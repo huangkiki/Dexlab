@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+vendor/
+build/
+**/runs/
+*.log
+MUJOCO_LOG.TXT
+dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# Versioned downloads; small task-specific geometry stays in Git.
+demos/apple-stem-grasp/assets/robot/
+demos/apple-stem-grasp/assets/licenses/
+demos/apple-stem-grasp/assets/apple/Textures/

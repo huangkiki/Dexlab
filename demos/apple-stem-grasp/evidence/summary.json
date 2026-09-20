@@ -1,0 +1,84 @@
+{
+  "physics": "native SuperDex FP64",
+  "fixed_base": true,
+  "sequence": "stem pinch \u2192 lift \u2192 table \u2192 release \u2192 body grasp \u2192 lift",
+  "apple_mass_kg": 0.2,
+  "stem_model": "original rigid SDF mesh; no bending/fracture",
+  "joint_targets_only": true,
+  "phases": {
+    "stem_hold": {
+      "minimum_clearance_m": 0.11521612127441977,
+      "maximum_clearance_m": 0.11524438366335321,
+      "hand_support_weight_ratio": 0.9997267015999307,
+      "table_support_weight_ratio": 0.0,
+      "momentum_balance_error_weight_fraction": 0.0002809168388185584,
+      "maximum_hand_contact_n": 14.078715150171657,
+      "minimum_hand_contact_n": 13.89578450083112,
+      "apple_solver_status_counts": {
+        "CONVERGED": 1499,
+        "STOPPED": 1
+      }
+    },
+    "released": {
+      "minimum_clearance_m": -0.0006942724589727445,
+      "maximum_clearance_m": -0.0006942724589727445,
+      "hand_support_weight_ratio": 0.0,
+      "table_support_weight_ratio": 0.9999999665939396,
+      "momentum_balance_error_weight_fraction": 3.342334851216704e-08,
+      "maximum_hand_contact_n": 0.0,
+      "minimum_hand_contact_n": 0.0,
+      "apple_solver_status_counts": {
+        "CONVERGED": 500
+      }
+    },
+    "body_hold": {
+      "minimum_clearance_m": 0.13972674905081028,
+      "maximum_clearance_m": 0.13973563727386124,
+      "hand_support_weight_ratio": 1.0000342321766555,
+      "table_support_weight_ratio": 0.0,
+      "momentum_balance_error_weight_fraction": 5.0263735082390367e-05,
+      "maximum_hand_contact_n": 18.610539072113188,
+      "minimum_hand_contact_n": 18.60282242480524,
+      "apple_solver_status_counts": {
+        "CONVERGED": 1500
+      }
+    }
+  },
+  "checks": {
+    "stem_hold_momentum_balance": true,
+    "stem_hold_lifted": true,
+    "stem_hold_supported_by_hand": true,
+    "stem_hold_no_table_support": true,
+    "stem_hold_continuous_contact": true,
+    "released_momentum_balance": true,
+    "released_on_table": true,
+    "released_no_hand_contact": true,
+    "body_hold_momentum_balance": true,
+    "body_hold_lifted": true,
+    "body_hold_supported_by_hand": true,
+    "body_hold_no_table_support": true,
+    "body_hold_continuous_contact": true,
+    "stem_grasp_only_stem": true,
+    "stem_hold_two_fingers": true,
+    "body_hold_contacts_fruit": true,
+    "no_other_robot_support": true,
+    "bounded_penetration": true,
+    "no_solver_divergence": true,
+    "finite_state": true,
+    "whole_sequence_force_balance": true,
+    "base_stationary": true,
+    "all_recorded_transforms_finite": true
+  },
+  "maximum_stem_phase_nonstem_force_n": 0.0,
+  "maximum_penetration_m": 0.0004522343405016635,
+  "whole_sequence_force_balance": {
+    "maximum_error_weight_fraction": 0.01650575485655118,
+    "p99_error_weight_fraction": 0.0006078714026875937,
+    "scene_status_counts": {
+      "CONVERGED": 19978,
+      "STOPPED": 22
+    }
+  },
+  "passed": true,
+  "maximum_base_pose_change": 0.0
+}

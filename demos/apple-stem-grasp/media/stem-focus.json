@@ -1,0 +1,16 @@
+{
+  "source": "SuperDex FP64 apple-stem-grasp recording",
+  "trajectory_sha256": "471b1b1cbb889ffd1db31a782dd6c254cca040183a483f455a087790d7ea7c17",
+  "recorded_frame_interval_s": 0.05,
+  "poster_frame": 240,
+  "poster_time_s": 12.0,
+  "video_first_frame": 60,
+  "video_last_frame_inclusive": 279,
+  "video_time_range_s": [
+    3.0,
+    14.0
+  ],
+  "rendering": "Official MuJoCo; recorded poses only; no dynamics",
+  "cameras": "Fixed overview; close-up follows the recorded apple",
+  "overlays": "Panel separator and identifying footer only"
+}

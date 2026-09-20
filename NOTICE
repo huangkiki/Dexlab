@@ -1,0 +1,15 @@
+DexLab
+Copyright 2026 Kiki Huang and contributors.
+
+DexLab source code is licensed under the Apache License, Version 2.0.
+Third-party assets retain their original terms and attribution; they are not
+relicensed by the root LICENSE. See docs/ASSETS.md.
+
+Robot assets originate from Project SuperDex, reference commit
+f216dace36464d70f224caa4253074ec365ed14f. Its upstream license is preserved in
+docs/SuperDex-LICENSE. Local changes include a cropped OpenArm mounting plate,
+fixed mounting transforms, and OBJ conversions for display.
+
+Apple meshes and textures derive from the NVIDIA Isaac Sim 5.1 Apple asset.
+The original URLs and hashes are recorded in
+demos/apple-stem-grasp/assets/apple/sources.json.

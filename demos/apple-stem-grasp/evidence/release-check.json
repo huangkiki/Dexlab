@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-20",
+  "scope": "Fresh 40-second baseline run using the existing native SuperDex FP64 build; independent force and trajectory verification; EGL poster rendering. Not a clean native build or visual-policy experiment.",
+  "run_directory": "runs/release-check-20260920",
+  "python": "3.12.12",
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "trimesh": "5.1.0",
+    "mujoco": "3.11.0",
+    "Pillow": "11.3.0",
+    "rtree": "1.4.1"
+  },
+  "physics_steps": 20000,
+  "seconds": 40,
+  "frames": 800,
+  "dofs": 54,
+  "zgws_links": 0,
+  "checks_passed": 23,
+  "passed": true,
+  "scene_status_counts": {
+    "CONVERGED": 19978,
+    "STOPPED": 22
+  },
+  "stem_hold_minimum_clearance_m": 0.11521612127441977,
+  "stem_hold_hand_support_weight_ratio": 0.9997267015999307,
+  "maximum_stem_phase_nonstem_force_n": 0.0,
+  "maximum_penetration_m": 0.0004522343405016635,
+  "mujoco_wheel_record_matches": true,
+  "mujoco_files_checked": 246,
+  "asset_hashes_verified": 183,
+  "python_syntax": true,
+  "shell_syntax": true,
+  "egl_poster_render": true,
+  "clean_native_build_retested": false,
+  "runtime_source_sha256": {
+    "apple_scene.py": "517c4c2ddf372e9c88681fe8421dfc60785c1b96d2d88c45b19b219991192e21",
+    "grasp_display.py": "e33e1ba814caaad1532de64b5357bfcdd14f3ef37c0800dfa86d5d954378c2aa",
+    "physics_utils.py": "355ccfe8b0d3ef26e4f24373e4646e30be612b37d7551ce24c482326a7077538",
+    "plan_wuji_pinch.py": "bc87925c065156e98a28377f95794efd8b097308f60bd51cd10002e03ad0927a",
+    "render_stem_focus.py": "ef5508c73117a4f1dcf9c64cc4ca594dbbac9b457a1b6652aa409fb9e10b1e9e",
+    "render_wuji_two_views.py": "39734ebcb5f98fa304eb42e69f9dc371abb6642d59cc22f0361cd21e640df5ae",
+    "robot.py": "6766795d8ad133f1bf54896e48468da48baf9557441e9a3790af666eb4e21fec",
+    "verify_wuji_sequence.py": "8434e20c17a9f61d6bd295cfd3d1cab60ab9e5dfad117ede08a7fb5f5f70a8d8",
+    "wuji_regrasp.py": "3ee5fdbafd5fb7488c19ea9721b84e339dec5e3a7da85a8f148dc71594c5c5e7",
+    "wuji_stem_grasp.py": "33bb5051b20a7844917bdb8ebc73efc65707f2ca837351c9f22605160c508737"
+  },
+  "run_files_sha256": {
+    "trajectory.npz": "471b1b1cbb889ffd1db31a782dd6c254cca040183a483f455a087790d7ea7c17",
+    "metrics.json": "11f4eac34338bcb7f24917a9269e6d4962a56b81ce8becb7b787e09042900b02",
+    "dynamics.json": "7545e66d37f8a9e65d7af8ca97830cfc4cf16fdbeaa2dca2c5b6f2878f2ccad6",
+    "summary.json": "ac406214039e1e2ebf8c6f89d58a89b87b5934b1ed075c1ab51a643a6db4b8b5"
+  },
+  "native_extensions_sha256": {
+    "libmarl.so": "fe8dce8a1808142caea5d44fb21714bcd34d7657ca14da9687c43ac4a2d5c9e1",
+    "libmochi_physics_double.so": "08bf63507f6f787b18867f9ff9610bb21a0a8ec04435a1652c305f79e05923f9",
+    "libmochi_pybind_core_double.so": "c14ebf8b6a25569970cf7ed0b25e4b951086c36019406cac7c1b8eb8ad42e085",
+    "libsuperdex_robotics.so": "c9df604509fff3539f481c807b581c8ff2c0dc3f8cbaba970735990711b26eda",
+    "mochi_physics_double.so": "2a57524259f2f6e5cffdb545eba2670504c38f624651f352d6fbe66940459bfb",
+    "superdex_robotics_double.so": "3144d00b34f643ba40cc113762030e52dceac763a826434e051141812c5d20db"
+  },
+  "published_media": "Existing verified recording retained; see media/stem-focus.json for its separate provenance."
+}
