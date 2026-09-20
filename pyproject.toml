@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dexlab"
+version = "0.1.0"
+description = "UniLab contact dynamics experiments"
+requires-python = ">=3.12,<3.13"
+dependencies = ["unilab==1.3.3", "unisim-core==1.7.10", "torch==2.9.1"]
+
+[project.entry-points."unilab.tasks"]
+dexlab = "dexlab.tasks"
+
+[project.scripts]
+dexlab-grasp = "dexlab.tasks.apple_stem:main"
+
+[tool.setuptools]
+packages = ["dexlab", "dexlab.tasks"]
+py-modules = ["apple_scene", "grasp_display", "mujoco_grasp", "mujoco_model", "physics_utils", "plan_wuji_pinch", "render_stem_focus", "render_wuji_two_views", "robot", "stem_trajectory", "superdex_evidence", "verify_sdf_grasp", "verify_wuji_sequence", "wuji_regrasp", "wuji_stem_grasp"]
+
+[tool.setuptools.package-dir]
+"" = "demos/apple-stem-grasp/src"
+"dexlab" = "src/dexlab"

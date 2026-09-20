@@ -1,0 +1,18 @@
+{
+  "run_name": "unilab-mujoco",
+  "command": "bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/unilab-mujoco",
+  "entrypoint": "UniLab registry task DexLab-AppleStem-v0; one env.step per native physics step",
+  "baseline_comparison": "All acceptance metrics exactly match the preceding native-script release run",
+  "raw_archives": "Generated locally by the runnable command; large raw archives are not stored in Git.",
+  "sha256": {
+    "sdf-dynamics.npz": "c760b50f3d8586442580694b2e9a58701612e2ef99a366b400bab00ff683c235",
+    "sdf-contacts.npz": "6d8965007f4b35a6c0e5152a0a8f53ab4a8fd1f83470148b96c5b19d41758f34",
+    "trajectory.npz": "e719860805f65b71904d05c83dd713f028d834645e387a82995ede17ed0f5420",
+    "media/mujoco-sdf.gif": "c39b1b1f007c1c791bad4b42df897b89d2933e7a0defb6e5cf58ff21018d8718",
+    "media/mujoco-sdf.mp4": "da9dd07c0c09cdde990d91916f87a18d56233efc523caa7218b4eafeab90fd56",
+    "media/mujoco-sdf.png": "85878b12f498250e0790bc156f9aa47745e126b4f42166d0d62f10b23cdf8c0f",
+    "media/mujoco-sdf.json": "a20b6c3af37cc2999e93bb10f140acf34e1f36a1953a795185563ed2e2ebb885"
+  },
+  "python_constraints_sha256": "3fd6fc2d48ae06360140efd8a82903b041fea22f42568a6bae6e30f84f9aa7fd",
+  "video": "Continuous 14 s close-up at 20 fps; GIF at 10 fps. Presentation camera follows the recorded apple; no controller image input."
+}

@@ -1,0 +1,13 @@
+{
+  "engine": "SuperDex native FP64",
+  "robot": "OpenArm V20 + Wuji Hand 2 Beta1",
+  "zgws_links": 0,
+  "dofs": 54,
+  "full_sequence_seconds": 40,
+  "physics_steps": 20000,
+  "checks_passed": 23,
+  "run_directory": "runs/openarm-only",
+  "python_syntax": true,
+  "mujoco_wheel_record_matches": true,
+  "clean_native_build_retested": false
+}

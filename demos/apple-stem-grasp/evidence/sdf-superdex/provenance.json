@@ -1,0 +1,18 @@
+{
+  "run_name": "unilab-superdex",
+  "command": "bash demos/apple-stem-grasp/run.sh --backend superdex --headless --output demos/apple-stem-grasp/runs/unilab-superdex",
+  "entrypoint": "UniLab registry task DexLab-AppleStem-v0; one env.step per native physics step",
+  "baseline_comparison": "All acceptance metrics exactly match the preceding native-script release run",
+  "raw_archives": "Generated locally by the runnable command; large raw archives are not stored in Git.",
+  "sha256": {
+    "sdf-dynamics.npz": "ab59f4e529681c73b88a16ed902cf8e1af6d1c585f76ea61c3b5f22969a55294",
+    "sdf-contacts.npz": "93504a31fc86a45aeef1e296051a392dc81678e1184e222a3b3f79a8a46bd19f",
+    "trajectory.npz": "dbb43b209abaa73ab824782545736ea09ef8de13fdbd8a132c02e045ff86c5a0",
+    "media/superdex-sdf.gif": "a6aab338361f8fc3c44bb85637de40973abc0a936fbf3c5a200a19a347dbe18b",
+    "media/superdex-sdf.mp4": "d8293a1c6b8ccaed5ef558b28718c609b79d37351a0ef1ac1b8f590a9e289216",
+    "media/superdex-sdf.png": "a38bb120e6edc269025f45f6612723ac5270bcc8b30f45e8fa2a32ebac7e7937",
+    "media/superdex-sdf.json": "a75904e08ed0b66678f4cdedb0a7ddccb0ecfec1eb4307f89016fc3121a2b6fc"
+  },
+  "python_constraints_sha256": "3fd6fc2d48ae06360140efd8a82903b041fea22f42568a6bae6e30f84f9aa7fd",
+  "video": "Continuous 14 s close-up at 20 fps; GIF at 10 fps. Presentation camera follows the recorded apple; no controller image input."
+}
