@@ -258,5 +258,35 @@ class JitterTests(unittest.TestCase):
             self.assertEqual(before, {p.name: p.read_bytes() for p in root.iterdir()})
 
 
+    def test_chunked_model_inputs_cannot_be_overwritten(self):
+        import mujoco
+        from dexlab.mujoco_artifacts import pack_model
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            model = mujoco.MjModel.from_xml_string(
+                '<mujoco><worldbody><body name="r_thumb_pad"/>'
+                '<body name="r_index_finger_pad"/></worldbody></mujoco>'
+            )
+            mujoco.mj_saveModel(model, str(root / "model.mjb"))
+            pack_model(root, shared_store=root / "shared")
+            (root / "engine.json").write_text(
+                json.dumps({"backend": "mujoco", "dt": self.dt})
+            )
+            self.log["time"] += 11
+            self.contacts[:, 0] += 11
+            np.savez(root / "sdf-dynamics.npz", **self.log)
+            np.savez(root / "sdf-contacts.npz", contacts=self.contacts)
+            chunk = next((root / "model-chunks").glob("*.gz"))
+            original = chunk.read_bytes()
+            completed = subprocess.run(
+                [sys.executable, "-m", "dexlab.jitter", str(root), "--output", str(chunk)],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("must not overwrite", completed.stderr)
+            self.assertEqual(chunk.read_bytes(), original)
+
+
 if __name__ == "__main__":
     unittest.main()

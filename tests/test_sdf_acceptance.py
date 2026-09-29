@@ -72,6 +72,29 @@ class AcceptanceTests(unittest.TestCase):
     def test_consistent_fixture(self):
         self.assertTrue(self.verify()["passed"])
 
+    def test_mass_comes_from_expected_case_not_engine_claim(self):
+        self.verify()  # materialize the unmodified synthetic archive
+        engine_path = self.directory / "engine.json"
+        engine = json.loads(engine_path.read_text())
+        engine["mass_kg"] = 0.3
+        engine_path.write_text(json.dumps(engine))
+        self.assertFalse(verify_grasp(self.directory)["checks"]["original_apple_mass"])
+        result = verify_grasp(self.directory, expected_mass=0.3)
+        self.assertTrue(result["checks"]["original_apple_mass"])
+        self.assertFalse(result["checks"]["hand_supports_weight"])
+        self.assertFalse(result["checks"]["momentum_balance"])
+
+    def test_non_default_mass_uses_same_relative_tolerances(self):
+        self.log["total"] *= 1.5
+        self.log["hand"] *= 1.5
+        self.contacts[:, 9] *= 1.5
+        self.verify()
+        engine_path = self.directory / "engine.json"
+        engine = json.loads(engine_path.read_text())
+        engine["mass_kg"] = 0.3
+        engine_path.write_text(json.dumps(engine))
+        self.assertTrue(verify_grasp(self.directory, expected_mass=0.3)["passed"])
+
     def test_one_missing_finger_contact_fails(self):
         self.contacts = self.contacts[1:]
         result = self.verify()

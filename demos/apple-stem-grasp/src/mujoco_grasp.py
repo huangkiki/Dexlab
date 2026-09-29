@@ -180,6 +180,8 @@ def simulate(
 ):
     """Execute a prepared command prior from a fresh physics state."""
     dest = args.output
+    if args.timestep is not None:
+        model.opt.timestep = args.timestep
     model.geom_friction[:, 0] = args.mujoco_friction
     data = mujoco.MjData(model)
     qi = np.array([model.joint(n).qposadr[0] for n in names])
@@ -287,6 +289,7 @@ def simulate(
             summary,
         )
 
+    physics_step_seconds = 0.0
     started = time.monotonic()
     with ExitStack() as stack:
         viewer = (
@@ -324,7 +327,9 @@ def simulate(
             previous = target
             mujoco.mj_jacBodyCom(model, data, jac, jr, apple_id)
             before = jac @ data.qvel
+            step_started = time.perf_counter()
             mujoco.mj_step(model, data)
+            physics_step_seconds += time.perf_counter() - step_started
             forces, contacts = contact_forces(model, data, apple_id)
             contact_rows.extend([[t, *row] for row in contacts])
             penetration = max([max(0, -r[4]) for r in contacts], default=0)
@@ -376,9 +381,14 @@ def simulate(
     np.savez_compressed(
         dest / "trajectory.npz", frames=frames, names=model_names + ["apple"], dt=0.05
     )
-    engine.update(completed=True, steps=count, wall_seconds=time.monotonic() - started)
+    engine.update(
+        completed=True,
+        steps=count,
+        wall_seconds=time.monotonic() - started,
+        physics_step_seconds=physics_step_seconds,
+    )
     (dest / "engine.json").write_text(json.dumps(engine, indent=2))
-    result = verify_grasp(dest)
+    result = verify_grasp(dest, expected_mass=args.apple_mass)
     (dest / "summary.json").write_text(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2), flush=True)
     yield snapshot(args.seconds, target, result)

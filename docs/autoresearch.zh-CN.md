@@ -24,7 +24,7 @@ python3 scripts/autoresearch.py submit 3 --summary-file /path/to/review.md
 - 审查实际 PR diff，满足 Issue 的完整验收，保留参数来源、近似和失败证据。同步中英文文档，不改官方引擎，不放宽物理阈值。
 - 验证绑定当前 head 与目标 base。目标分支改变、解决冲突或合入其他代码后，检查组合后的文件树。物理相关组合需完整双后端验收；与已验收文件树完全相同的提交可复用对应证据，并记录文件树哈希。
 - 适用 CI 与分支保护必须满足，不能有未解决的阻塞意见。没有配置 CI 不等于 CI 通过；自行审查不能伪称独立 reviewer 批准。
-- 使用 `gh pr merge NUMBER --squash --match-head-commit HEAD_SHA`，合并前再次核对 head；不用 `--admin` 绕过保护，不强推。读回 `MERGED` 状态、main 的提交与文件树，核实 Issue 完成状态。
+- 使用 `gh pr merge NUMBER --squash --match-head-commit HEAD_SHA`，合并前再次核对 head；不用 `--admin` 绕过保护，不强推。读回 `MERGED` 状态、main 的提交与文件树，核实 Issue 完成状态。提交默认使用 `Refs #N`；只有完整验收（包括部分 PR 尚未覆盖的工作）已满足，才关闭 Issue。
 - 有可修复的问题就继续修复；缺少外部数据、环境或必要决定时，留下具体恢复条件。不同意见未解决或验证失败时不合并。
 
 ## 发布条件

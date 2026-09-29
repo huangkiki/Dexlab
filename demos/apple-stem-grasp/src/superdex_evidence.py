@@ -11,8 +11,19 @@ from verify_sdf_grasp import verify_grasp
 
 class GraspRecorder:
     def __init__(
-        self, destination, body, table, links, names, fruit_vertices, table_top, dt
+        self,
+        destination,
+        body,
+        table,
+        links,
+        names,
+        fruit_vertices,
+        table_top,
+        dt,
+        *,
+        expected_mass=0.2,
     ):
+        self.expected_mass = expected_mass
         self.destination = destination
         self.body, self.table = body, table
         self.links, self.names = links, names
@@ -109,6 +120,6 @@ class GraspRecorder:
             completed=True, steps=len(self.rows), duration=len(self.rows) * self.dt
         )
         (self.destination / "engine.json").write_text(json.dumps(self.engine, indent=2))
-        result = verify_grasp(self.destination)
+        result = verify_grasp(self.destination, expected_mass=self.expected_mass)
         (self.destination / "summary.json").write_text(json.dumps(result, indent=2))
         return result
