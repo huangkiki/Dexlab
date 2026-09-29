@@ -39,6 +39,8 @@ Use `latest-superdex-sdf` for the other backend. Video export needs FFmpeg and O
 
 The checks cover clearance, continuous two-pad stem support, penetration, wrist-relative motion, and momentum balance over the full 11–14 s hold. Fruit contact is allowed during approach; fruit-body support is excluded during the hold.
 
+For offline position/velocity/force RMS, peaks and per-pad low-load intervals, use the [jitter diagnostics](../../docs/jitter.md). Missing records remain unknown rather than becoming zero contact.
+
 
 ## UniLab task API
 

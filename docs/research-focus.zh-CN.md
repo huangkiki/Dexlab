@@ -54,7 +54,7 @@ MuJoCo 适配器使用临时的正惯性占位值编译无质量连杆，然后�
 | 数值不稳定 | 首个非有限状态、求解器告警/残差、加速度尖峰 | 不合理惯量、约束冲突、步长、驱动或求解器设置 |
 | 开销过大 | 准备时间、每仿真秒耗时、逐步耗时、内存、场景/接触规模 | SDF 构建、碰撞工作量、求解器迭代、记录与渲染开销 |
 
-这些是需要实验检验的原因，不能只凭外观下诊断。柔顺接触的重叠应结合声明的容差与几何尺度评估。当前物体相对腕部位移不是材料点累计滑移，动量平衡也不是能量守恒检验。抖动与能量诊断的验收要求见 [issue #2](https://github.com/huangkiki/Dexlab/issues/2)。
+这些是需要实验检验的原因，不能只凭外观下诊断。柔顺接触的重叠应结合声明的容差与几何尺度评估。当前物体相对腕部位移不是材料点累计滑移，动量平衡也不是能量守恒检验。[离线抖动诊断](jitter.zh-CN.md)报告 RMS/峰值、采样覆盖及逐指腹低载荷区间，不改变抓取阈值。现有日志不足以进行完整能量收支分析。
 
 参数语义参见 [MuJoCo 求解器指南](https://mujoco.readthedocs.io/en/latest/modeling.html#solver-parameters)、[SuperDex 源码依据](sdf-backends.zh-CN.md#引擎底层实现)，以及后续 PhysX 工作可参考的[刚体动力学指南](https://nvidia-omniverse.github.io/PhysX/physx/5.4.1/docs/RigidBodyDynamics.html)。不同引擎的配置应通过测量行为比较，不能仅按参数名称照搬。
 
