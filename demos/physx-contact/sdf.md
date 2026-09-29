@@ -41,3 +41,5 @@ The SDF hole and surface-support controls pass. The convex control blocks the ho
 The complete 54-joint OpenArm/Wuji model now imports both right-hand SDF pads with native readback. This check runs only 20 steps with gravity disabled and no apple/contact load. It repairs the missing-pad import route, not the full PhysX grasp. Collision filtering, loaded robot control, apple contact and complete independent acceptance remain under [Issue #5](https://github.com/huangkiki/Dexlab/issues/5).
 
 Reference: [official SDF collision API](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/107.3/dev_guide/rigid_bodies_articulations/collision.html#create-an-sdf-collider).
+
+Subsequent [loaded diagnostics](contact-details.md) preserve all 267 source-implied collision exclusions and record normal plus friction forces. Transient apple lifting still fails continuous hold acceptance.

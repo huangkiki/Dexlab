@@ -1,0 +1,170 @@
+{
+  "box": {
+    "name": "box",
+    "assignment": [
+      0
+    ],
+    "prim_paths": [
+      "/World/envs/env_0/entity_626f78/body/body"
+    ],
+    "body_mass": [
+      [
+        0.20000000298023224
+      ]
+    ],
+    "body_com": [
+      [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    ],
+    "body_inertia": [
+      [
+        [
+          [
+            5.333330045687035e-05,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            5.333330045687035e-05,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            5.333330045687035e-05
+          ]
+        ]
+      ]
+    ],
+    "body_sphere_radii": [
+      [
+        []
+      ]
+    ],
+    "geom_names": [
+      [
+        "surface"
+      ]
+    ],
+    "geom_body_names": [
+      [
+        "body"
+      ]
+    ],
+    "geom_contact_masks": [
+      [
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "geom_friction": [
+      [
+        [
+          0.30000001192092896,
+          0.30000001192092896,
+          0.0
+        ]
+      ]
+    ],
+    "geom_sdf": [
+      [
+        null
+      ]
+    ],
+    "collision_exclusions": [
+      []
+    ]
+  },
+  "table": {
+    "name": "table",
+    "assignment": [
+      0
+    ],
+    "prim_paths": [
+      "/World/envs/env_0/entity_7461626c65/body/body"
+    ],
+    "body_mass": [
+      [
+        10.0
+      ]
+    ],
+    "body_com": [
+      [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    ],
+    "body_inertia": [
+      [
+        [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      ]
+    ],
+    "body_sphere_radii": [
+      [
+        []
+      ]
+    ],
+    "geom_names": [
+      [
+        "surface"
+      ]
+    ],
+    "geom_body_names": [
+      [
+        "body"
+      ]
+    ],
+    "geom_contact_masks": [
+      [
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "geom_friction": [
+      [
+        [
+          0.30000001192092896,
+          0.30000001192092896,
+          0.0
+        ]
+      ]
+    ],
+    "geom_sdf": [
+      [
+        null
+      ]
+    ],
+    "collision_exclusions": [
+      []
+    ]
+  }
+}

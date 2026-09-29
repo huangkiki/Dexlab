@@ -17,7 +17,9 @@ from dexlab.physx_robot import (
 from dexlab.robot_transfer import (
     collapse_massless_frames,
     compare_reduction,
+    implicit_body_exclusions,
     move_into_parent,
+    preserve_implicit_filters,
 )
 
 
@@ -146,6 +148,99 @@ class RobotQualificationTests(unittest.TestCase):
             move_into_parent(
                 ET.fromstring('<body euler="1 0 0"/>'), ET.fromstring("<body/>")
             )
+
+
+class CollisionFilterTransferTests(unittest.TestCase):
+    XML = """<mujoco><worldbody><body name="robot_world">
+      <geom name="base" type="sphere" size=".1"/>
+      <body name="arm"><joint/><geom name="arm_geom" type="sphere" size=".1"/>
+        <body name="tool"><geom type="sphere" size=".1"/>
+          <body name="finger"><joint/><geom name="finger_geom" type="sphere" size=".1"/>
+            <body name="tip"><geom type="sphere" size=".1"/></body>
+          </body>
+        </body>
+      </body>
+      <body name="other"><joint/><geom type="sphere" size=".1"/></body>
+    </body></worldbody></mujoco>"""
+
+    def test_fixed_descendants_inherit_parent_filter_but_other_links_still_collide(
+        self,
+    ):
+        model = mujoco.MjModel.from_xml_string(self.XML)
+        names = [model.body(i).name for i in range(1, model.nbody)]
+        pairs = implicit_body_exclusions(model, names)
+        self.assertEqual(
+            pairs,
+            {
+                ("arm", "tool"),
+                ("finger", "tip"),
+                ("arm", "finger"),
+                ("arm", "tip"),
+                ("finger", "tool"),
+                ("tip", "tool"),
+            },
+        )
+        # Native collision behavior, not just the helper's own formulas.
+        data = mujoco.MjData(model)
+        mujoco.mj_forward(model, data)
+        actual = {
+            tuple(
+                sorted(
+                    (
+                        model.body(model.geom_bodyid[c.geom1]).name,
+                        model.body(model.geom_bodyid[c.geom2]).name,
+                    )
+                )
+            )
+            for c in data.contact
+        }
+        self.assertFalse(actual & pairs)
+        self.assertIn(("arm", "other"), actual)
+        self.assertIn(("arm", "robot_world"), actual)
+
+    def test_filterparent_disabled_keeps_only_same_weld_exclusions(self):
+        model = mujoco.MjModel.from_xml_string(self.XML)
+        model.opt.disableflags |= mujoco.mjtDisableBit.mjDSBL_FILTERPARENT
+        names = [model.body(i).name for i in range(1, model.nbody)]
+        self.assertEqual(
+            implicit_body_exclusions(model, names), {("arm", "tool"), ("finger", "tip")}
+        )
+        data = mujoco.MjData(model)
+        mujoco.mj_forward(model, data)
+        actual = {
+            tuple(
+                sorted(
+                    (
+                        model.body(model.geom_bodyid[c.geom1]).name,
+                        model.body(model.geom_bodyid[c.geom2]).name,
+                    )
+                )
+            )
+            for c in data.contact
+        }
+        self.assertIn(("arm", "finger"), actual)
+
+    def test_explicit_contact_override_is_not_silently_filtered(self):
+        root = ET.fromstring(self.XML)
+        ET.SubElement(
+            ET.SubElement(root, "contact"),
+            "pair",
+            geom1="arm_geom",
+            geom2="finger_geom",
+        )
+        model = mujoco.MjModel.from_xml_string(ET.tostring(root).decode())
+        with self.assertRaisesRegex(ValueError, "Explicit geom-pair"):
+            preserve_implicit_filters(root, model)
+
+    def test_authoring_preserves_existing_filters_and_is_idempotent(self):
+        root = ET.fromstring(self.XML)
+        ET.SubElement(
+            ET.SubElement(root, "contact"), "exclude", body1="arm", body2="other"
+        )
+        model = mujoco.MjModel.from_xml_string(ET.tostring(root).decode())
+        self.assertEqual(len(preserve_implicit_filters(root, model)), 6)
+        self.assertEqual(preserve_implicit_filters(root, model), [])
+        self.assertEqual(len(root.findall("./contact/exclude")), 7)
 
 
 if __name__ == "__main__":
