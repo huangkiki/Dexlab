@@ -3,7 +3,7 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 Development work for [issue #5](https://github.com/huangkiki/Dexlab/issues/5).
-The runner uses UniSim 1.7.10's public entity API and a separate Isaac Sim 5.1 / IsaacLab 2.3.0 worker. Three native primitive-contact cases pass independent acceptance with the disclosed UniSim contact-reporting fix. PhysX itself is unchanged. These tests do not qualify apple grasping, joints/actuators, SDF–SDF contact or cloth.
+The runner uses UniSim 1.7.10's public entity API and a separate Isaac Sim 5.1 / IsaacLab 2.3.0 worker. Three native primitive-contact cases pass independent acceptance with the disclosed UniSim contact-reporting fix. PhysX itself is unchanged. These primitive tests do not qualify robot grasping, SDF–SDF contact or cloth. A separate [drive protocol](drive.md) qualifies a loaded prismatic actuator.
 
 ## Setup and run
 
@@ -36,7 +36,7 @@ Each case records all 2,000 measured steps after 0.5 s settling. Native mass/fri
 .venv/bin/python -m dexlab.physx_baseline verify demos/physx-contact/evidence/qualification-v1/rest
 ```
 
-Unmodified UniSim 1.7.10 failed both pair-sensor initialization and body-net force reads because imported bodies lacked `PhysxContactReportAPI`. The [five-line adapter patch](../../scripts/patches/unisim-1.7.10-physx-contact-reporting.patch) enables reporting before simulation and changes the role-cache identity to prevent stale USD reuse. Setup applies it only to upstream commit `dc41b5e79d58d9b58eba9b2f27d10d71e16cf03d`, checks the entire tracked diff, and builds a separate package. No PhysX solver/source patch or threshold relaxation is used. Upstream adapter checks passed: Ruff, mypy, Pyright, 1,304 tests (92 optional-runtime skips), and package build. This is local verification, not upstream approval.
+Unmodified UniSim 1.7.10 failed both pair-sensor initialization and body-net force reads because imported bodies lacked `PhysxContactReportAPI`. The [five-line adapter patch](../../scripts/patches/unisim-1.7.10-physx-contact-reporting.patch) enables reporting before simulation and changes the role-cache identity to prevent stale USD reuse. The original qualification applied it only to upstream commit `dc41b5e79d58d9b58eba9b2f27d10d71e16cf03d`, checks the entire tracked diff, and builds a separate package. No PhysX solver/source patch or threshold relaxation is used. Upstream adapter checks passed: Ruff, mypy, Pyright, 1,304 tests (92 optional-runtime skips), and package build. This is local verification, not upstream approval.
 
 ## Physical protocol
 
@@ -55,3 +55,7 @@ Sources: [Isaac Sim 5.1 Python installation](https://docs.isaacsim.omniverse.nvi
 An ideal prismatic fixture measures about 4 N normal load per finger. The 0.2 kg, μ=0.3 case holds; the 0.5 kg overload and μ=0 controls drop 103.39 mm and 197.18 mm within 200 ms after preparation support is removed. Fully released motion has acceleration near −9.81 m/s². All three final qualifications pass; the initial travel-stop readback failure is retained. [Protocol, complete outcomes and reproduction](pinch.md).
 
 This is not robot joint/actuator or apple-grasp qualification; tangential contact forces are not observed.
+
+## Loaded joint drive
+
+A 0.1 kg prismatic drive reproduces TGS steady-state position/velocity inconsistency. The native per-iteration external-force option passes independent equilibrium, velocity, force-limit and return checks. The default configuration remains a recorded failure. [Protocol, native SDK control and limitations](drive.md). Current setup installs the disclosed [combined adapter patch](../../scripts/patches/unisim-1.7.10-physx-adapter.patch); the new option is opt-in and does not change existing contact defaults.

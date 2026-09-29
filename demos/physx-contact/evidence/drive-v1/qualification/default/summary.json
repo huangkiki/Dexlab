@@ -1,0 +1,41 @@
+{
+  "passed": false,
+  "checks": {
+    "complete_finite_record": true,
+    "complete_time_grid": true,
+    "declared_commands_only": true,
+    "fixed_base_and_prismatic_pose": true,
+    "body_joint_velocity_agree": true,
+    "no_body_rotation": true,
+    "away_from_joint_limits": true,
+    "unloaded_equilibrium": true,
+    "unloaded_stationary_velocity": true,
+    "loaded_equilibrium": true,
+    "loaded_stationary_velocity": false,
+    "returned_equilibrium": true,
+    "returned_stationary_velocity": true,
+    "overload_matches_force_limit": true,
+    "frozen_protocol": true,
+    "archive_hashes_match": true,
+    "native_run_completed": true,
+    "source_unchanged": true,
+    "native_option_readback": true,
+    "fixture_topology": true,
+    "native_mass_matches": true
+  },
+  "metrics": {
+    "body_joint_position_error_m": 2.980232227667301e-09,
+    "body_joint_velocity_error_m_s": 0.0,
+    "unloaded_position_error_m": 2.071261405965641e-08,
+    "unloaded_max_speed_m_s": 9.96021412902337e-07,
+    "loaded_position_error_m": 8.059740066526655e-07,
+    "loaded_max_speed_m_s": 0.004293649923056364,
+    "returned_position_error_m": 1.3049037406176467e-09,
+    "returned_max_speed_m_s": 2.8738605806211126e-07,
+    "loaded_integrated_velocity_m": 0.0008544363346882162,
+    "loaded_position_change_m": 0.0,
+    "pulse_acceleration_m_s2": -9.999996458108614,
+    "velocity_inferred_drive_effort_n": 2.0000003541891385
+  },
+  "verifier_sha256": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3"
+}

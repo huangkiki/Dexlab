@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": {
+    "complete_finite_archive": true,
+    "complete_time_grid": true,
+    "unit_quaternions": true,
+    "bounded_penetration": true,
+    "support_matches_weight": true,
+    "frictionless_motion_preserved": true,
+    "declared_two_body_scene": true,
+    "native_mass_matches": true,
+    "native_friction_matches": true,
+    "native_reports_match": true,
+    "native_run_completed": true,
+    "clean_shutdown": true,
+    "source_unchanged": true,
+    "source_snapshot_matches": true,
+    "adapter_snapshot_matches": true,
+    "recorded_assets_unchanged": true,
+    "asset_files_match": true,
+    "exact_archive_hash": true,
+    "frozen_engineering_limits": true
+  },
+  "metrics": {
+    "max_penetration_m": 3.3527612686157227e-08,
+    "support_relative_error": 6.318942924465887e-09,
+    "travel_x_m": 1.0000187158584595,
+    "final_speed_m_s": 0.5,
+    "max_velocity_error_m_s": 0.0
+  },
+  "verifier_sha256": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798"
+}

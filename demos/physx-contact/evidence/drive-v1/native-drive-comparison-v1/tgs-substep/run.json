@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "dt": 0.001,
+  "device": "cuda:0",
+  "solver_type": 1,
+  "position_iterations": 8,
+  "velocity_iterations": 2,
+  "source_sha256": "af86b0e3ed4e25e67d1fe7a86b2c82aae8d46e573987a0fb0c1ce8fc64e19137",
+  "external_forces_every_iteration": true,
+  "scope": "Standalone SDK drive diagnostic: no DexLab/UniSim imports or MJCF converter.",
+  "packages": {
+    "isaacsim": "5.1.0.0",
+    "isaaclab": "0.47.2",
+    "torch": "2.7.0+cu128"
+  },
+  "scene_readback": {
+    "solver": "TGS",
+    "external_forces_every_iteration": true
+  },
+  "body_names": [
+    "base",
+    "pad"
+  ],
+  "joint_names": [
+    "slide"
+  ],
+  "fixed_base": true,
+  "masses": [
+    [
+      0.10000000149011612,
+      0.10000000149011612
+    ]
+  ],
+  "stiffness": [
+    [
+      500.0
+    ]
+  ],
+  "damping": [
+    [
+      10.0
+    ]
+  ],
+  "effort_limits": [
+    [
+      2.0
+    ]
+  ],
+  "unisim_imported": false,
+  "archive_sha256": "558d09a12ae7befe1cca31048d2a59d1296a572472532355a9208d40e8bd3c44"
+}

@@ -3,7 +3,7 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 [Issue #5](https://github.com/huangkiki/Dexlab/issues/5) 的开发实现。
-运行器通过 UniSim 1.7.10 的公开实体接口调用独立的 Isaac Sim 5.1／IsaacLab 2.3.0 环境。使用下述明确披露的 UniSim 接触报告修复后，三项原生基础接触实验通过独立验收，PhysX 本身未修改。这些实验尚不能验收苹果抓取、关节／驱动、SDF–SDF 接触或布料。
+运行器通过 UniSim 1.7.10 的公开实体接口调用独立的 Isaac Sim 5.1／IsaacLab 2.3.0 环境。使用下述明确披露的 UniSim 接触报告修复后，三项原生基础接触实验通过独立验收，PhysX 本身未修改。这些基础接触实验尚不能验收机器人抓取、SDF–SDF 接触或布料；受载直线关节由独立的[驱动协议](drive.zh-CN.md)验收。
 
 ## 安装与运行
 
@@ -36,7 +36,7 @@ bash scripts/setup_physx.sh
 .venv/bin/python -m dexlab.physx_baseline verify demos/physx-contact/evidence/qualification-v1/rest
 ```
 
-未经修改的 UniSim 1.7.10 在成对传感器初始化、物体总接触力读取两条路径上均失败，原因是导入刚体缺少 `PhysxContactReportAPI`。[五行适配层补丁](../../scripts/patches/unisim-1.7.10-physx-contact-reporting.patch)在仿真前启用报告，并更新角色缓存标识，避免复用旧 USD。安装脚本仅在上游提交 `dc41b5e79d58d9b58eba9b2f27d10d71e16cf03d` 上应用补丁，核对完整差异后构建独立包。未修改 PhysX 求解器／源码，也未放宽阈值。适配层通过 Ruff、mypy、Pyright、1,304 项测试（92 项可选运行库跳过）及打包检查；这是本地验证，不代表上游批准。
+未经修改的 UniSim 1.7.10 在成对传感器初始化、物体总接触力读取两条路径上均失败，原因是导入刚体缺少 `PhysxContactReportAPI`。[五行适配层补丁](../../scripts/patches/unisim-1.7.10-physx-contact-reporting.patch)在仿真前启用报告，并更新角色缓存标识，避免复用旧 USD。原资格验证仅在上游提交 `dc41b5e79d58d9b58eba9b2f27d10d71e16cf03d` 上应用补丁，核对完整差异后构建独立包。未修改 PhysX 求解器／源码，也未放宽阈值。适配层通过 Ruff、mypy、Pyright、1,304 项测试（92 项可选运行库跳过）及打包检查；这是本地验证，不代表上游批准。
 
 ## 实验协议
 
@@ -55,3 +55,7 @@ Issue 尚需机器人关节／驱动验证，再接入苹果抓取；下述理�
 新增理想棱柱夹具：每侧实际法向载荷约 4 N，0.2 kg/μ=0.3 正常保持；0.5 kg 过载与 μ=0 两个负对照在撤去准备支撑后 200 ms 分别下落 103.39 mm、197.18 mm；完全释放后加速度接近 −9.81 m/s²。三项最终资格验证通过，第一轮行程末端读数不一致的失败保留。[协议、全部结果与复现](pinch.zh-CN.md)。
 
 夹具仍非机器人关节/执行器或苹果抓取验证，未观测切向接触力。
+
+## 受载关节驱动
+
+0.1 kg 直线关节复现了 TGS 稳态位置与速度不一致。启用原生逐迭代外力选项后，通过平衡位置、静止速度、力限幅与回零检查；默认配置的失败记录保留。[协议、独立 SDK 对照及限制](drive.zh-CN.md)。当前安装脚本使用明确披露的[组合适配补丁](../../scripts/patches/unisim-1.7.10-physx-adapter.patch)，新增选项需显式开启，原有接触默认配置不变。
