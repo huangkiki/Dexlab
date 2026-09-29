@@ -8,6 +8,8 @@ DexLab 研究**机器人仿真模型的合理性与数值行为**。通过可重
 
 当前已实现 UniLab 注册任务、单场景 reset/step/close、两个原生 SDF 后端和独立动力学验收。场景由 DexLab 自身管理，尚未使用 UniSim 内置后端。见[任务接口](../demos/apple-stem-grasp/README.zh-CN.md#unilab-任务接口)。
 
+新运行还会导出[只读模型审查](model-audit.zh-CN.md)：源值与运行时惯量、关节、驱动、碰撞过滤及初始重叠发现项。
+
 后续工作统一维护在 GitHub issues，不在文档重复维护 TODO：
 
 - [模型审查 / Model audit](https://github.com/huangkiki/Dexlab/issues/1)

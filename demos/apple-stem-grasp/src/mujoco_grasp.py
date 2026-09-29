@@ -247,6 +247,9 @@ def simulate(
     model.actuator_biasprm[aids, 1] = -kp
     model.actuator_biasprm[aids, 2] = -(kd + dt * kp)
     mujoco.mj_saveModel(model, str(dest / "model.mjb"))
+    from dexlab.model_audit import record_mujoco
+
+    record_mujoco(model, data, dest)
     count = round(args.seconds / dt)
     log = {
         k: []

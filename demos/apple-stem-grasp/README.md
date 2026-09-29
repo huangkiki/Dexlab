@@ -42,6 +42,8 @@ The checks cover clearance, continuous two-pad stem support, penetration, wrist-
 
 ## UniLab task API
 
+Scene preparation also writes read-only `model-audit.superdex.json` and, for MuJoCo runs, `model-audit.mujoco.json`. See [model audit](../../docs/model-audit.md) for parameter provenance, initial overlaps, and standalone rechecking.
+
 UniLab 1.3.3 discovers `DexLab-AppleStem-v0` via the installed `unilab.tasks` entry point. The task implements the real `ABEnv`/`NpEnvState` lifecycle; `step` advances one native physics step. It owns the SDF scene and contact recorder rather than using UniSim's built-in adapters. That migration is tracked in [issue #4](https://github.com/huangkiki/Dexlab/issues/4).
 
 ```python

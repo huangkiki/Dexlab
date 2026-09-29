@@ -277,6 +277,9 @@ def episode(args):
                     )
             actor.add_articulated_pose_controller(params)
             actor.reset_articulated_target_pose(pose=pre)
+            from dexlab.model_audit import record_superdex
+
+            record_superdex(prefab, links, scene, body, table, actor, dest)
             report = {
                 "native_worker_threads": 8,
                 "solver": {
