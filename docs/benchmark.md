@@ -42,7 +42,7 @@ New batches store MuJoCo binaries as lossless, content-addressed 1 MiB gzip chun
 
 ## Completed experiments
 
-All ten paired regression cases were scored, with no runtime errors or timeouts. The default MuJoCo configuration passed **1/10** and SuperDex passed **10/10**; the respective 95% Wilson intervals are **1.8–40.4%** and **72.2–100%**. Failures include hold drift, lost support and excessive penetration; failed episodes remain in the denominator. The separate frozen 100-case test set has not completed evaluation.
+All ten paired regression cases were scored, with no runtime errors or timeouts. The default MuJoCo configuration passed **1/10** and SuperDex passed **10/10**; the respective 95% Wilson intervals are **1.8–40.4%** and **72.2–100%**. Failures include hold drift, lost support and excessive penetration; failed episodes remain in the denominator. The separate frozen 100-case test set has not completed evaluation. Its first batch was interrupted after negative scientific-notation offsets exposed an argument-transport error before simulation; all records are retained. The fix changes argument encoding only, without retuning the policy, cases or acceptance thresholds. The full paired suite is rerun in a new directory.
 
 | Backend | Timestep | Full acceptance | Maximum hand penetration, full episode |
 |---|---:|---|---:|

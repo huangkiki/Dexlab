@@ -164,7 +164,7 @@ class AppleStemEnv(ABEnv):
             argv.extend(["--output", self.cfg.output])
         for key, value in self.cfg.parameters.items():
             if value is not None:
-                argv.extend(["--" + key.replace("_", "-"), str(value)])
+                argv.append(f"--{key.replace('_', '-')}={value}")
         args = parse_args(argv)
         self._episode = episode(args)
         self._steps = 0
