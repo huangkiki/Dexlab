@@ -46,7 +46,7 @@ Compare stopping distance with the ideal Coulomb reference `v²/(2 μ g)`. Indep
 
 PhysX requests eight position and two velocity iterations, 1 mm contact offset and zero rest offset. These are numerical settings, not material calibration. The import report distinguishes authored settings from native readback. Pair sensors report world-frame normal contact forces, not friction forces; vertical support can be checked on this horizontal plane. Raw states, source/adapter snapshots, report/geometry hashes, versions and pass/failure details stay with each run. Step timing includes Python/IPC observations and is not pure solver time; rendering is disabled.
 
-Remaining issue scope includes robot joint/actuator qualification, then apple grasp; the ideal force fixture below covers primitive pinch controls only. Primitive collision results cannot establish SDF equivalence or cloth capability. Full engine comparisons require matched calibration, timestep/geometry refinement and held-out scenes.
+Remaining issue scope includes loaded robot motion and native SDF contacts, then apple grasp; the ideal force fixture below covers primitive pinch controls only. Primitive collision results cannot establish SDF equivalence or cloth capability. Full engine comparisons require matched calibration, timestep/geometry refinement and held-out scenes.
 
 Sources: [Isaac Sim 5.1 Python installation](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/install_python.html), [pinned IsaacLab source](https://github.com/isaac-sim/IsaacLab/tree/3c6e67bb5c7ada942a6d1884ab69338f57596f77), [UniSim entity contract](https://github.com/unilabsim/unisim/blob/v1.7.10/docs/en/entity-scenes.md).
 
@@ -59,3 +59,7 @@ This is not robot joint/actuator or apple-grasp qualification; tangential contac
 ## Loaded joint drive
 
 A 0.1 kg prismatic drive reproduces TGS steady-state position/velocity inconsistency. The native per-iteration external-force option passes independent equilibrium, velocity, force-limit and return checks. The default configuration remains a recorded failure. [Protocol, native SDK control and limitations](drive.md). Current setup installs the disclosed [combined adapter patch](../../scripts/patches/unisim-1.7.10-physx-adapter.patch); the new option is opt-in and does not change existing contact defaults.
+
+## Robot articulation
+
+The actual OpenArm/Wuji 54-joint articulation passed an unloaded, contact-free motion qualification. Frame reduction preserves the source joint mass matrix and forward kinematics. This does not yet qualify native SDF or loaded robot grasping. [Protocol, results and failures](robot.md).
