@@ -164,6 +164,8 @@ def environment() -> dict:
         "unisim-core",
         "mujoco",
         "superdex-physics",
+        "superdex-physics-fp64",
+        "superdex-robotics-fp64",
         "numpy",
     ):
         try:
@@ -284,6 +286,22 @@ def load_receipt(directory: Path, expected: dict) -> dict:
     result = json.loads((directory / "result.json").read_text())
     if any(result.get(k) != v for k, v in expected.items()):
         raise ValueError(f"Receipt does not match frozen job: {directory}")
+    status = result.get("status")
+    outcome = result.get("outcome", {})
+    if status not in ("scored", "runtime_error", "timeout"):
+        raise ValueError(f"Receipt is not terminal: {directory}")
+    if type(outcome.get("passed")) is not bool:
+        raise ValueError(f"Receipt has no boolean outcome: {directory}")
+    if status == "scored":
+        checks = outcome.get("checks", {})
+        if (
+            not checks
+            or any(type(value) is not bool for value in checks.values())
+            or outcome["passed"] != all(checks.values())
+        ):
+            raise ValueError(f"Receipt has inconsistent checks: {directory}")
+    elif outcome["passed"]:
+        raise ValueError(f"Unscored receipt cannot pass: {directory}")
     for name, digest in result["artifacts"].items():
         if (
             Path(name).is_absolute()
@@ -292,6 +310,39 @@ def load_receipt(directory: Path, expected: dict) -> dict:
         ):
             raise ValueError(f"Artifact changed after scoring: {directory / name}")
     return result
+
+
+def verify_snapshots(directory: Path, signature: dict) -> None:
+    for name, digest in signature.get("source_snapshots", {}).items():
+        if Path(name).is_absolute() or ".." in Path(name).parts:
+            raise ValueError("Invalid source snapshot path")
+        if sha256(directory / "source" / name) != digest:
+            raise ValueError(f"Source snapshot changed: {name}")
+
+
+def collect_report(directory: Path) -> dict:
+    """Check completed evidence without rerunning or changing its physics score."""
+    signature = json.loads((directory / "run.json").read_text())
+    if sha256(directory / "suite.json") != signature["suite_sha256"]:
+        raise ValueError("Archived suite changed after freezing")
+    jobs = signature["jobs"]
+    names = [job["id"] for job in jobs]
+    if not names or len(set(names)) != len(names) or any(
+        not name or name in (".", "..") or Path(name).name != name for name in names
+    ):
+        raise ValueError("Require nonempty, unique, safe job identities")
+    verify_snapshots(directory, signature)
+    rows = [load_receipt(directory / job["id"], job) for job in jobs]
+    report = aggregate(rows)
+    if report != json.loads((directory / "report.json").read_text()):
+        raise ValueError("Batch report disagrees with its complete frozen job receipts")
+    return {
+        **report,
+        "configuration": signature,
+        "run_sha256": sha256(directory / "run.json"),
+        "collector_sha256": sha256(Path(__file__)),
+        "evidence": "Hash-checked archived records; collection does not rescore physics. Raw trajectories and model chunks remain in the run directories and are required for independent rescoring.",
+    }
 
 
 def run_suite(args: argparse.Namespace) -> dict:
@@ -322,6 +373,12 @@ def run_suite(args: argparse.Namespace) -> dict:
         "source_hashes": source_hashes(),
         "jobs": jobs,
         "environment": environment(),
+        "timeout_seconds": args.timeout,
+    }
+    signature["source_snapshots"] = {
+        name: digest
+        for name, digest in signature["source_hashes"].items()
+        if name.endswith(".py") or name == "pyproject.toml"
     }
     output = args.output.resolve()
     if output.exists():
@@ -335,8 +392,15 @@ def run_suite(args: argparse.Namespace) -> dict:
             )
     else:
         output.mkdir(parents=True)
+        for name in signature["source_snapshots"]:
+            destination = output / "source" / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / name, destination)
+            if sha256(destination) != signature["source_snapshots"][name]:
+                raise RuntimeError("Source changed while creating the frozen snapshot")
         write_json(output / "run.json", signature)
-        write_json(output / "suite.json", spec)
+        shutil.copy2(args.suite, output / "suite.json")
+    verify_snapshots(output, signature)
     rows = []
     if not (output / "report.json").exists():
         write_json(output / "report.json", aggregate(jobs))
@@ -409,10 +473,18 @@ def main() -> None:
     run.add_argument("--resume", action="store_true")
     run.add_argument("--timestep-sweep", action="store_true")
     run.add_argument("--timeout", type=float, default=1200)
+    report = commands.add_parser("report")
+    report.add_argument("directory", type=Path)
+    report.add_argument("--output", type=Path, required=True)
     commands.add_parser("_episode").add_argument("job", type=Path)
     args = parser.parse_args()
     if args.command == "_episode":
         execute_episode(args.job)
+    elif args.command == "report":
+        result = collect_report(args.directory)
+        with args.output.open("x") as stream:
+            stream.write(json.dumps(result, indent=2, allow_nan=False) + "\n")
+        print(json.dumps(result["groups"], indent=2))
     else:
         if not math.isfinite(args.timeout) or args.timeout <= 0:
             parser.error("Timeout must be finite and positive")

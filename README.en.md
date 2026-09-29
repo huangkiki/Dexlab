@@ -44,23 +44,22 @@ Tasks are registered and stepped through **UniLab**. DexLab currently owns the s
 - Control uses **known object poses, inverse kinematics, and scripted joint targets**. This is not a visual policy or a learned skill; no model API key is needed.
 - The engines are tuned separately. MuJoCo uses SDF contact-point search and soft contact constraints with a **0.5 ms** timestep. SuperDex uses surface-sample integration and smooth penalty energy with a **2 ms** timestep. The same SDF geometry does not imply the same contact-force law.
 
-Independent checks cover clearance, two-finger support, penetration, wrist-relative motion, and momentum balance during a continuous three-second hold. Fruit-body contact is allowed during approach. This is one tuned scene, without stem bending, fracture, or demonstrated hardware accuracy.
+Independent checks cover clearance, two-finger support, penetration, wrist-relative motion, and momentum balance during a continuous three-second hold. Fruit-body contact is allowed during approach. The GIFs show the default scene; stem bending, fracture and hardware accuracy are not validated.
 
 [MuJoCo acceptance](demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json) · [SuperDex acceptance](demos/apple-stem-grasp/evidence/sdf-superdex/summary.json) · [Parameters and engine internals](docs/sdf-backends.md)
 
 ## Results
 
-These are single-scene records using the released default configurations. The hold window is 11–14 s, with evidence recorded at every physics step.
+Apple-stem grasping completed **10 frozen paired cases: 20 episodes across both backends**. Mass, horizontal position and yaw were perturbed without retuning the released policies on these cases.
 
-| Metric | MuJoCo 3.11.0 | SuperDex 1.0.0 FP64 |
+| Configuration | Passed full acceptance | Success rate, 95% Wilson interval |
 |---|---:|---:|
-| Physics steps, full episode | 28,000 | 7,000 |
-| Minimum table clearance, hold | 124.43 mm | 115.22 mm |
-| Maximum hand penetration, full episode | 0.159 mm | 0.452 mm |
-| Maximum wrist-relative displacement, hold | 0.275 mm | 0.040 mm |
-| Mean-centered wrist-relative position RMS, hold | 0.0786 mm | 0.0115 mm |
+| MuJoCo 3.11.0, 0.5 ms | 1 / 10 | 1.8–40.4% |
+| SuperDex 1.0.0 FP64, 2 ms | 10 / 10 | 72.2–100% |
 
-Timesteps, friction and drives differ, so these numbers cannot rank engine accuracy. Displacement is not cumulative material-point slip; centered RMS still includes slow drift. See the [acceptance evidence](docs/sdf-backends.md#results-and-limits) and [diagnostic definitions](docs/jitter.md) for coverage and approximations.
+These measure separately configured task robustness, **not engine accuracy**. All failures and raw evidence are retained. Six additional timestep episodes completed; MuJoCo at 0.25 ms failed the penetration limit, so refinement did not improve acceptance monotonically. A separate 100-case test set is frozen but has not completed evaluation.
+
+[Protocol, all results and reproduction](docs/benchmark.md) · [Default demo measurements](docs/sdf-backends.md#results-and-limits) · [Diagnostic definitions](docs/jitter.md)
 
 ## Run
 

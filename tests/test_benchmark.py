@@ -9,6 +9,7 @@ from pathlib import Path
 from dexlab.benchmark import (
     DEFAULT_SUITE,
     aggregate,
+    collect_report,
     load_receipt,
     read_suite,
     select_cases,
@@ -82,6 +83,7 @@ class BenchmarkTests(unittest.TestCase):
         result = expected | {
             "artifacts": {artifact.name: sha256(artifact)},
             "status": "scored",
+            "outcome": {"passed": True, "checks": {"fixture": True}},
         }
         write_json(self.root / "result.json", result)
         self.assertEqual(load_receipt(self.root, expected), result)
@@ -96,6 +98,66 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(case["split"], "baseline")
         self.assertEqual(case["parameters"]["apple_mass"], 0.2)
         self.assertNotIn(case, self.spec["cases"])
+
+    def archived_batch(self):
+        jobs = []
+        rows = []
+        write_json(self.root / "suite.json", {"fixture": True})
+        for index, passed in enumerate((True, False)):
+            job = {"id": f"case-{index}", "backend": "mujoco", "parameters": {"timestep": 0.0005}}
+            directory = self.root / job["id"]
+            directory.mkdir()
+            (directory / "evidence").write_bytes(b"fixture")
+            row = job | {
+                "status": "scored",
+                "outcome": {"passed": passed, "checks": {"fixture": passed}},
+                "artifacts": {"evidence": sha256(directory / "evidence")},
+            }
+            write_json(directory / "result.json", row)
+            jobs.append(job)
+            rows.append(row)
+        write_json(self.root / "run.json", {"jobs": jobs, "suite_sha256": sha256(self.root / "suite.json")})
+        write_json(self.root / "report.json", aggregate(rows))
+        return jobs, rows
+
+    def test_collection_preserves_failures_and_rejects_changed_aggregate(self):
+        _, rows = self.archived_batch()
+        self.assertEqual(collect_report(self.root)["groups"]["mujoco/dt=0.0005"]["passed"], 1)
+        write_json(self.root / "report.json", aggregate(rows[:1]))
+        with self.assertRaisesRegex(ValueError, "complete frozen job"):
+            collect_report(self.root)
+
+    def test_collection_rejects_missing_receipt_and_modified_evidence(self):
+        self.archived_batch()
+        evidence = self.root / "case-1/evidence"
+        evidence.write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "Artifact changed"):
+            collect_report(self.root)
+        evidence.write_bytes(b"fixture")
+        (self.root / "case-1/result.json").unlink()
+        with self.assertRaises(FileNotFoundError):
+            collect_report(self.root)
+
+    def test_collection_rejects_a_pass_that_disagrees_with_checks(self):
+        _, rows = self.archived_batch()
+        rows[1]["outcome"]["passed"] = True
+        write_json(self.root / "case-1/result.json", rows[1])
+        with self.assertRaisesRegex(ValueError, "inconsistent checks"):
+            collect_report(self.root)
+
+    def test_collection_checks_frozen_source_snapshot(self):
+        self.archived_batch()
+        source = self.root / "source/worker.py"
+        source.parent.mkdir()
+        source.write_text("original")
+        path = self.root / "run.json"
+        signature = json.loads(path.read_text())
+        signature["source_snapshots"] = {"worker.py": sha256(source)}
+        write_json(path, signature)
+        collect_report(self.root)
+        source.write_text("changed")
+        with self.assertRaisesRegex(ValueError, "Source snapshot changed"):
+            collect_report(self.root)
 
 
 if __name__ == "__main__":

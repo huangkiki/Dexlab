@@ -63,14 +63,14 @@ class AppleStemEnv(ABEnv):
             raise ValueError("The audited episode duration is 14 seconds")
         if set(cfg.parameters) - set(PARAMETERS):
             raise ValueError("Unknown physics parameter override")
-        dt = cfg.parameters.get("timestep") or (
-            0.0005 if backend_type == "mujoco" else 0.002
-        )
+        dt = cfg.parameters.get("timestep")
+        if dt is None:
+            dt = 0.0005 if backend_type == "mujoco" else 0.002
         if dt not in (0.002, 0.001, 0.0005, 0.00025, 0.000125):
             raise ValueError("Unsupported benchmark timestep")
         if (cfg.sim_dt, cfg.ctrl_dt) not in ((0.01, 0.01), (dt, dt)):
             raise ValueError(
-                f"This audited backend uses sim_dt = ctrl_dt = {dt}; timestep overrides are not supported"
+                f"This episode requires sim_dt = ctrl_dt = {dt}; set timestep overrides in parameters"
             )
         self._cfg = replace(cfg, sim_dt=dt, ctrl_dt=dt)
         self.backend_type = backend_type

@@ -249,7 +249,8 @@ def diagnose_run(directory):
     result["backend"] = engine["backend"]
     result["engine_version"] = engine.get("version")
     result["input_sha256"] = {
-        p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs
+        p.relative_to(directory).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in inputs
     }
     result["analyzer_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     return result
@@ -264,7 +265,7 @@ def main():
     output = args.output or args.run / "jitter-diagnostics.json"
     if output.resolve() in {
         (args.run / name).resolve()
-        for name in ("engine.json", "sdf-dynamics.npz", "sdf-contacts.npz", "model.mjb")
+        for name in result["input_sha256"]
     }:
         parser.error("Output must not overwrite an input archive")
     text = json.dumps(result, indent=2, allow_nan=False) + "\n"

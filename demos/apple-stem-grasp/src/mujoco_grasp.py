@@ -381,9 +381,12 @@ def simulate(
     np.savez_compressed(
         dest / "trajectory.npz", frames=frames, names=model_names + ["apple"], dt=0.05
     )
-    engine.update(completed=True, steps=count, wall_seconds=time.monotonic() - started)
-    (dest / "engine.json").write_text(json.dumps(engine, indent=2))
-    engine["physics_step_seconds"] = physics_step_seconds
+    engine.update(
+        completed=True,
+        steps=count,
+        wall_seconds=time.monotonic() - started,
+        physics_step_seconds=physics_step_seconds,
+    )
     (dest / "engine.json").write_text(json.dumps(engine, indent=2))
     result = verify_grasp(dest, expected_mass=args.apple_mass)
     (dest / "summary.json").write_text(json.dumps(result, indent=2))

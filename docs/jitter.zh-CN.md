@@ -15,7 +15,7 @@
 
 命令在运行目录生成 `jitter-diagnostics.json`，并打印相同 JSON；`--output path.json` 可改变输出位置。输入文件只读。命令正常退出表示已生成报告，不代表抓取或数据质量通过。档案结构损坏会报错；记录不完整则保留在报告中。
 
-输入包括 `engine.json`、`sdf-dynamics.npz` 和存在时的 `sdf-contacts.npz`。MuJoCo 还需要匹配的 `model.mjb` 解析刚体 ID，只加载而不步进；SuperDex 的 ID 从 `engine.json` 读取。需要本地完整运行产物，只有打包的简要验收结果不够。报告记录输入文件与分析器源码的哈希，不依赖单独开发的模型审查功能。
+输入包括 `engine.json`、`sdf-dynamics.npz` 和存在时的 `sdf-contacts.npz`。MuJoCo 还需要匹配的原始 `model.mjb` 或无损模型档案解析刚体 ID，只加载而不步进；SuperDex 的 ID 从 `engine.json` 读取。需要本地完整运行产物，只有打包的简要验收结果不够。报告记录输入文件与分析器源码的哈希，不依赖单独开发的模型审查功能。
 
 ## 信号、单位与定义
 

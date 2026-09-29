@@ -105,6 +105,10 @@ class UniLabTaskTest(unittest.TestCase):
         self.assertEqual(manifest["parameters"]["timestep"], 0.001)
         self.assertEqual(manifest["dt_s"], 0.001)
 
+    def test_zero_benchmark_timestep_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Unsupported benchmark timestep"):
+            AppleStemEnv(AppleStemCfg(parameters={"timestep": 0.0}))
+
     def test_native_failure_releases_scene(self):
         def failing(args):
             Path(args.output).mkdir(parents=True, exist_ok=True)

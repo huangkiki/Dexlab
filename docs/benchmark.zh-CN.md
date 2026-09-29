@@ -40,6 +40,31 @@ CLI 返回 0 表示所有实验完成评分，**不表示每次抓取成功**。
 
 新批次将 MuJoCo 编译模型按 1 MiB 切块、无损 gzip 压缩，并以内容哈希命名。不同场景的相同块通过硬链接共享磁盘空间；每条记录仍含完整的 `model-chunks/` 和清单，复制到其他文件系统后可独立使用。只有按顺序恢复的完整 SHA-256 与原模型一致，才移除原始二进制副本。不得原地修改以哈希命名的块。验收器和抖动诊断也兼容原始 MJB 与旧版 `model.mjb.gz`。物理数组和失败记录完整保留；剩余磁盘不足 4 GiB 时停止启动新场景。
 
+## 已完成的实验
+
+10 个配对回归场景全部完成评分，没有运行错误或超时。MuJoCo 默认配置通过 **1/10**，SuperDex 通过 **10/10**；95% Wilson 区间分别为 **1.8–40.4%** 与 **72.2–100%**。失败包含保持漂移、失去支撑和穿透超限，不能只统计成功场景。另行冻结的 100 个正式测试场景尚未完成评估。
+
+| 后端 | 步长 | 完整验收 | 全程最大手部穿透 |
+|---|---:|---|---:|
+| MuJoCo | 0.5 ms | 通过 | 0.15918 mm |
+| MuJoCo | 0.25 ms | **失败：穿透超限** | 1.15241 mm |
+| MuJoCo | 0.125 ms | 通过 | 0.17969 mm |
+| SuperDex | 2 ms | 通过 | 0.45226 mm |
+| SuperDex | 1 ms | 通过 | 0.45167 mm |
+| SuperDex | 0.5 ms | 通过 | 0.45200 mm |
+
+步长扫描使用同一个默认场景，各配置一次；不构成成功率估计。结果没有证明单调收敛，也不能据此把某引擎作为真实物理参照。判定沿用 1 mm 穿透上限，未因失败改变阈值。
+
+[全部回归记录](../demos/apple-stem-grasp/evidence/benchmark/regression-v1.json) · [全部步长记录](../demos/apple-stem-grasp/evidence/benchmark/timestep-v1.json)。报告含每次判定、参数、耗时、环境和原始文件哈希；完整数组与模型仍在各运行目录，报告本身不足以独立重评分或回放。
+
+```bash
+# 不重跑物理：核对完整批次的场景、记录和文件哈希，保留每次失败
+.venv/bin/python -m dexlab.benchmark report \
+  demos/apple-stem-grasp/runs/benchmark-regression --output regression-report.json
+```
+
+报告收集器拒绝不完整批次、被修改的证据、与检查项矛盾的成功标记，以及与逐场结果不一致的汇总；输出不得覆盖已有文件。旧批次保留当时的源码哈希；新批次另外归档 Python 源码快照，恢复与收集时核对其内容。它验证归档完整性，不重新计算物理评分。
+
 ## 测量与时间步
 
 验收沿用原有离桌、持续两指支撑、保持漂移、穿透和动量平衡阈值。预期质量由冻结场景传给独立评分器，不从运行器声称的质量推定；独立复核非默认质量时需提供 `verify_sdf_grasp.py RUN --expected-mass-kg MASS`。
@@ -63,6 +88,8 @@ CLI 返回 0 表示所有实验完成评分，**不表示每次抓取成功**。
 范围覆盖固定版本 UniSim 声明的 MuJoCo/mjbatch、SuperDex、MJWarp、Newton、Motrix、Drake、Genesis、IsaacGym 与 IsaacSim，并审查 Newton 的刚体求解器 MuJoCo、XPBD、VBD、Featherstone、SemiImplicit 和 Kamino 的实际可用性。引擎、积分器、约束求解器和封装分开标识；Newton SolverMuJoCo 不算独立的非 MuJoCo 物理实现。缺失 SDK、SDF、关节或接触读数不能静默降级，更不能标为通过。
 
 ## 布料实验
+
+已发布 7 个原生求解器配置的 105 次冻结留出实验：52 次通过协议、53 次失败；名义材料尚未完成跨求解器校准。机器人摩擦夹布通过，双臂折叠未通过。[结果与复现](../demos/cloth-benchmark/README.zh-CN.md) · [机器人夹布](../demos/cloth-folding/README.zh-CN.md)。
 
 [Issue #12](https://github.com/huangkiki/Dexlab/issues/12) 与刚体实验共享版本、证据和运行管理，但单独评分。首组实验为固定边拉伸/卸载、重力下垂、解析障碍物上的悬垂与接触；依据求解器支持情况增加自碰撞。
 

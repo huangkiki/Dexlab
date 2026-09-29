@@ -40,6 +40,31 @@ CLI exit 0 means every episode was scored, **not that every grasp succeeded**. R
 
 New batches store MuJoCo binaries as lossless, content-addressed 1 MiB gzip chunks. Identical chunks share disk inodes across episodes, while each record has its own complete `model-chunks/` directory and manifest; copying a record to another filesystem remains self-contained. Ordered reconstruction must match the original full SHA-256 before the raw binary is removed. Never edit a hash-named chunk in place. Independent verification and jitter analysis also accept raw MJB and legacy `model.mjb.gz`. Physical arrays and failures are retained. Runs stop before starting a new scene if less than 4 GiB is free.
 
+## Completed experiments
+
+All ten paired regression cases were scored, with no runtime errors or timeouts. The default MuJoCo configuration passed **1/10** and SuperDex passed **10/10**; the respective 95% Wilson intervals are **1.8–40.4%** and **72.2–100%**. Failures include hold drift, lost support and excessive penetration; failed episodes remain in the denominator. The separate frozen 100-case test set has not completed evaluation.
+
+| Backend | Timestep | Full acceptance | Maximum hand penetration, full episode |
+|---|---:|---|---:|
+| MuJoCo | 0.5 ms | Pass | 0.15918 mm |
+| MuJoCo | 0.25 ms | **Fail: excessive penetration** | 1.15241 mm |
+| MuJoCo | 0.125 ms | Pass | 0.17969 mm |
+| SuperDex | 2 ms | Pass | 0.45226 mm |
+| SuperDex | 1 ms | Pass | 0.45167 mm |
+| SuperDex | 0.5 ms | Pass | 0.45200 mm |
+
+The timestep study runs the same default scene once per configuration; it does not estimate success rates. These results establish neither monotonic convergence nor an engine as physical ground truth. The original 1 mm penetration limit was not changed to accommodate failures.
+
+[All regression records](../demos/apple-stem-grasp/evidence/benchmark/regression-v1.json) · [All timestep records](../demos/apple-stem-grasp/evidence/benchmark/timestep-v1.json). Reports include individual outcomes, parameters, timing, environment and raw-file hashes. Full arrays and models remain in their run directories; the report alone cannot independently rescore physics or replay trajectories.
+
+```bash
+# No simulation: check complete batch identities and file hashes, retaining failures
+.venv/bin/python -m dexlab.benchmark report \
+  demos/apple-stem-grasp/runs/benchmark-regression --output regression-report.json
+```
+
+Collection rejects incomplete batches, changed evidence, pass flags inconsistent with checks, and aggregate reports inconsistent with individual records. Output cannot overwrite an existing file. Historical batches retain their original source hashes; new batches also archive Python source snapshots and check their contents during resume and collection. Collection verifies archive integrity rather than recalculating physical scores.
+
 ## Measurement and timestep
 
 Acceptance retains the original clearance, continuous two-pad support, hold drift, penetration and momentum-balance thresholds. The independent scorer receives expected mass from the frozen case, not the runtime's claimed mass. Rechecking nondefault mass requires `verify_sdf_grasp.py RUN --expected-mass-kg MASS`.
@@ -63,6 +88,8 @@ Controlled comparisons fix source geometry, mass/inertia, physical control laws,
 Scope includes the pinned UniSim declarations for MuJoCo/mjbatch, SuperDex, MJWarp, Newton, Motrix, Drake, Genesis, IsaacGym and IsaacSim, plus availability audits of Newton's rigid-capable MuJoCo, XPBD, VBD, Featherstone, SemiImplicit and Kamino solvers. Identify engines, integrators, constraint solvers and wrappers separately. Newton SolverMuJoCo is not independent non-MuJoCo physics. Missing SDKs, SDF, joints or contact readback cannot silently fall back or count as passes.
 
 ## Cloth experiments
+
+Seven native solver profiles have published 105 frozen held-out episodes: 52 protocol passes and 53 failures. Nominal materials are not calibrated across solvers. The frictional robot cloth grasp passed; bimanual folding has not. [Results and reproduction](../demos/cloth-benchmark/README.md) · [Robot cloth grasp](../demos/cloth-folding/README.md).
 
 [Issue #12](https://github.com/huangkiki/Dexlab/issues/12) shares versioning, evidence and run management with rigid tasks, but uses separate scores. Initial experiments: pinned-edge extension/unloading, gravity sag and draping/contact over an analytic obstacle, with self-collision where supported.
 
