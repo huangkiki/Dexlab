@@ -4,7 +4,7 @@
 
 **基于 UniLab 的机器人接触动力学实验：审查模型，量化接触行为，复现抓取结果。**
 
-DexLab 用小而可复现的机器人任务研究仿真中的穿透、抖动、打滑与数值稳定性。当前案例是 **OpenArm 双臂 + Wuji 灵巧手抓取苹果梗**，支持官方 MuJoCo 与 SuperDex FP64 两条 SDF–SDF 动力学路径。研究重点是参数来源、碰撞与驱动模型，以及独立物理验收。
+DexLab 用可复现的刚体抓取和布料实验研究穿透、抖动、打滑与数值稳定性。案例包括 **OpenArm 双臂 + Wuji 灵巧手抓苹果梗、夹布**，以及多求解器的布料拉伸、下垂和碰撞测试。每项实验保留参数来源、原始轨迹、独立验收及失败记录。
 
 [快速运行](#运行) · [实验结果](#实验结果) · [诊断工具](#模型审查与诊断) · [研究方法](docs/research-focus.zh-CN.md) · [版本发布](https://github.com/huangkiki/Dexlab/releases)
 
@@ -18,17 +18,24 @@ DexLab 用小而可复现的机器人任务研究仿真中的穿透、抖动、�
 
 动图连续展示完整 14 秒过程：接近 → 两指闭合 → 抬升 → 保持。仅显示抓取近景；展示相机跟随记录中的苹果，不参与控制。两个后端均由 MuJoCo 渲染器回放实际物理轨迹。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4)
 
-## 当前能做什么
+## 机器人夹布
 
-| 能力 | 实际交付 |
+![Wuji 夹布、抬升与释放近景](demos/cloth-folding/media/grasp.gif)
+
+MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放；连续 9 秒记录，独立验收通过。此任务使用已知状态与脚本控制，机器人碰撞体采用凸网格近似；未使用布料附着约束。双臂折叠仍未通过。[视频与物理指标](demos/cloth-folding/README.zh-CN.md)
+
+## 引擎与实验
+
+| 原生配置 | 当前验证范围 |
 |---|---|
-| 双后端抓取 | 同一机器人和任务，两套原生 SDF 接触实现；逐物理步运行并保存证据 |
-| 模型审查 | 导出源资产与运行时质量、质心、惯量、关节、驱动和碰撞过滤，报告初始重叠 |
-| 稳定性诊断 | 位置、速度、力的 RMS/峰值与逐指接触间断；缺失数据保持未知 |
-| 独立验收 | 检查完整保持过程，保留原始力与位姿记录，不靠视频判断成功 |
-| Issue 驱动开发 | 自动实现、验证和审查，符合条件后合并并发布；结果可追溯至提交和日志 |
+| MuJoCo 3.11.0 | SDF–SDF 抓梗、flex 布料、机器人摩擦夹布 |
+| SuperDex 1.0.0 FP64 | SDF–SDF 抓梗、实验性三角薄壳 |
+| Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | 固定上游版本的布料实验；各求解器的材料与自接触能力分别记录 |
+| PhysX / Isaac Sim | 接入与原生资格验证进行中，尚无通过验证的结果；[Issue #5](https://github.com/huangkiki/Dexlab/issues/5) |
 
-当前接入 **UniLab 任务层**。场景由 DexLab 管理，尚未采用 UniSim 内置后端；PhysX、多场景回归和真机校准的进度维护在 [Issues](https://github.com/huangkiki/Dexlab/issues)。
+布料基准已完成 **105 次冻结留出实验：52 次通过协议检查、53 次失败，无超时**。覆盖拉伸、下垂、球面覆盖和折叠下落；名义材料尚未完成跨求解器校准，不按通过数排名真实精度。[全部结果与运行方法](demos/cloth-benchmark/README.zh-CN.md#留出结果)
+
+任务通过 **UniLab** 注册和逐步执行；当前场景由 DexLab 管理，尚未采用 UniSim 内置后端。刚体与布料分别评分；未完成或不支持的能力明确标记。
 
 ## 抓取细节
 
@@ -92,6 +99,6 @@ SDF 构建和规划完成后打开窗口；服务器添加 `--headless`。两条
 
 ## 致谢
 
-感谢 [UniLab](https://github.com/unilabsim/UniLab)、[Project SuperDex](https://github.com/unilabsim/project_superdex)、[MuJoCo](https://github.com/google-deepmind/mujoco)、[OpenArm](https://github.com/enactic/openarm) 和 [Wuji](https://github.com/wuji-technology)。SuperDex 抓梗演示收录于 [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex)；Astra 参与开发与调试。
+感谢 [UniLab](https://github.com/unilabsim/UniLab)、[Project SuperDex](https://github.com/unilabsim/project_superdex)、[MuJoCo](https://github.com/google-deepmind/mujoco)、[Newton](https://github.com/newton-physics/newton)、[OpenArm](https://github.com/enactic/openarm) 和 [Wuji](https://github.com/wuji-technology)。SuperDex 抓梗演示收录于 [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex)；Astra 参与开发与调试。
 
 代码：[Apache-2.0](LICENSE)。第三方资产保留各自条款，见[资产来源](docs/ASSETS.zh-CN.md)。

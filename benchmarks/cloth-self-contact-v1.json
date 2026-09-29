@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "scope": "Passive stress-free pre-folded sheet dropped on an analytic plane; collision stress, not a robot folding task or measured fabric",
+  "initial_fold": "left half rotated about y by pi-0.3 rad; isometric rest geometry, odd nx includes hinge",
+  "checks": {
+    "obstacle_penetration_m": 0.0015,
+    "sampled_nonadjacent_surface_crossing_pairs": 0
+  },
+  "audit": "100Hz zero-thickness triangle crossings; shared-vertex pairs excluded; no inter-step or thickness-overlap guarantee",
+  "cases": [
+    {
+      "split": "development",
+      "case": {
+        "name": "dev-folded-drop",
+        "experiment": "folded-drop",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.2,
+        "height": 0.08,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-folded-drop-00",
+        "experiment": "folded-drop",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.18,
+        "height": 0.06,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-folded-drop-01",
+        "experiment": "folded-drop",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.22,
+        "height": 0.1,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-folded-drop-02",
+        "experiment": "folded-drop",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.2,
+        "height": 0.12,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    }
+  ]
+}

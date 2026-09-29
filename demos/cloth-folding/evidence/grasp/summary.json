@@ -1,0 +1,83 @@
+{
+  "task": "grasp",
+  "engine": "MuJoCo",
+  "version": "3.11.0",
+  "timestep_s": 0.00025,
+  "sample_dt_s": 0.01,
+  "solver": "Newton",
+  "friction_cone": "pyramidal",
+  "initialization_solver": "CG",
+  "initialization_timestep_s": 0.0005,
+  "initial_condition": "Cloth positions come from passive settling; velocities are zeroed before the pregrasp episode.",
+  "iterations": 100,
+  "wall_time_s": 347.55197317292914,
+  "cloth_vertices": 169,
+  "cloth_triangles": 288,
+  "attachments": 0,
+  "cloth_actuators": 0,
+  "hand_sliding_friction": 1.0,
+  "grasp_inset_barycentric": 0.3,
+  "nominal_shell_thickness_m": 0.0005,
+  "collision_radius_m": 0.0012,
+  "failure": null,
+  "maximums": {
+    "hand_penetration_m": 0.0003758359323881919,
+    "table_penetration_m": 0.00020041406496989025,
+    "self_contact_penetration_m": 0.0005157232550246937,
+    "edge_strain": 0.04473986061448909,
+    "robot_rigid_penetration_m": 0.0
+  },
+  "completed": true,
+  "verified": true,
+  "validation": {
+    "passed": true,
+    "checks": {
+      "valid_task": true,
+      "complete_time_grid": true,
+      "finite_complete_measurements": true,
+      "complete_hand_plans": true,
+      "complete_contact_scan": true,
+      "completed_without_physics_warning": true,
+      "edge_strain_below_5_percent": true,
+      "robot_contact_penetration_below_1_5_mm": true,
+      "table_contact_penetration_below_1_5_mm": true,
+      "cloth_self_contact_penetration_below_1_5_mm": true,
+      "robot_rigid_penetration_below_1_5_mm": true,
+      "r_both_pads_contact_at_least_95_percent": true,
+      "r_material_slip_below_1_cm": true,
+      "r_material_lift_above_8_cm": true,
+      "released_from_all_robot_geometries": true
+    },
+    "metrics": {
+      "r": {
+        "two_pad_contact_fraction": 1.0,
+        "maximum_anchor_error_m": 0.003982802808762453,
+        "lift_m": 0.12145827075311838
+      },
+      "maximum_final_robot_cloth_normal_force_N": 0.0
+    }
+  },
+  "engine_identity": {
+    "version": "3.11.0",
+    "native_library_sha256": "7b47f06aa840d4f8fa3c66c2027d52de570bac6d11b9ddd19d55ae1469d40e22",
+    "wheel_record_matches": true
+  },
+  "robot_model_sha256": "b00c68c596b26807dd0834da92a11826f4b6dbcace3bd43d0b0b8711a6ad9000",
+  "schedule_s": {
+    "move_start": 1.75,
+    "move_end": 4.0,
+    "hold_end": 5.0,
+    "release_start": 5.0,
+    "release_end": 6.5,
+    "retreat_end": 7.5,
+    "duration": 9.0
+  },
+  "limitation": "Known-state single-layer panel; uncalibrated material and controller parameters; no real-hardware validation.",
+  "source_sha256": {
+    "render_cloth.py": "64dba99d3b2322a1262e467ee9c5aa8b1ff4381edd3b467b23e60c872d91c50f",
+    "cloth_control.py": "8f4719c43d7beaeaa49eae4ae144e08def280e9934af2486bbc80e93b4223941",
+    "verify_cloth.py": "33ea708584db14172dfd4ef89697d684e773c5e44641af989ebe298970f1a131",
+    "run_cloth.py": "fb11bba771d8cbe04ca5c83beb08670e63483988cb7552d64942061c2c075462",
+    "cloth_model.py": "7bee23cc02d241c833f2348c5300cb9e17665b9a4c4a5699f6f990eb09962880"
+  }
+}
