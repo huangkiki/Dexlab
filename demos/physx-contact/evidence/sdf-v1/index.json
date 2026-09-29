@@ -1,0 +1,644 @@
+{
+  "scope": "16 native SDF development/control/import records, including failed and invalid cases; engines unchanged. Final protocol v3: SDF hole/support pass, convex control fails speed. Robot import is 20 steps without gravity/contact load.",
+  "cases": {
+    "sdf-hole-dev-v1": {
+      "status": "error",
+      "source_sha256": {
+        "source.py": "709630a31fd91e66cbcf24a8dcb1fb32436f78f397f40fadf1cf96fa04369e84",
+        "unisim-scene-worker.py": "c419c4bb53f5f6a3edb48d15deeb916a9ecf08cd1794ac6dc3eee860abff118a",
+        "unisim-sdf-collision.py": "a8e0d7a9b41b58ad923dde8df213f8e8e6d18638e9405fe981128f98637c5ae5",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "case": "sdf-hole",
+        "status": "error",
+        "source_sha256": {
+          "source.py": "709630a31fd91e66cbcf24a8dcb1fb32436f78f397f40fadf1cf96fa04369e84",
+          "unisim-scene-worker.py": "c419c4bb53f5f6a3edb48d15deeb916a9ecf08cd1794ac6dc3eee860abff118a",
+          "unisim-sdf-collision.py": "a8e0d7a9b41b58ad923dde8df213f8e8e6d18638e9405fe981128f98637c5ae5",
+          "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+        },
+        "scope": "development concavity and SDF-SDF contact controls; not robot grasp",
+        "dt": 0.001,
+        "duration": 0.35,
+        "sdf_resolution": 256,
+        "sdf_subgrid_resolution": 6,
+        "source_unchanged": true
+      }
+    },
+    "sdf-hole-dev-v2": {
+      "status": "error",
+      "source_sha256": {
+        "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+        "unisim-scene-worker.py": "b1b60e27abd5f37c6eaa864a9bb91e8b66327d07d68551299dc4dd3a063d6965",
+        "unisim-sdf-collision.py": "6f5c2ca1d41e0632dfee35313800268f046532162a51805154b3311e665dd36d",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "case": "sdf-hole",
+        "status": "error",
+        "source_sha256": {
+          "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+          "unisim-scene-worker.py": "b1b60e27abd5f37c6eaa864a9bb91e8b66327d07d68551299dc4dd3a063d6965",
+          "unisim-sdf-collision.py": "6f5c2ca1d41e0632dfee35313800268f046532162a51805154b3311e665dd36d",
+          "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+        },
+        "scope": "development concavity and SDF-SDF contact controls; not robot grasp",
+        "dt": 0.001,
+        "duration": 0.35,
+        "sdf_resolution": 256,
+        "sdf_subgrid_resolution": 6,
+        "source_unchanged": true
+      }
+    },
+    "sdf-hole-dev-v3": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "case": "sdf-hole",
+        "status": "completed",
+        "source_sha256": {
+          "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+          "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+          "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+          "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+        },
+        "scope": "development concavity and SDF-SDF contact controls; not robot grasp",
+        "dt": 0.001,
+        "duration": 0.35,
+        "sdf_resolution": 256,
+        "sdf_subgrid_resolution": 6,
+        "final_position": [
+          [
+            0.0,
+            0.0,
+            -0.47107985615730286
+          ],
+          [
+            0.0,
+            0.0,
+            0.05000000074505806
+          ]
+        ],
+        "mean_late_force": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "analytic_min_clearance_m": 0.014003255084861516,
+        "source_unchanged": true
+      }
+    },
+    "sdf-surface-dev-v1": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "case": "sdf-surface",
+        "status": "completed",
+        "source_sha256": {
+          "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+          "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+          "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+          "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+        },
+        "scope": "development concavity and SDF-SDF contact controls; not robot grasp",
+        "dt": 0.001,
+        "duration": 0.35,
+        "sdf_resolution": 256,
+        "sdf_subgrid_resolution": 6,
+        "final_position": [
+          [
+            0.029999995604157448,
+            2.3520041736446728e-07,
+            0.06600002199411392
+          ],
+          [
+            0.0,
+            0.0,
+            0.05000000074505806
+          ]
+        ],
+        "mean_late_force": [
+          -4.1961626266129315e-05,
+          0.0,
+          0.19620001316070557
+        ],
+        "analytic_min_clearance_m": -1.121163368117406e-07,
+        "source_unchanged": true
+      }
+    },
+    "convex-hole-dev-v1": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "case": "convex-hole",
+        "status": "completed",
+        "source_sha256": {
+          "source.py": "4f6e548b052f640ad9e738c2dc54fd306b5cb3fb5ac8a9ee5c6ce2bd627f0dc6",
+          "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+          "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+          "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+        },
+        "scope": "development concavity and SDF-SDF contact controls; not robot grasp",
+        "dt": 0.001,
+        "duration": 0.35,
+        "sdf_resolution": 256,
+        "sdf_subgrid_resolution": 6,
+        "final_position": [
+          [
+            3.88562839361839e-05,
+            -3.988681783084758e-06,
+            0.06583604216575623
+          ],
+          [
+            0.0,
+            0.0,
+            0.05000000074505806
+          ]
+        ],
+        "mean_late_force": [
+          -0.00038218914414756,
+          0.0027120006270706654,
+          0.19616088271141052
+        ],
+        "analytic_min_clearance_m": 0.01788861355890023,
+        "source_unchanged": true
+      }
+    },
+    "sdf-mesh-refinement-v1": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "8d954eb98798264818e5b51f2871e4e09fdd04602987ac5bbe2ae614c0b0c0b2",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": false,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": false,
+          "convex_hull_blocks_hole": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.017378682300303414,
+          "final_ball_position_m": [
+            -0.000614272546954453,
+            -2.594069519545883e-05,
+            0.06583185493946075
+          ],
+          "late_height_error_m": 0.00016814470291137695,
+          "late_maximum_speed_m_s": 0.010782741941511631,
+          "late_mean_support_n": 0.19608978927135468
+        },
+        "verifier_sha256": "8d954eb98798264818e5b51f2871e4e09fdd04602987ac5bbe2ae614c0b0c0b2"
+      }
+    },
+    "robot-sdf-import-v1": {
+      "status": "completed",
+      "source_sha256": null,
+      "summary": {
+        "status": "completed",
+        "scope": "SDF pad import on full 54-joint robot; no apple/load/contact qualification",
+        "sdf_geoms": [
+          "collision_r_index_finger_pad",
+          "collision_r_thumb_pad"
+        ],
+        "source_robot_sha256": "cf686b6d9c32ea38bd58e881576167d8490c43a0e9d999c14acd30f222030504",
+        "observed_sdf_geoms": [
+          "collision_r_index_finger_pad",
+          "collision_r_thumb_pad"
+        ],
+        "exact_sdf_names": true,
+        "native_joints": 54
+      }
+    },
+    "sdf-qualification-v1/sdf-hole": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "1237650ffc33ae58ed2fa4ec8a1740d139c525c9abb78ecd35e63fd34d719bfb",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": true,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "falls_through_hole": true,
+          "no_false_contact": true,
+          "positive_clearance": true,
+          "ballistic_position": true,
+          "ballistic_velocity": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.014003255084861516,
+          "final_ball_position_m": [
+            0.0,
+            0.0,
+            -0.47107985615730286
+          ],
+          "ballistic_position_error_m": 0.00021735615730267277,
+          "ballistic_velocity_error_m_s": 4.269195556627636e-05,
+          "maximum_force_n": 0.0
+        },
+        "verifier_sha256": "1237650ffc33ae58ed2fa4ec8a1740d139c525c9abb78ecd35e63fd34d719bfb"
+      }
+    },
+    "sdf-qualification-v1/sdf-surface": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "1237650ffc33ae58ed2fa4ec8a1740d139c525c9abb78ecd35e63fd34d719bfb",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": true,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": true,
+          "bounded_analytic_penetration": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": -1.1211633622887351e-07,
+          "final_ball_position_m": [
+            0.029989566653966904,
+            -1.0526672440391849e-06,
+            0.06599990278482437
+          ],
+          "late_height_error_m": 1.2665987014770508e-07,
+          "late_maximum_speed_m_s": 0.0003137120802421123,
+          "late_mean_support_n": 0.1961999088525772
+        },
+        "verifier_sha256": "1237650ffc33ae58ed2fa4ec8a1740d139c525c9abb78ecd35e63fd34d719bfb"
+      }
+    },
+    "sdf-qualification-v1/convex-hole": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "1237650ffc33ae58ed2fa4ec8a1740d139c525c9abb78ecd35e63fd34d719bfb",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": false,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": false,
+          "convex_hull_blocks_hole": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.016444612259057197,
+          "final_ball_position_m": [
+            0.0016813752008602023,
+            6.403947918443009e-05,
+            0.06583595275878906
+          ],
+          "late_height_error_m": 0.0001994296908378601,
+          "late_maximum_speed_m_s": 0.022043339908123016,
+          "late_mean_support_n": 0.19636967778205872
+        },
+        "verifier_sha256": "1237650ffc33ae58ed2fa4ec8a1740d139c525c9abb78ecd35e63fd34d719bfb"
+      }
+    },
+    "sdf-qualification-v2/sdf-hole": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "27e2337b4f0c3f679f1663498c3affdc1f668c2fb39bb89586cca82e07ec3331",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": true,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "falls_through_hole": true,
+          "no_false_contact": true,
+          "positive_clearance": true,
+          "ballistic_position": true,
+          "ballistic_velocity": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.014003255084861516,
+          "final_ball_position_m": [
+            0.0,
+            0.0,
+            -0.47107985615730286
+          ],
+          "ballistic_position_error_m": 0.00021735615730267277,
+          "ballistic_velocity_error_m_s": 4.269195556627636e-05,
+          "maximum_force_n": 0.0
+        },
+        "verifier_sha256": "27e2337b4f0c3f679f1663498c3affdc1f668c2fb39bb89586cca82e07ec3331"
+      }
+    },
+    "sdf-qualification-v2/sdf-surface": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "27e2337b4f0c3f679f1663498c3affdc1f668c2fb39bb89586cca82e07ec3331",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": true,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": true,
+          "bounded_analytic_penetration": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": -1.1211633606927895e-07,
+          "final_ball_position_m": [
+            0.029992256313562393,
+            -9.69048752352819e-09,
+            0.0660000666975975
+          ],
+          "late_height_error_m": 1.4156103134155273e-07,
+          "late_maximum_speed_m_s": 0.00022626294230576605,
+          "late_mean_support_n": 0.19619996845722198
+        },
+        "verifier_sha256": "27e2337b4f0c3f679f1663498c3affdc1f668c2fb39bb89586cca82e07ec3331"
+      }
+    },
+    "sdf-qualification-v2/convex-hole": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "27e2337b4f0c3f679f1663498c3affdc1f668c2fb39bb89586cca82e07ec3331",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": false,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": false,
+          "convex_hull_blocks_hole": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.016945865823771437,
+          "final_ball_position_m": [
+            0.0006146031082607806,
+            -0.0009222366497851908,
+            0.0658334419131279
+          ],
+          "late_height_error_m": 0.00017384439706802368,
+          "late_maximum_speed_m_s": 0.013120907358825207,
+          "late_mean_support_n": 0.1961282193660736
+        },
+        "verifier_sha256": "27e2337b4f0c3f679f1663498c3affdc1f668c2fb39bb89586cca82e07ec3331"
+      }
+    },
+    "sdf-qualification-v3/sdf-hole": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": true,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "falls_through_hole": true,
+          "no_false_contact": true,
+          "positive_clearance": true,
+          "ballistic_position": true,
+          "ballistic_velocity": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_contact_offsets": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.014003255084861516,
+          "final_ball_position_m": [
+            0.0,
+            0.0,
+            -0.47107985615730286
+          ],
+          "ballistic_position_error_m": 0.00021735615730267277,
+          "ballistic_velocity_error_m_s": 4.269195556627636e-05,
+          "maximum_force_n": 0.0
+        },
+        "verifier_sha256": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea"
+      }
+    },
+    "sdf-qualification-v3/sdf-surface": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": true,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": true,
+          "bounded_analytic_penetration": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_contact_offsets": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": -1.1956691598619118e-07,
+          "final_ball_position_m": [
+            0.029992371797561646,
+            6.492165738336553e-08,
+            0.06600002944469452
+          ],
+          "late_height_error_m": 1.4156103134155273e-07,
+          "late_maximum_speed_m_s": 0.0002159738214686513,
+          "late_mean_support_n": 0.19619998335838318
+        },
+        "verifier_sha256": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea"
+      }
+    },
+    "sdf-qualification-v3/convex-hole": {
+      "status": "completed",
+      "source_sha256": {
+        "source.py": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea",
+        "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+        "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+        "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "unisim-scene-materialization.py": "c03eb5d3467cb266ef984f58059432f116b086fddadc0f40013c98388cf1a4db"
+      },
+      "summary": {
+        "passed": false,
+        "checks": {
+          "complete_finite_steps": true,
+          "uniform_timestep": true,
+          "ring_remains_fixed": true,
+          "surface_support": true,
+          "supported_height": true,
+          "low_late_speed": false,
+          "convex_hull_blocks_hole": true,
+          "frozen_protocol": true,
+          "archive_hashes_match": true,
+          "native_completed": true,
+          "unchanged_sources": true,
+          "native_sdf_authoring_readback": true,
+          "native_contact_offsets": true,
+          "native_mass_matches": true
+        },
+        "metrics": {
+          "fixed_ring_error_m": 7.450580569168253e-10,
+          "minimum_analytic_torus_clearance_m": 0.017378682300303414,
+          "final_ball_position_m": [
+            -0.000614272546954453,
+            -2.594069519545883e-05,
+            0.06583185493946075
+          ],
+          "late_height_error_m": 0.00016814470291137695,
+          "late_maximum_speed_m_s": 0.010782741941511631,
+          "late_mean_support_n": 0.19608978927135468
+        },
+        "verifier_sha256": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea"
+      }
+    }
+  },
+  "final_cases": [
+    "sdf-qualification-v3/sdf-hole",
+    "sdf-qualification-v3/sdf-surface",
+    "sdf-qualification-v3/convex-hole"
+  ]
+}
