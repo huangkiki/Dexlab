@@ -1,0 +1,47 @@
+{
+  "case": {
+    "name": "rest",
+    "friction": 0.5,
+    "initial_speed": 0.0,
+    "mass": 0.2,
+    "half_size": 0.02,
+    "timestep": 0.001,
+    "duration": 2.0,
+    "settle": 0.5,
+    "gravity": 9.81
+  },
+  "limits": {
+    "penetration_m": 0.001,
+    "support_relative_error": 0.05,
+    "rest_drift_m": 0.001,
+    "rest_speed_m_s": 0.005,
+    "slide_distance_relative_error": 0.1,
+    "slide_distance_absolute_error_m": 0.002,
+    "slide_final_speed_m_s": 0.005,
+    "frictionless_velocity_error_m_s": 0.01
+  },
+  "source_sha256": "fd1ed6c217f51c8b5b829b3a32adf77e22b89a050de79826e495e36f55d85f04",
+  "unisim_version": "1.7.10",
+  "host": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "geometry": "analytic box primitives; no SDF qualification",
+  "contact_measurement": "box body-net force; table is the only other collision body",
+  "status": "error",
+  "worker": {
+    "python": "3.11.14 (main, Jan 13 2026, 17:35:07) [Clang 21.1.4 ]",
+    "packages": {
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "isaaclab": "0.47.2",
+      "torch": "2.7.0+cu128"
+    }
+  },
+  "assets": {
+    "table.xml": "388f9d196050f8665a3bdf3f648aeff940bd6de01d27d384088db24631ffa049",
+    "box.xml": "adc722e9e18d264d125793ad49b8b3264c262a9807b25a889b5794db49384251",
+    "sensors.xml": "53b23f623b7d8100de4d7b138de0a9b13cb18717be467529bc89b6000bf9dc68"
+  },
+  "error": "Traceback (most recent call last):\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/src/dexlab/physx_baseline.py\", line 224, in run\n    backend.step(controls)\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/backend.py\", line 796, in step\n    return super().step(ctrl, nsteps)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/subprocess_ipc/backend.py\", line 2264, in step\n    payload = self._request(protocol.CMD_STEP, step_payload, expect=protocol.CMD_READY)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/subprocess_ipc/backend.py\", line 1829, in _request\n    raise error\nunisim.backend.isaacsim.backend.IsaacSimWorkerError: isaacsim worker raised AttributeError: 'NoneType' object has no attribute 'sensor_count'\nworker traceback:\nTraceback (most recent call last):\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/worker.py\", line 828, in main\n    reply_cmd, reply_payload = _dispatch(ctx, protocol, cmd, message.get(\"payload\"))\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/worker.py\", line 775, in _dispatch\n    return protocol.CMD_READY, ctx.step(payload)\n                               ^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/scene_worker.py\", line 2496, in step\n    self._poll_body_net_contact_forces()\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/scene_worker.py\", line 2433, in _poll_body_net_contact_forces\n    view.get_net_contact_forces(dt=self.sim_dt)\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/isaacsim-5.1/venv/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py\", line 5834, in get_net_contact_forces\n    (self.sensor_count, 3), float32\n     ^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/isaacsim-5.1/venv/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py\", line 5762, in sensor_count\n    return self._backend.sensor_count\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'sensor_count'\n\n",
+  "source_unchanged": true,
+  "assets_unchanged": true,
+  "archive_sha256": "26b166cd9c4252c87693a35b2bcec8c959a2461fcfeeb94463a10e37d05b67c2"
+}

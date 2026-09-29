@@ -9,7 +9,9 @@ from unittest.mock import patch
 
 import numpy as np
 
-from dexlab.physx_baseline import CASES, box_plane_clearance, create_scene, run, score, verify
+from dexlab.physx_baseline import (
+    CASES, box_plane_clearance, create_scene, native_parameter_checks, run, score, verify,
+)
 
 
 def analytical_archive(case):
@@ -39,6 +41,22 @@ class ContactScoringTests(unittest.TestCase):
         self.assertTrue(score(case, archive)["passed"])
         archive["force"] *= 0.5
         self.assertFalse(score(case, archive)["checks"]["support_matches_weight"])
+
+    def test_native_parameters_reject_wrong_mass_friction_and_fixed_object(self):
+        case = CASES["slide"]
+        receipt = {"body_mass_readback": [[0.0, 0.2, 10.0]],
+                   "geom_friction_readback": [[[0.3, 0.3, 0.0]] * 2]}
+        layout = {"nu": 0, "nbody": 3, "ngeom": 2, "entities": [
+            {"name": "box", "root_mode": "floating", "body_ids": [1]},
+            {"name": "table", "root_mode": "fixed", "body_ids": [2]},
+        ]}
+        self.assertTrue(all(native_parameter_checks(case, receipt, layout).values()))
+        receipt["body_mass_readback"][0][1] = 0.4
+        self.assertFalse(native_parameter_checks(case, receipt, layout)["native_mass_matches"])
+        receipt["geom_friction_readback"][0][1][1] = 0.8
+        self.assertFalse(native_parameter_checks(case, receipt, layout)["native_friction_matches"])
+        layout["entities"][0]["root_mode"] = "fixed"
+        self.assertFalse(native_parameter_checks(case, receipt, layout)["declared_two_body_scene"])
 
     def test_missing_repeated_and_nonfinite_samples_fail(self):
         case = CASES["rest"]

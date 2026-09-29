@@ -1,0 +1,46 @@
+{
+  "case": {
+    "name": "rest",
+    "friction": 0.5,
+    "initial_speed": 0.0,
+    "mass": 0.2,
+    "half_size": 0.02,
+    "timestep": 0.001,
+    "duration": 2.0,
+    "settle": 0.5,
+    "gravity": 9.81
+  },
+  "limits": {
+    "penetration_m": 0.001,
+    "support_relative_error": 0.05,
+    "rest_drift_m": 0.001,
+    "rest_speed_m_s": 0.005,
+    "slide_distance_relative_error": 0.1,
+    "slide_distance_absolute_error_m": 0.002,
+    "slide_final_speed_m_s": 0.005,
+    "frictionless_velocity_error_m_s": 0.01
+  },
+  "source_sha256": "a85b749034be495b312f6a8036a3dc11d7b6dc63f5e8b3263f08f4fe8fbf1ae0",
+  "unisim_version": "1.7.10",
+  "host": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "geometry": "analytic box primitives; no SDF qualification",
+  "status": "error",
+  "worker": {
+    "python": "3.11.14 (main, Jan 13 2026, 17:35:07) [Clang 21.1.4 ]",
+    "packages": {
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "isaaclab": "0.47.2",
+      "torch": "2.7.0+cu128"
+    }
+  },
+  "assets": {
+    "table.xml": "388f9d196050f8665a3bdf3f648aeff940bd6de01d27d384088db24631ffa049",
+    "box.xml": "adc722e9e18d264d125793ad49b8b3264c262a9807b25a889b5794db49384251",
+    "sensors.xml": "a449103003a63a67092485c419e21f8f3e100e004ddec8a47059622be93f43ff"
+  },
+  "error": "Traceback (most recent call last):\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/src/dexlab/physx_baseline.py\", line 217, in run\n    backend.materialize()\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/subprocess_ipc/backend.py\", line 1074, in materialize\n    meta = self._request(\n           ^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/subprocess_ipc/backend.py\", line 1829, in _request\n    raise error\nunisim.backend.isaacsim.backend.IsaacSimWorkerError: isaacsim worker raised RuntimeError: Sensor at path '/World/envs/env_.*/entity_626f78/body/body' could not find any bodies with contact reporter API.\nHINT: Make sure to enable 'activate_contact_sensors' in the corresponding asset spawn configuration.\nworker traceback:\nTraceback (most recent call last):\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/worker.py\", line 828, in main\n    reply_cmd, reply_payload = _dispatch(ctx, protocol, cmd, message.get(\"payload\"))\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/worker.py\", line 770, in _dispatch\n    return protocol.CMD_META, ctx.init_sim(payload)\n                              ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.venv/lib/python3.12/site-packages/unisim/backend/isaacsim/scene_worker.py\", line 1928, in init_sim\n    self.sim.reset()\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/isaacsim-5.1/IsaacLab/source/isaaclab/isaaclab/sim/simulation_context.py\", line 504, in reset\n    self.render()\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/isaacsim-5.1/IsaacLab/source/isaaclab/isaaclab/sim/simulation_context.py\", line 567, in render\n    raise exception_to_raise\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/isaacsim-5.1/IsaacLab/source/isaaclab/isaaclab/sensors/sensor_base.py\", line 302, in _initialize_callback\n    self._initialize_impl()\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/isaacsim-5.1/IsaacLab/source/isaaclab/isaaclab/sensors/contact_sensor/contact_sensor.py\", line 270, in _initialize_impl\n    raise RuntimeError(\nRuntimeError: Sensor at path '/World/envs/env_.*/entity_626f78/body/body' could not find any bodies with contact reporter API.\nHINT: Make sure to enable 'activate_contact_sensors' in the corresponding asset spawn configuration.\n\n",
+  "source_unchanged": true,
+  "assets_unchanged": true,
+  "archive_sha256": "26b166cd9c4252c87693a35b2bcec8c959a2461fcfeeb94463a10e37d05b67c2"
+}

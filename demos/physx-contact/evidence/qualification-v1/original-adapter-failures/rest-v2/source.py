@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import asdict, dataclass
 import hashlib
-from importlib.metadata import distribution, version
+from importlib.metadata import version
 import json
 from pathlib import Path
 import platform
@@ -62,7 +62,6 @@ LIMITS = {
     "slide_final_speed_m_s": 0.005,
     "frictionless_velocity_error_m_s": 0.01,
 }
-REPORT_FILES = ("import-report.json", "capabilities.json", "layout.json")
 
 
 def write_json(path: Path, value: object) -> None:
@@ -74,7 +73,7 @@ def digest(path: Path) -> str:
 
 
 def create_scene(case: ContactCase, directory: Path):
-    """Write explicit-mass primitives and their cross-entity force sensor."""
+    """Write two explicit-mass primitives and a body-net contact force sensor."""
     from unisim.dr.types import ModelSourceDescriptor
     from unisim.entities import EntityInitialState, SceneEntitySpec
     from unisim.scene import SceneCfg
@@ -101,7 +100,7 @@ def create_scene(case: ContactCase, directory: Path):
     sensors = directory / "sensors.xml"
     sensors.write_text(
         '<mujoco><sensor><contact name="box_force" geom1="box/surface" '
-        'geom2="table/surface" data="force" reduce="netforce"/></sensor></mujoco>\n'
+        'data="force" reduce="netforce"/></sensor></mujoco>\n'
     )
     return SceneCfg(
         entity_assets=(
@@ -179,28 +178,7 @@ def score(case: ContactCase, archive: dict[str, np.ndarray]) -> dict:
     return {"passed": all(checks.values()), "checks": checks, "metrics": metrics}
 
 
-def native_parameter_checks(case: ContactCase, receipt: dict, layout: dict) -> dict[str, bool]:
-    """Check the measured mass/material against this explicit two-body scene."""
-    mass = np.asarray(receipt.get("body_mass_readback", []))
-    friction = np.asarray(receipt.get("geom_friction_readback", []))
-    expected_friction = np.array([[[case.friction, case.friction, 0.0]] * 2])
-    entities = layout.get("entities", [])
-    topology = (
-        layout.get("nu") == 0 and layout.get("nbody") == 3 and layout.get("ngeom") == 2
-        and [(entity.get("name"), entity.get("root_mode"), entity.get("body_ids"))
-             for entity in entities] == [("box", "floating", [1]), ("table", "fixed", [2])]
-    )
-    return {
-        "declared_two_body_scene": topology,
-        "native_mass_matches": bool(topology and mass.shape == (1, 3)
-                                    and np.allclose(mass, [[0.0, case.mass, 10.0]], atol=1e-7, rtol=1e-6)),
-        "native_friction_matches": bool(topology and friction.shape == expected_friction.shape
-                                        and np.allclose(friction, expected_friction, atol=1e-7, rtol=1e-6)),
-    }
-
-
 def run(case: ContactCase, output: Path, worker_timeout: float) -> dict:
-    from unisim.backend.isaacsim import scene_worker
     from unisim.backend.isaacsim.dependencies import resolve_isaacsim_runtime
     from unisim.entities import EntityStatePatch, SceneResetRequest
     from unisim.factory import create_backend
@@ -208,14 +186,10 @@ def run(case: ContactCase, output: Path, worker_timeout: float) -> dict:
     output.mkdir(parents=True, exist_ok=False)
     source = Path(__file__).resolve()
     (output / "source.py").write_bytes(source.read_bytes())
-    adapter = Path(scene_worker.__file__).resolve()
-    (output / "unisim-scene-worker.py").write_bytes(adapter.read_bytes())
     receipt = {"case": asdict(case), "limits": LIMITS, "source_sha256": digest(source),
                "unisim_version": version("unisim-core"), "host": platform.platform(),
-               "adapter_source_sha256": digest(adapter),
-               "unisim_install_origin": distribution("unisim-core").read_text("direct_url.json"),
                "geometry": "analytic box primitives; no SDF qualification",
-               "contact_measurement": "PhysX pair normal contact force in world frame; not friction force",
+               "contact_measurement": "box body-net force; table is the only other collision body",
                "status": "preparing"}
     write_json(output / "run.json", receipt)
     backend = None
@@ -288,15 +262,11 @@ def run(case: ContactCase, output: Path, worker_timeout: float) -> dict:
                    "initial_pose": initial_pose}
         np.savez_compressed(output / "states.npz", **archive)
         receipt["source_unchanged"] = digest(source) == receipt["source_sha256"]
-        receipt["adapter_unchanged"] = digest(adapter) == receipt["adapter_source_sha256"]
         receipt["assets_unchanged"] = all(
             digest(output / "scene" / name) == expected
             for name, expected in receipt.get("assets", {}).items()
         )
         receipt["archive_sha256"] = digest(output / "states.npz")
-        receipt["report_sha256"] = {
-            name: digest(output / name) for name in REPORT_FILES if (output / name).is_file()
-        }
         write_json(output / "run.json", receipt)
         result = verify(output)
     return result
@@ -308,21 +278,11 @@ def verify(output: Path) -> dict:
     case = ContactCase(**receipt["case"])
     with np.load(output / "states.npz", allow_pickle=False) as saved:
         result = score(case, dict(saved))
-    reports = receipt.get("report_sha256", {})
-    reports_match = set(reports) == set(REPORT_FILES) and all(
-        (output / name).is_file() and digest(output / name) == reports[name]
-        for name in REPORT_FILES
-    )
-    layout = json.loads((output / "layout.json").read_text()) if reports_match else {}
-    result["checks"].update(native_parameter_checks(case, receipt, layout))
     result["checks"].update(
-        native_reports_match=reports_match,
         native_run_completed=receipt["status"] == "completed",
         clean_shutdown="cleanup_error" not in receipt,
         source_unchanged=receipt.get("source_unchanged") is True,
         source_snapshot_matches=digest(output / "source.py") == receipt["source_sha256"],
-        adapter_snapshot_matches=receipt.get("adapter_unchanged") is True
-        and digest(output / "unisim-scene-worker.py") == receipt.get("adapter_source_sha256"),
         recorded_assets_unchanged=receipt.get("assets_unchanged") is True,
         asset_files_match=bool(receipt.get("assets")) and all(
             digest(output / "scene" / name) == expected for name, expected in receipt.get("assets", {}).items()
