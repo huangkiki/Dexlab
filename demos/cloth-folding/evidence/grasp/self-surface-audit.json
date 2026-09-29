@@ -1,0 +1,17 @@
+{
+  "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+  "epsilon_m": 1e-09,
+  "requested_sample_interval_s": 0.01,
+  "maximum_observed_interval_s": 0.040000000000000924,
+  "audited_frame_count": 225,
+  "candidate_topology_pairs": 39787,
+  "maximum_crossing_pairs": 0,
+  "frames_with_crossings": 0,
+  "first_crossing_time_s": null,
+  "maximum_degenerate_triangles": 0,
+  "recorded_state_rate_hz": 25,
+  "model_sha256": "09115e90500c9add7952a9cb3ef5ab15ec9069ba90fae0e4e9871ecae739c4ab",
+  "states_sha256": "ffd7e5362c514e8416d1822c632e0b9f50821b32143fbeb34ba27cb4cc466dcf",
+  "analyzer_sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+  "analysis_seconds": 0.6654806580627337
+}

@@ -18,6 +18,12 @@ DexLab 用小而可复现的机器人任务研究仿真中的穿透、抖动、�
 
 动图连续展示完整 14 秒过程：接近 → 两指闭合 → 抬升 → 保持。仅显示抓取近景；展示相机跟随记录中的苹果，不参与控制。两个后端均由 MuJoCo 渲染器回放实际物理轨迹。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4)
 
+## 机器人夹布
+
+![Wuji 夹布、抬升与释放近景](demos/cloth-folding/media/grasp.gif)
+
+MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放；连续 9 秒记录，独立验收通过。此任务使用已知状态与脚本控制，机器人碰撞体采用凸网格近似；未使用布料附着约束。双臂折叠仍未通过。[视频与物理指标](demos/cloth-folding/README.zh-CN.md)
+
 ## 当前能做什么
 
 | 能力 | 实际交付 |
@@ -26,6 +32,7 @@ DexLab 用小而可复现的机器人任务研究仿真中的穿透、抖动、�
 | 模型审查 | 导出源资产与运行时质量、质心、惯量、关节、驱动和碰撞过滤，报告初始重叠 |
 | 稳定性诊断 | 位置、速度、力的 RMS/峰值与逐指接触间断；缺失数据保持未知 |
 | 独立验收 | 检查完整保持过程，保留原始力与位姿记录，不靠视频判断成功 |
+| 布料实验 | MuJoCo flex、SuperDex shell 与五种 Newton 求解器；拉伸、下垂、覆盖和自碰撞检查；[结果与限制](demos/cloth-benchmark/README.zh-CN.md) |
 | Issue 驱动开发 | 自动实现、验证和审查，符合条件后合并并发布；结果可追溯至提交和日志 |
 
 当前接入 **UniLab 任务层**。场景由 DexLab 管理，尚未采用 UniSim 内置后端；PhysX、多场景回归和真机校准的进度维护在 [Issues](https://github.com/huangkiki/Dexlab/issues)。

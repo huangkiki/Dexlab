@@ -18,6 +18,12 @@ DexLab uses small, repeatable robot tasks to investigate penetration, jitter, sl
 
 Each GIF shows the continuous 14-second approach, pinch, lift, and hold. Only the grasp close-up is shown. The presentation camera follows the recorded apple and is not a control input. Both recordings replay actual physics poses using MuJoCo's renderer. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4)
 
+## Robot cloth grasp
+
+![Wuji cloth pinch, lift and release close-up](demos/cloth-folding/media/grasp.gif)
+
+A Wuji hand pinches, lifts and releases MuJoCo flex cloth through frictional contact. The continuous 9-second recording passes independent checks. Control uses known state and a scripted sequence; robot collisions use convex mesh approximations, without cloth attachment constraints. Bimanual folding has not passed. [Video and physics measurements](demos/cloth-folding/README.md)
+
 ## What is available
 
 | Capability | Delivered behavior |
@@ -26,6 +32,7 @@ Each GIF shows the continuous 14-second approach, pinch, lift, and hold. Only th
 | Model audit | Source/runtime mass, COM, inertia, joints, drives, collision filters and initial overlap reports |
 | Stability diagnostics | Position, velocity and force RMS/peaks, plus per-pad contact interruptions; missing data stays unknown |
 | Independent acceptance | Checks the entire hold using recorded forces and poses rather than judging success from a video |
+| Cloth experiments | MuJoCo flex, SuperDex shells and five Newton solvers; extension, sag, drape and self-collision checks; [results and limits](demos/cloth-benchmark/README.md) |
 | Issue-driven development | Automated implementation, validation and review, followed by eligible merges and releases tied to commits and logs |
 
 Integration currently uses the **UniLab task layer**. DexLab owns the scenes; UniSim's built-in adapters are not yet used. PhysX, multi-scene regression and hardware calibration are tracked in [Issues](https://github.com/huangkiki/Dexlab/issues).

@@ -1,0 +1,16 @@
+{
+  "upstream": "DexLab local unpublished frictional cloth experiment",
+  "source_base_commit": "618ae9c245e2837875d0493c4f908e0fc8979a9e",
+  "source_sha256": {
+    "README.md": "38f551669cb98c583429670d428f5e5791a35cd557cf8a7685165e4586a5eae6",
+    "run.sh": "73c73a0b64beb0fc2420e97625e5717d5a35d68929d66c9d2954872503aa647b",
+    "requirements.txt": "6b141150110b0296b35c69c56c79d04d4f0df68902ffee0cecd8f81171e07a0d",
+    "src/cloth_control.py": "8f4719c43d7beaeaa49eae4ae144e08def280e9934af2486bbc80e93b4223941",
+    "src/cloth_model.py": "7bee23cc02d241c833f2348c5300cb9e17665b9a4c4a5699f6f990eb09962880",
+    "src/render_cloth.py": "64dba99d3b2322a1262e467ee9c5aa8b1ff4381edd3b467b23e60c872d91c50f",
+    "src/run_cloth.py": "1ff816a1afee84ca4cff7b35c1936c1e894902b2319f5eff01673634361591a1",
+    "src/verify_cloth.py": "985728941426bb80af0f6cebda08ce4c4382d05f101850a123941dea4c33f295"
+  },
+  "license": "DexLab Apache-2.0; procedural cloth mesh, existing robot assets retain original terms",
+  "limits": "Historical one-hand grasp passed; two-hand fold failed. Current integration requires fresh verification."
+}

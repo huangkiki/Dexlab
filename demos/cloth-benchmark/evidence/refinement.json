@@ -1,0 +1,3746 @@
+{
+  "scope": "Nominal profiles; no cross-solver material calibration or hardware accuracy claim",
+  "raw_records": "Raw trajectories remain in run directories; commands reproduce them. These packaged reports alone do not replay physics.",
+  "records": [
+    {
+      "run": "runs/refinement-v1/mujoco-drape-125us-mesh1",
+      "run_sha256": "c041258680805b6b9c1c4dd4d255c51c2632dc47ab50cc609dc79aa21b322220",
+      "summary_sha256": "981e2e514ecc7dbc67e3a344e15f20aa88594dfb7365c265e62551d6abc89e03",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.000125,
+        "solver": "mujoco",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "mujoco",
+          "--dt",
+          "0.000125",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/mujoco-drape-125us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 0.1216570979449898,
+        "engine": {
+          "engine": "mujoco",
+          "version": "3.11.0",
+          "solver": "Newton",
+          "integrator": "implicitfast",
+          "device": "cpu",
+          "precision": "float64",
+          "iterations": 10,
+          "tolerance": 1e-10,
+          "material": {
+            "young_Pa": 20000,
+            "poisson": 0,
+            "thickness_m": 0.0005,
+            "elastic2d": "both",
+            "damping": 0.001
+          },
+          "contact": {
+            "radius_m": 0.001,
+            "friction": [
+              0.5,
+              0.005,
+              0.0001
+            ],
+            "solref": [
+              0.005,
+              1
+            ],
+            "solimp": [
+              0.9,
+              0.95,
+              0.001
+            ],
+            "selfcollide": "auto"
+          },
+          "mass_distribution": "triangle-area lumped; pinned vertices fixed to world",
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.008000000000000002,
+          "package_identity": {
+            "version": "3.11.0",
+            "record_verified": true,
+            "code_sha256": "f18d6be058574753f90af7d489b54f2293301ed0238c8ea8ab792ea956457f11",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 3.4550805499311537,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 3.303507333388552,
+        "first_step_seconds": 0.00017445406410843134,
+        "step_time_p95_seconds": 0.00024181721964851015,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "5fafc883681b4652954ac6f92a3dd287aa0d6b968d18a7e04b2cf45636a4de9f"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.34487739723751143,
+            "tip_extension_m": 2.4220914648653834e-07,
+            "tip_sag_m": 0.14225715283029183,
+            "center_sag_m": 0.05050033660880124,
+            "speed_rms_m_s": 1.1639192682517858,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.002615970227318125
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.10108445811176492,
+            "tip_extension_m": -0.0425037730843994,
+            "tip_sag_m": 0.13127916200520834,
+            "center_sag_m": 0.045327364944555,
+            "speed_rms_m_s": 0.02865080783329298,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 1.6604217657742448e-05
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/mujoco-drape-250us-mesh1",
+      "run_sha256": "c274f920299c36a0c7d3f7f111b54b85e92bdf6102dc29742aafdeb32d1a77a3",
+      "summary_sha256": "a23087ed0ee72693a12cdc04ca6982506ba60e11497301b3b23e21126d71f2ea",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.00025,
+        "solver": "mujoco",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "mujoco",
+          "--dt",
+          "0.00025",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/mujoco-drape-250us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 0.09971159207634628,
+        "engine": {
+          "engine": "mujoco",
+          "version": "3.11.0",
+          "solver": "Newton",
+          "integrator": "implicitfast",
+          "device": "cpu",
+          "precision": "float64",
+          "iterations": 10,
+          "tolerance": 1e-10,
+          "material": {
+            "young_Pa": 20000,
+            "poisson": 0,
+            "thickness_m": 0.0005,
+            "elastic2d": "both",
+            "damping": 0.001
+          },
+          "contact": {
+            "radius_m": 0.001,
+            "friction": [
+              0.5,
+              0.005,
+              0.0001
+            ],
+            "solref": [
+              0.005,
+              1
+            ],
+            "solimp": [
+              0.9,
+              0.95,
+              0.001
+            ],
+            "selfcollide": "auto"
+          },
+          "mass_distribution": "triangle-area lumped; pinned vertices fixed to world",
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.008000000000000002,
+          "package_identity": {
+            "version": "3.11.0",
+            "record_verified": true,
+            "code_sha256": "f18d6be058574753f90af7d489b54f2293301ed0238c8ea8ab792ea956457f11",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 1.9648115260060877,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 1.8481278258841485,
+        "first_step_seconds": 0.00016987998969852924,
+        "step_time_p95_seconds": 0.00019387087086215616,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "d25902ed8d1ab52d1ced492513518e1e14103276dd8d44365e038642e4a362df"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.3448914692570815,
+            "tip_extension_m": 2.412784146726965e-07,
+            "tip_sag_m": 0.14224051946222116,
+            "center_sag_m": 0.050468881999384485,
+            "speed_rms_m_s": 1.1610288661818071,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.002650375630049627
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.1011244794465267,
+            "tip_extension_m": -0.0432064000271981,
+            "tip_sag_m": 0.13138887608023783,
+            "center_sag_m": 0.04525786897217038,
+            "speed_rms_m_s": 0.029128771057818494,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 1.5354186323236763e-05
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/mujoco-drape-500us-mesh1",
+      "run_sha256": "79740094e320b97eaac5899048b2bef4153a06f2557d104505b534c5edfaaf37",
+      "summary_sha256": "18a1e72c9bf97b3709b948f6b84a45840594fd858717a82679201a2a949bf713",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "mujoco",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "mujoco",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/mujoco-drape-500us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 0.1315262799616903,
+        "engine": {
+          "engine": "mujoco",
+          "version": "3.11.0",
+          "solver": "Newton",
+          "integrator": "implicitfast",
+          "device": "cpu",
+          "precision": "float64",
+          "iterations": 10,
+          "tolerance": 1e-10,
+          "material": {
+            "young_Pa": 20000,
+            "poisson": 0,
+            "thickness_m": 0.0005,
+            "elastic2d": "both",
+            "damping": 0.001
+          },
+          "contact": {
+            "radius_m": 0.001,
+            "friction": [
+              0.5,
+              0.005,
+              0.0001
+            ],
+            "solref": [
+              0.005,
+              1
+            ],
+            "solimp": [
+              0.9,
+              0.95,
+              0.001
+            ],
+            "selfcollide": "auto"
+          },
+          "mass_distribution": "triangle-area lumped; pinned vertices fixed to world",
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.008000000000000002,
+          "package_identity": {
+            "version": "3.11.0",
+            "record_verified": true,
+            "code_sha256": "f18d6be058574753f90af7d489b54f2293301ed0238c8ea8ab792ea956457f11",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 1.2378094759769738,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 1.095684951171279,
+        "first_step_seconds": 0.00027359300293028355,
+        "step_time_p95_seconds": 0.0003083749092184007,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "6cfb78a8fae1df56f7595719c07ce49086abb45b6dcd23f37fcfb47fca157f19"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.33357202401098585,
+            "tip_extension_m": 2.89926588184497e-07,
+            "tip_sag_m": 0.14191042546241842,
+            "center_sag_m": 0.05041145943194503,
+            "speed_rms_m_s": 1.1612898500762567,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.002427786152484082
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.10146256591684666,
+            "tip_extension_m": -0.0433747801110604,
+            "tip_sag_m": 0.1314567933647654,
+            "center_sag_m": 0.04552051171736943,
+            "speed_rms_m_s": 0.025725862477262797,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 1.8617513047651524e-05
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/mujoco-drape-500us-mesh2",
+      "run_sha256": "5368b4041fbeaafd24d6c412a9670dc67825bcca8705de3f3e99a6a545ba5a0f",
+      "summary_sha256": "e39d97a06eb332bf6710bdd1da92b6a9f1e6f10bdc6efa20f952481a99d90590",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 17,
+          "ny": 9,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "mujoco",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "mujoco",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "2",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/mujoco-drape-500us-mesh2",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 0.14826155500486493,
+        "engine": {
+          "engine": "mujoco",
+          "version": "3.11.0",
+          "solver": "Newton",
+          "integrator": "implicitfast",
+          "device": "cpu",
+          "precision": "float64",
+          "iterations": 10,
+          "tolerance": 1e-10,
+          "material": {
+            "young_Pa": 20000,
+            "poisson": 0,
+            "thickness_m": 0.0005,
+            "elastic2d": "both",
+            "damping": 0.001
+          },
+          "contact": {
+            "radius_m": 0.001,
+            "friction": [
+              0.5,
+              0.005,
+              0.0001
+            ],
+            "solref": [
+              0.005,
+              1
+            ],
+            "solimp": [
+              0.9,
+              0.95,
+              0.001
+            ],
+            "selfcollide": "auto"
+          },
+          "mass_distribution": "triangle-area lumped; pinned vertices fixed to world",
+          "nominal_mass_kg": 0.008,
+          "dynamic_mass_kg": 0.008,
+          "package_identity": {
+            "version": "3.11.0",
+            "record_verified": true,
+            "code_sha256": "f18d6be058574753f90af7d489b54f2293301ed0238c8ea8ab792ea956457f11",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 3.7065986120142043,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 3.5464859794592485,
+        "first_step_seconds": 0.00033565296325832605,
+        "step_time_p95_seconds": 0.0006973817013204097,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "df61fde3270dc7127cfa10a39b0ac50b62964023dade3abf1b1cd2629e578604"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": false,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.615186620772175,
+            "tip_extension_m": 2.8566331399125667e-12,
+            "tip_sag_m": 0.14621361129773175,
+            "center_sag_m": 0.050381995949805,
+            "speed_rms_m_s": 1.165188343939625,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.0035615053629795695
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.14613796298978343,
+            "tip_extension_m": -0.0375873742503035,
+            "tip_sag_m": 0.13454499573647455,
+            "center_sag_m": 0.047009387987837936,
+            "speed_rms_m_s": 0.026118923224684978,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.00012035033355131675
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 31291,
+          "maximum_crossing_pairs": 1,
+          "frames_with_crossings": 1,
+          "first_crossing_time_s": 0.21,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-semi_implicit-drape-125us-mesh1",
+      "run_sha256": "4b817bda6d57245dd1ae77f94f1f5b9293fbf5060fc6089ab057ab3a96ebc14e",
+      "summary_sha256": "e0277880a701b93059a186087e533f4444b0f0e431859202b1efd3b12db189c4",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.000125,
+        "solver": "newton-semi_implicit",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-semi_implicit",
+          "--dt",
+          "0.000125",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-semi_implicit-drape-125us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.1802366130286828,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "semi_implicit",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": null,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 19.665474897017702,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 18.436911427299492,
+        "first_step_seconds": 0.021333744982257485,
+        "step_time_p95_seconds": 0.0007871109526604414,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "1d3207650e1db1097cb15d51bcef8ef2c87dd0a7cd73a634375372c6ad1dc9b3"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": false,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.15386367787712274,
+            "tip_extension_m": 6.671249866480045e-06,
+            "tip_sag_m": 0.13878540761768815,
+            "center_sag_m": 0.049863986968994134,
+            "speed_rms_m_s": 1.1287573775322683,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.009366839696674296
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.04852783312629416,
+            "tip_extension_m": -0.04297897666692734,
+            "tip_sag_m": 0.133980815410614,
+            "center_sag_m": 0.04936902999877929,
+            "speed_rms_m_s": 0.0008281918197442596,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.007316380737452326
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 6,
+          "frames_with_crossings": 277,
+          "first_crossing_time_s": 0.19,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-semi_implicit-drape-250us-mesh1",
+      "run_sha256": "e12a8d5d9ba0c6194381e99bafe015e166d13ba8beb7aa5a62d369b5078bc60f",
+      "summary_sha256": "4edfc4e7a46c5fd95683313de10e2ff4e0001276f76d27984d807150ad0bec36",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.00025,
+        "solver": "newton-semi_implicit",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-semi_implicit",
+          "--dt",
+          "0.00025",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-semi_implicit-drape-250us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.17389082594309,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "semi_implicit",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": null,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 10.327713242033496,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 9.128843433689326,
+        "first_step_seconds": 0.021424229023978114,
+        "step_time_p95_seconds": 0.000778867641929537,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "180ab7edd237d307c8976ef667c4e44bfa0ed52169aa7bd6bf27ca219f4327fb"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": false,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.19748393866026737,
+            "tip_extension_m": 2.4807453155512028e-05,
+            "tip_sag_m": 0.13902606155723332,
+            "center_sag_m": 0.04986427009105682,
+            "speed_rms_m_s": 1.4466377645320696,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.009390862657159847
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.05351223324144705,
+            "tip_extension_m": -0.03833956420421601,
+            "tip_sag_m": 0.13241223126649854,
+            "center_sag_m": 0.04940778791904449,
+            "speed_rms_m_s": 0.0017866746914975097,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.007829606364925239
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 6,
+          "frames_with_crossings": 10,
+          "first_crossing_time_s": 0.19,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-semi_implicit-drape-500us-mesh1",
+      "run_sha256": "c37be6978afcdd8fe7da42130669693024d2d5c921fa560efb543760d142e406",
+      "summary_sha256": "133a971c75ee079e1f1dc89bfe9a51fb1abe14c7284a5e4f0659465170c55435",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-semi_implicit",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-semi_implicit",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-semi_implicit-drape-500us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.1875154649605975,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "semi_implicit",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": null,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 5.993147252011113,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 4.792359430808574,
+        "first_step_seconds": 0.021185213001444936,
+        "step_time_p95_seconds": 0.0008278013090603053,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "4418eb3ce1a23a4993123e4fa4b601d7ecf6d0b608e6a1c338c4bbb7b591490b"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": false,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": false
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 6344.392479948313,
+            "tip_extension_m": 128.67019653320312,
+            "tip_sag_m": 15.246263961791993,
+            "center_sag_m": 43.66064422607422,
+            "speed_rms_m_s": 100000.00241651552,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 65.14527947998047,
+            "sphere_penetration_m": 0.03180576219987778
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 3861.512326587481,
+            "tip_extension_m": 100.87977142333985,
+            "tip_sag_m": -96.50563842773437,
+            "center_sag_m": -106.71640045166015,
+            "speed_rms_m_s": 99999.99895301003,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 5.851753784179688,
+            "sphere_penetration_m": 0.0
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 826,
+          "frames_with_crossings": 281,
+          "first_crossing_time_s": 0.19,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-semi_implicit-drape-500us-mesh2",
+      "run_sha256": "8181c40b8d1908414ce8e36f424e4c542527583b8019f4cb97550e20d6c046c0",
+      "summary_sha256": "9681509fca1b1831b038a2abc98cf4a90328c4a7ee00159052ee9e098a3aaa57",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 17,
+          "ny": 9,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-semi_implicit",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-semi_implicit",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "2",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-semi_implicit-drape-500us-mesh2",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.211313068983145,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "semi_implicit",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": null,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008,
+          "dynamic_mass_kg": 0.008000001311302185,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 11.042677056975663,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 9.816863269894384,
+        "first_step_seconds": 0.023314981954172254,
+        "step_time_p95_seconds": 0.0016599129885435104,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "612c8d4a4f2775be48344db45e474e52596300a09d65349d8378dfb1675b8659"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": false,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": false
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 12365.338894718589,
+            "tip_extension_m": 138.0782455444336,
+            "tip_sag_m": 78.60224290635853,
+            "center_sag_m": 78.49468963623048,
+            "speed_rms_m_s": 100000.0012209423,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 129.175560546875,
+            "sphere_penetration_m": 0.06011916949720751
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 7503.538653822946,
+            "tip_extension_m": 83.41228374905057,
+            "tip_sag_m": 36.45958679199219,
+            "center_sag_m": -4.938175506591797,
+            "speed_rms_m_s": 100000.00070829029,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 79.95133264160157,
+            "sphere_penetration_m": 0.0
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 31291,
+          "maximum_crossing_pairs": 11036,
+          "frames_with_crossings": 285,
+          "first_crossing_time_s": 0.16,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-style3d-drape-125us-mesh1",
+      "run_sha256": "fd18b812a2fde017b01d88e7d688f700526802a5e32e32723bf54b77a92f8d87",
+      "summary_sha256": "b52e3e2bd546ff15303db63c6ef7e6ccd820d2a48b4f2470dfc33403f7295f73",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.000125,
+        "solver": "newton-style3d",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-style3d",
+          "--dt",
+          "0.000125",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-style3d-drape-125us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.8549331340473145,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "style3d",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_aniso_ke": [
+              10.0,
+              10.0,
+              5.0
+            ],
+            "edge_aniso_ke": [
+              2e-06,
+              1e-06,
+              5e-06
+            ],
+            "tri_ka": 10.0,
+            "tri_kd": 0.001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 200.01366024301387,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 198.10071987321135,
+        "first_step_seconds": 0.047612488036975265,
+        "step_time_p95_seconds": 0.011261765914969146,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "2d0ce72808f33fb7369e1c6c37bdbb2ecf4b42e8d2474ec55e6b7a14d058305a"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.1143961946410863,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.13240815766155717,
+            "center_sag_m": 0.04923080682754516,
+            "speed_rms_m_s": 0.5273313278253894,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.007964237452256814
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.048165464878209274,
+            "tip_extension_m": -0.02968198955059052,
+            "tip_sag_m": 0.13088851340115068,
+            "center_sag_m": 0.04923080682754516,
+            "speed_rms_m_s": 0.0003820346501619195,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.007614618836543512
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-style3d-drape-250us-mesh1",
+      "run_sha256": "1846a5c8582cd45076264674e3dffa185dad08b34c3cbcc4e8e101ac67fb76b0",
+      "summary_sha256": "5758522990e472719ce39c7103bb843db891bd8eefcb3cb5d6a8d11e27ba2c3f",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.00025,
+        "solver": "newton-style3d",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-style3d",
+          "--dt",
+          "0.00025",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-style3d-drape-250us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 2.2728681720327586,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "style3d",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_aniso_ke": [
+              10.0,
+              10.0,
+              5.0
+            ],
+            "edge_aniso_ke": [
+              2e-06,
+              1e-06,
+              5e-06
+            ],
+            "tri_ka": 10.0,
+            "tri_kd": 0.001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 108.58435240702238,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 106.27575680543669,
+        "first_step_seconds": 0.045103656011633575,
+        "step_time_p95_seconds": 0.011394519614987076,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "e2b44e4295229ee693573b842900d568010205e38503d26d768e4f1cb97b3c48"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.1485641828809594,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.13352669712156057,
+            "center_sag_m": 0.04930014193058013,
+            "speed_rms_m_s": 0.7928466220785337,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.008292556200835008
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.04862336915348253,
+            "tip_extension_m": -0.027882528305053715,
+            "tip_sag_m": 0.1303608226776123,
+            "center_sag_m": 0.04930014193058013,
+            "speed_rms_m_s": 0.00013632942423903637,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.007721190285004835
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-style3d-drape-500us-mesh1",
+      "run_sha256": "fe2e657b4472523fcc2368ba5fa39763d726941df304a592139ad866bd49d3b7",
+      "summary_sha256": "29047e6486f56bdd5213d45a9d316993af83257363d414ffd4dabc3f6c509ca8",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-style3d",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-style3d",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-style3d-drape-500us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.4016384819988161,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "style3d",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_aniso_ke": [
+              10.0,
+              10.0,
+              5.0
+            ],
+            "edge_aniso_ke": [
+              2e-06,
+              1e-06,
+              5e-06
+            ],
+            "tri_ka": 10.0,
+            "tri_kd": 0.001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 50.91166919202078,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 49.495780319091864,
+        "first_step_seconds": 0.025991937960498035,
+        "step_time_p95_seconds": 0.00949888863833621,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "b19fc9d10b19ec6ff1da542cb774a70b7ce39f7a1a8ade398cd43aed0e89e681"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.16537752367784697,
+            "tip_extension_m": 6.908178329462222e-06,
+            "tip_sag_m": 0.13537761710584162,
+            "center_sag_m": 0.04927546560764312,
+            "speed_rms_m_s": 1.000203807579098,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.008593521844765098
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.04765129949548541,
+            "tip_extension_m": -0.029754469543695455,
+            "tip_sag_m": 0.13088803954422473,
+            "center_sag_m": 0.04927546560764312,
+            "speed_rms_m_s": 0.00039637707824251544,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.007630489659518951
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-style3d-drape-500us-mesh2",
+      "run_sha256": "188c4e829cee7fee388160ccffcc1f06355a6a8068909582e64b6caf7540845a",
+      "summary_sha256": "032192049cff5590757ab97fc7532a8e4899b6c825b28d1ceb9e576e0c5ada74",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 17,
+          "ny": 9,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-style3d",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-style3d",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "2",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-style3d-drape-500us-mesh2",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.4709864050382748,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "style3d",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_aniso_ke": [
+              10.0,
+              10.0,
+              5.0
+            ],
+            "edge_aniso_ke": [
+              2e-06,
+              1e-06,
+              5e-06
+            ],
+            "tri_ka": 10.0,
+            "tri_kd": 0.001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008,
+          "dynamic_mass_kg": 0.008000001311302185,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 56.42955229303334,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 54.943543123896234,
+        "first_step_seconds": 0.02730750502087176,
+        "step_time_p95_seconds": 0.00926283827284351,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "c93c4840179a2a368f9f0270cafe144fbc620d849411c0a26deefd294ed7b639"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.15195974289507053,
+            "tip_extension_m": 3.3262703153267044e-07,
+            "tip_sag_m": 0.13040371020634967,
+            "center_sag_m": 0.049076669216156,
+            "speed_rms_m_s": 0.9699598427267943,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.002130755896749867
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.05585991448035732,
+            "tip_extension_m": -0.029304197016689515,
+            "tip_sag_m": 0.12734379380113547,
+            "center_sag_m": 0.04907507479190826,
+            "speed_rms_m_s": 0.00027413027371163206,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.0018618738873721133
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 31291,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-vbd-drape-125us-mesh1",
+      "run_sha256": "dcb2b6ab08aa4e424e465434b911556a7aec5b23a72a39a146c7ad502921026e",
+      "summary_sha256": "6eaea901da6b1b06e11e1353e9b49fc5d75f5dd047bfbe38c29e2b050befb16e",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.000125,
+        "solver": "newton-vbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-vbd",
+          "--dt",
+          "0.000125",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-vbd-drape-125us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.3582495900336653,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "vbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.01,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 112.66135242395103,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 111.2506441755686,
+        "first_step_seconds": 0.03554068598896265,
+        "step_time_p95_seconds": 0.004715486709028482,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "3684a39dd3d6711d0bf259085b7031a7484287d4f126a20f1159761461ef1c51"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.3418042915709263,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.1790109410486184,
+            "center_sag_m": 0.17902430333895608,
+            "speed_rms_m_s": 2.6367171175191375,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.00016130973724648359,
+            "sphere_penetration_m": 0.00832966752434635
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 3.0899784450921786e-05,
+            "tip_extension_m": -0.06343625262379646,
+            "tip_sag_m": 0.17900937213096765,
+            "center_sag_m": 0.17902430333895608,
+            "speed_rms_m_s": 2.597334408103178e-07,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 2.4516670033335707e-05,
+            "sphere_penetration_m": 0.0
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-vbd-drape-250us-mesh1",
+      "run_sha256": "61ce466ed104778b8dbb42bd72987f6a6fc766c61a7a975c35894a7ddf73789e",
+      "summary_sha256": "2b6b400291c7603c96c52a2ed8d4670255844eea8a99dcef3b5e0a0085b13801",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.00025,
+        "solver": "newton-vbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-vbd",
+          "--dt",
+          "0.00025",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-vbd-drape-250us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 2.1490708159981295,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "vbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.01,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 63.412223435007036,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 61.227378507261164,
+        "first_step_seconds": 0.06967007904313505,
+        "step_time_p95_seconds": 0.006002572807483375,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "e3f39f55bfb14ee9008e8a702707b3ffb3145a1ad41a4825374d19ed54af9398"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.7242636720571509,
+            "tip_extension_m": 0.43317258954048155,
+            "tip_sag_m": 0.17905036236159502,
+            "center_sag_m": 0.17951561508351005,
+            "speed_rms_m_s": 2.7658513889298284,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0014725594772025943,
+            "sphere_penetration_m": 0.008243048626110971
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.040763351933682634,
+            "tip_extension_m": 0.4238671660423279,
+            "tip_sag_m": 0.17900943145621567,
+            "center_sag_m": 0.17812606163322925,
+            "speed_rms_m_s": 0.37642692016013257,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0001263538831844926,
+            "sphere_penetration_m": 0.0
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-vbd-drape-500us-mesh1",
+      "run_sha256": "f8ff32f662308573f4a6d45bcc6b2047cc3fca9cbc02597d5a43cba02c5b3954",
+      "summary_sha256": "1f4a56a1ba9e876d827547eba867b2ac34d29466c1da702bb8a1a413e3d5a15d",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-vbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-vbd",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-vbd-drape-500us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.8250293480232358,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "vbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.01,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 33.026892251102254,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 31.18525714916177,
+        "first_step_seconds": 0.057420558063313365,
+        "step_time_p95_seconds": 0.006109765917062759,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "78ea01234d00404d90a3b2f323c03daf02584b9e3394dc01bc036d07c5ee10a7"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.16231574568302387,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.13699465870857236,
+            "center_sag_m": 0.049770303368568414,
+            "speed_rms_m_s": 1.3380312869180004,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.008533761532859056
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.03973152142956904,
+            "tip_extension_m": -0.03867982551455498,
+            "tip_sag_m": 0.132092651091516,
+            "center_sag_m": 0.049770303368568414,
+            "speed_rms_m_s": 0.0176996040947321,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.00761587171934873
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-vbd-drape-500us-mesh2",
+      "run_sha256": "d0f470411d09ec59d594eacf70f3c78917ad39421036f2eb05847018e1c204ce",
+      "summary_sha256": "2c516707757bb0485a62cf0994fe409898be962fd5be7a729a8daec2594e98a3",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 17,
+          "ny": 9,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-vbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-vbd",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "2",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-vbd-drape-500us-mesh2",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.375382159021683,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "vbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.01,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 100.0,
+            "mu": 0.5,
+            "self_contact": true
+          },
+          "nominal_mass_kg": 0.008,
+          "dynamic_mass_kg": 0.008000001311302185,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 47.73709876509383,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 46.34619399474468,
+        "first_step_seconds": 0.03822389803826809,
+        "step_time_p95_seconds": 0.008194741362240165,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "08ab9a3205aaf363fb860b7e609dd85b0005143d4829f3407a35911743d99486"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.6739143436251984,
+            "tip_extension_m": 6.712145275484311e-07,
+            "tip_sag_m": 0.17901411019446742,
+            "center_sag_m": 0.17934250622754916,
+            "speed_rms_m_s": 2.002285944539109,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.002449828501790762,
+            "sphere_penetration_m": 0.0025814052679288685
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 2.583771180786343e-06,
+            "tip_extension_m": -0.20066701334694192,
+            "tip_sag_m": 0.17900267410299014,
+            "center_sag_m": 0.17900602223351597,
+            "speed_rms_m_s": 6.639249466910655e-06,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 6.131081841886064e-06,
+            "sphere_penetration_m": 0.0
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 31291,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-xpbd-drape-125us-mesh1",
+      "run_sha256": "a94f7506f15407d23f0fa7598834071cf20a01337f72d585a75bbc435e2132fc",
+      "summary_sha256": "e91583718b24e0623732cb3ee2f234df4576b6672c5e55e003c2ac938c79f102",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.000125,
+        "solver": "newton-xpbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-xpbd",
+          "--dt",
+          "0.000125",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-xpbd-drape-125us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 2.048364916932769,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "xpbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0,
+            "add_springs": true,
+            "spring_ke": 10.0,
+            "spring_kd": 0.001
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 69.14178778592031,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 66.98373609909322,
+        "first_step_seconds": 0.28702446399256587,
+        "step_time_p95_seconds": 0.004457358946092426,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "09ed691a4adb9a5ce3e55f742bfc442bba8353561b3a37a2f4fd05d1c29cf2d0"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.058188522656961394,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.11709618821740149,
+            "center_sag_m": 0.04900234222412109,
+            "speed_rms_m_s": 1.2240243761892995,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.006112036175774077
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.01807364059437977,
+            "tip_extension_m": -0.03614942654967308,
+            "tip_sag_m": 0.1142993728816509,
+            "center_sag_m": 0.0490001368522644,
+            "speed_rms_m_s": 0.002356244429714216,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.0055756774790007985
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-xpbd-drape-250us-mesh1",
+      "run_sha256": "e49c91399c2a8e1b64bcd6b58c0412dbdc222c3fd8e10c053c66cd14e8810c65",
+      "summary_sha256": "32734b286a78f8aa8865f2d9fe2f445b6d71909397561683ca612d61f89f509d",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.00025,
+        "solver": "newton-xpbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-xpbd",
+          "--dt",
+          "0.00025",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-xpbd-drape-250us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.6531739989295602,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "xpbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0,
+            "add_springs": true,
+            "spring_ke": 10.0,
+            "spring_kd": 0.001
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 30.43106676195748,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 28.73126234044321,
+        "first_step_seconds": 0.1490983939729631,
+        "step_time_p95_seconds": 0.004250191280152649,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "0169bcb3f119db1d09508e61a8e588e5a474e7d245aa2b55b1ff102bc683d6cf"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.058168338957642396,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.11721367120742796,
+            "center_sag_m": 0.049009226560592645,
+            "speed_rms_m_s": 1.1975016963415783,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.005905559086341987
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.017054272172829954,
+            "tip_extension_m": -0.035815043747425085,
+            "tip_sag_m": 0.11426421061158179,
+            "center_sag_m": 0.04900046467781066,
+            "speed_rms_m_s": 0.015638366148590706,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.005237194267375768
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-xpbd-drape-500us-mesh1",
+      "run_sha256": "ab69be5eed1be83944dc98ff5468913f555834ce152f257a566c638a80f17dfd",
+      "summary_sha256": "c63d1c1c841dbb7809a11fbc29be94b655e1b810d6da61b4ca6ef411e5bdeec5",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 9,
+          "ny": 5,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-xpbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-xpbd",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "1",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-xpbd-drape-500us-mesh1",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.5743149879854172,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "xpbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0,
+            "add_springs": true,
+            "spring_ke": 10.0,
+            "spring_kd": 0.001
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008000000000000002,
+          "dynamic_mass_kg": 0.007999999448657036,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 15.081777496961877,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 13.48524223617278,
+        "first_step_seconds": 0.13554496096912771,
+        "step_time_p95_seconds": 0.00234405075898394,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "1f41e0a2c09c46bd101dd387e609584bd5c2bdf6336d9bd01a24d6b285e7aba0"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.057830145473516614,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.1174521270394325,
+            "center_sag_m": 0.049035556912422174,
+            "speed_rms_m_s": 1.152066308976717,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.005481014620934137
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.01661746433630662,
+            "tip_extension_m": -0.03621749803423882,
+            "tip_sag_m": 0.11423621654510496,
+            "center_sag_m": 0.049001671671867364,
+            "speed_rms_m_s": 0.010127355298355973,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.00517094148701315
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 1723,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    },
+    {
+      "run": "runs/refinement-v1/newton-xpbd-drape-500us-mesh2",
+      "run_sha256": "b8fd17ccbd8e90d3df65fec62edbf38a5f9f55d1a646aa78404a242f5cdb1689",
+      "summary_sha256": "5faa361d22fe3c86733e55635aef730b4a009d303e8524f861a174c247b5622d",
+      "metadata": {
+        "task": "DexLab-Cloth-v0",
+        "case": {
+          "name": "dev-drape",
+          "experiment": "drape",
+          "length": 0.2,
+          "width": 0.2,
+          "nx": 17,
+          "ny": 9,
+          "areal_density": 0.2,
+          "height": 0.18,
+          "force": 0.005,
+          "radius": 0.001,
+          "duration": 3.0,
+          "sphere_radius": 0.06,
+          "sphere_height": 0.07
+        },
+        "split": "development",
+        "suite_sha256": "ce9f994f6ea2bf415299103c3fc68f1939a6d3b5bcc2676590e231aa6ad788b0",
+        "dt_s": 0.0005,
+        "solver": "newton-xpbd",
+        "device": "cpu",
+        "iterations": 10,
+        "source_before": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "status": "completed",
+        "error": null,
+        "command": [
+          "/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-12/src/dexlab/cloth_benchmark.py",
+          "run",
+          "--case",
+          "dev-drape",
+          "--solver",
+          "newton-xpbd",
+          "--dt",
+          "0.0005",
+          "--refine",
+          "2",
+          "--output",
+          "demos/cloth-benchmark/runs/refinement-v1/newton-xpbd-drape-500us-mesh2",
+          "--timing-context",
+          "Development refinement; concurrent apple regression and cloth grasp; no speed ranking"
+        ],
+        "system": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+        "timing_context": "Development refinement; concurrent apple regression and cloth grasp; no speed ranking",
+        "execution": "UniLab task owning native engine scene; not UniSim built-in cloth backend",
+        "prepare_seconds": 1.4879534229403362,
+        "engine": {
+          "engine": "newton",
+          "version": "1.7.0.dev0",
+          "warp": "1.17.0",
+          "solver": "xpbd",
+          "device": "cpu",
+          "precision": "float32",
+          "iterations": 10,
+          "material": {
+            "tri_ke": 5.0,
+            "tri_ka": 5.0,
+            "tri_kd": 0.001,
+            "edge_ke": 0.0001,
+            "edge_kd": 0.0,
+            "add_springs": true,
+            "spring_ke": 10.0,
+            "spring_kd": 0.001
+          },
+          "parameter_provenance": "nominal, adapted from official cloth_hanging example; not calibrated",
+          "contact": {
+            "radius_m": 0.001,
+            "ke": 100.0,
+            "kd": 1.0,
+            "mu": 0.5,
+            "self_contact": false
+          },
+          "nominal_mass_kg": 0.008,
+          "dynamic_mass_kg": 0.008000001311302185,
+          "mass_distribution": "triangle-area lumped; pinned masses zero",
+          "particle_velocity_limit_m_s": 100000.0,
+          "reference_source_commit": "2dee323416ab34763d8680fa5108a28ea688efff",
+          "package_identity": {
+            "version": "1.7.0.dev0",
+            "record_verified": true,
+            "code_sha256": "010954507a8a8333f42b2d985ed0f858168cef057e1bca54962bb68755f373b7",
+            "installation_origin": {
+              "url": "file:///home/robdog/Documents/Codex/2026-09-08/new-chat/work/newton-research",
+              "dir_info": {}
+            }
+          },
+          "warp_identity": {
+            "version": "1.17.0",
+            "record_verified": true,
+            "code_sha256": "c03194b4580270160af8a4f35861e91159127cb5ad07dd14c37c231e3d183e22",
+            "installation_origin": null
+          }
+        },
+        "run_wall_seconds": 25.39396798389498,
+        "source_after": {
+          "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+          "src/dexlab/cloth.py": "ded1b5cf5b12006c5b9f7a1993d4926abfc438a5ef401f956d9af7f2c99b0324",
+          "src/dexlab/cloth_benchmark.py": "a449c125cac89cb73ee491d36320ef470203f5f9b8e54d868853082ab59caa5b",
+          "src/dexlab/cloth_engines.py": "aa146181fe0217f00dbc2aff59250a96c40bc1ccfa1893d6eaa37099465fcb14",
+          "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+          "src/dexlab/jitter.py": "59ae376ea16252b19e6044a946b8bff288adf3df463ecb9e857605d41f2b046b",
+          "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+          "src/dexlab/tasks/__init__.py": "7da8556704e8aa9db9ae487b02497b53194578fb5e0603ef078c55f080ce39ed",
+          "src/dexlab/tasks/apple_stem.py": "666244bb96960c9d229626e7e23efd624ef649aa6a73e1e8de2e5e9c65344197",
+          "src/dexlab/tasks/cloth.py": "f31bf1953f43e10d1514864f71cc529b5d4a10b58f81845a2efaa52637a9432b"
+        },
+        "step_and_observation_seconds": 23.86907901696395,
+        "first_step_seconds": 0.14231879194267094,
+        "step_time_p95_seconds": 0.004961823567282408,
+        "timing_definition": "Per-step force upload, collision/solver completion, state readback and task validation; first-step JIT included separately",
+        "trajectory_sha256": "7b9c1843e638b781099cc7a4ee0ad6abd2e4b3f7a9c6e71e12012b0fdc78553c"
+      },
+      "summary": {
+        "protocol_checks_passed": false,
+        "checks": {
+          "complete_time_grid": true,
+          "finite_states": true,
+          "fixed_boundary_within_1_um": true,
+          "obstacle_penetration_below_1_5_mm": false,
+          "no_sampled_surface_crossings": true,
+          "no_sampled_degenerate_triangles": true,
+          "successful_runtime": true,
+          "exact_record_hash": true,
+          "declared_mesh": true,
+          "prescribed_loads": true,
+          "frozen_source": true,
+          "source_snapshot_matches": true,
+          "declared_initial_state": true,
+          "no_native_velocity_clipping": true
+        },
+        "metrics": {
+          "maximum": {
+            "maximum_absolute_edge_strain": 0.06832336534039452,
+            "tip_extension_m": 1.4901161138336505e-09,
+            "tip_sag_m": 0.12036507399545775,
+            "center_sag_m": 0.04905166506767272,
+            "speed_rms_m_s": 1.0084445827981317,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.0016803901786047182
+          },
+          "final": {
+            "maximum_absolute_edge_strain": 0.019976403274834187,
+            "tip_extension_m": -0.0353422640512387,
+            "tip_sag_m": 0.11607593162192237,
+            "center_sag_m": 0.04900204420089721,
+            "speed_rms_m_s": 0.002498723754571406,
+            "maximum_pin_error_m": 0.0,
+            "ground_penetration_m": 0.0,
+            "sphere_penetration_m": 0.0013414163840767962
+          }
+        },
+        "self_intersection_audit": {
+          "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+          "epsilon_m": 1e-09,
+          "requested_sample_interval_s": 0.01,
+          "maximum_observed_interval_s": 0.010000000000000231,
+          "audited_frame_count": 301,
+          "candidate_topology_pairs": 31291,
+          "maximum_crossing_pairs": 0,
+          "frames_with_crossings": 0,
+          "first_crossing_time_s": null,
+          "maximum_degenerate_triangles": 0
+        },
+        "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+        "verifier_sha256": {
+          "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+          "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+          "cloth_benchmark.py": "62eedea666e525c5242ab1792fb03f1052a47c9bf73baa7df9f6800ffcdf507d"
+        },
+        "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+      }
+    }
+  ]
+}
