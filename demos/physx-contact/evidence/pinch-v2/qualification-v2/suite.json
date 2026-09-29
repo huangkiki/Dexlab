@@ -1,0 +1,37 @@
+{
+  "protocol": "ideal-force-prismatic-box-v2",
+  "source_sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+  "limits": {
+    "penetration_m": 0.001,
+    "hold_drift_m": 0.001,
+    "hold_speed_m_s": 0.005,
+    "normal_load_relative_error": 0.05,
+    "minimum_hold_normal_force_n": 0.1,
+    "minimum_drop_m": 0.05,
+    "released_force_n": 0.01,
+    "freefall_acceleration_relative_error": 0.02,
+    "freefall_velocity_fit_error_m_s": 0.01
+  },
+  "cases": [
+    "hold",
+    "overload",
+    "frictionless"
+  ],
+  "status": "completed",
+  "jobs": [
+    {
+      "case": "hold",
+      "exit_code": 0
+    },
+    {
+      "case": "overload",
+      "exit_code": 0
+    },
+    {
+      "case": "frictionless",
+      "exit_code": 0
+    }
+  ],
+  "previous": "pinch-qualification-v1 retained; overload fails 1um prismatic consistency near travel stop; release pulse now brakes before stop; limits unchanged",
+  "source_unchanged": true
+}

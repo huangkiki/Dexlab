@@ -31,7 +31,7 @@ MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放�
 | MuJoCo 3.11.0 | SDF–SDF 抓梗、flex 布料、机器人摩擦夹布 |
 | SuperDex 1.0.0 FP64 | SDF–SDF 抓梗、实验性三角薄壳 |
 | Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | 固定上游版本的布料实验；各求解器的材料与自接触能力分别记录 |
-| PhysX / Isaac Sim 5.1 | [解析刚体静置、滑动与零摩擦对照](demos/physx-contact/README.zh-CN.md)通过；使用明确披露的 UniSim 接触报告修复，PhysX 未修改；抓取与布料待验证 |
+| PhysX / Isaac Sim 5.1 | [静置、滑动、零摩擦与受控夹持/过载/释放](demos/physx-contact/README.zh-CN.md)通过资格验证；显式 UniSim 适配补丁，PhysX 未修改；机器人抓取/SDF/布料待验证 |
 
 布料基准已完成 **105 次冻结留出实验：52 次通过协议检查、53 次失败，无超时**。覆盖拉伸、下垂、球面覆盖和折叠下落；名义材料尚未完成跨求解器校准，不按通过数排名真实精度。[全部结果与运行方法](demos/cloth-benchmark/README.zh-CN.md#留出结果)
 
