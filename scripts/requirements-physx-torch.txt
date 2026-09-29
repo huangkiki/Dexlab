@@ -1,0 +1,5 @@
+# Official PyTorch CUDA 12.8 wheels for the pinned Linux x86_64 / CPython 3.11 worker.
+# Keep ordinary dependencies on PyPI instead of routing all CUDA wheels through this CDN.
+torch @ https://download-r2.pytorch.org/whl/cu128/torch-2.7.0%2Bcu128-cp311-cp311-manylinux_2_28_x86_64.whl#sha256=c4bbc0b4be60319ba1cefc90be9557b317f0b3c261eeceb96ca6e0343eec56bf
+torchvision @ https://download-r2.pytorch.org/whl/cu128/torchvision-0.22.0%2Bcu128-cp311-cp311-manylinux_2_28_x86_64.whl#sha256=f3ac527d58b4c2043eb8d9e29fc56cd1751f36f2aaa6dc75e34ec54c951bcb9c
+torchaudio @ https://download-r2.pytorch.org/whl/cu128/torchaudio-2.7.0%2Bcu128-cp311-cp311-manylinux_2_28_x86_64.whl#sha256=941f59c037390e288bce798f9ce53dc17b894f707f7f46b50ba3aa1c3144d283
