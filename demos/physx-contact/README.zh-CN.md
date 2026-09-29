@@ -46,7 +46,7 @@ bash scripts/setup_physx.sh
 
 PhysX 请求位置迭代 8 次、速度迭代 2 次、接触偏移 1 mm、静止偏移为零。这是数值设置，不是材料标定。导入报告区分设置值与原生回读。成对传感器返回世界坐标系下的法向接触力，不含摩擦力；在本水平面实验中用于核对竖直支撑。每次保存实际状态、源码／适配层快照、报告／几何哈希、运行库版本及通过／失败详情。步进耗时包含 Python／IPC 观测，不是纯求解器时间；关闭渲染。
 
-Issue 尚需机器人关节／驱动验证，再接入苹果抓取；下述理想力夹具仅覆盖基础夹持对照。基础几何结果不能证明 SDF 等价或布料能力。完整引擎比较还需要共同标定、时间／几何加密以及留出场景。
+Issue 尚需受载整机运动与原生 SDF 接触验证，再接入苹果抓取；下述理想力夹具仅覆盖基础夹持对照。基础几何结果不能证明 SDF 等价或布料能力。完整引擎比较还需要共同标定、时间／几何加密以及留出场景。
 
 来源：[Isaac Sim 5.1 Python 安装](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/install_python.html)、[固定 IsaacLab 源码](https://github.com/isaac-sim/IsaacLab/tree/3c6e67bb5c7ada942a6d1884ab69338f57596f77)、[UniSim 实体接口](https://github.com/unilabsim/unisim/blob/v1.7.10/docs/en/entity-scenes.md)。
 
@@ -59,3 +59,7 @@ Issue 尚需机器人关节／驱动验证，再接入苹果抓取；下述理�
 ## 受载关节驱动
 
 0.1 kg 直线关节复现了 TGS 稳态位置与速度不一致。启用原生逐迭代外力选项后，通过平衡位置、静止速度、力限幅与回零检查；默认配置的失败记录保留。[协议、独立 SDK 对照及限制](drive.zh-CN.md)。当前安装脚本使用明确披露的[组合适配补丁](../../scripts/patches/unisim-1.7.10-physx-adapter.patch)，新增选项需显式开启，原有接触默认配置不变。
+
+## 整机关节运动
+
+实际 OpenArm/Wuji 的 54 个关节通过无重力、无接触运动验收。固定坐标链接折叠保持原关节质量矩阵与运动学；尚未验证原生 SDF 或受载机器人抓取。[协议、结果与失败](robot.zh-CN.md)。
