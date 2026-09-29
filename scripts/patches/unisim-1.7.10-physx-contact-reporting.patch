@@ -1,0 +1,23 @@
+diff --git a/src/unisim/backend/isaacsim/scene_worker.py b/src/unisim/backend/isaacsim/scene_worker.py
+index c183891..ffba097 100644
+--- a/src/unisim/backend/isaacsim/scene_worker.py
++++ b/src/unisim/backend/isaacsim/scene_worker.py
+@@ -238,6 +238,7 @@ def _role_usd_request(
+             # Resolved per-entity request; cache identity tracks it exactly.
+             "disable_gravity": bool(entry["gravity_disabled"]),
+             "require_native_body_paths": require_bodies,
++            "contact_reporter": require_bodies,
+             # Entity-level solver offsets are baked into the role artifact;
+             # the cache identity tracks them exactly.
+             "contact_offset": contact_offset,
+@@ -826,6 +827,10 @@ def _bake(
+             PhysxSchema.PhysxRigidBodyAPI.Apply(prim).CreateDisableGravityAttr().Set(
+                 bool(entry["gravity_disabled"])
+             )
++            if require_bodies:
++                # Both IsaacLab pair sensors and PhysX body-net views require
++                # reporting on the native rigid body before simulation starts.
++                PhysxSchema.PhysxContactReportAPI.Apply(prim).CreateThresholdAttr().Set(0.0)
+         if prim.HasAPI(UsdPhysics.CollisionAPI):
+             UsdPhysics.CollisionAPI(prim).CreateCollisionEnabledAttr().Set(
+                 bool(entry["collision_enabled"])

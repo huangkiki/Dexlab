@@ -31,7 +31,7 @@ A Wuji hand pinches, lifts and releases MuJoCo flex cloth through frictional con
 | MuJoCo 3.11.0 | SDF–SDF stem grasp, flex cloth, and frictional robot cloth grasp |
 | SuperDex 1.0.0 FP64 | SDF–SDF stem grasp and experimental triangle shells |
 | Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | Cloth experiments on a pinned upstream version; material and self-contact capabilities documented per solver |
-| PhysX / Isaac Sim | Integration and native qualification in progress; no validated result yet; [Issue #5](https://github.com/huangkiki/Dexlab/issues/5) |
+| PhysX / Isaac Sim 5.1 | [Primitive resting, sliding and zero-friction controls](demos/physx-contact/README.md) passed with a disclosed UniSim contact-reporting fix; PhysX unchanged; grasping and cloth remain unqualified |
 
 The cloth benchmark completed **105 frozen held-out episodes: 52 passed the protocol checks and 53 failed, with no timeouts**. Cases cover extension, sag, sphere drape, and folded drop. Nominal materials are not calibrated across solvers; pass counts do not rank physical accuracy. [All results and reproduction](demos/cloth-benchmark/README.md#held-out-results)
 
