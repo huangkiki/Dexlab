@@ -8,6 +8,8 @@ DexLab investigates **the validity and numerical behavior of robot simulation mo
 
 The registered UniLab task implements single-scene reset/step/close, two native SDF execution paths, and independent dynamics acceptance. DexLab owns the scene; UniSim's built-in adapters are not yet used. See the [task API](../demos/apple-stem-grasp/README.md#unilab-task-api).
 
+New episodes also export a [read-only model audit](model-audit.md): source and runtime inertials, joints, drives, collision filters, and initial-overlap findings.
+
 Follow-up work is maintained in GitHub issues rather than a duplicate documentation TODO list:
 
 - [模型审查 / Model audit](https://github.com/huangkiki/Dexlab/issues/1)

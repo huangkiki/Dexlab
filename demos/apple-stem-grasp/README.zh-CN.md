@@ -42,6 +42,8 @@ MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py \
 
 ## UniLab 任务接口
 
+场景准备还会写入只读的 `model-audit.superdex.json`，MuJoCo 运行额外生成 `model-audit.mujoco.json`。参数来源、初始重叠和独立复查方法见[模型审查](../../docs/model-audit.zh-CN.md)。
+
 安装后的 `unilab.tasks` 扩展入口将 `DexLab-AppleStem-v0` 注册到 UniLab 1.3.3。任务实现实际的 `ABEnv`／`NpEnvState` 生命周期；每次 `step` 推进一个原生物理步。当前 SDF 场景和接触记录由任务自身管理，尚未改用 UniSim 内置适配器，该工作见 [issue #4](https://github.com/huangkiki/Dexlab/issues/4)。
 
 ```python
