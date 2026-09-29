@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "checks": {
+    "valid_task": true,
+    "complete_time_grid": true,
+    "finite_complete_measurements": true,
+    "complete_hand_plans": true,
+    "complete_contact_scan": true,
+    "completed_without_physics_warning": true,
+    "edge_strain_below_5_percent": true,
+    "robot_contact_penetration_below_1_5_mm": true,
+    "table_contact_penetration_below_1_5_mm": true,
+    "cloth_self_contact_penetration_below_1_5_mm": true,
+    "robot_rigid_penetration_below_1_5_mm": true,
+    "r_both_pads_contact_at_least_95_percent": true,
+    "r_material_slip_below_1_cm": true,
+    "r_material_lift_above_8_cm": true,
+    "released_from_all_robot_geometries": true,
+    "no_mocap_or_external_welds": true,
+    "no_cloth_actuators": true,
+    "three_dof_passive_cloth_vertices": true,
+    "complete_surface_audit_record": true,
+    "no_sampled_surface_crossings": true
+  },
+  "metrics": {
+    "r": {
+      "two_pad_contact_fraction": 1.0,
+      "maximum_anchor_error_m": 0.003982802808762453,
+      "lift_m": 0.12145827075311838
+    },
+    "maximum_final_robot_cloth_normal_force_N": 0.0
+  },
+  "self_surface_audit": {
+    "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+    "epsilon_m": 1e-09,
+    "requested_sample_interval_s": 0.01,
+    "maximum_observed_interval_s": 0.040000000000000924,
+    "audited_frame_count": 225,
+    "candidate_topology_pairs": 39787,
+    "maximum_crossing_pairs": 0,
+    "frames_with_crossings": 0,
+    "first_crossing_time_s": null,
+    "maximum_degenerate_triangles": 0
+  },
+  "verifier_sha256": "fce96b07e8e69ac68846586b6d3e5838cb8585af934fb76c049e896c61504579"
+}

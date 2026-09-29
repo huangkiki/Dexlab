@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "seed": 292612,
+  "scope": "Nominal cloth numerical consistency; no material calibration claim",
+  "case_split": "3 development cases; 12 disjoint frozen held-out cases",
+  "geometry": "SI units, alternating strip triangles, triangle-area-lumped vertex masses, pinned left edge except free drape",
+  "force_schedule": "extension total traction: ramp 0-.5s, hold .5-1.5s, unload 1.5-2s, relax 2-3s; edge trapezoidal weights",
+  "refinement": {
+    "timestep_seconds": [
+      0.0005,
+      0.00025,
+      0.000125
+    ],
+    "mesh_multiplier": [
+      1,
+      2
+    ]
+  },
+  "checks": {
+    "pin_error_m": 1e-06,
+    "obstacle_penetration_m": 0.0015
+  },
+  "limitations": [
+    "Uncalibrated solver-specific material formulations",
+    "No independent self-intersection metric yet",
+    "Small-step convergence does not establish material fidelity",
+    "Pinned boundary mass is recorded separately from dynamically free mass"
+  ],
+  "cases": [
+    {
+      "split": "development",
+      "case": {
+        "name": "dev-extension",
+        "experiment": "extension",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.2,
+        "height": 0.3,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-extension-00",
+        "experiment": "extension",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.19462848905162222,
+        "height": 0.3,
+        "force": 0.004861110070286348,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-extension-01",
+        "experiment": "extension",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.23553738356321718,
+        "height": 0.3,
+        "force": 0.004283548781577806,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-extension-02",
+        "experiment": "extension",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.20381785792687876,
+        "height": 0.3,
+        "force": 0.00475660528065621,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-extension-03",
+        "experiment": "extension",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.21813003593000024,
+        "height": 0.3,
+        "force": 0.006417812056900101,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "development",
+      "case": {
+        "name": "dev-sag",
+        "experiment": "sag",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.2,
+        "height": 0.3,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-sag-00",
+        "experiment": "sag",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.1877037288894008,
+        "height": 0.3,
+        "force": 0.005538580526103518,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-sag-01",
+        "experiment": "sag",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.23388556547206957,
+        "height": 0.3,
+        "force": 0.004399717215978994,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-sag-02",
+        "experiment": "sag",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.1782251768171214,
+        "height": 0.3,
+        "force": 0.004550310314695356,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-sag-03",
+        "experiment": "sag",
+        "length": 0.2,
+        "width": 0.1,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.2385612665389868,
+        "height": 0.3,
+        "force": 0.0030027392342431526,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "development",
+      "case": {
+        "name": "dev-drape",
+        "experiment": "drape",
+        "length": 0.2,
+        "width": 0.2,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.2,
+        "height": 0.18,
+        "force": 0.005,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-drape-00",
+        "experiment": "drape",
+        "length": 0.2,
+        "width": 0.2,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.19291065461924828,
+        "height": 0.18,
+        "force": 0.006355374211843559,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-drape-01",
+        "experiment": "drape",
+        "length": 0.2,
+        "width": 0.2,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.19446479199010036,
+        "height": 0.18,
+        "force": 0.006354178129306413,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-drape-02",
+        "experiment": "drape",
+        "length": 0.2,
+        "width": 0.2,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.21805452385274599,
+        "height": 0.18,
+        "force": 0.00568783218921384,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    },
+    {
+      "split": "test",
+      "case": {
+        "name": "test-drape-03",
+        "experiment": "drape",
+        "length": 0.2,
+        "width": 0.2,
+        "nx": 9,
+        "ny": 5,
+        "areal_density": 0.1613486695269593,
+        "height": 0.18,
+        "force": 0.004367208848997424,
+        "radius": 0.001,
+        "duration": 3.0,
+        "sphere_radius": 0.06,
+        "sphere_height": 0.07
+      }
+    }
+  ]
+}
