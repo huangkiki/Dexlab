@@ -39,6 +39,8 @@ MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py \
 
 检查覆盖完整的 11–14 s 保持阶段，包括离桌高度、两指指腹持续支撑苹果梗、穿透、相对腕部运动和动量平衡。接近阶段允许果身接触；保持阶段不允许通过果身接触提供支撑。
 
+位置/速度/力的 RMS、峰值和逐指腹低载荷区间可用[离线抖动诊断](../../docs/jitter.zh-CN.md)分析。缺失记录保持未知，不会被当成零接触。
+
 
 ## UniLab 任务接口
 
