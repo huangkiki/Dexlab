@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "checks": {
+    "complete_finite_archive": true,
+    "complete_time_grid": true,
+    "declared_external_forces_only": true,
+    "unit_quaternions": true,
+    "actual_prismatic_fixture": true,
+    "bounded_object_pad_penetration": true,
+    "normal_load_matches_command": true,
+    "negative_control_drops": true,
+    "fully_released": true,
+    "freefall_acceleration": true,
+    "freefall_velocity_fit": true,
+    "frozen_case": true,
+    "frozen_limits": true,
+    "archive_hashes_match": true,
+    "native_run_completed": true,
+    "source_unchanged": true,
+    "adapter_unchanged": true,
+    "declared_fixture_topology": true,
+    "native_mass_matches": true,
+    "native_friction_matches": true
+  },
+  "metrics": {
+    "max_object_pad_penetration_m": 2.709909358612761e-07,
+    "normal_load_n": [
+      4.000051498413086,
+      3.999920606613159
+    ],
+    "nominal_friction_capacity_n": 0.0,
+    "weight_n": 1.9620000000000002,
+    "drop_after_200ms_m": 0.19718150794506073,
+    "released_normal_force_n": 0.0,
+    "released_acceleration_m_s2": -9.809494018554686,
+    "released_velocity_fit_error_m_s": 1.2434497875801753e-14,
+    "release_drop_m": 24.529878616333008
+  },
+  "verifier_sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af"
+}
