@@ -1,10 +1,15 @@
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 98bf755..61604cf 100644
+index 98bf755..df61d4c 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -1,5 +1,9 @@
+@@ -1,5 +1,14 @@
  # Changelog
  
++## DexLab local SDF adapter extension
++
++- Preserve mesh-backed MJCF SDF intent, import through a sibling mesh transport, and author/audit native PhysX SDF collision. Version cache identities; test optional slot alignment and unsupported input rejection. This is an adapter-only extension, not an upstream UniSim release.
++
++
 +## Unreleased — DexLab adapter extension
 +
 +- Added opt-in `isaacsim_external_forces_every_iteration`, native scene authoring and strict boolean readback. Defaults are unchanged; official PhysX binaries are unchanged.
@@ -13,10 +18,10 @@ index 98bf755..61604cf 100644
  
  - Sped up mapped IsaacSim prototype authoring at catalog scale (1200-variant INIT entity build drops from 134s to 11s; total INIT from 158s to 35s). Two serialized overheads dominated: each per-variant prototype spawn went through IsaacLab's `UsdFileCfg` spawner, whose `check_usd_path_with_timeout` runs an asyncio `omni.client.stat_async` availability probe with a fixed ~0.1s event-loop yield per call (127s of the 157s INIT, at near-zero CPU/GPU utilization), and every spawn ran with the physics change listener attached, so PhysX parsed each transient prototype subtree (~43ms per variant) even though prototypes are removed before physics starts. The worker now authors the same reference arc directly through `isaacsim.core.utils.prims.create_prim` behind a plain `os.path.isfile` guard — every spawned path is a validated cache artifact (manifest + SHA-256) or a fresh copy of one, and every spawner override the worker set was `None` or unconsumed by the from-files spawner — and prototype spawns join the destination copies and the prototype scope removal under the existing single change-listener toggle, so physics only ever parses the final per-environment destinations. Stage-object edits stay outside the copy loop's `Sdf.ChangeBlock` (deferred layer notices break `DefinePrim` recomposition). Authored prims, the composed stage, PhysX view order, and the native instance audit are unchanged.
 diff --git a/docs/en/support-matrix.md b/docs/en/support-matrix.md
-index a88a6b6..ad66a65 100644
+index a88a6b6..0144909 100644
 --- a/docs/en/support-matrix.md
 +++ b/docs/en/support-matrix.md
-@@ -85,3 +85,7 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
+@@ -85,3 +85,13 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
  DR, playback, body-wrench and fixed-variant capability sources remain their existing instance APIs. The static inventory intentionally leaves those dependent entries unknown; `backend.get_capabilities()` aggregates authoritative instance declarations. Multiple logical entity partitions do not imply arbitrary multi-articulation composition. URDF investigations and unmerged branches are not current support. IsaacSim's legacy reserved zero contact buffer never means a valid contact query or absence of physical contact; mapped scenes serve declared geom-pair `contact data="force" reduce="netforce"` sensors through the dedicated PhysX pair-force slot and wildcard body-net force (`geom2` omitted) plus body-net `data="found"` flags through one batched per-entity PhysX contact view, while legacy model-file scenes fail all contact declarations closed. Isaac worker sensors support gyro reconstruction but reject accelerometers.
  
  The [capability design decision](adr-capabilities.md) defines evidence matching and snapshot lifetime. `available` in the installation table above is never a task compatibility decision.
@@ -24,11 +29,17 @@ index a88a6b6..ad66a65 100644
 +### TGS external force application (DexLab adapter extension)
 +
 +`isaacsim_external_forces_every_iteration=True` applies external forces at each native TGS position iteration via `PhysxSceneAPI`. The default `None` preserves SDK behavior; explicit `False` disables the option. The host and worker require an actual boolean and verify the USD readback. This changes force application timing, not the integration timestep or engine source. Validate affected dynamics before adoption; existing saved experiments retain their original configuration.
++
++### Mesh-backed SDF transport (DexLab adapter extension)
++
++The mapped IsaacSim path preserves MJCF `type="sdf"` intent separately from importer transport. A temporary sibling MJCF spells only mesh-backed SDF geoms as `mesh`; the native importer requires adjacent relative mesh resources and a USD-compatible filename. Role authoring then applies `PhysxSDFMeshCollisionAPI` with resolution 256 and sparse subgrid resolution 6. Native USD readback rejects missing SDF APIs or changed approximation/resolution. Both artifact identities include the transport version; role identities also include per-geom SDF intent. Optional absent geom slots remain collision-disabled placeholders. Plugin SDFs without a mesh are rejected. Ordinary mesh collision semantics are unchanged.
++
++This is a new SDF sampled from the source triangle surface, not a transfer of MuJoCo octree samples or equivalent contact mechanics. USD readback alone is not contact qualification: the DexLab torus/sphere protocol tests an open hole, support on the torus surface and an explicit convex-hull negative control. Official PhysX and IsaacLab sources are unchanged.
 diff --git a/docs/zh/support-matrix.md b/docs/zh/support-matrix.md
-index 155b431..d5916af 100644
+index 155b431..149f359 100644
 --- a/docs/zh/support-matrix.md
 +++ b/docs/zh/support-matrix.md
-@@ -85,3 +85,7 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
+@@ -85,3 +85,13 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
  DR、播放、body wrench 和 fixed-variant 能力仍由既有实例 API 提供权威信息。静态清单有意将依赖这些来源的项目保留为 unknown；`backend.get_capabilities()` 聚合实例权威声明。多个逻辑实体分区不代表任意多 articulation 组合。URDF 调研和未合并分支不构成当前支持。IsaacSim legacy 路径预留的零接触缓冲区既不代表有效接触查询，也不代表没有物理接触；映射场景把具名 geom-pair `contact data="force" reduce="netforce"` 声明路由到专用 PhysX 碰撞对力槽位，把 wildcard body-net force（省略 `geom2`）与 body-net `data="found"` 标志路由到批量逐 entity PhysX contact view；legacy model-file 场景的一切 contact 声明均快速失败。Isaac worker 的传感器支持 gyro 重建，但拒绝 accelerometer。
  
  [能力设计决策](adr-capabilities.md) 定义证据匹配和快照生命周期。上方安装表中的 `available` 始终不能用于判断任务兼容性。
@@ -36,6 +47,12 @@ index 155b431..d5916af 100644
 +### TGS 外力施加方式（DexLab 适配扩展）
 +
 +`isaacsim_external_forces_every_iteration=True` 通过 `PhysxSceneAPI` 在每次原生 TGS 位置迭代施加外力。默认 `None` 保持 SDK 行为；显式 `False` 关闭该选项。主进程与工作进程均要求布尔值，并核对 USD 读回。此项改变外力的施加时序，不改变积分步长或引擎源码。采用前需验证受影响的动力学，已有实验保持其原始配置。
++
++### 网格来源的 SDF 转换（DexLab 适配器扩展）
++
++IsaacSim 映射路径单独保留 MJCF `type="sdf"` 意图。临时同目录 MJCF 仅在导入阶段将网格来源 SDF 写为 `mesh`；原生导入器需要同目录的相对网格资源及合法 USD 文件名。角色生成随后设置 `PhysxSDFMeshCollisionAPI`，分辨率 256、稀疏子网格分辨率 6。原生 USD 读回拒绝缺失 SDF API 或改变近似类型/分辨率的模型。两层缓存均包含转换版本，角色缓存另含逐几何 SDF 意图。可选缺失槽仍是关闭碰撞的占位体；没有网格的插件 SDF 会被拒绝。普通网格碰撞语义不变。
++
++这里从源三角表面重新生成 SDF，不复制 MuJoCo 八叉树采样，也不代表接触力学等价。仅 USD 读回不能证明接触有效：DexLab 圆环/小球协议验证孔洞通行、环面支撑及显式凸包负对照。官方 PhysX 和 IsaacLab 源码不变。
 diff --git a/src/unisim/backend/isaacsim/backend.py b/src/unisim/backend/isaacsim/backend.py
 index 2b3077e..5af30a8 100644
 --- a/src/unisim/backend/isaacsim/backend.py
@@ -139,7 +156,7 @@ index abe7b6f..25a6f6d 100644
          result[CONTACT_OFFSET_FIELD] = _authored_offset_values(
              stage,
 diff --git a/src/unisim/backend/isaacsim/scene_worker.py b/src/unisim/backend/isaacsim/scene_worker.py
-index c183891..b2881cd 100644
+index c183891..7eec739 100644
 --- a/src/unisim/backend/isaacsim/scene_worker.py
 +++ b/src/unisim/backend/isaacsim/scene_worker.py
 @@ -21,6 +21,7 @@ import numpy as np
@@ -150,15 +167,51 @@ index c183891..b2881cd 100644
      apply_max_depenetration_velocity,
      build_isaaclab_physx_cfg,
      read_engine_solver_values,
-@@ -238,6 +239,7 @@ def _role_usd_request(
+@@ -35,6 +36,15 @@ from unisim.backend.isaacsim.raw_usd_cache import (
+     file_sha256,
+     raw_artifact_fingerprint,
+ )
++from unisim.backend.isaacsim.sdf_collision import (
++    SDF_RESOLUTION,
++    SDF_SUBGRID_RESOLUTION,
++    SDF_TRANSPORT_VERSION,
++    author_sdf,
++    importer_source,
++    read_sdf,
++    sdf_flags,
++)
+ from unisim.backend.subprocess_ipc.scene_materialization import (
+     body_sphere_radii_close,
+     validate_body_sphere_radii,
+@@ -186,6 +196,7 @@ def _raw_usd_request(
+         "variant": variant,
+         "expanded_source_sha256": source_digest,
+         "converter": "MjcfConverter",
++        "sdf_transport_version": SDF_TRANSPORT_VERSION,
+         "importer": {
+             "fix_base": entity.kind == "articulation" and entity.root_mode == "fixed",
+             "import_sites": False,
+@@ -238,6 +249,10 @@ def _role_usd_request(
              # Resolved per-entity request; cache identity tracks it exactly.
              "disable_gravity": bool(entry["gravity_disabled"]),
              "require_native_body_paths": require_bodies,
 +            "contact_reporter": require_bodies,
++            "sdf_resolution": SDF_RESOLUTION,
++            "sdf_subgrid_resolution": SDF_SUBGRID_RESOLUTION,
++            "sdf_transport_version": SDF_TRANSPORT_VERSION,
              # Entity-level solver offsets are baked into the role artifact;
              # the cache identity tracks them exactly.
              "contact_offset": contact_offset,
-@@ -826,6 +828,10 @@ def _bake(
+@@ -248,6 +263,8 @@ def _role_usd_request(
+     variants = entry.get("variants")
+     if isinstance(variants, list) and 0 <= variant < len(variants):
+         placeholders = variants[variant].get("geom_placeholders")
++        if "geom_sdf" in variants[variant]:
++            parameters["bake"]["geom_sdf"] = sdf_flags(variants[variant])
+     if placeholders and any(placeholders):
+         # Placeholder prims are baked into the role artifact; the padded slot
+         # set depends on the compiled public layout, which the raw identity
+@@ -826,6 +843,10 @@ def _bake(
              PhysxSchema.PhysxRigidBodyAPI.Apply(prim).CreateDisableGravityAttr().Set(
                  bool(entry["gravity_disabled"])
              )
@@ -169,7 +222,78 @@ index c183891..b2881cd 100644
          if prim.HasAPI(UsdPhysics.CollisionAPI):
              UsdPhysics.CollisionAPI(prim).CreateCollisionEnabledAttr().Set(
                  bool(entry["collision_enabled"])
-@@ -1924,6 +1930,10 @@ class SceneWorkerContext:
+@@ -1007,6 +1028,7 @@ def _normalized_variant_record(entity: Any, record: dict[str, Any]) -> dict[str,
+         raise ValueError("variant geom_placeholders are worker-owned")
+     public_geoms = [(geom.name, geom.body_name) for geom in entity.geoms]
+     actual_geoms = list(zip(record["geom_names"], record["geom_body_names"]))
++    source_sdf = sdf_flags(record)
+     if actual_geoms == public_geoms:
+         return record
+     slots: list[int] = []
+@@ -1023,7 +1045,9 @@ def _normalized_variant_record(entity: Any, record: dict[str, Any]) -> dict[str,
+     conaffinity = [0] * len(public_geoms)
+     friction = [[0.0, 0.0, 0.0] for _ in public_geoms]
+     placeholders = [0] * len(public_geoms)
++    sdf = [False] * len(public_geoms)
+     for source, slot in enumerate(slots):
++        sdf[slot] = source_sdf[source]
+         contype[slot] = int(record["geom_contype"][source])
+         conaffinity[slot] = int(record["geom_conaffinity"][source])
+         friction[slot] = [float(value) for value in record["geom_friction"][source]]
+@@ -1037,6 +1061,7 @@ def _normalized_variant_record(entity: Any, record: dict[str, Any]) -> dict[str,
+     normalized["geom_conaffinity"] = conaffinity
+     normalized["geom_friction"] = friction
+     normalized["geom_placeholders"] = placeholders
++    normalized["geom_sdf"] = sdf
+     return normalized
+ 
+ 
+@@ -1172,6 +1197,8 @@ def _author_native_geometry(
+             observed_name = collision.GetAttribute("unisim:geomName").Get()
+             if observed_name != record["geom_names"][geom_index]:
+                 raise RuntimeError(f"entity {entity.name} native geometry identity differs")
++            if sdf_flags(record)[geom_index]:
++                author_sdf(collision)
+             sliding_friction = float(record["geom_friction"][geom_index][0])
+             material_path = f"{root_path}/Looks/unisim_geom_{geom_index}"
+             material = UsdShade.Material.Define(stage, material_path)
+@@ -1197,6 +1224,7 @@ def _native_geometry_record(
+     body_names: list[str] = []
+     masks: list[list[int]] = []
+     friction: list[list[float]] = []
++    sdf: list[dict[str, Any] | None] = [None] * len(record["geom_names"])
+     # Visual-only geoms have no native collision prim (see
+     # _author_native_geometry); they keep their public row with a zero mask
+     # and the record's friction, and only the native subset is read back.
+@@ -1234,6 +1262,8 @@ def _native_geometry_record(
+             observed_name = collision.GetAttribute("unisim:geomName").Get()
+             if observed_name != record["geom_names"][geom_index]:
+                 raise RuntimeError(f"entity {entity.name} native geometry identity differs")
++            if sdf_flags(record)[geom_index]:
++                sdf[geom_index] = read_sdf(collision)
+             enabled = UsdPhysics.CollisionAPI(collision).GetCollisionEnabledAttr().Get()
+             if not isinstance(enabled, bool):
+                 raise RuntimeError(f"entity {entity.name} native collision state is missing")
+@@ -1278,6 +1308,7 @@ def _native_geometry_record(
+     return {
+         "geom_names": names,
+         "geom_body_names": body_names,
++        "geom_sdf": sdf,
+         "geom_contact_masks": masks,
+         "geom_friction": friction,
+     }
+@@ -1630,7 +1661,9 @@ class SceneWorkerContext:
+                 def convert_raw_usd(artifact_dir: Path, usd_file_name: str) -> Path:
+                     raw_converter = MjcfConverter(
+                         MjcfConverterCfg(
+-                            asset_path=source,
++                            asset_path=importer_source(
++                                source, Path(source).with_name(Path(source).stem + "_sdf.xml")
++                            ),
+                             fix_base=(
+                                 raw_entity.kind == "articulation"
+                                 and raw_entity.root_mode == "fixed"
+@@ -1924,6 +1957,10 @@ class SceneWorkerContext:
              apply_max_depenetration_velocity(
                  self.sim.stage, self.physx_solver.max_depenetration_velocity
              )
@@ -180,7 +304,15 @@ index c183891..b2881cd 100644
          telemetry.mark("collision_offsets")
          self.sim.reset()
          for entity, asset in zip(self.layout.entities, self.assets):
-@@ -3265,6 +3275,9 @@ class SceneWorkerContext:
+@@ -2340,6 +2377,7 @@ class SceneWorkerContext:
+                         row["geom_contact_masks"] for row in geometry_rows
+                     ],
+                     "geom_friction": [row["geom_friction"] for row in geometry_rows],
++                    "geom_sdf": [row["geom_sdf"] for row in geometry_rows],
+                 }
+             )
+         return result
+@@ -3265,6 +3303,9 @@ class SceneWorkerContext:
              solver_readback = (
                  read_engine_solver_values(
                      self.sim.stage,
@@ -190,6 +322,111 @@ index c183891..b2881cd 100644
                      include_contact_offset=self.physx_solver.contact_offset is not None,
                      include_rest_offset=self.physx_solver.rest_offset is not None,
                      include_max_depenetration_velocity=(
+diff --git a/src/unisim/backend/isaacsim/sdf_collision.py b/src/unisim/backend/isaacsim/sdf_collision.py
+new file mode 100644
+index 0000000..362bcb9
+--- /dev/null
++++ b/src/unisim/backend/isaacsim/sdf_collision.py
+@@ -0,0 +1,71 @@
++"""Explicit MJCF SDF transport and native PhysX authoring on the cold path.
++
++The MJCF importer cannot consume ``type=sdf``. Its mesh transport is never the
++final collision representation: selected shapes are authored and audited as SDF.
++Resolution is a disclosed adapter approximation, not source SDF equivalence.
++"""
++from __future__ import annotations
++
++import xml.etree.ElementTree as ET
++from pathlib import Path
++from typing import Any
++
++SDF_RESOLUTION = 256
++SDF_SUBGRID_RESOLUTION = 6
++SDF_TRANSPORT_VERSION = 3
++
++
++def sdf_flags(record: dict[str, Any]) -> list[bool]:
++    flags = record.get("geom_sdf", [False] * len(record["geom_names"]))
++    if len(flags) != len(record["geom_names"]) or any(type(x) is not bool for x in flags):
++        raise ValueError("geom_sdf must contain one boolean per geometry")
++    return list(flags)
++
++
++def importer_source(source: str, destination: Path) -> str:
++    """Write an importer-only mesh spelling, retaining the original source."""
++    path = Path(source)
++    document = ET.parse(path)
++    geoms = [g for g in document.iter("geom") if g.get("type") == "sdf"]
++    if not geoms:
++        return source
++    for geom in geoms:
++        if not geom.get("mesh") or geom.find("plugin") is not None:
++            raise ValueError("PhysX SDF transport requires a mesh-backed, non-plugin SDF")
++        geom.set("type", "mesh")
++    if destination.parent.resolve() != path.parent.resolve():
++        raise ValueError("MJCF importer transport must remain beside source mesh resources")
++    document.write(destination, encoding="utf-8")
++    return str(destination)
++
++
++def author_sdf(collision: Any) -> None:
++    from pxr import PhysxSchema, UsdGeom, UsdPhysics
++
++    if not collision.IsA(UsdGeom.Mesh):
++        raise RuntimeError("SDF transport did not produce a native mesh collider")
++    UsdPhysics.MeshCollisionAPI.Apply(collision).CreateApproximationAttr().Set(
++        PhysxSchema.Tokens.sdf
++    )
++    api = PhysxSchema.PhysxSDFMeshCollisionAPI.Apply(collision)
++    api.CreateSdfResolutionAttr().Set(SDF_RESOLUTION)
++    api.CreateSdfSubgridResolutionAttr().Set(SDF_SUBGRID_RESOLUTION)
++
++
++def read_sdf(collision: Any) -> dict[str, Any]:
++    from pxr import PhysxSchema, UsdGeom, UsdPhysics
++
++    if not collision.IsA(UsdGeom.Mesh) or not collision.HasAPI(
++        PhysxSchema.PhysxSDFMeshCollisionAPI
++    ):
++        raise RuntimeError("Requested SDF collider is missing its native mesh API")
++    api = PhysxSchema.PhysxSDFMeshCollisionAPI(collision)
++    values = {
++        "approximation": str(UsdPhysics.MeshCollisionAPI(collision).GetApproximationAttr().Get()),
++        "resolution": api.GetSdfResolutionAttr().Get(),
++        "subgrid_resolution": api.GetSdfSubgridResolutionAttr().Get(),
++    }
++    if values != {"approximation": "sdf", "resolution": SDF_RESOLUTION,
++                  "subgrid_resolution": SDF_SUBGRID_RESOLUTION}:
++        raise RuntimeError("Native SDF approximation or resolution differs from request")
++    return values
+diff --git a/src/unisim/backend/subprocess_ipc/scene_materialization.py b/src/unisim/backend/subprocess_ipc/scene_materialization.py
+index afdf4d1..e7825dc 100644
+--- a/src/unisim/backend/subprocess_ipc/scene_materialization.py
++++ b/src/unisim/backend/subprocess_ipc/scene_materialization.py
+@@ -105,6 +105,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
+     body_visual_rgb = _body_visual_rgb(model)
+     geom_names, geom_body_names = [], []
+     geom_contype, geom_conaffinity, geom_friction = [], [], []
++    geom_sdf = []
+     for body_id in range(1, int(model.nbody)):
+         body_name = model.body(body_id).name
+         body_offset = 0
+@@ -119,6 +120,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
+             geom_contype.append(int(model.geom_contype[geom_id]))
+             geom_conaffinity.append(int(model.geom_conaffinity[geom_id]))
+             geom_friction.append(model.geom_friction[geom_id].tolist())
++            geom_sdf.append(int(model.geom_type[geom_id]) == int(sdk.mjtGeom.mjGEOM_SDF))
+             body_offset += 1
+     if len(set(geom_names)) != len(geom_names):
+         raise ValueError("entity geometry names are not unique")
+@@ -147,6 +149,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
+         "geom_contype": geom_contype,
+         "geom_conaffinity": geom_conaffinity,
+         "geom_friction": geom_friction,
++        "geom_sdf": geom_sdf,
+     }
+ 
+ 
 diff --git a/src/unisim/factory.py b/src/unisim/factory.py
 index 679f6a9..f16f656 100644
 --- a/src/unisim/factory.py
@@ -308,3 +545,82 @@ index fe51fd9..5da9ed5 100644
 +        isaacsim_external_forces_every_iteration=enabled,
 +    )
 +    assert recorded["external_forces_every_iteration"] is enabled
+diff --git a/tests/adapters/isaacsim/test_raw_usd_cache.py b/tests/adapters/isaacsim/test_raw_usd_cache.py
+index 18556a3..eab096c 100644
+--- a/tests/adapters/isaacsim/test_raw_usd_cache.py
++++ b/tests/adapters/isaacsim/test_raw_usd_cache.py
+@@ -388,6 +388,7 @@ def test_worker_raw_identity_includes_expanded_source_importer_and_runtime_input
+     runtime = _runtime()
+     request = _raw_usd_request(_identity(), str(source), entity, 2, runtime, self_collision=False)
+     expected_parameters = _parameters()
++    expected_parameters["sdf_transport_version"] = 3
+     expected_parameters["entity"] = "robot"
+     expected_parameters["variant"] = 2
+     expected_parameters["expanded_source_sha256"] = source_digest
+diff --git a/tests/adapters/isaacsim/test_sdf_collision.py b/tests/adapters/isaacsim/test_sdf_collision.py
+new file mode 100644
+index 0000000..7f48ba9
+--- /dev/null
++++ b/tests/adapters/isaacsim/test_sdf_collision.py
+@@ -0,0 +1,61 @@
++"""SDF intent, source-preserving transport and optional geometry alignment."""
++import xml.etree.ElementTree as ET
++from types import SimpleNamespace
++
++import pytest
++
++from unisim.backend.isaacsim.scene_worker import _normalized_variant_record
++from unisim.backend.isaacsim.sdf_collision import importer_source, sdf_flags
++
++
++def test_transport_keeps_original_and_relative_mesh_resources(tmp_path):
++    source = tmp_path / "source.xml"
++    original = ('<mujoco><compiler meshdir="meshes"/><asset>'
++                '<mesh name="a" file="shape.obj"/></asset><worldbody><body>'
++                '<inertial mass=".1" pos="0 0 0" diaginertia="1 2 3"/>'
++                '<geom name="s" type="sdf" mesh="a"/><geom type="sphere" size=".1"/>'
++                '</body></worldbody></mujoco>')
++    source.write_text(original)
++    target = tmp_path / "transport.xml"
++    assert importer_source(str(source), target) == str(target)
++    assert source.read_text() == original
++    document = ET.parse(target)
++    assert [g.get("type") for g in document.iter("geom")] == ["mesh", "sphere"]
++    mesh = document.find("./asset/mesh")
++    assert mesh is not None and mesh.get("file") == "shape.obj"
++    inertial = document.find("./worldbody/body/inertial")
++    assert inertial is not None and inertial.get("mass") == ".1"
++
++
++@pytest.mark.parametrize("geom", ['<geom type="sdf"/>',
++                                  '<geom type="sdf" mesh="a"><plugin plugin="custom"/></geom>'])
++def test_unsupported_sdf_does_not_silently_become_mesh(tmp_path, geom):
++    source = tmp_path / "source.xml"
++    source.write_text(f"<mujoco><worldbody><body>{geom}</body></worldbody></mujoco>")
++    with pytest.raises(ValueError, match="mesh-backed"):
++        importer_source(str(source), tmp_path / "transport.xml")
++
++
++def test_non_sdf_import_uses_original_file(tmp_path):
++    source = tmp_path / "source.xml"
++    source.write_text('<mujoco><worldbody><geom type="mesh" mesh="a"/></worldbody></mujoco>')
++    assert importer_source(str(source), tmp_path / "unused.xml") == str(source)
++    assert not (tmp_path / "unused.xml").exists()
++
++
++@pytest.mark.parametrize("flags", [[1], [], [True, False]])
++def test_malformed_sdf_flags_are_rejected(flags):
++    with pytest.raises(ValueError, match="one boolean"):
++        sdf_flags({"geom_names": ["g"], "geom_sdf": flags})
++
++
++def test_missing_optional_slot_does_not_shift_sdf_intent():
++    entity = SimpleNamespace(geoms=[SimpleNamespace(name=n, body_name="body")
++                                   for n in ["optional", "pad"]])
++    record = {"geom_names": ["pad"], "geom_body_names": ["body"],
++              "geom_contype": [1], "geom_conaffinity": [1],
++              "geom_friction": [[.5, 0, 0]], "geom_sdf": [True]}
++    result = _normalized_variant_record(entity, record)
++    assert result["geom_sdf"] == [False, True]
++    assert result["geom_placeholders"] == [1, 0]
++    assert record["geom_sdf"] == [True]
