@@ -1,10 +1,14 @@
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 98bf755..df61d4c 100644
+index 98bf755..dbbbb88 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -1,5 +1,14 @@
+@@ -1,5 +1,18 @@
  # Changelog
  
++## DexLab local contact diagnostics extension
++
++- Added explicit single-environment rigid-object normal-contact and friction-anchor snapshots. Poll every physics substep, preserve body identities, reject malformed/saturated buffers, and copy shared native counts before subsequent queries. Native collision exclusion relationships are exposed in diagnostic metadata. Official engine sources remain unchanged; this is not an upstream UniSim release.
++
 +## DexLab local SDF adapter extension
 +
 +- Preserve mesh-backed MJCF SDF intent, import through a sibling mesh transport, and author/audit native PhysX SDF collision. Version cache identities; test optional slot alignment and unsupported input rejection. This is an adapter-only extension, not an upstream UniSim release.
@@ -18,10 +22,10 @@ index 98bf755..df61d4c 100644
  
  - Sped up mapped IsaacSim prototype authoring at catalog scale (1200-variant INIT entity build drops from 134s to 11s; total INIT from 158s to 35s). Two serialized overheads dominated: each per-variant prototype spawn went through IsaacLab's `UsdFileCfg` spawner, whose `check_usd_path_with_timeout` runs an asyncio `omni.client.stat_async` availability probe with a fixed ~0.1s event-loop yield per call (127s of the 157s INIT, at near-zero CPU/GPU utilization), and every spawn ran with the physics change listener attached, so PhysX parsed each transient prototype subtree (~43ms per variant) even though prototypes are removed before physics starts. The worker now authors the same reference arc directly through `isaacsim.core.utils.prims.create_prim` behind a plain `os.path.isfile` guard — every spawned path is a validated cache artifact (manifest + SHA-256) or a fresh copy of one, and every spawner override the worker set was `None` or unconsumed by the from-files spawner — and prototype spawns join the destination copies and the prototype scope removal under the existing single change-listener toggle, so physics only ever parses the final per-environment destinations. Stage-object edits stay outside the copy loop's `Sdf.ChangeBlock` (deferred layer notices break `DefinePrim` recomposition). Authored prims, the composed stage, PhysX view order, and the native instance audit are unchanged.
 diff --git a/docs/en/support-matrix.md b/docs/en/support-matrix.md
-index a88a6b6..0144909 100644
+index a88a6b6..e694362 100644
 --- a/docs/en/support-matrix.md
 +++ b/docs/en/support-matrix.md
-@@ -85,3 +85,13 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
+@@ -85,3 +85,19 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
  DR, playback, body-wrench and fixed-variant capability sources remain their existing instance APIs. The static inventory intentionally leaves those dependent entries unknown; `backend.get_capabilities()` aggregates authoritative instance declarations. Multiple logical entity partitions do not imply arbitrary multi-articulation composition. URDF investigations and unmerged branches are not current support. IsaacSim's legacy reserved zero contact buffer never means a valid contact query or absence of physical contact; mapped scenes serve declared geom-pair `contact data="force" reduce="netforce"` sensors through the dedicated PhysX pair-force slot and wildcard body-net force (`geom2` omitted) plus body-net `data="found"` flags through one batched per-entity PhysX contact view, while legacy model-file scenes fail all contact declarations closed. Isaac worker sensors support gyro reconstruction but reject accelerometers.
  
  The [capability design decision](adr-capabilities.md) defines evidence matching and snapshot lifetime. `available` in the installation table above is never a task compatibility decision.
@@ -35,11 +39,17 @@ index a88a6b6..0144909 100644
 +The mapped IsaacSim path preserves MJCF `type="sdf"` intent separately from importer transport. A temporary sibling MJCF spells only mesh-backed SDF geoms as `mesh`; the native importer requires adjacent relative mesh resources and a USD-compatible filename. Role authoring then applies `PhysxSDFMeshCollisionAPI` with resolution 256 and sparse subgrid resolution 6. Native USD readback rejects missing SDF APIs or changed approximation/resolution. Both artifact identities include the transport version; role identities also include per-geom SDF intent. Optional absent geom slots remain collision-disabled placeholders. Plugin SDFs without a mesh are rejected. Ordinary mesh collision semantics are unchanged.
 +
 +This is a new SDF sampled from the source triangle surface, not a transfer of MuJoCo octree samples or equivalent contact mechanics. USD readback alone is not contact qualification: the DexLab torus/sphere protocol tests an open hole, support on the torus surface and an explicit convex-hull negative control. Official PhysX and IsaacLab sources are unchanged.
++
++### Native contact diagnostics (DexLab adapter extension)
++
++For one mapped environment, `backend.enable_contact_details("object", capacity=8192)` enables diagnostics for a declared single-body rigid entity already covered by a contact sensor. Enable it before recorded stepping. `backend.get_contact_details()` returns the last physics substep's normal contacts and separate friction anchors, with public target body IDs, world-frame positions, forces in N and separation in m. They are not one-to-one records. Both channels must be summed for complete contact force; ordinary pair sensors retain their existing normal-only semantics.
++
++The native buffers are polled on every substep, even when a host call advances several steps; only the last snapshot is returned. Record with one step per call for complete time coverage. A buffer reaching capacity, invalid slices, overlapping ranges or nonfinite active rows fails the operation. This diagnostic does not score success, change contact parameters or alter engine source. Native metadata additionally reads the composed USD `physics:filteredPairs` relationships; callers must compare them with their intended collision model, including any implicit source-engine rules.
 diff --git a/docs/zh/support-matrix.md b/docs/zh/support-matrix.md
-index 155b431..149f359 100644
+index 155b431..845701d 100644
 --- a/docs/zh/support-matrix.md
 +++ b/docs/zh/support-matrix.md
-@@ -85,3 +85,13 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
+@@ -85,3 +85,19 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
  DR、播放、body wrench 和 fixed-variant 能力仍由既有实例 API 提供权威信息。静态清单有意将依赖这些来源的项目保留为 unknown；`backend.get_capabilities()` 聚合实例权威声明。多个逻辑实体分区不代表任意多 articulation 组合。URDF 调研和未合并分支不构成当前支持。IsaacSim legacy 路径预留的零接触缓冲区既不代表有效接触查询，也不代表没有物理接触；映射场景把具名 geom-pair `contact data="force" reduce="netforce"` 声明路由到专用 PhysX 碰撞对力槽位，把 wildcard body-net force（省略 `geom2`）与 body-net `data="found"` 标志路由到批量逐 entity PhysX contact view；legacy model-file 场景的一切 contact 声明均快速失败。Isaac worker 的传感器支持 gyro 重建，但拒绝 accelerometer。
  
  [能力设计决策](adr-capabilities.md) 定义证据匹配和快照生命周期。上方安装表中的 `available` 始终不能用于判断任务兼容性。
@@ -53,8 +63,14 @@ index 155b431..149f359 100644
 +IsaacSim 映射路径单独保留 MJCF `type="sdf"` 意图。临时同目录 MJCF 仅在导入阶段将网格来源 SDF 写为 `mesh`；原生导入器需要同目录的相对网格资源及合法 USD 文件名。角色生成随后设置 `PhysxSDFMeshCollisionAPI`，分辨率 256、稀疏子网格分辨率 6。原生 USD 读回拒绝缺失 SDF API 或改变近似类型/分辨率的模型。两层缓存均包含转换版本，角色缓存另含逐几何 SDF 意图。可选缺失槽仍是关闭碰撞的占位体；没有网格的插件 SDF 会被拒绝。普通网格碰撞语义不变。
 +
 +这里从源三角表面重新生成 SDF，不复制 MuJoCo 八叉树采样，也不代表接触力学等价。仅 USD 读回不能证明接触有效：DexLab 圆环/小球协议验证孔洞通行、环面支撑及显式凸包负对照。官方 PhysX 和 IsaacLab 源码不变。
++
++### 原生接触诊断（DexLab 适配器扩展）
++
++单个映射环境中，`backend.enable_contact_details("object", capacity=8192)` 为已声明接触传感器的单刚体实体启用诊断，应在记录步进前调用。`backend.get_contact_details()` 返回最后一个物理子步的法向接触及独立的摩擦锚点，包括公开目标刚体 ID、世界坐标位置、N 单位的力和 m 单位的间距。两类记录不一一对应；完整接触力需要累加两类分量，普通碰撞对传感器仍保留原有的仅法向语义。
++
++即使一次主进程调用推进多个物理步，原生缓冲区也在每个子步读取，但仅返回最后快照；完整时间覆盖要求每次调用只推进一步。缓冲区达到容量、无效切片、重叠区间或有效行含非有限值时操作失败。此诊断不判定成功，不改变接触参数或引擎源码。原生元数据另读回组合 USD 的 `physics:filteredPairs` 关系；调用方仍需与预期碰撞模型核对，包括源引擎的隐式规则。
 diff --git a/src/unisim/backend/isaacsim/backend.py b/src/unisim/backend/isaacsim/backend.py
-index 2b3077e..5af30a8 100644
+index 2b3077e..bd70591 100644
 --- a/src/unisim/backend/isaacsim/backend.py
 +++ b/src/unisim/backend/isaacsim/backend.py
 @@ -119,6 +119,7 @@ class IsaacSimBackend(MjcfSubprocessBackend):
@@ -73,6 +89,139 @@ index 2b3077e..5af30a8 100644
              solver_position_iteration_count=solver_position_iteration_count,
              solver_velocity_iteration_count=solver_velocity_iteration_count,
              bounce_threshold_velocity=bounce_threshold_velocity,
+@@ -1067,6 +1069,37 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+             return self._slots["contact_sensor_force"][:, spec.sensor_index, :].copy()
+         return super().get_sensor_data(name)
+ 
++    def enable_contact_details(self, entity: str, *, capacity: int = 8192) -> dict[str, Any]:
++        """Enable single-scene native normal/friction diagnostics for one rigid object.
++
++        Call before the first recorded step. This explicit adapter extension
++        requires an existing contact sensor on the object. It neither changes
++        the engine-neutral sensor contract nor substitutes normal forces for
++        friction. Saturated buffers fail rather than silently losing contacts.
++        """
++        self._require_state("enable_contact_details")
++        if self._num_envs != 1 or self._entity_scene is None:
++            raise NotImplementedError("Contact details require one mapped environment")
++        if not isinstance(entity, str) or not entity:
++            raise ValueError("Contact details require an entity name")
++        if isinstance(capacity, bool) or not isinstance(capacity, int) or capacity < 2:
++            raise ValueError("Contact capacity must be an integer of at least two")
++        response = self._request(
++            "PHYSX_CONTACT_DETAILS", {"entity": entity, "capacity": capacity},
++            expect=protocol.CMD_META,
++        )
++        if not isinstance(response, dict):
++            raise self._worker_error("Malformed native contact metadata")
++        return response
++
++    def get_contact_details(self) -> dict[str, Any]:
++        """Read the last physics-substep diagnostic, including separate friction anchors."""
++        self._require_state("get_contact_details")
++        response = self._request("PHYSX_CONTACT_DETAILS", None, expect=protocol.CMD_META)
++        if not isinstance(response, dict):
++            raise self._worker_error("Malformed native contact snapshot")
++        return response
++
+     def _bind_model_metadata(self, meta: dict[str, Any]) -> None:
+         """Validate the worker's private clone, collision, and render contract."""
+         expected_render_mode = self._resolved_render_mode
+diff --git a/src/unisim/backend/isaacsim/contact_details.py b/src/unisim/backend/isaacsim/contact_details.py
+new file mode 100644
+index 0000000..d3d7b6a
+--- /dev/null
++++ b/src/unisim/backend/isaacsim/contact_details.py
+@@ -0,0 +1,89 @@
++"""Explicit single-environment contact diagnostics, including friction patches.
++
++Normal contacts and friction anchors are distinct native records, not a
++one-to-one correspondence. Arrays are copied before the next SDK query can
++overwrite its shared count/index buffers. No engine SDK is imported here.
++"""
++
++from __future__ import annotations
++
++from typing import Any
++
++import numpy as np
++
++
++def compact_patches(
++    buffers: tuple[np.ndarray, ...], target_ids: list[int], capacity: int
++) -> tuple[np.ndarray, list[np.ndarray]]:
++    """Validate native ragged slices and retain only initialized contact rows."""
++    *values, counts, starts = buffers
++    shape = (1, len(target_ids))
++    if counts.shape != shape or starts.shape != shape:
++        raise ValueError("Contact patch counts do not match declared body filters")
++    if counts.dtype.kind not in "iu" or starts.dtype.kind not in "iu":
++        raise ValueError("Contact patch counts/indices must be integers")
++    indices: list[int] = []
++    owners: list[int] = []
++    for body, count, start in zip(target_ids, counts[0], starts[0]):
++        count, start = int(count), int(start)
++        if count < 0 or (count and (start < 0 or start + count >= capacity)):
++            raise ValueError("Contact buffer is invalid or may be saturated")
++        indices.extend(range(start, start + count))
++        owners.extend([body] * count)
++    if len(indices) != len(set(indices)):
++        raise ValueError("Contact patch ranges overlap")
++    selected = np.asarray(indices, dtype=np.int64)
++    packed = []
++    for value in values:
++        if value.ndim != 2 or value.shape[0] != capacity:
++            raise ValueError("Native contact buffer has an unexpected shape")
++        row = value[selected].copy()
++        if not np.isfinite(row).all():
++            raise ValueError("Native contact data contains nonfinite values")
++        packed.append(row)
++    return np.asarray(owners, dtype=np.int64), packed
++
++
++class ContactDetails:
++    """Own a native contact view and immutable snapshots for an explicit request."""
++
++    def __init__(self, view: Any, target_ids: list[int], capacity: int) -> None:
++        self.view = view
++        self.target_ids = target_ids
++        self.capacity = capacity
++        self.latest: dict[str, np.ndarray] | None = None
++
++    def poll(self, dt: float) -> None:
++        def copy_buffers(values: Any) -> tuple[np.ndarray, ...]:
++            return tuple(value.detach().cpu().numpy().copy() for value in values)
++
++        normal = copy_buffers(self.view.get_contact_data(dt))
++        normal_ids, normal_values = compact_patches(normal, self.target_ids, self.capacity)
++        if len(normal_values) != 4:
++            raise ValueError("Expected force, point, normal and separation buffers")
++        force, point, direction, distance = normal_values
++        if (force.shape != (len(normal_ids), 1) or point.shape != (len(normal_ids), 3)
++                or direction.shape != point.shape or distance.shape != force.shape):
++            raise ValueError("Malformed normal-contact rows")
++        # This query may reuse the normal-contact count/index tensors.
++        friction = copy_buffers(self.view.get_friction_data(dt))
++        friction_ids, friction_values = compact_patches(
++            friction, self.target_ids, self.capacity
++        )
++        if len(friction_values) != 2:
++            raise ValueError("Expected friction force and anchor buffers")
++        friction_force, friction_point = friction_values
++        if (friction_force.shape != (len(friction_ids), 3)
++                or friction_point.shape != friction_force.shape):
++            raise ValueError("Malformed friction-contact rows")
++        self.latest = {
++            "normal_body_ids": normal_ids,
++            "normal_force": force * direction,
++            "normal_magnitude": force[:, 0],
++            "normal_point": point,
++            "normal_direction": direction,
++            "separation": distance[:, 0],
++            "friction_body_ids": friction_ids,
++            "friction_force": friction_force,
++            "friction_point": friction_point,
++        }
 diff --git a/src/unisim/backend/isaacsim/physx_solver.py b/src/unisim/backend/isaacsim/physx_solver.py
 index abe7b6f..25a6f6d 100644
 --- a/src/unisim/backend/isaacsim/physx_solver.py
@@ -156,7 +305,7 @@ index abe7b6f..25a6f6d 100644
          result[CONTACT_OFFSET_FIELD] = _authored_offset_values(
              stage,
 diff --git a/src/unisim/backend/isaacsim/scene_worker.py b/src/unisim/backend/isaacsim/scene_worker.py
-index c183891..7eec739 100644
+index c183891..1e7353b 100644
 --- a/src/unisim/backend/isaacsim/scene_worker.py
 +++ b/src/unisim/backend/isaacsim/scene_worker.py
 @@ -21,6 +21,7 @@ import numpy as np
@@ -274,15 +423,45 @@ index c183891..7eec739 100644
              enabled = UsdPhysics.CollisionAPI(collision).GetCollisionEnabledAttr().Get()
              if not isinstance(enabled, bool):
                  raise RuntimeError(f"entity {entity.name} native collision state is missing")
-@@ -1278,6 +1308,7 @@ def _native_geometry_record(
+@@ -1278,11 +1308,28 @@ def _native_geometry_record(
      return {
          "geom_names": names,
          "geom_body_names": body_names,
 +        "geom_sdf": sdf,
          "geom_contact_masks": masks,
          "geom_friction": friction,
++        "collision_exclusions": _collision_exclusion_readback(root),
      }
-@@ -1630,7 +1661,9 @@ class SceneWorkerContext:
+ 
+ 
++def _collision_exclusion_readback(root: Any) -> list[dict[str, Any]]:
++    """Read actual composed USD relationships; no inferred source equivalence."""
++    from pxr import Usd
++
++    result = []
++    for prim in Usd.PrimRange(root):
++        relation = prim.GetRelationship("physics:filteredPairs")
++        if relation and relation.GetTargets():
++            result.append({
++                "path": str(prim.GetPath()),
++                "targets": [str(path) for path in relation.GetTargets()],
++            })
++    return result
++
++
+ def _inspect_role(
+     usd_path: str,
+     entity: Any,
+@@ -1425,6 +1472,8 @@ class SceneWorkerContext:
+         self.net_contact_views: list[Any] = []
+         self.net_contact_maps: list[dict[str, Any]] = []
+         self._contact_reporting = False
++        self._contact_details: Any = None
++        self._contact_details_metadata: dict[str, Any] | None = None
+         self.faulted = False
+         self.legacy_projection: Any = None
+         self._legacy_metadata: dict[str, Any] | None = None
+@@ -1630,7 +1679,9 @@ class SceneWorkerContext:
                  def convert_raw_usd(artifact_dir: Path, usd_file_name: str) -> Path:
                      raw_converter = MjcfConverter(
                          MjcfConverterCfg(
@@ -293,7 +472,7 @@ index c183891..7eec739 100644
                              fix_base=(
                                  raw_entity.kind == "articulation"
                                  and raw_entity.root_mode == "fixed"
-@@ -1924,6 +1957,10 @@ class SceneWorkerContext:
+@@ -1924,6 +1975,10 @@ class SceneWorkerContext:
              apply_max_depenetration_velocity(
                  self.sim.stage, self.physx_solver.max_depenetration_velocity
              )
@@ -304,15 +483,93 @@ index c183891..7eec739 100644
          telemetry.mark("collision_offsets")
          self.sim.reset()
          for entity, asset in zip(self.layout.entities, self.assets):
-@@ -2340,6 +2377,7 @@ class SceneWorkerContext:
+@@ -2340,6 +2395,8 @@ class SceneWorkerContext:
                          row["geom_contact_masks"] for row in geometry_rows
                      ],
                      "geom_friction": [row["geom_friction"] for row in geometry_rows],
 +                    "geom_sdf": [row["geom_sdf"] for row in geometry_rows],
++                    "collision_exclusions": [row["collision_exclusions"] for row in geometry_rows],
                  }
              )
          return result
-@@ -3265,6 +3303,9 @@ class SceneWorkerContext:
+@@ -2451,6 +2508,67 @@ class SceneWorkerContext:
+                 )
+             self.slots["contact_force"][mapping["env"], mapping["body"]] = net
+ 
++    def contact_details(self, payload: dict[str, Any] | None) -> dict[str, Any]:
++        """Initialize or read explicit one-rigid-body contact diagnostics."""
++        from unisim.backend.isaacsim.contact_details import ContactDetails
++
++        if payload is None:
++            if self._contact_details is None or self._contact_details.latest is None:
++                raise RuntimeError("Enable contact details and take a physics step first")
++            return cast(dict[str, Any], self._contact_details.latest)
++        if not isinstance(payload, dict) or set(payload) != {"entity", "capacity"}:
++            raise ValueError("Invalid contact detail request")
++        name, capacity = payload["entity"], payload["capacity"]
++        if (not isinstance(name, str) or isinstance(capacity, bool)
++                or not isinstance(capacity, int) or capacity < 2):
++            raise ValueError("Invalid contact detail entity/capacity")
++        if self.num_envs != 1 or self.legacy_projection is not None:
++            raise NotImplementedError("Contact details require one mapped environment")
++        if self._contact_details_metadata is not None:
++            if any(self._contact_details_metadata[k] != payload[k] for k in payload):
++                raise ValueError("Contact detail configuration is immutable")
++            return self._contact_details_metadata
++        sources = [e for e in self.layout.entities if e.name == name]
++        if len(sources) != 1 or sources[0].kind != "rigid" or len(sources[0].body_names) != 1:
++            raise ValueError("Contact source must be one declared rigid object")
++        if not any(name in (s["source_entity"], s["target_entity"])
++                   for s in self.contact_force_sensors):
++            raise ValueError("Declare a contact sensor on the source before materialization")
++        source_path, target_paths, target_ids = "", [], []
++        body_names = {}
++        for index, (entity, entry) in enumerate(zip(self.layout.entities, self.entries)):
++            if entry["mirror_of"] is not None or not entry["collision_enabled"]:
++                continue
++            geom_bodies = {geom.body_name for geom in entity.geoms}
++            for local, body_id in zip(entity.body_names, entity.body_ids):
++                if local not in geom_bodies:
++                    continue
++                path = self.entity_paths[entity.name][0] + self.entity_body_paths[index][0][local]
++                body_names[str(body_id)] = entity.name + "/" + local
++                if entity.name == name:
++                    source_path = path
++                else:
++                    target_paths.append(path)
++                    target_ids.append(int(body_id))
++        if not source_path or not target_paths:
++            raise ValueError("Contact details require a colliding source and target bodies")
++        from isaacsim.core.simulation_manager import SimulationManager
++
++        view = SimulationManager.get_physics_sim_view().create_rigid_contact_view(
++            source_path, target_paths, max_contact_data_count=capacity
++        )
++        if view.sensor_count != 1 or view.filter_count != len(target_ids):
++            raise RuntimeError("Native contact view does not match declared body filters")
++        self._contact_details = ContactDetails(view, target_ids, capacity)
++        self._contact_details_metadata = {
++            "entity": name, "capacity": capacity,
++            "source_path": source_path, "target_paths": target_paths,
++            "target_body_ids": target_ids, "body_names": body_names,
++            "frame": "world", "force_unit": "N", "length_unit": "m",
++            "sampling": "last physics substep; normal contacts and friction anchors separate",
++        }
++        return self._contact_details_metadata
++
+     def set_state(self, payload: dict[str, Any]) -> dict[str, Any]:
+         """Translate only the old wire; native reset always uses reset_entities."""
+         if self.legacy_projection is None:
+@@ -2494,6 +2612,8 @@ class SceneWorkerContext:
+                 for sensor in self.contact_sensors:
+                     sensor.update(self.sim_dt)
+                 self._poll_body_net_contact_forces()
++                if self._contact_details is not None:
++                    self._contact_details.poll(self.sim_dt)
+             if wrench is not None:
+                 self._clear_body_wrench()
+             self.refresh_state_slots()
+@@ -3265,6 +3385,9 @@ class SceneWorkerContext:
              solver_readback = (
                  read_engine_solver_values(
                      self.sim.stage,
@@ -399,6 +656,19 @@ index 0000000..362bcb9
 +                  "subgrid_resolution": SDF_SUBGRID_RESOLUTION}:
 +        raise RuntimeError("Native SDF approximation or resolution differs from request")
 +    return values
+diff --git a/src/unisim/backend/isaacsim/worker.py b/src/unisim/backend/isaacsim/worker.py
+index 6d971ba..3fbde40 100644
+--- a/src/unisim/backend/isaacsim/worker.py
++++ b/src/unisim/backend/isaacsim/worker.py
+@@ -788,6 +788,8 @@ def _dispatch(ctx: Any, protocol: Any, cmd: str, payload: Any) -> tuple[str, Any
+         return protocol.CMD_META, ctx.render_frame()
+     if cmd == protocol.CMD_CAPTURE_FRAME:
+         return protocol.CMD_META, ctx.capture_frame()
++    if cmd == "PHYSX_CONTACT_DETAILS":
++        return protocol.CMD_META, ctx.contact_details(payload)
+     raise NotImplementedError(f"isaacsim worker command {cmd!r} is unsupported")
+ 
+ 
 diff --git a/src/unisim/backend/subprocess_ipc/scene_materialization.py b/src/unisim/backend/subprocess_ipc/scene_materialization.py
 index afdf4d1..e7825dc 100644
 --- a/src/unisim/backend/subprocess_ipc/scene_materialization.py
@@ -450,6 +720,132 @@ index 679f6a9..f16f656 100644
          if isaacsim_solver_position_iteration_count is not None:
              kwargs["solver_position_iteration_count"] = (
                  isaacsim_solver_position_iteration_count
+diff --git a/tests/adapters/isaacsim/test_body_wrench.py b/tests/adapters/isaacsim/test_body_wrench.py
+index ea8181c..7ce8011 100644
+--- a/tests/adapters/isaacsim/test_body_wrench.py
++++ b/tests/adapters/isaacsim/test_body_wrench.py
+@@ -283,6 +283,7 @@ def test_full_reset_clears_every_body_in_selected_rows():
+ 
+ def _wrench_worker() -> tuple[SceneWorkerContext, list[dict]]:
+     ctx = SceneWorkerContext.__new__(SceneWorkerContext)
++    ctx._contact_details = None
+     ctx.layout = _layout()
+     ctx.num_envs = 2
+     ctx.sim_dt = 0.002
+diff --git a/tests/adapters/isaacsim/test_contact_details.py b/tests/adapters/isaacsim/test_contact_details.py
+new file mode 100644
+index 0000000..0ea4966
+--- /dev/null
++++ b/tests/adapters/isaacsim/test_contact_details.py
+@@ -0,0 +1,78 @@
++"""Ragged native contact buffers must not hide data loss or alias SDK counts."""
++
++import numpy as np
++import pytest
++
++from unisim.backend.isaacsim.contact_details import ContactDetails, compact_patches
++
++
++def test_only_initialized_rows_are_read_and_body_filters_are_preserved():
++    buffer = np.full((8, 3), np.nan)
++    buffer[3:5] = [[1, 2, 3], [4, 5, 6]]
++    owners, values = compact_patches(
++        (buffer, np.array([[0, 2]]), np.array([[9999, 3]])), [10, 20], 8
++    )
++    np.testing.assert_array_equal(owners, [20, 20])
++    np.testing.assert_array_equal(values[0], buffer[3:5])
++    buffer[3:5] = 0
++    assert values[0][0, 0] == 1
++
++
++@pytest.mark.parametrize("counts,starts", [
++    ([[-1, 0]], [[0, 0]]),
++    ([[1, 0]], [[-1, 0]]),
++    ([[1, 0]], [[7, 0]]),  # Full capacity might mean truncated native output.
++    ([[2, 1]], [[0, 1]]),
++    ([[1.0, 0]], [[0, 0]]),
++    ([[1]], [[0]]),
++])
++def test_invalid_or_saturated_buffers_fail_closed(counts, starts):
++    with pytest.raises(ValueError):
++        compact_patches((np.zeros((8, 3)), np.array(counts), np.array(starts)), [10, 20], 8)
++
++
++def test_nonfinite_active_contact_cannot_be_dropped():
++    with pytest.raises(ValueError, match="nonfinite"):
++        compact_patches((np.full((8, 3), np.nan), np.array([[1]]), np.array([[0]])), [10], 8)
++
++
++class Tensor:
++    def __init__(self, value):
++        self.value = value
++
++    def detach(self):
++        return self
++
++    def cpu(self):
++        return self
++
++    def numpy(self):
++        return self.value
++
++
++def test_friction_query_reusing_counts_does_not_reassign_normal_contact():
++    class View:
++        counts = np.zeros((1, 2), dtype=np.uint32)
++        starts = np.zeros((1, 2), dtype=np.uint32)
++
++        def get_contact_data(self, dt):
++            self.counts[:] = [[1, 0]]
++            force = np.zeros((8, 1))
++            normal = np.zeros((8, 3))
++            force[0, 0], normal[0, 2] = 2, 1
++            return tuple(Tensor(x) for x in (
++                force, np.zeros((8, 3)), normal, np.zeros((8, 1)), self.counts, self.starts
++            ))
++
++        def get_friction_data(self, dt):
++            self.counts[:] = [[0, 1]]
++            force = np.zeros((8, 3))
++            force[0, 0] = -.5
++            return tuple(Tensor(x) for x in (force, np.zeros((8, 3)), self.counts, self.starts))
++
++    recorder = ContactDetails(View(), [10, 20], 8)
++    recorder.poll(.001)
++    np.testing.assert_array_equal(recorder.latest["normal_body_ids"], [10])
++    np.testing.assert_array_equal(recorder.latest["friction_body_ids"], [20])
++    np.testing.assert_array_equal(recorder.latest["normal_force"], [[0, 0, 2]])
++    np.testing.assert_array_equal(recorder.latest["friction_force"], [[-.5, 0, 0]])
+diff --git a/tests/adapters/isaacsim/test_mapped_scene.py b/tests/adapters/isaacsim/test_mapped_scene.py
+index 2bdc25a..cd47110 100644
+--- a/tests/adapters/isaacsim/test_mapped_scene.py
++++ b/tests/adapters/isaacsim/test_mapped_scene.py
+@@ -557,6 +557,8 @@ def test_host_strictly_compares_reported_per_entity_self_collision():
+ 
+ def _context():
+     ctx = SceneWorkerContext.__new__(SceneWorkerContext)
++    ctx._contact_details = None
++    ctx._contact_details_metadata = None
+     ctx.layout = validate_scene_payload(protocol, _payload())
+     ctx.num_envs = 2
+     ctx.sim_dt = 0.002
+@@ -842,6 +844,8 @@ def test_body_net_contact_forces_poll_every_substep_and_publish_the_last():
+     ctx.contact_sensors = []
+     ctx.contact_sensor_maps = []
+     calls = []
++    detail_calls = []
++    ctx._contact_details = SimpleNamespace(poll=detail_calls.append)
+     values = [np.zeros((4, 3), dtype=np.float32)]
+ 
+     class View:
+@@ -864,6 +868,7 @@ def test_body_net_contact_forces_poll_every_substep_and_publish_the_last():
+     # is lost (IsaacLab #7613), so the worker polls every substep and then
+     # reads once more to publish the final substep.
+     assert calls == [0.002, 0.002, 0.002]
++    assert detail_calls == [0.002, 0.002]
+     np.testing.assert_array_equal(
+         ctx.slots["contact_force"][:, 0, :], [[3, 0, 0], [3, 0, 0]]
+     )
 diff --git a/tests/adapters/isaacsim/test_physx_solver.py b/tests/adapters/isaacsim/test_physx_solver.py
 index fe51fd9..5da9ed5 100644
 --- a/tests/adapters/isaacsim/test_physx_solver.py

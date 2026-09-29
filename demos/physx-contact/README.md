@@ -65,3 +65,7 @@ A 0.1 kg prismatic drive reproduces TGS steady-state position/velocity inconsist
 The actual OpenArm/Wuji 54-joint articulation passed an unloaded, contact-free motion qualification. Frame reduction preserves the source joint mass matrix and forward kinematics. This does not yet qualify native SDF or loaded robot grasping. [Protocol, results and failures](robot.md).
 
 [Native SDF controls and known convex-control drift](sdf.md)
+
+## Detailed contact forces
+
+[Normal/friction recording and loaded apple diagnostics](contact-details.md): the sliding-block momentum check passes; robot collision filtering now preserves source semantics. The apple still fails continuous hold acceptance.

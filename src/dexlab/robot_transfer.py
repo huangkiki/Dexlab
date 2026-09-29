@@ -86,6 +86,73 @@ def collapse_massless_frames(root: ET.Element, massless: set[str]) -> dict[str, 
     return remapped
 
 
+def implicit_body_exclusions(
+    model: mujoco.MjModel, names: list[str]
+) -> set[tuple[str, str]]:
+    """Make MuJoCo's weld-group/parent filtering explicit for native importers.
+
+    Fixed links can remain separate PhysX bodies even though MuJoCo treats
+    them as one weld group. Disabling all articulation self-collision is not
+    equivalent. Explicit geom pairs override MuJoCo's body filters; reject
+    conflicting overrides rather than disabling a requested contact.
+    """
+    ids = {name: model.body(name).id for name in names}
+    if len(ids) != len(names):
+        raise ValueError("Collision body names must be unique")
+    filter_parent = not (
+        model.opt.disableflags & mujoco.mjtDisableBit.mjDSBL_FILTERPARENT
+    )
+    excluded = set()
+    for index, first in enumerate(names):
+        weld_first = int(model.body_weldid[ids[first]])
+        parent_first = int(model.body_weldid[model.body_parentid[weld_first]])
+        for second in names[index + 1 :]:
+            weld_second = int(model.body_weldid[ids[second]])
+            parent_second = int(model.body_weldid[model.body_parentid[weld_second]])
+            if weld_first == weld_second or (
+                filter_parent
+                and weld_first != 0
+                and weld_second != 0
+                and (weld_first == parent_second or weld_second == parent_first)
+            ):
+                excluded.add(tuple(sorted((first, second))))
+    for first_geom, second_geom in zip(model.pair_geom1, model.pair_geom2):
+        pair = tuple(
+            sorted(
+                (
+                    model.body(model.geom_bodyid[first_geom]).name,
+                    model.body(model.geom_bodyid[second_geom]).name,
+                )
+            )
+        )
+        if pair in excluded:
+            raise ValueError(
+                "Explicit geom-pair override cannot be represented by a body exclusion"
+            )
+    return excluded
+
+
+def preserve_implicit_filters(
+    root: ET.Element, model: mujoco.MjModel
+) -> list[list[str]]:
+    """Add only source-implied exclusions and return the newly authored pairs."""
+    robot = root.find("./worldbody/body[@name='robot_world']")
+    if robot is None:
+        raise ValueError("Expected robot_world body")
+    contact = root.find("contact")
+    if contact is None:
+        contact = ET.SubElement(root, "contact")
+    existing = {
+        tuple(sorted((p.attrib["body1"], p.attrib["body2"])))
+        for p in contact.findall("exclude")
+    }
+    names = [b.attrib["name"] for b in robot.iter("body")]
+    added = sorted(implicit_body_exclusions(model, names) - existing)
+    for first, second in added:
+        ET.SubElement(contact, "exclude", body1=first, body2=second)
+    return [list(pair) for pair in added]
+
+
 def prepare(source_run: Path, output: Path) -> dict:
     """Transfer compiled physical parameters, never XML placeholder inertias."""
     output.mkdir(parents=True, exist_ok=False)
@@ -164,6 +231,7 @@ def prepare(source_run: Path, output: Path) -> dict:
             or pair.get("body1") == pair.get("body2")
         ):
             contact.remove(pair)
+    implicit_exclusions = preserve_implicit_filters(tree, original)
     # No contacts in this qualification. Preserve surfaces for later explicit
     # native SDF authoring; MJCF importer ignores the original type="sdf".
     sdf_geoms = []
@@ -224,6 +292,7 @@ def prepare(source_run: Path, output: Path) -> dict:
         "home": q.tolist(),
         "collapsed_frames": remapped,
         "original_sdf_geoms": sdf_geoms,
+        "implicit_collision_exclusions": implicit_exclusions,
         "reduction_checks": checks,
         "scope": "contacts and gravity disabled; mesh conversion is not SDF equivalence",
         "anchor": "unit mass/inertia on fixed root; excluded from moving-joint dynamics",

@@ -41,3 +41,5 @@ SDF 孔洞通行和环面支撑通过；凸包对照会挡住孔洞，但存在�
 完整 OpenArm＋Wuji 模型的 54 个关节及右手两个 SDF 指腹已导入并读回；该检查仅运行 20 步、关闭重力，没有苹果或接触载荷。它修复了之前导入器漏掉指腹的路径，不证明已经完成 PhysX 抓梗。后续仍需审查碰撞过滤、受载机器人控制、苹果接触和完整离线验收；[Issue #5](https://github.com/huangkiki/Dexlab/issues/5) 保持开放。
 
 参考：[官方 SDF 碰撞 API](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/107.3/dev_guide/rigid_bodies_articulations/collision.html#create-an-sdf-collider)。
+
+后续[受载诊断](contact-details.zh-CN.md)已保留源模型共 267 对碰撞排除，并记录法向及摩擦力；苹果短暂抬起后仍未通过连续保持验收。
