@@ -85,13 +85,36 @@ Run the frozen nominal profiles across all 15 held-out cases and seven solvers (
   --split test --output demos/cloth-benchmark/runs/heldout
 ```
 
-The batch freezes source and case hashes before execution, saves each command/log, and retains failures and timeouts in the denominator. It requires a fresh directory. The first held-out batch is in progress; no held-out success rate is claimed here.
+The batch freezes source and case hashes before execution, saves each command/log, and retains failures and timeouts in the denominator. It requires a fresh directory.
+
+## Held-out results
+
+The first frozen batch completed **all 105 held-out episodes: 52 passed the protocol checks and 53 failed, with no runtime errors or timeouts**. Entries below are passes / cases; each episode simulated 3 seconds. Experiments have different parameter distributions and checks, so aggregate counts are not a material-accuracy ranking.
+
+| Native profile | Extension | Sag | Sphere drape | Folded drop |
+|---|---:|---:|---:|---:|
+| MuJoCo flex | 4/4 | 0/4 | 0/4 | 0/3 |
+| SuperDex shell | 4/4 | 3/4 | 0/4 | 0/3 |
+| Newton XPBD | 4/4 | 4/4 | 0/4 | 0/3 |
+| Newton VBD | 4/4 | 4/4 | 0/4 | 0/3 |
+| Newton Style3D | 4/4 | 4/4 | 0/4 | 1/3 |
+| Newton SemiImplicit | 4/4 | 4/4 | 0/4 | 0/3 |
+| Newton Featherstone | 4/4 | 4/4 | 0/4 | 0/3 |
+
+Every sphere-drape profile exceeded the original penetration limit. All MuJoCo sag cases and one SuperDex sag case had sampled surface crossings. Some SemiImplicit and Featherstone drape / folded-drop cases triggered the native velocity-clipping check. Thresholds and failed records were preserved; passing these checks does not establish agreement with real material extension or sag.
+
+[All 105 records](evidence/heldout-v1.json) retain case parameters, native-library provenance, measurements, failed checks, and trajectory hashes. The command below checks trajectory, source-snapshot, and scored-summary hashes before collecting a report. It neither reruns physics nor changes raw records; use the earlier `verify` command to recompute physical metrics.
+
+```bash
+.venv/bin/python -m dexlab.cloth_report demos/cloth-benchmark/runs/heldout \
+  --output demos/cloth-benchmark/runs/heldout-report.json
+```
 
 ## Backend capability audit
 
 | Profile | Native representation | Current evidence |
 |---|---|---|
-| MuJoCo flex | Triangle membrane and bending elasticity; flex contact | Executed development and refinement cases |
+| MuJoCo flex | Triangle membrane and bending elasticity; flex contact | Executed development, refinement, and held-out cases |
 | SuperDex shell | Experimental triangle-shell FEM; sampled surface contact and point-cloud self-contact | Official FP64 wheel exercised; volume FEM is a separate API |
 | Newton XPBD | Particle spring/bending constraints | Executed; pinned solver does not provide cloth self-collision |
 | Newton VBD / Style3D | Native triangle cloth with self-contact enabled | Executed; configured self-contact still fails some stress cases |

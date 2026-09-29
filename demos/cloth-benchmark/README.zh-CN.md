@@ -85,13 +85,36 @@ uv pip install --python .venv/bin/python \
   --split test --output demos/cloth-benchmark/runs/heldout
 ```
 
-批处理在开始前冻结源码和场景哈希，保存逐项命令与日志，失败和超时均计入总数；必须使用新目录。首次留出测试正在进行，此处尚不报告留出成功率。
+批处理在开始前冻结源码和场景哈希，保存逐项命令与日志，失败和超时均计入总数；必须使用新目录。
+
+## 留出结果
+
+冻结配置的首轮 **105 次留出实验已全部完成：52 次通过协议检查、53 次失败，无运行错误或超时**。下表是通过数／场景数，每个场景模拟 3 秒。各实验的参数分布和检查不同，合计数不能用作材料精度排行榜。
+
+| 原生配置 | 拉伸 | 下垂 | 球面覆盖 | 折叠下落 |
+|---|---:|---:|---:|---:|
+| MuJoCo flex | 4/4 | 0/4 | 0/4 | 0/3 |
+| SuperDex shell | 4/4 | 3/4 | 0/4 | 0/3 |
+| Newton XPBD | 4/4 | 4/4 | 0/4 | 0/3 |
+| Newton VBD | 4/4 | 4/4 | 0/4 | 0/3 |
+| Newton Style3D | 4/4 | 4/4 | 0/4 | 1/3 |
+| Newton SemiImplicit | 4/4 | 4/4 | 0/4 | 0/3 |
+| Newton Featherstone | 4/4 | 4/4 | 0/4 | 0/3 |
+
+全部球面覆盖配置超过原定穿透限制；MuJoCo 下垂场景出现采样表面自相交，SuperDex 有一个下垂场景出现该问题。SemiImplicit 与 Featherstone 的部分覆盖／折叠下落实验触发原生速度截断检查。阈值与失败记录均未修改；通过检查也不代表伸长或下垂响应已与真实材料一致。
+
+[全部 105 次结果](evidence/heldout-v1.json)保留每个场景的参数、原生库来源、指标、失败项与轨迹哈希。以下命令校验轨迹、源码快照和已评分报告的哈希后生成证据包，不重跑物理、不修改原记录；重新计算物理指标仍使用前述 `verify` 命令。
+
+```bash
+.venv/bin/python -m dexlab.cloth_report demos/cloth-benchmark/runs/heldout \
+  --output demos/cloth-benchmark/runs/heldout-report.json
+```
 
 ## 后端能力审查
 
 | 配置 | 原生表示 | 当前证据 |
 |---|---|---|
-| MuJoCo flex | 三角膜与弯曲弹性、flex 接触 | 已运行开发与细化实验 |
+| MuJoCo flex | 三角膜与弯曲弹性、flex 接触 | 已运行开发、细化和留出实验 |
 | SuperDex shell | 实验性三角薄壳 FEM、表面接触采样与点云自接触 | 已运行官方 FP64 wheel；体积 FEM 属于另一套接口 |
 | Newton XPBD | 粒子弹簧与弯曲约束 | 已运行；固定版本的求解器不提供布料自碰撞 |
 | Newton VBD / Style3D | 原生三角布料，开启自接触 | 已运行；当前自接触配置在部分压力测试中仍失败 |

@@ -4,7 +4,7 @@
 
 **Robot contact-dynamics experiments built on UniLab: audit models, measure contact behavior, and reproduce grasps.**
 
-DexLab uses small, repeatable robot tasks to investigate penetration, jitter, slip, and numerical stability. The current case is **apple-stem grasping with OpenArm dual arms and Wuji hands**, using official MuJoCo and SuperDex FP64 SDF–SDF dynamics. The focus is parameter provenance, collision and drive models, and independent physical acceptance.
+DexLab uses reproducible rigid grasping and cloth experiments to study penetration, jitter, slip, and numerical stability. Cases include **OpenArm dual arms with Wuji hands grasping an apple stem and pinching cloth**, plus cloth extension, sag, and collision tests across solvers. Each experiment retains parameter provenance, raw trajectories, independent checks, and failed records.
 
 [Quick start](#run) · [Results](#results) · [Diagnostics](#model-audits-and-diagnostics) · [Research methods](docs/research-focus.md) · [Releases](https://github.com/huangkiki/Dexlab/releases)
 
@@ -24,18 +24,18 @@ Each GIF shows the continuous 14-second approach, pinch, lift, and hold. Only th
 
 A Wuji hand pinches, lifts and releases MuJoCo flex cloth through frictional contact. The continuous 9-second recording passes independent checks. Control uses known state and a scripted sequence; robot collisions use convex mesh approximations, without cloth attachment constraints. Bimanual folding has not passed. [Video and physics measurements](demos/cloth-folding/README.md)
 
-## What is available
+## Engines and experiments
 
-| Capability | Delivered behavior |
+| Native profile | Current validation scope |
 |---|---|
-| Two-backend grasp | The same robot and task with two native SDF contact implementations, physics-step execution and evidence recording |
-| Model audit | Source/runtime mass, COM, inertia, joints, drives, collision filters and initial overlap reports |
-| Stability diagnostics | Position, velocity and force RMS/peaks, plus per-pad contact interruptions; missing data stays unknown |
-| Independent acceptance | Checks the entire hold using recorded forces and poses rather than judging success from a video |
-| Cloth experiments | MuJoCo flex, SuperDex shells and five Newton solvers; extension, sag, drape and self-collision checks; [results and limits](demos/cloth-benchmark/README.md) |
-| Issue-driven development | Automated implementation, validation and review, followed by eligible merges and releases tied to commits and logs |
+| MuJoCo 3.11.0 | SDF–SDF stem grasp, flex cloth, and frictional robot cloth grasp |
+| SuperDex 1.0.0 FP64 | SDF–SDF stem grasp and experimental triangle shells |
+| Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | Cloth experiments on a pinned upstream version; material and self-contact capabilities documented per solver |
+| PhysX / Isaac Sim | Integration and native qualification in progress; no validated result yet; [Issue #5](https://github.com/huangkiki/Dexlab/issues/5) |
 
-Integration currently uses the **UniLab task layer**. DexLab owns the scenes; UniSim's built-in adapters are not yet used. PhysX, multi-scene regression and hardware calibration are tracked in [Issues](https://github.com/huangkiki/Dexlab/issues).
+The cloth benchmark completed **105 frozen held-out episodes: 52 passed the protocol checks and 53 failed, with no timeouts**. Cases cover extension, sag, sphere drape, and folded drop. Nominal materials are not calibrated across solvers; pass counts do not rank physical accuracy. [All results and reproduction](demos/cloth-benchmark/README.md#held-out-results)
+
+Tasks are registered and stepped through **UniLab**. DexLab currently owns the scenes rather than using UniSim's built-in backends. Rigid and cloth experiments have separate scores; incomplete and unsupported capabilities remain explicit.
 
 ## Grasp details
 
@@ -99,6 +99,6 @@ Submit reproducible problems, parameter experiments and failed trials as an [Iss
 
 ## Acknowledgments
 
-Thanks to [UniLab](https://github.com/unilabsim/UniLab), [Project SuperDex](https://github.com/unilabsim/project_superdex), [MuJoCo](https://github.com/google-deepmind/mujoco), [OpenArm](https://github.com/enactic/openarm), and [Wuji](https://github.com/wuji-technology). The SuperDex grasp appears in [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex); Astra assisted development and debugging.
+Thanks to [UniLab](https://github.com/unilabsim/UniLab), [Project SuperDex](https://github.com/unilabsim/project_superdex), [MuJoCo](https://github.com/google-deepmind/mujoco), [Newton](https://github.com/newton-physics/newton), [OpenArm](https://github.com/enactic/openarm), and [Wuji](https://github.com/wuji-technology). The SuperDex grasp appears in [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex); Astra assisted development and debugging.
 
 Code: [Apache-2.0](LICENSE). Third-party assets retain their own terms; see [asset sources](docs/ASSETS.md).
