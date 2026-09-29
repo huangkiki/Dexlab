@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "backend": "isaacsim",
+  "profile": "default",
+  "lifecycle": "materialization",
+  "fields": [
+    {
+      "field": "entity.identity",
+      "requested": [
+        0
+      ],
+      "effective": [
+        0
+      ],
+      "difference": "exact",
+      "provenance": [
+        {
+          "kind": "source",
+          "source": "Immutable entity assignment"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker instance materialization audit"
+        }
+      ],
+      "scope": {
+        "entity": "left",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": "Assignment is separately checked against native instance parameters."
+    },
+    {
+      "field": "body_mass",
+      "requested": [
+        [
+          0.1,
+          0.1
+        ]
+      ],
+      "effective": [
+        [
+          0.10000000149011612,
+          0.10000000149011612
+        ]
+      ],
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "source",
+          "source": "/tmp/unisim-entities-g0w6_n6s/entity_0_0.xml"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker per-instance body properties"
+        }
+      ],
+      "scope": {
+        "entity": "left",
+        "env_ids": [
+          0
+        ],
+        "variant": "0"
+      },
+      "unit": "kg",
+      "frame": null,
+      "reason": "Compiled source and per-instance native readback; fixed roots may have infinite mass."
+    },
+    {
+      "field": "entity.identity",
+      "requested": [
+        0
+      ],
+      "effective": [
+        0
+      ],
+      "difference": "exact",
+      "provenance": [
+        {
+          "kind": "source",
+          "source": "Immutable entity assignment"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker instance materialization audit"
+        }
+      ],
+      "scope": {
+        "entity": "right",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": "Assignment is separately checked against native instance parameters."
+    },
+    {
+      "field": "body_mass",
+      "requested": [
+        [
+          0.1,
+          0.1
+        ]
+      ],
+      "effective": [
+        [
+          0.10000000149011612,
+          0.10000000149011612
+        ]
+      ],
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "source",
+          "source": "/tmp/unisim-entities-g0w6_n6s/entity_1_0.xml"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker per-instance body properties"
+        }
+      ],
+      "scope": {
+        "entity": "right",
+        "env_ids": [
+          0
+        ],
+        "variant": "0"
+      },
+      "unit": "kg",
+      "frame": null,
+      "reason": "Compiled source and per-instance native readback; fixed roots may have infinite mass."
+    },
+    {
+      "field": "entity.identity",
+      "requested": [
+        0
+      ],
+      "effective": [
+        0
+      ],
+      "difference": "exact",
+      "provenance": [
+        {
+          "kind": "source",
+          "source": "Immutable entity assignment"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker instance materialization audit"
+        }
+      ],
+      "scope": {
+        "entity": "object",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": "Assignment is separately checked against native instance parameters."
+    },
+    {
+      "field": "body_mass",
+      "requested": [
+        [
+          0.2
+        ]
+      ],
+      "effective": [
+        [
+          0.20000000298023224
+        ]
+      ],
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "source",
+          "source": "/tmp/unisim-entities-g0w6_n6s/entity_2_0.xml"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker per-instance body properties"
+        }
+      ],
+      "scope": {
+        "entity": "object",
+        "env_ids": [
+          0
+        ],
+        "variant": "0"
+      },
+      "unit": "kg",
+      "frame": null,
+      "reason": "Compiled source and per-instance native readback; fixed roots may have infinite mass."
+    },
+    {
+      "field": "dt",
+      "requested": 0.001,
+      "effective": 0.001,
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Native worker scene profile"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "gravity",
+      "requested": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "effective": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Native worker scene profile"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "solver",
+      "requested": null,
+      "effective": null,
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Native worker scene profile"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "integrator",
+      "requested": null,
+      "effective": null,
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Native worker scene profile"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "collision_filter",
+      "requested": null,
+      "effective": {
+        "self_collision": {
+          "left": false,
+          "right": false,
+          "object": false
+        },
+        "environment_isolation": true,
+        "implicit_ground": false
+      },
+      "difference": "unknown",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Native worker scene profile"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "solver_position_iteration_count",
+      "requested": 8,
+      "effective": 8,
+      "difference": "exact",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Host INIT worker configuration request"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker native runtime readback"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "solver_velocity_iteration_count",
+      "requested": 2,
+      "effective": 2,
+      "difference": "exact",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Host INIT worker configuration request"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker native runtime readback"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    },
+    {
+      "field": "contact_offset",
+      "requested": 0.001,
+      "effective": 0.0010000000474974513,
+      "difference": "approximate",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Host INIT worker configuration request"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker native runtime readback"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": "The engine stores this setting in single precision; the readback matches the float32 rounding of the request."
+    },
+    {
+      "field": "rest_offset",
+      "requested": 0.0,
+      "effective": 0.0,
+      "difference": "exact",
+      "provenance": [
+        {
+          "kind": "adapter_setting",
+          "source": "Host INIT worker configuration request"
+        },
+        {
+          "kind": "engine_readback",
+          "source": "Worker native runtime readback"
+        }
+      ],
+      "scope": {
+        "entity": "scene",
+        "env_ids": null,
+        "variant": null
+      },
+      "unit": null,
+      "frame": null,
+      "reason": ""
+    }
+  ]
+}

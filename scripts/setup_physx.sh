@@ -11,7 +11,7 @@ host_python="$script_dir/../.venv/bin/python"
 if [[ ${1:-} == --help ]]; then
   echo 'Usage: UNISIM_ISAACSIM_HOME=/path/to/worker bash scripts/setup_physx.sh'
   echo 'Linux x86_64 with an NVIDIA GPU; optional multi-GB Isaac Sim 5.1 installation.'
-  echo 'Also installs the disclosed UniSim contact-reporting adapter fix; PhysX is unchanged.'
+  echo 'Also installs the disclosed UniSim contact-reporting and opt-in drive adapter extensions; PhysX is unchanged.'
   exit 0
 fi
 [[ $# == 0 ]] || { echo 'Unknown argument; use --help.' >&2; exit 2; }
@@ -95,8 +95,8 @@ uv pip freeze --python "$worker_python" > "$worker_root/requirements-installed.t
 
 # UniSim 1.7.10 omits PhysxContactReportAPI on imported rigid bodies.
 # Build the explicit adapter-only patch, without editing installed engine files.
-unisim_dir=${DEXLAB_UNISIM_SOURCE:-"$worker_root/UniSim"}
-contact_patch="$script_dir/patches/unisim-1.7.10-physx-contact-reporting.patch"
+unisim_dir=${DEXLAB_UNISIM_SOURCE:-"$worker_root/UniSim-physx-drive"}
+adapter_patch="$script_dir/patches/unisim-1.7.10-physx-adapter.patch"
 if [[ ! -e "$unisim_dir" ]]; then
   git init "$unisim_dir"
   git -C "$unisim_dir" remote add origin https://github.com/unilabsim/unisim.git
@@ -110,16 +110,16 @@ fi
   echo 'Unexpected untracked UniSim files; existing checkout preserved.' >&2; exit 1;
 }
 if git -C "$unisim_dir" diff --quiet HEAD; then
-  git -C "$unisim_dir" apply --check "$contact_patch"
-  git -C "$unisim_dir" apply "$contact_patch"
+  git -C "$unisim_dir" apply --check "$adapter_patch"
+  git -C "$unisim_dir" apply "$adapter_patch"
 fi
 git -C "$unisim_dir" -c core.abbrev=7 diff --no-ext-diff --binary \
-  --src-prefix=a/ --dst-prefix=b/ --no-color HEAD | cmp - "$contact_patch" || {
-  echo 'UniSim changes differ from the disclosed contact patch; existing checkout preserved.' >&2; exit 1;
+  --src-prefix=a/ --dst-prefix=b/ --no-color HEAD | cmp - "$adapter_patch" || {
+  echo 'UniSim changes differ from the disclosed adapter patch; existing checkout preserved.' >&2; exit 1;
 }
 uv pip install --python "$host_python" --no-deps --reinstall-package unisim-core "$unisim_dir"
 uv pip check --python "$host_python"
-sha256sum "$contact_patch" "$unisim_dir/src/unisim/backend/isaacsim/scene_worker.py" \
-  > "$worker_root/unisim-contact-fix.sha256"
+sha256sum "$adapter_patch" "$unisim_dir/src/unisim/backend/isaacsim/scene_worker.py" \
+  > "$worker_root/unisim-adapter.sha256"
 echo "Installed worker: $worker_root"
 echo 'Installation is not physics qualification. Run the contact baselines next.'

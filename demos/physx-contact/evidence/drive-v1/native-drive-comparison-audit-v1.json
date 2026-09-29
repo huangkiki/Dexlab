@@ -1,0 +1,53 @@
+[
+  {
+    "case": "pgs",
+    "status": "completed",
+    "readback": {
+      "solver": "PGS",
+      "external_forces_every_iteration": false
+    },
+    "q_mean": 0.00800000224262476,
+    "q_change": 0.0,
+    "dq_mean": -1.1548399925231934e-07,
+    "raw_differences": {
+      "q": 0.0,
+      "dq": 0.0,
+      "position": 0.0,
+      "velocity": 0.0
+    }
+  },
+  {
+    "case": "tgs-default",
+    "status": "completed",
+    "readback": {
+      "solver": "TGS",
+      "external_forces_every_iteration": false
+    },
+    "q_mean": 0.008000805974006653,
+    "q_change": 0.0,
+    "dq_mean": 0.004293649923056364,
+    "raw_differences": {
+      "q": 0.0,
+      "dq": 0.0,
+      "position": 0.0,
+      "velocity": 0.0
+    }
+  },
+  {
+    "case": "tgs-substep",
+    "status": "completed",
+    "readback": {
+      "solver": "TGS",
+      "external_forces_every_iteration": true
+    },
+    "q_mean": 0.007999970577657223,
+    "q_change": 0.0,
+    "dq_mean": 1.4183169696480036e-06,
+    "raw_differences": {
+      "q": 0.0,
+      "dq": 0.0,
+      "position": 0.0,
+      "velocity": 0.0
+    }
+  }
+]

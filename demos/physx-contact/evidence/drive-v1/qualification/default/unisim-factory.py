@@ -1,0 +1,469 @@
+"""Lazy backend factory for optional engine adapters."""
+
+from __future__ import annotations
+
+import warnings
+from collections.abc import Sequence
+from dataclasses import replace
+from typing import Any, cast
+
+from .adapters import adapter_spec
+from .contract import BackendError, SimBackend
+from .scene import SceneCfg, require_scene_composition_support
+from .validation import (
+    SemanticRequirements,
+    validate_semantic_requirements,
+)
+
+
+def create_backend(
+    backend_type: str,
+    scene: SceneCfg | None = None,
+    num_envs: int = 1,
+    sim_dt: float = 0.01,
+    *,
+    semantic_requirements: SemanticRequirements | None = None,
+    **kwargs: Any,
+) -> SimBackend:
+    """Construct a backend, optionally requiring declared and materialized semantics.
+
+    Strict requirements are checked on the cold path only. Existing adapter
+    audits remain authoritative when requirements are omitted. A failed
+    post-construction check releases scene assets and any worker resources.
+    """
+    if semantic_requirements is None:
+        return _create_backend(backend_type, scene, num_envs, sim_dt, **kwargs)
+    if not isinstance(semantic_requirements, SemanticRequirements):
+        raise TypeError("semantic_requirements must be SemanticRequirements or None")
+    from .capabilities import CapabilityReport, CapabilityScope, get_adapter_capabilities
+
+    if backend_type == "fake":
+        declaration = CapabilityReport(CapabilityScope("fake", semantic_requirements.profile))
+    else:
+        declaration = get_adapter_capabilities(backend_type, profile=semantic_requirements.profile)
+    # These keys are aggregated from the existing instance capabilities, never
+    # duplicated in the static inventory. Check them as soon as the instance exists.
+    static_features = tuple(
+        name
+        for name in semantic_requirements.features
+        if not name.startswith(("dr.", "play.", "variant."))
+    )
+    preflight = replace(
+        semantic_requirements,
+        features=static_features,
+        settings=(),
+        approximations=tuple(
+            name for name in semantic_requirements.approximations if name in static_features
+        ),
+        require_runtime_verified=False,
+    )
+    validate_semantic_requirements(declaration, preflight)
+    backend = _create_backend(backend_type, scene, num_envs, sim_dt, **kwargs)
+    try:
+        # Strict binding completes the cold lifecycle before inspecting settings
+        # or authoritative instance declarations. In particular, subprocess
+        # reports cannot exist before the worker's handshake.
+        backend.materialize()
+        report = backend.get_import_report()
+        validate_semantic_requirements(
+            backend.get_capabilities(profile=semantic_requirements.profile),
+            semantic_requirements,
+            report,
+        )
+    except BaseException as error:
+        try:
+            try:
+                close = getattr(backend, "close", None)
+                if callable(close):
+                    close()
+            finally:
+                backend.cleanup_scene_assets()
+        except BaseException as cleanup_error:
+            raise error from cleanup_error
+        finally:
+            close = None
+            del backend
+        raise
+    return backend
+
+
+def _create_backend(
+    backend_type: str,
+    scene: SceneCfg | None,
+    num_envs: int,
+    sim_dt: float,
+    **kwargs: Any,
+) -> SimBackend:
+    """Dispatch to the selected adapter without importing unrelated SDKs."""
+    require_scene_composition_support(scene, backend_type)
+    if isinstance(scene, SceneCfg):
+        scene.validate_composition(num_envs)
+    body_state_required = kwargs.pop("body_state_required", False)
+    if not isinstance(body_state_required, bool):
+        raise TypeError("body_state_required must be bool")
+    tracked_body_names = kwargs.pop("tracked_body_names", None)
+    if tracked_body_names is not None:
+        if isinstance(tracked_body_names, (str, bytes)) or not isinstance(
+            tracked_body_names, Sequence
+        ):
+            raise TypeError("tracked_body_names must be a sequence of body names or None")
+        if not tracked_body_names or any(
+            not isinstance(name, str) or not name for name in tracked_body_names
+        ):
+            raise ValueError("tracked_body_names must contain non-empty body names")
+    if tracked_body_names is not None and backend_type != "mujoco":
+        raise TypeError("tracked_body_names is only supported by the mujoco backend")
+    if tracked_body_names is not None and not body_state_required:
+        raise ValueError("tracked_body_names requires body_state_required=True")
+    refresh_pre_step_body_state = kwargs.pop("refresh_pre_step_body_state", None)
+    if refresh_pre_step_body_state is not None and not isinstance(
+        refresh_pre_step_body_state, bool
+    ):
+        raise TypeError("refresh_pre_step_body_state must be bool")
+    if backend_type != "mujoco" and refresh_pre_step_body_state is not None:
+        raise TypeError("refresh_pre_step_body_state is only supported by the mujoco backend")
+    if backend_type == "fake":
+        from .fake import FakeBackend
+
+        return FakeBackend(num_envs=num_envs, **kwargs)
+    try:
+        spec = adapter_spec(backend_type)
+    except KeyError:
+        raise ValueError(f"unknown UniSim backend: {backend_type!r}") from None
+    if spec.status != "available":
+        raise BackendError(f"backend '{backend_type}' is not currently available")
+    if scene is None and backend_type not in {"isaacgym", "isaacsim"}:
+        raise ValueError(f"backend '{backend_type}' requires a SceneCfg")
+    # The ``cast(SceneCfg, scene)`` at each lazy constructor call site below
+    # encodes this guard for the type checker; the IsaacSim adapter declares
+    # its scene parameter as Any and needs no cast.
+    fixed_variant_plan = getattr(scene, "fixed_variant_plan", None)
+    if fixed_variant_plan is not None:
+        fixed_variant_plan.validate(num_envs)
+
+    position_actuator_gains = kwargs.pop("position_actuator_gains", None)
+    motrix_max_iterations = kwargs.pop("motrix_max_iterations", None)
+    post_step_forward_sensor = kwargs.pop("post_step_forward_sensor", None)
+    iterations = kwargs.pop("iterations", None)
+    chunk_size = kwargs.pop("chunk_size", None)
+    adaptive_chunk_size = kwargs.pop("adaptive_chunk_size", False)
+    cpu_ids = kwargs.pop("cpu_ids", None)
+    bench_nsteps = kwargs.pop("bench_nsteps", 1)
+    mjwarp_nconmax = kwargs.pop("mjwarp_nconmax", None)
+    mjwarp_njmax = kwargs.pop("mjwarp_njmax", None)
+    newton_device = kwargs.pop("newton_device", None)
+    newton_nconmax = kwargs.pop("newton_nconmax", None)
+    newton_njmax = kwargs.pop("newton_njmax", None)
+    newton_capacity_check_steps = kwargs.pop("newton_capacity_check_steps", 1)
+    newton_use_cuda_graph = kwargs.pop("newton_use_cuda_graph", False)
+    superdex_num_workers = kwargs.pop("superdex_num_workers", 0)
+    superdex_execution_mode = kwargs.pop("superdex_execution_mode", "batch")
+    superdex_effort_limits = kwargs.pop("superdex_effort_limits", None)
+    superdex_allow_contact_approximation = kwargs.pop("superdex_allow_contact_approximation", False)
+    drake_backend_mode = kwargs.pop("drake_backend_mode", "batch")
+    drake_nthread = kwargs.pop("drake_nthread", None)
+    isaacgym_device_id = kwargs.pop("isaacgym_device_id", None)
+    isaacgym_worker_timeout_s = kwargs.pop("isaacgym_worker_timeout_s", None)
+    isaacgym_env_spacing = kwargs.pop("isaacgym_env_spacing", None)
+    genesis_integrator = kwargs.pop("genesis_integrator", None)
+    genesis_constraint_solver = kwargs.pop("genesis_constraint_solver", None)
+    genesis_friction_cone = kwargs.pop("genesis_friction_cone", None)
+    genesis_solver_iterations = kwargs.pop("genesis_solver_iterations", None)
+    genesis_device_id = kwargs.pop("genesis_device_id", None)
+    isaacsim_device_id = kwargs.pop("isaacsim_device_id", None)
+    isaacsim_worker_timeout_s = kwargs.pop("isaacsim_worker_timeout_s", None)
+    isaacsim_render_mode = kwargs.pop("isaacsim_render_mode", None)
+    isaacsim_render_width = kwargs.pop("isaacsim_render_width", 1280)
+    isaacsim_render_height = kwargs.pop("isaacsim_render_height", 720)
+    isaacsim_external_forces_every_iteration = kwargs.pop(
+        "isaacsim_external_forces_every_iteration", None
+    )
+    isaacsim_solver_position_iteration_count = kwargs.pop(
+        "isaacsim_solver_position_iteration_count", None
+    )
+    isaacsim_solver_velocity_iteration_count = kwargs.pop(
+        "isaacsim_solver_velocity_iteration_count", None
+    )
+    isaacsim_bounce_threshold_velocity = kwargs.pop("isaacsim_bounce_threshold_velocity", None)
+    isaacsim_contact_offset = kwargs.pop("isaacsim_contact_offset", None)
+    isaacsim_rest_offset = kwargs.pop("isaacsim_rest_offset", None)
+    isaacsim_max_depenetration_velocity = kwargs.pop(
+        "isaacsim_max_depenetration_velocity", None
+    )
+    isaacsim_gpu_max_rigid_contact_count = kwargs.pop(
+        "isaacsim_gpu_max_rigid_contact_count", None
+    )
+    isaacsim_gpu_max_rigid_patch_count = kwargs.pop(
+        "isaacsim_gpu_max_rigid_patch_count", None
+    )
+
+    if backend_type == "mujoco":
+        from .backend.mujoco.backend import MuJoCoBackend
+
+        if refresh_pre_step_body_state is None:
+            refresh_pre_step_body_state = True
+        if body_state_required:
+            kwargs["add_body_sensors"] = True
+            if tracked_body_names is not None:
+                kwargs["tracked_body_names"] = tracked_body_names
+        kwargs["refresh_pre_step_body_state"] = refresh_pre_step_body_state
+        if position_actuator_gains is not None:
+            kwargs["position_actuator_gains"] = position_actuator_gains
+        ignored = {}
+        if post_step_forward_sensor is not None:
+            ignored["post_step_forward_sensor"] = post_step_forward_sensor
+        if chunk_size is not None:
+            ignored["chunk_size"] = chunk_size
+        if adaptive_chunk_size:
+            ignored["adaptive_chunk_size"] = adaptive_chunk_size
+        if bench_nsteps != 1:
+            ignored["bench_nsteps"] = bench_nsteps
+        if ignored:
+            warnings.warn(
+                "mujoco ignores removed executor options: "
+                + ", ".join(f"{key}={value!r}" for key, value in ignored.items())
+                + " (post_step_forward_sensor was removed: the mjbatch executor serves "
+                "final-substep sensordata semantics; chunk_size/adaptive_chunk_size/"
+                "bench_nsteps belonged to the removed chunk tuner)",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+        kwargs["iterations"] = iterations
+        kwargs["cpu_ids"] = cpu_ids
+        return MuJoCoBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "motrix":
+        from .backend.motrix.backend import MOTRIX_AVAILABLE, MotrixBackend
+
+        if not MOTRIX_AVAILABLE:
+            raise ImportError("MotrixSim not available, install motrixsim package")
+        if body_state_required:
+            kwargs["add_body_sensors"] = True
+        if motrix_max_iterations is not None:
+            kwargs["max_iterations"] = motrix_max_iterations
+        # An explicit ``cpu_ids`` block initializes MotrixSim's shared worker
+        # pool with deterministic core pinning before the first model load;
+        # ``None`` keeps MotrixSim's default one-worker-per-CPU policy.
+        if cpu_ids is not None:
+            kwargs["cpu_ids"] = cpu_ids
+        return MotrixBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "drake":
+        from .backend.drake.backend import DrakeBackend
+
+        kwargs.pop("add_body_sensors", None)
+        kwargs["drake_backend_mode"] = drake_backend_mode
+        if drake_nthread is not None:
+            kwargs["nthread"] = drake_nthread
+        return DrakeBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "mjwarp":
+        from .backend.mjwarp.backend import MjwarpBackend
+
+        if body_state_required:
+            kwargs["add_body_sensors"] = True
+        if position_actuator_gains is not None:
+            raise ValueError(
+                "mjwarp does not accept position_actuator_gains in the host compatibility "
+                "profile; configure the model on the cold path instead."
+            )
+        _warn_ignored_mujoco_options(
+            "mjwarp",
+            post_step_forward_sensor=post_step_forward_sensor,
+            iterations=iterations,
+            chunk_size=chunk_size,
+            adaptive_chunk_size=adaptive_chunk_size,
+            cpu_ids=cpu_ids,
+            bench_nsteps=bench_nsteps,
+        )
+        kwargs["nconmax"] = mjwarp_nconmax
+        kwargs["njmax"] = mjwarp_njmax
+        return MjwarpBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "newton":
+        from .backend.newton.backend import NewtonBackend
+
+        if body_state_required:
+            raise NotImplementedError(
+                "newton does not support body-state sensor injection; define MJCF sensors"
+            )
+        if position_actuator_gains is not None:
+            raise ValueError(
+                "newton uses direct MJCF actuators; position_actuator_gains has no equivalent"
+            )
+        _warn_ignored_mujoco_options(
+            "newton",
+            post_step_forward_sensor=post_step_forward_sensor,
+            iterations=iterations,
+            chunk_size=chunk_size,
+            adaptive_chunk_size=adaptive_chunk_size,
+            cpu_ids=cpu_ids,
+            bench_nsteps=bench_nsteps,
+        )
+        kwargs["device"] = newton_device
+        kwargs["nconmax"] = newton_nconmax
+        kwargs["njmax"] = newton_njmax
+        kwargs["capacity_check_steps"] = newton_capacity_check_steps
+        kwargs["use_cuda_graph"] = newton_use_cuda_graph
+        return NewtonBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "superdex":
+        from .backend.superdex import SuperDexBackend
+
+        if position_actuator_gains is not None:
+            raise ValueError(
+                "superdex requires authored actuator gains or the pre-step control hook"
+            )
+        kwargs.pop("add_body_sensors", None)
+        kwargs["num_workers"] = superdex_num_workers
+        kwargs["execution_mode"] = superdex_execution_mode
+        kwargs["effort_limits"] = superdex_effort_limits
+        kwargs["allow_contact_approximation"] = superdex_allow_contact_approximation
+        return SuperDexBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "genesis":
+        from .backend.genesis.backend import GenesisBackend
+
+        kwargs.pop("add_body_sensors", None)
+        if position_actuator_gains is not None:
+            raise ValueError(
+                "genesis imports the MJCF position-actuator gains directly; "
+                "position_actuator_gains has no Genesis equivalent."
+            )
+        _warn_ignored_mujoco_options(
+            "genesis",
+            post_step_forward_sensor=post_step_forward_sensor,
+            iterations=iterations,
+            chunk_size=chunk_size,
+            adaptive_chunk_size=adaptive_chunk_size,
+            cpu_ids=cpu_ids,
+            bench_nsteps=bench_nsteps,
+        )
+        kwargs["integrator"] = genesis_integrator
+        kwargs["constraint_solver"] = genesis_constraint_solver
+        kwargs["friction_cone"] = genesis_friction_cone
+        kwargs["solver_iterations"] = genesis_solver_iterations
+        kwargs["device_id"] = genesis_device_id
+        return GenesisBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "isaacgym":
+        if scene is None and "runtime" not in kwargs and "worker_command" not in kwargs:
+            from .backend.isaacgym.dependencies import IsaacGymDependencyError
+
+            raise IsaacGymDependencyError(
+                "IsaacGym backend requires a SceneCfg plus a configured external worker."
+            )
+        from .backend.isaacgym.backend import IsaacGymBackend
+
+        kwargs.pop("add_body_sensors", None)
+        if position_actuator_gains is not None:
+            raise ValueError(
+                "isaacgym runs torque-mode dofs only; position_actuator_gains has no "
+                "IsaacGym equivalent in the subprocess profile."
+            )
+        _warn_ignored_mujoco_options(
+            "isaacgym",
+            post_step_forward_sensor=post_step_forward_sensor,
+            iterations=iterations,
+            chunk_size=chunk_size,
+            adaptive_chunk_size=adaptive_chunk_size,
+            cpu_ids=cpu_ids,
+            bench_nsteps=bench_nsteps,
+        )
+        if isaacgym_device_id is not None:
+            kwargs["device_id"] = isaacgym_device_id
+        if isaacgym_worker_timeout_s is not None:
+            kwargs["worker_timeout_s"] = isaacgym_worker_timeout_s
+        if isaacgym_env_spacing is not None:
+            kwargs["env_spacing"] = isaacgym_env_spacing
+        return IsaacGymBackend(cast(SceneCfg, scene), num_envs, sim_dt, **kwargs)
+    if backend_type == "isaacsim":
+        if scene is None and "runtime" not in kwargs and "worker_command" not in kwargs:
+            from .backend.isaacsim.dependencies import IsaacSimDependencyError
+
+            raise IsaacSimDependencyError(
+                "IsaacSim backend requires a SceneCfg plus a configured external worker."
+            )
+        from .backend.isaacsim.backend import IsaacSimBackend
+
+        direct_render_width = kwargs.pop("render_width", None)
+        direct_render_height = kwargs.pop("render_height", None)
+        kwargs.pop("add_body_sensors", None)
+        if position_actuator_gains is not None:
+            raise ValueError(
+                "isaacsim uses IsaacLab implicit position actuators; configure gains in the "
+                "scene/owner contract rather than position_actuator_gains."
+            )
+        _warn_ignored_mujoco_options(
+            "isaacsim",
+            post_step_forward_sensor=post_step_forward_sensor,
+            iterations=iterations,
+            chunk_size=chunk_size,
+            adaptive_chunk_size=adaptive_chunk_size,
+            cpu_ids=cpu_ids,
+            bench_nsteps=bench_nsteps,
+        )
+        if isaacsim_device_id is not None:
+            kwargs["device_id"] = isaacsim_device_id
+        if isaacsim_worker_timeout_s is not None:
+            kwargs["worker_timeout_s"] = isaacsim_worker_timeout_s
+        if isaacsim_render_mode is not None:
+            kwargs["render_mode"] = isaacsim_render_mode
+        kwargs["render_width"] = (
+            isaacsim_render_width if direct_render_width is None else direct_render_width
+        )
+        kwargs["render_height"] = (
+            isaacsim_render_height if direct_render_height is None else direct_render_height
+        )
+        if isaacsim_external_forces_every_iteration is not None:
+            kwargs["external_forces_every_iteration"] = isaacsim_external_forces_every_iteration
+        if isaacsim_solver_position_iteration_count is not None:
+            kwargs["solver_position_iteration_count"] = (
+                isaacsim_solver_position_iteration_count
+            )
+        if isaacsim_solver_velocity_iteration_count is not None:
+            kwargs["solver_velocity_iteration_count"] = (
+                isaacsim_solver_velocity_iteration_count
+            )
+        if isaacsim_bounce_threshold_velocity is not None:
+            kwargs["bounce_threshold_velocity"] = isaacsim_bounce_threshold_velocity
+        if isaacsim_contact_offset is not None:
+            kwargs["contact_offset"] = isaacsim_contact_offset
+        if isaacsim_rest_offset is not None:
+            kwargs["rest_offset"] = isaacsim_rest_offset
+        if isaacsim_max_depenetration_velocity is not None:
+            kwargs["max_depenetration_velocity"] = isaacsim_max_depenetration_velocity
+        if isaacsim_gpu_max_rigid_contact_count is not None:
+            kwargs["gpu_max_rigid_contact_count"] = isaacsim_gpu_max_rigid_contact_count
+        if isaacsim_gpu_max_rigid_patch_count is not None:
+            kwargs["gpu_max_rigid_patch_count"] = isaacsim_gpu_max_rigid_patch_count
+        return IsaacSimBackend(scene, num_envs, sim_dt, **kwargs)
+    # Every backend in the manifest has a concrete public adapter.  Optional
+    # SDK/worker availability is diagnosed by that adapter at construction;
+    # this branch is retained only as a guard for future manifest mistakes.
+    raise ValueError(f"unknown UniSim backend: {backend_type!r}")
+
+
+def _warn_ignored_mujoco_options(
+    backend_type: str,
+    *,
+    post_step_forward_sensor: Any,
+    iterations: Any,
+    chunk_size: Any,
+    adaptive_chunk_size: Any,
+    cpu_ids: Any,
+    bench_nsteps: Any,
+) -> None:
+    values = {
+        key: value
+        for key, value, default in (
+            ("post_step_forward_sensor", post_step_forward_sensor, None),
+            ("iterations", iterations, None),
+            ("chunk_size", chunk_size, None),
+            ("adaptive_chunk_size", adaptive_chunk_size, False),
+            ("cpu_ids", cpu_ids, None),
+            ("bench_nsteps", bench_nsteps, 1),
+        )
+        if value != default
+    }
+    if not values:
+        return
+    rendered = ", ".join(f"{key}={value!r}" for key, value in values.items())
+    warnings.warn(
+        f"{backend_type} ignores non-default MuJoCo-only backend options: {rendered}",
+        UserWarning,
+        stacklevel=3,
+    )

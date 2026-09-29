@@ -1,3 +1,6 @@
 *.obj binary
 *.glb binary
 *.stl binary
+
+# Generated patch context contains mandatory single-space blank lines.
+scripts/patches/unisim-1.7.10-physx-adapter.patch -whitespace

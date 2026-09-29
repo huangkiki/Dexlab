@@ -1,0 +1,310 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 98bf755..61604cf 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,9 @@
+ # Changelog
+ 
++## Unreleased — DexLab adapter extension
++
++- Added opt-in `isaacsim_external_forces_every_iteration`, native scene authoring and strict boolean readback. Defaults are unchanged; official PhysX binaries are unchanged.
++
+ ## 1.7.10 - 2026-09-24
+ 
+ - Sped up mapped IsaacSim prototype authoring at catalog scale (1200-variant INIT entity build drops from 134s to 11s; total INIT from 158s to 35s). Two serialized overheads dominated: each per-variant prototype spawn went through IsaacLab's `UsdFileCfg` spawner, whose `check_usd_path_with_timeout` runs an asyncio `omni.client.stat_async` availability probe with a fixed ~0.1s event-loop yield per call (127s of the 157s INIT, at near-zero CPU/GPU utilization), and every spawn ran with the physics change listener attached, so PhysX parsed each transient prototype subtree (~43ms per variant) even though prototypes are removed before physics starts. The worker now authors the same reference arc directly through `isaacsim.core.utils.prims.create_prim` behind a plain `os.path.isfile` guard — every spawned path is a validated cache artifact (manifest + SHA-256) or a fresh copy of one, and every spawner override the worker set was `None` or unconsumed by the from-files spawner — and prototype spawns join the destination copies and the prototype scope removal under the existing single change-listener toggle, so physics only ever parses the final per-environment destinations. Stage-object edits stay outside the copy loop's `Sdf.ChangeBlock` (deferred layer notices break `DefinePrim` recomposition). Authored prims, the composed stage, PhysX view order, and the native instance audit are unchanged.
+diff --git a/docs/en/support-matrix.md b/docs/en/support-matrix.md
+index a88a6b6..ad66a65 100644
+--- a/docs/en/support-matrix.md
++++ b/docs/en/support-matrix.md
+@@ -85,3 +85,7 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
+ DR, playback, body-wrench and fixed-variant capability sources remain their existing instance APIs. The static inventory intentionally leaves those dependent entries unknown; `backend.get_capabilities()` aggregates authoritative instance declarations. Multiple logical entity partitions do not imply arbitrary multi-articulation composition. URDF investigations and unmerged branches are not current support. IsaacSim's legacy reserved zero contact buffer never means a valid contact query or absence of physical contact; mapped scenes serve declared geom-pair `contact data="force" reduce="netforce"` sensors through the dedicated PhysX pair-force slot and wildcard body-net force (`geom2` omitted) plus body-net `data="found"` flags through one batched per-entity PhysX contact view, while legacy model-file scenes fail all contact declarations closed. Isaac worker sensors support gyro reconstruction but reject accelerometers.
+ 
+ The [capability design decision](adr-capabilities.md) defines evidence matching and snapshot lifetime. `available` in the installation table above is never a task compatibility decision.
++
++### TGS external force application (DexLab adapter extension)
++
++`isaacsim_external_forces_every_iteration=True` applies external forces at each native TGS position iteration via `PhysxSceneAPI`. The default `None` preserves SDK behavior; explicit `False` disables the option. The host and worker require an actual boolean and verify the USD readback. This changes force application timing, not the integration timestep or engine source. Validate affected dynamics before adoption; existing saved experiments retain their original configuration.
+diff --git a/docs/zh/support-matrix.md b/docs/zh/support-matrix.md
+index 155b431..d5916af 100644
+--- a/docs/zh/support-matrix.md
++++ b/docs/zh/support-matrix.md
+@@ -85,3 +85,7 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
+ DR、播放、body wrench 和 fixed-variant 能力仍由既有实例 API 提供权威信息。静态清单有意将依赖这些来源的项目保留为 unknown；`backend.get_capabilities()` 聚合实例权威声明。多个逻辑实体分区不代表任意多 articulation 组合。URDF 调研和未合并分支不构成当前支持。IsaacSim legacy 路径预留的零接触缓冲区既不代表有效接触查询，也不代表没有物理接触；映射场景把具名 geom-pair `contact data="force" reduce="netforce"` 声明路由到专用 PhysX 碰撞对力槽位，把 wildcard body-net force（省略 `geom2`）与 body-net `data="found"` 标志路由到批量逐 entity PhysX contact view；legacy model-file 场景的一切 contact 声明均快速失败。Isaac worker 的传感器支持 gyro 重建，但拒绝 accelerometer。
+ 
+ [能力设计决策](adr-capabilities.md) 定义证据匹配和快照生命周期。上方安装表中的 `available` 始终不能用于判断任务兼容性。
++
++### TGS 外力施加方式（DexLab 适配扩展）
++
++`isaacsim_external_forces_every_iteration=True` 通过 `PhysxSceneAPI` 在每次原生 TGS 位置迭代施加外力。默认 `None` 保持 SDK 行为；显式 `False` 关闭该选项。主进程与工作进程均要求布尔值，并核对 USD 读回。此项改变外力的施加时序，不改变积分步长或引擎源码。采用前需验证受影响的动力学，已有实验保持其原始配置。
+diff --git a/src/unisim/backend/isaacsim/backend.py b/src/unisim/backend/isaacsim/backend.py
+index 2b3077e..5af30a8 100644
+--- a/src/unisim/backend/isaacsim/backend.py
++++ b/src/unisim/backend/isaacsim/backend.py
+@@ -119,6 +119,7 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+         render_mode: str | None = None,
+         render_width: int = 1280,
+         render_height: int = 720,
++        external_forces_every_iteration: bool | None = None,
+         solver_position_iteration_count: int | None = None,
+         solver_velocity_iteration_count: int | None = None,
+         bounce_threshold_velocity: float | None = None,
+@@ -135,6 +136,7 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+                 raise ValueError(f"{name} must be a positive integer, got {value!r}")
+         # Validation is fail-closed at construction, before any worker spawn.
+         self._physx_solver = PhysxSolverConfig(
++            external_forces_every_iteration=external_forces_every_iteration,
+             solver_position_iteration_count=solver_position_iteration_count,
+             solver_velocity_iteration_count=solver_velocity_iteration_count,
+             bounce_threshold_velocity=bounce_threshold_velocity,
+diff --git a/src/unisim/backend/isaacsim/physx_solver.py b/src/unisim/backend/isaacsim/physx_solver.py
+index abe7b6f..25a6f6d 100644
+--- a/src/unisim/backend/isaacsim/physx_solver.py
++++ b/src/unisim/backend/isaacsim/physx_solver.py
+@@ -26,6 +26,7 @@ from typing import Any
+ 
+ import numpy as np
+ 
++EXTERNAL_FORCES_EVERY_ITERATION_FIELD = "external_forces_every_iteration"
+ SOLVER_POSITION_ITERATION_FIELD = "solver_position_iteration_count"
+ SOLVER_VELOCITY_ITERATION_FIELD = "solver_velocity_iteration_count"
+ BOUNCE_THRESHOLD_FIELD = "bounce_threshold_velocity"
+@@ -54,6 +55,7 @@ PHYSX_SOLVER_FIELDS = (
+     PHYSX_SOLVER_ITERATION_FIELDS
+     + PHYSX_SOLVER_FLOAT_FIELDS
+     + PHYSX_SOLVER_GPU_BUFFER_FIELDS
++    + (EXTERNAL_FORCES_EVERY_ITERATION_FIELD,)
+ )
+ # The GPU buffer capacities are PhysX carb settings flattened into the
+ # simulation parameters, not USD attributes; the worker reports the authored
+@@ -100,7 +102,13 @@ class PhysxSolverConfig:
+     gpu_max_rigid_contact_count: int | None = None
+     gpu_max_rigid_patch_count: int | None = None
+ 
++    external_forces_every_iteration: bool | None = None
++
+     def __post_init__(self) -> None:
++        if self.external_forces_every_iteration is not None and not isinstance(
++            self.external_forces_every_iteration, bool
++        ):
++            raise TypeError("external_forces_every_iteration must be a bool")
+         if self.solver_position_iteration_count is not None:
+             object.__setattr__(
+                 self,
+@@ -219,6 +227,8 @@ class PhysxSolverConfig:
+ 
+ def solver_value_matches(field: str, requested: Any, reported: Any) -> bool:
+     """Strict host comparison; only the engine's float32 storage is tolerated."""
++    if field == EXTERNAL_FORCES_EVERY_ITERATION_FIELD:
++        return isinstance(reported, bool) and reported is requested
+     if field in PHYSX_SOLVER_INT_FIELDS:
+         return (
+             not isinstance(reported, bool)
+@@ -262,6 +272,18 @@ def build_isaaclab_physx_cfg(sim_utils: Any, config: PhysxSolverConfig) -> Any:
+     return sim_utils.PhysxCfg(**kwargs)
+ 
+ 
++def apply_external_forces_every_iteration(stage: Any, enabled: bool) -> None:
++    """Set the native TGS force-application option before scene initialization."""
++    from pxr import PhysxSchema  # type: ignore[import-not-found]
++
++    scenes = [prim for prim in stage.Traverse() if prim.HasAPI(PhysxSchema.PhysxSceneAPI)]
++    if len(scenes) != 1:
++        raise RuntimeError("isaacsim expected exactly one PhysxSceneAPI")
++    PhysxSchema.PhysxSceneAPI(scenes[0]).CreateEnableExternalForcesEveryIterationAttr().Set(
++        enabled
++    )
++
++
+ def apply_collision_offsets(
+     stage: Any,
+     *,
+@@ -366,6 +388,7 @@ def read_engine_solver_values(
+     include_contact_offset: bool,
+     include_rest_offset: bool = False,
+     include_max_depenetration_velocity: bool = False,
++    include_external_forces_every_iteration: bool = False,
+ ) -> dict[str, Any]:
+     """Read the applied solver settings back from the USD stage (worker-side only)."""
+     from pxr import PhysxSchema  # type: ignore[import-not-found]
+@@ -389,6 +412,11 @@ def read_engine_solver_values(
+         ),
+         BOUNCE_THRESHOLD_FIELD: float(scene_api.GetBounceThresholdAttr().Get()),
+     }
++    if include_external_forces_every_iteration:
++        value = scene_api.GetEnableExternalForcesEveryIterationAttr().Get()
++        if not isinstance(value, bool):
++            raise RuntimeError("isaacsim external-forces option has no boolean readback")
++        result[EXTERNAL_FORCES_EVERY_ITERATION_FIELD] = value
+     if include_contact_offset:
+         result[CONTACT_OFFSET_FIELD] = _authored_offset_values(
+             stage,
+diff --git a/src/unisim/backend/isaacsim/scene_worker.py b/src/unisim/backend/isaacsim/scene_worker.py
+index c183891..b2881cd 100644
+--- a/src/unisim/backend/isaacsim/scene_worker.py
++++ b/src/unisim/backend/isaacsim/scene_worker.py
+@@ -21,6 +21,7 @@ import numpy as np
+ from unisim.backend.isaacsim.physx_solver import (
+     PHYSX_SOLVER_AUTHORED_FIELDS,
+     PhysxSolverConfig,
++    apply_external_forces_every_iteration,
+     apply_max_depenetration_velocity,
+     build_isaaclab_physx_cfg,
+     read_engine_solver_values,
+@@ -238,6 +239,7 @@ def _role_usd_request(
+             # Resolved per-entity request; cache identity tracks it exactly.
+             "disable_gravity": bool(entry["gravity_disabled"]),
+             "require_native_body_paths": require_bodies,
++            "contact_reporter": require_bodies,
+             # Entity-level solver offsets are baked into the role artifact;
+             # the cache identity tracks them exactly.
+             "contact_offset": contact_offset,
+@@ -826,6 +828,10 @@ def _bake(
+             PhysxSchema.PhysxRigidBodyAPI.Apply(prim).CreateDisableGravityAttr().Set(
+                 bool(entry["gravity_disabled"])
+             )
++            if require_bodies:
++                # Both IsaacLab pair sensors and PhysX body-net views require
++                # reporting on the native rigid body before simulation starts.
++                PhysxSchema.PhysxContactReportAPI.Apply(prim).CreateThresholdAttr().Set(0.0)
+         if prim.HasAPI(UsdPhysics.CollisionAPI):
+             UsdPhysics.CollisionAPI(prim).CreateCollisionEnabledAttr().Set(
+                 bool(entry["collision_enabled"])
+@@ -1924,6 +1930,10 @@ class SceneWorkerContext:
+             apply_max_depenetration_velocity(
+                 self.sim.stage, self.physx_solver.max_depenetration_velocity
+             )
++        if self.physx_solver.external_forces_every_iteration is not None:
++            apply_external_forces_every_iteration(
++                self.sim.stage, self.physx_solver.external_forces_every_iteration
++            )
+         telemetry.mark("collision_offsets")
+         self.sim.reset()
+         for entity, asset in zip(self.layout.entities, self.assets):
+@@ -3265,6 +3275,9 @@ class SceneWorkerContext:
+             solver_readback = (
+                 read_engine_solver_values(
+                     self.sim.stage,
++                    include_external_forces_every_iteration=(
++                        self.physx_solver.external_forces_every_iteration is not None
++                    ),
+                     include_contact_offset=self.physx_solver.contact_offset is not None,
+                     include_rest_offset=self.physx_solver.rest_offset is not None,
+                     include_max_depenetration_velocity=(
+diff --git a/src/unisim/factory.py b/src/unisim/factory.py
+index 679f6a9..f16f656 100644
+--- a/src/unisim/factory.py
++++ b/src/unisim/factory.py
+@@ -175,6 +175,9 @@ def _create_backend(
+     isaacsim_render_mode = kwargs.pop("isaacsim_render_mode", None)
+     isaacsim_render_width = kwargs.pop("isaacsim_render_width", 1280)
+     isaacsim_render_height = kwargs.pop("isaacsim_render_height", 720)
++    isaacsim_external_forces_every_iteration = kwargs.pop(
++        "isaacsim_external_forces_every_iteration", None
++    )
+     isaacsim_solver_position_iteration_count = kwargs.pop(
+         "isaacsim_solver_position_iteration_count", None
+     )
+@@ -405,6 +408,8 @@ def _create_backend(
+         kwargs["render_height"] = (
+             isaacsim_render_height if direct_render_height is None else direct_render_height
+         )
++        if isaacsim_external_forces_every_iteration is not None:
++            kwargs["external_forces_every_iteration"] = isaacsim_external_forces_every_iteration
+         if isaacsim_solver_position_iteration_count is not None:
+             kwargs["solver_position_iteration_count"] = (
+                 isaacsim_solver_position_iteration_count
+diff --git a/tests/adapters/isaacsim/test_physx_solver.py b/tests/adapters/isaacsim/test_physx_solver.py
+index fe51fd9..5da9ed5 100644
+--- a/tests/adapters/isaacsim/test_physx_solver.py
++++ b/tests/adapters/isaacsim/test_physx_solver.py
+@@ -15,6 +15,7 @@ from unisim.backend.isaacsim.physx_solver import (
+     PHYSX_SOLVER_FIELDS,
+     PhysxSolverConfig,
+     apply_collision_offsets,
++    apply_external_forces_every_iteration,
+     apply_max_depenetration_velocity,
+     build_isaaclab_physx_cfg,
+     read_engine_solver_values,
+@@ -59,6 +60,7 @@ def test_valid_values_normalize():
+         max_depenetration_velocity=1000,
+         gpu_max_rigid_contact_count=2**24,
+         gpu_max_rigid_patch_count=2**23,
++        external_forces_every_iteration=True,
+     )
+     assert config.configured_fields() == PHYSX_SOLVER_FIELDS
+     assert config.to_payload() == {
+@@ -70,6 +72,7 @@ def test_valid_values_normalize():
+         "max_depenetration_velocity": 1000.0,
+         "gpu_max_rigid_contact_count": 16777216,
+         "gpu_max_rigid_patch_count": 8388608,
++        "external_forces_every_iteration": True,
+     }
+ 
+ 
+@@ -524,6 +527,15 @@ def _fake_pxr():
+         def GetMaxVelocityIterationCountAttr(self):  # noqa: N802 - mirrors the USD API
+             return self._attr("max_velocity_iteration_count")
+ 
++        def CreateEnableExternalForcesEveryIterationAttr(self):  # noqa: N802
++            return _FakeAttr(
++                lambda: self._prim.scene_values.get("external_forces_every_iteration"),
++                lambda value: self._prim.scene_values.update(external_forces_every_iteration=value),
++            )
++
++        def GetEnableExternalForcesEveryIterationAttr(self):  # noqa: N802
++            return self.CreateEnableExternalForcesEveryIterationAttr()
++
+         def GetBounceThresholdAttr(self):  # noqa: N802 - mirrors the USD API
+             return self._attr("bounce_threshold")
+ 
+@@ -653,3 +665,50 @@ def test_read_back_rejects_missing_physx_rigid_body_api(monkeypatch):
+         read_engine_solver_values(
+             stage, include_contact_offset=False, include_max_depenetration_velocity=True
+         )
++
++
++@pytest.mark.parametrize("enabled", [False, True])
++def test_external_force_option_roundtrip(monkeypatch, enabled):
++    config = PhysxSolverConfig(external_forces_every_iteration=enabled)
++    assert PhysxSolverConfig.from_payload(config.to_payload()) == config
++    _pxr, stage, _shapes, _bodies = _fake_stage(monkeypatch)
++    apply_external_forces_every_iteration(stage, enabled)
++    values = read_engine_solver_values(
++        stage, include_contact_offset=False, include_external_forces_every_iteration=True
++    )
++    assert values["external_forces_every_iteration"] is enabled
++    _backend(config)._validate_solver_readback(_meta(values, ["external_forces_every_iteration"]))
++    values["external_forces_every_iteration"] = not enabled
++    with pytest.raises(IsaacSimWorkerError):
++        _backend(config)._validate_solver_readback(
++            _meta(values, ["external_forces_every_iteration"])
++        )
++
++
++@pytest.mark.parametrize("bad", [0, 1, "true", float("nan")])
++def test_external_force_option_rejects_non_boolean(bad):
++    with pytest.raises(TypeError):
++        PhysxSolverConfig.from_payload({"external_forces_every_iteration": bad})
++    assert not solver_value_matches("external_forces_every_iteration", True, bad)
++
++
++def test_external_force_option_missing_scene_fails(monkeypatch):
++    _fake_stage(monkeypatch)
++    with pytest.raises(RuntimeError, match="exactly one"):
++        apply_external_forces_every_iteration(SimpleNamespace(Traverse=lambda: []), True)
++
++
++@pytest.mark.parametrize("enabled", [False, True])
++def test_factory_forwards_external_force_option(monkeypatch, enabled):
++    recorded = {}
++
++    class Recorder:
++        def __init__(self, *args, **kwargs):
++            recorded.update(kwargs)
++
++    monkeypatch.setattr("unisim.backend.isaacsim.backend.IsaacSimBackend", Recorder)
++    create_backend(
++        "isaacsim", None, 1, 0.001, worker_command=["true"],
++        isaacsim_external_forces_every_iteration=enabled,
++    )
++    assert recorded["external_forces_every_iteration"] is enabled

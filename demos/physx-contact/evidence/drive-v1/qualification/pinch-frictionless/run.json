@@ -1,0 +1,80 @@
+{
+  "case": {
+    "name": "frictionless",
+    "mass": 0.2,
+    "friction": 0.0,
+    "should_hold": false
+  },
+  "limits": {
+    "penetration_m": 0.001,
+    "hold_drift_m": 0.001,
+    "hold_speed_m_s": 0.005,
+    "normal_load_relative_error": 0.05,
+    "minimum_hold_normal_force_n": 0.1,
+    "minimum_drop_m": 0.05,
+    "released_force_n": 0.01,
+    "freefall_acceleration_relative_error": 0.02,
+    "freefall_velocity_fit_error_m_s": 0.01
+  },
+  "source_sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+  "adapter_source_sha256": "df57b4022ce017a73f8d8f4808549dd7bc22a7e9c6e86d1f848d69765a11e6b2",
+  "unisim_version": "1.7.10",
+  "unisim_install_origin": "{\"url\":\"file:///home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-drive\",\"dir_info\":{}}",
+  "protocol": "ideal-force-prismatic-box-v2",
+  "status": "completed",
+  "geometry": "analytic boxes; not SDF, cylinder or robot qualification",
+  "contact_measurement": "world-frame normal forces only; tangential force not observed",
+  "worker": {
+    "python": "3.11.14 (main, Jan 13 2026, 17:35:07) [Clang 21.1.4 ]",
+    "packages": {
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "isaaclab": "0.47.2",
+      "torch": "2.7.0+cu128"
+    }
+  },
+  "body_mass_readback": [
+    [
+      0.0,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.20000000298023224
+    ]
+  ],
+  "geom_friction_readback": [
+    [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "step_and_observation_seconds": 12.812532842974178,
+  "source_unchanged": true,
+  "adapter_unchanged": true,
+  "artifact_sha256": {
+    "capabilities.json": "b70b2a870672eca49d5cb37025c9bca9d10bf0de11c374ef86ec84c067abf0bc",
+    "unisim-scene-worker.py": "df57b4022ce017a73f8d8f4808549dd7bc22a7e9c6e86d1f848d69765a11e6b2",
+    "source.py": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+    "layout.json": "94395c6e5c688794ffd4041ff482b0020e01bc43e1eb6900e6338d25a8b0a7b7",
+    "states.npz": "965cc009464ddf079fb8b5233d52f5a3de4207a700f550398dc012a1cf8ce9f4",
+    "import-report.json": "607af4a6b6b3df3bbe6b200fefb76c7a90adf7405d5b4d1f2d77a22d31a4ef7e",
+    "scene/object.xml": "7179a0d4f844fb48a06bbf6d1f1dfd5bee9feec089316a4fbc7deab967dd87ac",
+    "scene/right.xml": "47be572fdaed229d352437fdf678c94a253a8d885618faba757eb713d6bc490a",
+    "scene/sensors.xml": "7917bdef0eccb77a547c1c11963110d445c41c7fc17f1f76840d197d7bb1b5cd",
+    "scene/left.xml": "120816ac8f1e1558f0dfc38cb517c9df6c922f2c7a8e232b8744644111aeb0a0"
+  }
+}

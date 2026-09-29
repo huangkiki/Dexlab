@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "nq": 1,
+  "nv": 1,
+  "nu": 1,
+  "nbody": 3,
+  "ngeom": 1,
+  "entities": [
+    {
+      "name": "fixture",
+      "kind": "articulation",
+      "root_mode": "fixed",
+      "root_body": "base",
+      "body_names": [
+        "base",
+        "pad"
+      ],
+      "body_ids": [
+        1,
+        2
+      ],
+      "body_parent_names": [
+        null,
+        "base"
+      ],
+      "joints": [
+        {
+          "name": "slide",
+          "kind": "slide",
+          "body_name": "pad",
+          "qpos_indices": [
+            0
+          ],
+          "qvel_indices": [
+            0
+          ]
+        }
+      ],
+      "actuator_names": [
+        "drive"
+      ],
+      "actuator_joint_names": [
+        "slide"
+      ],
+      "actuator_indices": [
+        0
+      ],
+      "root_qpos_indices": [],
+      "root_qvel_indices": [],
+      "geoms": [
+        {
+          "name": "surface",
+          "body_name": "pad"
+        }
+      ]
+    }
+  ]
+}
