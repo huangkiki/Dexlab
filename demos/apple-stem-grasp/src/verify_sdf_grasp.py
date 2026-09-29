@@ -29,7 +29,10 @@ def relative_motion(apple, wrist):
     }
 
 
-def verify_grasp(directory):
+def verify_grasp(directory, *, expected_mass=0.2):
+    if not np.isfinite(expected_mass) or expected_mass <= 0:
+        raise ValueError("Expected mass must be finite and positive")
+    weight = expected_mass * 9.81
     directory = Path(directory)
     engine = json.loads((directory / "engine.json").read_text())
     with np.load(directory / "sdf-dynamics.npz") as archive:
@@ -37,7 +40,9 @@ def verify_grasp(directory):
     with np.load(directory / "sdf-contacts.npz") as archive:
         contacts = archive["contacts"]
     if engine["backend"] == "mujoco":
-        model = mujoco.MjModel.from_binary_path(str(directory / "model.mjb"))
+        from dexlab.mujoco_artifacts import load_model
+
+        model = load_model(directory)
         identities = {
             "official_wheel": engine.get("wheel_record_matches") is True
             and engine.get("engine_patch") is None,
@@ -51,7 +56,9 @@ def verify_grasp(directory):
                 and model.neq == 0
                 and model.nmocap == 0
             ),
-            "original_apple_mass": bool(np.isclose(model.body("apple").mass[0], 0.2)),
+            "original_apple_mass": bool(
+                np.isclose(model.body("apple").mass[0], expected_mass)
+            ),
             "no_apple_actuation": bool(
                 all(
                     int(j) != model.joint("apple_free").id
@@ -66,7 +73,7 @@ def verify_grasp(directory):
             "native_sdf_apple_and_pads": engine.get("grasp_collider_types")
             == {n: "SDF" for n in ("apple", "r_thumb_pad", "r_index_finger_pad")},
             "free_apple_no_attachment": engine.get("apple_dynamic") is True,
-            "original_apple_mass": bool(np.isclose(engine["mass_kg"], 0.2)),
+            "original_apple_mass": bool(np.isclose(engine["mass_kg"], expected_mass)),
         }
         body_lookup = dict(enumerate(engine["body_names"]))
     dt = float(engine["dt"])
@@ -104,7 +111,7 @@ def verify_grasp(directory):
         stats.update(relative_motion(log["apple_pose"][hold], log["wrist_pose"][hold]))
         stats["minimum_clearance_mm"] = float(log["clearance"][hold].min() * 1000)
         stats["mean_hand_support_weight_ratio"] = float(
-            log["hand"][hold, 2].mean() / 1.962
+            log["hand"][hold, 2].mean() / weight
         )
         checks.update(
             lifted=stats["minimum_clearance_mm"] > 70,
@@ -172,11 +179,11 @@ def verify_grasp(directory):
         stats["maximum_off_stem_contact_n"] = float(np.max(sums["off_stem"][hold]))
     residual = (
         log["total"]
-        - [0, 0, 1.962]
-        - 0.2 * (log["velocity"] - log["velocity_before"]) / dt
+        - [0, 0, weight]
+        - expected_mass * (log["velocity"] - log["velocity_before"]) / dt
     )
     stats["maximum_momentum_residual_weight_ratio"] = float(
-        np.linalg.norm(residual, axis=1).max() / 1.962
+        np.linalg.norm(residual, axis=1).max() / weight
     )
     checks["momentum_balance"] = stats["maximum_momentum_residual_weight_ratio"] < 0.05
     checks = {k: bool(v) for k, v in checks.items()}
@@ -193,8 +200,9 @@ def verify_grasp(directory):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
+    parser.add_argument("--expected-mass-kg", type=float, default=0.2)
     args = parser.parse_args()
-    result = verify_grasp(args.run)
+    result = verify_grasp(args.run, expected_mass=args.expected_mass_kg)
     (args.run / "summary.json").write_text(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2))
     if not result["passed"]:

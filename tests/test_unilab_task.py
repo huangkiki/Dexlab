@@ -92,6 +92,19 @@ class UniLabTaskTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "timestep overrides"):
             AppleStemEnv(AppleStemCfg(sim_dt=0.001, ctrl_dt=0.001))
 
+    def test_explicit_benchmark_step_is_recorded(self):
+        env = AppleStemEnv(
+            AppleStemCfg(output=self.tmp.name, parameters={"timestep": 0.001})
+        )
+        self.addCleanup(env.close)
+        self.assertEqual(env.cfg.sim_dt, 0.001)
+        env.reset()
+        import json
+
+        manifest = json.loads((Path(self.tmp.name) / "unilab.json").read_text())
+        self.assertEqual(manifest["parameters"]["timestep"], 0.001)
+        self.assertEqual(manifest["dt_s"], 0.001)
+
     def test_native_failure_releases_scene(self):
         def failing(args):
             Path(args.output).mkdir(parents=True, exist_ok=True)

@@ -116,6 +116,15 @@ def check(worktree):
     run(
         python,
         "-m",
+        "compileall",
+        "-q",
+        "src/dexlab",
+        "demos/apple-stem-grasp/src",
+        cwd=worktree,
+    )
+    run(
+        python,
+        "-m",
         "unittest",
         "discover",
         "-s",
