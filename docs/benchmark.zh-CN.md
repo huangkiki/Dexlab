@@ -100,3 +100,5 @@ CLI 返回 0 表示所有实验完成评分，**不表示每次抓取成功**。
 ## 方法依据
 
 [ContactBench](https://arxiv.org/abs/2304.06372) 区分接触模型与数值近似；[SimBenchmark](https://leggedrobotics.github.io/SimBenchmark/) 比较速度—误差曲线；[GAUGE](https://internrobotics.github.io/GAUGE/) 提供实测参照思路。本协议的场景范围与验收阈值由 DexLab 声明，不是这些项目提供的硬件结论。
+
+法向静态匹配后的[瞬态开发验证](../demos/contact-benchmark/TRANSIENT_RESPONSE.zh-CN.md)固定 K、D 与载荷历史，并比较三个步长。12 项候选中 6 项通过综合检查，所有失败保留；这些确定性检查不应当作随机成功率。

@@ -4,6 +4,9 @@ import argparse
 import json
 from pathlib import Path
 
+import numpy as np
+
+from dexlab import contact_transient
 from dexlab.contact_indent_run import run, verify
 from dexlab.contact_load import LIMITS, LoadCase
 from dexlab.physx_baseline import digest, write_json
@@ -13,6 +16,9 @@ def evaluate(root, suite):
     plan = json.loads(suite.read_text())
     if plan["protocol"] != "normal-load" or plan["target"] != LIMITS:
         raise ValueError("Unexpected protocol or changed target limits")
+    transient = "transient_target" in plan
+    if transient and plan["transient_target"] != contact_transient.TARGET:
+        raise ValueError("Changed transient target")
     ids = [job["id"] for job in plan["jobs"]]
     if len(ids) != len(set(ids)) or any(
         Path(i).name != i or i in (".", "..") for i in ids
@@ -20,6 +26,10 @@ def evaluate(root, suite):
         raise ValueError("Job IDs must be unique directory basenames")
     root.mkdir(parents=True, exist_ok=False)
     (root / "suite.json").write_bytes(suite.read_bytes())
+    if transient:
+        (root / "transient-scorer.py").write_bytes(
+            Path(contact_transient.__file__).read_bytes()
+        )
     rows = []
     for job in plan["jobs"]:
         output = root / "raw" / job["id"]
@@ -38,6 +48,11 @@ def evaluate(root, suite):
                 "result": result,
             }
         )
+        if transient:
+            with np.load(output / "states.npz", allow_pickle=False) as data:
+                rows[-1]["transient"] = contact_transient.score(
+                    LoadCase(**job["case"]), data
+                )
         report = {
             "schema_version": 1,
             "scope": plan["scope"],
@@ -46,6 +61,14 @@ def evaluate(root, suite):
             "results": rows,
             "suite_sha256": digest(suite),
         }
+        if transient:
+            report.update(
+                transient_scorer_sha256=digest(root / "transient-scorer.py"),
+                transient_passed=sum(r["transient"]["passed"] for r in rows),
+                combined_passed=sum(
+                    r["result"]["passed"] and r["transient"]["passed"] for r in rows
+                ),
+            )
         write_json(root / "report.json", report)
         print(job["id"], result["passed"], flush=True)
     return report
@@ -56,6 +79,13 @@ def rescore(root):
     plan = json.loads((root / "suite.json").read_text())
     if digest(root / "suite.json") != report["suite_sha256"]:
         raise ValueError("Suite hash mismatch")
+    transient = "transient_target" in plan
+    if transient and (
+        plan["transient_target"] != contact_transient.TARGET
+        or digest(root / "transient-scorer.py") != report["transient_scorer_sha256"]
+        or digest(Path(contact_transient.__file__)) != report["transient_scorer_sha256"]
+    ):
+        raise ValueError("Transient target or scorer changed")
     if [r["id"] for r in report["results"]] != [j["id"] for j in plan["jobs"]]:
         raise ValueError("Incomplete or reordered outcomes")
     for row, job in zip(report["results"], plan["jobs"], strict=True):
@@ -75,14 +105,35 @@ def rescore(root):
             raise ValueError("Run differs from declared native profile")
         if verify(folder) != row["result"]:
             raise ValueError(f"Outcome differs: {row['id']}")
+        if transient:
+            with np.load(folder / "states.npz", allow_pickle=False) as data:
+                if (
+                    contact_transient.score(LoadCase(**job["case"]), data)
+                    != row["transient"]
+                ):
+                    raise ValueError(f"Transient outcome differs: {row['id']}")
     passed = sum(r["result"]["passed"] for r in report["results"])
     if len(report["results"]) != report["completed"] or passed != report["passed"]:
         raise ValueError("Incorrect aggregate counts")
-    return {
+    result = {
         "outcomes_reproduced": len(report["results"]),
         "physics_passed": passed,
         "physics_failed": len(report["results"]) - passed,
     }
+    if transient:
+        counts = {
+            "transient_passed": sum(
+                r["transient"]["passed"] for r in report["results"]
+            ),
+            "combined_passed": sum(
+                r["result"]["passed"] and r["transient"]["passed"]
+                for r in report["results"]
+            ),
+        }
+        if any(report[key] != value for key, value in counts.items()):
+            raise ValueError("Incorrect transient counts")
+        result.update(counts)
+    return result
 
 
 if __name__ == "__main__":

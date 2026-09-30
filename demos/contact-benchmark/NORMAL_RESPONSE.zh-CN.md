@@ -49,3 +49,5 @@ MuJoCo 的直接格式指定约束加速度参考，受阻抗与惯量影响，�
 单次力加载使用 `python -m dexlab.contact_indent_run --protocol normal-load --engine mujoco --normal-parameters profile.json --output runs/normal-one`，参数文件采用表中原生字段名。原有压入/滑动默认配置保留。
 
 发布证据包包含精确矩阵、全部状态数组及接触力账目、原生与源码快照、记录哈希、离线复核和绘图脚本。`verify` 返回零表示全部既有结果复现，**包括物理失败**；运行错误单独识别。实验与苹果批次共享机器，耗时不作为隔离性能测量。
+
+当前安装使用 `UniSim-physx-precision`：[后续瞬态实验](TRANSIENT_RESPONSE.zh-CN.md)修正惯量导出舍入，物理阈值不变。v0.13 历史归档保持不变；复跑原适配器请使用 v0.13.0 tag。新运行可能通过惯量检查，但稳定性失败仍保留。

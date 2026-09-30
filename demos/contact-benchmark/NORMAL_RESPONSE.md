@@ -49,3 +49,5 @@ Use the repository environment; PhysX also needs `scripts/setup_physx.sh` and it
 An individual force protocol uses `python -m dexlab.contact_indent_run --protocol normal-load --engine mujoco --normal-parameters profile.json --output runs/normal-one`. The profile uses the native field names in the table. Existing indentation/sliding defaults are retained.
 
 The release evidence archive contains the exact suite, all raw arrays and contact ledgers, native and source snapshots, receipt hashes, offline scorer and plot script. `verify` exits zero only when all published outcomes are reproduced, **including physical failures**. Runtime failures remain distinct. Runs shared a machine with the apple batch, so timings are not isolated performance measurements.
+
+Current setup uses `UniSim-physx-precision`: the follow-up [transient study](TRANSIENT_RESPONSE.md) corrects inertial export rounding without changing physics tolerances. The v0.13 historical archive remains immutable; use tag v0.13.0 to rerun its original adapter. New runs may pass the inertia check while retaining the settling failure.

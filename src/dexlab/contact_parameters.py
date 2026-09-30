@@ -96,8 +96,9 @@ def _matches(actual, expected):
         np.asarray(actual, dtype=float),
         np.asarray(expected, dtype=float),
     )
-    # Native PhysX records pass through six-significant-digit MJCF import fields.
-    # This tolerance covers that conversion, not a physical calibration error.
+    # Legacy archives include rounded MJCF values; current inertials retain full
+    # export precision before native float32 conversion. Keep the frozen
+    # tolerance for historical scoring; it is not a material accuracy limit.
     return bool(
         actual.shape == expected.shape
         and np.isfinite(actual).all()
