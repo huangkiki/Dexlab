@@ -2,6 +2,8 @@
 
 [English](contact-details.md) | [简体中文](contact-details.zh-CN.md)
 
+本页保留 v0.9.0 的接触记录与抓取失败。后续通过的实验、可复现入口及对照见 [PhysX SDF 抓梗](apple.zh-CN.md)。
+
 通过显式 UniSim 适配扩展，分别记录原生法向接触与切向摩擦锚点。滑块动量核对通过。OpenArm/Wuji 的受载开发实验**尚未通过连续抓梗验收**，短暂抬起不算成功。
 
 ## 复现接触力核对

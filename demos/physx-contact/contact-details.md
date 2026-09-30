@@ -2,6 +2,8 @@
 
 [English](contact-details.md) | [简体中文](contact-details.zh-CN.md)
 
+This page retains the v0.9.0 force records and failed grasps. See the later [PhysX SDF grasp](apple.md) for the passing case, reproducible runner and controls.
+
 Native normal contacts and tangential friction anchors are now recorded separately through an explicit UniSim adapter extension. A sliding-block momentum check passes. The loaded OpenArm/Wuji development runs **do not pass continuous apple-grasp acceptance**; transient lifting is not success.
 
 ## Reproduce the force check

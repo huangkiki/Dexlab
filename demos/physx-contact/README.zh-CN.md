@@ -3,6 +3,8 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 [Issue #5](https://github.com/huangkiki/Dexlab/issues/5) 的开发实现。
+
+完整机器人实验见 [PhysX SDF 抓梗](apple.zh-CN.md)：连续保持与独立表面检查通过，下文保留基础接触协议。
 运行器通过 UniSim 1.7.10 的公开实体接口调用独立的 Isaac Sim 5.1／IsaacLab 2.3.0 环境。使用下述明确披露的 UniSim 接触报告修复后，三项原生基础接触实验通过独立验收，PhysX 本身未修改。这些基础接触实验尚不能验收机器人抓取、SDF–SDF 接触或布料；受载直线关节由独立的[驱动协议](drive.zh-CN.md)验收。
 
 ## 安装与运行
