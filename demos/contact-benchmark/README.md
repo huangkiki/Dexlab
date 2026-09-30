@@ -6,6 +6,8 @@ Three UniLab tasks measure planar sliding, normal loading/unloading, and two-pad
 
 **These are uncalibrated development experiments, not held-out results or engine-accuracy rankings.** Failures are retained. Response calibration, frozen evaluation and isolated speed–error studies remain in [Issue #10](https://github.com/huangkiki/Dexlab/issues/10).
 
+Normal response now has a separate [force-loading protocol and transfer report](NORMAL_RESPONSE.md): 17 completed development runs, 11 passes and 6 retained failures. Static response matching and settling are scored separately.
+
 ![Normal response, drift, load onset, temporal and spatial refinement](media/development-v2.png)
 
 ## Experiments and outcomes

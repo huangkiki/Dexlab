@@ -9,6 +9,69 @@ import json
 import numpy as np
 
 
+def normal_parameters(engine, overrides=None):
+    """Resolve explicit native parameters; their numerical values are not portable."""
+    defaults = {
+        "mujoco": {"solref": [0.005, 1.0], "solimp": [0.95, 0.99, 0.001, 0.5, 2.0]},
+        "superdex": {
+            "penalty_coefficient": 1e9,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 0.00005,
+            "normal_viscous_damping_coefficient": 0.0,
+        },
+        "physx": {"compliant_contact_stiffness": 0.0, "compliant_contact_damping": 0.0},
+    }
+    if engine not in defaults:
+        raise ValueError(f"Unknown engine: {engine}")
+    overrides = {} if overrides is None else overrides
+    if (
+        not isinstance(overrides, dict)
+        or not overrides.keys() <= defaults[engine].keys()
+    ):
+        raise ValueError("Unknown normal contact parameter")
+    values = defaults[engine] | overrides
+    for name, value in values.items():
+        array = np.asarray(value)
+        if array.dtype.kind not in "fiu" or not np.isfinite(array).all():
+            raise ValueError(f"Expected finite numeric {name}")
+    if engine == "mujoco":
+        ref, imp = np.asarray(values["solref"]), np.asarray(values["solimp"])
+        if ref.shape != (2,) or imp.shape != (5,):
+            raise ValueError("Expected solref[2] and solimp[5]")
+        if not (np.all(ref > 0) or (ref[0] < 0 and ref[1] <= 0)):
+            raise ValueError("Use positive time constants or negative direct solref")
+        if not (
+            0 < imp[0] <= imp[1] < 1 and imp[2] > 0 and 0 < imp[3] < 1 and imp[4] >= 1
+        ):
+            raise ValueError("Invalid impedance curve")
+        return {k: np.asarray(v, dtype=float).tolist() for k, v in values.items()}
+    if any(np.shape(v) or float(v) < 0 for v in values.values()):
+        raise ValueError("Expected nonnegative scalar native parameters")
+    if engine == "superdex" and values["penalty_coefficient"] <= 0:
+        raise ValueError("Penalty coefficient must be positive")
+    if engine == "physx" and overrides:
+        if overrides.keys() != defaults[engine].keys():
+            raise ValueError("Specify both compliant stiffness and damping")
+        if (
+            values["compliant_contact_stiffness"] == 0
+            and values["compliant_contact_damping"] != 0
+        ):
+            raise ValueError("Rigid contact cannot have compliant damping")
+    return {k: float(v) for k, v in values.items()}
+
+
+def normal_readback_matches(engine, declared, native):
+    """Validate the normal profile independently from trace response matching."""
+    try:
+        expected = normal_parameters(engine, declared)
+        actual = native["normal_parameters_readback"]
+        return actual.keys() == expected.keys() and all(
+            _matches(actual[k], v) for k, v in expected.items()
+        )
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
 def required_native_files(engine, *, cylinder=False):
     if engine == "mujoco":
         return {"model.xml"}
