@@ -64,3 +64,5 @@ python3 scripts/autoresearch.py submit 3 --summary-file /path/to/review.md \
 这是可验证的开发工作流，不能保证无人干预完成科学研究；缺少的真机测量不能编造。研究方向、依赖和进度以 [Issues](https://github.com/huangkiki/Dexlab/issues) 为准，工具能力见[模型审查](model-audit.zh-CN.md)和[抖动诊断](jitter.zh-CN.md)。
 
 [参数来源与研究方法](research-focus.zh-CN.md) · [返回 DexLab](../README.md)
+
+[远端资格验证与归档协议](remote-research.zh-CN.md)

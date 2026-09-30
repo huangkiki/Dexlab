@@ -1,0 +1,58 @@
+# 远端研究与可核验归档
+
+[English](remote-research.md) | [简体中文](remote-research.zh-CN.md)
+
+资格验证把精确源码树、资产清单、安装环境和官方引擎哈希绑定到完整运行记录，证明该环境能够执行指定工作负载。它不代表引擎性能排名、全新机器安装验证，也不能据此直接开六路并发。
+
+## 执行与测量
+
+使用独立远端工作树及其 editable 环境。`autoresearch check` 每次生成新的输出目录，保留历史记录。`submit --check-remote "$DEXLAB_CHECKOUT" --remote-state "$REMOTE_STATE"` 为整个远端验收加锁，分别记录仿真命令和独立评分命令的资源开销，并在前后核对源码树。部署信息仅放在私有配置中。
+
+在回执旁保留环境与包清单、源码树、输入哈希、原生库哈希、命令、失败及可用磁盘空间。已有 UniSim 适配补丁继续明确披露；官方 MuJoCo、SuperDex 二进制不变。可以复用不可变的包和资产，但项目 editable 安装必须指向实际验收工作树。
+
+| 测量项 | 计时范围 |
+|---|---|
+| `engine.json: physics_step_seconds` | 已有原生步进计时，不含整个任务的初始化、控制与记录成本 |
+| `runtime-timing.json: preparation_seconds` | 任务初始化，包含 `init_state` 内部准备 |
+| `episode_and_recording_seconds` | 任务步进循环，包含控制器、记录及内嵌评分 |
+| `total_task_seconds` | 初始化至关闭，不含更早的导入和注册准备 |
+| 仿真/评分资源 JSON | GNU time 分别记录每条命令的墙钟时间、用户/系统 CPU、最大子进程 RSS 高水位及退出码 |
+| 互斥回执 | 整条受保护命令；RSS 不是并发进程内存峰值之和 |
+
+这些时间存在包含关系，不能相加。无窗口运行关闭实时渲染，但仍可能构造显示资产。磁盘增长与内存分别测量。先用单任务，根据实际 CPU、内存和磁盘余量再验收更高并发；GPU 数量不能证明这些 CPU 动力学后端会加速。
+
+## 协作式窗口互斥
+
+`scripts/research_guard.py` 使用 Linux `flock` 和持久化进程组标记。受管理的测速、传输、压缩、哈希工作在每台主机共享一个锁。本地控制器应在整个操作期间持锁，包括本地校验；所有远端命令也使用同一个远端锁：
+
+```bash
+python3 scripts/research_guard.py run \
+  --lock "$LOCAL_STATE/window.lock" --kind qualification \
+  --receipt "$LOCAL_STATE/unique-gate.json" -- \
+  python3 scripts/autoresearch.py submit 29 --summary-file "$REVIEW" \
+    --check-remote "$DEXLAB_CHECKOUT" --remote-state "$REMOTE_STATE"
+```
+
+新窗口开始数据哈希或复制之前，先在持有本地锁的条件下，用远端 guard 执行前台 `true` 命令和新回执，排查控制器或 SSH 异常后残留的远端任务。正式测速用 `--kind timing`，窗口内只运行待测命令；准备、传输、压缩、哈希和报告放在窗口外。另行检查其他系统负载。资格验收包含测试和源码哈希，不能包装成隔离后的性能实验。
+
+该队列只有一个控制器。命令须留在受保护的前台进程组，禁止 daemon 化或启动脱离的子进程。锁只管理遵守协议的任务，不隔离其他用户或任意进程。guard 被杀后若子进程仍存活，保留标记，新窗口返回 75；进程组结束后，下一回执记录恢复。不要删除锁文件或手动清除仍活跃的标记。失败命令保留非零退出码和回执；已有回执路径不能复用覆盖。
+
+## 归档已封存的苹果实验
+
+私有 JSON 配置包含 `ssh_alias`、绝对路径 `remote_root`，以及 `archive_policy` 中的 `local_root`、`nice`（15）、`bandwidth_KiB_per_second`（16384）。先挂载并准备归档盘。该配置及原始回执不进入 Git 或 Obsidian 上传内容。
+
+```bash
+.venv/bin/python scripts/archive_run.py archive --config "$PRIVATE_CONFIG" \
+  --checkout "$REMOTE_CHECKOUT_RELATIVE" --source "$REMOTE_RUN_RELATIVE" \
+  --archive-id "$UNIQUE_RUN_ID"
+```
+
+命令持有本地窗口锁，并为远端哈希与 rsync 加锁。只开一路传输，使用空闲 I/O 优先级，关闭 SSH/rsync 压缩。传输前后分别扫描封存源目录，核对所有文件数量、大小和 SHA-256；离线读取模型及状态，不积分仿真；独立重评副本，再次核对读取未修改原始记录。全部通过后才将同级暂存目录改名为正式归档。回执在目录外。科学实验失败仍可正确归档，未完成轨迹不会标成完成。
+
+只有来源完全不变时，才能使用相同归档 ID 恢复。文件变化、额外文件或缺失都会阻止完成，保留源目录和暂存供排查。目录改名与最终回执之间的中断可恢复。任何步骤都不删除远端源数据。
+
+MuJoCo 读取原生模型及保存的 `qpos`；SuperDex 读取 mocap 显示代理及记录位姿，**不是 SuperDex 原生检查点**。外部显示资产按公开哈希清单在内存中重定位，不改写原始证据。复现还需单独保留源码、环境与输入包；仅有运行目录不包含运行时及全部共享资产。
+
+## 验证范围
+
+测试覆盖两种真实进程的抢锁顺序、guard 被杀且子进程存活、命令失败、回执不可覆盖、损坏/缺失/额外文件/软链接拒绝、归档改名中断恢复，以及原生和显示模型的不同读取路径。完整远端资格还要求：双后端原有 14 秒苹果验收通过、明确评分器快照的布料离线重评、真实跨主机回传，以及资源限制测量。只公开脱敏证据。基础设施通过不代表布料穿模已经修复，也不代表真机验证通过。

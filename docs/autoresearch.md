@@ -64,3 +64,5 @@ The current Codex heartbeat checks this thread hourly, stays quiet when state is
 This is a verifiable development workflow, not guaranteed unattended scientific discovery; missing hardware measurements cannot be invented. [Issues](https://github.com/huangkiki/Dexlab/issues) track research scope, dependencies and progress. See the delivered [model audit](model-audit.md) and [jitter diagnostics](jitter.md).
 
 [Parameter provenance and research methods](research-focus.md) · [DexLab](../README.en.md)
+
+[Remote qualification and archive protocol](remote-research.md)
