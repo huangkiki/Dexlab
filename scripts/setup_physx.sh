@@ -95,7 +95,7 @@ uv pip freeze --python "$worker_python" > "$worker_root/requirements-installed.t
 
 # UniSim 1.7.10 omits PhysxContactReportAPI on imported rigid bodies.
 # Build the explicit adapter-only patch, without editing installed engine files.
-unisim_dir=${DEXLAB_UNISIM_SOURCE:-"$worker_root/UniSim-physx-compliance"}
+unisim_dir=${DEXLAB_UNISIM_SOURCE:-"$worker_root/UniSim-physx-precision"}
 adapter_patch="$script_dir/patches/unisim-1.7.10-physx-adapter.patch"
 if [[ ! -e "$unisim_dir" ]]; then
   git init "$unisim_dir"

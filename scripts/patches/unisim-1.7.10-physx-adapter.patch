@@ -1,10 +1,14 @@
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 98bf755..f032730 100644
+index 98bf755..16efb2a 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -1,5 +1,22 @@
+@@ -1,5 +1,26 @@
  # Changelog
  
++## DexLab local worker inertial-precision fix
++
++- Preserve compiled mass, COM and diagonal inertia/frame at float64 round-trip precision in worker MJCF transport. Inferred and full-tensor inertias become explicit diagonal inertials after XML serialization; native SDK precision remains unchanged. This is a local adapter fix, not an engine change or upstream release.
++
 +## DexLab local compliant-contact adapter extension
 +
 +- Add explicit paired stiffness/damping options for native force-based PhysX compliant contact. Author all bound collision materials before reset with average combination; read composed USD values back and reject missing/mixed semantics. Values are per native constraint, not whole-object material moduli. Defaults and official engines are unchanged. This is not an upstream UniSim release.
@@ -25,7 +29,7 @@ index 98bf755..f032730 100644
  ## 1.7.10 - 2026-09-24
  
  - Sped up mapped IsaacSim prototype authoring at catalog scale (1200-variant INIT entity build drops from 134s to 11s; total INIT from 158s to 35s). Two serialized overheads dominated: each per-variant prototype spawn went through IsaacLab's `UsdFileCfg` spawner, whose `check_usd_path_with_timeout` runs an asyncio `omni.client.stat_async` availability probe with a fixed ~0.1s event-loop yield per call (127s of the 157s INIT, at near-zero CPU/GPU utilization), and every spawn ran with the physics change listener attached, so PhysX parsed each transient prototype subtree (~43ms per variant) even though prototypes are removed before physics starts. The worker now authors the same reference arc directly through `isaacsim.core.utils.prims.create_prim` behind a plain `os.path.isfile` guard — every spawned path is a validated cache artifact (manifest + SHA-256) or a fresh copy of one, and every spawner override the worker set was `None` or unconsumed by the from-files spawner — and prototype spawns join the destination copies and the prototype scope removal under the existing single change-listener toggle, so physics only ever parses the final per-environment destinations. Stage-object edits stay outside the copy loop's `Sdf.ChangeBlock` (deferred layer notices break `DefinePrim` recomposition). Authored prims, the composed stage, PhysX view order, and the native instance audit are unchanged.
-@@ -385,3 +402,7 @@
+@@ -385,3 +406,7 @@
  - Bootstrap the `unisim` namespace and `unisim-core` distribution.
  - Add the backend-neutral `SimBackend` contract, fake backend, and conformance helper.
  - Reserve benchmark case/result interfaces without implementing workloads or measurements.
@@ -34,10 +38,10 @@ index 98bf755..f032730 100644
 +
 +- Add opt-in minimum torsional contact radius with fail-closed host/worker validation and native USD readback; defaults and cached roles unchanged. This exposes an official PhysX parameter, not a solver patch.
 diff --git a/docs/en/support-matrix.md b/docs/en/support-matrix.md
-index a88a6b6..1d15213 100644
+index a88a6b6..3b14b95 100644
 --- a/docs/en/support-matrix.md
 +++ b/docs/en/support-matrix.md
-@@ -85,3 +85,29 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
+@@ -85,3 +85,33 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
  DR, playback, body-wrench and fixed-variant capability sources remain their existing instance APIs. The static inventory intentionally leaves those dependent entries unknown; `backend.get_capabilities()` aggregates authoritative instance declarations. Multiple logical entity partitions do not imply arbitrary multi-articulation composition. URDF investigations and unmerged branches are not current support. IsaacSim's legacy reserved zero contact buffer never means a valid contact query or absence of physical contact; mapped scenes serve declared geom-pair `contact data="force" reduce="netforce"` sensors through the dedicated PhysX pair-force slot and wildcard body-net force (`geom2` omitted) plus body-net `data="found"` flags through one batched per-entity PhysX contact view, while legacy model-file scenes fail all contact declarations closed. Isaac worker sensors support gyro reconstruction but reject accelerometers.
  
  The [capability design decision](adr-capabilities.md) defines evidence matching and snapshot lifetime. `available` in the installation table above is never a task compatibility decision.
@@ -67,11 +71,15 @@ index a88a6b6..1d15213 100644
 +### DexLab local compliant contact
 +
 +Explicit `isaacsim_compliant_contact_stiffness` and `isaacsim_compliant_contact_damping` must be provided together and be finite/nonnegative. Zero stiffness disables compliance and requires zero damping. Positive stiffness selects native force-based implicit spring contact (N/m and N s/m per native contact constraint); the adapter fixes stiffness/damping combination to average and disables acceleration-spring semantics. All enabled collision materials must be bound and consistent. Values are authored after cached roles are composed and before reset, then read from composed USD; this is not a direct native material-tensor readback or a measured macroscopic modulus. Defaults remain unchanged. This is a local DexLab adapter extension, not an upstream release.
++
++### DexLab local inertial transport precision
++
++Worker source export writes compiled body mass, COM, diagonal inertia and inertia-frame quaternion with 17 significant digits after `MjSpec.to_xml()`. This avoids its six-digit rounding, including for inferred and full-tensor source inertia. The native engine can still round to its own dtype; no solver or SDK is modified. Geometry, joint and other serialized fields are outside this fix. Native readback remains required.
 diff --git a/docs/zh/support-matrix.md b/docs/zh/support-matrix.md
-index 155b431..0e43ec8 100644
+index 155b431..ebf19f8 100644
 --- a/docs/zh/support-matrix.md
 +++ b/docs/zh/support-matrix.md
-@@ -85,3 +85,29 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
+@@ -85,3 +85,33 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
  DR、播放、body wrench 和 fixed-variant 能力仍由既有实例 API 提供权威信息。静态清单有意将依赖这些来源的项目保留为 unknown；`backend.get_capabilities()` 聚合实例权威声明。多个逻辑实体分区不代表任意多 articulation 组合。URDF 调研和未合并分支不构成当前支持。IsaacSim legacy 路径预留的零接触缓冲区既不代表有效接触查询，也不代表没有物理接触；映射场景把具名 geom-pair `contact data="force" reduce="netforce"` 声明路由到专用 PhysX 碰撞对力槽位，把 wildcard body-net force（省略 `geom2`）与 body-net `data="found"` 标志路由到批量逐 entity PhysX contact view；legacy model-file 场景的一切 contact 声明均快速失败。Isaac worker 的传感器支持 gyro 重建，但拒绝 accelerometer。
  
  [能力设计决策](adr-capabilities.md) 定义证据匹配和快照生命周期。上方安装表中的 `available` 始终不能用于判断任务兼容性。
@@ -101,6 +109,10 @@ index 155b431..0e43ec8 100644
 +### DexLab 本地柔顺接触扩展
 +
 +必须同时指定 `isaacsim_compliant_contact_stiffness` 和 `isaacsim_compliant_contact_damping`，数值有限且非负。零刚度关闭柔顺接触，同时要求零阻尼。正刚度启用原生基于力的隐式弹簧接触（每条原生接触约束的 N/m 与 N s/m）；适配器固定刚度/阻尼组合方式为平均值，关闭加速度弹簧。所有启用碰撞的材料必须绑定且语义一致。配置在缓存角色组合后、reset 前写入，并从组合 USD 读回；这不是原生材料张量的直接读回，也不是测得的宏观材料模量。默认行为保持不变。本扩展属于 DexLab 的适配器修改，不是上游发布。
++
++### DexLab 本地惯量传输精度修复
++
++worker 源文件导出在 `MjSpec.to_xml()` 之后，以 17 位有效数字写入编译后的质量、质心、对角惯量及惯量坐标系四元数，避免六位数序列化舍入；支持推断惯量与源文件完整惯量张量。原生引擎仍会按自身数值类型舍入，没有修改求解器或 SDK。几何、关节及其他序列化字段不在本修复范围内；仍需核对原生读回。
 diff --git a/src/unisim/backend/isaacsim/backend.py b/src/unisim/backend/isaacsim/backend.py
 index 2b3077e..23025d0 100644
 --- a/src/unisim/backend/isaacsim/backend.py
@@ -957,7 +969,7 @@ index 6d971ba..b23d6d7 100644
  
  
 diff --git a/src/unisim/backend/subprocess_ipc/scene_materialization.py b/src/unisim/backend/subprocess_ipc/scene_materialization.py
-index afdf4d1..e7825dc 100644
+index afdf4d1..794db92 100644
 --- a/src/unisim/backend/subprocess_ipc/scene_materialization.py
 +++ b/src/unisim/backend/subprocess_ipc/scene_materialization.py
 @@ -105,6 +105,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
@@ -984,6 +996,55 @@ index afdf4d1..e7825dc 100644
      }
  
  
+@@ -399,19 +402,6 @@ def prepare_worker_scene(scene: SceneCfg, num_envs: int, sim_dt: float) -> Prepa
+                     # USD importer uses the MJCF model name as a prim identifier;
+                     # MuJoCo's default "MuJoCo Model" contains an invalid space.
+                     spec.modelname = f"entity_{source_entity_indexes[source_entity.name]}"
+-                    # Gym's importer ignores geom mass. Explicit compiler-derived
+-                    # inertials preserve the actual intended body mass/COM/tensor.
+-                    for body in spec.bodies[1:]:
+-                        bid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, body.name)
+-                        body.mass = float(model.body_mass[bid])
+-                        body.inertia = model.body_inertia[bid]
+-                        body.ipos = model.body_ipos[bid]
+-                        body.iquat = model.body_iquat[bid]
+-                        # MJCF rejects the mixed full/diagonal spelling: clear a
+-                        # source fullinertia now that the diagonal form replaces
+-                        # it (NaN is the spec's "unspecified" sentinel).
+-                        body.fullinertia = [float("nan"), 0.0, 0.0, 0.0, 0.0, 0.0]
+-                        body.explicitinertial = True
+                     record = _actuation(model, mujoco)
+                     for joint in spec.joints:
+                         if joint.type != mujoco.mjtJoint.mjJNT_FREE:
+@@ -436,6 +426,28 @@ def prepare_worker_scene(scene: SceneCfg, num_envs: int, sim_dt: float) -> Prepa
+                     # to_file() may serialize the last compiled model, omitting
+                     # edits made after compile(); to_xml() serializes current spec.
+                     document = ET.fromstring(spec.to_xml())
++                    # Gym ignores geom mass; MjSpec.to_xml() rounds attributes.
++                    # Write explicit compiled inertials at round-trip precision
++                    # so mass/COM/tensor match the independent intent table.
++                    for element in document.findall("./worldbody//body"):
++                        bid = mujoco.mj_name2id(
++                            model, mujoco.mjtObj.mjOBJ_BODY, element.get("name", "")
++                        )
++                        if bid <= 0:
++                            raise ValueError("Serialized worker body has no compiled identity")
++                        inertial = element.find("inertial")
++                        if inertial is None:
++                            if model.body_mass[bid] == 0:
++                                continue
++                            inertial = ET.SubElement(element, "inertial")
++                        inertial.attrib.clear()
++                        for name, values in (
++                            ("mass", [model.body_mass[bid]]),
++                            ("pos", model.body_ipos[bid]),
++                            ("quat", model.body_iquat[bid]),
++                            ("diaginertia", model.body_inertia[bid]),
++                        ):
++                            inertial.set(name, " ".join(format(float(v), ".17g") for v in values))
+                     for mesh in document.findall("./asset/mesh"):
+                         filename = mesh_files.get(mesh.get("file", ""))
+                         if filename is not None:
 diff --git a/src/unisim/factory.py b/src/unisim/factory.py
 index 679f6a9..bb61c77 100644
 --- a/src/unisim/factory.py
@@ -1499,3 +1560,129 @@ index 0000000..7f48ba9
 +    assert result["geom_sdf"] == [False, True]
 +    assert result["geom_placeholders"] == [1, 0]
 +    assert record["geom_sdf"] == [True]
+diff --git a/tests/contract/test_worker_scene_materialization.py b/tests/contract/test_worker_scene_materialization.py
+index d1cee0a..a8c9d1a 100644
+--- a/tests/contract/test_worker_scene_materialization.py
++++ b/tests/contract/test_worker_scene_materialization.py
+@@ -81,12 +81,8 @@ def test_worker_sources_have_explicit_inertia_and_no_unsupported_canonical_actua
+         )
+         assert entries[1]["variants"][0]["geom_names"] == ["base::geom0"]
+         assert entries[1]["variants"][1]["geom_names"] == ["base::geom0"]
+-        np.testing.assert_allclose(
+-            entries[1]["variants"][0]["geom_friction"], [[0.7, 0.2, 0.03]]
+-        )
+-        np.testing.assert_allclose(
+-            entries[1]["variants"][1]["geom_friction"], [[0.4, 0.1, 0.02]]
+-        )
++        np.testing.assert_allclose(entries[1]["variants"][0]["geom_friction"], [[0.7, 0.2, 0.03]])
++        np.testing.assert_allclose(entries[1]["variants"][1]["geom_friction"], [[0.4, 0.1, 0.02]])
+         for entry in entries:
+             for source in entry["sources"]:
+                 root = ET.parse(source).getroot()
+@@ -100,6 +96,65 @@ def test_worker_sources_have_explicit_inertia_and_no_unsupported_canonical_actua
+     assert not directory.exists()
+ 
+ 
++@pytest.mark.parametrize(
++    "inertial",
++    [
++        "",
++        '<inertial pos="0.000123456789012345 0 -0.000987654321098765" '
++        'mass="0.400000123456789" '
++        'diaginertia="0.00010666666666666668 0.00011666666666666668 0.00012666666666666668" '
++        'quat="0.9238795325112867 0 0.3826834323650898 0"/>',
++        '<inertial pos="0.000123456789012345 0 0" mass="0.400000123456789" '
++        'fullinertia="0.00011 0.00012 0.00013 0.000001234567890123 0.000002 0"/>',
++    ],
++)
++def test_exported_inertials_preserve_compiled_double_precision(tmp_path, inertial):
++    import mujoco
++
++    source = tmp_path / "precise.xml"
++    source.write_text(
++        '<mujoco><worldbody><body name="cube"><freejoint/>'
++        + inertial
++        + '<geom type="box" size="0.02 0.02 0.02" mass="0.4"/>'
++        "</body></worldbody></mujoco>"
++    )
++    intended = mujoco.MjModel.from_xml_path(str(source))
++    prepared = prepare_worker_scene(
++        SceneCfg(
++            entity_assets=(
++                SceneEntitySpec(
++                    "object",
++                    ModelSourceDescriptor(str(source)),
++                    kind="rigid",
++                ),
++            )
++        ),
++        1,
++        0.0005,
++    )
++    try:
++        entry = prepared.payload["scene_entities"][0]
++        actual = mujoco.MjModel.from_xml_path(entry["sources"][0])
++        for field in ("body_mass", "body_ipos", "body_inertia"):
++            np.testing.assert_allclose(
++                getattr(actual, field)[1:],
++                getattr(intended, field)[1:],
++                rtol=2e-14,
++                atol=1e-18,
++            )
++
++        # Quaternion signs are equivalent; compare the physical inertia tensor.
++        def tensor(model):
++            rotation = np.empty(9)
++            mujoco.mju_quat2Mat(rotation, model.body_iquat[1])
++            rotation = rotation.reshape(3, 3)
++            return rotation @ np.diag(model.body_inertia[1]) @ rotation.T
++
++        np.testing.assert_allclose(tensor(actual), tensor(intended), rtol=2e-13, atol=1e-18)
++    finally:
++        prepared.close()
++
++
+ def test_mirror_receives_the_same_role_neutral_expanded_source_as_its_source_entity(tmp_path):
+     config = scene(tmp_path)
+     config.entity_assets = (
+@@ -118,9 +173,7 @@ def test_mirror_receives_the_same_role_neutral_expanded_source_as_its_source_ent
+         prepared.close()
+ 
+ 
+-def test_initial_state_reuses_composition_snapshots_without_recompiling(
+-    tmp_path, monkeypatch
+-):
++def test_initial_state_reuses_composition_snapshots_without_recompiling(tmp_path, monkeypatch):
+     import mujoco
+ 
+     config = scene(tmp_path)
+@@ -165,8 +218,7 @@ def test_worker_mesh_sources_are_self_contained(tmp_path):
+     texture = tmp_path / "checker.png"
+     texture.write_bytes(b"fake png bytes")
+     material.write_text(
+-        "newmtl shape\nKd 0.2 0.6 1.0\nKa 0 0 0\nKs 0.3 0.3 0.3\n"
+-        f"map_Kd {texture.name}\n",
++        f"newmtl shape\nKd 0.2 0.6 1.0\nKa 0 0 0\nKs 0.3 0.3 0.3\nmap_Kd {texture.name}\n",
+         encoding="utf-8",
+     )
+     obj.write_text(
+@@ -179,7 +231,7 @@ def test_worker_mesh_sources_are_self_contained(tmp_path):
+     for name, scale in (("small", ".5 .5 .5"), ("large", "1 1 1")):
+         path = tmp_path / f"{name}.xml"
+         path.write_text(
+-            '<mujoco><asset>'
++            "<mujoco><asset>"
+             f'<mesh name="shape" file="{obj.name}" scale="{scale}"/>'
+             '</asset><worldbody><body name="base"><freejoint/>'
+             '<inertial mass="1" pos="0 0 0" diaginertia=".01 .01 .01"/>'
+@@ -349,9 +401,7 @@ def test_fullinertia_source_is_rewritten_to_the_diagonal_spelling(tmp_path):
+     prepared = prepare_worker_scene(config, 1, 0.002)
+     try:
+         entries = prepared.payload["scene_entities"]
+-        tensor = np.array(
+-            [[1.0, 0.01, 0.02], [0.01, 1.1, 0.03], [0.02, 0.03, 0.9]]
+-        )
++        tensor = np.array([[1.0, 0.01, 0.02], [0.01, 1.1, 0.03], [0.02, 0.03, 0.9]])
+         # The compiler's diagonalization stores principal moments in
+         # descending order.
+         expected = np.linalg.eigvalsh(tensor)[::-1]

@@ -294,6 +294,7 @@ class PhysXPlane:
             scene_worker,
         )
         from unisim.backend.isaacsim.dependencies import resolve_isaacsim_runtime
+        from unisim.backend.subprocess_ipc import scene_materialization
         from unisim.factory import create_backend
 
         from dexlab.physx_baseline import create_scene
@@ -318,7 +319,13 @@ class PhysXPlane:
         worker_identity = json.loads(worker.stdout)
         if worker_identity["packages"]["isaacsim"] != "5.1.0.0":
             raise ValueError("The native profile requires Isaac Sim 5.1.0.0")
-        for module in (scene_worker, contact_details, adapter, physx_solver):
+        for module in (
+            scene_worker,
+            contact_details,
+            adapter,
+            physx_solver,
+            scene_materialization,
+        ):
             path = Path(module.__file__)
             (output / f"unisim-{path.name}").write_bytes(path.read_bytes())
         self.backend = create_backend(

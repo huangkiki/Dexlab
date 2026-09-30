@@ -47,6 +47,8 @@ Apple SDF grasping is registered and stepped through **UniLab**, with native sce
 
 PhysX native surface cloth adds **15 frozen held-out cases: 10 passes, one surface-crossing failure and four unsupported force-extension cases**. Eight of nine development refinement runs pass; repeat and refined-mesh failures are retained. [Results, GIF and raw evidence](demos/physx-contact/cloth.md)
 
+A further 12 predeclared contact-transient experiments retain six combined passes and six failures. Timestep refinement separates contact-law mismatch from numerical error, including tensile-release failures. [Parameters, curves and reproduction](demos/contact-benchmark/TRANSIENT_RESPONSE.md).
+
 ## Grasp details
 
 - The right thumb and index finger pinch the stem; the left arm stays parked. The apple and stem form **one free 0.2 kg rigid body**.

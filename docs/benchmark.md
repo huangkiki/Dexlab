@@ -100,3 +100,5 @@ Record topology/resolution, areal density/total mass, thickness, stretch/shear/b
 ## Method references
 
 [ContactBench](https://arxiv.org/abs/2304.06372) separates contact models and numerical approximations; [SimBenchmark](https://leggedrobotics.github.io/SimBenchmark/) compares speed/error curves; [GAUGE](https://internrobotics.github.io/GAUGE/) motivates measurement-grounded evaluation. DexLab declares its own case ranges and acceptance criteria; these are not hardware findings supplied by those projects.
+
+The [transient development comparison](../demos/contact-benchmark/TRANSIENT_RESPONSE.md) fixes K, D and load history, then compares three timesteps. Six of 12 candidates pass combined checks and all failures remain; these deterministic checks are not random success-rate trials.
