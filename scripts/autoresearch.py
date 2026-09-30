@@ -13,6 +13,7 @@ import re
 import shlex
 import subprocess
 import tempfile
+import uuid
 from pathlib import Path
 
 REPO = "huangkiki/Dexlab"
@@ -239,7 +240,7 @@ def source_tree(worktree):
         return git("write-tree")
 
 
-def check_remote(worktree, destination):
+def check_remote(worktree, destination, remote_state=None):
     """Run the same gate on a prepared SSH checkout, bound to the local source tree.
 
     The caller prepares the checkout/environment; this command never syncs over
@@ -250,9 +251,17 @@ def check_remote(worktree, destination):
             or not directory.startswith("/") or "\n" in directory):
         raise SystemExit("Expected SSH_ALIAS:/absolute/check-out; use an SSH config alias")
     expected = source_tree(worktree)
-    command = "cd " + shlex.quote(directory) + " && " + shlex.join([
-        "python3", "scripts/autoresearch.py", "check", ".", "--expected-tree", expected,
-    ])
+    arguments = ["python3", "scripts/autoresearch.py", "check", ".", "--expected-tree", expected]
+    if remote_state is not None:
+        state = Path(remote_state)
+        if not state.is_absolute():
+            raise SystemExit("Remote research state must use an absolute private path")
+        receipt = state / "receipts" / (uuid.uuid4().hex + "-gate.json")
+        arguments += ["--resource-dir", str(state / "receipts")]
+        arguments = ["python3", "scripts/research_guard.py", "run",
+                     "--lock", str(state / "window.lock"), "--kind", "qualification",
+                     "--receipt", str(receipt), "--", *arguments]
+    command = "cd " + shlex.quote(directory) + " && " + shlex.join(arguments)
     run("ssh", "-o", "BatchMode=yes", "-o", "ForwardAgent=no", "-o", "ConnectTimeout=15",
         host, command, cwd=worktree)
     if source_tree(worktree) != expected:
@@ -260,7 +269,7 @@ def check_remote(worktree, destination):
     return {"source_tree": expected, "checks": "full", "execution": "remote"}
 
 
-def check(worktree):
+def check(worktree, resource_dir=None):
     """Always verify both physical episodes; test logs stay inside the worktree."""
     python = str(worktree / ".venv/bin/python")
     run(
@@ -292,9 +301,23 @@ def check(worktree):
         "test_*.py",
         cwd=worktree,
     )
+    run_id = uuid.uuid4().hex
+    resource_dir = None if resource_dir is None else Path(resource_dir)
+    if resource_dir is not None:
+        resource_dir.mkdir(parents=True, exist_ok=True)
+    def measured(backend, phase, *command):
+        if resource_dir is None:
+            return run(*command, cwd=worktree)
+        receipt = resource_dir / f"{run_id}-{backend}-{phase}.json"
+        layout = ('{"whole_command_wall_s":%e,"user_cpu_s":%U,"system_cpu_s":%S,'
+                  '"maximum_child_rss_kib":%M,"returncode":%x}')
+        return run("env", "LC_ALL=C", "/usr/bin/time", "-q", "-f", layout,
+                   "-o", str(receipt), "--", *command, cwd=worktree)
+    outputs = {}
     for backend in ("mujoco", "superdex"):
-        output = worktree / "demos/apple-stem-grasp/runs" / f"autoresearch-{backend}"
-        run(
+        output = worktree / "demos/apple-stem-grasp/runs" / f"autoresearch-{backend}-{run_id}"
+        outputs[backend] = str(output)
+        measured(backend, "episode",
             "bash",
             "demos/apple-stem-grasp/run.sh",
             "--backend",
@@ -302,17 +325,16 @@ def check(worktree):
             "--headless",
             "--output",
             str(output),
-            cwd=worktree,
         )
-        run(
-            python,
-            "demos/apple-stem-grasp/src/verify_sdf_grasp.py",
-            str(output),
-            cwd=worktree,
-        )
+        measured(backend, "verify", python,
+                 "demos/apple-stem-grasp/src/verify_sdf_grasp.py", str(output))
+    result = {"run_id": run_id, "outputs": outputs}
+    if resource_dir is not None:
+        (resource_dir / f"{run_id}-outputs.json").write_text(json.dumps(result, indent=2))
+    return result
 
 
-def submit(number, summary_file, check_remote_at=None):
+def submit(number, summary_file, check_remote_at=None, remote_state=None):
     worktree = ROOT / ".autoresearch/worktrees" / f"issue-{number}"
     branch = f"autoresearch/issue-{number}"
     if not worktree.is_dir():
@@ -326,7 +348,7 @@ def submit(number, summary_file, check_remote_at=None):
     issue = authorized_issue(number)
     validated_tree = source_tree(worktree)
     if check_remote_at:
-        check_remote(worktree, check_remote_at)
+        check_remote(worktree, check_remote_at, remote_state)
     else:
         check(worktree)
     if source_tree(worktree) != validated_tree:
@@ -415,10 +437,12 @@ def main():
     check_parser = sub.add_parser("check")
     check_parser.add_argument("worktree", type=Path)
     check_parser.add_argument("--expected-tree")
+    check_parser.add_argument("--resource-dir", type=Path)
     submit_parser = sub.add_parser("submit")
     submit_parser.add_argument("issue", type=int)
     submit_parser.add_argument("--summary-file", required=True, type=Path)
     submit_parser.add_argument("--check-remote", metavar="SSH_ALIAS:/CHECKOUT")
+    submit_parser.add_argument("--remote-state", type=Path)
     args = parser.parse_args()
     if args.command == "next":
         result = next_issue(explain=args.dry_run)
@@ -429,12 +453,12 @@ def main():
         before = source_tree(worktree)
         if args.expected_tree and before != args.expected_tree:
             raise SystemExit("Remote checkout does not match the expected source tree")
-        check(worktree)
+        checks = check(worktree, args.resource_dir)
         if source_tree(worktree) != before:
             raise SystemExit("Source changed during verification; rerun the gate")
-        result = {"source_tree": before, "checks": "full"}
+        result = {"source_tree": before, "checks": "full", **checks}
     else:
-        result = submit(args.issue, args.summary_file, args.check_remote)
+        result = submit(args.issue, args.summary_file, args.check_remote, args.remote_state)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
 

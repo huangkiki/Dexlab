@@ -72,6 +72,12 @@ def install(manifest: Path, root: Path, cache: Path) -> None:
     for archive in data['archives']:
         expected.update(archive['files'])
     expected.update({item['path']: item['sha256'] for item in data['files']})
+    # Small task geometry is shipped in Git, rather than downloaded archives.
+    repository_files = data.get('repository_files', {})
+    expected.update(repository_files)
+    for name, digest in repository_files.items():
+        if not matches(destination(root, name), digest):
+            raise ValueError(f'Repository asset is missing or modified: {name}')
     # Check before any writes: preserve locally edited assets.
     for name, digest in expected.items():
         path = destination(root, name)

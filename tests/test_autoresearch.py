@@ -323,3 +323,35 @@ class VerifiedCheckoutTests(unittest.TestCase):
               patch.object(module, "run", side_effect=offline_run)):
             _, _, context = module.queue_context()
         self.assertEqual(context["integrated"], {1})
+
+
+class ResourceGateTests(unittest.TestCase):
+    def test_remote_guard_wraps_full_gate_with_private_resource_receipts(self):
+        with (patch.object(module, "source_tree", return_value="a" * 40),
+              patch.object(module, "run") as runner):
+            module.check_remote(Path("/source"), "worker:/checkout", Path("/state"))
+        command = runner.call_args.args[-1]
+        self.assertIn("scripts/research_guard.py run --lock /state/window.lock", command)
+        self.assertIn("--kind qualification", command)
+        self.assertIn("--resource-dir /state/receipts", command)
+        with patch.object(module, "run") as runner, patch.object(module, "source_tree"):
+            with self.assertRaises(SystemExit):
+                module.check_remote(Path("/source"), "worker:/checkout", Path("relative"))
+            runner.assert_not_called()
+
+    def test_each_gate_preserves_old_outputs_and_measures_episode_and_verifier(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            with patch.object(module, "run") as runner:
+                first = module.check(root, root / "receipts")
+                second = module.check(root, root / "receipts")
+            self.assertNotEqual(first["run_id"], second["run_id"])
+            self.assertTrue(set(first["outputs"].values()).isdisjoint(second["outputs"].values()))
+            commands = [call.args for call in runner.call_args_list if "/usr/bin/time" in call.args]
+            self.assertEqual(len(commands), 8)
+            for run in (first, second):
+                for backend in ("mujoco", "superdex"):
+                    for phase in ("episode", "verify"):
+                        receipt = str(root / "receipts" / f"{run['run_id']}-{backend}-{phase}.json")
+                        self.assertEqual(sum(receipt in command for command in commands), 1)
+                self.assertTrue((root / "receipts" / (run["run_id"] + "-outputs.json")).is_file())
