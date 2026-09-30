@@ -6,7 +6,7 @@
 
 DexLab 用可复现的刚体抓取和布料实验研究穿透、抖动、打滑与数值稳定性。案例包括 **OpenArm 双臂 + Wuji 灵巧手抓苹果梗、夹布**，以及多求解器的布料拉伸、下垂和碰撞测试。每项实验保留参数来源、原始轨迹、独立验收及失败记录。
 
-[快速运行](#运行) · [实验结果](#实验结果) · [诊断工具](#模型审查与诊断) · [研究方法](docs/research-focus.zh-CN.md) · [版本发布](https://github.com/huangkiki/Dexlab/releases)
+[快速运行](#运行) · [实验结果](#实验结果) · [诊断工具](#模型审查与诊断) · [任务与证据盘点](docs/inventory/README.zh-CN.md) · [研究方法](docs/research-focus.zh-CN.md) · [版本发布](https://github.com/huangkiki/Dexlab/releases)
 
 ## MuJoCo
 

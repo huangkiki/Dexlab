@@ -6,11 +6,11 @@ DexLab investigates **the validity and numerical behavior of robot simulation mo
 
 ## Delivered scope and work queue
 
-The registered UniLab task implements single-scene reset/step/close, two native SDF execution paths, and independent dynamics acceptance. DexLab owns the scene; UniSim's built-in adapters are not yet used. See the [task API](../demos/apple-stem-grasp/README.md#unilab-task-api).
+Five UniLab tasks cover apple stem, cloth, sliding, indentation and cylinder pinch. DexLab owns native MuJoCo/SuperDex grasp scenes. PhysX rigid paths use UniSim scene contracts and its Isaac Sim worker; surface cloth reuses runtime discovery only. The [complete inventory](inventory/README.md) maps controls, observations, independent scoring, parameter provenance and failures. Registration alone does not establish native backend equivalence.
 
 New episodes also export a [read-only model audit](model-audit.md): source and runtime inertials, joints, drives, collision filters, and initial-overlap findings.
 
-Follow-up work is maintained in GitHub issues rather than a duplicate documentation TODO list:
+Historical deliveries and follow-up work are maintained in GitHub issues; the links below include completed slices, not only pending work:
 
 - [模型审查 / Model audit](https://github.com/huangkiki/Dexlab/issues/1)
 - [抖动与接触间断 / Stability diagnostics](https://github.com/huangkiki/Dexlab/issues/2)
@@ -31,7 +31,7 @@ Record each parameter's value, units, source or derivation, uncertainty, and ove
 | SDF resolution and collision filtering | Engine-specific discretization and adapter settings in [backend details](sdf-backends.md#engine-implementation) | Approximate surfaces and normals; finite sampling; local wrist self-collision exclusion |
 | Friction and contact response | SuperDex friction 0.5 retained from the baseline; MuJoCo friction 1.0 set by the demo; penalty/constraint response and regularization configured in the controllers | Not identified skin–stem material properties; equal coefficients do not imply equivalent engine behavior |
 | Joint drives and motion | Scripted targets, IK, gain/damping settings and grasp-height offsets in the controllers | Known-pose control with explicit motion priors; no learned grasp skill or measured actuator model |
-| Timestep and solver tolerances | MuJoCo 0.5 ms; SuperDex 2 ms; engine-specific iteration limits | Numerical choices validated for this case, not a convergence study or matched speed benchmark |
+| Timestep and solver tolerances | MuJoCo 0.5 ms; SuperDex 2 ms; engine-specific iteration limits | Numerical choices validated for this case, limited timestep experiments are separately reported, not a convergence proof or matched speed benchmark |
 | Acceptance thresholds | Explicit task criteria in [the verifier](../demos/apple-stem-grasp/src/verify_sdf_grasp.py) | Engineering acceptance limits, not real-world accuracy estimates; do not relax them to hide failures |
 
 The MuJoCo adapter temporarily uses positive inertial placeholders to compile massless links, restores their source values, and checks the assembled mass matrix before stepping. This documented conversion does not prove that every source link has physically realistic inertia.
@@ -58,7 +58,7 @@ These are experiment-design principles; implementation scope and acceptance prog
 
 These are investigation hypotheses, not diagnoses from appearance alone. Compliant-contact overlap should be assessed against declared tolerances and geometry scale. Current wrist-relative object displacement is not cumulative material-point slip; momentum balance is not an energy-conservation test. The [offline jitter diagnostics](jitter.md) report RMS/peaks, sampling coverage and per-pad low-load intervals without changing grasp thresholds. Full energy balance is unavailable from current logs.
 
-For parameter semantics, consult [MuJoCo's solver guide](https://mujoco.readthedocs.io/en/latest/modeling.html#solver-parameters), the [SuperDex source references](sdf-backends.md#engine-implementation), and, for future PhysX work, its [rigid-body dynamics guide](https://nvidia-omniverse.github.io/PhysX/physx/5.4.1/docs/RigidBodyDynamics.html). Engine-specific settings should be compared through measured behavior rather than copied by name.
+For parameter semantics, consult [MuJoCo's solver guide](https://mujoco.readthedocs.io/en/latest/modeling.html#solver-parameters), the [SuperDex source references](sdf-backends.md#engine-implementation), and the PhysX [rigid-body dynamics guide](https://nvidia-omniverse.github.io/PhysX/physx/5.4.1/docs/RigidBodyDynamics.html). Engine-specific settings should be compared through measured behavior rather than copied by name.
 
 ## Reproducibility and regression
 

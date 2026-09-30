@@ -6,7 +6,7 @@
 
 DexLab uses reproducible rigid grasping and cloth experiments to study penetration, jitter, slip, and numerical stability. Cases include **OpenArm dual arms with Wuji hands grasping an apple stem and pinching cloth**, plus cloth extension, sag, and collision tests across solvers. Each experiment retains parameter provenance, raw trajectories, independent checks, and failed records.
 
-[Quick start](#run) · [Results](#results) · [Diagnostics](#model-audits-and-diagnostics) · [Research methods](docs/research-focus.md) · [Releases](https://github.com/huangkiki/Dexlab/releases)
+[Quick start](#run) · [Results](#results) · [Diagnostics](#model-audits-and-diagnostics) · [Task and evidence inventory](docs/inventory/README.md) · [Research methods](docs/research-focus.md) · [Releases](https://github.com/huangkiki/Dexlab/releases)
 
 ## MuJoCo
 
