@@ -6,11 +6,11 @@ DexLab 研究**机器人仿真模型的合理性与数值行为**。通过可重
 
 ## 已实现与工作队列
 
-当前已实现 UniLab 注册任务、单场景 reset/step/close、两个原生 SDF 后端和独立动力学验收。场景由 DexLab 自身管理，尚未使用 UniSim 内置后端。见[任务接口](../demos/apple-stem-grasp/README.zh-CN.md#unilab-任务接口)。
+目前注册了苹果梗、布料、滑动、压入和圆柱夹持五个 UniLab 任务。MuJoCo/SuperDex 抓梗由 DexLab 管理原生场景；PhysX 刚体路径实际使用 UniSim 的场景契约与 Isaac Sim worker，表面布料只复用其运行环境。各路径的控制、观测、独立评分、参数来源和失败证据见[完整盘点](inventory/README.zh-CN.md)。注册成功不证明原生后端等价。
 
 新运行还会导出[只读模型审查](model-audit.zh-CN.md)：源值与运行时惯量、关节、驱动、碰撞过滤及初始重叠发现项。
 
-后续工作统一维护在 GitHub issues，不在文档重复维护 TODO：
+历史交付与后续工作统一维护在 GitHub issues；下列链接包含已完成切片，不代表全部仍待实现：
 
 - [模型审查 / Model audit](https://github.com/huangkiki/Dexlab/issues/1)
 - [抖动与接触间断 / Stability diagnostics](https://github.com/huangkiki/Dexlab/issues/2)
@@ -31,7 +31,7 @@ DexLab 研究**机器人仿真模型的合理性与数值行为**。通过可重
 | SDF 分辨率与碰撞过滤 | [后端说明](sdf-backends.zh-CN.md#引擎底层实现)中的引擎离散化和适配器配置 | 表面与法向近似、有限采样，以及腕部局部自碰撞排除 |
 | 摩擦与接触响应 | SuperDex 沿用基线摩擦系数 0.5；MuJoCo 由演示设置为 1.0；罚力/约束响应和正则化在控制器中配置 | 不是辨识得到的皮肤–果梗材料属性；相同系数不代表相同引擎行为 |
 | 关节驱动与运动 | 控制器中的脚本目标、逆运动学、增益/阻尼和抓取高度偏移 | 已知位姿控制与显式运动先验；没有学习到的抓取技能或实测执行器模型 |
-| 步长与求解器容差 | MuJoCo 0.5 ms、SuperDex 2 ms，以及各自的迭代上限 | 针对此案例验证的数值选择，并非收敛性研究或同等条件速度基准 |
+| 步长与求解器容差 | MuJoCo 0.5 ms、SuperDex 2 ms，以及各自的迭代上限 | 针对此案例验证的数值选择，有限步长实验另见基准报告，尚非收敛性证明或同等条件速度基准 |
 | 验收阈值 | [验收器](../demos/apple-stem-grasp/src/verify_sdf_grasp.py)中的显式任务标准 | 工程验收边界，不是真实世界精度估计；不能为掩盖失败而放宽 |
 
 MuJoCo 适配器使用临时的正惯性占位值编译无质量连杆，然后恢复源值并在步进前检查组装后的质量矩阵。这一有记录的转换过程不能证明每个源连杆的惯量都符合真实物理。
@@ -58,7 +58,7 @@ MuJoCo 适配器使用临时的正惯性占位值编译无质量连杆，然后�
 
 这些是需要实验检验的原因，不能只凭外观下诊断。柔顺接触的重叠应结合声明的容差与几何尺度评估。当前物体相对腕部位移不是材料点累计滑移，动量平衡也不是能量守恒检验。[离线抖动诊断](jitter.zh-CN.md)报告 RMS/峰值、采样覆盖及逐指腹低载荷区间，不改变抓取阈值。现有日志不足以进行完整能量收支分析。
 
-参数语义参见 [MuJoCo 求解器指南](https://mujoco.readthedocs.io/en/latest/modeling.html#solver-parameters)、[SuperDex 源码依据](sdf-backends.zh-CN.md#引擎底层实现)，以及后续 PhysX 工作可参考的[刚体动力学指南](https://nvidia-omniverse.github.io/PhysX/physx/5.4.1/docs/RigidBodyDynamics.html)。不同引擎的配置应通过测量行为比较，不能仅按参数名称照搬。
+参数语义参见 [MuJoCo 求解器指南](https://mujoco.readthedocs.io/en/latest/modeling.html#solver-parameters)、[SuperDex 源码依据](sdf-backends.zh-CN.md#引擎底层实现)，以及 PhysX 的[刚体动力学指南](https://nvidia-omniverse.github.io/PhysX/physx/5.4.1/docs/RigidBodyDynamics.html)。不同引擎的配置应通过测量行为比较，不能仅按参数名称照搬。
 
 ## 可复现运行与回归
 
