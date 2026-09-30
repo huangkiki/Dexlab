@@ -41,6 +41,8 @@ The cloth benchmark completed **105 frozen held-out episodes: 52 passed the prot
 
 Contact-mechanics development covers sliding, loading/unloading and two-pad load sweeps. Original failures are retained; refining the same cylinder surface lets SuperDex pass all four development hold/drop conditions. Cross-engine material calibration remains incomplete. [Experiments, failures and reproduction](demos/contact-benchmark/README.md).
 
+A separate normal-loading protocol completed 17 development checks: 11 passes and 6 failures. Mass transfer and settling remain distinct from matching static stiffness. [Response fitting and retained failures](demos/contact-benchmark/NORMAL_RESPONSE.md).
+
 Apple SDF grasping is registered and stepped through **UniLab**, with native scenes owned by DexLab. PhysX rigid-body qualifications use **UniSim's Isaac Sim backend**; the separate cloth task reuses its runtime discovery. Rigid and cloth experiments have separate scores; incomplete and unsupported capabilities remain explicit.
 
 PhysX native surface cloth adds **15 frozen held-out cases: 10 passes, one surface-crossing failure and four unsupported force-extension cases**. Eight of nine development refinement runs pass; repeat and refined-mesh failures are retained. [Results, GIF and raw evidence](demos/physx-contact/cloth.md)

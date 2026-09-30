@@ -1,0 +1,1413 @@
+{
+  "schema_version": 1,
+  "scope": "Development normal-response candidates and prescribed validation; not random held-out trials or hardware material calibration",
+  "completed": 17,
+  "passed": 11,
+  "results": [
+    {
+      "id": "initial-mujoco",
+      "role": "initial-development-fit",
+      "engine": "mujoco",
+      "receipt_sha256": "d23dadcf970ca67178b7aaa6d4eacc0de7b4db5a4902939455c418c9a673d3fb",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": false,
+          "intermediate_load_validation": false,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 2.5002170450845325e-05,
+              "indentation_std_m": 2.7887834096719034e-09,
+              "contact_force_mean_n": 2.0000030376199196
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 4.999982750670741e-05,
+              "indentation_std_m": 1.9522227710450114e-09,
+              "contact_force_mean_n": 4.000002537585328
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 7.499982747394632e-05,
+              "indentation_std_m": 1.952227903040108e-09,
+              "contact_force_mean_n": 6.000002537510673
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.07744624825654343,
+              "indentation_std_m": 0.012673547710593465,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.7499782954915468,
+            0.7500008624664629,
+            0.7500005750868456
+          ],
+          "fit_secant_stiffness_n_m": 80003.74893871194,
+          "fit_zero_load_intercept_m": 3.341939294827838e-09,
+          "maximum_penetration_m": 7.856320116865143e-05,
+          "peak_momentum_residual_weight_ratio": 6.564009727651282e-15,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "initial-superdex",
+      "role": "initial-development-fit",
+      "engine": "superdex",
+      "receipt_sha256": "d98ee9cf1184d25a176f39090daa6e9d41f8cce1ee5a706b214548fb2a8426ce",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.951701073061758e-05,
+              "indentation_std_m": 1.0513989410580168e-06,
+              "contact_force_mean_n": 2.0003402146123057
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.0001995173733345769,
+              "indentation_std_m": 1.0642338213199325e-06,
+              "contact_force_mean_n": 4.000347466691491
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0002995173776979276,
+              "indentation_std_m": 1.064325350171535e-06,
+              "contact_force_mean_n": 6.000347553958505
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.09029070280939662,
+              "indentation_std_m": 0.013756914799117123,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.004829892693824167,
+            0.0024131333271155686,
+            0.0016087410069079988
+          ],
+          "fit_secant_stiffness_n_m": 19999.963303336335,
+          "fit_zero_load_intercept_m": -4.831727530374088e-07,
+          "maximum_penetration_m": 0.00037817896107935137,
+          "peak_momentum_residual_weight_ratio": 3.816659403947699e-05,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "initial-physx",
+      "role": "initial-development-fit",
+      "engine": "physx",
+      "receipt_sha256": "aeec0930c58ba26d2bfea5fbed5014126badf4b8303f8f0d74200d446c7c02b7",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "native_layout_matches": true,
+          "clean_worker_exit": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.99999392661266e-05,
+              "indentation_std_m": 5.291125830808596e-07,
+              "contact_force_mean_n": 1.9998089969158173
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00020000032964162529,
+              "indentation_std_m": 5.304880801304535e-07,
+              "contact_force_mean_n": 3.999811987876892
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00030011197668500245,
+              "indentation_std_m": 5.302176191435137e-07,
+              "contact_force_mean_n": 5.99980916261673
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.08986078202724457,
+              "indentation_std_m": 0.013722670264542103,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            6.073387339711189e-07,
+            1.648208126425743e-06,
+            0.0003732556166748946
+          ],
+          "fit_secant_stiffness_n_m": 19988.802530790155,
+          "fit_zero_load_intercept_m": -5.607944331133231e-08,
+          "maximum_penetration_m": 0.00037530623376369476,
+          "peak_momentum_residual_weight_ratio": 8.549432628128144e-05,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-mujoco-reference",
+      "role": "fit-confirmation",
+      "engine": "mujoco",
+      "receipt_sha256": "d990b12b773a3b8a239d022859583bcc58b007185f0d24f41702f2c1df406774",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.990947794307135e-05,
+              "indentation_std_m": 5.0787389255879156e-08,
+              "contact_force_mean_n": 2.000028122258094
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00019970307636872162,
+              "indentation_std_m": 1.629816836416381e-07,
+              "contact_force_mean_n": 4.000089771381707
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00029970765612379995,
+              "indentation_std_m": 1.6303837620069055e-07,
+              "contact_force_mean_n": 6.000089802668401
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.07722063569697239,
+              "indentation_std_m": 0.012673489934644367,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.0009052205692865467,
+            0.0014846181563918925,
+            0.0009744795873335432
+          ],
+          "fit_secant_stiffness_n_m": 20020.202568522804,
+          "fit_zero_load_intercept_m": 1.0388852707027448e-08,
+          "maximum_penetration_m": 0.00029991050773876815,
+          "peak_momentum_residual_weight_ratio": 4.7532484234716175e-15,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-mujoco-mass01",
+      "role": "validation-fixed-native",
+      "engine": "mujoco",
+      "receipt_sha256": "e700467ffa0048384b0fa731f80502f163762fb981307b50d3ef93c1b582b1ad",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": false,
+          "intermediate_load_validation": false,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 0.00019981896134396818,
+              "indentation_std_m": 1.0157478128532259e-07,
+              "contact_force_mean_n": 2.0000281768865182
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00039940614742969187,
+              "indentation_std_m": 3.259633496815694e-07,
+              "contact_force_mean_n": 4.000089717971105
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0005994153069067806,
+              "indentation_std_m": 3.260767523875987e-07,
+              "contact_force_mean_n": 6.000089749262636
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.15444127967944815,
+              "indentation_std_m": 0.025346981222969748,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.9981896134396817,
+            0.9970307371484595,
+            0.9980510230226021
+          ],
+          "fit_secant_stiffness_n_m": 10010.101554773206,
+          "fit_zero_load_intercept_m": 2.078856256197215e-08,
+          "maximum_penetration_m": 0.0005998210101367217,
+          "peak_momentum_residual_weight_ratio": 1.663636948215066e-14,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-mujoco-mass04",
+      "role": "validation-fixed-native",
+      "engine": "mujoco",
+      "receipt_sha256": "4c48a122b2f08387a08c66d8d2aa241b825c24bad7b5ae757f41d4009a95912f",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": false,
+          "intermediate_load_validation": false,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 4.9954738382729684e-05,
+              "indentation_std_m": 2.539369433068967e-08,
+              "contact_force_mean_n": 2.0000280986841266
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 9.985153545940852e-05,
+              "indentation_std_m": 8.149083832816176e-08,
+              "contact_force_mean_n": 4.000089662122553
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00014985382477328564,
+              "indentation_std_m": 8.151918718763819e-08,
+              "contact_force_mean_n": 6.000089671060341
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.038610313711698166,
+              "indentation_std_m": 0.006336744290481936,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.5004526161727032,
+            0.5007423227029575,
+            0.5004872507557145
+          ],
+          "fit_secant_stiffness_n_m": 40040.4062191518,
+          "fit_zero_load_intercept_m": 5.19518745170232e-09,
+          "maximum_penetration_m": 0.00014995525057963713,
+          "peak_momentum_residual_weight_ratio": 1.471243559645977e-15,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-mujoco-h2",
+      "role": "validation-fixed-native",
+      "engine": "mujoco",
+      "receipt_sha256": "428fe46da45317b78699acdb36d737137711ddef5f1dda5c5b35ac8430a5b61f",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.981308419601115e-05,
+              "indentation_std_m": 1.0350616167009022e-07,
+              "contact_force_mean_n": 2.0000573951274223
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00019971535974575892,
+              "indentation_std_m": 1.5870121584389273e-07,
+              "contact_force_mean_n": 4.00008793320435
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0002997200000817077,
+              "indentation_std_m": 1.587260023750415e-07,
+              "contact_force_mean_n": 6.0000879469818615
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.07700160373939295,
+              "indentation_std_m": 0.01265594104419307,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.0018691580398885188,
+            0.001423201271205432,
+            0.0009333330609743173
+          ],
+          "fit_secant_stiffness_n_m": 20009.312745773805,
+          "fit_zero_load_intercept_m": -1.4037374683713094e-07,
+          "maximum_penetration_m": 0.00029991700185124856,
+          "peak_momentum_residual_weight_ratio": 1.788126787877418e-14,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-superdex-reference",
+      "role": "fit-confirmation",
+      "engine": "superdex",
+      "receipt_sha256": "0799a913158a3c71706e88ae85979c04b04143fef039298b8356489f94a10361",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.951701073061758e-05,
+              "indentation_std_m": 1.0513989410580168e-06,
+              "contact_force_mean_n": 2.0003402146123057
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.0001995173733345769,
+              "indentation_std_m": 1.0642338213199325e-06,
+              "contact_force_mean_n": 4.000347466691491
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0002995173776979276,
+              "indentation_std_m": 1.064325350171535e-06,
+              "contact_force_mean_n": 6.000347553958505
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.09029070280939662,
+              "indentation_std_m": 0.013756914799117123,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.004829892693824167,
+            0.0024131333271155686,
+            0.0016087410069079988
+          ],
+          "fit_secant_stiffness_n_m": 19999.963303336335,
+          "fit_zero_load_intercept_m": -4.831727530374088e-07,
+          "maximum_penetration_m": 0.00037817896107935137,
+          "peak_momentum_residual_weight_ratio": 3.816659403947699e-05,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-superdex-mass01",
+      "role": "validation-fixed-native",
+      "engine": "superdex",
+      "receipt_sha256": "bc3040a0c42d6732eee328f00f3ff698b822b768e845c2768cc5a207655ee1b3",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.946039004893748e-05,
+              "indentation_std_m": 1.8767221825839362e-08,
+              "contact_force_mean_n": 1.9992078009787042
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00019946017308425246,
+              "indentation_std_m": 1.8870012905451976e-08,
+              "contact_force_mean_n": 3.9992034616850027
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0002994601729861814,
+              "indentation_std_m": 1.8870059368514867e-08,
+              "contact_force_mean_n": 5.999203459723581
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.1723562426393168,
+              "indentation_std_m": 0.026803360732449304,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.005396099510625141,
+            0.0026991345787377163,
+            0.0017994233793953152
+          ],
+          "fit_secant_stiffness_n_m": 20000.021706299165,
+          "fit_zero_load_intercept_m": -5.395014196844761e-07,
+          "maximum_penetration_m": 0.0003704647173090603,
+          "peak_momentum_residual_weight_ratio": 0.0009220500882284292,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-superdex-mass04",
+      "role": "validation-fixed-native",
+      "engine": "superdex",
+      "receipt_sha256": "5a2b2faba23622c59de75e41190f91971203b6873708eb25281c50190da1993b",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": false,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 0.00010037282490284801,
+              "indentation_std_m": 8.518991476868556e-06,
+              "contact_force_mean_n": 2.0174564980569176
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00020038482090331176,
+              "indentation_std_m": 9.196593626751664e-06,
+              "contact_force_mean_n": 4.01769641806619
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00030038218396801,
+              "indentation_std_m": 9.232588111581889e-06,
+              "contact_force_mean_n": 6.017643679360155
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.04780855804380928,
+              "indentation_std_m": 0.0071144280522467684,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.003728249028480013,
+            0.0019241045165587778,
+            0.0012739465600333233
+          ],
+          "fit_secant_stiffness_n_m": 19999.0641372778,
+          "fit_zero_load_intercept_m": 3.681453702670059e-07,
+          "maximum_penetration_m": 0.0003900520010399512,
+          "peak_momentum_residual_weight_ratio": 0.0007615330222914314,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-superdex-h2",
+      "role": "validation-fixed-native",
+      "engine": "superdex",
+      "receipt_sha256": "640206e61518944e4d4512b56b298a22b90bf77b0c029fea0c6dfd94675887ef",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": false,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.91508341301075e-05,
+              "indentation_std_m": 8.120842614395938e-06,
+              "contact_force_mean_n": 1.9930166826021039
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00019908793820998388,
+              "indentation_std_m": 8.800444144411533e-06,
+              "contact_force_mean_n": 3.991758764199632
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00029907990950505384,
+              "indentation_std_m": 8.849663423032313e-06,
+              "contact_force_mean_n": 5.991598190101031
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.09060914552626471,
+              "indentation_std_m": 0.013785524023077207,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.008491658698924986,
+            0.004560308950080638,
+            0.0030669683164871175
+          ],
+          "fit_secant_stiffness_n_m": 20007.09497854883,
+          "fit_zero_load_intercept_m": -8.137035573656807e-07,
+          "maximum_penetration_m": 0.0003955563010265145,
+          "peak_momentum_residual_weight_ratio": 0.0005632974221642316,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-physx-reference",
+      "role": "fit-confirmation",
+      "engine": "physx",
+      "receipt_sha256": "eb1fd1d4bfdbedb8d5a55d3db2f016c6757109dd25ae322982722b679043ba93",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "native_layout_matches": true,
+          "clean_worker_exit": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.99999392661266e-05,
+              "indentation_std_m": 5.291125830808596e-07,
+              "contact_force_mean_n": 1.9998089969158173
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00020000032964162529,
+              "indentation_std_m": 5.304880801304535e-07,
+              "contact_force_mean_n": 3.999811987876892
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00030011197668500245,
+              "indentation_std_m": 5.302176191435137e-07,
+              "contact_force_mean_n": 5.99980916261673
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.08986078202724457,
+              "indentation_std_m": 0.013722670264542103,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            6.073387339711189e-07,
+            1.648208126425743e-06,
+            0.0003732556166748946
+          ],
+          "fit_secant_stiffness_n_m": 19988.802530790155,
+          "fit_zero_load_intercept_m": -5.607944331133231e-08,
+          "maximum_penetration_m": 0.00037530623376369476,
+          "peak_momentum_residual_weight_ratio": 8.549432628128144e-05,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-physx-mass01",
+      "role": "validation-fixed-native",
+      "engine": "physx",
+      "receipt_sha256": "b5cea49b05991cecc621eee9fea6dd72ed0fee6525247869a752ba737c75a8d9",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "native_layout_matches": true,
+          "clean_worker_exit": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.999934263760224e-05,
+              "indentation_std_m": 5.350819787253158e-09,
+              "contact_force_mean_n": 1.9999905636906623
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00020019519433844835,
+              "indentation_std_m": 5.398333779993436e-09,
+              "contact_force_mean_n": 3.9999927175045014
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00030019559198990464,
+              "indentation_std_m": 5.301705297000581e-09,
+              "contact_force_mean_n": 5.999993035793304
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.17143425345420837,
+              "indentation_std_m": 0.02672886848449707,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            6.573623977601528e-06,
+            0.0009759716922417283,
+            0.0006519732996821404
+          ],
+          "fit_secant_stiffness_n_m": 19980.39430279665,
+          "fit_zero_load_intercept_m": -9.878203854896128e-08,
+          "maximum_penetration_m": 0.00036662444472312927,
+          "peak_momentum_residual_weight_ratio": 0.00017104309268673506,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-physx-mass04",
+      "role": "validation-fixed-native",
+      "engine": "physx",
+      "receipt_sha256": "9acc86fbaed25fa3d4a48a799a729033907aae80509093c434b3fad0ce230fc9",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": false,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": false,
+          "native_friction_matches": true,
+          "native_layout_matches": true,
+          "clean_worker_exit": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 0.00010067191033158451,
+              "indentation_std_m": 6.088014742999803e-06,
+              "contact_force_mean_n": 2.012328300178051
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00020067532022949308,
+              "indentation_std_m": 6.380370905390009e-06,
+              "contact_force_mean_n": 4.012317972779274
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0003006728948093951,
+              "indentation_std_m": 6.386175300576724e-06,
+              "contact_force_mean_n": 6.01226796746254
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.04767702892422676,
+              "indentation_std_m": 0.007104614749550819,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.006719103315845132,
+            0.003376601147465408,
+            0.002242982697983509
+          ],
+          "fit_secant_stiffness_n_m": 19999.90155270354,
+          "fit_zero_load_intercept_m": 6.714180926792324e-07,
+          "maximum_penetration_m": 0.0003855489194393158,
+          "peak_momentum_residual_weight_ratio": 4.271994307855464e-05,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-physx-h2",
+      "role": "validation-fixed-native",
+      "engine": "physx",
+      "receipt_sha256": "ca370026ead516ff6f7b6e88beefa4d040a07b879e9bc13e55f2f4d43364ce31",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "native_layout_matches": true,
+          "clean_worker_exit": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.999840403907001e-05,
+              "indentation_std_m": 7.284120897566027e-07,
+              "contact_force_mean_n": 1.9996143324673177
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00019999832147732377,
+              "indentation_std_m": 7.323415047721937e-07,
+              "contact_force_mean_n": 3.9996088114380837
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.00029999850085005164,
+              "indentation_std_m": 7.298354489648773e-07,
+              "contact_force_mean_n": 5.999615469574929
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.08990476280450821,
+              "indentation_std_m": 0.01372706051915884,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            1.5959609299898148e-05,
+            8.392613381147385e-06,
+            4.997166494491445e-06
+          ],
+          "fit_secant_stiffness_n_m": 19999.990318906523,
+          "fit_zero_load_intercept_m": -1.6443664208054543e-09,
+          "maximum_penetration_m": 0.0003767870366573334,
+          "peak_momentum_residual_weight_ratio": 0.00010893468827656767,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-mujoco-mass0.1-converted",
+      "role": "validation-mass-conversion-declared-before-run",
+      "engine": "mujoco",
+      "receipt_sha256": "71ac38aabe35dc0b6ebe2e85d66ebe33e648065fefed8864e418730cafff4356",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 9.959836110975079e-05,
+              "indentation_std_m": 1.6480088178469726e-07,
+              "contact_force_mean_n": 2.000033694255597
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00019916515974814032,
+              "indentation_std_m": 3.424019802147237e-07,
+              "contact_force_mean_n": 4.000069948017214
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0002991684007447216,
+              "indentation_std_m": 3.4298812383948964e-07,
+              "contact_force_mean_n": 6.000070067666875
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.1547409271787847,
+              "indentation_std_m": 0.02534693653454315,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.0040163889024921184,
+            0.00417420125929846,
+            0.0027719975175947154
+          ],
+          "fit_secant_stiffness_n_m": 20043.088668601322,
+          "fit_zero_load_intercept_m": -1.866587077346127e-07,
+          "maximum_penetration_m": 0.00029963052450271074,
+          "peak_momentum_residual_weight_ratio": 1.663636948215066e-14,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    },
+    {
+      "id": "validation-mujoco-mass0.4-converted",
+      "role": "validation-mass-conversion-declared-before-run",
+      "engine": "mujoco",
+      "receipt_sha256": "b4ca560536c650fe30fe8e2d7828fa12aa11a4b54995a3a0088ed840827b80e8",
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_loads": true,
+          "declared_force_commands": true,
+          "unit_quaternions": true,
+          "initially_at_rest": true,
+          "declared_initial_pose": true,
+          "bounded_penetration": true,
+          "momentum_balance": true,
+          "no_tipping": true,
+          "no_lateral_drift": true,
+          "no_tensile_normal_force": true,
+          "loaded_force_balance": true,
+          "settled_plateaus": true,
+          "fitting_load_response": true,
+          "intermediate_load_validation": true,
+          "released_geometry": true,
+          "fully_unloaded": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true,
+          "normal_parameters_match": true
+        },
+        "metrics": {
+          "plateaus": [
+            {
+              "load_n": 2.0,
+              "indentation_mean_m": 0.00010047110773439182,
+              "indentation_std_m": 4.3605640098126265e-07,
+              "contact_force_mean_n": 1.9995915060820453
+            },
+            {
+              "load_n": 4.0,
+              "indentation_mean_m": 0.00020120932211646302,
+              "indentation_std_m": 5.993281913911309e-07,
+              "contact_force_mean_n": 3.9997750028959125
+            },
+            {
+              "load_n": 6.0,
+              "indentation_mean_m": 0.0003012132249885252,
+              "indentation_std_m": 5.978404954669463e-07,
+              "contact_force_mean_n": 5.999776888473966
+            },
+            {
+              "load_n": -1.0,
+              "indentation_mean_m": -0.03846416374314631,
+              "indentation_std_m": 0.006337093248233646,
+              "contact_force_mean_n": 0.0
+            }
+          ],
+          "response_relative_errors": [
+            0.004711077343918291,
+            0.006046610582315148,
+            0.004044083295083878
+          ],
+          "fit_secant_stiffness_n_m": 19926.062625593026,
+          "fit_zero_load_intercept_m": 1.0004910732512877e-07,
+          "maximum_penetration_m": 0.00030314961596231496,
+          "peak_momentum_residual_weight_ratio": 4.52690326044916e-15,
+          "maximum_orientation_rad": 0.0
+        },
+        "scope": "Static normal response to a declared engineering target; not full material calibration"
+      }
+    }
+  ],
+  "suite_sha256": "684f3d902b054c8ce3dff3024935096c7a0b41248b24d6ccd1214efa053bf46b"
+}

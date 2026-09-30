@@ -11,7 +11,7 @@ host_python="$script_dir/../.venv/bin/python"
 if [[ ${1:-} == --help ]]; then
   echo 'Usage: UNISIM_ISAACSIM_HOME=/path/to/worker bash scripts/setup_physx.sh'
   echo 'Linux x86_64 with an NVIDIA GPU; optional multi-GB Isaac Sim 5.1 installation.'
-  echo 'Also installs the disclosed UniSim normal/friction reporting, drive and SDF adapter extensions; PhysX is unchanged.'
+  echo 'Also installs the disclosed UniSim normal/friction reporting, drive, SDF and compliant-contact adapter extensions; PhysX is unchanged.'
   exit 0
 fi
 [[ $# == 0 ]] || { echo 'Unknown argument; use --help.' >&2; exit 2; }
@@ -95,7 +95,7 @@ uv pip freeze --python "$worker_python" > "$worker_root/requirements-installed.t
 
 # UniSim 1.7.10 omits PhysxContactReportAPI on imported rigid bodies.
 # Build the explicit adapter-only patch, without editing installed engine files.
-unisim_dir=${DEXLAB_UNISIM_SOURCE:-"$worker_root/UniSim-physx-torsion"}
+unisim_dir=${DEXLAB_UNISIM_SOURCE:-"$worker_root/UniSim-physx-compliance"}
 adapter_patch="$script_dir/patches/unisim-1.7.10-physx-adapter.patch"
 if [[ ! -e "$unisim_dir" ]]; then
   git init "$unisim_dir"
@@ -117,7 +117,8 @@ if git -C "$unisim_dir" diff --quiet HEAD; then
     src/unisim/backend/isaacsim/sdf_collision.py \
     tests/adapters/isaacsim/test_sdf_collision.py \
     src/unisim/backend/isaacsim/contact_details.py \
-    tests/adapters/isaacsim/test_contact_details.py
+    tests/adapters/isaacsim/test_contact_details.py \
+    tests/adapters/isaacsim/test_compliant_contact.py
 fi
 git -C "$unisim_dir" -c core.abbrev=7 diff --no-ext-diff --binary \
   --src-prefix=a/ --dst-prefix=b/ --no-color HEAD | cmp - "$adapter_patch" || {

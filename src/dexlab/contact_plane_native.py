@@ -24,20 +24,23 @@ from dexlab.physx_baseline import digest, write_json
 class MuJoCoPlane:
     """Official MuJoCo; force epoch is the solve that produced the velocity step."""
 
-    def __init__(self, case, output):
+    def __init__(self, case, output, *, normal_parameters=None):
         import mujoco as mj
 
         self.mj, self.case = mj, case
         identity = package_identity("mujoco")
         if identity["version"] != "3.11.0":
             raise ValueError("The frozen native profile requires MuJoCo 3.11.0")
+        normal = contact_parameters.normal_parameters("mujoco", normal_parameters)
+        solref = " ".join(map(str, normal["solref"]))
+        solimp = " ".join(map(str, normal["solimp"]))
         h, b, mu = case.timestep, case.half_size, case.friction
         inertia = " ".join(map(str, case.inertia))
         xml = f'''<mujoco model="controlled-plane">
   <option timestep="{h}" gravity="0 0 -{case.gravity}" integrator="Euler"
           solver="Newton" cone="elliptic" iterations="100" tolerance="1e-10"/>
   <default><geom condim="3" friction="{mu} 0 0"
-                 solref="0.005 1" solimp="0.95 0.99 0.001"/></default>
+                 solref="{solref}" solimp="{solimp}"/></default>
   <worldbody>
     <geom name="plane" type="plane" size="2 2 0.1"/>
     <body name="box" pos="0 0 {b}"><freejoint/>
@@ -51,12 +54,16 @@ class MuJoCoPlane:
         self.data = mj.MjData(self.model)
         mj.mj_forward(self.model, self.data)
         self.metadata = {
+            "normal_parameters_readback": {
+                "solref": self.model.geom_solref[1].tolist(),
+                "solimp": self.model.geom_solimp[1].tolist(),
+            },
             "engine": "mujoco",
             "identity": identity,
             "mass_readback": float(self.model.body_mass[1]),
             "inertia_readback": self.model.body_inertia[1].tolist(),
             "friction_readback": self.model.geom_friction.tolist(),
-            "profile": "model.xml; engineering constants, not calibrated",
+            "profile": "Explicit native normal profile; not hardware material calibration",
             "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
             "solver_status": "Native warning counters; absence of warnings is not a convergence proof",
         }
@@ -111,11 +118,12 @@ class MuJoCoPlane:
 class SuperDexPlane:
     """Official FP64 API with actual COM state and signed per-contact forces."""
 
-    def __init__(self, case, output):
+    def __init__(self, case, output, *, normal_parameters=None):
         os.environ.setdefault("SUPERDEX_PRECISION", "fp64")
         import trimesh
         from superdex import physics as p
 
+        normal = contact_parameters.normal_parameters("superdex", normal_parameters)
         self.p, self.case = p, case
         identity = package_identity("superdex-physics-fp64")
         if identity["version"] != "1.0.0" or not p.uses_double_precision():
@@ -130,12 +138,10 @@ class SuperDexPlane:
             solver.non_linear_solver.max_iter = 100
             self.scene.set_solver_params(solver)
             contact = p.ContactParams()
-            contact.penalty_coefficient = 1e9
-            contact.penalty_threshold_default = 0.0001
-            contact.penalty_smoothing_half_distance = 0.00005
+            for key, value in normal.items():
+                setattr(contact, key, value)
             contact.coulomb_friction_coefficient = case.friction
             contact.friction_falloff_vel = 0.001
-            contact.normal_viscous_damping_coefficient = 0
             contact.viscous_friction_coefficient = 0
             mesh = trimesh.creation.box(extents=[2 * case.half_size] * 3)
             np.savez(output / "geometry.npz", vertices=mesh.vertices, faces=mesh.faces)
@@ -183,6 +189,10 @@ class SuperDexPlane:
             self.box.register_query(p.QueryType.TOTAL_CONTACT_FORCE)
             self.scene.step(0)
             self.metadata = {
+                "normal_parameters_readback": {
+                    key: float(getattr(self.box.get_contact_params(), key))
+                    for key in normal
+                },
                 "engine": "superdex",
                 "identity": identity,
                 "api_identity": package_identity("superdex-physics"),
@@ -212,7 +222,7 @@ class SuperDexPlane:
                     "absolute_tolerance": solver.non_linear_solver.abs_tol,
                     "relative_tolerance": solver.non_linear_solver.rel_tol,
                 },
-                "profile": "Explicit nominal penalty and friction constants; not calibrated",
+                "profile": "Explicit native penalty and friction constants; not hardware material calibration",
                 "force_epoch": "Actual total force and per-contact native queries after the solved step",
             }
         except Exception:
@@ -274,12 +284,13 @@ class SuperDexPlane:
 class PhysXPlane:
     """Qualified UniSim adapter; preserve separate normal/friction patch records."""
 
-    def __init__(self, case, output):
+    def __init__(self, case, output, *, normal_parameters=None):
         from unisim.backend.isaacsim import (
             backend as adapter,
         )
         from unisim.backend.isaacsim import (
             contact_details,
+            physx_solver,
             scene_worker,
         )
         from unisim.backend.isaacsim.dependencies import resolve_isaacsim_runtime
@@ -287,6 +298,7 @@ class PhysXPlane:
 
         from dexlab.physx_baseline import create_scene
 
+        normal = contact_parameters.normal_parameters("physx", normal_parameters)
         self.case, self.output, self.steps = case, output, 0
         runtime = resolve_isaacsim_runtime()
         worker = subprocess.run(
@@ -306,7 +318,7 @@ class PhysXPlane:
         worker_identity = json.loads(worker.stdout)
         if worker_identity["packages"]["isaacsim"] != "5.1.0.0":
             raise ValueError("The native profile requires Isaac Sim 5.1.0.0")
-        for module in (scene_worker, contact_details, adapter):
+        for module in (scene_worker, contact_details, adapter, physx_solver):
             path = Path(module.__file__)
             (output / f"unisim-{path.name}").write_bytes(path.read_bytes())
         self.backend = create_backend(
@@ -320,6 +332,11 @@ class PhysXPlane:
             isaacsim_external_forces_every_iteration=True,
             isaacsim_contact_offset=0.0001,
             isaacsim_rest_offset=0.0,
+            **(
+                {"isaacsim_" + k: v for k, v in normal.items()}
+                if normal_parameters
+                else {}
+            ),
         )
         try:
             self.backend.materialize()
@@ -336,12 +353,19 @@ class PhysXPlane:
             self.controls = np.empty((1, 0), dtype=np.float32)
             self.box_ids = self.backend.get_body_ids(["box/body"])
             self.metadata = {
+                "normal_parameters_readback": {}
+                if not normal_parameters
+                else {
+                    row["field"]: row["effective"]
+                    for row in self.backend.get_import_report().to_dict()["fields"]
+                    if row["field"] in normal
+                },
                 "engine": "physx",
                 "adapter_identity": package_identity("unisim-core"),
                 "worker": worker_identity,
                 "mass_readback": self.backend.get_body_mass().tolist(),
                 "friction_readback": self.backend.get_geom_friction().tolist(),
-                "profile": "TGS position8/velocity2, contact_offset0.1mm, rest_offset0; nominal uncalibrated",
+                "profile": "TGS8/2, contact_offset0.1mm, rest_offset0; explicit native profile, not hardware calibration",
                 "time_observation": "Count of completed synchronous steps at declared sim_dt; not native clock readback",
                 "force_epoch": "Normal and friction patches from completed native step; no pointwise pairing",
                 "solver_status": "Public RPC completion; native convergence residual unavailable",

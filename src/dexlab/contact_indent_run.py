@@ -14,6 +14,7 @@ from dexlab import (
     cloth_engines,
     contact_archive,
     contact_indent,
+    contact_load,
     contact_parameters,
     contact_plane,
     contact_plane_native,
@@ -24,11 +25,15 @@ from dexlab.physx_baseline import digest, write_json
 from dexlab.tasks import contact_plane as contact_task
 
 
-def run(case, engine, output):
+def run(case, engine, output, *, normal_parameters=None):
     if not case.name.startswith("dev-"):
         raise ValueError(
             "This response profile is development-only until calibration and suite freeze"
         )
+    loaded = isinstance(case, contact_load.LoadCase)
+    if normal_parameters and not loaded:
+        raise ValueError("Custom normal profiles require the explicit load protocol")
+    normal = contact_parameters.normal_parameters(engine, normal_parameters)
     output.mkdir(parents=True, exist_ok=False)
     sources = {
         "runner.py": Path(__file__),
@@ -39,6 +44,7 @@ def run(case, engine, output):
                 contact_parameters,
                 cloth_engines,
                 contact_indent,
+                contact_load,
                 contact_plane,
                 contact_plane_native,
                 physx_baseline,
@@ -51,7 +57,9 @@ def run(case, engine, output):
         (output / name).write_bytes(path.read_bytes())
     receipt = {
         "case": asdict(case),
-        "limits": LIMITS,
+        "limits": contact_load.LIMITS if loaded else LIMITS,
+        "protocol": "normal-load" if loaded else "indent",
+        "normal_parameters": normal if loaded else None,
         "engine": engine,
         "status": "preparing",
         "source_sha256": hashes,
@@ -77,6 +85,7 @@ def run(case, engine, output):
                 "max_episode_seconds": case.duration,
                 "output_dir": str(output),
                 "max_force_n": case.max_force,
+                "normal_parameters": normal if loaded else {},
             },
         )
         state = env.init_state()
@@ -114,7 +123,6 @@ def run(case, engine, output):
                 -1, 3
             ),
             "external_force": np.array(actions).reshape(-1, 3),
-            "target_height": case.target(np.arange(len(actions)) * case.timestep),
             "contact_known": np.array(
                 [r["contact_known"] for r in rows[1:]], dtype=bool
             ),
@@ -122,6 +130,10 @@ def run(case, engine, output):
                 [r["step_completed"] for r in rows[1:]], dtype=bool
             ),
         }
+        if loaded:
+            data["downward_load"] = case.loads()[: len(actions)]
+        else:
+            data["target_height"] = case.target(np.arange(len(actions)) * case.timestep)
         np.savez_compressed(output / "states.npz", **data)
         receipt["contact_archive"] = contact_archive.write_contacts(output, contacts)
         write_json(output / "native-status.json", statuses)
@@ -145,10 +157,14 @@ def run(case, engine, output):
 
 def verify(directory):
     receipt = json.loads((directory / "run.json").read_text())
-    case = IndentCase(**receipt["case"])
+    protocol = receipt.get("protocol", "indent")
+    if protocol not in ("indent", "normal-load"):
+        raise ValueError("Unknown contact protocol")
+    loaded = protocol == "normal-load"
+    case = (contact_load.LoadCase if loaded else IndentCase)(**receipt["case"])
     with np.load(directory / "states.npz", allow_pickle=False) as saved:
         data = dict(saved)
-    result = score(case, data)
+    result = (contact_load.score if loaded else score)(case, data)
     artifacts = receipt.get("artifact_sha256", {})
     required = {
         "states.npz",
@@ -174,7 +190,8 @@ def verify(directory):
         archived_source_hashes_match=contact_archive.source_snapshots_match(
             directory, receipt
         ),
-        declared_limits=receipt.get("limits") == LIMITS,
+        declared_limits=receipt.get("limits")
+        == (contact_load.LIMITS if loaded else LIMITS),
     )
     ledger = []
     try:
@@ -199,6 +216,14 @@ def verify(directory):
     result["checks"].update(
         contact_parameters.native_checks(directory, receipt, case.plane())
     )
+    if loaded:
+        result["checks"]["normal_parameters_match"] = (
+            contact_parameters.normal_readback_matches(
+                receipt["engine"],
+                receipt.get("normal_parameters"),
+                receipt.get("native", {}),
+            )
+        )
     result["passed"] = all(result["checks"].values())
     return result
 
@@ -209,20 +234,32 @@ def main():
     parser.add_argument("--case", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--verify", type=Path)
+    parser.add_argument(
+        "--protocol", choices=("indent", "normal-load"), default="indent"
+    )
+    parser.add_argument("--normal-parameters", type=Path)
     args = parser.parse_args()
     if args.verify:
-        if args.engine or args.case or args.output:
+        if (
+            args.engine
+            or args.case
+            or args.output
+            or args.normal_parameters
+            or args.protocol != "indent"
+        ):
             parser.error("--verify cannot be combined with run arguments")
         result = verify(args.verify.resolve())
     else:
         if not args.engine or not args.output:
             parser.error("--engine and --output are required")
-        case = (
-            IndentCase(**json.loads(args.case.read_text()))
-            if args.case
-            else IndentCase()
+        cls = contact_load.LoadCase if args.protocol == "normal-load" else IndentCase
+        case = cls(**json.loads(args.case.read_text())) if args.case else cls()
+        normal = (
+            json.loads(args.normal_parameters.read_text())
+            if args.normal_parameters
+            else None
         )
-        result = run(case, args.engine, args.output.resolve())
+        result = run(case, args.engine, args.output.resolve(), normal_parameters=normal)
     print(json.dumps(result, indent=2))
     raise SystemExit(0 if result["passed"] else 1)
 

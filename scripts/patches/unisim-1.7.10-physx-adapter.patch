@@ -1,10 +1,14 @@
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 98bf755..375e90a 100644
+index 98bf755..f032730 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -1,5 +1,18 @@
+@@ -1,5 +1,22 @@
  # Changelog
  
++## DexLab local compliant-contact adapter extension
++
++- Add explicit paired stiffness/damping options for native force-based PhysX compliant contact. Author all bound collision materials before reset with average combination; read composed USD values back and reject missing/mixed semantics. Values are per native constraint, not whole-object material moduli. Defaults and official engines are unchanged. This is not an upstream UniSim release.
++
 +## DexLab local contact diagnostics extension
 +
 +- Added explicit single-environment rigid-object normal-contact and friction-anchor snapshots. Poll every physics substep, preserve body identities, reject malformed/saturated buffers, and copy shared native counts before subsequent queries. Native collision exclusion relationships are exposed in diagnostic metadata. Official engine sources remain unchanged; this is not an upstream UniSim release.
@@ -21,7 +25,7 @@ index 98bf755..375e90a 100644
  ## 1.7.10 - 2026-09-24
  
  - Sped up mapped IsaacSim prototype authoring at catalog scale (1200-variant INIT entity build drops from 134s to 11s; total INIT from 158s to 35s). Two serialized overheads dominated: each per-variant prototype spawn went through IsaacLab's `UsdFileCfg` spawner, whose `check_usd_path_with_timeout` runs an asyncio `omni.client.stat_async` availability probe with a fixed ~0.1s event-loop yield per call (127s of the 157s INIT, at near-zero CPU/GPU utilization), and every spawn ran with the physics change listener attached, so PhysX parsed each transient prototype subtree (~43ms per variant) even though prototypes are removed before physics starts. The worker now authors the same reference arc directly through `isaacsim.core.utils.prims.create_prim` behind a plain `os.path.isfile` guard — every spawned path is a validated cache artifact (manifest + SHA-256) or a fresh copy of one, and every spawner override the worker set was `None` or unconsumed by the from-files spawner — and prototype spawns join the destination copies and the prototype scope removal under the existing single change-listener toggle, so physics only ever parses the final per-environment destinations. Stage-object edits stay outside the copy loop's `Sdf.ChangeBlock` (deferred layer notices break `DefinePrim` recomposition). Authored prims, the composed stage, PhysX view order, and the native instance audit are unchanged.
-@@ -385,3 +398,7 @@
+@@ -385,3 +402,7 @@
  - Bootstrap the `unisim` namespace and `unisim-core` distribution.
  - Add the backend-neutral `SimBackend` contract, fake backend, and conformance helper.
  - Reserve benchmark case/result interfaces without implementing workloads or measurements.
@@ -30,10 +34,10 @@ index 98bf755..375e90a 100644
 +
 +- Add opt-in minimum torsional contact radius with fail-closed host/worker validation and native USD readback; defaults and cached roles unchanged. This exposes an official PhysX parameter, not a solver patch.
 diff --git a/docs/en/support-matrix.md b/docs/en/support-matrix.md
-index a88a6b6..7f5af04 100644
+index a88a6b6..1d15213 100644
 --- a/docs/en/support-matrix.md
 +++ b/docs/en/support-matrix.md
-@@ -85,3 +85,25 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
+@@ -85,3 +85,29 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
  DR, playback, body-wrench and fixed-variant capability sources remain their existing instance APIs. The static inventory intentionally leaves those dependent entries unknown; `backend.get_capabilities()` aggregates authoritative instance declarations. Multiple logical entity partitions do not imply arbitrary multi-articulation composition. URDF investigations and unmerged branches are not current support. IsaacSim's legacy reserved zero contact buffer never means a valid contact query or absence of physical contact; mapped scenes serve declared geom-pair `contact data="force" reduce="netforce"` sensors through the dedicated PhysX pair-force slot and wildcard body-net force (`geom2` omitted) plus body-net `data="found"` flags through one batched per-entity PhysX contact view, while legacy model-file scenes fail all contact declarations closed. Isaac worker sensors support gyro reconstruction but reject accelerometers.
  
  The [capability design decision](adr-capabilities.md) defines evidence matching and snapshot lifetime. `available` in the installation table above is never a task compatibility decision.
@@ -59,11 +63,15 @@ index a88a6b6..7f5af04 100644
 +`create_backend("isaacsim", ..., isaacsim_min_torsional_patch_radius=radius)` optionally sets the official PhysX minimum torsional patch radius, in meters, on every composed collision shape before initialization. `None` preserves defaults; zero explicitly disables this minimum-radius contribution. Values must be finite and nonnegative, and host/worker validate the request and uniform native readback. Cached role files remain unchanged.
 +
 +This is an explicit contact-model assumption, not an automatic conversion of MuJoCo torsional friction coefficients or a material calibration. Native normal/friction point records do not expose a separate torsional impulse; linear force closure is not a full angular-momentum check. PhysX SDK source and binaries are unchanged.
++
++### DexLab local compliant contact
++
++Explicit `isaacsim_compliant_contact_stiffness` and `isaacsim_compliant_contact_damping` must be provided together and be finite/nonnegative. Zero stiffness disables compliance and requires zero damping. Positive stiffness selects native force-based implicit spring contact (N/m and N s/m per native contact constraint); the adapter fixes stiffness/damping combination to average and disables acceleration-spring semantics. All enabled collision materials must be bound and consistent. Values are authored after cached roles are composed and before reset, then read from composed USD; this is not a direct native material-tensor readback or a measured macroscopic modulus. Defaults remain unchanged. This is a local DexLab adapter extension, not an upstream release.
 diff --git a/docs/zh/support-matrix.md b/docs/zh/support-matrix.md
-index 155b431..4e9d1f6 100644
+index 155b431..0e43ec8 100644
 --- a/docs/zh/support-matrix.md
 +++ b/docs/zh/support-matrix.md
-@@ -85,3 +85,25 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
+@@ -85,3 +85,29 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
  DR、播放、body wrench 和 fixed-variant 能力仍由既有实例 API 提供权威信息。静态清单有意将依赖这些来源的项目保留为 unknown；`backend.get_capabilities()` 聚合实例权威声明。多个逻辑实体分区不代表任意多 articulation 组合。URDF 调研和未合并分支不构成当前支持。IsaacSim legacy 路径预留的零接触缓冲区既不代表有效接触查询，也不代表没有物理接触；映射场景把具名 geom-pair `contact data="force" reduce="netforce"` 声明路由到专用 PhysX 碰撞对力槽位，把 wildcard body-net force（省略 `geom2`）与 body-net `data="found"` 标志路由到批量逐 entity PhysX contact view；legacy model-file 场景的一切 contact 声明均快速失败。Isaac worker 的传感器支持 gyro 重建，但拒绝 accelerometer。
  
  [能力设计决策](adr-capabilities.md) 定义证据匹配和快照生命周期。上方安装表中的 `available` 始终不能用于判断任务兼容性。
@@ -89,11 +97,15 @@ index 155b431..4e9d1f6 100644
 +`create_backend("isaacsim", ..., isaacsim_min_torsional_patch_radius=radius)` 可选地在初始化前，对已组合的全部碰撞形状设置官方 PhysX 最小扭转接触半径，单位 m。`None` 保留默认值；零明确关闭最小半径贡献。数值须有限且非负，主机与 worker 均验证请求，并核对统一的原生读回。缓存角色文件不修改。
 +
 +这是显式的接触模型假设，不自动转换 MuJoCo 扭转摩擦系数，也不是材料标定。原生法向／摩擦点记录没有独立扭转冲量通道；线性力平衡不等于完整角动量检查。PhysX SDK 源码和二进制不变。
++
++### DexLab 本地柔顺接触扩展
++
++必须同时指定 `isaacsim_compliant_contact_stiffness` 和 `isaacsim_compliant_contact_damping`，数值有限且非负。零刚度关闭柔顺接触，同时要求零阻尼。正刚度启用原生基于力的隐式弹簧接触（每条原生接触约束的 N/m 与 N s/m）；适配器固定刚度/阻尼组合方式为平均值，关闭加速度弹簧。所有启用碰撞的材料必须绑定且语义一致。配置在缓存角色组合后、reset 前写入，并从组合 USD 读回；这不是原生材料张量的直接读回，也不是测得的宏观材料模量。默认行为保持不变。本扩展属于 DexLab 的适配器修改，不是上游发布。
 diff --git a/src/unisim/backend/isaacsim/backend.py b/src/unisim/backend/isaacsim/backend.py
-index 2b3077e..3d2e69d 100644
+index 2b3077e..23025d0 100644
 --- a/src/unisim/backend/isaacsim/backend.py
 +++ b/src/unisim/backend/isaacsim/backend.py
-@@ -119,11 +119,13 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+@@ -119,11 +119,15 @@ class IsaacSimBackend(MjcfSubprocessBackend):
          render_mode: str | None = None,
          render_width: int = 1280,
          render_height: int = 720,
@@ -103,11 +115,13 @@ index 2b3077e..3d2e69d 100644
          bounce_threshold_velocity: float | None = None,
          contact_offset: float | None = None,
          rest_offset: float | None = None,
++        compliant_contact_stiffness: float | None = None,
++        compliant_contact_damping: float | None = None,
 +        min_torsional_patch_radius: float | None = None,
          max_depenetration_velocity: float | None = None,
          gpu_max_rigid_contact_count: int | None = None,
          gpu_max_rigid_patch_count: int | None = None,
-@@ -135,11 +137,13 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+@@ -135,11 +139,15 @@ class IsaacSimBackend(MjcfSubprocessBackend):
                  raise ValueError(f"{name} must be a positive integer, got {value!r}")
          # Validation is fail-closed at construction, before any worker spawn.
          self._physx_solver = PhysxSolverConfig(
@@ -117,11 +131,13 @@ index 2b3077e..3d2e69d 100644
              bounce_threshold_velocity=bounce_threshold_velocity,
              contact_offset=contact_offset,
              rest_offset=rest_offset,
++            compliant_contact_stiffness=compliant_contact_stiffness,
++            compliant_contact_damping=compliant_contact_damping,
 +            min_torsional_patch_radius=min_torsional_patch_radius,
              max_depenetration_velocity=max_depenetration_velocity,
              gpu_max_rigid_contact_count=gpu_max_rigid_contact_count,
              gpu_max_rigid_patch_count=gpu_max_rigid_patch_count,
-@@ -1067,6 +1071,37 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+@@ -1067,6 +1075,37 @@ class IsaacSimBackend(MjcfSubprocessBackend):
              return self._slots["contact_sensor_force"][:, spec.sensor_index, :].copy()
          return super().get_sensor_data(name)
  
@@ -255,10 +271,10 @@ index 0000000..d3d7b6a
 +            "friction_point": friction_point,
 +        }
 diff --git a/src/unisim/backend/isaacsim/physx_solver.py b/src/unisim/backend/isaacsim/physx_solver.py
-index abe7b6f..f9b6c8b 100644
+index abe7b6f..c701aad 100644
 --- a/src/unisim/backend/isaacsim/physx_solver.py
 +++ b/src/unisim/backend/isaacsim/physx_solver.py
-@@ -26,11 +26,13 @@ from typing import Any
+@@ -26,11 +26,15 @@ from typing import Any
  
  import numpy as np
  
@@ -268,19 +284,25 @@ index abe7b6f..f9b6c8b 100644
  BOUNCE_THRESHOLD_FIELD = "bounce_threshold_velocity"
  CONTACT_OFFSET_FIELD = "contact_offset"
  REST_OFFSET_FIELD = "rest_offset"
++COMPLIANT_STIFFNESS_FIELD = "compliant_contact_stiffness"
++COMPLIANT_DAMPING_FIELD = "compliant_contact_damping"
 +MIN_TORSIONAL_PATCH_RADIUS_FIELD = "min_torsional_patch_radius"
  MAX_DEPENETRATION_VELOCITY_FIELD = "max_depenetration_velocity"
  GPU_MAX_RIGID_CONTACT_COUNT_FIELD = "gpu_max_rigid_contact_count"
  GPU_MAX_RIGID_PATCH_COUNT_FIELD = "gpu_max_rigid_patch_count"
-@@ -43,6 +45,7 @@ PHYSX_SOLVER_FLOAT_FIELDS = (
+@@ -41,8 +45,11 @@ PHYSX_SOLVER_ITERATION_FIELDS = (
+ )
+ PHYSX_SOLVER_FLOAT_FIELDS = (
      BOUNCE_THRESHOLD_FIELD,
++    COMPLIANT_STIFFNESS_FIELD,
++    COMPLIANT_DAMPING_FIELD,
      CONTACT_OFFSET_FIELD,
      REST_OFFSET_FIELD,
 +    MIN_TORSIONAL_PATCH_RADIUS_FIELD,
      MAX_DEPENETRATION_VELOCITY_FIELD,
  )
  PHYSX_SOLVER_GPU_BUFFER_FIELDS = (
-@@ -54,6 +57,7 @@ PHYSX_SOLVER_FIELDS = (
+@@ -54,6 +61,7 @@ PHYSX_SOLVER_FIELDS = (
      PHYSX_SOLVER_ITERATION_FIELDS
      + PHYSX_SOLVER_FLOAT_FIELDS
      + PHYSX_SOLVER_GPU_BUFFER_FIELDS
@@ -288,10 +310,12 @@ index abe7b6f..f9b6c8b 100644
  )
  # The GPU buffer capacities are PhysX carb settings flattened into the
  # simulation parameters, not USD attributes; the worker reports the authored
-@@ -96,11 +100,24 @@ class PhysxSolverConfig:
+@@ -96,11 +104,38 @@ class PhysxSolverConfig:
      bounce_threshold_velocity: float | None = None
      contact_offset: float | None = None
      rest_offset: float | None = None
++    compliant_contact_stiffness: float | None = None
++    compliant_contact_damping: float | None = None
 +    min_torsional_patch_radius: float | None = None
      max_depenetration_velocity: float | None = None
      gpu_max_rigid_contact_count: int | None = None
@@ -300,6 +324,18 @@ index abe7b6f..f9b6c8b 100644
 +    external_forces_every_iteration: bool | None = None
 +
      def __post_init__(self) -> None:
++        compliance = (self.compliant_contact_stiffness, self.compliant_contact_damping)
++        if any(v is not None for v in compliance):
++            if any(v is None for v in compliance):
++                raise ValueError(
++                    "Compliant contact stiffness and damping must be explicit together"
++                )
++            for field in (COMPLIANT_STIFFNESS_FIELD, COMPLIANT_DAMPING_FIELD):
++                object.__setattr__(self, field, _validated_float(
++                    field, getattr(self, field), allow_zero=True
++                ))
++            if self.compliant_contact_stiffness == 0 and self.compliant_contact_damping != 0:
++                raise ValueError("Zero stiffness disables compliance and requires zero damping")
 +        if self.min_torsional_patch_radius is not None:
 +            object.__setattr__(
 +                self, MIN_TORSIONAL_PATCH_RADIUS_FIELD,
@@ -313,7 +349,7 @@ index abe7b6f..f9b6c8b 100644
          if self.solver_position_iteration_count is not None:
              object.__setattr__(
                  self,
-@@ -219,6 +236,8 @@ class PhysxSolverConfig:
+@@ -219,6 +254,8 @@ class PhysxSolverConfig:
  
  def solver_value_matches(field: str, requested: Any, reported: Any) -> bool:
      """Strict host comparison; only the engine's float32 storage is tolerated."""
@@ -322,7 +358,7 @@ index abe7b6f..f9b6c8b 100644
      if field in PHYSX_SOLVER_INT_FIELDS:
          return (
              not isinstance(reported, bool)
-@@ -262,13 +281,26 @@ def build_isaaclab_physx_cfg(sim_utils: Any, config: PhysxSolverConfig) -> Any:
+@@ -262,13 +299,26 @@ def build_isaaclab_physx_cfg(sim_utils: Any, config: PhysxSolverConfig) -> Any:
      return sim_utils.PhysxCfg(**kwargs)
  
  
@@ -350,7 +386,7 @@ index abe7b6f..f9b6c8b 100644
  
      The offsets live on ``PhysxSchema.PhysxCollisionAPI`` (plain
      ``UsdPhysics.CollisionAPI`` has no such attributes), so the API is applied
-@@ -276,7 +308,8 @@ def apply_collision_offsets(
+@@ -276,7 +326,8 @@ def apply_collision_offsets(
      ``restOffset <= contactOffset``; ``PhysxSolverConfig`` validates the
      relationship before the worker applies it here.
      """
@@ -360,7 +396,7 @@ index abe7b6f..f9b6c8b 100644
          raise ValueError("apply_collision_offsets requires at least one offset")
      from pxr import PhysxSchema, UsdPhysics  # type: ignore[import-not-found]
  
-@@ -291,6 +324,8 @@ def apply_collision_offsets(
+@@ -291,6 +342,8 @@ def apply_collision_offsets(
              physx_api.CreateContactOffsetAttr().Set(float(contact_offset))
          if rest_offset is not None:
              physx_api.CreateRestOffsetAttr().Set(float(rest_offset))
@@ -369,9 +405,11 @@ index abe7b6f..f9b6c8b 100644
          applied += 1
      if applied == 0:
          raise RuntimeError(
-@@ -365,7 +400,9 @@ def read_engine_solver_values(
+@@ -364,8 +417,11 @@ def read_engine_solver_values(
+     stage: Any,
      *,
      include_contact_offset: bool,
++    include_compliant_contacts: bool = False,
      include_rest_offset: bool = False,
 +    include_min_torsional_patch_radius: bool = False,
      include_max_depenetration_velocity: bool = False,
@@ -379,7 +417,7 @@ index abe7b6f..f9b6c8b 100644
  ) -> dict[str, Any]:
      """Read the applied solver settings back from the USD stage (worker-side only)."""
      from pxr import PhysxSchema  # type: ignore[import-not-found]
-@@ -389,6 +426,11 @@ def read_engine_solver_values(
+@@ -389,6 +445,11 @@ def read_engine_solver_values(
          ),
          BOUNCE_THRESHOLD_FIELD: float(scene_api.GetBounceThresholdAttr().Get()),
      }
@@ -391,7 +429,7 @@ index abe7b6f..f9b6c8b 100644
      if include_contact_offset:
          result[CONTACT_OFFSET_FIELD] = _authored_offset_values(
              stage,
-@@ -403,6 +445,13 @@ def read_engine_solver_values(
+@@ -403,6 +464,13 @@ def read_engine_solver_values(
              label="rest offset",
              plural="rest offsets",
          ).pop()
@@ -405,8 +443,92 @@ index abe7b6f..f9b6c8b 100644
      if include_max_depenetration_velocity:
          result[MAX_DEPENETRATION_VELOCITY_FIELD] = _authored_rigid_body_values(
              stage,
+@@ -410,9 +478,83 @@ def read_engine_solver_values(
+             label="max depenetration velocity",
+             plural="max depenetration velocities",
+         ).pop()
++    if include_compliant_contacts:
++        result.update(read_compliant_materials(stage))
+     return result
+ 
+ 
++def _collision_materials(stage: Any) -> list[Any]:
++    """Resolve every enabled collider's physics material, including instances."""
++    from pxr import Usd, UsdPhysics, UsdShade
++
++    materials = {}
++    for prim in Usd.PrimRange.Stage(stage, Usd.TraverseInstanceProxies()):
++        if not prim.HasAPI(UsdPhysics.CollisionAPI):
++            continue
++        if UsdPhysics.CollisionAPI(prim).GetCollisionEnabledAttr().Get() is False:
++            continue
++        targets = prim.GetRelationship("material:binding:physics").GetTargets()
++        if len(targets) == 1:
++            material = stage.GetPrimAtPath(targets[0])
++        else:
++            bound, _relationship = UsdShade.MaterialBindingAPI(prim).ComputeBoundMaterial(
++                materialPurpose="physics"
++            )
++            material = bound.GetPrim()
++        if not material or not material.IsValid() or not material.HasAPI(UsdPhysics.MaterialAPI):
++            raise RuntimeError(
++                f"Compliant contact requires a bound physics material: {prim.GetPath()}"
++            )
++        materials[str(material.GetPath())] = material
++    if not materials:
++        raise RuntimeError("No enabled collision materials for compliant contact")
++    return list(materials.values())
++
++
++def apply_compliant_materials(stage: Any, stiffness: float, damping: float | None) -> None:
++    """Apply force-based implicit springs before reset; never change engine code.
++
++    The values are per native contact constraint, not a whole-object modulus.
++    Global average combination is explicit; restitution is unused in this mode.
++    """
++    from pxr import PhysxSchema
++
++    if damping is None:
++        raise ValueError("Compliant contact damping must be explicit")
++    for material in _collision_materials(stage):
++        api = PhysxSchema.PhysxMaterialAPI.Apply(material)
++        api.CreateCompliantContactStiffnessAttr().Set(float(stiffness))
++        api.CreateCompliantContactDampingAttr().Set(float(damping))
++        api.CreateCompliantContactAccelerationSpringAttr().Set(False)
++        api.CreateRestitutionCombineModeAttr().Set("average")
++        api.CreateDampingCombineModeAttr().Set("average")
++
++
++def read_compliant_materials(stage: Any) -> dict[str, float]:
++    """Read composed USD materials back and reject mixed or missing semantics."""
++    from pxr import PhysxSchema
++
++    values = set()
++    for material in _collision_materials(stage):
++        if not material.HasAPI(PhysxSchema.PhysxMaterialAPI):
++            raise RuntimeError("A collision material has no compliant-contact schema")
++        api = PhysxSchema.PhysxMaterialAPI(material)
++        if api.GetCompliantContactAccelerationSpringAttr().Get() is not False:
++            raise RuntimeError("Compliant contact must use force-based springs")
++        if (api.GetRestitutionCombineModeAttr().Get() != "average"
++                or api.GetDampingCombineModeAttr().Get() != "average"):
++            raise RuntimeError("Compliant contact must use average combination")
++        pair = (api.GetCompliantContactStiffnessAttr().Get(),
++                api.GetCompliantContactDampingAttr().Get())
++        if any(v is None or not np.isfinite(v) or v < 0 for v in pair):
++            raise RuntimeError("Invalid compliant-contact material readback")
++        values.add(tuple(map(float, pair)))
++    if len(values) != 1:
++        raise RuntimeError("Compliant-contact collision materials disagree")
++    stiffness, damping = values.pop()
++    return {COMPLIANT_STIFFNESS_FIELD: stiffness, COMPLIANT_DAMPING_FIELD: damping}
++
++
+ def _authored_rigid_body_values(
+     stage: Any, *, api_attr: str, label: str, plural: str
+ ) -> set[float]:
 diff --git a/src/unisim/backend/isaacsim/scene_worker.py b/src/unisim/backend/isaacsim/scene_worker.py
-index c183891..b4610fa 100644
+index c183891..db1ac9a 100644
 --- a/src/unisim/backend/isaacsim/scene_worker.py
 +++ b/src/unisim/backend/isaacsim/scene_worker.py
 @@ -21,6 +21,7 @@ import numpy as np
@@ -573,7 +695,18 @@ index c183891..b4610fa 100644
                              fix_base=(
                                  raw_entity.kind == "articulation"
                                  and raw_entity.root_mode == "fixed"
-@@ -1924,6 +1975,19 @@ class SceneWorkerContext:
+@@ -1920,10 +1971,30 @@ class SceneWorkerContext:
+         # Collision offsets are baked into the role artifacts (identical on
+         # every environment copy); the max depenetration velocity is still
+         # authored on every rigid body before the first physics step.
++        if self.physx_solver.compliant_contact_stiffness is not None:
++            from unisim.backend.isaacsim.physx_solver import apply_compliant_materials
++
++            apply_compliant_materials(
++                self.sim.stage, self.physx_solver.compliant_contact_stiffness,
++                self.physx_solver.compliant_contact_damping,
++            )
+         if self.physx_solver.max_depenetration_velocity is not None:
              apply_max_depenetration_velocity(
                  self.sim.stage, self.physx_solver.max_depenetration_velocity
              )
@@ -593,7 +726,7 @@ index c183891..b4610fa 100644
          telemetry.mark("collision_offsets")
          self.sim.reset()
          for entity, asset in zip(self.layout.entities, self.assets):
-@@ -2340,6 +2404,8 @@ class SceneWorkerContext:
+@@ -2340,6 +2411,8 @@ class SceneWorkerContext:
                          row["geom_contact_masks"] for row in geometry_rows
                      ],
                      "geom_friction": [row["geom_friction"] for row in geometry_rows],
@@ -602,7 +735,7 @@ index c183891..b4610fa 100644
                  }
              )
          return result
-@@ -2451,6 +2517,67 @@ class SceneWorkerContext:
+@@ -2451,6 +2524,67 @@ class SceneWorkerContext:
                  )
              self.slots["contact_force"][mapping["env"], mapping["body"]] = net
  
@@ -670,7 +803,7 @@ index c183891..b4610fa 100644
      def set_state(self, payload: dict[str, Any]) -> dict[str, Any]:
          """Translate only the old wire; native reset always uses reset_entities."""
          if self.legacy_projection is None:
-@@ -2494,6 +2621,8 @@ class SceneWorkerContext:
+@@ -2494,6 +2628,8 @@ class SceneWorkerContext:
                  for sensor in self.contact_sensors:
                      sensor.update(self.sim_dt)
                  self._poll_body_net_contact_forces()
@@ -679,12 +812,15 @@ index c183891..b4610fa 100644
              if wrench is not None:
                  self._clear_body_wrench()
              self.refresh_state_slots()
-@@ -3265,8 +3394,14 @@ class SceneWorkerContext:
+@@ -3265,8 +3401,17 @@ class SceneWorkerContext:
              solver_readback = (
                  read_engine_solver_values(
                      self.sim.stage,
 +                    include_external_forces_every_iteration=(
 +                        self.physx_solver.external_forces_every_iteration is not None
++                    ),
++                    include_compliant_contacts=(
++                        self.physx_solver.compliant_contact_stiffness is not None
 +                    ),
                      include_contact_offset=self.physx_solver.contact_offset is not None,
                      include_rest_offset=self.physx_solver.rest_offset is not None,
@@ -772,10 +908,10 @@ index 0000000..362bcb9
 +        raise RuntimeError("Native SDF approximation or resolution differs from request")
 +    return values
 diff --git a/src/unisim/backend/isaacsim/worker.py b/src/unisim/backend/isaacsim/worker.py
-index 6d971ba..0550d2b 100644
+index 6d971ba..b23d6d7 100644
 --- a/src/unisim/backend/isaacsim/worker.py
 +++ b/src/unisim/backend/isaacsim/worker.py
-@@ -392,11 +392,13 @@ class _WorkerContext:
+@@ -392,11 +392,20 @@ class _WorkerContext:
          if (
              self.physx_solver.contact_offset is not None
              or self.physx_solver.rest_offset is not None
@@ -786,11 +922,23 @@ index 6d971ba..0550d2b 100644
                  contact_offset=self.physx_solver.contact_offset,
                  rest_offset=self.physx_solver.rest_offset,
 +                min_torsional_patch_radius=self.physx_solver.min_torsional_patch_radius,
++            )
++        if self.physx_solver.compliant_contact_stiffness is not None:
++            from unisim.backend.isaacsim.physx_solver import apply_compliant_materials
++
++            apply_compliant_materials(
++                self.sim.stage, self.physx_solver.compliant_contact_stiffness,
++                self.physx_solver.compliant_contact_damping,
              )
          if self.physx_solver.max_depenetration_velocity is not None:
              apply_max_depenetration_velocity(
-@@ -467,6 +469,9 @@ class _WorkerContext:
+@@ -465,8 +474,14 @@ class _WorkerContext:
+             solver_readback = (
+                 read_engine_solver_values(
                      self.sim.stage,
++                    include_compliant_contacts=(
++                        self.physx_solver.compliant_contact_stiffness is not None
++                    ),
                      include_contact_offset=self.physx_solver.contact_offset is not None,
                      include_rest_offset=self.physx_solver.rest_offset is not None,
 +                    include_min_torsional_patch_radius=(
@@ -799,7 +947,7 @@ index 6d971ba..0550d2b 100644
                      include_max_depenetration_velocity=(
                          self.physx_solver.max_depenetration_velocity is not None
                      ),
-@@ -788,6 +793,8 @@ def _dispatch(ctx: Any, protocol: Any, cmd: str, payload: Any) -> tuple[str, Any
+@@ -788,6 +803,8 @@ def _dispatch(ctx: Any, protocol: Any, cmd: str, payload: Any) -> tuple[str, Any
          return protocol.CMD_META, ctx.render_frame()
      if cmd == protocol.CMD_CAPTURE_FRAME:
          return protocol.CMD_META, ctx.capture_frame()
@@ -837,7 +985,7 @@ index afdf4d1..e7825dc 100644
  
  
 diff --git a/src/unisim/factory.py b/src/unisim/factory.py
-index 679f6a9..2734cde 100644
+index 679f6a9..bb61c77 100644
 --- a/src/unisim/factory.py
 +++ b/src/unisim/factory.py
 @@ -175,6 +175,9 @@ def _create_backend(
@@ -850,15 +998,18 @@ index 679f6a9..2734cde 100644
      isaacsim_solver_position_iteration_count = kwargs.pop(
          "isaacsim_solver_position_iteration_count", None
      )
-@@ -183,6 +186,7 @@ def _create_backend(
+@@ -183,7 +186,10 @@ def _create_backend(
      )
      isaacsim_bounce_threshold_velocity = kwargs.pop("isaacsim_bounce_threshold_velocity", None)
      isaacsim_contact_offset = kwargs.pop("isaacsim_contact_offset", None)
 +    isaacsim_min_torsional_patch_radius = kwargs.pop("isaacsim_min_torsional_patch_radius", None)
      isaacsim_rest_offset = kwargs.pop("isaacsim_rest_offset", None)
++    isaacsim_compliant_contact_stiffness = kwargs.pop("isaacsim_compliant_contact_stiffness", None)
++    isaacsim_compliant_contact_damping = kwargs.pop("isaacsim_compliant_contact_damping", None)
      isaacsim_max_depenetration_velocity = kwargs.pop(
          "isaacsim_max_depenetration_velocity", None
-@@ -405,6 +409,8 @@ def _create_backend(
+     )
+@@ -405,6 +411,8 @@ def _create_backend(
          kwargs["render_height"] = (
              isaacsim_render_height if direct_render_height is None else direct_render_height
          )
@@ -867,12 +1018,16 @@ index 679f6a9..2734cde 100644
          if isaacsim_solver_position_iteration_count is not None:
              kwargs["solver_position_iteration_count"] = (
                  isaacsim_solver_position_iteration_count
-@@ -417,6 +423,8 @@ def _create_backend(
+@@ -417,6 +425,12 @@ def _create_backend(
              kwargs["bounce_threshold_velocity"] = isaacsim_bounce_threshold_velocity
          if isaacsim_contact_offset is not None:
              kwargs["contact_offset"] = isaacsim_contact_offset
 +        if isaacsim_min_torsional_patch_radius is not None:
 +            kwargs["min_torsional_patch_radius"] = isaacsim_min_torsional_patch_radius
++        if isaacsim_compliant_contact_stiffness is not None:
++            kwargs["compliant_contact_stiffness"] = isaacsim_compliant_contact_stiffness
++        if isaacsim_compliant_contact_damping is not None:
++            kwargs["compliant_contact_damping"] = isaacsim_compliant_contact_damping
          if isaacsim_rest_offset is not None:
              kwargs["rest_offset"] = isaacsim_rest_offset
          if isaacsim_max_depenetration_velocity is not None:
@@ -888,6 +1043,111 @@ index ea8181c..7ce8011 100644
      ctx.layout = _layout()
      ctx.num_envs = 2
      ctx.sim_dt = 0.002
+diff --git a/tests/adapters/isaacsim/test_compliant_contact.py b/tests/adapters/isaacsim/test_compliant_contact.py
+new file mode 100644
+index 0000000..85dd6e0
+--- /dev/null
++++ b/tests/adapters/isaacsim/test_compliant_contact.py
+@@ -0,0 +1,99 @@
++"""Opt-in force-contact material semantics without loading a native SDK."""
++
++from __future__ import annotations
++
++import sys
++from types import SimpleNamespace
++
++import pytest
++
++from unisim.backend.isaacsim import physx_solver as solver
++
++
++@pytest.mark.parametrize("stiffness,damping", [(5000, 2), (0, 0)])
++def test_material_options_round_trip(stiffness, damping):
++    config = solver.PhysxSolverConfig(
++        compliant_contact_stiffness=stiffness, compliant_contact_damping=damping
++    )
++    assert solver.PhysxSolverConfig.from_payload(config.to_payload()) == config
++
++
++@pytest.mark.parametrize(
++    "stiffness,damping",
++    [
++        (1, None),
++        (None, 1),
++        (-1, 0),
++        (1, -1),
++        (0, 1),
++        (True, 0),
++        (1, float("nan")),
++        (float("inf"), 1),
++    ],
++)
++def test_invalid_material_options_fail_before_worker(stiffness, damping):
++    with pytest.raises((TypeError, ValueError)):
++        solver.PhysxSolverConfig(
++            compliant_contact_stiffness=stiffness, compliant_contact_damping=damping
++        )
++
++
++class Attribute:
++    def __init__(self):
++        self.value = None
++
++    def Set(self, value):  # noqa: N802 -- match the public USD API
++        self.value = value
++
++    def Get(self):  # noqa: N802 -- match the public USD API
++        return self.value
++
++
++class Material:
++    def __init__(self):
++        self.attributes = {}
++
++    def HasAPI(self, _api):  # noqa: N802 -- match the public USD API
++        return bool(self.attributes)
++
++
++class MaterialAPI:
++    def __init__(self, material):
++        self.material = material
++
++    @classmethod
++    def Apply(cls, material):  # noqa: N802 -- match the public USD API
++        return cls(material)
++
++    def __getattr__(self, name):
++        key = name.removeprefix("Create").removeprefix("Get")
++        return lambda: self.material.attributes.setdefault(key, Attribute())
++
++
++def test_authored_materials_read_back_and_mixed_semantics_fail(monkeypatch):
++    materials = [Material(), Material()]
++    monkeypatch.setitem(
++        sys.modules,
++        "pxr",
++        SimpleNamespace(PhysxSchema=SimpleNamespace(PhysxMaterialAPI=MaterialAPI)),
++    )
++    monkeypatch.setattr(solver, "_collision_materials", lambda _stage: materials)
++    solver.apply_compliant_materials(None, 5000, 2)
++    assert solver.read_compliant_materials(None) == {
++        "compliant_contact_stiffness": 5000,
++        "compliant_contact_damping": 2,
++    }
++    changes = {
++        "CompliantContactStiffnessAttr": 6000,
++        "CompliantContactDampingAttr": None,
++        "CompliantContactAccelerationSpringAttr": True,
++        "RestitutionCombineModeAttr": "multiply",
++        "DampingCombineModeAttr": "max",
++    }
++    for key, value in changes.items():
++        attribute = materials[1].attributes[key]
++        old = attribute.Get()
++        attribute.Set(value)
++        with pytest.raises(RuntimeError):
++            solver.read_compliant_materials(None)
++        attribute.Set(old)
 diff --git a/tests/adapters/isaacsim/test_contact_details.py b/tests/adapters/isaacsim/test_contact_details.py
 new file mode 100644
 index 0000000..0ea4966
@@ -1003,7 +1263,7 @@ index 2bdc25a..cd47110 100644
          ctx.slots["contact_force"][:, 0, :], [[3, 0, 0], [3, 0, 0]]
      )
 diff --git a/tests/adapters/isaacsim/test_physx_solver.py b/tests/adapters/isaacsim/test_physx_solver.py
-index fe51fd9..984bac3 100644
+index fe51fd9..5b117d6 100644
 --- a/tests/adapters/isaacsim/test_physx_solver.py
 +++ b/tests/adapters/isaacsim/test_physx_solver.py
 @@ -15,6 +15,7 @@ from unisim.backend.isaacsim.physx_solver import (
@@ -1014,20 +1274,24 @@ index fe51fd9..984bac3 100644
      apply_max_depenetration_velocity,
      build_isaaclab_physx_cfg,
      read_engine_solver_values,
-@@ -59,6 +60,8 @@ def test_valid_values_normalize():
+@@ -59,6 +60,10 @@ def test_valid_values_normalize():
          max_depenetration_velocity=1000,
          gpu_max_rigid_contact_count=2**24,
          gpu_max_rigid_patch_count=2**23,
 +        external_forces_every_iteration=True,
 +        min_torsional_patch_radius=0.001,
++        compliant_contact_stiffness=5000,
++        compliant_contact_damping=2,
      )
      assert config.configured_fields() == PHYSX_SOLVER_FIELDS
      assert config.to_payload() == {
-@@ -67,9 +70,11 @@ def test_valid_values_normalize():
+@@ -67,9 +72,13 @@ def test_valid_values_normalize():
          "bounce_threshold_velocity": 0.0,
          "contact_offset": 0.002,
          "rest_offset": 0.0,
 +        "min_torsional_patch_radius": 0.001,
++        "compliant_contact_stiffness": 5000.0,
++        "compliant_contact_damping": 2.0,
          "max_depenetration_velocity": 1000.0,
          "gpu_max_rigid_contact_count": 16777216,
          "gpu_max_rigid_patch_count": 8388608,
@@ -1035,7 +1299,7 @@ index fe51fd9..984bac3 100644
      }
  
  
-@@ -90,6 +95,11 @@ def test_valid_values_normalize():
+@@ -90,6 +99,11 @@ def test_valid_values_normalize():
          {"contact_offset": 0},
          {"contact_offset": -0.002},
          {"contact_offset": "0.002"},
@@ -1047,7 +1311,7 @@ index fe51fd9..984bac3 100644
          {"rest_offset": -0.001, "contact_offset": 0.002},
          {"rest_offset": float("nan"), "contact_offset": 0.002},
          {"rest_offset": True, "contact_offset": 0.002},
-@@ -446,6 +456,7 @@ class _FakePrim:
+@@ -446,6 +460,7 @@ class _FakePrim:
          self._apis = apis
          self.contact_offset = contact_offset
          self.rest_offset = rest_offset
@@ -1055,7 +1319,7 @@ index fe51fd9..984bac3 100644
          self.max_depenetration = max_depenetration
          self.scene_values = scene_values or {}
  
-@@ -490,6 +501,15 @@ def _fake_pxr():
+@@ -490,6 +505,15 @@ def _fake_pxr():
          def GetRestOffsetAttr(self):  # noqa: N802 - mirrors the USD API
              return _FakeAttr(lambda: self._prim.rest_offset)
  
@@ -1071,7 +1335,7 @@ index fe51fd9..984bac3 100644
      class _PhysxRigidBodyAPI:
          def __init__(self, prim):
              self._prim = prim
-@@ -524,6 +544,15 @@ def _fake_pxr():
+@@ -524,6 +548,15 @@ def _fake_pxr():
          def GetMaxVelocityIterationCountAttr(self):  # noqa: N802 - mirrors the USD API
              return self._attr("max_velocity_iteration_count")
  
@@ -1087,7 +1351,7 @@ index fe51fd9..984bac3 100644
          def GetBounceThresholdAttr(self):  # noqa: N802 - mirrors the USD API
              return self._attr("bounce_threshold")
  
-@@ -653,3 +682,68 @@ def test_read_back_rejects_missing_physx_rigid_body_api(monkeypatch):
+@@ -653,3 +686,68 @@ def test_read_back_rejects_missing_physx_rigid_body_api(monkeypatch):
          read_engine_solver_values(
              stage, include_contact_offset=False, include_max_depenetration_velocity=True
          )
