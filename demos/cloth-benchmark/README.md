@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
-Measure native MuJoCo flex, SuperDex experimental shells, and Newton cloth motion using shared surface meshes, areal density, loads, and boundary conditions. MuJoCo/Newton use explicit area-lumped vertex masses; SuperDex retains its native shell FEM inertia, with total mass checked. These are **nominal-material numerical experiments**. Constitutive responses are not yet calibrated across solvers; the results cannot rank real-material accuracy.
+Measure native MuJoCo flex, SuperDex experimental shells, Newton cloth and PhysX surface-deformable motion using shared surface meshes, areal density, loads, and boundary conditions. MuJoCo/Newton use explicit area-lumped vertex masses; SuperDex retains its native shell FEM inertia, with total mass checked. These are **nominal-material numerical experiments**. Constitutive responses are not yet calibrated across solvers; the results cannot rank real-material accuracy.
 
 ## Experiments and inputs
 
@@ -120,11 +120,11 @@ Every sphere-drape profile exceeded the original penetration limit. All MuJoCo s
 | Newton VBD / Style3D | Native triangle cloth with self-contact enabled | Executed; configured self-contact still fails some stress cases |
 | Newton SemiImplicit / Featherstone | Semi-implicit particle forces; no cloth self-collision in the pinned feature matrix | Executed; contact instability is retained |
 | Newton SolverMuJoCo / Kamino / ImplicitMPM | Not triangle-cloth profiles in the pinned feature matrix | Not silently substituted for these cloth cases |
-| PhysX through Isaac Sim 5.1 | Versioned particle-cloth API and newer surface-deformable schema require separate qualification | Worker installation incomplete; no native cloth result claimed |
+| PhysX through Isaac Sim 5.1 | Native beta triangle surface, explicit world-edge attachments, actual node tensors | [Passive cloth qualification](../physx-contact/cloth.md); prescribed per-node-force extension unsupported |
 
 Newton's capability boundary follows its [pinned official feature matrix](https://github.com/newton-physics/newton/blob/2dee323416ab34763d8680fa5108a28ea688efff/docs/solvers/index.rst). SuperDex's [shell parameters](https://github.com/unilabsim/project_superdex/blob/f216dace36464d70f224caa4253074ec365ed14f/superdex_physics/libraries/mochi/mochi_physics/include/mochi_physics/mochi_physics_experimental.h) document area density and 2D membrane units; that reference commit is not asserted to be the exact wheel build revision.
 
-Isaac Sim's [5.0 release notes](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/overview/release_notes.html) introduced a beta volume/surface-deformable schema, while its [5.1 API](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/py/source/extensions/isaacsim.core.prims/docs/index.html) still lists particle-cloth classes. API documentation alone does not establish which path works in the pinned worker. The pending runtime audit must identify the actual representation and exercise node-state, force, pin and collision APIs before adding PhysX results.
+Isaac Sim's [5.0 release notes](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/overview/release_notes.html) introduced a beta volume/surface-deformable schema, while its [5.1 API](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/py/source/extensions/isaacsim.core.prims/docs/index.html) still lists particle-cloth classes. The runtime audit now exercises the native beta surface path, node observations, explicit world attachments and collisions. It does not use the deprecated particle-cloth API. Per-node force upload and native nodal-mass readback are unavailable in the pinned tensor interface; those limitations are explicit.
 
 ## Parameters, evidence, and limits
 
@@ -138,3 +138,5 @@ Isaac Sim's [5.0 release notes](https://docs.isaacsim.omniverse.nvidia.com/5.0.0
 - Raw trajectories include the initial and every end-of-step state. Errors preserve partial records and return a nonzero exit code. Incomplete cases cannot pass.
 
 Robot cloth pinching/folding is a [separate experiment](../cloth-folding/README.md). Cloth and apple grasping have different models and scores; they are not combined into one ranking. Complete solver qualification, self-collision stress tests, refinement, and held-out results remain tracked in [Issue #12](https://github.com/huangkiki/Dexlab/issues/12). Hardware material calibration requires measurements.
+
+PhysX surface cloth uses the same scene protocol, with a separate 15-case held-out batch: 10 passes, one crossing failure and four unsupported cases. These are separate from the historical 105 runs above. [Results and raw evidence](../physx-contact/cloth.md).

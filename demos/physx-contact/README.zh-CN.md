@@ -5,7 +5,7 @@
 [Issue #5](https://github.com/huangkiki/Dexlab/issues/5) 的开发实现。
 
 完整机器人实验见 [PhysX SDF 抓梗](apple.zh-CN.md)：连续保持与独立表面检查通过，下文保留基础接触协议。
-运行器通过 UniSim 1.7.10 的公开实体接口调用独立的 Isaac Sim 5.1／IsaacLab 2.3.0 环境。使用下述明确披露的 UniSim 接触报告修复后，三项原生基础接触实验通过独立验收，PhysX 本身未修改。这些基础接触实验尚不能验收机器人抓取、SDF–SDF 接触或布料；受载直线关节由独立的[驱动协议](drive.zh-CN.md)验收。
+运行器通过 UniSim 1.7.10 的公开实体接口调用独立的 Isaac Sim 5.1／IsaacLab core 0.47.2 环境。使用下述明确披露的 UniSim 接触报告修复后，三项原生基础接触实验通过独立验收，PhysX 本身未修改。这些基础接触实验尚不能验收机器人抓取、SDF–SDF 接触或布料；受载直线关节由独立的[驱动协议](drive.zh-CN.md)验收。
 
 ## 安装与运行
 
@@ -48,7 +48,7 @@ bash scripts/setup_physx.sh
 
 PhysX 请求位置迭代 8 次、速度迭代 2 次、接触偏移 1 mm、静止偏移为零。这是数值设置，不是材料标定。导入报告区分设置值与原生回读。成对传感器返回世界坐标系下的法向接触力，不含摩擦力；在本水平面实验中用于核对竖直支撑。每次保存实际状态、源码／适配层快照、报告／几何哈希、运行库版本及通过／失败详情。步进耗时包含 Python／IPC 观测，不是纯求解器时间；关闭渲染。
 
-Issue 尚需受载整机运动与原生 SDF 接触验证，再接入苹果抓取；下述理想力夹具仅覆盖基础夹持对照。基础几何结果不能证明 SDF 等价或布料能力。完整引擎比较还需要共同标定、时间／几何加密以及留出场景。
+基础几何协议仅覆盖下述接触对照。后续交付的[整机运动](robot.zh-CN.md)、[原生 SDF 接触](sdf.zh-CN.md)、[苹果抓梗](apple.zh-CN.md)与[表面布料](cloth.zh-CN.md)分别提供独立证据。完整引擎比较仍需共同标定、时间／几何加密以及留出场景。
 
 来源：[Isaac Sim 5.1 Python 安装](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/install_python.html)、[固定 IsaacLab 源码](https://github.com/isaac-sim/IsaacLab/tree/3c6e67bb5c7ada942a6d1884ab69338f57596f77)、[UniSim 实体接口](https://github.com/unilabsim/unisim/blob/v1.7.10/docs/en/entity-scenes.md)。
 
@@ -64,10 +64,12 @@ Issue 尚需受载整机运动与原生 SDF 接触验证，再接入苹果抓取
 
 ## 整机关节运动
 
-实际 OpenArm/Wuji 的 54 个关节通过无重力、无接触运动验收。固定坐标链接折叠保持原关节质量矩阵与运动学；尚未验证原生 SDF 或受载机器人抓取。[协议、结果与失败](robot.zh-CN.md)。
+实际 OpenArm/Wuji 的 54 个关节通过无重力、无接触运动验收。固定坐标链接折叠保持原关节质量矩阵与运动学；本运动协议不包含原生 SDF 或受载抓取，相关结果见[抓梗验收](apple.zh-CN.md)。[协议、结果与失败](robot.zh-CN.md)。
 
 [原生 SDF 接触对照与凸包漂移问题](sdf.zh-CN.md)
 
 ## 详细接触力
 
-[法向／摩擦记录与受载苹果诊断](contact-details.zh-CN.md)：滑块动量核对通过，机器人碰撞过滤保留源模型语义；苹果仍未通过连续保持验收。
+[法向／摩擦记录与受载苹果诊断](contact-details.zh-CN.md)：滑块动量核对通过，机器人碰撞过滤保留源模型语义；该页保留早期苹果连续保持失败；后续[抓梗验收](apple.zh-CN.md)已通过。
+
+[PhysX 表面布料](cloth.zh-CN.md)通过 UniLab 任务运行，采用独立几何验收；逐节点外力拉伸不支持。
