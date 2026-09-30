@@ -81,6 +81,31 @@ class ClothGraspEvidenceTest(unittest.TestCase):
         self.records[420]["material"]["r"][1] = float("nan")
         self.assertFalse(self.verify()["passed"])
 
+    def test_each_trace_peak_must_be_bounded_by_summary(self):
+        for key in VERIFIER.MAXIMUM_FIELDS:
+            with self.subTest(key=key):
+                previous = self.records[48][key]
+                self.records[48][key] = 0.02
+                result = self.verify()
+                self.assertFalse(result["passed"])
+                self.assertFalse(result["checks"]["summary_bounds_recorded_maxima"])
+                self.records[48][key] = previous
+
+    def test_between_sample_peak_in_summary_is_valid(self):
+        self.maximums["table_penetration_m"] = 0.0002
+        self.assertTrue(self.verify()["passed"])
+
+    def test_consistent_large_penetration_still_fails_original_threshold(self):
+        self.records[48]["table_penetration_m"] = 0.02
+        self.maximums["table_penetration_m"] = 0.02
+        result = self.verify()
+        self.assertTrue(result["checks"]["summary_bounds_recorded_maxima"])
+        self.assertFalse(result["checks"]["table_contact_penetration_below_1_5_mm"])
+
+    def test_negative_penetration_is_invalid_evidence(self):
+        self.records[48]["table_penetration_m"] = -0.02
+        self.assertFalse(self.verify()["passed"])
+
 
 if __name__ == "__main__":
     unittest.main()
