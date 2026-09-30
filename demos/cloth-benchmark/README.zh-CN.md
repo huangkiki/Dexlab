@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
-采用共同的表面网格、面密度、外力和边界条件，记录 MuJoCo flex、SuperDex 实验性薄壳与 Newton 布料求解器的实际运动。MuJoCo/Newton 显式使用面积集中的顶点质量；SuperDex 保留原生薄壳 FEM 惯性，并核对总质量。当前是**名义材料的数值实验**；不同求解器尚未完成材料响应校准，不能据此排名真实物理精度。
+采用共同的表面网格、面密度、外力和边界条件，记录 MuJoCo flex、SuperDex 实验性薄壳、Newton 布料求解器及可选 PhysX 表面布料的实际运动。MuJoCo/Newton 显式使用面积集中的顶点质量；SuperDex 保留原生薄壳 FEM 惯性，并核对总质量。当前是**名义材料的数值实验**；不同求解器尚未完成材料响应校准，不能据此排名真实物理精度。
 
 ## 实验与输入
 
@@ -120,11 +120,11 @@ uv pip install --python .venv/bin/python \
 | Newton VBD / Style3D | 原生三角布料，开启自接触 | 已运行；当前自接触配置在部分压力测试中仍失败 |
 | Newton SemiImplicit / Featherstone | 半隐式粒子力；固定版本能力表没有布料自碰撞 | 已运行，接触不稳定结果保留 |
 | Newton SolverMuJoCo / Kamino / ImplicitMPM | 固定版本能力表中不是三角布料配置 | 不以其他模型暗中替代这些布料实验 |
-| PhysX / Isaac Sim 5.1 | 粒子布料接口与较新的表面可变形体 schema 需分别验证 | worker 尚未安装完成，没有声明原生布料结果 |
+| PhysX / Isaac Sim 5.1 | 原生 beta 三角表面、显式世界边界约束、实际节点张量 | [被动布料验收](../physx-contact/cloth.zh-CN.md)；逐节点外力拉伸不支持 |
 
 Newton 的边界依据[固定上游能力表](https://github.com/newton-physics/newton/blob/2dee323416ab34763d8680fa5108a28ea688efff/docs/solvers/index.rst)。SuperDex 的[薄壳参数](https://github.com/unilabsim/project_superdex/blob/f216dace36464d70f224caa4253074ec365ed14f/superdex_physics/libraries/mochi/mochi_physics/include/mochi_physics/mochi_physics_experimental.h)明确了面密度和二维膜参数单位；不声称该参考提交就是 wheel 的精确构建版本。
 
-Isaac Sim 的 [5.0 发布说明](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/overview/release_notes.html)引入了 beta 体积／表面可变形体 schema，而 [5.1 API](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/py/source/extensions/isaacsim.core.prims/docs/index.html)仍列出粒子布料类。文档不能代替固定 worker 中的实际验证；后续必须确定实际模型，并运行节点状态、外力、固定边界与碰撞接口，才能加入 PhysX 结果。
+Isaac Sim 的 [5.0 发布说明](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/overview/release_notes.html)引入了 beta 体积／表面可变形体 schema，而 [5.1 API](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/py/source/extensions/isaacsim.core.prims/docs/index.html)仍列出粒子布料类。现已实际运行原生 beta 表面路径、节点观测、显式世界锚点与碰撞；未采用旧粒子布料路径。固定张量接口缺少逐节点外力施加和原生节点质量读回，均明确披露。
 
 ## 参数、证据与边界
 
@@ -138,3 +138,5 @@ Isaac Sim 的 [5.0 发布说明](https://docs.isaacsim.omniverse.nvidia.com/5.0.
 - 原始轨迹含初始状态和每步末状态；发生错误保留已记录部分并返回非零退出码。没有完成的场景不得记为成功。
 
 机器人夹布/折叠是[独立实验](../cloth-folding/README.md)。布料测试与苹果抓梗使用不同物理模型和指标，不合成一个分数。完整求解器资格、自碰撞压力测试、细化研究和留出结果在 [Issue #12](https://github.com/huangkiki/Dexlab/issues/12) 跟踪；真机材料校准需要实测数据。
+
+PhysX 表面布料使用同一场景协议，另报告 15 个留出场景：10 通过、1 相交失败、4 不支持；与上述 105 次历史实验分开统计。[结果与原始证据](../physx-contact/cloth.zh-CN.md)。

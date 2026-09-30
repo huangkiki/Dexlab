@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import platform
+import shutil
 import subprocess
 import sys
 import time
@@ -24,6 +25,7 @@ SOLVERS = (
     "newton-semi_implicit",
     "newton-featherstone",
     "newton-style3d",
+    "physx-surface",
 )
 
 
@@ -170,6 +172,33 @@ def verify(directory):
             and np.all(data["velocities"][0] == 0)
         ),
     )
+    if meta["solver"] == "physx-surface":
+        from dexlab.physx_apple_score import physics_diagnostics
+
+        log = directory / "native-worker.log"
+        intact = log.is_file() and meta.get("native_log_sha256") == digest(log)
+        startup, diagnostics = physics_diagnostics(log.read_text()) if intact else ([], [])
+        native_mesh_matches = False
+        initial = directory / "native" / "native-initial.npz"
+        if initial.is_file():
+            with np.load(initial, allow_pickle=False) as archive:
+                native_mesh_matches = bool(
+                    np.array_equal(archive["rest"], vertices.astype(np.float32))
+                    and np.array_equal(archive["elements"], triangles)
+                )
+        result["checks"].update(
+            native_mesh_preserved=native_mesh_matches,
+            clean_native_shutdown=meta.get("native_shutdown") == {"stopped": True, "exit_code": 0},
+            full_native_log=intact,
+            no_native_physics_diagnostics=intact and not diagnostics,
+            native_artifacts_intact=bool(meta.get("native_artifact_sha256")) and all(
+                (directory / "native" / name).is_file()
+                and digest(directory / "native" / name) == value
+                for name, value in meta.get("native_artifact_sha256", {}).items()
+            ),
+        )
+        result["native_startup_diagnostics"] = startup
+        result["native_physics_diagnostics"] = diagnostics
     limit = meta.get("engine", {}).get("particle_velocity_limit_m_s")
     if limit is not None:
         result["checks"]["no_native_velocity_clipping"] = bool(
@@ -205,7 +234,7 @@ def run(args):
         raise FileExistsError(
             "Use a fresh output directory; failed evidence is preserved"
         )
-    backend = args.solver.split("-")[0]
+    backend = "isaacsim" if args.solver == "physx-surface" else args.solver.split("-")[0]
     env = registry.make(
         TASK,
         sim_backend=backend,
@@ -251,6 +280,11 @@ def run(args):
         state = env.init_state()
         meta["prepare_seconds"] = time.perf_counter() - started
         meta["engine"] = env.native.metadata
+        if backend == "isaacsim":
+            shutil.copytree(env.native.artifacts, args.output / "native")
+            meta["native_artifact_sha256"] = {
+                item.name: digest(item) for item in (args.output / "native").iterdir()
+            }
         if backend == "mujoco":
             (args.output / "model.xml").write_text(env.native.xml)
             # XML is before area-lumped mass assignment; the native binary is authoritative.
@@ -270,7 +304,7 @@ def run(args):
             forces.append(applied)
         meta["status"] = "completed"
     except Exception as error:
-        meta["status"] = "runtime_error"
+        meta["status"] = "unsupported" if isinstance(error, NotImplementedError) else "runtime_error"
         meta["error"] = f"{type(error).__name__}: {error}"
     finally:
         meta["run_wall_seconds"] = time.perf_counter() - started
@@ -298,8 +332,13 @@ def run(args):
         meta["trajectory_sha256"] = digest(args.output / "trajectory.npz")
         if meta["source_before"] != meta["source_after"]:
             meta["status"] = "source_changed"
-        write_json(args.output / "run.json", meta)
+        native = env.native
         env.close()
+        if backend == "isaacsim" and native is not None:
+            (args.output / "native-worker.log").write_text(native.worker_log)
+            meta["native_log_sha256"] = digest(args.output / "native-worker.log")
+            meta["native_shutdown"] = native.shutdown
+        write_json(args.output / "run.json", meta)
     result = verify(args.output)
     print(
         json.dumps(
@@ -329,7 +368,10 @@ def main():
     batch_parser = commands.add_parser("batch")
     batch_parser.add_argument("--suite", type=Path, nargs="+", default=[SUITE])
     batch_parser.add_argument("--split", choices=("development", "test"), default="test")
-    batch_parser.add_argument("--solver", choices=SOLVERS, nargs="+", default=list(SOLVERS))
+    batch_parser.add_argument(
+        "--solver", choices=SOLVERS, nargs="+",
+        default=[solver for solver in SOLVERS if solver != "physx-surface"],
+    )
     batch_parser.add_argument("--device", default="cpu")
     batch_parser.add_argument("--dt", type=float, default=0.0005)
     batch_parser.add_argument("--iterations", type=int, default=10)

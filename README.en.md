@@ -35,11 +35,13 @@ A Wuji hand pinches, lifts and releases MuJoCo flex cloth through frictional con
 | MuJoCo 3.11.0 | SDF–SDF stem grasp, flex cloth, and frictional robot cloth grasp |
 | SuperDex 1.0.0 FP64 | SDF–SDF stem grasp and experimental triangle shells |
 | Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | Cloth experiments on a pinned upstream version; material and self-contact capabilities documented per solver |
-| PhysX / Isaac Sim 5.1 | [SDF–SDF stem grasp](demos/physx-contact/apple.md), [primitive contacts and drives](demos/physx-contact/README.md), [54-joint motion](demos/physx-contact/robot.md); independent surface checks pass, failed controls retained; cloth pending |
+| PhysX / Isaac Sim 5.1 | [SDF–SDF stem grasp](demos/physx-contact/apple.md), [primitive contacts and drives](demos/physx-contact/README.md), [54-joint motion](demos/physx-contact/robot.md); independent surface checks pass, failed controls retained; [native surface cloth](demos/physx-contact/cloth.md) |
 
 The cloth benchmark completed **105 frozen held-out episodes: 52 passed the protocol checks and 53 failed, with no timeouts**. Cases cover extension, sag, sphere drape, and folded drop. Nominal materials are not calibrated across solvers; pass counts do not rank physical accuracy. [All results and reproduction](demos/cloth-benchmark/README.md#held-out-results)
 
-Apple SDF grasping is registered and stepped through **UniLab**, with native scenes owned by DexLab. PhysX qualifications use **UniSim's Isaac Sim backend**. Rigid and cloth experiments have separate scores; incomplete and unsupported capabilities remain explicit.
+Apple SDF grasping is registered and stepped through **UniLab**, with native scenes owned by DexLab. PhysX rigid-body qualifications use **UniSim's Isaac Sim backend**; the separate cloth task reuses its runtime discovery. Rigid and cloth experiments have separate scores; incomplete and unsupported capabilities remain explicit.
+
+PhysX native surface cloth adds **15 frozen held-out cases: 10 passes, one surface-crossing failure and four unsupported force-extension cases**. Eight of nine development refinement runs pass; repeat and refined-mesh failures are retained. [Results, GIF and raw evidence](demos/physx-contact/cloth.md)
 
 ## Grasp details
 
