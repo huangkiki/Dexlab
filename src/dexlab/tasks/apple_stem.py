@@ -2,6 +2,7 @@
 
 import json
 import os
+import time
 from dataclasses import dataclass, field, replace
 from importlib.metadata import version
 from pathlib import Path
@@ -244,14 +245,26 @@ def main():
             "parameters": {key: getattr(args, key) for key in PARAMETERS},
         },
     )
+    started = time.perf_counter()
+    timing = {"schema_version": 1, "backend": args.backend,
+              "headless": args.headless, "preparation_seconds": None,
+              "episode_and_recording_seconds": None,
+              "rendering": "disabled" if args.headless else "included_in_episode",
+              "scope": "Preparation includes settling/planning/model build. Episode includes control, native steps, recording and internal scoring. Native step-only time is in engine.json; independent verification is timed separately."}
     try:
         state = env.init_state()
+        prepared = time.perf_counter()
+        timing["preparation_seconds"] = prepared - started
         while not state.terminated[0]:
             state = env.step(state.info["scripted_target"])
+        timing["episode_and_recording_seconds"] = time.perf_counter() - prepared
         if not state.info["summary"]["passed"]:
             raise SystemExit("Stem grasp verification failed")
     finally:
         env.close()
+        timing["total_task_seconds"] = time.perf_counter() - started
+        if Path(args.output).is_dir():
+            (Path(args.output) / "runtime-timing.json").write_text(json.dumps(timing, indent=2))
 
 
 if __name__ == "__main__":
