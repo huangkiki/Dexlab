@@ -15,12 +15,24 @@ import mujoco
 import numpy as np
 
 
-def render(model, positions, destination, task):
-    from verify_cloth import verify_saved
+def render(model, positions, source, task, *, output=None):
+    from verify_cloth import SCORER_VERSION, verify_saved
 
     started = time.perf_counter()
-    verification = verify_saved(destination)
-    with np.load(destination / "states.npz", allow_pickle=False) as archive:
+    source = Path(source)
+    destination = Path(output) if output is not None else source.with_name(
+        source.name + '-media-' + SCORER_VERSION
+    )
+    if destination.resolve().is_relative_to(source.resolve()):
+        raise ValueError('Media output must be outside the original recording')
+    # Never replace a previous render or add files to a sealed input record.
+    destination.mkdir(parents=True, exist_ok=False)
+    verification = verify_saved(source)
+    verification_path = destination / f"verification-{SCORER_VERSION}.json"
+    report_text = json.dumps(verification, indent=2) + "\n"
+    with verification_path.open("x") as stream:
+        stream.write(report_text)
+    with np.load(source / "states.npz", allow_pickle=False) as archive:
         times = archive["time_s"]
         if not np.array_equal(archive["qpos"], positions):
             raise ValueError("Render input differs from saved physics recording")
@@ -62,9 +74,13 @@ def render(model, positions, destination, task):
     ]
     from PIL import Image, ImageDraw, ImageFont
 
-    status = "PASSED" if verification["passed"] else "FAILED / NOT VERIFIED"
+    status = {
+        "protocol_failed": "PROTOCOL FAILED",
+        "geometry_review_required": "GEOMETRY REVIEW REQUIRED",
+        "limited_protocol_pass": "LIMITED PROTOCOL PASS",
+    }[verification["assessment"]]
     font = ImageFont.load_default(size=20)
-    with np.load(destination / "plan-r.npz") as plan:
+    with np.load(source / "plan-r.npz", allow_pickle=False) as plan:
         data.qpos[:] = plan["opened"]
         mujoco.mj_fwdPosition(model, data)
         wrist = model.body("r_wrist").id
@@ -94,7 +110,7 @@ def render(model, positions, destination, task):
                 )
                 draw.text(
                     (14, 37),
-                    "Scripted joints | Passive cloth | Recorded physics",
+                    f"{SCORER_VERSION} | Scripted joints | Recorded physics",
                     font=font,
                     fill=(173, 192, 203),
                 )
@@ -114,8 +130,10 @@ def render(model, positions, destination, task):
         return hashlib.sha256(path.read_bytes()).hexdigest()
 
     provenance = {
-        "inputs_sha256": {name: digest(destination / name) for name in
-                          ("states.npz", "model.mjb", "summary.json", "trace.json", "plan-r.npz", "verification.json")},
+        "inputs_sha256": verification['input_sha256'],
+        "verification_sha256": digest(verification_path),
+        "assessment": verification["assessment"],
+        "scorer_version": SCORER_VERSION,
         "renderer_sha256": digest(Path(__file__)),
         "display_engine": mujoco.__version__,
         "physics_steps_executed": 0,
@@ -133,8 +151,9 @@ def render(model, positions, destination, task):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
+    parser.add_argument("--output", required=True, type=Path, help="New directory outside the recording")
     args = parser.parse_args()
     metadata = json.loads((args.run / "summary.json").read_text())
     model = mujoco.MjModel.from_binary_path(str(args.run / "model.mjb"))
     with np.load(args.run / "states.npz") as recording:
-        render(model, recording["qpos"], args.run, metadata["task"])
+        render(model, recording["qpos"], args.run, metadata["task"], output=args.output)

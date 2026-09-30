@@ -1,0 +1,1441 @@
+{
+  "checks": {
+    "valid_task": true,
+    "complete_time_grid": true,
+    "finite_complete_measurements": true,
+    "complete_hand_plans": true,
+    "complete_contact_scan": true,
+    "summary_bounds_recorded_maxima": true,
+    "completed_without_physics_warning": true,
+    "edge_strain_below_5_percent": true,
+    "robot_contact_penetration_below_1_5_mm": true,
+    "table_contact_penetration_below_1_5_mm": true,
+    "cloth_self_contact_penetration_below_1_5_mm": true,
+    "robot_rigid_penetration_below_1_5_mm": true,
+    "r_both_pads_contact_at_least_95_percent": true,
+    "r_material_slip_below_1_cm": true,
+    "r_material_lift_above_8_cm": true,
+    "released_from_all_robot_geometries": true,
+    "no_mocap_or_external_welds": true,
+    "no_cloth_actuators": true,
+    "three_dof_passive_cloth_vertices": true,
+    "complete_surface_audit_record": true,
+    "no_sampled_surface_crossings": true
+  },
+  "metrics": {
+    "r": {
+      "two_pad_contact_fraction": 1.0,
+      "maximum_anchor_error_m": 0.003982802808762453,
+      "lift_m": 0.12145827075311838
+    },
+    "maximum_final_robot_cloth_normal_force_N": 0.0
+  },
+  "self_surface_audit": {
+    "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+    "epsilon_m": 1e-09,
+    "requested_sample_interval_s": 0.01,
+    "maximum_observed_interval_s": 0.040000000000000924,
+    "audited_frame_count": 225,
+    "candidate_topology_pairs": 39787,
+    "maximum_crossing_pairs": 0,
+    "frames_with_crossings": 0,
+    "first_crossing_time_s": null,
+    "maximum_degenerate_triangles": 0
+  },
+  "table_surface_diagnostic": {
+    "version": "table-triangle-interior-v1",
+    "status": "sampled_intrusion_detected",
+    "classification": "exploratory_diagnostic_not_a_new_physical_threshold",
+    "method": "LP over zero-thickness triangle interiors in verified union of table boxes",
+    "table_bounds_m": [
+      [
+        -0.54,
+        0.39999999999999997,
+        0.494
+      ],
+      [
+        0.54,
+        0.84,
+        0.5
+      ]
+    ],
+    "table_geom_count": 96,
+    "numerical_zero_tolerance_m": 1e-08,
+    "maximum_interior_depth_m": 0.0030000000000000083,
+    "frames_with_intrusion": 176,
+    "saved_frames": 225,
+    "first_intrusion_time_s": 0.0,
+    "rows": [
+      {
+        "time_s": 0.0,
+        "triangle_max_interior_depth_m": 0.0025566268756169025,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.04,
+        "triangle_max_interior_depth_m": 0.0025577883587597707,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 0.08,
+        "triangle_max_interior_depth_m": 0.002558092783758534,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 0.12,
+        "triangle_max_interior_depth_m": 0.0025581458442073893,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.16,
+        "triangle_max_interior_depth_m": 0.00255956253766151,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 15
+      },
+      {
+        "time_s": 0.2,
+        "triangle_max_interior_depth_m": 0.002560298940459572,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 15
+      },
+      {
+        "time_s": 0.24,
+        "triangle_max_interior_depth_m": 0.00256060649589658,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.28,
+        "triangle_max_interior_depth_m": 0.002560895465066804,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 15
+      },
+      {
+        "time_s": 0.32,
+        "triangle_max_interior_depth_m": 0.002561356354799906,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.36,
+        "triangle_max_interior_depth_m": 0.002562127412056128,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 15
+      },
+      {
+        "time_s": 0.4,
+        "triangle_max_interior_depth_m": 0.0025625134100066872,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.44,
+        "triangle_max_interior_depth_m": 0.0025633027096162693,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.48,
+        "triangle_max_interior_depth_m": 0.002564239107598735,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.52,
+        "triangle_max_interior_depth_m": 0.0025646899390242457,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.56,
+        "triangle_max_interior_depth_m": 0.0025650287040737537,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.6,
+        "triangle_max_interior_depth_m": 0.002565436943286478,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.64,
+        "triangle_max_interior_depth_m": 0.0025658042842187207,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.68,
+        "triangle_max_interior_depth_m": 0.0025666051451124178,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.72,
+        "triangle_max_interior_depth_m": 0.002567474416369988,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.76,
+        "triangle_max_interior_depth_m": 0.0025676263352535584,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.8,
+        "triangle_max_interior_depth_m": 0.0025682901959939723,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.84,
+        "triangle_max_interior_depth_m": 0.0025685250310897912,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.88,
+        "triangle_max_interior_depth_m": 0.002569276162602246,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.92,
+        "triangle_max_interior_depth_m": 0.0025698683034862573,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 0.96,
+        "triangle_max_interior_depth_m": 0.0025700275785324853,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.0,
+        "triangle_max_interior_depth_m": 0.0025705841246994278,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.04,
+        "triangle_max_interior_depth_m": 0.00257091692380429,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.08,
+        "triangle_max_interior_depth_m": 0.002570785719485114,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.12,
+        "triangle_max_interior_depth_m": 0.002595871196948938,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.16,
+        "triangle_max_interior_depth_m": 0.002464670268421529,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 1.2,
+        "triangle_max_interior_depth_m": 0.0024241317711634442,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 1.24,
+        "triangle_max_interior_depth_m": 0.0023874326721689634,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 1.28,
+        "triangle_max_interior_depth_m": 0.002482464885658702,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 1.32,
+        "triangle_max_interior_depth_m": 0.002540960986037285,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.36,
+        "triangle_max_interior_depth_m": 0.0025707998143862276,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 1.4000000000000001,
+        "triangle_max_interior_depth_m": 0.002603884551940527,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 15
+      },
+      {
+        "time_s": 1.44,
+        "triangle_max_interior_depth_m": 0.0026297714383887237,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.48,
+        "triangle_max_interior_depth_m": 0.0026934904434787136,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.52,
+        "triangle_max_interior_depth_m": 0.002679541609018903,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.56,
+        "triangle_max_interior_depth_m": 0.0027193671579092155,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.6,
+        "triangle_max_interior_depth_m": 0.0027341486538114516,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.6400000000000001,
+        "triangle_max_interior_depth_m": 0.0027626526397826643,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.68,
+        "triangle_max_interior_depth_m": 0.002756932589013909,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.72,
+        "triangle_max_interior_depth_m": 0.0027432698730256175,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.76,
+        "triangle_max_interior_depth_m": 0.0027228929894434926,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.8,
+        "triangle_max_interior_depth_m": 0.002699583742757808,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.84,
+        "triangle_max_interior_depth_m": 0.002680366847614286,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.8800000000000001,
+        "triangle_max_interior_depth_m": 0.0025955322811053332,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.92,
+        "triangle_max_interior_depth_m": 0.0028209022022002636,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 1.96,
+        "triangle_max_interior_depth_m": 0.002131621926181529,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 16
+      },
+      {
+        "time_s": 2.0,
+        "triangle_max_interior_depth_m": 0.0021657685324391433,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 2.04,
+        "triangle_max_interior_depth_m": 0.002147207117184271,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 14
+      },
+      {
+        "time_s": 2.08,
+        "triangle_max_interior_depth_m": 0.002215563991375345,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 2.12,
+        "triangle_max_interior_depth_m": 0.002287220028298697,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 2.16,
+        "triangle_max_interior_depth_m": 0.0024590380656450105,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 2.2,
+        "triangle_max_interior_depth_m": 0.0013586256192537312,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 7
+      },
+      {
+        "time_s": 2.24,
+        "triangle_max_interior_depth_m": 0.0008543685814795966,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 7
+      },
+      {
+        "time_s": 2.2800000000000002,
+        "triangle_max_interior_depth_m": 0.0006508927077193832,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 2.32,
+        "triangle_max_interior_depth_m": 0.0006184235858885936,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 7
+      },
+      {
+        "time_s": 2.36,
+        "triangle_max_interior_depth_m": 0.00019918631347446043,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 2.4,
+        "triangle_max_interior_depth_m": 6.57774425459408e-05,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 2.44,
+        "triangle_max_interior_depth_m": 0.000171308269335378,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 2.48,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 2.52,
+        "triangle_max_interior_depth_m": 0.000500507716811655,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 7
+      },
+      {
+        "time_s": 2.56,
+        "triangle_max_interior_depth_m": 0.0007960601706735546,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 10
+      },
+      {
+        "time_s": 2.6,
+        "triangle_max_interior_depth_m": 0.00027985757562800067,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 7
+      },
+      {
+        "time_s": 2.64,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 2.68,
+        "triangle_max_interior_depth_m": 0.002944674835435996,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 5
+      },
+      {
+        "time_s": 2.72,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 5
+      },
+      {
+        "time_s": 2.7600000000000002,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 4
+      },
+      {
+        "time_s": 2.8000000000000003,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 4
+      },
+      {
+        "time_s": 2.84,
+        "triangle_max_interior_depth_m": 0.003000000000000002,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 2.88,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 2.92,
+        "triangle_max_interior_depth_m": 0.003000000000000002,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 2.96,
+        "triangle_max_interior_depth_m": 0.0025463746815840484,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 5
+      },
+      {
+        "time_s": 3.0,
+        "triangle_max_interior_depth_m": 0.0021397164963731265,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 3.04,
+        "triangle_max_interior_depth_m": 0.0014141438025851542,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.08,
+        "triangle_max_interior_depth_m": 0.000709162982313799,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.12,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.16,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.2,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.24,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 3.2800000000000002,
+        "triangle_max_interior_depth_m": 0.0030000000000000022,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 3.3200000000000003,
+        "triangle_max_interior_depth_m": 0.0014204653041165454,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.36,
+        "triangle_max_interior_depth_m": 0.0010077495403585449,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 3.4,
+        "triangle_max_interior_depth_m": 0.0004035650959231564,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.44,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.48,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.52,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.56,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 3.6,
+        "triangle_max_interior_depth_m": 0.0028771329203160605,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 3.64,
+        "triangle_max_interior_depth_m": 0.0018125799827095205,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 3.68,
+        "triangle_max_interior_depth_m": 0.0016111052674427587,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.72,
+        "triangle_max_interior_depth_m": 0.0009082092360922934,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.7600000000000002,
+        "triangle_max_interior_depth_m": 0.0004990584596510604,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.8000000000000003,
+        "triangle_max_interior_depth_m": 8.758188146163609e-05,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 1
+      },
+      {
+        "time_s": 3.84,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.88,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.92,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 3.96,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.0,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.04,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.08,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.12,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.16,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.2,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.24,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.28,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.32,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.36,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.4,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.44,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.48,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.5200000000000005,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.5600000000000005,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.6000000000000005,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.64,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.68,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.72,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.76,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.8,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.84,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.88,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.92,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 4.96,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.0,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.04,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.08,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.12,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.16,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.2,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.24,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.28,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.32,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.36,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.4,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.44,
+        "triangle_max_interior_depth_m": 0.0,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 0
+      },
+      {
+        "time_s": 5.48,
+        "triangle_max_interior_depth_m": 0.0009892719025143566,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 5.5200000000000005,
+        "triangle_max_interior_depth_m": 0.0012411402679076053,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 4
+      },
+      {
+        "time_s": 5.5600000000000005,
+        "triangle_max_interior_depth_m": 0.0018262149985254347,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 5.6000000000000005,
+        "triangle_max_interior_depth_m": 0.002178735064999349,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 5.64,
+        "triangle_max_interior_depth_m": 0.0015621212978837063,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 5.68,
+        "triangle_max_interior_depth_m": 0.0014073335234661474,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 5.72,
+        "triangle_max_interior_depth_m": 0.001922076576416844,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 11
+      },
+      {
+        "time_s": 5.76,
+        "triangle_max_interior_depth_m": 0.0026433675601173975,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 15
+      },
+      {
+        "time_s": 5.8,
+        "triangle_max_interior_depth_m": 0.0024071725714108465,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 5.84,
+        "triangle_max_interior_depth_m": 0.002219788192933116,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 5.88,
+        "triangle_max_interior_depth_m": 0.0006837418306742706,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 5.92,
+        "triangle_max_interior_depth_m": 0.001889970481285514,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 5.96,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 6.0,
+        "triangle_max_interior_depth_m": 0.003000000000000003,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 6.04,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 6.08,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.12,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.16,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.2,
+        "triangle_max_interior_depth_m": 0.0025987837331535395,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.24,
+        "triangle_max_interior_depth_m": 0.0021096895310215393,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.28,
+        "triangle_max_interior_depth_m": 0.00202665928264442,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.32,
+        "triangle_max_interior_depth_m": 0.0018415328411646695,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 6.36,
+        "triangle_max_interior_depth_m": 0.0018393170056566813,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 2
+      },
+      {
+        "time_s": 6.4,
+        "triangle_max_interior_depth_m": 0.0023200464039587424,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 3
+      },
+      {
+        "time_s": 6.44,
+        "triangle_max_interior_depth_m": 0.00298173102243322,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 5
+      },
+      {
+        "time_s": 6.48,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 6
+      },
+      {
+        "time_s": 6.5200000000000005,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.5600000000000005,
+        "triangle_max_interior_depth_m": 0.0030000000000000083,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 6.6000000000000005,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.640000000000001,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.68,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.72,
+        "triangle_max_interior_depth_m": 0.003000000000000003,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 6.76,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 6.8,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.84,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.88,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.92,
+        "triangle_max_interior_depth_m": 0.0030000000000000044,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 6.96,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 8
+      },
+      {
+        "time_s": 7.0,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.04,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.08,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.12,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.16,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.2,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.24,
+        "triangle_max_interior_depth_m": 0.0030000000000000044,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.28,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.32,
+        "triangle_max_interior_depth_m": 0.003000000000000005,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.36,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.4,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.44,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.48,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.5200000000000005,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.5600000000000005,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.6000000000000005,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.640000000000001,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.68,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.72,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.76,
+        "triangle_max_interior_depth_m": 0.003000000000000006,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.8,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.84,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.88,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.92,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 7.96,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.0,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.040000000000001,
+        "triangle_max_interior_depth_m": 0.003000000000000003,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.08,
+        "triangle_max_interior_depth_m": 0.0030000000000000044,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.120000000000001,
+        "triangle_max_interior_depth_m": 0.003000000000000004,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.16,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.2,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.24,
+        "triangle_max_interior_depth_m": 0.0030000000000000044,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.28,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.32,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.36,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.4,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.44,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.48,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.52,
+        "triangle_max_interior_depth_m": 0.0030000000000000044,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.56,
+        "triangle_max_interior_depth_m": 0.0030000000000000053,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.6,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.64,
+        "triangle_max_interior_depth_m": 0.003000000000000005,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.68,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.72,
+        "triangle_max_interior_depth_m": 0.0030000000000000035,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.76,
+        "triangle_max_interior_depth_m": 0.003000000000000004,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.8,
+        "triangle_max_interior_depth_m": 0.003000000000000003,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.84,
+        "triangle_max_interior_depth_m": 0.003000000000000003,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.88,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.92,
+        "triangle_max_interior_depth_m": 0.0030000000000000027,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      },
+      {
+        "time_s": 8.96,
+        "triangle_max_interior_depth_m": 0.003000000000000003,
+        "vertex_max_interior_depth_m": 0.0,
+        "triangles_with_interior_points": 9
+      }
+    ]
+  },
+  "scorer_version": "cloth-evidence-v2",
+  "verifier_sha256": "157740e1a92b2b3c0712b62f868f50b16a6930dd83d0b1e8ba217e334507a752",
+  "table_auditor_sha256": "6553539d76b90ca6a52f8beb99d985ca1cf90d7ea78475f8b43422f9f8a62b60",
+  "self_auditor_sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+  "input_sha256": {
+    "model.mjb": "09115e90500c9add7952a9cb3ef5ab15ec9069ba90fae0e4e9871ecae739c4ab",
+    "states.npz": "ffd7e5362c514e8416d1822c632e0b9f50821b32143fbeb34ba27cb4cc466dcf",
+    "trace.json": "0b6b43a3a797826d011db2c2ea8876a35a786e91f5d4593bf9c6f09208206c88",
+    "summary.json": "84ad0e717ddade0e244e4aaca609e35b02d01ec21a37d8985459d2f7b54889b5",
+    "plan-r.npz": "0c52b4133a3cefd7afa4d532f737548d03e5c803b826aac06afe731c0153f5b1"
+  },
+  "protocol_passed": true,
+  "protocol_scope": "Existing nominal protocol with corrected evidence integrity; not complete geometric validity",
+  "assessment": "geometry_review_required",
+  "coverage_limits": [
+    "Independent cloth versus robot surface audit is not implemented",
+    "25 Hz saved states cannot certify separation between frames",
+    "Table audit uses zero-thickness triangles, not shell thickness or native contact distance",
+    "Table diagnostic is exploratory; no new physical pass threshold is imposed"
+  ]
+}

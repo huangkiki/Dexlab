@@ -26,7 +26,11 @@ DexLab 用可复现的刚体抓取和布料实验研究穿透、抖动、打滑�
 
 ![Wuji 夹布、抬升与释放近景](demos/cloth-folding/media/grasp.gif)
 
-MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放；连续 9 秒记录，独立验收通过。此任务使用已知状态与脚本控制，机器人碰撞体采用凸网格近似；未使用布料附着约束。双臂折叠仍未通过。[视频与物理指标](demos/cloth-folding/README.zh-CN.md)
+**复核结论：这段夹布记录存在桌体相交，不能作为物理有效抓取的成功证据。** 旧协议检查虽通过，新评分在 225 个保存帧中检出 176 帧的布三角面进入桌体，最大内部深度 3.00 mm。动图是原 9 秒轨迹的连续回放，已修正“通过”标注；物理修复见 [#32](https://github.com/huangkiki/Dexlab/issues/32)。控制仍为已知状态与脚本关节目标，没有布料附着约束。
+
+![夹布桌体相交诊断](demos/cloth-folding/media/table-diagnostic.zh-CN.svg)
+
+曲线为零厚度三角面进入桌体的诊断，不是原生接触距离或新的验收阈值。[新旧评分、指标与覆盖限制](demos/cloth-folding/SCORING.zh-CN.md) · [视频与运行](demos/cloth-folding/README.zh-CN.md)
 
 ## 引擎与实验
 
