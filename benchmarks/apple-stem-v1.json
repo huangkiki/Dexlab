@@ -1,0 +1,1500 @@
+{
+  "schema_version": 1,
+  "name": "apple-stem-v1",
+  "track": "task-robustness",
+  "frozen_before_evaluation": true,
+  "source_baseline_commit": "2dad3261b7fc638034d7a0bf6c477be3dea92e50",
+  "duration_s": 14,
+  "hold_window_s": [
+    11,
+    14
+  ],
+  "parameter_units": {
+    "apple_x_offset": "m",
+    "apple_y_offset": "m",
+    "apple_yaw": "deg",
+    "apple_mass": "kg"
+  },
+  "ranges": {
+    "apple_x_offset": [
+      -0.005,
+      0.005
+    ],
+    "apple_y_offset": [
+      -0.005,
+      0.005
+    ],
+    "apple_yaw": [
+      -10.0,
+      10.0
+    ],
+    "apple_mass": [
+      0.16,
+      0.24
+    ]
+  },
+  "range_provenance": "Declared engineering perturbations; not measured hardware distributions. Uniform independent samples. Geometry and control remain fixed.",
+  "defaults": {
+    "mujoco": {
+      "timestep": 0.0005,
+      "mujoco_height_offset": 0.00725,
+      "mujoco_friction": 1.0,
+      "mujoco_pinch_gain": 2.0
+    },
+    "superdex": {
+      "timestep": 0.002,
+      "linear_solver": "GMRES"
+    },
+    "shared": {
+      "gap": 0.001,
+      "stiffness": 30.0,
+      "friction_velocity": 2e-05,
+      "roll": -20.0,
+      "yaw": 0.0,
+      "height_offset": 0.0015
+    }
+  },
+  "timestep_sweep_factors": [
+    1.0,
+    0.5,
+    0.25
+  ],
+  "cases": [
+    {
+      "id": "development-000",
+      "split": "development",
+      "seed": 291000,
+      "parameters": {
+        "apple_x_offset": 0.00349847,
+        "apple_y_offset": -0.003534063,
+        "apple_yaw": 8.788444884,
+        "apple_mass": 0.193316253
+      }
+    },
+    {
+      "id": "development-001",
+      "split": "development",
+      "seed": 291001,
+      "parameters": {
+        "apple_x_offset": -0.000994273,
+        "apple_y_offset": 0.002898951,
+        "apple_yaw": -8.130905125,
+        "apple_mass": 0.218024863
+      }
+    },
+    {
+      "id": "development-002",
+      "split": "development",
+      "seed": 291002,
+      "parameters": {
+        "apple_x_offset": -0.000933148,
+        "apple_y_offset": 0.001844701,
+        "apple_yaw": -6.186340375,
+        "apple_mass": 0.197197601
+      }
+    },
+    {
+      "id": "development-003",
+      "split": "development",
+      "seed": 291003,
+      "parameters": {
+        "apple_x_offset": 0.000226242,
+        "apple_y_offset": -0.001746157,
+        "apple_yaw": -7.54770163,
+        "apple_mass": 0.175861622
+      }
+    },
+    {
+      "id": "development-004",
+      "split": "development",
+      "seed": 291004,
+      "parameters": {
+        "apple_x_offset": -0.000459964,
+        "apple_y_offset": -0.003861857,
+        "apple_yaw": 6.335824822,
+        "apple_mass": 0.188647359
+      }
+    },
+    {
+      "id": "development-005",
+      "split": "development",
+      "seed": 291005,
+      "parameters": {
+        "apple_x_offset": 0.002213872,
+        "apple_y_offset": -0.002346781,
+        "apple_yaw": 1.998381561,
+        "apple_mass": 0.194411865
+      }
+    },
+    {
+      "id": "development-006",
+      "split": "development",
+      "seed": 291006,
+      "parameters": {
+        "apple_x_offset": -0.000903417,
+        "apple_y_offset": 0.000529437,
+        "apple_yaw": 7.275791076,
+        "apple_mass": 0.219523952
+      }
+    },
+    {
+      "id": "development-007",
+      "split": "development",
+      "seed": 291007,
+      "parameters": {
+        "apple_x_offset": -0.004242775,
+        "apple_y_offset": -0.001909604,
+        "apple_yaw": 3.948317224,
+        "apple_mass": 0.208857446
+      }
+    },
+    {
+      "id": "development-008",
+      "split": "development",
+      "seed": 291008,
+      "parameters": {
+        "apple_x_offset": 0.003460106,
+        "apple_y_offset": 0.004355101,
+        "apple_yaw": 4.427656805,
+        "apple_mass": 0.201803037
+      }
+    },
+    {
+      "id": "development-009",
+      "split": "development",
+      "seed": 291009,
+      "parameters": {
+        "apple_x_offset": 0.003543838,
+        "apple_y_offset": 0.00109384,
+        "apple_yaw": -4.937031814,
+        "apple_mass": 0.181736828
+      }
+    },
+    {
+      "id": "development-010",
+      "split": "development",
+      "seed": 291010,
+      "parameters": {
+        "apple_x_offset": -0.000720958,
+        "apple_y_offset": 0.00475669,
+        "apple_yaw": 3.663211223,
+        "apple_mass": 0.195017395
+      }
+    },
+    {
+      "id": "development-011",
+      "split": "development",
+      "seed": 291011,
+      "parameters": {
+        "apple_x_offset": -0.002128179,
+        "apple_y_offset": 0.001671042,
+        "apple_yaw": -4.907850042,
+        "apple_mass": 0.161456036
+      }
+    },
+    {
+      "id": "development-012",
+      "split": "development",
+      "seed": 291012,
+      "parameters": {
+        "apple_x_offset": 0.003660702,
+        "apple_y_offset": -0.001153346,
+        "apple_yaw": -6.832778285,
+        "apple_mass": 0.194845519
+      }
+    },
+    {
+      "id": "development-013",
+      "split": "development",
+      "seed": 291013,
+      "parameters": {
+        "apple_x_offset": 0.004902993,
+        "apple_y_offset": -0.000415316,
+        "apple_yaw": -2.896745401,
+        "apple_mass": 0.211322713
+      }
+    },
+    {
+      "id": "development-014",
+      "split": "development",
+      "seed": 291014,
+      "parameters": {
+        "apple_x_offset": -0.00050007,
+        "apple_y_offset": 0.001603492,
+        "apple_yaw": 6.681883556,
+        "apple_mass": 0.239674758
+      }
+    },
+    {
+      "id": "development-015",
+      "split": "development",
+      "seed": 291015,
+      "parameters": {
+        "apple_x_offset": -0.000699473,
+        "apple_y_offset": -0.003828731,
+        "apple_yaw": -4.408875832,
+        "apple_mass": 0.16903398
+      }
+    },
+    {
+      "id": "development-016",
+      "split": "development",
+      "seed": 291016,
+      "parameters": {
+        "apple_x_offset": 0.004193456,
+        "apple_y_offset": 0.004892122,
+        "apple_yaw": 8.795683017,
+        "apple_mass": 0.187955285
+      }
+    },
+    {
+      "id": "development-017",
+      "split": "development",
+      "seed": 291017,
+      "parameters": {
+        "apple_x_offset": 0.002153285,
+        "apple_y_offset": 0.004482309,
+        "apple_yaw": -2.984554849,
+        "apple_mass": 0.216872756
+      }
+    },
+    {
+      "id": "development-018",
+      "split": "development",
+      "seed": 291018,
+      "parameters": {
+        "apple_x_offset": -0.001504751,
+        "apple_y_offset": 0.002627596,
+        "apple_yaw": -6.251320899,
+        "apple_mass": 0.180792407
+      }
+    },
+    {
+      "id": "development-019",
+      "split": "development",
+      "seed": 291019,
+      "parameters": {
+        "apple_x_offset": 0.002169124,
+        "apple_y_offset": -0.001765264,
+        "apple_yaw": -6.176533332,
+        "apple_mass": 0.215056026
+      }
+    },
+    {
+      "id": "regression-000",
+      "split": "regression",
+      "seed": 292000,
+      "parameters": {
+        "apple_x_offset": -0.002098745,
+        "apple_y_offset": -0.000344149,
+        "apple_yaw": -4.022672856,
+        "apple_mass": 0.18146631
+      }
+    },
+    {
+      "id": "regression-001",
+      "split": "regression",
+      "seed": 292001,
+      "parameters": {
+        "apple_x_offset": -0.00337006,
+        "apple_y_offset": 0.000268261,
+        "apple_yaw": -6.273308594,
+        "apple_mass": 0.216507314
+      }
+    },
+    {
+      "id": "regression-002",
+      "split": "regression",
+      "seed": 292002,
+      "parameters": {
+        "apple_x_offset": -0.003007531,
+        "apple_y_offset": 0.004324867,
+        "apple_yaw": 7.389255179,
+        "apple_mass": 0.184870227
+      }
+    },
+    {
+      "id": "regression-003",
+      "split": "regression",
+      "seed": 292003,
+      "parameters": {
+        "apple_x_offset": -0.000504995,
+        "apple_y_offset": -0.000251179,
+        "apple_yaw": 4.093671045,
+        "apple_mass": 0.16989122
+      }
+    },
+    {
+      "id": "regression-004",
+      "split": "regression",
+      "seed": 292004,
+      "parameters": {
+        "apple_x_offset": -0.001415458,
+        "apple_y_offset": 0.002161008,
+        "apple_yaw": 7.589701598,
+        "apple_mass": 0.218538624
+      }
+    },
+    {
+      "id": "regression-005",
+      "split": "regression",
+      "seed": 292005,
+      "parameters": {
+        "apple_x_offset": 0.001025518,
+        "apple_y_offset": 0.000391314,
+        "apple_yaw": 3.064816372,
+        "apple_mass": 0.197956275
+      }
+    },
+    {
+      "id": "regression-006",
+      "split": "regression",
+      "seed": 292006,
+      "parameters": {
+        "apple_x_offset": -0.003594208,
+        "apple_y_offset": -0.002747257,
+        "apple_yaw": 3.804901256,
+        "apple_mass": 0.169999508
+      }
+    },
+    {
+      "id": "regression-007",
+      "split": "regression",
+      "seed": 292007,
+      "parameters": {
+        "apple_x_offset": -0.004695271,
+        "apple_y_offset": 0.003227793,
+        "apple_yaw": 1.301482754,
+        "apple_mass": 0.1829805
+      }
+    },
+    {
+      "id": "regression-008",
+      "split": "regression",
+      "seed": 292008,
+      "parameters": {
+        "apple_x_offset": 0.000841573,
+        "apple_y_offset": 0.00166342,
+        "apple_yaw": -3.01240962,
+        "apple_mass": 0.193393612
+      }
+    },
+    {
+      "id": "regression-009",
+      "split": "regression",
+      "seed": 292009,
+      "parameters": {
+        "apple_x_offset": 0.001666847,
+        "apple_y_offset": -0.004024154,
+        "apple_yaw": 2.729097351,
+        "apple_mass": 0.220740009
+      }
+    },
+    {
+      "id": "test-000",
+      "split": "test",
+      "seed": 293000,
+      "parameters": {
+        "apple_x_offset": -0.003641566,
+        "apple_y_offset": -0.002823353,
+        "apple_yaw": -5.655859499,
+        "apple_mass": 0.176236386
+      }
+    },
+    {
+      "id": "test-001",
+      "split": "test",
+      "seed": 293001,
+      "parameters": {
+        "apple_x_offset": -3.2439e-05,
+        "apple_y_offset": 0.00382513,
+        "apple_yaw": 5.482793365,
+        "apple_mass": 0.197682754
+      }
+    },
+    {
+      "id": "test-002",
+      "split": "test",
+      "seed": 293002,
+      "parameters": {
+        "apple_x_offset": -0.002750407,
+        "apple_y_offset": -0.000624107,
+        "apple_yaw": -9.688084914,
+        "apple_mass": 0.216371932
+      }
+    },
+    {
+      "id": "test-003",
+      "split": "test",
+      "seed": 293003,
+      "parameters": {
+        "apple_x_offset": 0.003448778,
+        "apple_y_offset": 2.767e-06,
+        "apple_yaw": -5.320684315,
+        "apple_mass": 0.226511733
+      }
+    },
+    {
+      "id": "test-004",
+      "split": "test",
+      "seed": 293004,
+      "parameters": {
+        "apple_x_offset": 0.000131481,
+        "apple_y_offset": 0.001448608,
+        "apple_yaw": -4.802986085,
+        "apple_mass": 0.168272645
+      }
+    },
+    {
+      "id": "test-005",
+      "split": "test",
+      "seed": 293005,
+      "parameters": {
+        "apple_x_offset": 0.000439477,
+        "apple_y_offset": 0.004199795,
+        "apple_yaw": 6.207453976,
+        "apple_mass": 0.223936349
+      }
+    },
+    {
+      "id": "test-006",
+      "split": "test",
+      "seed": 293006,
+      "parameters": {
+        "apple_x_offset": 0.001977089,
+        "apple_y_offset": 0.003767091,
+        "apple_yaw": 9.075766891,
+        "apple_mass": 0.235496173
+      }
+    },
+    {
+      "id": "test-007",
+      "split": "test",
+      "seed": 293007,
+      "parameters": {
+        "apple_x_offset": 0.002871731,
+        "apple_y_offset": 0.003216861,
+        "apple_yaw": -2.368391105,
+        "apple_mass": 0.180559979
+      }
+    },
+    {
+      "id": "test-008",
+      "split": "test",
+      "seed": 293008,
+      "parameters": {
+        "apple_x_offset": 0.000736776,
+        "apple_y_offset": -0.0025697,
+        "apple_yaw": -3.59551417,
+        "apple_mass": 0.169706847
+      }
+    },
+    {
+      "id": "test-009",
+      "split": "test",
+      "seed": 293009,
+      "parameters": {
+        "apple_x_offset": 3.9601e-05,
+        "apple_y_offset": 0.00417664,
+        "apple_yaw": 7.121240361,
+        "apple_mass": 0.20754042
+      }
+    },
+    {
+      "id": "test-010",
+      "split": "test",
+      "seed": 293010,
+      "parameters": {
+        "apple_x_offset": -0.000283221,
+        "apple_y_offset": -0.001762526,
+        "apple_yaw": -9.122806307,
+        "apple_mass": 0.170330476
+      }
+    },
+    {
+      "id": "test-011",
+      "split": "test",
+      "seed": 293011,
+      "parameters": {
+        "apple_x_offset": -0.001353122,
+        "apple_y_offset": -0.003751532,
+        "apple_yaw": -6.777334734,
+        "apple_mass": 0.218786549
+      }
+    },
+    {
+      "id": "test-012",
+      "split": "test",
+      "seed": 293012,
+      "parameters": {
+        "apple_x_offset": -0.002149855,
+        "apple_y_offset": 0.000507891,
+        "apple_yaw": 1.35429841,
+        "apple_mass": 0.172520647
+      }
+    },
+    {
+      "id": "test-013",
+      "split": "test",
+      "seed": 293013,
+      "parameters": {
+        "apple_x_offset": 0.003385369,
+        "apple_y_offset": 0.001607781,
+        "apple_yaw": 5.985190418,
+        "apple_mass": 0.174292362
+      }
+    },
+    {
+      "id": "test-014",
+      "split": "test",
+      "seed": 293014,
+      "parameters": {
+        "apple_x_offset": 0.003682464,
+        "apple_y_offset": -0.000949948,
+        "apple_yaw": -6.571636448,
+        "apple_mass": 0.211231469
+      }
+    },
+    {
+      "id": "test-015",
+      "split": "test",
+      "seed": 293015,
+      "parameters": {
+        "apple_x_offset": 0.000961822,
+        "apple_y_offset": -0.002817285,
+        "apple_yaw": 0.412915048,
+        "apple_mass": 0.194747453
+      }
+    },
+    {
+      "id": "test-016",
+      "split": "test",
+      "seed": 293016,
+      "parameters": {
+        "apple_x_offset": 0.000983064,
+        "apple_y_offset": -0.002172555,
+        "apple_yaw": 8.232797629,
+        "apple_mass": 0.183007234
+      }
+    },
+    {
+      "id": "test-017",
+      "split": "test",
+      "seed": 293017,
+      "parameters": {
+        "apple_x_offset": 0.003915531,
+        "apple_y_offset": -0.004061426,
+        "apple_yaw": -4.082212861,
+        "apple_mass": 0.163359813
+      }
+    },
+    {
+      "id": "test-018",
+      "split": "test",
+      "seed": 293018,
+      "parameters": {
+        "apple_x_offset": 0.003649258,
+        "apple_y_offset": 0.004407514,
+        "apple_yaw": 6.740571201,
+        "apple_mass": 0.188008076
+      }
+    },
+    {
+      "id": "test-019",
+      "split": "test",
+      "seed": 293019,
+      "parameters": {
+        "apple_x_offset": -0.000782245,
+        "apple_y_offset": 0.001936521,
+        "apple_yaw": -7.863768102,
+        "apple_mass": 0.176657377
+      }
+    },
+    {
+      "id": "test-020",
+      "split": "test",
+      "seed": 293020,
+      "parameters": {
+        "apple_x_offset": 0.004795896,
+        "apple_y_offset": 0.001646916,
+        "apple_yaw": -9.064781252,
+        "apple_mass": 0.1794081
+      }
+    },
+    {
+      "id": "test-021",
+      "split": "test",
+      "seed": 293021,
+      "parameters": {
+        "apple_x_offset": -0.004779147,
+        "apple_y_offset": -0.004052839,
+        "apple_yaw": 7.405775622,
+        "apple_mass": 0.217383674
+      }
+    },
+    {
+      "id": "test-022",
+      "split": "test",
+      "seed": 293022,
+      "parameters": {
+        "apple_x_offset": 0.003464771,
+        "apple_y_offset": 0.001878684,
+        "apple_yaw": -5.236651482,
+        "apple_mass": 0.18305708
+      }
+    },
+    {
+      "id": "test-023",
+      "split": "test",
+      "seed": 293023,
+      "parameters": {
+        "apple_x_offset": 0.004459579,
+        "apple_y_offset": 0.004556851,
+        "apple_yaw": 7.663354169,
+        "apple_mass": 0.192393473
+      }
+    },
+    {
+      "id": "test-024",
+      "split": "test",
+      "seed": 293024,
+      "parameters": {
+        "apple_x_offset": -0.004121275,
+        "apple_y_offset": 0.004871574,
+        "apple_yaw": 3.728617833,
+        "apple_mass": 0.182087227
+      }
+    },
+    {
+      "id": "test-025",
+      "split": "test",
+      "seed": 293025,
+      "parameters": {
+        "apple_x_offset": 0.004272619,
+        "apple_y_offset": 0.001596509,
+        "apple_yaw": 3.827398885,
+        "apple_mass": 0.165543618
+      }
+    },
+    {
+      "id": "test-026",
+      "split": "test",
+      "seed": 293026,
+      "parameters": {
+        "apple_x_offset": -0.0047863,
+        "apple_y_offset": -0.002278334,
+        "apple_yaw": 8.186227563,
+        "apple_mass": 0.197914566
+      }
+    },
+    {
+      "id": "test-027",
+      "split": "test",
+      "seed": 293027,
+      "parameters": {
+        "apple_x_offset": 0.003166325,
+        "apple_y_offset": 0.000339925,
+        "apple_yaw": 8.544494022,
+        "apple_mass": 0.21576545
+      }
+    },
+    {
+      "id": "test-028",
+      "split": "test",
+      "seed": 293028,
+      "parameters": {
+        "apple_x_offset": 0.000283914,
+        "apple_y_offset": 0.001576124,
+        "apple_yaw": -6.744359037,
+        "apple_mass": 0.20296435
+      }
+    },
+    {
+      "id": "test-029",
+      "split": "test",
+      "seed": 293029,
+      "parameters": {
+        "apple_x_offset": 0.002486065,
+        "apple_y_offset": -0.001186905,
+        "apple_yaw": -4.947269744,
+        "apple_mass": 0.219209814
+      }
+    },
+    {
+      "id": "test-030",
+      "split": "test",
+      "seed": 293030,
+      "parameters": {
+        "apple_x_offset": -0.002116328,
+        "apple_y_offset": 0.000555009,
+        "apple_yaw": 2.256839196,
+        "apple_mass": 0.16796737
+      }
+    },
+    {
+      "id": "test-031",
+      "split": "test",
+      "seed": 293031,
+      "parameters": {
+        "apple_x_offset": 0.004913868,
+        "apple_y_offset": 0.001533841,
+        "apple_yaw": -0.773866702,
+        "apple_mass": 0.195198778
+      }
+    },
+    {
+      "id": "test-032",
+      "split": "test",
+      "seed": 293032,
+      "parameters": {
+        "apple_x_offset": 0.003280151,
+        "apple_y_offset": 0.004650528,
+        "apple_yaw": -8.296285954,
+        "apple_mass": 0.212235915
+      }
+    },
+    {
+      "id": "test-033",
+      "split": "test",
+      "seed": 293033,
+      "parameters": {
+        "apple_x_offset": -0.001728097,
+        "apple_y_offset": -0.001163902,
+        "apple_yaw": -3.974462365,
+        "apple_mass": 0.205684822
+      }
+    },
+    {
+      "id": "test-034",
+      "split": "test",
+      "seed": 293034,
+      "parameters": {
+        "apple_x_offset": -0.002055673,
+        "apple_y_offset": 0.003665856,
+        "apple_yaw": 0.513554721,
+        "apple_mass": 0.222070886
+      }
+    },
+    {
+      "id": "test-035",
+      "split": "test",
+      "seed": 293035,
+      "parameters": {
+        "apple_x_offset": 0.000133812,
+        "apple_y_offset": 0.002587247,
+        "apple_yaw": 9.409225196,
+        "apple_mass": 0.233970031
+      }
+    },
+    {
+      "id": "test-036",
+      "split": "test",
+      "seed": 293036,
+      "parameters": {
+        "apple_x_offset": -0.003267568,
+        "apple_y_offset": -0.003464318,
+        "apple_yaw": 3.97061463,
+        "apple_mass": 0.184353561
+      }
+    },
+    {
+      "id": "test-037",
+      "split": "test",
+      "seed": 293037,
+      "parameters": {
+        "apple_x_offset": 0.001245543,
+        "apple_y_offset": 0.001258278,
+        "apple_yaw": -4.031285253,
+        "apple_mass": 0.231048292
+      }
+    },
+    {
+      "id": "test-038",
+      "split": "test",
+      "seed": 293038,
+      "parameters": {
+        "apple_x_offset": 0.001674232,
+        "apple_y_offset": 0.003571425,
+        "apple_yaw": 3.5517872,
+        "apple_mass": 0.226401731
+      }
+    },
+    {
+      "id": "test-039",
+      "split": "test",
+      "seed": 293039,
+      "parameters": {
+        "apple_x_offset": 0.003749793,
+        "apple_y_offset": -0.003897782,
+        "apple_yaw": -4.991395014,
+        "apple_mass": 0.19935183
+      }
+    },
+    {
+      "id": "test-040",
+      "split": "test",
+      "seed": 293040,
+      "parameters": {
+        "apple_x_offset": -0.000651427,
+        "apple_y_offset": 0.002398368,
+        "apple_yaw": 4.192063388,
+        "apple_mass": 0.173196427
+      }
+    },
+    {
+      "id": "test-041",
+      "split": "test",
+      "seed": 293041,
+      "parameters": {
+        "apple_x_offset": -0.001196483,
+        "apple_y_offset": -0.001198504,
+        "apple_yaw": -2.104275749,
+        "apple_mass": 0.185156111
+      }
+    },
+    {
+      "id": "test-042",
+      "split": "test",
+      "seed": 293042,
+      "parameters": {
+        "apple_x_offset": -0.003765923,
+        "apple_y_offset": -0.00201999,
+        "apple_yaw": 4.914704194,
+        "apple_mass": 0.191488464
+      }
+    },
+    {
+      "id": "test-043",
+      "split": "test",
+      "seed": 293043,
+      "parameters": {
+        "apple_x_offset": -0.001515339,
+        "apple_y_offset": 0.003342791,
+        "apple_yaw": -8.477472962,
+        "apple_mass": 0.232020334
+      }
+    },
+    {
+      "id": "test-044",
+      "split": "test",
+      "seed": 293044,
+      "parameters": {
+        "apple_x_offset": -0.001330548,
+        "apple_y_offset": -0.004979222,
+        "apple_yaw": 7.68885248,
+        "apple_mass": 0.219540926
+      }
+    },
+    {
+      "id": "test-045",
+      "split": "test",
+      "seed": 293045,
+      "parameters": {
+        "apple_x_offset": -0.002181279,
+        "apple_y_offset": -0.004644629,
+        "apple_yaw": -6.42308432,
+        "apple_mass": 0.224248992
+      }
+    },
+    {
+      "id": "test-046",
+      "split": "test",
+      "seed": 293046,
+      "parameters": {
+        "apple_x_offset": -0.002680281,
+        "apple_y_offset": -0.00439941,
+        "apple_yaw": 6.129050745,
+        "apple_mass": 0.197774852
+      }
+    },
+    {
+      "id": "test-047",
+      "split": "test",
+      "seed": 293047,
+      "parameters": {
+        "apple_x_offset": 0.00366878,
+        "apple_y_offset": 0.002487774,
+        "apple_yaw": 1.567964056,
+        "apple_mass": 0.19843371
+      }
+    },
+    {
+      "id": "test-048",
+      "split": "test",
+      "seed": 293048,
+      "parameters": {
+        "apple_x_offset": 0.000520665,
+        "apple_y_offset": 0.003989545,
+        "apple_yaw": 4.362786373,
+        "apple_mass": 0.191819619
+      }
+    },
+    {
+      "id": "test-049",
+      "split": "test",
+      "seed": 293049,
+      "parameters": {
+        "apple_x_offset": 0.001119032,
+        "apple_y_offset": -0.000731596,
+        "apple_yaw": 7.109868159,
+        "apple_mass": 0.223658597
+      }
+    },
+    {
+      "id": "test-050",
+      "split": "test",
+      "seed": 293050,
+      "parameters": {
+        "apple_x_offset": -0.001517682,
+        "apple_y_offset": 0.002108704,
+        "apple_yaw": 2.875349193,
+        "apple_mass": 0.211977758
+      }
+    },
+    {
+      "id": "test-051",
+      "split": "test",
+      "seed": 293051,
+      "parameters": {
+        "apple_x_offset": -0.002062343,
+        "apple_y_offset": 0.001330082,
+        "apple_yaw": 8.979984906,
+        "apple_mass": 0.166273465
+      }
+    },
+    {
+      "id": "test-052",
+      "split": "test",
+      "seed": 293052,
+      "parameters": {
+        "apple_x_offset": 0.003855509,
+        "apple_y_offset": -0.003211558,
+        "apple_yaw": -1.390790233,
+        "apple_mass": 0.193910338
+      }
+    },
+    {
+      "id": "test-053",
+      "split": "test",
+      "seed": 293053,
+      "parameters": {
+        "apple_x_offset": 0.002284923,
+        "apple_y_offset": -0.002308727,
+        "apple_yaw": -0.315375289,
+        "apple_mass": 0.212812394
+      }
+    },
+    {
+      "id": "test-054",
+      "split": "test",
+      "seed": 293054,
+      "parameters": {
+        "apple_x_offset": 0.003452777,
+        "apple_y_offset": 0.004479635,
+        "apple_yaw": -5.444326677,
+        "apple_mass": 0.226713074
+      }
+    },
+    {
+      "id": "test-055",
+      "split": "test",
+      "seed": 293055,
+      "parameters": {
+        "apple_x_offset": -0.004853618,
+        "apple_y_offset": -0.001233239,
+        "apple_yaw": -5.87444539,
+        "apple_mass": 0.166321161
+      }
+    },
+    {
+      "id": "test-056",
+      "split": "test",
+      "seed": 293056,
+      "parameters": {
+        "apple_x_offset": -0.004623442,
+        "apple_y_offset": -0.002451081,
+        "apple_yaw": 1.077202295,
+        "apple_mass": 0.165438547
+      }
+    },
+    {
+      "id": "test-057",
+      "split": "test",
+      "seed": 293057,
+      "parameters": {
+        "apple_x_offset": 0.000810284,
+        "apple_y_offset": 0.002068011,
+        "apple_yaw": 7.33926756,
+        "apple_mass": 0.203940771
+      }
+    },
+    {
+      "id": "test-058",
+      "split": "test",
+      "seed": 293058,
+      "parameters": {
+        "apple_x_offset": 0.002889576,
+        "apple_y_offset": 0.000395225,
+        "apple_yaw": 2.907377746,
+        "apple_mass": 0.212255063
+      }
+    },
+    {
+      "id": "test-059",
+      "split": "test",
+      "seed": 293059,
+      "parameters": {
+        "apple_x_offset": 0.004000204,
+        "apple_y_offset": 0.004347897,
+        "apple_yaw": 8.667330871,
+        "apple_mass": 0.204028448
+      }
+    },
+    {
+      "id": "test-060",
+      "split": "test",
+      "seed": 293060,
+      "parameters": {
+        "apple_x_offset": 0.000893673,
+        "apple_y_offset": 0.004013058,
+        "apple_yaw": 6.930694645,
+        "apple_mass": 0.195347981
+      }
+    },
+    {
+      "id": "test-061",
+      "split": "test",
+      "seed": 293061,
+      "parameters": {
+        "apple_x_offset": -0.001143984,
+        "apple_y_offset": 0.001297453,
+        "apple_yaw": -1.16221773,
+        "apple_mass": 0.227502977
+      }
+    },
+    {
+      "id": "test-062",
+      "split": "test",
+      "seed": 293062,
+      "parameters": {
+        "apple_x_offset": -0.004190013,
+        "apple_y_offset": 0.000925077,
+        "apple_yaw": 1.834775981,
+        "apple_mass": 0.204606907
+      }
+    },
+    {
+      "id": "test-063",
+      "split": "test",
+      "seed": 293063,
+      "parameters": {
+        "apple_x_offset": 0.002353931,
+        "apple_y_offset": -0.003842099,
+        "apple_yaw": -8.02995739,
+        "apple_mass": 0.223391435
+      }
+    },
+    {
+      "id": "test-064",
+      "split": "test",
+      "seed": 293064,
+      "parameters": {
+        "apple_x_offset": 0.000172896,
+        "apple_y_offset": 0.000701534,
+        "apple_yaw": 0.892759833,
+        "apple_mass": 0.208910032
+      }
+    },
+    {
+      "id": "test-065",
+      "split": "test",
+      "seed": 293065,
+      "parameters": {
+        "apple_x_offset": 0.000923892,
+        "apple_y_offset": -0.003128211,
+        "apple_yaw": 4.918253005,
+        "apple_mass": 0.219996735
+      }
+    },
+    {
+      "id": "test-066",
+      "split": "test",
+      "seed": 293066,
+      "parameters": {
+        "apple_x_offset": -0.002276235,
+        "apple_y_offset": 0.001785782,
+        "apple_yaw": 2.429020819,
+        "apple_mass": 0.20003678
+      }
+    },
+    {
+      "id": "test-067",
+      "split": "test",
+      "seed": 293067,
+      "parameters": {
+        "apple_x_offset": 0.00434726,
+        "apple_y_offset": -0.002923045,
+        "apple_yaw": -3.228962347,
+        "apple_mass": 0.204411232
+      }
+    },
+    {
+      "id": "test-068",
+      "split": "test",
+      "seed": 293068,
+      "parameters": {
+        "apple_x_offset": -0.002079927,
+        "apple_y_offset": -0.002190526,
+        "apple_yaw": -7.0523411,
+        "apple_mass": 0.219711291
+      }
+    },
+    {
+      "id": "test-069",
+      "split": "test",
+      "seed": 293069,
+      "parameters": {
+        "apple_x_offset": 0.000871459,
+        "apple_y_offset": 0.004384664,
+        "apple_yaw": 9.029287172,
+        "apple_mass": 0.205257332
+      }
+    },
+    {
+      "id": "test-070",
+      "split": "test",
+      "seed": 293070,
+      "parameters": {
+        "apple_x_offset": 9.6827e-05,
+        "apple_y_offset": -0.004193908,
+        "apple_yaw": 5.405065259,
+        "apple_mass": 0.182361249
+      }
+    },
+    {
+      "id": "test-071",
+      "split": "test",
+      "seed": 293071,
+      "parameters": {
+        "apple_x_offset": -0.00459757,
+        "apple_y_offset": 0.00033003,
+        "apple_yaw": 5.387182815,
+        "apple_mass": 0.199508621
+      }
+    },
+    {
+      "id": "test-072",
+      "split": "test",
+      "seed": 293072,
+      "parameters": {
+        "apple_x_offset": -0.00388236,
+        "apple_y_offset": -0.002827168,
+        "apple_yaw": 2.253734712,
+        "apple_mass": 0.178978733
+      }
+    },
+    {
+      "id": "test-073",
+      "split": "test",
+      "seed": 293073,
+      "parameters": {
+        "apple_x_offset": -0.000975204,
+        "apple_y_offset": 0.004291149,
+        "apple_yaw": -4.662724141,
+        "apple_mass": 0.238479288
+      }
+    },
+    {
+      "id": "test-074",
+      "split": "test",
+      "seed": 293074,
+      "parameters": {
+        "apple_x_offset": 0.000960592,
+        "apple_y_offset": 0.001564045,
+        "apple_yaw": -1.084307437,
+        "apple_mass": 0.167928722
+      }
+    },
+    {
+      "id": "test-075",
+      "split": "test",
+      "seed": 293075,
+      "parameters": {
+        "apple_x_offset": 0.003832276,
+        "apple_y_offset": -0.000205717,
+        "apple_yaw": -4.29967187,
+        "apple_mass": 0.176328295
+      }
+    },
+    {
+      "id": "test-076",
+      "split": "test",
+      "seed": 293076,
+      "parameters": {
+        "apple_x_offset": 0.000338172,
+        "apple_y_offset": 1.2021e-05,
+        "apple_yaw": 8.1068689,
+        "apple_mass": 0.226608203
+      }
+    },
+    {
+      "id": "test-077",
+      "split": "test",
+      "seed": 293077,
+      "parameters": {
+        "apple_x_offset": -0.00451172,
+        "apple_y_offset": 0.000497637,
+        "apple_yaw": 4.942458908,
+        "apple_mass": 0.200948346
+      }
+    },
+    {
+      "id": "test-078",
+      "split": "test",
+      "seed": 293078,
+      "parameters": {
+        "apple_x_offset": -0.003687223,
+        "apple_y_offset": 0.002776907,
+        "apple_yaw": 6.091039924,
+        "apple_mass": 0.216239674
+      }
+    },
+    {
+      "id": "test-079",
+      "split": "test",
+      "seed": 293079,
+      "parameters": {
+        "apple_x_offset": 0.003688412,
+        "apple_y_offset": 0.000968192,
+        "apple_yaw": 6.918816796,
+        "apple_mass": 0.175438795
+      }
+    },
+    {
+      "id": "test-080",
+      "split": "test",
+      "seed": 293080,
+      "parameters": {
+        "apple_x_offset": -0.00401923,
+        "apple_y_offset": -0.003312794,
+        "apple_yaw": 1.366750171,
+        "apple_mass": 0.233706432
+      }
+    },
+    {
+      "id": "test-081",
+      "split": "test",
+      "seed": 293081,
+      "parameters": {
+        "apple_x_offset": -0.004696516,
+        "apple_y_offset": -0.002106634,
+        "apple_yaw": 8.883682419,
+        "apple_mass": 0.23867619
+      }
+    },
+    {
+      "id": "test-082",
+      "split": "test",
+      "seed": 293082,
+      "parameters": {
+        "apple_x_offset": 0.001192797,
+        "apple_y_offset": 0.002642477,
+        "apple_yaw": 8.595494166,
+        "apple_mass": 0.233419304
+      }
+    },
+    {
+      "id": "test-083",
+      "split": "test",
+      "seed": 293083,
+      "parameters": {
+        "apple_x_offset": 0.004371053,
+        "apple_y_offset": -0.001739906,
+        "apple_yaw": -6.520311834,
+        "apple_mass": 0.227136257
+      }
+    },
+    {
+      "id": "test-084",
+      "split": "test",
+      "seed": 293084,
+      "parameters": {
+        "apple_x_offset": 0.004801479,
+        "apple_y_offset": -0.000189603,
+        "apple_yaw": -0.503795587,
+        "apple_mass": 0.22694863
+      }
+    },
+    {
+      "id": "test-085",
+      "split": "test",
+      "seed": 293085,
+      "parameters": {
+        "apple_x_offset": 0.000649071,
+        "apple_y_offset": -0.003538788,
+        "apple_yaw": 5.295706991,
+        "apple_mass": 0.228352149
+      }
+    },
+    {
+      "id": "test-086",
+      "split": "test",
+      "seed": 293086,
+      "parameters": {
+        "apple_x_offset": 0.000459883,
+        "apple_y_offset": 0.00176307,
+        "apple_yaw": 3.227694697,
+        "apple_mass": 0.182723282
+      }
+    },
+    {
+      "id": "test-087",
+      "split": "test",
+      "seed": 293087,
+      "parameters": {
+        "apple_x_offset": 0.00252863,
+        "apple_y_offset": 0.004424167,
+        "apple_yaw": 8.916900533,
+        "apple_mass": 0.207650746
+      }
+    },
+    {
+      "id": "test-088",
+      "split": "test",
+      "seed": 293088,
+      "parameters": {
+        "apple_x_offset": 0.003903579,
+        "apple_y_offset": -0.003014316,
+        "apple_yaw": -1.662994923,
+        "apple_mass": 0.220314501
+      }
+    },
+    {
+      "id": "test-089",
+      "split": "test",
+      "seed": 293089,
+      "parameters": {
+        "apple_x_offset": -0.003653986,
+        "apple_y_offset": -0.002741514,
+        "apple_yaw": 2.754036479,
+        "apple_mass": 0.162557399
+      }
+    },
+    {
+      "id": "test-090",
+      "split": "test",
+      "seed": 293090,
+      "parameters": {
+        "apple_x_offset": 0.00350901,
+        "apple_y_offset": -0.003390444,
+        "apple_yaw": -9.217497073,
+        "apple_mass": 0.216477449
+      }
+    },
+    {
+      "id": "test-091",
+      "split": "test",
+      "seed": 293091,
+      "parameters": {
+        "apple_x_offset": 0.004828343,
+        "apple_y_offset": 0.003492829,
+        "apple_yaw": -9.27393425,
+        "apple_mass": 0.161241239
+      }
+    },
+    {
+      "id": "test-092",
+      "split": "test",
+      "seed": 293092,
+      "parameters": {
+        "apple_x_offset": -0.001647619,
+        "apple_y_offset": -0.004380063,
+        "apple_yaw": 8.505606211,
+        "apple_mass": 0.17209677
+      }
+    },
+    {
+      "id": "test-093",
+      "split": "test",
+      "seed": 293093,
+      "parameters": {
+        "apple_x_offset": 0.002931256,
+        "apple_y_offset": -0.004788459,
+        "apple_yaw": 8.672032054,
+        "apple_mass": 0.224233437
+      }
+    },
+    {
+      "id": "test-094",
+      "split": "test",
+      "seed": 293094,
+      "parameters": {
+        "apple_x_offset": -0.004027169,
+        "apple_y_offset": 0.003945342,
+        "apple_yaw": 2.157008239,
+        "apple_mass": 0.188057986
+      }
+    },
+    {
+      "id": "test-095",
+      "split": "test",
+      "seed": 293095,
+      "parameters": {
+        "apple_x_offset": 0.001353437,
+        "apple_y_offset": -0.000410669,
+        "apple_yaw": -6.485885764,
+        "apple_mass": 0.192118003
+      }
+    },
+    {
+      "id": "test-096",
+      "split": "test",
+      "seed": 293096,
+      "parameters": {
+        "apple_x_offset": -0.000222131,
+        "apple_y_offset": -0.000123432,
+        "apple_yaw": -8.632186059,
+        "apple_mass": 0.167026359
+      }
+    },
+    {
+      "id": "test-097",
+      "split": "test",
+      "seed": 293097,
+      "parameters": {
+        "apple_x_offset": 0.003973836,
+        "apple_y_offset": 0.004866924,
+        "apple_yaw": -2.272064718,
+        "apple_mass": 0.188508791
+      }
+    },
+    {
+      "id": "test-098",
+      "split": "test",
+      "seed": 293098,
+      "parameters": {
+        "apple_x_offset": -0.004073964,
+        "apple_y_offset": 0.004397599,
+        "apple_yaw": 4.861679173,
+        "apple_mass": 0.16437519
+      }
+    },
+    {
+      "id": "test-099",
+      "split": "test",
+      "seed": 293099,
+      "parameters": {
+        "apple_x_offset": 0.003163825,
+        "apple_y_offset": -0.000806187,
+        "apple_yaw": 3.871644828,
+        "apple_mass": 0.210051068
+      }
+    }
+  ],
+  "limits": [
+    "Separate backend calibration retained; not a controlled engine accuracy ranking.",
+    "Known-pose planning adapts to settled pose; no visual policy.",
+    "The same numeric physical case is reused on both backends; engine RNG is not the case definition.",
+    "Test results must not drive configuration changes; any redesign creates a new suite version."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dev-cylinder-overload",
+  "mode": "overload",
+  "mass": 0.4,
+  "radius": 0.01,
+  "half_height": 0.03,
+  "sections": 64,
+  "friction": 0.3,
+  "normal_load": 4.0,
+  "gravity": 9.81,
+  "timestep": 0.0005,
+  "controller_period": 0.001,
+  "ramp_load": 4.0
+}

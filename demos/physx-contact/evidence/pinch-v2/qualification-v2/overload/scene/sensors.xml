@@ -1,0 +1,1 @@
+<mujoco><sensor><contact name="left_force" geom1="object/surface" geom2="left/surface" data="force" reduce="netforce"/><contact name="right_force" geom1="object/surface" geom2="right/surface" data="force" reduce="netforce"/></sensor></mujoco>

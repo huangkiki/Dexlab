@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "protocol": "normal-load",
+  "scope": "Predeclared development contact-law comparison against a synthetic linear spring-damper; not fitted hardware or held-out task evidence",
+  "target": {
+    "target_stiffness_n_m": 20000.0,
+    "relative_response_error": 0.05,
+    "plateau_std_m": 5e-06,
+    "penetration_m": 0.001,
+    "momentum_peak_weight_ratio": 0.05,
+    "orientation_change_rad": 0.05,
+    "lateral_drift_m": 0.001,
+    "released_clearance_m": 0.0005,
+    "released_contact_force_n": 0.01,
+    "normal_tension_n": 1e-06,
+    "command_rounding_n": 2e-06
+  },
+  "transient_target": {
+    "stiffness_n_m": 20000.0,
+    "damping_n_s_m": 40.0,
+    "window_s": 0.05,
+    "rms_fraction_of_step": 0.1,
+    "peak_fraction_of_step": 0.25
+  },
+  "parameter_origin": {
+    "target": "Engineering design: K=20000 N/m, D=40 N s/m, mass=0.2 kg; all candidates declared before execution, no outcome-driven tuning",
+    "mujoco": "Four symmetric face contacts, constant impedance d: direct solref=-(1-d)/(4m)*[K,D]; development hypothesis for this geometry, not a universal conversion",
+    "superdex": "Static penalty profile retained from normal-v1; damping coefficient=40/4=10 s/m about 4 N. Effective damping depends on elastic load; 2/6 N test law mismatch",
+    "physx": "Four native face constraints: force spring K/4=5000 N/m and D/4=10 N s/m; unchanged TGS8/2; readback and outcome checked separately"
+  },
+  "jobs": [
+    {
+      "id": "mujoco-imp09-500us",
+      "engine": "mujoco",
+      "role": "declared-candidate",
+      "case": {
+        "name": "dev-transient-mujoco-imp09-500us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "solref": [
+          -2500,
+          -5
+        ],
+        "solimp": [
+          0.9,
+          0.9,
+          0.001,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "id": "mujoco-imp09-250us",
+      "engine": "mujoco",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-mujoco-imp09-250us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "solref": [
+          -2500,
+          -5
+        ],
+        "solimp": [
+          0.9,
+          0.9,
+          0.001,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "id": "mujoco-imp09-125us",
+      "engine": "mujoco",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-mujoco-imp09-125us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "solref": [
+          -2500,
+          -5
+        ],
+        "solimp": [
+          0.9,
+          0.9,
+          0.001,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "id": "mujoco-imp0001-500us",
+      "engine": "mujoco",
+      "role": "declared-candidate",
+      "case": {
+        "name": "dev-transient-mujoco-imp0001-500us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "solref": [
+          -24975,
+          -49.95
+        ],
+        "solimp": [
+          0.001,
+          0.001,
+          0.001,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "id": "mujoco-imp0001-250us",
+      "engine": "mujoco",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-mujoco-imp0001-250us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "solref": [
+          -24975,
+          -49.95
+        ],
+        "solimp": [
+          0.001,
+          0.001,
+          0.001,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "id": "mujoco-imp0001-125us",
+      "engine": "mujoco",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-mujoco-imp0001-125us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "solref": [
+          -24975,
+          -49.95
+        ],
+        "solimp": [
+          0.001,
+          0.001,
+          0.001,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "id": "superdex-load-damping-500us",
+      "engine": "superdex",
+      "role": "declared-candidate",
+      "case": {
+        "name": "dev-transient-superdex-load-damping-500us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "penalty_coefficient": 12500000.0,
+        "penalty_threshold_default": 1e-06,
+        "penalty_smoothing_half_distance": 5e-07,
+        "normal_viscous_damping_coefficient": 10.0
+      }
+    },
+    {
+      "id": "superdex-load-damping-250us",
+      "engine": "superdex",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-superdex-load-damping-250us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "penalty_coefficient": 12500000.0,
+        "penalty_threshold_default": 1e-06,
+        "penalty_smoothing_half_distance": 5e-07,
+        "normal_viscous_damping_coefficient": 10.0
+      }
+    },
+    {
+      "id": "superdex-load-damping-125us",
+      "engine": "superdex",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-superdex-load-damping-125us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "penalty_coefficient": 12500000.0,
+        "penalty_threshold_default": 1e-06,
+        "penalty_smoothing_half_distance": 5e-07,
+        "normal_viscous_damping_coefficient": 10.0
+      }
+    },
+    {
+      "id": "physx-force-spring-500us",
+      "engine": "physx",
+      "role": "declared-candidate",
+      "case": {
+        "name": "dev-transient-physx-force-spring-500us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "compliant_contact_stiffness": 5000.0,
+        "compliant_contact_damping": 10.0
+      }
+    },
+    {
+      "id": "physx-force-spring-250us",
+      "engine": "physx",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-physx-force-spring-250us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "compliant_contact_stiffness": 5000.0,
+        "compliant_contact_damping": 10.0
+      }
+    },
+    {
+      "id": "physx-force-spring-125us",
+      "engine": "physx",
+      "role": "step-refinement-with-fixed-native-parameters",
+      "case": {
+        "name": "dev-transient-physx-force-spring-125us",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0.0,
+        "duration": 0.8,
+        "max_force": 40.0
+      },
+      "normal_parameters": {
+        "compliant_contact_stiffness": 5000.0,
+        "compliant_contact_damping": 10.0
+      }
+    }
+  ]
+}

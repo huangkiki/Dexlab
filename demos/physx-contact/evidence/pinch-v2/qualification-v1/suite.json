@@ -1,0 +1,36 @@
+{
+  "protocol": "ideal-force-prismatic-box-v1",
+  "source_sha256": "8d620b9c43bdf2d3f72b0c47d164dfddcdc0389662770707eb26151fa92a4c3c",
+  "limits": {
+    "penetration_m": 0.001,
+    "hold_drift_m": 0.001,
+    "hold_speed_m_s": 0.005,
+    "normal_load_relative_error": 0.05,
+    "minimum_hold_normal_force_n": 0.1,
+    "minimum_drop_m": 0.05,
+    "released_force_n": 0.01,
+    "freefall_acceleration_relative_error": 0.02,
+    "freefall_velocity_fit_error_m_s": 0.01
+  },
+  "cases": [
+    "hold",
+    "overload",
+    "frictionless"
+  ],
+  "status": "completed",
+  "jobs": [
+    {
+      "case": "hold",
+      "exit_code": 0
+    },
+    {
+      "case": "overload",
+      "exit_code": 1
+    },
+    {
+      "case": "frictionless",
+      "exit_code": 0
+    }
+  ],
+  "source_unchanged": true
+}

@@ -1,0 +1,50 @@
+{
+  "protocol": "prismatic-drive-load-return-v1",
+  "limits": {
+    "position_m": 5e-05,
+    "steady_velocity_m_s": 0.0001,
+    "kinematic_position_m": 1e-06,
+    "kinematic_velocity_m_s": 1e-06,
+    "inferred_effort_n": 0.05
+  },
+  "status": "completed",
+  "external_forces_every_iteration": true,
+  "source_sha256": {
+    "source.py": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3",
+    "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+    "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+    "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+    "unisim-scene-worker.py": "df57b4022ce017a73f8d8f4808549dd7bc22a7e9c6e86d1f848d69765a11e6b2"
+  },
+  "unisim_version": "1.7.10",
+  "unisim_install_origin": "{\"url\":\"file:///home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-drive\",\"dir_info\":{}}",
+  "scope": "one prismatic drive; no contacts, robot grasp or measured actuator force",
+  "worker": {
+    "python": "3.11.14 (main, Jan 13 2026, 17:35:07) [Clang 21.1.4 ]",
+    "packages": {
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "isaaclab": "0.47.2",
+      "torch": "2.7.0+cu128"
+    }
+  },
+  "body_mass_readback": [
+    [
+      0.0,
+      0.10000000149011612,
+      0.10000000149011612
+    ]
+  ],
+  "source_unchanged": true,
+  "artifact_sha256": {
+    "unisim-scene-worker.py": "df57b4022ce017a73f8d8f4808549dd7bc22a7e9c6e86d1f848d69765a11e6b2",
+    "unisim-factory.py": "4944c592f1c8eb53d9fc20d25d133893a8ba58904870ec8d05b907b6211e99af",
+    "source.py": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3",
+    "unisim-backend.py": "77d5f80469f36ef6ae757149c2d0902ec65a59d71fa4391e4e7b216a69d8a5d8",
+    "layout.json": "78e19ad2715333796f91e16968fcff7020e1b0db9db33fef07dd59dfc7de63fc",
+    "unisim-physx-solver.py": "28938be3f5aa3c2e0132cc39cbea235a213397ca83913f30ea1b51ef133208ca",
+    "states.npz": "050166b018d01e149ed51f3c03351da1a369d5bd4448a60a87aac4ba9d025729",
+    "import-report.json": "d86016ff2e96268409ada0edba4cb3aa606f3fb0e316c5047c45d6a5a85ec0a1",
+    "scene/fixture.xml": "212cdc698498f9d4462f83e250baeaf6727fdf2d8e64d978c208e80660e6fe3b"
+  }
+}

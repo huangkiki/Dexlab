@@ -1,0 +1,1 @@
+<mujoco model="table"><option gravity="0 0 -9.81" timestep="0.001"/><worldbody><body name="body"><inertial pos="0 0 0" mass="10" diaginertia="1 1 1"/><geom name="surface" type="box" size="2 0.5 0.05" friction="0.0 0 0" condim="3"/></body></worldbody></mujoco>

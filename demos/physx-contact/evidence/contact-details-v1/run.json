@@ -1,0 +1,85 @@
+{
+  "status": "completed",
+  "case": {
+    "name": "contact-details-slide",
+    "friction": 0.3,
+    "initial_speed": 0.5,
+    "mass": 0.2,
+    "half_size": 0.02,
+    "timestep": 0.001,
+    "duration": 0.25,
+    "settle": 0.1,
+    "gravity": 9.81
+  },
+  "limits": {
+    "momentum_residual_weight_ratio": 0.01,
+    "minimum_friction_n": 0.1
+  },
+  "source_sha256": {
+    "source.py": "263549ce18c593aaa3a8571d3146a45cd19abcb4c3c80e0039b1f2db4a088af2",
+    "baseline-source.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+    "unisim-contact-details.py": "7484c94d7eeb5926fb3e92afd4b2398e7e5e23c7f439289b4946f8d0092dc00a",
+    "unisim-backend.py": "a002b00171386b8fa06051d5332e8c8136c74ad56ed820c970063f05c0d0a09c",
+    "unisim-worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+    "unisim-scene-worker.py": "6a1bfc093b32678c743a3f8b0787d5e72f82e654b07a90225678264b776a060e"
+  },
+  "scope": "Qualify native normal and friction reporting with a sliding rigid block.\n\nThis is an observation-consistency test, not a material calibration or grasp\nsuccess test. Verification uses saved actual velocities and contact records.",
+  "contact_details": {
+    "entity": "box",
+    "capacity": 8192,
+    "source_path": "/World/envs/env_0/entity_626f78/body/body",
+    "target_paths": [
+      "/World/envs/env_0/entity_7461626c65/body/body"
+    ],
+    "target_body_ids": [
+      2
+    ],
+    "body_names": {
+      "1": "box/body",
+      "2": "table/body"
+    },
+    "frame": "world",
+    "force_unit": "N",
+    "length_unit": "m",
+    "sampling": "last physics substep; normal contacts and friction anchors separate"
+  },
+  "body_mass_readback": [
+    [
+      0.0,
+      0.20000000298023224,
+      10.0
+    ]
+  ],
+  "geom_friction_readback": [
+    [
+      [
+        0.30000001192092896,
+        0.30000001192092896,
+        0.0
+      ],
+      [
+        0.30000001192092896,
+        0.30000001192092896,
+        0.0
+      ]
+    ]
+  ],
+  "source_unchanged": true,
+  "artifact_sha256": {
+    "native-records.json": "d52c1c5ae60d054355df9d014bfff5906c9490e5ba242f936fe459c7118817c3",
+    "unisim-contact-details.py": "7484c94d7eeb5926fb3e92afd4b2398e7e5e23c7f439289b4946f8d0092dc00a",
+    "contacts.json": "849a85108a305bb1d04d7526eb4737bf5179b18ccd2aea2d3cdc78a7ae502129",
+    "unisim-scene-worker.py": "6a1bfc093b32678c743a3f8b0787d5e72f82e654b07a90225678264b776a060e",
+    "source.py": "263549ce18c593aaa3a8571d3146a45cd19abcb4c3c80e0039b1f2db4a088af2",
+    "baseline-source.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+    "unisim-backend.py": "a002b00171386b8fa06051d5332e8c8136c74ad56ed820c970063f05c0d0a09c",
+    "layout.json": "7d68e2a825c16bb181eb4c33f1cb3120e35d1426e78f193ec5eefbf04bd038b9",
+    "worker-stderr.log": "217c87ab3c57af58434886dfcb195bc4b3cef1e6a845058b8508fb5bb58aec0e",
+    "states.npz": "87918cbabf1cde190c9fea6e5df5e7a4257826634ea035b1be9a6647d3a5b610",
+    "import-report.json": "c349062f231c9228eef4fd42d9673eecfb96f55d10163ba35c353a9fa7b87cec",
+    "unisim-worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+    "scene/table.xml": "eeb6e7517708e738297fbdd1c3974505aec6836bf0369208c63d166b8c7e25af",
+    "scene/box.xml": "764695af1336c8607e7d7582f527dca29dd3056b6a8381d326179f8b8a2be11b",
+    "scene/sensors.xml": "a449103003a63a67092485c419e21f8f3e100e004ddec8a47059622be93f43ff"
+  }
+}

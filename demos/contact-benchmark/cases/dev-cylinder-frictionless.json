@@ -1,0 +1,14 @@
+{
+  "name": "dev-cylinder-frictionless",
+  "mode": "frictionless",
+  "mass": 0.2,
+  "radius": 0.01,
+  "half_height": 0.03,
+  "sections": 64,
+  "friction": 0,
+  "normal_load": 4.0,
+  "gravity": 9.81,
+  "timestep": 0.0005,
+  "controller_period": 0.001,
+  "ramp_load": 4.0
+}

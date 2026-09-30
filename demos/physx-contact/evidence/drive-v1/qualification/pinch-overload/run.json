@@ -1,0 +1,80 @@
+{
+  "case": {
+    "name": "overload",
+    "mass": 0.5,
+    "friction": 0.3,
+    "should_hold": false
+  },
+  "limits": {
+    "penetration_m": 0.001,
+    "hold_drift_m": 0.001,
+    "hold_speed_m_s": 0.005,
+    "normal_load_relative_error": 0.05,
+    "minimum_hold_normal_force_n": 0.1,
+    "minimum_drop_m": 0.05,
+    "released_force_n": 0.01,
+    "freefall_acceleration_relative_error": 0.02,
+    "freefall_velocity_fit_error_m_s": 0.01
+  },
+  "source_sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+  "adapter_source_sha256": "df57b4022ce017a73f8d8f4808549dd7bc22a7e9c6e86d1f848d69765a11e6b2",
+  "unisim_version": "1.7.10",
+  "unisim_install_origin": "{\"url\":\"file:///home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-drive\",\"dir_info\":{}}",
+  "protocol": "ideal-force-prismatic-box-v2",
+  "status": "completed",
+  "geometry": "analytic boxes; not SDF, cylinder or robot qualification",
+  "contact_measurement": "world-frame normal forces only; tangential force not observed",
+  "worker": {
+    "python": "3.11.14 (main, Jan 13 2026, 17:35:07) [Clang 21.1.4 ]",
+    "packages": {
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "isaaclab": "0.47.2",
+      "torch": "2.7.0+cu128"
+    }
+  },
+  "body_mass_readback": [
+    [
+      0.0,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.5
+    ]
+  ],
+  "geom_friction_readback": [
+    [
+      [
+        0.30000001192092896,
+        0.30000001192092896,
+        0.0
+      ],
+      [
+        0.30000001192092896,
+        0.30000001192092896,
+        0.0
+      ],
+      [
+        0.30000001192092896,
+        0.30000001192092896,
+        0.0
+      ]
+    ]
+  ],
+  "step_and_observation_seconds": 13.508014856022783,
+  "source_unchanged": true,
+  "adapter_unchanged": true,
+  "artifact_sha256": {
+    "capabilities.json": "b70b2a870672eca49d5cb37025c9bca9d10bf0de11c374ef86ec84c067abf0bc",
+    "unisim-scene-worker.py": "df57b4022ce017a73f8d8f4808549dd7bc22a7e9c6e86d1f848d69765a11e6b2",
+    "source.py": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+    "layout.json": "94395c6e5c688794ffd4041ff482b0020e01bc43e1eb6900e6338d25a8b0a7b7",
+    "states.npz": "596fe4ff5d30b26260b4e326f251d25af1104bf9eb09e54e74270d5177bda88a",
+    "import-report.json": "3c4b139d4ca6fcd6ea9ce16c9303d67c87acf650753b46e9afe3ade72ca17c77",
+    "scene/object.xml": "d81652a37770c1b81a04c84a6c557edf5a54c813292d42d491980b33a8185909",
+    "scene/right.xml": "1693ee3616709447fda9cc51324bd404828ba9c0691965edd98366963a2d8cd0",
+    "scene/sensors.xml": "7917bdef0eccb77a547c1c11963110d445c41c7fc17f1f76840d197d7bb1b5cd",
+    "scene/left.xml": "449b701c99ee9b85c601c7d4aad3b5633bc3def239ffa9a4a306a239a4e12c67"
+  }
+}

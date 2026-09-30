@@ -17,9 +17,11 @@ class UniLabTaskTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.received = []
+        self.episode_args = []
         self.cleaned = 0
 
         def episode(args):
+            self.episode_args.append(args)
             Path(args.output).mkdir(parents=True, exist_ok=True)
             try:
                 target = np.array([0.4, -0.3])
@@ -91,6 +93,41 @@ class UniLabTaskTest(unittest.TestCase):
     def test_timestep_override_cannot_be_silently_ignored(self):
         with self.assertRaisesRegex(ValueError, "timestep overrides"):
             AppleStemEnv(AppleStemCfg(sim_dt=0.001, ctrl_dt=0.001))
+
+    def test_explicit_benchmark_step_is_recorded(self):
+        env = AppleStemEnv(
+            AppleStemCfg(output=self.tmp.name, parameters={"timestep": 0.001})
+        )
+        self.addCleanup(env.close)
+        self.assertEqual(env.cfg.sim_dt, 0.001)
+        env.reset()
+        import json
+
+        manifest = json.loads((Path(self.tmp.name) / "unilab.json").read_text())
+        self.assertEqual(manifest["parameters"]["timestep"], 0.001)
+        self.assertEqual(manifest["dt_s"], 0.001)
+
+    def test_zero_benchmark_timestep_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Unsupported benchmark timestep"):
+            AppleStemEnv(AppleStemCfg(parameters={"timestep": 0.0}))
+
+    def test_every_frozen_case_reaches_native_argument_parser_unchanged(self):
+        from dexlab.benchmark import DEFAULT_SUITE, read_suite
+
+        for case in read_suite(DEFAULT_SUITE)["cases"]:
+            for backend in ("mujoco", "superdex"):
+                with self.subTest(case=case["id"], backend=backend):
+                    env = AppleStemEnv(
+                        AppleStemCfg(output=self.tmp.name, parameters=case["parameters"]),
+                        backend_type=backend,
+                    )
+                    try:
+                        env.reset()
+                        actual = self.episode_args[-1]
+                        for key, value in case["parameters"].items():
+                            self.assertEqual(getattr(actual, key), value)
+                    finally:
+                        env.close()
 
     def test_native_failure_releases_scene(self):
         def failing(args):

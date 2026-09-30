@@ -116,6 +116,15 @@ def check(worktree):
     run(
         python,
         "-m",
+        "compileall",
+        "-q",
+        "src/dexlab",
+        "demos/apple-stem-grasp/src",
+        cwd=worktree,
+    )
+    run(
+        python,
+        "-m",
         "unittest",
         "discover",
         "-s",
@@ -187,7 +196,7 @@ def submit(number, summary_file):
     run("git", "push", "--set-upstream", "origin", branch, cwd=worktree)
     body = (
         summary
-        + f"\n\nValidation: unit tests and full MuJoCo/SuperDex 14 s SDF acceptance.\n\nFixes #{number}\n"
+        + f"\n\nValidation: unit tests and full MuJoCo/SuperDex 14 s SDF acceptance.\n\nRefs #{number}\n"
     )
     existing = gh_json(
         "pr", "list", "--head", branch, "--state", "open", "--json", "number,url"

@@ -24,7 +24,7 @@ Run queue commands from the primary checkout; install and edit in the returned w
 - Review the actual PR diff against the complete issue acceptance criteria, preserving parameter provenance, approximations and failed experiments. Update both languages; do not modify official engines or relax physics thresholds.
 - Bind verification to the current head and target base. When the base changes, conflicts are resolved or other changes are combined, validate the combined tree. Physics-related combinations require both complete backend checks. A commit with an exactly identical validated tree may reuse that evidence, recording the tree hash.
 - Satisfy applicable CI and branch protection, with no unresolved blocking feedback. No configured CI is not a CI pass; self-review is not independent reviewer approval.
-- Recheck the head and use `gh pr merge NUMBER --squash --match-head-commit HEAD_SHA`. Do not bypass protection with `--admin` or force-push. Read back `MERGED`, main's commit/tree, and issue completion.
+- Recheck the head and use `gh pr merge NUMBER --squash --match-head-commit HEAD_SHA`. Do not bypass protection with `--admin` or force-push. Read back `MERGED`, main's commit/tree, and issue completion. Submission uses `Refs #N`; close an issue only after verifying its complete acceptance criteria, including work outside a partial PR.
 - Repair actionable problems. When external data, an environment or a necessary decision is missing, record concrete resumption conditions. Unresolved objections or failed verification prevent merging.
 
 ## Release conditions

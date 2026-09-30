@@ -16,7 +16,11 @@ DexLab 用可复现的刚体抓取和布料实验研究穿透、抖动、打滑�
 
 ![SuperDex 抓梗近景](demos/apple-stem-grasp/media/superdex-sdf.gif)
 
-动图连续展示完整 14 秒过程：接近 → 两指闭合 → 抬升 → 保持。仅显示抓取近景；展示相机跟随记录中的苹果，不参与控制。两个后端均由 MuJoCo 渲染器回放实际物理轨迹。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4)
+## PhysX
+
+![PhysX 抓梗近景](demos/physx-contact/media/physx-sdf.gif)
+
+动图连续展示完整 14 秒过程：接近 → 两指闭合 → 抬升 → 保持。展示相机跟随记录中的苹果，不参与控制；MuJoCo 渲染器回放各引擎的实际位姿。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX 视频与复现](demos/physx-contact/apple.zh-CN.md)
 
 ## 机器人夹布
 
@@ -31,36 +35,45 @@ MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放�
 | MuJoCo 3.11.0 | SDF–SDF 抓梗、flex 布料、机器人摩擦夹布 |
 | SuperDex 1.0.0 FP64 | SDF–SDF 抓梗、实验性三角薄壳 |
 | Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | 固定上游版本的布料实验；各求解器的材料与自接触能力分别记录 |
-| PhysX / Isaac Sim | 接入与原生资格验证进行中，尚无通过验证的结果；[Issue #5](https://github.com/huangkiki/Dexlab/issues/5) |
+| PhysX / Isaac Sim 5.1 | [SDF–SDF 抓梗](demos/physx-contact/apple.zh-CN.md)、[基础接触与驱动](demos/physx-contact/README.zh-CN.md)、[54 关节运动](demos/physx-contact/robot.zh-CN.md)；独立表面复核通过，失败对照保留；[原生表面布料](demos/physx-contact/cloth.zh-CN.md) |
 
 布料基准已完成 **105 次冻结留出实验：52 次通过协议检查、53 次失败，无超时**。覆盖拉伸、下垂、球面覆盖和折叠下落；名义材料尚未完成跨求解器校准，不按通过数排名真实精度。[全部结果与运行方法](demos/cloth-benchmark/README.zh-CN.md#留出结果)
 
-任务通过 **UniLab** 注册和逐步执行；当前场景由 DexLab 管理，尚未采用 UniSim 内置后端。刚体与布料分别评分；未完成或不支持的能力明确标记。
+PhysX 原生表面布料另完成 **15 个冻结留出场景：10 通过、1 表面相交失败、4 外力拉伸不支持**。9 次开发场景细化中 8 次通过；重复运行与加密网格的失败均保留。[结果、动图与原始证据](demos/physx-contact/cloth.zh-CN.md)
+
+接触力学开发实验覆盖滑动、压入/卸载和双指载荷扫描。原始失败完整保留；相同圆柱表面细化后，SuperDex 的四种夹持/滑落条件通过开发检查。材料响应尚未跨引擎校准。[实验、失败与复现](demos/contact-benchmark/README.zh-CN.md)。
+
+法向加载另完成 17 次开发检查，11 通过、6 失败；静态斜率匹配后，质量迁移与保持波动仍需分别验证。[响应标定与失败记录](demos/contact-benchmark/NORMAL_RESPONSE.zh-CN.md)。
+
+苹果 SDF 抓取通过 **UniLab** 注册和逐步执行，原生场景由 DexLab 管理；PhysX 刚体实验使用 **UniSim 的 Isaac Sim 后端**，独立布料任务复用其运行环境。刚体与布料分别评分；未完成或不支持的能力明确标记。
+
+接触瞬态另完成 12 次预声明开发实验：6 次同时通过物理与响应检查，6 次失败。通过步长细化区分接触定律差异与数值误差，保留释放拉力等失败。[参数、曲线与复现](demos/contact-benchmark/TRANSIENT_RESPONSE.zh-CN.md)。
 
 ## 抓取细节
 
 - 右手拇指与食指夹梗，左臂停放；苹果与梗是 **0.2 kg 的单个自由刚体**。
 - 苹果、拇指指腹和食指指腹均为 **SDF 碰撞体**。没有附着约束、物体位置驱动或引擎源码补丁。
 - 控制使用**已知物体位姿、逆运动学和脚本化关节目标**，不是视觉策略或学习得到的技能；无需模型 API key。
-- 两个后端分别调参。MuJoCo 使用 SDF 接触点搜索与软接触约束，步长 **0.5 ms**；SuperDex 使用表面采样积分与平滑罚能，步长 **2 ms**。相同的 SDF 几何不代表相同的接触力定律。
+- 各后端分别调参。MuJoCo 使用 SDF 接触搜索与软约束，步长 **0.5 ms**；SuperDex 使用表面采样积分与平滑罚能，步长 **2 ms**；PhysX 使用原生 SDF 接触与 TGS，步长 **1 ms**，显式配置扭转接触半径。相同源表面不代表相同的离散几何或接触力定律。
 
-独立验收覆盖连续 3 秒保持中的离桌、两指支撑、穿透、相对腕部位移和动量平衡；接近阶段允许果身接触。当前是单个已调优场景，不模拟梗弯曲或断裂，也没有真机精度结论。
+独立验收覆盖连续 3 秒保持中的离桌、两指支撑、穿透、相对腕部位移和动量平衡；接近阶段允许果身接触。动图对应默认场景；不模拟梗弯曲或断裂，也没有真机精度结论。
 
 [MuJoCo 验收](demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json) · [SuperDex 验收](demos/apple-stem-grasp/evidence/sdf-superdex/summary.json) · [参数与引擎实现差异](docs/sdf-backends.zh-CN.md)
 
 ## 实验结果
 
-以下为发布默认配置的单场景记录。保持窗口为 11–14 s；每个物理步均参与验收。
+苹果抓梗已完成 **10 个冻结场景、两个后端共 20 次实验**。扰动质量、水平位置与朝向；沿用已发布策略，未针对这些场景重新调参。
 
-| 指标 | MuJoCo 3.11.0 | SuperDex 1.0.0 FP64 |
+| 配置 | 完整验收通过 | 成功率 95% Wilson 区间 |
 |---|---:|---:|
-| 全程物理步数 | 28,000 | 7,000 |
-| 保持期最小离桌高度 | 124.43 mm | 115.22 mm |
-| 全程最大手部穿透 | 0.159 mm | 0.452 mm |
-| 保持期相对腕部最大位移 | 0.275 mm | 0.040 mm |
-| 保持期相对腕部位置去均值 RMS | 0.0786 mm | 0.0115 mm |
+| MuJoCo 3.11.0，0.5 ms | 1 / 10 | 1.8–40.4% |
+| SuperDex 1.0.0 FP64，2 ms | 10 / 10 | 72.2–100% |
 
-两者的步长、摩擦和驱动配置不同，不能据此给引擎精度排名。位移不是材料点累计滑移，去均值 RMS 仍包含缓慢漂移。完整的[验收依据](docs/sdf-backends.zh-CN.md#结果与限制)与[诊断定义](docs/jitter.zh-CN.md)说明了采样覆盖和近似。
+这是各自配置的任务鲁棒性结果，**不构成引擎精度排名**。全部失败和原始证据均保留；另完成 6 次步长实验，MuJoCo 0.25 ms 因穿透超限失败，更小步长未呈现单调改善。100 个正式测试场景已冻结，尚未完成评估。
+
+PhysX 当前通过单个开发场景的抓梗验收，尚未纳入上述留出测试。其原生接触距离与独立参考表面穿透分别报告。[参数、失败与测量边界](demos/physx-contact/apple.zh-CN.md)
+
+[基准协议、全部结果与复现](docs/benchmark.zh-CN.md) · [演示默认场景指标](docs/sdf-backends.zh-CN.md#结果与限制) · [诊断定义](docs/jitter.zh-CN.md)
 
 ## 运行
 

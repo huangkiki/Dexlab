@@ -1,0 +1,1 @@
+<mujoco><sensor><contact name="box_force" geom1="box/surface" geom2="table/surface" data="force" reduce="netforce"/></sensor></mujoco>

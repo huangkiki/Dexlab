@@ -15,7 +15,7 @@ After [installation](installation.md) and a completed or interrupted recording:
 
 Each command writes `jitter-diagnostics.json` in that run directory and prints the same JSON. `--output path.json` changes the destination. Input files are read-only. A successful command means that a report was generated, not that the grasp or data quality passed. Malformed archive structure raises an error; incomplete traces remain visible in the report.
 
-Inputs are `engine.json`, `sdf-dynamics.npz`, and, when available, `sdf-contacts.npz`. MuJoCo also needs its matching `model.mjb` to resolve body IDs, loaded without stepping; SuperDex IDs come from `engine.json`. These are full local run artifacts, not just the smaller packaged acceptance summaries. The report hashes its inputs and analyzer source. No dependency on the separate model-audit feature is required.
+Inputs are `engine.json`, `sdf-dynamics.npz`, and, when available, `sdf-contacts.npz`. MuJoCo also needs its matching raw `model.mjb` or lossless model archive to resolve body IDs, loaded without stepping; SuperDex IDs come from `engine.json`. These are full local run artifacts, not just the smaller packaged acceptance summaries. The report hashes its inputs and analyzer source. No dependency on the separate model-audit feature is required.
 
 ## Signals, units, and definitions
 

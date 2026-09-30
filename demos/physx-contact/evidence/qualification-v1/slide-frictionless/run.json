@@ -1,0 +1,77 @@
+{
+  "case": {
+    "name": "slide-frictionless",
+    "friction": 0.0,
+    "initial_speed": 0.5,
+    "mass": 0.2,
+    "half_size": 0.02,
+    "timestep": 0.001,
+    "duration": 2.0,
+    "settle": 0.5,
+    "gravity": 9.81
+  },
+  "limits": {
+    "penetration_m": 0.001,
+    "support_relative_error": 0.05,
+    "rest_drift_m": 0.001,
+    "rest_speed_m_s": 0.005,
+    "slide_distance_relative_error": 0.1,
+    "slide_distance_absolute_error_m": 0.002,
+    "slide_final_speed_m_s": 0.005,
+    "frictionless_velocity_error_m_s": 0.01
+  },
+  "source_sha256": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+  "unisim_version": "1.7.10",
+  "host": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "adapter_source_sha256": "aafdfb1ad4749db2e5963ecb25a5d6787e35ae17e9182d11bb8d96e27e52189e",
+  "unisim_install_origin": "{\"url\":\"file:///home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-contact\",\"dir_info\":{}}",
+  "geometry": "analytic box primitives; no SDF qualification",
+  "contact_measurement": "PhysX pair normal contact force in world frame; not friction force",
+  "status": "completed",
+  "worker": {
+    "python": "3.11.14 (main, Jan 13 2026, 17:35:07) [Clang 21.1.4 ]",
+    "packages": {
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "isaaclab": "0.47.2",
+      "torch": "2.7.0+cu128"
+    }
+  },
+  "assets": {
+    "table.xml": "bb7bcd82df954f669183f56c07d65eb5a46469ee8d74fd845fe34a32b82b0288",
+    "box.xml": "6c8a9bfd2d55d6905686508b3e72f2f17447add65968eeef75586894f57e6200",
+    "sensors.xml": "a449103003a63a67092485c419e21f8f3e100e004ddec8a47059622be93f43ff"
+  },
+  "preparation_seconds": 5.99311352497898,
+  "geom_friction_readback": [
+    [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "body_mass_readback": [
+    [
+      0.0,
+      0.20000000298023224,
+      10.0
+    ]
+  ],
+  "step_and_observation_seconds": 4.088510244968347,
+  "source_unchanged": true,
+  "adapter_unchanged": true,
+  "assets_unchanged": true,
+  "archive_sha256": "8524fa62430bab2378a2769b4b4cbc75f92c6e6c7e1ec2f1d50e39c4c9dc90fa",
+  "report_sha256": {
+    "import-report.json": "d50ee8c8ea65cc9dfd64f53c7c3953d0aecb9b7a19bf82c0d5321f4fc576fab5",
+    "capabilities.json": "b70b2a870672eca49d5cb37025c9bca9d10bf0de11c374ef86ec84c067abf0bc",
+    "layout.json": "7d68e2a825c16bb181eb4c33f1cb3120e35d1426e78f193ec5eefbf04bd038b9"
+  }
+}

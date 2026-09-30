@@ -1,0 +1,1055 @@
+{
+  "scope": "Development records, not a held-out benchmark or successful PhysX grasp qualification. Summaries and hashes are public; full apple arrays and model files remain in local run directories and cannot be rescored from this index alone.",
+  "records": [
+    {
+      "run": "apple-sdf-dev-v1",
+      "status": "error",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": null,
+      "source_unchanged": true,
+      "receipt_sha256": "467a747f9f239bede859717249cf609270188d14307e6da6d78195cfa0c1e70a",
+      "source_sha256": {
+        "source.py": "8d1dac43de94c78f58f8cf554c73d4dd488c63479d54062cf53b794541cfc508",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e"
+      },
+      "raw_artifact_sha256": {
+        "states.npz": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "error": "Traceback (most recent call last):\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dexlab-mujoco-release/.autoresearch/worktrees/issue-5/.autoresearch/probes/physx_apple_probe.py\", line 132, in run\n    backend = create_backend(\"isaacsim\", scene, num_envs=1, sim_dt=args.dt,\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/factory.py\", line 35, in create_backend\n    return _create_backend(backend_type, scene, num_envs, sim_dt, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/factory.py\", line 433, in _create_backend\n    return IsaacSimBackend(scene, num_envs, sim_dt, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/backend/isaacsim/backend.py\", line 151, in __init__\n    super().__init__(scene, num_envs, sim_dt, **kwargs)\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/backend/subprocess_ipc/backend.py\", line 427, in __init__\n    self._entity_scene = prepare_worker_scene(scene, int(num_envs), float(sim_dt))\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/backend/subprocess_ipc/scene_materialization.py\", line 322, in prepare_worker_scene\n    owner = compose_scene(scene, num_envs, sim_dt, allow_self_collision=True)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/mjcf_compiler.py\", line 1336, in compose_scene\n    integrate_provenance_options(result)\n  File \"/home/robdog/Documents/Codex/2026-09-10/github-wuji-technology-wuji-mjlab-in/work/dependencies/unisim-1.7.10-physx-sdf/src/unisim/mjcf_compiler.py\", line 1245, in integrate_provenance_options\n    raise ValueError(\nValueError: entity 'apple': conflicting global physics options\n"
+    },
+    {
+      "run": "apple-sdf-dev-v2",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": null,
+      "source_unchanged": true,
+      "receipt_sha256": "e47b0b968efadd11d244189e27b258c40570719166d63664e08fda1739135033",
+      "source_sha256": {
+        "source.py": "7e9774c674191e1892862baea50045cc816bae6cb059c122e3d187d295897f0d",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "2dfdb95bbc059a89f452d457c5a3a15634bafff6778e9b79563c770cf6412cca",
+        "states.npz": "1bdec491686b500b2ef6b354969ae51335b732f90ede83cb61c777783ecc2e2a"
+      }
+    },
+    {
+      "run": "apple-sdf-no-self-collision-v1",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": false,
+      "source_unchanged": true,
+      "receipt_sha256": "62265759a0cfb5e060b972e7bcfbd214c0477f7377826a8b6b55865383e6aabf",
+      "source_sha256": {
+        "source.py": "d8cdb0252bf077f9d0c867bc792b24aa28f302e1ed29de69a9ad2ad5dd7a97c3",
+        "unisim-scene-worker.py": "dfe08f2bdc0db7946db1441104aa9ce72809e53904e8be8e2f95b457daf2d505",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "2dfdb95bbc059a89f452d457c5a3a15634bafff6778e9b79563c770cf6412cca",
+        "states.npz": "4d9047e3021836137528da41c6775b0c525d74ddb73cb266c620918ba92734c9"
+      }
+    },
+    {
+      "run": "apple-collision-filter-audit-v1",
+      "status": "completed",
+      "duration_s": 0.02,
+      "dt_s": 0.001,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": true,
+      "source_unchanged": true,
+      "receipt_sha256": "a58e86df78d0fb7ac3b5f915f060c7956bf75e6789744811edd3bfc841dd79c6",
+      "source_sha256": {
+        "source.py": "d8cdb0252bf077f9d0c867bc792b24aa28f302e1ed29de69a9ad2ad5dd7a97c3",
+        "unisim-scene-worker.py": "e823c5d05ff6c0c16b01ee4dcc9b52df07dd4159daaad74d3ae118cf81a24517",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "dd3f06b46860e6fdba6eef9f4d8c826f37ac14c307f3438429bce8ce6a35ae4b",
+        "states.npz": "26a25562377ad083ac297ad391a89264aea9ed8866692deaa294485d0f21b57a"
+      }
+    },
+    {
+      "run": "apple-sdf-parent-filter-v1",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": true,
+      "source_unchanged": true,
+      "receipt_sha256": "2e5ca9e946c133fa2fbf5717f67eaf876a03c85958da10eecc6f009fcb23ad06",
+      "source_sha256": {
+        "source.py": "8941a975cd1de58c76c84f4b7d7b015aaa8131ca6d941498a650eb963efccd49",
+        "unisim-scene-worker.py": "e823c5d05ff6c0c16b01ee4dcc9b52df07dd4159daaad74d3ae118cf81a24517",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e",
+        "robot_transfer.py": "2627dec37f5c8c0b609bb04ee551e189ca59f03f041772015e90eb1f290f2588"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "bb3db509675088b01096ad7f1cd26bdc177a719b99b979e71a5c32250e5d4a8f",
+        "states.npz": "47e7e018b50960188d55ec6fa57fca63d9548b5a199d23afd560d20f48752307",
+        "implicit-collision-exclusions.json": "ac67ebdd5801b76ac52ff2acfb5d87a16b85b09055808b1a1709002e88e61eaa"
+      }
+    },
+    {
+      "run": "contact-details-slide-v1",
+      "status": "error",
+      "duration_s": null,
+      "dt_s": null,
+      "height_offset_m": null,
+      "robot_self_collision": null,
+      "source_unchanged": null,
+      "receipt_sha256": "0491e133518ed0ef73f9a0f3ca48237887de91e24f0b0f07f61d9d5b1fce99cb",
+      "source_sha256": null,
+      "raw_artifact_sha256": {},
+      "error": "ContactCase friction argument omitted; no physics ran"
+    },
+    {
+      "run": "contact-details-slide-v2",
+      "status": "completed",
+      "duration_s": null,
+      "dt_s": 0.001,
+      "height_offset_m": null,
+      "robot_self_collision": null,
+      "source_unchanged": true,
+      "receipt_sha256": "c3734680d3258686936b5f418702b41740687277847c573ee76f6952491424d3",
+      "source_sha256": {
+        "source.py": "cfdc2246c6e3d9ee1468416a8fc4484f269c1a599be689c21b4908cb0f53465c",
+        "contact-details.py": "a337ad790d74fea9c3978bb948aba0f72001436117b0845ca6979d95362fcc66",
+        "scene-worker.py": "3fcdfb49cf6a1ab3de648b9e63266662e011a734fe5e0c9a9fa2b9aba318a011",
+        "worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+        "backend.py": "7908bb9278b00672280c5ddd6035a1f27e4f40bd531853c538a9263ed0aa12ed"
+      },
+      "raw_artifact_sha256": {
+        "states.npz": "485983897ac6f546d3089b900486c6834d145e10cd38ddd4fac54058ea75194c"
+      },
+      "maximum_momentum_residual_n": 2.9444988635441495e-05
+    },
+    {
+      "run": "apple-sdf-contact-details-v1",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": true,
+      "source_unchanged": true,
+      "receipt_sha256": "e11e22b31598acdf32386b5d9fc2965bbb763128bf9c3547552dd868f1071eb3",
+      "source_sha256": {
+        "source.py": "8478354394191c2fc57826926ff0c89163b6652490b3858dd758cb8b299c4b89",
+        "unisim-scene-worker.py": "3fcdfb49cf6a1ab3de648b9e63266662e011a734fe5e0c9a9fa2b9aba318a011",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e",
+        "robot_transfer.py": "2627dec37f5c8c0b609bb04ee551e189ca59f03f041772015e90eb1f290f2588",
+        "unisim-contact-details.py": "a337ad790d74fea9c3978bb948aba0f72001436117b0845ca6979d95362fcc66",
+        "unisim-worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+        "unisim-backend.py": "7908bb9278b00672280c5ddd6035a1f27e4f40bd531853c538a9263ed0aa12ed"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "bb3db509675088b01096ad7f1cd26bdc177a719b99b979e71a5c32250e5d4a8f",
+        "states.npz": "47e7e018b50960188d55ec6fa57fca63d9548b5a199d23afd560d20f48752307",
+        "implicit-collision-exclusions.json": "ac67ebdd5801b76ac52ff2acfb5d87a16b85b09055808b1a1709002e88e61eaa",
+        "contacts.npz": "0f537542df0670afd5cd9670eab1d06b29b4a287f6fd229318b562f6b8038f79"
+      },
+      "diagnosis": {
+        "scope": "Development diagnosis v2; not a complete grasp qualification. Hand penetration excludes table, which is reported separately. Native separation is not cross-engine reference-surface penetration. Apple-local contact points use post-step pose and are approximate.",
+        "metrics": {
+          "minimum_clearance_during_hold_m": -0.0005793327814453963,
+          "maximum_clearance_m": 3.622067315578459e-06,
+          "mean_hold_support_weight_ratio": {
+            "thumb": 0.0,
+            "index": 0.0,
+            "table": 1.0000846398318481,
+            "other": 0.0
+          },
+          "maximum_momentum_residual_weight_ratio": 2.6903278052308642e-05,
+          "p99_momentum_residual_weight_ratio": 3.808050013443339e-06,
+          "maximum_native_penetration_m": 0.0014704838395118713,
+          "maximum_native_hand_penetration_m": 4.298060594010167e-05,
+          "maximum_native_table_penetration_m": 0.0014704838395118713,
+          "hold_wrist_relative_displacement_m": 0.011288842957854676,
+          "maximum_joint_error_rad": 0.126668864293486
+        },
+        "checks": {
+          "lifted_70mm": false,
+          "hand_supports_weight": false,
+          "bounded_native_hand_penetration": true,
+          "momentum_balance": true
+        },
+        "contact_sources": {
+          "robot/r_index_finger_nail": {
+            "normal": {
+              "records": 21731,
+              "first_time_s": 4.656,
+              "last_time_s": 7.474,
+              "maximum_force_n": 11.092517852783203,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.005357057131106135,
+                  -0.011374368022457764,
+                  0.04289628497870451
+                ],
+                [
+                  0.006717263732327306,
+                  0.002848720706744079,
+                  0.05707382636115955
+                ]
+              ]
+            },
+            "friction": {
+              "records": 8560,
+              "first_time_s": 4.656,
+              "last_time_s": 7.474,
+              "maximum_force_n": 5.433453559875488,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.005352513354318762,
+                  -0.011379052898989522,
+                  0.04289628497870451
+                ],
+                [
+                  0.006717263732327306,
+                  0.002848720706744079,
+                  0.05707382636115955
+                ]
+              ]
+            }
+          },
+          "robot/r_index_finger_pad": {
+            "normal": {
+              "records": 2157,
+              "first_time_s": 4.556,
+              "last_time_s": 7.433,
+              "maximum_force_n": 4.181728363037109,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.005115919530024939,
+                  -0.001948411189567131,
+                  0.04794975923978693
+                ],
+                [
+                  -0.002822041099283825,
+                  0.0018282621148674244,
+                  0.0570735414510886
+                ]
+              ]
+            },
+            "friction": {
+              "records": 970,
+              "first_time_s": 4.556,
+              "last_time_s": 7.433,
+              "maximum_force_n": 3.0473620891571045,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.005115919530024939,
+                  -0.001948411189567131,
+                  0.04794975923978693
+                ],
+                [
+                  -0.002822041099283825,
+                  0.0018282621148674244,
+                  0.0570735414510886
+                ]
+              ]
+            }
+          },
+          "robot/r_thumb_pad": {
+            "normal": {
+              "records": 41627,
+              "first_time_s": 2.166,
+              "last_time_s": 7.313,
+              "maximum_force_n": 37.7596549987793,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.007348998895814215,
+                  -0.023653161450092015,
+                  0.04457323851441676
+                ],
+                [
+                  -0.005017448935572892,
+                  -0.019981942590858996,
+                  0.0455889920360331
+                ]
+              ]
+            },
+            "friction": {
+              "records": 16311,
+              "first_time_s": 2.166,
+              "last_time_s": 7.313,
+              "maximum_force_n": 16.34426498413086,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.007349623209467545,
+                  -0.023653161450092015,
+                  0.044770642609277676
+                ],
+                [
+                  -0.005017448935572892,
+                  -0.0199819723853196,
+                  0.045623447463079406
+                ]
+              ]
+            }
+          },
+          "table/table": {
+            "normal": {
+              "records": 74995,
+              "first_time_s": 0.001,
+              "last_time_s": 14.0,
+              "maximum_force_n": 39.38551712036133,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.02117552696484584,
+                  -0.022012395410962903,
+                  -0.048802997110899846
+                ],
+                [
+                  0.018194153542788614,
+                  0.017138474716164566,
+                  -0.04522754030101961
+                ]
+              ]
+            },
+            "friction": {
+              "records": 27896,
+              "first_time_s": 0.001,
+              "last_time_s": 14.0,
+              "maximum_force_n": 18.22186851501465,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.02117552696484584,
+                  -0.022012366853385024,
+                  -0.04867367811253033
+                ],
+                [
+                  0.018194153542788614,
+                  0.017133790936411743,
+                  -0.04525067652207521
+                ]
+              ]
+            }
+          }
+        },
+        "source_states_sha256": "47e7e018b50960188d55ec6fa57fca63d9548b5a199d23afd560d20f48752307",
+        "source_contacts_sha256": "0f537542df0670afd5cd9670eab1d06b29b4a287f6fd229318b562f6b8038f79"
+      }
+    },
+    {
+      "run": "apple-sdf-contact-details-500us-v1",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.0005,
+      "height_offset_m": 0.00725,
+      "robot_self_collision": true,
+      "source_unchanged": true,
+      "receipt_sha256": "e7f66561cba0d58bf026969bc5eec7396b77cf3e20e2aaa5351aba3f25ad6dcc",
+      "source_sha256": {
+        "source.py": "8478354394191c2fc57826926ff0c89163b6652490b3858dd758cb8b299c4b89",
+        "unisim-scene-worker.py": "6a1bfc093b32678c743a3f8b0787d5e72f82e654b07a90225678264b776a060e",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e",
+        "robot_transfer.py": "2627dec37f5c8c0b609bb04ee551e189ca59f03f041772015e90eb1f290f2588",
+        "unisim-contact-details.py": "7484c94d7eeb5926fb3e92afd4b2398e7e5e23c7f439289b4946f8d0092dc00a",
+        "unisim-worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+        "unisim-backend.py": "a002b00171386b8fa06051d5332e8c8136c74ad56ed820c970063f05c0d0a09c"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "bb3db509675088b01096ad7f1cd26bdc177a719b99b979e71a5c32250e5d4a8f",
+        "states.npz": "45ec166d57268dd6b4fbd18b5edbf164dfa1f377d72e750bf4c6a010fad5e559",
+        "implicit-collision-exclusions.json": "ac67ebdd5801b76ac52ff2acfb5d87a16b85b09055808b1a1709002e88e61eaa",
+        "contacts.npz": "2ab37fed22980f6fabc3cb4a0ec5713cb8c58288fc1765af24cd304cced72932"
+      },
+      "diagnosis": {
+        "scope": "Development diagnosis v2; not a complete grasp qualification. Hand penetration excludes table, which is reported separately. Native separation is not cross-engine reference-surface penetration. Apple-local contact points use post-step pose and are approximate.",
+        "metrics": {
+          "minimum_clearance_during_hold_m": -0.000887152666903257,
+          "maximum_clearance_m": 1.291540690567805e-05,
+          "mean_hold_support_weight_ratio": {
+            "thumb": 0.0,
+            "index": 0.0,
+            "table": 1.0001610913675325,
+            "other": 0.0
+          },
+          "maximum_momentum_residual_weight_ratio": 0.00011885621208619393,
+          "p99_momentum_residual_weight_ratio": 6.112215322955096e-06,
+          "maximum_native_penetration_m": 0.0014704838395118713,
+          "maximum_native_hand_penetration_m": 1.483597225160338e-05,
+          "maximum_native_table_penetration_m": 0.0014704838395118713,
+          "hold_wrist_relative_displacement_m": 0.008509160822236872,
+          "maximum_joint_error_rad": 0.1383292874859703
+        },
+        "checks": {
+          "lifted_70mm": false,
+          "hand_supports_weight": false,
+          "bounded_native_hand_penetration": true,
+          "momentum_balance": true
+        },
+        "contact_sources": {
+          "robot/r_index_finger_nail": {
+            "normal": {
+              "records": 7153,
+              "first_time_s": 2.2325,
+              "last_time_s": 3.478,
+              "maximum_force_n": 14.83881950378418,
+              "apple_local_point_bounds_m": [
+                [
+                  0.015397620809197024,
+                  0.015001321170199058,
+                  0.04080537230661295
+                ],
+                [
+                  0.018406944977812586,
+                  0.016761329230543527,
+                  0.041063632716934764
+                ]
+              ]
+            },
+            "friction": {
+              "records": 3323,
+              "first_time_s": 2.2325,
+              "last_time_s": 3.478,
+              "maximum_force_n": 11.369308471679688,
+              "apple_local_point_bounds_m": [
+                [
+                  0.015397620809197024,
+                  0.015001321170199058,
+                  0.04080089798561034
+                ],
+                [
+                  0.018406944977812586,
+                  0.01676533574008195,
+                  0.04106556608778359
+                ]
+              ]
+            }
+          },
+          "robot/r_thumb_pad": {
+            "normal": {
+              "records": 93630,
+              "first_time_s": 2.2205,
+              "last_time_s": 7.452500000000001,
+              "maximum_force_n": 28.608884811401367,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.006042836193356256,
+                  -0.01948473307003683,
+                  0.04577308043219162
+                ],
+                [
+                  0.0012613995771840697,
+                  -0.0020119813966610906,
+                  0.05688119472883963
+                ]
+              ]
+            },
+            "friction": {
+              "records": 24527,
+              "first_time_s": 2.2205,
+              "last_time_s": 7.452500000000001,
+              "maximum_force_n": 14.24120044708252,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.006042836193356256,
+                  -0.01948473307003683,
+                  0.04581295797247766
+                ],
+                [
+                  0.0012613995771840697,
+                  -0.0020119813966610906,
+                  0.05688119472883963
+                ]
+              ]
+            }
+          },
+          "table/table": {
+            "normal": {
+              "records": 156298,
+              "first_time_s": 0.0005,
+              "last_time_s": 14.0,
+              "maximum_force_n": 45.87380599975586,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.021199176412149513,
+                  -0.019253179841959997,
+                  -0.04875002370843232
+                ],
+                [
+                  0.01571275906253116,
+                  0.017167594664294048,
+                  -0.04525140014208914
+                ]
+              ]
+            },
+            "friction": {
+              "records": 56000,
+              "first_time_s": 0.0005,
+              "last_time_s": 14.0,
+              "maximum_force_n": 17.863130569458008,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.021199173655371276,
+                  -0.01925293048886067,
+                  -0.04875002370843232
+                ],
+                [
+                  0.01571275019626918,
+                  0.01712835975396206,
+                  -0.04525140014208914
+                ]
+              ]
+            }
+          }
+        },
+        "source_states_sha256": "45ec166d57268dd6b4fbd18b5edbf164dfa1f377d72e750bf4c6a010fad5e559",
+        "source_contacts_sha256": "2ab37fed22980f6fabc3cb4a0ec5713cb8c58288fc1765af24cd304cced72932"
+      }
+    },
+    {
+      "run": "apple-sdf-raised-approach-v1",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.01225,
+      "robot_self_collision": true,
+      "source_unchanged": true,
+      "receipt_sha256": "a3fa2e767cc112da64ef42fc1f60c1135cd6904191d3add94edf32be8db999f7",
+      "source_sha256": {
+        "source.py": "8478354394191c2fc57826926ff0c89163b6652490b3858dd758cb8b299c4b89",
+        "unisim-scene-worker.py": "6a1bfc093b32678c743a3f8b0787d5e72f82e654b07a90225678264b776a060e",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e",
+        "robot_transfer.py": "fb118b5d90919510cdb474ef6607145e53e1044b76efb4e3760701b3c8f8818b",
+        "unisim-contact-details.py": "7484c94d7eeb5926fb3e92afd4b2398e7e5e23c7f439289b4946f8d0092dc00a",
+        "unisim-worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+        "unisim-backend.py": "a002b00171386b8fa06051d5332e8c8136c74ad56ed820c970063f05c0d0a09c"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "bb3db509675088b01096ad7f1cd26bdc177a719b99b979e71a5c32250e5d4a8f",
+        "states.npz": "a88eead16be9a6822690e93a251efe35682d44b654a0946978c58efd20b5e820",
+        "implicit-collision-exclusions.json": "ac67ebdd5801b76ac52ff2acfb5d87a16b85b09055808b1a1709002e88e61eaa",
+        "contacts.npz": "d5c7338bb3258e81e80a62f6d7ef67b61d9347f3fe65923d0fb81db642df38cb"
+      },
+      "diagnosis": {
+        "scope": "Development diagnosis v2; not a complete grasp qualification. Hand penetration excludes table, which is reported separately. Native separation is not cross-engine reference-surface penetration. Apple-local contact points use post-step pose and are approximate.",
+        "metrics": {
+          "minimum_clearance_during_hold_m": -0.0008347570596059506,
+          "maximum_clearance_m": 0.00024098753302959075,
+          "mean_hold_support_weight_ratio": {
+            "thumb": 0.0,
+            "index": 0.0,
+            "table": 1.0002529138805583,
+            "other": 0.0
+          },
+          "maximum_momentum_residual_weight_ratio": 3.2476318608669245e-05,
+          "p99_momentum_residual_weight_ratio": 3.3299578957918866e-06,
+          "maximum_native_penetration_m": 0.0014704838395118713,
+          "maximum_native_hand_penetration_m": 3.244829349569045e-05,
+          "maximum_native_table_penetration_m": 0.0014704838395118713,
+          "hold_wrist_relative_displacement_m": 0.007467442739117657,
+          "maximum_joint_error_rad": 0.11867398164337808
+        },
+        "checks": {
+          "lifted_70mm": false,
+          "hand_supports_weight": false,
+          "bounded_native_hand_penetration": true,
+          "momentum_balance": true
+        },
+        "contact_sources": {
+          "robot/r_index_finger_pad": {
+            "normal": {
+              "records": 8966,
+              "first_time_s": 5.316,
+              "last_time_s": 7.2,
+              "maximum_force_n": 6.57083797454834,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.004610147418870199,
+                  2.8599959493026943e-05,
+                  0.050491411724847036
+                ],
+                [
+                  -0.0038250347882520562,
+                  0.0018395951528132446,
+                  0.05494079067056144
+                ]
+              ]
+            },
+            "friction": {
+              "records": 3973,
+              "first_time_s": 5.316,
+              "last_time_s": 7.2,
+              "maximum_force_n": 5.645579814910889,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.004607416777864513,
+                  2.8599959493026943e-05,
+                  0.050491411724847036
+                ],
+                [
+                  -0.0038250347882520562,
+                  0.0018395951528132446,
+                  0.05494079067056144
+                ]
+              ]
+            }
+          },
+          "robot/r_thumb_pad": {
+            "normal": {
+              "records": 7254,
+              "first_time_s": 5.5440000000000005,
+              "last_time_s": 7.367,
+              "maximum_force_n": 7.413711071014404,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.006482952156540173,
+                  -0.002598469797011593,
+                  0.05581032409077445
+                ],
+                [
+                  -0.005144973823927574,
+                  -0.0018273559407846276,
+                  0.05689650272049742
+                ]
+              ]
+            },
+            "friction": {
+              "records": 3590,
+              "first_time_s": 5.5440000000000005,
+              "last_time_s": 7.367,
+              "maximum_force_n": 3.817533493041992,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.006482952156540173,
+                  -0.0025778467985954194,
+                  0.05581032409077445
+                ],
+                [
+                  -0.005144973823927574,
+                  -0.0018273559407846276,
+                  0.05689650272049742
+                ]
+              ]
+            }
+          },
+          "table/table": {
+            "normal": {
+              "records": 78654,
+              "first_time_s": 0.001,
+              "last_time_s": 14.0,
+              "maximum_force_n": 20.013280868530273,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.021201466369361065,
+                  -0.02158441773961233,
+                  -0.048802997110899846
+                ],
+                [
+                  0.018196611249752366,
+                  0.017129437678712417,
+                  -0.04523723379019379
+                ]
+              ]
+            },
+            "friction": {
+              "records": 27968,
+              "first_time_s": 0.001,
+              "last_time_s": 14.0,
+              "maximum_force_n": 6.236185550689697,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.021201466369361065,
+                  -0.02158441773961233,
+                  -0.04867367811253033
+                ],
+                [
+                  0.0181727471759239,
+                  0.01712746224365723,
+                  -0.04525370954022999
+                ]
+              ]
+            }
+          }
+        },
+        "source_states_sha256": "a88eead16be9a6822690e93a251efe35682d44b654a0946978c58efd20b5e820",
+        "source_contacts_sha256": "d5c7338bb3258e81e80a62f6d7ef67b61d9347f3fe65923d0fb81db642df38cb"
+      }
+    },
+    {
+      "run": "apple-sdf-mid-approach-v1",
+      "status": "completed",
+      "duration_s": 14.0,
+      "dt_s": 0.001,
+      "height_offset_m": 0.01025,
+      "robot_self_collision": true,
+      "source_unchanged": true,
+      "receipt_sha256": "55d28742bbed58dd4ceb6331e8483bce1143f16f7250e5955ffe78439ddd9426",
+      "source_sha256": {
+        "source.py": "8478354394191c2fc57826926ff0c89163b6652490b3858dd758cb8b299c4b89",
+        "unisim-scene-worker.py": "6a1bfc093b32678c743a3f8b0787d5e72f82e654b07a90225678264b776a060e",
+        "unisim-sdf-collision.py": "ea400309f908dcbb959c18ccf648cec16a305587f915fa6d7eff274442e96625",
+        "stem_trajectory.py": "86dc53811464fe978507626d1e5440f3b09921ccdb541076aff17ac703760af8",
+        "mujoco_grasp.py": "88fada098953dde15fac30009ee0bdd0c358a7f22f686532fa4e7781c3df008e",
+        "robot_transfer.py": "fb118b5d90919510cdb474ef6607145e53e1044b76efb4e3760701b3c8f8818b",
+        "unisim-contact-details.py": "7484c94d7eeb5926fb3e92afd4b2398e7e5e23c7f439289b4946f8d0092dc00a",
+        "unisim-worker.py": "e8b2ea2cc93be6b0ae5df3b75d76a3634a78f087d0ef3aea54adbde883efb12d",
+        "unisim-backend.py": "a002b00171386b8fa06051d5332e8c8136c74ad56ed820c970063f05c0d0a09c"
+      },
+      "raw_artifact_sha256": {
+        "native-records.json": "bb3db509675088b01096ad7f1cd26bdc177a719b99b979e71a5c32250e5d4a8f",
+        "states.npz": "5a09fba990ae69f39f9c15fa52262db06edba8d5d990321e818e29703ce4c3b7",
+        "implicit-collision-exclusions.json": "ac67ebdd5801b76ac52ff2acfb5d87a16b85b09055808b1a1709002e88e61eaa",
+        "contacts.npz": "7edf55f1ade8662e0cc4e93ea54025fa274fd321b6e69129ba21156fb9d14279"
+      },
+      "diagnosis": {
+        "scope": "Development diagnosis v2; not a complete grasp qualification. Hand penetration excludes table, which is reported separately. Native separation is not cross-engine reference-surface penetration. Apple-local contact points use post-step pose and are approximate.",
+        "metrics": {
+          "minimum_clearance_during_hold_m": -0.00067181199639188,
+          "maximum_clearance_m": 0.1263605209735047,
+          "mean_hold_support_weight_ratio": {
+            "thumb": 0.6448009473555477,
+            "index": -0.3155034878102246,
+            "table": 0.6700088021563775,
+            "other": 0.0
+          },
+          "maximum_momentum_residual_weight_ratio": 5.400523011255966e-05,
+          "p99_momentum_residual_weight_ratio": 7.384733699598486e-06,
+          "maximum_native_penetration_m": 0.0014704838395118713,
+          "maximum_native_hand_penetration_m": 0.0001027229372994043,
+          "maximum_native_table_penetration_m": 0.0014704838395118713,
+          "hold_wrist_relative_displacement_m": 0.30431873961093836,
+          "maximum_joint_error_rad": 0.1190965282055125
+        },
+        "checks": {
+          "lifted_70mm": false,
+          "hand_supports_weight": false,
+          "bounded_native_hand_penetration": true,
+          "momentum_balance": true
+        },
+        "contact_sources": {
+          "robot/r_index_finger_nail": {
+            "normal": {
+              "records": 51,
+              "first_time_s": 2.709,
+              "last_time_s": 2.725,
+              "maximum_force_n": 10.815949440002441,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.006826811018879173,
+                  0.017914915435565962,
+                  0.04037241551075833
+                ],
+                [
+                  -0.005814903942281797,
+                  0.01903058585135408,
+                  0.04089406142413749
+                ]
+              ]
+            },
+            "friction": {
+              "records": 27,
+              "first_time_s": 2.709,
+              "last_time_s": 2.725,
+              "maximum_force_n": 5.285087585449219,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.006826811018879173,
+                  0.017914915435565962,
+                  0.04037241551075833
+                ],
+                [
+                  -0.005814903942281797,
+                  0.01903058585135408,
+                  0.04091949343759044
+                ]
+              ]
+            }
+          },
+          "robot/r_index_finger_pad": {
+            "normal": {
+              "records": 55008,
+              "first_time_s": 4.416,
+              "last_time_s": 12.0,
+              "maximum_force_n": 21.678287506103516,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.007835227137867995,
+                  0.0004533730920249744,
+                  0.04826848973255156
+                ],
+                [
+                  -0.003462514761173016,
+                  0.00287261230515583,
+                  0.057127094498213585
+                ]
+              ]
+            },
+            "friction": {
+              "records": 18546,
+              "first_time_s": 4.416,
+              "last_time_s": 12.0,
+              "maximum_force_n": 11.320892333984375,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.007835227137867995,
+                  0.00042929441176445607,
+                  0.04826848973255156
+                ],
+                [
+                  -0.003462514761173016,
+                  0.00287261230515583,
+                  0.057127094498213585
+                ]
+              ]
+            }
+          },
+          "robot/r_thumb_nail": {
+            "normal": {
+              "records": 25153,
+              "first_time_s": 4.9670000000000005,
+              "last_time_s": 9.618,
+              "maximum_force_n": 24.687393188476562,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.017872712563734197,
+                  -0.009396417365095817,
+                  0.04414907231341433
+                ],
+                [
+                  -0.010409006658206679,
+                  -0.00712994383938289,
+                  0.04645079462172865
+                ]
+              ]
+            },
+            "friction": {
+              "records": 11537,
+              "first_time_s": 4.9670000000000005,
+              "last_time_s": 9.618,
+              "maximum_force_n": 9.248980522155762,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.017872712563734197,
+                  -0.009396417365095817,
+                  0.04414907231341433
+                ],
+                [
+                  -0.010409006658206679,
+                  -0.00712994383938289,
+                  0.04645079462172865
+                ]
+              ]
+            }
+          },
+          "robot/r_thumb_pad": {
+            "normal": {
+              "records": 50977,
+              "first_time_s": 2.266,
+              "last_time_s": 12.002,
+              "maximum_force_n": 36.98177719116211,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.018018275160309127,
+                  -0.021358897088667273,
+                  0.04483453424472253
+                ],
+                [
+                  0.0022379620845066877,
+                  -0.0012376214400180866,
+                  0.057331143897090014
+                ]
+              ]
+            },
+            "friction": {
+              "records": 21949,
+              "first_time_s": 2.266,
+              "last_time_s": 12.002,
+              "maximum_force_n": 17.320823669433594,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.018018275160309127,
+                  -0.021337393837024633,
+                  0.04483453424472253
+                ],
+                [
+                  0.0022379620845066877,
+                  -0.0012376214400180866,
+                  0.057331143897090014
+                ]
+              ]
+            }
+          },
+          "table/table": {
+            "normal": {
+              "records": 48913,
+              "first_time_s": 0.001,
+              "last_time_s": 14.0,
+              "maximum_force_n": 295.5472717285156,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.03756427227103176,
+                  -0.03741467473319468,
+                  -0.048802997110899846
+                ],
+                [
+                  0.035288726878051915,
+                  0.04175706342992996,
+                  0.04469907731248853
+                ]
+              ]
+            },
+            "friction": {
+              "records": 17878,
+              "first_time_s": 0.001,
+              "last_time_s": 14.0,
+              "maximum_force_n": 46.13640594482422,
+              "apple_local_point_bounds_m": [
+                [
+                  -0.03758392951252462,
+                  -0.03741467473319468,
+                  -0.04867367811253033
+                ],
+                [
+                  0.035288726878051915,
+                  0.0417825252328557,
+                  0.0446987855442427
+                ]
+              ]
+            }
+          }
+        },
+        "source_states_sha256": "5a09fba990ae69f39f9c15fa52262db06edba8d5d990321e818e29703ce4c3b7",
+        "source_contacts_sha256": "7edf55f1ade8662e0cc4e93ea54025fa274fd321b6e69129ba21156fb9d14279"
+      }
+    }
+  ],
+  "native_collision_filter_readback": {
+    "run": "apple-sdf-mid-approach-v1",
+    "expected_pairs": 267,
+    "actual_pairs": 267,
+    "missing": [],
+    "extra": [],
+    "new_source_implied_pairs": [
+      [
+        "arm_openarm_left_link6",
+        "l_wrist"
+      ],
+      [
+        "arm_openarm_right_link6",
+        "r_wrist"
+      ],
+      [
+        "l_index_finger_middle",
+        "l_index_finger_nail"
+      ],
+      [
+        "l_index_finger_middle",
+        "l_index_finger_pad"
+      ],
+      [
+        "l_middle_finger_middle",
+        "l_middle_finger_nail"
+      ],
+      [
+        "l_middle_finger_middle",
+        "l_middle_finger_pad"
+      ],
+      [
+        "l_pinky_middle",
+        "l_pinky_nail"
+      ],
+      [
+        "l_pinky_middle",
+        "l_pinky_pad"
+      ],
+      [
+        "l_ring_finger_middle",
+        "l_ring_finger_nail"
+      ],
+      [
+        "l_ring_finger_middle",
+        "l_ring_finger_pad"
+      ],
+      [
+        "l_thumb_middle",
+        "l_thumb_nail"
+      ],
+      [
+        "l_thumb_middle",
+        "l_thumb_pad"
+      ],
+      [
+        "r_index_finger_middle",
+        "r_index_finger_nail"
+      ],
+      [
+        "r_index_finger_middle",
+        "r_index_finger_pad"
+      ],
+      [
+        "r_middle_finger_middle",
+        "r_middle_finger_nail"
+      ],
+      [
+        "r_middle_finger_middle",
+        "r_middle_finger_pad"
+      ],
+      [
+        "r_pinky_middle",
+        "r_pinky_nail"
+      ],
+      [
+        "r_pinky_middle",
+        "r_pinky_pad"
+      ],
+      [
+        "r_ring_finger_middle",
+        "r_ring_finger_nail"
+      ],
+      [
+        "r_ring_finger_middle",
+        "r_ring_finger_pad"
+      ],
+      [
+        "r_thumb_middle",
+        "r_thumb_pad"
+      ]
+    ]
+  },
+  "observer_invariance": {
+    "runs": [
+      "apple-sdf-parent-filter-v1",
+      "apple-sdf-contact-details-v1"
+    ],
+    "bitwise_equal": {
+      "time": true,
+      "target": true,
+      "ctrl": true,
+      "q": true,
+      "dq": true,
+      "position": true,
+      "quaternion": true,
+      "velocity": true,
+      "angular_velocity": true,
+      "normal_force": true
+    }
+  }
+}

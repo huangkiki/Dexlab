@@ -26,6 +26,11 @@ PARAMETERS = (
     "yaw",
     "height_offset",
     "linear_solver",
+    "timestep",
+    "apple_mass",
+    "apple_x_offset",
+    "apple_y_offset",
+    "apple_yaw",
 )
 
 
@@ -35,7 +40,7 @@ class AppleStemCfg(EnvCfg):
     max_episode_seconds: float = 14.0
     output: str = ""
     headless: bool = True
-    parameters: dict[str, float | str] = field(default_factory=dict)
+    parameters: dict[str, float | str | None] = field(default_factory=dict)
 
 
 class AppleStemEnv(ABEnv):
@@ -58,10 +63,14 @@ class AppleStemEnv(ABEnv):
             raise ValueError("The audited episode duration is 14 seconds")
         if set(cfg.parameters) - set(PARAMETERS):
             raise ValueError("Unknown physics parameter override")
-        dt = 0.0005 if backend_type == "mujoco" else 0.002
+        dt = cfg.parameters.get("timestep")
+        if dt is None:
+            dt = 0.0005 if backend_type == "mujoco" else 0.002
+        if dt not in (0.002, 0.001, 0.0005, 0.00025, 0.000125):
+            raise ValueError("Unsupported benchmark timestep")
         if (cfg.sim_dt, cfg.ctrl_dt) not in ((0.01, 0.01), (dt, dt)):
             raise ValueError(
-                f"This audited backend uses sim_dt = ctrl_dt = {dt}; timestep overrides are not supported"
+                f"This episode requires sim_dt = ctrl_dt = {dt}; set timestep overrides in parameters"
             )
         self._cfg = replace(cfg, sim_dt=dt, ctrl_dt=dt)
         self.backend_type = backend_type
@@ -153,9 +162,10 @@ class AppleStemEnv(ABEnv):
             argv.append("--headless")
         if self.cfg.output:
             argv.extend(["--output", self.cfg.output])
-        args = parse_args(argv)
         for key, value in self.cfg.parameters.items():
-            setattr(args, key, value)
+            if value is not None:
+                argv.append(f"--{key.replace('_', '-')}={value}")
+        args = parse_args(argv)
         self._episode = episode(args)
         self._steps = 0
         self._frame = next(self._episode)

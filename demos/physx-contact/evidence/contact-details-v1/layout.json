@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "nq": 7,
+  "nv": 6,
+  "nu": 0,
+  "nbody": 3,
+  "ngeom": 2,
+  "entities": [
+    {
+      "name": "box",
+      "kind": "rigid",
+      "root_mode": "floating",
+      "root_body": "body",
+      "body_names": [
+        "body"
+      ],
+      "body_ids": [
+        1
+      ],
+      "body_parent_names": [
+        null
+      ],
+      "joints": [],
+      "actuator_names": [],
+      "actuator_joint_names": [],
+      "actuator_indices": [],
+      "root_qpos_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "root_qvel_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "geoms": [
+        {
+          "name": "surface",
+          "body_name": "body"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "kind": "rigid",
+      "root_mode": "fixed",
+      "root_body": "body",
+      "body_names": [
+        "body"
+      ],
+      "body_ids": [
+        2
+      ],
+      "body_parent_names": [
+        null
+      ],
+      "joints": [],
+      "actuator_names": [],
+      "actuator_joint_names": [],
+      "actuator_indices": [],
+      "root_qpos_indices": [],
+      "root_qvel_indices": [],
+      "geoms": [
+        {
+          "name": "surface",
+          "body_name": "body"
+        }
+      ]
+    }
+  ]
+}

@@ -50,7 +50,11 @@ def main():
     font = ImageFont.load_default(size=16)
     engine = json.loads((args.input / "engine.json").read_text())
     backend = engine["backend"]
-    label = "MuJoCo 3.11.0" if backend == "mujoco" else "SuperDex FP64"
+    label = {
+        "mujoco": "MuJoCo 3.11.0",
+        "superdex": "SuperDex FP64",
+        "physx": "PhysX / Isaac Sim 5.1",
+    }[backend]
     basename = backend + "-sdf"
 
     detail = mujoco.MjvCamera()

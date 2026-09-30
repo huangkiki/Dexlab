@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "scope": {
+    "adapter": "isaacsim",
+    "profile": "default",
+    "unisim_version": "1.7.10",
+    "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+    "engine_version": null,
+    "platform": null,
+    "device": null,
+    "runtime_available": null
+  },
+  "declarations": [
+    {
+      "feature": "actuator.motor",
+      "support": "unsupported",
+      "reason": "Worker control accepts position targets only.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "actuator.position",
+      "support": "exact",
+      "reason": "MJCF position actuators map to worker joint drives.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "asset.mjcf",
+      "support": "exact",
+      "reason": "MJCF entry point exists; importer-specific subsets apply.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "asset.urdf",
+      "support": "unsupported",
+      "reason": "The current worker path imports MJCF only.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "collision.rigid",
+      "support": "exact",
+      "reason": "Implemented for the adapter's accepted MJCF subset.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "collision.self",
+      "support": "exact",
+      "reason": "Mapped entity scenes apply each collision-enabled articulation's self_collision request through the MJCF converter, re-author the imported PhysX articulation flag when fixed roots move the articulation API to the root prim, audit the flag on every spawned instance and report it per entity. Source <contact><exclude> pairs stay excluded as USD filtered pairs; rigid entities and mirrors cannot request self-collision. Legacy model-file scenes keep self-collision disabled.",
+      "conditions": [
+        {
+          "key": "entity.self_collision",
+          "value": "true"
+        },
+        {
+          "key": "scene.profile",
+          "value": "mapped_entities"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "contact.query",
+      "support": "approximate",
+      "reason": "Mapped scenes report geom-pair net normal force through the dedicated IsaacLab PhysX collision-pair reporter, and per-body net normal force (geom2 omitted, any contact object) plus body-net found flags through one batched per-entity PhysX contact view. Values are world-frame net normal forces with worker self-collision disabled. Legacy scenes reject all contact declarations.",
+      "conditions": [
+        {
+          "key": "scene.profile",
+          "value": "mapped_entities"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.interval.body_angular_velocity_delta",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.interval.body_force",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.interval.body_linear_velocity_delta",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.interval.body_torque",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.interval.push",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.base_com_offset",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.base_mass_delta",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.body_inertia",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.body_ipos",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.body_iquat",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.body_mass",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.dof_armature",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.dof_damping",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.dof_frictionloss",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.geom_friction",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.geom_size",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.geom_solimp",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.geom_solref",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.gravity",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.kd",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "dr.reset.kp",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "entity.gravity_disable",
+      "support": "exact",
+      "reason": "Mapped entity scenes honor each entity's explicit gravity_disabled request exactly: role baking authors physxRigidBody:disableGravity from the resolved value, every baked or cached role re-validates it, and the worker reports the resolved flag per entity for strict host comparison. gravity_disabled=None keeps the implicit default (kinematic entities and fixed rigid bodies feel no gravity). Legacy model-file scenes keep their authored gravity behavior.",
+      "conditions": [
+        {
+          "key": "entity.gravity_disabled",
+          "value": "explicit"
+        },
+        {
+          "key": "scene.profile",
+          "value": "mapped_entities"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "entity.multiple",
+      "support": "exact",
+      "reason": "Mapped MJCF scalar-joint entity scenes; worker audits native layout, inertials and identity. Variants use immutable construction-time assignments; IsaacSim materializes each unique assignment as a K-prototype catalog. Unsupported source/root/geometry profiles fail closed. Per-environment reset domain randomization covers geometry friction, body mass/COM/inertia, drive kp/kd and joint damping/armature/friction; per-variant drive gains are written at spawn and audited per environment.",
+      "conditions": [
+        {
+          "key": "entity.asset_format",
+          "value": "mjcf"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/issues/108",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "m2-entity-composition",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "entity.single_articulation",
+      "support": "exact",
+      "reason": "One primary articulation is supported.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "joint.ball",
+      "support": "unknown",
+      "reason": "No reviewed declaration for this feature/profile; fail closed.",
+      "conditions": [],
+      "evidence": []
+    },
+    {
+      "feature": "joint.hinge",
+      "support": "exact",
+      "reason": "Implemented for the adapter's accepted MJCF subset.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "joint.slide",
+      "support": "exact",
+      "reason": "Implemented for the adapter's accepted MJCF subset.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.debug_overlay",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_play_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_play_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.interactive_debug_overlay",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_play_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_play_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.mocap_playback",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_play_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_play_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.native_interactive_renderer",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_play_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_play_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.native_video_capture",
+      "support": "exact",
+      "reason": "Derived from authoritative SimBackend.get_play_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_play_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.per_env",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "play.physics_state_playback",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_play_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_play_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "reset.state",
+      "support": "exact",
+      "reason": "Generalized-state reset exists; layout is adapter-owned.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "root.fixed",
+      "support": "exact",
+      "reason": "Fixed roots use the root-prim articulation convention with fixed-anchor world-pose rebinding; the worker audits is_fixed_base and rejects fixed-root state/velocity writes.",
+      "conditions": [
+        {
+          "key": "scene.profile",
+          "value": "mapped_entities"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "root.free",
+      "support": "exact",
+      "reason": "Implemented for the adapter's accepted MJCF subset.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "sensor.gyro",
+      "support": "approximate",
+      "reason": "Host maps worker rigid-body angular velocity into the local sensor frame.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "sensor.imu",
+      "support": "unsupported",
+      "reason": "Accelerometers are rejected; use the narrower gyro declaration.",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "state.callback_refresh",
+      "support": "exact",
+      "reason": "Mapped host control splits one public step into worker substeps and refreshes shared state before every owner callback.",
+      "conditions": [
+        {
+          "key": "scene.profile",
+          "value": "mapped_entities"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "https://github.com/unilabsim/unisim/blob/6d62d9ba40a1f637fb04da190fd38f64d02b05d1/src/unisim/backend/isaacsim/worker.py",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "state.final_refresh",
+      "support": "unknown",
+      "reason": "No reviewed declaration for this feature/profile; fail closed.",
+      "conditions": [],
+      "evidence": []
+    },
+    {
+      "feature": "terrain.heightfield",
+      "support": "unknown",
+      "reason": "No reviewed declaration for this feature/profile; fail closed.",
+      "conditions": [],
+      "evidence": []
+    },
+    {
+      "feature": "variant.fixed",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "variant.same_layout",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    },
+    {
+      "feature": "variant.uniform_public_layout",
+      "support": "unsupported",
+      "reason": "Derived from authoritative SimBackend.get_dr_capabilities",
+      "conditions": [],
+      "evidence": [
+        {
+          "kind": "source",
+          "source": "SimBackend.get_dr_capabilities",
+          "scope": {
+            "adapter": "isaacsim",
+            "profile": "default",
+            "unisim_version": "1.7.10",
+            "adapter_version": "6d62d9ba40a1f637fb04da190fd38f64d02b05d1",
+            "engine_version": null,
+            "platform": null,
+            "device": null,
+            "runtime_available": null
+          },
+          "result": "passed",
+          "revoked": false
+        }
+      ]
+    }
+  ]
+}

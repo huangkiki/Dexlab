@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checks": {
+    "complete_time_and_velocity": true,
+    "one_contact_record_per_step": true,
+    "finite_contact_forces": true,
+    "initial_slide": true,
+    "friction_observed": true,
+    "momentum_balance": true,
+    "native_run_completed": true,
+    "clean_shutdown": true,
+    "source_unchanged": true,
+    "artifact_hashes_match": true,
+    "frozen_protocol": true,
+    "declared_two_body_scene": true,
+    "native_mass_matches": true,
+    "native_friction_matches": true
+  },
+  "metrics": {
+    "maximum_momentum_residual_n": 2.9444701526474527e-05,
+    "maximum_momentum_residual_weight_ratio": 1.5007493132759696e-05,
+    "maximum_friction_n": 0.5886248350364934
+  },
+  "scope": "Qualify native normal and friction reporting with a sliding rigid block.\n\nThis is an observation-consistency test, not a material calibration or grasp\nsuccess test. Verification uses saved actual velocities and contact records."
+}

@@ -35,8 +35,8 @@ class ClothEnv(ABEnv):
     """
 
     def __init__(self, cfg, *, num_envs=1, backend_type="mujoco"):
-        if num_envs != 1 or backend_type not in ("mujoco", "newton", "superdex"):
-            raise ValueError("A single MuJoCo, Newton, or SuperDex cloth scene is required")
+        if num_envs != 1 or backend_type not in ("mujoco", "newton", "superdex", "isaacsim"):
+            raise ValueError("A single supported native cloth scene is required")
         if not np.isfinite(cfg.sim_dt) or cfg.sim_dt <= 0 or cfg.ctrl_dt != cfg.sim_dt:
             raise ValueError("sim_dt and ctrl_dt must match and be positive")
         steps = 3 / cfg.sim_dt
@@ -112,6 +112,10 @@ class ClothEnv(ABEnv):
             self.native = MuJoCoCloth(self.case, self.cfg.sim_dt, **kwargs)
         elif self.backend == "superdex":
             self.native = SuperDexCloth(self.case, self.cfg.sim_dt, **kwargs)
+        elif self.backend == "isaacsim":
+            from dexlab.physx_cloth import PhysXCloth
+
+            self.native = PhysXCloth(self.case, self.cfg.sim_dt, **kwargs)
         else:
             self.native = NewtonCloth(
                 self.case, self.cfg.sim_dt, solver=self.cfg.solver, **kwargs
@@ -141,11 +145,11 @@ class ClothEnv(ABEnv):
         return self._observe()
 
     def close(self):
-        if self.native is not None and self.backend == "superdex":
+        if self.native is not None and self.backend in ("superdex", "isaacsim"):
             self.native.close()
         self.native = None
         self._state = None
 
 
-for backend in ("mujoco", "newton", "superdex"):
+for backend in ("mujoco", "newton", "superdex", "isaacsim"):
     registry.register_env(TASK, ClothEnv, sim_backend=backend)

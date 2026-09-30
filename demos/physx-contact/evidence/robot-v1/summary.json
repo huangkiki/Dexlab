@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "checks": {
+    "complete_finite_record": true,
+    "complete_time_grid": true,
+    "declared_targets": true,
+    "within_joint_limits": true,
+    "unit_quaternions": true,
+    "actual_joint_fk_position": true,
+    "actual_joint_fk_rotation": true,
+    "return_to_initial_posture": true,
+    "settled_joint_velocity": true,
+    "every_joint_exercised": true,
+    "all_54_joints": true,
+    "native_body_order": true,
+    "reduction_matches_source": true,
+    "native_mass_readback": true,
+    "unchanged_model_mass": true,
+    "archive_hashes_match": true,
+    "frozen_protocol": true,
+    "native_run_completed": true,
+    "source_unchanged": true
+  },
+  "metrics": {
+    "fk_max_position_error_m": 7.120820043558677e-07,
+    "fk_max_rotation_error_rad": 2.7895715880201172e-06,
+    "return_max_position_error_rad": 1.7762184143066406e-05,
+    "return_max_velocity_rad_s": 0.00043178428313694894,
+    "minimum_joint_excursion_rad": 0.028188040480017662,
+    "tracking_max_error_rad": 0.003727173262875638
+  },
+  "verifier_sha256": "c2f19bc2e03fc473d97ba1971057c4c046d0f4472efdee2a3d8f56b7879ed1a9"
+}

@@ -1,0 +1,1688 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 98bf755..16efb2a 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,26 @@
+ # Changelog
+ 
++## DexLab local worker inertial-precision fix
++
++- Preserve compiled mass, COM and diagonal inertia/frame at float64 round-trip precision in worker MJCF transport. Inferred and full-tensor inertias become explicit diagonal inertials after XML serialization; native SDK precision remains unchanged. This is a local adapter fix, not an engine change or upstream release.
++
++## DexLab local compliant-contact adapter extension
++
++- Add explicit paired stiffness/damping options for native force-based PhysX compliant contact. Author all bound collision materials before reset with average combination; read composed USD values back and reject missing/mixed semantics. Values are per native constraint, not whole-object material moduli. Defaults and official engines are unchanged. This is not an upstream UniSim release.
++
++## DexLab local contact diagnostics extension
++
++- Added explicit single-environment rigid-object normal-contact and friction-anchor snapshots. Poll every physics substep, preserve body identities, reject malformed/saturated buffers, and copy shared native counts before subsequent queries. Native collision exclusion relationships are exposed in diagnostic metadata. Official engine sources remain unchanged; this is not an upstream UniSim release.
++
++## DexLab local SDF adapter extension
++
++- Preserve mesh-backed MJCF SDF intent, import through a sibling mesh transport, and author/audit native PhysX SDF collision. Version cache identities; test optional slot alignment and unsupported input rejection. This is an adapter-only extension, not an upstream UniSim release.
++
++
++## Unreleased — DexLab adapter extension
++
++- Added opt-in `isaacsim_external_forces_every_iteration`, native scene authoring and strict boolean readback. Defaults are unchanged; official PhysX binaries are unchanged.
++
+ ## 1.7.10 - 2026-09-24
+ 
+ - Sped up mapped IsaacSim prototype authoring at catalog scale (1200-variant INIT entity build drops from 134s to 11s; total INIT from 158s to 35s). Two serialized overheads dominated: each per-variant prototype spawn went through IsaacLab's `UsdFileCfg` spawner, whose `check_usd_path_with_timeout` runs an asyncio `omni.client.stat_async` availability probe with a fixed ~0.1s event-loop yield per call (127s of the 157s INIT, at near-zero CPU/GPU utilization), and every spawn ran with the physics change listener attached, so PhysX parsed each transient prototype subtree (~43ms per variant) even though prototypes are removed before physics starts. The worker now authors the same reference arc directly through `isaacsim.core.utils.prims.create_prim` behind a plain `os.path.isfile` guard — every spawned path is a validated cache artifact (manifest + SHA-256) or a fresh copy of one, and every spawner override the worker set was `None` or unconsumed by the from-files spawner — and prototype spawns join the destination copies and the prototype scope removal under the existing single change-listener toggle, so physics only ever parses the final per-environment destinations. Stage-object edits stay outside the copy loop's `Sdf.ChangeBlock` (deferred layer notices break `DefinePrim` recomposition). Authored prims, the composed stage, PhysX view order, and the native instance audit are unchanged.
+@@ -385,3 +406,7 @@
+ - Bootstrap the `unisim` namespace and `unisim-core` distribution.
+ - Add the backend-neutral `SimBackend` contract, fake backend, and conformance helper.
+ - Reserve benchmark case/result interfaces without implementing workloads or measurements.
++
++### Local explicit torsional radius extension
++
++- Add opt-in minimum torsional contact radius with fail-closed host/worker validation and native USD readback; defaults and cached roles unchanged. This exposes an official PhysX parameter, not a solver patch.
+diff --git a/docs/en/support-matrix.md b/docs/en/support-matrix.md
+index a88a6b6..3b14b95 100644
+--- a/docs/en/support-matrix.md
++++ b/docs/en/support-matrix.md
+@@ -85,3 +85,33 @@ The following table is generated from `get_adapter_capabilities()` in `src/unisi
+ DR, playback, body-wrench and fixed-variant capability sources remain their existing instance APIs. The static inventory intentionally leaves those dependent entries unknown; `backend.get_capabilities()` aggregates authoritative instance declarations. Multiple logical entity partitions do not imply arbitrary multi-articulation composition. URDF investigations and unmerged branches are not current support. IsaacSim's legacy reserved zero contact buffer never means a valid contact query or absence of physical contact; mapped scenes serve declared geom-pair `contact data="force" reduce="netforce"` sensors through the dedicated PhysX pair-force slot and wildcard body-net force (`geom2` omitted) plus body-net `data="found"` flags through one batched per-entity PhysX contact view, while legacy model-file scenes fail all contact declarations closed. Isaac worker sensors support gyro reconstruction but reject accelerometers.
+ 
+ The [capability design decision](adr-capabilities.md) defines evidence matching and snapshot lifetime. `available` in the installation table above is never a task compatibility decision.
++
++### TGS external force application (DexLab adapter extension)
++
++`isaacsim_external_forces_every_iteration=True` applies external forces at each native TGS position iteration via `PhysxSceneAPI`. The default `None` preserves SDK behavior; explicit `False` disables the option. The host and worker require an actual boolean and verify the USD readback. This changes force application timing, not the integration timestep or engine source. Validate affected dynamics before adoption; existing saved experiments retain their original configuration.
++
++### Mesh-backed SDF transport (DexLab adapter extension)
++
++The mapped IsaacSim path preserves MJCF `type="sdf"` intent separately from importer transport. A temporary sibling MJCF spells only mesh-backed SDF geoms as `mesh`; the native importer requires adjacent relative mesh resources and a USD-compatible filename. Role authoring then applies `PhysxSDFMeshCollisionAPI` with resolution 256 and sparse subgrid resolution 6. Native USD readback rejects missing SDF APIs or changed approximation/resolution. Both artifact identities include the transport version; role identities also include per-geom SDF intent. Optional absent geom slots remain collision-disabled placeholders. Plugin SDFs without a mesh are rejected. Ordinary mesh collision semantics are unchanged.
++
++This is a new SDF sampled from the source triangle surface, not a transfer of MuJoCo octree samples or equivalent contact mechanics. USD readback alone is not contact qualification: the DexLab torus/sphere protocol tests an open hole, support on the torus surface and an explicit convex-hull negative control. Official PhysX and IsaacLab sources are unchanged.
++
++### Native contact diagnostics (DexLab adapter extension)
++
++For one mapped environment, `backend.enable_contact_details("object", capacity=8192)` enables diagnostics for a declared single-body rigid entity already covered by a contact sensor. Enable it before recorded stepping. `backend.get_contact_details()` returns the last physics substep's normal contacts and separate friction anchors, with public target body IDs, world-frame positions, forces in N and separation in m. They are not one-to-one records. Both channels must be summed for complete contact force; ordinary pair sensors retain their existing normal-only semantics.
++
++The native buffers are polled on every substep, even when a host call advances several steps; only the last snapshot is returned. Record with one step per call for complete time coverage. A buffer reaching capacity, invalid slices, overlapping ranges or nonfinite active rows fails the operation. This diagnostic does not score success, change contact parameters or alter engine source. Native metadata additionally reads the composed USD `physics:filteredPairs` relationships; callers must compare them with their intended collision model, including any implicit source-engine rules.
++
++### Explicit torsional contact radius
++
++`create_backend("isaacsim", ..., isaacsim_min_torsional_patch_radius=radius)` optionally sets the official PhysX minimum torsional patch radius, in meters, on every composed collision shape before initialization. `None` preserves defaults; zero explicitly disables this minimum-radius contribution. Values must be finite and nonnegative, and host/worker validate the request and uniform native readback. Cached role files remain unchanged.
++
++This is an explicit contact-model assumption, not an automatic conversion of MuJoCo torsional friction coefficients or a material calibration. Native normal/friction point records do not expose a separate torsional impulse; linear force closure is not a full angular-momentum check. PhysX SDK source and binaries are unchanged.
++
++### DexLab local compliant contact
++
++Explicit `isaacsim_compliant_contact_stiffness` and `isaacsim_compliant_contact_damping` must be provided together and be finite/nonnegative. Zero stiffness disables compliance and requires zero damping. Positive stiffness selects native force-based implicit spring contact (N/m and N s/m per native contact constraint); the adapter fixes stiffness/damping combination to average and disables acceleration-spring semantics. All enabled collision materials must be bound and consistent. Values are authored after cached roles are composed and before reset, then read from composed USD; this is not a direct native material-tensor readback or a measured macroscopic modulus. Defaults remain unchanged. This is a local DexLab adapter extension, not an upstream release.
++
++### DexLab local inertial transport precision
++
++Worker source export writes compiled body mass, COM, diagonal inertia and inertia-frame quaternion with 17 significant digits after `MjSpec.to_xml()`. This avoids its six-digit rounding, including for inferred and full-tensor source inertia. The native engine can still round to its own dtype; no solver or SDK is modified. Geometry, joint and other serialized fields are outside this fix. Native readback remains required.
+diff --git a/docs/zh/support-matrix.md b/docs/zh/support-matrix.md
+index 155b431..ebf19f8 100644
+--- a/docs/zh/support-matrix.md
++++ b/docs/zh/support-matrix.md
+@@ -85,3 +85,33 @@ Drake 的 portable-entity profile 覆盖无 variant 场景和实际使用的同
+ DR、播放、body wrench 和 fixed-variant 能力仍由既有实例 API 提供权威信息。静态清单有意将依赖这些来源的项目保留为 unknown；`backend.get_capabilities()` 聚合实例权威声明。多个逻辑实体分区不代表任意多 articulation 组合。URDF 调研和未合并分支不构成当前支持。IsaacSim legacy 路径预留的零接触缓冲区既不代表有效接触查询，也不代表没有物理接触；映射场景把具名 geom-pair `contact data="force" reduce="netforce"` 声明路由到专用 PhysX 碰撞对力槽位，把 wildcard body-net force（省略 `geom2`）与 body-net `data="found"` 标志路由到批量逐 entity PhysX contact view；legacy model-file 场景的一切 contact 声明均快速失败。Isaac worker 的传感器支持 gyro 重建，但拒绝 accelerometer。
+ 
+ [能力设计决策](adr-capabilities.md) 定义证据匹配和快照生命周期。上方安装表中的 `available` 始终不能用于判断任务兼容性。
++
++### TGS 外力施加方式（DexLab 适配扩展）
++
++`isaacsim_external_forces_every_iteration=True` 通过 `PhysxSceneAPI` 在每次原生 TGS 位置迭代施加外力。默认 `None` 保持 SDK 行为；显式 `False` 关闭该选项。主进程与工作进程均要求布尔值，并核对 USD 读回。此项改变外力的施加时序，不改变积分步长或引擎源码。采用前需验证受影响的动力学，已有实验保持其原始配置。
++
++### 网格来源的 SDF 转换（DexLab 适配器扩展）
++
++IsaacSim 映射路径单独保留 MJCF `type="sdf"` 意图。临时同目录 MJCF 仅在导入阶段将网格来源 SDF 写为 `mesh`；原生导入器需要同目录的相对网格资源及合法 USD 文件名。角色生成随后设置 `PhysxSDFMeshCollisionAPI`，分辨率 256、稀疏子网格分辨率 6。原生 USD 读回拒绝缺失 SDF API 或改变近似类型/分辨率的模型。两层缓存均包含转换版本，角色缓存另含逐几何 SDF 意图。可选缺失槽仍是关闭碰撞的占位体；没有网格的插件 SDF 会被拒绝。普通网格碰撞语义不变。
++
++这里从源三角表面重新生成 SDF，不复制 MuJoCo 八叉树采样，也不代表接触力学等价。仅 USD 读回不能证明接触有效：DexLab 圆环/小球协议验证孔洞通行、环面支撑及显式凸包负对照。官方 PhysX 和 IsaacLab 源码不变。
++
++### 原生接触诊断（DexLab 适配器扩展）
++
++单个映射环境中，`backend.enable_contact_details("object", capacity=8192)` 为已声明接触传感器的单刚体实体启用诊断，应在记录步进前调用。`backend.get_contact_details()` 返回最后一个物理子步的法向接触及独立的摩擦锚点，包括公开目标刚体 ID、世界坐标位置、N 单位的力和 m 单位的间距。两类记录不一一对应；完整接触力需要累加两类分量，普通碰撞对传感器仍保留原有的仅法向语义。
++
++即使一次主进程调用推进多个物理步，原生缓冲区也在每个子步读取，但仅返回最后快照；完整时间覆盖要求每次调用只推进一步。缓冲区达到容量、无效切片、重叠区间或有效行含非有限值时操作失败。此诊断不判定成功，不改变接触参数或引擎源码。原生元数据另读回组合 USD 的 `physics:filteredPairs` 关系；调用方仍需与预期碰撞模型核对，包括源引擎的隐式规则。
++
++### 显式扭转接触半径
++
++`create_backend("isaacsim", ..., isaacsim_min_torsional_patch_radius=radius)` 可选地在初始化前，对已组合的全部碰撞形状设置官方 PhysX 最小扭转接触半径，单位 m。`None` 保留默认值；零明确关闭最小半径贡献。数值须有限且非负，主机与 worker 均验证请求，并核对统一的原生读回。缓存角色文件不修改。
++
++这是显式的接触模型假设，不自动转换 MuJoCo 扭转摩擦系数，也不是材料标定。原生法向／摩擦点记录没有独立扭转冲量通道；线性力平衡不等于完整角动量检查。PhysX SDK 源码和二进制不变。
++
++### DexLab 本地柔顺接触扩展
++
++必须同时指定 `isaacsim_compliant_contact_stiffness` 和 `isaacsim_compliant_contact_damping`，数值有限且非负。零刚度关闭柔顺接触，同时要求零阻尼。正刚度启用原生基于力的隐式弹簧接触（每条原生接触约束的 N/m 与 N s/m）；适配器固定刚度/阻尼组合方式为平均值，关闭加速度弹簧。所有启用碰撞的材料必须绑定且语义一致。配置在缓存角色组合后、reset 前写入，并从组合 USD 读回；这不是原生材料张量的直接读回，也不是测得的宏观材料模量。默认行为保持不变。本扩展属于 DexLab 的适配器修改，不是上游发布。
++
++### DexLab 本地惯量传输精度修复
++
++worker 源文件导出在 `MjSpec.to_xml()` 之后，以 17 位有效数字写入编译后的质量、质心、对角惯量及惯量坐标系四元数，避免六位数序列化舍入；支持推断惯量与源文件完整惯量张量。原生引擎仍会按自身数值类型舍入，没有修改求解器或 SDK。几何、关节及其他序列化字段不在本修复范围内；仍需核对原生读回。
+diff --git a/src/unisim/backend/isaacsim/backend.py b/src/unisim/backend/isaacsim/backend.py
+index 2b3077e..23025d0 100644
+--- a/src/unisim/backend/isaacsim/backend.py
++++ b/src/unisim/backend/isaacsim/backend.py
+@@ -119,11 +119,15 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+         render_mode: str | None = None,
+         render_width: int = 1280,
+         render_height: int = 720,
++        external_forces_every_iteration: bool | None = None,
+         solver_position_iteration_count: int | None = None,
+         solver_velocity_iteration_count: int | None = None,
+         bounce_threshold_velocity: float | None = None,
+         contact_offset: float | None = None,
+         rest_offset: float | None = None,
++        compliant_contact_stiffness: float | None = None,
++        compliant_contact_damping: float | None = None,
++        min_torsional_patch_radius: float | None = None,
+         max_depenetration_velocity: float | None = None,
+         gpu_max_rigid_contact_count: int | None = None,
+         gpu_max_rigid_patch_count: int | None = None,
+@@ -135,11 +139,15 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+                 raise ValueError(f"{name} must be a positive integer, got {value!r}")
+         # Validation is fail-closed at construction, before any worker spawn.
+         self._physx_solver = PhysxSolverConfig(
++            external_forces_every_iteration=external_forces_every_iteration,
+             solver_position_iteration_count=solver_position_iteration_count,
+             solver_velocity_iteration_count=solver_velocity_iteration_count,
+             bounce_threshold_velocity=bounce_threshold_velocity,
+             contact_offset=contact_offset,
+             rest_offset=rest_offset,
++            compliant_contact_stiffness=compliant_contact_stiffness,
++            compliant_contact_damping=compliant_contact_damping,
++            min_torsional_patch_radius=min_torsional_patch_radius,
+             max_depenetration_velocity=max_depenetration_velocity,
+             gpu_max_rigid_contact_count=gpu_max_rigid_contact_count,
+             gpu_max_rigid_patch_count=gpu_max_rigid_patch_count,
+@@ -1067,6 +1075,37 @@ class IsaacSimBackend(MjcfSubprocessBackend):
+             return self._slots["contact_sensor_force"][:, spec.sensor_index, :].copy()
+         return super().get_sensor_data(name)
+ 
++    def enable_contact_details(self, entity: str, *, capacity: int = 8192) -> dict[str, Any]:
++        """Enable single-scene native normal/friction diagnostics for one rigid object.
++
++        Call before the first recorded step. This explicit adapter extension
++        requires an existing contact sensor on the object. It neither changes
++        the engine-neutral sensor contract nor substitutes normal forces for
++        friction. Saturated buffers fail rather than silently losing contacts.
++        """
++        self._require_state("enable_contact_details")
++        if self._num_envs != 1 or self._entity_scene is None:
++            raise NotImplementedError("Contact details require one mapped environment")
++        if not isinstance(entity, str) or not entity:
++            raise ValueError("Contact details require an entity name")
++        if isinstance(capacity, bool) or not isinstance(capacity, int) or capacity < 2:
++            raise ValueError("Contact capacity must be an integer of at least two")
++        response = self._request(
++            "PHYSX_CONTACT_DETAILS", {"entity": entity, "capacity": capacity},
++            expect=protocol.CMD_META,
++        )
++        if not isinstance(response, dict):
++            raise self._worker_error("Malformed native contact metadata")
++        return response
++
++    def get_contact_details(self) -> dict[str, Any]:
++        """Read the last physics-substep diagnostic, including separate friction anchors."""
++        self._require_state("get_contact_details")
++        response = self._request("PHYSX_CONTACT_DETAILS", None, expect=protocol.CMD_META)
++        if not isinstance(response, dict):
++            raise self._worker_error("Malformed native contact snapshot")
++        return response
++
+     def _bind_model_metadata(self, meta: dict[str, Any]) -> None:
+         """Validate the worker's private clone, collision, and render contract."""
+         expected_render_mode = self._resolved_render_mode
+diff --git a/src/unisim/backend/isaacsim/contact_details.py b/src/unisim/backend/isaacsim/contact_details.py
+new file mode 100644
+index 0000000..d3d7b6a
+--- /dev/null
++++ b/src/unisim/backend/isaacsim/contact_details.py
+@@ -0,0 +1,89 @@
++"""Explicit single-environment contact diagnostics, including friction patches.
++
++Normal contacts and friction anchors are distinct native records, not a
++one-to-one correspondence. Arrays are copied before the next SDK query can
++overwrite its shared count/index buffers. No engine SDK is imported here.
++"""
++
++from __future__ import annotations
++
++from typing import Any
++
++import numpy as np
++
++
++def compact_patches(
++    buffers: tuple[np.ndarray, ...], target_ids: list[int], capacity: int
++) -> tuple[np.ndarray, list[np.ndarray]]:
++    """Validate native ragged slices and retain only initialized contact rows."""
++    *values, counts, starts = buffers
++    shape = (1, len(target_ids))
++    if counts.shape != shape or starts.shape != shape:
++        raise ValueError("Contact patch counts do not match declared body filters")
++    if counts.dtype.kind not in "iu" or starts.dtype.kind not in "iu":
++        raise ValueError("Contact patch counts/indices must be integers")
++    indices: list[int] = []
++    owners: list[int] = []
++    for body, count, start in zip(target_ids, counts[0], starts[0]):
++        count, start = int(count), int(start)
++        if count < 0 or (count and (start < 0 or start + count >= capacity)):
++            raise ValueError("Contact buffer is invalid or may be saturated")
++        indices.extend(range(start, start + count))
++        owners.extend([body] * count)
++    if len(indices) != len(set(indices)):
++        raise ValueError("Contact patch ranges overlap")
++    selected = np.asarray(indices, dtype=np.int64)
++    packed = []
++    for value in values:
++        if value.ndim != 2 or value.shape[0] != capacity:
++            raise ValueError("Native contact buffer has an unexpected shape")
++        row = value[selected].copy()
++        if not np.isfinite(row).all():
++            raise ValueError("Native contact data contains nonfinite values")
++        packed.append(row)
++    return np.asarray(owners, dtype=np.int64), packed
++
++
++class ContactDetails:
++    """Own a native contact view and immutable snapshots for an explicit request."""
++
++    def __init__(self, view: Any, target_ids: list[int], capacity: int) -> None:
++        self.view = view
++        self.target_ids = target_ids
++        self.capacity = capacity
++        self.latest: dict[str, np.ndarray] | None = None
++
++    def poll(self, dt: float) -> None:
++        def copy_buffers(values: Any) -> tuple[np.ndarray, ...]:
++            return tuple(value.detach().cpu().numpy().copy() for value in values)
++
++        normal = copy_buffers(self.view.get_contact_data(dt))
++        normal_ids, normal_values = compact_patches(normal, self.target_ids, self.capacity)
++        if len(normal_values) != 4:
++            raise ValueError("Expected force, point, normal and separation buffers")
++        force, point, direction, distance = normal_values
++        if (force.shape != (len(normal_ids), 1) or point.shape != (len(normal_ids), 3)
++                or direction.shape != point.shape or distance.shape != force.shape):
++            raise ValueError("Malformed normal-contact rows")
++        # This query may reuse the normal-contact count/index tensors.
++        friction = copy_buffers(self.view.get_friction_data(dt))
++        friction_ids, friction_values = compact_patches(
++            friction, self.target_ids, self.capacity
++        )
++        if len(friction_values) != 2:
++            raise ValueError("Expected friction force and anchor buffers")
++        friction_force, friction_point = friction_values
++        if (friction_force.shape != (len(friction_ids), 3)
++                or friction_point.shape != friction_force.shape):
++            raise ValueError("Malformed friction-contact rows")
++        self.latest = {
++            "normal_body_ids": normal_ids,
++            "normal_force": force * direction,
++            "normal_magnitude": force[:, 0],
++            "normal_point": point,
++            "normal_direction": direction,
++            "separation": distance[:, 0],
++            "friction_body_ids": friction_ids,
++            "friction_force": friction_force,
++            "friction_point": friction_point,
++        }
+diff --git a/src/unisim/backend/isaacsim/physx_solver.py b/src/unisim/backend/isaacsim/physx_solver.py
+index abe7b6f..c701aad 100644
+--- a/src/unisim/backend/isaacsim/physx_solver.py
++++ b/src/unisim/backend/isaacsim/physx_solver.py
+@@ -26,11 +26,15 @@ from typing import Any
+ 
+ import numpy as np
+ 
++EXTERNAL_FORCES_EVERY_ITERATION_FIELD = "external_forces_every_iteration"
+ SOLVER_POSITION_ITERATION_FIELD = "solver_position_iteration_count"
+ SOLVER_VELOCITY_ITERATION_FIELD = "solver_velocity_iteration_count"
+ BOUNCE_THRESHOLD_FIELD = "bounce_threshold_velocity"
+ CONTACT_OFFSET_FIELD = "contact_offset"
+ REST_OFFSET_FIELD = "rest_offset"
++COMPLIANT_STIFFNESS_FIELD = "compliant_contact_stiffness"
++COMPLIANT_DAMPING_FIELD = "compliant_contact_damping"
++MIN_TORSIONAL_PATCH_RADIUS_FIELD = "min_torsional_patch_radius"
+ MAX_DEPENETRATION_VELOCITY_FIELD = "max_depenetration_velocity"
+ GPU_MAX_RIGID_CONTACT_COUNT_FIELD = "gpu_max_rigid_contact_count"
+ GPU_MAX_RIGID_PATCH_COUNT_FIELD = "gpu_max_rigid_patch_count"
+@@ -41,8 +45,11 @@ PHYSX_SOLVER_ITERATION_FIELDS = (
+ )
+ PHYSX_SOLVER_FLOAT_FIELDS = (
+     BOUNCE_THRESHOLD_FIELD,
++    COMPLIANT_STIFFNESS_FIELD,
++    COMPLIANT_DAMPING_FIELD,
+     CONTACT_OFFSET_FIELD,
+     REST_OFFSET_FIELD,
++    MIN_TORSIONAL_PATCH_RADIUS_FIELD,
+     MAX_DEPENETRATION_VELOCITY_FIELD,
+ )
+ PHYSX_SOLVER_GPU_BUFFER_FIELDS = (
+@@ -54,6 +61,7 @@ PHYSX_SOLVER_FIELDS = (
+     PHYSX_SOLVER_ITERATION_FIELDS
+     + PHYSX_SOLVER_FLOAT_FIELDS
+     + PHYSX_SOLVER_GPU_BUFFER_FIELDS
++    + (EXTERNAL_FORCES_EVERY_ITERATION_FIELD,)
+ )
+ # The GPU buffer capacities are PhysX carb settings flattened into the
+ # simulation parameters, not USD attributes; the worker reports the authored
+@@ -96,11 +104,38 @@ class PhysxSolverConfig:
+     bounce_threshold_velocity: float | None = None
+     contact_offset: float | None = None
+     rest_offset: float | None = None
++    compliant_contact_stiffness: float | None = None
++    compliant_contact_damping: float | None = None
++    min_torsional_patch_radius: float | None = None
+     max_depenetration_velocity: float | None = None
+     gpu_max_rigid_contact_count: int | None = None
+     gpu_max_rigid_patch_count: int | None = None
+ 
++    external_forces_every_iteration: bool | None = None
++
+     def __post_init__(self) -> None:
++        compliance = (self.compliant_contact_stiffness, self.compliant_contact_damping)
++        if any(v is not None for v in compliance):
++            if any(v is None for v in compliance):
++                raise ValueError(
++                    "Compliant contact stiffness and damping must be explicit together"
++                )
++            for field in (COMPLIANT_STIFFNESS_FIELD, COMPLIANT_DAMPING_FIELD):
++                object.__setattr__(self, field, _validated_float(
++                    field, getattr(self, field), allow_zero=True
++                ))
++            if self.compliant_contact_stiffness == 0 and self.compliant_contact_damping != 0:
++                raise ValueError("Zero stiffness disables compliance and requires zero damping")
++        if self.min_torsional_patch_radius is not None:
++            object.__setattr__(
++                self, MIN_TORSIONAL_PATCH_RADIUS_FIELD,
++                _validated_float(MIN_TORSIONAL_PATCH_RADIUS_FIELD,
++                                 self.min_torsional_patch_radius, allow_zero=True),
++            )
++        if self.external_forces_every_iteration is not None and not isinstance(
++            self.external_forces_every_iteration, bool
++        ):
++            raise TypeError("external_forces_every_iteration must be a bool")
+         if self.solver_position_iteration_count is not None:
+             object.__setattr__(
+                 self,
+@@ -219,6 +254,8 @@ class PhysxSolverConfig:
+ 
+ def solver_value_matches(field: str, requested: Any, reported: Any) -> bool:
+     """Strict host comparison; only the engine's float32 storage is tolerated."""
++    if field == EXTERNAL_FORCES_EVERY_ITERATION_FIELD:
++        return isinstance(reported, bool) and reported is requested
+     if field in PHYSX_SOLVER_INT_FIELDS:
+         return (
+             not isinstance(reported, bool)
+@@ -262,13 +299,26 @@ def build_isaaclab_physx_cfg(sim_utils: Any, config: PhysxSolverConfig) -> Any:
+     return sim_utils.PhysxCfg(**kwargs)
+ 
+ 
++def apply_external_forces_every_iteration(stage: Any, enabled: bool) -> None:
++    """Set the native TGS force-application option before scene initialization."""
++    from pxr import PhysxSchema  # type: ignore[import-not-found]
++
++    scenes = [prim for prim in stage.Traverse() if prim.HasAPI(PhysxSchema.PhysxSceneAPI)]
++    if len(scenes) != 1:
++        raise RuntimeError("isaacsim expected exactly one PhysxSceneAPI")
++    PhysxSchema.PhysxSceneAPI(scenes[0]).CreateEnableExternalForcesEveryIterationAttr().Set(
++        enabled
++    )
++
++
+ def apply_collision_offsets(
+     stage: Any,
+     *,
+     contact_offset: float | None = None,
+     rest_offset: float | None = None,
++    min_torsional_patch_radius: float | None = None,
+ ) -> int:
+-    """Author collision offsets on every collision shape (worker-side only).
++    """Author offsets and an optional torsional radius on every collision shape.
+ 
+     The offsets live on ``PhysxSchema.PhysxCollisionAPI`` (plain
+     ``UsdPhysics.CollisionAPI`` has no such attributes), so the API is applied
+@@ -276,7 +326,8 @@ def apply_collision_offsets(
+     ``restOffset <= contactOffset``; ``PhysxSolverConfig`` validates the
+     relationship before the worker applies it here.
+     """
+-    if contact_offset is None and rest_offset is None:
++    if (contact_offset is None and rest_offset is None
++            and min_torsional_patch_radius is None):
+         raise ValueError("apply_collision_offsets requires at least one offset")
+     from pxr import PhysxSchema, UsdPhysics  # type: ignore[import-not-found]
+ 
+@@ -291,6 +342,8 @@ def apply_collision_offsets(
+             physx_api.CreateContactOffsetAttr().Set(float(contact_offset))
+         if rest_offset is not None:
+             physx_api.CreateRestOffsetAttr().Set(float(rest_offset))
++        if min_torsional_patch_radius is not None:
++            physx_api.CreateMinTorsionalPatchRadiusAttr().Set(float(min_torsional_patch_radius))
+         applied += 1
+     if applied == 0:
+         raise RuntimeError(
+@@ -364,8 +417,11 @@ def read_engine_solver_values(
+     stage: Any,
+     *,
+     include_contact_offset: bool,
++    include_compliant_contacts: bool = False,
+     include_rest_offset: bool = False,
++    include_min_torsional_patch_radius: bool = False,
+     include_max_depenetration_velocity: bool = False,
++    include_external_forces_every_iteration: bool = False,
+ ) -> dict[str, Any]:
+     """Read the applied solver settings back from the USD stage (worker-side only)."""
+     from pxr import PhysxSchema  # type: ignore[import-not-found]
+@@ -389,6 +445,11 @@ def read_engine_solver_values(
+         ),
+         BOUNCE_THRESHOLD_FIELD: float(scene_api.GetBounceThresholdAttr().Get()),
+     }
++    if include_external_forces_every_iteration:
++        value = scene_api.GetEnableExternalForcesEveryIterationAttr().Get()
++        if not isinstance(value, bool):
++            raise RuntimeError("isaacsim external-forces option has no boolean readback")
++        result[EXTERNAL_FORCES_EVERY_ITERATION_FIELD] = value
+     if include_contact_offset:
+         result[CONTACT_OFFSET_FIELD] = _authored_offset_values(
+             stage,
+@@ -403,6 +464,13 @@ def read_engine_solver_values(
+             label="rest offset",
+             plural="rest offsets",
+         ).pop()
++    if include_min_torsional_patch_radius:
++        result[MIN_TORSIONAL_PATCH_RADIUS_FIELD] = _authored_offset_values(
++            stage,
++            offset_attr="GetMinTorsionalPatchRadiusAttr",
++            label="minimum torsional patch radius",
++            plural="minimum torsional patch radii",
++        ).pop()
+     if include_max_depenetration_velocity:
+         result[MAX_DEPENETRATION_VELOCITY_FIELD] = _authored_rigid_body_values(
+             stage,
+@@ -410,9 +478,83 @@ def read_engine_solver_values(
+             label="max depenetration velocity",
+             plural="max depenetration velocities",
+         ).pop()
++    if include_compliant_contacts:
++        result.update(read_compliant_materials(stage))
+     return result
+ 
+ 
++def _collision_materials(stage: Any) -> list[Any]:
++    """Resolve every enabled collider's physics material, including instances."""
++    from pxr import Usd, UsdPhysics, UsdShade
++
++    materials = {}
++    for prim in Usd.PrimRange.Stage(stage, Usd.TraverseInstanceProxies()):
++        if not prim.HasAPI(UsdPhysics.CollisionAPI):
++            continue
++        if UsdPhysics.CollisionAPI(prim).GetCollisionEnabledAttr().Get() is False:
++            continue
++        targets = prim.GetRelationship("material:binding:physics").GetTargets()
++        if len(targets) == 1:
++            material = stage.GetPrimAtPath(targets[0])
++        else:
++            bound, _relationship = UsdShade.MaterialBindingAPI(prim).ComputeBoundMaterial(
++                materialPurpose="physics"
++            )
++            material = bound.GetPrim()
++        if not material or not material.IsValid() or not material.HasAPI(UsdPhysics.MaterialAPI):
++            raise RuntimeError(
++                f"Compliant contact requires a bound physics material: {prim.GetPath()}"
++            )
++        materials[str(material.GetPath())] = material
++    if not materials:
++        raise RuntimeError("No enabled collision materials for compliant contact")
++    return list(materials.values())
++
++
++def apply_compliant_materials(stage: Any, stiffness: float, damping: float | None) -> None:
++    """Apply force-based implicit springs before reset; never change engine code.
++
++    The values are per native contact constraint, not a whole-object modulus.
++    Global average combination is explicit; restitution is unused in this mode.
++    """
++    from pxr import PhysxSchema
++
++    if damping is None:
++        raise ValueError("Compliant contact damping must be explicit")
++    for material in _collision_materials(stage):
++        api = PhysxSchema.PhysxMaterialAPI.Apply(material)
++        api.CreateCompliantContactStiffnessAttr().Set(float(stiffness))
++        api.CreateCompliantContactDampingAttr().Set(float(damping))
++        api.CreateCompliantContactAccelerationSpringAttr().Set(False)
++        api.CreateRestitutionCombineModeAttr().Set("average")
++        api.CreateDampingCombineModeAttr().Set("average")
++
++
++def read_compliant_materials(stage: Any) -> dict[str, float]:
++    """Read composed USD materials back and reject mixed or missing semantics."""
++    from pxr import PhysxSchema
++
++    values = set()
++    for material in _collision_materials(stage):
++        if not material.HasAPI(PhysxSchema.PhysxMaterialAPI):
++            raise RuntimeError("A collision material has no compliant-contact schema")
++        api = PhysxSchema.PhysxMaterialAPI(material)
++        if api.GetCompliantContactAccelerationSpringAttr().Get() is not False:
++            raise RuntimeError("Compliant contact must use force-based springs")
++        if (api.GetRestitutionCombineModeAttr().Get() != "average"
++                or api.GetDampingCombineModeAttr().Get() != "average"):
++            raise RuntimeError("Compliant contact must use average combination")
++        pair = (api.GetCompliantContactStiffnessAttr().Get(),
++                api.GetCompliantContactDampingAttr().Get())
++        if any(v is None or not np.isfinite(v) or v < 0 for v in pair):
++            raise RuntimeError("Invalid compliant-contact material readback")
++        values.add(tuple(map(float, pair)))
++    if len(values) != 1:
++        raise RuntimeError("Compliant-contact collision materials disagree")
++    stiffness, damping = values.pop()
++    return {COMPLIANT_STIFFNESS_FIELD: stiffness, COMPLIANT_DAMPING_FIELD: damping}
++
++
+ def _authored_rigid_body_values(
+     stage: Any, *, api_attr: str, label: str, plural: str
+ ) -> set[float]:
+diff --git a/src/unisim/backend/isaacsim/scene_worker.py b/src/unisim/backend/isaacsim/scene_worker.py
+index c183891..db1ac9a 100644
+--- a/src/unisim/backend/isaacsim/scene_worker.py
++++ b/src/unisim/backend/isaacsim/scene_worker.py
+@@ -21,6 +21,7 @@ import numpy as np
+ from unisim.backend.isaacsim.physx_solver import (
+     PHYSX_SOLVER_AUTHORED_FIELDS,
+     PhysxSolverConfig,
++    apply_external_forces_every_iteration,
+     apply_max_depenetration_velocity,
+     build_isaaclab_physx_cfg,
+     read_engine_solver_values,
+@@ -35,6 +36,15 @@ from unisim.backend.isaacsim.raw_usd_cache import (
+     file_sha256,
+     raw_artifact_fingerprint,
+ )
++from unisim.backend.isaacsim.sdf_collision import (
++    SDF_RESOLUTION,
++    SDF_SUBGRID_RESOLUTION,
++    SDF_TRANSPORT_VERSION,
++    author_sdf,
++    importer_source,
++    read_sdf,
++    sdf_flags,
++)
+ from unisim.backend.subprocess_ipc.scene_materialization import (
+     body_sphere_radii_close,
+     validate_body_sphere_radii,
+@@ -186,6 +196,7 @@ def _raw_usd_request(
+         "variant": variant,
+         "expanded_source_sha256": source_digest,
+         "converter": "MjcfConverter",
++        "sdf_transport_version": SDF_TRANSPORT_VERSION,
+         "importer": {
+             "fix_base": entity.kind == "articulation" and entity.root_mode == "fixed",
+             "import_sites": False,
+@@ -238,6 +249,10 @@ def _role_usd_request(
+             # Resolved per-entity request; cache identity tracks it exactly.
+             "disable_gravity": bool(entry["gravity_disabled"]),
+             "require_native_body_paths": require_bodies,
++            "contact_reporter": require_bodies,
++            "sdf_resolution": SDF_RESOLUTION,
++            "sdf_subgrid_resolution": SDF_SUBGRID_RESOLUTION,
++            "sdf_transport_version": SDF_TRANSPORT_VERSION,
+             # Entity-level solver offsets are baked into the role artifact;
+             # the cache identity tracks them exactly.
+             "contact_offset": contact_offset,
+@@ -248,6 +263,8 @@ def _role_usd_request(
+     variants = entry.get("variants")
+     if isinstance(variants, list) and 0 <= variant < len(variants):
+         placeholders = variants[variant].get("geom_placeholders")
++        if "geom_sdf" in variants[variant]:
++            parameters["bake"]["geom_sdf"] = sdf_flags(variants[variant])
+     if placeholders and any(placeholders):
+         # Placeholder prims are baked into the role artifact; the padded slot
+         # set depends on the compiled public layout, which the raw identity
+@@ -826,6 +843,10 @@ def _bake(
+             PhysxSchema.PhysxRigidBodyAPI.Apply(prim).CreateDisableGravityAttr().Set(
+                 bool(entry["gravity_disabled"])
+             )
++            if require_bodies:
++                # Both IsaacLab pair sensors and PhysX body-net views require
++                # reporting on the native rigid body before simulation starts.
++                PhysxSchema.PhysxContactReportAPI.Apply(prim).CreateThresholdAttr().Set(0.0)
+         if prim.HasAPI(UsdPhysics.CollisionAPI):
+             UsdPhysics.CollisionAPI(prim).CreateCollisionEnabledAttr().Set(
+                 bool(entry["collision_enabled"])
+@@ -1007,6 +1028,7 @@ def _normalized_variant_record(entity: Any, record: dict[str, Any]) -> dict[str,
+         raise ValueError("variant geom_placeholders are worker-owned")
+     public_geoms = [(geom.name, geom.body_name) for geom in entity.geoms]
+     actual_geoms = list(zip(record["geom_names"], record["geom_body_names"]))
++    source_sdf = sdf_flags(record)
+     if actual_geoms == public_geoms:
+         return record
+     slots: list[int] = []
+@@ -1023,7 +1045,9 @@ def _normalized_variant_record(entity: Any, record: dict[str, Any]) -> dict[str,
+     conaffinity = [0] * len(public_geoms)
+     friction = [[0.0, 0.0, 0.0] for _ in public_geoms]
+     placeholders = [0] * len(public_geoms)
++    sdf = [False] * len(public_geoms)
+     for source, slot in enumerate(slots):
++        sdf[slot] = source_sdf[source]
+         contype[slot] = int(record["geom_contype"][source])
+         conaffinity[slot] = int(record["geom_conaffinity"][source])
+         friction[slot] = [float(value) for value in record["geom_friction"][source]]
+@@ -1037,6 +1061,7 @@ def _normalized_variant_record(entity: Any, record: dict[str, Any]) -> dict[str,
+     normalized["geom_conaffinity"] = conaffinity
+     normalized["geom_friction"] = friction
+     normalized["geom_placeholders"] = placeholders
++    normalized["geom_sdf"] = sdf
+     return normalized
+ 
+ 
+@@ -1172,6 +1197,8 @@ def _author_native_geometry(
+             observed_name = collision.GetAttribute("unisim:geomName").Get()
+             if observed_name != record["geom_names"][geom_index]:
+                 raise RuntimeError(f"entity {entity.name} native geometry identity differs")
++            if sdf_flags(record)[geom_index]:
++                author_sdf(collision)
+             sliding_friction = float(record["geom_friction"][geom_index][0])
+             material_path = f"{root_path}/Looks/unisim_geom_{geom_index}"
+             material = UsdShade.Material.Define(stage, material_path)
+@@ -1197,6 +1224,7 @@ def _native_geometry_record(
+     body_names: list[str] = []
+     masks: list[list[int]] = []
+     friction: list[list[float]] = []
++    sdf: list[dict[str, Any] | None] = [None] * len(record["geom_names"])
+     # Visual-only geoms have no native collision prim (see
+     # _author_native_geometry); they keep their public row with a zero mask
+     # and the record's friction, and only the native subset is read back.
+@@ -1234,6 +1262,8 @@ def _native_geometry_record(
+             observed_name = collision.GetAttribute("unisim:geomName").Get()
+             if observed_name != record["geom_names"][geom_index]:
+                 raise RuntimeError(f"entity {entity.name} native geometry identity differs")
++            if sdf_flags(record)[geom_index]:
++                sdf[geom_index] = read_sdf(collision)
+             enabled = UsdPhysics.CollisionAPI(collision).GetCollisionEnabledAttr().Get()
+             if not isinstance(enabled, bool):
+                 raise RuntimeError(f"entity {entity.name} native collision state is missing")
+@@ -1278,11 +1308,28 @@ def _native_geometry_record(
+     return {
+         "geom_names": names,
+         "geom_body_names": body_names,
++        "geom_sdf": sdf,
+         "geom_contact_masks": masks,
+         "geom_friction": friction,
++        "collision_exclusions": _collision_exclusion_readback(root),
+     }
+ 
+ 
++def _collision_exclusion_readback(root: Any) -> list[dict[str, Any]]:
++    """Read actual composed USD relationships; no inferred source equivalence."""
++    from pxr import Usd
++
++    result = []
++    for prim in Usd.PrimRange(root):
++        relation = prim.GetRelationship("physics:filteredPairs")
++        if relation and relation.GetTargets():
++            result.append({
++                "path": str(prim.GetPath()),
++                "targets": [str(path) for path in relation.GetTargets()],
++            })
++    return result
++
++
+ def _inspect_role(
+     usd_path: str,
+     entity: Any,
+@@ -1425,6 +1472,8 @@ class SceneWorkerContext:
+         self.net_contact_views: list[Any] = []
+         self.net_contact_maps: list[dict[str, Any]] = []
+         self._contact_reporting = False
++        self._contact_details: Any = None
++        self._contact_details_metadata: dict[str, Any] | None = None
+         self.faulted = False
+         self.legacy_projection: Any = None
+         self._legacy_metadata: dict[str, Any] | None = None
+@@ -1630,7 +1679,9 @@ class SceneWorkerContext:
+                 def convert_raw_usd(artifact_dir: Path, usd_file_name: str) -> Path:
+                     raw_converter = MjcfConverter(
+                         MjcfConverterCfg(
+-                            asset_path=source,
++                            asset_path=importer_source(
++                                source, Path(source).with_name(Path(source).stem + "_sdf.xml")
++                            ),
+                             fix_base=(
+                                 raw_entity.kind == "articulation"
+                                 and raw_entity.root_mode == "fixed"
+@@ -1920,10 +1971,30 @@ class SceneWorkerContext:
+         # Collision offsets are baked into the role artifacts (identical on
+         # every environment copy); the max depenetration velocity is still
+         # authored on every rigid body before the first physics step.
++        if self.physx_solver.compliant_contact_stiffness is not None:
++            from unisim.backend.isaacsim.physx_solver import apply_compliant_materials
++
++            apply_compliant_materials(
++                self.sim.stage, self.physx_solver.compliant_contact_stiffness,
++                self.physx_solver.compliant_contact_damping,
++            )
+         if self.physx_solver.max_depenetration_velocity is not None:
+             apply_max_depenetration_velocity(
+                 self.sim.stage, self.physx_solver.max_depenetration_velocity
+             )
++        if self.physx_solver.external_forces_every_iteration is not None:
++            apply_external_forces_every_iteration(
++                self.sim.stage, self.physx_solver.external_forces_every_iteration
++            )
++        if self.physx_solver.min_torsional_patch_radius is not None:
++            from unisim.backend.isaacsim.physx_solver import apply_collision_offsets
++
++            # Explicit stage override after cached roles are composed; never
++            # infer a material radius from a foreign engine's friction tuple.
++            apply_collision_offsets(
++                self.sim.stage,
++                min_torsional_patch_radius=self.physx_solver.min_torsional_patch_radius,
++            )
+         telemetry.mark("collision_offsets")
+         self.sim.reset()
+         for entity, asset in zip(self.layout.entities, self.assets):
+@@ -2340,6 +2411,8 @@ class SceneWorkerContext:
+                         row["geom_contact_masks"] for row in geometry_rows
+                     ],
+                     "geom_friction": [row["geom_friction"] for row in geometry_rows],
++                    "geom_sdf": [row["geom_sdf"] for row in geometry_rows],
++                    "collision_exclusions": [row["collision_exclusions"] for row in geometry_rows],
+                 }
+             )
+         return result
+@@ -2451,6 +2524,67 @@ class SceneWorkerContext:
+                 )
+             self.slots["contact_force"][mapping["env"], mapping["body"]] = net
+ 
++    def contact_details(self, payload: dict[str, Any] | None) -> dict[str, Any]:
++        """Initialize or read explicit one-rigid-body contact diagnostics."""
++        from unisim.backend.isaacsim.contact_details import ContactDetails
++
++        if payload is None:
++            if self._contact_details is None or self._contact_details.latest is None:
++                raise RuntimeError("Enable contact details and take a physics step first")
++            return cast(dict[str, Any], self._contact_details.latest)
++        if not isinstance(payload, dict) or set(payload) != {"entity", "capacity"}:
++            raise ValueError("Invalid contact detail request")
++        name, capacity = payload["entity"], payload["capacity"]
++        if (not isinstance(name, str) or isinstance(capacity, bool)
++                or not isinstance(capacity, int) or capacity < 2):
++            raise ValueError("Invalid contact detail entity/capacity")
++        if self.num_envs != 1 or self.legacy_projection is not None:
++            raise NotImplementedError("Contact details require one mapped environment")
++        if self._contact_details_metadata is not None:
++            if any(self._contact_details_metadata[k] != payload[k] for k in payload):
++                raise ValueError("Contact detail configuration is immutable")
++            return self._contact_details_metadata
++        sources = [e for e in self.layout.entities if e.name == name]
++        if len(sources) != 1 or sources[0].kind != "rigid" or len(sources[0].body_names) != 1:
++            raise ValueError("Contact source must be one declared rigid object")
++        if not any(name in (s["source_entity"], s["target_entity"])
++                   for s in self.contact_force_sensors):
++            raise ValueError("Declare a contact sensor on the source before materialization")
++        source_path, target_paths, target_ids = "", [], []
++        body_names = {}
++        for index, (entity, entry) in enumerate(zip(self.layout.entities, self.entries)):
++            if entry["mirror_of"] is not None or not entry["collision_enabled"]:
++                continue
++            geom_bodies = {geom.body_name for geom in entity.geoms}
++            for local, body_id in zip(entity.body_names, entity.body_ids):
++                if local not in geom_bodies:
++                    continue
++                path = self.entity_paths[entity.name][0] + self.entity_body_paths[index][0][local]
++                body_names[str(body_id)] = entity.name + "/" + local
++                if entity.name == name:
++                    source_path = path
++                else:
++                    target_paths.append(path)
++                    target_ids.append(int(body_id))
++        if not source_path or not target_paths:
++            raise ValueError("Contact details require a colliding source and target bodies")
++        from isaacsim.core.simulation_manager import SimulationManager
++
++        view = SimulationManager.get_physics_sim_view().create_rigid_contact_view(
++            source_path, target_paths, max_contact_data_count=capacity
++        )
++        if view.sensor_count != 1 or view.filter_count != len(target_ids):
++            raise RuntimeError("Native contact view does not match declared body filters")
++        self._contact_details = ContactDetails(view, target_ids, capacity)
++        self._contact_details_metadata = {
++            "entity": name, "capacity": capacity,
++            "source_path": source_path, "target_paths": target_paths,
++            "target_body_ids": target_ids, "body_names": body_names,
++            "frame": "world", "force_unit": "N", "length_unit": "m",
++            "sampling": "last physics substep; normal contacts and friction anchors separate",
++        }
++        return self._contact_details_metadata
++
+     def set_state(self, payload: dict[str, Any]) -> dict[str, Any]:
+         """Translate only the old wire; native reset always uses reset_entities."""
+         if self.legacy_projection is None:
+@@ -2494,6 +2628,8 @@ class SceneWorkerContext:
+                 for sensor in self.contact_sensors:
+                     sensor.update(self.sim_dt)
+                 self._poll_body_net_contact_forces()
++                if self._contact_details is not None:
++                    self._contact_details.poll(self.sim_dt)
+             if wrench is not None:
+                 self._clear_body_wrench()
+             self.refresh_state_slots()
+@@ -3265,8 +3401,17 @@ class SceneWorkerContext:
+             solver_readback = (
+                 read_engine_solver_values(
+                     self.sim.stage,
++                    include_external_forces_every_iteration=(
++                        self.physx_solver.external_forces_every_iteration is not None
++                    ),
++                    include_compliant_contacts=(
++                        self.physx_solver.compliant_contact_stiffness is not None
++                    ),
+                     include_contact_offset=self.physx_solver.contact_offset is not None,
+                     include_rest_offset=self.physx_solver.rest_offset is not None,
++                    include_min_torsional_patch_radius=(
++                        self.physx_solver.min_torsional_patch_radius is not None
++                    ),
+                     include_max_depenetration_velocity=(
+                         self.physx_solver.max_depenetration_velocity is not None
+                     ),
+diff --git a/src/unisim/backend/isaacsim/sdf_collision.py b/src/unisim/backend/isaacsim/sdf_collision.py
+new file mode 100644
+index 0000000..362bcb9
+--- /dev/null
++++ b/src/unisim/backend/isaacsim/sdf_collision.py
+@@ -0,0 +1,71 @@
++"""Explicit MJCF SDF transport and native PhysX authoring on the cold path.
++
++The MJCF importer cannot consume ``type=sdf``. Its mesh transport is never the
++final collision representation: selected shapes are authored and audited as SDF.
++Resolution is a disclosed adapter approximation, not source SDF equivalence.
++"""
++from __future__ import annotations
++
++import xml.etree.ElementTree as ET
++from pathlib import Path
++from typing import Any
++
++SDF_RESOLUTION = 256
++SDF_SUBGRID_RESOLUTION = 6
++SDF_TRANSPORT_VERSION = 3
++
++
++def sdf_flags(record: dict[str, Any]) -> list[bool]:
++    flags = record.get("geom_sdf", [False] * len(record["geom_names"]))
++    if len(flags) != len(record["geom_names"]) or any(type(x) is not bool for x in flags):
++        raise ValueError("geom_sdf must contain one boolean per geometry")
++    return list(flags)
++
++
++def importer_source(source: str, destination: Path) -> str:
++    """Write an importer-only mesh spelling, retaining the original source."""
++    path = Path(source)
++    document = ET.parse(path)
++    geoms = [g for g in document.iter("geom") if g.get("type") == "sdf"]
++    if not geoms:
++        return source
++    for geom in geoms:
++        if not geom.get("mesh") or geom.find("plugin") is not None:
++            raise ValueError("PhysX SDF transport requires a mesh-backed, non-plugin SDF")
++        geom.set("type", "mesh")
++    if destination.parent.resolve() != path.parent.resolve():
++        raise ValueError("MJCF importer transport must remain beside source mesh resources")
++    document.write(destination, encoding="utf-8")
++    return str(destination)
++
++
++def author_sdf(collision: Any) -> None:
++    from pxr import PhysxSchema, UsdGeom, UsdPhysics
++
++    if not collision.IsA(UsdGeom.Mesh):
++        raise RuntimeError("SDF transport did not produce a native mesh collider")
++    UsdPhysics.MeshCollisionAPI.Apply(collision).CreateApproximationAttr().Set(
++        PhysxSchema.Tokens.sdf
++    )
++    api = PhysxSchema.PhysxSDFMeshCollisionAPI.Apply(collision)
++    api.CreateSdfResolutionAttr().Set(SDF_RESOLUTION)
++    api.CreateSdfSubgridResolutionAttr().Set(SDF_SUBGRID_RESOLUTION)
++
++
++def read_sdf(collision: Any) -> dict[str, Any]:
++    from pxr import PhysxSchema, UsdGeom, UsdPhysics
++
++    if not collision.IsA(UsdGeom.Mesh) or not collision.HasAPI(
++        PhysxSchema.PhysxSDFMeshCollisionAPI
++    ):
++        raise RuntimeError("Requested SDF collider is missing its native mesh API")
++    api = PhysxSchema.PhysxSDFMeshCollisionAPI(collision)
++    values = {
++        "approximation": str(UsdPhysics.MeshCollisionAPI(collision).GetApproximationAttr().Get()),
++        "resolution": api.GetSdfResolutionAttr().Get(),
++        "subgrid_resolution": api.GetSdfSubgridResolutionAttr().Get(),
++    }
++    if values != {"approximation": "sdf", "resolution": SDF_RESOLUTION,
++                  "subgrid_resolution": SDF_SUBGRID_RESOLUTION}:
++        raise RuntimeError("Native SDF approximation or resolution differs from request")
++    return values
+diff --git a/src/unisim/backend/isaacsim/worker.py b/src/unisim/backend/isaacsim/worker.py
+index 6d971ba..b23d6d7 100644
+--- a/src/unisim/backend/isaacsim/worker.py
++++ b/src/unisim/backend/isaacsim/worker.py
+@@ -392,11 +392,20 @@ class _WorkerContext:
+         if (
+             self.physx_solver.contact_offset is not None
+             or self.physx_solver.rest_offset is not None
++            or self.physx_solver.min_torsional_patch_radius is not None
+         ):
+             apply_collision_offsets(
+                 self.sim.stage,
+                 contact_offset=self.physx_solver.contact_offset,
+                 rest_offset=self.physx_solver.rest_offset,
++                min_torsional_patch_radius=self.physx_solver.min_torsional_patch_radius,
++            )
++        if self.physx_solver.compliant_contact_stiffness is not None:
++            from unisim.backend.isaacsim.physx_solver import apply_compliant_materials
++
++            apply_compliant_materials(
++                self.sim.stage, self.physx_solver.compliant_contact_stiffness,
++                self.physx_solver.compliant_contact_damping,
+             )
+         if self.physx_solver.max_depenetration_velocity is not None:
+             apply_max_depenetration_velocity(
+@@ -465,8 +474,14 @@ class _WorkerContext:
+             solver_readback = (
+                 read_engine_solver_values(
+                     self.sim.stage,
++                    include_compliant_contacts=(
++                        self.physx_solver.compliant_contact_stiffness is not None
++                    ),
+                     include_contact_offset=self.physx_solver.contact_offset is not None,
+                     include_rest_offset=self.physx_solver.rest_offset is not None,
++                    include_min_torsional_patch_radius=(
++                        self.physx_solver.min_torsional_patch_radius is not None
++                    ),
+                     include_max_depenetration_velocity=(
+                         self.physx_solver.max_depenetration_velocity is not None
+                     ),
+@@ -788,6 +803,8 @@ def _dispatch(ctx: Any, protocol: Any, cmd: str, payload: Any) -> tuple[str, Any
+         return protocol.CMD_META, ctx.render_frame()
+     if cmd == protocol.CMD_CAPTURE_FRAME:
+         return protocol.CMD_META, ctx.capture_frame()
++    if cmd == "PHYSX_CONTACT_DETAILS":
++        return protocol.CMD_META, ctx.contact_details(payload)
+     raise NotImplementedError(f"isaacsim worker command {cmd!r} is unsupported")
+ 
+ 
+diff --git a/src/unisim/backend/subprocess_ipc/scene_materialization.py b/src/unisim/backend/subprocess_ipc/scene_materialization.py
+index afdf4d1..794db92 100644
+--- a/src/unisim/backend/subprocess_ipc/scene_materialization.py
++++ b/src/unisim/backend/subprocess_ipc/scene_materialization.py
+@@ -105,6 +105,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
+     body_visual_rgb = _body_visual_rgb(model)
+     geom_names, geom_body_names = [], []
+     geom_contype, geom_conaffinity, geom_friction = [], [], []
++    geom_sdf = []
+     for body_id in range(1, int(model.nbody)):
+         body_name = model.body(body_id).name
+         body_offset = 0
+@@ -119,6 +120,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
+             geom_contype.append(int(model.geom_contype[geom_id]))
+             geom_conaffinity.append(int(model.geom_conaffinity[geom_id]))
+             geom_friction.append(model.geom_friction[geom_id].tolist())
++            geom_sdf.append(int(model.geom_type[geom_id]) == int(sdk.mjtGeom.mjGEOM_SDF))
+             body_offset += 1
+     if len(set(geom_names)) != len(geom_names):
+         raise ValueError("entity geometry names are not unique")
+@@ -147,6 +149,7 @@ def _actuation(model: Any, sdk: Any) -> dict[str, Any]:
+         "geom_contype": geom_contype,
+         "geom_conaffinity": geom_conaffinity,
+         "geom_friction": geom_friction,
++        "geom_sdf": geom_sdf,
+     }
+ 
+ 
+@@ -399,19 +402,6 @@ def prepare_worker_scene(scene: SceneCfg, num_envs: int, sim_dt: float) -> Prepa
+                     # USD importer uses the MJCF model name as a prim identifier;
+                     # MuJoCo's default "MuJoCo Model" contains an invalid space.
+                     spec.modelname = f"entity_{source_entity_indexes[source_entity.name]}"
+-                    # Gym's importer ignores geom mass. Explicit compiler-derived
+-                    # inertials preserve the actual intended body mass/COM/tensor.
+-                    for body in spec.bodies[1:]:
+-                        bid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, body.name)
+-                        body.mass = float(model.body_mass[bid])
+-                        body.inertia = model.body_inertia[bid]
+-                        body.ipos = model.body_ipos[bid]
+-                        body.iquat = model.body_iquat[bid]
+-                        # MJCF rejects the mixed full/diagonal spelling: clear a
+-                        # source fullinertia now that the diagonal form replaces
+-                        # it (NaN is the spec's "unspecified" sentinel).
+-                        body.fullinertia = [float("nan"), 0.0, 0.0, 0.0, 0.0, 0.0]
+-                        body.explicitinertial = True
+                     record = _actuation(model, mujoco)
+                     for joint in spec.joints:
+                         if joint.type != mujoco.mjtJoint.mjJNT_FREE:
+@@ -436,6 +426,28 @@ def prepare_worker_scene(scene: SceneCfg, num_envs: int, sim_dt: float) -> Prepa
+                     # to_file() may serialize the last compiled model, omitting
+                     # edits made after compile(); to_xml() serializes current spec.
+                     document = ET.fromstring(spec.to_xml())
++                    # Gym ignores geom mass; MjSpec.to_xml() rounds attributes.
++                    # Write explicit compiled inertials at round-trip precision
++                    # so mass/COM/tensor match the independent intent table.
++                    for element in document.findall("./worldbody//body"):
++                        bid = mujoco.mj_name2id(
++                            model, mujoco.mjtObj.mjOBJ_BODY, element.get("name", "")
++                        )
++                        if bid <= 0:
++                            raise ValueError("Serialized worker body has no compiled identity")
++                        inertial = element.find("inertial")
++                        if inertial is None:
++                            if model.body_mass[bid] == 0:
++                                continue
++                            inertial = ET.SubElement(element, "inertial")
++                        inertial.attrib.clear()
++                        for name, values in (
++                            ("mass", [model.body_mass[bid]]),
++                            ("pos", model.body_ipos[bid]),
++                            ("quat", model.body_iquat[bid]),
++                            ("diaginertia", model.body_inertia[bid]),
++                        ):
++                            inertial.set(name, " ".join(format(float(v), ".17g") for v in values))
+                     for mesh in document.findall("./asset/mesh"):
+                         filename = mesh_files.get(mesh.get("file", ""))
+                         if filename is not None:
+diff --git a/src/unisim/factory.py b/src/unisim/factory.py
+index 679f6a9..bb61c77 100644
+--- a/src/unisim/factory.py
++++ b/src/unisim/factory.py
+@@ -175,6 +175,9 @@ def _create_backend(
+     isaacsim_render_mode = kwargs.pop("isaacsim_render_mode", None)
+     isaacsim_render_width = kwargs.pop("isaacsim_render_width", 1280)
+     isaacsim_render_height = kwargs.pop("isaacsim_render_height", 720)
++    isaacsim_external_forces_every_iteration = kwargs.pop(
++        "isaacsim_external_forces_every_iteration", None
++    )
+     isaacsim_solver_position_iteration_count = kwargs.pop(
+         "isaacsim_solver_position_iteration_count", None
+     )
+@@ -183,7 +186,10 @@ def _create_backend(
+     )
+     isaacsim_bounce_threshold_velocity = kwargs.pop("isaacsim_bounce_threshold_velocity", None)
+     isaacsim_contact_offset = kwargs.pop("isaacsim_contact_offset", None)
++    isaacsim_min_torsional_patch_radius = kwargs.pop("isaacsim_min_torsional_patch_radius", None)
+     isaacsim_rest_offset = kwargs.pop("isaacsim_rest_offset", None)
++    isaacsim_compliant_contact_stiffness = kwargs.pop("isaacsim_compliant_contact_stiffness", None)
++    isaacsim_compliant_contact_damping = kwargs.pop("isaacsim_compliant_contact_damping", None)
+     isaacsim_max_depenetration_velocity = kwargs.pop(
+         "isaacsim_max_depenetration_velocity", None
+     )
+@@ -405,6 +411,8 @@ def _create_backend(
+         kwargs["render_height"] = (
+             isaacsim_render_height if direct_render_height is None else direct_render_height
+         )
++        if isaacsim_external_forces_every_iteration is not None:
++            kwargs["external_forces_every_iteration"] = isaacsim_external_forces_every_iteration
+         if isaacsim_solver_position_iteration_count is not None:
+             kwargs["solver_position_iteration_count"] = (
+                 isaacsim_solver_position_iteration_count
+@@ -417,6 +425,12 @@ def _create_backend(
+             kwargs["bounce_threshold_velocity"] = isaacsim_bounce_threshold_velocity
+         if isaacsim_contact_offset is not None:
+             kwargs["contact_offset"] = isaacsim_contact_offset
++        if isaacsim_min_torsional_patch_radius is not None:
++            kwargs["min_torsional_patch_radius"] = isaacsim_min_torsional_patch_radius
++        if isaacsim_compliant_contact_stiffness is not None:
++            kwargs["compliant_contact_stiffness"] = isaacsim_compliant_contact_stiffness
++        if isaacsim_compliant_contact_damping is not None:
++            kwargs["compliant_contact_damping"] = isaacsim_compliant_contact_damping
+         if isaacsim_rest_offset is not None:
+             kwargs["rest_offset"] = isaacsim_rest_offset
+         if isaacsim_max_depenetration_velocity is not None:
+diff --git a/tests/adapters/isaacsim/test_body_wrench.py b/tests/adapters/isaacsim/test_body_wrench.py
+index ea8181c..7ce8011 100644
+--- a/tests/adapters/isaacsim/test_body_wrench.py
++++ b/tests/adapters/isaacsim/test_body_wrench.py
+@@ -283,6 +283,7 @@ def test_full_reset_clears_every_body_in_selected_rows():
+ 
+ def _wrench_worker() -> tuple[SceneWorkerContext, list[dict]]:
+     ctx = SceneWorkerContext.__new__(SceneWorkerContext)
++    ctx._contact_details = None
+     ctx.layout = _layout()
+     ctx.num_envs = 2
+     ctx.sim_dt = 0.002
+diff --git a/tests/adapters/isaacsim/test_compliant_contact.py b/tests/adapters/isaacsim/test_compliant_contact.py
+new file mode 100644
+index 0000000..85dd6e0
+--- /dev/null
++++ b/tests/adapters/isaacsim/test_compliant_contact.py
+@@ -0,0 +1,99 @@
++"""Opt-in force-contact material semantics without loading a native SDK."""
++
++from __future__ import annotations
++
++import sys
++from types import SimpleNamespace
++
++import pytest
++
++from unisim.backend.isaacsim import physx_solver as solver
++
++
++@pytest.mark.parametrize("stiffness,damping", [(5000, 2), (0, 0)])
++def test_material_options_round_trip(stiffness, damping):
++    config = solver.PhysxSolverConfig(
++        compliant_contact_stiffness=stiffness, compliant_contact_damping=damping
++    )
++    assert solver.PhysxSolverConfig.from_payload(config.to_payload()) == config
++
++
++@pytest.mark.parametrize(
++    "stiffness,damping",
++    [
++        (1, None),
++        (None, 1),
++        (-1, 0),
++        (1, -1),
++        (0, 1),
++        (True, 0),
++        (1, float("nan")),
++        (float("inf"), 1),
++    ],
++)
++def test_invalid_material_options_fail_before_worker(stiffness, damping):
++    with pytest.raises((TypeError, ValueError)):
++        solver.PhysxSolverConfig(
++            compliant_contact_stiffness=stiffness, compliant_contact_damping=damping
++        )
++
++
++class Attribute:
++    def __init__(self):
++        self.value = None
++
++    def Set(self, value):  # noqa: N802 -- match the public USD API
++        self.value = value
++
++    def Get(self):  # noqa: N802 -- match the public USD API
++        return self.value
++
++
++class Material:
++    def __init__(self):
++        self.attributes = {}
++
++    def HasAPI(self, _api):  # noqa: N802 -- match the public USD API
++        return bool(self.attributes)
++
++
++class MaterialAPI:
++    def __init__(self, material):
++        self.material = material
++
++    @classmethod
++    def Apply(cls, material):  # noqa: N802 -- match the public USD API
++        return cls(material)
++
++    def __getattr__(self, name):
++        key = name.removeprefix("Create").removeprefix("Get")
++        return lambda: self.material.attributes.setdefault(key, Attribute())
++
++
++def test_authored_materials_read_back_and_mixed_semantics_fail(monkeypatch):
++    materials = [Material(), Material()]
++    monkeypatch.setitem(
++        sys.modules,
++        "pxr",
++        SimpleNamespace(PhysxSchema=SimpleNamespace(PhysxMaterialAPI=MaterialAPI)),
++    )
++    monkeypatch.setattr(solver, "_collision_materials", lambda _stage: materials)
++    solver.apply_compliant_materials(None, 5000, 2)
++    assert solver.read_compliant_materials(None) == {
++        "compliant_contact_stiffness": 5000,
++        "compliant_contact_damping": 2,
++    }
++    changes = {
++        "CompliantContactStiffnessAttr": 6000,
++        "CompliantContactDampingAttr": None,
++        "CompliantContactAccelerationSpringAttr": True,
++        "RestitutionCombineModeAttr": "multiply",
++        "DampingCombineModeAttr": "max",
++    }
++    for key, value in changes.items():
++        attribute = materials[1].attributes[key]
++        old = attribute.Get()
++        attribute.Set(value)
++        with pytest.raises(RuntimeError):
++            solver.read_compliant_materials(None)
++        attribute.Set(old)
+diff --git a/tests/adapters/isaacsim/test_contact_details.py b/tests/adapters/isaacsim/test_contact_details.py
+new file mode 100644
+index 0000000..0ea4966
+--- /dev/null
++++ b/tests/adapters/isaacsim/test_contact_details.py
+@@ -0,0 +1,78 @@
++"""Ragged native contact buffers must not hide data loss or alias SDK counts."""
++
++import numpy as np
++import pytest
++
++from unisim.backend.isaacsim.contact_details import ContactDetails, compact_patches
++
++
++def test_only_initialized_rows_are_read_and_body_filters_are_preserved():
++    buffer = np.full((8, 3), np.nan)
++    buffer[3:5] = [[1, 2, 3], [4, 5, 6]]
++    owners, values = compact_patches(
++        (buffer, np.array([[0, 2]]), np.array([[9999, 3]])), [10, 20], 8
++    )
++    np.testing.assert_array_equal(owners, [20, 20])
++    np.testing.assert_array_equal(values[0], buffer[3:5])
++    buffer[3:5] = 0
++    assert values[0][0, 0] == 1
++
++
++@pytest.mark.parametrize("counts,starts", [
++    ([[-1, 0]], [[0, 0]]),
++    ([[1, 0]], [[-1, 0]]),
++    ([[1, 0]], [[7, 0]]),  # Full capacity might mean truncated native output.
++    ([[2, 1]], [[0, 1]]),
++    ([[1.0, 0]], [[0, 0]]),
++    ([[1]], [[0]]),
++])
++def test_invalid_or_saturated_buffers_fail_closed(counts, starts):
++    with pytest.raises(ValueError):
++        compact_patches((np.zeros((8, 3)), np.array(counts), np.array(starts)), [10, 20], 8)
++
++
++def test_nonfinite_active_contact_cannot_be_dropped():
++    with pytest.raises(ValueError, match="nonfinite"):
++        compact_patches((np.full((8, 3), np.nan), np.array([[1]]), np.array([[0]])), [10], 8)
++
++
++class Tensor:
++    def __init__(self, value):
++        self.value = value
++
++    def detach(self):
++        return self
++
++    def cpu(self):
++        return self
++
++    def numpy(self):
++        return self.value
++
++
++def test_friction_query_reusing_counts_does_not_reassign_normal_contact():
++    class View:
++        counts = np.zeros((1, 2), dtype=np.uint32)
++        starts = np.zeros((1, 2), dtype=np.uint32)
++
++        def get_contact_data(self, dt):
++            self.counts[:] = [[1, 0]]
++            force = np.zeros((8, 1))
++            normal = np.zeros((8, 3))
++            force[0, 0], normal[0, 2] = 2, 1
++            return tuple(Tensor(x) for x in (
++                force, np.zeros((8, 3)), normal, np.zeros((8, 1)), self.counts, self.starts
++            ))
++
++        def get_friction_data(self, dt):
++            self.counts[:] = [[0, 1]]
++            force = np.zeros((8, 3))
++            force[0, 0] = -.5
++            return tuple(Tensor(x) for x in (force, np.zeros((8, 3)), self.counts, self.starts))
++
++    recorder = ContactDetails(View(), [10, 20], 8)
++    recorder.poll(.001)
++    np.testing.assert_array_equal(recorder.latest["normal_body_ids"], [10])
++    np.testing.assert_array_equal(recorder.latest["friction_body_ids"], [20])
++    np.testing.assert_array_equal(recorder.latest["normal_force"], [[0, 0, 2]])
++    np.testing.assert_array_equal(recorder.latest["friction_force"], [[-.5, 0, 0]])
+diff --git a/tests/adapters/isaacsim/test_mapped_scene.py b/tests/adapters/isaacsim/test_mapped_scene.py
+index 2bdc25a..cd47110 100644
+--- a/tests/adapters/isaacsim/test_mapped_scene.py
++++ b/tests/adapters/isaacsim/test_mapped_scene.py
+@@ -557,6 +557,8 @@ def test_host_strictly_compares_reported_per_entity_self_collision():
+ 
+ def _context():
+     ctx = SceneWorkerContext.__new__(SceneWorkerContext)
++    ctx._contact_details = None
++    ctx._contact_details_metadata = None
+     ctx.layout = validate_scene_payload(protocol, _payload())
+     ctx.num_envs = 2
+     ctx.sim_dt = 0.002
+@@ -842,6 +844,8 @@ def test_body_net_contact_forces_poll_every_substep_and_publish_the_last():
+     ctx.contact_sensors = []
+     ctx.contact_sensor_maps = []
+     calls = []
++    detail_calls = []
++    ctx._contact_details = SimpleNamespace(poll=detail_calls.append)
+     values = [np.zeros((4, 3), dtype=np.float32)]
+ 
+     class View:
+@@ -864,6 +868,7 @@ def test_body_net_contact_forces_poll_every_substep_and_publish_the_last():
+     # is lost (IsaacLab #7613), so the worker polls every substep and then
+     # reads once more to publish the final substep.
+     assert calls == [0.002, 0.002, 0.002]
++    assert detail_calls == [0.002, 0.002]
+     np.testing.assert_array_equal(
+         ctx.slots["contact_force"][:, 0, :], [[3, 0, 0], [3, 0, 0]]
+     )
+diff --git a/tests/adapters/isaacsim/test_physx_solver.py b/tests/adapters/isaacsim/test_physx_solver.py
+index fe51fd9..5b117d6 100644
+--- a/tests/adapters/isaacsim/test_physx_solver.py
++++ b/tests/adapters/isaacsim/test_physx_solver.py
+@@ -15,6 +15,7 @@ from unisim.backend.isaacsim.physx_solver import (
+     PHYSX_SOLVER_FIELDS,
+     PhysxSolverConfig,
+     apply_collision_offsets,
++    apply_external_forces_every_iteration,
+     apply_max_depenetration_velocity,
+     build_isaaclab_physx_cfg,
+     read_engine_solver_values,
+@@ -59,6 +60,10 @@ def test_valid_values_normalize():
+         max_depenetration_velocity=1000,
+         gpu_max_rigid_contact_count=2**24,
+         gpu_max_rigid_patch_count=2**23,
++        external_forces_every_iteration=True,
++        min_torsional_patch_radius=0.001,
++        compliant_contact_stiffness=5000,
++        compliant_contact_damping=2,
+     )
+     assert config.configured_fields() == PHYSX_SOLVER_FIELDS
+     assert config.to_payload() == {
+@@ -67,9 +72,13 @@ def test_valid_values_normalize():
+         "bounce_threshold_velocity": 0.0,
+         "contact_offset": 0.002,
+         "rest_offset": 0.0,
++        "min_torsional_patch_radius": 0.001,
++        "compliant_contact_stiffness": 5000.0,
++        "compliant_contact_damping": 2.0,
+         "max_depenetration_velocity": 1000.0,
+         "gpu_max_rigid_contact_count": 16777216,
+         "gpu_max_rigid_patch_count": 8388608,
++        "external_forces_every_iteration": True,
+     }
+ 
+ 
+@@ -90,6 +99,11 @@ def test_valid_values_normalize():
+         {"contact_offset": 0},
+         {"contact_offset": -0.002},
+         {"contact_offset": "0.002"},
++        {"min_torsional_patch_radius": -0.001},
++        {"min_torsional_patch_radius": float("nan")},
++        {"min_torsional_patch_radius": float("inf")},
++        {"min_torsional_patch_radius": True},
++        {"min_torsional_patch_radius": "0.001"},
+         {"rest_offset": -0.001, "contact_offset": 0.002},
+         {"rest_offset": float("nan"), "contact_offset": 0.002},
+         {"rest_offset": True, "contact_offset": 0.002},
+@@ -446,6 +460,7 @@ class _FakePrim:
+         self._apis = apis
+         self.contact_offset = contact_offset
+         self.rest_offset = rest_offset
++        self.min_torsional_patch_radius = None
+         self.max_depenetration = max_depenetration
+         self.scene_values = scene_values or {}
+ 
+@@ -490,6 +505,15 @@ def _fake_pxr():
+         def GetRestOffsetAttr(self):  # noqa: N802 - mirrors the USD API
+             return _FakeAttr(lambda: self._prim.rest_offset)
+ 
++        def CreateMinTorsionalPatchRadiusAttr(self):  # noqa: N802
++            return _FakeAttr(
++                lambda: self._prim.min_torsional_patch_radius,
++                lambda value: setattr(self._prim, "min_torsional_patch_radius", value),
++            )
++
++        def GetMinTorsionalPatchRadiusAttr(self):  # noqa: N802
++            return _FakeAttr(lambda: self._prim.min_torsional_patch_radius)
++
+     class _PhysxRigidBodyAPI:
+         def __init__(self, prim):
+             self._prim = prim
+@@ -524,6 +548,15 @@ def _fake_pxr():
+         def GetMaxVelocityIterationCountAttr(self):  # noqa: N802 - mirrors the USD API
+             return self._attr("max_velocity_iteration_count")
+ 
++        def CreateEnableExternalForcesEveryIterationAttr(self):  # noqa: N802
++            return _FakeAttr(
++                lambda: self._prim.scene_values.get("external_forces_every_iteration"),
++                lambda value: self._prim.scene_values.update(external_forces_every_iteration=value),
++            )
++
++        def GetEnableExternalForcesEveryIterationAttr(self):  # noqa: N802
++            return self.CreateEnableExternalForcesEveryIterationAttr()
++
+         def GetBounceThresholdAttr(self):  # noqa: N802 - mirrors the USD API
+             return self._attr("bounce_threshold")
+ 
+@@ -653,3 +686,68 @@ def test_read_back_rejects_missing_physx_rigid_body_api(monkeypatch):
+         read_engine_solver_values(
+             stage, include_contact_offset=False, include_max_depenetration_velocity=True
+         )
++
++
++@pytest.mark.parametrize("enabled", [False, True])
++def test_external_force_option_roundtrip(monkeypatch, enabled):
++    config = PhysxSolverConfig(external_forces_every_iteration=enabled)
++    assert PhysxSolverConfig.from_payload(config.to_payload()) == config
++    _pxr, stage, _shapes, _bodies = _fake_stage(monkeypatch)
++    apply_external_forces_every_iteration(stage, enabled)
++    values = read_engine_solver_values(
++        stage, include_contact_offset=False, include_external_forces_every_iteration=True
++    )
++    assert values["external_forces_every_iteration"] is enabled
++    _backend(config)._validate_solver_readback(_meta(values, ["external_forces_every_iteration"]))
++    values["external_forces_every_iteration"] = not enabled
++    with pytest.raises(IsaacSimWorkerError):
++        _backend(config)._validate_solver_readback(
++            _meta(values, ["external_forces_every_iteration"])
++        )
++
++
++@pytest.mark.parametrize("bad", [0, 1, "true", float("nan")])
++def test_external_force_option_rejects_non_boolean(bad):
++    with pytest.raises(TypeError):
++        PhysxSolverConfig.from_payload({"external_forces_every_iteration": bad})
++    assert not solver_value_matches("external_forces_every_iteration", True, bad)
++
++
++def test_external_force_option_missing_scene_fails(monkeypatch):
++    _fake_stage(monkeypatch)
++    with pytest.raises(RuntimeError, match="exactly one"):
++        apply_external_forces_every_iteration(SimpleNamespace(Traverse=lambda: []), True)
++
++
++@pytest.mark.parametrize("enabled", [False, True])
++def test_factory_forwards_external_force_option(monkeypatch, enabled):
++    recorded = {}
++
++    class Recorder:
++        def __init__(self, *args, **kwargs):
++            recorded.update(kwargs)
++
++    monkeypatch.setattr("unisim.backend.isaacsim.backend.IsaacSimBackend", Recorder)
++    create_backend(
++        "isaacsim", None, 1, 0.001, worker_command=["true"],
++        isaacsim_external_forces_every_iteration=enabled,
++    )
++    assert recorded["external_forces_every_iteration"] is enabled
++
++
++def test_minimum_torsional_radius_readback_and_zero_control(monkeypatch):
++    _pxr, stage, shapes, _bodies = _fake_stage(monkeypatch)
++    for radius in (0.001, 0.0):
++        config = PhysxSolverConfig(min_torsional_patch_radius=radius)
++        assert PhysxSolverConfig.from_payload(config.to_payload()) == config
++        assert apply_collision_offsets(stage, min_torsional_patch_radius=radius) == 2
++        values = read_engine_solver_values(
++            stage, include_contact_offset=False, include_min_torsional_patch_radius=True
++        )
++        assert values['min_torsional_patch_radius'] == radius
++        assert all(shape.contact_offset is None for shape in shapes)
++    shapes[0].min_torsional_patch_radius = 0.002
++    with pytest.raises(RuntimeError, match='non-uniform minimum torsional'):
++        read_engine_solver_values(
++            stage, include_contact_offset=False, include_min_torsional_patch_radius=True
++        )
+diff --git a/tests/adapters/isaacsim/test_raw_usd_cache.py b/tests/adapters/isaacsim/test_raw_usd_cache.py
+index 18556a3..eab096c 100644
+--- a/tests/adapters/isaacsim/test_raw_usd_cache.py
++++ b/tests/adapters/isaacsim/test_raw_usd_cache.py
+@@ -388,6 +388,7 @@ def test_worker_raw_identity_includes_expanded_source_importer_and_runtime_input
+     runtime = _runtime()
+     request = _raw_usd_request(_identity(), str(source), entity, 2, runtime, self_collision=False)
+     expected_parameters = _parameters()
++    expected_parameters["sdf_transport_version"] = 3
+     expected_parameters["entity"] = "robot"
+     expected_parameters["variant"] = 2
+     expected_parameters["expanded_source_sha256"] = source_digest
+diff --git a/tests/adapters/isaacsim/test_sdf_collision.py b/tests/adapters/isaacsim/test_sdf_collision.py
+new file mode 100644
+index 0000000..7f48ba9
+--- /dev/null
++++ b/tests/adapters/isaacsim/test_sdf_collision.py
+@@ -0,0 +1,61 @@
++"""SDF intent, source-preserving transport and optional geometry alignment."""
++import xml.etree.ElementTree as ET
++from types import SimpleNamespace
++
++import pytest
++
++from unisim.backend.isaacsim.scene_worker import _normalized_variant_record
++from unisim.backend.isaacsim.sdf_collision import importer_source, sdf_flags
++
++
++def test_transport_keeps_original_and_relative_mesh_resources(tmp_path):
++    source = tmp_path / "source.xml"
++    original = ('<mujoco><compiler meshdir="meshes"/><asset>'
++                '<mesh name="a" file="shape.obj"/></asset><worldbody><body>'
++                '<inertial mass=".1" pos="0 0 0" diaginertia="1 2 3"/>'
++                '<geom name="s" type="sdf" mesh="a"/><geom type="sphere" size=".1"/>'
++                '</body></worldbody></mujoco>')
++    source.write_text(original)
++    target = tmp_path / "transport.xml"
++    assert importer_source(str(source), target) == str(target)
++    assert source.read_text() == original
++    document = ET.parse(target)
++    assert [g.get("type") for g in document.iter("geom")] == ["mesh", "sphere"]
++    mesh = document.find("./asset/mesh")
++    assert mesh is not None and mesh.get("file") == "shape.obj"
++    inertial = document.find("./worldbody/body/inertial")
++    assert inertial is not None and inertial.get("mass") == ".1"
++
++
++@pytest.mark.parametrize("geom", ['<geom type="sdf"/>',
++                                  '<geom type="sdf" mesh="a"><plugin plugin="custom"/></geom>'])
++def test_unsupported_sdf_does_not_silently_become_mesh(tmp_path, geom):
++    source = tmp_path / "source.xml"
++    source.write_text(f"<mujoco><worldbody><body>{geom}</body></worldbody></mujoco>")
++    with pytest.raises(ValueError, match="mesh-backed"):
++        importer_source(str(source), tmp_path / "transport.xml")
++
++
++def test_non_sdf_import_uses_original_file(tmp_path):
++    source = tmp_path / "source.xml"
++    source.write_text('<mujoco><worldbody><geom type="mesh" mesh="a"/></worldbody></mujoco>')
++    assert importer_source(str(source), tmp_path / "unused.xml") == str(source)
++    assert not (tmp_path / "unused.xml").exists()
++
++
++@pytest.mark.parametrize("flags", [[1], [], [True, False]])
++def test_malformed_sdf_flags_are_rejected(flags):
++    with pytest.raises(ValueError, match="one boolean"):
++        sdf_flags({"geom_names": ["g"], "geom_sdf": flags})
++
++
++def test_missing_optional_slot_does_not_shift_sdf_intent():
++    entity = SimpleNamespace(geoms=[SimpleNamespace(name=n, body_name="body")
++                                   for n in ["optional", "pad"]])
++    record = {"geom_names": ["pad"], "geom_body_names": ["body"],
++              "geom_contype": [1], "geom_conaffinity": [1],
++              "geom_friction": [[.5, 0, 0]], "geom_sdf": [True]}
++    result = _normalized_variant_record(entity, record)
++    assert result["geom_sdf"] == [False, True]
++    assert result["geom_placeholders"] == [1, 0]
++    assert record["geom_sdf"] == [True]
+diff --git a/tests/contract/test_worker_scene_materialization.py b/tests/contract/test_worker_scene_materialization.py
+index d1cee0a..a8c9d1a 100644
+--- a/tests/contract/test_worker_scene_materialization.py
++++ b/tests/contract/test_worker_scene_materialization.py
+@@ -81,12 +81,8 @@ def test_worker_sources_have_explicit_inertia_and_no_unsupported_canonical_actua
+         )
+         assert entries[1]["variants"][0]["geom_names"] == ["base::geom0"]
+         assert entries[1]["variants"][1]["geom_names"] == ["base::geom0"]
+-        np.testing.assert_allclose(
+-            entries[1]["variants"][0]["geom_friction"], [[0.7, 0.2, 0.03]]
+-        )
+-        np.testing.assert_allclose(
+-            entries[1]["variants"][1]["geom_friction"], [[0.4, 0.1, 0.02]]
+-        )
++        np.testing.assert_allclose(entries[1]["variants"][0]["geom_friction"], [[0.7, 0.2, 0.03]])
++        np.testing.assert_allclose(entries[1]["variants"][1]["geom_friction"], [[0.4, 0.1, 0.02]])
+         for entry in entries:
+             for source in entry["sources"]:
+                 root = ET.parse(source).getroot()
+@@ -100,6 +96,65 @@ def test_worker_sources_have_explicit_inertia_and_no_unsupported_canonical_actua
+     assert not directory.exists()
+ 
+ 
++@pytest.mark.parametrize(
++    "inertial",
++    [
++        "",
++        '<inertial pos="0.000123456789012345 0 -0.000987654321098765" '
++        'mass="0.400000123456789" '
++        'diaginertia="0.00010666666666666668 0.00011666666666666668 0.00012666666666666668" '
++        'quat="0.9238795325112867 0 0.3826834323650898 0"/>',
++        '<inertial pos="0.000123456789012345 0 0" mass="0.400000123456789" '
++        'fullinertia="0.00011 0.00012 0.00013 0.000001234567890123 0.000002 0"/>',
++    ],
++)
++def test_exported_inertials_preserve_compiled_double_precision(tmp_path, inertial):
++    import mujoco
++
++    source = tmp_path / "precise.xml"
++    source.write_text(
++        '<mujoco><worldbody><body name="cube"><freejoint/>'
++        + inertial
++        + '<geom type="box" size="0.02 0.02 0.02" mass="0.4"/>'
++        "</body></worldbody></mujoco>"
++    )
++    intended = mujoco.MjModel.from_xml_path(str(source))
++    prepared = prepare_worker_scene(
++        SceneCfg(
++            entity_assets=(
++                SceneEntitySpec(
++                    "object",
++                    ModelSourceDescriptor(str(source)),
++                    kind="rigid",
++                ),
++            )
++        ),
++        1,
++        0.0005,
++    )
++    try:
++        entry = prepared.payload["scene_entities"][0]
++        actual = mujoco.MjModel.from_xml_path(entry["sources"][0])
++        for field in ("body_mass", "body_ipos", "body_inertia"):
++            np.testing.assert_allclose(
++                getattr(actual, field)[1:],
++                getattr(intended, field)[1:],
++                rtol=2e-14,
++                atol=1e-18,
++            )
++
++        # Quaternion signs are equivalent; compare the physical inertia tensor.
++        def tensor(model):
++            rotation = np.empty(9)
++            mujoco.mju_quat2Mat(rotation, model.body_iquat[1])
++            rotation = rotation.reshape(3, 3)
++            return rotation @ np.diag(model.body_inertia[1]) @ rotation.T
++
++        np.testing.assert_allclose(tensor(actual), tensor(intended), rtol=2e-13, atol=1e-18)
++    finally:
++        prepared.close()
++
++
+ def test_mirror_receives_the_same_role_neutral_expanded_source_as_its_source_entity(tmp_path):
+     config = scene(tmp_path)
+     config.entity_assets = (
+@@ -118,9 +173,7 @@ def test_mirror_receives_the_same_role_neutral_expanded_source_as_its_source_ent
+         prepared.close()
+ 
+ 
+-def test_initial_state_reuses_composition_snapshots_without_recompiling(
+-    tmp_path, monkeypatch
+-):
++def test_initial_state_reuses_composition_snapshots_without_recompiling(tmp_path, monkeypatch):
+     import mujoco
+ 
+     config = scene(tmp_path)
+@@ -165,8 +218,7 @@ def test_worker_mesh_sources_are_self_contained(tmp_path):
+     texture = tmp_path / "checker.png"
+     texture.write_bytes(b"fake png bytes")
+     material.write_text(
+-        "newmtl shape\nKd 0.2 0.6 1.0\nKa 0 0 0\nKs 0.3 0.3 0.3\n"
+-        f"map_Kd {texture.name}\n",
++        f"newmtl shape\nKd 0.2 0.6 1.0\nKa 0 0 0\nKs 0.3 0.3 0.3\nmap_Kd {texture.name}\n",
+         encoding="utf-8",
+     )
+     obj.write_text(
+@@ -179,7 +231,7 @@ def test_worker_mesh_sources_are_self_contained(tmp_path):
+     for name, scale in (("small", ".5 .5 .5"), ("large", "1 1 1")):
+         path = tmp_path / f"{name}.xml"
+         path.write_text(
+-            '<mujoco><asset>'
++            "<mujoco><asset>"
+             f'<mesh name="shape" file="{obj.name}" scale="{scale}"/>'
+             '</asset><worldbody><body name="base"><freejoint/>'
+             '<inertial mass="1" pos="0 0 0" diaginertia=".01 .01 .01"/>'
+@@ -349,9 +401,7 @@ def test_fullinertia_source_is_rewritten_to_the_diagonal_spelling(tmp_path):
+     prepared = prepare_worker_scene(config, 1, 0.002)
+     try:
+         entries = prepared.payload["scene_entities"]
+-        tensor = np.array(
+-            [[1.0, 0.01, 0.02], [0.01, 1.1, 0.03], [0.02, 0.03, 0.9]]
+-        )
++        tensor = np.array([[1.0, 0.01, 0.02], [0.01, 1.1, 0.03], [0.02, 0.03, 0.9]])
+         # The compiler's diagonalization stores principal moments in
+         # descending order.
+         expected = np.linalg.eigvalsh(tensor)[::-1]

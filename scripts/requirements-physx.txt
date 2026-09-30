@@ -1,0 +1,9 @@
+# Dedicated Python 3.11 worker. Never install into DexLab's Python 3.12 venv.
+isaacsim[all,extscache]==5.1.0
+torch==2.7.0+cu128
+torchvision==0.22.0+cu128
+torchaudio==2.7.0+cu128
+# Keep IsaacLab's open-ended dependencies compatible with the pinned SDK.
+click==8.1.7
+# Isaac Sim pins packaging 23.0; newer wheel releases require packaging >=24.
+wheel==0.45.1

@@ -43,6 +43,8 @@ DT = 0.002
 
 
 def episode(args):
+    dt = args.timestep or 0.002
+    physics_step_seconds = 0.0
     if not physics.uses_double_precision():
         raise RuntimeError("This audited task requires SuperDex FP64")
     dest = args.output
@@ -99,18 +101,21 @@ def episode(args):
                 body = scene.create_rigid_actor(
                     name="apple_with_stem",
                     shape=shape,
-                    mass=0.2,
+                    mass=args.apple_mass,
                     collider_type=physics.ColliderType.SDF,
                     sdf=physics.GridSdfParams(
                         resolution_mode=physics.GridSdfResolutionMode.EXPLICIT,
                         resolution_delta=[0.0002] * 3,
                     ),
                     world_from_local=physics.TransformRT(
+                        rotation=Rotation.from_euler(
+                            "z", args.apple_yaw, degrees=True
+                        ).as_quat(),
                         translation=[
-                            0.30,
-                            0.40,
+                            0.30 + args.apple_x_offset,
+                            0.40 + args.apple_y_offset,
                             TABLE_TOP - body_mesh.bounds[0, 2] + 0.001,
-                        ]
+                        ],
                     ),
                 )
             finally:
@@ -119,6 +124,7 @@ def episode(args):
             body.register_query(physics.QueryType.CONTACT_POINTS)
             print("Settling the apple on the table", flush=True)
             # Resolve the fruit's resting pose before planning the narrow stem pinch.
+            # Fixed preparation discretization isolates episode timestep changes.
             for _ in range(round(3 / DT)):
                 scene.step(DT)
             apple_transform = body.get_root_transform()
@@ -366,7 +372,15 @@ def episode(args):
                 from superdex_evidence import GraspRecorder
 
                 recorder = GraspRecorder(
-                    dest, body, table, links, names, body_mesh.vertices, TABLE_TOP, DT
+                    dest,
+                    body,
+                    table,
+                    links,
+                    names,
+                    body_mesh.vertices,
+                    TABLE_TOP,
+                    dt,
+                    expected_mass=args.apple_mass,
                 )
             viewer = None
             if not args.headless:
@@ -396,11 +410,11 @@ def episode(args):
                     summary,
                 )
 
-            for step in range(round(args.seconds / DT)):
-                t = step * DT
+            for step in range(round(args.seconds / dt)):
+                t = step * dt
                 if viewer is not None and not viewer.is_running():
                     return None
-                if args.sequence and step == round(23 / DT):
+                if args.sequence and step == round(23 / dt):
                     released_pose = np.empty_like(home)
                     actor.get_articulated_pose(released_pose)
                     regrasp_plan = plan_body_grasp(
@@ -477,18 +491,20 @@ def episode(args):
                 target = yield snapshot(t, target)
                 actor.set_articulated_target_pose(pose=target)
                 velocity_before = np.array(body.get_linear_velocity())
-                scene.step(DT)
+                step_started = time.perf_counter()
+                scene.step(dt)
+                physics_step_seconds += time.perf_counter() - step_started
                 stats = scene.get_solver_stats()
                 status = stats.convergence_status.name
                 solver_counts[status] = solver_counts.get(status, 0) + 1
                 if recorder is not None:
                     recorder.record(t, velocity_before, status)
                 if 11 <= t < 14:
-                    hold_vertical_impulse += DT * (
+                    hold_vertical_impulse += dt * (
                         body.get_contact_force_world()[2]
                         - body.get_contact_force_from_actor_world(table)[2]
                     )
-                    hold_duration += DT
+                    hold_duration += dt
                 total_force = np.array(body.get_contact_force_world())
                 table_force = np.array(body.get_contact_force_from_actor_world(table))
                 dynamics.append(
@@ -503,7 +519,7 @@ def episode(args):
                         "scene_status": status,
                     }
                 )
-                if step % round(0.05 / DT) == 0:
+                if step % round(0.05 / dt) == 0:
                     frame = actor_poses(links + [body])
                     frames.append(frame)
                     if not np.isfinite(frame).all():
@@ -589,7 +605,7 @@ def episode(args):
                         set_frame(model, data, frame)
                         viewer.sync()
                         time.sleep(max(0, start + t - time.monotonic()))
-                if step % round(1 / DT) == 0:
+                if step % round(1 / dt) == 0:
                     np.savez_compressed(
                         dest / "trajectory.npz",
                         frames=frames,
@@ -612,12 +628,13 @@ def episode(args):
             (dest / "metrics.json").write_text(json.dumps(records, indent=2))
             (dest / "dynamics.json").write_text(json.dumps(dynamics))
             if recorder is not None:
+                recorder.engine["physics_step_seconds"] = physics_step_seconds
                 summary = recorder.finish()
                 print(json.dumps(summary, indent=2), flush=True)
                 yield snapshot(args.seconds, target, summary)
                 return summary
             if args.sequence:
-                summary = verify_sequence(records, dynamics, DT)
+                summary = verify_sequence(records, dynamics, dt)
                 (dest / "summary.json").write_text(json.dumps(summary, indent=2))
                 print(json.dumps(summary, indent=2), flush=True)
                 yield snapshot(args.seconds, target, summary)
@@ -633,7 +650,7 @@ def episode(args):
                     if hold_duration
                     else 0.0
                 ),
-                "hold_force_sampling_hz": round(1 / DT),
+                "hold_force_sampling_hz": round(1 / dt),
                 "maximum_nonstem_contact_n": max(
                     r["off_stem_contact_force_n"] for r in records
                 ),
@@ -686,7 +703,7 @@ def episode(args):
                 "solver_status_counts": solver_counts,
                 "finite_state": True,
                 "friction_falloff_velocity_m_per_s": args.friction_velocity,
-                "dt_s": DT,
+                "dt_s": dt,
                 "gap_m": args.gap,
                 "stiffness": args.stiffness,
                 "yaw_deg": args.yaw,
@@ -773,7 +790,20 @@ def parse_args(argv=None):
     p.add_argument("--yaw", type=float, default=0)
     p.add_argument("--height-offset", type=float, default=0.0015)
     p.add_argument("--linear-solver", choices=["CG", "GMRES"], default="GMRES")
+    p.add_argument("--timestep", type=float, default=None)
+    p.add_argument("--apple-mass", type=float, default=0.2)
+    p.add_argument("--apple-x-offset", type=float, default=0.0)
+    p.add_argument("--apple-y-offset", type=float, default=0.0)
+    p.add_argument("--apple-yaw", type=float, default=0.0)
     args = p.parse_args(argv)
+    values = (args.apple_mass, args.apple_x_offset, args.apple_y_offset, args.apple_yaw)
+    if not np.isfinite(values).all() or args.apple_mass <= 0:
+        p.error("Scene parameters must be finite and apple mass positive")
+    if args.timestep is not None:
+        if args.timestep not in (0.002, 0.001, 0.0005, 0.00025, 0.000125):
+            p.error("Use a supported timestep: 0.002, 0.001, 0.0005, 0.00025, 0.000125")
+    if args.sequence and (args.timestep is not None or values != (0.2, 0.0, 0.0, 0.0)):
+        p.error("Scene and timestep overrides apply to the 14-second benchmark only")
     if args.stem_only or args.backend == "mujoco":
         args.sequence = False
     if args.output is None:

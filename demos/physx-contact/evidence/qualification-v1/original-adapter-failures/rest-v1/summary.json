@@ -1,0 +1,17 @@
+{
+  "passed": false,
+  "checks": {
+    "complete_finite_archive": false,
+    "complete_time_grid": false,
+    "native_run_completed": false,
+    "clean_shutdown": true,
+    "source_unchanged": true,
+    "source_snapshot_matches": true,
+    "recorded_assets_unchanged": true,
+    "asset_files_match": true,
+    "exact_archive_hash": true,
+    "frozen_engineering_limits": true
+  },
+  "metrics": {},
+  "verifier_sha256": "a85b749034be495b312f6a8036a3dc11d7b6dc63f5e8b3263f08f4fe8fbf1ae0"
+}
