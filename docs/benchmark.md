@@ -77,6 +77,8 @@ Acceptance retains the original clearance, continuous two-pad support, hold drif
 
 ## Mechanistic contact experiments
 
+The three implemented development tasks, 38 completed runs and known failures are documented in [contact-mechanics experiments](../demos/contact-benchmark/README.md). Nominal profiles remain uncalibrated; formal held-out evaluation has not started.
+
 [Issue #10](https://github.com/huangkiki/Dexlab/issues/10) covers indentation/unloading, planar sliding, two-pad cylinder load sweeps and complete release. Include expected successes and expected failures. For ideal horizontal normals with Coulomb friction, no geometric jamming and no other support, static load capacity is `mu * (N_left + N_right)`; excess load should slip. This expression must not be applied blindly to compliance, torsional friction or complex geometry.
 
 Controlled comparisons fix source geometry, mass/inertia, physical control laws, update frequency and limits. Fit contact response to independent indentation/sliding targets rather than copying similarly named parameters. Recheck penetration against shared reference geometry; record actual tangential relative velocity, normal load and observation coverage. Fruit-body contact is allowed, while stem support and fruit-assisted support are reported separately.
