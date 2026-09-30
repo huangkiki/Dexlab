@@ -1,13 +1,15 @@
 {
   "inputs_sha256": {
-    "states.npz": "ffd7e5362c514e8416d1822c632e0b9f50821b32143fbeb34ba27cb4cc466dcf",
     "model.mjb": "09115e90500c9add7952a9cb3ef5ab15ec9069ba90fae0e4e9871ecae739c4ab",
-    "summary.json": "84ad0e717ddade0e244e4aaca609e35b02d01ec21a37d8985459d2f7b54889b5",
+    "states.npz": "ffd7e5362c514e8416d1822c632e0b9f50821b32143fbeb34ba27cb4cc466dcf",
     "trace.json": "0b6b43a3a797826d011db2c2ea8876a35a786e91f5d4593bf9c6f09208206c88",
-    "plan-r.npz": "0c52b4133a3cefd7afa4d532f737548d03e5c803b826aac06afe731c0153f5b1",
-    "verification.json": "df64235ddc87a765b9d190c818f8f4d0decba0a8bc99147ee79b50647aa1c93e"
+    "summary.json": "84ad0e717ddade0e244e4aaca609e35b02d01ec21a37d8985459d2f7b54889b5",
+    "plan-r.npz": "0c52b4133a3cefd7afa4d532f737548d03e5c803b826aac06afe731c0153f5b1"
   },
-  "renderer_sha256": "7f461c9b248186ebf3d7a9c4cd80be91b0a27647bc8fef146edb2c5ede6e82c0",
+  "verification_sha256": "f2963660ddda2f983054f61c8450e8fa2e0e8ff96d1bfcee7e119fa6666c4ee5",
+  "assessment": "geometry_review_required",
+  "scorer_version": "cloth-evidence-v2",
+  "renderer_sha256": "b0559cfda79d4bb814995ea08c5fafeece2f40c2a176da4b71dd4978ae5f24c0",
   "display_engine": "3.11.0",
   "physics_steps_executed": 0,
   "frame_times_s": [
@@ -240,7 +242,7 @@
   "video_fps": 25,
   "gif_fps": 12,
   "camera": "close-up following measured cloth center and wrist anchor; display only",
-  "render_and_encoding_seconds": 6.250003797002137,
-  "video_sha256": "e2115d8be0532530374f8163a0fb021c1345230e71e7979d6ba53debf8f75819",
-  "gif_sha256": "6652e34a194facc49eb521451b66e4a253209b4e92f7f819373fff8bab37d186"
+  "render_and_encoding_seconds": 10.74182979699981,
+  "video_sha256": "a684dbd637636442d36a679d0bbffbf645b2cd9121d15a25e499d96187b2cea5",
+  "gif_sha256": "42a9fe98585e194cc0fa75d78e80162abb9041689f3049a6cc0027eda80024cb"
 }

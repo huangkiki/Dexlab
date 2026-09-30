@@ -26,7 +26,11 @@ Each GIF shows a continuous 14-second approach, pinch, lift and hold. The apple-
 
 ![Wuji cloth pinch, lift and release close-up](demos/cloth-folding/media/grasp.gif)
 
-A Wuji hand pinches, lifts and releases MuJoCo flex cloth through frictional contact. The continuous 9-second recording passes independent checks. Control uses known state and a scripted sequence; robot collisions use convex mesh approximations, without cloth attachment constraints. Bimanual folding has not passed. [Video and physics measurements](demos/cloth-folding/README.md)
+**Reassessment: this cloth recording intersects the table and does not establish a physically valid grasp.** The legacy protocol passed, but the new scorer finds triangle interiors inside the table in 176 of 225 saved frames, with a maximum interior depth of 3.00 mm. The GIF continuously replays the original 9-second trajectory with the success caption corrected; physical repair is tracked in [#32](https://github.com/huangkiki/Dexlab/issues/32). Control still uses known state and scripted joints, with no cloth attachments.
+
+![Cloth table-intersection diagnostic](demos/cloth-folding/media/table-diagnostic.svg)
+
+The curve measures zero-thickness triangle interiors inside the table, not native contact distance or a new physical threshold. [Old/new scores, measurements and coverage](demos/cloth-folding/SCORING.md) · [Video and reproduction](demos/cloth-folding/README.md)
 
 ## Engines and experiments
 
