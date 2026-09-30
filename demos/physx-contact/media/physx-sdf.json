@@ -1,0 +1,17 @@
+{
+  "source": "PhysX / Isaac Sim 5.1 apple-stem-grasp recording",
+  "task_runtime": null,
+  "trajectory_sha256": "27f9b0c676018d921887bfa5d82b08a56ba57c643bb0bcd556fb63fd913a7989",
+  "recorded_frame_interval_s": 0.05,
+  "poster_frame": 240,
+  "poster_time_s": 12.0,
+  "video_first_frame": 0,
+  "video_last_frame_inclusive": 279,
+  "video_time_range_s": [
+    0.0,
+    14.0
+  ],
+  "rendering": "Official MuJoCo; recorded poses only; no dynamics",
+  "cameras": "Single close-up follows the recorded apple for presentation; not controller input",
+  "overlays": "Identifying footer only; no fingertip markers"
+}

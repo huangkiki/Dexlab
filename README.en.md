@@ -16,7 +16,11 @@ DexLab uses reproducible rigid grasping and cloth experiments to study penetrati
 
 ![SuperDex stem-grasp close-up](demos/apple-stem-grasp/media/superdex-sdf.gif)
 
-Each GIF shows the continuous 14-second approach, pinch, lift, and hold. Only the grasp close-up is shown. The presentation camera follows the recorded apple and is not a control input. Both recordings replay actual physics poses using MuJoCo's renderer. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4)
+## PhysX
+
+![PhysX stem-grasp close-up](demos/physx-contact/media/physx-sdf.gif)
+
+Each GIF shows a continuous 14-second approach, pinch, lift and hold. The apple-following camera is presentation only; MuJoCo renders actual poses recorded from each engine. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video and recording](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX video and reproduction](demos/physx-contact/apple.md)
 
 ## Robot cloth grasp
 
@@ -31,7 +35,7 @@ A Wuji hand pinches, lifts and releases MuJoCo flex cloth through frictional con
 | MuJoCo 3.11.0 | SDF–SDF stem grasp, flex cloth, and frictional robot cloth grasp |
 | SuperDex 1.0.0 FP64 | SDF–SDF stem grasp and experimental triangle shells |
 | Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | Cloth experiments on a pinned upstream version; material and self-contact capabilities documented per solver |
-| PhysX / Isaac Sim 5.1 | [Primitive contacts and loaded drives](demos/physx-contact/README.md), [54-joint motion](demos/physx-contact/robot.md), [native SDF controls](demos/physx-contact/sdf.md) and [normal/friction accounting](demos/physx-contact/contact-details.md); transient apple lift fails continuous hold; cloth pending; PhysX unchanged |
+| PhysX / Isaac Sim 5.1 | [SDF–SDF stem grasp](demos/physx-contact/apple.md), [primitive contacts and drives](demos/physx-contact/README.md), [54-joint motion](demos/physx-contact/robot.md); independent surface checks pass, failed controls retained; cloth pending |
 
 The cloth benchmark completed **105 frozen held-out episodes: 52 passed the protocol checks and 53 failed, with no timeouts**. Cases cover extension, sag, sphere drape, and folded drop. Nominal materials are not calibrated across solvers; pass counts do not rank physical accuracy. [All results and reproduction](demos/cloth-benchmark/README.md#held-out-results)
 
@@ -42,7 +46,7 @@ Apple SDF grasping is registered and stepped through **UniLab**, with native sce
 - The right thumb and index finger pinch the stem; the left arm stays parked. The apple and stem form **one free 0.2 kg rigid body**.
 - The apple and both fingertip pads use **SDF collision geometry**. There are no attachment constraints, direct object position drives, or engine source patches.
 - Control uses **known object poses, inverse kinematics, and scripted joint targets**. This is not a visual policy or a learned skill; no model API key is needed.
-- The engines are tuned separately. MuJoCo uses SDF contact-point search and soft contact constraints with a **0.5 ms** timestep. SuperDex uses surface-sample integration and smooth penalty energy with a **2 ms** timestep. The same SDF geometry does not imply the same contact-force law.
+- Engines are tuned separately. MuJoCo uses SDF contact search and soft constraints at **0.5 ms**; SuperDex uses surface integration and smooth penalty energy at **2 ms**; PhysX uses native SDF contact and TGS at **1 ms**, with an explicit torsional patch radius. Shared source surfaces do not imply identical discrete geometry or contact laws.
 
 Independent checks cover clearance, two-finger support, penetration, wrist-relative motion, and momentum balance during a continuous three-second hold. Fruit-body contact is allowed during approach. The GIFs show the default scene; stem bending, fracture and hardware accuracy are not validated.
 
@@ -58,6 +62,8 @@ Apple-stem grasping completed **10 frozen paired cases: 20 episodes across both 
 | SuperDex 1.0.0 FP64, 2 ms | 10 / 10 | 72.2–100% |
 
 These measure separately configured task robustness, **not engine accuracy**. All failures and raw evidence are retained. Six additional timestep episodes completed; MuJoCo at 0.25 ms failed the penetration limit, so refinement did not improve acceptance monotonically. A separate 100-case test set is frozen but has not completed evaluation.
+
+PhysX currently passes one development grasp scene and is not included in that held-out evaluation. Native separation and independent reference-surface penetration are reported separately. [Parameters, failures and measurement scope](demos/physx-contact/apple.md)
 
 [Protocol, all results and reproduction](docs/benchmark.md) · [Default demo measurements](docs/sdf-backends.md#results-and-limits) · [Diagnostic definitions](docs/jitter.md)
 

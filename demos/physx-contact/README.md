@@ -3,6 +3,8 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 Development work for [issue #5](https://github.com/huangkiki/Dexlab/issues/5).
+
+See the complete [PhysX SDF grasp](apple.md) for sustained robot holding and independent surface checks. The primitive protocol remains below.
 The runner uses UniSim 1.7.10's public entity API and a separate Isaac Sim 5.1 / IsaacLab 2.3.0 worker. Three native primitive-contact cases pass independent acceptance with the disclosed UniSim contact-reporting fix. PhysX itself is unchanged. These primitive tests do not qualify robot grasping, SDF–SDF contact or cloth. A separate [drive protocol](drive.md) qualifies a loaded prismatic actuator.
 
 ## Setup and run

@@ -16,7 +16,11 @@ DexLab 用可复现的刚体抓取和布料实验研究穿透、抖动、打滑�
 
 ![SuperDex 抓梗近景](demos/apple-stem-grasp/media/superdex-sdf.gif)
 
-动图连续展示完整 14 秒过程：接近 → 两指闭合 → 抬升 → 保持。仅显示抓取近景；展示相机跟随记录中的苹果，不参与控制。两个后端均由 MuJoCo 渲染器回放实际物理轨迹。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4)
+## PhysX
+
+![PhysX 抓梗近景](demos/physx-contact/media/physx-sdf.gif)
+
+动图连续展示完整 14 秒过程：接近 → 两指闭合 → 抬升 → 保持。展示相机跟随记录中的苹果，不参与控制；MuJoCo 渲染器回放各引擎的实际位姿。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX 视频与复现](demos/physx-contact/apple.zh-CN.md)
 
 ## 机器人夹布
 
@@ -31,7 +35,7 @@ MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放�
 | MuJoCo 3.11.0 | SDF–SDF 抓梗、flex 布料、机器人摩擦夹布 |
 | SuperDex 1.0.0 FP64 | SDF–SDF 抓梗、实验性三角薄壳 |
 | Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | 固定上游版本的布料实验；各求解器的材料与自接触能力分别记录 |
-| PhysX / Isaac Sim 5.1 | [基础接触与受载驱动](demos/physx-contact/README.zh-CN.md)、[54 关节无接触运动](demos/physx-contact/robot.zh-CN.md)通过；[SDF 孔洞与支撑对照](demos/physx-contact/sdf.zh-CN.md)通过，凸包对照漂移超限；[法向／摩擦记录](demos/physx-contact/contact-details.zh-CN.md)通过；苹果曾短暂抬起但保持失败，布料待验证；PhysX 未修改 |
+| PhysX / Isaac Sim 5.1 | [SDF–SDF 抓梗](demos/physx-contact/apple.zh-CN.md)、[基础接触与驱动](demos/physx-contact/README.zh-CN.md)、[54 关节运动](demos/physx-contact/robot.zh-CN.md)；独立表面复核通过，失败对照保留；布料待验证 |
 
 布料基准已完成 **105 次冻结留出实验：52 次通过协议检查、53 次失败，无超时**。覆盖拉伸、下垂、球面覆盖和折叠下落；名义材料尚未完成跨求解器校准，不按通过数排名真实精度。[全部结果与运行方法](demos/cloth-benchmark/README.zh-CN.md#留出结果)
 
@@ -42,7 +46,7 @@ MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放�
 - 右手拇指与食指夹梗，左臂停放；苹果与梗是 **0.2 kg 的单个自由刚体**。
 - 苹果、拇指指腹和食指指腹均为 **SDF 碰撞体**。没有附着约束、物体位置驱动或引擎源码补丁。
 - 控制使用**已知物体位姿、逆运动学和脚本化关节目标**，不是视觉策略或学习得到的技能；无需模型 API key。
-- 两个后端分别调参。MuJoCo 使用 SDF 接触点搜索与软接触约束，步长 **0.5 ms**；SuperDex 使用表面采样积分与平滑罚能，步长 **2 ms**。相同的 SDF 几何不代表相同的接触力定律。
+- 各后端分别调参。MuJoCo 使用 SDF 接触搜索与软约束，步长 **0.5 ms**；SuperDex 使用表面采样积分与平滑罚能，步长 **2 ms**；PhysX 使用原生 SDF 接触与 TGS，步长 **1 ms**，显式配置扭转接触半径。相同源表面不代表相同的离散几何或接触力定律。
 
 独立验收覆盖连续 3 秒保持中的离桌、两指支撑、穿透、相对腕部位移和动量平衡；接近阶段允许果身接触。动图对应默认场景；不模拟梗弯曲或断裂，也没有真机精度结论。
 
@@ -58,6 +62,8 @@ MuJoCo flex 布料与 Wuji 手通过摩擦接触完成夹持、抬升和释放�
 | SuperDex 1.0.0 FP64，2 ms | 10 / 10 | 72.2–100% |
 
 这是各自配置的任务鲁棒性结果，**不构成引擎精度排名**。全部失败和原始证据均保留；另完成 6 次步长实验，MuJoCo 0.25 ms 因穿透超限失败，更小步长未呈现单调改善。100 个正式测试场景已冻结，尚未完成评估。
+
+PhysX 当前通过单个开发场景的抓梗验收，尚未纳入上述留出测试。其原生接触距离与独立参考表面穿透分别报告。[参数、失败与测量边界](demos/physx-contact/apple.zh-CN.md)
 
 [基准协议、全部结果与复现](docs/benchmark.zh-CN.md) · [演示默认场景指标](docs/sdf-backends.zh-CN.md#结果与限制) · [诊断定义](docs/jitter.zh-CN.md)
 
