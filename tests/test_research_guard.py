@@ -102,3 +102,30 @@ class GuardTests(unittest.TestCase):
         path.write_text('original')
         self.assertNotEqual(self.launch('old', 'archive', 'pass').wait(timeout=10), 0)
         self.assertEqual(path.read_text(), 'original')
+
+
+    def test_previous_boot_marker_does_not_block_on_reused_group_number(self):
+        active = self.lock.with_name(self.lock.name + '.active.json')
+        old = {'id': 'interrupted-previous-boot', 'process_group': os.getpgrp(),
+               'boot_id': 'a-different-boot', 'state': 'active'}
+        active.write_text(json.dumps(old))
+        original = self.root / 'original-record.json'
+        original.write_text(json.dumps(old))
+        self.assertEqual(self.launch('reboot-recovery', 'archive', 'pass').wait(timeout=10), 0)
+        result = json.loads((self.root / 'reboot-recovery.json').read_text())
+        self.assertEqual(result['recovered_window'], old['id'])
+        self.assertEqual(result['recovery_reason'], 'previous_boot')
+        self.assertEqual(result['boot_id'], Path('/proc/sys/kernel/random/boot_id').read_text().strip())
+        self.assertEqual(json.loads(original.read_text()), old)
+        self.assertFalse(active.exists())
+
+    def test_same_boot_and_legacy_live_groups_still_block(self):
+        active = self.lock.with_name(self.lock.name + '.active.json')
+        boot_id = Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+        for name, extra in [('same-boot', {'boot_id': boot_id}), ('legacy', {})]:
+            with self.subTest(name=name):
+                old = {'id': name, 'process_group': os.getpgrp(), 'state': 'active', **extra}
+                active.write_text(json.dumps(old))
+                self.assertEqual(self.launch(name, 'archive', 'raise SystemExit(99)').wait(timeout=10), 75)
+                self.assertEqual(json.loads(active.read_text()), old)
+                self.assertFalse((self.root / (name + '.json')).exists())

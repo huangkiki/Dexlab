@@ -63,18 +63,28 @@ def run_window(lock_path, kind, receipt, command):
     with lock_path.open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         recovered = None
+        recovery_reason = None
+        boot_id = Path('/proc/sys/kernel/random/boot_id').read_text().strip()
         if active.exists():
             previous = json.loads(active.read_text())
-            members = group_members(previous['process_group'])
+            # Process-group numbers can be reused after reboot. A recorded
+            # previous boot cannot have live descendants in this boot. Legacy
+            # markers without boot identity retain the conservative live check.
+            prior_boot = previous.get('boot_id')
+            rebooted = prior_boot is not None and prior_boot != boot_id
+            members = [] if rebooted else group_members(previous['process_group'])
             if members:
                 raise BusyWindow('Previous window has surviving processes; preserve it and retry later')
             recovered = previous['id']
+            recovery_reason = 'previous_boot' if rebooted else 'no_surviving_processes'
         if receipt.exists():
             raise FileExistsError('Choose a new receipt; existing evidence is immutable')
         state = {
-            'schema_version': 1, 'id': uuid.uuid4().hex, 'kind': kind,
+            'schema_version': 2, 'id': uuid.uuid4().hex, 'kind': kind,
+            'boot_id': boot_id,
             'process_group': os.getpgrp(), 'started_at_unix_s': time.time(),
             'state': 'active', 'recovered_window': recovered,
+            'recovery_reason': recovery_reason,
         }
         # Written before spawning: even a kill during launch leaves a known group.
         atomic_json(active, state)
