@@ -115,3 +115,7 @@ Submit reproducible problems, parameter studies and failures as [issues](https:/
 Thanks to [UniLab](https://github.com/unilabsim/UniLab), [Project SuperDex](https://github.com/unilabsim/project_superdex), [MuJoCo](https://github.com/google-deepmind/mujoco), [Newton](https://github.com/newton-physics/newton), [OpenArm](https://github.com/enactic/openarm) and [Wuji](https://github.com/wuji-technology). Documentation organization draws on [RLinf](https://github.com/RLinf/RLinf). The SuperDex grasp appears in [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex); Astra assisted development and debugging.
 
 Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs/ASSETS.md).
+
+Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.
+
+The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.

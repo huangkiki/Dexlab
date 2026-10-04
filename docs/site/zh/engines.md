@@ -26,3 +26,7 @@ Newton 的 MuJoCo 扩展仍限制 3.12.x，不能称底层最新；ovphysx 0.6.3
 ## Genesis 的范围
 
 先验刚体支撑、滑动、夹持释放，再单独验证 PBD 薄布与耦合；MPM/FEM 体材料分列。Genesis 的 Newton 是算法名，不是 Newton Physics 项目。SDF-SDF 不支持时明确报告，不隐藏凸包替代。[资格任务 #42](https://github.com/huangkiki/Dexlab/issues/42)
+
+## GPU 接触开发证据
+
+MuJoCo Warp 3.14.0 的六卡参数对照得到四组通过、两组失败，固定 5 mm 侵入阈值未改。更小步长未使穿透单调改善。这是合成球—平面诊断，不是抓梗或夹布资格验收。[完整结果、图表与复现记录](https://github.com/huangkiki/Dexlab/blob/main/docs/engine-qualification.zh-CN.md)。
