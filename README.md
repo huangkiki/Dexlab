@@ -12,6 +12,10 @@
 
 DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研究碰撞几何、接触律、求解器及驱动对**穿透、滑移、抖动与计算成本**的影响。每项结论连接原始记录、独立评分、参数来源与失败案例。
 
+## 灵巧操作任务路线
+
+当前实现集中于抓持与接触诊断。新增 [六层研究地图](docs/dexterity-roadmap.zh-CN.md) 将 ManiSkill、抓取评测、触觉、数据生成与本体研究映射到具体实验；[ManiSkill 原生任务 #47](https://github.com/huangkiki/Dexlab/issues/47) 与 [手内旋转 #48](https://github.com/huangkiki/Dexlab/issues/48) 已排入计划，**尚未实现，不算已支持**。
+
 ## 当前结论
 
 | 研究问题 | 已有证据 | 结论与限制 |

@@ -90,6 +90,10 @@ Sliding, loading and transients. Use simple experiments to explain complex failu
 :::
 ::::
 
+## Dexterous roadmap
+
+Six research layers: tasks, actuation, physics, sensing, data and transfer. ManiSkill integration and in-hand rotation remain planned. [→ Dexterous roadmap](dexterity.md)
+
 <div class="lab-note">New batches target official latest-stable releases; qualification is pending, including Genesis. Current results do not establish hardware accuracy. <a href="engines.html">Versions and capability limits →</a></div>
 
 
@@ -101,6 +105,7 @@ Quick start <quickstart>
 Experiments <experiments>
 Results <results>
 Engines <engines>
+Dexterous roadmap <dexterity>
 Benchmark <benchmark>
 Contribute <contributing>
 ```
