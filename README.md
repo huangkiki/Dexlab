@@ -6,7 +6,7 @@
 
 DexLab 用可复现的刚体抓取和布料实验研究穿透、抖动、打滑与数值稳定性。案例包括 **OpenArm 双臂 + Wuji 灵巧手抓苹果梗、夹布**，以及多求解器的布料拉伸、下垂和碰撞测试。每项实验保留参数来源、原始轨迹、独立验收及失败记录。
 
-[快速运行](#运行) · [实验结果](#实验结果) · [诊断工具](#模型审查与诊断) · [任务与证据盘点](docs/inventory/README.zh-CN.md) · [研究方法](docs/research-focus.zh-CN.md) · [版本发布](https://github.com/huangkiki/Dexlab/releases)
+[快速运行](#运行) · [实验结果](#实验结果) · [诊断工具](#模型审查与诊断) · [任务与证据盘点](docs/inventory/README.zh-CN.md) · [统一指标与历史重评](docs/evidence/README.zh-CN.md) · [研究方法](docs/research-focus.zh-CN.md) · [版本发布](https://github.com/huangkiki/Dexlab/releases)
 
 ## MuJoCo
 
@@ -65,6 +65,10 @@ PhysX 原生表面布料另完成 **15 个冻结留出场景：10 通过、1 表
 [MuJoCo 验收](demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json) · [SuperDex 验收](demos/apple-stem-grasp/evidence/sdf-superdex/summary.json) · [参数与引擎实现差异](docs/sdf-backends.zh-CN.md)
 
 ## 实验结果
+
+![各批次历史重评](docs/evidence/outcomes.zh-CN.svg)
+
+七个完整历史批次按统一证据规则重评，失败与不支持均保留。各批次的任务、参数和调参预算不同，**不能合并为引擎排名**；旧夹布通过记录转为几何复核。[指标定义、逐场景图表与复算数据](docs/evidence/README.zh-CN.md)。
 
 苹果抓梗已完成 **10 个冻结场景、两个后端共 20 次实验**。扰动质量、水平位置与朝向；沿用已发布策略，未针对这些场景重新调参。
 

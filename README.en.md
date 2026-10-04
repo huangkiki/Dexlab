@@ -6,7 +6,7 @@
 
 DexLab uses reproducible rigid grasping and cloth experiments to study penetration, jitter, slip, and numerical stability. Cases include **OpenArm dual arms with Wuji hands grasping an apple stem and pinching cloth**, plus cloth extension, sag, and collision tests across solvers. Each experiment retains parameter provenance, raw trajectories, independent checks, and failed records.
 
-[Quick start](#run) · [Results](#results) · [Diagnostics](#model-audits-and-diagnostics) · [Task and evidence inventory](docs/inventory/README.md) · [Research methods](docs/research-focus.md) · [Releases](https://github.com/huangkiki/Dexlab/releases)
+[Quick start](#run) · [Results](#results) · [Diagnostics](#model-audits-and-diagnostics) · [Task and evidence inventory](docs/inventory/README.md) · [Metrics and historical rescoring](docs/evidence/README.md) · [Research methods](docs/research-focus.md) · [Releases](https://github.com/huangkiki/Dexlab/releases)
 
 ## MuJoCo
 
@@ -65,6 +65,10 @@ Independent checks cover clearance, two-finger support, penetration, wrist-relat
 [MuJoCo acceptance](demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json) · [SuperDex acceptance](demos/apple-stem-grasp/evidence/sdf-superdex/summary.json) · [Parameters and engine internals](docs/sdf-backends.md)
 
 ## Results
+
+![Historical cohort rescoring](docs/evidence/outcomes.svg)
+
+Seven complete historical cohorts are rescored with common evidence rules, retaining failures and unsupported cases. Tasks, parameters and tuning budgets differ: **do not pool these into an engine ranking**. The old cloth-grasp pass requires geometry review. [Metric definitions, per-scenario plots and reproduction data](docs/evidence/README.md).
 
 Apple-stem grasping completed **10 frozen paired cases: 20 episodes across both backends**. Mass, horizontal position and yaw were perturbed without retuning the released policies on these cases.
 
