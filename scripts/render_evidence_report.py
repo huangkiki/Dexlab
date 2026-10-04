@@ -110,8 +110,8 @@ def markdown(report, output, zh):
         '', '[English](README.md) | [简体中文](README.zh-CN.md)', '',
         f'**结论：七个固定批次共 {total} 条记录按当前评分器重新读取；旧夹布“通过”应列为几何复核，其余批次的协议结果见下表。没有实测精度或等预算引擎排名。**' if zh else
         f'**Conclusion: {total} records from seven frozen cohorts are read again with current scorers. The old robot-cloth pass requires geometry review. Other cohort outcomes are below. This is neither measured accuracy nor an equal-budget engine ranking.**', '',
-        '本地离线报告草稿。完整远端发布门禁尚未通过；此报告不是新一轮动力学实验。保持原控制器、引擎与物理阈值，原始输入逐文件校验，分析前后哈希必须一致。' if zh else
-        'Local offline report draft. The full remote release gate is pending; this is not a new dynamics experiment. Controllers, engines and physical limits are unchanged. Every declared raw input is hash-checked before and after analysis.', '',
+        '此报告为历史离线重评，不是新一轮动力学实验；发布验收见 [GitHub Releases](https://github.com/huangkiki/Dexlab/releases)。保持原控制器、引擎与物理阈值，原始输入逐文件校验，分析前后哈希必须一致。' if zh else
+        'This is offline historical rescoring, not a new dynamics experiment; release validation is recorded in [GitHub Releases](https://github.com/huangkiki/Dexlab/releases). Controllers, engines and physical limits are unchanged. Every declared raw input is hash-checked before and after analysis.', '',
         '## 结果与结论' if zh else '## Results and conclusions', '',
         f'![{"各批次结果" if zh else "Cohort outcomes"}](outcomes{suffix}.svg)', '',
         '| 批次 | N | 历史通过 | 当前协议通过 | 协议失败 | 几何复核 | 不支持 | 超时 / 运行失败 |' if zh else

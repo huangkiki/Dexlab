@@ -211,3 +211,13 @@ class EndToEndEvidenceTest(EvidenceFixture):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class PublishedEvidenceIntegrity(unittest.TestCase):
+    def test_generated_artifacts_match_provenance(self):
+        root = Path(__file__).resolve().parents[1]
+        evidence = root / "docs/evidence"
+        provenance = json.loads((evidence / "plot-provenance.json").read_text())
+        self.assertEqual(digest(evidence / "historical-v1.json"), provenance["report_sha256"])
+        self.assertEqual(digest(root / "scripts/render_evidence_report.py"), provenance["generator_sha256"])
+        verify_hashes(evidence, provenance["files"])

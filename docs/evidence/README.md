@@ -4,7 +4,7 @@
 
 **Conclusion: 208 records from seven frozen cohorts are read again with current scorers. The old robot-cloth pass requires geometry review. Other cohort outcomes are below. This is neither measured accuracy nor an equal-budget engine ranking.**
 
-This is offline historical rescoring, not a new dynamics experiment. Release regression evidence is linked from [v0.16.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.16.0). Controllers, engines and physical limits are unchanged. Every declared raw input is hash-checked before and after analysis.
+This is offline historical rescoring, not a new dynamics experiment; release validation is recorded in [GitHub Releases](https://github.com/huangkiki/Dexlab/releases). Controllers, engines and physical limits are unchanged. Every declared raw input is hash-checked before and after analysis.
 
 ## Results and conclusions
 
@@ -97,6 +97,6 @@ Use the existing DexLab environment and install matplotlib for plotting. A priva
   /tmp/historical-new.json --output /tmp/evidence-report
 ```
 
-Rescoring loads saved MuJoCo models for geometry/FK analysis but never integrates dynamics. Scorer identity is bound to source-file hashes, not just a package version. Plot generation and complete dynamics release regressions are validated separately.
+Rescoring loads saved MuJoCo models for geometry/FK analysis but never integrates dynamics. Scorer identity is bound to source-file hashes, not just a package version. Generating plots does not establish release-gate completion.
 
 [Task and parameter provenance](../inventory/README.md) · [Research methods](../research-focus.md) · [Homepage](../../README.en.md)

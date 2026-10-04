@@ -1,0 +1,42 @@
+name: Documentation
+on:
+  pull_request:
+    paths: ['docs/**', 'README*', 'pyproject.toml', 'scripts/build_docs.py', '.github/workflows/docs.yml', '.readthedocs.yaml']
+  push:
+    branches: [main]
+    paths: ['docs/**', 'README*', 'pyproject.toml', 'scripts/build_docs.py', '.github/workflows/docs.yml', '.readthedocs.yaml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: docs/site/requirements.txt
+      - run: python -m pip install -r docs/site/requirements.txt
+      - run: python scripts/build_docs.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/html
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy documentation
+        id: deployment
+        uses: actions/deploy-pages@v4
