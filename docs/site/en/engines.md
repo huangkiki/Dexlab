@@ -26,3 +26,7 @@ Newton's MuJoCo extra still restricts the core to 3.12.x; ovphysx 0.6.3 is class
 ## Genesis scope
 
 Qualify rigid support, sliding and pinch/release first, then PBD thin cloth and coupling separately. MPM/FEM volume materials are distinct. Genesis's Newton method is not Newton Physics. Unsupported SDF-SDF must not become an undisclosed convex surrogate. [Qualification #42](https://github.com/huangkiki/Dexlab/issues/42)
+
+## GPU contact development evidence
+
+Six-device parameter checks on MuJoCo Warp 3.14.0 produced four passing and two failing configurations. The fixed 5 mm intrusion bound was unchanged; smaller timesteps did not monotonically improve penetration. This is a synthetic sphere/plane diagnostic, not apple or cloth qualification. [Full results, plots and reproducible records](https://github.com/huangkiki/Dexlab/blob/main/docs/engine-qualification.md).

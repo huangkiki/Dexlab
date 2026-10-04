@@ -115,3 +115,7 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 感谢 [UniLab](https://github.com/unilabsim/UniLab)、[Project SuperDex](https://github.com/unilabsim/project_superdex)、[MuJoCo](https://github.com/google-deepmind/mujoco)、[Newton](https://github.com/newton-physics/newton)、[OpenArm](https://github.com/enactic/openarm) 和 [Wuji](https://github.com/wuji-technology)。文档组织参考 [RLinf](https://github.com/RLinf/RLinf)。SuperDex 抓梗演示收录于 [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex)，Astra 参与开发与调试。
 
 代码：[Apache-2.0](LICENSE)；第三方资产见[来源与许可](docs/ASSETS.zh-CN.md)。
+
+最新稳定版运行准入正在推进：[版本清单、GPU 基础检查及边界](docs/engine-qualification.zh-CN.md)。设备检查不等于抓取成功，也尚未开放正式 benchmark 派发。
+
+六卡基础接触对照已实际完成：六组参数中 4 组通过、2 组失败。默认软接触下仅减小步长并未减少侵入；详见上面的逐配置报告。这不是苹果抓取验收。
