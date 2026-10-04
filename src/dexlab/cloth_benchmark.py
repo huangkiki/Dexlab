@@ -131,7 +131,7 @@ def source_identity():
     }
 
 
-def verify(directory):
+def verify(directory, *, write_summary=True):
     """Recompute physics measurements; do not trust the saved summary."""
     meta = json.loads((directory / "run.json").read_text())
     case = ClothCase(**meta["case"])
@@ -213,7 +213,8 @@ def verify(directory):
     result["scope"] = (
         "Recorded nominal cloth experiment; no real-material accuracy claim"
     )
-    write_json(directory / "summary.json", result)
+    if write_summary:
+        write_json(directory / "summary.json", result)
     return result
 
 
