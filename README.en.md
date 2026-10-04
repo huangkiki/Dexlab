@@ -1,5 +1,8 @@
 # DexLab
 
+> Archival infrastructure: local archival now verifies hard memory, CPU and disk I/O limits before starting. Failures retain sources and receipts. Success, timeout and isolated OOM checks passed; both historical backend archives passed bounded offline readback. [Execution limits](docs/remote-research.md#hard-bounds-for-local-archival)
+
+
 [简体中文](README.md) | [English](README.en.md)
 
 **Robot contact-dynamics experiments built on UniLab: audit models, measure contact behavior, and reproduce grasps.**

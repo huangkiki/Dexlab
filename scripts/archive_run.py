@@ -2,13 +2,16 @@
 """Low-priority, uncompressed, verified archival using private deployment config."""
 
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
+import os
 from pathlib import Path, PurePosixPath
 import re
 import shlex
 import subprocess
 import sys
+import time
 import uuid
 import xml.etree.ElementTree as ET
 
@@ -92,6 +95,23 @@ def read_apple(directory):
             'score': score}
 
 
+@contextmanager
+def record_stage(path, name):
+    """Persist the last archival stage even if the worker is killed."""
+    start = time.monotonic()
+    record = {'stage': name, 'state': 'running', 'started_at_unix_s': time.time()}
+    write_receipt(path, record)
+    try:
+        yield
+    except BaseException:
+        record.update(state='failed', wall_s=time.monotonic() - start)
+        write_receipt(path, record)
+        raise
+    else:
+        record.update(state='completed', wall_s=time.monotonic() - start)
+        write_receipt(path, record)
+
+
 def archive(args):
     config = json.loads(args.config.read_text())
     host, remote_root = config['ssh_alias'], PurePosixPath(config['remote_root'])
@@ -123,7 +143,8 @@ def archive(args):
     scan = [str(checkout / '.venv/bin/python'), str(checkout / 'scripts/archive_run.py'),
             'snapshot', '--source', str(source), '--boundary', str(remote_root)]
     # Remote lock/recovery is checked before any local scan or hashing begins.
-    before = remote_json(scan, 'before')
+    with record_stage(receipts / (operation + '-source-before.json'), 'remote_source_snapshot_before'):
+        before = remote_json(scan, 'before')
     source_receipt = receipts / (args.archive_id + '-source.json')
     identity = {'checkout': str(checkout), 'source': str(source), 'manifest': before}
     if source_receipt.exists() and json.loads(source_receipt.read_text()) != identity:
@@ -135,16 +156,19 @@ def archive(args):
         raise ValueError('Archive directories must not be symlinks')
     if not destination.exists():
         stage.mkdir(exist_ok=True)
-        subprocess.run([
-            'rsync', '-a', '--partial', '--protect-args', '--no-compress',
-            '--bwlimit=' + str(policy['bandwidth_KiB_per_second']),
-            '-e', 'ssh -o BatchMode=yes -o ForwardAgent=no -o Compression=no',
-            '--rsync-path=' + guarded_remote(['rsync'], 'transfer'),
-            str(host) + ':' + str(source) + '/', str(stage) + '/',
-        ], check=True)
-    after = remote_json(scan, 'after')
-    result = finalize(stage, destination, before, after, read_apple,
-                      receipt_path=receipts / (args.archive_id + '-complete.json'))
+        with record_stage(receipts / (operation + '-transfer.json'), 'transfer'):
+            subprocess.run([
+                'rsync', '-a', '--partial', '--protect-args', '--no-compress',
+                '--bwlimit=' + str(policy['bandwidth_KiB_per_second']),
+                '-e', 'ssh -o BatchMode=yes -o ForwardAgent=no -o Compression=no',
+                '--rsync-path=' + guarded_remote(['rsync'], 'transfer'),
+                str(host) + ':' + str(source) + '/', str(stage) + '/',
+            ], check=True)
+    with record_stage(receipts / (operation + '-source-after.json'), 'remote_source_snapshot_after'):
+        after = remote_json(scan, 'after')
+    with record_stage(receipts / (operation + '-finalize.json'), 'local_verify_read_score_and_promote'):
+        result = finalize(stage, destination, before, after, read_apple,
+                          receipt_path=receipts / (args.archive_id + '-complete.json'))
     print(json.dumps(result, indent=2))
 
 
@@ -166,6 +190,11 @@ def main():
             parser.error('Source escaped the private execution boundary')
         print(json.dumps(snapshot(args.source)))
     elif args.command == '_archive':
+        from bounded_run import current_cgroup, verify_limits
+        config = json.loads(args.config.read_text())
+        device = Path(config['archive_policy']['io_device']).stat().st_rdev
+        verify_limits(current_cgroup(), f'{os.major(device)}:{os.minor(device)}',
+                      8 * 1024 ** 3, 6 * 1024 ** 3)
         archive(args)
     else:
         config = json.loads(args.config.read_text())
@@ -173,12 +202,18 @@ def main():
         if not root.is_dir():
             parser.error('Archive volume must already exist')
         control = root / '.control'
+        device = config['archive_policy'].get('io_device')
+        if not device:
+            parser.error('Private archive_policy.io_device is required for hard I/O bounds')
         command = ['nice', '-n', str(config['archive_policy']['nice']), 'ionice', '-c', '3',
                    sys.executable, str(ROOT / 'scripts/research_guard.py'), 'run',
                    '--lock', str(control / 'window.lock'), '--kind', 'archive',
                    '--receipt', str(control / (uuid.uuid4().hex + '.json')), '--',
                    sys.executable, str(Path(__file__).resolve()), '_archive', *sys.argv[2:]]
-        raise SystemExit(subprocess.run(command, check=False).returncode)
+        bounded = [sys.executable, str(ROOT / 'scripts/bounded_run.py'),
+                   '--io-device', device, '--receipt',
+                   str(control / (uuid.uuid4().hex + '-resources.json')), '--', *command]
+        raise SystemExit(subprocess.run(bounded, check=False).returncode)
 
 
 if __name__ == '__main__':
