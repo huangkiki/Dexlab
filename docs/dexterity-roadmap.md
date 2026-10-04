@@ -57,7 +57,7 @@ The [official task documentation](https://maniskill.readthedocs.io/en/latest/tas
 2. **M2 / #48:** Verify the actual registered rotation environment and hand. Reproduce an available controller/trajectory first; unavailable policy is a blocker, not permission to label random actions successful. A Wuji port needs separate drive/asset qualification.
 3. **Frozen evaluation:** Separate development from ten preregistered held-out cases. Retain every failure. Action replay differs from state injection; equal seeds do not prove matched initial states. Record continuous contact close-ups.
 
-Heavy work stays on resource-bounded remote execution. Qualify isolation on one GPU before scaling. Report preparation, stepping, rendering and end-to-end costs separately; stop transfers during timing. Missing real measurements must not block simulation integration but preclude hardware-accuracy claims.
+Experiments prefer a qualified local machine; remote execution remains optional. Verify enforced memory, CPU, process and runtime limits with experiment swap disabled, preserve desktop headroom, and store bulk outputs on the configured data volume. Qualify isolation on one GPU before scaling. Report preparation, stepping, rendering and end-to-end costs separately; stop transfers during timing. Missing real measurements must not block simulation integration but preclude hardware-accuracy claims.
 
 ## Remaining research review
 
