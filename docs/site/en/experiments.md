@@ -40,3 +40,7 @@ These are development-scene replays at the original pinned versions, not held-ou
 ![Cloth: geometric failure](../../../demos/cloth-folding/media/grasp.gif)
 :::
 ::::
+
+## Hardware acquisition preparation
+
+The [protocol, empty template and log validator](https://github.com/huangkiki/Dexlab/blob/main/docs/hardware/README.md) cover two UR7e arms and two identical CTAG2F90D grippers. Commands, measured feedback and independent references remain separate; unknown data stays unknown. The tool only reads files and does not control hardware. Format validity does not establish calibration.

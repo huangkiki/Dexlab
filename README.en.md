@@ -131,6 +131,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 
 No model API key is needed. The window opens after SDF preparation and planning. UniLab registers and steps the task; DexLab owns the native scene. [Installation](docs/installation.md) · [Documentation-only build](docs/site/en/quickstart.md#build-documentation-only)
 
+[UR7e and gripper acquisition preparation](docs/hardware/README.md): protocol, signal provenance, clocks, uncertainty and a read-only log validator. Empty templates and synthetic fixtures are not measurements; no hardware data is accepted yet.
+
 ## Contributing and acknowledgments
 
 Submit reproducible problems, parameter studies and failures as [issues](https://github.com/huangkiki/Dexlab/issues). Experiment PRs update findings, plots and bilingual reports; internal-only changes explain when no homepage update is needed. [Development and release workflow](docs/autoresearch.md)

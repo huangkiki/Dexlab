@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "kind": "preparation",
+  "protocol": "ctag-contact-v1",
+  "devices": {
+    "arm_left": {
+      "model": "UR7e",
+      "firmware": null,
+      "interface": null
+    },
+    "arm_right": {
+      "model": "UR7e",
+      "firmware": null,
+      "interface": null
+    },
+    "gripper_left": {
+      "model": "CTAG2F90D",
+      "firmware": null,
+      "interface": null
+    },
+    "gripper_right": {
+      "model": "CTAG2F90D",
+      "firmware": null,
+      "interface": null
+    },
+    "reference_sensor": {
+      "model": "unselected",
+      "firmware": null,
+      "interface": null
+    }
+  },
+  "clocks": {
+    "host": {
+      "description": "Monotonic collector clock; record origin and restarts.",
+      "offset_to_host_s": null,
+      "scale_to_host": null,
+      "uncertainty_s": null,
+      "evidence": null
+    },
+    "arm_left": {
+      "description": "Left controller uptime; independently map to host.",
+      "offset_to_host_s": null,
+      "scale_to_host": null,
+      "uncertainty_s": null,
+      "evidence": null
+    },
+    "gripper_left": {
+      "description": "Device sampling time if exposed; otherwise retain null.",
+      "offset_to_host_s": null,
+      "scale_to_host": null,
+      "uncertainty_s": null,
+      "evidence": null
+    },
+    "reference": {
+      "description": "External force/displacement DAQ sampling clock.",
+      "offset_to_host_s": null,
+      "scale_to_host": null,
+      "uncertainty_s": null,
+      "evidence": null
+    }
+  },
+  "frames": {
+    "left_joints": {
+      "description": "Six UR joint angles, vendor joint order.",
+      "evidence": null
+    },
+    "left_tcp": {
+      "description": "TCP pose in left base; translation then rotation vector, not Euler angles.",
+      "evidence": null
+    },
+    "left_opening": {
+      "description": "Distance between defined opposing pad reference surfaces; linkage mapping must be measured.",
+      "evidence": null
+    },
+    "reference_axis": {
+      "description": "Normal compression force and displacement in the fixture axis; sign and zero require measurement.",
+      "evidence": null
+    }
+  },
+  "channels": {
+    "left_q_actual": {
+      "signal": "joint_position_actual",
+      "unit": "rad",
+      "kind": "feedback",
+      "device": "arm_left",
+      "frame": "left_joints",
+      "clock": "arm_left",
+      "source_field": "actual_q",
+      "status": "unverified",
+      "evidence": null,
+      "uncertainty": null
+    },
+    "left_q_target": {
+      "signal": "joint_position_target",
+      "unit": "rad",
+      "kind": "command",
+      "device": "arm_left",
+      "frame": "left_joints",
+      "clock": "arm_left",
+      "source_field": "target_q",
+      "status": "unverified",
+      "evidence": null,
+      "uncertainty": null
+    },
+    "left_aperture_actual": {
+      "signal": "gripper_aperture_actual",
+      "unit": "m",
+      "kind": "feedback",
+      "device": "gripper_left",
+      "frame": "left_opening",
+      "clock": "gripper_left",
+      "source_field": null,
+      "status": "unverified",
+      "evidence": null,
+      "uncertainty": null
+    },
+    "left_force_setting": {
+      "signal": "gripper_setting_target",
+      "unit": "device_code",
+      "kind": "command",
+      "device": "gripper_left",
+      "frame": "left_opening",
+      "clock": "host",
+      "source_field": null,
+      "status": "unverified",
+      "evidence": null,
+      "uncertainty": null
+    },
+    "normal_force": {
+      "signal": "normal_force_reference",
+      "unit": "N",
+      "kind": "reference",
+      "device": "reference_sensor",
+      "frame": "reference_axis",
+      "clock": "reference",
+      "source_field": null,
+      "status": "unverified",
+      "evidence": null,
+      "uncertainty": null
+    },
+    "compression": {
+      "signal": "displacement_reference",
+      "unit": "m",
+      "kind": "reference",
+      "device": "reference_sensor",
+      "frame": "reference_axis",
+      "clock": "reference",
+      "source_field": null,
+      "status": "unverified",
+      "evidence": null,
+      "uncertainty": null
+    }
+  },
+  "trials": [
+    {
+      "id": "development-001",
+      "split": "development",
+      "specimen_id": "development-specimen-001",
+      "condition_id": "development-condition-001",
+      "repeat": 1,
+      "status": "planned",
+      "failure_reason": null,
+      "conditions": "Preparation placeholder: freeze material, dimensions, fixture, loading range/rate and repetitions before acquisition.",
+      "required_channels": [
+        "normal_force",
+        "compression"
+      ]
+    },
+    {
+      "id": "calibration-001",
+      "split": "calibration",
+      "specimen_id": "calibration-specimen-001",
+      "condition_id": "calibration-condition-001",
+      "repeat": 1,
+      "status": "planned",
+      "failure_reason": null,
+      "conditions": "Preparation placeholder: freeze material, dimensions, fixture, loading range/rate and repetitions before acquisition.",
+      "required_channels": [
+        "normal_force",
+        "compression"
+      ]
+    },
+    {
+      "id": "test-001",
+      "split": "test",
+      "specimen_id": "test-specimen-001",
+      "condition_id": "test-condition-001",
+      "repeat": 1,
+      "status": "planned",
+      "failure_reason": null,
+      "conditions": "Preparation placeholder: freeze material, dimensions, fixture, loading range/rate and repetitions before acquisition.",
+      "required_channels": [
+        "normal_force",
+        "compression"
+      ]
+    }
+  ],
+  "artifacts": {}
+}
