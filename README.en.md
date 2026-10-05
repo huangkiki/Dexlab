@@ -13,6 +13,17 @@
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
 
+## Reference standards and current answers
+
+**We have no evidence that either engine better matches real grasping.** First test the declared model and numerical error; measured data are needed for physical validity. Grasp success is configuration regression only.
+
+| Question | Reference and criterion | Current answer |
+|---|---|---|
+| Does collision geometry match the declaration? | Native BOX type, 40 mm dimensions and analytic signed distances; 1e-12 m covers FP64 coordinate arithmetic only | Static native readback passes; one query-on/off trajectory has identical states and contact records. [Geometry checks](demos/contact-benchmark/NATIVE_GEOMETRY.md) |
+| Do nominal contact mappings transfer? | Prescribed K=20000 N/m, D=40 Ns/m synthetic model, fixed loading and preregistered mass/size cases | None of 30 episodes meets the combined target; a mapping limitation, not real-material error |
+| Does finer computation improve reliability? | Fixed model, timestep refinement, reference discrepancy and measured cost | Response–cost curves are available; smaller steps do not reduce every profile's error |
+| Does this match real grasping? | Same-apparatus force–displacement, slip and release measurements with uncertainty | Measured references are missing; unanswered |
+
 ## Paired mass and size transfer
 
 Three frozen nominal contact profiles completed30 episodes over10 preregistered mass/size combinations: original engineering checks1/30, transient target0/30, combined0/30. All outcomes independently reproduce; all30 actual initial states and representation checks within the declared scope are complete. **Nominal-scene success does not establish parameter transfer.** No mass/area compensation was applied; failures show that these mappings miss the synthetic target, not that native algorithms are wrong. Internal cooking and combined-law observability remain incomplete.
@@ -26,7 +37,7 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 | Research question | Evidence | Conclusion and boundary |
 |---|---|---|
 | How do the specified grasp configurations behave on ten initial-state perturbations? | Historical complete acceptance: MuJoCo **1/10**, SuperDex **10/10** | Configuration outcomes on this cohort only; differing contact, drives and timesteps prevent engine attribution or physical-accuracy claims |
-| Is the cloth grasp physically valid? | New 9 s development case passes pinch, lift, release and sampled geometry checks; strain 3.52% | Self penetration 1.492 mm is near its limit; one case only, historical failures retained |
+| Which engineering checks does the cloth development case pass? | New 9 s development case passes pinch, lift, release and sampled geometry checks; strain 3.52% | Self penetration 1.492 mm is near its limit; one case only, historical failures retained |
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 

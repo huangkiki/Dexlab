@@ -284,6 +284,45 @@ class SuperDexPlane:
             self.close()
             raise
 
+    def record_geometry(self):
+        """Copy native reference geometry and sampled collider distances at this epoch.
+
+        This BOX fixture uses analytic collision; its reference surface is not an
+        SDF cooking readback. Queries do not change transforms or register forces.
+        """
+        mesh = self.box.get_surface_mesh()
+        shape = self.box.get_reference_shape()
+        bounds = self.p.get_shape_aabb(shape)
+        b = self.case.half_size
+        local = b * np.array([[0, 0, 0], [1, 0, 0], [-1, 0, 0],
+                              [0, 1, 0], [0, 0, -1], [1.5, 0, 0],
+                              [1.5, 1.5, 0]], dtype=float)
+        pose, velocity = self.observe()
+        # Native quaternion order is xyzw; the recorded pose uses wxyz.
+        w, x, y, z = pose[3:]
+        rotation = np.array([
+            [1-2*(y*y+z*z), 2*(x*y-z*w), 2*(x*z+y*w)],
+            [2*(x*y+z*w), 1-2*(x*x+z*z), 2*(y*z-x*w)],
+            [2*(x*z-y*w), 2*(y*z+x*w), 1-2*(x*x+y*y)],
+        ])
+        world = local @ rotation.T + pose[:3]
+        distances = np.empty(len(world), dtype=np.float64)
+        self.box.get_points_distance_to_surface(world, distances)
+        return {
+            "box_collider": self.box.get_collider_type().name,
+            "plane_collider": self.plane.get_collider_type().name,
+            "vertices": np.asarray(mesh.coordinates).reshape(-1, 3).copy().tolist(),
+            "faces": np.asarray(mesh.connectivity).reshape(-1, 3).copy().tolist(),
+            "nodes_per_element": int(mesh.nodes_per_element),
+            "aabb_min": np.asarray(bounds.min).tolist(),
+            "aabb_max": np.asarray(bounds.max).tolist(),
+            "pose": pose.tolist(), "velocity": velocity.tolist(),
+            "local_points": local.tolist(), "world_points": world.tolist(),
+            "distances": distances.tolist(),
+            "time_s": self.clock(),
+            "scope": "Native reference mesh and sampled BOX distances; not SDF cooking or combined contact law",
+        }
+
     def observe(self):
         transform = self.box.get_root_transform()
         xyzw = np.asarray(transform.rotation)

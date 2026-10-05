@@ -1,0 +1,37 @@
+{
+  "archive": "dexlab-native-geometry-v1.tar.gz",
+  "bytes": 703878,
+  "sha256": "3a4f3ac05284a2a27416c994f5eb7946f4016312d383c37d30701c75440f084b",
+  "verified_files": 165,
+  "offline": {
+    "state_arrays_equal": {
+      "time": true,
+      "pose": true,
+      "velocity": true,
+      "contact_force": true,
+      "external_force": true,
+      "contact_known": true,
+      "step_completed": true,
+      "downward_load": true
+    },
+    "complete_arrays": true,
+    "contacts_equal": true,
+    "same_configuration_except_queries": true,
+    "geometry_matches": true,
+    "archive_integrity": true,
+    "original_engineering_passed": {
+      "off": false,
+      "on": false
+    },
+    "original_failures": {
+      "off": [
+        "no_tensile_normal_force"
+      ],
+      "on": [
+        "no_tensile_normal_force"
+      ]
+    },
+    "observation_noninterference_passed": true
+  },
+  "raw_bytes_unchanged": true
+}
