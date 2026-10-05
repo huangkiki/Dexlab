@@ -25,7 +25,7 @@ from dexlab.physx_baseline import digest, write_json
 from dexlab.tasks import contact_plane as contact_task
 
 
-def run(case, engine, output, *, normal_parameters=None):
+def run(case, engine, output, *, normal_parameters=None, measure_step_timing=False):
     if not case.name.startswith("dev-"):
         raise ValueError(
             "This response profile is development-only until calibration and suite freeze"
@@ -65,6 +65,7 @@ def run(case, engine, output, *, normal_parameters=None):
         "source_sha256": hashes,
         "task": contact_task.INDENT_TASK,
         "scope": "Development response measurement, not calibrated engine accuracy",
+        "measure_step_timing": measure_step_timing,
     }
     write_json(output / "run.json", receipt)
     env = None
@@ -86,6 +87,7 @@ def run(case, engine, output, *, normal_parameters=None):
                 "output_dir": str(output),
                 "max_force_n": case.max_force,
                 "normal_parameters": normal if loaded else {},
+                "measure_step_timing": measure_step_timing,
             },
         )
         state = env.init_state()
@@ -111,6 +113,8 @@ def run(case, engine, output, *, normal_parameters=None):
         receipt.update(status="error", error=traceback.format_exc())
     finally:
         if env is not None:
+            if measure_step_timing and env.native is not None:
+                receipt["step_timing"] = getattr(env.native, "step_timing", None)
             try:
                 env.close()
             except Exception:  # noqa: BLE001 -- preserve a native shutdown failure.
@@ -153,6 +157,23 @@ def run(case, engine, output, *, normal_parameters=None):
     result = verify(output)
     write_json(output / "summary.json", result)
     return result
+
+
+def valid_step_timing(receipt, expected_steps):
+    """Check coverage and disjoint timing bounds; this is not timer calibration."""
+    timing = receipt.get("step_timing")
+    if not isinstance(timing, dict) or timing.get("steps") != expected_steps:
+        return False
+    try:
+        values = [timing["native_call_seconds"], timing["observation_seconds"],
+                  receipt["step_and_observation_seconds"]]
+        if any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in values):
+            return False
+        if not all(np.isfinite(value) and value >= 0 for value in values):
+            return False
+        return values[0] + values[1] <= values[2] + 1e-9
+    except KeyError:
+        return False
 
 
 def verify(directory):
@@ -224,6 +245,8 @@ def verify(directory):
                 receipt.get("native", {}),
             )
         )
+    if receipt.get("measure_step_timing"):
+        result["checks"]["complete_native_timing"] = valid_step_timing(receipt, case.steps)
     result["passed"] = all(result["checks"].values())
     return result
 
@@ -238,6 +261,7 @@ def main():
         "--protocol", choices=("indent", "normal-load"), default="indent"
     )
     parser.add_argument("--normal-parameters", type=Path)
+    parser.add_argument("--measure-step-timing", action="store_true")
     args = parser.parse_args()
     if args.verify:
         if (
@@ -246,6 +270,7 @@ def main():
             or args.output
             or args.normal_parameters
             or args.protocol != "indent"
+            or args.measure_step_timing
         ):
             parser.error("--verify cannot be combined with run arguments")
         result = verify(args.verify.resolve())
@@ -259,7 +284,8 @@ def main():
             if args.normal_parameters
             else None
         )
-        result = run(case, args.engine, args.output.resolve(), normal_parameters=normal)
+        result = run(case, args.engine, args.output.resolve(), normal_parameters=normal,
+                     measure_step_timing=args.measure_step_timing)
     print(json.dumps(result, indent=2))
     raise SystemExit(0 if result["passed"] else 1)
 

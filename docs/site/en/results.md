@@ -98,3 +98,11 @@ Each row has a different task and protocol. Retain failure, geometry review and 
 - Historical timings do not share an isolated protocol; no speed ranking.
 - Persistent material-point correspondences are unavailable; slip is unknown, not zero.
 - MuJoCo 3.14.0 has the explicitly scoped development and regression evidence above. Genesis task qualification remains pending; none of these results establishes all-engine or all-task qualification.
+
+## Synthetic response discrepancy and cost
+
+All 27 fixed-profile, three-timestep, three-repeat episodes were independently rescored: nine original combined passes and eighteen retained failures. Worst positive-load window RMS decreases from 2.771 to 0.617 µm for the low-impedance MuJoCo profile; it increases from 9.209 to 13.751 µm for the current SuperDex load-damping profile, which fails unloading no-tension checks at every timestep. The reference is a specified linear spring–damper, not calibrated material data.
+
+![Synthetic response and measured cost](../../evidence/response-cost-v1.png)
+
+[Protocol, timing boundaries, failures and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/RESPONSE_COST.md)

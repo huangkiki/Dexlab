@@ -25,6 +25,7 @@ class ContactPlaneCfg(EnvCfg):
     output_dir: str = ""
     normal_parameters: dict = field(default_factory=dict)
     solver_parameters: dict = field(default_factory=dict)
+    measure_step_timing: bool = False
 
 
 class ContactPlaneEnv(ABEnv):
@@ -111,6 +112,10 @@ class ContactPlaneEnv(ABEnv):
             if self.backend == "isaacsim":
                 raise ValueError("Solver overrides are not supported for this PhysX fixture")
             solver_kwargs["solver_parameters"] = self.cfg.solver_parameters
+        if self.cfg.measure_step_timing:
+            if self.backend == "isaacsim":
+                raise ValueError("Native-call timing is not qualified for this PhysX fixture")
+            solver_kwargs["measure_step_timing"] = True
         self.native = native_class(
             self.case, output, normal_parameters=self.cfg.normal_parameters, **solver_kwargs
         )

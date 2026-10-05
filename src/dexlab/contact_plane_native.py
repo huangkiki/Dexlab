@@ -26,9 +26,10 @@ from dexlab.physx_baseline import digest, write_json
 class MuJoCoPlane:
     """Official MuJoCo; force epoch is the solve that produced the velocity step."""
 
-    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False):
         import mujoco as mj
 
+        self.step_timing = {"native_call_seconds": 0.0, "observation_seconds": 0.0, "steps": 0} if measure_step_timing else None
         self.mj, self.case = mj, case
         identity = mujoco_profile_identity(package_identity("mujoco"),
                                            mj.mj_versionString())
@@ -105,7 +106,9 @@ class MuJoCoPlane:
 
     def step(self, external_force=None):
         self.data.xfrc_applied[1, :3] = 0 if external_force is None else external_force
+        started = time.perf_counter() if self.step_timing is not None else None
         self.mj.mj_step(self.model, self.data)
+        stepped = time.perf_counter() if started is not None else None
         force = np.zeros(3)
         contacts = []
         for i in range(self.data.ncon):
@@ -135,6 +138,10 @@ class MuJoCoPlane:
             )
         pose, velocity = self.observe()
         warnings = self.data.warning.number.tolist()
+        if started is not None:
+            self.step_timing["native_call_seconds"] += stepped - started
+            self.step_timing["observation_seconds"] += time.perf_counter() - stepped
+            self.step_timing["steps"] += 1
         return pose, velocity, force, contacts, not any(warnings), warnings
 
     def clock(self):
@@ -147,13 +154,14 @@ class MuJoCoPlane:
 class SuperDexPlane:
     """Official FP64 API with actual COM state and signed per-contact forces."""
 
-    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False):
         os.environ.setdefault("SUPERDEX_PRECISION", "fp64")
         import trimesh
         from superdex import physics as p
 
         normal = contact_parameters.normal_parameters("superdex", normal_parameters)
         solver_values = contact_parameters.solver_parameters("superdex", solver_parameters)
+        self.step_timing = {"native_call_seconds": 0.0, "observation_seconds": 0.0, "steps": 0} if measure_step_timing else None
         self.p, self.case = p, case
         identity = package_identity("superdex-physics-fp64")
         if identity["version"] != "1.0.0" or not p.uses_double_precision():
@@ -293,7 +301,9 @@ class SuperDexPlane:
             np.arange(3, dtype=np.int32),
             np.zeros(3) if external_force is None else external_force,
         )
+        started = time.perf_counter() if self.step_timing is not None else None
         self.scene.step(self.case.timestep)
+        stepped = time.perf_counter() if started is not None else None
         contacts = []
         for point in self.box.get_contact_points_world():
             sign = 1 if point.actor_a == self.box.get_handle() else -1
@@ -310,10 +320,15 @@ class SuperDexPlane:
             )
         status = self.box.get_convergence_status().name
         pose, velocity = self.observe()
+        force = np.asarray(self.box.get_contact_force_world()).copy()
+        if started is not None:
+            self.step_timing["native_call_seconds"] += stepped - started
+            self.step_timing["observation_seconds"] += time.perf_counter() - stepped
+            self.step_timing["steps"] += 1
         return (
             pose,
             velocity,
-            np.asarray(self.box.get_contact_force_world()).copy(),
+            force,
             contacts,
             status != "DIVERGED",
             status,

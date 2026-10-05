@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import time
 from pathlib import Path
 
 import numpy as np
@@ -24,6 +25,22 @@ def evaluate(root, suite):
         Path(i).name != i or i in (".", "..") for i in ids
     ):
         raise ValueError("Job IDs must be unique directory basenames")
+    measure_timing = plan.get("measure_step_timing", False)
+    if not isinstance(measure_timing, bool):
+        raise ValueError("measure_step_timing must be boolean")
+    budget = plan.get("budget")
+    if measure_timing:
+        if (
+            not isinstance(budget, dict)
+            or budget.get("episodes") != len(ids)
+            or budget.get("parallel_workers") != 1
+            or isinstance(budget.get("batch_seconds"), bool)
+            or not isinstance(budget.get("batch_seconds"), (int, float))
+            or not np.isfinite(budget["batch_seconds"])
+            or budget["batch_seconds"] <= 0
+        ):
+            raise ValueError("Timed studies require a finite serial episode budget")
+    batch_started = time.perf_counter()
     root.mkdir(parents=True, exist_ok=False)
     (root / "suite.json").write_bytes(suite.read_bytes())
     if transient:
@@ -32,13 +49,18 @@ def evaluate(root, suite):
         )
     rows = []
     for job in plan["jobs"]:
+        if measure_timing and time.perf_counter() - batch_started >= budget["batch_seconds"]:
+            raise TimeoutError("Batch budget exhausted; retain incomplete report and raw runs")
         output = root / "raw" / job["id"]
+        episode_started = time.perf_counter()
         result = run(
             LoadCase(**job["case"]),
             job["engine"],
             output,
             normal_parameters=job["normal_parameters"],
+            **({"measure_step_timing": True} if measure_timing else {}),
         )
+        episode_wall = time.perf_counter() - episode_started
         rows.append(
             {
                 "id": job["id"],
@@ -48,6 +70,12 @@ def evaluate(root, suite):
                 "result": result,
             }
         )
+        if measure_timing:
+            rows[-1]["episode_wall_seconds"] = episode_wall
+            rows[-1]["wall_scope"] = (
+                "Full run() call: source snapshot, preparation, stepping, recording, "
+                "cleanup and independent scoring; excludes batch admission and startup"
+            )
         if transient:
             with np.load(output / "states.npz", allow_pickle=False) as data:
                 rows[-1]["transient"] = contact_transient.score(
@@ -69,6 +97,9 @@ def evaluate(root, suite):
                     r["result"]["passed"] and r["transient"]["passed"] for r in rows
                 ),
             )
+        if measure_timing:
+            report["batch_elapsed_seconds"] = time.perf_counter() - batch_started
+            report["timing_scope"] = "Serial instrumented runs; not pure solver kernel time"
         write_json(root / "report.json", report)
         print(job["id"], result["passed"], flush=True)
     return report
@@ -103,6 +134,16 @@ def rescore(root):
             job["engine"], job["normal_parameters"]
         ):
             raise ValueError("Run differs from declared native profile")
+        if plan.get("measure_step_timing"):
+            wall = row.get("episode_wall_seconds")
+            if (
+                receipt.get("measure_step_timing") is not True
+                or isinstance(wall, bool)
+                or not isinstance(wall, (int, float))
+                or not np.isfinite(wall)
+                or wall < receipt["total_seconds"]
+            ):
+                raise ValueError("Missing or inconsistent full-call timing")
         if verify(folder) != row["result"]:
             raise ValueError(f"Outcome differs: {row['id']}")
         if transient:
