@@ -197,9 +197,24 @@ def execute_episode(job_path: Path) -> None:
     from dexlab.tasks.apple_stem import TASK
 
     job = json.loads(job_path.read_text())
-    expected_source = json.loads((job_path.parent.parent / "run.json").read_text())[
-        "source_hashes"
-    ]
+    signature = json.loads((job_path.parent.parent / "run.json").read_text())
+    expected_source = signature["source_hashes"]
+    if job["case"]["split"] == "test" and not signature.get("admission"):
+        raise ValueError("Held-out worker requires frozen formal admission")
+    if job not in signature["jobs"]:
+        raise ValueError("Worker job differs from the frozen batch")
+    def check_admission():
+        if "admission" in signature:
+            from dexlab.apple_admission import observe_runtime, apple_profile, profile_key
+            from dexlab.engine_versions import verify_frozen_runtime
+
+            profiles = {}
+            for frozen_job in signature["jobs"]:
+                profile = apple_profile(frozen_job["backend"], frozen_job["parameters"])
+                profiles[profile_key(profile)] = profile
+            verify_frozen_runtime(signature["admission"], task="apple-stem", profiles=profiles,
+                                  source_hashes=source_hashes(), runtime=observe_runtime())
+    check_admission()
     if source_hashes() != expected_source:
         raise RuntimeError("Source changed after benchmark was frozen")
     env = registry.make(
@@ -223,6 +238,7 @@ def execute_episode(job_path: Path) -> None:
             raise RuntimeError(
                 "Source changed during this episode; refusing mixed-code evidence"
             )
+        check_admission()
         engine = json.loads((job_path.parent / "engine.json").read_text())
         write_json(
             job_path.parent / "timing.json",
@@ -349,6 +365,11 @@ def run_suite(args: argparse.Namespace) -> dict:
     spec = read_suite(args.suite)
     cases = select_cases(spec, args.split, args.case)
     backends = ("mujoco", "superdex") if args.backend == "all" else (args.backend,)
+    formal = any(case["split"] == "test" for case in cases)
+    if formal and not getattr(args, "qualification_records", None) and not getattr(args, "resume", False):
+        from dexlab.engine_versions import require_formal_batch_qualification
+
+        require_formal_batch_qualification("apple-stem", backends)
     factors = spec["timestep_sweep_factors"] if args.timestep_sweep else [1.0]
     jobs = []
     for case in cases:
@@ -375,6 +396,25 @@ def run_suite(args: argparse.Namespace) -> dict:
         "environment": environment(),
         "timeout_seconds": args.timeout,
     }
+    if formal:
+        from dexlab.apple_admission import admit_records, apple_profile, observe_runtime, profile_key
+        from dexlab.engine_versions import verify_frozen_runtime
+
+        profiles = {}
+        for job in jobs:
+            profile = apple_profile(job["backend"], job["parameters"])
+            profiles[profile_key(profile)] = profile
+        if args.resume:
+            frozen = json.loads((args.output / "run.json").read_text()).get("admission")
+            if not frozen:
+                raise ValueError("Historical batch has no formal admission; offline reporting remains available")
+            verify_frozen_runtime(frozen, task="apple-stem", profiles=profiles, source_hashes=signature["source_hashes"],
+                                  runtime=observe_runtime())
+        else:
+            record_map = json.loads(args.qualification_records.read_text())
+            frozen = admit_records(record_map, profiles, signature["source_hashes"],
+                                   wheel_dir=getattr(args, "qualification_wheels", None))
+        signature["admission"] = frozen
     signature["source_snapshots"] = {
         name: digest
         for name, digest in signature["source_hashes"].items()
@@ -471,6 +511,10 @@ def main() -> None:
     run.add_argument("--backend", choices=("all", "mujoco", "superdex"), default="all")
     run.add_argument("--output", type=Path, required=True)
     run.add_argument("--resume", action="store_true")
+    run.add_argument("--qualification-records", type=Path,
+                     help="Private JSON mapping profile keys to original qualification-run directories")
+    run.add_argument("--qualification-wheels", type=Path,
+                     help="Private directory with exact official wheels for new batch qualification")
     run.add_argument("--timestep-sweep", action="store_true")
     run.add_argument("--timeout", type=float, default=1200)
     report = commands.add_parser("report")

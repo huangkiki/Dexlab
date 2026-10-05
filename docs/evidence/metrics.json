@@ -1,0 +1,194 @@
+{
+  "apple.native_depth": {
+    "unit": "m",
+    "frame": "native contact separation",
+    "window": "all physics steps [0,14)",
+    "definition": "max native recorded overlap over apple/right-hand contact points; backend-specific contact construction",
+    "approximation": "Native contacts and SDF discretization; not a common reference-surface distance",
+    "description_zh": "苹果与右手原生接触点的重叠最大值；引擎接触定义与 SDF 离散各异，不是全表面精度"
+  },
+  "apple.wrist_translation": {
+    "unit": "m",
+    "frame": "wrist frame",
+    "window": "all physics steps [11,14)",
+    "definition": "max norm of wrist-frame apple position minus first held position",
+    "approximation": "Object pose drift; no persistent contact-material correspondence",
+    "description_zh": "保持期苹果在腕部坐标系的位置相对首帧最大位移；不是材料点滑移"
+  },
+  "apple.wrist_rotation": {
+    "unit": "rad",
+    "frame": "wrist frame",
+    "window": "all physics steps [11,14)",
+    "definition": "max relative orientation geodesic angle from first held pose",
+    "approximation": "Object rotation; distinct from translation and rolling/sliding classification",
+    "description_zh": "保持期相对首帧姿态的最大旋转角；不判定滚动或滑动"
+  },
+  "apple.clearance": {
+    "unit": "m",
+    "frame": "world z",
+    "window": "all physics steps [11,14)",
+    "definition": "minimum recorded apple lowest-point height above tabletop",
+    "approximation": "Uses the recorded geometry-based clearance approximation",
+    "description_zh": "保持期苹果最低点相对桌面最小高度；沿用记录中的几何近似"
+  },
+  "apple.support": {
+    "unit": "1",
+    "frame": "world z",
+    "window": "all physics steps [11,14)",
+    "definition": "mean total hand contact force z / (mass*9.81)",
+    "approximation": "Net measured hand force, not commanded force or per-contact normal load",
+    "description_zh": "保持期手部总接触力竖直分量均值除以重力；不是指令力或法向夹紧力"
+  },
+  "apple.momentum": {
+    "unit": "1",
+    "frame": "world vector",
+    "window": "all physics steps [0,14)",
+    "definition": "max norm(total force - gravity - mass*delta_velocity/dt) / weight",
+    "approximation": "Step-end force/velocity epoch in the frozen native log; not energy conservation",
+    "description_zh": "全程逐步力与速度增量的动量残差最大值除以重力；不是能量守恒误差"
+  },
+  "cloth.ground_depth": {
+    "unit": "m",
+    "frame": "world z",
+    "window": "every recorded physics state, initial included",
+    "definition": "max(0, collision_radius - minimum vertex z)",
+    "approximation": "Plane reference; prescribed collision radius, not measured cloth thickness",
+    "description_zh": "相对地平面的最大顶点侵入，包含设定碰撞半径；不等于实测布厚"
+  },
+  "cloth.sphere_depth": {
+    "unit": "m",
+    "frame": "world geometry",
+    "window": "every recorded physics state, initial included",
+    "definition": "max(0, sphere_radius + collision_radius - closest triangle-interior distance)",
+    "approximation": "Triangle interiors and declared sphere, not native contact depth",
+    "description_zh": "三角形内部到球心最近距离与球半径加碰撞半径之差的正部最大值"
+  },
+  "cloth.edge_strain": {
+    "unit": "1",
+    "frame": "material rest edges",
+    "window": "every recorded physics state, initial included",
+    "definition": "max absolute(edge_length/rest_length - 1)",
+    "approximation": "Edge strain only; not continuum stress or material calibration",
+    "description_zh": "相对静止边长的绝对应变最大值；不是连续介质应力或材料标定"
+  },
+  "cloth.pin_error": {
+    "unit": "m",
+    "frame": "world relative to fixed rest vertices",
+    "window": "every recorded physics state, initial included",
+    "definition": "max pinned-vertex displacement from rest",
+    "approximation": "Prescribed boundary condition; not robot grasp quality",
+    "description_zh": "固定顶点相对初始位置的最大位移；用于边界条件检查"
+  },
+  "cloth.final_tip_sag": {
+    "unit": "m",
+    "frame": "world z relative to rest",
+    "window": "last physics state",
+    "definition": "mean(rest_z - final_z) over declared tip vertices",
+    "approximation": "Signed displacement; positive downwards; not measured material error",
+    "description_zh": "末帧自由端相对静止高度的平均下垂，向下为正；不是实测误差"
+  },
+  "cloth.crossing_pairs": {
+    "unit": "count",
+    "frame": "world zero-thickness triangles",
+    "window": "sampled surface audit; see surface_coverage",
+    "definition": "maximum intersecting nonadjacent triangle pairs across audited frames",
+    "approximation": "Shared-vertex pairs excluded; no thickness overlap or continuous-time guarantee",
+    "description_zh": "抽样帧内非相邻三角形交叉对数最大值；排除共享顶点，不保证厚度或帧间无交叉"
+  },
+  "robot_cloth.table_depth": {
+    "unit": "m",
+    "frame": "verified table boxes",
+    "window": "25 Hz saved states [0,9)",
+    "definition": "max interior depth over zero-thickness triangle interiors in table box union",
+    "approximation": "LP diagnostic; capped by half 6mm table thickness, not vertical/native penetration; no new pass threshold",
+    "description_zh": "桌体盒并集内零厚度三角形的最大内部深度；上界为桌厚一半，不是竖直或原生穿透，不新设通过阈值"
+  },
+  "robot_cloth.intrusion_frames": {
+    "unit": "count",
+    "frame": "verified table boxes",
+    "window": "25 Hz saved states [0,9)",
+    "definition": "number of frames with interior depth > numerical zero 1e-8 m",
+    "approximation": "Observed frame count, not continuous duration or a new physical tolerance",
+    "description_zh": "超过数值零容差 1e-8 m 的侵入帧数；不是连续时间或新增物理容差"
+  },
+  "robot_cloth.anchor_error": {
+    "unit": "m",
+    "frame": "material point versus moving grasp anchor",
+    "window": "100 Hz trace samples in [2, hold_end); hold_end from summary.schedule_s",
+    "definition": "max norm of selected material-point position minus kinematic anchor",
+    "approximation": "Includes normal separation, deformation and tangential motion; not accumulated slip",
+    "description_zh": "选定材料点相对运动学锚点的最大距离，混合分离、形变与切向运动；不是累计滑移"
+  },
+  "robot_cloth.lift": {
+    "unit": "m",
+    "frame": "world z",
+    "window": "100 Hz trace samples in [2, hold_end); hold_end from summary.schedule_s",
+    "definition": "maximum selected material-point z minus planned material-point initial z",
+    "approximation": "One selected material point, not minimum whole-cloth clearance",
+    "description_zh": "保持窗口中选定材料点相对计划初始点的最大抬升；不是末帧值或整布最小离桌高度"
+  },
+  "plane.box_depth": {
+    "unit": "m",
+    "frame": "world z above z=0 plane",
+    "window": "every recorded physics state, initial included",
+    "definition": "max(0, -minimum transformed box-corner z)",
+    "approximation": "Analytical box-plane geometry; separate from native soft-contact distance",
+    "description_zh": "变换后盒顶点相对 z=0 平面的最大侵入；独立解析几何，不是原生软接触距离"
+  },
+  "cylinder.sat_depth": {
+    "unit": "m",
+    "frame": "relative rigid-body geometry",
+    "window": "every recorded physics state, initial included",
+    "definition": "max SAT overlap of cylinder prism against either pad box",
+    "approximation": "Declared polygonal prism, not ideal cylinder; sections/faceting remain in receipt",
+    "description_zh": "离散棱柱与两指盒的 SAT 重叠最大值；不是理想圆柱，边数及离散误差见原始配置"
+  },
+  "contact.momentum": {
+    "unit": "1",
+    "frame": "world vector",
+    "window": "every physics transition",
+    "definition": "max norm(mass*delta_velocity/dt - contact - external + gravity) / weight",
+    "approximation": "Net native force on tested body at declared step epoch, not contact command",
+    "description_zh": "被测刚体逐步动量残差最大值除以重力；使用原生合力及声明时序，不是指令值"
+  },
+  "normal.static_error": {
+    "unit": "1",
+    "frame": "world z box-plane indentation",
+    "window": "last 50 ms of 2,4,6 N plateaus",
+    "definition": "max abs(mean indentation - load/20000) / (load/20000)",
+    "approximation": "Synthetic 20 kN/m target; 2/6 N fit and 4 N validation; not hardware accuracy",
+    "description_zh": "2/4/6 N 平台末 50 ms 压入均值相对 20 kN/m 合成目标的最大相对误差；不是硬件精度"
+  },
+  "normal.plateau_std": {
+    "unit": "m",
+    "frame": "world z box-plane indentation",
+    "window": "last 50 ms of each positive-load plateau",
+    "definition": "maximum population standard deviation among 2,4,6 N plateaus",
+    "approximation": "Mean removed only; slow drift remains; not detrended jitter",
+    "description_zh": "三个正载荷平台末 50 ms 的总体标准差最大值；仅去均值，仍包含慢漂移"
+  },
+  "normal.transient_rms": {
+    "unit": "m",
+    "frame": "world COM displacement",
+    "window": "first 50 ms after t=0,0.2,0.4; onset excluded",
+    "definition": "maximum per-window RMS error against m*xdd+40*xd+20000*x=load",
+    "approximation": "Exact underdamped synthetic response; no offset/time fit; excludes detachment",
+    "description_zh": "各加载起点后 50 ms 对合成阻尼弹簧响应的最大窗口 RMS 误差；不拟合时移或偏置，不含脱离阶段"
+  },
+  "normal.transient_peak": {
+    "unit": "m",
+    "frame": "world COM displacement",
+    "window": "first 50 ms after t=0,0.2,0.4; onset excluded",
+    "definition": "maximum absolute error across the three transient windows",
+    "approximation": "Same synthetic reference as transient_rms; not fitted material dynamics",
+    "description_zh": "三个瞬态窗口的最大绝对误差；与 RMS 使用同一合成参考，不是材料动力学实测"
+  },
+  "material_slip": {
+    "unit": "m",
+    "frame": "persistent paired material points projected on contact tangent",
+    "window": "unavailable",
+    "definition": "cumulative relative tangential material displacement would be required",
+    "approximation": "No persistent material-pair record exists; value must be null, never zero",
+    "description_zh": "缺少持久接触材料点对应与切向轨迹；必须记为 null，不能用零或腕部漂移替代"
+  }
+}

@@ -15,6 +15,8 @@ from pathlib import Path
 
 import numpy as np
 
+from dexlab.engine_versions import mujoco_profile_identity
+
 from dexlab import contact_archive, contact_parameters
 from dexlab.cloth_engines import package_identity
 from dexlab.contact_plane import LIMITS, PlaneCase, score
@@ -28,9 +30,8 @@ class MuJoCoPlane:
         import mujoco as mj
 
         self.mj, self.case = mj, case
-        identity = package_identity("mujoco")
-        if identity["version"] != "3.11.0":
-            raise ValueError("The frozen native profile requires MuJoCo 3.11.0")
+        identity = mujoco_profile_identity(package_identity("mujoco"),
+                                           mj.mj_versionString())
         normal = contact_parameters.normal_parameters("mujoco", normal_parameters)
         solref = " ".join(map(str, normal["solref"]))
         solimp = " ".join(map(str, normal["solimp"]))

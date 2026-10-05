@@ -1,121 +1,137 @@
+<div align="center">
+
 # DexLab
 
-[简体中文](README.md) | [English](README.en.md)
+**Robot contact dynamics: from models and parameters to verifiable experimental findings.**
 
-**Robot contact-dynamics experiments built on UniLab: audit models, measure contact behavior, and reproduce grasps.**
+[Documentation](docs/site/en/index.md) · [简体中文](README.md) · [Experiments](demos/) · [Results and data](docs/evidence/README.md) · [Research issues](https://github.com/huangkiki/Dexlab/issues)
 
-DexLab uses reproducible rigid grasping and cloth experiments to study penetration, jitter, slip, and numerical stability. Cases include **OpenArm dual arms with Wuji hands grasping an apple stem and pinching cloth**, plus cloth extension, sag, and collision tests across solvers. Each experiment retains parameter provenance, raw trajectories, independent checks, and failed records.
+</div>
 
-[Quick start](#run) · [Results](#results) · [Diagnostics](#model-audits-and-diagnostics) · [Task and evidence inventory](docs/inventory/README.md) · [Research methods](docs/research-focus.md) · [Releases](https://github.com/huangkiki/Dexlab/releases)
+> Archival infrastructure: local archival now verifies hard memory, CPU and disk I/O limits before starting. Failures retain sources and receipts. Success, timeout and isolated OOM checks passed; both historical backend archives passed bounded offline readback. [Execution limits](docs/remote-research.md#hard-bounds-for-local-archival)
 
-## MuJoCo
+DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
-![MuJoCo stem-grasp close-up](demos/apple-stem-grasp/media/mujoco-sdf.gif)
+## Local execution and autonomous delivery
 
-## SuperDex
+Experiments now prefer a qualified local host, with measured headroom, enforced cgroup limits and zero experiment swap. Priority review precedes each task; interrupted jobs resume from verified handles. Remote execution is optional. [Execution and recovery protocol](docs/autoresearch.md#local-first-execution-and-recovery).
 
-![SuperDex stem-grasp close-up](demos/apple-stem-grasp/media/superdex-sdf.gif)
+## Dexterous task roadmap
 
-## PhysX
+The [research evidence ledger](docs/dexterity-ledger.md) covers38 paper identities and19 repository entrypoints, distinguishing targeted source audits, abstract screening and unverified runtimes. Conclusions: independently score native task success; distinguish targets, estimated effort and tactile proxies from measured data; exclude custom-engine and historical profiles from latest-stable comparisons. Optional replay #52 and tactile-history #53 have dependencies and budgets.
 
-![PhysX stem-grasp close-up](demos/physx-contact/media/physx-sdf.gif)
+Current implementations focus on holding and contact diagnostics. The [six-layer research map](docs/dexterity-roadmap.md) connects ManiSkill, grasp evaluation, tactile sensing, data generation and embodiment research to concrete experiments. [Native ManiSkill tasks #47](https://github.com/huangkiki/Dexlab/issues/47) and [in-hand rotation #48](https://github.com/huangkiki/Dexlab/issues/48) are planned, **not implemented or supported yet**.
 
-Each GIF shows a continuous 14-second approach, pinch, lift and hold. The apple-following camera is presentation only; MuJoCo renders actual poses recorded from each engine. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video and recording](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX video and reproduction](demos/physx-contact/apple.md)
+## Current findings
 
-## Robot cloth grasp
+| Research question | Evidence | Conclusion and boundary |
+|---|---|---|
+| Can dynamics lift an apple by its stem? | Default cases pass; historical ten-scene regression: MuJoCo **1/10**, SuperDex **10/10** | Fixed-configuration robustness, **not a physical-accuracy ranking** |
+| Is the cloth grasp physically valid? | Cloth/table intersection in **176/225** saved frames; maximum interior depth **3.00 mm** | Missed detection corrected; physical repair remains incomplete |
+| How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
+| Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
-![Wuji cloth pinch, lift and release close-up](demos/cloth-folding/media/grasp.gif)
+Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) is planned, without runtime results yet.
 
-**Reassessment: this cloth recording intersects the table and does not establish a physically valid grasp.** The legacy protocol passed, but the new scorer finds triangle interiors inside the table in 176 of 225 saved frames, with a maximum interior depth of 3.00 mm. The GIF continuously replays the original 9-second trajectory with the success caption corrected; physical repair is tracked in [#32](https://github.com/huangkiki/Dexlab/issues/32). Control still uses known state and scripted joints, with no cloth attachments.
+## Key experimental results
 
-![Cloth table-intersection diagnostic](demos/cloth-folding/media/table-diagnostic.svg)
+### Apple stem: robustness and where failures occur
 
-The curve measures zero-thickness triangle interiors inside the table, not native contact distance or a new physical threshold. [Old/new scores, measurements and coverage](demos/cloth-folding/SCORING.md) · [Video and reproduction](demos/cloth-folding/README.md)
+Ten frozen scenes vary mass, horizontal position and orientation: twenty runs, without retuning for these cases.
 
-## Engines and experiments
-
-| Native profile | Current validation scope |
-|---|---|
-| MuJoCo 3.11.0 | SDF–SDF stem grasp, flex cloth, and frictional robot cloth grasp |
-| SuperDex 1.0.0 FP64 | SDF–SDF stem grasp and experimental triangle shells |
-| Newton XPBD / VBD / Style3D / SemiImplicit / Featherstone | Cloth experiments on a pinned upstream version; material and self-contact capabilities documented per solver |
-| PhysX / Isaac Sim 5.1 | [SDF–SDF stem grasp](demos/physx-contact/apple.md), [primitive contacts and drives](demos/physx-contact/README.md), [54-joint motion](demos/physx-contact/robot.md); independent surface checks pass, failed controls retained; [native surface cloth](demos/physx-contact/cloth.md) |
-
-The cloth benchmark completed **105 frozen held-out episodes: 52 passed the protocol checks and 53 failed, with no timeouts**. Cases cover extension, sag, sphere drape, and folded drop. Nominal materials are not calibrated across solvers; pass counts do not rank physical accuracy. [All results and reproduction](demos/cloth-benchmark/README.md#held-out-results)
-
-Contact-mechanics development covers sliding, loading/unloading and two-pad load sweeps. Original failures are retained; refining the same cylinder surface lets SuperDex pass all four development hold/drop conditions. Cross-engine material calibration remains incomplete. [Experiments, failures and reproduction](demos/contact-benchmark/README.md).
-
-A separate normal-loading protocol completed 17 development checks: 11 passes and 6 failures. Mass transfer and settling remain distinct from matching static stiffness. [Response fitting and retained failures](demos/contact-benchmark/NORMAL_RESPONSE.md).
-
-Apple SDF grasping is registered and stepped through **UniLab**, with native scenes owned by DexLab. PhysX rigid-body qualifications use **UniSim's Isaac Sim backend**; the separate cloth task reuses its runtime discovery. Rigid and cloth experiments have separate scores; incomplete and unsupported capabilities remain explicit.
-
-PhysX native surface cloth adds **15 frozen held-out cases: 10 passes, one surface-crossing failure and four unsupported force-extension cases**. Eight of nine development refinement runs pass; repeat and refined-mesh failures are retained. [Results, GIF and raw evidence](demos/physx-contact/cloth.md)
-
-A further 12 predeclared contact-transient experiments retain six combined passes and six failures. Timestep refinement separates contact-law mismatch from numerical error, including tensile-release failures. [Parameters, curves and reproduction](demos/contact-benchmark/TRANSIENT_RESPONSE.md).
-
-## Grasp details
-
-- The right thumb and index finger pinch the stem; the left arm stays parked. The apple and stem form **one free 0.2 kg rigid body**.
-- The apple and both fingertip pads use **SDF collision geometry**. There are no attachment constraints, direct object position drives, or engine source patches.
-- Control uses **known object poses, inverse kinematics, and scripted joint targets**. This is not a visual policy or a learned skill; no model API key is needed.
-- Engines are tuned separately. MuJoCo uses SDF contact search and soft constraints at **0.5 ms**; SuperDex uses surface integration and smooth penalty energy at **2 ms**; PhysX uses native SDF contact and TGS at **1 ms**, with an explicit torsional patch radius. Shared source surfaces do not imply identical discrete geometry or contact laws.
-
-Independent checks cover clearance, two-finger support, penetration, wrist-relative motion, and momentum balance during a continuous three-second hold. Fruit-body contact is allowed during approach. The GIFs show the default scene; stem bending, fracture and hardware accuracy are not validated.
-
-[MuJoCo acceptance](demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json) · [SuperDex acceptance](demos/apple-stem-grasp/evidence/sdf-superdex/summary.json) · [Parameters and engine internals](docs/sdf-backends.md)
-
-## Results
-
-Apple-stem grasping completed **10 frozen paired cases: 20 episodes across both backends**. Mass, horizontal position and yaw were perturbed without retuning the released policies on these cases.
-
-| Configuration | Passed full acceptance | Success rate, 95% Wilson interval |
+| Historical configuration | Complete acceptance | 95% Wilson interval |
 |---|---:|---:|
-| MuJoCo 3.11.0, 0.5 ms | 1 / 10 | 1.8–40.4% |
-| SuperDex 1.0.0 FP64, 2 ms | 10 / 10 | 72.2–100% |
+| MuJoCo 3.11.0 · 0.5 ms | 1 / 10 | 1.8–40.4% |
+| SuperDex 1.0.0 FP64 · 2 ms | 10 / 10 | 72.2–100% |
 
-These measure separately configured task robustness, **not engine accuracy**. All failures and raw evidence are retained. Six additional timestep episodes completed; MuJoCo at 0.25 ms failed the penetration limit, so refinement did not improve acceptance monotonically. A separate 100-case test set is frozen but has not completed evaluation.
+![Per-case contact overlap, wrist displacement and full-protocol failure](docs/evidence/apple-metrics.svg)
 
-PhysX currently passes one development grasp scene and is not included in that held-out evaluation. Native separation and independent reference-surface penetration are reported separately. [Parameters, failures and measurement scope](demos/physx-contact/apple.md)
+Crosses denote complete-acceptance failure. Native contact overlap and independent surface intrusion are different quantities; **wrist displacement is not material slip**. Timesteps, friction and drives differ, preventing an engine-quality ranking. PhysX has a separate development case outside this held-out cohort.
 
-[Protocol, all results and reproduction](docs/benchmark.md) · [Default demo measurements](docs/sdf-backends.md#results-and-limits) · [Diagnostic definitions](docs/jitter.md)
+[Protocol and failures](docs/benchmark.md) · [Definitions and rescoring](docs/evidence/README.md) · [Raw-data provenance](docs/evidence/cohorts.json)
 
-## Run
+### Cloth: a plausible-looking grasp still fails geometry checks
 
-Linux x86_64; install [uv](https://docs.astral.sh/uv/getting-started/installation/) first.
+![Cloth/table intersection timeline](demos/cloth-folding/media/table-diagnostic.svg)
+
+The original continuous nine-second record intersects the table in 176 of 225 saved frames. The diagnostic covers zero-thickness triangles, not continuous finite-thickness separation. **A scoring fix is not a physics fix**; full pinch, lift and release remain under [#32](https://github.com/huangkiki/Dexlab/issues/32).
+
+[Old/new scores and coverage](demos/cloth-folding/SCORING.md)
+
+<details>
+<summary><strong>All outcomes from seven complete historical cohorts</strong></summary>
+
+![Historical cohort outcomes](docs/evidence/outcomes.svg)
+
+Each row uses a different task/protocol. Keep failures, unsupported outcomes and development/held-out splits; do not collapse them into an engine score. [Technical report](docs/evidence/README.md)
+
+</details>
+
+## Continuous close-up demonstrations
+
+<table>
+<tr><th>MuJoCo · default development case</th><th>SuperDex FP64 · default development case</th></tr>
+<tr><td><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" alt="Continuous MuJoCo stem grasp" width="100%"></td><td><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" alt="Continuous SuperDex stem grasp" width="100%"></td></tr>
+<tr><th>PhysX · separate development case</th><th>Robot cloth · geometry failure</th></tr>
+<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="Continuous PhysX stem grasp" width="100%"></td><td><img src="demos/cloth-folding/media/grasp.gif" alt="Cloth replay retaining table-intersection failure" width="100%"></td></tr>
+</table>
+
+Apple GIFs continuously show fourteen seconds of approach, closing, lifting and holding. The display camera serves playback only. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX report](demos/physx-contact/apple.md) · [Cloth report](demos/cloth-folding/README.md)
+
+## Method and engine differences
+
+OpenArm dual arms with Wuji hands: the right thumb/index pinch while the left arm is parked. Apple and stem form a **0.2 kg free rigid body**; apple and both pads use SDF collision geometry. There is no object attachment, object-position drive or engine patch. Control uses **known poses, IK and scripted joint targets**, not a visual policy or learned skill.
+
+| Historical backend | Contact implementation | Step | Disclosed approximations |
+|---|---|---:|---|
+| MuJoCo | SDF contact search + soft constraints | 0.5 ms | SDF discretization, contact points and constraint settings |
+| SuperDex FP64 | Surface-sampling integration + smooth penalty energy | 2 ms | Sampling density, smoothing and penalty response |
+| PhysX | Native SDF contacts + TGS | 1 ms | SDF resolution, discrete contacts and torsional radius |
+
+The hold window is 11–14 s, checking lift, two-pad support, penetration, wrist displacement and momentum balance. Fruit contact is allowed during approach. Matching source surfaces do not imply matching discrete geometry or contact laws. Stem bending and fracture are not modeled.
+
+[Parameter provenance and implementation](docs/sdf-backends.md) · [Benchmark design](docs/site/en/benchmark.md) · [Model audit](docs/model-audit.md)
+
+## Experiment code and documentation
+
+| Experiment | Code | Detailed report |
+|---|---|---|
+| Apple stem grasp | [apple-stem-grasp](demos/apple-stem-grasp/) | [Run and score](demos/apple-stem-grasp/README.md) |
+| Robot cloth grasp | [cloth-folding](demos/cloth-folding/) | [Failure review](demos/cloth-folding/SCORING.md) |
+| Contact, drives and transients | [contact-benchmark](demos/contact-benchmark/) | [Results](demos/contact-benchmark/README.md) |
+| Multi-solver cloth | [cloth-benchmark](demos/cloth-benchmark/) | [Materials and held-out cases](demos/cloth-benchmark/README.md) |
+| PhysX contact and cloth | [physx-contact](demos/physx-contact/) | [Capabilities and limits](demos/physx-contact/README.md) |
+
+**[Documentation source](docs/site/en/index.md) · [中文文档](docs/site/zh/index.md)**. The site maintains getting started, experiments, results, engine methods, benchmarks and contribution guidance. Both languages use a strict Sphinx build; deployment configuration is included. An online address will be announced after deployment verification.
+
+## Latest-stable qualification
+
+Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.
+
+The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.
+
+The local candidate passes **346 unit tests**. Migration tree `8ac3d71` completed both 14-second MuJoCo 3.14 and SuperDex FP64 grasps with independent acceptance; all five participating packages subsequently matched official wheels against installed code. The added provenance admission still needs final-source regression; no completed formal benchmark is claimed. Cloth remains unqualified: drape intrusion is 2.656 mm against 1.5 mm, robot-cloth strain is 5.48% against 5%, and independent auditing detects table intrusion. Engine code and physical acceptance limits remain unchanged.
+
+The latest robot-cloth contrast still fails: 5.48% strain exceeds its bound, and independent geometry auditing detects table intrusion from the first frame. See the [migration report](docs/engine-qualification.md).
+
+## Quick reproduction
+
+On Linux x86_64, install [uv](https://docs.astral.sh/uv/getting-started/installation/) and reproduce the original pinned demo:
 
 ```bash
 git clone https://github.com/huangkiki/Dexlab.git
 cd Dexlab
 bash scripts/setup.sh
 bash demos/apple-stem-grasp/run.sh --backend mujoco
-# or
-bash demos/apple-stem-grasp/run.sh --backend superdex
+# Or --backend superdex; add --headless without a display
 ```
 
-The viewer opens after SDF preparation and planning; add `--headless` on a server. Both commands step the registered **UniLab task `DexLab-AppleStem-v0`**. DexLab currently owns the native SDF scenes; these have not been replaced by UniSim's built-in backends.
+No model API key is needed. The window opens after SDF preparation and planning. UniLab registers and steps the task; DexLab owns the native scene. [Installation](docs/installation.md) · [Documentation-only build](docs/site/en/quickstart.md#build-documentation-only)
 
-[Installation](docs/installation.md) · [Task API and reproduction](demos/apple-stem-grasp/README.md) · [Autoresearch and issues](docs/autoresearch.md)
+## Contributing and acknowledgments
 
-## Model audits and diagnostics
+Submit reproducible problems, parameter studies and failures as [issues](https://github.com/huangkiki/Dexlab/issues). Experiment PRs update findings, plots and bilingual reports; internal-only changes explain when no homepage update is needed. [Development and release workflow](docs/autoresearch.md)
 
-Each grasp run exports model-audit JSON. The MuJoCo path records both native source and compiled parameters. Intentional massless coordinate frames are distinguished from errors; the report never silently repairs a model.
+Thanks to [UniLab](https://github.com/unilabsim/UniLab), [Project SuperDex](https://github.com/unilabsim/project_superdex), [MuJoCo](https://github.com/google-deepmind/mujoco), [Newton](https://github.com/newton-physics/newton), [OpenArm](https://github.com/enactic/openarm) and [Wuji](https://github.com/wuji-technology). Documentation organization draws on [RLinf](https://github.com/RLinf/RLinf). The SuperDex grasp appears in [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex); Astra assisted development and debugging.
 
-```bash
-# Recheck model parameters without rerunning physics
-.venv/bin/python -m dexlab.model_audit \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf/model-audit.mujoco.json
-# Measure jitter and contact interruptions from existing step records
-.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/latest-mujoco-sdf
-```
-
-The [model audit](docs/model-audit.md) explains parameters and initial overlaps. [Jitter diagnostics](docs/jitter.md) explain load, missing records and duration bounds. Reports do not establish hardware calibration, and current logs are insufficient for a full-system energy balance.
-
-## Contributing experiments
-
-Submit reproducible problems, parameter experiments and failed trials as an [Issue](https://github.com/huangkiki/Dexlab/issues), including code version, commands, parameter sources, raw records and expected acceptance criteria. Autoresearch handles explicitly queued tasks, preserves failures and never relaxes thresholds to manufacture success. Validated and reviewed changes are automatically merged and released; unresolved problems are fixed or recorded as blockers. [Workflow and release policy](docs/autoresearch.md)
-
-## Acknowledgments
-
-Thanks to [UniLab](https://github.com/unilabsim/UniLab), [Project SuperDex](https://github.com/unilabsim/project_superdex), [MuJoCo](https://github.com/google-deepmind/mujoco), [Newton](https://github.com/newton-physics/newton), [OpenArm](https://github.com/enactic/openarm), and [Wuji](https://github.com/wuji-technology). The SuperDex grasp appears in [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex); Astra assisted development and debugging.
-
-Code: [Apache-2.0](LICENSE). Third-party assets retain their own terms; see [asset sources](docs/ASSETS.md).
+Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs/ASSETS.md).

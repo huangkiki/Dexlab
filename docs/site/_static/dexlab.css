@@ -1,0 +1,60 @@
+html[data-theme="light"] {
+  --pst-color-primary: #2458d3;
+  --pst-color-link: #2458d3;
+  --pst-color-background: #fff;
+  --pst-color-on-background: #fff;
+  --pst-color-text-base: #27334a;
+  --pst-color-text-muted: #647086;
+}
+html[data-theme="dark"] { --pst-color-primary: #91b1ff; --pst-color-link: #91b1ff; }
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", sans-serif; }
+.bd-header { box-shadow: none; border-bottom: 1px solid var(--pst-color-border); }
+.navbar-brand { font-weight: 800; letter-spacing: -.04em; }
+.navbar-nav .nav-link { font-size: .9rem; }
+.bd-main .bd-content .bd-article-container { max-width: 960px; }
+.bd-article h1, .bd-article h2, .bd-article h3 { letter-spacing: -.035em; }
+.bd-article h1 { font-weight: 750; }
+.bd-article p { line-height: 1.8; }
+.bd-article table { font-size: .92rem; }
+.sd-card { border-radius: 12px; box-shadow: none; }
+.sd-card-header { font-weight: 650; }
+.bd-main:has(.lab-kicker) .bd-content .bd-article-container { max-width: 1120px; padding: 3rem 2.5rem 2rem; }
+.bd-article:has(.lab-kicker) > section > h1 { margin: .8rem 0 .4rem; font-size: clamp(3.5rem,7vw,5.5rem); line-height: 1.05; font-weight: 800; color: var(--pst-color-text-base); }
+.lab-kicker { font-size: .7rem; letter-spacing: .19em; font-weight: 700; color: var(--pst-color-text-muted); }
+.lab-subtitle { font-size: clamp(1.5rem,3vw,2.15rem); font-weight: 650; letter-spacing: -.035em; margin: .6rem 0 1rem; }
+.bd-article:has(.lab-kicker) > section > p:first-of-type { max-width: 750px; font-size: 1.08rem; color: var(--pst-color-text-muted); }
+.lab-actions { display: flex; gap: 1.6rem; align-items: center; flex-wrap: wrap; margin: 1.6rem 0 1.4rem; }
+.lab-button { display: inline-flex; gap: 2rem; align-items: center; background: #2458d3; color: white !important; border-radius: 7px; padding: .7rem 1.1rem; font-weight: 650; text-decoration: none !important; }
+.lab-button:hover { background: #1748b8; }
+.lab-link { font-size: .94rem; font-weight: 600; text-decoration: none !important; }
+.lab-tags { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.lab-tags span { font-size: .75rem; color: var(--pst-color-text-muted); border: 1px solid var(--pst-color-border); border-radius: 4px; padding: .15rem .6rem; }
+.lab-showcase { border: 1px solid var(--pst-color-border); border-radius: 14px; overflow: hidden; background: var(--pst-color-surface); margin-bottom: .8rem; }
+.lab-showcase .sd-row { margin: 0; }
+.lab-demo { border: none; border-radius: 0; background: transparent; }
+.lab-demo .sd-card-header { padding: .7rem 1.1rem; font-size: .85rem; border: 0; background: transparent; }
+.lab-demo .sd-card-body { padding: 0; }
+.lab-demo p { margin: 0; }
+.lab-demo img { display: block; width: 100%; margin: 0 !important; }
+.lab-caption { font-size: .75rem; color: var(--pst-color-text-muted); padding: .8rem 1.1rem; border-top: 1px solid var(--pst-color-border); }
+.lab-showcase + p { font-size: .83rem; color: var(--pst-color-text-muted); }
+.bd-article:has(.lab-kicker) h2 { margin-top: 3.4rem; margin-bottom: .7rem; font-size: 1.7rem; font-weight: 700; }
+.lab-finding { padding: .35rem .55rem; border-top: 3px solid #2458d3; }
+.lab-finding-warning { border-top-color: #bc7626; }
+.lab-finding .sd-card-header, .lab-task .sd-card-header { background: transparent; border-bottom: none; padding-bottom: 0; }
+.lab-finding p { font-size: .92rem; }
+.lab-score { display: grid; grid-template-columns: auto 1fr; gap: .1rem 1rem; align-items: baseline; margin: .2rem 0 .9rem; }
+.lab-score strong { font-size: 2rem; font-weight: 750; letter-spacing: -.04em; }
+.lab-score span { color: var(--pst-color-text-muted); font-size: .9rem; }
+.lab-chart { border: 1px solid var(--pst-color-border); border-radius: 12px; overflow: hidden; background: white; margin: 1.3rem 0 .75rem; }
+.lab-chart p { margin: 0; }
+.lab-chart img { display: block; width: 100%; margin: 0 !important; }
+.lab-chart + p { font-size: .83rem; color: var(--pst-color-text-muted); }
+.lab-task .sd-card-body { font-size: .92rem; color: var(--pst-color-text-muted); }
+.lab-note { margin: 2rem 0; padding: 1rem 1.2rem; background: var(--pst-color-surface); border-radius: 8px; font-size: .86rem; line-height: 1.8; color: var(--pst-color-text-muted); }
+@media (max-width: 640px) {
+ .bd-main:has(.lab-kicker) .bd-content .bd-article-container { padding: 2rem 1rem; }
+ .lab-actions { gap: 1rem; }
+ .lab-kicker { font-size: .6rem; letter-spacing: .1em; }
+ .bd-article:has(.lab-kicker) h2 { margin-top: 2.5rem; }
+}

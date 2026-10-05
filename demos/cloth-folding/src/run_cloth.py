@@ -15,6 +15,8 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
+from dexlab import engine_versions
+
 from cloth_control import (
     arm_pose,
     grasp_candidates,
@@ -44,11 +46,11 @@ def engine_identity():
         raise RuntimeError(
             "Use an unmodified MuJoCo wheel; native library RECORD validation failed"
         )
-    return dict(
+    return engine_versions.mujoco_profile_identity(dict(
         version=mujoco.__version__,
         native_library_sha256=digest.hex(),
         wheel_record_matches=True,
-    )
+    ), mujoco.mj_versionString())
 
 
 def controls(model):
@@ -240,6 +242,9 @@ def run(args):
     }
     for source in Path(__file__).parent.glob("*.py"):
         (snapshot / source.name).write_bytes(source.read_bytes())
+    profile_source = Path(engine_versions.__file__)
+    source_sha256["engine_versions.py"] = hashlib.sha256(profile_source.read_bytes()).hexdigest()
+    (snapshot / "engine_versions.py").write_bytes(profile_source.read_bytes())
     model, vertices, triangles, indices = build_model(
         args.robot_model,
         destination,
@@ -445,6 +450,7 @@ def run(args):
         verified=validation["passed"],
         validation=validation,
         engine_identity=engine,
+        integrator=mujoco.mjtIntegrator(model.opt.integrator).name,
         robot_model_sha256=hashlib.sha256(args.robot_model.read_bytes()).hexdigest(),
         schedule_s=dict(
             move_start=1.75,

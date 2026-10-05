@@ -1,0 +1,2011 @@
+{
+  "schema_version": 1,
+  "scope": "Development migration diagnosis only; no formal task admission or engine accuracy ranking. Full raw trajectories remain required for independent physical rescoring.",
+  "generated_at": "2026-10-05T02:35:10.252787+00:00",
+  "cylinder_comparison": [
+    {
+      "record_id": "cylinder311-projection-v1",
+      "diagnosis": {
+        "version": "3.11.0",
+        "case": {
+          "name": "dev-cylinder-hold",
+          "mode": "hold",
+          "mass": 0.2,
+          "radius": 0.01,
+          "half_height": 0.03,
+          "sections": 64,
+          "surface_subdivisions": 0,
+          "friction": 0.3,
+          "normal_load": 4.0,
+          "gravity": 9.81,
+          "timestep": 0.0005,
+          "controller_period": 0.001,
+          "ramp_load": 4.0
+        },
+        "physics_score": {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_record": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "unit_quaternions": true,
+            "declared_external_forces": true,
+            "actual_prismatic_pads": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "bounded_pad_pad_penetration": true,
+            "pads_do_not_cross": true,
+            "measured_normal_load": true,
+            "holds_load": false,
+            "bounded_hold_speed": true,
+            "no_tipping_during_hold": true,
+            "fully_released": true,
+            "freefall_acceleration": true,
+            "artifact_hashes_match": true,
+            "native_run_completed": true,
+            "clean_shutdown": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "declared_limits": true,
+            "native_normal_components_consistent": true,
+            "contact_motion_observation_complete": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0002047330930506682,
+            "maximum_pad_pad_penetration_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "maximum_momentum_residual_weight_ratio": 3.087951256120298e-08,
+            "measured_preload_n": [
+              3.9999999999998455,
+              4.000000000000093
+            ],
+            "nominal_capacity_n": 2.3999999999999817,
+            "hold_max_drift_m": 0.0011449193795902146,
+            "hold_max_speed_m_s": 0.0009557500842226055,
+            "released_acceleration_m_s2": -9.810000000000949,
+            "released_force_n": 0.0,
+            "vertical_slip_onset_time_s": null,
+            "load_at_vertical_slip_onset_n": null,
+            "normal_load_at_vertical_slip_onset_n": null,
+            "slip_definition": "COM vertical speed exceeds5mm/s for20ms; rigid-body drift, not material-point accumulated slip",
+            "cylinder_radial_faceting_error_m": 1.204543794827595e-05
+          },
+          "scope": "Nominal regular-prism pinch/load/release; not calibrated fingertips or apple grasp",
+          "contact_motion": {
+            "complete_observation_coverage": true,
+            "known_steps": 4000,
+            "expected_steps": 4000,
+            "loaded_steps": 2994,
+            "hold_loaded_contact_peak_tangent_speed_m_s": 0.0009557500842226064,
+            "hold_loaded_contact_rms_tangent_speed_m_s": 0.0009557500842002439,
+            "scope": "Actual post-step COM twists evaluated at native normal-contact locations; MuJoCo locations may lag one step; not tracked material slip. RMS is normal-load weighted within each step, then time weighted on the fixed grid; unloaded steps excluded and coverage reported."
+          }
+        },
+        "preload_net_x_mean_n": [
+          3.9999999999998455,
+          4.000000000000093
+        ],
+        "preload_normal_x_mean_n": [
+          3.9999999999998455,
+          4.000000000000093
+        ],
+        "preload_friction_x_mean_n": [
+          0.0,
+          0.0
+        ],
+        "absolute_normal_x_range": [
+          1.0,
+          1.0
+        ],
+        "facet_angle_rad": 0.04908738521234052,
+        "candidate_facet_projection_n": 3.990369453344394,
+        "scope": "Development diagnosis only. No threshold, controller, engine or geometry change. Contact normal projection is not total squeeze force."
+      },
+      "independent_score": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_record": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "unit_quaternions": true,
+          "declared_external_forces": true,
+          "actual_prismatic_pads": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "bounded_pad_pad_penetration": true,
+          "pads_do_not_cross": true,
+          "measured_normal_load": true,
+          "holds_load": false,
+          "bounded_hold_speed": true,
+          "no_tipping_during_hold": true,
+          "fully_released": true,
+          "freefall_acceleration": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "native_normal_components_consistent": true,
+          "contact_motion_observation_complete": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0002047330930506682,
+          "maximum_pad_pad_penetration_m": 0.0,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "maximum_momentum_residual_weight_ratio": 3.087951256120298e-08,
+          "measured_preload_n": [
+            3.9999999999998455,
+            4.000000000000093
+          ],
+          "nominal_capacity_n": 2.3999999999999817,
+          "hold_max_drift_m": 0.0011449193795902146,
+          "hold_max_speed_m_s": 0.0009557500842226055,
+          "released_acceleration_m_s2": -9.810000000000949,
+          "released_force_n": 0.0,
+          "vertical_slip_onset_time_s": null,
+          "load_at_vertical_slip_onset_n": null,
+          "normal_load_at_vertical_slip_onset_n": null,
+          "slip_definition": "COM vertical speed exceeds5mm/s for20ms; rigid-body drift, not material-point accumulated slip",
+          "cylinder_radial_faceting_error_m": 1.204543794827595e-05
+        },
+        "scope": "Nominal regular-prism pinch/load/release; not calibrated fingertips or apple grasp",
+        "contact_motion": {
+          "complete_observation_coverage": true,
+          "known_steps": 4000,
+          "expected_steps": 4000,
+          "loaded_steps": 2994,
+          "hold_loaded_contact_peak_tangent_speed_m_s": 0.0009557500842226064,
+          "hold_loaded_contact_rms_tangent_speed_m_s": 0.0009557500842002439,
+          "scope": "Actual post-step COM twists evaluated at native normal-contact locations; MuJoCo locations may lag one step; not tracked material slip. RMS is normal-load weighted within each step, then time weighted on the fixed grid; unloaded steps excluded and coverage reported."
+        }
+      },
+      "source_sha256": {
+        "runner.py": "83184966e59c2a0ef0f295ddd6f8bf1b7dae43ee7f48aa67b98c8a32ac256e10",
+        "dexlab_contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "dexlab_contact_kinematics.py": "99dc2d10b00a21909d70203c34e8e42a8e2c2c89ae78696f8b7aa42ee21436af",
+        "dexlab_contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "dexlab_cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07",
+        "dexlab_contact_pinch.py": "9b9b80765472dfa5fdc4b6fdc574d092e5aec27f3cd92a34b4b33d6d79b325c3",
+        "dexlab_contact_pinch_native.py": "35c1f98a8adf5292a759a9205eddc07ed43f8c97ce31348e1d984befdfd87a12",
+        "dexlab_physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "dexlab_physx_pinch.py": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+        "dexlab_tasks_contact_pinch.py": "fa5ad3b8a830c84ca8c1d4bc72183778c4e54e4d75f7db2d4489a15257d1daa1"
+      },
+      "record_sha256": {
+        "run.json": "0134f8a8a9194780da41d238aa8d43e425410292c30d3896c0816ffb17586f9c",
+        "summary.json": "4eaa288d8c2e2f0b67145cd30e58fe34b35170b8957c9324435900e2fc8bb51e",
+        "projection-diagnosis.json": "3c69ca5aff853039da292d16d561f7d5b2858cccfe0081fa38139512a86aa598"
+      }
+    },
+    {
+      "record_id": "cylinder314-projection-v1",
+      "diagnosis": {
+        "version": "3.14.0",
+        "case": {
+          "name": "dev-cylinder-hold",
+          "mode": "hold",
+          "mass": 0.2,
+          "radius": 0.01,
+          "half_height": 0.03,
+          "sections": 64,
+          "surface_subdivisions": 0,
+          "friction": 0.3,
+          "normal_load": 4.0,
+          "gravity": 9.81,
+          "timestep": 0.0005,
+          "controller_period": 0.001,
+          "ramp_load": 4.0
+        },
+        "physics_score": {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_record": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "unit_quaternions": true,
+            "declared_external_forces": true,
+            "actual_prismatic_pads": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "bounded_pad_pad_penetration": true,
+            "pads_do_not_cross": true,
+            "measured_normal_load": true,
+            "holds_load": false,
+            "bounded_hold_speed": true,
+            "no_tipping_during_hold": true,
+            "fully_released": true,
+            "freefall_acceleration": true,
+            "artifact_hashes_match": true,
+            "native_run_completed": true,
+            "clean_shutdown": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "declared_limits": true,
+            "native_normal_components_consistent": true,
+            "contact_motion_observation_complete": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.00020299965660938203,
+            "maximum_pad_pad_penetration_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "maximum_momentum_residual_weight_ratio": 6.179149388335212e-10,
+            "measured_preload_n": [
+              3.990370764601506,
+              3.990370764600733
+            ],
+            "nominal_capacity_n": 2.3942224587606717,
+            "hold_max_drift_m": 0.0011677306342388078,
+            "hold_max_speed_m_s": 0.0009747273304067739,
+            "released_acceleration_m_s2": -9.81000000000095,
+            "released_force_n": 0.0,
+            "vertical_slip_onset_time_s": null,
+            "load_at_vertical_slip_onset_n": null,
+            "normal_load_at_vertical_slip_onset_n": null,
+            "slip_definition": "COM vertical speed exceeds5mm/s for20ms; rigid-body drift, not material-point accumulated slip",
+            "cylinder_radial_faceting_error_m": 1.204543794827595e-05
+          },
+          "scope": "Nominal regular-prism pinch/load/release; not calibrated fingertips or apple grasp",
+          "contact_motion": {
+            "complete_observation_coverage": true,
+            "known_steps": 4000,
+            "expected_steps": 4000,
+            "loaded_steps": 2994,
+            "hold_loaded_contact_peak_tangent_speed_m_s": 0.0009746882998842846,
+            "hold_loaded_contact_rms_tangent_speed_m_s": 0.0009746819752378917,
+            "scope": "Actual post-step COM twists evaluated at native normal-contact locations; MuJoCo locations may lag one step; not tracked material slip. RMS is normal-load weighted within each step, then time weighted on the fixed grid; unloaded steps excluded and coverage reported."
+          }
+        },
+        "preload_net_x_mean_n": [
+          4.000000000004352,
+          4.000000000003578
+        ],
+        "preload_normal_x_mean_n": [
+          3.990370764601506,
+          3.990370764600733
+        ],
+        "preload_friction_x_mean_n": [
+          0.009629235402845358,
+          0.009629235402845321
+        ],
+        "absolute_normal_x_range": [
+          0.9987956203094248,
+          0.9987956203094249
+        ],
+        "facet_angle_rad": 0.04908738521234052,
+        "candidate_facet_projection_n": 3.990369453344394,
+        "scope": "Development diagnosis only. No threshold, controller, engine or geometry change. Contact normal projection is not total squeeze force."
+      },
+      "independent_score": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_record": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "unit_quaternions": true,
+          "declared_external_forces": true,
+          "actual_prismatic_pads": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "bounded_pad_pad_penetration": true,
+          "pads_do_not_cross": true,
+          "measured_normal_load": true,
+          "holds_load": false,
+          "bounded_hold_speed": true,
+          "no_tipping_during_hold": true,
+          "fully_released": true,
+          "freefall_acceleration": true,
+          "artifact_hashes_match": true,
+          "native_run_completed": true,
+          "clean_shutdown": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "declared_limits": true,
+          "native_normal_components_consistent": true,
+          "contact_motion_observation_complete": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.00020299965660938203,
+          "maximum_pad_pad_penetration_m": 0.0,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "maximum_momentum_residual_weight_ratio": 6.179149388335212e-10,
+          "measured_preload_n": [
+            3.990370764601506,
+            3.990370764600733
+          ],
+          "nominal_capacity_n": 2.3942224587606717,
+          "hold_max_drift_m": 0.0011677306342388078,
+          "hold_max_speed_m_s": 0.0009747273304067739,
+          "released_acceleration_m_s2": -9.81000000000095,
+          "released_force_n": 0.0,
+          "vertical_slip_onset_time_s": null,
+          "load_at_vertical_slip_onset_n": null,
+          "normal_load_at_vertical_slip_onset_n": null,
+          "slip_definition": "COM vertical speed exceeds5mm/s for20ms; rigid-body drift, not material-point accumulated slip",
+          "cylinder_radial_faceting_error_m": 1.204543794827595e-05
+        },
+        "scope": "Nominal regular-prism pinch/load/release; not calibrated fingertips or apple grasp",
+        "contact_motion": {
+          "complete_observation_coverage": true,
+          "known_steps": 4000,
+          "expected_steps": 4000,
+          "loaded_steps": 2994,
+          "hold_loaded_contact_peak_tangent_speed_m_s": 0.0009746882998842846,
+          "hold_loaded_contact_rms_tangent_speed_m_s": 0.0009746819752378917,
+          "scope": "Actual post-step COM twists evaluated at native normal-contact locations; MuJoCo locations may lag one step; not tracked material slip. RMS is normal-load weighted within each step, then time weighted on the fixed grid; unloaded steps excluded and coverage reported."
+        }
+      },
+      "source_sha256": {
+        "runner.py": "83184966e59c2a0ef0f295ddd6f8bf1b7dae43ee7f48aa67b98c8a32ac256e10",
+        "dexlab_contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "dexlab_contact_kinematics.py": "99dc2d10b00a21909d70203c34e8e42a8e2c2c89ae78696f8b7aa42ee21436af",
+        "dexlab_contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "dexlab_cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07",
+        "dexlab_contact_pinch.py": "9b9b80765472dfa5fdc4b6fdc574d092e5aec27f3cd92a34b4b33d6d79b325c3",
+        "dexlab_contact_pinch_native.py": "35c1f98a8adf5292a759a9205eddc07ed43f8c97ce31348e1d984befdfd87a12",
+        "dexlab_physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "dexlab_physx_pinch.py": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+        "dexlab_tasks_contact_pinch.py": "fa5ad3b8a830c84ca8c1d4bc72183778c4e54e4d75f7db2d4489a15257d1daa1"
+      },
+      "record_sha256": {
+        "run.json": "dad37f99787be305e86e3ed8dfbd36adacc179f106f17295e6e71efb30a6d3a4",
+        "summary.json": "2447d603b9c80c78176a2c483725acde7d968c8c4802607601d73851dbde1445",
+        "projection-diagnosis.json": "e30d59e62284815d97a39d08a50338a0abf065ccede11cbbc71319952df1b39c"
+      }
+    }
+  ],
+  "cloth_drape": {
+    "record_id": "cloth314-drape-v1",
+    "case": {
+      "name": "dev-drape",
+      "experiment": "drape",
+      "length": 0.2,
+      "width": 0.2,
+      "nx": 9,
+      "ny": 5,
+      "areal_density": 0.2,
+      "height": 0.18,
+      "force": 0.005,
+      "radius": 0.001,
+      "duration": 3.0,
+      "sphere_radius": 0.06,
+      "sphere_height": 0.07
+    },
+    "solver": "mujoco",
+    "dt_s": 0.0005,
+    "iterations": 10,
+    "status": "completed",
+    "error": null,
+    "source_sha256": {
+      "src/dexlab/__init__.py": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327",
+      "src/dexlab/archive_integrity.py": "4c60c18481c029db94430f80e42277cd19eeed75b01326128732c72168739b3e",
+      "src/dexlab/benchmark.py": "aee50c11ad811c5536739be50d28af0b7b757775cf6e876bf5f08f9c65419364",
+      "src/dexlab/cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+      "src/dexlab/cloth_benchmark.py": "dfbcf8ffadc43c00bf9bfc53bf67255846d2e9b2f4fcc46b72986a5e21c12e6a",
+      "src/dexlab/cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07",
+      "src/dexlab/cloth_report.py": "ffeb6836e1943e1d045fdcb10540850046e9a77233e1eb4a9879147afa6917d4",
+      "src/dexlab/cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+      "src/dexlab/cloth_superdex.py": "57ff41b983290862baeccef1bdf95eb1f83219c113668c4ecd26cf67318016fb",
+      "src/dexlab/cloth_table_audit.py": "6553539d76b90ca6a52f8beb99d985ca1cf90d7ea78475f8b43422f9f8a62b60",
+      "src/dexlab/contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+      "src/dexlab/contact_indent.py": "ada99a07d2ab03972c629e07aea37a8f7f862ff9063d0476f15b7f9d49c92b4c",
+      "src/dexlab/contact_indent_run.py": "1c38c73f971dc686ec82cf047e0743740af5ee386dde17168c81d5c104cf84f5",
+      "src/dexlab/contact_kinematics.py": "99dc2d10b00a21909d70203c34e8e42a8e2c2c89ae78696f8b7aa42ee21436af",
+      "src/dexlab/contact_load.py": "b34000ed8318b30f0d147133c121651b41f25c258b04ff8df016c83402c98d15",
+      "src/dexlab/contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+      "src/dexlab/contact_pinch.py": "9b9b80765472dfa5fdc4b6fdc574d092e5aec27f3cd92a34b4b33d6d79b325c3",
+      "src/dexlab/contact_pinch_native.py": "35c1f98a8adf5292a759a9205eddc07ed43f8c97ce31348e1d984befdfd87a12",
+      "src/dexlab/contact_pinch_run.py": "83184966e59c2a0ef0f295ddd6f8bf1b7dae43ee7f48aa67b98c8a32ac256e10",
+      "src/dexlab/contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+      "src/dexlab/contact_plane_native.py": "663b2d03f26223a172bd49846b28dd071389dda1f8bdd9e10dbd7c4a0f9d491e",
+      "src/dexlab/contact_transient.py": "1753a7c54f8233c77bb0c7d23393630b77eeddef8b029cb99943471f007c944d",
+      "src/dexlab/engine_versions.py": "29329861ca754d9038f079d1da8cb0ab1d91fb62cf2c4f5fc5093efa510fc116",
+      "src/dexlab/episode.py": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872",
+      "src/dexlab/evidence_report.py": "203fec3f4ae286caf63e8327153fe84b8f4cb532bfdb7d2bb4583f491809a9bc",
+      "src/dexlab/jitter.py": "23ce7c167d0eef7321b56c2ccc3fc67e550e24d3288ab948aeaa1ac369de843b",
+      "src/dexlab/model_audit.py": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d",
+      "src/dexlab/mujoco_artifacts.py": "9bc7804db54247bf14ea2d9d02ff77481496d790f5d709920ed4eed8327e9ad2",
+      "src/dexlab/physx_apple.py": "48859d0d9bf8d95c272293719f0d95b3f2e7a00c1f6a6d2a5df9661930816ec2",
+      "src/dexlab/physx_apple_replay.py": "0f61c4a739035deca8403ad352fd177db75ef904889909d499293b2a2f96e6c2",
+      "src/dexlab/physx_apple_score.py": "73ac7e6bc0a3f9efcd5cde7c5c16d6cd30cf2b6db03c3e812c8b89d82adb50bf",
+      "src/dexlab/physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+      "src/dexlab/physx_cloth.py": "79d2bffbc8585417b24c044ae7b6a43c96596d8b932c593292fa09964593d2b7",
+      "src/dexlab/physx_cloth_worker.py": "5522fe7a7e3d5dab4f8ed6f00740cd8ca43b1bc22fabe159286ad535b169b99e",
+      "src/dexlab/physx_contact_details.py": "4ae75b2fa0af0481a4adc40579cab5ba070968e165d905c5e793f28d6d2f9a7f",
+      "src/dexlab/physx_drive.py": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3",
+      "src/dexlab/physx_geometry.py": "0d40bfca65e216096b24209612bbeb0b28966ae96ba642d64a6d2c4f2c4a500d",
+      "src/dexlab/physx_pinch.py": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af",
+      "src/dexlab/physx_robot.py": "c2f19bc2e03fc473d97ba1971057c4c046d0f4472efdee2a3d8f56b7879ed1a9",
+      "src/dexlab/physx_sdf.py": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea",
+      "src/dexlab/robot_transfer.py": "fb118b5d90919510cdb474ef6607145e53e1044b76efb4e3760701b3c8f8818b",
+      "src/dexlab/tasks/__init__.py": "0440fd5a2ad1d7cf72f84c128d02a04943d78b64a592e46c51290df2bab4fd8c",
+      "src/dexlab/tasks/apple_stem.py": "cb3d58be0236f8fc0a35b0c2463b42d679ffd52ff355ea17ec73980dc4845068",
+      "src/dexlab/tasks/cloth.py": "5274ec78c31a1017858c0e2e809c82b3bc4d2d38ac8fea3ffc19d1abc95cbbc0",
+      "src/dexlab/tasks/contact_pinch.py": "fa5ad3b8a830c84ca8c1d4bc72183778c4e54e4d75f7db2d4489a15257d1daa1",
+      "src/dexlab/tasks/contact_plane.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a"
+    },
+    "source_unchanged": true,
+    "independent_score": {
+      "protocol_checks_passed": false,
+      "checks": {
+        "complete_time_grid": true,
+        "finite_states": true,
+        "fixed_boundary_within_1_um": true,
+        "obstacle_penetration_below_1_5_mm": false,
+        "no_sampled_surface_crossings": true,
+        "no_sampled_degenerate_triangles": true,
+        "successful_runtime": true,
+        "exact_record_hash": true,
+        "declared_mesh": true,
+        "prescribed_loads": true,
+        "frozen_source": true,
+        "source_snapshot_matches": true,
+        "declared_initial_state": true
+      },
+      "metrics": {
+        "maximum": {
+          "maximum_absolute_edge_strain": 0.3103502497775522,
+          "tip_extension_m": 2.8703823318487754e-07,
+          "tip_sag_m": 0.1423326795749013,
+          "center_sag_m": 0.05061541776442041,
+          "speed_rms_m_s": 1.1322566990208398,
+          "maximum_pin_error_m": 0.0,
+          "ground_penetration_m": 0.0,
+          "sphere_penetration_m": 0.0026555684266674692
+        },
+        "final": {
+          "maximum_absolute_edge_strain": 0.10184017611643048,
+          "tip_extension_m": -0.044186915493935684,
+          "tip_sag_m": 0.13171106126846616,
+          "center_sag_m": 0.045786193767075045,
+          "speed_rms_m_s": 0.02717975506310694,
+          "maximum_pin_error_m": 0.0,
+          "ground_penetration_m": 0.0,
+          "sphere_penetration_m": 2.0754369576249376e-05
+        }
+      },
+      "self_intersection_audit": {
+        "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+        "epsilon_m": 1e-09,
+        "requested_sample_interval_s": 0.01,
+        "maximum_observed_interval_s": 0.010000000000000231,
+        "audited_frame_count": 301,
+        "candidate_topology_pairs": 1723,
+        "maximum_crossing_pairs": 0,
+        "frames_with_crossings": 0,
+        "first_crossing_time_s": null,
+        "maximum_degenerate_triangles": 0
+      },
+      "material_accuracy": "uncalibrated; no shared stiffness equivalence claimed",
+      "verifier_sha256": {
+        "cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+        "cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+        "cloth_benchmark.py": "dfbcf8ffadc43c00bf9bfc53bf67255846d2e9b2f4fcc46b72986a5e21c12e6a"
+      },
+      "scope": "Recorded nominal cloth experiment; no real-material accuracy claim"
+    },
+    "record_sha256": {
+      "run.json": "56cf76669b00894e6cd924d6a1c6b3b20d1f14f9ef60c222c27bfd68c29d8015",
+      "summary.json": "080c7ec607e60c6372c6db7324e42154c9e5984be7e14cb91e614f2bc6f0a754"
+    },
+    "trajectory_sha256": "d489ccd8a0ef02cd1f6cb4704bb1a2d44453ab0f2df17e3cbc15e3d1cf8e17c2"
+  },
+  "unit_tests": {
+    "count": 315,
+    "passed": true,
+    "log_sha256": "71febcac317ab6fd7d823b7279b0fb0642ed15f8a4762777cfe9e7886d1a44a9",
+    "limitation": "Before later robot-cloth migration and source-provenance edits; not a pass for the current complete tree."
+  },
+  "robot_cloth": {
+    "completed": true,
+    "accepted": false,
+    "integrator": "mjINT_DISCRETE",
+    "maxima": {
+      "hand_penetration_m": 0.0006767900251905924,
+      "table_penetration_m": 0.0003842136268940217,
+      "self_contact_penetration_m": 0.0008476007240681705,
+      "edge_strain": 0.05480032507482768,
+      "robot_rigid_penetration_m": 0.0
+    },
+    "online_validation": {
+      "passed": false,
+      "checks": {
+        "valid_task": true,
+        "complete_time_grid": true,
+        "finite_complete_measurements": true,
+        "complete_hand_plans": true,
+        "complete_contact_scan": true,
+        "summary_bounds_recorded_maxima": true,
+        "completed_without_physics_warning": true,
+        "edge_strain_below_5_percent": false,
+        "robot_contact_penetration_below_1_5_mm": true,
+        "table_contact_penetration_below_1_5_mm": true,
+        "cloth_self_contact_penetration_below_1_5_mm": true,
+        "robot_rigid_penetration_below_1_5_mm": true,
+        "r_both_pads_contact_at_least_95_percent": true,
+        "r_material_slip_below_1_cm": true,
+        "r_material_lift_above_8_cm": true,
+        "released_from_all_robot_geometries": true
+      },
+      "metrics": {
+        "r": {
+          "two_pad_contact_fraction": 1.0,
+          "maximum_anchor_error_m": 0.002337921477561612,
+          "lift_m": 0.12117317270230837
+        },
+        "maximum_final_robot_cloth_normal_force_N": 0.0
+      }
+    },
+    "offline_audit": {
+      "checks": {
+        "valid_task": true,
+        "complete_time_grid": true,
+        "finite_complete_measurements": true,
+        "complete_hand_plans": true,
+        "complete_contact_scan": true,
+        "summary_bounds_recorded_maxima": true,
+        "completed_without_physics_warning": true,
+        "edge_strain_below_5_percent": false,
+        "robot_contact_penetration_below_1_5_mm": true,
+        "table_contact_penetration_below_1_5_mm": true,
+        "cloth_self_contact_penetration_below_1_5_mm": true,
+        "robot_rigid_penetration_below_1_5_mm": true,
+        "r_both_pads_contact_at_least_95_percent": true,
+        "r_material_slip_below_1_cm": true,
+        "r_material_lift_above_8_cm": true,
+        "released_from_all_robot_geometries": true,
+        "no_mocap_or_external_welds": true,
+        "no_cloth_actuators": true,
+        "three_dof_passive_cloth_vertices": true,
+        "complete_surface_audit_record": true,
+        "no_sampled_surface_crossings": true
+      },
+      "metrics": {
+        "r": {
+          "two_pad_contact_fraction": 1.0,
+          "maximum_anchor_error_m": 0.002337921477561612,
+          "lift_m": 0.12117317270230837
+        },
+        "maximum_final_robot_cloth_normal_force_N": 0.0
+      },
+      "self_surface_audit": {
+        "scope": "nonadjacent zero-thickness surface crossings; shared-vertex pairs excluded; no continuous-time or thickness-overlap guarantee",
+        "epsilon_m": 1e-09,
+        "requested_sample_interval_s": 0.01,
+        "maximum_observed_interval_s": 0.040000000000000924,
+        "audited_frame_count": 225,
+        "candidate_topology_pairs": 39787,
+        "maximum_crossing_pairs": 0,
+        "frames_with_crossings": 0,
+        "first_crossing_time_s": null,
+        "maximum_degenerate_triangles": 0
+      },
+      "table_surface_diagnostic": {
+        "version": "table-triangle-interior-v1",
+        "status": "sampled_intrusion_detected",
+        "classification": "exploratory_diagnostic_not_a_new_physical_threshold",
+        "method": "LP over zero-thickness triangle interiors in verified union of table boxes",
+        "table_bounds_m": [
+          [
+            -0.54,
+            0.39999999999999997,
+            0.494
+          ],
+          [
+            0.54,
+            0.84,
+            0.5
+          ]
+        ],
+        "table_geom_count": 96,
+        "numerical_zero_tolerance_m": 1e-08,
+        "maximum_interior_depth_m": 0.003000000000000004,
+        "frames_with_intrusion": 219,
+        "saved_frames": 225,
+        "first_intrusion_time_s": 0.0,
+        "rows": [
+          {
+            "time_s": 0.0,
+            "triangle_max_interior_depth_m": 0.002558680710591757,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 15
+          },
+          {
+            "time_s": 0.04,
+            "triangle_max_interior_depth_m": 0.0025605328873030504,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 0.08,
+            "triangle_max_interior_depth_m": 0.0025616726831687404,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 0.12,
+            "triangle_max_interior_depth_m": 0.0025623919340790466,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.16,
+            "triangle_max_interior_depth_m": 0.0025643018868430493,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 15
+          },
+          {
+            "time_s": 0.2,
+            "triangle_max_interior_depth_m": 0.002565166961882555,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.24,
+            "triangle_max_interior_depth_m": 0.0025652043205342716,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.28,
+            "triangle_max_interior_depth_m": 0.002565283355375785,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.32,
+            "triangle_max_interior_depth_m": 0.002566061283108746,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.36,
+            "triangle_max_interior_depth_m": 0.0025666985177904378,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.4,
+            "triangle_max_interior_depth_m": 0.0025674001281966096,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.44,
+            "triangle_max_interior_depth_m": 0.0025684813152920343,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.48,
+            "triangle_max_interior_depth_m": 0.0025691448266519576,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.52,
+            "triangle_max_interior_depth_m": 0.0025697405814759803,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.56,
+            "triangle_max_interior_depth_m": 0.002570137448946052,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.6,
+            "triangle_max_interior_depth_m": 0.002570522697091688,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.64,
+            "triangle_max_interior_depth_m": 0.0025715427541360956,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.68,
+            "triangle_max_interior_depth_m": 0.0025723504381791333,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.72,
+            "triangle_max_interior_depth_m": 0.002572910678152958,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.76,
+            "triangle_max_interior_depth_m": 0.002573615851402183,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.8,
+            "triangle_max_interior_depth_m": 0.0025739987491299374,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.84,
+            "triangle_max_interior_depth_m": 0.0025745961652176787,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.88,
+            "triangle_max_interior_depth_m": 0.0025754474258789517,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.92,
+            "triangle_max_interior_depth_m": 0.0025763653842421613,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 0.96,
+            "triangle_max_interior_depth_m": 0.0025767848086269305,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.0,
+            "triangle_max_interior_depth_m": 0.002577356760367461,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.04,
+            "triangle_max_interior_depth_m": 0.00257774707689398,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.08,
+            "triangle_max_interior_depth_m": 0.0025783905643580766,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.12,
+            "triangle_max_interior_depth_m": 0.002606766857957157,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.16,
+            "triangle_max_interior_depth_m": 0.0024173365169884043,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 1.2,
+            "triangle_max_interior_depth_m": 0.002359786293796319,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 1.24,
+            "triangle_max_interior_depth_m": 0.0025616716805278304,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 1.28,
+            "triangle_max_interior_depth_m": 0.0025938799987263736,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 1.32,
+            "triangle_max_interior_depth_m": 0.0026434619376010547,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.36,
+            "triangle_max_interior_depth_m": 0.002655119004194073,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 15
+          },
+          {
+            "time_s": 1.4000000000000001,
+            "triangle_max_interior_depth_m": 0.002642934889496998,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 1.44,
+            "triangle_max_interior_depth_m": 0.002682185515298536,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 15
+          },
+          {
+            "time_s": 1.48,
+            "triangle_max_interior_depth_m": 0.0027526563285336907,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.52,
+            "triangle_max_interior_depth_m": 0.0027876496581356646,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.56,
+            "triangle_max_interior_depth_m": 0.0028030481074188523,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.6,
+            "triangle_max_interior_depth_m": 0.002819374921417781,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.6400000000000001,
+            "triangle_max_interior_depth_m": 0.0028414109765641645,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.68,
+            "triangle_max_interior_depth_m": 0.0028891160117310386,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.72,
+            "triangle_max_interior_depth_m": 0.00291833577323979,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.76,
+            "triangle_max_interior_depth_m": 0.00295275339423457,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.8,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.84,
+            "triangle_max_interior_depth_m": 0.003000000000000003,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.8800000000000001,
+            "triangle_max_interior_depth_m": 0.0028492528577620173,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.92,
+            "triangle_max_interior_depth_m": 0.0025115540712224863,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 1.96,
+            "triangle_max_interior_depth_m": 0.0021450407113914236,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 16
+          },
+          {
+            "time_s": 2.0,
+            "triangle_max_interior_depth_m": 0.0021562483569312722,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 2.04,
+            "triangle_max_interior_depth_m": 0.0020690393262607475,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 11
+          },
+          {
+            "time_s": 2.08,
+            "triangle_max_interior_depth_m": 0.002242606160625214,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 2.12,
+            "triangle_max_interior_depth_m": 0.002351261940479018,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 2.16,
+            "triangle_max_interior_depth_m": 0.0022133617431144663,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 2.2,
+            "triangle_max_interior_depth_m": 0.001216753310115985,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 2.24,
+            "triangle_max_interior_depth_m": 0.0008970184707606677,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 2.2800000000000002,
+            "triangle_max_interior_depth_m": 0.0008914250026731433,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 2.32,
+            "triangle_max_interior_depth_m": 0.000557117384981428,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 2.36,
+            "triangle_max_interior_depth_m": 0.00010100113108202184,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 2.4,
+            "triangle_max_interior_depth_m": 0.00010612031916869139,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 2.44,
+            "triangle_max_interior_depth_m": 0.00011113058416223169,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 2.48,
+            "triangle_max_interior_depth_m": 0.001002540766891634,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 3
+          },
+          {
+            "time_s": 2.52,
+            "triangle_max_interior_depth_m": 0.0010826155246107397,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 2.56,
+            "triangle_max_interior_depth_m": 0.0007711504956672824,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 11
+          },
+          {
+            "time_s": 2.6,
+            "triangle_max_interior_depth_m": 0.0004171861211879147,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 3
+          },
+          {
+            "time_s": 2.64,
+            "triangle_max_interior_depth_m": 0.0005996290759533078,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 2.68,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 2.72,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 2.7600000000000002,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 4
+          },
+          {
+            "time_s": 2.8000000000000003,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 2.84,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 2.88,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 3
+          },
+          {
+            "time_s": 2.92,
+            "triangle_max_interior_depth_m": 0.0029476712249155226,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 2.96,
+            "triangle_max_interior_depth_m": 0.002369384396590306,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.0,
+            "triangle_max_interior_depth_m": 0.0017979436291624528,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.04,
+            "triangle_max_interior_depth_m": 0.0013195614043812684,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.08,
+            "triangle_max_interior_depth_m": 0.0005140279702232058,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.12,
+            "triangle_max_interior_depth_m": 0.0,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 0
+          },
+          {
+            "time_s": 3.16,
+            "triangle_max_interior_depth_m": 0.0,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 0
+          },
+          {
+            "time_s": 3.2,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.24,
+            "triangle_max_interior_depth_m": 0.0030000000000000022,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.2800000000000002,
+            "triangle_max_interior_depth_m": 0.0016007970768133258,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.3200000000000003,
+            "triangle_max_interior_depth_m": 0.0,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 0
+          },
+          {
+            "time_s": 3.36,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 4
+          },
+          {
+            "time_s": 3.4,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 3.44,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.48,
+            "triangle_max_interior_depth_m": 0.0027296540403587803,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.52,
+            "triangle_max_interior_depth_m": 0.002676670543121303,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.56,
+            "triangle_max_interior_depth_m": 0.003000000000000003,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.6,
+            "triangle_max_interior_depth_m": 0.0013097150477173868,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.64,
+            "triangle_max_interior_depth_m": 0.0012278047089521356,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.68,
+            "triangle_max_interior_depth_m": 0.0013123025915662105,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.72,
+            "triangle_max_interior_depth_m": 0.0008487793406509597,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.7600000000000002,
+            "triangle_max_interior_depth_m": 3.2358796793559644e-05,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 1
+          },
+          {
+            "time_s": 3.8000000000000003,
+            "triangle_max_interior_depth_m": 0.0,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 0
+          },
+          {
+            "time_s": 3.84,
+            "triangle_max_interior_depth_m": 0.0,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 0
+          },
+          {
+            "time_s": 3.88,
+            "triangle_max_interior_depth_m": 0.0,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 0
+          },
+          {
+            "time_s": 3.92,
+            "triangle_max_interior_depth_m": 0.002560068049920295,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 3.96,
+            "triangle_max_interior_depth_m": 0.00196211353534407,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.0,
+            "triangle_max_interior_depth_m": 0.0013165229032862233,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.04,
+            "triangle_max_interior_depth_m": 0.0017460231108284542,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.08,
+            "triangle_max_interior_depth_m": 0.0021730159964721742,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.12,
+            "triangle_max_interior_depth_m": 0.0018322791504586577,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.16,
+            "triangle_max_interior_depth_m": 0.001717643889645926,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.2,
+            "triangle_max_interior_depth_m": 0.001867701394988314,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.24,
+            "triangle_max_interior_depth_m": 0.001824428869307308,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.28,
+            "triangle_max_interior_depth_m": 0.0017861214794338397,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.32,
+            "triangle_max_interior_depth_m": 0.0018140080081213315,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.36,
+            "triangle_max_interior_depth_m": 0.0018646524343586641,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.4,
+            "triangle_max_interior_depth_m": 0.0018629887306902005,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.44,
+            "triangle_max_interior_depth_m": 0.0018419126166777646,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.48,
+            "triangle_max_interior_depth_m": 0.0018405724459720461,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.5200000000000005,
+            "triangle_max_interior_depth_m": 0.0018150749612397517,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.5600000000000005,
+            "triangle_max_interior_depth_m": 0.0018178636028119656,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.6000000000000005,
+            "triangle_max_interior_depth_m": 0.001823747827243205,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.64,
+            "triangle_max_interior_depth_m": 0.0018022822953999238,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.68,
+            "triangle_max_interior_depth_m": 0.001823264718235595,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.72,
+            "triangle_max_interior_depth_m": 0.0018866879000193314,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.76,
+            "triangle_max_interior_depth_m": 0.001831079317267146,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.8,
+            "triangle_max_interior_depth_m": 0.0017496952715505025,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.84,
+            "triangle_max_interior_depth_m": 0.0018020929457232765,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.88,
+            "triangle_max_interior_depth_m": 0.0018137293441155868,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.92,
+            "triangle_max_interior_depth_m": 0.0018083929648000053,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 4.96,
+            "triangle_max_interior_depth_m": 0.0017991668223036363,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.0,
+            "triangle_max_interior_depth_m": 0.0018354132254257286,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.04,
+            "triangle_max_interior_depth_m": 0.001818876182367088,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.08,
+            "triangle_max_interior_depth_m": 0.0018151755652453024,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.12,
+            "triangle_max_interior_depth_m": 0.0018112562297686518,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.16,
+            "triangle_max_interior_depth_m": 0.0018106708175054222,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.2,
+            "triangle_max_interior_depth_m": 0.0017972567162605488,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.24,
+            "triangle_max_interior_depth_m": 0.0017718321324925491,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.28,
+            "triangle_max_interior_depth_m": 0.001827019071142944,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.32,
+            "triangle_max_interior_depth_m": 0.002000546559820018,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.36,
+            "triangle_max_interior_depth_m": 0.002254214094054563,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.4,
+            "triangle_max_interior_depth_m": 0.0023968677929384653,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 2
+          },
+          {
+            "time_s": 5.44,
+            "triangle_max_interior_depth_m": 0.0026281592401520863,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 5.48,
+            "triangle_max_interior_depth_m": 0.003000000000000003,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 12
+          },
+          {
+            "time_s": 5.5200000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 5.5600000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 5.6000000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000035,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 12
+          },
+          {
+            "time_s": 5.64,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 12
+          },
+          {
+            "time_s": 5.68,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 12
+          },
+          {
+            "time_s": 5.72,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 14
+          },
+          {
+            "time_s": 5.76,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 5.8,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 10
+          },
+          {
+            "time_s": 5.84,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 10
+          },
+          {
+            "time_s": 5.88,
+            "triangle_max_interior_depth_m": 0.0030000000000000035,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 5.92,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 5.96,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 6.0,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 6.04,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.08,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.12,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 6.16,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 6.2,
+            "triangle_max_interior_depth_m": 0.0030000000000000022,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 6.24,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 5
+          },
+          {
+            "time_s": 6.28,
+            "triangle_max_interior_depth_m": 0.003000000000000001,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 6.32,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.36,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.4,
+            "triangle_max_interior_depth_m": 0.003000000000000003,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 6.44,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 6.48,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 6.5200000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000035,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 9
+          },
+          {
+            "time_s": 6.5600000000000005,
+            "triangle_max_interior_depth_m": 0.003000000000000003,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 6.6000000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 6.640000000000001,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.68,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 6.72,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 6.76,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 6.8,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 6
+          },
+          {
+            "time_s": 6.84,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.88,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.92,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 6.96,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.0,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.04,
+            "triangle_max_interior_depth_m": 0.003000000000000004,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.08,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.12,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.16,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.2,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.24,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.28,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.32,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.36,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.4,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.44,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.48,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.5200000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.5600000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.6000000000000005,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.640000000000001,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 8
+          },
+          {
+            "time_s": 7.68,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.72,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.76,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.8,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.84,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.88,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.92,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 7.96,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.0,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.040000000000001,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.08,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.120000000000001,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.16,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.2,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.24,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.28,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.32,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.36,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.4,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.44,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.48,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.52,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.56,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.6,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.64,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.68,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.72,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.76,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.8,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.84,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.88,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.92,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          },
+          {
+            "time_s": 8.96,
+            "triangle_max_interior_depth_m": 0.0030000000000000027,
+            "vertex_max_interior_depth_m": 0.0,
+            "triangles_with_interior_points": 7
+          }
+        ]
+      },
+      "scorer_version": "cloth-evidence-v2",
+      "verifier_sha256": "157740e1a92b2b3c0712b62f868f50b16a6930dd83d0b1e8ba217e334507a752",
+      "table_auditor_sha256": "6553539d76b90ca6a52f8beb99d985ca1cf90d7ea78475f8b43422f9f8a62b60",
+      "self_auditor_sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+      "input_sha256": {
+        "model.mjb": "2bb298a9ec9b27b6a68cef5c7961562bf5220926ad05b7af48728530dcb6979d",
+        "states.npz": "4a5ffaba77d26ebf94e9f9564b2d2fbfcbd0b5810e1ca028d58faf8342bb133d",
+        "trace.json": "2d358edbf52d24985c4846f1b0c02bc91f2d943b927bf462b34d2943933fa07b",
+        "summary.json": "7f77f9e42cd3f85f22b47dcbe58b33a1896d79e3c3b49870507a2727feba61be",
+        "plan-r.npz": "66261cb693ec67a04aa8dda17c6f137e78adc5b3eb37c0d854d7dfdcfeba47b0"
+      },
+      "protocol_passed": false,
+      "protocol_scope": "Existing nominal protocol with corrected evidence integrity; not complete geometric validity",
+      "assessment": "protocol_failed",
+      "coverage_limits": [
+        "Independent cloth versus robot surface audit is not implemented",
+        "25 Hz saved states cannot certify separation between frames",
+        "Table audit uses zero-thickness triangles, not shell thickness or native contact distance",
+        "Table diagnostic is exploratory; no new physical pass threshold is imposed"
+      ]
+    },
+    "offline_report_sha256": "e76dc71239aeee3a6681a6235af113d96a1f4e32d1d68b1541c74ecfae3861f3"
+  },
+  "remaining": [
+    "current-tree paired14s regressions",
+    "formal batch dispatch admission",
+    "bilingual site build and final review"
+  ]
+}
