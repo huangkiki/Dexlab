@@ -25,3 +25,5 @@ The site uses Sphinx, MyST and PyData Sphinx Theme, with information organizatio
 ## Execution and recovery
 
 Experiments prefer a resource-qualified local host; remote execution is optional. Review priorities and live jobs before selection, preserve interrupted evidence, and keep one executor. The [full workflow](https://github.com/huangkiki/Dexlab/blob/main/docs/autoresearch.md) documents enforced limits, timing/archive exclusion and delivery conditions. Continuous goals proceed between scheduled recovery checks; cloning does not install a scheduler.
+
+[Actual delivery and interruption recovery audit](https://github.com/huangkiki/Dexlab/blob/main/docs/autonomous-delivery.md)
