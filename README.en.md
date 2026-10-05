@@ -12,6 +12,10 @@
 
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
+## Local execution and autonomous delivery
+
+Experiments now prefer a qualified local host, with measured headroom, enforced cgroup limits and zero experiment swap. Priority review precedes each task; interrupted jobs resume from verified handles. Remote execution is optional. [Execution and recovery protocol](docs/autoresearch.md#local-first-execution-and-recovery).
+
 ## Dexterous task roadmap
 
 Current implementations focus on holding and contact diagnostics. The [six-layer research map](docs/dexterity-roadmap.md) connects ManiSkill, grasp evaluation, tactile sensing, data generation and embodiment research to concrete experiments. [Native ManiSkill tasks #47](https://github.com/huangkiki/Dexlab/issues/47) and [in-hand rotation #48](https://github.com/huangkiki/Dexlab/issues/48) are planned, **not implemented or supported yet**.
