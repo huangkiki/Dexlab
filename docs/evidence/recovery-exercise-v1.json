@@ -1,0 +1,30 @@
+{
+  "scope": "injected local process recovery, not a physics run or scheduler proof",
+  "owner_exit": 247,
+  "live_child_count_after_owner_killed": 1,
+  "duplicate_exit": 75,
+  "duplicate_command_executed": false,
+  "recovery_exit": 0,
+  "recovered_window_matches": true,
+  "original_sha256_before": "50a46b3f087ad1cf7d2071541793627e2ac7ef892a210406016ea2056c9e12fd",
+  "original_sha256_after": "50a46b3f087ad1cf7d2071541793627e2ac7ef892a210406016ea2056c9e12fd",
+  "passed": true,
+  "schema_version": 1,
+  "guard_sha256": "20c5907fd2a870a6718aa26183e63c2cfc0094babe31371d020ad16fca057642",
+  "source_commit": "5efb9149e8e37992ed183f7b35057e365795a360",
+  "resource_limits": {
+    "memory.max": "8589934592",
+    "memory.high": "6442450944",
+    "memory.swap.max": "0",
+    "cpu.max": "100000 100000",
+    "pids.max": "32"
+  },
+  "service_returncode": 0,
+  "wall_s": 1.1496073520102073,
+  "memory_peak_bytes": 49258496,
+  "fixture_limit": "Small synthetic file; not a large-archive corruption or power-loss durability test.",
+  "io_limit_bytes_s": {
+    "read": 16777216,
+    "write": 8388608
+  }
+}

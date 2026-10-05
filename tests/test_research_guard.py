@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -66,6 +67,9 @@ class GuardTests(unittest.TestCase):
                 self.assertGreaterEqual(right['started_at_unix_s'], left['finished_at_unix_s'])
 
     def test_killed_guard_keeps_live_child_group_blocked_then_recovers(self):
+        evidence = self.root / 'original-evidence.json'
+        evidence.write_text('{"kind": "recovery fixture", "value": 42}\n')
+        original_hash = hashlib.sha256(evidence.read_bytes()).hexdigest()
         started, release = self.root / 'started', self.root / 'release'
         owner = self.launch('old', 'archive', self.blocking_job(started, release))
         wait_for(started.exists)
@@ -73,6 +77,7 @@ class GuardTests(unittest.TestCase):
         old = json.loads(active.read_text())
         os.kill(old['process_group'], signal.SIGKILL)
         owner.wait(timeout=10)
+        interrupted_receipt = (self.root / 'old.json').read_bytes()
         blocked = self.launch('blocked', 'timing', 'raise SystemExit(99)')
         self.assertEqual(blocked.wait(timeout=10), 75)
         self.assertFalse((self.root / 'blocked.json').exists())
@@ -88,6 +93,8 @@ class GuardTests(unittest.TestCase):
         result = json.loads((self.root / 'recovered.json').read_text())
         self.assertEqual(result['recovered_window'], old['id'])
         self.assertFalse(active.exists())
+        self.assertEqual((self.root / 'old.json').read_bytes(), interrupted_receipt)
+        self.assertEqual(hashlib.sha256(evidence.read_bytes()).hexdigest(), original_hash)
 
     def test_failed_command_releases_window_but_preserves_failure_receipt(self):
         failed = self.launch('failed', 'qualification', 'raise SystemExit(3)')

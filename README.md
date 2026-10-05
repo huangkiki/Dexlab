@@ -180,3 +180,5 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 感谢 [UniLab](https://github.com/unilabsim/UniLab)、[Project SuperDex](https://github.com/unilabsim/project_superdex)、[MuJoCo](https://github.com/google-deepmind/mujoco)、[Newton](https://github.com/newton-physics/newton)、[OpenArm](https://github.com/enactic/openarm) 和 [Wuji](https://github.com/wuji-technology)。文档组织参考 [RLinf](https://github.com/RLinf/RLinf)。SuperDex 抓梗演示收录于 [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex)，Astra 参与开发与调试。
 
 代码：[Apache-2.0](LICENSE)；第三方资产见[来源与许可](docs/ASSETS.zh-CN.md)。
+
+**研究交付可追溯性：** [实际夹布交付与中断恢复审计](docs/autonomous-delivery.zh-CN.md)分别记录实验参照、失败、独立评分、归档和恢复证据；工作流通过不等于物理准确。
