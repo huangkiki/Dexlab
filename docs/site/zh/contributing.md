@@ -25,3 +25,5 @@ README 展示定位、当前结论、关键图表、连续近景与文档入口�
 ## 执行与恢复
 
 实验优先使用通过资源准入的本机，远端可选。选项前复审优先级与活跃任务，保留中断证据，同一队列只有一个执行者。[完整工作流](https://github.com/huangkiki/Dexlab/blob/main/docs/autoresearch.zh-CN.md) 说明强制限额、测速/归档互斥及交付条件。持续目标在定时恢复检查之间继续推进；克隆仓库不会安装调度器。
+
+[实际交付与中断恢复审计](https://github.com/huangkiki/Dexlab/blob/main/docs/autonomous-delivery.zh-CN.md)
