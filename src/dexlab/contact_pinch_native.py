@@ -5,6 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
+from dexlab.engine_versions import mujoco_profile_identity
+
 from dexlab.cloth_engines import package_identity
 from dexlab.contact_pinch import HEIGHT, PAD_HALF, PAD_MASS
 from dexlab.physx_baseline import write_json
@@ -43,9 +45,8 @@ class MuJoCoCylinder:
     def __init__(self, case, output):
         import mujoco as mj
 
-        identity = package_identity("mujoco")
-        if identity["version"] != "3.11.0":
-            raise ValueError("MuJoCo3.11.0 required")
+        identity = mujoco_profile_identity(package_identity("mujoco"),
+                                           mj.mj_versionString())
         self.mj, self.case = mj, case
         geometry(case, output)
         pads = []

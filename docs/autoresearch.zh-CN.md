@@ -91,3 +91,5 @@ python3 scripts/bounded_run.py --profile experiment \
 [参数来源与研究方法](research-focus.zh-CN.md) · [返回 DexLab](../README.md)
 
 [远端资格验证与归档协议](remote-research.zh-CN.md)
+
+实测原生资格运行出现内存压力后，新增显式 `experiment-24g` 配置：24 GiB 硬上限、23 GiB 软上限；仍为两核 CPU 配额、128 进程、零 swap、原 I/O 限速和有限运行时间。默认 `experiment` 保持 16/15 GiB，并继续拒绝 24 GiB 覆盖。两种实验配置均在启动前和服务内部实测完整额度加 8 GiB 桌面余量；增加内存不授权并发实验。

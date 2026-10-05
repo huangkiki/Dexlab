@@ -271,7 +271,10 @@ def check_remote(worktree, destination, remote_state=None):
 
 def check(worktree, resource_dir=None):
     """Always verify both physical episodes; test logs stay inside the worktree."""
-    python = str(worktree / ".venv/bin/python")
+    python = os.environ.get("SUPERDEX_PYTHON") or str(worktree / ".venv/bin/python")
+    wheel_dir = os.environ.get("DEXLAB_QUALIFICATION_WHEELS")
+    if os.environ.get("DEXLAB_MUJOCO_PROFILE", "").startswith("qualification-") and not wheel_dir:
+        raise ValueError("Candidate submission requires DEXLAB_QUALIFICATION_WHEELS")
     run(
         python,
         "-c",
@@ -314,8 +317,11 @@ def check(worktree, resource_dir=None):
         return run("env", "LC_ALL=C", "/usr/bin/time", "-q", "-f", layout,
                    "-o", str(receipt), "--", *command, cwd=worktree)
     outputs = {}
+    output_root = Path(os.environ.get("DEXLAB_RUN_ROOT") or worktree / "demos/apple-stem-grasp/runs")
+    if not output_root.is_absolute():
+        raise ValueError("DEXLAB_RUN_ROOT must be an absolute output directory")
     for backend in ("mujoco", "superdex"):
-        output = worktree / "demos/apple-stem-grasp/runs" / f"autoresearch-{backend}-{run_id}"
+        output = output_root / f"autoresearch-{backend}-{run_id}"
         outputs[backend] = str(output)
         measured(backend, "episode",
             "bash",
@@ -329,6 +335,12 @@ def check(worktree, resource_dir=None):
         measured(backend, "verify", python,
                  "demos/apple-stem-grasp/src/verify_sdf_grasp.py", str(output))
     result = {"run_id": run_id, "outputs": outputs}
+    if wheel_dir:
+        admission = output_root / f"autoresearch-admission-{run_id}.json"
+        run(python, "-m", "dexlab.apple_admission", "--mujoco", outputs["mujoco"],
+            "--superdex", outputs["superdex"], "--wheel-dir", wheel_dir,
+            "--output", str(admission), cwd=worktree)
+        result["admission"] = str(admission)
     if resource_dir is not None:
         (resource_dir / f"{run_id}-outputs.json").write_text(json.dumps(result, indent=2))
     return result

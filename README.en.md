@@ -104,6 +104,16 @@ The hold window is 11–14 s, checking lift, two-pad support, penetration, wrist
 
 **[Documentation source](docs/site/en/index.md) · [中文文档](docs/site/zh/index.md)**. The site maintains getting started, experiments, results, engine methods, benchmarks and contribution guidance. Both languages use a strict Sphinx build; deployment configuration is included. An online address will be announced after deployment verification.
 
+## Latest-stable qualification
+
+Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.
+
+The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.
+
+The local candidate passes **346 unit tests**. Migration tree `8ac3d71` completed both 14-second MuJoCo 3.14 and SuperDex FP64 grasps with independent acceptance; all five participating packages subsequently matched official wheels against installed code. The added provenance admission still needs final-source regression; no completed formal benchmark is claimed. Cloth remains unqualified: drape intrusion is 2.656 mm against 1.5 mm, robot-cloth strain is 5.48% against 5%, and independent auditing detects table intrusion. Engine code and physical acceptance limits remain unchanged.
+
+The latest robot-cloth contrast still fails: 5.48% strain exceeds its bound, and independent geometry auditing detects table intrusion from the first frame. See the [migration report](docs/engine-qualification.md).
+
 ## Quick reproduction
 
 On Linux x86_64, install [uv](https://docs.astral.sh/uv/getting-started/installation/) and reproduce the original pinned demo:
@@ -125,7 +135,3 @@ Submit reproducible problems, parameter studies and failures as [issues](https:/
 Thanks to [UniLab](https://github.com/unilabsim/UniLab), [Project SuperDex](https://github.com/unilabsim/project_superdex), [MuJoCo](https://github.com/google-deepmind/mujoco), [Newton](https://github.com/newton-physics/newton), [OpenArm](https://github.com/enactic/openarm) and [Wuji](https://github.com/wuji-technology). Documentation organization draws on [RLinf](https://github.com/RLinf/RLinf). The SuperDex grasp appears in [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex); Astra assisted development and debugging.
 
 Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs/ASSETS.md).
-
-Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.
-
-The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.

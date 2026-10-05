@@ -21,6 +21,8 @@ PROFILES = {
     'archive': dict(memory=8192, high=6144, cpu=100, tasks=32, timeout=900, read=16777216, write=8388608),
     'experiment': dict(memory=16384, high=15360, cpu=200, tasks=128, timeout=3600, read=33554432, write=16777216),
 }
+# Explicit opt-in after measured pressure; the default experiment cap is unchanged.
+PROFILES['experiment-24g'] = {**PROFILES['experiment'], 'memory': 24576, 'high': 23552}
 
 METRICS = ('memory.current', 'memory.peak', 'memory.events', 'cpu.stat',
            'pids.current', 'pids.events', 'io.stat')
@@ -112,7 +114,7 @@ def inside(args):
     root = current_cgroup()
     limits = verify_limits(root, args.device_number, args.memory_bytes, args.high_bytes, args.profile)
     admission = (experiment_admission(args.data_dir, args.device_number, args.memory_bytes)
-                 if args.profile == 'experiment' else None)
+                 if args.profile != 'archive' else None)
     service = verify_service(root.name, args.timeout, PROFILES[args.profile]['tasks'])
     state = {'state': 'running', 'profile': args.profile, 'admission': admission,
              'effective_service_properties': service,
@@ -152,7 +154,7 @@ def launch(args):
     if os.getuid() == 0:
         raise ValueError('Launch as the ordinary workload owner, not root')
     device_number = f'{os.major(info.st_rdev)}:{os.minor(info.st_rdev)}'
-    if args.profile == 'experiment':
+    if args.profile != 'archive':
         experiment_admission(args.data_dir, device_number, args.memory_mib * 1024**2)
     args.receipt = args.receipt.resolve()
     args.receipt.parent.mkdir(parents=True, exist_ok=True)
@@ -241,7 +243,7 @@ def main():
                             or not 0 < args.high_mib <= args.memory_mib <= policy['memory']
                             or not 0 < args.timeout <= 3600):
         parser.error('Require device, fresh receipt, 0 < high <= memory <= profile cap, and timeout <= 3600 s')
-    if args.profile == 'experiment' and args.data_dir is None:
+    if args.profile != 'archive' and args.data_dir is None:
         parser.error('Experiment profile requires --data-dir')
     return inside(args) if args.inside else launch(args)
 

@@ -1,0 +1,245 @@
+{
+  "audit": [
+    {
+      "package": "mujoco",
+      "version": "3.14.0",
+      "source": "https://pypi.org/pypi/mujoco/json",
+      "checked_at": "2026-10-05T03:42:21.692281+00:00",
+      "yanked": false,
+      "classifiers": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
+        "Programming Language :: Python :: 3.15",
+        "Topic :: Scientific/Engineering"
+      ],
+      "requires_dist": [
+        "absl-py",
+        "etils[epath]",
+        "glfw",
+        "numpy",
+        "pyopengl",
+        "websockets>=13",
+        "absl-py; extra == \"sysid\"",
+        "colorama; extra == \"sysid\"",
+        "imageio[ffmpeg]; extra == \"sysid\"",
+        "jinja2; extra == \"sysid\"",
+        "matplotlib; extra == \"sysid\"",
+        "plotly; extra == \"sysid\"",
+        "pyyaml; extra == \"sysid\"",
+        "scipy; extra == \"sysid\"",
+        "tabulate; extra == \"sysid\"",
+        "typing_extensions; extra == \"sysid\"",
+        "usd-core; extra == \"usd\"",
+        "pillow; extra == \"usd\""
+      ],
+      "distribution_sha256": {
+        "mujoco-3.14.0-cp310-cp310-macosx_11_0_arm64.whl": "8a263a7e334e0b40db9fa69ee90ebe7cd390c01e8122d0722e9e0bd7fe3ded71",
+        "mujoco-3.14.0-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "2a75ecc3db198c266ef7e4b5b7efe08ecf173414a8e521142c0a26cf997ae708",
+        "mujoco-3.14.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "907562096e6f9a927b32221cf09530a7c0a06b2b3debfd42775a469cdd00aa08",
+        "mujoco-3.14.0-cp310-cp310-win_amd64.whl": "a5fe30e8a7c1b48ef24a1cadc869b9c461b73705032a41ec2b4b1e5d6c29db9e",
+        "mujoco-3.14.0-cp311-cp311-macosx_11_0_arm64.whl": "ac43ebbfdf5522c556291cbc94a4d420ffed226f67e37a00dfcaf01525fa93bc",
+        "mujoco-3.14.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "068080a3c98f7514f1e17a2c414e40cd86f797679b182c21799584ea27300f9a",
+        "mujoco-3.14.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "922983dfdf88d29f4eb0f451a1d18867156d9fc97e3df6e63b9933cc0eba4d38",
+        "mujoco-3.14.0-cp311-cp311-win_amd64.whl": "b6c619c2ce649083a9055bc115c142a0f524ff9ab1effff4c72f074bc58cb2e5",
+        "mujoco-3.14.0-cp312-cp312-macosx_11_0_arm64.whl": "ec16352489f6abdfec92397f627c4f36656eab881bf5282121da8cfa83e5dc61",
+        "mujoco-3.14.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "f2f72463083b4d319874a93f91a54d46e5d538caea2706f18be874d4307b0264",
+        "mujoco-3.14.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "7042bfc7cf3e67e885463ff053fc1c28947b75c5ca0cce8d3f780dff4f83f055",
+        "mujoco-3.14.0-cp312-cp312-win_amd64.whl": "d1777cd426f9155bed514d2362c74d6456df784bb84b00759bc253b64564e92c",
+        "mujoco-3.14.0-cp313-cp313-macosx_11_0_arm64.whl": "69b06639629506459d8e4d605668b73d8175d146219c132be406b6a75792d10a",
+        "mujoco-3.14.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "60e31f3ca2320e9f9ab3b783b4189dad422047b42bb5a4fcfcaf04d371143448",
+        "mujoco-3.14.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "dd02d0744bd5bd802394ee03310fbc4c8e629cfa5ed3d5c2abc56c1914ae316e",
+        "mujoco-3.14.0-cp313-cp313-win_amd64.whl": "ef6967db38492a1b296c7d8dc7443ebd838ac2aac4593a64fe27a2b09315e371",
+        "mujoco-3.14.0-cp314-cp314-macosx_11_0_arm64.whl": "645d3b84395960062d63bf83c3092363cbfe7fb671a95a2680445ce5bcd695f3",
+        "mujoco-3.14.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "435e14a3c03c7b912cf56d9f9c3710e091a5f29096159fe10cd82b38b7d97dc2",
+        "mujoco-3.14.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "6c9e388e723acb70f272c90666bb6ca6b76dd7930d051ae3a092a4c4ea5ca6a4",
+        "mujoco-3.14.0-cp314-cp314t-macosx_11_0_arm64.whl": "a1fd0e888eb0a7e3dcfb33c0e563b0678cb424f58d093b0c470c2ea2bd80096f",
+        "mujoco-3.14.0-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "c3cc7a11a36b34955a4a8f6c22e5180ed4a00e924d49cd91678ed338896ae1b2",
+        "mujoco-3.14.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "f2d8b07bf7cc486c2dedd3a981e03b766c886072504bf5b887640bd8110a0bb5",
+        "mujoco-3.14.0-cp314-cp314t-win_amd64.whl": "2f0be3c6369825fd49137d88f025162a9b122b2f255750667d0a2084567353dd",
+        "mujoco-3.14.0-cp314-cp314-win_amd64.whl": "2813411c339f9eb5acfb69b154462d88c3c3c7aa049e334c713d6cacac3d5247",
+        "mujoco-3.14.0-cp315-cp315-macosx_11_0_arm64.whl": "72a0d67b770d1167cc590bfe14932c751e1627c6484d2f572cadc634076a49ac",
+        "mujoco-3.14.0-cp315-cp315-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "65812fcac30150fa5c6b712ae710a3655b0e1996976d9cecb5b64d6c1720b3a8",
+        "mujoco-3.14.0-cp315-cp315-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "27ba9e30ff76da3264aef14ee3b91fe1a2ad0f7ab764907d479cd5c687bab30b",
+        "mujoco-3.14.0-cp315-cp315t-macosx_11_0_arm64.whl": "d59ffd55be15e39dd3935d7fc5d24702962283a60d1a5866ddeec6c1f514ffcc",
+        "mujoco-3.14.0-cp315-cp315t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl": "e67dbfa7e3ee1d29fab342c1a675c072011c0be3f59d0d36d396d274461bca5c",
+        "mujoco-3.14.0-cp315-cp315t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "6d99b01a0f5ecbc4c0b24a70e97cc1208d3c4cddd3d81bc5caaa5aa0d1aca923",
+        "mujoco-3.14.0-cp315-cp315t-win_amd64.whl": "44010db2efc5ea05b1eb205599f9958ab128b5a748bff5529f52db7fcdf029dc",
+        "mujoco-3.14.0-cp315-cp315-win_amd64.whl": "94ade6c841bfed4bab621169592a8f276dcd8ffe2f8313ffd9efa56f82d16600",
+        "mujoco-3.14.0.tar.gz": "f75a0731f6fd829387a1ba9c9a7891efec429000517a6c3f9af98f41735d3b6f"
+      }
+    },
+    {
+      "package": "superdex-physics",
+      "version": "1.0.0",
+      "source": "https://pypi.org/pypi/superdex-physics/json",
+      "checked_at": "2026-10-05T03:42:22.241848+00:00",
+      "yanked": false,
+      "classifiers": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Scientific/Engineering"
+      ],
+      "requires_dist": [
+        "imageio[ffmpeg]>=2.36.1",
+        "numpy",
+        "pillow",
+        "polyscope<2.6,>=2.5.0",
+        "pycollada",
+        "pyre-extensions",
+        "scikit-image",
+        "scipy",
+        "tabulate",
+        "trimesh",
+        "typing_extensions",
+        "unrealcv",
+        "superdex-physics-fp64==1.0.0; extra == \"double\""
+      ],
+      "distribution_sha256": {
+        "superdex_physics-1.0.0-cp312-cp312-macosx_11_0_arm64.whl": "c30a5a36ffc4232e0ca8a0117a43a7af6b1880b674c6a2d3f6b9b67babe1887e",
+        "superdex_physics-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl": "46fa446ed0bb86815d6970d14e11f2777bcc7391119c4ebe582ac698e1373377",
+        "superdex_physics-1.0.0-cp312-cp312-win_amd64.whl": "7715adfada7ca6fbae6edad54a2de4904bcf00d3ee3a6b4be968774f009d4c93"
+      }
+    },
+    {
+      "package": "superdex-robotics",
+      "version": "1.0.0",
+      "source": "https://pypi.org/pypi/superdex-robotics/json",
+      "checked_at": "2026-10-05T03:42:22.810259+00:00",
+      "yanked": false,
+      "classifiers": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Scientific/Engineering"
+      ],
+      "requires_dist": [
+        "superdex-physics==1.0.0",
+        "superdex-robotics-fp64==1.0.0; extra == \"double\""
+      ],
+      "distribution_sha256": {
+        "superdex_robotics-1.0.0-cp312-cp312-macosx_11_0_arm64.whl": "79786ef4740eecc2cd3c133cf6143d14dc289e5e7821ad7451be50c93e0357b7",
+        "superdex_robotics-1.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "a9de8feaf989f7ebae285b5bd2a57880c27abf91d0a98db1d4ef5f7ccdd306b2",
+        "superdex_robotics-1.0.0-cp312-cp312-win_amd64.whl": "23cd8942bf08364311517bf1e4e616a3efadf30acf658e4159c82cdb89f37c6d"
+      }
+    },
+    {
+      "package": "superdex-physics-fp64",
+      "version": "1.0.0",
+      "source": "https://pypi.org/pypi/superdex-physics-fp64/json",
+      "checked_at": "2026-10-05T03:42:23.431779+00:00",
+      "yanked": false,
+      "classifiers": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Scientific/Engineering"
+      ],
+      "requires_dist": [
+        "superdex-physics==1.0.0"
+      ],
+      "distribution_sha256": {
+        "superdex_physics_fp64-1.0.0-cp312-cp312-macosx_11_0_arm64.whl": "6a550f9eeec65533f099be59910f152983bb3c56073a83d7df0eb621dd5f3884",
+        "superdex_physics_fp64-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl": "ce300f8a2b30f8043aad238f4c918f981d143256276e34935fa31382a22c02c4",
+        "superdex_physics_fp64-1.0.0-cp312-cp312-win_amd64.whl": "1c770276e3538ed0e287028e950078fd6e0869192a5239829805949a6e5194c9"
+      }
+    },
+    {
+      "package": "superdex-robotics-fp64",
+      "version": "1.0.0",
+      "source": "https://pypi.org/pypi/superdex-robotics-fp64/json",
+      "checked_at": "2026-10-05T03:42:24.007571+00:00",
+      "yanked": false,
+      "classifiers": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Scientific/Engineering"
+      ],
+      "requires_dist": [
+        "superdex-physics-fp64==1.0.0",
+        "superdex-robotics==1.0.0"
+      ],
+      "distribution_sha256": {
+        "superdex_robotics_fp64-1.0.0-cp312-cp312-macosx_11_0_arm64.whl": "4aa36541e59ef7fff91f29ddf2e3f1fcdc6a65d66f7e9c4e6c1b3f823715d5db",
+        "superdex_robotics_fp64-1.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": "7445d2d4415a98fad4040a0358f0e4c545d8d2cd73c20b2b877bc9b3c9f16589",
+        "superdex_robotics_fp64-1.0.0-cp312-cp312-win_amd64.whl": "785aee2481aec4d9fa46ac5010c336098a679c2875b83c4e9f82f4a69d3e498f"
+      }
+    }
+  ],
+  "runtime": {
+    "installed": {
+      "mujoco": "3.14.0",
+      "superdex-physics": "1.0.0",
+      "superdex-robotics": "1.0.0",
+      "superdex-physics-fp64": "1.0.0",
+      "superdex-robotics-fp64": "1.0.0"
+    },
+    "native": {
+      "mujoco": "3.14.0",
+      "superdex": {
+        "version_api": null,
+        "precision": "fp64",
+        "identity_method": "loaded wheel payload SHA256",
+        "physics_sha256": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+        "robotics_sha256": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+      }
+    },
+    "artifact_sha256": {
+      "mujoco": "5e7623e30f55bf324d4c9648379ebeba5bcd153ee0304c52eac74bf8d441000b",
+      "superdex-physics-fp64": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+      "superdex-robotics-fp64": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+    },
+    "package_code_sha256": {
+      "mujoco": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+      "superdex-physics": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+      "superdex-robotics": "6de9e505d7413c332752dfc37c976db44baffed322e51c133dfd4165111b8d5b",
+      "superdex-physics-fp64": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+      "superdex-robotics-fp64": "eceed1c4ab5fa9b4190bd8bdf6900939e57dd9bf9aee56d1cfbedc4346c02037"
+    }
+  },
+  "official_wheels": {
+    "mujoco": {
+      "filename": "mujoco-3.14.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "7042bfc7cf3e67e885463ff053fc1c28947b75c5ca0cce8d3f780dff4f83f055",
+      "package_code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+      "code_files": 137
+    },
+    "superdex-physics": {
+      "filename": "superdex_physics-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "46fa446ed0bb86815d6970d14e11f2777bcc7391119c4ebe582ac698e1373377",
+      "package_code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+      "code_files": 74
+    },
+    "superdex-robotics": {
+      "filename": "superdex_robotics-1.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "a9de8feaf989f7ebae285b5bd2a57880c27abf91d0a98db1d4ef5f7ccdd306b2",
+      "package_code_sha256": "6de9e505d7413c332752dfc37c976db44baffed322e51c133dfd4165111b8d5b",
+      "code_files": 3
+    },
+    "superdex-physics-fp64": {
+      "filename": "superdex_physics_fp64-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "ce300f8a2b30f8043aad238f4c918f981d143256276e34935fa31382a22c02c4",
+      "package_code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+      "code_files": 7
+    },
+    "superdex-robotics-fp64": {
+      "filename": "superdex_robotics_fp64-1.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "7445d2d4415a98fad4040a0358f0e4c545d8d2cd73c20b2b877bc9b3c9f16589",
+      "package_code_sha256": "eceed1c4ab5fa9b4190bd8bdf6900939e57dd9bf9aee56d1cfbedc4346c02037",
+      "code_files": 3
+    }
+  }
+}

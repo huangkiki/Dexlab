@@ -104,6 +104,16 @@ OpenArm 双臂＋Wuji，右手拇指/食指夹梗、左臂停放。苹果与梗�
 
 **[中文文档站源码](docs/site/zh/index.md) · [English documentation](docs/site/en/index.md)**。文档站维护快速开始、实验目录、结果、引擎原理、benchmark 和开发规范；Sphinx 严格构建并维护两种语言，发布配置已纳入仓库。在线地址需部署验证后公布。
 
+## 最新稳定版验证
+
+最新稳定版运行准入正在推进：[版本清单、GPU 基础检查及边界](docs/engine-qualification.zh-CN.md)。设备检查不等于抓取成功，也尚未开放正式 benchmark 派发。
+
+六卡基础接触对照已实际完成：六组参数中 4 组通过、2 组失败。默认软接触下仅减小步长并未减少侵入；详见上面的逐配置报告。这不是苹果抓取验收。
+
+本机候选环境通过 **346 项单测**。迁移源码 `8ac3d71` 的 MuJoCo 3.14 与 SuperDex FP64 各完成 14 秒抓梗并通过独立验收；随后五个参与包均通过官方 wheel 与已安装代码比对。新加入的来源准入逻辑仍需最终源码回归，尚不宣称正式 benchmark 已完成。布料仍未合格：披覆球面侵入 2.656 mm 超过 1.5 mm 上限，夹布应变 5.48% 超过 5%，独立审计还发现桌体侵入；未修改引擎或放宽物理验收。
+
+最新夹布对照仍失败：5.48% 应变超限，独立几何审计从首帧即发现布面进入桌体；详见[迁移报告](docs/engine-qualification.zh-CN.md)。
+
 ## 快速复现
 
 Linux x86_64，安装 [uv](https://docs.astral.sh/uv/getting-started/installation/) 后运行原固定版本演示：
@@ -125,7 +135,3 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 感谢 [UniLab](https://github.com/unilabsim/UniLab)、[Project SuperDex](https://github.com/unilabsim/project_superdex)、[MuJoCo](https://github.com/google-deepmind/mujoco)、[Newton](https://github.com/newton-physics/newton)、[OpenArm](https://github.com/enactic/openarm) 和 [Wuji](https://github.com/wuji-technology)。文档组织参考 [RLinf](https://github.com/RLinf/RLinf)。SuperDex 抓梗演示收录于 [Awesome Astra Embodied AI · Case 7](https://github.com/zjwzcx/Awesome-Astra-Embodied-AI#case-7-dexterous-apple-stem-grasp-in-superdex)，Astra 参与开发与调试。
 
 代码：[Apache-2.0](LICENSE)；第三方资产见[来源与许可](docs/ASSETS.zh-CN.md)。
-
-最新稳定版运行准入正在推进：[版本清单、GPU 基础检查及边界](docs/engine-qualification.zh-CN.md)。设备检查不等于抓取成功，也尚未开放正式 benchmark 派发。
-
-六卡基础接触对照已实际完成：六组参数中 4 组通过、2 组失败。默认软接触下仅减小步长并未减少侵入；详见上面的逐配置报告。这不是苹果抓取验收。

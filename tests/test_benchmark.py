@@ -1,6 +1,8 @@
 """Evidence integrity, paired sampling and failure accounting for benchmarks."""
 
 import copy
+import argparse
+from unittest.mock import patch
 import json
 import tempfile
 import unittest
@@ -8,6 +10,7 @@ from pathlib import Path
 
 from dexlab.benchmark import (
     DEFAULT_SUITE,
+    run_suite,
     aggregate,
     collect_report,
     load_receipt,
@@ -25,6 +28,40 @@ class BenchmarkTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.spec = read_suite(DEFAULT_SUITE)
+
+    def test_unqualified_heldout_dispatch_fails_before_output_or_worker(self):
+        args = argparse.Namespace(suite=DEFAULT_SUITE, split="test", case=None,
+                                  backend="all", output=self.root / "formal")
+        with patch("dexlab.benchmark.subprocess.run") as worker:
+            with self.assertRaisesRegex(ValueError, "Formal batch not qualified"):
+                run_suite(args)
+        worker.assert_not_called()
+        self.assertFalse(args.output.exists())
+
+    def test_formal_dispatch_propagates_task_owner_freeze(self):
+        case = next(case for case in self.spec["cases"] if case["split"] == "test")
+        records = self.root / "records.json"
+        records.write_text("{}")
+        args = argparse.Namespace(suite=DEFAULT_SUITE, split="test", case=case["id"],
+            backend="mujoco", output=self.root / "formal", timestep_sweep=False,
+            resume=False, timeout=1, qualification_records=records)
+        # Exercise the actual dispatcher; task-owner verification is tested
+        # separately against native ownership and independent raw rescoring.
+        frozen = {"task": "apple-stem", "test_fixture": True}
+        def failed_score(directory, job, returncode, elapsed):
+            return {**job, "status": "runtime_error", "outcome": {"passed": False}}
+        with patch("dexlab.benchmark.source_hashes", return_value={}), \
+             patch("dexlab.benchmark.environment", return_value={}), \
+             patch("dexlab.apple_admission.admit_records", return_value=frozen) as admit, \
+             patch("dexlab.benchmark.subprocess.run") as worker, \
+             patch("dexlab.benchmark.score_job", side_effect=failed_score):
+            worker.return_value.returncode = 1
+            run_suite(args)
+        admit.assert_called_once()
+        worker.assert_called_once()
+        signature = json.loads((args.output / "run.json").read_text())
+        self.assertEqual(signature["admission"], frozen)
+        self.assertEqual(len(signature["jobs"]), 1)
 
     def test_disjoint_frozen_cases(self):
         self.assertEqual(len(select_cases(self.spec, "development", None)), 20)

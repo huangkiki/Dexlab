@@ -142,8 +142,12 @@ class CylinderEvidenceTests(unittest.TestCase):
         ):
             self.assertTrue(self.result["checks"][key], key)
         self.assertTrue(self.result["checks"]["native_normal_components_consistent"])
+        # The actuator balances total horizontal contact force, not its normal
+        # component alone: oblique prism facets also carry tangential x force.
+        preload = (self.data["time"][1:] > 0.25) & (self.data["time"][1:] <= 0.3)
+        total_squeeze = self.data["contact_force"][preload, :, 0] * [1, -1]
         np.testing.assert_allclose(
-            self.result["metrics"]["measured_preload_n"], [4, 4], atol=0.001
+            total_squeeze.mean(axis=0), [4, 4], atol=0.001
         )
         self.assertEqual(verify(self.output), self.result)
 
