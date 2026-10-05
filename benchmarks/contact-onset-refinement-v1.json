@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "scope": "Development contact-onset timestep sensitivity; no presettling, no hardware accuracy or engine ranking",
+  "engines": [
+    "mujoco",
+    "superdex"
+  ],
+  "max_runs": 16,
+  "wall_budget_s": 600,
+  "defaults": {
+    "mass": 0.2,
+    "half_size": 0.02,
+    "friction": 0.3,
+    "initial_speed": 0.25,
+    "gravity": 9.81,
+    "timestep": 0.001,
+    "settle": 0,
+    "duration": 0.5
+  },
+  "cases": [
+    {
+      "name": "dev-onset-forward-h",
+      "friction": 0.3,
+      "timestep": 0.001
+    },
+    {
+      "name": "dev-onset-forward-h2",
+      "friction": 0.3,
+      "timestep": 0.0005
+    },
+    {
+      "name": "dev-onset-forward-h4",
+      "friction": 0.3,
+      "timestep": 0.00025
+    },
+    {
+      "name": "dev-onset-forward-h8",
+      "friction": 0.3,
+      "timestep": 0.000125
+    },
+    {
+      "name": "dev-onset-frictionless-h",
+      "friction": 0,
+      "timestep": 0.001
+    },
+    {
+      "name": "dev-onset-frictionless-h2",
+      "friction": 0,
+      "timestep": 0.0005
+    },
+    {
+      "name": "dev-onset-frictionless-h4",
+      "friction": 0,
+      "timestep": 0.00025
+    },
+    {
+      "name": "dev-onset-frictionless-h8",
+      "friction": 0,
+      "timestep": 0.000125
+    }
+  ],
+  "parameters": "Fresh scene every episode; existing nominal normal/contact/solver settings unchanged within engine. Inspect actual initial pose/velocity and native profile equality before grid comparisons. Hidden native histories not claimed observable.",
+  "diagnostics": "Original engineering acceptance unchanged, all failures retained. Shared physical times only; no interpolation or finest-grid truth claim. Coulomb discrepancy separate from numerical self-consistency.",
+  "hypothesis": "Step refinement changes each native transient response toward a stable limit; nonmonotone differences or unmatched starts invalidate a convergence interpretation. No preregistered accuracy pass because no justified accuracy tolerance exists."
+}

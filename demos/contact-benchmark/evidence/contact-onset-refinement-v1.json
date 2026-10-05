@@ -1,0 +1,4855 @@
+{
+  "complete_run_details": true,
+  "runs": [
+    {
+      "id": "mujoco-dev-onset-forward-h",
+      "case": {
+        "name": "dev-onset-forward-h",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.001,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.3,
+            0.0,
+            0.0
+          ],
+          [
+            0.3,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "a6d12b1b0b237a3ece6b81b44353de1d54beadf8024c1f9f1212ba546d4145f3",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "e0f699d057c3a788d51b533c9f9c245916c647bd445b253c74267f46c73342b9",
+        "model.xml": "6625715c4cb98cd44f4a6df4bfa328cc15a7e4dc8487e64be2d9682a93f0a3b1",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "62f6dfc8396f44b8cce2ee7b606f06f88b26878c3d13868b9975b5aef8f77faa",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.09156511299079284,
+        "step_and_observation_seconds": 0.04365545588370878,
+        "total_seconds": 0.1890487659984501
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 5.056576417349079e-05,
+          "penetration_p95_m": 1.539505050002568e-05,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 1.2119194536808209e-12,
+          "maximum_momentum_residual_weight_ratio": 3.051831787402214e-11,
+          "maximum_position_reference_error_m": 0.00011800828171460408,
+          "maximum_velocity_reference_error_m_s": 0.006258913568372576,
+          "maximum_transverse_drift_m": 6.7974220157051904e-18,
+          "maximum_surface_clearance_m": 2.717904710048194e-05,
+          "maximum_orientation_change_rad": 0.0025063964212782884,
+          "normal_force_range_n": [
+            0.0,
+            8.391328522312282
+          ],
+          "maximum_tangential_force_n": 2.517398556693685,
+          "travel_x_m": 0.010511752766970696,
+          "final_speed_m_s": 1.2421297714807552e-16
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-forward-h2",
+      "case": {
+        "name": "dev-onset-forward-h2",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.3,
+            0.0,
+            0.0
+          ],
+          [
+            0.3,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "6b7e158d5ce9ff8619da12f5385f1e2716ab3992c9463d68db486b17b69f1c0f",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "acc78ebc2300df5d791ea14bff9dd62c4ab5ce4f192858655a692ef563d998f5",
+        "model.xml": "9a32156a9338b2d3606be776c6abef58dc51c5cccc7e6b038d0957831d40d005",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "dd453bdc6d0d291cb654a5cce041c27cffe6d432580e65e04cb27181ceff1934",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.09965937800006941,
+        "step_and_observation_seconds": 0.0636625731276581,
+        "total_seconds": 0.2703783350007143
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 2.0184074490545156e-05,
+          "penetration_p95_m": 7.957656118166151e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 3.953449789761976e-10,
+          "maximum_momentum_residual_weight_ratio": 4.1283998238483515e-07,
+          "maximum_position_reference_error_m": 5.7986647804672206e-05,
+          "maximum_velocity_reference_error_m_s": 0.005402308477955586,
+          "maximum_transverse_drift_m": 4.0761115909950176e-18,
+          "maximum_surface_clearance_m": 1.5761262666676157e-05,
+          "maximum_orientation_change_rad": 0.0008433600146620004,
+          "normal_force_range_n": [
+            0.0,
+            8.243254546557772
+          ],
+          "maximum_tangential_force_n": 2.4729763639673314,
+          "travel_x_m": 0.01056301855821683,
+          "final_speed_m_s": 2.3345802490305003e-15
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-forward-h4",
+      "case": {
+        "name": "dev-onset-forward-h4",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.3,
+            0.0,
+            0.0
+          ],
+          [
+            0.3,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "34f29585c6a77d36377b905ddd61e39175726f79c21d7ab8321a8eac45f4bc29",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "b420e38e472f2b80792b0b31f97cf7dd59272df286759da230874590ae8a5b8f",
+        "model.xml": "4ccedb1d9d41aeae6c5ff8d83ea2226e7d420402ccebe622123769f5e70abe6d",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "c19a4ec1f665f1b35f90a349cb3126b0458b39d473ac79a525c9d3d5ffb47fab",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.08779073899495415,
+        "step_and_observation_seconds": 0.10514032033097465,
+        "total_seconds": 0.40714778800611384
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 9.692326614962887e-06,
+          "penetration_p95_m": 4.121666632425636e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 1.5604691983028829e-09,
+          "maximum_momentum_residual_weight_ratio": 1.7847685386017081e-06,
+          "maximum_position_reference_error_m": 3.0192599864272904e-05,
+          "maximum_velocity_reference_error_m_s": 0.0031674723390952416,
+          "maximum_transverse_drift_m": 1.3452699041639205e-18,
+          "maximum_surface_clearance_m": 8.880154656328715e-06,
+          "maximum_orientation_change_rad": 0.0005147667329507575,
+          "normal_force_range_n": [
+            0.0,
+            7.599694597154537
+          ],
+          "maximum_tangential_force_n": 2.279908379146361,
+          "travel_x_m": 0.010598397367302446,
+          "final_speed_m_s": 2.655600110896911e-15
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-forward-h8",
+      "case": {
+        "name": "dev-onset-forward-h8",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.3,
+            0.0,
+            0.0
+          ],
+          [
+            0.3,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "a20b1b8430226a11b381549227472b44b89f00c4a88806ae80ba4b44224e0774",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "dbb146c70c08af2666c3c402d30885355e08d4e59c8578d7b03551a97c977ae3",
+        "model.xml": "f509f444d0689460ff2c1c7dfc366bfa3ef4c3e62ed2972e429c857d77ccd2db",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "1e64893134ba8e4ed1f14e79320a61b2921c04e995bbf6e76f43df89d9afc082",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.10484982699563261,
+        "step_and_observation_seconds": 0.21803717383590993,
+        "total_seconds": 0.7424674329959089
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 4.070212962538344e-06,
+          "penetration_p95_m": 3.329152545656494e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 3.0849029997170874e-09,
+          "maximum_momentum_residual_weight_ratio": 2.051238132323469e-06,
+          "maximum_position_reference_error_m": 1.4880481131062176e-05,
+          "maximum_velocity_reference_error_m_s": 0.002638605300617395,
+          "maximum_transverse_drift_m": 3.90331832996135e-18,
+          "maximum_surface_clearance_m": 1.8062701507351453e-06,
+          "maximum_orientation_change_rad": 0.00017749922961819386,
+          "normal_force_range_n": [
+            0.0,
+            7.346901028607311
+          ],
+          "maximum_tangential_force_n": 2.2040703085821933,
+          "travel_x_m": 0.010611955488006648,
+          "final_speed_m_s": 4.5246096714380895e-15
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-frictionless-h",
+      "case": {
+        "name": "dev-onset-frictionless-h",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.001,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "75e4f077dace3f097a81a396148577507c2101e4df4acd26db5af77267fd2e8d",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "e0f699d057c3a788d51b533c9f9c245916c647bd445b253c74267f46c73342b9",
+        "model.xml": "82d9b842adfaa7574beff6f269e8d88f84871b75fcbaeca8d8f5c22e7d616ec3",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "51254aa418c77c9688a775dd38407975475d79e3712976556f222b448c90d462",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.08968447700317483,
+        "step_and_observation_seconds": 0.044590322984731756,
+        "total_seconds": 0.20211200100311544
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 1.9663698919585026e-05,
+          "penetration_p95_m": 4.867907873875449e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 2.0768942121662803e-12,
+          "maximum_momentum_residual_weight_ratio": 3.057300704682311e-11,
+          "maximum_position_reference_error_m": 1.2286991969645555e-05,
+          "maximum_velocity_reference_error_m_s": 4.9050000003852956e-05,
+          "maximum_transverse_drift_m": 1.63187517239048e-21,
+          "maximum_surface_clearance_m": 0.0,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            2.7942393497850633
+          ],
+          "maximum_tangential_force_n": 2.7942393497850634e-05,
+          "travel_x_m": 0.12498771300803044,
+          "final_speed_m_s": 0.24995094999999615
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-frictionless-h2",
+      "case": {
+        "name": "dev-onset-frictionless-h2",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "ad85ed78b18f6e8a5f24f30443d143983fbd7344222e9c6153ae98150c683b6d",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "acc78ebc2300df5d791ea14bff9dd62c4ab5ce4f192858655a692ef563d998f5",
+        "model.xml": "dde272287874509ccfb2e17017c7b64511b49f4efb3d1ac2679a7005b4df8869",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "fcec091cd0bf463c2a6fa94445f5f12dea6fffdd473fb59774c3a4697e144644",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.09196914300264325,
+        "step_and_observation_seconds": 0.06588937870401423,
+        "total_seconds": 0.2929463769978611
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 1.0114331978668817e-05,
+          "penetration_p95_m": 3.996009310426596e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 4.2594816562768756e-12,
+          "maximum_momentum_residual_weight_ratio": 3.049706826941851e-11,
+          "maximum_position_reference_error_m": 1.2274729469741175e-05,
+          "maximum_velocity_reference_error_m_s": 4.905000000415827e-05,
+          "maximum_transverse_drift_m": 2.3960845300218664e-22,
+          "maximum_surface_clearance_m": 0.0,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            2.346705719120591
+          ],
+          "maximum_tangential_force_n": 2.346705719120591e-05,
+          "travel_x_m": 0.12498772527053034,
+          "final_speed_m_s": 0.24995094999999584
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-frictionless-h4",
+      "case": {
+        "name": "dev-onset-frictionless-h4",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "64d398678e2c0ee297657f7295d1b65dcab79030f984dffc7df1e489de74088a",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "b420e38e472f2b80792b0b31f97cf7dd59272df286759da230874590ae8a5b8f",
+        "model.xml": "d0ede530cf1341e198f25864ddb63074c9a4652c1eacb7088a947dc705d04b4b",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "55a6c6d5af302018303aad70a82486325aad742272530012a9044117174ab3b7",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.08444715499354061,
+        "step_and_observation_seconds": 0.10903223205241375,
+        "total_seconds": 0.46549316799791995
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 5.58582446247291e-06,
+          "penetration_p95_m": 3.5385152445874257e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 2.5183188867572426e-12,
+          "maximum_momentum_residual_weight_ratio": 3.0588511690470063e-11,
+          "maximum_position_reference_error_m": 1.2268598212905601e-05,
+          "maximum_velocity_reference_error_m_s": 4.905000000446358e-05,
+          "maximum_transverse_drift_m": 2.1504396146479192e-21,
+          "maximum_surface_clearance_m": 0.0,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            2.137019539762944
+          ],
+          "maximum_tangential_force_n": 2.1370195397629443e-05,
+          "travel_x_m": 0.12498773140178025,
+          "final_speed_m_s": 0.24995094999999554
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "mujoco-dev-onset-frictionless-h8",
+      "case": {
+        "name": "dev-onset-frictionless-h8",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "solref": [
+            0.005,
+            1.0
+          ],
+          "solimp": [
+            0.95,
+            0.99,
+            0.001,
+            0.5,
+            2.0
+          ]
+        },
+        "engine": "mujoco",
+        "identity": {
+          "version": "3.14.0",
+          "record_verified": true,
+          "code_sha256": "ed320ab31c6ff62179f7f35122325e0b9a115c2ba0fbfdd74501d1c91aff0648",
+          "installation_origin": null,
+          "compatibility_profile": "qualification-3.14.0",
+          "profile_status": "candidate",
+          "formal_batch_qualified": false
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          5.333333333333334e-05,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "solver": {
+          "integrator": 0,
+          "algorithm": 2,
+          "cone": 1,
+          "iterations": 100,
+          "tolerance": 1e-10,
+          "impratio": 1.0,
+          "disableflags": 0,
+          "enableflags": 0
+        },
+        "contact_parameter_observability": "Per-contact native readback at solve epoch",
+        "geometry_readback": {
+          "type": [
+            0,
+            6
+          ],
+          "size": [
+            [
+              2.0,
+              2.0,
+              0.1
+            ],
+            [
+              0.02,
+              0.02,
+              0.02
+            ]
+          ],
+          "priority": [
+            0,
+            0
+          ],
+          "solmix": [
+            1.0,
+            1.0
+          ],
+          "solref": [
+            [
+              0.005,
+              1.0
+            ],
+            [
+              0.005,
+              1.0
+            ]
+          ],
+          "solimp": [
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ],
+            [
+              0.95,
+              0.99,
+              0.001,
+              0.5,
+              2.0
+            ]
+          ],
+          "condim": [
+            3,
+            3
+          ]
+        },
+        "profile": "Explicit native normal profile; not hardware material calibration",
+        "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
+        "solver_status": "Native warning counters; absence of warnings is not a convergence proof"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "5fba12932f3f26dadf401c35b589acfa7a29ca8f44e56d78a664c4d94c9d7ee3",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "dbb146c70c08af2666c3c402d30885355e08d4e59c8578d7b03551a97c977ae3",
+        "model.xml": "857a38e01bd2a5a31ae9299431968f1d142b3516fdfb9ea778117fc897dbd6d8",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "fb5bde92e520cfcd6d696618a7a9b4dcf2375e30ab59ee35efc64cfbeff49b15",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "warning_counters",
+        "maximum_by_type": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.09186218898685183,
+        "step_and_observation_seconds": 0.25584207837528083,
+        "total_seconds": 0.8796561009949073
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 3.600197457171578e-06,
+          "penetration_p95_m": 3.333958494979028e-06,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 2.1768142843825444e-12,
+          "maximum_momentum_residual_weight_ratio": 3.057617761618937e-11,
+          "maximum_position_reference_error_m": 1.2265532576313798e-05,
+          "maximum_velocity_reference_error_m_s": 4.90499999617755e-05,
+          "maximum_transverse_drift_m": 1.426190728490706e-20,
+          "maximum_surface_clearance_m": 0.0,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            2.0356960463028373
+          ],
+          "maximum_tangential_force_n": 2.0356960463028374e-05,
+          "travel_x_m": 0.12498773446741339,
+          "final_speed_m_s": 0.24995095000003822
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-forward-h",
+      "case": {
+        "name": "dev-onset-forward-h",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.001,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.3,
+          0.3
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.3,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "50eda66895b04a48c99a44390693275baeea33280c5c7adfaedca1b64e8177ae",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "efb899e1093a69667c79acc17e31cef308cc3c5384a8089f4bdc2415d28c42fa",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "605db05e2b31bb1dc27951d2a98115de658b7a68a5067c985b8f3edb3d529bc6",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "STOPPED": 1,
+          "CONVERGED": 499
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.27379046799615026,
+        "step_and_observation_seconds": 0.050562307093059644,
+        "total_seconds": 0.3680095469899243
+      },
+      "physical_score": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": false,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": false,
+          "coulomb_position": false,
+          "coulomb_velocity": false,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0003153765657897059,
+          "penetration_p95_m": 0.00022197109126437242,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 6.9231851647089115e-06,
+          "maximum_momentum_residual_weight_ratio": 0.27652177101798225,
+          "maximum_position_reference_error_m": 0.0057747288935604746,
+          "maximum_velocity_reference_error_m_s": 0.10063252080974627,
+          "maximum_transverse_drift_m": 0.00018353685184783442,
+          "maximum_surface_clearance_m": 6.333420363487802e-05,
+          "maximum_orientation_change_rad": 0.05525109849618966,
+          "normal_force_range_n": [
+            0.4020201526296804,
+            14.460035894627174
+          ],
+          "maximum_tangential_force_n": 15.993307953546532,
+          "travel_x_m": 0.0048439287023708975,
+          "final_speed_m_s": 0.0
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-forward-h2",
+      "case": {
+        "name": "dev-onset-forward-h2",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.3,
+          0.3
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.3,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "c4f01cad3407dafcf1f8d5f42ea31e115891df4da19b46f95e8f841de44209e2",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "51797d2742ea39bdf80fe7bb2f1c2b15d8714507855d787299e0fcfc062859bd",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "e705e19fafa4029130cb8f037c5cdffd5fc829353e0e10b1ed25dd4ae9bf975e",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 1000
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.272103296010755,
+        "step_and_observation_seconds": 0.12988282316655386,
+        "total_seconds": 0.5001512610033387
+      },
+      "physical_score": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": false,
+          "coulomb_velocity": false,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0002654712350581116,
+          "penetration_p95_m": 0.00017942075569468002,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 5.53594349539388e-06,
+          "maximum_momentum_residual_weight_ratio": 0.0008270633227404743,
+          "maximum_position_reference_error_m": 0.004333372443566539,
+          "maximum_velocity_reference_error_m_s": 0.08043358248786658,
+          "maximum_transverse_drift_m": 7.552785212877659e-06,
+          "maximum_surface_clearance_m": 6.350747219046812e-05,
+          "maximum_orientation_change_rad": 0.04647249628653587,
+          "normal_force_range_n": [
+            0.0,
+            28.14359806155028
+          ],
+          "maximum_tangential_force_n": 23.999981439410018,
+          "travel_x_m": 0.00628817040620765,
+          "final_speed_m_s": 0.0
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-forward-h4",
+      "case": {
+        "name": "dev-onset-forward-h4",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.3,
+          0.3
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.3,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "2bdfe33eb3cd0d78959784a89ed47a4397d0829c0be570af8c50ea29472ffd1d",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "dbe1a4a501dce188d2e88695df600b2dab39b383454e846db8cb25b8a48977a2",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "fe2774ea8d149e20b28743ec94ee4d9c80e93c80bab5ffc786a95cd7a5bbe78c",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 2000
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.27427185300621204,
+        "step_and_observation_seconds": 0.22825096812448464,
+        "total_seconds": 0.7289412690006429
+      },
+      "physical_score": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": false,
+          "coulomb_velocity": false,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.00025795738793546116,
+          "penetration_p95_m": 0.00011159383423723496,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 3.734251158515889e-06,
+          "maximum_momentum_residual_weight_ratio": 0.0007118717939542845,
+          "maximum_position_reference_error_m": 0.0023779926578859495,
+          "maximum_velocity_reference_error_m_s": 0.05746081910761669,
+          "maximum_transverse_drift_m": 6.023260216712143e-06,
+          "maximum_surface_clearance_m": 0.00010728974255764037,
+          "maximum_orientation_change_rad": 0.043115841632342326,
+          "normal_force_range_n": [
+            0.0,
+            52.0309237832026
+          ],
+          "maximum_tangential_force_n": 23.999997694598818,
+          "travel_x_m": 0.00824524415829258,
+          "final_speed_m_s": 0.0
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-forward-h8",
+      "case": {
+        "name": "dev-onset-forward-h8",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0.3,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.3,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.3,
+          0.3
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.3,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "200106f4039dac20ff0fcae0271cb922162583c9b3ec4662c41856bf957d94f4",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "905f37d018ba309f6c251971ca6341a8ae0e4cc338def737c673d6f07a1e93ae",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "b8b02aeb8d2cc9698e87365a9f9ab082de43e0cde5f14e496749d872b12e6234",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 4000
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.27738469500036445,
+        "step_and_observation_seconds": 0.46497686294605955,
+        "total_seconds": 1.282131063999259
+      },
+      "physical_score": {
+        "passed": false,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": false,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0003140434744831194,
+          "penetration_p95_m": 6.141126702739405e-05,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 2.212061473993998e-06,
+          "maximum_momentum_residual_weight_ratio": 0.0007662331818823321,
+          "maximum_position_reference_error_m": 0.0011477204855307715,
+          "maximum_velocity_reference_error_m_s": 0.04793776157450408,
+          "maximum_transverse_drift_m": 5.371532089149388e-05,
+          "maximum_surface_clearance_m": 0.00022757539672375524,
+          "maximum_orientation_change_rad": 0.04393995661144419,
+          "normal_force_range_n": [
+            0.0,
+            70.79502050521339
+          ],
+          "maximum_tangential_force_n": 23.99999979252544,
+          "travel_x_m": 0.00947992740706892,
+          "final_speed_m_s": 0.0
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-frictionless-h",
+      "case": {
+        "name": "dev-onset-frictionless-h",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.001,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.0,
+          0.0
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.0,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "4e7d3e0d8c1d09576624c109521cc35980835c391e97101aaaeb6a7c4f58d5bb",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "1d930068589f1fb189b221178b388c139ab16aeb506553bcdde1f111b8ed533a",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "49165e4953fb24ae3b92029e2115e76a1510e63d6ce7bdca45f911241a918dca",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 500
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.27122753199364524,
+        "step_and_observation_seconds": 0.08502991993736941,
+        "total_seconds": 0.41354268399300054
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0,
+          "penetration_p95_m": 0.0,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 3.6078763381297563e-06,
+          "maximum_momentum_residual_weight_ratio": 0.0004079021801542695,
+          "maximum_position_reference_error_m": 2.8449465006019636e-16,
+          "maximum_velocity_reference_error_m_s": 3.247402347028583e-15,
+          "maximum_transverse_drift_m": 0.0,
+          "maximum_surface_clearance_m": 0.0001294497545950464,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            10.987808653168612
+          ],
+          "maximum_tangential_force_n": 0.0,
+          "travel_x_m": 0.12499999999999982,
+          "final_speed_m_s": 0.2500000000000002
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-frictionless-h2",
+      "case": {
+        "name": "dev-onset-frictionless-h2",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.0005,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.0,
+          0.0
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.0,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "199638550d143ad1f0bed6a00e3ba4eb3d39860d19acb8611eb5c70686c3ddf6",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "51797d2742ea39bdf80fe7bb2f1c2b15d8714507855d787299e0fcfc062859bd",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "174eee1b31840c11ab49abae48a35343a351b38dba6874d4c73c829500d48de9",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 1000
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.27407906200096477,
+        "step_and_observation_seconds": 0.1348569400870474,
+        "total_seconds": 0.5163116449984955
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0,
+          "penetration_p95_m": 0.0,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 5.616331519631146e-06,
+          "maximum_momentum_residual_weight_ratio": 0.0006806282830306958,
+          "maximum_position_reference_error_m": 2.7755575615628914e-17,
+          "maximum_velocity_reference_error_m_s": 1.942890293094024e-15,
+          "maximum_transverse_drift_m": 0.0,
+          "maximum_surface_clearance_m": 0.00024615471020886237,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            26.686034506272488
+          ],
+          "maximum_tangential_force_n": 0.0,
+          "travel_x_m": 0.1250000000000001,
+          "final_speed_m_s": 0.2500000000000002
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-frictionless-h4",
+      "case": {
+        "name": "dev-onset-frictionless-h4",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.00025,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.0,
+          0.0
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.0,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "894f9c449d44ff5f85013cfdf17543fbe229f62b23b3fbcba7ae7b9fe517b6f8",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "dbe1a4a501dce188d2e88695df600b2dab39b383454e846db8cb25b8a48977a2",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "8e83046766f1ced95e855db9cca43a523621d42249f773e1d7115408b7342d3e",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 2000
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.2743117529898882,
+        "step_and_observation_seconds": 0.23242878340533935,
+        "total_seconds": 0.7357862069911789
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0,
+          "penetration_p95_m": 0.0,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 8.516572343797435e-06,
+          "maximum_momentum_residual_weight_ratio": 0.0009923282803661136,
+          "maximum_position_reference_error_m": 1.3877787807814457e-17,
+          "maximum_velocity_reference_error_m_s": 2.7533531010703882e-14,
+          "maximum_transverse_drift_m": 0.0,
+          "maximum_surface_clearance_m": 0.0004267946573230756,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            51.93343791683438
+          ],
+          "maximum_tangential_force_n": 0.0,
+          "travel_x_m": 0.12499999999999317,
+          "final_speed_m_s": 0.24999999999997247
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    },
+    {
+      "id": "superdex-dev-onset-frictionless-h8",
+      "case": {
+        "name": "dev-onset-frictionless-h8",
+        "mass": 0.2,
+        "half_size": 0.02,
+        "friction": 0,
+        "initial_speed": 0.25,
+        "gravity": 9.81,
+        "timestep": 0.000125,
+        "settle": 0,
+        "duration": 0.5
+      },
+      "initial_state": {
+        "pose": [
+          0.0,
+          0.0,
+          0.02,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": [
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "native": {
+        "normal_parameters_readback": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "normal_viscous_damping_coefficient": 0.0
+        },
+        "engine": "superdex",
+        "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+        "actor_contact_parameters": {
+          "box": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          },
+          "plane": {
+            "penalty_coefficient": 1000000000.0,
+            "penalty_threshold_default": 0.0001,
+            "penalty_smoothing_half_distance": 5e-05,
+            "coulomb_friction_coefficient": 0.0,
+            "friction_falloff_vel": 0.001,
+            "normal_viscous_damping_coefficient": 0.0,
+            "viscous_friction_coefficient": 0.0
+          }
+        },
+        "identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+          "installation_origin": null
+        },
+        "api_identity": {
+          "version": "1.0.0",
+          "record_verified": true,
+          "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+          "installation_origin": null
+        },
+        "mass_readback": 0.2,
+        "inertia_readback": [
+          5.333333333333334e-05,
+          0.0,
+          0.0,
+          5.333333333333334e-05,
+          0.0,
+          5.333333333333334e-05
+        ],
+        "friction_readback": [
+          0.0,
+          0.0
+        ],
+        "contact": {
+          "penalty_coefficient": 1000000000.0,
+          "penalty_threshold_default": 0.0001,
+          "penalty_smoothing_half_distance": 5e-05,
+          "coulomb_friction_coefficient": 0.0,
+          "friction_falloff_vel": 0.001,
+          "normal_viscous_damping_coefficient": 0.0,
+          "viscous_friction_coefficient": 0.0
+        },
+        "solver": {
+          "integrator": "BACKWARD_EULER",
+          "iterations": 100,
+          "absolute_tolerance": 0.001,
+          "relative_tolerance": 1e-06
+        },
+        "profile": "Explicit native penalty and friction constants; not hardware material calibration",
+        "force_epoch": "Actual total force and per-contact native queries after the solved step"
+      },
+      "artifact_sha256": {
+        "contact_plane.py": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0",
+        "contact_plane_task.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a",
+        "contact_plane_native.py": "0ac430fd43f001130b6dd196dd34555d1f73080943124542b7d07f344b1001f7",
+        "contacts.json.gz": "ecec7fa2f52e8618fad48710267de786f615814a60a84648f69799bff1a48d92",
+        "contact_parameters.py": "34a1362d6fa6563f2561d41161839861feae9df1b6799253edc4f9d082acaf63",
+        "geometry.npz": "06582a42ea0143eac8daae5056adefcbd757aaec74fc4ac74d600ebf0c6e6c09",
+        "physx_baseline.py": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798",
+        "native-status.json": "905f37d018ba309f6c251971ca6341a8ae0e4cc338def737c673d6f07a1e93ae",
+        "contact_archive.py": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0",
+        "states.npz": "6f0f29b19ffc8c16fa4ae4a53e830a69a776fba9f643b3cc2116b13f8e206eaf",
+        "cloth_engines.py": "c8483a869ebcb264ff76a9792f745d6118dce86b31474a6651d652f8f870ad07"
+      },
+      "native_status": {
+        "kind": "convergence_status",
+        "counts": {
+          "CONVERGED": 4000
+        }
+      },
+      "cost_seconds": {
+        "preparation_seconds": 0.27450615300040226,
+        "step_and_observation_seconds": 0.458995141874766,
+        "total_seconds": 1.2413274830032606
+      },
+      "physical_score": {
+        "passed": true,
+        "checks": {
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "no_tensile_normal_force": true,
+          "support_matches_weight": true,
+          "momentum_balance": true,
+          "bounded_penetration": true,
+          "surface_contact_geometry": true,
+          "no_transverse_drift": true,
+          "initially_level_reference_applicable": true,
+          "no_tipping_reference_applicable": true,
+          "coulomb_position": true,
+          "coulomb_velocity": true,
+          "native_run_completed": true,
+          "source_unchanged": true,
+          "archived_source_hashes_match": true,
+          "clean_shutdown": true,
+          "declared_limits": true,
+          "artifact_hashes_match": true,
+          "contact_ledger_matches": true,
+          "native_mass_matches": true,
+          "native_inertia_matches": true,
+          "native_friction_matches": true
+        },
+        "metrics": {
+          "maximum_penetration_m": 0.0,
+          "penetration_p95_m": 0.0,
+          "penetration_over_limit_sample_duration_s": 0.0,
+          "support_relative_error": 1.4767828243167358e-05,
+          "maximum_momentum_residual_weight_ratio": 0.0009865994910407596,
+          "maximum_position_reference_error_m": 4.371503159461554e-16,
+          "maximum_velocity_reference_error_m_s": 2.7533531010703882e-14,
+          "maximum_transverse_drift_m": 0.0,
+          "maximum_surface_clearance_m": 0.00062888225485443,
+          "maximum_orientation_change_rad": 0.0,
+          "normal_force_range_n": [
+            0.0,
+            70.81929306813902
+          ],
+          "maximum_tangential_force_n": 0.0,
+          "travel_x_m": 0.12499999999999013,
+          "final_speed_m_s": 0.24999999999997247
+        },
+        "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+      }
+    }
+  ],
+  "scope": "Contact-onset development self-consistency; no exact numerical-error or physical-accuracy claim",
+  "expected_pairs": 12,
+  "comparable_pairs": 12,
+  "pairs": [
+    {
+      "engine": "mujoco",
+      "control": "forward",
+      "coarse": "mujoco-dev-onset-forward-h",
+      "fine": "mujoco-dev-onset-forward-h2",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 501,
+        "coarse_timestep_s": 0.001,
+        "fine_timestep_s": 0.0005,
+        "maximum_position_m": 6.116638601733269e-05,
+        "rms_position_m": 4.9690111520219485e-05,
+        "maximum_linear_velocity_m_s": 0.034495232724109856,
+        "rms_linear_velocity_m_s": 0.004843768162388654,
+        "maximum_angular_velocity_rad_s": 1.885405482285475,
+        "rms_angular_velocity_rad_s": 0.28423255391243774,
+        "maximum_orientation_rad": 0.002622811632847898,
+        "rms_orientation_rad": 0.0003615225034155293
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.056576417349079e-05,
+            "penetration_p95_m": 1.539505050002568e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.2119194536808209e-12,
+            "maximum_momentum_residual_weight_ratio": 3.051831787402214e-11,
+            "maximum_position_reference_error_m": 0.00011800828171460408,
+            "maximum_velocity_reference_error_m_s": 0.006258913568372576,
+            "maximum_transverse_drift_m": 6.7974220157051904e-18,
+            "maximum_surface_clearance_m": 2.717904710048194e-05,
+            "maximum_orientation_change_rad": 0.0025063964212782884,
+            "normal_force_range_n": [
+              0.0,
+              8.391328522312282
+            ],
+            "maximum_tangential_force_n": 2.517398556693685,
+            "travel_x_m": 0.010511752766970696,
+            "final_speed_m_s": 1.2421297714807552e-16
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 2.0184074490545156e-05,
+            "penetration_p95_m": 7.957656118166151e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.953449789761976e-10,
+            "maximum_momentum_residual_weight_ratio": 4.1283998238483515e-07,
+            "maximum_position_reference_error_m": 5.7986647804672206e-05,
+            "maximum_velocity_reference_error_m_s": 0.005402308477955586,
+            "maximum_transverse_drift_m": 4.0761115909950176e-18,
+            "maximum_surface_clearance_m": 1.5761262666676157e-05,
+            "maximum_orientation_change_rad": 0.0008433600146620004,
+            "normal_force_range_n": [
+              0.0,
+              8.243254546557772
+            ],
+            "maximum_tangential_force_n": 2.4729763639673314,
+            "travel_x_m": 0.01056301855821683,
+            "final_speed_m_s": 2.3345802490305003e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "mujoco",
+      "control": "forward",
+      "coarse": "mujoco-dev-onset-forward-h2",
+      "fine": "mujoco-dev-onset-forward-h4",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 1001,
+        "coarse_timestep_s": 0.0005,
+        "fine_timestep_s": 0.00025,
+        "maximum_position_m": 3.537880908563787e-05,
+        "rms_position_m": 3.298773716969565e-05,
+        "maximum_linear_velocity_m_s": 0.021824325830941543,
+        "rms_linear_velocity_m_s": 0.002522282024137212,
+        "maximum_angular_velocity_rad_s": 1.0069660436168149,
+        "rms_angular_velocity_rad_s": 0.15054093903979074,
+        "maximum_orientation_rad": 0.0007265668147370594,
+        "rms_orientation_rad": 0.00011339331588512705
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 2.0184074490545156e-05,
+            "penetration_p95_m": 7.957656118166151e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.953449789761976e-10,
+            "maximum_momentum_residual_weight_ratio": 4.1283998238483515e-07,
+            "maximum_position_reference_error_m": 5.7986647804672206e-05,
+            "maximum_velocity_reference_error_m_s": 0.005402308477955586,
+            "maximum_transverse_drift_m": 4.0761115909950176e-18,
+            "maximum_surface_clearance_m": 1.5761262666676157e-05,
+            "maximum_orientation_change_rad": 0.0008433600146620004,
+            "normal_force_range_n": [
+              0.0,
+              8.243254546557772
+            ],
+            "maximum_tangential_force_n": 2.4729763639673314,
+            "travel_x_m": 0.01056301855821683,
+            "final_speed_m_s": 2.3345802490305003e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 9.692326614962887e-06,
+            "penetration_p95_m": 4.121666632425636e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.5604691983028829e-09,
+            "maximum_momentum_residual_weight_ratio": 1.7847685386017081e-06,
+            "maximum_position_reference_error_m": 3.0192599864272904e-05,
+            "maximum_velocity_reference_error_m_s": 0.0031674723390952416,
+            "maximum_transverse_drift_m": 1.3452699041639205e-18,
+            "maximum_surface_clearance_m": 8.880154656328715e-06,
+            "maximum_orientation_change_rad": 0.0005147667329507575,
+            "normal_force_range_n": [
+              0.0,
+              7.599694597154537
+            ],
+            "maximum_tangential_force_n": 2.279908379146361,
+            "travel_x_m": 0.010598397367302446,
+            "final_speed_m_s": 2.655600110896911e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "mujoco",
+      "control": "forward",
+      "coarse": "mujoco-dev-onset-forward-h4",
+      "fine": "mujoco-dev-onset-forward-h8",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 2001,
+        "coarse_timestep_s": 0.00025,
+        "fine_timestep_s": 0.000125,
+        "maximum_position_m": 1.53935982652996e-05,
+        "rms_position_m": 1.294874839496405e-05,
+        "maximum_linear_velocity_m_s": 0.01086390166797407,
+        "rms_linear_velocity_m_s": 0.0016730189800292907,
+        "maximum_angular_velocity_rad_s": 0.8898780320655926,
+        "rms_angular_velocity_rad_s": 0.0986631543465795,
+        "maximum_orientation_rad": 0.0005377999471106009,
+        "rms_orientation_rad": 5.4222341239216405e-05
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 9.692326614962887e-06,
+            "penetration_p95_m": 4.121666632425636e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.5604691983028829e-09,
+            "maximum_momentum_residual_weight_ratio": 1.7847685386017081e-06,
+            "maximum_position_reference_error_m": 3.0192599864272904e-05,
+            "maximum_velocity_reference_error_m_s": 0.0031674723390952416,
+            "maximum_transverse_drift_m": 1.3452699041639205e-18,
+            "maximum_surface_clearance_m": 8.880154656328715e-06,
+            "maximum_orientation_change_rad": 0.0005147667329507575,
+            "normal_force_range_n": [
+              0.0,
+              7.599694597154537
+            ],
+            "maximum_tangential_force_n": 2.279908379146361,
+            "travel_x_m": 0.010598397367302446,
+            "final_speed_m_s": 2.655600110896911e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 4.070212962538344e-06,
+            "penetration_p95_m": 3.329152545656494e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.0849029997170874e-09,
+            "maximum_momentum_residual_weight_ratio": 2.051238132323469e-06,
+            "maximum_position_reference_error_m": 1.4880481131062176e-05,
+            "maximum_velocity_reference_error_m_s": 0.002638605300617395,
+            "maximum_transverse_drift_m": 3.90331832996135e-18,
+            "maximum_surface_clearance_m": 1.8062701507351453e-06,
+            "maximum_orientation_change_rad": 0.00017749922961819386,
+            "normal_force_range_n": [
+              0.0,
+              7.346901028607311
+            ],
+            "maximum_tangential_force_n": 2.2040703085821933,
+            "travel_x_m": 0.010611955488006648,
+            "final_speed_m_s": 4.5246096714380895e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "mujoco",
+      "control": "frictionless",
+      "coarse": "mujoco-dev-onset-frictionless-h",
+      "fine": "mujoco-dev-onset-frictionless-h2",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 501,
+        "coarse_timestep_s": 0.001,
+        "fine_timestep_s": 0.0005,
+        "maximum_position_m": 9.823448393005836e-06,
+        "rms_position_m": 1.266101153077927e-06,
+        "maximum_linear_velocity_m_s": 0.005866764298094842,
+        "rms_linear_velocity_m_s": 0.0003211491558575991,
+        "maximum_angular_velocity_rad_s": 1.49315221411581e-07,
+        "rms_angular_velocity_rad_s": 8.995089260117863e-09,
+        "maximum_orientation_rad": 0.0,
+        "rms_orientation_rad": 0.0
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.9663698919585026e-05,
+            "penetration_p95_m": 4.867907873875449e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.0768942121662803e-12,
+            "maximum_momentum_residual_weight_ratio": 3.057300704682311e-11,
+            "maximum_position_reference_error_m": 1.2286991969645555e-05,
+            "maximum_velocity_reference_error_m_s": 4.9050000003852956e-05,
+            "maximum_transverse_drift_m": 1.63187517239048e-21,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.7942393497850633
+            ],
+            "maximum_tangential_force_n": 2.7942393497850634e-05,
+            "travel_x_m": 0.12498771300803044,
+            "final_speed_m_s": 0.24995094999999615
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.0114331978668817e-05,
+            "penetration_p95_m": 3.996009310426596e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 4.2594816562768756e-12,
+            "maximum_momentum_residual_weight_ratio": 3.049706826941851e-11,
+            "maximum_position_reference_error_m": 1.2274729469741175e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000415827e-05,
+            "maximum_transverse_drift_m": 2.3960845300218664e-22,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.346705719120591
+            ],
+            "maximum_tangential_force_n": 2.346705719120591e-05,
+            "travel_x_m": 0.12498772527053034,
+            "final_speed_m_s": 0.24995094999999584
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "mujoco",
+      "control": "frictionless",
+      "coarse": "mujoco-dev-onset-frictionless-h2",
+      "fine": "mujoco-dev-onset-frictionless-h4",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 1001,
+        "coarse_timestep_s": 0.0005,
+        "fine_timestep_s": 0.00025,
+        "maximum_position_m": 4.6845689996894474e-06,
+        "rms_position_m": 6.271640797282551e-07,
+        "maximum_linear_velocity_m_s": 0.002671274424837221,
+        "rms_linear_velocity_m_s": 0.00013868459441901485,
+        "maximum_angular_velocity_rad_s": 1.0045523335425546e-07,
+        "rms_angular_velocity_rad_s": 6.251577529070597e-09,
+        "maximum_orientation_rad": 0.0,
+        "rms_orientation_rad": 0.0
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.0114331978668817e-05,
+            "penetration_p95_m": 3.996009310426596e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 4.2594816562768756e-12,
+            "maximum_momentum_residual_weight_ratio": 3.049706826941851e-11,
+            "maximum_position_reference_error_m": 1.2274729469741175e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000415827e-05,
+            "maximum_transverse_drift_m": 2.3960845300218664e-22,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.346705719120591
+            ],
+            "maximum_tangential_force_n": 2.346705719120591e-05,
+            "travel_x_m": 0.12498772527053034,
+            "final_speed_m_s": 0.24995094999999584
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.58582446247291e-06,
+            "penetration_p95_m": 3.5385152445874257e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.5183188867572426e-12,
+            "maximum_momentum_residual_weight_ratio": 3.0588511690470063e-11,
+            "maximum_position_reference_error_m": 1.2268598212905601e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000446358e-05,
+            "maximum_transverse_drift_m": 2.1504396146479192e-21,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.137019539762944
+            ],
+            "maximum_tangential_force_n": 2.1370195397629443e-05,
+            "travel_x_m": 0.12498773140178025,
+            "final_speed_m_s": 0.24995094999999554
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "mujoco",
+      "control": "frictionless",
+      "coarse": "mujoco-dev-onset-frictionless-h4",
+      "fine": "mujoco-dev-onset-frictionless-h8",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 2001,
+        "coarse_timestep_s": 0.00025,
+        "fine_timestep_s": 0.000125,
+        "maximum_position_m": 2.3028238973395352e-06,
+        "rms_position_m": 3.1301112142269095e-07,
+        "maximum_linear_velocity_m_s": 0.0012723100290028709,
+        "rms_linear_velocity_m_s": 6.482122419592382e-05,
+        "maximum_angular_velocity_rad_s": 8.297641980727493e-09,
+        "rms_angular_velocity_rad_s": 3.8402498711757064e-10,
+        "maximum_orientation_rad": 0.0,
+        "rms_orientation_rad": 0.0
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.58582446247291e-06,
+            "penetration_p95_m": 3.5385152445874257e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.5183188867572426e-12,
+            "maximum_momentum_residual_weight_ratio": 3.0588511690470063e-11,
+            "maximum_position_reference_error_m": 1.2268598212905601e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000446358e-05,
+            "maximum_transverse_drift_m": 2.1504396146479192e-21,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.137019539762944
+            ],
+            "maximum_tangential_force_n": 2.1370195397629443e-05,
+            "travel_x_m": 0.12498773140178025,
+            "final_speed_m_s": 0.24995094999999554
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 3.600197457171578e-06,
+            "penetration_p95_m": 3.333958494979028e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.1768142843825444e-12,
+            "maximum_momentum_residual_weight_ratio": 3.057617761618937e-11,
+            "maximum_position_reference_error_m": 1.2265532576313798e-05,
+            "maximum_velocity_reference_error_m_s": 4.90499999617755e-05,
+            "maximum_transverse_drift_m": 1.426190728490706e-20,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.0356960463028373
+            ],
+            "maximum_tangential_force_n": 2.0356960463028374e-05,
+            "travel_x_m": 0.12498773446741339,
+            "final_speed_m_s": 0.24995095000003822
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "superdex",
+      "control": "forward",
+      "coarse": "superdex-dev-onset-forward-h",
+      "fine": "superdex-dev-onset-forward-h2",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 501,
+        "coarse_timestep_s": 0.001,
+        "fine_timestep_s": 0.0005,
+        "maximum_position_m": 0.0014748007714524695,
+        "rms_position_m": 0.0013965640428152948,
+        "maximum_linear_velocity_m_s": 0.06649545632701895,
+        "rms_linear_velocity_m_s": 0.01030904743616846,
+        "maximum_angular_velocity_rad_s": 5.4209265436394665,
+        "rms_angular_velocity_rad_s": 0.5024151775456545,
+        "maximum_orientation_rad": 0.023341928574172086,
+        "rms_orientation_rad": 0.018088161003475472
+      },
+      "physical_scores": [
+        {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": false,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": false,
+            "coulomb_position": false,
+            "coulomb_velocity": false,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0003153765657897059,
+            "penetration_p95_m": 0.00022197109126437242,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 6.9231851647089115e-06,
+            "maximum_momentum_residual_weight_ratio": 0.27652177101798225,
+            "maximum_position_reference_error_m": 0.0057747288935604746,
+            "maximum_velocity_reference_error_m_s": 0.10063252080974627,
+            "maximum_transverse_drift_m": 0.00018353685184783442,
+            "maximum_surface_clearance_m": 6.333420363487802e-05,
+            "maximum_orientation_change_rad": 0.05525109849618966,
+            "normal_force_range_n": [
+              0.4020201526296804,
+              14.460035894627174
+            ],
+            "maximum_tangential_force_n": 15.993307953546532,
+            "travel_x_m": 0.0048439287023708975,
+            "final_speed_m_s": 0.0
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": false,
+            "coulomb_velocity": false,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0002654712350581116,
+            "penetration_p95_m": 0.00017942075569468002,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 5.53594349539388e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0008270633227404743,
+            "maximum_position_reference_error_m": 0.004333372443566539,
+            "maximum_velocity_reference_error_m_s": 0.08043358248786658,
+            "maximum_transverse_drift_m": 7.552785212877659e-06,
+            "maximum_surface_clearance_m": 6.350747219046812e-05,
+            "maximum_orientation_change_rad": 0.04647249628653587,
+            "normal_force_range_n": [
+              0.0,
+              28.14359806155028
+            ],
+            "maximum_tangential_force_n": 23.999981439410018,
+            "travel_x_m": 0.00628817040620765,
+            "final_speed_m_s": 0.0
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        false,
+        false
+      ]
+    },
+    {
+      "engine": "superdex",
+      "control": "forward",
+      "coarse": "superdex-dev-onset-forward-h2",
+      "fine": "superdex-dev-onset-forward-h4",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 1001,
+        "coarse_timestep_s": 0.0005,
+        "fine_timestep_s": 0.00025,
+        "maximum_position_m": 0.0019662080840376745,
+        "rms_position_m": 0.0018621565188944957,
+        "maximum_linear_velocity_m_s": 0.08017715905400863,
+        "rms_linear_velocity_m_s": 0.012070754293936696,
+        "maximum_angular_velocity_rad_s": 5.59611497986507,
+        "rms_angular_velocity_rad_s": 0.3759702629888476,
+        "maximum_orientation_rad": 0.007625579440244238,
+        "rms_orientation_rad": 0.0030348238261184313
+      },
+      "physical_scores": [
+        {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": false,
+            "coulomb_velocity": false,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0002654712350581116,
+            "penetration_p95_m": 0.00017942075569468002,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 5.53594349539388e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0008270633227404743,
+            "maximum_position_reference_error_m": 0.004333372443566539,
+            "maximum_velocity_reference_error_m_s": 0.08043358248786658,
+            "maximum_transverse_drift_m": 7.552785212877659e-06,
+            "maximum_surface_clearance_m": 6.350747219046812e-05,
+            "maximum_orientation_change_rad": 0.04647249628653587,
+            "normal_force_range_n": [
+              0.0,
+              28.14359806155028
+            ],
+            "maximum_tangential_force_n": 23.999981439410018,
+            "travel_x_m": 0.00628817040620765,
+            "final_speed_m_s": 0.0
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": false,
+            "coulomb_velocity": false,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.00025795738793546116,
+            "penetration_p95_m": 0.00011159383423723496,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.734251158515889e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0007118717939542845,
+            "maximum_position_reference_error_m": 0.0023779926578859495,
+            "maximum_velocity_reference_error_m_s": 0.05746081910761669,
+            "maximum_transverse_drift_m": 6.023260216712143e-06,
+            "maximum_surface_clearance_m": 0.00010728974255764037,
+            "maximum_orientation_change_rad": 0.043115841632342326,
+            "normal_force_range_n": [
+              0.0,
+              52.0309237832026
+            ],
+            "maximum_tangential_force_n": 23.999997694598818,
+            "travel_x_m": 0.00824524415829258,
+            "final_speed_m_s": 0.0
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        false,
+        false
+      ]
+    },
+    {
+      "engine": "superdex",
+      "control": "forward",
+      "coarse": "superdex-dev-onset-forward-h4",
+      "fine": "superdex-dev-onset-forward-h8",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 2001,
+        "coarse_timestep_s": 0.00025,
+        "fine_timestep_s": 0.000125,
+        "maximum_position_m": 0.0012412162297310418,
+        "rms_position_m": 0.001165613576787603,
+        "maximum_linear_velocity_m_s": 0.07497566111791147,
+        "rms_linear_velocity_m_s": 0.010721984174231437,
+        "maximum_angular_velocity_rad_s": 5.752468027852042,
+        "rms_angular_velocity_rad_s": 0.5058487294569797,
+        "maximum_orientation_rad": 0.014504630024099543,
+        "rms_orientation_rad": 0.013447994984152091
+      },
+      "physical_scores": [
+        {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": false,
+            "coulomb_velocity": false,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.00025795738793546116,
+            "penetration_p95_m": 0.00011159383423723496,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.734251158515889e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0007118717939542845,
+            "maximum_position_reference_error_m": 0.0023779926578859495,
+            "maximum_velocity_reference_error_m_s": 0.05746081910761669,
+            "maximum_transverse_drift_m": 6.023260216712143e-06,
+            "maximum_surface_clearance_m": 0.00010728974255764037,
+            "maximum_orientation_change_rad": 0.043115841632342326,
+            "normal_force_range_n": [
+              0.0,
+              52.0309237832026
+            ],
+            "maximum_tangential_force_n": 23.999997694598818,
+            "travel_x_m": 0.00824524415829258,
+            "final_speed_m_s": 0.0
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": false,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": false,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0003140434744831194,
+            "penetration_p95_m": 6.141126702739405e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.212061473993998e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0007662331818823321,
+            "maximum_position_reference_error_m": 0.0011477204855307715,
+            "maximum_velocity_reference_error_m_s": 0.04793776157450408,
+            "maximum_transverse_drift_m": 5.371532089149388e-05,
+            "maximum_surface_clearance_m": 0.00022757539672375524,
+            "maximum_orientation_change_rad": 0.04393995661144419,
+            "normal_force_range_n": [
+              0.0,
+              70.79502050521339
+            ],
+            "maximum_tangential_force_n": 23.99999979252544,
+            "travel_x_m": 0.00947992740706892,
+            "final_speed_m_s": 0.0
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        false,
+        false
+      ]
+    },
+    {
+      "engine": "superdex",
+      "control": "frictionless",
+      "coarse": "superdex-dev-onset-frictionless-h",
+      "fine": "superdex-dev-onset-frictionless-h2",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 501,
+        "coarse_timestep_s": 0.001,
+        "fine_timestep_s": 0.0005,
+        "maximum_position_m": 0.00016408407483017862,
+        "rms_position_m": 1.6876786876175125e-05,
+        "maximum_linear_velocity_m_s": 0.058110348975414644,
+        "rms_linear_velocity_m_s": 0.004688966494663586,
+        "maximum_angular_velocity_rad_s": 1.6609699128461556e-12,
+        "rms_angular_velocity_rad_s": 1.268177087091017e-13,
+        "maximum_orientation_rad": 0.0,
+        "rms_orientation_rad": 0.0
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0,
+            "penetration_p95_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.6078763381297563e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0004079021801542695,
+            "maximum_position_reference_error_m": 2.8449465006019636e-16,
+            "maximum_velocity_reference_error_m_s": 3.247402347028583e-15,
+            "maximum_transverse_drift_m": 0.0,
+            "maximum_surface_clearance_m": 0.0001294497545950464,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              10.987808653168612
+            ],
+            "maximum_tangential_force_n": 0.0,
+            "travel_x_m": 0.12499999999999982,
+            "final_speed_m_s": 0.2500000000000002
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0,
+            "penetration_p95_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 5.616331519631146e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0006806282830306958,
+            "maximum_position_reference_error_m": 2.7755575615628914e-17,
+            "maximum_velocity_reference_error_m_s": 1.942890293094024e-15,
+            "maximum_transverse_drift_m": 0.0,
+            "maximum_surface_clearance_m": 0.00024615471020886237,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              26.686034506272488
+            ],
+            "maximum_tangential_force_n": 0.0,
+            "travel_x_m": 0.1250000000000001,
+            "final_speed_m_s": 0.2500000000000002
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "superdex",
+      "control": "frictionless",
+      "coarse": "superdex-dev-onset-frictionless-h2",
+      "fine": "superdex-dev-onset-frictionless-h4",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 1001,
+        "coarse_timestep_s": 0.0005,
+        "fine_timestep_s": 0.00025,
+        "maximum_position_m": 0.0002910996261873168,
+        "rms_position_m": 3.3648265128357874e-05,
+        "maximum_linear_velocity_m_s": 0.08038476140827949,
+        "rms_linear_velocity_m_s": 0.008390520180445938,
+        "maximum_angular_velocity_rad_s": 1.8604475348956924e-11,
+        "rms_angular_velocity_rad_s": 1.7252601645873244e-12,
+        "maximum_orientation_rad": 0.0,
+        "rms_orientation_rad": 0.0
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0,
+            "penetration_p95_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 5.616331519631146e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0006806282830306958,
+            "maximum_position_reference_error_m": 2.7755575615628914e-17,
+            "maximum_velocity_reference_error_m_s": 1.942890293094024e-15,
+            "maximum_transverse_drift_m": 0.0,
+            "maximum_surface_clearance_m": 0.00024615471020886237,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              26.686034506272488
+            ],
+            "maximum_tangential_force_n": 0.0,
+            "travel_x_m": 0.1250000000000001,
+            "final_speed_m_s": 0.2500000000000002
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0,
+            "penetration_p95_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 8.516572343797435e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0009923282803661136,
+            "maximum_position_reference_error_m": 1.3877787807814457e-17,
+            "maximum_velocity_reference_error_m_s": 2.7533531010703882e-14,
+            "maximum_transverse_drift_m": 0.0,
+            "maximum_surface_clearance_m": 0.0004267946573230756,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              51.93343791683438
+            ],
+            "maximum_tangential_force_n": 0.0,
+            "travel_x_m": 0.12499999999999317,
+            "final_speed_m_s": 0.24999999999997247
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    },
+    {
+      "engine": "superdex",
+      "control": "frictionless",
+      "coarse": "superdex-dev-onset-frictionless-h4",
+      "fine": "superdex-dev-onset-frictionless-h8",
+      "comparable": true,
+      "reason": null,
+      "metrics": {
+        "shared_samples": 2001,
+        "coarse_timestep_s": 0.00025,
+        "fine_timestep_s": 0.000125,
+        "maximum_position_m": 0.0003549455304212648,
+        "rms_position_m": 5.096568703837552e-05,
+        "maximum_linear_velocity_m_s": 0.11959253460890051,
+        "rms_linear_velocity_m_s": 0.014064700520858595,
+        "maximum_angular_velocity_rad_s": 4.400449316383034e-09,
+        "rms_angular_velocity_rad_s": 4.898388487917653e-10,
+        "maximum_orientation_rad": 0.0,
+        "rms_orientation_rad": 0.0
+      },
+      "physical_scores": [
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0,
+            "penetration_p95_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 8.516572343797435e-06,
+            "maximum_momentum_residual_weight_ratio": 0.0009923282803661136,
+            "maximum_position_reference_error_m": 1.3877787807814457e-17,
+            "maximum_velocity_reference_error_m_s": 2.7533531010703882e-14,
+            "maximum_transverse_drift_m": 0.0,
+            "maximum_surface_clearance_m": 0.0004267946573230756,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              51.93343791683438
+            ],
+            "maximum_tangential_force_n": 0.0,
+            "travel_x_m": 0.12499999999999317,
+            "final_speed_m_s": 0.24999999999997247
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true,
+            "native_run_completed": true,
+            "source_unchanged": true,
+            "archived_source_hashes_match": true,
+            "clean_shutdown": true,
+            "declared_limits": true,
+            "artifact_hashes_match": true,
+            "contact_ledger_matches": true,
+            "native_mass_matches": true,
+            "native_inertia_matches": true,
+            "native_friction_matches": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.0,
+            "penetration_p95_m": 0.0,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.4767828243167358e-05,
+            "maximum_momentum_residual_weight_ratio": 0.0009865994910407596,
+            "maximum_position_reference_error_m": 4.371503159461554e-16,
+            "maximum_velocity_reference_error_m_s": 2.7533531010703882e-14,
+            "maximum_transverse_drift_m": 0.0,
+            "maximum_surface_clearance_m": 0.00062888225485443,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              70.81929306813902
+            ],
+            "maximum_tangential_force_n": 0.0,
+            "travel_x_m": 0.12499999999999013,
+            "final_speed_m_s": 0.24999999999997247
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        }
+      ],
+      "physical_passed": [
+        true,
+        true
+      ]
+    }
+  ]
+}

@@ -36,6 +36,20 @@ Cloth plots sample at 100 Hz; the acceptance extrema use every physics step. The
 
 The friction figure includes all 16 development outcomes; empty speed bins are missing coverage, not zero resistance. The linked reports contain exact source/configuration hashes and failed development controls.
 
+### Contact onset: timestep and stopping-tolerance sensitivity
+
+Sixteen timestep episodes fix observed starts, contact parameters and native solver profiles. Twelve additional SuperDex episodes independently tighten stopping tolerances. All failures remain. These values are **response differences, not errors against reality**.
+
+| Control | Result | Supported interpretation |
+|---|---|---|
+| Timesteps1→0.5→0.25→0.125ms | Frictional maximum position differences: MuJoCo0.06117→0.03538→0.01539mm; SuperDex1.47480→1.96621→1.24122mm | Decreasing differences for the former in this range; the latter does not establish convergence |
+| SuperDex tolerances tightened100/10,000× | Position differences between0.5 and0.125ms remain about3.206mm frictional and0.5545mm frictionless | Stopping-tolerance tightening alone does not remove timestep sensitivity; the mechanism is not fully identified |
+| Engineering acceptance | Timestep batch12/16; tolerance batch6/12 | All10 failures retained; passing frictionless cases do not establish numerical or hardware accuracy |
+
+![Contact-onset adjacent-grid response differences](../../../demos/contact-benchmark/media/contact-onset-refinement-v1.png)
+
+[Protocol, assumptions, all per-run parameters and costs](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/REFINEMENT.md). The finest grid is not truth; no convergence order is fitted. All28 scores match offline rescoring with their original frozen sources. Raw-archive publication awaits this release.
+
 ### Cost and reproducibility
 
 Cloth simulation-loop wall time was 618.86 s and service wall time 642.18 s, including preparation and recording. The friction report separates preparation and stepping-plus-observation time. Neither isolates native stepping, renderer, evaluator and transport costs under a shared speed benchmark; unmeasured components remain unknown. Replaying saved states or rescoring an archive does not rerun dynamics. Follow each linked report's exact configuration and version rather than replacing the historical runtime silently.

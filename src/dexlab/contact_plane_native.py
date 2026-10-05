@@ -26,20 +26,21 @@ from dexlab.physx_baseline import digest, write_json
 class MuJoCoPlane:
     """Official MuJoCo; force epoch is the solve that produced the velocity step."""
 
-    def __init__(self, case, output, *, normal_parameters=None):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None):
         import mujoco as mj
 
         self.mj, self.case = mj, case
         identity = mujoco_profile_identity(package_identity("mujoco"),
                                            mj.mj_versionString())
         normal = contact_parameters.normal_parameters("mujoco", normal_parameters)
+        solver_values = {"iterations": 100, "tolerance": 1e-10} | contact_parameters.solver_parameters("mujoco", solver_parameters)
         solref = " ".join(map(str, normal["solref"]))
         solimp = " ".join(map(str, normal["solimp"]))
         h, b, mu = case.timestep, case.half_size, case.friction
         inertia = " ".join(map(str, case.inertia))
         xml = f'''<mujoco model="controlled-plane">
   <option timestep="{h}" gravity="0 0 -{case.gravity}" integrator="Euler"
-          solver="Newton" cone="elliptic" iterations="100" tolerance="1e-10"/>
+          solver="Newton" cone="elliptic" iterations="{solver_values['iterations']}" tolerance="{solver_values['tolerance']}"/>
   <default><geom condim="3" friction="{mu} 0 0"
                  solref="{solref}" solimp="{solimp}"/></default>
   <worldbody>
@@ -64,6 +65,16 @@ class MuJoCoPlane:
             "mass_readback": float(self.model.body_mass[1]),
             "inertia_readback": self.model.body_inertia[1].tolist(),
             "friction_readback": self.model.geom_friction.tolist(),
+            "solver": {
+                "integrator": int(self.model.opt.integrator),
+                "algorithm": int(self.model.opt.solver),
+                "cone": int(self.model.opt.cone),
+                "iterations": int(self.model.opt.iterations),
+                "tolerance": float(self.model.opt.tolerance),
+                "impratio": float(self.model.opt.impratio),
+                "disableflags": int(self.model.opt.disableflags),
+                "enableflags": int(self.model.opt.enableflags),
+            },
             "contact_parameter_observability": "Per-contact native readback at solve epoch",
             "geometry_readback": {
                 "type": self.model.geom_type.tolist(),
@@ -136,12 +147,13 @@ class MuJoCoPlane:
 class SuperDexPlane:
     """Official FP64 API with actual COM state and signed per-contact forces."""
 
-    def __init__(self, case, output, *, normal_parameters=None):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None):
         os.environ.setdefault("SUPERDEX_PRECISION", "fp64")
         import trimesh
         from superdex import physics as p
 
         normal = contact_parameters.normal_parameters("superdex", normal_parameters)
+        solver_values = contact_parameters.solver_parameters("superdex", solver_parameters)
         self.p, self.case = p, case
         identity = package_identity("superdex-physics-fp64")
         if identity["version"] != "1.0.0" or not p.uses_double_precision():
@@ -153,8 +165,12 @@ class SuperDexPlane:
             self.scene.set_gravity([0, 0, -case.gravity])
             solver = self.scene.get_solver_params()
             solver.integration_method = p.IntegrationMethod.BACKWARD_EULER
-            solver.non_linear_solver.max_iter = 100
+            solver.non_linear_solver.max_iter = solver_values.get("iterations", 100)
+            for key, attribute in (("absolute_tolerance", "abs_tol"), ("relative_tolerance", "rel_tol")):
+                if key in solver_values:
+                    setattr(solver.non_linear_solver, attribute, solver_values[key])
             self.scene.set_solver_params(solver)
+            solver = self.scene.get_solver_params()
             contact = p.ContactParams()
             for key, value in normal.items():
                 setattr(contact, key, value)
@@ -478,10 +494,11 @@ class PhysXPlane:
             )
 
 
-def run(case, engine, output):
+def run(case, engine, output, *, solver_parameters=None):
     """Archive every measured step and failures; never overwrite an experiment."""
     if not case.name.startswith("dev-"):
         raise ValueError("Only development cases are admitted before the suite freeze")
+    solver_values = contact_parameters.solver_parameters(engine, solver_parameters)
     output.mkdir(parents=True, exist_ok=False)
     from dexlab import cloth_engines, contact_plane, physx_baseline
     from dexlab.tasks import contact_plane as contact_task
@@ -509,6 +526,7 @@ def run(case, engine, output):
         "engine": engine,
         "source_sha256": source_hashes,
         "status": "preparing",
+        "solver_overrides": solver_values,
         "scope": "Development only; uncalibrated nominal planar response",
     }
     write_json(output / "run.json", receipt)
@@ -531,6 +549,7 @@ def run(case, engine, output):
                 ctrl_dt=case.timestep,
                 max_episode_seconds=case.duration,
                 output_dir=str(output),
+                solver_parameters=solver_values,
             ),
             backend_type="isaacsim" if engine == "physx" else engine,
         )
@@ -664,6 +683,12 @@ def verify(directory):
     except (KeyError, TypeError, ValueError):
         checks["contact_ledger_matches"] = False
     checks.update(contact_parameters.native_checks(directory, receipt, case))
+    if receipt.get("solver_overrides"):
+        declared = receipt["solver_overrides"]
+        actual = receipt.get("native", {}).get("solver", {})
+        checks["solver_overrides_match"] = contact_parameters.solver_readback_matches(
+            receipt["engine"], declared, actual
+        )
     result["passed"] = all(checks.values())
     return result
 
@@ -680,9 +705,10 @@ def main():
         "--case", type=Path, help="Development PlaneCase JSON; default: dev-slide"
     )
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--solver-parameters", type=Path, help="Explicit native solver controls JSON")
     args = parser.parse_args()
     if args.verify:
-        if args.engine or args.case or args.output:
+        if args.engine or args.case or args.output or args.solver_parameters:
             parser.error("--verify cannot be combined with run arguments")
         result = verify(args.verify.resolve())
     else:
@@ -691,7 +717,8 @@ def main():
         case = (
             PlaneCase(**json.loads(args.case.read_text())) if args.case else PlaneCase()
         )
-        result = run(case, args.engine, args.output.resolve())
+        result = run(case, args.engine, args.output.resolve(), solver_parameters=(
+            json.loads(args.solver_parameters.read_text()) if args.solver_parameters else None))
     print(json.dumps(result, indent=2))
     raise SystemExit(0 if result["passed"] else 1)
 

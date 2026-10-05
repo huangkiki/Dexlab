@@ -27,6 +27,8 @@ Separate implementation consistency, numerical convergence and measured physical
 
 ## Key experimental results
 
+**Contact-onset numerical sensitivity.** Across16 fixed-start development runs, MuJoCo adjacent-grid trajectory differences decrease; some SuperDex differences are nonmonotone or increase. Its frictionless cases still pass the existing engineering gates: a pass does not establish timestep convergence. [Protocol, all failures and per-run costs](demos/contact-benchmark/REFINEMENT.md). Twelve additional tolerance controls show that tightening stopping tolerances alone does not remove timestep sensitivity; hardware calibration remains incomplete.
+
 ### Apple stem: robustness and where failures occur
 
 Ten frozen scenes vary mass, horizontal position and orientation: twenty runs, without retuning for these cases.
