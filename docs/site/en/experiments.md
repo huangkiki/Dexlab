@@ -44,3 +44,7 @@ These are development-scene replays at the original pinned versions, not held-ou
 ## Hardware acquisition preparation
 
 The [protocol, empty template and log validator](https://github.com/huangkiki/Dexlab/blob/main/docs/hardware/README.md) cover two UR7e arms and two identical CTAG2F90D grippers. Commands, measured feedback and independent references remain separate; unknown data stays unknown. The tool only reads files and does not control hardware. Format validity does not establish calibration.
+
+## Friction response development
+
+The [16-run planar report](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/FRICTION_RESPONSE.md) retains all paired MuJoCo 3.14.0 / SuperDex FP64 outcomes, measured initial states, speed-bin force ratios and costs. Every run passes existing plane checks, while low-speed resistance differs. This is not matched material calibration or an engine-accuracy ranking.

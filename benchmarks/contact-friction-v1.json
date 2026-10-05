@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "scope": "Predeclared development diagnosis, not held-out calibration or speed benchmark",
+  "engines": [
+    "mujoco",
+    "superdex"
+  ],
+  "max_runs": 16,
+  "wall_budget_s": 1800,
+  "defaults": {
+    "mass": 0.2,
+    "half_size": 0.02,
+    "friction": 0.3,
+    "initial_speed": 0.25,
+    "gravity": 9.81,
+    "timestep": 0.0005,
+    "settle": 0.2,
+    "duration": 0.5
+  },
+  "cases": [
+    {
+      "name": "dev-friction-forward"
+    },
+    {
+      "name": "dev-friction-reverse",
+      "initial_speed": -0.25
+    },
+    {
+      "name": "dev-friction-slow",
+      "initial_speed": 0.005
+    },
+    {
+      "name": "dev-friction-slow-reverse",
+      "initial_speed": -0.005
+    },
+    {
+      "name": "dev-friction-frictionless",
+      "friction": 0
+    },
+    {
+      "name": "dev-friction-rest",
+      "initial_speed": 0
+    },
+    {
+      "name": "dev-friction-mass-transfer",
+      "mass": 0.4
+    },
+    {
+      "name": "dev-friction-half-step",
+      "timestep": 0.00025
+    }
+  ],
+  "parameters": "Existing nominal native profiles unchanged. Engineering fixture, no hardware material fit. Initial velocity assigned once after native settling; compare observed initial states, not seed equality.",
+  "diagnostics": "Frozen contact_plane.LIMITS unchanged; contact_friction speed partitions fixed before all runs. No automatic parameter tuning.",
+  "excluded": "PhysX historical runtime is not admitted to this latest-stable development batch; this does not establish cross-engine material equivalence."
+}
