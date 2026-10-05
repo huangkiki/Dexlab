@@ -50,9 +50,9 @@ Ten paired regression scenes. Robustness of fixed configurations, not an engine-
 :::
 :::{grid-item-card} 02 / Robot cloth grasp
 :class-card: lab-finding lab-finding-warning
-<div class="lab-score"><strong>176/225</strong><span>intersecting frames</span></div>
+<div class="lab-score"><strong>176/225</strong><span>historical intersecting frames</span></div>
 
-Independent geometry checks detect cloth–table intersections, up to 3.00 mm interior depth. Scoring is corrected; physics repair is pending.
+Independent geometry checks detect cloth–table intersections, up to 3.00 mm interior depth. This historical failure is retained; a repaired 9 s development case now passes, with only 7.95 µm self-penetration margin.
 
 [Failure analysis and repair](results.md)
 :::
@@ -94,7 +94,7 @@ Sliding, loading and transients. Use simple experiments to explain complex failu
 
 Six research layers: tasks, actuation, physics, sensing, data and transfer. ManiSkill integration and in-hand rotation remain planned. [→ Dexterous roadmap](dexterity.md)
 
-<div class="lab-note">New batches target official latest-stable releases; qualification is pending, including Genesis. Current results do not establish hardware accuracy. <a href="engines.html">Versions and capability limits →</a></div>
+<div class="lab-note">MuJoCo 3.14.0 has scoped development and regression evidence; Genesis qualification remains pending. Current results do not establish hardware accuracy. <a href="engines.html">Versions and capability limits →</a></div>
 
 
 ```{toctree}

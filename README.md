@@ -8,19 +8,9 @@
 
 </div>
 
-> 归档基础设施更新：本地归档现在先验证内存、CPU 与磁盘 I/O 硬限额；异常终止保留源和回执。成功、超时与隔离 OOM 检查通过，两类历史归档完成受限读取复核。[运行边界](docs/remote-research.zh-CN.md#本地归档硬资源限制)
+> [技术报告：当前结果与历史失败](docs/site/zh/results.md) 分别列出夹布修复、低速摩擦响应和历史抓梗鲁棒性，附指标、采样范围、成本及复现入口。单场景通过不代表鲁棒性或真机精度。
 
 DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研究碰撞几何、接触律、求解器及驱动对**穿透、滑移、抖动与计算成本**的影响。每项结论连接原始记录、独立评分、参数来源与失败案例。
-
-## 本机执行与自动交付
-
-实验优先使用通过准入的本机，实测资源余量并强制 cgroup 限额，禁用实验 swap。每次选项先复审优先级，中断任务通过实际句柄恢复；远端作为可选执行位置。[执行与恢复协议](docs/autoresearch.zh-CN.md#本机优先执行与恢复)。
-
-## 灵巧操作任务路线
-
-[新版研究证据账本](docs/dexterity-ledger.zh-CN.md)覆盖38篇论文身份与19个仓库入口，区分定向源码审查、摘要筛选及未验证运行时。关键结论：上游成功指标须独立复核；目标关节值、估算力矩和触觉代理不能当实测量；自定义引擎与历史配置不进入最新稳定版比较。可选动作回放 #52、触觉历史 #53 已设依赖和预算。
-
-当前实现集中于抓持与接触诊断。新增 [六层研究地图](docs/dexterity-roadmap.zh-CN.md) 将 ManiSkill、抓取评测、触觉、数据生成与本体研究映射到具体实验；[ManiSkill 原生任务 #47](https://github.com/huangkiki/Dexlab/issues/47) 与 [手内旋转 #48](https://github.com/huangkiki/Dexlab/issues/48) 已排入计划，**尚未实现，不算已支持**。
 
 ## 当前结论
 
@@ -135,6 +125,16 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 无需模型 API key。SDF 构建与规划完成后打开窗口；运行命令使用 UniLab 注册任务，原生场景由 DexLab 管理。[完整安装](docs/installation.zh-CN.md) · [仅构建文档](docs/site/zh/quickstart.md#仅构建文档)
 
 [UR7e＋夹爪采集准备](docs/hardware/README.zh-CN.md)：采集协议、信号来源、时钟与不确定性，以及只读日志校验器。空模板与合成数据不算实测；尚无已验收真机数据。
+
+## 本机执行与自动交付
+
+实验优先使用通过准入的本机，实测资源余量并强制 cgroup 限额，禁用实验 swap。每次选项先复审优先级，中断任务通过实际句柄恢复；远端作为可选执行位置。[执行与恢复协议](docs/autoresearch.zh-CN.md#本机优先执行与恢复)。
+
+## 灵巧操作任务路线
+
+[新版研究证据账本](docs/dexterity-ledger.zh-CN.md)覆盖38篇论文身份与19个仓库入口，区分定向源码审查、摘要筛选及未验证运行时。关键结论：上游成功指标须独立复核；目标关节值、估算力矩和触觉代理不能当实测量；自定义引擎与历史配置不进入最新稳定版比较。可选动作回放 #52、触觉历史 #53 已设依赖和预算。
+
+当前实现集中于抓持与接触诊断。新增 [六层研究地图](docs/dexterity-roadmap.zh-CN.md) 将 ManiSkill、抓取评测、触觉、数据生成与本体研究映射到具体实验；[ManiSkill 原生任务 #47](https://github.com/huangkiki/Dexlab/issues/47) 与 [手内旋转 #48](https://github.com/huangkiki/Dexlab/issues/48) 已排入计划，**尚未实现，不算已支持**。
 
 ## 参与与致谢
 
