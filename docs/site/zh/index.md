@@ -90,6 +90,10 @@ html_theme.sidebar_secondary.remove: true
 :::
 ::::
 
+## 灵巧操作路线
+
+六层研究地图：任务、执行器、物理、感知、数据与迁移。ManiSkill 接入和手内旋转尚在计划中。 [→ 灵巧操作路线](dexterity.md)
+
 <div class="lab-note">新批次须使用官方最新稳定版，运行资格尚待验收；Genesis 已列入计划。当前结果不证明真机精度。 <a href="engines.html">版本与能力边界 →</a></div>
 
 
@@ -101,6 +105,8 @@ html_theme.sidebar_secondary.remove: true
 实验 <experiments>
 研究结果 <results>
 引擎与模型 <engines>
+灵巧操作路线 <dexterity>
+研究证据账本 <research-ledger>
 Benchmark <benchmark>
 参与开发 <contributing>
 ```
