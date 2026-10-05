@@ -19,7 +19,7 @@
 
 新批次冻结当日核查官方最新稳定核心、solver、绑定与封装；记录实际加载版本、哈希、精度和计算路径。轮内不升级。alpha/beta/RC/dev、撤回包与实验性 solver 选项不进入主比较。不兼容的组合明确阻塞，不静默退回旧版本。
 
-2026-10-04 已核实发布线索：[MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0)、[Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3)、[Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0)。这是待资格验证的版本清单，不是已跑出的结果。
+2026-10-04 已核实发布线索：[MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0)、[Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3)、[Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0)。仅此带日期的清单不证明任务资格。MuJoCo 3.14.0 已有[结果报告](results.md)所列夹布与摩擦开发证据；Genesis 和 Newton 仍需分别验收。
 
 Newton 的 MuJoCo 扩展仍限制 3.12.x，不能称底层最新；ovphysx 0.6.3 的分发分类为 Alpha。稳定绑定、内嵌核心和独立 SDK 必须分别核查。[版本任务 #41](https://github.com/huangkiki/Dexlab/issues/41)
 

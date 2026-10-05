@@ -19,7 +19,7 @@ Record collision geometry, contact law, integrator, constraint solver and drives
 
 Before each new batch, resolve official latest stable core, solver, bindings and wrappers. Record loaded versions, hashes, precision and compute path; freeze throughout the batch. Exclude alpha/beta/RC/dev, yanked packages and experimental solver options from the primary comparison. Block incompatible combinations rather than silently downgrading.
 
-Release leads checked on 2026-10-04: [MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0), [Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3), [Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0). This is a pending qualification inventory, not measured results.
+Release leads checked on 2026-10-04: [MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0), [Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3), [Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0). This dated inventory alone does not establish task qualification. MuJoCo 3.14.0 now has the scoped cloth and friction development results in the [results report](results.md); Genesis and Newton qualification remain separate.
 
 Newton's MuJoCo extra still restricts the core to 3.12.x; ovphysx 0.6.3 is classified Alpha. Stable bindings, embedded cores and standalone SDKs need separate checks. [Version task #41](https://github.com/huangkiki/Dexlab/issues/41)
 
