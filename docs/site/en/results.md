@@ -1,5 +1,19 @@
 # Results and failures
 
+## What standard judges an experiment?
+
+Lifting an object is a task outcome, not a reference answer for physical accuracy. Report three separate levels.
+
+| Level | Independent reference and check | Supported claim |
+|---|---|---|
+| Implementation consistency | Analytical references under stated assumptions, force/momentum balances, no-contact/zero-friction/release negatives | Detect implementation and recording errors; does not establish real-material accuracy |
+| Numerical reliability | Hold the physical model fixed; refine timestep and solver accuracy while recording errors, residuals and cost | Characterize numerical sensitivity over tested settings; self-convergence does not validate the physical model |
+| Physical validity | Same-apparatus force-displacement, slip threshold and release measurements with uncertainty | Measure error relative to reality; currently unknown without hardware data |
+
+Before each new experiment, freeze the hypothesis, reference and its assumptions, controlled and varied quantities, metrics and units, rejection criterion and rationale, budget and retention of all failures. Without a justified accuracy tolerance, report error/response curves rather than inventing an accuracy pass after observing results. Existing engineering thresholds define task acceptance; latest-stable admission is not physical validation.
+
+Apple-stem grasp is a downstream integrated task. The historical ten scenes describe specific configurations on a specific perturbation set; their difference cannot be attributed to the engine. Parameter readback establishes what was used, not whether the contact law is physically accurate. The next contact study should hold physical assumptions fixed and examine timestep/solver refinement before error-cost interpretation; hardware calibration requires measurements tracked in #6.
+
 ## Current development evidence
 
 The newest records answer narrower questions than the historical robustness cohorts below. They use official MuJoCo 3.14.0 and SuperDex 1.0.0 FP64 where applicable; a release regression pass does not requalify an older benchmark.

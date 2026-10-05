@@ -16,12 +16,14 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 
 | Research question | Evidence | Conclusion and boundary |
 |---|---|---|
-| Can dynamics lift an apple by its stem? | Default cases pass; historical ten-scene regression: MuJoCo **1/10**, SuperDex **10/10** | Fixed-configuration robustness, **not a physical-accuracy ranking** |
+| How do the specified grasp configurations behave on ten initial-state perturbations? | Historical complete acceptance: MuJoCo **1/10**, SuperDex **10/10** | Configuration outcomes on this cohort only; differing contact, drives and timesteps prevent engine attribution or physical-accuracy claims |
 | Is the cloth grasp physically valid? | New 9 s development case passes pinch, lift, release and sampled geometry checks; strain 3.52% | Self penetration 1.492 mm is near its limit; one case only, historical failures retained |
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
 Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) is planned, without runtime results yet.
+
+Separate implementation consistency, numerical convergence and measured physical validity; a grasp pass substitutes for none of them. [Research standards](docs/research-focus.md#what-standard-judges-an-experiment)
 
 ## Key experimental results
 
