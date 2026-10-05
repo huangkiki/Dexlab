@@ -1,8 +1,9 @@
 from copy import deepcopy
+from unittest.mock import patch
 from datetime import datetime, timezone
 import unittest
 
-from dexlab.engine_versions import validate_versions
+from dexlab.engine_versions import validate_versions, mujoco_profile_identity
 
 
 class VersionAdmissionTests(unittest.TestCase):
@@ -47,6 +48,27 @@ class VersionAdmissionTests(unittest.TestCase):
         self.check([self.row, newton], versions)
         with self.assertRaisesRegex(ValueError, "Incompatible"):
             self.check([self.row, newton], versions, extras={"newton": ["sim"]})
+
+
+class MuJoCoCompatibilityProfileTests(unittest.TestCase):
+    def test_historical_default_does_not_silently_upgrade(self):
+        with patch.dict("os.environ", {}, clear=True):
+            old = mujoco_profile_identity({"version": "3.11.0"}, "3.11.0")
+            self.assertEqual(old["profile_status"], "historical")
+            with self.assertRaises(ValueError):
+                mujoco_profile_identity({"version": "3.14.0"}, "3.14.0")
+
+    def test_candidate_requires_explicit_selection_and_native_match(self):
+        identity = {"version": "3.14.0", "code_sha256": "example"}
+        with patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "qualification-3.14.0"}):
+            result = mujoco_profile_identity(identity, "3.14.0")
+            self.assertEqual(result["profile_status"], "candidate")
+            self.assertFalse(result["formal_batch_qualified"])
+            self.assertEqual(identity, {"version": "3.14.0", "code_sha256": "example"})
+            with self.assertRaises(ValueError):
+                mujoco_profile_identity(identity, "3.11.0")
+        with self.assertRaises(ValueError):
+            mujoco_profile_identity(identity, "3.14.0", profile="latest")
 
 
 if __name__ == "__main__":

@@ -49,3 +49,24 @@ def validate_versions(audit, installed, native, *, extras=None, now=None):
     if "mujoco" in installed and native.get("mujoco") != installed["mujoco"]:
         raise ValueError("Loaded MuJoCo native version differs from its package")
     return {"metadata_compatible": True, "runtime_qualified": False}
+
+
+def mujoco_profile_identity(identity, native_version, *, profile=None):
+    """Select an explicit compatibility profile without granting qualification.
+
+    Historical reproduction remains the default. Candidate mode permits the
+    qualification tests to execute; it never authorizes a formal batch.
+    """
+    import os
+
+    if profile is None:
+        profile = os.environ.get("DEXLAB_MUJOCO_PROFILE", "historical-3.11.0")
+    versions = {"historical-3.11.0": "3.11.0", "qualification-3.14.0": "3.14.0"}
+    if profile not in versions:
+        raise ValueError("Unknown MuJoCo compatibility profile")
+    expected = versions[profile]
+    if identity["version"] != expected or native_version != expected:
+        raise ValueError(f"{profile} requires matching package and native MuJoCo {expected}")
+    return {**identity, "compatibility_profile": profile,
+            "profile_status": "candidate" if profile.startswith("qualification-") else "historical",
+            "formal_batch_qualified": False}

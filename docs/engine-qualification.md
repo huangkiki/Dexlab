@@ -10,7 +10,7 @@ Official releases and PyPI metadata were checked on 2026-10-04 UTC (2026-10-05 l
 
 | Profile | Status | Boundary |
 |---|---|---|
-| MuJoCo 3.14.0 native | Pending | Full apple regressions and cloth diagnostic still required |
+| MuJoCo 3.14.0 native | Partial | Single-scene apple pass; cloth and cylinder qualification failed |
 | MuJoCo Warp 3.14.0 + Warp 1.17.0 | Pending | Per-device runtime/contact probe is not SDF grasp qualification |
 | Newton 1.6.0 `sim` | Blocked combination | Its MuJoCo and MJWarp ~3.12 requirements conflict with latest 3.14 |
 | Genesis 1.4.3 | Pending | Separate rigid and cloth qualification, issue #42 |
@@ -48,3 +48,27 @@ Native MuJoCo with the identical default XML measured 18.254210 mm intrusion ver
 `engine_versions.validate_versions` tests stale inventories, previews, yanked/missing evidence, wrapper/native mismatch and incompatible extras. Its positive result explicitly says `runtime_qualified: false`. It is a metadata-checking foundation, not yet a dispatch gate. Full runtime evidence, artifact/source freeze checks, formal-batch integration and publication-time rechecks remain #41. All worker receipts were inspected and failures retained; these development probes do not qualify a task.
 
 [Official MJWarp usage](https://mujoco.readthedocs.io/en/stable/mjwarp/index.html) · [MuJoCo release](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0) · [MJWarp release](https://github.com/google-deepmind/mujoco_warp/releases/tag/v3.14.0) · [Warp release](https://github.com/NVIDIA/warp/releases/tag/v1.17.0)
+
+## Native candidate profile
+
+The first full-suite run on 3.14.0 encountered four failures and eighteen errors because cloth/contact adapters hard-coded 3.11.0; apple regressions had not started. Failed logs are retained.
+
+`DEXLAB_MUJOCO_PROFILE=qualification-3.14.0` explicitly selects the candidate profile and requires both package and loaded-native versions to match 3.14.0. Metadata retains candidate status and `formal_batch_qualified: false`. The default `historical-3.11.0` still rejects silent upgrades. This switch permits qualification work; it does not replace official release checks, hashes, task scoring or formal dispatch admission. Collision, controller, solver parameters and physical thresholds are unchanged.
+
+
+## Native apple result and remaining failures
+
+The explicit candidate suite ran 311 tests with **1 failure and 2 errors**. Both cloth errors reject flex elasticity with `implicitfast`; the official engine requires a declared integration migration. The cylinder test measured 3.9903707646 N against its unchanged 4 N ± 0.001 N check. These failures are retained; thresholds and official binaries were not changed.
+
+An apple-only run then completed both 14-second episodes and separate scoring, with the 11–14 s hold checked at every physics step. [Machine-readable scores](evidence/native314-apple-qualification.json) bind this evidence to source tree `2fd01ed93ac9a67e9286dcaed413c4566d9481c1`.
+
+| Metric | MuJoCo 3.14.0 | SuperDex 1.0.0 FP64 |
+| --- | ---: | ---: |
+| Maximum penetration (mm) | 0.1165 | 0.4523 |
+| Minimum hold clearance (mm) | 125.6668 | 115.2155 |
+| Maximum wrist-relative displacement (mm) | 0.3355 | 0.0399 |
+| Independent apple acceptance | Pass | Pass |
+
+Each column is one development scene, with engine-specific settings. Wrist-relative displacement is not material-point slip. This is neither a held-out benchmark nor an accuracy ranking; full-suite and formal dispatch admission remain pending. Control uses known poses and explicit coordination, with rigid stems and no hardware validation.
+
+The first apple-only attempt timed out under a 12 GiB memory high watermark. The same source passed after raising only that watermark to 15 GiB, retaining the 16 GiB hard limit and zero swap. Failed outputs remain preserved. This resource-constrained run is not a simulation-speed measurement.

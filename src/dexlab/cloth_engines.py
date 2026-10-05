@@ -7,6 +7,8 @@ from importlib.metadata import distribution, version
 
 import numpy as np
 
+from dexlab.engine_versions import mujoco_profile_identity
+
 
 def package_identity(name):
     """Reject locally modified package code and retain the installation origin."""
@@ -37,9 +39,8 @@ class MuJoCoCloth:
     def __init__(self, case, dt, *, device="cpu", iterations=50):
         import mujoco
 
-        identity = package_identity("mujoco")
-        if identity["version"] != "3.11.0":
-            raise ValueError("This cloth profile is pinned to MuJoCo 3.11.0")
+        identity = mujoco_profile_identity(package_identity("mujoco"),
+                                           mujoco.mj_versionString())
         if device != "cpu":
             raise ValueError("This adapter uses native CPU MuJoCo, not MuJoCo Warp")
         self.mj = mujoco
