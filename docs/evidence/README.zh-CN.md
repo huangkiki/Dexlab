@@ -78,15 +78,17 @@
 
 [全部结果与逐文件哈希](historical-v1.json) · [逐指标 CSV](metrics.csv) · [冻结批次选择](cohorts.json) · [离线评分代码](../../src/dexlab/evidence_report.py) · [图表生成代码](../../scripts/render_evidence_report.py)
 
+补齐的两组公开包使用显式脱敏副本及冻结历史评分器；106 条记录完整复算一致。下载目录、变换及限制见 [独立复算说明](PUBLIC-ARCHIVE.zh-CN.md)。原历史报告保留当时的可用性记录，当前下载位置以本表为准。
+
 | 批次 | 完整原始记录 |
 |---|---|
 | 苹果抓梗回归 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-grasp-regression-evidence.tar.gz) |
-| 基础布料留出 | 本地保留；当前没有公开的完整原始包，JSON 不能替代原始轨迹 |
+| 基础布料留出 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz) |
 | PhysX 布料留出 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.11.0/v0.11.0-physx-cloth-evidence.tar.gz) |
 | 基础接触开发 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.12.0/v0.12.0-contact-development-evidence.tar.gz) |
 | 静态响应开发 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-normal-response-evidence.tar.gz) |
 | 瞬态响应开发 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.14.0/v0.14.0-transient-response-evidence.tar.gz) |
-| 机器人夹布诊断 | 本地保留；当前没有公开的完整原始包，JSON 不能替代原始轨迹 |
+| 机器人夹布诊断 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz) |
 
 在现有 DexLab 环境中复算，另外安装绘图依赖 `matplotlib`。私人位置文件用批次 ID 映射到解压目录；分散记录可用 `{场景ID: 本地目录}`。不提交该文件。每个根目录下应直接包含场景 ID；发布包的外层目录需要手动选择。所有原始数据可用后才能生成完整报告，命令不会联网下载或执行仿真。
 

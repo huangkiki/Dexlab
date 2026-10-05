@@ -78,15 +78,17 @@ No speed ranking is exported. Preparation, physics stepping, control/recording, 
 
 [All rows and per-file hashes](historical-v1.json) · [Tidy metric CSV](metrics.csv) · [Frozen cohort selection](cohorts.json) · [Offline scorer](../../src/dexlab/evidence_report.py) · [Plot generator](../../scripts/render_evidence_report.py)
 
+The two completed public cohorts use explicit metadata projections and the frozen historical scorer; all 106 records reproduce exactly. See [portable reproduction](PUBLIC-ARCHIVE.md) for layout, transformations and limits. The immutable historical report retains its original availability snapshot; this table gives current download locations.
+
 | Cohort | Complete raw records |
 |---|---|
 | Apple grasp regression | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-grasp-regression-evidence.tar.gz) |
-| Nominal cloth held-out | Preserved locally; no public complete raw archive. JSON does not replace raw trajectories. |
+| Nominal cloth held-out | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz) |
 | PhysX cloth held-out | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.11.0/v0.11.0-physx-cloth-evidence.tar.gz) |
 | Contact development | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.12.0/v0.12.0-contact-development-evidence.tar.gz) |
 | Static response development | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-normal-response-evidence.tar.gz) |
 | Transient response development | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.14.0/v0.14.0-transient-response-evidence.tar.gz) |
-| Robot cloth diagnostic | Preserved locally; no public complete raw archive. JSON does not replace raw trajectories. |
+| Robot cloth diagnostic | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz) |
 
 Use the existing DexLab environment and install matplotlib for plotting. A private location JSON maps cohort IDs to extracted roots; scattered records may use {recordID: localDirectory}. Do not commit it. Each root must directly contain record IDs; select the appropriate archive subdirectory. All raw data is required for a complete report; commands neither download data nor simulate.
 

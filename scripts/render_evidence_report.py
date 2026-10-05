@@ -153,6 +153,8 @@ def markdown(report, output, zh):
         '## 数据、代码与复算' if zh else '## Data, code and reproduction', '',
         '[全部结果与逐文件哈希](historical-v1.json) · [逐指标 CSV](metrics.csv) · [冻结批次选择](cohorts.json) · [离线评分代码](../../src/dexlab/evidence_report.py) · [图表生成代码](../../scripts/render_evidence_report.py)' if zh else
         '[All rows and per-file hashes](historical-v1.json) · [Tidy metric CSV](metrics.csv) · [Frozen cohort selection](cohorts.json) · [Offline scorer](../../src/dexlab/evidence_report.py) · [Plot generator](../../scripts/render_evidence_report.py)', '',
+        '补齐的两组公开包使用显式脱敏副本及冻结历史评分器；106 条记录完整复算一致。下载目录、变换及限制见 [独立复算说明](PUBLIC-ARCHIVE.zh-CN.md)。原历史报告保留当时的可用性记录，当前下载位置以本表为准。' if zh else
+        'The two completed public cohorts use explicit metadata projections and the frozen historical scorer; all 106 records reproduce exactly. See [portable reproduction](PUBLIC-ARCHIVE.md) for layout, transformations and limits. The immutable historical report retains its original availability snapshot; this table gives current download locations.', '',
         '| 批次 | 完整原始记录 |' if zh else '| Cohort | Complete raw records |', '|---|---|',
     ]
     for c in selection['cohorts']:
