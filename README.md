@@ -38,6 +38,10 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 [协议、逐场景失败与复算](demos/contact-benchmark/TRANSFER.zh-CN.md)
 
+**阻尼配对消融：** 固定其余条件的六组实验中，SuperDex 零法向阻尼均无记录到的负力，但两个较小步长的稳定性检查失败；联合原瞬态目标仍为0/6，不能称为完整修复。[全部结果与参照](demos/contact-benchmark/DAMPING_ABLATION.zh-CN.md)
+
+![卸载力配对曲线](docs/evidence/damping-ablation-v1.png)
+
 ## 当前结论
 
 | 研究问题 | 已有证据 | 结论与限制 |
