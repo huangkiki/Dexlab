@@ -12,6 +12,15 @@
 
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
+
+## Paired mass and size transfer
+
+Three frozen nominal contact profiles completed30 episodes over10 preregistered mass/size combinations: original engineering checks1/30, transient target0/30, combined0/30. All outcomes independently reproduce; all30 actual initial states and representation checks within the declared scope are complete. **Nominal-scene success does not establish parameter transfer.** No mass/area compensation was applied; failures show that these mappings miss the synthetic target, not that native algorithms are wrong. Internal cooking and combined-law observability remain incomplete.
+
+![Per-scenario synthetic response discrepancy](docs/evidence/contact-transfer-v1.png)
+
+[Protocol, every failure and reproduction](demos/contact-benchmark/TRANSFER.md)
+
 ## Current findings
 
 | Research question | Evidence | Conclusion and boundary |

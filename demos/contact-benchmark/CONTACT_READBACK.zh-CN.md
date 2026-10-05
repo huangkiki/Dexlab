@@ -20,7 +20,7 @@ python -m dexlab.contact_readback RECORD_DIRECTORY
 
 另六个 MuJoCo 静态对照均符合预先声明的预期：同优先级加权、平面较高优先级、直接格式 solref 逐项最小值、显式各向异性接触对、全局覆盖及分离负例。五个正例各有四个接触，负例无接触。仅调用 `mj_forward`，不推进仿真时间，不证明动态稳定性。复现命令为 `probe_contact_mixing.py OUTPUT --wheel-dir OFFICIAL_WHEEL_DIRECTORY`。
 
-原始证据已打包并通过离线复核；最终原生抓取回归门禁和发布尚待完成。一般网格烹制等价性和真实材料标定仍未证明。
+原始证据已打包并通过离线复核；v0.22.0 的完整原生抓取回归及发布已完成。一般网格烹制等价性和真实材料标定仍未证明。
 
 [Readback JSON](evidence/contact-readback-v1.json) · [Mixing JSON](evidence/contact-mixing-v1.json)
 
@@ -28,4 +28,6 @@ python -m dexlab.contact_readback RECORD_DIRECTORY
 python demos/contact-benchmark/report_contact_readback.py READBACK_RECORDS --previous FRICTION_RECORDS --output REPORT.json
 ```
 
-待发布原始附件: `dexlab-contact-readback-evidence-v1.tar.gz`, 2,403,074 bytes, SHA-256 `ba59bd8beca7fab3091df52759070febcdb9bce35344bc31fb0e1e26c63e3b02`. 解压后以归档源码核对 186 个文件哈希并重现八组诊断。原生状态／接触字节不变，仅脱敏私有源码路径键并记录前后哈希；原件保留。
+已发布原始附件: `dexlab-contact-readback-evidence-v1.tar.gz`, 2,403,074 bytes, SHA-256 `ba59bd8beca7fab3091df52759070febcdb9bce35344bc31fb0e1e26c63e3b02`. 解压后以归档源码核对 186 个文件哈希并重现八组诊断。原生状态／接触字节不变，仅脱敏私有源码路径键并记录前后哈希；原件保留。
+
+[Published raw evidence / 已发布原始证据 (v0.22.0)](https://github.com/huangkiki/Dexlab/releases/download/v0.22.0/dexlab-contact-readback-evidence-v1.tar.gz). Publication and downloaded-asset verification are complete; this does not resolve the unobservable fields described above.

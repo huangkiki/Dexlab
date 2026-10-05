@@ -1,0 +1,1083 @@
+{
+  "verification": {
+    "outcomes_reproduced": 30,
+    "physics_passed": 1,
+    "physics_failed": 29,
+    "transient_passed": 0,
+    "combined_passed": 0
+  },
+  "declared_episodes": 30,
+  "observed_comparison_complete": 30,
+  "results": [
+    {
+      "id": "seed-2026100500-mujoco-imp09-500us",
+      "seed": 2026100500,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.138831,
+      "half_size_m": 0.0198,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00014300602580561453,
+      "peak_error_m": 0.00024156420781074896,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0005153586905640405,
+      "episode_wall_seconds": 0.2729451109917136,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100500-mujoco-imp0001-500us",
+      "seed": 2026100500,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.138831,
+      "half_size_m": 0.0198,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00013203209714642475,
+      "peak_error_m": 0.000158267661965765,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0004815453505986611,
+      "episode_wall_seconds": 0.27251007000450045,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100500-superdex-load-damping-500us",
+      "seed": 2026100500,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.138831,
+      "half_size_m": 0.0198,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 9.625162996849132e-06,
+      "peak_error_m": 2.7297291652253326e-05,
+      "minimum_recorded_normal_force_n": -0.6097566912852553,
+      "maximum_penetration_m": 0.00031664766648525217,
+      "episode_wall_seconds": 0.5345982449944131,
+      "failed_checks": [
+        "no_tensile_normal_force",
+        "transient_peak_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100501-mujoco-imp0001-500us",
+      "seed": 2026100501,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.147815,
+      "half_size_m": 0.016759,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00010587076891311578,
+      "peak_error_m": 0.00012658204937257274,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0004522776795534353,
+      "episode_wall_seconds": 0.2778203490015585,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100501-superdex-load-damping-500us",
+      "seed": 2026100501,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.147815,
+      "half_size_m": 0.016759,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00012135160144068715,
+      "peak_error_m": 0.00014028569238988824,
+      "minimum_recorded_normal_force_n": -0.5034123117946782,
+      "maximum_penetration_m": 0.0004373575372345409,
+      "episode_wall_seconds": 0.3630311309971148,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100501-mujoco-imp09-500us",
+      "seed": 2026100501,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.147815,
+      "half_size_m": 0.016759,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.0001325841199045562,
+      "peak_error_m": 0.00021466970846777586,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.00048403586467914497,
+      "episode_wall_seconds": 0.2457550200051628,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100502-superdex-load-damping-500us",
+      "seed": 2026100502,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.250536,
+      "half_size_m": 0.015131,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00021437059636828895,
+      "peak_error_m": 0.00025360847543460125,
+      "minimum_recorded_normal_force_n": -0.39187556916778166,
+      "maximum_penetration_m": 0.0005466648113082902,
+      "episode_wall_seconds": 0.35980691098666284,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100502-mujoco-imp09-500us",
+      "seed": 2026100502,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.250536,
+      "half_size_m": 0.015131,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00012515095395899747,
+      "peak_error_m": 0.00022118631377383147,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.00028557876143978783,
+      "episode_wall_seconds": 0.2808579029951943,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100502-mujoco-imp0001-500us",
+      "seed": 2026100502,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.250536,
+      "half_size_m": 0.015131,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 6.038150471354823e-05,
+      "peak_error_m": 8.057769559678522e-05,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.00026684159075051825,
+      "episode_wall_seconds": 0.24473577000026125,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100503-mujoco-imp09-500us",
+      "seed": 2026100503,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.138898,
+      "half_size_m": 0.019851,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00014290219379336258,
+      "peak_error_m": 0.00024135089523978864,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0005151100912537988,
+      "episode_wall_seconds": 0.2791821350110695,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100503-mujoco-imp0001-500us",
+      "seed": 2026100503,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.138898,
+      "half_size_m": 0.019851,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.0001318245125138,
+      "peak_error_m": 0.00015801713106153726,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.000481313087804823,
+      "episode_wall_seconds": 0.27965441600827035,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100503-superdex-load-damping-500us",
+      "seed": 2026100503,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.138898,
+      "half_size_m": 0.019851,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 9.421044339563088e-06,
+      "peak_error_m": 2.685076950771985e-05,
+      "minimum_recorded_normal_force_n": -0.6154214779526511,
+      "maximum_penetration_m": 0.0003150960137333417,
+      "episode_wall_seconds": 0.31340857199393213,
+      "failed_checks": [
+        "no_tensile_normal_force",
+        "transient_peak_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100504-mujoco-imp0001-500us",
+      "seed": 2026100504,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.257268,
+      "half_size_m": 0.017277,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 6.666923587968831e-05,
+      "peak_error_m": 8.855677653137896e-05,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0002598590716467175,
+      "episode_wall_seconds": 0.2766543249890674,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100504-superdex-load-damping-500us",
+      "seed": 2026100504,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.257268,
+      "half_size_m": 0.017277,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 9.763610218336771e-05,
+      "peak_error_m": 0.00012304091960158373,
+      "minimum_recorded_normal_force_n": -0.3063990989473645,
+      "maximum_penetration_m": 0.0004252724572961636,
+      "episode_wall_seconds": 0.3697132130037062,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100504-mujoco-imp09-500us",
+      "seed": 2026100504,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.257268,
+      "half_size_m": 0.017277,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00012607592919935658,
+      "peak_error_m": 0.00022188364123403378,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0002781059494811576,
+      "episode_wall_seconds": 0.2462155559915118,
+      "failed_checks": [
+        "fitting_load_response",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100505-superdex-load-damping-500us",
+      "seed": 2026100505,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.135367,
+      "half_size_m": 0.023054,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 7.447636305199448e-05,
+      "peak_error_m": 9.14885829035049e-05,
+      "minimum_recorded_normal_force_n": -0.5690068911646006,
+      "maximum_penetration_m": 0.00023598539388279896,
+      "episode_wall_seconds": 0.3499743430002127,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100505-mujoco-imp09-500us",
+      "seed": 2026100505,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.135367,
+      "half_size_m": 0.023054,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.0001485257231240609,
+      "peak_error_m": 0.0002528774312382153,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0005285465561559559,
+      "episode_wall_seconds": 0.2807208430022001,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100505-mujoco-imp0001-500us",
+      "seed": 2026100505,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.135367,
+      "half_size_m": 0.023054,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00014304445401209235,
+      "peak_error_m": 0.0001715374945081686,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0004938679454354229,
+      "episode_wall_seconds": 0.24242357899493072,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100506-mujoco-imp09-500us",
+      "seed": 2026100506,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.131723,
+      "half_size_m": 0.021217,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00015466948841450875,
+      "peak_error_m": 0.000265415404897551,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.000543168312509331,
+      "episode_wall_seconds": 0.27823456400074065,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100506-mujoco-imp0001-500us",
+      "seed": 2026100506,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.131723,
+      "half_size_m": 0.021217,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00015525251041348745,
+      "peak_error_m": 0.00018619945630363942,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0005075304043551526,
+      "episode_wall_seconds": 0.2854004079999868,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100506-superdex-load-damping-500us",
+      "seed": 2026100506,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.131723,
+      "half_size_m": 0.021217,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 3.481780059951779e-05,
+      "peak_error_m": 5.0063753660341314e-05,
+      "minimum_recorded_normal_force_n": -0.6321147522724445,
+      "maximum_penetration_m": 0.00027651137724278227,
+      "episode_wall_seconds": 0.3123694940004498,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100507-mujoco-imp0001-500us",
+      "seed": 2026100507,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.208975,
+      "half_size_m": 0.022049,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": true,
+      "transient_passed": false,
+      "worst_window_rms_m": 1.2951035066486361e-05,
+      "peak_error_m": 2.0488450424893656e-05,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0003199111128731058,
+      "episode_wall_seconds": 0.2775317360064946,
+      "failed_checks": [
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100507-superdex-load-damping-500us",
+      "seed": 2026100507,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.208975,
+      "half_size_m": 0.022049,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 5.418073621690419e-05,
+      "peak_error_m": 7.309087417292165e-05,
+      "minimum_recorded_normal_force_n": -0.44659519007586873,
+      "maximum_penetration_m": 0.00026347422014639035,
+      "episode_wall_seconds": 0.35634752399346326,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100507-mujoco-imp09-500us",
+      "seed": 2026100507,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.208975,
+      "half_size_m": 0.022049,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.00012091499456252052,
+      "peak_error_m": 0.00021618460794779848,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0003423747368595173,
+      "episode_wall_seconds": 0.24284889199770987,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100508-superdex-load-damping-500us",
+      "seed": 2026100508,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.255524,
+      "half_size_m": 0.024289,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 9.686294162138726e-05,
+      "peak_error_m": 0.00012343325968450404,
+      "minimum_recorded_normal_force_n": -0.11418327418282972,
+      "maximum_penetration_m": 0.00022113923059907323,
+      "episode_wall_seconds": 0.3532335400086595,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100508-mujoco-imp09-500us",
+      "seed": 2026100508,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.255524,
+      "half_size_m": 0.024289,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.0001258331925618706,
+      "peak_error_m": 0.00022171223781254054,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0002800040783983576,
+      "episode_wall_seconds": 0.2831080629985081,
+      "failed_checks": [
+        "fitting_load_response",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100508-mujoco-imp0001-500us",
+      "seed": 2026100508,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.255524,
+      "half_size_m": 0.024289,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 6.507129192064834e-05,
+      "peak_error_m": 8.652963192104176e-05,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.000261632660856069,
+      "episode_wall_seconds": 0.2422630269866204,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100509-mujoco-imp09-500us",
+      "seed": 2026100509,
+      "profile": "mujoco-imp09-500us",
+      "mass_kg": 0.221561,
+      "half_size_m": 0.023256,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 0.0001217946854303182,
+      "peak_error_m": 0.00021779608900293016,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.0003229257904000665,
+      "episode_wall_seconds": 0.2794638310006121,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100509-mujoco-imp0001-500us",
+      "seed": 2026100509,
+      "profile": "mujoco-imp0001-500us",
+      "mass_kg": 0.221561,
+      "half_size_m": 0.023256,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "compiled analytic plane and box dimensions",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 2.908365693711984e-05,
+      "peak_error_m": 4.090715628162411e-05,
+      "minimum_recorded_normal_force_n": 0.0,
+      "maximum_penetration_m": 0.00030173823478858025,
+      "episode_wall_seconds": 0.28525130900379736,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "id": "seed-2026100509-superdex-load-damping-500us",
+      "seed": 2026100509,
+      "profile": "superdex-load-damping-500us",
+      "mass_kg": 0.221561,
+      "half_size_m": 0.023256,
+      "observed_comparison_checks": {
+        "native_run_completed": true,
+        "native_mass_matches": true,
+        "native_inertia_matches": true,
+        "normal_parameters_match": true,
+        "declared_force_commands": true,
+        "actual_initial_state_matches": true,
+        "checked_representation_matches": true
+      },
+      "observed_comparison_complete": true,
+      "representation": {
+        "checked_representation": "submitted triangle mesh only",
+        "representation_matches": true,
+        "cooked_mesh_equivalence": null,
+        "combined_contact_law_readback": null
+      },
+      "physics_passed": false,
+      "transient_passed": false,
+      "worst_window_rms_m": 7.8568886745855e-05,
+      "peak_error_m": 0.00010086913406130661,
+      "minimum_recorded_normal_force_n": -0.21256408772564653,
+      "maximum_penetration_m": 0.0002385464702945525,
+      "episode_wall_seconds": 0.3219585990009364,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    }
+  ],
+  "scope": "Prospective synthetic-reference profile transfer. Input-mesh checks do not observe internal cooking; no engine equivalence or hardware accuracy claim."
+}

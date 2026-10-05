@@ -106,3 +106,11 @@
 ![Synthetic response and measured cost](../../evidence/response-cost-v1.png)
 
 [Protocol, timing boundaries, failures and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/RESPONSE_COST.zh-CN.md)
+
+## 成对质量与尺寸迁移
+
+三个冻结的名义接触配置，在10组预登记质量/尺寸组合上完成30次运行：原工程检查1/30通过，瞬态目标0/30通过，联合0/30通过。所有结果独立复算，30次实际初态和声明范围内的表示检查完整。**名义场景通过不能证明参数可直接迁移。** 这里未做质量或面积补偿，失败说明固定映射不满足指定合成目标，不能归因成引擎算法错误。内部烘焙与组合律仍有不可观测项。
+
+![Per-scenario synthetic response discrepancy](../../evidence/contact-transfer-v1.png)
+
+[Protocol and all outcomes](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TRANSFER.zh-CN.md)

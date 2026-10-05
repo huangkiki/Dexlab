@@ -106,3 +106,11 @@ All 27 fixed-profile, three-timestep, three-repeat episodes were independently r
 ![Synthetic response and measured cost](../../evidence/response-cost-v1.png)
 
 [Protocol, timing boundaries, failures and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/RESPONSE_COST.md)
+
+## Paired mass and size transfer
+
+Three frozen nominal contact profiles completed30 episodes over10 preregistered mass/size combinations: original engineering checks1/30, transient target0/30, combined0/30. All outcomes independently reproduce; all30 actual initial states and representation checks within the declared scope are complete. **Nominal-scene success does not establish parameter transfer.** No mass/area compensation was applied; failures show that these mappings miss the synthetic target, not that native algorithms are wrong. Internal cooking and combined-law observability remain incomplete.
+
+![Per-scenario synthetic response discrepancy](../../evidence/contact-transfer-v1.png)
+
+[Protocol and all outcomes](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TRANSFER.md)
