@@ -24,7 +24,7 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 | Does finer computation improve reliability? | Fixed model, timestep refinement, reference discrepancy and measured cost | Response–cost curves are available; smaller steps do not reduce every profile's error |
 | Does this match real grasping? | Same-apparatus force–displacement, slip and release measurements with uncertainty | Measured references are missing; unanswered |
 
-**Version qualification:** the MuJoCo 3.15.0 candidate passes 486 tests. Cloth XML omits the removed `internal` attribute and elastic cloth retains the candidate discrete integrator. Full latest-version grasp qualification is pending; passing 3.14.0 trajectories remain earlier-version evidence.
+**Version qualification:** v0.28.0 passed both full 14-second official MuJoCo 3.15.0 / SuperDex 1.0.0 FP64 grasp runs and independent acceptance, plus 491 tests. This qualifies the specified regression configurations, not material accuracy; historical trajectories retain their original version labels.
 
 ### Negative SDF construction-path result
 
@@ -41,6 +41,8 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 **Matched damping ablation:** Zero normal damping removes recorded tensile force in all three pairs, but settling fails at two finer steps. Combined acceptance remains 0/6; this is not a complete repair. [Reference and all outcomes](demos/contact-benchmark/DAMPING_ABLATION.md)
 
 ![Paired unloading forces](docs/evidence/damping-ablation-v1.png)
+
+**Model check before tuning:** under the documented damping law and pure-normal-translation assumptions, a fixed coefficient cannot exactly match constant tangent damping at 2,4,6 N. This analytic mismatch is not measured trajectory error; see the [conditional derivation and reproduction](demos/contact-benchmark/DAMPING_REFERENCE.md).
 
 ## Current findings
 
