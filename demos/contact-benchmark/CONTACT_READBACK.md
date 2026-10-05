@@ -28,4 +28,6 @@ Raw evidence has been packaged and verified offline; final native grasp regressi
 python demos/contact-benchmark/report_contact_readback.py READBACK_RECORDS --previous FRICTION_RECORDS --output REPORT.json
 ```
 
-Prepared raw artifact: `dexlab-contact-readback-evidence-v1.tar.gz`, 2,403,074 bytes, SHA-256 `ba59bd8beca7fab3091df52759070febcdb9bce35344bc31fb0e1e26c63e3b02`. All 186 file hashes and eight rescored diagnoses verified after extraction using archived source. Native state/contact bytes unchanged; only private source-map keys redacted with before/after hashes. Originals retained.
+Published raw artifact: `dexlab-contact-readback-evidence-v1.tar.gz`, 2,403,074 bytes, SHA-256 `ba59bd8beca7fab3091df52759070febcdb9bce35344bc31fb0e1e26c63e3b02`. All 186 file hashes and eight rescored diagnoses verified after extraction using archived source. Native state/contact bytes unchanged; only private source-map keys redacted with before/after hashes. Originals retained.
+
+[Published raw evidence / 已发布原始证据 (v0.22.0)](https://github.com/huangkiki/Dexlab/releases/download/v0.22.0/dexlab-contact-readback-evidence-v1.tar.gz). Publication and downloaded-asset verification are complete; this does not resolve the unobservable fields described above.

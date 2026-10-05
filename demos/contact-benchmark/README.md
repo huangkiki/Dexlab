@@ -4,7 +4,7 @@
 
 Three UniLab tasks measure planar sliding, normal loading/unloading, and two-pad cylinder loading/release. MuJoCo 3.11.0 and SuperDex 1.0.0 FP64 use official native APIs; PhysX uses the qualified UniSim/Isaac Sim 5.1 adapter. Engine sources and binaries are unchanged.
 
-**These are uncalibrated development experiments, not held-out results or engine-accuracy rankings.** Failures are retained. Response calibration, frozen evaluation and isolated speed–error studies remain in [Issue #10](https://github.com/huangkiki/Dexlab/issues/10).
+**These are uncalibrated development experiments, not held-out results or engine-accuracy rankings.** Failures are retained. New [synthetic response–cost](RESPONSE_COST.md) and [prospective paired transfer](TRANSFER.md) studies preserve all failures. Complete internal cooking/combined-law readback remains unobservable. Real-material calibration belongs to #6, the apple suite to #3; #10 still requires its full acceptance audit.
 
 Normal response now has a separate [force-loading protocol and transfer report](NORMAL_RESPONSE.md): 17 completed development runs, 11 passes and 6 retained failures. Static response matching and settling are scored separately.
 
@@ -80,3 +80,7 @@ tar -xzf runs/contact-evidence-v012/v0.12.0-contact-development-evidence.tar.gz 
 ```
 
 Archive SHA-256: `5a836c146ed5b726d29f60813322e68e4cb03a1ba7f9c8f301c379ec4e003279`. The batch rescoring command exits zero only when every recorded summary is reproduced, including the 13 physical failures. It does not reclassify those failures as successful physics.
+
+## Updated evidence and remaining scope
+
+[Synthetic response–cost](RESPONSE_COST.md) and [prospective paired mass/size transfer](TRANSFER.md) now retain all measured failures. Full internal cooking/combined-law readback remains unobservable. Real-material calibration belongs to #6 and the apple held-out suite to #3; #10 still requires its explicit completion audit. Earlier development data are not retroactively labeled held-out.
