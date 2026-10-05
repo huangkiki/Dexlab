@@ -28,8 +28,10 @@
         "protocol_fail": 53
       },
       "raw_source": {
-        "url": null,
-        "availability": "preserved locally; no public complete raw archive"
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz",
+        "availability": "public projected archive; original trajectories and explicit metadata/path redaction",
+        "archive_subdirectory": "dexlab-historical-evidence-v1/raw/cloth-heldout",
+        "reproduction": "PUBLIC-ARCHIVE.md"
       }
     },
     {
@@ -104,8 +106,10 @@
         "protocol_pass": 1
       },
       "raw_source": {
-        "url": null,
-        "availability": "preserved locally; no public complete raw archive"
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz",
+        "availability": "public projected archive; original trajectories and explicit metadata/path redaction",
+        "archive_subdirectory": "dexlab-historical-evidence-v1/raw/robot-cloth",
+        "reproduction": "PUBLIC-ARCHIVE.md"
       }
     }
   ]

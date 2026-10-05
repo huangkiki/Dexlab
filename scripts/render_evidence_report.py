@@ -153,6 +153,8 @@ def markdown(report, output, zh):
         '## 数据、代码与复算' if zh else '## Data, code and reproduction', '',
         '[全部结果与逐文件哈希](historical-v1.json) · [逐指标 CSV](metrics.csv) · [冻结批次选择](cohorts.json) · [离线评分代码](../../src/dexlab/evidence_report.py) · [图表生成代码](../../scripts/render_evidence_report.py)' if zh else
         '[All rows and per-file hashes](historical-v1.json) · [Tidy metric CSV](metrics.csv) · [Frozen cohort selection](cohorts.json) · [Offline scorer](../../src/dexlab/evidence_report.py) · [Plot generator](../../scripts/render_evidence_report.py)', '',
+        '补齐的两组公开包使用显式脱敏副本及冻结历史评分器；106 条记录完整复算一致。下载目录、变换及限制见 [独立复算说明](PUBLIC-ARCHIVE.zh-CN.md)。原历史报告保留当时的可用性记录，当前下载位置以本表为准。' if zh else
+        'The two completed public cohorts use explicit metadata projections and the frozen historical scorer; all 106 records reproduce exactly. See [portable reproduction](PUBLIC-ARCHIVE.md) for layout, transformations and limits. The immutable historical report retains its original availability snapshot; this table gives current download locations.', '',
         '| 批次 | 完整原始记录 |' if zh else '| Cohort | Complete raw records |', '|---|---|',
     ]
     for c in selection['cohorts']:
@@ -160,9 +162,11 @@ def markdown(report, output, zh):
         label=('[发布包]('+url+')' if zh else '[Release archive]('+url+')') if url else ('本地保留；当前没有公开的完整原始包，JSON 不能替代原始轨迹' if zh else 'Preserved locally; no public complete raw archive. JSON does not replace raw trajectories.')
         text.append(f"| {LABELS[c['id']][int(zh)]} | {label} |")
     text += ['',
-        '在现有 DexLab 环境中复算，另外安装绘图依赖 `matplotlib`。私人位置文件用批次 ID 映射到解压目录；分散记录可用 `{场景ID: 本地目录}`。不提交该文件。每个根目录下应直接包含场景 ID；发布包的外层目录需要手动选择。所有原始数据可用后才能生成完整报告，命令不会联网下载或执行仿真。' if zh else
-        'Use the existing DexLab environment and install matplotlib for plotting. A private location JSON maps cohort IDs to extracted roots; scattered records may use {recordID: localDirectory}. Do not commit it. Each root must directly contain record IDs; select the appropriate archive subdirectory. All raw data is required for a complete report; commands neither download data nor simulate.', '',
-        '```bash', '.venv/bin/python -m dexlab.evidence_report \\', '  --locations "$PRIVATE_LOCATIONS" --output /tmp/historical-new.json', '.venv/bin/python scripts/render_evidence_report.py \\', '  /tmp/historical-new.json --output /tmp/evidence-report', '```', '',
+        '两组公开脱敏批次请使用上方包内独立复算脚本。包内复制的批次记录绑定公开哈希；仓库原记录刻意保留私有原件哈希，不能用于混合校验脱敏副本和原件。其余五组发布包仍沿用各自的原始记录与评分来源。以下命令只从不可变的 208 条记录报告重新生成图表，不重新评分原始数据。' if zh else
+        'For the two public projected cohorts, use the bundled standalone reproducer above. Its copied receipts bind public hashes; the original tracked receipts deliberately retain private-original hashes and cannot validate a mixture of projected and original files. The other five archives retain their original receipt/scorer provenance. The following command regenerates plots from the immutable 208-record report; it does not rescore raw data.', '',
+        '```bash', '.venv/bin/python scripts/render_evidence_report.py docs/evidence/historical-v1.json --output /tmp/evidence-report', '```', '',
+        '开发者工具 `dexlab.evidence_report` 面向未脱敏原始输入及兼容的历史模型运行时。当前评分器可能要求旧录制不存在的证据；复现已发表历史值应使用包内固定源码，不能补造缺失证据。绘图另需安装 `matplotlib`。' if zh else
+        'The developer-facing `dexlab.evidence_report` tool requires unredacted original inputs and a compatible recorded-model runtime. Current scorers may require evidence absent from old recordings; use the pinned bundled sources to reproduce published historical values. Missing evidence remains missing. Plotting additionally requires matplotlib.', '',
         '复算会载入保存的 MuJoCo 模型作几何/FK 分析；不会调用动力学积分。评分版本由源文件哈希集合精确绑定，而不只依赖包版本号。图表生成成功不代表新代码已通过发布门禁。' if zh else
         'Rescoring loads saved MuJoCo models for geometry/FK analysis but never integrates dynamics. Scorer identity is bound to source-file hashes, not just a package version. Generating plots does not establish release-gate completion.', '',
         '[任务与参数来源](../inventory/README.zh-CN.md) · [研究方法](../research-focus.zh-CN.md) · [首页](../../README.md)' if zh else

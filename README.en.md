@@ -70,6 +70,8 @@ Each row uses a different task/protocol. Keep failures, unsupported outcomes and
 **Cloth repair candidate (MuJoCo 3.14):** the complete 9 s pinch, lift and release passes the current protocol: maximum strain **3.52%**, lift **123.92 mm**, and zero final hand/cloth force. No table/robot/floor midsurface intrusion is detected in 225 saved frames. Self penetration **1.492 mm** is close to the 1.5 mm limit, so robustness is not established. Official engines remain unchanged; material and control parameters are uncalibrated. [Metrics, plots, continuous video and failed controls](demos/cloth-folding/SETTLING.md).
 
 
+**Portable historical evidence:** the missing 105 cloth records and one robot-cloth record reproduce all 106 record objects exactly with the frozen historical scorer, retaining failures. Public projections explicitly record deployment-metadata redaction and original/public hashes; historical reproduction is not a pass under the latest protocol. [Download and reproduction](docs/evidence/PUBLIC-ARCHIVE.md).
+
 ## Continuous close-up demonstrations
 
 <table>
