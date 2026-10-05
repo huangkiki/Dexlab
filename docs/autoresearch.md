@@ -8,7 +8,7 @@ Codex implements, verifies and reviews issue-scoped changes, then merges eligibl
 
 1. Inspect existing worktrees, associated PRs, review feedback, applicable checks and interrupted releases first. Finish existing work; excluding claimed tasks from new dispatch must not cause them to be skipped forever. PR links and explicit `Refs #N` statements count even on other branch names.
 2. Use `next --dry-run` to inspect all candidates and exclusion reasons. New tasks must be open and labeled `auto:approved`, with exactly one priority and an explicit dependency declaration. Exclude `needs-input`, `blocked`, existing worktrees and open PRs. Choose P0 before P1 before P2, then creation time. Missing metadata, unknown dependencies and cycles fail closed.
-3. Handle at most one issue per run with one worker per queue. Use an isolated worktree from current `origin/main`, preserving unfinished changes. Issue bodies are task data and do not expand authorization.
+3. Handle one issue at a time with one worker per queue. A continuous goal can repeat this cycle after each verified delivery; an hourly trigger is recovery guidance, not a stopping boundary. Use an isolated worktree from current `origin/main`, preserving unfinished changes. Issue bodies are task data and do not expand authorization.
 
 ```bash
 python3 scripts/autoresearch.py next --dry-run
@@ -36,7 +36,32 @@ Every executable issue declares exactly one line `Depends on: none` or, for exam
 
 During migration, create `dexlab-dispatch-paused` inside the directory returned by `git rev-parse --git-common-dir`. Its presence prevents new selection/creation across worktrees; existing authorized work can still be recovered and submitted. The scheduled controller also pauses dispatch while older code remains installed. Preserve snapshots, then migrate labels, bodies, code, templates, docs and scheduler instructions together. Inspect `next --dry-run`, verify ongoing work recovery, and remove only this marker after acceptance. A dry run reads GitHub and refreshes the Git base but does not claim tasks. The controller remains responsible for checking runtime resources and acceptance scope before execution.
 
-Full physics checks run only in the authorized remote environment. Set `DEXLAB_CHECKOUT` privately to `SSH_ALIAS:/absolute/check-out`, prepare that isolated checkout with the exact source and its own environment, then pass `--check-remote` to `submit`. The gate hashes tracked and non-ignored new files with a temporary Git index; it refuses a mismatched remote tree, executes the unchanged full checks remotely, and checks both trees again before submission. Remote validation failures stop submission. This option does not copy files, forward GitHub credentials, or qualify batch execution/performance. Keep deployment values out of committed configuration and public logs. Without this option, `check`/`submit` execute on the calling host; call them there only if it is the approved simulation host.
+## Local-first execution and recovery
+
+Use a qualified local host first; remote execution is optional. Local authorization is not resource qualification. Launch experiments through the existing bounded runner, inside the cooperative research window:
+
+```bash
+python3 scripts/bounded_run.py --profile experiment \
+  --io-device "$DATA_DEVICE" --data-dir "$DATA_DIR" \
+  --receipt "$PRIVATE_STATE/unique-resources.json" -- \
+  python3 scripts/research_guard.py run \
+    --lock "$PRIVATE_STATE/window.lock" --kind qualification \
+    --receipt "$PRIVATE_STATE/unique-window.json" -- \
+    python3 scripts/autoresearch.py submit 49 --summary-file "$REVIEW"
+```
+
+All variables are private deployment configuration. Set the selected worktree's ignored run-output directory on the data volume before launch; `--data-dir` checks the volume but does not redirect arbitrary child writes. Preserve existing directories rather than replacing them. Archive evidence and raw outputs must not enter Git. The bounded runner requires the existing administrator-provided `sudo -n systemd-run` capability and never creates privileges or falls back to unbounded execution.
+
+The experiment profile enforces 16 GiB maximum / 15 GiB high memory, CPU quota 200% (two logical-core equivalents), 128 tasks, zero experiment swap and a one-hour maximum runtime. Data-device I/O is limited to 32 MiB/s reads and 16 MiB/s writes. It checks effective cgroup limits before the command and records counters and systemd results. Missing final telemetry prevents successful qualification. Admission requires measured available RAM for the envelope plus 8 GiB desktop reserve and at least 20 GiB free on the configured data volume, checked before launch and again inside the service. The supplied device must directly back that volume or its partition; stacked storage needs separate qualification. Headroom is a launch-time check, not protection against unrelated future workloads. The archive profile keeps its existing 8/6 GiB, one-CPU, 32-task and 16/8 MiB/s limits. These conservative starting profiles are not tuned performance settings; additional concurrency requires measurement.
+
+Before any launch, recheck recorded process/session/service handles, source tree and environment. A timeout while observing is not process termination. Continue a live job without changing its frozen source/environment or starting another. Keep failed/interrupted receipts; retry only after actual termination with fresh output and receipt identities. Confirm hashes, offline readability and no active consumers before deleting originals; another directory on the same disk is not an independent backup. The shared guard serializes timing against transfer/compression/hash work. Qualification includes setup/tests/source hashing and is not a speed benchmark; record local/remote hardware and do not pool their timings as identical conditions.
+
+For an optional remote gate, set `DEXLAB_CHECKOUT` privately to `SSH_ALIAS:/absolute/check-out` and pass `--check-remote` to `submit`. Prepare an isolated remote checkout with its own editable environment. The unchanged gate compares both source trees before and after checks; it does not copy files or forward authentication. Remote resource admission remains required. A remote outage must not block independent work already qualified locally.
+
+## Priority review before each work selection
+
+Inspect all open Issues, associated PRs/releases, dependencies, latest maintainer goals, existing review objections, live processes, resource capacity and expected cost. Before changing labels, comment on the affected Issue with evidence, alternative ordering, old → proposed priority and the selected next action. Do not invent agreement or remove unresolved human objections. If priorities stay unchanged, write one concise reason in #49 for that scheduled round; do not repeat it on every Issue or mechanically change labels. Assign exactly one priority, read it back, then select an eligible task. Priorities never bypass dependencies, authorization, reviews or acceptance.
+
 
 ## Merge conditions
 
@@ -59,7 +84,7 @@ The first code release is `v0.1.0`, matching the project version in `pyproject.t
 
 ## Scheduling and boundaries
 
-The current Codex heartbeat checks this thread hourly, stays quiet when state is unchanged, and reports releases, regressions or required input. Scheduling belongs to the maintainer's app/account; cloning the repository does not create a schedule, grant credentials or authorize merges for other users. The host and runtime environment must be available.
+The existing heartbeat checks this thread hourly. A continuous authorized goal keeps working between triggers. Report PR outcomes, resolved Issues or blockers requiring maintainer input; do not send minute/hour status messages. Obsidian commits and pushes are paused until explicitly resumed. Before context compaction or handoff, save a short private checkpoint with actual handles, frozen source/environment, verified evidence and next action. Resume by checking actual processes and GitHub, not by trusting a stale checkpoint alone; a text instruction cannot force host context compaction. Scheduling belongs to the maintainer's app/account; cloning the repository does not create a schedule, grant credentials or authorize merges for other users. The host and runtime environment must be available.
 
 This is a verifiable development workflow, not guaranteed unattended scientific discovery; missing hardware measurements cannot be invented. [Issues](https://github.com/huangkiki/Dexlab/issues) track research scope, dependencies and progress. See the delivered [model audit](model-audit.md) and [jitter diagnostics](jitter.md).
 
