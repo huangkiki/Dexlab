@@ -113,7 +113,7 @@ Latest-stable runtime qualification is in progress: [inventory, GPU probe and li
 
 The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.
 
-The current cloth candidate passes **397 unit tests**; its MuJoCo 3.14 single-case result is above. Published [v0.18.2](https://github.com/huangkiki/Dexlab/releases/tag/v0.18.2) completed both 14 s apple-grasp gates and official-package provenance admission. This change still needs final paired-backend regression; older tests cannot qualify the new source. Historical sphere-drape failures remain separate.
+The current cloth candidate passes **397 unit tests**; its MuJoCo 3.14 single-case result is above. Published [v0.18.2](https://github.com/huangkiki/Dexlab/releases/tag/v0.18.2) completed both 14 s apple-grasp gates and official-package provenance admission. Current-source paired regression, provenance admission and commit identity are recorded in each delivery PR and Release. Historical sphere-drape failures remain separate.
 
 ## Quick reproduction
 

@@ -1,5 +1,7 @@
 # Cloth versus robot: independent geometry audit
 
+> **Historical diagnostic snapshot:** test counts, next steps and uncommitted/pending-validation statements below describe that diagnostic stage, not current delivery status. See the [current experiment report](SETTLING.md) for the full dynamics repair, later controls and limitations.
+
 [简体中文](ROBOT-CONTACT.zh-CN.md) | [English](ROBOT-CONTACT.md)
 
 **No cloth midsurface intrusion into the 79 robot collision hulls was detected in 225 saved frames. Table intrusion remains present in 176/225 frames; the physics repair is unfinished.** This adds the previously missing cloth/robot diagnostic, not a new successful grasp.

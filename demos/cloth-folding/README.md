@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
+**Current development case:** the complete pinch, lift and release in official MuJoCo 3.14 passes the fixed protocol; strain is 3.52% and self penetration 1.492 mm is near its limit, so robustness is not established. [New results, continuous video, parameters and reproduction](SETTLING.md). The old video and original defaults below are retained failure history, not the current candidate.
+
 OpenArm and Wuji manipulate passive MuJoCo cloth through joint actuation and
 frictional contact. There are no hand–cloth attachments, cloth actuators, mocap
 grippers, or cloth-state edits during the recorded episode.
@@ -16,15 +18,15 @@ The complete, uncut 9 s episode. The display camera follows saved hand/cloth sta
 
 **The original success claim is withdrawn:** the table-interior audit detects intrusion in 176/225 saved frames. This recording requires geometry review. [Scoring comparison, curve and limits](SCORING.md). Physical repair is separate in [#32](https://github.com/huangkiki/Dexlab/issues/32).
 
-[Static table-edge counterexample and parameter audit](TABLE-CONTACT.md): a concrete mismatch between native contact distance and surface intrusion; dynamics repair remains unvalidated.
+[Static table-edge counterexample and parameter audit](TABLE-CONTACT.md): a concrete mismatch between native contact distance and surface intrusion; this static contrast alone does not establish a dynamics repair.
 
 [Independent cloth/robot audit](ROBOT-CONTACT.md): no midsurface intrusion into 79 robot collision hulls in 225 saved frames; injected counterexamples are detected. This does not clear the table failure or certify finite-thickness/inter-frame separation.
 
 ## Run and verify
 
-[Passive-settling observation](SETTLING.md): optionally record every initialization step before planning and locate the first sampled table intrusion offline. Synthetic tests are complete; new remote dynamics validation is pending.
+[Passive-settling observation](SETTLING.md): optionally record every initialization step before planning and locate the first sampled table intrusion offline. The report also records full native dynamics, the passing case and failed controls.
 
-Use the repository's `bash scripts/setup.sh` environment. Generate an apple
+The commands below retain the original defaults; use the linked 3.14 qualified profile and explicit arguments for the passing candidate. Use the repository's `bash scripts/setup.sh` environment. Generate an apple
 robot model first, or set `DEXLAB_ROBOT_MODEL` to an existing `model.xml`:
 
 ```bash
@@ -33,7 +35,7 @@ bash demos/cloth-folding/run.sh --task grasp --timestep .00025
 .venv/bin/python demos/cloth-folding/src/verify_cloth.py demos/cloth-folding/runs/latest
 ```
 
-The offline verifier returns 0 for a limited protocol pass, 1 for protocol failure, and 2 when geometry review is required. It reads the recording without modifying it; use `--output /path/to/new-report.json` outside the recording for a new report. Rendering writes a new sibling directory named `<run>-media-cloth-evidence-v2`; an existing destination is rejected. Explicit replay: `render_cloth.py RECORD --output NEW_MEDIA_DIR`. The episode summary's `verified`/`validation.passed` covers online protocol measurements only; use the offline assessment for geometry.
+The offline verifier returns 0 for a limited protocol pass, 1 for protocol failure, and 2 when geometry review is required. It reads the recording without modifying it; use `--output /path/to/new-report.json` outside the recording for a new report. Rendering writes a new sibling directory named `<run>-media-cloth-evidence-v3`; an existing destination is rejected. Explicit replay: `render_cloth.py RECORD --output NEW_MEDIA_DIR`. The episode summary's `verified`/`validation.passed` covers online protocol measurements only; use the offline assessment for geometry.
 
 `DEXLAB_PYTHON` selects a Python environment; `--no-video` skips rendering.
 Use a fresh `--output` directory for each experiment. To reproduce the

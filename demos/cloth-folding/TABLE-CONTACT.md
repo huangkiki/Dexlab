@@ -1,5 +1,7 @@
 # Table-edge intersection: static contact diagnostic
 
+> **Historical diagnostic snapshot:** test counts, next steps and uncommitted/pending-validation statements below describe that diagnostic stage, not current delivery status. See the [current experiment report](SETTLING.md) for the full dynamics repair, later controls and limitations.
+
 [简体中文](TABLE-CONTACT.zh-CN.md) | [English](TABLE-CONTACT.md)
 
 **Conclusion: the historical cloth/table intersection is reproducible in static collision queries without a robot or dynamics integration.** For one recorded triangle, independent table-interior intrusion is **2.556627 mm**, while MuJoCo 3.11.0 reports only **0.001032 mm** maximum native contact penetration for that triangle. These different definitions cannot substitute for each other. A small native contact metric can therefore coexist with visible surface intersection.
