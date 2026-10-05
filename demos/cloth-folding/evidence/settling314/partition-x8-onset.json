@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "classification": "exploratory_settling_onset_diagnostic",
+  "record_completed": true,
+  "scientific_acceptance": "not_assessed",
+  "input_sha256": {
+    "states.npz": "2d30d5dff8f5020576c9cf4eb8ed512c11169e37ad4c3eeabb49b084427a0ef3",
+    "model.mjb": "5a435d0c3c34f8a6ec36fe39668e9ec6005ed9e03befa784674b716b6414576d",
+    "manifest.json": "18def1a4017ce24ab3313b7f30e668ddb9c275274208ed437978388bdf3efb8c"
+  },
+  "auditor_sha256": "48a6da3714a2c36206dbf69d0f2af0012ee9b09025a078e58750161e16d468c2",
+  "table_auditor_sha256": "6553539d76b90ca6a52f8beb99d985ca1cf90d7ea78475f8b43422f9f8a62b60",
+  "runtime_mujoco_version": "3.14.0",
+  "first_intrusion": {
+    "frame_index": 181,
+    "time_s": 0.09050000000000007,
+    "previous_sample_without_intrusion_s": 0.09000000000000007,
+    "triangle_id": 22,
+    "depth_m": 1.8733150781415943e-05,
+    "triangle_vertices_m": [
+      [
+        0.2632756406136239,
+        0.4014665647894321,
+        0.4848635028913885
+      ],
+      [
+        0.2797267100455266,
+        0.40409044215372575,
+        0.48573357903373393
+      ],
+      [
+        0.28002585304725947,
+        0.39669106625367856,
+        0.5007899029649202
+      ]
+    ]
+  },
+  "evaluated_frames": 182,
+  "recorded_frames": 4001,
+  "table_bounds_m": [
+    [
+      -0.54,
+      0.39999999999999997,
+      0.494
+    ],
+    [
+      0.54,
+      0.84,
+      0.5
+    ]
+  ],
+  "numerical_zero_tolerance_m": 1e-08,
+  "limits": [
+    "Zero-thickness midsurface versus the verified solid table only",
+    "Stops at the first sampled intrusion; later states are not geometrically assessed",
+    "Consecutive physical steps do not prove continuous inter-step separation",
+    "The previous clear sample is not a continuous-time onset bound",
+    "No robot contact, support force, grasp success or physical repair is assessed"
+  ]
+}

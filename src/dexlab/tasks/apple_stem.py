@@ -2,6 +2,7 @@
 
 import json
 import os
+import time
 from dataclasses import dataclass, field, replace
 from importlib.metadata import version
 from pathlib import Path
@@ -13,25 +14,9 @@ from unilab.base.base import ABEnv, EnvCfg
 from unilab.base.np_env import NpEnvState
 
 from dexlab.episode import SCENE_LOCK
+from dexlab.apple_admission import APPLE_PARAMETERS as PARAMETERS
 
 TASK = "DexLab-AppleStem-v0"
-PARAMETERS = (
-    "mujoco_height_offset",
-    "mujoco_friction",
-    "mujoco_pinch_gain",
-    "gap",
-    "stiffness",
-    "friction_velocity",
-    "roll",
-    "yaw",
-    "height_offset",
-    "linear_solver",
-    "timestep",
-    "apple_mass",
-    "apple_x_offset",
-    "apple_y_offset",
-    "apple_yaw",
-)
 
 
 @registry.envcfg(TASK)
@@ -244,14 +229,43 @@ def main():
             "parameters": {key: getattr(args, key) for key in PARAMETERS},
         },
     )
+    from dexlab.apple_admission import observe_runtime, apple_profile
+    from dexlab.benchmark import source_hashes, write_json
+
+    qualification = None
+    if os.environ.get("DEXLAB_MUJOCO_PROFILE", "").startswith("qualification-"):
+        qualification = {
+            "schema_version": 1, "backend": args.backend,
+            "source_sha256": source_hashes(), "runtime": observe_runtime(),
+            "profile": apple_profile(args.backend, {key: getattr(args, key) for key in PARAMETERS}),
+        }
+    started = time.perf_counter()
+    timing = {"schema_version": 1, "backend": args.backend,
+              "headless": args.headless, "preparation_seconds": None,
+              "episode_and_recording_seconds": None,
+              "rendering": "disabled" if args.headless else "included_in_episode",
+              "scope": "Preparation includes settling/planning/model build. Episode includes control, native steps, recording and internal scoring. Native step-only time is in engine.json; independent verification is timed separately."}
     try:
         state = env.init_state()
+        prepared = time.perf_counter()
+        timing["preparation_seconds"] = prepared - started
         while not state.terminated[0]:
             state = env.step(state.info["scripted_target"])
+        timing["episode_and_recording_seconds"] = time.perf_counter() - prepared
         if not state.info["summary"]["passed"]:
             raise SystemExit("Stem grasp verification failed")
     finally:
         env.close()
+        timing["total_task_seconds"] = time.perf_counter() - started
+        if Path(args.output).is_dir():
+            (Path(args.output) / "runtime-timing.json").write_text(json.dumps(timing, indent=2))
+            if qualification is not None:
+                qualification["source_unchanged"] = source_hashes() == qualification["source_sha256"]
+                qualification["runtime_unchanged"] = observe_runtime() == qualification["runtime"]
+                write_json(Path(args.output) / "qualification-observation.json", qualification)
+                if not qualification["source_unchanged"] or not qualification["runtime_unchanged"]:
+                    raise RuntimeError("Source or native runtime changed during qualification episode")
+
 
 
 if __name__ == "__main__":

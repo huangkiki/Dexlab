@@ -91,7 +91,7 @@ Scope includes the pinned UniSim declarations for MuJoCo/mjbatch, SuperDex, MJWa
 
 ## Cloth experiments
 
-Seven native solver profiles have published 105 frozen held-out episodes: 52 protocol passes and 53 failures. Nominal materials are not calibrated across solvers. The frictional robot cloth grasp passed; bimanual folding has not. [Results and reproduction](../demos/cloth-benchmark/README.md) · [Robot cloth grasp](../demos/cloth-folding/README.md).
+Seven native solver profiles have published 105 frozen held-out episodes: 52 protocol passes and 53 failures. Nominal materials are not calibrated across solvers. The robot cloth grasp passed its original protocol, but subsequent independent geometry checks found table intersections in 176 of 225 saved frames (maximum interior depth 3.00 mm). Physical repair and bimanual folding remain unvalidated. [Results and reproduction](../demos/cloth-benchmark/README.md) · [Robot cloth grasp](../demos/cloth-folding/README.md).
 
 [Issue #12](https://github.com/huangkiki/Dexlab/issues/12) shares versioning, evidence and run management with rigid tasks, but uses separate scores. Initial experiments: pinned-edge extension/unloading, gravity sag and draping/contact over an analytic obstacle, with self-collision where supported.
 

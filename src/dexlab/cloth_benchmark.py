@@ -53,6 +53,10 @@ def batch(args):
         raise ValueError("Batch requires nonempty, uniquely named cases")
     if args.timeout <= 0:
         raise ValueError("Episode timeout must be positive")
+    if args.split == "test":
+        from dexlab.engine_versions import require_formal_batch_qualification
+
+        require_formal_batch_qualification("cloth", args.solver)
     args.output.mkdir(parents=True, exist_ok=False)
     frozen = source_identity()
     suite_hashes = {str(path): digest(path) for path in suites}
@@ -131,7 +135,7 @@ def source_identity():
     }
 
 
-def verify(directory):
+def verify(directory, *, write_summary=True):
     """Recompute physics measurements; do not trust the saved summary."""
     meta = json.loads((directory / "run.json").read_text())
     case = ClothCase(**meta["case"])
@@ -213,7 +217,8 @@ def verify(directory):
     result["scope"] = (
         "Recorded nominal cloth experiment; no real-material accuracy claim"
     )
-    write_json(directory / "summary.json", result)
+    if write_summary:
+        write_json(directory / "summary.json", result)
     return result
 
 
@@ -227,6 +232,10 @@ def run(args):
     )
     if entry is None:
         raise ValueError(f"Unknown case {args.case}")
+    if entry["split"] == "test":
+        from dexlab.engine_versions import require_formal_batch_qualification
+
+        require_formal_batch_qualification("cloth", [args.solver])
     case = ClothCase(**entry["case"])
     if args.refine == 2:
         case = replace(case, nx=2 * case.nx - 1, ny=2 * case.ny - 1)

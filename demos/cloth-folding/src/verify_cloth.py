@@ -11,6 +11,22 @@ from pathlib import Path
 
 import numpy as np
 
+SCORER_VERSION = "cloth-evidence-v3"
+MAXIMUM_FIELDS = (
+    "edge_strain", "hand_penetration_m", "table_penetration_m",
+    "self_contact_penetration_m", "robot_rigid_penetration_m", "floor_penetration_m",
+)
+
+
+def input_hashes(directory):
+    files = [directory / name for name in ("model.mjb", "states.npz", "trace.json", "summary.json")]
+    files.extend(sorted(directory.glob("plan-*.npz")))
+    hashes = {}
+    for path in files:
+        with path.open('rb') as stream:
+            hashes[path.name] = hashlib.file_digest(stream, 'sha256').hexdigest()
+    return hashes
+
 
 def evidence_checks(records, maximums, plans, task, duration, sample_dt):
     """Require actual sampling coverage before computing success fractions."""
@@ -21,6 +37,7 @@ def evidence_checks(records, maximums, plans, task, duration, sample_dt):
         "finite_complete_measurements": False,
         "complete_hand_plans": False,
         "complete_contact_scan": False,
+        "summary_bounds_recorded_maxima": False,
     }
     try:
         expected_time = np.arange(round(duration / sample_dt)) * sample_dt
@@ -37,13 +54,7 @@ def evidence_checks(records, maximums, plans, task, duration, sample_dt):
             row.get("contact_measurement_complete") is True for row in records
         )
         quantities = list(maximums.values())
-        required_maxima = {
-            "edge_strain",
-            "hand_penetration_m",
-            "table_penetration_m",
-            "self_contact_penetration_m",
-            "robot_rigid_penetration_m",
-        }
+        required_maxima = set(MAXIMUM_FIELDS)
         for row in records:
             quantities.extend(row[key] for key in required_maxima)
             quantities.extend(row["cloth_height_range_m"])
@@ -60,6 +71,14 @@ def evidence_checks(records, maximums, plans, task, duration, sample_dt):
                     quantities.extend(point)
         checks["finite_complete_measurements"] = (
             required_maxima <= maximums.keys() and bool(np.isfinite(quantities).all())
+        )
+        # The summary scans every physics step, the trace only at 100 Hz.
+        # Equality would incorrectly reject a peak between recorded samples.
+        checks["summary_bounds_recorded_maxima"] = bool(records) and all(
+            np.isfinite(maximums[key])
+            and maximums[key] >= 0
+            and all(0 <= row[key] <= maximums[key] for row in records)
+            for key in MAXIMUM_FIELDS
         )
     except (KeyError, TypeError, ValueError, ZeroDivisionError):
         pass
@@ -85,6 +104,7 @@ def verify_episode(
         < 0.0015,
         "table_contact_penetration_below_1_5_mm": maximums["table_penetration_m"]
         < 0.0015,
+        "floor_contact_penetration_below_1_5_mm": maximums["floor_penetration_m"] < 0.0015,
         "cloth_self_contact_penetration_below_1_5_mm": maximums[
             "self_contact_penetration_m"
         ]
@@ -175,8 +195,11 @@ def verify_episode(
 
 
 def verify_saved(directory):
+    """Read and rescore evidence without writing into the source directory."""
     import mujoco
 
+    directory = Path(directory)
+    original_hashes = input_hashes(directory)
     metadata = json.loads((directory / "summary.json").read_text())
     records = json.loads((directory / "trace.json").read_text())
     plans = []
@@ -224,6 +247,8 @@ def verify_saved(directory):
         and times.shape == expected.shape
         and np.isfinite(poses).all()
         and np.allclose(times, expected, rtol=0, atol=1e-10)
+        and triangles.ndim == 2 and triangles.shape[1] == 3
+        and triangles.dtype.kind in 'iu'
         and np.array_equal(triangles.ravel(), model.flex_elem)
     )
     result["checks"]["complete_surface_audit_record"] = bool(valid_states)
@@ -241,16 +266,66 @@ def verify_saved(directory):
             audit["maximum_crossing_pairs"] == 0
             and audit["maximum_degenerate_triangles"] == 0
         )
+        from dexlab.cloth_floor_audit import audit_floor
+        result["floor_surface_diagnostic"] = audit_floor(model, times, np.asarray(vertices))
+        from dexlab.cloth_table_audit import audit_table
+
+        result["table_surface_diagnostic"] = audit_table(
+            model, times, poses, triangles, np.asarray(vertices)
+        )
+    else:
+        result["floor_surface_diagnostic"] = {"status": "insufficient_evidence"}
+        result["table_surface_diagnostic"] = {
+            "status": "insufficient_evidence", "reason": "Invalid saved surface states"
+        }
+    result["scorer_version"] = SCORER_VERSION
     result["verifier_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-    result["passed"] = all(result["checks"].values())
-    (directory / "verification.json").write_text(json.dumps(result, indent=2) + "\n")
+    from dexlab import cloth_table_audit, cloth_self_contact, cloth_floor_audit
+
+    result["floor_auditor_sha256"] = hashlib.sha256(Path(cloth_floor_audit.__file__).read_bytes()).hexdigest()
+    result["table_auditor_sha256"] = hashlib.sha256(
+        Path(cloth_table_audit.__file__).read_bytes()
+    ).hexdigest()
+    result['self_auditor_sha256'] = hashlib.sha256(
+        Path(cloth_self_contact.__file__).read_bytes()
+    ).hexdigest()
+    if input_hashes(directory) != original_hashes:
+        raise ValueError('Recording changed during offline verification')
+    result["input_sha256"] = original_hashes
+    # Do not expose an unqualified success boolean in offline reports.
+    result.pop("passed", None)
+    result["protocol_passed"] = all(result["checks"].values())
+    result["protocol_scope"] = "Existing nominal protocol with corrected evidence integrity; not complete geometric validity"
+    result["assessment"] = (
+        "protocol_failed" if not result["protocol_passed"] else
+        "geometry_review_required" if any(result[name]["status"] != "no_sampled_intrusion"
+            for name in ("table_surface_diagnostic", "floor_surface_diagnostic")) else
+        "limited_protocol_pass"
+    )
+    result["coverage_limits"] = [
+        "The separate cloth versus robot surface auditor must also be run",
+        "25 Hz saved states cannot certify separation between frames",
+        "Table audit uses zero-thickness triangles, not shell thickness or native contact distance",
+        "Table and floor midsurface diagnostics are sampled; native penetration limits remain 1.5 mm",
+        "Historical records without per-step floor extrema cannot pass this scorer version",
+    ]
     return result
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
-    report = verify_saved(parser.parse_args().directory)
+    parser.add_argument("--output", type=Path, help="New report path; existing files are never overwritten")
+    args = parser.parse_args()
+    if args.output and args.output.resolve().is_relative_to(args.directory.resolve()):
+        parser.error('Report output must be outside the original recording')
+    report = verify_saved(args.directory)
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        with args.output.open("x") as stream:
+            stream.write(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
-    if not report["passed"]:
+    if not report["protocol_passed"]:
         raise SystemExit(1)
+    if report["assessment"] == "geometry_review_required":
+        raise SystemExit(2)

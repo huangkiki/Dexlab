@@ -19,6 +19,7 @@ class ClothGraspEvidenceTest(unittest.TestCase):
             edge_strain=0.01,
             hand_penetration_m=0.0001,
             table_penetration_m=0.0001,
+            floor_penetration_m=0.0,
             self_contact_penetration_m=0,
             robot_rigid_penetration_m=0,
         )
@@ -53,6 +54,13 @@ class ClothGraspEvidenceTest(unittest.TestCase):
             failure=None,
         )
 
+    def test_floor_penetration_and_missing_floor_coverage_fail(self):
+        self.maximums['floor_penetration_m'] = .002
+        self.records[300]['floor_penetration_m'] = .002
+        self.assertFalse(self.verify()['checks']['floor_contact_penetration_below_1_5_mm'])
+        del self.maximums['floor_penetration_m']
+        self.assertFalse(self.verify()['passed'])
+
     def test_complete_record_can_pass(self):
         self.assertTrue(self.verify()["passed"])
 
@@ -79,6 +87,31 @@ class ClothGraspEvidenceTest(unittest.TestCase):
 
     def test_nonfinite_measurement_fails(self):
         self.records[420]["material"]["r"][1] = float("nan")
+        self.assertFalse(self.verify()["passed"])
+
+    def test_each_trace_peak_must_be_bounded_by_summary(self):
+        for key in VERIFIER.MAXIMUM_FIELDS:
+            with self.subTest(key=key):
+                previous = self.records[48][key]
+                self.records[48][key] = 0.02
+                result = self.verify()
+                self.assertFalse(result["passed"])
+                self.assertFalse(result["checks"]["summary_bounds_recorded_maxima"])
+                self.records[48][key] = previous
+
+    def test_between_sample_peak_in_summary_is_valid(self):
+        self.maximums["table_penetration_m"] = 0.0002
+        self.assertTrue(self.verify()["passed"])
+
+    def test_consistent_large_penetration_still_fails_original_threshold(self):
+        self.records[48]["table_penetration_m"] = 0.02
+        self.maximums["table_penetration_m"] = 0.02
+        result = self.verify()
+        self.assertTrue(result["checks"]["summary_bounds_recorded_maxima"])
+        self.assertFalse(result["checks"]["table_contact_penetration_below_1_5_mm"])
+
+    def test_negative_penetration_is_invalid_evidence(self):
+        self.records[48]["table_penetration_m"] = -0.02
         self.assertFalse(self.verify()["passed"])
 
 

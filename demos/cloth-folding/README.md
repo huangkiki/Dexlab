@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
+**Current development case:** the complete pinch, lift and release in official MuJoCo 3.14 passes the fixed protocol; strain is 3.52% and self penetration 1.492 mm is near its limit, so robustness is not established. [New results, continuous video, parameters and reproduction](SETTLING.md). The old video and original defaults below are retained failure history, not the current candidate.
+
 OpenArm and Wuji manipulate passive MuJoCo cloth through joint actuation and
 frictional contact. There are no hand–cloth attachments, cloth actuators, mocap
 grippers, or cloth-state edits during the recorded episode.
@@ -14,9 +16,17 @@ grippers, or cloth-state edits during the recorded episode.
 
 The complete, uncut 9 s episode. The display camera follows saved hand/cloth states and never feeds the controller. [MP4](media/grasp.mp4) · [Media provenance](media/grasp-provenance.json)
 
+**The original success claim is withdrawn:** the table-interior audit detects intrusion in 176/225 saved frames. This recording requires geometry review. [Scoring comparison, curve and limits](SCORING.md). Physical repair is separate in [#32](https://github.com/huangkiki/Dexlab/issues/32).
+
+[Static table-edge counterexample and parameter audit](TABLE-CONTACT.md): a concrete mismatch between native contact distance and surface intrusion; this static contrast alone does not establish a dynamics repair.
+
+[Independent cloth/robot audit](ROBOT-CONTACT.md): no midsurface intrusion into 79 robot collision hulls in 225 saved frames; injected counterexamples are detected. This does not clear the table failure or certify finite-thickness/inter-frame separation.
+
 ## Run and verify
 
-Use the repository's `bash scripts/setup.sh` environment. Generate an apple
+[Passive-settling observation](SETTLING.md): optionally record every initialization step before planning and locate the first sampled table intrusion offline. The report also records full native dynamics, the passing case and failed controls.
+
+The commands below retain the original defaults; use the linked 3.14 qualified profile and explicit arguments for the passing candidate. Use the repository's `bash scripts/setup.sh` environment. Generate an apple
 robot model first, or set `DEXLAB_ROBOT_MODEL` to an existing `model.xml`:
 
 ```bash
@@ -24,6 +34,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
 bash demos/cloth-folding/run.sh --task grasp --timestep .00025
 .venv/bin/python demos/cloth-folding/src/verify_cloth.py demos/cloth-folding/runs/latest
 ```
+
+The offline verifier returns 0 for a limited protocol pass, 1 for protocol failure, and 2 when geometry review is required. It reads the recording without modifying it; use `--output /path/to/new-report.json` outside the recording for a new report. Rendering writes a new sibling directory named `<run>-media-cloth-evidence-v3`; an existing destination is rejected. Explicit replay: `render_cloth.py RECORD --output NEW_MEDIA_DIR`. The episode summary's `verified`/`validation.passed` covers online protocol measurements only; use the offline assessment for geometry.
 
 `DEXLAB_PYTHON` selects a Python environment; `--no-video` skips rendering.
 Use a fresh `--output` directory for each experiment. To reproduce the
@@ -52,9 +64,7 @@ step handle manipulation. This is **not the Newton physics engine**. CG at
 ## Evidence and current limits
 
 This experiment was imported from unpublished DexLab research; original file
-hashes are in [import-provenance.json](import-provenance.json). A fresh single-hand
-run in this worktree passes the complete checks, including the new offline
-surface-crossing audit. The historical bimanual fold failed strain, release and
+hashes are in [import-provenance.json](import-provenance.json). The historical single-hand run passed the old protocol, but the new independent table audit detects geometric intrusion. Zero nonadjacent self-crossings did not establish collision validity against the table or robot. The historical bimanual fold failed strain, release and
 final-placement checks; successful bimanual folding is not established here.
 
 | Single nominal configuration | Result |
@@ -67,7 +77,7 @@ final-placement checks; successful bimanual folding is not established here.
 | Final robot–cloth normal force | 0 N |
 | Nonadjacent surface crossings in 225 saved frames | 0 |
 
-[Run summary](evidence/grasp/summary.json) · [Offline verification](evidence/grasp/verification.json).
+[Unchanged historical summary](evidence/grasp/summary.json) · [Historical verifier output](evidence/grasp/verification.json) · [Current versioned assessment](evidence/grasp/verification-cloth-evidence-v2.json).
 The repository packages reports and media. Each new run retains the full model,
 trajectory, 100 Hz measurements and source snapshot under `runs/`; the commands
 above regenerate them.
@@ -75,7 +85,7 @@ above regenerate them.
 The verifier requires complete 100 Hz traces, explicit complete contact scans,
 finite measurements, and the correct hand plans before scoring. It checks two-pad
 contact coverage, material-anchor error, lift, strain, reported penetration,
-and release from every robot geometry. Offline verification also inspects the
+and release from every robot geometry. Recorded maxima must not exceed the per-step summary; a denser per-step summary may legitimately be larger. Missing or unsupported table geometry requires review, rather than silently counting as safe. Offline verification also inspects the
 compiled model for cloth actuation and external attachment constraints.
 Thresholds remain 95% two-pad coverage, 1 cm anchor error, 8 cm lift, 5% maximum
 edge strain, and 1.5 mm reported penetration. Final robot/cloth normal contact

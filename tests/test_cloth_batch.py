@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from dexlab.cloth_benchmark import batch
+from dexlab.cloth_benchmark import batch, run
 
 
 class ClothBatchTest(unittest.TestCase):
@@ -18,15 +18,32 @@ class ClothBatchTest(unittest.TestCase):
         self.root = Path(self.temporary.name)
         self.suite = self.root / "cases.json"
         self.suite.write_text(json.dumps({"cases": [
-            {"split": "test", "case": {"name": "held-out-a"}},
-            {"split": "test", "case": {"name": "held-out-b"}},
-            {"split": "development", "case": {"name": "dev"}},
+            {"split": "development", "case": {"name": "dev-a"}},
+            {"split": "development", "case": {"name": "dev-b"}},
+            {"split": "test", "case": {"name": "held-out"}},
         ]}))
         self.args = argparse.Namespace(
-            suite=[self.suite], split="test", solver=["mujoco"],
+            suite=[self.suite], split="development", solver=["mujoco"],
             output=self.root / "batch", dt=0.0005, iterations=10,
             device="cpu", timeout=1,
         )
+
+    def test_unqualified_test_split_never_launches_or_creates_output(self):
+        self.args.split = "test"
+        with patch("dexlab.cloth_benchmark.subprocess.run") as launch:
+            with self.assertRaisesRegex(ValueError, "Formal batch not qualified"):
+                batch(self.args)
+        launch.assert_not_called()
+        self.assertFalse(self.args.output.exists())
+
+    def test_single_case_cannot_bypass_heldout_admission(self):
+        args = argparse.Namespace(suite=self.suite, case="held-out", solver="mujoco",
+                                  output=self.root / "single-case")
+        with patch("unilab.base.registry.make") as make:
+            with self.assertRaisesRegex(ValueError, "Formal batch not qualified"):
+                run(args)
+        make.assert_not_called()
+        self.assertFalse(args.output.exists())
 
     def test_timeout_and_runtime_failure_remain_in_denominator(self):
         with patch("dexlab.cloth_benchmark.subprocess.run", side_effect=[

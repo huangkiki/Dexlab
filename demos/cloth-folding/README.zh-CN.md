@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
+**当前开发案例：** 官方 MuJoCo 3.14 的完整夹持、抬升和释放通过固定协议；应变 3.52%，自接触穿透 1.492 mm 接近上限，不宣称稳健性。[新结果、连续录像、参数与复现命令](SETTLING.zh-CN.md)。下方旧视频和原默认配置保留为失败历史，不代表当前候选。
+
 OpenArm 与 Wuji 通过关节驱动和摩擦接触操作被动 MuJoCo 布料。记录过程没有手—布附着约束、布料驱动器、mocap 夹具或布料状态改写。
 
 - `grasp`：夹住矩形布片，退离桌边、抬升、松手并撤离。
@@ -11,15 +13,25 @@ OpenArm 与 Wuji 通过关节驱动和摩擦接触操作被动 MuJoCo 布料。�
 
 完整 9 s 抓取、抬升、释放过程，无剪辑。展示相机跟随保存的手和布料状态，不参与控制。[MP4](media/grasp.mp4) · [媒体来源](media/grasp-provenance.json)
 
+**撤回原有成功表述：**桌体内部审计检出 176/225 个保存帧存在相交，这段记录需要几何复核。[评分对照、曲线与限制](SCORING.zh-CN.md)。物理修复单独见 [#32](https://github.com/huangkiki/Dexlab/issues/32)。
+
+[桌边静态反例与参数审查](TABLE-CONTACT.zh-CN.md)：已定位原生接触距离与面片内部穿插不一致的具体记录；此静态对照不单独证明动力学修复。
+
+[布—机器人独立检查](ROBOT-CONTACT.zh-CN.md)：225 个保存帧未检出布料中面侵入 79 个机器人碰撞凸包，人工反例能够检出；不撤销桌体失败，也不证明有限厚度或帧间分离。
+
 ## 运行与验收
 
-使用仓库 `bash scripts/setup.sh` 创建的环境。先生成苹果演示的机器人模型，或通过 `DEXLAB_ROBOT_MODEL` 指定已有 `model.xml`：
+[被动沉降观测](SETTLING.zh-CN.md)：可选保存规划前两秒的全部物理步，离线定位首次桌体侵入。报告同时记录完整原生动力学、通过案例与失败对照。
+
+下面命令是原默认配置；通过案例须采用上方链接中的 3.14 准入环境与显式参数。使用仓库 `bash scripts/setup.sh` 创建的环境。先生成苹果演示的机器人模型，或通过 `DEXLAB_ROBOT_MODEL` 指定已有 `model.xml`：
 
 ```bash
 bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
 bash demos/cloth-folding/run.sh --task grasp --timestep .00025
 .venv/bin/python demos/cloth-folding/src/verify_cloth.py demos/cloth-folding/runs/latest
 ```
+
+离线评分退出码：0 表示有限协议通过，1 表示协议失败，2 表示需要几何复核。评分只读原始记录；用 `--output /path/to/new-report.json` 在记录目录之外写入新报告。渲染写入新的同级目录 `<run>-media-cloth-evidence-v3`，已有目录会被拒绝；显式回放命令为 `render_cloth.py RECORD --output NEW_MEDIA_DIR`。运行汇总中的 `verified`/`validation.passed` 只覆盖在线协议测量，几何结论须查看离线 assessment。
 
 `DEXLAB_PYTHON` 指定 Python 环境；`--no-video` 跳过渲染。每次实验选择新的 `--output` 目录。实验性折叠配置为 `--task fold --hand-friction 2 --timestep .0005`。轨迹运行结束或视频生成不等于折叠成功。
 
@@ -33,7 +45,7 @@ bash demos/cloth-folding/run.sh --task grasp --timestep .00025
 
 ## 证据与当前边界
 
-本实验从尚未发布的 DexLab 研究代码导入，原文件哈希见 [import-provenance.json](import-provenance.json)。本分支重新运行的单手夹布通过完整验收，含新增的离线表面相交检查。历史双手折叠在应变、释放和最终位置上失败；尚未证明当前分支双手折叠成功。
+本实验从尚未发布的 DexLab 研究代码导入，原文件哈希见 [import-provenance.json](import-provenance.json)。历史单手记录虽通过旧协议，新版独立桌体审计检出了几何相交。非相邻自表面交叉数为零，并不能证明布与桌体或机器人没有碰撞问题。历史双手折叠在应变、释放和最终位置上失败；尚未证明当前分支双手折叠成功。
 
 | 单次名义配置记录 | 结果 |
 |---|---:|
@@ -45,9 +57,9 @@ bash demos/cloth-folding/run.sh --task grasp --timestep .00025
 | 最终机器人—布料法向力 | 0 N |
 | 225 个保存帧中的非相邻表面相交 | 0 |
 
-[运行结果](evidence/grasp/summary.json) · [离线验收](evidence/grasp/verification.json)。打包的是报告和媒体；原始模型、轨迹、100 Hz 测量和源码快照随每次运行保存在 `runs/`，上述命令可重新生成。
+[未修改的历史结果](evidence/grasp/summary.json) · [历史评分](evidence/grasp/verification.json) · [新版独立评估](evidence/grasp/verification-cloth-evidence-v2.json)。打包的是报告和媒体；原始模型、轨迹、100 Hz 测量和源码快照随每次运行保存在 `runs/`，上述命令可重新生成。
 
-评分前要求完整的 100 Hz 记录、明确完成的接触扫描、有限测量值和正确的手部计划。检查两指接触覆盖、材料点相对手部锚点误差、抬升、应变、上报穿透，以及从所有机器人几何体释放。离线验收还检查编译模型中的布料驱动与外部附着约束。
+评分前要求完整的 100 Hz 记录、明确完成的接触扫描、有限测量值和正确的手部计划。检查两指接触覆盖、材料点相对手部锚点误差、抬升、应变、上报穿透，以及从所有机器人几何体释放。采样轨迹的最大值不得超过逐步汇总；逐步汇总更密集，因此允许大于采样峰值。缺失或不支持的桌体几何须标记待复核，不能默认为安全。离线验收还检查编译模型中的布料驱动与外部附着约束。
 
 原阈值保持不变：两指覆盖率至少 95%、锚点误差小于 1 cm、抬升超过 8 cm、最大边长应变小于 5%、上报穿透小于 1.5 mm；最后机器人—布料法向力小于 1 mN。折叠另查下摆目标位置和远端布片位移。
 

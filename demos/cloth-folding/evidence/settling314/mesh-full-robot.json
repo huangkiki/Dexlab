@@ -1,0 +1,1467 @@
+{
+  "version": "robot-convex-interior-v1",
+  "status": "no_sampled_intrusion",
+  "classification": "exploratory_diagnostic_not_a_physical_acceptance_test",
+  "method": "LP over zero-thickness triangles and stored robot collision hulls",
+  "numerical_zero_tolerance_m": 1e-08,
+  "saved_frames": 225,
+  "robot_geom_count": 79,
+  "triangle_count": 288,
+  "frames_with_intrusion": 0,
+  "maximum_interior_depth_m": 0.0,
+  "first_intrusion_time_s": null,
+  "per_geom_maximum_interior_depth_m": {
+    "collision_openarm_body_link0": 0.0,
+    "collision_arm_openarm_left_base_link": 0.0,
+    "collision_arm_openarm_left_link1": 0.0,
+    "collision_arm_openarm_left_link2": 0.0,
+    "collision_arm_openarm_left_link3": 0.0,
+    "collision_arm_openarm_left_link4": 0.0,
+    "collision_arm_openarm_left_link5": 0.0,
+    "collision_arm_openarm_left_link6": 0.0,
+    "collision_arm_openarm_left_ee_base_link": 0.0,
+    "collision_l_wrist": 0.0,
+    "collision_l_index_finger_proximal": 0.0,
+    "collision_l_index_finger_proximal_abd": 0.0,
+    "collision_l_index_finger_middle": 0.0,
+    "collision_l_index_finger_distal": 0.0,
+    "collision_l_index_finger_nail": 0.0,
+    "collision_l_index_finger_pad": 0.0,
+    "collision_l_middle_finger_proximal": 0.0,
+    "collision_l_middle_finger_proximal_abd": 0.0,
+    "collision_l_middle_finger_middle": 0.0,
+    "collision_l_middle_finger_distal": 0.0,
+    "collision_l_middle_finger_nail": 0.0,
+    "collision_l_middle_finger_pad": 0.0,
+    "collision_l_pinky_proximal": 0.0,
+    "collision_l_pinky_proximal_abd": 0.0,
+    "collision_l_pinky_middle": 0.0,
+    "collision_l_pinky_distal": 0.0,
+    "collision_l_pinky_nail": 0.0,
+    "collision_l_pinky_pad": 0.0,
+    "collision_l_ring_finger_proximal": 0.0,
+    "collision_l_ring_finger_proximal_abd": 0.0,
+    "collision_l_ring_finger_middle": 0.0,
+    "collision_l_ring_finger_distal": 0.0,
+    "collision_l_ring_finger_nail": 0.0,
+    "collision_l_ring_finger_pad": 0.0,
+    "collision_l_thumb_proximal": 0.0,
+    "collision_l_thumb_proximal_abd": 0.0,
+    "collision_l_thumb_middle": 0.0,
+    "collision_l_thumb_distal": 0.0,
+    "collision_l_thumb_nail": 0.0,
+    "collision_l_thumb_pad": 0.0,
+    "collision_arm_openarm_right_base_link": 0.0,
+    "collision_arm_openarm_right_link1": 0.0,
+    "collision_arm_openarm_right_link2": 0.0,
+    "collision_arm_openarm_right_link3": 0.0,
+    "collision_arm_openarm_right_link4": 0.0,
+    "collision_arm_openarm_right_link5": 0.0,
+    "collision_arm_openarm_right_link6": 0.0,
+    "collision_arm_openarm_right_ee_base_link": 0.0,
+    "collision_r_wrist": 0.0,
+    "collision_r_index_finger_proximal": 0.0,
+    "collision_r_index_finger_proximal_abd": 0.0,
+    "collision_r_index_finger_middle": 0.0,
+    "collision_r_index_finger_distal": 0.0,
+    "collision_r_index_finger_nail": 0.0,
+    "collision_r_index_finger_pad": 0.0,
+    "collision_r_middle_finger_proximal": 0.0,
+    "collision_r_middle_finger_proximal_abd": 0.0,
+    "collision_r_middle_finger_middle": 0.0,
+    "collision_r_middle_finger_distal": 0.0,
+    "collision_r_middle_finger_nail": 0.0,
+    "collision_r_middle_finger_pad": 0.0,
+    "collision_r_pinky_proximal": 0.0,
+    "collision_r_pinky_proximal_abd": 0.0,
+    "collision_r_pinky_middle": 0.0,
+    "collision_r_pinky_distal": 0.0,
+    "collision_r_pinky_nail": 0.0,
+    "collision_r_pinky_pad": 0.0,
+    "collision_r_ring_finger_proximal": 0.0,
+    "collision_r_ring_finger_proximal_abd": 0.0,
+    "collision_r_ring_finger_middle": 0.0,
+    "collision_r_ring_finger_distal": 0.0,
+    "collision_r_ring_finger_nail": 0.0,
+    "collision_r_ring_finger_pad": 0.0,
+    "collision_r_thumb_proximal": 0.0,
+    "collision_r_thumb_proximal_abd": 0.0,
+    "collision_r_thumb_middle": 0.0,
+    "collision_r_thumb_distal": 0.0,
+    "collision_r_thumb_nail": 0.0,
+    "collision_r_thumb_pad": 0.0
+  },
+  "rows": [
+    {
+      "time_s": 0.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.52,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.56,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.6,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.64,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 0.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.4000000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.52,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.56,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.6,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.6400000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.8800000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 1.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.2800000000000002,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.52,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.56,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.6,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.64,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.7600000000000002,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.8000000000000003,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 2.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.2800000000000002,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.3200000000000003,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.52,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.56,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.6,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.64,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.7600000000000002,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.8000000000000003,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 3.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.5200000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.5600000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.6000000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.64,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 4.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.5200000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.5600000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.6000000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.64,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 5.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.5200000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.5600000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.6000000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.640000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 6.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.04,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.12,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.5200000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.5600000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.6000000000000005,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.640000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 7.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.0,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.040000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.08,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.120000000000001,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.16,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.2,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.24,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.28,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.32,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.36,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.4,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.44,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.48,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.52,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.56,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.6,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.64,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.68,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.72,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.76,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.8,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.84,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.88,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.92,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    },
+    {
+      "time_s": 8.96,
+      "maximum_interior_depth_m": 0.0,
+      "intruding_triangle_geom_pairs": 0,
+      "witness": null
+    }
+  ],
+  "coverage_limits": [
+    "Recorded frames only; no continuous-time separation claim",
+    "Collision convex hulls, not detailed render surfaces or SDFs",
+    "Zero-thickness cloth; no collision radius or contact margin inflation",
+    "Interior distance is not native contact depth or minimum translation distance",
+    "Small compliant contact overlap alone does not establish physical failure",
+    "Floor, table and cloth self-intersection require separate audits",
+    "Shared archived geometry and native kinematics; independent intersection algorithm"
+  ],
+  "input_sha256": {
+    "model.mjb": "28e0cac36af15f4aeb49aa78710056cb80d0bc4a8ac23201203d3a472e4ad599",
+    "states.npz": "f2fdebdf2e513d7da0674828a4f4bd72d23ac75ec714cf407e1dcd22396be9e3",
+    "summary.json": "05b9f51cee6414e167df147677bc87dde9ccbb79faed17189143616301ce5e10"
+  },
+  "physics_steps_executed": 0,
+  "source_sha256": "663f51361b9302175fe73d1d4cea0595ffbffb62f1e2ab93f1b3738149db6aac",
+  "runtime": {
+    "mujoco": "3.14.0",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1"
+  }
+}

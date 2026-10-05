@@ -1,0 +1,116 @@
+{
+  "schema": "historical-selection-v1",
+  "scope": "Seven complete published cohorts; other development and qualification records remain in their original reports. This selection is not a new held-out evaluation.",
+  "cohorts": [
+    {
+      "id": "apple-regression",
+      "kind": "apple",
+      "report": "demos/apple-stem-grasp/evidence/benchmark/regression-v1.json",
+      "report_sha256": "36bacdcd08988b5f2414c05ac985af2ac3f55daf5aa63d57c984ecdd10fba913",
+      "count": 20,
+      "historical_counts": {
+        "protocol_pass": 11,
+        "protocol_fail": 9
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-grasp-regression-evidence.tar.gz",
+        "availability": "public release archive"
+      }
+    },
+    {
+      "id": "cloth-heldout",
+      "kind": "cloth",
+      "report": "demos/cloth-benchmark/evidence/heldout-v1.json",
+      "report_sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356",
+      "count": 105,
+      "historical_counts": {
+        "protocol_pass": 52,
+        "protocol_fail": 53
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz",
+        "availability": "public projected archive; original trajectories and explicit metadata/path redaction",
+        "archive_subdirectory": "dexlab-historical-evidence-v1/raw/cloth-heldout",
+        "reproduction": "PUBLIC-ARCHIVE.md"
+      }
+    },
+    {
+      "id": "physx-cloth-heldout",
+      "kind": "cloth",
+      "report": "demos/physx-contact/evidence/cloth-v1.json",
+      "report_sha256": "95052b60074757cc0cb824071c02e5326f7cc2d654828aadea1a155cbc16a358",
+      "count": 15,
+      "historical_counts": {
+        "protocol_pass": 10,
+        "protocol_fail": 1,
+        "unsupported": 4
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.11.0/v0.11.0-physx-cloth-evidence.tar.gz",
+        "availability": "public release archive"
+      },
+      "batch": "cloth-test-final-v2"
+    },
+    {
+      "id": "contact-development",
+      "kind": "contact",
+      "report": "demos/contact-benchmark/evidence/development-v2.json",
+      "report_sha256": "e6d9510026f872e1eebc4ec63b2e975209c241979e8d2ef05772ce14df00de18",
+      "count": 38,
+      "historical_counts": {
+        "protocol_pass": 25,
+        "protocol_fail": 13
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.12.0/v0.12.0-contact-development-evidence.tar.gz",
+        "availability": "public release archive"
+      }
+    },
+    {
+      "id": "normal-response",
+      "kind": "normal",
+      "report": "demos/contact-benchmark/evidence/normal-response-v1.json",
+      "report_sha256": "9e786e374c6a799a6e44912617b3bbdbd281be8cbdb066f23fdb4fe77be4713f",
+      "count": 17,
+      "historical_counts": {
+        "protocol_pass": 11,
+        "protocol_fail": 6
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-normal-response-evidence.tar.gz",
+        "availability": "public release archive"
+      }
+    },
+    {
+      "id": "transient-response",
+      "kind": "transient",
+      "report": "demos/contact-benchmark/evidence/transient-response-v1.json",
+      "report_sha256": "e2ac9b6c645d1be2a723320594607c306393cb8c955b31df588d7393f5173edb",
+      "count": 12,
+      "historical_counts": {
+        "protocol_pass": 6,
+        "protocol_fail": 6
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.14.0/v0.14.0-transient-response-evidence.tar.gz",
+        "availability": "public release archive"
+      }
+    },
+    {
+      "id": "robot-cloth",
+      "kind": "robot_cloth",
+      "report": "demos/cloth-folding/evidence/grasp/scoring-comparison-v2.json",
+      "report_sha256": "33229a7af319973f1ea418ec8f27ff2418840378832c78fe20965b954d1e9ab2",
+      "count": 1,
+      "historical_counts": {
+        "protocol_pass": 1
+      },
+      "raw_source": {
+        "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz",
+        "availability": "public projected archive; original trajectories and explicit metadata/path redaction",
+        "archive_subdirectory": "dexlab-historical-evidence-v1/raw/robot-cloth",
+        "reproduction": "PUBLIC-ARCHIVE.md"
+      }
+    }
+  ]
+}
