@@ -109,6 +109,9 @@ The hold window is 11–14 s, checking lift, two-pad support, penetration, wrist
 
 **[Documentation source](docs/site/en/index.md) · [中文文档](docs/site/zh/index.md)**. The site maintains getting started, experiments, results, engine methods, benchmarks and contribution guidance. Both languages use a strict Sphinx build; deployment configuration is included. An online address will be announced after deployment verification.
 
+
+[Friction-response development results](demos/contact-benchmark/FRICTION_RESPONSE.md): all 16 runs pass existing plane checks, but low-speed resistance and settled initial states differ. Per-case plots and raw-record hashes are retained; no engine-accuracy ranking.
+
 ## Latest-stable qualification
 
 Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.

@@ -109,6 +109,9 @@ OpenArm 双臂＋Wuji，右手拇指/食指夹梗、左臂停放。苹果与梗�
 
 **[中文文档站源码](docs/site/zh/index.md) · [English documentation](docs/site/en/index.md)**。文档站维护快速开始、实验目录、结果、引擎原理、benchmark 和开发规范；Sphinx 严格构建并维护两种语言，发布配置已纳入仓库。在线地址需部署验证后公布。
 
+
+[摩擦响应开发实验](demos/contact-benchmark/FRICTION_RESPONSE.zh-CN.md)：16 次运行通过原平面检查，但低速阻力响应及实际沉降初态不同；包含逐工况曲线与原始记录哈希，不作引擎精度排名。
+
 ## 最新稳定版验证
 
 最新稳定版运行准入正在推进：[版本清单、GPU 基础检查及边界](docs/engine-qualification.zh-CN.md)。设备检查不等于抓取成功，也尚未开放正式 benchmark 派发。
