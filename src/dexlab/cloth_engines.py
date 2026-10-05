@@ -46,6 +46,13 @@ class MuJoCoCloth:
         self.mj = mujoco
         self.case = case
         self.dt = dt
+        # Explicit candidate profile follows the official 3.13 flex migration.
+        # Historical records retain their original integration scheme.
+        integrator = (
+            "discrete"
+            if identity["compatibility_profile"] == "qualification-3.14.0"
+            else "implicitfast"
+        )
         vertices, triangles, masses = case.mesh()
         points = " ".join(map(str, vertices.ravel()))
         elements = " ".join(map(str, triangles.ravel()))
@@ -60,7 +67,7 @@ class MuJoCoCloth:
         self.xml = f'''<mujoco model="cloth-{case.name}">
           <default><geom friction=".5 .005 .0001" solref=".005 1" solimp=".9 .95 .001"/></default>
           <option timestep="{dt}" gravity="{" ".join(map(str, case.gravity))}"
-                  solver="Newton" integrator="implicitfast" iterations="{iterations}" tolerance="1e-10"/>
+                  solver="Newton" integrator="{integrator}" iterations="{iterations}" tolerance="1e-10"/>
           <worldbody>{obstacle}
             <flexcomp name="cloth" type="direct" dim="2" point="{points}" element="{elements}"
                       radius="{case.radius}" mass="{masses.sum()}">
@@ -83,7 +90,7 @@ class MuJoCoCloth:
             "engine": "mujoco",
             "version": version("mujoco"),
             "solver": "Newton",
-            "integrator": "implicitfast",
+            "integrator": integrator,
             "device": "cpu",
             "precision": "float64",
             "iterations": iterations,

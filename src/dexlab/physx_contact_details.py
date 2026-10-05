@@ -146,23 +146,11 @@ def verify(directory: Path) -> dict:
 
 def run(output: Path) -> dict:
     from dexlab import physx_baseline
-    from unisim.backend.isaacsim import (
-        backend as adapter,
-        contact_details,
-        scene_worker,
-        worker,
-    )
-    from unisim.entities import EntityStatePatch, SceneResetRequest
-    from unisim.factory import create_backend
 
     output.mkdir(parents=True, exist_ok=False)
     sources = {
         "source.py": Path(__file__),
         "baseline-source.py": Path(physx_baseline.__file__),
-        "unisim-contact-details.py": Path(contact_details.__file__),
-        "unisim-backend.py": Path(adapter.__file__),
-        "unisim-worker.py": Path(worker.__file__),
-        "unisim-scene-worker.py": Path(scene_worker.__file__),
     }
     source_hashes = {name: digest(path) for name, path in sources.items()}
     for name, path in sources.items():
@@ -178,6 +166,26 @@ def run(output: Path) -> dict:
     backend, velocities, contacts = None, [], []
     initial = np.full(3, np.nan)
     try:
+        from unisim.backend.isaacsim import (
+            backend as adapter,
+            contact_details,
+            scene_worker,
+            worker,
+        )
+        from unisim.entities import EntityStatePatch, SceneResetRequest
+        from unisim.factory import create_backend
+
+        adapter_sources = {
+            "unisim-contact-details.py": Path(contact_details.__file__),
+            "unisim-backend.py": Path(adapter.__file__),
+            "unisim-worker.py": Path(worker.__file__),
+            "unisim-scene-worker.py": Path(scene_worker.__file__),
+        }
+        for name, path in adapter_sources.items():
+            source_hashes[name] = digest(path)
+            shutil.copyfile(path, output / name)
+        sources.update(adapter_sources)
+        write_json(output / "run.json", receipt)
         backend = create_backend(
             "isaacsim",
             create_scene(CASE, output / "scene"),

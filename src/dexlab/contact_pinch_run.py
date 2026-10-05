@@ -12,6 +12,7 @@ from unilab.base import registry
 
 from dexlab import (
     cloth_engines,
+    engine_versions,
     contact_archive,
     contact_kinematics,
     contact_parameters,
@@ -34,6 +35,7 @@ def run(case, engine, output):
         contact_kinematics,
         contact_parameters,
         cloth_engines,
+        engine_versions,
         contact_pinch,
         contact_pinch_native,
         physx_baseline,

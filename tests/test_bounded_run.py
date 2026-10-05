@@ -9,7 +9,7 @@ from types import SimpleNamespace
 
 SCRIPTS = Path(__file__).parents[1] / 'scripts'
 sys.path.insert(0, str(SCRIPTS))
-from bounded_run import verify_limits, verify_headroom, verify_service
+from bounded_run import verify_limits, verify_headroom, verify_service, main
 from archive_run import record_stage
 sys.path.pop(0)
 
@@ -57,6 +57,24 @@ class ArchiveStageTests(unittest.TestCase):
 
 
 class ExperimentAdmissionTests(unittest.TestCase):
+    def test_larger_profile_is_explicit_and_preserves_desktop_reserve(self):
+        args = ["bounded_run", "--profile", "experiment", "--memory-mib", "24576",
+                "--high-mib", "23552", "--io-device", "/dev/example",
+                "--receipt", "/tmp/example-receipt", "--data-dir", "/tmp", "--", "true"]
+        with patch.object(sys, "argv", args), patch("bounded_run.launch") as launch:
+            with self.assertRaises(SystemExit) as failure:
+                main()
+            self.assertEqual(failure.exception.code, 2)
+            launch.assert_not_called()
+        args[2] = "experiment-24g"
+        with patch.object(sys, "argv", args), patch("bounded_run.launch", return_value=0) as launch:
+            self.assertEqual(main(), 0)
+            self.assertEqual(launch.call_args.args[0].memory_mib, 24576)
+        gib = 1024**3
+        with self.assertRaises(RuntimeError):
+            verify_headroom(32 * gib - 1, 20 * gib, 24 * gib)
+        verify_headroom(32 * gib, 20 * gib, 24 * gib)
+
     def test_headroom_rejects_memory_or_disk_shortfall(self):
         gib = 1024**3
         verify_headroom(24 * gib, 20 * gib, 16 * gib)

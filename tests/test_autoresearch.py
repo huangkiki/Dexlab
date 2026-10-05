@@ -339,10 +339,24 @@ class ResourceGateTests(unittest.TestCase):
                 module.check_remote(Path("/source"), "worker:/checkout", Path("relative"))
             runner.assert_not_called()
 
+    def test_gate_uses_explicit_interpreter_and_data_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            python = str(root / "candidate/bin/python")
+            output = root / "data-output"
+            with patch.dict("os.environ", {"SUPERDEX_PYTHON": python,
+                                             "DEXLAB_RUN_ROOT": str(output),
+                                             "DEXLAB_MUJOCO_PROFILE": "historical-3.11.0"}), \
+                 patch.object(module, "run") as runner:
+                result = module.check(root)
+            self.assertTrue(all(Path(path).parent == output for path in result["outputs"].values()))
+            self.assertTrue(any(call.args[0] == python for call in runner.call_args_list))
+
     def test_each_gate_preserves_old_outputs_and_measures_episode_and_verifier(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            with patch.object(module, "run") as runner:
+            with patch.object(module, "run") as runner, \
+                 patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "historical-3.11.0"}):
                 first = module.check(root, root / "receipts")
                 second = module.check(root, root / "receipts")
             self.assertNotEqual(first["run_id"], second["run_id"])
@@ -355,3 +369,17 @@ class ResourceGateTests(unittest.TestCase):
                         receipt = str(root / "receipts" / f"{run['run_id']}-{backend}-{phase}.json")
                         self.assertEqual(sum(receipt in command for command in commands), 1)
                 self.assertTrue((root / "receipts" / (run["run_id"] + "-outputs.json")).is_file())
+
+    def test_candidate_gate_requires_provenance_before_running_and_checks_it_after_pair(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "qualification-3.14.0"}, clear=True), \
+                 patch.object(module, "run") as runner:
+                with self.assertRaisesRegex(ValueError, "DEXLAB_QUALIFICATION_WHEELS"):
+                    module.check(root)
+                runner.assert_not_called()
+                with patch.dict("os.environ", {"DEXLAB_QUALIFICATION_WHEELS": str(root / "wheels")}):
+                    result = module.check(root)
+                self.assertEqual(runner.call_args.args[1:3], ("-m", "dexlab.apple_admission"))
+                self.assertIn(result["outputs"]["mujoco"], runner.call_args.args)
+                self.assertIn(result["admission"], runner.call_args.args)

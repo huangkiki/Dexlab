@@ -91,3 +91,5 @@ This is a verifiable development workflow, not guaranteed unattended scientific 
 [Parameter provenance and research methods](research-focus.md) · [DexLab](../README.en.md)
 
 [Remote qualification and archive protocol](remote-research.md)
+
+The explicit `experiment-24g` profile is available after the measured native-qualification pressure failure: 24 GiB maximum / 23 GiB high memory, with the same two-core CPU quota, 128 tasks, zero swap, I/O limits and finite runtime. The default `experiment` profile remains 16/15 GiB and rejects a 24 GiB override. Both experiment profiles require measured available RAM for their full cap plus 8 GiB desktop reserve before launch and inside the service; larger memory is not permission for concurrent jobs.

@@ -10,6 +10,8 @@ import xml.etree.ElementTree as ET
 import mujoco
 import numpy as np
 
+from dexlab.engine_versions import mujoco_profile_identity
+
 TABLE_HEIGHT = 0.5
 CLOTH_RADIUS = 0.0012
 
@@ -91,6 +93,8 @@ def build_model(
     robot_model, destination, *, garment=False, hand_friction=1.0, timestep=0.00025
 ):
     """Keep native robot frames, inertia, meshes, joints and collision filters."""
+    identity = mujoco_profile_identity({"version": mujoco.__version__}, mujoco.mj_versionString())
+    integrator = ("discrete" if identity["profile_status"] == "candidate" else "implicitfast")
     robot_model = Path(robot_model).resolve()
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
@@ -127,7 +131,7 @@ def build_model(
     option.attrib.clear()
     option.attrib.update(
         timestep=str(timestep),
-        integrator="implicitfast",
+        integrator=integrator,
         solver="Newton",
         iterations="100",
         tolerance="1e-8",

@@ -1,5 +1,6 @@
 """Contact accounting must detect dropped friction and incomplete evidence."""
 
+import builtins
 import copy
 import json
 from pathlib import Path
@@ -59,6 +60,27 @@ class ContactDetailsTests(unittest.TestCase):
         self.assertFalse(score(states, contacts)["passed"])
         contacts[1]["normal_force"] = [0, 0, 1]
         self.assertFalse(score(states, contacts)["passed"])
+
+    def test_missing_optional_adapter_is_archived_as_failure(self):
+        original_import = builtins.__import__
+
+        def missing_adapter(name, *args, **kwargs):
+            if name == "unisim.backend.isaacsim":
+                raise ImportError("optional contact adapter absent")
+            return original_import(name, *args, **kwargs)
+
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder) / "missing-adapter"
+            with patch("builtins.__import__", side_effect=missing_adapter):
+                result = run(output)
+            receipt = json.loads((output / "run.json").read_text())
+            self.assertEqual(receipt["status"], "error")
+            self.assertIn("optional contact adapter absent", receipt["error"])
+            self.assertFalse(result["passed"])
+            self.assertFalse(result["checks"]["native_run_completed"])
+            self.assertTrue((output / "source.py").is_file())
+            self.assertTrue((output / "states.npz").is_file())
+            self.assertFalse(verify(output)["passed"])
 
     def test_runtime_failure_preserves_archive_and_rejects_reuse(self):
         with tempfile.TemporaryDirectory() as folder:

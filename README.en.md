@@ -110,7 +110,9 @@ Latest-stable runtime qualification is in progress: [inventory, GPU probe and li
 
 The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.
 
-MuJoCo 3.14.0 and SuperDex 1.0.0 FP64 each passed independent scoring of one 14-second apple grasp; maximum penetration was 0.1165 / 0.4523 mm. The 311-test candidate suite still has 1 failure and 2 errors (cylinder contact force and cloth integration), so formal admission remains pending. See the report above and its score summary; these results do not rank engine accuracy.
+The local candidate passes **346 unit tests**. Migration tree `8ac3d71` completed both 14-second MuJoCo 3.14 and SuperDex FP64 grasps with independent acceptance; all five participating packages subsequently matched official wheels against installed code. The added provenance admission still needs final-source regression; no completed formal benchmark is claimed. Cloth remains unqualified: drape intrusion is 2.656 mm against 1.5 mm, robot-cloth strain is 5.48% against 5%, and independent auditing detects table intrusion. Engine code and physical acceptance limits remain unchanged.
+
+The latest robot-cloth contrast still fails: 5.48% strain exceeds its bound, and independent geometry auditing detects table intrusion from the first frame. See the [migration report](docs/engine-qualification.md).
 
 ## Quick reproduction
 
