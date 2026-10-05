@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "scope": "SuperDex onset solver-tolerance sensitivity; development only",
+  "engines": [
+    "superdex"
+  ],
+  "max_runs": 12,
+  "wall_budget_s": 600,
+  "defaults": {
+    "mass": 0.2,
+    "half_size": 0.02,
+    "friction": 0.3,
+    "initial_speed": 0.25,
+    "gravity": 9.81,
+    "timestep": 0.001,
+    "settle": 0,
+    "duration": 0.5
+  },
+  "cases": [
+    {
+      "name": "dev-solver-forward-h2-base",
+      "friction": 0.3,
+      "timestep": 0.0005,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 0.001,
+        "relative_tolerance": 1e-06
+      }
+    },
+    {
+      "name": "dev-solver-forward-h2-tight",
+      "friction": 0.3,
+      "timestep": 0.0005,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1e-05,
+        "relative_tolerance": 1e-08
+      }
+    },
+    {
+      "name": "dev-solver-forward-h2-tighter",
+      "friction": 0.3,
+      "timestep": 0.0005,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1.0000000000000001e-07,
+        "relative_tolerance": 1e-10
+      }
+    },
+    {
+      "name": "dev-solver-forward-h8-base",
+      "friction": 0.3,
+      "timestep": 0.000125,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 0.001,
+        "relative_tolerance": 1e-06
+      }
+    },
+    {
+      "name": "dev-solver-forward-h8-tight",
+      "friction": 0.3,
+      "timestep": 0.000125,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1e-05,
+        "relative_tolerance": 1e-08
+      }
+    },
+    {
+      "name": "dev-solver-forward-h8-tighter",
+      "friction": 0.3,
+      "timestep": 0.000125,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1.0000000000000001e-07,
+        "relative_tolerance": 1e-10
+      }
+    },
+    {
+      "name": "dev-solver-frictionless-h2-base",
+      "friction": 0,
+      "timestep": 0.0005,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 0.001,
+        "relative_tolerance": 1e-06
+      }
+    },
+    {
+      "name": "dev-solver-frictionless-h2-tight",
+      "friction": 0,
+      "timestep": 0.0005,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1e-05,
+        "relative_tolerance": 1e-08
+      }
+    },
+    {
+      "name": "dev-solver-frictionless-h2-tighter",
+      "friction": 0,
+      "timestep": 0.0005,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1.0000000000000001e-07,
+        "relative_tolerance": 1e-10
+      }
+    },
+    {
+      "name": "dev-solver-frictionless-h8-base",
+      "friction": 0,
+      "timestep": 0.000125,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 0.001,
+        "relative_tolerance": 1e-06
+      }
+    },
+    {
+      "name": "dev-solver-frictionless-h8-tight",
+      "friction": 0,
+      "timestep": 0.000125,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1e-05,
+        "relative_tolerance": 1e-08
+      }
+    },
+    {
+      "name": "dev-solver-frictionless-h8-tighter",
+      "friction": 0,
+      "timestep": 0.000125,
+      "solver_parameters": {
+        "iterations": 100,
+        "absolute_tolerance": 1.0000000000000001e-07,
+        "relative_tolerance": 1e-10
+      }
+    }
+  ],
+  "parameters": "Fixed contact profile, actual initial state,100iteration cap; jointly scale absolute/relative stopping tolerances only. No equivalence to another engine tolerance.",
+  "diagnostics": "All original scores and failures retained. Compare the two timesteps at each tolerance separately. Joint absolute/relative scaling cannot identify which criterion dominates. Costs include observations and are unreplicated.",
+  "hypothesis": "Tighter stopping tolerances reduce response sensitivity at fixed timestep. Compare common times and record native statuses. Nonmonotonic differences or capped solves prevent a convergence claim. No invented physical-accuracy threshold."
+}

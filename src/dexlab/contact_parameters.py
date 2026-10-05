@@ -205,3 +205,33 @@ def native_checks(directory, receipt, case, *, cylinder=False):
         # Earlier independent checks remain useful even when a later field is bad.
         pass
     return checks
+
+
+def solver_parameters(engine, overrides=None):
+    """Validate explicit solver controls without equating native tolerances."""
+    fields = {
+        "mujoco": {"iterations", "tolerance"},
+        "superdex": {"iterations", "absolute_tolerance", "relative_tolerance"},
+    }
+    if engine not in ("mujoco", "superdex", "physx"):
+        raise ValueError("Unknown native solver engine")
+    values = {} if overrides is None else overrides
+    if not isinstance(values, dict) or not values.keys() <= fields.get(engine, set()):
+        raise ValueError("Unsupported solver override")
+    for name, value in values.items():
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError("Solver controls must be numeric scalars")
+        if not np.isfinite(value) or value <= 0:
+            raise ValueError("Solver controls must be finite and positive")
+        if name == "iterations" and (not isinstance(value, int) or value > 10000):
+            raise ValueError("Iteration cap must be an integer between 1 and 10000")
+    return dict(values)
+
+
+def solver_readback_matches(engine, declared, actual):
+    """Missing, invalid or unapplied requested controls fail independent scoring."""
+    try:
+        expected = solver_parameters(engine, declared)
+    except ValueError:
+        return False
+    return isinstance(actual, dict) and all(actual.get(key) == value for key, value in expected.items())

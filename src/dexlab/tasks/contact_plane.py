@@ -24,6 +24,7 @@ class ContactPlaneCfg(EnvCfg):
     case: dict = field(default_factory=dict)
     output_dir: str = ""
     normal_parameters: dict = field(default_factory=dict)
+    solver_parameters: dict = field(default_factory=dict)
 
 
 class ContactPlaneEnv(ABEnv):
@@ -105,8 +106,13 @@ class ContactPlaneEnv(ABEnv):
             "superdex": SuperDexPlane,
             "isaacsim": PhysXPlane,
         }[self.backend]
+        solver_kwargs = {}
+        if self.cfg.solver_parameters:
+            if self.backend == "isaacsim":
+                raise ValueError("Solver overrides are not supported for this PhysX fixture")
+            solver_kwargs["solver_parameters"] = self.cfg.solver_parameters
         self.native = native_class(
-            self.case, output, normal_parameters=self.cfg.normal_parameters
+            self.case, output, normal_parameters=self.cfg.normal_parameters, **solver_kwargs
         )
         try:
             for _ in range(round(self.case.settle / self.case.timestep)):

@@ -48,6 +48,10 @@ def run(output, wheel_dir, suite_path=None):
     try:
         for parameters in suite["cases"]:
             case = suite["defaults"] | parameters
+            solver_parameters = case.pop("solver_parameters", {})
+            solver_path = output / (case["name"] + "-solver.json")
+            if solver_parameters:
+                write_json(solver_path, solver_parameters)
             case_path = output / (case["name"] + ".json")
             write_json(case_path, case)
             for engine in suite["engines"]:
@@ -59,12 +63,13 @@ def run(output, wheel_dir, suite_path=None):
                 name = f"{engine}-{case['name']}"
                 directory = output / name
                 before = time.monotonic()
+                solver_args = ["--solver-parameters", str(solver_path)] if solver_parameters else []
                 with (output / (name + ".log")).open("w") as log:
                     completed = subprocess.run([
                         sys.executable, "-m", "dexlab.contact_plane_native", "--engine", engine,
-                        "--case", str(case_path), "--output", str(directory),
+                        "--case", str(case_path), "--output", str(directory), *solver_args,
                     ], cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=remaining)
-                row = {"id": name, "engine": engine, "case": case,
+                row = {"id": name, "engine": engine, "case": case, "solver_parameters": solver_parameters,
                        "process_exit": completed.returncode, "process_wall_s": time.monotonic() - before}
                 if (directory / "summary.json").is_file():
                     row["summary"] = json.loads((directory / "summary.json").read_text())
