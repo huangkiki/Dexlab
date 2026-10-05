@@ -1,0 +1,76 @@
+{
+  "engine": {
+    "version": "3.14.0",
+    "native_library_sha256": "5e7623e30f55bf324d4c9648379ebeba5bcd153ee0304c52eac74bf8d441000b",
+    "wheel_record_matches": true,
+    "compatibility_profile": "qualification-3.14.0",
+    "profile_status": "candidate",
+    "formal_batch_qualified": false
+  },
+  "input_sha256": {
+    "model.xml": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5",
+    "settling/states.npz": "821e4afb7c783d6ca801f356e15e961310381af43a0762e8752e5fe4562df59f"
+  },
+  "source_sha256": {
+    "probe_phase_initialization.py": "dbb46ddc9e1309255cb2e5e034ba1c740640145a02780c1e0a103662030b0803",
+    "run_cloth.py": "9757cf672d872135a5884e5d524f918c660e9231b3ce37ba7907f8a65edccb4d",
+    "cloth_model.py": "55d97efefc23dbec1c1a0ffedefe9cc713d391e3e5aba3201ab7b38fa941be9f"
+  },
+  "results": {
+    "original-0.00025": {
+      "wall_s": 20.669118236008217,
+      "cached_factor_max_change": 0.0,
+      "model_xml_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5",
+      "final_state_sha256": "0b233bb1dcb76799b119108cb5c5c3cdce955b5caee96bf94a4fdff978478f2b"
+    },
+    "original-0.000125": {
+      "wall_s": 20.711039796005934,
+      "cached_factor_max_change": 0.0,
+      "model_xml_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174",
+      "final_state_sha256": "ef6ac1f5f45a6d210cd7da9e76d29822d76e77e1494bdce595305694094f4a05"
+    },
+    "configured-0.00025": {
+      "wall_s": 20.639416808000533,
+      "cached_factor_max_change": 0.0,
+      "model_xml_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5",
+      "final_state_sha256": "0b233bb1dcb76799b119108cb5c5c3cdce955b5caee96bf94a4fdff978478f2b"
+    },
+    "configured-0.000125": {
+      "wall_s": 20.698303689991008,
+      "cached_factor_max_change": 0.0,
+      "model_xml_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174",
+      "final_state_sha256": "ef6ac1f5f45a6d210cd7da9e76d29822d76e77e1494bdce595305694094f4a05"
+    },
+    "refreshed-0.00025": {
+      "wall_s": 20.574162992998026,
+      "cached_factor_max_change": 7.611293319862572e-07,
+      "model_xml_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5",
+      "final_state_sha256": "77964decdab88a0706f87b6563c8eda968d6603c02075caafd18d2fe67292636"
+    },
+    "refreshed-0.000125": {
+      "wall_s": 20.64549657801399,
+      "cached_factor_max_change": 9.73822550324327e-07,
+      "model_xml_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174",
+      "final_state_sha256": "77964decdab88a0706f87b6563c8eda968d6603c02075caafd18d2fe67292636"
+    },
+    "original-comparison": {
+      "qpos_bitwise_equal": false,
+      "qpos_max_abs_delta": 0.0019161467994459978,
+      "qvel_bitwise_equal": false,
+      "qvel_max_abs_delta": 0.07718635789018895
+    },
+    "configured-comparison": {
+      "qpos_bitwise_equal": false,
+      "qpos_max_abs_delta": 0.0019161467994459978,
+      "qvel_bitwise_equal": false,
+      "qvel_max_abs_delta": 0.07718635789018895
+    },
+    "refreshed-comparison": {
+      "qpos_bitwise_equal": true,
+      "qpos_max_abs_delta": 0.0,
+      "qvel_bitwise_equal": true,
+      "qvel_max_abs_delta": 0.0
+    }
+  },
+  "scope": "Six passive development controls; no grasp or material calibration."
+}

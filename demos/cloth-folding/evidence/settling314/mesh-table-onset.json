@@ -1,0 +1,21 @@
+{
+  "first_intrusion": null,
+  "evaluated_frames": 4001,
+  "recorded_frames": 4001,
+  "table_bounds_m": [
+    [
+      -0.54,
+      0.39999999999999997,
+      0.494
+    ],
+    [
+      0.54,
+      0.84,
+      0.5
+    ]
+  ],
+  "numerical_zero_tolerance_m": 1e-08,
+  "classification": "exploratory_same_shape_mesh_settling",
+  "evaluation_geometry": "Original box union verified against compiled mesh corners; original cloth kinematics; no evaluation contacts or stepping",
+  "scope": "Midsurface samples only; not finite-thickness/interstep/fullgrasp acceptance"
+}

@@ -1,0 +1,52 @@
+{
+  "original-0.00025": {
+    "wall_s": 20.611029291001614,
+    "cached_factor_max_change": 0.0,
+    "model_xml_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5"
+  },
+  "original-0.000125": {
+    "wall_s": 20.62169811500644,
+    "cached_factor_max_change": 0.0,
+    "model_xml_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174"
+  },
+  "configured-0.00025": {
+    "wall_s": 20.618313329003286,
+    "cached_factor_max_change": 0.0,
+    "model_xml_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5"
+  },
+  "configured-0.000125": {
+    "wall_s": 20.673707804002333,
+    "cached_factor_max_change": 0.0,
+    "model_xml_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174"
+  },
+  "refreshed-0.00025": {
+    "wall_s": 20.590756246994715,
+    "cached_factor_max_change": 7.611293319862572e-07,
+    "model_xml_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5"
+  },
+  "refreshed-0.000125": {
+    "wall_s": 20.557844265000313,
+    "cached_factor_max_change": 9.73822550324327e-07,
+    "model_xml_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174"
+  },
+  "original-comparison": {
+    "qpos_bitwise_equal": false,
+    "qpos_max_abs_delta": 0.0019161467994459978,
+    "qvel_bitwise_equal": false,
+    "qvel_max_abs_delta": 0.07718635789018895
+  },
+  "configured-comparison": {
+    "qpos_bitwise_equal": false,
+    "qpos_max_abs_delta": 0.0019161467994459978,
+    "qvel_bitwise_equal": false,
+    "qvel_max_abs_delta": 0.07718635789018895
+  },
+  "refreshed-comparison": {
+    "qpos_bitwise_equal": true,
+    "qpos_max_abs_delta": 0.0,
+    "qvel_bitwise_equal": true,
+    "qvel_max_abs_delta": 0.0
+  },
+  "script_sha256": "654ec1376c59119853839355abdad56e6a9b65fb9891a01dd40bc3395e75206c",
+  "scope": "Six passive initialization controls only; no grasp, heldout evaluation or independent geometry verdict."
+}

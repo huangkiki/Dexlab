@@ -28,6 +28,7 @@ from cloth_control import (
 from cloth_model import build_model
 from verify_cloth import verify_episode
 from render_cloth import render
+from settling_trace import capture_settling
 
 
 def engine_identity():
@@ -74,17 +75,37 @@ def step(model, data, target):
         )
 
 
-def trajectory(point, task):
+def configure_phase(model, *, solver, timestep):
+    """Refresh timestep-dependent model constants without resetting live state."""
+    model.opt.solver = solver
+    model.opt.iterations = 100
+    model.opt.timestep = timestep
+    mujoco.mj_setConst(model, mujoco.MjData(model))
+
+
+def settle_cloth(model, data, opened, *, output=None, engine=None):
+    """Initialize at a fixed timestep independently of the manipulation phase."""
+    configure_phase(model, solver=mujoco.mjtSolver.mjSOL_CG, timestep=0.0005)
+    mujoco.mj_forward(model, data)
+    steps = round(2 / model.opt.timestep)
+    with capture_settling(model, data, output, steps=steps, engine=engine) as capture:
+        for _ in range(steps):
+            step(model, data, opened)
+            if capture is not None:
+                capture()
+
+
+def trajectory(point, task, pre_lift_retreat=0.06):
     """Retreat from the table before lifting; release above the support surface."""
     waypoints = [point.copy()]
     for fraction in np.linspace(0, 1, 11)[1:]:
-        waypoints.append(point + (0, -0.06 * fraction, 0))
+        waypoints.append(point + (0, -pre_lift_retreat * fraction, 0))
     if task == "grasp":
         for fraction in np.linspace(0, 1, 21)[1:]:
-            waypoints.append(point + (0, -0.06, 0.12 * fraction))
+            waypoints.append(point + (0, -pre_lift_retreat, 0.12 * fraction))
     else:
         for fraction in np.linspace(0, 1, 21)[1:]:
-            waypoints.append(point + (0, -0.06, 0.13 * fraction))
+            waypoints.append(point + (0, -pre_lift_retreat, 0.13 * fraction))
         raised = waypoints[-1].copy()
         target = np.array([point[0], 0.535, point[2] + 0.11])
         for fraction in np.linspace(0, 1, 21)[1:]:
@@ -92,7 +113,8 @@ def trajectory(point, task):
     return np.asarray(waypoints)
 
 
-def plan_grasp(model, state, side, indices, task, inset=0.3):
+def plan_grasp(model, state, side, indices, task, inset=0.3, pre_lift_retreat=0.06,
+               release_retreat=0.08):
     columns = (
         (14, 13, 12)
         if task == "fold" and side == "r"
@@ -121,7 +143,7 @@ def plan_grasp(model, state, side, indices, task, inset=0.3):
             poses = [candidate["opened"]]
             try:
                 for knot, point in enumerate(
-                    trajectory(candidate["point"], task)[1:], start=1
+                    trajectory(candidate["point"], task, pre_lift_retreat)[1:], start=1
                 ):
                     poses.append(
                         arm_pose(
@@ -137,7 +159,7 @@ def plan_grasp(model, state, side, indices, task, inset=0.3):
                     model,
                     poses[-1],
                     side,
-                    trajectory(candidate["point"], task)[-1] + (0, -0.08, 0),
+                    trajectory(candidate["point"], task, pre_lift_retreat)[-1] + (0, -release_retreat, 0),
                     candidate["rotation"],
                     relax_orientation=task == "fold",
                 )
@@ -164,7 +186,7 @@ def plan_grasp(model, state, side, indices, task, inset=0.3):
 
 def contact_measurements(model, data):
     forces = {}
-    hand_depth = table_depth = self_depth = 0.0
+    hand_depth = table_depth = self_depth = floor_depth = 0.0
     force = np.zeros(6)
     for index, contact in enumerate(data.contact):
         if not np.any(contact.flex >= 0):
@@ -181,7 +203,9 @@ def contact_measurements(model, data):
                 hand_depth = max(hand_depth, -float(contact.dist))
             elif name.startswith("table_"):
                 table_depth = max(table_depth, -float(contact.dist))
-    return forces, hand_depth, table_depth, self_depth
+            elif name == "floor":
+                floor_depth = max(floor_depth, -float(contact.dist))
+    return forces, hand_depth, table_depth, self_depth, floor_depth
 
 
 def verify_combined_path(model, state, plans):
@@ -205,6 +229,10 @@ def run(args):
     destination = args.output.resolve()
     if (
         not 0 < args.grasp_inset < 1
+        or not 0 < args.pre_lift_retreat <= 0.2
+        or not 0 < args.release_retreat <= 0.2
+        or not 0 < args.floor_time_constant <= 0.02
+        or not 0 < args.edge_time_constant <= 0.02
         or args.hand_friction < 0
         or not 0 < args.timestep <= 0.001
         or not np.isfinite(args.hand_friction)
@@ -213,7 +241,8 @@ def run(args):
         )
     ):
         raise ValueError(
-            "Require inset in (0, 1), friction >= 0, and timestep in (0, 0.001] seconds"
+            "Require inset in (0, 1), pre-lift and release retreats in (0, 0.2] m, friction >= 0, "
+            "time constants in (0, 0.02], and timestep in (0, 0.001] seconds"
         )
     if (destination / "summary.json").exists():
         raise FileExistsError(
@@ -237,22 +266,21 @@ def run(args):
         garment=args.task == "fold",
         hand_friction=args.hand_friction,
         timestep=args.timestep,
+        table_contact=args.table_contact,
+        floor_time_constant=args.floor_time_constant,
+        edge_time_constant=args.edge_time_constant,
     )
     sides = ("r", "l") if args.task == "fold" else ("r",)
     data = mujoco.MjData(model)
     opened = initial_pose(model, sides)
     data.qpos[:] = opened
-    mujoco.mj_forward(model, data)
 
     print("Settling the passive cloth with the hands parked", flush=True)
-    model.opt.solver = mujoco.mjtSolver.mjSOL_CG
-    model.opt.iterations = 100
-    model.opt.timestep = 0.0005
-    for _ in range(round(2 / model.opt.timestep)):
-        step(model, data, opened)
-    model.opt.solver = mujoco.mjtSolver.mjSOL_NEWTON
-    model.opt.iterations = 100
-    model.opt.timestep = args.timestep
+    settle_cloth(model, data, opened,
+                 output=destination / "settling" if args.record_settling else None,
+                 engine=engine)
+    configure_phase(model, solver=mujoco.mjtSolver.mjSOL_NEWTON,
+                    timestep=args.timestep)
 
     state = data.qpos.copy()
     np.save(destination / "settled.npy", state)
@@ -262,7 +290,8 @@ def run(args):
             f"Planning {side} hand: pad contacts, table clearance and arm reach",
             flush=True,
         )
-        plan = plan_grasp(model, state, side, indices, args.task, args.grasp_inset)
+        plan = plan_grasp(model, state, side, indices, args.task, args.grasp_inset,
+                          args.pre_lift_retreat, args.release_retreat)
         if not any(
             set(plan["material_ids"]) == set(triangle) for triangle in triangles
         ):
@@ -293,10 +322,12 @@ def run(args):
     maximums = dict(
         hand_penetration_m=0.0,
         table_penetration_m=0.0,
+        floor_penetration_m=0.0,
         self_contact_penetration_m=0.0,
         edge_strain=0.0,
         robot_rigid_penetration_m=0.0,
     )
+    solver_observations = dict(steps=0, maximum_iterations=0, steps_reaching_iteration_budget=0)
     start = time.monotonic()
     failure = None
     try:
@@ -325,7 +356,13 @@ def run(args):
                     arm
                 ]
             step(model, data, target)
-            forces, hand_depth, table_depth, self_depth = contact_measurements(
+            solver_iterations = int(np.max(data.solver_niter, initial=0))
+            solver_observations["steps"] += 1
+            solver_observations["maximum_iterations"] = max(
+                solver_observations["maximum_iterations"], solver_iterations)
+            solver_observations["steps_reaching_iteration_budget"] += int(
+                solver_iterations >= model.opt.iterations)
+            forces, hand_depth, table_depth, self_depth, floor_depth = contact_measurements(
                 model, data
             )
             strain = float(
@@ -334,6 +371,7 @@ def run(args):
             measurements = dict(
                 hand_penetration_m=hand_depth,
                 table_penetration_m=table_depth,
+                floor_penetration_m=floor_depth,
                 self_contact_penetration_m=self_depth,
                 edge_strain=strain,
                 robot_rigid_penetration_m=robot_penetration(model, data),
@@ -363,6 +401,7 @@ def run(args):
                     dict(
                         time_s=time_s,
                         contact_measurement_complete=True,
+                        solver_iterations=solver_iterations,
                         material=material,
                         anchors=anchors,
                         far_material=far_material,
@@ -374,6 +413,7 @@ def run(args):
                         edge_strain=strain,
                         hand_penetration_m=hand_depth,
                         table_penetration_m=table_depth,
+                        floor_penetration_m=floor_depth,
                         self_contact_penetration_m=self_depth,
                         robot_rigid_penetration_m=measurements[
                             "robot_rigid_penetration_m"
@@ -418,6 +458,7 @@ def run(args):
         timestep_s=float(model.opt.timestep),
         sample_dt_s=0.01,
         solver="Newton",
+        solver_observations=solver_observations,
         friction_cone="pyramidal",
         initialization_solver="CG",
         initialization_timestep_s=0.0005,
@@ -430,8 +471,14 @@ def run(args):
         cloth_actuators=0,
         hand_sliding_friction=args.hand_friction,
         grasp_inset_barycentric=args.grasp_inset,
+        pre_lift_retreat_m=args.pre_lift_retreat,
+        release_retreat_m=args.release_retreat,
         nominal_shell_thickness_m=0.0005,
         collision_radius_m=0.0012,
+        table_contact=args.table_contact,
+        requested_floor_time_constant_s=args.floor_time_constant,
+        requested_edge_time_constant_s=args.edge_time_constant,
+        constraint_time_constant_scope="Nominal compliance parameters; native reference-safety timestep clamp remains enabled.",
         failure=failure,
         maximums=maximums,
         completed=failure is None,
@@ -478,8 +525,20 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--task", choices=("grasp", "fold"), default="grasp")
     parser.add_argument("--no-video", action="store_true")
+    parser.add_argument("--table-contact", choices=("box", "convex-mesh"), default="box",
+                        help="Explicit table representation control; box preserves the historical baseline")
+    parser.add_argument("--record-settling", action="store_true",
+                        help="Keep every passive-settling state for offline table-crossing diagnosis")
     parser.add_argument("--hand-friction", type=float, default=1.0)
     parser.add_argument("--grasp-inset", type=float, default=0.3)
+    parser.add_argument("--pre-lift-retreat", type=float, default=0.06,
+                        help="Horizontal clearance before lifting, in metres; does not relax collision checks")
+    parser.add_argument("--release-retreat", type=float, default=0.08,
+                        help="Horizontal withdrawal after opening, in metres; all contact checks remain active")
+    parser.add_argument("--floor-time-constant", type=float, default=0.002,
+                        help="Nominal floor-contact solref time constant (s); native reference safety remains enabled")
+    parser.add_argument("--edge-time-constant", type=float, default=0.002,
+                        help="Nominal edge-equality solref time constant (s); not measured material calibration")
     parser.add_argument("--timestep", type=float, default=0.00025)
     arguments = parser.parse_args()
     try:

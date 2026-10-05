@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "classification": "static_contact_coverage_diagnostic",
+  "engine": {
+    "version": "3.11.0",
+    "library_sha256": "7b47f06aa840d4f8fa3c66c2027d52de570bac6d11b9ddd19d55ae1469d40e22",
+    "wheel_record_matches": true
+  },
+  "physics_steps_executed": 0,
+  "input_sha256": "e1079eeb0c7073725d995d46e6375397b5a82135db5d4a53cbc48d4260ef7dfd",
+  "original_record_hashes": {
+    "source_model_sha256": "09115e90500c9add7952a9cb3ef5ab15ec9069ba90fae0e4e9871ecae739c4ab",
+    "source_states_sha256": "ffd7e5362c514e8416d1822c632e0b9f50821b32143fbeb34ba27cb4cc466dcf"
+  },
+  "source_sha256": {
+    "diagnose_table_contact.py": "757e8d4cb0846829f8e9a81243893b393c9bae6dd4c422287e5cbb3e0295ba55",
+    "cloth_model.py": "7bee23cc02d241c833f2348c5300cb9e17665b9a4c4a5699f6f990eb09962880",
+    "cloth_table_audit.py": "6553539d76b90ca6a52f8beb99d985ca1cf90d7ea78475f8b43422f9f8a62b60"
+  },
+  "frame_index": 0,
+  "recorded_time_s": 0.0,
+  "triangle_id": 42,
+  "triangle_vertices_m": [
+    [
+      0.22973118781439564,
+      0.3988010324853738,
+      0.4955019885388194
+    ],
+    [
+      0.24640253105274548,
+      0.398799835845686,
+      0.49532736640590774
+    ],
+    [
+      0.24649192823320545,
+      0.4133121413798163,
+      0.5035013999803416
+    ]
+  ],
+  "table_bounds_m": [
+    [
+      -0.54,
+      0.39999999999999997,
+      0.494
+    ],
+    [
+      0.54,
+      0.84,
+      0.5
+    ]
+  ],
+  "collision_radius_m": 0.0012,
+  "vertex_interior_depth_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "cases": {
+    "single_witness": {
+      "all_contacts": 1,
+      "witness_contacts": [
+        {
+          "element": 0,
+          "table": "table_8_0",
+          "distance_m": -1.03248537380537e-06,
+          "position_m": [
+            0.22973118781439564,
+            0.4000005162426869,
+            0.4955019885388194
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        }
+      ],
+      "witness_max_native_penetration_m": 1.03248537380537e-06,
+      "physical_time_s": 0.0,
+      "table_geometries": 96,
+      "witness_interior_depth_m": 0.0025566268756169025
+    },
+    "whole_panel": {
+      "all_contacts": 367,
+      "witness_contacts": [
+        {
+          "element": 42,
+          "table": "table_8_0",
+          "distance_m": -1.03248537380537e-06,
+          "position_m": [
+            0.22973118781439564,
+            0.4000005162426869,
+            0.4955019885388194
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        }
+      ],
+      "witness_max_native_penetration_m": 1.03248537380537e-06,
+      "physical_time_s": 0.0,
+      "table_geometries": 96,
+      "witness_interior_depth_m": 0.0025566268756169025
+    },
+    "midphase_disabled": {
+      "all_contacts": 1,
+      "witness_contacts": [
+        {
+          "element": 0,
+          "table": "table_8_0",
+          "distance_m": -1.03248537380537e-06,
+          "position_m": [
+            0.22973118781439564,
+            0.4000005162426869,
+            0.4955019885388194
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        }
+      ],
+      "witness_max_native_penetration_m": 1.03248537380537e-06,
+      "physical_time_s": 0.0,
+      "table_geometries": 96,
+      "witness_interior_depth_m": 0.0025566268756169025
+    },
+    "refined_witness": {
+      "all_contacts": 10,
+      "witness_contacts": [
+        {
+          "element": 0,
+          "table": "table_8_0",
+          "distance_m": -1.03248537380537e-06,
+          "position_m": [
+            0.22973118781439564,
+            0.4000005162426869,
+            0.4955019885388194
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        },
+        {
+          "element": 0,
+          "table": "table_8_0",
+          "distance_m": -4.341655299134554e-07,
+          "position_m": [
+            0.23806685943357056,
+            0.40000021708276495,
+            0.49541467747236356
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        },
+        {
+          "element": 0,
+          "table": "table_8_0",
+          "distance_m": -0.001698305740419533,
+          "position_m": [
+            0.23811155802380055,
+            0.40605658693259505,
+            0.49915084712979024
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "element": 1,
+          "table": "table_8_0",
+          "distance_m": -4.341655299134554e-07,
+          "position_m": [
+            0.23806685943357056,
+            0.40000021708276495,
+            0.49541467747236356
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        },
+        {
+          "element": 1,
+          "table": "table_8_0",
+          "distance_m": -0.0017856168068752971,
+          "position_m": [
+            0.24644722964297547,
+            0.40605598861275116,
+            0.49910719159656236
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "element": 2,
+          "table": "table_8_0",
+          "distance_m": -0.001698305740419533,
+          "position_m": [
+            0.23811155802380055,
+            0.40605658693259505,
+            0.49915084712979024
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "element": 2,
+          "table": "table_8_0",
+          "distance_m": -0.0017856168068752971,
+          "position_m": [
+            0.24644722964297547,
+            0.40605598861275116,
+            0.49910719159656236
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "element": 3,
+          "table": "table_8_0",
+          "distance_m": -4.341655299134554e-07,
+          "position_m": [
+            0.23806685943357056,
+            0.40000021708276495,
+            0.49541467747236356
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ]
+        },
+        {
+          "element": 3,
+          "table": "table_8_0",
+          "distance_m": -0.0017856168068752971,
+          "position_m": [
+            0.24644722964297547,
+            0.40605598861275116,
+            0.49910719159656236
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "element": 3,
+          "table": "table_8_0",
+          "distance_m": -0.001698305740419533,
+          "position_m": [
+            0.23811155802380055,
+            0.40605658693259505,
+            0.49915084712979024
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "witness_max_native_penetration_m": 0.0017856168068752971,
+      "physical_time_s": 0.0,
+      "table_geometries": 96,
+      "witness_interior_depth_m": 0.002556626875616893
+    },
+    "raised_witness": {
+      "all_contacts": 0,
+      "witness_contacts": [],
+      "witness_max_native_penetration_m": 0.0,
+      "physical_time_s": 0.0,
+      "table_geometries": 96,
+      "witness_interior_depth_m": 0.0
+    }
+  },
+  "limits": [
+    "Static rebuilt geometry only; no settling, grasp or release validation",
+    "No robot, bending response or self-contact in the reduced queries",
+    "Subdivision preserves this surface, not dynamic degrees of freedom or material response",
+    "Box interior depth and native contact distance are different metrics",
+    "No physical success criterion or published threshold changed"
+  ]
+}

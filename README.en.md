@@ -27,7 +27,7 @@ Current implementations focus on holding and contact diagnostics. The [six-layer
 | Research question | Evidence | Conclusion and boundary |
 |---|---|---|
 | Can dynamics lift an apple by its stem? | Default cases pass; historical ten-scene regression: MuJoCo **1/10**, SuperDex **10/10** | Fixed-configuration robustness, **not a physical-accuracy ranking** |
-| Is the cloth grasp physically valid? | Cloth/table intersection in **176/225** saved frames; maximum interior depth **3.00 mm** | Missed detection corrected; physical repair remains incomplete |
+| Is the cloth grasp physically valid? | New 9 s development case passes pinch, lift, release and sampled geometry checks; strain 3.52% | Self penetration 1.492 mm is near its limit; one case only, historical failures retained |
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
@@ -67,16 +67,19 @@ Each row uses a different task/protocol. Keep failures, unsupported outcomes and
 
 </details>
 
+**Cloth repair candidate (MuJoCo 3.14):** the complete 9 s pinch, lift and release passes the current protocol: maximum strain **3.52%**, lift **123.92 mm**, and zero final hand/cloth force. No table/robot/floor midsurface intrusion is detected in 225 saved frames. Self penetration **1.492 mm** is close to the 1.5 mm limit, so robustness is not established. Official engines remain unchanged; material and control parameters are uncalibrated. [Metrics, plots, continuous video and failed controls](demos/cloth-folding/SETTLING.md).
+
+
 ## Continuous close-up demonstrations
 
 <table>
 <tr><th>MuJoCo · default development case</th><th>SuperDex FP64 · default development case</th></tr>
 <tr><td><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" alt="Continuous MuJoCo stem grasp" width="100%"></td><td><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" alt="Continuous SuperDex stem grasp" width="100%"></td></tr>
-<tr><th>PhysX · separate development case</th><th>Robot cloth · geometry failure</th></tr>
-<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="Continuous PhysX stem grasp" width="100%"></td><td><img src="demos/cloth-folding/media/grasp.gif" alt="Cloth replay retaining table-intersection failure" width="100%"></td></tr>
+<tr><th>PhysX · separate development case</th><th>Robot cloth · single-case protocol pass</th></tr>
+<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="Continuous PhysX stem grasp" width="100%"></td><td><img src="demos/cloth-folding/media/compliance-grasp.gif" alt="Continuous single-case cloth grasp and release" width="100%"></td></tr>
 </table>
 
-Apple GIFs continuously show fourteen seconds of approach, closing, lifting and holding. The display camera serves playback only. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX report](demos/physx-contact/apple.md) · [Cloth report](demos/cloth-folding/README.md)
+Apple GIFs continuously show fourteen seconds of approach, closing, lifting and holding. The display camera serves playback only. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX report](demos/physx-contact/apple.md) · [Cloth report](demos/cloth-folding/SETTLING.md)
 
 ## Method and engine differences
 
@@ -97,7 +100,7 @@ The hold window is 11–14 s, checking lift, two-pad support, penetration, wrist
 | Experiment | Code | Detailed report |
 |---|---|---|
 | Apple stem grasp | [apple-stem-grasp](demos/apple-stem-grasp/) | [Run and score](demos/apple-stem-grasp/README.md) |
-| Robot cloth grasp | [cloth-folding](demos/cloth-folding/) | [Failure review](demos/cloth-folding/SCORING.md) |
+| Robot cloth grasp | [cloth-folding](demos/cloth-folding/) | [Repair and failed controls](demos/cloth-folding/SETTLING.md) |
 | Contact, drives and transients | [contact-benchmark](demos/contact-benchmark/) | [Results](demos/contact-benchmark/README.md) |
 | Multi-solver cloth | [cloth-benchmark](demos/cloth-benchmark/) | [Materials and held-out cases](demos/cloth-benchmark/README.md) |
 | PhysX contact and cloth | [physx-contact](demos/physx-contact/) | [Capabilities and limits](demos/physx-contact/README.md) |
@@ -110,9 +113,7 @@ Latest-stable runtime qualification is in progress: [inventory, GPU probe and li
 
 The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.
 
-The local candidate passes **346 unit tests**. Migration tree `8ac3d71` completed both 14-second MuJoCo 3.14 and SuperDex FP64 grasps with independent acceptance; all five participating packages subsequently matched official wheels against installed code. The added provenance admission still needs final-source regression; no completed formal benchmark is claimed. Cloth remains unqualified: drape intrusion is 2.656 mm against 1.5 mm, robot-cloth strain is 5.48% against 5%, and independent auditing detects table intrusion. Engine code and physical acceptance limits remain unchanged.
-
-The latest robot-cloth contrast still fails: 5.48% strain exceeds its bound, and independent geometry auditing detects table intrusion from the first frame. See the [migration report](docs/engine-qualification.md).
+The current cloth candidate passes **397 unit tests**; its MuJoCo 3.14 single-case result is above. Published [v0.18.2](https://github.com/huangkiki/Dexlab/releases/tag/v0.18.2) completed both 14 s apple-grasp gates and official-package provenance admission. Current-source paired regression, provenance admission and commit identity are recorded in each delivery PR and Release. Historical sphere-drape failures remain separate.
 
 ## Quick reproduction
 

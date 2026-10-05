@@ -11,10 +11,10 @@ from pathlib import Path
 
 import numpy as np
 
-SCORER_VERSION = "cloth-evidence-v3"
+SCORER_VERSION = "cloth-evidence-v2"
 MAXIMUM_FIELDS = (
     "edge_strain", "hand_penetration_m", "table_penetration_m",
-    "self_contact_penetration_m", "robot_rigid_penetration_m", "floor_penetration_m",
+    "self_contact_penetration_m", "robot_rigid_penetration_m",
 )
 
 
@@ -104,7 +104,6 @@ def verify_episode(
         < 0.0015,
         "table_contact_penetration_below_1_5_mm": maximums["table_penetration_m"]
         < 0.0015,
-        "floor_contact_penetration_below_1_5_mm": maximums["floor_penetration_m"] < 0.0015,
         "cloth_self_contact_penetration_below_1_5_mm": maximums[
             "self_contact_penetration_m"
         ]
@@ -266,23 +265,19 @@ def verify_saved(directory):
             audit["maximum_crossing_pairs"] == 0
             and audit["maximum_degenerate_triangles"] == 0
         )
-        from dexlab.cloth_floor_audit import audit_floor
-        result["floor_surface_diagnostic"] = audit_floor(model, times, np.asarray(vertices))
         from dexlab.cloth_table_audit import audit_table
 
         result["table_surface_diagnostic"] = audit_table(
             model, times, poses, triangles, np.asarray(vertices)
         )
     else:
-        result["floor_surface_diagnostic"] = {"status": "insufficient_evidence"}
         result["table_surface_diagnostic"] = {
             "status": "insufficient_evidence", "reason": "Invalid saved surface states"
         }
     result["scorer_version"] = SCORER_VERSION
     result["verifier_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-    from dexlab import cloth_table_audit, cloth_self_contact, cloth_floor_audit
+    from dexlab import cloth_table_audit, cloth_self_contact
 
-    result["floor_auditor_sha256"] = hashlib.sha256(Path(cloth_floor_audit.__file__).read_bytes()).hexdigest()
     result["table_auditor_sha256"] = hashlib.sha256(
         Path(cloth_table_audit.__file__).read_bytes()
     ).hexdigest()
@@ -292,22 +287,20 @@ def verify_saved(directory):
     if input_hashes(directory) != original_hashes:
         raise ValueError('Recording changed during offline verification')
     result["input_sha256"] = original_hashes
-    # Do not expose an unqualified success boolean in offline reports.
+    # Do not expose an unqualified success boolean in v2 offline reports.
     result.pop("passed", None)
     result["protocol_passed"] = all(result["checks"].values())
     result["protocol_scope"] = "Existing nominal protocol with corrected evidence integrity; not complete geometric validity"
     result["assessment"] = (
         "protocol_failed" if not result["protocol_passed"] else
-        "geometry_review_required" if any(result[name]["status"] != "no_sampled_intrusion"
-            for name in ("table_surface_diagnostic", "floor_surface_diagnostic")) else
+        "geometry_review_required" if result["table_surface_diagnostic"]["status"] != "no_sampled_intrusion" else
         "limited_protocol_pass"
     )
     result["coverage_limits"] = [
-        "The separate cloth versus robot surface auditor must also be run",
+        "Independent cloth versus robot surface audit is not implemented",
         "25 Hz saved states cannot certify separation between frames",
         "Table audit uses zero-thickness triangles, not shell thickness or native contact distance",
-        "Table and floor midsurface diagnostics are sampled; native penetration limits remain 1.5 mm",
-        "Historical records without per-step floor extrema cannot pass this scorer version",
+        "Table diagnostic is exploratory; no new physical pass threshold is imposed",
     ]
     return result
 

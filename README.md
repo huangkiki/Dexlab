@@ -27,7 +27,7 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 | 研究问题 | 已有证据 | 结论与限制 |
 |---|---|---|
 | 动力学能否夹起苹果梗？ | 默认场景通过；历史 10 场景回归：MuJoCo **1/10**、SuperDex **10/10** | 说明各固定配置的鲁棒性，**不是引擎真实精度排名** |
-| 夹布是否物理有效？ | **176/225** 保存帧存在布—桌相交，最大内部深度 **3.00 mm** | 评分漏检已修正，物理修复尚未完成 |
+| 夹布是否物理有效？ | 新开发案例完成 9 秒夹持、抬升、释放；应变 3.52%，保存帧几何检查通过 | 自接触 1.492 mm 接近上限；仅单场景，历史穿透失败保留 |
 | 材料与接触如何影响结果？ | 拉伸、下垂、滑动、加载及瞬态的成功和失败均保留 | 材料和驱动尚未完成跨引擎实测校准 |
 | 能否说明真机表现？ | 尚无正式标定集与独立实测测试集 | 实测误差与 sim-to-real 能力未知 |
 
@@ -50,11 +50,11 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 [协议与失败明细](docs/benchmark.zh-CN.md) · [指标定义与复算](docs/evidence/README.zh-CN.md) · [原始数据与来源](docs/evidence/cohorts.json)
 
-### 夹布：看起来抓住了，几何检查仍然失败
+### 历史夹布：视觉成功与几何失败
 
 ![布—桌相交时间线](demos/cloth-folding/media/table-diagnostic.zh-CN.svg)
 
-原 9 秒连续记录在 225 个保存帧中有 176 帧桌体相交。检查覆盖零厚度三角面，不能证明有限厚度或帧间无碰撞。**评分修复不等于物理修复**；完整夹持、抬升与释放仍由 [#32](https://github.com/huangkiki/Dexlab/issues/32) 验证。
+原 9 秒连续记录在 225 个保存帧中有 176 帧桌体相交。检查覆盖零厚度三角面，不能证明有限厚度或帧间无碰撞。**评分修复不等于物理修复**；下方列出 #32 新开发案例的结果，原失败证据保留。
 
 [旧新评分及测量边界](demos/cloth-folding/SCORING.zh-CN.md)
 
@@ -67,16 +67,19 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 </details>
 
+**夹布修复候选（MuJoCo 3.14）：** 完整 9 秒夹持、抬升、释放通过当前协议；最大应变 **3.52%**，抬升 **123.92 mm**，末段手—布力为零。225 个保存帧未检出桌／机器人／地面中面侵入。但自接触穿透 **1.492 mm** 接近 1.5 mm 上限，不能据此宣称稳健性。官方引擎未改；材料与控制参数尚未校准。[指标、曲线、连续录像及全部失败对照](demos/cloth-folding/SETTLING.zh-CN.md)。
+
+
 ## 连续近景演示
 
 <table>
 <tr><th>MuJoCo · 默认开发场景</th><th>SuperDex FP64 · 默认开发场景</th></tr>
 <tr><td><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" alt="MuJoCo 连续抓梗近景" width="100%"></td><td><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" alt="SuperDex 连续抓梗近景" width="100%"></td></tr>
-<tr><th>PhysX · 独立开发场景</th><th>机器人夹布 · 几何失败记录</th></tr>
-<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="PhysX 连续抓梗近景" width="100%"></td><td><img src="demos/cloth-folding/media/grasp.gif" alt="保留桌体相交失败的夹布回放" width="100%"></td></tr>
+<tr><th>PhysX · 独立开发场景</th><th>机器人夹布 · 单场景协议通过</th></tr>
+<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="PhysX 连续抓梗近景" width="100%"></td><td><img src="demos/cloth-folding/media/compliance-grasp.gif" alt="通过单场景协议的连续夹布与释放回放" width="100%"></td></tr>
 </table>
 
-苹果动图连续展示 14 秒接近、闭合、抬升与保持。展示相机只用于回放，不参与控制。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX 报告](demos/physx-contact/apple.zh-CN.md) · [夹布报告](demos/cloth-folding/README.zh-CN.md)
+苹果动图连续展示 14 秒接近、闭合、抬升与保持。展示相机只用于回放，不参与控制。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX 报告](demos/physx-contact/apple.zh-CN.md) · [夹布报告](demos/cloth-folding/SETTLING.zh-CN.md)
 
 ## 实验方法与引擎差别
 
@@ -97,7 +100,7 @@ OpenArm 双臂＋Wuji，右手拇指/食指夹梗、左臂停放。苹果与梗�
 | 实验 | 代码 | 详细报告 |
 |---|---|---|
 | 苹果梗抓取 | [apple-stem-grasp](demos/apple-stem-grasp/) | [运行与验收](demos/apple-stem-grasp/README.zh-CN.md) |
-| 机器人夹布 | [cloth-folding](demos/cloth-folding/) | [失败复核](demos/cloth-folding/SCORING.zh-CN.md) |
+| 机器人夹布 | [cloth-folding](demos/cloth-folding/) | [修复与失败对照](demos/cloth-folding/SETTLING.zh-CN.md) |
 | 接触、驱动与瞬态 | [contact-benchmark](demos/contact-benchmark/) | [研究结果](demos/contact-benchmark/README.zh-CN.md) |
 | 多求解器布料 | [cloth-benchmark](demos/cloth-benchmark/) | [材料与留出实验](demos/cloth-benchmark/README.zh-CN.md) |
 | PhysX 接触与布料 | [physx-contact](demos/physx-contact/) | [能力与限制](demos/physx-contact/README.zh-CN.md) |
@@ -110,9 +113,7 @@ OpenArm 双臂＋Wuji，右手拇指/食指夹梗、左臂停放。苹果与梗�
 
 六卡基础接触对照已实际完成：六组参数中 4 组通过、2 组失败。默认软接触下仅减小步长并未减少侵入；详见上面的逐配置报告。这不是苹果抓取验收。
 
-本机候选环境通过 **346 项单测**。迁移源码 `8ac3d71` 的 MuJoCo 3.14 与 SuperDex FP64 各完成 14 秒抓梗并通过独立验收；随后五个参与包均通过官方 wheel 与已安装代码比对。新加入的来源准入逻辑仍需最终源码回归，尚不宣称正式 benchmark 已完成。布料仍未合格：披覆球面侵入 2.656 mm 超过 1.5 mm 上限，夹布应变 5.48% 超过 5%，独立审计还发现桌体侵入；未修改引擎或放宽物理验收。
-
-最新夹布对照仍失败：5.48% 应变超限，独立几何审计从首帧即发现布面进入桌体；详见[迁移报告](docs/engine-qualification.zh-CN.md)。
+当前夹布候选通过 **397 项单测**；MuJoCo 3.14 单场景修复结果见上方。已发布的 [v0.18.2](https://github.com/huangkiki/Dexlab/releases/tag/v0.18.2) 完成双后端 14 秒抓梗及官方包来源准入；每次交付的当前源码双后端回归、来源准入及提交身份记录在对应 PR 与 Release 中。披覆球面的历史失败仍保留，不由夹布通过替代。
 
 ## 快速复现
 

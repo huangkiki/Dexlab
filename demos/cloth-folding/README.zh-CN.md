@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
+**当前开发案例：** 官方 MuJoCo 3.14 的完整夹持、抬升和释放通过固定协议；应变 3.52%，自接触穿透 1.492 mm 接近上限，不宣称稳健性。[新结果、连续录像、参数与复现命令](SETTLING.zh-CN.md)。下方旧视频和原默认配置保留为失败历史，不代表当前候选。
+
 OpenArm 与 Wuji 通过关节驱动和摩擦接触操作被动 MuJoCo 布料。记录过程没有手—布附着约束、布料驱动器、mocap 夹具或布料状态改写。
 
 - `grasp`：夹住矩形布片，退离桌边、抬升、松手并撤离。
@@ -13,9 +15,15 @@ OpenArm 与 Wuji 通过关节驱动和摩擦接触操作被动 MuJoCo 布料。�
 
 **撤回原有成功表述：**桌体内部审计检出 176/225 个保存帧存在相交，这段记录需要几何复核。[评分对照、曲线与限制](SCORING.zh-CN.md)。物理修复单独见 [#32](https://github.com/huangkiki/Dexlab/issues/32)。
 
+[桌边静态反例与参数审查](TABLE-CONTACT.zh-CN.md)：已定位原生接触距离与面片内部穿插不一致的具体记录；此静态对照不单独证明动力学修复。
+
+[布—机器人独立检查](ROBOT-CONTACT.zh-CN.md)：225 个保存帧未检出布料中面侵入 79 个机器人碰撞凸包，人工反例能够检出；不撤销桌体失败，也不证明有限厚度或帧间分离。
+
 ## 运行与验收
 
-使用仓库 `bash scripts/setup.sh` 创建的环境。先生成苹果演示的机器人模型，或通过 `DEXLAB_ROBOT_MODEL` 指定已有 `model.xml`：
+[被动沉降观测](SETTLING.zh-CN.md)：可选保存规划前两秒的全部物理步，离线定位首次桌体侵入。报告同时记录完整原生动力学、通过案例与失败对照。
+
+下面命令是原默认配置；通过案例须采用上方链接中的 3.14 准入环境与显式参数。使用仓库 `bash scripts/setup.sh` 创建的环境。先生成苹果演示的机器人模型，或通过 `DEXLAB_ROBOT_MODEL` 指定已有 `model.xml`：
 
 ```bash
 bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
@@ -23,7 +31,7 @@ bash demos/cloth-folding/run.sh --task grasp --timestep .00025
 .venv/bin/python demos/cloth-folding/src/verify_cloth.py demos/cloth-folding/runs/latest
 ```
 
-离线评分退出码：0 表示有限协议通过，1 表示协议失败，2 表示需要几何复核。评分只读原始记录；用 `--output /path/to/new-report.json` 在记录目录之外写入新报告。渲染写入新的同级目录 `<run>-media-cloth-evidence-v2`，已有目录会被拒绝；显式回放命令为 `render_cloth.py RECORD --output NEW_MEDIA_DIR`。运行汇总中的 `verified`/`validation.passed` 只覆盖在线协议测量，几何结论须查看离线 assessment。
+离线评分退出码：0 表示有限协议通过，1 表示协议失败，2 表示需要几何复核。评分只读原始记录；用 `--output /path/to/new-report.json` 在记录目录之外写入新报告。渲染写入新的同级目录 `<run>-media-cloth-evidence-v3`，已有目录会被拒绝；显式回放命令为 `render_cloth.py RECORD --output NEW_MEDIA_DIR`。运行汇总中的 `verified`/`validation.passed` 只覆盖在线协议测量，几何结论须查看离线 assessment。
 
 `DEXLAB_PYTHON` 指定 Python 环境；`--no-video` 跳过渲染。每次实验选择新的 `--output` 目录。实验性折叠配置为 `--task fold --hand-friction 2 --timestep .0005`。轨迹运行结束或视频生成不等于折叠成功。
 
