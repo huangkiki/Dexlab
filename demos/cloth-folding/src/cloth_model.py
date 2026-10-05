@@ -5,10 +5,13 @@ no hand/cloth attachments, mocap bodies, or actuators on cloth vertices.
 """
 
 from pathlib import Path
+from itertools import product
 import xml.etree.ElementTree as ET
 
 import mujoco
 import numpy as np
+
+from dexlab.engine_versions import mujoco_profile_identity
 
 TABLE_HEIGHT = 0.5
 CLOTH_RADIUS = 0.0012
@@ -53,7 +56,7 @@ def cloth_mesh(garment):
     return np.asarray(points), np.asarray(triangles), indices
 
 
-def add_table(world):
+def add_table(world, *, mesh_name=None):
     # MuJoCo 3.11 caps flex contacts per body pair. Separate fixed support
     # bodies preserve distributed support without changing the engine.
     for row, y in enumerate(np.linspace(0.4275, 0.8125, 8)):
@@ -63,8 +66,8 @@ def add_table(world):
                 body,
                 "geom",
                 name=f"table_{column}_{row}",
-                type="box",
-                size=".045 .0275 .003",
+                **({"type": "box", "size": ".045 .0275 .003"} if mesh_name is None
+                   else {"type": "mesh", "mesh": mesh_name}),
                 pos=numbers((x, y, TABLE_HEIGHT - 0.003)),
                 rgba=".34 .39 .43 1",
                 condim="3",
@@ -88,9 +91,12 @@ def load_model(path):
 
 
 def build_model(
-    robot_model, destination, *, garment=False, hand_friction=1.0, timestep=0.00025
+    robot_model, destination, *, garment=False, hand_friction=1.0, timestep=0.00025,
+    table_contact="box", floor_time_constant=0.002, edge_time_constant=0.002,
 ):
     """Keep native robot frames, inertia, meshes, joints and collision filters."""
+    identity = mujoco_profile_identity({"version": mujoco.__version__}, mujoco.mj_versionString())
+    integrator = ("discrete" if identity["profile_status"] == "candidate" else "implicitfast")
     robot_model = Path(robot_model).resolve()
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
@@ -127,7 +133,7 @@ def build_model(
     option.attrib.clear()
     option.attrib.update(
         timestep=str(timestep),
-        integrator="implicitfast",
+        integrator=integrator,
         solver="Newton",
         iterations="100",
         tolerance="1e-8",
@@ -151,10 +157,23 @@ def build_model(
     ET.SubElement(visual, "global", offwidth="1280", offheight="960")
     ET.SubElement(visual, "headlight", ambient=".4 .4 .4", diffuse=".7 .7 .7")
     ET.SubElement(world, "light", pos="0 -.5 2", diffuse=".8 .8 .8")
-    ET.SubElement(
+    floor = ET.SubElement(
         world, "geom", name="floor", type="plane", size="3 3 .1", rgba=".10 .14 .20 1"
     )
-    add_table(world)
+    if floor_time_constant != 0.002:
+        # Override pair mixing only for the explicitly selected floor response.
+        floor.set("priority", "1")
+        floor.set("solref", numbers((floor_time_constant, 1)))
+    if table_contact not in ("box", "convex-mesh"):
+        raise ValueError("Unknown table contact representation")
+    mesh_name = None
+    if table_contact == "convex-mesh":
+        # Same cuboid surfaces, using the general convex/flex collision path.
+        # This changes contact representation, not table dimensions or material.
+        mesh_name = "cloth_table_cuboid"
+        corners = np.array(list(product((-1, 1), repeat=3))) * (.045, .0275, .003)
+        ET.SubElement(assets, "mesh", name=mesh_name, vertex=numbers(corners))
+    add_table(world, mesh_name=mesh_name)
 
     vertices, triangles, indices = cloth_mesh(garment)
     flex = ET.SubElement(
@@ -169,7 +188,8 @@ def build_model(
         element=numbers(triangles),
         rgba=".02 .68 .63 1",
     )
-    ET.SubElement(flex, "edge", equality="true", damping=".002", solref=".002 1")
+    ET.SubElement(flex, "edge", equality="true", damping=".002",
+                  solref=numbers((edge_time_constant, 1)))
     ET.SubElement(
         flex,
         "elasticity",

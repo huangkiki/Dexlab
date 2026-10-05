@@ -1,0 +1,66 @@
+{
+  "engine_version": "3.14.0",
+  "source_model_sha256": "fc91e8d268e58a45b3ab1ce1e89edb9b210e6dfc107e5a5c81e5c4462f492cc5",
+  "script_sha256": "6111b0476e92220156f2aa67611461914515089fa874059784083cac85373616",
+  "timestep_s": 0.000125,
+  "duration_s": 1.0,
+  "results": {
+    "baseline": {
+      "wall_s": 16.379056047007907,
+      "maximums": {
+        "edge_strain": 0.11024185188200764,
+        "floor_penetration_m": 0.002455334953005782,
+        "self_penetration_m": 0.00036247670758195286,
+        "solver_iterations": 31
+      },
+      "steps": 8000,
+      "xml_sha256": "bc008fccca5721175636a88c0f3f84be6949444587c9a0c6ee9bcd2d99746706",
+      "trace_sha256": "d6b347a50e350b365432fdb2a63d8fcce862cccb831d8e2bf57d52e34d78e2ce",
+      "floor_time_constant_s": null,
+      "edge_time_constant_s": null
+    },
+    "floor": {
+      "wall_s": 15.24511530699965,
+      "maximums": {
+        "edge_strain": 0.09372740050644568,
+        "floor_penetration_m": 0.0006852599019546923,
+        "self_penetration_m": 0.0004413070780795623,
+        "solver_iterations": 35
+      },
+      "steps": 8000,
+      "xml_sha256": "975303f4b5ccd5447fbd9919db1e0033ec313d600e3115c4cf644f54f22f9601",
+      "trace_sha256": "ec9eeef00f093108996a5368a769a6c6817de111ec9c018f7162163d3fee7ea6",
+      "floor_time_constant_s": 0.0005,
+      "edge_time_constant_s": null
+    },
+    "edge": {
+      "wall_s": 11.952183350993437,
+      "maximums": {
+        "edge_strain": 0.01905274935458623,
+        "floor_penetration_m": 0.0024129463194303633,
+        "self_penetration_m": 0.0012815220958116225,
+        "solver_iterations": 32
+      },
+      "steps": 8000,
+      "xml_sha256": "10fb86cd60478edfc997fbe850d2643ca776204d6eeb1390e5088a2c2af10bb9",
+      "trace_sha256": "28b0bace34b969a8cb25579a4744545d43bf9c3b4a7cc5fe1dbc6eec7699e11d",
+      "floor_time_constant_s": null,
+      "edge_time_constant_s": 0.0005
+    },
+    "both": {
+      "wall_s": 11.452712156999041,
+      "maximums": {
+        "edge_strain": 0.02041566876284251,
+        "floor_penetration_m": 0.0006852594707012149,
+        "self_penetration_m": 0.00099087020156092,
+        "solver_iterations": 26
+      },
+      "steps": 8000,
+      "xml_sha256": "d2a99eaa0c175bbfb0bd5348dde0bfc6b1d0371c75bcb397cbf64c4200a1deac",
+      "trace_sha256": "730dec100fada4e183587ec1e464509bcf0f091f9cc12d045881a95a98c86a29",
+      "floor_time_constant_s": 0.0005,
+      "edge_time_constant_s": 0.0005
+    }
+  },
+  "scope": "Minimal 45-degree planar cloth drop, centered at 0.6 m, zero initial velocity, no robot or table. Original cloth, floor, defaults and solver options retained except listed controls. No material calibration, full-grasp or independent collision validation claim. Peaks sampled every native step; traces every eight steps. Floor priority 1 selects its changed solref; native reference safety remains enabled."
+}

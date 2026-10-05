@@ -1,0 +1,55 @@
+{
+  "results": {
+    "baseline": {
+      "wall_s": 16.261427879988332,
+      "maximums": {
+        "edge_strain": 0.11024185188200764,
+        "floor_penetration_m": 0.002455334953005782,
+        "self_penetration_m": 0.00036247670758195286,
+        "solver_iterations": 31
+      },
+      "floor_time_constant_s": null,
+      "edge_time_constant_s": null,
+      "xml_sha256": "980360a66a5d93386c637659266c4dd86bdd94e79fc89076e2167b79e70ebee2"
+    },
+    "floor": {
+      "wall_s": 15.326933524993365,
+      "maximums": {
+        "edge_strain": 0.09372740050644568,
+        "floor_penetration_m": 0.0006852599019546923,
+        "self_penetration_m": 0.0004413070780795623,
+        "solver_iterations": 35
+      },
+      "floor_time_constant_s": 0.0005,
+      "edge_time_constant_s": null,
+      "xml_sha256": "b4bafeb1a591e91ec15043b99086e071d411aa2936ebc820fa23f245910ed74e"
+    },
+    "edge": {
+      "wall_s": 11.977395251000416,
+      "maximums": {
+        "edge_strain": 0.01905274935458623,
+        "floor_penetration_m": 0.0024129463194303633,
+        "self_penetration_m": 0.0012815220958116225,
+        "solver_iterations": 32
+      },
+      "floor_time_constant_s": null,
+      "edge_time_constant_s": 0.0005,
+      "xml_sha256": "f41e21900518b5da47ed480086ae2e11560c755f34a719f641fecd73bf98591b"
+    },
+    "both": {
+      "wall_s": 11.424489222001284,
+      "maximums": {
+        "edge_strain": 0.02041566876284251,
+        "floor_penetration_m": 0.0006852594707012149,
+        "self_penetration_m": 0.00099087020156092,
+        "solver_iterations": 26
+      },
+      "floor_time_constant_s": 0.0005,
+      "edge_time_constant_s": 0.0005,
+      "xml_sha256": "b90a75f367ab6de9198c8467c4f93bed597cc9d006c20c531aba56570bb2f590"
+    }
+  },
+  "source_model_sha256": "c01d69aadba0e49f5eef7462e269f8b2556294f5801c4b9d1fb9513048e37174",
+  "script_sha256": "2addfa63152c52e9be15dabfa372c67253003c653625e4b7218d04b6072b6e06",
+  "scope": "Minimal tilted panel drop, not the original grasp or replay: same original cloth/default/floor/options, no robot or table, 45deg planar rest orientation, center height.6m, zero initial velocity.0.125ms/1s each. Floor priority1 makes only the explicitly changed floor solref authoritative; other contact fields retain defaults. No engine patch or criterion changes."
+}

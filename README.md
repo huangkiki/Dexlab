@@ -12,12 +12,22 @@
 
 DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研究碰撞几何、接触律、求解器及驱动对**穿透、滑移、抖动与计算成本**的影响。每项结论连接原始记录、独立评分、参数来源与失败案例。
 
+## 本机执行与自动交付
+
+实验优先使用通过准入的本机，实测资源余量并强制 cgroup 限额，禁用实验 swap。每次选项先复审优先级，中断任务通过实际句柄恢复；远端作为可选执行位置。[执行与恢复协议](docs/autoresearch.zh-CN.md#本机优先执行与恢复)。
+
+## 灵巧操作任务路线
+
+[新版研究证据账本](docs/dexterity-ledger.zh-CN.md)覆盖38篇论文身份与19个仓库入口，区分定向源码审查、摘要筛选及未验证运行时。关键结论：上游成功指标须独立复核；目标关节值、估算力矩和触觉代理不能当实测量；自定义引擎与历史配置不进入最新稳定版比较。可选动作回放 #52、触觉历史 #53 已设依赖和预算。
+
+当前实现集中于抓持与接触诊断。新增 [六层研究地图](docs/dexterity-roadmap.zh-CN.md) 将 ManiSkill、抓取评测、触觉、数据生成与本体研究映射到具体实验；[ManiSkill 原生任务 #47](https://github.com/huangkiki/Dexlab/issues/47) 与 [手内旋转 #48](https://github.com/huangkiki/Dexlab/issues/48) 已排入计划，**尚未实现，不算已支持**。
+
 ## 当前结论
 
 | 研究问题 | 已有证据 | 结论与限制 |
 |---|---|---|
 | 动力学能否夹起苹果梗？ | 默认场景通过；历史 10 场景回归：MuJoCo **1/10**、SuperDex **10/10** | 说明各固定配置的鲁棒性，**不是引擎真实精度排名** |
-| 夹布是否物理有效？ | **176/225** 保存帧存在布—桌相交，最大内部深度 **3.00 mm** | 评分漏检已修正，物理修复尚未完成 |
+| 夹布是否物理有效？ | 新开发案例完成 9 秒夹持、抬升、释放；应变 3.52%，保存帧几何检查通过 | 自接触 1.492 mm 接近上限；仅单场景，历史穿透失败保留 |
 | 材料与接触如何影响结果？ | 拉伸、下垂、滑动、加载及瞬态的成功和失败均保留 | 材料和驱动尚未完成跨引擎实测校准 |
 | 能否说明真机表现？ | 尚无正式标定集与独立实测测试集 | 实测误差与 sim-to-real 能力未知 |
 
@@ -40,11 +50,11 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 [协议与失败明细](docs/benchmark.zh-CN.md) · [指标定义与复算](docs/evidence/README.zh-CN.md) · [原始数据与来源](docs/evidence/cohorts.json)
 
-### 夹布：看起来抓住了，几何检查仍然失败
+### 历史夹布：视觉成功与几何失败
 
 ![布—桌相交时间线](demos/cloth-folding/media/table-diagnostic.zh-CN.svg)
 
-原 9 秒连续记录在 225 个保存帧中有 176 帧桌体相交。检查覆盖零厚度三角面，不能证明有限厚度或帧间无碰撞。**评分修复不等于物理修复**；完整夹持、抬升与释放仍由 [#32](https://github.com/huangkiki/Dexlab/issues/32) 验证。
+原 9 秒连续记录在 225 个保存帧中有 176 帧桌体相交。检查覆盖零厚度三角面，不能证明有限厚度或帧间无碰撞。**评分修复不等于物理修复**；下方列出 #32 新开发案例的结果，原失败证据保留。
 
 [旧新评分及测量边界](demos/cloth-folding/SCORING.zh-CN.md)
 
@@ -57,16 +67,19 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 </details>
 
+**夹布修复候选（MuJoCo 3.14）：** 完整 9 秒夹持、抬升、释放通过当前协议；最大应变 **3.52%**，抬升 **123.92 mm**，末段手—布力为零。225 个保存帧未检出桌／机器人／地面中面侵入。但自接触穿透 **1.492 mm** 接近 1.5 mm 上限，不能据此宣称稳健性。官方引擎未改；材料与控制参数尚未校准。[指标、曲线、连续录像及全部失败对照](demos/cloth-folding/SETTLING.zh-CN.md)。
+
+
 ## 连续近景演示
 
 <table>
 <tr><th>MuJoCo · 默认开发场景</th><th>SuperDex FP64 · 默认开发场景</th></tr>
 <tr><td><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" alt="MuJoCo 连续抓梗近景" width="100%"></td><td><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" alt="SuperDex 连续抓梗近景" width="100%"></td></tr>
-<tr><th>PhysX · 独立开发场景</th><th>机器人夹布 · 几何失败记录</th></tr>
-<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="PhysX 连续抓梗近景" width="100%"></td><td><img src="demos/cloth-folding/media/grasp.gif" alt="保留桌体相交失败的夹布回放" width="100%"></td></tr>
+<tr><th>PhysX · 独立开发场景</th><th>机器人夹布 · 单场景协议通过</th></tr>
+<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="PhysX 连续抓梗近景" width="100%"></td><td><img src="demos/cloth-folding/media/compliance-grasp.gif" alt="通过单场景协议的连续夹布与释放回放" width="100%"></td></tr>
 </table>
 
-苹果动图连续展示 14 秒接近、闭合、抬升与保持。展示相机只用于回放，不参与控制。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX 报告](demos/physx-contact/apple.zh-CN.md) · [夹布报告](demos/cloth-folding/README.zh-CN.md)
+苹果动图连续展示 14 秒接近、闭合、抬升与保持。展示相机只用于回放，不参与控制。[MuJoCo 视频](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex 视频](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX 报告](demos/physx-contact/apple.zh-CN.md) · [夹布报告](demos/cloth-folding/SETTLING.zh-CN.md)
 
 ## 实验方法与引擎差别
 
@@ -87,12 +100,20 @@ OpenArm 双臂＋Wuji，右手拇指/食指夹梗、左臂停放。苹果与梗�
 | 实验 | 代码 | 详细报告 |
 |---|---|---|
 | 苹果梗抓取 | [apple-stem-grasp](demos/apple-stem-grasp/) | [运行与验收](demos/apple-stem-grasp/README.zh-CN.md) |
-| 机器人夹布 | [cloth-folding](demos/cloth-folding/) | [失败复核](demos/cloth-folding/SCORING.zh-CN.md) |
+| 机器人夹布 | [cloth-folding](demos/cloth-folding/) | [修复与失败对照](demos/cloth-folding/SETTLING.zh-CN.md) |
 | 接触、驱动与瞬态 | [contact-benchmark](demos/contact-benchmark/) | [研究结果](demos/contact-benchmark/README.zh-CN.md) |
 | 多求解器布料 | [cloth-benchmark](demos/cloth-benchmark/) | [材料与留出实验](demos/cloth-benchmark/README.zh-CN.md) |
 | PhysX 接触与布料 | [physx-contact](demos/physx-contact/) | [能力与限制](demos/physx-contact/README.zh-CN.md) |
 
 **[中文文档站源码](docs/site/zh/index.md) · [English documentation](docs/site/en/index.md)**。文档站维护快速开始、实验目录、结果、引擎原理、benchmark 和开发规范；Sphinx 严格构建并维护两种语言，发布配置已纳入仓库。在线地址需部署验证后公布。
+
+## 最新稳定版验证
+
+最新稳定版运行准入正在推进：[版本清单、GPU 基础检查及边界](docs/engine-qualification.zh-CN.md)。设备检查不等于抓取成功，也尚未开放正式 benchmark 派发。
+
+六卡基础接触对照已实际完成：六组参数中 4 组通过、2 组失败。默认软接触下仅减小步长并未减少侵入；详见上面的逐配置报告。这不是苹果抓取验收。
+
+当前夹布候选通过 **397 项单测**；MuJoCo 3.14 单场景修复结果见上方。已发布的 [v0.18.2](https://github.com/huangkiki/Dexlab/releases/tag/v0.18.2) 完成双后端 14 秒抓梗及官方包来源准入；每次交付的当前源码双后端回归、来源准入及提交身份记录在对应 PR 与 Release 中。披覆球面的历史失败仍保留，不由夹布通过替代。
 
 ## 快速复现
 

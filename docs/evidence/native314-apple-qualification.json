@@ -1,0 +1,96 @@
+{
+  "source_tree": "2fd01ed93ac9a67e9286dcaed413c4566d9481c1",
+  "versions": {
+    "mujoco": "3.14.0",
+    "superdex-physics-fp64": "1.0.0",
+    "superdex-robotics-fp64": "1.0.0"
+  },
+  "scope": "Single development scene per backend; not held-out benchmark or full-suite qualification",
+  "formal_batch_qualified": false,
+  "full_suite": {
+    "tests": 311,
+    "failures": 1,
+    "errors": 2
+  },
+  "scores": {
+    "mujoco": {
+      "passed": true,
+      "backend": "mujoco",
+      "scope": "14 s stem grasp; 11-14 s hold",
+      "checks": {
+        "completed": true,
+        "uniform_step_coverage": true,
+        "finite_records": true,
+        "official_wheel": true,
+        "native_sdf_apple_and_pads": true,
+        "free_apple_no_attachment": true,
+        "original_apple_mass": true,
+        "no_apple_actuation": true,
+        "fixed_base": true,
+        "no_solver_warnings": true,
+        "bounded_penetration": true,
+        "full_hold": true,
+        "lifted": true,
+        "hand_supports_weight": true,
+        "no_table_support": true,
+        "no_other_support": true,
+        "retained": true,
+        "contact_step_times_valid": true,
+        "contact_ledger_matches_hand_force": true,
+        "two_sdf_pads_throughout_hold": true,
+        "no_fruit_support_during_hold": true,
+        "only_two_pads_support": true,
+        "momentum_balance": true
+      },
+      "metrics": {
+        "maximum_penetration_mm": 0.11649614163250308,
+        "maximum_wrist_relative_displacement_mm": 0.3354759343233245,
+        "maximum_wrist_relative_rotation_deg": 0.36283483105737285,
+        "minimum_clearance_mm": 125.66677816196442,
+        "mean_hand_support_weight_ratio": 0.9999957592765827,
+        "maximum_off_stem_contact_n": 0.0,
+        "maximum_momentum_residual_weight_ratio": 7.685623250956188e-06
+      },
+      "limits": "Known-pose scripted control. Rigid stem; no fracture or hardware validation. SDF discretization and contact-point classification are approximate."
+    },
+    "superdex": {
+      "passed": true,
+      "backend": "superdex",
+      "scope": "14 s stem grasp; 11-14 s hold",
+      "checks": {
+        "completed": true,
+        "uniform_step_coverage": true,
+        "finite_records": true,
+        "fp64": true,
+        "native_sdf_apple_and_pads": true,
+        "free_apple_no_attachment": true,
+        "original_apple_mass": true,
+        "fixed_base": true,
+        "no_solver_warnings": true,
+        "bounded_penetration": true,
+        "full_hold": true,
+        "lifted": true,
+        "hand_supports_weight": true,
+        "no_table_support": true,
+        "no_other_support": true,
+        "retained": true,
+        "contact_step_times_valid": true,
+        "contact_ledger_matches_hand_force": true,
+        "two_sdf_pads_throughout_hold": true,
+        "no_fruit_support_during_hold": true,
+        "only_two_pads_support": true,
+        "momentum_balance": true
+      },
+      "metrics": {
+        "maximum_penetration_mm": 0.4522579213048954,
+        "maximum_wrist_relative_displacement_mm": 0.03988570732237601,
+        "maximum_wrist_relative_rotation_deg": 0.5551215269507543,
+        "minimum_clearance_mm": 115.21549249150476,
+        "mean_hand_support_weight_ratio": 0.999722413546418,
+        "maximum_off_stem_contact_n": 0.0,
+        "maximum_momentum_residual_weight_ratio": 0.0009764272829240137
+      },
+      "limits": "Known-pose scripted control. Rigid stem; no fracture or hardware validation. SDF discretization and contact-point classification are approximate."
+    }
+  }
+}

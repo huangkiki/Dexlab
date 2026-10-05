@@ -19,6 +19,7 @@ class ClothGraspEvidenceTest(unittest.TestCase):
             edge_strain=0.01,
             hand_penetration_m=0.0001,
             table_penetration_m=0.0001,
+            floor_penetration_m=0.0,
             self_contact_penetration_m=0,
             robot_rigid_penetration_m=0,
         )
@@ -52,6 +53,13 @@ class ClothGraspEvidenceTest(unittest.TestCase):
             duration=9,
             failure=None,
         )
+
+    def test_floor_penetration_and_missing_floor_coverage_fail(self):
+        self.maximums['floor_penetration_m'] = .002
+        self.records[300]['floor_penetration_m'] = .002
+        self.assertFalse(self.verify()['checks']['floor_contact_penetration_below_1_5_mm'])
+        del self.maximums['floor_penetration_m']
+        self.assertFalse(self.verify()['passed'])
 
     def test_complete_record_can_pass(self):
         self.assertTrue(self.verify()["passed"])

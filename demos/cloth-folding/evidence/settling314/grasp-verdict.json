@@ -1,0 +1,65 @@
+{
+  "version": "3.14.0",
+  "completed": true,
+  "verified": false,
+  "maximums": {
+    "hand_penetration_m": 0.0006767900251905924,
+    "table_penetration_m": 0.0003842136268940217,
+    "self_contact_penetration_m": 0.0008476007240681705,
+    "edge_strain": 0.05480032507482768,
+    "robot_rigid_penetration_m": 0.0
+  },
+  "validation": {
+    "passed": false,
+    "checks": {
+      "valid_task": true,
+      "complete_time_grid": true,
+      "finite_complete_measurements": true,
+      "complete_hand_plans": true,
+      "complete_contact_scan": true,
+      "summary_bounds_recorded_maxima": true,
+      "completed_without_physics_warning": true,
+      "edge_strain_below_5_percent": false,
+      "robot_contact_penetration_below_1_5_mm": true,
+      "table_contact_penetration_below_1_5_mm": true,
+      "cloth_self_contact_penetration_below_1_5_mm": true,
+      "robot_rigid_penetration_below_1_5_mm": true,
+      "r_both_pads_contact_at_least_95_percent": true,
+      "r_material_slip_below_1_cm": true,
+      "r_material_lift_above_8_cm": true,
+      "released_from_all_robot_geometries": true
+    },
+    "metrics": {
+      "r": {
+        "two_pad_contact_fraction": 1.0,
+        "maximum_anchor_error_m": 0.002337921477561612,
+        "lift_m": 0.12117317270230837
+      },
+      "maximum_final_robot_cloth_normal_force_N": 0.0
+    }
+  },
+  "wall_time_s": 511.92448725899885,
+  "engine_identity": {
+    "version": "3.14.0",
+    "native_library_sha256": "5e7623e30f55bf324d4c9648379ebeba5bcd153ee0304c52eac74bf8d441000b",
+    "wheel_record_matches": true,
+    "compatibility_profile": "qualification-3.14.0",
+    "profile_status": "candidate",
+    "formal_batch_qualified": false
+  },
+  "source_sha256": {
+    "render_cloth.py": "b0559cfda79d4bb814995ea08c5fafeece2f40c2a176da4b71dd4978ae5f24c0",
+    "plot_robot_audit.py": "ec5e413aea8671d4be906f5d1da736681993955e5de7cd86e181a85274d64fe4",
+    "plot_table_contact.py": "5a25acbbe2fd3530980fc428bbf5ed43302f54f84b416c2781f82a0ccae15ed0",
+    "probe_robot_audit.py": "a75c23b5cbcd4d6452290cbe37a158fb73438c2268e0beffa5084f7804c7ac27",
+    "settling_trace.py": "48a6da3714a2c36206dbf69d0f2af0012ee9b09025a078e58750161e16d468c2",
+    "diagnose_table_contact.py": "757e8d4cb0846829f8e9a81243893b393c9bae6dd4c422287e5cbb3e0295ba55",
+    "plot_scoring.py": "2159f078f19819a5c81df3e1305b8d90902b156a8e3cdee30ee16a6a2184d15c",
+    "cloth_control.py": "8f4719c43d7beaeaa49eae4ae144e08def280e9934af2486bbc80e93b4223941",
+    "compare_scoring.py": "5b151b852ad0535a3cac101ba2cf9099dfde9b0803abebccb2501e2534701f71",
+    "verify_cloth.py": "157740e1a92b2b3c0712b62f868f50b16a6930dd83d0b1e8ba217e334507a752",
+    "run_cloth.py": "5abf5eccd03e814d6f95ace019a3887e66f8e3d0906de1e19cfad6809838bce4",
+    "cloth_model.py": "485d148184200c3144bd21e83ade8187266d6d18a0f5996f0a3125e405cad11e",
+    "engine_versions.py": "0ddb2b9e3faabc93caf03b090d542e9a6b3c71eb08e698f88b1cf558a5d49eb7"
+  }
+}

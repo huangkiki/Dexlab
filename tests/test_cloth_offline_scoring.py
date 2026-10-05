@@ -33,7 +33,7 @@ class OfflineScoringTests(unittest.TestCase):
         self.fixture = fixtures.ClothGraspEvidenceTest()
         self.fixture.setUp()
         self.xml = (
-            '<mujoco><worldbody><geom name="table_0" type="box" size="1 1 .003"/>'
+            '<mujoco><worldbody><geom name="floor" type="plane" size="1 1 .1" pos="0 0 -1"/><geom name="table_0" type="box" size="1 1 .003"/>'
             '<flexcomp name="cloth" type="grid" count="2 2 1" spacing=".1 .1 .1" '
             'dim="2" pos="0 0 1"><edge equality="true"/></flexcomp></worldbody></mujoco>')
         self.model = mujoco.MjModel.from_xml_string(self.xml)
@@ -58,6 +58,16 @@ class OfflineScoringTests(unittest.TestCase):
         self.assertEqual(report['assessment'], 'limited_protocol_pass')
         self.assertNotIn('passed', report)
         self.assertEqual(snapshot(self.record), before)
+
+    def test_floor_crossing_cannot_hide_behind_clear_table_and_claimed_trace(self):
+        # Synthetic native trace says clear; independent geometry must still reject it.
+        model = mujoco.MjModel.from_xml_string(self.xml.replace('pos="0 0 -1"', 'pos="0 0 1.1"'))
+        mujoco.mj_saveModel(model, str(self.record / 'model.mjb'))
+        report = verify_cloth.verify_saved(self.record)
+        self.assertTrue(report['protocol_passed'])
+        self.assertEqual(report['table_surface_diagnostic']['status'], 'no_sampled_intrusion')
+        self.assertEqual(report['floor_surface_diagnostic']['status'], 'sampled_intrusion')
+        self.assertEqual(report['assessment'], 'geometry_review_required')
 
     def test_missing_table_geometry_cannot_be_safe(self):
         unknown = mujoco.MjModel.from_xml_string('<mujoco/>')
@@ -130,8 +140,8 @@ class IndependentGeometryReferenceTests(unittest.TestCase):
         media = json.loads((root / 'media/grasp-provenance.json').read_text())
         checks = {
             SOURCE / 'compare_scoring.py': report['comparison_source_sha256'],
-            SOURCE / 'verify_cloth.py': report['current_report']['verifier_sha256'],
-            SOURCE / 'render_cloth.py': media['renderer_sha256'],
+            root / 'evidence/grasp/sources/verify_cloth-v2.py': report['current_report']['verifier_sha256'],
+            root / 'evidence/grasp/sources/render_cloth-v2.py': media['renderer_sha256'],
             root / 'media/grasp.gif': media['gif_sha256'],
             root / 'media/grasp.mp4': media['video_sha256'],
             root / 'evidence/grasp/verification-cloth-evidence-v2.json': media['verification_sha256'],

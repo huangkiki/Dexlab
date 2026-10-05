@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-05",
+  "source_sha": "62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3",
+  "scope": "Static task/control source audit; no native runtime; installed PhysX/SAPIEN versions require separate qualification",
+  "source_files": [
+    {
+      "path": "mani_skill/envs/tasks/tabletop/pick_cube.py",
+      "url": "https://raw.githubusercontent.com/mani-skill/ManiSkill/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/mani_skill/envs/tasks/tabletop/pick_cube.py",
+      "sha256": "53bfed0229cd4de2c7e363e7f3c531d5c5c84803c28e1345a2aea1a4972f3168"
+    },
+    {
+      "path": "mani_skill/envs/tasks/tabletop/push_cube.py",
+      "url": "https://raw.githubusercontent.com/mani-skill/ManiSkill/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/mani_skill/envs/tasks/tabletop/push_cube.py",
+      "sha256": "9af1d9fd3f84544ce2f38a49d944e30a96a9a12f82befbe478daab9c3c019f66"
+    },
+    {
+      "path": "mani_skill/envs/tasks/dexterity/rotate_single_object_in_hand.py",
+      "url": "https://raw.githubusercontent.com/mani-skill/ManiSkill/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/mani_skill/envs/tasks/dexterity/rotate_single_object_in_hand.py",
+      "sha256": "5873d5285d97b9cdc99f88333e8cc00419fac5e9eef9c5c4732cae33aee8cc44"
+    },
+    {
+      "path": "mani_skill/agents/robots/allegro_hand/allegro.py",
+      "url": "https://raw.githubusercontent.com/mani-skill/ManiSkill/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/mani_skill/agents/robots/allegro_hand/allegro.py",
+      "sha256": "9799cf1616d25837d144a361937bd60b5ec74d714a7598df5dc7ad052c87065b"
+    },
+    {
+      "path": "mani_skill/agents/robots/allegro_hand/allegro_touch.py",
+      "url": "https://raw.githubusercontent.com/mani-skill/ManiSkill/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/mani_skill/agents/robots/allegro_hand/allegro_touch.py",
+      "sha256": "b684e1398bde6d854cf98b4f284c40584e9deafa5b697c6bf741e417f686b83c"
+    }
+  ],
+  "findings": {
+    "pickcube": "Success combines goal proximity and robot static, not sustained support/release. Extra observations include is_grasped and goal_pos even without state-specific object-pose fields.",
+    "pushcube": "Success combines planar proximity and an upper z bound; does not independently enforce penetration or sustained support.",
+    "rotation": "Level0/1/2/3 registered; AllegroHandRightTouch. Unsigned clipped angular increments accumulate; requires signed palm-relative independent scorer. qf is a clipped PD estimate, not measured actuator torque.",
+    "allegro": "Joint PD position and delta modes; base stiffness400, damping10, force_limit50; controller targets differ from observed joints. Touch subclass adds FSR impulse magnitudes, not calibrated tactile images."
+  },
+  "reuse": "Reuse native task/recording; independently score physics and input privileges. Keep upstream success separate.",
+  "minimal_experiments": [
+    "PushCube normal episode plus below-table negative",
+    "PickCube goal coincidence without sustained grasp negative",
+    "Rotation oscillation, palm-only motion, drop, reset isolation negatives"
+  ],
+  "remaining": [
+    "native execution and held-out tests",
+    "installed engine identities",
+    "all asset licenses and dependency versions"
+  ]
+}

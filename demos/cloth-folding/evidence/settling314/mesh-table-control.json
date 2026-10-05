@@ -1,0 +1,47 @@
+{
+  "classification": "exploratory_same_shape_table_representation",
+  "max_compiled_corner_distance_m": 1.7945270709089774e-09,
+  "geometry_check_tolerance_m": 1e-08,
+  "static": [
+    {
+      "frame": 43,
+      "element": 28,
+      "representation": "box",
+      "contacts": 0,
+      "max_native_depth_m": 0.0
+    },
+    {
+      "frame": 43,
+      "element": 28,
+      "representation": "same_shape_mesh",
+      "contacts": 1,
+      "max_native_depth_m": 0.001225942981150939
+    },
+    {
+      "frame": 4000,
+      "element": 42,
+      "representation": "box",
+      "contacts": 2,
+      "max_native_depth_m": 6.702206493648059e-07
+    },
+    {
+      "frame": 4000,
+      "element": 42,
+      "representation": "same_shape_mesh",
+      "contacts": 1,
+      "max_native_depth_m": 0.004690369599608413
+    }
+  ],
+  "engine": {
+    "version": "3.14.0",
+    "native_library_sha256": "5e7623e30f55bf324d4c9648379ebeba5bcd153ee0304c52eac74bf8d441000b",
+    "wheel_record_matches": true,
+    "compatibility_profile": "qualification-3.14.0",
+    "profile_status": "candidate",
+    "formal_batch_qualified": false
+  },
+  "script_sha256": "e42a2a0f1a08ebdd2dac2ecdda90b4ea0bd348a1ad44fc940a5cc5e4a5d1abba",
+  "baseline_model_sha256": "0f31c49d8b0b9531ed4f1e4238fa65782207e8ffd108511720f0d19ccb6e74af",
+  "scope": "Only table primitive representation changes. Same convex cuboid surfaces within recorded numerical error; no substituted enclosing shape. Cloth/control/contact coefficients unchanged. Not fullgrasp validation.",
+  "wall_s": 21.483610075003526
+}

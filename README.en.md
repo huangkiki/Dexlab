@@ -12,12 +12,22 @@
 
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
+## Local execution and autonomous delivery
+
+Experiments now prefer a qualified local host, with measured headroom, enforced cgroup limits and zero experiment swap. Priority review precedes each task; interrupted jobs resume from verified handles. Remote execution is optional. [Execution and recovery protocol](docs/autoresearch.md#local-first-execution-and-recovery).
+
+## Dexterous task roadmap
+
+The [research evidence ledger](docs/dexterity-ledger.md) covers38 paper identities and19 repository entrypoints, distinguishing targeted source audits, abstract screening and unverified runtimes. Conclusions: independently score native task success; distinguish targets, estimated effort and tactile proxies from measured data; exclude custom-engine and historical profiles from latest-stable comparisons. Optional replay #52 and tactile-history #53 have dependencies and budgets.
+
+Current implementations focus on holding and contact diagnostics. The [six-layer research map](docs/dexterity-roadmap.md) connects ManiSkill, grasp evaluation, tactile sensing, data generation and embodiment research to concrete experiments. [Native ManiSkill tasks #47](https://github.com/huangkiki/Dexlab/issues/47) and [in-hand rotation #48](https://github.com/huangkiki/Dexlab/issues/48) are planned, **not implemented or supported yet**.
+
 ## Current findings
 
 | Research question | Evidence | Conclusion and boundary |
 |---|---|---|
 | Can dynamics lift an apple by its stem? | Default cases pass; historical ten-scene regression: MuJoCo **1/10**, SuperDex **10/10** | Fixed-configuration robustness, **not a physical-accuracy ranking** |
-| Is the cloth grasp physically valid? | Cloth/table intersection in **176/225** saved frames; maximum interior depth **3.00 mm** | Missed detection corrected; physical repair remains incomplete |
+| Is the cloth grasp physically valid? | New 9 s development case passes pinch, lift, release and sampled geometry checks; strain 3.52% | Self penetration 1.492 mm is near its limit; one case only, historical failures retained |
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
@@ -57,16 +67,19 @@ Each row uses a different task/protocol. Keep failures, unsupported outcomes and
 
 </details>
 
+**Cloth repair candidate (MuJoCo 3.14):** the complete 9 s pinch, lift and release passes the current protocol: maximum strain **3.52%**, lift **123.92 mm**, and zero final hand/cloth force. No table/robot/floor midsurface intrusion is detected in 225 saved frames. Self penetration **1.492 mm** is close to the 1.5 mm limit, so robustness is not established. Official engines remain unchanged; material and control parameters are uncalibrated. [Metrics, plots, continuous video and failed controls](demos/cloth-folding/SETTLING.md).
+
+
 ## Continuous close-up demonstrations
 
 <table>
 <tr><th>MuJoCo · default development case</th><th>SuperDex FP64 · default development case</th></tr>
 <tr><td><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" alt="Continuous MuJoCo stem grasp" width="100%"></td><td><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" alt="Continuous SuperDex stem grasp" width="100%"></td></tr>
-<tr><th>PhysX · separate development case</th><th>Robot cloth · geometry failure</th></tr>
-<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="Continuous PhysX stem grasp" width="100%"></td><td><img src="demos/cloth-folding/media/grasp.gif" alt="Cloth replay retaining table-intersection failure" width="100%"></td></tr>
+<tr><th>PhysX · separate development case</th><th>Robot cloth · single-case protocol pass</th></tr>
+<tr><td><img src="demos/physx-contact/media/physx-sdf.gif" alt="Continuous PhysX stem grasp" width="100%"></td><td><img src="demos/cloth-folding/media/compliance-grasp.gif" alt="Continuous single-case cloth grasp and release" width="100%"></td></tr>
 </table>
 
-Apple GIFs continuously show fourteen seconds of approach, closing, lifting and holding. The display camera serves playback only. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX report](demos/physx-contact/apple.md) · [Cloth report](demos/cloth-folding/README.md)
+Apple GIFs continuously show fourteen seconds of approach, closing, lifting and holding. The display camera serves playback only. [MuJoCo video](demos/apple-stem-grasp/media/mujoco-sdf.mp4) · [SuperDex video](demos/apple-stem-grasp/media/superdex-sdf.mp4) · [PhysX report](demos/physx-contact/apple.md) · [Cloth report](demos/cloth-folding/SETTLING.md)
 
 ## Method and engine differences
 
@@ -87,12 +100,20 @@ The hold window is 11–14 s, checking lift, two-pad support, penetration, wrist
 | Experiment | Code | Detailed report |
 |---|---|---|
 | Apple stem grasp | [apple-stem-grasp](demos/apple-stem-grasp/) | [Run and score](demos/apple-stem-grasp/README.md) |
-| Robot cloth grasp | [cloth-folding](demos/cloth-folding/) | [Failure review](demos/cloth-folding/SCORING.md) |
+| Robot cloth grasp | [cloth-folding](demos/cloth-folding/) | [Repair and failed controls](demos/cloth-folding/SETTLING.md) |
 | Contact, drives and transients | [contact-benchmark](demos/contact-benchmark/) | [Results](demos/contact-benchmark/README.md) |
 | Multi-solver cloth | [cloth-benchmark](demos/cloth-benchmark/) | [Materials and held-out cases](demos/cloth-benchmark/README.md) |
 | PhysX contact and cloth | [physx-contact](demos/physx-contact/) | [Capabilities and limits](demos/physx-contact/README.md) |
 
 **[Documentation source](docs/site/en/index.md) · [中文文档](docs/site/zh/index.md)**. The site maintains getting started, experiments, results, engine methods, benchmarks and contribution guidance. Both languages use a strict Sphinx build; deployment configuration is included. An online address will be announced after deployment verification.
+
+## Latest-stable qualification
+
+Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.
+
+The six-device contact contrast completed: four of six configurations passed and two failed. Smaller timesteps alone did not reduce intrusion under default soft contact; see the per-configuration report above. This is not apple grasp qualification.
+
+The current cloth candidate passes **397 unit tests**; its MuJoCo 3.14 single-case result is above. Published [v0.18.2](https://github.com/huangkiki/Dexlab/releases/tag/v0.18.2) completed both 14 s apple-grasp gates and official-package provenance admission. Current-source paired regression, provenance admission and commit identity are recorded in each delivery PR and Release. Historical sphere-drape failures remain separate.
 
 ## Quick reproduction
 
