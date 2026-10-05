@@ -70,12 +70,27 @@
     "src/dexlab/tasks/contact_pinch.py": "fa5ad3b8a830c84ca8c1d4bc72183778c4e54e4d75f7db2d4489a15257d1daa1",
     "src/dexlab/tasks/contact_plane.py": "d464a30b1ff9a2cd2210f3f727eba0fd05be83efdb9e143a6bd7440c5d1f744a"
   },
-  "manifest_sha256": "e30b14dfbac93999c214c9ffa49e9b08af301d86d871532aefd17b7f0ff51f0f",
+  "manifest_sha256": "bc6483ec1626b5518a8936768ad5974ac958d4589862f311119987cb1fd031f9",
   "archive": {
     "archive": "dexlab-historical-evidence-v1.tar.gz",
-    "bytes": 655361853,
-    "sha256": "8871b11be5d84901dac048447c7570f665bc60f60217468de3def51903b43466",
+    "bytes": 655361836,
+    "sha256": "09c4da563ffefa3635b0830d7b9334ab6f97e9f83e4f0fba731d56e9a349ad82",
     "extracted_offline_reproduction": true
   },
-  "scope": "Two missing historical cohorts only; offline reproduction under frozen versions, not current engine qualification"
+  "scope": "Two missing historical cohorts only; offline reproduction under frozen scorer versions, not current engine qualification",
+  "independent_environment": {
+    "installed_project_packages": {
+      "dexlab": false,
+      "unilab": false
+    },
+    "direct_requirements": {
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "mujoco": "3.11.0",
+      "trimesh": "5.1.0"
+    },
+    "execution_outside_checkout": true,
+    "initial_failure": "Initial three-package environment lacked trimesh; dependency added and fresh minimal replay plus extracted archive replay passed.",
+    "additional_pin_provenance": "trimesh version verified for public replay, not recorded in original historical environment metadata"
+  }
 }

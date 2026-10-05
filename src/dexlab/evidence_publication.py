@@ -145,7 +145,8 @@ def export_bundle(repository, locations, destination):
         raise ValueError("Bundle cannot be written inside raw inputs")
     destination.mkdir(parents=True)
     manifest = {"schema": "public-historical-bundle-v1", "files": {}, "lineage": {},
-                "environment": history["environment"],
+                "environment": {**history["environment"], "trimesh": "5.1.0"},
+                "additional_dependency_provenance": "trimesh 5.1.0 verified during public replay; not recorded in the historical environment field",
                 "historical_report_sha256": digest(repository / "docs/evidence/historical-v1.json"),
                 "scope": "106 historical records; deployment metadata redacted; trajectories unchanged"}
 
@@ -229,7 +230,7 @@ def export_bundle(repository, locations, destination):
                  "docs/asset-licenses/wuji-hand-NOTICE"):
         write(name, (repository / name).read_bytes())
     write("reproduce.py", (repository / "scripts/reproduce_historical_bundle.py").read_bytes())
-    write("requirements.txt", ("\n".join(f"{name}=={version}" for name, version in history["environment"].items()) + "\n").encode())
+    write("requirements.txt", ("\n".join(f"{name}=={version}" for name, version in manifest["environment"].items()) + "\n").encode())
     for language, filename in (("", "README.md"), (".zh-CN", "README.zh-CN.md")):
         write(filename, bundle_readme((repository / f"docs/evidence/PUBLIC-ARCHIVE{language}.md").read_bytes()))
     write_json("manifest.json", manifest)

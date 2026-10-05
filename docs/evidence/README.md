@@ -90,14 +90,13 @@ The two completed public cohorts use explicit metadata projections and the froze
 | Transient response development | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.14.0/v0.14.0-transient-response-evidence.tar.gz) |
 | Robot cloth diagnostic | [Release archive](https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz) |
 
-Use the existing DexLab environment and install matplotlib for plotting. A private location JSON maps cohort IDs to extracted roots; scattered records may use {recordID: localDirectory}. Do not commit it. Each root must directly contain record IDs; select the appropriate archive subdirectory. All raw data is required for a complete report; commands neither download data nor simulate.
+For the two public projected cohorts, use the bundled standalone reproducer above. Its copied receipts bind public hashes; the original tracked receipts deliberately retain private-original hashes and cannot validate a mixture of projected and original files. The other five archives retain their original receipt/scorer provenance. The following command regenerates plots from the immutable 208-record report; it does not rescore raw data.
 
 ```bash
-.venv/bin/python -m dexlab.evidence_report \
-  --locations "$PRIVATE_LOCATIONS" --output /tmp/historical-new.json
-.venv/bin/python scripts/render_evidence_report.py \
-  /tmp/historical-new.json --output /tmp/evidence-report
+.venv/bin/python scripts/render_evidence_report.py docs/evidence/historical-v1.json --output /tmp/evidence-report
 ```
+
+The developer-facing `dexlab.evidence_report` tool requires unredacted original inputs and a compatible recorded-model runtime. Current scorers may require evidence absent from old recordings; use the pinned bundled sources to reproduce published historical values. Missing evidence remains missing. Plotting additionally requires matplotlib.
 
 Rescoring loads saved MuJoCo models for geometry/FK analysis but never integrates dynamics. Scorer identity is bound to source-file hashes, not just a package version. Generating plots does not establish release-gate completion.
 

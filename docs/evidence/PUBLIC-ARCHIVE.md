@@ -9,9 +9,9 @@ Download the [versioned evidence archive](https://github.com/huangkiki/Dexlab/re
 This bundle supplies the two previously missing raw cohorts: 105 material/cloth records and one robot-cloth record. It preserves every selected failure. The frozen historical scorer produces 52 passes and 53 failures for the cloth cohort, and `geometry_review_required` for robot-cloth. This is offline historical reproduction, not a new dynamics run or latest-stable qualification.
 
 <!-- repository-only:start -->
-All 106 record objects match after archive extraction; [verification report](public-archive-verification.json). Archive size: 655,361,853 bytes.
+All 106 record objects match after archive extraction; [verification report](public-archive-verification.json). Archive size: 655,361,836 bytes.
 
-SHA-256: `8871b11be5d84901dac048447c7570f665bc60f60217468de3def51903b43466`
+SHA-256: `09c4da563ffefa3635b0830d7b9334ab6f97e9f83e4f0fba731d56e9a349ad82`
 
 <!-- repository-only:end -->
 ## Run without the repository or robot asset download
@@ -34,6 +34,8 @@ Raw trajectories, contact records, scientific parameters and source snapshots re
 The robot binary model contains absolute asset paths. Its public projection replaces only strings in the native path table, preserving byte length and offsets. Every byte outside that table is identical; the official historical loader verifies that native numerical arrays are identical. This changes a model artifact, not MuJoCo source or binaries, geometry, contact parameters or recorded states.
 
 `manifest.json` lists public hashes, original hashes and transformations. Original hashes record provenance; they cannot independently prove redacted content to a reader without the private original. The published archive hash anchors the distributed bundle. Third-party robot geometry retains the included OpenArm Apache-2.0 and Wuji MIT licenses and notices. No apple assets are included.
+
+Geometry scoring also requires `trimesh==5.1.0`. This version is verified for public replay; the original historical environment field did not record a trimesh version, so this additional pin is not an original runtime record.
 
 ## Limits
 

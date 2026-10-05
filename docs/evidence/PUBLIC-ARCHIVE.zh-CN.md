@@ -9,9 +9,9 @@
 本包补齐此前缺失的两组原始记录：105 条材料／布料记录和 1 条机器人夹布记录，保留全部所选失败。冻结的历史评分器得到布料 52 条通过、53 条失败，机器人夹布为 `geometry_review_required`。这是历史离线复算，不是新动力学实验或最新稳定版准入。
 
 <!-- repository-only:start -->
-解压回读后 106 条记录全部字段一致；[验证报告](public-archive-verification.json)。归档大小：655,361,853 字节。
+解压回读后 106 条记录全部字段一致；[验证报告](public-archive-verification.json)。归档大小：655,361,836 字节。
 
-SHA-256: `8871b11be5d84901dac048447c7570f665bc60f60217468de3def51903b43466`
+SHA-256: `09c4da563ffefa3635b0830d7b9334ab6f97e9f83e4f0fba731d56e9a349ad82`
 
 <!-- repository-only:end -->
 ## 无需仓库和额外机器人资产即可运行
@@ -34,6 +34,8 @@ uv pip install --python .offline/bin/python -r dexlab-historical-evidence-v1/req
 机器人二进制模型含资产绝对路径。公开副本仅替换原生路径表字符串，长度与偏移不变；路径表之外全部字节一致，官方历史加载器读回的数值数组逐字节一致。这修改的是模型记录，不是 MuJoCo 源码或二进制，也不改变几何、接触参数及已录制状态。
 
 `manifest.json` 列明公开哈希、原始哈希与变换。原始哈希提供来源记录，但没有私有原件的读者不能独立证明被删除的内容。公开归档哈希绑定实际分发包。机器人几何沿用包内 OpenArm Apache-2.0、Wuji MIT 许可及声明，不包含苹果资产。
+
+几何评分还依赖 `trimesh==5.1.0`。该版本在公开复算中验证；原历史环境字段未记录 trimesh 版本，不能将这项新增固定依赖称为原始运行时记录。
 
 ## 限制
 

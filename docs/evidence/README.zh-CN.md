@@ -90,14 +90,13 @@
 | 瞬态响应开发 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.14.0/v0.14.0-transient-response-evidence.tar.gz) |
 | 机器人夹布诊断 | [发布包](https://github.com/huangkiki/Dexlab/releases/download/v0.19.1/dexlab-historical-evidence-v1.tar.gz) |
 
-在现有 DexLab 环境中复算，另外安装绘图依赖 `matplotlib`。私人位置文件用批次 ID 映射到解压目录；分散记录可用 `{场景ID: 本地目录}`。不提交该文件。每个根目录下应直接包含场景 ID；发布包的外层目录需要手动选择。所有原始数据可用后才能生成完整报告，命令不会联网下载或执行仿真。
+两组公开脱敏批次请使用上方包内独立复算脚本。包内复制的批次记录绑定公开哈希；仓库原记录刻意保留私有原件哈希，不能用于混合校验脱敏副本和原件。其余五组发布包仍沿用各自的原始记录与评分来源。以下命令只从不可变的 208 条记录报告重新生成图表，不重新评分原始数据。
 
 ```bash
-.venv/bin/python -m dexlab.evidence_report \
-  --locations "$PRIVATE_LOCATIONS" --output /tmp/historical-new.json
-.venv/bin/python scripts/render_evidence_report.py \
-  /tmp/historical-new.json --output /tmp/evidence-report
+.venv/bin/python scripts/render_evidence_report.py docs/evidence/historical-v1.json --output /tmp/evidence-report
 ```
+
+开发者工具 `dexlab.evidence_report` 面向未脱敏原始输入及兼容的历史模型运行时。当前评分器可能要求旧录制不存在的证据；复现已发表历史值应使用包内固定源码，不能补造缺失证据。绘图另需安装 `matplotlib`。
 
 复算会载入保存的 MuJoCo 模型作几何/FK 分析；不会调用动力学积分。评分版本由源文件哈希集合精确绑定，而不只依赖包版本号。图表生成成功不代表新代码已通过发布门禁。
 
