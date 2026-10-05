@@ -40,3 +40,7 @@
 ![夹布：几何失败](../../../demos/cloth-folding/media/grasp.gif)
 :::
 ::::
+
+## 真机采集准备
+
+双 UR7e 与两个相同 CTAG2F90D 的[采集协议、空模板和日志校验器](https://github.com/huangkiki/Dexlab/blob/main/docs/hardware/README.zh-CN.md)已提供。命令、实测反馈和独立参考分开记录；未知数据保持未知。此功能只读文件，不控制机器人；格式通过不代表真机标定。

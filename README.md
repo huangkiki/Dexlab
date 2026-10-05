@@ -131,6 +131,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 
 无需模型 API key。SDF 构建与规划完成后打开窗口；运行命令使用 UniLab 注册任务，原生场景由 DexLab 管理。[完整安装](docs/installation.zh-CN.md) · [仅构建文档](docs/site/zh/quickstart.md#仅构建文档)
 
+[UR7e＋夹爪采集准备](docs/hardware/README.zh-CN.md)：采集协议、信号来源、时钟与不确定性，以及只读日志校验器。空模板与合成数据不算实测；尚无已验收真机数据。
+
 ## 参与与致谢
 
 请用 [Issue](https://github.com/huangkiki/Dexlab/issues) 提交可复现问题、参数实验或失败案例。实验 PR 同步结论、指标图表与中英报告；无读者影响的内部修改说明理由。[开发与发布流程](docs/autoresearch.zh-CN.md)
