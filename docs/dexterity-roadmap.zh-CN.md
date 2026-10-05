@@ -1,10 +1,13 @@
 # 灵巧操作：从研究到可运行任务
 
+[新版证据账本](dexterity-ledger.zh-CN.md)更新了下文的入口快照：38篇论文身份、19个仓库入口，并区分审查深度、借鉴/暂缓决策和未知项。可选执行任务为[#52](https://github.com/huangkiki/Dexlab/issues/52)、[#53](https://github.com/huangkiki/Dexlab/issues/53)。
+
+
 [English](dexterity-roadmap.md)
 
 **当前缺口是任务与机制覆盖，而不只是增加引擎。** 苹果抓梗主要验证保持接触；它不能替代手内旋转、换指、双手交接、工具接触或柔性物体操作。
 
-本页把既有六层研究框架落实为任务路线。2026-10-05 重新获取 10 个官方仓库的 README 与提交身份，属于源码入口审查，未运行这些上游任务。原有 38 篇候选、19 个仓库为历史调研范围，不能称为本轮全部重新核验；余项仍由 #46 跟踪。固定提交和 README 哈希见[来源清单](evidence/dexterity-sources.json)。许可字段是仓库元数据线索，不代表资产再分发授权。
+本页把六层框架落实为任务。新版证据账本覆盖38篇论文身份及19个仓库入口，明确区分定向源码审查和仅摘要筛选。暂缓实现项保留求解器、输入及资产条款未知项，不声称新增运行复现。
 
 ## 六层实验契约
 
@@ -27,10 +30,10 @@
 | [BODex](https://github.com/JYChen18/BODex/blob/06b9a3c90870d33bde9d6c665d4ed2819471407e/README.md) | 抓取可行性与加载协议 | 对同一抓取施加冻结的多方向载荷，记录首次滑落 | 非商业及 cuRobo 条款分开；不直接复制百万生成管线 | #10 |
 | [DexGraspBench](https://github.com/JYChen18/DexGraspBench/blob/d9ea6cf282de1f463c20fa54b4f68d7025bad40e/README.md) | 抓取评价与控制参数敏感性 | 冻结物体与抓取，对比质量/增益变化后的保留率 | 历史 baseline 与 main 不混用；不是手内技能评测 | #3 / #10 |
 | [DexMachina](https://github.com/MandiZhao/dexmachina/blob/adae5bf620c57723d185b2757ee3ce9656927c20/README.md) | 本体与功能重定向实验设计 | 固定物体目标，分开改变腕部约束与驱动力限幅 | 定制依赖需审查；不能把悬浮腕结果解释为机械臂性能 | #48 |
-| [Taccel](https://github.com/Taccel-Simulator/Taccel/blob/cb23bc251b531ba6908a3788c2f91423cd543149/README.md) | 刚柔接触与触觉成本分解 | 按压/切向移动/卸载：对照净力、形变和各阶段耗时 | 凝胶模型与刚体 solver 分开验；不直接接入主排行榜 | 候选 / candidate |
+| [Taccel](https://github.com/Taccel-Simulator/Taccel/blob/cb23bc251b531ba6908a3788c2f91423cd543149/README.md) | 刚柔接触与触觉成本分解 | 按压/切向移动/卸载：对照净力、形变和各阶段耗时 | 凝胶模型与刚体 solver 分开验；不直接接入主排行榜 | #53 |
 | [TacEx](https://github.com/DH-Ng/TacEx/blob/adceed41afb7cb48f9ec1f66a662fb8e5a06627f/README.md) | 触觉模块接口与观测层级 | 相同轨迹对比净力、几何深度、触觉图像的观测差异 | README 固定旧 Isaac 版本且为预览；仅参考，不越过稳定版规则 | 暂缓 / deferred |
-| [HydroShear](https://github.com/MMintLab/hydroshear/blob/f815b82fdf3451852acd918933020a82cede1f3b/README.md) | 有历史的触觉与重置协议 | 相同终态比较直接到达、滑动返回、脱离重接触 | 先验观测模型；不当作替换底层动力学的证据 | 候选 / candidate |
-| [DexMimicGen](https://github.com/NVlabs/dexmimicgen/blob/940e8a1b3ad70eb1925ada6b364b197de6bb2af9/README.md) | 示范扩增与失败过滤审计 | 小批示范分别计生成、执行、物理有效率和接触类型 | 源码、数据许可分开；数量增加不证明新接触策略 | 候选 / candidate |
+| [HydroShear](https://github.com/MMintLab/hydroshear/blob/f815b82fdf3451852acd918933020a82cede1f3b/README.md) | 有历史的触觉与重置协议 | 相同终态比较直接到达、滑动返回、脱离重接触 | 先验观测模型；不当作替换底层动力学的证据 | #53 |
+| [DexMimicGen](https://github.com/NVlabs/dexmimicgen/blob/940e8a1b3ad70eb1925ada6b364b197de6bb2af9/README.md) | 示范扩增与失败过滤审计 | 小批示范分别计生成、执行、物理有效率和接触类型 | 源码、数据许可分开；数量增加不证明新接触策略 | #52 |
 | [DexGarmentLab](https://github.com/wayrise/DexGarmentLab/blob/e4e298e696bae5d866ded3b31e0ae27becea5376/README.md) | 衣物任务分解与柔性接触失败 | 先验单层抓持释放与自碰撞，再考虑双手折叠 | 旧 Isaac 依赖不自动移植；视觉折叠不代表无穿透 | #28 / #32 |
 | [DexScrew](https://github.com/x-robotics-lab/dexscrew/blob/3bde4e3a4d973743921c75719ca88167de144e83/README.md) | 技能与真实闭环的边界 | 声明预插入初态，记录旋转进度、载荷与退出原因 | 旧 IsaacGym 路径为历史参考；进度比不当成功率 | #6 / future tool task |
 
@@ -59,12 +62,12 @@ ManiSkill 1 的物体泛化、ManiSkill2 的任务多样性和 ManiSkill3 的并
 
 实验优先使用通过资源准入的本机，远端作为可选执行位置。实测并强制限制内存、CPU、进程数和运行时限，禁用实验 swap，保留桌面余量，大输出使用已配置数据盘；先单卡验证隔离再扩到可用 GPU。准备、步进、渲染和总耗时分别记账，测速期间停止传输。真机数据不应阻塞仿真接入，但没有实测就不能宣称真实精度。
 
-## 未完成的研究审查
+## 候选决策与执行准入
 
-Dexonomy、Dex1B、SPIDER、CHORD、Dex4D、Tacmap、PTLD、Dex-X、Labimus/LabDex、TeleOpBench、腱绳 MPC 与本体驱动研究仍是历史候选。其论文版本、源码、许可、观测权限及可执行入口须逐项复核，缺代码或不兼容时保留排除原因。不得把这个名单当作本轮完成复现。
+账本已逐项记录借鉴或暂缓决定及可证伪探针，运行时源码和资产检查仍是接入前提。仅摘要筛选可以支持暂缓决定，不能证明实现等价或运行复现。
 
-后续触觉、数据和工具任务须先给定固定输入、成功/失败、预算与退出条件，再创建独立实现项。当前顺序是 [#46](https://github.com/huangkiki/Dexlab/issues/46) → [#47](https://github.com/huangkiki/Dexlab/issues/47) → [#48](https://github.com/huangkiki/Dexlab/issues/48)；既有布料与接触修复继续保留。
+动作回放 #52 与触觉历史 #53 已明确依赖、每批最多10例/30分钟、最多3批，不训练或下载大资产。当前顺序是 [#46](https://github.com/huangkiki/Dexlab/issues/46) → [#47](https://github.com/huangkiki/Dexlab/issues/47) → [#48](https://github.com/huangkiki/Dexlab/issues/48)；既有布料与接触修复继续保留。
 
-## 本切片验证与复现边界
+## 已发布 v0.17.1 的历史验证边界
 
 严格中英文网站构建通过。基础 `setup.sh` 环境运行 309 项测试时，PhysX 接触明细测试因缺少可选 UniSim 适配补丁报错；失败日志保留。安装与仓库 `scripts/patches/unisim-1.7.10-physx-adapter.patch` 完全一致的已披露适配源码后，309 项测试通过。该补丁修改适配层，不修改官方物理引擎；不能将带补丁环境的结果声称为基础安装全套通过。本页不包含 ManiSkill 运行结果。

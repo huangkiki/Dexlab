@@ -106,6 +106,7 @@ Experiments <experiments>
 Results <results>
 Engines <engines>
 Dexterous roadmap <dexterity>
+Research ledger <research-ledger>
 Benchmark <benchmark>
 Contribute <contributing>
 ```

@@ -106,6 +106,7 @@ html_theme.sidebar_secondary.remove: true
 研究结果 <results>
 引擎与模型 <engines>
 灵巧操作路线 <dexterity>
+研究证据账本 <research-ledger>
 Benchmark <benchmark>
 参与开发 <contributing>
 ```

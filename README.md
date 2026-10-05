@@ -18,6 +18,8 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 ## 灵巧操作任务路线
 
+[新版研究证据账本](docs/dexterity-ledger.zh-CN.md)覆盖38篇论文身份与19个仓库入口，区分定向源码审查、摘要筛选及未验证运行时。关键结论：上游成功指标须独立复核；目标关节值、估算力矩和触觉代理不能当实测量；自定义引擎与历史配置不进入最新稳定版比较。可选动作回放 #52、触觉历史 #53 已设依赖和预算。
+
 当前实现集中于抓持与接触诊断。新增 [六层研究地图](docs/dexterity-roadmap.zh-CN.md) 将 ManiSkill、抓取评测、触觉、数据生成与本体研究映射到具体实验；[ManiSkill 原生任务 #47](https://github.com/huangkiki/Dexlab/issues/47) 与 [手内旋转 #48](https://github.com/huangkiki/Dexlab/issues/48) 已排入计划，**尚未实现，不算已支持**。
 
 ## 当前结论

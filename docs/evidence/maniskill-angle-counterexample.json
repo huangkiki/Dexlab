@@ -1,0 +1,10 @@
+{
+  "scope": "Algebraic counterexample to the inspected angle formula, not a native simulator run or trained-policy result",
+  "source": "https://github.com/mani-skill/ManiSkill/blob/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/mani_skill/envs/tasks/dexterity/rotate_single_object_in_hand.py",
+  "input": "128 alternating increments between0 and0.1rad about the requested axis; fixed palm; projected vectors well-defined",
+  "unsigned_cumulative_rad": 12.79999999999995,
+  "success_threshold_rad": 12.566370614359172,
+  "net_angle_rad": 0.0,
+  "threshold_crossed": true,
+  "task_support": "not implemented"
+}
