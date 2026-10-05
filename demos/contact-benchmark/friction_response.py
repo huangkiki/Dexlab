@@ -14,9 +14,9 @@ from dexlab.official_wheels import verify_official_wheel
 from dexlab.physx_baseline import digest, write_json
 
 
-def run(output, wheel_dir):
+def run(output, wheel_dir, suite_path=None):
     root = Path(__file__).resolve().parents[2]
-    suite_path = root / "benchmarks/contact-friction-v1.json"
+    suite_path = root / "benchmarks/contact-friction-v1.json" if suite_path is None else suite_path.resolve()
     suite = json.loads(suite_path.read_text())
     output.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
@@ -85,5 +85,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("--wheel-dir", required=True, type=Path)
+    parser.add_argument("--suite", type=Path, help="Explicit frozen development matrix")
     args = parser.parse_args()
-    run(args.output.resolve(), args.wheel_dir.resolve())
+    run(args.output.resolve(), args.wheel_dir.resolve(), args.suite)

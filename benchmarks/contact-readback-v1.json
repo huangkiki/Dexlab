@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "scope": "Contact parameter readback development validation; not held-out material calibration",
+  "engines": [
+    "mujoco",
+    "superdex"
+  ],
+  "max_runs": 8,
+  "wall_budget_s": 600,
+  "defaults": {
+    "mass": 0.2,
+    "half_size": 0.02,
+    "friction": 0.3,
+    "initial_speed": 0.25,
+    "gravity": 9.81,
+    "timestep": 0.0005,
+    "settle": 0.2,
+    "duration": 0.5
+  },
+  "cases": [
+    {
+      "name": "dev-readback-forward"
+    },
+    {
+      "name": "dev-readback-frictionless",
+      "friction": 0
+    },
+    {
+      "name": "dev-readback-rest",
+      "initial_speed": 0
+    },
+    {
+      "name": "dev-readback-half-step",
+      "timestep": 0.00025
+    }
+  ],
+  "parameters": "Existing nominal native profiles unchanged. Engineering fixture, no hardware material fit. Initial velocity assigned once after native settling; compare observed initial states, not seed equality.",
+  "diagnostics": "Actual MuJoCo contact parameters and analytic compiled geometry; SuperDex actor parameters only, combined pair law unavailable. Independent old physical limits unchanged.",
+  "excluded": "PhysX historical runtime is not admitted to this latest-stable development batch; this does not establish cross-engine material equivalence."
+}

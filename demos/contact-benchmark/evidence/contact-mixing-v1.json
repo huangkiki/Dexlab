@@ -1,0 +1,725 @@
+{
+  "scope": "Six static native contact-construction controls; no integration or grasp",
+  "cases": [
+    {
+      "name": "equal-priority-weighted",
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.6,
+          0.6,
+          0.01,
+          0.004,
+          0.004
+        ],
+        "solref": [
+          0.01,
+          0.625
+        ],
+        "solimp": [
+          0.875,
+          0.9675,
+          0.005,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "name": "plane-priority",
+      "plane_extra": "priority=\"1\"",
+      "expected": {
+        "dimension": 3,
+        "friction": [
+          0.2,
+          0.2,
+          0.01,
+          0.002,
+          0.002
+        ],
+        "solref": [
+          0.004,
+          1
+        ],
+        "solimp": [
+          0.8,
+          0.9,
+          0.002,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "name": "direct-solref-minimum",
+      "direct": true,
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.6,
+          0.6,
+          0.01,
+          0.004,
+          0.004
+        ],
+        "solref": [
+          -2000,
+          -20
+        ],
+        "solimp": [
+          0.875,
+          0.9675,
+          0.005,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "name": "explicit-anisotropic-pair",
+      "pair": true,
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.15,
+          0.25,
+          0.001,
+          0.002,
+          0.003
+        ],
+        "solref": [
+          0.003,
+          1
+        ],
+        "solimp": [
+          0.9,
+          0.95,
+          0.003,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "name": "global-override",
+      "override": true,
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.7,
+          0.7,
+          0.05,
+          0.006,
+          0.006
+        ],
+        "solref": [
+          0.006,
+          1
+        ],
+        "solimp": [
+          0.85,
+          0.97,
+          0.004,
+          0.5,
+          2
+        ]
+      }
+    },
+    {
+      "name": "separated-negative",
+      "height": 1.0,
+      "expected": null
+    }
+  ],
+  "source_sha256": "c7ace571f5b363f3772fd0223d7b311b91a096e35b703ec5322a296a0a8111df",
+  "status": "completed",
+  "rows": [
+    {
+      "name": "equal-priority-weighted",
+      "xml_sha256": "dc396da1a70dd9cf56ebf805850601c65842f92679846e100091877411d67a50",
+      "observed": [
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            0.010000000000000002,
+            0.625
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            0.010000000000000002,
+            0.625
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            0.010000000000000002,
+            0.625
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            0.010000000000000002,
+            0.625
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.6,
+          0.6,
+          0.01,
+          0.004,
+          0.004
+        ],
+        "solref": [
+          0.01,
+          0.625
+        ],
+        "solimp": [
+          0.875,
+          0.9675,
+          0.005,
+          0.5,
+          2
+        ]
+      },
+      "matched": true,
+      "construction_forward_s": 0.001316011999733746,
+      "simulation_time": 0.0
+    },
+    {
+      "name": "plane-priority",
+      "xml_sha256": "e472558fd3a72ffdcc3ab68201ac853eda5dbac63eac979a2a6d2b5e6a48b5e8",
+      "observed": [
+        {
+          "dimension": 3,
+          "friction": [
+            0.2,
+            0.2,
+            0.01,
+            0.002,
+            0.002
+          ],
+          "solref": [
+            0.004,
+            1.0
+          ],
+          "solimp": [
+            0.8,
+            0.9,
+            0.002,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 3,
+          "friction": [
+            0.2,
+            0.2,
+            0.01,
+            0.002,
+            0.002
+          ],
+          "solref": [
+            0.004,
+            1.0
+          ],
+          "solimp": [
+            0.8,
+            0.9,
+            0.002,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 3,
+          "friction": [
+            0.2,
+            0.2,
+            0.01,
+            0.002,
+            0.002
+          ],
+          "solref": [
+            0.004,
+            1.0
+          ],
+          "solimp": [
+            0.8,
+            0.9,
+            0.002,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 3,
+          "friction": [
+            0.2,
+            0.2,
+            0.01,
+            0.002,
+            0.002
+          ],
+          "solref": [
+            0.004,
+            1.0
+          ],
+          "solimp": [
+            0.8,
+            0.9,
+            0.002,
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "expected": {
+        "dimension": 3,
+        "friction": [
+          0.2,
+          0.2,
+          0.01,
+          0.002,
+          0.002
+        ],
+        "solref": [
+          0.004,
+          1
+        ],
+        "solimp": [
+          0.8,
+          0.9,
+          0.002,
+          0.5,
+          2
+        ]
+      },
+      "matched": true,
+      "construction_forward_s": 0.003373597006429918,
+      "simulation_time": 0.0
+    },
+    {
+      "name": "direct-solref-minimum",
+      "xml_sha256": "d0f01a08489853c7c3201132193863290014093f4d44b658f4c3786ca6919b5d",
+      "observed": [
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            -2000.0,
+            -20.0
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            -2000.0,
+            -20.0
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            -2000.0,
+            -20.0
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.6,
+            0.6,
+            0.01,
+            0.004,
+            0.004
+          ],
+          "solref": [
+            -2000.0,
+            -20.0
+          ],
+          "solimp": [
+            0.875,
+            0.9674999999999999,
+            0.005000000000000001,
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.6,
+          0.6,
+          0.01,
+          0.004,
+          0.004
+        ],
+        "solref": [
+          -2000,
+          -20
+        ],
+        "solimp": [
+          0.875,
+          0.9675,
+          0.005,
+          0.5,
+          2
+        ]
+      },
+      "matched": true,
+      "construction_forward_s": 0.004792359002749436,
+      "simulation_time": 0.0
+    },
+    {
+      "name": "explicit-anisotropic-pair",
+      "xml_sha256": "2877961dd698db408f5ba52cec44171ea780aff680c52cb74dc624cc9025697e",
+      "observed": [
+        {
+          "dimension": 6,
+          "friction": [
+            0.15,
+            0.25,
+            0.001,
+            0.002,
+            0.003
+          ],
+          "solref": [
+            0.003,
+            1.0
+          ],
+          "solimp": [
+            0.9,
+            0.95,
+            0.003,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.15,
+            0.25,
+            0.001,
+            0.002,
+            0.003
+          ],
+          "solref": [
+            0.003,
+            1.0
+          ],
+          "solimp": [
+            0.9,
+            0.95,
+            0.003,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.15,
+            0.25,
+            0.001,
+            0.002,
+            0.003
+          ],
+          "solref": [
+            0.003,
+            1.0
+          ],
+          "solimp": [
+            0.9,
+            0.95,
+            0.003,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.15,
+            0.25,
+            0.001,
+            0.002,
+            0.003
+          ],
+          "solref": [
+            0.003,
+            1.0
+          ],
+          "solimp": [
+            0.9,
+            0.95,
+            0.003,
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.15,
+          0.25,
+          0.001,
+          0.002,
+          0.003
+        ],
+        "solref": [
+          0.003,
+          1
+        ],
+        "solimp": [
+          0.9,
+          0.95,
+          0.003,
+          0.5,
+          2
+        ]
+      },
+      "matched": true,
+      "construction_forward_s": 0.003126032999716699,
+      "simulation_time": 0.0
+    },
+    {
+      "name": "global-override",
+      "xml_sha256": "869b346eaa2ce06ae72692d22cc3d0b9bbc0b3a4403b5699eb7dd6212c4d904b",
+      "observed": [
+        {
+          "dimension": 6,
+          "friction": [
+            0.7,
+            0.7,
+            0.05,
+            0.006,
+            0.006
+          ],
+          "solref": [
+            0.006,
+            1.0
+          ],
+          "solimp": [
+            0.85,
+            0.97,
+            0.004,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.7,
+            0.7,
+            0.05,
+            0.006,
+            0.006
+          ],
+          "solref": [
+            0.006,
+            1.0
+          ],
+          "solimp": [
+            0.85,
+            0.97,
+            0.004,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.7,
+            0.7,
+            0.05,
+            0.006,
+            0.006
+          ],
+          "solref": [
+            0.006,
+            1.0
+          ],
+          "solimp": [
+            0.85,
+            0.97,
+            0.004,
+            0.5,
+            2.0
+          ]
+        },
+        {
+          "dimension": 6,
+          "friction": [
+            0.7,
+            0.7,
+            0.05,
+            0.006,
+            0.006
+          ],
+          "solref": [
+            0.006,
+            1.0
+          ],
+          "solimp": [
+            0.85,
+            0.97,
+            0.004,
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "expected": {
+        "dimension": 6,
+        "friction": [
+          0.7,
+          0.7,
+          0.05,
+          0.006,
+          0.006
+        ],
+        "solref": [
+          0.006,
+          1
+        ],
+        "solimp": [
+          0.85,
+          0.97,
+          0.004,
+          0.5,
+          2
+        ]
+      },
+      "matched": true,
+      "construction_forward_s": 0.0022156010090839118,
+      "simulation_time": 0.0
+    },
+    {
+      "name": "separated-negative",
+      "xml_sha256": "d5158f809dcf075d20421e17f58c5e965fe6bc63304f1547565f131d88524324",
+      "observed": [],
+      "expected": null,
+      "matched": true,
+      "construction_forward_s": 0.0012961650063516572,
+      "simulation_time": 0.0
+    }
+  ],
+  "source_unchanged": true,
+  "installed": {
+    "mujoco": "3.14.0",
+    "superdex-physics": "1.0.0",
+    "superdex-robotics": "1.0.0",
+    "superdex-physics-fp64": "1.0.0",
+    "superdex-robotics-fp64": "1.0.0"
+  }
+}
