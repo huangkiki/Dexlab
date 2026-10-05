@@ -44,8 +44,13 @@ class ClothContactProbeTests(unittest.TestCase):
         self.assertAlmostEqual(a, cases['whole_panel']['witness_max_native_penetration_m'], places=12)
         self.assertAlmostEqual(a, cases['midphase_disabled']['witness_max_native_penetration_m'], places=12)
 
-    def test_recorded_counterexample_in_pinned_engine(self):
-        self.assertEqual(self.result['engine']['version'], '3.11.0')
+    def test_recorded_counterexample_in_selected_engine(self):
+        from dexlab.engine_versions import mujoco_profile_identity
+
+        identity = mujoco_profile_identity(
+            self.result["engine"], mujoco.mj_versionString()
+        )
+        self.assertEqual(identity["version"], mujoco.__version__)
         case = self.result['cases']['single_witness']
         self.assertGreater(case['witness_interior_depth_m'], 0.002)
         self.assertLess(case['witness_max_native_penetration_m'], 0.00001)

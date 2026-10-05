@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "classification": "exploratory_settling_onset_diagnostic",
+  "record_completed": true,
+  "scientific_acceptance": "not_assessed",
+  "input_sha256": {
+    "states.npz": "464a7043d05576ee21bdcdfb6bb0a2835bae06204f7dd1c21a07145112f8f7bd",
+    "model.mjb": "2cf6f02c9bef5d3c6177092bca46be7a214fe99230dc848046a1f66722e4191b",
+    "manifest.json": "4faf33f43bc5fb517ab146d8b7497ecb28872f71e3955d1f7147cc92783d4f06"
+  },
+  "auditor_sha256": "487f878df91af745a2ba50be1934e08501bb670e35ffc91e81f51dbae22765a1",
+  "table_auditor_sha256": "cb25ba5a16821f32e99ac5c4e485e54f89e871b04a2b1e09be80a2634ead2f54",
+  "runtime_mujoco_version": "3.14.0",
+  "first_intrusion": null,
+  "evaluated_frames": 4001,
+  "recorded_frames": 4001,
+  "table_bounds_m": [
+    [
+      -0.5400000017881396,
+      0.40000000014901155,
+      0.49399999997392297
+    ],
+    [
+      0.5400000017881396,
+      0.8399999998509885,
+      0.500000000026077
+    ]
+  ],
+  "numerical_zero_tolerance_m": 1e-08,
+  "table_geometry_verification": {
+    "box_count": 0,
+    "verified_cuboid_mesh_count": 96,
+    "maximum_corner_residual_m": 0.0,
+    "maximum_tile_plane_snap_m": 1.7881395392160826e-09,
+    "mesh_geometry_zero_tolerance_m": 1e-08
+  },
+  "limits": [
+    "Zero-thickness midsurface versus the verified solid table only",
+    "Stops at the first sampled intrusion; later states are not geometrically assessed",
+    "Consecutive physical steps do not prove continuous inter-step separation",
+    "The previous clear sample is not a continuous-time onset bound",
+    "No robot contact, support force, grasp success or physical repair is assessed"
+  ]
+}

@@ -11,7 +11,7 @@ import numpy as np
 
 from dexlab import cloth_table_audit
 from dexlab.cloth_table_audit import (
-    NUMERICAL_EPS_M, tiled_box_bounds, triangle_box_depth,
+    NUMERICAL_EPS_M, verified_table_bounds, triangle_box_depth,
 )
 
 
@@ -90,20 +90,15 @@ def first_table_intrusion(model, times, poses, triangles):
             or np.any(np.diff(times) <= 0)
             or not np.isfinite(times).all() or not np.isfinite(poses).all()):
         raise ValueError("Unsupported model or invalid recorded poses/topology")
-    ids = [g for g in range(model.ngeom) if (model.geom(g).name or "").startswith("table_")]
-    if not ids or any(model.geom_type[g] != mujoco.mjtGeom.mjGEOM_BOX or
-                      model.body_weldid[model.geom_bodyid[g]] != 0 for g in ids):
-        raise ValueError("Expected fixed named table boxes")
     data = mujoco.MjData(model)
     witness, previous_time, bounds = None, None, None
     for index, (time, pose) in enumerate(zip(times, poses, strict=True)):
         data.qpos[:] = pose
         mujoco.mj_kinematics(model, data)
         mujoco.mj_flex(model, data)
-        if not np.allclose(data.geom_xmat[ids].reshape(-1, 3, 3), np.eye(3), atol=1e-12, rtol=0):
-            raise ValueError("Rotated table boxes are outside this diagnostic")
         if bounds is None:
-            bounds = tiled_box_bounds(data.geom_xpos[ids], model.geom_size[ids])
+            lo, hi, geometry = verified_table_bounds(model, data)
+            bounds = (lo, hi)
         points = data.flexvert_xpos
         depths = [triangle_box_depth(face, *bounds) for face in points[triangles]]
         triangle_id = int(np.argmax(depths))
@@ -116,7 +111,8 @@ def first_table_intrusion(model, times, poses, triangles):
         previous_time = float(time)
     return {"first_intrusion": witness, "evaluated_frames": index + 1,
             "recorded_frames": len(times), "table_bounds_m": np.asarray(bounds).tolist(),
-            "numerical_zero_tolerance_m": NUMERICAL_EPS_M}
+            "numerical_zero_tolerance_m": NUMERICAL_EPS_M,
+            "table_geometry_verification": geometry}
 
 
 def audit_saved(directory):

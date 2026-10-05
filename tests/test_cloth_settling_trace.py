@@ -164,7 +164,7 @@ class SettlingTraceTests(unittest.TestCase):
 
     def test_unsupported_table_geometry_is_not_zero_intrusion(self):
         self.model.geom_type[0] = mujoco.mjtGeom.mjGEOM_SPHERE
-        with self.assertRaisesRegex(ValueError, "table boxes"):
+        with self.assertRaisesRegex(ValueError, "Unsupported table solid"):
             trace.first_table_intrusion(self.model, np.array([0.]), self.data.qpos[None],
                                         self.model.flex_elem.reshape(-1, 3))
 
