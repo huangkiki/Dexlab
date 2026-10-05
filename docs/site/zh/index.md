@@ -50,9 +50,9 @@ html_theme.sidebar_secondary.remove: true
 :::
 :::{grid-item-card} 02 / 机器人夹布
 :class-card: lab-finding lab-finding-warning
-<div class="lab-score"><strong>176/225</strong><span>相交帧</span></div>
+<div class="lab-score"><strong>176/225</strong><span>历史相交帧</span></div>
 
-独立几何检查检出布—桌相交，最大内部深度 3.00 mm。评分已修正，物理修复尚未通过。
+独立几何检查检出布—桌相交，最大内部深度 3.00 mm。保留该历史失败；修复后的 9 秒开发场景已通过，但自接触穿透余量仅 7.95 µm。
 
 [失败分析与修复任务](results.md)
 :::
@@ -94,7 +94,7 @@ html_theme.sidebar_secondary.remove: true
 
 六层研究地图：任务、执行器、物理、感知、数据与迁移。ManiSkill 接入和手内旋转尚在计划中。 [→ 灵巧操作路线](dexterity.md)
 
-<div class="lab-note">新批次须使用官方最新稳定版，运行资格尚待验收；Genesis 已列入计划。当前结果不证明真机精度。 <a href="engines.html">版本与能力边界 →</a></div>
+<div class="lab-note">MuJoCo 3.14.0 已有限定范围的开发与回归证据；Genesis 资格仍待验收。当前结果不证明真机精度。 <a href="engines.html">版本与能力边界 →</a></div>
 
 
 ```{toctree}

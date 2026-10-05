@@ -43,6 +43,6 @@ python demos/contact-benchmark/friction_response.py runs/friction-new --wheel-di
 python demos/contact-benchmark/report_friction.py runs/friction-new --output runs/friction-report.json --plot runs/friction-report.png
 ```
 
-整批最多 16 次原生运行、1800 s，外层 cgroup 也须强制相同时限。运行时异常停止；物理验收失败保留。报告命令返回零表示重现记录的结果，不代表全部物理通过。完整原始包待本开发 PR 发版时发布，仓库内摘要不能替代原始记录。
+整批最多 16 次原生运行、1800 s，外层 cgroup 也须强制相同时限。运行时异常停止；物理验收失败保留。报告命令返回零表示重现记录的结果，不代表全部物理通过。下方已发布的完整原始包包含独立离线复核工具；仓库内摘要不能替代原始记录。
 
-已准备 v0.21.0 原始证据包（尚待发布）：`dexlab-friction-evidence-v1.tar.gz`, 4289185 bytes, SHA-256 `cd25b5c05d7dfadca69e195ff0cc1269a7052b24180e8a998c791edc93822001`. 解压后核对全部 293 个文件哈希及 16 次评分，原生状态与接触字节未改动。仅清理私有源码路径键，并附前后哈希。
+已发布 v0.21.0 原始证据包：[dexlab-friction-evidence-v1.tar.gz](https://github.com/huangkiki/Dexlab/releases/download/v0.21.0/dexlab-friction-evidence-v1.tar.gz), 4289185 bytes, SHA-256 `cd25b5c05d7dfadca69e195ff0cc1269a7052b24180e8a998c791edc93822001`. 解压后核对全部 293 个文件哈希及 16 次评分，原生状态与接触字节未改动。仅清理私有源码路径键，并附前后哈希。
