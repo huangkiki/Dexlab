@@ -25,6 +25,11 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 标准分为实现一致性、数值收敛性与实测物理有效性；抓取通过不能替代三者。[研究标准](docs/research-focus.zh-CN.md#实验用什么标准判断)
 
+
+下一项[合成响应—成本协议](demos/contact-benchmark/RESPONSE_COST.zh-CN.md)固定27次重复工况，比较指定参考模型的偏差与开销；27次已完成并独立复算：低阻抗MuJoCo偏差随步长减小下降，SuperDex该配置偏差增大且卸载拉力检查失败；这些是指定合成模型的响应证据，不是真机准确性结论。
+
+![Synthetic response and measured cost](docs/evidence/response-cost-v1.png)
+
 ## 关键实验结果
 
 **接触起始瞬态：数值敏感性。** 固定初态的16次开发运行中，MuJoCo相邻步长轨迹差异下降，SuperDex部分差异非单调或增大；后者零摩擦工况仍通过原工程验收，说明“通过”不能证明步长收敛。[协议、全部失败与逐次成本](demos/contact-benchmark/REFINEMENT.zh-CN.md)。另12次容差对照表明，仅收紧停止容差未消除步长敏感性；实测校准仍未完成。

@@ -98,3 +98,11 @@
 - 旧记录没有统一的隔离性能计时，不能比较仿真速度。
 - 材料点对应不足，材料滑移未知，不能用零填补。
 - MuJoCo 3.14.0 已有上述限定范围的开发与回归证据；Genesis 任务资格仍待验证，不能扩展为所有引擎或任务已通过。
+
+## 合成响应偏差与成本
+
+27次固定参数、三步长、三次重复的开发实验已完成并独立复算，9次通过原有联合标准，18次失败保留。低阻抗MuJoCo配置的最差正载荷窗口RMS从2.771降至0.617 µm；SuperDex当前载荷阻尼配置从9.209增至13.751 µm，且三种步长均违反卸载无拉力检查。参考是指定线性弹簧—阻尼模型，未实测标定。
+
+![Synthetic response and measured cost](../../evidence/response-cost-v1.png)
+
+[Protocol, timing boundaries, failures and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/RESPONSE_COST.zh-CN.md)

@@ -1,0 +1,328 @@
+{
+  "verification": {
+    "outcomes_reproduced": 27,
+    "physics_passed": 9,
+    "physics_failed": 18,
+    "transient_passed": 12,
+    "combined_passed": 9
+  },
+  "groups": [
+    {
+      "candidate": "mujoco-imp09-500us",
+      "engine": "mujoco",
+      "timestep_s": 0.0005,
+      "runs": 3,
+      "combined_passed": 0,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.004503137635765597,
+          "median": 0.004539107219898142,
+          "maximum": 0.004663128129323013
+        },
+        "observation_seconds": {
+          "minimum": 0.030429474398260936,
+          "median": 0.057041108986595646,
+          "maximum": 0.06485298271581996
+        },
+        "outer_step_seconds": {
+          "minimum": 0.06338723414228298,
+          "median": 0.09043937591195572,
+          "maximum": 0.09769183325988706
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.2379773760039825,
+          "median": 0.2690438389981864,
+          "maximum": 0.2728619599947706
+        }
+      },
+      "worst_window_rms_m": 0.00012065393479141886,
+      "peak_error_m": 0.00021486209815631193,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "candidate": "mujoco-imp09-250us",
+      "engine": "mujoco",
+      "timestep_s": 0.00025,
+      "runs": 3,
+      "combined_passed": 0,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.008950862131314352,
+          "median": 0.008957751793786883,
+          "maximum": 0.009274158990592696
+        },
+        "observation_seconds": {
+          "minimum": 0.09718323133711237,
+          "median": 0.0977179001638433,
+          "maximum": 0.124643580216798
+        },
+        "outer_step_seconds": {
+          "minimum": 0.1618382992746774,
+          "median": 0.16245008786791004,
+          "maximum": 0.19123395152564626
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.4819818210089579,
+          "median": 0.5138045609928668,
+          "maximum": 0.5334763069986366
+        }
+      },
+      "worst_window_rms_m": 7.654222715015674e-05,
+      "peak_error_m": 0.00014081160757742985,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "candidate": "mujoco-imp09-125us",
+      "engine": "mujoco",
+      "timestep_s": 0.000125,
+      "runs": 3,
+      "combined_passed": 0,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.018067597076878883,
+          "median": 0.018223695529741235,
+          "maximum": 0.018513390750740655
+        },
+        "observation_seconds": {
+          "minimum": 0.1970860340516083,
+          "median": 0.21450547587301116,
+          "maximum": 0.24728967082046438
+        },
+        "outer_step_seconds": {
+          "minimum": 0.3308870636683423,
+          "median": 0.34900609993201215,
+          "maximum": 0.3775205201818608
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.9482944350020261,
+          "median": 0.9687089560029563,
+          "maximum": 0.9986036710033659
+        }
+      },
+      "worst_window_rms_m": 6.776463124080446e-05,
+      "peak_error_m": 0.00012745183498325712,
+      "failed_checks": [
+        "fitting_load_response",
+        "intermediate_load_validation",
+        "settled_plateaus",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "candidate": "mujoco-imp0001-500us",
+      "engine": "mujoco",
+      "timestep_s": 0.0005,
+      "runs": 3,
+      "combined_passed": 3,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.0044523232645587996,
+          "median": 0.004482485703192651,
+          "maximum": 0.004497535992413759
+        },
+        "observation_seconds": {
+          "minimum": 0.0304512566071935,
+          "median": 0.057212441926822066,
+          "maximum": 0.06559331764583476
+        },
+        "outer_step_seconds": {
+          "minimum": 0.06247146904934198,
+          "median": 0.08978619905246887,
+          "maximum": 0.0978440180333564
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.23981557600200176,
+          "median": 0.27453637699363753,
+          "maximum": 0.2769219309993787
+        }
+      },
+      "worst_window_rms_m": 2.7708940962438377e-06,
+      "peak_error_m": 7.184669395206059e-06,
+      "failed_checks": []
+    },
+    {
+      "candidate": "mujoco-imp0001-250us",
+      "engine": "mujoco",
+      "timestep_s": 0.00025,
+      "runs": 3,
+      "combined_passed": 3,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.008940752115449868,
+          "median": 0.008987499182694592,
+          "maximum": 0.009158942018984817
+        },
+        "observation_seconds": {
+          "minimum": 0.0922944841440767,
+          "median": 0.10005825707048643,
+          "maximum": 0.13488579190743621
+        },
+        "outer_step_seconds": {
+          "minimum": 0.15808936348184943,
+          "median": 0.1649195606878493,
+          "maximum": 0.20012325880816206
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.4797422160045244,
+          "median": 0.48440980599843897,
+          "maximum": 0.5176624409941724
+        }
+      },
+      "worst_window_rms_m": 1.3274049946025552e-06,
+      "peak_error_m": 3.4636044714817025e-06,
+      "failed_checks": []
+    },
+    {
+      "candidate": "mujoco-imp0001-125us",
+      "engine": "mujoco",
+      "timestep_s": 0.000125,
+      "runs": 3,
+      "combined_passed": 3,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.01785937549720984,
+          "median": 0.018227889857371338,
+          "maximum": 0.01830805672216229
+        },
+        "observation_seconds": {
+          "minimum": 0.18466575365164317,
+          "median": 0.20420834991091397,
+          "maximum": 0.25272290005523246
+        },
+        "outer_step_seconds": {
+          "minimum": 0.33410686295246705,
+          "median": 0.3555603706918191,
+          "maximum": 0.383115164222545
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.9507657689973712,
+          "median": 0.972464136997587,
+          "maximum": 0.994058252996183
+        }
+      },
+      "worst_window_rms_m": 6.170664076623062e-07,
+      "peak_error_m": 1.6428693579009573e-06,
+      "failed_checks": []
+    },
+    {
+      "candidate": "superdex-load-damping-500us",
+      "engine": "superdex",
+      "timestep_s": 0.0005,
+      "runs": 3,
+      "combined_passed": 0,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.019783452531555668,
+          "median": 0.020192871204926632,
+          "maximum": 0.02115473907906562
+        },
+        "observation_seconds": {
+          "minimum": 0.09023535308369901,
+          "median": 0.09080046085000504,
+          "maximum": 0.12765778788889293
+        },
+        "outer_step_seconds": {
+          "minimum": 0.14587040309561417,
+          "median": 0.1467934039537795,
+          "maximum": 0.18562977224064525
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.3191165799944429,
+          "median": 0.3213484230072936,
+          "maximum": 0.5317599569971208
+        }
+      },
+      "worst_window_rms_m": 9.209178035056652e-06,
+      "peak_error_m": 2.2843073030722743e-05,
+      "failed_checks": [
+        "no_tensile_normal_force"
+      ]
+    },
+    {
+      "candidate": "superdex-load-damping-250us",
+      "engine": "superdex",
+      "timestep_s": 0.00025,
+      "runs": 3,
+      "combined_passed": 0,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.03985231663682498,
+          "median": 0.040750197833403945,
+          "maximum": 0.04237038794963155
+        },
+        "observation_seconds": {
+          "minimum": 0.21942717694037128,
+          "median": 0.22380672938015778,
+          "maximum": 0.2524813710770104
+        },
+        "outer_step_seconds": {
+          "minimum": 0.33282634761417285,
+          "median": 0.3393214854731923,
+          "maximum": 0.3656711312942207
+        },
+        "episode_wall_seconds": {
+          "minimum": 0.6352208879980026,
+          "median": 0.6437929850071669,
+          "maximum": 0.6654276740009664
+        }
+      },
+      "worst_window_rms_m": 1.1997497415264596e-05,
+      "peak_error_m": 2.7545441081929168e-05,
+      "failed_checks": [
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    },
+    {
+      "candidate": "superdex-load-damping-125us",
+      "engine": "superdex",
+      "timestep_s": 0.000125,
+      "runs": 3,
+      "combined_passed": 0,
+      "cost": {
+        "native_call_seconds": {
+          "minimum": 0.08119017910212278,
+          "median": 0.08198130270466208,
+          "maximum": 0.08419226617843378
+        },
+        "observation_seconds": {
+          "minimum": 0.40285360005509574,
+          "median": 0.45055284129921347,
+          "maximum": 0.45152350518037565
+        },
+        "outer_step_seconds": {
+          "minimum": 0.673643131434801,
+          "median": 0.6786269898584578,
+          "maximum": 0.679283017598209
+        },
+        "episode_wall_seconds": {
+          "minimum": 1.2420348090090556,
+          "median": 1.245873145002406,
+          "maximum": 1.2462022490071831
+        }
+      },
+      "worst_window_rms_m": 1.3750987088141327e-05,
+      "peak_error_m": 3.0200432846785557e-05,
+      "failed_checks": [
+        "no_tensile_normal_force",
+        "transient_peak_matches",
+        "transient_rms_matches"
+      ]
+    }
+  ],
+  "scope": "Worst positive-load window error; three serial fresh-scene repeats. No hardware accuracy or engine ranking."
+}

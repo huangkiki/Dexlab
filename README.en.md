@@ -25,6 +25,11 @@ Plots below are **historical evidence under their original pinned versions**. Ne
 
 Separate implementation consistency, numerical convergence and measured physical validity; a grasp pass substitutes for none of them. [Research standards](docs/research-focus.md#what-standard-judges-an-experiment)
 
+
+The next [synthetic response–cost protocol](demos/contact-benchmark/RESPONSE_COST.md) declares 27 repeat runs to compare reference-model discrepancy and cost. All 27 runs were independently rescored: the low-impedance MuJoCo profile approaches the synthetic target under refinement; this SuperDex profile diverges from it and fails unloading no-tension checks. These results establish no hardware accuracy.
+
+![Synthetic response and measured cost](docs/evidence/response-cost-v1.png)
+
 ## Key experimental results
 
 **Contact-onset numerical sensitivity.** Across16 fixed-start development runs, MuJoCo adjacent-grid trajectory differences decrease; some SuperDex differences are nonmonotone or increase. Its frictionless cases still pass the existing engineering gates: a pass does not establish timestep convergence. [Protocol, all failures and per-run costs](demos/contact-benchmark/REFINEMENT.md). Twelve additional tolerance controls show that tightening stopping tolerances alone does not remove timestep sensitivity; hardware calibration remains incomplete.
