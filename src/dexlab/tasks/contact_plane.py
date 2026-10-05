@@ -26,6 +26,7 @@ class ContactPlaneCfg(EnvCfg):
     normal_parameters: dict = field(default_factory=dict)
     solver_parameters: dict = field(default_factory=dict)
     measure_step_timing: bool = False
+    record_native_geometry: bool = False
 
 
 class ContactPlaneEnv(ABEnv):
@@ -123,6 +124,10 @@ class ContactPlaneEnv(ABEnv):
             for _ in range(round(self.case.settle / self.case.timestep)):
                 self.native.step()
             self.native.start()
+            if self.cfg.record_native_geometry:
+                if self.backend != "superdex":
+                    raise ValueError("Native geometry query profile is SuperDex-only")
+                self.native.metadata["native_geometry"] = self.native.record_geometry()
             self._clock_origin = self.native.clock()
             return self._observe(*self.native.observe(), 0.0, contact_known=False)
         except Exception:

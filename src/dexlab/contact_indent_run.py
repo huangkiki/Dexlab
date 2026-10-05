@@ -18,6 +18,7 @@ from dexlab import (
     contact_parameters,
     contact_plane,
     contact_plane_native,
+    contact_transfer,
     physx_baseline,
 )
 from dexlab.contact_indent import LIMITS, IndentCase, score
@@ -25,7 +26,7 @@ from dexlab.physx_baseline import digest, write_json
 from dexlab.tasks import contact_plane as contact_task
 
 
-def run(case, engine, output, *, normal_parameters=None, measure_step_timing=False):
+def run(case, engine, output, *, normal_parameters=None, measure_step_timing=False, record_native_geometry=False):
     if not case.name.startswith("dev-"):
         raise ValueError(
             "This response profile is development-only until calibration and suite freeze"
@@ -47,6 +48,7 @@ def run(case, engine, output, *, normal_parameters=None, measure_step_timing=Fal
                 contact_load,
                 contact_plane,
                 contact_plane_native,
+                contact_transfer,
                 physx_baseline,
                 contact_task,
             )
@@ -66,6 +68,7 @@ def run(case, engine, output, *, normal_parameters=None, measure_step_timing=Fal
         "task": contact_task.INDENT_TASK,
         "scope": "Development response measurement, not calibrated engine accuracy",
         "measure_step_timing": measure_step_timing,
+        "record_native_geometry": record_native_geometry,
     }
     write_json(output / "run.json", receipt)
     env = None
@@ -88,6 +91,7 @@ def run(case, engine, output, *, normal_parameters=None, measure_step_timing=Fal
                 "max_force_n": case.max_force,
                 "normal_parameters": normal if loaded else {},
                 "measure_step_timing": measure_step_timing,
+                "record_native_geometry": record_native_geometry,
             },
         )
         state = env.init_state()
@@ -214,6 +218,13 @@ def verify(directory):
         declared_limits=receipt.get("limits")
         == (contact_load.LIMITS if loaded else LIMITS),
     )
+    if receipt.get("record_native_geometry", False):
+        result["checks"]["native_geometry_matches"] = (
+            receipt["engine"] == "superdex"
+            and contact_transfer.native_box_observation_matches(
+                receipt.get("native", {}).get("native_geometry", {}), case.half_size
+            )
+        )
     ledger = []
     try:
         contacts = contact_archive.read_contacts(directory, receipt)
@@ -262,6 +273,7 @@ def main():
     )
     parser.add_argument("--normal-parameters", type=Path)
     parser.add_argument("--measure-step-timing", action="store_true")
+    parser.add_argument("--record-native-geometry", action="store_true")
     args = parser.parse_args()
     if args.verify:
         if (
@@ -271,6 +283,7 @@ def main():
             or args.normal_parameters
             or args.protocol != "indent"
             or args.measure_step_timing
+            or args.record_native_geometry
         ):
             parser.error("--verify cannot be combined with run arguments")
         result = verify(args.verify.resolve())
@@ -285,7 +298,8 @@ def main():
             else None
         )
         result = run(case, args.engine, args.output.resolve(), normal_parameters=normal,
-                     measure_step_timing=args.measure_step_timing)
+                     measure_step_timing=args.measure_step_timing,
+                     record_native_geometry=args.record_native_geometry)
     print(json.dumps(result, indent=2))
     raise SystemExit(0 if result["passed"] else 1)
 

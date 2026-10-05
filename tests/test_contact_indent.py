@@ -40,6 +40,19 @@ class IndentationTests(unittest.TestCase):
             self.result["metrics"]["minimum_released_clearance_m"], 0.0005
         )
 
+    def test_requested_geometry_cannot_pass_without_supported_native_evidence(self):
+        path = self.output / "run.json"
+        original = path.read_text()
+        try:
+            receipt = json.loads(original)
+            receipt["record_native_geometry"] = True
+            path.write_text(json.dumps(receipt))
+            result = verify(self.output)
+            self.assertFalse(result["checks"]["native_geometry_matches"])
+            self.assertFalse(result["passed"])
+        finally:
+            path.write_text(original)
+
     def test_injected_adhesion_cannot_pass_even_with_balanced_force(self):
         data = self.copy_data()
         released = data["time"][1:] > 1.35

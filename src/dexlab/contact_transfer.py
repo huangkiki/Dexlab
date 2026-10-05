@@ -111,3 +111,41 @@ def geometry_observation(engine, case, native, mesh=None):
                 'representation_matches': bool(passed), 'cooked_mesh_equivalence': None,
                 'combined_contact_law_readback': None}
     raise ValueError('Unsupported native representation')
+
+
+def native_box_observation_matches(record, half_size):
+    """Check native reference geometry and sampled distances against an analytic box.
+
+    The 1e-12 m tolerance covers FP64 coordinate arithmetic/serialization only;
+    it is not a physical contact-accuracy tolerance or a whole-surface proof.
+    """
+    from scipy.spatial.transform import Rotation
+
+    try:
+        if (record['box_collider'] != 'BOX' or record['plane_collider'] != 'PLANE'
+                or record['nodes_per_element'] != 3
+                or not box_mesh_matches(record['vertices'], record['faces'], half_size)):
+            return False
+        pose = np.asarray(record['pose'], dtype=float)
+        local = np.asarray(record['local_points'], dtype=float)
+        world = np.asarray(record['world_points'], dtype=float)
+        distances = np.asarray(record['distances'], dtype=float)
+        lower, upper = np.asarray(record['aabb_min']), np.asarray(record['aabb_max'])
+        if (pose.shape != (7,) or local.shape != (7, 3) or world.shape != local.shape
+                or distances.shape != (7,) or lower.shape != (3,) or upper.shape != (3,)):
+            return False
+        if not np.isfinite(np.r_[pose, local.ravel(), world.ravel(), distances, lower, upper]).all():
+            return False
+        if not np.isclose(np.linalg.norm(pose[3:]), 1, rtol=0, atol=1e-12):
+            return False
+        expected_points = half_size * np.array([[0,0,0],[1,0,0],[-1,0,0],
+                                               [0,1,0],[0,0,-1],[1.5,0,0],[1.5,1.5,0]])
+        rotation = Rotation.from_quat(pose[[4,5,6,3]])
+        expected_world = rotation.apply(local) + pose[:3]
+        q = np.abs(local) - half_size
+        expected_distance = np.linalg.norm(np.maximum(q, 0), axis=1) + np.minimum(q.max(axis=1), 0)
+        return all(np.allclose(a, b, rtol=0, atol=1e-12) for a, b in (
+            (local, expected_points), (world, expected_world),
+            (distances, expected_distance), (lower, -half_size), (upper, half_size)))
+    except (KeyError, TypeError, ValueError, IndexError):
+        return False
