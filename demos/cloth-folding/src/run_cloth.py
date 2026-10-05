@@ -26,6 +26,7 @@ from cloth_control import (
 from cloth_model import build_model
 from verify_cloth import verify_episode
 from render_cloth import render
+from settling_trace import capture_settling
 
 
 def engine_identity():
@@ -70,6 +71,19 @@ def step(model, data, target):
         raise RuntimeError(
             "Physics warning, reset, or nonfinite state; this episode failed"
         )
+
+
+def settle_cloth(model, data, opened, *, output=None, engine=None):
+    """Preserve the existing two-second passive initialization and optional trace."""
+    model.opt.solver = mujoco.mjtSolver.mjSOL_CG
+    model.opt.iterations = 100
+    model.opt.timestep = 0.0005
+    steps = round(2 / model.opt.timestep)
+    with capture_settling(model, data, output, steps=steps, engine=engine) as capture:
+        for _ in range(steps):
+            step(model, data, opened)
+            if capture is not None:
+                capture()
 
 
 def trajectory(point, task):
@@ -240,11 +254,9 @@ def run(args):
     mujoco.mj_forward(model, data)
 
     print("Settling the passive cloth with the hands parked", flush=True)
-    model.opt.solver = mujoco.mjtSolver.mjSOL_CG
-    model.opt.iterations = 100
-    model.opt.timestep = 0.0005
-    for _ in range(round(2 / model.opt.timestep)):
-        step(model, data, opened)
+    settle_cloth(model, data, opened,
+                 output=destination / "settling" if args.record_settling else None,
+                 engine=engine)
     model.opt.solver = mujoco.mjtSolver.mjSOL_NEWTON
     model.opt.iterations = 100
     model.opt.timestep = args.timestep
@@ -472,6 +484,8 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--task", choices=("grasp", "fold"), default="grasp")
     parser.add_argument("--no-video", action="store_true")
+    parser.add_argument("--record-settling", action="store_true",
+                        help="Keep every passive-settling state for offline table-crossing diagnosis")
     parser.add_argument("--hand-friction", type=float, default=1.0)
     parser.add_argument("--grasp-inset", type=float, default=0.3)
     parser.add_argument("--timestep", type=float, default=0.00025)

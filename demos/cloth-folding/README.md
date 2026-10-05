@@ -16,7 +16,13 @@ The complete, uncut 9 s episode. The display camera follows saved hand/cloth sta
 
 **The original success claim is withdrawn:** the table-interior audit detects intrusion in 176/225 saved frames. This recording requires geometry review. [Scoring comparison, curve and limits](SCORING.md). Physical repair is separate in [#32](https://github.com/huangkiki/Dexlab/issues/32).
 
+[Static table-edge counterexample and parameter audit](TABLE-CONTACT.md): a concrete mismatch between native contact distance and surface intrusion; dynamics repair remains unvalidated.
+
+[Independent cloth/robot audit](ROBOT-CONTACT.md): no midsurface intrusion into 79 robot collision hulls in 225 saved frames; injected counterexamples are detected. This does not clear the table failure or certify finite-thickness/inter-frame separation.
+
 ## Run and verify
+
+[Passive-settling observation](SETTLING.md): optionally record every initialization step before planning and locate the first sampled table intrusion offline. Synthetic tests are complete; new remote dynamics validation is pending.
 
 Use the repository's `bash scripts/setup.sh` environment. Generate an apple
 robot model first, or set `DEXLAB_ROBOT_MODEL` to an existing `model.xml`:
