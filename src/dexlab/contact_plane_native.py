@@ -64,6 +64,16 @@ class MuJoCoPlane:
             "mass_readback": float(self.model.body_mass[1]),
             "inertia_readback": self.model.body_inertia[1].tolist(),
             "friction_readback": self.model.geom_friction.tolist(),
+            "contact_parameter_observability": "Per-contact native readback at solve epoch",
+            "geometry_readback": {
+                "type": self.model.geom_type.tolist(),
+                "size": self.model.geom_size.tolist(),
+                "priority": self.model.geom_priority.tolist(),
+                "solmix": self.model.geom_solmix.tolist(),
+                "solref": self.model.geom_solref.tolist(),
+                "solimp": self.model.geom_solimp.tolist(),
+                "condim": self.model.geom_condim.tolist(),
+            },
             "profile": "Explicit native normal profile; not hardware material calibration",
             "force_epoch": "Native solved contact force before any forward recomputation; poses after integration",
             "solver_status": "Native warning counters; absence of warnings is not a convergence proof",
@@ -103,6 +113,13 @@ class MuJoCoPlane:
                     "frame": frame.tolist(),
                     "force_local": local.tolist(),
                     "force_on_box": on_box.tolist(),
+                    "parameters": {
+                        "dimension": int(contact.dim),
+                        "friction": contact.friction.tolist(),
+                        "solref": contact.solref.tolist(),
+                        "solimp": contact.solimp.tolist(),
+                        "include_margin": float(contact.includemargin),
+                    },
                 }
             )
         pose, velocity = self.observe()
@@ -195,6 +212,19 @@ class SuperDexPlane:
                     for key in normal
                 },
                 "engine": "superdex",
+                "contact_parameter_observability": "Actor parameters only; ContactPoint exposes no combined contact law",
+                "actor_contact_parameters": {
+                    name: {
+                        key: float(getattr(actor.get_contact_params(), key))
+                        for key in (
+                            "penalty_coefficient", "penalty_threshold_default",
+                            "penalty_smoothing_half_distance", "coulomb_friction_coefficient",
+                            "friction_falloff_vel", "normal_viscous_damping_coefficient",
+                            "viscous_friction_coefficient",
+                        )
+                    }
+                    for name, actor in (("box", self.box), ("plane", self.plane))
+                },
                 "identity": identity,
                 "api_identity": package_identity("superdex-physics"),
                 "mass_readback": float(self.box.get_mass()),

@@ -102,6 +102,8 @@ The hold window is 11–14 s, checking lift, two-pad support, penetration, wrist
 
 [Friction-response development results](demos/contact-benchmark/FRICTION_RESPONSE.md): all 16 runs pass existing plane checks, but low-speed resistance and settled initial states differ. Per-case plots and raw-record hashes are retained; no engine-accuracy ranking.
 
+Contact diagnosis: eight native recordings passed original acceptance; six MuJoCo static parameter-mixing controls matched expectations. SuperDex combined pair laws remain unobservable; material equivalence is not established. [Results and reproduction](demos/contact-benchmark/CONTACT_READBACK.md).
+
 ## Latest-stable qualification
 
 Latest-stable runtime qualification is in progress: [inventory, GPU probe and limits](docs/engine-qualification.md). Device smoke does not establish grasp success or enable formal benchmark dispatch.
