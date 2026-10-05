@@ -203,7 +203,7 @@ def build_model(
         flex,
         "contact",
         selfcollide="auto",
-        internal="false",
+        **({"internal": "false"} if mujoco.mj_version() < 315 else {}),
         contype="1",
         conaffinity="3",
         condim="3",

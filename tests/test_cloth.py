@@ -123,7 +123,7 @@ class ClothTaskTest(unittest.TestCase):
             )
             self.assertAlmostEqual(env.native.metadata["dynamic_mass_kg"], 0.00375)
             expected_integrator = (
-                "discrete" if env.native.metadata["version"] == "3.14.0" else "implicitfast"
+                "discrete" if env.native.metadata["version"] in ("3.14.0", "3.15.0") else "implicitfast"
             )
             self.assertEqual(env.native.metadata["integrator"], expected_integrator)
             self.assertEqual(

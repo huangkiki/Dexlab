@@ -50,7 +50,7 @@ class MuJoCoCloth:
         # Historical records retain their original integration scheme.
         integrator = (
             "discrete"
-            if identity["compatibility_profile"] == "qualification-3.14.0"
+            if identity["compatibility_profile"] in ("qualification-3.14.0", "qualification-3.15.0")
             else "implicitfast"
         )
         vertices, triangles, masses = case.mesh()
@@ -71,7 +71,7 @@ class MuJoCoCloth:
           <worldbody>{obstacle}
             <flexcomp name="cloth" type="direct" dim="2" point="{points}" element="{elements}"
                       radius="{case.radius}" mass="{masses.sum()}">
-              {pins}<contact selfcollide="auto" internal="true" friction="0.5 .005 .0001"
+              {pins}<contact selfcollide="auto" {('internal="true"' if mujoco.mj_version() < 315 else '')} friction="0.5 .005 .0001"
                 solref=".005 1" solimp=".9 .95 .001"/>
               <elasticity young="20000" poisson="0" thickness=".0005" elastic2d="both" damping=".001"/>
             </flexcomp>
