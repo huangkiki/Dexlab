@@ -1,0 +1,194 @@
+{
+  "verification": {
+    "outcomes_reproduced": 6,
+    "physics_passed": 1,
+    "physics_failed": 5,
+    "transient_passed": 1,
+    "combined_passed": 0
+  },
+  "paired_comparison_complete": true,
+  "results": [
+    {
+      "id": "superdex-damping-0-500us",
+      "timestep_s": 0.0005,
+      "damping_s_m": 0.0,
+      "windows": {
+        "loading": {
+          "minimum_force_n": 0.0585365853360407,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        },
+        "unloading": {
+          "minimum_force_n": 0.0,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        }
+      },
+      "engineering_passed": true,
+      "transient_passed": false,
+      "failed_engineering_checks": []
+    },
+    {
+      "id": "superdex-damping-10-500us",
+      "timestep_s": 0.0005,
+      "damping_s_m": 10.0,
+      "windows": {
+        "loading": {
+          "minimum_force_n": 0.05900999753153428,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        },
+        "unloading": {
+          "minimum_force_n": -0.4507119010407573,
+          "negative_steps": 2,
+          "negative_duration_s": 0.001,
+          "negative_step_intervals_s": [
+            [
+              0.6044999999999888,
+              0.6049999999999888
+            ],
+            [
+              0.6049999999999888,
+              0.6054999999999887
+            ]
+          ]
+        }
+      },
+      "engineering_passed": false,
+      "transient_passed": true,
+      "failed_engineering_checks": [
+        "no_tensile_normal_force"
+      ]
+    },
+    {
+      "id": "superdex-damping-10-250us",
+      "timestep_s": 0.00025,
+      "damping_s_m": 10.0,
+      "windows": {
+        "loading": {
+          "minimum_force_n": 0.022605887459681104,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        },
+        "unloading": {
+          "minimum_force_n": -0.2817429890862973,
+          "negative_steps": 3,
+          "negative_duration_s": 0.00075,
+          "negative_step_intervals_s": [
+            [
+              0.6047499999999612,
+              0.6049999999999611
+            ],
+            [
+              0.6049999999999611,
+              0.6052499999999611
+            ],
+            [
+              0.6052499999999611,
+              0.6054999999999611
+            ]
+          ]
+        }
+      },
+      "engineering_passed": false,
+      "transient_passed": false,
+      "failed_engineering_checks": [
+        "no_tensile_normal_force"
+      ]
+    },
+    {
+      "id": "superdex-damping-0-250us",
+      "timestep_s": 0.00025,
+      "damping_s_m": 0.0,
+      "windows": {
+        "loading": {
+          "minimum_force_n": 0.022360248439642155,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        },
+        "unloading": {
+          "minimum_force_n": 0.0,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        }
+      },
+      "engineering_passed": false,
+      "transient_passed": false,
+      "failed_engineering_checks": [
+        "settled_plateaus"
+      ]
+    },
+    {
+      "id": "superdex-damping-0-125us",
+      "timestep_s": 0.000125,
+      "damping_s_m": 0.0,
+      "windows": {
+        "loading": {
+          "minimum_force_n": 0.013104524179074291,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        },
+        "unloading": {
+          "minimum_force_n": 0.0,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        }
+      },
+      "engineering_passed": false,
+      "transient_passed": false,
+      "failed_engineering_checks": [
+        "settled_plateaus"
+      ]
+    },
+    {
+      "id": "superdex-damping-10-125us",
+      "timestep_s": 0.000125,
+      "damping_s_m": 10.0,
+      "windows": {
+        "loading": {
+          "minimum_force_n": 0.013228503679559949,
+          "negative_steps": 0,
+          "negative_duration_s": 0.0,
+          "negative_step_intervals_s": []
+        },
+        "unloading": {
+          "minimum_force_n": -0.1614070799469366,
+          "negative_steps": 4,
+          "negative_duration_s": 0.0005,
+          "negative_step_intervals_s": [
+            [
+              0.6049999999999939,
+              0.6051249999999939
+            ],
+            [
+              0.6051249999999939,
+              0.605249999999994
+            ],
+            [
+              0.605249999999994,
+              0.605374999999994
+            ],
+            [
+              0.605374999999994,
+              0.605499999999994
+            ]
+          ]
+        }
+      },
+      "engineering_passed": false,
+      "transient_passed": false,
+      "failed_engineering_checks": [
+        "no_tensile_normal_force"
+      ]
+    }
+  ],
+  "scope": "Recorded actor/solver/input matching and solved-step forces; not hidden contact-law readback or hardware calibration"
+}

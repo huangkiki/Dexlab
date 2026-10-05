@@ -38,6 +38,10 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 
 [Protocol, every failure and reproduction](demos/contact-benchmark/TRANSFER.md)
 
+**Matched damping ablation:** Zero normal damping removes recorded tensile force in all three pairs, but settling fails at two finer steps. Combined acceptance remains 0/6; this is not a complete repair. [Reference and all outcomes](demos/contact-benchmark/DAMPING_ABLATION.md)
+
+![Paired unloading forces](docs/evidence/damping-ablation-v1.png)
+
 ## Current findings
 
 | Research question | Evidence | Conclusion and boundary |
