@@ -61,7 +61,8 @@ def mujoco_profile_identity(identity, native_version, *, profile=None):
 
     if profile is None:
         profile = os.environ.get("DEXLAB_MUJOCO_PROFILE", "historical-3.11.0")
-    versions = {"historical-3.11.0": "3.11.0", "qualification-3.14.0": "3.14.0"}
+    versions = {"historical-3.11.0": "3.11.0", "qualification-3.14.0": "3.14.0",
+                "qualification-3.15.0": "3.15.0"}
     if profile not in versions:
         raise ValueError("Unknown MuJoCo compatibility profile")
     expected = versions[profile]

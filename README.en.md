@@ -24,6 +24,12 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 | Does finer computation improve reliability? | Fixed model, timestep refinement, reference discrepancy and measured cost | Response–cost curves are available; smaller steps do not reduce every profile's error |
 | Does this match real grasping? | Same-apparatus force–displacement, slip and release measurements with uncertainty | Measured references are missing; unanswered |
 
+**Version qualification:** the MuJoCo 3.15.0 candidate passes 486 tests. Cloth XML omits the removed `internal` attribute and elastic cloth retains the candidate discrete integrator. Full latest-version grasp qualification is pending; passing 3.14.0 trajectories remain earlier-version evidence.
+
+### Negative SDF construction-path result
+
+For the same asymmetric box, requested spacing and measured native pose,729 interior queries differ by up to **0.129771 mm** between automatic and official precomputed SDF construction. The explicit baked grid is exportable, but is not readback of the automatic actor's internal grid. This static negative result judges neither dynamics nor hardware accuracy; the apple demo is unchanged. [Protocol and independent verification](demos/contact-benchmark/SDF_CONSTRUCTION.md)
+
 ## Paired mass and size transfer
 
 Three frozen nominal contact profiles completed30 episodes over10 preregistered mass/size combinations: original engineering checks1/30, transient target0/30, combined0/30. All outcomes independently reproduce; all30 actual initial states and representation checks within the declared scope are complete. **Nominal-scene success does not establish parameter transfer.** No mass/area compensation was applied; failures show that these mappings miss the synthetic target, not that native algorithms are wrong. Internal cooking and combined-law observability remain incomplete.

@@ -1,0 +1,75 @@
+{
+  "actual_poses": [
+    [
+      0.1,
+      0.2,
+      0.3,
+      0.0,
+      0.0,
+      0.34289780745545134,
+      0.9393727128473789
+    ],
+    [
+      0.1,
+      0.2,
+      0.3,
+      0.0,
+      0.0,
+      0.34289780745545134,
+      0.9393727128473789
+    ]
+  ],
+  "actual_colliders": [
+    "SDF",
+    "SDF"
+  ],
+  "requested_spacing_m": [
+    0.002,
+    0.002,
+    0.002
+  ],
+  "grid": {
+    "dims": [
+      27,
+      22,
+      17
+    ],
+    "values_shape": [
+      10098
+    ],
+    "bounds_min": [
+      -0.025000000000000012,
+      -0.02000000000000001,
+      -0.015000000000000006
+    ],
+    "bounds_max": [
+      0.025000000000000012,
+      0.02000000000000001,
+      0.015000000000000006
+    ],
+    "rotation": null,
+    "scale": null,
+    "translation": null
+  },
+  "engine_versions": {
+    "mujoco": "3.14.0",
+    "superdex-physics": "1.0.0",
+    "superdex-robotics": "1.0.0",
+    "superdex-physics-fp64": "1.0.0",
+    "superdex-robotics-fp64": "1.0.0"
+  },
+  "time_s": 0.0,
+  "independent_summary": {
+    "evidence_complete": true,
+    "query_count": 729,
+    "grid_value_count": 10098,
+    "sampled_paths_exactly_equal": false,
+    "maximum_pair_difference_m": 0.00012977119515956634,
+    "maximum_analytic_difference_m": {
+      "automatic": 0.0002734792780748792,
+      "precomputed": 0.00029355494505495716
+    },
+    "scope": "Static sampled SDF discrepancy; not hidden-grid identity, dynamics or hardware accuracy"
+  },
+  "source_unchanged": true
+}

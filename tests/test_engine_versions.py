@@ -72,6 +72,16 @@ class MuJoCoCompatibilityProfileTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             mujoco_profile_identity(identity, "3.14.0", profile="latest")
 
+    def test_315_candidate_is_explicit_and_cannot_reuse_314_identity(self):
+        result = mujoco_profile_identity({'version': '3.15.0'}, '3.15.0',
+                                         profile='qualification-3.15.0')
+        self.assertEqual(result['profile_status'], 'candidate')
+        self.assertFalse(result['formal_batch_qualified'])
+        for installed, native in [('3.14.0', '3.14.0'), ('3.15.0', '3.14.0')]:
+            with self.subTest(installed=installed, native=native), self.assertRaises(ValueError):
+                mujoco_profile_identity({'version': installed}, native,
+                                        profile='qualification-3.15.0')
+
 
 class RuntimeQualificationTests(unittest.TestCase):
     def setUp(self):

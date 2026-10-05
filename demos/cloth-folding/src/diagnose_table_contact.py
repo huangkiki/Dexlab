@@ -32,7 +32,8 @@ def query(points, triangles, witness_ids, *, disable_midphase=False):
                          mass=".015", radius=str(CLOTH_RADIUS), point=numbers(points),
                          element=numbers(triangles))
     ET.SubElement(flex, "edge", equality="true")
-    ET.SubElement(flex, "contact", selfcollide="none", internal="false",
+    ET.SubElement(flex, "contact", selfcollide="none",
+                  **({"internal": "false"} if mujoco.mj_version() < 315 else {}),
                   contype="1", conaffinity="3", condim="3", friction="1 .005 .0001",
                   solref=".002 1", solimp=".99 .999 .001")
     model = mujoco.MjModel.from_xml_string(ET.tostring(root, encoding="unicode"))
