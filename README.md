@@ -1,5 +1,7 @@
 <div align="center">
 
+手动验收关闭的任务通过[交付证据表](docs/issue-deliveries.json)绑定 PR、合并提交和验收记录；队列只读取已合入主线的记录，并核验当前关闭状态和提交祖先关系。布料资格仍须独立实验，修复依赖识别不等于布料通过。
+
 Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整证据及未验证范围见[能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
 
 # DexLab

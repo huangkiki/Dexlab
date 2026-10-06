@@ -1,3 +1,4 @@
+import json
 import importlib.util
 import subprocess
 import sys
@@ -323,6 +324,88 @@ class VerifiedCheckoutTests(unittest.TestCase):
               patch.object(module, "run", side_effect=offline_run)):
             _, _, context = module.queue_context()
         self.assertEqual(context["integrated"], {1})
+
+    def manual_fixture(self):
+        commit = self.git("rev-parse", "HEAD")
+        entries = [{"issue": 42, "pr": 76, "merge_commit": commit,
+                    "audit_url": "https://github.com/huangkiki/Dexlab/issues/42#issuecomment-123"}]
+        pulls = [{"number": 76, "state": "MERGED", "baseRefName": "main",
+                  "mergeCommit": {"oid": commit}, "closingIssuesReferences": []}]
+        return entries, [{"number": 42, "state": "CLOSED"}], pulls
+
+    def commit_ledger(self, entries):
+        path = self.root / "docs/issue-deliveries.json"
+        path.parent.mkdir(exist_ok=True)
+        path.write_text(json.dumps(entries))
+        self.git("add", "docs/issue-deliveries.json")
+        self.git("commit", "-qm", "reviewed ledger", "--allow-empty")
+        self.git("update-ref", "refs/remotes/origin/main", "HEAD")
+
+    def test_manual_delivery_restores_dependency_without_closing_keywords(self):
+        entries, issues, pulls = self.manual_fixture()
+        self.commit_ledger(entries)
+        with patch.object(module, "ROOT", self.root):
+            integrated = module.manual_integrations(issues, pulls)
+        self.assertEqual(integrated, {42})
+        self.assertEqual(module.select_issue(
+            [issue(42, state="CLOSED"), issue(77, dependencies="#42")], [],
+            integrated=integrated)["number"], 77)
+
+    def test_manual_delivery_ignores_unmerged_working_ledger(self):
+        entries, issues, pulls = self.manual_fixture()
+        self.git("update-ref", "refs/remotes/origin/main", "HEAD")
+        (self.root / "docs").mkdir()
+        (self.root / "docs/issue-deliveries.json").write_text(json.dumps(entries))
+        with patch.object(module, "ROOT", self.root):
+            self.assertEqual(module.manual_integrations(issues, pulls), set())
+        self.commit_ledger(entries)
+        (self.root / "docs/issue-deliveries.json").write_text("corrupt working copy")
+        with patch.object(module, "ROOT", self.root):
+            self.assertEqual(module.manual_integrations(issues, pulls), {42})
+
+    def test_manual_delivery_rejects_stale_or_unmerged_pr_evidence(self):
+        entries, issues, pulls = self.manual_fixture()
+        self.commit_ledger(entries)
+        for field, value in (("state", "OPEN"), ("baseRefName", "other"),
+                             ("mergeCommit", {"oid": "0" * 40}), ("number", 999)):
+            with self.subTest(field=field), patch.object(module, "ROOT", self.root):
+                with self.assertRaisesRegex(SystemExit, "does not match"):
+                    module.manual_integrations(issues, [{**pulls[0], field: value}])
+        with patch.object(module, "ROOT", self.root):
+            with self.assertRaisesRegex(SystemExit, "reopened"):
+                module.manual_integrations([{"number": 42, "state": "OPEN"}], pulls)
+            with self.assertRaisesRegex(SystemExit, "missing"):
+                module.manual_integrations([], pulls)
+
+    def test_manual_delivery_rejects_nonancestor_even_with_matching_api(self):
+        entries, issues, pulls = self.manual_fixture()
+        self.commit_ledger(entries)
+        base = self.git("rev-parse", "HEAD")
+        (self.root / "source.py").write_text("unmerged")
+        self.git("commit", "-qam", "unmerged")
+        other = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-q", "--detach", base)
+        entries[0]["merge_commit"] = other
+        pulls[0]["mergeCommit"] = {"oid": other}
+        self.commit_ledger(entries)
+        with patch.object(module, "ROOT", self.root):
+            with self.assertRaisesRegex(SystemExit, "not in origin/main"):
+                module.manual_integrations(issues, pulls)
+
+    def test_manual_delivery_rejects_malformed_ledger(self):
+        entries, issues, pulls = self.manual_fixture()
+        bad = [None, {}, [None], entries * 2,
+               [{**entries[0], "issue": True}],
+               [{**entries[0], "merge_commit": "not a hash"}],
+               [{**entries[0], "audit_url": "https://example.com"}],
+               [{**entries[0], "extra": "ignored?"}]]
+        for value in bad:
+            with self.subTest(value=value):
+                self.commit_ledger(value)
+                with patch.object(module, "ROOT", self.root):
+                    with self.assertRaises(SystemExit):
+                        module.manual_integrations(issues, pulls)
+
 
 
 class ResourceGateTests(unittest.TestCase):

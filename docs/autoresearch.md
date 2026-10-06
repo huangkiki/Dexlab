@@ -95,3 +95,11 @@ This is a verifiable development workflow, not guaranteed unattended scientific 
 The explicit `experiment-24g` profile is available after the measured native-qualification pressure failure: 24 GiB maximum / 23 GiB high memory, with the same two-core CPU quota, 128 tasks, zero swap, I/O limits and finite runtime. The default `experiment` profile remains 16/15 GiB and rejects a 24 GiB override. Both experiment profiles require measured available RAM for their full cap plus 8 GiB desktop reserve before launch and inside the service; larger memory is not permission for concurrent jobs.
 
 [End-to-end delivery and recovery evidence](autonomous-delivery.md)
+
+## Manually audited dependency deliveries
+
+For a phased PR with `Refs`, a manual Issue closure may have no GitHub automatic closing reference. `docs/issue-deliveries.json` is a reviewed list of `issue`, `pr`, full `merge_commit`, and issue-comment `audit_url`. The audit must cover the original acceptance; a partial delivery must not be entered. The first entry records #42 / PR #76; its earlier rigid evidence is retained in the audit.
+
+The selector reads the ledger from fetched `origin/main`, never the working copy or candidate branch. Each entry requires a currently closed issue, the matching merged PR targeting main, an exact merge hash, and commit ancestry in main. Malformed, missing or stale evidence stops dispatch with an actionable error; inspect and correct the reviewed record instead of deleting dependencies. An audit link is a traceability pointer, not an automated semantic proof. Regular closing references and all approval, blocker, recursive-dependency and active-work checks remain unchanged.
+
+This repairs dispatch evidence only; it does not qualify cloth or any new physics. #77 still needs its own bounded acceptance. Unmerged ledger edits intentionally cannot unlock tasks before review/merge.

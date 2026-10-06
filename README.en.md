@@ -1,5 +1,7 @@
 <div align="center">
 
+Manually accepted deliveries use a [reviewed ledger](docs/issue-deliveries.json) binding PR, merge commit and acceptance audit. The queue reads only merged main records and verifies live closure and ancestry. Restoring a cloth dependency does not qualify cloth physics.
+
 Genesis joint, GPU and cost reports now distinguish published evidence from remaining unverified capabilities; see the [capability audit](demos/contact-benchmark/GENESIS_COST.md).
 
 # DexLab
