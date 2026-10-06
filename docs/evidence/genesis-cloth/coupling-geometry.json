@@ -1,0 +1,42 @@
+[
+  {
+    "condition": "coupled",
+    "repeat": 0,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+  },
+  {
+    "condition": "coupled",
+    "repeat": 1,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+  },
+  {
+    "condition": "disabled",
+    "repeat": 0,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+  },
+  {
+    "condition": "disabled",
+    "repeat": 1,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+  }
+]

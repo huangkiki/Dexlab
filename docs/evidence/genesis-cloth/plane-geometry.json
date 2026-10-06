@@ -1,0 +1,104 @@
+[
+  {
+    "condition": "low",
+    "repeat": 0,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee.",
+    "plane": {
+      "minimum_signed_distance_m": 0.004,
+      "maximum_midsurface_depth_m": 0.0,
+      "crossing_intervals": 0,
+      "linear_sweep_minimum_m": 0.004,
+      "scope": "For straight interpolation of vertices against a fixed horizontal plane, the space-time minimum occurs at an endpoint vertex. This does not certify the engine path between observations."
+    }
+  },
+  {
+    "condition": "low",
+    "repeat": 1,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee.",
+    "plane": {
+      "minimum_signed_distance_m": 0.004,
+      "maximum_midsurface_depth_m": 0.0,
+      "crossing_intervals": 0,
+      "linear_sweep_minimum_m": 0.004,
+      "scope": "For straight interpolation of vertices against a fixed horizontal plane, the space-time minimum occurs at an endpoint vertex. This does not certify the engine path between observations."
+    }
+  },
+  {
+    "condition": "high",
+    "repeat": 0,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee.",
+    "plane": {
+      "minimum_signed_distance_m": 0.004,
+      "maximum_midsurface_depth_m": 0.0,
+      "crossing_intervals": 0,
+      "linear_sweep_minimum_m": 0.004,
+      "scope": "For straight interpolation of vertices against a fixed horizontal plane, the space-time minimum occurs at an endpoint vertex. This does not certify the engine path between observations."
+    }
+  },
+  {
+    "condition": "high",
+    "repeat": 1,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee.",
+    "plane": {
+      "minimum_signed_distance_m": 0.004,
+      "maximum_midsurface_depth_m": 0.0,
+      "crossing_intervals": 0,
+      "linear_sweep_minimum_m": 0.004,
+      "scope": "For straight interpolation of vertices against a fixed horizontal plane, the space-time minimum occurs at an endpoint vertex. This does not certify the engine path between observations."
+    }
+  },
+  {
+    "condition": "disabled",
+    "repeat": 0,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee.",
+    "plane": {
+      "minimum_signed_distance_m": -0.42439299999998853,
+      "maximum_midsurface_depth_m": 0.42439299999998853,
+      "crossing_intervals": 1,
+      "linear_sweep_minimum_m": -0.42439299999998853,
+      "scope": "For straight interpolation of vertices against a fixed horizontal plane, the space-time minimum occurs at an endpoint vertex. This does not certify the engine path between observations."
+    }
+  },
+  {
+    "condition": "disabled",
+    "repeat": 1,
+    "frames": 151,
+    "max_interval_s": 0.0020000000000000018,
+    "maximum_crossing_pairs": 0,
+    "frames_with_self_crossing": 0,
+    "maximum_degenerate_triangles": 0,
+    "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee.",
+    "plane": {
+      "minimum_signed_distance_m": -0.42439299999998853,
+      "maximum_midsurface_depth_m": 0.42439299999998853,
+      "crossing_intervals": 1,
+      "linear_sweep_minimum_m": -0.42439299999998853,
+      "scope": "For straight interpolation of vertices against a fixed horizontal plane, the space-time minimum occurs at an endpoint vertex. This does not certify the engine path between observations."
+    }
+  }
+]

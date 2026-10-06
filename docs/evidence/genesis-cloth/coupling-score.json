@@ -1,0 +1,65 @@
+{
+  "valid": true,
+  "passed": false,
+  "cases": {
+    "coupled": {
+      "passed": false,
+      "repeat_max_differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "max_momentum_residual_kg_m_s": 3.1999999999989204e-05,
+          "momentum_tolerance_kg_m_s": 3.299999999999999e-07,
+          "momentum_passed": false,
+          "cloth_z_momentum_change_kg_m_s": 3.1999999999989204e-05,
+          "plate_z_momentum_change_kg_m_s": -3.1999999999989035e-05,
+          "transfer_verified": true,
+          "negative_verified": false
+        },
+        {
+          "max_momentum_residual_kg_m_s": 3.1999999999989204e-05,
+          "momentum_tolerance_kg_m_s": 3.299999999999999e-07,
+          "momentum_passed": false,
+          "cloth_z_momentum_change_kg_m_s": 3.1999999999989204e-05,
+          "plate_z_momentum_change_kg_m_s": -3.1999999999989035e-05,
+          "transfer_verified": true,
+          "negative_verified": false
+        }
+      ]
+    },
+    "disabled": {
+      "passed": true,
+      "repeat_max_differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "max_momentum_residual_kg_m_s": 1.6940658945086007e-19,
+          "momentum_tolerance_kg_m_s": 3.299999999999999e-07,
+          "momentum_passed": true,
+          "cloth_z_momentum_change_kg_m_s": 1.6940658945086007e-19,
+          "plate_z_momentum_change_kg_m_s": 0.0,
+          "transfer_verified": false,
+          "negative_verified": true
+        },
+        {
+          "max_momentum_residual_kg_m_s": 1.6940658945086007e-19,
+          "momentum_tolerance_kg_m_s": 3.299999999999999e-07,
+          "momentum_passed": true,
+          "cloth_z_momentum_change_kg_m_s": 1.6940658945086007e-19,
+          "plate_z_momentum_change_kg_m_s": 0.0,
+          "transfer_verified": false,
+          "negative_verified": true
+        }
+      ]
+    }
+  },
+  "limits": "Linear momentum only; native PBD force readback, angular momentum and frictional grasp remain unqualified."
+}

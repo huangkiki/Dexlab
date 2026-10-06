@@ -1,0 +1,90 @@
+{
+  "valid": true,
+  "passed": true,
+  "cases": {
+    "low": {
+      "episodes": [
+        {
+          "support_passed": true,
+          "minimum_surface_z_m": 0.004,
+          "hold_center_height_error_m": 2.6020852139652106e-18,
+          "freefall_z_error_m": 0.42839299999999997,
+          "freefall_vz_error_m_s": 2.9430000000000005,
+          "negative_verified": false,
+          "mean_final_x_travel_m": 0.05999999999999973,
+          "mean_final_vx_m_s": 0.19999999999999865
+        },
+        {
+          "support_passed": true,
+          "minimum_surface_z_m": 0.004,
+          "hold_center_height_error_m": 2.6020852139652106e-18,
+          "freefall_z_error_m": 0.42839299999999997,
+          "freefall_vz_error_m_s": 2.9430000000000005,
+          "negative_verified": false,
+          "mean_final_x_travel_m": 0.05999999999999973,
+          "mean_final_vx_m_s": 0.19999999999999865
+        }
+      ],
+      "reset_max_position_difference_m": 0.0,
+      "reset_max_velocity_difference_m_s": 0.0,
+      "reset_passed": true
+    },
+    "high": {
+      "episodes": [
+        {
+          "support_passed": true,
+          "minimum_surface_z_m": 0.004,
+          "hold_center_height_error_m": 2.6020852139652106e-18,
+          "freefall_z_error_m": 0.42839299999999997,
+          "freefall_vz_error_m_s": 2.9430000000000005,
+          "negative_verified": false,
+          "mean_final_x_travel_m": 0.05999999999999973,
+          "mean_final_vx_m_s": 0.19999999999999865
+        },
+        {
+          "support_passed": true,
+          "minimum_surface_z_m": 0.004,
+          "hold_center_height_error_m": 2.6020852139652106e-18,
+          "freefall_z_error_m": 0.42839299999999997,
+          "freefall_vz_error_m_s": 2.9430000000000005,
+          "negative_verified": false,
+          "mean_final_x_travel_m": 0.05999999999999973,
+          "mean_final_vx_m_s": 0.19999999999999865
+        }
+      ],
+      "reset_max_position_difference_m": 0.0,
+      "reset_max_velocity_difference_m_s": 0.0,
+      "reset_passed": true
+    },
+    "disabled": {
+      "episodes": [
+        {
+          "support_passed": false,
+          "minimum_surface_z_m": -0.42439299999998853,
+          "hold_center_height_error_m": 0.42839299999998864,
+          "freefall_z_error_m": 1.1435297153639112e-14,
+          "freefall_vz_error_m_s": 1.3811174426336947e-13,
+          "negative_verified": true,
+          "mean_final_x_travel_m": 0.05999999999999973,
+          "mean_final_vx_m_s": 0.19999999999999865
+        },
+        {
+          "support_passed": false,
+          "minimum_surface_z_m": -0.42439299999998853,
+          "hold_center_height_error_m": 0.42839299999998864,
+          "freefall_z_error_m": 1.1435297153639112e-14,
+          "freefall_vz_error_m_s": 1.3811174426336947e-13,
+          "negative_verified": true,
+          "mean_final_x_travel_m": 0.05999999999999973,
+          "mean_final_vx_m_s": 0.19999999999999865
+        }
+      ],
+      "reset_max_position_difference_m": 0.0,
+      "reset_max_velocity_difference_m_s": 0.0,
+      "reset_passed": true
+    }
+  },
+  "high_low_max_position_difference_m": 0.0,
+  "high_low_max_velocity_difference_m_s": 0.0,
+  "limits": "Plane geometry only. Linear triangle-plane penetration is bounded by minimum vertex z; no general swept-surface/obstacle/self-contact proof. Native PBD coupling forces unqualified."
+}

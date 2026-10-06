@@ -1,0 +1,64 @@
+{
+  "valid": true,
+  "passed": true,
+  "matched_imported_xy_topology_mass": true,
+  "cases": [
+    {
+      "rest_separation_m": 0.03,
+      "episodes": [
+        {
+          "selected_pairs": 38,
+          "eligible_pairs": 38,
+          "excluded_pairs": 0,
+          "minimum_step1_distance_m": 0.007999999999888874,
+          "excluded_step1_max_distance_change_m": null,
+          "center_shift_m": 0.0,
+          "passed": true
+        },
+        {
+          "selected_pairs": 38,
+          "eligible_pairs": 38,
+          "excluded_pairs": 0,
+          "minimum_step1_distance_m": 0.007999999999888874,
+          "excluded_step1_max_distance_change_m": null,
+          "center_shift_m": 0.0,
+          "passed": true
+        }
+      ],
+      "repeat_max_differences": [
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "rest_separation_m": 0.006,
+      "episodes": [
+        {
+          "selected_pairs": 38,
+          "eligible_pairs": 0,
+          "excluded_pairs": 38,
+          "minimum_step1_distance_m": 0.006000000000000005,
+          "excluded_step1_max_distance_change_m": 0.0,
+          "center_shift_m": 0.0,
+          "passed": true
+        },
+        {
+          "selected_pairs": 38,
+          "eligible_pairs": 0,
+          "excluded_pairs": 38,
+          "minimum_step1_distance_m": 0.006000000000000005,
+          "excluded_step1_max_distance_change_m": 0.0,
+          "center_shift_m": 0.0,
+          "passed": true
+        }
+      ],
+      "repeat_max_differences": [
+        0.0,
+        0.0
+      ],
+      "passed": true
+    }
+  ],
+  "limits": "Rest-distance eligibility control, not public collision-off. Disconnected patches; no connected-fold or continuous triangle-collision qualification."
+}

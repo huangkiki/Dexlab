@@ -1,5 +1,9 @@
 # Results and failures
 
+## Genesis PBD cloth: failures remain visible
+
+Plane support and rest-distance self-contact controls pass their bounded checks. The free-plate test fails the simultaneous momentum bound (one-step reaction lag); gravity compensation restores gripper lift to 79.988 mm, but cloth holding still fails. These development diagnostics do not qualify cloth grasping, material accuracy or continuous collision detection. [Protocols, plots, continuous recorded-state replays and raw evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md). Issue #77 remains open.
+
 ## Newton XPBD: bounded positive and negative contact evidence
 
 The CPU sphere–plane profile passes its preregistered engineering bounds; maximum intrusion is 0.000849 mm and hold-force error is 0.051353%. A rebuild repeat is identical; a collision-disabled negative loses support and matches discrete free fall. These are synthetic primitive checks, not grasp, SDF or hardware qualification. [Complete traces, thresholds, raw data and limitations](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md).

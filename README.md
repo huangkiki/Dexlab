@@ -12,6 +12,11 @@ Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整�
 
 </div>
 
+**Genesis 薄布诊断：** 平面支撑通过，但摩擦0.01→0.5未改变轨迹；自由板反作用延迟2 ms，同一步动量验收失败。36格单步拉伸/弯曲响应检查通过，不能当作材料标定或完整夹布资格。[原始数据、判据与限制](docs/genesis-cloth.zh-CN.md)
+
+![Genesis 薄布诊断与失败](docs/evidence/genesis-cloth/diagnostics.png)
+
+
 **Newton XPBD 基本接触：** 官方核心 CPU 配置的最大穿透 0.000849 mm、保持期支撑力误差 0.051353%；禁碰撞负对照失去支撑并符合自由落体参考。三段逐步记录及曲线公开；不代表抓梗、SDF 或真机精度。[判据、全部结果与复现](docs/newton-contact.zh-CN.md)
 
 ![Newton XPBD 正负对照](docs/evidence/newton-xpbd/traces.png)

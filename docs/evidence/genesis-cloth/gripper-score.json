@@ -1,0 +1,97 @@
+{
+  "valid": true,
+  "passed": false,
+  "cases": [
+    {
+      "coupled": true,
+      "passed": false,
+      "repeat_passed": true,
+      "repeat_max_differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "held": false,
+          "released": true,
+          "actual_min_lift_m": 0.06821643531083514,
+          "hold_min_cloth_height_m": 0.004,
+          "hold_relative_center_drift_m": 0.25290616028444635,
+          "max_vertex_pad_intrusion_m": 0.0,
+          "intrusion_passed": true,
+          "final_gap_m": 0.059999999998446185,
+          "final_min_cloth_height_m": 0.004,
+          "max_abs_actuator_force_N": [
+            12.940750217056783,
+            10.0,
+            10.0
+          ]
+        },
+        {
+          "held": false,
+          "released": true,
+          "actual_min_lift_m": 0.06821643531083514,
+          "hold_min_cloth_height_m": 0.004,
+          "hold_relative_center_drift_m": 0.25290616028444635,
+          "max_vertex_pad_intrusion_m": 0.0,
+          "intrusion_passed": true,
+          "final_gap_m": 0.059999999998446185,
+          "final_min_cloth_height_m": 0.004,
+          "max_abs_actuator_force_N": [
+            12.940750217056783,
+            10.0,
+            10.0
+          ]
+        }
+      ]
+    },
+    {
+      "coupled": false,
+      "passed": true,
+      "repeat_passed": true,
+      "repeat_max_differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "held": false,
+          "released": true,
+          "actual_min_lift_m": 0.0682164353108345,
+          "hold_min_cloth_height_m": 0.004,
+          "hold_relative_center_drift_m": 5.929105504742793e-05,
+          "max_vertex_pad_intrusion_m": 0.0098873552280238,
+          "intrusion_passed": false,
+          "final_gap_m": 0.059999999998446185,
+          "final_min_cloth_height_m": 0.004,
+          "max_abs_actuator_force_N": [
+            12.94097045101657,
+            10.0,
+            10.0
+          ]
+        },
+        {
+          "held": false,
+          "released": true,
+          "actual_min_lift_m": 0.0682164353108345,
+          "hold_min_cloth_height_m": 0.004,
+          "hold_relative_center_drift_m": 5.929105504742793e-05,
+          "max_vertex_pad_intrusion_m": 0.0098873552280238,
+          "intrusion_passed": false,
+          "final_gap_m": 0.059999999998446185,
+          "final_min_cloth_height_m": 0.004,
+          "max_abs_actuator_force_N": [
+            12.94097045101657,
+            10.0,
+            10.0
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Vertex-to-box geometry only, not triangle/edge crossing certification. Actuator force is not independently measured cloth contact force. Synthetic fixture, not hardware."
+}
