@@ -10,8 +10,8 @@ SuperDex 可显式使用 `contact_indent_run.run(..., record_native_geometry=Tru
 
 开发证据：官方 FP64 运行时读回 BOX／PLANE、8 顶点、12 三角形与 ±0.02 m 边界。固定 0.8 秒法向加载轨迹、0.5 ms 步长，分别运行一次查询关闭和开启。所有记录的状态数组与完整接触记录完全相同。原驱动在两次仿真完成后的离线比较中漏传接触读取器参数而失败；随后只修复离线比较，没有重跑或覆盖仿真。这是一组无干扰对照，不是真机验证或统计可重复性证明。
 
-原始证据已本地保留，公开附件交付及完整 PR 回归门禁待完成。不据此声明 SDF 几何准确性。
+原始证据和完整回归结果已在 [v0.26.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.26.0) 发布。不据此声明 SDF 几何准确性。
 
 两条轨迹均未通过原来的 `no_tensile_normal_force` 检查。查询无干扰通过，不代表原接触问题修复。可用 `python demos/contact-benchmark/report_geometry.py EXTRACTED_PAIR` 离线复算几何、记录完整性、逐步状态与接触记录一致性，以及全部原验收失败。
 
-证据包已解压核对 165 个文件哈希，离线报告完全一致；[包大小、哈希与全部判定](../../docs/evidence/native-geometry-v1.json)。公开附件以实际 Release 为准。
+证据包已解压核对 165 个文件哈希，离线报告完全一致；[包大小、哈希与全部判定](../../docs/evidence/native-geometry-v1.json)。公开附件见上方 v0.26.0 Release。

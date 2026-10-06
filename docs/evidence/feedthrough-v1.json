@@ -1,0 +1,2436 @@
+{
+  "scope": "Synthetic local response, no hardware calibration",
+  "raw_contact_rescore": true,
+  "cases": [
+    {
+      "id": "high-load-2-dt-500us",
+      "profile": "high",
+      "load_n": 2.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 671.5970367002058,
+              "damping_ns_m": 1.0333061747278438,
+              "intercept_n": 1.9328245795919703,
+              "condition": 1.0939491848329392,
+              "residual_rms_n": 0.03878266153686829
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 429.7197530588057,
+              "damping_ns_m": -2.732543469407916,
+              "intercept_n": 1.9569888250045997,
+              "condition": 1.0201214166332033,
+              "residual_rms_n": 0.019360847053894917
+            },
+            "prediction_rms_n": 0.019553299440170105,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19328.402963299795,
+              "damping_ns_m": -38.96669382527216,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405418,
+              "damping_ns_m": 1.0810810810810845,
+              "intercept_n": -2.220446049250313e-16,
+              "condition": 1.1304841223168922,
+              "residual_rms_n": 3.534452148675006e-16,
+              "load_gain": 0.9729729729729729
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.540540540536,
+              "damping_ns_m": 1.081081081081008,
+              "intercept_n": 1.5543122344752192e-15,
+              "condition": 1.1071358946127836,
+              "residual_rms_n": 6.216257588307092e-16,
+              "load_gain": 0.9729729729729727
+            },
+            "prediction_rms_n": 3.402973930198639e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891891,
+              "load_gain": 0.9729729729729729
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 673.353897107617,
+              "damping_ns_m": 0.7589943662707092,
+              "intercept_n": 1.9326585482129752,
+              "condition": 1.0918190311892335,
+              "residual_rms_n": 0.0387797908371435
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 426.3032176187926,
+              "damping_ns_m": -2.8219565975556624,
+              "intercept_n": 1.9573279906155456,
+              "condition": 1.0232793412683756,
+              "residual_rms_n": 0.019364443251383374
+            },
+            "prediction_rms_n": 0.019554249716861583,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19326.646102892384,
+              "damping_ns_m": -39.241005633729294,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 542.005420054201,
+              "damping_ns_m": 0.8130081300813201,
+              "intercept_n": -1.3322676295501878e-15,
+              "condition": 1.128860840894363,
+              "residual_rms_n": 7.371496308275493e-16,
+              "load_gain": 0.9728997289972908
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 542.0054200541957,
+              "damping_ns_m": 0.8130081300811799,
+              "intercept_n": -6.661338147750939e-16,
+              "condition": 1.1044467939906026,
+              "residual_rms_n": 8.291812725253074e-16,
+              "load_gain": 0.9728997289972908
+            },
+            "prediction_rms_n": 7.357688469947062e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19457.9945799458,
+              "damping_ns_m": -39.18699186991868,
+              "load_gain": 0.9728997289972908
+            }
+          }
+        },
+        "momentum_peak_n": 4.260480856999038e-15
+      },
+      "receipt_sha256": "0a6ea3b994935e05a8d5bdd31346d8567d13c4e17f35763f729839decf3c4d61"
+    },
+    {
+      "id": "high-load-4-dt-500us",
+      "profile": "high",
+      "load_n": 4.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 671.5970367002985,
+              "damping_ns_m": 1.0333061747276364,
+              "intercept_n": 3.865649159183922,
+              "condition": 1.0939491848329272,
+              "residual_rms_n": 0.07756532307373644
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 429.7197530586039,
+              "damping_ns_m": -2.7325434694115036,
+              "intercept_n": 3.913977650009239,
+              "condition": 1.0201214166333084,
+              "residual_rms_n": 0.03872169410778989
+            },
+            "prediction_rms_n": 0.0391065988803402,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19328.4029632997,
+              "damping_ns_m": -38.966693825272365,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405404,
+              "damping_ns_m": 1.0810810810810727,
+              "intercept_n": 3.1086244689504383e-15,
+              "condition": 1.1304841223168987,
+              "residual_rms_n": 8.517661144765324e-16,
+              "load_gain": 0.9729729729729724
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405395,
+              "damping_ns_m": 1.0810810810810412,
+              "intercept_n": -4.440892098500626e-15,
+              "condition": 1.107135894612795,
+              "residual_rms_n": 7.101957063202258e-16,
+              "load_gain": 0.9729729729729742
+            },
+            "prediction_rms_n": 8.615502353353493e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.918918918918926,
+              "load_gain": 0.9729729729729724
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 673.3538971077115,
+              "damping_ns_m": 0.7589943662705084,
+              "intercept_n": 3.8653170964259327,
+              "condition": 1.0918190311892224,
+              "residual_rms_n": 0.07755958167428682
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 426.3032176186048,
+              "damping_ns_m": -2.8219565975588172,
+              "intercept_n": 3.9146559812311272,
+              "condition": 1.0232793412684846,
+              "residual_rms_n": 0.03872888650276675
+            },
+            "prediction_rms_n": 0.039108499433723035,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19326.64610289229,
+              "damping_ns_m": -39.24100563372949,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 542.0054200542007,
+              "damping_ns_m": 0.813008130081292,
+              "intercept_n": -4.440892098500626e-16,
+              "condition": 1.1288608408943717,
+              "residual_rms_n": 8.309631827591804e-16,
+              "load_gain": 0.97289972899729
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 542.005420054199,
+              "damping_ns_m": 0.8130081300812702,
+              "intercept_n": 1.3322676295501878e-15,
+              "condition": 1.1044467939906073,
+              "residual_rms_n": 1.208767267876262e-15,
+              "load_gain": 0.9728997289972899
+            },
+            "prediction_rms_n": 7.845750602111124e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19457.9945799458,
+              "damping_ns_m": -39.18699186991871,
+              "load_gain": 0.97289972899729
+            }
+          }
+        },
+        "momentum_peak_n": 1.9997892231060632e-14
+      },
+      "receipt_sha256": "9b077bcc590340f7dffed91d93fca49283d6f663ced3d15f0979cd0eb8206501"
+    },
+    {
+      "id": "high-load-6-dt-500us",
+      "profile": "high",
+      "load_n": 6.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 671.5970367003034,
+              "damping_ns_m": 1.0333061747282577,
+              "intercept_n": 5.7984737387758845,
+              "condition": 1.093949184832944,
+              "residual_rms_n": 0.11634798461060429
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 429.71975305882233,
+              "damping_ns_m": -2.7325434694074633,
+              "intercept_n": 5.870966475013793,
+              "condition": 1.020121416633269,
+              "residual_rms_n": 0.058082541161684986
+            },
+            "prediction_rms_n": 0.058659898320510356,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19328.402963299697,
+              "damping_ns_m": -38.96669382527174,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.540540540544,
+              "damping_ns_m": 1.081081081081047,
+              "intercept_n": 5.329070518200751e-15,
+              "condition": 1.1304841223169304,
+              "residual_rms_n": 2.388399133494953e-15,
+              "load_gain": 0.9729729729729722
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405373,
+              "damping_ns_m": 1.0810810810810099,
+              "intercept_n": 1.2434497875801753e-14,
+              "condition": 1.1071358946127385,
+              "residual_rms_n": 7.919245037569582e-16,
+              "load_gain": 0.972972972972971
+            },
+            "prediction_rms_n": 2.3156601657496784e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.459459459456,
+              "damping_ns_m": -38.918918918918955,
+              "load_gain": 0.9729729729729722
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 673.3538971077139,
+              "damping_ns_m": 0.7589943662710846,
+              "intercept_n": 5.797975644638898,
+              "condition": 1.0918190311892395,
+              "residual_rms_n": 0.11633937251142994
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 426.30321761882215,
+              "damping_ns_m": -2.8219565975551006,
+              "intercept_n": 5.8719839718466265,
+              "condition": 1.0232793412684444,
+              "residual_rms_n": 0.058093329754150276
+            },
+            "prediction_rms_n": 0.05866274915058468,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19326.646102892286,
+              "damping_ns_m": -39.24100563372892,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 542.0054200542024,
+              "damping_ns_m": 0.8130081300812741,
+              "intercept_n": 5.329070518200751e-15,
+              "condition": 1.1288608408944032,
+              "residual_rms_n": 9.278170416749356e-16,
+              "load_gain": 0.9728997289972889
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 542.005420054196,
+              "damping_ns_m": 0.8130081300812549,
+              "intercept_n": 5.329070518200751e-15,
+              "condition": 1.1044467939905545,
+              "residual_rms_n": 1.5641147279904575e-15,
+              "load_gain": 0.9728997289972895
+            },
+            "prediction_rms_n": 1.0209223628774433e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19457.994579945796,
+              "damping_ns_m": -39.18699186991873,
+              "load_gain": 0.9728997289972889
+            }
+          }
+        },
+        "momentum_peak_n": 3.683164884193957e-14
+      },
+      "receipt_sha256": "cbc4b5be48e8ee82a997a3bcafe6dc82f2da72c2626a634fe7ed0da6c52d4f22"
+    },
+    {
+      "id": "high-load-2-dt-250us",
+      "profile": "high",
+      "load_n": 2.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 603.7253759709338,
+              "damping_ns_m": 4.938790800581833,
+              "intercept_n": 1.9396837404051797,
+              "condition": 1.0362680329133978,
+              "residual_rms_n": 0.03876387744068072
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 671.8286322258838,
+              "damping_ns_m": -3.033671981900597,
+              "intercept_n": 1.9327757509916308,
+              "condition": 1.0119870569198177,
+              "residual_rms_n": 0.019397302221942775
+            },
+            "prediction_rms_n": 0.019574237927810243,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19396.274624029065,
+              "damping_ns_m": -35.061209199418165,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405414,
+              "damping_ns_m": 1.0810810810811093,
+              "intercept_n": 4.440892098500626e-16,
+              "condition": 1.099725524091763,
+              "residual_rms_n": 8.961054261260734e-16,
+              "load_gain": 0.9729729729729731
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405386,
+              "damping_ns_m": 1.0810810810811364,
+              "intercept_n": 0.0,
+              "condition": 1.0837363852771038,
+              "residual_rms_n": 2.783871781568655e-16,
+              "load_gain": 0.972972972972973
+            },
+            "prediction_rms_n": 8.996061194050825e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891889,
+              "load_gain": 0.9729729729729731
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 607.2258137853897,
+              "damping_ns_m": 4.86337126391547,
+              "intercept_n": 1.9393367263235741,
+              "condition": 1.037798200290602,
+              "residual_rms_n": 0.038757174528020834
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 669.9541020586429,
+              "damping_ns_m": -3.081383295912319,
+              "intercept_n": 1.9329665780589795,
+              "condition": 1.0105560640842446,
+              "residual_rms_n": 0.01939930664566656
+            },
+            "prediction_rms_n": 0.019573845340417687,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19392.77418621461,
+              "damping_ns_m": -35.13662873608453,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 541.2719891745608,
+              "damping_ns_m": 0.9472259810554997,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 1.1017347664697688,
+              "residual_rms_n": 7.209827984840502e-16,
+              "load_gain": 0.9729364005412726
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 541.2719891745622,
+              "damping_ns_m": 0.9472259810555417,
+              "intercept_n": 8.881784197001252e-16,
+              "condition": 1.081718853672133,
+              "residual_rms_n": 8.186718638421367e-16,
+              "load_gain": 0.9729364005412717
+            },
+            "prediction_rms_n": 7.272596407387118e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19458.728010825438,
+              "damping_ns_m": -39.0527740189445,
+              "load_gain": 0.9729364005412726
+            }
+          }
+        },
+        "momentum_peak_n": 6.38378239159465e-15
+      },
+      "receipt_sha256": "f3b1b5836bf70f39b3639dc8345527dac8890e91222663ced68906afc3f53261"
+    },
+    {
+      "id": "high-load-4-dt-250us",
+      "profile": "high",
+      "load_n": 4.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 603.7253759712265,
+              "damping_ns_m": 4.938790800573218,
+              "intercept_n": 3.8793674808103003,
+              "condition": 1.0362680329135003,
+              "residual_rms_n": 0.07752775488136147
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 671.8286322259045,
+              "damping_ns_m": -3.033671981911298,
+              "intercept_n": 3.8655515019832567,
+              "condition": 1.0119870569197604,
+              "residual_rms_n": 0.038794604443884904
+            },
+            "prediction_rms_n": 0.03914847585562037,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19396.274624028774,
+              "damping_ns_m": -35.061209199426784,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405409,
+              "damping_ns_m": 1.08108108108109,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 1.099725524091774,
+              "residual_rms_n": 5.505407804403645e-16,
+              "load_gain": 0.9729729729729731
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405413,
+              "damping_ns_m": 1.0810810810811158,
+              "intercept_n": -4.884981308350689e-15,
+              "condition": 1.0837363852773338,
+              "residual_rms_n": 6.795072836895668e-16,
+              "load_gain": 0.9729729729729742
+            },
+            "prediction_rms_n": 5.377423412472531e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891891,
+              "load_gain": 0.9729729729729731
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 607.2258137856786,
+              "damping_ns_m": 4.8633712639065605,
+              "intercept_n": 3.8786734526470896,
+              "condition": 1.0377982002907038,
+              "residual_rms_n": 0.0775143490560417
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 669.9541020586686,
+              "damping_ns_m": -3.081383295923278,
+              "intercept_n": 3.865933156117953,
+              "condition": 1.0105560640841973,
+              "residual_rms_n": 0.038798613291332454
+            },
+            "prediction_rms_n": 0.039147690680835234,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19392.774186214323,
+              "damping_ns_m": -35.13662873609344,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 541.2719891745609,
+              "damping_ns_m": 0.9472259810554816,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 1.1017347664697759,
+              "residual_rms_n": 7.506946843872416e-16,
+              "load_gain": 0.9729364005412722
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 541.2719891745559,
+              "damping_ns_m": 0.9472259810554585,
+              "intercept_n": 2.6645352591003757e-15,
+              "condition": 1.0817188536723663,
+              "residual_rms_n": 1.0376280046867664e-15,
+              "load_gain": 0.9729364005412717
+            },
+            "prediction_rms_n": 7.35349915771883e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19458.728010825438,
+              "damping_ns_m": -39.05277401894452,
+              "load_gain": 0.9729364005412722
+            }
+          }
+        },
+        "momentum_peak_n": 1.27675647831893e-14
+      },
+      "receipt_sha256": "e9cef1c26d6035dedaa25ecf3d766824d68e4b0e56d3bc5c48e1c0e2a1ff35df"
+    },
+    {
+      "id": "high-load-6-dt-250us",
+      "profile": "high",
+      "load_n": 6.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 603.7253759710459,
+              "damping_ns_m": 4.9387908005760215,
+              "intercept_n": 5.8190512212155,
+              "condition": 1.0362680329135228,
+              "residual_rms_n": 0.11629163232204204
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 671.828632225668,
+              "damping_ns_m": -3.0336719819106235,
+              "intercept_n": 5.798327252974954,
+              "condition": 1.0119870569196947,
+              "residual_rms_n": 0.05819190666582731
+            },
+            "prediction_rms_n": 0.058722713783431205,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19396.274624028953,
+              "damping_ns_m": -35.06120919942398,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405393,
+              "damping_ns_m": 1.0810810810810512,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 1.0997255240918005,
+              "residual_rms_n": 1.6608877078071009e-15,
+              "load_gain": 0.9729729729729729
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405378,
+              "damping_ns_m": 1.0810810810812232,
+              "intercept_n": 8.881784197001252e-15,
+              "condition": 1.0837363852773092,
+              "residual_rms_n": 2.249784163675333e-15,
+              "load_gain": 0.9729729729729713
+            },
+            "prediction_rms_n": 1.6611845334207311e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891895,
+              "load_gain": 0.9729729729729729
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 607.225813785499,
+              "damping_ns_m": 4.863371263909457,
+              "intercept_n": 5.8180101789706855,
+              "condition": 1.0377982002907262,
+              "residual_rms_n": 0.11627152358406236
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 669.9541020584243,
+              "damping_ns_m": -3.0813832959226044,
+              "intercept_n": 5.798899734177001,
+              "condition": 1.0105560640841273,
+              "residual_rms_n": 0.058197919936998674
+            },
+            "prediction_rms_n": 0.05872153602125355,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19392.7741862145,
+              "damping_ns_m": -35.13662873609054,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 541.2719891745567,
+              "damping_ns_m": 0.947225981055439,
+              "intercept_n": 2.6645352591003757e-15,
+              "condition": 1.1017347664698038,
+              "residual_rms_n": 3.308688140669137e-15,
+              "load_gain": 0.9729364005412712
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 541.2719891745595,
+              "damping_ns_m": 0.9472259810555814,
+              "intercept_n": 6.217248937900877e-15,
+              "condition": 1.08171885367234,
+              "residual_rms_n": 1.6747816443126131e-15,
+              "load_gain": 0.9729364005412707
+            },
+            "prediction_rms_n": 3.263678043672003e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19458.72801082544,
+              "damping_ns_m": -39.05277401894456,
+              "load_gain": 0.9729364005412712
+            }
+          }
+        },
+        "momentum_peak_n": 5.440092820663267e-15
+      },
+      "receipt_sha256": "ac8da234b231a14666b8e6afa1ae7c6c61894624b2f0b61b21db2179f3806277"
+    },
+    {
+      "id": "high-load-2-dt-125us",
+      "profile": "high",
+      "load_n": 2.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 559.1411455511764,
+              "damping_ns_m": 5.4898305405892005,
+              "intercept_n": 1.9441530174375183,
+              "condition": 1.015627975969847,
+              "residual_rms_n": 0.03875080556569379
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 719.2616171610613,
+              "damping_ns_m": -2.300680395925342,
+              "intercept_n": 1.928040385253085,
+              "condition": 1.0380541971467734,
+              "residual_rms_n": 0.0194045496964687
+            },
+            "prediction_rms_n": 0.01957533039095392,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19440.858854448823,
+              "damping_ns_m": -34.5101694594108,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.54054054054,
+              "damping_ns_m": 1.08108108108108,
+              "intercept_n": -1.7763568394002505e-15,
+              "condition": 1.0989810530119244,
+              "residual_rms_n": 6.712489570563835e-16,
+              "load_gain": 0.9729729729729736
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405428,
+              "damping_ns_m": 1.0810810810810445,
+              "intercept_n": -1.1102230246251565e-15,
+              "condition": 1.0805164417187019,
+              "residual_rms_n": 4.537845630405284e-16,
+              "load_gain": 0.9729729729729736
+            },
+            "prediction_rms_n": 6.761431405248925e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891892,
+              "load_gain": 0.9729729729729736
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 561.0382865256141,
+              "damping_ns_m": 5.462031009376875,
+              "intercept_n": 1.9439641557671294,
+              "condition": 1.0162717585747552,
+              "residual_rms_n": 0.03874709689749033
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 718.658121737742,
+              "damping_ns_m": -2.322456058947168,
+              "intercept_n": 1.928102885512876,
+              "condition": 1.0371723124493535,
+              "residual_rms_n": 0.019405313581328427
+            },
+            "prediction_rms_n": 0.019574926595825347,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19438.961713474386,
+              "damping_ns_m": -34.53796899062313,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.9060175794451,
+              "damping_ns_m": 1.0141987829614714,
+              "intercept_n": 0.0,
+              "condition": 1.0999871811444024,
+              "residual_rms_n": 6.575787337755245e-16,
+              "load_gain": 0.9729546991210276
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.9060175794483,
+              "damping_ns_m": 1.0141987829614347,
+              "intercept_n": 2.220446049250313e-15,
+              "condition": 1.079585816112787,
+              "residual_rms_n": 7.784634947003681e-16,
+              "load_gain": 0.9729546991210267
+            },
+            "prediction_rms_n": 6.527341924682066e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.093982420556,
+              "damping_ns_m": -38.98580121703853,
+              "load_gain": 0.9729546991210276
+            }
+          }
+        },
+        "momentum_peak_n": 9.492406860545088e-15
+      },
+      "receipt_sha256": "d6b358494bd318676930440e0f6faa422472dc5a53f484e7faf94321fccb4b22"
+    },
+    {
+      "id": "high-load-4-dt-125us",
+      "profile": "high",
+      "load_n": 4.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 559.1411455515652,
+              "damping_ns_m": 5.489830540583183,
+              "intercept_n": 3.88830603487496,
+              "condition": 1.0156279759699551,
+              "residual_rms_n": 0.07750161113138801
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 719.2616171603096,
+              "damping_ns_m": -2.300680395908675,
+              "intercept_n": 3.856080770506321,
+              "condition": 1.03805419714713,
+              "residual_rms_n": 0.03880909939293776
+            },
+            "prediction_rms_n": 0.039150660781907716,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19440.858854448434,
+              "damping_ns_m": -34.510169459416815,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405409,
+              "damping_ns_m": 1.0810810810810878,
+              "intercept_n": 8.881784197001252e-16,
+              "condition": 1.0989810530118795,
+              "residual_rms_n": 6.04383633938131e-16,
+              "load_gain": 0.9729729729729728
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405428,
+              "damping_ns_m": 1.0810810810810474,
+              "intercept_n": -4.440892098500626e-15,
+              "condition": 1.080516441718615,
+              "residual_rms_n": 8.442441316460709e-16,
+              "load_gain": 0.9729729729729741
+            },
+            "prediction_rms_n": 6.062163378433435e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891891,
+              "load_gain": 0.9729729729729728
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 561.0382865260019,
+              "damping_ns_m": 5.462031009370755,
+              "intercept_n": 3.8879283115341816,
+              "condition": 1.0162717585748622,
+              "residual_rms_n": 0.07749419379498107
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 718.6581217369819,
+              "damping_ns_m": -2.322456058930784,
+              "intercept_n": 3.8562057710259054,
+              "condition": 1.0371723124497132,
+              "residual_rms_n": 0.03881062716265722
+            },
+            "prediction_rms_n": 0.03914985319165058,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19438.961713473996,
+              "damping_ns_m": -34.537968990629246,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.9060175794467,
+              "damping_ns_m": 1.014198782961484,
+              "intercept_n": 8.881784197001252e-16,
+              "condition": 1.0999871811443571,
+              "residual_rms_n": 1.025079205553247e-15,
+              "load_gain": 0.9729546991210276
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.9060175794441,
+              "damping_ns_m": 1.0141987829614048,
+              "intercept_n": 2.6645352591003757e-15,
+              "condition": 1.0795858161127003,
+              "residual_rms_n": 8.220524915640079e-16,
+              "load_gain": 0.9729546991210271
+            },
+            "prediction_rms_n": 1.0117963796134695e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.093982420552,
+              "damping_ns_m": -38.985801217038514,
+              "load_gain": 0.9729546991210276
+            }
+          }
+        },
+        "momentum_peak_n": 1.6903145549918008e-14
+      },
+      "receipt_sha256": "40b0e7fc67354509aababf2a35867db395e9761ee6d6f46f2af2ea52d2c16fc1"
+    },
+    {
+      "id": "high-load-6-dt-125us",
+      "profile": "high",
+      "load_n": 6.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": false,
+          "settled_depth": false,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 559.1411455516302,
+              "damping_ns_m": 5.489830540589831,
+              "intercept_n": 5.832459052312416,
+              "condition": 1.015627975969857,
+              "residual_rms_n": 0.11625241669708147
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 719.2616171606512,
+              "damping_ns_m": -2.3006803959264337,
+              "intercept_n": 5.784121155759378,
+              "condition": 1.0380541971468227,
+              "residual_rms_n": 0.058213649089406204
+            },
+            "prediction_rms_n": 0.05872599117286157,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19440.85885444837,
+              "damping_ns_m": -34.51016945941017,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.5405405405398,
+              "damping_ns_m": 1.081081081081056,
+              "intercept_n": 1.7763568394002505e-15,
+              "condition": 1.0989810530119073,
+              "residual_rms_n": 2.1044510984381026e-15,
+              "load_gain": 0.9729729729729724
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.5405405405411,
+              "damping_ns_m": 1.0810810810811273,
+              "intercept_n": 1.7763568394002505e-15,
+              "condition": 1.0805164417186623,
+              "residual_rms_n": 8.89703666724325e-16,
+              "load_gain": 0.9729729729729727
+            },
+            "prediction_rms_n": 2.0853286887277095e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.45945945946,
+              "damping_ns_m": -38.91891891891894,
+              "load_gain": 0.9729729729729724
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 561.0382865260688,
+              "damping_ns_m": 5.46203100937748,
+              "intercept_n": 5.831892467301248,
+              "condition": 1.0162717585747643,
+              "residual_rms_n": 0.11624129069247108
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 718.658121737315,
+              "damping_ns_m": -2.32245605894825,
+              "intercept_n": 5.784308656538756,
+              "condition": 1.0371723124494063,
+              "residual_rms_n": 0.05821594074398544
+            },
+            "prediction_rms_n": 0.058724779787475895,
+            "prediction_ok": false,
+            "fit_ok": false,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19438.96171347393,
+              "damping_ns_m": -34.53796899062252,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 540.906017579446,
+              "damping_ns_m": 1.0141987829614247,
+              "intercept_n": 0.0,
+              "condition": 1.0999871811443855,
+              "residual_rms_n": 3.160101185563425e-15,
+              "load_gain": 0.9729546991210272
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 540.9060175794448,
+              "damping_ns_m": 1.0141987829614847,
+              "intercept_n": 7.993605777301127e-15,
+              "condition": 1.0795858161127436,
+              "residual_rms_n": 1.1773599797398614e-15,
+              "load_gain": 0.9729546991210263
+            },
+            "prediction_rms_n": 3.1673477932041716e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": false,
+            "target_difference": {
+              "stiffness_n_m": -19459.093982420552,
+              "damping_ns_m": -38.98580121703858,
+              "load_gain": 0.9729546991210272
+            }
+          }
+        },
+        "momentum_peak_n": 1.3405943022348765e-14
+      },
+      "receipt_sha256": "6fae2070403c0f6bc5bccb2a2b1bbfca38b3b2070da6847bcfb185207d8f261f"
+    },
+    {
+      "id": "low-load-2-dt-500us",
+      "profile": "low",
+      "load_n": 2.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19971.15187630603,
+              "damping_ns_m": 40.00178409500493,
+              "intercept_n": 0.0028861743999673006,
+              "condition": 1.0565717167406319,
+              "residual_rms_n": 3.5374003828961146e-05
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19971.090156343944,
+              "damping_ns_m": 39.98952724413935,
+              "intercept_n": 0.002890346771033059,
+              "condition": 1.0271820746589808,
+              "residual_rms_n": 1.7505680898558378e-05
+            },
+            "prediction_rms_n": 1.790468074492945e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -28.848123693969683,
+              "damping_ns_m": 0.0017840950049290427,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.239282153536,
+              "damping_ns_m": 39.84047856430709,
+              "intercept_n": -2.4424906541753444e-15,
+              "condition": 8.912139318006073,
+              "residual_rms_n": 2.114413848049535e-15,
+              "load_gain": 0.003988035892324526
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.23928215343,
+              "damping_ns_m": 39.84047856430714,
+              "intercept_n": 1.7763568394002505e-15,
+              "condition": 9.002849533418269,
+              "residual_rms_n": 4.415841426153331e-16,
+              "load_gain": 0.003988035892327799
+            },
+            "prediction_rms_n": 3.314903602021605e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.7607178464641,
+              "damping_ns_m": -0.1595214356929091,
+              "load_gain": 0.003988035892324526
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20690.24409953997,
+              "damping_ns_m": 29.53147524809777,
+              "intercept_n": -0.06905752651111996,
+              "condition": 1.0545022052906525,
+              "residual_rms_n": 0.0008462566591694244
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20696.76895021199,
+              "damping_ns_m": 29.833681530378204,
+              "intercept_n": -0.06966128907215019,
+              "condition": 1.032538939592461,
+              "residual_rms_n": 0.0004220747447982113
+            },
+            "prediction_rms_n": 0.0004321147907964699,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 690.2440995399702,
+              "damping_ns_m": -10.46852475190223,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 22123.795814416502,
+              "damping_ns_m": 33.1856937216222,
+              "intercept_n": 1.9095836023552692e-14,
+              "condition": 9.944957378525041,
+              "residual_rms_n": 6.05539270629793e-14,
+              "load_gain": -0.1061897907208355
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 22123.79581442018,
+              "damping_ns_m": 33.185693721633285,
+              "intercept_n": 7.460698725481052e-14,
+              "condition": 9.96601903416905,
+              "residual_rms_n": 2.133229045060254e-14,
+              "load_gain": -0.10618979072104652
+            },
+            "prediction_rms_n": 2.1418819268263384e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 2123.7958144165023,
+              "damping_ns_m": -6.814306278377799,
+              "load_gain": -0.1061897907208355
+            }
+          }
+        },
+        "momentum_peak_n": 5.99838028863669e-11
+      },
+      "receipt_sha256": "2aeaa05a97f6a427fe5524709aa336e2e47e1d4717294092cd80570b9a6ae926"
+    },
+    {
+      "id": "low-load-4-dt-500us",
+      "profile": "low",
+      "load_n": 4.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19971.15187630506,
+              "damping_ns_m": 40.001784095004794,
+              "intercept_n": 0.005772348800128668,
+              "condition": 1.0565717167412532,
+              "residual_rms_n": 7.074800765944531e-05
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19971.090156344002,
+              "damping_ns_m": 39.98952724413915,
+              "intercept_n": 0.005780693542052795,
+              "condition": 1.0271820746587397,
+              "residual_rms_n": 3.501136179709379e-05
+            },
+            "prediction_rms_n": 3.580936148979923e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -28.848123694941023,
+              "damping_ns_m": 0.0017840950047940396,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.239282153547,
+              "damping_ns_m": 39.840478564307055,
+              "intercept_n": -2.6645352591003757e-15,
+              "condition": 8.912139317807648,
+              "residual_rms_n": 6.069641161627259e-15,
+              "load_gain": 0.003988035892323398
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.23928215352,
+              "damping_ns_m": 39.84047856430712,
+              "intercept_n": -1.7763568394002505e-15,
+              "condition": 9.002849533420948,
+              "residual_rms_n": 5.479600186598905e-16,
+              "load_gain": 0.003988035892324399
+            },
+            "prediction_rms_n": 5.891509130072236e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.76071784645319,
+              "damping_ns_m": -0.15952143569294464,
+              "load_gain": 0.003988035892323398
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20690.244099564014,
+              "damping_ns_m": 29.531475248092317,
+              "intercept_n": -0.1381150530270503,
+              "condition": 1.0545022052913997,
+              "residual_rms_n": 0.0016925133183755886
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20696.768950211503,
+              "damping_ns_m": 29.8336815303757,
+              "intercept_n": -0.1393225781442009,
+              "condition": 1.0325389395922149,
+              "residual_rms_n": 0.0008441494895945745
+            },
+            "prediction_rms_n": 0.0008642295815902818,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 690.2440995640136,
+              "damping_ns_m": -10.468524751907683,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 22123.795814416688,
+              "damping_ns_m": 33.1856937216245,
+              "intercept_n": -2.3092638912203256e-14,
+              "condition": 9.944957378303846,
+              "residual_rms_n": 1.6206959812315335e-13,
+              "load_gain": -0.10618979072082682
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 22123.795814416837,
+              "damping_ns_m": 33.18569372162316,
+              "intercept_n": -3.197442310920451e-14,
+              "condition": 9.966019034170472,
+              "residual_rms_n": 2.2686385411756384e-14,
+              "load_gain": -0.10618979072083369
+            },
+            "prediction_rms_n": 2.3572458561804087e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 2123.795814416688,
+              "damping_ns_m": -6.814306278375497,
+              "load_gain": -0.10618979072082682
+            }
+          }
+        },
+        "momentum_peak_n": 5.942786953098399e-11
+      },
+      "receipt_sha256": "028898b07a736a198ecb72da905cc88fe7576047a7b9eef18c79c610160be388"
+    },
+    {
+      "id": "low-load-6-dt-500us",
+      "profile": "low",
+      "load_n": 6.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19971.151876305128,
+              "damping_ns_m": 40.001784095004666,
+              "intercept_n": 0.008658523200173462,
+              "condition": 1.0565717167412916,
+              "residual_rms_n": 0.0001061220114959772
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19971.09015634397,
+              "damping_ns_m": 39.98952724413935,
+              "intercept_n": 0.008671040313092071,
+              "condition": 1.0271820746587625,
+              "residual_rms_n": 5.251704269563224e-05
+            },
+            "prediction_rms_n": 5.371404223481937e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -28.8481236948719,
+              "damping_ns_m": 0.001784095004666142,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.23928215354,
+              "damping_ns_m": 39.840478564307084,
+              "intercept_n": -2.6645352591003757e-15,
+              "condition": 8.912139317221431,
+              "residual_rms_n": 3.326966272203901e-15,
+              "load_gain": 0.003988035892323515
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.23928215346,
+              "damping_ns_m": 39.84047856430718,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 9.002849533419054,
+              "residual_rms_n": 1.5338766736024339e-15,
+              "load_gain": 0.003988035892327448
+            },
+            "prediction_rms_n": 6.609324672507285e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.76071784646047,
+              "damping_ns_m": -0.1595214356929162,
+              "load_gain": 0.003988035892323515
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20690.244099562064,
+              "damping_ns_m": 29.5314752480852,
+              "intercept_n": -0.20717257954004342,
+              "condition": 1.0545022052913973,
+              "residual_rms_n": 0.0025387699777273975
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20696.76895021138,
+              "damping_ns_m": 29.833681530376403,
+              "intercept_n": -0.20898386721626316,
+              "condition": 1.0325389395922278,
+              "residual_rms_n": 0.0012662242343928173
+            },
+            "prediction_rms_n": 0.001296344372393717,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 690.2440995620636,
+              "damping_ns_m": -10.4685247519148,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 22123.795814417575,
+              "damping_ns_m": 33.185693721625924,
+              "intercept_n": 4.085620730620576e-14,
+              "condition": 9.944957377653742,
+              "residual_rms_n": 9.020930388318714e-14,
+              "load_gain": -0.10618979072088494
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 22123.795814417565,
+              "damping_ns_m": 33.18569372162583,
+              "intercept_n": 8.970602038971265e-14,
+              "condition": 9.966019034168813,
+              "residual_rms_n": 2.2274272591968263e-14,
+              "load_gain": -0.10618979072089284
+            },
+            "prediction_rms_n": 2.2373569625534738e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 2123.7958144175755,
+              "damping_ns_m": -6.814306278374076,
+              "load_gain": -0.10618979072088494
+            }
+          }
+        },
+        "momentum_peak_n": 5.998390402588872e-11
+      },
+      "receipt_sha256": "fe02dbf13f9aba4695308829b99b5f81f1d6c2b37448699887e1f30e248a4757"
+    },
+    {
+      "id": "low-load-2-dt-250us",
+      "profile": "low",
+      "load_n": 2.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19971.02646503601,
+              "damping_ns_m": 40.00262835249673,
+              "intercept_n": 0.0028987219838050304,
+              "condition": 1.031215255440856,
+              "residual_rms_n": 3.5607561805410176e-05
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19970.912283119225,
+              "damping_ns_m": 39.99026858643092,
+              "intercept_n": 0.0029081295022199694,
+              "condition": 1.0046450892116219,
+              "residual_rms_n": 1.7654774338870223e-05
+            },
+            "prediction_rms_n": 1.806266904143006e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -28.97353496398864,
+              "damping_ns_m": 0.0026283524967283256,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.239282153554,
+              "damping_ns_m": 39.84047856430705,
+              "intercept_n": -1.7763568394002505e-15,
+              "condition": 8.84862732102644,
+              "residual_rms_n": 3.712530017172705e-15,
+              "load_gain": 0.003988035892323221
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.23928215357,
+              "damping_ns_m": 39.84047856430715,
+              "intercept_n": 2.6645352591003757e-15,
+              "condition": 8.92357669608929,
+              "residual_rms_n": 2.756060177257249e-16,
+              "load_gain": 0.003988035892320275
+            },
+            "prediction_rms_n": 2.9321240205258407e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.76071784644591,
+              "damping_ns_m": -0.15952143569295174,
+              "load_gain": 0.003988035892323221
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20332.49830983824,
+              "damping_ns_m": 34.86759287109175,
+              "intercept_n": -0.033265659073459464,
+              "condition": 1.0302101957648768,
+              "residual_rms_n": 0.0004086002544270355
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20335.027049399134,
+              "damping_ns_m": 35.011695151348356,
+              "intercept_n": -0.03349525256622776,
+              "condition": 1.0072493655936205,
+              "residual_rms_n": 0.00020338126998680668
+            },
+            "prediction_rms_n": 0.0002081803359802586,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 332.49830983823995,
+              "damping_ns_m": -5.132407128908248,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20964.272598499316,
+              "damping_ns_m": 36.68747704737274,
+              "intercept_n": -1.1546319456101628e-14,
+              "condition": 9.334506887823169,
+              "residual_rms_n": 4.948401426693965e-14,
+              "load_gain": -0.0482136299249593
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20964.27259850074,
+              "damping_ns_m": 36.68747704737854,
+              "intercept_n": -6.217248937900877e-15,
+              "condition": 9.375877129393468,
+              "residual_rms_n": 2.073219994616311e-14,
+              "load_gain": -0.048213629925033925
+            },
+            "prediction_rms_n": 2.0864936766652537e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 964.2725984993158,
+              "damping_ns_m": -3.312522952627262,
+              "load_gain": -0.0482136299249593
+            }
+          }
+        },
+        "momentum_peak_n": 5.999509088741304e-11
+      },
+      "receipt_sha256": "7ae379eedde70f77d4a7a4256293ce1417f28b1e869227ca8c66503fa4c970c9"
+    },
+    {
+      "id": "low-load-4-dt-250us",
+      "profile": "low",
+      "load_n": 4.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19971.026465036346,
+              "damping_ns_m": 40.00262835249685,
+              "intercept_n": 0.005797443967543892,
+              "condition": 1.0312152554406562,
+              "residual_rms_n": 7.121512360553129e-05
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19970.91228311923,
+              "damping_ns_m": 39.99026858643095,
+              "intercept_n": 0.005816259004439939,
+              "condition": 1.004645089211406,
+              "residual_rms_n": 3.530954867774913e-05
+            },
+            "prediction_rms_n": 3.612533808297065e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -28.973534963653947,
+              "damping_ns_m": 0.002628352496849118,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.23928215355,
+              "damping_ns_m": 39.840478564307126,
+              "intercept_n": -2.6645352591003757e-15,
+              "condition": 8.848627321701207,
+              "residual_rms_n": 9.920201506336514e-16,
+              "load_gain": 0.003988035892323395
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.239282153532,
+              "damping_ns_m": 39.84047856430714,
+              "intercept_n": 8.881784197001252e-16,
+              "condition": 8.923576696090471,
+              "residual_rms_n": 6.019825398928962e-16,
+              "load_gain": 0.003988035892323267
+            },
+            "prediction_rms_n": 1.0341177711654676e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.76071784644955,
+              "damping_ns_m": -0.15952143569287358,
+              "load_gain": 0.003988035892323395
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20332.49830983427,
+              "damping_ns_m": 34.867592871094985,
+              "intercept_n": -0.06653131814610846,
+              "condition": 1.0302101957646699,
+              "residual_rms_n": 0.0008172005087938905
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20335.027049399,
+              "damping_ns_m": 35.01169515134743,
+              "intercept_n": -0.06699050513242444,
+              "condition": 1.0072493655934076,
+              "residual_rms_n": 0.00040676253997203493
+            },
+            "prediction_rms_n": 0.0004163606719570436,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 332.4983098342709,
+              "damping_ns_m": -5.132407128905015,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20964.272598499625,
+              "damping_ns_m": 36.68747704737479,
+              "intercept_n": 4.884981308350689e-14,
+              "condition": 9.33450688853326,
+              "residual_rms_n": 2.0914011692472698e-14,
+              "load_gain": -0.048213629924993125
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20964.272598498075,
+              "damping_ns_m": 36.6874770473705,
+              "intercept_n": -2.3714363805993344e-13,
+              "condition": 9.375877129393457,
+              "residual_rms_n": 2.135524593687866e-14,
+              "load_gain": -0.04821362992484415
+            },
+            "prediction_rms_n": 2.143488188948319e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 964.272598499625,
+              "damping_ns_m": -3.3125229526252085,
+              "load_gain": -0.048213629924993125
+            }
+          }
+        },
+        "momentum_peak_n": 5.989461899685382e-11
+      },
+      "receipt_sha256": "8a7a6aa013693585767013a20716a2e52a958f49746716db9dcd9cfcf6ebb84f"
+    },
+    {
+      "id": "low-load-6-dt-250us",
+      "profile": "low",
+      "load_n": 6.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19971.02646503666,
+              "damping_ns_m": 40.00262835249693,
+              "intercept_n": 0.008696165951216805,
+              "condition": 1.0312152554407872,
+              "residual_rms_n": 0.000106822685404692
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19970.912283119294,
+              "damping_ns_m": 39.990268586430474,
+              "intercept_n": 0.008724388506635705,
+              "condition": 1.0046450892114196,
+              "residual_rms_n": 5.296432301664496e-05
+            },
+            "prediction_rms_n": 5.41880071239076e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -28.97353496334108,
+              "damping_ns_m": 0.0026283524969272776,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.239282153565,
+              "damping_ns_m": 39.84047856430711,
+              "intercept_n": -2.6645352591003757e-15,
+              "condition": 8.848627322005475,
+              "residual_rms_n": 2.163539552759593e-15,
+              "load_gain": 0.003988035892321893
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.239282153678,
+              "damping_ns_m": 39.840478564307006,
+              "intercept_n": 8.881784197001252e-16,
+              "condition": 8.923576696088272,
+              "residual_rms_n": 2.29867112714792e-15,
+              "load_gain": 0.003988035892315648
+            },
+            "prediction_rms_n": 2.188238034285014e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.760717846435,
+              "damping_ns_m": -0.1595214356928878,
+              "load_gain": 0.003988035892321893
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20332.498309830822,
+              "damping_ns_m": 34.86759287109555,
+              "intercept_n": -0.09979697721812197,
+              "condition": 1.0302101957647862,
+              "residual_rms_n": 0.0012258007631495867
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20335.02704939886,
+              "damping_ns_m": 35.01169515134627,
+              "intercept_n": -0.10048575769860157,
+              "condition": 1.0072493655934258,
+              "residual_rms_n": 0.0006101438099603731
+            },
+            "prediction_rms_n": 0.0006245410079370863,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 332.4983098308221,
+              "damping_ns_m": -5.132407128904447,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20964.272598499698,
+              "damping_ns_m": 36.687477047374436,
+              "intercept_n": 1.2434497875801753e-14,
+              "condition": 9.33450688885357,
+              "residual_rms_n": 2.1176711890995686e-14,
+              "load_gain": -0.048213629924986894
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20964.272598500545,
+              "damping_ns_m": 36.687477047375346,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 9.375877129392146,
+              "residual_rms_n": 2.1386653511433927e-14,
+              "load_gain": -0.04821362992502783
+            },
+            "prediction_rms_n": 2.0974613579610537e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 964.2725984996978,
+              "damping_ns_m": -3.3125229526255637,
+              "load_gain": -0.048213629924986894
+            }
+          }
+        },
+        "momentum_peak_n": 5.990376961325011e-11
+      },
+      "receipt_sha256": "41e3df35e63c8fef0bbcfbd1cb2198120794ef61e6f87e74d50851ec8a38c9b0"
+    },
+    {
+      "id": "low-load-2-dt-125us",
+      "profile": "low",
+      "load_n": 2.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19970.970373349464,
+              "damping_ns_m": 40.003042280227625,
+              "intercept_n": 0.0029043337594811813,
+              "condition": 1.0187407791853094,
+              "residual_rms_n": 3.571845205758565e-05
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19970.82949184632,
+              "damping_ns_m": 39.990634131232746,
+              "intercept_n": 0.0029164066010278766,
+              "condition": 1.006515818774232,
+              "residual_rms_n": 1.7726625881804215e-05
+            },
+            "prediction_rms_n": 1.8138747847804365e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -29.029626650535647,
+              "damping_ns_m": 0.0030422802276248717,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.239282153536,
+              "damping_ns_m": 39.84047856430709,
+              "intercept_n": 2.220446049250313e-16,
+              "condition": 8.819386374387095,
+              "residual_rms_n": 1.091327209231524e-15,
+              "load_gain": 0.003988035892322698
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.23928215357,
+              "damping_ns_m": 39.84047856430713,
+              "intercept_n": 1.7763568394002505e-15,
+              "condition": 8.886526612970584,
+              "residual_rms_n": 9.50108665413399e-16,
+              "load_gain": 0.0039880358923202715
+            },
+            "prediction_rms_n": 9.426604207776602e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.7607178464641,
+              "damping_ns_m": -0.1595214356929091,
+              "load_gain": 0.003988035892322698
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20152.147371923726,
+              "damping_ns_m": 37.460696732079846,
+              "intercept_n": -0.015221951071642925,
+              "condition": 1.0182455790413207,
+              "residual_rms_n": 0.00018719763307911653
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20153.16478579246,
+              "damping_ns_m": 37.52625941828562,
+              "intercept_n": -0.015313083456145016,
+              "condition": 1.0052168958844223,
+              "residual_rms_n": 9.30848592069974e-05
+            },
+            "prediction_rms_n": 9.527176981623793e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 152.1473719237256,
+              "damping_ns_m": -2.539303267920154,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20428.925640960006,
+              "damping_ns_m": 38.30423557679983,
+              "intercept_n": 2.6645352591003757e-15,
+              "condition": 9.055400578346136,
+              "residual_rms_n": 2.0974406795557132e-14,
+              "load_gain": -0.021446282048002082
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20428.92564096057,
+              "damping_ns_m": 38.304235576802796,
+              "intercept_n": 4.218847493575595e-14,
+              "condition": 9.106039156422959,
+              "residual_rms_n": 2.046738678408766e-14,
+              "load_gain": -0.021446282048050058
+            },
+            "prediction_rms_n": 2.0469592687024296e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 428.9256409600057,
+              "damping_ns_m": -1.695764423200167,
+              "load_gain": -0.021446282048002082
+            }
+          }
+        },
+        "momentum_peak_n": 5.99975620034883e-11
+      },
+      "receipt_sha256": "5108a1654fc7d155629e95102c4d6253d70a426a9317186197dfb6c8c84f9538"
+    },
+    {
+      "id": "low-load-4-dt-125us",
+      "profile": "low",
+      "load_n": 4.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19970.97037334874,
+              "damping_ns_m": 40.00304228022753,
+              "intercept_n": 0.005808667519109356,
+              "condition": 1.0187407791852627,
+              "residual_rms_n": 7.143690411645915e-05
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19970.82949184632,
+              "damping_ns_m": 39.990634131232746,
+              "intercept_n": 0.0058328132020570855,
+              "condition": 1.0065158187745484,
+              "residual_rms_n": 3.5453251763577855e-05
+            },
+            "prediction_rms_n": 3.627749569583169e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -29.029626651259605,
+              "damping_ns_m": 0.003042280227532501,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.23928215354,
+              "damping_ns_m": 39.840478564307155,
+              "intercept_n": 3.9968028886505635e-15,
+              "condition": 8.819386374221192,
+              "residual_rms_n": 9.013000849345244e-16,
+              "load_gain": 0.0039880358923220045
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.239282153507,
+              "damping_ns_m": 39.840478564307034,
+              "intercept_n": 0.0,
+              "condition": 8.886526612976557,
+              "residual_rms_n": 6.115807408998065e-16,
+              "load_gain": 0.003988035892324782
+            },
+            "prediction_rms_n": 6.713407643408252e-16,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.76071784646047,
+              "damping_ns_m": -0.15952143569284516,
+              "load_gain": 0.0039880358923220045
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20152.14737192749,
+              "damping_ns_m": 37.46069673208003,
+              "intercept_n": -0.030443902144039914,
+              "condition": 1.018245579041295,
+              "residual_rms_n": 0.0003743952661649673
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20153.164785792287,
+              "damping_ns_m": 37.52625941828439,
+              "intercept_n": -0.030626166912253616,
+              "condition": 1.0052168958847327,
+              "residual_rms_n": 0.00018616971841331682
+            },
+            "prediction_rms_n": 0.00019054353963167444,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 152.1473719274909,
+              "damping_ns_m": -2.539303267919969,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20428.925640959915,
+              "damping_ns_m": 38.304235576799584,
+              "intercept_n": -3.552713678800501e-15,
+              "condition": 9.05540057817581,
+              "residual_rms_n": 2.092638318993939e-14,
+              "load_gain": -0.021446282047994623
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20428.92564095961,
+              "damping_ns_m": 38.304235576798746,
+              "intercept_n": 1.1546319456101628e-14,
+              "condition": 9.106039156428587,
+              "residual_rms_n": 2.0479955856406152e-14,
+              "load_gain": -0.021446282047983357
+            },
+            "prediction_rms_n": 2.049914151143804e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 428.92564095991474,
+              "damping_ns_m": -1.6957644232004156,
+              "load_gain": -0.021446282047994623
+            }
+          }
+        },
+        "momentum_peak_n": 5.997371320026382e-11
+      },
+      "receipt_sha256": "85ca7ea0ca9e74fb2eff92d9cd1965ba2d05632d6e19c7d5282c7f76e69b7897"
+    },
+    {
+      "id": "low-load-6-dt-125us",
+      "profile": "low",
+      "load_n": 6.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "models": {
+          "pre-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19970.97037334857,
+              "damping_ns_m": 40.00304228022752,
+              "intercept_n": 0.008713001278715993,
+              "condition": 1.018740779185326,
+              "residual_rms_n": 0.00010715535617871605
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19970.829491846296,
+              "damping_ns_m": 39.99063413123286,
+              "intercept_n": 0.008749219803094732,
+              "condition": 1.0065158187742718,
+              "residual_rms_n": 5.317987764540708e-05
+            },
+            "prediction_rms_n": 5.44162435438207e-05,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -29.02962665143059,
+              "damping_ns_m": 0.0030422802275182903,
+              "load_gain": 0.0
+            }
+          },
+          "pre-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19920.23928215353,
+              "damping_ns_m": 39.84047856430706,
+              "intercept_n": 6.217248937900877e-15,
+              "condition": 8.819386373884198,
+              "residual_rms_n": 1.6714664817598915e-15,
+              "load_gain": 0.003988035892322819
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19920.239282153492,
+              "damping_ns_m": 39.84047856430704,
+              "intercept_n": -8.881784197001252e-16,
+              "condition": 8.886526612973222,
+              "residual_rms_n": 1.6071796497383393e-15,
+              "load_gain": 0.003988035892325829
+            },
+            "prediction_rms_n": 1.5911475317184403e-15,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": -79.76071784647138,
+              "damping_ns_m": -0.15952143569293753,
+              "load_gain": 0.003988035892322819
+            }
+          },
+          "post-basic": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20152.147371928528,
+              "damping_ns_m": 37.46069673208004,
+              "intercept_n": -0.045665853216376284,
+              "condition": 1.0182455790413596,
+              "residual_rms_n": 0.0005615928992682012
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20153.16478579246,
+              "damping_ns_m": 37.526259418284816,
+              "intercept_n": -0.04593925036842883,
+              "condition": 1.0052168958844523,
+              "residual_rms_n": 0.0002792545776200968
+            },
+            "prediction_rms_n": 0.00028581530944827535,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 152.14737192852772,
+              "damping_ns_m": -2.539303267919962,
+              "load_gain": 0.0
+            }
+          },
+          "post-load": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 20428.92564095985,
+              "damping_ns_m": 38.304235576799655,
+              "intercept_n": -2.398081733190338e-14,
+              "condition": 9.055400577830236,
+              "residual_rms_n": 2.0667665638844498e-14,
+              "load_gain": -0.021446282047988173
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20428.925640959733,
+              "damping_ns_m": 38.304235576799215,
+              "intercept_n": -1.9539925233402755e-14,
+              "condition": 9.10603915642523,
+              "residual_rms_n": 2.0628242563677683e-14,
+              "load_gain": -0.021446282047982868
+            },
+            "prediction_rms_n": 2.0518801819118876e-14,
+            "prediction_ok": true,
+            "fit_ok": true,
+            "data_valid": true,
+            "target_difference": {
+              "stiffness_n_m": 428.92564095984926,
+              "damping_ns_m": -1.6957644232003446,
+              "load_gain": -0.021446282047988173
+            }
+          }
+        },
+        "momentum_peak_n": 5.998735597671077e-11
+      },
+      "receipt_sha256": "59de0b1995d3c7338b7a77cc878a9dfdaa61850a93aa3df9cebd6e5a64107dbd"
+    }
+  ]
+}

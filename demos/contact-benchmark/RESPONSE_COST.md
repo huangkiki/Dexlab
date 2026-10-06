@@ -2,7 +2,7 @@
 
 English | [简体中文](RESPONSE_COST.zh-CN.md)
 
-Status: all 27 formal episodes and offline score reproduction completed. Full delivery grasp regressions and publication gates remain pending.
+Status: all 27 formal episodes and offline score reproduction completed. Full delivery regressions and evidence were published in [v0.24.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.24.0).
 
 ## Question and reference
 

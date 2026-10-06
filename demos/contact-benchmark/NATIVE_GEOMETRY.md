@@ -10,8 +10,8 @@ Enable explicitly with `contact_indent_run.run(..., record_native_geometry=True)
 
 Development evidence: the official FP64 runtime returned BOX/PLANE, 8 vertices, 12 triangles and ±0.02 m bounds. A fixed 0.8 s normal-load trajectory (0.5 ms steps) was executed once with queries off and once on. Every recorded state array and the full contact ledger were exactly equal. The original driver failed after both completed runs because its offline comparison omitted the contact-reader receipt argument. Offline-only recovery succeeded; neither simulation was retried or overwritten. This is one noninterference pair, not hardware validation or statistical reproducibility.
 
-Raw evidence is retained locally; public archive delivery and complete PR regression gates are pending. No new geometry accuracy claim for SDF is made.
+Raw evidence and complete regression results were published in [v0.26.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.26.0). No new geometry accuracy claim for SDF is made.
 
 Both trajectories still fail the original `no_tensile_normal_force` check. Observation noninterference does not repair that contact failure. Run `python demos/contact-benchmark/report_geometry.py EXTRACTED_PAIR` to rescore geometry, archive integrity, exact state/contact equality and all original acceptance failures offline.
 
-The prepared archive was extracted: 165 file hashes and the full offline report match. [Size, hash and all outcomes](../../docs/evidence/native-geometry-v1.json). Public availability depends on the actual Release.
+The prepared archive was extracted: 165 file hashes and the full offline report match. [Size, hash and all outcomes](../../docs/evidence/native-geometry-v1.json). The archive is available in the linked v0.26.0 Release.

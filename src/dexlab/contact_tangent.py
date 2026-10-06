@@ -41,12 +41,16 @@ def commands(load, dt):
     return load * (1 + amplitude * wave)
 
 
-def fit_response(depth, inward_speed, force):
-    """Centered/scaled full-rank regression F = intercept + K*d + D*v."""
+def fit_response(depth, inward_speed, force, *, applied_load=None):
+    """Fit force versus state, optionally separating applied-load feedthrough."""
     x = np.column_stack((depth, inward_speed)).astype(float)
+    if applied_load is not None:
+        x = np.column_stack((x, applied_load))
+    width = 2 if applied_load is None else 3
     y = np.asarray(force, dtype=float)
     if (
-        x.shape != (len(y), 2)
+        y.ndim != 1
+        or x.shape != (len(y), width)
         or len(y) < 10
         or not np.isfinite(x).all()
         or not np.isfinite(y).all()
@@ -61,18 +65,21 @@ def fit_response(depth, inward_speed, force):
     if condition > LIMITS["condition"]:
         raise ValueError("Response coordinates are not independently identifiable")
     coefficients, _, rank, _ = np.linalg.lstsq(design, y, rcond=None)
-    if rank != 3:
+    if rank != width + 1:
         raise ValueError("Rank-deficient response")
     slopes = coefficients[1:] / scale
     intercept = float(coefficients[0] - slopes @ center)
     predicted = intercept + x @ slopes
-    return {
+    result = {
         "stiffness_n_m": float(slopes[0]),
         "damping_ns_m": float(slopes[1]),
         "intercept_n": intercept,
         "condition": condition,
         "residual_rms_n": float(np.sqrt(np.mean((y - predicted) ** 2))),
     }
+    if applied_load is not None:
+        result["load_gain"] = float(slopes[2])
+    return result
 
 
 def score(load, dt, data):
