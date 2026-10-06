@@ -25,6 +25,8 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 ![Genesis pinch and release](docs/evidence/genesis-pinch.png)
 
+**Genesis GPU 准入：** 单场景重置、双场景隔离和容量正负对照通过；公开同步计时分项，不据此宣称抓取通过或加速。[协议、耗时与限制](demos/contact-benchmark/GENESIS_GPU.zh-CN.md)。
+
 ## 实验依据与当前答案
 
 **目前没有证据证明哪套引擎更符合真实抓取。** 我们先检验声明模型的实现和数值误差，再用实测数据判断物理有效性。抓取成功率仅作配置回归。
