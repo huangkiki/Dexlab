@@ -2,6 +2,8 @@
 
 [English](engine-qualification.md) | [简体中文](engine-qualification.zh-CN.md)
 
+Current Newton core evidence is separate from the historical `sim`-extra constraint table below: the official 1.6.1 / Warp 1.18.0 CPU XPBD sphere–plane profile passed positive, rebuild and collision-disabled controls. This does not upgrade the pinned UniSim SolverMuJoCo adapter or qualify SDF/grasp. [Protocol and complete raw evidence](newton-contact.md).
+
 Release metadata, successful import, device smoke, and full task qualification are different evidence stages. A compatible package combination does not qualify an apple or cloth scene.
 
 ## Current delivery evidence

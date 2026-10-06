@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "record_sha256": "6f67c30dde6af9ad85d33e1ccb0a38d417467a0b7b3bb8cf25f87d6e9c3e0a74",
+  "compressed_sha256": "533647301d833a88a2220bcc39181048764d89e0bbaab82c058d02e24d2784d6",
+  "runner_sha256": "f6a8ce5aaa960009c8339515727dfe82d7ede868b7cc9761738b4aef4607e7bb",
+  "scorer_sha256": "1084d5e905408b51df374f43bd78e8992eab829be418f4b397954fb3c316294e",
+  "sampling": "All 1000 steps per episode plus initial state; CPU float32; three development episodes, not independent seeds",
+  "wall_s": 12.825956937012961,
+  "native_wall_s": 12.062955105007859,
+  "memory_peak_bytes": "299753472",
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+  "limits": {
+    "memory.max": "17179869184",
+    "memory.high": "16106127360",
+    "memory.swap.max": "0",
+    "cpu.max": "200000 100000",
+    "pids.max": "128",
+    "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+  },
+  "cost_scope": "Includes imports, first-use CPU JIT, three builds, host copies and recording; not simulation throughput",
+  "setup_failures": [
+    "Interrupted slow proxy download (148.3 s)",
+    "Interrupted slow direct download (174.5 s)",
+    "Verification helper used Python >=3.11 file_digest on Python3.10; failed before physical execution. Fixed with streamed SHA256, official bytes unchanged."
+  ],
+  "reassessment": "After native execution, scorer added geometry/material readback and nonfinite mass rejection without changing physical thresholds; unchanged raw records pass. A NaN-mass mutation initially passed and now fails; interrupted canonical gate preserved, followed by fresh gate.",
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i9-14900K"
+  }
+}
