@@ -1,0 +1,253 @@
+{
+  "valid": true,
+  "passed": true,
+  "cases": [
+    {
+      "angle_deg": 0,
+      "passed": true,
+      "repeat_max_differences": [
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "repeat": 0,
+          "geometry": {
+            "frames": 21,
+            "max_interval_s": 0.0020000000000000018,
+            "maximum_crossing_pairs": 0,
+            "frames_with_self_crossing": 0,
+            "maximum_degenerate_triangles": 0,
+            "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+          },
+          "minimum_eligible_pair_gap_m_each_step": [
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05
+          ],
+          "max_center_shift_m": 0.0,
+          "flat_unchanged": true
+        },
+        {
+          "repeat": 1,
+          "geometry": {
+            "frames": 21,
+            "max_interval_s": 0.0020000000000000018,
+            "maximum_crossing_pairs": 0,
+            "frames_with_self_crossing": 0,
+            "maximum_degenerate_triangles": 0,
+            "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+          },
+          "minimum_eligible_pair_gap_m_each_step": [
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05,
+            3.0961356866475095e-05
+          ],
+          "max_center_shift_m": 0.0,
+          "flat_unchanged": true
+        }
+      ]
+    },
+    {
+      "angle_deg": 150,
+      "passed": true,
+      "repeat_max_differences": [
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "repeat": 0,
+          "geometry": {
+            "frames": 21,
+            "max_interval_s": 0.0020000000000000018,
+            "maximum_crossing_pairs": 0,
+            "frames_with_self_crossing": 0,
+            "maximum_degenerate_triangles": 0,
+            "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+          },
+          "minimum_eligible_pair_gap_m_each_step": [
+            -0.005796443040155749,
+            -9.034838174640583e-06,
+            4.295676442524904e-07,
+            1.1014546557816529e-07,
+            8.146180068523134e-08,
+            1.2394246151105348e-07,
+            9.26864316946191e-08,
+            8.298035943966886e-08,
+            9.930369994359811e-08,
+            1.206870685662581e-07,
+            1.2689133153075127e-07,
+            1.0682441029495615e-07,
+            6.644530394124548e-08,
+            2.5738421841753345e-08,
+            3.0853005515002474e-09,
+            1.1339291197787205e-05,
+            3.773569063537409e-05,
+            3.7144785909371675e-05,
+            4.907809377839231e-05,
+            6.665865790860329e-05,
+            6.390843782775463e-05
+          ],
+          "max_center_shift_m": 5.55207896294403e-16,
+          "flat_unchanged": false
+        },
+        {
+          "repeat": 1,
+          "geometry": {
+            "frames": 21,
+            "max_interval_s": 0.0020000000000000018,
+            "maximum_crossing_pairs": 0,
+            "frames_with_self_crossing": 0,
+            "maximum_degenerate_triangles": 0,
+            "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+          },
+          "minimum_eligible_pair_gap_m_each_step": [
+            -0.005796443040155749,
+            -9.034838174640583e-06,
+            4.295676442524904e-07,
+            1.1014546557816529e-07,
+            8.146180068523134e-08,
+            1.2394246151105348e-07,
+            9.26864316946191e-08,
+            8.298035943966886e-08,
+            9.930369994359811e-08,
+            1.206870685662581e-07,
+            1.2689133153075127e-07,
+            1.0682441029495615e-07,
+            6.644530394124548e-08,
+            2.5738421841753345e-08,
+            3.0853005515002474e-09,
+            1.1339291197787205e-05,
+            3.773569063537409e-05,
+            3.7144785909371675e-05,
+            4.907809377839231e-05,
+            6.665865790860329e-05,
+            6.390843782775463e-05
+          ],
+          "max_center_shift_m": 5.55207896294403e-16,
+          "flat_unchanged": false
+        }
+      ]
+    },
+    {
+      "angle_deg": 170,
+      "passed": true,
+      "repeat_max_differences": [
+        0.0,
+        0.0
+      ],
+      "episodes": [
+        {
+          "repeat": 0,
+          "geometry": {
+            "frames": 21,
+            "max_interval_s": 0.0020000000000000018,
+            "maximum_crossing_pairs": 0,
+            "frames_with_self_crossing": 0,
+            "maximum_degenerate_triangles": 0,
+            "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+          },
+          "minimum_eligible_pair_gap_m_each_step": [
+            -0.007097090969661761,
+            -0.0009470712311871752,
+            9.297906307728643e-09,
+            7.086941704804832e-05,
+            0.00014512554255304705,
+            5.147098393006033e-06,
+            7.870772337700838e-09,
+            1.0930931719325965e-07,
+            4.416748092261891e-09,
+            1.2712074448639754e-10,
+            2.7960350441544324e-07,
+            3.1668224378077203e-07,
+            6.851544756894534e-09,
+            5.378797457954165e-08,
+            2.6421844896012958e-08,
+            5.879951976706099e-10,
+            1.537955585800832e-09,
+            1.9692074899267317e-05,
+            6.127343476353131e-09,
+            1.942446051818314e-07,
+            2.4299623174392493e-07
+          ],
+          "max_center_shift_m": 1.3880829381577724e-16,
+          "flat_unchanged": false
+        },
+        {
+          "repeat": 1,
+          "geometry": {
+            "frames": 21,
+            "max_interval_s": 0.0020000000000000018,
+            "maximum_crossing_pairs": 0,
+            "frames_with_self_crossing": 0,
+            "maximum_degenerate_triangles": 0,
+            "scope": "Every saved frame; shared-vertex triangle pairs excluded. No general swept self-contact or thickness guarantee."
+          },
+          "minimum_eligible_pair_gap_m_each_step": [
+            -0.007097090969661761,
+            -0.0009470712311871752,
+            9.297906307728643e-09,
+            7.086941704804832e-05,
+            0.00014512554255304705,
+            5.147098393006033e-06,
+            7.870772337700838e-09,
+            1.0930931719325965e-07,
+            4.416748092261891e-09,
+            1.2712074448639754e-10,
+            2.7960350441544324e-07,
+            3.1668224378077203e-07,
+            6.851544756894534e-09,
+            5.378797457954165e-08,
+            2.6421844896012958e-08,
+            5.879951976706099e-10,
+            1.537955585800832e-09,
+            1.9692074899267317e-05,
+            6.127343476353131e-09,
+            1.942446051818314e-07,
+            2.4299623174392493e-07
+          ],
+          "max_center_shift_m": 1.3880829381577724e-16,
+          "flat_unchanged": false
+        }
+      ]
+    }
+  ],
+  "limits": "Connected synthetic initial folds; flat is a geometric negative, not self-collision off. Saved-frame nonadjacent surfaces only; excludes shared vertices and continuous crossings. Pair gaps are diagnostics, not continuum thickness or material accuracy."
+}

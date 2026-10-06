@@ -1,0 +1,90 @@
+[
+  {
+    "coupled": true,
+    "repeat": 0,
+    "triangle_interiors": {
+      "frames": 2001,
+      "candidate_triangle_checks": 23,
+      "maximum_triangle_interior_depth_m": 0.0,
+      "witness": null,
+      "scope": "Every saved frame; independent triangle interior/box LP; nonrotating prismatic pads only; no inter-step certification."
+    },
+    "linear_vertex_sweep": {
+      "intervals": 2000,
+      "vertex_pad_interval_tests": 152000,
+      "intruding_vertex_pad_intervals": 0,
+      "endpoint_invisible_intrusion_intervals": 0,
+      "first_endpoint_invisible_witness": null,
+      "boundary_inset_m": 1e-12,
+      "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+    }
+  },
+  {
+    "coupled": true,
+    "repeat": 1,
+    "triangle_interiors": {
+      "frames": 2001,
+      "candidate_triangle_checks": 23,
+      "maximum_triangle_interior_depth_m": 0.0,
+      "witness": null,
+      "scope": "Every saved frame; independent triangle interior/box LP; nonrotating prismatic pads only; no inter-step certification."
+    },
+    "linear_vertex_sweep": {
+      "intervals": 2000,
+      "vertex_pad_interval_tests": 152000,
+      "intruding_vertex_pad_intervals": 0,
+      "endpoint_invisible_intrusion_intervals": 0,
+      "first_endpoint_invisible_witness": null,
+      "boundary_inset_m": 1e-12,
+      "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+    }
+  },
+  {
+    "coupled": false,
+    "repeat": 0,
+    "triangle_interiors": {
+      "frames": 2001,
+      "candidate_triangle_checks": 1385,
+      "maximum_triangle_interior_depth_m": 0.009999999999999998,
+      "witness": {
+        "step": 194,
+        "pad": 0,
+        "face": 8
+      },
+      "scope": "Every saved frame; independent triangle interior/box LP; nonrotating prismatic pads only; no inter-step certification."
+    },
+    "linear_vertex_sweep": {
+      "intervals": 2000,
+      "vertex_pad_interval_tests": 152000,
+      "intruding_vertex_pad_intervals": 489,
+      "endpoint_invisible_intrusion_intervals": 0,
+      "first_endpoint_invisible_witness": null,
+      "boundary_inset_m": 1e-12,
+      "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+    }
+  },
+  {
+    "coupled": false,
+    "repeat": 1,
+    "triangle_interiors": {
+      "frames": 2001,
+      "candidate_triangle_checks": 1385,
+      "maximum_triangle_interior_depth_m": 0.009999999999999998,
+      "witness": {
+        "step": 194,
+        "pad": 0,
+        "face": 8
+      },
+      "scope": "Every saved frame; independent triangle interior/box LP; nonrotating prismatic pads only; no inter-step certification."
+    },
+    "linear_vertex_sweep": {
+      "intervals": 2000,
+      "vertex_pad_interval_tests": 152000,
+      "intruding_vertex_pad_intervals": 489,
+      "endpoint_invisible_intrusion_intervals": 0,
+      "first_endpoint_invisible_witness": null,
+      "boundary_inset_m": 1e-12,
+      "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+    }
+  }
+]

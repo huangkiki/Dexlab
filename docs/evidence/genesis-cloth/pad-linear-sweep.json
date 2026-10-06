@@ -1,0 +1,103 @@
+{
+  "scope": "Post-hoc independent linear-interpolation audit; no new physics, no change to frozen scores",
+  "batches": {
+    "gripper": {
+      "raw_sha256": "3b746e88d9f0e894ff63ceb00ad8f87e487fc2fc2ff76ee163ddf913196807de",
+      "cases": [
+        {
+          "coupled": true,
+          "repeat": 0,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 0,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        },
+        {
+          "coupled": true,
+          "repeat": 1,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 0,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        },
+        {
+          "coupled": false,
+          "repeat": 0,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 496,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        },
+        {
+          "coupled": false,
+          "repeat": 1,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 496,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        }
+      ]
+    },
+    "gripper-compensated": {
+      "raw_sha256": "156420a3c03ea029c66bf5781d6d8dd36394b4071980e69ae898c142ac3c2d93",
+      "cases": [
+        {
+          "coupled": true,
+          "repeat": 0,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 0,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        },
+        {
+          "coupled": true,
+          "repeat": 1,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 0,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        },
+        {
+          "coupled": false,
+          "repeat": 0,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 489,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        },
+        {
+          "coupled": false,
+          "repeat": 1,
+          "intervals": 2000,
+          "vertex_pad_interval_tests": 152000,
+          "intruding_vertex_pad_intervals": 489,
+          "endpoint_invisible_intrusion_intervals": 0,
+          "first_endpoint_invisible_witness": null,
+          "boundary_inset_m": 1e-12,
+          "scope": "Linear interpolation only; vertices versus translating axis-aligned pads. Excludes triangle/edge interior crossings, physical cloth thickness and the actual unobserved engine path."
+        }
+      ]
+    }
+  }
+}
