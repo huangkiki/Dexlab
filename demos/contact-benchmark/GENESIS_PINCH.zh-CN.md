@@ -49,6 +49,25 @@ python -m dexlab.genesis_pinch_probe /path/to/new-run --dt 0.0005
 python -m dexlab.genesis_pinch_score /path/to/new-run
 ```
 
-拒绝覆盖输出；源码哈希、模型、参数读回及每步原始轨迹保留。评分器不加载引擎。当前原始证据仍为本地候选，尚未随新 Release 发布。
+拒绝覆盖输出；源码哈希、模型、参数读回及每步原始轨迹保留。评分器不加载引擎。原始证据已随 v0.31.0 发布。
 
-#42 仍需连续近景、GPU 隔离与容量、阶段成本和更完整资格验证；当前不覆盖苹果形状、接触全表面参考、真实摩擦标定或学习控制。
+#42 仍需剩余能力与误差/成本验收；当前不覆盖苹果形状、接触全表面参考、真实摩擦标定或学习控制。
+
+
+## 连续实测状态回放
+
+| 夹持、保持与释放 | 张指负对照 |
+|---|---|
+| ![夹持](media/genesis-pinch.gif) | ![张指负对照](media/genesis-open_negative.gif) |
+
+[夹持 MP4](media/genesis-pinch.mp4) · [负对照 MP4](media/genesis-open_negative.mp4) · [夹持来源](media/genesis-pinch.json) · [负对照来源](media/genesis-open_negative.json)
+
+原始记录已随 [v0.31.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.31.0) 发布。这里回放其中第 0 次实测轨迹，**不是重新运行 MuJoCo 物理得到的结果**。显示使用实际关节位置、物体位置与标量在前的四元数，不使用控制目标替代状态。夹爪直接采用记录中的 XML；方块与平面保持相同基础几何。相机固定，不跟随物体。闭合、抬升、保持、张开、落桌全过程无剪切、无插值或平滑。第 1 次重置重复仍保留在原始数据与评分中。
+
+121 帧从第一个物理步后 0.0005 s 覆盖到 4.0 s；30 fps 编码时长为 4.033 s。清单逐帧记录准确采样索引和仿真时刻。时间降采样不能显示所有瞬态冲击，也不能证明无穿透；应查看完整逐步曲线与独立评分。MuJoCo 仅进行前向运动学显示，不推进动力学。清单单独记录渲染编码墙钟耗时，不能当作 Genesis 仿真耗时。源码、模型、输入与媒体均记录哈希，不代表真机或视觉策略能力。
+
+```bash
+python scripts/render_genesis_pinch.py /path/to/raw/pinch-0.json /path/to/raw/gripper.xml /path/to/new-replay
+```
+
+使用标准渲染依赖及 EGL，并遵守资源和 IO 互斥规则。输出目录不得已存在；缺失物理步或非法姿态会被拒绝。GPU 隔离、容量与同步阶段耗时见 [GPU 报告](GENESIS_GPU.zh-CN.md)。#42 剩余能力及误差/成本验收仍未完成。

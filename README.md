@@ -25,6 +25,10 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 ![Genesis pinch and release](docs/evidence/genesis-pinch.png)
 
+**连续近景：** 以下为 Genesis 实测状态回放，MuJoCo 仅显示、不积分动力学；完整保留夹持、抬升、保持、松开与落桌。30 fps 动图不能替代逐物理步穿透评分。
+
+![Genesis measured-pose replay](demos/contact-benchmark/media/genesis-pinch.gif)
+
 **Genesis GPU 准入：** 单场景重置、双场景隔离和容量正负对照通过；公开同步计时分项，不据此宣称抓取通过或加速。[协议、耗时与限制](demos/contact-benchmark/GENESIS_GPU.zh-CN.md)。
 
 ## 实验依据与当前答案

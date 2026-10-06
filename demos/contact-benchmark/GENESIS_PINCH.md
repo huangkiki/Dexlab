@@ -49,6 +49,25 @@ python -m dexlab.genesis_pinch_probe /path/to/new-run --dt 0.0005
 python -m dexlab.genesis_pinch_score /path/to/new-run
 ```
 
-Output overwrite is refused. Source hash, model, readbacks and every physics-step record are retained. Scoring does not load the engine. Raw evidence remains a local candidate pending a new Release.
+Output overwrite is refused. Source hash, model, readbacks and every physics-step record are retained. Scoring does not load the engine. Raw evidence is published with [v0.31.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.31.0).
 
-Issue #42 still requires continuous close-up media, GPU isolation/capacity, stage costs and broader qualification. Apple geometry, independent whole-contact reference surfaces, hardware friction calibration and learned control are outside this result.
+GPU isolation/capacity and synchronized diagnostic stage costs are reported separately in [GENESIS_GPU](GENESIS_GPU.md). Issue #42 still needs the remaining capability and accuracy/cost acceptance audit. Apple geometry, independent whole-contact reference surfaces, hardware friction calibration and learned control are outside this result.
+
+
+## Continuous measured-state replay
+
+| Pinch / hold / release | Open-pad negative |
+|---|---|
+| ![Pinch](media/genesis-pinch.gif) | ![Open-pad control](media/genesis-open_negative.gif) |
+
+[Pinch MP4](media/genesis-pinch.mp4) · [Negative MP4](media/genesis-open_negative.mp4) · [Pinch provenance](media/genesis-pinch.json) · [Negative provenance](media/genesis-open_negative.json)
+
+These are measured-pose replays of repeat 0 from the published raw package, **not newly simulated MuJoCo results**. The renderer uses actual joint positions, object position and scalar-first quaternion. Commands never determine displayed poses. The gripper XML is the recorded model; cube and plane use the same primitive dimensions. A fixed close-up camera does not track the object. All phases appear in order without cuts, interpolation or smoothing. Reset repeat 1 remains in the raw data and scores.
+
+The 121 frames cover every phase from the first post-step state at 0.0005 s to 4.0 s. At 30 fps the encoded duration is 4.033 s; each frame's exact source sample/time is in the manifest. This temporal decimation cannot reveal every brief impact or prove absence of penetration; use the full-rate curves and independent scorer. Geometry is displayed with MuJoCo forward kinematics only, with no integration. Replay rendering/encoding wall time is recorded separately and is not Genesis stepping cost. Source, model, input and media hashes bind the artifacts; no hardware or visual-policy claim follows.
+
+```bash
+python scripts/render_genesis_pinch.py /path/to/raw/pinch-0.json /path/to/raw/gripper.xml /path/to/new-replay
+```
+
+Requires the standard rendering dependencies and EGL; run under the resource/IO guard. The output directory must not exist. Missing physics samples or invalid poses are rejected.
