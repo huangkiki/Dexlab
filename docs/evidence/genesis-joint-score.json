@@ -1,0 +1,277 @@
+{
+  "scope": "Engineering criterion only; physical accuracy unmeasured",
+  "results": {
+    "as_imported-default-True--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.0014979647840657263,
+      "final_violation_m": 0.0002553448017401887,
+      "limit_criterion_passed": false
+    },
+    "as_imported-default-True-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.0014979647840657334,
+      "final_violation_m": 0.000255344801739929,
+      "limit_criterion_passed": false
+    },
+    "as_imported-default-False--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.049999916326091264,
+      "final_violation_m": 0.049999916326091264,
+      "limit_criterion_passed": true
+    },
+    "as_imported-default-False-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.04999991632609126,
+      "final_violation_m": 0.04999991632609126,
+      "limit_criterion_passed": true
+    },
+    "as_imported-explicit004-True--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.00022576724347261298,
+      "final_violation_m": 4.442096157975446e-05,
+      "limit_criterion_passed": true
+    },
+    "as_imported-explicit004-True-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.00022576724347262572,
+      "final_violation_m": 4.442096157941666e-05,
+      "limit_criterion_passed": true
+    },
+    "as_imported-explicit004-False--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.049999916326091264,
+      "final_violation_m": 0.049999916326091264,
+      "limit_criterion_passed": true
+    },
+    "as_imported-explicit004-False-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.04999991632609126,
+      "final_violation_m": 0.04999991632609126,
+      "limit_criterion_passed": true
+    },
+    "zero-default-True--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.001791378529838611,
+      "final_violation_m": 0.00043145052547769033,
+      "limit_criterion_passed": false
+    },
+    "zero-default-True-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.0017913785298386137,
+      "final_violation_m": 0.0004314505254776821,
+      "limit_criterion_passed": false
+    },
+    "zero-default-False--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.04999905250688617,
+      "final_violation_m": 0.04999905250688617,
+      "limit_criterion_passed": true
+    },
+    "zero-default-False-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.04999905250688619,
+      "final_violation_m": 0.04999905250688619,
+      "limit_criterion_passed": true
+    },
+    "zero-explicit004-True--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.0006110822457828756,
+      "final_violation_m": 8.813530725514848e-05,
+      "limit_criterion_passed": true
+    },
+    "zero-explicit004-True-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.0006110822457828791,
+      "final_violation_m": 8.813530725518964e-05,
+      "limit_criterion_passed": true
+    },
+    "zero-explicit004-False--0.05": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.04999905250688617,
+      "final_violation_m": 0.04999905250688617,
+      "limit_criterion_passed": true
+    },
+    "zero-explicit004-False-0.1": {
+      "import_checks": {
+        "mass": true,
+        "armature": true,
+        "effective_mass": true,
+        "passive_damping": true,
+        "gains": true,
+        "limit_range": true,
+        "effort_range": true,
+        "initial_q": true,
+        "solver_parameters": true
+      },
+      "import_passed": true,
+      "max_violation_m": 0.04999905250688619,
+      "final_violation_m": 0.04999905250688619,
+      "limit_criterion_passed": true
+    }
+  }
+}

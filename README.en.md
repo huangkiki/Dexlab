@@ -16,6 +16,11 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 
 **Genesis contact diagnostic:** the vertical transient after a horizontal velocity kick depends on friction-cone configuration. The original failure is retained; grasp qualification remains incomplete. [Protocol and limits](demos/contact-benchmark/GENESIS_CONE.md)
 
+
+**Audit the model before interpreting improvement:** imported Genesis armature changes joint response. Explicit zero-armature controls retain both passing and failing limit configurations. [Parameters, traces and criteria](demos/contact-benchmark/GENESIS_JOINT.md).
+
+![Joint-limit diagnostic](docs/evidence/genesis-joint-limits.png)
+
 ## Reference standards and current answers
 
 **We have no evidence that either engine better matches real grasping.** First test the declared model and numerical error; measured data are needed for physical validity. Grasp success is configuration regression only.
