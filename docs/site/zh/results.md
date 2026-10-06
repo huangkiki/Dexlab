@@ -136,3 +136,7 @@
 ## 接触诊断综合结论
 
 静态匹配尚未建立共同动态物性。成对迁移30个工况全部未通过综合目标；局部力定律辨识不能替代卸载修复。[逐项验收证据与未完成承诺](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/CONCLUSIONS.zh-CN.md)。#10仍开放；本汇总不新增实验或引擎排名。
+
+## 接触起始配置敏感性
+
+24 个固定配置＋2 次精确重复全部通过工程检查；摩擦锥变化的影响方向并不统一。通过验收不等于材料准确。[完整图表、协议与指标](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/CONE_PROTOCOL.zh-CN.md)。

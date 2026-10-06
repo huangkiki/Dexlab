@@ -218,3 +218,5 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 代码：[Apache-2.0](LICENSE)；第三方资产见[来源与许可](docs/ASSETS.zh-CN.md)。
 
 **研究交付可追溯性：** [实际夹布交付与中断恢复审计](docs/autonomous-delivery.zh-CN.md)分别记录实验参照、失败、独立评分、归档和恢复证据；工作流通过不等于物理准确。
+
+**接触起始对照：** 24 个固定配置＋2 次重复全部通过工程检查，但摩擦锥变化的瞬态影响方向并不一致。通过任务检查不等于物性准确。[图表、完整指标与限制](demos/contact-benchmark/CONE_PROTOCOL.zh-CN.md)。

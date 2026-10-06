@@ -26,7 +26,9 @@ from dexlab.physx_baseline import digest, write_json
 class MuJoCoPlane:
     """Official MuJoCo; force epoch is the solve that produced the velocity step."""
 
-    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False, friction_cone="elliptic"):
+        if friction_cone not in ("elliptic", "pyramidal"):
+            raise ValueError("Expected elliptic or pyramidal friction cone")
         import mujoco as mj
 
         self.step_timing = {"native_call_seconds": 0.0, "observation_seconds": 0.0, "steps": 0} if measure_step_timing else None
@@ -41,7 +43,7 @@ class MuJoCoPlane:
         inertia = " ".join(map(str, case.inertia))
         xml = f'''<mujoco model="controlled-plane">
   <option timestep="{h}" gravity="0 0 -{case.gravity}" integrator="Euler"
-          solver="Newton" cone="elliptic" iterations="{solver_values['iterations']}" tolerance="{solver_values['tolerance']}"/>
+          solver="Newton" cone="{friction_cone}" iterations="{solver_values['iterations']}" tolerance="{solver_values['tolerance']}"/>
   <default><geom condim="3" friction="{mu} 0 0"
                  solref="{solref}" solimp="{solimp}"/></default>
   <worldbody>
@@ -57,6 +59,9 @@ class MuJoCoPlane:
         self.data = mj.MjData(self.model)
         mj.mj_forward(self.model, self.data)
         self.metadata = {
+            "simulation_options": {"timestep": float(self.model.opt.timestep),
+                                   "gravity": self.model.opt.gravity.tolist(),
+                                   "actuator_count": int(self.model.nu)},
             "normal_parameters_readback": {
                 "solref": self.model.geom_solref[1].tolist(),
                 "solimp": self.model.geom_solimp[1].tolist(),
