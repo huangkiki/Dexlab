@@ -20,7 +20,7 @@ All four MuJoCo recordings had complete, consistent readbacks (3,660 / 4,000 / 4
 
 Six additional MuJoCo static controls matched their preregistered expectations: weighted equal priority, higher plane priority, direct-format solref minimum, explicit anisotropic pair, global override, and a separated negative control. The five positive controls each produced four contacts; the negative produced none. They call `mj_forward` without advancing simulation time and do not establish dynamic stability. Reproduce with `probe_contact_mixing.py OUTPUT --wheel-dir OFFICIAL_WHEEL_DIRECTORY`.
 
-Raw evidence has been packaged and verified offline; final native grasp regression gates and release publication remain pending. General mesh cooking equivalence and real material calibration remain unproven.
+Raw evidence and full native regression results were published in [v0.22.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.22.0). General mesh cooking equivalence and real material calibration remain unproven.
 
 [Readback JSON](evidence/contact-readback-v1.json) · [Mixing JSON](evidence/contact-mixing-v1.json)
 

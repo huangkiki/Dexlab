@@ -70,6 +70,8 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 
 **Native tangent identification:** All nine default-solver cases failed the fixed momentum gate. Tightening only solver tolerances gives 9/9 valid records and damping near 20/40/60 Ns/m at 2/4/6 N. State/force epoch changes the fit; this is local numerical identification, not completed material calibration. [Protocol](demos/contact-benchmark/TANGENT_IDENTIFICATION.md)
 
+**Applied-load identification:** MuJoCo low impedance gives9/9 valid records; all9 high-impedance records fail settling at0.4s. State and applied-load effects are fitted separately; small prediction error is not completed material calibration. [All outcomes](demos/contact-benchmark/FEEDTHROUGH.md)
+
 ## Current findings
 
 | Research question | Evidence | Conclusion and boundary |

@@ -2,7 +2,7 @@
 
 [English](RESPONSE_COST.md) | 简体中文
 
-状态：27次正式运行及全部离线评分复算完成；尚未通过本次交付的完整抓取回归与发布门禁。
+状态：27次正式运行及全部离线评分复算完成；完整抓取回归与原始证据已在 [v0.24.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.24.0) 发布。
 
 ## 问题与判断依据
 

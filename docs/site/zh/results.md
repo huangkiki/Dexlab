@@ -123,3 +123,12 @@
 [协议与全部结果](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TANGENT_IDENTIFICATION.zh-CN.md)。
 
 ![Native tangent diagnostics](../../evidence/tangent-identification-v1.png)
+
+
+## 外加载荷响应
+
+低阻抗9组通过数据有效性，高阻抗9组未稳定，保留失败判定。局部拟合分离载荷直接影响与状态系数，不代表材料标定完成。
+
+[Protocol / 协议](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/FEEDTHROUGH.zh-CN.md)
+
+![Applied-load diagnostics](../../evidence/feedthrough-v1.png)

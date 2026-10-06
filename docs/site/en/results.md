@@ -124,3 +124,12 @@ batch preserves all physical inputs and acceptance thresholds: 9/9 valid records
 [Protocol and all outcomes](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TANGENT_IDENTIFICATION.md).
 
 ![Native tangent diagnostics](../../evidence/tangent-identification-v1.png)
+
+
+## Applied-load response
+
+Nine low-impedance cases pass data validity; nine high-impedance cases fail settling and remain rejected. The local fit separates load feedthrough from state coefficients; this is not completed material calibration.
+
+[Protocol / 协议](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/FEEDTHROUGH.md)
+
+![Applied-load diagnostics](../../evidence/feedthrough-v1.png)

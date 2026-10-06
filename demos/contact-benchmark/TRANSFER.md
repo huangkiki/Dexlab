@@ -2,7 +2,7 @@
 
 English | [简体中文](TRANSFER.zh-CN.md)
 
-Status: all30 preregistered episodes and independent rescoring completed; delivery regression and publication remain pending. Select this cohort after development but before seeing its transfer outcomes. It is not an earlier concealed blind test or the apple-grasp held-out set.
+Status: all30 preregistered episodes and independent rescoring completed; delivery regressions and evidence were published in [v0.25.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.25.0). Select this cohort after development but before seeing its transfer outcomes. It is not an earlier concealed blind test or the apple-grasp held-out set.
 
 ## Question
 
