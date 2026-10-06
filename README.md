@@ -1,5 +1,7 @@
 <div align="center">
 
+Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整证据及未验证范围见[能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
+
 # DexLab
 
 **机器人接触动力学：从模型与参数，到可复核的实验结论。**
