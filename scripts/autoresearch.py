@@ -141,6 +141,50 @@ def select_issue(issues, pulls, **context):
     return queue_report(issues, pulls, **context)["selected"]
 
 
+def manual_integrations(issues, pulls):
+    """Verify reviewed manual deliveries recorded in the fetched base only."""
+    path = "docs/issue-deliveries.json"
+    if not run("git", "ls-tree", "origin/main", "--", path, capture=True):
+        return set()
+    try:
+        entries = json.loads(run("git", "show", f"origin/main:{path}", capture=True))
+        if not isinstance(entries, list):
+            raise ValueError("expected a list")
+        issue_by_number = {item["number"]: item for item in issues}
+        pull_by_number = {item["number"]: item for item in pulls if "number" in item}
+        integrated = set()
+        for entry in entries:
+            if not isinstance(entry, dict) or set(entry) != {"issue", "pr", "merge_commit", "audit_url"}:
+                raise ValueError("invalid entry fields")
+            number, pr = entry["issue"], entry["pr"]
+            commit, audit = entry["merge_commit"], entry["audit_url"]
+            if any(type(value) is not int or value < 1 for value in (number, pr)):
+                raise ValueError("issue and PR must be positive integers")
+            if number in integrated:
+                raise ValueError(f"duplicate issue #{number}")
+            if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):
+                raise ValueError(f"invalid commit for #{number}")
+            if not isinstance(audit, str) or not re.fullmatch(
+                rf"https://github\.com/{re.escape(REPO)}/issues/{number}#issuecomment-[0-9]+", audit
+            ):
+                raise ValueError(f"invalid acceptance audit link for #{number}")
+            if issue_by_number.get(number, {}).get("state") != "CLOSED":
+                raise ValueError(f"issue #{number} is missing or reopened")
+            pull = pull_by_number.get(pr, {})
+            if (pull.get("state") != "MERGED" or pull.get("baseRefName") != "main"
+                    or (pull.get("mergeCommit") or {}).get("oid") != commit):
+                raise ValueError(f"PR #{pr} does not match the recorded main merge for #{number}")
+            if subprocess.run(
+                ["git", "merge-base", "--is-ancestor", commit, "origin/main"],
+                cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            ).returncode != 0:
+                raise ValueError(f"delivery of #{number} is not in origin/main")
+            integrated.add(number)
+        return integrated
+    except (ValueError, TypeError, KeyError) as error:
+        raise SystemExit(f"Invalid {path} in origin/main: {error}; review the delivery evidence") from error
+
+
 def queue_context():
     """Refresh the base and verify merged dependency commits against its ancestry."""
     run("git", "fetch", "origin", "main")
@@ -166,6 +210,7 @@ def queue_context():
         )
         if result.returncode == 0:
             integrated.update(item["number"] for item in pull["closingIssuesReferences"])
+    integrated.update(manual_integrations(issues, pulls))
     claimed = set()
     for line in run("git", "worktree", "list", "--porcelain", capture=True).splitlines():
         match = re.fullmatch(r"branch refs/heads/autoresearch/issue-(\d+)", line)
