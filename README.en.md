@@ -25,6 +25,10 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 
 ![Genesis pinch and release](docs/evidence/genesis-pinch.png)
 
+**Continuous close-up:** recorded Genesis states, displayed by MuJoCo without physics integration. Includes closing, lifting, holding, opening and landing. The 30 fps replay does not replace per-step penetration scoring.
+
+![Genesis measured-pose replay](demos/contact-benchmark/media/genesis-pinch.gif)
+
 **Genesis GPU admission:** reset, two-environment isolation and capacity controls passed; synchronized stage costs are reported without claiming grasp qualification or speedup. [Protocol, costs and limits](demos/contact-benchmark/GENESIS_GPU.md).
 
 ## Reference standards and current answers
