@@ -1,0 +1,2544 @@
+{
+  "cases": [
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.001,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-00"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.056576417349079e-05,
+            "penetration_p95_m": 1.539505050002568e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.2119194536808209e-12,
+            "maximum_momentum_residual_weight_ratio": 3.051831787402214e-11,
+            "maximum_position_reference_error_m": 0.00011800828171460408,
+            "maximum_velocity_reference_error_m_s": 0.006258913568372576,
+            "maximum_transverse_drift_m": 6.7974220157051904e-18,
+            "maximum_surface_clearance_m": 2.717904710048194e-05,
+            "maximum_orientation_change_rad": 0.0025063964212782884,
+            "normal_force_range_n": [
+              0.0,
+              8.391328522312282
+            ],
+            "maximum_tangential_force_n": 2.517398556693685,
+            "travel_x_m": 0.010511752766970696,
+            "final_speed_m_s": 1.2421297714807552e-16
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.003186646425116642,
+          "maximum_abs_vertical_speed_m_s": 0.020863045227911187,
+          "first50ms_vx_reference_max_m_s": 0.006258913568372576,
+          "first50ms_vx_reference_rms_m_s": 0.0034400887003258325
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.001,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-01"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 2.350882121859854e-05,
+            "penetration_p95_m": 9.809999999998986e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.5001333508735115e-12,
+            "maximum_momentum_residual_weight_ratio": 2.804009761647874e-11,
+            "maximum_position_reference_error_m": 0.00011921862629075963,
+            "maximum_velocity_reference_error_m_s": 0.0071044994374588055,
+            "maximum_transverse_drift_m": 6.632123781564696e-18,
+            "maximum_surface_clearance_m": 2.3849491098678482e-05,
+            "maximum_orientation_change_rad": 0.0006978043464132882,
+            "normal_force_range_n": [
+              0.0,
+              8.433537908875653
+            ],
+            "maximum_tangential_force_n": 2.5300613726626957,
+            "travel_x_m": 0.010510252373306586,
+            "final_speed_m_s": 1.2289351031215119e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0030502081046737822,
+          "maximum_abs_vertical_speed_m_s": 0.02368166479152951,
+          "first50ms_vx_reference_max_m_s": 0.0071044994374588055,
+          "first50ms_vx_reference_rms_m_s": 0.003344801295571775
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.001,
+        "timeconst": 0.02,
+        "cone": "elliptic",
+        "id": "case-02"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 0.00010485040457440531,
+            "penetration_p95_m": 9.58934194345111e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.1102790626059686e-09,
+            "maximum_momentum_residual_weight_ratio": 1.148360846290281e-06,
+            "maximum_position_reference_error_m": 9.92286578797106e-05,
+            "maximum_velocity_reference_error_m_s": 0.011691398004118761,
+            "maximum_transverse_drift_m": 5.344232053550128e-19,
+            "maximum_surface_clearance_m": 1.4627268367258667e-05,
+            "maximum_orientation_change_rad": 0.0014520178689972057,
+            "normal_force_range_n": [
+              0.0,
+              3.3417198147161056
+            ],
+            "maximum_tangential_force_n": 1.0025159444148317,
+            "travel_x_m": 0.010671340921995153,
+            "final_speed_m_s": 6.47237342743316e-10
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0006287010944615048,
+          "maximum_abs_vertical_speed_m_s": 0.01619369175167696,
+          "first50ms_vx_reference_max_m_s": 0.004858107525503114,
+          "first50ms_vx_reference_rms_m_s": 0.0016723501153527328
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.001,
+        "timeconst": 0.02,
+        "cone": "pyramidal",
+        "id": "case-03"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 9.361569977362968e-05,
+            "penetration_p95_m": 8.132246490007503e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.0730264171930912e-09,
+            "maximum_momentum_residual_weight_ratio": 9.225734683431201e-07,
+            "maximum_position_reference_error_m": 9.359259112639261e-05,
+            "maximum_velocity_reference_error_m_s": 0.011847797498251792,
+            "maximum_transverse_drift_m": 1.1903530085543199e-17,
+            "maximum_surface_clearance_m": 1.7605052350305045e-05,
+            "maximum_orientation_change_rad": 0.0022934855967762053,
+            "normal_force_range_n": [
+              0.0,
+              3.367536710036287
+            ],
+            "maximum_tangential_force_n": 1.010261013010886,
+            "travel_x_m": 0.01069340036071729,
+            "final_speed_m_s": 1.5782191643306259e-09
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.00045955678410769,
+          "maximum_abs_vertical_speed_m_s": 0.01697575701368608,
+          "first50ms_vx_reference_max_m_s": 0.0050927271041060485,
+          "first50ms_vx_reference_rms_m_s": 0.0023716678976705907
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.0005,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-04"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 2.0184074490545156e-05,
+            "penetration_p95_m": 7.957656118166151e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.953449789761976e-10,
+            "maximum_momentum_residual_weight_ratio": 4.1283998238483515e-07,
+            "maximum_position_reference_error_m": 5.7986647804672206e-05,
+            "maximum_velocity_reference_error_m_s": 0.005402308477955586,
+            "maximum_transverse_drift_m": 4.0761115909950176e-18,
+            "maximum_surface_clearance_m": 1.5761262666676157e-05,
+            "maximum_orientation_change_rad": 0.0008433600146620004,
+            "normal_force_range_n": [
+              0.0,
+              8.243254546557772
+            ],
+            "maximum_tangential_force_n": 2.4729763639673314,
+            "travel_x_m": 0.01056301855821683,
+            "final_speed_m_s": 2.3345802490305003e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.0008651008274002053,
+          "maximum_abs_vertical_speed_m_s": 0.018007694926517374,
+          "first50ms_vx_reference_max_m_s": 0.005402308477955586,
+          "first50ms_vx_reference_rms_m_s": 0.0018171067471101166
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.0005,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-05"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.6252716427442998e-05,
+            "penetration_p95_m": 7.072980965642378e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.04523287195002e-10,
+            "maximum_momentum_residual_weight_ratio": 2.1236963647123023e-07,
+            "maximum_position_reference_error_m": 5.9732905009183754e-05,
+            "maximum_velocity_reference_error_m_s": 0.005252220222954407,
+            "maximum_transverse_drift_m": 3.706031361916247e-17,
+            "maximum_surface_clearance_m": 1.8043978495661805e-05,
+            "maximum_orientation_change_rad": 0.0005620252968409821,
+            "normal_force_range_n": [
+              0.0,
+              8.278256408043985
+            ],
+            "maximum_tangential_force_n": 2.483476922413195,
+            "travel_x_m": 0.010570720707870388,
+            "final_speed_m_s": 2.6341191865531835e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0007778422520416264,
+          "maximum_abs_vertical_speed_m_s": 0.017507400743181384,
+          "first50ms_vx_reference_max_m_s": 0.005252220222954407,
+          "first50ms_vx_reference_rms_m_s": 0.0018024327903348447
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.0005,
+        "timeconst": 0.02,
+        "cone": "elliptic",
+        "id": "case-06"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 6.374953490825841e-05,
+            "penetration_p95_m": 6.21089850787182e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 4.46413128685208e-10,
+            "maximum_momentum_residual_weight_ratio": 6.25346342132355e-07,
+            "maximum_position_reference_error_m": 0.00010401049007175388,
+            "maximum_velocity_reference_error_m_s": 0.010922524167187002,
+            "maximum_transverse_drift_m": 8.427187032128096e-19,
+            "maximum_surface_clearance_m": 3.510001739294444e-06,
+            "maximum_orientation_change_rad": 0.0008641751390636659,
+            "normal_force_range_n": [
+              0.0,
+              3.239011736816374
+            ],
+            "maximum_tangential_force_n": 0.9717035210449121,
+            "travel_x_m": 0.010717561564546738,
+            "final_speed_m_s": 1.3966431822169204e-10
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0006215438490242633,
+          "maximum_abs_vertical_speed_m_s": 0.00947602239162276,
+          "first50ms_vx_reference_max_m_s": 0.002735438592018191,
+          "first50ms_vx_reference_rms_m_s": 0.0011735240116851646
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.0005,
+        "timeconst": 0.02,
+        "cone": "pyramidal",
+        "id": "case-07"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 3.283813014091572e-05,
+            "penetration_p95_m": 2.869399858503041e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 6.957479037339453e-11,
+            "maximum_momentum_residual_weight_ratio": 1.267723264290024e-12,
+            "maximum_position_reference_error_m": 0.00011653872151167963,
+            "maximum_velocity_reference_error_m_s": 0.011546082023048179,
+            "maximum_transverse_drift_m": 8.07822558022822e-18,
+            "maximum_surface_clearance_m": 4.3012050714823225e-06,
+            "maximum_orientation_change_rad": 0.0007493047206223007,
+            "normal_force_range_n": [
+              0.0,
+              3.2735971234847954
+            ],
+            "maximum_tangential_force_n": 0.9820791370454387,
+            "travel_x_m": 0.010734955303231014,
+            "final_speed_m_s": 3.5992656106218293e-10
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.000745356565235177,
+          "maximum_abs_vertical_speed_m_s": 0.008893460671299883,
+          "first50ms_vx_reference_max_m_s": 0.0026680382013902493,
+          "first50ms_vx_reference_rms_m_s": 0.0011448992377638741
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.00025,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-08"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 9.692326614962887e-06,
+            "penetration_p95_m": 4.121666632425636e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.5604691983028829e-09,
+            "maximum_momentum_residual_weight_ratio": 1.7847685386017081e-06,
+            "maximum_position_reference_error_m": 3.0192599864272904e-05,
+            "maximum_velocity_reference_error_m_s": 0.0031674723390952416,
+            "maximum_transverse_drift_m": 1.3452699041639205e-18,
+            "maximum_surface_clearance_m": 8.880154656328715e-06,
+            "maximum_orientation_change_rad": 0.0005147667329507575,
+            "normal_force_range_n": [
+              0.0,
+              7.599694597154537
+            ],
+            "maximum_tangential_force_n": 2.279908379146361,
+            "travel_x_m": 0.010598397367302446,
+            "final_speed_m_s": 2.655600110896911e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.0008267954181000654,
+          "maximum_abs_vertical_speed_m_s": 0.010365052181209308,
+          "first50ms_vx_reference_max_m_s": 0.003109515654363487,
+          "first50ms_vx_reference_rms_m_s": 0.0012743530803005407
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.00025,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-09"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 6.134745685761056e-06,
+            "penetration_p95_m": 2.3996791459687805e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.0197174216131089e-09,
+            "maximum_momentum_residual_weight_ratio": 1.358044115184315e-06,
+            "maximum_position_reference_error_m": 2.9897375594001296e-05,
+            "maximum_velocity_reference_error_m_s": 0.003364434804264377,
+            "maximum_transverse_drift_m": 1.9472737507343065e-17,
+            "maximum_surface_clearance_m": 6.843670574893657e-06,
+            "maximum_orientation_change_rad": 0.00022072758875596175,
+            "normal_force_range_n": [
+              0.0,
+              7.8254593218692365
+            ],
+            "maximum_tangential_force_n": 2.347637796560771,
+            "travel_x_m": 0.010597290811091838,
+            "final_speed_m_s": 4.0258828468039665e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.001972056372358818,
+          "maximum_abs_vertical_speed_m_s": 0.011214782680881212,
+          "first50ms_vx_reference_max_m_s": 0.003364434804264377,
+          "first50ms_vx_reference_rms_m_s": 0.001191099794244157
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.00025,
+        "timeconst": 0.02,
+        "cone": "elliptic",
+        "id": "case-10"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.300296678241445e-05,
+            "penetration_p95_m": 5.30029588594709e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.7293533272066952e-09,
+            "maximum_momentum_residual_weight_ratio": 1.996374045857141e-06,
+            "maximum_position_reference_error_m": 0.00012934131396077908,
+            "maximum_velocity_reference_error_m_s": 0.010984207248626912,
+            "maximum_transverse_drift_m": 2.8308938498753074e-19,
+            "maximum_surface_clearance_m": 1.939980256954882e-06,
+            "maximum_orientation_change_rad": 0.0009047808085694931,
+            "normal_force_range_n": [
+              0.0,
+              3.1910862809838174
+            ],
+            "maximum_tangential_force_n": 0.9573258842951451,
+            "travel_x_m": 0.010747279402186258,
+            "final_speed_m_s": 2.1260606812505509e-10
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0003152929457914766,
+          "maximum_abs_vertical_speed_m_s": 0.008360150347929548,
+          "first50ms_vx_reference_max_m_s": 0.0025080451043790475,
+          "first50ms_vx_reference_rms_m_s": 0.0010918394642617875
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.00025,
+        "timeconst": 0.02,
+        "cone": "pyramidal",
+        "id": "case-11"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.8590293003328817e-05,
+            "penetration_p95_m": 1.185991717000262e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.0811349593353725e-09,
+            "maximum_momentum_residual_weight_ratio": 1.7981602163910773e-06,
+            "maximum_position_reference_error_m": 0.00012402819003656286,
+            "maximum_velocity_reference_error_m_s": 0.010832216095091593,
+            "maximum_transverse_drift_m": 3.9762713960531885e-18,
+            "maximum_surface_clearance_m": 2.1508644085753426e-06,
+            "maximum_orientation_change_rad": 0.0004770757296429905,
+            "normal_force_range_n": [
+              0.0,
+              3.2274437270801175
+            ],
+            "maximum_tangential_force_n": 0.9682331181240351,
+            "travel_x_m": 0.010742410306108834,
+            "final_speed_m_s": 1.7940903955959133e-11
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.00018525235600371913,
+          "maximum_abs_vertical_speed_m_s": 0.008911729652482032,
+          "first50ms_vx_reference_max_m_s": 0.0026735188957448253,
+          "first50ms_vx_reference_rms_m_s": 0.0009248670019966785
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.001,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-12"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.9663698919585026e-05,
+            "penetration_p95_m": 4.867907873875449e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.0768942121662803e-12,
+            "maximum_momentum_residual_weight_ratio": 3.057300704682311e-11,
+            "maximum_position_reference_error_m": 1.2286991969645555e-05,
+            "maximum_velocity_reference_error_m_s": 4.9050000003852956e-05,
+            "maximum_transverse_drift_m": 1.63187517239048e-21,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.7942393497850633
+            ],
+            "maximum_tangential_force_n": 2.7942393497850634e-05,
+            "travel_x_m": 0.12498771300803044,
+            "final_speed_m_s": 0.24995094999999615
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.00024096238409059012,
+          "maximum_abs_vertical_speed_m_s": 0.009810000000000001,
+          "first50ms_vx_reference_max_m_s": 4.905097413410164e-06,
+          "first50ms_vx_reference_rms_m_s": 2.847528607026566e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.001,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-13"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.8829560897978825e-05,
+            "penetration_p95_m": 1.7931742312470716e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 3.737540044546073e-05,
+            "maximum_momentum_residual_weight_ratio": 1.572327390451639e-05,
+            "maximum_position_reference_error_m": 1.2287011817990745e-05,
+            "maximum_velocity_reference_error_m_s": 4.9051832596624934e-05,
+            "maximum_transverse_drift_m": 7.713347712497171e-16,
+            "maximum_surface_clearance_m": 6.37989095580993e-10,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.8309996327454887
+            ],
+            "maximum_tangential_force_n": 2.8309996327454885e-05,
+            "travel_x_m": 0.12498771298818209,
+            "final_speed_m_s": 0.24995101534940062
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.00027433248957900246,
+          "maximum_abs_vertical_speed_m_s": 0.009810000000000001,
+          "first50ms_vx_reference_max_m_s": 4.905109903724503e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8477592257320472e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.001,
+        "timeconst": 0.02,
+        "cone": "elliptic",
+        "id": "case-14"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 8.932595400035909e-05,
+            "penetration_p95_m": 8.275881597653856e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.05790939844519e-12,
+            "maximum_momentum_residual_weight_ratio": 5.773216272546693e-15,
+            "maximum_position_reference_error_m": 1.2286496001795433e-05,
+            "maximum_velocity_reference_error_m_s": 4.9050000000411265e-05,
+            "maximum_transverse_drift_m": 2.0041741677267782e-22,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.1368745106469413
+            ],
+            "maximum_tangential_force_n": 2.136874510646942e-05,
+            "travel_x_m": 0.12498771350399829,
+            "final_speed_m_s": 0.2499509499999996
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0007910233565199185,
+          "maximum_abs_vertical_speed_m_s": 0.009810000000000001,
+          "first50ms_vx_reference_max_m_s": 4.911515223054996e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8449646786907904e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.001,
+        "timeconst": 0.02,
+        "cone": "pyramidal",
+        "id": "case-15"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 7.266297938246513e-05,
+            "penetration_p95_m": 7.099428922726497e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 0.00018408800957825378,
+            "maximum_momentum_residual_weight_ratio": 6.967668355646795e-07,
+            "maximum_position_reference_error_m": 1.2286745035824942e-05,
+            "maximum_velocity_reference_error_m_s": 4.9059029229331363e-05,
+            "maximum_transverse_drift_m": 7.499758714503053e-16,
+            "maximum_surface_clearance_m": 3.0929158192916084e-10,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.1649867060842993
+            ],
+            "maximum_tangential_force_n": 2.1649867060842997e-05,
+            "travel_x_m": 0.12498771325496426,
+            "final_speed_m_s": 0.24995257182631936
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0006298170514362944,
+          "maximum_abs_vertical_speed_m_s": 0.009810000000000001,
+          "first50ms_vx_reference_max_m_s": 4.916760640516493e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8514343160309505e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.0005,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-16"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.0114331978668817e-05,
+            "penetration_p95_m": 3.996009310426596e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 4.2594816562768756e-12,
+            "maximum_momentum_residual_weight_ratio": 3.049706826941851e-11,
+            "maximum_position_reference_error_m": 1.2274729469741175e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000415827e-05,
+            "maximum_transverse_drift_m": 2.3960845300218664e-22,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.346705719120591
+            ],
+            "maximum_tangential_force_n": 2.346705719120591e-05,
+            "travel_x_m": 0.12498772527053034,
+            "final_speed_m_s": 0.24995094999999584
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 9.820000848564448e-05,
+          "maximum_abs_vertical_speed_m_s": 0.0049050000000000005,
+          "first50ms_vx_reference_max_m_s": 4.905035249969103e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8396063127253396e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.0005,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-17"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 9.172115354897509e-06,
+            "penetration_p95_m": 8.852417021216336e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 5.833257660903257e-06,
+            "maximum_momentum_residual_weight_ratio": 3.4107020263354104e-06,
+            "maximum_position_reference_error_m": 1.2274760758879122e-05,
+            "maximum_velocity_reference_error_m_s": 4.905028628868213e-05,
+            "maximum_transverse_drift_m": 7.637054314921143e-16,
+            "maximum_surface_clearance_m": 1.0162829570947718e-09,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.3775832169471425
+            ],
+            "maximum_tangential_force_n": 2.3775832169471423e-05,
+            "travel_x_m": 0.1249877252392412,
+            "final_speed_m_s": 0.24995095135340192
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 0.00013299990477120717,
+          "maximum_abs_vertical_speed_m_s": 0.0049050000000000005,
+          "first50ms_vx_reference_max_m_s": 4.905044263786573e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8398409144743193e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.0005,
+        "timeconst": 0.02,
+        "cone": "elliptic",
+        "id": "case-18"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.766879072493375e-05,
+            "penetration_p95_m": 5.682076612204684e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 6.68476385357053e-12,
+            "maximum_momentum_residual_weight_ratio": 6.7866551663886774e-15,
+            "maximum_position_reference_error_m": 1.2274233501752274e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000013371e-05,
+            "maximum_transverse_drift_m": 1.193275371678458e-22,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.0355467662225415
+            ],
+            "maximum_tangential_force_n": 2.0355467662225417e-05,
+            "travel_x_m": 0.12498772576649833,
+            "final_speed_m_s": 0.24995094999999987
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0004631655014865892,
+          "maximum_abs_vertical_speed_m_s": 0.0049050000000000005,
+          "first50ms_vx_reference_max_m_s": 4.905532628968201e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8350785577870954e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.0005,
+        "timeconst": 0.02,
+        "cone": "pyramidal",
+        "id": "case-19"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 3.615765294718437e-05,
+            "penetration_p95_m": 3.539844717038651e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.400411314740225e-05,
+            "maximum_momentum_residual_weight_ratio": 1.6083870208851484e-07,
+            "maximum_position_reference_error_m": 1.2274731280167983e-05,
+            "maximum_velocity_reference_error_m_s": 4.905117739317788e-05,
+            "maximum_transverse_drift_m": 8.188288278356587e-16,
+            "maximum_surface_clearance_m": 6.757189703610056e-10,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.062330030855893
+            ],
+            "maximum_tangential_force_n": 2.0623300308558934e-05,
+            "travel_x_m": 0.12498772526871992,
+            "final_speed_m_s": 0.2499509765532437
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.00030500918333826733,
+          "maximum_abs_vertical_speed_m_s": 0.0049050000000000005,
+          "first50ms_vx_reference_max_m_s": 4.910889442016897e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8416158406983404e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.00025,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-20"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.58582446247291e-06,
+            "penetration_p95_m": 3.5385152445874257e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.5183188867572426e-12,
+            "maximum_momentum_residual_weight_ratio": 3.0588511690470063e-11,
+            "maximum_position_reference_error_m": 1.2268598212905601e-05,
+            "maximum_velocity_reference_error_m_s": 4.905000000446358e-05,
+            "maximum_transverse_drift_m": 2.1504396146479192e-21,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.137019539762944
+            ],
+            "maximum_tangential_force_n": 2.1370195397629443e-05,
+            "travel_x_m": 0.12498773140178025,
+            "final_speed_m_s": 0.24995094999999554
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 3.0273002326083543e-05,
+          "maximum_abs_vertical_speed_m_s": 0.0024525000000000003,
+          "first50ms_vx_reference_max_m_s": 4.905012204098336e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8356390555384024e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.00025,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-21"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 4.537040898155292e-06,
+            "penetration_p95_m": 4.3988712506992655e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 0.00018600557028514153,
+            "maximum_momentum_residual_weight_ratio": 9.577261147946182e-07,
+            "maximum_position_reference_error_m": 1.2268595139836025e-05,
+            "maximum_velocity_reference_error_m_s": 4.904087650142719e-05,
+            "maximum_transverse_drift_m": 1.7412082171255554e-15,
+            "maximum_surface_clearance_m": 4.225587588169155e-11,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.1651384051436624
+            ],
+            "maximum_tangential_force_n": 2.165138405143663e-05,
+            "travel_x_m": 0.12498773140485332,
+            "final_speed_m_s": 0.24995262420612904
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": 6.55195063459999e-05,
+          "maximum_abs_vertical_speed_m_s": 0.0024525000000000003,
+          "first50ms_vx_reference_max_m_s": 4.904558604940101e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8344162866699335e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.00025,
+        "timeconst": 0.02,
+        "cone": "elliptic",
+        "id": "case-22"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.2900357920722396e-05,
+            "penetration_p95_m": 5.290035679940755e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 9.546030632634483e-12,
+            "maximum_momentum_residual_weight_ratio": 3.052377698938007e-11,
+            "maximum_position_reference_error_m": 1.2268102244680779e-05,
+            "maximum_velocity_reference_error_m_s": 4.904999999949533e-05,
+            "maximum_transverse_drift_m": 1.361969390012986e-23,
+            "maximum_surface_clearance_m": 0.0,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              1.9857646414327421
+            ],
+            "maximum_tangential_force_n": 1.9857646414327423e-05,
+            "travel_x_m": 0.12498773189774848,
+            "final_speed_m_s": 0.2499509500000005
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.00030662746796576815,
+          "maximum_abs_vertical_speed_m_s": 0.0024525000000000003,
+          "first50ms_vx_reference_max_m_s": 4.902541904328039e-06,
+          "first50ms_vx_reference_rms_m_s": 2.8301897614534426e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.0,
+        "timestep": 0.00025,
+        "timeconst": 0.02,
+        "cone": "pyramidal",
+        "id": "case-23"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 1.8027117056410025e-05,
+            "penetration_p95_m": 1.762836409591531e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 2.911833525631735e-06,
+            "maximum_momentum_residual_weight_ratio": 4.807380804698394e-08,
+            "maximum_position_reference_error_m": 1.2268628518580238e-05,
+            "maximum_velocity_reference_error_m_s": 4.9050142821749354e-05,
+            "maximum_transverse_drift_m": 1.4463360294132568e-15,
+            "maximum_surface_clearance_m": 6.334269775365442e-10,
+            "maximum_orientation_change_rad": 0.0,
+            "normal_force_range_n": [
+              0.0,
+              2.0118931590295768
+            ],
+            "maximum_tangential_force_n": 2.0118931590295766e-05,
+            "travel_x_m": 0.12498773137147458,
+            "final_speed_m_s": 0.24995095026522288
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.00015002834558580603,
+          "maximum_abs_vertical_speed_m_s": 0.0024525000000000003,
+          "first50ms_vx_reference_max_m_s": 4.907950610699707e-06,
+          "first50ms_vx_reference_rms_m_s": 2.836751500251649e-06
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.001,
+        "timeconst": 0.005,
+        "cone": "elliptic",
+        "id": "case-24"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 5.056576417349079e-05,
+            "penetration_p95_m": 1.539505050002568e-05,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.2119194536808209e-12,
+            "maximum_momentum_residual_weight_ratio": 3.051831787402214e-11,
+            "maximum_position_reference_error_m": 0.00011800828171460408,
+            "maximum_velocity_reference_error_m_s": 0.006258913568372576,
+            "maximum_transverse_drift_m": 6.7974220157051904e-18,
+            "maximum_surface_clearance_m": 2.717904710048194e-05,
+            "maximum_orientation_change_rad": 0.0025063964212782884,
+            "normal_force_range_n": [
+              0.0,
+              8.391328522312282
+            ],
+            "maximum_tangential_force_n": 2.517398556693685,
+            "travel_x_m": 0.010511752766970696,
+            "final_speed_m_s": 1.2421297714807552e-16
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.003186646425116642,
+          "maximum_abs_vertical_speed_m_s": 0.020863045227911187,
+          "first50ms_vx_reference_max_m_s": 0.006258913568372576,
+          "first50ms_vx_reference_rms_m_s": 0.0034400887003258325
+        }
+      }
+    },
+    {
+      "job": {
+        "friction": 0.3,
+        "timestep": 0.001,
+        "timeconst": 0.005,
+        "cone": "pyramidal",
+        "id": "case-25"
+      },
+      "result": {
+        "valid": true,
+        "checks": {
+          "case_matches": true,
+          "complete_shapes": true,
+          "finite_states_and_forces": true,
+          "complete_contact_coverage": true,
+          "native_steps_completed": true,
+          "uniform_time_grid": true,
+          "declared_initial_velocity": true,
+          "unit_quaternions": true,
+          "momentum_balance": true,
+          "identical_initial_pose": true,
+          "identical_initial_velocity": true,
+          "zero_external_action": true,
+          "native_identity": true,
+          "native_simulation": true,
+          "native_solver": true,
+          "native_normal_profile": true,
+          "native_mass_inertia": true,
+          "native_geometry": true,
+          "authored_options": true,
+          "native_warnings": true,
+          "contact_parameters": true,
+          "raw_force_ledger": true
+        },
+        "engineering": {
+          "passed": true,
+          "checks": {
+            "complete_shapes": true,
+            "finite_states_and_forces": true,
+            "complete_contact_coverage": true,
+            "native_steps_completed": true,
+            "uniform_time_grid": true,
+            "declared_initial_velocity": true,
+            "unit_quaternions": true,
+            "no_tensile_normal_force": true,
+            "support_matches_weight": true,
+            "momentum_balance": true,
+            "bounded_penetration": true,
+            "surface_contact_geometry": true,
+            "no_transverse_drift": true,
+            "initially_level_reference_applicable": true,
+            "no_tipping_reference_applicable": true,
+            "coulomb_position": true,
+            "coulomb_velocity": true
+          },
+          "metrics": {
+            "maximum_penetration_m": 2.350882121859854e-05,
+            "penetration_p95_m": 9.809999999998986e-06,
+            "penetration_over_limit_sample_duration_s": 0.0,
+            "support_relative_error": 1.5001333508735115e-12,
+            "maximum_momentum_residual_weight_ratio": 2.804009761647874e-11,
+            "maximum_position_reference_error_m": 0.00011921862629075963,
+            "maximum_velocity_reference_error_m_s": 0.0071044994374588055,
+            "maximum_transverse_drift_m": 6.632123781564696e-18,
+            "maximum_surface_clearance_m": 2.3849491098678482e-05,
+            "maximum_orientation_change_rad": 0.0006978043464132882,
+            "normal_force_range_n": [
+              0.0,
+              8.433537908875653
+            ],
+            "maximum_tangential_force_n": 2.5300613726626957,
+            "travel_x_m": 0.010510252373306586,
+            "final_speed_m_s": 1.2289351031215119e-15
+          },
+          "scope": "Nominal planar contact; no matched compliance or hardware accuracy claim"
+        },
+        "metrics": {
+          "first10ms_excess_normal_impulse_ns": -0.0030502081046737822,
+          "maximum_abs_vertical_speed_m_s": 0.02368166479152951,
+          "first50ms_vx_reference_max_m_s": 0.0071044994374588055,
+          "first50ms_vx_reference_rms_m_s": 0.003344801295571775
+        }
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "factor": "cone",
+      "pair": [
+        "case-00",
+        "case-01"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.00013643832044285976,
+        "maximum_abs_vertical_speed_m_s": 0.0028186195636183235,
+        "first50ms_vx_reference_max_m_s": 0.0008455858690862295,
+        "first50ms_vx_reference_rms_m_s": -9.528740475405742e-05
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-02",
+        "case-03"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.00016914431035381478,
+        "maximum_abs_vertical_speed_m_s": 0.0007820652620091212,
+        "first50ms_vx_reference_max_m_s": 0.0002346195786029348,
+        "first50ms_vx_reference_rms_m_s": 0.0006993177823178579
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-04",
+        "case-05"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0016429430794418316,
+        "maximum_abs_vertical_speed_m_s": -0.0005002941833359906,
+        "first50ms_vx_reference_max_m_s": -0.0001500882550011795,
+        "first50ms_vx_reference_rms_m_s": -1.4673956775271843e-05
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-06",
+        "case-07"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.0013669004142594404,
+        "maximum_abs_vertical_speed_m_s": -0.0005825617203228765,
+        "first50ms_vx_reference_max_m_s": -6.74003906279419e-05,
+        "first50ms_vx_reference_rms_m_s": -2.8624773921290432e-05
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-08",
+        "case-09"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.0011452609542587527,
+        "maximum_abs_vertical_speed_m_s": 0.0008497304996719045,
+        "first50ms_vx_reference_max_m_s": 0.0002549191499008896,
+        "first50ms_vx_reference_rms_m_s": -8.32532860563838e-05
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-10",
+        "case-11"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.0005005453017951957,
+        "maximum_abs_vertical_speed_m_s": 0.0005515793045524839,
+        "first50ms_vx_reference_max_m_s": 0.00016547379136577778,
+        "first50ms_vx_reference_rms_m_s": -0.00016697246226510894
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-12",
+        "case-13"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 3.3370105488412345e-05,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 1.2490314338364783e-11,
+        "first50ms_vx_reference_rms_m_s": 2.3061870548136834e-10
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-14",
+        "case-15"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.00016120630508362405,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 5.245417461496871e-09,
+        "first50ms_vx_reference_rms_m_s": 6.469637340160105e-09
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-16",
+        "case-17"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 3.4799896285562685e-05,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 9.013817470204799e-12,
+        "first50ms_vx_reference_rms_m_s": 2.3460174897962943e-10
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-18",
+        "case-19"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.00015815631814832188,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 5.356813048695841e-09,
+        "first50ms_vx_reference_rms_m_s": 6.537282911245024e-09
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-20",
+        "case-21"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 3.524650401991636e-05,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": -4.535991582343968e-10,
+        "first50ms_vx_reference_rms_m_s": -1.2227688684689053e-09
+      }
+    },
+    {
+      "factor": "cone",
+      "pair": [
+        "case-22",
+        "case-23"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.00015659912237996212,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 5.408706371667904e-09,
+        "first50ms_vx_reference_rms_m_s": 6.561738798206559e-09
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-00",
+        "case-02"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.0025579453306551372,
+        "maximum_abs_vertical_speed_m_s": -0.004669353476234227,
+        "first50ms_vx_reference_max_m_s": -0.0014008060428694624,
+        "first50ms_vx_reference_rms_m_s": -0.0017677385849730997
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-01",
+        "case-03"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.002590651320566092,
+        "maximum_abs_vertical_speed_m_s": -0.006705907777843429,
+        "first50ms_vx_reference_max_m_s": -0.002011772333352757,
+        "first50ms_vx_reference_rms_m_s": -0.0009731333979011844
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-04",
+        "case-06"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0014866446764244686,
+        "maximum_abs_vertical_speed_m_s": -0.008531672534894615,
+        "first50ms_vx_reference_max_m_s": -0.002666869885937395,
+        "first50ms_vx_reference_rms_m_s": -0.000643582735424952
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-05",
+        "case-07"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": 0.0015231988172768034,
+        "maximum_abs_vertical_speed_m_s": -0.008613940071881501,
+        "first50ms_vx_reference_max_m_s": -0.0025841820215641575,
+        "first50ms_vx_reference_rms_m_s": -0.0006575335525709706
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-08",
+        "case-10"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.001142088363891542,
+        "maximum_abs_vertical_speed_m_s": -0.0020049018332797593,
+        "first50ms_vx_reference_max_m_s": -0.0006014705499844397,
+        "first50ms_vx_reference_rms_m_s": -0.00018251361603875325
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-09",
+        "case-11"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.001786804016355099,
+        "maximum_abs_vertical_speed_m_s": -0.00230305302839918,
+        "first50ms_vx_reference_max_m_s": -0.0006909159085195515,
+        "first50ms_vx_reference_rms_m_s": -0.0002662327922474784
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-12",
+        "case-14"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0010319857406105087,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 6.417809644831962e-09,
+        "first50ms_vx_reference_rms_m_s": -2.5639283357755062e-09
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-13",
+        "case-15"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0009041495410152969,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 1.1650736791990468e-08,
+        "first50ms_vx_reference_rms_m_s": 3.67509029890323e-09
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-16",
+        "case-18"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0005613655099722337,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 4.973789990980748e-10,
+        "first50ms_vx_reference_rms_m_s": -4.527754938244215e-09
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-17",
+        "case-19"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0004380090881094745,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 5.845178230323711e-09,
+        "first50ms_vx_reference_rms_m_s": 1.77492622402118e-09
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-20",
+        "case-22"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.0003369004702918517,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": -2.470299770296336e-09,
+        "first50ms_vx_reference_rms_m_s": -5.449294084959806e-09
+      }
+    },
+    {
+      "factor": "timeconst",
+      "pair": [
+        "case-21",
+        "case-23"
+      ],
+      "comparable": true,
+      "right_minus_left": {
+        "first10ms_excess_normal_impulse_ns": -0.00021554785193180593,
+        "maximum_abs_vertical_speed_m_s": 0.0,
+        "first50ms_vx_reference_max_m_s": 3.392005759605965e-09,
+        "first50ms_vx_reference_rms_m_s": 2.3352135817156583e-09
+      }
+    }
+  ],
+  "repeats": [
+    {
+      "pair": [
+        "case-00",
+        "case-24"
+      ],
+      "exact_arrays": true
+    },
+    {
+      "pair": [
+        "case-01",
+        "case-25"
+      ],
+      "exact_arrays": true
+    }
+  ],
+  "valid_count": 26,
+  "engineering_pass_count": 26
+}

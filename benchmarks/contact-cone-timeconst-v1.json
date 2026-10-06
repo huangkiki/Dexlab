@@ -1,0 +1,63 @@
+{
+  "question": "At identical fresh-scene cube/plane inputs, how do cone and positive-solref time constant change onset force/velocity, separately from timestep?",
+  "engine": "official MuJoCo latest stable, require verified runtime3.15.0 or stop and requalify",
+  "mass_kg": 0.2,
+  "half_size_m": 0.02,
+  "gravity_m_s2": 9.81,
+  "initial_vx_m_s": 0.25,
+  "settle_s": 0,
+  "duration_s": 0.5,
+  "cones": [
+    "elliptic",
+    "pyramidal"
+  ],
+  "timeconst_s": [
+    0.005,
+    0.02
+  ],
+  "dampratio": 1,
+  "solimp": [
+    0.95,
+    0.99,
+    0.001,
+    0.5,
+    2
+  ],
+  "dt_s": [
+    0.001,
+    0.0005,
+    0.00025
+  ],
+  "friction": [
+    0.3,
+    0
+  ],
+  "integrator": "Euler",
+  "solver": "Newton",
+  "iterations": 100,
+  "tolerance": 1e-10,
+  "episodes": 26,
+  "order": "friction .3 then0, dt descending, timeconst ascending, cone elliptic then pyramidal; append exact repeats of mu.3,dt.001,tc.005 for bothcones",
+  "metrics": [
+    "existing contact_plane.LIMITS engineering score, unchanged",
+    "first10ms integrated normal impulse minus mg duration",
+    "maximum absolute vertical speed",
+    "maximum and RMS horizontal velocity difference against conditional no-tip Coulomb reference in first50ms",
+    "all paired contrasts; exact-repeat arrays compared before effect interpretation"
+  ],
+  "validity": [
+    "native clock/actualinitialpose/velocity/mass/inertia/compiled XML/options/readback",
+    "every raw contact force ledger and warning",
+    "source/artifact hashes, no missingcase or discardedfailure",
+    "match all non-intervened inputs before contrast; numerical refinement is not reference truth"
+  ],
+  "budget_seconds": 600,
+  "hard_deadline_seconds": 660,
+  "parallel_workers": 1,
+  "stopping": "Run declared26once, retain physical failures, no parameter optimization or additionalcohorts. Stop on identity/resource/integrityfailure. Report factor contrasts even if noeffect; no universal engine, material or convergence claim.",
+  "limits": "Fresh non-equilibrium contact onset, not settled sliding. Native zero-mu floor disclosed; no accumulated material-point slip. Changing timeconst changes the contact response, not merely an integrator setting. Not Manda reproduction or Genesis equivalence.",
+  "sources": [
+    "https://mujoco.readthedocs.io/en/stable/modeling.html#solver-parameters",
+    "https://mandarobotics.com/blog/comparing-physics-engines/index.html"
+  ]
+}
