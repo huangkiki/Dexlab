@@ -132,3 +132,7 @@
 [Protocol / 协议](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/FEEDTHROUGH.zh-CN.md)
 
 ![Applied-load diagnostics](../../evidence/feedthrough-v1.png)
+
+## 接触诊断综合结论
+
+静态匹配尚未建立共同动态物性。成对迁移30个工况全部未通过综合目标；局部力定律辨识不能替代卸载修复。[逐项验收证据与未完成承诺](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/CONCLUSIONS.zh-CN.md)。#10仍开放；本汇总不新增实验或引擎排名。

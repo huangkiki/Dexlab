@@ -133,3 +133,7 @@ Nine low-impedance cases pass data validity; nine high-impedance cases fail sett
 [Protocol / 协议](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/FEEDTHROUGH.md)
 
 ![Applied-load diagnostics](../../evidence/feedthrough-v1.png)
+
+## Contact diagnosis synthesis
+
+Static matching has not established a shared dynamic material. All30 paired transfer cases fail the combined target; local force-law identification does not repair unloading. [Requirement-by-requirement evidence and open commitments](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/CONCLUSIONS.md). Issue10 remains open; this summary adds no new experiment or engine ranking.
