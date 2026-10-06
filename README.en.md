@@ -25,6 +25,10 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 
 ![Genesis pinch and release](docs/evidence/genesis-pinch.png)
 
+**Genesis quality/cost:** three development timesteps pass the engineering criterion without establishing convergence; stepping, observation, writing and scoring costs are separated. [Protocol and capability audit](demos/contact-benchmark/GENESIS_COST.md).
+
+![Genesis quality and cost](docs/evidence/genesis-cost.png)
+
 **Continuous close-up:** recorded Genesis states, displayed by MuJoCo without physics integration. Includes closing, lifting, holding, opening and landing. The 30 fps replay does not replace per-step penetration scoring.
 
 ![Genesis measured-pose replay](demos/contact-benchmark/media/genesis-pinch.gif)

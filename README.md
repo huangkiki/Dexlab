@@ -25,6 +25,10 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 ![Genesis pinch and release](docs/evidence/genesis-pinch.png)
 
+**Genesis 误差／成本：** 三个步长均通过工程判据，但峰值不支持收敛结论；公开步进、观测、写盘及评分分项。[协议与能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
+
+![Genesis quality and cost](docs/evidence/genesis-cost.png)
+
 **连续近景：** 以下为 Genesis 实测状态回放，MuJoCo 仅显示、不积分动力学；完整保留夹持、抬升、保持、松开与落桌。30 fps 动图不能替代逐物理步穿透评分。
 
 ![Genesis measured-pose replay](demos/contact-benchmark/media/genesis-pinch.gif)

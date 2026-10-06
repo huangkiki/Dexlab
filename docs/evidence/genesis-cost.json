@@ -1,0 +1,551 @@
+{
+  "protocol": {
+    "schema": 1,
+    "engine": "Genesis1.4.3",
+    "quadrants": "1.3.3",
+    "torch": "2.9.1+cpu",
+    "precision": "64",
+    "backend": "cpu",
+    "dt_order_s": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "duration_per_episode_s": 4,
+    "conditions": [
+      "pinch",
+      "open_negative"
+    ],
+    "reset_repeats": 2,
+    "acceptance": "unchanged genesis_pinch_score.py; development cases, not heldout",
+    "cache": "existing JIT caches retained; first step separately measured; not cold compilation",
+    "budget": "serial;24GiB2CPU128pids/swap0;1200s total",
+    "controls": "unchanged geometry/material/drive/contact options; only timestep changes",
+    "timing": "instrumented CPU wall time, synchronization via synchronous CPU calls; not uninstrumented throughput",
+    "rendering": "not in physics cost window; previously delivered replay timing separately",
+    "archival": "not executed; no concurrent transfer/hash",
+    "cpu": "Intel(R) Core(TM) i9-14900K",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35"
+  },
+  "cases": [
+    {
+      "dt_s": 0.001,
+      "returncode": 0,
+      "process_wall_s": 14.044593552011065,
+      "score_process_wall_s": 0.3727497619984206,
+      "score_returncode": 0,
+      "physical_checks_passed": true,
+      "timings": {
+        "clock": "perf_counter; synchronous CPU readback",
+        "trials": [
+          {
+            "condition": "pinch",
+            "repeat": 0,
+            "control_s": 0.30931650518323295,
+            "step_s": 0.8167812813189812,
+            "observations_s": 0.5616028953227215,
+            "step_count": 4000,
+            "reset_s": 0.00045177899301052094,
+            "setup_readback_s": 0.00046077798469923437,
+            "first_step_s": 0.15883782698074356,
+            "serialize_write_s": 0.36606491199927405
+          },
+          {
+            "condition": "pinch",
+            "repeat": 1,
+            "control_s": 0.3994064346770756,
+            "step_s": 0.6536863239889499,
+            "observations_s": 0.5466733363282401,
+            "step_count": 4000,
+            "reset_s": 0.0006652510201092809,
+            "setup_readback_s": 0.00040450599044561386,
+            "first_step_s": 0.00042424502316862345,
+            "serialize_write_s": 0.337947089021327
+          },
+          {
+            "condition": "open_negative",
+            "repeat": 0,
+            "control_s": 0.21500331672723405,
+            "step_s": 0.623566504655173,
+            "observations_s": 0.533537209557835,
+            "step_count": 4000,
+            "reset_s": 0.0006620770145673305,
+            "setup_readback_s": 0.00039242900675162673,
+            "first_step_s": 0.00041839899495244026,
+            "serialize_write_s": 0.18522251400281675
+          },
+          {
+            "condition": "open_negative",
+            "repeat": 1,
+            "control_s": 0.3020396236679517,
+            "step_s": 0.623587625392247,
+            "observations_s": 0.5357730957912281,
+            "step_count": 4000,
+            "reset_s": 0.0006129670073278248,
+            "setup_readback_s": 0.0004207279998809099,
+            "first_step_s": 0.0004201910051051527,
+            "serialize_write_s": 0.1848972539883107
+          }
+        ],
+        "rendering": "not executed",
+        "archival": "not executed",
+        "scope": "instrumented CPU run; process import and package installation excluded",
+        "init_s": 1.146219195012236,
+        "scene_build_s": 2.329212963988539,
+        "destroy_s": 0.018474254000466317,
+        "total_after_import_s": 11.078441547986586
+      },
+      "score": {
+        "passed": true,
+        "results": {
+          "pinch-0": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 4.4444400055622944e-05,
+              "reference_table_max_penetration_m": 3.241266263913703e-05,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.6702337438002695e-09,
+              "minimum_hold_center_z_m": 0.08370110058204057,
+              "maximum_release_center_z_m": 0.01999890697381819
+            }
+          },
+          "pinch-1": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 4.4444400055622944e-05,
+              "reference_table_max_penetration_m": 3.241266263913703e-05,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.6702337438002695e-09,
+              "minimum_hold_center_z_m": 0.08370110058204057,
+              "maximum_release_center_z_m": 0.01999890697381819
+            }
+          },
+          "open_negative-0": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 9.809999999998986e-06,
+              "reference_table_max_penetration_m": 9.809999999998986e-06,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.988018912820908e-10,
+              "minimum_hold_center_z_m": 0.0199989069738181,
+              "maximum_release_center_z_m": 0.01999890697381819
+            }
+          },
+          "open_negative-1": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 9.809999999998986e-06,
+              "reference_table_max_penetration_m": 9.809999999998986e-06,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.988018912820908e-10,
+              "minimum_hold_center_z_m": 0.0199989069738181,
+              "maximum_release_center_z_m": 0.01999890697381819
+            }
+          }
+        },
+        "exact_reset_replay": {
+          "pinch": true,
+          "open_negative": true
+        },
+        "scope": "Development fixture only; no convergence, hardware, GPU or SDF qualification"
+      },
+      "sha256": {
+        "gripper.xml": "2dcdbb2537a2dc5b528607fefca523c79bf65a62827b773a9002f1b0c6a9c55c",
+        "open_negative-0.json": "f0c5b1939d8ad5c8729019ccd602b4aa632036b53cd9f0923454831ba493094c",
+        "open_negative-1.json": "85e2b8f2d7c9306437ff712bb5c7503e9d53fe1904c8437d55ceba8087ac7ed7",
+        "pinch-0.json": "7e201eb603218428206232f92aa5677cfc4d66fe0a1aac05203bd3802d69f145",
+        "pinch-1.json": "7de00bd970571450ac3d0eaebec8826f387262be41751ccb40922119aa2bd321",
+        "protocol.json": "ab53603f59754046367eda24bfdc1b5c528539fdb3d826ba9af59e3b39b950db",
+        "runner.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5",
+        "score.json": "c8069f4b4d403862ad5e053d899f0fda6db9fb8b36589c6e20508c6bb9624746",
+        "score.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "score.stdout": "c8069f4b4d403862ad5e053d899f0fda6db9fb8b36589c6e20508c6bb9624746",
+        "timings.json": "3fff235a39c2085a6d257c483bd2a7a844497c6f402619f2eeb9766cd32f5668"
+      }
+    },
+    {
+      "dt_s": 0.0005,
+      "returncode": 0,
+      "process_wall_s": 21.10060116200475,
+      "score_process_wall_s": 0.7621995030203834,
+      "score_returncode": 0,
+      "physical_checks_passed": true,
+      "timings": {
+        "clock": "perf_counter; synchronous CPU readback",
+        "trials": [
+          {
+            "condition": "pinch",
+            "repeat": 0,
+            "control_s": 0.44719106203410774,
+            "step_s": 1.4663668552821036,
+            "observations_s": 1.3019225056632422,
+            "step_count": 8000,
+            "reset_s": 0.0004339480074122548,
+            "setup_readback_s": 0.000458476017229259,
+            "first_step_s": 0.1577928479819093,
+            "serialize_write_s": 0.7109469580173027
+          },
+          {
+            "condition": "pinch",
+            "repeat": 1,
+            "control_s": 0.4486293918744195,
+            "step_s": 1.3178364823106676,
+            "observations_s": 1.3045929846120998,
+            "step_count": 8000,
+            "reset_s": 0.0006156710151117295,
+            "setup_readback_s": 0.0003944659838452935,
+            "first_step_s": 0.000398796983063221,
+            "serialize_write_s": 0.7001546210085507
+          },
+          {
+            "condition": "open_negative",
+            "repeat": 0,
+            "control_s": 0.614114696305478,
+            "step_s": 1.2462169789359905,
+            "observations_s": 1.093133369955467,
+            "step_count": 8000,
+            "reset_s": 0.0006469269865192473,
+            "setup_readback_s": 0.00041738300933502614,
+            "first_step_s": 0.000389612017897889,
+            "serialize_write_s": 0.37468593698577024
+          },
+          {
+            "condition": "open_negative",
+            "repeat": 1,
+            "control_s": 0.623671490495326,
+            "step_s": 1.2424443773343228,
+            "observations_s": 1.0791364914912265,
+            "step_count": 8000,
+            "reset_s": 0.0006560869805980474,
+            "setup_readback_s": 0.0003768589813262224,
+            "first_step_s": 0.0003985310031566769,
+            "serialize_write_s": 0.371760195994284
+          }
+        ],
+        "rendering": "not executed",
+        "archival": "not executed",
+        "scope": "instrumented CPU run; process import and package installation excluded",
+        "init_s": 1.145385976007674,
+        "scene_build_s": 2.311587050993694,
+        "destroy_s": 0.01798209099797532,
+        "total_after_import_s": 18.242570507980417
+      },
+      "score": {
+        "passed": true,
+        "results": {
+          "pinch-0": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 0.000664849119904564,
+              "reference_table_max_penetration_m": 0.000664849119904564,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.6052971944291032e-09,
+              "minimum_hold_center_z_m": 0.0837011018485747,
+              "maximum_release_center_z_m": 0.019998906973818325
+            }
+          },
+          "pinch-1": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 0.000664849119904564,
+              "reference_table_max_penetration_m": 0.000664849119904564,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.6052971944291032e-09,
+              "minimum_hold_center_z_m": 0.0837011018485747,
+              "maximum_release_center_z_m": 0.019998906973818325
+            }
+          },
+          "open_negative-0": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 3.9784150574380395e-06,
+              "reference_table_max_penetration_m": 3.9784150574380395e-06,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.987417466173537e-10,
+              "minimum_hold_center_z_m": 0.01999890697381819,
+              "maximum_release_center_z_m": 0.019998906973818325
+            }
+          },
+          "open_negative-1": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 3.9784150574380395e-06,
+              "reference_table_max_penetration_m": 3.9784150574380395e-06,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.987417466173537e-10,
+              "minimum_hold_center_z_m": 0.01999890697381819,
+              "maximum_release_center_z_m": 0.019998906973818325
+            }
+          }
+        },
+        "exact_reset_replay": {
+          "pinch": true,
+          "open_negative": true
+        },
+        "scope": "Development fixture only; no convergence, hardware, GPU or SDF qualification"
+      },
+      "sha256": {
+        "gripper.xml": "2dcdbb2537a2dc5b528607fefca523c79bf65a62827b773a9002f1b0c6a9c55c",
+        "open_negative-0.json": "3dbe5b5d817fecab607d810e20874196485c6204e3418d42c35c90f78b856ebc",
+        "open_negative-1.json": "4eefea23c273bebf3e756b6e23668f1260d50500b9d83b999326f43b5c59b434",
+        "pinch-0.json": "a6b61a2cd6bab5c5d17e54a7d25b7945f6dc9280dad9bd7f47f9e0cb56b843e9",
+        "pinch-1.json": "e2579d004966e4a74046e7b109c1fcad98cc4816b84798b36acd78915a956002",
+        "protocol.json": "e019328a4ebdcd63deb457c0eba25b247eb546dd72a6df122ff30f5130c768e9",
+        "runner.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5",
+        "score.json": "d464cc0497bc16f8a656074dffdd76710baf3edfa8f7ddef2e32f5dc725ca352",
+        "score.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "score.stdout": "d464cc0497bc16f8a656074dffdd76710baf3edfa8f7ddef2e32f5dc725ca352",
+        "timings.json": "3331ce4642dd8b22acfb6ae3bc7909ac8f61f51a9dc09857dd6f5adf6ae4dd09"
+      }
+    },
+    {
+      "dt_s": 0.00025,
+      "returncode": 0,
+      "process_wall_s": 35.196628531004535,
+      "score_process_wall_s": 1.5137058609980159,
+      "score_returncode": 0,
+      "physical_checks_passed": true,
+      "timings": {
+        "clock": "perf_counter; synchronous CPU readback",
+        "trials": [
+          {
+            "condition": "pinch",
+            "repeat": 0,
+            "control_s": 0.8884736572217662,
+            "step_s": 2.7900970444607083,
+            "observations_s": 2.7156366488488857,
+            "step_count": 16000,
+            "reset_s": 0.0004435419978108257,
+            "setup_readback_s": 0.00047255901154130697,
+            "first_step_s": 0.15827679602080025,
+            "serialize_write_s": 1.3980891270039137
+          },
+          {
+            "condition": "pinch",
+            "repeat": 1,
+            "control_s": 1.018728374299826,
+            "step_s": 2.6290327317256015,
+            "observations_s": 2.493573021143675,
+            "step_count": 16000,
+            "reset_s": 0.000615112017840147,
+            "setup_readback_s": 0.0004296160186640918,
+            "first_step_s": 0.0004293509991839528,
+            "serialize_write_s": 1.371546100010164
+          },
+          {
+            "condition": "open_negative",
+            "repeat": 0,
+            "control_s": 1.097421853162814,
+            "step_s": 2.490400719776517,
+            "observations_s": 2.176149137347238,
+            "step_count": 16000,
+            "reset_s": 0.0006360269908327609,
+            "setup_readback_s": 0.0004109830188099295,
+            "first_step_s": 0.0004556290223263204,
+            "serialize_write_s": 0.7681991420104168
+          },
+          {
+            "condition": "open_negative",
+            "repeat": 1,
+            "control_s": 1.0798669590731151,
+            "step_s": 2.472432635986479,
+            "observations_s": 2.1665021882217843,
+            "step_count": 16000,
+            "reset_s": 0.0006669670110568404,
+            "setup_readback_s": 0.00041773999691940844,
+            "first_step_s": 0.0003860809956677258,
+            "serialize_write_s": 0.8013715849956498
+          }
+        ],
+        "rendering": "not executed",
+        "archival": "not executed",
+        "scope": "instrumented CPU run; process import and package installation excluded",
+        "init_s": 1.1390032740018796,
+        "scene_build_s": 2.3099133720097598,
+        "destroy_s": 0.01753764000022784,
+        "total_after_import_s": 32.33318831399083
+      },
+      "score": {
+        "passed": true,
+        "results": {
+          "pinch-0": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 0.0007577717432539523,
+              "reference_table_max_penetration_m": 0.0007577717432539523,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.5710355551386504e-09,
+              "minimum_hold_center_z_m": 0.08370110250428056,
+              "maximum_release_center_z_m": 0.019998906973818325
+            }
+          },
+          "pinch-1": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 0.0007577717432539523,
+              "reference_table_max_penetration_m": 0.0007577717432539523,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 2.5710355551386504e-09,
+              "minimum_hold_center_z_m": 0.08370110250428056,
+              "maximum_release_center_z_m": 0.019998906973818325
+            }
+          },
+          "open_negative-0": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 2.109092283007763e-06,
+              "reference_table_max_penetration_m": 2.109092283007763e-06,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 3.055165621423032e-10,
+              "minimum_hold_center_z_m": 0.019998906973818235,
+              "maximum_release_center_z_m": 0.01999890697381842
+            }
+          },
+          "open_negative-1": {
+            "passed": true,
+            "checks": {
+              "declared_import": true,
+              "native_penetration_1mm": true,
+              "reference_table_penetration_1mm": true,
+              "force_ledger": true,
+              "momentum_balance_5percent_weight": true,
+              "released": true,
+              "hold_or_negative": true
+            },
+            "metrics": {
+              "native_max_penetration_m": 2.109092283007763e-06,
+              "reference_table_max_penetration_m": 2.109092283007763e-06,
+              "maximum_force_ledger_error_N": 0.0,
+              "maximum_momentum_residual_weight_ratio": 3.055165621423032e-10,
+              "minimum_hold_center_z_m": 0.019998906973818235,
+              "maximum_release_center_z_m": 0.01999890697381842
+            }
+          }
+        },
+        "exact_reset_replay": {
+          "pinch": true,
+          "open_negative": true
+        },
+        "scope": "Development fixture only; no convergence, hardware, GPU or SDF qualification"
+      },
+      "sha256": {
+        "gripper.xml": "2dcdbb2537a2dc5b528607fefca523c79bf65a62827b773a9002f1b0c6a9c55c",
+        "open_negative-0.json": "b345f4af3dd0bd385e81b90ec64c41f1cf8a33da5c1883402bca34759e7a0327",
+        "open_negative-1.json": "d1bcfff86a3862734f2b7b3c7d6c564456e1a8fcc098500833f64b6e2a29f3a3",
+        "pinch-0.json": "4dea2bdcb726aee5066cd04378e0d1103d1f6dc519c223f1a89b833d92455ef1",
+        "pinch-1.json": "39ab87805c871a20bf05a40c9ddfb3cf90dd08ff6c98104939458653ec433a16",
+        "protocol.json": "676c30683e1d19fee7b42c72e0a9c2bf3e1fb36e15c4df5166790b2fd779d696",
+        "runner.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5",
+        "score.json": "65f45889f260728e5461c0c8f1b97965833a1233915041ad05f64eee1292c092",
+        "score.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "score.stdout": "65f45889f260728e5461c0c8f1b97965833a1233915041ad05f64eee1292c092",
+        "timings.json": "67ebbeda7820a818a11d1146ef01875390bcbb8098c0beb67886241be9d23e5a"
+      }
+    }
+  ],
+  "timer_instrumentation_trajectory_equality": {
+    "pinch-0.json": true,
+    "pinch-1.json": true,
+    "open_negative-0.json": true,
+    "open_negative-1.json": true
+  }
+}

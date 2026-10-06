@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import time
 from importlib.metadata import version
 from pathlib import Path
 
@@ -34,9 +35,16 @@ def run(output, dt):
     })
     model = output / "gripper.xml"
     model.write_text(MODEL)
+    timings = {"clock": "perf_counter; synchronous CPU readback", "trials": [],
+               "rendering": "not executed", "archival": "not executed",
+               "scope": "instrumented CPU run; process import and package installation excluded"}
+    started = time.perf_counter()
     try:
+        phase = time.perf_counter()
         gs.init(backend=gs.cpu, precision="64", seed=0,
                 use_deterministic_algorithms=True, logging_level="warning")
+        timings["init_s"] = time.perf_counter() - phase
+        phase = time.perf_counter()
         options = gs.options.RigidOptions(noslip_iterations=0, friction_cone=gs.friction_cone.elliptic)
         scene = gs.Scene(show_viewer=False, sim_options=gs.options.SimOptions(dt=dt), rigid_options=options)
         plane = scene.add_entity(gs.morphs.Plane(), material=gs.materials.Rigid(friction=.5))
@@ -44,6 +52,7 @@ def run(output, dt):
         cube = scene.add_entity(gs.morphs.Box(size=(.04,) * 3, pos=(0, 0, .02)),
                                 material=gs.materials.Rigid(rho=1000, friction=.5))
         scene.build()
+        timings["scene_build_s"] = time.perf_counter() - phase
         if gripper.n_dofs != 3:
             raise RuntimeError("Expected three prismatic gripper DOFs")
         joints = [gripper.get_joint(name) for name in ("lift", "left_slide", "right_slide")]
@@ -58,7 +67,12 @@ def run(output, dt):
             geom.set_sol_params(values)
         for condition in ("pinch", "open_negative"):
             for repeat in range(2):
+                trial_cost = {"condition": condition, "repeat": repeat, "control_s": 0.,
+                              "step_s": 0., "observations_s": 0., "step_count": round(4/dt)}
+                phase = time.perf_counter()
                 scene.reset()
+                trial_cost["reset_s"] = time.perf_counter() - phase
+                phase = time.perf_counter()
                 gripper.control_dofs_position([0, 0, 0], dofs_idx_local=indices)
                 initial = {
                     "cube_mass": cube.get_links_mass().tolist(),
@@ -74,13 +88,22 @@ def run(output, dt):
                     "pad_links": [gripper.get_link(n).idx for n in ("left", "right")],
                     "options": options.model_dump(mode="json"),
                 }
+                trial_cost["setup_readback_s"] = time.perf_counter() - phase
                 rows = []
                 for step in range(round(4 / dt)):
                     t = step * dt
                     closure = .012 * min(t / .5, 1) if condition == "pinch" and t < 3.2 else 0
                     lift = .08 * max(0, min(t - 1, 1))
+                    phase = time.perf_counter()
                     gripper.control_dofs_position([lift, closure, closure], dofs_idx_local=indices)
+                    trial_cost["control_s"] += time.perf_counter() - phase
+                    phase = time.perf_counter()
                     scene.step()
+                    elapsed = time.perf_counter() - phase
+                    trial_cost["step_s"] += elapsed
+                    if step == 0:
+                        trial_cost["first_step_s"] = elapsed
+                    phase = time.perf_counter()
                     rows.append({
                         "time": (step + 1) * dt, "command": [lift, closure, closure],
                         "q": gripper.get_dofs_position().tolist(),
@@ -89,13 +112,21 @@ def run(output, dt):
                         "object_contact_force": cube.get_links_net_contact_force().tolist(),
                         "contacts": {k: v.tolist() for k, v in cube.get_contacts().items()},
                     })
+                    trial_cost["observations_s"] += time.perf_counter() - phase
+                phase = time.perf_counter()
                 write_json(output / f"{condition}-{repeat}.json", {
                     "condition": condition, "repeat": repeat, "initial": initial, "samples": rows})
+                trial_cost["serialize_write_s"] = time.perf_counter() - phase
+                timings["trials"].append(trial_cost)
     except Exception as error:
         write_json(output / "error.json", {"type": type(error).__name__, "message": str(error)})
         raise
     finally:
+        phase = time.perf_counter()
         gs.destroy()
+        timings["destroy_s"] = time.perf_counter() - phase
+        timings["total_after_import_s"] = time.perf_counter() - started
+        write_json(output / "timings.json", timings)
 
 
 if __name__ == "__main__":
