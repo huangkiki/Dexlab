@@ -16,6 +16,11 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 **Genesis 接触诊断：** 水平速度激励后的竖直瞬态随摩擦锥配置明显变化；原失败保留，尚未完成抓取资格。[协议与限制](demos/contact-benchmark/GENESIS_CONE.zh-CN.md)
 
+
+**先核验模型，再解释改进：** Genesis 默认导入的附加惯量改变了关节响应；显式零附加惯量后，限位参数对照仍保留成功与失败。[完整参数、时序曲线与判据](demos/contact-benchmark/GENESIS_JOINT.zh-CN.md)。
+
+![关节限位诊断](docs/evidence/genesis-joint-limits.png)
+
 ## 实验依据与当前答案
 
 **目前没有证据证明哪套引擎更符合真实抓取。** 我们先检验声明模型的实现和数值误差，再用实测数据判断物理有效性。抓取成功率仅作配置回归。
