@@ -26,7 +26,7 @@ Existing JIT caches were retained. These are single-run wall times with CUDA syn
 | Capacity | 0.1469 | 0.9513 | 156.29 | 39.77 | 8.72 |
 | Overflow | 0.1245 | 0.8644 (failed build) | — | — | — |
 
-Rendering and archival were not executed in these timed windows. Independent scoring ran afterward. No engine-speed ranking follows from these numbers. Continuous grasp media and full GPU pinch acceptance remain separate outstanding work.
+Rendering and archival were not executed in these timed windows. Independent scoring ran afterward. No engine-speed ranking follows from these numbers. [Continuous CPU grasp replay](GENESIS_PINCH.md#continuous-measured-state-replay) is published in v0.33.0; it does not establish full GPU pinch acceptance, which remains unverified.
 
 ## Reproduce
 

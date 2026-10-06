@@ -47,8 +47,8 @@ python -m dexlab.genesis_joint_score /path/to/new-output
 python scripts/plot_genesis_joint.py /path/to/new-output /path/to/new-figure.png
 ```
 
-Output overwrite is refused. Source hash, models, native parameters, full traces and phase timings are retained; scoring does not import the engine. Raw archive delivery accompanies a future release; current figures/scores are locally validated candidate evidence, not a publication claim. Short CPU runs are not speed rankings.
+Output overwrite is refused. Source hash, models, native parameters, full traces and phase timings are retained; scoring does not import the engine. Raw records, figures and scores were published in [v0.30.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.30.0). Short CPU runs are not speed rankings.
 
-This adopts [Manda's layered audit method](https://mandarobotics.com/blog/comparing-physics-engines/index.html), not a reproduction of its pendulum experiment. #42 pinch/release, GPU batching, continuous replay and hardware calibration remain incomplete.
+This adopts [Manda's layered audit method](https://mandarobotics.com/blog/comparing-physics-engines/index.html), not a reproduction of its pendulum experiment. Later pinch/release, bounded GPU diagnostics and continuous replay are linked in the [capability audit](GENESIS_COST.md). Hardware calibration and full GPU grasp qualification remain unverified.
 
-Evidence bundle: [release attachment](https://github.com/huangkiki/Dexlab/releases/download/v0.30.0/genesis-joint-evidence-v1.tar.gz), [hash manifest](../../docs/evidence/genesis-joint-manifest.json). The locally verified archive has80members,1,126,996bytes; SHA256 `5f93fdf18a6938a6d989fc40c728bf01db52d7a5207090bc5ee2df3134029a16`. It includes failed timestep refinements and the earlier matrix-readback mistake. The attachment becomes available when v0.30.0 is published.
+Evidence bundle: [release attachment](https://github.com/huangkiki/Dexlab/releases/download/v0.30.0/genesis-joint-evidence-v1.tar.gz), [hash manifest](../../docs/evidence/genesis-joint-manifest.json). The locally verified archive has80members,1,126,996bytes; SHA256 `5f93fdf18a6938a6d989fc40c728bf01db52d7a5207090bc5ee2df3134029a16`. It includes failed timestep refinements and the earlier matrix-readback mistake. The attachment is published in v0.30.0.

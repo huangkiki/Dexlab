@@ -1,5 +1,7 @@
 <div align="center">
 
+Genesis joint, GPU and cost reports now distinguish published evidence from remaining unverified capabilities; see the [capability audit](demos/contact-benchmark/GENESIS_COST.md).
+
 # DexLab
 
 **Robot contact dynamics: from models and parameters to verifiable experimental findings.**

@@ -41,4 +41,4 @@ Genesis1.4.3／Quadrants1.3.3／Torch2.9.1+cpu，CPU FP64，i9-14900K，两核CP
 
 按关联报告准备官方环境并通过资源门禁。以新目录运行`python -m dexlab.genesis_pinch_probe NEW_DIRECTORY --dt 0.001`，再分别运行0.0005和0.00025；各目录生成`timings.json`与四条原始轨迹。仿真结束后执行`python -m dexlab.genesis_pinch_score DIRECTORY`。用`python scripts/plot_genesis_cost.py docs/evidence/genesis-cost.json NEW_FIGURE.png`重建图表。不覆盖输出、不改阈值、不删除失败。
 
-原始12回合归档及源码哈希见[清单](../../docs/evidence/genesis-cost-manifest.json)；当前本地包已读回核验，计划随 v0.34.0 发布，发布前不称远端已交付。
+原始12回合归档及源码哈希见[清单](../../docs/evidence/genesis-cost-manifest.json)；归档已随 [v0.34.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.34.0) 发布，下载后的大小与 SHA-256 均与清单一致。此交付副本不是独立备份。

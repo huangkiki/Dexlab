@@ -49,8 +49,8 @@ python -m dexlab.genesis_joint_score /path/to/new-output
 python scripts/plot_genesis_joint.py /path/to/new-output /path/to/new-figure.png
 ```
 
-输出目录不可覆盖；源码哈希、模型、实际参数、全部轨迹和阶段耗时保留。评分器不加载引擎。原始归档随后续发布交付，当前评分与图表属于本地已验证候选；不得说已发布。短 CPU 运行不作性能排名。
+输出目录不可覆盖；源码哈希、模型、实际参数、全部轨迹和阶段耗时保留。评分器不加载引擎。原始记录、评分与图表已随 [v0.30.0](https://github.com/huangkiki/Dexlab/releases/tag/v0.30.0) 发布。短 CPU 运行不作性能排名。
 
-借鉴 [Manda 的逐层审计方法](https://mandarobotics.com/blog/comparing-physics-engines/index.html)，本例先修正导入与读数解释再讨论参数效果；并未复现其摆杆实验。#42 的夹持、释放、GPU 批量、连续回放及真机校准仍未完成。
+借鉴 [Manda 的逐层审计方法](https://mandarobotics.com/blog/comparing-physics-engines/index.html)，本例先修正导入与读数解释再讨论参数效果；并未复现其摆杆实验。后续夹持释放、有界 GPU 诊断及连续回放见[能力审计](GENESIS_COST.zh-CN.md)。真机校准和完整 GPU 抓取仍未验证。
 
-证据包：[发布附件](https://github.com/huangkiki/Dexlab/releases/download/v0.30.0/genesis-joint-evidence-v1.tar.gz)、[哈希清单](../../docs/evidence/genesis-joint-manifest.json)。本地归档已逐项读回校验80个成员，大小1,126,996字节；SHA256 `5f93fdf18a6938a6d989fc40c728bf01db52d7a5207090bc5ee2df3134029a16`。包含步长细化失败及先前矩阵读取错误。附件在v0.30.0发布后可用。
+证据包：[发布附件](https://github.com/huangkiki/Dexlab/releases/download/v0.30.0/genesis-joint-evidence-v1.tar.gz)、[哈希清单](../../docs/evidence/genesis-joint-manifest.json)。本地归档已逐项读回校验80个成员，大小1,126,996字节；SHA256 `5f93fdf18a6938a6d989fc40c728bf01db52d7a5207090bc5ee2df3134029a16`。包含步长细化失败及先前矩阵读取错误。附件已随 v0.30.0 发布。

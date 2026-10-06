@@ -41,4 +41,4 @@ Rigid contact is the measured profile. PBD cloth and MPM/FEM are separate, unqua
 
 Use the official environment and resource guard from the linked reports. Run `python -m dexlab.genesis_pinch_probe NEW_DIRECTORY --dt 0.001`, then0.0005 and0.00025 in fresh directories; each produces `timings.json` plus all four raw records. Run `python -m dexlab.genesis_pinch_score DIRECTORY` after simulation. The plot is reproducible with `python scripts/plot_genesis_cost.py docs/evidence/genesis-cost.json NEW_FIGURE.png`. No output overwrite, threshold change or failed-case deletion is permitted.
 
-The [archive manifest](../../docs/evidence/genesis-cost-manifest.json) covers all12raw episodes and source hashes. The local package is reread-verified and intended for v0.34.0; remote delivery is not claimed before publication.
+The [archive manifest](../../docs/evidence/genesis-cost-manifest.json) covers all12raw episodes and source hashes. The [v0.34.0 release](https://github.com/huangkiki/Dexlab/releases/tag/v0.34.0) publishes this package. Downloaded size and SHA-256 match the manifest; this delivery copy is not an independent backup.
