@@ -68,6 +68,8 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 ![卸载力配对曲线](docs/evidence/damping-ablation-v1.png)
 
+**原生切线辨识：** 默认求解器9组均未达固定动量门禁；仅收紧求解容差后9/9有效，测得2/4/6 N下局部阻尼约20/40/60 Ns/m。步前/步后配对会改变拟合结果；这是局部数值辨识，未完成材料标定。[协议](demos/contact-benchmark/TANGENT_IDENTIFICATION.zh-CN.md)
+
 ## 当前结论
 
 | 研究问题 | 已有证据 | 结论与限制 |
@@ -77,7 +79,7 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 | 材料与接触如何影响结果？ | 拉伸、下垂、滑动、加载及瞬态的成功和失败均保留 | 材料和驱动尚未完成跨引擎实测校准 |
 | 能否说明真机表现？ | 尚无正式标定集与独立实测测试集 | 实测误差与 sim-to-real 能力未知 |
 
-下面的图表均为**原固定版本的历史证据**。新批次采用官方最新稳定版并重新验收，见 [版本准入 #41](https://github.com/huangkiki/Dexlab/issues/41)；[Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) 已有基础接触与关节诊断，完整资格尚未完成。
+下面的图表均为**原固定版本的历史证据**。新批次采用官方最新稳定版并重新验收，见 [版本准入 #41](https://github.com/huangkiki/Dexlab/issues/41)；[Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) 已完成限定合成刚体工况验收，薄布另由 #77 跟踪。
 
 标准分为实现一致性、数值收敛性与实测物理有效性；抓取通过不能替代三者。[研究标准](docs/research-focus.zh-CN.md#实验用什么标准判断)
 

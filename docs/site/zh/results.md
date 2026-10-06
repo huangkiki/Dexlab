@@ -114,3 +114,12 @@
 ![Per-scenario synthetic response discrepancy](../../evidence/contact-transfer-v1.png)
 
 [Protocol and all outcomes](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TRANSFER.zh-CN.md)
+
+## 原生法向响应辨识
+
+9组预注册载荷/步长工况使用双频小扰动辨识局部刚度与阻尼，再以较小幅度验证。
+默认求解器批次全部未通过固定动量残差门禁。受控对照仅收紧求解器容差，
+物理输入与验收阈值不变，9/9数据有效；2/4/6 N下局部阻尼约20/40/60 Ns/m。材料标定仍未完成。
+[协议与全部结果](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TANGENT_IDENTIFICATION.zh-CN.md)。
+
+![Native tangent diagnostics](../../evidence/tangent-identification-v1.png)

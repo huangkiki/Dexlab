@@ -114,3 +114,13 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 ![Per-scenario synthetic response discrepancy](../../evidence/contact-transfer-v1.png)
 
 [Protocol and all outcomes](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TRANSFER.md)
+
+## Native normal-response identification
+
+Nine predeclared preload/timestep cases isolate local stiffness and damping with
+two-tone forcing and smaller-amplitude validation. The default solver batch
+failed the fixed momentum-residual gate in every case. A controlled tighter-solver
+batch preserves all physical inputs and acceptance thresholds: 9/9 valid records, local damping near 20/40/60 Ns/m at 2/4/6 N. Material calibration remains incomplete.
+[Protocol and all outcomes](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TANGENT_IDENTIFICATION.md).
+
+![Native tangent diagnostics](../../evidence/tangent-identification-v1.png)
