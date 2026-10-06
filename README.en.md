@@ -72,6 +72,8 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 
 **Applied-load identification:** MuJoCo low impedance gives9/9 valid records; all9 high-impedance records fail settling at0.4s. State and applied-load effects are fitted separately; small prediction error is not completed material calibration. [All outcomes](demos/contact-benchmark/FEEDTHROUGH.md)
 
+**Contact conclusions and standards:** Static matching did not establish shared dynamic material; all30 paired transfer cases fail the combined target. Local identification does not repair unloading. [Acceptance audit, figures and gaps](demos/contact-benchmark/CONCLUSIONS.md)
+
 ## Current findings
 
 | Research question | Evidence | Conclusion and boundary |

@@ -38,4 +38,4 @@ The existing c=10 is already the minimax solution of this conditional problem. S
 
 The checker rejects empty, zero, negative or nonfinite preloads and nonpositive targets. It imports no physics engine and changes no raw trajectory. Tests cover single-load matching, scaling, endpoint optimality and invalid inputs.
 
-The negative aggregate forces measured by the [paired unloading study](DAMPING_ABLATION.md) are separate evidence from this tangent derivation. A native tangent identification would require newly frozen perturbation amplitudes, loading, force timing and error criteria. Neither that identification nor common-material calibration is complete; #10 stays open and measured material properties remain in #6.
+Native tangent identification has since been completed within its declared positive-load scope; see [TANGENT](TANGENT_IDENTIFICATION.md). It does not repair unloading or complete common-material calibration. The [acceptance audit](CONCLUSIONS.md) retains these open commitments; #10 remains open and measured material properties remain in #6.
