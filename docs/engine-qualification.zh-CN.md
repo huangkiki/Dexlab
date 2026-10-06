@@ -2,6 +2,8 @@
 
 [English](engine-qualification.md) | [简体中文](engine-qualification.zh-CN.md)
 
+当前 Newton 核心证据与下方历史 `sim` extra 依赖表分开：官方 1.6.1 / Warp 1.18.0 的 CPU XPBD 球–平面配置通过正常、重建与禁碰撞对照。这不等于固定版本 UniSim SolverMuJoCo 适配器升级，也不代表 SDF/抓取通过。[协议与全部原始证据](newton-contact.zh-CN.md)。
+
 发布元数据、导入成功、设备基础检查、完整任务验收是不同层次。依赖兼容不等于苹果或布料场景通过。
 
 ## 当前交付证据

@@ -1,5 +1,10 @@
 # Results and failures
 
+## Newton XPBD: bounded positive and negative contact evidence
+
+The CPU sphere–plane profile passes its preregistered engineering bounds; maximum intrusion is 0.000849 mm and hold-force error is 0.051353%. A rebuild repeat is identical; a collision-disabled negative loses support and matches discrete free fall. These are synthetic primitive checks, not grasp, SDF or hardware qualification. [Complete traces, thresholds, raw data and limitations](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md).
+
+
 ## What standard judges an experiment?
 
 Lifting an object is a task outcome, not a reference answer for physical accuracy. Report three separate levels.

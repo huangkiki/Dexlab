@@ -1,0 +1,41 @@
+{
+  "valid": true,
+  "passed": true,
+  "repeat_identical": true,
+  "negative_control_verified": true,
+  "cases": {
+    "support": {
+      "support_passed": true,
+      "max_intrusion_m": 8.486211299923996e-07,
+      "hold_height_error_m": 1.4156103136930831e-08,
+      "hold_speed_m_s": 0.0,
+      "hold_force_relative_error": 0.0005135293157579287,
+      "momentum_residual_N_s": 0.0004417804479598386,
+      "freefall_position_error_m": 4.8599049858438965,
+      "freefall_velocity_error_m_s": 9.81,
+      "max_abs_contact_force_N": 53.043357849121094
+    },
+    "support-repeat": {
+      "support_passed": true,
+      "max_intrusion_m": 8.486211299923996e-07,
+      "hold_height_error_m": 1.4156103136930831e-08,
+      "hold_speed_m_s": 0.0,
+      "hold_force_relative_error": 0.0005135293157579287,
+      "momentum_residual_N_s": 0.0004417804479598386,
+      "freefall_position_error_m": 4.8599049858438965,
+      "freefall_velocity_error_m_s": 9.81,
+      "max_abs_contact_force_N": 53.043357849121094
+    },
+    "collision-disabled": {
+      "support_passed": false,
+      "max_intrusion_m": 4.859900760650635,
+      "hold_height_error_m": 4.859900760650635,
+      "hold_speed_m_s": 9.810060501098633,
+      "hold_force_relative_error": 1.0,
+      "momentum_residual_N_s": -6.05010986332033e-06,
+      "freefall_position_error_m": 8.643337401803564e-06,
+      "freefall_velocity_error_m_s": 6.050109863231512e-05,
+      "max_abs_contact_force_N": 0.0
+    }
+  }
+}

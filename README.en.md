@@ -10,6 +10,11 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 </div>
 
+**Newton XPBD primitive contact:** official core CPU configuration reaches 0.000849 mm maximum intrusion and 0.051353% hold-force error; the collision-disabled negative loses support and matches free fall. All three traces and criteria are public; this does not qualify grasp, SDF or hardware accuracy. [Protocol, results and reproduction](docs/newton-contact.md)
+
+![Newton XPBD controls](docs/evidence/newton-xpbd/traces.png)
+
+
 > [Technical report: current results and historical failures](docs/site/en/results.md) separates cloth repair, low-speed friction response and historical grasp robustness, with metrics, sampling coverage, costs and reproduction links. A single passing case establishes neither robustness nor hardware accuracy.
 
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
