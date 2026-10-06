@@ -13,6 +13,9 @@
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
 
+
+**Genesis contact diagnostic:** the vertical transient after a horizontal velocity kick depends on friction-cone configuration. The original failure is retained; grasp qualification remains incomplete. [Protocol and limits](demos/contact-benchmark/GENESIS_CONE.md)
+
 ## Reference standards and current answers
 
 **We have no evidence that either engine better matches real grasping.** First test the declared model and numerical error; measured data are needed for physical validity. Grasp success is configuration regression only.
