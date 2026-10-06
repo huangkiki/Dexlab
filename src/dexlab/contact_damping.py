@@ -80,3 +80,54 @@ def force_windows(case, data):
                                           for i in negative],
         }
     return rows
+
+
+def point_force_windows(case, data, contacts):
+    """Diagnose solved-step point forces on the qualified horizontal plane.
+
+    This adds observations, not a replacement historical acceptance verdict.
+    Point samples have no persistent IDs; counts are not unique contacts.
+    """
+    force_windows(case, data)  # Preserve existing clock/load/array qualification.
+    if not isinstance(contacts, list) or len(contacts) != case.steps:
+        raise ValueError('Incomplete point-contact coverage')
+    per_step = []
+    for index, points in enumerate(contacts):
+        if not isinstance(points, list):
+            raise ValueError('Contact step must contain a point list')
+        forces = []
+        for point in points:
+            vectors = {}
+            for key in ('force_on_box', 'normal_native', 'point_b'):
+                value = np.asarray(point.get(key), dtype=float)
+                if value.shape != (3,) or not np.isfinite(value).all():
+                    raise ValueError('Missing or nonfinite point observation')
+                vectors[key] = value
+            if (not np.allclose(vectors['normal_native'], [0, 0, 1], rtol=0, atol=1e-12)
+                    or abs(vectors['point_b'][2]) > 1e-12):
+                raise ValueError('Point is outside the qualified horizontal-plane frame')
+            forces.append(vectors['force_on_box'])
+        force = np.asarray(forces).reshape(-1, 3)
+        if not np.allclose(force.sum(axis=0), data['contact_force'][index],
+                           rtol=1e-6, atol=1e-7):
+            raise ValueError('Point-force ledger differs from the archived total')
+        per_step.append(force[:, 2])
+    result = {}
+    tolerance = LIMITS['normal_tension_n']
+    for name, mask in (('loading', data['downward_load'] > 0),
+                       ('unloading', data['downward_load'] < 0)):
+        indices = np.flatnonzero(mask)
+        observed = np.concatenate([per_step[i] for i in indices])
+        negative_steps = [int(i) for i in indices if np.any(per_step[i] < -tolerance)]
+        hidden = [i for i in negative_steps if data['contact_force'][i, 2] >= -tolerance]
+        result[name] = {
+            'point_samples': int(observed.size),
+            'minimum_point_force_n': float(observed.min()) if observed.size else None,
+            'negative_point_samples': int(np.count_nonzero(observed < -tolerance)),
+            'steps_with_negative_point': len(negative_steps),
+            'negative_step_duration_s': len(negative_steps)*case.timestep,
+            'negative_step_intervals_s': [[float(data['time'][i]), float(data['time'][i+1])]
+                                          for i in negative_steps],
+            'hidden_by_aggregate_steps': hidden,
+        }
+    return result

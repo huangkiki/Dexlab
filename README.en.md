@@ -220,3 +220,5 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 **Research traceability:** [Actual cloth delivery and recovery audit](docs/autonomous-delivery.md) separates reference standards, failures, independent scoring, archival and recovery evidence. Workflow success does not establish physical accuracy.
 
 **Contact-onset contrast:** 24 fixed settings + 2 repeats pass the engineering checks, while the cone effect changes direction across settings. Passing a task check does not establish material accuracy. [Figures, complete metrics and limits](demos/contact-benchmark/CONE_PROTOCOL.md).
+
+**Unloading observation audit:** point-level rescoring of the original six damping cases found no tension hidden by the aggregate; zero damping still fails the full transient target. [Point-level diagnosis and limits](demos/contact-benchmark/DAMPING_ABLATION.md#point-level-unloading-audit).
