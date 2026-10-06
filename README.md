@@ -222,3 +222,5 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 **接触起始对照：** 24 个固定配置＋2 次重复全部通过工程检查，但摩擦锥变化的瞬态影响方向并不一致。通过任务检查不等于物性准确。[图表、完整指标与限制](demos/contact-benchmark/CONE_PROTOCOL.zh-CN.md)。
 
 **卸载观测补充：** 原六组阻尼对照已逐接触点复核，未发现被总力掩盖的局部拉力；零阻尼仍不满足全部瞬态要求。[逐点诊断与限制](demos/contact-benchmark/DAMPING_ABLATION.zh-CN.md#逐接触点卸载诊断)。
+
+**验收范围：** 接触机制诊断已有受控修复与否定结果；共同动态材料和真机标定仍未完成。[逐项证据与剩余要求](demos/contact-benchmark/CONCLUSIONS.zh-CN.md#验收决定与剩余工作)。

@@ -2,7 +2,7 @@
 
 [English](CONCLUSIONS.md) | [简体中文](CONCLUSIONS.zh-CN.md)
 
-**Static response matching does not establish a shared dynamic material.** The frozen profiles failed the declared transfer target; local identification explains some mechanisms but does not repair unloading or validate real material. Issue #10 remains open. This synthesis adds no experiment, retuning, changed threshold or new aggregate success rate.
+**Static response matching does not establish a shared dynamic material.** The frozen profiles failed the declared transfer target; local identification explains some mechanisms but does not repair unloading or validate real material. The mechanism-diagnosis acceptance is supported by scoped positive and negative evidence; this does not complete the broader material benchmark. This synthesis adds no experiment, retuning, changed threshold or new aggregate success rate.
 
 ## What question did each experiment answer?
 
@@ -32,10 +32,22 @@ The cylinder motion-onset detector requires downward COM speed above5 mm/s for20
 | Frozen physics, positive/negative outcomes, force, onset, penetration, release and cost | [Development](README.md), [unloading](DAMPING_ABLATION.md), [response–cost](RESPONSE_COST.md) | Published; measurements and historical timing limitations remain explicit |
 | Independent scorer rejects adhesion and missing observations | `tests/test_contact_indent.py`, `test_contact_pinch.py`, `test_contact_plane.py`, `test_contact_tangent.py`, `test_contact_feedthrough.py` | Injected negatives exist; current release validation must report its actual test result |
 | Paired scenarios, all failures, provenance and bilingual reproduction | Linked reports and immutable release raw archives; `test_contact_transfer.py` rejects missing cases/retuning | Published; report reproduction is not a new engine run |
-| Later commitments: common-response calibration and unloading repair | Native local identification and ablation narrow the mechanism; transfer/unloading failures persist | **Not completed** |
+| Later commitments: common-response calibration and unloading repair | Native local identification and ablation narrow the mechanism; transfer/unloading failures persist | **Not completed**; explicitly retained in [#3](https://github.com/huangkiki/Dexlab/issues/3#issuecomment-6020002263), with measured calibration in #6 |
 | Complete internal contact-pair law and cooked geometry | [Native geometry](NATIVE_GEOMETRY.md) and contact readback distinguish submitted geometry from unexposed internals | **Unknown where public APIs do not expose it**, never an equivalence pass |
 
-This audit is not an Issue closure declaration. The original deliverable permits a supported negative result, but later commitments must be explicitly reconciled before closure; they cannot disappear through wording. Broader frozen-condition comparison remains #3 and measured calibration remains #6. No physical-accuracy or hardware-fidelity claim follows from analytic consistency.
+## Acceptance decision and remaining work
+
+The original [#10 specification](https://github.com/huangkiki/Dexlab/issues/10) allows a controlled repair **or an evidence-backed negative result**, not guaranteed successful material matching. Its diagnosis requirements are met by the published surface refinement controls and fixed-map transfer rejection. This is a scoped research outcome; none of the failed profiles is promoted to calibrated material.
+
+Later commitments are reconciled explicitly, rather than removed:
+
+- UniLab tasks, indentation/unloading, cylinder loading/release and injected adhesion/missing-data checks were delivered in the development reports and current tests. The v0.37.1 gate ran 540 tests and both full grasp regressions; those regressions protect the demo and are not material validation.
+- Friction response, prospective paired transfer and isolated response–cost studies were delivered in their linked reports. The 30 transfer cases are prospective synthetic tests, not measured hardware or blind population evidence. Reported deterministic repeats are not independent confidence intervals.
+- Native BOX/PLANE readback, static SDF construction-path comparison and contact-parameter audits establish only their observable scope. Complete hidden-grid/pair-law equivalence is unavailable evidence, not a passing check. New tasks must qualify that scope again.
+- Shared dynamic material calibration and a generally valid unloading repair are **not achieved**. The fixed maps failed; no claim of impossibility for every possible mapping follows. These requirements remain explicitly tracked in the existing [broader benchmark #3](https://github.com/huangkiki/Dexlab/issues/3#issuecomment-6020002263); measured calibration remains [#6](https://github.com/huangkiki/Dexlab/issues/6). They must be resolved or explicitly excluded before calibrated physical-error comparisons.
+- The matched cone/time-constant study and point-level unloading audit add controlled evidence ([cone protocol](CONE_PROTOCOL.md), [damping audit](DAMPING_ABLATION.md)); neither is an exact Manda reproduction or a universal engine ranking.
+
+Closing the mechanism-diagnosis Issue after this audit is integrated records its supported outcome only. It does not close #3/#6, remove failed runs, satisfy unknown native fields, or declare the overall development goal complete. No new physical experiment or changed acceptance threshold is introduced by this reconciliation.
 
 ## Next experiment must have a stopping rule
 
