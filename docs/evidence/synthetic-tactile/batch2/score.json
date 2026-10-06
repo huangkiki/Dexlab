@@ -1,0 +1,227 @@
+{
+  "valid": true,
+  "passed": false,
+  "runs": [
+    {
+      "name": "32-direct",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 1.0121723798127424e-05,
+      "terminal_support_relative_error": 4.1822101337629647e-13,
+      "terminal_position_m": [
+        0.0,
+        0.0,
+        0.01999667084745432
+      ],
+      "terminal_rotation_deg": 0.0,
+      "detached_steps": 0,
+      "path_exercised": true
+    },
+    {
+      "name": "32-slide-return",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 1.0158741797060972e-05,
+      "terminal_support_relative_error": 8.43769498715119e-15,
+      "terminal_position_m": [
+        0.00019159762344469062,
+        4.074478878032763e-21,
+        0.019996670846691076
+      ],
+      "terminal_rotation_deg": 0.0009265060975895495,
+      "detached_steps": 0,
+      "path_exercised": true
+    },
+    {
+      "name": "32-detach-recontact",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 9.907957256897679e-05,
+      "terminal_support_relative_error": 4.32542890393961e-13,
+      "terminal_position_m": [
+        0.0,
+        0.0,
+        0.019996670847454313
+      ],
+      "terminal_rotation_deg": 0.0,
+      "detached_steps": 1679,
+      "path_exercised": true
+    },
+    {
+      "name": "32-reset-direct",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 1.0121723798127424e-05,
+      "terminal_support_relative_error": 4.1822101337629647e-13,
+      "terminal_position_m": [
+        0.0,
+        0.0,
+        0.01999667084745432
+      ],
+      "terminal_rotation_deg": 0.0,
+      "detached_steps": 0,
+      "path_exercised": true
+    },
+    {
+      "name": "64-direct",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 1.0121723798127424e-05,
+      "terminal_support_relative_error": 4.1822101337629647e-13,
+      "terminal_position_m": [
+        0.0,
+        0.0,
+        0.01999667084745432
+      ],
+      "terminal_rotation_deg": 0.0,
+      "detached_steps": 0,
+      "path_exercised": true
+    },
+    {
+      "name": "64-slide-return",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 1.0158741797060972e-05,
+      "terminal_support_relative_error": 8.43769498715119e-15,
+      "terminal_position_m": [
+        0.00019159762344469062,
+        4.074478878032763e-21,
+        0.019996670846691076
+      ],
+      "terminal_rotation_deg": 0.0009265060975895495,
+      "detached_steps": 0,
+      "path_exercised": true
+    },
+    {
+      "name": "64-detach-recontact",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 9.907957256897679e-05,
+      "terminal_support_relative_error": 4.32542890393961e-13,
+      "terminal_position_m": [
+        0.0,
+        0.0,
+        0.019996670847454313
+      ],
+      "terminal_rotation_deg": 0.0,
+      "detached_steps": 1679,
+      "path_exercised": true
+    },
+    {
+      "name": "64-reset-direct",
+      "native_passed": true,
+      "sensor_bounds_and_detachment_passed": true,
+      "maximum_penetration_m": 1.0121723798127424e-05,
+      "terminal_support_relative_error": 4.1822101337629647e-13,
+      "terminal_position_m": [
+        0.0,
+        0.0,
+        0.01999667084745432
+      ],
+      "terminal_rotation_deg": 0.0,
+      "detached_steps": 0,
+      "path_exercised": true
+    }
+  ],
+  "observation_invariance": [
+    {
+      "path": "direct",
+      "differences": {
+        "pose": 0.0,
+        "velocity": 0.0,
+        "force": 0.0,
+        "command": 0.0
+      },
+      "bitwise_equal": true,
+      "passed": true
+    },
+    {
+      "path": "slide-return",
+      "differences": {
+        "pose": 0.0,
+        "velocity": 0.0,
+        "force": 0.0,
+        "command": 0.0
+      },
+      "bitwise_equal": true,
+      "passed": true
+    },
+    {
+      "path": "detach-recontact",
+      "differences": {
+        "pose": 0.0,
+        "velocity": 0.0,
+        "force": 0.0,
+        "command": 0.0
+      },
+      "bitwise_equal": true,
+      "passed": true
+    },
+    {
+      "path": "reset-direct",
+      "differences": {
+        "pose": 0.0,
+        "velocity": 0.0,
+        "force": 0.0,
+        "command": 0.0
+      },
+      "bitwise_equal": true,
+      "passed": true
+    }
+  ],
+  "resets": [
+    true,
+    true
+  ],
+  "endpoints": [
+    {
+      "name": "32-direct",
+      "position_difference_m": 0.0,
+      "rotation_difference_deg": 0.0,
+      "passed": true
+    },
+    {
+      "name": "32-slide-return",
+      "position_difference_m": 0.00019159762344469062,
+      "rotation_difference_deg": 0.0009265060975895495,
+      "passed": false
+    },
+    {
+      "name": "32-detach-recontact",
+      "position_difference_m": 6.938893903907228e-18,
+      "rotation_difference_deg": 0.0,
+      "passed": true
+    },
+    {
+      "name": "32-reset-direct",
+      "position_difference_m": 0.0,
+      "rotation_difference_deg": 0.0,
+      "passed": true
+    },
+    {
+      "name": "64-direct",
+      "position_difference_m": 0.0,
+      "rotation_difference_deg": 0.0,
+      "passed": true
+    },
+    {
+      "name": "64-slide-return",
+      "position_difference_m": 0.00019159762344469062,
+      "rotation_difference_deg": 0.0009265060975895495,
+      "passed": false
+    },
+    {
+      "name": "64-detach-recontact",
+      "position_difference_m": 6.938893903907228e-18,
+      "rotation_difference_deg": 0.0,
+      "passed": true
+    },
+    {
+      "name": "64-reset-direct",
+      "position_difference_m": 0.0,
+      "rotation_difference_deg": 0.0,
+      "passed": true
+    }
+  ],
+  "limits": "Synthetic occupancy only. Native force is solve epoch; map is post-step. No real tactile accuracy, shear history or material calibration."
+}

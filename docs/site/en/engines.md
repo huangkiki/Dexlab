@@ -30,3 +30,8 @@ Qualify rigid support, sliding and pinch/release first, then PBD thin cloth and 
 ## GPU contact development evidence
 
 Six-device parameter checks on MuJoCo Warp 3.14.0 produced four passing and two failing configurations. The fixed 5 mm intrusion bound was unchanged; smaller timesteps did not monotonically improve penetration. This is a synthetic sphere/plane diagnostic, not apple or cloth qualification. [Full results, plots and reproducible records](https://github.com/huangkiki/Dexlab/blob/main/docs/engine-qualification.md).
+
+
+## Synthetic tactile observation
+
+Box/fixed-slab geometric occupancy is supported on the MuJoCo fixture; shear memory, optical rendering and hardware calibration are not. See all three batches and failed controls in the [report](https://github.com/huangkiki/Dexlab/blob/main/docs/synthetic-tactile.md).

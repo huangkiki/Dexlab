@@ -115,7 +115,7 @@ Protocol research only: no training or bulk assets. Proposed probes are capped a
 | [TacEx v1](https://arxiv.org/html/2411.04776v1) | Gel physics, optical rendering and marker synthesis are separate modules; historical slipping observations do not indict current PhysX. | Compare force/deformation and optical signals under the same imposed trajectory. |
 | [Taccel v2](https://arxiv.org/html/2504.12908v2) | ABD/FEM IPC and kinematic constraints require separate contact and actuation qualification. | Fixed-mesh indentation/shear/unload; record residuals, force, penetration and stage costs. |
 
-No tactile runtime is supported yet. Detailed input, solver and unresolved licensing fields are in the [method ledger](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/dexterity-method-decisions.json). Optional probes remain bounded proposals, not executed experiments.
+A restricted independently implemented geometric occupancy observer now has [three bounded experimental batches](https://github.com/huangkiki/Dexlab/blob/main/docs/synthetic-tactile.md). This does not adopt or qualify upstream tactile runtimes, shear memory or hardware precision. Upstream input/solver/licensing boundaries remain in the [method ledger](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/dexterity-method-decisions.json).
 
 ## Grasp evaluation and bimanual generation
 
