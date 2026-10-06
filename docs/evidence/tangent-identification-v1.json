@@ -1,0 +1,1699 @@
+{
+  "scope": "Synthetic local response; paired solver tolerances; no hardware or engine ranking",
+  "raw_contact_rescore": true,
+  "native_pair_readback": true,
+  "cases": [
+    {
+      "batch": "default",
+      "id": "load-2-dt-500us",
+      "load_n": 2.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19429.035168062746,
+              "damping_ns_m": 30.023197264507797,
+              "intercept_n": 0.06682293165491493,
+              "condition": 1.0559224673664962,
+              "residual_rms_n": 0.0007795362078072662
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19429.704067955565,
+              "damping_ns_m": 29.807290244996665,
+              "intercept_n": 0.06672699331490528,
+              "condition": 1.0338354510068943,
+              "residual_rms_n": 0.000355956174427627
+            },
+            "held_out_prediction_rms_n": 0.000362837871228799,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.848722769595,
+              "damping_ns_m": 19.98858602926606,
+              "intercept_n": 0.010001004143844083,
+              "condition": 1.0540724025667298,
+              "residual_rms_n": 0.00026512950159079366
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20000.847156039355,
+              "damping_ns_m": 19.99893402710896,
+              "intercept_n": 0.009910374168971225,
+              "condition": 1.0387415135286107,
+              "residual_rms_n": 7.48710741102106e-05
+            },
+            "held_out_prediction_rms_n": 7.545839987458472e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.001903999388927824,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 2.0,
+        "timestep_s": 0.0005,
+        "elapsed_s": 0.3790819869900588,
+        "arrays_sha256": "904c8f9ddecbfdc9b4e742687fde59cca7cdc13226a28c8e22df9c60358bb980",
+        "contacts_sha256": "cfb7823a018e6267c04950a2ae182321e6bd1b8d7f1c9fdf421853d730f18b7e",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-2-dt-500us",
+      "load_n": 2.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19429.32361379368,
+              "damping_ns_m": 30.02285160028272,
+              "intercept_n": 0.06679450313765134,
+              "condition": 1.0559192760610736,
+              "residual_rms_n": 0.000779883692291903
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19429.757634449674,
+              "damping_ns_m": 29.80745889105569,
+              "intercept_n": 0.06672173927005098,
+              "condition": 1.033827451705385,
+              "residual_rms_n": 0.00035582236312943624
+            },
+            "held_out_prediction_rms_n": 0.0003626969267205382,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.852612151903,
+              "damping_ns_m": 19.988249011716462,
+              "intercept_n": 0.010000630109233244,
+              "condition": 1.0540672051409608,
+              "residual_rms_n": 0.0002649473636040565
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20000.846985420205,
+              "damping_ns_m": 19.999048963874753,
+              "intercept_n": 0.009910390944337433,
+              "condition": 1.038733377216715,
+              "residual_rms_n": 7.488261664916609e-05
+            },
+            "held_out_prediction_rms_n": 7.547389917149754e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.8667720702580937e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 2.0,
+        "timestep_s": 0.0005,
+        "elapsed_s": 0.3992491469834931,
+        "arrays_sha256": "21bbea086740e10a0caa6469852c8033e70b6f990cdfaec40dcfed28b4eb22a7",
+        "contacts_sha256": "2bdfc518ac56eebd9002e1eda5425d76fb42c0d1fd3ac5738040632302be9f03",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-4-dt-500us",
+      "load_n": 4.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19121.214046288358,
+              "damping_ns_m": 50.03842490974291,
+              "intercept_n": 0.18536872676231253,
+              "condition": 1.0590296340662697,
+              "residual_rms_n": 0.002284554607273452
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19123.877674353254,
+              "damping_ns_m": 49.63724158648941,
+              "intercept_n": 0.18472989172304732,
+              "condition": 1.0189657645016457,
+              "residual_rms_n": 0.0010651309721440628
+            },
+            "held_out_prediction_rms_n": 0.0010890188072293712,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19998.966245132586,
+              "damping_ns_m": 39.98343504233251,
+              "intercept_n": 0.010172007429083862,
+              "condition": 1.0567391695319819,
+              "residual_rms_n": 0.0007779039223106816
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20004.203057084138,
+              "damping_ns_m": 39.96206398819003,
+              "intercept_n": 0.009143619311089424,
+              "condition": 1.0246822672498164,
+              "residual_rms_n": 0.00022770003917694942
+            },
+            "held_out_prediction_rms_n": 0.00022889062799448404,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.0019393810527761346,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 4.0,
+        "timestep_s": 0.0005,
+        "elapsed_s": 0.3776256480196025,
+        "arrays_sha256": "d0b35747c1fcac5c658e72082596012418efb92f16da089d49af5556f38c0c23",
+        "contacts_sha256": "74ec3674b33cc204150564eb13c1c1cb21c0e37de65551015c252601fb773220",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-4-dt-500us",
+      "load_n": 4.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19121.594655499237,
+              "damping_ns_m": 50.037943454457576,
+              "intercept_n": 0.185293452505634,
+              "condition": 1.0590295699350247,
+              "residual_rms_n": 0.0022859301785538603
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19123.882126984387,
+              "damping_ns_m": 49.63730235368743,
+              "intercept_n": 0.1847290713580776,
+              "condition": 1.0189670708626133,
+              "residual_rms_n": 0.0010650947888565497
+            },
+            "held_out_prediction_rms_n": 0.0010889931515691749,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19998.97179032716,
+              "damping_ns_m": 39.98296896529564,
+              "intercept_n": 0.010170919579844284,
+              "condition": 1.0567370494541282,
+              "residual_rms_n": 0.0007776509664994987
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20004.202919537292,
+              "damping_ns_m": 39.96210292100833,
+              "intercept_n": 0.009143645422487356,
+              "condition": 1.0246832569220723,
+              "residual_rms_n": 0.00022770452920556862
+            },
+            "held_out_prediction_rms_n": 0.00022888226326090854,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.1314451597854713e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 4.0,
+        "timestep_s": 0.0005,
+        "elapsed_s": 0.39076196899986826,
+        "arrays_sha256": "acffec2b411737fc52c02accce022c19319aaf4c30485ae0603c3e3f6b6c056c",
+        "contacts_sha256": "e607d8e29c0bf7b4b63eb19e4c4027942b4d8a74b187fd0b849d6cd32337f01c",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-6-dt-500us",
+      "load_n": 6.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 18864.51073581374,
+              "damping_ns_m": 70.0582694670803,
+              "intercept_n": 0.3502068304645345,
+              "condition": 1.0612882162242174,
+              "residual_rms_n": 0.004167060011517295
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 18869.563423115116,
+              "damping_ns_m": 69.45776882187052,
+              "intercept_n": 0.3484552063456663,
+              "condition": 1.006789149399074,
+              "residual_rms_n": 0.0019825192687123695
+            },
+            "held_out_prediction_rms_n": 0.0020321992406453064,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19997.629592914243,
+              "damping_ns_m": 59.98617151476554,
+              "intercept_n": 0.010662583151278326,
+              "condition": 1.0588918845978075,
+              "residual_rms_n": 0.001294706236015985
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20008.683375956953,
+              "damping_ns_m": 59.92290648283071,
+              "intercept_n": 0.007366991204635909,
+              "condition": 1.0125208580948282,
+              "residual_rms_n": 0.0003902799363631828
+            },
+            "held_out_prediction_rms_n": 0.0003941590622361701,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.0016410168955545146,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 6.0,
+        "timestep_s": 0.0005,
+        "elapsed_s": 0.39293250598711893,
+        "arrays_sha256": "96020f04cd3a08afbb987b76d3b8e55fe3e1ae8527a97d3f5990506dc4dfcbf7",
+        "contacts_sha256": "10a595b8a574ff09774d8fb0558245f4b4ff8542f3a00bf31ca60690279c68db",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-6-dt-500us",
+      "load_n": 6.0,
+      "timestep_s": 0.0005,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 18864.416723125527,
+              "damping_ns_m": 70.05834780340477,
+              "intercept_n": 0.35023461564696223,
+              "condition": 1.0612876497029011,
+              "residual_rms_n": 0.004166572635616098
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 18869.564659026313,
+              "damping_ns_m": 69.45776297027552,
+              "intercept_n": 0.3484546895310281,
+              "condition": 1.0067889092550146,
+              "residual_rms_n": 0.0019824429170465013
+            },
+            "held_out_prediction_rms_n": 0.0020321089970072957,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19997.628562426868,
+              "damping_ns_m": 59.98624167043412,
+              "intercept_n": 0.010662885933578892,
+              "condition": 1.0588917613710063,
+              "residual_rms_n": 0.0012947643571940668
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20008.68319588308,
+              "damping_ns_m": 59.92290198443411,
+              "intercept_n": 0.007367046786995068,
+              "condition": 1.0125206978647694,
+              "residual_rms_n": 0.0003902776443045873
+            },
+            "held_out_prediction_rms_n": 0.00039416169668927037,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.618335687680883e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 6.0,
+        "timestep_s": 0.0005,
+        "elapsed_s": 0.3882090869883541,
+        "arrays_sha256": "d098500adb253bb5aeefa4fb036166bb1fef88173cad6c8cd585b3b5b4b6af52",
+        "contacts_sha256": "e2c422329846ef93fbe07e3965f1820708ebb6721f5a8db4089423969e4e36f8",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-2-dt-250us",
+      "load_n": 2.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19758.356721058663,
+              "damping_ns_m": 25.00570760201152,
+              "intercept_n": 0.03404711747212019,
+              "condition": 1.028649611469403,
+              "residual_rms_n": 0.00042607989310640827
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19758.519153603094,
+              "damping_ns_m": 24.932436830477023,
+              "intercept_n": 0.03401910338139191,
+              "condition": 1.0142899431366919,
+              "residual_rms_n": 0.00016116230529395235
+            },
+            "held_out_prediction_rms_n": 0.0001631212228716316,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.898476392507,
+              "damping_ns_m": 19.985572075680942,
+              "intercept_n": 0.010002860836849203,
+              "condition": 1.0278674174386706,
+              "residual_rms_n": 0.00027951139362806897
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20000.53966849338,
+              "damping_ns_m": 20.007928957514586,
+              "intercept_n": 0.009943212399470047,
+              "condition": 1.0164218656825126,
+              "residual_rms_n": 7.807303655434462e-05
+            },
+            "held_out_prediction_rms_n": 7.848363847234402e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.001762847862337491,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 2.0,
+        "timestep_s": 0.00025,
+        "elapsed_s": 0.7471722470072564,
+        "arrays_sha256": "54de9a99d5ba6eb55734cb64af39177790af95a70a52c71b0710ecb48552393c",
+        "contacts_sha256": "e4249790ae1c317b67f4707f5a3c24ea37bf6baf59111b7c9fcbebaf128235ca",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-2-dt-250us",
+      "load_n": 2.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19758.429948101006,
+              "damping_ns_m": 25.005239314329316,
+              "intercept_n": 0.03403993795825855,
+              "condition": 1.028647782828527,
+              "residual_rms_n": 0.000426303220845571
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19758.530883876556,
+              "damping_ns_m": 24.93237684473545,
+              "intercept_n": 0.03401793014846355,
+              "condition": 1.0142977891536105,
+              "residual_rms_n": 0.00016113673218760946
+            },
+            "held_out_prediction_rms_n": 0.00016308790912820693,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.90150943538,
+              "damping_ns_m": 19.985093128116613,
+              "intercept_n": 0.010002558128844319,
+              "condition": 1.0278649970644231,
+              "residual_rms_n": 0.0002794010816595477
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20000.53914860596,
+              "damping_ns_m": 20.007887783771157,
+              "intercept_n": 0.009943264426073961,
+              "condition": 1.0164293502586472,
+              "residual_rms_n": 7.808142471059788e-05
+            },
+            "held_out_prediction_rms_n": 7.850354614514033e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.7488082093564117e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 2.0,
+        "timestep_s": 0.00025,
+        "elapsed_s": 0.7982081609952729,
+        "arrays_sha256": "1d333b034e1009f866f69de93fa9295994ffd2f40fa5a796ec30ad873a179400",
+        "contacts_sha256": "3201012ad49a1de03bc9d4f19dc0e70e40d19dcca2ea94a8f2e5d6208c92a882",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-4-dt-250us",
+      "load_n": 4.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19597.545402184274,
+              "damping_ns_m": 45.01488819694984,
+              "intercept_n": 0.09031319499690804,
+              "condition": 1.0325083974841878,
+              "residual_rms_n": 0.001299732259123705
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19600.114393295476,
+              "damping_ns_m": 44.83446898733747,
+              "intercept_n": 0.08974749127630144,
+              "condition": 1.0008697474273325,
+              "residual_rms_n": 0.0005236506768752243
+            },
+            "held_out_prediction_rms_n": 0.0005344745976620747,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.109124704122,
+              "damping_ns_m": 39.9776634639448,
+              "intercept_n": 0.010162201195452969,
+              "condition": 1.0314282309977243,
+              "residual_rms_n": 0.0008238222331399219
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20003.416649254,
+              "damping_ns_m": 39.9718214818964,
+              "intercept_n": 0.00930659520368815,
+              "condition": 1.0036198800310538,
+              "residual_rms_n": 0.00023653072590873955
+            },
+            "held_out_prediction_rms_n": 0.00023684408962778718,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.0015300243374931632,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 4.0,
+        "timestep_s": 0.00025,
+        "elapsed_s": 0.7282913709932473,
+        "arrays_sha256": "366e592dd2b0f7781fc9df48aeee4feb4cc78a78c4476cc187e8dc1c3558fd6b",
+        "contacts_sha256": "b806128bb903697f3806f96dd36cd36fd0440eff92b432c9c19ec30ed9a37c69",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-4-dt-250us",
+      "load_n": 4.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19597.43623616069,
+              "damping_ns_m": 45.015200020679245,
+              "intercept_n": 0.0903348454910633,
+              "condition": 1.0325090700887853,
+              "residual_rms_n": 0.0012993328042829827
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19600.11402396355,
+              "damping_ns_m": 44.8344691892863,
+              "intercept_n": 0.08974755884951158,
+              "condition": 1.0008700450715744,
+              "residual_rms_n": 0.0005236519270366479
+            },
+            "held_out_prediction_rms_n": 0.0005344945520177086,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.10731413408,
+              "damping_ns_m": 39.97797680938594,
+              "intercept_n": 0.010162560788753883,
+              "condition": 1.0314295266001983,
+              "residual_rms_n": 0.0008240356077875564
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20003.416593876256,
+              "damping_ns_m": 39.97182034768983,
+              "intercept_n": 0.0093066062514926,
+              "condition": 1.0036201490793895,
+              "residual_rms_n": 0.00023653116361525392
+            },
+            "held_out_prediction_rms_n": 0.00023684676734212824,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.403540395017444e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 4.0,
+        "timestep_s": 0.00025,
+        "elapsed_s": 0.7750925330037717,
+        "arrays_sha256": "3adc479c0bf67ddaf83c40bac234b616ac8ecabd2ca338e229a8e067e055fec3",
+        "contacts_sha256": "a5d56e13612534dcd15f2cf4f3f893e57cf91978b23f2167c7d18f6f675ebac2",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-6-dt-250us",
+      "load_n": 6.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19463.03033931304,
+              "damping_ns_m": 65.03267131483771,
+              "intercept_n": 0.1708871448884386,
+              "condition": 1.0357716260542784,
+              "residual_rms_n": 0.0023447211594657307
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19469.79658155189,
+              "damping_ns_m": 64.72994105005513,
+              "intercept_n": 0.16873541678726678,
+              "condition": 1.0107353812649398,
+              "residual_rms_n": 0.001005412526683299
+            },
+            "held_out_prediction_rms_n": 0.0010322160884783766,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19997.80657460738,
+              "damping_ns_m": 59.97919592116586,
+              "intercept_n": 0.010639502154440095,
+              "condition": 1.0345953631976346,
+              "residual_rms_n": 0.0013647678048833121
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20007.656349990455,
+              "damping_ns_m": 59.931742790042,
+              "intercept_n": 0.007683973285044665,
+              "condition": 1.0078139212036692,
+              "residual_rms_n": 0.00040370168736479634
+            },
+            "held_out_prediction_rms_n": 0.0004062772173884419,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.0015850263372678697,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 6.0,
+        "timestep_s": 0.00025,
+        "elapsed_s": 0.7282782479887828,
+        "arrays_sha256": "fc191d9d1dd46a2fc821f7681227ec4510c06224e8ee6d5bbb092c73a65f2528",
+        "contacts_sha256": "5d08e6c891adf61c0dc71b309c2f5c1f6756f7c422abd3db4a1baf629ab8360c",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-6-dt-250us",
+      "load_n": 6.0,
+      "timestep_s": 0.00025,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19462.93684291977,
+              "damping_ns_m": 65.03284000654361,
+              "intercept_n": 0.17091492487880267,
+              "condition": 1.0357705960181507,
+              "residual_rms_n": 0.0023441932796695033
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19469.789197120477,
+              "damping_ns_m": 64.72998687807163,
+              "intercept_n": 0.16873766656686762,
+              "condition": 1.010732886900169,
+              "residual_rms_n": 0.0010054091153272068
+            },
+            "held_out_prediction_rms_n": 0.0010322040127967035,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19997.80547681105,
+              "damping_ns_m": 59.97936390740583,
+              "intercept_n": 0.010639829040868243,
+              "condition": 1.034594710743648,
+              "residual_rms_n": 0.001364898447436648
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20007.6559741762,
+              "damping_ns_m": 59.9317733726571,
+              "intercept_n": 0.007684084076931441,
+              "condition": 1.0078116461027806,
+              "residual_rms_n": 0.0004037218533265974
+            },
+            "held_out_prediction_rms_n": 0.0004063042661926773,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.8663079970338003e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 6.0,
+        "timestep_s": 0.00025,
+        "elapsed_s": 0.7613950959930662,
+        "arrays_sha256": "0859162e482fb642b1a1135e3e202b6c727a8daea2e0abe4015499c0ffd3e600",
+        "contacts_sha256": "cc451ded93ac669d8308565ba18809886fb036fe3b9666adfaff8bb5820e33a0",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-2-dt-125us",
+      "load_n": 2.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19890.46387700286,
+              "damping_ns_m": 22.492990761789372,
+              "intercept_n": 0.020900353638651392,
+              "condition": 1.0152475999040027,
+              "residual_rms_n": 0.00032547625136258374
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19890.600004123582,
+              "damping_ns_m": 22.479747493090944,
+              "intercept_n": 0.0208810679980318,
+              "condition": 1.0043029047414362,
+              "residual_rms_n": 9.716167423509226e-05
+            },
+            "held_out_prediction_rms_n": 9.741739208314733e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.915236677072,
+              "damping_ns_m": 19.982697649944555,
+              "intercept_n": 0.010004995202889333,
+              "condition": 1.0148957331209754,
+              "residual_rms_n": 0.00028642464589831885
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20000.4247577446,
+              "damping_ns_m": 20.012729288822474,
+              "intercept_n": 0.00995586263532,
+              "condition": 1.0052741384308859,
+              "residual_rms_n": 7.989075970751018e-05
+            },
+            "held_out_prediction_rms_n": 8.043626738273543e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.001378363568212304,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 2.0,
+        "timestep_s": 0.000125,
+        "elapsed_s": 1.4546729639987461,
+        "arrays_sha256": "b91caeafdbdf965b8702ce07cfb3a187d87ccbde456e8973a7b7192661613c83",
+        "contacts_sha256": "594408cb8119b8f4a385d78ac4a077767a76c91ee3aa5ac1319df7d780ce12d0",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-2-dt-125us",
+      "load_n": 2.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19890.42249130861,
+              "damping_ns_m": 22.493464196878463,
+              "intercept_n": 0.020904451771392996,
+              "condition": 1.0152523579491322,
+              "residual_rms_n": 0.0003255991777500943
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19890.59770801724,
+              "damping_ns_m": 22.4797409743966,
+              "intercept_n": 0.020881303630585935,
+              "condition": 1.004301971530552,
+              "residual_rms_n": 9.717534069884612e-05
+            },
+            "held_out_prediction_rms_n": 9.743582538542651e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": false,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.91387429244,
+              "damping_ns_m": 19.983176740871865,
+              "intercept_n": 0.010005133381981723,
+              "condition": 1.0149008706177376,
+              "residual_rms_n": 0.00028665205694952873
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20000.424847813385,
+              "damping_ns_m": 20.012719730591616,
+              "intercept_n": 0.009955853484593602,
+              "condition": 1.0052732045035335,
+              "residual_rms_n": 7.989435963450279e-05
+            },
+            "held_out_prediction_rms_n": 8.042293620816317e-05,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.8159096448755463e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 2.0,
+        "timestep_s": 0.000125,
+        "elapsed_s": 1.5866980820137542,
+        "arrays_sha256": "b5b594c218716dc83b954d094d35b880e63600a8e6858b23b4af63d366b694e9",
+        "contacts_sha256": "16994880c9b99fdb467e1fca494671ca8263211694d67d18ec08f48956ffd387",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-4-dt-125us",
+      "load_n": 4.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19807.97819391281,
+              "damping_ns_m": 42.495328836076474,
+              "intercept_n": 0.04832177098513446,
+              "condition": 1.0193730879605156,
+              "residual_rms_n": 0.0009812729281261797
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19810.91091391417,
+              "damping_ns_m": 42.4143141031491,
+              "intercept_n": 0.04770626899232511,
+              "condition": 1.0082699545215317,
+              "residual_rms_n": 0.0003189750283303292
+            },
+            "held_out_prediction_rms_n": 0.00032330130573568727,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.168681582665,
+              "damping_ns_m": 39.97492000707144,
+              "intercept_n": 0.010160756607286103,
+              "condition": 1.0188533985268875,
+              "residual_rms_n": 0.0008482659043790179
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20003.036153410256,
+              "damping_ns_m": 39.97714538462295,
+              "intercept_n": 0.009385877602094528,
+              "condition": 1.006912007289816,
+              "residual_rms_n": 0.000241315371816427
+            },
+            "held_out_prediction_rms_n": 0.00024155570266560437,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.0019249621891512803,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 4.0,
+        "timestep_s": 0.000125,
+        "elapsed_s": 1.4666927480138838,
+        "arrays_sha256": "601dbaadeb3883db27b3d9b1dbc070540e1f5bd0ecf6c70b407e811de16ab1b0",
+        "contacts_sha256": "eae738b18ef2d074574d1a0ef6258c0819f98aaba4dac52ccf0117c148a5cb3b",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-4-dt-125us",
+      "load_n": 4.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19807.907998685183,
+              "damping_ns_m": 42.495799211547485,
+              "intercept_n": 0.04833567761308721,
+              "condition": 1.019373237791153,
+              "residual_rms_n": 0.000981156345946836
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19810.907289868883,
+              "damping_ns_m": 42.41430701591485,
+              "intercept_n": 0.047706997997000844,
+              "condition": 1.0082690332597013,
+              "residual_rms_n": 0.0003189864199314786
+            },
+            "held_out_prediction_rms_n": 0.00032333960261227547,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19999.167170041306,
+              "damping_ns_m": 39.97539437580975,
+              "intercept_n": 0.01016106513025905,
+              "condition": 1.018853991653972,
+              "residual_rms_n": 0.0008485938769394734
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20003.036078084115,
+              "damping_ns_m": 39.97713381503374,
+              "intercept_n": 0.009385892602715717,
+              "condition": 1.006911173899261,
+              "residual_rms_n": 0.000241320554906359
+            },
+            "held_out_prediction_rms_n": 0.00024156019100943436,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 1.87987447830551e-09,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 4.0,
+        "timestep_s": 0.000125,
+        "elapsed_s": 1.536321128020063,
+        "arrays_sha256": "e051e28b60749a1899cb4417262b98297372fbd201b29d3f8ef09e9680df0c4e",
+        "contacts_sha256": "96f536bb25841ff8d93247d6ec083fe74d87dd367201f981c943772a61793153",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "default",
+      "id": "load-6-dt-125us",
+      "load_n": 6.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": false,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": false,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19738.716747254424,
+              "damping_ns_m": 62.50597234367621,
+              "intercept_n": 0.08829307069594705,
+              "condition": 1.023097186964646,
+              "residual_rms_n": 0.0016926284323474732
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19746.36772845823,
+              "damping_ns_m": 62.3427879260389,
+              "intercept_n": 0.08592676697366564,
+              "condition": 1.019637779184992,
+              "residual_rms_n": 0.0006032766596904977
+            },
+            "held_out_prediction_rms_n": 0.000617915296895782,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19997.889966465926,
+              "damping_ns_m": 59.9755717897768,
+              "intercept_n": 0.01063102276865191,
+              "condition": 1.0225174524153882,
+              "residual_rms_n": 0.0014021622696276969
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20007.1328312353,
+              "damping_ns_m": 59.936463529540596,
+              "intercept_n": 0.007845931621385027,
+              "condition": 1.0181562737347,
+              "residual_rms_n": 0.0004108405611396093
+            },
+            "held_out_prediction_rms_n": 0.00041324120818293753,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 0.001312353979330716,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 6.0,
+        "timestep_s": 0.000125,
+        "elapsed_s": 1.4378363660071045,
+        "arrays_sha256": "66b6b28ef4c60fe3408aa5651ababdbc9d0a9e2832749126e4b95ef8b6f4fba0",
+        "contacts_sha256": "e36d23313e253856678f747931cb359bda2263202cc75628c6b83902bfa53422",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    },
+    {
+      "batch": "tight",
+      "id": "load-6-dt-125us",
+      "load_n": 6.0,
+      "timestep_s": 0.000125,
+      "result": {
+        "valid": true,
+        "checks": {
+          "complete_finite_arrays": true,
+          "declared_clock": true,
+          "declared_commands": true,
+          "native_steps_completed": true,
+          "contact_retained": true,
+          "stable_contact_count": true,
+          "force_ledger": true,
+          "momentum": true,
+          "normal_translation": true,
+          "settled_speed": true,
+          "settled_depth": true,
+          "preload_balance": true
+        },
+        "epochs": {
+          "pre_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19738.656671705645,
+              "damping_ns_m": 62.506207549730895,
+              "intercept_n": 0.08831092872600532,
+              "condition": 1.0230950923711308,
+              "residual_rms_n": 0.0016923740749302855
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 19746.367728458164,
+              "damping_ns_m": 62.342787926036635,
+              "intercept_n": 0.08592676697368429,
+              "condition": 1.019637779185489,
+              "residual_rms_n": 0.000603276659691591
+            },
+            "held_out_prediction_rms_n": 0.0006179347656417044,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          },
+          "post_step": {
+            "identifiable": true,
+            "fit": {
+              "stiffness_n_m": 19997.88913705247,
+              "damping_ns_m": 59.97581014757495,
+              "intercept_n": 0.010631274744324237,
+              "condition": 1.0225156088068703,
+              "residual_rms_n": 0.0014023533795032884
+            },
+            "smaller_amplitude_fit": {
+              "stiffness_n_m": 20007.132831235467,
+              "damping_ns_m": 59.936463529539004,
+              "intercept_n": 0.007845931621336177,
+              "condition": 1.0181562737351846,
+              "residual_rms_n": 0.0004108405611398054
+            },
+            "held_out_prediction_rms_n": 0.0004132513989267543,
+            "fit_ok": true,
+            "prediction_ok": true,
+            "conditional_cL_ok": true,
+            "amplitude_stability_ok": true
+          }
+        },
+        "scope": "Synthetic local response; not hardware calibration",
+        "momentum_peak_n": 9.907576981049715e-10,
+        "ledger_peak_n": 0.0
+      },
+      "receipt": {
+        "load_n": 6.0,
+        "timestep_s": 0.000125,
+        "elapsed_s": 1.514132101990981,
+        "arrays_sha256": "e04ea1b2e44911899934ae4971bcf870544be4a09df0fe9287026b5036a47b0e",
+        "contacts_sha256": "9fea0f74313fd5bd076b517246eabc305e0bc3486963d3593a5f70dd406de573",
+        "limits": {
+          "condition": 20.0,
+          "fit_fraction": 0.05,
+          "prediction_fraction": 0.05,
+          "tangent_relative_error": 0.1,
+          "amplitude_relative_change": 0.1,
+          "preload_relative_error": 0.01,
+          "settle_speed_m_s": 1e-05,
+          "settle_std_m": 1e-06,
+          "momentum_n": 1e-05,
+          "ledger_n": 1e-07,
+          "off_axis_m": 1e-07,
+          "off_axis_rad_s": 1e-06
+        },
+        "scope": "Warm serial diagnostic wall time including observation/I-O; not performance benchmark"
+      }
+    }
+  ]
+}

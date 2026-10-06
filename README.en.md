@@ -68,6 +68,8 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 
 **Model check before tuning:** under the documented damping law and pure-normal-translation assumptions, a fixed coefficient cannot exactly match constant tangent damping at 2,4,6 N. This analytic mismatch is not measured trajectory error; see the [conditional derivation and reproduction](demos/contact-benchmark/DAMPING_REFERENCE.md).
 
+**Native tangent identification:** All nine default-solver cases failed the fixed momentum gate. Tightening only solver tolerances gives 9/9 valid records and damping near 20/40/60 Ns/m at 2/4/6 N. State/force epoch changes the fit; this is local numerical identification, not completed material calibration. [Protocol](demos/contact-benchmark/TANGENT_IDENTIFICATION.md)
+
 ## Current findings
 
 | Research question | Evidence | Conclusion and boundary |
@@ -77,7 +79,7 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
-Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) has primitive contact and joint diagnostics; full qualification remains incomplete.
+Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) has completed bounded synthetic rigid-fixture qualification; thin cloth is tracked separately in #77.
 
 Separate implementation consistency, numerical convergence and measured physical validity; a grasp pass substitutes for none of them. [Research standards](docs/research-focus.md#what-standard-judges-an-experiment)
 
