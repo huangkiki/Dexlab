@@ -5,13 +5,14 @@ from pathlib import Path
 
 import numpy as np
 
-from dexlab.contact_damping import force_windows, pair_native_matches, validate_plan
+from dexlab.contact_damping import force_windows, pair_native_matches, validate_plan, point_force_windows
+from dexlab.contact_archive import read_contacts
 from dexlab.contact_load import LoadCase
 from dexlab.contact_transfer import initial_state_matches
 from normal_response import rescore
 
 
-def summarize(root):
+def summarize(root, *, pointwise=False):
     root = Path(root)
     plan = json.loads((root/'suite.json').read_text())
     validate_plan(plan)
@@ -35,12 +36,19 @@ def summarize(root):
             inputs = {key: data[key].copy() for key in ('time', 'external_force', 'downward_load')}
         with np.load(folder/'geometry.npz', allow_pickle=False) as mesh:
             inputs.update({key: mesh[key].copy() for key in mesh.files})
+        point_result = None
+        if pointwise:
+            with np.load(folder/'states.npz', allow_pickle=False) as data:
+                point_result = point_force_windows(LoadCase(**job['case']), data,
+                                                  read_contacts(folder, receipt))
         key = (job['case']['timestep'], job['normal_parameters']['normal_viscous_damping_coefficient'])
         observations[key] = (receipt, inputs)
         rows.append({'id': job['id'], 'timestep_s': key[0], 'damping_s_m': key[1],
                      'windows': windows, 'engineering_passed': outcome['result']['passed'],
                      'transient_passed': outcome['transient']['passed'],
                      'failed_engineering_checks': sorted(k for k,v in checks.items() if not v)})
+        if pointwise:
+            rows[-1]['point_force_windows'] = point_result
     for dt in sorted({key[0] for key in observations}):
         (left, a), (right, b) = observations[dt, 0.], observations[dt, 10.]
         if (not pair_native_matches(left['native'], right['native'])
@@ -55,5 +63,7 @@ def summarize(root):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('directory', type=Path)
+    parser.add_argument('--pointwise', action='store_true',
+                        help='Add horizontal-plane point-force diagnostics; preserve original verdicts')
     args = parser.parse_args()
-    print(json.dumps(summarize(args.directory), indent=2))
+    print(json.dumps(summarize(args.directory, pointwise=args.pointwise), indent=2))
