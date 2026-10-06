@@ -1,0 +1,1296 @@
+{
+  "files": {
+    "audit.json": {
+      "bytes": 682119,
+      "sha256": "98968da3df5b81d22d5cda6dd5cadd16aca7fbbf5e2271ebc0434085aa0dd5bd"
+    },
+    "batch1/32-detach-recontact.npz": {
+      "bytes": 91715,
+      "sha256": "c07335b9f763b6e3f55636727477901357629b1f393590791454dc0973b30811"
+    },
+    "batch1/32-direct.npz": {
+      "bytes": 8363,
+      "sha256": "5aaf55f0e3c7c4f4f44cb673841960a756c045d2e7e1208d02026dd83841295e"
+    },
+    "batch1/32-reset-direct.npz": {
+      "bytes": 8363,
+      "sha256": "5aaf55f0e3c7c4f4f44cb673841960a756c045d2e7e1208d02026dd83841295e"
+    },
+    "batch1/32-slide-return.npz": {
+      "bytes": 127047,
+      "sha256": "c38b30851f423bd5ffc7209b575226947af95c93b2ec555341f531866cf8f8ab"
+    },
+    "batch1/64-detach-recontact.npz": {
+      "bytes": 111608,
+      "sha256": "febcf5b09d2fe0a76759bb410b702a50549487f2892f93c22eb1a49a96767c84"
+    },
+    "batch1/64-direct.npz": {
+      "bytes": 34025,
+      "sha256": "1175e8b1464b2f5915e805665a6489c3608e8f1f7202511f9f25f791b614b4e3"
+    },
+    "batch1/64-reset-direct.npz": {
+      "bytes": 34025,
+      "sha256": "1175e8b1464b2f5915e805665a6489c3608e8f1f7202511f9f25f791b614b4e3"
+    },
+    "batch1/64-slide-return.npz": {
+      "bytes": 152748,
+      "sha256": "36d510eb54b4d0a9a4f21f9b7845fcac814c4663ba2b9c59eaabb8d1ed8a41bc"
+    },
+    "batch1/frozen.json": {
+      "bytes": 9709,
+      "sha256": "c3773e6368dc60f6ba1297ecff31a9a3b037f403b2ee4255189506c0ab559200"
+    },
+    "batch1/official-proof.json": {
+      "bytes": 15641,
+      "sha256": "70c17e0a148635c0ac8160f69a1ad3cba2bfd7ae1961674fc9584d3548706cd4"
+    },
+    "batch1/record.json.gz": {
+      "bytes": 12882,
+      "sha256": "7448d9e25e5947cecb9537960cfd07b85ef8285ccaf5c47b2105ddf80568721c"
+    },
+    "batch1/score.json": {
+      "bytes": 5471,
+      "sha256": "31bb7409ac8d6e22dc737007ed1690d4067917ef085685177d986c662d456be0"
+    },
+    "batch1/source/docs/synthetic-tactile.md": {
+      "bytes": 4242,
+      "sha256": "7affb4ac07a70d6319d4b45e540f89f82ee254631551fb1403787f966abec6a8"
+    },
+    "batch1/source/src/dexlab/__init__.py": {
+      "bytes": 57,
+      "sha256": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327"
+    },
+    "batch1/source/src/dexlab/apple_admission.py": {
+      "bytes": 14896,
+      "sha256": "36822ae15982917348c641f5e111bdb9dce8a1f5ded7ddbdd874ad9bd64742ac"
+    },
+    "batch1/source/src/dexlab/archive_integrity.py": {
+      "bytes": 6572,
+      "sha256": "4c60c18481c029db94430f80e42277cd19eeed75b01326128732c72168739b3e"
+    },
+    "batch1/source/src/dexlab/benchmark.py": {
+      "bytes": 22424,
+      "sha256": "c30c767cfeae29f75c1bc17d472fce63ae97009dde1e131e76efec404c253a29"
+    },
+    "batch1/source/src/dexlab/cloth.py": {
+      "bytes": 8223,
+      "sha256": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f"
+    },
+    "batch1/source/src/dexlab/cloth_benchmark.py": {
+      "bytes": 16765,
+      "sha256": "e342fcd01671a3b0b3f91ed4dd98ee48c1957e05b062e23337d9b90d37890917"
+    },
+    "batch1/source/src/dexlab/cloth_engines.py": {
+      "bytes": 12005,
+      "sha256": "e650f2232e4b9f362209a87419eea99ab360b53f0f631ee08198c43b41016cae"
+    },
+    "batch1/source/src/dexlab/cloth_floor_audit.py": {
+      "bytes": 2388,
+      "sha256": "e26ee5d0ce495aa4756008369bf7dc0b3e587668131bc98beffda443a44fc521"
+    },
+    "batch1/source/src/dexlab/cloth_fold.py": {
+      "bytes": 6167,
+      "sha256": "4041bf4c3001a0f1c57ad473ed71b1f5728fd58437db38636d895a95d1ef9a61"
+    },
+    "batch1/source/src/dexlab/cloth_fold_probe.py": {
+      "bytes": 4909,
+      "sha256": "f3e253114dc29477c2824160481b18b86585d9092781f9142612aca6d691089f"
+    },
+    "batch1/source/src/dexlab/cloth_pad_sweep.py": {
+      "bytes": 3079,
+      "sha256": "40079629b64f22e39cae0a24b6d07e172ea44ee55d18b7fd0c513b91f37b83ed"
+    },
+    "batch1/source/src/dexlab/cloth_report.py": {
+      "bytes": 5473,
+      "sha256": "ffeb6836e1943e1d045fdcb10540850046e9a77233e1eb4a9879147afa6917d4"
+    },
+    "batch1/source/src/dexlab/cloth_response_history.py": {
+      "bytes": 4614,
+      "sha256": "9135fa884346bcba6b83ac64b0bc3a228bd02a8ae8879473f7a74bc321faeb45"
+    },
+    "batch1/source/src/dexlab/cloth_robot_audit.py": {
+      "bytes": 10554,
+      "sha256": "663f51361b9302175fe73d1d4cea0595ffbffb62f1e2ab93f1b3738149db6aac"
+    },
+    "batch1/source/src/dexlab/cloth_self_contact.py": {
+      "bytes": 4915,
+      "sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e"
+    },
+    "batch1/source/src/dexlab/cloth_superdex.py": {
+      "bytes": 7513,
+      "sha256": "57ff41b983290862baeccef1bdf95eb1f83219c113668c4ecd26cf67318016fb"
+    },
+    "batch1/source/src/dexlab/cloth_table_audit.py": {
+      "bytes": 10339,
+      "sha256": "30bc4494e7a07f4c44a3c4a0376478829e86d4cbf442d942d5f780fbe65ee8fe"
+    },
+    "batch1/source/src/dexlab/contact_archive.py": {
+      "bytes": 2437,
+      "sha256": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0"
+    },
+    "batch1/source/src/dexlab/contact_cone.py": {
+      "bytes": 10448,
+      "sha256": "dba3570b8eadf67f869cb81358f2582ad7561773d19a1b9687e01fefb70edfe1"
+    },
+    "batch1/source/src/dexlab/contact_cone_run.py": {
+      "bytes": 5428,
+      "sha256": "66d05c58323c4f91a3b58c97d031fbcc450446cbf81efb725cf317916ec0b58a"
+    },
+    "batch1/source/src/dexlab/contact_damping.py": {
+      "bytes": 6483,
+      "sha256": "cac3d87c351993feeed946f8668141dec12d81cfdc31692a72fe6d6fd7b4cba5"
+    },
+    "batch1/source/src/dexlab/contact_feedthrough.py": {
+      "bytes": 6262,
+      "sha256": "17460a73904ac93bda5f962f1d6033444be100b69575784b87cb57fbf740c46c"
+    },
+    "batch1/source/src/dexlab/contact_feedthrough_run.py": {
+      "bytes": 4384,
+      "sha256": "8366d682507b3eda89e1acc11cefa975a8272a6d24c87f50609ab24dda530258"
+    },
+    "batch1/source/src/dexlab/contact_friction.py": {
+      "bytes": 4639,
+      "sha256": "6f90f6a9cd1560a5d4999b52f8f5668ac3bd3bf24684f1bf97c88584518a27e7"
+    },
+    "batch1/source/src/dexlab/contact_indent.py": {
+      "bytes": 8126,
+      "sha256": "ada99a07d2ab03972c629e07aea37a8f7f862ff9063d0476f15b7f9d49c92b4c"
+    },
+    "batch1/source/src/dexlab/contact_indent_run.py": {
+      "bytes": 12322,
+      "sha256": "0f530b0ca29d0c972938b645691cf2f7f950cba0da0ca27581261bf6534d765b"
+    },
+    "batch1/source/src/dexlab/contact_kinematics.py": {
+      "bytes": 4732,
+      "sha256": "99dc2d10b00a21909d70203c34e8e42a8e2c2c89ae78696f8b7aa42ee21436af"
+    },
+    "batch1/source/src/dexlab/contact_load.py": {
+      "bytes": 7658,
+      "sha256": "b34000ed8318b30f0d147133c121651b41f25c258b04ff8df016c83402c98d15"
+    },
+    "batch1/source/src/dexlab/contact_parameters.py": {
+      "bytes": 10470,
+      "sha256": "b76d0f1dc2139cda7f111a7b940145afb7ec6b27884c99a3cedbb48748d8eece"
+    },
+    "batch1/source/src/dexlab/contact_pinch.py": {
+      "bytes": 13811,
+      "sha256": "9b9b80765472dfa5fdc4b6fdc574d092e5aec27f3cd92a34b4b33d6d79b325c3"
+    },
+    "batch1/source/src/dexlab/contact_pinch_native.py": {
+      "bytes": 21773,
+      "sha256": "35c1f98a8adf5292a759a9205eddc07ed43f8c97ce31348e1d984befdfd87a12"
+    },
+    "batch1/source/src/dexlab/contact_pinch_run.py": {
+      "bytes": 11661,
+      "sha256": "76c650de1c7240d51aed9dfcd456db1aae8eb67cd3dcdc87efef07ec90a3c66e"
+    },
+    "batch1/source/src/dexlab/contact_plane.py": {
+      "bytes": 7360,
+      "sha256": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0"
+    },
+    "batch1/source/src/dexlab/contact_plane_native.py": {
+      "bytes": 34094,
+      "sha256": "b2c1961084b061cfc8aead1d5900c2a07bff90df92f6121704fb628fd3a79ac8"
+    },
+    "batch1/source/src/dexlab/contact_readback.py": {
+      "bytes": 5389,
+      "sha256": "eac073718b56f558f014875a11bfb7a485feafbcf60525a934fee97494425db5"
+    },
+    "batch1/source/src/dexlab/contact_refinement.py": {
+      "bytes": 7416,
+      "sha256": "7f2c562f5355fae98a762d1d7dba0d2a3ab6190503212d3a68e990595581168d"
+    },
+    "batch1/source/src/dexlab/contact_tangent.py": {
+      "bytes": 7196,
+      "sha256": "9dd8ee4ec1bce7b4550f5edac859c3c0e24a3bdd8282414f5eb149e543b97a8f"
+    },
+    "batch1/source/src/dexlab/contact_tangent_run.py": {
+      "bytes": 5438,
+      "sha256": "a1c5a190f99e780a9106c29c6f6cd65b520d034b9ac609a13aff4e7c5c9631b4"
+    },
+    "batch1/source/src/dexlab/contact_tangent_verify.py": {
+      "bytes": 1977,
+      "sha256": "a2e0d1d1d80fd643bcd9f6a833dcaa3be132a52cc427dd74b722202cbe22a038"
+    },
+    "batch1/source/src/dexlab/contact_transfer.py": {
+      "bytes": 7467,
+      "sha256": "1872c4f61801c11f5e3b78d10b1920dd899026da012f89acb41b0c1e2a1d2015"
+    },
+    "batch1/source/src/dexlab/contact_transient.py": {
+      "bytes": 3894,
+      "sha256": "1753a7c54f8233c77bb0c7d23393630b77eeddef8b029cb99943471f007c944d"
+    },
+    "batch1/source/src/dexlab/damping_reference.py": {
+      "bytes": 2676,
+      "sha256": "369f761e66e56b9d5749e283911ae243ffe447e9404dfcff34490b914368da53"
+    },
+    "batch1/source/src/dexlab/engine_versions.py": {
+      "bytes": 9973,
+      "sha256": "83d8598a959991d4f927d229dd3340e129531c8255665140cd299c508bf8b5fc"
+    },
+    "batch1/source/src/dexlab/episode.py": {
+      "bytes": 933,
+      "sha256": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872"
+    },
+    "batch1/source/src/dexlab/evidence_publication.py": {
+      "bytes": 12640,
+      "sha256": "fb6d57ca58ac0b6c9015e37fd36c70029309a94bf7258d49fde9c7534858312e"
+    },
+    "batch1/source/src/dexlab/evidence_report.py": {
+      "bytes": 21780,
+      "sha256": "203fec3f4ae286caf63e8327153fe84b8f4cb532bfdb7d2bb4583f491809a9bc"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_coupling_probe.py": {
+      "bytes": 8107,
+      "sha256": "e4f81dfd73254f8af06df01b683102a86009703c4bf6f6ffc8d0ecef252a591d"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_coupling_score.py": {
+      "bytes": 6099,
+      "sha256": "69b65c509f4fe50392b75bcf63cc4e3d38279953f5bfb018ac6f0233016d1156"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_geometry.py": {
+      "bytes": 4745,
+      "sha256": "048da29290885ad6749861cd99133bac05aeea72105652d49c552f3b8928d9ff"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_gripper_probe.py": {
+      "bytes": 8432,
+      "sha256": "bc9c149e46db5407b36154b49d68e1752fcd257690de5468ec22875762a79c8a"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_gripper_score.py": {
+      "bytes": 6135,
+      "sha256": "081fc2331b800c75637d8b020eff23d0c5c5209eef81b7added6f5a33a4365f1"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_probe.py": {
+      "bytes": 7597,
+      "sha256": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_replay.py": {
+      "bytes": 4848,
+      "sha256": "4a1ab53c2bb8562d1d9c5b637929e1133f44145aebfd3cb731fd054288b50128"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_response.py": {
+      "bytes": 6635,
+      "sha256": "c1ab777eb0b63371f48b0b464b35e553091e0995a6b32209c1afcf7daa70c651"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_response_probe.py": {
+      "bytes": 7203,
+      "sha256": "9f99ea6890ba2ee34d11b8d1ddcb9e1569b4a6aeaf4078d7ebdf7c280e134c0b"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_score.py": {
+      "bytes": 7351,
+      "sha256": "983da54f3b4e5db9ccf5a2fce3549aa81dd04af73f63ce707581da466e46d733"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_self_probe.py": {
+      "bytes": 5885,
+      "sha256": "8878292e74c73deb626f78ed4592806f36005c5aa54e5c06728327a005a67d34"
+    },
+    "batch1/source/src/dexlab/genesis_cloth_self_score.py": {
+      "bytes": 7944,
+      "sha256": "4bb00acdf4afa36f1c729e0d3504acc202ff4aef8c469d15f8695259283c7b2b"
+    },
+    "batch1/source/src/dexlab/genesis_cone_probe.py": {
+      "bytes": 4511,
+      "sha256": "d82161ffb5fed6d14c7c83548850dca74820e0a7e78db3609799de97a1f0299c"
+    },
+    "batch1/source/src/dexlab/genesis_cone_score.py": {
+      "bytes": 2908,
+      "sha256": "ed2d14cefbb2de1e7259d9bd991e619ab5259e2fe1fe2a4e58dfb44dbd327ffc"
+    },
+    "batch1/source/src/dexlab/genesis_gpu_probe.py": {
+      "bytes": 4984,
+      "sha256": "a68f9832dc9fee9988a58f41bab522d85e49862a2be8fa44818ae5ce43510a56"
+    },
+    "batch1/source/src/dexlab/genesis_gpu_score.py": {
+      "bytes": 2905,
+      "sha256": "a3c311e04e7fab1e2534bb8211e2d0351223cf88b38167a848123f76e22eff6e"
+    },
+    "batch1/source/src/dexlab/genesis_joint_probe.py": {
+      "bytes": 5890,
+      "sha256": "09ea6e55808438b4f22b59576436a4c8b610cdf70bf2812ed3cd5114894417a5"
+    },
+    "batch1/source/src/dexlab/genesis_joint_score.py": {
+      "bytes": 3434,
+      "sha256": "32893e438d9e0799c262aaed1159414be73c7deb5344e3a71a350645e779c612"
+    },
+    "batch1/source/src/dexlab/genesis_pinch_probe.py": {
+      "bytes": 8036,
+      "sha256": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    },
+    "batch1/source/src/dexlab/genesis_pinch_score.py": {
+      "bytes": 7069,
+      "sha256": "ab0f7ca532d32d7373fbc204ec8b62818dde4e34046582bc6343bd864bd33f46"
+    },
+    "batch1/source/src/dexlab/hardware_log.py": {
+      "bytes": 12869,
+      "sha256": "e126e3e1caeef3aa68a409fc3670efbcfad9d06df1baf53837febc96b37707d1"
+    },
+    "batch1/source/src/dexlab/jitter.py": {
+      "bytes": 11976,
+      "sha256": "23ce7c167d0eef7321b56c2ccc3fc67e550e24d3288ab948aeaa1ac369de843b"
+    },
+    "batch1/source/src/dexlab/model_audit.py": {
+      "bytes": 26375,
+      "sha256": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d"
+    },
+    "batch1/source/src/dexlab/mujoco_artifacts.py": {
+      "bytes": 7317,
+      "sha256": "9bc7804db54247bf14ea2d9d02ff77481496d790f5d709920ed4eed8327e9ad2"
+    },
+    "batch1/source/src/dexlab/newton_contact_probe.py": {
+      "bytes": 5199,
+      "sha256": "f6a8ce5aaa960009c8339515727dfe82d7ede868b7cc9761738b4aef4607e7bb"
+    },
+    "batch1/source/src/dexlab/newton_contact_score.py": {
+      "bytes": 7139,
+      "sha256": "1084d5e905408b51df374f43bd78e8992eab829be418f4b397954fb3c316294e"
+    },
+    "batch1/source/src/dexlab/official_wheels.py": {
+      "bytes": 2558,
+      "sha256": "f6182e7a95ff1b7fd5daac5d762d76f8d8faf808fcfd577f8a60c2ab335cda06"
+    },
+    "batch1/source/src/dexlab/physx_apple.py": {
+      "bytes": 18820,
+      "sha256": "48859d0d9bf8d95c272293719f0d95b3f2e7a00c1f6a6d2a5df9661930816ec2"
+    },
+    "batch1/source/src/dexlab/physx_apple_replay.py": {
+      "bytes": 4730,
+      "sha256": "0f61c4a739035deca8403ad352fd177db75ef904889909d499293b2a2f96e6c2"
+    },
+    "batch1/source/src/dexlab/physx_apple_score.py": {
+      "bytes": 20795,
+      "sha256": "73ac7e6bc0a3f9efcd5cde7c5c16d6cd30cf2b6db03c3e812c8b89d82adb50bf"
+    },
+    "batch1/source/src/dexlab/physx_baseline.py": {
+      "bytes": 17768,
+      "sha256": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798"
+    },
+    "batch1/source/src/dexlab/physx_cloth.py": {
+      "bytes": 5760,
+      "sha256": "79d2bffbc8585417b24c044ae7b6a43c96596d8b932c593292fa09964593d2b7"
+    },
+    "batch1/source/src/dexlab/physx_cloth_worker.py": {
+      "bytes": 11287,
+      "sha256": "5522fe7a7e3d5dab4f8ed6f00740cd8ca43b1bc22fabe159286ad535b169b99e"
+    },
+    "batch1/source/src/dexlab/physx_contact_details.py": {
+      "bytes": 10797,
+      "sha256": "4ae75b2fa0af0481a4adc40579cab5ba070968e165d905c5e793f28d6d2f9a7f"
+    },
+    "batch1/source/src/dexlab/physx_drive.py": {
+      "bytes": 12712,
+      "sha256": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3"
+    },
+    "batch1/source/src/dexlab/physx_geometry.py": {
+      "bytes": 10162,
+      "sha256": "0d40bfca65e216096b24209612bbeb0b28966ae96ba642d64a6d2c4f2c4a500d"
+    },
+    "batch1/source/src/dexlab/physx_pinch.py": {
+      "bytes": 17922,
+      "sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af"
+    },
+    "batch1/source/src/dexlab/physx_robot.py": {
+      "bytes": 15789,
+      "sha256": "c2f19bc2e03fc473d97ba1971057c4c046d0f4472efdee2a3d8f56b7879ed1a9"
+    },
+    "batch1/source/src/dexlab/physx_sdf.py": {
+      "bytes": 14735,
+      "sha256": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea"
+    },
+    "batch1/source/src/dexlab/robot_transfer.py": {
+      "bytes": 15024,
+      "sha256": "fb118b5d90919510cdb474ef6607145e53e1044b76efb4e3760701b3c8f8818b"
+    },
+    "batch1/source/src/dexlab/sdf_observability.py": {
+      "bytes": 6352,
+      "sha256": "1d911aa4412336b4035d1a462af26903118a24e7b40f25fd65a5ece5e33b8d8c"
+    },
+    "batch1/source/src/dexlab/tactile_depth.py": {
+      "bytes": 1941,
+      "sha256": "1b4db7a784ac86d0be8896773bea9d1875ad44e207ff1ad3ca7f06b2940a7360"
+    },
+    "batch1/source/src/dexlab/tactile_probe.py": {
+      "bytes": 4514,
+      "sha256": "1302572b1c809d637c3380b26ad9121ba63b09f0bd4abff10983a5492bb75fc9"
+    },
+    "batch1/source/src/dexlab/tactile_score.py": {
+      "bytes": 5378,
+      "sha256": "ec124fb5ed65ecb8901dac63960ba4ecb5352c7632bfcc7a6ffb59b7b4df5bda"
+    },
+    "batch1/source/tests/test_tactile_depth.py": {
+      "bytes": 2010,
+      "sha256": "82314ffc74c2c66c36cc498ba8711dd15e59dd0cc6824730e45ce17ab3f61555"
+    },
+    "batch1/source/tests/test_tactile_score.py": {
+      "bytes": 2419,
+      "sha256": "69031b97e319b7fa0d72e2cb6334f612c015511669b42cc4c105f16b422dbb2c"
+    },
+    "batch2/32-detach-recontact.npz": {
+      "bytes": 95197,
+      "sha256": "ad910a6f31809cba7e5cd36971d2e3373a8c6e0af55b425fac9769d8e1b07941"
+    },
+    "batch2/32-direct.npz": {
+      "bytes": 44772,
+      "sha256": "28579a87f841d2debcf9d85febc64cb09da2743ea022d955b8b3ff8e2a517db0"
+    },
+    "batch2/32-reset-direct.npz": {
+      "bytes": 44772,
+      "sha256": "28579a87f841d2debcf9d85febc64cb09da2743ea022d955b8b3ff8e2a517db0"
+    },
+    "batch2/32-slide-return.npz": {
+      "bytes": 481901,
+      "sha256": "16ea0826159e1fbf392279ce634b5bd5536eecf735af343bd1366a072cee0c4b"
+    },
+    "batch2/64-detach-recontact.npz": {
+      "bytes": 115101,
+      "sha256": "79280aa9ae29878303e49833830953fc4eb6f761d364df78f7e954b11b0602d8"
+    },
+    "batch2/64-direct.npz": {
+      "bytes": 70434,
+      "sha256": "b6b3834b750cf89fe112efc2e61da30b12d7fb69fe30c2ab60e5ca494deb56a8"
+    },
+    "batch2/64-reset-direct.npz": {
+      "bytes": 70434,
+      "sha256": "b6b3834b750cf89fe112efc2e61da30b12d7fb69fe30c2ab60e5ca494deb56a8"
+    },
+    "batch2/64-slide-return.npz": {
+      "bytes": 507602,
+      "sha256": "b04fb0ccc05a3482470aa621241863c5a3f5e059460ee34a9a665c0f218d4d2e"
+    },
+    "batch2/frozen.json": {
+      "bytes": 9709,
+      "sha256": "3dba65c5062a0e6c795ab05558e4fbaca29eef670a41be816ffae1fd5533b24a"
+    },
+    "batch2/official-proof.json": {
+      "bytes": 15641,
+      "sha256": "70c17e0a148635c0ac8160f69a1ad3cba2bfd7ae1961674fc9584d3548706cd4"
+    },
+    "batch2/record.json.gz": {
+      "bytes": 189110,
+      "sha256": "9ec92ce8a01c81ab2ee96cd171acec3a89e9630ba2b1fa827f5baf7b9e6fec5c"
+    },
+    "batch2/score.json": {
+      "bytes": 5961,
+      "sha256": "71ec7b41c7d8b3b3465db146c35d8228b9041fb17cab36de24e7701fcfbd6dee"
+    },
+    "batch2/source/docs/synthetic-tactile.md": {
+      "bytes": 4811,
+      "sha256": "be90a1cab58ca713f70e54ed46f885e2561d692212883414ebc923915074699d"
+    },
+    "batch2/source/src/dexlab/__init__.py": {
+      "bytes": 57,
+      "sha256": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327"
+    },
+    "batch2/source/src/dexlab/apple_admission.py": {
+      "bytes": 14896,
+      "sha256": "36822ae15982917348c641f5e111bdb9dce8a1f5ded7ddbdd874ad9bd64742ac"
+    },
+    "batch2/source/src/dexlab/archive_integrity.py": {
+      "bytes": 6572,
+      "sha256": "4c60c18481c029db94430f80e42277cd19eeed75b01326128732c72168739b3e"
+    },
+    "batch2/source/src/dexlab/benchmark.py": {
+      "bytes": 22424,
+      "sha256": "c30c767cfeae29f75c1bc17d472fce63ae97009dde1e131e76efec404c253a29"
+    },
+    "batch2/source/src/dexlab/cloth.py": {
+      "bytes": 8223,
+      "sha256": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f"
+    },
+    "batch2/source/src/dexlab/cloth_benchmark.py": {
+      "bytes": 16765,
+      "sha256": "e342fcd01671a3b0b3f91ed4dd98ee48c1957e05b062e23337d9b90d37890917"
+    },
+    "batch2/source/src/dexlab/cloth_engines.py": {
+      "bytes": 12005,
+      "sha256": "e650f2232e4b9f362209a87419eea99ab360b53f0f631ee08198c43b41016cae"
+    },
+    "batch2/source/src/dexlab/cloth_floor_audit.py": {
+      "bytes": 2388,
+      "sha256": "e26ee5d0ce495aa4756008369bf7dc0b3e587668131bc98beffda443a44fc521"
+    },
+    "batch2/source/src/dexlab/cloth_fold.py": {
+      "bytes": 6167,
+      "sha256": "4041bf4c3001a0f1c57ad473ed71b1f5728fd58437db38636d895a95d1ef9a61"
+    },
+    "batch2/source/src/dexlab/cloth_fold_probe.py": {
+      "bytes": 4909,
+      "sha256": "f3e253114dc29477c2824160481b18b86585d9092781f9142612aca6d691089f"
+    },
+    "batch2/source/src/dexlab/cloth_pad_sweep.py": {
+      "bytes": 3079,
+      "sha256": "40079629b64f22e39cae0a24b6d07e172ea44ee55d18b7fd0c513b91f37b83ed"
+    },
+    "batch2/source/src/dexlab/cloth_report.py": {
+      "bytes": 5473,
+      "sha256": "ffeb6836e1943e1d045fdcb10540850046e9a77233e1eb4a9879147afa6917d4"
+    },
+    "batch2/source/src/dexlab/cloth_response_history.py": {
+      "bytes": 4614,
+      "sha256": "9135fa884346bcba6b83ac64b0bc3a228bd02a8ae8879473f7a74bc321faeb45"
+    },
+    "batch2/source/src/dexlab/cloth_robot_audit.py": {
+      "bytes": 10554,
+      "sha256": "663f51361b9302175fe73d1d4cea0595ffbffb62f1e2ab93f1b3738149db6aac"
+    },
+    "batch2/source/src/dexlab/cloth_self_contact.py": {
+      "bytes": 4915,
+      "sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e"
+    },
+    "batch2/source/src/dexlab/cloth_superdex.py": {
+      "bytes": 7513,
+      "sha256": "57ff41b983290862baeccef1bdf95eb1f83219c113668c4ecd26cf67318016fb"
+    },
+    "batch2/source/src/dexlab/cloth_table_audit.py": {
+      "bytes": 10339,
+      "sha256": "30bc4494e7a07f4c44a3c4a0376478829e86d4cbf442d942d5f780fbe65ee8fe"
+    },
+    "batch2/source/src/dexlab/contact_archive.py": {
+      "bytes": 2437,
+      "sha256": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0"
+    },
+    "batch2/source/src/dexlab/contact_cone.py": {
+      "bytes": 10448,
+      "sha256": "dba3570b8eadf67f869cb81358f2582ad7561773d19a1b9687e01fefb70edfe1"
+    },
+    "batch2/source/src/dexlab/contact_cone_run.py": {
+      "bytes": 5428,
+      "sha256": "66d05c58323c4f91a3b58c97d031fbcc450446cbf81efb725cf317916ec0b58a"
+    },
+    "batch2/source/src/dexlab/contact_damping.py": {
+      "bytes": 6483,
+      "sha256": "cac3d87c351993feeed946f8668141dec12d81cfdc31692a72fe6d6fd7b4cba5"
+    },
+    "batch2/source/src/dexlab/contact_feedthrough.py": {
+      "bytes": 6262,
+      "sha256": "17460a73904ac93bda5f962f1d6033444be100b69575784b87cb57fbf740c46c"
+    },
+    "batch2/source/src/dexlab/contact_feedthrough_run.py": {
+      "bytes": 4384,
+      "sha256": "8366d682507b3eda89e1acc11cefa975a8272a6d24c87f50609ab24dda530258"
+    },
+    "batch2/source/src/dexlab/contact_friction.py": {
+      "bytes": 4639,
+      "sha256": "6f90f6a9cd1560a5d4999b52f8f5668ac3bd3bf24684f1bf97c88584518a27e7"
+    },
+    "batch2/source/src/dexlab/contact_indent.py": {
+      "bytes": 8126,
+      "sha256": "ada99a07d2ab03972c629e07aea37a8f7f862ff9063d0476f15b7f9d49c92b4c"
+    },
+    "batch2/source/src/dexlab/contact_indent_run.py": {
+      "bytes": 12322,
+      "sha256": "0f530b0ca29d0c972938b645691cf2f7f950cba0da0ca27581261bf6534d765b"
+    },
+    "batch2/source/src/dexlab/contact_kinematics.py": {
+      "bytes": 4732,
+      "sha256": "99dc2d10b00a21909d70203c34e8e42a8e2c2c89ae78696f8b7aa42ee21436af"
+    },
+    "batch2/source/src/dexlab/contact_load.py": {
+      "bytes": 7658,
+      "sha256": "b34000ed8318b30f0d147133c121651b41f25c258b04ff8df016c83402c98d15"
+    },
+    "batch2/source/src/dexlab/contact_parameters.py": {
+      "bytes": 10470,
+      "sha256": "b76d0f1dc2139cda7f111a7b940145afb7ec6b27884c99a3cedbb48748d8eece"
+    },
+    "batch2/source/src/dexlab/contact_pinch.py": {
+      "bytes": 13811,
+      "sha256": "9b9b80765472dfa5fdc4b6fdc574d092e5aec27f3cd92a34b4b33d6d79b325c3"
+    },
+    "batch2/source/src/dexlab/contact_pinch_native.py": {
+      "bytes": 21773,
+      "sha256": "35c1f98a8adf5292a759a9205eddc07ed43f8c97ce31348e1d984befdfd87a12"
+    },
+    "batch2/source/src/dexlab/contact_pinch_run.py": {
+      "bytes": 11661,
+      "sha256": "76c650de1c7240d51aed9dfcd456db1aae8eb67cd3dcdc87efef07ec90a3c66e"
+    },
+    "batch2/source/src/dexlab/contact_plane.py": {
+      "bytes": 7360,
+      "sha256": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0"
+    },
+    "batch2/source/src/dexlab/contact_plane_native.py": {
+      "bytes": 34094,
+      "sha256": "b2c1961084b061cfc8aead1d5900c2a07bff90df92f6121704fb628fd3a79ac8"
+    },
+    "batch2/source/src/dexlab/contact_readback.py": {
+      "bytes": 5389,
+      "sha256": "eac073718b56f558f014875a11bfb7a485feafbcf60525a934fee97494425db5"
+    },
+    "batch2/source/src/dexlab/contact_refinement.py": {
+      "bytes": 7416,
+      "sha256": "7f2c562f5355fae98a762d1d7dba0d2a3ab6190503212d3a68e990595581168d"
+    },
+    "batch2/source/src/dexlab/contact_tangent.py": {
+      "bytes": 7196,
+      "sha256": "9dd8ee4ec1bce7b4550f5edac859c3c0e24a3bdd8282414f5eb149e543b97a8f"
+    },
+    "batch2/source/src/dexlab/contact_tangent_run.py": {
+      "bytes": 5438,
+      "sha256": "a1c5a190f99e780a9106c29c6f6cd65b520d034b9ac609a13aff4e7c5c9631b4"
+    },
+    "batch2/source/src/dexlab/contact_tangent_verify.py": {
+      "bytes": 1977,
+      "sha256": "a2e0d1d1d80fd643bcd9f6a833dcaa3be132a52cc427dd74b722202cbe22a038"
+    },
+    "batch2/source/src/dexlab/contact_transfer.py": {
+      "bytes": 7467,
+      "sha256": "1872c4f61801c11f5e3b78d10b1920dd899026da012f89acb41b0c1e2a1d2015"
+    },
+    "batch2/source/src/dexlab/contact_transient.py": {
+      "bytes": 3894,
+      "sha256": "1753a7c54f8233c77bb0c7d23393630b77eeddef8b029cb99943471f007c944d"
+    },
+    "batch2/source/src/dexlab/damping_reference.py": {
+      "bytes": 2676,
+      "sha256": "369f761e66e56b9d5749e283911ae243ffe447e9404dfcff34490b914368da53"
+    },
+    "batch2/source/src/dexlab/engine_versions.py": {
+      "bytes": 9973,
+      "sha256": "83d8598a959991d4f927d229dd3340e129531c8255665140cd299c508bf8b5fc"
+    },
+    "batch2/source/src/dexlab/episode.py": {
+      "bytes": 933,
+      "sha256": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872"
+    },
+    "batch2/source/src/dexlab/evidence_publication.py": {
+      "bytes": 12640,
+      "sha256": "fb6d57ca58ac0b6c9015e37fd36c70029309a94bf7258d49fde9c7534858312e"
+    },
+    "batch2/source/src/dexlab/evidence_report.py": {
+      "bytes": 21780,
+      "sha256": "203fec3f4ae286caf63e8327153fe84b8f4cb532bfdb7d2bb4583f491809a9bc"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_coupling_probe.py": {
+      "bytes": 8107,
+      "sha256": "e4f81dfd73254f8af06df01b683102a86009703c4bf6f6ffc8d0ecef252a591d"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_coupling_score.py": {
+      "bytes": 6099,
+      "sha256": "69b65c509f4fe50392b75bcf63cc4e3d38279953f5bfb018ac6f0233016d1156"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_geometry.py": {
+      "bytes": 4745,
+      "sha256": "048da29290885ad6749861cd99133bac05aeea72105652d49c552f3b8928d9ff"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_gripper_probe.py": {
+      "bytes": 8432,
+      "sha256": "bc9c149e46db5407b36154b49d68e1752fcd257690de5468ec22875762a79c8a"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_gripper_score.py": {
+      "bytes": 6135,
+      "sha256": "081fc2331b800c75637d8b020eff23d0c5c5209eef81b7added6f5a33a4365f1"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_probe.py": {
+      "bytes": 7597,
+      "sha256": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_replay.py": {
+      "bytes": 4848,
+      "sha256": "4a1ab53c2bb8562d1d9c5b637929e1133f44145aebfd3cb731fd054288b50128"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_response.py": {
+      "bytes": 6635,
+      "sha256": "c1ab777eb0b63371f48b0b464b35e553091e0995a6b32209c1afcf7daa70c651"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_response_probe.py": {
+      "bytes": 7203,
+      "sha256": "9f99ea6890ba2ee34d11b8d1ddcb9e1569b4a6aeaf4078d7ebdf7c280e134c0b"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_score.py": {
+      "bytes": 7351,
+      "sha256": "983da54f3b4e5db9ccf5a2fce3549aa81dd04af73f63ce707581da466e46d733"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_self_probe.py": {
+      "bytes": 5885,
+      "sha256": "8878292e74c73deb626f78ed4592806f36005c5aa54e5c06728327a005a67d34"
+    },
+    "batch2/source/src/dexlab/genesis_cloth_self_score.py": {
+      "bytes": 7944,
+      "sha256": "4bb00acdf4afa36f1c729e0d3504acc202ff4aef8c469d15f8695259283c7b2b"
+    },
+    "batch2/source/src/dexlab/genesis_cone_probe.py": {
+      "bytes": 4511,
+      "sha256": "d82161ffb5fed6d14c7c83548850dca74820e0a7e78db3609799de97a1f0299c"
+    },
+    "batch2/source/src/dexlab/genesis_cone_score.py": {
+      "bytes": 2908,
+      "sha256": "ed2d14cefbb2de1e7259d9bd991e619ab5259e2fe1fe2a4e58dfb44dbd327ffc"
+    },
+    "batch2/source/src/dexlab/genesis_gpu_probe.py": {
+      "bytes": 4984,
+      "sha256": "a68f9832dc9fee9988a58f41bab522d85e49862a2be8fa44818ae5ce43510a56"
+    },
+    "batch2/source/src/dexlab/genesis_gpu_score.py": {
+      "bytes": 2905,
+      "sha256": "a3c311e04e7fab1e2534bb8211e2d0351223cf88b38167a848123f76e22eff6e"
+    },
+    "batch2/source/src/dexlab/genesis_joint_probe.py": {
+      "bytes": 5890,
+      "sha256": "09ea6e55808438b4f22b59576436a4c8b610cdf70bf2812ed3cd5114894417a5"
+    },
+    "batch2/source/src/dexlab/genesis_joint_score.py": {
+      "bytes": 3434,
+      "sha256": "32893e438d9e0799c262aaed1159414be73c7deb5344e3a71a350645e779c612"
+    },
+    "batch2/source/src/dexlab/genesis_pinch_probe.py": {
+      "bytes": 8036,
+      "sha256": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    },
+    "batch2/source/src/dexlab/genesis_pinch_score.py": {
+      "bytes": 7069,
+      "sha256": "ab0f7ca532d32d7373fbc204ec8b62818dde4e34046582bc6343bd864bd33f46"
+    },
+    "batch2/source/src/dexlab/hardware_log.py": {
+      "bytes": 12869,
+      "sha256": "e126e3e1caeef3aa68a409fc3670efbcfad9d06df1baf53837febc96b37707d1"
+    },
+    "batch2/source/src/dexlab/jitter.py": {
+      "bytes": 11976,
+      "sha256": "23ce7c167d0eef7321b56c2ccc3fc67e550e24d3288ab948aeaa1ac369de843b"
+    },
+    "batch2/source/src/dexlab/model_audit.py": {
+      "bytes": 26375,
+      "sha256": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d"
+    },
+    "batch2/source/src/dexlab/mujoco_artifacts.py": {
+      "bytes": 7317,
+      "sha256": "9bc7804db54247bf14ea2d9d02ff77481496d790f5d709920ed4eed8327e9ad2"
+    },
+    "batch2/source/src/dexlab/newton_contact_probe.py": {
+      "bytes": 5199,
+      "sha256": "f6a8ce5aaa960009c8339515727dfe82d7ede868b7cc9761738b4aef4607e7bb"
+    },
+    "batch2/source/src/dexlab/newton_contact_score.py": {
+      "bytes": 7139,
+      "sha256": "1084d5e905408b51df374f43bd78e8992eab829be418f4b397954fb3c316294e"
+    },
+    "batch2/source/src/dexlab/official_wheels.py": {
+      "bytes": 2558,
+      "sha256": "f6182e7a95ff1b7fd5daac5d762d76f8d8faf808fcfd577f8a60c2ab335cda06"
+    },
+    "batch2/source/src/dexlab/physx_apple.py": {
+      "bytes": 18820,
+      "sha256": "48859d0d9bf8d95c272293719f0d95b3f2e7a00c1f6a6d2a5df9661930816ec2"
+    },
+    "batch2/source/src/dexlab/physx_apple_replay.py": {
+      "bytes": 4730,
+      "sha256": "0f61c4a739035deca8403ad352fd177db75ef904889909d499293b2a2f96e6c2"
+    },
+    "batch2/source/src/dexlab/physx_apple_score.py": {
+      "bytes": 20795,
+      "sha256": "73ac7e6bc0a3f9efcd5cde7c5c16d6cd30cf2b6db03c3e812c8b89d82adb50bf"
+    },
+    "batch2/source/src/dexlab/physx_baseline.py": {
+      "bytes": 17768,
+      "sha256": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798"
+    },
+    "batch2/source/src/dexlab/physx_cloth.py": {
+      "bytes": 5760,
+      "sha256": "79d2bffbc8585417b24c044ae7b6a43c96596d8b932c593292fa09964593d2b7"
+    },
+    "batch2/source/src/dexlab/physx_cloth_worker.py": {
+      "bytes": 11287,
+      "sha256": "5522fe7a7e3d5dab4f8ed6f00740cd8ca43b1bc22fabe159286ad535b169b99e"
+    },
+    "batch2/source/src/dexlab/physx_contact_details.py": {
+      "bytes": 10797,
+      "sha256": "4ae75b2fa0af0481a4adc40579cab5ba070968e165d905c5e793f28d6d2f9a7f"
+    },
+    "batch2/source/src/dexlab/physx_drive.py": {
+      "bytes": 12712,
+      "sha256": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3"
+    },
+    "batch2/source/src/dexlab/physx_geometry.py": {
+      "bytes": 10162,
+      "sha256": "0d40bfca65e216096b24209612bbeb0b28966ae96ba642d64a6d2c4f2c4a500d"
+    },
+    "batch2/source/src/dexlab/physx_pinch.py": {
+      "bytes": 17922,
+      "sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af"
+    },
+    "batch2/source/src/dexlab/physx_robot.py": {
+      "bytes": 15789,
+      "sha256": "c2f19bc2e03fc473d97ba1971057c4c046d0f4472efdee2a3d8f56b7879ed1a9"
+    },
+    "batch2/source/src/dexlab/physx_sdf.py": {
+      "bytes": 14735,
+      "sha256": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea"
+    },
+    "batch2/source/src/dexlab/robot_transfer.py": {
+      "bytes": 15024,
+      "sha256": "fb118b5d90919510cdb474ef6607145e53e1044b76efb4e3760701b3c8f8818b"
+    },
+    "batch2/source/src/dexlab/sdf_observability.py": {
+      "bytes": 6352,
+      "sha256": "1d911aa4412336b4035d1a462af26903118a24e7b40f25fd65a5ece5e33b8d8c"
+    },
+    "batch2/source/src/dexlab/tactile_depth.py": {
+      "bytes": 1941,
+      "sha256": "1b4db7a784ac86d0be8896773bea9d1875ad44e207ff1ad3ca7f06b2940a7360"
+    },
+    "batch2/source/src/dexlab/tactile_probe.py": {
+      "bytes": 4941,
+      "sha256": "a4aaa843cb29ad65e3f89652d2023b34ded86b1883af492561266fa3ccf73c31"
+    },
+    "batch2/source/src/dexlab/tactile_score.py": {
+      "bytes": 5378,
+      "sha256": "ec124fb5ed65ecb8901dac63960ba4ecb5352c7632bfcc7a6ffb59b7b4df5bda"
+    },
+    "batch2/source/tests/test_tactile_depth.py": {
+      "bytes": 2010,
+      "sha256": "82314ffc74c2c66c36cc498ba8711dd15e59dd0cc6824730e45ce17ab3f61555"
+    },
+    "batch2/source/tests/test_tactile_score.py": {
+      "bytes": 2419,
+      "sha256": "69031b97e319b7fa0d72e2cb6334f612c015511669b42cc4c105f16b422dbb2c"
+    },
+    "batch3/32-detach-recontact.npz": {
+      "bytes": 113266,
+      "sha256": "9a5767c70adff67135f0e2aa85c9f5730c802e439b0d0c403168e4b710142005"
+    },
+    "batch3/32-direct.npz": {
+      "bytes": 35262,
+      "sha256": "56c641a90959aa4d7c9258a67c678c354f3141a4fe3eb91061f2069b6f7af3cc"
+    },
+    "batch3/32-reset-direct.npz": {
+      "bytes": 35262,
+      "sha256": "56c641a90959aa4d7c9258a67c678c354f3141a4fe3eb91061f2069b6f7af3cc"
+    },
+    "batch3/32-slide-return.npz": {
+      "bytes": 370338,
+      "sha256": "1122eca14aa40a558823b33d4d4fbb01d8d98101c4ca8bb2a541b1610a7bf93d"
+    },
+    "batch3/64-detach-recontact.npz": {
+      "bytes": 133159,
+      "sha256": "da80037bdfe14478cad4361ece0bbf7ccc268354a80ae6678732a323d6fe5f20"
+    },
+    "batch3/64-direct.npz": {
+      "bytes": 60924,
+      "sha256": "b4f3a06af69700ead7cbde5fb2fc01f602bd070bedd80c05faf3478b26852dee"
+    },
+    "batch3/64-reset-direct.npz": {
+      "bytes": 60924,
+      "sha256": "b4f3a06af69700ead7cbde5fb2fc01f602bd070bedd80c05faf3478b26852dee"
+    },
+    "batch3/64-slide-return.npz": {
+      "bytes": 396039,
+      "sha256": "3728e53fadf73bb89907f40db3e3e8ad2205d104f521054cd649ba572336ba96"
+    },
+    "batch3/frozen.json": {
+      "bytes": 9709,
+      "sha256": "f3ca8e2f3880efe24ec05678f0f0a4eb12a1f4ded6f4d14a001e82f2ec2fdee6"
+    },
+    "batch3/official-proof.json": {
+      "bytes": 15641,
+      "sha256": "70c17e0a148635c0ac8160f69a1ad3cba2bfd7ae1961674fc9584d3548706cd4"
+    },
+    "batch3/record.json.gz": {
+      "bytes": 80953,
+      "sha256": "e28bb5fd9656d7adb07ab929045425be2554dd72db33c22d653d5635d4598182"
+    },
+    "batch3/score.json": {
+      "bytes": 5856,
+      "sha256": "a1eba6573447056513af1e17dfbbda7cbb43bcdd7bb79cb856a6bc7e647a083e"
+    },
+    "batch3/source/docs/synthetic-tactile.md": {
+      "bytes": 4811,
+      "sha256": "be90a1cab58ca713f70e54ed46f885e2561d692212883414ebc923915074699d"
+    },
+    "batch3/source/src/dexlab/__init__.py": {
+      "bytes": 57,
+      "sha256": "3c07558ad0920d6699c2bdc43aec10640838e0424b604bc954ee038c5bbd3327"
+    },
+    "batch3/source/src/dexlab/apple_admission.py": {
+      "bytes": 14896,
+      "sha256": "36822ae15982917348c641f5e111bdb9dce8a1f5ded7ddbdd874ad9bd64742ac"
+    },
+    "batch3/source/src/dexlab/archive_integrity.py": {
+      "bytes": 6572,
+      "sha256": "4c60c18481c029db94430f80e42277cd19eeed75b01326128732c72168739b3e"
+    },
+    "batch3/source/src/dexlab/benchmark.py": {
+      "bytes": 22424,
+      "sha256": "c30c767cfeae29f75c1bc17d472fce63ae97009dde1e131e76efec404c253a29"
+    },
+    "batch3/source/src/dexlab/cloth.py": {
+      "bytes": 8223,
+      "sha256": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f"
+    },
+    "batch3/source/src/dexlab/cloth_benchmark.py": {
+      "bytes": 16765,
+      "sha256": "e342fcd01671a3b0b3f91ed4dd98ee48c1957e05b062e23337d9b90d37890917"
+    },
+    "batch3/source/src/dexlab/cloth_engines.py": {
+      "bytes": 12005,
+      "sha256": "e650f2232e4b9f362209a87419eea99ab360b53f0f631ee08198c43b41016cae"
+    },
+    "batch3/source/src/dexlab/cloth_floor_audit.py": {
+      "bytes": 2388,
+      "sha256": "e26ee5d0ce495aa4756008369bf7dc0b3e587668131bc98beffda443a44fc521"
+    },
+    "batch3/source/src/dexlab/cloth_fold.py": {
+      "bytes": 6167,
+      "sha256": "4041bf4c3001a0f1c57ad473ed71b1f5728fd58437db38636d895a95d1ef9a61"
+    },
+    "batch3/source/src/dexlab/cloth_fold_probe.py": {
+      "bytes": 4909,
+      "sha256": "f3e253114dc29477c2824160481b18b86585d9092781f9142612aca6d691089f"
+    },
+    "batch3/source/src/dexlab/cloth_pad_sweep.py": {
+      "bytes": 3079,
+      "sha256": "40079629b64f22e39cae0a24b6d07e172ea44ee55d18b7fd0c513b91f37b83ed"
+    },
+    "batch3/source/src/dexlab/cloth_report.py": {
+      "bytes": 5473,
+      "sha256": "ffeb6836e1943e1d045fdcb10540850046e9a77233e1eb4a9879147afa6917d4"
+    },
+    "batch3/source/src/dexlab/cloth_response_history.py": {
+      "bytes": 4614,
+      "sha256": "9135fa884346bcba6b83ac64b0bc3a228bd02a8ae8879473f7a74bc321faeb45"
+    },
+    "batch3/source/src/dexlab/cloth_robot_audit.py": {
+      "bytes": 10554,
+      "sha256": "663f51361b9302175fe73d1d4cea0595ffbffb62f1e2ab93f1b3738149db6aac"
+    },
+    "batch3/source/src/dexlab/cloth_self_contact.py": {
+      "bytes": 4915,
+      "sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e"
+    },
+    "batch3/source/src/dexlab/cloth_superdex.py": {
+      "bytes": 7513,
+      "sha256": "57ff41b983290862baeccef1bdf95eb1f83219c113668c4ecd26cf67318016fb"
+    },
+    "batch3/source/src/dexlab/cloth_table_audit.py": {
+      "bytes": 10339,
+      "sha256": "30bc4494e7a07f4c44a3c4a0376478829e86d4cbf442d942d5f780fbe65ee8fe"
+    },
+    "batch3/source/src/dexlab/contact_archive.py": {
+      "bytes": 2437,
+      "sha256": "92f7d7e7fb9aeebf28917175506605f616f1862fb9276275e488f33f070bf9a0"
+    },
+    "batch3/source/src/dexlab/contact_cone.py": {
+      "bytes": 10448,
+      "sha256": "dba3570b8eadf67f869cb81358f2582ad7561773d19a1b9687e01fefb70edfe1"
+    },
+    "batch3/source/src/dexlab/contact_cone_run.py": {
+      "bytes": 5428,
+      "sha256": "66d05c58323c4f91a3b58c97d031fbcc450446cbf81efb725cf317916ec0b58a"
+    },
+    "batch3/source/src/dexlab/contact_damping.py": {
+      "bytes": 6483,
+      "sha256": "cac3d87c351993feeed946f8668141dec12d81cfdc31692a72fe6d6fd7b4cba5"
+    },
+    "batch3/source/src/dexlab/contact_feedthrough.py": {
+      "bytes": 6262,
+      "sha256": "17460a73904ac93bda5f962f1d6033444be100b69575784b87cb57fbf740c46c"
+    },
+    "batch3/source/src/dexlab/contact_feedthrough_run.py": {
+      "bytes": 4384,
+      "sha256": "8366d682507b3eda89e1acc11cefa975a8272a6d24c87f50609ab24dda530258"
+    },
+    "batch3/source/src/dexlab/contact_friction.py": {
+      "bytes": 4639,
+      "sha256": "6f90f6a9cd1560a5d4999b52f8f5668ac3bd3bf24684f1bf97c88584518a27e7"
+    },
+    "batch3/source/src/dexlab/contact_indent.py": {
+      "bytes": 8126,
+      "sha256": "ada99a07d2ab03972c629e07aea37a8f7f862ff9063d0476f15b7f9d49c92b4c"
+    },
+    "batch3/source/src/dexlab/contact_indent_run.py": {
+      "bytes": 12322,
+      "sha256": "0f530b0ca29d0c972938b645691cf2f7f950cba0da0ca27581261bf6534d765b"
+    },
+    "batch3/source/src/dexlab/contact_kinematics.py": {
+      "bytes": 4732,
+      "sha256": "99dc2d10b00a21909d70203c34e8e42a8e2c2c89ae78696f8b7aa42ee21436af"
+    },
+    "batch3/source/src/dexlab/contact_load.py": {
+      "bytes": 7658,
+      "sha256": "b34000ed8318b30f0d147133c121651b41f25c258b04ff8df016c83402c98d15"
+    },
+    "batch3/source/src/dexlab/contact_parameters.py": {
+      "bytes": 10470,
+      "sha256": "b76d0f1dc2139cda7f111a7b940145afb7ec6b27884c99a3cedbb48748d8eece"
+    },
+    "batch3/source/src/dexlab/contact_pinch.py": {
+      "bytes": 13811,
+      "sha256": "9b9b80765472dfa5fdc4b6fdc574d092e5aec27f3cd92a34b4b33d6d79b325c3"
+    },
+    "batch3/source/src/dexlab/contact_pinch_native.py": {
+      "bytes": 21773,
+      "sha256": "35c1f98a8adf5292a759a9205eddc07ed43f8c97ce31348e1d984befdfd87a12"
+    },
+    "batch3/source/src/dexlab/contact_pinch_run.py": {
+      "bytes": 11661,
+      "sha256": "76c650de1c7240d51aed9dfcd456db1aae8eb67cd3dcdc87efef07ec90a3c66e"
+    },
+    "batch3/source/src/dexlab/contact_plane.py": {
+      "bytes": 7360,
+      "sha256": "0f31e478e1c38da131a7659ce9579a7b75d76a888c4a370df3c9580f4d3dd7f0"
+    },
+    "batch3/source/src/dexlab/contact_plane_native.py": {
+      "bytes": 34094,
+      "sha256": "b2c1961084b061cfc8aead1d5900c2a07bff90df92f6121704fb628fd3a79ac8"
+    },
+    "batch3/source/src/dexlab/contact_readback.py": {
+      "bytes": 5389,
+      "sha256": "eac073718b56f558f014875a11bfb7a485feafbcf60525a934fee97494425db5"
+    },
+    "batch3/source/src/dexlab/contact_refinement.py": {
+      "bytes": 7416,
+      "sha256": "7f2c562f5355fae98a762d1d7dba0d2a3ab6190503212d3a68e990595581168d"
+    },
+    "batch3/source/src/dexlab/contact_tangent.py": {
+      "bytes": 7196,
+      "sha256": "9dd8ee4ec1bce7b4550f5edac859c3c0e24a3bdd8282414f5eb149e543b97a8f"
+    },
+    "batch3/source/src/dexlab/contact_tangent_run.py": {
+      "bytes": 5438,
+      "sha256": "a1c5a190f99e780a9106c29c6f6cd65b520d034b9ac609a13aff4e7c5c9631b4"
+    },
+    "batch3/source/src/dexlab/contact_tangent_verify.py": {
+      "bytes": 1977,
+      "sha256": "a2e0d1d1d80fd643bcd9f6a833dcaa3be132a52cc427dd74b722202cbe22a038"
+    },
+    "batch3/source/src/dexlab/contact_transfer.py": {
+      "bytes": 7467,
+      "sha256": "1872c4f61801c11f5e3b78d10b1920dd899026da012f89acb41b0c1e2a1d2015"
+    },
+    "batch3/source/src/dexlab/contact_transient.py": {
+      "bytes": 3894,
+      "sha256": "1753a7c54f8233c77bb0c7d23393630b77eeddef8b029cb99943471f007c944d"
+    },
+    "batch3/source/src/dexlab/damping_reference.py": {
+      "bytes": 2676,
+      "sha256": "369f761e66e56b9d5749e283911ae243ffe447e9404dfcff34490b914368da53"
+    },
+    "batch3/source/src/dexlab/engine_versions.py": {
+      "bytes": 9973,
+      "sha256": "83d8598a959991d4f927d229dd3340e129531c8255665140cd299c508bf8b5fc"
+    },
+    "batch3/source/src/dexlab/episode.py": {
+      "bytes": 933,
+      "sha256": "27b1c6ca97b1f2bf784a5711d7b4533e50ea2640d163652453cf5085b8f8b872"
+    },
+    "batch3/source/src/dexlab/evidence_publication.py": {
+      "bytes": 12640,
+      "sha256": "fb6d57ca58ac0b6c9015e37fd36c70029309a94bf7258d49fde9c7534858312e"
+    },
+    "batch3/source/src/dexlab/evidence_report.py": {
+      "bytes": 21780,
+      "sha256": "203fec3f4ae286caf63e8327153fe84b8f4cb532bfdb7d2bb4583f491809a9bc"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_coupling_probe.py": {
+      "bytes": 8107,
+      "sha256": "e4f81dfd73254f8af06df01b683102a86009703c4bf6f6ffc8d0ecef252a591d"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_coupling_score.py": {
+      "bytes": 6099,
+      "sha256": "69b65c509f4fe50392b75bcf63cc4e3d38279953f5bfb018ac6f0233016d1156"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_geometry.py": {
+      "bytes": 4745,
+      "sha256": "048da29290885ad6749861cd99133bac05aeea72105652d49c552f3b8928d9ff"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_gripper_probe.py": {
+      "bytes": 8432,
+      "sha256": "bc9c149e46db5407b36154b49d68e1752fcd257690de5468ec22875762a79c8a"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_gripper_score.py": {
+      "bytes": 6135,
+      "sha256": "081fc2331b800c75637d8b020eff23d0c5c5209eef81b7added6f5a33a4365f1"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_probe.py": {
+      "bytes": 7597,
+      "sha256": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_replay.py": {
+      "bytes": 4848,
+      "sha256": "4a1ab53c2bb8562d1d9c5b637929e1133f44145aebfd3cb731fd054288b50128"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_response.py": {
+      "bytes": 6635,
+      "sha256": "c1ab777eb0b63371f48b0b464b35e553091e0995a6b32209c1afcf7daa70c651"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_response_probe.py": {
+      "bytes": 7203,
+      "sha256": "9f99ea6890ba2ee34d11b8d1ddcb9e1569b4a6aeaf4078d7ebdf7c280e134c0b"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_score.py": {
+      "bytes": 7351,
+      "sha256": "983da54f3b4e5db9ccf5a2fce3549aa81dd04af73f63ce707581da466e46d733"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_self_probe.py": {
+      "bytes": 5885,
+      "sha256": "8878292e74c73deb626f78ed4592806f36005c5aa54e5c06728327a005a67d34"
+    },
+    "batch3/source/src/dexlab/genesis_cloth_self_score.py": {
+      "bytes": 7944,
+      "sha256": "4bb00acdf4afa36f1c729e0d3504acc202ff4aef8c469d15f8695259283c7b2b"
+    },
+    "batch3/source/src/dexlab/genesis_cone_probe.py": {
+      "bytes": 4511,
+      "sha256": "d82161ffb5fed6d14c7c83548850dca74820e0a7e78db3609799de97a1f0299c"
+    },
+    "batch3/source/src/dexlab/genesis_cone_score.py": {
+      "bytes": 2908,
+      "sha256": "ed2d14cefbb2de1e7259d9bd991e619ab5259e2fe1fe2a4e58dfb44dbd327ffc"
+    },
+    "batch3/source/src/dexlab/genesis_gpu_probe.py": {
+      "bytes": 4984,
+      "sha256": "a68f9832dc9fee9988a58f41bab522d85e49862a2be8fa44818ae5ce43510a56"
+    },
+    "batch3/source/src/dexlab/genesis_gpu_score.py": {
+      "bytes": 2905,
+      "sha256": "a3c311e04e7fab1e2534bb8211e2d0351223cf88b38167a848123f76e22eff6e"
+    },
+    "batch3/source/src/dexlab/genesis_joint_probe.py": {
+      "bytes": 5890,
+      "sha256": "09ea6e55808438b4f22b59576436a4c8b610cdf70bf2812ed3cd5114894417a5"
+    },
+    "batch3/source/src/dexlab/genesis_joint_score.py": {
+      "bytes": 3434,
+      "sha256": "32893e438d9e0799c262aaed1159414be73c7deb5344e3a71a350645e779c612"
+    },
+    "batch3/source/src/dexlab/genesis_pinch_probe.py": {
+      "bytes": 8036,
+      "sha256": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    },
+    "batch3/source/src/dexlab/genesis_pinch_score.py": {
+      "bytes": 7069,
+      "sha256": "ab0f7ca532d32d7373fbc204ec8b62818dde4e34046582bc6343bd864bd33f46"
+    },
+    "batch3/source/src/dexlab/hardware_log.py": {
+      "bytes": 12869,
+      "sha256": "e126e3e1caeef3aa68a409fc3670efbcfad9d06df1baf53837febc96b37707d1"
+    },
+    "batch3/source/src/dexlab/jitter.py": {
+      "bytes": 11976,
+      "sha256": "23ce7c167d0eef7321b56c2ccc3fc67e550e24d3288ab948aeaa1ac369de843b"
+    },
+    "batch3/source/src/dexlab/model_audit.py": {
+      "bytes": 26375,
+      "sha256": "8ba78185f82beae9e4ae3c5f5ae3c8ecfb40e4f8158e2c230a874b93a940cb3d"
+    },
+    "batch3/source/src/dexlab/mujoco_artifacts.py": {
+      "bytes": 7317,
+      "sha256": "9bc7804db54247bf14ea2d9d02ff77481496d790f5d709920ed4eed8327e9ad2"
+    },
+    "batch3/source/src/dexlab/newton_contact_probe.py": {
+      "bytes": 5199,
+      "sha256": "f6a8ce5aaa960009c8339515727dfe82d7ede868b7cc9761738b4aef4607e7bb"
+    },
+    "batch3/source/src/dexlab/newton_contact_score.py": {
+      "bytes": 7139,
+      "sha256": "1084d5e905408b51df374f43bd78e8992eab829be418f4b397954fb3c316294e"
+    },
+    "batch3/source/src/dexlab/official_wheels.py": {
+      "bytes": 2558,
+      "sha256": "f6182e7a95ff1b7fd5daac5d762d76f8d8faf808fcfd577f8a60c2ab335cda06"
+    },
+    "batch3/source/src/dexlab/physx_apple.py": {
+      "bytes": 18820,
+      "sha256": "48859d0d9bf8d95c272293719f0d95b3f2e7a00c1f6a6d2a5df9661930816ec2"
+    },
+    "batch3/source/src/dexlab/physx_apple_replay.py": {
+      "bytes": 4730,
+      "sha256": "0f61c4a739035deca8403ad352fd177db75ef904889909d499293b2a2f96e6c2"
+    },
+    "batch3/source/src/dexlab/physx_apple_score.py": {
+      "bytes": 20795,
+      "sha256": "73ac7e6bc0a3f9efcd5cde7c5c16d6cd30cf2b6db03c3e812c8b89d82adb50bf"
+    },
+    "batch3/source/src/dexlab/physx_baseline.py": {
+      "bytes": 17768,
+      "sha256": "96eb4126e4fa763017b97d593dbda3811ff9f77e314129ccc8acec452f756798"
+    },
+    "batch3/source/src/dexlab/physx_cloth.py": {
+      "bytes": 5760,
+      "sha256": "79d2bffbc8585417b24c044ae7b6a43c96596d8b932c593292fa09964593d2b7"
+    },
+    "batch3/source/src/dexlab/physx_cloth_worker.py": {
+      "bytes": 11287,
+      "sha256": "5522fe7a7e3d5dab4f8ed6f00740cd8ca43b1bc22fabe159286ad535b169b99e"
+    },
+    "batch3/source/src/dexlab/physx_contact_details.py": {
+      "bytes": 10797,
+      "sha256": "4ae75b2fa0af0481a4adc40579cab5ba070968e165d905c5e793f28d6d2f9a7f"
+    },
+    "batch3/source/src/dexlab/physx_drive.py": {
+      "bytes": 12712,
+      "sha256": "8ec42c6e36cf07ee3b8c7f029a19724ba6f7254300a87d600331eab81db790f3"
+    },
+    "batch3/source/src/dexlab/physx_geometry.py": {
+      "bytes": 10162,
+      "sha256": "0d40bfca65e216096b24209612bbeb0b28966ae96ba642d64a6d2c4f2c4a500d"
+    },
+    "batch3/source/src/dexlab/physx_pinch.py": {
+      "bytes": 17922,
+      "sha256": "e8f30353b8bbff645c8bc50675638cc6da0669c8f9994cbac1000c4fb21c64af"
+    },
+    "batch3/source/src/dexlab/physx_robot.py": {
+      "bytes": 15789,
+      "sha256": "c2f19bc2e03fc473d97ba1971057c4c046d0f4472efdee2a3d8f56b7879ed1a9"
+    },
+    "batch3/source/src/dexlab/physx_sdf.py": {
+      "bytes": 14735,
+      "sha256": "d94e7cb160782e7ca88b660a657d4ec995e68c4b7fa48e0f6ece6297089977ea"
+    },
+    "batch3/source/src/dexlab/robot_transfer.py": {
+      "bytes": 15024,
+      "sha256": "fb118b5d90919510cdb474ef6607145e53e1044b76efb4e3760701b3c8f8818b"
+    },
+    "batch3/source/src/dexlab/sdf_observability.py": {
+      "bytes": 6352,
+      "sha256": "1d911aa4412336b4035d1a462af26903118a24e7b40f25fd65a5ece5e33b8d8c"
+    },
+    "batch3/source/src/dexlab/tactile_depth.py": {
+      "bytes": 1941,
+      "sha256": "1b4db7a784ac86d0be8896773bea9d1875ad44e207ff1ad3ca7f06b2940a7360"
+    },
+    "batch3/source/src/dexlab/tactile_probe.py": {
+      "bytes": 5023,
+      "sha256": "dc7597feff4228b5f129c3b2be7c8b7847713aa3548bb334ae7669f252abdb32"
+    },
+    "batch3/source/src/dexlab/tactile_score.py": {
+      "bytes": 5378,
+      "sha256": "ec124fb5ed65ecb8901dac63960ba4ecb5352c7632bfcc7a6ffb59b7b4df5bda"
+    },
+    "batch3/source/tests/test_tactile_depth.py": {
+      "bytes": 2010,
+      "sha256": "82314ffc74c2c66c36cc498ba8711dd15e59dd0cc6824730e45ce17ab3f61555"
+    },
+    "batch3/source/tests/test_tactile_score.py": {
+      "bytes": 2419,
+      "sha256": "69031b97e319b7fa0d72e2cb6334f612c015511669b42cc4c105f16b422dbb2c"
+    },
+    "diagnostics.png": {
+      "bytes": 171716,
+      "sha256": "2d58b368c00d5950a66c6cfffdfb2c683d964bea14f47c2f46f3e0e6fd0b31bb"
+    },
+    "grid-phase.json": {
+      "bytes": 32661,
+      "sha256": "a74df1b590a64748cd167cb88e4ba5056edcd47344b18f72aea99944a22ffc78"
+    },
+    "depth-contact.png": {
+      "bytes": 7751,
+      "sha256": "bad4426512b679533ead52fe46135576d1f06134664de69ebe4df9dd19c5bd37"
+    },
+    "resolution-error.png": {
+      "bytes": 88010,
+      "sha256": "fd60f457019f5ef5603af040461c89c1b1189297affc1504ec623692b53e41ff"
+    },
+    "depth-replay.gif": {
+      "bytes": 209908,
+      "sha256": "e09b323526b15abe39aa971e13eaa6d9806ad2cbc488b5084b465390975a2e10"
+    },
+    "depth-replay.json": {
+      "bytes": 443,
+      "sha256": "7a8a627b3a5c851b59dbf55d7cc0cb84d85438a09b0bd38a9ae74e2afa990e43"
+    },
+    "depth-detached.png": {
+      "bytes": 7512,
+      "sha256": "094efb0777df43c443a62dd98f0a6b0401678046c162e9364e41544115223a60"
+    }
+  }
+}

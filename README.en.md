@@ -12,6 +12,11 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 </div>
 
+**Synthetic tactile observation:** 32/64 grids leave native trajectories unchanged; reset and detached-zero checks pass. The first batch has depth but zero contact force, the second fails endpoint matching, and the third passes the bounded checks. [All outcomes, formulas and costs](docs/synthetic-tactile.md)
+
+![Continuous synthetic depth replay](docs/evidence/synthetic-tactile/depth-replay.gif)
+
+
 **Genesis cloth: the tested frictional grasp profile is rejected.** The official PBD/rigid coupling path lacks tangential friction. Same-step momentum fails its bound; after gripper gravity compensation, holding still fails at the development position and both preregistered offsets. Repeatability and passing geometry checks do not cancel these failures. [Criteria, all outcomes and reproduction](docs/genesis-cloth.md)
 
 | Check | Measurement | Scope |

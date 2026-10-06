@@ -30,3 +30,8 @@ Newton 的 MuJoCo 扩展仍限制 3.12.x，不能称底层最新；ovphysx 0.6.3
 ## GPU 接触开发证据
 
 MuJoCo Warp 3.14.0 的六卡参数对照得到四组通过、两组失败，固定 5 mm 侵入阈值未改。更小步长未使穿透单调改善。这是合成球—平面诊断，不是抓梗或夹布资格验收。[完整结果、图表与复现记录](https://github.com/huangkiki/Dexlab/blob/main/docs/engine-qualification.zh-CN.md)。
+
+
+## 合成触觉观测
+
+支持盒体/固定薄层的几何占据图（MuJoCo夹具），非剪切记忆、光学渲染或真机标定。三批结果及未通过对照见[报告](https://github.com/huangkiki/Dexlab/blob/main/docs/synthetic-tactile.zh-CN.md)。

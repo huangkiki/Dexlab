@@ -115,7 +115,7 @@
 | [TacEx v1](https://arxiv.org/html/2411.04776v1) | 胶体物理、光学与标记合成分开；历史打滑不能推广为当前PhysX缺陷。 | 相同给定轨迹分别比较力/形变与光学输出。 |
 | [Taccel v2](https://arxiv.org/html/2504.12908v2) | ABD/FEM IPC及运动学约束，接触和驱动要分别准入。 | 固定网格的压入、剪切、卸载，记录残差、力、侵入及分阶段开销。 |
 
-尚未支持触觉运行；具体输入、solver及未核实许可见[方法账本](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/dexterity-method-decisions.json)。小探针仍是有界提案，不是已完成实验。
+独立实现的限定几何占据观测器已完成[三批有界实验](https://github.com/huangkiki/Dexlab/blob/main/docs/synthetic-tactile.zh-CN.md)。这不代表接入或认证了上游触觉运行时、剪切记忆或硬件精度。上游输入、solver与许可边界仍见[方法账本](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/dexterity-method-decisions.json)。
 
 ## 抓取评估与双臂数据生成
 
