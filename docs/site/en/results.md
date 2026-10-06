@@ -2,7 +2,7 @@
 
 ## Genesis PBD cloth: failures remain visible
 
-Plane support and rest-distance self-contact controls pass their bounded checks. The free-plate test fails the simultaneous momentum bound (one-step reaction lag); gravity compensation restores gripper lift to 79.988 mm, but cloth holding still fails. These development diagnostics do not qualify cloth grasping, material accuracy or continuous collision detection. [Protocols, plots, continuous recorded-state replays and raw evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md). Issue #77 remains open.
+The tested official PBD/rigid frictional grasp profile is rejected: same-step momentum residual 3.2e-5 kg·m/s exceeds the 3.3e-7 bound; actual gripper lift reaches 79.988 mm while cloth stays at 4 mm, including both preregistered offsets. The 36-cell equal-time response shows strong timestep sensitivity. Connected-fold saved-state checks pass but establish neither continuous collision nor material accuracy. [Full protocols, all results and raw records](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md).
 
 ## Newton XPBD: bounded positive and negative contact evidence
 

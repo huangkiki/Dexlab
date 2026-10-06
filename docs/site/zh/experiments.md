@@ -9,7 +9,7 @@
 | 接触与驱动 | [demos/contact-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/contact-benchmark/) | 滑动、压入/卸载、载荷与瞬态；合成响应不等于真机标定 |
 | 基础布料 | [demos/cloth-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-benchmark/) | 拉伸、下垂、碰撞与折叠下落；各材料与求解器能力单列 |
 | PhysX | [demos/physx-contact/](https://github.com/huangkiki/Dexlab/tree/main/demos/physx-contact/) | 原生刚体、SDF、关节和表面布料；不把单例成功外推到留出测试 |
-| Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | 刚体限定范围证据已交付；[PBD 薄布诊断](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)包含失败对照，完整验收尚未完成 |
+| Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | 刚体限定范围证据已交付；[PBD 薄布诊断](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)包含失败对照，当前摩擦夹持配置不准入；等时长响应、连通折叠与两个独立偏移位置已记录 |
 
 `src/dexlab/` 保留共享任务注册、评分与记录逻辑；`scripts/` 放安装、复算、文档及研究工具。只有有实际重复或不变量的部分进入共享代码，不另建通用仿真框架。
 

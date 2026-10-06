@@ -1,0 +1,203 @@
+{
+  "scope": "Same CPU diagnostic; separate build/step timings, observation overhead unavailable. No cross-engine speed ranking.",
+  "cases": [
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.30994429953677555,
+      "native_build_s": 0.7113341380027123,
+      "step_seconds_each_repeat": [
+        0.10388209501979873,
+        0.09937967301812023
+      ]
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.6013474057410374,
+      "native_build_s": 0.8063195110007655,
+      "step_seconds_each_repeat": [
+        0.1226640400418546,
+        0.12179291099891998
+      ]
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.09759780283736115,
+      "native_build_s": 0.7173133910109755,
+      "step_seconds_each_repeat": [
+        0.22418566199485213,
+        0.2224408030451741
+      ]
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.2856615615613405,
+      "native_build_s": 0.7169398039986845,
+      "step_seconds_each_repeat": [
+        0.2420015539682936,
+        0.24271955399308354
+      ]
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.07775111891219699,
+      "native_build_s": 0.7220485210127663,
+      "step_seconds_each_repeat": [
+        0.4887846189958509,
+        0.49035846898914315
+      ]
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.5124566736564223,
+      "native_build_s": 0.7125840419903398,
+      "step_seconds_each_repeat": [
+        0.3955477450217586,
+        0.38623764403746463
+      ]
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.35115848335706284,
+      "native_build_s": 0.822700418997556,
+      "step_seconds_each_repeat": [
+        0.15731916899676435,
+        0.15472194002359174
+      ]
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.6558947847024502,
+      "native_build_s": 0.730808881984558,
+      "step_seconds_each_repeat": [
+        0.1656506159924902,
+        0.1648461099830456
+      ]
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.2164604988035297,
+      "native_build_s": 0.7246227440191433,
+      "step_seconds_each_repeat": [
+        0.32323565197293647,
+        0.3235199499758892
+      ]
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.5751072017262708,
+      "native_build_s": 0.7325490569928661,
+      "step_seconds_each_repeat": [
+        0.3235093969851732,
+        0.32030172905069776
+      ]
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.09181548981427837,
+      "native_build_s": 0.7269043959968258,
+      "step_seconds_each_repeat": [
+        0.6614981269813143,
+        0.6481135420035571
+      ]
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.21640615706880473,
+      "native_build_s": 0.8277367139817216,
+      "step_seconds_each_repeat": [
+        0.5442991340823937,
+        0.5465383709815796
+      ]
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.21359115886570806,
+      "native_build_s": 0.7460140949988272,
+      "step_seconds_each_repeat": [
+        0.1427232840214856,
+        0.1419747930194717
+      ]
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.6100855031122638,
+      "native_build_s": 0.7436718350218143,
+      "step_seconds_each_repeat": [
+        0.16276443999959156,
+        0.16191594998235814
+      ]
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.4359761239461632,
+      "native_build_s": 0.7303209519886877,
+      "step_seconds_each_repeat": [
+        0.311227351980051,
+        0.3163125190185383
+      ]
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.5432328382741987,
+      "native_build_s": 0.7313118040037807,
+      "step_seconds_each_repeat": [
+        0.3291896229493432,
+        0.32838359897141345
+      ]
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "final_initial_rms_ratio": 0.2276151904077064,
+      "native_build_s": 0.8490375450055581,
+      "step_seconds_each_repeat": [
+        0.6486110701225698,
+        0.6580951679497957
+      ]
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "final_initial_rms_ratio": 0.40210085390779615,
+      "native_build_s": 0.7424712280044332,
+      "step_seconds_each_repeat": [
+        0.5550123460416216,
+        0.5520378319488373
+      ]
+    }
+  ]
+}

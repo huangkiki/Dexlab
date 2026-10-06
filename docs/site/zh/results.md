@@ -2,7 +2,7 @@
 
 ## Genesis PBD 薄布：保留失败结果
 
-平面支撑与静止距离自接触对照通过限定检查。自由刚板试验未通过同时刻动量判据（反作用滞后一物理步）；重力补偿将夹爪实际抬升恢复到 79.988 mm，但布料保持仍失败。这些开发诊断不代表布料抓取、材料精度或连续碰撞检测已通过验收。[协议、曲线、连续状态回放与原始证据](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)。Issue #77 保持开放。
+当前官方 PBD/刚体摩擦夹持配置不准入：同一步动量误差 3.2e-5 kg·m/s 超过 3.3e-7 判据；夹爪实际抬升 79.988 mm 后布料仍落在 4 mm，两个预登记偏移位置也失败。36 格等时长响应显示明显步长敏感性；连通折叠逐帧检查通过，不能替代连续碰撞或材料精度验收。[完整协议、全部结果与原始记录](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)。
 
 ## Newton XPBD：有界接触正负对照
 

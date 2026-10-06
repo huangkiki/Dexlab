@@ -1,6 +1,6 @@
 # Genesis PBD thin-cloth qualification
 
-Status: six diagnostic batches completed (plane, free plate, response sensitivity, baseline and gravity-compensated gripper, and self-contact pairs); full cloth qualification remains open. This is a separate synthetic thin-surface experiment, not Genesis rigid qualification, calibrated fabric or MPM/FEM substitution.
+**Assessment: the tested official PBD/rigid frictional grasp profile is rejected.** Same-step momentum and holding fail; other passing diagnostics do not erase these outcomes. This is a bounded synthetic qualification assessment, not proof that every controller fails or a calibrated fabric model. All frozen stages are retained below, including equal-time response, connected folds, interframe geometry and held-out positions.
 
 ## Source audit
 
@@ -20,9 +20,11 @@ Record initial and every-step particle positions/velocities, actual native setti
 
 Frozen checks: finite complete records; supported surface min z≥-0.5 mm and final 0.1 s center-height within0.5 mm of4 mm radius; disabled coupling must fail support and follow discrete semi-implicit freefall within0.1 mm position/0.001 m/s velocity. Compare reset initial state and all trajectories at1e-9 m /1e-8 m/s; report deviation rather than silently resampling. Report full signed horizontal travel/velocity and low-versus-high-friction differences, without requiring a friction effect to call the diagnostic valid. Source predicts no tangential friction in this coupling path; native runs must establish the actual behavior.
 
-## Remaining original Issue scope
+## Acceptance scope and unverified behavior
 
-This first batch cannot close #77. Next stages require preregistered stretch/unload and bend references, at least three mesh/timestep levels, triangle-surface/crossing audit, self-contact controls, free-body momentum/reaction, and real actuator clamp/hold/release controls. Continuous close-ups and quality/cost plots accompany actual records. Unsupported features get bounded negative evidence, never a surrogate or relaxed criterion. Hardware material accuracy remains unqualified.
+The original Issue permits evidence-backed negative outcomes. Native particle readback establishes the tested contact scale; rest-geometry references and three mesh/timestep levels cover stretch/bend diagnostics. Self/table/gripper controls, free-body momentum exchange, actual actuator close/lift/hold/open cycles, independent scores, resets, costs, media and provenance appear below.
+
+Failed holding leaves successful hold-then-release unqualified: an open gripper and cloth on the floor are not successful release evidence. Native PBD reaction-force access, general triangle CCD, loaded unloading curves and hardware material calibration remain unestablished. Unforced relaxation here does not replace those measurements. Real-material and cross-engine benchmark work remains tracked by #6 and #3.
 
 ## Development result (not full qualification)
 
@@ -88,7 +90,7 @@ Read every initial/step actual q/qvel/actuator force plus command, particle posi
 
 Status: baseline completed and failed; follow-up below.
 
-### Actuator baseline failed; gravity-compensation follow-up pending
+### Actuator baseline failed
 
 Four baseline trajectories completed in281.248s and reset exactly. The coupled condition never met held-lift criteria: minimum cloth height4mm, hold-window center drift252.906mm, actual minimum lift68.216mm. The disabled condition also did not hold. Independent every-frame triangle-interior audit found0mm maximum pad intrusion with coupling and10mm with coupling disabled. These are failed grasp diagnostics, not a successful release demonstration: `released=true` in the frozen score means only the final open-jaw/floor endpoint was met, not that a previously held cloth was released.
 
@@ -114,11 +116,11 @@ One cloth entity contains two disconnected patches; this isolates the native par
 
 | Requirement | Evidence and status |
 |---|---|
-| Thickness/geometry |8mm particle readback; every-frame plane/self-surface and pad-triangle audits. General swept triangles remain unqualified. |
-| Stretch/bend |36-cell one-step reference/sensitivity checks pass. Constitutive magnitude, unloading and longer-time response remain unqualified. |
-| Self-contact |Matched rest-distance eligibility controls pass; no public PBD off toggle; connected folded cloth/CCD unqualified. |
+| Thickness/geometry |8mm particle readback; every-frame plane/self-surface and pad-triangle audits plus between-frame linear vertex checks. General swept triangles remain unqualified. |
+| Stretch/bend |36-cell one-step and repeated20ms checks completed; equal-time responses are timestep-sensitive. Constitutive magnitude, externally loaded unloading and long-time stability remain unqualified. |
+| Self-contact |Matched rest-distance eligibility controls pass; no public PBD off toggle; connected-fold saved-frame stress checks pass; general CCD remains unqualified. |
 | Two-way coupling |Exchange measured with2ms lag; frozen same-step momentum criterion fails. Native force accessor still unqualified. |
-| Actuator clamp/hold/release |Baseline and gravity-compensated fixtures both fail hold. Open/floor endpoint is not successful grasp-release evidence. |
+| Actuator clamp/hold/release |Baseline, gravity-compensated and preregistered±3mm held-out fixtures all fail hold. Open/floor endpoint is not successful grasp-release evidence. |
 | Reproducibility/media |Raw states, hashes, frozen code, offline scores and fixed-camera sampled replays provided; hardware calibration not claimed. |
 
 This is a staged delivery for Issue77; the full issue remains open. [Compensated raw](evidence/genesis-cloth/gripper-compensated-record.json.gz), [score](evidence/genesis-cloth/gripper-compensated-score.json), [triangle audit](evidence/genesis-cloth/gripper-compensated-geometry.json), [continuous replay](evidence/genesis-cloth/gripper-compensated-replay.gif).
@@ -142,3 +144,49 @@ The commands above are workload commands to place after the bounded runner's `--
 ```
 
 `python -m dexlab.genesis_cloth_replay RECORD.json.gz OUTPUT --prefix gripper` regenerates the fixed-camera replay from recorded states only.
+
+## Between-frame translating-pad audit
+
+[Independent linear sweep](evidence/genesis-cloth/pad-linear-sweep.json) examines all adjacent states, vertices and both pads in the original and gravity-compensated recordings. A segment/slab calculation detects entry even when both endpoints lie outside. It assumes linear vertex/pad-center interpolation and fixed pad orientation, with a declared 1e-12 m boundary inset. Analytic crossing, moving-pad, grazing, endpoint and invalid-state tests precede scoring.
+
+Coupled trajectories have zero intrusive vertex/pad/interval triples in both batches and repeats. Disabled coupling has 496 triples per baseline repeat and 489 per compensated repeat; none are invisible at both endpoints. Counts are not independent physical events. These results do not erase the previously measured triangle-interior penetration of 10 mm in negative controls. No new native simulation was run and original grasp scores remain unchanged. This adds a conditional between-observation vertex check, not triangle/edge CCD, cloth-thickness certification or proof of the engine's unobserved path.
+
+## Equal physical time: response is timestep-sensitive
+
+The follow-up retains the same 36-cell factorial but records every step to 20 ms, twice from reset (840 steps total). Official unchanged CPU FP64 execution completed in 102.617 s. First-step direction, finite/nondegenerate histories, center drift ≤1e-8 m, disabled-state and reset bounds passed; repeat differences were exactly zero. These checks validate the diagnostic controls, not a material model.
+
+At 12 mm diameter the final/initial bend-RMS ratios for dt 4/2/1 ms are 0.60135/0.28566/0.51246. At 8 mm they are 0.65589/0.57511/0.21641; at 6 mm, 0.61009/0.54323/0.40210. Thus the earlier near-identical single-step response does not imply time convergence. Undamped trajectories need not decay monotonically; diameter changes both discretization and contact envelope. Build and stepping costs are recorded separately, but observation overhead was **not separately timed**, despite the initial protocol's wording; total wall time cannot be relabeled observation time. [Raw histories](evidence/genesis-cloth/history-record.json.gz), [independent scores](evidence/genesis-cloth/history-score.json) and [per-cell build/step cost](evidence/genesis-cloth/history-cost.json) are packaged with hashes and frozen sources.
+
+![Equal-time strain and bend response](evidence/genesis-cloth/history-response.png)
+
+Reproduce with `python -m dexlab.genesis_cloth_response_probe NEW_OUTPUT --equal-time`, inside the same bounded environment described above, then `python -m dexlab.cloth_response_history NEW_OUTPUT/record.json`.
+
+## Held-out positions: no successful holding
+
+Before execution, freeze cloth y offsets -3 mm and +3 mm; neither was used for controller tuning. Each runs coupling enabled/disabled with two resets (eight trajectories total), using unchanged gravity compensation, material, solver, commands and thresholds. The actual initial native y bounds are independently checked against the declared offset. Execution completed in 551.652 s without resource-limit events.
+
+Both positions fail holding: actual minimum lift 79.988435 mm, minimum cloth height 4 mm, relative center drift 252.442620 mm. Both reset pairs are identical. Final open jaws and cloth on the plane remain an endpoint observation, not release from a successful hold. This small two-position evaluation does not establish a statistical robustness rate or prove that all controllers must fail. All eight trajectories, including negatives, are retained.
+
+[−3 mm raw](evidence/genesis-cloth/heldout-minus3mm-record.json.gz) · [+3 mm raw](evidence/genesis-cloth/heldout-plus3mm-record.json.gz) · [−3 mm score](evidence/genesis-cloth/heldout-minus3mm-score.json) · [+3 mm score](evidence/genesis-cloth/heldout-plus3mm-score.json).
+
+![Held-out minus 3 mm fixed-camera replay](evidence/genesis-cloth/heldout-minus3mm-replay.gif)
+
+Reproduce with `python -m dexlab.genesis_cloth_gripper_probe NEW_OUTPUT --gravity-compensation --cloth-y-offset -0.003` inside the bounded environment; use a separate output and `0.003` for the other position.
+
+![Synthetic response versus measured stepping cost](evidence/genesis-cloth/history-response-cost.png)
+
+The horizontal axis is mean native stepping time across two repeats on the same CPU profile, excluding build and observations. The vertical axis is residual/initial RMS at equal20ms, not real-material error. No statistical confidence interval or cross-engine accuracy/speed ranking is claimed.
+
+## Connected-fold stress
+
+A single native connected40mm patch starts flat or with its positive-x side rotated150°/170° around the y-directed crease. Remeshed triangles spanning the crease approximate that initial fold. All other cloth parameters remain unchanged; zero gravity/velocity, no pins or rigid bodies. Each configuration records20steps at2ms and two resets. Flat is a geometric negative, not a public self-collision-off control.
+
+Six trajectories completed in14.600s. Every saved frame passed the nonadjacent zero-thickness crossing/degeneracy check, reset differences were zero, and COM drift≤5.56e-16m. Eligible particle-pair gaps (distance minus8mm diameter) went from−5.796443 to+0.063908mm for150°, and−7.097091 to+0.000243mm for170°. Initial envelope overlap is deliberate; these values do not establish continuum thickness or a material law. General between-step triangle crossings and shared-vertex intersections remain outside this audit.
+
+[Raw states](evidence/genesis-cloth/fold-record.json.gz) · [scores](evidence/genesis-cloth/fold-score.json) · [playback provenance](evidence/genesis-cloth/fold-replay.json). All21 saved frames appear at50× slow motion, with fixed cameras and visible out-of-view counts.
+
+![Connected-fold gap](evidence/genesis-cloth/fold-gap.png)
+
+![Connected-fold replay](evidence/genesis-cloth/fold-replay.gif)
+
+Bounded workload: `python -m dexlab.cloth_fold_probe NEW_OUTPUT`; independent scoring: `python -m dexlab.cloth_fold NEW_OUTPUT/record.json`.

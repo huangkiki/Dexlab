@@ -256,6 +256,194 @@
     "self-frozen/test_genesis_cloth_self_score.py": {
       "bytes": 1401,
       "sha256": "a823025e564d1ddba9007a67592cbe4be3abddd947b5938ef1000a5e049ae161"
+    },
+    "pad-linear-sweep.json": {
+      "bytes": 4744,
+      "sha256": "702f70228437b177ef7d0f33a2c22c50e793e6f32a3048090226883e6830946c"
+    },
+    "history-cost.json": {
+      "bytes": 5217,
+      "sha256": "175bcfaa9ceaf473d963d82664dd87edaf3006229a4ed37b81d10b3cb60e58b3"
+    },
+    "history-record.json.gz": {
+      "bytes": 1027633,
+      "sha256": "83a36f30f66f234a9a36c2299b948de597ea34784ba50c1f9e5f1a7bcd9e112d"
+    },
+    "history-response.png": {
+      "bytes": 264393,
+      "sha256": "e363013640328590a6afdf1b3162b608d520d5a1595e4cc16591b25e74631cc5"
+    },
+    "history-official.json": {
+      "bytes": 29674,
+      "sha256": "041d71adbf6b6a1de880533b3c1386ecc30b95eb8d11aa38243e8d1a930206d9"
+    },
+    "history-score.json": {
+      "bytes": 219646,
+      "sha256": "e177ee37287e5daed026d97d7ffb108492982b398af6f30f941dd25265017686"
+    },
+    "history-frozen/genesis_cloth_response.py": {
+      "bytes": 6635,
+      "sha256": "c1ab777eb0b63371f48b0b464b35e553091e0995a6b32209c1afcf7daa70c651"
+    },
+    "history-frozen/cloth_response_history.py": {
+      "bytes": 4614,
+      "sha256": "9135fa884346bcba6b83ac64b0bc3a228bd02a8ae8879473f7a74bc321faeb45"
+    },
+    "history-frozen/genesis_cloth_probe.py": {
+      "bytes": 7597,
+      "sha256": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01"
+    },
+    "history-frozen/genesis_cloth_response_probe.py": {
+      "bytes": 7203,
+      "sha256": "9f99ea6890ba2ee34d11b8d1ddcb9e1569b4a6aeaf4078d7ebdf7c280e134c0b"
+    },
+    "history-frozen/hashes.json": {
+      "bytes": 666,
+      "sha256": "0bc3601fbd2a8a7bb6eafed31fbbeb980b4f57a7b23e5f37f544ac0cef735b19"
+    },
+    "history-frozen/test_genesis_cloth_response.py": {
+      "bytes": 1457,
+      "sha256": "7a958ccafe10dd94ba2f41f4b71f5c88ba9ec50ef92297d6423983d874c54c2e"
+    },
+    "history-frozen/test_cloth_response_history.py": {
+      "bytes": 2120,
+      "sha256": "a25aa6e07b63e6b5d7e3bf23c163076b02a2ce947f90e64d163073dfdf13fba8"
+    },
+    "heldout-plus3mm-geometry.json": {
+      "bytes": 3475,
+      "sha256": "b9c52bea6e15a3c410dad1fb8fcbdef7380c9328bf2c47fdc4deaa1bc0243fc3"
+    },
+    "heldout-minus3mm-record.json.gz": {
+      "bytes": 14032211,
+      "sha256": "5849663931c83bb4cd28dab37ebb7c0b4623d1cfe183b4d74aa17bf3df9191cf"
+    },
+    "heldout-plus3mm-replay.gif": {
+      "bytes": 2352962,
+      "sha256": "e07a765002db9656097069e3df226ccb549e0de06c6d6a3256641eb11977551d"
+    },
+    "heldout-plus3mm-score.json": {
+      "bytes": 2795,
+      "sha256": "9d4092845046ca9b51ba09cbebbc724327a4f2c2e9f568325fc0e9f507e865af"
+    },
+    "heldout-minus3mm-geometry.json": {
+      "bytes": 3443,
+      "sha256": "0a23d617c7ef50de73f758c0109541a5c30d1559ae5aa1f68edb0fe7276ea4b8"
+    },
+    "heldout-official.json": {
+      "bytes": 29674,
+      "sha256": "041d71adbf6b6a1de880533b3c1386ecc30b95eb8d11aa38243e8d1a930206d9"
+    },
+    "heldout-plus3mm-replay.json": {
+      "bytes": 1190,
+      "sha256": "f98fddf7038ba01235e66f2f46fe46a0329b14618a4155ebb81b4003bd2a67e1"
+    },
+    "heldout-minus3mm-replay.gif": {
+      "bytes": 2014261,
+      "sha256": "14fa1f203abcc121d4f9a0d0be89adc6642031dcd8136885d01b1e1a13c9aff4"
+    },
+    "heldout-minus3mm-replay.json": {
+      "bytes": 1190,
+      "sha256": "1f236465bcb2d4d94c2adaf53432cc18a144145320cca491c6fb225f920e56a2"
+    },
+    "heldout-minus3mm-score.json": {
+      "bytes": 2793,
+      "sha256": "02784001a7b6a7a3d20722513b6dacd85147e33308353fb3c38bfc36799a5002"
+    },
+    "heldout-plus3mm-record.json.gz": {
+      "bytes": 14031231,
+      "sha256": "09b88516d624a58d13852e08a554785a10869fe426167cfdf6e705f09473f153"
+    },
+    "heldout-plus3mm-hold.png": {
+      "bytes": 179294,
+      "sha256": "cc15ad9e8d7fc0464975469304a5107ffa8c2fb5892c1d3dae495a3ee9fbb008"
+    },
+    "heldout-minus3mm-hold.png": {
+      "bytes": 179254,
+      "sha256": "48e9bb7c3da9e119aec8517e97d44800fee6310d3b71374f735bdef28a86da24"
+    },
+    "heldout-frozen/genesis_cloth_gripper_score.py": {
+      "bytes": 6135,
+      "sha256": "081fc2331b800c75637d8b020eff23d0c5c5209eef81b7added6f5a33a4365f1"
+    },
+    "heldout-frozen/genesis_cloth_gripper_probe.py": {
+      "bytes": 8432,
+      "sha256": "bc9c149e46db5407b36154b49d68e1752fcd257690de5468ec22875762a79c8a"
+    },
+    "heldout-frozen/genesis_cloth_probe.py": {
+      "bytes": 7597,
+      "sha256": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01"
+    },
+    "heldout-frozen/genesis_pinch_probe.py": {
+      "bytes": 8036,
+      "sha256": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    },
+    "heldout-frozen/hashes.json": {
+      "bytes": 562,
+      "sha256": "c8c4958604aefb4ce44158cd2741ad3253df97b58f89d58f4a5a5bab5909fb8d"
+    },
+    "heldout-frozen/test_genesis_cloth_gripper_score.py": {
+      "bytes": 1855,
+      "sha256": "bfbebe76c1e8db695b99979fdb0c662a8bd8e33b3d936744d5fa7bfddc33f672"
+    },
+    "history-response-cost.png": {
+      "bytes": 91542,
+      "sha256": "81de181f17c5efc9e073141392658de798b3a064a2e61274e3137701bac8c6df"
+    },
+    "fold-record.json.gz": {
+      "bytes": 203332,
+      "sha256": "60e4a81d014d7c92c15f962ccf844f02d02979e3a4053f514dd584e20007d29d"
+    },
+    "fold-gap.png": {
+      "bytes": 52107,
+      "sha256": "0562d39156b0a270508388b7b4ccf4fa45fabac5ba1ae5df364c6811666f23e7"
+    },
+    "fold-replay.gif": {
+      "bytes": 725736,
+      "sha256": "98c2a47bfe4299d106dc164af38ad8b8c5d6360fc62eb736ce48e61795d2790f"
+    },
+    "fold-official.json": {
+      "bytes": 29674,
+      "sha256": "041d71adbf6b6a1de880533b3c1386ecc30b95eb8d11aa38243e8d1a930206d9"
+    },
+    "fold-final.png": {
+      "bytes": 141748,
+      "sha256": "078a48cc37da6f0aadbfc2fee5b9d56fc13be37551b5145f53a65e20eece0f2c"
+    },
+    "fold-score.json": {
+      "bytes": 8716,
+      "sha256": "2b498d4aa918d22c90ca74283d6adbe030cf678eb9a5b14b94976b59214ccf0f"
+    },
+    "fold-replay.json": {
+      "bytes": 327,
+      "sha256": "d10e179a6e8b5b16a3ac186808d11be953d4c19b7d311fb10d07486d0ef58531"
+    },
+    "fold-frozen/cloth_fold.py": {
+      "bytes": 6167,
+      "sha256": "4041bf4c3001a0f1c57ad473ed71b1f5728fd58437db38636d895a95d1ef9a61"
+    },
+    "fold-frozen/genesis_cloth_geometry.py": {
+      "bytes": 4745,
+      "sha256": "048da29290885ad6749861cd99133bac05aeea72105652d49c552f3b8928d9ff"
+    },
+    "fold-frozen/cloth_fold_probe.py": {
+      "bytes": 4909,
+      "sha256": "f3e253114dc29477c2824160481b18b86585d9092781f9142612aca6d691089f"
+    },
+    "fold-frozen/genesis_cloth_probe.py": {
+      "bytes": 7597,
+      "sha256": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01"
+    },
+    "fold-frozen/cloth_self_contact.py": {
+      "bytes": 4915,
+      "sha256": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e"
+    },
+    "fold-frozen/hashes.json": {
+      "bytes": 626,
+      "sha256": "2c21e651708d202b0ad4ce6947a2ec31d676b638f067df28de2893e517bf5b00"
+    },
+    "fold-frozen/test_cloth_fold.py": {
+      "bytes": 2302,
+      "sha256": "e973fade49a349bc52dd47801cd2c012d3644c2904712f4954064f479a64e63b"
     }
   },
   "plane": {
@@ -322,6 +510,56 @@
       "src/dexlab/genesis_cloth_self_score.py": "6afef301a906882619355db7dd05e3bb5b09ee0a093e2cd4de79aa601edc15ff",
       "tests/test_genesis_cloth_self_score.py": "a823025e564d1ddba9007a67592cbe4be3abddd947b5938ef1000a5e049ae161",
       "src/dexlab/genesis_cloth_probe.py": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    }
+  },
+  "history": {
+    "raw_sha256": "74e1af65bc6ad3867a6c42d5a8b876978442f356ddd6c267004b0593f07c5b39",
+    "raw_bytes": 12530431,
+    "score_passed": true,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_response_probe.py": "9f99ea6890ba2ee34d11b8d1ddcb9e1569b4a6aeaf4078d7ebdf7c280e134c0b",
+      "src/dexlab/genesis_cloth_response.py": "c1ab777eb0b63371f48b0b464b35e553091e0995a6b32209c1afcf7daa70c651",
+      "tests/test_genesis_cloth_response.py": "7a958ccafe10dd94ba2f41f4b71f5c88ba9ec50ef92297d6423983d874c54c2e",
+      "src/dexlab/genesis_cloth_probe.py": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01",
+      "src/dexlab/cloth_response_history.py": "9135fa884346bcba6b83ac64b0bc3a228bd02a8ae8879473f7a74bc321faeb45",
+      "tests/test_cloth_response_history.py": "a25aa6e07b63e6b5d7e3bf23c163076b02a2ce947f90e64d163073dfdf13fba8"
+    }
+  },
+  "heldout-minus3mm": {
+    "raw_sha256": "b1c3d79741557636facb2b708bbd794766d6b2c777b4cc9980f7c280d204484d",
+    "raw_bytes": 98506008,
+    "score_passed": false,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_gripper_probe.py": "bc9c149e46db5407b36154b49d68e1752fcd257690de5468ec22875762a79c8a",
+      "src/dexlab/genesis_cloth_gripper_score.py": "081fc2331b800c75637d8b020eff23d0c5c5209eef81b7added6f5a33a4365f1",
+      "tests/test_genesis_cloth_gripper_score.py": "bfbebe76c1e8db695b99979fdb0c662a8bd8e33b3d936744d5fa7bfddc33f672",
+      "src/dexlab/genesis_cloth_probe.py": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01",
+      "src/dexlab/genesis_pinch_probe.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    }
+  },
+  "heldout-plus3mm": {
+    "raw_sha256": "8d3e142f647be692b895453e95042c5a8bb143a3097b819f540b09469618b276",
+    "raw_bytes": 98451156,
+    "score_passed": false,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_gripper_probe.py": "bc9c149e46db5407b36154b49d68e1752fcd257690de5468ec22875762a79c8a",
+      "src/dexlab/genesis_cloth_gripper_score.py": "081fc2331b800c75637d8b020eff23d0c5c5209eef81b7added6f5a33a4365f1",
+      "tests/test_genesis_cloth_gripper_score.py": "bfbebe76c1e8db695b99979fdb0c662a8bd8e33b3d936744d5fa7bfddc33f672",
+      "src/dexlab/genesis_cloth_probe.py": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01",
+      "src/dexlab/genesis_pinch_probe.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    }
+  },
+  "fold": {
+    "raw_sha256": "f9decc34283747d67a272e766f2df9ae0591b566414f387bcda76dc239d43934",
+    "raw_bytes": 1394699,
+    "score_passed": true,
+    "source_frozen": {
+      "src/dexlab/cloth_fold_probe.py": "f3e253114dc29477c2824160481b18b86585d9092781f9142612aca6d691089f",
+      "src/dexlab/cloth_fold.py": "4041bf4c3001a0f1c57ad473ed71b1f5728fd58437db38636d895a95d1ef9a61",
+      "src/dexlab/genesis_cloth_probe.py": "2973db212c0f5b87dc0b08f387b3eb92c6a4687d9297e48381c4d3f31414fe01",
+      "src/dexlab/genesis_cloth_geometry.py": "048da29290885ad6749861cd99133bac05aeea72105652d49c552f3b8928d9ff",
+      "src/dexlab/cloth_self_contact.py": "f3db2860947a403296f8bb4b1562047de4665e554f005c71d4d0e686918ebb4e",
+      "tests/test_cloth_fold.py": "e973fade49a349bc52dd47801cd2c012d3644c2904712f4954064f479a64e63b"
     }
   }
 }

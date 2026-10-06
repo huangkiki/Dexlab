@@ -9,7 +9,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 | Contact and drives | [demos/contact-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/contact-benchmark/) | Sliding, loading/unloading and transients; synthetic response is not hardware calibration |
 | Basic cloth | [demos/cloth-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-benchmark/) | Stretch, drape, collision and falling folds; separate material/solver capabilities |
 | PhysX | [demos/physx-contact/](https://github.com/huangkiki/Dexlab/tree/main/demos/physx-contact/) | Native rigid bodies, SDFs, joints and surface cloth; one success does not establish held-out performance |
-| Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | Scoped rigid evidence in #42; [PBD cloth diagnostics](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md) retain failed momentum/grasp checks; full cloth qualification open |
+| Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | Scoped rigid evidence in #42; [PBD cloth diagnostics](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md) retain failed momentum/grasp checks; tested frictional grasp profile rejected; equal-time response, connected folds and two held-out offsets recorded |
 
 `src/dexlab/` contains shared task registration, scoring and recording. `scripts/` contains setup, rescoring, documentation and research tools. Share code only for real duplication or invariants; this is not a new general simulation framework.
 
