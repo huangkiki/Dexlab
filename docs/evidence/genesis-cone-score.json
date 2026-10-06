@@ -1,0 +1,126 @@
+{
+  "scope": "0.2s primitive diagnostic, not physical-accuracy certification",
+  "reference_assumptions": "Flat translating Coulomb block; rotation violates the reference",
+  "results": {
+    "pyramidal-no_write": {
+      "first_velocity_m_s": [
+        -8.837073647229842e-20,
+        1.4886673396694058e-19,
+        -2.4167962916662696e-14
+      ],
+      "first_contact_force_N": [
+        4.85722573273506e-17,
+        -1.8041124150158794e-16,
+        1.226250000339004
+      ],
+      "initial_vertical_speed_m_s": 4.2041441089358543e-14,
+      "max_abs_vertical_speed_m_s": 8.269846486349402e-14,
+      "max_conditional_vx_error_m_s": 2.647174359145562e-19
+    },
+    "pyramidal-zero_all": {
+      "first_velocity_m_s": [
+        2.6934410635540364e-20,
+        1.8651967050233445e-20,
+        3.673890436591303e-14
+      ],
+      "first_contact_force_N": [
+        0.0,
+        0.0,
+        1.2262500000009187
+      ],
+      "initial_vertical_speed_m_s": 4.2041441089358543e-14,
+      "max_abs_vertical_speed_m_s": 8.300397260729025e-14,
+      "max_conditional_vx_error_m_s": 2.87441782289786e-19
+    },
+    "pyramidal-kick_all": {
+      "first_velocity_m_s": [
+        0.37715934266964807,
+        2.541096197398393e-16,
+        0.1966313146607037
+      ],
+      "first_contact_force_N": [
+        -3.0710164332587873,
+        0.0,
+        6.1420328665175745
+      ],
+      "initial_vertical_speed_m_s": 4.2041441089358543e-14,
+      "max_abs_vertical_speed_m_s": 0.1966313146607037,
+      "max_conditional_vx_error_m_s": 0.09831565733035191
+    },
+    "pyramidal-kick_x_only": {
+      "first_velocity_m_s": [
+        0.37715934266966555,
+        2.540945164678319e-16,
+        0.19663131466071096
+      ],
+      "first_contact_force_N": [
+        -3.071016433258363,
+        0.0,
+        6.142032866516726
+      ],
+      "initial_vertical_speed_m_s": 4.2041441089358543e-14,
+      "max_abs_vertical_speed_m_s": 0.19663131466071096,
+      "max_conditional_vx_error_m_s": 0.09831565733033443
+    },
+    "elliptic-no_write": {
+      "first_velocity_m_s": [
+        0.0,
+        0.0,
+        2.0058345390495878e-13
+      ],
+      "first_contact_force_N": [
+        0.0,
+        0.0,
+        1.2262500000097294
+      ],
+      "initial_vertical_speed_m_s": -1.8857443247757759e-13,
+      "max_abs_vertical_speed_m_s": 5.179021129101546e-13,
+      "max_conditional_vx_error_m_s": 0.0
+    },
+    "elliptic-zero_all": {
+      "first_velocity_m_s": [
+        0.0,
+        0.0,
+        -7.615881168179703e-14
+      ],
+      "first_contact_force_N": [
+        0.0,
+        0.0,
+        1.226250000250064
+      ],
+      "initial_vertical_speed_m_s": -1.8857443247757759e-13,
+      "max_abs_vertical_speed_m_s": 2.5535706358380825e-13,
+      "max_conditional_vx_error_m_s": 0.0
+    },
+    "elliptic-kick_all": {
+      "first_velocity_m_s": [
+        0.4754749999949987,
+        0.0,
+        1.9601924551550163e-13
+      ],
+      "first_contact_force_N": [
+        -0.6131250000024504,
+        0.0,
+        1.2262500000049006
+      ],
+      "initial_vertical_speed_m_s": -1.8857443247757759e-13,
+      "max_abs_vertical_speed_m_s": 3.7194077618162757e-07,
+      "max_conditional_vx_error_m_s": 0.0008789955255124188
+    },
+    "elliptic-kick_x_only": {
+      "first_velocity_m_s": [
+        0.4754749999914228,
+        0.0,
+        2.0058358174157595e-13
+      ],
+      "first_contact_force_N": [
+        -0.6131250000048646,
+        0.0,
+        1.226250000009729
+      ],
+      "initial_vertical_speed_m_s": -1.8857443247757759e-13,
+      "max_abs_vertical_speed_m_s": 3.719407760265875e-07,
+      "max_conditional_vx_error_m_s": 0.000878995525425124
+    }
+  }
+}

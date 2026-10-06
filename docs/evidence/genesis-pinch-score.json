@@ -1,0 +1,90 @@
+{
+  "passed": true,
+  "results": {
+    "pinch-0": {
+      "passed": true,
+      "checks": {
+        "declared_import": true,
+        "native_penetration_1mm": true,
+        "reference_table_penetration_1mm": true,
+        "force_ledger": true,
+        "momentum_balance_5percent_weight": true,
+        "released": true,
+        "hold_or_negative": true
+      },
+      "metrics": {
+        "native_max_penetration_m": 0.000664849119904564,
+        "reference_table_max_penetration_m": 0.000664849119904564,
+        "maximum_force_ledger_error_N": 0.0,
+        "maximum_momentum_residual_weight_ratio": 2.6052971944291032e-09,
+        "minimum_hold_center_z_m": 0.0837011018485747,
+        "maximum_release_center_z_m": 0.019998906973818325
+      }
+    },
+    "pinch-1": {
+      "passed": true,
+      "checks": {
+        "declared_import": true,
+        "native_penetration_1mm": true,
+        "reference_table_penetration_1mm": true,
+        "force_ledger": true,
+        "momentum_balance_5percent_weight": true,
+        "released": true,
+        "hold_or_negative": true
+      },
+      "metrics": {
+        "native_max_penetration_m": 0.000664849119904564,
+        "reference_table_max_penetration_m": 0.000664849119904564,
+        "maximum_force_ledger_error_N": 0.0,
+        "maximum_momentum_residual_weight_ratio": 2.6052971944291032e-09,
+        "minimum_hold_center_z_m": 0.0837011018485747,
+        "maximum_release_center_z_m": 0.019998906973818325
+      }
+    },
+    "open_negative-0": {
+      "passed": true,
+      "checks": {
+        "declared_import": true,
+        "native_penetration_1mm": true,
+        "reference_table_penetration_1mm": true,
+        "force_ledger": true,
+        "momentum_balance_5percent_weight": true,
+        "released": true,
+        "hold_or_negative": true
+      },
+      "metrics": {
+        "native_max_penetration_m": 3.9784150574380395e-06,
+        "reference_table_max_penetration_m": 3.9784150574380395e-06,
+        "maximum_force_ledger_error_N": 0.0,
+        "maximum_momentum_residual_weight_ratio": 2.987417466173537e-10,
+        "minimum_hold_center_z_m": 0.01999890697381819,
+        "maximum_release_center_z_m": 0.019998906973818325
+      }
+    },
+    "open_negative-1": {
+      "passed": true,
+      "checks": {
+        "declared_import": true,
+        "native_penetration_1mm": true,
+        "reference_table_penetration_1mm": true,
+        "force_ledger": true,
+        "momentum_balance_5percent_weight": true,
+        "released": true,
+        "hold_or_negative": true
+      },
+      "metrics": {
+        "native_max_penetration_m": 3.9784150574380395e-06,
+        "reference_table_max_penetration_m": 3.9784150574380395e-06,
+        "maximum_force_ledger_error_N": 0.0,
+        "maximum_momentum_residual_weight_ratio": 2.987417466173537e-10,
+        "minimum_hold_center_z_m": 0.01999890697381819,
+        "maximum_release_center_z_m": 0.019998906973818325
+      }
+    }
+  },
+  "exact_reset_replay": {
+    "pinch": true,
+    "open_negative": true
+  },
+  "scope": "Development fixture only; no convergence, hardware, GPU or SDF qualification"
+}

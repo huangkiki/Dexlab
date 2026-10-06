@@ -1,5 +1,7 @@
 <div align="center">
 
+Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整证据及未验证范围见[能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
+
 # DexLab
 
 **机器人接触动力学：从模型与参数，到可复核的实验结论。**
@@ -12,6 +14,28 @@
 
 DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研究碰撞几何、接触律、求解器及驱动对**穿透、滑移、抖动与计算成本**的影响。每项结论连接原始记录、独立评分、参数来源与失败案例。
 
+
+
+**Genesis 接触诊断：** 水平速度激励后的竖直瞬态随摩擦锥配置明显变化；原失败保留，尚未完成抓取资格。[协议与限制](demos/contact-benchmark/GENESIS_CONE.zh-CN.md)
+
+
+**先核验模型，再解释改进：** Genesis 默认导入的附加惯量改变了关节响应；显式零附加惯量后，限位参数对照仍保留成功与失败。[完整参数、时序曲线与判据](demos/contact-benchmark/GENESIS_JOINT.zh-CN.md)。
+
+![关节限位诊断](docs/evidence/genesis-joint-limits.png)
+
+**Genesis 夹持释放：** 基础方块工况加入两次重置及张指负对照；候选接触配置在三个开发步长下满足原 1 mm 穿透标准，保留落桌失败。[协议、结果与限制](demos/contact-benchmark/GENESIS_PINCH.zh-CN.md)。
+
+![Genesis pinch and release](docs/evidence/genesis-pinch.png)
+
+**Genesis 误差／成本：** 三个步长均通过工程判据，但峰值不支持收敛结论；公开步进、观测、写盘及评分分项。[协议与能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
+
+![Genesis quality and cost](docs/evidence/genesis-cost.png)
+
+**连续近景：** 以下为 Genesis 实测状态回放，MuJoCo 仅显示、不积分动力学；完整保留夹持、抬升、保持、松开与落桌。30 fps 动图不能替代逐物理步穿透评分。
+
+![Genesis measured-pose replay](demos/contact-benchmark/media/genesis-pinch.gif)
+
+**Genesis GPU 准入：** 单场景重置、双场景隔离和容量正负对照通过；公开同步计时分项，不据此宣称抓取通过或加速。[协议、耗时与限制](demos/contact-benchmark/GENESIS_GPU.zh-CN.md)。
 
 ## 实验依据与当前答案
 
@@ -53,7 +77,7 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 | 材料与接触如何影响结果？ | 拉伸、下垂、滑动、加载及瞬态的成功和失败均保留 | 材料和驱动尚未完成跨引擎实测校准 |
 | 能否说明真机表现？ | 尚无正式标定集与独立实测测试集 | 实测误差与 sim-to-real 能力未知 |
 
-下面的图表均为**原固定版本的历史证据**。新批次采用官方最新稳定版并重新验收，见 [版本准入 #41](https://github.com/huangkiki/Dexlab/issues/41)；[Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) 已纳入计划，尚无运行结果。
+下面的图表均为**原固定版本的历史证据**。新批次采用官方最新稳定版并重新验收，见 [版本准入 #41](https://github.com/huangkiki/Dexlab/issues/41)；[Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) 已有基础接触与关节诊断，完整资格尚未完成。
 
 标准分为实现一致性、数值收敛性与实测物理有效性；抓取通过不能替代三者。[研究标准](docs/research-focus.zh-CN.md#实验用什么标准判断)
 

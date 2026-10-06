@@ -1,5 +1,7 @@
 <div align="center">
 
+Genesis joint, GPU and cost reports now distinguish published evidence from remaining unverified capabilities; see the [capability audit](demos/contact-benchmark/GENESIS_COST.md).
+
 # DexLab
 
 **Robot contact dynamics: from models and parameters to verifiable experimental findings.**
@@ -12,6 +14,28 @@
 
 DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact experiments. We study how collision geometry, contact laws, solvers and drives affect **penetration, slip, jitter and computational cost**, connecting every finding to raw records, independent scoring, parameter provenance and failures.
 
+
+
+**Genesis contact diagnostic:** the vertical transient after a horizontal velocity kick depends on friction-cone configuration. The original failure is retained; grasp qualification remains incomplete. [Protocol and limits](demos/contact-benchmark/GENESIS_CONE.md)
+
+
+**Audit the model before interpreting improvement:** imported Genesis armature changes joint response. Explicit zero-armature controls retain both passing and failing limit configurations. [Parameters, traces and criteria](demos/contact-benchmark/GENESIS_JOINT.md).
+
+![Joint-limit diagnostic](docs/evidence/genesis-joint-limits.png)
+
+**Genesis pinch/release:** the primitive fixture adds reset repeats and open-pad negatives. Candidate contact settings meet the original 1 mm penetration criterion at three development timesteps; failed impacts remain documented. [Protocol, results and limits](demos/contact-benchmark/GENESIS_PINCH.md).
+
+![Genesis pinch and release](docs/evidence/genesis-pinch.png)
+
+**Genesis quality/cost:** three development timesteps pass the engineering criterion without establishing convergence; stepping, observation, writing and scoring costs are separated. [Protocol and capability audit](demos/contact-benchmark/GENESIS_COST.md).
+
+![Genesis quality and cost](docs/evidence/genesis-cost.png)
+
+**Continuous close-up:** recorded Genesis states, displayed by MuJoCo without physics integration. Includes closing, lifting, holding, opening and landing. The 30 fps replay does not replace per-step penetration scoring.
+
+![Genesis measured-pose replay](demos/contact-benchmark/media/genesis-pinch.gif)
+
+**Genesis GPU admission:** reset, two-environment isolation and capacity controls passed; synchronized stage costs are reported without claiming grasp qualification or speedup. [Protocol, costs and limits](demos/contact-benchmark/GENESIS_GPU.md).
 
 ## Reference standards and current answers
 
@@ -53,7 +77,7 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
-Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) is planned, without runtime results yet.
+Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) has primitive contact and joint diagnostics; full qualification remains incomplete.
 
 Separate implementation consistency, numerical convergence and measured physical validity; a grasp pass substitutes for none of them. [Research standards](docs/research-focus.md#what-standard-judges-an-experiment)
 

@@ -1,0 +1,14 @@
+{
+  "inputs": {
+    "baseline": {
+      "file": "issue42-pinch-v2/pinch.json",
+      "sha256": "0c5832b1b95ca51a1549dcdff4b49ab7240485a5fbadaacbd943f830606f6f9d"
+    },
+    "candidate": {
+      "file": "issue42-pinch-public-v1/pinch-0.json",
+      "sha256": "a6b61a2cd6bab5c5d17e54a7d25b7945f6dc9280dad9bd7f47f9e0cb56b843e9"
+    }
+  },
+  "generator": "scripts/plot_genesis_pinch.py",
+  "scope": "all recorded physics samples; no smoothing; development baseline and candidate differ in timestep and geom contact parameters"
+}
