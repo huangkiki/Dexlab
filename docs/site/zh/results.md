@@ -1,5 +1,9 @@
 # 实验结果与失败
 
+## Genesis PBD 薄布：保留失败结果
+
+平面支撑与静止距离自接触对照通过限定检查。自由刚板试验未通过同时刻动量判据（反作用滞后一物理步）；重力补偿将夹爪实际抬升恢复到 79.988 mm，但布料保持仍失败。这些开发诊断不代表布料抓取、材料精度或连续碰撞检测已通过验收。[协议、曲线、连续状态回放与原始证据](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)。Issue #77 保持开放。
+
 ## Newton XPBD：有界接触正负对照
 
 CPU 球–平面配置通过预登记工程判据：最大穿透 0.000849 mm、保持期力误差 0.051353%。重建重复记录完全一致；禁碰撞负对照失去支撑并符合离散自由落体参考。这是合成基本几何检查，不代表抓梗、SDF 或真机精度。[完整曲线、阈值、原始数据与限制](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md)。

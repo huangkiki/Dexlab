@@ -12,6 +12,11 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 </div>
 
+**Genesis thin-cloth diagnostics:** plane support passes, but friction0.01→0.5 leaves trajectories unchanged. Free-plate reaction lags2 ms and fails same-step momentum acceptance. The36-cell one-step stretch/bend checks pass; this is not material calibration or full cloth-grasp qualification. [Raw data, criteria and limits](docs/genesis-cloth.md)
+
+![Genesis cloth diagnostics and failure](docs/evidence/genesis-cloth/diagnostics.png)
+
+
 **Newton XPBD primitive contact:** official core CPU configuration reaches 0.000849 mm maximum intrusion and 0.051353% hold-force error; the collision-disabled negative loses support and matches free fall. All three traces and criteria are public; this does not qualify grasp, SDF or hardware accuracy. [Protocol, results and reproduction](docs/newton-contact.md)
 
 ![Newton XPBD controls](docs/evidence/newton-xpbd/traces.png)

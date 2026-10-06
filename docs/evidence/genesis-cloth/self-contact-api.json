@@ -1,0 +1,65 @@
+{
+  "version": "1.4.3",
+  "tested": [
+    {
+      "class": "PBDOptions",
+      "field": "enable_self_collision",
+      "accepted": false,
+      "error_type": "GenesisException",
+      "error": "Validation error for <gs.options.PBDOptions>: Unrecognized attribute 'enable_self_collision'."
+    },
+    {
+      "class": "PBDOptions",
+      "field": "enable_collision",
+      "accepted": false,
+      "error_type": "GenesisException",
+      "error": "Validation error for <gs.options.PBDOptions>: Unrecognized attribute 'enable_collision'."
+    },
+    {
+      "class": "PBD.Cloth",
+      "field": "enable_self_collision",
+      "accepted": false,
+      "error_type": "GenesisException",
+      "error": "Validation error for <gs.materials.PBD.Cloth>: Unrecognized attribute 'enable_self_collision'."
+    },
+    {
+      "class": "PBD.Cloth",
+      "field": "enable_collision",
+      "accepted": false,
+      "error_type": "GenesisException",
+      "error": "Validation error for <gs.materials.PBD.Cloth>: Unrecognized attribute 'enable_collision'."
+    }
+  ],
+  "pbd_option_fields": [
+    "dt",
+    "gravity",
+    "hash_grid_cell_size",
+    "hash_grid_res",
+    "lower_bound",
+    "max_bending_solver_iterations",
+    "max_density_solver_iterations",
+    "max_stretch_solver_iterations",
+    "max_viscosity_solver_iterations",
+    "max_volume_solver_iterations",
+    "particle_size",
+    "upper_bound"
+  ],
+  "cloth_material_fields": [
+    "air_resistance",
+    "bending_compliance",
+    "bending_relaxation",
+    "kinetic_friction",
+    "rho",
+    "static_friction",
+    "stretch_compliance",
+    "stretch_relaxation",
+    "use_visual_raycasting"
+  ],
+  "rigid_option_has_enable_self_collision": true,
+  "source_sha256": {
+    "options/solvers.py": "207f12b6ca35f5c9ce4347dc2a56210c0573d724124b2433b84768054bd574a4",
+    "engine/solvers/pbd_solver.py": "1cca66812186fd77f29ebdeb3adf72df01192bb14ea7f521da87c269b1a9b3f9",
+    "engine/materials/PBD/cloth.py": "bb2d7b7e53962d288cadd70c40357bb6c6a8a9b04249d7134021315d5de8d291"
+  },
+  "scope": "Public PBD options/material toggle audit only; rigid self-collision switch is a different solver. No native kernel mutation or material substitution."
+}

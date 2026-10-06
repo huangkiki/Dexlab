@@ -1,0 +1,655 @@
+{
+  "valid": true,
+  "passed": true,
+  "cases": [
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.04426252148907035,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.02146504575880999,
+      "center_shift_m": 1.0420223910621854e-20,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "after": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "after": {
+        "strain_rms": 0.0120894254995686,
+        "bend_rms_rad": 0.10943553500925998
+      },
+      "reduction": 0.015408378816681612,
+      "center_shift_m": 3.2609989236990437e-23,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.04426252337626399,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.02146504387161635,
+      "center_shift_m": 5.780100247932767e-21,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "after": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "after": {
+        "strain_rms": 0.012089425502596774,
+        "bend_rms_rad": 0.10943553506745306
+      },
+      "reduction": 0.015408378758488536,
+      "center_shift_m": 3.260998909943282e-23,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.06572756724788034,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.04426253092503504,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0214650363228453,
+      "center_shift_m": 3.4680601487596606e-20,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "after": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.012,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 25,
+      "before": {
+        "strain_rms": 0.012975312065523272,
+        "bend_rms_rad": 0.1248439138259416
+      },
+      "after": {
+        "strain_rms": 0.012089425514709292,
+        "bend_rms_rad": 0.10943553530022236
+      },
+      "reduction": 0.015408378525719232,
+      "center_shift_m": 3.330694435392688e-18,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.04699811967284851,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.01593076885309192,
+      "center_shift_m": 4.2161277599639274e-19,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "after": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "after": {
+        "strain_rms": 0.01145538468212363,
+        "bend_rms_rad": 0.08201285839925586
+      },
+      "reduction": 0.009514228826978097,
+      "center_shift_m": 1.4613702930271545e-18,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.04699812059983971,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.015930767926100722,
+      "center_shift_m": 2.9985301557382966e-19,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "after": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "after": {
+        "strain_rms": 0.011455384680069488,
+        "bend_rms_rad": 0.08201285840119588
+      },
+      "reduction": 0.009514228825038079,
+      "center_shift_m": 1.4646084339249953e-18,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.06292888852594043,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.04699812430780331,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.01593076421813712,
+      "center_shift_m": 1.210621706817292e-19,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "after": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.008,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 38,
+      "before": {
+        "strain_rms": 0.011592368708135823,
+        "bend_rms_rad": 0.09152708722623396
+      },
+      "after": {
+        "strain_rms": 0.011455384671852939,
+        "bend_rms_rad": 0.0820128584089574
+      },
+      "reduction": 0.009514228817276552,
+      "center_shift_m": 1.4622926930143437e-18,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.004,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.05475000798930356,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.010578501129872075,
+      "center_shift_m": 1.8864081318198842e-19,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "after": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.004,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "after": {
+        "strain_rms": 0.01242319313022084,
+        "bend_rms_rad": 0.07333135755185688
+      },
+      "reduction": 0.010838391978965883,
+      "center_shift_m": 1.0344986786709074e-21,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.002,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.05475000826775516,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.010578500851420473,
+      "center_shift_m": 1.1141602402786328e-19,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "after": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.002,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "after": {
+        "strain_rms": 0.012423193130341823,
+        "bend_rms_rad": 0.0733313575550152
+      },
+      "reduction": 0.010838391975807563,
+      "center_shift_m": 2.397714297420057e-18,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "enabled": false,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.001,
+      "mode": "stretch",
+      "enabled": true,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.06532850911917563,
+        "bend_rms_rad": 0.0
+      },
+      "after": {
+        "strain_rms": 0.0547500093815614,
+        "bend_rms_rad": 0.0
+      },
+      "reduction": 0.010578499737614232,
+      "center_shift_m": 2.5338360976427346e-19,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "enabled": false,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "after": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "reduction": 0.0,
+      "center_shift_m": 0.0,
+      "passed": true
+    },
+    {
+      "diameter_m": 0.006,
+      "dt_s": 0.001,
+      "mode": "bend",
+      "enabled": true,
+      "particles": 81,
+      "before": {
+        "strain_rms": 0.012892826995972358,
+        "bend_rms_rad": 0.08416974953082276
+      },
+      "after": {
+        "strain_rms": 0.012423193130826122,
+        "bend_rms_rad": 0.07333135756764592
+      },
+      "reduction": 0.010838391963176847,
+      "center_shift_m": 2.3976929144047664e-18,
+      "passed": true
+    }
+  ],
+  "limits": "One-step constraint direction/sensitivity; not constitutive magnitude, unloading, continuum convergence or calibrated cloth."
+}

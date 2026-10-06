@@ -1,0 +1,327 @@
+{
+  "scope": "Development diagnostics, not full cloth or hardware qualification",
+  "files": {
+    "coupling-frozen/genesis_cloth_coupling_probe.py": {
+      "bytes": 6759,
+      "sha256": "d2c202328163158dd752ac18cb531e5172f19ce8aae1e922e944a1e6ce4819a0"
+    },
+    "coupling-frozen/genesis_cloth_coupling_score.py": {
+      "bytes": 5170,
+      "sha256": "82fb2a9b7e13c8f138d3554850c59c70d7316ac4f871073a8fbd3ac43b8ed52b"
+    },
+    "coupling-frozen/hashes.json": {
+      "bytes": 351,
+      "sha256": "ee2cbcc6369af651e2aef908f9786c42ed6127123ef3b6974ddc4986545c04cc"
+    },
+    "coupling-frozen/test_genesis_cloth_coupling_score.py": {
+      "bytes": 2091,
+      "sha256": "dd8045fc46a198fb5c7ce60a04094836fcefe16d136f1e6ecdd86a40360df054"
+    },
+    "coupling-geometry.json": {
+      "bytes": 1417,
+      "sha256": "c75517954e9b21fa44f6336fd7b24f792a1b4c55fd8fe3800062759b7fd8ce2a"
+    },
+    "coupling-official.json": {
+      "bytes": 29675,
+      "sha256": "4c8fb5755cba01755c73f362181d136730f115852cd84a715cbdcb65d8c6f5a6"
+    },
+    "coupling-record.json.gz": {
+      "bytes": 146335,
+      "sha256": "a072964589ca0b63bba37b736f46f4ba2909d5dae15d6df6d56237f91f96cd5c"
+    },
+    "coupling-score.json": {
+      "bytes": 2056,
+      "sha256": "7783dceef61b0606850808778d8c1aa8b78a86b557cbba24dc4a910e8bb02b86"
+    },
+    "diagnostics.png": {
+      "bytes": 175956,
+      "sha256": "956f2fd3ccb466ca18172265c304551424e3cb668ce924e65cb398bfd5be978a"
+    },
+    "plane-frozen/genesis_cloth_probe.py": {
+      "bytes": 6379,
+      "sha256": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    },
+    "plane-frozen/genesis_cloth_score.py": {
+      "bytes": 6284,
+      "sha256": "88e8771b286f1f09d8e5df4b71c0a39711b4567322dea274c3816d2bfc060e84"
+    },
+    "plane-frozen/hashes.json": {
+      "bytes": 324,
+      "sha256": "8341327f9c06e07f45fee0b16b6297471cda4da8c8e3a8b5f06a2f812f24c9cd"
+    },
+    "plane-frozen/test_genesis_cloth_score.py": {
+      "bytes": 3252,
+      "sha256": "075328eaa4a80f86e077863aa86067831bb5350d647824a848fa19642a1d419d"
+    },
+    "plane-geometry.json": {
+      "bytes": 4469,
+      "sha256": "f932de46711599a44100add4ac41c2e14f63a49a59984834554511c4a23c7b08"
+    },
+    "plane-official.json": {
+      "bytes": 29675,
+      "sha256": "4c8fb5755cba01755c73f362181d136730f115852cd84a715cbdcb65d8c6f5a6"
+    },
+    "plane-record.json.gz": {
+      "bytes": 342477,
+      "sha256": "6da9b6942162ec6a13371eccb68c1e079ec38fb63fc342b8cda83b1f5ff79c10"
+    },
+    "plane-score.json": {
+      "bytes": 3366,
+      "sha256": "159410628b7d2484ab88f20f6ec3b3988d598153c7db7afda87fa436513b10ca"
+    },
+    "response-frozen/genesis_cloth_probe.py": {
+      "bytes": 6379,
+      "sha256": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    },
+    "response-frozen/genesis_cloth_response.py": {
+      "bytes": 5619,
+      "sha256": "52b13cbf43f844d1d99278d89fd02da30d2caab9616ce806135551255fc7f977"
+    },
+    "response-frozen/genesis_cloth_response_probe.py": {
+      "bytes": 3923,
+      "sha256": "498c6d22bfb8b8bcfc9f7b1120d8c4e1a7cff4ddd5aecce3962e71e267414bfd"
+    },
+    "response-frozen/hashes.json": {
+      "bytes": 446,
+      "sha256": "12364c3b5d50a05347a665c28f5a5e476adb34d510af52fba56e847832521c44"
+    },
+    "response-frozen/test_genesis_cloth_response.py": {
+      "bytes": 1267,
+      "sha256": "fbe2a81550bcea5d057957fd87edb8577448607b8a60dbd7535de10d5d2c1f10"
+    },
+    "response-geometry.json": {
+      "bytes": 13431,
+      "sha256": "fc55ea916d646e552e8a4fa82e8f053e019466cf91a0a712a58953eb2f1779f7"
+    },
+    "response-official.json": {
+      "bytes": 29675,
+      "sha256": "4c8fb5755cba01755c73f362181d136730f115852cd84a715cbdcb65d8c6f5a6"
+    },
+    "response-prephysics-failure.json": {
+      "bytes": 553,
+      "sha256": "1b548319194d167adf68e7243fbf879843b62fea33a07805c7d51246052f56ee"
+    },
+    "response-record.json.gz": {
+      "bytes": 54036,
+      "sha256": "25a19e157e4df7f50dc4e3cec7bd527866778ba749d4e768a476346818c82638"
+    },
+    "response-score.json": {
+      "bytes": 15828,
+      "sha256": "ed5454f6be7598810d72a3e80d55671a335ee4757ce0da7badf7d05eb799229a"
+    },
+    "self-contact-api.json": {
+      "bytes": 2189,
+      "sha256": "8503b13b8ef8f74ad7ef862bbe821689c6be4760a4fd580771a9cdf24d01f1d2"
+    },
+    "gripper-frozen/genesis_cloth_gripper_probe.py": {
+      "bytes": 5737,
+      "sha256": "7776358682b1504b91169f4da182ef02194cf92f5906e1e753ac076ec83a5778"
+    },
+    "gripper-frozen/genesis_cloth_gripper_score.py": {
+      "bytes": 4417,
+      "sha256": "d34c1514e55ea9a86490427520031e91106d3e6d87c7c49009bf7ae235f53366"
+    },
+    "gripper-frozen/genesis_cloth_probe.py": {
+      "bytes": 6379,
+      "sha256": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    },
+    "gripper-frozen/genesis_pinch_probe.py": {
+      "bytes": 8036,
+      "sha256": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    },
+    "gripper-frozen/hashes.json": {
+      "bytes": 562,
+      "sha256": "cecaffac65a1b36c8f1b811491f53c0fa09434b39b7c992a582c367fe284c4ef"
+    },
+    "gripper-frozen/test_genesis_cloth_gripper_score.py": {
+      "bytes": 1535,
+      "sha256": "ae34923f09727b782d8db756dfe05514fb94d4c90b4b5b0131a76ea203128585"
+    },
+    "gripper-geometry.json": {
+      "bytes": 4503,
+      "sha256": "e6ef60f35c44fd808dacc45a220f9176db7891826dae321fdcd00e3c6093ecca"
+    },
+    "gripper-hold.png": {
+      "bytes": 179021,
+      "sha256": "750a06252c9d4b280a0f944c29fed804a4d3197ff9e9f86addb6f0cd40a047dd"
+    },
+    "gripper-official.json": {
+      "bytes": 29674,
+      "sha256": "041d71adbf6b6a1de880533b3c1386ecc30b95eb8d11aa38243e8d1a930206d9"
+    },
+    "gripper-record.json.gz": {
+      "bytes": 14140868,
+      "sha256": "6ec9a9e1067bd5ca826c8f493c0e7707182d4182adfa96dd461e2f4f798a9084"
+    },
+    "gripper-replay.gif": {
+      "bytes": 2358528,
+      "sha256": "4a09aeecec5e7992c9b3687533a84290161ae76a91e7e20f2b8b811a7882df65"
+    },
+    "gripper-replay.json": {
+      "bytes": 1190,
+      "sha256": "ed4d2299375ed048a27a843ff3068109db807d447f99fd195e43280dd65e030e"
+    },
+    "gripper-score.json": {
+      "bytes": 2791,
+      "sha256": "01c65a4ae0a98a4a06d21d07c79d96f4cddc6161135e77a56d2fa1d7e284ea7e"
+    },
+    "gripper-compensated-frozen/genesis_cloth_gripper_probe.py": {
+      "bytes": 6196,
+      "sha256": "8c44f199f47ca434cda5380217d285312397f70616eeee66f1e56d2a0678ca2b"
+    },
+    "gripper-compensated-frozen/genesis_cloth_gripper_score.py": {
+      "bytes": 4417,
+      "sha256": "d34c1514e55ea9a86490427520031e91106d3e6d87c7c49009bf7ae235f53366"
+    },
+    "gripper-compensated-frozen/genesis_cloth_probe.py": {
+      "bytes": 6379,
+      "sha256": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    },
+    "gripper-compensated-frozen/genesis_pinch_probe.py": {
+      "bytes": 8036,
+      "sha256": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    },
+    "gripper-compensated-frozen/hashes.json": {
+      "bytes": 562,
+      "sha256": "d0fd7c5b7dac065d65337b452f34e70830cfd8710c3704c55cda236b9f949b8e"
+    },
+    "gripper-compensated-frozen/test_genesis_cloth_gripper_score.py": {
+      "bytes": 1535,
+      "sha256": "ae34923f09727b782d8db756dfe05514fb94d4c90b4b5b0131a76ea203128585"
+    },
+    "gripper-compensated-geometry.json": {
+      "bytes": 4503,
+      "sha256": "1328d17b87676e442005519e2d20a5e2d86fb6b2bc327a514e8e9f1ccccbdc66"
+    },
+    "gripper-compensated-hold.png": {
+      "bytes": 179454,
+      "sha256": "8fa8bcd5a7f9ca0b52d4dbb518838c804f4924c28c02bd6532995e97a3a15813"
+    },
+    "gripper-compensated-official.json": {
+      "bytes": 29674,
+      "sha256": "041d71adbf6b6a1de880533b3c1386ecc30b95eb8d11aa38243e8d1a930206d9"
+    },
+    "gripper-compensated-record.json.gz": {
+      "bytes": 14039563,
+      "sha256": "731476e1c6658dd4d9388bdc5e7daa92b04d897727ea0d7a02968251a6eb9334"
+    },
+    "gripper-compensated-replay.gif": {
+      "bytes": 2366080,
+      "sha256": "f5dff8fad8641c897f4a03ecf426daec477f37cb54953c16be527df2d35bd7a3"
+    },
+    "gripper-compensated-replay.json": {
+      "bytes": 1190,
+      "sha256": "f3559af466de7af49654f80b063822469f30beb0de5a50956f50bba6038c49b1"
+    },
+    "gripper-compensated-score.json": {
+      "bytes": 2791,
+      "sha256": "d5835bb07ef1c94f24c3ea801bc978392d9e3f133fedb1448757addb08081a89"
+    },
+    "self-official.json": {
+      "bytes": 29674,
+      "sha256": "041d71adbf6b6a1de880533b3c1386ecc30b95eb8d11aa38243e8d1a930206d9"
+    },
+    "self-distance.png": {
+      "bytes": 65400,
+      "sha256": "f484c1b257bfe415f637cd7c9248406cf44e2eea02142567d97d17bf57227f92"
+    },
+    "self-record.json.gz": {
+      "bytes": 17427,
+      "sha256": "071922f26bb20aeeea8f1984b82782fab7fa4048e759c240d714da05e083ab8b"
+    },
+    "self-geometry.json": {
+      "bytes": 1425,
+      "sha256": "19ac0794c2a21eff4913d8c050ad17a24110cab490a22135dfaf36e7c3c300fb"
+    },
+    "self-score.json": {
+      "bytes": 1749,
+      "sha256": "3e387a4887dc13913ceb24848db2159d627096a7d785f239bc2840eead14a21a"
+    },
+    "self-frozen/genesis_cloth_self_probe.py": {
+      "bytes": 4459,
+      "sha256": "376a5d70deda5fd951a72312bb6e386b941a7686f55f7914d5635d3ae7aeabe6"
+    },
+    "self-frozen/genesis_cloth_probe.py": {
+      "bytes": 6379,
+      "sha256": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    },
+    "self-frozen/hashes.json": {
+      "bytes": 446,
+      "sha256": "cf2396922f300304f0efec284e38145504ce09c526c8b05c34e614c76f4aca4c"
+    },
+    "self-frozen/genesis_cloth_self_score.py": {
+      "bytes": 6856,
+      "sha256": "6afef301a906882619355db7dd05e3bb5b09ee0a093e2cd4de79aa601edc15ff"
+    },
+    "self-frozen/test_genesis_cloth_self_score.py": {
+      "bytes": 1401,
+      "sha256": "a823025e564d1ddba9007a67592cbe4be3abddd947b5938ef1000a5e049ae161"
+    }
+  },
+  "plane": {
+    "raw_sha256": "32ce9543fb0ca56e0326f1ada0c2954ba1d6b81b15e68bcb25fd81f96b3cf34a",
+    "raw_bytes": 9699386,
+    "score_passed": true,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_probe.py": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2",
+      "src/dexlab/genesis_cloth_score.py": "88e8771b286f1f09d8e5df4b71c0a39711b4567322dea274c3816d2bfc060e84",
+      "tests/test_genesis_cloth_score.py": "075328eaa4a80f86e077863aa86067831bb5350d647824a848fa19642a1d419d"
+    }
+  },
+  "coupling": {
+    "raw_sha256": "f98f1cb3b8dd99891c75aa9942a4d9316f8c5dabf5fa9346f75af7f36d9a04df",
+    "raw_bytes": 6630535,
+    "score_passed": false,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_coupling_probe.py": "d2c202328163158dd752ac18cb531e5172f19ce8aae1e922e944a1e6ce4819a0",
+      "src/dexlab/genesis_cloth_coupling_score.py": "82fb2a9b7e13c8f138d3554850c59c70d7316ac4f871073a8fbd3ac43b8ed52b",
+      "tests/test_genesis_cloth_coupling_score.py": "dd8045fc46a198fb5c7ce60a04094836fcefe16d136f1e6ecdd86a40360df054"
+    }
+  },
+  "response": {
+    "raw_sha256": "ab7654eea577c848b18d7a3da5a949620ad2563032f51f7d2bf83d79e50fddc1",
+    "raw_bytes": 1019814,
+    "score_passed": true,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_response_probe.py": "498c6d22bfb8b8bcfc9f7b1120d8c4e1a7cff4ddd5aecce3962e71e267414bfd",
+      "src/dexlab/genesis_cloth_response.py": "52b13cbf43f844d1d99278d89fd02da30d2caab9616ce806135551255fc7f977",
+      "tests/test_genesis_cloth_response.py": "fbe2a81550bcea5d057957fd87edb8577448607b8a60dbd7535de10d5d2c1f10",
+      "src/dexlab/genesis_cloth_probe.py": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    }
+  },
+  "gripper": {
+    "raw_sha256": "3b746e88d9f0e894ff63ceb00ad8f87e487fc2fc2ff76ee163ddf913196807de",
+    "raw_bytes": 98705075,
+    "score_passed": false,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_gripper_probe.py": "7776358682b1504b91169f4da182ef02194cf92f5906e1e753ac076ec83a5778",
+      "src/dexlab/genesis_cloth_gripper_score.py": "d34c1514e55ea9a86490427520031e91106d3e6d87c7c49009bf7ae235f53366",
+      "tests/test_genesis_cloth_gripper_score.py": "ae34923f09727b782d8db756dfe05514fb94d4c90b4b5b0131a76ea203128585",
+      "src/dexlab/genesis_cloth_probe.py": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2",
+      "src/dexlab/genesis_pinch_probe.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    }
+  },
+  "gripper-compensated": {
+    "raw_sha256": "156420a3c03ea029c66bf5781d6d8dd36394b4071980e69ae898c142ac3c2d93",
+    "raw_bytes": 98489788,
+    "score_passed": false,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_gripper_probe.py": "8c44f199f47ca434cda5380217d285312397f70616eeee66f1e56d2a0678ca2b",
+      "src/dexlab/genesis_cloth_gripper_score.py": "d34c1514e55ea9a86490427520031e91106d3e6d87c7c49009bf7ae235f53366",
+      "tests/test_genesis_cloth_gripper_score.py": "ae34923f09727b782d8db756dfe05514fb94d4c90b4b5b0131a76ea203128585",
+      "src/dexlab/genesis_cloth_probe.py": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2",
+      "src/dexlab/genesis_pinch_probe.py": "793b9a4224386b07984ae34ddf4aa2dff76082027806207969ca784949d4cfd5"
+    }
+  },
+  "self": {
+    "raw_sha256": "3b69cd252e23029e018a9f9887a666c70c0d7c3dd70d766fb933d1910314e9bf",
+    "raw_bytes": 888290,
+    "score_passed": true,
+    "source_frozen": {
+      "src/dexlab/genesis_cloth_self_probe.py": "376a5d70deda5fd951a72312bb6e386b941a7686f55f7914d5635d3ae7aeabe6",
+      "src/dexlab/genesis_cloth_self_score.py": "6afef301a906882619355db7dd05e3bb5b09ee0a093e2cd4de79aa601edc15ff",
+      "tests/test_genesis_cloth_self_score.py": "a823025e564d1ddba9007a67592cbe4be3abddd947b5938ef1000a5e049ae161",
+      "src/dexlab/genesis_cloth_probe.py": "22f9604b64d043455fd28eb4f0028f0cbdbf0af02fd41c2c7b84ca95f8ac9bc2"
+    }
+  }
+}

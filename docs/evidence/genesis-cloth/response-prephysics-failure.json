@@ -1,0 +1,15 @@
+{
+  "completed": false,
+  "cases": [
+    {
+      "diameter": 0.012,
+      "dt": 0.004,
+      "mode": "stretch",
+      "enabled": false
+    }
+  ],
+  "version": "1.4.3",
+  "runner_sha256": "c341a8d6a40a3f6b536772bb7d1d61cfe2e672d17f28f3b4dc7503fd03ee3951",
+  "error": "GenesisException: * Validation error for <gs.options.PBDOptions>:\n* Invalid attribute 'max_stretch_solver_iterations': input should be greater than 0. Got 0.\n* Invalid attribute 'max_bending_solver_iterations': input should be greater than 0. Got 0.",
+  "wall_s": 3.567029497004114
+}
