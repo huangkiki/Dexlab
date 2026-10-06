@@ -21,6 +21,10 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 
 ![关节限位诊断](docs/evidence/genesis-joint-limits.png)
 
+**Genesis 夹持释放：** 基础方块工况加入两次重置及张指负对照；候选接触配置在三个开发步长下满足原 1 mm 穿透标准，保留落桌失败。[协议、结果与限制](demos/contact-benchmark/GENESIS_PINCH.zh-CN.md)。
+
+![Genesis pinch and release](docs/evidence/genesis-pinch.png)
+
 ## 实验依据与当前答案
 
 **目前没有证据证明哪套引擎更符合真实抓取。** 我们先检验声明模型的实现和数值误差，再用实测数据判断物理有效性。抓取成功率仅作配置回归。
@@ -61,7 +65,7 @@ DexLab 基于 **UniLab** 组织刚体抓取、布料和基础接触实验，研�
 | 材料与接触如何影响结果？ | 拉伸、下垂、滑动、加载及瞬态的成功和失败均保留 | 材料和驱动尚未完成跨引擎实测校准 |
 | 能否说明真机表现？ | 尚无正式标定集与独立实测测试集 | 实测误差与 sim-to-real 能力未知 |
 
-下面的图表均为**原固定版本的历史证据**。新批次采用官方最新稳定版并重新验收，见 [版本准入 #41](https://github.com/huangkiki/Dexlab/issues/41)；[Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) 已纳入计划，尚无运行结果。
+下面的图表均为**原固定版本的历史证据**。新批次采用官方最新稳定版并重新验收，见 [版本准入 #41](https://github.com/huangkiki/Dexlab/issues/41)；[Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) 已有基础接触与关节诊断，完整资格尚未完成。
 
 标准分为实现一致性、数值收敛性与实测物理有效性；抓取通过不能替代三者。[研究标准](docs/research-focus.zh-CN.md#实验用什么标准判断)
 

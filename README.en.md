@@ -21,6 +21,10 @@ DexLab uses **UniLab** to organize rigid grasping, cloth and basic contact exper
 
 ![Joint-limit diagnostic](docs/evidence/genesis-joint-limits.png)
 
+**Genesis pinch/release:** the primitive fixture adds reset repeats and open-pad negatives. Candidate contact settings meet the original 1 mm penetration criterion at three development timesteps; failed impacts remain documented. [Protocol, results and limits](demos/contact-benchmark/GENESIS_PINCH.md).
+
+![Genesis pinch and release](docs/evidence/genesis-pinch.png)
+
 ## Reference standards and current answers
 
 **We have no evidence that either engine better matches real grasping.** First test the declared model and numerical error; measured data are needed for physical validity. Grasp success is configuration regression only.
@@ -61,7 +65,7 @@ Three frozen nominal contact profiles completed30 episodes over10 preregistered 
 | How do materials and contacts affect outcomes? | Retained stretch, drape, sliding, loading and transient successes/failures | Cross-engine measured material/drive calibration is incomplete |
 | Does this establish hardware performance? | No formal calibration and independent measured test set | Measured error and sim-to-real capability are unknown |
 
-Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) is planned, without runtime results yet.
+Plots below are **historical evidence under their original pinned versions**. New batches require latest-stable qualification [#41](https://github.com/huangkiki/Dexlab/issues/41). [Genesis #42](https://github.com/huangkiki/Dexlab/issues/42) has primitive contact and joint diagnostics; full qualification remains incomplete.
 
 Separate implementation consistency, numerical convergence and measured physical validity; a grasp pass substitutes for none of them. [Research standards](docs/research-focus.md#what-standard-judges-an-experiment)
 
