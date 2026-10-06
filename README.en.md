@@ -222,3 +222,5 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 **Contact-onset contrast:** 24 fixed settings + 2 repeats pass the engineering checks, while the cone effect changes direction across settings. Passing a task check does not establish material accuracy. [Figures, complete metrics and limits](demos/contact-benchmark/CONE_PROTOCOL.md).
 
 **Unloading observation audit:** point-level rescoring of the original six damping cases found no tension hidden by the aggregate; zero damping still fails the full transient target. [Point-level diagnosis and limits](demos/contact-benchmark/DAMPING_ABLATION.md#point-level-unloading-audit).
+
+**Acceptance scope:** Contact diagnosis has controlled repairs and supported negative results; common dynamic material and hardware calibration remain incomplete. [Evidence and retained requirements](demos/contact-benchmark/CONCLUSIONS.md#acceptance-decision-and-remaining-work).
