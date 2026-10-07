@@ -23,9 +23,10 @@ def model_xml(protocol, case):
 <inertial pos="0 0 0" mass="{mass}" diaginertia="{inertia} {inertia} {inertia}"/>
 <geom name="sphere{i}" type="sphere" size="{radius}"/></body>''')
     d = protocol['impedance']
+    stiffness = case.get('stiffness_s2', protocol['stiffness_s2'])
     return f'''<mujoco model="elastic-impact"><option timestep="{case['timestep']}"
  gravity="0 0 0" integrator="Euler" solver="Newton" iterations="100" tolerance="1e-12"/>
-<default><geom condim="1" friction="0 0 0" solref="-{protocol['stiffness_s2']} 0"
+<default><geom condim="1" friction="0 0 0" solref="-{stiffness} 0"
  solimp="{d} {d} 0.001 0.5 2" margin="0" gap="0"/></default>
 <worldbody>{''.join(bodies)}</worldbody></mujoco>'''
 

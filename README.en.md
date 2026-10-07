@@ -263,4 +263,6 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 
 **Acceptance scope:** Contact diagnosis has controlled repairs and supported negative results; common dynamic material and hardware calibration remain incomplete. [Evidence and retained requirements](demos/contact-benchmark/CONCLUSIONS.md#acceptance-decision-and-remaining-work).
 
+[Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](docs/impact-stiffness-results.md)
+
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)

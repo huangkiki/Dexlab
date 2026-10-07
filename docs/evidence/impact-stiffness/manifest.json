@@ -1,0 +1,305 @@
+{
+  "version": "3.15.0",
+  "radius_m": 0.05,
+  "initial_x_m": [
+    -0.06,
+    0.06
+  ],
+  "duration_s": 0.2,
+  "score_window_s": 0.02,
+  "stiffness_s2": 10000,
+  "impedance": 0.9,
+  "limits": {
+    "velocity_error_m_s": 0.01,
+    "relative_energy_error": 0.01,
+    "momentum_error_kg_m_s": 1e-09,
+    "transverse_speed_m_s": 1e-09,
+    "spin_speed_rad_s": 1e-09
+  },
+  "cases": [
+    {
+      "id": "stiffness-01",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-02",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-03",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-04",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-05",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-06",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-07",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-08",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-09",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 100000.0
+    },
+    {
+      "id": "stiffness-10",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-11",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-12",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-13",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-14",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-15",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-16",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-17",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0
+    },
+    {
+      "id": "stiffness-18",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0
+    }
+  ],
+  "overlap_budget_m": 0.001,
+  "baseline_manifest_sha256": "b33717fa89c4801fda1615eaa8c0dc033deef41a57e5acb4f6f3637f37518c4f",
+  "baseline_archive_sha256": "56fb67cf6ffa5cf930ae2dbe777504d2fe28c3f41d2e68e00f9490dd239a5b3c",
+  "baseline_bindings": [
+    {
+      "id": "impact-01",
+      "trace_sha256": "d78d5ae5318fc84be859f62c6db5ace1e35243bbf62b8b9e92dd9a39e599b7bf",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+    },
+    {
+      "id": "impact-02",
+      "trace_sha256": "b2bd65c67de6e906c7e8e7ef6c97705ba0be49cff8fc5c6bb5525c1ac9031624",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+    },
+    {
+      "id": "impact-03",
+      "trace_sha256": "e4b75017c0aab668c4fa2cf174ca66b3b44c611bdab5abff9d3be6caf04ddadf",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+    },
+    {
+      "id": "impact-04",
+      "trace_sha256": "5bf4647e926f91486cbf8a9dcde7d92ba3359b5d4bbb2243d0cdba0237bbd966",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+    },
+    {
+      "id": "impact-05",
+      "trace_sha256": "3c1a4986cb81c76f1a5fe23c6efbd5bb0f3aca0cec5e616d45f9738dcb6763f3",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+    },
+    {
+      "id": "impact-06",
+      "trace_sha256": "b8a739b505ab9b198089af8387e7188cc15a8d41143f4a31a07584b521e8a9b8",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+    },
+    {
+      "id": "impact-07",
+      "trace_sha256": "dc2bb6b3242d309658a484b8112664ba94545bb71768b13311f4887d331ab390",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+    },
+    {
+      "id": "impact-08",
+      "trace_sha256": "34f67f72efd2fd77f6f34cc4e9600629485057a68a80f9bd27e95c1553b6c64e",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+    },
+    {
+      "id": "impact-09",
+      "trace_sha256": "177aff8781d6187746fbc58a93cb89aa58cac6804ccebabb90181da6bc068e33",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+    }
+  ]
+}
