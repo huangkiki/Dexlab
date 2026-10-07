@@ -153,3 +153,5 @@ CPU 球–平面配置通过预登记工程判据：最大穿透 0.000849 mm、�
 24 个固定配置＋2 次精确重复全部通过工程检查；摩擦锥变化的影响方向并不统一。通过验收不等于材料准确。[完整图表、协议与指标](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/CONE_PROTOCOL.zh-CN.md)。
 
 原六组阻尼消融归档已增加逐接触点诊断，保留原评分。没有发现总力掩盖的局部拉力；这不是新的物理实验或卸载修复。[逐点报告](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/DAMPING_ABLATION.zh-CN.md#逐接触点卸载诊断)。
+
+[UniSim 准入边界：保留原生 FP64，成对等价验证仍未完成](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-reuse-boundary.zh-CN.md)

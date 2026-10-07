@@ -1,5 +1,6 @@
 <div align="center">
 
+
 手动验收关闭的任务通过[交付证据表](docs/issue-deliveries.json)绑定 PR、合并提交和验收记录；队列只读取已合入主线的记录，并核验当前关闭状态和提交祖先关系。布料资格仍须独立实验，修复依赖识别不等于布料通过。
 
 Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整证据及未验证范围见[能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
@@ -13,6 +14,8 @@ Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整�
 [中文文档](docs/site/zh/index.md) · [English](README.en.md) · [实验代码](demos/) · [结果与数据](docs/evidence/README.zh-CN.md) · [研究任务](https://github.com/huangkiki/Dexlab/issues)
 
 </div>
+
+当前标准方块任务继续使用原生 FP64 路径：[UniSim 准入边界与未完成范围](docs/unisim-reuse-boundary.zh-CN.md)。适配器版本与精度不匹配已有实测，尚无成对物理等价或删减收益证据。
 
 **合成触觉观测：** 32/64网格不改变原生物理轨迹；重置和脱离清零通过。首批“有深度但零接触力”、第二批回位失败均保留，第三批限定检查通过。[三批结果、公式与成本](docs/synthetic-tactile.zh-CN.md)
 

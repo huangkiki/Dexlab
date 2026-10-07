@@ -1,5 +1,6 @@
 <div align="center">
 
+
 Manually accepted deliveries use a [reviewed ledger](docs/issue-deliveries.json) binding PR, merge commit and acceptance audit. The queue reads only merged main records and verifies live closure and ancestry. Restoring a cloth dependency does not qualify cloth physics.
 
 Genesis joint, GPU and cost reports now distinguish published evidence from remaining unverified capabilities; see the [capability audit](demos/contact-benchmark/GENESIS_COST.md).
@@ -13,6 +14,8 @@ Current focus: measurable standard-object grasping. Across [16 force-limit cases
 [Documentation](docs/site/en/index.md) · [简体中文](README.md) · [Experiments](demos/) · [Results and data](docs/evidence/README.md) · [Research issues](https://github.com/huangkiki/Dexlab/issues)
 
 </div>
+
+The standard-block task retains its native FP64 route: [UniSim admission boundary and remaining work](docs/unisim-reuse-boundary.md). Version/precision mismatch is measured; paired physics equivalence and code-reduction benefits remain unverified.
 
 **Synthetic tactile observation:** 32/64 grids leave native trajectories unchanged; reset and detached-zero checks pass. The first batch has depth but zero contact force, the second fails endpoint matching, and the third passes the bounded checks. [All outcomes, formulas and costs](docs/synthetic-tactile.md)
 
