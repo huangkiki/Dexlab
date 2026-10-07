@@ -1,5 +1,7 @@
 # 实验结果与失败
 
+标准方块[16例力限额实验](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md)完成：0.2/0.4 N保持失败，0.8/10 N保持释放通过，±2 mm偏移保持此结果；数值有效性与任务成败分别报告，不代表真机精度。
+
 ## Genesis PBD 薄布：保留失败结果
 
 当前官方 PBD/刚体摩擦夹持配置不准入：同一步动量误差 3.2e-5 kg·m/s 超过 3.3e-7 判据；夹爪实际抬升 79.988 mm 后布料仍落在 4 mm，两个预登记偏移位置也失败。36 格等时长响应显示明显步长敏感性；连通折叠逐帧检查通过，不能替代连续碰撞或材料精度验收。[完整协议、全部结果与原始记录](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)。

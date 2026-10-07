@@ -6,7 +6,9 @@ Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整�
 
 # DexLab
 
-**机器人接触动力学：从模型与参数，到可复核的实验结论。**
+**研究机器人如何在可信的仿真中完成接触密集操作。**
+
+当前方向：更容易测量与验证的标准物体抓取。[16例夹持力限额实验](docs/force-limit-results.zh-CN.md)中，0.2/0.4 N保持失败、0.8/10 N保持释放通过；±2 mm偏移下结果一致。全部失败与原始记录保留，不代表真机精度。
 
 [中文文档](docs/site/zh/index.md) · [English](README.en.md) · [实验代码](demos/) · [结果与数据](docs/evidence/README.zh-CN.md) · [研究任务](https://github.com/huangkiki/Dexlab/issues)
 

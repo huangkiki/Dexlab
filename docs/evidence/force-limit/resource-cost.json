@@ -1,0 +1,879 @@
+{
+  "scope": "Experiment preparation through packaging/rendering; includes failed setup/qualification/render attempts. Delivery gates and human/agent labor costs are not in service sum; elapsed span includes gaps.",
+  "cpu_model": "Intel(R) Core(TM) i9-14900K",
+  "logical_cpus": 32,
+  "physical_memory_bytes": 67171790848,
+  "experiment": "CPU FP64 single-world, two-core equivalent quota; no remote results pooled",
+  "service_wall_sum_s": 1216.444382138783,
+  "elapsed_span_s": 1896.0389926433563,
+  "stages": [
+    {
+      "stage": "issue90-admission-v1",
+      "state": "failed",
+      "returncode": 1,
+      "service_wall_s": 3.006052037992049,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 83558400,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384282.53906
+    },
+    {
+      "stage": "issue90-admission-v2",
+      "state": "failed",
+      "returncode": 1,
+      "service_wall_s": 24.576252026017755,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 919744512,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384311.6359165
+    },
+    {
+      "stage": "issue90-admission-v3",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 45.837132977030706,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 869236736,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384371.3217628
+    },
+    {
+      "stage": "issue90-case01-launch-v2",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 51.47261001402512,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 1392320512,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384481.8469348
+    },
+    {
+      "stage": "issue90-case01",
+      "state": "failed",
+      "returncode": 2,
+      "service_wall_s": 0.363143710012082,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 14438400,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384472.9410205
+    },
+    {
+      "stage": "issue90-case02",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.456892421003431,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 874967040,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384603.707536
+    },
+    {
+      "stage": "issue90-case02-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6250968559761532,
+      "profile": "archive",
+      "memory_peak_bytes": 128495616,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384615.2318935
+    },
+    {
+      "stage": "issue90-case03",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.177186240965966,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 881729536,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384615.9068158
+    },
+    {
+      "stage": "issue90-case03-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6060978979803622,
+      "profile": "archive",
+      "memory_peak_bytes": 137461760,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384627.124546
+    },
+    {
+      "stage": "issue90-case04",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.151653242006432,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 786341888,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384627.81144
+    },
+    {
+      "stage": "issue90-case04-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6243769620195962,
+      "profile": "archive",
+      "memory_peak_bytes": 137125888,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384639.0258625
+    },
+    {
+      "stage": "issue90-case05",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.11992042401107,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 792420352,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384639.6880114
+    },
+    {
+      "stage": "issue90-case05-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6077804829692468,
+      "profile": "archive",
+      "memory_peak_bytes": 137330688,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384650.8586042
+    },
+    {
+      "stage": "issue90-case06",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.629519511014223,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 792408064,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384651.5242503
+    },
+    {
+      "stage": "issue90-case06-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6242316009593196,
+      "profile": "archive",
+      "memory_peak_bytes": 95375360,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384662.1959822
+    },
+    {
+      "stage": "issue90-case07",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.747384081943892,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 765947904,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384694.2441597
+    },
+    {
+      "stage": "issue90-case07-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6081158299930394,
+      "profile": "archive",
+      "memory_peak_bytes": 128827392,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384705.0579257
+    },
+    {
+      "stage": "issue90-case08",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.839502259972505,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 769327104,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384705.6937044
+    },
+    {
+      "stage": "issue90-case08-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6143078840104863,
+      "profile": "archive",
+      "memory_peak_bytes": 130355200,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384716.6029353
+    },
+    {
+      "stage": "issue90-case09",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.003855431976262,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 778182656,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384717.2690504
+    },
+    {
+      "stage": "issue90-case09-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6204714889754541,
+      "profile": "archive",
+      "memory_peak_bytes": 139476992,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384728.3254657
+    },
+    {
+      "stage": "issue90-case10",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.202355753979646,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 796651520,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384728.991153
+    },
+    {
+      "stage": "issue90-case10-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6256187299732119,
+      "profile": "archive",
+      "memory_peak_bytes": 140095488,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384740.2387283
+    },
+    {
+      "stage": "issue90-case11",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.613687203032896,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 689573888,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384740.9245286
+    },
+    {
+      "stage": "issue90-case11-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6192298000096343,
+      "profile": "archive",
+      "memory_peak_bytes": 98484224,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384751.577533
+    },
+    {
+      "stage": "issue90-case12",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.866302536975127,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 861528064,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384752.2500756
+    },
+    {
+      "stage": "issue90-case12-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6320569009985775,
+      "profile": "archive",
+      "memory_peak_bytes": 129208320,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384763.1729162
+    },
+    {
+      "stage": "issue90-case13",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.906343655020464,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 755515392,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384763.8440056
+    },
+    {
+      "stage": "issue90-case13-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.634918085008394,
+      "profile": "archive",
+      "memory_peak_bytes": 130363392,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384774.8050747
+    },
+    {
+      "stage": "issue90-case14",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.19433787005255,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 797351936,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384775.4878578
+    },
+    {
+      "stage": "issue90-case14-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6062440529931337,
+      "profile": "archive",
+      "memory_peak_bytes": 139902976,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384786.725968
+    },
+    {
+      "stage": "issue90-case15",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 11.167484266974498,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 887599104,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384787.3949676
+    },
+    {
+      "stage": "issue90-case15-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6057455150294118,
+      "profile": "archive",
+      "memory_peak_bytes": 140345344,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384798.5942771
+    },
+    {
+      "stage": "issue90-case16",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 10.613169096992351,
+      "profile": "experiment-24g",
+      "memory_peak_bytes": 689266688,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "25769803776",
+        "memory.high": "24696061952",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384799.2741687
+    },
+    {
+      "stage": "issue90-case16-score",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6351475410046987,
+      "profile": "archive",
+      "memory_peak_bytes": 99069952,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384809.9280148
+    },
+    {
+      "stage": "issue90-dev-review",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.9099022069713101,
+      "profile": "archive",
+      "memory_peak_bytes": 222138368,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384685.9853396
+    },
+    {
+      "stage": "issue90-genesis-setup-v1",
+      "state": "failed",
+      "returncode": 1,
+      "service_wall_s": 750.2722588200122,
+      "profile": "experiment",
+      "memory_peak_bytes": 837410816,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791383217.7015972
+    },
+    {
+      "stage": "issue90-genesis-setup-v2",
+      "state": "failed",
+      "returncode": 1,
+      "service_wall_s": 90.56814863398904,
+      "profile": "experiment",
+      "memory_peak_bytes": null,
+      "memory_events": null,
+      "pids_events": null,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384052.734682
+    },
+    {
+      "stage": "issue90-genesis-setup-v3",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 18.098829401948024,
+      "profile": "experiment",
+      "memory_peak_bytes": 168132608,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384162.0932958
+    },
+    {
+      "stage": "issue90-package-v1",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 7.207102729007602,
+      "profile": "archive",
+      "memory_peak_bytes": 252866560,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384821.0756788
+    },
+    {
+      "stage": "issue90-render-v1",
+      "state": "failed",
+      "returncode": 1,
+      "service_wall_s": 2.4663450740044937,
+      "profile": "archive",
+      "memory_peak_bytes": 201760768,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 1",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384886.0797455
+    },
+    {
+      "stage": "issue90-render-v2",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 7.593232201994397,
+      "profile": "archive",
+      "memory_peak_bytes": 492109824,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384965.2599003
+    },
+    {
+      "stage": "issue90-score01",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.6412221469799988,
+      "profile": "archive",
+      "memory_peak_bytes": 128061440,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "8589934592",
+        "memory.high": "6442450944",
+        "memory.swap.max": "0",
+        "cpu.max": "100000 100000",
+        "pids.max": "32",
+        "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384572.9439316
+    },
+    {
+      "stage": "issue90-setup-v1",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 9.352786855015438,
+      "profile": "experiment",
+      "memory_peak_bytes": 352931840,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791383076.8141398
+    },
+    {
+      "stage": "issue90-stable-v1",
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 30.10032967996085,
+      "profile": "experiment",
+      "memory_peak_bytes": 35622912,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "pids_events": "max 0",
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "200000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "started_at_unix_s": 1791384424.0539987
+    }
+  ],
+  "failures": {
+    "genesis-setup-v1": "av download timeout",
+    "genesis-setup-v2": "Intentional stop to propagate data cache and timeout inside service",
+    "admission-v1": "Host Python3.10 helper lacks hashlib.file_digest",
+    "admission-v2": "Missing explicit MuJoCo3.15 profile; old3.11 profile correctly rejected",
+    "case01": "Invalid guard kind; no native episode started",
+    "render-v1": "FFmpeg auto threads exceeded resource availability; retained failed output, then limited encoder/filter threads to one"
+  },
+  "postphysics_display_fix": {
+    "reason": "Bound encoder/filter threads without changing resource caps or physical trajectories",
+    "renderer_sha256": "8f5cfd94def82a9c5eecb84c4ab877b075114baa3a56179a44c6bc6001f8990e"
+  },
+  "plot_source_sha256": "8c77a79ed29de26cb8e36cb2ca966994ae9b6e2aa59c0499c36b1e6fa11e8bad"
+}
