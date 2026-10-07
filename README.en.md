@@ -7,9 +7,11 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 # DexLab
 
+**Analytical evaluation:** [18 incline-friction cases](docs/incline-friction-results.md) expose contact-parameter sensitivity and failed sliding assumptions; all cases and limitations are retained without waiting for new hardware data.
+
 **Research question: Which measurable factors determine standard-object grasping outcomes, and why trust the simulated explanation?**
 
-**Holiday findings:** [Conclusions, evidence boundaries and next steps](docs/holiday-report.md). Current scope is the stage report and release closeout.
+**Holiday findings:** [Conclusions, evidence boundaries and next steps](docs/holiday-report.md).
 
 
 Current focus: measurable standard-object grasping. Across [16 force-limit cases](docs/force-limit-results.md), 0.2/0.4 N fail retention and 0.8/10 N hold and release, including ±2 mm offsets. All failures and raw records are retained; no hardware-fidelity claim.
