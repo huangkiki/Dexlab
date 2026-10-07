@@ -6,6 +6,8 @@ html_theme.sidebar_secondary.remove: true
 
 # DexLab
 
+[Holiday findings and next steps](https://github.com/huangkiki/Dexlab/blob/main/docs/holiday-report.md)
+
 <div class="lab-subtitle">A lab for robot contact dynamics</div>
 
 From a single grasp to reproducible physical evidence. Studying how geometry, contact, solvers and drives shape robot manipulation.

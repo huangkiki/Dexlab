@@ -6,6 +6,8 @@ html_theme.sidebar_secondary.remove: true
 
 # DexLab
 
+[假期阶段报告：结论与下一步](https://github.com/huangkiki/Dexlab/blob/main/docs/holiday-report.zh-CN.md)
+
 <div class="lab-subtitle">机器人接触动力学实验室</div>
 
 从一次抓取，到可复核的物理证据。研究碰撞几何、接触、求解器与驱动如何影响机器人操作。
