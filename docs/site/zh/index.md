@@ -112,3 +112,5 @@ html_theme.sidebar_secondary.remove: true
 Benchmark <benchmark>
 参与开发 <contributing>
 ```
+
+[斜面摩擦解析评测：完整18工况、失败与限制](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.zh-CN.md)
