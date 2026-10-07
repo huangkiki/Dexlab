@@ -114,3 +114,5 @@ Contribute <contributing>
 ```
 
 [Analytical incline friction: all18 cases, failures and limits](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.md)
+
+[Incline diagnosis: none of12 controls restored continuous support](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.md)
