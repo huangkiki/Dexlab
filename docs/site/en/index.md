@@ -119,6 +119,8 @@ Contribute <contributing>
 
 [Impact phase study: 36 cases, 2/9 complete phase groups pass; coarse endpoints remain near exact](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-phase-results.md)
 
+[Discrete contact audit: 54 trace predictions pass; exact rebound endpoints do not ensure accurate transients](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-discrete-results.md)
+
 [Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md)
 
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.md)

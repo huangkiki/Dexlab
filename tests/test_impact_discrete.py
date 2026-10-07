@@ -54,3 +54,18 @@ class DiscreteImpactTests(unittest.TestCase):
             bind_records(published, published, ['a', 'a'])
         with self.assertRaises(ValueError):
             bind_records(published, published, ['missing'])
+
+    def test_audit_rejects_epoch_and_coherent_wrong_law(self):
+        import copy
+        from test_impact import ImpactTests
+        from dexlab.impact_discrete import audit_trace
+        fixture = ImpactTests(); fixture.setUp()
+        # A coherent instantaneous elastic impulse is not the compliant map.
+        result = audit_trace(fixture.protocol, fixture.case, fixture.trace)
+        self.assertFalse(result['full_rollout']['passed'])
+        self.assertFalse(result['one_step']['passed'])
+        for field in ('force_times', 'states', 'forces'):
+            trace = copy.deepcopy(fixture.trace)
+            trace[field].flat[10] += .01
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                audit_trace(fixture.protocol, fixture.case, trace)
