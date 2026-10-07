@@ -1,0 +1,1290 @@
+{
+  "protocol": {
+    "version": "3.15.0",
+    "radius_m": 0.05,
+    "initial_x_m": [
+      -0.06,
+      0.06
+    ],
+    "duration_s": 0.2,
+    "score_window_s": 0.02,
+    "stiffness_s2": 10000,
+    "impedance": 0.9,
+    "limits": {
+      "velocity_error_m_s": 0.01,
+      "relative_energy_error": 0.01,
+      "momentum_error_kg_m_s": 1e-09,
+      "transverse_speed_m_s": 1e-09,
+      "spin_speed_rad_s": 1e-09
+    },
+    "cases": [
+      {
+        "id": "stiffness-01",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.001,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-02",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.0005,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-03",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.00025,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-04",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.001,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-05",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.0005,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-06",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.00025,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-07",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.001,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-08",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.0005,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-09",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.00025,
+        "stiffness_s2": 100000.0
+      },
+      {
+        "id": "stiffness-10",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.001,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-11",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.0005,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-12",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.00025,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-13",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.001,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-14",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.0005,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-15",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.00025,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-16",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.001,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-17",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.0005,
+        "stiffness_s2": 1000000.0
+      },
+      {
+        "id": "stiffness-18",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.00025,
+        "stiffness_s2": 1000000.0
+      }
+    ],
+    "overlap_budget_m": 0.001,
+    "baseline_manifest_sha256": "b33717fa89c4801fda1615eaa8c0dc033deef41a57e5acb4f6f3637f37518c4f",
+    "baseline_archive_sha256": "56fb67cf6ffa5cf930ae2dbe777504d2fe28c3f41d2e68e00f9490dd239a5b3c",
+    "baseline_bindings": [
+      {
+        "id": "impact-01",
+        "trace_sha256": "d78d5ae5318fc84be859f62c6db5ace1e35243bbf62b8b9e92dd9a39e599b7bf",
+        "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+      },
+      {
+        "id": "impact-02",
+        "trace_sha256": "b2bd65c67de6e906c7e8e7ef6c97705ba0be49cff8fc5c6bb5525c1ac9031624",
+        "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+      },
+      {
+        "id": "impact-03",
+        "trace_sha256": "e4b75017c0aab668c4fa2cf174ca66b3b44c611bdab5abff9d3be6caf04ddadf",
+        "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+      },
+      {
+        "id": "impact-04",
+        "trace_sha256": "5bf4647e926f91486cbf8a9dcde7d92ba3359b5d4bbb2243d0cdba0237bbd966",
+        "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+      },
+      {
+        "id": "impact-05",
+        "trace_sha256": "3c1a4986cb81c76f1a5fe23c6efbd5bb0f3aca0cec5e616d45f9738dcb6763f3",
+        "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+      },
+      {
+        "id": "impact-06",
+        "trace_sha256": "b8a739b505ab9b198089af8387e7188cc15a8d41143f4a31a07584b521e8a9b8",
+        "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+      },
+      {
+        "id": "impact-07",
+        "trace_sha256": "dc2bb6b3242d309658a484b8112664ba94545bb71768b13311f4887d331ab390",
+        "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+      },
+      {
+        "id": "impact-08",
+        "trace_sha256": "34f67f72efd2fd77f6f34cc4e9600629485057a68a80f9bd27e95c1553b6c64e",
+        "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+      },
+      {
+        "id": "impact-09",
+        "trace_sha256": "177aff8781d6187746fbc58a93cb89aa58cac6804ccebabb90181da6bc068e33",
+        "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+      }
+    ]
+  },
+  "baseline_campaign": {
+    "runtime": {
+      "version": "3.15.0",
+      "record_verified": true,
+      "code_sha256": "a48c3263e40378576b39f2739cc8d5b151a56ffd69ca0fcc11d66b32b60668e1",
+      "installation_origin": null,
+      "compatibility_profile": "qualification-3.15.0",
+      "profile_status": "candidate",
+      "formal_batch_qualified": false
+    },
+    "manifest_sha256": "b33717fa89c4801fda1615eaa8c0dc033deef41a57e5acb4f6f3637f37518c4f",
+    "runner_sha256": "5b545ba56a47362670fc5f3851f3e44bd31a6deb0696132f593927a3fca04602",
+    "completed_cases": 18,
+    "wall_s": 0.05879246297990903
+  },
+  "new_campaign": {
+    "runtime": {
+      "version": "3.15.0",
+      "record_verified": true,
+      "code_sha256": "a48c3263e40378576b39f2739cc8d5b151a56ffd69ca0fcc11d66b32b60668e1",
+      "installation_origin": null,
+      "compatibility_profile": "qualification-3.15.0",
+      "profile_status": "candidate",
+      "formal_batch_qualified": false
+    },
+    "manifest_sha256": "4f2a7a8288bdb1d145ccc62a31ab658393fd4f49aada586bce179d8528d6f9b6",
+    "runner_sha256": "53c9324cfb925634ffd52979749b182c764f72d3b03b4b67b735be03c421cb9f",
+    "completed_cases": 18,
+    "wall_s": 0.05228545400314033
+  },
+  "results": [
+    {
+      "id": "impact-01",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0003012594396157864,
+        "relative_energy_error": 0.001205763816462646,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.005004028410475647,
+      "peak_force_n": 25.020142052378233,
+      "impulse_vector_ns": [
+        -0.5003012594396172,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0003012594396172297,
+      "contact_duration_s": 0.032,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0008887380245141685,
+        "native_step_s": 0.0003108131932094693,
+        "observation_s": 0.0005004088161513209,
+        "total_case_wall_s": 0.002467530022840947
+      },
+      "trace_sha256": "d78d5ae5318fc84be859f62c6db5ace1e35243bbf62b8b9e92dd9a39e599b7bf",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+    },
+    {
+      "id": "impact-02",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.0005,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 4.5074949807766274e-05,
+        "relative_energy_error": 0.00018031605323987066,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.005000498447972873,
+      "peak_force_n": 25.00249223986436,
+      "impulse_vector_ns": [
+        -0.5000450749498085,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 4.507494980854343e-05,
+      "contact_duration_s": 0.0315,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005863870028406382,
+        "native_step_s": 0.0005582693847827613,
+        "observation_s": 0.0008619948639534414,
+        "total_case_wall_s": 0.002819599991198629
+      },
+      "trace_sha256": "b2bd65c67de6e906c7e8e7ef6c97705ba0be49cff8fc5c6bb5525c1ac9031624",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+    },
+    {
+      "id": "impact-03",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 1.7522427607857908e-05,
+        "relative_energy_error": 7.00921667142751e-05,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.005000345623811159,
+      "peak_force_n": 25.001728119055795,
+      "impulse_vector_ns": [
+        -0.5000175224276084,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 1.7522427608440694e-05,
+      "contact_duration_s": 0.0315,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005928329774178565,
+        "native_step_s": 0.0011052978807128966,
+        "observation_s": 0.0017230717930942774,
+        "total_case_wall_s": 0.004621385014615953
+      },
+      "trace_sha256": "e4b75017c0aab668c4fa2cf174ca66b3b44c611bdab5abff9d3be6caf04ddadf",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+    },
+    {
+      "id": "impact-04",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.000602518879231506,
+        "relative_energy_error": 0.001205763816462202,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.010008056820951294,
+      "peak_force_n": 50.040284104756466,
+      "impulse_vector_ns": [
+        -1.0006025188792331,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0006025188792331271,
+      "contact_duration_s": 0.032,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0005447500152513385,
+        "native_step_s": 0.0002809879370033741,
+        "observation_s": 0.00044950656592845917,
+        "total_case_wall_s": 0.0018658540211617947
+      },
+      "trace_sha256": "5bf4647e926f91486cbf8a9dcde7d92ba3359b5d4bbb2243d0cdba0237bbd966",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+    },
+    {
+      "id": "impact-05",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.0005,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 9.014989961604537e-05,
+        "relative_energy_error": 0.00018031605324075883,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.010000996895945746,
+      "peak_force_n": 50.00498447972872,
+      "impulse_vector_ns": [
+        -1.0000901498996169,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 9.014989961686481e-05,
+      "contact_duration_s": 0.0315,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.000553908001165837,
+        "native_step_s": 0.0005629060906358063,
+        "observation_s": 0.0008539628470316529,
+        "total_case_wall_s": 0.0027724329847842455
+      },
+      "trace_sha256": "3c1a4986cb81c76f1a5fe23c6efbd5bb0f3aca0cec5e616d45f9738dcb6763f3",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+    },
+    {
+      "id": "impact-06",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 3.504485521391149e-05,
+        "relative_energy_error": 7.009216671116647e-05,
+        "momentum_error_kg_m_s": 3.3306690738754696e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.010000691247622304,
+      "peak_force_n": 50.003456238111504,
+      "impulse_vector_ns": [
+        -1.0000350448552142,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 3.504485521421685e-05,
+      "contact_duration_s": 0.0315,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005513570504263043,
+        "native_step_s": 0.001097264583222568,
+        "observation_s": 0.0016893820720724761,
+        "total_case_wall_s": 0.004492939042393118
+      },
+      "trace_sha256": "b8a739b505ab9b198089af8387e7188cc15a8d41143f4a31a07584b521e8a9b8",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+    },
+    {
+      "id": "impact-07",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0012050377584615296,
+        "relative_energy_error": 0.0012057638164608697,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.020016113641902575,
+      "peak_force_n": 100.08056820951288,
+      "impulse_vector_ns": [
+        -2.0012050377584623,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0012050377584622574,
+      "contact_duration_s": 0.032,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0005547420005314052,
+        "native_step_s": 0.00028342666337266564,
+        "observation_s": 0.0004439635667949915,
+        "total_case_wall_s": 0.001867183018475771
+      },
+      "trace_sha256": "dc2bb6b3242d309658a484b8112664ba94545bb71768b13311f4887d331ab390",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c"
+    },
+    {
+      "id": "impact-08",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.0005,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0001802997992294904,
+        "relative_energy_error": 0.0001803160532380943,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.020001993791891493,
+      "peak_force_n": 100.00996895945744,
+      "impulse_vector_ns": [
+        -2.00018029979923,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.00018029979923017692,
+      "contact_duration_s": 0.0315,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005408169818110764,
+        "native_step_s": 0.0005604108446277678,
+        "observation_s": 0.0008672893163748085,
+        "total_case_wall_s": 0.0027599959867075086
+      },
+      "trace_sha256": "34f67f72efd2fd77f6f34cc4e9600629485057a68a80f9bd27e95c1553b6c64e",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439"
+    },
+    {
+      "id": "impact-09",
+      "reused": true,
+      "stiffness_s2": 10000,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 7.008971042722298e-05,
+        "relative_energy_error": 7.009216671072238e-05,
+        "momentum_error_kg_m_s": 8.881784197001252e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.020001382495244635,
+      "peak_force_n": 100.00691247622315,
+      "impulse_vector_ns": [
+        -2.0000700897104275,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 7.008971042754553e-05,
+      "contact_duration_s": 0.0315,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005494380020536482,
+        "native_step_s": 0.0011001434759236872,
+        "observation_s": 0.0016828385414555669,
+        "total_case_wall_s": 0.004526272998191416
+      },
+      "trace_sha256": "177aff8781d6187746fbc58a93cb89aa58cac6804ccebabb90181da6bc068e33",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7"
+    },
+    {
+      "id": "stiffness-01",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0012167077500004897,
+        "relative_energy_error": 0.004878674021993046,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0016010499999999928,
+      "peak_force_n": 80.05249999999965,
+      "impulse_vector_ns": [
+        -0.5012167077500005,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0012167077500004897,
+      "contact_duration_s": 0.01,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0008197890128940344,
+        "native_step_s": 0.0002643954358063638,
+        "observation_s": 0.00042202958138659596,
+        "total_case_wall_s": 0.0021709450520575047
+      },
+      "trace_sha256": "12b40296ed545dfbfe1087745d8dde4c72d4bd52c622104d76ad3228e91f8e10",
+      "xml_sha256": "4a22eb625ff83f983a7e3178595afb452ca1f0ea4dbf81775ac5ac05baf5a9d8"
+    },
+    {
+      "id": "stiffness-02",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.0005,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.00040362762503698413,
+        "relative_energy_error": 0.0016158138222253093,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0015859890842658125,
+      "peak_force_n": 79.29945421329062,
+      "impulse_vector_ns": [
+        -0.500403627625037,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.00040362762503698413,
+      "contact_duration_s": 0.01,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005574630340561271,
+        "native_step_s": 0.0005056415684521198,
+        "observation_s": 0.0007093388703651726,
+        "total_case_wall_s": 0.0025149229913949966
+      },
+      "trace_sha256": "af5115461ee99615482bcfa66821fe2cba56147024e2e77d760b5a8cb94376c4",
+      "xml_sha256": "32346cc00f8564090600ed68aa62e8db19316b1901981edb0635ebba2e9150fd"
+    },
+    {
+      "id": "stiffness-03",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.00015487734785979423,
+        "relative_energy_error": 0.0006197012873823127,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.001582284036123635,
+      "peak_force_n": 79.11420180618175,
+      "impulse_vector_ns": [
+        -0.5001548773478596,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0001548773478595722,
+      "contact_duration_s": 0.01,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.000545645016245544,
+        "native_step_s": 0.0009909773361869156,
+        "observation_s": 0.0013821072643622756,
+        "total_case_wall_s": 0.004042014013975859
+      },
+      "trace_sha256": "3014b37ed43584980966593fa716dac542e52293198eaf49de509b8e7a41db84",
+      "xml_sha256": "86ca98b5dbe749daf5f6491f49da4a274a506a5b6f68a79af925b8827514fac3"
+    },
+    {
+      "id": "stiffness-04",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0024334155000023117,
+        "relative_energy_error": 0.00487867402199571,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0032020999999999994,
+      "peak_force_n": 160.10500000000002,
+      "impulse_vector_ns": [
+        -1.0024334155000028,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0024334155000027557,
+      "contact_duration_s": 0.01,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0005474890349432826,
+        "native_step_s": 0.00025644287234172225,
+        "observation_s": 0.00036814366467297077,
+        "total_case_wall_s": 0.001727920025587082
+      },
+      "trace_sha256": "bdb979b043caf4d67ad66f8c7aa0291ff39754f23babaf02ad664349087b37b2",
+      "xml_sha256": "4a22eb625ff83f983a7e3178595afb452ca1f0ea4dbf81775ac5ac05baf5a9d8"
+    },
+    {
+      "id": "stiffness-05",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.0005,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0008072552500730801,
+        "relative_energy_error": 0.001615813822223533,
+        "momentum_error_kg_m_s": 0.0,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.003171978168531625,
+      "peak_force_n": 158.5989084265813,
+      "impulse_vector_ns": [
+        -1.000807255250073,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0008072552500730801,
+      "contact_duration_s": 0.01,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005515739903785288,
+        "native_step_s": 0.0005136368563398719,
+        "observation_s": 0.0007077904301695526,
+        "total_case_wall_s": 0.0024841889971867204
+      },
+      "trace_sha256": "2006694f7669b7e2b32d6a49a84d511f82492416ccd616e62d3392afd3e8a3fd",
+      "xml_sha256": "32346cc00f8564090600ed68aa62e8db19316b1901981edb0635ebba2e9150fd"
+    },
+    {
+      "id": "stiffness-06",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.00030975469571928966,
+        "relative_energy_error": 0.0006197012873814245,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.00316456807224727,
+      "peak_force_n": 158.22840361236354,
+      "impulse_vector_ns": [
+        -1.0003097546957191,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0003097546957191444,
+      "contact_duration_s": 0.01,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005526060122065246,
+        "native_step_s": 0.0009928583167493343,
+        "observation_s": 0.001397924788761884,
+        "total_case_wall_s": 0.004076140001416206
+      },
+      "trace_sha256": "5faaa17d9f0ba9249088c2513e538a7617ff42a2ce31ef840d65ff5453e4cdaf",
+      "xml_sha256": "86ca98b5dbe749daf5f6491f49da4a274a506a5b6f68a79af925b8827514fac3"
+    },
+    {
+      "id": "stiffness-07",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0048668310000006265,
+        "relative_energy_error": 0.0048786740219917135,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.006404199999999999,
+      "peak_force_n": 320.21000000000004,
+      "impulse_vector_ns": [
+        -2.0048668310000006,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0048668310000006265,
+      "contact_duration_s": 0.01,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.000545127026271075,
+        "native_step_s": 0.00025983783416450024,
+        "observation_s": 0.0003634198219515383,
+        "total_case_wall_s": 0.001715597987640649
+      },
+      "trace_sha256": "3b2fc1c9cbad1adda5de27d8ab3952ac747378167fcbe7b55cae82e4f673b7bb",
+      "xml_sha256": "4a22eb625ff83f983a7e3178595afb452ca1f0ea4dbf81775ac5ac05baf5a9d8"
+    },
+    {
+      "id": "stiffness-08",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.0005,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0016145105001542023,
+        "relative_energy_error": 0.0016158138222315266,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.006343956337063278,
+      "peak_force_n": 317.1978168531639,
+      "impulse_vector_ns": [
+        -2.0016145105001546,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0016145105001545978,
+      "contact_duration_s": 0.01,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005492880009114742,
+        "native_step_s": 0.0005097367684356868,
+        "observation_s": 0.0007109847501851618,
+        "total_case_wall_s": 0.0025041360058821738
+      },
+      "trace_sha256": "940aa3a6d4c595b9320818f32e32bea091ba2ee9f522fcb0d5e9ad8ad6f23fc7",
+      "xml_sha256": "32346cc00f8564090600ed68aa62e8db19316b1901981edb0635ebba2e9150fd"
+    },
+    {
+      "id": "stiffness-09",
+      "reused": false,
+      "stiffness_s2": 100000.0,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.0006195093914423177,
+        "relative_energy_error": 0.0006197012873854213,
+        "momentum_error_kg_m_s": 0.0,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.006329136144494554,
+      "peak_force_n": 316.4568072247277,
+      "impulse_vector_ns": [
+        -2.0006195093914423,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0006195093914422856,
+      "contact_duration_s": 0.01,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005524749867618084,
+        "native_step_s": 0.0010159683297388256,
+        "observation_s": 0.0013891804264858365,
+        "total_case_wall_s": 0.003991409961599857
+      },
+      "trace_sha256": "1c5950e605c27e4572391a4dcb16b206c45b2f8e1410b7258924f81f7e8ffc55",
+      "xml_sha256": "86ca98b5dbe749daf5f6491f49da4a274a506a5b6f68a79af925b8827514fac3"
+    },
+    {
+      "id": "stiffness-10",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": true,
+      "joint_passed": true,
+      "metrics": {
+        "velocity_error_m_s": 4.440892098500626e-16,
+        "relative_energy_error": 1.7763568394002505e-15,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0005000000000000004,
+      "peak_force_n": 250.00000000000054,
+      "impulse_vector_ns": [
+        -0.5000000000000008,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 7.771561172376096e-16,
+      "contact_duration_s": 0.003,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0005410769954323769,
+        "native_step_s": 0.0002509609912522137,
+        "observation_s": 0.0003405280876904726,
+        "total_case_wall_s": 0.0016312639927491546
+      },
+      "trace_sha256": "a2647472afbc86a1140162c95ffe0d6528aa7d36e81741bf5967d4f9537fbf51",
+      "xml_sha256": "a62ff61a24d144345e644ddcd87a7a37df257d526aed004a3423bee7af61de46"
+    },
+    {
+      "id": "stiffness-11",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.0005,
+      "final_state_passed": false,
+      "overlap_passed": true,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.005554199218744005,
+        "relative_energy_error": 0.02246358990666808,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0005156249999999918,
+      "peak_force_n": 257.812499999996,
+      "impulse_vector_ns": [
+        -0.5055541992187441,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.005554199218744116,
+      "contact_duration_s": 0.0035,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005415999912656844,
+        "native_step_s": 0.00048128096386790276,
+        "observation_s": 0.0006664874381385744,
+        "total_case_wall_s": 0.002443737001158297
+      },
+      "trace_sha256": "dce7e68d5f6615b27fffc2a5e872a43f48c0dcc9263f144b3ced6edd96e8dfda",
+      "xml_sha256": "165a9e8457ad86e6e865c547f63a63cad8e2b386be0be8ab0cd0a602c53ae3ee"
+    },
+    {
+      "id": "stiffness-12",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 0.5,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": true,
+      "joint_passed": true,
+      "metrics": {
+        "velocity_error_m_s": 0.0019674322817111456,
+        "relative_energy_error": 0.00790069544510974,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0005028265714645264,
+      "peak_force_n": 251.4132857322632,
+      "impulse_vector_ns": [
+        -0.5019674322817111,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.0019674322817111456,
+      "contact_duration_s": 0.0032500000000000003,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005408830475062132,
+        "native_step_s": 0.0009664579411037266,
+        "observation_s": 0.0013007083325646818,
+        "total_case_wall_s": 0.0038337160367518663
+      },
+      "trace_sha256": "fa235b82c6579eab136dbcf645e579abebc1d2e29200b5d06c6b066dcf4690d3",
+      "xml_sha256": "28851362dc033573bab8b0531613aa6a59be94a3bef5bd1ea82c505d32b521ca"
+    },
+    {
+      "id": "stiffness-13",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 1.1102230246251565e-15,
+        "relative_energy_error": 2.220446049250313e-15,
+        "momentum_error_kg_m_s": 6.661338147750939e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0010000000000000009,
+      "peak_force_n": 500.00000000000006,
+      "impulse_vector_ns": [
+        -1.0000000000000004,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 4.440892098500626e-16,
+      "contact_duration_s": 0.003,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.0005504880100488663,
+        "native_step_s": 0.00024505582405254245,
+        "observation_s": 0.00033548474311828613,
+        "total_case_wall_s": 0.0016552350134588778
+      },
+      "trace_sha256": "c1baf670d952532c27767dc37a49701585010524cf7c1d72cc0269a22c7e68ee",
+      "xml_sha256": "a62ff61a24d144345e644ddcd87a7a37df257d526aed004a3423bee7af61de46"
+    },
+    {
+      "id": "stiffness-14",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.0005,
+      "final_state_passed": false,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.01110839843748801,
+        "relative_energy_error": 0.02246358990666808,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0010312499999999836,
+      "peak_force_n": 515.6249999999919,
+      "impulse_vector_ns": [
+        -1.0111083984374878,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.011108398437487788,
+      "contact_duration_s": 0.0035,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.0005490479525178671,
+        "native_step_s": 0.0004935829783789814,
+        "observation_s": 0.0006678540376015007,
+        "total_case_wall_s": 0.002472214982844889
+      },
+      "trace_sha256": "620f0b4359857636d7a147b47c0b0aee0069533587871631ab5a9e02fce001f4",
+      "xml_sha256": "165a9e8457ad86e6e865c547f63a63cad8e2b386be0be8ab0cd0a602c53ae3ee"
+    },
+    {
+      "id": "stiffness-15",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 1.0,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.00393486456342762,
+        "relative_energy_error": 0.007900695445120398,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0010056531429290666,
+      "peak_force_n": 502.8265714645333,
+      "impulse_vector_ns": [
+        -1.0039348645634276,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.00393486456342762,
+      "contact_duration_s": 0.0032500000000000003,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005487399757839739,
+        "native_step_s": 0.0009691534796729684,
+        "observation_s": 0.0013157303328625858,
+        "total_case_wall_s": 0.0038321989704854786
+      },
+      "trace_sha256": "d1a6b7148ec697ac35f7f08b3194a16c39f711548431eb26422bc0ca0546e490",
+      "xml_sha256": "28851362dc033573bab8b0531613aa6a59be94a3bef5bd1ea82c505d32b521ca"
+    },
+    {
+      "id": "stiffness-16",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.001,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 2.6645352591003757e-15,
+        "relative_energy_error": 2.6645352591003757e-15,
+        "momentum_error_kg_m_s": 1.7763568394002505e-15,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.0020000000000000018,
+      "peak_force_n": 1000.0000000000001,
+      "impulse_vector_ns": [
+        -2.000000000000001,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 8.881784197001252e-16,
+      "contact_duration_s": 0.003,
+      "steps": 200,
+      "timing": {
+        "setup_s": 0.000551927019841969,
+        "native_step_s": 0.0002501566195860505,
+        "observation_s": 0.0003416752442717552,
+        "total_case_wall_s": 0.0016381400055252016
+      },
+      "trace_sha256": "3e99ea41b5da0dbfb0679a289a32d23ab71a9dd1cc50e369fb6b28f4c43b34b8",
+      "xml_sha256": "a62ff61a24d144345e644ddcd87a7a37df257d526aed004a3423bee7af61de46"
+    },
+    {
+      "id": "stiffness-17",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.0005,
+      "final_state_passed": false,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.02221679687499023,
+        "relative_energy_error": 0.022463589906682513,
+        "momentum_error_kg_m_s": 8.881784197001252e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.002062499999999995,
+      "peak_force_n": 1031.2499999999973,
+      "impulse_vector_ns": [
+        -2.0222167968749893,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.022216796874989342,
+      "contact_duration_s": 0.0035,
+      "steps": 400,
+      "timing": {
+        "setup_s": 0.000542991969268769,
+        "native_step_s": 0.0004819890018552542,
+        "observation_s": 0.0006551817059516907,
+        "total_case_wall_s": 0.0024448370095342398
+      },
+      "trace_sha256": "56d578d79169b8d42f2ded0e4af0109bc161f871549dd7e65c588950428f2802",
+      "xml_sha256": "165a9e8457ad86e6e865c547f63a63cad8e2b386be0be8ab0cd0a602c53ae3ee"
+    },
+    {
+      "id": "stiffness-18",
+      "reused": false,
+      "stiffness_s2": 1000000.0,
+      "speed_m_s": 2.0,
+      "timestep_s": 0.00025,
+      "final_state_passed": true,
+      "overlap_passed": false,
+      "joint_passed": false,
+      "metrics": {
+        "velocity_error_m_s": 0.007869729126858793,
+        "relative_energy_error": 0.00790069544512395,
+        "momentum_error_kg_m_s": 0.0,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "penetration_m": 0.002011306285858147,
+      "peak_force_n": 1005.6531429290733,
+      "impulse_vector_ns": [
+        -2.0078697291268583,
+        0.0,
+        0.0
+      ],
+      "impulse_error_ns": 0.00786972912685835,
+      "contact_duration_s": 0.0032500000000000003,
+      "steps": 800,
+      "timing": {
+        "setup_s": 0.0005373279564082623,
+        "native_step_s": 0.0009639037889428437,
+        "observation_s": 0.0012895168620161712,
+        "total_case_wall_s": 0.003847293963190168
+      },
+      "trace_sha256": "18f8261cfb1c62b62edfa9351eb073b75445656d0470c0fc115cf63543c83e72",
+      "xml_sha256": "28851362dc033573bab8b0531613aa6a59be94a3bef5bd1ea82c505d32b521ca"
+    }
+  ],
+  "reused_cases": 9,
+  "new_cases": 18,
+  "final_state_passed": 24,
+  "joint_passed": 2,
+  "scorer_sha256": "d9d007c2db56b8fd5a03f5609e17136807bc3af2c71a94cd6fb6d399ebfd10e6",
+  "scoring_wall_s": 0.04343236598651856
+}

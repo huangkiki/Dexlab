@@ -263,4 +263,6 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 
 **验收范围：** 接触机制诊断已有受控修复与否定结果；共同动态材料和真机标定仍未完成。[逐项证据与剩余要求](demos/contact-benchmark/CONCLUSIONS.zh-CN.md#验收决定与剩余工作)。
 
+[刚度与穿透联合评测：27 例中 24 例末态通过，2 例同时满足 1 mm 预算](docs/impact-stiffness-results.zh-CN.md)
+
 [弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](docs/elastic-impact-results.zh-CN.md)
