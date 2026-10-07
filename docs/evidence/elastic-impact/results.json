@@ -1,0 +1,943 @@
+{
+  "protocol": {
+    "version": "3.15.0",
+    "radius_m": 0.05,
+    "initial_x_m": [
+      -0.06,
+      0.06
+    ],
+    "duration_s": 0.2,
+    "score_window_s": 0.02,
+    "stiffness_s2": 10000,
+    "impedance": 0.9,
+    "limits": {
+      "velocity_error_m_s": 0.01,
+      "relative_energy_error": 0.01,
+      "momentum_error_kg_m_s": 1e-09,
+      "transverse_speed_m_s": 1e-09,
+      "spin_speed_rad_s": 1e-09
+    },
+    "cases": [
+      {
+        "id": "impact-01",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.001
+      },
+      {
+        "id": "impact-02",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.0005
+      },
+      {
+        "id": "impact-03",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.00025
+      },
+      {
+        "id": "impact-04",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.001
+      },
+      {
+        "id": "impact-05",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.0005
+      },
+      {
+        "id": "impact-06",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.00025
+      },
+      {
+        "id": "impact-07",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.001
+      },
+      {
+        "id": "impact-08",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.0005
+      },
+      {
+        "id": "impact-09",
+        "masses_kg": [
+          1.0,
+          1.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.00025
+      },
+      {
+        "id": "impact-10",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.001
+      },
+      {
+        "id": "impact-11",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.0005
+      },
+      {
+        "id": "impact-12",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          0.5,
+          0.0
+        ],
+        "timestep": 0.00025
+      },
+      {
+        "id": "impact-13",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.001
+      },
+      {
+        "id": "impact-14",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.0005
+      },
+      {
+        "id": "impact-15",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          1.0,
+          0.0
+        ],
+        "timestep": 0.00025
+      },
+      {
+        "id": "impact-16",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.001
+      },
+      {
+        "id": "impact-17",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.0005
+      },
+      {
+        "id": "impact-18",
+        "masses_kg": [
+          1.0,
+          2.0
+        ],
+        "initial_vx_m_s": [
+          2.0,
+          0.0
+        ],
+        "timestep": 0.00025
+      }
+    ]
+  },
+  "campaign": {
+    "runtime": {
+      "version": "3.15.0",
+      "record_verified": true,
+      "code_sha256": "a48c3263e40378576b39f2739cc8d5b151a56ffd69ca0fcc11d66b32b60668e1",
+      "installation_origin": null,
+      "compatibility_profile": "qualification-3.15.0",
+      "profile_status": "candidate",
+      "formal_batch_qualified": false
+    },
+    "manifest_sha256": "b33717fa89c4801fda1615eaa8c0dc033deef41a57e5acb4f6f3637f37518c4f",
+    "runner_sha256": "5b545ba56a47362670fc5f3851f3e44bd31a6deb0696132f593927a3fca04602",
+    "completed_cases": 18,
+    "wall_s": 0.05879246297990903
+  },
+  "results": [
+    {
+      "id": "impact-01",
+      "metrics": {
+        "velocity_error_m_s": 0.0003012594396157864,
+        "relative_energy_error": 0.001205763816462646,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        0.5
+      ],
+      "measured_velocity_m_s": [
+        -0.000301259439615756,
+        0.5003012594396156
+      ],
+      "energy_error_j": 0.00015072047705783076,
+      "restitution_error": 0.0012050377584631455,
+      "penetration_m": 0.005004028410475647,
+      "impulse_residual_ns": 1.387778780781446e-15,
+      "trace_sha256": "d78d5ae5318fc84be859f62c6db5ace1e35243bbf62b8b9e92dd9a39e599b7bf",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c",
+      "timing": {
+        "setup_s": 0.0008887380245141685,
+        "native_step_s": 0.0003108131932094693,
+        "observation_s": 0.0005004088161513209,
+        "total_case_wall_s": 0.002467530022840947
+      }
+    },
+    {
+      "id": "impact-02",
+      "metrics": {
+        "velocity_error_m_s": 4.5074949807766274e-05,
+        "relative_energy_error": 0.00018031605323987066,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        0.5
+      ],
+      "measured_velocity_m_s": [
+        -4.5074949807709834e-05,
+        0.5000450749498078
+      ],
+      "energy_error_j": 2.2539506654983832e-05,
+      "restitution_error": 0.00018029979923084305,
+      "penetration_m": 0.005000498447972873,
+      "impulse_residual_ns": 6.93889390390723e-16,
+      "trace_sha256": "b2bd65c67de6e906c7e8e7ef6c97705ba0be49cff8fc5c6bb5525c1ac9031624",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439",
+      "timing": {
+        "setup_s": 0.0005863870028406382,
+        "native_step_s": 0.0005582693847827613,
+        "observation_s": 0.0008619948639534414,
+        "total_case_wall_s": 0.002819599991198629
+      }
+    },
+    {
+      "id": "impact-03",
+      "metrics": {
+        "velocity_error_m_s": 1.7522427607857908e-05,
+        "relative_energy_error": 7.00921667142751e-05,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        0.5
+      ],
+      "measured_velocity_m_s": [
+        -1.7522427607857898e-05,
+        0.5000175224276076
+      ],
+      "energy_error_j": 8.761520839284387e-06,
+      "restitution_error": 7.008971043109824e-05,
+      "penetration_m": 0.005000345623811159,
+      "impulse_residual_ns": 3.469446951953615e-16,
+      "trace_sha256": "e4b75017c0aab668c4fa2cf174ca66b3b44c611bdab5abff9d3be6caf04ddadf",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7",
+      "timing": {
+        "setup_s": 0.0005928329774178565,
+        "native_step_s": 0.0011052978807128966,
+        "observation_s": 0.0017230717930942774,
+        "total_case_wall_s": 0.004621385014615953
+      }
+    },
+    {
+      "id": "impact-04",
+      "metrics": {
+        "velocity_error_m_s": 0.000602518879231506,
+        "relative_energy_error": 0.001205763816462202,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        1.0
+      ],
+      "measured_velocity_m_s": [
+        -0.0006025188792315063,
+        1.0006025188792311
+      ],
+      "energy_error_j": 0.000602881908231101,
+      "restitution_error": 0.0012050377584629235,
+      "penetration_m": 0.010008056820951294,
+      "impulse_residual_ns": 1.387778780781446e-15,
+      "trace_sha256": "5bf4647e926f91486cbf8a9dcde7d92ba3359b5d4bbb2243d0cdba0237bbd966",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c",
+      "timing": {
+        "setup_s": 0.0005447500152513385,
+        "native_step_s": 0.0002809879370033741,
+        "observation_s": 0.00044950656592845917,
+        "total_case_wall_s": 0.0018658540211617947
+      }
+    },
+    {
+      "id": "impact-05",
+      "metrics": {
+        "velocity_error_m_s": 9.014989961604537e-05,
+        "relative_energy_error": 0.00018031605324075883,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        1.0
+      ],
+      "measured_velocity_m_s": [
+        -9.014989961604528e-05,
+        1.0000901498996155
+      ],
+      "energy_error_j": 9.015802662037942e-05,
+      "restitution_error": 0.00018029979923195327,
+      "penetration_m": 0.010000996895945746,
+      "impulse_residual_ns": 6.93889390390723e-16,
+      "trace_sha256": "3c1a4986cb81c76f1a5fe23c6efbd5bb0f3aca0cec5e616d45f9738dcb6763f3",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439",
+      "timing": {
+        "setup_s": 0.000553908001165837,
+        "native_step_s": 0.0005629060906358063,
+        "observation_s": 0.0008539628470316529,
+        "total_case_wall_s": 0.0027724329847842455
+      }
+    },
+    {
+      "id": "impact-06",
+      "metrics": {
+        "velocity_error_m_s": 3.504485521391149e-05,
+        "relative_energy_error": 7.009216671116647e-05,
+        "momentum_error_kg_m_s": 3.3306690738754696e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        1.0
+      ],
+      "measured_velocity_m_s": [
+        -3.504485521391153e-05,
+        1.000035044855214
+      ],
+      "energy_error_j": 3.5046083355583235e-05,
+      "restitution_error": 7.008971042776757e-05,
+      "penetration_m": 0.010000691247622304,
+      "impulse_residual_ns": 3.469446951953615e-16,
+      "trace_sha256": "b8a739b505ab9b198089af8387e7188cc15a8d41143f4a31a07584b521e8a9b8",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7",
+      "timing": {
+        "setup_s": 0.0005513570504263043,
+        "native_step_s": 0.001097264583222568,
+        "observation_s": 0.0016893820720724761,
+        "total_case_wall_s": 0.004492939042393118
+      }
+    },
+    {
+      "id": "impact-07",
+      "metrics": {
+        "velocity_error_m_s": 0.0012050377584615296,
+        "relative_energy_error": 0.0012057638164608697,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        2.0
+      ],
+      "measured_velocity_m_s": [
+        -0.0012050377584615292,
+        2.001205037758461
+      ],
+      "energy_error_j": 0.0024115276329217394,
+      "restitution_error": 0.0012050377584613692,
+      "penetration_m": 0.020016113641902575,
+      "impulse_residual_ns": 1.387778780781446e-15,
+      "trace_sha256": "dc2bb6b3242d309658a484b8112664ba94545bb71768b13311f4887d331ab390",
+      "xml_sha256": "2f1f8a7f40c25414873722e5cbfc92b867311847a3da8488921eff450f31cf7c",
+      "timing": {
+        "setup_s": 0.0005547420005314052,
+        "native_step_s": 0.00028342666337266564,
+        "observation_s": 0.0004439635667949915,
+        "total_case_wall_s": 0.001867183018475771
+      }
+    },
+    {
+      "id": "impact-08",
+      "metrics": {
+        "velocity_error_m_s": 0.0001802997992294904,
+        "relative_energy_error": 0.0001803160532380943,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        2.0
+      ],
+      "measured_velocity_m_s": [
+        -0.0001802997992294902,
+        2.000180299799227
+      ],
+      "energy_error_j": 0.0003606321064761886,
+      "restitution_error": 0.00018029979922928874,
+      "penetration_m": 0.020001993791891493,
+      "impulse_residual_ns": 6.93889390390723e-16,
+      "trace_sha256": "34f67f72efd2fd77f6f34cc4e9600629485057a68a80f9bd27e95c1553b6c64e",
+      "xml_sha256": "af5231b458a9c0390742e365038ac0e6521e9fc146efdb199bbb5317c3e62439",
+      "timing": {
+        "setup_s": 0.0005408169818110764,
+        "native_step_s": 0.0005604108446277678,
+        "observation_s": 0.0008672893163748085,
+        "total_case_wall_s": 0.0027599959867075086
+      }
+    },
+    {
+      "id": "impact-09",
+      "metrics": {
+        "velocity_error_m_s": 7.008971042722298e-05,
+        "relative_energy_error": 7.009216671072238e-05,
+        "momentum_error_kg_m_s": 8.881784197001252e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        0.0,
+        2.0
+      ],
+      "measured_velocity_m_s": [
+        -7.00897104272229e-05,
+        2.000070089710428
+      ],
+      "energy_error_j": 0.00014018433342144476,
+      "restitution_error": 7.008971042710144e-05,
+      "penetration_m": 0.020001382495244635,
+      "impulse_residual_ns": 3.469446951953615e-16,
+      "trace_sha256": "177aff8781d6187746fbc58a93cb89aa58cac6804ccebabb90181da6bc068e33",
+      "xml_sha256": "a51f958ccf990f3eb185717d3f8f958f62f759baa841dc4db0a5252b54ad20e7",
+      "timing": {
+        "setup_s": 0.0005494380020536482,
+        "native_step_s": 0.0011001434759236872,
+        "observation_s": 0.0016828385414555669,
+        "total_case_wall_s": 0.004526272998191416
+      }
+    },
+    {
+      "id": "impact-10",
+      "metrics": {
+        "velocity_error_m_s": 0.0004016792528214186,
+        "relative_energy_error": 0.0016076850886186378,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.16666666666666666,
+        0.3333333333333333
+      ],
+      "measured_velocity_m_s": [
+        -0.16706834591948813,
+        0.33353417295974425
+      ],
+      "energy_error_j": 0.00020096063607732972,
+      "restitution_error": 0.0012050377584642558,
+      "penetration_m": 0.005004028410475661,
+      "impulse_residual_ns": 1.8503717077085944e-15,
+      "trace_sha256": "5eb3ecff41dd9880d0a19a1a750fdaec931d305bab815c0c7b41cd1e099c0af9",
+      "xml_sha256": "f08c44fc87dde2b5d7e97c6af37234e17c655360056b28fa974fd056fc534edf",
+      "timing": {
+        "setup_s": 0.0005432110046967864,
+        "native_step_s": 0.0002813398605212569,
+        "observation_s": 0.0004345819470472634,
+        "total_case_wall_s": 0.0018364429706707597
+      }
+    },
+    {
+      "id": "impact-11",
+      "metrics": {
+        "velocity_error_m_s": 6.00999330775398e-05,
+        "relative_energy_error": 0.0002404214043216779,
+        "momentum_error_kg_m_s": 1.1102230246251565e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.16666666666666666,
+        0.3333333333333333
+      ],
+      "measured_velocity_m_s": [
+        -0.16672676659974425,
+        0.3333633832998721
+      ],
+      "energy_error_j": 3.005267554020974e-05,
+      "restitution_error": 0.0001802997992326194,
+      "penetration_m": 0.005000498447972873,
+      "impulse_residual_ns": 9.251858538542972e-16,
+      "trace_sha256": "1ceedfab3153e2fd575d09c9614c51bc14d660c73005b5d7afef5f4779cdb9e6",
+      "xml_sha256": "215079d3960c018196153e4c72981c20effacaedfe6657e5c3772a06dc328526",
+      "timing": {
+        "setup_s": 0.0005460850079543889,
+        "native_step_s": 0.0005505107692442834,
+        "observation_s": 0.0008572832448408008,
+        "total_case_wall_s": 0.0027166330255568027
+      }
+    },
+    {
+      "id": "impact-12",
+      "metrics": {
+        "velocity_error_m_s": 2.3363236807044663e-05,
+        "relative_energy_error": 9.345622227296957e-05,
+        "momentum_error_kg_m_s": 2.7755575615628914e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.16666666666666666,
+        0.3333333333333333
+      ],
+      "measured_velocity_m_s": [
+        -0.1666900299034739,
+        0.33334501495173635
+      ],
+      "energy_error_j": 1.1682027784121196e-05,
+      "restitution_error": 7.008971042088419e-05,
+      "penetration_m": 0.005000345623811159,
+      "impulse_residual_ns": 4.625929269271486e-16,
+      "trace_sha256": "9344149286300bb6922709173770191cbb75b4d7ee3ba41873469bdda996bf09",
+      "xml_sha256": "7c83ad6d5c078659965cd4beeb1ca173a1aa2c98287973fa63420b4e20e4d247",
+      "timing": {
+        "setup_s": 0.0005486310110427439,
+        "native_step_s": 0.0010971754090860486,
+        "observation_s": 0.0016943897353485227,
+        "total_case_wall_s": 0.004539799992926419
+      }
+    },
+    {
+      "id": "impact-13",
+      "metrics": {
+        "velocity_error_m_s": 0.0008033585056427817,
+        "relative_energy_error": 0.0016076850886186378,
+        "momentum_error_kg_m_s": 2.220446049250313e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.3333333333333333,
+        0.6666666666666666
+      ],
+      "measured_velocity_m_s": [
+        -0.3341366918389762,
+        0.6670683459194885
+      ],
+      "energy_error_j": 0.0008038425443093189,
+      "restitution_error": 0.0012050377584642558,
+      "penetration_m": 0.010008056820951294,
+      "impulse_residual_ns": 1.8503717077085944e-15,
+      "trace_sha256": "cbe262e828c5963e0478925b4cc3da0834acd29a73fe46839101aad2642af655",
+      "xml_sha256": "f08c44fc87dde2b5d7e97c6af37234e17c655360056b28fa974fd056fc534edf",
+      "timing": {
+        "setup_s": 0.0005504929577000439,
+        "native_step_s": 0.0002850023447535932,
+        "observation_s": 0.00044382252963259816,
+        "total_case_wall_s": 0.0018447759794071317
+      }
+    },
+    {
+      "id": "impact-14",
+      "metrics": {
+        "velocity_error_m_s": 0.00012019986615524614,
+        "relative_energy_error": 0.00024042140432189996,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.3333333333333333,
+        0.6666666666666666
+      ],
+      "measured_velocity_m_s": [
+        -0.33345353319948856,
+        0.6667267665997442
+      ],
+      "energy_error_j": 0.00012021070216094998,
+      "restitution_error": 0.00018029979923284145,
+      "penetration_m": 0.010000996895945746,
+      "impulse_residual_ns": 9.251858538542972e-16,
+      "trace_sha256": "14496c8904c90262223c4d5243a439f6fa96e1d6c8d901932f2f89992e1beed4",
+      "xml_sha256": "215079d3960c018196153e4c72981c20effacaedfe6657e5c3772a06dc328526",
+      "timing": {
+        "setup_s": 0.0005398750072345138,
+        "native_step_s": 0.0005532018258236349,
+        "observation_s": 0.0008577184053137898,
+        "total_case_wall_s": 0.002727498998865485
+      }
+    },
+    {
+      "id": "impact-15",
+      "metrics": {
+        "velocity_error_m_s": 4.672647361542159e-05,
+        "relative_energy_error": 9.34562222760782e-05,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.3333333333333333,
+        0.6666666666666666
+      ],
+      "measured_velocity_m_s": [
+        -0.33338005980694874,
+        0.6666900299034759
+      ],
+      "energy_error_j": 4.67281111380391e-05,
+      "restitution_error": 7.008971042310463e-05,
+      "penetration_m": 0.010000691247622318,
+      "impulse_residual_ns": 4.625929269271486e-16,
+      "trace_sha256": "59d7bbdd3bb95ef5902e78f85290ccbc0d88ed2c9f27b3947a8f73c7641783b4",
+      "xml_sha256": "7c83ad6d5c078659965cd4beeb1ca173a1aa2c98287973fa63420b4e20e4d247",
+      "timing": {
+        "setup_s": 0.0005546300089918077,
+        "native_step_s": 0.0010944435489363968,
+        "observation_s": 0.0016977102495729923,
+        "total_case_wall_s": 0.004538406035862863
+      }
+    },
+    {
+      "id": "impact-16",
+      "metrics": {
+        "velocity_error_m_s": 0.001606717011283454,
+        "relative_energy_error": 0.0016076850886166394,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.6666666666666666,
+        1.3333333333333333
+      ],
+      "measured_velocity_m_s": [
+        -0.6682733836779504,
+        1.3341366918389748
+      ],
+      "energy_error_j": 0.0032153701772332788,
+      "restitution_error": 0.0012050377584627014,
+      "penetration_m": 0.02001611364190259,
+      "impulse_residual_ns": 1.8503717077085944e-15,
+      "trace_sha256": "799750020b3c144603112672e2321a9fedc096e5e24c9b5275a67f82f8d5b24f",
+      "xml_sha256": "f08c44fc87dde2b5d7e97c6af37234e17c655360056b28fa974fd056fc534edf",
+      "timing": {
+        "setup_s": 0.0005490640178322792,
+        "native_step_s": 0.00029305426869541407,
+        "observation_s": 0.0004347605281509459,
+        "total_case_wall_s": 0.0018415619852021337
+      }
+    },
+    {
+      "id": "impact-17",
+      "metrics": {
+        "velocity_error_m_s": 0.0002403997323110474,
+        "relative_energy_error": 0.00024042140432234405,
+        "momentum_error_kg_m_s": 4.440892098500626e-16,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.6666666666666666,
+        1.3333333333333333
+      ],
+      "measured_velocity_m_s": [
+        -0.6669070663989773,
+        1.3334535331994886
+      ],
+      "energy_error_j": 0.0004808428086446881,
+      "restitution_error": 0.0001802997992330635,
+      "penetration_m": 0.020001993791891506,
+      "impulse_residual_ns": 9.251858538542972e-16,
+      "trace_sha256": "b027dda487b29ebf712f9ca89572d874bb5f7fb2a40c6386b3145877f1e5b42a",
+      "xml_sha256": "215079d3960c018196153e4c72981c20effacaedfe6657e5c3772a06dc328526",
+      "timing": {
+        "setup_s": 0.0005436849896796048,
+        "native_step_s": 0.0005614770343527198,
+        "observation_s": 0.0008572251535952091,
+        "total_case_wall_s": 0.002735670015681535
+      }
+    },
+    {
+      "id": "impact-18",
+      "metrics": {
+        "velocity_error_m_s": 9.345294723406283e-05,
+        "relative_energy_error": 9.345622227852068e-05,
+        "momentum_error_kg_m_s": 1.1102230246251565e-15,
+        "transverse_speed_m_s": 0.0,
+        "spin_speed_rad_s": 0.0
+      },
+      "checks": {
+        "velocity_error_m_s": true,
+        "relative_energy_error": true,
+        "momentum_error_kg_m_s": true,
+        "transverse_speed_m_s": true,
+        "spin_speed_rad_s": true
+      },
+      "passed": true,
+      "reference_velocity_m_s": [
+        -0.6666666666666666,
+        1.3333333333333333
+      ],
+      "measured_velocity_m_s": [
+        -0.6667601196138995,
+        1.333380059806952
+      ],
+      "energy_error_j": 0.00018691244455704137,
+      "restitution_error": 7.008971042532508e-05,
+      "penetration_m": 0.020001382495244593,
+      "impulse_residual_ns": 4.625929269271486e-16,
+      "trace_sha256": "66a81f30f13223401e9a544b7ba0b9627a2c941e214f240761134bd6681fd3d3",
+      "xml_sha256": "7c83ad6d5c078659965cd4beeb1ca173a1aa2c98287973fa63420b4e20e4d247",
+      "timing": {
+        "setup_s": 0.0005502880085259676,
+        "native_step_s": 0.0010974727338179946,
+        "observation_s": 0.0016929442062973976,
+        "total_case_wall_s": 0.004530314006842673
+      }
+    }
+  ],
+  "passed_cases": 18,
+  "scorer_sha256": "53f723af215c3101ce039859c4eb9b05aa4ed476c130dcc4695c804c0296e79b",
+  "scoring_wall_s": 0.021049737988505512
+}

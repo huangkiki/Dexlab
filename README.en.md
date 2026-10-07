@@ -262,3 +262,5 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 **Unloading observation audit:** point-level rescoring of the original six damping cases found no tension hidden by the aggregate; zero damping still fails the full transient target. [Point-level diagnosis and limits](demos/contact-benchmark/DAMPING_ABLATION.md#point-level-unloading-audit).
 
 **Acceptance scope:** Contact diagnosis has controlled repairs and supported negative results; common dynamic material and hardware calibration remain incomplete. [Evidence and retained requirements](demos/contact-benchmark/CONCLUSIONS.md#acceptance-decision-and-remaining-work).
+
+[Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)

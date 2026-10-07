@@ -116,3 +116,5 @@ Contribute <contributing>
 [Analytical incline friction: all18 cases, failures and limits](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.md)
 
 [Incline diagnosis: none of12 controls restored continuous support](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.md)
+
+[Elastic impact:18 final-state passes, with5–20mm contact overlap](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.md)
