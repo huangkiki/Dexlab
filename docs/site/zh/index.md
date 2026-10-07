@@ -114,3 +114,5 @@ Benchmark <benchmark>
 ```
 
 [斜面摩擦解析评测：完整18工况、失败与限制](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.zh-CN.md)
+
+[斜面滑动诊断：12个对照均未恢复连续承载](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.zh-CN.md)

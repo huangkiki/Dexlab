@@ -2,9 +2,13 @@
 import json
 from pathlib import Path
 import unittest
+import tempfile
+import xml.etree.ElementTree as ET
+from unittest.mock import patch
 
 import numpy as np
-from dexlab.incline_score import score
+from dexlab.incline_score import score, score_campaign
+from dexlab.incline_run import model_xml
 
 PROTOCOL = json.loads((Path(__file__).resolve().parents[1] / 'docs/evidence/incline-friction/manifest.json').read_text())
 
@@ -74,3 +78,37 @@ class InclineTests(unittest.TestCase):
         result = score(PROTOCOL, case, trace)
         self.assertFalse(result['passed'])
         self.assertFalse(result['checks']['continuous_support'])
+
+
+class InclineConfigurationTests(unittest.TestCase):
+    def test_ratio_control_preserves_every_other_xml_setting(self):
+        case = PROTOCOL['cases'][0]
+        original = ET.fromstring(model_xml(PROTOCOL, case))
+        for ratio in [0.1, 10.0]:
+            changed = ET.fromstring(model_xml(PROTOCOL, dict(case, impratio=ratio)))
+            self.assertEqual(float(changed.find('option').get('impratio')), ratio)
+            changed.find('option').set('impratio', '1')
+            self.assertEqual(ET.tostring(changed), ET.tostring(original))
+
+    def test_wrong_compiled_ratio_is_rejected_before_scoring(self):
+        case = dict(PROTOCOL['cases'][0], impratio=10.0)
+        protocol = dict(PROTOCOL, cases=[case])
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'manifest.json').write_text(json.dumps(protocol))
+            (root / 'campaign.json').write_text(json.dumps(dict(
+                manifest_sha256='hash', completed_cases=1,
+                runtime=dict(version=protocol['version'], record_verified=True))))
+            folder = root / case['id']
+            folder.mkdir()
+            metadata = dict(case=case, state_writes_after_initialization=0,
+                            trace_sha256='hash', xml_sha256='hash', readback=dict(
+                                nq=7, nv=6, nu=0, timestep=case['timestep'],
+                                iterations=protocol['solver_iterations'],
+                                tolerance=protocol['solver_tolerance'], impratio=1.,
+                                integrator=0, solver=2, cone=1))
+            (folder / 'metadata.json').write_text(json.dumps(metadata))
+            # Hash verification is tested elsewhere; isolate compiled-setting rejection.
+            with patch('dexlab.incline_score.file_hash', return_value='hash'):
+                with self.assertRaisesRegex(ValueError, 'Compiled solver/DOF mismatch'):
+                    score_campaign(root)

@@ -123,7 +123,7 @@ def score_campaign(root):
         readback = meta['readback']
         expected = {'nq': 7, 'nv': 6, 'nu': 0, 'timestep': case['timestep'],
                     'iterations': protocol['solver_iterations'], 'tolerance': protocol['solver_tolerance'],
-                    'impratio': 1., 'integrator': 0, 'solver': 2, 'cone': 1}
+                    'impratio': case.get('impratio', 1.), 'integrator': 0, 'solver': 2, 'cone': 1}
         if any(readback[k] != v for k, v in expected.items()):
             raise ValueError('Compiled solver/DOF mismatch')
         if not np.allclose(readback['gravity'], [0, 0, -protocol['gravity_m_s2']], atol=1e-12):
