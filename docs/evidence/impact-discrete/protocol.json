@@ -1,0 +1,34 @@
+{
+  "version": "0.44.3",
+  "study": "retrospective discrete prediction, not held-out",
+  "source_commit": "9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5",
+  "sources": [
+    {
+      "file": "engine_core_constraint.c",
+      "sha256": "a18146e7766c627d4421947d1e023d92fc6ebb60afcbbf0f0384d0aff44f0b11",
+      "url": "https://github.com/google-deepmind/mujoco/blob/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_core_constraint.c"
+    },
+    {
+      "file": "engine_forward.c",
+      "sha256": "b51009c9f90a59708e63e4b329b5448d514d79e9f6febeed338206d06c083b46",
+      "url": "https://github.com/google-deepmind/mujoco/blob/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_forward.c"
+    },
+    {
+      "file": "engine_setconst.c",
+      "sha256": "42a9e9e5bbabfb2960e56b27eca3d905e7548f14fe87c5eff80a9ac05bbe87cf",
+      "url": "https://github.com/google-deepmind/mujoco/blob/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_setconst.c"
+    },
+    {
+      "file": "engine_core_util.c",
+      "sha256": "7d2347f0d51b3ade707984517af62d9a09dbd0c496377cc5ff862e025ae3f78a",
+      "url": "https://github.com/google-deepmind/mujoco/blob/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_core_util.c"
+    }
+  ],
+  "case_count": 54,
+  "limits": {
+    "position_m": 1e-10,
+    "velocity_m_s": 1e-09,
+    "force_n": 1e-06
+  },
+  "new_native_collision_runs": 0
+}
