@@ -86,8 +86,9 @@ def verify_readback(p,c,r):
     if any(r[k]!=v for k,v in expected.items()):
         raise ValueError('Native solver/DOF mismatch')
     d=p['impedance'];m=np.asarray(c['masses_kg'])
+    stiffness = c.get('stiffness_s2', p['stiffness_s2'])
     arrays=dict(gravity=[0,0,0],mass=[0,*m],inertia=[[0,0,0],*[([.4*x*p['radius_m']**2]*3) for x in m]],
-                condim=[1,1],solref=[[-p['stiffness_s2'],0]]*2,
+                condim=[1,1],solref=[[-stiffness,0]]*2,
                 solimp=[[d,d,.001,.5,2]]*2,size=[[p['radius_m'],0,0]]*2,
                 friction=[[0,0,0]]*2,margin=[0,0],gap=[0,0],damping=[0]*12,armature=[0]*12)
     for name,value in arrays.items():
