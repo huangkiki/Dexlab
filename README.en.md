@@ -265,6 +265,8 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 
 [Impact phase study: 36 cases, 2/9 complete phase groups pass; coarse endpoints remain near exact](docs/impact-phase-results.md)
 
+[Discrete contact audit: 54 trace predictions pass; exact rebound endpoints do not ensure accurate transients](docs/impact-discrete-results.md)
+
 [Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](docs/impact-stiffness-results.md)
 
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)

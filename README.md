@@ -265,6 +265,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 
 [碰撞相位评测：36 例、2/9 组全相位通过，粗步长近零末态误差仍保持](docs/impact-phase-results.zh-CN.md)
 
+[离散接触审计：54条轨迹预测通过，精确反弹末态不保证瞬态准确](docs/impact-discrete-results.zh-CN.md)
+
 [刚度与穿透联合评测：27 例中 24 例末态通过，2 例同时满足 1 mm 预算](docs/impact-stiffness-results.zh-CN.md)
 
 [弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](docs/elastic-impact-results.zh-CN.md)
