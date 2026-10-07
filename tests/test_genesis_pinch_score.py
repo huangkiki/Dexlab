@@ -14,5 +14,5 @@ class PinchEvidenceTests(unittest.TestCase):
 
     def test_invalid_body_map_rejected(self):
         with self.assertRaisesRegex(ValueError, 'identity'):
-            score_trial({'samples': [{}]*4000, 'initial': {
+            score_trial({'condition': 'pinch', 'samples': [{}]*4000, 'initial': {
                 'cube_link': 5, 'pad_links': [5, 4], 'plane_link': 0}}, .001)

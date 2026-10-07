@@ -1,0 +1,13 @@
+{
+  "selection": [
+    "dev-cap-0.4",
+    "dev-cap-0.8",
+    "dev-open"
+  ],
+  "frames": 121,
+  "fps": 30,
+  "scope": "Full four-second saved-pose replay; Genesis dynamics, MuJoCo display only; no interpolated states",
+  "composition": "0.4 N failure left, 0.8 N success right; center cases; original individual MP4s retained",
+  "render_encode_compose_wall_s": 7.281528074992821,
+  "sha256": "00e1394368511e908d93003bb8e6eefc58497460035f26d7c43cc29d9e883821"
+}

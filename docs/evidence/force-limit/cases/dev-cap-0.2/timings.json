@@ -1,0 +1,24 @@
+{
+  "clock": "perf_counter; synchronous CPU readback",
+  "trials": [
+    {
+      "condition": "pinch",
+      "repeat": 0,
+      "control_s": 0.6017589418333955,
+      "step_s": 2.8786191137623973,
+      "observations_s": 1.296667115879245,
+      "step_count": 8000,
+      "reset_s": 0.001664401963353157,
+      "setup_readback_s": 0.038566602976061404,
+      "first_step_s": 1.47733036900172,
+      "serialize_write_s": 0.6316400509676896
+    }
+  ],
+  "rendering": "not executed",
+  "archival": "not executed",
+  "scope": "instrumented CPU run; process import and package installation excluded",
+  "init_s": 1.2062706199940294,
+  "scene_build_s": 32.10587814700557,
+  "destroy_s": 0.15621209796518087,
+  "total_after_import_s": 42.595431668974925
+}

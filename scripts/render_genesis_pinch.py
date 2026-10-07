@@ -60,7 +60,8 @@ def render(record_path, model_path, output):
     start = time.perf_counter()
     frame_map = []
     with mujoco.Renderer(model, height=600, width=800) as renderer, imageio.get_writer(
-            output / 'replay.mp4', fps=30, codec='libx264', quality=8, macro_block_size=1) as writer:
+            output / 'replay.mp4', fps=30, codec='libx264', quality=8, macro_block_size=1,
+            ffmpeg_params=['-threads', '1', '-filter_threads', '1']) as writer:
         for frame, index in enumerate(indices):
             row = rows[int(index)]
             q, pos, quat = (np.asarray(row[key], dtype=float) for key in ('q', 'object_pos', 'object_quat'))
@@ -75,7 +76,7 @@ def render(record_path, model_path, output):
             image = renderer.render()
             canvas = Image.fromarray(image)
             draw = ImageDraw.Draw(canvas)
-            draw.text((20, 16), f"Genesis recorded dynamics | {record['condition']} | t={row['time']:.3f} s", fill='white', font_size=20)
+            draw.text((20, 16), f"Genesis | {record.get('case_id') or record['condition']} | t={row['time']:.3f} s", fill='white', font_size=20)
             draw.text((20, 46), "Measured-pose replay; MuJoCo display only", fill='white', font_size=18)
             image = np.asarray(canvas)
             writer.append_data(image)

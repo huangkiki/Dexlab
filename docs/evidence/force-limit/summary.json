@@ -1,0 +1,1287 @@
+{
+  "intended": 16,
+  "scored": 16,
+  "cases": [
+    {
+      "case": {
+        "id": "dev-cap-0.2",
+        "split": "development",
+        "condition": "pinch",
+        "force_limit_N": 0.2,
+        "initial_x_m": 0.0
+      },
+      "status": "scored",
+      "result": {
+        "passed": false,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": false,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {
+          "hold_or_negative": 2.0
+        },
+        "metrics": {
+          "native_max_penetration_m": 5.222622319561161e-05,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.6049652585656328e-09,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "dev-cap-0.2",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 0.2,
+          "initial_x_m": 0.0
+        },
+        "numerically_valid": true,
+        "task_passed": false,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.24557432398432866
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.39999999999999974,
+          "mean_sum_pad_z_force_N": 6.640748972583572e-12,
+          "mean_other_absolute_vertical_support_N": 0.6278399999933595
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.3999999999999922,
+          "mean_sum_pad_z_force_N": 0.1999999999999961,
+          "mean_other_absolute_vertical_support_N": 0.427839623009117
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000001966
+        }
+      },
+      "native_process_wall_s": 51.13362484698882,
+      "cache_note": "fresh campaign JIT cache",
+      "raw_record_sha256": "76f97458f57ba6c0785c70f8049563281cd58da772e6a93655f41a6cb91185f9"
+    },
+    {
+      "case": {
+        "id": "dev-cap-0.4",
+        "split": "development",
+        "condition": "pinch",
+        "force_limit_N": 0.4,
+        "initial_x_m": 0.0
+      },
+      "status": "scored",
+      "result": {
+        "passed": false,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": false,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {
+          "hold_or_negative": 2.0
+        },
+        "metrics": {
+          "native_max_penetration_m": 5.2615393795161956e-05,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.6066545973025153e-09,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "dev-cap-0.4",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 0.4,
+          "initial_x_m": 0.0
+        },
+        "numerically_valid": true,
+        "task_passed": false,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2440569440368563
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.7999999999999988,
+          "mean_sum_pad_z_force_N": -5.044891368886226e-12,
+          "mean_other_absolute_vertical_support_N": 0.6278400000050451
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.7999999999999998,
+          "mean_sum_pad_z_force_N": 0.3999999999999999,
+          "mean_other_absolute_vertical_support_N": 0.22783842451310107
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000009544
+        }
+      },
+      "native_process_wall_s": 11.127361357037444,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "d0a077422df494bed68451388cb15718a0bc708cefa3a11374992295b928aab1"
+    },
+    {
+      "case": {
+        "id": "dev-cap-0.8",
+        "split": "development",
+        "condition": "pinch",
+        "force_limit_N": 0.8,
+        "initial_x_m": 0.0
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.0006648502491588063,
+          "reference_table_max_penetration_m": 0.0006648502491588063,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.605731860421156e-09,
+          "minimum_hold_center_z_m": 0.0837011011769657,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "dev-cap-0.8",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 0.8,
+          "initial_x_m": 0.0
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.269395547977183
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.600000000000002,
+          "mean_sum_pad_z_force_N": -5.047158754301785e-12,
+          "mean_other_absolute_vertical_support_N": 0.6278400000050474
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.6000000000000005,
+          "mean_sum_pad_z_force_N": 0.6283384573768601,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.5999999999999615,
+          "mean_sum_pad_z_force_N": 0.6227225583020932,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.727449293015525,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "0c1fde9432a08942aa4ecbc1f3782e66a160f676b166c0e7023327418b8c4cf6"
+    },
+    {
+      "case": {
+        "id": "dev-cap-10",
+        "split": "development",
+        "condition": "pinch",
+        "force_limit_N": 10.0,
+        "initial_x_m": 0.0
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.000664849119904564,
+          "reference_table_max_penetration_m": 0.000664849119904564,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.6052971944291032e-09,
+          "minimum_hold_center_z_m": 0.0837011018485747,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "dev-cap-10",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2731002179789357
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.980903155172145,
+          "mean_sum_pad_z_force_N": -5.044596132661269e-12,
+          "mean_other_absolute_vertical_support_N": 0.6278400000050448
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.9809031551721403,
+          "mean_sum_pad_z_force_N": 0.6283384573232736,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.9809031551720842,
+          "mean_sum_pad_z_force_N": 0.6227225583020933,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.726593845000025,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "e5daf2c2abfab350711f6e8112a9e5f2e5d5a292ae3291273408ab768d44654c"
+    },
+    {
+      "case": {
+        "id": "dev-repeat-10",
+        "split": "development",
+        "condition": "pinch",
+        "force_limit_N": 10.0,
+        "initial_x_m": 0.0
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.000664849119904564,
+          "reference_table_max_penetration_m": 0.000664849119904564,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.6052971944291032e-09,
+          "minimum_hold_center_z_m": 0.0837011018485747,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "dev-repeat-10",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2719706589705311
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.980903155172145,
+          "mean_sum_pad_z_force_N": -5.044596132661269e-12,
+          "mean_other_absolute_vertical_support_N": 0.6278400000050448
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.9809031551721403,
+          "mean_sum_pad_z_force_N": 0.6283384573232736,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.9809031551720842,
+          "mean_sum_pad_z_force_N": 0.6227225583020933,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.627407077990938,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "94d2c54b0b2f98761c27d1832e38bc10ceccfc7b3ed90129d50a02bb52299981"
+    },
+    {
+      "case": {
+        "id": "dev-open",
+        "split": "development",
+        "condition": "open_negative",
+        "force_limit_N": 10.0,
+        "initial_x_m": 0.0
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 3.9784150574380395e-06,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.987417466173537e-10,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "dev-open",
+          "split": "development",
+          "condition": "open_negative",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.1467897769762203
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278399999993611
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000008887
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.627840000000507
+        }
+      },
+      "native_process_wall_s": 10.277808830025606,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "91353c980501857672fdcda4166f408df578de253ceffe2a3ef390a37e67f8dc"
+    },
+    {
+      "case": {
+        "id": "eval-left-cap-0.2",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 0.2,
+        "initial_x_m": -0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": false,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": false,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {
+          "hold_or_negative": 2.0
+        },
+        "metrics": {
+          "native_max_penetration_m": 4.85885345729243e-05,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.566529865286427e-09,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-left-cap-0.2",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 0.2,
+          "initial_x_m": -0.002
+        },
+        "numerically_valid": true,
+        "task_passed": false,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2523709060042165
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.23760488635577923,
+          "mean_sum_pad_z_force_N": -0.01653654759056813,
+          "mean_other_absolute_vertical_support_N": 0.6443765466525809
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.2377414912386612,
+          "mean_sum_pad_z_force_N": 0.11886824440428435,
+          "mean_other_absolute_vertical_support_N": 0.5089715548876512
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000007743
+        }
+      },
+      "native_process_wall_s": 10.576745191006921,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "d65d7c0324168153eb340f8436f475e9ce9fe6bf9902ac5102da1371cd0aa43b"
+    },
+    {
+      "case": {
+        "id": "eval-left-cap-0.4",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 0.4,
+        "initial_x_m": -0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": false,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": false,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {
+          "hold_or_negative": 2.0
+        },
+        "metrics": {
+          "native_max_penetration_m": 9.8645654241232e-05,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.59080767667296e-09,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-left-cap-0.4",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 0.4,
+          "initial_x_m": -0.002
+        },
+        "numerically_valid": true,
+        "task_passed": false,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2622400539694354
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.8000000000329003,
+          "mean_sum_pad_z_force_N": -0.033624242354595574,
+          "mean_other_absolute_vertical_support_N": 0.6614642404470348
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.8000000000104965,
+          "mean_sum_pad_z_force_N": 0.4000000000052429,
+          "mean_other_absolute_vertical_support_N": 0.22783811217905758
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000009544
+        }
+      },
+      "native_process_wall_s": 10.626977350970265,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "d151fbb916e70734cab3f6b41361b8d122a6d08fe975875c3d44c0be2d54c50f"
+    },
+    {
+      "case": {
+        "id": "eval-left-cap-0.8",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 0.8,
+        "initial_x_m": -0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.0006650870699778146,
+          "reference_table_max_penetration_m": 0.0006650870699778134,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.59080767667296e-09,
+          "minimum_hold_center_z_m": 0.08370078532050079,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-left-cap-0.8",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 0.8,
+          "initial_x_m": -0.002
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.28327865502797067
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.6000000000400674,
+          "mean_sum_pad_z_force_N": -0.03321424988117304,
+          "mean_other_absolute_vertical_support_N": 0.6610542479975255
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.6000000000481647,
+          "mean_sum_pad_z_force_N": 0.6283497893564057,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.5999999999998937,
+          "mean_sum_pad_z_force_N": 0.622722558303082,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.627547141979448,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "2253aeeeb02df68ea4a620cad700c075b041539d6e6790382732bdee7e3ad9b5"
+    },
+    {
+      "case": {
+        "id": "eval-left-cap-10",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 10.0,
+        "initial_x_m": -0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.0006651573827965338,
+          "reference_table_max_penetration_m": 0.0006651573827965336,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.59080767667296e-09,
+          "minimum_hold_center_z_m": 0.08370078832311136,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-left-cap-10",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 10.0,
+          "initial_x_m": -0.002
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2807992320158519
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.9809035988510029,
+          "mean_sum_pad_z_force_N": -0.03321089959344117,
+          "mean_other_absolute_vertical_support_N": 0.6610508977110818
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.9809031116810771,
+          "mean_sum_pad_z_force_N": 0.6283510320057877,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.9809031575924871,
+          "mean_sum_pad_z_force_N": 0.6227225583028918,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.779607767995913,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "81c82fba9040338c67a3fa9b08bfc46c81fa1ccda605a564e4b1757691a16f2b"
+    },
+    {
+      "case": {
+        "id": "eval-left-open",
+        "split": "evaluation",
+        "condition": "open_negative",
+        "force_limit_N": 10.0,
+        "initial_x_m": -0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 3.9784150574380395e-06,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.987435476161001e-10,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-left-open",
+          "split": "evaluation",
+          "condition": "open_negative",
+          "force_limit_N": 10.0,
+          "initial_x_m": -0.002
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.17119371402077377
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278399999993611
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000008887
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.627840000000507
+        }
+      },
+      "native_process_wall_s": 10.327510406030342,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "064a27c39d4d5a6bcaa926e57dc33c484706e72b2d1a98884e495717bbaede86"
+    },
+    {
+      "case": {
+        "id": "eval-right-cap-0.2",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 0.2,
+        "initial_x_m": 0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": false,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": false,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {
+          "hold_or_negative": 2.0
+        },
+        "metrics": {
+          "native_max_penetration_m": 4.858853610928383e-05,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.5733137801574588e-09,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-right-cap-0.2",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 0.2,
+          "initial_x_m": 0.002
+        },
+        "numerically_valid": true,
+        "task_passed": false,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.26089346897788346
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.23760487386446275,
+          "mean_sum_pad_z_force_N": -0.01653654730096703,
+          "mean_other_absolute_vertical_support_N": 0.6443765463629798
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.2377414787649903,
+          "mean_sum_pad_z_force_N": 0.11886823816706915,
+          "mean_other_absolute_vertical_support_N": 0.5089715611263126
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000007743
+        }
+      },
+      "native_process_wall_s": 10.627738044015132,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "a4fb9e9c8d9feecb45d4a8a0fee974cf5e85e14289e5fe4d398859ae42ab67c4"
+    },
+    {
+      "case": {
+        "id": "eval-right-cap-0.4",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 0.4,
+        "initial_x_m": 0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": false,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": false,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {
+          "hold_or_negative": 2.0
+        },
+        "metrics": {
+          "native_max_penetration_m": 9.864565414390361e-05,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.5827107977453674e-09,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-right-cap-0.4",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 0.4,
+          "initial_x_m": 0.002
+        },
+        "numerically_valid": true,
+        "task_passed": false,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.25461766502121463
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.8000000000329006,
+          "mean_sum_pad_z_force_N": -0.033624239184647985,
+          "mean_other_absolute_vertical_support_N": 0.6614642372770876
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.8000000000104946,
+          "mean_sum_pad_z_force_N": 0.40000000000524183,
+          "mean_other_absolute_vertical_support_N": 0.22783811217910505
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000009544
+        }
+      },
+      "native_process_wall_s": 10.676551839977037,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "a0774bfbb0f7e995b0a8a83aa86bdfaf23a2eb3f9ddfe3f81526ab05fe48c2fd"
+    },
+    {
+      "case": {
+        "id": "eval-right-cap-0.8",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 0.8,
+        "initial_x_m": 0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.0006650870699061085,
+          "reference_table_max_penetration_m": 0.0006650870699061104,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.5827107977453674e-09,
+          "minimum_hold_center_z_m": 0.08370078532051246,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-right-cap-0.8",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 0.8,
+          "initial_x_m": 0.002
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.28667736798524857
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.600000000040068,
+          "mean_sum_pad_z_force_N": -0.03321424865460017,
+          "mean_other_absolute_vertical_support_N": 0.6610542467709535
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.6000000000481651,
+          "mean_sum_pad_z_force_N": 0.6283497893559866,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.6000000000000234,
+          "mean_sum_pad_z_force_N": 0.622722558303082,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.727872840012424,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "6f013782e43c68fea2684415f5fb214919ec08b1c03f6acff251e88ea5c5e6a0"
+    },
+    {
+      "case": {
+        "id": "eval-right-cap-10",
+        "split": "evaluation",
+        "condition": "pinch",
+        "force_limit_N": 10.0,
+        "initial_x_m": 0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 0.0006651573827800508,
+          "reference_table_max_penetration_m": 0.0006651573827800503,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.587667754009365e-09,
+          "minimum_hold_center_z_m": 0.08370078832312274,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-right-cap-10",
+          "split": "evaluation",
+          "condition": "pinch",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.002
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.2974043019930832
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 1.9809035988509966,
+          "mean_sum_pad_z_force_N": -0.03321089836888761,
+          "mean_other_absolute_vertical_support_N": 0.661050896486528
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 1.9809031116811533,
+          "mean_sum_pad_z_force_N": 0.6283510320052034,
+          "mean_other_absolute_vertical_support_N": 0.0
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 1.9809031575924707,
+          "mean_sum_pad_z_force_N": 0.6227225583028918,
+          "mean_other_absolute_vertical_support_N": 0.0
+        }
+      },
+      "native_process_wall_s": 10.777640487009194,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "17e060d31dbe9f2c27324ae551a4f57e405f7a2728929956d748eccdfc88fdf8"
+    },
+    {
+      "case": {
+        "id": "eval-right-open",
+        "split": "evaluation",
+        "condition": "open_negative",
+        "force_limit_N": 10.0,
+        "initial_x_m": 0.002
+      },
+      "status": "scored",
+      "result": {
+        "passed": true,
+        "checks": {
+          "declared_import": true,
+          "native_penetration_1mm": true,
+          "reference_table_penetration_1mm": true,
+          "force_ledger": true,
+          "momentum_balance_5percent_weight": true,
+          "released": true,
+          "hold_or_negative": true,
+          "initial_rest_orientation": true,
+          "box_inertia_and_friction": true
+        },
+        "first_failure_time_s": {},
+        "metrics": {
+          "native_max_penetration_m": 3.9784150574380395e-06,
+          "reference_table_max_penetration_m": 3.9784150574380395e-06,
+          "maximum_force_ledger_error_N": 0.0,
+          "maximum_momentum_residual_weight_ratio": 2.9873994622960843e-10,
+          "minimum_hold_center_z_m": 0.01999890697381819,
+          "maximum_release_center_z_m": 0.019998906973818325
+        },
+        "case": {
+          "id": "eval-right-open",
+          "split": "evaluation",
+          "condition": "open_negative",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.002
+        },
+        "numerically_valid": true,
+        "task_passed": true,
+        "scope": "Fixed simulation challenges; no hardware or population success claim",
+        "scoring_wall_s": 0.1706738649518229
+      },
+      "diagnostic_windows": {
+        "prelift": {
+          "window_s": [
+            0.8,
+            0.9
+          ],
+          "samples": 201,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278399999993611
+        },
+        "early_lift": {
+          "window_s": [
+            1.025,
+            1.075
+          ],
+          "samples": 101,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.6278400000008887
+        },
+        "hold": {
+          "window_s": [
+            2.0,
+            3.0
+          ],
+          "samples": 2001,
+          "mean_sum_abs_pad_x_force_N": 0.0,
+          "mean_sum_pad_z_force_N": 0.0,
+          "mean_other_absolute_vertical_support_N": 0.627840000000507
+        }
+      },
+      "native_process_wall_s": 10.326399061013944,
+      "cache_note": "existing campaign JIT cache retained",
+      "raw_record_sha256": "9e3e545574f6ade152e45dbc2b8c882be5fd74f44af6964d94dd866cb4f37803"
+    }
+  ],
+  "scope": "Fixed cases, no population success probability or hardware qualification",
+  "native_process_wall_s": 210.69483538006898,
+  "attempts": 16,
+  "packaging_and_plot_wall_s": 6.765721375006251,
+  "diagnostic_window_note": "Descriptive fixed windows, no acceptance or controller change; x force is a flat-pad proxy, not actuator force"
+}

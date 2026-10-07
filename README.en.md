@@ -6,7 +6,9 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 # DexLab
 
-**Robot contact dynamics: from models and parameters to verifiable experimental findings.**
+Current focus: measurable standard-object grasping. Across [16 force-limit cases](docs/force-limit-results.md), 0.2/0.4 N fail retention and 0.8/10 N hold and release, including ±2 mm offsets. All failures and raw records are retained; no hardware-fidelity claim.
+
+**Studying how robots perform contact-rich manipulation in trustworthy simulation.**
 
 [Documentation](docs/site/en/index.md) · [简体中文](README.md) · [Experiments](demos/) · [Results and data](docs/evidence/README.md) · [Research issues](https://github.com/huangkiki/Dexlab/issues)
 

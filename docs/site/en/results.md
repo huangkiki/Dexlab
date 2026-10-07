@@ -1,5 +1,7 @@
 # Results and failures
 
+The [16-case block force-limit experiment](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) is complete: 0.2/0.4 N fail retention, 0.8/10 N hold and release, including ±2 mm offsets. Numerical validity and task outcome are separate; no hardware-fidelity claim.
+
 ## Genesis PBD cloth: failures remain visible
 
 The tested official PBD/rigid frictional grasp profile is rejected: same-step momentum residual 3.2e-5 kg·m/s exceeds the 3.3e-7 bound; actual gripper lift reaches 79.988 mm while cloth stays at 4 mm, including both preregistered offsets. The 36-cell equal-time response shows strong timestep sensitivity. Connected-fold saved-state checks pass but establish neither continuous collision nor material accuracy. [Full protocols, all results and raw records](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md).
