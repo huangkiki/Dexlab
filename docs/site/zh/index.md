@@ -117,6 +117,8 @@ Benchmark <benchmark>
 
 [斜面滑动诊断：12个对照均未恢复连续承载](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.zh-CN.md)
 
+[碰撞相位评测：36 例、2/9 组全相位通过，粗步长近零末态误差仍保持](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-phase-results.zh-CN.md)
+
 [刚度与穿透联合评测：27 例中 24 例末态通过，2 例同时满足 1 mm 预算](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.zh-CN.md)
 
 [弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.zh-CN.md)
