@@ -29,7 +29,7 @@ def model_xml(protocol, case):
     d = case['impedance']
     return f'''<mujoco model="analytical-incline">
 <option timestep="{case['timestep']}" gravity="0 0 -{protocol['gravity_m_s2']}"
- integrator="Euler" solver="Newton" cone="elliptic" impratio="1"
+ integrator="Euler" solver="Newton" cone="elliptic" impratio="{case.get('impratio', 1)}"
  iterations="{protocol['solver_iterations']}" tolerance="{protocol['solver_tolerance']}"/>
 <default><geom condim="3" friction="{case['friction']} 0 0"
  solref="{vec(protocol['solref'])}" solimp="{d} {d} 0.001 0.5 2"/></default>

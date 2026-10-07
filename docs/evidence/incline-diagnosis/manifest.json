@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "engine": "mujoco",
+  "version": "3.15.0",
+  "duration_s": 2,
+  "score_start_s": 0.5,
+  "mass_kg": 0.064,
+  "side_m": 0.04,
+  "gravity_m_s2": 9.81,
+  "solref": [
+    0.02,
+    1
+  ],
+  "solver_iterations": 100,
+  "solver_tolerance": 1e-10,
+  "integrator": "Euler",
+  "cone": "elliptic",
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "force_balance_rmse_n": 0.01
+  },
+  "cases": [
+    {
+      "id": "sliding-d0.9-h0.002-ratio0.1",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.002,
+      "impratio": 0.1
+    },
+    {
+      "id": "sliding-d0.9-h0.001-ratio0.1",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "impratio": 0.1
+    },
+    {
+      "id": "sliding-d0.9-h0.0005-ratio0.1",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.0005,
+      "impratio": 0.1
+    },
+    {
+      "id": "sliding-d0.99-h0.002-ratio0.1",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.002,
+      "impratio": 0.1
+    },
+    {
+      "id": "sliding-d0.99-h0.001-ratio0.1",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.001,
+      "impratio": 0.1
+    },
+    {
+      "id": "sliding-d0.99-h0.0005-ratio0.1",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.0005,
+      "impratio": 0.1
+    },
+    {
+      "id": "sliding-d0.9-h0.002-ratio10.0",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.002,
+      "impratio": 10.0
+    },
+    {
+      "id": "sliding-d0.9-h0.001-ratio10.0",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "impratio": 10.0
+    },
+    {
+      "id": "sliding-d0.9-h0.0005-ratio10.0",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.0005,
+      "impratio": 10.0
+    },
+    {
+      "id": "sliding-d0.99-h0.002-ratio10.0",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.002,
+      "impratio": 10.0
+    },
+    {
+      "id": "sliding-d0.99-h0.001-ratio10.0",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.001,
+      "impratio": 10.0
+    },
+    {
+      "id": "sliding-d0.99-h0.0005-ratio10.0",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.0005,
+      "impratio": 10.0
+    }
+  ],
+  "diagnostic": "One-factor friction-to-normal constraint impedance sensitivity; baseline ratio1 reused from v0.43.0; not material calibration."
+}
