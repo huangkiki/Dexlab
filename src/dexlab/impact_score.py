@@ -34,7 +34,7 @@ def score(protocol, case, trace):
     f = np.asarray(trace['forces']); count = np.asarray(trace['contact_count'])
     if not np.allclose(t,np.arange(n+1)*h,atol=1e-10,rtol=0) or not np.allclose(trace['force_times'],t[:-1],atol=1e-10,rtol=0):
         raise ValueError('Incorrect time/force epoch')
-    initial = np.zeros((2,13));initial[:,0] = protocol['initial_x_m']
+    initial = np.zeros((2,13));initial[:,0] = case.get('initial_x_m', protocol['initial_x_m'])
     initial[:,3] = 1;initial[:,7] = case['initial_vx_m_s']
     if not np.allclose(s[0],initial,atol=1e-12,rtol=0):
         raise ValueError('Incorrect initial state')

@@ -17,7 +17,7 @@ def file_hash(path):
 def model_xml(protocol, case):
     radius = protocol['radius_m']
     bodies = []
-    for i, (mass, x) in enumerate(zip(case['masses_kg'], protocol['initial_x_m'])):
+    for i, (mass, x) in enumerate(zip(case['masses_kg'], case.get('initial_x_m', protocol['initial_x_m']))):
         inertia = 0.4 * mass * radius**2
         bodies.append(f'''<body name="sphere{i}" pos="{x} 0 0"><freejoint/>
 <inertial pos="0 0 0" mass="{mass}" diaginertia="{inertia} {inertia} {inertia}"/>
@@ -102,7 +102,8 @@ def main():
     args = parser.parse_args()
     import mujoco as mj
     protocol = json.loads(args.manifest.read_text())
-    if len(protocol['cases']) != 18 or protocol['version'] != mj.mj_versionString():
+    budget = protocol.get('case_budget', 18)
+    if budget not in (18, 27) or len(protocol['cases']) != budget or protocol['version'] != mj.mj_versionString():
         raise ValueError('Frozen case budget or version mismatch')
     identity = mujoco_profile_identity(package_identity('mujoco'), mj.mj_versionString(),
                                        profile='qualification-3.15.0')

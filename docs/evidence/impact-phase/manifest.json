@@ -1,0 +1,558 @@
+{
+  "version": "3.15.0",
+  "radius_m": 0.05,
+  "initial_x_m": [
+    -0.06,
+    0.06
+  ],
+  "duration_s": 0.2,
+  "score_window_s": 0.02,
+  "stiffness_s2": 10000,
+  "impedance": 0.9,
+  "limits": {
+    "velocity_error_m_s": 0.01,
+    "relative_energy_error": 0.01,
+    "momentum_error_kg_m_s": 1e-09,
+    "transverse_speed_m_s": 1e-09,
+    "spin_speed_rad_s": 1e-09
+  },
+  "overlap_budget_m": 0.001,
+  "case_budget": 27,
+  "baseline_manifest_sha256": "4f2a7a8288bdb1d145ccc62a31ab658393fd4f49aada586bce179d8528d6f9b6",
+  "baseline_archive_sha256": "f8a294d055059667fd34346ebad2aaefffa3f471f6429d2c8fe880ace9c35dc5",
+  "baseline_bindings": [
+    {
+      "id": "stiffness-10",
+      "trace_sha256": "a2647472afbc86a1140162c95ffe0d6528aa7d36e81741bf5967d4f9537fbf51",
+      "xml_sha256": "a62ff61a24d144345e644ddcd87a7a37df257d526aed004a3423bee7af61de46"
+    },
+    {
+      "id": "stiffness-11",
+      "trace_sha256": "dce7e68d5f6615b27fffc2a5e872a43f48c0dcc9263f144b3ced6edd96e8dfda",
+      "xml_sha256": "165a9e8457ad86e6e865c547f63a63cad8e2b386be0be8ab0cd0a602c53ae3ee"
+    },
+    {
+      "id": "stiffness-12",
+      "trace_sha256": "fa235b82c6579eab136dbcf645e579abebc1d2e29200b5d06c6b066dcf4690d3",
+      "xml_sha256": "28851362dc033573bab8b0531613aa6a59be94a3bef5bd1ea82c505d32b521ca"
+    },
+    {
+      "id": "stiffness-13",
+      "trace_sha256": "c1baf670d952532c27767dc37a49701585010524cf7c1d72cc0269a22c7e68ee",
+      "xml_sha256": "a62ff61a24d144345e644ddcd87a7a37df257d526aed004a3423bee7af61de46"
+    },
+    {
+      "id": "stiffness-14",
+      "trace_sha256": "620f0b4359857636d7a147b47c0b0aee0069533587871631ab5a9e02fce001f4",
+      "xml_sha256": "165a9e8457ad86e6e865c547f63a63cad8e2b386be0be8ab0cd0a602c53ae3ee"
+    },
+    {
+      "id": "stiffness-15",
+      "trace_sha256": "d1a6b7148ec697ac35f7f08b3194a16c39f711548431eb26422bc0ca0546e490",
+      "xml_sha256": "28851362dc033573bab8b0531613aa6a59be94a3bef5bd1ea82c505d32b521ca"
+    },
+    {
+      "id": "stiffness-16",
+      "trace_sha256": "3e99ea41b5da0dbfb0679a289a32d23ab71a9dd1cc50e369fb6b28f4c43b34b8",
+      "xml_sha256": "a62ff61a24d144345e644ddcd87a7a37df257d526aed004a3423bee7af61de46"
+    },
+    {
+      "id": "stiffness-17",
+      "trace_sha256": "56d578d79169b8d42f2ded0e4af0109bc161f871549dd7e65c588950428f2802",
+      "xml_sha256": "165a9e8457ad86e6e865c547f63a63cad8e2b386be0be8ab0cd0a602c53ae3ee"
+    },
+    {
+      "id": "stiffness-18",
+      "trace_sha256": "18f8261cfb1c62b62edfa9351eb073b75445656d0470c0fc115cf63543c83e72",
+      "xml_sha256": "28851362dc033573bab8b0531613aa6a59be94a3bef5bd1ea82c505d32b521ca"
+    }
+  ],
+  "cases": [
+    {
+      "id": "phase-01",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060125
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-02",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06025
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-03",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060375
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-04",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0600625
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-05",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060125
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-06",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0601875
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-07",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060031249999999994
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-08",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0600625
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-09",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060093749999999994
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-10",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06025
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-11",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0605
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-12",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06075
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-13",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060125
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-14",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06025
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-15",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060375
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-16",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0600625
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-17",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060125
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-18",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0601875
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-19",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0605
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-20",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.061
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-21",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0615
+      ],
+      "timestep": 0.001,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-22",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06025
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-23",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.0605
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-24",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06075
+      ],
+      "timestep": 0.0005,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    },
+    {
+      "id": "phase-25",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060125
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.25
+    },
+    {
+      "id": "phase-26",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.06025
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.5
+    },
+    {
+      "id": "phase-27",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "initial_x_m": [
+        -0.06,
+        0.060375
+      ],
+      "timestep": 0.00025,
+      "stiffness_s2": 1000000.0,
+      "arrival_phase": 0.75
+    }
+  ]
+}
