@@ -8,6 +8,24 @@ This phase moved from demonstrating a grasp to explaining success and failure wi
 
 DexLab studies contact-rich robotic manipulation in trustworthy simulation. Trustworthiness remains an evidence requirement, not an achieved hardware-accuracy certification.
 
+## The research question organizing this release
+
+**Which measurable factors determine success or failure in standard-object grasping, and why should we trust the explanation supplied by simulation?**
+
+### Established factors versus open hypotheses
+
+The strongest current evidence concerns **finger actuator limits**: model, friction and action sequence are fixed while the limit changes; measured support forces and object height reveal reproducible differences in sustained grasping. **Initial position** was checked only at preregistered ±2 mm offsets; retained outcomes do not establish arbitrary-position robustness. **Mass, size and contact-parameter mappings** were examined in separate synthetic contact experiments; their transfer failures cannot be relabeled as standard-grasp failures. Friction, gripper geometry and actuator dynamics remain relevant hypotheses without a complete grasp-specific causal comparison in this release.
+
+### Grounds for trusting the explanation
+
+The evidence has three levels:
+
+1. **Execution matches the declared experiment:** frozen source/actions, native mass/inertia/contact/actuator readbacks, complete initial states and per-step records.
+2. **The explanation is supported inside the declared numerical model:** positive and negative controls distinguish finger support from table support; native contact forces, penetration, momentum checks and repeat replay constrain the interpretation. Each finding is limited to its tested conditions and tolerances; a PASS is not universal reliability.
+3. **The explanation agrees with reality:** matched measurements of force, slip, holding and release for the same object/gripper, with uncertainty. These are missing, so this release reaches preliminary within-model conclusions rather than this final validation level.
+
+Engineering gates establish deliverability and known regression behavior, not independent physical realism. Future tasks must state which uncertainty they reduce, which measurement they require, and what result would refute the proposed explanation. Backend count and closed issues are not research outcomes by themselves.
+
 ## Six reportable findings
 
 | Question | Evidence | Conclusion and limit |

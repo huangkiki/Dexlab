@@ -7,6 +7,8 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 # DexLab
 
+**Research question: Which measurable factors determine standard-object grasping outcomes, and why trust the simulated explanation?**
+
 **Holiday findings:** [Conclusions, evidence boundaries and next steps](docs/holiday-report.md). Current scope is the stage report and release closeout.
 
 
