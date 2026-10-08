@@ -270,3 +270,5 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 [Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](docs/impact-stiffness-results.md)
 
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)
+
+[Standard cube pinch: all18 records retained,3 pass; marginal records fail consistency](docs/pinch-load-results.md)

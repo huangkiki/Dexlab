@@ -124,3 +124,5 @@ Benchmark <benchmark>
 [刚度与穿透联合评测：27 例中 24 例末态通过，2 例同时满足 1 mm 预算](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.zh-CN.md)
 
 [弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.zh-CN.md)
+
+[标准方块夹持：3例通过、9例物理失败、6例一致性拒绝](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.zh-CN.md)
