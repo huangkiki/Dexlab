@@ -10,8 +10,8 @@ from dexlab.pinch_score import score_trace
 P = json.loads((Path(__file__).resolve().parents[1]/'docs/evidence/pinch-load/manifest.json').read_text())
 
 
-def static_trace():
-    c = next(c for c in P['cases'] if c['capacity_ratio'] == 2.)
+def static_trace(c=None):
+    c = c or next(c for c in P['cases'] if c['capacity_ratio'] == 2.)
     h = c['timestep']; n = round(P['duration_s']/h); onset = round(P['preload_s']/h)
     state = np.zeros((n+1, 18)); state[:, 0] = np.arange(n+1)*h; state[:, 6] = 1
     weight = P['cube_mass_kg']*P['gravity_m_s2']
@@ -75,3 +75,59 @@ class PinchScorerTests(unittest.TestCase):
         result=score_trace(P,c,t)
         self.assertIsNone(result['passed'])
         self.assertEqual(result['status'],'marginal diagnostic')
+
+
+class PinchProvenanceTests(unittest.TestCase):
+    def setUp(self):
+        import hashlib
+        import tempfile
+        import mujoco as mj
+        from dexlab.pinch_run import model_xml, compiled_readback
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.evidence = Path(__file__).resolve().parents[1]/'docs/evidence/pinch-load'
+        self.digest = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+        manifest = self.root/'manifest.json'
+        manifest.write_bytes((self.evidence/'manifest.json').read_bytes())
+        runner = Path(__file__).resolve().parents[1]/'src/dexlab/pinch_run.py'
+        campaign = dict(manifest_sha256=self.digest(manifest),runner_sha256=self.digest(runner),
+                        completed_cases=18,runtime=dict(version=P['version'],record_verified=True))
+        (self.root/'campaign.json').write_text(json.dumps(campaign))
+        for c in P['cases']:
+            directory=self.root/c['id'];directory.mkdir()
+            xml=model_xml(P,c);(directory/'model.xml').write_text(xml)
+            _,trace=static_trace(c)
+            np.savez_compressed(directory/'trace.npz',**trace)
+            meta=dict(case=c,readback=compiled_readback(mj.MjModel.from_xml_string(xml)),
+                      cube_body=3,cube_geom=2,jaw_geoms=[0,1],state_writes_after_initialization=0,
+                      force_epoch='states[i].time; states[i+1] postintegration',
+                      xml_sha256=self.digest(directory/'model.xml'),trace_sha256=self.digest(directory/'trace.npz'),
+                      setup_s=0,control_s=0,native_step_s=0,observation_s=0,serialization_s=0,total_case_wall_s=0)
+            (directory/'metadata.json').write_text(json.dumps(meta))
+
+    def test_complete_synthetic_matrix(self):
+        from dexlab.pinch_score import score_campaign
+        result=score_campaign(self.root,self.evidence)
+        self.assertEqual((result['passed_cases'],result['failed_cases'],result['diagnostic_cases']),(6,6,6))
+
+    def test_rehashed_manifest_cannot_change_threshold(self):
+        from dexlab.pinch_score import score_campaign
+        path=self.root/'manifest.json';m=json.loads(path.read_text());m['limits']['static_speed_m_s']=999
+        path.write_text(json.dumps(m));campaign=self.root/'campaign.json';m=json.loads(campaign.read_text())
+        m['manifest_sha256']=self.digest(path);campaign.write_text(json.dumps(m))
+        with self.assertRaisesRegex(ValueError,'frozen protocol'):score_campaign(self.root,self.evidence)
+
+    def test_changed_compiled_mass_rejected(self):
+        from dexlab.pinch_score import score_campaign
+        path=self.root/P['cases'][0]['id']/'metadata.json';m=json.loads(path.read_text())
+        m['readback']['body_mass'][3]*=2;path.write_text(json.dumps(m))
+        with self.assertRaisesRegex(ValueError,'body_mass'):score_campaign(self.root,self.evidence)
+
+    def test_corrupt_archive_and_runner_rejected(self):
+        from dexlab.pinch_score import score_campaign
+        path=self.root/P['cases'][0]['id']/'trace.npz';path.write_bytes(path.read_bytes()+b'changed')
+        with self.assertRaisesRegex(ValueError,'hash mismatch'):score_campaign(self.root,self.evidence)
+        path=self.root/'campaign.json';m=json.loads(path.read_text());m['runner_sha256']='0'*64
+        path.write_text(json.dumps(m))
+        with self.assertRaisesRegex(ValueError,'Runner source'):score_campaign(self.root,self.evidence)

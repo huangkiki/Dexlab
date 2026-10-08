@@ -45,6 +45,20 @@ def model_xml(protocol, case):
 </mujoco>'''
 
 
+def compiled_readback(model):
+    """Record all fields checked by the independent configuration audit."""
+    fields = ('body_mass','body_inertia','body_pos','jnt_type','jnt_axis','jnt_qposadr','jnt_dofadr',
+              'dof_damping','dof_frictionloss','dof_armature','geom_type','geom_size','geom_bodyid',
+              'geom_friction','geom_solref','geom_solimp','geom_condim','actuator_gear',
+              'actuator_gainprm','actuator_biasprm','actuator_trnid')
+    readback = {name: getattr(model, name).tolist() for name in fields}
+    readback.update(nq=model.nq,nv=model.nv,nu=model.nu,gravity=model.opt.gravity.tolist(),
+                    timestep=float(model.opt.timestep),integrator=int(model.opt.integrator),
+                    solver=int(model.opt.solver),cone=int(model.opt.cone),impratio=float(model.opt.impratio),
+                    iterations=int(model.opt.iterations),tolerance=float(model.opt.tolerance))
+    return readback
+
+
 def run_case(mj, protocol, case, output):
     output.mkdir()
     started = time.perf_counter()
@@ -68,12 +82,14 @@ def run_case(mj, protocol, case, output):
     contacts = np.full((n, 16, 13), np.nan)
     warnings = np.zeros((n, len(data.warning)), dtype=int)
     setup_s = time.perf_counter()-started
-    native_s = observation_s = 0.
+    native_s = observation_s = control_s = 0.
     for step in range(n):
         before = time.perf_counter()
         ctrl[step], external[step] = commands(protocol, case, step)
         data.ctrl[:] = ctrl[step]
         data.xfrc_applied[cube, :3] = external[step]
+        control_s += time.perf_counter() - before
+        before = time.perf_counter()
         # mj_step leaves pose/contact kinematics at this solve epoch.
         mj.mj_step(model, data)
         after = time.perf_counter(); native_s += after-before
@@ -103,19 +119,11 @@ def run_case(mj, protocol, case, output):
                         forces=forces, moments=moments, contacts=contacts, counts=counts,
                         actuator=actuator, constraint=constraint, warnings=warnings,
                         force_times=states[:-1, 0])
-    fields = ('body_mass','body_inertia','body_pos','jnt_type','jnt_axis','jnt_qposadr','jnt_dofadr',
-              'dof_damping','dof_frictionloss','dof_armature','geom_type','geom_size','geom_bodyid',
-              'geom_friction','geom_solref','geom_solimp','geom_condim','actuator_gear',
-              'actuator_gainprm','actuator_biasprm','actuator_trnid')
-    readback = {name: getattr(model, name).tolist() for name in fields}
-    readback.update(nq=model.nq,nv=model.nv,nu=model.nu,gravity=model.opt.gravity.tolist(),
-                    timestep=float(model.opt.timestep),integrator=int(model.opt.integrator),
-                    solver=int(model.opt.solver),cone=int(model.opt.cone),impratio=float(model.opt.impratio),
-                    iterations=int(model.opt.iterations),tolerance=float(model.opt.tolerance))
+    readback = compiled_readback(model)
     metadata = dict(case=case, readback=readback, cube_body=cube, cube_geom=cube_geom,
                     jaw_geoms=jaw_geoms, state_writes_after_initialization=0,
                     force_epoch='states[i].time; states[i+1] postintegration',
-                    setup_s=setup_s,native_step_s=native_s,observation_s=observation_s,
+                    setup_s=setup_s,control_s=control_s,native_step_s=native_s,observation_s=observation_s,
                     serialization_s=time.perf_counter()-serialized,
                     total_case_wall_s=time.perf_counter()-started,
                     xml_sha256=hashlib.sha256(xml.encode()).hexdigest(),

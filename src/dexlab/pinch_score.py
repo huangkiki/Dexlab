@@ -140,3 +140,110 @@ def score_trace(protocol, case, trace):
                 measured_normal_capacity_mean_n=float(np.mean(p['friction']*normals[fw].sum(axis=1))),
                 full_stage_normal_command_relative_rmse=[_rmse(normals[onset:, i]/normal_command-1) for i in (0, 1)],
                 scope='Specified Coulomb fixture; measured-force capacity is diagnostic, not an independent prediction')
+
+
+def validate_readback(protocol, case, readback):
+    """Check compiled configuration against the declared physical specification."""
+    p = protocol
+    size = p['jaw_half_size_m']; half = p['side_m']/2
+    jaw_inertia = [p['jaw_mass_kg']*(size[(i+1)%3]**2+size[(i+2)%3]**2)/3 for i in range(3)]
+    cube_inertia = p['cube_mass_kg']*p['side_m']**2/6
+    expected = dict(
+        nq=9, nv=8, nu=2, timestep=case['timestep'], gravity=[0,0,0],
+        integrator=0, solver=2, cone=1, impratio=1,
+        iterations=p['solver_iterations'], tolerance=p['solver_tolerance'],
+        body_mass=[0,p['jaw_mass_kg'],p['jaw_mass_kg'],p['cube_mass_kg']],
+        body_inertia=[[0,0,0],jaw_inertia,jaw_inertia,[cube_inertia]*3],
+        body_pos=[[0,0,0],[-half-size[0],0,0],[half+size[0],0,0],[0,0,0]],
+        jnt_type=[2,2,0], jnt_axis=[[1,0,0],[-1,0,0],[0,0,1]],
+        jnt_qposadr=[0,1,2], jnt_dofadr=[0,1,2],
+        dof_damping=[0]*8, dof_frictionloss=[0]*8, dof_armature=[0]*8,
+        geom_type=[6]*3, geom_size=[size,size,[half]*3], geom_bodyid=[1,2,3],
+        geom_friction=[[p['friction'],0,0]]*3, geom_condim=[3]*3,
+        geom_solref=[p['solref']]*3,
+        geom_solimp=[[case['impedance']]*2+[.001,.5,2]]*3,
+        actuator_gear=[[1,0,0,0,0,0]]*2, actuator_gainprm=[[1]+[0]*9]*2,
+        actuator_biasprm=[[0]*10]*2, actuator_trnid=[[0,-1],[1,-1]])
+    if set(readback) != set(expected):
+        raise ValueError('Compiled configuration fields differ')
+    for name, value in expected.items():
+        if np.shape(readback[name]) != np.shape(value):
+            raise ValueError(f'Compiled shape mismatch: {name}')
+        _close(readback[name], value, 1e-14, f'Compiled configuration mismatch: {name}')
+
+
+def score_campaign(root, evidence):
+    """Bind immutable inputs to a trusted protocol before numerical scoring.
+
+    Local hashes detect inconsistency, not malicious fabrication or hardware truth.
+    """
+    import hashlib
+    import json
+    from pathlib import Path
+    from dexlab.pinch_run import model_xml
+
+    def digest(path):
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    protocol = json.loads((root/'manifest.json').read_text())
+    frozen = json.loads((evidence/'manifest.json').read_text())
+    if protocol != frozen:
+        raise ValueError('Manifest differs from frozen protocol')
+    campaign = json.loads((root/'campaign.json').read_text())
+    if campaign['manifest_sha256'] != digest(root/'manifest.json'):
+        raise ValueError('Manifest hash mismatch')
+    if campaign['runner_sha256'] != digest(Path(__file__).with_name('pinch_run.py')):
+        raise ValueError('Runner source mismatch')
+    cases = protocol['cases']
+    if len(cases) != 18 or len({c['id'] for c in cases}) != 18 or campaign['completed_cases'] != 18:
+        raise ValueError('Incomplete/duplicate case matrix')
+    runtime = campaign['runtime']
+    if runtime.get('version') != protocol['version'] or runtime.get('record_verified') is not True:
+        raise ValueError('Runtime record/version mismatch')
+    rows = []
+    for case in cases:
+        directory = root/case['id']
+        meta = json.loads((directory/'metadata.json').read_text())
+        if meta['case'] != case or meta['state_writes_after_initialization'] != 0:
+            raise ValueError('Case identity or state injection declaration')
+        if (meta['cube_body'],meta['cube_geom'],meta['jaw_geoms']) != (3,2,[0,1]):
+            raise ValueError('Native geometry/body identity mismatch')
+        if meta['force_epoch'] != 'states[i].time; states[i+1] postintegration':
+            raise ValueError('Force epoch declaration mismatch')
+        for name, key in (('trace.npz','trace_sha256'),('model.xml','xml_sha256')):
+            if digest(directory/name) != meta[key]:
+                raise ValueError(f'Artifact hash mismatch: {case["id"]}/{name}')
+        if (directory/'model.xml').read_text() != model_xml(protocol,case):
+            raise ValueError('XML differs from declared scene')
+        validate_readback(protocol,case,meta['readback'])
+        timing = {k:meta[k] for k in ('setup_s','control_s','native_step_s','observation_s','serialization_s','total_case_wall_s')}
+        if not all(np.isfinite(v) and v >= 0 for v in timing.values()):
+            raise ValueError('Invalid cost record')
+        with np.load(directory/'trace.npz',allow_pickle=False) as trace:
+            result = score_trace(protocol,case,trace)
+        rows.append(dict(id=case['id'],**result,timing=timing,
+                         trace_sha256=meta['trace_sha256'],xml_sha256=meta['xml_sha256']))
+    return dict(protocol=protocol,campaign=campaign,results=rows,
+                scorer_sha256=digest(Path(__file__)),
+                passed_cases=sum(row['passed'] is True for row in rows),
+                failed_cases=sum(row['passed'] is False for row in rows),
+                diagnostic_cases=sum(row['passed'] is None for row in rows))
+
+
+def main():
+    import argparse
+    import json
+    from pathlib import Path
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--input',type=Path,required=True)
+    parser.add_argument('--evidence',type=Path,required=True)
+    parser.add_argument('--output',type=Path,required=True)
+    args = parser.parse_args()
+    result = score_campaign(args.input,args.evidence)
+    with args.output.open('x') as stream:
+        json.dump(result,stream,indent=2,allow_nan=False)
+        stream.write('\n')
+
+
+if __name__ == '__main__':
+    main()

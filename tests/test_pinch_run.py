@@ -5,7 +5,8 @@ import unittest
 import xml.etree.ElementTree as ET
 
 import numpy as np
-from dexlab.pinch_run import commands, model_xml
+from dexlab.pinch_run import commands, model_xml, compiled_readback
+from dexlab.pinch_score import validate_readback
 
 P = json.loads((Path(__file__).resolve().parents[1]/'docs/evidence/pinch-load/manifest.json').read_text())
 
@@ -32,6 +33,7 @@ class PinchProtocolTests(unittest.TestCase):
         import mujoco as mj
         for c in P['cases']:
             m = mj.MjModel.from_xml_string(model_xml(P,c))
+            validate_readback(P,c,compiled_readback(m))
             self.assertEqual((m.nq,m.nv,m.nu),(9,8,2))
             np.testing.assert_array_equal(m.dof_damping,0)
             np.testing.assert_array_equal(m.dof_frictionloss,0)

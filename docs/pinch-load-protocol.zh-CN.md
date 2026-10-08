@@ -31,3 +31,5 @@
 物理运行前提交协议、清单、评分负例及源码冻结。负例须拒绝错误力时刻、缺侧/接触、修改状态、用命令代替实测力以及损坏哈希/配置。另行完成原生与最新稳定版准入。只运行一批18例、每例1.5s；单执行者，每次上限30分钟，挂载盘环境与输出，16GiB/两核/128任务/零swap及独占窗口。分别记录准备、原生步进、观测、序列化、评分与完整回归成本。不作引擎排名、总体成功率或真实材料准确性结论。公开全部失败及载荷/滑移曲线，联系抓取限制但不声称完整机器人抓取验收。
 
 角冲量一致性单独使用1e-9N*m*s阈值（均匀方块惯量），四元数积分残差≤1e-10为无量纲。上述记录一致性检查在原生实验前补充，平动冲量阈值仍为1e-9N*s。
+
+运行时与资源准入后复现：`python -m dexlab.pinch_run --manifest docs/evidence/pinch-load/manifest.json --output /data/new-pinch-run`，再执行`python -m dexlab.pinch_score --input /data/new-pinch-run --evidence docs/evidence/pinch-load --output /data/pinch-results.json`。评分核对可信清单、XML、完整编译配置与源码/产物哈希；哈希本身不能排除伪造证据。控制提交耗时与原生步进分开记录。
