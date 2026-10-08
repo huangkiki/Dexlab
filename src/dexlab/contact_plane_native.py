@@ -159,7 +159,7 @@ class MuJoCoPlane:
 class SuperDexPlane:
     """Official FP64 API with actual COM state and signed per-contact forces."""
 
-    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False, incline_angle_deg=0.):
         os.environ.setdefault("SUPERDEX_PRECISION", "fp64")
         import trimesh
         from superdex import physics as p
@@ -167,6 +167,8 @@ class SuperDexPlane:
         normal = contact_parameters.normal_parameters("superdex", normal_parameters)
         solver_values = contact_parameters.solver_parameters("superdex", solver_parameters)
         self.step_timing = {"native_call_seconds": 0.0, "observation_seconds": 0.0, "steps": 0} if measure_step_timing else None
+        from dexlab.incline_run import axes
+        _, normal_axis, quaternion = axes(incline_angle_deg)
         self.p, self.case = p, case
         identity = package_identity("superdex-physics-fp64")
         if identity["version"] != "1.0.0" or not p.uses_double_precision():
@@ -213,13 +215,14 @@ class SuperDexPlane:
                         center_of_mass=[0, 0, 0],
                         contact=contact,
                         world_from_local=p.TransformRT(
-                            translation=[0, 0, case.half_size]
+                            rotation=np.r_[quaternion[1:], quaternion[0]],
+                            translation=case.half_size * normal_axis
                         ),
                     )
                 )
             finally:
                 p.release_shape(shape)
-            plane = p.create_plane_shape([0, 0, 1], 0)
+            plane = p.create_plane_shape(normal_axis, 0)
             try:
                 self.plane = self.scene.create_rigid_actor(
                     p.RigidActorParams(
