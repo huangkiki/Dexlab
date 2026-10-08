@@ -1,5 +1,6 @@
 """Build both public documentation languages without installing DexLab."""
 import argparse
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -27,6 +28,9 @@ def main():
         '<a href="en/latest/index.html">English documentation</a></body></html>\n'
     )
     (output / '.nojekyll').touch()
+    revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    (output / 'build-info.json').write_text(json.dumps({'source_revision': revision}) + '\n')
+
 
 
 if __name__ == '__main__':

@@ -6,6 +6,8 @@ We use inclined-plane friction, one-dimensional collisions and pinch experiments
 
 [简体中文](README.md) · [Documentation (中文)](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiment reports](docs/site/en/results.md) · [Installation](docs/installation.md) · [Releases and data](https://github.com/huangkiki/Dexlab/releases)
 
+The documentation site updates on every merge to main, with findings, matched comparisons and six-engine coverage on the homepage.
+
 ## Engines, solvers and versions
 
 This table distinguishes **available evidence** from **matched-case comparisons**. Results from different tasks or versions do not form a single ranking. Versions are those actually used in the cited reports, not a claim about the latest release.
