@@ -1,5 +1,9 @@
 # 实验结果与失败
 
+## 双引擎斜面对照
+
+[相同方块、三个步长的完整配对报告](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.zh-CN.md)：固定配置下 MuJoCo 3/9、SuperDex 8/9 通过；保留静态漂移、初始瞬态及 MuJoCo 更高阻抗下漂移更小的反例，不作通用排名。
+
 标准方块[16例力限额实验](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md)完成：0.2/0.4 N保持失败，0.8/10 N保持释放通过，±2 mm偏移保持此结果；数值有效性与任务成败分别报告，不代表真机精度。
 
 ## Genesis PBD 薄布：保留失败结果

@@ -1,5 +1,9 @@
 # Results and failures
 
+## Paired engine incline comparison
+
+[Same cube, three timesteps, complete paired report](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md): fixed profiles yield MuJoCo 3/9 and SuperDex 8/9 passes. Drift, initial transients and the lower drift of higher-impedance MuJoCo remain visible; no universal ranking.
+
 The [16-case block force-limit experiment](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) is complete: 0.2/0.4 N fail retention, 0.8/10 N hold and release, including ±2 mm offsets. Numerical validity and task outcome are separate; no hardware-fidelity claim.
 
 ## Genesis PBD cloth: failures remain visible

@@ -6,6 +6,20 @@ Starting with standard-object grasping, we use inclined-plane friction, one-dime
 
 [简体中文](README.md) · [Experiment reports](docs/site/en/results.md) · [Installation](docs/installation.md) · [Releases and data](https://github.com/huangkiki/Dexlab/releases)
 
+## Engine comparison: one cube, two fixed profiles
+
+Official **MuJoCo 3.15.0** and **SuperDex 1.0.0 FP64**: the same 40 mm, 64 g cube, initial state and gravity; three timesteps (2/1/0.5 ms), 2 s per case. Published MuJoCo records are reused; nine SuperDex cases are new.
+
+| Case | MuJoCo (impedance=0.9) | SuperDex (fixed penalty profile) |
+|---|---|---|
+| 15° static friction, μ=0.5 | **1.301–1.336 mm** drift; 0/3 pass | **0.708–1.132 mm** drift; 2/3 pass |
+| 35° sliding, μ=0.5 | Rotation and intermittent support; 0/3 pass | Stable sliding in the scoring window; 3/3 pass |
+| 15° nominal zero friction | Velocity RMSE **8.21×10⁻⁵ m/s**; 3/3 pass | Velocity RMSE **8.04×10⁻¹²–1.52×10⁻¹⁰ m/s**; 3/3 pass |
+
+**Contact settings change drift and stability; engine names alone do not predict the outcome.** SuperDex meets more criteria under these fixed profiles, but its static drift increases with timestep refinement. Existing MuJoCo impedance=0.99 records drift only **0.141–0.179 mm**, less than these SuperDex results. The zero-friction difference also involves MuJoCo's native friction floor. Velocity errors use the 0.5–2 s window; the report retains initial transients, every failure and the conditions of the different contact models.
+
+[Full comparison, parameters and raw data](docs/incline-comparison-results.md). These counts describe fixed-case tolerance checks, not real-material accuracy or a universal engine ranking.
+
 ## What we have learned
 
 ### 1. Correct post-impact velocity does not establish an accurate collision process

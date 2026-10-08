@@ -93,6 +93,18 @@ def score_superdex(protocol, case, trace):
     return result
 
 
+def geometric_penetration(protocol, case, states):
+    """Supplement native contact distances with the same cube/plane geometry."""
+    angle = np.deg2rad(case['angle_deg'])
+    normal = np.array([np.sin(angle), 0., np.cos(angle)])
+    states = np.asarray(states)
+    w, vector = states[:, 4:5], states[:, 5:8]
+    local_normal = normal + 2*np.cross(vector, np.cross(vector, normal)-w*normal)
+    support_radius = protocol['side_m']/2*np.sum(np.abs(local_normal), axis=1)
+    clearance = states[:, 1:4] @ normal - support_radius
+    return float(max(0., -np.min(clearance)))
+
+
 def compare(superdex_root, mujoco_root):
     protocol = json.loads((superdex_root/'manifest.json').read_text())
     campaign = json.loads((superdex_root/'campaign.json').read_text())
@@ -124,9 +136,12 @@ def compare(superdex_root, mujoco_root):
             try:
                 measured = score_superdex(protocol, case, trace)
                 measured['record_valid'] = True
+                measured['geometric_penetration_m'] = geometric_penetration(protocol, case, trace['states'])
             except ValueError as error:
                 measured = dict(record_valid=False, passed=False, failure=str(error))
         old = next(row for row in historical['results'] if row['id'] == case['id'])
+        with np.load(mujoco_root/case['id']/'trace.npz', allow_pickle=False) as trace:
+            old['geometric_penetration_m'] = geometric_penetration(protocol, case, trace['states'])
         results.append(dict(id=case['id'], mujoco=old, superdex=measured,
                             superdex_metadata=meta))
     return dict(results=results, protocol=protocol,

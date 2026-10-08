@@ -1,14 +1,15 @@
 """Reject mismatched observations; synthetic traces are not engine evidence."""
-import copy
 import itertools
 import json
+import tempfile
+from unittest.mock import patch
 from pathlib import Path
 import unittest
 
 import numpy as np
 
-from dexlab.incline_compare_score import score_superdex, validate_admission
-from dexlab.incline_score import score
+from dexlab.incline_compare_score import score_superdex, validate_admission, geometric_penetration, compare
+from dexlab.incline_score import score, file_hash
 from test_incline import ideal_trace
 
 PROTOCOL = json.loads((Path(__file__).resolve().parents[1]/'docs/evidence/incline-comparison/manifest.json').read_text())
@@ -83,6 +84,14 @@ class ComparisonTests(unittest.TestCase):
             with self.subTest(corrupt=corrupt), self.assertRaises(ValueError):
                 score_superdex(PROTOCOL, case, trace)
 
+    def test_geometric_penetration_uses_rotated_cube(self):
+        case = PROTOCOL['cases'][0]
+        trace = superdex_trace(case)
+        self.assertAlmostEqual(geometric_penetration(PROTOCOL, case, trace['states']), 0)
+        normal = np.array([np.sin(np.deg2rad(15)), 0, np.cos(np.deg2rad(15))])
+        trace['states'][:, 1:4] -= .002*normal
+        self.assertAlmostEqual(geometric_penetration(PROTOCOL, case, trace['states']), .002)
+
     def test_physical_failure_remains_a_result(self):
         case = PROTOCOL['cases'][0]
         trace = superdex_trace(case)
@@ -90,3 +99,41 @@ class ComparisonTests(unittest.TestCase):
         result = score_superdex(PROTOCOL, case, trace)
         self.assertFalse(result['passed'])
         self.assertGreater(result['contact_loss_fraction'], 0)
+
+
+class ArtifactBindingTests(unittest.TestCase):
+    def test_altered_artifact_and_rehashed_wrong_readback_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            sd, mj = base/'sd', base/'mj'
+            sd.mkdir(); mj.mkdir()
+            (sd/'manifest.json').write_text(json.dumps(PROTOCOL))
+            (sd/'campaign.json').write_text(json.dumps(dict(admission_only=False,
+                completed_cases=9, manifest_sha256=file_hash(sd/'manifest.json'))))
+            old = dict(protocol=PROTOCOL, results=[])
+            for case in PROTOCOL['cases']:
+                folder = sd/case['id']; folder.mkdir()
+                previous = mj/case['id']; previous.mkdir()
+                np.savez(folder/'trace.npz', **superdex_trace(case))
+                np.savez(previous/'trace.npz', **ideal_trace(case))
+                (folder/'admission.json').write_text(json.dumps(admission(case), default=lambda x: np.asarray(x).tolist()))
+                (folder/'geometry.npz').write_bytes(b'fixture')
+                meta = dict(case=case, state_writes_after_initialization=0,
+                    trace_sha256=file_hash(folder/'trace.npz'), admission_sha256=file_hash(folder/'admission.json'),
+                    geometry_sha256=file_hash(folder/'geometry.npz'))
+                (folder/'metadata.json').write_text(json.dumps(meta))
+                old['results'].append(dict(id=case['id'], **score(PROTOCOL, case, ideal_trace(case))))
+            with patch('dexlab.incline_compare_score.score_campaign', return_value=old):
+                self.assertEqual(len(compare(sd, mj)['results']), 9)
+                first = sd/PROTOCOL['cases'][0]['id']
+                saved = (first/'admission.json').read_text()
+                (first/'admission.json').write_text(saved+' ')
+                with self.assertRaisesRegex(ValueError, 'Artifact hash'):
+                    compare(sd, mj)
+                record = json.loads(saved); record['gravity'] = [0, 0, 0]
+                (first/'admission.json').write_text(json.dumps(record))
+                meta = json.loads((first/'metadata.json').read_text())
+                meta['admission_sha256'] = file_hash(first/'admission.json')
+                (first/'metadata.json').write_text(json.dumps(meta))
+                with self.assertRaisesRegex(ValueError, 'gravity'):
+                    compare(sd, mj)
