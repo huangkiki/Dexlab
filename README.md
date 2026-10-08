@@ -273,4 +273,4 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 
 [标准方块夹持：18例全部保留，3例通过，临界记录一致性仍未通过](docs/pinch-load-results.zh-CN.md)
 
-夹持冲量残差的[六工况诊断协议](docs/pinch-impulse-protocol.zh-CN.md)已登记；尚待执行，不替换 v0.45.0 的拒绝结果。
+夹持残差六例诊断：残差定位到原生力平衡项，收紧容差后减小，但约 2 mm 滑移持续；原拒绝结果保留。[报告](docs/pinch-impulse-results.zh-CN.md)

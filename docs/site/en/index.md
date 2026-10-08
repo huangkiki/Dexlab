@@ -127,4 +127,4 @@ Contribute <contributing>
 
 [Standard cube pinch:3 pass,9 physical failures,6 consistency rejections](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md)
 
-[Pinch impulse diagnostic protocol](../../pinch-impulse-protocol.md): six preregistered cases, results pending.
+[Six-case pinch impulse findings](../../pinch-impulse-results.md): force-balance residual decreases, creep persists.
