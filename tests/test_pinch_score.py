@@ -145,3 +145,7 @@ class PinchProvenanceTests(unittest.TestCase):
         self.assertEqual(len(result['results']),18)
         self.assertEqual(result['invalid_cases'],1)
         self.assertFalse(result['results'][0]['passed'])
+
+
+if __name__ == '__main__':
+    unittest.main()

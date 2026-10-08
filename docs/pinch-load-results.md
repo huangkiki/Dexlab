@@ -2,7 +2,7 @@
 
 [简体中文](pinch-load-results.zh-CN.md) · [Preregistered protocol](pinch-load-protocol.md) · [All scores](evidence/pinch-load/results.json) · [Impulse diagnostics](evidence/pinch-load/impulse-diagnostics.json)
 
-All18 preregistered native cases completed once: **3 pass,9 fail the physical tolerances,6 fail numerical record consistency**. This is a deterministic matrix, not a population success rate. The full repository regression, archive publication and release remain pending; these findings are not a completed release claim.
+All18 preregistered native cases completed once: **3 pass,9 fail the physical tolerances,6 fail numerical record consistency**. This is a deterministic matrix, not a population success rate. Research outcomes and software release validation are separate; the release validation attachment records the latter.
 
 ## What follows from the records
 
@@ -45,10 +45,14 @@ Travel and speed in INVALID rows are descriptive raw values, not accepted measur
 
 Official MuJoCo3.15.0 CPU FP64; runner frozen at de096255437d3ef7ea1f9a78344655e75cf68e0f before physics. The campaign took4.369s within a5.029s bounded service. Summed setup0.0151s, command submission0.0641s, native steps0.1317s, observation3.8087s and serialization0.3371s. Environment setup took20.755s. These short observational timings are not an engine ranking.16GiB/two-CPU/128tasks/zero-swap/1800s limits and an exclusive research window were enforced. No transfer or unrelated hashing ran during physics.
 
-The first scoring pass stopped at the first rejected R1 record. The aggregation fix now preserves that rejection and evaluates every remaining case; it changes neither the physics nor the numerical threshold.15 focused tests pass, including rehashed-protocol, changed compiled mass, altered force/state and continued aggregation after invalid evidence. The second scoring service took0.690s. See the protocol for the engine-free scoring command; public raw archive delivery is pending.
+The first scoring pass stopped at the first rejected R1 record. The aggregation fix now preserves that rejection and evaluates every remaining case; it changes neither the physics nor the numerical threshold.15 focused tests pass, including rehashed-protocol, changed compiled mass, altered force/state and continued aggregation after invalid evidence. The second scoring service took0.690s. See the protocol for the engine-free scoring command; the raw archive below includes every original case.
 
 For grasping, sufficient commanded squeeze is only a model-level precondition: actual normal forces, sustained contact and acceptable creep must also be verified. These tall guided jaws are a deliberate analytical fixture with synthetic friction and privileged observations, not a robot, learned policy or hardware-validated gripper. Future separately preregistered work should record native acceleration/solver diagnostics for the marginal case and test transfer to finite robot fingers; this study does not silently extend its18-case budget.
 
 ```bash
 python scripts/analyze_pinch.py --input /data/new-pinch-run --output /data/new-pinch-plots
 ```
+
+[Raw records / 原始记录](https://github.com/huangkiki/Dexlab/releases/download/v0.45.0/pinch-load-raw-v1.zip) · [Archive verification / 归档核验](evidence/pinch-load/archive.json)
+
+SHA-256: `766bf653d4645f578f663c34cc0ac0572341c3ce82f1d738a6b65b3c8921f562`; 7623638 bytes,56 files.
