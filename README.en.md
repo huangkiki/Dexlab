@@ -272,3 +272,5 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)
 
 [Standard cube pinch: all18 records retained,3 pass; marginal records fail consistency](docs/pinch-load-results.md)
+
+Six pinch diagnostics localize the residual to native force balance: tighter tolerance reduces it, while roughly 2 mm creep persists. Original rejections remain. [Report](docs/pinch-impulse-results.md)
