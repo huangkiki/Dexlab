@@ -127,4 +127,4 @@ Benchmark <benchmark>
 
 [标准方块夹持：3例通过、9例物理失败、6例一致性拒绝](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.zh-CN.md)
 
-[夹持冲量残差六例报告](../../pinch-impulse-results.zh-CN.md)：力平衡残差下降，滑移仍存在。
+[夹持冲量残差六例报告](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-impulse-results.zh-CN.md)：力平衡残差下降，滑移仍存在。
