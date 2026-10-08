@@ -131,3 +131,17 @@ class PinchProvenanceTests(unittest.TestCase):
         path=self.root/'campaign.json';m=json.loads(path.read_text());m['runner_sha256']='0'*64
         path.write_text(json.dumps(m))
         with self.assertRaisesRegex(ValueError,'Runner source'):score_campaign(self.root,self.evidence)
+
+
+    def test_invalid_trace_does_not_hide_remaining_cases(self):
+        from dexlab.pinch_score import score_campaign
+        directory=self.root/P['cases'][0]['id'];path=directory/'trace.npz'
+        with np.load(path) as source: trace={k:source[k] for k in source.files}
+        trace['states'][20,14]+=1
+        np.savez_compressed(path,**trace)
+        meta_path=directory/'metadata.json';meta=json.loads(meta_path.read_text())
+        meta['trace_sha256']=self.digest(path);meta_path.write_text(json.dumps(meta))
+        result=score_campaign(self.root,self.evidence)
+        self.assertEqual(len(result['results']),18)
+        self.assertEqual(result['invalid_cases'],1)
+        self.assertFalse(result['results'][0]['passed'])

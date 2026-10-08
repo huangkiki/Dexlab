@@ -220,13 +220,18 @@ def score_campaign(root, evidence):
         if not all(np.isfinite(v) and v >= 0 for v in timing.values()):
             raise ValueError('Invalid cost record')
         with np.load(directory/'trace.npz',allow_pickle=False) as trace:
-            result = score_trace(protocol,case,trace)
+            try:
+                result = score_trace(protocol,case,trace)
+            except ValueError as error:
+                # A rejected numerical trace must not hide the remaining matrix.
+                result = dict(passed=False, status='invalid evidence', error=str(error))
         rows.append(dict(id=case['id'],**result,timing=timing,
                          trace_sha256=meta['trace_sha256'],xml_sha256=meta['xml_sha256']))
     return dict(protocol=protocol,campaign=campaign,results=rows,
                 scorer_sha256=digest(Path(__file__)),
                 passed_cases=sum(row['passed'] is True for row in rows),
-                failed_cases=sum(row['passed'] is False for row in rows),
+                failed_cases=sum(row['passed'] is False and row['status'] != 'invalid evidence' for row in rows),
+                invalid_cases=sum(row['status'] == 'invalid evidence' for row in rows),
                 diagnostic_cases=sum(row['passed'] is None for row in rows))
 
 
