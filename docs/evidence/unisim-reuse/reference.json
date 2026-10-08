@@ -1,0 +1,1097 @@
+{
+  "protocol": {
+    "dt_s": 0.0005,
+    "scope": "Issue90 native fixed-control trials; open reference reused for candidate reset repeat"
+  },
+  "trials": {
+    "pinch-0.json": {
+      "source_trial": "attempt-04-dev-cap-10",
+      "sha256": "e5daf2c2abfab350711f6e8112a9e5f2e5d5a292ae3291273408ab768d44654c",
+      "initial": {
+        "cube_mass": [
+          0.06400000000000002
+        ],
+        "cube_inertia": [
+          [
+            [
+              1.7066666666666674e-05,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.7066666666666674e-05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.7066666666666674e-05
+            ]
+          ]
+        ],
+        "geom_friction": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "gripper_mass": [
+          0.0,
+          1.0,
+          0.1,
+          0.1
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "kp": [
+          1000.0,
+          500.0,
+          500.0
+        ],
+        "kv": [
+          50.0,
+          20.0,
+          20.0
+        ],
+        "force_range": [
+          [
+            -50.0,
+            -10.0,
+            -10.0
+          ],
+          [
+            50.0,
+            10.0,
+            10.0
+          ]
+        ],
+        "q": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_pos": [
+          0.0,
+          0.0,
+          0.02
+        ],
+        "object_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_ang": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "geom_sol_params": [
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "joint_sol_params": [
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "cube_link": 5,
+        "plane_link": 0,
+        "pad_links": [
+          3,
+          4
+        ],
+        "options": {
+          "dt": 0.0005,
+          "gravity": [
+            0.0,
+            0.0,
+            -9.81
+          ],
+          "enable_collision": true,
+          "enable_joint_limit": true,
+          "enable_self_collision": true,
+          "enable_neutral_collision": false,
+          "enable_adjacent_collision": false,
+          "disable_constraint": false,
+          "max_collision_pairs": 150,
+          "max_contacts": 30,
+          "multiplier_collision_broad_phase": 8,
+          "integrator": 2,
+          "IK_max_targets": 6,
+          "batch_links_info": false,
+          "batch_joints_info": false,
+          "batch_dofs_info": false,
+          "constraint_solver": 1,
+          "iterations": 25,
+          "tolerance": 1e-09,
+          "ls_iterations": 50,
+          "ls_tolerance": 0.01,
+          "noslip_iterations": 0,
+          "noslip_tolerance": 1e-06,
+          "friction_cone": 1,
+          "contact_resolution": 1,
+          "enable_torsional_friction": false,
+          "enable_rolling_friction": false,
+          "impratio": 100.0,
+          "contact_pruning_tolerance": 0.02,
+          "sparse_solve": null,
+          "constraint_timeconst": 0.01,
+          "box_box_detection": false,
+          "use_hibernation": false,
+          "hibernation_thresh_vel": null,
+          "max_dynamic_constraints": 8,
+          "enable_multi_contact": true,
+          "enable_mujoco_compatibility": false,
+          "use_gjk_collision": false,
+          "enable_contact_patch": false,
+          "broadphase_traversal": null
+        }
+      },
+      "samples": 8000,
+      "protocol": {
+        "schema": 2,
+        "case": {
+          "id": "dev-cap-10",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "engine": "1.4.3",
+        "quadrants": "1.3.3",
+        "torch": "2.9.1+cpu",
+        "dt_s": 0.0005,
+        "steps": 8000,
+        "duration_s": 4,
+        "mass_kg": 0.064,
+        "cube_size_m": 0.04,
+        "mu": 0.5,
+        "gravity_m_s2": 9.81,
+        "backend": "cpu",
+        "precision": "64",
+        "seed": 0,
+        "repeats": 1,
+        "conditions": [
+          "pinch"
+        ],
+        "plane_cube_geom_timeconst_s": 0.002,
+        "source_sha256": "e195c50b5fb03a38c5e29914655d491f47f106cc3330225645c45f2def23528f",
+        "scope": "Preregistered fixed challenge; not hardware calibration"
+      },
+      "recorded_options": {
+        "dt": null,
+        "gravity": null,
+        "enable_collision": true,
+        "enable_joint_limit": true,
+        "enable_self_collision": true,
+        "enable_neutral_collision": false,
+        "enable_adjacent_collision": false,
+        "disable_constraint": false,
+        "max_collision_pairs": 150,
+        "max_contacts": null,
+        "multiplier_collision_broad_phase": 8,
+        "integrator": 2,
+        "IK_max_targets": 6,
+        "batch_links_info": false,
+        "batch_joints_info": false,
+        "batch_dofs_info": false,
+        "constraint_solver": 1,
+        "iterations": 25,
+        "tolerance": null,
+        "ls_iterations": 50,
+        "ls_tolerance": 0.01,
+        "noslip_iterations": 0,
+        "noslip_tolerance": 1e-06,
+        "friction_cone": 1,
+        "contact_resolution": null,
+        "enable_torsional_friction": false,
+        "enable_rolling_friction": false,
+        "impratio": null,
+        "contact_pruning_tolerance": 0.02,
+        "sparse_solve": null,
+        "constraint_timeconst": 0.01,
+        "box_box_detection": false,
+        "use_hibernation": false,
+        "hibernation_thresh_vel": null,
+        "max_dynamic_constraints": 8,
+        "enable_multi_contact": true,
+        "enable_mujoco_compatibility": false,
+        "use_gjk_collision": false,
+        "enable_contact_patch": null,
+        "broadphase_traversal": null
+      }
+    },
+    "pinch-1.json": {
+      "source_trial": "attempt-05-dev-repeat-10",
+      "sha256": "94d2c54b0b2f98761c27d1832e38bc10ceccfc7b3ed90129d50a02bb52299981",
+      "initial": {
+        "cube_mass": [
+          0.06400000000000002
+        ],
+        "cube_inertia": [
+          [
+            [
+              1.7066666666666674e-05,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.7066666666666674e-05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.7066666666666674e-05
+            ]
+          ]
+        ],
+        "geom_friction": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "gripper_mass": [
+          0.0,
+          1.0,
+          0.1,
+          0.1
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "kp": [
+          1000.0,
+          500.0,
+          500.0
+        ],
+        "kv": [
+          50.0,
+          20.0,
+          20.0
+        ],
+        "force_range": [
+          [
+            -50.0,
+            -10.0,
+            -10.0
+          ],
+          [
+            50.0,
+            10.0,
+            10.0
+          ]
+        ],
+        "q": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_pos": [
+          0.0,
+          0.0,
+          0.02
+        ],
+        "object_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_ang": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "geom_sol_params": [
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "joint_sol_params": [
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "cube_link": 5,
+        "plane_link": 0,
+        "pad_links": [
+          3,
+          4
+        ],
+        "options": {
+          "dt": 0.0005,
+          "gravity": [
+            0.0,
+            0.0,
+            -9.81
+          ],
+          "enable_collision": true,
+          "enable_joint_limit": true,
+          "enable_self_collision": true,
+          "enable_neutral_collision": false,
+          "enable_adjacent_collision": false,
+          "disable_constraint": false,
+          "max_collision_pairs": 150,
+          "max_contacts": 30,
+          "multiplier_collision_broad_phase": 8,
+          "integrator": 2,
+          "IK_max_targets": 6,
+          "batch_links_info": false,
+          "batch_joints_info": false,
+          "batch_dofs_info": false,
+          "constraint_solver": 1,
+          "iterations": 25,
+          "tolerance": 1e-09,
+          "ls_iterations": 50,
+          "ls_tolerance": 0.01,
+          "noslip_iterations": 0,
+          "noslip_tolerance": 1e-06,
+          "friction_cone": 1,
+          "contact_resolution": 1,
+          "enable_torsional_friction": false,
+          "enable_rolling_friction": false,
+          "impratio": 100.0,
+          "contact_pruning_tolerance": 0.02,
+          "sparse_solve": null,
+          "constraint_timeconst": 0.01,
+          "box_box_detection": false,
+          "use_hibernation": false,
+          "hibernation_thresh_vel": null,
+          "max_dynamic_constraints": 8,
+          "enable_multi_contact": true,
+          "enable_mujoco_compatibility": false,
+          "use_gjk_collision": false,
+          "enable_contact_patch": false,
+          "broadphase_traversal": null
+        }
+      },
+      "samples": 8000,
+      "protocol": {
+        "schema": 2,
+        "case": {
+          "id": "dev-repeat-10",
+          "split": "development",
+          "condition": "pinch",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "engine": "1.4.3",
+        "quadrants": "1.3.3",
+        "torch": "2.9.1+cpu",
+        "dt_s": 0.0005,
+        "steps": 8000,
+        "duration_s": 4,
+        "mass_kg": 0.064,
+        "cube_size_m": 0.04,
+        "mu": 0.5,
+        "gravity_m_s2": 9.81,
+        "backend": "cpu",
+        "precision": "64",
+        "seed": 0,
+        "repeats": 1,
+        "conditions": [
+          "pinch"
+        ],
+        "plane_cube_geom_timeconst_s": 0.002,
+        "source_sha256": "e195c50b5fb03a38c5e29914655d491f47f106cc3330225645c45f2def23528f",
+        "scope": "Preregistered fixed challenge; not hardware calibration"
+      },
+      "recorded_options": {
+        "dt": null,
+        "gravity": null,
+        "enable_collision": true,
+        "enable_joint_limit": true,
+        "enable_self_collision": true,
+        "enable_neutral_collision": false,
+        "enable_adjacent_collision": false,
+        "disable_constraint": false,
+        "max_collision_pairs": 150,
+        "max_contacts": null,
+        "multiplier_collision_broad_phase": 8,
+        "integrator": 2,
+        "IK_max_targets": 6,
+        "batch_links_info": false,
+        "batch_joints_info": false,
+        "batch_dofs_info": false,
+        "constraint_solver": 1,
+        "iterations": 25,
+        "tolerance": null,
+        "ls_iterations": 50,
+        "ls_tolerance": 0.01,
+        "noslip_iterations": 0,
+        "noslip_tolerance": 1e-06,
+        "friction_cone": 1,
+        "contact_resolution": null,
+        "enable_torsional_friction": false,
+        "enable_rolling_friction": false,
+        "impratio": null,
+        "contact_pruning_tolerance": 0.02,
+        "sparse_solve": null,
+        "constraint_timeconst": 0.01,
+        "box_box_detection": false,
+        "use_hibernation": false,
+        "hibernation_thresh_vel": null,
+        "max_dynamic_constraints": 8,
+        "enable_multi_contact": true,
+        "enable_mujoco_compatibility": false,
+        "use_gjk_collision": false,
+        "enable_contact_patch": null,
+        "broadphase_traversal": null
+      }
+    },
+    "open_negative-0.json": {
+      "source_trial": "attempt-06-dev-open",
+      "sha256": "91353c980501857672fdcda4166f408df578de253ceffe2a3ef390a37e67f8dc",
+      "initial": {
+        "cube_mass": [
+          0.06400000000000002
+        ],
+        "cube_inertia": [
+          [
+            [
+              1.7066666666666674e-05,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.7066666666666674e-05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.7066666666666674e-05
+            ]
+          ]
+        ],
+        "geom_friction": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "gripper_mass": [
+          0.0,
+          1.0,
+          0.1,
+          0.1
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "kp": [
+          1000.0,
+          500.0,
+          500.0
+        ],
+        "kv": [
+          50.0,
+          20.0,
+          20.0
+        ],
+        "force_range": [
+          [
+            -50.0,
+            -10.0,
+            -10.0
+          ],
+          [
+            50.0,
+            10.0,
+            10.0
+          ]
+        ],
+        "q": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_pos": [
+          0.0,
+          0.0,
+          0.02
+        ],
+        "object_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_ang": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "geom_sol_params": [
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "joint_sol_params": [
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "cube_link": 5,
+        "plane_link": 0,
+        "pad_links": [
+          3,
+          4
+        ],
+        "options": {
+          "dt": 0.0005,
+          "gravity": [
+            0.0,
+            0.0,
+            -9.81
+          ],
+          "enable_collision": true,
+          "enable_joint_limit": true,
+          "enable_self_collision": true,
+          "enable_neutral_collision": false,
+          "enable_adjacent_collision": false,
+          "disable_constraint": false,
+          "max_collision_pairs": 150,
+          "max_contacts": 30,
+          "multiplier_collision_broad_phase": 8,
+          "integrator": 2,
+          "IK_max_targets": 6,
+          "batch_links_info": false,
+          "batch_joints_info": false,
+          "batch_dofs_info": false,
+          "constraint_solver": 1,
+          "iterations": 25,
+          "tolerance": 1e-09,
+          "ls_iterations": 50,
+          "ls_tolerance": 0.01,
+          "noslip_iterations": 0,
+          "noslip_tolerance": 1e-06,
+          "friction_cone": 1,
+          "contact_resolution": 1,
+          "enable_torsional_friction": false,
+          "enable_rolling_friction": false,
+          "impratio": 100.0,
+          "contact_pruning_tolerance": 0.02,
+          "sparse_solve": null,
+          "constraint_timeconst": 0.01,
+          "box_box_detection": false,
+          "use_hibernation": false,
+          "hibernation_thresh_vel": null,
+          "max_dynamic_constraints": 8,
+          "enable_multi_contact": true,
+          "enable_mujoco_compatibility": false,
+          "use_gjk_collision": false,
+          "enable_contact_patch": false,
+          "broadphase_traversal": null
+        }
+      },
+      "samples": 8000,
+      "protocol": {
+        "schema": 2,
+        "case": {
+          "id": "dev-open",
+          "split": "development",
+          "condition": "open_negative",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "engine": "1.4.3",
+        "quadrants": "1.3.3",
+        "torch": "2.9.1+cpu",
+        "dt_s": 0.0005,
+        "steps": 8000,
+        "duration_s": 4,
+        "mass_kg": 0.064,
+        "cube_size_m": 0.04,
+        "mu": 0.5,
+        "gravity_m_s2": 9.81,
+        "backend": "cpu",
+        "precision": "64",
+        "seed": 0,
+        "repeats": 1,
+        "conditions": [
+          "open_negative"
+        ],
+        "plane_cube_geom_timeconst_s": 0.002,
+        "source_sha256": "e195c50b5fb03a38c5e29914655d491f47f106cc3330225645c45f2def23528f",
+        "scope": "Preregistered fixed challenge; not hardware calibration"
+      },
+      "recorded_options": {
+        "dt": null,
+        "gravity": null,
+        "enable_collision": true,
+        "enable_joint_limit": true,
+        "enable_self_collision": true,
+        "enable_neutral_collision": false,
+        "enable_adjacent_collision": false,
+        "disable_constraint": false,
+        "max_collision_pairs": 150,
+        "max_contacts": null,
+        "multiplier_collision_broad_phase": 8,
+        "integrator": 2,
+        "IK_max_targets": 6,
+        "batch_links_info": false,
+        "batch_joints_info": false,
+        "batch_dofs_info": false,
+        "constraint_solver": 1,
+        "iterations": 25,
+        "tolerance": null,
+        "ls_iterations": 50,
+        "ls_tolerance": 0.01,
+        "noslip_iterations": 0,
+        "noslip_tolerance": 1e-06,
+        "friction_cone": 1,
+        "contact_resolution": null,
+        "enable_torsional_friction": false,
+        "enable_rolling_friction": false,
+        "impratio": null,
+        "contact_pruning_tolerance": 0.02,
+        "sparse_solve": null,
+        "constraint_timeconst": 0.01,
+        "box_box_detection": false,
+        "use_hibernation": false,
+        "hibernation_thresh_vel": null,
+        "max_dynamic_constraints": 8,
+        "enable_multi_contact": true,
+        "enable_mujoco_compatibility": false,
+        "use_gjk_collision": false,
+        "enable_contact_patch": null,
+        "broadphase_traversal": null
+      }
+    },
+    "open_negative-1.json": {
+      "source_trial": "attempt-06-dev-open",
+      "sha256": "91353c980501857672fdcda4166f408df578de253ceffe2a3ef390a37e67f8dc",
+      "initial": {
+        "cube_mass": [
+          0.06400000000000002
+        ],
+        "cube_inertia": [
+          [
+            [
+              1.7066666666666674e-05,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.7066666666666674e-05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.7066666666666674e-05
+            ]
+          ]
+        ],
+        "geom_friction": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "gripper_mass": [
+          0.0,
+          1.0,
+          0.1,
+          0.1
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "kp": [
+          1000.0,
+          500.0,
+          500.0
+        ],
+        "kv": [
+          50.0,
+          20.0,
+          20.0
+        ],
+        "force_range": [
+          [
+            -50.0,
+            -10.0,
+            -10.0
+          ],
+          [
+            50.0,
+            10.0,
+            10.0
+          ]
+        ],
+        "q": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_pos": [
+          0.0,
+          0.0,
+          0.02
+        ],
+        "object_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "object_ang": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "geom_sol_params": [
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.002,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "joint_sol_params": [
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ],
+          [
+            0.01,
+            1.0,
+            0.9,
+            0.95,
+            0.001,
+            0.5,
+            2.0
+          ]
+        ],
+        "cube_link": 5,
+        "plane_link": 0,
+        "pad_links": [
+          3,
+          4
+        ],
+        "options": {
+          "dt": 0.0005,
+          "gravity": [
+            0.0,
+            0.0,
+            -9.81
+          ],
+          "enable_collision": true,
+          "enable_joint_limit": true,
+          "enable_self_collision": true,
+          "enable_neutral_collision": false,
+          "enable_adjacent_collision": false,
+          "disable_constraint": false,
+          "max_collision_pairs": 150,
+          "max_contacts": 30,
+          "multiplier_collision_broad_phase": 8,
+          "integrator": 2,
+          "IK_max_targets": 6,
+          "batch_links_info": false,
+          "batch_joints_info": false,
+          "batch_dofs_info": false,
+          "constraint_solver": 1,
+          "iterations": 25,
+          "tolerance": 1e-09,
+          "ls_iterations": 50,
+          "ls_tolerance": 0.01,
+          "noslip_iterations": 0,
+          "noslip_tolerance": 1e-06,
+          "friction_cone": 1,
+          "contact_resolution": 1,
+          "enable_torsional_friction": false,
+          "enable_rolling_friction": false,
+          "impratio": 100.0,
+          "contact_pruning_tolerance": 0.02,
+          "sparse_solve": null,
+          "constraint_timeconst": 0.01,
+          "box_box_detection": false,
+          "use_hibernation": false,
+          "hibernation_thresh_vel": null,
+          "max_dynamic_constraints": 8,
+          "enable_multi_contact": true,
+          "enable_mujoco_compatibility": false,
+          "use_gjk_collision": false,
+          "enable_contact_patch": false,
+          "broadphase_traversal": null
+        }
+      },
+      "samples": 8000,
+      "protocol": {
+        "schema": 2,
+        "case": {
+          "id": "dev-open",
+          "split": "development",
+          "condition": "open_negative",
+          "force_limit_N": 10.0,
+          "initial_x_m": 0.0
+        },
+        "engine": "1.4.3",
+        "quadrants": "1.3.3",
+        "torch": "2.9.1+cpu",
+        "dt_s": 0.0005,
+        "steps": 8000,
+        "duration_s": 4,
+        "mass_kg": 0.064,
+        "cube_size_m": 0.04,
+        "mu": 0.5,
+        "gravity_m_s2": 9.81,
+        "backend": "cpu",
+        "precision": "64",
+        "seed": 0,
+        "repeats": 1,
+        "conditions": [
+          "open_negative"
+        ],
+        "plane_cube_geom_timeconst_s": 0.002,
+        "source_sha256": "e195c50b5fb03a38c5e29914655d491f47f106cc3330225645c45f2def23528f",
+        "scope": "Preregistered fixed challenge; not hardware calibration"
+      },
+      "recorded_options": {
+        "dt": null,
+        "gravity": null,
+        "enable_collision": true,
+        "enable_joint_limit": true,
+        "enable_self_collision": true,
+        "enable_neutral_collision": false,
+        "enable_adjacent_collision": false,
+        "disable_constraint": false,
+        "max_collision_pairs": 150,
+        "max_contacts": null,
+        "multiplier_collision_broad_phase": 8,
+        "integrator": 2,
+        "IK_max_targets": 6,
+        "batch_links_info": false,
+        "batch_joints_info": false,
+        "batch_dofs_info": false,
+        "constraint_solver": 1,
+        "iterations": 25,
+        "tolerance": null,
+        "ls_iterations": 50,
+        "ls_tolerance": 0.01,
+        "noslip_iterations": 0,
+        "noslip_tolerance": 1e-06,
+        "friction_cone": 1,
+        "contact_resolution": null,
+        "enable_torsional_friction": false,
+        "enable_rolling_friction": false,
+        "impratio": null,
+        "contact_pruning_tolerance": 0.02,
+        "sparse_solve": null,
+        "constraint_timeconst": 0.01,
+        "box_box_detection": false,
+        "use_hibernation": false,
+        "hibernation_thresh_vel": null,
+        "max_dynamic_constraints": 8,
+        "enable_multi_contact": true,
+        "enable_mujoco_compatibility": false,
+        "use_gjk_collision": false,
+        "enable_contact_patch": null,
+        "broadphase_traversal": null
+      }
+    }
+  },
+  "resolved_options_provenance": "native-options-v1 zero-step native scene audit; original serialized options retained per trial"
+}

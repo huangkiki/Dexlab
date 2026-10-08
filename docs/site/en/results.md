@@ -155,4 +155,4 @@ All 24 fixed settings + 2 exact repeats pass engineering checks; the cone effect
 
 The original six damping archives now support optional point-level diagnosis with unchanged historical scores. No local tension was hidden by the aggregate in this cohort; this is neither a new physics experiment nor an unloading repair. [Point-level report](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/DAMPING_ABLATION.md#point-level-unloading-audit).
 
-[UniSim admission boundary: retain native FP64; paired equivalence remains open](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-reuse-boundary.md)
+[UniSim candidate: bounded paired qualification passes; production ownership remains native](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-reuse-boundary.md)

@@ -10,6 +10,8 @@ Genesis joint, GPU and cost reports now distinguish published evidence from rema
 
 # DexLab
 
+**Adapter reuse qualification:** the single-environment FP64 candidate passes four pinch/negative replay and physical checks. Production scene ownership remains native; see [benefits and limits](docs/unisim-reuse-boundary.md).
+
 **Analytical evaluation:** [18 incline-friction cases](docs/incline-friction-results.md) expose contact-parameter sensitivity and failed sliding assumptions; all cases and limitations are retained without waiting for new hardware data.
 
 **Research question: Which measurable factors determine standard-object grasping outcomes, and why trust the simulated explanation?**
