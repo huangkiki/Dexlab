@@ -126,3 +126,5 @@ Benchmark <benchmark>
 [弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.zh-CN.md)
 
 [标准方块夹持：3例通过、9例物理失败、6例一致性拒绝](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.zh-CN.md)
+
+[夹持冲量残差诊断协议](../../pinch-impulse-protocol.zh-CN.md)：六工况预登记，结果待验证。

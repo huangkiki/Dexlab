@@ -126,3 +126,5 @@ Contribute <contributing>
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.md)
 
 [Standard cube pinch:3 pass,9 physical failures,6 consistency rejections](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md)
+
+[Pinch impulse diagnostic protocol](../../pinch-impulse-protocol.md): six preregistered cases, results pending.

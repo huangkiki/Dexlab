@@ -272,3 +272,5 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 [弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](docs/elastic-impact-results.zh-CN.md)
 
 [标准方块夹持：18例全部保留，3例通过，临界记录一致性仍未通过](docs/pinch-load-results.zh-CN.md)
+
+夹持冲量残差的[六工况诊断协议](docs/pinch-impulse-protocol.zh-CN.md)已登记；尚待执行，不替换 v0.45.0 的拒绝结果。

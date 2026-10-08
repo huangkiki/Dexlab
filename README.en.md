@@ -272,3 +272,5 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 [Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)
 
 [Standard cube pinch: all18 records retained,3 pass; marginal records fail consistency](docs/pinch-load-results.md)
+
+A [six-case pinch impulse diagnostic](docs/pinch-impulse-protocol.md) is preregistered, pending execution; it does not replace the rejected v0.45.0 records.
