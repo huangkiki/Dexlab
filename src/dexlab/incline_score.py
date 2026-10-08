@@ -56,6 +56,18 @@ def score(protocol, case, trace):
     # Native engines can clamp exactly-zero friction to a tiny positive value.
     if not np.allclose(mu[active], case['friction'], atol=1e-5, rtol=0):
         raise ValueError('Native friction differs from declared model')
+    return measure_response(protocol, case, trace)
+
+
+def measure_response(protocol, case, trace):
+    """Common numerical metrics; callers must first validate native evidence."""
+    states, forces = np.asarray(trace['states']), np.asarray(trace['forces'])
+    active = np.asarray(trace['contact_count']) > 0
+    h = case['timestep']
+    angle = np.deg2rad(case['angle_deg'])
+    tangent = np.array([np.cos(angle), 0., -np.sin(angle)])
+    normal = np.array([np.sin(angle), 0., np.cos(angle)])
+    initial_quat = np.array([np.cos(angle / 2), 0., np.sin(angle / 2), 0.])
     time = states[:, 0]
     position = states[:, 1:4] @ tangent
     speed = states[:, 8:11] @ tangent
