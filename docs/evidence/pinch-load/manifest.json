@@ -40,7 +40,8 @@
     "impulse_residual_n_s": 1e-09,
     "position_update_residual_m": 1e-10,
     "friction_bound_slack_n": 1e-08,
-    "preload_speed_m_s": 0.001
+    "preload_speed_m_s": 0.001,
+    "angular_impulse_residual_n_m_s": 1e-09
   },
   "cases": [
     {
