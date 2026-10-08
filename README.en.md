@@ -1,11 +1,21 @@
 <div align="center">
 
 
+Incline diagnosis: all12 impedance-ratio controls fail original acceptance; failures and unresolved mechanism retained. [Report](docs/incline-diagnosis.md)
+
+
 Manually accepted deliveries use a [reviewed ledger](docs/issue-deliveries.json) binding PR, merge commit and acceptance audit. The queue reads only merged main records and verifies live closure and ancestry. Restoring a cloth dependency does not qualify cloth physics.
 
 Genesis joint, GPU and cost reports now distinguish published evidence from remaining unverified capabilities; see the [capability audit](demos/contact-benchmark/GENESIS_COST.md).
 
 # DexLab
+
+**Analytical evaluation:** [18 incline-friction cases](docs/incline-friction-results.md) expose contact-parameter sensitivity and failed sliding assumptions; all cases and limitations are retained without waiting for new hardware data.
+
+**Research question: Which measurable factors determine standard-object grasping outcomes, and why trust the simulated explanation?**
+
+**Holiday findings:** [Conclusions, evidence boundaries and next steps](docs/holiday-report.md).
+
 
 Current focus: measurable standard-object grasping. Across [16 force-limit cases](docs/force-limit-results.md), 0.2/0.4 N fail retention and 0.8/10 N hold and release, including ±2 mm offsets. All failures and raw records are retained; no hardware-fidelity claim.
 
@@ -252,3 +262,15 @@ Code: [Apache-2.0](LICENSE). Third-party assets retain their [source terms](docs
 **Unloading observation audit:** point-level rescoring of the original six damping cases found no tension hidden by the aggregate; zero damping still fails the full transient target. [Point-level diagnosis and limits](demos/contact-benchmark/DAMPING_ABLATION.md#point-level-unloading-audit).
 
 **Acceptance scope:** Contact diagnosis has controlled repairs and supported negative results; common dynamic material and hardware calibration remain incomplete. [Evidence and retained requirements](demos/contact-benchmark/CONCLUSIONS.md#acceptance-decision-and-remaining-work).
+
+[Impact phase study: 36 cases, 2/9 complete phase groups pass; coarse endpoints remain near exact](docs/impact-phase-results.md)
+
+[Discrete contact audit: 54 trace predictions pass; exact rebound endpoints do not ensure accurate transients](docs/impact-discrete-results.md)
+
+[Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](docs/impact-stiffness-results.md)
+
+[Elastic impact:18 final-state passes, with5–20mm contact overlap](docs/elastic-impact-results.md)
+
+[Standard cube pinch: all18 records retained,3 pass; marginal records fail consistency](docs/pinch-load-results.md)
+
+Six pinch diagnostics localize the residual to native force balance: tighter tolerance reduces it, while roughly 2 mm creep persists. Original rejections remain. [Report](docs/pinch-impulse-results.md)

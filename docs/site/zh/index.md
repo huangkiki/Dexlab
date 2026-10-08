@@ -6,6 +6,8 @@ html_theme.sidebar_secondary.remove: true
 
 # DexLab
 
+[假期阶段报告：结论与下一步](https://github.com/huangkiki/Dexlab/blob/main/docs/holiday-report.zh-CN.md)
+
 <div class="lab-subtitle">机器人接触动力学实验室</div>
 
 从一次抓取，到可复核的物理证据。研究碰撞几何、接触、求解器与驱动如何影响机器人操作。
@@ -110,3 +112,19 @@ html_theme.sidebar_secondary.remove: true
 Benchmark <benchmark>
 参与开发 <contributing>
 ```
+
+[斜面摩擦解析评测：完整18工况、失败与限制](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.zh-CN.md)
+
+[斜面滑动诊断：12个对照均未恢复连续承载](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.zh-CN.md)
+
+[碰撞相位评测：36 例、2/9 组全相位通过，粗步长近零末态误差仍保持](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-phase-results.zh-CN.md)
+
+[离散接触审计：54条轨迹预测通过，精确反弹末态不保证瞬态准确](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-discrete-results.zh-CN.md)
+
+[刚度与穿透联合评测：27 例中 24 例末态通过，2 例同时满足 1 mm 预算](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.zh-CN.md)
+
+[弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.zh-CN.md)
+
+[标准方块夹持：3例通过、9例物理失败、6例一致性拒绝](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.zh-CN.md)
+
+[夹持冲量残差六例报告](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-impulse-results.zh-CN.md)：力平衡残差下降，滑移仍存在。

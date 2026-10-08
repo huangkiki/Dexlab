@@ -1,0 +1,237 @@
+{
+  "version": "3.15.0",
+  "radius_m": 0.05,
+  "initial_x_m": [
+    -0.06,
+    0.06
+  ],
+  "duration_s": 0.2,
+  "score_window_s": 0.02,
+  "stiffness_s2": 10000,
+  "impedance": 0.9,
+  "limits": {
+    "velocity_error_m_s": 0.01,
+    "relative_energy_error": 0.01,
+    "momentum_error_kg_m_s": 1e-09,
+    "transverse_speed_m_s": 1e-09,
+    "spin_speed_rad_s": 1e-09
+  },
+  "cases": [
+    {
+      "id": "impact-01",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.001
+    },
+    {
+      "id": "impact-02",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.0005
+    },
+    {
+      "id": "impact-03",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.00025
+    },
+    {
+      "id": "impact-04",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.001
+    },
+    {
+      "id": "impact-05",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.0005
+    },
+    {
+      "id": "impact-06",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.00025
+    },
+    {
+      "id": "impact-07",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.001
+    },
+    {
+      "id": "impact-08",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.0005
+    },
+    {
+      "id": "impact-09",
+      "masses_kg": [
+        1.0,
+        1.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.00025
+    },
+    {
+      "id": "impact-10",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.001
+    },
+    {
+      "id": "impact-11",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.0005
+    },
+    {
+      "id": "impact-12",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        0.5,
+        0.0
+      ],
+      "timestep": 0.00025
+    },
+    {
+      "id": "impact-13",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.001
+    },
+    {
+      "id": "impact-14",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.0005
+    },
+    {
+      "id": "impact-15",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        1.0,
+        0.0
+      ],
+      "timestep": 0.00025
+    },
+    {
+      "id": "impact-16",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.001
+    },
+    {
+      "id": "impact-17",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.0005
+    },
+    {
+      "id": "impact-18",
+      "masses_kg": [
+        1.0,
+        2.0
+      ],
+      "initial_vx_m_s": [
+        2.0,
+        0.0
+      ],
+      "timestep": 0.00025
+    }
+  ]
+}

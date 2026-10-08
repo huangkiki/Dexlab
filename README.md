@@ -1,11 +1,21 @@
 <div align="center">
 
 
+斜面滑动失败归因：12个阻抗比对照全部未通过原验收，保留失败与未定位机制。 [报告](docs/incline-diagnosis.zh-CN.md)
+
+
 手动验收关闭的任务通过[交付证据表](docs/issue-deliveries.json)绑定 PR、合并提交和验收记录；队列只读取已合入主线的记录，并核验当前关闭状态和提交祖先关系。布料资格仍须独立实验，修复依赖识别不等于布料通过。
 
 Genesis 的关节、GPU 与成本报告已统一到实际发布状态，完整证据及未验证范围见[能力审计](demos/contact-benchmark/GENESIS_COST.zh-CN.md)。
 
 # DexLab
+
+**解析评测：** [18例斜面摩擦结果](docs/incline-friction-results.zh-CN.md)：静止漂移受接触参数影响，滑动参考假设出现失败；全部工况和限制保留，无需等待新增真机数据。
+
+**本阶段研究问题：在标准物体抓取中，哪些可测因素决定成败，我们凭什么相信仿真的解释？**
+
+**假期阶段总结：** [我们已经得出的结论、证据边界与下一步](docs/holiday-report.zh-CN.md)。
+
 
 **研究机器人如何在可信的仿真中完成接触密集操作。**
 
@@ -252,3 +262,15 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 **卸载观测补充：** 原六组阻尼对照已逐接触点复核，未发现被总力掩盖的局部拉力；零阻尼仍不满足全部瞬态要求。[逐点诊断与限制](demos/contact-benchmark/DAMPING_ABLATION.zh-CN.md#逐接触点卸载诊断)。
 
 **验收范围：** 接触机制诊断已有受控修复与否定结果；共同动态材料和真机标定仍未完成。[逐项证据与剩余要求](demos/contact-benchmark/CONCLUSIONS.zh-CN.md#验收决定与剩余工作)。
+
+[碰撞相位评测：36 例、2/9 组全相位通过，粗步长近零末态误差仍保持](docs/impact-phase-results.zh-CN.md)
+
+[离散接触审计：54条轨迹预测通过，精确反弹末态不保证瞬态准确](docs/impact-discrete-results.zh-CN.md)
+
+[刚度与穿透联合评测：27 例中 24 例末态通过，2 例同时满足 1 mm 预算](docs/impact-stiffness-results.zh-CN.md)
+
+[弹性碰撞解析评测：18例末态通过，但接触重叠5–20mm](docs/elastic-impact-results.zh-CN.md)
+
+[标准方块夹持：18例全部保留，3例通过，临界记录一致性仍未通过](docs/pinch-load-results.zh-CN.md)
+
+夹持残差六例诊断：残差定位到原生力平衡项，收紧容差后减小，但约 2 mm 滑移持续；原拒绝结果保留。[报告](docs/pinch-impulse-results.zh-CN.md)

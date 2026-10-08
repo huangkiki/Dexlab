@@ -6,6 +6,8 @@ html_theme.sidebar_secondary.remove: true
 
 # DexLab
 
+[Holiday findings and next steps](https://github.com/huangkiki/Dexlab/blob/main/docs/holiday-report.md)
+
 <div class="lab-subtitle">A lab for robot contact dynamics</div>
 
 From a single grasp to reproducible physical evidence. Studying how geometry, contact, solvers and drives shape robot manipulation.
@@ -110,3 +112,19 @@ Research ledger <research-ledger>
 Benchmark <benchmark>
 Contribute <contributing>
 ```
+
+[Analytical incline friction: all18 cases, failures and limits](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.md)
+
+[Incline diagnosis: none of12 controls restored continuous support](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.md)
+
+[Impact phase study: 36 cases, 2/9 complete phase groups pass; coarse endpoints remain near exact](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-phase-results.md)
+
+[Discrete contact audit: 54 trace predictions pass; exact rebound endpoints do not ensure accurate transients](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-discrete-results.md)
+
+[Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md)
+
+[Elastic impact:18 final-state passes, with5–20mm contact overlap](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.md)
+
+[Standard cube pinch:3 pass,9 physical failures,6 consistency rejections](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md)
+
+[Six-case pinch impulse findings](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-impulse-results.md): force-balance residual decreases, creep persists.

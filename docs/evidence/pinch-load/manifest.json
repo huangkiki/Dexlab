@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "engine": "mujoco",
+  "version": "3.15.0",
+  "cube_mass_kg": 0.064,
+  "side_m": 0.04,
+  "jaw_mass_kg": 0.1,
+  "jaw_half_size_m": [
+    0.01,
+    0.1,
+    6.0
+  ],
+  "gravity_m_s2": 9.81,
+  "friction": 0.5,
+  "preload_s": 0.5,
+  "ramp_s": 0.2,
+  "duration_s": 1.5,
+  "score_start_s": 0.6,
+  "solref": [
+    0.02,
+    1
+  ],
+  "solver_iterations": 100,
+  "solver_tolerance": 1e-10,
+  "integrator": "Euler",
+  "cone": "elliptic",
+  "impratio": 1,
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "lateral_drift_m": 0.001,
+    "normal_command_relative_rmse": 0.05,
+    "contact_loss_fraction": 0.0,
+    "force_balance_rmse_n": 0.01,
+    "impulse_residual_n_s": 1e-09,
+    "position_update_residual_m": 1e-10,
+    "friction_bound_slack_n": 1e-08,
+    "preload_speed_m_s": 0.001,
+    "angular_impulse_residual_n_m_s": 1e-09
+  },
+  "cases": [
+    {
+      "id": "R0.5-d0.9-h0.002",
+      "capacity_ratio": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.002
+    },
+    {
+      "id": "R0.5-d0.9-h0.001",
+      "capacity_ratio": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.001
+    },
+    {
+      "id": "R0.5-d0.9-h0.0005",
+      "capacity_ratio": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.0005
+    },
+    {
+      "id": "R0.5-d0.99-h0.002",
+      "capacity_ratio": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.002
+    },
+    {
+      "id": "R0.5-d0.99-h0.001",
+      "capacity_ratio": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.001
+    },
+    {
+      "id": "R0.5-d0.99-h0.0005",
+      "capacity_ratio": 0.5,
+      "impedance": 0.99,
+      "timestep": 0.0005
+    },
+    {
+      "id": "R1.0-d0.9-h0.002",
+      "capacity_ratio": 1.0,
+      "impedance": 0.9,
+      "timestep": 0.002
+    },
+    {
+      "id": "R1.0-d0.9-h0.001",
+      "capacity_ratio": 1.0,
+      "impedance": 0.9,
+      "timestep": 0.001
+    },
+    {
+      "id": "R1.0-d0.9-h0.0005",
+      "capacity_ratio": 1.0,
+      "impedance": 0.9,
+      "timestep": 0.0005
+    },
+    {
+      "id": "R1.0-d0.99-h0.002",
+      "capacity_ratio": 1.0,
+      "impedance": 0.99,
+      "timestep": 0.002
+    },
+    {
+      "id": "R1.0-d0.99-h0.001",
+      "capacity_ratio": 1.0,
+      "impedance": 0.99,
+      "timestep": 0.001
+    },
+    {
+      "id": "R1.0-d0.99-h0.0005",
+      "capacity_ratio": 1.0,
+      "impedance": 0.99,
+      "timestep": 0.0005
+    },
+    {
+      "id": "R2.0-d0.9-h0.002",
+      "capacity_ratio": 2.0,
+      "impedance": 0.9,
+      "timestep": 0.002
+    },
+    {
+      "id": "R2.0-d0.9-h0.001",
+      "capacity_ratio": 2.0,
+      "impedance": 0.9,
+      "timestep": 0.001
+    },
+    {
+      "id": "R2.0-d0.9-h0.0005",
+      "capacity_ratio": 2.0,
+      "impedance": 0.9,
+      "timestep": 0.0005
+    },
+    {
+      "id": "R2.0-d0.99-h0.002",
+      "capacity_ratio": 2.0,
+      "impedance": 0.99,
+      "timestep": 0.002
+    },
+    {
+      "id": "R2.0-d0.99-h0.001",
+      "capacity_ratio": 2.0,
+      "impedance": 0.99,
+      "timestep": 0.001
+    },
+    {
+      "id": "R2.0-d0.99-h0.0005",
+      "capacity_ratio": 2.0,
+      "impedance": 0.99,
+      "timestep": 0.0005
+    }
+  ]
+}

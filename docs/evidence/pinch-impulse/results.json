@@ -1,0 +1,358 @@
+{
+  "protocol": {
+    "schema_version": 1,
+    "engine": "mujoco",
+    "version": "3.15.0",
+    "cube_mass_kg": 0.064,
+    "side_m": 0.04,
+    "jaw_mass_kg": 0.1,
+    "jaw_half_size_m": [
+      0.01,
+      0.1,
+      6.0
+    ],
+    "gravity_m_s2": 9.81,
+    "friction": 0.5,
+    "preload_s": 0.5,
+    "ramp_s": 0.2,
+    "duration_s": 1.5,
+    "score_start_s": 0.6,
+    "solref": [
+      0.02,
+      1
+    ],
+    "solver_iterations": 100,
+    "solver_tolerance": 1e-10,
+    "integrator": "Euler",
+    "cone": "elliptic",
+    "impratio": 1,
+    "limits": {
+      "static_displacement_m": 0.001,
+      "static_speed_m_s": 0.001,
+      "sliding_velocity_rmse_m_s": 0.01,
+      "sliding_position_rmse_m": 0.01,
+      "acceleration_error_m_s2": 0.05,
+      "rotation_rad": 0.01,
+      "penetration_m": 0.001,
+      "lateral_drift_m": 0.001,
+      "normal_command_relative_rmse": 0.05,
+      "contact_loss_fraction": 0.0,
+      "force_balance_rmse_n": 0.01,
+      "impulse_residual_n_s": 1e-09,
+      "position_update_residual_m": 1e-10,
+      "friction_bound_slack_n": 1e-08,
+      "preload_speed_m_s": 0.001,
+      "angular_impulse_residual_n_m_s": 1e-09
+    },
+    "cases": [
+      {
+        "id": "R1-tol1e-06",
+        "capacity_ratio": 1,
+        "impedance": 0.9,
+        "timestep": 0.001,
+        "solver_tolerance": 1e-06
+      },
+      {
+        "id": "R1-tol1e-10",
+        "capacity_ratio": 1,
+        "impedance": 0.9,
+        "timestep": 0.001,
+        "solver_tolerance": 1e-10
+      },
+      {
+        "id": "R1-tol1e-14",
+        "capacity_ratio": 1,
+        "impedance": 0.9,
+        "timestep": 0.001,
+        "solver_tolerance": 1e-14
+      },
+      {
+        "id": "R2-tol1e-06",
+        "capacity_ratio": 2,
+        "impedance": 0.9,
+        "timestep": 0.001,
+        "solver_tolerance": 1e-06
+      },
+      {
+        "id": "R2-tol1e-10",
+        "capacity_ratio": 2,
+        "impedance": 0.9,
+        "timestep": 0.001,
+        "solver_tolerance": 1e-10
+      },
+      {
+        "id": "R2-tol1e-14",
+        "capacity_ratio": 2,
+        "impedance": 0.9,
+        "timestep": 0.001,
+        "solver_tolerance": 1e-14
+      }
+    ],
+    "diagnostic_limits": {
+      "linear_closure_n_s": 1e-12,
+      "angular_closure_n_m_s": 1e-12,
+      "linear_integration_m_s": 1e-12,
+      "angular_integration_rad_s": 1e-12,
+      "smooth_force_n": 1e-12,
+      "smooth_torque_n_m": 1e-12,
+      "mass_matrix_absolute": 1e-14,
+      "baseline_state_absolute": 1e-12
+    },
+    "baseline": {
+      "1": {
+        "id": "R1.0-d0.9-h0.001",
+        "trace_sha256": "a072aecbb9c3847ce7ac6ddd00e88fe8fe97124ac8b691d1a8b064354d8e2365"
+      },
+      "2": {
+        "id": "R2.0-d0.9-h0.001",
+        "trace_sha256": "fa0d6fb36c4b4c735e43f786ec875713e55239c4766966242a474876a897fed7"
+      },
+      "release": "v0.45.0",
+      "archive_sha256": "766bf653d4645f578f663c34cc0ac0572341c3ce82f1d738a6b65b3c8921f562"
+    },
+    "scope": "Six new diagnostic cases only; original 18-case results and physical limits unchanged."
+  },
+  "campaign": {
+    "runtime": {
+      "version": "3.15.0",
+      "record_verified": true,
+      "code_sha256": "a48c3263e40378576b39f2739cc8d5b151a56ffd69ca0fcc11d66b32b60668e1",
+      "installation_origin": null,
+      "compatibility_profile": "qualification-3.15.0",
+      "profile_status": "candidate",
+      "formal_batch_qualified": false
+    },
+    "completed_cases": 6,
+    "wall_s": 0.22756480798125267,
+    "manifest_sha256": "30790102330450601d8cae1caf16f6f361a35fed3e75a5378b1aad3b16121308",
+    "runner_sha256": "900e67d9fd98806ac759c6f42dabb4add49b49c1f250195262cc10cd07e1213a",
+    "fixture_source_sha256": "f1fcf40f0272dee6c9a68545edda450341e94e93374a5aed623e31adc2a6e0fc"
+  },
+  "results": [
+    {
+      "id": "R1-tol1e-06",
+      "status": "diagnostic consistent",
+      "metrics": {
+        "total_peak_n_s": 1.233735802708306e-06,
+        "total_rms_n_s": 4.2746627017704295e-08,
+        "total_peak_n_m_s": 3.0513375618573924e-15,
+        "total_rms_n_m_s": 2.4877756124716253e-16,
+        "integration_peak_n_s": 1.3778473194748892e-20,
+        "integration_rms_n_s": 2.9660410030444253e-21,
+        "integration_peak_n_m_s": 1.2924697071141057e-32,
+        "integration_rms_n_m_s": 4.446660915114472e-34,
+        "force_peak_n_s": 1.2337358027083063e-06,
+        "force_rms_n_s": 4.274662701770431e-08,
+        "force_peak_n_m_s": 3.0513375618573924e-15,
+        "force_rms_n_m_s": 2.4877756124716253e-16,
+        "closure_peak_n_s": 1.11130722679764e-21,
+        "closure_rms_n_s": 2.7958574764128274e-23,
+        "closure_peak_n_m_s": 3.944304526105059e-31,
+        "closure_rms_n_m_s": 1.8573320729738044e-32,
+        "max_iterations": 2,
+        "cap_hit_steps": 0,
+        "max_scaled_gradient": 0.049941103446873435,
+        "loaded_travel_m": 0.0019954640579012274,
+        "loaded_peak_speed_m_s": 0.0020121132070007267
+      },
+      "scope": "Numerical decomposition only; no physical acceptance or accuracy claim",
+      "trace_sha256": "ac0bc5ae28f13bc7e57439ad73e333a5f2a41a704b273382323147b1f0cbb192",
+      "timing": {
+        "setup_s": 0.0009654019959270954,
+        "control_s": 0.0019528977572917938,
+        "native_step_s": 0.0062057223985902965,
+        "observation_s": 0.013378544361330569,
+        "serialization_s": 0.014115764002781361,
+        "total_case_wall_s": 0.03707268595462665
+      }
+    },
+    {
+      "id": "R1-tol1e-10",
+      "status": "diagnostic consistent",
+      "metrics": {
+        "total_peak_n_s": 1.2399320604130745e-08,
+        "total_rms_n_s": 4.2955667488058266e-10,
+        "total_peak_n_m_s": 4.427292761856811e-17,
+        "total_rms_n_m_s": 4.292276595931963e-18,
+        "integration_peak_n_s": 1.3856086667090786e-20,
+        "integration_rms_n_s": 2.9802852435675524e-21,
+        "integration_peak_n_m_s": 1.3463226115771936e-34,
+        "integration_rms_n_m_s": 7.215792432314301e-36,
+        "force_peak_n_s": 1.2399320604130743e-08,
+        "force_rms_n_s": 4.2955667488058494e-10,
+        "force_peak_n_m_s": 4.4272927618568117e-17,
+        "force_rms_n_m_s": 4.292276595931963e-18,
+        "closure_peak_n_s": 6.437450399132606e-22,
+        "closure_rms_n_s": 2.4031690250955117e-23,
+        "closure_peak_n_m_s": 6.162975822039155e-33,
+        "closure_rms_n_m_s": 4.114706780303622e-34,
+        "max_iterations": 2,
+        "cap_hit_steps": 0,
+        "max_scaled_gradient": 0.04994107153427111,
+        "loaded_travel_m": 0.001994557927715071,
+        "loaded_peak_speed_m_s": 0.002011060465193431
+      },
+      "scope": "Numerical decomposition only; no physical acceptance or accuracy claim",
+      "baseline_matched": true,
+      "trace_sha256": "e7aa093060f7363e727b01556e4935729afb959c53a0237ea93523361870fc64",
+      "timing": {
+        "setup_s": 0.0007170719909481704,
+        "control_s": 0.0019448213279247284,
+        "native_step_s": 0.007302859332412481,
+        "observation_s": 0.013631516019813716,
+        "serialization_s": 0.014239012030884624,
+        "total_case_wall_s": 0.038345306005794555
+      }
+    },
+    {
+      "id": "R1-tol1e-14",
+      "status": "diagnostic consistent",
+      "metrics": {
+        "total_peak_n_s": 1.2448040607101494e-10,
+        "total_rms_n_s": 4.3166718297605035e-12,
+        "total_peak_n_m_s": 3.6105727949008055e-19,
+        "total_rms_n_m_s": 1.9700191532240982e-20,
+        "integration_peak_n_s": 1.383327391033053e-20,
+        "integration_rms_n_s": 2.961519742308337e-21,
+        "integration_peak_n_m_s": 8.41451632235746e-37,
+        "integration_rms_n_m_s": 7.689109625288719e-38,
+        "force_peak_n_s": 1.2448040607101494e-10,
+        "force_rms_n_s": 4.31667182979846e-12,
+        "force_peak_n_m_s": 3.6105727949008055e-19,
+        "force_rms_n_m_s": 1.9700191532240982e-20,
+        "closure_peak_n_s": 1.1790698625779826e-21,
+        "closure_rms_n_s": 3.1502362777512375e-23,
+        "closure_peak_n_m_s": 4.81482486096809e-35,
+        "closure_rms_n_m_s": 1.4165525200257347e-36,
+        "max_iterations": 2,
+        "cap_hit_steps": 0,
+        "max_scaled_gradient": 0.04994107153424739,
+        "loaded_travel_m": 0.001994549385498168,
+        "loaded_peak_speed_m_s": 0.0020110500646436857
+      },
+      "scope": "Numerical decomposition only; no physical acceptance or accuracy claim",
+      "trace_sha256": "9d1de9a2376f71e62eb23b3b94a0422543cf7b358384b0e0ad00a74e6647742e",
+      "timing": {
+        "setup_s": 0.0010163999977521598,
+        "control_s": 0.0019461000920273364,
+        "native_step_s": 0.008734601025935262,
+        "observation_s": 0.014100335887633264,
+        "serialization_s": 0.014719858998432755,
+        "total_case_wall_s": 0.04112969199195504
+      }
+    },
+    {
+      "id": "R2-tol1e-06",
+      "status": "diagnostic consistent",
+      "metrics": {
+        "total_peak_n_s": 3.918517260115273e-10,
+        "total_rms_n_s": 7.8092878878653e-11,
+        "total_peak_n_m_s": 1.4150471153538986e-17,
+        "total_rms_n_m_s": 1.7433691264004547e-18,
+        "integration_peak_n_s": 1.3796472644878044e-20,
+        "integration_rms_n_s": 3.502233497465579e-21,
+        "integration_peak_n_m_s": 4.03896783473158e-35,
+        "integration_rms_n_m_s": 3.05645705205568e-36,
+        "force_peak_n_s": 3.918517260083767e-10,
+        "force_rms_n_s": 7.809287887886211e-11,
+        "force_peak_n_m_s": 1.4150471153538983e-17,
+        "force_rms_n_m_s": 1.7433691264004547e-18,
+        "closure_peak_n_s": 8.402566836762817e-22,
+        "closure_rms_n_s": 4.1677316504062195e-23,
+        "closure_peak_n_m_s": 3.0814879110195774e-33,
+        "closure_rms_n_m_s": 1.7659804352444234e-34,
+        "max_iterations": 1,
+        "cap_hit_steps": 0,
+        "max_scaled_gradient": 2.044682264929589e-15,
+        "loaded_travel_m": 0.0019945493624428396,
+        "loaded_peak_speed_m_s": 0.00201105075916066
+      },
+      "scope": "Numerical decomposition only; no physical acceptance or accuracy claim",
+      "trace_sha256": "285af59efd016b21c941a1c925d29ae77c22a2a8632b3b7e585c4e78d7aa61c0",
+      "timing": {
+        "setup_s": 0.0010344599722884595,
+        "control_s": 0.001918646739795804,
+        "native_step_s": 0.00570820871507749,
+        "observation_s": 0.013015933684073389,
+        "serialization_s": 0.013892401999328285,
+        "total_case_wall_s": 0.036003866989631206
+      }
+    },
+    {
+      "id": "R2-tol1e-10",
+      "status": "diagnostic consistent",
+      "metrics": {
+        "total_peak_n_s": 3.041864063035789e-14,
+        "total_rms_n_s": 6.749665900837818e-15,
+        "total_peak_n_m_s": 1.5815465728554103e-16,
+        "total_rms_n_m_s": 1.3367345639107183e-17,
+        "integration_peak_n_s": 1.3874885261703988e-20,
+        "integration_rms_n_s": 3.091248441911755e-21,
+        "integration_peak_n_m_s": 3.231174267785264e-34,
+        "integration_rms_n_m_s": 2.0285343849380553e-35,
+        "force_peak_n_s": 3.041864063035788e-14,
+        "force_rms_n_s": 6.749665902386896e-15,
+        "force_peak_n_m_s": 1.5815465728554103e-16,
+        "force_rms_n_m_s": 1.3367345639107183e-17,
+        "closure_peak_n_s": 1.6263032587282701e-21,
+        "closure_rms_n_s": 4.504340115180099e-23,
+        "closure_peak_n_m_s": 2.465190328815662e-32,
+        "closure_rms_n_m_s": 1.3277075113769972e-33,
+        "max_iterations": 1,
+        "cap_hit_steps": 0,
+        "max_scaled_gradient": 2.044682264929589e-15,
+        "loaded_travel_m": 0.0019945493347500883,
+        "loaded_peak_speed_m_s": 0.002011050000000202
+      },
+      "scope": "Numerical decomposition only; no physical acceptance or accuracy claim",
+      "baseline_matched": true,
+      "trace_sha256": "6e325edce4a83737031e1e6c8ba5e01982badcb61ba20e466167a3805a7597e1",
+      "timing": {
+        "setup_s": 0.0006785159930586815,
+        "control_s": 0.001949469035025686,
+        "native_step_s": 0.005859185708686709,
+        "observation_s": 0.013237050210591406,
+        "serialization_s": 0.014327326032798737,
+        "total_case_wall_s": 0.03650294698309153
+      }
+    },
+    {
+      "id": "R2-tol1e-14",
+      "status": "diagnostic consistent",
+      "metrics": {
+        "total_peak_n_s": 3.1139104396839597e-18,
+        "total_rms_n_s": 5.3329256687942425e-19,
+        "total_peak_n_m_s": 5.795759330074433e-19,
+        "total_rms_n_m_s": 4.14380869357129e-20,
+        "integration_peak_n_s": 1.3829362793599226e-20,
+        "integration_rms_n_s": 3.355043603537926e-21,
+        "integration_peak_n_m_s": 8.41451632235746e-37,
+        "integration_rms_n_m_s": 1.0440435511821014e-37,
+        "force_peak_n_s": 3.1139104396839597e-18,
+        "force_rms_n_s": 5.332929774156797e-19,
+        "force_peak_n_m_s": 5.795759330074433e-19,
+        "force_rms_n_m_s": 4.14380869357129e-20,
+        "closure_peak_n_s": 1.1790698625779826e-21,
+        "closure_rms_n_s": 4.492740777531e-23,
+        "closure_peak_n_m_s": 4.81482486096809e-35,
+        "closure_rms_n_m_s": 4.16223715667206e-36,
+        "max_iterations": 1,
+        "cap_hit_steps": 0,
+        "max_scaled_gradient": 2.0797339231383364e-15,
+        "loaded_travel_m": 0.0019945493347499612,
+        "loaded_peak_speed_m_s": 0.002011049999999999
+      },
+      "scope": "Numerical decomposition only; no physical acceptance or accuracy claim",
+      "trace_sha256": "1017910bb987aabc33d80383356db672b379ae5a4137b20718eb6821be0f7dd0",
+      "timing": {
+        "setup_s": 0.0007160110399127007,
+        "control_s": 0.00196783960564062,
+        "native_step_s": 0.006317263934761286,
+        "observation_s": 0.013629758614115417,
+        "serialization_s": 0.013926625018939376,
+        "total_case_wall_s": 0.037063741008751094
+      }
+    }
+  ],
+  "scorer_sha256": "2afdbe49a9f13ced60fc351cdd5698e24bda404e076ed45c690b6fe437e1c379"
+}

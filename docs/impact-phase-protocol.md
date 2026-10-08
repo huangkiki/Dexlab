@@ -1,0 +1,13 @@
+# Impact arrival-phase protocol
+
+[English](impact-phase-protocol.md) | [简体中文](impact-phase-protocol.zh-CN.md)
+
+This finite sensitivity study reuses nine published k=1000000 s⁻² cases and records exactly27 new cases: u=0.5/1/2 m/s, h=1/0.5/0.25 ms, alpha=0.25/0.5/0.75. Set x1=-0.06m and x2=0.06+u*h*alpha m. Relative to the nominal0.02m gap, this delays ballistic contact by alpha*h. The [manifest](evidence/impact-phase/manifest.json) binds baseline hashes and all exact values. All other settings and original final-state/1mm overlap thresholds remain those of the [stiffness study](impact-stiffness-protocol.md). No outcome-dependent tuning or required positive result.
+
+Two free1kg spheres, radius0.05m, no gravity/friction/spin/actuation; officialMuJoCo3.15.0 CPU FP64, Euler/Newton100/tolerance1e-12, solref=(-1000000,0), constant impedance0.9; duration0.2s and final window0.02s. Hardware Intel Core i9-14900K; enforced16GiB/twoCPU/128tasks/zero swap/1800s, desktop reserve and exclusive timing window. One formal27-case batch; mounted-volume source/environment/output. Baselines are re-scored, never re-simulated.
+
+Independent scoring preserves every case and reports final velocity, energy, momentum, sampled overlap, force peak, signed impulse/error norm, sampled contact duration, setup/step/observation/total/scoring times and artifact identities. First contact uses force_times[i] (pre-integration epoch), while states[i+1] is post-integration. Compare first contact epoch with (x2-x1-2r)/u; onset delay is diagnostic, not a new acceptance gate. Peak force remains timestep-dependent and is not a verified continuous transient force reference.
+
+Each of nine speed/step groups must contain exactly phases0/.25/.5/.75. Publish per-phase outcomes and min/max/span of absolute velocity error, relative energy error and overlap. A finite group passes only if all four joint verdicts pass. These deliberately chosen phases are not a random population, success probability or universal robustness certificate. Mark overlap within1e-12m of the1mm limit as a boundary diagnostic only; never modify the strict pass criterion. Preserve roundoff and nonmonotonic outcomes.
+
+The elastic final-state reference is specified before observation; no restitution fit. Changing free-flight alignment tests sensitivity, but endpoint variation alone does not identify a unique transient mechanism or prove real-material accuracy. Source references: [prior release](https://github.com/huangkiki/Dexlab/releases/tag/v0.44.1), [MuJoCo reference](https://mujoco.readthedocs.io/en/stable/modeling.html#reference), [OpenStax conservation](https://openstax.org/books/university-physics-volume-1/pages/9-4-types-of-collisions).

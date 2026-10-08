@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "engine": "mujoco",
+  "version": "3.15.0",
+  "cube_mass_kg": 0.064,
+  "side_m": 0.04,
+  "jaw_mass_kg": 0.1,
+  "jaw_half_size_m": [
+    0.01,
+    0.1,
+    6.0
+  ],
+  "gravity_m_s2": 9.81,
+  "friction": 0.5,
+  "preload_s": 0.5,
+  "ramp_s": 0.2,
+  "duration_s": 1.5,
+  "score_start_s": 0.6,
+  "solref": [
+    0.02,
+    1
+  ],
+  "solver_iterations": 100,
+  "solver_tolerance": 1e-10,
+  "integrator": "Euler",
+  "cone": "elliptic",
+  "impratio": 1,
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "lateral_drift_m": 0.001,
+    "normal_command_relative_rmse": 0.05,
+    "contact_loss_fraction": 0.0,
+    "force_balance_rmse_n": 0.01,
+    "impulse_residual_n_s": 1e-09,
+    "position_update_residual_m": 1e-10,
+    "friction_bound_slack_n": 1e-08,
+    "preload_speed_m_s": 0.001,
+    "angular_impulse_residual_n_m_s": 1e-09
+  },
+  "cases": [
+    {
+      "id": "R1-tol1e-06",
+      "capacity_ratio": 1,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "solver_tolerance": 1e-06
+    },
+    {
+      "id": "R1-tol1e-10",
+      "capacity_ratio": 1,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "solver_tolerance": 1e-10
+    },
+    {
+      "id": "R1-tol1e-14",
+      "capacity_ratio": 1,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "solver_tolerance": 1e-14
+    },
+    {
+      "id": "R2-tol1e-06",
+      "capacity_ratio": 2,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "solver_tolerance": 1e-06
+    },
+    {
+      "id": "R2-tol1e-10",
+      "capacity_ratio": 2,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "solver_tolerance": 1e-10
+    },
+    {
+      "id": "R2-tol1e-14",
+      "capacity_ratio": 2,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "solver_tolerance": 1e-14
+    }
+  ],
+  "diagnostic_limits": {
+    "linear_closure_n_s": 1e-12,
+    "angular_closure_n_m_s": 1e-12,
+    "linear_integration_m_s": 1e-12,
+    "angular_integration_rad_s": 1e-12,
+    "smooth_force_n": 1e-12,
+    "smooth_torque_n_m": 1e-12,
+    "mass_matrix_absolute": 1e-14,
+    "baseline_state_absolute": 1e-12
+  },
+  "baseline": {
+    "1": {
+      "id": "R1.0-d0.9-h0.001",
+      "trace_sha256": "a072aecbb9c3847ce7ac6ddd00e88fe8fe97124ac8b691d1a8b064354d8e2365"
+    },
+    "2": {
+      "id": "R2.0-d0.9-h0.001",
+      "trace_sha256": "fa0d6fb36c4b4c735e43f786ec875713e55239c4766966242a474876a897fed7"
+    },
+    "release": "v0.45.0",
+    "archive_sha256": "766bf653d4645f578f663c34cc0ac0572341c3ce82f1d738a6b65b3c8921f562"
+  },
+  "scope": "Six new diagnostic cases only; original 18-case results and physical limits unchanged."
+}
