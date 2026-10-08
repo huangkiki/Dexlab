@@ -1,130 +1,104 @@
 ---
 html_theme.sidebar_secondary.remove: true
+html_theme.sidebar_primary.remove: true
 ---
 
-<div class="lab-kicker">ROBOTICS · CONTACT DYNAMICS · REPRODUCIBILITY</div>
+<div class="research-eyebrow">DEXLAB / PHYSICS EVALUATION NOTES</div>
 
-# DexLab
+# How does contact shape grasping?
 
-[Holiday findings and next steps](https://github.com/huangkiki/Dexlab/blob/main/docs/holiday-report.md)
+<div class="research-deck">Start with physics. Test the explanation.</div>
 
-<div class="lab-subtitle">A lab for robot contact dynamics</div>
+Reproducible contact and friction experiments grounded in established physical laws and empirical relations. Findings come first; models, solvers, raw records and their limits follow.
 
-From a single grasp to reproducible physical evidence. Studying how geometry, contact, solvers and drives shape robot manipulation.
+<div class="research-links"><a href="#comparison">Read the comparison ↗</a><a href="#coverage">Six-engine coverage</a><a href="https://github.com/huangkiki/Dexlab/releases">Code & data ↗</a></div>
 
-<div class="lab-actions"><a class="lab-button" href="quickstart.html">Run an experiment <span>↗</span></a><a class="lab-link" href="results.html">Read the findings →</a><a class="lab-link" href="https://github.com/huangkiki/Dexlab">GitHub ↗</a></div>
+<div class="research-meta">Evidence release v0.46.0 · Analytical verification / fixed cases · Full-engine matrix incomplete</div>
 
-<div class="lab-tags"><span>UniLab</span><span>MuJoCo</span><span>SuperDex</span><span>PhysX</span></div>
-
-:::::{div} lab-showcase
-
-::::{grid} 1 1 2 2
-:gutter: 0
-:::{grid-item-card} MuJoCo
-:class-card: lab-demo
-![MuJoCo SDF grasp](../../../demos/apple-stem-grasp/media/mujoco-sdf.gif)
-:::
-:::{grid-item-card} SuperDex FP64
-:class-card: lab-demo
-![SuperDex SDF grasp](../../../demos/apple-stem-grasp/media/superdex-sdf.gif)
-:::
-::::
-
-<div class="lab-caption">APPLE STEM GRASP · OpenArm × Wuji · Continuous 14 s dynamics records</div>
-
-:::::
-
-Free rigid body, SDF fingertips and stem, scripted joint control. These default development scenes do not represent all test outcomes.
-
-## What the experiments show
-
-Findings first, with the data, failures and measurement limits alongside them.
-
-::::{grid} 1 1 2 2
-:gutter: 3
-:::{grid-item-card} 01 / Apple stem grasp
-:class-card: lab-finding
-<div class="lab-score"><strong>1/10</strong><span>MuJoCo</span><strong>10/10</strong><span>SuperDex</span></div>
-
-Ten paired regression scenes. Robustness of fixed configurations, not an engine-accuracy ranking.
-
-[Per-scene metrics and failures](results.md)
-:::
-:::{grid-item-card} 02 / Robot cloth grasp
-:class-card: lab-finding lab-finding-warning
-<div class="lab-score"><strong>176/225</strong><span>historical intersecting frames</span></div>
-
-Independent geometry checks detect cloth–table intersections, up to 3.00 mm interior depth. This historical failure is retained; a repaired 9 s development case now passes, with only 7.95 µm self-penetration margin.
-
-[Failure analysis and repair](results.md)
-:::
-::::
-
-:::::{div} lab-chart
-
-![Per-scene apple grasp metrics](../../evidence/apple-metrics.svg)
-
-:::::
-
-Historical versions: MuJoCo 3.11.0 (0.5 ms) and SuperDex 1.0.0 FP64 (2 ms). Timesteps, friction and drives differ; wrist-relative displacement is not material slip. Intervals and acceptance criteria: [results report](results.md).
-
-## From basic contact to robot manipulation
+## Three findings to start with
 
 ::::{grid} 1 1 3 3
 :gutter: 3
-:::{grid-item-card} Rigid grasping
-:link: experiments
-:link-type: doc
-:class-card: lab-task
-Apple stems, SDF contact, holding and support. Separate task success from physical validity.
+:::{grid-item-card} 01 / Contact settings change drift
+:class-card: research-finding
+**Engine names do not predict the outcome.** SuperDex satisfies more checks in the fixed incline comparison; a historical higher-impedance MuJoCo profile has less static drift.
+
+[Parameters and counterexample](#comparison)
 :::
-:::{grid-item-card} Cloth manipulation
-:link: experiments
-:link-type: doc
-:class-card: lab-task
-Grasping, drape and stretch. Inspect intersections, material response and solver limitations.
+:::{grid-item-card} 02 / Correct endpoints can hide errors
+:class-card: research-finding
+**24/27 endpoint passes; 2/27 also meet the overlap budget.** Collision velocity, energy and overlap must be checked separately.
+
+[Collision evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md)
 :::
-:::{grid-item-card} Contact and actuation
-:link: benchmark
-:link-type: doc
-:class-card: lab-task
-Sliding, loading and transients. Use simple experiments to explain complex failures.
+:::{grid-item-card} 03 / Smaller residuals do not ensure a hold
+:class-card: research-finding
+**The cube still slips about 2 mm after tightening tolerances.** Numerical consistency and grasp retention are different outcomes.
+
+[Pinch evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-impulse-results.md)
 :::
 ::::
 
-## Dexterous roadmap
+(comparison)=
+## One cube. Two fixed profiles.
 
-Six research layers: tasks, actuation, physics, sensing, data and transfer. ManiSkill integration and in-hand rotation remain planned. [→ Dexterous roadmap](dexterity.md)
+40 mm · 64 g · matched initial state and gravity · 2 / 1 / 0.5 ms timesteps · 2 seconds per case. Verified MuJoCo records are reused; nine SuperDex cases are new. **An interim paired comparison, not a six-engine ranking.**
 
-<div class="lab-note">MuJoCo 3.14.0 has scoped development and regression evidence; Genesis qualification remains pending. Current results do not establish hardware accuracy. <a href="engines.html">Versions and capability limits →</a></div>
+| Case and observation | MuJoCo 3.15.0 | SuperDex 1.0.0 FP64 |
+|---|---|---|
+| 15° static friction, μ=0.5 · displacement | **1.301–1.336 mm** · 0/3 pass | **0.708–1.132 mm** · 2/3 pass |
+| 35° sliding, μ=0.5 · support and motion | Rotation, intermittent support loss · 0/3 | Stable sliding in scoring window · 3/3 |
+| 15° nominal zero friction · velocity RMSE | **8.21×10⁻⁵ m/s** · 3/3 | **8.04×10⁻¹²–1.52×10⁻¹⁰ m/s** · 3/3 |
 
+<div class="research-caution"><strong>Counterexamples belong in the conclusion.</strong> Historical MuJoCo impedance=0.99 drift is 0.141–0.179 mm, below this SuperDex profile. SuperDex static drift increases with timestep refinement; MuJoCo has a native friction floor. These results do not establish a universal winner.</div>
+
+**Solver settings.** MuJoCo: Newton / Euler / elliptic, impedance=0.9, 100 iterations maximum, tolerance 1e-10. SuperDex: native nonlinear solver (algorithm name unconfirmed in this record) / Backward Euler / penalty, 100 iterations maximum, absolute/relative tolerance 1e-9. Equal μ is not material or contact-model equivalence. Velocity errors use the 0.5–2 s window; the report preserves initial transients and failures.
+
+[Full results and raw data](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) · [Frozen protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-protocol.md) · [Parameter manifest](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/incline-comparison/manifest.json)
+
+(coverage)=
+## Six engines. What is covered?
+
+Matched cases and scoring are separate from having some previous experiment. The table concerns the nine incline cases above. Versions are historical evidence identities, not claims about current latest releases. Missing runs are never counted as passes.
+
+| Engine | Recorded version / solver | Nine paired incline cases | Other evidence |
+|---|---|---|---|
+| MuJoCo | 3.15.0 / Newton | Executed, including failures | Collision and pinch diagnostics |
+| SuperDex | 1.0.0 FP64 / native nonlinear | Executed, including failures | Loading, parameter transfer |
+| Genesis | 1.4.3 / native rigid, algorithm not separately confirmed | Not run | [16 force-limit cases](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) |
+| Newton Physics | 1.6.1, Warp 1.18.0 / XPBD | Not run | [Sphere–plane and negatives](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md) |
+| PhysX | Historical Isaac Sim 5.1 integration; verify native core per record | Not run; integration qualification incomplete | [Historical contact cases](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.md) |
+| Drake | No accepted version / solver yet | Not run | [Integration #117](https://github.com/huangkiki/Dexlab/issues/117) |
+
+[Follow-up work and blockers](https://github.com/huangkiki/Dexlab/issues) · [PhysX integration #47](https://github.com/huangkiki/Dexlab/issues/47). Frameworks and native engines are distinct; Newton Physics is not MuJoCo's Newton algorithm.
+
+## How we check
+
+1. **Define the reference first.** Static friction |f| ≤ μₛN, threshold tanθ=μₛ, sliding acceleration a=g(sinθ−μₖcosθ). Declare rigid-body/Coulomb assumptions, initial conditions and applicability before comparison.
+2. **Freeze cases and expose differences.** Match mass, inertia, geometry, frames, controls and initial state; record engine/solver versions, precision, timestep, budgets and contact parameters.
+3. **Retain failures and test sensitivity.** Report absolute errors, trajectories, convergence/sensitivity and cost. Support loss, rotation and unobservable parameters do not disappear into averages.
+4. **Keep evidence levels separate.** Analytical verification, sourced empirical references and real-system validation are different. The first two can proceed independently but do not replace measured calibration of a specific material.
+
+## From contact experiments to grasping
+
+![Native Genesis pinch, lift and release replay](../../../demos/contact-benchmark/media/genesis-pinch.gif)
+
+Continuous replay of native Genesis states, displayed by MuJoCo. In16 fixed cases, 0.2/0.4 N force caps cannot retain the object; 0.8/10 N hold and release, including ±2 mm initial offsets. This is a fixture-specific result, not a cross-engine grasp ranking.
+
+[Force-limit report](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) · [All research results](results.md) · [Installation and reproduction](quickstart.md)
+
+<div class="research-footer">Organization informed by <a href="https://mandarobotics.com/blog/comparing-physics-engines/index.html">Manda Robotics' engine comparison</a>: findings first, case-by-case evidence and disclosed differences. All numbers here come from published DexLab evidence.</div>
 
 ```{toctree}
 :hidden:
 :maxdepth: 1
 
-Quick start <quickstart>
+Quickstart <quickstart>
 Experiments <experiments>
-Results <results>
-Engines <engines>
-Dexterous roadmap <dexterity>
+Research results <results>
+Engines and models <engines>
+Dexterity roadmap <dexterity>
 Research ledger <research-ledger>
 Benchmark <benchmark>
-Contribute <contributing>
+Contributing <contributing>
 ```
-
-[Analytical incline friction: all18 cases, failures and limits](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-friction-results.md)
-
-[Incline diagnosis: none of12 controls restored continuous support](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-diagnosis.md)
-
-[Impact phase study: 36 cases, 2/9 complete phase groups pass; coarse endpoints remain near exact](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-phase-results.md)
-
-[Discrete contact audit: 54 trace predictions pass; exact rebound endpoints do not ensure accurate transients](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-discrete-results.md)
-
-[Stiffness and overlap: 24/27 final-state passes, 2/27 within the joint 1 mm budget](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md)
-
-[Elastic impact:18 final-state passes, with5–20mm contact overlap](https://github.com/huangkiki/Dexlab/blob/main/docs/elastic-impact-results.md)
-
-[Standard cube pinch:3 pass,9 physical failures,6 consistency rejections](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md)
-
-[Six-case pinch impulse findings](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-impulse-results.md): force-balance residual decreases, creep persists.

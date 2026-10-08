@@ -6,6 +6,8 @@
 
 [English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [实验报告](docs/site/zh/results.md) · [安装与复现](docs/installation.zh-CN.md) · [版本与数据下载](https://github.com/huangkiki/Dexlab/releases)
 
+文档站按每次 main 合并自动更新；首页提供实验结论、同工况对照与六引擎覆盖状态。
+
 ## 引擎、求解器与版本
 
 下表区分**已有证据**与**同工况对照**；不同任务、版本的结果不能拼成统一排名。版本是报告中的实测版本，不代表当前最新版。
