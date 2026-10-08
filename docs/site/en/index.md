@@ -87,7 +87,7 @@ Continuous replay of native Genesis states, displayed by MuJoCo. In16 fixed case
 
 [Force-limit report](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) · [All research results](results.md) · [Installation and reproduction](quickstart.md)
 
-<div class="research-footer">Organization informed by <a href="https://mandarobotics.com/blog/comparing-physics-engines/index.html">Manda Robotics' engine comparison</a>: findings first, case-by-case evidence and disclosed differences. All numbers here come from published DexLab evidence.</div>
+<div class="research-footer">Organization informed by <a href="https://mandarobotics.com/blog/comparing-physics-engines/index.html">Manda Robotics' engine comparison</a>: findings first, case-by-case evidence and disclosed differences. All experimental numbers on this page come from published DexLab evidence. <a href="references.html">Reading guides and references ↗</a></div>
 
 ```{toctree}
 :hidden:
@@ -100,5 +100,6 @@ Engines and models <engines>
 Dexterity roadmap <dexterity>
 Research ledger <research-ledger>
 Benchmark <benchmark>
+References <references>
 Contributing <contributing>
 ```
