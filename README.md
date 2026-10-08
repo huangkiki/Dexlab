@@ -6,6 +6,21 @@
 
 [English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [实验报告](docs/site/zh/results.md) · [安装与复现](docs/installation.zh-CN.md) · [版本与数据下载](https://github.com/huangkiki/Dexlab/releases)
 
+## 引擎、求解器与版本
+
+下表区分**已有证据**与**同工况对照**；不同任务、版本的结果不能拼成统一排名。版本是报告中的实测版本，不代表当前最新版。
+
+| 引擎 / 运行版本 | 求解器与数值配置 | 已有证据范围 |
+|---|---|---|
+| MuJoCo 3.15.0 | Newton 求解器；Euler 积分；elliptic 摩擦锥；100 次迭代上限，容差 1e-10 | 下方九组斜面配对，以及碰撞、夹持诊断 |
+| SuperDex 1.0.0 FP64 | 原生非线性求解器（记录未确认算法名称）；Backward Euler 积分；penalty 接触；100 次迭代上限，绝对/相对容差 1e-9 | 下方九组斜面配对；[冻结配置](docs/evidence/incline-comparison/manifest.json) |
+| Genesis 1.4.3 CPU FP64 | 原生刚体求解器；elliptic 摩擦锥，noslip_iterations=0；该记录未单独确认算法名称 | [16 组夹持力限额实验](docs/force-limit-results.zh-CN.md)，未参与下方斜面配对 |
+| Newton Physics 1.6.1 / Warp 1.18.0 | CPU SolverXPBD，float32；4 次迭代，dt=1 ms | [球–平面及负例](docs/newton-contact.zh-CN.md)，不等于抓取对照 |
+| PhysX（历史 Isaac Sim 5.1 / UniSim 1.7.10 接入） | 原生核心版本及算法须按各记录核验；不能用宿主版本替代 PhysX 版本 | [历史接触实验](demos/contact-benchmark/README.zh-CN.md)；不属于下方双引擎批次 |
+| Drake | 尚无已验收的运行版本或求解器结果 | 接入与首轮评测见 [#117](https://github.com/huangkiki/Dexlab/issues/117) |
+
+后续评测必须覆盖 **MuJoCo、SuperDex、Genesis、Newton Physics、PhysX、Drake** 及适用的已登记求解器配置。每份报告列出完整工况矩阵：已通过、已失败、受阻、不支持或未运行；缺项必须关联 Issue，补齐前仅称阶段结果。既有结果保留原范围，不追认成全引擎评测。ManiSkill/SAPIEN/Isaac Sim 是接入层，UniLab 是任务层，不能重复计作独立引擎；Newton Physics 与 MuJoCo 的 Newton 算法也不是一回事。
+
 ## 引擎对比：同一个方块，两种固定配置
 
 官方 **MuJoCo 3.15.0** 与 **SuperDex 1.0.0 FP64**：相同 40 mm／64 g 方块、初态与重力，三个步长（2／1／0.5 ms），每例 2 秒。复用已有 MuJoCo 数据，新增九例 SuperDex 对照。
