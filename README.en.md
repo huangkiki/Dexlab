@@ -1,10 +1,10 @@
 # DexLab
 
-**Studying how robots perform contact-rich manipulation in trustworthy simulation.**
+**DexLab investigates how contact and friction shape robotic grasping, using reproducible experiments grounded in established physical laws and empirical relations to assess the reliability of physics simulation.**
 
-Starting with standard-object grasping, we use inclined-plane friction, one-dimensional collisions and pinch experiments to check whether simulated forces, motion and contact agree with the declared physical model. This repository provides **findings, reproducible code and raw data** to explain why an object stays held, why it slips, and which simulation results can be trusted.
+We use inclined-plane friction, one-dimensional collisions and pinch experiments to examine simulated forces, motion and contact against analytical solutions, conservation laws and sourced empirical relations. This repository provides **findings, reproducible code and raw data** to investigate measurable factors that affect grasping performance and identify the conditions under which each conclusion applies.
 
-[简体中文](README.md) · [Experiment reports](docs/site/en/results.md) · [Installation](docs/installation.md) · [Releases and data](https://github.com/huangkiki/Dexlab/releases)
+[简体中文](README.md) · [Documentation (中文)](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiment reports](docs/site/en/results.md) · [Installation](docs/installation.md) · [Releases and data](https://github.com/huangkiki/Dexlab/releases)
 
 ## Engine comparison: one cube, two fixed profiles
 

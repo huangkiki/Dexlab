@@ -1,10 +1,10 @@
 # DexLab
 
-**研究机器人如何在可信的仿真中完成接触密集操作。**
+**以经典物理规律与已有经验公式为参照，通过可复现实验，研究接触与摩擦对机器人抓取的影响，评估物理仿真的可信度。**
 
-我们从标准方块抓取出发，用斜面摩擦、一维碰撞和夹持实验，检查仿真中的力、运动与接触是否符合声明的物理模型。这个仓库提供**实验结论、可复现代码和原始数据**，帮助解释物体为什么抓得住、为什么滑落，以及哪些仿真结果值得相信。
+我们用斜面摩擦、一维碰撞和夹持实验，对照解析解、守恒律及有来源的经验关系，检查仿真中的力、运动与接触。这个仓库提供**实验结论、可复现代码和原始数据**，分析哪些可测因素影响抓取表现，并明确结论的适用条件。
 
-[English](README.en.md) · [实验报告](docs/site/zh/results.md) · [安装与复现](docs/installation.zh-CN.md) · [版本与数据下载](https://github.com/huangkiki/Dexlab/releases)
+[English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [实验报告](docs/site/zh/results.md) · [安装与复现](docs/installation.zh-CN.md) · [版本与数据下载](https://github.com/huangkiki/Dexlab/releases)
 
 ## 引擎对比：同一个方块，两种固定配置
 
