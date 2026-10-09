@@ -15,6 +15,8 @@
 
 - Every unresolved fact, provenance, implementation or measurement/scoring ambiguity discovered during development must reuse or create a bounded Issue with affected claim/artifact, exact question, interpretation impact, evidence needed, acceptance and recovery condition. README/site ambiguity that affects public interpretation defaults to P0 ahead of new P1 capability work; safety and evidence-corruption incidents remain urgent. Use exactly one priority and explicit dependencies, verify queue eligibility, and retain blockers. Public text states known facts plus a direct Issue link. Linking, rewording or deleting a disclaimer does not resolve the technical gap; close only after sourced verification and synchronized public updates, or an explicitly reviewed withdrawal with remaining work tracked. Quantified uncertainty with a defined evidence basis remains part of the result.
 
+- Follow the maintainer-selected [unified-drive pinch workstream](docs/pinch-boundary-roadmap.md) and docs/autoresearch.md: safely recover in-flight work and handle actionable P0s, then prefer dependency-satisfied P1 children #131–#134; #130 is tracking-only. Use Discussion #129 for stage decisions; runs still require reviewed frozen protocols and full acceptance.
+
 ## Research and evaluation policy (2026-10-08)
 
 - Mission: use established physical laws and empirical relations in reproducible experiments to study contact/friction in robotic grasping and assess simulation reliability. README leads with findings, conditions, evidence and the documentation link; unfinished work belongs in Issues, never presented as results.

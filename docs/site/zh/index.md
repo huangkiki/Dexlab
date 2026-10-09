@@ -74,6 +74,12 @@ html_theme.sidebar_primary.remove: true
 
 [所有后续任务与阻塞](https://github.com/huangkiki/Dexlab/issues) · [PhysX 接入问题 #47](https://github.com/huangkiki/Dexlab/issues/47)。接入层与原生引擎分开；Newton Physics 也不是 MuJoCo 的 Newton 求解算法。
 
+## 下一阶段：统一驱动与夹持失效边界
+
+[开发路线](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-roadmap.zh-CN.md) · [专题 Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [研究总任务](https://github.com/huangkiki/Dexlab/issues/130)
+
+计划已采纳，协议与正式实验尚未交付。先处理公开证据 P0，再推进共同夹具/外部 PD、双后端资格、独立评分和 594 个正式回合＋24 个对照；六引擎缺项继续跟踪。既有实验结果保持原范围。
+
 ## 我们怎样检验
 
 1. **先定义参照。** 静摩擦 |f| ≤ μₛN；临界条件 tanθ=μₛ；滑动加速度 a=g(sinθ−μₖcosθ)。先声明刚体、库仑摩擦、初态与适用条件，再与原生观测对比。

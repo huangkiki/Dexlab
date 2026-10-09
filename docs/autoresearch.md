@@ -21,6 +21,16 @@ python3 scripts/autoresearch.py submit 3 --summary-file /path/to/review.md \
 
 Run queue commands from the primary checkout; install and edit in the returned worktree. Each needs its own editable environment; uv and asset caches are reusable. `submit` reruns unit tests, both complete 14-second backend episodes and independent acceptance before committing. Failed checks stop submission. Use existing `gh`/Git authentication without changing global credentials.
 
+## Current workstream and Discussion handoff (2026-10-09)
+
+The [unified-drive pinch roadmap](pinch-boundary-roadmap.md) connects Discussion [#129](https://github.com/huangkiki/Dexlab/discussions/129), tracking-only parent [#130](https://github.com/huangkiki/Dexlab/issues/130), and execution chain #131 → #132 → #133 → #134. Do not add `auto:approved` to the parent. The maintainer explicitly selected these four P1 children as the current workstream; P0 #124/#125/#126 and later urgent P0s remain ahead.
+
+Each iteration first inspects and safely recovers/concludes live workers and in-flight delivery, then reads `next --dry-run`. When no P0 is actionable, choose an eligible child of this workstream whose dependencies are verified delivered and call the existing `start ISSUE`. Creation-time order is the default recommendation, not an override of the maintainer's explicit selection. Recover existing workstream worktrees instead of recreating them when excluded from eligible. Pause, authorization, blockers, dependency proofs and single-worker rules still apply. If every child is blocked, record restoration conditions and continue other independent authorized tasks without inventing dependencies or closing old work.
+
+Discussion owns research tradeoffs and stage interpretation; Issues own scope, questions, acceptance and recovery; PRs and repository protocols/manifests govern delivery and runs. Unreviewed discussion comments cannot alter frozen experiments. Return to #129 after #132 qualification and #134 reporting, converting actions into Issues. Verify code delivery, complete two-engine acquisition and the six-engine research objective separately. This integration creates entry points; it neither launches physics nor creates a scheduled job.
+
+The campaign's 6 h / 700-start budget includes qualification, bridging, formal cases, controls and retries. Development/submission regressions are accounted separately under existing limits. Recoverable accounting, native observations and scoring remain undelivered child-Issue acceptance items. See the roadmap for scope, tests and completion criteria.
+
 ## Public uncertainty becomes work
 
 Any unresolved fact, provenance, implementation or measurement/scoring ambiguity found while developing must have a bounded Issue. Search existing work first. Record the exact public sentence or artifact and its version, question, known evidence, interpretation impact, verification route, acceptance, resources and concrete recovery condition. Use the existing labels and selector; no separate uncertainty database or scheduler.
