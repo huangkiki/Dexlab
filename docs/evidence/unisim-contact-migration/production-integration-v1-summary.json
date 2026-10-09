@@ -1,0 +1,510 @@
+{
+  "passed": true,
+  "scope": "Two production-entry integration acquisitions; unchanged acquisition functions reuse the qualified v4 matrix. Not a new full 38-launch comparison.",
+  "manifest_sha256": "fa1faadb29e77161180191c8fa58b73dc26d5aa11e61091e79d3f7b8c6005f39",
+  "qualified_reference_manifest_sha256": "474de44f8900cb9ba0210434e8da37f9f9405bdf8f35508a804ad725ed2ee854",
+  "results": {
+    "reset-250us": {
+      "comparison": {
+        "passed": true,
+        "trials": {
+          "pinch-0": {
+            "passed": true,
+            "initial": {
+              "passed": true,
+              "absolute_errors": {
+                "cube_mass": 0.0,
+                "cube_inertia": 0.0,
+                "geom_friction": 0.0,
+                "gripper_mass": 0.0,
+                "armature": 0.0,
+                "kp": 0.0,
+                "kv": 0.0,
+                "force_range": 0.0,
+                "q": 0.0,
+                "qvel": 0.0,
+                "object_pos": 0.0,
+                "object_vel": 0.0,
+                "object_quat": 0.0,
+                "object_ang": 0.0,
+                "geom_sol_params": 0.0,
+                "joint_sol_params": 0.0
+              },
+              "failures": [],
+              "option_differences": {},
+              "configuration_identical": true,
+              "scope": "admission to storage representation trial"
+            },
+            "first_failure_time_s": {},
+            "state_max_absolute_errors": {
+              "q": 0.0,
+              "qvel": 0.0,
+              "object_pos": 0.0,
+              "object_quat": 0.0,
+              "object_vel": 0.0,
+              "object_ang": 0.0,
+              "command": 0.0,
+              "object_contact_force": 0.0
+            },
+            "contact_max_absolute_errors": {
+              "position": 0.0,
+              "distance": 0.0,
+              "normal": 0.0,
+              "force": 0.0
+            },
+            "native_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 0.0007577717432539523,
+                "reference_table_max_penetration_m": 0.0007577717432539523,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 2.5710355551386504e-09,
+                "minimum_hold_center_z_m": 0.08370110250428056,
+                "maximum_release_center_z_m": 0.019998906973818325
+              }
+            },
+            "candidate_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 0.0007577717432539523,
+                "reference_table_max_penetration_m": 0.0007577717432539523,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 2.5710355551386504e-09,
+                "minimum_hold_center_z_m": 0.08370110250428056,
+                "maximum_release_center_z_m": 0.019998906973818325
+              }
+            }
+          },
+          "pinch-1": {
+            "passed": true,
+            "initial": {
+              "passed": true,
+              "absolute_errors": {
+                "cube_mass": 0.0,
+                "cube_inertia": 0.0,
+                "geom_friction": 0.0,
+                "gripper_mass": 0.0,
+                "armature": 0.0,
+                "kp": 0.0,
+                "kv": 0.0,
+                "force_range": 0.0,
+                "q": 0.0,
+                "qvel": 0.0,
+                "object_pos": 0.0,
+                "object_vel": 0.0,
+                "object_quat": 0.0,
+                "object_ang": 0.0,
+                "geom_sol_params": 0.0,
+                "joint_sol_params": 0.0
+              },
+              "failures": [],
+              "option_differences": {},
+              "configuration_identical": true,
+              "scope": "admission to storage representation trial"
+            },
+            "first_failure_time_s": {},
+            "state_max_absolute_errors": {
+              "q": 0.0,
+              "qvel": 0.0,
+              "object_pos": 0.0,
+              "object_quat": 0.0,
+              "object_vel": 0.0,
+              "object_ang": 0.0,
+              "command": 0.0,
+              "object_contact_force": 0.0
+            },
+            "contact_max_absolute_errors": {
+              "position": 0.0,
+              "distance": 0.0,
+              "normal": 0.0,
+              "force": 0.0
+            },
+            "native_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 0.0007577717432539523,
+                "reference_table_max_penetration_m": 0.0007577717432539523,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 2.5710355551386504e-09,
+                "minimum_hold_center_z_m": 0.08370110250428056,
+                "maximum_release_center_z_m": 0.019998906973818325
+              }
+            },
+            "candidate_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 0.0007577717432539523,
+                "reference_table_max_penetration_m": 0.0007577717432539523,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 2.5710355551386504e-09,
+                "minimum_hold_center_z_m": 0.08370110250428056,
+                "maximum_release_center_z_m": 0.019998906973818325
+              }
+            }
+          },
+          "open_negative-0": {
+            "passed": true,
+            "initial": {
+              "passed": true,
+              "absolute_errors": {
+                "cube_mass": 0.0,
+                "cube_inertia": 0.0,
+                "geom_friction": 0.0,
+                "gripper_mass": 0.0,
+                "armature": 0.0,
+                "kp": 0.0,
+                "kv": 0.0,
+                "force_range": 0.0,
+                "q": 0.0,
+                "qvel": 0.0,
+                "object_pos": 0.0,
+                "object_vel": 0.0,
+                "object_quat": 0.0,
+                "object_ang": 0.0,
+                "geom_sol_params": 0.0,
+                "joint_sol_params": 0.0
+              },
+              "failures": [],
+              "option_differences": {},
+              "configuration_identical": true,
+              "scope": "admission to storage representation trial"
+            },
+            "first_failure_time_s": {},
+            "state_max_absolute_errors": {
+              "q": 0.0,
+              "qvel": 0.0,
+              "object_pos": 0.0,
+              "object_quat": 0.0,
+              "object_vel": 0.0,
+              "object_ang": 0.0,
+              "command": 0.0,
+              "object_contact_force": 0.0
+            },
+            "contact_max_absolute_errors": {
+              "position": 0.0,
+              "distance": 0.0,
+              "normal": 0.0,
+              "force": 0.0
+            },
+            "native_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 2.109092283007763e-06,
+                "reference_table_max_penetration_m": 2.109092283007763e-06,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 3.055165621423032e-10,
+                "minimum_hold_center_z_m": 0.019998906973818235,
+                "maximum_release_center_z_m": 0.01999890697381842
+              }
+            },
+            "candidate_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 2.109092283007763e-06,
+                "reference_table_max_penetration_m": 2.109092283007763e-06,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 3.055165621423032e-10,
+                "minimum_hold_center_z_m": 0.019998906973818235,
+                "maximum_release_center_z_m": 0.01999890697381842
+              }
+            }
+          },
+          "open_negative-1": {
+            "passed": true,
+            "initial": {
+              "passed": true,
+              "absolute_errors": {
+                "cube_mass": 0.0,
+                "cube_inertia": 0.0,
+                "geom_friction": 0.0,
+                "gripper_mass": 0.0,
+                "armature": 0.0,
+                "kp": 0.0,
+                "kv": 0.0,
+                "force_range": 0.0,
+                "q": 0.0,
+                "qvel": 0.0,
+                "object_pos": 0.0,
+                "object_vel": 0.0,
+                "object_quat": 0.0,
+                "object_ang": 0.0,
+                "geom_sol_params": 0.0,
+                "joint_sol_params": 0.0
+              },
+              "failures": [],
+              "option_differences": {},
+              "configuration_identical": true,
+              "scope": "admission to storage representation trial"
+            },
+            "first_failure_time_s": {},
+            "state_max_absolute_errors": {
+              "q": 0.0,
+              "qvel": 0.0,
+              "object_pos": 0.0,
+              "object_quat": 0.0,
+              "object_vel": 0.0,
+              "object_ang": 0.0,
+              "command": 0.0,
+              "object_contact_force": 0.0
+            },
+            "contact_max_absolute_errors": {
+              "position": 0.0,
+              "distance": 0.0,
+              "normal": 0.0,
+              "force": 0.0
+            },
+            "native_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 2.109092283007763e-06,
+                "reference_table_max_penetration_m": 2.109092283007763e-06,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 3.055165621423032e-10,
+                "minimum_hold_center_z_m": 0.019998906973818235,
+                "maximum_release_center_z_m": 0.01999890697381842
+              }
+            },
+            "candidate_score": {
+              "passed": true,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": true
+              },
+              "first_failure_time_s": {},
+              "metrics": {
+                "native_max_penetration_m": 2.109092283007763e-06,
+                "reference_table_max_penetration_m": 2.109092283007763e-06,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 3.055165621423032e-10,
+                "minimum_hold_center_z_m": 0.019998906973818235,
+                "maximum_release_center_z_m": 0.01999890697381842
+              }
+            }
+          }
+        },
+        "exact_reset_replay": {
+          "native-pinch": true,
+          "native-open_negative": true,
+          "unisim-pinch": true,
+          "unisim-open_negative": true
+        }
+      },
+      "public_scorer_valid": true,
+      "task_passed": true
+    },
+    "eval-right-cap-0.2": {
+      "comparison": {
+        "passed": true,
+        "trials": {
+          "pinch-0": {
+            "passed": true,
+            "initial": {
+              "passed": true,
+              "absolute_errors": {
+                "cube_mass": 0.0,
+                "cube_inertia": 0.0,
+                "geom_friction": 0.0,
+                "gripper_mass": 0.0,
+                "armature": 0.0,
+                "kp": 0.0,
+                "kv": 0.0,
+                "force_range": 0.0,
+                "q": 0.0,
+                "qvel": 0.0,
+                "object_pos": 0.0,
+                "object_vel": 0.0,
+                "object_quat": 0.0,
+                "object_ang": 0.0,
+                "geom_sol_params": 0.0,
+                "joint_sol_params": 0.0
+              },
+              "failures": [],
+              "option_differences": {},
+              "configuration_identical": true,
+              "scope": "admission to storage representation trial"
+            },
+            "first_failure_time_s": {},
+            "state_max_absolute_errors": {
+              "q": 0.0,
+              "qvel": 0.0,
+              "object_pos": 0.0,
+              "object_quat": 2.220446049250313e-16,
+              "object_vel": 0.0,
+              "object_ang": 8.673617379884035e-19,
+              "command": 0.0,
+              "object_contact_force": 0.0
+            },
+            "contact_max_absolute_errors": {
+              "position": 0.0,
+              "distance": 0.0,
+              "normal": 0.0,
+              "force": 0.0
+            },
+            "native_score": {
+              "passed": false,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": false,
+                "initial_rest_orientation": true,
+                "box_inertia_and_friction": true
+              },
+              "first_failure_time_s": {
+                "hold_or_negative": 2.0
+              },
+              "metrics": {
+                "native_max_penetration_m": 4.858853610928383e-05,
+                "reference_table_max_penetration_m": 3.9784150574380395e-06,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 2.5733137801574588e-09,
+                "minimum_hold_center_z_m": 0.01999890697381819,
+                "maximum_release_center_z_m": 0.019998906973818325
+              },
+              "case": {
+                "condition": "pinch",
+                "force_limit_N": 0.2,
+                "id": "eval-right-cap-0.2",
+                "initial_x_m": 0.002,
+                "split": "evaluation"
+              },
+              "numerically_valid": true,
+              "task_passed": false,
+              "scope": "Fixed simulation challenges; no hardware or population success claim"
+            },
+            "candidate_score": {
+              "passed": false,
+              "checks": {
+                "declared_import": true,
+                "native_penetration_1mm": true,
+                "reference_table_penetration_1mm": true,
+                "force_ledger": true,
+                "momentum_balance_5percent_weight": true,
+                "released": true,
+                "hold_or_negative": false,
+                "initial_rest_orientation": true,
+                "box_inertia_and_friction": true
+              },
+              "first_failure_time_s": {
+                "hold_or_negative": 2.0
+              },
+              "metrics": {
+                "native_max_penetration_m": 4.858853610928383e-05,
+                "reference_table_max_penetration_m": 3.9784150574380395e-06,
+                "maximum_force_ledger_error_N": 0.0,
+                "maximum_momentum_residual_weight_ratio": 2.5733137801574588e-09,
+                "minimum_hold_center_z_m": 0.01999890697381819,
+                "maximum_release_center_z_m": 0.019998906973818325
+              },
+              "case": {
+                "condition": "pinch",
+                "force_limit_N": 0.2,
+                "id": "eval-right-cap-0.2",
+                "initial_x_m": 0.002,
+                "split": "evaluation"
+              },
+              "numerically_valid": true,
+              "task_passed": false,
+              "scope": "Fixed simulation challenges; no hardware or population success claim"
+            }
+          }
+        },
+        "exact_reset_replay": {}
+      },
+      "public_scorer_valid": true,
+      "task_passed": false
+    }
+  },
+  "runtime_reverified": true,
+  "full_check_sha256": "a4180ff41da2adcf6470c7d8b3438aa929b5c97794877cca93fef64c0a41d6c7",
+  "accounting": {
+    "starts_used": 110,
+    "wall_charged_or_reserved_s": 1975.7305280469009,
+    "package_starts_used": 64,
+    "package_wall_s": 1079.1432347339578,
+    "remaining_starts": 0
+  },
+  "limitations": [
+    "This is two integration acquisitions reusing the qualified v4 matrix, not a newly repeated full 38-launch comparison.",
+    "Only protocol metadata and pre-acquisition checks changed; model, control and per-step acquisition functions are structurally identical.",
+    "The raw evidence archive is private. The local adapter patch is not an upstream release."
+  ]
+}

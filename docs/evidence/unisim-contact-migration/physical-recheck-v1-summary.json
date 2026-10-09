@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "pair_count": 21,
+  "scope": "Additional scoring revision enforcing physical validity and exact first-failure times; original sealed verdicts are unchanged.",
+  "input_manifests": {
+    "comparison-v4": "474de44f8900cb9ba0210434e8da37f9f9405bdf8f35508a804ad725ed2ee854",
+    "production-integration-v1": "fa1faadb29e77161180191c8fa58b73dc26d5aa11e61091e79d3f7b8c6005f39"
+  },
+  "checker_source_sha256": "faadcb4f78049c2da64f15ed58d9e7390c3890011f7152eacce9b2e0a1ce2e9d",
+  "driver_source_sha256": "82087d321396a199d9494ada00d9ed59a0fa3364330080802228687fce1f8eb0",
+  "runtime_reverified": true,
+  "pairs": {
+    "comparison-v4/reset-1000us": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      }
+    },
+    "comparison-v4/reset-500us": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      }
+    },
+    "comparison-v4/reset-250us": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      }
+    },
+    "comparison-v4/dev-cap-0.2": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/dev-cap-0.4": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/dev-cap-0.8": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/dev-cap-10": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/dev-repeat-10": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/dev-open": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-left-cap-0.2": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-left-cap-0.4": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-left-cap-0.8": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-left-cap-10": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-left-open": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-right-cap-0.2": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-right-cap-0.4": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-right-cap-0.8": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-right-cap-10": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "comparison-v4/eval-right-open": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    },
+    "production-integration-v1/reset-250us": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      }
+    },
+    "production-integration-v1/eval-right-cap-0.2": {
+      "passed": true,
+      "physical_validity_passed": true,
+      "exact_failure_times_equal": true,
+      "reset_replay": {}
+    }
+  },
+  "full_check_sha256": "84346f0b4df0998458256a43d9941d5804a2dba9ac118dff4d94dc3a41de6916"
+}

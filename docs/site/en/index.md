@@ -158,6 +158,8 @@ Unresolved facts or provenance behind public findings must link to actionable Is
 
 ## Next: unified-drive pinch boundary
 
+A 24-process native diagnostic isolated batched parameter storage as the low-force discrepancy factor. The subsequent storage-aligned comparison passed all 19 pairs and 12 exact reset replays across 38 launches / 56 episodes, at unchanged thresholds. The six earlier failed pairs and low-force grasp failures remain recorded. This result covers the disclosed Genesis 1.4.3 / local adapter patch combination and adds no task type. [Cause, evidence and reproduction](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-contact-migration.md) · [#143](https://github.com/huangkiki/Dexlab/issues/143).
+
 [Development roadmap](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-roadmap.md) · [Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [Research tracker](https://github.com/huangkiki/Dexlab/issues/130)
 
 [Common protocol and data contract v1](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-protocol.md) now defines the finite fixture, 1 ms external-PD clock, 594 formal cases, 24 controls and up to 32 qualification/bridge cases, with case expansion and record-shape checks. Backend qualification and independent scoring are next; no backend is admitted and no formal campaign has run. Six-engine gaps and historical evidence scope remain explicit.

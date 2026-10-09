@@ -1,5 +1,7 @@
 # Genesis rigid qualification: quality and cost
 
+Current entry-point update: `dexlab.genesis_pinch_probe` now uses the disclosed public contact adapter; prepare the isolated patched environment in the [migration report](../../docs/unisim-contact-migration.md). Historical measurements in this report belong to their archived native source and timing schema; running the current entry point does not reproduce those historical costs. The explicit native comparison reference is `scripts/references/genesis_pinch_native.py`.
+
 [简体中文](GENESIS_COST.zh-CN.md)
 
 **The bounded primitive cases pass their engineering checks, but smaller steps do not establish convergence.** Native peak penetration increases from0.044 to0.665 to0.758mm as the step is refined. All stay below the unchanged1mm criterion. An apparently smaller coarse-step peak is not evidence of higher accuracy; contact-event sampling and soft response matter. No engine ranking or hardware accuracy follows.

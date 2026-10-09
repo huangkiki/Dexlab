@@ -158,6 +158,8 @@ Genesis 1.4.3 PBD 的驱动夹布／保持工况已运行并失败，见[保留�
 
 ## 下一阶段：统一驱动与夹持失效边界
 
+接触路径对照已找到低力差异的配置来源：24 进程原生诊断隔离了参数批存储因素，随后对齐存储的 38 次启动／56 回合通过全部 19 组对照与 12 项精确重放，原误差阈值不变。旧版六组失败和低力抓取失败均保留。该结果限定于显式披露的 Genesis 1.4.3／本地适配补丁组合，不增加任务类型数。[原因、证据与复现](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-contact-migration.zh-CN.md) · [#143](https://github.com/huangkiki/Dexlab/issues/143)。
+
 [开发路线](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-roadmap.zh-CN.md) · [专题 Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [研究总任务](https://github.com/huangkiki/Dexlab/issues/130)
 
 [共同协议与数据接口 v1](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-protocol.zh-CN.md)已实现：固定有限夹具、1 ms 外部 PD 时钟、594 个正式项、24 个对照及最多 32 个资格／桥接项，提供工况展开与记录结构校验。下一步为双后端资格与独立评分；后端尚未准入，正式批次尚未运行。六引擎缺项继续跟踪，历史结果保持原范围。
