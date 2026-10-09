@@ -13,7 +13,7 @@ html_theme.sidebar_primary.remove: true
 
 <div class="research-links"><a href="#comparison">阅读引擎对照 ↗</a><a href="#coverage">查看六引擎覆盖</a><a href="https://github.com/huangkiki/Dexlab/releases">代码与数据 ↗</a></div>
 
-<div class="research-meta">当前数据交付 v0.49.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
+<div class="research-meta">当前数据交付 v0.50.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
 
 ## 现在能做哪些任务
 
@@ -36,6 +36,8 @@ html_theme.sidebar_primary.remove: true
 
 ## 不同 solver 的任务覆盖度
 
+MuJoCo 3.15.0 首轮六配置：elliptic 各 3/9，pyramidal 各 0/9；六个负例正确拒绝。CG／Newton 的 pyramidal 路径各有三例力–状态一致性失败，均保留为无效记录。 [详细证据 / Evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.zh-CN.md).
+
 <!-- task-coverage:start -->
 
 状态：完整通过 / 部分通过 / 失败 / 未运行 / 接入受阻 / 不支持。点击单元格查看证据或恢复条件。
@@ -47,6 +49,12 @@ html_theme.sidebar_primary.remove: true
 | 引擎核心 / solver / 路径 / 版本 / 批次 | 基础接触 | 斜面 | 碰撞 | 夹具夹持 | 机器人抓取 |
 | --- | --- | --- | --- | --- | --- |
 | **MuJoCo · Newton / Euler**<br>native · 3.15.0<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · PGS / elliptic / Euler**<br>native CPU FP64 · 3.15.0<br>mujoco-incline-pgs-elliptic-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · PGS / pyramidal / Euler**<br>native CPU FP64 · 3.15.0<br>mujoco-incline-pgs-pyramidal-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · CG / elliptic / Euler**<br>native CPU FP64 · 3.15.0<br>mujoco-incline-cg-elliptic-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · CG / pyramidal / Euler**<br>native CPU FP64 · 3.15.0<br>mujoco-incline-cg-pyramidal-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · Newton / elliptic / Euler**<br>native CPU FP64 · 3.15.0<br>mujoco-incline-newton-elliptic-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · Newton / pyramidal / Euler**<br>native CPU FP64 · 3.15.0<br>mujoco-incline-newton-pyramidal-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **SuperDex · Newton / AUTO / FP64**<br>native · 1.0.0<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Genesis · Newton / approximate_implicitfast**<br>native CPU FP64 · 1.4.3<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [完整通过](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Genesis · Newton / approximate_implicitfast**<br>UniSim 1.7.12 + disclosed local patch · 1.4.3<br>genesis-contact-migration-v4 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-contact-migration.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |

@@ -1,0 +1,101 @@
+{
+  "version": "3.15.0",
+  "wheel": {
+    "filename": "mujoco-3.15.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "7d88a16eeabdd6f24a48d50f3154b9cacd790248c29a362543b952a8e07b7df4",
+    "package_code_sha256": "a48c3263e40378576b39f2739cc8d5b151a56ffd69ca0fcc11d66b32b60668e1",
+    "code_files": 137
+  },
+  "native_core_sha256": "d3a1476dd52e220031aca40b2b00f69d1febce2ee85c57d5015f68b0cc72afa9",
+  "release_inventory": {
+    "checked_at": "2026-10-09T18:01:17.342691+00:00",
+    "source": "https://pypi.org/pypi/mujoco/json",
+    "version": "3.15.0",
+    "requires_dist": [
+      "absl-py",
+      "etils[epath]",
+      "glfw",
+      "numpy",
+      "pyopengl",
+      "websockets>=13",
+      "absl-py; extra == \"sysid\"",
+      "colorama; extra == \"sysid\"",
+      "imageio[ffmpeg]; extra == \"sysid\"",
+      "jinja2; extra == \"sysid\"",
+      "matplotlib; extra == \"sysid\"",
+      "plotly; extra == \"sysid\"",
+      "pyyaml; extra == \"sysid\"",
+      "scipy; extra == \"sysid\"",
+      "tabulate; extra == \"sysid\"",
+      "typing_extensions; extra == \"sysid\"",
+      "usd-core; extra == \"usd\"",
+      "pillow; extra == \"usd\""
+    ],
+    "classifiers": [
+      "Development Status :: 5 - Production/Stable",
+      "Intended Audience :: Developers",
+      "Intended Audience :: Science/Research",
+      "Natural Language :: English",
+      "Programming Language :: Python :: 3",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
+      "Programming Language :: Python :: 3.14",
+      "Programming Language :: Python :: 3.15",
+      "Topic :: Scientific/Engineering"
+    ],
+    "wheel": {
+      "comment_text": null,
+      "core-metadata": {
+        "sha256": "ed75e601a51e1372123c1f3e95b2286c4ee6c94661886dbc19e43d2f8e9efad4"
+      },
+      "digests": {
+        "blake2b_256": "d685b8d427579e098c863875e2bae305c6d22ae13bc4582586ff2a8e04fb3ff2",
+        "md5": "14f8b37dcd5a130668f02c5fc0c1b4d2",
+        "sha256": "7d88a16eeabdd6f24a48d50f3154b9cacd790248c29a362543b952a8e07b7df4"
+      },
+      "downloads": -1,
+      "filename": "mujoco-3.15.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "has_sig": false,
+      "md5_digest": "14f8b37dcd5a130668f02c5fc0c1b4d2",
+      "packagetype": "bdist_wheel",
+      "python_version": "cp312",
+      "requires_python": ">=3.10",
+      "size": 30193547,
+      "upload_time": "2026-10-05T17:06:16",
+      "upload_time_iso_8601": "2026-10-05T17:06:16.056654Z",
+      "url": "https://files.pythonhosted.org/packages/d6/85/b8d427579e098c863875e2bae305c6d22ae13bc4582586ff2a8e04fb3ff2/mujoco-3.15.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "yanked": false,
+      "yanked_reason": null
+    },
+    "source_commit": "9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5",
+    "source_files": {
+      "include/mujoco/mjtype.h": {
+        "url": "https://raw.githubusercontent.com/google-deepmind/mujoco/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/include/mujoco/mjtype.h",
+        "sha256": "f20d165d2713a4432535850eea6ed08f8a7b471fc4c4d673f31d77ddca758886"
+      },
+      "src/engine/engine_forward.c": {
+        "url": "https://raw.githubusercontent.com/google-deepmind/mujoco/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_forward.c",
+        "sha256": "b51009c9f90a59708e63e4b329b5448d514d79e9f6febeed338206d06c083b46"
+      },
+      "src/engine/engine_solver.c": {
+        "url": "https://raw.githubusercontent.com/google-deepmind/mujoco/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_solver.c",
+        "sha256": "4d4afc77346eb436fc0caea1df5255675a0fb7d857061436d7a61cc8ebd89799"
+      },
+      "src/engine/engine_collision_driver.c": {
+        "url": "https://raw.githubusercontent.com/google-deepmind/mujoco/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/src/engine/engine_collision_driver.c",
+        "sha256": "67ce97bd1ea28cc1dd6fe9086e60afdad84ccf248fd38e0d3e72b65ae03ec6fc"
+      },
+      "doc/XMLreference.rst": {
+        "url": "https://raw.githubusercontent.com/google-deepmind/mujoco/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/doc/XMLreference.rst",
+        "sha256": "a77b0669771c1620d11fa7c02671099fc869c59cc339ccffc1dbf7bcabc47e01"
+      },
+      "doc/computation/index.rst": {
+        "url": "https://raw.githubusercontent.com/google-deepmind/mujoco/9ea3cdfcae93bf2cc4dc0e1a1627c5a39a1e06e5/doc/computation/index.rst",
+        "sha256": "f6a00ef24c8e973b21899ff9f3f0828a1643ff71e1769b133688dea0babe360a"
+      }
+    }
+  },
+  "engine_patches": false
+}

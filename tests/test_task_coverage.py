@@ -32,6 +32,21 @@ class TaskCoverageTests(unittest.TestCase):
             with self.subTest(name=name), self.assertRaises(ValueError):
                 incline_counts(invalid, protocol)
 
+    def test_invalid_positive_is_retained_as_failure_and_invalid_negative_rejected(self):
+        root = ROOT / 'docs/evidence/drake-incline'
+        bundle = json.loads((root / 'score-v2.json').read_text())
+        protocol = json.loads((root / 'protocol-v2.json').read_text())
+        bundle['results'][0].update(record_valid=False, passed=False,
+                                    failure='native force/state inconsistency', checks={'consistency': False})
+        self.assertEqual(incline_counts(bundle, protocol), (5, 9))
+        bundle['results'][0]['passed'] = True
+        with self.assertRaises(ValueError):
+            incline_counts(bundle, protocol)
+        bundle['results'][0]['passed'] = False
+        bundle['results'][-1].update(record_valid=False, failure='corrupt negative')
+        with self.assertRaises(ValueError):
+            incline_counts(bundle, protocol)
+
     def setUp(self):
         self.manifest = load_inventory()
         self.cohort = self.manifest['cohorts']['cloth-heldout-v1']
