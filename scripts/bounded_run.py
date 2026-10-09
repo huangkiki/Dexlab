@@ -182,13 +182,15 @@ def inside(args):
     admission = (experiment_admission(args.data_dir, args.device_number, args.memory_bytes)
                  if args.profile != 'archive' else None)
     service = verify_service(root.name, args.timeout, PROFILES[args.profile]['tasks'])
+    # Include initialization/GPU-query time in the first counter interval.
+    # Taking its timestamp afterwards inflates the first sampled CPU/I/O rate.
+    start = time.monotonic()
     state = {'state': 'running', 'profile': args.profile, 'admission': admission,
              'effective_service_properties': service,
              'effective_limits': limits,
              'started_at_unix_s': time.time(), 'initial': read_values(root, METRICS),
              'initial_pressure': pressure(root), 'initial_gpu_memory_mib': gpu_memory()}
     atomic_json(args.telemetry, state)
-    start = time.monotonic()
     previous_time = start
     previous = counters(state['initial'], args.device_number)
     peaks = [0.0, 0.0, 0.0]

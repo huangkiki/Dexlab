@@ -17,7 +17,7 @@ Record collision geometry, contact law, integrator, constraint solver and drives
 
 ## Latest-stable qualification
 
-Before each new batch, resolve official latest stable core, solver, bindings and wrappers. Record loaded versions, hashes, precision and compute path; freeze throughout the batch. Exclude alpha/beta/RC/dev, yanked packages and experimental solver options from the primary comparison. Block incompatible combinations rather than silently downgrading.
+Before each new batch, qualify the latest stable native path or an officially compatible framework combination. Record core, binding and framework versions, hashes, precision and compute path separately; freeze throughout the batch. An older bundled core is not itself a blocker. Attribution experiments additionally match core versions; unmatched versions cannot isolate a framework effect.
 
 Release leads checked on 2026-10-04: [MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0), [Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3), [Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0). This dated inventory alone does not establish task qualification. MuJoCo 3.14.0 now has the scoped cloth and friction development results in the [results report](results.md); Genesis and Newton qualification remain separate.
 
@@ -35,3 +35,7 @@ Six-device parameter checks on MuJoCo Warp 3.14.0 produced four passing and two 
 ## Synthetic tactile observation
 
 Box/fixed-slab geometric occupancy is supported on the MuJoCo fixture; shear memory, optical rendering and hardware calibration are not. See all three batches and failed controls in the [report](https://github.com/huangkiki/Dexlab/blob/main/docs/synthetic-tactile.md).
+
+## Two-track admission and Drake results
+
+The 2026-10-09 coverage plan uses the two admission tracks above. Native Drake 1.57.0 now records SAP / kLagged / hydroelastic incline results: six passes, three failures. Applicable kSap, kSimilar and other profiles remain unrun. [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md).

@@ -27,6 +27,24 @@ def issue(number, state="OPEN", labels=("auto:approved", "priority:P1"),
 
 
 class QueueTest(unittest.TestCase):
+    def test_pythonpath_cannot_disguise_an_editable_install_in_another_checkout(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'dexlab').mkdir()
+            (root / 'dexlab/__init__.py').write_text('')
+
+            def preflight(*command, **kwargs):
+                if command[0] != sys.executable:
+                    self.fail('Wrong installed checkout reached the expensive gate')
+                return subprocess.run(command, cwd=kwargs['cwd'], check=True, capture_output=True)
+
+            environment = {'SUPERDEX_PYTHON': sys.executable, 'PYTHONPATH': directory,
+                           'DEXLAB_MUJOCO_PROFILE': 'historical-3.11.0'}
+            with patch.dict('os.environ', environment, clear=True), \
+                    patch.object(module, 'run', side_effect=preflight), \
+                    self.assertRaises(subprocess.CalledProcessError):
+                module.check(root)
+
     def test_only_opted_in_and_unclaimed_issues(self):
         issues = [
             issue(1, labels=()),

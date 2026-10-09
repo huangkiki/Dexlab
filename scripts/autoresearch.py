@@ -322,6 +322,7 @@ def check(worktree, resource_dir=None):
         raise ValueError("Candidate submission requires DEXLAB_QUALIFICATION_WHEELS")
     run(
         python,
+        "-I",
         "-c",
         "from pathlib import Path; import dexlab; "
         "assert Path(dexlab.__file__).resolve().is_relative_to(Path.cwd().resolve()), "

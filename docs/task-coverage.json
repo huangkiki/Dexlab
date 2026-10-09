@@ -137,6 +137,21 @@
     },
     "genesis-cloth-diagnostic": {
       "scope": "Actuated clamp/lift/hold tests failed; other native PBD diagnostics are different protocols, not seven-profile heldout cloth cases"
+    },
+    "drake-incline-qualification-v2": {
+      "scope": "Initial native qualification, 6/9 positive cases; one rejected negative. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/drake-incline/score-v2.json",
+        "sha256": "9f5062acf55910a18620fd513846f0e08df83c51e2200068af19197a72147cb9"
+      },
+      "protocol": {
+        "path": "docs/evidence/drake-incline/protocol-v2.json",
+        "sha256": "4dfd54ab4ab2a59749aed62d5e43eabe4d8220ded0127b61cfcff01026ad8e6b"
+      },
+      "profile": "kLagged"
+    },
+    "genesis-contact-migration-v4": {
+      "scope": "Native versus locally patched adapter correspondence; retains low-force physical failures, not coverage-v1."
     }
   },
   "rows": [
@@ -315,6 +330,74 @@
           "evidence": {
             "path": "docs/force-limit-results.md",
             "sha256": "36ae5008d6c08f07b58b6b78d209512663202b5e06e73409e4ac899d0bb02c5f"
+          }
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / approximate_implicitfast",
+      "runtime_path": "UniSim 1.7.12 + disclosed local patch",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-contact-migration-v4",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-contact-migration.md",
+          "evidence": {
+            "path": "docs/unisim-contact-migration.md",
+            "sha256": "e54b43fe0227d6a4fbc381ffb5f5f87ee954e56fc410e51b6750409e542acddf"
           }
         },
         "grasp": {
@@ -562,34 +645,39 @@
     },
     {
       "engine": "Drake",
-      "solver": "pending qualification",
-      "runtime_path": "native",
-      "version": "pending #117",
+      "solver": "SAP / kLagged / hydroelastic",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
       "groups": [
         "rigid",
         "manipulation"
       ],
-      "cohort": "rigid-history",
+      "cohort": "drake-incline-qualification-v2",
       "cells": {
         "contact": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
         },
         "incline": {
-          "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/drake-incline/score-v2.json",
+            "sha256": "9f5062acf55910a18620fd513846f0e08df83c51e2200068af19197a72147cb9"
+          }
         },
         "collision": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
         },
         "pinch": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
         },
         "grasp": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
         },
         "push": {
           "state": "not-run",
@@ -623,7 +711,8 @@
           "state": "not-run",
           "reference": "https://github.com/huangkiki/Dexlab/issues/28"
         }
-      }
+      },
+      "profile": "kLagged"
     },
     {
       "engine": "MuJoCo",

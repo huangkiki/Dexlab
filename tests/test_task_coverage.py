@@ -9,11 +9,29 @@ import unittest
 
 from scripts.task_coverage import (
     ROOT, RELIABILITY_CHECKS, cloth_counts, evidence, load_inventory,
-    reliable_tasks, render, update,
+    reliable_tasks, render, update, incline_counts,
 )
 
 
 class TaskCoverageTests(unittest.TestCase):
+    def test_incline_failures_and_negative_cannot_be_omitted_from_counts(self):
+        root = ROOT / 'docs/evidence/drake-incline'
+        score = json.loads((root / 'score-v2.json').read_text())
+        protocol = json.loads((root / 'protocol-v2.json').read_text())
+        self.assertEqual(incline_counts(score, protocol), (6, 9))
+        for name in ('missing-failure', 'missing-negative', 'duplicate', 'false-pass'):
+            invalid = deepcopy(score)
+            if name == 'missing-failure':
+                invalid['results'].pop(3)
+            elif name == 'missing-negative':
+                invalid['results'].pop()
+            elif name == 'duplicate':
+                invalid['results'].append(invalid['results'][0])
+            else:
+                invalid['results'][3]['passed'] = True
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                incline_counts(invalid, protocol)
+
     def setUp(self):
         self.manifest = load_inventory()
         self.cohort = self.manifest['cohorts']['cloth-heldout-v1']

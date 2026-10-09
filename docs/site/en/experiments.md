@@ -56,3 +56,7 @@ The [16-run planar report](https://github.com/huangkiki/Dexlab/blob/main/demos/c
 ![Continuous repaired pinch, lift and release](../../../demos/cloth-folding/media/compliance-grasp.gif)
 
 One 9 s candidate passes the fixed v3 criteria; self penetration remains close to its limit. [Metrics, failed controls, video provenance and exact command](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.md). This does not replace the historical failure above or establish robustness.
+
+## Initial Drake incline qualification
+
+Official 1.57.0 / SAP / kLagged / hydroelastic: all six static and frictionless cases pass, three sliding cases fail, and the no-floor negative is rejected. The original coplanar failure is retained; 1 µm clearance belongs to a separate protocol. Reliable coverage under the new protocol remains unqualified. [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md).
