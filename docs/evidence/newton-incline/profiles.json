@@ -1,0 +1,142 @@
+[
+  {
+    "profile": "xpbd",
+    "score": {
+      "path": "docs/evidence/newton-incline/xpbd-score.json",
+      "sha256": "8d4faedae3e514281022136553563eb1437f826d3c0cd7c323930eacc71e9c1e"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/xpbd.json",
+      "sha256": "a805e1b834036cebb2791b07501fa284b17df7f44b45bf20ffd4fd64e0be4f74"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/xpbd.json",
+      "sha256": "11033b5615e594968d05b0e8aedb9d123fe9aa3c5ae5a8e22552b41b4313eaa8"
+    },
+    "passed": 1,
+    "total": 9,
+    "invalid_positives": 6,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "semiimplicit",
+    "score": {
+      "path": "docs/evidence/newton-incline/semiimplicit-score.json",
+      "sha256": "13e4e30fec322a60d578a06923ea741bda747c52a6609f081976d4251ca041c9"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/semiimplicit.json",
+      "sha256": "f18d6e854bd562d1f4f6ebf4ade08ba20f5c326b90b867c93674d4c69c3eba4d"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/semiimplicit.json",
+      "sha256": "5e690cd8fedac2665d63e8d080888a6ed692a3094ae38c54033650b4f1cba8ce"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid_positives": 4,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "featherstone",
+    "score": {
+      "path": "docs/evidence/newton-incline/featherstone-score.json",
+      "sha256": "4eb5c977000d4859e8190e1c2a7dc485eb598543c9c920359910c3eafef06edb"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/featherstone.json",
+      "sha256": "a60b9dcd2dbffa8e7d24f726a0f0a218058c2385c4bd36081cfe4de80437246b"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/featherstone.json",
+      "sha256": "7231cb51ad7aa9b464ecd75ffacbb7dc6a4999dfa2f889912aeaf5659fafeba7"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid_positives": 9,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "vbd-legacy",
+    "score": {
+      "path": "docs/evidence/newton-incline/vbd-legacy-score.json",
+      "sha256": "826827d85bc6a653e84e97781f7f32395a3257e6be8e1bcede21640be7a10d18"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/vbd-legacy.json",
+      "sha256": "89115dfe3885f33a7028bb447b9a7f17f013ca970c80cc0e18956ae13e09d8a0"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/vbd-legacy.json",
+      "sha256": "cca349187b57d233c4a5f1b80ef2abf50b32c914c24cb7105fd6cb23b3c1bb09"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid_positives": 9,
+    "negative_valid": false,
+    "negative_rejected": false
+  },
+  {
+    "profile": "vbd-compliant",
+    "score": {
+      "path": "docs/evidence/newton-incline/vbd-compliant-score.json",
+      "sha256": "a0f1369c8216d0f2374845824663a22d5a23c07b7190971fbce670557ba1a1d0"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/vbd-compliant.json",
+      "sha256": "faa3a93d0ec5de85f24c388c1ef417e35e27f328b8ac57d4f2c621762e190129"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/vbd-compliant.json",
+      "sha256": "dcf718b08e6e4adcc90de666476e2d310dc6070646891b78849d8f063244eb13"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid_positives": 9,
+    "negative_valid": false,
+    "negative_rejected": false
+  },
+  {
+    "profile": "kamino-padmm",
+    "score": {
+      "path": "docs/evidence/newton-incline/kamino-padmm-score.json",
+      "sha256": "0a682374005a81f1ee74a839e7ac1547e86e02781ad4064e50eacf00ed9a7d3b"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/kamino-padmm.json",
+      "sha256": "52ead9d677aff5959b41430a5de9f07868d0f238903fc76afeabb75ffdfa0e3d"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/kamino-padmm.json",
+      "sha256": "f6b42e478a2f48d0abb3cd479f082257e5c99e10e2f0640bffd41f0213be2a95"
+    },
+    "passed": 1,
+    "total": 9,
+    "invalid_positives": 8,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "kamino-dvi",
+    "score": {
+      "path": "docs/evidence/newton-incline/kamino-dvi-score.json",
+      "sha256": "0de8080ad7e59f2a637be6e55ef494ae16dff9f4c659d0a415d8056ae56aabf3"
+    },
+    "raw_score": {
+      "path": "docs/evidence/newton-incline/raw-scores/kamino-dvi.json",
+      "sha256": "01e1afb1ac15273ac39a7db2f9c1d2c4b3abc0fdea55fe144dea31c78ee6897b"
+    },
+    "protocol": {
+      "path": "docs/evidence/newton-incline/profiles/kamino-dvi.json",
+      "sha256": "bfec42c480963b9f87f1ef5e78aa40f11dc649251d08e9c6cc19bfcfc60bb80b"
+    },
+    "passed": 4,
+    "total": 9,
+    "invalid_positives": 4,
+    "negative_valid": true,
+    "negative_rejected": true
+  }
+]

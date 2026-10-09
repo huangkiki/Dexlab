@@ -434,6 +434,96 @@
     },
     "genesis-signorini-unsupported-v1": {
       "scope": "Official API rejects these solver/cone/Signorini combinations before stepping."
+    },
+    "newton-incline-v1-xpbd": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/xpbd-score.json",
+        "sha256": "8d4faedae3e514281022136553563eb1437f826d3c0cd7c323930eacc71e9c1e"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/xpbd.json",
+        "sha256": "11033b5615e594968d05b0e8aedb9d123fe9aa3c5ae5a8e22552b41b4313eaa8"
+      },
+      "profile": "xpbd"
+    },
+    "newton-incline-v1-semiimplicit": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/semiimplicit-score.json",
+        "sha256": "13e4e30fec322a60d578a06923ea741bda747c52a6609f081976d4251ca041c9"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/semiimplicit.json",
+        "sha256": "5e690cd8fedac2665d63e8d080888a6ed692a3094ae38c54033650b4f1cba8ce"
+      },
+      "profile": "semiimplicit"
+    },
+    "newton-incline-v1-featherstone": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/featherstone-score.json",
+        "sha256": "4eb5c977000d4859e8190e1c2a7dc485eb598543c9c920359910c3eafef06edb"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/featherstone.json",
+        "sha256": "7231cb51ad7aa9b464ecd75ffacbb7dc6a4999dfa2f889912aeaf5659fafeba7"
+      },
+      "profile": "featherstone"
+    },
+    "newton-incline-v1-vbd-legacy": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/vbd-legacy-score.json",
+        "sha256": "826827d85bc6a653e84e97781f7f32395a3257e6be8e1bcede21640be7a10d18"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/vbd-legacy.json",
+        "sha256": "cca349187b57d233c4a5f1b80ef2abf50b32c914c24cb7105fd6cb23b3c1bb09"
+      },
+      "profile": "vbd-legacy"
+    },
+    "newton-incline-v1-vbd-compliant": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/vbd-compliant-score.json",
+        "sha256": "a0f1369c8216d0f2374845824663a22d5a23c07b7190971fbce670557ba1a1d0"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/vbd-compliant.json",
+        "sha256": "dcf718b08e6e4adcc90de666476e2d310dc6070646891b78849d8f063244eb13"
+      },
+      "profile": "vbd-compliant"
+    },
+    "newton-incline-v1-kamino-padmm": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/kamino-padmm-score.json",
+        "sha256": "0a682374005a81f1ee74a839e7ac1547e86e02781ad4064e50eacf00ed9a7d3b"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/kamino-padmm.json",
+        "sha256": "f6b42e478a2f48d0abb3cd479f082257e5c99e10e2f0640bffd41f0213be2a95"
+      },
+      "profile": "kamino-padmm"
+    },
+    "newton-incline-v1-kamino-dvi": {
+      "description": "Initial fixed native FP32 evaluation; no shared tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/newton-incline/kamino-dvi-score.json",
+        "sha256": "0de8080ad7e59f2a637be6e55ef494ae16dff9f4c659d0a415d8056ae56aabf3"
+      },
+      "protocol": {
+        "path": "docs/evidence/newton-incline/profiles/kamino-dvi.json",
+        "sha256": "bfec42c480963b9f87f1ef5e78aa40f11dc649251d08e9c6cc19bfcfc60bb80b"
+      },
+      "profile": "kamino-dvi"
+    },
+    "newton-incline-particle-scope-v1": {
+      "description": "Official particle solver scope excludes this standalone rigid-body protocol"
+    },
+    "newton-mujoco-wrapper-unqualified": {
+      "description": "MuJoCo core through Newton; optional core dependency not qualified, no Newton-core credit"
     }
   },
   "rows": [
@@ -4159,6 +4249,696 @@
         "folded-drop": {
           "state": "not-run",
           "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "XPBD / 100 sweeps",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-xpbd",
+      "profile": "xpbd",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/xpbd-score.json",
+            "sha256": "8d4faedae3e514281022136553563eb1437f826d3c0cd7c323930eacc71e9c1e"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "SemiImplicit",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-semiimplicit",
+      "profile": "semiimplicit",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/semiimplicit-score.json",
+            "sha256": "13e4e30fec322a60d578a06923ea741bda747c52a6609f081976d4251ca041c9"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Featherstone",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-featherstone",
+      "profile": "featherstone",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/featherstone-score.json",
+            "sha256": "4eb5c977000d4859e8190e1c2a7dc485eb598543c9c920359910c3eafef06edb"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "VBD legacy / 100 sweeps",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-vbd-legacy",
+      "profile": "vbd-legacy",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/vbd-legacy-score.json",
+            "sha256": "826827d85bc6a653e84e97781f7f32395a3257e6be8e1bcede21640be7a10d18"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "VBD compliant / 100 sweeps",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-vbd-compliant",
+      "profile": "vbd-compliant",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/vbd-compliant-score.json",
+            "sha256": "a0f1369c8216d0f2374845824663a22d5a23c07b7190971fbce670557ba1a1d0"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Kamino / PADMM / Euler",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-kamino-padmm",
+      "profile": "kamino-padmm",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/kamino-padmm-score.json",
+            "sha256": "0a682374005a81f1ee74a839e7ac1547e86e02781ad4064e50eacf00ed9a7d3b"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Kamino / DVI / Euler",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-v1-kamino-dvi",
+      "profile": "kamino-dvi",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/kamino-dvi-score.json",
+            "sha256": "0de8080ad7e59f2a637be6e55ef494ae16dff9f4c659d0a415d8056ae56aabf3"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Style3D",
+      "runtime_path": "native particle solver",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-particle-scope-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/unsupported.json",
+            "sha256": "35d4bb515b4010f2a3475083ad35eb552496f290661a2e21a5ce28cb4ff608d9"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "ImplicitMPM",
+      "runtime_path": "native particle solver",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-incline-particle-scope-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/newton-incline/unsupported.json",
+            "sha256": "35d4bb515b4010f2a3475083ad35eb552496f290661a2e21a5ce28cb4ff608d9"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "SolverMuJoCo; algorithm unqualified",
+      "runtime_path": "Newton wrapper / unqualified",
+      "version": "Newton 1.6.1; MuJoCo core unqualified",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "newton-mujoco-wrapper-unqualified",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
         }
       }
     }

@@ -61,7 +61,7 @@ def cloth_counts(bundle, expected_cases):
 def incline_counts(bundle, protocol):
     """Recount the frozen qualification, including the required negative."""
     cases = {case['id']: case for case in protocol['cases']}
-    seen, passed, total, negatives = set(), 0, 0, 0
+    seen, passed, total, negatives = set(), 0, 0, []
     for result in bundle['results']:
         name = result['id']
         if name not in cases or name in seen or type(result['record_valid']) is not bool:
@@ -74,18 +74,18 @@ def incline_counts(bundle, protocol):
                 or result['passed'] != all(result['checks'].values())):
             raise ValueError('Contradictory incline verdict')
         if not result['record_valid']:
-            if result['passed'] or not result.get('failure') or negative:
+            if result['passed'] or not result.get('failure'):
                 raise ValueError('Invalid evidence cannot qualify a positive or a negative')
         if negative:
             if result['passed']:
                 raise ValueError('Negative control was accepted')
-            negatives += 1
+            negatives.append(result['record_valid'])
         else:
             passed += int(result['passed'])
             total += 1
     if seen != set(cases) or not negatives or not total:
         raise ValueError('Incomplete incline qualification')
-    return passed, total
+    return passed, total, all(negatives)
 
 
 def reliable_tasks(manifest, root):
@@ -154,11 +154,15 @@ def load_inventory(root=ROOT):
             if not cell['reference'].startswith('https://github.com/huangkiki/Dexlab/'):
                 raise ValueError('Coverage references must identify repository evidence or issues')
             if 'counts_from' in cell:
-                passed, total = counts[row['cohort']][row['profile'], cell['counts_from']]
-                state = 'passed' if passed == total else 'partial' if passed else 'failed'
+                count = counts[row['cohort']][row['profile'], cell['counts_from']]
+                passed, total = count[:2]
+                negative_valid = count[2] if len(count) == 3 else True
+                state = 'passed' if passed == total and negative_valid else 'partial' if passed else 'failed'
                 if cell['state'] != state:
                     raise ValueError('Declared state disagrees with frozen records')
                 cell['count'] = f'{passed}/{total}'
+                if not negative_valid:
+                    cell['negative_valid'] = False
             if cell['state'] in ('passed', 'partial', 'failed', 'unsupported'):
                 if 'evidence' not in cell:
                     raise ValueError('Observed and unsupported claims require hashed evidence')
@@ -195,6 +199,8 @@ def render(manifest, language, root=ROOT):
                 label = STATES[cell['state']][index]
                 if 'count' in cell:
                     label += ' ' + cell['count']
+                if cell.get('negative_valid') is False:
+                    label += '；负例无效' if zh else '; invalid negative'
                 values.append(f'[{label}]({cell["reference"]})')
             lines.append('| ' + ' | '.join(values) + ' |')
         lines.append('')

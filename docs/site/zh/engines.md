@@ -19,9 +19,9 @@
 
 新批次分别准入原生最新稳定路径和框架官方兼容组合。核心、绑定、框架版本及其哈希、精度、计算路径分别记录，批次内冻结。较旧的内嵌核心不自动成为阻塞；归因实验另行匹配核心版本，版本不能匹配时不声称差异仅由框架造成。
 
-2026-10-04 已核实发布线索：[MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0)、[Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3)、[Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0)。仅此带日期的清单不证明任务资格。MuJoCo 3.14.0 已有[结果报告](results.md)所列夹布与摩擦开发证据；Genesis 和 Newton 仍需分别验收。
+2026-10-04 已核实发布线索：[MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0)、[Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3)、[Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0)。仅此带日期的清单不证明任务资格。MuJoCo 3.14.0 已有[结果报告](results.md)所列夹布与摩擦开发证据；更新的原生斜面批次见下文，与这些历史任务分别展示。
 
-Newton 的 MuJoCo 扩展仍限制 3.12.x，不能称底层最新；ovphysx 0.6.3 的分发分类为 Alpha。稳定绑定、内嵌核心和独立 SDK 必须分别核查。[版本任务 #41](https://github.com/huangkiki/Dexlab/issues/41)
+已准入的 Newton 1.6.1 包在 `sim` 扩展声明 `mujoco~=3.12.0` 和 `mujoco-warp~=3.12.0`；不能称底层最新；ovphysx 0.6.3 的分发分类为 Alpha。稳定绑定、内嵌核心和独立 SDK 必须分别核查。[版本任务 #41](https://github.com/huangkiki/Dexlab/issues/41)
 
 ## Genesis 的范围
 
@@ -39,3 +39,7 @@ MuJoCo Warp 3.14.0 的六卡参数对照得到四组通过、两组失败，固�
 ## 双轨准入与 Drake 结果
 
 2026-10-09 的覆盖计划采用上述双轨准入。Drake 原生 1.57.0 已记录 SAP / kLagged / hydroelastic 的首轮斜面结果，九例六过三败；kSap、kSimilar 等适用配置尚未运行。 [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md).
+
+## 原生斜面批次
+
+[覆盖矩阵](index.md)分别保留初始批次。[Genesis 1.4.3](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.zh-CN.md)记录五组原生 CPU 配置。[Newton 1.6.1 / Warp 1.18.0](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md)记录七组：XPBD 与 Kamino PADMM 各通过 1/9 正例，DVI 通过 4/9，其余未通过。49 个无效正例、两个无效 VBD 负例及 DVI 中断尝试全部保留；显式续接仅补齐缺失的负例。这些固定配置不计入可靠覆盖 coverage-v1，也不构成等额调优比较或引擎排名。

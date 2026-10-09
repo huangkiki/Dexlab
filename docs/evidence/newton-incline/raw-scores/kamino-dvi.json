@@ -1,0 +1,221 @@
+{
+  "profile": "kamino-dvi",
+  "results": [
+    {
+      "case": "static-h0.002",
+      "negative": false,
+      "valid": true,
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 1.3030025188695243e-05,
+        "static_speed_m_s": 0.003540251556844005,
+        "sliding_velocity_rmse_m_s": 0.00016863226267602386,
+        "sliding_position_rmse_m": 1.1719460408085291e-05,
+        "acceleration_error_m_s2": 2.1559377137229562e-05,
+        "rotation_rad": 0.0008536446318117375,
+        "penetration_m": 3.4170822763846324e-05,
+        "force_balance_rmse_n": 0.019224516731094533
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": true,
+        "static_speed_m_s": false,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": -2.1559377137229562e-05,
+      "full_velocity_rmse_m_s": 0.00014606467205410491,
+      "full_position_rmse_m": 1.016009560600254e-05,
+      "impulse_residual_max_ns": 2.1694379115568945e-10
+    },
+    {
+      "case": "static-h0.001",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Incorrect unit quaternions"
+    },
+    {
+      "case": "static-h0.0005",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 0.0,
+        "static_speed_m_s": 4.604218024349145e-09,
+        "sliding_velocity_rmse_m_s": 8.086940622774868e-10,
+        "sliding_position_rmse_m": 3.4033503910130226e-09,
+        "acceleration_error_m_s2": 2.8620796960227134e-10,
+        "rotation_rad": 0.0,
+        "penetration_m": 2.3598102226272047e-09,
+        "force_balance_rmse_n": 1.28291347585992e-07
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "static_displacement_m": true,
+        "static_speed_m_s": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.8620796960227134e-10,
+      "full_velocity_rmse_m_s": 3.713126213058163e-09,
+      "full_position_rmse_m": 0.0,
+      "impulse_residual_max_ns": 5.8008967599682983e-11
+    },
+    {
+      "case": "sliding-h0.002",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 3.2209081751188826,
+        "static_speed_m_s": 3.217680014199049,
+        "sliding_velocity_rmse_m_s": 6.979400396750643e-06,
+        "sliding_position_rmse_m": 0.0013995106686449056,
+        "acceleration_error_m_s2": 1.231497800846526e-06,
+        "rotation_rad": 0.0003892031796673418,
+        "penetration_m": 3.214266826668675e-05,
+        "force_balance_rmse_n": 7.323574059251706e-06
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6088428318684562,
+      "full_velocity_rmse_m_s": 0.0002545948102463797,
+      "full_position_rmse_m": 0.0018606919467215237,
+      "impulse_residual_max_ns": 8.224684240101603e-09
+    },
+    {
+      "case": "sliding-h0.001",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 3.219294948143593,
+        "static_speed_m_s": 3.217719234463244,
+        "sliding_velocity_rmse_m_s": 1.1413377636306568e-05,
+        "sliding_position_rmse_m": 0.0006923208276628863,
+        "acceleration_error_m_s2": 6.459916515488828e-06,
+        "rotation_rad": 0.00047241186012907777,
+        "penetration_m": 8.036197811099636e-06,
+        "force_balance_rmse_n": 1.4628219325559953e-05
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6088505232827726,
+      "full_velocity_rmse_m_s": 9.05135035397806e-05,
+      "full_position_rmse_m": 0.0009268018123120335,
+      "impulse_residual_max_ns": 7.3169152590391275e-09
+    },
+    {
+      "case": "sliding-h0.0005",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 3.2185274963703563,
+        "static_speed_m_s": 3.2177641483412476,
+        "sliding_velocity_rmse_m_s": 3.412220695625646e-05,
+        "sliding_position_rmse_m": 0.0003616509473769677,
+        "acceleration_error_m_s2": 5.0939020951767944e-05,
+        "rotation_rad": 0.0003892031796673418,
+        "penetration_m": 2.0084358550817957e-06,
+        "force_balance_rmse_n": 5.020626592689374e-05
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6088950023872088,
+      "full_velocity_rmse_m_s": 4.242591321641049e-05,
+      "full_position_rmse_m": 0.00047381962509473633,
+      "impulse_residual_max_ns": 7.59738626165796e-09
+    },
+    {
+      "case": "frictionless-h0.002",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Incorrect unit quaternions"
+    },
+    {
+      "case": "frictionless-h0.001",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Incorrect unit quaternions"
+    },
+    {
+      "case": "frictionless-h0.0005",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Incorrect unit quaternions"
+    },
+    {
+      "case": "negative-no-floor",
+      "negative": true,
+      "valid": true,
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 5.080621817856192,
+        "static_speed_m_s": 5.078069868431341,
+        "sliding_velocity_rmse_m_s": 2.199266942416197,
+        "sliding_position_rmse_m": 1.2791478620395766,
+        "acceleration_error_m_s2": 2.5390788643586495,
+        "rotation_rad": 0.0,
+        "penetration_m": 0.0,
+        "force_balance_rmse_n": 0.6278400000000001
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.5390788643586495,
+      "full_velocity_rmse_m_s": 2.9322063572952994,
+      "full_position_rmse_m": 2.273254791165008,
+      "impulse_residual_max_ns": 3.238281250008551e-08,
+      "negative_rejected": true
+    }
+  ],
+  "positives_passed": 4,
+  "positives_total": 9,
+  "reliable_coverage_v1": false,
+  "continuation": {
+    "reused_positive_cases": 9,
+    "preserved_interrupted_attempt": true,
+    "identical_prefix_steps": 1588,
+    "original_campaign_sha256": "aed765f250f6269302439a5163cbd140befe1d4e030e114c43e866158045e65f",
+    "continuation_runner_sha256": "8a2b94e2b7e5108f1e18b32e7d956fb4a5b93a1dd0f9a814ef0ba7fc6e90d272"
+  }
+}

@@ -18,7 +18,7 @@ class TaskCoverageTests(unittest.TestCase):
         root = ROOT / 'docs/evidence/drake-incline'
         score = json.loads((root / 'score-v2.json').read_text())
         protocol = json.loads((root / 'protocol-v2.json').read_text())
-        self.assertEqual(incline_counts(score, protocol), (6, 9))
+        self.assertEqual(incline_counts(score, protocol), (6, 9, True))
         for name in ('missing-failure', 'missing-negative', 'duplicate', 'false-pass'):
             invalid = deepcopy(score)
             if name == 'missing-failure':
@@ -32,20 +32,61 @@ class TaskCoverageTests(unittest.TestCase):
             with self.subTest(name=name), self.assertRaises(ValueError):
                 incline_counts(invalid, protocol)
 
-    def test_invalid_positive_is_retained_as_failure_and_invalid_negative_rejected(self):
+    def test_invalid_positive_and_negative_remain_visible_without_qualification(self):
         root = ROOT / 'docs/evidence/drake-incline'
         bundle = json.loads((root / 'score-v2.json').read_text())
         protocol = json.loads((root / 'protocol-v2.json').read_text())
         bundle['results'][0].update(record_valid=False, passed=False,
                                     failure='native force/state inconsistency', checks={'consistency': False})
-        self.assertEqual(incline_counts(bundle, protocol), (5, 9))
+        self.assertEqual(incline_counts(bundle, protocol), (5, 9, True))
         bundle['results'][0]['passed'] = True
         with self.assertRaises(ValueError):
             incline_counts(bundle, protocol)
         bundle['results'][0]['passed'] = False
         bundle['results'][-1].update(record_valid=False, failure='corrupt negative')
-        with self.assertRaises(ValueError):
-            incline_counts(bundle, protocol)
+        self.assertEqual(incline_counts(bundle, protocol), (5, 9, False))
+
+    def test_all_positive_passes_with_invalid_negative_cannot_render_full_pass(self):
+        source = ROOT / 'docs/evidence/drake-incline'
+        score = json.loads((source / 'score-v2.json').read_text())
+        protocol = json.loads((source / 'protocol-v2.json').read_text())
+        for result in score['results']:
+            if not result['expected_negative']:
+                result.update(record_valid=True, passed=True, checks={'fixture_check': True})
+            else:
+                result.update(record_valid=False, passed=False, checks={'consistency': False},
+                              failure='invalid negative fixture')
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'docs').mkdir()
+
+            def save(name, data):
+                raw = json.dumps(data).encode()
+                (root / name).write_bytes(raw)
+                return {'path': name, 'sha256': hashlib.sha256(raw).hexdigest()}
+
+            protocol_ref = save('protocol.json', protocol)
+            score['protocol_sha256'] = protocol_ref['sha256']
+            score_ref = save('score.json', score)
+            cell = dict(state='passed', counts_from='incline', evidence=score_ref,
+                        reference='https://github.com/huangkiki/Dexlab/issues/149')
+            manifest = dict(schema_version=1, current_protocol='coverage-v1',
+                            groups=[dict(id='rigid', en='Rigid', zh='刚体')],
+                            tasks=[dict(id='incline', group='rigid', en='Incline', zh='斜面')],
+                            cohorts={'fixture': dict(incline_score=score_ref,
+                                                    protocol=protocol_ref, profile='fixture')},
+                            rows=[dict(engine='Newton Physics', solver='fixture',
+                                       runtime_path='fixture', version='fixture',
+                                       cohort='fixture', profile='fixture', groups=['rigid'],
+                                       cells={'incline': cell})])
+            save('docs/task-coverage.json', manifest)
+            with self.assertRaisesRegex(ValueError, 'Declared state'):
+                load_inventory(root)
+            cell['state'] = 'partial'
+            save('docs/task-coverage.json', manifest)
+            observed = load_inventory(root)
+            self.assertIn('Partial 9/9; invalid negative', render(observed, 'en', root))
+            self.assertFalse(any(reliable_tasks(observed, root).values()))
 
     def setUp(self):
         self.manifest = load_inventory()

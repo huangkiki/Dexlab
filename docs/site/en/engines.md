@@ -19,9 +19,9 @@ Record collision geometry, contact law, integrator, constraint solver and drives
 
 Before each new batch, qualify the latest stable native path or an officially compatible framework combination. Record core, binding and framework versions, hashes, precision and compute path separately; freeze throughout the batch. An older bundled core is not itself a blocker. Attribution experiments additionally match core versions; unmatched versions cannot isolate a framework effect.
 
-Release leads checked on 2026-10-04: [MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0), [Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3), [Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0). This dated inventory alone does not establish task qualification. MuJoCo 3.14.0 now has the scoped cloth and friction development results in the [results report](results.md); Genesis and Newton qualification remain separate.
+Release leads checked on 2026-10-04: [MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0), [Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3), [Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0). This dated inventory alone does not establish task qualification. MuJoCo 3.14.0 now has the scoped cloth and friction development results in the [results report](results.md); newer native incline cohorts are listed below and remain separate from those historical tasks.
 
-Newton's MuJoCo extra still restricts the core to 3.12.x; ovphysx 0.6.3 is classified Alpha. Stable bindings, embedded cores and standalone SDKs need separate checks. [Version task #41](https://github.com/huangkiki/Dexlab/issues/41)
+The qualified Newton 1.6.1 package declares `mujoco~=3.12.0` and `mujoco-warp~=3.12.0` for its `sim` extra; ovphysx 0.6.3 is classified Alpha. Stable bindings, embedded cores and standalone SDKs need separate checks. [Version task #41](https://github.com/huangkiki/Dexlab/issues/41)
 
 ## Genesis scope
 
@@ -39,3 +39,7 @@ Box/fixed-slab geometric occupancy is supported on the MuJoCo fixture; shear mem
 ## Two-track admission and Drake results
 
 The 2026-10-09 coverage plan uses the two admission tracks above. Native Drake 1.57.0 now records SAP / kLagged / hydroelastic incline results: six passes, three failures. Applicable kSap, kSimilar and other profiles remain unrun. [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md).
+
+## Native incline cohorts
+
+The [coverage matrix](index.md) retains the initial cohorts separately. [Genesis 1.4.3](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) records five native CPU configurations. [Newton 1.6.1 / Warp 1.18.0](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) records seven: XPBD and Kamino PADMM pass 1/9 positives each, DVI passes 4/9, and the remaining profiles pass none. The 49 invalid positives, two invalid VBD negatives and interrupted DVI attempt remain visible. An explicit continuation completes only the missing negative. These fixed configurations do not establish reliable coverage-v1 credit, equal tuning or an engine ranking.
