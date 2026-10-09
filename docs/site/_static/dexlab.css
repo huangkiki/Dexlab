@@ -81,3 +81,9 @@ html[data-theme="dark"] { --research-accent: #8bd4bd; --research-panel: #202d29;
 .research-footer { border-top: 1px solid var(--research-rule); margin-top: 2.5rem; padding-top: 1.5rem; color: var(--pst-color-text-muted); font-size: .85rem; }
 .bd-article:has(.research-eyebrow) a:focus-visible { outline: 3px solid var(--research-accent); outline-offset: 3px; }
 @media(max-width: 767px) { .bd-main:has(.research-eyebrow) .bd-article-container { padding: 1.5rem 1rem; } .bd-article:has(.research-eyebrow) h2 { margin-top: 2.2rem; } .bd-article:has(.research-eyebrow) .table-wrapper { overflow-x: auto; } }
+
+/* Keep task verdicts readable while narrow screens scroll each table. */
+#solver table td:first-child,
+#task-coverage-by-solver table td:first-child { min-width: 18rem; max-width: 30rem; }
+#solver table td:not(:first-child),
+#task-coverage-by-solver table td:not(:first-child) { white-space: nowrap; }

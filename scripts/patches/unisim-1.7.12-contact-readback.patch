@@ -1,0 +1,3110 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index d77e65a5aa5d7ccf9aab0e9497cf5188dd4328a5..1cf70ede1d65b14d5be63d717c3d026767825160 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -2,6 +2,14 @@
+ 
+ ## Unreleased
+ 
++- Derive Genesis host time from integer step counts and a per-environment restored origin. Single-step and batched calls now agree at scoring-window boundaries; selected resets, playback and device-to-host barriers rebase the affected clocks. The separate device tensor clock retains its existing precision.
++
++- Preserve explicit inertial values at FP64 precision in the Genesis portable XML handoff; compiled XML rounding no longer silently changes these parameters. Implicit inertials remain native-inferred.
++
++- Genesis factory calls reject unprefixed options that were silently overwritten; use `genesis_friction_cone` (and the corresponding prefixed solver options) with `create_backend`, or constructor names with `GenesisBackend` directly. Initial reports expose the requested and effective native friction-cone names.
++
++- Added an optional detached rigid-contact snapshot contract with explicit state, collision and force epochs, public geometry identities, per-contact force orientation and independently read body net forces. Genesis 1.4.3 mapped rigid scenes expose the candidate readback; other adapters and older Genesis releases remain unsupported for this complete snapshot. Added explicit Genesis CPU/FP64/seed/determinism selection, actuated armature and noslip overrides, plus initial effective native configuration reports. The default Genesis extra remains 1.3.3; unqualified 1.4.3 mass/COM randomization fails closed. See the bilingual contact-readback documentation for the runtime qualification boundary.
++
+ - Moved MotrixSim packed host-bridge sensor layout validation off the step/reset hot path (unilabsim/UniLab#2102). `MotrixHostBridgeTransferPlan` previously re-read every physical sensor through `SceneModel.get_sensor_value` on each full and selected packed read to re-check widths; the full layout contract check now runs only at compile time, while hot reads re-verify only the plan-owned staging buffer shapes. A Motrix scene layout is immutable for the lifetime of its backend and `MotrixBackend.close()` closes every compiled plan fail closed, so explicit layout drift still fails closed at compile/open and backend teardown.
+ 
+ ## 1.7.12 - 2026-10-08
+diff --git a/docs/en/contact-readback.md b/docs/en/contact-readback.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..ab02c38bdade46c2897811c069fa212160d85d95
+--- /dev/null
++++ b/docs/en/contact-readback.md
+@@ -0,0 +1,39 @@
++# Native contact snapshots and Genesis precision
++
++[English](contact-readback.md) | [中文](../zh/contact-readback.md)
++
++## Public boundary
++
++`SimBackend.get_contact_capabilities()` declares complete rigid-contact readback separately from aggregate contact sensors. `get_contact_snapshot()` returns a detached `ContactSnapshot`. Unsupported adapters raise `UnsupportedCapabilityError`; an empty successful result is reserved for an observed absence of contacts. Missing normal, signed distance, contact torque or body net-force readback is `None`, never a zero substitute. `get_capabilities()` includes these instance declarations with source provenance; declaration is not runtime verification.
++
++Arrays identify the environment and public geometry IDs (`get_geom_names()`), positions, forces on both geometries, and optional normals pointing A to B, signed distance (negative penetration) and torque on B about the contact point. SI units and world frames apply. State time, collision geometry time and force interval are separate arrays; clients must not attach post-integration poses to an earlier contact evaluation silently. Reset rows are unavailable until a subsequent solve, and padded native slots are excluded using native counts. Records copy their input arrays and reject invalid identity, shape, nonfinite values and impossible epochs.
++
++The Genesis implementation translates the 1.4.3 padded native collider buffer inside UniSim, retains the last solve without recomputing physics, and binds identities through the common entity layout. It is restricted to mapped rigid scenes and full step barriers; older runtime versions retain existing pair sensors and do not declare the new capability. This source implementation still requires exact-version runtime qualification before downstream production migration. No other adapter claims support yet.
++
++Primitive collision identity uses the owning body, native shape/dimensions and local pose. Cached meshes can omit names or retain another instance's name, so names alone do not identify them. For 1.4.3 aligned free roots, the adapter transforms the built geometry back into the authored link frame using each variant's native anchor, including fixed child links. Ambiguous matches remain unsupported. This cold-path identity check does not change native alignment or solver tolerances.
++
++## Precision and session ownership
++
++`GenesisBackend(..., device="auto", precision="32", seed=None)` retains the existing defaults. Select `device="cpu", precision="64", seed=0` explicitly for a CPU FP64 process. Metadata, NumPy caches, controls, reset values, contact reductions and physics-state exports preserve the selected precision. The existing device-resident tensor lane remains FP32; FP64 does not advertise that separate capability.
++
++Portable Genesis XML export restores already explicit inertials (mass, COM, orientation and diagonal inertia) from the compiled FP64 source model, because the compiled XML writer otherwise rounds these values to six significant digits. Implicit inertials remain implicit. This safeguard does not claim lossless serialization of every MJCF field; actual model parameters still require native readback and qualification.
++
++The host clock uses an integer step count and a per-environment restored origin, avoiding accumulated floating-point addition that can move a sample across a scoring-window boundary. Selected resets and playback rebase only the affected clocks. A device-to-host barrier preserves the device lane's reported time as the new origin; this does not improve the separate tensor lane's clock precision or prove physical trajectory equivalence.
++
++Genesis has one process-wide session. All constructed scenes must share the selected device, precision, seed and `use_deterministic_algorithms` choice (default `False`). An explicit `True` forwards Genesis’ native deterministic policy, including its process-wide TorchScript fusion settings; use a dedicated process for that policy. Conflicting requests fail before changing the active CUDA device or creating another session. CPU cannot specify `device_id`; explicit GPU requires CUDA. After destruction, use a new process. A seed applies during initialization; Python, NumPy and Torch caller RNG states and Torch default device/dtype are restored. A seeded constructor alone does not prove deterministic replay.
++
++`get_import_report()` caches native precision/device, materialized rigid options, gravity and available entity mass/inertia/drive readbacks with engine provenance. Unmeasured common fields stay unknown. These are initial values; they do not describe subsequent domain randomization or prove command/output equivalence. The default optional dependency pin and legacy runtime qualification are unchanged by this interface work.
++
++## Native observations and explicit configuration
++
++Use `genesis_friction_cone="elliptic"` with `create_backend("genesis", ...)`; `friction_cone` is the direct `GenesisBackend` constructor spelling. The factory rejects unprefixed integrator, constraint solver, friction cone, solver iteration and device-ID keywords instead of silently replacing them. `native_friction_cone` in the import report records the requested and actual native enum names; callers can refuse a mismatch before stepping.
++
++`body_ids` and `body_net_force` are paired optional fields: public body columns and `(num_envs, bodies, 3)` world forces. Genesis reads the native aggregate independently from the per-contact ledger, permitting a real force-balance audit. Unavailable reset rows contain zero placeholders with `available=False`; they are not measurements. Do not reconstruct a missing aggregate from per-contact sums and label it native readback.
++
++`actuated_armature=None` and `noslip_iterations=None` preserve native import defaults. Explicit nonnegative values apply to source-actuated DOFs and the rigid solver respectively, before initial property binding. They are backend-specific settings, not a claim of cross-engine equivalence. Native force ranges encode unbounded ends as `"-inf"` / `"+inf"`; NaN remains an error. A native infinite plane has no finite collision-size readback; `get_geom_size()` refuses that query instead of returning visualization bounds.
++
++The 1.4.3 profile retains native inertia alignment. It rejects `body_mass`, `base_mass_delta`, `body_ipos` and `base_com_offset` randomization before mutation pending native setter/frame qualification; the pinned 1.3.3 profile remains unchanged. This explicit capability limit does not prevent fixed-model experiments. Initial import reports do not authorize historical evidence relabeling or establish physical equivalence.
++
++## Validation boundary
++
++Contract tests exercise FP64 distinctions smaller than one FP32 unit, contact orientation, selected reset masking, padded/stale slots, unmapped geometry refusal, detached storage and session conflicts. Tests using fake runtime data establish translation behavior only. Physical equivalence requires a frozen model/configuration, native and UniSim trajectories, full contact records, independent scoring and reset replay in the same official runtime. Preserve failed attempts and version-specific evidence.
+diff --git a/docs/zh/contact-readback.md b/docs/zh/contact-readback.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..c7a147933f7fe76ac345e156b4bc31ab3dc8479c
+--- /dev/null
++++ b/docs/zh/contact-readback.md
+@@ -0,0 +1,39 @@
++# 原生接触快照与 Genesis 精度
++
++[English](../en/contact-readback.md) | [中文](contact-readback.md)
++
++## 公共边界
++
++`SimBackend.get_contact_capabilities()` 单独声明完整刚体接触读回，与聚合接触传感器区分。`get_contact_snapshot()` 返回独立存储的 `ContactSnapshot`。不支持的适配器抛出 `UnsupportedCapabilityError`；只有实际观测到无接触时才能成功返回空结果。缺失的法向、带符号距离、接触力矩或物体净接触力读回保持 `None`，不得用零替代。`get_capabilities()` 纳入带源码来源的实例声明；声明不等于运行验证。
++
++数组标识环境、公共几何 ID（对应 `get_geom_names()`）、位置、作用于两几何体的力，以及可选的 A 指向 B 法向、带符号距离（负值为穿透）和作用于 B、相对接触点的力矩。使用 SI 单位和世界坐标。状态时刻、碰撞几何时刻和力区间分别保存，调用方不能悄悄把积分后姿态附到更早的接触计算上。重置行在下一次求解前不可用，原生计数排除填充槽。记录复制输入数组，并拒绝错误身份、形状、非有限值及不可能的时刻。
++
++Genesis 实现在 UniSim 内转换 1.4.3 的填充接触缓冲区，保留最近一次求解而不重算物理，并通过共同实体布局绑定身份。范围限于映射后的刚体场景和完整步进边界；旧运行时保留既有逐对传感器，不声明新能力。此源码实现仍需完成精确版本的运行资格，才能迁移下游生产路径。其他适配器尚未声明支持。
++
++基本几何的碰撞身份使用所属物体、原生形状/尺寸和局部姿态核对。缓存网格可能缺少名字或保留另一实例的名字，因此名字本身不能证明身份。对于 1.4.3 的对齐浮动根节点，适配器使用各变体的原生对齐变换，把构建后的几何转回源模型物体坐标，包含固定子节点。多义匹配仍不支持。这项冷路径身份检查不改变原生对齐或求解器容差。
++
++## 精度与会话所有权
++
++`GenesisBackend(..., device="auto", precision="32", seed=None)` 保持既有默认值。CPU FP64 进程须显式选择 `device="cpu", precision="64", seed=0`。元数据、NumPy 缓存、控制、重置值、接触汇总和物理状态导出保留所选精度。现有设备驻留张量路径仍为 FP32；FP64 不声明这项独立能力。
++
++Genesis 可移植 XML 导出从编译后的 FP64 源模型恢复已有显式惯性参数（质量、质心、方向与对角惯量），避免编译后 XML 写入器将它们截为六位有效数字；隐式惯量仍保持隐式。此保护不代表所有 MJCF 字段均可无损序列化，实际模型参数仍须原生读回和资格验证。
++
++主机时钟使用整数步数及每环境独立恢复的时间原点，避免浮点逐步累加将样本移到评分窗口另一侧。选定环境重置及回放只重新设定受影响时钟；设备转主机同步以设备路径报告的时间为新原点，保持该值。这不提高独立张量路径的时钟精度，也不证明物理轨迹等价。
++
++Genesis 每进程只有一个会话。所有场景必须共享所选设备、精度、种子和 `use_deterministic_algorithms` 选择（默认 `False`）。显式 `True` 传递 Genesis 原生确定性策略，包括进程级 TorchScript 融合设置；此策略应使用独立进程。冲突请求在改变当前 CUDA 设备或再次初始化之前失败。CPU 不能指定 `device_id`，显式 GPU 需要 CUDA。销毁后须启用新进程。种子在初始化时使用；调用方的 Python、NumPy、Torch 随机状态及 Torch 默认设备和类型会恢复。带种子的构造成功本身不证明重放确定性。
++
++`get_import_report()` 缓存原生精度/设备、物化后的刚体选项、重力，以及可获取的实体质量/惯量/驱动读回，并标明引擎来源。未测量的公共字段保持未知。这些是初始值，不描述后续域随机化，也不证明命令与输出等价。此接口工作不改变默认可选依赖锁定和旧运行时资格范围。
++
++## 原生观测与显式配置
++
++调用 `create_backend("genesis", ...)` 时使用 `genesis_friction_cone="elliptic"`；`friction_cone` 是直接调用 `GenesisBackend` 构造器时的名称。工厂拒绝无前缀的积分器、约束求解器、摩擦锥、求解迭代数及设备 ID 关键字，不再静默覆盖。导入报告的 `native_friction_cone` 保存请求和实际原生枚举名称，调用方可以在步进前拒绝不一致配置。
++
++`body_ids` 与 `body_net_force` 是成对的可选字段：公共物体列，以及 `(num_envs, bodies, 3)` 的世界坐标净力。Genesis 独立读取原生汇总值，不通过逐接触力求和构造，从而支持实际的力账核对。不可用的重置行以零占位并标记 `available=False`，这些值不是测量。不得把缺失汇总值由逐接触力重建后标作原生读回。
++
++`actuated_armature=None` 与 `noslip_iterations=None` 保留原生导入默认值。显式非负值分别用于源模型受驱动的自由度和刚体求解器，并在初始属性绑定前设置。它们是后端特定配置，不代表跨引擎等价。原生驱动力范围的无界端点编码为 `"-inf"` / `"+inf"`；NaN 仍报错。原生无限平面不存在有限的碰撞尺寸读回，`get_geom_size()` 拒绝该查询，不返回可视化边界替代。
++
++1.4.3 配置保留原生惯性对齐。原生写入及坐标语义完成资格核验前，在实际修改前拒绝 `body_mass`、`base_mass_delta`、`body_ipos` 和 `base_com_offset` 随机化；锁定的 1.3.3 配置行为保持不变。此能力限制不阻止固定模型实验。初始导入报告不能授权重标历史证据，也不证明物理等价。
++
++## 验证边界
++
++契约测试覆盖小于 FP32 一个量化单位的 FP64 差异、接触方向、选择性重置屏蔽、填充/陈旧槽、未映射几何拒绝、独立存储和会话冲突。使用假运行时的测试只证明转换行为。物理等价需要在同一官方运行时上冻结模型/配置，对照原生与 UniSim 轨迹、完整接触记录、独立评分及重置重放。保留所有失败尝试和版本对应的证据。
+diff --git a/src/unisim/__init__.py b/src/unisim/__init__.py
+index bad1e34422874758099be784634b68cd68559374..f5cc21192d927ffa5af719e70562aabbbd108c8e 100644
+--- a/src/unisim/__init__.py
++++ b/src/unisim/__init__.py
+@@ -16,6 +16,7 @@ from .capabilities import (
+     get_adapter_capabilities,
+ )
+ from .conformance import assert_backend_conformance
++from .contacts import ContactReadbackCapabilities, ContactSnapshot
+ from .contract import (
+     BackendCapability,
+     BackendError,
+@@ -62,6 +63,8 @@ from .validation import (
+ )
+ 
+ __all__ = [
++    "ContactReadbackCapabilities",
++    "ContactSnapshot",
+     "CompiledSceneLayout",
+     "EntityLayout",
+     "JointLayout",
+diff --git a/src/unisim/backend/base.py b/src/unisim/backend/base.py
+index 2b9f25a52a9eda23c1f3eceea3e60389272e9d1c..969c40aabce72979481d1d0516ddb3b75667a975 100644
+--- a/src/unisim/backend/base.py
++++ b/src/unisim/backend/base.py
+@@ -10,6 +10,7 @@ from typing import Any, Literal, TypeAlias
+ import numpy as np
+ 
+ from unisim.capabilities import CapabilityReport, backend_capabilities
++from unisim.contacts import ContactReadbackCapabilities, ContactSnapshot
+ from unisim.dr.types import (
+     DomainRandomizationCapabilities,
+     IntervalRandomizationPlan,
+@@ -18,6 +19,7 @@ from unisim.dr.types import (
+     _validate_reset_term,
+ )
+ from unisim.entities import SceneResetRequest
++from unisim.errors import UnsupportedCapabilityError
+ from unisim.inspection import ImportReport
+ from unisim.scene_layout import CompiledSceneLayout
+ 
+@@ -1097,6 +1099,16 @@ class SimBackend(abc.ABC):
+         """
+         raise NotImplementedError(f"{self.backend_type} does not support entity reset")
+ 
++    def get_contact_capabilities(self) -> ContactReadbackCapabilities:
++        """Declare optional complete rigid-contact readback, without stepping."""
++        return ContactReadbackCapabilities()
++
++    def get_contact_snapshot(self) -> ContactSnapshot:
++        """Return last-solve contacts; never recompute a solve to synthesize forces."""
++        raise UnsupportedCapabilityError(
++            f"{self.backend_type} does not expose complete per-contact snapshots"
++        )
++
+     def get_import_report(self) -> "ImportReport":
+         """Return a detached construction/materialization configuration snapshot.
+ 
+diff --git a/src/unisim/backend/genesis/backend.py b/src/unisim/backend/genesis/backend.py
+index cfc61663209099a34141311458ba55299d4b0f2d..39672333c9bfa203f8af8b28bf51a347c87c5074 100644
+--- a/src/unisim/backend/genesis/backend.py
++++ b/src/unisim/backend/genesis/backend.py
+@@ -19,6 +19,7 @@ import logging
+ import time
+ from collections.abc import Callable, Mapping, Sequence
+ from dataclasses import dataclass
++from numbers import Real
+ from os import PathLike
+ from typing import Any
+ 
+@@ -42,6 +43,7 @@ from unisim.backend.base import (
+     normalize_play_render_mode,
+     unsupported_debug_overlay_error,
+ )
++from unisim.contacts import ContactReadbackCapabilities, ContactSnapshot
+ from unisim.dr.types import (
+     INTERVAL_TERM_BODY_FORCE,
+     INTERVAL_TERM_BODY_TORQUE,
+@@ -73,6 +75,8 @@ from unisim.utils.rotation import (
+ )
+ 
+ from . import dependencies, materialization, playback
++from .geometry_identity import body_frame_inertia, native_property
++from .geometry_identity import matches as collision_matches
+ 
+ logger = logging.getLogger(__name__)
+ 
+@@ -187,9 +191,12 @@ class _GenesisPortableResetRandomization:
+     kd: np.ndarray | None
+ 
+ 
+-def _make_device_cache(torch: Any, shape: tuple[int, ...]) -> tuple[Any, np.ndarray]:
++def _make_device_cache(
++    torch: Any, shape: tuple[int, ...], np_dtype: Any = np.float32
++) -> tuple[Any, np.ndarray]:
+     """One fixed-shape host cache: (pinned storage, zero-copy NumPy view)."""
+-    pinned = torch.empty(shape, dtype=torch.float32, pin_memory=torch.cuda.is_available())
++    dtype = torch.float64 if np.dtype(np_dtype) == np.dtype(np.float64) else torch.float32
++    pinned = torch.empty(shape, dtype=dtype, pin_memory=torch.cuda.is_available())
+     return pinned, pinned.numpy()
+ 
+ 
+@@ -205,6 +212,8 @@ class GenesisBackend(SimBackend):
+     Genesis session; re-initialization afterwards fails closed by design.
+     """
+ 
++    _np_dtype: np.dtype[Any] = np.dtype(np.float32)
++    _contact_geometry_map: np.ndarray | None = None
+     _metadata: materialization.GenesisModelMetadata
+     _composed_scene: Any | None = None
+     _portable_sources: materialization.GenesisPortableSources | None = None
+@@ -323,10 +332,9 @@ class GenesisBackend(SimBackend):
+                 for native_index, native_geom in enumerate(native_geoms):
+                     if native_index in used:
+                         continue
+-                    native_metadata = native_geom.metadata
+-                    if str(native_metadata.get("name", "")) != geom.name:
+-                        continue
+-                    if str(native_geom.link.name) != geom.body_name:
++                    if not collision_matches(
++                        native_geom, metadata, geom_index, geom.name, geom.body_name, variant
++                    ):
+                         continue
+                     active_rows = (
+                         np.arange(num_envs, dtype=np.intp)
+@@ -343,9 +351,9 @@ class GenesisBackend(SimBackend):
+                 try:
+                     friction = np.asarray(
+                         (
+-                            native_geom.friction,
+-                            native_geom.friction_torsional,
+-                            native_geom.friction_rolling,
++                            native_property(native_geom, "friction").item(),
++                            native_property(native_geom, "friction_torsional").item(),
++                            native_property(native_geom, "friction_rolling").item(),
+                         ),
+                         dtype=np.float64,
+                     )
+@@ -364,11 +372,7 @@ class GenesisBackend(SimBackend):
+                         "native friction properties"
+                     )
+                 try:
+-                    raw_solver_params = native_geom.sol_params
+-                    if hasattr(raw_solver_params, "detach"):
+-                        raw_solver_params = raw_solver_params.detach()
+-                    if hasattr(raw_solver_params, "cpu"):
+-                        raw_solver_params = raw_solver_params.cpu()
++                    raw_solver_params = native_property(native_geom, "sol_params")
+                     native_solver_params = np.asarray(raw_solver_params, dtype=np.float64)
+                 except (AttributeError, RuntimeError, TypeError, ValueError) as exc:
+                     raise RuntimeError(
+@@ -510,9 +514,10 @@ class GenesisBackend(SimBackend):
+                 for native_index, native_geom in enumerate(native_geoms):
+                     if native_index in used:
+                         continue
+-                    if str(native_geom.metadata.get("name", "")) != geom.name:
+-                        continue
+-                    if str(native_geom.link.name) != geom.body_name:
++                    if not collision_matches(
++                        native_geom, source_metadata[variant], geom_index, geom.name,
++                        geom.body_name, variant
++                    ):
+                         continue
+                     active_rows = (
+                         np.arange(num_envs, dtype=np.intp)
+@@ -536,6 +541,12 @@ class GenesisBackend(SimBackend):
+         base_name: str | None = None,
+         push_body_name: str | None = None,
+         device_id: int | None = None,
++        device: str = "auto",
++        precision: str = "32",
++        seed: int | None = None,
++        use_deterministic_algorithms: bool = False,
++        actuated_armature: float | None = None,
++        noslip_iterations: int | None = None,
+         integrator: str | None = None,
+         constraint_solver: str | None = None,
+         friction_cone: str | None = None,
+@@ -550,6 +561,12 @@ class GenesisBackend(SimBackend):
+                 base_name=base_name,
+                 push_body_name=push_body_name,
+                 device_id=device_id,
++                device=device,
++                precision=precision,
++                seed=seed,
++                use_deterministic_algorithms=use_deterministic_algorithms,
++                actuated_armature=actuated_armature,
++                noslip_iterations=noslip_iterations,
+                 integrator=integrator,
+                 constraint_solver=constraint_solver,
+                 friction_cone=friction_cone,
+@@ -569,6 +586,12 @@ class GenesisBackend(SimBackend):
+         base_name: str | None = None,
+         push_body_name: str | None = None,
+         device_id: int | None = None,
++        device: str = "auto",
++        precision: str = "32",
++        seed: int | None = None,
++        use_deterministic_algorithms: bool = False,
++        actuated_armature: float | None = None,
++        noslip_iterations: int | None = None,
+         integrator: str | None = None,
+         constraint_solver: str | None = None,
+         friction_cone: str | None = None,
+@@ -604,6 +627,26 @@ class GenesisBackend(SimBackend):
+                 "randomization; remove domain_rand.push_body_name and disable push_robots."
+             )
+ 
++        materialization.validate_session_options(
++            device, precision, seed, use_deterministic_algorithms
++        )
++        if actuated_armature is not None and (
++            isinstance(actuated_armature, bool) or not isinstance(actuated_armature, Real)
++            or not np.isfinite(actuated_armature)
++            or actuated_armature < 0
++        ):
++            raise ValueError("genesis actuated_armature must be finite and nonnegative or None")
++        if noslip_iterations is not None and (
++            type(noslip_iterations) is not int or noslip_iterations < 0
++        ):
++            raise ValueError("genesis noslip_iterations must be a nonnegative integer or None")
++        self._actuated_armature = actuated_armature
++        self._use_deterministic_algorithms = use_deterministic_algorithms
++        if device == "cpu" and device_id is not None:
++            raise ValueError("genesis CPU device cannot specify a CUDA device_id")
++        self._np_dtype = np.dtype(np.float64 if precision == "64" else np.float32)
++        self._precision, self._requested_device, self._seed = precision, device, seed
++        self._requested_friction_cone = friction_cone
+         deps = dependencies.load_genesis_dependencies()
+         self._deps = deps
+         self._torch = deps.torch
+@@ -651,11 +694,11 @@ class GenesisBackend(SimBackend):
+                 else np.zeros((num_envs,), dtype=np.int32)
+             )
+             portable_sources = materialization.prepare_genesis_portable_sources(
+-                deps.mujoco, scene, composed.layout
++                deps.mujoco, scene, composed.layout, np_dtype=self._np_dtype
+             )
+             self._portable_sources = portable_sources
+             self._metadata = materialization.scan_genesis_portable_composed_metadata(
+-                deps.mujoco, composed
++                deps.mujoco, composed, np_dtype=self._np_dtype
+             )
+             self._sensor_plans = materialization.validate_genesis_portable_sensor_plans(
+                 deps.mujoco, portable_sources, composed.layout, self._metadata.sensor_plans
+@@ -664,13 +707,18 @@ class GenesisBackend(SimBackend):
+             self._variant_assignment = assignment
+             self._scene_model_file = composed.model_file
+         else:
+-            self._metadata = materialization.scan_genesis_model_metadata(deps.mujoco, scene)
++            self._metadata = materialization.scan_genesis_model_metadata(
++                deps.mujoco, scene, np_dtype=self._np_dtype
++            )
+             self._sensor_plans = self._metadata.sensor_plans
+             self._scene_cleanup_handle = self._metadata.cleanup_handle
+             self._scene_model_file = str(scene.model_file)
+ 
+         # One gs.init per process; re-init after destroy fails closed here.
+-        materialization.init_genesis_session(deps, device_id=self._device_id)
++        materialization.init_genesis_session(
++            deps, device_id=self._device_id, device=device, precision=precision, seed=seed,
++            use_deterministic_algorithms=use_deterministic_algorithms,
++        )
+         self._device = (
+             self._torch.device(
+                 "cuda",
+@@ -678,7 +726,7 @@ class GenesisBackend(SimBackend):
+                 if self._device_id is not None
+                 else self._torch.cuda.current_device(),
+             )
+-            if (self._torch.cuda.is_available())
++            if device != "cpu" and self._torch.cuda.is_available()
+             else self._torch.device("cpu")
+         )
+ 
+@@ -690,6 +738,7 @@ class GenesisBackend(SimBackend):
+             constraint_solver=constraint_solver,
+             friction_cone=friction_cone,
+             solver_iterations=solver_iterations,
++            noslip_iterations=noslip_iterations,
+         )
+         self._entity: Any
+         self._entity_runtimes = {}
+@@ -818,16 +867,52 @@ class GenesisBackend(SimBackend):
+         backend — the same pattern as the isaacgym backend's lazy
+         materialize.  A closed backend cannot be materialized again.
+         """
++        if self._entity_faulted:
++            raise RuntimeError("genesis backend materialization or state is faulted")
+         if self._materialized:
+             return
+         if self._closed:
+             raise RuntimeError("genesis backend is closed and cannot be materialized again")
+-        self._scene.build(n_envs=self._num_envs)
+-        self._materialized = True
+-        self._bind_materialized_metadata()
++        try:
++            self._scene.build(n_envs=self._num_envs)
++            self._materialized = True
++            self._configure_actuated_armature()
++            self._bind_materialized_metadata()
++            from .inspection import configuration_report
++
++            self._import_report = configuration_report(self)
++        except BaseException:
++            self._entity_faulted = True
++            raise
++
++    def _configure_actuated_armature(self) -> None:
++        """Apply an explicit drive choice before native properties are bound/read back."""
++        if self._actuated_armature is None:
++            return
++        if self._portable_mode:
++            assert self._portable_sources is not None
++            sources = {
++                source.name: source.metadata[0] for source in self._portable_sources.entities
++            }
++            bindings = [(entity, sources[entity.name]) for entity in self._scene.entities]
++        else:
++            bindings = [(self._entity, self._metadata)]
++        for entity, metadata in bindings:
++            indices = [entity.get_joint(name).dofs_idx_local[0]
++                       for name in metadata.actuator_joint_names]
++            if indices:
++                entity.set_dofs_armature(
++                    self._to_device(np.full(
++                        (self._num_envs, len(indices)), self._actuated_armature,
++                        dtype=self._np_dtype,
++                    )), dofs_idx_local=indices,
++                )
+ 
+     def _bind_materialized_metadata(self) -> None:
+         metadata = self._metadata
++        self._time_cache = np.zeros((self._num_envs,), dtype=self._np_dtype)
++        self._time_origin = np.zeros((self._num_envs,), dtype=np.float64)
++        self._time_steps = np.zeros((self._num_envs,), dtype=np.int64)
+         if self._portable_mode:
+             self._bind_portable_metadata()
+             torch = self._torch
+@@ -838,23 +923,33 @@ class GenesisBackend(SimBackend):
+             self._bind_portable_contact_sensors()
+             self._contact_sensor_rows_valid = np.zeros((n,), dtype=np.bool_)
+             self._sensor_link_pos_cache = np.zeros(
+-                (n, len(self._sensor_plans), 3), dtype=np.float32
++                (n, len(self._sensor_plans), 3), dtype=self._np_dtype
+             )
+             self._sensor_link_quat_cache = np.zeros(
+-                (n, len(self._sensor_plans), 4), dtype=np.float32
++                (n, len(self._sensor_plans), 4), dtype=self._np_dtype
++            )
++            self._qpos_cache = _make_device_cache(torch, (n, metadata.nq), self._np_dtype)
++            self._qvel_cache = _make_device_cache(torch, (n, metadata.nv), self._np_dtype)
++            self._links_pos_cache = _make_device_cache(
++                torch, (n, metadata.nbody, 3), self._np_dtype
++            )
++            self._links_quat_cache = _make_device_cache(
++                torch, (n, metadata.nbody, 4), self._np_dtype
++            )
++            self._links_vel_cache = _make_device_cache(
++                torch, (n, metadata.nbody, 3), self._np_dtype
++            )
++            self._links_ang_cache = _make_device_cache(
++                torch, (n, metadata.nbody, 3), self._np_dtype
++            )
++            self._contact_force_cache = _make_device_cache(
++                torch, (n, metadata.nbody, 3), self._np_dtype
+             )
+-            self._qpos_cache = _make_device_cache(torch, (n, metadata.nq))
+-            self._qvel_cache = _make_device_cache(torch, (n, metadata.nv))
+-            self._links_pos_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-            self._links_quat_cache = _make_device_cache(torch, (n, metadata.nbody, 4))
+-            self._links_vel_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-            self._links_ang_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-            self._contact_force_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-            self._sensor_cache = np.zeros((n, total_dim), dtype=np.float32)
++            self._sensor_cache = np.zeros((n, total_dim), dtype=self._np_dtype)
+             self._imu_caches = {
+-                name: _make_device_cache(torch, (n, 3)) for name in self._imu_sensors
++                name: _make_device_cache(torch, (n, 3), self._np_dtype)
++                for name in self._imu_sensors
+             }
+-            self._time_cache = np.zeros((n,), dtype=np.float32)
+             self._refresh_host_cache()
+             return
+         entity = self._entity
+@@ -935,16 +1030,20 @@ class GenesisBackend(SimBackend):
+ 
+         torch = self._torch
+         n = self._num_envs
+-        self._qpos_cache = _make_device_cache(torch, (n, metadata.nq))
+-        self._qvel_cache = _make_device_cache(torch, (n, metadata.nv))
+-        self._links_pos_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-        self._links_quat_cache = _make_device_cache(torch, (n, metadata.nbody, 4))
+-        self._links_vel_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-        self._links_ang_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-        self._contact_force_cache = _make_device_cache(torch, (n, metadata.nbody, 3))
+-        self._sensor_cache = np.zeros((n, total_dim), dtype=np.float32)
+-        self._imu_caches = {name: _make_device_cache(torch, (n, 3)) for name in self._imu_sensors}
+-        self._time_cache = np.zeros((n,), dtype=np.float32)
++        self._qpos_cache = _make_device_cache(torch, (n, metadata.nq), self._np_dtype)
++        self._qvel_cache = _make_device_cache(torch, (n, metadata.nv), self._np_dtype)
++        self._links_pos_cache = _make_device_cache(torch, (n, metadata.nbody, 3), self._np_dtype)
++        self._links_quat_cache = _make_device_cache(torch, (n, metadata.nbody, 4), self._np_dtype)
++        self._links_vel_cache = _make_device_cache(torch, (n, metadata.nbody, 3), self._np_dtype)
++        self._links_ang_cache = _make_device_cache(torch, (n, metadata.nbody, 3), self._np_dtype)
++        self._contact_force_cache = _make_device_cache(
++            torch, (n, metadata.nbody, 3), self._np_dtype
++        )
++        self._sensor_cache = np.zeros((n, total_dim), dtype=self._np_dtype)
++        self._imu_caches = {
++            name: _make_device_cache(torch, (n, 3), self._np_dtype)
++            for name in self._imu_sensors
++        }
+         self._refresh_host_cache()
+ 
+     def _validate_non_portable_joint_order(self) -> None:
+@@ -1189,17 +1288,27 @@ class GenesisBackend(SimBackend):
+ 
+             if not is_visual_mirror:
+                 for body_name in owner.body_names:
+-                    source_body = metadata.body_names.index(body_name)
+-                    source_rotation = np_matrix_from_quat(metadata.body_iquat[source_body])
+-                    expected_inertia = (
+-                        source_rotation
+-                        @ np.diag(metadata.body_inertia[source_body].astype(np.float64))
+-                        @ source_rotation.T
+-                    )
+-                    native_inertia = np.asarray(
+-                        native_links[body_name].inertial_i, dtype=np.float64
+-                    )
+-                    if native_inertia.shape != (3, 3) or not np.allclose(
++                    if getattr(getattr(self, "_gs", None), "__version__", None) == "1.4.3":
++                        native_inertia = body_frame_inertia(
++                            native_entity, native_links[body_name], self._num_envs
++                        )
++                        variants = (self._variant_assignment if len(source.metadata) > 1
++                                    else np.zeros(self._num_envs, dtype=int))
++                    else:
++                        native_inertia = np.asarray(
++                            native_links[body_name].inertial_i, dtype=np.float64
++                        )[None, :, :]
++                        variants = np.zeros(1, dtype=int)
++                    expected_inertia = []
++                    for variant in variants:
++                        variant_metadata = source.metadata[int(variant)]
++                        source_body = variant_metadata.body_names.index(body_name)
++                        rotation = np_matrix_from_quat(variant_metadata.body_iquat[source_body])
++                        expected_inertia.append(
++                            rotation @ np.diag(variant_metadata.body_inertia[source_body])
++                            @ rotation.T
++                        )
++                    if native_inertia.shape != (len(variants), 3, 3) or not np.allclose(
+                         native_inertia, expected_inertia, rtol=2e-6, atol=2e-7
+                     ):
+                         raise RuntimeError(
+@@ -1242,6 +1351,23 @@ class GenesisBackend(SimBackend):
+                 for geom_index, (geom_name, geom_body, geom_type, geom_size) in enumerate(
+                     geom_records
+                 ):
++                    if int(geom_type) == int(self._deps.mujoco.mjtGeom.mjGEOM_PLANE):
++                        # A plane has no finite collision extents. Require native
++                        # normal/local-pose identity and refuse finite-size queries.
++                        from .geometry_identity import primitive_matches
++
++                        plane_matches = [
++                            geom for geom in native_entity.geoms
++                            if str(geom.link.name) == geom_body
++                            and primitive_matches(geom, variant_metadata, geom_index, variant)
++                            and np.array_equal(
++                                self._native_vgeom_env_ids(geom, self._num_envs), expected_rows
++                            )
++                        ]
++                        if len(plane_matches) != 1:
++                            raise RuntimeError("Genesis plane collision identity is ambiguous")
++                        native_geom_sizes[variant, geom_index] = 0.0
++                        continue
+                     expected_lower, expected_upper = self._expected_geometry_bounds(
+                         geom_type, geom_size
+                     )
+@@ -1387,9 +1513,10 @@ class GenesisBackend(SimBackend):
+                     )
+ 
+             if len(source.metadata) > 1 and not is_visual_mirror:
+-                native_mass = np.asarray(
+-                    native_entity.get_links_inertial_mass(native_bodies).cpu().numpy()
+-                )
++                mass_getter = getattr(native_entity, "get_links_mass", None)
++                if mass_getter is None:
++                    mass_getter = native_entity.get_links_inertial_mass
++                native_mass = np.asarray(mass_getter(native_bodies).cpu().numpy())
+                 native_mass = native_mass.reshape(self._num_envs, len(native_bodies))
+                 expected_mass = np.empty_like(native_mass)
+                 for row, variant in enumerate(self._variant_assignment):
+@@ -1454,10 +1581,10 @@ class GenesisBackend(SimBackend):
+         self._portable_body_link_ids = body_link_ids
+         self._portable_force_body_ids = force_body_ids
+         self._portable_pending_body_forces = np.zeros(
+-            (self._num_envs, self._metadata.nbody, 3), dtype=np.float32
++            (self._num_envs, self._metadata.nbody, 3), dtype=self._np_dtype
+         )
+         self._portable_pending_body_torques = np.zeros(
+-            (self._num_envs, self._metadata.nbody, 3), dtype=np.float32
++            (self._num_envs, self._metadata.nbody, 3), dtype=self._np_dtype
+         )
+         self._entity = next(
+             runtime.entity for runtime in runtimes.values() if not runtime.is_visual_mirror
+@@ -1540,7 +1667,9 @@ class GenesisBackend(SimBackend):
+         """Freeze native construction root poses before any runtime mutation."""
+ 
+         assert self._entity_layout is not None
+-        roots = np.zeros((self._num_envs, len(self._entity_layout.entities), 13), dtype=np.float32)
++        roots = np.zeros(
++            (self._num_envs, len(self._entity_layout.entities), 13), dtype=self._np_dtype
++        )
+         for entity_index, runtime in enumerate(self._entity_runtimes.values()):
+             roots[:, entity_index, :3] = np.asarray(
+                 runtime.entity.get_links_pos(relative=False).cpu().numpy()
+@@ -1591,10 +1720,14 @@ class GenesisBackend(SimBackend):
+             if plan.site_pos is None or plan.site_quat is None:
+                 continue
+             self._tensor_sensor_constants[name] = (
+-                self._torch.from_numpy(np.ascontiguousarray(plan.site_pos, dtype=np.float32)).to(
++                self._torch.from_numpy(
++                    np.ascontiguousarray(plan.site_pos, dtype=self._np_dtype)
++                ).to(
+                     self._device
+                 ),
+-                self._torch.from_numpy(np.ascontiguousarray(plan.site_quat, dtype=np.float32)).to(
++                self._torch.from_numpy(
++                    np.ascontiguousarray(plan.site_quat, dtype=self._np_dtype)
++                ).to(
+                     self._device
+                 ),
+             )
+@@ -1625,10 +1758,16 @@ class GenesisBackend(SimBackend):
+             # This is the sole D2H path used when a caller mixes the partial
+             # device lifecycle with legacy NumPy getters. It is never executed
+             # by step_tensor/get_state_views themselves.
+-            self._time_cache[...] = tensor_time.detach().cpu().numpy()
++            self._set_host_time(slice(None), tensor_time.detach().cpu().numpy())
+             self._tensor_time = tensor_time
+         self._host_cache_stale = False
+ 
++    def _set_host_time(self, rows: slice | np.ndarray, values: float | np.ndarray) -> None:
++        """Rebase selected clocks on authoritative reset, playback or device time."""
++        self._time_cache[rows] = values
++        self._time_origin[rows] = self._time_cache[rows]
++        self._time_steps[rows] = 0
++
+     def _refresh_host_cache(self) -> None:
+         """Refresh every legacy-visible cache at one explicit lifecycle barrier."""
+         if self._portable_mode:
+@@ -1662,7 +1801,7 @@ class GenesisBackend(SimBackend):
+                 links_vel = native.get_links_vel().cpu().numpy()[:, runtime.native_body_indices]
+                 links_ang = native.get_links_ang().cpu().numpy()[:, runtime.native_body_indices]
+                 contact = (
+-                    np.zeros((self._num_envs, runtime.native_body_indices.size, 3), np.float32)
++                    np.zeros((self._num_envs, runtime.native_body_indices.size, 3), self._np_dtype)
+                     if runtime.is_visual_mirror
+                     else native.get_links_net_contact_force()
+                     .cpu()
+@@ -1718,7 +1857,7 @@ class GenesisBackend(SimBackend):
+                     force = self._contact_force_cache[1][:, link_idx, :]
+                     magnitude = np.linalg.norm(force, axis=-1, keepdims=True)
+                     threshold = materialization.CONTACT_FOUND_FORCE_THRESHOLD_N
+-                    out[...] = (magnitude > threshold).astype(np.float32)
++                    out[...] = (magnitude > threshold).astype(self._np_dtype)
+                 else:
+                     if plan.contact_netforce:
+                         out[...] = self._read_portable_contact(plan.name, netforce=True)
+@@ -1825,6 +1964,27 @@ class GenesisBackend(SimBackend):
+             )
+         return array
+ 
++    def get_contact_capabilities(self) -> ContactReadbackCapabilities:
++        # The complete padded-slot contract was source-audited for this release.
++        # Older runtimes retain existing pair sensors; no capability is inferred.
++        supported = bool(getattr(self, "_portable_mode", False)) and (
++            getattr(getattr(self, "_gs", None), "__version__", None) == "1.4.3"
++        )
++        return ContactReadbackCapabilities(
++            supported=supported, normal=supported, signed_distance=supported,
++            body_net_force=supported,
++        )
++
++    def get_contact_snapshot(self) -> ContactSnapshot:
++        if self._pre_step_control_active:
++            raise RuntimeError("Contact snapshots are available only after a complete step barrier")
++        self._require_state("get_contact_snapshot")
++        if not self.get_contact_capabilities().supported:
++            return super().get_contact_snapshot()
++        from .contacts import snapshot
++
++        return snapshot(self)
++
+     def _read_portable_contact(self, name: str, *, netforce: bool) -> np.ndarray:
+         """Read one exact geom-pair contact value from Genesis' public contacts.
+ 
+@@ -1835,15 +1995,15 @@ class GenesisBackend(SimBackend):
+ 
+         if name not in self._sensor_contact_bindings:
+             return np.zeros(
+-                (self._num_envs, 3) if netforce else (self._num_envs,), dtype=np.float32
++                (self._num_envs, 3) if netforce else (self._num_envs,), dtype=self._np_dtype
+             )
+         binding = self._sensor_contact_bindings[name]
+         if binding.netforce != netforce:
+             raise RuntimeError(
+                 f"genesis contact sensor {name!r} reader disagrees with its bound contact form"
+             )
+-        force_a: np.ndarray = np.empty((0, 0, 3), dtype=np.float32)
+-        force_b: np.ndarray = np.empty((0, 0, 3), dtype=np.float32)
++        force_a: np.ndarray = np.empty((0, 0, 3), dtype=self._np_dtype)
++        force_b: np.ndarray = np.empty((0, 0, 3), dtype=self._np_dtype)
+         try:
+             contacts = binding.entity1.get_contacts(binding.entity2)
+             geom_a = self._public_contact_array(contacts["geom_a"], "geom_a", name, ndim=2)
+@@ -1908,13 +2068,13 @@ class GenesisBackend(SimBackend):
+             )
+             force = force_on_geom1.sum(axis=1)
+             force[~self._contact_sensor_rows_valid] = 0.0
+-            return force.astype(np.float32)
++            return force.astype(self._np_dtype)
+         found = np.any(selected, axis=1)
+         found &= self._contact_sensor_rows_valid
+-        return found.astype(np.float32)
++        return found.astype(self._np_dtype)
+ 
+     def _to_device(self, array: np.ndarray) -> Any:
+-        host = np.ascontiguousarray(array, dtype=np.float32)
++        host = np.ascontiguousarray(array, dtype=self._np_dtype)
+         return self._torch.from_numpy(host).to(self._device)
+ 
+     def _validate_rows(self, env_indices: np.ndarray) -> np.ndarray:
+@@ -1936,6 +2096,7 @@ class GenesisBackend(SimBackend):
+ 
+         return (
+             not self._portable_mode
++            and self._np_dtype == np.dtype(np.float32)
+             and self._device.type == "cuda"
+             and self._genesis_backend_is_exact_cuda()
+             and bool(getattr(self._gs, "use_zerocopy", False))
+@@ -2292,10 +2453,10 @@ class GenesisBackend(SimBackend):
+         if constants is None:
+             assert plan.site_pos is not None and plan.site_quat is not None
+             constants = (
+-                torch.from_numpy(np.ascontiguousarray(plan.site_pos, dtype=np.float32)).to(
++                torch.from_numpy(np.ascontiguousarray(plan.site_pos, dtype=self._np_dtype)).to(
+                     self._device
+                 ),
+-                torch.from_numpy(np.ascontiguousarray(plan.site_quat, dtype=np.float32)).to(
++                torch.from_numpy(np.ascontiguousarray(plan.site_quat, dtype=self._np_dtype)).to(
+                     self._device
+                 ),
+             )
+@@ -2358,10 +2519,10 @@ class GenesisBackend(SimBackend):
+                     f"genesis tensor body sensor {name!r} lacks site-local identity"
+                 )
+             constants = (
+-                torch.from_numpy(np.ascontiguousarray(plan.site_pos, dtype=np.float32)).to(
++                torch.from_numpy(np.ascontiguousarray(plan.site_pos, dtype=self._np_dtype)).to(
+                     self._device
+                 ),
+-                torch.from_numpy(np.ascontiguousarray(plan.site_quat, dtype=np.float32)).to(
++                torch.from_numpy(np.ascontiguousarray(plan.site_quat, dtype=self._np_dtype)).to(
+                     self._device
+                 ),
+             )
+@@ -2591,7 +2752,7 @@ class GenesisBackend(SimBackend):
+         return self._metadata.default_qpos[self._root_qpos_dim :].copy()
+ 
+     def get_init_qvel(self) -> np.ndarray:
+-        return np.zeros((self._metadata.nv,), dtype=np.float32)
++        return np.zeros((self._metadata.nv,), dtype=self._np_dtype)
+ 
+     def get_root_state_layout(self, root_body_name: str) -> BackendRootStateLayout:
+         if self._portable_mode:
+@@ -2656,6 +2817,8 @@ class GenesisBackend(SimBackend):
+                     "portable genesis fixed variants do not expose non-uniform "
+                     "public geometry sizes"
+                 )
++            if 0 in runtime.source_metadata[0].geom_types:
++                raise NotImplementedError("Infinite planes have no finite collision size")
+             values.append(runtime.geom_sizes[0])
+         return np.concatenate(values)
+ 
+@@ -2678,6 +2841,8 @@ class GenesisBackend(SimBackend):
+             raise NotImplementedError(
+                 "portable genesis fixed variants do not expose non-uniform public geometry sizes"
+             )
++        if runtime.source_metadata[0].geom_types[local_geom_index] == 0:
++            raise NotImplementedError("Infinite planes have no finite collision size")
+         return runtime.geom_sizes[0, local_geom_index].copy()
+ 
+     def get_geom_sizes(self) -> np.ndarray:
+@@ -2924,7 +3089,7 @@ class GenesisBackend(SimBackend):
+ 
+     def _entity_roots(self) -> np.ndarray:
+         layout = self.get_scene_layout()
+-        roots = np.zeros((self._num_envs, len(layout.entities), 13), dtype=np.float32)
++        roots = np.zeros((self._num_envs, len(layout.entities), 13), dtype=self._np_dtype)
+         for index, entity in enumerate(layout.entities):
+             roots[:, index, :3] = self._links_pos_cache[1][:, entity.body_ids[0]]
+             roots[:, index, 3:7] = self._links_quat_cache[1][:, entity.body_ids[0]]
+@@ -2937,7 +3102,7 @@ class GenesisBackend(SimBackend):
+         owner = self.get_scene_layout().get_entity(entity)
+         if owner.root_mode == "floating":
+             return entity_state_snapshot(owner, self._qpos_cache[1], self._qvel_cache[1])
+-        root = np.zeros((self._num_envs, 13), dtype=np.float32)
++        root = np.zeros((self._num_envs, 13), dtype=self._np_dtype)
+         root[:, :7] = self._entity_roots()[:, self.get_scene_layout().entities.index(owner), :7]
+         return entity_state_snapshot(owner, self._qpos_cache[1], self._qvel_cache[1], root)
+ 
+@@ -2951,9 +3116,9 @@ class GenesisBackend(SimBackend):
+         owner = layout.get_entity(entity)
+         rows = selected_state_rows(env_ids, self._num_envs)
+         assert self._variant_assignment is not None
+-        qpos = np.zeros((rows.size, layout.nq), dtype=np.float32)
+-        qvel = np.zeros((rows.size, layout.nv), dtype=np.float32)
+-        roots = np.zeros((rows.size, 1, 13), dtype=np.float32)
++        qpos = np.zeros((rows.size, layout.nq), dtype=self._np_dtype)
++        qvel = np.zeros((rows.size, layout.nv), dtype=self._np_dtype)
++        roots = np.zeros((rows.size, 1, 13), dtype=self._np_dtype)
+         runtime = self._entity_runtimes[entity]
+         variants = (
+             self._variant_assignment[rows]
+@@ -3054,7 +3219,7 @@ class GenesisBackend(SimBackend):
+                         if default_controls is not None
+                         else np.zeros(
+                             (prepared.env_ids.size, runtime.native_actuated_dofs.size),
+-                            dtype=np.float32,
++                            dtype=self._np_dtype,
+                         )
+                     )
+                     runtime.entity.control_dofs_position(
+@@ -3070,7 +3235,7 @@ class GenesisBackend(SimBackend):
+                 prepared.roots,
+             )
+             self._refresh_host_cache()
+-            self._time_cache[prepared.env_ids] = 0.0
++            self._set_host_time(prepared.env_ids, 0.0)
+         except BaseException:
+             self._entity_faulted = True
+             raise
+@@ -3094,7 +3259,7 @@ class GenesisBackend(SimBackend):
+             EntityStatePatch(
+                 name,
+                 root_pose=np.asarray(
+-                    self.get_entity_default_state(name, rows)["root_pose"], dtype=np.float32
++                    self.get_entity_default_state(name, rows)["root_pose"], dtype=self._np_dtype
+                 ),
+             )
+             for name, runtime in self._entity_runtimes.items()
+@@ -3107,7 +3272,7 @@ class GenesisBackend(SimBackend):
+         """Build variant-assigned public default controls for selected rows."""
+ 
+         assert self._variant_assignment is not None
+-        controls = np.zeros((rows.size, self.num_actuators), dtype=np.float32)
++        controls = np.zeros((rows.size, self.num_actuators), dtype=self._np_dtype)
+         for runtime in self._entity_runtimes.values():
+             if not runtime.actuator_indices.size:
+                 continue
+@@ -3173,7 +3338,7 @@ class GenesisBackend(SimBackend):
+         self._require_state("step")
+         if isinstance(nsteps, bool) or int(nsteps) <= 0:
+             raise ValueError(f"nsteps must be a positive integer, got {nsteps!r}")
+-        ctrl_array = np.asarray(ctrl, dtype=np.float32)
++        ctrl_array = np.asarray(ctrl, dtype=self._np_dtype)
+         expected = (self._num_envs, self.num_actuators)
+         if ctrl_array.shape != expected:
+             raise ValueError(f"ctrl must have shape {expected}, got {ctrl_array.shape}")
+@@ -3204,7 +3369,8 @@ class GenesisBackend(SimBackend):
+ 
+         t0 = time.perf_counter()
+         self._refresh_host_cache()
+-        self._time_cache += np.float32(int(nsteps) * self._sim_dt)
++        self._time_steps += int(nsteps)
++        self._time_cache[...] = self._time_origin + self._time_steps * self._sim_dt
+         host_cache_ms = (time.perf_counter() - t0) * 1000.0
+         return {"timing": {"physics_ms": physics_ms, "host_cache_refresh_ms": host_cache_ms}}
+ 
+@@ -3251,8 +3417,8 @@ class GenesisBackend(SimBackend):
+                 )
+         self._require_state("set_state")
+         rows = self._validate_rows(env_indices)
+-        qpos_array = np.asarray(qpos, dtype=np.float32)
+-        qvel_array = np.asarray(qvel, dtype=np.float32)
++        qpos_array = np.asarray(qpos, dtype=self._np_dtype)
++        qvel_array = np.asarray(qvel, dtype=self._np_dtype)
+         expected_qpos = (rows.size, self._metadata.nq)
+         expected_qvel = (rows.size, self._metadata.nv)
+         if qpos_array.shape != expected_qpos:
+@@ -3289,7 +3455,7 @@ class GenesisBackend(SimBackend):
+             timing["set_state_reset_upload_ms"] = (time.perf_counter() - t0) * 1000.0
+             t0 = time.perf_counter()
+             self._refresh_host_cache()
+-            self._time_cache[rows] = 0.0
++            self._set_host_time(rows, 0.0)
+             timing["set_state_host_cache_refresh_ms"] = (time.perf_counter() - t0) * 1000.0
+             measured_ms = (
+                 timing["set_state_reset_upload_ms"]
+@@ -3309,7 +3475,7 @@ class GenesisBackend(SimBackend):
+         if randomization is not None and not randomization.is_empty():
+             self._apply_reset_randomization(randomization, rows)
+         self._refresh_host_cache()
+-        self._time_cache[rows] = 0.0
++        self._set_host_time(rows, 0.0)
+         timing["set_state_host_cache_refresh_ms"] = (time.perf_counter() - t0) * 1000.0
+ 
+         measured_ms = (
+@@ -3346,6 +3512,13 @@ class GenesisBackend(SimBackend):
+                 RESET_TERM_DOF_FRICTIONLOSS,
+                 RESET_TERM_DOF_ARMATURE,
+             }
++            if getattr(getattr(self, "_gs", None), "__version__", None) == "1.4.3":
++                # Native aligned roots restrict inertial writes. Changing alignment
++                # changes state semantics; do not silently enable a different model.
++                supported_reset_terms -= {
++                    RESET_TERM_BODY_MASS, RESET_TERM_BASE_MASS,
++                    RESET_TERM_BODY_IPOS, RESET_TERM_BASE_COM,
++                }
+             return DomainRandomizationCapabilities(
+                 supported_reset_terms=frozenset(supported_reset_terms),
+                 supports_interval_body_force=True,
+@@ -3356,7 +3529,9 @@ class GenesisBackend(SimBackend):
+             )
+         return DomainRandomizationCapabilities(
+             supported_reset_terms=frozenset(
+-                {RESET_TERM_BODY_MASS, RESET_TERM_BASE_MASS, RESET_TERM_KP, RESET_TERM_KD}
++                ({RESET_TERM_KP, RESET_TERM_KD}
++                 if getattr(getattr(self, "_gs", None), "__version__", None) == "1.4.3"
++                 else {RESET_TERM_BODY_MASS, RESET_TERM_BASE_MASS, RESET_TERM_KP, RESET_TERM_KD})
+             ),
+             supports_interval_body_force=True,
+             supported_interval_terms=frozenset({INTERVAL_TERM_BODY_FORCE}),
+@@ -3370,9 +3545,9 @@ class GenesisBackend(SimBackend):
+             raise NotImplementedError(f"GenesisBackend does not support reset term {term!r}")
+         if term == RESET_TERM_BASE_MASS:
+             shape = (self._num_envs,) if self._portable_mode else ()
+-            value = np.zeros(shape, dtype=np.float32)
++            value = np.zeros(shape, dtype=self._np_dtype)
+         elif term == RESET_TERM_BASE_COM and self._portable_mode:
+-            value = np.zeros((self._num_envs, 3), dtype=np.float32)
++            value = np.zeros((self._num_envs, 3), dtype=self._np_dtype)
+         elif term == RESET_TERM_BODY_MASS:
+             value = (
+                 self._portable_default_body_mass(np.arange(self._num_envs, dtype=np.intp))
+@@ -3458,7 +3633,7 @@ class GenesisBackend(SimBackend):
+         """Build variant-assigned public DOF defaults for selected rows."""
+ 
+         assert self._variant_assignment is not None
+-        values = np.full((rows.size, self._metadata.nv), np.nan, dtype=np.float32)
++        values = np.full((rows.size, self._metadata.nv), np.nan, dtype=self._np_dtype)
+         mapped = np.zeros(self._metadata.nv, dtype=bool)
+         row_indices = np.arange(rows.size, dtype=np.intp)
+         for runtime in self._entity_runtimes.values():
+@@ -3493,7 +3668,7 @@ class GenesisBackend(SimBackend):
+ 
+         body_mass: np.ndarray | None = None
+         if randomization.body_mass is not None:
+-            body_mass = np.asarray(randomization.body_mass, dtype=np.float32)
++            body_mass = np.asarray(randomization.body_mass, dtype=self._np_dtype)
+             expected = (rows.size, self._metadata.nbody)
+             if body_mass.shape != expected:
+                 raise ValueError(f"body_mass must have shape {expected}, got {body_mass.shape}")
+@@ -3508,7 +3683,7 @@ class GenesisBackend(SimBackend):
+                 )
+             delta = np.asarray(
+                 randomization.base_mass_delta,
+-                dtype=np.float32,
++                dtype=self._np_dtype,
+             ).reshape(-1)
+             if delta.shape != (rows.size,):
+                 raise ValueError(
+@@ -3547,7 +3722,7 @@ class GenesisBackend(SimBackend):
+             if randomization.body_ipos is None:
+                 ipos_values = self._portable_default_body_ipos[rows].copy()
+             else:
+-                ipos_values = np.asarray(randomization.body_ipos, dtype=np.float32)
++                ipos_values = np.asarray(randomization.body_ipos, dtype=self._np_dtype)
+                 ipos_expected = (rows.size, self._metadata.nbody, 3)
+                 if ipos_values.shape != ipos_expected:
+                     raise ValueError(
+@@ -3560,7 +3735,7 @@ class GenesisBackend(SimBackend):
+                         "genesis base_com_offset randomization requires base_name to "
+                         "identify the base link"
+                     )
+-                delta = np.asarray(randomization.base_com_offset, dtype=np.float32)
++                delta = np.asarray(randomization.base_com_offset, dtype=self._np_dtype)
+                 if delta.shape != (rows.size, 3):
+                     raise ValueError(
+                         f"base_com_offset must have shape ({rows.size}, 3), got {delta.shape}"
+@@ -3585,7 +3760,7 @@ class GenesisBackend(SimBackend):
+                 body_ipos[:, unmapped_bodies, :],
+                 np.asarray(
+                     self._portable_default_body_ipos[rows][:, unmapped_bodies, :],
+-                    dtype=np.float32,
++                    dtype=self._np_dtype,
+                 ),
+             ):
+                 raise ValueError(
+@@ -3604,7 +3779,7 @@ class GenesisBackend(SimBackend):
+             if value is None:
+                 prepared_dof_values[field] = None
+                 continue
+-            values = np.asarray(value, dtype=np.float32)
++            values = np.asarray(value, dtype=self._np_dtype)
+             expected = (rows.size, self._metadata.nv)
+             if values.shape != expected:
+                 raise ValueError(f"{term} must have shape {expected}, got {values.shape}")
+@@ -3620,7 +3795,7 @@ class GenesisBackend(SimBackend):
+             if value is None:
+                 prepared_gains[name] = None
+                 continue
+-            gains = np.asarray(value, dtype=np.float32)
++            gains = np.asarray(value, dtype=self._np_dtype)
+             expected = (rows.size, self.num_actuators)
+             if gains.shape != expected:
+                 raise ValueError(f"{name} must have shape {expected}, got {gains.shape}")
+@@ -3649,7 +3824,7 @@ class GenesisBackend(SimBackend):
+             if values.body_mass is not None:
+                 local_mass = np.ascontiguousarray(
+                     values.body_mass[:, runtime.body_ids],
+-                    dtype=np.float32,
++                    dtype=self._np_dtype,
+                 )
+                 runtime.entity.set_links_inertial_mass(
+                     self._to_device(local_mass),
+@@ -3660,7 +3835,7 @@ class GenesisBackend(SimBackend):
+                 default_ipos = self._portable_default_body_ipos[rows][:, runtime.body_ids, :]
+                 local_shift = np.ascontiguousarray(
+                     values.body_ipos[:, runtime.body_ids, :] - default_ipos,
+-                    dtype=np.float32,
++                    dtype=self._np_dtype,
+                 )
+                 runtime.entity.set_COM_shift(
+                     self._to_device(local_shift),
+@@ -3680,7 +3855,7 @@ class GenesisBackend(SimBackend):
+                     continue
+                 local_values = np.ascontiguousarray(
+                     dof_values[:, runtime.qvel_indices],
+-                    dtype=np.float32,
++                    dtype=self._np_dtype,
+                 )
+                 getattr(runtime.entity, setter_name)(
+                     self._to_device(local_values),
+@@ -3698,7 +3873,7 @@ class GenesisBackend(SimBackend):
+                     continue
+                 local_gains = np.ascontiguousarray(
+                     gains[:, runtime.actuator_indices],
+-                    dtype=np.float32,
++                    dtype=self._np_dtype,
+                 )
+                 getattr(runtime.entity, setter_name)(
+                     self._to_device(local_gains),
+@@ -3751,7 +3926,7 @@ class GenesisBackend(SimBackend):
+                     "genesis base_mass_delta randomization requires base_name to identify "
+                     "the base link"
+                 )
+-            delta = np.asarray(randomization.base_mass_delta, dtype=np.float32).reshape(-1)
++            delta = np.asarray(randomization.base_mass_delta, dtype=self._np_dtype).reshape(-1)
+             if delta.shape != (rows.size,):
+                 raise ValueError(
+                     f"base_mass_delta must have shape ({rows.size},), got {delta.shape}"
+@@ -3761,10 +3936,10 @@ class GenesisBackend(SimBackend):
+                     self._metadata.body_mass, (rows.size, self._metadata.nbody)
+                 ).copy()
+             else:
+-                body_mass = np.asarray(body_mass, dtype=np.float32).copy()
++                body_mass = np.asarray(body_mass, dtype=self._np_dtype).copy()
+             body_mass[:, self._base_link_idx] += delta
+         if body_mass is not None:
+-            mass = np.asarray(body_mass, dtype=np.float32)
++            mass = np.asarray(body_mass, dtype=self._np_dtype)
+             expected = (rows.size, self._metadata.nbody)
+             if mass.shape != expected:
+                 raise ValueError(f"body_mass must have shape {expected}, got {mass.shape}")
+@@ -3775,7 +3950,7 @@ class GenesisBackend(SimBackend):
+         ):
+             if value is None:
+                 continue
+-            gains = np.asarray(value, dtype=np.float32)
++            gains = np.asarray(value, dtype=self._np_dtype)
+             expected = (rows.size, self.num_actuators)
+             if gains.shape != expected:
+                 raise ValueError(f"{name} must have shape {expected}, got {gains.shape}")
+@@ -3808,7 +3983,7 @@ class GenesisBackend(SimBackend):
+                     ids = require_op_body_ids(op)
+                     self.apply_body_force(
+                         ids,
+-                        np.zeros((self._num_envs, len(ids), 3), dtype=np.float32),
++                        np.zeros((self._num_envs, len(ids), 3), dtype=self._np_dtype),
+                         torque=op.payload,
+                     )
+ 
+@@ -3829,8 +4004,8 @@ class GenesisBackend(SimBackend):
+             )
+         self._require_state("apply_body_force")
+         ids = np.asarray(body_ids, dtype=np.int32).reshape(-1)
+-        force_array = np.asarray(force, dtype=np.float32)
+-        torque_array = None if torque is None else np.asarray(torque, dtype=np.float32)
++        force_array = np.asarray(force, dtype=self._np_dtype)
++        torque_array = None if torque is None else np.asarray(torque, dtype=self._np_dtype)
+         expected = (self._num_envs, ids.size, 3)
+         if force_array.shape != expected:
+             raise ValueError(f"body force must have shape {expected}, got {force_array.shape}")
+@@ -3854,21 +4029,12 @@ class GenesisBackend(SimBackend):
+                 raise ValueError("genesis body ids must reference owned physical bodies")
+             native_links = self._portable_body_link_ids[ids]
+             force_device = self._to_device(force_array)
+-            solver = self._scene.sim.rigid_solver
+             try:
+-                solver.apply_links_external_force(
++                self._apply_native_wrench(
+                     force_device,
+-                    links_idx=native_links.tolist(),
+-                    ref="link_com",
+-                    local=False,
++                    None if torque_array is None else self._to_device(torque_array),
++                    native_links.tolist(),
+                 )
+-                if torque_array is not None:
+-                    solver.apply_links_external_torque(
+-                        self._to_device(torque_array),
+-                        links_idx=native_links.tolist(),
+-                        ref="link_com",
+-                        local=False,
+-                    )
+                 for offset, body_id in enumerate(ids):
+                     self._portable_pending_body_forces[:, int(body_id), :] += force_array[
+                         :, offset, :
+@@ -3883,16 +4049,32 @@ class GenesisBackend(SimBackend):
+             return
+         if np.any(ids < 0) or np.any(ids >= self._metadata.nbody):
+             raise ValueError(f"body_ids must be in [0, {self._metadata.nbody}), got {ids}")
+-        solver = self._scene.sim.rigid_solver
+         force_device = self._to_device(force_array)
+         for offset, body_id in enumerate(ids):
+-            # Solver-level API uses global link indices (REPORT §3.5 [8]);
+-            # single-entity scenes keep global == link_start + local.
+-            solver.apply_links_external_force(
+-                force_device[:, offset, :],
+-                links_idx=[self._link_start + int(body_id)],
++            self._apply_native_wrench(
++                force_device[:, offset, :], None, [self._link_start + int(body_id)], at_com=False
+             )
+ 
++    def _apply_native_wrench(
++        self, force: Any, torque: Any, links: list[int], rows: list[int] | None = None,
++        *, at_com: bool = True,
++    ) -> None:
++        """Preserve reference-frame and selected-world semantics across SDK versions."""
++        solver = self._scene.sim.rigid_solver
++        selection: dict[str, Any] = dict(links_idx=links, envs_idx=rows)
++        if callable(getattr(solver, "apply_links_external_wrench", None)):
++            solver.apply_links_external_wrench(
++                force=force, torque=torque, **selection, local=False,
++                ref=(self._gs.link_ref_frame.link_COM if at_com
++                     else self._gs.link_ref_frame.link_origin),
++            )
++        else:
++            if at_com:
++                selection.update(ref="link_com", local=False)
++            solver.apply_links_external_force(force, **selection)
++            if torque is not None:
++                solver.apply_links_external_torque(torque, **selection)
++
+     def _cancel_portable_body_wrenches(
+         self,
+         rows: np.ndarray,
+@@ -3913,28 +4095,17 @@ class GenesisBackend(SimBackend):
+         active_forces = np.any(pending_forces[np.ix_(rows, candidate_bodies)], axis=(0, 2))
+         active_torques = np.any(pending_torques[np.ix_(rows, candidate_bodies)], axis=(0, 2))
+         active = active_forces | active_torques
+-        if active.size == 0:
++        if not active.any():
+             return
+         selected_bodies = candidate_bodies[active]
+         assert self._portable_body_link_ids is not None
+         native_links = self._portable_body_link_ids[selected_bodies]
+         force_cancellation = np.ascontiguousarray(-pending_forces[np.ix_(rows, selected_bodies)])
+         torque_cancellation = np.ascontiguousarray(-pending_torques[np.ix_(rows, selected_bodies)])
+-        solver = self._scene.sim.rigid_solver
+         try:
+-            solver.apply_links_external_force(
+-                self._to_device(force_cancellation),
+-                links_idx=native_links.tolist(),
+-                envs_idx=rows.tolist(),
+-                ref="link_com",
+-                local=False,
+-            )
+-            solver.apply_links_external_torque(
+-                self._to_device(torque_cancellation),
+-                links_idx=native_links.tolist(),
+-                envs_idx=rows.tolist(),
+-                ref="link_com",
+-                local=False,
++            self._apply_native_wrench(
++                self._to_device(force_cancellation), self._to_device(torque_cancellation),
++                native_links.tolist(), rows.tolist(),
+             )
+             pending_forces[np.ix_(rows, selected_bodies)] = 0.0
+             pending_torques[np.ix_(rows, selected_bodies)] = 0.0
+@@ -4193,12 +4364,13 @@ class GenesisBackend(SimBackend):
+         (:meth:`_validate_non_portable_joint_order`) and portable caches are
+         scattered into the composed-scene column order; Genesis free-base and
+         ball-joint quaternions are natively wxyz, matching MuJoCo.  The time
+-        column is the backend accumulator advanced by ``nsteps * sim_dt`` on
+-        every public step path and zeroed on state resets.
++        column derives from the restored origin plus an integer host step
++        count times ``sim_dt``, and is zeroed on state resets. A device-to-host
++        barrier rebases it on the device lane's reported time.
+         """
+         self._require_state("get_physics_state")
+         layout = self.get_physics_state_layout()
+-        out = np.empty((self._num_envs, layout.state_width), dtype=np.float32)
++        out = np.empty((self._num_envs, layout.state_width), dtype=self._np_dtype)
+         out[:, 0] = self._time_cache
+         out[:, 1 : 1 + layout.nq] = self._qpos_cache[1]
+         out[:, 1 + layout.nq :] = self._qvel_cache[1]
+@@ -4207,7 +4379,7 @@ class GenesisBackend(SimBackend):
+     def set_physics_state(self, state: np.ndarray) -> None:
+         """Restore a ``get_physics_state`` snapshot through the set_state path."""
+         layout = self.get_physics_state_layout()
+-        state_array = np.asarray(state, dtype=np.float32)
++        state_array = np.asarray(state, dtype=self._np_dtype)
+         expected = (self._num_envs, layout.state_width)
+         if state_array.shape != expected:
+             raise ValueError(
+@@ -4224,7 +4396,7 @@ class GenesisBackend(SimBackend):
+         )
+         # set_state restarts the playback clock for its rows; the snapshot's
+         # time column is authoritative for the restore.
+-        self._time_cache[...] = parts.time
++        self._set_host_time(slice(None), parts.time)
+ 
+     def get_playback_model(self, env_index: int | None = None) -> str:
+         """Return the MJCF file path used by detached MuJoCo playback.
+diff --git a/src/unisim/backend/genesis/contacts.py b/src/unisim/backend/genesis/contacts.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..7b7ee98e3d95cc679f0cf10ec8b4218f41252880
+--- /dev/null
++++ b/src/unisim/backend/genesis/contacts.py
+@@ -0,0 +1,101 @@
++"""Genesis rigid contact translation, owned entirely by the engine adapter."""
++from __future__ import annotations
++
++from typing import Any
++
++import numpy as np
++
++from unisim.contacts import ContactSnapshot
++
++
++def geometry_map(backend: Any) -> np.ndarray:
++    """Map every active native collision identity to the public per-world layout."""
++    solver = backend._scene.rigid_solver
++    mapping = np.full((backend._num_envs, solver.n_geoms), -1, dtype=np.int64)
++    layout = backend._entity_layout
++    for owner in layout.entities:
++        runtime = backend._entity_runtimes[owner.name]
++        if runtime.is_visual_mirror:
++            continue
++        public = layout.get_geom_ids(tuple(geom.name for geom in owner.geoms), entity=owner.name)
++        for row in range(backend._num_envs):
++            variant = 0 if len(runtime.source_metadata) == 1 else backend._variant_assignment[row]
++            native = runtime.collision_geom_indices[variant]
++            valid = native >= 0
++            selected = native[valid]
++            if np.unique(selected).size != selected.size or np.any(mapping[row, selected] >= 0):
++                raise RuntimeError("Genesis contact geometry mapping is ambiguous")
++            mapping[row, selected] = np.asarray(public, dtype=np.int64)[valid]
++    return mapping
++
++
++def snapshot(backend: Any) -> ContactSnapshot:
++    """Copy native contact slots without collision detection or forward recomputation.
++
++    Genesis 1.4.3 computes contacts before integrating each rigid substep. Its
++    native normal points B->A; its native force acts on B. The public normal is
++    reversed to A->B and signed distance is minus the native penetration.
++    """
++    raw = backend._scene.rigid_solver.collider.get_contacts(
++        as_tensor=True, to_torch=True, is_padded=True
++    )
++
++    def array(name: str) -> np.ndarray:
++        value = raw[name]
++        if hasattr(value, "detach"):
++            value = value.detach().cpu().numpy()
++        return np.asarray(value)
++
++    counts = array("n_contacts")
++    geom_a, geom_b = array("geom_a"), array("geom_b")
++    worlds = backend._num_envs
++    if (
++        geom_a.ndim != 2 or geom_a.shape != geom_b.shape or geom_a.shape[0] != worlds
++        or counts.shape != (worlds,) or counts.dtype.kind not in "iu"
++        or np.any(counts < 0) or np.any(counts > geom_a.shape[1])
++        or geom_a.dtype.kind not in "iu" or geom_b.dtype.kind not in "iu"
++    ):
++        raise RuntimeError("Genesis returned malformed contact counts or identities")
++    available = backend._contact_sensor_rows_valid.copy()
++    valid = (np.arange(geom_a.shape[1])[None, :] < counts[:, None]) & available[:, None]
++    rows, slots = np.nonzero(valid)
++    mapping = backend._contact_geometry_map
++    if mapping is None:
++        mapping = geometry_map(backend)
++        backend._contact_geometry_map = mapping
++    native_a, native_b = geom_a[rows, slots], geom_b[rows, slots]
++    if (
++        np.any(native_a < 0) or np.any(native_b < 0)
++        or np.any(native_a >= mapping.shape[1]) or np.any(native_b >= mapping.shape[1])
++    ):
++        raise RuntimeError("Genesis returned out-of-range native contact identities")
++    public_a, public_b = mapping[rows, native_a], mapping[rows, native_b]
++    if np.any(public_a < 0) or np.any(public_b < 0):
++        raise RuntimeError("Genesis contact geometry is not bound to the public layout")
++
++    def field(name: str, dimensions: tuple[int, ...]) -> np.ndarray:
++        values = array(name)
++        if values.shape != geom_a.shape + dimensions or values.dtype.kind != "f":
++            raise RuntimeError(f"Genesis returned malformed contact {name}")
++        return values[rows, slots]
++
++    force = field("force", (3,))
++    state_time = backend._time_cache.copy()
++    start = np.where(available, state_time - backend._sim_dt, state_time)
++    body_ids = np.concatenate([
++        runtime.body_ids for runtime in backend._entity_runtimes.values()
++        if not runtime.is_visual_mirror
++    ])
++    # The host cache comes from get_links_net_contact_force at the same barrier,
++    # independently of the padded per-contact ledger read above.
++    body_force = backend._contact_force_cache[1][:, body_ids].copy()
++    body_force[~available] = 0
++    return ContactSnapshot(
++        state_time=state_time, geometry_time=start,
++        force_start_time=start, force_end_time=state_time,
++        available=available, env_ids=rows, geom_a=public_a, geom_b=public_b,
++        position=field("position", (3,)), force_a=-force, force_b=force,
++        normal=-field("normal", (3,)), signed_distance=-field("penetration", ()),
++        # The rigid contact getter has no independent contact-torque measurement.
++        torque_b=None, body_ids=body_ids, body_net_force=body_force,
++    )
+diff --git a/src/unisim/backend/genesis/dependencies.py b/src/unisim/backend/genesis/dependencies.py
+index d557d6c9ead17257252bf49a90a1336d291057f9..8d088c89411d9c8d743f3c2e13177f8212e372df 100644
+--- a/src/unisim/backend/genesis/dependencies.py
++++ b/src/unisim/backend/genesis/dependencies.py
+@@ -2,9 +2,10 @@
+ 
+ The Genesis runtime (PyPI distribution ``genesis-world``, import name
+ ``genesis``) is a heavy optional dependency (torch, quadrants) that must never
+-be imported at package import time.  It is pinned exactly to the release probed
+-in the Genesis feasibility audit (#1372) because the adapter
+-relies on measured API behavior of that version.
++be imported at package import time. The default extra remains pinned to the
++original feasibility release (1.3.3).
++The 1.4.3 compatibility path uses live property getters and explicit primitive
++identity; accepting a version here is not a runtime qualification result.
+ """
+ 
+ from __future__ import annotations
+@@ -32,7 +33,7 @@ class GenesisDependencies:
+ 
+ 
+ _REQUIRED_MODULES = ("genesis", "torch", "mujoco")
+-_REQUIRED_GENESIS_VERSION = "1.3.3"
++_SUPPORTED_GENESIS_VERSIONS = ("1.3.3", "1.4.3")
+ _INSTALL_HINT = "Install it with `uv sync --extra genesis`."
+ 
+ 
+@@ -49,10 +50,11 @@ def load_genesis_dependencies() -> GenesisDependencies:
+         raise GenesisDependencyError(
+             f"genesis backend requires optional dependency 'genesis-world'. {_INSTALL_HINT}"
+         ) from exc
+-    if installed_version != _REQUIRED_GENESIS_VERSION:
++    if installed_version not in _SUPPORTED_GENESIS_VERSIONS:
+         raise GenesisDependencyError(
+-            "genesis backend requires exact genesis-world version "
+-            f"{_REQUIRED_GENESIS_VERSION}, found {installed_version}. {_INSTALL_HINT}"
++            "genesis backend requires genesis-world version "
++            f"{' or '.join(_SUPPORTED_GENESIS_VERSIONS)}, found {installed_version}. "
++            f"{_INSTALL_HINT}"
+         )
+     try:
+         genesis = importlib.import_module("genesis")
+diff --git a/src/unisim/backend/genesis/geometry_identity.py b/src/unisim/backend/genesis/geometry_identity.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..637bc1f20e807c760dbaff024b7eb4131da55bb7
+--- /dev/null
++++ b/src/unisim/backend/genesis/geometry_identity.py
+@@ -0,0 +1,114 @@
++"""Cold-path primitive identity when mesh caches omit or reuse source names."""
++from __future__ import annotations
++
++from typing import Any
++
++import numpy as np
++
++from unisim.utils.rotation import np_matrix_from_quat
++
++
++def pose_matrix(position: Any, quaternion: Any) -> np.ndarray:
++    result = np.eye(4)
++    result[:3, :3] = np_matrix_from_quat(np.asarray(quaternion))
++    result[:3, 3] = position
++    return result
++
++
++def authored_geom_pose(native: Any, variant: int) -> np.ndarray:
++    """Undo 1.4.3's static free-root alignment, including fixed child frames."""
++    pose = pose_matrix(native.init_pos, native.init_quat)
++    link = native.link
++    if not hasattr(link, "aligned"):
++        return pose  # Earlier runtimes do not re-express collision geometry.
++    entity = link.entity
++    root_to_link = np.eye(4)
++    while link.parent_idx != -1:
++        root_to_link = pose_matrix(link.desc.pos, link.desc.quat) @ root_to_link
++        link = entity.links[link.parent_idx - entity.link_start]
++    if not link.aligned:
++        return pose
++    # Native descriptions retain each variant's actual anchor after build.
++    # The root offset composes morph offset with inertial alignment; remove
++    # only the former, then conjugate alignment into this link's local frame.
++    description = entity._desc.variants[variant] if entity._desc.variants else link.desc
++    offset = pose_matrix(description.offset_pos, description.offset_quat)
++    native_morph = entity.morphs[variant]
++    morph = pose_matrix(native_morph.offset_pos, native_morph.offset_quat)
++    alignment = np.linalg.solve(morph, offset)
++    return np.linalg.solve(root_to_link, alignment @ root_to_link @ pose)
++
++
++def primitive_matches(native: Any, metadata: Any, source_id: int, variant: int) -> bool:
++    """Require native type, dimensions and local pose, never approximate names."""
++    # MJCF geom enum values are stable source-format identities, not engine IDs.
++    kind = metadata.geom_types[source_id]
++    size = metadata.geom_sizes[source_id]
++    if kind == 0:
++        expected_type, dimensions = "PLANE", np.array([0., 0., 1.])
++    elif kind == 2:
++        expected_type, dimensions = "SPHERE", size[:1]
++    elif kind == 6:
++        expected_type, dimensions = "BOX", 2 * size
++    else:
++        return False
++    if getattr(native.type, "name", None) != expected_type:
++        return False
++    data = np.asarray(native.data)
++    position, quaternion = np.asarray(native.init_pos), np.asarray(native.init_quat)
++    if data.ndim != 1 or data.size < dimensions.size:
++        return False
++    if position.shape != (3,) or quaternion.shape != (4,):
++        return False
++    actual_pose = authored_geom_pose(native, variant)
++    expected_pose = pose_matrix(metadata.geom_positions[source_id],
++                                metadata.geom_quaternions[source_id])
++    # Source metadata preserves compiler precision for identity, independently
++    # of the selected state-cache precision. This is not a physics tolerance.
++    def same(left: np.ndarray, right: np.ndarray) -> bool:
++        return bool(np.allclose(left, right, rtol=0, atol=1e-12))
++    return (
++        same(data[:dimensions.size], dimensions)
++        and same(actual_pose, expected_pose)
++    )
++
++
++def matches(native: Any, metadata: Any, source_id: int, name: str, body: str,
++            variant: int = 0) -> bool:
++    """Bind primitives by body, shape and pose; mesh-cache names are not identities."""
++    if str(native.link.name) != body:
++        return False
++    # Identical cached primitive meshes can retain the first instance's name,
++    # even on another link. Prefer physical identity when all native fields
++    # exist; callers still reject multiple matches on the same body.
++    if (metadata is not None
++            and all(hasattr(native, field) for field in ("type", "data", "init_pos", "init_quat"))
++            and metadata.geom_types[source_id] in (0, 2, 6)):
++        return primitive_matches(native, metadata, source_id, variant)
++    native_name = str(native.metadata.get("name", ""))
++    if native_name:
++        return native_name == name
++    return False
++
++
++def native_property(native: Any, name: str) -> np.ndarray:
++    """1.4.3 moved static properties to live getters; retain older runtime support."""
++    getter = getattr(native, "get_" + name, None)
++    value: Any = getter() if callable(getter) else getattr(native, name)
++    if hasattr(value, "detach"):
++        value = value.detach().cpu().numpy()
++    return np.asarray(value, dtype=np.float64)
++
++
++def body_frame_inertia(entity: Any, link: Any, num_envs: int) -> np.ndarray:
++    """Rotate 1.4.3's live inertial-frame tensor using its live inertial quaternion."""
++    from genesis.utils.misc import qd_to_torch
++
++    inertia = entity.get_links_inertia(links_idx_local=[link.idx_local]).detach().cpu().numpy()
++    inertia = inertia.reshape(-1, 3, 3)
++    quaternions = qd_to_torch(entity.solver.dyn_info.links.inertial_quat, copy=True)
++    quaternions = quaternions[link.idx].detach().cpu().numpy().reshape(-1, 4)
++    if inertia.shape[0] not in (1, num_envs) or quaternions.shape[0] not in (1, num_envs):
++        raise RuntimeError("Genesis inertial readback has an unexpected environment axis")
++    rotation = np.stack([np_matrix_from_quat(value) for value in quaternions])
++    return np.broadcast_to(rotation @ inertia @ rotation.transpose(0, 2, 1), (num_envs, 3, 3))
+diff --git a/src/unisim/backend/genesis/inspection.py b/src/unisim/backend/genesis/inspection.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..1cd63b764f427b2eb4ecf06c7fb372d5d4673bc7
+--- /dev/null
++++ b/src/unisim/backend/genesis/inspection.py
+@@ -0,0 +1,103 @@
++"""Initial native readbacks, copied before any caller reset or randomization."""
++from __future__ import annotations
++
++from typing import Any
++
++import numpy as np
++
++from unisim.inspection import ConfigurationField, ConfigurationProvenance, ImportReport
++
++
++def force_limit_values(value: Any) -> Any:
++    """Represent native unbounded drive limits without accepting NaN observations."""
++    array = np.asarray(value.detach().cpu() if hasattr(value, "detach") else value)
++    if np.isnan(array).any():
++        raise ValueError("Genesis drive limits contain NaN")
++    if array.ndim:
++        return [force_limit_values(row) for row in array]
++    number = float(array)
++    return "+inf" if number == np.inf else "-inf" if number == -np.inf else number
++
++
++def optional_readback(owner: Any, *names: str) -> Any:
++    """Missing native getters remain missing, including older runtime releases."""
++    for name in names:
++        getter = getattr(owner, name, None)
++        if callable(getter):
++            value: Any = getter()
++            return value.tolist()
++    return None
++
++
++def configuration_report(backend: Any) -> ImportReport:
++    """Keep unmeasured common settings unknown; expose native values with provenance."""
++    gs, scene = backend._gs, backend._scene
++    source = (ConfigurationProvenance(
++        "engine_readback", "Genesis initialized runtime and materialized rigid solver getters"
++    ),)
++    fields = list(ImportReport.unknown("genesis").fields)
++    actual_dtype = getattr(gs, "np_float", None)
++    for name, requested, effective in (
++        ("native_precision", str(backend._np_dtype),
++         None if actual_dtype is None else str(np.dtype(actual_dtype))),
++        ("native_device", str(backend._device),
++         None if getattr(gs, "device", None) is None else str(gs.device)),
++        ("native_deterministic_algorithms", backend._use_deterministic_algorithms,
++         getattr(gs, "use_deterministic_algorithms", None)),
++    ):
++        fields.append(ConfigurationField(
++            name, requested=requested, effective=effective,
++            difference="unknown" if effective is None else (
++                "exact" if effective == requested else "overridden"
++            ), provenance=source,
++        ))
++    # Fake cold-path runtimes used by contract tests need not expose a solver.
++    # Runtime qualification requires these fields to contain actual values.
++    solver = getattr(scene, "rigid_solver", None)
++    if solver is not None:
++        native_options = solver._options.model_dump(mode="json")
++        requested_cone = backend._requested_friction_cone
++        effective_cone = getattr(solver._options.friction_cone, "name", None)
++        fields.append(ConfigurationField(
++            "native_friction_cone", requested=requested_cone, effective=effective_cone,
++            difference="unknown" if effective_cone is None or requested_cone is None else (
++                "exact" if effective_cone == requested_cone else "overridden"
++            ), provenance=source,
++        ))
++        fields.append(ConfigurationField(
++            "native_rigid_options", effective=native_options, provenance=source,
++            reason="Native option names retain Genesis semantics; no material equivalence claimed.",
++        ))
++        fields.append(ConfigurationField(
++            "native_gravity", effective=solver.get_gravity().tolist(), provenance=source,
++            unit="m/s^2", frame="world",
++        ))
++    entities = {}
++    for name, runtime in backend._entity_runtimes.items():
++        if runtime.is_visual_mirror:
++            continue
++        entity = runtime.entity
++        values = {
++            "link_names": [link.name for link in entity.links],
++            "mass": optional_readback(entity, "get_links_mass", "get_links_inertial_mass"),
++            "inertia": optional_readback(entity, "get_links_inertia"),
++            "joints": {joint.name: {"sol_params": optional_readback(joint, "get_sol_params")}
++                       for joint in entity.joints},
++        }
++        if entity.n_dofs:
++            values.update({
++                "armature": entity.get_dofs_armature().tolist(),
++                "damping": entity.get_dofs_damping().tolist(),
++                "frictionloss": entity.get_dofs_frictionloss().tolist(),
++                "kp": entity.get_dofs_kp().tolist(), "kv": entity.get_dofs_kv().tolist(),
++                "force_range": [
++                    force_limit_values(value) for value in entity.get_dofs_force_range()
++                ],
++            })
++        entities[name] = values
++    if entities:
++        fields.append(ConfigurationField(
++            "native_entities", effective=entities, provenance=source,
++            reason="Arrays follow native entity link/DOF order; initial materialization only.",
++        ))
++    return ImportReport("genesis", tuple(fields), lifecycle="materialization")
+diff --git a/src/unisim/backend/genesis/materialization.py b/src/unisim/backend/genesis/materialization.py
+index 48397080d0f1be8d4f6d63bdb10460ff0b24bfd9..6ba982a6455bb78de59f0c3d03b30254dcd03f00 100644
+--- a/src/unisim/backend/genesis/materialization.py
++++ b/src/unisim/backend/genesis/materialization.py
+@@ -14,7 +14,9 @@ effects (torch default device/dtype and RNG) are contained by
+ from __future__ import annotations
+ 
+ import os
++import random
+ import tempfile
++import xml.etree.ElementTree as ET
+ from contextlib import contextmanager
+ from dataclasses import dataclass, replace
+ from pathlib import Path
+@@ -92,6 +94,8 @@ class GenesisModelMetadata:
+     geom_body_names: tuple[str, ...]
+     geom_types: tuple[int, ...]
+     geom_sizes: np.ndarray
++    geom_positions: np.ndarray
++    geom_quaternions: np.ndarray
+     actuator_names: tuple[str, ...]
+     actuator_joint_names: tuple[str, ...]
+     actuator_ctrl_range: np.ndarray
+@@ -169,7 +173,7 @@ def validate_genesis_variant_assignment(assignment: np.ndarray, num_variants: in
+ 
+ 
+ def prepare_genesis_portable_sources(
+-    mujoco: Any, scene: SceneCfg, layout: Any
++    mujoco: Any, scene: SceneCfg, layout: Any, *, np_dtype: Any = np.float32
+ ) -> GenesisPortableSources:
+     """Normalize common portable sources into independent Genesis MJCF files.
+ 
+@@ -220,8 +224,10 @@ def prepare_genesis_portable_sources(
+                     mirror=entity_spec.mirror_of is not None,
+                 )
+                 model_file = str(Path(directory.name) / f"{entity_spec.name}-{variant}.xml")
+-                spec.to_file(model_file)
+-                item = scan_genesis_model_metadata(mujoco, SceneCfg(model_file=model_file))
++                _write_portable_source(spec, original_model, model_file)
++                item = scan_genesis_model_metadata(
++                    mujoco, SceneCfg(model_file=model_file), np_dtype=np_dtype
++                )
+                 item = _genesis_portable_source_defaults(
+                     mujoco,
+                     owner,
+@@ -241,6 +247,33 @@ def prepare_genesis_portable_sources(
+     return GenesisPortableSources(tuple(entities), directory)
+ 
+ 
++def _write_portable_source(spec: Any, model: Any, filename: str) -> None:
++    """Keep explicit inertials at FP64 precision across the XML handoff.
++
++    MuJoCo's compiled XML writer rounds numbers to six significant digits.
++    Restore only inertials already emitted by that writer from the compiled
++    source. Root placement is handled separately by the native morph, so retain
++    the existing to_file snapshot semantics instead of recompiling edited poses.
++    Inferred inertials must remain inferred by the native loader.
++    """
++    spec.to_file(filename)
++    root = ET.parse(filename).getroot()
++    for body in root.findall(".//worldbody//body"):
++        inertial = body.find("inertial")
++        if inertial is None:
++            continue
++        index = model.body(body.attrib["name"]).id
++        for field, values in (
++            ("pos", model.body_ipos[index]),
++            ("quat", model.body_iquat[index]),
++            ("mass", [model.body_mass[index]]),
++            ("diaginertia", model.body_inertia[index]),
++        ):
++            inertial.set(field, " ".join(repr(float(value)) for value in values))
++        inertial.attrib.pop("fullinertia", None)
++    Path(filename).write_text(ET.tostring(root, encoding="unicode"), encoding="utf-8")
++
++
+ def _genesis_portable_source_defaults(
+     mujoco: Any,
+     owner: Any,
+@@ -257,8 +290,10 @@ def _genesis_portable_source_defaults(
+     """
+ 
+     qpos = normalized_metadata.default_qpos.copy()
+-    qvel = np.zeros(normalized_metadata.nv, dtype=np.float32)
+-    ctrl = np.zeros(len(normalized_metadata.actuator_names), dtype=np.float32)
++    qvel = np.zeros(normalized_metadata.nv, dtype=normalized_metadata.default_qpos.dtype)
++    ctrl = np.zeros(
++        len(normalized_metadata.actuator_names), dtype=normalized_metadata.default_qpos.dtype
++    )
+     if keyframe_name is None:
+         return replace(normalized_metadata, default_qvel=qvel, default_ctrl=ctrl)
+ 
+@@ -555,13 +590,16 @@ def validate_genesis_portable_sensor_plans(
+     return composed_plans
+ 
+ 
+-def scan_genesis_portable_composed_metadata(mujoco: Any, composed: Any) -> GenesisModelMetadata:
++def scan_genesis_portable_composed_metadata(
++    mujoco: Any, composed: Any, *, np_dtype: Any = np.float32
++) -> GenesisModelMetadata:
+     """Scan composed sensors and freeze their complete identity across variants."""
+ 
+     metadata = scan_genesis_model_metadata(
+         mujoco,
+         SceneCfg(model_file=composed.model_file),
+         allow_cross_entity_contacts=True,
++        np_dtype=np_dtype,
+     )
+     if composed.variant_plan is None:
+         return metadata
+@@ -570,6 +608,7 @@ def scan_genesis_portable_composed_metadata(mujoco: Any, composed: Any) -> Genes
+             mujoco,
+             SceneCfg(model_file=descriptor.model_file),
+             allow_cross_entity_contacts=True,
++            np_dtype=np_dtype,
+         )
+         if variant_metadata.sensor_plans != metadata.sensor_plans:
+             raise NotImplementedError(
+@@ -586,11 +625,20 @@ def preserve_torch_globals(torch: Any) -> Iterator[None]:
+     ``gs.init`` mutates the host process: it forces
+     ``torch.set_default_device("cuda:0")`` on the GPU lane, and passing
+     ``seed=`` would reseed the global RNG (REPORT #1372 §3.5 [10]).  The
+-    adapter never passes a seed and restores default device/dtype plus the
++    session initializer restores default device/dtype plus the
+     torch RNG state so the training process observes no pollution
+     (REPORT #1372 §5.8).
+     """
+-    default_device = torch.get_default_device()
++    try:
++        default_device = torch.get_default_device()
++    except AttributeError:
++        # Torch 2.9.1 leaves device_context=None after set_default_device(None),
++        # then its getter dereferences None. Retain the no-context CPU default
++        # without installing a dispatch mode, and propagate unrelated errors.
++        context = getattr(torch, "_GLOBAL_DEVICE_CONTEXT", None)
++        if getattr(context, "device_context", False) is not None:
++            raise
++        default_device = torch.device("cpu")
+     default_dtype = torch.get_default_dtype()
+     cpu_rng_state = torch.get_rng_state()
+     cuda_rng_state = torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None
+@@ -613,6 +661,7 @@ def preserve_torch_globals(torch: Any) -> Iterator[None]:
+ _SESSION_ACTIVE = False
+ _SESSION_DESTROYED = False
+ _SESSION_DEVICE_ID: int | None = None
++_SESSION_PROFILE: tuple[str, str, int | None, bool] | None = None
+ 
+ 
+ def _pin_cuda_visible_devices(torch: Any, device_id: int) -> int:
+@@ -696,73 +745,119 @@ def _resolve_genesis_device_id(torch: Any, device_id: int | None) -> int | None:
+     return None
+ 
+ 
++def validate_session_options(
++    device: str, precision: str, seed: int | None, use_deterministic_algorithms: bool = False
++) -> None:
++    """Reject invalid process-wide choices before touching optional runtimes."""
++    if not isinstance(use_deterministic_algorithms, bool):
++        raise ValueError("genesis use_deterministic_algorithms must be boolean")
++    if device not in ("auto", "cpu", "gpu"):
++        raise ValueError("genesis device must be auto, cpu or gpu")
++    if precision not in ("32", "64"):
++        raise ValueError("genesis precision must be '32' or '64'")
++    if seed is not None and (type(seed) is not int or not 0 <= seed < 2**32):
++        raise ValueError("genesis seed must be None or an integer in [0, 2**32)")
++
++
+ def init_genesis_session(
+     deps: Any,
+     *,
+     device_id: int | None = None,
+     logging_level: str = "warning",
++    device: str = "auto",
++    precision: str = "32",
++    seed: int | None = None,
++    use_deterministic_algorithms: bool = False,
+ ) -> None:
+-    """Initialize the process-wide Genesis session exactly once.
+-
+-    Repeated ``init -> destroy`` cycles are functional but leak 200-450 MB of
+-    host RSS per cycle (REPORT #1372 §3.5 [9a]), so a long-lived training
+-    process gets exactly one session.  Multiple GenesisBackend instances share
+-    the live session (multi-scene coexistence is measured OK, REPORT [9b]);
+-    after :func:`destroy_genesis_session` any further construction fails
+-    closed with a clear error.
++    """Initialize once; scenes must share device, precision, seed and determinism.
++
++    Defaults retain automatic device selection, FP32 and an unseeded session.
++    Explicit CPU selection never pins a CUDA device. A seed controls Genesis
++    initialization while Python, NumPy and Torch caller RNG states are restored.
++    Explicit deterministic algorithms retain Genesis' process-wide compiler policy.
++    Re-initialization after destroy remains forbidden because it leaks native
++    resources; use a fresh process to select another session configuration.
+     """
+-    global _SESSION_ACTIVE, _SESSION_DESTROYED, _SESSION_DEVICE_ID
++    global _SESSION_ACTIVE, _SESSION_DEVICE_ID, _SESSION_PROFILE
++    validate_session_options(device, precision, seed, use_deterministic_algorithms)
++    if device == "cpu" and device_id is not None:
++        raise ValueError("genesis CPU device cannot specify a CUDA device_id")
+     if _SESSION_DESTROYED:
+         raise RuntimeError(
+             "genesis backend supports exactly one gs.init per process and the session "
+             "was already destroyed; start a fresh process instead of re-initializing "
+             "(init/destroy cycles leak host RSS, REPORT #1372 §3.5 [9a])."
+         )
+-    selected_device_id = _resolve_genesis_device_id(deps.torch, device_id)
+     if _SESSION_ACTIVE:
+-        if (
+-            selected_device_id is not None
+-            and _SESSION_DEVICE_ID is not None
+-            and selected_device_id != _SESSION_DEVICE_ID
+-        ):
++        selected = (
++            "cpu" if device == "cpu" else "gpu" if deps.torch.cuda.is_available() else "cpu"
++        )
++        selected_id = (
++            (deps.torch.cuda.current_device() if device_id is None else device_id)
++            if selected == "gpu" else None
++        )
++        if ((selected, precision, seed, use_deterministic_algorithms) != _SESSION_PROFILE
++                or selected_id != _SESSION_DEVICE_ID):
+             raise RuntimeError(
+-                "genesis session is already initialized on CUDA device "
+-                f"{_SESSION_DEVICE_ID}, cannot reuse it on device {selected_device_id}"
++                "genesis session already initialized with a different device, precision, seed "
++                "or deterministic policy; start a fresh process for the requested configuration"
+             )
++        if device == "gpu" and selected != "gpu":
++            raise ValueError("genesis device='gpu' requires CUDA, but CUDA is unavailable")
+         return
++    selected_device_id = (
++        None if device == "cpu" else _resolve_genesis_device_id(deps.torch, device_id)
++    )
++    selected_device = "gpu" if selected_device_id is not None else "cpu"
++    if device == "gpu" and selected_device != "gpu":
++        raise ValueError("genesis device='gpu' requires CUDA, but CUDA is unavailable")
++    profile = (selected_device, precision, seed, use_deterministic_algorithms)
+     gs = deps.genesis
+-    cuda_available = bool(deps.torch.cuda.is_available())
+-    backend_kind = gs.gpu if cuda_available else gs.cpu
++    backend_kind = gs.gpu if selected_device == "gpu" else gs.cpu
++    python_rng = random.getstate()
++    numpy_rng = np.random.get_state()
+     try:
+         with preserve_torch_globals(deps.torch):
+-            gs.init(backend=backend_kind, logging_level=logging_level)
++            options: dict[str, Any] = dict(
++                backend=backend_kind, logging_level=logging_level, precision=precision
++            )
++            if seed is not None:
++                options["seed"] = seed
++            if use_deterministic_algorithms:
++                options["use_deterministic_algorithms"] = True
++            gs.init(**options)
+     except Exception as exc:
+         raise RuntimeError(
+             "genesis backend failed to initialize the Genesis runtime "
+-            f"(backend={'gpu' if cuda_available else 'cpu'}; only the gs.gpu lane is "
+-            f"validated by REPORT #1372): {type(exc).__name__}: {exc}"
++            f"(backend={selected_device}, precision={precision}): {type(exc).__name__}: {exc}"
+         ) from exc
++    finally:
++        random.setstate(python_rng)
++        np.random.set_state(numpy_rng)
+     _SESSION_ACTIVE = True
+     _SESSION_DEVICE_ID = selected_device_id
++    _SESSION_PROFILE = profile
+ 
+ 
+ def destroy_genesis_session(deps: Any) -> None:
+     """Tear down the process-wide session; re-initialization stays forbidden."""
+-    global _SESSION_ACTIVE, _SESSION_DESTROYED, _SESSION_DEVICE_ID
++    global _SESSION_ACTIVE, _SESSION_DESTROYED, _SESSION_DEVICE_ID, _SESSION_PROFILE
+     if not _SESSION_ACTIVE:
+         return
+     deps.genesis.destroy()
+     _SESSION_ACTIVE = False
+     _SESSION_DESTROYED = True
+     _SESSION_DEVICE_ID = None
++    _SESSION_PROFILE = None
+ 
+ 
+ def _reset_session_state_for_tests() -> None:
+     """Reset the lifecycle guard; test-only seam for the fake runtime lane."""
+-    global _SESSION_ACTIVE, _SESSION_DESTROYED, _SESSION_DEVICE_ID
++    global _SESSION_ACTIVE, _SESSION_DESTROYED, _SESSION_DEVICE_ID, _SESSION_PROFILE
+     _SESSION_ACTIVE = False
+     _SESSION_DESTROYED = False
+     _SESSION_DEVICE_ID = None
++    _SESSION_PROFILE = None
+ 
+ 
+ def _map_global_option(name: str, value: str, table: dict[str, str], enum_ns: Any) -> Any:
+@@ -786,6 +881,7 @@ def build_genesis_scene(
+     constraint_solver: str | None,
+     friction_cone: str | None,
+     solver_iterations: int | None,
++    noslip_iterations: int | None = None,
+ ) -> Any:
+     """Construct the unbuilt Genesis scene with explicit global options."""
+     gs = deps.genesis
+@@ -812,6 +908,8 @@ def build_genesis_scene(
+         )
+     if solver_iterations is not None:
+         rigid_kwargs["iterations"] = int(solver_iterations)
++    if noslip_iterations is not None:
++        rigid_kwargs["noslip_iterations"] = noslip_iterations
+     gravity_tuple = tuple(float(component) for component in np.asarray(gravity, dtype=np.float64))
+     return gs.Scene(
+         sim_options=gs.options.SimOptions(dt=float(sim_dt), gravity=gravity_tuple),
+@@ -1027,7 +1125,8 @@ def _scan_contact_sensor(
+ 
+ 
+ def scan_genesis_model_metadata(
+-    mujoco: Any, scene: SceneCfg, *, allow_cross_entity_contacts: bool = False
++    mujoco: Any, scene: SceneCfg, *, allow_cross_entity_contacts: bool = False,
++    np_dtype: Any = np.float32,
+ ) -> GenesisModelMetadata:
+     """Resolve the scene and scan MJCF metadata with the ``mujoco`` package."""
+     if scene is None or not scene.model_file:
+@@ -1102,11 +1201,11 @@ def scan_genesis_model_metadata(
+         key_name = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_KEY, key_id)
+         if key_name is not None:
+             keyframes.append(
+-                (str(key_name), np.asarray(model.key_qpos[key_id], dtype=np.float32).copy())
++                (str(key_name), np.asarray(model.key_qpos[key_id], dtype=np_dtype).copy())
+             )
+ 
+     non_free_mask = np.asarray(model.jnt_type, dtype=np.int32) != free_joint
+-    joint_range = np.asarray(model.jnt_range, dtype=np.float32)[non_free_mask]
++    joint_range = np.asarray(model.jnt_range, dtype=np_dtype)[non_free_mask]
+     body_names = tuple(
+         str(mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_BODY, body_id) or "")
+         for body_id in range(int(model.nbody))
+@@ -1138,25 +1237,27 @@ def scan_genesis_model_metadata(
+         geom_names=geom_names,
+         geom_body_names=geom_body_names,
+         geom_types=tuple(int(value) for value in np.asarray(model.geom_type)),
+-        geom_sizes=np.asarray(model.geom_size, dtype=np.float32).copy(),
++        geom_sizes=np.asarray(model.geom_size, dtype=np.float64).copy(),
++        geom_positions=np.asarray(model.geom_pos, dtype=np.float64).copy(),
++        geom_quaternions=np.asarray(model.geom_quat, dtype=np.float64).copy(),
+         actuator_names=tuple(actuator_names),
+         actuator_joint_names=tuple(actuator_joint_names),
+-        actuator_ctrl_range=np.asarray(model.actuator_ctrlrange, dtype=np.float32).copy(),
+-        actuator_kp=np.asarray(model.actuator_gainprm[:, 0], dtype=np.float32).copy(),
+-        actuator_kv=np.asarray(-model.actuator_biasprm[:, 2], dtype=np.float32).copy(),
++        actuator_ctrl_range=np.asarray(model.actuator_ctrlrange, dtype=np_dtype).copy(),
++        actuator_kp=np.asarray(model.actuator_gainprm[:, 0], dtype=np_dtype).copy(),
++        actuator_kv=np.asarray(-model.actuator_biasprm[:, 2], dtype=np_dtype).copy(),
+         keyframe_qpos=tuple(keyframes),
+-        default_qpos=np.asarray(model.qpos0, dtype=np.float32).copy(),
+-        default_qvel=np.zeros(int(model.nv), dtype=np.float32),
+-        default_ctrl=np.zeros(int(model.nu), dtype=np.float32),
++        default_qpos=np.asarray(model.qpos0, dtype=np_dtype).copy(),
++        default_qvel=np.zeros(int(model.nv), dtype=np_dtype),
++        default_ctrl=np.zeros(int(model.nu), dtype=np_dtype),
+         joint_range=None if joint_range.size == 0 else joint_range.copy(),
+-        dof_armature=np.asarray(model.dof_armature, dtype=np.float32).copy(),
+-        gravity=np.asarray(model.opt.gravity, dtype=np.float32).copy(),
+-        body_mass=np.asarray(model.body_mass, dtype=np.float32).copy(),
+-        body_ipos=np.asarray(model.body_ipos, dtype=np.float32).copy(),
+-        body_inertia=np.asarray(model.body_inertia, dtype=np.float32).copy(),
+-        body_iquat=np.asarray(model.body_iquat, dtype=np.float32).copy(),
+-        body_pos=np.asarray(model.body_pos, dtype=np.float32).copy(),
+-        body_quat=np.asarray(model.body_quat, dtype=np.float32).copy(),
++        dof_armature=np.asarray(model.dof_armature, dtype=np_dtype).copy(),
++        gravity=np.asarray(model.opt.gravity, dtype=np_dtype).copy(),
++        body_mass=np.asarray(model.body_mass, dtype=np_dtype).copy(),
++        body_ipos=np.asarray(model.body_ipos, dtype=np_dtype).copy(),
++        body_inertia=np.asarray(model.body_inertia, dtype=np_dtype).copy(),
++        body_iquat=np.asarray(model.body_iquat, dtype=np_dtype).copy(),
++        body_pos=np.asarray(model.body_pos, dtype=np_dtype).copy(),
++        body_quat=np.asarray(model.body_quat, dtype=np_dtype).copy(),
+         sensor_plans=_scan_sensor_plans(
+             mujoco, model, allow_cross_entity_contacts=allow_cross_entity_contacts
+         ),
+diff --git a/src/unisim/capabilities.py b/src/unisim/capabilities.py
+index 781a6cb51232c1870f499e617c410bf462e67304..2ce090c79c7456ed79e4b1826faf5051a122cef4 100644
+--- a/src/unisim/capabilities.py
++++ b/src/unisim/capabilities.py
+@@ -284,6 +284,7 @@ def backend_capabilities(backend: SimBackend, *, profile: str = "default") -> Ca
+             ),
+         )
+     declarations = {item.feature: item for item in report.declarations}
++    contacts = backend.get_contact_capabilities()
+     tensor = backend.get_tensor_capabilities()
+     dr = backend.get_dr_capabilities()
+     play = backend.get_play_capabilities()
+@@ -297,6 +298,13 @@ def backend_capabilities(backend: SimBackend, *, profile: str = "default") -> Ca
+             evidence=(provenance,),
+         )
+ 
++    contact_source = CapabilityEvidence(
++        "source", "SimBackend.get_contact_capabilities", report.scope
++    )
++    declare("contact.snapshot", contacts.supported, contact_source)
++    for name in ("normal", "signed_distance", "torque", "body_net_force"):
++        declare("contact." + name, contacts.supported and getattr(contacts, name), contact_source)
++
+     for term in sorted(_RESET_TERM_NAMES | dr.supported_reset_terms):
+         declare("dr.reset." + term, dr.supports_reset_term(term))
+     interval_terms = (
+diff --git a/src/unisim/contacts.py b/src/unisim/contacts.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..7569dfe8a6e8673624ee583909c0bb120c09f6e9
+--- /dev/null
++++ b/src/unisim/contacts.py
+@@ -0,0 +1,122 @@
++"""Detached per-contact observations with explicit geometry and force epochs."""
++from __future__ import annotations
++
++from dataclasses import dataclass
++
++import numpy as np
++
++
++@dataclass(frozen=True)
++class ContactReadbackCapabilities:
++    """Native rigid-contact fields available through ``get_contact_snapshot``.
++
++    Support is a declaration, not a proof of physical accuracy or equivalence.
++    Unsupported fields stay ``None``; adapters must never replace them with zero.
++    """
++
++    supported: bool = False
++    normal: bool = False
++    signed_distance: bool = False
++    torque: bool = False
++    body_net_force: bool = False
++
++
++@dataclass(frozen=True)
++class ContactSnapshot:
++    """All rigid contacts from the last solve, as detached NumPy arrays.
++
++    ``state_time``, ``geometry_time``, ``force_start_time``, ``force_end_time``
++    and ``available`` have shape (num_envs,). Times are seconds in the scene's
++    clock. Geometry time is the collision evaluation epoch; force times bound
++    the solve interval. Neither is inferred from the integrated pose by clients.
++    An unavailable row (e.g. just reset) has no contacts and makes no force claim.
++
++    Each remaining array has n_contact rows. ``env_ids`` identifies the world;
++    geometry IDs index ``get_geom_names()`` in that world, never SDK objects or
++    transient native slots. Positions are world-frame meters; forces act on A
++    and B in world-frame newtons. The optional normal points from A to B;
++    signed distance is negative for penetration. Optional torques (N*m) act on
++    B about the contact point, excluding moment arms. Missing fields are None.
++    Optional ``body_ids`` identifies columns of ``body_net_force`` with shape
++    (num_envs, n_bodies, 3). This is the independent native net contact force
++    readback, never a reconstruction from the contact rows. It shares the force
++    interval and availability mask; unavailable rows contain zero placeholders.
++    Contacts are not persistent IDs, material equivalence or a convergence test.
++    """
++
++    state_time: np.ndarray
++    geometry_time: np.ndarray
++    force_start_time: np.ndarray
++    force_end_time: np.ndarray
++    available: np.ndarray
++    env_ids: np.ndarray
++    geom_a: np.ndarray
++    geom_b: np.ndarray
++    position: np.ndarray
++    force_a: np.ndarray
++    force_b: np.ndarray
++    normal: np.ndarray | None = None
++    signed_distance: np.ndarray | None = None
++    torque_b: np.ndarray | None = None
++    body_ids: np.ndarray | None = None
++    body_net_force: np.ndarray | None = None
++
++    def __post_init__(self) -> None:
++        # Snapshot arrays own their storage: retained records cannot change when
++        # the native engine steps or a caller changes the source input arrays.
++        worlds = np.asarray(self.state_time).size
++        count = np.asarray(self.env_ids).size
++        bodies = 0 if self.body_ids is None else np.asarray(self.body_ids).size
++        if (self.body_ids is None) != (self.body_net_force is None):
++            raise ValueError("body_ids and body_net_force must be present together")
++        if worlds == 0:
++            raise ValueError("contact snapshots require at least one world")
++        shape: tuple[int, ...]
++        for name in self.__dataclass_fields__:
++            value = getattr(self, name)
++            if value is None:
++                if name not in (
++                    "normal", "signed_distance", "torque_b", "body_ids", "body_net_force"
++                ):
++                    raise ValueError(f"contact {name} is required")
++                continue
++            array = np.array(value, copy=True)
++            if name in ("state_time", "geometry_time", "force_start_time", "force_end_time"):
++                shape = (worlds,)
++                kind = "f"
++            elif name == "available":
++                shape, kind = (worlds,), "b"
++            elif name in ("env_ids", "geom_a", "geom_b"):
++                shape, kind = (count,), "iu"
++            elif name == "body_ids":
++                shape, kind = (bodies,), "iu"
++            elif name == "body_net_force":
++                shape, kind = (worlds, bodies, 3), "f"
++            elif name == "signed_distance":
++                shape, kind = (count,), "f"
++            else:
++                shape, kind = (count, 3), "f"
++            if array.shape != shape or array.dtype.kind not in kind:
++                raise ValueError(f"contact {name} must have shape {shape} and dtype kind {kind}")
++            if not np.isfinite(array).all():
++                raise ValueError(f"contact {name} contains nonfinite values")
++            array.flags.writeable = False
++            object.__setattr__(self, name, array)
++        if self.body_ids is not None:
++            if np.any(self.body_ids < 0) or np.unique(self.body_ids).size != bodies:
++                raise ValueError("body_ids must be unique nonnegative public identities")
++            assert self.body_net_force is not None
++            if np.any(self.body_net_force[~self.available] != 0):
++                raise ValueError("unavailable worlds must not retain stale body forces")
++        if np.any(self.env_ids < 0) or np.any(self.env_ids >= worlds):
++            raise ValueError("contact env_ids out of range")
++        if np.any(self.geom_a < 0) or np.any(self.geom_b < 0):
++            raise ValueError("contact geometry IDs must be nonnegative")
++        if np.any(~self.available[self.env_ids]):
++            raise ValueError("unavailable worlds must not contain contacts")
++        if np.any(self.force_start_time > self.force_end_time):
++            raise ValueError("contact force interval is reversed")
++        if np.any(self.force_end_time > self.state_time):
++            raise ValueError("contact force interval extends beyond the recorded state")
++        if np.any(self.geometry_time > self.state_time):
++            raise ValueError("contact geometry epoch extends beyond the recorded state")
+diff --git a/src/unisim/factory.py b/src/unisim/factory.py
+index 162a12905d5e6076ea75457773c47d6c9af8fb8b..e719af9c361753d619e94834ff79a94d45fecd50 100644
+--- a/src/unisim/factory.py
++++ b/src/unisim/factory.py
+@@ -319,6 +319,10 @@ def _create_backend(
+     if backend_type == "genesis":
+         from .backend.genesis.backend import GenesisBackend
+ 
++        for name in ("integrator", "constraint_solver", "friction_cone",
++                     "solver_iterations", "device_id"):
++            if name in kwargs:
++                raise TypeError(f"create_backend('genesis') requires genesis_{name}, not {name}")
+         kwargs.pop("add_body_sensors", None)
+         if position_actuator_gains is not None:
+             raise ValueError(
+diff --git a/tests/adapters/genesis/test_backend.py b/tests/adapters/genesis/test_backend.py
+index c47860f393ff1d3cf34473f4596db56612fae938..0d95e0a46a1e3c3eb57e69094db6182cd922f5a3 100644
+--- a/tests/adapters/genesis/test_backend.py
++++ b/tests/adapters/genesis/test_backend.py
+@@ -148,7 +148,10 @@ def test_preserve_torch_globals_does_not_leave_cpu_device_context() -> None:
+     from unisim.backend.genesis.materialization import preserve_torch_globals
+ 
+     before_modes = _len_torch_function_stack()
+-    with preserve_torch_globals(torch):
+-        torch.set_default_dtype(torch.float64)
+-    assert torch.get_default_dtype() is torch.float32
+-    assert _len_torch_function_stack() == before_modes
++    before_dtype = torch.get_default_dtype()
++    for _ in range(2):
++        with preserve_torch_globals(torch):
++            torch.set_default_dtype(torch.float64)
++        assert torch.get_default_dtype() is before_dtype
++        assert _len_torch_function_stack() == before_modes
++        assert torch.empty(0).device == torch.device("cpu")
+diff --git a/tests/adapters/genesis/test_contact_snapshot.py b/tests/adapters/genesis/test_contact_snapshot.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..641f0631fe211e128098efed4afc9efb5a0e6952
+--- /dev/null
++++ b/tests/adapters/genesis/test_contact_snapshot.py
+@@ -0,0 +1,76 @@
++"""Translate a complete native contact buffer without advancing the engine."""
++from __future__ import annotations
++
++from types import SimpleNamespace
++
++import numpy as np
++import pytest
++
++from unisim.backend.genesis.contacts import snapshot
++
++
++def backend():
++    raw = dict(
++        n_contacts=np.array([1, 2, 0]),
++        geom_a=np.array([[4, 999], [2, 4], [999, 999]]),
++        geom_b=np.array([[2, 999], [4, 2], [999, 999]]),
++        position=np.ones((3, 2, 3)), normal=np.broadcast_to([0., 0., -1.], (3, 2, 3)).copy(),
++        force=np.broadcast_to([0., 0., 5. + 2**-30], (3, 2, 3)).copy(),
++        penetration=np.ones((3, 2)) * .001,
++    )
++    # Padded/invalid slots may contain stale data, even NaNs, and are not observations.
++    raw["force"][0, 1] = np.nan
++    native_map = np.full((3, 5), -1, dtype=int)
++    native_map[:, 2], native_map[:, 4] = 10, 20
++    calls = []
++    def get_contacts(**kwargs):
++        calls.append(kwargs)
++        return raw
++    value = SimpleNamespace(
++        _num_envs=3, _scene=SimpleNamespace(rigid_solver=SimpleNamespace(
++            collider=SimpleNamespace(get_contacts=get_contacts))),
++        _contact_geometry_map=native_map, _time_cache=np.array([.2, .3, .4]),
++        _sim_dt=.001, _contact_sensor_rows_valid=np.array([True, False, True]),
++        _entity_runtimes={"body": SimpleNamespace(body_ids=np.array([1]), is_visual_mirror=False)},
++        _contact_force_cache=(None, np.full((3, 2, 3), 7.25)),
++    )
++    return value, raw, calls
++
++
++def test_snapshot_respects_native_counts_reset_rows_precision_and_epochs():
++    value, raw, calls = backend()
++    result = snapshot(value)
++    np.testing.assert_array_equal(result.env_ids, [0])
++    np.testing.assert_array_equal(result.geom_a, [20])
++    np.testing.assert_array_equal(result.geom_b, [10])
++    np.testing.assert_array_equal(result.normal, [[0, 0, 1]])
++    np.testing.assert_array_equal(result.signed_distance, [-.001])
++    np.testing.assert_array_equal(result.force_b, [[0, 0, 5 + 2**-30]])
++    np.testing.assert_array_equal(result.force_a, -result.force_b)
++    np.testing.assert_allclose(result.geometry_time, [.199, .3, .399], rtol=0, atol=1e-16)
++    np.testing.assert_array_equal(result.force_end_time, result.state_time)
++    assert result.torque_b is None
++    np.testing.assert_array_equal(result.body_ids, [1])
++    np.testing.assert_array_equal(result.body_net_force[:, 0], [[7.25]*3, [0.]*3, [7.25]*3])
++    value._contact_force_cache[1][:] = 99
++    assert result.body_net_force[0, 0, 0] == 7.25
++    assert calls == [dict(as_tensor=True, to_torch=True, is_padded=True)]
++    raw["force"][:] = 99
++    assert result.force_b[0, 2] == 5 + 2**-30
++
++
++@pytest.mark.parametrize("damage", ["identity", "count", "nonfinite", "unmapped", "shape"])
++def test_invalid_live_native_contacts_are_not_silently_dropped(damage):
++    value, raw, _ = backend()
++    if damage == "identity":
++        raw["geom_a"][0, 0] = 999
++    elif damage == "count":
++        raw["n_contacts"][0] = 3
++    elif damage == "nonfinite":
++        raw["force"][0, 0] = np.nan
++    elif damage == "unmapped":
++        value._contact_geometry_map[0, 4] = -1
++    else:
++        raw["normal"] = np.zeros((3, 2))
++    with pytest.raises((RuntimeError, ValueError)):
++        snapshot(value)
+diff --git a/tests/adapters/genesis/test_geometry_identity.py b/tests/adapters/genesis/test_geometry_identity.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..a0bd862e2ed961f4ed0a3169572a99e70d496f09
+--- /dev/null
++++ b/tests/adapters/genesis/test_geometry_identity.py
+@@ -0,0 +1,83 @@
++"""Collision identity must survive missing mesh names without guessing slots."""
++from __future__ import annotations
++
++from types import SimpleNamespace
++
++import numpy as np
++import pytest
++
++from unisim.backend.genesis.geometry_identity import matches
++
++
++def fixture():
++    source = SimpleNamespace(
++        geom_types=(6,), geom_sizes=np.array([[.02, .03, .04]]),
++        geom_positions=np.array([[.1, .2, .3]]),
++        geom_quaternions=np.array([[1., 0., 0., 0.]]),
++    )
++    native = SimpleNamespace(
++        metadata={}, link=SimpleNamespace(name="cube"), type=SimpleNamespace(name="BOX"),
++        data=np.array([.04, .06, .08, 0, 0, 0, 0]), init_pos=np.array([.1, .2, .3]),
++        init_quat=np.array([-1., 0., 0., 0.]),
++    )
++    return native, source
++
++
++def test_unnamed_primitive_requires_exact_shape_pose_and_body():
++    native, source = fixture()
++    assert matches(native, source, 0, "collision", "cube")
++    assert not matches(native, source, 0, "collision", "other")
++    native.data[0] *= 2
++    assert not matches(native, source, 0, "collision", "cube")
++
++
++@pytest.mark.parametrize("attribute,value", [
++    ("init_pos", np.array([.1, .2, .31])),
++    ("init_quat", np.array([0., 1., 0., 0.])),
++    ("type", SimpleNamespace(name="SPHERE")),
++    ("data", np.array([np.nan, .06, .08])),
++])
++def test_unverified_primitive_identity_is_refused(attribute, value):
++    native, source = fixture()
++    setattr(native, attribute, value)
++    assert not matches(native, source, 0, "collision", "cube")
++
++
++def test_named_legacy_geometry_keeps_existing_binding():
++    native = SimpleNamespace(metadata={"name":"mesh"}, link=SimpleNamespace(name="body"))
++    assert matches(native, None, 0, "mesh", "body")
++    assert not matches(native, None, 0, "different", "body")
++
++
++def test_cached_primitive_name_cannot_override_body_shape_or_pose():
++    native, source = fixture()
++    native.metadata = {"name": "cached_left_pad"}
++    assert matches(native, source, 0, "right_pad", "cube")
++    assert not matches(native, source, 0, "right_pad", "left")
++    native.init_pos[0] += .01
++    assert not matches(native, source, 0, "cached_left_pad", "cube")
++
++
++@pytest.mark.parametrize("variant", [0, 1])
++@pytest.mark.parametrize("fixed_child", [False, True])
++def test_aligned_variant_anchor_is_removed_in_the_correct_link_frame(variant, fixed_child):
++    native, source = fixture()
++    quarter_turn = np.array([2**-.5, 0., 0., 2**-.5])
++    anchors = [SimpleNamespace(offset_pos=np.array([.71 + .01 * i, 0., 0.]),
++                               offset_quat=quarter_turn) for i in range(2)]
++    root = SimpleNamespace(name="root", parent_idx=-1, aligned=True, desc=anchors[0])
++    child = SimpleNamespace(name="cube", parent_idx=10, aligned=False,
++                            desc=SimpleNamespace(pos=np.array([.05, 0., 0.]),
++                                                 quat=np.array([1., 0., 0., 0.])))
++    entity = SimpleNamespace(links=[root, child], link_start=10,
++                             _desc=SimpleNamespace(variants=anchors),
++                             morphs=[SimpleNamespace(offset_pos=np.array([.7, 0., 0.]),
++                                                      offset_quat=np.array([1., 0., 0., 0.]))] * 2)
++    root.entity = child.entity = entity
++    native.link = child if fixed_child else root
++    native.init_pos = np.array([.15 if fixed_child else .2,
++                                -.14 if fixed_child else -.09, .3])
++    native.init_pos[1] += .01 * variant
++    native.init_quat = quarter_turn * np.array([1., 1., 1., -1.])
++    assert matches(native, source, 0, "collision", native.link.name, variant)
++    assert not matches(native, source, 0, "collision", native.link.name, 1 - variant)
+diff --git a/tests/adapters/genesis/test_host_clock.py b/tests/adapters/genesis/test_host_clock.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..60e9e58a8eda697a4e47dab9d357c7588544db1b
+--- /dev/null
++++ b/tests/adapters/genesis/test_host_clock.py
+@@ -0,0 +1,78 @@
++"""Host lifecycle clock boundaries, independent of optional native runtimes."""
++from __future__ import annotations
++
++from types import SimpleNamespace
++from unittest.mock import Mock
++
++import numpy as np
++import pytest
++
++from unisim.backend.genesis.backend import GenesisBackend
++
++
++def _backend(dt: float, dtype=np.float64) -> GenesisBackend:
++    backend = object.__new__(GenesisBackend)
++    backend._np_dtype = np.dtype(dtype)
++    backend._num_envs = 2
++    backend._sim_dt = dt
++    backend._metadata = SimpleNamespace(nq=0, nv=0, actuator_names=())
++    backend._qpos_cache = (None, np.empty((2, 0), dtype=dtype))
++    backend._qvel_cache = (None, np.empty((2, 0), dtype=dtype))
++    backend._time_cache = np.zeros(2, dtype=dtype)
++    backend._time_origin = np.zeros(2, dtype=np.float64)
++    backend._time_steps = np.zeros(2, dtype=np.int64)
++    backend._contact_sensor_rows_valid = np.zeros(2, dtype=bool)
++    backend._portable_mode = False
++    backend._pre_step_control_fn = None
++    backend._entity = Mock()
++    backend._require_state = Mock()
++    backend._push_control = Mock()
++    backend._physics_substep = Mock()
++    backend._refresh_host_cache = Mock()
++    backend._to_device = lambda value: value
++    return backend
++
++
++@pytest.mark.parametrize("dt", [0.001, 0.0005, 0.00025])
++@pytest.mark.parametrize("dtype", [np.float32, np.float64])
++def test_single_and_batched_steps_have_identical_window_membership(dt, dtype):
++    single, batched = _backend(dt, dtype), _backend(dt, dtype)
++    ctrl = np.empty((2, 0), dtype=dtype)
++    last_step = 0
++    for boundary in (2.0, 3.0, 3.8, 4.0):
++        end_step = round(boundary / dt)
++        for _ in range(end_step - last_step):
++            single.step(ctrl)
++        batched.step(ctrl, nsteps=end_step - last_step)
++        expected = np.full(2, end_step * dt, dtype=dtype)
++        np.testing.assert_array_equal(single.get_physics_state()[:, 0], expected)
++        np.testing.assert_array_equal(batched.get_physics_state()[:, 0], expected)
++        assert np.all(single.get_physics_state()[:, 0] >= dtype(boundary))
++        last_step = end_step
++
++
++def test_selected_reset_and_playback_restore_keep_independent_origins():
++    backend = _backend(0.0005)
++    ctrl = np.empty((2, 0))
++    backend.set_physics_state(np.array([[1.25], [5.75]]))
++    backend.step(ctrl, nsteps=4000)
++    np.testing.assert_array_equal(backend.get_physics_state()[:, 0], [3.25, 7.75])
++    backend.set_state(np.array([0]), np.empty((1, 0)), np.empty((1, 0)))
++    for _ in range(4000):
++        backend.step(ctrl)
++    np.testing.assert_array_equal(backend.get_physics_state()[:, 0], [2.0, 9.75])
++    backend.set_state(np.array([], dtype=int), np.empty((0, 0)), np.empty((0, 0)))
++    np.testing.assert_array_equal(backend.get_physics_state()[:, 0], [2.0, 9.75])
++
++
++def test_tensor_to_host_barrier_rebases_clock_without_changing_received_time():
++    backend = _backend(0.0005)
++    tensor = Mock()
++    tensor.detach.return_value.cpu.return_value.numpy.return_value = np.array([2.5, 8.5])
++    backend._tensor_time = tensor
++    backend._host_cache_stale = True
++    backend._sync_host_cache_from_tensor()
++    np.testing.assert_array_equal(backend.get_physics_state()[:, 0], [2.5, 8.5])
++    for _ in range(4000):
++        backend.step(np.empty((2, 0)))
++    np.testing.assert_array_equal(backend.get_physics_state()[:, 0], [4.5, 10.5])
+diff --git a/tests/adapters/genesis/test_inspection.py b/tests/adapters/genesis/test_inspection.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..30f69b9c99a12015fe8b297bc4c2f53487073d84
+--- /dev/null
++++ b/tests/adapters/genesis/test_inspection.py
+@@ -0,0 +1,17 @@
++"""Native unbounded limits have explicit JSON meanings; NaNs remain errors."""
++from __future__ import annotations
++
++import numpy as np
++import pytest
++
++from unisim.backend.genesis.inspection import force_limit_values
++
++
++def test_unbounded_force_limits_keep_sign_and_finite_values():
++    values = np.array([[-np.inf, -50., -.1], [np.inf, 50., .1]])
++    assert force_limit_values(values) == [["-inf", -50., -.1], ["+inf", 50., .1]]
++
++
++def test_nan_force_limit_is_invalid():
++    with pytest.raises(ValueError, match="NaN"):
++        force_limit_values(np.array([np.nan]))
+diff --git a/tests/adapters/genesis/test_physics_state_playback.py b/tests/adapters/genesis/test_physics_state_playback.py
+index 076d62fc335a5ecd397cd22da93f1d4ca0460888..060188cf98585d14142130c99dcda9f752260704 100644
+--- a/tests/adapters/genesis/test_physics_state_playback.py
++++ b/tests/adapters/genesis/test_physics_state_playback.py
+@@ -229,7 +229,8 @@ def test_joint_order_validation_covers_multi_root_and_ball_joints(tmp_path: Path
+ 
+     A whole-MJCF scene with two free roots plus hinge, slide, and ball joints
+     must pass validation and expose a snapshot layout identical to MuJoCo's
+-    compiled generalized state.
++    compiled generalized state. The ball joint sits on a separate link: a ball
++    and hinge on the same link duplicate an angular DOF and make inertia singular.
+     """
+     scene = _write(
+         tmp_path,
+@@ -244,9 +245,13 @@ def test_joint_order_validation_covers_multi_root_and_ball_joints(tmp_path: Path
+       <body name="link" pos="0 0 .2">
+         <joint name="drive" type="hinge" axis="0 1 0"/>
+         <joint name="slider" type="slide" axis="1 0 0"/>
+-        <joint name="knuckle" type="ball"/>
+         <inertial pos="0 0 0" mass=".2" diaginertia=".03 .03 .03"/>
+         <geom name="link_geom" type="sphere" size=".03"/>
++        <body name="knuckle_link" pos=".1 0 0">
++          <joint name="knuckle" type="ball"/>
++          <inertial pos="0 0 0" mass=".1" diaginertia=".01 .01 .01"/>
++          <geom name="knuckle_geom" type="sphere" size=".02"/>
++        </body>
+       </body>
+     </body>
+     <body name="ball" pos="1 0 .3">
+diff --git a/tests/adapters/genesis/test_portable_entities.py b/tests/adapters/genesis/test_portable_entities.py
+index 18243afcffa57dd4694b77118199f3be914000d5..b5c138633d5285f51b82f740410ba79d650e5240 100644
+--- a/tests/adapters/genesis/test_portable_entities.py
++++ b/tests/adapters/genesis/test_portable_entities.py
+@@ -10,7 +10,7 @@ import numpy as np
+ import pytest
+ 
+ pytest.importorskip("mujoco")
+-pytest.importorskip("genesis")
++GENESIS = pytest.importorskip("genesis")
+ pytest.importorskip("torch")
+ 
+ from unisim.backend.genesis.backend import GenesisBackend
+@@ -32,6 +32,43 @@ from unisim.entities import (
+ from unisim.scene import SceneCfg
+ 
+ 
++def _native_mass(entity, indices):
++    getter = (entity.get_links_mass if hasattr(entity, "get_links_mass")
++              else entity.get_links_inertial_mass)
++    return getter(indices)
++
++
++def test_factory_friction_cone_has_a_native_effective_readback(tmp_path):
++    from unisim import create_backend
++
++    backend = create_backend("genesis", scene=_scene(tmp_path), num_envs=5, sim_dt=.002,
++                             genesis_friction_cone="elliptic")
++    try:
++        backend.materialize()
++        fields = {field.field: field for field in backend.get_import_report().fields}
++        assert fields["native_friction_cone"].requested == "elliptic"
++        assert fields["native_friction_cone"].effective == "elliptic"
++        assert fields["native_friction_cone"].difference == "exact"
++    finally:
++        # The native suite shares its one allowed Genesis session across tests.
++        backend._cleanup_materialization_resources()
++
++
++def _assert_inertial_writes_rejected(backend):
++    before = backend.get_physics_state().copy()
++    parts = backend.get_physics_state_layout().split_state(before)
++    qpos, qvel = parts.qpos, parts.qvel
++    rows = np.array([1, 4])
++    for term in ("body_mass", "base_mass_delta", "body_ipos", "base_com_offset"):
++        assert not backend.get_dr_capabilities().supports_reset_term(term)
++        with pytest.raises(NotImplementedError, match="does not support"):
++            backend.get_reset_term_default(term)
++        with pytest.raises(NotImplementedError, match="does not support"):
++            backend.set_state(rows, qpos[rows], qvel[rows],
++                              randomization=ResetRandomizationPayload(**{term: np.zeros(1)}))
++        np.testing.assert_array_equal(backend.get_physics_state(), before)
++
++
+ def _write(tmp_path: Path, name: str, xml: str) -> ModelSourceDescriptor:
+     path = tmp_path / f"{name}.xml"
+     path.parent.mkdir(parents=True, exist_ok=True)
+@@ -547,19 +584,6 @@ def test_portable_site_sensor_structural_rejections(tmp_path: Path) -> None:
+     with pytest.raises(RuntimeError, match="native inertia differs"):
+         orientation_backend.materialize()
+ 
+-    contact_scene = _scene(tmp_path / "cross-entity-contact-fragment", assignment=(0, 1))
+-    contact_fragment = tmp_path / "cross-entity-contact-fragment" / "fragment.xml"
+-    contact_fragment.write_text(
+-        "<mujoco><sensor>"
+-        "<contact name='passive_internal_found' geom1='passive/passive_base_geom' "
+-        "geom2='passive/passive_child_geom' data='found' num='1'/>"
+-        "</sensor></mujoco>",
+-        encoding="utf-8",
+-    )
+-    contact_scene.fragment_files = [str(contact_fragment)]
+-    with pytest.raises(NotImplementedError, match="two distinct public entities"):
+-        GenesisBackend(contact_scene, 2, 0.002)
+-
+ 
+ def test_portable_site_sensor_fragment_variant_identity_is_frozen(tmp_path: Path) -> None:
+     scene = _scene(tmp_path, assignment=(0, 1), object_site_sensors=True)
+@@ -973,6 +997,9 @@ def test_portable_entities_selected_reset_randomization_mass_and_gains(tmp_path:
+     backend = GenesisBackend(scene, 5, 0.002, base_name="passive/base")
+     try:
+         backend.materialize()
++        if GENESIS.__version__ == "1.4.3":
++            _assert_inertial_writes_rejected(backend)
++            return
+         layout = backend.get_scene_layout()
+         default_mass = backend.get_body_mass().copy()
+         default_reset_mass = backend.get_reset_term_default("body_mass")
+@@ -1018,9 +1045,7 @@ def test_portable_entities_selected_reset_randomization_mass_and_gains(tmp_path:
+         )
+         np.testing.assert_array_equal(effective_mass[untouched_rows], default_mass[untouched_rows])
+         native_object_mass = (
+-            object_runtime.entity.get_links_inertial_mass(
+-                object_runtime.native_body_indices.tolist()
+-            )
++            _native_mass(object_runtime.entity, object_runtime.native_body_indices.tolist())
+             .cpu()
+             .numpy()
+             .reshape(5, -1)[:, 0]
+@@ -1113,6 +1138,9 @@ def test_portable_entities_selected_reset_randomization_com(tmp_path: Path):
+     backend = GenesisBackend(scene, 5, 0.002, base_name="passive/base")
+     try:
+         backend.materialize()
++        if GENESIS.__version__ == "1.4.3":
++            _assert_inertial_writes_rejected(backend)
++            return
+         layout = backend.get_scene_layout()
+         default_mass = backend.get_body_mass().copy()
+         default_ipos = backend.get_body_ipos(np.arange(5)).copy()
+@@ -1192,15 +1220,11 @@ def test_portable_entities_selected_reset_randomization_com(tmp_path: Path):
+         object_native_link = int(object_runtime.entity.get_link("base").idx)
+         native_robot_shift = (
+             solver.get_links_COM_shift(links_idx=[robot_native_link], envs_idx=rows.tolist())
+-            .cpu()
+-            .numpy()
+-            .reshape(2, 3)
++            .cpu().numpy().reshape(2, 3)
+         )
+         native_object_shift = (
+             solver.get_links_COM_shift(links_idx=[object_native_link], envs_idx=rows.tolist())
+-            .cpu()
+-            .numpy()
+-            .reshape(2, 3)
++            .cpu().numpy().reshape(2, 3)
+         )
+         expected_shift = requested_ipos - default_ipos[rows]
+         np.testing.assert_allclose(
+@@ -1216,9 +1240,7 @@ def test_portable_entities_selected_reset_randomization_com(tmp_path: Path):
+             atol=1e-7,
+         )
+         native_object_mass = (
+-            object_runtime.entity.get_links_inertial_mass(
+-                object_runtime.native_body_indices.tolist()
+-            )
++            _native_mass(object_runtime.entity, object_runtime.native_body_indices.tolist())
+             .cpu()
+             .numpy()
+             .reshape(5, -1)[:, 0]
+@@ -1275,15 +1297,11 @@ def test_portable_entities_selected_reset_randomization_com(tmp_path: Path):
+         passive_native_base = int(passive_runtime.entity.get_link("base").idx)
+         native_base_shift = (
+             solver.get_links_COM_shift(links_idx=[passive_native_base], envs_idx=rows.tolist())
+-            .cpu()
+-            .numpy()
+-            .reshape(2, 3)
++            .cpu().numpy().reshape(2, 3)
+         )
+         native_object_shift = (
+             solver.get_links_COM_shift(links_idx=[object_native_link], envs_idx=rows.tolist())
+-            .cpu()
+-            .numpy()
+-            .reshape(2, 3)
++            .cpu().numpy().reshape(2, 3)
+         )
+         np.testing.assert_allclose(native_base_shift, base_com_offset, rtol=2e-6, atol=1e-7)
+         np.testing.assert_array_equal(native_object_shift, np.zeros((2, 3)))
+@@ -1398,9 +1416,9 @@ def test_portable_entities_selected_reset_randomization_dof_properties(tmp_path:
+             rows,
+             qpos[rows],
+             qvel[rows],
+-            randomization=ResetRandomizationPayload(
++            randomization=(ResetRandomizationPayload(
+                 base_com_offset=np.zeros((2, 3), dtype=np.float32)
+-            ),
++            ) if GENESIS.__version__ != "1.4.3" else None),
+         )
+         for runtime in backend._entity_runtimes.values():
+             if not runtime.native_qvel_indices.size:
+@@ -1727,9 +1745,7 @@ def test_portable_entities_layout_variants_selected_state_and_control(tmp_path:
+         assert not table_runtime.native_actuated_dofs.size
+ 
+         native_mass = np.asarray(
+-            object_runtime.entity.get_links_inertial_mass(
+-                object_runtime.native_body_indices.tolist()
+-            )
++            _native_mass(object_runtime.entity, object_runtime.native_body_indices.tolist())
+             .cpu()
+             .numpy()
+         ).reshape(5, -1)[:, 0]
+@@ -1781,24 +1797,17 @@ def test_portable_entities_layout_variants_selected_state_and_control(tmp_path:
+         )
+         for entity in layout.entities:
+             runtime = backend._entity_runtimes[entity.name]
+-            native_values = {
+-                (
+-                    str(geom.metadata.get("name", "")),
+-                    str(geom.link.name),
+-                    float(geom.friction),
+-                    float(geom.friction_torsional),
+-                    float(geom.friction_rolling),
+-                )
+-                for geom in runtime.entity.geoms
+-            }
+-            for geom in entity.geoms:
+-                assert (
+-                    geom.name,
+-                    geom.body_name,
+-                    0.37,
+-                    0.004,
+-                    0.002,
+-                ) in native_values
++            for geom in runtime.entity.geoms:
++                if hasattr(geom, "get_friction"):
++                    values = [geom.get_friction().cpu().numpy(),
++                              geom.get_friction_torsional().cpu().numpy(),
++                              geom.get_friction_rolling().cpu().numpy()]
++                    for actual, expected in zip(values, (.37, .004, .002), strict=True):
++                        np.testing.assert_allclose(actual, expected, rtol=2e-6, atol=2e-7)
++                else:
++                    assert (geom.friction, geom.friction_torsional, geom.friction_rolling) == (
++                        .37, .004, .002
++                    )
+         native_solref = backend.get_geom_solref()
+         native_solimp = backend.get_geom_solimp()
+         assert native_solref.shape == (6, 2)
+@@ -1817,20 +1826,13 @@ def test_portable_entities_layout_variants_selected_state_and_control(tmp_path:
+         )
+         for entity in layout.entities:
+             runtime = backend._entity_runtimes[entity.name]
+-            native_values = {
+-                (
+-                    str(geom.metadata.get("name", "")),
+-                    str(geom.link.name),
+-                ): np.asarray(geom.sol_params.detach().cpu().numpy(), dtype=np.float64)
+-                for geom in runtime.entity.geoms
+-            }
+-            for geom in entity.geoms:
+-                native_solver_params = native_values[(geom.name, geom.body_name)]
++            for geom in runtime.entity.geoms:
++                params = (geom.get_sol_params() if hasattr(geom, "get_sol_params")
++                          else geom.sol_params)
+                 np.testing.assert_allclose(
+-                    native_solver_params,
+-                    (0.021, 0.89, 0.91, 0.94, 0.0013, 0.53, 2.2),
+-                    rtol=2e-6,
+-                    atol=2e-7,
++                    params.detach().cpu().numpy(),
++                    np.broadcast_to((0.021, 0.89, 0.91, 0.94, 0.0013, 0.53, 2.2), params.shape),
++                    rtol=2e-6, atol=2e-7,
+                 )
+         expected_damping = np.zeros((layout.nv,), dtype=np.float64)
+         expected_frictionloss = np.zeros((layout.nv,), dtype=np.float64)
+diff --git a/tests/adapters/genesis/test_portable_mirrors.py b/tests/adapters/genesis/test_portable_mirrors.py
+index c17c87da34e118c974732a6cb20b0e1feb06c371..ab1872da372b73e0d433cb980c805ec8bad93847 100644
+--- a/tests/adapters/genesis/test_portable_mirrors.py
++++ b/tests/adapters/genesis/test_portable_mirrors.py
+@@ -114,7 +114,8 @@ def test_reversed_variant_declaration_controls_native_identity(tmp_path: Path) -
+         assert solver is not None
+         native_link = int(object_runtime.entity.get_link("base").idx)
+         native_mass = (
+-            solver.get_links_inertial_mass(links_idx=[native_link])
++            (solver.get_links_mass if hasattr(solver, "get_links_mass")
++             else solver.get_links_inertial_mass)(links_idx=[native_link])
+             .cpu()
+             .numpy()
+             .reshape(2, 1)[:, 0]
+@@ -412,9 +413,11 @@ def test_visual_mirror_physical_mutation_and_contact_fragments_fail_closed(
+         qpos = backend._qpos_cache[1].copy()
+         qvel = backend._qvel_cache[1].copy()
+         states_before = _object_state_snapshot(backend)
++        mass_supported = backend.get_dr_capabilities().supports_reset_term("body_mass")
+         with pytest.raises(
+-            ValueError,
+-            match="body_mass cannot randomize public columns without native Genesis links",
++            ValueError if mass_supported else NotImplementedError,
++            match=("body_mass cannot randomize public columns without native Genesis links"
++                   if mass_supported else "does not support terms"),
+         ):
+             backend.set_state(
+                 np.asarray((1,), dtype=np.intp),
+diff --git a/tests/adapters/genesis/test_precision.py b/tests/adapters/genesis/test_precision.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..fdfa19e41fb9b6cdd53459a9f4703e22014aef7f
+--- /dev/null
++++ b/tests/adapters/genesis/test_precision.py
+@@ -0,0 +1,184 @@
++"""Precision must survive source ingestion, caches, controls and contact reduction."""
++from __future__ import annotations
++
++import random
++import xml.etree.ElementTree as ET
++from contextlib import nullcontext
++from types import SimpleNamespace
++
++import numpy as np
++import pytest
++
++from unisim.backend.genesis import materialization
++from unisim.backend.genesis.backend import GenesisBackend, _make_device_cache
++from unisim.scene import SceneCfg
++
++
++def test_portable_xml_preserves_explicit_inertials_without_materializing_inferred_ones(tmp_path):
++    mujoco = pytest.importorskip("mujoco")
++    mass = .06400000000000002
++    inertia = 1.7066666666666674e-5
++    source = f'''<mujoco><worldbody>
++        <body name="explicit"><freejoint/>
++          <inertial pos=".0123456789012345 0 0" mass="{mass!r}"
++            diaginertia="{inertia!r} {inertia!r} {inertia!r}"/>
++          <geom type="box" size=".02 .02 .02"/>
++        </body>
++        <body name="inferred"><freejoint/><geom type="box" size=".02 .02 .02"/></body>
++        </worldbody></mujoco>'''
++    spec = mujoco.MjSpec.from_string(source)
++    expected = spec.compile()
++    path = tmp_path / "normalized.xml"
++    materialization._write_portable_source(spec, expected, str(path))
++    actual = mujoco.MjModel.from_xml_path(str(path))
++    for field in ("body_mass", "body_inertia", "body_ipos", "body_iquat"):
++        np.testing.assert_array_equal(getattr(actual, field), getattr(expected, field))
++    root = ET.parse(path)
++    assert root.find("worldbody/body[@name='inferred']/inertial") is None
++    assert actual.body("explicit").mass[0] == mass
++
++
++@pytest.fixture
++def session(monkeypatch):
++    # Restore any real session guard when this fake-session fixture finishes.
++    for name, value in (("_SESSION_ACTIVE", False), ("_SESSION_DESTROYED", False),
++                        ("_SESSION_DEVICE_ID", None), ("_SESSION_PROFILE", None)):
++        monkeypatch.setattr(materialization, name, value)
++    calls = []
++    cuda = SimpleNamespace(
++        is_available=lambda: True, current_device=lambda: 0,
++        set_device=lambda value: calls.append(("set_device", value)),
++    )
++    def initialize(**kwargs):
++        calls.append(kwargs)
++        random.seed(15)
++        np.random.seed(15)
++    deps = SimpleNamespace(
++        genesis=SimpleNamespace(cpu="cpu", gpu="gpu", init=initialize, destroy=lambda: None),
++        torch=SimpleNamespace(cuda=cuda),
++    )
++    monkeypatch.setattr(materialization, "preserve_torch_globals", lambda _: nullcontext())
++    yield deps, calls
++
++
++def test_cpu_fp64_seed_is_explicit_and_does_not_reseed_caller(session):
++    deps, calls = session
++    python_rng, numpy_rng = random.getstate(), np.random.get_state()
++    materialization.init_genesis_session(deps, device="cpu", precision="64", seed=7)
++    materialization.init_genesis_session(deps, device="cpu", precision="64", seed=7)
++    assert calls == [dict(backend="cpu", logging_level="warning", precision="64", seed=7)]
++    assert random.getstate() == python_rng
++    actual = np.random.get_state()
++    assert actual[0] == numpy_rng[0] and actual[2:] == numpy_rng[2:]
++    np.testing.assert_array_equal(actual[1], numpy_rng[1])
++
++
++@pytest.mark.parametrize("options", [
++    dict(device="gpu", precision="64", seed=7),
++    dict(device="cpu", precision="32", seed=7),
++    dict(device="cpu", precision="64", seed=8),
++])
++def test_session_conflict_rejected_without_second_init(session, options):
++    deps, calls = session
++    materialization.init_genesis_session(deps, device="cpu", precision="64", seed=7)
++    with pytest.raises(RuntimeError, match="different device, precision, seed"):
++        materialization.init_genesis_session(deps, **options)
++    assert len(calls) == 1
++
++
++def test_rejected_gpu_switch_does_not_change_current_device(session):
++    deps, calls = session
++    materialization.init_genesis_session(deps)
++    with pytest.raises(RuntimeError, match="different device"):
++        materialization.init_genesis_session(deps, device_id=1)
++    assert calls == [dict(backend="gpu", logging_level="warning", precision="32")]
++
++
++def test_destroy_does_not_allow_reinitialization(session):
++    deps, _ = session
++    materialization.init_genesis_session(deps, device="cpu")
++    materialization.destroy_genesis_session(deps)
++    with pytest.raises(RuntimeError, match="already destroyed"):
++        materialization.init_genesis_session(deps, device="cpu")
++
++
++@pytest.mark.parametrize("options", [
++    dict(device="cuda"), dict(precision=64), dict(precision="16"),
++    dict(seed=True), dict(seed=-1), dict(seed=2**32), dict(device="cpu", device_id=0),
++])
++def test_invalid_session_options_do_not_initialize(session, options):
++    deps, calls = session
++    with pytest.raises(ValueError):
++        materialization.init_genesis_session(deps, **options)
++    assert not calls
++
++
++@pytest.mark.parametrize("dtype", [np.float32, np.float64])
++def test_source_metadata_and_cache_keep_selected_precision(tmp_path, dtype):
++    mujoco = pytest.importorskip("mujoco")
++    value = 1 + 2**-30
++    model = tmp_path / "model.xml"
++    model.write_text(f'''<mujoco><option gravity="0 0 -{value}"/><worldbody>
++        <body pos="0 0 {value}"><freejoint/><geom type="sphere" size=".1"
++        mass="{value}"/></body></worldbody></mujoco>''')
++    metadata = materialization.scan_genesis_model_metadata(
++        mujoco, SceneCfg(model_file=str(model)), np_dtype=dtype
++    )
++    for array in (metadata.gravity, metadata.default_qpos, metadata.body_mass):
++        assert array.dtype == dtype
++    assert metadata.body_mass[1] == dtype(value)
++    assert metadata.gravity[2] == -dtype(value)
++    torch = SimpleNamespace(
++        float32=np.float32, float64=np.float64,
++        cuda=SimpleNamespace(is_available=lambda: False),
++        empty=lambda shape, dtype, pin_memory: SimpleNamespace(
++            numpy=lambda: np.empty(shape, dtype=dtype)
++        ),
++    )
++    _, cache = _make_device_cache(torch, (1, 3), dtype)
++    cache[:] = value
++    assert cache.dtype == dtype and cache[0, 0] == dtype(value)
++
++
++@pytest.mark.parametrize("dtype", [np.float32, np.float64])
++def test_contact_reduction_keeps_precision_orientation_and_reset_mask(dtype):
++    value = 1 + 2**-30
++    backend = object.__new__(GenesisBackend)
++    backend._np_dtype = np.dtype(dtype)
++    backend._num_envs = 2
++    backend._contact_sensor_rows_valid = np.array([True, False])
++    contacts = dict(
++        geom_a=np.array([[1, 2, 8]] * 2), geom_b=np.array([[2, 1, 9]] * 2),
++        valid_mask=np.ones((2, 3), bool),
++        force_a=np.array([[[value, 0, 0], [-value, 0, 0], [99, 0, 0]]] * 2),
++        force_b=np.array([[[-value, 0, 0], [value, 0, 0], [-99, 0, 0]]] * 2),
++    )
++    backend._sensor_contact_bindings = {"pair": SimpleNamespace(
++        netforce=True, entity1=SimpleNamespace(get_contacts=lambda _: contacts),
++        entity2=object(), geom1_ids=np.array([1, 1]), geom2_ids=np.array([2, 2]),
++    )}
++    actual = backend._read_portable_contact("pair", netforce=True)
++    assert actual.dtype == dtype
++    np.testing.assert_array_equal(actual, np.array([[2 * value, 0, 0], [0, 0, 0]], dtype=dtype))
++    contacts["force_a"][0, 0, 0] = np.nan
++    with pytest.raises(RuntimeError, match="nonfinite"):
++        backend._read_portable_contact("pair", netforce=True)
++
++
++def test_deterministic_policy_is_explicit_and_cannot_change(session):
++    deps, calls = session
++    materialization.init_genesis_session(deps, use_deterministic_algorithms=True)
++    assert calls[0]["use_deterministic_algorithms"] is True
++    with pytest.raises(RuntimeError, match="deterministic policy"):
++        materialization.init_genesis_session(deps)
++
++
++@pytest.mark.parametrize("options", [
++    dict(actuated_armature=-1.), dict(actuated_armature=float("nan")),
++    dict(actuated_armature=True), dict(noslip_iterations=-1), dict(noslip_iterations=True),
++    dict(actuated_armature="0"), dict(actuated_armature=[0]),
++    dict(use_deterministic_algorithms=1),
++])
++def test_invalid_physical_options_rejected_before_optional_import(options):
++    with pytest.raises(ValueError):
++        GenesisBackend(SceneCfg(model_file="does-not-exist.xml"), 1, .001, **options)
+diff --git a/tests/adapters/genesis/test_wrench_versions.py b/tests/adapters/genesis/test_wrench_versions.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..f46921d27bdf8a8d313259008d92a9305442b413
+--- /dev/null
++++ b/tests/adapters/genesis/test_wrench_versions.py
+@@ -0,0 +1,42 @@
++"""SDK evolution must preserve selected worlds, force frames and torque scope."""
++from __future__ import annotations
++
++from types import SimpleNamespace
++
++import numpy as np
++import pytest
++
++from unisim.backend.genesis.backend import GenesisBackend
++
++
++@pytest.mark.parametrize("unified", [False, True])
++def test_force_and_torque_keep_com_frame_and_selected_worlds(unified):
++    calls = []
++    solver = SimpleNamespace()
++    if unified:
++        solver.apply_links_external_wrench = lambda **kwargs: calls.append(kwargs)
++    else:
++        solver.apply_links_external_force = lambda force, **kwargs: calls.append(
++            dict(force=force, **kwargs))
++        solver.apply_links_external_torque = lambda torque, **kwargs: calls.append(
++            dict(torque=torque, **kwargs))
++    backend = object.__new__(GenesisBackend)
++    backend._scene = SimpleNamespace(sim=SimpleNamespace(rigid_solver=solver))
++    backend._gs = SimpleNamespace(link_ref_frame=SimpleNamespace(link_COM=11, link_origin=12))
++    force, torque = np.ones((1, 2, 3)), np.full((1, 2, 3), .1)
++    backend._apply_native_wrench(force, torque, [4, 7], [2])
++    assert len(calls) == (1 if unified else 2)
++    for call in calls:
++        assert call['links_idx'] == [4, 7] and call['envs_idx'] == [2]
++        assert call['local'] is False
++        assert call['ref'] == (11 if unified else 'link_com')
++    assert calls[0]['force'] is force
++    assert calls[-1]['torque'] is torque
++
++
++def test_reset_with_no_pending_wrench_never_calls_native_solver():
++    backend = object.__new__(GenesisBackend)
++    backend._portable_pending_body_forces = np.zeros((2, 3, 3))
++    backend._portable_pending_body_torques = np.zeros((2, 3, 3))
++    # No scene exists: an unnecessary native invocation fails this test.
++    backend._cancel_portable_body_wrenches(np.array([0]))
+diff --git a/tests/contract/test_contacts.py b/tests/contract/test_contacts.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..1faf9a80a9ee5f7d72f55e063bf7e1176e61b1b6
+--- /dev/null
++++ b/tests/contract/test_contacts.py
+@@ -0,0 +1,65 @@
++"""Complete-contact records reject invented identity, epochs and missing fields."""
++from __future__ import annotations
++
++import numpy as np
++import pytest
++
++from unisim import ContactSnapshot, FakeBackend, UnsupportedCapabilityError
++
++
++def sample(**overrides):
++    values = dict(
++        state_time=np.array([1.0]), geometry_time=np.array([0.9]),
++        force_start_time=np.array([0.9]), force_end_time=np.array([1.0]),
++        available=np.array([True]), env_ids=np.array([0]), geom_a=np.array([0]),
++        geom_b=np.array([1]), position=np.zeros((1, 3)), force_a=np.array([[0., 0., -1.]]),
++        force_b=np.array([[0., 0., 1.]]),
++    )
++    return ContactSnapshot(**(values | overrides))
++
++
++def test_snapshot_owns_storage_and_missing_is_not_zero():
++    positions = np.ones((1, 3))
++    result = sample(position=positions)
++    positions[:] = 42
++    np.testing.assert_array_equal(result.position, [[1, 1, 1]])
++    assert not result.position.flags.writeable
++    assert result.normal is None and result.signed_distance is None and result.torque_b is None
++
++
++@pytest.mark.parametrize("overrides", [
++    dict(env_ids=np.array([1])), dict(env_ids=np.array([0.])),
++    dict(geom_b=np.array([-1])), dict(available=np.array([False])),
++    dict(force_start_time=np.array([1.1])), dict(force_end_time=np.array([1.1])),
++    dict(geometry_time=np.array([1.1])), dict(force_b=np.array([[np.nan, 0., 0.]])),
++    dict(position=np.array([0., 0., 0.])), dict(signed_distance=np.zeros((1, 1))),
++])
++def test_malformed_snapshot_fails_closed(overrides):
++    with pytest.raises(ValueError):
++        sample(**overrides)
++
++
++def test_unsupported_backend_does_not_return_an_empty_success():
++    backend = FakeBackend()
++    assert not backend.get_contact_capabilities().supported
++    with pytest.raises(UnsupportedCapabilityError):
++        backend.get_contact_snapshot()
++
++
++@pytest.mark.parametrize("overrides", [
++    dict(body_ids=np.array([1])), dict(body_net_force=np.zeros((1, 1, 3))),
++    dict(body_ids=np.array([1, 1]), body_net_force=np.zeros((1, 2, 3))),
++    dict(body_ids=np.array([-1]), body_net_force=np.zeros((1, 1, 3))),
++    dict(body_ids=np.array([1]), body_net_force=np.zeros((1, 3))),
++])
++def test_body_net_force_requires_complete_unique_identity(overrides):
++    with pytest.raises(ValueError):
++        sample(**overrides)
++
++
++def test_body_force_readback_is_detached_without_imposing_ledger_equality():
++    forces = np.full((1, 1, 3), 2.0)
++    result = sample(body_ids=np.array([1]), body_net_force=forces)
++    forces[:] = 90
++    np.testing.assert_array_equal(result.body_net_force, np.full((1, 1, 3), 2.0))
++    assert not result.body_net_force.flags.writeable
+diff --git a/tests/factory/test_genesis_options.py b/tests/factory/test_genesis_options.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..5b73ef4473df9a6803314772f47806027e866d93
+--- /dev/null
++++ b/tests/factory/test_genesis_options.py
+@@ -0,0 +1,29 @@
++"""Factory spelling errors must never silently select different native physics."""
++from __future__ import annotations
++
++import pytest
++
++from unisim import create_backend
++from unisim.scene import SceneCfg
++
++
++@pytest.mark.parametrize("name", ["integrator", "constraint_solver", "friction_cone",
++                                  "solver_iterations", "device_id"])
++def test_genesis_factory_rejects_shadowed_constructor_options(name):
++    with pytest.raises(TypeError, match="requires genesis_" + name):
++        create_backend("genesis", scene=SceneCfg(model_file="unused.xml"), **{name: "value"})
++
++
++def test_genesis_factory_forwards_prefixed_cone(monkeypatch):
++    import unisim.backend.genesis.backend as module
++
++    captured = {}
++
++    def constructor(scene, num_envs, dt, **kwargs):
++        captured.update(kwargs)
++        return object()
++
++    monkeypatch.setattr(module, "GenesisBackend", constructor)
++    create_backend("genesis", scene=SceneCfg(model_file="unused.xml"),
++                   genesis_friction_cone="elliptic")
++    assert captured["friction_cone"] == "elliptic"

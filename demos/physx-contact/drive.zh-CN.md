@@ -2,6 +2,8 @@
 
 [English](drive.md) | [简体中文](drive.zh-CN.md)
 
+历史配置归因见[分批求解器与版本审计](../../docs/physx-solver-audit.zh-CN.md)：区分原生场景读回、源码／报告中的 TGS 配置和缺失字段；[P0 #126](https://github.com/huangkiki/Dexlab/issues/126) 保留同期核心／加载库身份缺口。
+
 固定基座的单自由度直线关节通过 UniSim 调用官方 Isaac Sim 5.1。启用原生 TGS 逐迭代外力选项后，完整 2 秒记录通过独立验收。默认选项未通过静止速度检查，失败记录保留。此结果限于理想直线关节，尚未验证 OpenArm/Wuji 机器人驱动、接触中的驱动或苹果抓取。
 
 ## 发现与原生对照

@@ -1,0 +1,1641 @@
+{
+  "schema_version": 1,
+  "current_protocol": "coverage-v1",
+  "groups": [
+    {
+      "id": "rigid",
+      "zh": "刚体任务 · 历史协议",
+      "en": "Rigid tasks · historical protocols"
+    },
+    {
+      "id": "manipulation",
+      "zh": "操作任务 · 历史协议与缺项",
+      "en": "Manipulation · historical protocols and gaps"
+    },
+    {
+      "id": "cloth",
+      "zh": "布料任务 · 历史协议分别展示",
+      "en": "Cloth tasks · separate historical protocols"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "contact",
+      "group": "rigid",
+      "zh": "基础接触",
+      "en": "Basic contact"
+    },
+    {
+      "id": "incline",
+      "group": "rigid",
+      "zh": "斜面",
+      "en": "Incline"
+    },
+    {
+      "id": "collision",
+      "group": "rigid",
+      "zh": "碰撞",
+      "en": "Collision"
+    },
+    {
+      "id": "pinch",
+      "group": "rigid",
+      "zh": "夹具夹持",
+      "en": "Fixture pinch"
+    },
+    {
+      "id": "grasp",
+      "group": "rigid",
+      "zh": "机器人抓取",
+      "en": "Robot grasp"
+    },
+    {
+      "id": "push",
+      "group": "manipulation",
+      "zh": "推动",
+      "en": "Pushing"
+    },
+    {
+      "id": "rotation",
+      "group": "manipulation",
+      "zh": "手内旋转",
+      "en": "In-hand rotation"
+    },
+    {
+      "id": "cloth-grasp",
+      "group": "manipulation",
+      "zh": "夹布抬升",
+      "en": "Cloth grasp/lift"
+    },
+    {
+      "id": "cloth-fold",
+      "group": "manipulation",
+      "zh": "主动折布",
+      "en": "Active folding"
+    },
+    {
+      "id": "extension",
+      "group": "cloth",
+      "zh": "拉伸",
+      "en": "Extension"
+    },
+    {
+      "id": "sag",
+      "group": "cloth",
+      "zh": "下垂",
+      "en": "Sag"
+    },
+    {
+      "id": "drape",
+      "group": "cloth",
+      "zh": "球面覆盖",
+      "en": "Sphere drape"
+    },
+    {
+      "id": "folded-drop",
+      "group": "cloth",
+      "zh": "预折叠下落",
+      "en": "Folded drop"
+    }
+  ],
+  "cohorts": {
+    "coverage-v1": {
+      "scope": "New acceptance, not yet executed"
+    },
+    "rigid-history": {
+      "scope": "Separate task protocols; no combined ranking"
+    },
+    "cloth-heldout-v1": {
+      "scope": "Frozen nominal material, summary checks only",
+      "cloth_summaries": {
+        "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+        "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+      },
+      "expected_cases": {
+        "test-extension-00": "extension",
+        "test-extension-01": "extension",
+        "test-extension-02": "extension",
+        "test-extension-03": "extension",
+        "test-sag-00": "sag",
+        "test-sag-01": "sag",
+        "test-sag-02": "sag",
+        "test-sag-03": "sag",
+        "test-drape-00": "drape",
+        "test-drape-01": "drape",
+        "test-drape-02": "drape",
+        "test-drape-03": "drape",
+        "test-folded-drop-00": "folded-drop",
+        "test-folded-drop-01": "folded-drop",
+        "test-folded-drop-02": "folded-drop"
+      }
+    },
+    "apple-sdf-14s": {
+      "scope": "Historical scripted SDF grasp, 14 seconds; not heldout qualification"
+    },
+    "physx-cloth-final-v2": {
+      "scope": "Separate passive-cloth final repeat, not the seven-solver cohort"
+    },
+    "genesis-cloth-diagnostic": {
+      "scope": "Actuated clamp/lift/hold tests failed; other native PBD diagnostics are different protocols, not seven-profile heldout cloth cases"
+    }
+  },
+  "rows": [
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / Euler",
+      "runtime_path": "native",
+      "version": "3.15.0",
+      "groups": [
+        "rigid",
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md",
+          "evidence": {
+            "path": "docs/incline-comparison-results.md",
+            "sha256": "0e855efc5ab99e5e0b7bfc8955d50faa3525261b10a17ba9bb7099662edb1f19"
+          }
+        },
+        "collision": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md",
+          "evidence": {
+            "path": "docs/impact-stiffness-results.md",
+            "sha256": "2dc1dbe27e153618943f37da72e485359e98963cf970563820c6c0bc59641e91"
+          }
+        },
+        "pinch": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md",
+          "evidence": {
+            "path": "docs/pinch-load-results.md",
+            "sha256": "b3c995650648e0d983e6a7066e29504f307107e4504402b399a6927b30703b89"
+          }
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "Newton / AUTO / FP64",
+      "runtime_path": "native",
+      "version": "1.0.0",
+      "groups": [
+        "rigid",
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md",
+          "evidence": {
+            "path": "docs/incline-comparison-results.md",
+            "sha256": "0e855efc5ab99e5e0b7bfc8955d50faa3525261b10a17ba9bb7099662edb1f19"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / approximate_implicitfast",
+      "runtime_path": "native CPU FP64",
+      "version": "1.4.3",
+      "groups": [
+        "rigid",
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md",
+          "evidence": {
+            "path": "docs/force-limit-results.md",
+            "sha256": "109d47912365bde8a098f6fd88503a969d41efd2a32d619daa5b006598dd05ec"
+          }
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "XPBD",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "groups": [
+        "rigid",
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md",
+          "evidence": {
+            "path": "docs/newton-contact.md",
+            "sha256": "f61b00740958bf1be5a18f0a7acb56a506b4104520c5b31242cd3ecf76937c9f"
+          }
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "PhysX",
+      "solver": "historical readback incomplete (#126)",
+      "runtime_path": "SDK historical",
+      "version": "core identity pending #126",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md",
+          "evidence": {
+            "path": "docs/physx-solver-audit.md",
+            "sha256": "77cc307ffe8d91b4946466287950d95590c635a5d961cdcfe4ce8b0408140a52"
+          }
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md",
+          "evidence": {
+            "path": "docs/physx-solver-audit.md",
+            "sha256": "77cc307ffe8d91b4946466287950d95590c635a5d961cdcfe4ce8b0408140a52"
+          }
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "PhysX",
+      "solver": "pending qualification",
+      "runtime_path": "ManiSkill / SAPIEN",
+      "version": "official combination pending #47",
+      "groups": [
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "push": {
+          "state": "blocked",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "blocked",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "pending qualification",
+      "runtime_path": "native",
+      "version": "pending #117",
+      "groups": [
+        "rigid",
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/117"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / implicitfast",
+      "runtime_path": "native",
+      "version": "3.14.0",
+      "groups": [
+        "manipulation"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.md",
+          "evidence": {
+            "path": "demos/cloth-folding/SETTLING.md",
+            "sha256": "cc764c64aff9083291e2ff0de4eeb907fc4de2fcb45906915ba9fe0bdaf3dbe6"
+          }
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton",
+      "runtime_path": "native cpu float64",
+      "version": "3.11.0",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "mujoco"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "experimental-shell",
+      "runtime_path": "native cpu float64",
+      "version": "1.0.0",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "superdex-shell"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "xpbd",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "newton-xpbd"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "vbd",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "newton-vbd"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "semi_implicit",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "newton-semi_implicit"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "featherstone",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "newton-featherstone"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "style3d",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "cloth-heldout-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "extension",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "sag": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "sag",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "drape": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "drape",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        },
+        "folded-drop": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json",
+          "counts_from": "folded-drop",
+          "evidence": {
+            "path": "demos/cloth-benchmark/evidence/heldout-v1.json",
+            "sha256": "a05722eba6c60e52fd05b8f8b7d6948d8430fbb848f3a8e119ac6c53b2c2a356"
+          }
+        }
+      },
+      "profile": "newton-style3d"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "PBD / rigid coupling",
+      "runtime_path": "native CPU FP64",
+      "version": "1.4.3",
+      "groups": [
+        "cloth",
+        "manipulation"
+      ],
+      "cohort": "genesis-cloth-diagnostic",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-cloth/heldout-plus3mm-score.json",
+            "sha256": "9d4092845046ca9b51ba09cbebbc724327a4f2c2e9f568325fc0e9f507e865af"
+          }
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "not qualified",
+      "runtime_path": "native",
+      "version": "not qualified",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "rigid-history",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "PhysX",
+      "solver": "surface cloth",
+      "runtime_path": "Isaac Sim 5.1.0.0 / IsaacLab 0.47.2",
+      "version": "core identity pending #126",
+      "groups": [
+        "cloth"
+      ],
+      "cohort": "physx-cloth-final-v2",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md",
+          "evidence": {
+            "path": "demos/physx-contact/cloth.md",
+            "sha256": "f3599ecb9d95bb56dd4a240cdc0a95ef74b9a8ebfc1ea5b6367c9b36099f85c8"
+          }
+        },
+        "sag": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md",
+          "evidence": {
+            "path": "demos/physx-contact/cloth.md",
+            "sha256": "f3599ecb9d95bb56dd4a240cdc0a95ef74b9a8ebfc1ea5b6367c9b36099f85c8"
+          }
+        },
+        "drape": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md",
+          "evidence": {
+            "path": "demos/physx-contact/cloth.md",
+            "sha256": "f3599ecb9d95bb56dd4a240cdc0a95ef74b9a8ebfc1ea5b6367c9b36099f85c8"
+          }
+        },
+        "folded-drop": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md",
+          "evidence": {
+            "path": "demos/physx-contact/cloth.md",
+            "sha256": "f3599ecb9d95bb56dd4a240cdc0a95ef74b9a8ebfc1ea5b6367c9b36099f85c8"
+          }
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / implicitfast",
+      "runtime_path": "native",
+      "version": "3.11.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "apple-sdf-14s",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md",
+          "evidence": {
+            "path": "demos/apple-stem-grasp/README.md",
+            "sha256": "00b915284da013e48900a014432e6681f7a1706e2bd52cafca152f1fd221a881"
+          }
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "Newton / GMRES / FP64",
+      "runtime_path": "native",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "apple-sdf-14s",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "passed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md",
+          "evidence": {
+            "path": "demos/apple-stem-grasp/README.md",
+            "sha256": "00b915284da013e48900a014432e6681f7a1706e2bd52cafca152f1fd221a881"
+          }
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    }
+  ]
+}

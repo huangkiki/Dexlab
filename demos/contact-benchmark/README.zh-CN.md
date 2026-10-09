@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | [English](README.md)
 
+历史配置归因见[分批求解器与版本审计](../../docs/physx-solver-audit.zh-CN.md)：区分原生场景读回、源码／报告中的 TGS 配置和缺失字段；[P0 #126](https://github.com/huangkiki/Dexlab/issues/126) 保留同期核心／加载库身份缺口。
+
 三个 UniLab 任务分别测量平面滑动、法向压入/卸载、双指夹圆柱的载荷变化与释放。MuJoCo 3.11.0、SuperDex 1.0.0 FP64 使用官方原生 API；PhysX 使用已验证的 UniSim/Isaac Sim 5.1 适配器。没有修改引擎源码或二进制。
 
 **当前是未校准的开发实验，不是正式留出结果或引擎精度排名。** 原始失败保留；已完成[合成响应—成本对照](RESPONSE_COST.zh-CN.md)及[预登记成对质量/尺寸迁移](TRANSFER.zh-CN.md)，失败全部保留。完整内部烘焙/组合律读回仍不可观测；真实材料标定属于 #6，苹果正式测试集属于 #3，#10 的整体验收仍需逐项审查。

@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+The [historical solver/version audit](../../docs/physx-solver-audit.md) separates native scene readbacks, source/report TGS profiles and missing fields; [P0 #126](https://github.com/huangkiki/Dexlab/issues/126) retains contemporaneous core/loaded-library identity gaps.
+
 Development work for [issue #5](https://github.com/huangkiki/Dexlab/issues/5).
 
 See the complete [PhysX SDF grasp](apple.md) for sustained robot holding and independent surface checks. The primitive protocol remains below.

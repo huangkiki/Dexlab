@@ -9,9 +9,45 @@ from types import SimpleNamespace
 
 SCRIPTS = Path(__file__).parents[1] / 'scripts'
 sys.path.insert(0, str(SCRIPTS))
-from bounded_run import verify_limits, verify_headroom, verify_service, main
+from bounded_run import (verify_limits, verify_headroom, verify_service, main,
+                         select_profile, freeze_resources, pressure, PROFILES)
 from archive_run import record_stage
 sys.path.pop(0)
+
+
+class AdaptiveResourceTests(unittest.TestCase):
+    def test_smallest_tier_reserves_fifty_percent_above_peak(self):
+        self.assertEqual(select_profile(), 'adaptive-16g-4c')
+        self.assertEqual(select_profile(complex_model=True), 'adaptive-24g-4c')
+        for peak_gib, tier in ((4, 8), (8, 16), (12, 24), (17, 32), (24, 40)):
+            self.assertEqual(select_profile(peak_gib * 1024, cores=8), f'adaptive-{tier}g-8c')
+        for peak in (0, -1, float('inf'), float('nan'), 28 * 1024):
+            with self.assertRaises(ValueError):
+                select_profile(peak)
+        self.assertEqual(PROFILES['experiment']['cpu'], 200)
+        self.assertEqual(PROFILES['experiment-24g']['memory'], 24576)
+
+    def test_batch_restart_reuses_plan_but_cannot_change_resources(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            receipt = root / 'prior.json'
+            receipt.write_text(json.dumps({'telemetry': {'final': {'memory.peak': str(12 * 1024**3)}}}))
+            path = root / 'batch.json'
+            plan = freeze_resources(path, receipt)
+            self.assertEqual(plan['profile'], 'adaptive-24g-4c')
+            original = path.read_bytes()
+            self.assertEqual(freeze_resources(path, receipt), plan)
+            with self.assertRaisesRegex(ValueError, 'frozen'):
+                freeze_resources(path, receipt, cores=8)
+            self.assertEqual(path.read_bytes(), original)
+            receipt.write_text('{}')
+            with self.assertRaises(KeyError):
+                freeze_resources(root / 'missing.json', receipt)
+            self.assertFalse((root / 'missing.json').exists())
+
+    def test_missing_pressure_is_not_zero(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.assertTrue(all(value is None for value in pressure(Path(directory)).values()))
 
 
 class EffectiveLimitTests(unittest.TestCase):

@@ -8,6 +8,88 @@ We use inclined-plane friction, one-dimensional collisions and pinch experiments
 
 The documentation site updates on every merge to main, with findings, matched comparisons and six-engine coverage on the homepage.
 
+## What tasks can I run?
+
+Choose a task entry point, then use its documented protocol, environment and results. This table describes **implementations with retained DexLab evidence**. “Executed” includes failures; a pass applies only to the reported version, configuration and cases.
+
+| Task | Implemented engines and validation | Run and evidence entry points |
+|---|---|---|
+| Inclined-plane friction and one-dimensional impact | MuJoCo / SuperDex have paired incline cases, including failures; MuJoCo has recorded impact experiments | [Incline comparison](docs/incline-comparison-results.md) · [Impact](docs/elastic-impact-results.md) |
+| Plane sliding, normal loading / unloading, and cylinder pinch | MuJoCo / SuperDex / PhysX development cases executed, retaining failures and geometry refinement | [Contact experiments and commands](demos/contact-benchmark/README.md) |
+| Finite-fixture pinch, lift, hold and release | Genesis completed 16 force-limit cases for studying drive limits and failure mechanisms | [Force-limit results and reproduction](docs/force-limit-results.md) |
+| Robot SDF apple-stem grasp | MuJoCo / SuperDex passed the specified 14 s scene; PhysX has separate single-scene acceptance with its own configuration and preparation chain | [MuJoCo / SuperDex](demos/apple-stem-grasp/README.md) · [PhysX](demos/physx-contact/apple.md) |
+| Cloth extension, sag, sphere draping and pre-folded drop | MuJoCo flex / SuperDex shell / Newton Physics have historical experiments, including failures; PhysX surface cloth has separate passive cases, without per-node-force extension support | [Cloth benchmark](demos/cloth-benchmark/README.md) · [PhysX scope](demos/physx-contact/cloth.md) |
+| Robot cloth grasp, lift and release | One specified 9 s MuJoCo 3.14 development case passed the limited protocol; self-contact is near the threshold and robustness remains unproven | [Passing configuration, failures and commands](demos/cloth-folding/SETTLING.md) |
+| Basic rigid sphere–plane contact | Newton Physics 1.6.1 / XPBD normal, repeat and collision-disabled controls passed admission; robot grasping is outside this test | [Protocol, records and verification](docs/newton-contact.md) |
+
+Two-hand cloth folding has an experimental entry point but no demonstrated success. Drake has no accepted task yet, and the new MuJoCo / Genesis unified-drive campaign is not admitted. Follow the [folding records](demos/cloth-folding/README.md), [#117](https://github.com/huangkiki/Dexlab/issues/117) and [#130](https://github.com/huangkiki/Dexlab/issues/130) / [#143](https://github.com/huangkiki/Dexlab/issues/143), respectively.
+
+**Our assessment standard: a better engine should reliably cover more types of tasks.** We assess task types alongside physical credibility, stability across conditions and execution cost. Reliably completing more task types under retained criteria expands a configuration's validated scope. Installation, adapter declarations, multiple solvers for one task and repeated runs do not add task types; pass counts from different historical protocols do not form a universal ranking.
+
+## Task coverage by solver
+
+<!-- task-coverage:start -->
+
+States: passed / partial / failed / not run / blocked / unsupported. Cells link to evidence or recovery conditions.
+
+**Historical protocols remain separate; a pass applies only to its protocol.** Reliable coverage under the new protocol requires positive and negative cases, independent physics scoring, frozen holdouts and equal tuning budgets.
+
+### Rigid tasks · historical protocols
+
+| Core / solver / path / version / cohort | Basic contact | Incline | Collision | Fixture pinch | Robot grasp |
+| --- | --- | --- | --- | --- | --- |
+| **MuJoCo · Newton / Euler**<br>native · 3.15.0<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) | [Partial](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md) | [Partial](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **SuperDex · Newton / AUTO / FP64**<br>native · 1.0.0<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · Newton / approximate_implicitfast**<br>native CPU FP64 · 1.4.3<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Passed](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Newton Physics · XPBD**<br>native CPU FP32 · 1.6.1 / Warp 1.18.0<br>rigid-history | [Passed](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · historical readback incomplete (#126)**<br>SDK historical · core identity pending #126<br>rigid-history | [Partial](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Drake · pending qualification**<br>native · pending #117<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/117) | [Not run](https://github.com/huangkiki/Dexlab/issues/117) | [Not run](https://github.com/huangkiki/Dexlab/issues/117) | [Not run](https://github.com/huangkiki/Dexlab/issues/117) | [Not run](https://github.com/huangkiki/Dexlab/issues/117) |
+| **MuJoCo · Newton / implicitfast**<br>native · 3.11.0<br>apple-sdf-14s | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Passed](https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md) |
+| **SuperDex · Newton / GMRES / FP64**<br>native · 1.0.0<br>apple-sdf-14s | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Passed](https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md) |
+
+### Manipulation · historical protocols and gaps
+
+| Core / solver / path / version / cohort | Pushing | In-hand rotation | Cloth grasp/lift | Active folding |
+| --- | --- | --- | --- | --- |
+| **MuJoCo · Newton / Euler**<br>native · 3.15.0<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **SuperDex · Newton / AUTO / FP64**<br>native · 1.0.0<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **Genesis · Newton / approximate_implicitfast**<br>native CPU FP64 · 1.4.3<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **Newton Physics · XPBD**<br>native CPU FP32 · 1.6.1 / Warp 1.18.0<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **PhysX · pending qualification**<br>ManiSkill / SAPIEN · official combination pending #47<br>rigid-history | [Blocked](https://github.com/huangkiki/Dexlab/issues/47) | [Blocked](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **Drake · pending qualification**<br>native · pending #117<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **MuJoCo · Newton / implicitfast**<br>native · 3.14.0<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Passed](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **Genesis · PBD / rigid coupling**<br>native CPU FP64 · 1.4.3<br>genesis-cloth-diagnostic | [Not run](https://github.com/huangkiki/Dexlab/issues/47) | [Not run](https://github.com/huangkiki/Dexlab/issues/48) | [Failed](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+
+### Cloth tasks · separate historical protocols
+
+| Core / solver / path / version / cohort | Extension | Sag | Sphere drape | Folded drop |
+| --- | --- | --- | --- | --- |
+| **MuJoCo · Newton**<br>native cpu float64 · 3.11.0<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **SuperDex · experimental-shell**<br>native cpu float64 · 1.0.0<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Partial 3/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **Newton Physics · xpbd**<br>native cpu float32 · 1.7.0.dev0 @ 2dee3234<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **Newton Physics · vbd**<br>native cpu float32 · 1.7.0.dev0 @ 2dee3234<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **Newton Physics · semi_implicit**<br>native cpu float32 · 1.7.0.dev0 @ 2dee3234<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **Newton Physics · featherstone**<br>native cpu float32 · 1.7.0.dev0 @ 2dee3234<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **Newton Physics · style3d**<br>native cpu float32 · 1.7.0.dev0 @ 2dee3234<br>cloth-heldout-v1 | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Passed 4/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Failed 0/4](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) | [Partial 1/3](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json) |
+| **Genesis · PBD / rigid coupling**<br>native CPU FP64 · 1.4.3<br>genesis-cloth-diagnostic | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **Drake · not qualified**<br>native · not qualified<br>rigid-history | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) | [Not run](https://github.com/huangkiki/Dexlab/issues/28) |
+| **PhysX · surface cloth**<br>Isaac Sim 5.1.0.0 / IsaacLab 0.47.2 · core identity pending #126<br>physx-cloth-final-v2 | [Unsupported](https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md) | [Passed](https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md) | [Partial](https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md) | [Passed](https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/cloth.md) |
+
+**Reliable coverage under the new protocol: not yet qualified.** Existing capabilities remain valid within their original protocols; historical runs are not retroactively admitted.
+
+Cloth counts are recomputed from 105 historical summaries, not rescored trajectories. Featherstone cloth uses semi-implicit particle kernels; folded drop is not active folding. Missing runs do not establish lack of support.
+
+[Inventory and generation rules](https://github.com/huangkiki/Dexlab/blob/main/docs/task-coverage.md)
+
+<!-- task-coverage:end -->
+
+Genesis 1.4.3 PBD actuated cloth clamping/holding was run and failed; see the [retained negative results](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md). Its plane support, stretch/bend response and connected-fold diagnostics are different from the seven-profile shared cloth holdout protocol.
+
+
+The [coverage-first development plan](https://github.com/huangkiki/Dexlab/blob/main/docs/task-coverage.md) proceeds through migration discrepancies, independent engine baselines, native MJWarp/Isaac Sim comparisons, then pushing, rotation and cloth. The 594-case pinch study advances between newly delivered task types. Native paths use latest stable cores; frameworks use official compatible combinations, with matched-core attribution studied separately.
+
+A 24-process native diagnostic isolated batched parameter storage as the low-force discrepancy factor. The subsequent storage-aligned comparison passed all 19 pairs and 12 exact reset replays across 38 launches / 56 episodes, at unchanged thresholds. The six earlier failed pairs and low-force grasp failures remain recorded. This result covers the disclosed Genesis 1.4.3 / local adapter patch combination and adds no task type. [Cause, evidence and reproduction](docs/unisim-contact-migration.md) · [#143](https://github.com/huangkiki/Dexlab/issues/143).
+
 ## Engines, solvers and versions
 
 This table distinguishes **available evidence** from **matched-case comparisons**. Results from different tasks or versions do not form a single ranking. Versions are those actually used in the cited reports, not a claim about the latest release.
@@ -16,12 +98,12 @@ This table distinguishes **available evidence** from **matched-case comparisons*
 |---|---|---|
 | MuJoCo 3.15.0 | Newton solver; Euler integration; elliptic friction cone; 100 iterations maximum, tolerance 1e-10 | Nine paired incline cases below, plus collision and pinch diagnostics |
 | SuperDex 1.0.0 FP64 | Same-byte reconstruction: Newton, linear AUTO (dense LDLᵀ on the small-system source path), C1-regularized friction; historical readback: Backward Euler, 100 iterations, absolute/relative tolerance 1e-9. [Evidence and historical telemetry gap #124](docs/superdex-solver-audit.md) | Nine paired incline cases below; [frozen configuration](docs/evidence/incline-comparison/manifest.json) |
-| Genesis 1.4.3 CPU FP64 | Recorded configuration: elliptic cone and noslip_iterations=0; open audit of the solver used: [P0 #125](https://github.com/huangkiki/Dexlab/issues/125) | [16 force-limit cases](docs/force-limit-results.md), not part of the paired incline cohort |
+| Genesis 1.4.3 CPU FP64 | Historical configuration: Newton / approximate_implicitfast / elliptic, noslip=0; [source resolution and historical effective-settings gap #125](docs/genesis-solver-audit.md) | [16 force-limit cases](docs/force-limit-results.md), not part of the paired incline cohort |
 | Newton Physics 1.6.1 / Warp 1.18.0 | CPU SolverXPBD, float32; 4 iterations, dt=1 ms | [Sphere–plane and negative controls](docs/newton-contact.md), not a grasp comparison |
-| PhysX (historical Isaac Sim 5.1 / UniSim 1.7.10 integration) | Open audit of historical native versions and solver profiles: [P0 #126](https://github.com/huangkiki/Dexlab/issues/126); host version is not PhysX version | [Historical contact experiments](demos/contact-benchmark/README.md); outside the paired cohort below |
+| PhysX (historical Isaac Sim 5.1; UniSim and direct SDK paths) | Three SDK controls read back PGS/TGS and force timing; surface cloth is separate. [Cohort audit and native-core identity gap #126](docs/physx-solver-audit.md) | [Historical contact experiments](demos/contact-benchmark/README.md); outside the paired cohort below |
 | Drake | No accepted runtime version or solver results yet | Integration and first evaluation: [#117](https://github.com/huangkiki/Dexlab/issues/117) |
 
-Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. SuperDex package identity and configuration reconstruction are verified; [#124](https://github.com/huangkiki/Dexlab/issues/124) retains the historical execution-telemetry gap. Genesis and PhysX provenance remain P0 work. Reconstruction, source inference and historical native readback are labeled separately.
+Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. SuperDex package identity/configuration reconstruction and Genesis historical solver enums are verified; [#124](https://github.com/huangkiki/Dexlab/issues/124) and [#125](https://github.com/huangkiki/Dexlab/issues/125) retain historical readback gaps, while PhysX has three recovered native scene-solver readbacks and [#126](https://github.com/huangkiki/Dexlab/issues/126) retains cohort core/library identities and remaining missing readbacks. Reconstruction, source inference and historical native readback are labeled separately.
 
 Future evaluations must cover **MuJoCo, SuperDex, Genesis, Newton Physics, PhysX and Drake**, including applicable registered solver profiles. Every report lists the complete case matrix: passed, failed, blocked, unsupported or not run; missing cells link to Issues, and incomplete coverage is reported only as an interim result. Historical findings retain their original scope. ManiSkill/SAPIEN/Isaac Sim integration layers and the UniLab task layer are not extra physics engines; Newton Physics is also distinct from MuJoCo's Newton algorithm.
 
@@ -75,7 +157,17 @@ Each finding applies to the engine version, model and conditions frozen in its r
 
 [Development roadmap](docs/pinch-boundary-roadmap.md) · [Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [Research tracker](https://github.com/huangkiki/Dexlab/issues/130)
 
-The plan is adopted; the protocol and formal campaign are not yet delivered. After public-evidence P0 work, develop the common fixture/external PD, qualify two backends, validate independent scoring, then acquire 594 formal episodes plus 24 controls. Retain six-engine gaps and the scope of historical evidence.
+[Common protocol and data contract v1](docs/pinch-boundary-protocol.md) now defines the finite fixture, 1 ms external-PD clock, 594 formal cases, 24 controls and up to 32 qualification/bridge cases, with case expansion and record-shape checks. Backend qualification and independent scoring are next; no backend is admitted and no formal campaign has run. Six-engine gaps and historical evidence scope remain explicit.
+
+## Learn the engines: Sim Atlas
+
+The **[Sim Atlas learning home](https://github.com/huangkiki/sim-atlas)** provides the two-track map, shared foundations and six-engine navigation. Each engine has a separate learning repository, with application and principles/source tracks covering modeling, state and time, control, contact solvers, sensing, rendering, parallelism and extensions.
+
+The [GitHub Projects tracker](https://github.com/users/huangkiki/projects/2) organizes all six repositories by engine, learning track and stage, with board and curriculum-table views.
+
+[MuJoCo Atlas](https://github.com/huangkiki/mujoco-atlas) · [SuperDex Atlas](https://github.com/huangkiki/superdex-atlas) · [Genesis Atlas](https://github.com/huangkiki/genesis-atlas) · [Newton Atlas](https://github.com/huangkiki/newton-atlas) · [PhysX Atlas](https://github.com/huangkiki/physx-atlas) · [Drake Atlas](https://github.com/huangkiki/drake-atlas)
+
+Initial guides and pinned source maps are available; the full course is in development. This phase focuses on understanding engine mechanisms. Later experiments will reuse DexLab with their original versions, configurations and workloads. Course progress is tracked separately from the experimental coverage above.
 
 ## Start here
 

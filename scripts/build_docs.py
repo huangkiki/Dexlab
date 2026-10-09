@@ -13,6 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'docs/_build/html')
     args = parser.parse_args()
+    subprocess.run([sys.executable, str(ROOT / 'scripts/task_coverage.py'), '--check'], check=True)
     output = args.output.resolve()
     source = ROOT / 'docs/site'
     for directory, language, route in [('zh', 'zh_CN', 'zh-cn'), ('en', 'en', 'en')]:
