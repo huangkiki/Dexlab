@@ -110,3 +110,7 @@ Research ledger <research-ledger>
 Benchmark <benchmark>
 Contributing <contributing>
 ```
+
+## Learn the engines: Sim Atlas
+
+The [Sim Atlas learning home](https://github.com/huangkiki/sim-atlas) organizes application and physics/source tracks for six engines, shared foundations and their course repositories. The [project tracker](https://github.com/users/huangkiki/projects/2) records actual development progress. Courses currently focus on engine mechanisms; later cases reuse DexLab versions, workloads and evidence. Course completion and experimental coverage are tracked separately.
