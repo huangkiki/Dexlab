@@ -1,0 +1,122 @@
+{
+  "checked_at": "2026-10-09T20:23:08.881360+00:00",
+  "searched": [
+    "Issue #121 body/comments",
+    "Current repository incline manifests and reports",
+    "All current GitHub release asset metadata",
+    "Published paired-incline-raw-v1.zip member list and hashes"
+  ],
+  "paired_archive_sha256": "9c0e86425ec03c6d045d5db5a2282310216fa892c7677deb317e9ce306504079",
+  "paired_archive_engines": [
+    "mujoco",
+    "superdex"
+  ],
+  "other_incline_cohorts": {
+    "incline-friction": "MuJoCo",
+    "incline-diagnosis": "MuJoCo"
+  },
+  "historical_genesis": [
+    "joint/cone/pinch/cost experiments; different tasks and protocols"
+  ],
+  "decision": "No compatible nine-case Genesis incline record found in these sources; new native acquisition, no historical telemetry replacement",
+  "release_asset_candidates": [
+    {
+      "tag": "v0.51.0",
+      "name": "dexlab-superdex-incline-v1.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.51.0/dexlab-superdex-incline-v1.tar.gz",
+      "size": 146922047,
+      "digest": "sha256:f44c2f5d608a256b524e8a536978181ce11497b5f9b37799d8049d4baec4689e"
+    },
+    {
+      "tag": "v0.51.0",
+      "name": "superdex-incline-scores.json",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.51.0/superdex-incline-scores.json",
+      "size": 190051,
+      "digest": "sha256:d559245b58ad4b8297c6543b0298ea2e376f9e4d34f1d715e6d0d899be59f66f"
+    },
+    {
+      "tag": "v0.50.0",
+      "name": "dexlab-mujoco-incline-v1-evidence2.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.50.0/dexlab-mujoco-incline-v1-evidence2.tar.gz",
+      "size": 42164529,
+      "digest": "sha256:d6c38604d3b3110f58a98dfd82f9938133d4365c4f8391dfcd1acb31564cb13b"
+    },
+    {
+      "tag": "v0.50.0",
+      "name": "mujoco-incline-scores.json",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.50.0/mujoco-incline-scores.json",
+      "size": 132330,
+      "digest": "sha256:6fc23554b72df604921ee585b23a985c02d94444e28b8e7ad3f83a8dfa9eb8f2"
+    },
+    {
+      "tag": "v0.49.0",
+      "name": "dexlab-drake-incline-v2.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz",
+      "size": 5443305,
+      "digest": "sha256:1e0b882f6684a0ac9ed847a2a0f29b2513ba4af26eb0476e79890f2852cb1450"
+    },
+    {
+      "tag": "v0.46.0",
+      "name": "paired-incline-raw-v1.zip",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.46.0/paired-incline-raw-v1.zip",
+      "size": 6578616,
+      "digest": "sha256:9c0e86425ec03c6d045d5db5a2282310216fa892c7677deb317e9ce306504079"
+    },
+    {
+      "tag": "v0.43.1",
+      "name": "incline-diagnosis-raw-v1.zip",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.43.1/incline-diagnosis-raw-v1.zip",
+      "size": 2612632,
+      "digest": "sha256:747fbfe94d0b0e3413a47a4d797089fe814bb964205b73e08df5188cef7a4849"
+    },
+    {
+      "tag": "v0.43.1",
+      "name": "incline-diagnosis-results.json",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.43.1/incline-diagnosis-results.json",
+      "size": 23765,
+      "digest": "sha256:f44956e240acd402f4a13eea7afb2b48d7b22779d4d1ef474fba131ec94a5ee8"
+    },
+    {
+      "tag": "v0.43.0",
+      "name": "incline-friction-raw-v1.zip",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.43.0/incline-friction-raw-v1.zip",
+      "size": 4542512,
+      "digest": "sha256:6b865ef7ab31d7b919f97a567ab31dc745497babb1249e5114c8bc9a99e72616"
+    },
+    {
+      "tag": "v0.43.0",
+      "name": "incline-results.json",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.43.0/incline-results.json",
+      "size": 33703,
+      "digest": "sha256:3782f450119a59e58bb58cea661889bdfb7feb09256b354bee4f29a1afe64f25"
+    },
+    {
+      "tag": "v0.34.0",
+      "name": "genesis-cost-evidence-v1.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.34.0/genesis-cost-evidence-v1.tar.gz",
+      "size": 24814557,
+      "digest": "sha256:a068263a4edc3e81de53f4379011b71e05296cdada97d7d0e4754c4d45e521e2"
+    },
+    {
+      "tag": "v0.31.0",
+      "name": "genesis-pinch-evidence-v1.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.31.0/genesis-pinch-evidence-v1.tar.gz",
+      "size": 29762844,
+      "digest": "sha256:98cc0d3ec9572d26e06e28d1f8e0b46aaa6efb0390d90b98a35254ce2d57e96e"
+    },
+    {
+      "tag": "v0.30.0",
+      "name": "genesis-joint-evidence-v1.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.30.0/genesis-joint-evidence-v1.tar.gz",
+      "size": 1126996,
+      "digest": "sha256:5f93fdf18a6938a6d989fc40c728bf01db52d7a5207090bc5ee2df3134029a16"
+    },
+    {
+      "tag": "v0.29.0",
+      "name": "genesis-cone-evidence-v1.tar.gz",
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/v0.29.0/genesis-cone-evidence-v1.tar.gz",
+      "size": 406767,
+      "digest": "sha256:837d87034269f0a257c24252d4a2339e95d65584b60ef5e683b981c09c0a5f33"
+    }
+  ]
+}

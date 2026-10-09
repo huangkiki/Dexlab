@@ -371,6 +371,69 @@
     },
     "superdex-incline-cuda-unavailable-v1": {
       "scope": "Official CPU wheel rejects CUDA solver selection before time advancement; not an engine-wide absence claim."
+    },
+    "genesis-incline-v1-newton-elliptic-signorini": {
+      "scope": "Initial native analytic qualification; all failures retained, no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+        "sha256": "a52cbceca63d9de7b3e97bf020b9abf1552bb9f9fbcf2321c91e90aa1d46e9e2"
+      },
+      "protocol": {
+        "path": "docs/evidence/genesis-incline/profiles/newton-elliptic-signorini.json",
+        "sha256": "812637712f5829e82c1741f785fc24d24e6702e5bd0b2f40cc924d061f8dffa4"
+      },
+      "profile": "newton-elliptic-signorini"
+    },
+    "genesis-incline-v1-newton-elliptic-convex": {
+      "scope": "Initial native analytic qualification; all failures retained, no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/genesis-incline/newton-elliptic-convex-score.json",
+        "sha256": "e938fb75c7ad87446eaf7823a3af86717e933ccd731b275ce8f6988aca600b42"
+      },
+      "protocol": {
+        "path": "docs/evidence/genesis-incline/profiles/newton-elliptic-convex.json",
+        "sha256": "b0576ac9e01fcbde11850f1f0fa7b29098bd45b5eea862c9ffdde8868d3f3138"
+      },
+      "profile": "newton-elliptic-convex"
+    },
+    "genesis-incline-v1-newton-pyramidal-convex": {
+      "scope": "Initial native analytic qualification; all failures retained, no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/genesis-incline/newton-pyramidal-convex-score.json",
+        "sha256": "0087e0ad79fbf04b2013ed58072a7f0cd6aa1a140856a95510008846fbce3d67"
+      },
+      "protocol": {
+        "path": "docs/evidence/genesis-incline/profiles/newton-pyramidal-convex.json",
+        "sha256": "0217ad78247ea4cef621e92a1ee471821ca566a1e8436ef4fee00e8a890b6829"
+      },
+      "profile": "newton-pyramidal-convex"
+    },
+    "genesis-incline-v1-cg-elliptic-convex": {
+      "scope": "Initial native analytic qualification; all failures retained, no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/genesis-incline/cg-elliptic-convex-score.json",
+        "sha256": "11876e3381e293a43c79ed72326d023064a120cc3fa387d27fd9c3df87ecb675"
+      },
+      "protocol": {
+        "path": "docs/evidence/genesis-incline/profiles/cg-elliptic-convex.json",
+        "sha256": "4ec0bd0862537fc6b20478fbfc25fceac085d7de9af934fb8f325641309bdc69"
+      },
+      "profile": "cg-elliptic-convex"
+    },
+    "genesis-incline-v1-cg-pyramidal-convex": {
+      "scope": "Initial native analytic qualification; all failures retained, no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/genesis-incline/cg-pyramidal-convex-score.json",
+        "sha256": "8489793f1b813792ac369394ea9192a0377a917405ec768e786c3f79e474bac7"
+      },
+      "protocol": {
+        "path": "docs/evidence/genesis-incline/profiles/cg-pyramidal-convex.json",
+        "sha256": "70b64a49d30f76be67173bf4656ff23ae2476aca456c14b182766191c669d563"
+      },
+      "profile": "cg-pyramidal-convex"
+    },
+    "genesis-signorini-unsupported-v1": {
+      "scope": "Official API rejects these solver/cone/Signorini combinations before stepping."
     }
   },
   "rows": [
@@ -3497,6 +3560,560 @@
           "evidence": {
             "path": "docs/evidence/superdex-incline/unsupported.json",
             "sha256": "7658fc56d80ed25b13dbf948287f34932faf60e3589b7e54b26450fab257ce77"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / elliptic / signorini / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-incline-v1-newton-elliptic-signorini",
+      "profile": "newton-elliptic-signorini",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+            "sha256": "a52cbceca63d9de7b3e97bf020b9abf1552bb9f9fbcf2321c91e90aa1d46e9e2"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / elliptic / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-incline-v1-newton-elliptic-convex",
+      "profile": "newton-elliptic-convex",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/newton-elliptic-convex-score.json",
+            "sha256": "e938fb75c7ad87446eaf7823a3af86717e933ccd731b275ce8f6988aca600b42"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / pyramidal / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-incline-v1-newton-pyramidal-convex",
+      "profile": "newton-pyramidal-convex",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/newton-pyramidal-convex-score.json",
+            "sha256": "0087e0ad79fbf04b2013ed58072a7f0cd6aa1a140856a95510008846fbce3d67"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / elliptic / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-incline-v1-cg-elliptic-convex",
+      "profile": "cg-elliptic-convex",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/cg-elliptic-convex-score.json",
+            "sha256": "11876e3381e293a43c79ed72326d023064a120cc3fa387d27fd9c3df87ecb675"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / pyramidal / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-incline-v1-cg-pyramidal-convex",
+      "profile": "cg-pyramidal-convex",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/cg-pyramidal-convex-score.json",
+            "sha256": "8489793f1b813792ac369394ea9192a0377a917405ec768e786c3f79e474bac7"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / pyramidal / Signorini",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-signorini-unsupported-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/unsupported.json",
+            "sha256": "e79e8615125542e64cd6b30e186c421faa6a6b625287247d0a01f5152d5af8cf"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / elliptic / Signorini",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-signorini-unsupported-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/unsupported.json",
+            "sha256": "e79e8615125542e64cd6b30e186c421faa6a6b625287247d0a01f5152d5af8cf"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / pyramidal / Signorini",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "genesis-signorini-unsupported-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/genesis-incline/unsupported.json",
+            "sha256": "e79e8615125542e64cd6b30e186c421faa6a6b625287247d0a01f5152d5af8cf"
           }
         },
         "collision": {

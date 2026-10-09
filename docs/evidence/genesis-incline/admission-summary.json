@@ -1,0 +1,28 @@
+{
+  "profiles": 5,
+  "zero_duration_admissions": 50,
+  "unsupported_profiles": 3,
+  "failed_setup_attempts": [
+    {
+      "attempt": "inspection-v1",
+      "reason": "Incorrect private sim attribute in inspection; zero physics"
+    },
+    {
+      "attempt": "admission-v1",
+      "reason": "Native NumPy boolean required scalar JSON conversion; zero physics"
+    },
+    {
+      "attempt": "admission-v2",
+      "reason": "Single-world friction-ratio readback has no batch axis; zero physics"
+    },
+    {
+      "attempt": "admission-v3",
+      "reason": "All-zero collision filters remove plane geometry; zero physics"
+    },
+    {
+      "attempt": "admission-v4",
+      "reason": "No eligible negative pair resolves max_contacts to 0; zero physics"
+    }
+  ],
+  "acceptance": "All final expected options, masks and static configurations frozen before positive physics; prior failures retained."
+}

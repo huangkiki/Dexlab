@@ -1,0 +1,317 @@
+{
+  "state": [
+    0.0,
+    0.005176380902050415,
+    0.0,
+    0.019318516525781367,
+    0.9914448613738105,
+    -1.1102230246251565e-16,
+    0.13052619222005168,
+    1.1102230246251565e-16,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "options": {
+    "dt": 0.002,
+    "gravity": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "enable_collision": true,
+    "enable_joint_limit": true,
+    "enable_self_collision": true,
+    "enable_neutral_collision": false,
+    "enable_adjacent_collision": false,
+    "disable_constraint": false,
+    "max_collision_pairs": 150,
+    "max_contacts": 5,
+    "multiplier_collision_broad_phase": 8,
+    "integrator": 2,
+    "IK_max_targets": 6,
+    "batch_links_info": true,
+    "batch_joints_info": false,
+    "batch_dofs_info": true,
+    "constraint_solver": 1,
+    "iterations": 100,
+    "tolerance": 1e-09,
+    "ls_iterations": 50,
+    "ls_tolerance": 0.01,
+    "noslip_iterations": 0,
+    "noslip_tolerance": 1e-06,
+    "friction_cone": 1,
+    "contact_resolution": 1,
+    "enable_torsional_friction": false,
+    "enable_rolling_friction": false,
+    "impratio": 100.0,
+    "contact_pruning_tolerance": 0.02,
+    "sparse_solve": null,
+    "constraint_timeconst": 0.02,
+    "box_box_detection": false,
+    "use_hibernation": false,
+    "hibernation_thresh_vel": null,
+    "max_dynamic_constraints": 8,
+    "enable_multi_contact": true,
+    "enable_mujoco_compatibility": false,
+    "use_gjk_collision": false,
+    "enable_contact_patch": false,
+    "broadphase_traversal": null
+  },
+  "sim_options": {
+    "dt": 0.002,
+    "substeps": 1,
+    "substeps_local": 1,
+    "gravity": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "floor_height": 0.0,
+    "requires_grad": false
+  },
+  "static_config": {
+    "backend": 0,
+    "para_level": 0,
+    "enable_collision": true,
+    "use_hibernation": false,
+    "batch_links_info": true,
+    "batch_dofs_info": true,
+    "batch_joints_info": false,
+    "enable_mujoco_compatibility": false,
+    "enable_elliptic_friction": true,
+    "enable_signorini_contact": true,
+    "enable_multi_contact": true,
+    "enable_joint_limit": true,
+    "box_box_detection": false,
+    "sparse_solve": false,
+    "integrator": 2,
+    "solver_type": 1,
+    "requires_grad": false,
+    "prefer_decomposed_solver": 0,
+    "enable_cone_free_hessian_reuse": false,
+    "enable_torsional_friction": false,
+    "enable_rolling_friction": false,
+    "hibernation_min_steps": 10,
+    "parallel_init": false,
+    "enable_level_sweep": false,
+    "level_sweep_n_lanes_per_env": 8,
+    "broadphase_traversal": 0,
+    "enable_tiled_cholesky_mass_matrix": false,
+    "mass_matrix_fits_shared": false,
+    "cholesky_tile_size": 32,
+    "enable_register_tiled_mass": false,
+    "enable_tiled_island_seed": false,
+    "is_single_island": true,
+    "has_scalar_seed_factor": false,
+    "enable_cooperative_constraint_kernels": false,
+    "enable_cooperative_noslip": false,
+    "constraint_layout_batch_first": true,
+    "enable_jacobi_equilibration": false,
+    "tiled_n_dofs_per_block": -1,
+    "island_tile_cap_first": 0,
+    "island_tile_cap_last": 0,
+    "has_island_above_tile_cap": false
+  },
+  "n_envs": 0,
+  "n_dofs": 6,
+  "n_geoms": 2,
+  "mass": [
+    0.06400000000000002
+  ],
+  "com": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "inertia": [
+    [
+      [
+        1.7066666666666674e-05,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.7066666666666674e-05,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.7066666666666674e-05
+      ]
+    ]
+  ],
+  "geom_parameters": [
+    {
+      "id": 0,
+      "type": 0,
+      "data": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quat": [
+        0.9914448613738105,
+        -1.1102230246251565e-16,
+        0.13052619222005168,
+        0.0
+      ],
+      "friction": 0.5,
+      "sol_params": [
+        0.02,
+        1.0,
+        0.9,
+        0.9,
+        0.001,
+        0.5,
+        2.0
+      ],
+      "contype": 65535,
+      "conaffinity": 65535
+    },
+    {
+      "id": 1,
+      "type": 5,
+      "data": [
+        0.04,
+        0.04,
+        0.04,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pos": [
+        0.005176380902050415,
+        0.0,
+        0.019318516525781367
+      ],
+      "quat": [
+        0.9914448613738105,
+        -1.1102230246251565e-16,
+        0.13052619222005168,
+        1.1102230246251565e-16
+      ],
+      "friction": 0.5,
+      "sol_params": [
+        0.02,
+        1.0,
+        0.9,
+        0.9,
+        0.001,
+        0.5,
+        2.0
+      ],
+      "contype": 65535,
+      "conaffinity": 65535
+    }
+  ],
+  "authored_material_friction": 0.5,
+  "before_geom_setters": [
+    {
+      "id": 0,
+      "type": 0,
+      "data": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quat": [
+        0.9914448613738105,
+        -1.1102230246251565e-16,
+        0.13052619222005168,
+        0.0
+      ],
+      "friction": 0.5,
+      "sol_params": [
+        0.02,
+        1.0,
+        0.9,
+        0.95,
+        0.001,
+        0.5,
+        2.0
+      ],
+      "contype": 65535,
+      "conaffinity": 65535
+    },
+    {
+      "id": 1,
+      "type": 5,
+      "data": [
+        0.04,
+        0.04,
+        0.04,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pos": [
+        0.005176380902050415,
+        0.0,
+        0.019318516525781367
+      ],
+      "quat": [
+        0.9914448613738105,
+        -1.1102230246251565e-16,
+        0.13052619222005168,
+        1.1102230246251565e-16
+      ],
+      "friction": 0.5,
+      "sol_params": [
+        0.02,
+        1.0,
+        0.9,
+        0.95,
+        0.001,
+        0.5,
+        2.0
+      ],
+      "contype": 65535,
+      "conaffinity": 65535
+    }
+  ],
+  "friction_ratio": [
+    1.0,
+    1.0
+  ],
+  "initial_contact_count": 0,
+  "initial_errors": [
+    0
+  ],
+  "contact_capacity": 5,
+  "constraint_storage_shape": [
+    69,
+    1
+  ],
+  "solver_statistics": {
+    "achieved_iterations": null,
+    "reason": "CPU monolithic iteration loop does not persist its iteration count; graph-loop counter is not used"
+  }
+}
