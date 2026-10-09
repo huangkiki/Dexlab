@@ -81,6 +81,8 @@ Each finding applies to the engine version, model and conditions frozen in its r
 
 **Sim Atlas** provides a separate learning repository for each engine, with application and principles/source tracks covering modeling, state and time, control, contact solvers, sensing, rendering, parallelism and extensions.
 
+The [GitHub Projects tracker](https://github.com/users/huangkiki/projects/2) organizes all six repositories by engine, learning track and stage, with board and curriculum-table views.
+
 [MuJoCo Atlas](https://github.com/huangkiki/mujoco-atlas) · [SuperDex Atlas](https://github.com/huangkiki/superdex-atlas) · [Genesis Atlas](https://github.com/huangkiki/genesis-atlas) · [Newton Atlas](https://github.com/huangkiki/newton-atlas) · [PhysX Atlas](https://github.com/huangkiki/physx-atlas) · [Drake Atlas](https://github.com/huangkiki/drake-atlas)
 
 Initial guides and pinned source maps are available; the full course is in development. This phase focuses on understanding engine mechanisms. Later experiments will reuse DexLab with their original versions, configurations and workloads. Course progress is tracked separately from the experimental coverage above.

@@ -81,6 +81,8 @@
 
 **Sim Atlas · 仿真图谱** 为每个引擎提供独立学习仓库，沿应用和原理源码两条路线，讲解建模、状态与时间、控制、接触求解、传感渲染、并行与扩展。
 
+[GitHub Projects 总看板](https://github.com/users/huangkiki/projects/2) 按引擎、学习路线和阶段管理六仓任务，提供开发看板与课程总表。
+
 [MuJoCo Atlas](https://github.com/huangkiki/mujoco-atlas) · [SuperDex Atlas](https://github.com/huangkiki/superdex-atlas) · [Genesis Atlas](https://github.com/huangkiki/genesis-atlas) · [Newton Atlas](https://github.com/huangkiki/newton-atlas) · [PhysX Atlas](https://github.com/huangkiki/physx-atlas) · [Drake Atlas](https://github.com/huangkiki/drake-atlas)
 
 首批导读与固定版本源码地图已交付，完整专题仍在开发。当前先理解引擎机制，后续实验复用 DexLab 的版本、配置与工况记录。课程完成度与上方实验证据覆盖分别记录。
