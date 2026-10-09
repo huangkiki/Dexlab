@@ -177,17 +177,34 @@ def profile_key(profile):
     ).hexdigest()[:16]
 
 
+def official_json(url):
+    """Retry transient transport failures; never substitute cached qualification."""
+    import ssl
+    import time
+    from urllib.error import HTTPError, URLError
+    from urllib.request import urlopen
+
+    for attempt in range(3):
+        try:
+            with urlopen(url, timeout=30) as response:
+                return json.load(response)
+        except HTTPError:
+            raise  # Do not retry an explicit server rejection or rate limit.
+        except (URLError, ssl.SSLEOFError, TimeoutError, ConnectionError) as error:
+            if isinstance(getattr(error, 'reason', error), ssl.SSLCertVerificationError) or attempt == 2:
+                raise
+            time.sleep(attempt + 1)
+
+
 def refresh_inventory():
     """Fetch official non-yanked latest stable metadata at a new batch freeze."""
     from datetime import datetime, timezone
-    from urllib.request import urlopen
     from packaging.version import Version
 
     rows = []
     for package in PACKAGES:
         source = f"https://pypi.org/pypi/{package}/json"
-        with urlopen(source, timeout=30) as response:
-            payload = json.load(response)
+        payload = official_json(source)
         releases = [Version(version) for version, files in payload["releases"].items()
                     if files and any(not item.get("yanked", False) for item in files)
                     and not Version(version).is_prerelease
@@ -195,8 +212,7 @@ def refresh_inventory():
         if not releases:
             raise ValueError(f"No stable non-yanked release found for {package}")
         latest = str(max(releases))
-        with urlopen(f"https://pypi.org/pypi/{package}/{latest}/json", timeout=30) as response:
-            selected = json.load(response)
+        selected = official_json(f"https://pypi.org/pypi/{package}/{latest}/json")
         files = [item for item in selected["urls"] if not item.get("yanked", False)]
         if not files or Version(selected["info"]["version"]) != Version(latest):
             raise ValueError("Official release metadata changed during collection")

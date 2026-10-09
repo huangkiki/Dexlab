@@ -4,97 +4,97 @@
   "groups": [
     {
       "id": "rigid",
-      "zh": "刚体任务 · 历史协议",
-      "en": "Rigid tasks · historical protocols"
+      "zh": "\u521a\u4f53\u4efb\u52a1 \u00b7 \u5386\u53f2\u534f\u8bae",
+      "en": "Rigid tasks \u00b7 historical protocols"
     },
     {
       "id": "manipulation",
-      "zh": "操作任务 · 历史协议与缺项",
-      "en": "Manipulation · historical protocols and gaps"
+      "zh": "\u64cd\u4f5c\u4efb\u52a1 \u00b7 \u5386\u53f2\u534f\u8bae\u4e0e\u7f3a\u9879",
+      "en": "Manipulation \u00b7 historical protocols and gaps"
     },
     {
       "id": "cloth",
-      "zh": "布料任务 · 历史协议分别展示",
-      "en": "Cloth tasks · separate historical protocols"
+      "zh": "\u5e03\u6599\u4efb\u52a1 \u00b7 \u5386\u53f2\u534f\u8bae\u5206\u522b\u5c55\u793a",
+      "en": "Cloth tasks \u00b7 separate historical protocols"
     }
   ],
   "tasks": [
     {
       "id": "contact",
       "group": "rigid",
-      "zh": "基础接触",
+      "zh": "\u57fa\u7840\u63a5\u89e6",
       "en": "Basic contact"
     },
     {
       "id": "incline",
       "group": "rigid",
-      "zh": "斜面",
+      "zh": "\u659c\u9762",
       "en": "Incline"
     },
     {
       "id": "collision",
       "group": "rigid",
-      "zh": "碰撞",
+      "zh": "\u78b0\u649e",
       "en": "Collision"
     },
     {
       "id": "pinch",
       "group": "rigid",
-      "zh": "夹具夹持",
+      "zh": "\u5939\u5177\u5939\u6301",
       "en": "Fixture pinch"
     },
     {
       "id": "grasp",
       "group": "rigid",
-      "zh": "机器人抓取",
+      "zh": "\u673a\u5668\u4eba\u6293\u53d6",
       "en": "Robot grasp"
     },
     {
       "id": "push",
       "group": "manipulation",
-      "zh": "推动",
+      "zh": "\u63a8\u52a8",
       "en": "Pushing"
     },
     {
       "id": "rotation",
       "group": "manipulation",
-      "zh": "手内旋转",
+      "zh": "\u624b\u5185\u65cb\u8f6c",
       "en": "In-hand rotation"
     },
     {
       "id": "cloth-grasp",
       "group": "manipulation",
-      "zh": "夹布抬升",
+      "zh": "\u5939\u5e03\u62ac\u5347",
       "en": "Cloth grasp/lift"
     },
     {
       "id": "cloth-fold",
       "group": "manipulation",
-      "zh": "主动折布",
+      "zh": "\u4e3b\u52a8\u6298\u5e03",
       "en": "Active folding"
     },
     {
       "id": "extension",
       "group": "cloth",
-      "zh": "拉伸",
+      "zh": "\u62c9\u4f38",
       "en": "Extension"
     },
     {
       "id": "sag",
       "group": "cloth",
-      "zh": "下垂",
+      "zh": "\u4e0b\u5782",
       "en": "Sag"
     },
     {
       "id": "drape",
       "group": "cloth",
-      "zh": "球面覆盖",
+      "zh": "\u7403\u9762\u8986\u76d6",
       "en": "Sphere drape"
     },
     {
       "id": "folded-drop",
       "group": "cloth",
-      "zh": "预折叠下落",
+      "zh": "\u9884\u6298\u53e0\u4e0b\u843d",
       "en": "Folded drop"
     }
   ],
@@ -152,6 +152,78 @@
     },
     "genesis-contact-migration-v4": {
       "scope": "Native versus locally patched adapter correspondence; retains low-force physical failures, not coverage-v1."
+    },
+    "mujoco-incline-pgs-elliptic-v1": {
+      "scope": "Initial native analytic qualification; all failures retained. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+        "sha256": "330688293c34710e50ac83871ce8f019f1939a508e6cccec3902dad1b68884c3"
+      },
+      "protocol": {
+        "path": "docs/evidence/mujoco-incline/pgs-elliptic.json",
+        "sha256": "c97636ef2cb9f428102b65d2089c196cf65c64671b7c28f8b88b7949052b7f28"
+      },
+      "profile": "pgs-elliptic"
+    },
+    "mujoco-incline-pgs-pyramidal-v1": {
+      "scope": "Initial native analytic qualification; all failures retained. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/mujoco-incline/pgs-pyramidal-score.json",
+        "sha256": "bc7791969ca01d68346bce03e78c7660f55f1ecc3c54a70af8f3cc00f01aacf0"
+      },
+      "protocol": {
+        "path": "docs/evidence/mujoco-incline/pgs-pyramidal.json",
+        "sha256": "8378d0a5100ee156b0327729c801a3380ae46195e483f8adb03e0c3d1cbe4ede"
+      },
+      "profile": "pgs-pyramidal"
+    },
+    "mujoco-incline-cg-elliptic-v1": {
+      "scope": "Initial native analytic qualification; all failures retained. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/mujoco-incline/cg-elliptic-score.json",
+        "sha256": "d70ae0d0b96ed72deb131ffc97ba86970c6ec788a846d52827eff20489619e57"
+      },
+      "protocol": {
+        "path": "docs/evidence/mujoco-incline/cg-elliptic.json",
+        "sha256": "9bc25d79c43d6179c6628c1908f422ad0cc7e0efd52bff77b8ddc1f1c0ad6973"
+      },
+      "profile": "cg-elliptic"
+    },
+    "mujoco-incline-cg-pyramidal-v1": {
+      "scope": "Initial native analytic qualification; all failures retained. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/mujoco-incline/cg-pyramidal-score.json",
+        "sha256": "c34abed69f759d7af3a8d2af37c88f560fd44aaa7f2fff45e4a8d68ae6d14f7c"
+      },
+      "protocol": {
+        "path": "docs/evidence/mujoco-incline/cg-pyramidal.json",
+        "sha256": "3140ecea624fb60c3ba70458b1dd646aae59d770352c21e538e806c78db88c11"
+      },
+      "profile": "cg-pyramidal"
+    },
+    "mujoco-incline-newton-elliptic-v1": {
+      "scope": "Initial native analytic qualification; all failures retained. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/mujoco-incline/newton-elliptic-score.json",
+        "sha256": "0fd7b980926cf0052ab570418b9953e38bf48164ae202cd9311ba55cc5682578"
+      },
+      "protocol": {
+        "path": "docs/evidence/mujoco-incline/newton-elliptic.json",
+        "sha256": "fc79a9ffe6ff25226acf5f9511b32e61ab3ce3db0615013b60ba96c935132e8b"
+      },
+      "profile": "newton-elliptic"
+    },
+    "mujoco-incline-newton-pyramidal-v1": {
+      "scope": "Initial native analytic qualification; all failures retained. Not coverage-v1.",
+      "incline_score": {
+        "path": "docs/evidence/mujoco-incline/newton-pyramidal-score.json",
+        "sha256": "771e2b7e7601363ccd854c9a183e041ee5ad713dd2c5407d138aba668922de1a"
+      },
+      "protocol": {
+        "path": "docs/evidence/mujoco-incline/newton-pyramidal.json",
+        "sha256": "2a5bc0b41b0311a107841cae58987c22a2fd8d786184ea26a068ad491de74b9f"
+      },
+      "profile": "newton-pyramidal"
     }
   },
   "rows": [
@@ -229,6 +301,426 @@
         "folded-drop": {
           "state": "not-run",
           "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "PGS / elliptic / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-pgs-elliptic-v1",
+      "profile": "pgs-elliptic",
+      "groups": [
+        "rigid"
+      ],
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+            "sha256": "330688293c34710e50ac83871ce8f019f1939a508e6cccec3902dad1b68884c3"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "PGS / pyramidal / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-pgs-pyramidal-v1",
+      "profile": "pgs-pyramidal",
+      "groups": [
+        "rigid"
+      ],
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/mujoco-incline/pgs-pyramidal-score.json",
+            "sha256": "bc7791969ca01d68346bce03e78c7660f55f1ecc3c54a70af8f3cc00f01aacf0"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "CG / elliptic / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-cg-elliptic-v1",
+      "profile": "cg-elliptic",
+      "groups": [
+        "rigid"
+      ],
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/mujoco-incline/cg-elliptic-score.json",
+            "sha256": "d70ae0d0b96ed72deb131ffc97ba86970c6ec788a846d52827eff20489619e57"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "CG / pyramidal / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-cg-pyramidal-v1",
+      "profile": "cg-pyramidal",
+      "groups": [
+        "rigid"
+      ],
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/mujoco-incline/cg-pyramidal-score.json",
+            "sha256": "c34abed69f759d7af3a8d2af37c88f560fd44aaa7f2fff45e4a8d68ae6d14f7c"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / elliptic / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-newton-elliptic-v1",
+      "profile": "newton-elliptic",
+      "groups": [
+        "rigid"
+      ],
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/mujoco-incline/newton-elliptic-score.json",
+            "sha256": "0fd7b980926cf0052ab570418b9953e38bf48164ae202cd9311ba55cc5682578"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / pyramidal / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-newton-pyramidal-v1",
+      "profile": "newton-pyramidal",
+      "groups": [
+        "rigid"
+      ],
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/mujoco-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/mujoco-incline/newton-pyramidal-score.json",
+            "sha256": "771e2b7e7601363ccd854c9a183e041ee5ad713dd2c5407d138aba668922de1a"
+          },
+          "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
         }
       }
     },

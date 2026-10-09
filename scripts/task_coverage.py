@@ -64,7 +64,7 @@ def incline_counts(bundle, protocol):
     seen, passed, total, negatives = set(), 0, 0, 0
     for result in bundle['results']:
         name = result['id']
-        if name not in cases or name in seen or result['record_valid'] is not True:
+        if name not in cases or name in seen or type(result['record_valid']) is not bool:
             raise ValueError('Missing, duplicate or invalid incline evidence')
         seen.add(name)
         negative = cases[name].get('negative_no_floor', False)
@@ -73,6 +73,9 @@ def incline_counts(bundle, protocol):
         if (result['expected_negative'] != negative or type(result['passed']) is not bool
                 or result['passed'] != all(result['checks'].values())):
             raise ValueError('Contradictory incline verdict')
+        if not result['record_valid']:
+            if result['passed'] or not result.get('failure') or negative:
+                raise ValueError('Invalid evidence cannot qualify a positive or a negative')
         if negative:
             if result['passed']:
                 raise ValueError('Negative control was accepted')
