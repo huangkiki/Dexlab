@@ -12,7 +12,7 @@
 
 左为0.4 N失败，右为0.8 N成功；连续完整4 s的实际状态回放，无状态插值。Genesis提供动力学，MuJoCo仅用于显示；原始MP4与逐帧映射见[回放目录](evidence/force-limit/replays/)。空夹负例亦保留。图片与动画不能替代全速率验收。
 
-[求解器与力采样审计](genesis-solver-audit.zh-CN.md)已核实历史 Newton / approximate_implicitfast / elliptic 配置，并区分接触求解量与步末状态的时刻。已解析有效参数没有完整原生快照，恢复条件见 [#125](https://github.com/huangkiki/Dexlab/issues/125)。历史原生位置驱动的力限额不等于原生执行器输出测量；本报告结果与阈值保持原样。
+[求解器与力采样审计](genesis-solver-audit.zh-CN.md)已核实历史 Newton / approximate_implicitfast / elliptic 配置，并区分接触求解量与步末状态的时刻。已解析有效参数没有完整原生快照，[#125](https://github.com/huangkiki/Dexlab/issues/125) 采纳明确标注的源码推导，保留缺失观测。历史原生位置驱动的力限额不等于原生执行器输出测量；本报告结果与阈值保持原样。
 
 ## 为什么会失败
 

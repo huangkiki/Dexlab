@@ -21,7 +21,7 @@ MuJoCo 使用 Euler/Newton、100 次上限、容差 1e−10、solref=[0.02,1]、
 
 MuJoCo 力在积分前求解，SuperDex 力在步骤后查询；二者分别与该步速度增量配对。原生接触距离的采样时刻不同，所以另报告相同姿态下的几何方块—平面最大穿透作为诊断，不改变原判据。SuperDex 九例的该几何穿透均为零，接触可在正间隙激活；这不表示碰撞模型完全刚性。
 
-[2026-10-09 求解器审计](superdex-solver-audit.zh-CN.md)已把九例包哈希对上官方 wheel 与构建源码；同字节重建读回 Newton／AUTO／C1 正则化，源码小系统分支为稠密 LDLᵀ。该补充与历史直接读回分开，原始记录未补写；历史执行遥测缺口继续由 [#124](https://github.com/huangkiki/Dexlab/issues/124) 跟踪。
+[2026-10-09 求解器审计](superdex-solver-audit.zh-CN.md)已把九例包哈希对上官方 wheel 与构建源码；同字节重建读回 Newton／AUTO／C1 正则化，源码小系统分支为稠密 LDLᵀ。该补充与历史直接读回分开，原始记录未补写；[#124](https://github.com/huangkiki/Dexlab/issues/124) 的审查结论保留遥测缺口，撤回已观测线性分支或已隔离算法优势的声明。
 
 ## 全部配对记录
 

@@ -1,8 +1,8 @@
 # Genesis force-limit solver audit: recorded selection and resolved defaults
 
-[简体中文](genesis-solver-audit.zh-CN.md) · [Historical results](force-limit-results.md) · [P0 #125][issue]
+[简体中文](genesis-solver-audit.zh-CN.md) · [Historical results](force-limit-results.md) · [Audit #125][issue]
 
-The sixteen archived cases record **Newton (`constraint_solver=1`), `approximate_implicitfast` (`integrator=2`), elliptic friction and zero noslip iterations**. These names are resolved against the exact official source matching the historical wheel, not today's defaults. The archive contains the caller's options object; it does **not** contain every resolved solver setting. [#125][issue] remains open for that precisely bounded historical readback gap.
+The sixteen archived cases record **Newton (`constraint_solver=1`), `approximate_implicitfast` (`integrator=2`), elliptic friction and zero noslip iterations**. These names are resolved against the exact official source matching the historical wheel, not today's defaults. The archive contains the caller's options object; it does **not** contain every resolved solver setting. The reviewed boundary in [#125][issue] retains the absent native readbacks and accepts the explicitly labeled matching-source interpretation below.
 
 ## Identity and evidence scope
 
@@ -51,11 +51,13 @@ Each archived row is collected after `scene.step()` and labeled `(step+1)*dt`. [
 
 The historical controller is Genesis's native position drive with configured gains and force bounds. There is **no native actuator-output history** in these records. A position target, force bound, contact force and actuator force must not be substituted for one another. New external-PD actuator qualification belongs to [#132](https://github.com/huangkiki/Dexlab/issues/132), after [protocol #131](https://github.com/huangkiki/Dexlab/issues/131); historical grasp success is not that qualification.
 
-## Remaining gap and recovery
+## Retained limitations and reviewed disposition
 
 [#125][issue] retains the missing contemporaneous **resolved solver-options/static-configuration snapshot**, including contact resolution, effective tolerance, impedance ratio and sparse selection, plus per-contact combined parameters. The archived file records these settings as `null` or does not expose them. This limits runtime attribution, not the recovered Newton/integrator names. Actual iteration counts and JIT/factorization traces were also not saved and are not claimed here.
 
-Recovery requires a contemporaneous artifact tied to the sixteen case identities, or an explicitly reviewed attribution decision accepting the matching-source derivation as the historical boundary. A new probe can qualify a new execution; it cannot create the absent historical readbacks. The Issue remains blocked on that recovery, with no blanket dependency imposed on independently qualified new experiments. #131/#132 must capture supported effective settings and field-specific observability limits before their new batch freezes.
+**Reviewed disposition (2026-10-09):** the search of all 126 manifest entries, sixteen complete records, frozen runner/options and 264 matching official source files does not recover the missing native snapshot. Accept the S column only as conditional source derivation; withdraw any interpretation that it measures historical effective parameters, achieved iterations or actuator output. This completes #125's bounded audit under the maintainer's coverage-first plan. Original records, thresholds and all six hold failures remain unchanged.
+
+[Genesis #148](https://github.com/huangkiki/Dexlab/issues/148) and [pinch #132](https://github.com/huangkiki/Dexlab/issues/132) carry the effective-setting/epoch recording requirements. The separately recorded [migration #143](unisim-contact-migration.md) qualifies a new execution path; it does not repair old observations. Reopen the historical question only for a newly discovered contemporaneous artifact bound to the sixteen case identities.
 
 This audit ran no Genesis import or physics step and did not rescore or modify the original data, thresholds, successes or six failed grasps. Its bounded read-only source/archive pass completed in 5.074 s of launcher wall time, with kernel memory peak 306,806,784 bytes and no OOM; this is audit overhead, not physics throughput. The new 6-hour/700-start campaign allowance was not consumed.
 
