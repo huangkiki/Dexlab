@@ -78,7 +78,7 @@ Unresolved facts or provenance behind public findings must link to actionable Is
 
 [Development roadmap](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-roadmap.md) · [Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [Research tracker](https://github.com/huangkiki/Dexlab/issues/130)
 
-The plan is adopted; the protocol and formal campaign are not yet delivered. After public-evidence P0 work, develop the common fixture/external PD, qualify two backends, validate independent scoring, then acquire 594 formal episodes plus 24 controls. Retain six-engine gaps and the scope of historical evidence.
+[Common protocol and data contract v1](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-protocol.md) now defines the finite fixture, 1 ms external-PD clock, 594 formal cases, 24 controls and up to 32 qualification/bridge cases, with case expansion and record-shape checks. Backend qualification and independent scoring are next; no backend is admitted and no formal campaign has run. Six-engine gaps and historical evidence scope remain explicit.
 
 ## How we check
 

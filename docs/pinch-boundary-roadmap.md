@@ -2,7 +2,7 @@
 
 [简体中文](pinch-boundary-roadmap.zh-CN.md) · [Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [Research tracker](https://github.com/huangkiki/Dexlab/issues/130) · [Autodev retrospective](https://github.com/huangkiki/Dexlab/discussions/127)
 
-**Status: direction adopted and development Issues created; the new protocol, implementation and formal campaign are not delivered.** This page records approved requirements and task relationships, not an executable frozen protocol. A delivers the repository protocol and manifest; C freezes the independently verified implementation/scorer before D starts the formal campaign. Planning baseline: `026855534c612ba395c2a2f9cfe75a71ecd5a1bf`; `b4ca4e3` is a historical source. Recheck main when starting work and freezing a campaign.
+**Status: [A protocol/data contract](pinch-boundary-protocol.md) and engine-free case expansion are implemented; backend qualification, independent scoring and the formal campaign remain undelivered.** This page records approved requirements and task relationships, not an executable frozen protocol. A defines the repository protocol and matrix; C freezes the independently verified implementation/scorer before D starts the formal campaign. Planning baseline: `026855534c612ba395c2a2f9cfe75a71ecd5a1bf`; `b4ca4e3` is a historical source. Recheck main when starting work and freezing a campaign.
 
 ## Question and adopted choices
 
@@ -30,7 +30,7 @@ Discussion preserves reasoning, dissent and adopted decisions. Issues own bounde
 
 ## Planned interface and records
 
-The planned `python -m dexlab.pinch_boundary` entry has `qualify / run / score / report / check-campaign` commands; these do not exist yet. Inputs are a frozen manifest and case identity. Acquisition, offline scoring and reporting are independent. A defines the minimum data contract; B/C implement it without a speculative general framework.
+The available `python -m dexlab.pinch_boundary list-cases` exports protocol identities only. The planned acquisition/scoring entry has `qualify / run / score / report / check-campaign` commands; these do not exist yet. Inputs are a frozen manifest and case identity. Acquisition, offline scoring and reporting are independent. A defines the minimum data contract; B/C implement it without a speculative general framework.
 
 At every physics step, separately retain pre/post states, control-update epoch, target, pre/post saturation commands, native actuator force, and contact identities/positions/normals/forces with their epochs. Record solver status, warnings, costs and first failure. Commands, actuator forces and contact forces are separate observations. Unobservable fields remain missing with a reason; unavailable required observations block backend admission. Never copy a command as native measurement. Hash-bind protocol, models, acquisition code, scorer and raw records.
 
@@ -52,7 +52,7 @@ B/C must deliver a recoverable ledger of every attempt, complete process wall ti
 
 ## Scoring and completion
 
-A must translate these adopted requirements into a verifiable protocol rather than only citing this roadmap:
+The [A protocol](pinch-boundary-protocol.md) fixes these adopted criteria; B/C must implement and verify them:
 
 - Hold window [2,3] s: center height always ≥60 mm, both fingers in effective contact, other vertical support ≤0.01 N. Release window [3.8,4] s: center height ≤30 mm and sum of per-contact finger-force magnitudes ≤0.01 N. Define effective contact, frames and sample epochs.
 - Retain the 1 mm penetration budget, `1e-8 N` contact-ledger consistency and 5% gravity-impulse residual. The ledger compares summed contact forces with net object contact force; it does not qualify actuator output or known-force dynamics. A/B separately define and verify those checks and tolerances.

@@ -75,7 +75,7 @@
 
 [开发路线](docs/pinch-boundary-roadmap.zh-CN.md) · [专题 Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [研究总任务](https://github.com/huangkiki/Dexlab/issues/130)
 
-计划已采纳，协议与正式实验尚未交付。先处理公开证据 P0，再推进共同夹具/外部 PD、双后端资格、独立评分和 594 个正式回合＋24 个对照；六引擎缺项继续跟踪。既有实验结果保持原范围。
+[共同协议与数据接口 v1](docs/pinch-boundary-protocol.zh-CN.md)已实现：固定有限夹具、1 ms 外部 PD 时钟、594 个正式项、24 个对照及最多 32 个资格／桥接项，提供工况展开与记录结构校验。下一步为双后端资格与独立评分；后端尚未准入，正式批次尚未运行。六引擎缺项继续跟踪，历史结果保持原范围。
 
 ## 学习各个引擎：Sim Atlas
 
