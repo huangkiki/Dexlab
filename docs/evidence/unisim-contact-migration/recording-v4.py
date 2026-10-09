@@ -1,14 +1,13 @@
-"""Record the Genesis pinch protocol through qualified public contact readbacks.
+"""Candidate public-UniSim recording route for the existing pinch protocol.
 
-Requires the disclosed UniSim contact patch; see docs/unisim-contact-migration.md.
-The historical native reference is explicit, never an automatic fallback.
+Production remains on the frozen native reference until physical comparison
+and the repository delivery gates pass. This module owns no engine handles.
 """
 from __future__ import annotations
 
 import argparse
 from dataclasses import fields
 import hashlib
-import json
 from importlib.metadata import version
 import os
 from pathlib import Path
@@ -17,20 +16,7 @@ import xml.etree.ElementTree as ET
 
 import numpy as np
 
-MODEL = '<mujoco><compiler angle="radian"/><worldbody><body name="base"><body name="carriage"><joint name="lift" type="slide" axis="0 0 1" range="0 0.15" limited="true"/><inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01"/>\n<body name="left" pos="-0.04 0 0.025"><joint name="left_slide" type="slide" axis="1 0 0" range="0 0.03" limited="true"/><geom type="box" size="0.01 0.03 0.02" mass="0.1" friction="0.5"/></body>\n<body name="right" pos="0.04 0 0.025"><joint name="right_slide" type="slide" axis="-1 0 0" range="0 0.03" limited="true"/><geom type="box" size="0.01 0.03 0.02" mass="0.1" friction="0.5"/></body></body></body></worldbody></mujoco>'
-
-
-def write_json(path, value):
-    path.write_text(json.dumps(value, indent=2) + "\n")
-
-
-def load_case(case_id):
-    manifest = Path(__file__).resolve().parents[2] / "demos/contact-benchmark/force-limit-v1.json"
-    protocol = json.loads(manifest.read_text())
-    for case in protocol["cases"]:
-        if case["id"] == case_id:
-            return case
-    raise ValueError(f"Unknown preregistered case: {case_id}")
+from dexlab.genesis_pinch_probe import MODEL, load_case, write_json
 
 JOINTS = ("lift", "left_slide", "right_slide")
 GEOMS = ("ground/plane", "block/cube", "gripper/left_pad", "gripper/right_pad")
@@ -78,9 +64,6 @@ def create_scene(output: Path, cap: float, initial_x: float):
 
 
 def require_contacts(backend) -> None:
-    if not callable(getattr(backend, "get_contact_capabilities", None)):
-        raise RuntimeError("Install the disclosed UniSim contact-readback patch; "
-                           "see docs/unisim-contact-migration.md")
     capability = backend.get_contact_capabilities()
     if not all((capability.supported, capability.normal,
                 capability.signed_distance, capability.body_net_force)):
@@ -96,9 +79,6 @@ def read_initial(backend) -> dict:
                           ("native_friction_cone", "elliptic")):
         if effective.get(key) != expected:
             raise RuntimeError(f"Required native readback differs: {key}")
-    options = effective["native_rigid_options"]
-    if any(options.get(key) is not True for key in ("batch_links_info", "batch_dofs_info")):
-        raise RuntimeError("Pinch requires the qualified native batched parameter storage")
     entities = effective["native_entities"]
     gripper, cube = entities["gripper"], entities["block"]
     gripper_state = backend.get_entity_state("gripper")
@@ -194,7 +174,7 @@ def run(output: Path, dt: float, case_id: str | None = None) -> None:
     (output / "runner.py").write_bytes(source)
     write_json(output / "protocol.json", {
         "schema": 2 if case else 1, "case": case, "engine": version("genesis-world"),
-        "unisim": version("unisim-core"), "route": "unisim_public",
+        "unisim": version("unisim-core"), "route": "unisim_public_candidate",
         "quadrants": version("quadrants"), "torch": version("torch"),
         "dt_s": dt, "steps": round(4 / dt), "duration_s": 4,
         "mass_kg": .064, "cube_size_m": .04, "mu": .5, "gravity_m_s2": 9.81,
@@ -202,7 +182,7 @@ def run(output: Path, dt: float, case_id: str | None = None) -> None:
         "repeats": repeats, "conditions": conditions,
         "plane_cube_geom_timeconst_s": .002,
         "source_sha256": hashlib.sha256(source).hexdigest(),
-        "scope": "Qualified fixed-model contact path; not hardware calibration",
+        "scope": "Candidate migration comparison; not hardware calibration",
     })
     timings = {"clock": "perf_counter; synchronous public CPU readback", "trials": [],
                "rendering": "not executed", "archival": "not executed"}

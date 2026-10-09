@@ -88,6 +88,7 @@ Genesis 1.4.3 PBD 的驱动夹布／保持工况已运行并失败，见[保留�
 
 下一步按[覆盖优先开发计划](https://github.com/huangkiki/Dexlab/blob/main/docs/task-coverage.zh-CN.md)推进：迁移差异 → 各引擎独立基础实验 → 原生 MJWarp／Isaac Sim 对照 → 推动、旋转与布料；夹持 594 回合研究穿插推进。原生用最新稳定版，框架用官方兼容组合，归因对照另做核心版本匹配。
 
+接触路径对照已找到低力差异的配置来源：24 进程原生诊断隔离了参数批存储因素，随后对齐存储的 38 次启动／56 回合通过全部 19 组对照与 12 项精确重放，原误差阈值不变。旧版六组失败和低力抓取失败均保留。该结果限定于显式披露的 Genesis 1.4.3／本地适配补丁组合，不增加任务类型数。[原因、证据与复现](docs/unisim-contact-migration.zh-CN.md) · [#143](https://github.com/huangkiki/Dexlab/issues/143)。
 
 ## 引擎、求解器与版本
 
