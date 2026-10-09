@@ -1,0 +1,23 @@
+{
+  "frozen_at": "2026-10-09T21:42:51.982458+00:00",
+  "source_sha256": "41080b9d40002a969ae2d8bd968c23c6f4e84ee77a9382dc8edc66a67875c24a",
+  "supersedes": "Unexecuted private diagnostic-v4 harness; same hypothesis, cases, iterations and 200-update budget",
+  "hypothesis": "Possible finiteprecision fixed point or primal/dual iteration cycle; compare adjacent caps and native last-primal/returned forces",
+  "profiles": [
+    "vbd-legacy",
+    "vbd-compliant"
+  ],
+  "iterations": [
+    99,
+    100,
+    101,
+    1000,
+    1001
+  ],
+  "steps": 20,
+  "case": "static-h0.001",
+  "native_processes": 1,
+  "native_updates": 200,
+  "source": "scripts/diagnose_newton_incline.py",
+  "formal_replacement": false
+}

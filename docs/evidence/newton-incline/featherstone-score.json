@@ -1,0 +1,140 @@
+{
+  "profile": "featherstone",
+  "positive_passed": 0,
+  "positive_total": 9,
+  "protocol_sha256": "7231cb51ad7aa9b464ecd75ffacbb7dc6a4999dfa2f889912aeaf5659fafeba7",
+  "raw_score": {
+    "path": "docs/evidence/newton-incline/raw-scores/featherstone.json",
+    "sha256": "a60b9dcd2dbffa8e7d24f726a0f0a218058c2385c4bd36081cfe4de80437246b"
+  },
+  "representation": "Only field names normalized for the existing coverage inventory; no thresholds or verdicts changed",
+  "results": [
+    {
+      "passed": false,
+      "id": "static-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Position/velocity mismatch beyond representation bound",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 1.2784999999999967e-05,
+      "id": "static-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 9.355879978370917e-06,
+      "id": "static-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "sliding-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Position/velocity mismatch beyond representation bound",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 2.9766084615774056e-05,
+      "id": "sliding-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 9.538821787837513e-06,
+      "id": "sliding-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 5.201864759165989e-07,
+      "id": "frictionless-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 1.3030427207451508e-05,
+      "id": "frictionless-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 2.1633038152357624e-06,
+      "id": "frictionless-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 5.080621817856192,
+        "static_speed_m_s": 5.078069897892866,
+        "sliding_velocity_rmse_m_s": 2.199266973748155,
+        "sliding_position_rmse_m": 1.2791478713086655,
+        "acceleration_error_m_s2": 2.539078888627732,
+        "rotation_rad": 0.0005117725163133251,
+        "penetration_m": 0.0,
+        "force_balance_rmse_n": 0.6278400000000001
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.539078888627732,
+      "full_velocity_rmse_m_s": 2.9322063752480023,
+      "full_position_rmse_m": 2.273254791164843,
+      "impulse_residual_max_ns": 3.238282621381454e-08,
+      "negative_rejected": true,
+      "id": "negative-no-floor",
+      "record_valid": true,
+      "expected_negative": true
+    }
+  ]
+}

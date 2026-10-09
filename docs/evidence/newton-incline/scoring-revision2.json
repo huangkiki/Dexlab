@@ -1,0 +1,18 @@
+{
+  "reason": "Add explicit provenance validation for one recovered negative; original physics/representation checks unchanged",
+  "original_scorer_sha256": "be6fe865928051090a3363f159391a6528d151fa25e201230a42a36f8774485a",
+  "final_source_hashes": {
+    "newton_incline_score.py": "06b8038e3f0e4788bba5d6883ad24efd510a29cd2163a451aba4ff9b0fa9ffcb",
+    "newton_incline_recovery.py": "f4ea02acdcbb3603b0b4a9cd3b32eb62903ba27f54bb7c519038bbfff116159b",
+    "incline_score.py": "655aa7bd4f4fc23ebd2e040579fc647cf8075f53e3fc375b716af36115551b52"
+  },
+  "unchanged_six_original_score_reports": true,
+  "original_interrupted_campaign_remains_rejected": true,
+  "continuation": {
+    "reused_positive_cases": 9,
+    "preserved_interrupted_attempt": true,
+    "identical_prefix_steps": 1588,
+    "original_campaign_sha256": "aed765f250f6269302439a5163cbd140befe1d4e030e114c43e866158045e65f",
+    "continuation_runner_sha256": "8a2b94e2b7e5108f1e18b32e7d956fb4a5b93a1dd0f9a814ef0ba7fc6e90d272"
+  }
+}

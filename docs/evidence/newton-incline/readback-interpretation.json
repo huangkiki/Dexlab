@@ -1,0 +1,20 @@
+{
+  "xpbd": {
+    "source": "https://github.com/newton-physics/newton/blob/713fecdc41caf0c9d726f5c016939f36e66e3dff/newton/_src/solvers/xpbd/kernels.py#L869-L938",
+    "mechanism": "Position and velocity receive separately rounded incremental corrections; velocities below1e-4 are snapped tozero. Default reconstruction from full position delta is disabled.",
+    "limitation": "The frozen8eps position/velocity criterion was an engineering check, not a derived forward-error bound for100 iterative projections. Invalid records are not proof of state injection. Allsix moving cases also exceed the independent1e-7Ns momentum guard; both observations are retained."
+  },
+  "kamino": {
+    "source": "https://github.com/newton-physics/newton/blob/713fecdc41caf0c9d726f5c016939f36e66e3dff/newton/_src/solvers/kamino/_src/core/math.py#L544-L560",
+    "mechanism": "Quaternion exponential update multiplies the old quaternion without an explicit renormalization in this function.",
+    "limitation": "Observed norm drift exceeds the frozen8eps check in several cases. Source-linked numerical observation, not a hardware/material accuracy claim; no renormalization is inserted into acquisition or acceptance."
+  },
+  "vbd": {
+    "source": "https://github.com/newton-physics/newton/blob/713fecdc41caf0c9d726f5c016939f36e66e3dff/newton/_src/solvers/vbd/solver_vbd.py#L2339-L2357",
+    "force_query": "https://github.com/newton-physics/newton/blob/713fecdc41caf0c9d726f5c016939f36e66e3dff/newton/_src/solvers/vbd/solver_vbd.py#L3705-L3855",
+    "velocity": "https://github.com/newton-physics/newton/blob/713fecdc41caf0c9d726f5c016939f36e66e3dff/newton/_src/solvers/vbd/rigid_vbd_kernels.py#L6675-L6740",
+    "mechanism": "Primal/dual alternation precedes final force query; velocities are reconstructed fromFP32pose differences. The no-contact negative also fails the original momentum guard.",
+    "limitation": "Matched-prefix and fixed-input probes quantify the observed behavior. They do not uniquely separate every roundoff/contact-solve contribution."
+  },
+  "score_scope": "All frozen decisions remain. Supplementary raw measurements and normalized-quaternion geometric diagnostics do not award acceptance. A source-derived precision-aware protocol would require a new prospective freeze and heldout validation."
+}

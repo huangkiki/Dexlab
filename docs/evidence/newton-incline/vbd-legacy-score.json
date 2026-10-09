@@ -1,0 +1,123 @@
+{
+  "profile": "vbd-legacy",
+  "positive_passed": 0,
+  "positive_total": 9,
+  "protocol_sha256": "cca349187b57d233c4a5f1b80ef2abf50b32c914c24cb7105fd6cb23b3c1bb09",
+  "raw_score": {
+    "path": "docs/evidence/newton-incline/raw-scores/vbd-legacy.json",
+    "sha256": "89115dfe3885f33a7028bb447b9a7f17f013ca970c80cc0e18956ae13e09d8a0"
+  },
+  "representation": "Only field names normalized for the existing coverage inventory; no thresholds or verdicts changed",
+  "results": [
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 1.542073654817366e-05,
+      "id": "static-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 1.3532521566388625e-05,
+      "id": "static-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 8.297710468671667e-06,
+      "id": "static-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 0.0001346661467062493,
+      "id": "sliding-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 0.0002638353139921957,
+      "id": "sliding-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 8.730200543621475e-05,
+      "id": "sliding-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 0.00010273423871920183,
+      "id": "frictionless-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 4.7659755548156976e-05,
+      "id": "frictionless-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 7.958294277339083e-05,
+      "id": "frictionless-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "impulse_residual_max_ns": 1.748843750000006e-05,
+      "id": "negative-no-floor",
+      "record_valid": false,
+      "expected_negative": true,
+      "failure": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "checks": {
+        "record_consistency": false
+      }
+    }
+  ]
+}

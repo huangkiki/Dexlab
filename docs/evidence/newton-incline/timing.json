@@ -1,0 +1,702 @@
+[
+  {
+    "profile": "xpbd",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 33.55428432946792,
+    "setup_s": 0.023393158975522965,
+    "wall_s": 35.46545567299472,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 16.845976068696473,
+    "setup_s": 0.02324267302174121,
+    "wall_s": 17.825858452997636,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 8.463175154698547,
+    "setup_s": 0.02354040800128132,
+    "wall_s": 8.973451245052274,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 16.908807807369158,
+    "setup_s": 0.023099027981515974,
+    "wall_s": 17.561091234965716,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 33.47638027725043,
+    "setup_s": 0.02283285098383203,
+    "wall_s": 35.36996893398464,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 16.78508141869679,
+    "setup_s": 0.02221002202713862,
+    "wall_s": 17.76040239201393,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 8.389382256136741,
+    "setup_s": 0.09533687902148813,
+    "wall_s": 8.963946846022736,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 33.43383400386665,
+    "setup_s": 0.022899307950865477,
+    "wall_s": 35.32431428297423,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 16.85596575558884,
+    "setup_s": 0.022540548990946263,
+    "wall_s": 17.824977317999583,
+    "error": null
+  },
+  {
+    "profile": "xpbd",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 12.164463980821893,
+    "setup_s": 4.354483378003351,
+    "wall_s": 18.1865523160086,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 0.19882161339046434,
+    "setup_s": 0.021938443009275943,
+    "wall_s": 1.3051731589948758,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.0990213198820129,
+    "setup_s": 0.022531640017405152,
+    "wall_s": 0.6541550299734809,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 0.049750747508369386,
+    "setup_s": 0.09620690403971821,
+    "wall_s": 0.41756824601907283,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.09730474720709026,
+    "setup_s": 0.022565936960745603,
+    "wall_s": 0.5926160939852707,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 0.19569076091283932,
+    "setup_s": 0.022708136006258428,
+    "wall_s": 1.2728903660317883,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.09735448594437912,
+    "setup_s": 0.02269577601691708,
+    "wall_s": 0.6369857480167411,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 0.0491344160400331,
+    "setup_s": 0.02290858799824491,
+    "wall_s": 0.341023372951895,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 0.1948685155948624,
+    "setup_s": 0.022196945967152715,
+    "wall_s": 1.2678165229735896,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.09971818584017456,
+    "setup_s": 0.022128136013634503,
+    "wall_s": 0.6559412810020149,
+    "error": null
+  },
+  {
+    "profile": "semiimplicit",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 1.685090399812907,
+    "setup_s": 0.56421224900987,
+    "wall_s": 2.521533229970373,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 0.8587830782053061,
+    "setup_s": 0.02306393499020487,
+    "wall_s": 1.992272526025772,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.4327763605979271,
+    "setup_s": 0.02318656403804198,
+    "wall_s": 1.0118168590124696,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 0.2150556543492712,
+    "setup_s": 0.023528446967247874,
+    "wall_s": 0.5201996939722449,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.4294621974695474,
+    "setup_s": 0.022880943026393652,
+    "wall_s": 0.959042513044551,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 0.8626230819500051,
+    "setup_s": 0.022863701975438744,
+    "wall_s": 1.9733691290020943,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.43134986236691475,
+    "setup_s": 0.0223571399692446,
+    "wall_s": 1.0037260699900798,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 0.21474317327374592,
+    "setup_s": 0.09229810297256336,
+    "wall_s": 0.5833496850100346,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 0.8555473136948422,
+    "setup_s": 0.023426424013450742,
+    "wall_s": 1.9603464439860545,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 0.4315707288333215,
+    "setup_s": 0.022776609985157847,
+    "wall_s": 1.0031234070193022,
+    "error": null
+  },
+  {
+    "profile": "featherstone",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 0.21670879638986662,
+    "setup_s": 5.223094484012108,
+    "wall_s": 5.720249867008533,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 47.85497166833375,
+    "setup_s": 0.1146713070338592,
+    "wall_s": 50.11144950101152,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.162546040664893,
+    "setup_s": 0.023420443991199136,
+    "wall_s": 25.28668584796833,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 12.00157261226559,
+    "setup_s": 0.023868841992225498,
+    "wall_s": 12.571123959962279,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.000397857860662,
+    "setup_s": 0.024409483012277633,
+    "wall_s": 24.76145839499077,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 48.26801461406285,
+    "setup_s": 0.023681411985307932,
+    "wall_s": 50.52979939698707,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.10699043510249,
+    "setup_s": 0.023849469958804548,
+    "wall_s": 25.247507384978235,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 12.05799747351557,
+    "setup_s": 0.02387494099093601,
+    "wall_s": 12.64078742597485,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 48.14871408120962,
+    "setup_s": 0.02315529203042388,
+    "wall_s": 51.53564459801419,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 23.99948112439597,
+    "setup_s": 0.0232662659836933,
+    "wall_s": 25.115565454994794,
+    "error": null
+  },
+  {
+    "profile": "vbd-legacy",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 11.89308273117058,
+    "setup_s": 4.016405076021329,
+    "wall_s": 16.444852641026955,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 49.35227459401358,
+    "setup_s": 0.02368573797866702,
+    "wall_s": 51.54958322294988,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.739593740785494,
+    "setup_s": 0.02388935099588707,
+    "wall_s": 25.853156305034645,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 12.22537341248244,
+    "setup_s": 0.024080180970486253,
+    "wall_s": 12.79472026298754,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.52254732407164,
+    "setup_s": 0.11793105502147228,
+    "wall_s": 25.36440408101771,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 49.10232475952944,
+    "setup_s": 0.02394437202019617,
+    "wall_s": 51.351160685007926,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.694333389459644,
+    "setup_s": 0.02382502000546083,
+    "wall_s": 25.838548146013636,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 12.359380894573405,
+    "setup_s": 0.023748920997604728,
+    "wall_s": 12.940411641960964,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 49.00409907923313,
+    "setup_s": 0.023328776995185763,
+    "wall_s": 51.13321147399256,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 24.663688411470503,
+    "setup_s": 0.022709093987941742,
+    "wall_s": 25.738111417973414,
+    "error": null
+  },
+  {
+    "profile": "vbd-compliant",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 12.212282190099359,
+    "setup_s": 0.7409546070266515,
+    "wall_s": 13.488751532975584,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 164.95468766667182,
+    "setup_s": 0.16628699202556163,
+    "wall_s": 167.4856853579986,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 83.80150756507646,
+    "setup_s": 0.04929621599148959,
+    "wall_s": 85.0491397419828,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 42.04046892625047,
+    "setup_s": 0.04981784796109423,
+    "wall_s": 42.69293272099458,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 71.947030735726,
+    "setup_s": 0.04878705501323566,
+    "wall_s": 72.88554760697298,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 168.56394142418867,
+    "setup_s": 0.05043665802804753,
+    "wall_s": 171.01108985801693,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 83.37494236865314,
+    "setup_s": 0.04978881898568943,
+    "wall_s": 84.62291358102812,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 41.65195073396899,
+    "setup_s": 0.05050847202073783,
+    "wall_s": 42.300009517988656,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 164.03909598791506,
+    "setup_s": 0.049189626006409526,
+    "wall_s": 166.32754291704623,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 82.22466641938081,
+    "setup_s": 0.04831965500488877,
+    "wall_s": 83.38922774198,
+    "error": null
+  },
+  {
+    "profile": "kamino-padmm",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 44.76422446034849,
+    "setup_s": 4.137214888003655,
+    "wall_s": 49.59148007899057,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "frictionless-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 315.56547411408974,
+    "setup_s": 0.054028560989536345,
+    "wall_s": 317.9353733200114,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "frictionless-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 157.87332413392141,
+    "setup_s": 0.05502575699938461,
+    "wall_s": 159.09535615396453,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "frictionless-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 78.91501342447009,
+    "setup_s": 0.05398132500704378,
+    "wall_s": 79.55963079998037,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "negative-no-floor",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 142.052416307386,
+    "setup_s": 6.655251299031079,
+    "wall_s": 150.81655215198407,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "sliding-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 315.51263392926194,
+    "setup_s": 0.05406764196231961,
+    "wall_s": 317.872482109,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "sliding-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 157.77440234826645,
+    "setup_s": 0.0544035229831934,
+    "wall_s": 158.98726136097685,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "sliding-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 78.80812401650473,
+    "setup_s": 0.05399188195588067,
+    "wall_s": 79.44380668998929,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "static-h0.0005",
+    "completed_steps": 4000,
+    "attempted_steps": 4000,
+    "native_step_wall_s": 316.2941341068945,
+    "setup_s": 0.14332797698443756,
+    "wall_s": 318.79998005897505,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "static-h0.001",
+    "completed_steps": 2000,
+    "attempted_steps": 2000,
+    "native_step_wall_s": 158.07344091677805,
+    "setup_s": 0.05185483297100291,
+    "wall_s": 159.32248711498687,
+    "error": null
+  },
+  {
+    "profile": "kamino-dvi",
+    "case": "static-h0.002",
+    "completed_steps": 1000,
+    "attempted_steps": 1000,
+    "native_step_wall_s": 80.79497407068266,
+    "setup_s": 0.8794166500447318,
+    "wall_s": 82.28317671903642,
+    "error": null
+  }
+]
