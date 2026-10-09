@@ -74,6 +74,12 @@ Unresolved facts or provenance behind public findings must link to actionable Is
 
 [Follow-up work and blockers](https://github.com/huangkiki/Dexlab/issues) · [PhysX integration #47](https://github.com/huangkiki/Dexlab/issues/47). Frameworks and native engines are distinct; Newton Physics is not MuJoCo's Newton algorithm.
 
+## Next: unified-drive pinch boundary
+
+[Development roadmap](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-boundary-roadmap.md) · [Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [Research tracker](https://github.com/huangkiki/Dexlab/issues/130)
+
+The plan is adopted; the protocol and formal campaign are not yet delivered. After public-evidence P0 work, develop the common fixture/external PD, qualify two backends, validate independent scoring, then acquire 594 formal episodes plus 24 controls. Retain six-engine gaps and the scope of historical evidence.
+
 ## How we check
 
 1. **Define the reference first.** Static friction |f| ≤ μₛN, threshold tanθ=μₛ, sliding acceleration a=g(sinθ−μₖcosθ). Declare rigid-body/Coulomb assumptions, initial conditions and applicability before comparison.

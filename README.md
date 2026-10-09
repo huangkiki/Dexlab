@@ -71,6 +71,12 @@
 
 这些结论分别对应报告中冻结的引擎版本、模型和工况，属于解析模型与数值实验结论；真实材料精度需要实测参照。它们不能合并成引擎优劣排名。
 
+## 下一阶段：统一驱动与夹持失效边界
+
+[开发路线](docs/pinch-boundary-roadmap.zh-CN.md) · [专题 Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [研究总任务](https://github.com/huangkiki/Dexlab/issues/130)
+
+计划已采纳，协议与正式实验尚未交付。先处理公开证据 P0，再推进共同夹具/外部 PD、双后端资格、独立评分和 594 个正式回合＋24 个对照；六引擎缺项继续跟踪。既有实验结果保持原范围。
+
 ## 从哪里开始
 
 - **看结论与图表：** [完整实验报告](docs/site/zh/results.md)，以及[阶段总结](docs/holiday-report.zh-CN.md)。

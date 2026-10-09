@@ -71,6 +71,12 @@ Transferring three fixed contact configurations across ten mass/size combination
 
 Each finding applies to the engine version, model and conditions frozen in its report. These are analytical-model and numerical-experiment findings; real-material accuracy requires measured references. The results cannot be pooled into an engine ranking.
 
+## Next: unified-drive pinch boundary
+
+[Development roadmap](docs/pinch-boundary-roadmap.md) · [Discussion](https://github.com/huangkiki/Dexlab/discussions/129) · [Research tracker](https://github.com/huangkiki/Dexlab/issues/130)
+
+The plan is adopted; the protocol and formal campaign are not yet delivered. After public-evidence P0 work, develop the common fixture/external PD, qualify two backends, validate independent scoring, then acquire 594 formal episodes plus 24 controls. Retain six-engine gaps and the scope of historical evidence.
+
 ## Start here
 
 - **Read findings and figures:** [Full experiment reports](docs/site/en/results.md) and the [stage report](docs/holiday-report.md).
