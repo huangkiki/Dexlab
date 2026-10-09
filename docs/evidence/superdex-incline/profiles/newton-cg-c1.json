@@ -1,0 +1,226 @@
+{
+  "schema_version": 2,
+  "engine": "superdex",
+  "version": "1.0.0",
+  "duration_s": 2,
+  "score_start_s": 0.5,
+  "mass_kg": 0.064,
+  "side_m": 0.04,
+  "gravity_m_s2": 9.81,
+  "solref": [
+    0.02,
+    1
+  ],
+  "solver_iterations": 100,
+  "solver_tolerance": 1e-10,
+  "integrator": "Euler",
+  "cone": "elliptic",
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "force_balance_rmse_n": 0.01
+  },
+  "cases": [
+    {
+      "id": "static-d0.9-h0.002",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.002
+    },
+    {
+      "id": "static-d0.9-h0.001",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.001
+    },
+    {
+      "id": "static-d0.9-h0.0005",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.0005
+    },
+    {
+      "id": "sliding-d0.9-h0.002",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.002
+    },
+    {
+      "id": "sliding-d0.9-h0.001",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.001
+    },
+    {
+      "id": "sliding-d0.9-h0.0005",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.0005
+    },
+    {
+      "id": "frictionless-d0.9-h0.002",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "impedance": 0.9,
+      "timestep": 0.002
+    },
+    {
+      "id": "frictionless-d0.9-h0.001",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "impedance": 0.9,
+      "timestep": 0.001
+    },
+    {
+      "id": "frictionless-d0.9-h0.0005",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "impedance": 0.9,
+      "timestep": 0.0005
+    },
+    {
+      "id": "negative-no-floor",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "impedance": 0.9,
+      "timestep": 0.001,
+      "negative_no_floor": true
+    }
+  ],
+  "comparison": {
+    "superdex_version": "1.0.0",
+    "precision": "fp64",
+    "integration_method": "BACKWARD_EULER",
+    "solver_iterations": 100,
+    "absolute_tolerance": 1e-09,
+    "relative_tolerance": 1e-09,
+    "normal_parameters": {
+      "penalty_coefficient": 1000000000.0,
+      "penalty_threshold_default": 0.0001,
+      "penalty_smoothing_half_distance": 5e-05,
+      "normal_viscous_damping_coefficient": 0.0
+    },
+    "friction_falloff_vel": 0.001,
+    "viscous_friction_coefficient": 0.0,
+    "parameter_source": "contact_plane_native.py and fixed tolerances from contact_tangent_run.py; numerical profile, not calibrated material",
+    "combined_friction_observability": "unavailable in SuperDex ContactPoint; actor readbacks only",
+    "timing_comparison": "historical MuJoCo timing; no speed ranking",
+    "source_archive_sha256": "6b865ef7ab31d7b919f97a567ab31dc745497babb1249e5114c8bc9a99e72616"
+  },
+  "solver_profile": {
+    "id": "newton-cg-c1",
+    "nonlinear": "NEWTON",
+    "linear": "CG",
+    "friction": "C1_REGULARIZED",
+    "preconditioner": null
+  },
+  "effective_solver_expected": {
+    "experimental_eval": {
+      "consistency_res_norm": false,
+      "consistency_res_norm_step": 0.0001,
+      "explicit_normals": false,
+      "fade_friction": true,
+      "fitted_saturation_hessian": {
+        "constraint_saturation": true,
+        "contact_friction": true,
+        "joint_friction": false
+      },
+      "friction_model": {
+        "name": "C1_REGULARIZED",
+        "value": 0
+      },
+      "implicit_normal_force_for_dissipation": false
+    },
+    "integration_method": {
+      "name": "BACKWARD_EULER",
+      "value": 0
+    },
+    "linear_solver": {
+      "abort_if_not_spd": false,
+      "abs_tol": 1e-09,
+      "max_iter": -1,
+      "norm_type": {
+        "name": "PRECONDITIONED_RESIDUAL_L2",
+        "value": 1
+      },
+      "preconditioner_type": {
+        "name": "PER_ACTOR",
+        "value": 11
+      },
+      "rel_div_tol": 10000000000.0,
+      "rel_tol": 1e-05,
+      "restart_size": 1000,
+      "solver_type": {
+        "name": "CG",
+        "value": 0
+      },
+      "verbosity": {
+        "name": "WARNING",
+        "value": 2
+      }
+    },
+    "non_linear_solver": {
+      "abs_div_tol": 1000000000.0,
+      "abs_tol": 1e-09,
+      "convergence_mode": {
+        "name": "PER_ACTOR_WEIGHTED",
+        "value": 1
+      },
+      "d_residual_assembly_period": 1,
+      "explosion_control": true,
+      "gradient_descent_fallback": false,
+      "line_search_alpha": 0.5,
+      "line_search_max_iter": 4,
+      "line_search_max_rel_increase": 0.0,
+      "line_search_type": {
+        "name": "RESIDUAL_NORM",
+        "value": 5
+      },
+      "line_search_wolfe1": 0.0001,
+      "line_search_wolfe2": 0.9,
+      "linear_tolerance_strategy": {
+        "name": "EISENSTAT_WALKER2",
+        "value": 2
+      },
+      "max_elapsed_time_seconds": 0.0,
+      "max_iter": 100,
+      "psd_proj_mode": {
+        "name": "ALWAYS",
+        "value": 1
+      },
+      "rel_div_tol": 10000.0,
+      "rel_step_tol": 2.220446049250313e-15,
+      "rel_tol": 1e-09,
+      "solver_type": {
+        "name": "NEWTON",
+        "value": 0
+      },
+      "stop_if_no_improvement": false,
+      "verbosity": {
+        "name": "WARNING",
+        "value": 2
+      }
+    }
+  }
+}

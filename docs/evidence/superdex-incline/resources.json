@@ -1,0 +1,111 @@
+{
+  "state": "completed",
+  "resource_plan": {
+    "schema_version": 1,
+    "profile": "adaptive-16g-4c",
+    "measurement": null,
+    "complex_model": false,
+    "cpu_cores": 4,
+    "peak_margin": 1.5,
+    "desktop_reserve_gib": 8
+  },
+  "returncode": 0,
+  "wall_s": 63.150315582053736,
+  "telemetry": {
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "9457664",
+      "memory.peak": "10080256",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 38274\nuser_usec 24388\nsystem_usec 13885\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "782204928",
+      "memory.peak": "949469184",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 55527100\nuser_usec 53120015\nsystem_usec 2407085\ncore_sched.force_idle_usec 0\nnr_periods 503\nnr_throttled 3\nthrottled_usec 5514\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=0 wbytes=465747968 rios=0 wios=1396 dbytes=0 dios=0"
+    },
+    "initial_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=26\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=26",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+    },
+    "pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4539\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4539",
+      "io.pressure": "some avg10=32.30 avg60=22.01 avg300=5.97 total=18958537\nfull avg10=32.29 avg60=21.99 avg300=5.96 total=18928004"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4571\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4571",
+      "io.pressure": "some avg10=32.30 avg60=22.01 avg300=5.97 total=18958604\nfull avg10=32.29 avg60=21.99 avg300=5.96 total=18928071"
+    },
+    "initial_gpu_memory_mib": [
+      "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1224, 23028"
+    ],
+    "final_gpu_memory_mib": [
+      "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1224, 23028"
+    ],
+    "gpu_memory_samples_mib": [
+      {
+        "wall_s": 0.05787677795160562,
+        "devices": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1224, 23028"
+        ]
+      },
+      {
+        "wall_s": 10.069497434946243,
+        "devices": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1180, 23028"
+        ]
+      },
+      {
+        "wall_s": 20.333578155958094,
+        "devices": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1224, 23028"
+        ]
+      },
+      {
+        "wall_s": 30.376497689983808,
+        "devices": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1180, 23028"
+        ]
+      },
+      {
+        "wall_s": 45.1534961759462,
+        "devices": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1201, 23028"
+        ]
+      },
+      {
+        "wall_s": 55.404974274977576,
+        "devices": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1224, 23028"
+        ]
+      }
+    ],
+    "sampled_peak_cpu_cores": 2.6817949045850478,
+    "sampled_peak_read_bytes_s": 0.0,
+    "sampled_peak_write_bytes_s": 16710070.350459527,
+    "sampling_interval_s": 0.25
+  },
+  "launch_headroom": {
+    "available_memory_bytes": 51105988608,
+    "data_free_bytes": 1388592693248,
+    "desktop_reserve_bytes": 8589934592
+  },
+  "next_equivalent_workload_memory_gib": 8
+}

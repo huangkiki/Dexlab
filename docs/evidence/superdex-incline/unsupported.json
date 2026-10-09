@@ -1,0 +1,67 @@
+[
+  {
+    "profile": {
+      "id": "newton-cuda-cg-c1",
+      "nonlinear": "NEWTON",
+      "linear": "CUDA_CG",
+      "friction": "C1_REGULARIZED",
+      "preconditioner": "NONE"
+    },
+    "state": "unsupported",
+    "stage": "set_solver_params; zero positive-duration steps",
+    "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+    "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+  },
+  {
+    "profile": {
+      "id": "newton-cuda-gmres-c1",
+      "nonlinear": "NEWTON",
+      "linear": "CUDA_GMRES",
+      "friction": "C1_REGULARIZED",
+      "preconditioner": "NONE"
+    },
+    "state": "unsupported",
+    "stage": "set_solver_params; zero positive-duration steps",
+    "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+    "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+  },
+  {
+    "profile": {
+      "id": "newton-experimental-cuda-sparse-cholesky-c1",
+      "nonlinear": "NEWTON",
+      "linear": "EXPERIMENTAL_CUDA_SPARSE_CHOLESKY",
+      "friction": "C1_REGULARIZED",
+      "preconditioner": "NONE"
+    },
+    "state": "unsupported",
+    "stage": "set_solver_params; zero positive-duration steps",
+    "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+    "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+  },
+  {
+    "profile": {
+      "id": "newton-experimental-cuda-sparse-ldlt-c1",
+      "nonlinear": "NEWTON",
+      "linear": "EXPERIMENTAL_CUDA_SPARSE_LDLT",
+      "friction": "C1_REGULARIZED",
+      "preconditioner": "NONE"
+    },
+    "state": "unsupported",
+    "stage": "set_solver_params; zero positive-duration steps",
+    "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+    "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+  },
+  {
+    "profile": {
+      "id": "newton-experimental-cuda-sparse-lu-c1",
+      "nonlinear": "NEWTON",
+      "linear": "EXPERIMENTAL_CUDA_SPARSE_LU",
+      "friction": "C1_REGULARIZED",
+      "preconditioner": "NONE"
+    },
+    "state": "unsupported",
+    "stage": "set_solver_params; zero positive-duration steps",
+    "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+    "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+  }
+]
