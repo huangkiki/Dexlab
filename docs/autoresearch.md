@@ -4,6 +4,10 @@
 
 Codex implements, verifies and reviews issue-scoped changes, then merges eligible PRs and publishes GitHub Releases. The maintainer authorized automatic merge and release for this repository on **2026-09-29**, without per-run confirmation. `scripts/autoresearch.py` handles selection, worktrees, checks and PR submission; the authorized Codex worker performs review, merge and release through GitHub tools. Running the script alone does not merge PRs or invoke a model, and does not call Astra/Jev inside the grasp controller.
 
+## Current execution policy (2026-10-09)
+
+[Task coverage and continuous development](task-coverage.md) is the latest authorized ordering, dual-version, work-package and resource policy. It supersedes the earlier pinch-first ordering and legacy resource defaults below; historical commands/configurations remain for reproduction. The queue filters dependencies; the executor restores and selects an explicit Issue under the new plan. Drake or irrecoverable historical telemetry must not block independent tasks. New batches use `--profile adaptive --resource-plan BATCH.json`, not the old 16 GiB / 2-core profile.
+
 ## Resume and select
 
 1. Inspect existing worktrees, associated PRs, review feedback, applicable checks and interrupted releases first. Finish existing work; excluding claimed tasks from new dispatch must not cause them to be skipped forever. PR links and explicit `Refs #N` statements count even on other branch names.

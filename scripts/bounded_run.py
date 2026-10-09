@@ -2,7 +2,9 @@
 """Run local research in a verified Linux systemd resource envelope."""
 
 import argparse
+import hashlib
 import json
+import math
 import os
 import re
 from pathlib import Path
@@ -24,8 +26,72 @@ PROFILES = {
 # Explicit opt-in after measured pressure; the default experiment cap is unchanged.
 PROFILES['experiment-24g'] = {**PROFILES['experiment'], 'memory': 24576, 'high': 23552}
 
+# Additive profiles preserve every historical experiment envelope.
+MEMORY_TIERS_GIB = (8, 16, 24, 32, 40)
+for gib in MEMORY_TIERS_GIB:
+    for cores in (4, 8):
+        PROFILES[f'adaptive-{gib}g-{cores}c'] = {
+            **PROFILES['experiment'], 'memory': gib * 1024,
+            'high': (gib - 1) * 1024, 'cpu': cores * 100,
+        }
+
+
+def select_profile(peak_mib=None, complex_model=False, cores=4):
+    if cores not in (4, 8):
+        raise ValueError('CPU quota must be 4 or 8 core equivalents')
+    if peak_mib is not None and (not math.isfinite(peak_mib) or peak_mib <= 0):
+        raise ValueError('Measured peak must be finite and positive')
+    required = peak_mib * 1.5 if peak_mib is not None else (24 if complex_model else 16) * 1024
+    for gib in MEMORY_TIERS_GIB:
+        if gib * 1024 >= required:
+            return f'adaptive-{gib}g-{cores}c'
+    raise ValueError('Measured peak needs more than the 40 GiB maximum; split the workload')
+
+
+def freeze_resources(path, peak_receipt=None, complex_model=False, cores=4):
+    """Reuse an immutable batch plan; never silently raise a running batch's cap."""
+    measurement = None
+    peak = None
+    if peak_receipt is not None:
+        raw = peak_receipt.read_bytes()
+        previous = json.loads(raw)
+        telemetry = previous.get('telemetry') or previous
+        counters = telemetry.get('final') or telemetry.get('latest') or {}
+        peak = int(counters['memory.peak']) / 1024**2
+        measurement = {'sha256': hashlib.sha256(raw).hexdigest(), 'peak_mib': peak}
+    plan = {'schema_version': 1, 'profile': select_profile(peak, complex_model, cores),
+            'measurement': measurement, 'complex_model': complex_model,
+            'cpu_cores': cores, 'peak_margin': 1.5, 'desktop_reserve_gib': 8}
+    # Exclusive create protects existing plans, including interrupted batches.
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with path.open('x') as stream:
+            json.dump(plan, stream, indent=2)
+            stream.write('\n')
+    except FileExistsError:
+        if json.loads(path.read_text()) != plan:
+            raise ValueError('Batch resource plan is frozen; use a new batch to retune resources')
+    return plan
+
 METRICS = ('memory.current', 'memory.peak', 'memory.events', 'cpu.stat',
-           'pids.current', 'pids.events', 'io.stat')
+         'pids.current', 'pids.events', 'io.stat')
+
+
+def pressure(root):
+    """PSI includes I/O stalls; absence remains explicit, never zero."""
+    return {name: (root / name).read_text().strip() if (root / name).exists() else None
+            for name in ('memory.pressure', 'cpu.pressure', 'io.pressure')}
+
+
+def gpu_memory():
+    """Whole-device samples, not exclusive ownership or a VRAM high-water mark."""
+    try:
+        result = subprocess.run(
+            ['nvidia-smi', '--query-gpu=uuid,memory.used,memory.total', '--format=csv,noheader,nounits'],
+            text=True, capture_output=True, timeout=2, check=True)
+        return result.stdout.strip().splitlines()
+    except (OSError, subprocess.SubprocessError):
+        return None
 
 
 def read_values(root, names):
@@ -119,12 +185,15 @@ def inside(args):
     state = {'state': 'running', 'profile': args.profile, 'admission': admission,
              'effective_service_properties': service,
              'effective_limits': limits,
-             'started_at_unix_s': time.time(), 'initial': read_values(root, METRICS)}
+             'started_at_unix_s': time.time(), 'initial': read_values(root, METRICS),
+             'initial_pressure': pressure(root), 'initial_gpu_memory_mib': gpu_memory()}
     atomic_json(args.telemetry, state)
     start = time.monotonic()
     previous_time = start
     previous = counters(state['initial'], args.device_number)
     peaks = [0.0, 0.0, 0.0]
+    next_gpu_sample = start
+    gpu_samples = []
     child = subprocess.Popen(args.command)
     while child.poll() is None:
         now = time.monotonic()
@@ -134,13 +203,19 @@ def inside(args):
         rates[0] /= 1e6
         peaks = [max(old, new) for old, new in zip(peaks, rates)]
         state.update(wall_s=now - start, latest=latest,
+                     pressure=pressure(root),
                      sampled_peak_cpu_cores=peaks[0], sampled_peak_read_bytes_s=peaks[1],
                      sampled_peak_write_bytes_s=peaks[2], sampling_interval_s=0.25)
+        if now >= next_gpu_sample:
+            gpu_samples.append({'wall_s': now - start, 'devices': gpu_memory()})
+            state['gpu_memory_samples_mib'] = gpu_samples
+            next_gpu_sample = now + 10
         previous_time, previous = now, current
         atomic_json(args.telemetry, state)
         time.sleep(0.25)
     state.update(state='completed', returncode=child.returncode,
-                 wall_s=time.monotonic() - start, final=read_values(root, METRICS))
+                 wall_s=time.monotonic() - start, final=read_values(root, METRICS),
+                 final_pressure=pressure(root), final_gpu_memory_mib=gpu_memory())
     atomic_json(args.telemetry, state)
     return child.returncode
 
@@ -204,6 +279,7 @@ def launch(args):
                 and telemetry_data.get('returncode') == 0)
     code = result.returncode or (0 if complete else 1)
     data = {'state': 'completed' if code == 0 else 'failed',
+            'resource_plan': getattr(args, 'resource_selection', None),
             'returncode': code, 'wall_s': time.monotonic() - start,
             'service': unit,
             'service_properties': query.stdout if properties.get('LoadState') == 'loaded' else None,
@@ -220,7 +296,11 @@ def main():
     parser.add_argument('--inside', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('--io-device', type=Path)
     parser.add_argument('--receipt', type=Path)
-    parser.add_argument('--profile', choices=PROFILES, default='archive')
+    parser.add_argument('--profile', choices=[*PROFILES, 'adaptive'], default='archive')
+    parser.add_argument('--resource-plan', type=Path, help='Immutable plan shared by one batch')
+    parser.add_argument('--peak-receipt', type=Path, help='Previous measured bounded-run receipt')
+    parser.add_argument('--complex-model', action='store_true')
+    parser.add_argument('--cpu-cores', type=int, choices=(4, 8), default=4)
     parser.add_argument('--data-dir', type=Path, help='Required existing data volume directory for experiments')
     parser.add_argument('--timeout', type=int)
     parser.add_argument('--memory-mib', type=int)
@@ -231,6 +311,14 @@ def main():
     parser.add_argument('--telemetry', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('command', nargs=argparse.REMAINDER)
     args = parser.parse_args()
+    if args.profile == 'adaptive':
+        if args.inside or args.resource_plan is None or args.memory_mib is not None or args.high_mib is not None:
+            parser.error('Adaptive launch requires --resource-plan and forbids memory overrides')
+        args.resource_selection = freeze_resources(
+            args.resource_plan, args.peak_receipt, args.complex_model, args.cpu_cores)
+        args.profile = args.resource_selection['profile']
+    elif args.resource_plan is not None or args.peak_receipt is not None or args.complex_model or args.cpu_cores != 4:
+        parser.error('Resource selection options require --profile adaptive')
     policy = PROFILES[args.profile]
     args.memory_mib = policy['memory'] if args.memory_mib is None else args.memory_mib
     args.high_mib = policy['high'] if args.high_mib is None else args.high_mib
