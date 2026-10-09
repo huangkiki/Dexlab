@@ -77,6 +77,14 @@ Each finding applies to the engine version, model and conditions frozen in its r
 
 The plan is adopted; the protocol and formal campaign are not yet delivered. After public-evidence P0 work, develop the common fixture/external PD, qualify two backends, validate independent scoring, then acquire 594 formal episodes plus 24 controls. Retain six-engine gaps and the scope of historical evidence.
 
+## Learn the engines: Sim Atlas
+
+**Sim Atlas** provides a separate learning repository for each engine, with application and principles/source tracks covering modeling, state and time, control, contact solvers, sensing, rendering, parallelism and extensions.
+
+[MuJoCo Atlas](https://github.com/huangkiki/mujoco-atlas) · [SuperDex Atlas](https://github.com/huangkiki/superdex-atlas) · [Genesis Atlas](https://github.com/huangkiki/genesis-atlas) · [Newton Atlas](https://github.com/huangkiki/newton-atlas) · [PhysX Atlas](https://github.com/huangkiki/physx-atlas) · [Drake Atlas](https://github.com/huangkiki/drake-atlas)
+
+Initial guides and pinned source maps are available; the full course is in development. This phase focuses on understanding engine mechanisms. Later experiments will reuse DexLab with their original versions, configurations and workloads. Course progress is tracked separately from the experimental coverage above.
+
 ## Start here
 
 - **Read findings and figures:** [Full experiment reports](docs/site/en/results.md) and the [stage report](docs/holiday-report.md).

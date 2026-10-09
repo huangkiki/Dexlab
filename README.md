@@ -77,6 +77,14 @@
 
 计划已采纳，协议与正式实验尚未交付。先处理公开证据 P0，再推进共同夹具/外部 PD、双后端资格、独立评分和 594 个正式回合＋24 个对照；六引擎缺项继续跟踪。既有实验结果保持原范围。
 
+## 学习各个引擎：Sim Atlas
+
+**Sim Atlas · 仿真图谱** 为每个引擎提供独立学习仓库，沿应用和原理源码两条路线，讲解建模、状态与时间、控制、接触求解、传感渲染、并行与扩展。
+
+[MuJoCo Atlas](https://github.com/huangkiki/mujoco-atlas) · [SuperDex Atlas](https://github.com/huangkiki/superdex-atlas) · [Genesis Atlas](https://github.com/huangkiki/genesis-atlas) · [Newton Atlas](https://github.com/huangkiki/newton-atlas) · [PhysX Atlas](https://github.com/huangkiki/physx-atlas) · [Drake Atlas](https://github.com/huangkiki/drake-atlas)
+
+首批导读与固定版本源码地图已交付，完整专题仍在开发。当前先理解引擎机制，后续实验复用 DexLab 的版本、配置与工况记录。课程完成度与上方实验证据覆盖分别记录。
+
 ## 从哪里开始
 
 - **看结论与图表：** [完整实验报告](docs/site/zh/results.md)，以及[阶段总结](docs/holiday-report.zh-CN.md)。
