@@ -1,0 +1,110 @@
+[
+  {
+    "profile": "newton-cg-c1",
+    "case": "frictionless-d0.9-h0.001",
+    "residual_max_ns": 2.104501699986525e-07,
+    "worst_step": 11,
+    "time_s": 0.012000000000000004,
+    "stats": {
+      "convergence_status": {
+        "name": "STOPPED",
+        "value": 2
+      },
+      "max_line_search_iters": 1,
+      "max_non_linear_iters": 5,
+      "residual_norm": 0.0002104501699986569
+    },
+    "actor_status": "STOPPED",
+    "contact_force_sum_error_max_n": 0.0
+  },
+  {
+    "profile": "newton-cg-c1",
+    "case": "frictionless-d0.9-h0.0005",
+    "residual_max_ns": 3.5577869994848406e-07,
+    "worst_step": 37,
+    "time_s": 0.019000000000000013,
+    "stats": {
+      "convergence_status": {
+        "name": "STOPPED",
+        "value": 2
+      },
+      "max_line_search_iters": 0,
+      "max_non_linear_iters": 4,
+      "residual_norm": 0.000711557399897141
+    },
+    "actor_status": "STOPPED",
+    "contact_force_sum_error_max_n": 0.0
+  },
+  {
+    "profile": "newton-async-cg-c1",
+    "case": "frictionless-d0.9-h0.001",
+    "residual_max_ns": 2.104501699986525e-07,
+    "worst_step": 11,
+    "time_s": 0.012000000000000004,
+    "stats": {
+      "convergence_status": {
+        "name": "STOPPED",
+        "value": 2
+      },
+      "max_line_search_iters": 1,
+      "max_non_linear_iters": 5,
+      "residual_norm": 0.0002104501699986569
+    },
+    "actor_status": "STOPPED",
+    "contact_force_sum_error_max_n": 0.0
+  },
+  {
+    "profile": "newton-async-cg-c1",
+    "case": "frictionless-d0.9-h0.0005",
+    "residual_max_ns": 3.5577869994848406e-07,
+    "worst_step": 37,
+    "time_s": 0.019000000000000013,
+    "stats": {
+      "convergence_status": {
+        "name": "STOPPED",
+        "value": 2
+      },
+      "max_line_search_iters": 0,
+      "max_non_linear_iters": 4,
+      "residual_norm": 0.000711557399897141
+    },
+    "actor_status": "STOPPED",
+    "contact_force_sum_error_max_n": 0.0
+  },
+  {
+    "profile": "newton-parallel-cg-c1",
+    "case": "frictionless-d0.9-h0.001",
+    "residual_max_ns": 2.104501699986525e-07,
+    "worst_step": 11,
+    "time_s": 0.012000000000000004,
+    "stats": {
+      "convergence_status": {
+        "name": "STOPPED",
+        "value": 2
+      },
+      "max_line_search_iters": 1,
+      "max_non_linear_iters": 5,
+      "residual_norm": 0.0002104501699986569
+    },
+    "actor_status": "STOPPED",
+    "contact_force_sum_error_max_n": 0.0
+  },
+  {
+    "profile": "newton-parallel-cg-c1",
+    "case": "frictionless-d0.9-h0.0005",
+    "residual_max_ns": 3.5577869994848406e-07,
+    "worst_step": 37,
+    "time_s": 0.019000000000000013,
+    "stats": {
+      "convergence_status": {
+        "name": "STOPPED",
+        "value": 2
+      },
+      "max_line_search_iters": 0,
+      "max_non_linear_iters": 4,
+      "residual_norm": 0.000711557399897141
+    },
+    "actor_status": "STOPPED",
+    "contact_force_sum_error_max_n": 0.0
+  }
+]

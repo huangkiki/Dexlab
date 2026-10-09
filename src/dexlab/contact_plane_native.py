@@ -357,6 +357,7 @@ class SuperDexPlane:
             contacts.append(
                 {
                     "force_on_box": (sign * np.asarray(point.force)).tolist(),
+                    "box_is_actor_a": bool(sign == 1),
                     "distance": float(point.distance),
                     "normal_native": np.asarray(point.normal).tolist(),
                     "point_a": np.asarray(point.pos_a).tolist(),

@@ -224,6 +224,153 @@
         "sha256": "2a5bc0b41b0311a107841cae58987c22a2fd8d786184ea26a068ad491de74b9f"
       },
       "profile": "newton-pyramidal"
+    },
+    "superdex-incline-newton-auto-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+        "sha256": "1b05c1fba750e8746200b485b75fa292c53d65a956d940548f77dcfd2daa0175"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-auto-c1-combined-protocol.json",
+        "sha256": "4ddde601435cc2eb1ff669bf9d007f969c318db975ec664c9c24271f98815534"
+      },
+      "profile": "newton-auto-c1"
+    },
+    "superdex-incline-newton-cg-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-cg-c1-score.json",
+        "sha256": "62ef0bb18c382393f54da2f21a518c89cbb636aa5cd73870e3f0e288b0b00a91"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-cg-c1-combined-protocol.json",
+        "sha256": "c4c4ddb6c297b293775e84ec399854be0fe5c98330a60080466e4480d99e2983"
+      },
+      "profile": "newton-cg-c1"
+    },
+    "superdex-incline-newton-gmres-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-gmres-c1-score.json",
+        "sha256": "6051d1a73f908ae425e3788c252053c35d8d26b5abfaa1f9c4b7eb0f63eb19de"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-gmres-c1-combined-protocol.json",
+        "sha256": "ca0ccbd6f24552f0ec1fb4d5552b9e2aed1e6e0d18a8fe8f556ebdd7aa0db02e"
+      },
+      "profile": "newton-gmres-c1"
+    },
+    "superdex-incline-newton-augmented-cg-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-augmented-cg-c1-score.json",
+        "sha256": "5fafea925896246ec0970eb48e1a3867b4580c4b253aabb6fa2216456b72c79e"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-augmented-cg-c1-combined-protocol.json",
+        "sha256": "1c2984d4c2bc684adeff0568fc8ef74fcb10e0fadafe0993594ae6ffec9db968"
+      },
+      "profile": "newton-augmented-cg-c1"
+    },
+    "superdex-incline-newton-ldlt-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-ldlt-c1-score.json",
+        "sha256": "5ad744be8f831d00deb0b295b2b0eecc63cff536e4197a9d564699e17287c5d9"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-ldlt-c1-combined-protocol.json",
+        "sha256": "209751095360f847a463d562abdf70b28abd88ec2a82277f16aa2f0bcf31f90b"
+      },
+      "profile": "newton-ldlt-c1"
+    },
+    "superdex-incline-newton-lu-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-lu-c1-score.json",
+        "sha256": "8dd3a5ace26feb120833c25823b8046856086f4868f997809ce5b8b4d18d5eb6"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-lu-c1-combined-protocol.json",
+        "sha256": "8b311869354afcb08da0d948e393430128e155b99aecf95e4f06c3fb5c81bb91"
+      },
+      "profile": "newton-lu-c1"
+    },
+    "superdex-incline-newton-async-cg-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-async-cg-c1-score.json",
+        "sha256": "a590066f6ca6f853c14fc7d0470fa8f205e8c4162e8a964d9ac4607f3c908878"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-async-cg-c1-combined-protocol.json",
+        "sha256": "6bf9c99c81ed72c386faaa121fef15cb09277f9d326d60a6bcb877e0e38698f3"
+      },
+      "profile": "newton-async-cg-c1"
+    },
+    "superdex-incline-newton-parallel-cg-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-parallel-cg-c1-score.json",
+        "sha256": "4b71ec658cab8ae51d7cf3a55509451b98bd21d138eea9896f04158196efdc16"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-parallel-cg-c1-combined-protocol.json",
+        "sha256": "edeb9726961ec55abc68f54b32327e2a30cbd58bb8ef3a0f6f6de2c1df7ab2cf"
+      },
+      "profile": "newton-parallel-cg-c1"
+    },
+    "superdex-incline-newton-minres-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-minres-c1-score.json",
+        "sha256": "d48eeefa21b27d7547af66a006f7523d1473d6bf0f14be6f6a174c902983b524"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-minres-c1-combined-protocol.json",
+        "sha256": "eb0524a955618a5a74bd0e2813d1b691f5757d5955106e2cd5043bd60175b87b"
+      },
+      "profile": "newton-minres-c1"
+    },
+    "superdex-incline-bfgs-auto-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/bfgs-auto-c1-score.json",
+        "sha256": "e65cd243c5832ec4c35ffed3fa6a1968aa8426e91510b8dffdfefad9b99bd9be"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/bfgs-auto-c1-combined-protocol.json",
+        "sha256": "b086d74b35538d2dd61d525a06d4d03c14032cd338a09ceb32da1d46c8e57280"
+      },
+      "profile": "bfgs-auto-c1"
+    },
+    "superdex-incline-sr1-auto-c1-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/sr1-auto-c1-score.json",
+        "sha256": "a57237c5f1218cd355d3d4766e903dd64ae23c7ffa2ead5d121f556c8bd7bf4f"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/sr1-auto-c1-combined-protocol.json",
+        "sha256": "226dfb290e670c956d5fa290d6a876bd4ded81e64f4f449872a805cc7a7f0ca9"
+      },
+      "profile": "sr1-auto-c1"
+    },
+    "superdex-incline-newton-auto-cinf-v1": {
+      "scope": "Initial native analytic qualification, all failures retained; no coverage-v1 credit.",
+      "incline_score": {
+        "path": "docs/evidence/superdex-incline/newton-auto-cinf-score.json",
+        "sha256": "934f08fcdcb7dfdf926ee43a88e006eec4b9ea817d4db28d5eaf19fb8f2c471a"
+      },
+      "protocol": {
+        "path": "docs/evidence/superdex-incline/newton-auto-cinf-combined-protocol.json",
+        "sha256": "10147d2097d0514731d7dcfd1788a81bcc91dea3d05157407ec436765aaf80bc"
+      },
+      "profile": "newton-auto-cinf"
+    },
+    "superdex-incline-cuda-unavailable-v1": {
+      "scope": "Official CPU wheel rejects CUDA solver selection before time advancement; not an engine-wide absence claim."
     }
   },
   "rows": [
@@ -2187,6 +2334,1186 @@
         "push": {
           "state": "not-run",
           "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / AUTO / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-auto-c1-v1",
+      "profile": "newton-auto-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+            "sha256": "1b05c1fba750e8746200b485b75fa292c53d65a956d940548f77dcfd2daa0175"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-cg-c1-v1",
+      "profile": "newton-cg-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-cg-c1-score.json",
+            "sha256": "62ef0bb18c382393f54da2f21a518c89cbb636aa5cd73870e3f0e288b0b00a91"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / GMRES / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-gmres-c1-v1",
+      "profile": "newton-gmres-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-gmres-c1-score.json",
+            "sha256": "6051d1a73f908ae425e3788c252053c35d8d26b5abfaa1f9c4b7eb0f63eb19de"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / AUGMENTED_CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-augmented-cg-c1-v1",
+      "profile": "newton-augmented-cg-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-augmented-cg-c1-score.json",
+            "sha256": "5fafea925896246ec0970eb48e1a3867b4580c4b253aabb6fa2216456b72c79e"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / LDLT / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-ldlt-c1-v1",
+      "profile": "newton-ldlt-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-ldlt-c1-score.json",
+            "sha256": "5ad744be8f831d00deb0b295b2b0eecc63cff536e4197a9d564699e17287c5d9"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / LU / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-lu-c1-v1",
+      "profile": "newton-lu-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-lu-c1-score.json",
+            "sha256": "8dd3a5ace26feb120833c25823b8046856086f4868f997809ce5b8b4d18d5eb6"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / ASYNC_CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-async-cg-c1-v1",
+      "profile": "newton-async-cg-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-async-cg-c1-score.json",
+            "sha256": "a590066f6ca6f853c14fc7d0470fa8f205e8c4162e8a964d9ac4607f3c908878"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / PARALLEL_CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-parallel-cg-c1-v1",
+      "profile": "newton-parallel-cg-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-parallel-cg-c1-score.json",
+            "sha256": "4b71ec658cab8ae51d7cf3a55509451b98bd21d138eea9896f04158196efdc16"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / MINRES / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-minres-c1-v1",
+      "profile": "newton-minres-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-minres-c1-score.json",
+            "sha256": "d48eeefa21b27d7547af66a006f7523d1473d6bf0f14be6f6a174c902983b524"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "BFGS / AUTO / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-bfgs-auto-c1-v1",
+      "profile": "bfgs-auto-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/bfgs-auto-c1-score.json",
+            "sha256": "e65cd243c5832ec4c35ffed3fa6a1968aa8426e91510b8dffdfefad9b99bd9be"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "SR1 / AUTO / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-sr1-auto-c1-v1",
+      "profile": "sr1-auto-c1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/sr1-auto-c1-score.json",
+            "sha256": "a57237c5f1218cd355d3d4766e903dd64ae23c7ffa2ead5d121f556c8bd7bf4f"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / AUTO / CINF_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-newton-auto-cinf-v1",
+      "profile": "newton-auto-cinf",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/newton-auto-cinf-score.json",
+            "sha256": "934f08fcdcb7dfdf926ee43a88e006eec4b9ea817d4db28d5eaf19fb8f2c471a"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / CUDA_CG / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/unsupported.json",
+            "sha256": "7658fc56d80ed25b13dbf948287f34932faf60e3589b7e54b26450fab257ce77"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / CUDA_GMRES / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/unsupported.json",
+            "sha256": "7658fc56d80ed25b13dbf948287f34932faf60e3589b7e54b26450fab257ce77"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / EXPERIMENTAL_CUDA_SPARSE_CHOLESKY / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/unsupported.json",
+            "sha256": "7658fc56d80ed25b13dbf948287f34932faf60e3589b7e54b26450fab257ce77"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / EXPERIMENTAL_CUDA_SPARSE_LDLT / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/unsupported.json",
+            "sha256": "7658fc56d80ed25b13dbf948287f34932faf60e3589b7e54b26450fab257ce77"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        }
+      }
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / EXPERIMENTAL_CUDA_SPARSE_LU / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "unsupported",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md",
+          "evidence": {
+            "path": "docs/evidence/superdex-incline/unsupported.json",
+            "sha256": "7658fc56d80ed25b13dbf948287f34932faf60e3589b7e54b26450fab257ce77"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
         },
         "rotation": {
           "state": "not-run",

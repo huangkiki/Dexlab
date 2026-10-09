@@ -1,0 +1,226 @@
+{
+  "profiles": [
+    {
+      "profile": {
+        "id": "newton-auto-c1",
+        "nonlinear": "NEWTON",
+        "linear": "AUTO",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-auto-c1.json",
+      "manifest_sha256": "d9ca8cbc64c1a4f1c90391e908844a4a5ec8223a4b245f73846f4466ecd73d44",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-cg-c1",
+        "nonlinear": "NEWTON",
+        "linear": "CG",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-cg-c1.json",
+      "manifest_sha256": "c4c4ddb6c297b293775e84ec399854be0fe5c98330a60080466e4480d99e2983",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-gmres-c1",
+        "nonlinear": "NEWTON",
+        "linear": "GMRES",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-gmres-c1.json",
+      "manifest_sha256": "ca0ccbd6f24552f0ec1fb4d5552b9e2aed1e6e0d18a8fe8f556ebdd7aa0db02e",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-augmented-cg-c1",
+        "nonlinear": "NEWTON",
+        "linear": "AUGMENTED_CG",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-augmented-cg-c1.json",
+      "manifest_sha256": "1c2984d4c2bc684adeff0568fc8ef74fcb10e0fadafe0993594ae6ffec9db968",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-ldlt-c1",
+        "nonlinear": "NEWTON",
+        "linear": "LDLT",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-ldlt-c1.json",
+      "manifest_sha256": "209751095360f847a463d562abdf70b28abd88ec2a82277f16aa2f0bcf31f90b",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-lu-c1",
+        "nonlinear": "NEWTON",
+        "linear": "LU",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-lu-c1.json",
+      "manifest_sha256": "8b311869354afcb08da0d948e393430128e155b99aecf95e4f06c3fb5c81bb91",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-async-cg-c1",
+        "nonlinear": "NEWTON",
+        "linear": "ASYNC_CG",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-async-cg-c1.json",
+      "manifest_sha256": "6bf9c99c81ed72c386faaa121fef15cb09277f9d326d60a6bcb877e0e38698f3",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-parallel-cg-c1",
+        "nonlinear": "NEWTON",
+        "linear": "PARALLEL_CG",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-parallel-cg-c1.json",
+      "manifest_sha256": "edeb9726961ec55abc68f54b32327e2a30cbd58bb8ef3a0f6f6de2c1df7ab2cf",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "newton-minres-c1",
+        "nonlinear": "NEWTON",
+        "linear": "MINRES",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-minres-c1.json",
+      "manifest_sha256": "eb0524a955618a5a74bd0e2813d1b691f5757d5955106e2cd5043bd60175b87b",
+      "admission_origin": "admission-v1"
+    },
+    {
+      "profile": {
+        "id": "bfgs-auto-c1",
+        "nonlinear": "BFGS",
+        "linear": "AUTO",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "bfgs-auto-c1.json",
+      "manifest_sha256": "b086d74b35538d2dd61d525a06d4d03c14032cd338a09ceb32da1d46c8e57280"
+    },
+    {
+      "profile": {
+        "id": "sr1-auto-c1",
+        "nonlinear": "SR1",
+        "linear": "AUTO",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "sr1-auto-c1.json",
+      "manifest_sha256": "226dfb290e670c956d5fa290d6a876bd4ded81e64f4f449872a805cc7a7f0ca9"
+    },
+    {
+      "profile": {
+        "id": "newton-auto-cinf",
+        "nonlinear": "NEWTON",
+        "linear": "AUTO",
+        "friction": "CINF_REGULARIZED",
+        "preconditioner": null
+      },
+      "zero_duration_admissions": 10,
+      "manifest": "newton-auto-cinf.json",
+      "manifest_sha256": "10147d2097d0514731d7dcfd1788a81bcc91dea3d05157407ec436765aaf80bc"
+    }
+  ],
+  "unsupported": [
+    {
+      "profile": {
+        "id": "newton-cuda-cg-c1",
+        "nonlinear": "NEWTON",
+        "linear": "CUDA_CG",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": "NONE"
+      },
+      "state": "unsupported",
+      "stage": "set_solver_params; zero positive-duration steps",
+      "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+      "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+    },
+    {
+      "profile": {
+        "id": "newton-cuda-gmres-c1",
+        "nonlinear": "NEWTON",
+        "linear": "CUDA_GMRES",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": "NONE"
+      },
+      "state": "unsupported",
+      "stage": "set_solver_params; zero positive-duration steps",
+      "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+      "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+    },
+    {
+      "profile": {
+        "id": "newton-experimental-cuda-sparse-cholesky-c1",
+        "nonlinear": "NEWTON",
+        "linear": "EXPERIMENTAL_CUDA_SPARSE_CHOLESKY",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": "NONE"
+      },
+      "state": "unsupported",
+      "stage": "set_solver_params; zero positive-duration steps",
+      "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+      "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+    },
+    {
+      "profile": {
+        "id": "newton-experimental-cuda-sparse-ldlt-c1",
+        "nonlinear": "NEWTON",
+        "linear": "EXPERIMENTAL_CUDA_SPARSE_LDLT",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": "NONE"
+      },
+      "state": "unsupported",
+      "stage": "set_solver_params; zero positive-duration steps",
+      "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+      "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+    },
+    {
+      "profile": {
+        "id": "newton-experimental-cuda-sparse-lu-c1",
+        "nonlinear": "NEWTON",
+        "linear": "EXPERIMENTAL_CUDA_SPARSE_LU",
+        "friction": "C1_REGULARIZED",
+        "preconditioner": "NONE"
+      },
+      "state": "unsupported",
+      "stage": "set_solver_params; zero positive-duration steps",
+      "native_error": "/project/superdex_physics/libraries/mochi/mochi_physics/src/mochi_scene.cpp(423): CUDA solvers require building with CUDA. To build with CUDA, include the CUDA dependencies in your build setup and define MOCHI_USE_CUDA=1",
+      "recovery": "Official CUDA-enabled build, source/binary requalification and a new frozen acquisition package"
+    }
+  ],
+  "native_positive_duration_steps": 0,
+  "historical_positive_readbacks_identical": 9
+}
