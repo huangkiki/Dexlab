@@ -110,3 +110,7 @@ Genesis 原生状态的连续回放，由 MuJoCo 显示。16 个固定工况中�
 Benchmark <benchmark>
 参与开发 <contributing>
 ```
+
+## 学习引擎：Sim Atlas
+
+[Sim Atlas · 仿真图谱学习首页](https://github.com/huangkiki/sim-atlas) 组织六个引擎的完整应用与原理源码路线，提供共同基础和各仓课程入口。[总看板](https://github.com/users/huangkiki/projects/2) 记录实际开发进度。当前课程专注引擎机制，后续案例复用这里的版本、工况与证据；课程完成度与实验覆盖分别记录。

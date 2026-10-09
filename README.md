@@ -79,7 +79,7 @@
 
 ## 学习各个引擎：Sim Atlas
 
-**Sim Atlas · 仿真图谱** 为每个引擎提供独立学习仓库，沿应用和原理源码两条路线，讲解建模、状态与时间、控制、接触求解、传感渲染、并行与扩展。
+**[Sim Atlas · 仿真图谱学习首页](https://github.com/huangkiki/sim-atlas)** 提供双路线地图、共同基础与六引擎入口；每个引擎维护独立学习仓库，沿应用和原理源码两条路线，讲解建模、状态与时间、控制、接触求解、传感渲染、并行与扩展。
 
 [GitHub Projects 总看板](https://github.com/users/huangkiki/projects/2) 按引擎、学习路线和阶段管理六仓任务，提供开发看板与课程总表。
 

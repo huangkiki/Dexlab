@@ -79,7 +79,7 @@ Each finding applies to the engine version, model and conditions frozen in its r
 
 ## Learn the engines: Sim Atlas
 
-**Sim Atlas** provides a separate learning repository for each engine, with application and principles/source tracks covering modeling, state and time, control, contact solvers, sensing, rendering, parallelism and extensions.
+The **[Sim Atlas learning home](https://github.com/huangkiki/sim-atlas)** provides the two-track map, shared foundations and six-engine navigation. Each engine has a separate learning repository, with application and principles/source tracks covering modeling, state and time, control, contact solvers, sensing, rendering, parallelism and extensions.
 
 The [GitHub Projects tracker](https://github.com/users/huangkiki/projects/2) organizes all six repositories by engine, learning track and stage, with board and curriculum-table views.
 
