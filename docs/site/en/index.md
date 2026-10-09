@@ -40,6 +40,8 @@ MuJoCo 3.15.0 initial six-profile qualification: elliptic 3/9 each, pyramidal 0/
 
 Across twelve SuperDex 1.0.0 FP64 incline profiles, nine pass 8/9 and three CG paths pass 6/9; all negatives are rejected, and five CUDA options are unsupported in the official build. Failures and historical gaps remain explicit. [Evidence / 详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md).
 
+BFGS/SR1 retain an assembly period of one and therefore execute Newton-equivalent steps; these are configuration rows, not two extra qualified algorithms.
+
 <!-- task-coverage:start -->
 
 States: passed / partial / failed / not run / blocked / unsupported. Cells link to evidence or recovery conditions.

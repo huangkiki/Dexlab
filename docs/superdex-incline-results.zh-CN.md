@@ -21,6 +21,8 @@
 
 AUTO/C1 的九个正例复用未经修改的 v0.46.0 历史记录，负例为新增；其他十一组为前瞻采集。复用前核实了官方 wheel／源码身份，以及九个原始模型的全部既有参数读回一致。历史内部线性分支、逐接触与资源遥测仍然缺失，不能用新观测补写。[历史身份审计](superdex-solver-audit.zh-CN.md)。
 
+BFGS、SR1 两行标识请求的枚举配置，不代表另外验证了两种拟牛顿算法。两组有效读回均为 `d_residual_assembly_period=1`；固定版本的[原生实现](https://github.com/facebookresearch/project_superdex/blob/1d7150946fa3f3d3fb09c2bff07eaa138cbfdee6/superdex_physics/libraries/mochi/mochi_core/src/solvers/newton_solver.cpp#L267-L272)明确说明此时等价于 Newton。每次迭代重新组装，不执行两次组装之间的 BFGS／SR1 低秩更新。原始结果继续保留，本批没有验证更长组装周期下的拟牛顿行为。
+
 ## 如何解释失败
 
 六条无效记录均来自三种 CG 路径的 1／0.5 ms 名义零摩擦工况。最大动量残差分别为 **2.1045017e-7、3.5577870e-7 N·s**，超过原有 1e-7 限制。对应时刻 actor 和 scene 都报告 **STOPPED**，非线性迭代数为五／四次。原生残差范数乘步长，与独立重算的动量残差相符；逐接触力合计和独立总力矩检查通过。这支持原生步骤没有充分收敛；具体停止条件继续由 [#159](https://github.com/huangkiki/Dexlab/issues/159) 归因，尚不能断言引擎缺陷或状态注入。[原始样本诊断](evidence/superdex-incline/invalid-record-diagnosis.json)。

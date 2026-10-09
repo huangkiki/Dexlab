@@ -12,6 +12,8 @@ Each profile adds one negative using the static 15°/μ=.5/1 ms setup with actor
 
 Budget: twelve serial launches, 99 new positives + 12 negatives, 255,000 updates; at most 120 s per profile and six hours per package. Resources are frozen at 16 GiB/four-core quota, 8 GiB launch reserve and zero swap. Readbacks and failure-safe recording add overhead. No formal pinch budget is consumed. Independent analysis, final regression and archive work use separate resource receipts. The complete acquisition freeze and source hashes are included in the raw archive.
 
+The BFGS and SR1 rows identify requested enum configurations, not additional independently exercised quasi-Newton algorithms. Both effective readbacks retain `d_residual_assembly_period=1`; the pinned [native implementation](https://github.com/facebookresearch/project_superdex/blob/1d7150946fa3f3d3fb09c2bff07eaa138cbfdee6/superdex_physics/libraries/mochi/mochi_core/src/solvers/newton_solver.cpp#L267-L272) states that this is equivalent to Newton. Reassembly on every iteration leaves no low-rank BFGS/SR1 update between assemblies. Their unchanged outcomes remain reported, but this batch does not qualify quasi-Newton behavior with a longer assembly period.
+
 ```bash
 # Run only under the repository's bounded resource and research-lock wrapper.
 python -m dexlab.incline_compare_run --manifest docs/evidence/superdex-incline/profiles/newton-cg-c1.json --output /data/new-cg --admission-only

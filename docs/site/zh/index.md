@@ -40,6 +40,8 @@ MuJoCo 3.15.0 首轮六配置：elliptic 各 3/9，pyramidal 各 0/9；六个负
 
 SuperDex 1.0.0 FP64 的十二组斜面配置中，九组 8/9、三种 CG 路径各 6/9；全部负例正确拒绝，五个 CUDA 选项在官方构建中不支持。失败与历史缺失完整保留。 [Evidence / 详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.zh-CN.md).
 
+BFGS／SR1 保留每步重组装的设置，实际执行等价 Newton 步骤；这些是配置记录，不能算额外验证了两种算法。
+
 <!-- task-coverage:start -->
 
 状态：完整通过 / 部分通过 / 失败 / 未运行 / 接入受阻 / 不支持。点击单元格查看证据或恢复条件。
