@@ -15,11 +15,13 @@ This table distinguishes **available evidence** from **matched-case comparisons*
 | Engine / runtime version | Solver and numerical configuration | Evidence scope |
 |---|---|---|
 | MuJoCo 3.15.0 | Newton solver; Euler integration; elliptic friction cone; 100 iterations maximum, tolerance 1e-10 | Nine paired incline cases below, plus collision and pinch diagnostics |
-| SuperDex 1.0.0 FP64 | Native nonlinear solver (algorithm name not confirmed in the record); Backward Euler integration; penalty contact; 100 iterations maximum, absolute/relative tolerance 1e-9 | Nine paired incline cases below; [frozen configuration](docs/evidence/incline-comparison/manifest.json) |
-| Genesis 1.4.3 CPU FP64 | Native rigid solver; elliptic cone, noslip_iterations=0; algorithm name not separately confirmed in this record | [16 force-limit cases](docs/force-limit-results.md), not part of the paired incline cohort |
+| SuperDex 1.0.0 FP64 | Recorded configuration: Backward Euler, penalty contact, 100 iterations maximum, absolute/relative tolerance 1e-9; open audit of the solver used and combined contact law: [P0 #124](https://github.com/huangkiki/Dexlab/issues/124) | Nine paired incline cases below; [frozen configuration](docs/evidence/incline-comparison/manifest.json) |
+| Genesis 1.4.3 CPU FP64 | Recorded configuration: elliptic cone and noslip_iterations=0; open audit of the solver used: [P0 #125](https://github.com/huangkiki/Dexlab/issues/125) | [16 force-limit cases](docs/force-limit-results.md), not part of the paired incline cohort |
 | Newton Physics 1.6.1 / Warp 1.18.0 | CPU SolverXPBD, float32; 4 iterations, dt=1 ms | [Sphere–plane and negative controls](docs/newton-contact.md), not a grasp comparison |
-| PhysX (historical Isaac Sim 5.1 / UniSim 1.7.10 integration) | Native core version and algorithm require per-record verification; host version is not PhysX version | [Historical contact experiments](demos/contact-benchmark/README.md); outside the paired cohort below |
+| PhysX (historical Isaac Sim 5.1 / UniSim 1.7.10 integration) | Open audit of historical native versions and solver profiles: [P0 #126](https://github.com/huangkiki/Dexlab/issues/126); host version is not PhysX version | [Historical contact experiments](demos/contact-benchmark/README.md); outside the paired cohort below |
 | Drake | No accepted runtime version or solver results yet | Integration and first evaluation: [#117](https://github.com/huangkiki/Dexlab/issues/117) |
+
+Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. The P0 audits above remain open; recorded parameters and observations retain their scope and do not establish attribution to an unverified solver algorithm.
 
 Future evaluations must cover **MuJoCo, SuperDex, Genesis, Newton Physics, PhysX and Drake**, including applicable registered solver profiles. Every report lists the complete case matrix: passed, failed, blocked, unsupported or not run; missing cells link to Issues, and incomplete coverage is reported only as an interim result. Historical findings retain their original scope. ManiSkill/SAPIEN/Isaac Sim integration layers and the UniLab task layer are not extra physics engines; Newton Physics is also distinct from MuJoCo's Newton algorithm.
 

@@ -21,13 +21,31 @@ python3 scripts/autoresearch.py submit 3 --summary-file /path/to/review.md \
 
 Run queue commands from the primary checkout; install and edit in the returned worktree. Each needs its own editable environment; uv and asset caches are reusable. `submit` reruns unit tests, both complete 14-second backend episodes and independent acceptance before committing. Failed checks stop submission. Use existing `gh`/Git authentication without changing global credentials.
 
+## Public uncertainty becomes work
+
+Any unresolved fact, provenance, implementation or measurement/scoring ambiguity found while developing must have a bounded Issue. Search existing work first. Record the exact public sentence or artifact and its version, question, known evidence, interpretation impact, verification route, acceptance, resources and concrete recovery condition. Use the existing labels and selector; no separate uncertainty database or scheduler.
+
+Public README/site ambiguity defaults to `priority:P0` before new P1 capabilities. Safety incidents and corrupt evidence still take precedence. Review the priority with evidence, assign exactly one priority, declare dependencies, then read back `next --dry-run`; an Issue link alone is not queue admission. Resume or finish the current live worker safely before switching work. A blocker does not disappear because the Issue is P0; continue other eligible independent work. Priority is not a hard dependency: declare a dependency when work actually consumes that evidence/deliverable; unrelated unresolved historical provenance does not automatically forbid newly qualified evidence.
+
+Use known facts and a direct audit link in both README languages and public homepages. Source an algorithm from the version and selected path that actually ran, not a current default. Preserve frozen historical artifacts and add a versioned evidence supplement. An audit that cannot recover identity remains open/blocked with an exact recovery condition, or withdraws the affected interpretation through an explicit reviewed decision and separately tracks remaining work. A wording edit, linked Issue or empty disclaimer is not technical closure. Quantified uncertainty with a defined evidence basis remains a scientific result, not an unresolved identity claim.
+
+Current public audits: [SuperDex #124](https://github.com/huangkiki/Dexlab/issues/124), [Genesis #125](https://github.com/huangkiki/Dexlab/issues/125), [historical PhysX #126](https://github.com/huangkiki/Dexlab/issues/126). Their technical acceptance is separate from the workflow change #123.
+
+## Documentation-only delivery
+
+For prose-only README/AGENTS, Markdown reports/workflow instructions and Markdown Issue templates, a single worker may submit via direct Git/`gh` after full unit tests, the strict bilingual site build, `git diff --check` and review of the entire diff. Bind the record to the actual base/head/tree, state the test environment and confirm imports resolve to the reviewed worktree. An unchanged qualified environment may be reused read-only with the worktree source explicitly selected. Stage only the reviewed files. The PR must name this documentation-only path and its actual checks; do not copy the full-backend validation statement emitted by `submit`.
+
+This path excludes changes to executable code, machine-consumed delivery ledgers or admission metadata, workflows/build configuration, dependency/runtime versions, assets, physical models, controllers, task protocols, scoring or acceptance thresholds. Such changes use `scripts/autoresearch.py submit` and the complete applicable gate. That script remains unchanged and always runs the full backend checks. Classify by behavioral impact, not extension or label: machine-read labels, dependencies or other Markdown-template fields that change dispatch/acceptance take the stricter path. Workflow prose changes require scenario review of authorization, priority/dependencies, recovery and failure handling against a live queue dry run; changes to scientific acceptance or executable behavior still require the full applicable gate. A mixed PR follows the stricter path.
+
+For either path, inspect current-head checks and unresolved feedback, validate the combined tree, merge with the expected head only under existing authorization, then verify the merged tree, actual site build/deploy and live `build-info.json`. A documentation-only change does not require a new code release.
+
 ## Labels, dependencies and migration
 
 | Dimension | Labels |
 |---|---|
 | Primary work type | `bug`, `enhancement`, `documentation`, `experiment`, `infrastructure` |
 | Area, usually one or two | `area:contact`, `area:cloth`, `area:evaluation`, `area:benchmark`, `area:backend`, `area:hardware` |
-| Exactly one priority | `priority:P0` (invalid evidence, data safety, execution blockers), `priority:P1` (current core work), `priority:P2` (extensions) |
+| Exactly one priority | `priority:P0` (public evidence ambiguity, invalid evidence, data safety, execution blockers), `priority:P1` (current core work), `priority:P2` (extensions) |
 | Authorization and blockers | `auto:approved`, `needs-input`, `blocked` |
 
 Replace broad `research` classifications individually; they never grant execution authority. `autoresearch` is the former opt-in spelling and is no longer accepted by this selector. Script and branch names remain unchanged. Tracking parents must not carry the execution opt-in once work is delegated to children. Use the existing Issue/PR state for progress.

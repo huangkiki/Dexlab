@@ -52,7 +52,7 @@ html_theme.sidebar_primary.remove: true
 
 <div class="research-caution"><strong>反例也属于结论。</strong> 历史 MuJoCo impedance=0.99 的静态漂移为 0.141–0.179 mm，小于上表 SuperDex。SuperDex 静态漂移随步长细化反而增大；MuJoCo 的名义零摩擦存在原生下限。不能据此宣布通用优胜者。</div>
 
-**求解配置。** MuJoCo：Newton / Euler / elliptic，impedance=0.9，100 次迭代上限，容差 1e-10。SuperDex：原生非线性求解器（该记录未确认算法名称）/ Backward Euler / penalty，100 次迭代上限，绝对与相对容差 1e-9。相同 μ 不等于材料或接触模型等价。速度误差评分窗为 0.5–2 s，初始瞬态与失败详见报告。
+**求解配置。** MuJoCo：Newton / Euler / elliptic，impedance=0.9，100 次迭代上限，容差 1e-10。SuperDex 已记录配置：Backward Euler / penalty，100 次迭代上限，绝对与相对容差 1e-9；待核实：实际求解算法与组合接触律 [P0 #124](https://github.com/huangkiki/Dexlab/issues/124)。相同 μ 不等于材料或接触模型等价。速度误差评分窗为 0.5–2 s，初始瞬态与失败详见报告。
 
 [完整结果与原始数据](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.zh-CN.md) · [冻结协议](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-protocol.zh-CN.md) · [参数清单](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/incline-comparison/manifest.json)
 
@@ -64,11 +64,13 @@ html_theme.sidebar_primary.remove: true
 | 引擎 | 已记录版本 / solver | 九组配对斜面协议 | 其他已有证据 |
 |---|---|---|---|
 | MuJoCo | 3.15.0 / Newton | 已运行，含失败 | 碰撞、夹持诊断 |
-| SuperDex | 1.0.0 FP64 / 原生非线性 | 已运行，含失败 | 加载、参数迁移 |
-| Genesis | 1.4.3 / 原生刚体，算法名未单独确认 | 未运行 | [16 组力限额](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) |
+| SuperDex | 1.0.0 FP64 / [待核实算法 P0 #124](https://github.com/huangkiki/Dexlab/issues/124) | 已运行，含失败 | 加载、参数迁移 |
+| Genesis | 1.4.3 / [待核实算法 P0 #125](https://github.com/huangkiki/Dexlab/issues/125) | 未运行 | [16 组力限额](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) |
 | Newton Physics | 1.6.1，Warp 1.18.0 / XPBD | 未运行 | [球–平面与负例](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md) |
-| PhysX | 历史 Isaac Sim 5.1 接入；核心版本须逐记录核验 | 未运行；接入资格待补齐 | [历史接触实验](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.zh-CN.md) |
+| PhysX | 历史 Isaac Sim 5.1 接入；[待核实原生身份 P0 #126](https://github.com/huangkiki/Dexlab/issues/126) | 未运行；接入资格待补齐 | [历史接触实验](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.zh-CN.md) |
 | Drake | 未取得已验收版本 / solver | 未运行 | [接入任务 #117](https://github.com/huangkiki/Dexlab/issues/117) |
+
+公开结论中的事实与来源缺口必须关联可验收 Issue，并优先于新增能力处理。上述 P0 溯源任务仍未完成；已记录参数和观测保留原范围，不能据此归因到尚未核实的求解算法。
 
 [所有后续任务与阻塞](https://github.com/huangkiki/Dexlab/issues) · [PhysX 接入问题 #47](https://github.com/huangkiki/Dexlab/issues/47)。接入层与原生引擎分开；Newton Physics 也不是 MuJoCo 的 Newton 求解算法。
 
