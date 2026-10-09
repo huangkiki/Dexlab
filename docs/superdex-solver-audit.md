@@ -1,8 +1,8 @@
 # SuperDex incline solver audit: identity, reconstruction and limits
 
-[简体中文](superdex-solver-audit.zh-CN.md) · [Historical result](incline-comparison-results.md) · [P0 #124][issue]
+[简体中文](superdex-solver-audit.zh-CN.md) · [Historical result](incline-comparison-results.md) · [Audit #124][issue]
 
-The nine historical incline cases used the same code bytes as the official SuperDex 1.0.0 FP64 and API wheels. Reconstructing the archived solver setters on those bytes reads **Newton, linear AUTO, residual-norm line search and C1-regularized Coulomb friction**. The identified source routes AUTO to **dense LDLᵀ for this small rigid system**. This is a configuration reconstruction and source trace; the original records do not contain per-step linear-solver branch telemetry. **#124 remains open for that historical executed-path evidence boundary.**
+The nine historical incline cases used the same code bytes as the official SuperDex 1.0.0 FP64 and API wheels. Reconstructing the archived solver setters on those bytes reads **Newton, linear AUTO, residual-norm line search and C1-regularized Coulomb friction**. The identified source routes AUTO to **dense LDLᵀ for this small rigid system**. This is a configuration reconstruction and source trace; the original records do not contain per-step linear-solver branch telemetry. **The reviewed boundary in #124 accepts this reconstruction and retains the missing historical telemetry. It does not assert an observed linear-solver branch.**
 
 This supplement changes no trajectory, score, threshold or historical manifest. It does not attribute the 8/9 result to one algorithm, establish material equivalence, or extend the finding to other SuperDex experiments.
 
@@ -82,7 +82,11 @@ finally:
     p.destroy_scene(scene)
 ```
 
-The residual gap in [#124][issue] is **historical execution telemetry**, not an unnamed candidate algorithm: the archive lacks the full solver-parameter object, island DoF/selected-linear-solver trace, and per-contact combined-law readback. The exposed [SolverStats][stats] contains iteration counts, residual and convergence status, not the chosen linear solver. A new replay can validate a new execution and compare trajectories, but cannot create missing historical telemetry. Recovery requires discovering a contemporaneous native trace/configuration artifact tied to this cohort, or an explicitly reviewed decision to accept source-based reconstruction as the attribution boundary. Until then the Issue stays open; no blanket dependency is added to newly qualified experiments. New protocols should capture complete available solver parameters and observability limits before positive-duration runs.
+The archive lacks the full solver-parameter object, island DoF/selected-linear-solver trace and per-contact combined-law readback. The exposed [SolverStats][stats] contains iteration counts, residual and convergence status, not the chosen linear solver. The search covered the nine published cases, retained admissions/traces, archived fixture/runner, exact official wheel bytes and the pinned build source; none supplies the missing contemporaneous telemetry.
+
+**Reviewed disposition (2026-10-09):** accept R/S only as same-byte reconstruction and conditional source attribution. Withdraw any interpretation that LDLᵀ was historically observed or that the 8/9 result isolates an algorithm's causal advantage. The historical scores, failures and artifacts remain unchanged; the missing fields stay missing. This completes #124's bounded evidence audit under the maintainer's coverage-first plan, rather than certifying recovered execution telemetry.
+
+Future qualification is tracked by [SuperDex #147](https://github.com/huangkiki/Dexlab/issues/147) and [pinch #132](https://github.com/huangkiki/Dexlab/issues/132): capture all supported effective parameters and state field-specific observability limits before a new positive-duration batch. A new record has its own identity and cannot fill old fields. Reopen this historical question only when a contemporaneous artifact tied to the nine-case cohort is discovered; a replay or matching modern default is insufficient.
 
 <details>
 <summary>Complete zero-duration solver readback (R)</summary>

@@ -1,8 +1,8 @@
 # Historical PhysX: solver readbacks and runtime provenance
 
-[简体中文](physx-solver-audit.zh-CN.md) · [Receipt index](physx-historical-receipts.md) · [P0 #126][issue]
+[简体中文](physx-solver-audit.zh-CN.md) · [Receipt index](physx-historical-receipts.md) · [Audit #126][issue]
 
-**Three standalone SDK controls explicitly read back PGS, TGS and TGS with external forces every position iteration. Historical PhysX evidence therefore does not describe one uniform TGS profile.** Other cohorts often retain iteration/offset configuration but omit the solver name. Surface deformables use a separate API. The exact native PhysX core/build and loaded-library identities remain unrecovered; [#126][issue] stays open for these historical gaps.
+**Three standalone SDK controls explicitly read back PGS, TGS and TGS with external forces every position iteration. Historical PhysX evidence therefore does not describe one uniform TGS profile.** Other cohorts often retain iteration/offset configuration but omit the solver name. Surface deformables use a separate API. The exact native PhysX core/build and loaded-library identities remain unrecovered; the reviewed decision in [#126][issue] withdraws exact-core attribution and uniform-solver claims for records without those observations.
 
 ## Audit scope and identity layers
 
@@ -70,11 +70,13 @@ All six complete archive sizes/SHA256 values and all manifest entries were verif
 | [v0.13.0 normal][a13] | 3,928,405 | `8d6b187dc6f9ce6f2e6d1175a07bac4c5a838f953b22e4dd88f00feb7dd97f7a` | 342 |
 | [v0.14.0 transient][a14] | 3,638,099 | `2e5e1934d43e05fb0d4f86ce3f36603384fcf55b514d8cfba8af29b5d71bc199` | 276 |
 
-## Remaining blocker and recovery
+## Retained limitations and reviewed disposition
 
-[#126][issue] retains two specific questions: **which native core/build/libraries were loaded for each cohort, and which solver was selected in records lacking explicit readback?** Required evidence is a contemporaneous, record-bound native version/build or library inventory and solver configuration snapshot. Reviewed source attribution may bound an interpretation, but must not be labeled a recovered historical observation. Available archived logs did not supply the missing core identity; a referenced full SDK application log was not retained at its recorded location. A new probe cannot create old evidence.
+The search covered six complete archives and manifests, 145 logical receipt entries, retained apple/robot records, available application logs and matching adapter/SDK source. It did not establish per-cohort loaded native core/build/library identity or missing solver selections. The referenced full SDK application log was not retained at its recorded location. A new probe cannot create old evidence.
 
-The independent new [protocol #131](https://github.com/huangkiki/Dexlab/issues/131) and [qualification #132](https://github.com/huangkiki/Dexlab/issues/132) should record authored and effective settings separately, identify available loaded native binaries and source, and name unavailable fields before freezing. This historical blocker is not a blanket dependency for newly qualified evidence. No formal pinch-campaign budget was consumed by this audit.
+**Reviewed disposition (2026-10-09):** withdraw exact native-core attribution for these historical cohorts and uniform-TGS claims for records lacking explicit readback. Keep the three PGS/TGS SDK controls as scene-setting observations; keep the conditional IsaacLab source path labeled as inference. Historical results may describe the recorded host/path/configuration, but cannot rank identified PhysX core versions or isolate a solver's causal effect. The missing fields remain unrecovered, and all original scores, failures and intermediate receipts remain unchanged. This completes #126's bounded audit under the maintainer's coverage-first plan.
+
+[PhysX #150](https://github.com/huangkiki/Dexlab/issues/150), [framework comparison #152](https://github.com/huangkiki/Dexlab/issues/152) and [pinch #132](https://github.com/huangkiki/Dexlab/issues/132) carry new qualification: separate authored/effective settings, identify available loaded libraries and source, and name unavailable fields before freezing. New evidence receives a new cohort identity. Reopen the historical question only on discovery of a contemporaneous, record-bound native identity or solver snapshot. No formal pinch-campaign budget was consumed by this audit.
 
 [issue]: https://github.com/huangkiki/Dexlab/issues/126
 [registry]: https://docs.omniverse.nvidia.com/kit/docs/kit-registry-reference/latest/107/shared.html

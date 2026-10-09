@@ -160,7 +160,7 @@
           "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md",
           "evidence": {
             "path": "docs/incline-comparison-results.md",
-            "sha256": "0e855efc5ab99e5e0b7bfc8955d50faa3525261b10a17ba9bb7099662edb1f19"
+            "sha256": "afdac08a65406a7bc30689a42ec964cadfd8d86b992dec918d4c6e9b44f3a217"
           }
         },
         "collision": {
@@ -237,7 +237,7 @@
           "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md",
           "evidence": {
             "path": "docs/incline-comparison-results.md",
-            "sha256": "0e855efc5ab99e5e0b7bfc8955d50faa3525261b10a17ba9bb7099662edb1f19"
+            "sha256": "afdac08a65406a7bc30689a42ec964cadfd8d86b992dec918d4c6e9b44f3a217"
           }
         },
         "collision": {
@@ -314,7 +314,7 @@
           "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md",
           "evidence": {
             "path": "docs/force-limit-results.md",
-            "sha256": "109d47912365bde8a098f6fd88503a969d41efd2a32d619daa5b006598dd05ec"
+            "sha256": "36ae5008d6c08f07b58b6b78d209512663202b5e06e73409e4ac899d0bb02c5f"
           }
         },
         "grasp": {
@@ -428,7 +428,7 @@
       "engine": "PhysX",
       "solver": "historical readback incomplete (#126)",
       "runtime_path": "SDK historical",
-      "version": "core identity pending #126",
+      "version": "historical core identity unrecovered (#126)",
       "groups": [
         "rigid"
       ],
@@ -439,7 +439,7 @@
           "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md",
           "evidence": {
             "path": "docs/physx-solver-audit.md",
-            "sha256": "77cc307ffe8d91b4946466287950d95590c635a5d961cdcfe4ce8b0408140a52"
+            "sha256": "4429eae9dfb73413f82abb3c8a506a1292958150358e505f414ba50c056000d5"
           }
         },
         "incline": {
@@ -455,7 +455,7 @@
           "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md",
           "evidence": {
             "path": "docs/physx-solver-audit.md",
-            "sha256": "77cc307ffe8d91b4946466287950d95590c635a5d961cdcfe4ce8b0408140a52"
+            "sha256": "4429eae9dfb73413f82abb3c8a506a1292958150358e505f414ba50c056000d5"
           }
         },
         "grasp": {
@@ -1425,7 +1425,7 @@
       "engine": "PhysX",
       "solver": "surface cloth",
       "runtime_path": "Isaac Sim 5.1.0.0 / IsaacLab 0.47.2",
-      "version": "core identity pending #126",
+      "version": "historical core identity unrecovered (#126)",
       "groups": [
         "cloth"
       ],

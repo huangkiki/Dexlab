@@ -12,7 +12,7 @@ The fixture uses three prismatic joints and a 40 mm, 64 g cube; official Genesis
 
 Left: 0.4 N failure; right: 0.8 N success. Continuous full four-second recorded-state playback, without state interpolation. Genesis owns dynamics; MuJoCo is display-only. Original MP4s and frame mappings are in the [replay directory](evidence/force-limit/replays/), including the open negative. Images do not replace full-rate acceptance.
 
-The [solver and force-sampling audit](genesis-solver-audit.md) identifies the historical Newton / approximate_implicitfast / elliptic configuration and distinguishes contact-solve epochs from final-state epochs. The full resolved native configuration snapshot is absent; [#125](https://github.com/huangkiki/Dexlab/issues/125) states recovery conditions. Historical native position-drive force bounds are not measured actuator outputs. Results and thresholds remain unchanged.
+The [solver and force-sampling audit](genesis-solver-audit.md) identifies the historical Newton / approximate_implicitfast / elliptic configuration and distinguishes contact-solve epochs from final-state epochs. The full resolved native configuration snapshot is absent; [#125](https://github.com/huangkiki/Dexlab/issues/125) accepts labeled source derivation while retaining the missing observation. Historical native position-drive force bounds are not measured actuator outputs. Results and thresholds remain unchanged.
 
 ## Why retention fails
 
