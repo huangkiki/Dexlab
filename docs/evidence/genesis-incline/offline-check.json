@@ -1,0 +1,39 @@
+{
+  "archive_sha256": "bad3a08a125f62cccf94ac5a545d403479ff2e946a8a56600d46da762e02037c",
+  "verified_members": 366,
+  "exact_score_match": true,
+  "physics_engine_imported": false,
+  "numpy_version": "2.5.2",
+  "profiles": [
+    {
+      "profile": "newton-elliptic-signorini",
+      "passed": 6,
+      "total": 9,
+      "invalid": 0
+    },
+    {
+      "profile": "newton-elliptic-convex",
+      "passed": 3,
+      "total": 9,
+      "invalid": 0
+    },
+    {
+      "profile": "newton-pyramidal-convex",
+      "passed": 0,
+      "total": 9,
+      "invalid": 0
+    },
+    {
+      "profile": "cg-elliptic-convex",
+      "passed": 0,
+      "total": 9,
+      "invalid": 4
+    },
+    {
+      "profile": "cg-pyramidal-convex",
+      "passed": 0,
+      "total": 9,
+      "invalid": 3
+    }
+  ]
+}

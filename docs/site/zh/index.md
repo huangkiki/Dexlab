@@ -13,7 +13,7 @@ html_theme.sidebar_primary.remove: true
 
 <div class="research-links"><a href="#comparison">阅读引擎对照 ↗</a><a href="#coverage">查看六引擎覆盖</a><a href="https://github.com/huangkiki/Dexlab/releases">代码与数据 ↗</a></div>
 
-<div class="research-meta">当前数据交付 v0.51.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
+<div class="research-meta">当前数据交付 v0.52.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
 
 ## 现在能做哪些任务
 
@@ -41,6 +41,8 @@ MuJoCo 3.15.0 首轮六配置：elliptic 各 3/9，pyramidal 各 0/9；六个负
 SuperDex 1.0.0 FP64 的十二组斜面配置中，九组 8/9、三种 CG 路径各 6/9；全部负例正确拒绝，五个 CUDA 选项在官方构建中不支持。失败与历史缺失完整保留。 [Evidence / 详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.zh-CN.md).
 
 BFGS／SR1 保留每步重组装的设置，实际执行等价 Newton 步骤；这些是配置记录，不能算额外验证了两种算法。
+
+Genesis 1.4.3 原生斜面五组配置分别为 6/9、3/9、0/9、0/9、0/9；名义零摩擦被原生接触抬至 .01，七条 CG 一致性失败全部保留并完成停止条件诊断。 [Evidence / 详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.zh-CN.md).
 
 <!-- task-coverage:start -->
 
@@ -84,6 +86,14 @@ BFGS／SR1 保留每步重组装的设置，实际执行等价 Newton 步骤；�
 | **SuperDex · NEWTON / EXPERIMENTAL_CUDA_SPARSE_CHOLESKY / C1_REGULARIZED**<br>official FP64 wheel, CUDA disabled · 1.0.0<br>superdex-incline-cuda-unavailable-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **SuperDex · NEWTON / EXPERIMENTAL_CUDA_SPARSE_LDLT / C1_REGULARIZED**<br>official FP64 wheel, CUDA disabled · 1.0.0<br>superdex-incline-cuda-unavailable-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **SuperDex · NEWTON / EXPERIMENTAL_CUDA_SPARSE_LU / C1_REGULARIZED**<br>official FP64 wheel, CUDA disabled · 1.0.0<br>superdex-incline-cuda-unavailable-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · Newton / elliptic / signorini / approximate_implicitfast**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-incline-v1-newton-elliptic-signorini | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 6/9](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · Newton / elliptic / convex / approximate_implicitfast**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-incline-v1-newton-elliptic-convex | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · Newton / pyramidal / convex / approximate_implicitfast**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-incline-v1-newton-pyramidal-convex | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · CG / elliptic / convex / approximate_implicitfast**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-incline-v1-cg-elliptic-convex | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · CG / pyramidal / convex / approximate_implicitfast**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-incline-v1-cg-pyramidal-convex | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · Newton / pyramidal / Signorini**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-signorini-unsupported-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · CG / elliptic / Signorini**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-signorini-unsupported-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · CG / pyramidal / Signorini**<br>native CPU FP64 / Quadrants 1.3.3 · 1.4.3<br>genesis-signorini-unsupported-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 
 ### 操作任务 · 历史协议与缺项
 
