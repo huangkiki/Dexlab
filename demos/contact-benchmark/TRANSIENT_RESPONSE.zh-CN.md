@@ -2,6 +2,8 @@
 
 [简体中文](TRANSIENT_RESPONSE.zh-CN.md) | [English](TRANSIENT_RESPONSE.md)
 
+历史配置归因见[分批求解器与版本审计](../../docs/physx-solver-audit.zh-CN.md)：区分原生场景读回、源码／报告中的 TGS 配置和缺失字段；[P0 #126](https://github.com/huangkiki/Dexlab/issues/126) 保留同期核心／加载库身份缺口。
+
 **先标定响应，再验证迁移；静态压入深度相同，不代表动力学相同。** 本开发实验在法向载荷协议中加入明确的阻尼目标和步长细化。使用官方 MuJoCo 3.11.0、SuperDex 1.0.0 FP64 和 PhysX / Isaac Sim 5.1，未修改引擎。
 
 ![未滤波瞬态与步长细化](media/transient-response-v1.png)

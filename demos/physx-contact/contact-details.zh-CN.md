@@ -15,7 +15,7 @@ bash scripts/setup_physx.sh
 .venv/bin/python -m dexlab.physx_contact_details verify demos/physx-contact/evidence/contact-details-v1
 ```
 
-0.2 kg 滑块先静置 0.1 s，再赋予 0.5 m/s 水平初速度，以 1 ms 步长自由演化 0.25 s。摩擦系数 0.3；原生 TGS 使用 8 次位置／2 次速度迭代、逐位置迭代外力、0.1 mm 接触偏移和零静止偏移。这些是工程设置，未经实测材料标定。滑块链接原点与质心重合。根据每步实际速度变化，独立重算 `m * Δv / dt - F_normal - F_friction - m * g`。
+0.2 kg 滑块先静置 0.1 s，再赋予 0.5 m/s 水平初速度，以 1 ms 步长自由演化 0.25 s。摩擦系数 0.3；报告中的 TGS 配置具有位置／速度迭代设置 8/2（[源码归因与缺失名称读回分列](../../docs/physx-solver-audit.zh-CN.md)）、逐位置迭代外力、0.1 mm 接触偏移和零静止偏移。这些是工程设置，未经实测材料标定。滑块链接原点与质心重合。根据每步实际速度变化，独立重算 `m * Δv / dt - F_normal - F_friction - m * g`。
 
 最大残差 **0.000029445 N**，相当于重力的 **0.00150%**，低于预先声明的 1% 工程限值；峰值摩擦力 0.58862 N。[原始记录、源码快照和冻结检查](evidence/contact-details-v1/summary.json) 已随仓库提供。失败返回非零，已有输出目录不覆盖。残差小表示力记录自洽，不能证明真机物理精度；评分不包含静置阶段和人为设置初速度的瞬间。
 

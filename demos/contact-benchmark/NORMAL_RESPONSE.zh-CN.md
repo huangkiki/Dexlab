@@ -2,6 +2,8 @@
 
 [简体中文](NORMAL_RESPONSE.zh-CN.md) | [English](NORMAL_RESPONSE.md)
 
+历史配置归因见[分批求解器与版本审计](../../docs/physx-solver-audit.zh-CN.md)：区分原生场景读回、源码／报告中的 TGS 配置和缺失字段；[P0 #126](https://github.com/huangkiki/Dexlab/issues/126) 保留同期核心／加载库身份缺口。
+
 **静态响应相同，不代表材料动力学相同。** 本开发协议使用官方 MuJoCo 3.11.0、SuperDex 1.0.0 FP64 与 PhysX/Isaac Sim 5.1，量化这一差别。未修改引擎源码或二进制；PhysX 通过公开的本地 UniSim 适配器扩展启用原生柔顺接触。
 
 ![响应、质量迁移与稳定性](media/normal-response-v1.png)

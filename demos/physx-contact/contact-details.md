@@ -15,7 +15,7 @@ bash scripts/setup_physx.sh
 .venv/bin/python -m dexlab.physx_contact_details verify demos/physx-contact/evidence/contact-details-v1
 ```
 
-The 0.2 kg block settles for 0.1 s, receives an initial horizontal speed of 0.5 m/s, then evolves freely for 0.25 s at 1 ms. Friction is 0.3; native TGS uses 8 position / 2 velocity iterations, external forces every position iteration, 0.1 mm contact offset and zero rest offset. These are engineering settings, without measured-material calibration. The block's link and mass-center origins coincide. From each actual velocity change, independently recompute `m * Δv / dt - F_normal - F_friction - m * g`.
+The 0.2 kg block settles for 0.1 s, receives an initial horizontal speed of 0.5 m/s, then evolves freely for 0.25 s at 1 ms. Friction is 0.3; the reported TGS profile has 8 position / 2 velocity iteration settings ([source attribution versus missing solver-name readback](../../docs/physx-solver-audit.md)), external forces every position iteration, 0.1 mm contact offset and zero rest offset. These are engineering settings, without measured-material calibration. The block's link and mass-center origins coincide. From each actual velocity change, independently recompute `m * Δv / dt - F_normal - F_friction - m * g`.
 
 The maximum residual is **0.000029445 N**, or **0.00150% of weight**, below the declared 1% engineering limit. Peak friction is 0.58862 N. [Raw records, source snapshots and frozen checks](evidence/contact-details-v1/summary.json) are bundled; failures return nonzero, existing output directories are never overwritten. A small residual checks force accounting, not physical accuracy against hardware. It excludes the settling interval and the commanded initial-velocity change.
 

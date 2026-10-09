@@ -18,10 +18,10 @@
 | SuperDex 1.0.0 FP64 | 同字节配置重建：Newton、线性 AUTO（小系统源码路径为稠密 LDLᵀ）、C1 正则化摩擦；历史记录：Backward Euler、100 次上限、绝对/相对容差 1e-9。[证据与历史遥测缺口 #124](docs/superdex-solver-audit.zh-CN.md) | 下方九组斜面配对；[冻结配置](docs/evidence/incline-comparison/manifest.json) |
 | Genesis 1.4.3 CPU FP64 | 历史记录：Newton / approximate_implicitfast / elliptic，noslip=0；[源码解析与历史有效参数读回缺口 #125](docs/genesis-solver-audit.zh-CN.md) | [16 组夹持力限额实验](docs/force-limit-results.zh-CN.md)，未参与下方斜面配对 |
 | Newton Physics 1.6.1 / Warp 1.18.0 | CPU SolverXPBD，float32；4 次迭代，dt=1 ms | [球–平面及负例](docs/newton-contact.zh-CN.md)，不等于抓取对照 |
-| PhysX（历史 Isaac Sim 5.1 / UniSim 1.7.10 接入） | 待核实：历史批次原生版本与求解配置 [P0 #126](https://github.com/huangkiki/Dexlab/issues/126)；宿主版本不代表 PhysX 版本 | [历史接触实验](demos/contact-benchmark/README.zh-CN.md)；不属于下方双引擎批次 |
+| PhysX（历史 Isaac Sim 5.1；UniSim 及直接 SDK 路径） | 三组 SDK 对照读回 PGS/TGS 与外力时序；表面布料单列。[分批审计与原生核心身份缺口 #126](docs/physx-solver-audit.zh-CN.md) | [历史接触实验](demos/contact-benchmark/README.zh-CN.md)；不属于下方双引擎批次 |
 | Drake | 尚无已验收的运行版本或求解器结果 | 接入与首轮评测见 [#117](https://github.com/huangkiki/Dexlab/issues/117) |
 
-公开结论中的事实与来源缺口必须关联可验收 Issue，并优先于新增能力处理。SuperDex 官方包身份与配置重建、Genesis 历史求解器枚举已核实；历史读回缺口分别由 [#124](https://github.com/huangkiki/Dexlab/issues/124)、[#125](https://github.com/huangkiki/Dexlab/issues/125) 跟踪，PhysX 溯源由 [#126](https://github.com/huangkiki/Dexlab/issues/126) 承接。重建、源码推导与历史原生读回分别标注。
+公开结论中的事实与来源缺口必须关联可验收 Issue，并优先于新增能力处理。SuperDex 官方包身份与配置重建、Genesis 历史求解器枚举已核实；历史读回缺口分别由 [#124](https://github.com/huangkiki/Dexlab/issues/124)、[#125](https://github.com/huangkiki/Dexlab/issues/125) 跟踪，PhysX 已恢复三组原生场景求解器读回，[#126](https://github.com/huangkiki/Dexlab/issues/126) 保留各批次核心／加载库身份及其余缺失读回。重建、源码推导与历史原生读回分别标注。
 
 后续评测必须覆盖 **MuJoCo、SuperDex、Genesis、Newton Physics、PhysX、Drake** 及适用的已登记求解器配置。每份报告列出完整工况矩阵：已通过、已失败、受阻、不支持或未运行；缺项必须关联 Issue，补齐前仅称阶段结果。既有结果保留原范围，不追认成全引擎评测。ManiSkill/SAPIEN/Isaac Sim 是接入层，UniLab 是任务层，不能重复计作独立引擎；Newton Physics 与 MuJoCo 的 Newton 算法也不是一回事。
 
