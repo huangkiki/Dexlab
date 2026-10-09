@@ -56,3 +56,7 @@
 ![连续夹持、抬升与释放近景](../../../demos/cloth-folding/media/compliance-grasp.gif)
 
 一个 9 秒候选通过固定 v3 标准，自接触穿透仍接近阈值。[指标、失败对照、录像溯源与完整命令](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.zh-CN.md)。该结果不替换上方历史失败，也不证明鲁棒性。
+
+## Drake 斜面首轮准入
+
+官方 1.57.0 / SAP / kLagged / hydroelastic：静止与零摩擦通过全部六例，滑动三例失败，无地面负例被正确拒绝。初始共面故障保留，1 µm 间隙另立协议；不增加新协议可靠覆盖。 [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md).

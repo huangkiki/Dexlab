@@ -4,18 +4,47 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from contextlib import ExitStack
+from copy import deepcopy
 from unittest.mock import patch
 from types import SimpleNamespace
 
 SCRIPTS = Path(__file__).parents[1] / 'scripts'
 sys.path.insert(0, str(SCRIPTS))
 from bounded_run import (verify_limits, verify_headroom, verify_service, main,
-                         select_profile, freeze_resources, pressure, PROFILES)
+                         select_profile, freeze_resources, pressure, PROFILES, inside)
 from archive_run import record_stage
 sys.path.pop(0)
 
 
 class AdaptiveResourceTests(unittest.TestCase):
+    def test_slow_gpu_query_does_not_inflate_initial_cpu_rate(self):
+        clock, receipts = [0.], []
+
+        def gpu():
+            clock[0] += 2.
+            return []
+
+        def values(*args):
+            return {'cpu.stat': f'usage_usec {int(clock[0] * 1e6)}', 'io.stat': ''}
+
+        args = SimpleNamespace(device_number='8:0', memory_bytes=1, high_bytes=1,
+                               profile='archive', timeout=10, telemetry=Path('unused'), command=['unused'])
+        replacements = {'os.getuid': lambda: 1000, 'current_cgroup': lambda: Path('/unused'),
+                        'verify_limits': lambda *a: {}, 'verify_service': lambda *a: {},
+                        'read_values': values, 'pressure': lambda *a: {}, 'gpu_memory': gpu,
+                        'time.monotonic': lambda: clock[0],
+                        'time.sleep': lambda seconds: clock.__setitem__(0, clock[0] + seconds),
+                        'atomic_json': lambda path, state: receipts.append(deepcopy(state))}
+        with ExitStack() as stack:
+            for name, replacement in replacements.items():
+                stack.enter_context(patch('bounded_run.' + name, replacement))
+            child = stack.enter_context(patch('bounded_run.subprocess.Popen')).return_value
+            child.poll.side_effect = [None, 0]
+            child.returncode = 0
+            self.assertEqual(inside(args), 0)
+        self.assertAlmostEqual(receipts[-1]['sampled_peak_cpu_cores'], 1.)
+
     def test_smallest_tier_reserves_fifty_percent_above_peak(self):
         self.assertEqual(select_profile(), 'adaptive-16g-4c')
         self.assertEqual(select_profile(complex_model=True), 'adaptive-24g-4c')

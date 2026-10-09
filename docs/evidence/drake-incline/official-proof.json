@@ -1,0 +1,78 @@
+{
+  "version": "1.57.0",
+  "native_version_file": "1.57.0 1e1466ba466e7ce8fa9fcca4e086ce1383e5427d",
+  "pypi_latest_stable": "1.57.0",
+  "wheel": {
+    "filename": "drake-1.57.0-cp312-cp312-manylinux_2_34_x86_64.whl",
+    "url": "https://files.pythonhosted.org/packages/3a/02/66c6ff19eca40b0709a57d40b4c5ff416da90ea8fcf4749d08a64759d940/drake-1.57.0-cp312-cp312-manylinux_2_34_x86_64.whl",
+    "size": 43581835,
+    "upload_time_iso_8601": "2026-09-10T16:48:30.571773Z",
+    "digests": {
+      "blake2b_256": "3a0266c6ff19eca40b0709a57d40b4c5ff416da90ea8fcf4749d08a64759d940",
+      "md5": "fcf3fb8e52d3dedb5b6bf69db42ecbbe",
+      "sha256": "9319e09d707d616dd5b753184724b1e87337f499a2f59b8c7f313480182f90ee"
+    }
+  },
+  "verified_file_count": 402,
+  "installed_files_sha256": "40b3e57408faad2426caf2b9283b71cdc8447aad24703377bf19309cad2c6861",
+  "native_files": {
+    "drake.libs/libgfortran-3f600444.so.5.0.0": "68a32c56adc87879e69ae4c0a483b84a3618f2962804a22d8586cca95d2fcc63",
+    "drake.libs/libgomp-2af01464.so.1.0.0": "e0b4316d0a703a7367f73b0c3e50f9ec3152850b257b0e5259d59b4420a85ab2",
+    "drake.libs/libquadmath-bfd9a0db.so.0.0.0": "5928560e6b40d9e7c30c3daa856479cfa3d308abd086bc012e8fb247e1becb1b",
+    "pydrake/lcm.so": "823d815889f331e87165e0bdf1add2ed04afc2a4689a251d797b1133f4ff3b51",
+    "pydrake/perception.so": "dec6fdd3dd9d66fdb30661126a587cfe13619163ebd0ebdba1dc96e4d5634adf",
+    "pydrake/polynomial.so": "80a1f5b18109ccba86a9d1a1e6723f7de39b6948da21878d5800df3f3fc5aad7",
+    "pydrake/trajectories.so": "d5e967084594366f56ccd2bc922e0e1dac1e10e4f177f37113db8cddf21bd470",
+    "pydrake/common/__init__.so": "9d5b9f473a1049815616d95812e04004c49ef4179717028a5b17a94088143a54",
+    "pydrake/doc/drake/VERSION.TXT": "06279e7169ae81a4d79087436dc265a7dd7b85ba935b1c52625332fb4133ec80",
+    "pydrake/examples/__init__.so": "7f8b1438e7cf8c076993b29bf4b81e87424b61e84e974bc3b916fce9134b83f5",
+    "pydrake/geometry/__init__.so": "5f238bd6aac66155593d65b598ee8a7623d069e162664a7fb839436ba60c44ca",
+    "pydrake/lib/libdrake.so": "2904ce0504aef6274321c58abf083a338cbd467c08a8c22bddd9caab79817837",
+    "pydrake/lib/libdrake_marker.so": "180da0ac4f63155618b3cbae92b5298f459076f7318383597899cbe5e21913cc",
+    "pydrake/lib/libdrake_vendor_lcm.so": "bf5857fffbad157b55ff67bca13489f5b974b9dd09228269cd06604696cced62",
+    "pydrake/manipulation/__init__.so": "35de7479474fa3bb6398072c30bd85836e4465662de2ca918dbf4cf9baa249ca",
+    "pydrake/multibody/benchmarks.so": "6c27ed526a492dff7b11813715b2d9d7d6baf6de4518a0916fb7b073699e0bcf",
+    "pydrake/multibody/cenic.so": "1622c245ce13d8c7b21db3e44718fde064d3c16a750a8a1f3a7fd626849adb37",
+    "pydrake/multibody/contact_solvers.so": "b8c7b9fed27377f6dad4727f8c48eeacae00c8eda1bd9aeb1e13f00f8b36cd54",
+    "pydrake/multibody/fem.so": "2f4661adf3ecf6f15a0a1cdc4ad22e8ec1d82ad26f2b240eb493661e3648ca1c",
+    "pydrake/multibody/inverse_kinematics.so": "d291e4b1f34be338dac6cf1ede9a29a718fd842483e16fbac3a92bf2d2af0627",
+    "pydrake/multibody/math.so": "dc699c6f04c180784b8ce3d93981bdc24b616122174eea1edb03754d082e0f59",
+    "pydrake/multibody/meshcat.so": "7d7b54a930acaefbbb27c31354380e14330d252645540bdf636e6f0215eaec2e",
+    "pydrake/multibody/optimization.so": "bc5730187783a8e27ea5ebf3f94b03f6de1d77216090945ed6270524abbce122",
+    "pydrake/multibody/parsing.so": "d9a468435e2093eff633115f7a71f1d14babc0c742d41c42051e5caf7a424ff3",
+    "pydrake/multibody/plant.so": "c7fcd531e6d56b49ab16c4edc338b90e4cf4a28972c2804b216004c2d876a1ed",
+    "pydrake/multibody/rational.so": "59c3de5f6132b12026e778959ab9e15b43e675ee5a4d07378def7d3ee57f2c42",
+    "pydrake/multibody/tree.so": "f0e2f3bf422780d577bfac2924d399b9567450e0b3bec2f853c1e55379cb26b3",
+    "pydrake/planning/__init__.so": "cf9bd93c53d67d0283e6d6a1672c5bb9047a7428c9e3d22f2a1f5ebff7bc9865",
+    "pydrake/solvers/__init__.so": "76aaffe91661e0464772b9492b511a88c421e1849628f8ee20411e9641be178d",
+    "pydrake/systems/analysis.so": "8218e9e0a3e2803e0811d33829d3aca35ae870a1606b86a052aa1b80d83a08a0",
+    "pydrake/systems/controllers.so": "8ff4548b01e396710495779559ff6b54cdac4a784f60d4f4b8c62bcd31a7d87f",
+    "pydrake/systems/estimators.so": "f8b5cfe166c47dae527be36d4d5671f3c44c51c57a3b764413d08c5d96ec67a7",
+    "pydrake/systems/framework.so": "93c5d7d640e20a26f07c0b73ce9a60d935500ce5ac7381ca0c1353f096f51e5b",
+    "pydrake/systems/lcm.so": "91171f328fe00eb72d896c3509c2eadf445c8b2548aa494186f1c8d2143a33ac",
+    "pydrake/systems/primitives.so": "682ce7ec076d60c6b1825586e77212bb156e838fc8bed0c1b6bea97401a93c08",
+    "pydrake/systems/rendering.so": "3fc297b24b978da8744d9b3201089ecf54ddb0a69e1e71a4e1b09ff805d9c12c",
+    "pydrake/systems/sensors.so": "b1ad204f0fb1cb48a7cf2d4344381864141cc19bcd019f94873618b8e7728dcb",
+    "pydrake/visualization/__init__.so": "5e5ef166e103078c82fe32200b224c5fa60d9e23ce4cff2c8f652e65927fcc53"
+  },
+  "approximations": [
+    "kLagged",
+    "kSap",
+    "kSimilar"
+  ],
+  "contact_models": [
+    "kHydroelastic",
+    "kHydroelasticWithFallback",
+    "kHydroelasticsOnly",
+    "kPoint",
+    "kPointContactOnly"
+  ],
+  "defaults": {
+    "solver": "kSap",
+    "approximation": "kLagged",
+    "model": "kHydroelasticWithFallback",
+    "sampled_output": true
+  },
+  "native_steps": 0,
+  "package_code_sha256": "eb80ad29a30fe7f6aaa2dde4b0833b2b715e336dcc8a56e354d2b3faad891115"
+}

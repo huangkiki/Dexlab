@@ -17,7 +17,7 @@
 
 ## 最新稳定版准入
 
-新批次冻结当日核查官方最新稳定核心、solver、绑定与封装；记录实际加载版本、哈希、精度和计算路径。轮内不升级。alpha/beta/RC/dev、撤回包与实验性 solver 选项不进入主比较。不兼容的组合明确阻塞，不静默退回旧版本。
+新批次分别准入原生最新稳定路径和框架官方兼容组合。核心、绑定、框架版本及其哈希、精度、计算路径分别记录，批次内冻结。较旧的内嵌核心不自动成为阻塞；归因实验另行匹配核心版本，版本不能匹配时不声称差异仅由框架造成。
 
 2026-10-04 已核实发布线索：[MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0)、[Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3)、[Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0)。仅此带日期的清单不证明任务资格。MuJoCo 3.14.0 已有[结果报告](results.md)所列夹布与摩擦开发证据；Genesis 和 Newton 仍需分别验收。
 
@@ -35,3 +35,7 @@ MuJoCo Warp 3.14.0 的六卡参数对照得到四组通过、两组失败，固�
 ## 合成触觉观测
 
 支持盒体/固定薄层的几何占据图（MuJoCo夹具），非剪切记忆、光学渲染或真机标定。三批结果及未通过对照见[报告](https://github.com/huangkiki/Dexlab/blob/main/docs/synthetic-tactile.zh-CN.md)。
+
+## 双轨准入与 Drake 结果
+
+2026-10-09 的覆盖计划采用上述双轨准入。Drake 原生 1.57.0 已记录 SAP / kLagged / hydroelastic 的首轮斜面结果，九例六过三败；kSap、kSimilar 等适用配置尚未运行。 [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md).

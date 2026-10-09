@@ -58,6 +58,33 @@ def cloth_counts(bundle, expected_cases):
     return counts
 
 
+def incline_counts(bundle, protocol):
+    """Recount the frozen qualification, including the required negative."""
+    cases = {case['id']: case for case in protocol['cases']}
+    seen, passed, total, negatives = set(), 0, 0, 0
+    for result in bundle['results']:
+        name = result['id']
+        if name not in cases or name in seen or result['record_valid'] is not True:
+            raise ValueError('Missing, duplicate or invalid incline evidence')
+        seen.add(name)
+        negative = cases[name].get('negative_no_floor', False)
+        if not result['checks'] or any(type(value) is not bool for value in result['checks'].values()):
+            raise ValueError('Malformed incline checks')
+        if (result['expected_negative'] != negative or type(result['passed']) is not bool
+                or result['passed'] != all(result['checks'].values())):
+            raise ValueError('Contradictory incline verdict')
+        if negative:
+            if result['passed']:
+                raise ValueError('Negative control was accepted')
+            negatives += 1
+        else:
+            passed += int(result['passed'])
+            total += 1
+    if seen != set(cases) or not negatives or not total:
+        raise ValueError('Incomplete incline qualification')
+    return passed, total
+
+
 def reliable_tasks(manifest, root):
     """Union task types across qualified configs; never add repeats or paths."""
     result = {engine: set() for engine in ENGINES}
@@ -98,6 +125,12 @@ def load_inventory(root=ROOT):
         if 'cloth_summaries' in cohort:
             bundle = json.loads(evidence(root, cohort['cloth_summaries']))
             counts[name] = cloth_counts(bundle, cohort['expected_cases'])
+        if 'incline_score' in cohort:
+            bundle = json.loads(evidence(root, cohort['incline_score']))
+            protocol = json.loads(evidence(root, cohort['protocol']))
+            if bundle['protocol_sha256'] != cohort['protocol']['sha256']:
+                raise ValueError('Incline protocol binding changed')
+            counts[name] = {(cohort['profile'], 'incline'): incline_counts(bundle, protocol)}
     rows_seen = set()
     for row in manifest['rows']:
         identity = tuple(row[key] for key in ('engine', 'solver', 'runtime_path', 'version', 'cohort'))

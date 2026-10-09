@@ -13,7 +13,7 @@ html_theme.sidebar_primary.remove: true
 
 <div class="research-links"><a href="#comparison">阅读引擎对照 ↗</a><a href="#coverage">查看六引擎覆盖</a><a href="https://github.com/huangkiki/Dexlab/releases">代码与数据 ↗</a></div>
 
-<div class="research-meta">当前数据交付 v0.46.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
+<div class="research-meta">当前数据交付 v0.49.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
 
 ## 现在能做哪些任务
 
@@ -29,7 +29,7 @@ html_theme.sidebar_primary.remove: true
 | 机器人夹布、抬升与释放 | MuJoCo 3.14 的指定 9 s 开发案例通过有限协议；自接触接近阈值，尚无稳健性结论 | [通过配置、失败与命令](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.zh-CN.md) |
 | 刚体球—平面基础接触 | Newton Physics 1.6.1 / XPBD 的正常、重复及禁碰撞对照完成准入；未覆盖机器人抓取 | [协议、记录与复核](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md) |
 
-双手折布已有实验入口但尚未证明成功；Drake 尚无已验收任务；新的 MuJoCo／Genesis 统一驱动批次尚未准入。它们分别由 [折布记录](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/README.zh-CN.md)、[#117](https://github.com/huangkiki/Dexlab/issues/117) 和 [#130](https://github.com/huangkiki/Dexlab/issues/130)／[#143](https://github.com/huangkiki/Dexlab/issues/143) 跟踪。
+双手折布尚未证明成功。Drake 1.57.0 首轮斜面九例中六例通过、三例滑动失败，负例正确拒绝；[完整记录](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md)。统一驱动接入差异已由 [#143](https://github.com/huangkiki/Dexlab/issues/143) 验证，完整研究批次仍见 [#130](https://github.com/huangkiki/Dexlab/issues/130)。
 
 **我们的评价标准：更好的引擎，应能可靠覆盖更多类型的任务。** 我们同时看任务类型、物理可信度、跨工况稳定性和执行成本：能在保留判据的前提下可靠完成更多任务类型，才扩大该配置的已验证能力。安装成功、适配器声明、同一任务的多个求解器或重复运行都不增加任务类型；历史不同协议的通过数不合并成通用排行榜。
 
@@ -49,9 +49,10 @@ html_theme.sidebar_primary.remove: true
 | **MuJoCo · Newton / Euler**<br>native · 3.15.0<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/impact-stiffness-results.md) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/pinch-load-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **SuperDex · Newton / AUTO / FP64**<br>native · 1.0.0<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Genesis · Newton / approximate_implicitfast**<br>native CPU FP64 · 1.4.3<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [完整通过](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **Genesis · Newton / approximate_implicitfast**<br>UniSim 1.7.12 + disclosed local patch · 1.4.3<br>genesis-contact-migration-v4 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/unisim-contact-migration.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Newton Physics · XPBD**<br>native CPU FP32 · 1.6.1 / Warp 1.18.0<br>rigid-history | [完整通过](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **PhysX · historical readback incomplete (#126)**<br>SDK historical · historical core identity unrecovered (#126)<br>rigid-history | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
-| **Drake · pending qualification**<br>native · pending #117<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/117) | [未运行](https://github.com/huangkiki/Dexlab/issues/117) | [未运行](https://github.com/huangkiki/Dexlab/issues/117) | [未运行](https://github.com/huangkiki/Dexlab/issues/117) | [未运行](https://github.com/huangkiki/Dexlab/issues/117) |
+| **Drake · SAP / kLagged / hydroelastic**<br>native CPU FP64 · 1.57.0<br>drake-incline-qualification-v2 | [未运行](https://github.com/huangkiki/Dexlab/issues/151) | [部分通过 6/9](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/151) | [未运行](https://github.com/huangkiki/Dexlab/issues/151) | [未运行](https://github.com/huangkiki/Dexlab/issues/151) |
 | **MuJoCo · Newton / implicitfast**<br>native · 3.11.0<br>apple-sdf-14s | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [完整通过](https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md) |
 | **SuperDex · Newton / GMRES / FP64**<br>native · 1.0.0<br>apple-sdf-14s | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [完整通过](https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md) |
 
@@ -64,7 +65,7 @@ html_theme.sidebar_primary.remove: true
 | **Genesis · Newton / approximate_implicitfast**<br>native CPU FP64 · 1.4.3<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/48) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
 | **Newton Physics · XPBD**<br>native CPU FP32 · 1.6.1 / Warp 1.18.0<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/48) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
 | **PhysX · pending qualification**<br>ManiSkill / SAPIEN · official combination pending #47<br>rigid-history | [接入受阻](https://github.com/huangkiki/Dexlab/issues/47) | [接入受阻](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
-| **Drake · pending qualification**<br>native · pending #117<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/48) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
+| **Drake · SAP / kLagged / hydroelastic**<br>native CPU FP64 · 1.57.0<br>drake-incline-qualification-v2 | [未运行](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/48) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
 | **MuJoCo · Newton / implicitfast**<br>native · 3.14.0<br>rigid-history | [未运行](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/48) | [完整通过](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
 | **Genesis · PBD / rigid coupling**<br>native CPU FP64 · 1.4.3<br>genesis-cloth-diagnostic | [未运行](https://github.com/huangkiki/Dexlab/issues/47) | [未运行](https://github.com/huangkiki/Dexlab/issues/48) | [失败](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/28) |
 
@@ -150,7 +151,7 @@ Genesis 1.4.3 PBD 的驱动夹布／保持工况已运行并失败，见[保留�
 | Genesis | 1.4.3 / Newton / approximate_implicitfast；[历史配置及读回边界](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.zh-CN.md) | 未运行 | [16 组力限额](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) |
 | Newton Physics | 1.6.1，Warp 1.18.0 / XPBD | 未运行 | [球–平面与负例](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md) |
 | PhysX | 三组 SDK 对照读回 PGS/TGS；[分批配置与原生核心身份缺口 #126](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.zh-CN.md) | 未运行；接入资格待补齐 | [历史接触实验](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.zh-CN.md) |
-| Drake | 未取得已验收版本 / solver | 未运行 | [接入任务 #117](https://github.com/huangkiki/Dexlab/issues/117) |
+| Drake | 1.57.0 / SAP / kLagged / hydroelastic | [6/9；滑动失败](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md) | 负例正确拒绝；其他配置 [#151](https://github.com/huangkiki/Dexlab/issues/151) |
 
 历史审计 [#124](https://github.com/huangkiki/Dexlab/issues/124)、[#125](https://github.com/huangkiki/Dexlab/issues/125)、[#126](https://github.com/huangkiki/Dexlab/issues/126)已完成有界搜寻与归因审查：SuperDex 同字节重建、Genesis 匹配源码推导、PhysX 三组场景读回分别保留；缺失遥测不回填，无法支持的精确核心版本及算法因果归因撤回。新实验由各引擎资格子项承接，使用独立记录；审计结项不增加可靠任务覆盖。
 
