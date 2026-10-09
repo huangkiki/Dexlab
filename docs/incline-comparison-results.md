@@ -21,6 +21,8 @@ All 21,000 new SuperDex steps report CONVERGED. Mass, inertia, gravity, coordina
 
 MuJoCo forces come from the preintegration solve, while SuperDex forces are queried after the step; each is paired with that step's velocity increment. Native contact-distance epochs differ, so a supplementary common cube/plane geometric penetration is also reported from saved poses, without changing original checks. It is zero in all nine SuperDex cases: contact can activate at a positive gap, which does not imply an exactly rigid contact model.
 
+The [2026-10-09 solver audit](superdex-solver-audit.md) links all nine package hashes to official wheels and build source. Same-byte reconstruction reads Newton/AUTO/C1 regularization; the small-system source branch is dense LDLᵀ. This supplement is separate from historical direct readback; original records are unchanged and [#124](https://github.com/huangkiki/Dexlab/issues/124) retains the execution-telemetry gap.
+
 ## Every paired case
 
 Velocity RMSE and acceleration errors use 0.5–2 s, initializing the analytical reference from the measured window-start state. Fits for MuJoCo sliding cases that violate assumptions are diagnostic only. Contact loss and drift/travel cover the full run. JSON retains every threshold, force error and individual check.

@@ -52,7 +52,7 @@ Reproducible contact and friction experiments grounded in established physical l
 
 <div class="research-caution"><strong>Counterexamples belong in the conclusion.</strong> Historical MuJoCo impedance=0.99 drift is 0.141–0.179 mm, below this SuperDex profile. SuperDex static drift increases with timestep refinement; MuJoCo has a native friction floor. These results do not establish a universal winner.</div>
 
-**Solver settings.** MuJoCo: Newton / Euler / elliptic, impedance=0.9, 100 iterations maximum, tolerance 1e-10. SuperDex recorded configuration: Backward Euler / penalty, 100 iterations maximum, absolute/relative tolerance 1e-9; open audit of the solver used and combined contact law: [P0 #124](https://github.com/huangkiki/Dexlab/issues/124). Equal μ is not material or contact-model equivalence. Velocity errors use the 0.5–2 s window; the report preserves initial transients and failures.
+**Solver settings.** MuJoCo: Newton / Euler / elliptic, impedance=0.9, 100 iterations maximum, tolerance 1e-10. SuperDex same-byte reconstruction: Newton / AUTO (dense LDLᵀ on the small-system source path) / C1-regularized friction; historical readback: Backward Euler, 100 iterations, absolute/relative tolerance 1e-9. [Identity, combination law and historical telemetry gap #124](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-solver-audit.md). Equal μ is not material or contact-model equivalence. Velocity errors use the 0.5–2 s window; the report preserves initial transients and failures.
 
 [Full results and raw data](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md) · [Frozen protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-protocol.md) · [Parameter manifest](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/incline-comparison/manifest.json)
 
@@ -64,13 +64,13 @@ Matched cases and scoring are separate from having some previous experiment. The
 | Engine | Recorded version / solver | Nine paired incline cases | Other evidence |
 |---|---|---|---|
 | MuJoCo | 3.15.0 / Newton | Executed, including failures | Collision and pinch diagnostics |
-| SuperDex | 1.0.0 FP64 / [open solver audit P0 #124](https://github.com/huangkiki/Dexlab/issues/124) | Executed, including failures | Loading, parameter transfer |
+| SuperDex | 1.0.0 FP64 / [Newton reconstruction; historical telemetry limit](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-solver-audit.md) | Executed, including failures | Loading, parameter transfer |
 | Genesis | 1.4.3 / [open solver audit P0 #125](https://github.com/huangkiki/Dexlab/issues/125) | Not run | [16 force-limit cases](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) |
 | Newton Physics | 1.6.1, Warp 1.18.0 / XPBD | Not run | [Sphere–plane and negatives](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md) |
 | PhysX | Historical Isaac Sim 5.1 integration; [open native identity audit P0 #126](https://github.com/huangkiki/Dexlab/issues/126) | Not run; integration qualification incomplete | [Historical contact cases](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.md) |
 | Drake | No accepted version / solver yet | Not run | [Integration #117](https://github.com/huangkiki/Dexlab/issues/117) |
 
-Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. The P0 audits above remain open; recorded parameters and observations retain their scope and do not establish attribution to an unverified solver algorithm.
+Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. SuperDex package identity and configuration reconstruction are verified; [#124](https://github.com/huangkiki/Dexlab/issues/124) retains the historical execution-telemetry gap. Genesis and PhysX provenance remain P0 work. Reconstruction, source inference and historical native readback are labeled separately.
 
 [Follow-up work and blockers](https://github.com/huangkiki/Dexlab/issues) · [PhysX integration #47](https://github.com/huangkiki/Dexlab/issues/47). Frameworks and native engines are distinct; Newton Physics is not MuJoCo's Newton algorithm.
 
