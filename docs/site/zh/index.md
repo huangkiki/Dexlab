@@ -65,12 +65,12 @@ html_theme.sidebar_primary.remove: true
 |---|---|---|---|
 | MuJoCo | 3.15.0 / Newton | 已运行，含失败 | 碰撞、夹持诊断 |
 | SuperDex | 1.0.0 FP64 / [Newton 配置重建；历史遥测边界](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-solver-audit.zh-CN.md) | 已运行，含失败 | 加载、参数迁移 |
-| Genesis | 1.4.3 / [待核实算法 P0 #125](https://github.com/huangkiki/Dexlab/issues/125) | 未运行 | [16 组力限额](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) |
+| Genesis | 1.4.3 / Newton / approximate_implicitfast；[历史配置及读回边界](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.zh-CN.md) | 未运行 | [16 组力限额](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) |
 | Newton Physics | 1.6.1，Warp 1.18.0 / XPBD | 未运行 | [球–平面与负例](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md) |
 | PhysX | 历史 Isaac Sim 5.1 接入；[待核实原生身份 P0 #126](https://github.com/huangkiki/Dexlab/issues/126) | 未运行；接入资格待补齐 | [历史接触实验](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.zh-CN.md) |
 | Drake | 未取得已验收版本 / solver | 未运行 | [接入任务 #117](https://github.com/huangkiki/Dexlab/issues/117) |
 
-公开结论中的事实与来源缺口必须关联可验收 Issue，并优先于新增能力处理。SuperDex 已完成官方包身份与配置重建，历史执行遥测缺口仍由 [#124](https://github.com/huangkiki/Dexlab/issues/124) 跟踪；Genesis、PhysX 溯源继续按 P0 处理。重建、源码推导与历史原生读回分别标注。
+公开结论中的事实与来源缺口必须关联可验收 Issue，并优先于新增能力处理。SuperDex 官方包身份与配置重建、Genesis 历史求解器枚举已核实；历史读回缺口分别由 [#124](https://github.com/huangkiki/Dexlab/issues/124)、[#125](https://github.com/huangkiki/Dexlab/issues/125) 跟踪，PhysX 溯源由 [#126](https://github.com/huangkiki/Dexlab/issues/126) 承接。重建、源码推导与历史原生读回分别标注。
 
 [所有后续任务与阻塞](https://github.com/huangkiki/Dexlab/issues) · [PhysX 接入问题 #47](https://github.com/huangkiki/Dexlab/issues/47)。接入层与原生引擎分开；Newton Physics 也不是 MuJoCo 的 Newton 求解算法。
 

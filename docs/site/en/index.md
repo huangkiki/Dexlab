@@ -65,12 +65,12 @@ Matched cases and scoring are separate from having some previous experiment. The
 |---|---|---|---|
 | MuJoCo | 3.15.0 / Newton | Executed, including failures | Collision and pinch diagnostics |
 | SuperDex | 1.0.0 FP64 / [Newton reconstruction; historical telemetry limit](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-solver-audit.md) | Executed, including failures | Loading, parameter transfer |
-| Genesis | 1.4.3 / [open solver audit P0 #125](https://github.com/huangkiki/Dexlab/issues/125) | Not run | [16 force-limit cases](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) |
+| Genesis | 1.4.3 / Newton / approximate_implicitfast; [historical settings and readback limits](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.md) | Not run | [16 force-limit cases](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) |
 | Newton Physics | 1.6.1, Warp 1.18.0 / XPBD | Not run | [Sphere–plane and negatives](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md) |
 | PhysX | Historical Isaac Sim 5.1 integration; [open native identity audit P0 #126](https://github.com/huangkiki/Dexlab/issues/126) | Not run; integration qualification incomplete | [Historical contact cases](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.md) |
 | Drake | No accepted version / solver yet | Not run | [Integration #117](https://github.com/huangkiki/Dexlab/issues/117) |
 
-Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. SuperDex package identity and configuration reconstruction are verified; [#124](https://github.com/huangkiki/Dexlab/issues/124) retains the historical execution-telemetry gap. Genesis and PhysX provenance remain P0 work. Reconstruction, source inference and historical native readback are labeled separately.
+Unresolved facts or provenance behind public findings must link to actionable Issues and take priority over capability expansion. SuperDex package identity/configuration reconstruction and Genesis historical solver enums are verified; [#124](https://github.com/huangkiki/Dexlab/issues/124) and [#125](https://github.com/huangkiki/Dexlab/issues/125) retain historical readback gaps, while [#126](https://github.com/huangkiki/Dexlab/issues/126) tracks PhysX provenance. Reconstruction, source inference and historical native readback are labeled separately.
 
 [Follow-up work and blockers](https://github.com/huangkiki/Dexlab/issues) · [PhysX integration #47](https://github.com/huangkiki/Dexlab/issues/47). Frameworks and native engines are distinct; Newton Physics is not MuJoCo's Newton algorithm.
 
