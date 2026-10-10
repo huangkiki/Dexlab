@@ -1,5 +1,7 @@
 # 自动研究与发布
 
+当前以维护者批准的研究产出计划为优先：复用已有结论、诊断具体失败、积累有条件的场景／solver 经验。AI 试参属于方法，覆盖表描述范围。见[诊断](site/zh/diagnosis.md)与[选型](site/zh/selection.md)。**定时开发保持暂停**；下文资源和证据规则保留。
+
 [English](autoresearch.md) | [简体中文](autoresearch.zh-CN.md)
 
 Codex 按 Issue 推进实现、验证和审查，再合并符合条件的 PR 并发布 GitHub Release。维护者于 **2026-09-29** 授权此仓库的自动合并发版，无需逐次确认。`scripts/autoresearch.py` 管理任务领取、工作树、检查与 PR 提交；审查、合并和发布由已授权的 Codex worker 使用 GitHub 工具执行。脚本单独运行不会自动合并或调用模型，也不会在抓取控制器内调用 Astra／Jev。

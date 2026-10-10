@@ -225,8 +225,7 @@ def render(manifest, language, root=ROOT):
 def update(root=ROOT, check=False):
     manifest = load_inventory(root)
     stale = []
-    for filename, language in (('README.md', 'zh'), ('README.en.md', 'en'),
-                               ('docs/site/zh/index.md', 'zh'), ('docs/site/en/index.md', 'en')):
+    for filename, language in (('docs/site/zh/coverage.md', 'zh'), ('docs/site/en/coverage.md', 'en')):
         path = root / filename
         source = path.read_text()
         if any(source.count(marker) != 1 for marker in MARKERS):

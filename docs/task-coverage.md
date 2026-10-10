@@ -1,12 +1,14 @@
 # Task coverage and continuous development
 
+The maintainer-approved research-output plan now takes priority: reuse existing findings, diagnose concrete failures, and build conditional scene/solver knowledge. AI parameter trials are a method; coverage describes scope. See [diagnosis](site/en/diagnosis.md) and [selection](site/en/selection.md). Scheduled development stays **PAUSED**; resource and evidence rules below remain.
+
 [English](task-coverage.md) | [简体中文](task-coverage.zh-CN.md)
 
 **We value an engine that reliably completes more types of tasks.** Each task may use its appropriate solver and parameters. Physical error, stability and cost remain visible alongside coverage. Repeats, timestep scans and another framework do not create new task types.
 
-## One inventory, four generated views
+## One inventory, detailed bilingual views
 
-`docs/task-coverage.json` is the versioned inventory. Run `python scripts/task_coverage.py` after updating evidence; `--check` rejects stale README/site tables and is part of the strict bilingual build. Fixed task IDs distinguish passive folded drop, robot cloth grasp/lift and active folding. Every row identifies core, solver, runtime path, version and cohort, and accounts for every task. Tables split columns for readability, not to change the denominator.
+`docs/task-coverage.json` is the versioned inventory. Run `python scripts/task_coverage.py` after updating evidence; `--check` rejects stale detailed coverage pages and is part of the strict bilingual build. Fixed task IDs distinguish passive folded drop, robot cloth grasp/lift and active folding. Every row identifies core, solver, runtime path, version and cohort, and accounts for every task. Tables split columns for readability, not to change the denominator.
 
 Every cell links to its original report (including commands and raw-data entry points) or a recovery Issue. Observed results and unsupported claims require a repository evidence file and SHA-256. Historical cloth counts are recomputed from all 105 frozen summaries: duplicate, missing or contradictory records fail validation. This is an inventory audit, not independent trajectory rescoring. Historical missing readbacks stay missing; documentation changes do not fill them.
 

@@ -1,5 +1,7 @@
 # Autoresearch and releases
 
+The maintainer-approved research-output plan now takes priority: reuse existing findings, diagnose concrete failures, and build conditional scene/solver knowledge. AI parameter trials are a method; coverage describes scope. See [diagnosis](site/en/diagnosis.md) and [selection](site/en/selection.md). Scheduled development stays **PAUSED**; resource and evidence rules below remain.
+
 [English](autoresearch.md) | [简体中文](autoresearch.zh-CN.md)
 
 Codex implements, verifies and reviews issue-scoped changes, then merges eligible PRs and publishes GitHub Releases. The maintainer authorized automatic merge and release for this repository on **2026-09-29**, without per-run confirmation. `scripts/autoresearch.py` handles selection, worktrees, checks and PR submission; the authorized Codex worker performs review, merge and release through GitHub tools. Running the script alone does not merge PRs or invoke a model, and does not call Astra/Jev inside the grasp controller.
