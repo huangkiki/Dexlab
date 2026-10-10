@@ -1,0 +1,82 @@
+[
+  {
+    "profile": "pgs",
+    "score": {
+      "path": "docs/evidence/physx-incline/pgs-score.json",
+      "sha256": "1e977f01db9461169b298e45b1edde69069e1dd4dd8186aacd353b3f256bd5ba"
+    },
+    "raw_score": {
+      "path": "docs/evidence/physx-incline/raw-scores/pgs.json",
+      "sha256": "af9900b83703898b03fe9786fa1d24789f401b53380a9e8748a795131d33c6c5"
+    },
+    "protocol": {
+      "path": "docs/evidence/physx-incline/profiles/pgs.json",
+      "sha256": "09d60380fd4e467df7455332552510b3683826b6bb9f4781c1b1c050d6c30ead"
+    },
+    "passed": 7,
+    "total": 9,
+    "invalid_positives": 1,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "pgs-friction",
+    "score": {
+      "path": "docs/evidence/physx-incline/pgs-friction-score.json",
+      "sha256": "3bdf184ce5a648a505c0c2865ed63c5ff6a7a864c35fbeb7c5ffb98d7701702b"
+    },
+    "raw_score": {
+      "path": "docs/evidence/physx-incline/raw-scores/pgs-friction.json",
+      "sha256": "3db094dba140bcebae703428919a45da064250329b286951fcc6a074c4a6edd0"
+    },
+    "protocol": {
+      "path": "docs/evidence/physx-incline/profiles/pgs-friction.json",
+      "sha256": "84f92f931db8b393b5b279d35c24506ef526bf8db28332c0688ee30c0d1de71a"
+    },
+    "passed": 7,
+    "total": 9,
+    "invalid_positives": 0,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "tgs",
+    "score": {
+      "path": "docs/evidence/physx-incline/tgs-score.json",
+      "sha256": "ebc3728daa58464699d9584a35d6c668ec0b7e1c4e7aaf591ac19504a60006ae"
+    },
+    "raw_score": {
+      "path": "docs/evidence/physx-incline/raw-scores/tgs.json",
+      "sha256": "10722ce9592cc7f4880183c7a1ceae917453d8c0e331ec19647b2664ca1d209f"
+    },
+    "protocol": {
+      "path": "docs/evidence/physx-incline/profiles/tgs.json",
+      "sha256": "9101340381807795c893d2d6ec3c56f6f5381c6acbca4c420ab60eb69867af7d"
+    },
+    "passed": 3,
+    "total": 9,
+    "invalid_positives": 6,
+    "negative_valid": true,
+    "negative_rejected": true
+  },
+  {
+    "profile": "tgs-external",
+    "score": {
+      "path": "docs/evidence/physx-incline/tgs-external-score.json",
+      "sha256": "70b24f84c4fea197e7a8bfe3d0e10f52811bc123107d07c3ee8e0396b6fc3f27"
+    },
+    "raw_score": {
+      "path": "docs/evidence/physx-incline/raw-scores/tgs-external.json",
+      "sha256": "90ca4cca49e0900b4e03d77ed85a343a9bfce44273d0d79fce026275b919f707"
+    },
+    "protocol": {
+      "path": "docs/evidence/physx-incline/profiles/tgs-external.json",
+      "sha256": "b84ff7d20a858cac503e1c0cb3d3629e001778e308d0de11c7f2d6855a41f6ab"
+    },
+    "passed": 3,
+    "total": 9,
+    "invalid_positives": 6,
+    "negative_valid": true,
+    "negative_rejected": true
+  }
+]

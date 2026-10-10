@@ -13,7 +13,7 @@ Reproducible contact and friction experiments grounded in established physical l
 
 <div class="research-links"><a href="#comparison">Read the comparison ↗</a><a href="#coverage">Six-engine coverage</a><a href="https://github.com/huangkiki/Dexlab/releases">Code & data ↗</a></div>
 
-<div class="research-meta">Evidence release v0.53.0 · Analytical verification / fixed cases · Full-engine matrix incomplete</div>
+<div class="research-meta">Evidence release v0.54.0 · Analytical verification / fixed cases · Full-engine matrix incomplete</div>
 
 ## What tasks can I run?
 
@@ -45,6 +45,8 @@ BFGS/SR1 retain an assembly period of one and therefore execute Newton-equivalen
 Five native Genesis 1.4.3 incline profiles pass 6/9, 3/9, 0/9, 0/9 and 0/9. Native contacts floor nominal-zero friction to .01; all seven invalid CG records remain, with source-linked stopping diagnostics. [Evidence / 详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md).
 
 Seven native Newton Physics 1.6.1 incline profiles pass 1/9, 0/9, 0/9, 0/9, 0/9, 1/9 and 4/9. Numerical checks reject 49 positives and both VBD negatives. DVI timeout and explicit continuation remain visible; no engine ranking or reliable coverage is claimed. [Evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md).
+
+Four native PhysX SDK 5.9.0 incline profiles pass 7/9, 7/9, 3/9 and 3/9. All four negatives are valid and rejected; 13 positives fail frozen numerical checks. All failures and raw observations remain. No reliable coverage or framework-path performance is inferred. [Results and reproduction](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) · [Precision validation #163](https://github.com/huangkiki/Dexlab/issues/163).
 
 <!-- task-coverage:start -->
 
@@ -106,6 +108,10 @@ States: passed / partial / failed / not run / blocked / unsupported. Cells link 
 | **Newton Physics · Style3D**<br>native particle solver · 1.6.1 / Warp 1.18.0<br>newton-incline-particle-scope-v1 | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Unsupported](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Newton Physics · ImplicitMPM**<br>native particle solver · 1.6.1 / Warp 1.18.0<br>newton-incline-particle-scope-v1 | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Unsupported](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
 | **MuJoCo · SolverMuJoCo; algorithm unqualified**<br>Newton wrapper / unqualified · Newton 1.6.1; MuJoCo core unqualified<br>newton-mujoco-wrapper-unqualified | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/152) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · PGS / patch friction**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-pgs | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial 7/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · PGS / friction every iteration**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-pgs-friction | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial 7/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · TGS / patch friction**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-tgs | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · TGS / external forces every iteration**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-tgs-external | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Partial 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) | [Not run](https://github.com/huangkiki/Dexlab/issues/121) |
 
 ### Manipulation · historical protocols and gaps
 
@@ -193,15 +199,15 @@ The [coverage-first development plan](https://github.com/huangkiki/Dexlab/blob/m
 (coverage)=
 ## Six engines. What is covered?
 
-Matched cases and scoring are separate from having some previous experiment. The table concerns the nine incline cases above. Versions are historical evidence identities, not claims about current latest releases. Missing runs are never counted as passes.
+This index links cohorts sharing the initial physical conditions. Native observations and scoring are frozen separately; this is not a shared-tuning/holdout six-engine ranking. Historical identities remain separate from new admissions. The generated matrix above lists every solver configuration.
 
 | Engine | Recorded version / solver | Nine paired incline cases | Other evidence |
 |---|---|---|---|
 | MuJoCo | 3.15.0 / Newton | Executed, including failures | Collision and pinch diagnostics |
 | SuperDex | 1.0.0 FP64 / [Newton reconstruction; historical telemetry limit](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-solver-audit.md) | Executed, including failures | Loading, parameter transfer |
-| Genesis | 1.4.3 / Newton / approximate_implicitfast; [historical settings and readback limits](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.md) | Not run | [16 force-limit cases](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) |
-| Newton Physics | 1.6.1, Warp 1.18.0 / XPBD | Not run | [Sphere–plane and negatives](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.md) |
-| PhysX | Three SDK controls read back PGS/TGS; [cohort settings and native-core identity gap #126](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md) | Not run; integration qualification incomplete | [Historical contact cases](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.md) |
+| Genesis | 1.4.3 / five native configurations | [Executed, including failures and invalid records](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.md) | Historical force-limit evidence separate |
+| Newton Physics | 1.6.1 / Warp 1.18.0 / seven native configurations | [Executed, including failures, interruption and explicit continuation](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | Separate sphere–plane negatives |
+| PhysX | Native SDK 5.9.0 / four PGS/TGS profiles | [7/9, 7/9, 3/9, 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | Historical framework core gaps remain; comparison #152 |
 | Drake | 1.57.0 / SAP / kLagged / hydroelastic | [6/9; sliding fails](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md) | Negative correctly rejected; other profiles [#151](https://github.com/huangkiki/Dexlab/issues/151) |
 
 Historical audits [#124](https://github.com/huangkiki/Dexlab/issues/124), [#125](https://github.com/huangkiki/Dexlab/issues/125) and [#126](https://github.com/huangkiki/Dexlab/issues/126) complete bounded searches and attribution review: SuperDex same-byte reconstruction, Genesis matching-source derivation and three PhysX scene readbacks remain distinct. Missing telemetry stays missing; unsupported exact-core and algorithm-causality attribution is withdrawn. Engine qualification children carry new experiments with separate records; closing these audits adds no reliable task coverage.

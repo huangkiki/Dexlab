@@ -1,0 +1,143 @@
+{
+  "source_commit": "517a0073715120e114ee055b63b26c95e00d9039",
+  "sdk_release": "110.1-omni-and-physx-5.9.0",
+  "archive_sha256": "bc894626070f0658a3235231c825c3e0f8ad1fd9d5077a63cb5bdaffe8816407",
+  "exact_git_blobs": 5271,
+  "line_endings_only": [
+    {
+      "path": "blast/build.bat",
+      "git_blob": "287ebebab4f571036d08ad2aec48f3abb7750270",
+      "archive_sha256": "98471ccb68a7c2cf9a60f086f19d878c8584b8e70759c8daee61ffed4ce73f2d",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "blast/format_code.bat",
+      "git_blob": "e87ae5117920ff4f1272de7d80e725f769eb0c3f",
+      "archive_sha256": "01cfc7e46ea31679aa6740b542cd3dfc6eced60acc7ab1f0e0dd9054f3b190a0",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "blast/repo.bat",
+      "git_blob": "6e713c6010deb64baab3dcdb3f4d3c8368e9a40e",
+      "archive_sha256": "589da6c62b652523fb796a7c0096cf1f9895aa97064f56a5939820b9d1cb4846",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "blast/tools/packman/bootstrap/configure.bat",
+      "git_blob": "1aff9d870aa1f11827dbd96f6e735890e63738d7",
+      "archive_sha256": "909a8e16baabed1e1a2544772ec50350f768ff204e4f151399d156ed4cbc0cc5",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "blast/tools/packman/bootstrap/fetch_file_from_packman_bootstrap.cmd",
+      "git_blob": "bf3a88d50f4c8d9ccc0401db184ac5de79e8bc9b",
+      "archive_sha256": "13f57a343ed5bc3786838fae32563f51ba7e1c814bdd307c3ba894356096fc32",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "blast/tools/packman/packman.cmd",
+      "git_blob": "e55b2f0e191a4f1f2e913a8e94628da9d8aaa0a6",
+      "archive_sha256": "0b69e7423b55604628c50ec2e32dc1e0d1b83517ecea2e87d55cdb4e199e3d2d",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "blast/tools/packman/python.bat",
+      "git_blob": "08df74f8a253ec704f17c294a721d31fbbe52d3d",
+      "archive_sha256": "9bdbb49f2f2dae2e7b79c3bcad52864733ca017f5539dfc74284316e26b6e816",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/cmake/parse_build_args.bat",
+      "git_blob": "fde736a5543f314a98bbfa4f6b2bef071f721ecc",
+      "archive_sha256": "dbaa614d6a63496b846d0dd97b4ea7388afec1fb9af6cbbe2aabd7714f7b3d1b",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovexts/build.bat",
+      "git_blob": "27af14bcbf3c944687038845e0e031d6ef4c0855",
+      "archive_sha256": "7461ffddd7d1248c45ff13259b3831b4283ef322bffa27745515b1b311176205",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovexts/repo.bat",
+      "git_blob": "aeb625b79f505476b5f78c581ace34f922d4a14d",
+      "archive_sha256": "2f71981cf0505380b0a46e93ba4cc692ea748c3d81d0adc48b441762c0f63fc6",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovexts/tools/packman/packman.cmd",
+      "git_blob": "c1c0bf5b456671bc50a4cfe10b68d8c6f1b20eb1",
+      "archive_sha256": "f71e70464a01c9ecf7edb8b8a72333f5747b12b0ca83b49b6e1da9ba02cf125d",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovexts/tools/packman/python.bat",
+      "git_blob": "08df74f8a253ec704f17c294a721d31fbbe52d3d",
+      "archive_sha256": "9bdbb49f2f2dae2e7b79c3bcad52864733ca017f5539dfc74284316e26b6e816",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovruntime/build.bat",
+      "git_blob": "8af8d17a89c56f279e93dafb01184882e75ed853",
+      "archive_sha256": "bb9497e2ab43dc1cc39f343e93c4a3f7dbf9b243a0d7af5b02a4b4b950c75ccc",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovruntime/pull_dependencies.bat",
+      "git_blob": "840befc46e8247df728e4f096d4e3b7d186d0b97",
+      "archive_sha256": "9709de7b1a24e573283648c697d8ef6d1b3728a22b1d97df20cbbd0c35cfc5ea",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovruntime/tools/packman/packman.cmd",
+      "git_blob": "c1c0bf5b456671bc50a4cfe10b68d8c6f1b20eb1",
+      "archive_sha256": "f71e70464a01c9ecf7edb8b8a72333f5747b12b0ca83b49b6e1da9ba02cf125d",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/ovruntime/tools/packman/python.bat",
+      "git_blob": "08df74f8a253ec704f17c294a721d31fbbe52d3d",
+      "archive_sha256": "9bdbb49f2f2dae2e7b79c3bcad52864733ca017f5539dfc74284316e26b6e816",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/schema/repo.bat",
+      "git_blob": "00c5c78369351ef47ad2026aee86ecd5852a354d",
+      "archive_sha256": "8e3e2e071c9dc76bab0fc1d5f88b1842cdcf63c6d937f2acfc8ff98d97725c3f",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/schema/tools/packman/packman.cmd",
+      "git_blob": "c1c0bf5b456671bc50a4cfe10b68d8c6f1b20eb1",
+      "archive_sha256": "f71e70464a01c9ecf7edb8b8a72333f5747b12b0ca83b49b6e1da9ba02cf125d",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/schema/tools/packman/python.bat",
+      "git_blob": "08df74f8a253ec704f17c294a721d31fbbe52d3d",
+      "archive_sha256": "9bdbb49f2f2dae2e7b79c3bcad52864733ca017f5539dfc74284316e26b6e816",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/umbrella/build.bat",
+      "git_blob": "27af14bcbf3c944687038845e0e031d6ef4c0855",
+      "archive_sha256": "7461ffddd7d1248c45ff13259b3831b4283ef322bffa27745515b1b311176205",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/umbrella/tools/packman/packman.cmd",
+      "git_blob": "c1c0bf5b456671bc50a4cfe10b68d8c6f1b20eb1",
+      "archive_sha256": "f71e70464a01c9ecf7edb8b8a72333f5747b12b0ca83b49b6e1da9ba02cf125d",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    },
+    {
+      "path": "omni/umbrella/tools/packman/python.bat",
+      "git_blob": "08df74f8a253ec704f17c294a721d31fbbe52d3d",
+      "archive_sha256": "9bdbb49f2f2dae2e7b79c3bcad52864733ca017f5539dfc74284316e26b6e816",
+      "difference": "CRLF in official archive versus LF in Git blob; source left unchanged"
+    }
+  ],
+  "mismatches": [],
+  "missing": [],
+  "source_modified": false
+}

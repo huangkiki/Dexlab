@@ -1,0 +1,13 @@
+{
+  "scope": [
+    "docs/physx-solver-audit.md",
+    "docs/evidence/physx-solver-audit",
+    "demos/physx-contact",
+    "demos/contact-benchmark"
+  ],
+  "decision": "No previously core-identified protocol-compatible nine-case native incline dataset; historical contact/cloth and scene controls do not substitute for this task.",
+  "historical_missing_telemetry_preserved": true,
+  "history_issue": 126,
+  "new_cohort_issue": 150,
+  "framework_issue": 152
+}

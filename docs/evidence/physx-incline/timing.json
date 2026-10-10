@@ -1,0 +1,282 @@
+[
+  {
+    "profile": "pgs",
+    "case": "static-h0.002",
+    "native_step_wall_s": 0.018221945999999982,
+    "case_wall_s": 0.04236485599540174,
+    "updates": 1000
+  },
+  {
+    "profile": "pgs",
+    "case": "static-h0.001",
+    "native_step_wall_s": 0.025065075000000027,
+    "case_wall_s": 0.06408212200039998,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs",
+    "case": "static-h0.0005",
+    "native_step_wall_s": 0.05111168000000001,
+    "case_wall_s": 0.11935463402187452,
+    "updates": 4000
+  },
+  {
+    "profile": "pgs",
+    "case": "sliding-h0.002",
+    "native_step_wall_s": 0.01540855200000001,
+    "case_wall_s": 0.033281257026828825,
+    "updates": 1000
+  },
+  {
+    "profile": "pgs",
+    "case": "sliding-h0.001",
+    "native_step_wall_s": 0.02152070799999995,
+    "case_wall_s": 0.05580659199040383,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs",
+    "case": "sliding-h0.0005",
+    "native_step_wall_s": 0.0539105600000001,
+    "case_wall_s": 0.12940965901361778,
+    "updates": 4000
+  },
+  {
+    "profile": "pgs",
+    "case": "frictionless-h0.002",
+    "native_step_wall_s": 0.014643254999999997,
+    "case_wall_s": 0.03447155904723331,
+    "updates": 1000
+  },
+  {
+    "profile": "pgs",
+    "case": "frictionless-h0.001",
+    "native_step_wall_s": 0.03312075000000004,
+    "case_wall_s": 0.08036892500240356,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs",
+    "case": "frictionless-h0.0005",
+    "native_step_wall_s": 0.044621087999999975,
+    "case_wall_s": 0.11134163703536615,
+    "updates": 4000
+  },
+  {
+    "profile": "pgs",
+    "case": "negative-no-support",
+    "native_step_wall_s": 0.02509185299999992,
+    "case_wall_s": 0.045470607990864664,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "static-h0.002",
+    "native_step_wall_s": 0.012788754000000017,
+    "case_wall_s": 0.031063714006450027,
+    "updates": 1000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "static-h0.001",
+    "native_step_wall_s": 0.025847794999999965,
+    "case_wall_s": 0.06143161200452596,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "static-h0.0005",
+    "native_step_wall_s": 0.04832320399999988,
+    "case_wall_s": 0.11495779297547415,
+    "updates": 4000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "sliding-h0.002",
+    "native_step_wall_s": 0.013255535000000002,
+    "case_wall_s": 0.031237872957717627,
+    "updates": 1000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "sliding-h0.001",
+    "native_step_wall_s": 0.02659490800000002,
+    "case_wall_s": 0.06200470100156963,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "sliding-h0.0005",
+    "native_step_wall_s": 0.044536318000000054,
+    "case_wall_s": 0.1104777569998987,
+    "updates": 4000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "frictionless-h0.002",
+    "native_step_wall_s": 0.018144626000000018,
+    "case_wall_s": 0.045007982989773154,
+    "updates": 1000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "frictionless-h0.001",
+    "native_step_wall_s": 0.024654065000000013,
+    "case_wall_s": 0.059475197980646044,
+    "updates": 2000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "frictionless-h0.0005",
+    "native_step_wall_s": 0.04196606200000017,
+    "case_wall_s": 0.10532700998010114,
+    "updates": 4000
+  },
+  {
+    "profile": "pgs-friction",
+    "case": "negative-no-support",
+    "native_step_wall_s": 0.03468699699999999,
+    "case_wall_s": 0.059782980009913445,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs",
+    "case": "static-h0.002",
+    "native_step_wall_s": 0.015551432999999991,
+    "case_wall_s": 0.03396801097551361,
+    "updates": 1000
+  },
+  {
+    "profile": "tgs",
+    "case": "static-h0.001",
+    "native_step_wall_s": 0.04773108099999994,
+    "case_wall_s": 0.11325249797664583,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs",
+    "case": "static-h0.0005",
+    "native_step_wall_s": 0.05442354600000005,
+    "case_wall_s": 0.12831179500790313,
+    "updates": 4000
+  },
+  {
+    "profile": "tgs",
+    "case": "sliding-h0.002",
+    "native_step_wall_s": 0.01601162600000002,
+    "case_wall_s": 0.03450214798795059,
+    "updates": 1000
+  },
+  {
+    "profile": "tgs",
+    "case": "sliding-h0.001",
+    "native_step_wall_s": 0.027230933000000034,
+    "case_wall_s": 0.06900720798876137,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs",
+    "case": "sliding-h0.0005",
+    "native_step_wall_s": 0.04925336300000001,
+    "case_wall_s": 0.1179184329812415,
+    "updates": 4000
+  },
+  {
+    "profile": "tgs",
+    "case": "frictionless-h0.002",
+    "native_step_wall_s": 0.016137820999999997,
+    "case_wall_s": 0.033484279992990196,
+    "updates": 1000
+  },
+  {
+    "profile": "tgs",
+    "case": "frictionless-h0.001",
+    "native_step_wall_s": 0.03708529400000003,
+    "case_wall_s": 0.08447310398332775,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs",
+    "case": "frictionless-h0.0005",
+    "native_step_wall_s": 0.049843039000000054,
+    "case_wall_s": 0.11404547101119533,
+    "updates": 4000
+  },
+  {
+    "profile": "tgs",
+    "case": "negative-no-support",
+    "native_step_wall_s": 0.02174324100000008,
+    "case_wall_s": 0.03504858503583819,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "static-h0.002",
+    "native_step_wall_s": 0.01615157799999999,
+    "case_wall_s": 0.0344916739850305,
+    "updates": 1000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "static-h0.001",
+    "native_step_wall_s": 0.028897857999999988,
+    "case_wall_s": 0.0640026589971967,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "static-h0.0005",
+    "native_step_wall_s": 0.06992831799999978,
+    "case_wall_s": 0.16979867103509605,
+    "updates": 4000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "sliding-h0.002",
+    "native_step_wall_s": 0.013333229000000007,
+    "case_wall_s": 0.03150351298972964,
+    "updates": 1000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "sliding-h0.001",
+    "native_step_wall_s": 0.02598625600000002,
+    "case_wall_s": 0.06114989594789222,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "sliding-h0.0005",
+    "native_step_wall_s": 0.056655922000000164,
+    "case_wall_s": 0.12817979097599164,
+    "updates": 4000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "frictionless-h0.002",
+    "native_step_wall_s": 0.01258351800000001,
+    "case_wall_s": 0.030711435014382005,
+    "updates": 1000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "frictionless-h0.001",
+    "native_step_wall_s": 0.023263427000000027,
+    "case_wall_s": 0.056258497992530465,
+    "updates": 2000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "frictionless-h0.0005",
+    "native_step_wall_s": 0.04541193499999995,
+    "case_wall_s": 0.10913044499466196,
+    "updates": 4000
+  },
+  {
+    "profile": "tgs-external",
+    "case": "negative-no-support",
+    "native_step_wall_s": 0.021803490999999987,
+    "case_wall_s": 0.03530012600822374,
+    "updates": 2000
+  }
+]

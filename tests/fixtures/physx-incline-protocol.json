@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "profile": "pgs",
+  "source_commit": "517a0073715120e114ee055b63b26c95e00d9039",
+  "version": "5.9.0",
+  "duration_s": 2,
+  "score_start_s": 0.5,
+  "side_m": 0.04,
+  "mass_kg": 0.064,
+  "gravity_m_s2": 9.81,
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "force_balance_rmse_n": 0.01
+  },
+  "cases": [
+    {
+      "id": "static-h0.002",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.002
+    },
+    {
+      "id": "static-h0.001",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.001
+    },
+    {
+      "id": "static-h0.0005",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.0005
+    },
+    {
+      "id": "sliding-h0.002",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "timestep": 0.002
+    },
+    {
+      "id": "sliding-h0.001",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "timestep": 0.001
+    },
+    {
+      "id": "sliding-h0.0005",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "timestep": 0.0005
+    },
+    {
+      "id": "frictionless-h0.002",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "timestep": 0.002
+    },
+    {
+      "id": "frictionless-h0.001",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "timestep": 0.001
+    },
+    {
+      "id": "frictionless-h0.0005",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "timestep": 0.0005
+    },
+    {
+      "id": "negative-no-support",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.001,
+      "negative_no_floor": true
+    }
+  ],
+  "binary_sha256": "046bbc1c7d478bb98a38a8cbe397b353ccc8f4700d34a47a4fcdef997c704aba",
+  "recorder_sha256": "32d90ba62a399c4ea381f3cbffa9b518762195aa70c08e0fda785dcaf54a3b6a"
+}
