@@ -51,3 +51,7 @@ Reuse old PhysX traces first for [offline FP32 diagnostics](https://github.com/h
 The six-engine matrix, 594-episode pinch study and later tasks remain. Preserve resource limits and one executor; scheduled development stays paused. Add a work package only with new evidence and a concrete hypothesis; one incomplete engine does not block independent research.
 
 The executed integration check retains two runtime-version admission failures. After freezing the explicit profile and inheriting the ledger, two 1600-step MuJoCo 3.15.0 cases complete: the initial profile fails physically and the historical fitted profile passes. Effective parameters and independent scores are retained. This validates the workflow with known candidates, not new holdouts. [Results, costs and archive](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/contact-trials-integration-v1.json). Recovery also verifies termination of the bounded cgroup, covering interruption before a child PID can be published.
+
+## Native LIBERO workflow case
+
+[Diagnose contacts and observations in the complete native task](libero-workflow.md): observation refresh has source/readback evidence, while the smaller-step candidate fails transfer screening. Action execution, physics diagnostics and policy-validation limits remain separate.

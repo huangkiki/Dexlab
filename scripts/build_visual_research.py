@@ -127,13 +127,17 @@ def engine_table(inventory, language, site):
         "",
     ]
     lines += [
-        "**MJWarp 运行路径对照（归入 MuJoCo 核心）**"
-        if zh
-        else "**MJWarp path comparison (MuJoCo core)**",
+        (
+            "**MJWarp 运行路径对照（归入 MuJoCo 核心）**"
+            if zh
+            else "**MJWarp path comparison (MuJoCo core)**"
+        ),
         "",
-        "| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |"
-        if zh
-        else "| Runtime path | Actual physics core | Solver / contact path | Task acceptance |",
+        (
+            "| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |"
+            if zh
+            else "| Runtime path | Actual physics core | Solver / contact path | Task acceptance |"
+        ),
         "| --- | --- | --- | --- |",
     ]
     for row in inventory["rows"]:
@@ -146,9 +150,11 @@ def engine_table(inventory, language, site):
             )
     lines += [
         "",
-        "已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。"
-        if zh
-        else "Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question.",
+        (
+            "已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。"
+            if zh
+            else "Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question."
+        ),
         "",
     ]
     return "\n".join(lines)
@@ -271,9 +277,9 @@ def comparisons(index, experiences, language):
         + ("从画面到物理差异" if zh else "From visible motion to physical differences"),
         "",
         (
-            "同步查看记录状态、原生观测与物理参照。所有图表来自已有实验；这里没有重新运行物理，也没有改变评分或容差。"
+            "同步查看记录状态、原生观测与物理参照。图表来自各自归档实验；回放只读取记录，不推进物理，也不改变评分或容差。"
             if zh
-            else "Inspect recorded states, native observations and physical references together. These are existing experiments; no physics was rerun and no scores or tolerances were changed."
+            else "Inspect recorded states, native observations and physical references together. Each plot links its archived experiment; playback reads records without advancing physics or changing scores or tolerances."
         ),
         "",
         (
@@ -342,6 +348,8 @@ def highlights(index, language, site):
         first = case["variants"][0]["data"]["path"]
         bundle = read_bundle(ROOT / first)
         poster = "docs/evidence/visual/" + bundle["videos"][0]["poster"]
+        if case["id"] == "libero":
+            poster = "docs/evidence/visual/libero-summary.png"
         if case["id"] == "pinch":
             poster = (
                 "docs/evidence/visual/pinch-summary.png"

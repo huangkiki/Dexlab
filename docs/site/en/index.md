@@ -42,6 +42,7 @@ Model/clock diagnostics already exist; task acceptance retains the matrix state.
 
 ```{raw} html
 <div class="experiment-grid">
+<article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="Native LIBERO: diagnosis and change"></a><div class="card-copy"><h3><a href="libero-workflow.html">Native LIBERO: diagnosis and change</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>How can an existing benchmark expose and validate a change?</p><p>Stale observations identified; timestep trials retain successes, failures and regressions.</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="Normal &amp; transient response"></a><div class="card-copy"><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>How do parameters change loading, unloading and transients?</p><p>Static calibration works; dynamics and mass transfer need separate checks.</p></div></article>
 <article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="Six-engine incline &amp; friction"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">Six-engine incline &amp; friction</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>Where do static, sliding and low-friction cases differ?</p><p>Fixed-profile outcomes and observation validity are separate; failures remain.</p></div></article>
 <article class="experiment-card"><a href="results.html"><img loading="lazy" src="_static/visual/catalogue/sensitivity.png" alt="Impact &amp; contact onset"></a><div class="card-copy"><h3><a href="results.html">Impact &amp; contact onset</a></h3><p class="engines">MuJoCo · SuperDex</p><p>How do timestep, stiffness and impact phase affect transients?</p><p>Existing phase/stiffness sweeps; smaller steps do not automatically remove model differences.</p></div></article>
@@ -91,6 +92,17 @@ The same Genesis fixture and object, changing the finger-joint force limit. Comp
 
 [Synchronized replay, full-rate curves, parameters and original evidence](pinch)
 
+(visual-highlight-libero)=
+### LIBERO: native task, timestep control and observation fix
+
+Same actions, initial state, Panda and native success; original 2 ms versus unqualified 1 ms control. Heldout task success stays 10/10, screens change from 5/10 to 3/10, and cost doubles. Policy effects of observation refresh remain unverified.
+
+![LIBERO: native task, timestep control and observation fix](../../../docs/evidence/visual/libero-summary.png)
+
+![LIBERO: native task, timestep control and observation fix — curves](../../../docs/evidence/visual/libero-demo0-curves.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](libero)
+
 <!-- visual-research:end -->
 
 ## How to diagnose a poorly performing scene
@@ -133,6 +145,7 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 :maxdepth: 1
 
 Visual comparisons <visual-comparisons>
+Native LIBERO workflow <libero-workflow>
 Findings <experience>
 Diagnosis <diagnosis>
 Selection <selection>

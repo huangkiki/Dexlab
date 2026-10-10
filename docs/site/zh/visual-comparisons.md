@@ -1,6 +1,6 @@
 # 从画面到物理差异
 
-同步查看记录状态、原生观测与物理参照。所有图表来自已有实验；这里没有重新运行物理，也没有改变评分或容差。
+同步查看记录状态、原生观测与物理参照。图表来自各自归档实验；回放只读取记录，不推进物理，也不改变评分或容差。
 
 画面采用实物比例；微小变化看局部曲线。虚线是案例声明的解析／工程参照，并不代表真实材料测量。不同历史协议的结果不汇总为引擎排行榜。
 
@@ -87,3 +87,31 @@
 物理参照：理想静态平指夹持需要 μΣN≥mg，本例 mg/μ≈1.256 N。曲线 Σ|Fx| 是指面力投影代理，不是实测执行器输出；2–3 s 高度阈值 60 mm 只是原验收的一项，全部原检查同时保留。
 
 **证据与全部配置：** [16 个案例、失败与成本](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) · [历史 solver 来源审计](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.md)
+
+(libero)=
+## LIBERO：原任务、步长对照与观测修正
+
+相同动作、初态、Panda 和成功判定；原版 2 ms 与未通过筛查的 1 ms 对照。全部留出任务成功，物理诊断 5/10 对 3/10，成本约翻倍。观测刷新补丁的策略效果未验证。
+
+```{raw} html
+<div class="dexlab-replay" data-language="zh" data-variants="[{&quot;label&quot;: &quot;开发 demo_0：冻结首条示范&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo0.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_4：首个诊断退化&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo4.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_8：最大原生穿透&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo8.json.gz&quot;}]">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.png" alt="LIBERO：原任务、步长对照与观测修正"></div>
+<details class="replay-fallback" open><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>开发 demo_0：冻结首条示范: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo0-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo0-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_4：首个诊断退化: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo4-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo4-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_8：最大原生穿透: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo8-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo8-step-1000us.mp4">MP4 · step-1000us</a></li></ul></details>
+</div>
+```
+
+**条件：** 官方 cream-cheese-to-basket，Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic；20 Hz 控制，原版 2 ms。
+
+**观察：** 原版与 1 ms 留出动作执行均 10/10 完成原任务，物理诊断分别 5/10 与 3/10；步进成本约翻倍。五步静置后旧观测与实际末端位置某坐标相差 4.481 mm。
+
+**解释：** 已验证观测赋值遗漏；正接触时间常数与步长安全下限存在源码确认的耦合。更小步长没有一致改善；最大 floor 接触穿透 12.163 mm 的完整机制仍见 #174。
+
+**建议：** 先修正观测新鲜度，区分控制目标、驱动输出与接触力；保留失败，按具体接触定位受控实验。本轮不推荐新的物理配置。
+
+**边界：** 只有示范动作执行，未验证固定策略闭环效果、真实材料准确性或中途状态恢复；留出仅为同任务的十条示范，不是新任务泛化。
+
+默认是冻结顺序第一条开发示范，不按结果挑选。另展示留出首个诊断退化与最大原版穿透，两者为事后诊断选择；完整十条配对结果均保留。视频不再积分物理。
+
+1 mm 虚线只是预设数值筛查；相对高度包含旋转，法向力来自实际接触。原生时间 = 显示时间 + 0.25 s；曲线使用各自积分前／后时刻。
+
+**证据与全部配置：** [原任务、全部配置、失败与复现](libero-workflow.md) · [剩余归因 #174](https://github.com/huangkiki/Dexlab/issues/174)

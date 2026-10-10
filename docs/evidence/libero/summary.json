@@ -1,0 +1,3933 @@
+{
+  "schema_version": 1,
+  "source_manifest_sha256": "e47de4c1381efba2d06493fa5c2adcb298c58317f30f50cae733df182ebb3d66",
+  "selection": {
+    "candidate": "step-1000us",
+    "development": [
+      {
+        "id": "baseline",
+        "max_overlap_m": 0.004882094925537077,
+        "native_seconds": 0.6940178962540813,
+        "screen_pass": false,
+        "task_pass": true,
+        "valid": true
+      },
+      {
+        "id": "step-1000us",
+        "max_overlap_m": 0.004997233344548508,
+        "native_seconds": 1.3599577270797454,
+        "screen_pass": false,
+        "task_pass": true,
+        "valid": true
+      },
+      {
+        "id": "step-500us",
+        "max_overlap_m": 0.005010925649768543,
+        "native_seconds": 2.7098412237828597,
+        "screen_pass": false,
+        "task_pass": true,
+        "valid": true
+      },
+      {
+        "id": "aligned-2000us",
+        "max_overlap_m": 0.0053039657786872006,
+        "native_seconds": 0.7100871242582798,
+        "screen_pass": false,
+        "task_pass": true,
+        "valid": true
+      },
+      {
+        "id": "aligned-1000us",
+        "max_overlap_m": 0.005406622886362615,
+        "native_seconds": 1.3871715022833087,
+        "screen_pass": false,
+        "task_pass": true,
+        "valid": true
+      },
+      {
+        "id": "aligned-500us",
+        "max_overlap_m": 0.006362042971243266,
+        "native_seconds": 2.7803144645295106,
+        "screen_pass": false,
+        "task_pass": true,
+        "valid": true
+      }
+    ],
+    "diagnostic_qualified": false,
+    "manifest_sha256": "e47de4c1381efba2d06493fa5c2adcb298c58317f30f50cae733df182ebb3d66",
+    "reason": "Heldout validation is still required; an unqualified challenger is a sensitivity comparison only.",
+    "recommendation": false,
+    "sources": {
+      "attempts/0000/result.json": "20d5cf51c7c991bec83bf362495787cb322f82a3847a849909853aef74936344",
+      "attempts/0001/result.json": "7f077ac62ad665933020cbd530a67996d8016c462229327ce3b0f73eb2374d3b",
+      "attempts/0002/result.json": "fc21022702c2a1401af2c968f20e8943062e8c287a09ffb79b49e7dbda525fa7",
+      "attempts/0003/result.json": "238f6e571008743ab80bca70871467f74de6cf1997f1bbfde3a945dd5792fddd",
+      "attempts/0004/result.json": "e9b633573e565503ea796868a992650076d718007f3b486a380815277ffdb7bc",
+      "attempts/0005/result.json": "2b56a4524f2181308efe5fe658a0efcb2721e114c5b336d0ff02f70efc440a50",
+      "attempts/0006/result.json": "9da629296586980026e9c5aa690247419d9cc7241198a8d2c73814be05a992ea",
+      "attempts/0007/result.json": "30916fc95af2384a5a99b699a39b1b1174522bd92a4eda016a412806511aed1c",
+      "attempts/0008/result.json": "2e29b4bab63b81db1cfdcb7918b2e4ed9cdf8e9cfc0740c78f78424fb3733d18",
+      "attempts/0009/result.json": "aca33fac647901a92f8c72f48c95496ba26a3fac3d35459b99e8ce565c22cde4",
+      "attempts/0010/result.json": "cea4d85274ee555adec4ea96aca50cb06abf09483c29320e689ae22e62cbc100",
+      "attempts/0011/result.json": "6242b2c9b45c103b0063e0ea841c2ce2209ce6e6552c96bfafc8525b6912dee6",
+      "attempts/0012/result.json": "0bd5e57cb9c05aca5069b6a633d0f37dc43286bef7a9561d3dd09cd3beb933e5",
+      "attempts/0013/result.json": "5dc4f1b4ebd6d523b432ebd7d0b5975a7ffe0f48d74d2c1f90b5279e94154901",
+      "attempts/0014/result.json": "74fa1bb7093662a94998e531562352d9e2f85b199abbb59c9eb0b6c0c5ecd4f3",
+      "attempts/0015/result.json": "7cf063a8c1acb29b7012ba98159fc41d722f2cc7c5eb07de6174ad55a1b049b9",
+      "attempts/0016/result.json": "c668509d7d67c5e767bffb639660f50ef8a06ab20c9d7c50b770a5e5eaa31983",
+      "attempts/0017/result.json": "306b0ce7509563b87592b1ddce4a4184f1c8a6cefba3df75bcaf58c3b943a91f"
+    }
+  },
+  "recording_parity": {
+    "state": true,
+    "time": true,
+    "initial": true,
+    "actions": true,
+    "success": true,
+    "measurements": true,
+    "controller_targets": true
+  },
+  "cases": [
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 6.068264527944848,
+      "attempt": "0000",
+      "native_result_sha256": "20d5cf51c7c991bec83bf362495787cb322f82a3847a849909853aef74936344",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25236893833643353,
+          "final": 0.02592088148167308
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0019157194137440106,
+          "max_finger_normal_n": 46.661415222859674,
+          "contact_samples": 3376,
+          "momentum_residual_weight_fraction": {
+            "median": 0.0002145239614788781,
+            "p99": 0.025690039302448616,
+            "max": 0.06095308431363615
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.21725062391487882,
+      "duration_s": 6.949999999999429,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "bf6ae37c9ea493ad3451f9b480e855cb224b0b063b641bceaa5bb0055be7f5d1",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "4cb7c5511e1bc45583e2a16267ce8cb74df53a8495fd5087a75bf91548fa79aa",
+        "trajectory.npz": "dd293642fdec6a6f83701a410c009265e5bc9459f5dd91eb18feb5b9e3336690"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.8339999999999095,
+        "first_lift_s": 3.4499999999998416,
+        "first_basket_contact_s": 6.681999999999486,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.64999999999949,
+        "last_finger_contact_s": 6.489999999999507,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 6.685999999999486,
+        "overlap_m": 0.0019157194137440106,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_1",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 6.894448182953056,
+      "attempt": "0001",
+      "native_result_sha256": "7f077ac62ad665933020cbd530a67996d8016c462229327ce3b0f73eb2374d3b",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2749193683990457,
+          "final": 0.05759265331206534
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.004882094925537077,
+          "max_finger_normal_n": 51.35424755320293,
+          "contact_samples": 4559,
+          "momentum_residual_weight_fraction": {
+            "median": 1.9738833122891272e-05,
+            "p99": 0.0075145232553428835,
+            "max": 0.025785770840924895
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.2768589121988043,
+      "duration_s": 9.349999999999875,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "4f785a200835294bef5cbf1761c47d99ed6c1f82d27b63b0313347270b07e5f8",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "cf595ef8a15d2db82f0ea9833de5238a37d0e97c7e9764c7cb9ca2eb37e6a03d",
+        "trajectory.npz": "3dc26113012b3f69453e3041ba3696a24ad66f4d70724e75967c15dd498a8673"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.1319999999998767,
+        "first_lift_s": 3.3499999999998527,
+        "first_basket_contact_s": 6.899999999999462,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 8.999999999999675,
+        "last_finger_contact_s": 8.951999999999659,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.609999999999545,
+        "overlap_m": 0.004882094925537077,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_2",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 5.911539298016578,
+      "attempt": "0002",
+      "native_result_sha256": "fc21022702c2a1401af2c968f20e8943062e8c287a09ffb79b49e7dbda525fa7",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23714060939449585,
+          "final": 0.025920808921270213
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0016205790893069505,
+          "max_finger_normal_n": 48.70994880781132,
+          "contact_samples": 3037,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00022228904761221658,
+            "p99": 0.02013006839986045,
+            "max": 0.04768457312442133
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.19990836014039814,
+      "duration_s": 6.249999999999506,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "40a14bfa43e2102f5757bf3d72641a5d50c35db42c3577c1358be4254af01e5e",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "41fc7156c8cca57c17a1ada0068696883a38fb3c065072eb2b97a1c87771feff",
+        "trajectory.npz": "f7e3e662f161b9a7fd16b28614545d9369f5f0bcdbb2fe9d8cb9f381c02e769c"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.0179999999999993,
+        "first_lift_s": 3.0499999999998857,
+        "first_basket_contact_s": 6.017999999999559,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.949999999999567,
+        "last_finger_contact_s": 5.859999999999577,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 6.031999999999558,
+        "overlap_m": 0.0016205790893069505,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 8.211308570054825,
+      "attempt": "0003",
+      "native_result_sha256": "238f6e571008743ab80bca70871467f74de6cf1997f1bbfde3a945dd5792fddd",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25208822908442396,
+          "final": 0.02592099478390653
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0021524664165076136,
+          "max_finger_normal_n": 50.87212407123463,
+          "contact_samples": 6765,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00014969239390331658,
+            "p99": 0.023358335248924462,
+            "max": 0.05738038482580847
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.42807060101768,
+      "duration_s": 6.950000000000739,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "e1a705f321d7d9b83d50c30fe18df664b7682785f78dd32c60a7d9f8da82e559",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "ccf0479050cea8cbd5a2ba815fda741986d85f2c87d88712a38f58a49db8885e",
+        "trajectory.npz": "2da61550b9576e591c6edaf5e60a1de9191ae11ca20b077218b38eda15bd60a4"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.8189999999998006,
+        "first_lift_s": 3.449999999999731,
+        "first_basket_contact_s": 6.559000000000525,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.500000000000505,
+        "last_finger_contact_s": 6.379000000000465,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.921999999999789,
+        "overlap_m": 0.0021524664165076136,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_1",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 9.824741110031027,
+      "attempt": "0004",
+      "native_result_sha256": "e9b633573e565503ea796868a992650076d718007f3b486a380815277ffdb7bc",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2759276207623101,
+          "final": 0.05759286634238233
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.004997233344548508,
+          "max_finger_normal_n": 47.13253821509021,
+          "contact_samples": 9099,
+          "momentum_residual_weight_fraction": {
+            "median": 2.3461008117726094e-05,
+            "p99": 0.007128577274028085,
+            "max": 0.02975679491412822
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.5369249416980892,
+      "duration_s": 9.350000000000119,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "8e976c3ff104a811dc794240a13a117069bc78ee018412a85cc473befb161314",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "e2244b94f62081c844ef618aa08608a238c83f281590c056faa18eeead09adee",
+        "trajectory.npz": "2d939207f60c9a81ea5b116f2ce9858cfda547d16d0b72afbd99032710657f55"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.0349999999997768,
+        "first_lift_s": 3.349999999999742,
+        "first_basket_contact_s": 6.787000000000601,
+        "first_other_contact_after_lift": {
+          "time_s": 8.867000000000525,
+          "geoms": [
+            "cream_cheese_1_g1",
+            "gripper0_hand_collision"
+          ]
+        },
+        "first_native_success_s": 8.950000000000479,
+        "last_finger_contact_s": 8.89300000000051,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.58800000000068,
+        "overlap_m": 0.004997233344548508,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_2",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 7.8824530490092,
+      "attempt": "0005",
+      "native_result_sha256": "2b56a4524f2181308efe5fe658a0efcb2721e114c5b336d0ff02f70efc440a50",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23625036826508986,
+          "final": 0.02592093903453033
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0015254213995824894,
+          "max_finger_normal_n": 47.37992550829296,
+          "contact_samples": 6089,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00011157442102732605,
+            "p99": 0.01793419027759307,
+            "max": 0.04361084167598821
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.3949621843639761,
+      "duration_s": 6.250000000000505,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "511436a64e3959ae9840a81b2a9d9604af7b26ce29b4ad616df4277681ae8926",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "1857e9a18d1c6cdec890c1bc11a2a018086700fb4556bce206adf6436238af6b",
+        "trajectory.npz": "ffb4f397b8be005abbae725788a86a7856ab0a951e69d6e79d65d9226483b2a3"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.0219999999998883,
+        "first_lift_s": 3.049999999999775,
+        "first_basket_contact_s": 5.888000000000301,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.800000000000272,
+        "last_finger_contact_s": 5.726000000000247,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.123999999999877,
+        "overlap_m": 0.0015254213995824894,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-500us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.25
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 12.59793540101964,
+      "attempt": "0006",
+      "native_result_sha256": "9da629296586980026e9c5aa690247419d9cc7241198a8d2c73814be05a992ea",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25197366547091227,
+          "final": 0.025921025806586843
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0020735074268358362,
+          "max_finger_normal_n": 47.817171170699936,
+          "contact_samples": 13552,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00013013568046299116,
+            "p99": 0.02277201778847694,
+            "max": 0.05885563823491119
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.8480947686475702,
+      "duration_s": 6.949999999998729,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "cf55d94c7785734acca81b898938c4fed53574f94acc8739cd0f9014dc76f142",
+        "effective-model.xml": "3e05970c5f848ffc5977be9a45bc7de8784fcc11da26ef7dc4c216df9a17f8fc",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "d955e77392757b7109bb7f6d97f3229d02ac4c2b69a4a8b1b6a537ec65aa9473",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "d955e77392757b7109bb7f6d97f3229d02ac4c2b69a4a8b1b6a537ec65aa9473",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "735b044c53c9c03b39fdd6a813f44ad1d749bd68e72e30dca69add01c948483d",
+        "trajectory.npz": "1f6e39b2a3d2674ce9adff8ca94ea50a2d8e3fa66b54e4a3bde3f76718c56664"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.8240000000001104,
+        "first_lift_s": 3.4500000000003195,
+        "first_basket_contact_s": 6.49549999999912,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.449999999999145,
+        "last_finger_contact_s": 6.320999999999216,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.927500000000145,
+        "overlap_m": 0.0020735074268358362,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-500us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.25
+      },
+      "demo": "demo_1",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 15.643880441959482,
+      "attempt": "0007",
+      "native_result_sha256": "30916fc95af2384a5a99b699a39b1b1174522bd92a4eda016a412806511aed1c",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2750965462523091,
+          "final": 0.05759289081098221
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.005010925649768543,
+          "max_finger_normal_n": 41.33407628168405,
+          "contact_samples": 18117,
+          "momentum_residual_weight_fraction": {
+            "median": 3.336525774633139e-05,
+            "p99": 0.007150426809074717,
+            "max": 0.030735982861240494
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 1.07914595794864,
+      "duration_s": 9.350000000000241,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "fd2dd9b5105ebd637c793df61b1b51fb2f2111b6adff7f13206a53bb84d3eb90",
+        "effective-model.xml": "3e05970c5f848ffc5977be9a45bc7de8784fcc11da26ef7dc4c216df9a17f8fc",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "d955e77392757b7109bb7f6d97f3229d02ac4c2b69a4a8b1b6a537ec65aa9473",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "d955e77392757b7109bb7f6d97f3229d02ac4c2b69a4a8b1b6a537ec65aa9473",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "50e46234dfb43ef8a56bc972e598b676bfaec6d08d0da1f8ec36c6f15100e6fc",
+        "trajectory.npz": "ad39ae8a49a170ab6c17067373d4ea5d8d110d7a81e7d968e00cefb7d9423905"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.9915000000001664,
+        "first_lift_s": 3.350000000000286,
+        "first_basket_contact_s": 6.72899999999899,
+        "first_other_contact_after_lift": {
+          "time_s": 8.847999999999322,
+          "geoms": [
+            "cream_cheese_1_g1",
+            "gripper0_hand_collision"
+          ]
+        },
+        "first_native_success_s": 8.949999999999447,
+        "last_finger_contact_s": 8.86249999999934,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.580499999998995,
+        "overlap_m": 0.005010925649768543,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-500us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.25
+      },
+      "demo": "demo_2",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 11.851616150001064,
+      "attempt": "0008",
+      "native_result_sha256": "2e29b4bab63b81db1cfdcb7918b2e4ed9cdf8e9cfc0740c78f78424fb3733d18",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2359080074372535,
+          "final": 0.025920970872103755
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0015103273994184416,
+          "max_finger_normal_n": 46.8697621350288,
+          "contact_samples": 12190,
+          "momentum_residual_weight_fraction": {
+            "median": 7.479990560528172e-05,
+            "p99": 0.016673316028779885,
+            "max": 0.041650807931384384
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.7826004971866496,
+      "duration_s": 6.249999999999117,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "db39bc682334c7c10a72a38a4821b832f328b4f654f94b8f4710e3168f3f010a",
+        "effective-model.xml": "3e05970c5f848ffc5977be9a45bc7de8784fcc11da26ef7dc4c216df9a17f8fc",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "d955e77392757b7109bb7f6d97f3229d02ac4c2b69a4a8b1b6a537ec65aa9473",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "d955e77392757b7109bb7f6d97f3229d02ac4c2b69a4a8b1b6a537ec65aa9473",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "8f5d6c4d0be4c7a61ec14eb05966cbf0c1fb7b55cb19c00edf7ceb2bbc0bf54c",
+        "trajectory.npz": "4f37f4f4203c7f47b2edaee0218f3b48cbfbb0277e8c4e758253c9012f38124c"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.0239999999998433,
+        "first_lift_s": 3.050000000000186,
+        "first_basket_contact_s": 5.822499999999493,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.749999999999533,
+        "last_finger_contact_s": 5.670999999999577,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.127999999999878,
+        "overlap_m": 0.0015103273994184416,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-2000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 7.51212949102046,
+      "attempt": "0009",
+      "native_result_sha256": "aca33fac647901a92f8c72f48c95496ba26a3fac3d35459b99e8ce565c22cde4",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.252909940323425,
+          "final": 0.025916297140566015
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0021482830737431942,
+          "max_finger_normal_n": 40.01856694691298,
+          "contact_samples": 3380,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00021924975372990764,
+            "p99": 0.026113319616851545,
+            "max": 0.061727000296935404
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.22104051749920473,
+      "duration_s": 6.949999999999429,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "bf50ae63301b199c78d827e04f541188ff0de7df0b1a1ff26d855b312c3f5fd6",
+        "effective-model.xml": "68a776cf6db0ac99cc3a81706ecf75d25d0ff8e95760ba5d246a7a7ba484450f",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "e7b35d380079db845f7707286c253d3f91738a1ea159a0f390e0e10dd851ada8",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "e7b35d380079db845f7707286c253d3f91738a1ea159a0f390e0e10dd851ada8",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "8afed329abc0923a7ec7a3c23d4b5d7b7737e5e25e4d3e4bf4d18d9f7a25e74d",
+        "trajectory.npz": "441fc3d25c9f795040ae0d5190570d9b3936fba4e02012cdf4fef8baedd74c01"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.8319999999999097,
+        "first_lift_s": 3.4499999999998416,
+        "first_basket_contact_s": 6.693999999999485,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.64999999999949,
+        "last_finger_contact_s": 6.503999999999506,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 6.697999999999484,
+        "overlap_m": 0.0021482830737431942,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.004,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-2000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_1",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 6.951030227995943,
+      "attempt": "0010",
+      "native_result_sha256": "cea4d85274ee555adec4ea96aca50cb06abf09483c29320e689ae22e62cbc100",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2748459720387038,
+          "final": 0.05758799740611307
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0053039657786872006,
+          "max_finger_normal_n": 44.09581072740632,
+          "contact_samples": 4559,
+          "momentum_residual_weight_fraction": {
+            "median": 2.246083080302778e-05,
+            "p99": 0.007270128452306159,
+            "max": 0.02761170419956581
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.2871165605029091,
+      "duration_s": 9.349999999999875,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "813d00cdf565520d758f0506a97682685c4d6d1811f4d796b37cdfe984ca24c8",
+        "effective-model.xml": "68a776cf6db0ac99cc3a81706ecf75d25d0ff8e95760ba5d246a7a7ba484450f",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "e7b35d380079db845f7707286c253d3f91738a1ea159a0f390e0e10dd851ada8",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "e7b35d380079db845f7707286c253d3f91738a1ea159a0f390e0e10dd851ada8",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "3853aca43f429c4921079d1c3482195437edc81db4d122c02962703daaea9cea",
+        "trajectory.npz": "5fbca1f2de31d9f4cbc4a1bb88f2f140394447f971ff1fa213513c483c4de001"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.1319999999998767,
+        "first_lift_s": 3.3499999999998527,
+        "first_basket_contact_s": 6.9059999999994615,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 8.999999999999675,
+        "last_finger_contact_s": 8.949999999999658,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.609999999999545,
+        "overlap_m": 0.0053039657786872006,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-2000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_2",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 5.88436027005082,
+      "attempt": "0011",
+      "native_result_sha256": "6242b2c9b45c103b0063e0ea841c2ce2209ce6e6552c96bfafc8525b6912dee6",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2370861389969491,
+          "final": 0.025916226540421625
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0016974959668511445,
+          "max_finger_normal_n": 44.710562045732615,
+          "contact_samples": 3038,
+          "momentum_residual_weight_fraction": {
+            "median": 0.0002196246041617498,
+            "p99": 0.021081761290536898,
+            "max": 0.04833995567802951
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.20193004625616595,
+      "duration_s": 6.249999999999506,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "980aa95548b8a5dfbbdf00a5067ca8076c88d69a2e0115a29b5a11f98b7aeab7",
+        "effective-model.xml": "68a776cf6db0ac99cc3a81706ecf75d25d0ff8e95760ba5d246a7a7ba484450f",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "e7b35d380079db845f7707286c253d3f91738a1ea159a0f390e0e10dd851ada8",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "e7b35d380079db845f7707286c253d3f91738a1ea159a0f390e0e10dd851ada8",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "5ebb509f3b9b6b281529d356f85d511583e407a2c01256b3d17004513d7d8355",
+        "trajectory.npz": "0b4e047906da0687bcf4287015ba64725b90ff748f8ef0cf543a5d753f8139db"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.0179999999999993,
+        "first_lift_s": 3.0499999999998857,
+        "first_basket_contact_s": 6.019999999999559,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.949999999999567,
+        "last_finger_contact_s": 5.843999999999578,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.137999999999986,
+        "overlap_m": 0.0016974959668511445,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 8.262897434993647,
+      "attempt": "0012",
+      "native_result_sha256": "0bd5e57cb9c05aca5069b6a633d0f37dc43286bef7a9561d3dd09cd3beb933e5",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2523485924057192,
+          "final": 0.025916294155267538
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.002499873329665182,
+          "max_finger_normal_n": 40.30871409732235,
+          "contact_samples": 6770,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00015329402542711438,
+            "p99": 0.02358486381603828,
+            "max": 0.05524055145647639
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.4342288663610816,
+      "duration_s": 6.950000000000739,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "d9c76bbbe271716d34647e7bd169d6a88a8181fdcae8ad4c01b92ce0b48be07b",
+        "effective-model.xml": "fa301fcbe229fe5b9e5b005a845c5aa67604e04b741743cec696df7c69911358",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "ecd9ba06025004183c035ae94db10cfd027955f5476e3df5a9457f7e5c2323d8",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "ecd9ba06025004183c035ae94db10cfd027955f5476e3df5a9457f7e5c2323d8",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "7b72af5841ed0d5ce8c1d079cb27d48b2b9a1fc0f60179b08fec4d3bdfd2c293",
+        "trajectory.npz": "9df6caf269ebc1be70de3e991dd5e57bb27683a6be57657ce95f963f132d3206"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.8189999999998006,
+        "first_lift_s": 3.449999999999731,
+        "first_basket_contact_s": 6.565000000000527,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.500000000000505,
+        "last_finger_contact_s": 6.384000000000467,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.933999999999788,
+        "overlap_m": 0.002499873329665182,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_1",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 9.86740025295876,
+      "attempt": "0013",
+      "native_result_sha256": "5dc4f1b4ebd6d523b432ebd7d0b5975a7ffe0f48d74d2c1f90b5279e94154901",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2758242755100051,
+          "final": 0.05758812571576716
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.005406622886362615,
+          "max_finger_normal_n": 43.22753629363426,
+          "contact_samples": 9109,
+          "momentum_residual_weight_fraction": {
+            "median": 2.3783593185649e-05,
+            "p99": 0.007150611340341942,
+            "max": 0.02606766098691854
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.5528609021566808,
+      "duration_s": 9.350000000000119,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "e9755cd1bbb2243dd50a44d6a692366c0687459f18c4c8742602b6d1d8d10af5",
+        "effective-model.xml": "fa301fcbe229fe5b9e5b005a845c5aa67604e04b741743cec696df7c69911358",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "ecd9ba06025004183c035ae94db10cfd027955f5476e3df5a9457f7e5c2323d8",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "ecd9ba06025004183c035ae94db10cfd027955f5476e3df5a9457f7e5c2323d8",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "2b9bedcd78d73e23eb8fb42a53a2a01cca3db448f0e09c57b8e7fc095d67b222",
+        "trajectory.npz": "d99c2a4b914a1f3a6b1f9d5547602f9902931054b48904235d0bb59824642d5f"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.0349999999997768,
+        "first_lift_s": 3.349999999999742,
+        "first_basket_contact_s": 6.792000000000603,
+        "first_other_contact_after_lift": {
+          "time_s": 8.860000000000529,
+          "geoms": [
+            "cream_cheese_1_g1",
+            "gripper0_hand_collision"
+          ]
+        },
+        "first_native_success_s": 8.950000000000479,
+        "last_finger_contact_s": 8.89500000000051,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.591000000000678,
+        "overlap_m": 0.005406622886362615,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_2",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 7.897238249017391,
+      "attempt": "0014",
+      "native_result_sha256": "74fa1bb7093662a94998e531562352d9e2f85b199abbb59c9eb0b6c0c5ecd4f3",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23631543850703007,
+          "final": 0.025916223585721477
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0017118702152093997,
+          "max_finger_normal_n": 42.97450377609704,
+          "contact_samples": 6090,
+          "momentum_residual_weight_fraction": {
+            "median": 0.0001225792222215007,
+            "p99": 0.01792006972485281,
+            "max": 0.039756105827734346
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.40008173376554623,
+      "duration_s": 6.250000000000505,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "f3cc393b6f3d0907f0ffabc2c0af1838fb25b1dbd5d653c346991042d01bd194",
+        "effective-model.xml": "fa301fcbe229fe5b9e5b005a845c5aa67604e04b741743cec696df7c69911358",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "ecd9ba06025004183c035ae94db10cfd027955f5476e3df5a9457f7e5c2323d8",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "ecd9ba06025004183c035ae94db10cfd027955f5476e3df5a9457f7e5c2323d8",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "1e0aaf6928c74ccfd5fb403265e5ef165fcae1512beab4c5f75db0bb7e02df64",
+        "trajectory.npz": "d7f0eefdadac5a7a76b912be1cfb5317f4ca0b96c41b1fdd98a67b09ef459c7b"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.0219999999998883,
+        "first_lift_s": 3.049999999999775,
+        "first_basket_contact_s": 5.893000000000303,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.800000000000272,
+        "last_finger_contact_s": 5.732000000000249,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.1359999999998758,
+        "overlap_m": 0.0017118702152093997,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-500us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 0.25
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 12.891371717967559,
+      "attempt": "0015",
+      "native_result_sha256": "7cf063a8c1acb29b7012ba98159fc41d722f2cc7c5eb07de6174ad55a1b049b9",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25189785882628846,
+          "final": 0.02591630614078374
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.002416261129118219,
+          "max_finger_normal_n": 40.56768782781798,
+          "contact_samples": 13553,
+          "momentum_residual_weight_fraction": {
+            "median": 0.0001408186923685777,
+            "p99": 0.02292672133670987,
+            "max": 0.05339463738665036
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.8761699150200002,
+      "duration_s": 6.949999999998729,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "f6d0e3dcd0775e2d9dda3b17a86b87ee632fb095bcc14ddb8791c4cae85f2c65",
+        "effective-model.xml": "1bc53dee3f14d50625ac334c8173c50fc6befc749be5a9e340684a8b4a88134b",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "c054ae8d63aab77adca033c5e954cfa9de6bbeb00eed185d5ee6feac7a0d4cc5",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "c054ae8d63aab77adca033c5e954cfa9de6bbeb00eed185d5ee6feac7a0d4cc5",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "8e6dda6909dc483a91b5a1c13c493712392630a1d64ff20048f780e77857cbce",
+        "trajectory.npz": "6b35184690b5ff35baa4b2b55a3445584427ddc51939639caa2565a5050d2711"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.8240000000001104,
+        "first_lift_s": 3.4500000000003195,
+        "first_basket_contact_s": 6.498999999999118,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.449999999999145,
+        "last_finger_contact_s": 6.324999999999214,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.9375000000001483,
+        "overlap_m": 0.002416261129118219,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-500us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 0.25
+      },
+      "demo": "demo_1",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 16.014013043022715,
+      "attempt": "0016",
+      "native_result_sha256": "c668509d7d67c5e767bffb639660f50ef8a06ab20c9d7c50b770a5e5eaa31983",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2752232440528192,
+          "final": 0.057588092054337854
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.006362042971243266,
+          "max_finger_normal_n": 42.93348223385621,
+          "contact_samples": 18232,
+          "momentum_residual_weight_fraction": {
+            "median": 3.998968332984509e-07,
+            "p99": 0.007121425088782711,
+            "max": 0.02479714929132869
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 1.1064138017245568,
+      "duration_s": 9.350000000000241,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "d3fb1d9e753bd7c100dfb5818480e3f3124666e0b065448adafcf8636a724736",
+        "effective-model.xml": "1bc53dee3f14d50625ac334c8173c50fc6befc749be5a9e340684a8b4a88134b",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "c054ae8d63aab77adca033c5e954cfa9de6bbeb00eed185d5ee6feac7a0d4cc5",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "c054ae8d63aab77adca033c5e954cfa9de6bbeb00eed185d5ee6feac7a0d4cc5",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "5401b72eefd97e515ad0416fc9bf98cec689ad47973af07243459ffbbb527d0c",
+        "trajectory.npz": "5b765f2692ec38f1067c45546aa199bea12c69ea6a83c4150b6119690d870372"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.9915000000001664,
+        "first_lift_s": 3.350000000000286,
+        "first_basket_contact_s": 6.731499999998989,
+        "first_other_contact_after_lift": {
+          "time_s": 8.851499999999326,
+          "geoms": [
+            "cream_cheese_1_g1",
+            "gripper0_hand_collision"
+          ]
+        },
+        "first_native_success_s": 8.949999999999447,
+        "last_finger_contact_s": 8.882999999999365,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.581499999998996,
+        "overlap_m": 0.006362042971243266,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration",
+        "id": "aligned-500us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.004,
+        "timestep_scale": 0.25
+      },
+      "demo": "demo_2",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 11.969632977969013,
+      "attempt": "0017",
+      "native_result_sha256": "306b0ce7509563b87592b1ddce4a4184f1c8a6cefba3df75bcaf58c3b943a91f",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23589887876935534,
+          "final": 0.025916226024430764
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.001661662043341448,
+          "max_finger_normal_n": 42.694854429429824,
+          "contact_samples": 12199,
+          "momentum_residual_weight_fraction": {
+            "median": 8.816687358687697e-05,
+            "p99": 0.01655383008821708,
+            "max": 0.03746853856902317
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.7977307477849536,
+      "duration_s": 6.249999999999117,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "1ee55dd167b950e0540e4b1cc128a1bdfc27cae0cbe8486c53327c6f8abd2715",
+        "effective-model.xml": "1bc53dee3f14d50625ac334c8173c50fc6befc749be5a9e340684a8b4a88134b",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "c054ae8d63aab77adca033c5e954cfa9de6bbeb00eed185d5ee6feac7a0d4cc5",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "c054ae8d63aab77adca033c5e954cfa9de6bbeb00eed185d5ee6feac7a0d4cc5",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "6f6fc30ec9ed223f44a626de79ecd959963ce7f097b9cc69d7013483b4158cd3",
+        "trajectory.npz": "159995afa23c9b68ccaa1997ebb8349999b9d58a1fe7fcd865aeb7a5a7c11fe3"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.0239999999998433,
+        "first_lift_s": 3.050000000000186,
+        "first_basket_contact_s": 5.82649999999949,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.749999999999533,
+        "last_finger_contact_s": 5.675499999999574,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.140499999999882,
+        "overlap_m": 0.001661662043341448,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.012,
+          1.0
+        ],
+        "effective_timeconst_s": 0.012
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Instrumentation must preserve every control-rate native state and native success decision",
+        "id": "recording-off",
+        "instrument": false,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 4.873974069952965,
+      "attempt": "0018",
+      "native_result_sha256": "1e6d3248f984cd70a420ca9cd37bf2fa30166ba749bf32575045ca524314f25e",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "not-recorded-parity-control",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25236893833643353,
+          "final": 0.02592088148167308
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": null,
+      "duration_s": 6.949999999999429,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "c95fc260b1b92e626d62c1184436abbcda8c23f116d2e66a5fc7afd78ba106b4",
+        "trajectory.npz": "3b9bb7dd610fde835057f808272da4d7e9074556572175d5207f5f05afa5e47f"
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Five native zero-action settle steps advance state while evaluate.py keeps the earlier observation; metric.py refreshes it",
+        "id": "settle-audit",
+        "instrument": true,
+        "mode": "observation-audit",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_0",
+      "split": "development",
+      "outcome": "recorded",
+      "wall_s": 4.430681616009679,
+      "attempt": "0019",
+      "native_result_sha256": "b139934d9d3fd08596bde45855befe0a42a1a33bf79cfac766628b216f7cd2da",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "settle_duration": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": false,
+        "native_success_final": null,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "observation_audit": {
+          "initial_time_s": 0.25000000000000017,
+          "fresh_time_s": 0.5000000000000003,
+          "difference": {
+            "robot0_joint_pos": 0.016211262168132068,
+            "robot0_joint_pos_cos": 0.011555837770840793,
+            "robot0_joint_pos_sin": 0.011369339427091174,
+            "robot0_joint_vel": 0.08578386966472618,
+            "robot0_eef_pos": 0.004481130000742973,
+            "robot0_eef_quat": 0.012846432277456691,
+            "robot0_gripper_qpos": 0.012142810921061353,
+            "robot0_gripper_qvel": 0.06843032797946762,
+            "cream_cheese_1_pos": 1.366948628941933e-09,
+            "cream_cheese_1_quat": 3.536157361478748e-12,
+            "cream_cheese_1_to_robot0_eef_pos": 0.009474127988526426,
+            "cream_cheese_1_to_robot0_eef_quat": 0.012846438447013497,
+            "basket_1_pos": 2.796108664179439e-07,
+            "basket_1_quat": 8.554876577602198e-08,
+            "basket_1_to_robot0_eef_pos": 0.00856318455909097,
+            "basket_1_to_robot0_eef_quat": 0.009105980396270752,
+            "alphabet_soup_1_pos": 1.363830229629548e-05,
+            "alphabet_soup_1_quat": 4.115413896934369e-06,
+            "alphabet_soup_1_to_robot0_eef_pos": 0.0070275554886706365,
+            "alphabet_soup_1_to_robot0_eef_quat": 0.011471040546894073,
+            "milk_1_pos": 0.0027371076552199503,
+            "milk_1_quat": 2.545405309833937e-05,
+            "milk_1_to_robot0_eef_pos": 0.00431860878313111,
+            "milk_1_to_robot0_eef_quat": 0.00833272933959961,
+            "tomato_sauce_1_pos": 6.825580448066582e-10,
+            "tomato_sauce_1_quat": 8.169909193611602e-11,
+            "tomato_sauce_1_to_robot0_eef_pos": 0.010632533746335743,
+            "tomato_sauce_1_to_robot0_eef_quat": 0.011466755997389555,
+            "butter_1_pos": 4.6478316452491786e-08,
+            "butter_1_quat": 9.417254364812834e-11,
+            "butter_1_to_robot0_eef_pos": 0.012140079834209706,
+            "butter_1_to_robot0_eef_quat": 0.012846439378336072,
+            "orange_juice_1_pos": 0.0027360357629103438,
+            "orange_juice_1_quat": 1.539716180576356e-05,
+            "orange_juice_1_to_robot0_eef_pos": 0.0029834056858753094,
+            "orange_juice_1_to_robot0_eef_quat": 0.008297652006149292,
+            "robot0_proprio-state": 0.08578386966472618,
+            "object-state": 0.012846439378336072
+          },
+          "policy_actions_evaluated": false,
+          "scope": "native proprioception; no compatible learned checkpoint"
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 1.4595286498412727e-05,
+          "max_finger_normal_n": 0.0,
+          "contact_samples": 125,
+          "momentum_residual_weight_fraction": {
+            "median": 1.4202686905184505e-13,
+            "p99": 2.9113459221554866e-10,
+            "max": 3.396693133381671e-10
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.006763398996554315,
+      "duration_s": 0.25000000000000017,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "20b27429857ad2e0e065bd33541e16504d731403b49506a4d2a9d9d73d8c7c83",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "observation-audit.json": "28fc589b60c015563b67ed9ed0c668f96169d92fa74f787bad352970d0074527",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "f63d306e0ac42d98bb60a3dd2e8881fdfb556efa13a17f94a0db62903867e80d",
+        "trajectory.npz": "4d1a9a497b9f81b3c228e4d488f51e90ccc5df61c22df9a2a19dc7d65a20c49b"
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_3",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 5.9138087870087475,
+      "attempt": "0020",
+      "native_result_sha256": "e87504a3eaa7d30ce0733218c4164ced8cc203e9fdc38fad16a185bbe95024ef",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.24952008572850962,
+          "final": 0.05846650782989496
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0009508017514477672,
+          "max_finger_normal_n": 48.82477678845134,
+          "contact_samples": 3217,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00029244340812006306,
+            "p99": 0.006622346204593983,
+            "max": 0.020822423670475734
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.20205703313695267,
+      "duration_s": 6.649999999999462,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "7ece4a7edb51b9824ffceaf26e098db5eca4f86c715e5615611c004a7a45f17b",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "5e3bc57a829109499d799475bddf48736e965f498685f69badadae0d6173afa3",
+        "trajectory.npz": "3b829f1336449ef79f8e48b4f8c7aa6d30227d6ce156bec3a877e2a73175fa92"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.0079999999998903,
+        "first_lift_s": 3.199999999999869,
+        "first_basket_contact_s": 6.297999999999528,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.349999999999523,
+        "last_finger_contact_s": 6.1879999999995405,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 5.073999999999663,
+        "overlap_m": 0.0009508017514477672,
+        "geoms": [
+          "gripper0_finger1_pad_collision",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0055,
+          0.75
+        ],
+        "effective_timeconst_s": 0.0055
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_3",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.063621457025874,
+      "attempt": "0021",
+      "native_result_sha256": "1e97b7bee6c39bdc7e66c7eb4ed6b89a849fbf533cebaeb81ed5ddca7bc3a360",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2489348788540918,
+          "final": 0.05760218555319902
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0009879547388736958,
+          "max_finger_normal_n": 55.62136987413792,
+          "contact_samples": 6437,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00025493807391454204,
+            "p99": 0.006115263441484363,
+            "max": 0.01733373466864109
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.3969812092836946,
+      "duration_s": 6.650000000000639,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "e5836582eb7ca44ad22e6fc521d5bde2bcdb7fda151769619b532c347611590d",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "dd6e8b2f7248c03f646215735a5b8b3fc96b7c5b2926620df73bbd9efd3ab83b",
+        "trajectory.npz": "18e0e41c8ca6558cc6b7a4137e72d0354a5235f7d5729b68620bc94fb3ab34ee"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.9849999999997823,
+        "first_lift_s": 3.1999999999997586,
+        "first_basket_contact_s": 6.169000000000395,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.250000000000422,
+        "last_finger_contact_s": 6.075000000000363,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.0289999999997774,
+        "overlap_m": 0.0009879547388736958,
+        "geoms": [
+          "gripper0_finger1_pad_collision",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0055,
+          0.75
+        ],
+        "effective_timeconst_s": 0.0055
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_4",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 5.974235741014127,
+      "attempt": "0022",
+      "native_result_sha256": "ca3848ee2edc3fefee6056ed1511d4ab18b170271a1a0b90a5f2974daba5ae61",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23434244076188512,
+          "final": 0.03324427264769348
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0009434577637762692,
+          "max_finger_normal_n": 53.92308958950856,
+          "contact_samples": 3087,
+          "momentum_residual_weight_fraction": {
+            "median": 0.0004518872804126836,
+            "p99": 0.02013594013781178,
+            "max": 0.0468563502939805
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.19134446315001696,
+      "duration_s": 6.349999999999495,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "ab74baeee497487b1f0f608437ea950410c1d1bb3b55700cb67a437e5cf395db",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "ef5609904f95451f7c5117817979cc7ff40e3c8164b786dab72fd45e5823414f",
+        "trajectory.npz": "0717004643c398f098c21d0c05dd3a613a0202af1052d1d40375d46cb37df173"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.5439999999999414,
+        "first_lift_s": 2.7999999999999132,
+        "first_basket_contact_s": 6.111999999999549,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.049999999999556,
+        "last_finger_contact_s": 5.937999999999568,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 6.111999999999549,
+        "overlap_m": 0.0009434577637762692,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_4",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.0539364789729,
+      "attempt": "0023",
+      "native_result_sha256": "cd7029a749813605d08c75219d2e8305dacf2d7be33ab764beef29b1d196fba6",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23595762366961875,
+          "final": 0.025920997747888253
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0010544027655464564,
+          "max_finger_normal_n": 56.43377626977513,
+          "contact_samples": 6149,
+          "momentum_residual_weight_fraction": {
+            "median": 0.0004137028409139892,
+            "p99": 0.01899373948857322,
+            "max": 0.04969656935614152
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.37838148936862126,
+      "duration_s": 6.350000000000539,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "ca09454a3b28057305426405d3616de0d263996a76e8d9c1923f32db4e3c8a9c",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "49e6fa8cc6c28876647e6513a610c54c61ad21c6b75ed9802ae0bd67e405b0da",
+        "trajectory.npz": "4057034624d41de6f4ccc23c1fdd31f43e58ae0efedf5e5b386d4658fb56530d"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.477999999999838,
+        "first_lift_s": 2.7999999999998026,
+        "first_basket_contact_s": 5.987000000000334,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 5.900000000000305,
+        "last_finger_contact_s": 5.820000000000278,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.6019999999998245,
+        "overlap_m": 0.0010544027655464564,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger2_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_5",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.350883766019251,
+      "attempt": "0024",
+      "native_result_sha256": "49347ac96f5e3de764fe976cd8a6e81c0f9382912ec52d1e653254ace338f6eb",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.22958184273942284,
+          "final": 0.025920819273495665
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0009406813055018175,
+          "max_finger_normal_n": 49.31221328481076,
+          "contact_samples": 3813,
+          "momentum_residual_weight_fraction": {
+            "median": 4.8507402031674676e-05,
+            "p99": 0.01724490707729622,
+            "max": 0.0509537494039001
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.23342265409883112,
+      "duration_s": 7.799999999999358,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "37f57fcb8fc47415a03b0c91f43cea0fc4fbedc02a2965c98883b5583be205f3",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "5c57dba64aa5e021c237fd7b766c68f0c607c4696a8d65f23f278eb1d4e23521",
+        "trajectory.npz": "ebb9aa603a4f18f993b5a917ee8f9e62a598df660ff91242fe316101af4478d1"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.581999999999827,
+        "first_lift_s": 3.9499999999997866,
+        "first_basket_contact_s": 7.55199999999939,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.499999999999396,
+        "last_finger_contact_s": 7.383999999999409,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 5.329999999999635,
+        "overlap_m": 0.0009406813055018175,
+        "geoms": [
+          "gripper0_finger1_pad_collision",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0055,
+          0.75
+        ],
+        "effective_timeconst_s": 0.0055
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_5",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.83404678403167,
+      "attempt": "0025",
+      "native_result_sha256": "f41b74c23b8ae0779487be1d2559e8b1948743c1fe740ec6a0c81c903812e881",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23071293196500628,
+          "final": 0.025920903960961264
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0010391358721525406,
+          "max_finger_normal_n": 50.75661284353939,
+          "contact_samples": 7634,
+          "momentum_residual_weight_fraction": {
+            "median": 3.5879287569196645e-05,
+            "p99": 0.01760592513205006,
+            "max": 0.052305977331285766
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.46008203184464946,
+      "duration_s": 7.800000000000978,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "e47ac1b0bdc9c5088a76cafd90ac47365cdf343c6f3dd8acfde631833c36211a",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "c970ac47605e89c0e0ab63144f2d469d6708f16d5350501eead99064abe47291",
+        "trajectory.npz": "f6a08f3eefae64ce32f06091985fb3c029b1bec014d94011a4ec85cd1606bfda"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.4899999999997267,
+        "first_lift_s": 3.949999999999676,
+        "first_basket_contact_s": 7.436000000000818,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.350000000000789,
+        "last_finger_contact_s": 7.274000000000764,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.540999999999721,
+        "overlap_m": 0.0010391358721525406,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger2_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_6",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.51400660694344,
+      "attempt": "0026",
+      "native_result_sha256": "262ced8483d58d1868d65451e63bb5a8387a8bda3795be4f2d6964e5a8f23788",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25401332709181046,
+          "final": 0.025920906366996482
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0011192010519896305,
+          "max_finger_normal_n": 50.852366991455106,
+          "contact_samples": 4105,
+          "momentum_residual_weight_fraction": {
+            "median": 1.4463828395833769e-19,
+            "p99": 0.01991862541485342,
+            "max": 0.06263938533220428
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.2604608803521842,
+      "duration_s": 8.399999999999558,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "e7f1e88800b4c91ddc735b2e5b63a1297697e3ccd2a6071893fcc7d322e41859",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "b64c685adad677fda201736f9b0d324aca153490b9b808f9314c4a60dad8b884",
+        "trajectory.npz": "12251280feb5c94c7432949597984de4c6696d667ce829154325784f5183bb9c"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 4.761999999999698,
+        "first_lift_s": 4.949999999999677,
+        "first_basket_contact_s": 8.131999999999385,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 8.099999999999374,
+        "last_finger_contact_s": 7.939999999999348,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 8.133999999999386,
+        "overlap_m": 0.0011192010519896305,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_6",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 9.158625031996053,
+      "attempt": "0027",
+      "native_result_sha256": "c88c3afac7f09e5017787044ff78d48a70af6c8bdace0dc4d78b465b99b46faa",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2536743055960057,
+          "final": 0.025921021091326654
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0009846928259602905,
+          "max_finger_normal_n": 63.30873064522966,
+          "contact_samples": 8217,
+          "momentum_residual_weight_fraction": {
+            "median": 9.189477053240537e-20,
+            "p99": 0.017947207692689506,
+            "max": 0.06066047432848152
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.5259919984382577,
+      "duration_s": 8.400000000000645,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "94a1dcf0b51919a77c962bdb0ea8348b292fc26556f1507e4e52eb0e35c1f1bf",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "0026b1ea52cd8f8a906ac750d5ff0155ed736b99cc7b7309ab997747ef32172a",
+        "trajectory.npz": "0df5ede673a8b78f9b06f16a7118bb67470193aab726e66141eff578592c0f53"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 4.739999999999918,
+        "first_lift_s": 4.949999999999988,
+        "first_basket_contact_s": 8.005000000001003,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.95000000000099,
+        "last_finger_contact_s": 7.826000000000948,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 4.780999999999931,
+        "overlap_m": 0.0009846928259602905,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_7",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.180081313999835,
+      "attempt": "0028",
+      "native_result_sha256": "3d74210c5ac0ec596864d39d1d4ddebe22453c0d9987d6c5568c6c33f47c8548",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2401555309852816,
+          "final": 0.025920913625521465
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0008055576837682402,
+          "max_finger_normal_n": 46.96967914819653,
+          "contact_samples": 3426,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00023856014291602742,
+            "p99": 0.01753523433223291,
+            "max": 0.04725990485474217
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.21456722979201004,
+      "duration_s": 7.049999999999418,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "b891d3e29ef3d9718dcf2a91e20cd13d6a272159d98ad24cc0d3d982c8f77ac9",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "766506d64b7cca6008ff1d30054f3952f1a3d84f9674d651dcee3da77b4a2fe4",
+        "trajectory.npz": "6225db0d676fc672cc23e752aaf6634984c0e42a8482ca0c8db5ffd4a1c8ea76"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.027999999999888,
+        "first_lift_s": 3.399999999999847,
+        "first_basket_contact_s": 6.73799999999948,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.749999999999479,
+        "last_finger_contact_s": 6.661999999999488,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.163999999999873,
+        "overlap_m": 0.0008055576837682402,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_7",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.50809062802,
+      "attempt": "0029",
+      "native_result_sha256": "3be3311afe2e4aac63044a34678320e5431f00cdc86b31265d025e325e167733",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2398741562815756,
+          "final": 0.061344604824991496
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0010529177834194684,
+          "max_finger_normal_n": 51.80851731644284,
+          "contact_samples": 6886,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00021059907177502267,
+            "p99": 0.005153892433865558,
+            "max": 0.008745926367561182
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.41994327370775864,
+      "duration_s": 7.0500000000007725,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "9cf287f3e6c31d6862d3436c643f1d9fce2537ad3099f8d10891d52054c6e1b4",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "a056bd79f8f430731d10f72cc04f4918af80841d523c0fcd3f708ac02378d878",
+        "trajectory.npz": "e1aa1f6b4335cffefe282ed9bda3a96c65a18ed3fbf95f90ebe6593cc6bfc8e5"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.9759999999997833,
+        "first_lift_s": 3.3999999999997366,
+        "first_basket_contact_s": 6.585000000000534,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.6500000000005555,
+        "last_finger_contact_s": 6.523000000000513,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.087999999999771,
+        "overlap_m": 0.0010529177834194684,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger1_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_8",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 7.082423175976146,
+      "attempt": "0030",
+      "native_result_sha256": "b13aa04269aa8b5059015973c3a65a7a7ed996a129bb27f052229ce9a36e81de",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2475803471574619,
+          "final": 0.025920794204932443
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.012163235816568259,
+          "max_finger_normal_n": 88.84576965497688,
+          "contact_samples": 4303,
+          "momentum_residual_weight_fraction": {
+            "median": 9.510894837777407e-05,
+            "p99": 0.01875334880277551,
+            "max": 0.061527203324258165
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.2685076263733208,
+      "duration_s": 8.799999999999692,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "f7d5ea7d9cc42325d6e823766baf61aa1a5cfe5268fbfd60f0ce0cb065bb8080",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "a307bce6617c9424f83c0741f6e9d87db680d1a558546b6ec4e0832a9015d530",
+        "trajectory.npz": "538f91247378246c217633298d18d753e78e9022986fb96e96852bde122460e6"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.6439999999999304,
+        "first_lift_s": 4.449999999999732,
+        "first_basket_contact_s": 8.53599999999952,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 8.499999999999508,
+        "last_finger_contact_s": 8.343999999999456,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.939999999999898,
+        "overlap_m": 0.012163235816568259,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_8",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 9.785970113007352,
+      "attempt": "0031",
+      "native_result_sha256": "366253051aefd55d2828a7d1e6422f42f10d6562f31e6e8e6e44c317e6d5c396",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2587162779472878,
+          "final": 0.03832092318439755
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.012211569151986951,
+          "max_finger_normal_n": 88.67470693037751,
+          "contact_samples": 8626,
+          "momentum_residual_weight_fraction": {
+            "median": 9.096521569811695e-05,
+            "p99": 0.008498999031058442,
+            "max": 0.026406583131597102
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.5750243125949055,
+      "duration_s": 8.800000000000423,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "6a08768b335979cf9e3f2917bfa4d905ace0c25d26ac121cdb54a8614c3429cb",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "8fa3f48e6ebbf5a4fd7a8d9adfae8cdbb7964a081925312920cc1cae97b9a9c6",
+        "trajectory.npz": "13492a83b19d0a920f30361c63a92db017881cbe0bab1d4fb7175397a95a7c7e"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.6469999999998195,
+        "first_lift_s": 3.7999999999996925,
+        "first_basket_contact_s": 8.344000000000815,
+        "first_other_contact_after_lift": {
+          "time_s": 3.939999999999677,
+          "geoms": [
+            "cream_cheese_1_g1",
+            "gripper0_hand_collision"
+          ]
+        },
+        "first_native_success_s": 8.30000000000084,
+        "last_finger_contact_s": 8.169000000000912,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 2.9459999999997866,
+        "overlap_m": 0.012211569151986951,
+        "geoms": [
+          "floor",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_9",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.456261918996461,
+      "attempt": "0032",
+      "native_result_sha256": "3d0c6086610c4533bab337b14bcfc9063fbc63a486f524063208373d9c904f85",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.24940491902186127,
+          "final": 0.02592075751799231
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0011479059330471804,
+          "max_finger_normal_n": 39.8531747899323,
+          "contact_samples": 3654,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00017662378895356398,
+            "p99": 0.019540817028921395,
+            "max": 0.050252727744095546
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.22264850337523967,
+      "duration_s": 7.4999999999993685,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "b273674ce868b7e7c3c4431286350b1a1624cbd49afba54b0e5e6f7fac966774",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "759e1ff05ceb250344492b68f665a4377df0ad9c1cf204b691e5739cdfa34116",
+        "trajectory.npz": "ed9b2dafa24ce3019aa1d57d6a8f20787ed7778460034ce7a01df1b7aa095171"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.3159999999998564,
+        "first_lift_s": 3.5499999999998306,
+        "first_basket_contact_s": 7.229999999999426,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.199999999999429,
+        "last_finger_contact_s": 7.049999999999446,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 7.255999999999423,
+        "overlap_m": 0.0011479059330471804,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_9",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 9.271603380970191,
+      "attempt": "0033",
+      "native_result_sha256": "aa6207985aa316fadf4d8f32942d8a75f89701f8bd29ee15ca946a8d142c2fe4",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.25016866544468525,
+          "final": 0.025920895440056102
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.001080528962996624,
+          "max_finger_normal_n": 52.35509296080675,
+          "contact_samples": 7318,
+          "momentum_residual_weight_fraction": {
+            "median": 9.236888542159299e-05,
+            "p99": 0.019007443085249917,
+            "max": 0.05080851915821133
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.4528946542413905,
+      "duration_s": 7.500000000000923,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "a3fa365fb60704f3a031d8ee6872458090add4ac68b972bb781283c6cb3667dd",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "2f9103ec30150dda497f38b7f4132e236765df7e4de8c4278f1fcdfae61c3957",
+        "trajectory.npz": "09057d35a7ab9cd56483cd907999bbd86e1eebe82f912c98913fe4b62ac9cb78"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.257999999999752,
+        "first_lift_s": 3.54999999999972,
+        "first_basket_contact_s": 7.107000000000708,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.050000000000689,
+        "last_finger_contact_s": 6.93200000000065,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.2919999999997485,
+        "overlap_m": 0.001080528962996624,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger2_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_10",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.205239453003742,
+      "attempt": "0034",
+      "native_result_sha256": "150dd84e0d235baa867d152569c59ccea1c8e5b5b27f8b8497c656e9409b2477",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.23039445855576524,
+          "final": 0.02592084956234088
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0014070667889630579,
+          "max_finger_normal_n": 62.0284131525648,
+          "contact_samples": 3214,
+          "momentum_residual_weight_fraction": {
+            "median": 9.17802717837288e-06,
+            "p99": 0.02081274758412572,
+            "max": 0.05149674460577114
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.20075768855167553,
+      "duration_s": 6.599999999999468,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "563efbb2a51c0c5fc948a3c919252c0357d652999a708db6652971802853b5a3",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "bd8f7977ad2d9e8bfd4c73c4ea95c2d32dbee5823ca7b95d13fab28360af85fa",
+        "trajectory.npz": "dade22f671143210a8ac328dd06e960041197d40f9fed6bd869ad44ce8b6e9a1"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.111999999999879,
+        "first_lift_s": 3.399999999999847,
+        "first_basket_contact_s": 6.3519999999995225,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.299999999999528,
+        "last_finger_contact_s": 6.177999999999542,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 6.3519999999995225,
+        "overlap_m": 0.0014070667889630579,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_10",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.378661146038212,
+      "attempt": "0035",
+      "native_result_sha256": "4d6afd4aee09a4691893244d9643b2da46d6f62b16065bc0faec345d2f369fff",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2296265494233747,
+          "final": 0.025920974115151582
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0005313155577915977,
+          "max_finger_normal_n": 48.820565395396486,
+          "contact_samples": 6414,
+          "momentum_residual_weight_fraction": {
+            "median": 5.5056470001186506e-08,
+            "p99": 0.02001564327202828,
+            "max": 0.0498725954477534
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.3886914717149921,
+      "duration_s": 6.600000000000622,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "3080dfbedf4112edc8c57f7297a423933f1bf7e1b644a2b5d5f0beddfc2faf66",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "26a433da5df9f04179a561302ee8a2b1a22ba8ec6cff5a72a87a0e266528c3d9",
+        "trajectory.npz": "8037fc4efb127651147f2dd339872b44743d9e3547929939ded9634c7a378ab4"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.0459999999997756,
+        "first_lift_s": 3.3999999999997366,
+        "first_basket_contact_s": 6.241000000000419,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.200000000000405,
+        "last_finger_contact_s": 6.0780000000003644,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 6.241000000000419,
+        "overlap_m": 0.0005313155577915977,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.002
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_11",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.388064927945379,
+      "attempt": "0036",
+      "native_result_sha256": "73827a3c3daeae760d886f9d00bc70d79c947526437dc7c1fa30907e99270b41",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2318779791165734,
+          "final": 0.025920874165901
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0014507566224445613,
+          "max_finger_normal_n": 39.93673524637298,
+          "contact_samples": 3958,
+          "momentum_residual_weight_fraction": {
+            "median": 3.798263517758694e-11,
+            "p99": 0.02104142612102315,
+            "max": 0.05926713254837127
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.2442519014584832,
+      "duration_s": 8.099999999999458,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "668f73deba3fb17ad557f336e2be6306089027cce8bae8c78515cd53a57673f6",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "e982e7372458d4c6aac6e014dbe2a0372fc5cf8cc60892d0f3859409c566172b",
+        "trajectory.npz": "a5d87c9ebc93a4bf1ca7b4ecddf598ccfb8f60cf68e45bd5e7c5ea43ae205790"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.137999999999876,
+        "first_lift_s": 4.799999999999693,
+        "first_basket_contact_s": 7.841999999999358,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.799999999999363,
+        "last_finger_contact_s": 7.655999999999379,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 7.847999999999358,
+        "overlap_m": 0.0014507566224445613,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "basket_1_g1"
+        ],
+        "solref": [
+          0.001,
+          1.0
+        ],
+        "effective_timeconst_s": 0.004
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_11",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.822119702002965,
+      "attempt": "0037",
+      "native_result_sha256": "24ffdc4c1746c9abe5ac25703dc1c3739a6da23214b3111a9a21bdbbc0b5ef8f",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2310034216777672,
+          "final": 0.025920982467783342
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.0014706770121139573,
+          "max_finger_normal_n": 41.89869568929733,
+          "contact_samples": 7905,
+          "momentum_residual_weight_fraction": {
+            "median": 3.397950110676114e-11,
+            "p99": 0.018257458036176878,
+            "max": 0.05830008389344884
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.4816206121467985,
+      "duration_s": 8.100000000000811,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "be42f0b143e963c3d4a45f191f46dea65409b247634a8eb79bc7695a0e28c608",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "fe29e6d85bf45143271a4e0e500ca166d842aa75fb3b4346b757b30e9d67abd4",
+        "trajectory.npz": "5d7077867f5d63f0eb2ca266b816417771edee411d6dac38c87f2980439700e7"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 3.031999999999777,
+        "first_lift_s": 4.799999999999938,
+        "first_basket_contact_s": 7.71100000000091,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 7.650000000000889,
+        "last_finger_contact_s": 7.536000000000851,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.205999999999758,
+        "overlap_m": 0.0014706770121139573,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger2_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+        "id": "baseline",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 1.0
+      },
+      "demo": "demo_12",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 6.021268673997838,
+      "attempt": "0038",
+      "native_result_sha256": "1820f31a9764f1b367d9730cee7539454512858d620a98506ffc780913f352aa",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-pass",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2552641305218339,
+          "final": 0.025920753871037844
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.000950649869849836,
+          "max_finger_normal_n": 55.30610165884124,
+          "contact_samples": 3232,
+          "momentum_residual_weight_fraction": {
+            "median": 0.00016602389231504245,
+            "p99": 0.02452513237705219,
+            "max": 0.056357796213709656
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.2005965726566501,
+      "duration_s": 6.649999999999462,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "7eda39426ddbfc962ee0c3e9e61ff9ed315bdb1367c35751a1ccc760edeb88f4",
+        "effective-model.xml": "ee25a2fbf38c1f7a6d670d7547234169cb880d1be0294c6465bd02c9ba0d6775",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "5994fca0dc121587951c1224e3be3526c6aa68e6f54fc392f7bd6d883a347d64",
+        "trajectory.npz": "0092722377e245e804279a28dd768383011934fdca76f9dcf9ed30bc5b7e658f"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.7799999999999154,
+        "first_lift_s": 3.2499999999998637,
+        "first_basket_contact_s": 6.421999999999515,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.349999999999523,
+        "last_finger_contact_s": 6.2339999999995355,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 4.167999999999763,
+        "overlap_m": 0.000950649869849836,
+        "geoms": [
+          "gripper0_finger1_pad_collision",
+          "cream_cheese_1_g1"
+        ],
+        "solref": [
+          0.0055,
+          0.75
+        ],
+        "effective_timeconst_s": 0.0055
+      }
+    },
+    {
+      "candidate": {
+        "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change",
+        "id": "step-1000us",
+        "instrument": true,
+        "mode": "actions",
+        "solref_floor_s": 0.0,
+        "timestep_scale": 0.5
+      },
+      "demo": "demo_12",
+      "split": "heldout",
+      "outcome": "recorded",
+      "wall_s": 8.575368789955974,
+      "attempt": "0039",
+      "native_result_sha256": "e9515a19aa24af0030ee02990a01a4a4e91116257a793a66e1dd922572bb649c",
+      "score": {
+        "checks": {
+          "task_identity": true,
+          "completed": true,
+          "source_hashes": true,
+          "parameters_stable": true,
+          "requested_parameters_match": true,
+          "finite": true,
+          "full_actions": true,
+          "terminal_state": true,
+          "clock": true,
+          "success_readback": true,
+          "native_substeps_present": true,
+          "force_state_clock": true,
+          "contact_readback_complete": true,
+          "full_physics_window": true
+        },
+        "native_success_any": true,
+        "native_success_final": true,
+        "physical_acceptance": "diagnostic-fail",
+        "policy_closed_loop_evaluated": false,
+        "height_m": {
+          "initial": 0.008921476051766767,
+          "max": 0.2547900033142295,
+          "final": 0.025920846173223263
+        },
+        "physics": {
+          "object_mass_kg": 0.012337579236976485,
+          "max_overlap_m": 0.001016262878993537,
+          "max_finger_normal_n": 55.166728214586705,
+          "contact_samples": 6457,
+          "momentum_residual_weight_fraction": {
+            "median": 7.916658803879953e-05,
+            "p99": 0.022863991244579104,
+            "max": 0.058062209026863605
+          }
+        },
+        "observation_valid": true
+      },
+      "native_step_seconds": 0.4016910982900299,
+      "duration_s": 6.650000000000639,
+      "case_sha256": {
+        "assets.json": "febfe2645ea150f023ec81a024df22a5e1f20fec505498a0bc0565550d413e71",
+        "contacts.jsonl": "43e9dd0aaa061241934ac9b9efcf5deb53e1964b3b4e0cf56164fc7944894f5c",
+        "effective-model.xml": "b7020e61b1d9b2a4f4a35aab9f28a437e84f9d576ea1adf3e1c521ab55f26380",
+        "input-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "parameters-after.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "parameters-before.json": "6ea4b67eb3e54eaed09516f9c664cef5642747d211368010b2c3a1b257ba494c",
+        "parameters-effective.json": "de6a51bc46d0d3d66036f9329a24ad4bcc52a7f7b012f230057c263829a9d048",
+        "relocated-model.xml": "c8ceac493944e8add0c43a63ba6614308259b41fcc024787572d672e8ca636cb",
+        "run.json": "ff7b70cc3fc1cd81df7527e38b8d6559e9058b738ffe57f41d36890a1e431b32",
+        "trajectory.npz": "ffb1973f04cd82821ab22dcff141eb2753a08d2063d951b46d19718027fa09cc"
+      },
+      "events": {
+        "classification": "native-success",
+        "first_finger_contact_s": 2.7819999999998046,
+        "first_lift_s": 3.249999999999753,
+        "first_basket_contact_s": 6.30500000000044,
+        "first_other_contact_after_lift": null,
+        "first_native_success_s": 6.250000000000422,
+        "last_finger_contact_s": 6.1260000000003805,
+        "thresholds": {
+          "lift_above_initial_m": 0.01,
+          "contact_normal_n": 0.0001
+        },
+        "interpretation": "Descriptive event thresholds, not task or physics acceptance. Post-lift contact loss needs action/control and geometry review before calling it slip."
+      },
+      "max_overlap_event": {
+        "time_s": 3.00599999999978,
+        "overlap_m": 0.001016262878993537,
+        "geoms": [
+          "cream_cheese_1_g1",
+          "gripper0_finger2_collision"
+        ],
+        "solref": [
+          0.0105,
+          1.0
+        ],
+        "effective_timeconst_s": 0.0105
+      }
+    }
+  ],
+  "scope": "Single task, action replay, fixed seed, split by demonstration. No trained-policy result or material calibration. Coverage unchanged."
+}

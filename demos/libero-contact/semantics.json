@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "source": "MuJoCo 2.3.7 / robosuite 1.4.0 native readback",
+  "clocks": {
+    "state": "seconds, native clock; time/qpos/qvel after the final substep of each action",
+    "physics": "force_time is before integration, state_time is after integration; both seconds",
+    "measurements": "derived native observations from the last pre-integration substep; their actual epoch is column 0",
+    "video": "seconds relative to native initial time 0.25; exact control-rate recorded states at 20 Hz"
+  },
+  "frames_and_units": {
+    "qpos": "MuJoCo model order; translation m, hinge rad, free orientation unit wxyz quaternion",
+    "qvel": "MuJoCo model order; translation m/s, rotation rad/s; free-joint angular velocity in local body frame",
+    "object_position": "world frame, m; free body origin, not center of mass",
+    "object_com_offset": "body_ipos is body-frame m; used with quaternion and angular velocity in COM momentum score",
+    "relative_object_position": "end-effector frame, m; includes rotation and release and is not pure slip",
+    "contact_frame": "rows are world vectors of contact normal and tangent axes; local wrench acts on geom2",
+    "contact_force": "world N on target, sign reversed when target is geom1",
+    "contact_torque": "world Nm about target free-body origin; translational scorer does not certify rotational balance",
+    "finger_normal": "sum of actual target/finger contact normal-force magnitudes, N; not actuator command",
+    "actions": "six normalized OSC pose commands plus native gripper command; scaling recorded in controller readback",
+    "controller_targets": "native OSC world goal position in m and orientation rotation matrix",
+    "controls": "native actuator order: seven Panda torque commands Nm; two finger position-servo targets m, bounded to [0,0.04] and [-0.04,0]",
+    "actuator_force": "native actuator output: seven Panda torques Nm; two finger forces N, each limited to [-20,20]; distinct from ctrl and contact force",
+    "qfrc_actuator": "generalized force in native DOF order; hinge Nm, translation N"
+  },
+  "parameter_readback": "before/effective/after retain full floating precision; MJCF exports can round values and are visualization inputs only",
+  "contact_reference": "contact.solref is the mixed reference. effective_timeconst_s is derived from the pinned refsafe code, not a separate native sensor; max(solref[0],2*h) for positive format with refsafe enabled",
+  "limits": "No historical controller-memory reconstruction, mid-episode restoration qualification, learned-policy closed-loop evaluation, measured material validation or additional reliable coverage. Published dataset done/reward flags are not used as success evidence."
+}

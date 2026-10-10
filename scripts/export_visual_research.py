@@ -556,6 +556,9 @@ def plot(bundle, variant_id, language="en"):
         "load": "外加载荷",
         "velocity_z": "竖直速度",
         "height": "物体高度",
+        "gripper_relative_z": "夹爪坐标系相对高度（非纯滑移）",
+        "finger_normal": "指部接触法向力之和",
+        "contact_overlap": "目标物体原生接触穿透",
         "relative_slip": "相对夹具滑移",
         "pad_force": "指面力 x 分量绝对值之和",
     }

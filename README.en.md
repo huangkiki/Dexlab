@@ -41,6 +41,7 @@ Model/clock diagnostics already exist; task acceptance retains the matrix state.
 
 | Experiment / figure | Comparisons and findings |
 | --- | --- |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="Native LIBERO: diagnosis and change"></a> | **[Native LIBERO: diagnosis and change](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>How can an existing benchmark expose and validate a change?<br>Stale observations identified; timestep trials retain successes, failures and regressions. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="Normal & transient response"></a> | **[Normal & transient response](https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>How do parameters change loading, unloading and transients?<br>Static calibration works; dynamics and mass transfer need separate checks. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="Six-engine incline & friction"></a> | **[Six-engine incline & friction](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>Where do static, sliding and low-friction cases differ?<br>Fixed-profile outcomes and observation validity are separate; failures remain. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/results.html"><img src="./docs/evidence/impact-phase/sensitivity.png" width="200" alt="Impact & contact onset"></a> | **[Impact & contact onset](https://huangkiki.github.io/Dexlab/en/latest/results.html)**<br>MuJoCo · SuperDex<br>How do timestep, stiffness and impact phase affect transients?<br>Existing phase/stiffness sweeps; smaller steps do not automatically remove model differences. |
@@ -84,6 +85,16 @@ The same Genesis fixture and object, changing the finger-joint force limit. Comp
 ![Pinch: 0.4 N slips, 0.8 N holds — curves](docs/evidence/visual/pinch-retention-curves.svg)
 
 [Synchronized replay, full-rate curves, parameters and original evidence](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch)
+
+### LIBERO: native task, timestep control and observation fix
+
+Same actions, initial state, Panda and native success; original 2 ms versus unqualified 1 ms control. Heldout task success stays 10/10, screens change from 5/10 to 3/10, and cost doubles. Policy effects of observation refresh remain unverified.
+
+![LIBERO: native task, timestep control and observation fix](docs/evidence/visual/libero-summary.png)
+
+![LIBERO: native task, timestep control and observation fix — curves](docs/evidence/visual/libero-demo0-curves.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#libero)
 
 <!-- visual-research:end -->
 

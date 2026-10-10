@@ -41,6 +41,7 @@
 
 | 实验画面／图表 | 比较对象与研究结论 |
 | --- | --- |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="LIBERO 原生抓取：诊断与改进"></a> | **[LIBERO 原生抓取：诊断与改进](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>如何从已有 benchmark 定位问题，再验证修改？<br>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="法向与瞬态响应"></a> | **[法向与瞬态响应](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>压入、卸载与动态响应如何随参数改变？<br>静态校准有效，动态响应和质量迁移须分别验证。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="六引擎斜面与摩擦"></a> | **[六引擎斜面与摩擦](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>静止、滑动和低摩擦有哪些差异？<br>原配置结果与观测有效性分列；全部失败保留。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html"><img src="./docs/evidence/impact-phase/sensitivity.png" width="200" alt="碰撞与接触起始"></a> | **[碰撞与接触起始](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)**<br>MuJoCo · SuperDex<br>步长、刚度及碰撞相位怎样影响瞬态？<br>已有相位与刚度扫描；更小步长不自动消除模型差异。 |
@@ -84,6 +85,16 @@
 ![夹持：0.4 N 滑脱，0.8 N 保持 — curves](docs/evidence/visual/pinch-retention-curves.zh.svg)
 
 [同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#pinch)
+
+### LIBERO：原任务、步长对照与观测修正
+
+相同动作、初态、Panda 和成功判定；原版 2 ms 与未通过筛查的 1 ms 对照。全部留出任务成功，物理诊断 5/10 对 3/10，成本约翻倍。观测刷新补丁的策略效果未验证。
+
+![LIBERO：原任务、步长对照与观测修正](docs/evidence/visual/libero-summary.png)
+
+![LIBERO：原任务、步长对照与观测修正 — curves](docs/evidence/visual/libero-demo0-curves.zh.svg)
+
+[同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#libero)
 
 <!-- visual-research:end -->
 

@@ -1,6 +1,6 @@
 # From visible motion to physical differences
 
-Inspect recorded states, native observations and physical references together. These are existing experiments; no physics was rerun and no scores or tolerances were changed.
+Inspect recorded states, native observations and physical references together. Each plot links its archived experiment; playback reads records without advancing physics or changing scores or tolerances.
 
 Replay geometry keeps physical proportions; inspect small changes in the curves. Dashed lines are the declared analytical/engineering references, not measured material truth. Historical protocols do not form a universal engine ranking.
 
@@ -87,3 +87,31 @@ The same Genesis fixture and object, changing the finger-joint force limit. Comp
 Reference: ideal static flat-pad retention requires μΣN≥mg; here mg/μ≈1.256 N. The plotted Σ|Fx| is a pad-force projection proxy, not measured actuator output. The 60 mm height threshold during 2–3 s is one original check; all other checks remain.
 
 **Evidence and all configurations:** [All 16 cases, failures and costs](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) · [Historical solver audit](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.md)
+
+(libero)=
+## LIBERO: native task, timestep control and observation fix
+
+Same actions, initial state, Panda and native success; original 2 ms versus unqualified 1 ms control. Heldout task success stays 10/10, screens change from 5/10 to 3/10, and cost doubles. Policy effects of observation refresh remain unverified.
+
+```{raw} html
+<div class="dexlab-replay" data-language="en" data-variants="[{&quot;label&quot;: &quot;Development demo_0: first frozen demo&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo0.json.gz&quot;}, {&quot;label&quot;: &quot;Heldout demo_4: first screen regression&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo4.json.gz&quot;}, {&quot;label&quot;: &quot;Heldout demo_8: maximum native overlap&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo8.json.gz&quot;}]">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.png" alt="LIBERO: native task, timestep control and observation fix"></div>
+<details class="replay-fallback" open><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Development demo_0: first frozen demo: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.svg">SVG</a> · <a href="_static/visual/libero-demo0-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo0-step-1000us.mp4">MP4 · step-1000us</a></li><li>Heldout demo_4: first screen regression: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.svg">SVG</a> · <a href="_static/visual/libero-demo4-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo4-step-1000us.mp4">MP4 · step-1000us</a></li><li>Heldout demo_8: maximum native overlap: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.svg">SVG</a> · <a href="_static/visual/libero-demo8-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo8-step-1000us.mp4">MP4 · step-1000us</a></li></ul></details>
+</div>
+```
+
+**Conditions：** Official cream-cheese-to-basket, Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic; 20 Hz control, original 2 ms step.
+
+**Observation：** Original and 1 ms heldout action executions both complete 10/10 tasks; numerical screens pass 5/10 and 3/10, with about double stepping cost. Five settling steps change one end-effector position component by 4.481 mm while the old observation is retained.
+
+**Explanation：** Observation assignment omission is verified. Positive contact time constants couple to the timestep safety floor in pinned source. Smaller steps do not consistently help; the mechanism behind 12.163 mm floor overlap continues in #174.
+
+**Advice：** Refresh observations first; distinguish controller goals, actuator output and contact forces. Retain failures and localize controlled experiments to the actual contact. No new physics profile is recommended.
+
+**Limits：** Demonstration action execution only: no fixed-policy closed-loop effect, real-material accuracy or mid-episode restore qualification. Holdouts are ten demonstrations of one task, not new-task generalization.
+
+Default: first frozen development demonstration, independent of outcome. Additional views show the first heldout screen regression and maximum baseline overlap, explicitly post-hoc diagnostic selections; all ten pairs remain in the full results. Video rendering never integrates physics.
+
+The 1 mm dashed line is a declared numerical screen. Relative height includes rotation; normal force is actual contact readback. Native time = display time + 0.25 s; channels retain their pre/post-integration epochs.
+
+**Evidence and all configurations:** [Native task, all configurations, failures and reproduction](libero-workflow.md) · [Remaining attribution #174](https://github.com/huangkiki/Dexlab/issues/174)

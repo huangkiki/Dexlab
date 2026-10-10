@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "Historical evidence; no new holdout or coverage admission",
+  "scope": "Evidence-linked research; historical cohorts and new LIBERO frozen demonstration holdouts are separate; reliable coverage unchanged",
   "experiences": [
     {
       "id": "normal-response",
@@ -338,11 +338,97 @@
         "starting_point": "This matched version is for attribution. Selection still separates latest stable native from official compatible framework versions; reuse the public default/aligned protocols.",
         "cost": "Retain initialization, observation, cache and independent-process costs; 200-step diagnostics do not establish long-grasp throughput."
       }
+    },
+    {
+      "id": "libero-workflow",
+      "task_ids": [
+        "grasp"
+      ],
+      "evidence": [
+        {
+          "path": "docs/evidence/libero/summary.json",
+          "sha256": "fa4ab804dc6825ea2f415a520ee7e75315a0dcf94e3495b53403a5288615789b"
+        },
+        {
+          "path": "docs/evidence/libero/patch-validation.json",
+          "sha256": "5401305b7389643a9f7148f78abd438b52380b0128c233efcbcb3786a3034450"
+        },
+        {
+          "path": "demos/libero-contact/protocol.json",
+          "sha256": "d4eb7a15396123335583d76ab4d7ca24d71ec60fb3cf9a7aa31fd02300760b30"
+        },
+        {
+          "path": "docs/evidence/libero/process-repeat.json",
+          "sha256": "49e2c1bdecc9b0e3c36bda3c10508d9be7dcbe303be005ebc4a2d7da256eb169"
+        },
+        {
+          "path": "docs/evidence/libero/budget.json",
+          "sha256": "f51951fcedd7521bd5d5618efa230061f7b5ccc43043c408f9f92647bed62b3d"
+        },
+        {
+          "path": "docs/evidence/libero/resources.json",
+          "sha256": "84794263763b153e786aa8dba6e87e4a52360b0d2b97a7c5b899ca058c42c166"
+        },
+        {
+          "path": "docs/evidence/libero/native-package-integrity.json",
+          "sha256": "3e12313f94070c6afbffa0440e11a3cf5fa92e4919d2765bbf373b5c8d3648c1"
+        },
+        {
+          "path": "docs/evidence/libero/history.json",
+          "sha256": "ac768e31c71a75626dfea7430e3acb74ec697de99dc97af0756ef238ab2fc629"
+        },
+        {
+          "path": "docs/evidence/libero/archive.json",
+          "sha256": "db866207878119d668322ba25c1134b1a66e1e7d9bcfa79283618f46d1b60112"
+        }
+      ],
+      "zh": {
+        "title": "LIBERO：原任务成功，不代表接触诊断通过",
+        "condition": "官方 cream-cheese-to-basket，Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic；20 Hz 控制，原版 2 ms。",
+        "observation": "原版与 1 ms 留出动作执行均 10/10 完成原任务，物理诊断分别 5/10 与 3/10；步进成本约翻倍。五步静置后旧观测与实际末端位置某坐标相差 4.481 mm。",
+        "explanation": "已验证观测赋值遗漏；正接触时间常数与步长安全下限存在源码确认的耦合。更小步长没有一致改善；最大 floor 接触穿透 12.163 mm 的完整机制仍见 #174。",
+        "advice": "先修正观测新鲜度，区分控制目标、驱动输出与接触力；保留失败，按具体接触定位受控实验。本轮不推荐新的物理配置。",
+        "boundary": "只有示范动作执行，未验证固定策略闭环效果、真实材料准确性或中途状态恢复；留出仅为同任务的十条示范，不是新任务泛化。",
+        "first_check": "核对初态与控制器重置、静置后观测、原生接触对/时刻/坐标、最终有效参数及原成功条件。",
+        "starting_point": "保持 LIBERO 8f1084e / robosuite 1.4.0 / MuJoCo 2.3.7 的原版配置，应用可撤销观测刷新补丁；1 ms 只是未通过筛查的对照。",
+        "cost": "八个候选（六种物理配置及两种审计），三个开发、十个留出示范；保留全部 40 条本协议记录。留出原生步进 2.239 s / 4.481 s；含记录的总成本见账本。"
+      },
+      "en": {
+        "title": "LIBERO: native success does not imply credible contacts",
+        "condition": "Official cream-cheese-to-basket, Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic; 20 Hz control, original 2 ms step.",
+        "observation": "Original and 1 ms heldout action executions both complete 10/10 tasks; numerical screens pass 5/10 and 3/10, with about double stepping cost. Five settling steps change one end-effector position component by 4.481 mm while the old observation is retained.",
+        "explanation": "Observation assignment omission is verified. Positive contact time constants couple to the timestep safety floor in pinned source. Smaller steps do not consistently help; the mechanism behind 12.163 mm floor overlap continues in #174.",
+        "advice": "Refresh observations first; distinguish controller goals, actuator output and contact forces. Retain failures and localize controlled experiments to the actual contact. No new physics profile is recommended.",
+        "boundary": "Demonstration action execution only: no fixed-policy closed-loop effect, real-material accuracy or mid-episode restore qualification. Holdouts are ten demonstrations of one task, not new-task generalization.",
+        "first_check": "Check initial state/controller reset, post-settling observation, native contact pair/epoch/frame, effective parameters and unchanged native success.",
+        "starting_point": "Retain LIBERO 8f1084e / robosuite 1.4.0 / MuJoCo 2.3.7 defaults with the reversible observation-refresh patch; 1 ms remains an unqualified comparison.",
+        "cost": "Eight candidates (six physical configurations and two audits), three development and ten heldout demos; all 40 current-protocol records retained. Heldout native stepping totals 2.239 s / 4.481 s; full recording costs remain in the ledger."
+      }
     }
   ],
   "visuals": {
     "schema_version": 1,
     "catalogue": [
+      {
+        "id": "libero-workflow",
+        "title": {
+          "zh": "LIBERO 原生抓取：诊断与改进",
+          "en": "Native LIBERO: diagnosis and change"
+        },
+        "engines": "LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic",
+        "thumbnail": "docs/evidence/visual/libero-summary.png",
+        "thumbnail_sha256": "38ca972b3e807365990bb26b611abe5d99daeedeaa3e5e0d9fd02016750118ba",
+        "site_thumbnail": "_static/visual/libero-summary.png",
+        "link": "libero-workflow.html",
+        "question": {
+          "zh": "如何从已有 benchmark 定位问题，再验证修改？",
+          "en": "How can an existing benchmark expose and validate a change?"
+        },
+        "finding": {
+          "zh": "发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。",
+          "en": "Stale observations identified; timestep trials retain successes, failures and regressions."
+        }
+      },
       {
         "id": "normal-response",
         "title": {
@@ -716,6 +802,62 @@
             "data": {
               "path": "docs/evidence/visual/pinch-negative.json.gz",
               "sha256": "2559c4425aed55d961ce27acae7ac4d5fd6bcf83897da2200000c526a45f9c98"
+            }
+          }
+        ]
+      },
+      {
+        "id": "libero",
+        "experience_id": "libero-workflow",
+        "title": {
+          "zh": "LIBERO：原任务、步长对照与观测修正",
+          "en": "LIBERO: native task, timestep control and observation fix"
+        },
+        "intro": {
+          "zh": "相同动作、初态、Panda 和成功判定；原版 2 ms 与未通过筛查的 1 ms 对照。全部留出任务成功，物理诊断 5/10 对 3/10，成本约翻倍。观测刷新补丁的策略效果未验证。",
+          "en": "Same actions, initial state, Panda and native success; original 2 ms versus unqualified 1 ms control. Heldout task success stays 10/10, screens change from 5/10 to 3/10, and cost doubles. Policy effects of observation refresh remain unverified."
+        },
+        "selection": {
+          "zh": "默认是冻结顺序第一条开发示范，不按结果挑选。另展示留出首个诊断退化与最大原版穿透，两者为事后诊断选择；完整十条配对结果均保留。视频不再积分物理。",
+          "en": "Default: first frozen development demonstration, independent of outcome. Additional views show the first heldout screen regression and maximum baseline overlap, explicitly post-hoc diagnostic selections; all ten pairs remain in the full results. Video rendering never integrates physics."
+        },
+        "reference": {
+          "zh": "1 mm 虚线只是预设数值筛查；相对高度包含旋转，法向力来自实际接触。原生时间 = 显示时间 + 0.25 s；曲线使用各自积分前／后时刻。",
+          "en": "The 1 mm dashed line is a declared numerical screen. Relative height includes rotation; normal force is actual contact readback. Native time = display time + 0.25 s; channels retain their pre/post-integration epochs."
+        },
+        "evidence": {
+          "zh": "[原任务、全部配置、失败与复现](libero-workflow.html) · [剩余归因 #174](https://github.com/huangkiki/Dexlab/issues/174)",
+          "en": "[Native task, all configurations, failures and reproduction](libero-workflow.html) · [Remaining attribution #174](https://github.com/huangkiki/Dexlab/issues/174)"
+        },
+        "variants": [
+          {
+            "label": {
+              "zh": "开发 demo_0：冻结首条示范",
+              "en": "Development demo_0: first frozen demo"
+            },
+            "data": {
+              "path": "docs/evidence/visual/libero-demo0.json.gz",
+              "sha256": "7f8434c777bf55bc4e9b7d4167066b2e8d1695cc83fdd4cf190b5d085b1718fd"
+            }
+          },
+          {
+            "label": {
+              "zh": "留出 demo_4：首个诊断退化",
+              "en": "Heldout demo_4: first screen regression"
+            },
+            "data": {
+              "path": "docs/evidence/visual/libero-demo4.json.gz",
+              "sha256": "61a26f95e3f096fabd4442f7d895490863eb233b162794c682714476538b36c4"
+            }
+          },
+          {
+            "label": {
+              "zh": "留出 demo_8：最大原生穿透",
+              "en": "Heldout demo_8: maximum native overlap"
+            },
+            "data": {
+              "path": "docs/evidence/visual/libero-demo8.json.gz",
+              "sha256": "a52927b6ddb4d23cad91d5e8ab59e8e1a95f8bc59b3fb8077c3abfc9aa9c271d"
             }
           }
         ]

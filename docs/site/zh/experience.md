@@ -151,4 +151,25 @@
 
 **证据：** [docs/framework-mjwarp-diagnostics.md](https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.md) · [docs/evidence/framework-mjwarp/matched-core.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/framework-mjwarp/matched-core.json) · [docs/evidence/framework-mjwarp/archive.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/framework-mjwarp/archive.json)
 
+(libero-workflow)=
+## LIBERO：原任务成功，不代表接触诊断通过
+
+**条件：** 官方 cream-cheese-to-basket，Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic；20 Hz 控制，原版 2 ms。
+
+**观察：** 原版与 1 ms 留出动作执行均 10/10 完成原任务，物理诊断分别 5/10 与 3/10；步进成本约翻倍。五步静置后旧观测与实际末端位置某坐标相差 4.481 mm。
+
+**解释与证据等级：** 已验证观测赋值遗漏；正接触时间常数与步长安全下限存在源码确认的耦合。更小步长没有一致改善；最大 floor 接触穿透 12.163 mm 的完整机制仍见 #174。
+
+**建议：** 先修正观测新鲜度，区分控制目标、驱动输出与接触力；保留失败，按具体接触定位受控实验。本轮不推荐新的物理配置。
+
+**边界：** 只有示范动作执行，未验证固定策略闭环效果、真实材料准确性或中途状态恢复；留出仅为同任务的十条示范，不是新任务泛化。
+
+**新场景首先验证：** 核对初态与控制器重置、静置后观测、原生接触对/时刻/坐标、最终有效参数及原成功条件。
+
+**候选起点：** 保持 LIBERO 8f1084e / robosuite 1.4.0 / MuJoCo 2.3.7 的原版配置，应用可撤销观测刷新补丁；1 ms 只是未通过筛查的对照。
+
+**成本：** 八个候选（六种物理配置及两种审计），三个开发、十个留出示范；保留全部 40 条本协议记录。留出原生步进 2.239 s / 4.481 s；含记录的总成本见账本。
+
+**证据：** [docs/evidence/libero/summary.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/summary.json) · [docs/evidence/libero/patch-validation.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/patch-validation.json) · [demos/libero-contact/protocol.json](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/protocol.json) · [docs/evidence/libero/process-repeat.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/process-repeat.json) · [docs/evidence/libero/budget.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/budget.json) · [docs/evidence/libero/resources.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/resources.json) · [docs/evidence/libero/native-package-integrity.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/native-package-integrity.json) · [docs/evidence/libero/history.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/history.json) · [docs/evidence/libero/archive.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/archive.json)
+
 <!-- research-experience:end -->

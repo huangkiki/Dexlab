@@ -15,3 +15,5 @@ Describe contact scale, mass/load, sticking/sliding, contact-switch frequency, g
 Retain candidate settings, parameter sensitivity, physical error, stability, cost, tested transfer range and failures for each selection. Prefer offline analysis of existing logs; add only the smallest experiment required by a concrete evidence gap. Without a matching scene, label the result a starting candidate and freeze development and unseen-validation conditions separately.
 
 Use latest stable native versions for new admission and official compatible combinations for frameworks. Older versions still support historical mechanism knowledge; report matched-core attribution separately from versions used for selection. Resource limits, installation and visual replay cannot replace physical acceptance.
+
+**LIBERO starting point:** [preserve the native version/configuration and audit observation timing first](libero-workflow.md). No new physics configuration qualifies in this cohort; 1 ms is not a general fix.

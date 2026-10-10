@@ -42,6 +42,7 @@
 
 ```{raw} html
 <div class="experiment-grid">
+<article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="LIBERO 原生抓取：诊断与改进"></a><div class="card-copy"><h3><a href="libero-workflow.html">LIBERO 原生抓取：诊断与改进</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>如何从已有 benchmark 定位问题，再验证修改？</p><p>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="法向与瞬态响应"></a><div class="card-copy"><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>压入、卸载与动态响应如何随参数改变？</p><p>静态校准有效，动态响应和质量迁移须分别验证。</p></div></article>
 <article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="六引擎斜面与摩擦"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">六引擎斜面与摩擦</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>静止、滑动和低摩擦有哪些差异？</p><p>原配置结果与观测有效性分列；全部失败保留。</p></div></article>
 <article class="experiment-card"><a href="results.html"><img loading="lazy" src="_static/visual/catalogue/sensitivity.png" alt="碰撞与接触起始"></a><div class="card-copy"><h3><a href="results.html">碰撞与接触起始</a></h3><p class="engines">MuJoCo · SuperDex</p><p>步长、刚度及碰撞相位怎样影响瞬态？</p><p>已有相位与刚度扫描；更小步长不自动消除模型差异。</p></div></article>
@@ -92,6 +93,17 @@
 
 [同步回放、逐步曲线、参数与原始证据](pinch)
 
+(visual-highlight-libero)=
+### LIBERO：原任务、步长对照与观测修正
+
+相同动作、初态、Panda 和成功判定；原版 2 ms 与未通过筛查的 1 ms 对照。全部留出任务成功，物理诊断 5/10 对 3/10，成本约翻倍。观测刷新补丁的策略效果未验证。
+
+![LIBERO：原任务、步长对照与观测修正](../../../docs/evidence/visual/libero-summary.png)
+
+![LIBERO：原任务、步长对照与观测修正 — curves](../../../docs/evidence/visual/libero-demo0-curves.zh.svg)
+
+[同步回放、逐步曲线、参数与原始证据](libero)
+
 <!-- visual-research:end -->
 
 (research-diagnosis)=
@@ -137,6 +149,7 @@
 :maxdepth: 1
 
 可视对照 <visual-comparisons>
+LIBERO 原生流程 <libero-workflow>
 研究经验 <experience>
 诊断方法 <diagnosis>
 场景选型 <selection>

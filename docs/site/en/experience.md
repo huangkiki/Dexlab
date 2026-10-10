@@ -151,4 +151,25 @@ Each experience retains conditions, observations, explanation, advice, limits an
 
 **Evidence:** [docs/framework-mjwarp-diagnostics.md](https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.md) · [docs/evidence/framework-mjwarp/matched-core.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/framework-mjwarp/matched-core.json) · [docs/evidence/framework-mjwarp/archive.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/framework-mjwarp/archive.json)
 
+(libero-workflow)=
+## LIBERO: native success does not imply credible contacts
+
+**Conditions:** Official cream-cheese-to-basket, Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic; 20 Hz control, original 2 ms step.
+
+**Observation:** Original and 1 ms heldout action executions both complete 10/10 tasks; numerical screens pass 5/10 and 3/10, with about double stepping cost. Five settling steps change one end-effector position component by 4.481 mm while the old observation is retained.
+
+**Explanation and evidence level:** Observation assignment omission is verified. Positive contact time constants couple to the timestep safety floor in pinned source. Smaller steps do not consistently help; the mechanism behind 12.163 mm floor overlap continues in #174.
+
+**Advice:** Refresh observations first; distinguish controller goals, actuator output and contact forces. Retain failures and localize controlled experiments to the actual contact. No new physics profile is recommended.
+
+**Limits:** Demonstration action execution only: no fixed-policy closed-loop effect, real-material accuracy or mid-episode restore qualification. Holdouts are ten demonstrations of one task, not new-task generalization.
+
+**First check in a new scene:** Check initial state/controller reset, post-settling observation, native contact pair/epoch/frame, effective parameters and unchanged native success.
+
+**Starting candidate:** Retain LIBERO 8f1084e / robosuite 1.4.0 / MuJoCo 2.3.7 defaults with the reversible observation-refresh patch; 1 ms remains an unqualified comparison.
+
+**Cost:** Eight candidates (six physical configurations and two audits), three development and ten heldout demos; all 40 current-protocol records retained. Heldout native stepping totals 2.239 s / 4.481 s; full recording costs remain in the ledger.
+
+**Evidence:** [docs/evidence/libero/summary.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/summary.json) · [docs/evidence/libero/patch-validation.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/patch-validation.json) · [demos/libero-contact/protocol.json](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/protocol.json) · [docs/evidence/libero/process-repeat.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/process-repeat.json) · [docs/evidence/libero/budget.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/budget.json) · [docs/evidence/libero/resources.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/resources.json) · [docs/evidence/libero/native-package-integrity.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/native-package-integrity.json) · [docs/evidence/libero/history.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/history.json) · [docs/evidence/libero/archive.json](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/archive.json)
+
 <!-- research-experience:end -->
