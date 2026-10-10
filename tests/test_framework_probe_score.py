@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from dexlab.framework_probe_score import decode_pyramidal_contact, score
+from dexlab.framework_probe_score import audit_export, decode_pyramidal_contact, score, score_native_state
 
 
 class ClockProbeTests(unittest.TestCase):
@@ -86,6 +86,36 @@ class ClockProbeTests(unittest.TestCase):
             decode_pyramidal_contact(values, [8, 9, 10, 11], [.5] * 5, 3)
         with self.assertRaisesRegex(ValueError, 'Non-finite'):
             decode_pyramidal_contact([float('nan')] * 4, [0, 1, 2, 3], [.5] * 5, 3)
+
+    def test_out_of_bounds_cpu_force_is_unavailable_not_a_numeric_error(self):
+        row = {'step': 1, 'nefc': 0, 'native_efc_force': [], 'contacts': [{
+            'native_efc_address': [-1] * 4, 'cpu_efc_address': 0,
+            'dim': 3, 'friction': [.5] * 5, 'force_local': [0.] * 6,
+            'cpu_address_in_bounds': False, 'cpu_converted_force_local': None,
+        }]}
+        (self.root / 'steps.jsonl').write_text(json.dumps(row) + '\n')
+        result = audit_export(self.root)
+        self.assertTrue(result['native_decode_within_1e_5_N'])
+        self.assertEqual(result['cpu_invalid_contacts'], 1)
+        self.assertIsNone(result['cpu_in_bounds_max_abs_N'])
+        # Older archives retain a numeric value from this invalid native call.
+        row['contacts'][0].pop('cpu_address_in_bounds')
+        row['contacts'][0]['cpu_converted_force_local'] = [1e20] * 6
+        (self.root / 'steps.jsonl').write_text(json.dumps(row) + '\n')
+        self.assertEqual(audit_export(self.root), result)
+
+    def test_native_diagnostic_does_not_invent_framework_clock_or_hide_nan_rotation(self):
+        for row in self.rows:
+            del row['framework_time_s'], row['framework_step_count']
+            row['qfrc_smooth'] = [0., 0., -.064 * 9.81, 0., 0., 0.]
+            row['native_efc_address'] = [[0, 1, 2, 3]]
+        (self.root / 'steps.jsonl').write_text(''.join(json.dumps(row) + '\n' for row in self.rows))
+        result = score_native_state(self.root)
+        self.assertTrue(result['passed'])
+        self.assertNotIn('framework_clock_error_s', result['metrics'])
+        self.rows[0]['qpos'][3] = float('nan')
+        (self.root / 'steps.jsonl').write_text(''.join(json.dumps(row) + '\n' for row in self.rows))
+        self.assertFalse(score_native_state(self.root)['checks']['finite'])
 
 
 if __name__ == '__main__':

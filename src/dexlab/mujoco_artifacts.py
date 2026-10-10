@@ -10,6 +10,75 @@ import tempfile
 from pathlib import Path
 
 
+def cpu_contact_address_valid(address, dimension, pyramidal, constraint_count):
+    """Check converted CPU bounds before passing a contact to native C code."""
+    if dimension not in (1, 3, 4, 6) or constraint_count < 0:
+        raise ValueError('Invalid contact dimension or constraint count')
+    if address == -1:
+        return True  # MuJoCo explicitly returns zero for an inactive contact.
+    width = 2 * (dimension - 1) if pyramidal and dimension > 1 else dimension
+    return 0 <= address and address + width <= constraint_count
+
+
+def warp_model_parameters(model):
+    """Read the effective GPU fields used by this rigid-body diagnostic.
+
+    Keep CPU authoring data separate: framework synchronization can overwrite
+    these arrays after put_model. Missing fields fail instead of guessing a
+    version's defaults. This is a scoped readback, not full model serialization.
+    """
+    import numpy as np
+
+    fields = {
+        '': ('body_pos', 'body_quat', 'body_ipos', 'body_iquat', 'body_mass',
+             'body_inertia', 'body_gravcomp', 'body_invweight0', 'qpos0',
+             'dof_armature', 'dof_damping', 'dof_frictionloss',
+             'geom_type', 'geom_bodyid', 'geom_pos', 'geom_quat', 'geom_size',
+             'geom_friction', 'geom_solref', 'geom_solimp', 'geom_margin',
+             'geom_gap', 'geom_condim', 'geom_priority', 'geom_solmix',
+             'geom_contype', 'geom_conaffinity', 'tree_sleep_policy'),
+        'opt': ('timestep', 'tolerance', 'ls_tolerance', 'ccd_tolerance',
+                'sleep_tolerance', 'gravity', 'wind', 'density', 'viscosity',
+                'integrator', 'cone', 'solver', 'iterations', 'ls_iterations',
+                'ccd_iterations', 'disableflags', 'enableflags',
+                'impratio_invsqrt', 'broadphase', 'broadphase_filter',
+                'graph_conditional', 'run_collision_detection'),
+        'stat': ('meaninertia',),
+        'block_dim': ('linesearch_iterative', 'update_gradient_grad',
+                      'update_gradient_cholesky', 'contact_jac_tiled'),
+    }
+    values, dtypes = {}, {}
+    for prefix, names in fields.items():
+        owner = getattr(model, prefix) if prefix else model
+        for name in names:
+            value = getattr(owner, name)
+            array = np.asarray(value.numpy() if hasattr(value, 'numpy') else value)
+            key = f'{prefix}.{name}' if prefix else name
+            if not np.isfinite(array).all():
+                raise ValueError(f'Non-finite GPU parameter: {key}')
+            values[key], dtypes[key] = array.tolist(), str(array.dtype)
+    return {'values': values, 'dtypes': dtypes,
+            'scope': 'Selected effective rigid-body GPU parameters; not all engine state.'}
+
+
+def warp_execution_options():
+    """Record compilation choices separately from mechanical model parameters."""
+    import importlib
+    import warp
+
+    result = {}
+    for name in ('solver', 'forward', 'smooth', 'collision_driver', 'collision_convex'):
+        module = importlib.import_module('mujoco_warp._src.' + name)
+        options = warp.get_module_options(module)
+        result[name] = {
+            key: options.get(key) for key in
+            ('enable_backward', 'fast_math', 'fuse_fp', 'max_unroll',
+             'deterministic_max_records')
+        }
+        result[name]['deterministic'] = str(options.get('deterministic'))
+    return result
+
+
 def conversion_parameters(model):
     """Read the compiled model, including frames and drives often changed by import.
 

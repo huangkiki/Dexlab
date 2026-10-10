@@ -1,0 +1,1708 @@
+{
+  "schema_version": 1,
+  "scope": "Development diagnostics only; no new reliable task coverage.",
+  "cases": [
+    {
+      "id": "clock-newton-support-v6",
+      "score": {
+        "case": "newton-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "framework_counters": true,
+          "clocks": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_readback_complete": true,
+          "momentum": false,
+          "contact_force": true,
+          "acceleration_epoch": true,
+          "selected_contact_path": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "framework_clock_error_s": 1.3877787807814457e-16,
+          "momentum_residual_Ns": 7.876595647294465e-07,
+          "contact_force_residual_N": 9.824453431157233e-07,
+          "acceleration_step_residual_m_s": 8.746294291170389e-10,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0003641811969955753
+        },
+        "scope": "Development clock/contact diagnostic; task qualification and reliable coverage remain pending."
+      },
+      "resources": {
+        "profile": "adaptive-16g-4c-256t",
+        "returncode": 0,
+        "whole_service_wall_s": 40.20636630995432,
+        "peak_memory_GiB": 5.462852478027344,
+        "peak_tasks": 138,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 122697420\nuser_usec 117298585\nsystem_usec 5398834\ncore_sched.force_idle_usec 0\nnr_periods 398\nnr_throttled 93\nthrottled_usec 63880\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=10.48 avg60=3.65 avg300=0.89 total=2915852\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=57248",
+          "io.pressure": "some avg10=14.31 avg60=4.88 avg300=1.15 total=3542230\nfull avg10=13.39 avg60=4.69 avg300=1.11 total=3445913"
+        },
+        "receipt_sha256": "7a8ca6f916df45e26fc9f7603204b7b8f686b2d54b7bfef3dcc1d5c53801feb0"
+      },
+      "raw_sha256": {
+        "progress.json": "ad5293ab52ca2794c49ba77b98ed0286183611ff1819883ec7e9c04c7a0cb8da",
+        "steps.jsonl": "d20398d491494294f709d3d9d143d29cb1fe35dbe8d336c6afe8e798200ab722",
+        "admission.json": "4eb5a3e67062e27c4f3b8dd0711eb70610e3ea419e075a0ac12009f786a5e924",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+        "gpu-model-initial.json": "21e4c6cfe16821d30dd07e7497571a6aa9297f60e00aa430c0d4f857a358a136",
+        "converted.xml": "de140a0406b37bc71ef873254f8418fbe49976fefe37ea1c9d0384ad978c3092",
+        "runtime-identity.json": "f5dcdd9dfb78913c773dc84315251d0abc507543595e48f2f8eb003de5ff04cb",
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "completion.json": "9d7f5901e0cf5287083042ebec8e1bef95757e5ce994daee2a1bf7505503bda6",
+        "invocation.json": "c0a6bc13e17968e223f8c2382b113ba66eebac3f4ad02c831ad7e6ec8ce5abc2",
+        "stage-detached.json": "8955faeb5fbea38443f09d13bacd14ba42d908e4bf50f0bfb5d09e87d85ab4ab",
+        "gpu-model-first-step.json": "18aa752f2318f36aa5ec3b1f1fe44e245e49e7b4c8f27cafd410aaca842da6f2",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a",
+        "input.usda": "19318f086fd02ff2b35f5b2298fa82ea21fd99173a17878e6bbc0eff36a6ec81"
+      },
+      "contact_audit": {
+        "steps": 200,
+        "contacts": 800,
+        "native_decode_max_abs_N": 1.4682882465422153e-08,
+        "cpu_in_bounds_max_abs_N": 0.0,
+        "cpu_compared_contacts": 778,
+        "cpu_invalid_contacts": 22,
+        "cpu_invalid_steps": [
+          1,
+          40,
+          42,
+          80,
+          82,
+          120,
+          122,
+          160,
+          162,
+          200
+        ],
+        "cpu_mismatch_steps": [],
+        "native_decode_within_1e_5_N": true,
+        "scope": "Pyramidal fixture address audit. Out-of-bounds CPU force values, including historical values, are not physical observations."
+      },
+      "v4_primary_observations_exact": true
+    },
+    {
+      "id": "clock-newton-no-floor-v6",
+      "score": {
+        "case": "newton-no-floor",
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "framework_counters": true,
+          "clocks": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_readback_complete": true,
+          "momentum": true,
+          "contact_force": true,
+          "acceleration_epoch": true,
+          "selected_contact_path": true,
+          "negative_freefall": true,
+          "negative_has_no_contacts": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "framework_clock_error_s": 1.3877787807814457e-16,
+          "momentum_residual_Ns": 1.949462983185865e-09,
+          "contact_force_residual_N": 7.484436537197325e-08,
+          "acceleration_step_residual_m_s": 3.0040740965978086e-08,
+          "maximum_contacts": 0,
+          "maximum_constraints": 0,
+          "freefall_position_error_m": 0.0009806958317756242
+        },
+        "scope": "Development clock/contact diagnostic; task qualification and reliable coverage remain pending."
+      },
+      "resources": {
+        "profile": "adaptive-16g-4c-256t",
+        "returncode": 0,
+        "whole_service_wall_s": 39.78257717896486,
+        "peak_memory_GiB": 5.440044403076172,
+        "peak_tasks": 138,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 122247845\nuser_usec 117224785\nsystem_usec 5023060\ncore_sched.force_idle_usec 0\nnr_periods 395\nnr_throttled 75\nthrottled_usec 66622\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=9.93 avg60=3.30 avg300=0.80 total=2823008\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=51566",
+          "io.pressure": "some avg10=13.08 avg60=4.31 avg300=1.00 total=3263662\nfull avg10=13.08 avg60=4.31 avg300=1.00 total=3251901"
+        },
+        "receipt_sha256": "ade0c1b9acbc46f4d9facf243af9ceecd3166ad1ff0f7f8cce313195d2e61cac"
+      },
+      "raw_sha256": {
+        "progress.json": "ad5293ab52ca2794c49ba77b98ed0286183611ff1819883ec7e9c04c7a0cb8da",
+        "steps.jsonl": "49ca57688995c7874bc371f7396db2d7dd1ad79c29657ee41f2e19224ba42327",
+        "admission.json": "26e305a1bc3d81e0fc9bc30fa964f24cd9e0729cd33da3fdba9897981797ae67",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+        "gpu-model-initial.json": "e51ceabc24d983fd1b2343cf0c0a7f5bfe8c7e3f5eaa35534c6492c4dca0d38f",
+        "converted.xml": "2032496a49b6bf3012ace41b84cb14d72b9540179f37e1fb97650047800324ad",
+        "runtime-identity.json": "f5dcdd9dfb78913c773dc84315251d0abc507543595e48f2f8eb003de5ff04cb",
+        "model.mjb": "1a372e70a7c559128dad886e55625bf4d779c3953600955a2613af48cb0f673b",
+        "completion.json": "95d3dd962deec96e1fb772fd8e1d30a81356b33a25252223dbd38883c8b72aa2",
+        "invocation.json": "a5255450da83ba67a31c782c3956f6c517e80ecd066a424fd57d069bc5f00115",
+        "stage-detached.json": "8955faeb5fbea38443f09d13bacd14ba42d908e4bf50f0bfb5d09e87d85ab4ab",
+        "gpu-model-first-step.json": "0d115ed4f543afc3440179ebaf4aedbd0adbea6b472bee229532fe02171d750e",
+        "conversion-readback.json": "2f38fea652c3f1a7664656c4dd5f4791a7611f1b659fc9254d2bd11caaaf9bf3",
+        "input.usda": "b8cc822c61b779742e32e3567c7abc92cda400b26561e70e11e2f869658ea8cb"
+      },
+      "contact_audit": {
+        "steps": 200,
+        "contacts": 0,
+        "native_decode_max_abs_N": 0.0,
+        "cpu_in_bounds_max_abs_N": null,
+        "cpu_compared_contacts": 0,
+        "cpu_invalid_contacts": 0,
+        "cpu_invalid_steps": [],
+        "cpu_mismatch_steps": [],
+        "native_decode_within_1e_5_N": true,
+        "scope": "Pyramidal fixture address audit. Out-of-bounds CPU force values, including historical values, are not physical observations."
+      },
+      "v4_primary_observations_exact": true
+    },
+    {
+      "id": "clock-mjwarp-support-v6",
+      "score": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "framework_counters": true,
+          "clocks": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_readback_complete": true,
+          "momentum": false,
+          "contact_force": true,
+          "acceleration_epoch": true,
+          "selected_contact_path": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "framework_clock_error_s": 1.3877787807814457e-16,
+          "momentum_residual_Ns": 7.20758160578417e-07,
+          "contact_force_residual_N": 9.402337819196956e-07,
+          "acceleration_step_residual_m_s": 1.4280112107639418e-09,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0008040048890453574
+        },
+        "scope": "Development clock/contact diagnostic; task qualification and reliable coverage remain pending."
+      },
+      "resources": {
+        "profile": "adaptive-16g-4c-256t",
+        "returncode": 0,
+        "whole_service_wall_s": 42.19404824898811,
+        "peak_memory_GiB": 5.414310455322266,
+        "peak_tasks": 138,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 129510400\nuser_usec 124457659\nsystem_usec 5052740\ncore_sched.force_idle_usec 0\nnr_periods 413\nnr_throttled 117\nthrottled_usec 117097\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=10.62 avg60=3.96 avg300=0.98 total=3230310\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=70742",
+          "io.pressure": "some avg10=6.64 avg60=1.27 avg300=0.27 total=859506\nfull avg10=6.64 avg60=1.27 avg300=0.27 total=853130"
+        },
+        "receipt_sha256": "e63ec012dbefb188046c6ae41a3172082069c29065b0c9f9c19d24294f6a5a75"
+      },
+      "raw_sha256": {
+        "progress.json": "ad5293ab52ca2794c49ba77b98ed0286183611ff1819883ec7e9c04c7a0cb8da",
+        "steps.jsonl": "cb97e170893387267d1517eab76c71dbfd31b81679a513363a0743eed60ce722",
+        "admission.json": "59ae70259f4bcef0afdaffc3cc9bbf619687300db86109206381d03655f04b54",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+        "gpu-model-initial.json": "5b1c0a6cf557e68c2b60a5b12ff5da0e9e2a085ffdc17f2f4391025db73218e0",
+        "converted.xml": "de140a0406b37bc71ef873254f8418fbe49976fefe37ea1c9d0384ad978c3092",
+        "runtime-identity.json": "f5dcdd9dfb78913c773dc84315251d0abc507543595e48f2f8eb003de5ff04cb",
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "completion.json": "80a45daf17c971679eb354eeeef7b2d401482577e6c54136aa6bf6857bbee02b",
+        "invocation.json": "3d99027282086b046924bd7a468ffd0d773b9d5a879cd90149d87890182423a5",
+        "stage-detached.json": "8955faeb5fbea38443f09d13bacd14ba42d908e4bf50f0bfb5d09e87d85ab4ab",
+        "gpu-model-first-step.json": "719e1e8ac67cec15f1ab102137202ec9eb14b817dec94ff5d640453f5f3be837",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a",
+        "input.usda": "19318f086fd02ff2b35f5b2298fa82ea21fd99173a17878e6bbc0eff36a6ec81"
+      },
+      "contact_audit": {
+        "steps": 200,
+        "contacts": 725,
+        "native_decode_max_abs_N": 2.2351741790771484e-08,
+        "cpu_in_bounds_max_abs_N": 0.7521283030509949,
+        "cpu_compared_contacts": 720,
+        "cpu_invalid_contacts": 5,
+        "cpu_invalid_steps": [
+          1,
+          135,
+          136,
+          167,
+          195
+        ],
+        "cpu_mismatch_steps": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          92,
+          93,
+          94,
+          95,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          107,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          196,
+          197,
+          198,
+          199,
+          200
+        ],
+        "native_decode_within_1e_5_N": true,
+        "scope": "Pyramidal fixture address audit. Out-of-bounds CPU force values, including historical values, are not physical observations."
+      },
+      "v4_primary_observations_exact": true
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v6",
+      "score": {
+        "case": "mjwarp-no-floor",
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "framework_counters": true,
+          "clocks": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_readback_complete": true,
+          "momentum": true,
+          "contact_force": true,
+          "acceleration_epoch": true,
+          "selected_contact_path": true,
+          "negative_freefall": true,
+          "negative_has_no_contacts": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "framework_clock_error_s": 1.3877787807814457e-16,
+          "momentum_residual_Ns": 1.949462983185865e-09,
+          "contact_force_residual_N": 7.484436537197325e-08,
+          "acceleration_step_residual_m_s": 3.0040740965978086e-08,
+          "maximum_contacts": 0,
+          "maximum_constraints": 0,
+          "freefall_position_error_m": 0.0009806958317756242
+        },
+        "scope": "Development clock/contact diagnostic; task qualification and reliable coverage remain pending."
+      },
+      "resources": {
+        "profile": "adaptive-16g-4c-256t",
+        "returncode": 0,
+        "whole_service_wall_s": 43.39795349002816,
+        "peak_memory_GiB": 5.633647918701172,
+        "peak_tasks": 138,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 133094987\nuser_usec 127879253\nsystem_usec 5215734\ncore_sched.force_idle_usec 0\nnr_periods 431\nnr_throttled 85\nthrottled_usec 59402\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1",
+          "cpu.pressure": "some avg10=11.55 avg60=3.81 avg300=0.93 total=3183110\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=70981",
+          "io.pressure": "some avg10=8.19 avg60=3.94 avg300=0.98 total=3202736\nfull avg10=8.01 avg60=3.91 avg300=0.97 total=3186886"
+        },
+        "receipt_sha256": "6f7e66df84b699d217ba6e712bf03915ce9a758df5706e2c3609171859d54ee6"
+      },
+      "raw_sha256": {
+        "progress.json": "ad5293ab52ca2794c49ba77b98ed0286183611ff1819883ec7e9c04c7a0cb8da",
+        "steps.jsonl": "49ca57688995c7874bc371f7396db2d7dd1ad79c29657ee41f2e19224ba42327",
+        "admission.json": "c97226185250dcf934b8f47d9b5be80e1e6c2aad09c3a2a0166b3804040a7a21",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+        "gpu-model-initial.json": "ae63e998db65ae18970e18a0b48cdf6a17de3c0a46e7f94cd414628829eb5e3f",
+        "converted.xml": "2032496a49b6bf3012ace41b84cb14d72b9540179f37e1fb97650047800324ad",
+        "runtime-identity.json": "f5dcdd9dfb78913c773dc84315251d0abc507543595e48f2f8eb003de5ff04cb",
+        "model.mjb": "1a372e70a7c559128dad886e55625bf4d779c3953600955a2613af48cb0f673b",
+        "completion.json": "89988a7f8be91e702ad222eab56e207452583ad3c747b48e2563935e27a74d3c",
+        "invocation.json": "383588caa5a2c74b329e1549778e8f578f973a764a2e145e988a5aaaf2734bab",
+        "stage-detached.json": "8955faeb5fbea38443f09d13bacd14ba42d908e4bf50f0bfb5d09e87d85ab4ab",
+        "gpu-model-first-step.json": "a61f627e1ed5c5c8a01374b210d7ad5471233cf4672426f2a7ab1019a5ae5b2b",
+        "conversion-readback.json": "2f38fea652c3f1a7664656c4dd5f4791a7611f1b659fc9254d2bd11caaaf9bf3",
+        "input.usda": "b8cc822c61b779742e32e3567c7abc92cda400b26561e70e11e2f869658ea8cb"
+      },
+      "contact_audit": {
+        "steps": 200,
+        "contacts": 0,
+        "native_decode_max_abs_N": 0.0,
+        "cpu_in_bounds_max_abs_N": null,
+        "cpu_compared_contacts": 0,
+        "cpu_invalid_contacts": 0,
+        "cpu_invalid_steps": [],
+        "cpu_mismatch_steps": [],
+        "native_decode_within_1e_5_N": true,
+        "scope": "Pyramidal fixture address audit. Out-of-bounds CPU force values, including historical values, are not physical observations."
+      },
+      "v4_primary_observations_exact": true
+    },
+    {
+      "id": "native-mjwarp-support-v2",
+      "score": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 1.0070789434520878e-06,
+          "acceleration_step_residual_m_s": 1.413747669279375e-09,
+          "native_equation_residual_N": 0.0010070118712515717,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007166175561052842
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "resources": {
+        "profile": "adaptive-16g-4c",
+        "returncode": 0,
+        "whole_service_wall_s": 39.941029927984346,
+        "peak_memory_GiB": 1.1473922729492188,
+        "peak_tasks": 12,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 39497999\nuser_usec 37422421\nsystem_usec 2075578\ncore_sched.force_idle_usec 0\nnr_periods 397\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=34311\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=32365",
+          "io.pressure": "some avg10=0.02 avg60=0.05 avg300=0.01 total=155549\nfull avg10=0.02 avg60=0.05 avg300=0.01 total=155549"
+        },
+        "receipt_sha256": "138e3cd5891d3229f1bc9c52a605280315e47dec43ad35bc0b6654c078727990"
+      },
+      "raw_sha256": {
+        "progress.json": "45ccc6ec0ecdf0b76a41848cd4645c7e0bc837a7cfa3de39ea0f4cc46448f4c6",
+        "sleep-policy-projection.json": "5790f9f07cb99f8ff41698f7af01254d86f9fc962171f6b824645cf0b3548a4d",
+        "steps.jsonl": "0fb0680246d5108ac78487130aa4bd7e8cff08d20d6fb76b6b1231193f5481f4",
+        "admission.json": "277d47e22fecc9526c39aced1fe6fb9b140f8b38c13cc27ddec1dbc6273012ac",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "0d080a5c539f2654c6c2b244d10ee6959029434e50bbbeeaa60159fd0d0f93d9",
+        "gpu-model-initial.json": "c8f6ac6eac3fa2ba8e327475cf47dd1dfa3ba1804e91c2a842ad43b040803016",
+        "runtime-identity.json": "366dc1b968ce1dbdfb45617991dd1455ae4efad7e50961da50380c2d41830bd8",
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "completion.json": "ed27114bc79f05fcf93d527549fa320c0a329c41d35ccf86e2d28f11d7f4d391",
+        "invocation.json": "e8a0ab62a2d16a0b403f08994143669da697d211e2e0bcab2e7c5da6f45ebc0d",
+        "gpu-model-first-step.json": "2a3449e36065b796f76bae3ec9bcd76e718ae9f9350a4182593928a1bf84c564",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a"
+      }
+    },
+    {
+      "id": "native-mjwarp-no-floor-v1",
+      "score": {
+        "case": "mjwarp-no-floor",
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": true,
+          "acceleration_epoch": true,
+          "negative_freefall": true,
+          "negative_has_no_contacts": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 1.949462983185865e-09,
+          "acceleration_step_residual_m_s": 3.0040740965978086e-08,
+          "native_equation_residual_N": 8.940637741261526e-08,
+          "maximum_contacts": 0,
+          "maximum_constraints": 0,
+          "freefall_position_error_m": 0.0009806958317756242
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "resources": {
+        "profile": "adaptive-16g-4c",
+        "returncode": 0,
+        "whole_service_wall_s": 3.159994765999727,
+        "peak_memory_GiB": 0.4820899963378906,
+        "peak_tasks": 10,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 3097554\nuser_usec 2204106\nsystem_usec 893448\ncore_sched.force_idle_usec 0\nnr_periods 30\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2243\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=243",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=40205\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=40205"
+        },
+        "receipt_sha256": "303562ecc779eaa2284df1147de189f7ed5660227fa9495edee7881d8ccc2094"
+      },
+      "raw_sha256": {
+        "progress.json": "45ccc6ec0ecdf0b76a41848cd4645c7e0bc837a7cfa3de39ea0f4cc46448f4c6",
+        "sleep-policy-projection.json": "5790f9f07cb99f8ff41698f7af01254d86f9fc962171f6b824645cf0b3548a4d",
+        "steps.jsonl": "3f1b434464f56a4ece273b4c871ac3a24269fcaec2965d962b0bf86f9cca8245",
+        "admission.json": "277d47e22fecc9526c39aced1fe6fb9b140f8b38c13cc27ddec1dbc6273012ac",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "0d080a5c539f2654c6c2b244d10ee6959029434e50bbbeeaa60159fd0d0f93d9",
+        "gpu-model-initial.json": "086f1bfaccfc26ae1e5db6718955d8a8f30ad97b53104db5dd532149d6a11fbf",
+        "runtime-identity.json": "366dc1b968ce1dbdfb45617991dd1455ae4efad7e50961da50380c2d41830bd8",
+        "model.mjb": "1a372e70a7c559128dad886e55625bf4d779c3953600955a2613af48cb0f673b",
+        "completion.json": "d55a13af79e5ddd35e0c9fde1c43a5ae68c5da58c5d93e3650b0b637c2a366db",
+        "invocation.json": "00b95b1a5e463c0dc1ca1b873b1ca376a72fd992478ef8e6ae236e43d2ef3cb3",
+        "gpu-model-first-step.json": "76290b740261de189d8f728763804893c69be2235200207c8c887a3c10beb831",
+        "conversion-readback.json": "2f38fea652c3f1a7664656c4dd5f4791a7611f1b659fc9254d2bd11caaaf9bf3"
+      }
+    },
+    {
+      "id": "native-mjwarp-support-aligned-v1",
+      "score": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 7.70135360982756e-07,
+          "acceleration_step_residual_m_s": 1.3321976972375103e-09,
+          "native_equation_residual_N": 0.0007701180834903858,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007945578831111092
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "resources": {
+        "profile": "adaptive-8g-4c",
+        "returncode": 0,
+        "whole_service_wall_s": 3.3853317920002155,
+        "peak_memory_GiB": 0.4816780090332031,
+        "peak_tasks": 10,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 3185902\nuser_usec 2304823\nsystem_usec 881079\ncore_sched.force_idle_usec 0\nnr_periods 33\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2278\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=262",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=46886\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=46886"
+        },
+        "receipt_sha256": "d32cff01a6676d453a7a91ed67303dbd6edb1c64e0f526e9eb4b52de70eb2cf0"
+      },
+      "raw_sha256": {
+        "progress.json": "45ccc6ec0ecdf0b76a41848cd4645c7e0bc837a7cfa3de39ea0f4cc46448f4c6",
+        "sleep-policy-projection.json": "5790f9f07cb99f8ff41698f7af01254d86f9fc962171f6b824645cf0b3548a4d",
+        "steps.jsonl": "abe14dadd39961064fcfdb68440624a6c89caafe062530179b898ba7aa1a3ae7",
+        "admission.json": "277d47e22fecc9526c39aced1fe6fb9b140f8b38c13cc27ddec1dbc6273012ac",
+        "gpu-alignment.json": "231524b59d44350f472f209ebe754c9cf5fa61e9c4f0aef3e3ae7129288a6ea2",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+        "gpu-model-initial.json": "5b1c0a6cf557e68c2b60a5b12ff5da0e9e2a085ffdc17f2f4391025db73218e0",
+        "runtime-identity.json": "366dc1b968ce1dbdfb45617991dd1455ae4efad7e50961da50380c2d41830bd8",
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "completion.json": "7a420b209f1ca821b7fe019f869aa851717f8b6632850c405db86b6c790e8635",
+        "invocation.json": "d71f07349dd9a4fb6e80e7e3f197fd674e49a729087d3b4abc4df09ab4243d35",
+        "gpu-model-unadjusted.json": "c8f6ac6eac3fa2ba8e327475cf47dd1dfa3ba1804e91c2a842ad43b040803016",
+        "gpu-model-first-step.json": "719e1e8ac67cec15f1ab102137202ec9eb14b817dec94ff5d640453f5f3be837",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a"
+      }
+    },
+    {
+      "id": "native-mjwarp-no-floor-aligned-v1",
+      "score": {
+        "case": "mjwarp-no-floor",
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": true,
+          "acceleration_epoch": true,
+          "negative_freefall": true,
+          "negative_has_no_contacts": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 1.949462983185865e-09,
+          "acceleration_step_residual_m_s": 3.0040740965978086e-08,
+          "native_equation_residual_N": 8.940637741261526e-08,
+          "maximum_contacts": 0,
+          "maximum_constraints": 0,
+          "freefall_position_error_m": 0.0009806958317756242
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "resources": {
+        "profile": "adaptive-8g-4c",
+        "returncode": 0,
+        "whole_service_wall_s": 3.168617771996651,
+        "peak_memory_GiB": 0.48180389404296875,
+        "peak_tasks": 10,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 3064764\nuser_usec 2182529\nsystem_usec 882235\ncore_sched.force_idle_usec 0\nnr_periods 31\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2207\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=233",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=45839\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=45838"
+        },
+        "receipt_sha256": "08f883f80d527bda7fb7f1126c8c4f7838802e1cb18e96300f06a2b20871ebe4"
+      },
+      "raw_sha256": {
+        "progress.json": "45ccc6ec0ecdf0b76a41848cd4645c7e0bc837a7cfa3de39ea0f4cc46448f4c6",
+        "sleep-policy-projection.json": "5790f9f07cb99f8ff41698f7af01254d86f9fc962171f6b824645cf0b3548a4d",
+        "steps.jsonl": "3f1b434464f56a4ece273b4c871ac3a24269fcaec2965d962b0bf86f9cca8245",
+        "admission.json": "277d47e22fecc9526c39aced1fe6fb9b140f8b38c13cc27ddec1dbc6273012ac",
+        "gpu-alignment.json": "d1671f4aa721a1768a0c4d7fbc323d97aec631dc4c6d7e0fc48b9a203bb53f1c",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+        "gpu-model-initial.json": "ae63e998db65ae18970e18a0b48cdf6a17de3c0a46e7f94cd414628829eb5e3f",
+        "runtime-identity.json": "366dc1b968ce1dbdfb45617991dd1455ae4efad7e50961da50380c2d41830bd8",
+        "model.mjb": "1a372e70a7c559128dad886e55625bf4d779c3953600955a2613af48cb0f673b",
+        "completion.json": "168f4788e34c2ceff567933e8989168b7f2cf6fd1340f459473d08961b7774bc",
+        "invocation.json": "74c7851b3ebc27d77c361a9f279a5c13eecf1591341d4195901137cba7682b52",
+        "gpu-model-unadjusted.json": "086f1bfaccfc26ae1e5db6718955d8a8f30ad97b53104db5dd532149d6a11fbf",
+        "gpu-model-first-step.json": "a61f627e1ed5c5c8a01374b210d7ad5471233cf4672426f2a7ab1019a5ae5b2b",
+        "conversion-readback.json": "2f38fea652c3f1a7664656c4dd5f4791a7611f1b659fc9254d2bd11caaaf9bf3"
+      }
+    },
+    {
+      "id": "native-mjwarp-support-aligned-repeat2",
+      "score": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 7.70135360982756e-07,
+          "acceleration_step_residual_m_s": 1.3321976972375103e-09,
+          "native_equation_residual_N": 0.0007701180834903858,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007945578831111092
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "resources": {
+        "profile": "adaptive-8g-4c",
+        "returncode": 0,
+        "whole_service_wall_s": 3.3659706049948,
+        "peak_memory_GiB": 0.4819984436035156,
+        "peak_tasks": 10,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 3157185\nuser_usec 2273013\nsystem_usec 884172\ncore_sched.force_idle_usec 0\nnr_periods 33\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2344\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=238",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=71924\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=71924"
+        },
+        "receipt_sha256": "56b252c36d02523b6cf9dde5aa17d59ec7c998e83a6d3dae9a421190e9f8c5df"
+      },
+      "raw_sha256": {
+        "progress.json": "45ccc6ec0ecdf0b76a41848cd4645c7e0bc837a7cfa3de39ea0f4cc46448f4c6",
+        "sleep-policy-projection.json": "5790f9f07cb99f8ff41698f7af01254d86f9fc962171f6b824645cf0b3548a4d",
+        "steps.jsonl": "abe14dadd39961064fcfdb68440624a6c89caafe062530179b898ba7aa1a3ae7",
+        "admission.json": "277d47e22fecc9526c39aced1fe6fb9b140f8b38c13cc27ddec1dbc6273012ac",
+        "gpu-alignment.json": "231524b59d44350f472f209ebe754c9cf5fa61e9c4f0aef3e3ae7129288a6ea2",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+        "gpu-model-initial.json": "5b1c0a6cf557e68c2b60a5b12ff5da0e9e2a085ffdc17f2f4391025db73218e0",
+        "runtime-identity.json": "366dc1b968ce1dbdfb45617991dd1455ae4efad7e50961da50380c2d41830bd8",
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "completion.json": "2c96dac1164c9ad6489720788fd5fb0b049a349b03d71c3cce52d82cc275b810",
+        "invocation.json": "d71f07349dd9a4fb6e80e7e3f197fd674e49a729087d3b4abc4df09ab4243d35",
+        "gpu-model-unadjusted.json": "c8f6ac6eac3fa2ba8e327475cf47dd1dfa3ba1804e91c2a842ad43b040803016",
+        "gpu-model-first-step.json": "719e1e8ac67cec15f1ab102137202ec9eb14b817dec94ff5d640453f5f3be837",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a"
+      }
+    },
+    {
+      "id": "native-mjwarp-support-aligned-repeat3",
+      "score": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 7.70135360982756e-07,
+          "acceleration_step_residual_m_s": 1.3321976972375103e-09,
+          "native_equation_residual_N": 0.0007701180834903858,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007945578831111092
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "resources": {
+        "profile": "adaptive-8g-4c",
+        "returncode": 0,
+        "whole_service_wall_s": 3.503557071031537,
+        "peak_memory_GiB": 0.4823036193847656,
+        "peak_tasks": 10,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu_counters": "usage_usec 3127860\nuser_usec 2257342\nsystem_usec 870517\ncore_sched.force_idle_usec 0\nnr_periods 33\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3040\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=186",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=51932\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=51932"
+        },
+        "receipt_sha256": "dceed98f5754c8f6fcb3dd031782f481bb4f1a71e9f88eefe47b0588e4c5a69d"
+      },
+      "raw_sha256": {
+        "progress.json": "45ccc6ec0ecdf0b76a41848cd4645c7e0bc837a7cfa3de39ea0f4cc46448f4c6",
+        "sleep-policy-projection.json": "5790f9f07cb99f8ff41698f7af01254d86f9fc962171f6b824645cf0b3548a4d",
+        "steps.jsonl": "abe14dadd39961064fcfdb68440624a6c89caafe062530179b898ba7aa1a3ae7",
+        "admission.json": "277d47e22fecc9526c39aced1fe6fb9b140f8b38c13cc27ddec1dbc6273012ac",
+        "gpu-alignment.json": "231524b59d44350f472f209ebe754c9cf5fa61e9c4f0aef3e3ae7129288a6ea2",
+        "gpu-execution-options.json": "4268de9feba6ce7676d99c7d4c96ff192d215a9c39349068ebc2e23ecb235a17",
+        "protocol.json": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+        "gpu-model-initial.json": "5b1c0a6cf557e68c2b60a5b12ff5da0e9e2a085ffdc17f2f4391025db73218e0",
+        "runtime-identity.json": "366dc1b968ce1dbdfb45617991dd1455ae4efad7e50961da50380c2d41830bd8",
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "completion.json": "38c382b55c1c58c798a9114184d6ca9b81cd2c1db3e033669f53d4837ff17da7",
+        "invocation.json": "d71f07349dd9a4fb6e80e7e3f197fd674e49a729087d3b4abc4df09ab4243d35",
+        "gpu-model-unadjusted.json": "c8f6ac6eac3fa2ba8e327475cf47dd1dfa3ba1804e91c2a842ad43b040803016",
+        "gpu-model-first-step.json": "719e1e8ac67cec15f1ab102137202ec9eb14b817dec94ff5d640453f5f3be837",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a"
+      }
+    }
+  ],
+  "unaligned_comparison": {
+    "mjwarp-support": {
+      "initial": {
+        "fields_checked": 55,
+        "differences": {
+          "body_iquat": {
+            "framework": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.9892767071723938,
+                  -0.04105338826775551,
+                  -0.09911155700683594,
+                  -0.09911152720451355
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.09911155700683594
+          },
+          "body_inertia": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.706666444079019e-05,
+                  1.706666444079019e-05
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 1.8189894035458565e-12
+          },
+          "body_invweight0": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624998092651367,
+                  58593.76171875
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624999046325684,
+                  58593.75
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.01171875
+          },
+          "stat.meaninertia": {
+            "framework": [
+              0.03200853243470192
+            ],
+            "native": [
+              0.03200853615999222
+            ],
+            "equal": false,
+            "max_abs": 3.725290298461914e-09
+          }
+        },
+        "dtypes_equal": true
+      },
+      "first-step": {
+        "fields_checked": 55,
+        "differences": {
+          "body_iquat": {
+            "framework": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.9892767071723938,
+                  -0.04105338826775551,
+                  -0.09911155700683594,
+                  -0.09911152720451355
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.09911155700683594
+          },
+          "body_inertia": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.706666444079019e-05,
+                  1.706666444079019e-05
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 1.8189894035458565e-12
+          },
+          "body_invweight0": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624998092651367,
+                  58593.76171875
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624999046325684,
+                  58593.75
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.01171875
+          },
+          "stat.meaninertia": {
+            "framework": [
+              0.03200853243470192
+            ],
+            "native": [
+              0.03200853615999222
+            ],
+            "equal": false,
+            "max_abs": 3.725290298461914e-09
+          }
+        },
+        "dtypes_equal": true
+      },
+      "compilation_options_equal": true,
+      "state_max_abs_difference": {
+        "qpos": 0.0016622543334960938,
+        "qvel": 0.7176481746137142,
+        "qacc": 350.4546842575073,
+        "qfrc_constraint": 0.8107155755379551,
+        "qfrc_smooth": 1.1920928955078125e-07,
+        "gpu_time_s": 0.0,
+        "nacon": 3.0,
+        "nefc": 16.0
+      }
+    },
+    "mjwarp-no-floor": {
+      "initial": {
+        "fields_checked": 55,
+        "differences": {
+          "body_iquat": {
+            "framework": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.9892767071723938,
+                  -0.04105338826775551,
+                  -0.09911155700683594,
+                  -0.09911152720451355
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.09911155700683594
+          },
+          "body_inertia": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.706666444079019e-05,
+                  1.706666444079019e-05
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 1.8189894035458565e-12
+          },
+          "body_invweight0": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624998092651367,
+                  58593.76171875
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624999046325684,
+                  58593.75
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.01171875
+          },
+          "stat.meaninertia": {
+            "framework": [
+              0.03200853243470192
+            ],
+            "native": [
+              0.03200853615999222
+            ],
+            "equal": false,
+            "max_abs": 3.725290298461914e-09
+          }
+        },
+        "dtypes_equal": true
+      },
+      "first-step": {
+        "fields_checked": 55,
+        "differences": {
+          "body_iquat": {
+            "framework": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.9892767071723938,
+                  -0.04105338826775551,
+                  -0.09911155700683594,
+                  -0.09911152720451355
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.09911155700683594
+          },
+          "body_inertia": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.706666444079019e-05,
+                  1.706666444079019e-05
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05,
+                  1.7066666259779595e-05
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 1.8189894035458565e-12
+          },
+          "body_invweight0": {
+            "framework": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624998092651367,
+                  58593.76171875
+                ]
+              ]
+            ],
+            "native": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  15.624999046325684,
+                  58593.75
+                ]
+              ]
+            ],
+            "equal": false,
+            "max_abs": 0.01171875
+          },
+          "stat.meaninertia": {
+            "framework": [
+              0.03200853243470192
+            ],
+            "native": [
+              0.03200853615999222
+            ],
+            "equal": false,
+            "max_abs": 3.725290298461914e-09
+          }
+        },
+        "dtypes_equal": true
+      },
+      "compilation_options_equal": true,
+      "state_max_abs_difference": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "qacc": 0.0,
+        "qfrc_constraint": 0.0,
+        "qfrc_smooth": 0.0,
+        "gpu_time_s": 0.0,
+        "nacon": 0.0,
+        "nefc": 0.0
+      }
+    }
+  },
+  "aligned_comparison": {
+    "mjwarp-support": {
+      "initial": {
+        "fields_checked": 55,
+        "differences": {},
+        "dtypes_equal": true
+      },
+      "first-step": {
+        "fields_checked": 55,
+        "differences": {},
+        "dtypes_equal": true
+      },
+      "compilation_options_equal": true,
+      "state_max_abs_difference": {
+        "qpos": 0.0010654926300048828,
+        "qvel": 0.9174860417842865,
+        "qacc": 397.1070079803467,
+        "qfrc_constraint": 0.7161883115768433,
+        "qfrc_smooth": 1.1920928955078125e-07,
+        "gpu_time_s": 0.0,
+        "nacon": 3.0,
+        "nefc": 16.0
+      }
+    },
+    "mjwarp-no-floor": {
+      "initial": {
+        "fields_checked": 55,
+        "differences": {},
+        "dtypes_equal": true
+      },
+      "first-step": {
+        "fields_checked": 55,
+        "differences": {},
+        "dtypes_equal": true
+      },
+      "compilation_options_equal": true,
+      "state_max_abs_difference": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "qacc": 0.0,
+        "qfrc_constraint": 0.0,
+        "qfrc_smooth": 0.0,
+        "gpu_time_s": 0.0,
+        "nacon": 0.0,
+        "nefc": 0.0
+      }
+    }
+  },
+  "repeat_analysis": {
+    "scope": "Three independent native processes, same frozen development case; not a holdout or framework attribution proof.",
+    "runs": {
+      "native-mjwarp-support-aligned-v1": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 7.70135360982756e-07,
+          "acceleration_step_residual_m_s": 1.3321976972375103e-09,
+          "native_equation_residual_N": 0.0007701180834903858,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007945578831111092
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "native-mjwarp-support-aligned-repeat2": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 7.70135360982756e-07,
+          "acceleration_step_residual_m_s": 1.3321976972375103e-09,
+          "native_equation_residual_N": 0.0007701180834903858,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007945578831111092
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      },
+      "native-mjwarp-support-aligned-repeat3": {
+        "case": "mjwarp-support",
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "clock": true,
+          "effective_dt": true,
+          "capacity": true,
+          "contact_address_count": true,
+          "momentum": false,
+          "acceleration_epoch": true,
+          "positive_support": true
+        },
+        "metrics": {
+          "gpu_clock_error_s": 2.2649765013538214e-07,
+          "momentum_residual_Ns": 7.70135360982756e-07,
+          "acceleration_step_residual_m_s": 1.3321976972375103e-09,
+          "native_equation_residual_N": 0.0007701180834903858,
+          "maximum_contacts": 4,
+          "maximum_constraints": 16,
+          "displacement_m": 0.0007945578831111092
+        },
+        "scope": "Native state-only development diagnostic; per-contact force and full task qualification not evaluated."
+      }
+    },
+    "all_recorded_steps_equal": true,
+    "step_file_sha256": {
+      "native-mjwarp-support-aligned-v1": "abe14dadd39961064fcfdb68440624a6c89caafe062530179b898ba7aa1a3ae7",
+      "native-mjwarp-support-aligned-repeat2": "abe14dadd39961064fcfdb68440624a6c89caafe062530179b898ba7aa1a3ae7",
+      "native-mjwarp-support-aligned-repeat3": "abe14dadd39961064fcfdb68440624a6c89caafe062530179b898ba7aa1a3ae7"
+    },
+    "native_vs_framework": {
+      "native-mjwarp-support-aligned-v1": {
+        "translation_vector_norm_m": 8.085062165053274e-05,
+        "linear_velocity_vector_norm_m_s": 0.019213944777019112,
+        "angular_velocity_component_vector_difference_rad_s": 1.1683754284241645
+      },
+      "native-mjwarp-support-aligned-repeat2": {
+        "translation_vector_norm_m": 8.085062165053274e-05,
+        "linear_velocity_vector_norm_m_s": 0.019213944777019112,
+        "angular_velocity_component_vector_difference_rad_s": 1.1683754284241645
+      },
+      "native-mjwarp-support-aligned-repeat3": {
+        "translation_vector_norm_m": 8.085062165053274e-05,
+        "linear_velocity_vector_norm_m_s": 0.019213944777019112,
+        "angular_velocity_component_vector_difference_rad_s": 1.1683754284241645
+      }
+    }
+  },
+  "historical_cpu_audit_correction": {
+    "clock-newton-support-v4": {
+      "steps": 200,
+      "contacts": 800,
+      "native_decode_max_abs_N": 1.4682882465422153e-08,
+      "cpu_in_bounds_max_abs_N": 0.0,
+      "cpu_compared_contacts": 778,
+      "cpu_invalid_contacts": 22,
+      "cpu_invalid_steps": [
+        1,
+        40,
+        42,
+        80,
+        82,
+        120,
+        122,
+        160,
+        162,
+        200
+      ],
+      "cpu_mismatch_steps": [],
+      "native_decode_within_1e_5_N": true,
+      "scope": "Pyramidal fixture address audit. Out-of-bounds CPU force values, including historical values, are not physical observations."
+    },
+    "clock-mjwarp-support-v4": {
+      "steps": 200,
+      "contacts": 725,
+      "native_decode_max_abs_N": 2.2351741790771484e-08,
+      "cpu_in_bounds_max_abs_N": 0.7521283030509949,
+      "cpu_compared_contacts": 720,
+      "cpu_invalid_contacts": 5,
+      "cpu_invalid_steps": [
+        1,
+        135,
+        136,
+        167,
+        195
+      ],
+      "cpu_mismatch_steps": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        92,
+        93,
+        94,
+        95,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        107,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        196,
+        197,
+        198,
+        199,
+        200
+      ],
+      "native_decode_within_1e_5_N": true,
+      "scope": "Pyramidal fixture address audit. Out-of-bounds CPU force values, including historical values, are not physical observations."
+    }
+  },
+  "interpretation": "Old out-of-bounds CPU forces are unavailable observations, not zeros or finite errors. Original files and prior archive remain unchanged. Four-field alignment is not equality of all model/internal state."
+}

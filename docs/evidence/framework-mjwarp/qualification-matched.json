@@ -1,0 +1,23 @@
+{
+  "qualified_utc": "2026-10-10T04:52:23.952550+00:00",
+  "scope": "Installed matched MuJoCo/MJWarp payloads and explicitly selected vendor Warp code/binaries. Not physics qualification. Prior official wheel/vendor archive audit retained as source evidence.",
+  "native_packages": [
+    {
+      "package": "mujoco",
+      "version": "3.11.0",
+      "official_wheel_sha256": "f40214fefc8c2fe0002a3c8abadf30de7a3330634f3c45cc29b407b40a0173fc",
+      "verified_files": 239
+    },
+    {
+      "package": "mujoco-warp",
+      "version": "3.11.0",
+      "official_wheel_sha256": "97e77e877c1c2ea064ae68eaace2333dec94f2d8984091ba7b383bc8c34958f6",
+      "verified_files": 281
+    }
+  ],
+  "vendor_warp": {
+    "archive_sha256": "28248fb8d6fb3792c8b4f0e76e2dd8d3c7250b3cb193dddba51246af0602ca1a",
+    "verified_files": 684
+  },
+  "cache_policy": "Fresh private PYTHONPYCACHEPREFIX and kernel cache; preserve installed vendor source/cache."
+}

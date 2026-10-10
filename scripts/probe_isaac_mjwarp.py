@@ -84,7 +84,10 @@ def acquire(args, protocol, case, output):
     from isaacsim.physics.newton.impl.solver_config import MuJoCoSolverConfig
     from isaacsim.physics.newton.impl.utils import newton_solver_to_api_schema
     from pxr import Gf, UsdGeom, UsdPhysics, UsdShade
-    from dexlab.mujoco_artifacts import save_conversion_evidence
+    from dexlab.mujoco_artifacts import (
+        save_conversion_evidence, warp_model_parameters, warp_execution_options,
+        cpu_contact_address_valid,
+    )
 
     versions = dict(mujoco=mujoco.__version__, mujoco_warp=mjw.__version__,
                     newton=newton.__version__, warp=wp.__version__)
@@ -157,6 +160,7 @@ def acquire(args, protocol, case, output):
     solver, gpu = native.solver, native.solver.mjw_data
     wp.synchronize()
     evidence = save_conversion_evidence(solver.mj_model, output, intermediate=output / 'converted.xml')
+    write_json(output / 'gpu-model-initial.json', warp_model_parameters(solver.mjw_model))
     labels = native.model.body_label
     cube = labels.index('/World/Cube')
     write_json(output / 'admission.json', {
@@ -169,6 +173,8 @@ def acquire(args, protocol, case, output):
         'worlds': gpu.nworld, 'use_mujoco_contacts': solver._use_mujoco_contacts,
         'body_labels': labels, 'cube_index': cube,
         'binary_sha256': evidence['sha256']['model.mjb'],
+        'state_update_interval': solver.update_data_interval,
+        'solver_deterministic': str(solver._deterministic),
     })
     data = mujoco.MjData(solver.mj_model)
     contact_ids = wp.array(np.arange(gpu.naconmax, dtype=np.int32), dtype=wp.int32,
@@ -188,6 +194,10 @@ def acquire(args, protocol, case, output):
             temporary.write_text(json.dumps({'physics_steps': step + 1,
                                               'recorded_steps': completed}) + '\n')
             temporary.replace(progress)
+            if step == 0:
+                write_json(output / 'gpu-model-first-step.json',
+                           warp_model_parameters(solver.mjw_model))
+                write_json(output / 'gpu-execution-options.json', warp_execution_options())
             nacon = int(gpu.nacon.numpy()[0])
             nefc = int(gpu.nefc.numpy()[0])
             counters = {'step': step + 1, 'nacon': nacon, 'nefc': nefc}
@@ -204,13 +214,21 @@ def acquire(args, protocol, case, output):
             for i in range(data.ncon):
                 contact = data.contact[i]
                 force = np.zeros(6)
-                mujoco.mj_contactForce(solver.mj_model, data, i, force)
+                cpu_valid = cpu_contact_address_valid(
+                    int(contact.efc_address), int(contact.dim),
+                    solver.mj_model.opt.cone == mujoco.mjtCone.mjCONE_PYRAMIDAL,
+                    int(data.nefc))
+                # get_data_into can assign a CPU address beyond nefc. Preserve
+                # the address, but never pass it to native force dereferencing.
+                if cpu_valid:
+                    mujoco.mj_contactForce(solver.mj_model, data, i, force)
                 contacts.append({
                     'geom': contact.geom.tolist(), 'frame': contact.frame.tolist(),
                     'position': contact.pos.tolist(), 'distance': float(contact.dist),
                     'friction': contact.friction.tolist(),
                     'force_local': native_forces[i].tolist(),
-                    'cpu_converted_force_local': force.tolist(),
+                    'cpu_converted_force_local': force.tolist() if cpu_valid else None,
+                    'cpu_address_in_bounds': cpu_valid,
                     'native_efc_address': addresses[i].tolist(),
                     'cpu_efc_address': int(contact.efc_address),
                     'dim': int(contact.dim),
