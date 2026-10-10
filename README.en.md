@@ -11,20 +11,81 @@ The research serves two goals:
 
 [简体中文](README.md) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](docs/site/en/experience.md) · [Diagnosis and trials](docs/site/en/diagnosis.md) · [Scenario guide](docs/site/en/selection.md)
 
+<!-- visual-research:start -->
+## Which engines and solvers are compared?
+
+| Engine | Registered comparison configurations | Experiment versions and paths |
+| --- | --- | --- |
+| **MuJoCo** | CG · Newton · PGS; elliptic / pyramidal | 3.11.0, 3.14.0, 3.15.0; native / historical paths in matrix |
+| **SuperDex** | BFGS · Newton · SR1; ASYNC_CG / AUGMENTED_CG / AUTO / C1_REGULARIZED / CG / CINF_REGULARIZED / GMRES / LDLT / LU / MINRES / PARALLEL_CG / GPU → matrix | 1.0.0; native / historical paths in matrix |
+| **Genesis** | CG · Newton · PBD; convex / elliptic / pyramidal / rigid coupling / signorini | 1.4.3; native / historical paths in matrix |
+| **Newton Physics** | Featherstone · ImplicitMPM · Kamino · SemiImplicit · Style3D · VBD · VBD compliant · VBD legacy · XPBD; DVI / PADMM | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / historical paths in matrix |
+| **PhysX** | PGS · TGS · surface cloth; external forces every iteration / friction every iteration / patch friction | 5.9.0; native / historical paths in matrix |
+| **Drake** | SAP; hydroelastic / kLagged / kSap / kSimilar / point | 1.57.0; native / historical paths in matrix |
+
+Native and framework **MJWarp** are separate paths with their actual core identified. Newton Physics is an engine project; Newton is also an algorithm name. Tested SuperDex BFGS/SR1 with assembly period=1 execute Newton-equivalent steps; configuration names are not independent algorithm counts.
+
+This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons:  [完整矩阵 / Full matrix](https://huangkiki.github.io/Dexlab/en/latest/coverage.html)。
+
+**MJWarp path comparison (MuJoCo core)**
+
+| Runtime path | Actual physics core | Solver / contact path | Task acceptance |
+| --- | --- | --- | --- |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](https://huangkiki.github.io/Dexlab/en/latest/coverage.html) |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/en/latest/coverage.html) |
+| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/en/latest/coverage.html) |
+
+Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question.
+
+## What experiments have we run?
+
+| Experiment / figure | Comparisons and findings |
+| --- | --- |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="Normal & transient response"></a> | **[Normal & transient response](https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>How do parameters change loading, unloading and transients?<br>Static calibration works; dynamics and mass transfer need separate checks. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="Six-engine incline & friction"></a> | **[Six-engine incline & friction](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>Where do static, sliding and low-friction cases differ?<br>Fixed-profile outcomes and observation validity are separate; failures remain. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/results.html"><img src="./docs/evidence/impact-phase/sensitivity.png" width="200" alt="Impact & contact onset"></a> | **[Impact & contact onset](https://huangkiki.github.io/Dexlab/en/latest/results.html)**<br>MuJoCo · SuperDex<br>How do timestep, stiffness and impact phase affect transients?<br>Existing phase/stiffness sweeps; smaller steps do not automatically remove model differences. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch"><img src="./docs/evidence/force-limit/replays/dev-cap-0.8/frame-060.png" width="200" alt="Fixture pinch, lift & release"></a> | **[Fixture pinch, lift & release](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch)**<br>Genesis · MuJoCo · SuperDex (separate protocols)<br>Why does the grasp hold or slip?<br>Genesis 0.4 N and 0.8 N configurations have different retention outcomes. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays"><img src="./demos/apple-stem-grasp/media/superdex-sdf.png" width="200" alt="Apple-stem grasp · SDF contact"></a> | **[Apple-stem grasp · SDF contact](https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays)**<br>MuJoCo · SuperDex · historical PhysX<br>Can a grasp maintain contact on complex geometry?<br>Native continuous replays and historical independent checks; cohorts stay separate. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/coverage.html"><img src="./docs/evidence/visual/cloth-poster.png" width="200" alt="Cloth mechanics & robot grasp"></a> | **[Cloth mechanics & robot grasp](https://huangkiki.github.io/Dexlab/en/latest/coverage.html)**<br>MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX<br>When do deformation, contact and retention fail?<br>Historical compliant-grasp frame; mechanics, drop and grasp retain separate protocols and failures. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html#mass-size-transfer"><img src="./docs/evidence/contact-transfer-v1.png" width="200" alt="Mass / size transfer"></a> | **[Mass / size transfer](https://huangkiki.github.io/Dexlab/en/latest/experience.html#mass-size-transfer)**<br>MuJoCo · SuperDex<br>Do fixed parameters transfer to nearby scenes?<br>30 historical transfer records, 0/30 joint passes; failures guide selection. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html#transient-cost"><img src="./docs/evidence/response-cost-v1.png" width="200" alt="Response error & cost"></a> | **[Response error & cost](https://huangkiki.github.io/Dexlab/en/latest/experience.html#transient-cost)**<br>MuJoCo · SuperDex<br>What does lower error cost?<br>27 records separate native computation, recording and scoring costs. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html#framework-path"><img src="./docs/evidence/engine-qualification/contact-parameters.png" width="200" alt="Native & framework paths"></a> | **[Native & framework paths](https://huangkiki.github.io/Dexlab/en/latest/experience.html#framework-path)**<br>MuJoCo / MJWarp · Newton / Isaac Sim<br>Why can matching cores still produce different trajectories?<br>GPU field differences remain after CPU alignment; parameter-map thumbnail is not trajectory evidence. |
+
+**Pending / incomplete:** pushing, in-hand rotation, active folding and broader grasp transfer remain in their existing Issues. Folded drop is not active folding; repeats, timestep sweeps and framework switches do not add task types.
+
 ## What we already know
 
-These findings reuse existing reports and logs with their original evidence boundaries. They provide starting points for another experiment, not automatic claims about all current versions or new holdouts.
+### Six-engine incline: shared conditions, different responses
 
-| Physical question | Existing finding | Implication for grasp simulation |
-| --- | --- | --- |
-| Normal response | MuJoCo parameters can calibrate static response in a fixed cube fixture; changing mass changes the response of the same parameters. | Interpret parameters with mass, impedance and contact configuration. [Conditions and evidence](https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response) |
-| Transients and cost | In 27 response/cost records, low-impedance MuJoCo passes 9/9 jointly; high impedance and the tested SuperDex profile each pass 0/9. Smaller steps do not universally remove errors. | Check dynamics, no tension, stability and extra computation together. [Conditions and evidence](https://huangkiki.github.io/Dexlab/en/latest/experience.html#transient-cost) |
-| Mass/size transfer | All 30 transfer records for three fixed profiles complete; 0/30 passes jointly. | Single-scene success does not justify direct transfer. Check contact scale and parameter conversion. [Reusable failures](https://huangkiki.github.io/Dexlab/en/latest/experience.html#mass-size-transfer) |
-| PhysX contact observations | Four native SDK 5.9.0 incline profiles fail differently; some records trip FP32 impulse-consistency guards. | Separate valid observations from physical error. Finite failed searches cannot establish engine unsuitability. [Diagnosis case](https://huangkiki.github.io/Dexlab/en/latest/experience.html#physx-observation) |
-| Pinch and release | Sixteen Genesis fixture cases show drive caps change retention boundaries; robot SDF grasps have separate historical acceptance. | Measure actual support, slip and release alongside contact-force errors. [Conditions and evidence](https://huangkiki.github.io/Dexlab/en/latest/experience.html#pinch-load) |
-| Framework integration | Matched cores and CPU models can still have different effective GPU fields; aligning four fields does not explain the full trajectory divergence. | Preserve conversion provenance and effective parameters; attribute specific differences. [Comparison and open questions](https://huangkiki.github.io/Dexlab/en/latest/experience.html#framework-path) |
+A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at three timesteps. Curves and replays retain the original passes, failures and invalid records.
 
-Response studies use **synthetic stiffness/damping targets**. Analytical relations support **numerical verification**. Accuracy for real materials and robots requires separate measurements. These evidence levels stay distinct; useful existing research need not wait for hardware data.
+![Six-engine incline: shared conditions, different responses](docs/evidence/visual/incline-static-0.001.png)
+
+![Six-engine incline: shared conditions, different responses — curves](docs/evidence/visual/incline-static-0.001-curves.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline)
+
+### Normal response: change parameters or the solver?
+
+The same MuJoCo fixture moves from about 80 kN/m toward the synthetic 20 kN/m target. Inspect loaded-window indentation, then the complete unloading trace; success belongs to the stated checks and conditions.
+
+![Normal response: change parameters or the solver?](docs/evidence/visual/normal-calibration.png)
+
+![Normal response: change parameters or the solver? — curves](docs/evidence/visual/normal-summary.en.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#normal)
+
+### Pinch: 0.4 N slips, 0.8 N holds
+
+The same Genesis fixture and object, changing the finger-joint force limit. Compare complete closing, lifting, holding and release, with an open-gripper negative control retained.
+
+![Pinch: 0.4 N slips, 0.8 N holds](docs/evidence/force-limit/comparison.gif)
+
+![Pinch: 0.4 N slips, 0.8 N holds — curves](docs/evidence/visual/pinch-retention-curves.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch)
+
+<!-- visual-research:end -->
 
 ## How to diagnose a poorly performing scene
 

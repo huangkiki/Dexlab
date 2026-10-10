@@ -11,21 +11,90 @@
 
 [English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](experience.md) · [诊断与试参方法](diagnosis.md) · [场景选型指南](selection.md)
 
+<!-- visual-research:start -->
+## 比较了哪些引擎与 solver
+
+| 引擎 | 已登记比较对象 | 实验版本与路径 |
+| --- | --- | --- |
+| **MuJoCo** | CG · Newton · PGS; elliptic / pyramidal | 3.11.0, 3.14.0, 3.15.0; native / 历史路径详见矩阵 |
+| **SuperDex** | BFGS · Newton · SR1; ASYNC_CG / AUGMENTED_CG / AUTO / C1_REGULARIZED / CG / CINF_REGULARIZED / GMRES / LDLT / LU / MINRES / PARALLEL_CG / GPU → matrix | 1.0.0; native / 历史路径详见矩阵 |
+| **Genesis** | CG · Newton · PBD; convex / elliptic / pyramidal / rigid coupling / signorini | 1.4.3; native / 历史路径详见矩阵 |
+| **Newton Physics** | Featherstone · ImplicitMPM · Kamino · SemiImplicit · Style3D · VBD · VBD compliant · VBD legacy · XPBD; DVI / PADMM | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / 历史路径详见矩阵 |
+| **PhysX** | PGS · TGS · surface cloth; external forces every iteration / friction every iteration / patch friction | 5.9.0; native / 历史路径详见矩阵 |
+| **Drake** | SAP; hydroelastic / kLagged / kSap / kSimilar / point | 1.57.0; native / 历史路径详见矩阵 |
+
+原生与框架 **MJWarp** 另列运行路径及实际核心。Newton Physics 是引擎项目，Newton 也是求解算法名。SuperDex BFGS／SR1 在已测 assembly period=1 时执行 Newton 等价步；配置名不计作独立算法。
+
+本表是研究对象概览，包含失败与未准入项；执行情况、CPU/GPU、精度、完整配置和不支持原因见 [完整矩阵 / Full matrix](coverage.md)。
+
+**MJWarp 运行路径对照（归入 MuJoCo 核心）**
+
+| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |
+| --- | --- | --- | --- |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](coverage.md) |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+
+已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。
+
+(visual-experiment-catalogue)=
+## 做了哪些实验
+
+```{raw} html
+<div class="experiment-grid">
+<article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="法向与瞬态响应"></a><div class="card-copy"><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>压入、卸载与动态响应如何随参数改变？</p><p>静态校准有效，动态响应和质量迁移须分别验证。</p></div></article>
+<article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="六引擎斜面与摩擦"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">六引擎斜面与摩擦</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>静止、滑动和低摩擦有哪些差异？</p><p>原配置结果与观测有效性分列；全部失败保留。</p></div></article>
+<article class="experiment-card"><a href="results.html"><img loading="lazy" src="_static/visual/catalogue/sensitivity.png" alt="碰撞与接触起始"></a><div class="card-copy"><h3><a href="results.html">碰撞与接触起始</a></h3><p class="engines">MuJoCo · SuperDex</p><p>步长、刚度及碰撞相位怎样影响瞬态？</p><p>已有相位与刚度扫描；更小步长不自动消除模型差异。</p></div></article>
+<article class="experiment-card"><a href="visual-comparisons.html#pinch"><img loading="lazy" src="_static/visual/catalogue/frame-060.png" alt="夹具夹持、抬升与释放"></a><div class="card-copy"><h3><a href="visual-comparisons.html#pinch">夹具夹持、抬升与释放</a></h3><p class="engines">Genesis · MuJoCo · SuperDex (separate protocols)</p><p>夹持为什么保持或滑脱？</p><p>Genesis 0.4 N 与 0.8 N 配置呈现不同保持结果。</p></div></article>
+<article class="experiment-card"><a href="experiments.html#apple-replays"><img loading="lazy" src="_static/visual/catalogue/superdex-sdf.png" alt="苹果抓梗 · SDF 接触"></a><div class="card-copy"><h3><a href="experiments.html#apple-replays">苹果抓梗 · SDF 接触</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>复杂几何下能否连续保持？</p><p>已有原生连续回放与独立历史验收；不同批次分列。</p></div></article>
+<article class="experiment-card"><a href="coverage.html"><img loading="lazy" src="_static/visual/catalogue/cloth-poster.png" alt="布料力学与机器人夹布"></a><div class="card-copy"><h3><a href="coverage.html">布料力学与机器人夹布</a></h3><p class="engines">MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX</p><p>柔性形变、接触与保持何时失效？</p><p>历史柔顺夹布画面；力学、下落与夹布按独立协议记录，保留失败。</p></div></article>
+<article class="experiment-card"><a href="experience.html#mass-size-transfer"><img loading="lazy" src="_static/visual/catalogue/contact-transfer-v1.png" alt="质量／尺寸迁移"></a><div class="card-copy"><h3><a href="experience.html#mass-size-transfer">质量／尺寸迁移</a></h3><p class="engines">MuJoCo · SuperDex</p><p>固定参数能否迁移到邻近场景？</p><p>30 条历史迁移记录，联合验收 0/30；失败也是选型依据。</p></div></article>
+<article class="experiment-card"><a href="experience.html#transient-cost"><img loading="lazy" src="_static/visual/catalogue/response-cost-v1.png" alt="响应误差与计算成本"></a><div class="card-copy"><h3><a href="experience.html#transient-cost">响应误差与计算成本</a></h3><p class="engines">MuJoCo · SuperDex</p><p>更小误差需要什么计算代价？</p><p>27 条记录区分原生计算、记录和评分成本。</p></div></article>
+<article class="experiment-card"><a href="experience.html#framework-path"><img loading="lazy" src="_static/visual/catalogue/contact-parameters.png" alt="原生与框架接入路径"></a><div class="card-copy"><h3><a href="experience.html#framework-path">原生与框架接入路径</a></h3><p class="engines">MuJoCo / MJWarp · Newton / Isaac Sim</p><p>相同核心为何仍可能出现轨迹差异？</p><p>对齐 CPU 模型后仍有 GPU 字段差异；参数概览图非轨迹证据。</p></div></article>
+</div>
+```
+
+**待开展／未完成：** 推动、手内旋转、主动折布及更广抓取迁移分别见现有 Issue。预折叠下落不等于主动折布成功；重复、步长扫描和框架切换不增加任务类型。
+
+(research-findings)=
 ## 我们已经知道什么
 
-这些结论来自已有报告和日志，适用范围随证据一起保留。它们支持下一次实验的起点；历史结果不自动代表当前所有版本或新的留出验证。
+(visual-highlight-incline)=
+### 六引擎斜面：相同工况，响应不同
 
-| 物理问题 | 已有发现 | 对抓取仿真的意义 |
-| --- | --- | --- |
-| 法向响应 | 在固定方块实验中，MuJoCo 静态响应能通过参数校准接近目标；改变质量后，原参数不再保持同一响应。 | 参数必须结合质量、阻抗与接触构型解释。[条件与证据](normal-response) |
-| 瞬态与成本 | 27 条响应—成本记录中，MuJoCo 低阻抗配置 9/9 联合通过，高阻抗与该 SuperDex 配置均 0/9；缩小步长并不普遍消除误差。 | 同时验证动态响应、无拉力、稳定性与额外计算成本。[条件与证据](transient-cost) |
-| 质量／尺寸迁移 | 三个固定配置的 30 条迁移记录全部完成，0/30 联合通过。 | 单场景成功不足以推荐直接迁移；先检查接触尺度与参数转换。[失败也可复用](mass-size-transfer) |
-| PhysX 接触观测 | 原生 SDK 5.9.0 的四组斜面配置存在不同失败；部分记录触发 FP32 冲量一致性检查。 | 先区分观测有效性与物理误差，有限试参失败不能证明引擎不适用。[诊断案例](physx-observation) |
-| 夹持与释放 | Genesis 固定夹具的 16 个案例显示驱动力限额改变保持边界；机器人 SDF 抓取有独立历史验收。 | 看实际承载、滑移与释放，不能只看接触力误差。[条件与证据](pinch-load) |
-| 框架接入 | 匹配核心和 CPU 模型后，原生与 Isaac Sim 的有效 GPU 字段仍可能不同；对齐四项也未解释全部轨迹差异。 | 保存资产转换及最终有效参数，按具体差异归因。[对照与未解问题](framework-path) |
+40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。
 
-响应研究中的刚度／阻尼目标是**合成目标**；解析关系用于**数值验证**；真实材料与机器人准确性需要独立测量。三者分别表述，已有实验无需等待真机数据才能产生有价值的结论。
+![六引擎斜面：相同工况，响应不同](../../../docs/evidence/visual/incline-static-0.001.png)
 
+![六引擎斜面：相同工况，响应不同 — curves](../../../docs/evidence/visual/incline-static-0.001-curves.zh.svg)
+
+[同步回放、逐步曲线、参数与原始证据](incline)
+
+(visual-highlight-normal)=
+### 法向响应：改参数，还是改 solver？
+
+同一 MuJoCo 场景，从约 80 kN/m 到合成目标 20 kN/m。先看加载窗口的压入曲线，再看完整卸载；成功只属于规定的物理检查与条件。
+
+![法向响应：改参数，还是改 solver？](../../../docs/evidence/visual/normal-calibration.png)
+
+![法向响应：改参数，还是改 solver？ — curves](../../../docs/evidence/visual/normal-summary.zh.svg)
+
+[同步回放、逐步曲线、参数与原始证据](normal)
+
+(visual-highlight-pinch)=
+### 夹持：0.4 N 滑脱，0.8 N 保持
+
+同一 Genesis 夹具与物体，只改变指关节驱动力限额。对照完整闭合、抬升、保持和释放，并保留张开负例。
+
+![夹持：0.4 N 滑脱，0.8 N 保持](../../../docs/evidence/visual/pinch-summary.png)
+
+![夹持：0.4 N 滑脱，0.8 N 保持 — curves](../../../docs/evidence/visual/pinch-retention-curves.zh.svg)
+
+[同步回放、逐步曲线、参数与原始证据](pinch)
+
+<!-- visual-research:end -->
+
+(research-diagnosis)=
 ## 场景表现不好时如何分析
 
 以“接触表现异常”为例，先声明物理参照与假设，再检查几何、质量／惯量、坐标、控制时刻、有效参数和接触读回。随后固定场景与目标，提出可检验假设，做有限参数试验，用独立评分确认改善及成本。剩余差异再进入接触生成、摩擦表示、约束求解、停止条件、积分和精度的机制研究。
@@ -34,6 +103,7 @@
 
 **AI 自动试参是研究方法之一。** AI 利用已有经验提出假设与候选参数；现有执行器、预算账本和独立评分保留所有尝试、失败、有效参数与成本。有限搜索未找到配置时，结论是当前搜索范围尚未成功。新迁移条件事前冻结，历史日志不能充当新留出。
 
+(research-selection)=
 ## 新场景如何选择
 
 先描述接触尺度与载荷、粘着／滑动、接触切换、几何及柔顺性，再查找邻近实验。每个候选起点都附版本／路径、参数来源、误差与失败边界，并列出新场景首先要做的验证。
@@ -47,6 +117,7 @@
 
 推荐依赖与目标场景相关的证据，兼顾**物理可信度、稳定性和成本**。覆盖更多任务意味着积累了更广的已验证范围；覆盖表本身不决定某个新场景的最佳方案。
 
+(research-scope)=
 ## 研究范围与复现
 
 | 已有研究范围 | 证据入口 |
@@ -65,6 +136,7 @@
 :hidden:
 :maxdepth: 1
 
+可视对照 <visual-comparisons>
 研究经验 <experience>
 诊断方法 <diagnosis>
 场景选型 <selection>

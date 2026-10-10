@@ -11,20 +11,87 @@ The research serves two goals:
 
 [简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](experience.md) · [Diagnosis and trials](diagnosis.md) · [Scenario guide](selection.md)
 
+<!-- visual-research:start -->
+## Which engines and solvers are compared?
+
+| Engine | Registered comparison configurations | Experiment versions and paths |
+| --- | --- | --- |
+| **MuJoCo** | CG · Newton · PGS; elliptic / pyramidal | 3.11.0, 3.14.0, 3.15.0; native / historical paths in matrix |
+| **SuperDex** | BFGS · Newton · SR1; ASYNC_CG / AUGMENTED_CG / AUTO / C1_REGULARIZED / CG / CINF_REGULARIZED / GMRES / LDLT / LU / MINRES / PARALLEL_CG / GPU → matrix | 1.0.0; native / historical paths in matrix |
+| **Genesis** | CG · Newton · PBD; convex / elliptic / pyramidal / rigid coupling / signorini | 1.4.3; native / historical paths in matrix |
+| **Newton Physics** | Featherstone · ImplicitMPM · Kamino · SemiImplicit · Style3D · VBD · VBD compliant · VBD legacy · XPBD; DVI / PADMM | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / historical paths in matrix |
+| **PhysX** | PGS · TGS · surface cloth; external forces every iteration / friction every iteration / patch friction | 5.9.0; native / historical paths in matrix |
+| **Drake** | SAP; hydroelastic / kLagged / kSap / kSimilar / point | 1.57.0; native / historical paths in matrix |
+
+Native and framework **MJWarp** are separate paths with their actual core identified. Newton Physics is an engine project; Newton is also an algorithm name. Tested SuperDex BFGS/SR1 with assembly period=1 execute Newton-equivalent steps; configuration names are not independent algorithm counts.
+
+This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons:  [完整矩阵 / Full matrix](coverage.md)。
+
+**MJWarp path comparison (MuJoCo core)**
+
+| Runtime path | Actual physics core | Solver / contact path | Task acceptance |
+| --- | --- | --- | --- |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](coverage.md) |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+
+Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question.
+
+(visual-experiment-catalogue)=
+## What experiments have we run?
+
+```{raw} html
+<div class="experiment-grid">
+<article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="Normal &amp; transient response"></a><div class="card-copy"><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>How do parameters change loading, unloading and transients?</p><p>Static calibration works; dynamics and mass transfer need separate checks.</p></div></article>
+<article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="Six-engine incline &amp; friction"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">Six-engine incline &amp; friction</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>Where do static, sliding and low-friction cases differ?</p><p>Fixed-profile outcomes and observation validity are separate; failures remain.</p></div></article>
+<article class="experiment-card"><a href="results.html"><img loading="lazy" src="_static/visual/catalogue/sensitivity.png" alt="Impact &amp; contact onset"></a><div class="card-copy"><h3><a href="results.html">Impact &amp; contact onset</a></h3><p class="engines">MuJoCo · SuperDex</p><p>How do timestep, stiffness and impact phase affect transients?</p><p>Existing phase/stiffness sweeps; smaller steps do not automatically remove model differences.</p></div></article>
+<article class="experiment-card"><a href="visual-comparisons.html#pinch"><img loading="lazy" src="_static/visual/catalogue/frame-060.png" alt="Fixture pinch, lift &amp; release"></a><div class="card-copy"><h3><a href="visual-comparisons.html#pinch">Fixture pinch, lift &amp; release</a></h3><p class="engines">Genesis · MuJoCo · SuperDex (separate protocols)</p><p>Why does the grasp hold or slip?</p><p>Genesis 0.4 N and 0.8 N configurations have different retention outcomes.</p></div></article>
+<article class="experiment-card"><a href="experiments.html#apple-replays"><img loading="lazy" src="_static/visual/catalogue/superdex-sdf.png" alt="Apple-stem grasp · SDF contact"></a><div class="card-copy"><h3><a href="experiments.html#apple-replays">Apple-stem grasp · SDF contact</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>Can a grasp maintain contact on complex geometry?</p><p>Native continuous replays and historical independent checks; cohorts stay separate.</p></div></article>
+<article class="experiment-card"><a href="coverage.html"><img loading="lazy" src="_static/visual/catalogue/cloth-poster.png" alt="Cloth mechanics &amp; robot grasp"></a><div class="card-copy"><h3><a href="coverage.html">Cloth mechanics &amp; robot grasp</a></h3><p class="engines">MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX</p><p>When do deformation, contact and retention fail?</p><p>Historical compliant-grasp frame; mechanics, drop and grasp retain separate protocols and failures.</p></div></article>
+<article class="experiment-card"><a href="experience.html#mass-size-transfer"><img loading="lazy" src="_static/visual/catalogue/contact-transfer-v1.png" alt="Mass / size transfer"></a><div class="card-copy"><h3><a href="experience.html#mass-size-transfer">Mass / size transfer</a></h3><p class="engines">MuJoCo · SuperDex</p><p>Do fixed parameters transfer to nearby scenes?</p><p>30 historical transfer records, 0/30 joint passes; failures guide selection.</p></div></article>
+<article class="experiment-card"><a href="experience.html#transient-cost"><img loading="lazy" src="_static/visual/catalogue/response-cost-v1.png" alt="Response error &amp; cost"></a><div class="card-copy"><h3><a href="experience.html#transient-cost">Response error &amp; cost</a></h3><p class="engines">MuJoCo · SuperDex</p><p>What does lower error cost?</p><p>27 records separate native computation, recording and scoring costs.</p></div></article>
+<article class="experiment-card"><a href="experience.html#framework-path"><img loading="lazy" src="_static/visual/catalogue/contact-parameters.png" alt="Native &amp; framework paths"></a><div class="card-copy"><h3><a href="experience.html#framework-path">Native &amp; framework paths</a></h3><p class="engines">MuJoCo / MJWarp · Newton / Isaac Sim</p><p>Why can matching cores still produce different trajectories?</p><p>GPU field differences remain after CPU alignment; parameter-map thumbnail is not trajectory evidence.</p></div></article>
+</div>
+```
+
+**Pending / incomplete:** pushing, in-hand rotation, active folding and broader grasp transfer remain in their existing Issues. Folded drop is not active folding; repeats, timestep sweeps and framework switches do not add task types.
+
 ## What we already know
 
-These findings reuse existing reports and logs with their original evidence boundaries. They provide starting points for another experiment, not automatic claims about all current versions or new holdouts.
+(visual-highlight-incline)=
+### Six-engine incline: shared conditions, different responses
 
-| Physical question | Existing finding | Implication for grasp simulation |
-| --- | --- | --- |
-| Normal response | MuJoCo parameters can calibrate static response in a fixed cube fixture; changing mass changes the response of the same parameters. | Interpret parameters with mass, impedance and contact configuration. [Conditions and evidence](normal-response) |
-| Transients and cost | In 27 response/cost records, low-impedance MuJoCo passes 9/9 jointly; high impedance and the tested SuperDex profile each pass 0/9. Smaller steps do not universally remove errors. | Check dynamics, no tension, stability and extra computation together. [Conditions and evidence](transient-cost) |
-| Mass/size transfer | All 30 transfer records for three fixed profiles complete; 0/30 passes jointly. | Single-scene success does not justify direct transfer. Check contact scale and parameter conversion. [Reusable failures](mass-size-transfer) |
-| PhysX contact observations | Four native SDK 5.9.0 incline profiles fail differently; some records trip FP32 impulse-consistency guards. | Separate valid observations from physical error. Finite failed searches cannot establish engine unsuitability. [Diagnosis case](physx-observation) |
-| Pinch and release | Sixteen Genesis fixture cases show drive caps change retention boundaries; robot SDF grasps have separate historical acceptance. | Measure actual support, slip and release alongside contact-force errors. [Conditions and evidence](pinch-load) |
-| Framework integration | Matched cores and CPU models can still have different effective GPU fields; aligning four fields does not explain the full trajectory divergence. | Preserve conversion provenance and effective parameters; attribute specific differences. [Comparison and open questions](framework-path) |
+A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at three timesteps. Curves and replays retain the original passes, failures and invalid records.
 
-Response studies use **synthetic stiffness/damping targets**. Analytical relations support **numerical verification**. Accuracy for real materials and robots requires separate measurements. These evidence levels stay distinct; useful existing research need not wait for hardware data.
+![Six-engine incline: shared conditions, different responses](../../../docs/evidence/visual/incline-static-0.001.png)
+
+![Six-engine incline: shared conditions, different responses — curves](../../../docs/evidence/visual/incline-static-0.001-curves.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](incline)
+
+(visual-highlight-normal)=
+### Normal response: change parameters or the solver?
+
+The same MuJoCo fixture moves from about 80 kN/m toward the synthetic 20 kN/m target. Inspect loaded-window indentation, then the complete unloading trace; success belongs to the stated checks and conditions.
+
+![Normal response: change parameters or the solver?](../../../docs/evidence/visual/normal-calibration.png)
+
+![Normal response: change parameters or the solver? — curves](../../../docs/evidence/visual/normal-summary.en.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](normal)
+
+(visual-highlight-pinch)=
+### Pinch: 0.4 N slips, 0.8 N holds
+
+The same Genesis fixture and object, changing the finger-joint force limit. Compare complete closing, lifting, holding and release, with an open-gripper negative control retained.
+
+![Pinch: 0.4 N slips, 0.8 N holds](../../../docs/evidence/visual/pinch-summary.png)
+
+![Pinch: 0.4 N slips, 0.8 N holds — curves](../../../docs/evidence/visual/pinch-retention-curves.svg)
+
+[Synchronized replay, full-rate curves, parameters and original evidence](pinch)
+
+<!-- visual-research:end -->
 
 ## How to diagnose a poorly performing scene
 
@@ -65,6 +132,7 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 :hidden:
 :maxdepth: 1
 
+Visual comparisons <visual-comparisons>
 Findings <experience>
 Diagnosis <diagnosis>
 Selection <selection>
