@@ -244,7 +244,7 @@ Genesis 原生状态的连续回放，由 MuJoCo 显示。16 个固定工况中�
 
 [力限额完整报告](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) · [全部研究结果](results.md) · [安装与复现](quickstart.md)
 
-<div class="research-footer">组织方式参考 <a href="https://mandarobotics.com/blog/comparing-physics-engines/index.html">Manda Robotics 的物理引擎比较</a>：先结论、逐项对照、公开差异。本站数值只来自 DexLab 已发布证据。</div>
+<div class="research-footer">组织方式参考 <a href="https://mandarobotics.com/blog/comparing-physics-engines/index.html">Manda Robotics 的物理引擎比较</a>：先结论、逐项对照、公开差异。本页实验数值只来自 DexLab 已发布证据。<a href="references.html">中文导读与外部参考 ↗</a></div>
 
 ```{toctree}
 :hidden:
@@ -257,6 +257,7 @@ Genesis 原生状态的连续回放，由 MuJoCo 显示。16 个固定工况中�
 灵巧操作路线 <dexterity>
 研究证据账本 <research-ledger>
 Benchmark <benchmark>
+外部参考 <references>
 参与开发 <contributing>
 ```
 

@@ -236,6 +236,8 @@ Initial guides and pinned source maps are available; the full course is in devel
 
 ## Start here
 
+- **Read related work:** [External references](docs/references/README.md) · [Manda Robotics engine-comparison guide](docs/references/manda-physics-engines.md). External findings are distinct from DexLab experiments.
+
 - **Read findings and figures:** [Full experiment reports](docs/site/en/results.md) and the [stage report](docs/holiday-report.md).
 - **Recompute results:** Each report links its frozen protocol, scorer and raw records; public archives are available in [Releases](https://github.com/huangkiki/Dexlab/releases).
 - **Run a demo:** Follow the [installation guide](docs/installation.md), then try the apple-stem grasp below.

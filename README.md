@@ -236,6 +236,8 @@ Genesis 1.4.3 PBD 的驱动夹布／保持工况已运行并失败，见[保留�
 
 ## 从哪里开始
 
+- **查阅外部研究：**[参考资料目录](docs/references/README.zh-CN.md) · [Manda Robotics 物理引擎比较中文导读](docs/references/manda-physics-engines.zh-CN.md)。外部结果与 DexLab 实验分别标注。
+
 - **看结论与图表：** [完整实验报告](docs/site/zh/results.md)，以及[阶段总结](docs/holiday-report.zh-CN.md)。
 - **复算结果：** 每份报告链接冻结协议、评分代码和原始记录；公开归档见 [Releases](https://github.com/huangkiki/Dexlab/releases)。
 - **运行演示：** 按[安装说明](docs/installation.zh-CN.md)配置环境后，运行下方苹果梗抓取示例。
