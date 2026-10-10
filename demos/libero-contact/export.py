@@ -82,6 +82,9 @@ def export(campaign, output):
 
     campaign, output = Path(campaign), Path(output)
     output.mkdir(parents=True, exist_ok=False)
+    notices = Path(__file__).parent
+    shutil.copyfile(notices / "NOTICE.md", output / "NOTICE.md")
+    shutil.copytree(notices / "licenses", output / "licenses")
     manifest = json.loads((campaign / "manifest.json").read_text())
     selection = json.loads((campaign / "selection.json").read_text())
     write(output / "selection.json", selection)

@@ -16,7 +16,7 @@ git -C /path/to/LIBERO checkout 8f1084e3132a39270c3a13ebe37270a43ece2a01
 /path/to/libero-env/bin/pip install --no-deps -e /path/to/LIBERO
 ```
 
-Download only [this official task dataset](https://huggingface.co/datasets/yifengzhu-hf/LIBERO-datasets/resolve/f13aa24a3da8c43c7225569f28c562979fa0e35a/libero_object/pick_up_the_cream_cheese_and_place_it_in_the_basket_demo.hdf5). Its SHA-256 must be `7ae50ed3a64bab8418fd6c8e346ba1c39da0fdaa62916a87b9d20f3745b45406`. The upstream full learning environment documents Python 3.8 / PyTorch 1.11; this Python 3.10 path qualifies native simulation and action replay only. Official source: MIT; dataset card: Apache-2.0. Assets retain upstream licensing; we publish derived observations and rendered views, not a replacement asset distribution.
+Download only [this official task dataset](https://huggingface.co/datasets/yifengzhu-hf/LIBERO-datasets/resolve/f13aa24a3da8c43c7225569f28c562979fa0e35a/libero_object/pick_up_the_cream_cheese_and_place_it_in_the_basket_demo.hdf5). Its SHA-256 must be `7ae50ed3a64bab8418fd6c8e346ba1c39da0fdaa62916a87b9d20f3745b45406`. The upstream full learning environment documents Python 3.8 / PyTorch 1.11; this Python 3.10 path qualifies native simulation and action replay only. Official source: MIT; dataset card: Apache-2.0. Assets retain upstream licensing; we publish derived observations and rendered views, not a replacement asset distribution. Selected source action/state arrays are retained and explicitly distinguished from new observations; [source and license notices](NOTICE.md) accompany every export.
 
 ```bash
 /path/to/libero-env/bin/python demos/libero-contact/prepare.py \
