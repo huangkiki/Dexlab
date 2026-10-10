@@ -1,0 +1,1135 @@
+{
+  "profile": "pgs-friction",
+  "protocol_sha256": "84f92f931db8b393b5b279d35c24506ef526bf8db28332c0688ee30c0d1de71a",
+  "source_sha256": "0be478fcafdb9df79585c298dedf545a77e40a3f180925b30db4badb1120035e",
+  "cases": [
+    {
+      "case": "static-h0.002",
+      "raw_sha256": "d38858af8894d077e17b3337613c330c8eeea6ae12f2256a6ade8c03e85c19a1",
+      "original_score": {
+        "case": "static-h0.002",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 2.1763815467502163e-07,
+          "static_speed_m_s": 3.514433096562258e-05,
+          "sliding_velocity_rmse_m_s": 1.0537506634739846e-06,
+          "sliding_position_rmse_m": 2.8920185923614765e-05,
+          "acceleration_error_m_s2": 2.4578347534165635e-09,
+          "rotation_rad": 0.0,
+          "penetration_m": 3.3155083656311035e-07,
+          "force_balance_rmse_n": 5.105342820558891e-05
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "static_displacement_m": true,
+          "static_speed_m_s": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 0.0,
+        "acceleration_fitted_m_s2": 2.4578347534165635e-09,
+        "full_velocity_rmse_m_s": 3.41319541989515e-05,
+        "full_position_rmse_m": 2.1557418613318133e-07,
+        "impulse_residual_max_ns": 1.0626895710566816e-09
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 372,
+            "time_s": 0.7460000354330987,
+            "residual_vector_ns": [
+              -2.8877375236055838e-11,
+              1.8906782606534223e-12,
+              1.1756462637169812e-09
+            ],
+            "residual_norm_ns": 1.1760023872665e-09,
+            "original_residual_norm_ns": 1.062689570969906e-09,
+            "endpoint_half_spacing_ns": [
+              2.328306547127318e-13,
+              2.328306547127318e-13,
+              2.328306547127318e-13
+            ],
+            "analytic_normal_residual_ns": 1.586906318428328e-11,
+            "native_normal_residual_ns": 2.250791363727668e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 372,
+            "time_s": 0.7460000354330987,
+            "residual_vector_ns": [
+              -2.8877375236055838e-11,
+              1.8906782606534223e-12,
+              1.1756462637169812e-09
+            ],
+            "residual_norm_ns": 1.1760023872665e-09,
+            "original_residual_norm_ns": 1.062689570969906e-09,
+            "endpoint_half_spacing_ns": [
+              2.328306547127318e-13,
+              2.328306547127318e-13,
+              2.328306547127318e-13
+            ],
+            "analytic_normal_residual_ns": 1.586906318428328e-11,
+            "native_normal_residual_ns": 2.250791363727668e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 734,
+            "time_s": 1.4700000698212534,
+            "residual_vector_ns": [
+              -1.3703873322570836e-11,
+              -4.716423947356482e-12,
+              -1.0104893029098949e-10
+            ],
+            "residual_norm_ns": 1.020829423157734e-10,
+            "original_residual_norm_ns": 2.1489159086940115e-10,
+            "endpoint_half_spacing_ns": [
+              2.328306547127318e-13,
+              2.328306547127318e-13,
+              2.328306547127318e-13
+            ],
+            "analytic_normal_residual_ns": 2.309785464293685e-11,
+            "native_normal_residual_ns": 6.439610604198724e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 224,
+            "time_s": 0.4500000213738531,
+            "residual_vector_ns": [
+              -2.3889729604265053e-11,
+              -1.2787307562649175e-12,
+              2.185958803292004e-10
+            ],
+            "residual_norm_ns": 2.199011442212387e-10,
+            "original_residual_norm_ns": 1.0793119106907074e-10,
+            "endpoint_half_spacing_ns": [
+              2.328306547127318e-13,
+              2.328306547127318e-13,
+              2.328306547127318e-13
+            ],
+            "analytic_normal_residual_ns": 1.3487172357130699e-11,
+            "native_normal_residual_ns": 6.852278374705131e-12
+          }
+        },
+        "steps": 1000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "static-h0.001",
+      "raw_sha256": "d06714ef3aed01c61ca3ed7a1297c7e20b916b28db5f4e4480c06a07b8ea48ec",
+      "original_score": {
+        "case": "static-h0.001",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 5.71238714915448e-08,
+          "static_speed_m_s": 1.9101226103815747e-05,
+          "sliding_velocity_rmse_m_s": 1.9777897589242576e-06,
+          "sliding_position_rmse_m": 1.5883943739874673e-05,
+          "acceleration_error_m_s2": 1.531834095272403e-09,
+          "rotation_rad": 0.0,
+          "penetration_m": 8.754432201385498e-08,
+          "force_balance_rmse_n": 0.00025196074673679384
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "static_displacement_m": true,
+          "static_speed_m_s": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 0.0,
+        "acceleration_fitted_m_s2": 1.531834095272403e-09,
+        "full_velocity_rmse_m_s": 1.71017912040737e-05,
+        "full_position_rmse_m": 5.4732521552508885e-08,
+        "impulse_residual_max_ns": 4.876995009667379e-10
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 16,
+            "time_s": 0.017000000807456672,
+            "residual_vector_ns": [
+              -2.6947838613886922e-11,
+              -1.3815069558166873e-12,
+              4.952510637918142e-10
+            ],
+            "residual_norm_ns": 4.959855953093322e-10,
+            "original_residual_norm_ns": 4.3941160489338056e-10,
+            "endpoint_half_spacing_ns": [
+              1.164153273563659e-13,
+              1.164153273563659e-13,
+              1.164153273563659e-13
+            ],
+            "analytic_normal_residual_ns": 1.0874181302590255e-11,
+            "native_normal_residual_ns": 2.543012167218004e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 919,
+            "time_s": 0.9200000436976552,
+            "residual_vector_ns": [
+              -2.152010617232844e-11,
+              2.447743207125222e-13,
+              -4.305440226342813e-10
+            ],
+            "residual_norm_ns": 4.3108158196592545e-10,
+            "original_residual_norm_ns": 4.876995009462966e-10,
+            "endpoint_half_spacing_ns": [
+              1.164153273563659e-13,
+              1.164153273563659e-13,
+              1.164153273563659e-13
+            ],
+            "analytic_normal_residual_ns": 7.145130461686661e-12,
+            "native_normal_residual_ns": 2.4834746821414226e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 229,
+            "time_s": 0.2300000109244138,
+            "residual_vector_ns": [
+              -1.4390169340416231e-11,
+              5.065800751970218e-13,
+              1.8640555787298452e-11
+            ],
+            "residual_norm_ns": 2.3554275982883186e-11,
+            "original_residual_norm_ns": 4.0670706382859823e-11,
+            "endpoint_half_spacing_ns": [
+              1.164153273563659e-13,
+              1.164153273563659e-13,
+              1.164153273563659e-13
+            ],
+            "analytic_normal_residual_ns": 1.1770104097093281e-11,
+            "native_normal_residual_ns": 3.4414681052293526e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 314,
+            "time_s": 0.31500001496169716,
+            "residual_vector_ns": [
+              -7.6238945983121e-12,
+              2.881198155491732e-14,
+              1.304568399921463e-11
+            ],
+            "residual_norm_ns": 1.5110078424145195e-11,
+            "original_residual_norm_ns": 4.430199184155934e-11,
+            "endpoint_half_spacing_ns": [
+              1.164153273563659e-13,
+              1.164153273563659e-13,
+              1.164153273563659e-13
+            ],
+            "analytic_normal_residual_ns": 7.118479464468096e-12,
+            "native_normal_residual_ns": 3.47391826947558e-12
+          }
+        },
+        "steps": 2000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "static-h0.0005",
+      "raw_sha256": "da4007aad8b349d31ef6f499eeb2fb2edf589e916d8ffd8568b8daf728495c47",
+      "original_score": {
+        "case": "static-h0.0005",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 1.3911328399864172e-08,
+          "static_speed_m_s": 1.551185539264472e-05,
+          "sliding_velocity_rmse_m_s": 4.091870997151373e-06,
+          "sliding_position_rmse_m": 4.832206992988439e-06,
+          "acceleration_error_m_s2": 1.0800079795065459e-08,
+          "rotation_rad": 0.0,
+          "penetration_m": 2.2351741790771484e-08,
+          "force_balance_rmse_n": 0.0007713375555705883
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "static_displacement_m": true,
+          "static_speed_m_s": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 0.0,
+        "acceleration_fitted_m_s2": 1.0800079795065459e-08,
+        "full_velocity_rmse_m_s": 8.96910067227978e-06,
+        "full_position_rmse_m": 1.1440198743725079e-08,
+        "impulse_residual_max_ns": 2.89305547160296e-10
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 3118,
+            "time_s": 1.5595000740722753,
+            "residual_vector_ns": [
+              -7.072563468582017e-12,
+              1.4686530122468358e-13,
+              2.8706744343827764e-10
+            ],
+            "residual_norm_ns": 2.8715459217226977e-10,
+            "original_residual_norm_ns": 2.5882411880805573e-10,
+            "endpoint_half_spacing_ns": [
+              5.820766367818295e-14,
+              5.820766367818295e-14,
+              5.820766367818295e-14
+            ],
+            "analytic_normal_residual_ns": 4.961492618794439e-12,
+            "native_normal_residual_ns": 7.972708288646237e-13
+          },
+          "original_residual_norm_ns": {
+            "step": 222,
+            "time_s": 0.11150000529596582,
+            "residual_vector_ns": [
+              -1.4145141750076216e-11,
+              1.3724374555660473e-12,
+              -2.60616121728046e-10
+            ],
+            "residual_norm_ns": 2.610033170752182e-10,
+            "original_residual_norm_ns": 2.893055471668989e-10,
+            "endpoint_half_spacing_ns": [
+              5.820766367818295e-14,
+              5.820766367818295e-14,
+              5.820766367818295e-14
+            ],
+            "analytic_normal_residual_ns": 4.812717925735659e-12,
+            "native_normal_residual_ns": 1.1569844542602854e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 3517,
+            "time_s": 1.7590000835480168,
+            "residual_vector_ns": [
+              -2.1365141833441445e-11,
+              -1.1122600372193495e-13,
+              4.5436769635382596e-11
+            ],
+            "residual_norm_ns": 5.020937852319823e-11,
+            "original_residual_norm_ns": 2.7364758241994994e-11,
+            "endpoint_half_spacing_ns": [
+              5.820766367818295e-14,
+              5.820766367818295e-14,
+              5.820766367818295e-14
+            ],
+            "analytic_normal_residual_ns": 5.904342929152892e-12,
+            "native_normal_residual_ns": 1.741501721611938e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 3517,
+            "time_s": 1.7590000835480168,
+            "residual_vector_ns": [
+              -2.1365141833441445e-11,
+              -1.1122600372193495e-13,
+              4.5436769635382596e-11
+            ],
+            "residual_norm_ns": 5.020937852319823e-11,
+            "original_residual_norm_ns": 2.7364758241994994e-11,
+            "endpoint_half_spacing_ns": [
+              5.820766367818295e-14,
+              5.820766367818295e-14,
+              5.820766367818295e-14
+            ],
+            "analytic_normal_residual_ns": 5.904342929152892e-12,
+            "native_normal_residual_ns": 1.741501721611938e-12
+          }
+        },
+        "steps": 4000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "sliding-h0.002",
+      "raw_sha256": "20c5ca327f44b86a15413b5fe70e1c57b067e38942572e2441a42fa61b3071c5",
+      "original_score": {
+        "case": "sliding-h0.002",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 3.2209082922184575,
+          "static_speed_m_s": 3.217697302599337,
+          "sliding_velocity_rmse_m_s": 6.740660757171741e-06,
+          "sliding_position_rmse_m": 0.0013885106149809964,
+          "acceleration_error_m_s2": 2.533375743851707e-06,
+          "rotation_rad": 0.00039191710546035907,
+          "penetration_m": 3.5390257835388184e-07,
+          "force_balance_rmse_n": 0.0007260070871417994
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 1.608844063366257,
+        "acceleration_fitted_m_s2": 1.608846596742001,
+        "full_velocity_rmse_m_s": 1.0942631907883092e-05,
+        "full_position_rmse_m": 0.001859193886889993,
+        "impulse_residual_max_ns": 1.0182323742328675e-08
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 901,
+            "time_s": 1.8040000856854022,
+            "residual_vector_ns": [
+              -7.218032394007423e-09,
+              -6.639345323522505e-12,
+              7.28158177092271e-09
+            ],
+            "residual_norm_ns": 1.025287612372649e-08,
+            "original_residual_norm_ns": 1.0182323742175902e-08,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              1.4901161901614834e-11,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 7.930260232671092e-11,
+            "native_normal_residual_ns": 5.924185133340115e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 901,
+            "time_s": 1.8040000856854022,
+            "residual_vector_ns": [
+              -7.218032394007423e-09,
+              -6.639345323522505e-12,
+              7.28158177092271e-09
+            ],
+            "residual_norm_ns": 1.025287612372649e-08,
+            "original_residual_norm_ns": 1.0182323742175902e-08,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              1.4901161901614834e-11,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 7.930260232671092e-11,
+            "native_normal_residual_ns": 5.924185133340115e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 219,
+            "time_s": 0.4400000208988786,
+            "residual_vector_ns": [
+              1.758403644913642e-09,
+              -1.5320739468749345e-12,
+              -2.0579050681417133e-10
+            ],
+            "residual_norm_ns": 1.7704054502827858e-09,
+            "original_residual_norm_ns": 1.7782503303419876e-09,
+            "endpoint_half_spacing_ns": [
+              3.814697446813398e-09,
+              3.725290475403709e-12,
+              1.907348723406699e-09
+            ],
+            "analytic_normal_residual_ns": 8.621297775614385e-11,
+            "native_normal_residual_ns": 1.1345718662529938e-11
+          },
+          "native_normal_residual_ns": {
+            "step": 371,
+            "time_s": 0.7440000353381038,
+            "residual_vector_ns": [
+              -8.71184013817583e-10,
+              -1.4417807225886037e-12,
+              1.0592484556582599e-09
+            ],
+            "residual_norm_ns": 1.3714849454067569e-09,
+            "original_residual_norm_ns": 1.2955067465923534e-09,
+            "endpoint_half_spacing_ns": [
+              3.814697446813398e-09,
+              3.725290475403709e-12,
+              3.814697446813398e-09
+            ],
+            "analytic_normal_residual_ns": 7.944837314617127e-11,
+            "native_normal_residual_ns": 1.1397446680015688e-11
+          }
+        },
+        "steps": 1000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "sliding-h0.001",
+      "raw_sha256": "06c33afeb405d0813ef3cf942cb36031896a67dbe9271ec384609aadc9047164",
+      "original_score": {
+        "case": "sliding-h0.001",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 3.2193004951802697,
+          "static_speed_m_s": 3.217739512047222,
+          "sliding_velocity_rmse_m_s": 1.5635041156071795e-05,
+          "sliding_position_rmse_m": 0.0006916126490768826,
+          "acceleration_error_m_s2": 1.0750765328859657e-05,
+          "rotation_rad": 0.000933026005638996,
+          "penetration_m": 2.868473529815674e-07,
+          "force_balance_rmse_n": 0.003211169656523508
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 1.608844063366257,
+        "acceleration_fitted_m_s2": 1.608854814131586,
+        "full_velocity_rmse_m_s": 1.6120785822985582e-05,
+        "full_position_rmse_m": 0.000930112776781028,
+        "impulse_residual_max_ns": 9.176103049572921e-09
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 1649,
+            "time_s": 1.6500000783707947,
+            "residual_vector_ns": [
+              7.523752287852403e-09,
+              6.665573475117537e-12,
+              5.312601131257123e-09
+            ],
+            "residual_norm_ns": 9.210354157070645e-09,
+            "original_residual_norm_ns": 9.176103049561271e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              7.450580950807417e-12,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 3.3040985637604325e-11,
+            "native_normal_residual_ns": 4.426885263529232e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 1649,
+            "time_s": 1.6500000783707947,
+            "residual_vector_ns": [
+              7.523752287852403e-09,
+              6.665573475117537e-12,
+              5.312601131257123e-09
+            ],
+            "residual_norm_ns": 9.210354157070645e-09,
+            "original_residual_norm_ns": 9.176103049561271e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              7.450580950807417e-12,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 3.3040985637604325e-11,
+            "native_normal_residual_ns": 4.426885263529232e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 1968,
+            "time_s": 1.9690000935224816,
+            "residual_vector_ns": [
+              1.8503243381928769e-09,
+              2.5108370244053546e-12,
+              4.958845883939501e-09
+            ],
+            "residual_norm_ns": 5.292812008892362e-09,
+            "original_residual_norm_ns": 5.240959772931421e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              1.4901161901614834e-11,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 4.317743366078104e-11,
+            "native_normal_residual_ns": 5.696328947272546e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 1647,
+            "time_s": 1.6480000782757998,
+            "residual_vector_ns": [
+              6.4600396143532635e-09,
+              -3.9026386289275905e-12,
+              1.6655522461434327e-09
+            ],
+            "residual_norm_ns": 6.671296076043632e-09,
+            "original_residual_norm_ns": 6.6538902762228275e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              7.450580950807417e-12,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 3.2932015391041146e-11,
+            "native_normal_residual_ns": 6.8575340989463635e-12
+          }
+        },
+        "steps": 2000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "sliding-h0.0005",
+      "raw_sha256": "db9f772cd2c2a763d8b8c36a4602ea1ad4c4aaa57311aa0fe1fd2de36ba240e4",
+      "original_score": {
+        "case": "sliding-h0.0005",
+        "negative": false,
+        "valid": true,
+        "passed": false,
+        "metrics": {
+          "static_displacement_m": 3.21849011201725,
+          "static_speed_m_s": 3.2176857376957373,
+          "sliding_velocity_rmse_m_s": 3.396486338455201e-05,
+          "sliding_position_rmse_m": 0.0003450593748189731,
+          "acceleration_error_m_s2": 2.156972640099397e-05,
+          "rotation_rad": 0.00198937506976274,
+          "penetration_m": 2.7008354663848877e-07,
+          "force_balance_rmse_n": 0.01276314501868491
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": false,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 1.608844063366257,
+        "acceleration_fitted_m_s2": 1.608865633092658,
+        "full_velocity_rmse_m_s": 3.0363123224177736e-05,
+        "full_position_rmse_m": 0.0004638093772967248,
+        "impulse_residual_max_ns": 8.777648779174413e-09
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 3260,
+            "time_s": 1.6305000774445944,
+            "residual_vector_ns": [
+              7.486073982931885e-09,
+              -9.004621701058646e-12,
+              4.614128243385102e-09
+            ],
+            "residual_norm_ns": 8.793836717130113e-09,
+            "original_residual_norm_ns": 8.777648779179723e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              1.4901161901614834e-11,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 1.8388422444340184e-11,
+            "native_normal_residual_ns": 1.112406919508667e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 3260,
+            "time_s": 1.6305000774445944,
+            "residual_vector_ns": [
+              7.486073982931885e-09,
+              -9.004621701058646e-12,
+              4.614128243385102e-09
+            ],
+            "residual_norm_ns": 8.793836717130113e-09,
+            "original_residual_norm_ns": 8.777648779179723e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              1.4901161901614834e-11,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 1.8388422444340184e-11,
+            "native_normal_residual_ns": 1.112406919508667e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 3786,
+            "time_s": 1.893500089936424,
+            "residual_vector_ns": [
+              6.030518306943122e-10,
+              5.0902337900282646e-12,
+              -2.092822307109537e-09
+            ],
+            "residual_norm_ns": 2.1779813199655968e-09,
+            "original_residual_norm_ns": 2.2045730437408138e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              1.4901161901614834e-11,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 2.3908763356161704e-11,
+            "native_normal_residual_ns": 3.2875780954988096e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 2467,
+            "time_s": 1.234000058611855,
+            "residual_vector_ns": [
+              1.8581589600330517e-09,
+              1.4936940573306856e-12,
+              -5.41997030481349e-11
+            ],
+            "residual_norm_ns": 1.8589498539991753e-09,
+            "original_residual_norm_ns": 1.857866829716367e-09,
+            "endpoint_half_spacing_ns": [
+              7.629394893626795e-09,
+              7.450580950807417e-12,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 2.3480183089182906e-11,
+            "native_normal_residual_ns": 3.9643310200320955e-12
+          }
+        },
+        "steps": 4000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "frictionless-h0.002",
+      "raw_sha256": "cf4b5ae57eee77ada7326719ae357211ef4f792503944a54cd32197def3f8e50",
+      "original_score": {
+        "case": "frictionless-h0.002",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 5.083099337642922,
+          "static_speed_m_s": 5.078022828347105,
+          "sliding_velocity_rmse_m_s": 4.22777161645396e-06,
+          "sliding_position_rmse_m": 0.002197084220445026,
+          "acceleration_error_m_s2": 3.9848072583836824e-06,
+          "rotation_rad": 0.0,
+          "penetration_m": 2.5704503059387207e-07,
+          "force_balance_rmse_n": 0.0006483714714013011
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 2.5390148324557287,
+        "acceleration_fitted_m_s2": 2.5390108476484703,
+        "full_velocity_rmse_m_s": 5.4898576191798796e-06,
+        "full_position_rmse_m": 0.002928535221798653,
+        "impulse_residual_max_ns": 1.6202253922671586e-08
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 994,
+            "time_s": 1.990000094519928,
+            "residual_vector_ns": [
+              -1.4451654095637423e-08,
+              0.0,
+              7.405285484861704e-09
+            ],
+            "residual_norm_ns": 1.6238490053334925e-08,
+            "original_residual_norm_ns": 1.6202253922671586e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 1.804285783009018e-11,
+            "native_normal_residual_ns": 5.740726172426616e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 994,
+            "time_s": 1.990000094519928,
+            "residual_vector_ns": [
+              -1.4451654095637423e-08,
+              0.0,
+              7.405285484861704e-09
+            ],
+            "residual_norm_ns": 1.6238490053334925e-08,
+            "original_residual_norm_ns": 1.6202253922671586e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 1.804285783009018e-11,
+            "native_normal_residual_ns": 5.740726172426616e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 189,
+            "time_s": 0.3800000180490315,
+            "residual_vector_ns": [
+              -8.815472796186441e-10,
+              0.0,
+              3.8431691206167184e-11
+            ],
+            "residual_norm_ns": 8.823846106386931e-10,
+            "original_residual_norm_ns": 8.992571209799065e-10,
+            "endpoint_half_spacing_ns": [
+              3.814697446813398e-09,
+              8.968310597650705e-47,
+              9.536743617033494e-10
+            ],
+            "analytic_normal_residual_ns": 1.9254360042117447e-11,
+            "native_normal_residual_ns": 6.919769146790725e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 189,
+            "time_s": 0.3800000180490315,
+            "residual_vector_ns": [
+              -8.815472796186441e-10,
+              0.0,
+              3.8431691206167184e-11
+            ],
+            "residual_norm_ns": 8.823846106386931e-10,
+            "original_residual_norm_ns": 8.992571209799065e-10,
+            "endpoint_half_spacing_ns": [
+              3.814697446813398e-09,
+              8.968310597650705e-47,
+              9.536743617033494e-10
+            ],
+            "analytic_normal_residual_ns": 1.9254360042117447e-11,
+            "native_normal_residual_ns": 6.919769146790725e-12
+          }
+        },
+        "steps": 1000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "frictionless-h0.001",
+      "raw_sha256": "59ea5964e6b1fa9ff29bbabc0774ebc89215130b5127f4659be8f97020892c65",
+      "original_score": {
+        "case": "frictionless-h0.001",
+        "negative": false,
+        "valid": true,
+        "passed": true,
+        "metrics": {
+          "static_displacement_m": 5.080573792172985,
+          "static_speed_m_s": 5.078028939422882,
+          "sliding_velocity_rmse_m_s": 3.119546920944289e-06,
+          "sliding_position_rmse_m": 0.0011024326955617223,
+          "acceleration_error_m_s2": 1.7000315613024952e-06,
+          "rotation_rad": 0.0,
+          "penetration_m": 1.3969838619232178e-07,
+          "force_balance_rmse_n": 0.0024829212214149987
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": true,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 2.5390148324557287,
+        "acceleration_fitted_m_s2": 2.53901653248729,
+        "full_velocity_rmse_m_s": 2.0936908206681774e-06,
+        "full_position_rmse_m": 0.001467000000340836,
+        "impulse_residual_max_ns": 1.52412939400552e-08
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 1652,
+            "time_s": 1.653000078513287,
+            "residual_vector_ns": [
+              -1.5166225608709283e-08,
+              0.0,
+              1.4892532707250564e-09
+            ],
+            "residual_norm_ns": 1.5239169088852402e-08,
+            "original_residual_norm_ns": 1.52412939400552e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 8.05030091796232e-12,
+            "native_normal_residual_ns": 2.0560420431622005e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 1652,
+            "time_s": 1.653000078513287,
+            "residual_vector_ns": [
+              -1.5166225608709283e-08,
+              0.0,
+              1.4892532707250564e-09
+            ],
+            "residual_norm_ns": 1.5239169088852402e-08,
+            "original_residual_norm_ns": 1.52412939400552e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 8.05030091796232e-12,
+            "native_normal_residual_ns": 2.0560420431622005e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 1975,
+            "time_s": 1.9760000938549638,
+            "residual_vector_ns": [
+              2.30060237527141e-09,
+              0.0,
+              4.116215918136858e-09
+            ],
+            "residual_norm_ns": 4.715506841669059e-09,
+            "original_residual_norm_ns": 4.664190668745561e-09,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 9.627180021058723e-12,
+            "native_normal_residual_ns": 3.4598845733953623e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 1568,
+            "time_s": 1.569000074523501,
+            "residual_vector_ns": [
+              5.069892949904897e-09,
+              0.0,
+              3.191075126579915e-10
+            ],
+            "residual_norm_ns": 5.0799256026176355e-09,
+            "original_residual_norm_ns": 5.069337843637577e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 8.743729136182713e-12,
+            "native_normal_residual_ns": 3.4933279616992767e-12
+          }
+        },
+        "steps": 2000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "frictionless-h0.0005",
+      "raw_sha256": "b7452754cf95d1ba0afde372fa58603f46d41d91163a66e3081fdd31cfa09f2b",
+      "original_score": {
+        "case": "frictionless-h0.0005",
+        "negative": false,
+        "valid": true,
+        "passed": false,
+        "metrics": {
+          "static_displacement_m": 5.079295246982828,
+          "static_speed_m_s": 5.078024148407815,
+          "sliding_velocity_rmse_m_s": 9.76125532836483e-06,
+          "sliding_position_rmse_m": 0.0005464013629282095,
+          "acceleration_error_m_s2": 1.1020742079814738e-05,
+          "rotation_rad": 0.0,
+          "penetration_m": 2.5890767574310303e-07,
+          "force_balance_rmse_n": 0.010484708528830624
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": false,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": true
+        },
+        "acceleration_reference_m_s2": 2.5390148324557287,
+        "acceleration_fitted_m_s2": 2.539003811713649,
+        "full_velocity_rmse_m_s": 7.92737825894901e-06,
+        "full_position_rmse_m": 0.0007311755580361136,
+        "impulse_residual_max_ns": 1.5352156541532536e-08
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 3403,
+            "time_s": 1.7020000808406621,
+            "residual_vector_ns": [
+              -1.5220603444277003e-08,
+              0.0,
+              2.004326979398747e-09
+            ],
+            "residual_norm_ns": 1.5352006248314345e-08,
+            "original_residual_norm_ns": 1.535215654152992e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 4.232473529638958e-12,
+            "native_normal_residual_ns": 1.148635182736564e-12
+          },
+          "original_residual_norm_ns": {
+            "step": 3403,
+            "time_s": 1.7020000808406621,
+            "residual_vector_ns": [
+              -1.5220603444277003e-08,
+              0.0,
+              2.004326979398747e-09
+            ],
+            "residual_norm_ns": 1.5352006248314345e-08,
+            "original_residual_norm_ns": 1.535215654152992e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 4.232473529638958e-12,
+            "native_normal_residual_ns": 1.148635182736564e-12
+          },
+          "analytic_normal_residual_ns": {
+            "step": 3388,
+            "time_s": 1.6945000804844312,
+            "residual_vector_ns": [
+              1.4880559007224292e-08,
+              0.0,
+              2.5693425692694012e-09
+            ],
+            "residual_norm_ns": 1.510074692211428e-08,
+            "original_residual_norm_ns": 1.5092044364067448e-08,
+            "endpoint_half_spacing_ns": [
+              3.051757957450718e-08,
+              8.968310597650705e-47,
+              7.629394893626795e-09
+            ],
+            "analytic_normal_residual_ns": 4.890901997501229e-12,
+            "native_normal_residual_ns": 1.6028276829968633e-12
+          },
+          "native_normal_residual_ns": {
+            "step": 2822,
+            "time_s": 1.4115000670426525,
+            "residual_vector_ns": [
+              -6.0499711906913944e-09,
+              0.0,
+              2.176971988798477e-09
+            ],
+            "residual_norm_ns": 6.429724601272518e-09,
+            "original_residual_norm_ns": 6.424031858438655e-09,
+            "endpoint_half_spacing_ns": [
+              1.525878978725359e-08,
+              8.968310597650705e-47,
+              3.814697446813398e-09
+            ],
+            "analytic_normal_residual_ns": 4.2443624366527745e-12,
+            "native_normal_residual_ns": 1.7466639808496384e-12
+          }
+        },
+        "steps": 4000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    },
+    {
+      "case": "negative-no-support",
+      "raw_sha256": "b39b9cf15a8f54f38ad6e46cf8bc7d788c7213fb317a0add86824c7e6e498ed6",
+      "original_score": {
+        "case": "negative-no-support",
+        "negative": true,
+        "valid": true,
+        "passed": false,
+        "metrics": {
+          "static_displacement_m": 5.080621817374105,
+          "static_speed_m_s": 5.078069868431341,
+          "sliding_velocity_rmse_m_s": 2.199266942416197,
+          "sliding_position_rmse_m": 1.2791478114667907,
+          "acceleration_error_m_s2": 2.5390787437588807,
+          "rotation_rad": 0.0,
+          "penetration_m": 0.0,
+          "force_balance_rmse_n": 0.6278400000000001
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": false,
+          "static_displacement_m": false,
+          "static_speed_m_s": false,
+          "continuous_support": false
+        },
+        "acceleration_reference_m_s2": 0.0,
+        "acceleration_fitted_m_s2": 2.5390787437588807,
+        "full_velocity_rmse_m_s": 2.9322063572952994,
+        "full_position_rmse_m": 2.273254790805729,
+        "impulse_residual_max_ns": 3.241263329988638e-08,
+        "negative_rejected": true
+      },
+      "diagnostics": {
+        "first_original_momentum_exceedance": null,
+        "peaks": {
+          "residual_norm_ns": {
+            "step": 1630,
+            "time_s": 1.631000077468343,
+            "residual_vector_ns": [
+              0.0,
+              0.0,
+              3.243949031064234e-08
+            ],
+            "residual_norm_ns": 3.243949031064234e-08,
+            "original_residual_norm_ns": 3.241263329988638e-08,
+            "endpoint_half_spacing_ns": [
+              8.968310597650705e-47,
+              8.968310597650705e-47,
+              9.155273872352154e-08
+            ],
+            "analytic_normal_residual_ns": 0.0,
+            "native_normal_residual_ns": 0.0
+          },
+          "original_residual_norm_ns": {
+            "step": 1630,
+            "time_s": 1.631000077468343,
+            "residual_vector_ns": [
+              0.0,
+              0.0,
+              3.243949031064234e-08
+            ],
+            "residual_norm_ns": 3.243949031064234e-08,
+            "original_residual_norm_ns": 3.241263329988638e-08,
+            "endpoint_half_spacing_ns": [
+              8.968310597650705e-47,
+              8.968310597650705e-47,
+              9.155273872352154e-08
+            ],
+            "analytic_normal_residual_ns": 0.0,
+            "native_normal_residual_ns": 0.0
+          },
+          "analytic_normal_residual_ns": {
+            "step": 0,
+            "time_s": 0.0010000000474974513,
+            "residual_vector_ns": [
+              0.0,
+              0.0,
+              1.456201272845986e-11
+            ],
+            "residual_norm_ns": 1.456201272845986e-11,
+            "original_residual_norm_ns": 1.2293457918310935e-11,
+            "endpoint_half_spacing_ns": [
+              8.968310597650705e-47,
+              8.968310597650705e-47,
+              2.980232380322967e-11
+            ],
+            "analytic_normal_residual_ns": 0.0,
+            "native_normal_residual_ns": 0.0
+          },
+          "native_normal_residual_ns": {
+            "step": 0,
+            "time_s": 0.0010000000474974513,
+            "residual_vector_ns": [
+              0.0,
+              0.0,
+              1.456201272845986e-11
+            ],
+            "residual_norm_ns": 1.456201272845986e-11,
+            "original_residual_norm_ns": 1.2293457918310935e-11,
+            "endpoint_half_spacing_ns": [
+              8.968310597650705e-47,
+              8.968310597650705e-47,
+              2.980232380322967e-11
+            ],
+            "analytic_normal_residual_ns": 0.0,
+            "native_normal_residual_ns": 0.0
+          }
+        },
+        "steps": 2000,
+        "interpretation": "Native readbacks used; endpoint spacing excludes internal arithmetic, impulse rounding and solver error. No new acceptance bound."
+      }
+    }
+  ],
+  "scope": "Offline diagnostics only; original scores unchanged; zero native launches"
+}

@@ -152,5 +152,5 @@ class TaskCoverageTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'every preregistered'):
                 reliable_tasks(manifest, root)
 
-    def test_all_four_public_views_are_current(self):
+    def test_detailed_public_views_are_current(self):
         update(check=True)
