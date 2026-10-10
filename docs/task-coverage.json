@@ -572,6 +572,66 @@
         "sha256": "b84ff7d20a858cac503e1c0cb3d3629e001778e308d0de11c7f2d6855a41f6ab"
       },
       "profile": "tgs-external"
+    },
+    "drake-contact-paths-v1-lagged-point": {
+      "description": "Initial fixed native CPU FP64 contact-path evaluation; no tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/drake-contact-paths/lagged-point-score.json",
+        "sha256": "174625edf753dd67c6630dad65bfab3bc4bc2d4f16fff5f5ef50561da92b5515"
+      },
+      "protocol": {
+        "path": "docs/evidence/drake-contact-paths/lagged-point.json",
+        "sha256": "8dae2a504d842245e01bdf2fd0d659be66405d9953a8965865d24099b6fffa80"
+      },
+      "profile": "lagged-point"
+    },
+    "drake-contact-paths-v1-similar-hydroelastic": {
+      "description": "Initial fixed native CPU FP64 contact-path evaluation; no tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/drake-contact-paths/similar-hydroelastic-score.json",
+        "sha256": "580762e47c0dcfc5353c35eb57b3e8d0fc3a0498f01b8944c45a4decbf600198"
+      },
+      "protocol": {
+        "path": "docs/evidence/drake-contact-paths/similar-hydroelastic.json",
+        "sha256": "09d3c85c9f1b27e8ea9b2d3448c9ae5f930bbf707c371a0eefc12f4cfe4957e0"
+      },
+      "profile": "similar-hydroelastic"
+    },
+    "drake-contact-paths-v1-similar-point": {
+      "description": "Initial fixed native CPU FP64 contact-path evaluation; no tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/drake-contact-paths/similar-point-score.json",
+        "sha256": "e6201c6f4375c8f62f130446387936cdac12ba37ed52ba7ac68f354567913a0f"
+      },
+      "protocol": {
+        "path": "docs/evidence/drake-contact-paths/similar-point.json",
+        "sha256": "31aeffdb0aebe2c2999b0b449bf4493049c8a6ec57a8b0ce8759eaba0157ae39"
+      },
+      "profile": "similar-point"
+    },
+    "drake-contact-paths-v1-sap-hydroelastic": {
+      "description": "Initial fixed native CPU FP64 contact-path evaluation; no tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/drake-contact-paths/sap-hydroelastic-score.json",
+        "sha256": "c65aaf0c6c7a37e026a208ae9858d9bce92aecabbaa1b811d900c465a02380b3"
+      },
+      "protocol": {
+        "path": "docs/evidence/drake-contact-paths/sap-hydroelastic.json",
+        "sha256": "a4417372c46294efac63942b984628fe087bd70b9cd71d07c78167cf2e779947"
+      },
+      "profile": "sap-hydroelastic"
+    },
+    "drake-contact-paths-v1-sap-point": {
+      "description": "Initial fixed native CPU FP64 contact-path evaluation; no tuning/holdout or reliable coverage-v1 credit",
+      "incline_score": {
+        "path": "docs/evidence/drake-contact-paths/sap-point-score.json",
+        "sha256": "8d14f2988b133ac2b9591eb33e65621a6f4d895299f0985d39d7072153d28ab1"
+      },
+      "protocol": {
+        "path": "docs/evidence/drake-contact-paths/sap-point.json",
+        "sha256": "cfa3e5a8d03b6c0a6b2f3d7b80fd589cbdb315312ff4390502acc68c91f5e072"
+      },
+      "profile": "sap-point"
     }
   },
   "rows": [
@@ -1496,7 +1556,7 @@
       "cells": {
         "contact": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
         },
         "incline": {
           "state": "partial",
@@ -1509,15 +1569,15 @@
         },
         "collision": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
         },
         "pinch": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
         },
         "grasp": {
           "state": "not-run",
-          "reference": "https://github.com/huangkiki/Dexlab/issues/151"
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
         },
         "push": {
           "state": "not-run",
@@ -5223,6 +5283,356 @@
             "sha256": "70b24f84c4fea197e7a8bfe3d0e10f52811bc123107d07c3ee8e0396b6fc3f27"
           },
           "counts_from": "incline"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kLagged / point",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "drake-contact-paths-v1-lagged-point",
+      "profile": "lagged-point",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md",
+          "evidence": {
+            "path": "docs/evidence/drake-contact-paths/lagged-point-score.json",
+            "sha256": "174625edf753dd67c6630dad65bfab3bc4bc2d4f16fff5f5ef50561da92b5515"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSimilar / hydroelastic",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "drake-contact-paths-v1-similar-hydroelastic",
+      "profile": "similar-hydroelastic",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md",
+          "evidence": {
+            "path": "docs/evidence/drake-contact-paths/similar-hydroelastic-score.json",
+            "sha256": "580762e47c0dcfc5353c35eb57b3e8d0fc3a0498f01b8944c45a4decbf600198"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSimilar / point",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "drake-contact-paths-v1-similar-point",
+      "profile": "similar-point",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "failed",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md",
+          "evidence": {
+            "path": "docs/evidence/drake-contact-paths/similar-point-score.json",
+            "sha256": "e6201c6f4375c8f62f130446387936cdac12ba37ed52ba7ac68f354567913a0f"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSap / hydroelastic",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "drake-contact-paths-v1-sap-hydroelastic",
+      "profile": "sap-hydroelastic",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md",
+          "evidence": {
+            "path": "docs/evidence/drake-contact-paths/sap-hydroelastic-score.json",
+            "sha256": "c65aaf0c6c7a37e026a208ae9858d9bce92aecabbaa1b811d900c465a02380b3"
+          }
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/47"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSap / point",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "drake-contact-paths-v1-sap-point",
+      "profile": "sap-point",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/121"
+        },
+        "incline": {
+          "state": "partial",
+          "counts_from": "incline",
+          "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md",
+          "evidence": {
+            "path": "docs/evidence/drake-contact-paths/sap-point-score.json",
+            "sha256": "8d14f2988b133ac2b9591eb33e65621a6f4d895299f0985d39d7072153d28ab1"
+          }
         },
         "collision": {
           "state": "not-run",

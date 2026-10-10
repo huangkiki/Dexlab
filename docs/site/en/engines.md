@@ -38,7 +38,7 @@ Box/fixed-slab geometric occupancy is supported on the MuJoCo fixture; shear mem
 
 ## Two-track admission and Drake results
 
-The 2026-10-09 coverage plan uses the two admission tracks above. Native Drake 1.57.0 now records SAP / kLagged / hydroelastic incline results: six passes, three failures. Applicable kSap, kSimilar and other profiles remain unrun. [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.md).
+Drake 1.57.0 now has six incline configurations across three SAP approximations and point/hydroelastic contact: the reused cohort passes6/9, and new profiles pass0/9,5/9,0/9,3/9,2/9. Five new positives exceed the original momentum check; all failures remain. Source equations reconstruct old Lagged sliding forces within4e-13 N. Reliable task coverage is unchanged. [Protocol, results and reproduction](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md) · [Residual follow-up #165](https://github.com/huangkiki/Dexlab/issues/165).
 
 ## Native incline cohorts
 

@@ -1,6 +1,7 @@
 """Adversarial checks over independently verifiable native-record fields."""
 
 import copy
+import importlib.util
 import json
 from pathlib import Path
 import unittest
@@ -130,6 +131,77 @@ class DrakeEvidenceTests(unittest.TestCase):
                 invalid[key]['code_sha256'] = '0' * 64
             with self.subTest(key=key), self.assertRaises(ValueError):
                 validate_runtime(self.protocol, proof, invalid)
+
+
+class DrakeContactPathsTests(unittest.TestCase):
+    def fixture(self, kind):
+        path = Path(__file__).parent / 'fixtures' / f'drake-{kind}.json'
+        data = json.loads(path.read_text())
+        return (data['protocol'], data['protocol']['cases'][0], data['admission'],
+                {k: np.asarray(v) for k, v in data['trace'].items()}, data['contacts'])
+
+    def test_native_point_and_hydroelastic_readbacks(self):
+        for kind in ('point', 'hydroelastic'):
+            p, c, a, t, rows = self.fixture(kind)
+            with self.subTest(kind=kind):
+                validate_admission(p, c, a)
+                validate_trace(p, c, t, rows)
+
+    def test_overwritten_stiffness_relaxation_or_contact_path(self):
+        for key in ('point_contact_stiffness', 'relaxation_time', 'contact_model'):
+            p, c, a, _, _ = self.fixture('point')
+            if key == 'contact_model':
+                a[key] = 'kHydroelastic'
+            else:
+                a['plane_properties']['material'][key] *= 2
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                validate_admission(p, c, a)
+
+    def test_point_pair_sign_normal_witness_and_contact_location(self):
+        for key in ('force_on_B_world', 'normal_BA_world', 'witness_A_world', 'contact_point_world'):
+            p, c, _, t, rows = self.fixture('point')
+            contact = next(row['contacts'][0] for row in rows if row['contacts'])
+            contact[key][0] += .001
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                validate_trace(p, c, t, rows)
+
+    def test_torque_epoch_and_frame_are_checked_in_both_paths(self):
+        for kind in ('point', 'hydroelastic'):
+            p, c, _, t, rows = self.fixture(kind)
+            t['generalized_contact_forces'][5, 0] += .001
+            with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, 'torque ledger'):
+                validate_trace(p, c, t, rows)
+
+    def test_missing_hydroelastic_faces_and_wrong_normal_are_rejected(self):
+        for mutation in ('missing', 'normal', 'area'):
+            p, c, _, t, rows = self.fixture('hydroelastic')
+            contact = next(row['contacts'][0] for row in rows if row['contacts'])
+            if mutation == 'missing':
+                contact['faces'] = []
+            elif mutation == 'area':
+                contact['faces'][0]['area_m2'] *= 2
+            else:
+                contact['faces'][0]['normal_into_cube_world'][0] += 1
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                validate_trace(p, c, t, rows)
+
+    def test_point_contact_cannot_be_relabeled_as_hydroelastic(self):
+        p, c, _, t, rows = self.fixture('point')
+        next(row['contacts'][0] for row in rows if row['contacts'])['kind'] = 'hydroelastic'
+        with self.assertRaisesRegex(ValueError, 'effective contact path'):
+            validate_trace(p, c, t, rows)
+
+    def test_source_formula_reconstructs_native_hydroelastic_force(self):
+        path = Path(__file__).resolve().parents[1] / 'scripts/diagnose_drake_lagged.py'
+        spec = importlib.util.spec_from_file_location('lagged_diagnostic', path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        p, c, _, trace, rows = self.fixture('hydroelastic')
+        normal, tangent, *_ = module.reconstruct(p, c, trace['states'], rows)
+        np.testing.assert_allclose(normal + tangent, trace['forces'], atol=1e-10, rtol=0)
+        p['drake']['dissipation_s_m'] = 1.
+        with self.assertRaises(ValueError):
+            module.reconstruct(p, c, trace['states'], rows)
 
 
 if __name__ == '__main__':

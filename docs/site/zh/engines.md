@@ -38,7 +38,7 @@ MuJoCo Warp 3.14.0 的六卡参数对照得到四组通过、两组失败，固�
 
 ## 双轨准入与 Drake 结果
 
-2026-10-09 的覆盖计划采用上述双轨准入。Drake 原生 1.57.0 已记录 SAP / kLagged / hydroelastic 的首轮斜面结果，九例六过三败；kSap、kSimilar 等适用配置尚未运行。 [报告 / Report](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md).
+Drake 1.57.0 的三种 SAP 近似与点/hydroelastic接触已有六配置斜面证据：复用旧6/9，新配置0/9、5/9、0/9、3/9、2/9。五条新增正例超过原动量检查，全部失败保留；旧Lagged滑动合力已由独立源码公式重建至4e-13 N以内。未增加可靠任务覆盖。[协议、结果与复现](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.zh-CN.md) · [残差后续验证 #165](https://github.com/huangkiki/Dexlab/issues/165)。
 
 ## 原生斜面批次
 

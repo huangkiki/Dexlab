@@ -1,0 +1,41 @@
+{
+  "version": "1.57.0",
+  "native_version": "1.57.0 1e1466ba466e7ce8fa9fcca4e086ce1383e5427d",
+  "official_wheel_sha256": "9319e09d707d616dd5b753184724b1e87337f499a2f59b8c7f313480182f90ee",
+  "verified_files": 402,
+  "same_installed_bytes_as117": true,
+  "pypi_latest": "1.57.0",
+  "solvers": [
+    "kSap"
+  ],
+  "approximations": [
+    "kLagged",
+    "kSap",
+    "kSimilar"
+  ],
+  "contact_models": {
+    "kHydroelastic": 0,
+    "kHydroelasticWithFallback": 2,
+    "kHydroelasticsOnly": 0,
+    "kPoint": 1,
+    "kPointContactOnly": 1
+  },
+  "packages": {
+    "fonttools": "4.66.1",
+    "pillow": "12.3.0",
+    "kiwisolver": "1.5.1",
+    "contourpy": "1.4.0",
+    "matplotlib": "3.11.2",
+    "pyparsing": "3.3.3",
+    "Mosek": "11.1.2",
+    "PyYAML": "6.0.3",
+    "pydot": "4.0.1",
+    "six": "1.17.0",
+    "cycler": "0.12.1",
+    "drake": "1.57.0",
+    "python-dateutil": "2.9.0.post0",
+    "packaging": "26.3",
+    "numpy": "2.5.3"
+  },
+  "native_steps": 0
+}
