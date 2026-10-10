@@ -1,0 +1,29 @@
+{
+  "inspected_at": "2026-10-10",
+  "selected_sdk": "110.1-omni-and-physx-5.9.0",
+  "source_commit": "517a0073715120e114ee055b63b26c95e00d9039",
+  "releases": [
+    {
+      "tag_name": "ovphysx-0.6.4",
+      "html_url": "https://github.com/NVIDIA-Omniverse/PhysX/releases/tag/ovphysx-0.6.4",
+      "prerelease": false,
+      "published_at": "2026-10-09T18:10:55Z",
+      "body": "ovphysx is a self-contained library package offering the PhysX SDK and Omni PhysX capabilities behind a C API and corresponding Python bindings for inclusion in user applications. It loads USD scenes, runs simulation, and allows reading and writing simulation data with DLPack interoperability.\r\n\r\novphysx 0.6.4 is a full open source release.\r\n\r\nDocumentation for getting started: https://nvidia-omniverse.github.io/PhysX/ovphysx/\r\n\r\nHighlights:\r\n- **Faster large-scene workflows:** improved scene attachment, cloning, tensor-binding creation, and sparse ovstage updates.\r\n- **More reliable simulation and editing:** GPU failures reach callers, rejected writes provide clearer diagnostics, pose edits preserve velocities, and material rebinding updates existing colliders.\r\n- **Articulation fixes:** runtime property edits correctly affect articulation links, and CPU tendon tensors handle differing tendon counts and padding.\r\n- **Clearer contact data:** separate normal and friction force reads, with explicit reporting of truncated results and required buffer capacity.\r\n- **Improved ovstage integration:** a C++ helper writes simulated world transforms on CPU and CUDA; the dependency advances to ovstage 0.2.1.385922.\r\n- **Packaging and documentation improvements:** published packages include build numbers for precise version pinning, ARM64 packages include HTML docs, and examples and session-I/O guidance are corrected.\r\n\r\nPre-release notice: ovphysx is pre-release software and not yet mature. Parts of the API are still being completed and may change before 1.0.\r\n\r\n**Python Wheels** can be obtained from PyPI via pip install ovphysx.\r\n**SDK Packages** available as release assets, see below."
+    },
+    {
+      "tag_name": "ovphysx-0.6.3",
+      "html_url": "https://github.com/NVIDIA-Omniverse/PhysX/releases/tag/ovphysx-0.6.3",
+      "prerelease": false,
+      "published_at": "2026-09-16T18:07:47Z",
+      "body": "ovphysx is a self-contained library package offering the PhysX SDK and Omni PhysX capabilities behind a C API and corresponding Python bindings for inclusion in user applications. It loads USD scenes, runs simulation, and allows reading and writing simulation data with DLPack interoperability.\r\n\r\novphysx 0.6.3 is a full open source release.\r\n\r\nDocumentation for getting started: https://nvidia-omniverse.github.io/PhysX/ovphysx/\r\n\r\nHighlights:\r\n- **Unified simulation read/write APIs.** Broad coverage now includes rigid bodies, articulations, tendons, deformables, particles and vehicle controls. Python reads and writes consistently expose Warp arrays; the older tensor-binding API is deprecated.\r\n\r\n- **Major performance improvements at scale.** Faster scene attachment, incremental updates and spawning reduce overhead for large simulations, with additional gains from buffer reuse and more efficient data access.\r\n\r\n- **A smaller, simpler runtime distribution.** ovphysx moved to a single USD-free build and removed bundled USD, OmniClient and unused GPU plugins. The bundled PhysX engine was upgraded to 5.11, and the projects adopted Apache 2.0 licensing.\r\n\r\n- **Better scene authoring and integration tools.** New Python USD authoring helpers and generated Python/C++ population builders simplify scene creation. Simulation output now updates consumer-visible world transforms and point-instancer arrays, with optional caching.\r\n\r\n- **Stronger simulation correctness and stability.** Fixes address CUDA races and device selection, stale views after scene teardown, articulation calculations, instanced-collider settings and point-instancer handling. Automatic deformable attachments also work without a live USD stage.\r\n\r\nPre-release notice: ovphysx is pre-release software and not yet mature. Parts of the API are still being completed and may change before 1.0.\r\n\r\n**Python Wheels** can be obtained from PyPI via pip install ovphysx.\r\n**SDK Packages** available as release assets, see below."
+    },
+    {
+      "tag_name": "110.1-omni-and-physx-5.9.0",
+      "html_url": "https://github.com/NVIDIA-Omniverse/PhysX/releases/tag/110.1-omni-and-physx-5.9.0",
+      "prerelease": false,
+      "published_at": "2026-07-14T15:42:14Z",
+      "body": "Combined Omniverse PhysX and PhysX SDK release. See [README.md](https://github.com/NVIDIA-Omniverse/PhysX/blob/110.1-omni-and-physx-5.9.0/omni/README.md) for more."
+    }
+  ],
+  "interpretation": "Newest explicitly versioned stable SDK tag selected; ovphysx wrapper has separate release identity and explicit prerelease notice in body. No inference of its embedded native core. Compatible framework paths #152."
+}

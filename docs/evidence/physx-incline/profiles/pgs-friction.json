@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "profile": "pgs-friction",
+  "source_commit": "517a0073715120e114ee055b63b26c95e00d9039",
+  "version": "5.9.0",
+  "duration_s": 2,
+  "score_start_s": 0.5,
+  "side_m": 0.04,
+  "mass_kg": 0.064,
+  "gravity_m_s2": 9.81,
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "force_balance_rmse_n": 0.01
+  },
+  "cases": [
+    {
+      "id": "static-h0.002",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.002
+    },
+    {
+      "id": "static-h0.001",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.001
+    },
+    {
+      "id": "static-h0.0005",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.0005
+    },
+    {
+      "id": "sliding-h0.002",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "timestep": 0.002
+    },
+    {
+      "id": "sliding-h0.001",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "timestep": 0.001
+    },
+    {
+      "id": "sliding-h0.0005",
+      "regime": "sliding",
+      "angle_deg": 35,
+      "friction": 0.5,
+      "timestep": 0.0005
+    },
+    {
+      "id": "frictionless-h0.002",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "timestep": 0.002
+    },
+    {
+      "id": "frictionless-h0.001",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "timestep": 0.001
+    },
+    {
+      "id": "frictionless-h0.0005",
+      "regime": "frictionless",
+      "angle_deg": 15,
+      "friction": 0,
+      "timestep": 0.0005
+    },
+    {
+      "id": "negative-no-support",
+      "regime": "static",
+      "angle_deg": 15,
+      "friction": 0.5,
+      "timestep": 0.001,
+      "negative_no_floor": true
+    }
+  ],
+  "binary_sha256": "046bbc1c7d478bb98a38a8cbe397b353ccc8f4700d34a47a4fcdef997c704aba",
+  "recorder_sha256": "32d90ba62a399c4ea381f3cbffa9b518762195aa70c08e0fda785dcaf54a3b6a",
+  "runner_sha256": "28fecfb8ad00c262797c276caa90f89d4e849eebd9e42349a153f3842c80936c",
+  "scorer_sha256": "7a2bf165915295de9ba2097562fa00633cc7d247ca9e5edf08cb62682f60b4f1",
+  "common_scorer_sha256": "655aa7bd4f4fc23ebd2e040579fc647cf8075f53e3fc375b716af36115551b52",
+  "resource_plan_sha256": "c942b8c854af53ca5db00f584bab608824fef980f62a87fa3ba74da9337291f3",
+  "admission_sha256": {
+    "static-h0.002": "0db975944fbea7ed7b28587cf15de09a5baaa5cc12c0874929698fa1e1e9820c",
+    "static-h0.001": "32379e44cd4f0da7cb0fb2bcdee698819469658b6c6ccc1080037e90113576a7",
+    "static-h0.0005": "708c23d09831eda4d64a8ff5161f59eb75e441ca918116c50ff7810f98a7d9d5",
+    "sliding-h0.002": "e7d18036f59b4237df32b753ced29efd5b698fffba1d32faef1a8cfeabb43716",
+    "sliding-h0.001": "5ae04382cb95bae0e9b4deb631db5908fe7df039ee217edaabee53f08b28d165",
+    "sliding-h0.0005": "68ee27df3fe724a9b4fa9348f7a628ef1a053b9d170543b2d8236642b3b16411",
+    "frictionless-h0.002": "36d2b93c3e994c2586744aeb034b02dd6d0d572554d95566de6b4d58392b91ea",
+    "frictionless-h0.001": "61da58c1f0217a002ee96e7b89f4fe1460d8f4fc70f6e91f7bf788ba9e6cf7ad",
+    "frictionless-h0.0005": "0f7ad9751a72da79b2e9c49f5016ea5d96a1edb998acef0543bf2f0591aaf66d",
+    "negative-no-support": "2b052d53738f4360d1618e51b5012b8b299eb57ec6243612b4559b2c57e84eab"
+  },
+  "tuning_budget": 0,
+  "cohort": "initial-fixed-configurations-not-coverage-v1",
+  "clock": "N * native FP32 timestep; independently verify PxScene timestamp increments",
+  "observations": "normal impulse plus friction-anchor impulse on cube, copied in callback for each simulate/fetchResults interval",
+  "representation_check": "8 FP32 eps times max(abs(expected),1e-8); parameters only",
+  "direction_check_absolute_tolerance_ns": 1e-10,
+  "integration_check": "continuous pre/post states, no post-init state writes, impulse consistency; no final-velocity Euler identity for TGS external-force substeps",
+  "frozen_at": "2026-10-10T01:09:13.217591+00:00"
+}

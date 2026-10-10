@@ -38,6 +38,8 @@ Genesis 1.4.3 原生斜面五组配置分别为 6/9、3/9、0/9、0/9、0/9；�
 
 Newton Physics 1.6.1 原生斜面七配置通过数为 1/9、0/9、0/9、0/9、0/9、1/9、4/9；49 条正例及两个 VBD 负例未通过数值检查。DVI 超时与单独续接均保留；不据此声称引擎排名或可靠覆盖。 [详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md)。
 
+PhysX SDK 5.9.0 原生斜面四配置通过 7/9、7/9、3/9、3/9；四个负例均有效且被拒绝，13 条正例触发冻结数值检查。失败及原始读回全部保留；不计入可靠覆盖，也不推断框架路径表现。[结果与复现](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md) · [精度验证 #163](https://github.com/huangkiki/Dexlab/issues/163)。
+
 <!-- task-coverage:start -->
 
 状态：完整通过 / 部分通过 / 失败 / 未运行 / 接入受阻 / 不支持。点击单元格查看证据或恢复条件。
@@ -98,6 +100,10 @@ Newton Physics 1.6.1 原生斜面七配置通过数为 1/9、0/9、0/9、0/9、0
 | **Newton Physics · Style3D**<br>native particle solver · 1.6.1 / Warp 1.18.0<br>newton-incline-particle-scope-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Newton Physics · ImplicitMPM**<br>native particle solver · 1.6.1 / Warp 1.18.0<br>newton-incline-particle-scope-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **MuJoCo · SolverMuJoCo; algorithm unqualified**<br>Newton wrapper / unqualified · Newton 1.6.1; MuJoCo core unqualified<br>newton-mujoco-wrapper-unqualified | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · PGS / patch friction**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-pgs | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 7/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · PGS / friction every iteration**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-pgs-friction | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 7/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · TGS / patch friction**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-tgs | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · TGS / external forces every iteration**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-tgs-external | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 
 ### 操作任务 · 历史协议与缺项
 

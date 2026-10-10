@@ -1,0 +1,22 @@
+[
+  {
+    "profile": "pgs",
+    "case": "sliding-h0.002",
+    "records_matched": 1002,
+    "updates_matched": 1000,
+    "excluded_fields": [
+      "native_step_wall_s"
+    ],
+    "state_parameters_contacts_exact": true
+  },
+  {
+    "profile": "tgs",
+    "case": "frictionless-h0.002",
+    "records_matched": 1002,
+    "updates_matched": 1000,
+    "excluded_fields": [
+      "native_step_wall_s"
+    ],
+    "state_parameters_contacts_exact": true
+  }
+]

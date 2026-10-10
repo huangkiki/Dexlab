@@ -13,7 +13,7 @@ html_theme.sidebar_primary.remove: true
 
 <div class="research-links"><a href="#comparison">阅读引擎对照 ↗</a><a href="#coverage">查看六引擎覆盖</a><a href="https://github.com/huangkiki/Dexlab/releases">代码与数据 ↗</a></div>
 
-<div class="research-meta">当前数据交付 v0.53.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
+<div class="research-meta">当前数据交付 v0.54.0 · 解析验证 / 固定工况 · 全引擎矩阵尚未完成</div>
 
 ## 现在能做哪些任务
 
@@ -45,6 +45,8 @@ BFGS／SR1 保留每步重组装的设置，实际执行等价 Newton 步骤；�
 Genesis 1.4.3 原生斜面五组配置分别为 6/9、3/9、0/9、0/9、0/9；名义零摩擦被原生接触抬至 .01，七条 CG 一致性失败全部保留并完成停止条件诊断。 [Evidence / 详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.zh-CN.md).
 
 Newton Physics 1.6.1 原生斜面七配置通过数为 1/9、0/9、0/9、0/9、0/9、1/9、4/9；49 条正例及两个 VBD 负例未通过数值检查。DVI 超时与单独续接均保留；不据此声称引擎排名或可靠覆盖。 [详细证据](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md)。
+
+PhysX SDK 5.9.0 原生斜面四配置通过 7/9、7/9、3/9、3/9；四个负例均有效且被拒绝，13 条正例触发冻结数值检查。失败及原始读回全部保留；不计入可靠覆盖，也不推断框架路径表现。[结果与复现](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md) · [精度验证 #163](https://github.com/huangkiki/Dexlab/issues/163)。
 
 <!-- task-coverage:start -->
 
@@ -106,6 +108,10 @@ Newton Physics 1.6.1 原生斜面七配置通过数为 1/9、0/9、0/9、0/9、0
 | **Newton Physics · Style3D**<br>native particle solver · 1.6.1 / Warp 1.18.0<br>newton-incline-particle-scope-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Newton Physics · ImplicitMPM**<br>native particle solver · 1.6.1 / Warp 1.18.0<br>newton-incline-particle-scope-v1 | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [不支持](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **MuJoCo · SolverMuJoCo; algorithm unqualified**<br>Newton wrapper / unqualified · Newton 1.6.1; MuJoCo core unqualified<br>newton-mujoco-wrapper-unqualified | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · PGS / patch friction**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-pgs | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 7/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · PGS / friction every iteration**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-pgs-friction | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 7/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · TGS / patch friction**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-tgs | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **PhysX · TGS / external forces every iteration**<br>native SDK CPU FP32 · 5.9.0<br>physx-incline-v1-tgs-external | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 
 ### 操作任务 · 历史协议与缺项
 
@@ -193,15 +199,15 @@ Genesis 1.4.3 PBD 的驱动夹布／保持工况已运行并失败，见[保留�
 (coverage)=
 ## 六个引擎，覆盖到哪里？
 
-同工况、同评分的覆盖与“有过实验”分开记录。下表对应上述九组斜面协议；版本来自已有报告，不代表当前最新版。缺失项保留在矩阵内，不能计为通过。
+下表索引相同起始物理工况的各批次；各批次独立冻结原生观测与评分，尚不是共同调优/留出集的六引擎排名。历史身份与新准入分开保留；完整 solver 行见上方自动生成矩阵。
 
 | 引擎 | 已记录版本 / solver | 九组配对斜面协议 | 其他已有证据 |
 |---|---|---|---|
 | MuJoCo | 3.15.0 / Newton | 已运行，含失败 | 碰撞、夹持诊断 |
 | SuperDex | 1.0.0 FP64 / [Newton 配置重建；历史遥测边界](https://github.com/huangkiki/Dexlab/blob/main/docs/superdex-solver-audit.zh-CN.md) | 已运行，含失败 | 加载、参数迁移 |
-| Genesis | 1.4.3 / Newton / approximate_implicitfast；[历史配置及读回边界](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.zh-CN.md) | 未运行 | [16 组力限额](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) |
-| Newton Physics | 1.6.1，Warp 1.18.0 / XPBD | 未运行 | [球–平面与负例](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md) |
-| PhysX | 三组 SDK 对照读回 PGS/TGS；[分批配置与原生核心身份缺口 #126](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.zh-CN.md) | 未运行；接入资格待补齐 | [历史接触实验](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.zh-CN.md) |
+| Genesis | 1.4.3 / 五组原生配置 | [已运行，含失败与无效记录](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.zh-CN.md) | 历史力限额证据单列 |
+| Newton Physics | 1.6.1 / Warp 1.18.0 / 七组原生配置 | [已运行，含失败、中断及明确续接](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md) | 球–平面负例另有证据 |
+| PhysX | 原生 SDK 5.9.0 / PGS、TGS 四配置 | [7/9、7/9、3/9、3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md) | 历史框架核心缺口不回填；对照 #152 |
 | Drake | 1.57.0 / SAP / kLagged / hydroelastic | [6/9；滑动失败](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md) | 负例正确拒绝；其他配置 [#151](https://github.com/huangkiki/Dexlab/issues/151) |
 
 历史审计 [#124](https://github.com/huangkiki/Dexlab/issues/124)、[#125](https://github.com/huangkiki/Dexlab/issues/125)、[#126](https://github.com/huangkiki/Dexlab/issues/126)已完成有界搜寻与归因审查：SuperDex 同字节重建、Genesis 匹配源码推导、PhysX 三组场景读回分别保留；缺失遥测不回填，无法支持的精确核心版本及算法因果归因撤回。新实验由各引擎资格子项承接，使用独立记录；审计结项不增加可靠任务覆盖。
