@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-10-10T02:04:27.283232+00:00",
+  "core_version": "1.57.0",
+  "profiles": [
+    {
+      "id": "lagged-hydroelastic",
+      "approximation": "kLagged",
+      "contact_model": "kHydroelastic",
+      "historical_reuse": true
+    },
+    {
+      "id": "lagged-point",
+      "approximation": "kLagged",
+      "contact_model": "kPoint",
+      "historical_reuse": false
+    },
+    {
+      "id": "similar-hydroelastic",
+      "approximation": "kSimilar",
+      "contact_model": "kHydroelastic",
+      "historical_reuse": false
+    },
+    {
+      "id": "similar-point",
+      "approximation": "kSimilar",
+      "contact_model": "kPoint",
+      "historical_reuse": false
+    },
+    {
+      "id": "sap-hydroelastic",
+      "approximation": "kSap",
+      "contact_model": "kHydroelastic",
+      "historical_reuse": false
+    },
+    {
+      "id": "sap-point",
+      "approximation": "kSap",
+      "contact_model": "kPoint",
+      "historical_reuse": false
+    }
+  ],
+  "cases": [
+    {
+      "profile": "lagged-hydroelastic",
+      "case": "sliding-h0.002",
+      "kind": "diagnostic",
+      "protocol": "cases/lagged-hydroelastic/sliding-h0.002.json",
+      "protocol_sha256": "0d57bf4b06f70352ed09350197f94263de0a22aeb52abf4f8ec8679c0ec8051c"
+    },
+    {
+      "profile": "lagged-hydroelastic",
+      "case": "sliding-h0.001",
+      "kind": "diagnostic",
+      "protocol": "cases/lagged-hydroelastic/sliding-h0.001.json",
+      "protocol_sha256": "b9f86fe13d9b9160c6cb731459892d82947ac178c20ec9b31e66c72c31c24534"
+    },
+    {
+      "profile": "lagged-hydroelastic",
+      "case": "sliding-h0.0005",
+      "kind": "diagnostic",
+      "protocol": "cases/lagged-hydroelastic/sliding-h0.0005.json",
+      "protocol_sha256": "ff874ea8daa2e94b8300539646e5ed94bd47bf070a37267fb27280a36e1cf139"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "static-h0.002",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/static-h0.002.json",
+      "protocol_sha256": "0272382b71113965e62fe58016d90b97b2bd7928eadfb4f40b910534cf45acd8"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "static-h0.001",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/static-h0.001.json",
+      "protocol_sha256": "b0d74b93ad4f71334713b07a9572e35c21fdcc8822da64d8e13909d36bda4406"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "static-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/static-h0.0005.json",
+      "protocol_sha256": "47dc3f780ac0f51cf284ae00fa2cfdc78175dc9c898677a919a98765e54a6c85"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "sliding-h0.002",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/sliding-h0.002.json",
+      "protocol_sha256": "37220c4c793c011e39e3eb55316a797da24e4089485c1a0f3b9e838fd1d2f317"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "sliding-h0.001",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/sliding-h0.001.json",
+      "protocol_sha256": "9f24d6cc4395b69ebc4d6f6d8ddc84666e3062ffdfebe9d43fd520f8244b9a7b"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "sliding-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/sliding-h0.0005.json",
+      "protocol_sha256": "fb7668963c1b3d30d449f6ef57b17cb011c922d3213eda9a0f2badac9ecd355a"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "frictionless-h0.002",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/frictionless-h0.002.json",
+      "protocol_sha256": "872b249a690a547189c3902716bfef8f88202a529f8e6656cc12d7458c8ef0a9"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "frictionless-h0.001",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/frictionless-h0.001.json",
+      "protocol_sha256": "39df462cc4b465c53eb565ff958df77aeedb021b16574768fd3fb05fb6259d89"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "frictionless-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/frictionless-h0.0005.json",
+      "protocol_sha256": "eb07ff0213f286b9f8cfbfab4d0befa4ecd69ca8e4dc0910fc6b85904af45375"
+    },
+    {
+      "profile": "lagged-point",
+      "case": "negative-no-floor",
+      "kind": "formal",
+      "protocol": "cases/lagged-point/negative-no-floor.json",
+      "protocol_sha256": "50142b92289d1a744bb4ab380b1746759adde5ace8d7c57b4675406c7690b6ab"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "static-h0.002",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/static-h0.002.json",
+      "protocol_sha256": "7e610a028350bab7af599cd99c46f57152a3842e80d6f8c5052965a96195ebf0"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "static-h0.001",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/static-h0.001.json",
+      "protocol_sha256": "f6dc133d751185a679eec6332d44fa76fd7ad0344b2ef67fe77f64ba1fe14bc1"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "static-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/static-h0.0005.json",
+      "protocol_sha256": "d9e79c9797868eef21fbc73101e70844841e6a83ceefc844ed11856bfb17b49a"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "sliding-h0.002",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/sliding-h0.002.json",
+      "protocol_sha256": "f31b7aad52cf2094c42e8262ee04bb4202572ef192311d7d518eb442b7743a6c"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "sliding-h0.001",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/sliding-h0.001.json",
+      "protocol_sha256": "b2a8050f7647a493ffc7b35da7a6e95d8d891ca9002b892d293006e3ce765c7c"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "sliding-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/sliding-h0.0005.json",
+      "protocol_sha256": "47d7fc29e02fd89e62e587cbb88a204857df0ee878cce57eb2c723ebf7dff7d1"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "frictionless-h0.002",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/frictionless-h0.002.json",
+      "protocol_sha256": "00d8cf35a4aa7f01790d9e648435a2ca15803b534e47518ae861087101676b67"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "frictionless-h0.001",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/frictionless-h0.001.json",
+      "protocol_sha256": "dd775b8d64292e3db134f8a3482743319a1599c93f0a5bcc40d99c6e7a50a0e8"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "frictionless-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/frictionless-h0.0005.json",
+      "protocol_sha256": "c040db9d0c9b30c91b2ab64a719953cfab877ce1db6256b7c68361dd99eced2e"
+    },
+    {
+      "profile": "similar-hydroelastic",
+      "case": "negative-no-floor",
+      "kind": "formal",
+      "protocol": "cases/similar-hydroelastic/negative-no-floor.json",
+      "protocol_sha256": "c9469862021899058d12b8bbd44791ebe74d6e3626333225c33116ee7e1d13dd"
+    },
+    {
+      "profile": "similar-point",
+      "case": "static-h0.002",
+      "kind": "formal",
+      "protocol": "cases/similar-point/static-h0.002.json",
+      "protocol_sha256": "885e2ce2a7b9878789091e944aa7a2fb765deafe2039530019a2a7e7bbe6a7b0"
+    },
+    {
+      "profile": "similar-point",
+      "case": "static-h0.001",
+      "kind": "formal",
+      "protocol": "cases/similar-point/static-h0.001.json",
+      "protocol_sha256": "ae26df502c501aed88397c3426021554d71ba0ce892399ce8a19eb26a5829d4a"
+    },
+    {
+      "profile": "similar-point",
+      "case": "static-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/similar-point/static-h0.0005.json",
+      "protocol_sha256": "9fadb010af11c65158c1b64f61ed5cd9b6bd5563b7e68f803f541322eade567e"
+    },
+    {
+      "profile": "similar-point",
+      "case": "sliding-h0.002",
+      "kind": "formal",
+      "protocol": "cases/similar-point/sliding-h0.002.json",
+      "protocol_sha256": "aad5175e059a6d34b0b6905a39cb450810578c79bedc97cb9ecd84c3f8b36143"
+    },
+    {
+      "profile": "similar-point",
+      "case": "sliding-h0.001",
+      "kind": "formal",
+      "protocol": "cases/similar-point/sliding-h0.001.json",
+      "protocol_sha256": "2c967ff40b25702bba6e4fe147163af42a4b1e0be80b0f33f35d3a78ff1a258c"
+    },
+    {
+      "profile": "similar-point",
+      "case": "sliding-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/similar-point/sliding-h0.0005.json",
+      "protocol_sha256": "d23c5cbf58afe7a04f635a0609b786b686baa8e650cb0016cd1e21225d681290"
+    },
+    {
+      "profile": "similar-point",
+      "case": "frictionless-h0.002",
+      "kind": "formal",
+      "protocol": "cases/similar-point/frictionless-h0.002.json",
+      "protocol_sha256": "66cb60d2b10d34ea64b1db2a6fdb66624b386efdda213190e6ebbab366d1a51b"
+    },
+    {
+      "profile": "similar-point",
+      "case": "frictionless-h0.001",
+      "kind": "formal",
+      "protocol": "cases/similar-point/frictionless-h0.001.json",
+      "protocol_sha256": "15fc1177673731b95d20ef5eac55b98e01e93299e60bc3b0caf29048c1634333"
+    },
+    {
+      "profile": "similar-point",
+      "case": "frictionless-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/similar-point/frictionless-h0.0005.json",
+      "protocol_sha256": "0a0e81475cdec34b5efc64a00332b4cc686233f4435154a7f24202ddbb29a831"
+    },
+    {
+      "profile": "similar-point",
+      "case": "negative-no-floor",
+      "kind": "formal",
+      "protocol": "cases/similar-point/negative-no-floor.json",
+      "protocol_sha256": "3101dcf0000fc1d504ededb5b4998246deb7f6c9ebaff8c6fb8de9a87d0e853f"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "static-h0.002",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/static-h0.002.json",
+      "protocol_sha256": "82e737b346339e027914372ee6ca40cebdf42dd13765a37a7766b2b73deecbd0"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "static-h0.001",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/static-h0.001.json",
+      "protocol_sha256": "67aa1fde4bc4deac42940dc8360702ae1515d00f8ec4a5ce8f9d55edca59fd94"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "static-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/static-h0.0005.json",
+      "protocol_sha256": "2016a32b4228110f868b17a1a5089d43d7cc761c0e6840de50be5084b407a85e"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "sliding-h0.002",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/sliding-h0.002.json",
+      "protocol_sha256": "a21b75fc3f412febd07866bb3dd210d616753cda87f44d6251994e13b7e3d650"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "sliding-h0.001",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/sliding-h0.001.json",
+      "protocol_sha256": "c00789876acadd0c2c7196b99019b2d6bf2e955e99d57bc9590f0d1f49735b8a"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "sliding-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/sliding-h0.0005.json",
+      "protocol_sha256": "cc80db3ca58077b7940c5c747fd1107515c7658a01b9dee47fb4cb3838a3f0c4"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "frictionless-h0.002",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/frictionless-h0.002.json",
+      "protocol_sha256": "cc40944bcf800f46d55a041bb831cb7dd9d3845e4e36b6bf41c996c6972ee157"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "frictionless-h0.001",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/frictionless-h0.001.json",
+      "protocol_sha256": "cdc0f45408f7f87ace3a141b5ac723f4b1ece168d44053587b090808a99bafc2"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "frictionless-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/frictionless-h0.0005.json",
+      "protocol_sha256": "e914ae6589b884f15d5adeae4019cc8d1c5d569ec5aab99c821e779c7c6ca431"
+    },
+    {
+      "profile": "sap-hydroelastic",
+      "case": "negative-no-floor",
+      "kind": "formal",
+      "protocol": "cases/sap-hydroelastic/negative-no-floor.json",
+      "protocol_sha256": "f40a616f993e21689bf55848c2056c86242bb00bb1bc03376f286fcb0c0a0490"
+    },
+    {
+      "profile": "sap-point",
+      "case": "static-h0.002",
+      "kind": "formal",
+      "protocol": "cases/sap-point/static-h0.002.json",
+      "protocol_sha256": "ddd1680239e99b8ed6a1ade6c4ae936d2c0bcaf4d5566e850320124115c56b0a"
+    },
+    {
+      "profile": "sap-point",
+      "case": "static-h0.001",
+      "kind": "formal",
+      "protocol": "cases/sap-point/static-h0.001.json",
+      "protocol_sha256": "c32ff1980604919e316efbb61ffdb406cbd896afd322a5b5edffafafc5ec165f"
+    },
+    {
+      "profile": "sap-point",
+      "case": "static-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/sap-point/static-h0.0005.json",
+      "protocol_sha256": "bba273eb77a34889f44d27f0ac8d2d02d1085403f1819262275894752afb0cb0"
+    },
+    {
+      "profile": "sap-point",
+      "case": "sliding-h0.002",
+      "kind": "formal",
+      "protocol": "cases/sap-point/sliding-h0.002.json",
+      "protocol_sha256": "1281f2929891d793c6e40d5f1fa9586b772f71f7e84c0ffd6c0d04fe0d604242"
+    },
+    {
+      "profile": "sap-point",
+      "case": "sliding-h0.001",
+      "kind": "formal",
+      "protocol": "cases/sap-point/sliding-h0.001.json",
+      "protocol_sha256": "db133a0aab29887ebd77e7ca5d69d7493b997cf35dddb5d031fb0a9f6d09af06"
+    },
+    {
+      "profile": "sap-point",
+      "case": "sliding-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/sap-point/sliding-h0.0005.json",
+      "protocol_sha256": "6388deff523e4696dd8e15c0c939a85d0d31b09efeaa7f85af9a886a8a9760d4"
+    },
+    {
+      "profile": "sap-point",
+      "case": "frictionless-h0.002",
+      "kind": "formal",
+      "protocol": "cases/sap-point/frictionless-h0.002.json",
+      "protocol_sha256": "013f58b3507b4bf3673ff40a0195399d55208a3c69f6a55857e43beceb434290"
+    },
+    {
+      "profile": "sap-point",
+      "case": "frictionless-h0.001",
+      "kind": "formal",
+      "protocol": "cases/sap-point/frictionless-h0.001.json",
+      "protocol_sha256": "dcc3140c01a85cb5886c23a49b892bcef005917efa55c227ec5fd8132c5b9424"
+    },
+    {
+      "profile": "sap-point",
+      "case": "frictionless-h0.0005",
+      "kind": "formal",
+      "protocol": "cases/sap-point/frictionless-h0.0005.json",
+      "protocol_sha256": "277e49e63ca131b4aa8b1e49c1150917d0a705702e1ea9e9bfb7b5ad0362e069"
+    },
+    {
+      "profile": "sap-point",
+      "case": "negative-no-floor",
+      "kind": "formal",
+      "protocol": "cases/sap-point/negative-no-floor.json",
+      "protocol_sha256": "ee32ab01d65c7bda2edfe6e7da049ec437e2348b23062ff4ad1b793e4682a02e"
+    }
+  ],
+  "formal_native_starts": 50,
+  "formal_updates": 115000,
+  "diagnostic_starts": 3,
+  "diagnostic_updates": 7000,
+  "source_hashes": {
+    "src/dexlab/drake_incline.py": "8b2b65a22fc00dca7c4a10a716740d293a96f4110efe4927f29042387718f35e",
+    "src/dexlab/drake_incline_score.py": "66130822a2d6f58b29039373e58453a7c19d8dd5fb19eab1d6eedacf4e11cea7",
+    "src/dexlab/incline_score.py": "655aa7bd4f4fc23ebd2e040579fc647cf8075f53e3fc375b716af36115551b52",
+    "src/dexlab/apple_admission.py": "ca6016990c67239f618c7c274b7c878be8dbb577f6611929e61df0f324d9290d",
+    "src/dexlab/cloth_engines.py": "e650f2232e4b9f362209a87419eea99ab360b53f0f631ee08198c43b41016cae"
+  },
+  "limits": {
+    "static_displacement_m": 0.001,
+    "static_speed_m_s": 0.001,
+    "sliding_velocity_rmse_m_s": 0.01,
+    "sliding_position_rmse_m": 0.01,
+    "acceleration_error_m_s2": 0.05,
+    "rotation_rad": 0.01,
+    "penetration_m": 0.001,
+    "force_balance_rmse_n": 0.01
+  },
+  "historical_reference": "https://github.com/huangkiki/Dexlab/releases/tag/v0.49.0",
+  "fallback_scope": "API supported; no extra effective row for this fixed rigid/compliant asset. Three 20-step static native pairs are exactly equal. Other asset pairs may fall back.",
+  "record_only": true
+}

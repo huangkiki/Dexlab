@@ -45,7 +45,7 @@ def validate_runtime(protocol, proof, runtime):
 def validate_admission(protocol, case, admission):
     config = protocol['drake']
     expected = dict(timestep=case['timestep'], solver='kSap', approximation=config['approximation'],
-                    contact_model='kHydroelastic', sampled_output=True,
+                    contact_model=config.get('contact_model', 'kHydroelastic'), sampled_output=True,
                     near_rigid_threshold=config['near_rigid_threshold'], num_positions=7, num_velocities=6)
     if any(admission.get(key) != value for key, value in expected.items()):
         raise ValueError('Native solver/contact/clock configuration mismatch')
@@ -74,6 +74,10 @@ def validate_admission(protocol, case, admission):
         if props['material']['coulomb_friction'] != friction:
             raise ValueError('Native material friction overwritten')
         require_close(props['material']['hunt_crossley_dissipation'], config['dissipation_s_m'], 'dissipation')
+        for setting, native_name in [('point_stiffness_n_m', 'point_contact_stiffness'),
+                                     ('relaxation_time_s', 'relaxation_time')]:
+            if setting in config:
+                require_close(props['material'].get(native_name), config[setting], setting)
     plane_props = admission['plane_properties']
     if plane_props is not None:
         require_close(plane_props['hydroelastic']['hydroelastic_modulus'], config['hydroelastic_modulus_pa'], 'modulus')
@@ -105,16 +109,71 @@ def validate_trace(protocol, case, trace, contact_rows):
         contacts = row['contacts']
         if len(contacts) != trace['contact_count'][index]:
             raise ValueError('Lost contact patch')
-        total = np.zeros(3)
+        total, torque = np.zeros(3), np.zeros(3)
         for contact in contacts:
-            for key in ('force_on_cube_world', 'torque_on_cube_at_centroid_world', 'centroid_world'):
+            point = protocol['drake'].get('effective_contact', 'hydroelastic') == 'point'
+            if contact.get('kind', 'hydroelastic') != ('point' if point else 'hydroelastic'):
+                raise ValueError('Wrong effective contact path')
+            keys = (('force_on_cube_world', 'force_on_B_world', 'contact_point_world',
+                     'witness_A_world', 'witness_B_world', 'normal_BA_world') if point else
+                    ('force_on_cube_world', 'torque_on_cube_at_centroid_world', 'centroid_world'))
+            for key in keys:
                 value = np.asarray(contact[key])
                 if value.shape != (3,) or not np.isfinite(value).all():
                     raise ValueError('Malformed contact observation')
-            if not np.isfinite(contact['area_m2']) or contact['area_m2'] <= 0:
-                raise ValueError('Invalid native surface area')
-            total += contact['force_on_cube_world']
+            force = np.asarray(contact['force_on_cube_world'])
+            if point:
+                if type(contact['cube_is_A']) is not bool:
+                    raise ValueError('Missing native pair orientation')
+                sign = -1 if contact['cube_is_A'] else 1
+                require_close(force, sign * np.asarray(contact['force_on_B_world']), 'point force sign', 1e-7)
+                angle = np.deg2rad(case['angle_deg'])
+                normal = np.array([np.sin(angle), 0., np.cos(angle)])
+                require_close(-sign * np.asarray(contact['normal_BA_world']), normal, 'point normal', 1e-10)
+                for key in ('depth_m', 'slip_speed_m_s', 'separation_speed_m_s'):
+                    if not np.isfinite(contact[key]):
+                        raise ValueError('Nonfinite point contact scalar')
+                if contact['depth_m'] <= 0 or contact['slip_speed_m_s'] < 0:
+                    raise ValueError('Invalid native point penetration or slip')
+                require_close(np.asarray(contact['witness_B_world']) - contact['witness_A_world'],
+                              np.asarray(contact['normal_BA_world']) * contact['depth_m'],
+                              'point witness depth', 1e-10)
+                # Both authored point stiffnesses are equal, so the native
+                # stiffness-weighted contact point is their midpoint.
+                position = np.asarray(contact['contact_point_world'])
+                require_close(position, (np.asarray(contact['witness_A_world']) +
+                                         contact['witness_B_world']) / 2, 'point location', 1e-10)
+                contact_torque = np.zeros(3)
+            else:
+                if not np.isfinite(contact['area_m2']) or contact['area_m2'] <= 0:
+                    raise ValueError('Invalid native surface area')
+                position = np.asarray(contact['centroid_world'])
+                contact_torque = np.asarray(contact['torque_on_cube_at_centroid_world'])
+                if protocol['drake'].get('record_surface_geometry', False):
+                    faces = contact['faces']
+                    if not faces:
+                        raise ValueError('Missing hydroelastic geometry observations')
+                    area = 0.
+                    centroid_sum = np.zeros(3)
+                    for face in faces:
+                        for key in ('centroid_world', 'normal_into_cube_world', 'plane_pressure_gradient_world'):
+                            if np.asarray(face[key]).shape != (3,) or not np.isfinite(face[key]).all():
+                                raise ValueError('Malformed hydroelastic face')
+                        if (not np.isfinite(face['area_m2']) or face['area_m2'] < 0
+                                or not np.isfinite(face['pressure_pa'])):
+                            raise ValueError('Malformed face area/pressure')
+                        area += face['area_m2']
+                        centroid_sum += face['area_m2'] * np.asarray(face['centroid_world'])
+                        if face['area_m2'] > 1e-14:  # Native quadrature eligibility.
+                            require_close(np.linalg.norm(face['normal_into_cube_world']), 1., 'face normal norm', 1e-10)
+                    require_close(area, contact['area_m2'], 'face area sum', 1e-12)
+                    require_close(centroid_sum / area, position, 'face centroid', 1e-10)
+            total += force
+            torque += np.cross(position - states[index, 1:4], force) + contact_torque
         require_close(total, trace['forces'][index], 'surface-force sum', 1e-7)
+        if protocol.get('observation_schema') == 2:
+            require_close(torque, trace['generalized_contact_forces'][index, :3],
+                          'contact/generalized-torque ledger', 1e-7)
     if case.get('negative_no_floor', False) and np.any(trace['contact_count']):
         raise ValueError('Unexpected support in the no-floor control')
 

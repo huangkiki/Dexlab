@@ -1,0 +1,64 @@
+{
+  "observations": [
+    {
+      "case": "sliding-h0.0005",
+      "full_force_reconstruction_max_error_n": 3.929936104101349e-13,
+      "full_force_reconstruction_rmse_n": 1.2116082278654907e-14,
+      "normal_component_mean_n": 0.5150229486741729,
+      "friction_component_mean_tangent_n": -0.36127357890411077,
+      "native_force_mean_tangent_n": -0.36139158966806806,
+      "lagged_to_updated_normal_counterfactual_force_mean_tangent_n": -0.2396001893131591,
+      "epsilon_soft_range_m_s": [
+        0.0001,
+        0.0001
+      ],
+      "face_normal_dot_plane_range": [
+        3.453666972255018e-16,
+        1.0
+      ],
+      "side_area_max_m2": 1.6154137967117625e-06,
+      "side_elastic_force_max_n": 0.02043016199639022
+    },
+    {
+      "case": "sliding-h0.001",
+      "full_force_reconstruction_max_error_n": 1.8708088352483595e-13,
+      "full_force_reconstruction_rmse_n": 1.2438415557433029e-14,
+      "normal_component_mean_n": 0.5147394032678432,
+      "friction_component_mean_tangent_n": -0.36058886344544877,
+      "native_force_mean_tangent_n": -0.3604992942323616,
+      "lagged_to_updated_normal_counterfactual_force_mean_tangent_n": -0.20631110430541624,
+      "epsilon_soft_range_m_s": [
+        0.0001,
+        0.00010626749194010842
+      ],
+      "face_normal_dot_plane_range": [
+        5.473569875878264e-16,
+        1.0
+      ],
+      "side_area_max_m2": 1.5840474781746523e-06,
+      "side_elastic_force_max_n": 0.0193137487472013
+    },
+    {
+      "case": "sliding-h0.002",
+      "full_force_reconstruction_max_error_n": 2.3648261877361944e-13,
+      "full_force_reconstruction_rmse_n": 1.8553557338363512e-14,
+      "normal_component_mean_n": 0.5156929123795537,
+      "friction_component_mean_tangent_n": -0.3618463617559195,
+      "native_force_mean_tangent_n": -0.36075277050156124,
+      "lagged_to_updated_normal_counterfactual_force_mean_tangent_n": -0.17870483114556032,
+      "epsilon_soft_range_m_s": [
+        0.0001,
+        0.0005120329030163911
+      ],
+      "face_normal_dot_plane_range": [
+        1.8676438536304054e-16,
+        1.0
+      ],
+      "side_area_max_m2": 3.8116472670761492e-06,
+      "side_elastic_force_max_n": 0.11246478946755521
+    }
+  ],
+  "acceptance_changed": false,
+  "source_sha256": "b43bc53ae0358e0a2b7afdd6dc74bddddb37c484fa1790ad3720fd494b4c98f5",
+  "scope": "Source-derived reconstruction, not private native readbacks. The counterfactual holds observed states fixed; it is not a kSimilar simulation. Includes side-face normals and geometry at the update start."
+}

@@ -95,7 +95,9 @@ class DrakeIncline:
         self.plant, self.graph = AddMultibodyPlantSceneGraph(builder, case['timestep'])
         plant, config = self.plant, protocol['drake']
         plant.set_discrete_contact_approximation(getattr(DiscreteContactApproximation, config['approximation']))
-        plant.set_contact_model(ContactModel.kHydroelastic)
+        plant.set_contact_model(getattr(ContactModel, config.get('contact_model', 'kHydroelastic')))
+        self.point_contact = config.get('effective_contact', 'hydroelastic') == 'point'
+        self.record_surface_geometry = config.get('record_surface_geometry', False)
         plant.SetUseSampledOutputPorts(True)
         plant.set_stiction_tolerance(config['stiction_tolerance_m_s'])
         plant.set_sap_near_rigid_threshold(config['near_rigid_threshold'])
@@ -107,7 +109,10 @@ class DrakeIncline:
         friction = CoulombFriction(case['friction'], case['friction'])
         cube_props, plane_props = ProximityProperties(), ProximityProperties()
         for props in (cube_props, plane_props):
-            AddContactMaterial(properties=props, dissipation=config['dissipation_s_m'], friction=friction)
+            AddContactMaterial(properties=props, dissipation=config['dissipation_s_m'],
+                               friction=friction, point_stiffness=config.get('point_stiffness_n_m'))
+            if 'relaxation_time_s' in config:
+                props.AddProperty('material', 'relaxation_time', config['relaxation_time_s'])
         AddRigidHydroelasticProperties(config['resolution_hint_m'], cube_props)
         AddCompliantHydroelasticPropertiesForHalfSpace(
             config['slab_thickness_m'], config['hydroelastic_modulus_pa'], plane_props)
@@ -168,9 +173,30 @@ class DrakeIncline:
         before = time.perf_counter()
         state = self.state()
         results = self.plant.get_contact_results_output_port().Eval(self.plant_context)
-        if results.num_point_pair_contacts() or results.num_deformable_contacts():
-            raise ValueError('Unexpected contact model in strict hydroelastic qualification')
+        if (results.num_deformable_contacts()
+                or (self.point_contact and results.num_hydroelastic_contacts())
+                or (not self.point_contact and results.num_point_pair_contacts())):
+            raise ValueError('Unexpected effective contact path')
         contacts, force = [], np.zeros(3)
+        for index in range(results.num_point_pair_contacts()):
+            info = results.point_pair_contact_info(index)
+            pair = info.point_pair()
+            if ({pair.id_A, pair.id_B} != {self.cube_id, self.plane_id}
+                    or {info.bodyA_index(), info.bodyB_index()} != {
+                        self.body.index(), self.plant.world_body().index()}):
+                raise ValueError('Unexpected point contact pair')
+            cube_is_A = pair.id_A == self.cube_id
+            if cube_is_A != (info.bodyA_index() == self.body.index()):
+                raise ValueError('Body and geometry contact ordering disagree')
+            linear = (-1 if cube_is_A else 1) * info.contact_force()
+            force += linear
+            contacts.append(dict(
+                kind='point', force_on_cube_world=linear.tolist(),
+                force_on_B_world=info.contact_force().tolist(), cube_is_A=cube_is_A,
+                contact_point_world=info.contact_point().tolist(),
+                witness_A_world=pair.p_WCa.tolist(), witness_B_world=pair.p_WCb.tolist(),
+                normal_BA_world=pair.nhat_BA_W.tolist(), depth_m=pair.depth,
+                slip_speed_m_s=info.slip_speed(), separation_speed_m_s=info.separation_speed()))
         for index in range(results.num_hydroelastic_contacts()):
             info = results.hydroelastic_contact_info(index)
             surface = info.contact_surface()
@@ -180,10 +206,23 @@ class DrakeIncline:
             spatial = info.F_Ac_W()
             linear = sign * spatial.translational()
             force += linear
-            contacts.append(dict(force_on_cube_world=linear.tolist(),
+            contacts.append(dict(kind='hydroelastic', force_on_cube_world=linear.tolist(),
                                  torque_on_cube_at_centroid_world=(sign * spatial.rotational()).tolist(),
                                  centroid_world=surface.centroid().tolist(),
                                  area_m2=surface.total_area()))
+            if self.record_surface_geometry:
+                field = surface.tri_e_MN() if surface.is_triangle() else surface.poly_e_MN()
+                faces = []
+                for face in range(surface.num_faces()):
+                    centroid = surface.centroid(face)
+                    faces.append(dict(
+                        area_m2=surface.area(face), centroid_world=centroid.tolist(),
+                        normal_into_cube_world=(sign * surface.face_normal(face)).tolist(),
+                        pressure_pa=(field.Evaluate(face, np.full(3, 1 / 3)) if surface.is_triangle()
+                                     else field.EvaluateCartesian(face, centroid)),
+                        plane_pressure_gradient_world=(surface.EvaluateGradE_N_W(face) if sign == 1
+                                                       else surface.EvaluateGradE_M_W(face)).tolist()))
+                contacts[-1]['faces'] = faces
         generalized = self.plant.get_generalized_contact_forces_output_port(self.instance).Eval(self.plant_context)
         return state, force, np.array(generalized), contacts, native_s, time.perf_counter() - before
 
@@ -231,7 +270,8 @@ def run_case(protocol, case, destination, *, admission_only=False):
             observation_s=observation_s, total_case_wall_s=time.perf_counter() - start,
             force_epoch='Sampled dynamics from the update [states[i].time, states[i+1].time]; no fresh end-state solve',
             contact_geometry_epoch='Geometry used by that update; centroid is not a new end-state query',
-            force_scope='Integrated hydroelastic surface force; quadrature forces and achieved iterations unavailable',
+            force_scope=('Point-pair force on B signed onto cube' if protocol['drake'].get('effective_contact') == 'point'
+                         else 'Integrated hydroelastic surface force; quadrature forces and achieved iterations unavailable'),
             hashes={name: file_hash(destination / name) for name in ('admission.json', 'trace.npz', 'contacts.jsonl.gz')},
         ))
 
@@ -244,6 +284,7 @@ def main():
     parser.add_argument('--proof', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--admission-only', action='store_true')
+    parser.add_argument('--record-only', action='store_true', help='Defer independent physical scoring until acquisition ends')
     args = parser.parse_args()
     protocol = json.loads(args.protocol.read_bytes())
     args.output.mkdir(parents=True, exist_ok=False)
@@ -267,9 +308,10 @@ def main():
                 raise ValueError('Source changed during the frozen batch')
             run_case(protocol, case, args.output / case['id'], admission_only=args.admission_only)
             if not args.admission_only:
-                result = score_record(protocol, case, args.output / case['id'])
+                result = (dict(id=case['id'], recorded=True) if args.record_only else
+                          score_record(protocol, case, args.output / case['id']))
                 results.append(result)
-                print(case['id'], result['passed'], flush=True)
+                print(case['id'], result.get('passed', 'recorded'), flush=True)
     except BaseException as exc:
         error = f'{type(exc).__name__}: {exc}'
         raise

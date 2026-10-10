@@ -1,0 +1,376 @@
+{
+  "campaign-v1": {
+    "returncode": 1,
+    "service_wall_s": 0.9485160330077633,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-8g-4c",
+      "measurement": {
+        "sha256": "23cfd69e9cfba6d81d72fe7a16463fbc9976436fea5ef0a55445172971916147",
+        "peak_mib": 179.14453125
+      },
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "8589934592",
+      "memory.high": "7516192768",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "8843264",
+      "memory.peak": "9445376",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 39342\nuser_usec 30184\nsystem_usec 9157\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "9175040",
+      "memory.peak": "187604992",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 797077\nuser_usec 631229\nsystem_usec 165848\ncore_sched.force_idle_usec 0\nnr_periods 10\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=0 wbytes=36864 rios=0 wios=9 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=132\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=132",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4649\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4649"
+    },
+    "sampled_peak_cpu_cores": 1.0022949981874059,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "campaign-v2": {
+    "returncode": 0,
+    "service_wall_s": 43.69608289998723,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-8g-4c",
+      "measurement": {
+        "sha256": "23cfd69e9cfba6d81d72fe7a16463fbc9976436fea5ef0a55445172971916147",
+        "peak_mib": 179.14453125
+      },
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "8589934592",
+      "memory.high": "7516192768",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "9113600",
+      "memory.peak": "9494528",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 29182\nuser_usec 24311\nsystem_usec 4871\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "57384960",
+      "memory.peak": "236654592",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 40777448\nuser_usec 34993001\nsystem_usec 5784447\ncore_sched.force_idle_usec 0\nnr_periods 427\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=0 wbytes=46239744 rios=0 wios=843 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6302\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6302",
+      "io.pressure": "some avg10=1.17 avg60=0.75 avg300=0.19 total=1465167\nfull avg10=1.17 avg60=0.75 avg300=0.19 total=1465167"
+    },
+    "sampled_peak_cpu_cores": 1.0384241678077013,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "lagged-diagnostic-v1": {
+    "returncode": 0,
+    "service_wall_s": 4.957879353954922,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-16g-4c",
+      "measurement": null,
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "8925184",
+      "memory.peak": "9568256",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 48256\nuser_usec 40160\nsystem_usec 8096\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "16601088",
+      "memory.peak": "191528960",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 4002812\nuser_usec 3603131\nsystem_usec 399680\ncore_sched.force_idle_usec 0\nnr_periods 46\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=0 wbytes=122880 rios=0 wios=30 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=498\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=498",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1422\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1422"
+    },
+    "sampled_peak_cpu_cores": 1.0043070607335214,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "repeat-v1": {
+    "returncode": 0,
+    "service_wall_s": 1.490478088031523,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-16g-4c",
+      "measurement": null,
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "9367552",
+      "memory.peak": "9744384",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 27420\nuser_usec 19506\nsystem_usec 7914\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "9936896",
+      "memory.peak": "187850752",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 1389235\nuser_usec 1104186\nsystem_usec 285048\ncore_sched.force_idle_usec 0\nnr_periods 15\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=0 wbytes=65536 rios=0 wios=16 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=226\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=226",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=159\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=159"
+    },
+    "sampled_peak_cpu_cores": 1.0047602050729942,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "admission-v1": {
+    "returncode": 0,
+    "service_wall_s": 5.0049393469817005,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-16g-4c",
+      "measurement": null,
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "8978432",
+      "memory.peak": "9347072",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 23467\nuser_usec 17522\nsystem_usec 5944\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "10014720",
+      "memory.peak": "187711488",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 4644316\nuser_usec 3542105\nsystem_usec 1102211\ncore_sched.force_idle_usec 0\nnr_periods 51\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "259:0 rbytes=139264 wbytes=0 rios=34 wios=0 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=552960 rios=0 wios=69 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1376",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6510\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6510"
+    },
+    "sampled_peak_cpu_cores": 1.0037354321272747,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "probe-v1": {
+    "returncode": 0,
+    "service_wall_s": 5.307552082987968,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-16g-4c",
+      "measurement": null,
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "9244672",
+      "memory.peak": "9609216",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 32640\nuser_usec 23666\nsystem_usec 8974\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "10129408",
+      "memory.peak": "187990016",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 4666503\nuser_usec 3596011\nsystem_usec 1070492\ncore_sched.force_idle_usec 0\nnr_periods 51\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "259:0 rbytes=131072 wbytes=0 rios=32 wios=0 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=532480 rios=0 wios=78 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1036\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1036",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5566\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5566"
+    },
+    "sampled_peak_cpu_cores": 1.0043430353005702,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "probe-v2": {
+    "returncode": 0,
+    "service_wall_s": 5.7284628440393135,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-16g-4c",
+      "measurement": null,
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "8863744",
+      "memory.peak": "9506816",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 28229\nuser_usec 18030\nsystem_usec 10199\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "10485760",
+      "memory.peak": "187846656",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 4676534\nuser_usec 3586545\nsystem_usec 1089989\ncore_sched.force_idle_usec 0\nnr_periods 52\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=0 wbytes=622592 rios=0 wios=80 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=748\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=748",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5348\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5348"
+    },
+    "sampled_peak_cpu_cores": 1.0031480112103301,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  },
+  "qualification-v1": {
+    "returncode": 0,
+    "service_wall_s": 2.9477047210093588,
+    "resource_plan": {
+      "schema_version": 1,
+      "profile": "adaptive-16g-4c",
+      "measurement": null,
+      "complex_model": false,
+      "cpu_cores": 4,
+      "peak_margin": 1.5,
+      "desktop_reserve_gib": 8
+    },
+    "effective_limits": {
+      "memory.max": "17179869184",
+      "memory.high": "16106127360",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "initial": {
+      "memory.current": "8953856",
+      "memory.peak": "9326592",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 38341\nuser_usec 28160\nsystem_usec 10180\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0"
+    },
+    "final": {
+      "memory.current": "12419072",
+      "memory.peak": "288030720",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "cpu.stat": "usage_usec 1361340\nuser_usec 1052263\nsystem_usec 309077\ncore_sched.force_idle_usec 0\nnr_periods 29\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "io.stat": "8:0 rbytes=49152 wbytes=57344 rios=1 wios=14 dbytes=0 dios=0"
+    },
+    "final_pressure": {
+      "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+      "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=327\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=327",
+      "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=16546\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=16546"
+    },
+    "sampled_peak_cpu_cores": 1.0050822468284473,
+    "gpu_memory_note": "CPU runtime. Whole-device VRAM occupancy is not process memory; device identifiers are private."
+  }
+}
