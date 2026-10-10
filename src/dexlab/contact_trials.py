@@ -181,12 +181,12 @@ def run_trial(root, candidate_id, *, timeout_s=900, retry_reason=None):
     except Exception as exc:
         result['error'] = f'{type(exc).__name__}: {exc}'
     finally:
-        result['wall_s'] = time.monotonic() - started
         result['outcome'] = outcome
-        result['within_reserved_wall'] = result['wall_s'] <= timeout_s
-        result['passed'] = result['passed'] and result['within_reserved_wall']
         result['artifact_sha256'] = {str(p.relative_to(directory)): digest(p.read_bytes())
                                      for p in sorted(directory.rglob('*')) if p.is_file()}
+        result['wall_s'] = time.monotonic() - started
+        result['within_reserved_wall'] = result['wall_s'] <= timeout_s
+        result['passed'] = result['passed'] and result['within_reserved_wall']
         raw_result = json_bytes(result)
         publish(directory / 'result.json', raw_result)
         budget.finish(attempt, wall_s=result['wall_s'], evidence_sha256=digest(raw_result), outcome=outcome)
@@ -212,21 +212,27 @@ def recover(root):
     directory = root / 'attempts' / f'{reservation["attempt"]:04d}'
     process = directory / 'process.json'
     # Parent PID covers the crash window before publishing the child PID.
-    targets = [(reservation['handle']['parent_pid'], False)]
+    targets = [reservation['handle']['parent_pid']]
     if process.exists():
-        targets.append((json.loads(process.read_bytes())['pid'], False))
-    for pid, group in targets:
+        targets.append(json.loads(process.read_bytes())['pid'])
+    for pid in targets:
         try:
-            (os.killpg if group else os.kill)(pid, 0)
+            os.kill(pid, 0)
         except ProcessLookupError:
             continue
         raise RuntimeError('Recorded process is still present; recover it before closing the attempt')
     directory.mkdir(exist_ok=True)
     receipt = dict(outcome='interrupted', wall_source='full reserved allowance',
                    artifact_sha256={str(p.relative_to(directory)): digest(p.read_bytes())
-                                     for p in directory.rglob('*') if p.is_file()})
+                                     for p in sorted(directory.rglob('*')) if p.is_file()
+                                     and p != directory / 'recovery.json'})
     raw = json_bytes(receipt)
-    publish(directory / 'recovery.json', raw)
+    recovery = directory / 'recovery.json'
+    if recovery.exists():
+        if recovery.read_bytes() != raw:
+            raise ValueError('Recovery evidence changed before ledger settlement')
+    else:
+        publish(recovery, raw)
     budget.finish(reservation['attempt'], wall_s=None, evidence_sha256=digest(raw), outcome='interrupted')
     return receipt
 

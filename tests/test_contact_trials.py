@@ -104,3 +104,14 @@ class ContactTrialTests(unittest.TestCase):
         with patch('dexlab.contact_trials.sources',return_value={}):
             with self.assertRaisesRegex(ValueError,'Source changed'): run_trial(root,'one',timeout_s=5)
         self.assertEqual(budget.status()['starts_used'],0)
+
+    def test_recovery_can_resume_after_receipt_before_ledger_settlement(self):
+        root=self.root/'run';budget=create(root,self.manifest)
+        budget.reserve('one',{'parent_pid':99999999,**self.handle},timeout_s=5)
+        with patch.object(MigrationBudget,'finish',side_effect=OSError('simulated interruption')):
+            with self.assertRaises(OSError): recover(root)
+        self.assertTrue((root/'attempts/0000/recovery.json').is_file())
+        self.assertIsNone(budget.status()['attempts'][0]['terminal'])
+        recover(root)
+        self.assertEqual(budget.status()['starts_used'],1)
+        self.assertEqual(budget.status()['wall_charged_or_reserved_s'],5)

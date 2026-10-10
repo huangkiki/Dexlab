@@ -1,4 +1,4 @@
----
+# 历史证据与完整配置矩阵
 html_theme.sidebar_secondary.remove: true
 html_theme.sidebar_primary.remove: true
 ---

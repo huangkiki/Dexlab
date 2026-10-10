@@ -65,16 +65,16 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 :hidden:
 :maxdepth: 1
 
-experience
-diagnosis
-selection
-coverage
-quickstart
-experiments
-results
-engines
-dexterity
-research-ledger
-benchmark
-contributing
+Findings <experience>
+Diagnosis <diagnosis>
+Selection <selection>
+Coverage <coverage>
+Quickstart <quickstart>
+Experiments <experiments>
+Results <results>
+Engines <engines>
+Roadmap <dexterity>
+Ledger <research-ledger>
+Benchmark <benchmark>
+Contributing <contributing>
 ```

@@ -65,16 +65,16 @@
 :hidden:
 :maxdepth: 1
 
-experience
-diagnosis
-selection
-coverage
-quickstart
-experiments
-results
-engines
-dexterity
-research-ledger
-benchmark
-contributing
+研究经验 <experience>
+诊断方法 <diagnosis>
+场景选型 <selection>
+完整覆盖 <coverage>
+安装复现 <quickstart>
+实验目录 <experiments>
+研究结果 <results>
+引擎与模型 <engines>
+研究路线 <dexterity>
+研究账本 <research-ledger>
+基准 <benchmark>
+参与贡献 <contributing>
 ```
