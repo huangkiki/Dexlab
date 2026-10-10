@@ -29,7 +29,9 @@ html_theme.sidebar_primary.remove: true
 | 机器人夹布、抬升与释放 | MuJoCo 3.14 的指定 9 s 开发案例通过有限协议；自接触接近阈值，尚无稳健性结论 | [通过配置、失败与命令](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.zh-CN.md) |
 | 刚体球—平面基础接触 | Newton Physics 1.6.1 / XPBD 的正常、重复及禁碰撞对照完成准入；未覆盖机器人抓取 | [协议、记录与复核](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-contact.zh-CN.md) |
 
-双手折布尚未证明成功。Drake 1.57.0 首轮斜面九例中六例通过、三例滑动失败，负例正确拒绝；[完整记录](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md)。统一驱动接入差异已由 [#143](https://github.com/huangkiki/Dexlab/issues/143) 验证，完整研究批次仍见 [#130](https://github.com/huangkiki/Dexlab/issues/130)。
+双手折布尚未证明成功。Isaac Sim／MJWarp3.11.0诊断现已保存精确转换模型及原生GPU接触力。最终四个短例正常退出，两个无地板负例通过，两个支撑正例仍未通过动量检查；不增加可靠任务覆盖。[读回问题与证据](https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.zh-CN.md)。
+
+Drake 1.57.0 首轮斜面九例中六例通过、三例滑动失败，负例正确拒绝；[完整记录](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-incline-results.zh-CN.md)。统一驱动接入差异已由 [#143](https://github.com/huangkiki/Dexlab/issues/143) 验证，完整研究批次仍见 [#130](https://github.com/huangkiki/Dexlab/issues/130)。
 
 **我们的评价标准：更好的引擎，应能可靠覆盖更多类型的任务。** 我们同时看任务类型、物理可信度、跨工况稳定性和执行成本：能在保留判据的前提下可靠完成更多任务类型，才扩大该配置的已验证能力。安装成功、适配器声明、同一任务的多个求解器或重复运行都不增加任务类型；历史不同协议的通过数不合并成通用排行榜。
 
@@ -119,6 +121,8 @@ Drake 1.57.0 的三种 SAP 近似与点/hydroelastic接触已有六配置斜面�
 | **Drake · SAP / kSimilar / point**<br>native CPU FP64 · 1.57.0<br>drake-contact-paths-v1-similar-point | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [失败 0/9](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Drake · SAP / kSap / hydroelastic**<br>native CPU FP64 · 1.57.0<br>drake-contact-paths-v1-sap-hydroelastic | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 3/9](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
 | **Drake · SAP / kSap / point**<br>native CPU FP64 · 1.57.0<br>drake-contact-paths-v1-sap-point | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [部分通过 2/9](https://github.com/huangkiki/Dexlab/blob/main/docs/drake-contact-paths-results.md) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) | [未运行](https://github.com/huangkiki/Dexlab/issues/121) |
+| **MuJoCo · MJWarp Newton / pyramidal / Newton contacts**<br>Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 · 3.11.0<br>isaac-mjwarp-clock-v4 | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) |
+| **MuJoCo · MJWarp Newton / pyramidal / MJWarp contacts**<br>Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 · 3.11.0<br>isaac-mjwarp-clock-v4 | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) | [未运行](https://github.com/huangkiki/Dexlab/issues/152) |
 
 ### 操作任务 · 历史协议与缺项
 

@@ -10,6 +10,97 @@ import tempfile
 from pathlib import Path
 
 
+def conversion_parameters(model):
+    """Read the compiled model, including frames and drives often changed by import.
+
+    This is an initialization readback. A GPU solver can set its own effective
+    timestep later; this snapshot must not be presented as an observed clock.
+    """
+    import mujoco
+    from dexlab.incline_run import native_readback
+
+    data = mujoco.MjData(model)
+    mujoco.mj_forward(model, data)
+    values = native_readback(model, data)
+    for name in (
+        'body_pos', 'body_quat', 'qpos0', 'jnt_type', 'jnt_bodyid', 'jnt_pos',
+        'jnt_axis', 'jnt_range', 'jnt_limited', 'jnt_stiffness',
+        'actuator_trntype', 'actuator_trnid', 'actuator_dyntype',
+        'actuator_gaintype', 'actuator_biastype', 'actuator_dynprm',
+        'actuator_gainprm', 'actuator_biasprm', 'actuator_gear',
+        'actuator_ctrlrange', 'actuator_forcerange',
+    ):
+        values[name] = getattr(model, name).tolist()
+    return values
+
+
+def parameter_differences(before, after):
+    """Report exact structural changes and absolute errors; apply no tolerance.
+
+    A missing field or changed shape must never masquerade as a zero error.
+    Physical acceptance and unit-specific limits belong to the frozen protocol.
+    """
+    import numpy as np
+
+    if before.keys() != after.keys():
+        raise ValueError('Parameter fields differ')
+    differences = {}
+    for name, original in before.items():
+        a, b = np.asarray(original), np.asarray(after[name])
+        if a.shape != b.shape:
+            differences[name] = {'shape_before': list(a.shape), 'shape_after': list(b.shape),
+                                 'max_abs': None, 'equal': False}
+            continue
+        if not np.isfinite(a).all() or not np.isfinite(b).all():
+            raise ValueError(f'Non-finite parameter: {name}')
+        differences[name] = {
+            'equal': bool(np.array_equal(a, b)),
+            'max_abs': float(np.max(np.abs(a.astype(float) - b.astype(float)), initial=0.)),
+        }
+    return differences
+
+
+def save_conversion_evidence(model, directory, *, intermediate):
+    """Preserve the in-memory model and quantify a framework's MJCF export loss.
+
+    The caller preserves and hashes input assets and conversion sources. Use the
+    framework's own intermediate MJCF; MjSpec-built models cannot be exported
+    with mj_saveLastXML. Refuse to overwrite any earlier evidence.
+    """
+    import mujoco
+
+    directory, intermediate = Path(directory), Path(intermediate)
+    binary, receipt = directory / 'model.mjb', directory / 'conversion-readback.json'
+    if binary.exists() or receipt.exists():
+        raise FileExistsError('Preserve earlier conversion evidence')
+    before = conversion_parameters(model)
+    # Reserve the path before the native writer opens it.
+    with binary.open('xb'):
+        pass
+    mujoco.mj_saveModel(model, str(binary), None)
+    restored = conversion_parameters(mujoco.MjModel.from_binary_path(str(binary)))
+    binary_diff = parameter_differences(before, restored)
+    if not all(row['equal'] for row in binary_diff.values()):
+        raise ValueError('Binary model readback changed during save/reload')
+    exported = conversion_parameters(mujoco.MjModel.from_xml_path(str(intermediate)))
+    values = {
+        'schema_version': 1,
+        'epoch': 'initialization; effective GPU timestep must be observed at step',
+        'compiled': before,
+        'binary_readback_exact': True,
+        'intermediate_readback': exported,
+        'intermediate_differences': parameter_differences(before, exported),
+        'sha256': {
+            'model.mjb': hashlib.sha256(binary.read_bytes()).hexdigest(),
+            'intermediate_mjcf': hashlib.sha256(intermediate.read_bytes()).hexdigest(),
+        },
+    }
+    with receipt.open('x') as stream:
+        json.dump(values, stream, indent=2, allow_nan=False)
+        stream.write('\n')
+    return values
+
+
 def model_inputs(directory: Path) -> list[Path]:
     raw = directory / "model.mjb"
     if raw.exists():

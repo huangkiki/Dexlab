@@ -1,0 +1,165 @@
+{
+  "started_utc": "2026-10-10T02:45:43.398788+00:00",
+  "budget_hours": 6,
+  "max_native_starts": 64,
+  "native_starts": 20,
+  "recorded_physics_updates": 2000,
+  "entries": [
+    {
+      "id": "isaac-probe-v1",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Torch libc10_cuda.so required cudaGetDriverEntryPointByVersion absent in selected libcudart.so.12; no physics. Bounded service ended, receipt retained."
+    },
+    {
+      "id": "isaac-probe-v2",
+      "state": "failed-cleanup",
+      "physics_duration_s": 0,
+      "failure": "Imports and switch completed; systemd stop-sigterm timeout killed owned omni.telemetry transmitter after main exited0. Zero physics. Do not treat overall exit as pass."
+    },
+    {
+      "id": "isaac-probe-v3",
+      "state": "completed-zero-duration",
+      "physics_duration_s": 0,
+      "cleanup": "clean service exit0; all limits enforced"
+    },
+    {
+      "id": "isaac-probe-v4",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Native std::system_error Resource temporarily unavailable during close; pids.events max1. No input asset or conversion report produced. 128-task cap reached; first Python exception obscured by shutdown."
+    },
+    {
+      "id": "isaac-probe-v5",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Captured Python AttributeError: resolver map contains string identifiers, not schema classes. Native stage cleanup then hit128-task cap; four-CPU affinity alone does not avoid that cleanup failure."
+    },
+    {
+      "id": "isaac-probe-v6",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Official Newton model.finalize / Warp GPU allocation aborted with std::system_error; pids.events max2 at128, no memory pressure. Input USD retained; no converted model or positive-duration physics."
+    },
+    {
+      "id": "isaac-probe-v7",
+      "state": "failed-export-api",
+      "physics_duration_s": 0,
+      "failure": "Official USD->Newton->MJWarp constructor completed with0 time/steps and exported intermediateMJCF. mj_saveLastXML rejects MjSpec-compiled models (No XML model loaded). 256-task envelope peak138/no PID events, memory6.249GiB; no physics. Nativeconverted.xml retained."
+    },
+    {
+      "id": "isaac-probe-v8",
+      "state": "failed-recorder-api",
+      "physics_duration_s": 0,
+      "failure": "MJB, sourceUSD and convertedMJCF saved; zero native time assertions passed. Recorder referenced nonexistentData.nconmax; official3.11 exposes naconmax shared across worlds, separately from per-world requested nconmax."
+    },
+    {
+      "id": "isaac-probe-v9",
+      "state": "failed-recorder-api",
+      "physics_duration_s": 0,
+      "failure": "Zero-time model and capacity reads succeeded; recorder requestedpublic use_mujoco_contacts but officialversion stores it as _use_mujoco_contacts. Readsourcepinnedfield explicitly; no physical configchange."
+    },
+    {
+      "id": "isaac-probe-v10",
+      "state": "completed-zero-duration",
+      "physics_duration_s": 0
+    },
+    {
+      "id": "clock-newton-support-v1",
+      "case": "newton-support",
+      "state": "completed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 44.035932302474976
+    },
+    {
+      "id": "clock-newton-no-floor-v1",
+      "case": "newton-no-floor",
+      "state": "failed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 15.327686309814453
+    },
+    {
+      "id": "clock-mjwarp-support-v1",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 57.47299122810364
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v1",
+      "case": "mjwarp-no-floor",
+      "state": "failed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 20.317936182022095
+    },
+    {
+      "id": "clock-newton-no-floor-v2",
+      "case": "newton-no-floor",
+      "state": "failed",
+      "protocol_sha256": "872d0f66311a63868dc8f1f98d8d47e7aad00adbce6f063925a5048175588d51",
+      "physics_updates": 200,
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 122.32085227966309
+    },
+    {
+      "id": "clock-newton-no-floor-v3",
+      "case": "newton-no-floor",
+      "state": "failed",
+      "protocol_sha256": "50bc9adb589b5052189f8153d296d7234ed6ece97de8aa2b5f8f700ce5e62e1b",
+      "physics_updates": 200,
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 20.553496599197388
+    },
+    {
+      "id": "clock-newton-support-v4",
+      "case": "newton-support",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 45.553327560424805
+    },
+    {
+      "id": "clock-newton-no-floor-v4",
+      "case": "newton-no-floor",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 43.442230224609375
+    },
+    {
+      "id": "clock-mjwarp-support-v4",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 40.865132093429565
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v4",
+      "case": "mjwarp-no-floor",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 41.046528816223145
+    }
+  ],
+  "note": "All private originals retained. Native starts1\u201310 were zero duration. v1-v3 lifecycle/recording failures are not relabeled by the later fix."
+}

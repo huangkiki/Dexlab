@@ -45,3 +45,6 @@ Drake 1.57.0 的三种 SAP 近似与点/hydroelastic接触已有六配置斜面�
 [覆盖矩阵](index.md)分别保留初始批次。[Genesis 1.4.3](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-incline-results.zh-CN.md)记录五组原生 CPU 配置。[Newton 1.6.1 / Warp 1.18.0](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md)记录七组：XPBD 与 Kamino PADMM 各通过 1/9 正例，DVI 通过 4/9，其余未通过。49 个无效正例、两个无效 VBD 负例及 DVI 中断尝试全部保留；显式续接仅补齐缺失的负例。这些固定配置不计入可靠覆盖 coverage-v1，也不构成等额调优比较或引擎排名。
 
 原生 PhysX SDK 5.9.0 的四组 CPU patch-friction 配置已完成新斜面批次，通过 7/9、7/9、3/9、3/9；13 个数值无效正例保留，四个负例均有效并被拒绝。[完整协议与证据](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。框架兼容核心与转换路径仍由 [#152](https://github.com/huangkiki/Dexlab/issues/152) 单独验证，不能把原生结果归给 Isaac 或历史核心。
+
+
+Isaac Sim／MJWarp3.11.0诊断现已保存精确转换模型及原生GPU接触力。最终四个短例正常退出，两个无地板负例通过，两个支撑正例仍未通过动量检查；不增加可靠任务覆盖。[读回问题与证据](https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.zh-CN.md)。
