@@ -1,0 +1,1885 @@
+{
+  "scope": "Whole guarded command, separate from native stepping; private service IDs and GPU UUIDs removed",
+  "cases": [
+    {
+      "case": "aligned-1000us-demo_0-v5-resources.json",
+      "source_sha256": "70b5a417dfa098d7179e9136a90216877280dfcb2299ac546cfcdae52a8bf9f6",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.80516255297698,
+      "final": {
+        "memory.current": "33198080",
+        "memory.peak": "1111953408",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9710101\nuser_usec 8274425\nsystem_usec 1435676\ncore_sched.force_idle_usec 0\nnr_periods 98\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=577536 rios=0 wios=48 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1235\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1235",
+        "io.pressure": "some avg10=0.09 avg60=0.02 avg300=0.00 total=30719\nfull avg10=0.09 avg60=0.02 avg300=0.00 total=30719"
+      },
+      "sampled_peak_cpu_cores": 1.8118370823961525,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-1000us-demo_1-v5-resources.json",
+      "source_sha256": "0eefa43cef48645f7c51d744c4dd1b3059c6225ff7088b6e9b2d8500aca66925",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 11.669419268029742,
+      "final": {
+        "memory.current": "44183552",
+        "memory.peak": "1146867712",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 11355531\nuser_usec 9823706\nsystem_usec 1531825\ncore_sched.force_idle_usec 0\nnr_periods 117\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=606208 rios=0 wios=55 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1173\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1173",
+        "io.pressure": "some avg10=0.08 avg60=0.02 avg300=0.00 total=46216\nfull avg10=0.08 avg60=0.02 avg300=0.00 total=46216"
+      },
+      "sampled_peak_cpu_cores": 1.7886920297036177,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1184",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-1000us-demo_2-v5-resources.json",
+      "source_sha256": "073dd20d6f76de76ddd4148d092412552c030d7bda43aece4fdf281d2eaff335",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.556036428024527,
+      "final": {
+        "memory.current": "32526336",
+        "memory.peak": "1094815744",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9371003\nuser_usec 7909443\nsystem_usec 1461560\ncore_sched.force_idle_usec 0\nnr_periods 96\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=552960 rios=0 wios=42 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1763\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1763",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=16031\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=16031"
+      },
+      "sampled_peak_cpu_cores": 1.8152027049045978,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-2000us-demo_0-v5-resources.json",
+      "source_sha256": "63acdd82648d8ee828591c3b7cf95447441daa4020b89736d2936fc3fbc8af8f",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.158934646984562,
+      "final": {
+        "memory.current": "21393408",
+        "memory.peak": "1077010432",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7567082\nuser_usec 6111066\nsystem_usec 1456015\ncore_sched.force_idle_usec 0\nnr_periods 81\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=552960 rios=0 wios=42 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=459\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=459",
+        "io.pressure": "some avg10=2.99 avg60=0.55 avg300=0.11 total=427574\nfull avg10=2.99 avg60=0.55 avg300=0.11 total=427574"
+      },
+      "sampled_peak_cpu_cores": 1.7557865578308027,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-2000us-demo_1-v5-resources.json",
+      "source_sha256": "0b6803498e7e732b0d2a8e10618d9dfedc37e7568122354e271fb40d1dd40d63",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 8.703959000995383,
+      "final": {
+        "memory.current": "27910144",
+        "memory.peak": "1076842496",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 8405506\nuser_usec 6964390\nsystem_usec 1441115\ncore_sched.force_idle_usec 0\nnr_periods 88\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=565248 rios=0 wios=45 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=928\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=928",
+        "io.pressure": "some avg10=0.18 avg60=0.03 avg300=0.00 total=44480\nfull avg10=0.18 avg60=0.03 avg300=0.00 total=44339"
+      },
+      "sampled_peak_cpu_cores": 1.81431146838941,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1185",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-2000us-demo_2-v5-resources.json",
+      "source_sha256": "4304d5d985a8ffc972f0366ef4da4a71f90d0a6afa289e120de3fe3cd9695430",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.419920427026227,
+      "final": {
+        "memory.current": "20484096",
+        "memory.peak": "1076809728",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7349833\nuser_usec 5923701\nsystem_usec 1426131\ncore_sched.force_idle_usec 0\nnr_periods 75\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=552960 rios=0 wios=42 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=541\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=541",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=45608\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=45608"
+      },
+      "sampled_peak_cpu_cores": 1.8147770636773037,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-500us-demo_0-v5-resources.json",
+      "source_sha256": "9ae437e06c1282aea7ef75d8e20cc0329230fab8fa7771f0672a245f51c6b299",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 15.63430141902063,
+      "final": {
+        "memory.current": "58978304",
+        "memory.peak": "1223245824",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 14372098\nuser_usec 12825505\nsystem_usec 1546593\ncore_sched.force_idle_usec 0\nnr_periods 148\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "16",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=647168 rios=0 wios=65 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2692\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2692",
+        "io.pressure": "some avg10=1.25 avg60=0.61 avg300=0.14 total=476458\nfull avg10=1.25 avg60=0.61 avg300=0.14 total=476437"
+      },
+      "sampled_peak_cpu_cores": 1.8141898878778668,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1174",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-500us-demo_1-v5-resources.json",
+      "source_sha256": "fbe82ea7bd5408ebddfe1686a87a9ce49e55b726d4e60ea0e0ebc83befff737f",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 17.69322120898869,
+      "final": {
+        "memory.current": "79675392",
+        "memory.peak": "1302122496",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 17379962\nuser_usec 15698708\nsystem_usec 1681253\ncore_sched.force_idle_usec 0\nnr_periods 178\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "16",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=679936 rios=0 wios=73 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1248\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1248",
+        "io.pressure": "some avg10=0.17 avg60=0.10 avg300=0.02 total=107753\nfull avg10=0.17 avg60=0.10 avg300=0.02 total=107753"
+      },
+      "sampled_peak_cpu_cores": 1.72099638454085,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "aligned-500us-demo_2-v5-resources.json",
+      "source_sha256": "c5573e6b92e91c18a5ae39da041f9e49bfaba5ac26ce9ef63518038ca200ad18",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 13.361479226034135,
+      "final": {
+        "memory.current": "54153216",
+        "memory.peak": "1131102208",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 13481178\nuser_usec 11891742\nsystem_usec 1589435\ncore_sched.force_idle_usec 0\nnr_periods 133\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "16",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=630784 rios=0 wios=61 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1257\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1257",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=29128\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=29128"
+      },
+      "sampled_peak_cpu_cores": 1.8192345246413075,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_0-v5-resources.json",
+      "source_sha256": "b443653384e11bdd3d8808c39332bb7966d889f54e9e993a5d83ddd3acb5620d",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.520979868015274,
+      "final": {
+        "memory.current": "22163456",
+        "memory.peak": "1075724288",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7570095\nuser_usec 6123593\nsystem_usec 1446502\ncore_sched.force_idle_usec 0\nnr_periods 75\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=581632 rios=0 wios=46 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=830\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=830",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=25656\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=25655"
+      },
+      "sampled_peak_cpu_cores": 1.8633039400734304,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1185",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_1-v5-resources.json",
+      "source_sha256": "cf252fc7e386a9708ef7436d9962f8ee7ef53e1d5155de7168ae06063b0153cb",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 8.460227884002961,
+      "final": {
+        "memory.current": "27422720",
+        "memory.peak": "1076416512",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 8322516\nuser_usec 6791317\nsystem_usec 1531198\ncore_sched.force_idle_usec 0\nnr_periods 84\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=565248 rios=0 wios=45 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=929\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=929",
+        "io.pressure": "some avg10=0.09 avg60=0.02 avg300=0.00 total=31686\nfull avg10=0.09 avg60=0.02 avg300=0.00 total=31686"
+      },
+      "sampled_peak_cpu_cores": 1.7864473119539712,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1185",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_10-v5-resources.json",
+      "source_sha256": "6cee789e6fb9b0ae132d7d721924a3b7b2c841faf053d6c4dd0eb49bbddeaaea",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 8.388818466977682,
+      "final": {
+        "memory.current": "23265280",
+        "memory.peak": "1076445184",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7501857\nuser_usec 6024916\nsystem_usec 1476940\ncore_sched.force_idle_usec 0\nnr_periods 79\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=544768 rios=0 wios=40 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1456\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1456",
+        "io.pressure": "some avg10=2.63 avg60=0.48 avg300=0.10 total=329133\nfull avg10=2.63 avg60=0.48 avg300=0.10 total=322245"
+      },
+      "sampled_peak_cpu_cores": 1.8124725434285902,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_11-v5-resources.json",
+      "source_sha256": "2c3164f6d1bd7b65f6d21a7321cebd6cfda1933e9942c81f8776c8633943934f",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.996891291986685,
+      "final": {
+        "memory.current": "22929408",
+        "memory.peak": "1076420608",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7852474\nuser_usec 6412186\nsystem_usec 1440288\ncore_sched.force_idle_usec 0\nnr_periods 79\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=561152 rios=0 wios=44 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1818\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1818",
+        "io.pressure": "some avg10=0.09 avg60=0.02 avg300=0.00 total=34124\nfull avg10=0.09 avg60=0.02 avg300=0.00 total=34104"
+      },
+      "sampled_peak_cpu_cores": 1.7686713321687777,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1178",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_12-v5-resources.json",
+      "source_sha256": "78a768d057e6e97117923046cea23220c76cab5004ce4aa5f091c93cff2dc9c2",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.440403681015596,
+      "final": {
+        "memory.current": "22814720",
+        "memory.peak": "1074479104",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7468661\nuser_usec 6029377\nsystem_usec 1439283\ncore_sched.force_idle_usec 0\nnr_periods 74\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=552960 rios=0 wios=42 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=603",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=28899\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=28899"
+      },
+      "sampled_peak_cpu_cores": 1.813064094534523,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_2-v5-resources.json",
+      "source_sha256": "4cd953603ccf6f40e9c0bd69a854791a24f3d0761f81263f6a5079b08b6d684e",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.244593123963568,
+      "final": {
+        "memory.current": "20557824",
+        "memory.peak": "1076891648",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7304023\nuser_usec 5831809\nsystem_usec 1472214\ncore_sched.force_idle_usec 0\nnr_periods 73\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=548864 rios=0 wios=41 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1134\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1134",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=16452\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=16452"
+      },
+      "sampled_peak_cpu_cores": 1.7926596066021798,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_3-v5-resources.json",
+      "source_sha256": "8fd6f57ee6e55813f1f7bd16aae348a368bf65241e0e200f779cba082bf1c0c0",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.156037109962199,
+      "final": {
+        "memory.current": "21204992",
+        "memory.peak": "1076486144",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7402716\nuser_usec 5992818\nsystem_usec 1409898\ncore_sched.force_idle_usec 0\nnr_periods 72\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=557056 rios=0 wios=43 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=496\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=496",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2300\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2300"
+      },
+      "sampled_peak_cpu_cores": 1.8621329359037715,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_4-v5-resources.json",
+      "source_sha256": "c7fb7d3672683ed446a11cb81d9c4488e67a67732f8b8e8a08e2f9826ac15be1",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.906779551005457,
+      "final": {
+        "memory.current": "22851584",
+        "memory.peak": "1075724288",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7468785\nuser_usec 6035332\nsystem_usec 1433453\ncore_sched.force_idle_usec 0\nnr_periods 77\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=557056 rios=0 wios=43 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=434\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=434",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=27346\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=27346"
+      },
+      "sampled_peak_cpu_cores": 1.8394713260660858,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_5-v5-resources.json",
+      "source_sha256": "19467f5ca9c0cc40403c10b137703f1fba2c925c87ab4f53fd708014e69ada89",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.831897322030272,
+      "final": {
+        "memory.current": "24649728",
+        "memory.peak": "1076129792",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7825622\nuser_usec 6405328\nsystem_usec 1420294\ncore_sched.force_idle_usec 0\nnr_periods 79\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=536576 rios=0 wios=38 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1172\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1172",
+        "io.pressure": "some avg10=0.48 avg60=0.12 avg300=0.02 total=85175\nfull avg10=0.48 avg60=0.12 avg300=0.02 total=85175"
+      },
+      "sampled_peak_cpu_cores": 1.7636202277517747,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_6-v5-resources.json",
+      "source_sha256": "78d22fc7967e900186d7faffe530a379d44d8bc2b77ef69c2c6f68ab2c59a70f",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 8.707613628997933,
+      "final": {
+        "memory.current": "23040000",
+        "memory.peak": "1075113984",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7934294\nuser_usec 6497067\nsystem_usec 1437227\ncore_sched.force_idle_usec 0\nnr_periods 83\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=565248 rios=0 wios=45 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=500\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=500",
+        "io.pressure": "some avg10=0.09 avg60=0.02 avg300=0.00 total=279210\nfull avg10=0.09 avg60=0.02 avg300=0.00 total=279210"
+      },
+      "sampled_peak_cpu_cores": 1.8393469225584014,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1171",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_7-v5-resources.json",
+      "source_sha256": "36bc7299e2d290e1dc0ba53dd63a9127e040985c8306552d3f1b2bfeb9b8440a",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 8.28715867799474,
+      "final": {
+        "memory.current": "23474176",
+        "memory.peak": "1075871744",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7642282\nuser_usec 6142264\nsystem_usec 1500018\ncore_sched.force_idle_usec 0\nnr_periods 81\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=557056 rios=0 wios=43 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=809\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=809",
+        "io.pressure": "some avg10=0.87 avg60=0.23 avg300=0.05 total=190543\nfull avg10=0.87 avg60=0.23 avg300=0.05 total=190543"
+      },
+      "sampled_peak_cpu_cores": 1.7516734225743336,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_8-v5-resources.json",
+      "source_sha256": "549ae9490c2ff47d04afd45a7c3c60916a8a541afe91fc0c482e12e8685a949a",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.461365331022535,
+      "final": {
+        "memory.current": "24502272",
+        "memory.peak": "1076703232",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 8187315\nuser_usec 6734598\nsystem_usec 1452717\ncore_sched.force_idle_usec 0\nnr_periods 90\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=557056 rios=0 wios=43 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=709\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=709",
+        "io.pressure": "some avg10=1.44 avg60=0.26 avg300=0.05 total=592265\nfull avg10=1.44 avg60=0.26 avg300=0.05 total=592265"
+      },
+      "sampled_peak_cpu_cores": 1.8129535139073214,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1171",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "baseline-demo_9-v5-resources.json",
+      "source_sha256": "f6ca0f4e0a1ea78810b6910bb6bc51d4ab7f5edb05652d89a363e57d46b4bb05",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 7.938484083977528,
+      "final": {
+        "memory.current": "26550272",
+        "memory.peak": "1076342784",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 7905538\nuser_usec 6434880\nsystem_usec 1470658\ncore_sched.force_idle_usec 0\nnr_periods 80\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=561152 rios=0 wios=44 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2472\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2472",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=21439\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=21439"
+      },
+      "sampled_peak_cpu_cores": 1.839907519443799,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "recording-off-demo_0-v5-resources.json",
+      "source_sha256": "9e9a479de992041b0af5e1c224aeee4d3e25cdbcc760c022dba5c39e81162726",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 6.471789539034944,
+      "final": {
+        "memory.current": "9502720",
+        "memory.peak": "1076625408",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 6196370\nuser_usec 4871649\nsystem_usec 1324720\ncore_sched.force_idle_usec 0\nnr_periods 65\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=540672 rios=0 wios=39 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=704\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=704",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=43524\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=43524"
+      },
+      "sampled_peak_cpu_cores": 1.790159510554469,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "settle-audit-demo_0-v5-resources.json",
+      "source_sha256": "c101983884d5360b853b2e602d3b9bc6c0acc07f680544245324828e7aa17a8c",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 10.932400262972806,
+      "final": {
+        "memory.current": "9650176",
+        "memory.peak": "1076535296",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 5274794\nuser_usec 3963602\nsystem_usec 1311191\ncore_sched.force_idle_usec 0\nnr_periods 73\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=1060864 rios=0 wios=45 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=640\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=632",
+        "io.pressure": "some avg10=12.48 avg60=2.52 avg300=0.53 total=1685771\nfull avg10=12.48 avg60=2.52 avg300=0.53 total=1685771"
+      },
+      "sampled_peak_cpu_cores": 1.7852705374371027,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_0-v5-resources.json",
+      "source_sha256": "f852806cd51de2f36811d4425017ab11e074e3a6586fa85e403f5b75c5e0aa90",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.569645997020416,
+      "final": {
+        "memory.current": "33394688",
+        "memory.peak": "1101942784",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9712244\nuser_usec 8211661\nsystem_usec 1500582\ncore_sched.force_idle_usec 0\nnr_periods 95\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=585728 rios=0 wios=50 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1089\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1089",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=23136\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=23119"
+      },
+      "sampled_peak_cpu_cores": 1.8372385978702834,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_1-v5-resources.json",
+      "source_sha256": "1f91a755b71f7b94e0c9f32a689da18fd4d950f3b50e2e2b1981ad37ab0f832c",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 12.081142142007593,
+      "final": {
+        "memory.current": "43204608",
+        "memory.peak": "1142595584",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 11242254\nuser_usec 9755295\nsystem_usec 1486959\ncore_sched.force_idle_usec 0\nnr_periods 116\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=12312576 rios=0 wios=66 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1731\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1728",
+        "io.pressure": "some avg10=4.41 avg60=0.81 avg300=0.16 total=516781\nfull avg10=4.41 avg60=0.81 avg300=0.16 total=516511"
+      },
+      "sampled_peak_cpu_cores": 1.7258375675238584,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1185",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_10-v5-resources.json",
+      "source_sha256": "5e1a498d7abcab9524bea88c3927ad30e351275e6daeb760d603ff9e644f7ad0",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.967198511993047,
+      "final": {
+        "memory.current": "40022016",
+        "memory.peak": "1126436864",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9834891\nuser_usec 8307044\nsystem_usec 1527847\ncore_sched.force_idle_usec 0\nnr_periods 100\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=573440 rios=0 wios=47 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=878\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=878",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=20197\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=20197"
+      },
+      "sampled_peak_cpu_cores": 1.7658886561811615,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_11-v5-resources.json",
+      "source_sha256": "a3df635b53a87bb6fb8f1d4f19dcf77a41afe60a1a6e4780c4a61b76d2ebd888",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 10.51373937499011,
+      "final": {
+        "memory.current": "36540416",
+        "memory.peak": "1128755200",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 10292628\nuser_usec 8783630\nsystem_usec 1508998\ncore_sched.force_idle_usec 0\nnr_periods 106\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=589824 rios=0 wios=51 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=770\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=770",
+        "io.pressure": "some avg10=1.34 avg60=0.25 avg300=0.05 total=182636\nfull avg10=1.34 avg60=0.25 avg300=0.05 total=182636"
+      },
+      "sampled_peak_cpu_cores": 1.8193068488089492,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_12-v5-resources.json",
+      "source_sha256": "171c60cc4eee4dc8937de6d76db1ad7c8f43e43306e9afa153b2bfed9670a1ad",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 10.023443215002771,
+      "final": {
+        "memory.current": "35053568",
+        "memory.peak": "1119424512",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9701444\nuser_usec 8210453\nsystem_usec 1490990\ncore_sched.force_idle_usec 0\nnr_periods 100\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=565248 rios=0 wios=45 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1900\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1900",
+        "io.pressure": "some avg10=1.53 avg60=0.29 avg300=0.06 total=187177\nfull avg10=1.34 avg60=0.25 avg300=0.05 total=166992"
+      },
+      "sampled_peak_cpu_cores": 1.8157197640721763,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_2-v5-resources.json",
+      "source_sha256": "46b6af8aa4554120c277204b7bdc8f6004fcc8885754c0bf66d40fd98eb688d8",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.54455227300059,
+      "final": {
+        "memory.current": "31932416",
+        "memory.peak": "1092448256",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9351214\nuser_usec 7835207\nsystem_usec 1516007\ncore_sched.force_idle_usec 0\nnr_periods 94\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=565248 rios=0 wios=45 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1573\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1573",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=20655\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=20655"
+      },
+      "sampled_peak_cpu_cores": 1.8380714630202688,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_3-v5-resources.json",
+      "source_sha256": "53af1951eca0e39e9342847141ae38a613f6c172fbcdf4af6f64081cc134a119",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.60980296699563,
+      "final": {
+        "memory.current": "32518144",
+        "memory.peak": "1099390976",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9527853\nuser_usec 8047633\nsystem_usec 1480220\ncore_sched.force_idle_usec 0\nnr_periods 97\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=581632 rios=0 wios=49 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=804\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=804",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=21538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=21538"
+      },
+      "sampled_peak_cpu_cores": 1.8077359452303623,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_4-v5-resources.json",
+      "source_sha256": "cd12ffc2f4548dd2534823593d9ea54c9b7100fbc654216bff58b773f2884461",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 9.602789302996825,
+      "final": {
+        "memory.current": "36265984",
+        "memory.peak": "1112686592",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9593971\nuser_usec 8149524\nsystem_usec 1444447\ncore_sched.force_idle_usec 0\nnr_periods 97\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=581632 rios=0 wios=49 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1616\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1616",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=19707\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=19707"
+      },
+      "sampled_peak_cpu_cores": 1.8150041873417013,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_5-v5-resources.json",
+      "source_sha256": "15ce7d9dc4303bc7b79f1f29d53a3e76393bd0851554edd05e93a9dff04748f1",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 10.743892295984551,
+      "final": {
+        "memory.current": "38375424",
+        "memory.peak": "1136336896",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 10336079\nuser_usec 8815714\nsystem_usec 1520365\ncore_sched.force_idle_usec 0\nnr_periods 107\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=593920 rios=0 wios=52 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=797\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=797",
+        "io.pressure": "some avg10=0.08 avg60=0.02 avg300=0.00 total=34648\nfull avg10=0.08 avg60=0.02 avg300=0.00 total=33427"
+      },
+      "sampled_peak_cpu_cores": 1.7899758010097329,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_6-v5-resources.json",
+      "source_sha256": "31f927ffe73a0385af3d0a3b1a48909c36b2a917ad35392848c3558e95df710f",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 10.883640045009088,
+      "final": {
+        "memory.current": "36564992",
+        "memory.peak": "1130721280",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 10641531\nuser_usec 9107013\nsystem_usec 1534518\ncore_sched.force_idle_usec 0\nnr_periods 109\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=598016 rios=0 wios=53 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1083\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1083",
+        "io.pressure": "some avg10=0.08 avg60=0.02 avg300=0.00 total=44537\nfull avg10=0.08 avg60=0.02 avg300=0.00 total=44534"
+      },
+      "sampled_peak_cpu_cores": 1.815387588033693,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1173",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_7-v5-resources.json",
+      "source_sha256": "fa23daf1ec55cf809b5b12828e91c79a79ea4eb624c44b2a818906be1f7335be",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 10.010366409027483,
+      "final": {
+        "memory.current": "37896192",
+        "memory.peak": "1118408704",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 9936800\nuser_usec 8425462\nsystem_usec 1511338\ncore_sched.force_idle_usec 0\nnr_periods 99\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=581632 rios=0 wios=49 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=700",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=26228\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=26228"
+      },
+      "sampled_peak_cpu_cores": 1.7837485033603304,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_8-v5-resources.json",
+      "source_sha256": "35cf3920e09e5e9a05f710627848b306b5c6f810736acef5f3ae20ca56336ab0",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 11.31258389604045,
+      "final": {
+        "memory.current": "44982272",
+        "memory.peak": "1159446528",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 11323082\nuser_usec 9795046\nsystem_usec 1528035\ncore_sched.force_idle_usec 0\nnr_periods 113\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=598016 rios=0 wios=53 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=984\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=984",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=15300\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=15300"
+      },
+      "sampled_peak_cpu_cores": 1.7820387921929142,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1172",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-1000us-demo_9-v5-resources.json",
+      "source_sha256": "44b2c94b1c814427a93822ff9e647f7a49358973c4c8bcb6ea1928dd3969f69c",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 11.39942782302387,
+      "final": {
+        "memory.current": "44937216",
+        "memory.peak": "1160114176",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 10657323\nuser_usec 9075196\nsystem_usec 1582126\ncore_sched.force_idle_usec 0\nnr_periods 113\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "14",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=602112 rios=0 wios=54 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=942\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=942",
+        "io.pressure": "some avg10=0.48 avg60=0.17 avg300=0.03 total=150794\nfull avg10=0.48 avg60=0.17 avg300=0.03 total=150767"
+      },
+      "sampled_peak_cpu_cores": 1.8368223008784936,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1178",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-500us-demo_0-v5-resources.json",
+      "source_sha256": "e795150e6a70789751bd890490cdbcb74d09e60a44799d9b8bddb8b0d0124f88",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 14.372231232991908,
+      "final": {
+        "memory.current": "56819712",
+        "memory.peak": "1204637696",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 14134185\nuser_usec 12518449\nsystem_usec 1615735\ncore_sched.force_idle_usec 0\nnr_periods 142\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "16",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=643072 rios=0 wios=64 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1025\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1025",
+        "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=18412\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=18412"
+      },
+      "sampled_peak_cpu_cores": 1.8165557798217848,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1185",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-500us-demo_1-v5-resources.json",
+      "source_sha256": "29bfdeb799a2073255dde687672cd7dca62f015582890ca5b97091711ef7a0af",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 17.210147552017588,
+      "final": {
+        "memory.current": "77963264",
+        "memory.peak": "1307500544",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 17177921\nuser_usec 15542405\nsystem_usec 1635515\ncore_sched.force_idle_usec 0\nnr_periods 173\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "16",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=675840 rios=0 wios=72 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=989\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=989",
+        "io.pressure": "some avg10=0.08 avg60=0.05 avg300=0.01 total=52217\nfull avg10=0.08 avg60=0.05 avg300=0.01 total=51627"
+      },
+      "sampled_peak_cpu_cores": 1.757616608201056,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1186",
+          "23028"
+        ]
+      ]
+    },
+    {
+      "case": "step-500us-demo_2-v5-resources.json",
+      "source_sha256": "e98761fc99405125e5769d4af5defab79fc5ae47f4dfdbedc6bee961b7dbe7f7",
+      "state": "completed",
+      "returncode": 0,
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "effective_limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "wall_s": 14.766396659018937,
+      "final": {
+        "memory.current": "54272000",
+        "memory.peak": "1202774016",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "cpu.stat": "usage_usec 13340946\nuser_usec 11727017\nsystem_usec 1613929\ncore_sched.force_idle_usec 0\nnr_periods 140\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+        "pids.current": "1",
+        "pids.peak": "16",
+        "pids.events": "max 0",
+        "io.stat": "8:0 rbytes=0 wbytes=593920 rios=0 wios=52 dbytes=0 dios=0"
+      },
+      "pressure": {
+        "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1713\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1713",
+        "io.pressure": "some avg10=0.59 avg60=0.29 avg300=0.07 total=236357\nfull avg10=0.59 avg60=0.29 avg300=0.07 total=236357"
+      },
+      "sampled_peak_cpu_cores": 1.7924945742727987,
+      "gpu_memory_scope": "Whole-device samples, not process ownership",
+      "gpu_memory_mib": [
+        [
+          "1185",
+          "23028"
+        ]
+      ]
+    }
+  ]
+}

@@ -11,7 +11,7 @@ from scripts.physx_precision_diagnostics import projection_residual, analyze_cas
 class ResearchExperienceTests(unittest.TestCase):
     def test_bilingual_pages_current_and_historical_tasks_unchanged(self):
         update(check=True)
-        self.assertEqual(len(load_experiences()),7)
+        self.assertEqual(len(load_experiences()),8)
 
     def test_broken_reference_and_unknown_task_fail_closed(self):
         original=json.loads((ROOT/'docs/research-experiences.json').read_text())

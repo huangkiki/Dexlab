@@ -1,0 +1,20 @@
+# Isolated Python 3.10 environment: official LIBERO's robosuite 1.4 path.
+# Deliberately separate from DexLab's Python 3.12 / newer MuJoCo environment.
+robosuite==1.4.0
+mujoco==2.3.7
+numpy==1.22.4
+scipy==1.10.1
+numba==0.57.1
+bddl==1.0.1
+gym==0.25.2
+h5py==3.10.0
+easydict==1.9
+PyYAML==6.0.2
+cloudpickle==2.1.0
+imageio==2.34.2
+imageio-ffmpeg==0.5.1
+Pillow==10.4.0
+
+termcolor==2.4.0
+future==0.18.2
+matplotlib==3.5.3

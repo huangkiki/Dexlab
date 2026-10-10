@@ -88,6 +88,12 @@ def validate_bundle(bundle):
                 "velocity_z",
             },
             "pinch": {"height", "relative_slip", "pad_force"},
+            "libero": {
+                "height",
+                "gripper_relative_z",
+                "finger_normal",
+                "contact_overlap",
+            },
         }[bundle["id"].split("-")[0]]
         keys = [c["key"] for c in series["channels"]]
         if len(keys) != len(set(keys)) or set(keys) != required:
@@ -168,11 +174,12 @@ def check(root=ROOT):
                 raise ValueError(f"Changed visual data: {path}")
             bundle = read_bundle(path)
             validate_bundle(bundle)
-            specs = json.loads((root / "docs/evidence/visual/sources.json").read_text())
+            spec_path = root / bundle.get(
+                "source_spec_path", "docs/evidence/visual/sources.json"
+            )
+            specs = json.loads(spec_path.read_text())
             spec = next(v for v in specs["variants"] if v["id"] == bundle["id"])
-            if bundle["source_spec_sha256"] != digest(
-                root / "docs/evidence/visual/sources.json"
-            ):
+            if bundle["source_spec_sha256"] != digest(spec_path):
                 raise ValueError("Changed frozen source specification")
             if bundle["condition"] != spec["condition"]:
                 raise ValueError("Changed experiment condition")

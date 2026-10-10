@@ -5,6 +5,7 @@
 # Generated patch context contains mandatory single-space blank lines.
 scripts/patches/unisim-1.7.10-physx-adapter.patch -whitespace
 scripts/patches/unisim-1.7.12-contact-readback.patch -whitespace
+demos/libero-contact/patches/refresh-settle-observation.patch -whitespace
 
 # Preserve the exact SDK log bytes authenticated by the evidence manifest.
 demos/physx-contact/evidence/contact-details-v1/worker-stderr.log -whitespace

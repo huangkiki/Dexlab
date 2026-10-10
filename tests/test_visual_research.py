@@ -41,7 +41,7 @@ class VisualEvidenceTests(unittest.TestCase):
     def test_all_published_sources_and_media_match(self):
         index = check()
         self.assertEqual(
-            {c["id"] for c in index["cases"]}, {"incline", "normal", "pinch"}
+            {c["id"] for c in index["cases"]}, {"incline", "normal", "pinch", "libero"}
         )
         self.assertEqual(len(index["cases"][0]["variants"]), 9)
 

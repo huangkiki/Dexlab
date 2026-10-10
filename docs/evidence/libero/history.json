@@ -1,0 +1,121 @@
+{
+  "revisions": [
+    {
+      "campaign": "campaign-v1",
+      "manifest_sha256": "0117c11d443c25f59fd96b2ff018e2ae123f0e7a27e2059c6f2e2e49941842ae",
+      "head_sha256": "6c7606cba9dec06612208e4d9bf6181a8f0db3953a1e3c477d3a2c7b15b78bb0",
+      "attempts": []
+    },
+    {
+      "campaign": "campaign-v2",
+      "manifest_sha256": "7fe0cba5206238bddc3d2bde94971f346f6a8a6f6dff126031d0d2b8e3134600",
+      "head_sha256": "d4c35f1c1d3b4ca8562e31d744b8ba8815ca661cd8ee9f31f9167ac8fbfeb7b4",
+      "attempts": []
+    },
+    {
+      "campaign": "campaign-v3",
+      "manifest_sha256": "70df1323efffe029ab54570cdd2bc4a964a3e0daec960495bd458c1008444782",
+      "head_sha256": "7ec75215d2ed870dc22e63c75f90b90a7960c4c4294dcb978fb562162aed59e9",
+      "attempts": [
+        {
+          "candidate": {
+            "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+            "id": "baseline",
+            "instrument": true,
+            "mode": "actions",
+            "timestep_scale": 1.0
+          },
+          "demo": "demo_0",
+          "split": "development",
+          "outcome": "failed",
+          "error": null,
+          "wall_s": 0.2957509150146507,
+          "native_result_sha256": "6c2300f87193a1bd002c9f1bf3e2e2f8561fd821054b83e746497dafbe3e486f"
+        }
+      ]
+    },
+    {
+      "campaign": "campaign-v4",
+      "manifest_sha256": "e6dd5f3c3bb9ee1db014e1f363c4248a2ae623dc34c79468bae9e2efdcb691fe",
+      "head_sha256": "5ddd8d7ceaef013a0e788df0267259b342484baabe700180709cf2c712a5afe1",
+      "attempts": [
+        {
+          "candidate": {
+            "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+            "id": "baseline",
+            "instrument": true,
+            "mode": "actions",
+            "timestep_scale": 1.0
+          },
+          "demo": "demo_0",
+          "split": "development",
+          "outcome": "recorded",
+          "error": null,
+          "wall_s": 9.62399735301733,
+          "native_result_sha256": "a377655fcd575a9570d9c0df24aa0309bee142cd21c6bd4f86b7265bc29e5445"
+        },
+        {
+          "candidate": {
+            "hypothesis": "Instrumentation must preserve every control-rate native state and native success decision",
+            "id": "recording-off",
+            "instrument": false,
+            "mode": "actions",
+            "timestep_scale": 1.0
+          },
+          "demo": "demo_0",
+          "split": "development",
+          "outcome": "recorded",
+          "error": null,
+          "wall_s": 4.794507235987112,
+          "native_result_sha256": "a5490f0d03eb937044255279b73306aa84df10bbd7c6d63b630cf60b31e9dfb1"
+        },
+        {
+          "candidate": {
+            "hypothesis": "Five native zero-action settle steps advance state while evaluate.py keeps the earlier observation; metric.py refreshes it",
+            "id": "settle-audit",
+            "instrument": true,
+            "mode": "observation-audit",
+            "timestep_scale": 1.0
+          },
+          "demo": "demo_0",
+          "split": "development",
+          "outcome": "recorded",
+          "error": null,
+          "wall_s": 4.014828852028586,
+          "native_result_sha256": "54bdb640330559d945349404c73c0873be33bfd00211db9aedccb78701fbb925"
+        },
+        {
+          "candidate": {
+            "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+            "id": "baseline",
+            "instrument": true,
+            "mode": "actions",
+            "timestep_scale": 1.0
+          },
+          "demo": "demo_1",
+          "split": "development",
+          "outcome": "recorded",
+          "error": null,
+          "wall_s": 6.628076256019995,
+          "native_result_sha256": "29efa9fbce2852f043b2d8b1b8ac9936c2253f87b1d7a8a9db5d24a34a0e61fc"
+        },
+        {
+          "candidate": {
+            "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+            "id": "baseline",
+            "instrument": true,
+            "mode": "actions",
+            "timestep_scale": 1.0
+          },
+          "demo": "demo_2",
+          "split": "development",
+          "outcome": "recorded",
+          "error": null,
+          "wall_s": 5.733754493994638,
+          "native_result_sha256": "39b73eb53368eb08e4182549508fef0af5daec5497cea4a86ec30a6d580b4fbd"
+        }
+      ]
+    }
+  ],
+  "preflight_failure": "campaign-v2 lacked budget matrix before any reservation; fixed in v3. v3 reserved one start and failed missing termcolor before physics; v4 installed/froze dependencies. v5 adds contact-reference readbacks and frozen timestep controls. Original private ledgers and failed resource receipts retained."
+}
