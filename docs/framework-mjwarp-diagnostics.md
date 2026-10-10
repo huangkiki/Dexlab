@@ -33,13 +33,37 @@ Earlier short runs aborted at shutdown; full teardown then spun for over120 s an
 
 The [v0.56.0 evidence archive](https://github.com/huangkiki/Dexlab/releases/tag/v0.56.0) contains every diagnostic generation, source snapshots, original USD, intermediate MJCF, exact compiled MJB, effective parameters, raw step/contact readbacks, failures and resource receipts. [Archive identity](evidence/framework-mjwarp/archive.json). Public path/UUID redactions are listed with original/published hashes; numerical records are unchanged. No original installed engine is patched.
 
-Run from a DexLab checkout using the qualified compatible runtime. Set `ISAAC_ROOT`, `OUT`, `EVIDENCE` and `DATA_DIR` to your own paths, with a block device for `IO_DEVICE`. The old receipt is a measurement for choosing the frozen profile, not a claim about another host's free memory:
+Run from a DexLab checkout using the qualified compatible runtime. Set `ISAAC_ROOT`, `OUT`, `EVIDENCE` (the extracted archive) and `DATA_DIR` to your own absolute paths, with a block device for `IO_DEVICE`. `OUT` must be new; the system Python used for offline scoring needs NumPy. The example passes CUDA/Python paths inside the bounded child because the resource runner does not inherit them from the calling shell. The old receipt is a measurement for choosing the frozen profile, not a claim about another host's free memory:
 
 ```bash
-export PYTHONPATH="$PWD/src"
-export LD_LIBRARY_PATH="$ISAAC_ROOT/exts/isaacsim.pip.nv/pip_prebundle/nvidia/cuda_runtime/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-python scripts/bounded_run.py --profile adaptive --task-limit 256   --resource-plan "$OUT/resources-plan.json"   --peak-receipt "$EVIDENCE/clock-newton-support-v1-resources.json"   --data-dir "$DATA_DIR" --io-device "$IO_DEVICE" --timeout 1200   --receipt "$OUT/resources.json" --   bash "$ISAAC_ROOT/python.sh" --no-ros-env scripts/probe_isaac_mjwarp.py   --protocol configs/framework-clock-probe-v4.json --case newton-support   --output "$OUT/newton-support" --warp-cache "$OUT/warp-cache"   --portable-root "$OUT/kit-state"
-python -m dexlab.framework_probe_score "$OUT/newton-support"
+CASE_ID=newton-support
+CPUS=$(python3 -c 'import os; print(",".join(map(str, sorted(os.sched_getaffinity(0))[:4])))')
+mkdir "$OUT"
+cat > "$OUT/privacy.toml" <<'TOML'
+[privacy]
+performance = false
+personalization = false
+usage = false
+TOML
+python3 scripts/bounded_run.py --profile adaptive --task-limit 256 \
+  --cpu-cores 4 --resource-plan "$OUT/resources-plan.json" \
+  --peak-receipt "$EVIDENCE/clock-newton-support-v1-resources.json" \
+  --data-dir "$DATA_DIR" --io-device "$IO_DEVICE" --timeout 1200 \
+  --receipt "$OUT/$CASE_ID-resources.json" -- \
+  env PYTHONPATH="$PWD/src" CUDA_CACHE_PATH="$OUT/cuda-cache" \
+  LD_LIBRARY_PATH="$ISAAC_ROOT/exts/isaacsim.pip.nv/pip_prebundle/nvidia/cuda_runtime/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" \
+  python3 scripts/research_guard.py run \
+  --lock "$DATA_DIR/.control/window.lock" --kind qualification \
+  --receipt "$OUT/$CASE_ID-window.json" -- \
+  taskset -c "$CPUS" bash "$ISAAC_ROOT/python.sh" --no-ros-env \
+  scripts/probe_isaac_mjwarp.py --protocol configs/framework-clock-probe-v4.json \
+  --case "$CASE_ID" --output "$OUT/$CASE_ID" --warp-cache "$OUT/warp-cache" \
+  --portable-root "$OUT/kit-state-$CASE_ID" \
+  --/log/file="$OUT/$CASE_ID-kit.log" \
+  --/telemetry/enableAnonymousData=false \
+  --/structuredLog/privacySettingsFile="$OUT/privacy.toml" \
+  --/telemetry/log/file="$OUT/$CASE_ID-telemetry.log"
+PYTHONPATH="$PWD/src" python3 -m dexlab.framework_probe_score "$OUT/$CASE_ID"
 ```
 
-Use the existing research lock for acquisition and keep transfers/scoring separate. The other frozen case IDs are `newton-no-floor`, `mjwarp-support`, `mjwarp-no-floor`; preserve separate output directories. The scorer intentionally exits nonzero on either failed support case. The acquisition launcher used four allowed CPUs, four BLAS threads, per-session vendor analytics disabled, and resource telemetry enabled; the archived invocation/receipts retain these choices. New reproduction must freeze equivalent launch settings and verify official source/binary hashes first.
+Use the existing research lock for acquisition and keep transfers/scoring separate. To run the other frozen cases, set `CASE_ID` to `newton-no-floor`, `mjwarp-support` or `mjwarp-no-floor` and repeat only the acquisition and scoring commands. Reuse the same frozen resource plan and caches, and keep separate case outputs, receipts and Kit state. Never overwrite an earlier attempt. The scorer intentionally exits nonzero on either failed support case. The acquisition launcher used four allowed CPUs, four BLAS threads, per-session vendor analytics disabled, and resource telemetry enabled; the archived invocation/receipts retain these choices. New reproduction must freeze equivalent launch settings and verify official source/binary hashes first.

@@ -33,4 +33,4 @@ Isaac Sim v6.1.0源标签的本地构建报告`6.1.0-rc.26+mr.0.7c206f75.local`�
 
 [v0.56.0证据](https://github.com/huangkiki/Dexlab/releases/tag/v0.56.0)保留每代诊断及源码、原始USD、中间MJCF、精确MJB、最终参数、逐步接触读回、失败与资源回执。[压缩包身份](evidence/framework-mjwarp/archive.json)。公开导出仅遮盖本地路径及GPU UUID，逐文件记录原始／公开哈希；数值记录不变，未修改安装的引擎。
 
-完整命令见[英文复现段](framework-mjwarp-diagnostics.md#evidence-and-reproduction)。使用已准入的官方兼容运行时、现有研究锁及冻结资源计划，四例各用独立输出目录，物理测量与传输／评分串行。现场启动限制四个可用CPU、四个BLAS线程，关闭单会话vendor analytics，保留资源遥测；调用与回执保存了这些设置。复现先核对源码及二进制，再冻结等价启动设置。两个支撑例的评分器应返回非零；原生／框架三任务对照、重置和留出仍由[#152](https://github.com/huangkiki/Dexlab/issues/152)继续推进。
+完整命令见[英文复现段](framework-mjwarp-diagnostics.md#evidence-and-reproduction)。使用已准入的官方兼容运行时、现有研究锁及冻结资源计划。命令在受限子进程内显式传入CUDA／Python路径；资源隔离器不会继承外层的这些变量。新建批次目录并写入单会话隐私设置后，四例复用冻结计划及缓存，各用独立输出、回执和Kit状态目录，物理测量与传输／评分串行。现场启动限制四个可用CPU、四个BLAS线程，关闭单会话vendor analytics，保留资源遥测；调用与回执保存了这些设置。复现先核对源码及二进制，再冻结等价启动设置。两个支撑例的评分器应返回非零；原生／框架三任务对照、重置和留出仍由[#152](https://github.com/huangkiki/Dexlab/issues/152)继续推进。
