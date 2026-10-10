@@ -636,6 +636,14 @@
     "isaac-mjwarp-clock-v4": {
       "description": "Development clock/contact diagnosis only; complete task qualification has not run.",
       "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.md"
+    },
+    "isaac-mjwarp-clock-v6": {
+      "description": "Safe contact readback and selected GPU parameter diagnostic; full task qualification has not run.",
+      "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.md"
+    },
+    "native-mjwarp-matched-v1": {
+      "description": "Matched 3.11.0 core, unaligned and four-field aligned development diagnostics; full task qualification has not run.",
+      "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.md"
     }
   },
   "rows": [
@@ -5692,7 +5700,7 @@
       "groups": [
         "rigid"
       ],
-      "cohort": "isaac-mjwarp-clock-v4",
+      "cohort": "isaac-mjwarp-clock-v6",
       "cells": {
         "contact": {
           "state": "not-run",
@@ -5756,7 +5764,71 @@
       "groups": [
         "rigid"
       ],
-      "cohort": "isaac-mjwarp-clock-v4",
+      "cohort": "isaac-mjwarp-clock-v6",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "MJWarp Newton / pyramidal / MJWarp contacts",
+      "runtime_path": "Native matched core / vendor Warp1.16.0; original and four-field aligned",
+      "version": "3.11.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "native-mjwarp-matched-v1",
       "cells": {
         "contact": {
           "state": "not-run",

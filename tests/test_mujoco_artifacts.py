@@ -6,14 +6,61 @@ import shutil
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 import mujoco
 import numpy as np
 
 from dexlab.mujoco_artifacts import (
     conversion_parameters, load_model, model_inputs, pack_model,
-    parameter_differences, save_conversion_evidence,
+    parameter_differences, save_conversion_evidence, warp_model_parameters,
+    cpu_contact_address_valid,
 )
+
+
+class GpuReadbackTests(unittest.TestCase):
+    def test_cpu_contact_bounds_cover_inactive_pyramid_and_elliptic_contacts(self):
+        self.assertTrue(cpu_contact_address_valid(-1, 3, True, 0))
+        self.assertFalse(cpu_contact_address_valid(0, 3, True, 0))
+        self.assertTrue(cpu_contact_address_valid(4, 3, True, 8))
+        self.assertFalse(cpu_contact_address_valid(8, 3, True, 8))
+        self.assertFalse(cpu_contact_address_valid(12, 3, True, 8))
+        self.assertTrue(cpu_contact_address_valid(5, 3, False, 8))
+        self.assertFalse(cpu_contact_address_valid(6, 3, False, 8))
+        self.assertTrue(cpu_contact_address_valid(7, 1, True, 8))
+        self.assertFalse(cpu_contact_address_valid(-2, 3, True, 8))
+
+    def test_gpu_overrides_and_float32_precision_are_observed(self):
+        class Parameters:
+            def __getattr__(self, name):
+                return 0
+
+        class Array:
+            def __init__(self, values):
+                self.values = np.asarray(values, dtype=np.float32)
+
+            def numpy(self):
+                return self.values.copy()
+
+        model = Parameters()
+        model.opt = Parameters()
+        model.stat = Parameters()
+        model.block_dim = Parameters()
+        model.body_mass = Array([[0., .064]])
+        model.opt.timestep = Array([.001])
+        first = warp_model_parameters(model)
+        self.assertEqual(first['dtypes']['body_mass'], 'float32')
+        self.assertNotEqual(first['values']['body_mass'][0][1], .064)
+        model.body_mass.values[0, 1] = .128
+        second = warp_model_parameters(model)
+        self.assertFalse(parameter_differences(first['values'], second['values'])['body_mass']['equal'])
+        model.body_mass.values[0, 1] = np.nan
+        with self.assertRaisesRegex(ValueError, 'Non-finite GPU parameter: body_mass'):
+            warp_model_parameters(model)
+
+    def test_missing_gpu_field_is_not_an_inferred_default(self):
+        with self.assertRaises(AttributeError):
+            warp_model_parameters(SimpleNamespace())
 
 
 class ModelArtifactTests(unittest.TestCase):

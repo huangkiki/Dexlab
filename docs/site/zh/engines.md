@@ -47,4 +47,4 @@ Drake 1.57.0 的三种 SAP 近似与点/hydroelastic接触已有六配置斜面�
 原生 PhysX SDK 5.9.0 的四组 CPU patch-friction 配置已完成新斜面批次，通过 7/9、7/9、3/9、3/9；13 个数值无效正例保留，四个负例均有效并被拒绝。[完整协议与证据](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。框架兼容核心与转换路径仍由 [#152](https://github.com/huangkiki/Dexlab/issues/152) 单独验证，不能把原生结果归给 Isaac 或历史核心。
 
 
-Isaac Sim／MJWarp3.11.0诊断现已保存精确转换模型及原生GPU接触力。最终四个短例正常退出，两个无地板负例通过，两个支撑正例仍未通过动量检查；不增加可靠任务覆盖。[读回问题与证据](https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.zh-CN.md)。
+已完成MuJoCo/MJWarp3.11.0原生匹配核心对照。原生支撑同样未通过动量检查；对齐四项GPU字段后仍失败，轨迹仍与Isaac Sim不同，三次独立原生重复完全一致。CPU接触读回现已拒绝越界地址，可靠任务覆盖数不变。[结果与归因边界](https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.zh-CN.md)。
