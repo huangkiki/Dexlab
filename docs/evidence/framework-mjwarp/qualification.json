@@ -1,0 +1,318 @@
+{
+  "scope": "Physics package payloads and two integration source modules audited. Local official-tag build; not a complete official Isaac binary certificate.",
+  "framework": {
+    "source_commit": "7c206f75bdadd9e05fc457f19863ca4c3f0cb693",
+    "source_tag": "v6.1.0",
+    "runtime_version": "6.1.0-rc.26+mr.0.7c206f75.local",
+    "source_files": [
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/__init__.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/__init__.py",
+        "sha256": "a0acd99fa31ef115f62e6e00aabd45a4e404efbad09b96ae5cd9529dd1130c39"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/__init__.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/__init__.py",
+        "sha256": "a770c6184ec1565a4271e22824642b8d0d145670404708c38f503df2a77c183a"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/_warning_logging.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/_warning_logging.py",
+        "sha256": "af46e35349a7b53a8c647f920bb710c89d2d3c49eaa081a5cdb3274076af7263"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/carb_config.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/carb_config.py",
+        "sha256": "ce9d21c69a14f92917c9cfac16fa936c07e041afb1081930e5f6deb5a85bb32f"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/collision_config.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/collision_config.py",
+        "sha256": "eb239170f46004cd74370d6031e600f8c9da6b2bc824c00faa8ea19583a192bf"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/extension.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/extension.py",
+        "sha256": "329bd33b391affc575741967c3fa0cd76672ec57a4d458cf21c44d4aa9c355bd"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/fabric.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/fabric.py",
+        "sha256": "c5f2fd8de9e069e96c853432899b13df4489f5312112051ab8dca0cddb1c1766"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/interface.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/interface.py",
+        "sha256": "5445b8021d712a03b1931a55903a579e7d360303d12b527cfd5405f494d76c0d"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/newton_config.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/newton_config.py",
+        "sha256": "b9cf1d9d9bceba58061a87df9f423b66ea660b031ff85627b08241e2d896289f"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/newton_stage.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/newton_stage.py",
+        "sha256": "08352d2a0e767611461b7dfe75a06ab24a36605f0c806ddba03ff211b1bef47a"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/property_query.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/property_query.py",
+        "sha256": "79458fc3b4f18314c1c0de3f0e5ebe25c703ed63fa44ea9561b344a3d80b16c0"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/register_simulation.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/register_simulation.py",
+        "sha256": "7f52998fd8b10a06d9a490c0206c521f9f9b92ced3c6f5c1e158b809841a3896"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/simulation_functions.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/simulation_functions.py",
+        "sha256": "9d5fa1640d2fc8d12ee6eb693e4e464c48cd1454dd79b98ee8d80ddda80aa9e9"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/solver_config.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/solver_config.py",
+        "sha256": "681106be479b4a01db4b005bd73f85ffe3efb422a831ba786385124cf5a0de52"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/stage_update_functions.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/stage_update_functions.py",
+        "sha256": "557b44920b6d6e9a71688f180b283ec6ce692574d0189d09b544a4b1a0de7e6d"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/__init__.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/__init__.py",
+        "sha256": "c524e4100d751bbf94e733fc670d31bfc2cd4098c6b32e21aeceba92082eae2a"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/articulation_view.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/articulation_view.py",
+        "sha256": "5d0952494527466dc1cce1f2a1cefc4e55cb72e38b6cca8652fe353b3d7897f6"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/backend.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/backend.py",
+        "sha256": "97b9a75c13c204bf385fcbacbff9f247750583846d3beddfba393503b26d1cf3"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/contact_kernels.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/contact_kernels.py",
+        "sha256": "7703f21359f5f9d999008f26ddea5567ee82828ecd68844f2b3d0250af607925"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/kernels.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/kernels.py",
+        "sha256": "c7bf921238f6cec4ba62c82396049e94d07d4e7378b9b6063947bb42a49304f8"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/rigid_body_view.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/rigid_body_view.py",
+        "sha256": "efbbbb7e2135d0bc14ab023fc1b0b0dd0697fc200de98573237ad9528344ae9e"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/rigid_contact_view.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/rigid_contact_view.py",
+        "sha256": "ddd27bf6139c157ce5ce83f235b75c6d1a93ec369bbd967efc6f9037aa5ae532"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/tensor_api.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/tensor_api.py",
+        "sha256": "ad88f3a62e57278cbac688062ff6c6aa57c956a67033205ea16629a8fa4cfd68"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/tensor_utils.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/tensor_utils.py",
+        "sha256": "2e8ab7195310e5d05977541f81e0faaac1e47a60961b4a0e7383e27fd976f53a"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/tensors/utils.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/tensors/utils.py",
+        "sha256": "abc3e02b27f1dfe369780a8a028f7643ef9d58cd37696f50960f31b1faed207d"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/usd.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/usd.py",
+        "sha256": "1eb36479a349ba61a1d74bef7d73ca655398066560815faf910768cf96c55e04"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/impl/utils.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/impl/utils.py",
+        "sha256": "cea26840b02135c039110f6f79ecfa00f4126d4a5da07cd8138d92d4ee9674b4"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/__init__.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/__init__.py",
+        "sha256": "25d96b43b07818bee2cbe1d99a6f754f54abd6050d26c941e1688b10ab90377c"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_articulation.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_articulation.py",
+        "sha256": "9545a3ad5d9884fa33ef74c142c1cd653045610055721d1e05cdd2760fdf1243"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_deprecated_tensors.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_deprecated_tensors.py",
+        "sha256": "e7e71979cf6da9817e5d72ed49b04da2198d74c1c9a79c3094c3879298ec4e2f"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_hydroelastic.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_hydroelastic.py",
+        "sha256": "961f9926fdcb1fbcda61399da7cda9145fbf7a78a7ab3912d41cc9df6666b632"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_init_errors.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_init_errors.py",
+        "sha256": "4752ec2d952c8ec429bb4b8ab773ac975f4a6f0d9f06deda701d7c935a510e49"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_newton_stage.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_newton_stage.py",
+        "sha256": "54d6952c8128da12567800c3d831fb30e26c66253d2c455ce5e99cfd25da24bd"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_pattern_matching.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_pattern_matching.py",
+        "sha256": "f3f05ee82ecf48fb5dbadaae8d3427419c7280aead9501b258d4b399132e9caa"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_property_query.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_property_query.py",
+        "sha256": "fd0439e1573ebc7266d356ef313d98d2dfc4fb4726013ef824126f01632ef95a"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_rigid_body.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_rigid_body.py",
+        "sha256": "7e3f586cb28af5c6a326f10b935d218f7619c3c28f14fea0f428718c7e2e8b83"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_rigid_contact_view.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_rigid_contact_view.py",
+        "sha256": "9d63f1f75df6289666e52ed35cda575f9912d51705cbf5c103868e9dc0eeaf17"
+      },
+      {
+        "source": "source/extensions/isaacsim.physics.newton/python/tests/test_warning_logging.py",
+        "built_relative": "exts/isaacsim.physics.newton/isaacsim/physics/newton/tests/test_warning_logging.py",
+        "sha256": "8bca0b7ed3f019cc0f9d4043d21b3e6050e5ad53e48a169e4b1eacad3386389a"
+      },
+      {
+        "source": "source/extensions/isaacsim.simulation_app/isaacsim/simulation_app/__init__.py",
+        "built_relative": "exts/isaacsim.simulation_app/isaacsim/simulation_app/__init__.py",
+        "sha256": "b32081c9c5e4bcd37bc7e041aabad1b08e451ac6d64e43a4e77873cce59fd6ee"
+      },
+      {
+        "source": "source/extensions/isaacsim.simulation_app/isaacsim/simulation_app/app_framework.py",
+        "built_relative": "exts/isaacsim.simulation_app/isaacsim/simulation_app/app_framework.py",
+        "sha256": "06994dee0a77ce2abcd914b56301bc0897472de1a59b810794790bb9c531b803"
+      },
+      {
+        "source": "source/extensions/isaacsim.simulation_app/isaacsim/simulation_app/simulation_app.py",
+        "built_relative": "exts/isaacsim.simulation_app/isaacsim/simulation_app/simulation_app.py",
+        "sha256": "c2a2173be57abac20ef97f81b80d58319c94c9a4017c98709f8d13489ad0b746"
+      },
+      {
+        "source": "source/extensions/isaacsim.simulation_app/isaacsim/simulation_app/utils.py",
+        "built_relative": "exts/isaacsim.simulation_app/isaacsim/simulation_app/utils.py",
+        "sha256": "3b48701611e0c8e3be3b2a515bd32e147a843b1fdd00b960b992aeda135a1186"
+      }
+    ],
+    "differences": [],
+    "scope": "Official-tag Python source for Newton integration and SimulationApp. Local build, not a complete official Isaac binary qualification."
+  },
+  "packages": [
+    {
+      "package": "mujoco",
+      "version": "3.11.0",
+      "url": "https://files.pythonhosted.org/packages/41/d6/7b79f5d8fbd019658a3b5feb6ffd09c1e727eaf93f518685d3cc105a28f5/mujoco-3.11.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "wheel": "mujoco-3.11.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "wheel_sha256": "f40214fefc8c2fe0002a3c8abadf30de7a3330634f3c45cc29b407b40a0173fc",
+      "mismatches": [],
+      "missing": [],
+      "scope": "Package payload comparison only. Actual loaded bytecode and imports are audited separately.",
+      "verified_files": 239
+    },
+    {
+      "package": "mujoco-warp",
+      "version": "3.11.0",
+      "url": "https://files.pythonhosted.org/packages/e6/03/9bf86946c755a9a020c1bea587841472b0206351f73f67e41050fcb2a20c/mujoco_warp-3.11.0-py3-none-any.whl",
+      "wheel": "mujoco_warp-3.11.0-py3-none-any.whl",
+      "wheel_sha256": "97e77e877c1c2ea064ae68eaace2333dec94f2d8984091ba7b383bc8c34958f6",
+      "mismatches": [],
+      "missing": [],
+      "scope": "Package payload comparison only. Actual loaded bytecode and imports are audited separately.",
+      "verified_files": 281
+    },
+    {
+      "package": "newton",
+      "version": "1.5.0",
+      "url": "https://files.pythonhosted.org/packages/ef/a8/706cd18af6c42a47f750a129c2605e7ed9af5800a37665ad78b870d34383/newton-1.5.0-py3-none-any.whl",
+      "wheel": "newton-1.5.0-py3-none-any.whl",
+      "wheel_sha256": "a9eef789e2e0f857e40df3382f101b5faadff5dd8a61cb86dd5ec5382dd27865",
+      "mismatches": [],
+      "missing": [],
+      "scope": "Package payload comparison only. Actual loaded bytecode and imports are audited separately.",
+      "verified_files": 844
+    },
+    {
+      "package": "mujoco-usd-converter",
+      "version": "0.5.0",
+      "url": "https://files.pythonhosted.org/packages/2e/5a/4c3be263beeda406d622ad273e0f5daba8e0ce3996e9e46a35cba820039f/mujoco_usd_converter-0.5.0-py3-none-any.whl",
+      "wheel": "mujoco_usd_converter-0.5.0-py3-none-any.whl",
+      "wheel_sha256": "e4a97f9817fdd56b06e6207e0878e0de8baae5ee82880e365815c89d9a2058f4",
+      "mismatches": [],
+      "missing": [],
+      "scope": "Package payload comparison only. Actual loaded bytecode and imports are audited separately.",
+      "verified_files": 22
+    },
+    {
+      "package": "newton-usd-schemas",
+      "version": "0.4.1",
+      "url": "https://files.pythonhosted.org/packages/9b/24/d1d44f682dbd28392ef0b6f9e6f9e40374c6009af06e494fa6a9308f79e2/newton_usd_schemas-0.4.1-py3-none-any.whl",
+      "wheel": "newton_usd_schemas-0.4.1-py3-none-any.whl",
+      "wheel_sha256": "8911e846c65448426609a2945db6d1135d33e84bf4107efd888a62287b1aa93d",
+      "mismatches": [],
+      "missing": [],
+      "scope": "Package payload comparison only. Actual loaded bytecode and imports are audited separately.",
+      "verified_files": 4
+    },
+    {
+      "package": "warp-lang",
+      "version": "1.16.0",
+      "url": "https://files.pythonhosted.org/packages/1d/3d/47feef2eee4739437e19d6949ea231ca4181c9eacbaa39144761e6130d94/warp_lang-1.16.0-py3-none-manylinux_2_28_x86_64.whl",
+      "wheel": "warp_lang-1.16.0-py3-none-manylinux_2_28_x86_64.whl",
+      "wheel_sha256": "96449fc1e3b354185e2f09434fb794b5953ab2e8673b104d7e7f48d5d418bb35",
+      "mismatches": [
+        {
+          "path": "warp/bin/warp-clang.so",
+          "expected": "f96c87184d4026429aeb8243e54e090862d96237cd34340456dfc584ed5715aa",
+          "actual": "3466e63e7cb9d04251f9ec3cb2c67e43bc33fc54ff88108a3cc62bbcab217be5"
+        },
+        {
+          "path": "warp/bin/warp.so",
+          "expected": "866ac94b7df824c464f6217c4592400235d3a9756b6e02da30badcf7ff761c44",
+          "actual": "4502f1ed3f92030c552cff529341e5a0777750fe65ecea8762d7935185673617"
+        }
+      ],
+      "missing": [],
+      "scope": "Package payload comparison only. Actual loaded bytecode and imports are audited separately.",
+      "verified_files": 557
+    }
+  ],
+  "warp_vendor": {
+    "url": "https://d4i3qtqj3r0z5.cloudfront.net/omni.warp.core-1.16.0%2Blx64.zip",
+    "archive_sha256": "28248fb8d6fb3792c8b4f0e76e2dd8d3c7250b3cb193dddba51246af0602ca1a",
+    "missing": [],
+    "different": [
+      {
+        "path": "config/extension.gen.toml",
+        "expected": "07815191f31971c28c759f7bfc678dbd7d86902293cb8693770fb98704531128",
+        "actual": "04987ce05efcc34f2c86e92614988eeda4249cbddd2d15e2d39d4186f78a0351"
+      }
+    ],
+    "claim": "Payload bytes compared against the vendor extension archive. No independent cryptographic signature verification claimed.",
+    "verified_files": 701
+  },
+  "python_cached_code_audit": "Selected Newton SolverMuJoCo, MJWarp forward and Warp context loader code equals compiled current source; no changed import cache found.",
+  "native_latest_target": "3.15.0; qualification/comparison still pending in #152",
+  "matched_native_target": "3.11.0 with explicitly matched Warp payload; separate from same-version PyPI binary"
+}

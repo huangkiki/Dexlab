@@ -30,25 +30,31 @@ PROFILES['experiment-24g'] = {**PROFILES['experiment'], 'memory': 24576, 'high':
 MEMORY_TIERS_GIB = (8, 16, 24, 32, 40)
 for gib in MEMORY_TIERS_GIB:
     for cores in (4, 8):
-        PROFILES[f'adaptive-{gib}g-{cores}c'] = {
+        name = f'adaptive-{gib}g-{cores}c'
+        PROFILES[name] = {
             **PROFILES['experiment'], 'memory': gib * 1024,
             'high': (gib - 1) * 1024, 'cpu': cores * 100,
         }
+        # Isaac Sim initialization reaches the legacy 128-task ceiling even
+        # with a four-core quota. Keep that ceiling for all existing profiles.
+        PROFILES[name + '-256t'] = {**PROFILES[name], 'tasks': 256}
 
 
-def select_profile(peak_mib=None, complex_model=False, cores=4):
+def select_profile(peak_mib=None, complex_model=False, cores=4, task_limit=128):
     if cores not in (4, 8):
         raise ValueError('CPU quota must be 4 or 8 core equivalents')
+    if task_limit not in (128, 256):
+        raise ValueError('Task limit must be 128 or 256')
     if peak_mib is not None and (not math.isfinite(peak_mib) or peak_mib <= 0):
         raise ValueError('Measured peak must be finite and positive')
     required = peak_mib * 1.5 if peak_mib is not None else (24 if complex_model else 16) * 1024
     for gib in MEMORY_TIERS_GIB:
         if gib * 1024 >= required:
-            return f'adaptive-{gib}g-{cores}c'
+            return f'adaptive-{gib}g-{cores}c' + ('-256t' if task_limit == 256 else '')
     raise ValueError('Measured peak needs more than the 40 GiB maximum; split the workload')
 
 
-def freeze_resources(path, peak_receipt=None, complex_model=False, cores=4):
+def freeze_resources(path, peak_receipt=None, complex_model=False, cores=4, task_limit=128):
     """Reuse an immutable batch plan; never silently raise a running batch's cap."""
     measurement = None
     peak = None
@@ -59,9 +65,11 @@ def freeze_resources(path, peak_receipt=None, complex_model=False, cores=4):
         counters = telemetry.get('final') or telemetry.get('latest') or {}
         peak = int(counters['memory.peak']) / 1024**2
         measurement = {'sha256': hashlib.sha256(raw).hexdigest(), 'peak_mib': peak}
-    plan = {'schema_version': 1, 'profile': select_profile(peak, complex_model, cores),
+    plan = {'schema_version': 1, 'profile': select_profile(peak, complex_model, cores, task_limit),
             'measurement': measurement, 'complex_model': complex_model,
             'cpu_cores': cores, 'peak_margin': 1.5, 'desktop_reserve_gib': 8}
+    if task_limit != 128:
+        plan['task_limit'] = task_limit
     # Exclusive create protects existing plans, including interrupted batches.
     path.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -74,7 +82,7 @@ def freeze_resources(path, peak_receipt=None, complex_model=False, cores=4):
     return plan
 
 METRICS = ('memory.current', 'memory.peak', 'memory.events', 'cpu.stat',
-         'pids.current', 'pids.events', 'io.stat')
+         'pids.current', 'pids.peak', 'pids.events', 'io.stat')
 
 
 def pressure(root):
@@ -95,7 +103,9 @@ def gpu_memory():
 
 
 def read_values(root, names):
-    return {name: (root / name).read_text().strip() for name in names}
+    # Older kernels omit pids.peak; required enforcement files stay fail-closed.
+    return {name: (None if name == 'pids.peak' and not (root / name).exists()
+                   else (root / name).read_text().strip()) for name in names}
 
 
 def verify_limits(root, device, memory, high, profile='archive'):
@@ -303,6 +313,8 @@ def main():
     parser.add_argument('--peak-receipt', type=Path, help='Previous measured bounded-run receipt')
     parser.add_argument('--complex-model', action='store_true')
     parser.add_argument('--cpu-cores', type=int, choices=(4, 8), default=4)
+    parser.add_argument('--task-limit', type=int, choices=(128, 256), default=128,
+                        help='Threads/processes allowed; 256 requires a new frozen adaptive plan')
     parser.add_argument('--data-dir', type=Path, help='Required existing data volume directory for experiments')
     parser.add_argument('--timeout', type=int)
     parser.add_argument('--memory-mib', type=int)
@@ -317,9 +329,10 @@ def main():
         if args.inside or args.resource_plan is None or args.memory_mib is not None or args.high_mib is not None:
             parser.error('Adaptive launch requires --resource-plan and forbids memory overrides')
         args.resource_selection = freeze_resources(
-            args.resource_plan, args.peak_receipt, args.complex_model, args.cpu_cores)
+            args.resource_plan, args.peak_receipt, args.complex_model, args.cpu_cores, args.task_limit)
         args.profile = args.resource_selection['profile']
-    elif args.resource_plan is not None or args.peak_receipt is not None or args.complex_model or args.cpu_cores != 4:
+    elif (args.resource_plan is not None or args.peak_receipt is not None or args.complex_model
+          or args.cpu_cores != 4 or args.task_limit != 128):
         parser.error('Resource selection options require --profile adaptive')
     policy = PROFILES[args.profile]
     args.memory_mib = policy['memory'] if args.memory_mib is None else args.memory_mib

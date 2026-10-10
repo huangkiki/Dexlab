@@ -10,7 +10,10 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
-from dexlab.mujoco_artifacts import load_model, model_inputs, pack_model
+from dexlab.mujoco_artifacts import (
+    conversion_parameters, load_model, model_inputs, pack_model,
+    parameter_differences, save_conversion_evidence,
+)
 
 
 class ModelArtifactTests(unittest.TestCase):
@@ -93,6 +96,50 @@ class ModelArtifactTests(unittest.TestCase):
         path.write_text(json.dumps(manifest))
         with self.assertRaisesRegex(ValueError, "Invalid model chunk"):
             load_model(self.path)
+
+
+class ConversionEvidenceTests(unittest.TestCase):
+    def test_mjspec_export_loss_preserves_exact_binary_and_source_arrays(self):
+        spec = mujoco.MjSpec.from_string(
+            '<mujoco><worldbody><body pos="0.123456789123 0 1"><freejoint/>'
+            '<geom type="box" size=".02 .02 .02" mass=".06400000303983688"/>'
+            '</body></worldbody></mujoco>')
+        model = spec.compile()
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            intermediate = root / 'framework.xml'
+            intermediate.write_text(spec.to_xml())
+            saved = save_conversion_evidence(model, root, intermediate=intermediate)
+            self.assertTrue(saved['binary_readback_exact'])
+            self.assertGreater(saved['intermediate_differences']['body_mass']['max_abs'], 0.)
+            self.assertGreater(saved['intermediate_differences']['body_pos']['max_abs'], 0.)
+            np.testing.assert_array_equal(load_model(root).body_mass, model.body_mass)
+            original = (root / 'model.mjb').read_bytes()
+            with self.assertRaises(FileExistsError):
+                save_conversion_evidence(model, root, intermediate=intermediate)
+            self.assertEqual((root / 'model.mjb').read_bytes(), original)
+
+    def test_drive_and_frame_changes_are_observable(self):
+        model = mujoco.MjModel.from_xml_string(
+            '<mujoco><worldbody><body><joint name="j" axis="0 1 0"/>'
+            '<geom type="box" size=".02 .03 .04"/></body></worldbody>'
+            '<actuator><position joint="j" kp="10"/></actuator></mujoco>')
+        before = conversion_parameters(model)
+        model.actuator_gainprm[0, 0] = 20
+        model.body_ipos[1, 0] = .001
+        changes = parameter_differences(before, conversion_parameters(model))
+        self.assertEqual(changes['actuator_gainprm']['max_abs'], 10.)
+        self.assertEqual(changes['body_ipos']['max_abs'], .001)
+        self.assertFalse(changes['actuator_gainprm']['equal'])
+
+    def test_missing_nonfinite_and_shape_changes_cannot_look_equal(self):
+        with self.assertRaisesRegex(ValueError, 'fields differ'):
+            parameter_differences({'mass': [1.]}, {})
+        with self.assertRaisesRegex(ValueError, 'Non-finite'):
+            parameter_differences({'mass': [1.]}, {'mass': [float('nan')]})
+        changed = parameter_differences({'mass': [1.]}, {'mass': [1., 1.]})
+        self.assertIsNone(changed['mass']['max_abs'])
+        self.assertFalse(changed['mass']['equal'])
 
 
 if __name__ == "__main__":

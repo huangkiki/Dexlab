@@ -632,6 +632,10 @@
         "sha256": "cfa3e5a8d03b6c0a6b2f3d7b80fd589cbdb315312ff4390502acc68c91f5e072"
       },
       "profile": "sap-point"
+    },
+    "isaac-mjwarp-clock-v4": {
+      "description": "Development clock/contact diagnosis only; complete task qualification has not run.",
+      "reference": "https://github.com/huangkiki/Dexlab/blob/main/docs/framework-mjwarp-diagnostics.md"
     }
   },
   "rows": [
@@ -5677,6 +5681,134 @@
         "folded-drop": {
           "state": "not-run",
           "reference": "https://github.com/huangkiki/Dexlab/issues/28"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "MJWarp Newton / pyramidal / Newton contacts",
+      "runtime_path": "Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0",
+      "version": "3.11.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "isaac-mjwarp-clock-v4",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        }
+      }
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "MJWarp Newton / pyramidal / MJWarp contacts",
+      "runtime_path": "Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0",
+      "version": "3.11.0",
+      "groups": [
+        "rigid"
+      ],
+      "cohort": "isaac-mjwarp-clock-v4",
+      "cells": {
+        "contact": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "incline": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "collision": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "pinch": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "push": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "rotation": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "cloth-grasp": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "cloth-fold": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "extension": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "sag": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "drape": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
+        },
+        "folded-drop": {
+          "state": "not-run",
+          "reference": "https://github.com/huangkiki/Dexlab/issues/152"
         }
       }
     }
