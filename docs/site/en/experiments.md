@@ -23,6 +23,7 @@ The display camera follows recorded apple poses for playback only. There is no v
 
 [Implementation and parameters](https://github.com/huangkiki/Dexlab/blob/main/docs/sdf-backends.md) · [Full inventory](https://github.com/huangkiki/Dexlab/blob/main/docs/inventory/README.md)
 
+(apple-replays)=
 ## Continuous close-up records
 
 These are development-scene replays at the original pinned versions, not held-out success rates. The cloth recording preserves the detected table-intersection failure.

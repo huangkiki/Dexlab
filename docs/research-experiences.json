@@ -339,5 +339,387 @@
         "cost": "Retain initialization, observation, cache and independent-process costs; 200-step diagnostics do not establish long-grasp throughput."
       }
     }
-  ]
+  ],
+  "visuals": {
+    "schema_version": 1,
+    "catalogue": [
+      {
+        "id": "normal-response",
+        "title": {
+          "zh": "法向与瞬态响应",
+          "en": "Normal & transient response"
+        },
+        "engines": "MuJoCo · SuperDex · historical PhysX",
+        "thumbnail": "demos/contact-benchmark/media/normal-response-v1.png",
+        "question": {
+          "zh": "压入、卸载与动态响应如何随参数改变？",
+          "en": "How do parameters change loading, unloading and transients?"
+        },
+        "finding": {
+          "zh": "静态校准有效，动态响应和质量迁移须分别验证。",
+          "en": "Static calibration works; dynamics and mass transfer need separate checks."
+        },
+        "link": "experience.html#normal-response",
+        "thumbnail_sha256": "31ad2d0a2f83de1f704efe98878da4ceed830894c95f18e0295c52d82a516ec2",
+        "site_thumbnail": "_static/visual/catalogue/normal-response-v1.png"
+      },
+      {
+        "id": "six-engine-incline",
+        "title": {
+          "zh": "六引擎斜面与摩擦",
+          "en": "Six-engine incline & friction"
+        },
+        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake",
+        "thumbnail": "docs/evidence/incline-friction/error-cost.png",
+        "question": {
+          "zh": "静止、滑动和低摩擦有哪些差异？",
+          "en": "Where do static, sliding and low-friction cases differ?"
+        },
+        "finding": {
+          "zh": "原配置结果与观测有效性分列；全部失败保留。",
+          "en": "Fixed-profile outcomes and observation validity are separate; failures remain."
+        },
+        "link": "visual-comparisons.html#incline",
+        "thumbnail_sha256": "1b5d51d0b31545d442d0505c3aa69c7cb4a57ac9f80c12bc536bb70d44beabd2",
+        "site_thumbnail": "_static/visual/catalogue/error-cost.png"
+      },
+      {
+        "id": "impact",
+        "title": {
+          "zh": "碰撞与接触起始",
+          "en": "Impact & contact onset"
+        },
+        "engines": "MuJoCo · SuperDex",
+        "thumbnail": "docs/evidence/impact-phase/sensitivity.png",
+        "question": {
+          "zh": "步长、刚度及碰撞相位怎样影响瞬态？",
+          "en": "How do timestep, stiffness and impact phase affect transients?"
+        },
+        "finding": {
+          "zh": "已有相位与刚度扫描；更小步长不自动消除模型差异。",
+          "en": "Existing phase/stiffness sweeps; smaller steps do not automatically remove model differences."
+        },
+        "link": "results.html",
+        "thumbnail_sha256": "8ca1132f6d52a2a940bcd55ae0fdd908ec809bd0476f808f8ed8ea168703388c",
+        "site_thumbnail": "_static/visual/catalogue/sensitivity.png"
+      },
+      {
+        "id": "pinch-load",
+        "title": {
+          "zh": "夹具夹持、抬升与释放",
+          "en": "Fixture pinch, lift & release"
+        },
+        "engines": "Genesis · MuJoCo · SuperDex (separate protocols)",
+        "thumbnail": "docs/evidence/force-limit/replays/dev-cap-0.8/frame-060.png",
+        "question": {
+          "zh": "夹持为什么保持或滑脱？",
+          "en": "Why does the grasp hold or slip?"
+        },
+        "finding": {
+          "zh": "Genesis 0.4 N 与 0.8 N 配置呈现不同保持结果。",
+          "en": "Genesis 0.4 N and 0.8 N configurations have different retention outcomes."
+        },
+        "link": "visual-comparisons.html#pinch",
+        "thumbnail_sha256": "a26e1646d59338e1205888dfb37d5e84cd19ce58a38f675dfe8f0216d6c2282d",
+        "site_thumbnail": "_static/visual/catalogue/frame-060.png"
+      },
+      {
+        "id": "apple",
+        "title": {
+          "zh": "苹果抓梗 · SDF 接触",
+          "en": "Apple-stem grasp · SDF contact"
+        },
+        "engines": "MuJoCo · SuperDex · historical PhysX",
+        "thumbnail": "demos/apple-stem-grasp/media/superdex-sdf.png",
+        "question": {
+          "zh": "复杂几何下能否连续保持？",
+          "en": "Can a grasp maintain contact on complex geometry?"
+        },
+        "finding": {
+          "zh": "已有原生连续回放与独立历史验收；不同批次分列。",
+          "en": "Native continuous replays and historical independent checks; cohorts stay separate."
+        },
+        "link": "experiments.html#apple-replays",
+        "thumbnail_sha256": "a38bb120e6edc269025f45f6612723ac5270bcc8b30f45e8fa2a32ebac7e7937",
+        "site_thumbnail": "_static/visual/catalogue/superdex-sdf.png"
+      },
+      {
+        "id": "cloth",
+        "title": {
+          "zh": "布料力学与机器人夹布",
+          "en": "Cloth mechanics & robot grasp"
+        },
+        "engines": "MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX",
+        "thumbnail": "docs/evidence/visual/cloth-poster.png",
+        "question": {
+          "zh": "柔性形变、接触与保持何时失效？",
+          "en": "When do deformation, contact and retention fail?"
+        },
+        "finding": {
+          "zh": "历史柔顺夹布画面；力学、下落与夹布按独立协议记录，保留失败。",
+          "en": "Historical compliant-grasp frame; mechanics, drop and grasp retain separate protocols and failures."
+        },
+        "link": "coverage.html",
+        "thumbnail_sha256": "77a3cbd26e0ad6c8717095123d216bc13a56bebbd83cfa2925d74c05e84da093",
+        "site_thumbnail": "_static/visual/catalogue/cloth-poster.png",
+        "thumbnail_source": {
+          "path": "demos/cloth-folding/media/compliance-grasp.gif",
+          "sha256": "866415b8e795a395f8d43c790bc07b6638f07903afc70ac0b896a12c0364c602",
+          "frame_selection": "middle frame, historical compliance-grasp protocol; not a new comparison"
+        }
+      },
+      {
+        "id": "mass-size-transfer",
+        "title": {
+          "zh": "质量／尺寸迁移",
+          "en": "Mass / size transfer"
+        },
+        "engines": "MuJoCo · SuperDex",
+        "thumbnail": "docs/evidence/contact-transfer-v1.png",
+        "question": {
+          "zh": "固定参数能否迁移到邻近场景？",
+          "en": "Do fixed parameters transfer to nearby scenes?"
+        },
+        "finding": {
+          "zh": "30 条历史迁移记录，联合验收 0/30；失败也是选型依据。",
+          "en": "30 historical transfer records, 0/30 joint passes; failures guide selection."
+        },
+        "link": "experience.html#mass-size-transfer",
+        "thumbnail_sha256": "339cdc6a58fc73a54383309b3bf106da38c3878da2126b1505e6bcd6e6582ab6",
+        "site_thumbnail": "_static/visual/catalogue/contact-transfer-v1.png"
+      },
+      {
+        "id": "transient-cost",
+        "title": {
+          "zh": "响应误差与计算成本",
+          "en": "Response error & cost"
+        },
+        "engines": "MuJoCo · SuperDex",
+        "thumbnail": "docs/evidence/response-cost-v1.png",
+        "question": {
+          "zh": "更小误差需要什么计算代价？",
+          "en": "What does lower error cost?"
+        },
+        "finding": {
+          "zh": "27 条记录区分原生计算、记录和评分成本。",
+          "en": "27 records separate native computation, recording and scoring costs."
+        },
+        "link": "experience.html#transient-cost",
+        "thumbnail_sha256": "37b02e843a12da54d8eeb65b412b31a4893155e37ceea6fb5151d6ba23f565bd",
+        "site_thumbnail": "_static/visual/catalogue/response-cost-v1.png"
+      },
+      {
+        "id": "framework-path",
+        "title": {
+          "zh": "原生与框架接入路径",
+          "en": "Native & framework paths"
+        },
+        "engines": "MuJoCo / MJWarp · Newton / Isaac Sim",
+        "thumbnail": "docs/evidence/engine-qualification/contact-parameters.png",
+        "question": {
+          "zh": "相同核心为何仍可能出现轨迹差异？",
+          "en": "Why can matching cores still produce different trajectories?"
+        },
+        "finding": {
+          "zh": "对齐 CPU 模型后仍有 GPU 字段差异；参数概览图非轨迹证据。",
+          "en": "GPU field differences remain after CPU alignment; parameter-map thumbnail is not trajectory evidence."
+        },
+        "link": "experience.html#framework-path",
+        "thumbnail_sha256": "af4051520404419903d59a1141796854c169e6c726524b115c0da10b17b2598d",
+        "site_thumbnail": "_static/visual/catalogue/contact-parameters.png"
+      }
+    ],
+    "cases": [
+      {
+        "id": "incline",
+        "experience_id": "six-engine-incline",
+        "title": {
+          "zh": "六引擎斜面：相同工况，响应不同",
+          "en": "Six-engine incline: shared conditions, different responses"
+        },
+        "intro": {
+          "zh": "40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。",
+          "en": "A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at three timesteps. Curves and replays retain the original passes, failures and invalid records."
+        },
+        "selection": {
+          "zh": "展示选择：MuJoCo 取冻结清单首项 PGS／elliptic；其余取已发布基线 SuperDex Newton／AUTO／C1、Genesis Newton／elliptic／Signorini、Newton Physics XPBD、PhysX PGS、Drake SAP／kLagged／hydroelastic。未按通过数挑选；其余配置仍在完整矩阵中。",
+          "en": "Selection: MuJoCo uses the first frozen profile, PGS/elliptic. Other published baselines are SuperDex Newton/AUTO/C1, Genesis Newton/elliptic/Signorini, Newton Physics XPBD, PhysX PGS and Drake SAP/kLagged/hydroelastic. Selection does not use pass counts; all other profiles remain in the full matrix."
+        },
+        "reference": {
+          "zh": "物理参照：不旋转刚体、库仑摩擦、持续接触的理想斜面，滑动加速度 a=g(sinθ−μcosθ)，静止需满足静摩擦不等式。接触切换、几何与模型差异限制此参照；Drake 初始 1 μm 间隙与 Genesis 名义零摩擦的原生下限保留。近景使用相同物体跟随规则及尺度，下方标尺保留世界坐标位移；无效观测的曲线只作诊断。",
+          "en": "Reference: an ideal nonrotating Coulomb block with continuous contact has sliding acceleration a=g(sinθ−μcosθ); rest requires the static-friction inequality. Contact switching, geometry and model differences limit this reference. Drake’s initial 1 μm gap and Genesis’s native floor on nominal zero friction remain. Close-ups use the same body-follow camera rule and scale; the shared ruler retains world displacement. Invalid-record curves are diagnostic only."
+        },
+        "evidence": {
+          "zh": "[完整 solver 矩阵](coverage.html) · [全部斜面报告](engines.html#原生斜面批次) · 各播放器数据包含原评分及来源哈希。",
+          "en": "[Complete solver matrix](coverage.html) · [Engine reports](engines.html) · Each replay dataset contains original scores and source hashes."
+        },
+        "variants": [
+          {
+            "label": {
+              "zh": "静止 · 1 ms",
+              "en": "Static · 1 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-static-0.001.json.gz",
+              "sha256": "95260fee94c2b1b5e2c2ef0978f80a4b9978e8907f6f8e74f3ece285bbb2caae"
+            }
+          },
+          {
+            "label": {
+              "zh": "静止 · 2 ms",
+              "en": "Static · 2 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-static-0.002.json.gz",
+              "sha256": "892fc2dee8f69ff221dbf6c97841922ebe2bcaddd26a34d5135f5f9fa8da9da9"
+            }
+          },
+          {
+            "label": {
+              "zh": "静止 · 0.5 ms",
+              "en": "Static · 0.5 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-static-0.0005.json.gz",
+              "sha256": "f2f72f97df3f9ff762bf9e9ca105cb849edff7a91630913fb16b44124598e123"
+            }
+          },
+          {
+            "label": {
+              "zh": "滑动 · 1 ms",
+              "en": "Sliding · 1 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-sliding-0.001.json.gz",
+              "sha256": "3bd21780db09e362afa2d73402acce4eb9227b8921de56450c4a18b7fae6bb1c"
+            }
+          },
+          {
+            "label": {
+              "zh": "滑动 · 2 ms",
+              "en": "Sliding · 2 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-sliding-0.002.json.gz",
+              "sha256": "1f967d908e912cefc2272108786740d8d1e6867eb8d381773ecf0e76ef63601c"
+            }
+          },
+          {
+            "label": {
+              "zh": "滑动 · 0.5 ms",
+              "en": "Sliding · 0.5 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-sliding-0.0005.json.gz",
+              "sha256": "d7d865b2e40adfe1a5a9d4bcea75008a71cc16ebeaff2ee25d2eb9da557a60fd"
+            }
+          },
+          {
+            "label": {
+              "zh": "名义零摩擦 · 1 ms",
+              "en": "Nominal zero friction · 1 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-frictionless-0.001.json.gz",
+              "sha256": "10aaff9c79eebf36befde0bbd5c70050606a92ca7f0566d3a82ef2ab8720aa39"
+            }
+          },
+          {
+            "label": {
+              "zh": "名义零摩擦 · 2 ms",
+              "en": "Nominal zero friction · 2 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-frictionless-0.002.json.gz",
+              "sha256": "687cfc7803aa9af7d31b2ac2e0caac062a820f7599f3b9a781c4098daad77d71"
+            }
+          },
+          {
+            "label": {
+              "zh": "名义零摩擦 · 0.5 ms",
+              "en": "Nominal zero friction · 0.5 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/incline-frictionless-0.0005.json.gz",
+              "sha256": "555f263bb2e39c3f43a54604fbaf309853d6a8f190dd5dd198142846888d8a46"
+            }
+          }
+        ]
+      },
+      {
+        "id": "normal",
+        "experience_id": "normal-response",
+        "title": {
+          "zh": "法向响应：改参数，还是改 solver？",
+          "en": "Normal response: change parameters or the solver?"
+        },
+        "intro": {
+          "zh": "同一 MuJoCo 场景，从约 80 kN/m 到合成目标 20 kN/m。先看加载窗口的压入曲线，再看完整卸载；成功只属于规定的物理检查与条件。",
+          "en": "The same MuJoCo fixture moves from about 80 kN/m toward the synthetic 20 kN/m target. Inspect loaded-window indentation, then the complete unloading trace; success belongs to the stated checks and conditions."
+        },
+        "parameters": {
+          "zh": "有效参数：相同 solimp=[0.9,0.9,0.001,0.5,2]；初始与校准 solref 及完整原生配置见数据中的 effective_parameters 和原始 run.json。图中保留 −1 N 离面段；加载窗口另图展示，避免离面运动掩盖微小压入。下方成本与迁移图属于各自历史协议，不与本案例合并计数。",
+          "en": "Effective parameters: shared solimp=[0.9,0.9,0.001,0.5,2]; initial/calibrated solref and full native settings are in effective_parameters and original run.json. The −1 N separation segment remains; a separate loaded-window plot exposes small indentation. Cost and transfer figures below belong to separate historical protocols and are not pooled with this case."
+        },
+        "evidence": {
+          "zh": "[法向协议、17 条结果与复现](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/NORMAL_RESPONSE.zh-CN.md) · [迁移经验](experience.html#mass-size-transfer) · [成本边界](experience.html#transient-cost)",
+          "en": "[Normal protocol, all 17 results and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/NORMAL_RESPONSE.md) · [Transfer](experience.html#mass-size-transfer) · [Cost boundaries](experience.html#transient-cost)"
+        },
+        "variants": [
+          {
+            "label": {
+              "zh": "初始／校准 · 0.2 kg · 0.5 ms",
+              "en": "Initial / calibrated · 0.2 kg · 0.5 ms"
+            },
+            "data": {
+              "path": "docs/evidence/visual/normal-calibration.json.gz",
+              "sha256": "cacf9c26242cc089e8af24144158e79b7658cdf7e3751049b9339455e17f19d3"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pinch",
+        "experience_id": "pinch-load",
+        "title": {
+          "zh": "夹持：0.4 N 滑脱，0.8 N 保持",
+          "en": "Pinch: 0.4 N slips, 0.8 N holds"
+        },
+        "intro": {
+          "zh": "同一 Genesis 夹具与物体，只改变指关节驱动力限额。对照完整闭合、抬升、保持和释放，并保留张开负例。",
+          "en": "The same Genesis fixture and object, changing the finger-joint force limit. Compare complete closing, lifting, holding and release, with an open-gripper negative control retained."
+        },
+        "reference": {
+          "zh": "物理参照：理想静态平指夹持需要 μΣN≥mg，本例 mg/μ≈1.256 N。曲线 Σ|Fx| 是指面力投影代理，不是实测执行器输出；2–3 s 高度阈值 60 mm 只是原验收的一项，全部原检查同时保留。",
+          "en": "Reference: ideal static flat-pad retention requires μΣN≥mg; here mg/μ≈1.256 N. The plotted Σ|Fx| is a pad-force projection proxy, not measured actuator output. The 60 mm height threshold during 2–3 s is one original check; all other checks remain."
+        },
+        "evidence": {
+          "zh": "[16 个案例、失败与成本](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md) · [历史 solver 来源审计](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.md)",
+          "en": "[All 16 cases, failures and costs](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) · [Historical solver audit](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-solver-audit.md)"
+        },
+        "variants": [
+          {
+            "label": {
+              "zh": "保持边界：0.4 N／0.8 N",
+              "en": "Retention: 0.4 N / 0.8 N"
+            },
+            "data": {
+              "path": "docs/evidence/visual/pinch-retention.json.gz",
+              "sha256": "39560eb3dee841dd6c73f2f260a6390da4cc15cff39db845de64692e10496ddd"
+            }
+          },
+          {
+            "label": {
+              "zh": "张开负例／0.8 N",
+              "en": "Open negative / 0.8 N"
+            },
+            "data": {
+              "path": "docs/evidence/visual/pinch-negative.json.gz",
+              "sha256": "2559c4425aed55d961ce27acae7ac4d5fd6bcf83897da2200000c526a45f9c98"
+            }
+          }
+        ]
+      }
+    ]
+  }
 }

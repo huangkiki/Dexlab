@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const {nearest,frameAt,envelope}=require('../docs/site/_static/replay.js');
+assert.equal(frameAt(-1,30,61),0);
+assert.equal(frameAt(99,30,61),60);
+assert.equal(frameAt(1/30,30,61),1);
+assert.equal(nearest([[0,1],[.002,2],[.004,3]],.0031),2);
+const raw=Array.from({length:10000},(_,i)=>[i*.0005,i===4999?1000:(i===5001?-500:0)]);
+const reduced=envelope(raw);
+assert(reduced.some(p=>p[1]===1000),'Downsampling must retain narrow positive peaks');
+assert(reduced.some(p=>p[1]===-500),'Downsampling must retain narrow negative peaks');
+assert.deepEqual(reduced[0],raw[0]);
+assert.deepEqual(reduced.at(-1),raw.at(-1));
+assert(reduced.length<2000);
