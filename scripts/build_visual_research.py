@@ -6,6 +6,7 @@ import json
 import re
 from pathlib import Path
 
+from solver_taxonomy import summarize_roles
 from task_coverage import load_inventory
 from visual_research import ROOT, check, read_bundle
 
@@ -14,52 +15,9 @@ SITE = "https://huangkiki.github.io/Dexlab/"
 ENGINES = ("MuJoCo", "SuperDex", "Genesis", "Newton Physics", "PhysX", "Drake")
 
 
-def solver_summary(engine, rows):
-    """Derive the compact inventory from actual registered configurations."""
-    names = {
-        r["solver"]
-        for r in rows
-        if not any(
-            word in r["solver"].lower()
-            for word in ("unqualified", "not qualified", "pending", "historical")
-        )
-        and not r["solver"].startswith("MJWarp")
-    }
-    aliases = {
-        "NEWTON": "Newton",
-        "xpbd": "XPBD",
-        "vbd": "VBD",
-        "semi_implicit": "SemiImplicit",
-        "featherstone": "Featherstone",
-        "style3d": "Style3D",
-    }
-    primary = sorted(
-        {aliases.get(n.split("/")[0].strip(), n.split("/")[0].strip()) for n in names}
-        - {"experimental-shell"}
-    )
-    tokens = {part.strip() for n in names for part in n.split("/")[1:]}
-    if engine == "SuperDex":
-        details = sorted(t for t in tokens if t != "FP64" and "CUDA" not in t)
-        if any("CUDA" in t for t in tokens):
-            details.append("GPU → matrix")
-    elif engine == "Drake":
-        details = sorted(tokens)
-    elif engine == "Genesis":
-        details = sorted(
-            {
-                t.lower()
-                for t in tokens
-                if t.lower()
-                in ("elliptic", "pyramidal", "convex", "signorini", "rigid coupling")
-            }
-        )
-    elif engine == "MuJoCo":
-        details = sorted(tokens & {"elliptic", "pyramidal"})
-    elif engine == "Newton Physics":
-        details = sorted(tokens & {"PADMM", "DVI"})
-    else:
-        details = sorted(tokens)
-    return " · ".join(primary) + ("; " + " / ".join(details) if details else "")
+def solver_summary(engine, rows, language="en"):
+    """Describe engine-specific roles without promoting names to peer algorithms."""
+    return summarize_roles(engine, rows, language)
 
 
 def site_url(language, path=""):
@@ -80,9 +38,9 @@ def engine_table(inventory, language, site):
     lines += [
         "| "
         + (
-            "引擎 | 已登记比较对象 | 实验版本与路径 |"
+            "引擎 | 已登记配置的角色（非同级算法清单） | 实验版本与路径 |"
             if zh
-            else "Engine | Registered comparison configurations | Experiment versions and paths |"
+            else "Engine | Roles in registered profiles (not peer algorithms) | Experiment versions and paths |"
         ),
         "| --- | --- | --- |",
     ]
@@ -90,7 +48,7 @@ def engine_table(inventory, language, site):
         rows = [r for r in inventory["rows"] if r["engine"] == engine]
         if not rows:
             raise ValueError("Engine missing from coverage: " + engine)
-        solvers = solver_summary(engine, rows)
+        solvers = solver_summary(engine, rows, language)
         versions = sorted(
             {r["version"] for r in rows if r["runtime_path"].startswith("native")}
         )
@@ -124,6 +82,32 @@ def engine_table(inventory, language, site):
             else "This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons: "
         )
         + f" [完整矩阵 / Full matrix]({target})。",
+        "",
+    ]
+    taxonomy_target = (
+        "solver-taxonomy.md"
+        if site
+        else ("docs/solver-taxonomy.zh-CN.md" if zh else "docs/solver-taxonomy.md")
+    )
+    lines += [
+        (
+            "角色按各引擎的已记录名称解释，不代表这些算法求解同一问题，也不证明任意组合已经执行。AUTO 只是选择策略；未知身份不从默认值补写。"
+            if zh
+            else "Roles interpret recorded names within each engine, not identical mathematical problems or evidence that every combination ran. AUTO is a selection policy; missing identities are not filled from defaults."
+        ),
+        "",
+        (
+            "**比较边界：** 系统配置选型与受控算法归因分开；记录完整性、数值一致性、物理参照和任务结果分别阅读，原始评分与失败分母不变。"
+            if zh
+            else "**Comparison boundary:** distinguish system-profile selection from controlled algorithm attribution. Read record integrity, numerical consistency, physical references and task outcomes separately; original scores and failure denominators are unchanged."
+        )
+        + f" [{'分类与证据说明' if zh else 'Roles and evidence guide'}]({taxonomy_target})。",
+        "",
+        (
+            "细 SDF 几何与材料响应仍需 [#178](https://github.com/huangkiki/Dexlab/issues/178) 资格核验；布料材料、碰撞/耦合与夹持分别由 [#179](https://github.com/huangkiki/Dexlab/issues/179) 补齐基线。既有开发案例通过不等于公平的跨引擎材料比较。"
+            if zh
+            else "Thin-feature SDF geometry/response qualification remains [#178](https://github.com/huangkiki/Dexlab/issues/178); cloth material, collision/coupling and grasp baselines remain [#179](https://github.com/huangkiki/Dexlab/issues/179). Existing development passes are not calibrated cross-engine material comparisons."
+        ),
         "",
     ]
     lines += [
