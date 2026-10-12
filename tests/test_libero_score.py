@@ -25,6 +25,7 @@ class LiberoScoreTests(unittest.TestCase):
             gravity=[0, 0, -9.81],
             arrays=dict(
                 body_mass=[0.1],
+                geom_bodyid=[0, 1, 1],
                 body_ipos=[[0, 0, 0]],
                 geom_solref=[[0.004, 1]],
                 pair_solref=[],
@@ -50,7 +51,8 @@ class LiberoScoreTests(unittest.TestCase):
             dict(
                 time_s=t,
                 state_after_s=t + 0.002,
-                contacts=[dict(world_force_on_object=[0, 0, 0.981])],
+                contacts=[dict(geom1=1, geom2=0, distance=0.,
+                               world_force_on_object=[0, 0, 0.981])],
             )
             for t in [0, 0.002]
         ]
@@ -127,6 +129,77 @@ class LiberoScoreTests(unittest.TestCase):
         path.write_text(json.dumps(params))
         self.write()
         self.assertFalse(score(self.root)["checks"]["requested_parameters_match"])
+
+    def test_overlap_cannot_be_hidden_by_refreshing_the_local_hash(self):
+        self.contacts[0]['contacts'][0]['distance'] = -0.012
+        self.physics[0, 16] = 0.012
+        self.write()
+        original = score(self.root)
+        self.assertTrue(original['observation_valid'])
+        self.assertEqual(original['physical_acceptance'], 'diagnostic-fail')
+        self.physics[0, 16] = 0.
+        self.write()  # New local hashes do not establish semantic consistency.
+        result = score(self.root)
+        self.assertTrue(result['checks']['source_hashes'])
+        self.assertFalse(result['observation_valid'])
+        self.assertEqual(result['physical_acceptance'], 'invalid-record')
+
+    def test_malformed_contact_observations_are_invalid(self):
+        original = copy.deepcopy((self.arrays, self.contacts, self.receipt))
+        for error in ('missing-distance', 'nan-distance', 'infinite-distance',
+                      'string-distance', 'wrong-object', 'negative-geom',
+                      'fractional-geom', 'fractional-count', 'nan-force',
+                      'force-shape', 'nan-epoch'):
+            self.arrays, self.contacts, self.receipt = copy.deepcopy(original)
+            row = self.contacts[0]['contacts'][0]
+            if error == 'missing-distance':
+                del row['distance']
+            elif error == 'nan-distance':
+                row['distance'] = float('nan')
+            elif error == 'infinite-distance':
+                row['distance'] = float('inf')
+            elif error == 'string-distance':
+                row['distance'] = '0'
+            elif error == 'wrong-object':
+                row['geom2'] = 2
+            elif error == 'negative-geom':
+                row['geom1'] = -1
+            elif error == 'fractional-geom':
+                row['geom1'] = 1.5
+            elif error == 'fractional-count':
+                self.arrays['physics'][0, 17] = 1.5
+            elif error == 'nan-force':
+                row['world_force_on_object'][0] = float('nan')
+            elif error == 'force-shape':
+                row['world_force_on_object'] = [0.981]
+            elif error == 'nan-epoch':
+                self.contacts[0]['time_s'] = float('nan')
+            self.write()
+            with self.subTest(error=error):
+                result = score(self.root)
+                self.assertFalse(result['observation_valid'])
+                self.assertEqual(result['physical_acceptance'], 'invalid-record')
+
+    def test_contact_free_overlap_must_be_zero(self):
+        for step in self.contacts:
+            step['contacts'] = []
+        self.physics[:, 9:12] = 0.
+        self.physics[:, 17] = 0.
+        self.write()
+        self.assertTrue(score(self.root)['observation_valid'])
+        self.physics[0, 16] = 0.012
+        self.write()
+        self.assertEqual(score(self.root)['physical_acceptance'], 'invalid-record')
+
+    def test_overlap_uses_the_deepest_contact_and_ignores_positive_distance(self):
+        self.contacts[0]['contacts'][0]['distance'] = 0.005
+        self.contacts[0]['contacts'].append(dict(
+            geom1=0, geom2=2, distance=-0.012, world_force_on_object=[0, 0, 0]))
+        self.physics[0, 16:18] = [0.012, 2]
+        self.write()
+        result = score(self.root)
+        self.assertTrue(result['observation_valid'])
+        self.assertEqual(result['physics']['max_overlap_m'], 0.012)
 
     def test_native_task_failure_is_retained_even_with_good_physics(self):
         self.arrays["success"][:] = False

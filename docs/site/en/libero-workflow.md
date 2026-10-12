@@ -31,6 +31,15 @@ Independent scoring compares **world COM momentum change with contact plus gravi
 
 Constraint forces read after `mj_step` belong to the pre-integration epoch; states are post-integration. Curves retain actual timestamps and every peak. Videos display recorded states at 20 Hz without advancing physics. [Full units, frames and control semantics](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/semantics.json).
 
+(scoring-integrity)=
+## Scoring integrity
+
+Scorer v2 independently recomputes each substep's maximum overlap as `max(0, -distance)` across its recorded target contacts. The serialized overlap must match exactly: both channels originate from the same native values, so this check introduces no physical tolerance. Contact distances, force vectors and epochs must be finite; counts must match exactly, and exactly one geometry in each contact must belong to the target. Empty contacts require zero overlap and zero summed contact force.
+
+A disposable-copy regression showed that the previous scorer could accept a zeroed overlap summary after refreshing the local trajectory hash while the contact distances still showed penetration. The separately published package manifest would reject that changed trajectory. This defect does not establish historical data corruption. V2 rejects the contradictory record without changing native task success or the historical numerical thresholds. Its output includes `scoring_version: 2`; archived v0.60.0 scores predate that field and remain immutable. Track acceptance in [#183](https://github.com/huangkiki/Dexlab/issues/183).
+
+Offline rescoring preserves all historical values for **40/40 records**, apart from the new version field, and verifies every original per-case file hash. The same summary-only mutation is now rejected despite valid refreshed local hashes. [Regression receipt](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero-score-v2.json). This is record validation, not a new simulation run or material-accuracy claim.
+
 ## All development controls and failures
 
 | Development configuration | Step | Positive reference floor | Native task | Physics screen | Maximum overlap | Native stepping, three demos |
