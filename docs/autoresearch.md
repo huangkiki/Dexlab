@@ -27,6 +27,18 @@ python3 scripts/autoresearch.py submit 3 --summary-file /path/to/review.md \
 
 Run queue commands from the primary checkout; install and edit in the returned worktree. Each needs its own editable environment; uv and asset caches are reusable. `submit` reruns unit tests, both complete 14-second backend episodes and independent acceptance before committing. Failed checks stop submission. Use existing `gh`/Git authentication without changing global credentials.
 
+### Recover an existing PR branch
+
+Restore the original branch at `.autoresearch/worktrees/issue-N`; do not create a second PR or rename its branch to satisfy the standard naming convention. Review and commit only the intended changes locally, leaving a clean recovery worktree, then run the normal bounded submission gate with the explicit linked PR:
+
+```bash
+python3 scripts/autoresearch.py submit 177 --existing-pr 180 --summary-file /path/to/review.md
+```
+
+Recovery verifies the Issue authorization, fetch/push repository, PR ownership, `main` base, branch and remote-head ancestry. Multiple claiming PRs, unrelated dirty files, foreign remotes and identity changes during verification stop publication. The complete gate and before/after tree checks still run; the original PR is updated and its actual head/base are read back. Ordinary standard-branch submissions continue to commit their reviewed changes after validation.
+
+New PR creation uses the explicit repository API and pushed branch, without asking the packaged CLI to discover a local Git checkout. A publication error does not erase successful validation or make the whole wrapper successful. Preserve the failure, inspect remote branch/PR state before retrying, and recover only the unfinished publication step when the reviewed head/tree and base still match the completed checks. Changed source or a changed combined tree needs the applicable gate again. This workflow changes no host access controls, scientific thresholds or scheduling state. [Recovery defect and acceptance](https://github.com/huangkiki/Dexlab/issues/184).
+
 ## Current workstream and Discussion handoff (2026-10-09)
 
 The [unified-drive pinch roadmap](pinch-boundary-roadmap.md) connects Discussion [#129](https://github.com/huangkiki/Dexlab/discussions/129), tracking-only parent [#130](https://github.com/huangkiki/Dexlab/issues/130), and execution chain #131 → #132 → #133 → #134. Do not add `auto:approved` to the parent. The maintainer explicitly selected these four P1 children as the current workstream; P0 #124/#125/#126 and later urgent P0s remain ahead.
