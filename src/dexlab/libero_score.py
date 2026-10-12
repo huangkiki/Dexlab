@@ -1,9 +1,51 @@
 """Offline LIBERO evidence checks; task success and physical diagnostics stay separate."""
 import argparse
 import json
+import math
 from pathlib import Path
 
 from dexlab.libero_workflow import TASK, file_hash
+
+SCORING_VERSION = 2
+
+
+def contact_readback_matches(step, physics, geom_bodies, object_bodies):
+    """Verify native contact identity and summaries, including signed distances."""
+    import numpy as np
+
+    def finite_number(value):
+        return type(value) in (int, float) and math.isfinite(value)
+
+    if not isinstance(step, dict) or not isinstance(step.get('contacts'), list):
+        return False
+    rows = step['contacts']
+    if (len(rows) != physics[17]
+            or not finite_number(step.get('time_s'))
+            or not finite_number(step.get('state_after_s'))
+            or abs(step['time_s'] - physics[0]) >= 1e-10
+            or abs(step['state_after_s'] - physics[1]) >= 1e-10):
+        return False
+    forces, overlap = [], 0.
+    for row in rows:
+        if not isinstance(row, dict) or not finite_number(row.get('distance')):
+            return False
+        geoms = [row.get('geom1'), row.get('geom2')]
+        if any(type(g) is not int or not 0 <= g < len(geom_bodies) for g in geoms):
+            return False
+        # Exactly one side belongs to the target, matching the native recorder.
+        if sum(geom_bodies[g] in object_bodies for g in geoms) != 1:
+            return False
+        force = row.get('world_force_on_object')
+        if (not isinstance(force, list) or len(force) != 3
+                or not all(finite_number(value) for value in force)):
+            return False
+        forces.append(force)
+        overlap = max(overlap, -row['distance'])
+    return bool(np.allclose(np.sum(forces, axis=0) if forces else np.zeros(3),
+                            physics[9:12], atol=1e-10, rtol=0)
+                # Both channels serialize the same native values; no physical
+                # tolerance is introduced by this identity check.
+                and overlap == physics[16])
 
 
 def rotation(quaternion):
@@ -48,7 +90,8 @@ def score(directory):
             if ref[0] > 0:
                 ref[0] = max(ref[0], run['candidate'].get('solref_floor_s', 0.))
     checks['requested_parameters_match'] = expected == json.loads((directory / 'parameters-effective.json').read_text())
-    result = {'checks': checks, 'native_success_any': run['native_success_any'],
+    result = {'scoring_version': SCORING_VERSION,
+              'checks': checks, 'native_success_any': run['native_success_any'],
               'native_success_final': run['native_success_final'],
               'physical_acceptance': 'not-evaluated', 'policy_closed_loop_evaluated': False}
     with np.load(directory / 'trajectory.npz', allow_pickle=False) as record:
@@ -79,17 +122,14 @@ def score(directory):
             if checks['native_substeps_present']:
                 checks['force_state_clock'] = bool(np.all(physics[:, 1] > physics[:, 0])
                                                    and np.allclose(physics[1:, 0], physics[:-1, 1], atol=1e-10, rtol=0))
+                params = json.loads((directory / 'parameters-effective.json').read_text())
                 contacts = [json.loads(line) for line in (directory / 'contacts.jsonl').read_text().splitlines()]
                 checks['contact_readback_complete'] = len(contacts) == len(physics) and all(
-                    len(c['contacts']) == int(p[17]) and abs(c['time_s'] - p[0]) < 1e-10
-                    and abs(c['state_after_s'] - p[1]) < 1e-10
-                    and np.allclose(np.sum([r['world_force_on_object'] for r in c['contacts']], axis=0)
-                                    if c['contacts'] else np.zeros(3), p[9:12], atol=1e-10, rtol=0)
+                    contact_readback_matches(c, p, params['arrays']['geom_bodyid'], run['object_body_ids'])
                     for c, p in zip(contacts, physics))
                 checks['full_physics_window'] = bool(abs(physics[0, 0] - run['initial_time_s']) < 1e-9
                                                          and abs(physics[-1, 1] - run['final_time_s']) < 1e-9
                                                          and np.allclose(physics[:, 1]-physics[:, 0], expected['options']['timestep'], atol=1e-10, rtol=0))
-                params = json.loads((directory / 'parameters-effective.json').read_text())
                 body = params['object_body_id']
                 mass = params['arrays']['body_mass'][body]
                 child_mass = sum(params['arrays']['body_mass'][i] for i in run['object_body_ids'] if i != body)
