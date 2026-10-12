@@ -27,6 +27,18 @@ python3 scripts/autoresearch.py submit 3 --summary-file /path/to/review.md \
 
 这些队列命令在主 checkout 执行，安装和编辑在返回的工作树完成。每个工作树拥有自己的 editable 环境；可复用 uv 与资产下载缓存。`submit` 在提交前重跑单元测试、两个后端完整 14 秒抓取及独立验收，失败不会提交。认证使用现有 `gh` 与 Git，不更改全局凭据。
 
+### 恢复现有 PR 分支
+
+在 `.autoresearch/worktrees/issue-N` 恢复原分支，不为满足标准命名重复开 PR 或重命名原分支。先审查并在本地仅提交本项修改，使恢复工作树保持干净，再在正常资源约束内显式指定关联 PR，运行完整提交门禁：
+
+```bash
+python3 scripts/autoresearch.py submit 177 --existing-pr 180 --summary-file /path/to/review.md
+```
+
+恢复会核验 Issue 授权、拉取与推送仓库、PR 归属、`main` base、分支与远端 head 祖先关系。多个 PR 声明同一任务、无关脏文件、外部 remote 或验证中发生身份变化时停止发布。完整门禁和前后文件树检查仍会运行，更新原 PR 后读回实际 head/base。普通标准分支仍在验证后提交已审查的修改。
+
+新建 PR 使用明确仓库与已推送分支的 API，不要求打包安装的 CLI 自动发现本地 Git checkout。发布失败不会抹去已通过的验证，也不能把整条命令改报成功。保留失败记录，重试前先核对远端分支与 PR；仅当已审查 head/tree 和 base 仍匹配已完成检查时恢复未完成的发布步骤。源码或组合树变化后须重新运行适用门禁。此流程不更改主机访问权限、科学阈值或定时状态。[恢复缺口与验收](https://github.com/huangkiki/Dexlab/issues/184)。
+
 ## 当前主线与 Discussion 交接（2026-10-09）
 
 [统一驱动夹持路线](pinch-boundary-roadmap.zh-CN.md)对应专题 [#129](https://github.com/huangkiki/Dexlab/discussions/129)、跟踪总项 [#130](https://github.com/huangkiki/Dexlab/issues/130) 和执行链 #131 → #132 → #133 → #134。总项不加 `auto:approved`。四个子项是维护者在本轮明确选择的 P1 主线，P0 #124/#125/#126 及后来发现的紧急 P0 仍优先。
