@@ -1,0 +1,294 @@
+{
+  "scoring_version": 2,
+  "records": 40,
+  "scope": "Offline regression only; no native rerun or rewritten historical evidence.",
+  "historical_values_unchanged": true,
+  "historical_hashes_unchanged": true,
+  "original_probe_hash_unchanged": true,
+  "mutation_local_hash_valid": true,
+  "mutation_rejected": true,
+  "cases": [
+    {
+      "case": "baseline-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_1",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_2",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_1",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_2",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-500us-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-500us-demo_1",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-500us-demo_2",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-2000us-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-2000us-demo_1",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-2000us-demo_2",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-1000us-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-1000us-demo_1",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-1000us-demo_2",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-500us-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-500us-demo_1",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "aligned-500us-demo_2",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "recording-off-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "not-recorded-parity-control"
+    },
+    {
+      "case": "settle-audit-demo_0",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "baseline-demo_3",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "step-1000us-demo_3",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "baseline-demo_4",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "step-1000us-demo_4",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_5",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "step-1000us-demo_5",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_6",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_6",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "baseline-demo_7",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "step-1000us-demo_7",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_8",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_8",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_9",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_9",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_10",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_10",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "baseline-demo_11",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "step-1000us-demo_11",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    },
+    {
+      "case": "baseline-demo_12",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-pass"
+    },
+    {
+      "case": "step-1000us-demo_12",
+      "historical_values_equal": true,
+      "source_hashes_equal": true,
+      "observation_valid": true,
+      "physical_acceptance": "diagnostic-fail"
+    }
+  ],
+  "scorer_sha256": "fa913ae501a7c398416b1dc10b53f6fdf069483db7e57816be6138ad08cafdfe",
+  "historical_summary_sha256": "fa4ab804dc6825ea2f415a520ee7e75315a0dcf94e3495b53403a5288615789b"
+}

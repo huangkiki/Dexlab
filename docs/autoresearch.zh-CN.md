@@ -27,6 +27,18 @@
 
 按行为影响分类，不按扩展名或 documentation 标签。工作流文字还需对照真实 dry-run 审查授权、依赖、恢复与失败场景。纯文字检查不能冒充双后端通过。所有失败保留；缺合格运行时或必要门禁时，候选保持 Draft，不合并。草稿审查不是科学交付。[原始门禁细则](autoresearch-2026-10-10.zh-CN.md)继续约束执行。
 
+### 恢复现有 PR 分支
+
+在 `.autoresearch/worktrees/issue-N` 恢复原分支，不为满足标准命名重复开 PR 或重命名原分支。先审查并在本地仅提交本项修改，使恢复工作树保持干净，再在正常资源约束内显式指定关联 PR，运行完整提交门禁：
+
+```bash
+python3 scripts/autoresearch.py submit 177 --existing-pr 180 --summary-file /path/to/review.md
+```
+
+恢复会核验 Issue 授权、拉取与推送仓库、PR 归属、`main` base、分支与远端 head 祖先关系。多个 PR 声明同一任务、无关脏文件、外部 remote 或验证中发生身份变化时停止发布。完整门禁和前后文件树检查仍会运行，更新原 PR 后读回实际 head/base。普通标准分支仍在验证后提交已审查的修改。
+
+新建 PR 使用明确仓库与已推送分支的 API，不要求打包安装的 CLI 自动发现本地 Git checkout。发布失败不会抹去已通过的验证，也不能把整条命令改报成功。保留失败记录，重试前先核对远端分支与 PR；仅当已审查 head/tree 和 base 仍匹配已完成检查时恢复未完成的发布步骤。源码或组合树变化后须重新运行适用门禁。此流程不更改主机访问权限、科学阈值或定时状态。[恢复缺口与验收](https://github.com/huangkiki/Dexlab/issues/184)。
+
 ## 合并、发布与恢复
 
 维护者 2026-09-29 的授权只允许符合条件的实际 head 合并与 GitHub Release。核对真实 diff、适用 CI、分支保护和未解决意见。自审不是独立批准，没有 CI 不是 CI 通过。组合树变化后重新验证；完全相同的已验收树可按哈希复用对应证据。squash 合并绑定预期 head，不强推 main 或绕过保护。
