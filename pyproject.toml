@@ -9,6 +9,9 @@ description = "UniLab contact dynamics experiments"
 requires-python = ">=3.12,<3.13"
 dependencies = ["unilab==1.3.3", "unisim-core>=1.7.10,<=1.7.12", "torch==2.9.1"]
 
+[project.optional-dependencies]
+libero-inputs = ["h5py==3.16.0"]
+
 [project.entry-points."unilab.tasks"]
 dexlab = "dexlab.tasks"
 
