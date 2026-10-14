@@ -410,6 +410,26 @@
     "schema_version": 1,
     "catalogue": [
       {
+        "id": "tofu-cut",
+        "title": {
+          "zh": "豆腐状软块对半切",
+          "en": "Synthetic tofu halving"
+        },
+        "engines": "CPU TLMPM / BladeMaster v2 reference",
+        "thumbnail": "demos/tofu-cut/media/poster.png",
+        "thumbnail_sha256": "0dabb018e44316856b7b00a81a0406a1f9bae663be368557af9edc66d894fa8a",
+        "site_thumbnail": "_static/visual/tofu-poster.png",
+        "link": "cutting.html",
+        "question": {
+          "zh": "撤刀后，切开的两块材料能否独立运动？",
+          "en": "Do the two cut pieces move independently after withdrawal?"
+        },
+        "finding": {
+          "zh": "三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。",
+          "en": "Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven."
+        }
+      },
+      {
         "id": "libero-workflow",
         "title": {
           "zh": "LIBERO 原生抓取：诊断与改进",
