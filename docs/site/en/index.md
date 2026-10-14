@@ -11,6 +11,8 @@ The research serves two goals:
 
 [简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](experience.md) · [Diagnosis and trials](diagnosis.md) · [Scenario guide](selection.md)
 
+**Learn before reading the configuration table:** [Sim Learning](https://github.com/huangkiki/sim-learning) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks remain separate from DexLab experimental qualification.
+
 <!-- visual-research:start -->
 ## Which engines and solvers are compared?
 
