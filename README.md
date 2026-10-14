@@ -130,7 +130,7 @@ MuJoCo 3.16.0 的[隔离资格记录](docs/engine-qualification.zh-CN.md)已核�
 
 LIBERO 离线评分器 v2 增加逐接触距离、物体身份与汇总穿透的一致性检查；重新计算本地哈希不能让矛盾记录通过。原始证据与诊断阈值保持不变。[评分修复与回归](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
 
-LIBERO 三个受影响任务各 50 条官方示范已完成恢复姿态协议回放：150 份有效记录、147 次原生成功，全部记录仍未通过数值诊断。九次夹爪记忆对照改变了已暴露失败案例的结果，但不能确定实际历史记忆或替换生产默认值。Object 去重覆盖为 157/500；源历史、物理准确性与全体 130 项任务范围继续开放。[完整结果与证据边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html) · [#198](https://github.com/huangkiki/Dexlab/issues/198)
+LIBERO Object 全部十项任务、500 条官方示范均有有效记录（开发 403、固定验证 97）：495 条原生成功、5 条失败保留，0 条通过全部数值诊断。物理参考、源历史、视觉策略与全体 130 项任务范围继续开放。[完整结果与证据边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html) · [#181](https://github.com/huangkiki/Dexlab/issues/181)
 
 ## 场景表现不好时如何分析
 

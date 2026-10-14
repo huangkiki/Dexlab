@@ -2,6 +2,65 @@
 
 **First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. The historical case below uses only this task dataset. mjlab is deferred; scheduled development remains paused.
 
+## Additional complete Object cohorts
+
+All ten Object tasks now have every official demonstration recorded under
+`osc-restored-pose-v1`: **500/500 valid records**, comprising **403/403 development**
+and **97/97 predetermined validation** records. There are 495 native successes,
+5 retained native failures, and 0 records passing every frozen
+numerical diagnostic. Native success does not establish physical accuracy.
+
+The seven later unpaired cohorts below complement the original three-task paired
+regression, whose comparisons and failures remain separately reported below.
+
+| Task | Development records / native successes | Validation records / native successes | Native failures |
+| --- | --- | --- | --- |
+| Cream cheese | 43 / 43 | 7 / 7 | — |
+| Ketchup | 40 / 39 | 10 / 9 | development `demo_20`; validation `demo_29` |
+| Tomato sauce | 40 / 40 | 10 / 10 | — |
+| Butter | 40 / 40 | 10 / 10 | — |
+| Milk | 40 / 40 | 10 / 10 | — |
+| Chocolate pudding | 40 / 40 | 10 / 10 | — |
+| Orange juice | 40 / 40 | 10 / 10 | — |
+
+Both ketchup failures persist with recording off: all 52 shared initial, command,
+state and observation arrays and four configuration artifacts match in each control.
+Recorder-specific `goal_event_range` is excluded. The validation control is post-hoc;
+it changes no validation outcome and adds no unseen validation or baseline sample.
+The other six later cohorts required no failure controls or native retries.
+
+The unchanged numerical screening retains all per-record violations in the linked
+reports. Constrained acceleration and projected body effort share native acceleration
+and force information through different reconstructions; their violations are not
+independent physical references. A substep may violate several diagnostics.
+No tolerance or physical-error interpretation was selected from these outcomes.
+
+| Task package | New native runs | Native worker seconds | Offline service seconds |
+| --- | --- | --- | --- |
+| Cream cheese | 49 | 1581.37 | 9.38 |
+| Ketchup | 51 | 1638.37 | 17.79 |
+| Tomato sauce | 49 | 1577.46 | 8.29 |
+| Butter | 49 | 1704.19 | 10.55 |
+| Milk | 49 | 1550.32 | 13.54 |
+| Chocolate pudding | 49 | 1683.58 | 16.56 |
+| Orange juice | 49 | 1484.62 | 21.02 |
+
+Ketchup includes two diagnostic controls; every other listed package adds 49 baseline
+runs. The table covers native execution and admission/comparison/closure services;
+input preparation and repository delivery gates have separate receipts. Offline costs
+retain the cream-cheese preflight failure. At Object completion, the native LIBERO
+campaign ledger was **775 starts /
+23729.89 native worker seconds**, including earlier
+failures and controls. Execution/scoring sources, initialization, parameters and
+thresholds were unchanged through these cohorts. Historical controller state was not
+reconstructed, and the original observed records were never relabeled as new holdouts.
+
+[Per-case reports and complete Object coverage index](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/restored-baseline-index-v2.json).
+Object covers ten of 130 official tasks. Fourteen native paths have representative
+recording qualification; this separate denominator does not complete the other 120
+task baselines or the other 116 path qualifications. Full task/all-demonstration
+coverage, independent physical references and visual-policy evaluation remain open.
+
 ## Complete affected-task records and remaining failures
 
 All **50 official demonstrations for each of three affected Object tasks** now have
@@ -25,7 +84,7 @@ differences increase from 101.12 to 281.88 mm and 12.91 to 408.58 mm, respective
 outcome-selected source comparisons do not estimate an unbiased improvement or physical error.
 [Regression source audit](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/new-regression-source-audit-v1.json).
 
-After verified reuse and de-duplication, Object coverage is **157/500 demonstrations**:
+At the earlier three-task delivery, verified Object coverage was **157/500 demonstrations**:
 127/403 development and 30/97 validation, with 343 remaining. Fourteen of the 130 native
 task paths have representative recording qualification; the other 116 paths, full baseline
 coverage, physical references and visual-policy evaluation remain open. A qualified path,
