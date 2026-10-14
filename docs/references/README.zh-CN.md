@@ -7,6 +7,7 @@
 | 资料 | 中文入口 | 适合查阅的问题 |
 | --- | --- | --- |
 | Manda Robotics — *Comparing physics engines for robotics simulation*（2026-10-05） | [中文导读](manda-physics-engines.zh-CN.md) · [英文原文](https://mandarobotics.com/blog/comparing-physics-engines/index.html) | 如何区分模型导入、控制器、接触过程与任务成败？ |
+| UniCross — *Unified Cross-Skill Dexterous Manipulation Synthesis*（arXiv v2，2026-10-07） | [中文参考调研](../unicross-solver-benchmark.zh-CN.md) · [英文调研](../unicross-solver-benchmark.md) · [项目页](https://zdchan.github.io/UniCross/) | 连续技能过渡能否暴露单技能对照未解释的失败？仅参考，未由 DexLab 复现。 |
 
 ## 与 DexLab 的实验一起阅读
 

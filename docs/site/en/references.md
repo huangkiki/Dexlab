@@ -10,6 +10,10 @@ The article was published on 2026-10-05; the guide was checked on 2026-10-08. Th
 
 [Original article](https://mandarobotics.com/blog/comparing-physics-engines/index.html) · [Repository reference directory](https://github.com/huangkiki/Dexlab/tree/main/docs/references)
 
+## UniCross: continuous skill transitions
+
+The [reference review](unicross.md) examines the question of transitioning between manipulation skills without resets, alongside existing in-hand rotation work. Review depth is limited to the project page and arXiv abstract/metadata; source, controller, assets and native parameters remain unqualified. This is a reference and reuse/defer decision, not a runnable benchmark or a DexLab reproduction.
+
 ## Compare with DexLab's own evidence
 
 - [Engines and models](engines.md): versions, solver configurations and modeling assumptions.
@@ -21,4 +25,5 @@ Turn related work into checkable questions: do imported models match, how are fe
 :maxdepth: 1
 
 Manda engine-comparison guide <manda-physics-engines>
+UniCross reference review <unicross>
 ```
