@@ -47,6 +47,7 @@
 
 | 实验画面／图表 | 比较对象与研究结论 |
 | --- | --- |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="./demos/tofu-cut/media/poster.png" width="200" alt="豆腐状软块对半切"></a> | **[豆腐状软块对半切](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>撤刀后，切开的两块材料能否独立运动？<br>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="LIBERO 原生抓取：诊断与改进"></a> | **[LIBERO 原生抓取：诊断与改进](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>如何从已有 benchmark 定位问题，再验证修改？<br>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="法向与瞬态响应"></a> | **[法向与瞬态响应](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>压入、卸载与动态响应如何随参数改变？<br>静态校准有效，动态响应和质量迁移须分别验证。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="六引擎斜面与摩擦"></a> | **[六引擎斜面与摩擦](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>静止、滑动和低摩擦有哪些差异？<br>原配置结果与观测有效性分列；全部失败保留。 |

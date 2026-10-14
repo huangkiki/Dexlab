@@ -48,6 +48,7 @@ Model/clock diagnostics already exist; task acceptance retains the matrix state.
 
 ```{raw} html
 <div class="experiment-grid">
+<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/visual/tofu-poster.png" alt="Synthetic tofu halving"></a><div class="card-copy"><h3><a href="cutting.html">Synthetic tofu halving</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>Do the two cut pieces move independently after withdrawal?</p><p>Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven.</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="Native LIBERO: diagnosis and change"></a><div class="card-copy"><h3><a href="libero-workflow.html">Native LIBERO: diagnosis and change</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>How can an existing benchmark expose and validate a change?</p><p>Stale observations identified; timestep trials retain successes, failures and regressions.</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="Normal &amp; transient response"></a><div class="card-copy"><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>How do parameters change loading, unloading and transients?</p><p>Static calibration works; dynamics and mass transfer need separate checks.</p></div></article>
 <article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="Six-engine incline &amp; friction"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">Six-engine incline &amp; friction</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>Where do static, sliding and low-friction cases differ?</p><p>Fixed-profile outcomes and observation validity are separate; failures remain.</p></div></article>
@@ -155,6 +156,8 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 ```{toctree}
 :hidden:
 :maxdepth: 1
+
+Synthetic tofu halving <cutting>
 
 Solver configuration roles <solver-taxonomy>
 

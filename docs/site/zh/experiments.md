@@ -6,6 +6,7 @@
 
 | 实验 | 代码入口 | 研究问题与状态 |
 |---|---|---|
+| [豆腐状软块对半切](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 单次切割 CPU TLMPM、刀具反力闭环与撤刀后分离；独立 BladeMaster 参考实现 |
 | 苹果梗抓取 | [demos/apple-stem-grasp/](https://github.com/huangkiki/Dexlab/tree/main/demos/apple-stem-grasp/) | OpenArm 双臂＋Wuji，SDF–SDF 摩擦夹持；默认场景与历史扰动测试分列 |
 | 机器人夹布 | [demos/cloth-folding/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-folding/) | 夹持、抬升、释放；保留历史桌体相交失败；修复后一个 9 秒开发场景通过，鲁棒性未验证 |
 | 接触与驱动 | [demos/contact-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/contact-benchmark/) | 滑动、压入/卸载、载荷与瞬态；合成响应不等于真机标定 |

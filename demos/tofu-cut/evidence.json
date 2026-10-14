@@ -1,0 +1,597 @@
+{
+  "schema_version": 1,
+  "paper": "https://arxiv.org/abs/2609.27342v2",
+  "scope": "Synthetic CPU reference task, one straight guided cut, no robot arm or hardware calibration",
+  "budget": {
+    "max_attempts": 36,
+    "max_wall_s_per_attempt": 600,
+    "max_cumulative_wall_s": 7200
+  },
+  "attempt_count": 8,
+  "cumulative_invocation_wall_s": 307.3678374339361,
+  "final_batch": [
+    "004-full",
+    "005-partial",
+    "006-uncut",
+    "007-half-step",
+    "008-refined"
+  ],
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "numba": "0.67.0"
+  },
+  "attempts": [
+    {
+      "id": "001-full",
+      "returncode": 1,
+      "whole_invocation_wall_s": 26.996326318010688,
+      "record_wall_s_including_jit_and_writes": 25.646478885086253,
+      "peak_cgroup_memory_mib": 227.546875,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "569bd8dfb6f0750b45f11ac1ba9c8078854f333a95f267afd3863b84add0e389",
+      "source_sha256": {
+        "cutting.py": "0a885e24b49574c90f5c0f3eb0402b4120439680d2b1008c8e065a5f83cf7a2a",
+        "cutting_score.py": "97114be61efdb1f5512349a817eb008009d45007bdb52531ab45c9a8d42e30d6",
+        "tofu_cut.py": "590b5d165f2a0d70e2dcf79c02f09ec63d978810fd8f691dbbe111c3c6b547e8"
+      },
+      "artifacts": {
+        "states.npz": "66a68f3cfd72708238391e57071db55c55ebcd4cfe02e31c88fc0e3ee35933c3",
+        "trace.npz": "c6f7bcc638ef42c841d16fa982b158905a0461c3daa430a732e5d5cf4590560b"
+      },
+      "score": null,
+      "status": "export-failed"
+    },
+    {
+      "id": "002-full",
+      "returncode": 0,
+      "whole_invocation_wall_s": 30.814530395902693,
+      "record_wall_s_including_jit_and_writes": 29.355117407045327,
+      "peak_cgroup_memory_mib": 280.48046875,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "3519c0b9c7042b19d1fc28fbf6ad73e6a3876affe6ed3e7a492cd56c397e9a61",
+      "source_sha256": {
+        "cutting.py": "72289d04618f3106a41845458a030aa4a6653b55758ea1eb69f2dda734583423",
+        "cutting_score.py": "3b37c993569b895b94839056dc564e8d0adb122e893e3c8577c95bd4d3053690",
+        "tofu_cut.py": "590b5d165f2a0d70e2dcf79c02f09ec63d978810fd8f691dbbe111c3c6b547e8"
+      },
+      "artifacts": {
+        "states.npz": "985baa2f84ccfe89ab5519003b1146a74097a852b2bb6d6f83d36e59a2e0cd93",
+        "trace.npz": "8c9596f8aaea0c069a6b5515c1fbdeb3d6eed8a85b4bab2a804a7f8ed84fc92b"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": true,
+          "half_mass": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true
+        },
+        "component_mass_fractions": [
+          0.5,
+          0.5
+        ],
+        "initial_components": 1,
+        "final_components": 2,
+        "mass_kg": 0.05939999999999999,
+        "particle_count": 1024,
+        "momentum_error_ns": 1.0516761073109393e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 1.3866988137736964e-18,
+        "relative_motion_m": 0.0032205312024384605,
+        "left_displacement_m": [
+          2.0525985428310536e-05,
+          6.230774360002633e-18,
+          -5.695362220269409e-06
+        ],
+        "right_displacement_m": [
+          0.003241057187866771,
+          1.2136288068259615e-17,
+          -1.3541532473838186e-05
+        ],
+        "peak_material_reaction_n": 0.07661317355271759,
+        "maximum_proxy_overlap_m": 0.0006327110433345781,
+        "det_f_range": [
+          0.9619579984461611,
+          1.0264993463499061
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "development-superseded"
+    },
+    {
+      "id": "003-full",
+      "returncode": 0,
+      "whole_invocation_wall_s": 30.971303167985752,
+      "record_wall_s_including_jit_and_writes": 29.337081131059676,
+      "peak_cgroup_memory_mib": 280.74609375,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "d97c5f2b178977707df0f0d05f2383ddef7aca7b12433c9b8dad9ffdb5c3b088",
+      "source_sha256": {
+        "cutting.py": "c9c3da9d6f7a2c1b4807b9fcb8600253d31c0fbc730b5fdf56faad67ff97d1f3",
+        "cutting_score.py": "3b37c993569b895b94839056dc564e8d0adb122e893e3c8577c95bd4d3053690",
+        "tofu_cut.py": "590b5d165f2a0d70e2dcf79c02f09ec63d978810fd8f691dbbe111c3c6b547e8"
+      },
+      "artifacts": {
+        "states.npz": "985baa2f84ccfe89ab5519003b1146a74097a852b2bb6d6f83d36e59a2e0cd93",
+        "trace.npz": "8c9596f8aaea0c069a6b5515c1fbdeb3d6eed8a85b4bab2a804a7f8ed84fc92b"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": true,
+          "half_mass": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true
+        },
+        "component_mass_fractions": [
+          0.5,
+          0.5
+        ],
+        "initial_components": 1,
+        "final_components": 2,
+        "mass_kg": 0.05939999999999999,
+        "particle_count": 1024,
+        "momentum_error_ns": 1.0516761073109393e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 1.3866988137736964e-18,
+        "relative_motion_m": 0.0032205312024384605,
+        "left_displacement_m": [
+          2.0525985428310536e-05,
+          6.230774360002633e-18,
+          -5.695362220269409e-06
+        ],
+        "right_displacement_m": [
+          0.003241057187866771,
+          1.2136288068259615e-17,
+          -1.3541532473838186e-05
+        ],
+        "peak_material_reaction_n": 0.07661317355271759,
+        "maximum_proxy_overlap_m": 0.0006327110433345781,
+        "det_f_range": [
+          0.9619579984461611,
+          1.0264993463499061
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "development-superseded"
+    },
+    {
+      "id": "004-full",
+      "returncode": 0,
+      "whole_invocation_wall_s": 25.222204354940914,
+      "record_wall_s_including_jit_and_writes": 24.057219039066695,
+      "peak_cgroup_memory_mib": 182.3828125,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "bb13a17a523ca928fd3765051ef80026d86b9ed603dbb50cddf5e394514a65e4",
+      "source_sha256": {
+        "cutting.py": "c9c3da9d6f7a2c1b4807b9fcb8600253d31c0fbc730b5fdf56faad67ff97d1f3",
+        "cutting_score.py": "4ae71ef907d9f2e2768a52afd5c68da504e4970b26ea8c19d81e6dbc0885701a",
+        "tofu_cut.py": "b4b56bf76e82f3db9ea563c5242bb6f15342630051ce07d38ba126681daedb98"
+      },
+      "artifacts": {
+        "states.npz": "985baa2f84ccfe89ab5519003b1146a74097a852b2bb6d6f83d36e59a2e0cd93",
+        "trace.npz": "8c9596f8aaea0c069a6b5515c1fbdeb3d6eed8a85b4bab2a804a7f8ed84fc92b"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": true,
+          "half_mass": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true
+        },
+        "component_mass_fractions": [
+          0.5,
+          0.5
+        ],
+        "initial_components": 1,
+        "final_components": 2,
+        "mass_kg": 0.05939999999999999,
+        "particle_count": 1024,
+        "momentum_error_ns": 1.0516761073109393e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 1.3866988137736964e-18,
+        "relative_motion_m": 0.0032205312024384605,
+        "left_displacement_m": [
+          2.0525985428310536e-05,
+          6.230774360002633e-18,
+          -5.695362220269409e-06
+        ],
+        "right_displacement_m": [
+          0.003241057187866771,
+          1.2136288068259615e-17,
+          -1.3541532473838186e-05
+        ],
+        "peak_material_reaction_n": 0.07661317355271759,
+        "maximum_proxy_overlap_m": 0.0006327110433345781,
+        "det_f_range": [
+          0.9619579984461611,
+          1.0264993463499061
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "qualified-record"
+    },
+    {
+      "id": "005-partial",
+      "returncode": 0,
+      "whole_invocation_wall_s": 69.81367253907956,
+      "record_wall_s_including_jit_and_writes": 24.105206055101007,
+      "peak_cgroup_memory_mib": 184.83203125,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "9e3634e5f4f6b17a6ae307e534a276f3c4b14a2d620dbe149ff554ce11e86640",
+      "source_sha256": {
+        "cutting.py": "c9c3da9d6f7a2c1b4807b9fcb8600253d31c0fbc730b5fdf56faad67ff97d1f3",
+        "cutting_score.py": "4ae71ef907d9f2e2768a52afd5c68da504e4970b26ea8c19d81e6dbc0885701a",
+        "tofu_cut.py": "b4b56bf76e82f3db9ea563c5242bb6f15342630051ce07d38ba126681daedb98"
+      },
+      "artifacts": {
+        "states.npz": "a929ed7fac5478096b90ded2dcc9ba34a6fdba8896c1b3cea64568e7be5017d8",
+        "trace.npz": "92931824ecef8d60005166f0a76f2268e6b666758c7ffea5b634b865d86836d8"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "partial",
+        "passed": false,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": false,
+          "half_mass": false,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": false,
+          "nonzero_material_reaction": true
+        },
+        "component_mass_fractions": [
+          1.0
+        ],
+        "initial_components": 1,
+        "final_components": 1,
+        "mass_kg": 0.05939999999999999,
+        "particle_count": 1024,
+        "momentum_error_ns": 1.0516761073109393e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 1.3877807660149158e-18,
+        "relative_motion_m": 0.0001662483280563988,
+        "left_displacement_m": [
+          0.0013294408687872777,
+          -6.545870616381233e-18,
+          -5.832019958189674e-05
+        ],
+        "right_displacement_m": [
+          0.0014956891968436765,
+          1.2163393122571753e-18,
+          -3.076803672188641e-05
+        ],
+        "peak_material_reaction_n": 0.06947210539475451,
+        "maximum_proxy_overlap_m": 0.0006146898698192232,
+        "det_f_range": [
+          0.9580990207569451,
+          1.0318119656042948
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "qualified-record"
+    },
+    {
+      "id": "006-uncut",
+      "returncode": 0,
+      "whole_invocation_wall_s": 25.31474425503984,
+      "record_wall_s_including_jit_and_writes": 24.130027408944443,
+      "peak_cgroup_memory_mib": 181.2421875,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "80de3371c167c61d4001c163b968e8b2e0bee98eeb61fe1e3507914a8d875cab",
+      "source_sha256": {
+        "cutting.py": "c9c3da9d6f7a2c1b4807b9fcb8600253d31c0fbc730b5fdf56faad67ff97d1f3",
+        "cutting_score.py": "4ae71ef907d9f2e2768a52afd5c68da504e4970b26ea8c19d81e6dbc0885701a",
+        "tofu_cut.py": "b4b56bf76e82f3db9ea563c5242bb6f15342630051ce07d38ba126681daedb98"
+      },
+      "artifacts": {
+        "states.npz": "a4b52bb10336822d768beaefa7aa99da8d8fe093f6d960c279f79ad42c136454",
+        "trace.npz": "793b3f8fe7ff798f4a97ba48c1ccf462286e6ac203b0485d3c62f1dcc7f69a3a"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "uncut",
+        "passed": false,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": false,
+          "half_mass": false,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": false,
+          "nonzero_material_reaction": false
+        },
+        "component_mass_fractions": [
+          1.0
+        ],
+        "initial_components": 1,
+        "final_components": 1,
+        "mass_kg": 0.05939999999999999,
+        "particle_count": 1024,
+        "momentum_error_ns": 1.0516761073109393e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 0.0,
+        "blade_impulse_error_ns": 0.0,
+        "relative_motion_m": 0.0001467570991464818,
+        "left_displacement_m": [
+          0.0014202807695249606,
+          1.466044625107743e-17,
+          -3.2488293316378786e-05
+        ],
+        "right_displacement_m": [
+          0.0015670378686714424,
+          -4.7535488999911335e-18,
+          -6.952479700240641e-06
+        ],
+        "peak_material_reaction_n": 0.0,
+        "maximum_proxy_overlap_m": 0.0006999202850369174,
+        "det_f_range": [
+          0.9645351184194573,
+          1.0265079956398995
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "qualified-record"
+    },
+    {
+      "id": "007-half-step",
+      "returncode": 0,
+      "whole_invocation_wall_s": 49.58754458697513,
+      "record_wall_s_including_jit_and_writes": 48.3525455459021,
+      "peak_cgroup_memory_mib": 197.8984375,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "26f7f27d19f00ccfc557dfad4300188bb140a5249317389909250ab30b3bacf8",
+      "source_sha256": {
+        "cutting.py": "c9c3da9d6f7a2c1b4807b9fcb8600253d31c0fbc730b5fdf56faad67ff97d1f3",
+        "cutting_score.py": "4ae71ef907d9f2e2768a52afd5c68da504e4970b26ea8c19d81e6dbc0885701a",
+        "tofu_cut.py": "b4b56bf76e82f3db9ea563c5242bb6f15342630051ce07d38ba126681daedb98"
+      },
+      "artifacts": {
+        "states.npz": "7f5243f02a085b7422a62ec58b88c857ff073b79c0e6ca7f7d217acde591b1f6",
+        "trace.npz": "c8eea47141e14dc190360612641d972a4fd8e60d3ae5559b8309687f80a4ad16"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": true,
+          "half_mass": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true
+        },
+        "component_mass_fractions": [
+          0.5,
+          0.5
+        ],
+        "initial_components": 1,
+        "final_components": 2,
+        "mass_kg": 0.05939999999999999,
+        "particle_count": 1024,
+        "momentum_error_ns": 1.4338573731120796e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 1.3552527156068805e-20,
+        "blade_impulse_error_ns": 1.395910297075087e-18,
+        "relative_motion_m": 0.004187457212249977,
+        "left_displacement_m": [
+          -2.9991643977940463e-06,
+          1.1373958415730745e-17,
+          2.61161221671094e-07
+        ],
+        "right_displacement_m": [
+          0.0041844580478521826,
+          -6.261267546103788e-18,
+          2.268736310850547e-06
+        ],
+        "peak_material_reaction_n": 0.15816868803668513,
+        "maximum_proxy_overlap_m": 0.00042923315785749184,
+        "det_f_range": [
+          0.9541673356984669,
+          1.0321032197444713
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "qualified-record"
+    },
+    {
+      "id": "008-refined",
+      "returncode": 0,
+      "whole_invocation_wall_s": 48.6475118160015,
+      "record_wall_s_including_jit_and_writes": 47.42052382801194,
+      "peak_cgroup_memory_mib": 260.98828125,
+      "limits": {
+        "memory.max": "17179869184",
+        "memory.high": "16106127360",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128",
+        "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+      },
+      "manifest_sha256": "89e24a3f12ff6dc32776b529998ca5baed6fe592d05f570380051af26381d7c4",
+      "source_sha256": {
+        "cutting.py": "c9c3da9d6f7a2c1b4807b9fcb8600253d31c0fbc730b5fdf56faad67ff97d1f3",
+        "cutting_score.py": "4ae71ef907d9f2e2768a52afd5c68da504e4970b26ea8c19d81e6dbc0885701a",
+        "tofu_cut.py": "b4b56bf76e82f3db9ea563c5242bb6f15342630051ce07d38ba126681daedb98"
+      },
+      "artifacts": {
+        "states.npz": "e95c056ac32c1676d890459ef799e35b07794f9db1940066a82f7197b0de1a4d",
+        "trace.npz": "6ce5c3f3286f9a66d1de871205214d69c3da689977e1f908b92ced371cf31db6"
+      },
+      "score": {
+        "schema_version": 1,
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "two_mechanical_components": true,
+          "half_mass": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true
+        },
+        "component_mass_fractions": [
+          0.5,
+          0.5
+        ],
+        "initial_components": 1,
+        "final_components": 2,
+        "mass_kg": 0.0594,
+        "particle_count": 2000,
+        "momentum_error_ns": 2.8189256484623115e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 1.0842021724855044e-19,
+        "blade_impulse_error_ns": 1.734723475976807e-18,
+        "relative_motion_m": 0.002863306963863818,
+        "left_displacement_m": [
+          2.465624632160164e-05,
+          -3.524958103184872e-18,
+          -2.451219220454652e-05
+        ],
+        "right_displacement_m": [
+          0.0028879632101854198,
+          -7.008282842946299e-19,
+          0.00026316727680249924
+        ],
+        "peak_material_reaction_n": 0.06366865091347804,
+        "maximum_proxy_overlap_m": 0.0008175024729067563,
+        "det_f_range": [
+          0.9563691861075414,
+          1.0352603838498264
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+      },
+      "status": "qualified-record"
+    }
+  ],
+  "history": [
+    "001: complete dynamics, then score serialization failed on a NumPy boolean; no valid exported score.",
+    "002: fixed JSON booleans, corrected FLIP to paper Eq.17, recorded separate blade support and reaction balance; passed development task.",
+    "003: cutting band sweep uses relative blade/material advance; passed development task.",
+    "004-008: same frozen solver, runner and scorer source hashes; complete default, two negative controls and two sensitivities."
+  ],
+  "cost_scope": "Invocation time includes guard waiting; record time includes JIT and writing, not rendering. Neither is a pure solver benchmark."
+}

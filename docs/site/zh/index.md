@@ -48,6 +48,7 @@
 
 ```{raw} html
 <div class="experiment-grid">
+<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/visual/tofu-poster.png" alt="豆腐状软块对半切"></a><div class="card-copy"><h3><a href="cutting.html">豆腐状软块对半切</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>撤刀后，切开的两块材料能否独立运动？</p><p>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="LIBERO 原生抓取：诊断与改进"></a><div class="card-copy"><h3><a href="libero-workflow.html">LIBERO 原生抓取：诊断与改进</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>如何从已有 benchmark 定位问题，再验证修改？</p><p>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="法向与瞬态响应"></a><div class="card-copy"><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>压入、卸载与动态响应如何随参数改变？</p><p>静态校准有效，动态响应和质量迁移须分别验证。</p></div></article>
 <article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="六引擎斜面与摩擦"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">六引擎斜面与摩擦</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>静止、滑动和低摩擦有哪些差异？</p><p>原配置结果与观测有效性分列；全部失败保留。</p></div></article>
@@ -159,6 +160,8 @@
 ```{toctree}
 :hidden:
 :maxdepth: 1
+
+豆腐状软块对半切 <cutting>
 
 求解配置分层 <solver-taxonomy>
 
