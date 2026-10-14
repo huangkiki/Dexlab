@@ -31,6 +31,15 @@
 
 原生 `mj_step` 后读取的约束力属于积分前时刻；状态属于积分后。曲线保留真实采样时刻和全部峰值，画面按 20 Hz 已记录状态显示，不重新积分。完整单位、坐标和控制语义见 [semantics.json](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/semantics.json)。
 
+(scoring-integrity)=
+## 评分一致性
+
+评分器 v2 根据每个子步记录的目标接触距离，独立重算 `max(0, -distance)` 的最大值，并要求与保存的汇总穿透完全一致。两条通道来自同一原生数值，这项身份检查不引入物理容差。接触距离、力向量和时刻必须有限，数量必须精确匹配，每个接触只能有一侧属于目标物体。无接触时，穿透与接触合力均须为零。
+
+临时副本回归证实：旧评分器会接受“汇总穿透置零、逐接触距离仍显示穿透”的矛盾记录，只要同时刷新本地轨迹哈希。外部已发布包的 manifest 仍会拒绝变化后的轨迹；该缺陷不证明历史数据被篡改。v2 拒绝这类矛盾记录，保留原生成功判定和历史数值阈值。新输出增加 `scoring_version: 2`，v0.60.0 归档评分没有该字段，原文件保持不变。验收跟踪见 [#183](https://github.com/huangkiki/Dexlab/issues/183)。
+
+离线复算的 **40/40 条记录**除新增版本字段外，所有历史评分值保持一致，各回合原始文件哈希也全部匹配。相同的汇总置零副本现在被拒绝，即使其本地哈希有效。[回归记录](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero-score-v2.json)。这是记录校验，不是新的仿真实验或材料准确性结论。
+
 ## 受控实验保留了哪些失败
 
 | 开发配置 | 步长 | 正时间常数下限 | 原任务 | 物理诊断 | 最大穿透 | 三条原生步进耗时 |
@@ -69,7 +78,35 @@
 
 [运行、评分、补丁应用／撤销和回放命令](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/README.md) · [冻结候选与选择规则](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/protocol.json) · [独立评测源码](https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/libero/lifelong/evaluate.py#L260-L273) · [训练评测源码](https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/libero/lifelong/metric.py#L117-L136)
 
-原生模拟使用独立 Python 3.10 诊断环境；上游完整学习安装文档的 Python 3.8 / PyTorch 1.11 环境没有被冒充为本轮策略准入。HDF5 未嵌入历史 BDDL 正文：我们核对其任务身份与语言，并使用冻结上游提交的 BDDL，明确保留该来源边界。示范末尾的 reward/done 写入不作为成功证据；成功来自实际执行时的原生查询。
+原生模拟使用独立 Python 3.10 诊断环境；上游完整学习安装文档的 Python 3.8 / PyTorch 1.11 环境没有被冒充为本轮策略准入。HDF5 未嵌入历史 BDDL 正文。其主任务和问题身份匹配冻结源码，但指令匹配 `benchmark.Task.language`，与 BDDL 文字不同：前者为 “pick up the cream cheese…”，后者为 “pick the cream cheese…”。旧 `env_args` 还保留更早的 BDDL 文件名。这些声明分别保存；缺失正文或辅助路径都不能证明原生环境等价。示范末尾的 reward/done 写入不作为成功证据；成功来自实际执行时的原生查询。[输入身份跟踪 #185](https://github.com/huangkiki/Dexlab/issues/185)。
+
+## 全任务输入准入
+
+输入清单保留五组（10/10/10/10/90）共 **130 项官方任务**、逐项 BDDL 与初态文件哈希、全部原生目标，以及固定数据 revision 的预期字节数和 SHA-256。LIBERO-100 就是已有的 90+10，不重复计数。静态身份、下载字节、HDF5 内容准入和原生执行分别记录；[#181](https://github.com/huangkiki/Dexlab/issues/181) 仍承接全任务运行。
+
+离线数据检查使用 Python 3.12 DexLab 环境及 `libero-inputs` 可选依赖，保留独立旧版仿真环境。在新结果暴露前冻结身份清单和确定性划分，再通过既有归档资源限制与共享研究锁准入完整文件。工具先核验整文件哈希，再读取 HDF5；拒绝外部或别名内容，逐示范保存动作数、状态宽度、初态和模型 XML 身份。动作／状态数组分块检查有限值，不读取 reward、done 或图像来筛选示范。
+
+```bash
+python -m pip install -e '.[libero-inputs]'
+python -m dexlab.libero_dataset freeze LIBERO_SOURCE FROZEN_INPUTS
+# 完整文件读取须放在 scripts/research_guard.py + scripts/bounded_run.py 内：
+python -m dexlab.libero_dataset admit LIBERO_SOURCE FROZEN_INPUTS TASK_ID TASK_HDF5 NEW_RECEIPT
+python -m dexlab.libero_dataset aggregate LIBERO_SOURCE FROZEN_INPUTS DATA_ROOT RECEIPT_ROOT NEW_SUMMARY
+```
+
+`TASK_ID` 是清单中精确的 `suite/task` 键。准入记录保存为 `RECEIPT_ROOT/suite/task.json`，数据文件使用冻结的官方相对路径。汇总始终保留缺失与无效行；可用性只检查文件大小，既有准入记录证明当时核验的字节，不冒充当前重新计算的哈希。文件变化或来源不可信时重新准入；内容不同的既有记录不能覆盖。
+
+回执索引拒绝缺失或矛盾的任务关联、初态身份、暴露／划分声明和读取器来源。无效回执不计入已准入示范总数，预期任务仍保留在分母中。初态数值相等时，正负零或不同浮点类型可能对应不同字节，因此不能仅凭哈希替代原始数值比较。
+
+源码 BDDL 语言与冻结 benchmark API 语言独立比较：**130 项中有 29 项源码声明不同**。数据集文字在大小写／空白规范化后须精确匹配其中至少一项显式源码声明，任意改写仍拒绝。缺失内嵌 BDDL 记为 `not-provided`，存在时逐字节核对源码。后续原生／策略资格必须记录实际指令与执行的 BDDL；输入准入不能证明策略等价。
+
+每项任务使用冻结盐值对未暴露 demo ID 作哈希排序，取 `floor(未暴露数量 / 5)` 作为验证，其余作为开发；不足五条未暴露示范时没有验证样本。历史 cream-cheese demo_0…12 保持已暴露开发身份。全部示范均保留在正式 baseline 分母中，历史 v1 批次及其原划分不改写。
+
+串行下载工具在首次传输前冻结累计计划：至多 390 次尝试、每文件三次、125 GiB 计费响应正文和 12 小时；每次最多 600 秒，正文读取限速 8 MiB/s。失败／中断保留部分文件并消耗其预留额度；记录的执行者仍存活时不能恢复。续传在追加前核对精确 Content-Range 和不变的强 ETag，完整哈希匹配后才发布文件；不覆盖已有正式文件，也不自动重试。沿用同一共享归档锁和有限资源限制；下载完成不等于内容或原生准入。固定源码 README 将数据集列为 CC BY 4.0，而固定数据卡声明 Apache-2.0；并列保留两项来源，不将任一标签当作全部数据已澄清的许可结论。源码 MIT 和上游资产许可另行保留。[来源说明](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/NOTICE.md)。
+
+响应读取和完整文件校验共用同一次尝试的截止时间。检测到超时后保留部分文件与费用，记为失败尝试，不发布为下载完成。除整包资源限制外，每次检索还须有不超过该次预留窗口的进程超时；截止时间检查不能抢占阻塞中的操作系统调用。
+
+实测容量不足时，可在同一账本中显式执行一次 `amend-wall`；须先结束当前包和全部已记录执行者，再通过共享锁操作。提供修订理由与 JSON 证据报告，包含 `inventory_sha256`、`transfer_plan_sha256`、正整数 `completed_successful_transfers` 及支持调整的实测成本。不可覆盖的修订绑定该证据和此前每份尝试回执，只将累计时间上限调为 24 小时、每次上限调为 1800 秒。原有费用全部计入新总额，尝试次数、字节额度、限速和任务范围不变。中断按该次记录的上限计费，旧的 600 秒预留不会被重解释。重复修订、未结束或存活的执行者、证据或历史回执变化都会被拒绝。字节已写全的部分文件仍须完成完整哈希和 HDF5 准入，不能凭大小判定有效。继续执行前冻结新的包及源码身份；外层包仍受既有 3600 秒限制，单个 1800 秒文件加管理开销可以容纳，五个同样的时间窗口则不行。
 
 本轮的作用是展示：DexLab 可以把现有 benchmark 的异常定位到具体时间、接触和代码路径，检验一个看似合理的修改是否有效，并把有效流程修正和无效物理试参分开交付。新场景首先检查观测新鲜度、实际接触力和控制驱动，再验证候选配置；这组结果尚不支持新的物理配置推荐。
 

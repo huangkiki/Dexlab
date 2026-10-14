@@ -1,0 +1,660 @@
+{
+  "schema_version": 1,
+  "repository": "yifengzhu-hf/LIBERO-datasets",
+  "revision": "f13aa24a3da8c43c7225569f28c562979fa0e35a",
+  "metadata_sha256": "8c525cb2d6e787afbfc4822ca4e3661ea6cc279a5858dd5d27327a70b0476ef0",
+  "source_license": "MIT",
+  "dataset_license": "Apache-2.0",
+  "files": [
+    {
+      "path": "libero_10/KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it_demo.hdf5",
+      "bytes": 1319613988,
+      "sha256": "6b30906a52a5741e98ef447d27e7066d6c0be4a5f7acd7ecaf1cb7468aca4aa9"
+    },
+    {
+      "path": "libero_10/KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it_demo.hdf5",
+      "bytes": 1235470452,
+      "sha256": "703950f48a3c49dfde61be489ade91527f16e1449b4f29a85f2e51153cef3638"
+    },
+    {
+      "path": "libero_10/KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_demo.hdf5",
+      "bytes": 1511189856,
+      "sha256": "1cef1974f76176214dfd1d983a1961507c2b23d54be9dbf9abb2f243f3efacef"
+    },
+    {
+      "path": "libero_10/KITCHEN_SCENE8_put_both_moka_pots_on_the_stove_demo.hdf5",
+      "bytes": 2061429892,
+      "sha256": "e329bb21a8ded3457854faf6a23513c90cb4b34f0e40f3f4e9e70451fc9ba504"
+    },
+    {
+      "path": "libero_10/LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket_demo.hdf5",
+      "bytes": 1341166952,
+      "sha256": "09fdc7cc0f546ab4b5232907c424670d08791476c69c1ee453b9ea4b70111cff"
+    },
+    {
+      "path": "libero_10/LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato_sauce_in_the_basket_demo.hdf5",
+      "bytes": 1467540242,
+      "sha256": "3173ebc709b064683956b757ae8737909457d730aa305b23c5735292e59066af"
+    },
+    {
+      "path": "libero_10/LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_demo.hdf5",
+      "bytes": 1300335262,
+      "sha256": "ce03c7be607cdc3d55f634998eb15beee770006b053fbcd9cbfb207c8b72847a"
+    },
+    {
+      "path": "libero_10/LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate_demo.hdf5",
+      "bytes": 1285266594,
+      "sha256": "a2a75bc6c301a914d0998ccac9dcf1d70d0f501897fbb6baf86aa61315b57b31"
+    },
+    {
+      "path": "libero_10/LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_demo.hdf5",
+      "bytes": 1268066750,
+      "sha256": "75988131f8f443d68108bbfaacc22dab229ece93f141362524e69a2c49a23516"
+    },
+    {
+      "path": "libero_10/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 940528916,
+      "sha256": "2e0127d0cf73afceacc2c0854e505d5743b6d3d5aaf5572c842f84c6a1c8173b"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE10_close_the_top_drawer_of_the_cabinet_and_put_the_black_bowl_on_top_of_it_demo.hdf5",
+      "bytes": 1061837668,
+      "sha256": "a2c70d561c0a4e88528a97e8fe2d402add7e5d17a225cc7c877f883431c764ce"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE10_close_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 383770272,
+      "sha256": "441708aa7d4804ae1438ff74c214228ea19f6d7d454e5a02bbb27bbbb66ab769"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE10_put_the_black_bowl_in_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 619928559,
+      "sha256": "26a2cd4310cb6121b3718e1b41f49b615bf09a8c1a92c97f85a5020c40d06eae"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE10_put_the_butter_at_the_back_in_the_top_drawer_of_the_cabinet_and_close_it_demo.hdf5",
+      "bytes": 940593950,
+      "sha256": "b938c9ad909d6e9448eb7dd75be50f15b8790252b45bd8460b80d03da0b5a8f8"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE10_put_the_butter_at_the_front_in_the_top_drawer_of_the_cabinet_and_close_it_demo.hdf5",
+      "bytes": 903882749,
+      "sha256": "4bf6959ee71988be431fa9274c9f59287eef5eb6fb10427160df36065bc22838"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE10_put_the_chocolate_pudding_in_the_top_drawer_of_the_cabinet_and_close_it_demo.hdf5",
+      "bytes": 893861616,
+      "sha256": "e23efb1756fb887e375f6b5452e38d64a9e6e3059d95d7d58e3656e6f7a00754"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE1_open_the_bottom_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 712566077,
+      "sha256": "c7767ff90f03c6e240b8434d6ecf7dbbe331f620910bc13808df71676bb1d7fe"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE1_open_the_top_drawer_of_the_cabinet_and_put_the_bowl_in_it_demo.hdf5",
+      "bytes": 995040964,
+      "sha256": "51a73e0c0463ca80246c55a49e3f23bb5ecc13f9a34ffe695379fe97d3f549c6"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE1_open_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 472881442,
+      "sha256": "6d9f2f4473f5c1dbce6f8061c82f3e7369203e1a3802cc15f79b042b9dc90bc0"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE1_put_the_black_bowl_on_the_plate_demo.hdf5",
+      "bytes": 660190434,
+      "sha256": "d0c84b32c36ac0a1c85c104993b995b4475ac8f6f3b1c9aff41c0b9292c7680b"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE1_put_the_black_bowl_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 678308962,
+      "sha256": "af4dfaef1e90e43d5508bb902736224e39aa937ec285c26d850e7a42f920ee77"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_open_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 378750672,
+      "sha256": "698899967e52be274e020793814b7ce5a47be9f05d22c8080e2e488022ff7019"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_put_the_black_bowl_at_the_back_on_the_plate_demo.hdf5",
+      "bytes": 554634522,
+      "sha256": "0a263eb4d59b5672db9402c9ededf96c990e07b686102257708f10189cfdd7e6"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_put_the_black_bowl_at_the_front_on_the_plate_demo.hdf5",
+      "bytes": 690757233,
+      "sha256": "77c5479b280d4bdc8c7c3bad72d9a287ed1a3a1f765104c495b9100c47f41588"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_put_the_middle_black_bowl_on_the_plate_demo.hdf5",
+      "bytes": 540249340,
+      "sha256": "6f718241c78ee1b718e0ff74027760ca6e6c66dca247d7d4e1cb074c254afb9c"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_put_the_middle_black_bowl_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 681926762,
+      "sha256": "b79d4dc67b9436313c24f661295f893a5c0830be10540424b6e3f9d6db9709e2"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_stack_the_black_bowl_at_the_front_on_the_black_bowl_in_the_middle_demo.hdf5",
+      "bytes": 641644880,
+      "sha256": "f4d4ae39d812c212e075bfa1f82ef37a56942bb8c981544468afb0c8ca8c47a4"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE2_stack_the_middle_black_bowl_on_the_back_black_bowl_demo.hdf5",
+      "bytes": 573681919,
+      "sha256": "9f9053c5420a47461db110ade20f6b28973f90d22dfdab53dfe36067415a8871"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE3_put_the_frying_pan_on_the_stove_demo.hdf5",
+      "bytes": 991110094,
+      "sha256": "e5a4de96e0b38f1ad7cedae0fe1fab762f258cefada076a46e3ecb4fc07a8ee5"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE3_put_the_moka_pot_on_the_stove_demo.hdf5",
+      "bytes": 751979286,
+      "sha256": "db4135e756e5a0324e10afbe6106f36c8e54a1fc4d9a171702e0b212773c74cb"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE3_turn_on_the_stove_and_put_the_frying_pan_on_it_demo.hdf5",
+      "bytes": 1390387354,
+      "sha256": "52e7051abf36c6a431b081346be27b799818c32e574d4a4a0e79137fef3cf2fe"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE3_turn_on_the_stove_demo.hdf5",
+      "bytes": 463131456,
+      "sha256": "3067b821a509c7fddfcdd1b7595dbc025f0a2a376d39ce3802e7e7d11e8c2b83"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE4_close_the_bottom_drawer_of_the_cabinet_and_open_the_top_drawer_demo.hdf5",
+      "bytes": 1170030986,
+      "sha256": "20239f9887a531785ddcbc6cf5ae2dfcf06a95a6c95b6d220553ad0bd2f4b5d7"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE4_close_the_bottom_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 581756590,
+      "sha256": "cc56be1b73999c72494cd715fc860a9a9be72c651fec2844ac207ea5f9712d90"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 662104593,
+      "sha256": "0e612a4a83f76b014d65983e4e5fa3969b59a77ab605d78d7b038f66645e849b"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE4_put_the_black_bowl_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 787549612,
+      "sha256": "eca3d819cb5dcb96d635a515678a7f1b25cec8c689c95d3c05b628727ee18553"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE4_put_the_wine_bottle_in_the_bottom_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 635669851,
+      "sha256": "b624b9f453d13eada396c7fbd142fd348bb480569ec3624ff89108b13f808d59"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE4_put_the_wine_bottle_on_the_wine_rack_demo.hdf5",
+      "bytes": 1201708042,
+      "sha256": "b665ff76c7444d66a2221062edf0d2f7e86c0a106512552c6f939d69b7be89ab"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE5_close_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 377038880,
+      "sha256": "504b27586d2de6b663d1ad1cfd9519bee8761b7fdb568e1444e28158ea4667fe"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE5_put_the_black_bowl_in_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 609432908,
+      "sha256": "96f36383107129d5e802923f7dd6b96870c9d58b05c2739c2f85cf8d9295c70c"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE5_put_the_black_bowl_on_the_plate_demo.hdf5",
+      "bytes": 664737046,
+      "sha256": "505a6485f041b9d0fc51b12fd4d0a917239d9321aae17cb1d06646b04999a47d"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE5_put_the_black_bowl_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 755029048,
+      "sha256": "f1c82689a37c2de01e0a3da215c82f9fa47c73a447f293b5dd977126717ab234"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE5_put_the_ketchup_in_the_top_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 1048703830,
+      "sha256": "69e046b65d7841ab8151006686907883bcff6b535776e6efda185cf5a7f13479"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE6_close_the_microwave_demo.hdf5",
+      "bytes": 1009177536,
+      "sha256": "ccafd17b4921f3e2a7c459e5f4a92a5ef952928c4b58824c168df9826d3a4408"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE6_put_the_yellow_and_white_mug_to_the_front_of_the_white_mug_demo.hdf5",
+      "bytes": 625342455,
+      "sha256": "8125534e8706f1e01977148cd3d8ce5fd1775e8e370b4352fd0606b766195488"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE7_open_the_microwave_demo.hdf5",
+      "bytes": 737167244,
+      "sha256": "ba7e2fa1622f94adda3d93a44e5bc021391f5f0a31c3c1418cdc980a97207d21"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE7_put_the_white_bowl_on_the_plate_demo.hdf5",
+      "bytes": 963628812,
+      "sha256": "945a464c86a50c245316df2592b87e3fbf30a2054517e2bb346462da5899250a"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE7_put_the_white_bowl_to_the_right_of_the_plate_demo.hdf5",
+      "bytes": 690846283,
+      "sha256": "4b5152e0d26fc7de67f6cff029ada46805892f57fb2d6d1b298bd35603bf8ffd"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE8_put_the_right_moka_pot_on_the_stove_demo.hdf5",
+      "bytes": 1051264520,
+      "sha256": "d2b6a54c21113cc128513ce1221e8ae28432133dde54785a17ce916fb898ab77"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE8_turn_off_the_stove_demo.hdf5",
+      "bytes": 873797342,
+      "sha256": "77f25843fce06dcb52e67c6bd53098906de7cc240640f68c7c14574133ca2fa4"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE9_put_the_frying_pan_on_the_cabinet_shelf_demo.hdf5",
+      "bytes": 939868962,
+      "sha256": "c70d1642458d8f21085d2c906e2455cd29c1475bfd9d0e65f4c4dc9c6443bb88"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE9_put_the_frying_pan_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 921556656,
+      "sha256": "89f268152def5780a7c48e3d752d01e4af9e308e66b04bfda140ed144edeb82a"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE9_put_the_frying_pan_under_the_cabinet_shelf_demo.hdf5",
+      "bytes": 856232816,
+      "sha256": "1ee3bb8ab3ed9deaa27cb410b0b9a29874e8687e940bb4a0f4557586cf64bddf"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE9_put_the_white_bowl_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 748048430,
+      "sha256": "516758506d26561d4eebcaacb377785f869f00f1139de46364d7edc8dfe6f58f"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE9_turn_on_the_stove_and_put_the_frying_pan_on_it_demo.hdf5",
+      "bytes": 1295198622,
+      "sha256": "313800f44448efb1e9cd6917781fe5f48681a5ade173abc5a73622f9f3cf1e46"
+    },
+    {
+      "path": "libero_90/KITCHEN_SCENE9_turn_on_the_stove_demo.hdf5",
+      "bytes": 584934655,
+      "sha256": "84cfbff7f32587cbae076e1275c69c3e29b1a11bb957c5c5b78b53147588c30d"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE1_pick_up_the_alphabet_soup_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 692219541,
+      "sha256": "95479e7fbbde98d04aa90cb35475429ee984face159de74fa02eac9dc3e63757"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE1_pick_up_the_cream_cheese_box_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 740565396,
+      "sha256": "26999202b1878a213adf1f5cb67b48622fe72a10d3fb8fcd5db5f6a7cfefa5b8"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE1_pick_up_the_ketchup_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 863555906,
+      "sha256": "07a7f7b8422ba2608876876e49d9619bf6fa79dfedbf069b7e7c568eb058ba69"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE1_pick_up_the_tomato_sauce_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 806284784,
+      "sha256": "bac9044f5584ebe8f6493dd8ef5235537660131c4c4c66a12abe7bae2a945076"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE2_pick_up_the_alphabet_soup_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 704118226,
+      "sha256": "292f1dd1ac87d6da3aaefec6949f598ce3d3e994c0689f28d183693fdacf722e"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE2_pick_up_the_butter_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 661790125,
+      "sha256": "0331cb26412ae01c5cacdf7e77bc4b3e2b37cf662d7d203d16078cb0d55fcd53"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE2_pick_up_the_milk_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 588699622,
+      "sha256": "5c302e3569627c2cd5b8886774b1f83c23eec1b16879d68f77cb06b4225daec4"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE2_pick_up_the_orange_juice_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 838459508,
+      "sha256": "b2fc791059fdbeb5cc7d7c0ef9115c675829dcd9961514f4efaf0275657fda8f"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE2_pick_up_the_tomato_sauce_and_put_it_in_the_basket_demo.hdf5",
+      "bytes": 532040832,
+      "sha256": "c7110d18e23cd9a32f3da2b7c86002b7e69206ddcdd40b16d0bf0f8a32cc86b6"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE3_pick_up_the_alphabet_soup_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 600221186,
+      "sha256": "d1bdd4ff5d08194649b73a94a53dca8d0bd14b1278cd85a75a9b8e6df5af88e9"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE3_pick_up_the_butter_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 507311634,
+      "sha256": "96c1728b1e138a09f8799b981acdb08de41e8ebb6244294c27cf142547eaef1f"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE3_pick_up_the_cream_cheese_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 768466210,
+      "sha256": "1702b5b6c81385edfe6e801372e20c5e16d1774faf030f5c0f67f159bd1eeead"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE3_pick_up_the_ketchup_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 797186472,
+      "sha256": "18d5d619b0a878c3496fb27f0ba6adc38ee002f7a2708b28e93aefe964f831ed"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE3_pick_up_the_tomato_sauce_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 557192196,
+      "sha256": "657f1c7368b1fd68bb33afb9026a1fc5cf83da960106524af1c1190d110e6c25"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE4_pick_up_the_black_bowl_on_the_left_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 617164176,
+      "sha256": "1c6bd7024ecbac964971669e18425f61da135663b0b2a7ade58c02dd5bce7e93"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE4_pick_up_the_chocolate_pudding_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 764485112,
+      "sha256": "310068fd25d645010365f3a511c87b933ca92d49bef6d61c650286a5e1a69cd4"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE4_pick_up_the_salad_dressing_and_put_it_in_the_tray_demo.hdf5",
+      "bytes": 596726529,
+      "sha256": "6542b6fcdde283bf26a01df85c83173709de5ad69bdedc884b4416b1322b1092"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE4_stack_the_left_bowl_on_the_right_bowl_and_place_them_in_the_tray_demo.hdf5",
+      "bytes": 1073326526,
+      "sha256": "6e5dd6cb435e94cd90886e2ae3a5f7145d3034710d7c1605bad1c97d56acb2b3"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE4_stack_the_right_bowl_on_the_left_bowl_and_place_them_in_the_tray_demo.hdf5",
+      "bytes": 1168927388,
+      "sha256": "85012c80aa040f1d35a93b2ffedf30136d794693dac6ac56f24abed247d7d972"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE5_put_the_red_mug_on_the_left_plate_demo.hdf5",
+      "bytes": 722379487,
+      "sha256": "6d73840ba02f8f98c08668d948d1c731c660c6dd4fb0d6fc3f4a8a3bfa44f88c"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE5_put_the_red_mug_on_the_right_plate_demo.hdf5",
+      "bytes": 701829894,
+      "sha256": "f666b2e1472cf274c6d710c87b60fbcf6113e3739d71a9ec081424f85a136a98"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_demo.hdf5",
+      "bytes": 532578592,
+      "sha256": "2e246aca11f821019e8476b6e7bdafbf406729870cfbf0440c130d836600f421"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE5_put_the_yellow_and_white_mug_on_the_right_plate_demo.hdf5",
+      "bytes": 537537810,
+      "sha256": "dfc434ce6a0915b7a0c998c301291714ff670ee152b604c2deabdb0ba6c9e41b"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE6_put_the_chocolate_pudding_to_the_left_of_the_plate_demo.hdf5",
+      "bytes": 617426604,
+      "sha256": "7bd19c1d5f24da0ce81a2fbb2ff2914842ab033e7e15a7d1f1a44afbe94a374d"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE6_put_the_chocolate_pudding_to_the_right_of_the_plate_demo.hdf5",
+      "bytes": 446676488,
+      "sha256": "78df42e2b9080b94bd7ce985fb10ac04afb4eed15f1a22dd25e1a6e72bb3e382"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE6_put_the_red_mug_on_the_plate_demo.hdf5",
+      "bytes": 664324928,
+      "sha256": "1c6cd236932cc08a1b6a5f4eeb2a05c9c4a6be19f09653debe6c23180917519b"
+    },
+    {
+      "path": "libero_90/LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_demo.hdf5",
+      "bytes": 787203694,
+      "sha256": "c79f91e2134f0b2a60028b1eeb37ab4c004a95f9f377df0e0ee03d09b114574d"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 868488676,
+      "sha256": "be189a6bff1ebdc093f8a3a45839fcb2f458bafda6ba9cf1f62d3f89d90dafee"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_left_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 788923228,
+      "sha256": "4483158ffcf75e24687ec341d77342655efb71b12bc7b4093cd763b8e1ff2ae2"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_right_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 778334366,
+      "sha256": "c666a62e2e5fbf398ebf1be19635a51e226b28acbb9ddf8a888078e6a8619891"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE1_pick_up_the_yellow_and_white_mug_and_place_it_to_the_right_of_the_caddy_demo.hdf5",
+      "bytes": 637215910,
+      "sha256": "371d6aaece111ef947733b817fff49f7035df1766fc913623275b1538f537356"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE2_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 728965938,
+      "sha256": "a8fb19adbe64de5e0411962056e029c2218b36706e648eb0644c0d0ac7ab337e"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE2_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 753310436,
+      "sha256": "5cffae59b652908ca8e430af8d27ad5d20c31e6ea25a0b563fd7a85781a4c162"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE2_pick_up_the_book_and_place_it_in_the_left_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 607046484,
+      "sha256": "96ce64d79589b52e4ab8ab05633e75dced5cf0acc691d78f9f7a8473ffce82b4"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE2_pick_up_the_book_and_place_it_in_the_right_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 707095798,
+      "sha256": "8942d1fedf59794dfe0f5261b9309c21164cf46308daa0b9ed0fbb1d04236f16"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE3_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 868981714,
+      "sha256": "bd3d87634ab86fa14ad1fb2e2a3cda0b58ade437596c5d383c3999aca9401c02"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE3_pick_up_the_book_and_place_it_in_the_left_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 727516086,
+      "sha256": "32f1b7e549e43098ea3f92d38627a426c3bcd7e9ee00bb0286f22258b27cd481"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE3_pick_up_the_book_and_place_it_in_the_right_compartment_of_the_caddy_demo.hdf5",
+      "bytes": 674416599,
+      "sha256": "f8fda9cec29d0fd18c9919ae944bed1688dea3e41741159cc75749554df9e1f5"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE3_pick_up_the_red_mug_and_place_it_to_the_right_of_the_caddy_demo.hdf5",
+      "bytes": 587438164,
+      "sha256": "ec62bb4cf08fa8c6eea7190d59a1c59dae125f9055c70942f114a36dbe81615b"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE3_pick_up_the_white_mug_and_place_it_to_the_right_of_the_caddy_demo.hdf5",
+      "bytes": 514333118,
+      "sha256": "3a3be1af70959353d3a6de3ec7315b7faca6bfc3288b2b7cf19184d7b13bfc3e"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE4_pick_up_the_book_in_the_middle_and_place_it_on_the_cabinet_shelf_demo.hdf5",
+      "bytes": 800762622,
+      "sha256": "5f047a7d1ff6b7763a5940f183b4c682fa74a6864b67a33296da08610bb31423"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE4_pick_up_the_book_on_the_left_and_place_it_on_top_of_the_shelf_demo.hdf5",
+      "bytes": 849501494,
+      "sha256": "fe2170d8f76eb9350fa5d61e0a7b3d9fef08e63c849217decfd4b08090c752d7"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE4_pick_up_the_book_on_the_right_and_place_it_on_the_cabinet_shelf_demo.hdf5",
+      "bytes": 509121440,
+      "sha256": "feb14ac9be070bdea208e5efa9bfae33f6f936f07111d6310cc9f3ce808bbafc"
+    },
+    {
+      "path": "libero_90/STUDY_SCENE4_pick_up_the_book_on_the_right_and_place_it_under_the_cabinet_shelf_demo.hdf5",
+      "bytes": 595993126,
+      "sha256": "7980c84e18335a4875878b44d0e9db9908908799329018563f199c61d569409c"
+    },
+    {
+      "path": "libero_goal/open_the_middle_drawer_of_the_cabinet_demo.hdf5",
+      "bytes": 702223367,
+      "sha256": "20252c7cf98cd7437061f7f200ae7b6cb6219fabbd53b4536dfaa8abda6ab737"
+    },
+    {
+      "path": "libero_goal/open_the_top_drawer_and_put_the_bowl_inside_demo.hdf5",
+      "bytes": 1017886342,
+      "sha256": "1b50d99a053a7e4547c9ae9ccd2e3cd762543d27be78f240f13440d7ae487ae8"
+    },
+    {
+      "path": "libero_goal/push_the_plate_to_the_front_of_the_stove_demo.hdf5",
+      "bytes": 762855139,
+      "sha256": "36b4e1bced49d2f4ff6b2fce6b1596a63978e14199e2513cd0df71e127bf47a6"
+    },
+    {
+      "path": "libero_goal/put_the_bowl_on_the_plate_demo.hdf5",
+      "bytes": 468246288,
+      "sha256": "e69528b0cf10dfc59b20698e12ec2affc03f3887309034d3eb74cac3ec929406"
+    },
+    {
+      "path": "libero_goal/put_the_bowl_on_the_stove_demo.hdf5",
+      "bytes": 509123820,
+      "sha256": "ff77d3bf0f89a147d423840ecbd842cd63c3c55aeead91f88dbc0917be473e99"
+    },
+    {
+      "path": "libero_goal/put_the_bowl_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 510414285,
+      "sha256": "e14c84ebc820a13ef9a92ca82a7f04bb299f0ee96dfe9cc907bab71aeb2683b2"
+    },
+    {
+      "path": "libero_goal/put_the_cream_cheese_in_the_bowl_demo.hdf5",
+      "bytes": 535715512,
+      "sha256": "ee58a7d72c143a71bf1448674e70940ac7781c1d1bb10a1b0c7a5c69b26abbef"
+    },
+    {
+      "path": "libero_goal/put_the_wine_bottle_on_the_rack_demo.hdf5",
+      "bytes": 878958730,
+      "sha256": "f9092aa70734fc4083e97fc58c3ba25f87c614d18326182ddc7a455f0ab4da2e"
+    },
+    {
+      "path": "libero_goal/put_the_wine_bottle_on_top_of_the_cabinet_demo.hdf5",
+      "bytes": 540179470,
+      "sha256": "7dc087a7596d5cbbe394f681b21a0be434438b0dca73ac430c293fe4c818404a"
+    },
+    {
+      "path": "libero_goal/turn_on_the_stove_demo.hdf5",
+      "bytes": 447509922,
+      "sha256": "387fc10747696b80dea6ed8d7f2beaa162bf92ae11750b241073cbd33aac73d5"
+    },
+    {
+      "path": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 780145352,
+      "sha256": "42189d4415d4c51aaaf0708300653fccc39239cd3f2709079a713cd8d1678a8d"
+    },
+    {
+      "path": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 734212272,
+      "sha256": "90a722f2243a72878baff494d07ce7f4206cfc10307a4c82dcda5f2a5fabc060"
+    },
+    {
+      "path": "libero_object/pick_up_the_butter_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 785532626,
+      "sha256": "07f48f1c0c06b5e10bc219e63701f0240d8205f85ccd0daab3ff9bd27bc35fb9"
+    },
+    {
+      "path": "libero_object/pick_up_the_chocolate_pudding_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 797322420,
+      "sha256": "b5b57f36cd78e598e258e0e2a1a9d4e8d37d387901487eecd22d503e0e222302"
+    },
+    {
+      "path": "libero_object/pick_up_the_cream_cheese_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 718919781,
+      "sha256": "7ae50ed3a64bab8418fd6c8e346ba1c39da0fdaa62916a87b9d20f3745b45406"
+    },
+    {
+      "path": "libero_object/pick_up_the_ketchup_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 804674488,
+      "sha256": "e0814effbe3a46777952950be0565577c348dad211327bc5d2a16f4eacc55ba1"
+    },
+    {
+      "path": "libero_object/pick_up_the_milk_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 727315202,
+      "sha256": "e56d954928e613f9db58085b7677ccf9c4824f1ab982265f71405d5bb14cfb4a"
+    },
+    {
+      "path": "libero_object/pick_up_the_orange_juice_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 696180446,
+      "sha256": "53e40490c62e94c678233eefbfd874a61c93d92c8088f59d426ae6c3fd90d288"
+    },
+    {
+      "path": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 664188039,
+      "sha256": "45960606a85b9c68980eb8130e0fe16bf3621539cf5d4147f35aa8139573c5ac"
+    },
+    {
+      "path": "libero_object/pick_up_the_tomato_sauce_and_place_it_in_the_basket_demo.hdf5",
+      "bytes": 735593408,
+      "sha256": "43c52bdaa78b4c6aff3afb54d932d6a0e065f5c30c8e30a6c17f78749d487ea9"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 508779600,
+      "sha256": "ff6f26121653c77280eb40a38773a74141c11a8509f3466058cb56dd2cc60ead"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 589630943,
+      "sha256": "75ede0cf5fbfc925093671b55032ad80f1b1f1cf35442ec6c663460d37d3e0b3"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 748271833,
+      "sha256": "7ff1ee60447875c152d8c7819f499d23dbc0eb4d4bf045225d5d87a2cdad99bd"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 632345992,
+      "sha256": "9d0b5435b313a8c0d7336b429b5f0f578be6f2a9f5f8a6dd67459ef388f3c74c"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 597677074,
+      "sha256": "3961cb7126eaca47d0f5be29eb297bb62e7591e3c86172c9587c0bf670112f84"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 671583385,
+      "sha256": "bf1090dd4826eacb49eb052f17d04798e2a1eb2f74f8d024bc3b9c5d234c25f9"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 507189857,
+      "sha256": "0c053db7317e584632549bddb963bee8a237661b4bd29f0581a245f715e8eb72"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 581087722,
+      "sha256": "d9b2da7399a88bea39024c8ef97713a20734e9b765e14b3399e2755890c828b7"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 711715594,
+      "sha256": "1fcb3990cf9fd6185f56531cc9f6dec0a77a59bfa0c7f39dff95b7e43cf6aeaa"
+    },
+    {
+      "path": "libero_spatial/pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate_demo.hdf5",
+      "bytes": 688768764,
+      "sha256": "4d503d447028f437211880bea4ee1a7f6732113ea8560181fcca163251864794"
+    }
+  ]
+}
