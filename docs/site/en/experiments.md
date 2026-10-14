@@ -6,6 +6,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 
 | Experiment | Code | Question and status |
 |---|---|---|
+| [Synthetic tofu halving](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Single-cut CPU TLMPM, dynamic blade reaction and separation after withdrawal; independent BladeMaster reference |
 | Apple stem grasp | [demos/apple-stem-grasp/](https://github.com/huangkiki/Dexlab/tree/main/demos/apple-stem-grasp/) | OpenArm + Wuji SDF-SDF frictional holding; distinguish default cases and historical perturbations |
 | Robot cloth grasp | [demos/cloth-folding/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-folding/) | Pinch, lift and release; historical intersections retained; one repaired 9 s development case passes, robustness untested |
 | Contact and drives | [demos/contact-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/contact-benchmark/) | Sliding, loading/unloading and transients; synthetic response is not hardware calibration |

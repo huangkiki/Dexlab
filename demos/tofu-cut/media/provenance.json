@@ -1,0 +1,68 @@
+{
+  "source_artifacts": {
+    "states.npz": "985baa2f84ccfe89ab5519003b1146a74097a852b2bb6d6f83d36e59a2e0cd93",
+    "trace.npz": "8c9596f8aaea0c069a6b5515c1fbdeb3d6eed8a85b4bab2a804a7f8ed84fc92b"
+  },
+  "renderer_sha256": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+  "frames": 151,
+  "fps": 25,
+  "physical_duration_s": 3.0,
+  "playback_duration_s": 6.04,
+  "score": {
+    "schema_version": 1,
+    "mode": "full",
+    "passed": true,
+    "checks": {
+      "complete_duration": true,
+      "initially_connected": true,
+      "persistent_cut_labels": true,
+      "two_mechanical_components": true,
+      "half_mass": true,
+      "momentum_balance": true,
+      "frame_momentum_matches": true,
+      "external_impulse_matches": true,
+      "blade_reaction_feedback": true,
+      "positive_jacobian": true,
+      "bounded_overlap": true,
+      "blade_withdrawn": true,
+      "independent_motion": true,
+      "nonzero_material_reaction": true
+    },
+    "component_mass_fractions": [
+      0.5,
+      0.5
+    ],
+    "initial_components": 1,
+    "final_components": 2,
+    "mass_kg": 0.05939999999999999,
+    "particle_count": 1024,
+    "momentum_error_ns": 1.0516761073109393e-17,
+    "frame_momentum_error_ns": 0.0,
+    "external_impulse_error_ns": 2.710505431213761e-20,
+    "blade_impulse_error_ns": 1.3866988137736964e-18,
+    "relative_motion_m": 0.0032205312024384605,
+    "left_displacement_m": [
+      2.0525985428310536e-05,
+      6.230774360002633e-18,
+      -5.695362220269409e-06
+    ],
+    "right_displacement_m": [
+      0.003241057187866771,
+      1.2136288068259615e-17,
+      -1.3541532473838186e-05
+    ],
+    "peak_material_reaction_n": 0.07661317355271759,
+    "maximum_proxy_overlap_m": 0.0006327110433345781,
+    "det_f_range": [
+      0.9619579984461611,
+      1.0264993463499061
+    ],
+    "evidence_scope": "synthetic CPU reference task; not measured tofu or authors implementation"
+  },
+  "description": "Continuous actual particle-state replay; no generated motion or surface reconstruction.",
+  "artifacts": {
+    "replay.mp4": "ecaa43b8db1687121b1af660b053c5ff6c68c1d6bb7c1f64aaf1d70675549b43",
+    "replay.gif": "5194cb544df84e44fcffac5d091ff80c304341cd92bd63235cdf854833ed5d04",
+    "poster.png": "0dabb018e44316856b7b00a81a0406a1f9bae663be368557af9edc66d894fa8a"
+  }
+}
