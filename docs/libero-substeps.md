@@ -156,6 +156,41 @@ The coordinate semantics are checked against the pinned
 [body dynamics source](https://github.com/google-deepmind/mujoco/blob/2.3.7/src/engine/engine_core_smooth.c)
 and [spatial algebra source](https://github.com/google-deepmind/mujoco/blob/2.3.7/src/engine/engine_util_spatial.c).
 
+## Independent analytical references
+
+`tests/test_libero_analytic_references.py` defines three synthetic references whose
+expected values use declared constants and closed-form mechanics, without native
+inertia, bias, force or acceleration caches as the reference:
+
+| Fixture | Independent comparison | Error and interpretation |
+| --- | --- | --- |
+| Driven damped slider | For mass `m`, damping `b`, constant drive `F` and step `h`, use `r = m/(m + b h)` and `v_n = F/b + (v_0 - F/b) r^n`; sum the velocities for position. Compare the body load with `[F - b v_n, 0, m g]`. | Compare the finite-time position and velocity separately with the continuous exponential solution at 4, 2 and 1 ms. Agreement with the discrete recurrence does not erase its integration error. |
+| Driven damped hinge | With COM radius `l` and central inertia `J`, use `alpha = (tau - b omega - m g l cos(theta))/(J + m l²)`. Derive COM acceleration and the support force from planar Newton–Euler mechanics. | The pivot moment includes the known drive/damping couple. The inferred subtree wrench is not a bearing-only measurement. A deliberately corrupted acceleration must disagree with the reference. |
+| Centered free fall | Compare every momentum change with `m g h`, retaining the gravity direction. | Over duration `T`, semi-implicit Euler's vertical position error is exactly `-g T h/2` in this ideal constant-acceleration model, apart from arithmetic error; report it at all three step sizes. |
+
+The fixtures declare gravity, mass, inertia, damping and drive as synthetic inputs.
+They exclude contacts, material uncertainty, actuator dynamics and joint limits.
+The predeclared `1e-10` absolute arithmetic acceptance allowance applies separately
+to each fixture quantity in its own units (N, N m, m, m/s, rad/s² or N s). It is
+neither a confidence interval nor a new bound for LIBERO records. Existing numerical
+protocols remain unchanged. Recording-on/off native states must also match exactly.
+
+These references qualify only the stated ideal load and integration paths. Physical
+joint reactions in general articulated systems, contact/material accuracy and the
+full task matrix retain their separate acceptance. The pinned
+[integration specification](https://mujoco.readthedocs.io/en/2.3.7/computation.html#numerical-integration)
+explains the implicit joint-damping and semi-implicit position updates used here.
+Native results require the pinned 2.3.7 test environment; skipped tests are not
+qualification evidence.
+
+Set `LIBERO_PYTHON` to the qualified MuJoCo 2.3.7 interpreter, then run from the repository root:
+
+```bash
+PYTHONPATH=src:tests "$LIBERO_PYTHON" -m unittest test_libero_analytic_references -v
+```
+
+[Recorded results and provenance](evidence/libero/analytic-references-v1.json) preserve the reference errors and negative controls.
+
 ## Qualification boundary
 
 Small native fixtures cover a free body with external force/torque, a damped driven slide,

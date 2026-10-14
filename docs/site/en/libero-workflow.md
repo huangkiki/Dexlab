@@ -33,6 +33,17 @@ The body-aware protocol uses the original force epoch, reports rigid free-COM im
 diagnostics and retains current solver statistics. Inferred subtree loads are not measured
 joint reactions; physical-reference qualification remains open.
 
+Three additional analytical checks passed for a driven damped slider, a driven
+hinge and centered free fall: eight synthetic configurations, 142 recorded
+substeps and matching uninstrumented controls. All saved substeps also passed
+offline replay. Closed-form loads and integration references use declared constants;
+deliberately damaged hinge acceleration fails the independent reference. Over
+40 ms of free fall, vertical position error decreases from 0.7848 to 0.1962 mm
+as the step decreases from 4 to 1 ms, matching the analytical Euler error.
+This retains finite-step error alongside small equation residuals. These ideal
+references do not calibrate LIBERO materials or measure general joint reactions.
+[Equations, units and applicability](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md#independent-analytical-references).
+
 Packed storage passed 86 record/storage/executor regressions and exact lossless conversion
 and full rescoring of all five complete reference sequences (1,006 actions / 25,150 substeps).
 Their substep chunks decreased from 1,837,228,156 to 442,665,669 bytes, a **75.91% reduction**.
@@ -58,6 +69,43 @@ retains its remaining qualifications; the full 130-task and visual-policy parent
 and [qualification evidence](https://github.com/huangkiki/Dexlab/issues/188#issuecomment-6159417739)
 separate record integrity, numerical diagnostics, physical-reference validity and native
 success. Current implementation results do not change the historical case below.
+
+## Object task-path qualification
+
+The other nine Object tasks completed one development demonstration each with
+recording on/off/repeat: **27 complete runs, 4,317 actions and 71,950 recorded
+substeps**. Every native final query succeeded; all 18 instrumented records were
+valid. Full artifact hashes, action/time chains and model identities were verified.
+Recording left control/state/observation arrays unchanged; repeated goals, scores
+and substep archives matched exactly.
+
+| Object | Actions per run | Recorded substeps per run | Violating substeps for each of the same two residuals |
+| --- | --- | --- | --- |
+| alphabet-soup | 179 | 4,475 | 54 |
+| salad-dressing | 124 | 3,100 | 264 |
+| bbq-sauce | 134 | 3,350 | 441 |
+| ketchup | 248 | 6,200 | 752 |
+| tomato-sauce | 132 | 3,300 | 171 |
+| butter | 169 | 4,225 | 729 |
+| milk | 150 | 3,750 | 104 |
+| chocolate-pudding | 168 | 4,200 | 812 |
+| orange-juice | 135 | 3,375 | 835 |
+
+The unchanged constrained-acceleration and projected-body-effort negatives remain;
+the other nine metrics had no violating substeps. Native success is separate from
+numerical consistency and physical accuracy. This package used 666.11 native-worker
+seconds and approximately 1.43 GB of campaign output; these are observed qualification
+costs, not engine throughput or an all-demonstration capacity estimate.
+
+Together with the prior cream-cheese case, all ten Object task paths have selected
+native controls. All **500 official Object demonstrations / 74,507 actions** have
+prepared, load-checked inputs; their full baseline execution remains incomplete.
+The original 403 development / 97 validation split is preserved, and these nine
+qualification sequences use development data only. All 130 tasks, physical-reference
+qualification and visual-policy evaluation retain their full acceptance.
+[Object evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/object-path-qualification-v1.json)
+and [analytical reference evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/analytic-references-v1.json)
+record the denominators, individual negatives and provenance hashes.
 
 ## What the original case establishes
 
