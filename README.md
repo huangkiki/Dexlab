@@ -142,3 +142,5 @@ LIBERO 离线评分器 v2 增加逐接触距离、物体身份与汇总穿透的
 本轮优先复用证据、补齐诊断案例所需缺口，再向夹持／抓取迁移；六引擎矩阵和 594 回合夹持研究继续保留。**定时开发保持暂停。** [开发与验收约定](docs/autoresearch.zh-CN.md)
 
 [当前工作与暂停状态](docs/current-work.zh-CN.md)
+
+**查阅外部研究：** [参考资料目录](docs/references/README.zh-CN.md) · [Manda Robotics 物理引擎比较中文导读](docs/references/manda-physics-engines.zh-CN.md)。外部结果与 DexLab 实验分别标注。

@@ -142,3 +142,5 @@ The matrix preserves core, solver, runtime path, version, passed/partial/failed/
 This round reuses evidence and fills concrete diagnosis gaps before transfer to pinch/grasp. The six-engine matrix and 594-episode pinch study remain. **Scheduled development stays paused.** [Development and acceptance](docs/autoresearch.md)
 
 [Current work and pause state](docs/current-work.md)
+
+**Read related work:** [External references](docs/references/README.md) · [Manda Robotics engine-comparison guide](docs/references/manda-physics-engines.md). External findings are distinct from DexLab experiments.

@@ -150,6 +150,8 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 
 [Current work and pause state](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.md)
 
+[Reading guides and references](references.md): explore Manda Robotics’ engine comparison. External findings are distinct from DexLab experiments.
+
 ```{toctree}
 :hidden:
 :maxdepth: 1
@@ -169,5 +171,6 @@ Engines <engines>
 Roadmap <dexterity>
 Ledger <research-ledger>
 Benchmark <benchmark>
+References <references>
 Contributing <contributing>
 ```
