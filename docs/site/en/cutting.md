@@ -2,9 +2,15 @@
 
 This experiment implements one **synthetic tofu-like block halving** task from the mechanisms in [BladeMaster, arXiv:2609.27342v2](https://arxiv.org/abs/2609.27342v2). A force-driven blade cuts and withdraws; a later diagnostic impulse checks whether the two pieces move independently. This is an independent CPU implementation, not the authors' code or a reproduction of their GPU speed or real-food accuracy.
 
-![Continuous recorded particle replay](../../../demos/tofu-cut/media/replay.gif)
+```{raw} html
+<section class="cutting-player" aria-label="Tofu halving">
+<header><h3>Tofu halving</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.mp4" data-poster="_static/cutting/tofu/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.mp4" data-poster="_static/cutting/tofu/particles-poster.png" aria-pressed="false">Particles</button></div></header>
+<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu/surface-poster.png" aria-label="Tofu halving"><source src="_static/cutting/tofu/surface.mp4" type="video/mp4"><a href="_static/cutting/tofu/surface.mp4">Watch video</a></video>
+<p>Cut, withdraw and check independent motion.</p>
+</section>
+```
 
-The replay shows actual recorded particles and blade poses at half speed. Blue and orange are persistent cut-side labels; colour alone does not establish mechanical separation. At 2.4 s, the right half receives a known external impulse. This is a diagnostic intervention, not a robot manipulation policy. The first version has no robot arm, camera controller or learned policy.
+Surface and particle views share the same saved physical states and play at physical speed. Blue and orange are persistent cut-side labels; colour alone does not establish mechanical separation. At 2.4 s, the right half receives a known external impulse. This is a diagnostic intervention, not a robot manipulation policy. The first version has no robot arm, camera controller or learned policy.
 
 ## What is implemented
 
@@ -16,9 +22,9 @@ The replay shows actual recorded particles and blade poses at half speed. Blue a
 | Eq. 10–13: material contact | Current-space spherical proxies, reference-neighbour exclusion within `2 Δx`, lifted for opposing cut sides; persistent tangent history and Coulomb slip |
 | Eq. 14–16: tool contact | Box closest-point queries, predicted-gap impulse and the same opposite impulse on the dynamic blade; attitude fixed by a guide, reaction torque recorded |
 | Directional resistance | Contact work accumulates toward `Gc V^(2/3) (1−ζ)/ζ`; saturated damage releases the positive cutting-direction impulse at subsequent contacts. Damage does not scale elasticity or directly trigger separation |
-| Rendering | Recorded particle replay. The paper's linked-grid dual-contouring surface reconstruction is not implemented |
+| Rendering | Surface and particle replay from saved states; exposed material-cell faces with compatible deformation embedding. This differs from the paper's linked-grid dual contouring |
 
-The 0.2 kg blade has three dynamic translation coordinates. A bounded PD drive follows an edge-height target; material reaction changes its velocity. A gravity-compensated guide fixes attitude, and a unilateral rigid-board stop supplies a separately recorded external impulse. This is not the paper's freely rotating gravity-drop experiment. One cut uses three logical grids; multiple/intersecting cuts, plasticity, viscosity and GPU kernels are outside this version.
+The 0.2 kg blade has three dynamic translation coordinates. A bounded PD drive follows an edge-height target; material reaction changes its velocity. A gravity-compensated guide fixes attitude, and a unilateral rigid-board stop supplies a separately recorded external impulse. This is not the paper's freely rotating gravity-drop experiment. This page retains the v0.61.0 single-cut baseline; the new version adds [three sequential banana cuts](banana-cutting.md). Intersecting paths, plasticity, viscosity and GPU kernels are not qualified.
 
 ## Parameters and frozen acceptance
 
@@ -48,7 +54,7 @@ Attempt 001 completed dynamics but failed score serialization. Attempts 002–00
 
 The scorer reconstructs connectivity from the reference transfer graph, including unassigned bridges. It reads saved states and native observations without importing the solver. A partial cut and an uncut block must remain connected and fail the halving task. Short probes, absent observations, altered frozen thresholds and changed artifact hashes are rejected or cannot pass completion.
 
-Spherical contact proxies permit finite overlap. The coarse particle rendering is not a watertight surface or a measurement of cut quality. A symmetric half cut does not establish quarter-cut accuracy, force agreement with real tofu, robustness to arbitrary paths or robot safety. Real tests would be needed to identify elasticity/friction/cutting resistance and then validate force and separated-mass ratios independently.
+Spherical contact proxies permit finite overlap. The reconstructed display surface is an approximation, not a measurement of cut quality. A symmetric half cut does not establish quarter-cut accuracy, force agreement with real tofu, robustness to arbitrary paths or robot safety. Real tests would be needed to identify elasticity/friction/cutting resistance and then validate force and separated-mass ratios independently.
 
 ## Reproduce
 
@@ -67,6 +73,6 @@ python scripts/bounded_run.py --profile adaptive \
 .venv/bin/python -m dexlab.cutting_score "$CUT_ROOT/full"
 ```
 
-Use the actual mounted device and existing shared guard path on the host. `--mode partial` and `--mode uncut` retain their negative task scores. `--dt 0.00025` and `--grid-spacing 0.006` select the recorded sensitivity cases. A successful runner exit means the record completed, not necessarily that the task passed; use `score.json` or the scorer's exit code for the task result. Replay is generated by `python -m dexlab.cutting_replay RUN --output MEDIA` from the saved states, under a separate guarded postprocessing window.
+Use the actual mounted device and existing shared guard path on the host. `--mode partial` and `--mode uncut` retain their negative task scores. `--dt 0.00025` and `--grid-spacing 0.006` select the recorded sensitivity cases. A successful runner exit means the record completed, not necessarily that the task passed; use `score.json` or the scorer's exit code for the task result. Replay is generated by `python -m dexlab.cutting_showcase RUN --output MEDIA` from the saved states, under a separate guarded postprocessing window.
 
 Each run saves `manifest.json`, `states.npz`, `trace.npz` and `score.json`, with source/package versions and SHA-256 hashes. Resource receipts and the cumulative attempt ledger preserve failures and cost. [Source and experiment entry](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut) · [Implementation task #192](https://github.com/huangkiki/Dexlab/issues/192) · [Cutting discussion #191](https://github.com/huangkiki/Dexlab/discussions/191).
