@@ -1,0 +1,1021 @@
+{
+  "provenance": {
+    "scope": "Four existing native damped-slider substeps reused for pure offline record-validation tests; no LIBERO episode or additional native run.",
+    "source_sha256": "299513c22113c9a1ae725b772fdc5025642ee11be72ae41f31dfbe8840a228a1",
+    "mujoco": "2.3.7",
+    "source_test": "test_damped_euler_requires_implicit_damping_not_saved_qacc",
+    "selected_substeps": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "model_annotations": "The source XML has no sites and its sole joint belongs to body slider (id 1). These three fields are fixture annotations for the expanded descriptor, not new runtime readbacks."
+  },
+  "xml": "<mujoco><compiler angle=\"radian\" autolimits=\"true\"/><option timestep=\".002\" integrator=\"Euler\" jacobian=\"dense\" cone=\"pyramidal\" tolerance=\"1e-12\" iterations=\"100\"/><worldbody><body name=\"slider\"><joint name=\"j\" type=\"slide\" damping=\"3\"/>\n<geom size=\".1\" mass=\"2\"/></body></worldbody><actuator><motor joint=\"j\" gear=\"2\"/></actuator></mujoco>",
+  "model": {
+    "schema_version": 1,
+    "mujoco": "2.3.7",
+    "dimensions": {
+      "nq": 1,
+      "nv": 1,
+      "nu": 1,
+      "na": 0,
+      "nM": 1,
+      "nbody": 2,
+      "ngeom": 1,
+      "njnt": 1,
+      "ntendon": 0,
+      "neq": 0,
+      "nsite": 0
+    },
+    "options": {
+      "timestep": 0.002,
+      "tolerance": 1e-12,
+      "integrator": 0,
+      "cone": 0,
+      "jacobian": 0,
+      "solver": 2,
+      "iterations": 100,
+      "disableflags": 0,
+      "enableflags": 0
+    },
+    "gravity": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "arrays": {
+      "dof_parentid": [
+        -1
+      ],
+      "dof_Madr": [
+        0
+      ],
+      "dof_damping": [
+        3.0
+      ],
+      "dof_armature": [
+        0.0
+      ],
+      "dof_jntid": [
+        0
+      ],
+      "dof_bodyid": [
+        1
+      ],
+      "jnt_type": [
+        2
+      ],
+      "jnt_qposadr": [
+        0
+      ],
+      "jnt_dofadr": [
+        0
+      ],
+      "jnt_actfrclimited": [
+        0
+      ],
+      "jnt_actfrcrange": [
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "body_parentid": [
+        0,
+        0
+      ],
+      "body_mass": [
+        0.0,
+        2.0
+      ],
+      "body_inertia": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.008000000000000002,
+          0.008000000000000002,
+          0.008000000000000002
+        ]
+      ],
+      "body_ipos": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "body_iquat": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "geom_bodyid": [
+        1
+      ],
+      "jnt_bodyid": [
+        1
+      ],
+      "site_bodyid": []
+    },
+    "names": {
+      "body": [
+        "world",
+        "slider"
+      ],
+      "geom": [
+        null
+      ],
+      "joint": [
+        "j"
+      ],
+      "site": []
+    },
+    "epochs": {
+      "force": "state_before",
+      "integrated_state": "state_after",
+      "external_jacobians": "read-only mj_jacBodyCom from force-stage caches"
+    },
+    "reaction_observability": "Generalized constraints recorded; cfrc buffers are not qualified joint-reaction measurements."
+  },
+  "rows": [
+    {
+      "sequence": 0,
+      "status": "recorded",
+      "state_before": {
+        "time": 0.0,
+        "qpos": [
+          0.0
+        ],
+        "qvel": [
+          0.3
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "state_after": {
+        "time": 0.002,
+        "qpos": [
+          0.0005750348953140578
+        ],
+        "qvel": [
+          0.2875174476570289
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "force_time": 0.0,
+      "force": {
+        "ctrl": [
+          4.0
+        ],
+        "actuator_force": [
+          4.0
+        ],
+        "actuator_moment": [
+          [
+            2.0
+          ]
+        ],
+        "qfrc_actuator": [
+          8.0
+        ],
+        "qfrc_passive": [
+          -0.8999999999999999
+        ],
+        "qfrc_bias": [
+          19.62
+        ],
+        "qfrc_applied": [
+          0.0
+        ],
+        "qfrc_smooth": [
+          -12.52
+        ],
+        "qfrc_constraint": [
+          0.0
+        ],
+        "qacc": [
+          -6.26
+        ],
+        "qacc_smooth": [
+          -6.26
+        ],
+        "qM": [
+          2.0
+        ],
+        "xfrc_applied": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xpos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xquat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xipos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xmat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cvel": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.3
+          ]
+        ],
+        "subtree_com": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "efc_type": [],
+        "efc_id": [],
+        "efc_force": [],
+        "efc_pos": [],
+        "efc_margin": [],
+        "efc_vel": [],
+        "jacobian": {
+          "native_storage": "dense",
+          "shape": [
+            0,
+            1
+          ],
+          "indptr": [
+            0
+          ],
+          "indices": [],
+          "values": []
+        },
+        "contacts": [],
+        "external_jacobians": []
+      }
+    },
+    {
+      "sequence": 1,
+      "status": "recorded",
+      "state_before": {
+        "time": 0.002,
+        "qpos": [
+          0.0005750348953140578
+        ],
+        "qvel": [
+          0.2875174476570289
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "state_after": {
+        "time": 0.004,
+        "qpos": [
+          0.0011251793572423308
+        ],
+        "qvel": [
+          0.2750722309641365
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "force_time": 0.002,
+      "force": {
+        "ctrl": [
+          4.0
+        ],
+        "actuator_force": [
+          4.0
+        ],
+        "actuator_moment": [
+          [
+            2.0
+          ]
+        ],
+        "qfrc_actuator": [
+          8.0
+        ],
+        "qfrc_passive": [
+          -0.8625523429710867
+        ],
+        "qfrc_bias": [
+          19.62
+        ],
+        "qfrc_applied": [
+          0.0
+        ],
+        "qfrc_smooth": [
+          -12.482552342971086
+        ],
+        "qfrc_constraint": [
+          0.0
+        ],
+        "qacc": [
+          -6.241276171485543
+        ],
+        "qacc_smooth": [
+          -6.241276171485543
+        ],
+        "qM": [
+          2.0
+        ],
+        "xfrc_applied": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xpos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0005750348953140578
+          ]
+        ],
+        "xquat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xipos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0005750348953140578
+          ]
+        ],
+        "xmat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cvel": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.2875174476570289
+          ]
+        ],
+        "subtree_com": [
+          [
+            0.0,
+            0.0,
+            0.0005750348953140578
+          ],
+          [
+            0.0,
+            0.0,
+            0.0005750348953140578
+          ]
+        ],
+        "efc_type": [],
+        "efc_id": [],
+        "efc_force": [],
+        "efc_pos": [],
+        "efc_margin": [],
+        "efc_vel": [],
+        "jacobian": {
+          "native_storage": "dense",
+          "shape": [
+            0,
+            1
+          ],
+          "indptr": [
+            0
+          ],
+          "indices": [],
+          "values": []
+        },
+        "contacts": [],
+        "external_jacobians": []
+      }
+    },
+    {
+      "sequence": 2,
+      "status": "recorded",
+      "state_before": {
+        "time": 0.004,
+        "qpos": [
+          0.0011251793572423308
+        ],
+        "qvel": [
+          0.2750722309641365
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "state_after": {
+        "time": 0.006,
+        "qpos": [
+          0.0016505078337411075
+        ],
+        "qvel": [
+          0.26266423824938834
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "force_time": 0.004,
+      "force": {
+        "ctrl": [
+          4.0
+        ],
+        "actuator_force": [
+          4.0
+        ],
+        "actuator_moment": [
+          [
+            2.0
+          ]
+        ],
+        "qfrc_actuator": [
+          8.0
+        ],
+        "qfrc_passive": [
+          -0.8252166928924096
+        ],
+        "qfrc_bias": [
+          19.62
+        ],
+        "qfrc_applied": [
+          0.0
+        ],
+        "qfrc_smooth": [
+          -12.445216692892412
+        ],
+        "qfrc_constraint": [
+          0.0
+        ],
+        "qacc": [
+          -6.222608346446206
+        ],
+        "qacc_smooth": [
+          -6.222608346446206
+        ],
+        "qM": [
+          2.0
+        ],
+        "xfrc_applied": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xpos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0011251793572423308
+          ]
+        ],
+        "xquat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xipos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0011251793572423308
+          ]
+        ],
+        "xmat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cvel": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.2750722309641365
+          ]
+        ],
+        "subtree_com": [
+          [
+            0.0,
+            0.0,
+            0.0011251793572423308
+          ],
+          [
+            0.0,
+            0.0,
+            0.0011251793572423308
+          ]
+        ],
+        "efc_type": [],
+        "efc_id": [],
+        "efc_force": [],
+        "efc_pos": [],
+        "efc_margin": [],
+        "efc_vel": [],
+        "jacobian": {
+          "native_storage": "dense",
+          "shape": [
+            0,
+            1
+          ],
+          "indptr": [
+            0
+          ],
+          "indices": [],
+          "values": []
+        },
+        "contacts": [],
+        "external_jacobians": []
+      }
+    },
+    {
+      "sequence": 3,
+      "status": "recorded",
+      "state_before": {
+        "time": 0.006,
+        "qpos": [
+          0.0016505078337411075
+        ],
+        "qvel": [
+          0.26266423824938834
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "state_after": {
+        "time": 0.008,
+        "qpos": [
+          0.002151094550090835
+        ],
+        "qvel": [
+          0.25029335817486376
+        ],
+        "act": [],
+        "warning_number": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "force_time": 0.006,
+      "force": {
+        "ctrl": [
+          4.0
+        ],
+        "actuator_force": [
+          4.0
+        ],
+        "actuator_moment": [
+          [
+            2.0
+          ]
+        ],
+        "qfrc_actuator": [
+          8.0
+        ],
+        "qfrc_passive": [
+          -0.787992714748165
+        ],
+        "qfrc_bias": [
+          19.62
+        ],
+        "qfrc_applied": [
+          0.0
+        ],
+        "qfrc_smooth": [
+          -12.407992714748165
+        ],
+        "qfrc_constraint": [
+          0.0
+        ],
+        "qacc": [
+          -6.203996357374082
+        ],
+        "qacc_smooth": [
+          -6.203996357374082
+        ],
+        "qM": [
+          2.0
+        ],
+        "xfrc_applied": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xpos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0016505078337411075
+          ]
+        ],
+        "xquat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "xipos": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0016505078337411075
+          ]
+        ],
+        "xmat": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cvel": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.26266423824938834
+          ]
+        ],
+        "subtree_com": [
+          [
+            0.0,
+            0.0,
+            0.0016505078337411075
+          ],
+          [
+            0.0,
+            0.0,
+            0.0016505078337411075
+          ]
+        ],
+        "efc_type": [],
+        "efc_id": [],
+        "efc_force": [],
+        "efc_pos": [],
+        "efc_margin": [],
+        "efc_vel": [],
+        "jacobian": {
+          "native_storage": "dense",
+          "shape": [
+            0,
+            1
+          ],
+          "indptr": [
+            0
+          ],
+          "indices": [],
+          "values": []
+        },
+        "contacts": [],
+        "external_jacobians": []
+      }
+    }
+  ]
+}
