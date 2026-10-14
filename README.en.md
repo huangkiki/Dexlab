@@ -130,7 +130,7 @@ MuJoCo 3.16.0's [isolated qualification record](docs/engine-qualification.md) ve
 
 LIBERO offline scorer v2 checks per-contact distances, target identity and summary overlap for consistency; refreshed local hashes cannot make contradictory records valid. Original evidence and diagnostic thresholds remain unchanged. [Scoring fix and regression](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
 
-LIBERO first-action diagnostics identified a stale OSC cache after state restoration. The new initialization contract synchronizes caches and pose goals while recording retained reset memory. Old experiments keep their original protocol; complete affected-task regression and source-history attribution remain open. One native success does not prove physical accuracy. [Controller state and evidence boundaries](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html) · [#198](https://github.com/huangkiki/Dexlab/issues/198)
+LIBERO restored-pose replay now covers all 50 official demonstrations in each of three affected tasks: 150 valid records and 147 native successes, with every record still failing numerical diagnostics. Nine gripper-memory controls change outcomes in exposed failures but do not identify historical memory or select a production default. De-duplicated Object coverage is 157/500; source history, physical accuracy and the full 130-task scope remain open. [Complete results and evidence boundaries](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html) · [#198](https://github.com/huangkiki/Dexlab/issues/198)
 
 ## How to diagnose a poorly performing scene
 

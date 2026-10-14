@@ -1,0 +1,1495 @@
+{
+  "archive_bytes": 12449738,
+  "cases": [
+    {
+      "actions": 175,
+      "case_id": "alphabet-observe",
+      "first_action_arm_difference_rad": 1.6180392019490841e-06,
+      "first_action_finger_difference_m": 0.005375413490895695,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          0.25000000000000006,
+          -0.25000000000000006
+        ],
+        "memory_before": [
+          0.24000000000000007,
+          -0.24000000000000007
+        ],
+        "native_actuator_ctrl": [
+          0.025,
+          -0.025
+        ],
+        "normalized_output": [
+          0.25000000000000006,
+          -0.25000000000000006
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          0.01,
+          -0.01
+        ],
+        "memory_before": [
+          0.0
+        ],
+        "native_actuator_ctrl": [
+          0.0202,
+          -0.0202
+        ],
+        "normalized_output": [
+          0.01,
+          -0.01
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4375,
+      "initial_memory": [
+        0.0
+      ],
+      "intervention": "observe-only",
+      "last_overlap_target_difference_m": 0.4876146984663442,
+      "max_target_difference_m": 0.511849922244983,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "c5940125ca51cb3dfff37e5bb556389637ae0c4e1345a19e4ee5bf13e22455f6",
+      "native_success_any": false,
+      "native_success_final": false,
+      "peak_memory_bytes": 1075503104,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": true,
+        "body_xipos": true,
+        "body_xpos": true,
+        "body_xquat": true,
+        "ctrl": true,
+        "done": true,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": true,
+        "obs:alphabet_soup_1_quat": true,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": true,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": true,
+        "obs:basket_1_pos": true,
+        "obs:basket_1_quat": true,
+        "obs:basket_1_to_robot0_eef_pos": true,
+        "obs:basket_1_to_robot0_eef_quat": true,
+        "obs:butter_1_pos": true,
+        "obs:butter_1_quat": true,
+        "obs:butter_1_to_robot0_eef_pos": true,
+        "obs:butter_1_to_robot0_eef_quat": true,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": true,
+        "obs:cream_cheese_1_to_robot0_eef_pos": true,
+        "obs:cream_cheese_1_to_robot0_eef_quat": true,
+        "obs:milk_1_pos": true,
+        "obs:milk_1_quat": true,
+        "obs:milk_1_to_robot0_eef_pos": true,
+        "obs:milk_1_to_robot0_eef_quat": true,
+        "obs:object-state": true,
+        "obs:robot0_eef_pos": true,
+        "obs:robot0_eef_quat": true,
+        "obs:robot0_gripper_qpos": true,
+        "obs:robot0_gripper_qvel": true,
+        "obs:robot0_joint_pos": true,
+        "obs:robot0_joint_pos_cos": true,
+        "obs:robot0_joint_pos_sin": true,
+        "obs:robot0_joint_vel": true,
+        "obs:robot0_proprio-state": true,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": true,
+        "obs:salad_dressing_1_to_robot0_eef_quat": true,
+        "obs:tomato_sauce_1_pos": true,
+        "obs:tomato_sauce_1_quat": true,
+        "obs:tomato_sauce_1_to_robot0_eef_pos": true,
+        "obs:tomato_sauce_1_to_robot0_eef_quat": true,
+        "qfrc_actuator": true,
+        "reward": true,
+        "site_rgba": true,
+        "state": true,
+        "time": true
+      },
+      "resources_sha256": "7f2f881b503abf35c90dd4a86c7d6d520168037b83b151876b804a9c04b269fc",
+      "result_sha256": "4ef24e5835c51f6767c6c0b21adde936cba2cb5826626f19ca3f0c778c19b324",
+      "task": "alphabet",
+      "wall_s": 5.118766329949722
+    },
+    {
+      "actions": 175,
+      "case_id": "alphabet-positive",
+      "first_action_arm_difference_rad": 3.642919299551295e-17,
+      "first_action_finger_difference_m": 0.0,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          1.0,
+          -1.0
+        ],
+        "memory_before": [
+          1.0,
+          -1.0
+        ],
+        "native_actuator_ctrl": [
+          0.04,
+          -0.04
+        ],
+        "normalized_output": [
+          1.0,
+          -1.0
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          1.0,
+          -1.0
+        ],
+        "memory_before": [
+          1.0,
+          -1.0
+        ],
+        "native_actuator_ctrl": [
+          0.04,
+          -0.04
+        ],
+        "normalized_output": [
+          1.0,
+          -1.0
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4375,
+      "initial_memory": [
+        1.0,
+        -1.0
+      ],
+      "intervention": "positive-memory",
+      "last_overlap_target_difference_m": 0.017991284172091827,
+      "max_target_difference_m": 0.03173230705049165,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "0eb9cafa32f4731d0ee02a5cb3a8f04c0290c66b706cff86a1875217a8604b35",
+      "native_success_any": true,
+      "native_success_final": true,
+      "peak_memory_bytes": 1075011584,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": false,
+        "body_xipos": false,
+        "body_xpos": false,
+        "body_xquat": false,
+        "ctrl": false,
+        "done": false,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": false,
+        "obs:alphabet_soup_1_quat": false,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": false,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": false,
+        "obs:basket_1_pos": false,
+        "obs:basket_1_quat": false,
+        "obs:basket_1_to_robot0_eef_pos": false,
+        "obs:basket_1_to_robot0_eef_quat": false,
+        "obs:butter_1_pos": true,
+        "obs:butter_1_quat": false,
+        "obs:butter_1_to_robot0_eef_pos": false,
+        "obs:butter_1_to_robot0_eef_quat": false,
+        "obs:cream_cheese_1_pos": false,
+        "obs:cream_cheese_1_quat": false,
+        "obs:cream_cheese_1_to_robot0_eef_pos": false,
+        "obs:cream_cheese_1_to_robot0_eef_quat": false,
+        "obs:milk_1_pos": true,
+        "obs:milk_1_quat": true,
+        "obs:milk_1_to_robot0_eef_pos": false,
+        "obs:milk_1_to_robot0_eef_quat": false,
+        "obs:object-state": false,
+        "obs:robot0_eef_pos": false,
+        "obs:robot0_eef_quat": false,
+        "obs:robot0_gripper_qpos": false,
+        "obs:robot0_gripper_qvel": false,
+        "obs:robot0_joint_pos": false,
+        "obs:robot0_joint_pos_cos": false,
+        "obs:robot0_joint_pos_sin": false,
+        "obs:robot0_joint_vel": false,
+        "obs:robot0_proprio-state": false,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": false,
+        "obs:salad_dressing_1_to_robot0_eef_quat": false,
+        "obs:tomato_sauce_1_pos": false,
+        "obs:tomato_sauce_1_quat": false,
+        "obs:tomato_sauce_1_to_robot0_eef_pos": false,
+        "obs:tomato_sauce_1_to_robot0_eef_quat": false,
+        "qfrc_actuator": false,
+        "reward": false,
+        "site_rgba": true,
+        "state": false,
+        "time": true
+      },
+      "resources_sha256": "ffda93fdd30c758e19541219a4f829511ed6999042da9b4b6c0987857da9ab97",
+      "result_sha256": "5871c8f15067f02a8ad7eb166ec33c5a20c99a4f6316251afe155b6b462bf700",
+      "task": "alphabet",
+      "wall_s": 5.317180149955675
+    },
+    {
+      "actions": 175,
+      "case_id": "alphabet-negative",
+      "first_action_arm_difference_rad": 8.633449472099375e-06,
+      "first_action_finger_difference_m": 0.00897520865458051,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          -0.7499999999999998,
+          0.7499999999999998
+        ],
+        "memory_before": [
+          -0.7599999999999998,
+          0.7599999999999998
+        ],
+        "native_actuator_ctrl": [
+          0.0050000000000000044,
+          -0.0050000000000000044
+        ],
+        "normalized_output": [
+          -0.7499999999999998,
+          0.7499999999999998
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          -0.99,
+          0.99
+        ],
+        "memory_before": [
+          -1.0,
+          1.0
+        ],
+        "native_actuator_ctrl": [
+          0.0001999999999999988,
+          -0.0001999999999999988
+        ],
+        "normalized_output": [
+          -0.99,
+          0.99
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4375,
+      "initial_memory": [
+        -1.0,
+        1.0
+      ],
+      "intervention": "negative-memory",
+      "last_overlap_target_difference_m": 0.00041708781876197186,
+      "max_target_difference_m": 0.006135966670911865,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "f116b1e9bc01eebfb466b51851cd86821b08d4554e70a94b54ed356bc009107e",
+      "native_success_any": true,
+      "native_success_final": true,
+      "peak_memory_bytes": 1073897472,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": false,
+        "body_xipos": false,
+        "body_xpos": false,
+        "body_xquat": false,
+        "ctrl": false,
+        "done": false,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": false,
+        "obs:alphabet_soup_1_quat": false,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": false,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": false,
+        "obs:basket_1_pos": false,
+        "obs:basket_1_quat": false,
+        "obs:basket_1_to_robot0_eef_pos": false,
+        "obs:basket_1_to_robot0_eef_quat": false,
+        "obs:butter_1_pos": true,
+        "obs:butter_1_quat": false,
+        "obs:butter_1_to_robot0_eef_pos": false,
+        "obs:butter_1_to_robot0_eef_quat": false,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": false,
+        "obs:cream_cheese_1_to_robot0_eef_pos": false,
+        "obs:cream_cheese_1_to_robot0_eef_quat": false,
+        "obs:milk_1_pos": true,
+        "obs:milk_1_quat": true,
+        "obs:milk_1_to_robot0_eef_pos": false,
+        "obs:milk_1_to_robot0_eef_quat": false,
+        "obs:object-state": false,
+        "obs:robot0_eef_pos": false,
+        "obs:robot0_eef_quat": false,
+        "obs:robot0_gripper_qpos": false,
+        "obs:robot0_gripper_qvel": false,
+        "obs:robot0_joint_pos": false,
+        "obs:robot0_joint_pos_cos": false,
+        "obs:robot0_joint_pos_sin": false,
+        "obs:robot0_joint_vel": false,
+        "obs:robot0_proprio-state": false,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": false,
+        "obs:salad_dressing_1_to_robot0_eef_quat": false,
+        "obs:tomato_sauce_1_pos": true,
+        "obs:tomato_sauce_1_quat": false,
+        "obs:tomato_sauce_1_to_robot0_eef_pos": false,
+        "obs:tomato_sauce_1_to_robot0_eef_quat": false,
+        "qfrc_actuator": false,
+        "reward": false,
+        "site_rgba": true,
+        "state": false,
+        "time": true
+      },
+      "resources_sha256": "0d83eb15451d3ec6f67bef2b7500ba1beaa48031884c88d4e5a3a599773a9072",
+      "result_sha256": "6bcc52e88dab3539179ea99de94214eddcd00bb87abdbb93f8d3c02510c0c11b",
+      "task": "alphabet",
+      "wall_s": 5.3527030920377
+    },
+    {
+      "actions": 177,
+      "case_id": "salad-observe",
+      "first_action_arm_difference_rad": 2.8712929811547383e-09,
+      "first_action_finger_difference_m": 0.005392705738561491,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          0.25000000000000006,
+          -0.25000000000000006
+        ],
+        "memory_before": [
+          0.24000000000000007,
+          -0.24000000000000007
+        ],
+        "native_actuator_ctrl": [
+          0.025,
+          -0.025
+        ],
+        "normalized_output": [
+          0.25000000000000006,
+          -0.25000000000000006
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          0.01,
+          -0.01
+        ],
+        "memory_before": [
+          0.0
+        ],
+        "native_actuator_ctrl": [
+          0.0202,
+          -0.0202
+        ],
+        "normalized_output": [
+          0.01,
+          -0.01
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4425,
+      "initial_memory": [
+        0.0
+      ],
+      "intervention": "observe-only",
+      "last_overlap_target_difference_m": 0.2320668576684083,
+      "max_target_difference_m": 0.2818839592651992,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "1980e82405345d58b55ac227970b55456928eca5204b4a636e2f5e17842a6137",
+      "native_success_any": false,
+      "native_success_final": false,
+      "peak_memory_bytes": 1078919168,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": true,
+        "body_xipos": true,
+        "body_xpos": true,
+        "body_xquat": true,
+        "ctrl": true,
+        "done": true,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": true,
+        "obs:alphabet_soup_1_quat": true,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": true,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": true,
+        "obs:basket_1_pos": true,
+        "obs:basket_1_quat": true,
+        "obs:basket_1_to_robot0_eef_pos": true,
+        "obs:basket_1_to_robot0_eef_quat": true,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": true,
+        "obs:cream_cheese_1_to_robot0_eef_pos": true,
+        "obs:cream_cheese_1_to_robot0_eef_quat": true,
+        "obs:ketchup_1_pos": true,
+        "obs:ketchup_1_quat": true,
+        "obs:ketchup_1_to_robot0_eef_pos": true,
+        "obs:ketchup_1_to_robot0_eef_quat": true,
+        "obs:milk_1_pos": true,
+        "obs:milk_1_quat": true,
+        "obs:milk_1_to_robot0_eef_pos": true,
+        "obs:milk_1_to_robot0_eef_quat": true,
+        "obs:object-state": true,
+        "obs:robot0_eef_pos": true,
+        "obs:robot0_eef_quat": true,
+        "obs:robot0_gripper_qpos": true,
+        "obs:robot0_gripper_qvel": true,
+        "obs:robot0_joint_pos": true,
+        "obs:robot0_joint_pos_cos": true,
+        "obs:robot0_joint_pos_sin": true,
+        "obs:robot0_joint_vel": true,
+        "obs:robot0_proprio-state": true,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": true,
+        "obs:salad_dressing_1_to_robot0_eef_quat": true,
+        "obs:tomato_sauce_1_pos": true,
+        "obs:tomato_sauce_1_quat": true,
+        "obs:tomato_sauce_1_to_robot0_eef_pos": true,
+        "obs:tomato_sauce_1_to_robot0_eef_quat": true,
+        "qfrc_actuator": true,
+        "reward": true,
+        "site_rgba": true,
+        "state": true,
+        "time": true
+      },
+      "resources_sha256": "a418efac895c00223adac105100659eb51ac9f40bfd4fad418b60b3038ae9bb4",
+      "result_sha256": "32306e144a1f761b3e739c9acd957560740f5c7773432ab8421af21130ca0950",
+      "task": "salad",
+      "wall_s": 5.208673325018026
+    },
+    {
+      "actions": 177,
+      "case_id": "salad-positive",
+      "first_action_arm_difference_rad": 4.336808689942018e-19,
+      "first_action_finger_difference_m": 0.0,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          1.0,
+          -1.0
+        ],
+        "memory_before": [
+          1.0,
+          -1.0
+        ],
+        "native_actuator_ctrl": [
+          0.04,
+          -0.04
+        ],
+        "normalized_output": [
+          1.0,
+          -1.0
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          1.0,
+          -1.0
+        ],
+        "memory_before": [
+          1.0,
+          -1.0
+        ],
+        "native_actuator_ctrl": [
+          0.04,
+          -0.04
+        ],
+        "normalized_output": [
+          1.0,
+          -1.0
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4425,
+      "initial_memory": [
+        1.0,
+        -1.0
+      ],
+      "intervention": "positive-memory",
+      "last_overlap_target_difference_m": 0.0015170303171860601,
+      "max_target_difference_m": 0.0015170303171860601,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "0dd107d1bcad465ec3d640bff24bc8956733ce15b20d407faae37b221175634f",
+      "native_success_any": true,
+      "native_success_final": true,
+      "peak_memory_bytes": 1077723136,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": false,
+        "body_xipos": false,
+        "body_xpos": false,
+        "body_xquat": false,
+        "ctrl": false,
+        "done": false,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": false,
+        "obs:alphabet_soup_1_quat": false,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": false,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": false,
+        "obs:basket_1_pos": false,
+        "obs:basket_1_quat": false,
+        "obs:basket_1_to_robot0_eef_pos": false,
+        "obs:basket_1_to_robot0_eef_quat": false,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": false,
+        "obs:cream_cheese_1_to_robot0_eef_pos": false,
+        "obs:cream_cheese_1_to_robot0_eef_quat": false,
+        "obs:ketchup_1_pos": false,
+        "obs:ketchup_1_quat": false,
+        "obs:ketchup_1_to_robot0_eef_pos": false,
+        "obs:ketchup_1_to_robot0_eef_quat": false,
+        "obs:milk_1_pos": true,
+        "obs:milk_1_quat": true,
+        "obs:milk_1_to_robot0_eef_pos": false,
+        "obs:milk_1_to_robot0_eef_quat": false,
+        "obs:object-state": false,
+        "obs:robot0_eef_pos": false,
+        "obs:robot0_eef_quat": false,
+        "obs:robot0_gripper_qpos": false,
+        "obs:robot0_gripper_qvel": false,
+        "obs:robot0_joint_pos": false,
+        "obs:robot0_joint_pos_cos": false,
+        "obs:robot0_joint_pos_sin": false,
+        "obs:robot0_joint_vel": false,
+        "obs:robot0_proprio-state": false,
+        "obs:salad_dressing_1_pos": false,
+        "obs:salad_dressing_1_quat": false,
+        "obs:salad_dressing_1_to_robot0_eef_pos": false,
+        "obs:salad_dressing_1_to_robot0_eef_quat": false,
+        "obs:tomato_sauce_1_pos": true,
+        "obs:tomato_sauce_1_quat": false,
+        "obs:tomato_sauce_1_to_robot0_eef_pos": false,
+        "obs:tomato_sauce_1_to_robot0_eef_quat": false,
+        "qfrc_actuator": false,
+        "reward": false,
+        "site_rgba": true,
+        "state": false,
+        "time": true
+      },
+      "resources_sha256": "0471a7585c1775ecfdca703588d4493c28007ca9e9632561b02c4827309e0cf8",
+      "result_sha256": "9d2f881fac41250da748501dc6994de38259ce95a375344189d51924c3dc4dde",
+      "task": "salad",
+      "wall_s": 5.2515337420627475
+    },
+    {
+      "actions": 177,
+      "case_id": "salad-negative",
+      "first_action_arm_difference_rad": 7.750470546732599e-08,
+      "first_action_finger_difference_m": 0.008946429403340485,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          -0.7499999999999998,
+          0.7499999999999998
+        ],
+        "memory_before": [
+          -0.7599999999999998,
+          0.7599999999999998
+        ],
+        "native_actuator_ctrl": [
+          0.0050000000000000044,
+          -0.0050000000000000044
+        ],
+        "normalized_output": [
+          -0.7499999999999998,
+          0.7499999999999998
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          -0.99,
+          0.99
+        ],
+        "memory_before": [
+          -1.0,
+          1.0
+        ],
+        "native_actuator_ctrl": [
+          0.0001999999999999988,
+          -0.0001999999999999988
+        ],
+        "normalized_output": [
+          -0.99,
+          0.99
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4425,
+      "initial_memory": [
+        -1.0,
+        1.0
+      ],
+      "intervention": "negative-memory",
+      "last_overlap_target_difference_m": 0.052046065809553,
+      "max_target_difference_m": 0.054414701003517786,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "66498125f2a3c490453485df1c0436e6c45022ef8b0bf3d68e5ba6fbd2c4ca8c",
+      "native_success_any": true,
+      "native_success_final": true,
+      "peak_memory_bytes": 1078579200,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": false,
+        "body_xipos": false,
+        "body_xpos": false,
+        "body_xquat": false,
+        "ctrl": false,
+        "done": false,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": false,
+        "obs:alphabet_soup_1_quat": false,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": false,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": false,
+        "obs:basket_1_pos": false,
+        "obs:basket_1_quat": false,
+        "obs:basket_1_to_robot0_eef_pos": false,
+        "obs:basket_1_to_robot0_eef_quat": false,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": false,
+        "obs:cream_cheese_1_to_robot0_eef_pos": false,
+        "obs:cream_cheese_1_to_robot0_eef_quat": false,
+        "obs:ketchup_1_pos": true,
+        "obs:ketchup_1_quat": true,
+        "obs:ketchup_1_to_robot0_eef_pos": false,
+        "obs:ketchup_1_to_robot0_eef_quat": false,
+        "obs:milk_1_pos": true,
+        "obs:milk_1_quat": true,
+        "obs:milk_1_to_robot0_eef_pos": false,
+        "obs:milk_1_to_robot0_eef_quat": false,
+        "obs:object-state": false,
+        "obs:robot0_eef_pos": false,
+        "obs:robot0_eef_quat": false,
+        "obs:robot0_gripper_qpos": false,
+        "obs:robot0_gripper_qvel": false,
+        "obs:robot0_joint_pos": false,
+        "obs:robot0_joint_pos_cos": false,
+        "obs:robot0_joint_pos_sin": false,
+        "obs:robot0_joint_vel": false,
+        "obs:robot0_proprio-state": false,
+        "obs:salad_dressing_1_pos": false,
+        "obs:salad_dressing_1_quat": false,
+        "obs:salad_dressing_1_to_robot0_eef_pos": false,
+        "obs:salad_dressing_1_to_robot0_eef_quat": false,
+        "obs:tomato_sauce_1_pos": false,
+        "obs:tomato_sauce_1_quat": false,
+        "obs:tomato_sauce_1_to_robot0_eef_pos": false,
+        "obs:tomato_sauce_1_to_robot0_eef_quat": false,
+        "qfrc_actuator": false,
+        "reward": false,
+        "site_rgba": true,
+        "state": false,
+        "time": true
+      },
+      "resources_sha256": "4a9466407ab42366602cab7862230795366108cc9137c9527d0d1db6d0d8011b",
+      "result_sha256": "bc56da4c9010cedd394ea4655c53adfc6c87e82297a20894d341a202b8684853",
+      "task": "salad",
+      "wall_s": 5.242723947972991
+    },
+    {
+      "actions": 162,
+      "case_id": "bbq-observe",
+      "first_action_arm_difference_rad": 5.275149913863686e-05,
+      "first_action_finger_difference_m": 0.005392902346188926,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          0.25000000000000006,
+          -0.25000000000000006
+        ],
+        "memory_before": [
+          0.24000000000000007,
+          -0.24000000000000007
+        ],
+        "native_actuator_ctrl": [
+          0.025,
+          -0.025
+        ],
+        "normalized_output": [
+          0.25000000000000006,
+          -0.25000000000000006
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          0.01,
+          -0.01
+        ],
+        "memory_before": [
+          0.0
+        ],
+        "native_actuator_ctrl": [
+          0.0202,
+          -0.0202
+        ],
+        "normalized_output": [
+          0.01,
+          -0.01
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4050,
+      "initial_memory": [
+        0.0
+      ],
+      "intervention": "observe-only",
+      "last_overlap_target_difference_m": 0.40552332680753733,
+      "max_target_difference_m": 0.40858294933216976,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "773234eb16c81d63deadc485c37d0f8cff4d8de8fdbd93835f2152a356742d63",
+      "native_success_any": false,
+      "native_success_final": false,
+      "peak_memory_bytes": 1070432256,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": true,
+        "body_xipos": true,
+        "body_xpos": true,
+        "body_xquat": true,
+        "ctrl": true,
+        "done": true,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": true,
+        "obs:alphabet_soup_1_quat": true,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": true,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": true,
+        "obs:basket_1_pos": true,
+        "obs:basket_1_quat": true,
+        "obs:basket_1_to_robot0_eef_pos": true,
+        "obs:basket_1_to_robot0_eef_quat": true,
+        "obs:bbq_sauce_1_pos": true,
+        "obs:bbq_sauce_1_quat": true,
+        "obs:bbq_sauce_1_to_robot0_eef_pos": true,
+        "obs:bbq_sauce_1_to_robot0_eef_quat": true,
+        "obs:chocolate_pudding_1_pos": true,
+        "obs:chocolate_pudding_1_quat": true,
+        "obs:chocolate_pudding_1_to_robot0_eef_pos": true,
+        "obs:chocolate_pudding_1_to_robot0_eef_quat": true,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": true,
+        "obs:cream_cheese_1_to_robot0_eef_pos": true,
+        "obs:cream_cheese_1_to_robot0_eef_quat": true,
+        "obs:ketchup_1_pos": true,
+        "obs:ketchup_1_quat": true,
+        "obs:ketchup_1_to_robot0_eef_pos": true,
+        "obs:ketchup_1_to_robot0_eef_quat": true,
+        "obs:object-state": true,
+        "obs:robot0_eef_pos": true,
+        "obs:robot0_eef_quat": true,
+        "obs:robot0_gripper_qpos": true,
+        "obs:robot0_gripper_qvel": true,
+        "obs:robot0_joint_pos": true,
+        "obs:robot0_joint_pos_cos": true,
+        "obs:robot0_joint_pos_sin": true,
+        "obs:robot0_joint_vel": true,
+        "obs:robot0_proprio-state": true,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": true,
+        "obs:salad_dressing_1_to_robot0_eef_quat": true,
+        "qfrc_actuator": true,
+        "reward": true,
+        "site_rgba": true,
+        "state": true,
+        "time": true
+      },
+      "resources_sha256": "3a3cfca955bc397e5918a10556aab31299d2fb42e7251f7071e3da13e56a9cae",
+      "result_sha256": "95a98b6b1da2362ff61151fa9ce10a502c6421cc28486c37dd0b1dcd2c723ed1",
+      "task": "bbq",
+      "wall_s": 5.034065820043907
+    },
+    {
+      "actions": 162,
+      "case_id": "bbq-positive",
+      "first_action_arm_difference_rad": 5.2746214166177197e-05,
+      "first_action_finger_difference_m": 1.557290024364888e-07,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          1.0,
+          -1.0
+        ],
+        "memory_before": [
+          1.0,
+          -1.0
+        ],
+        "native_actuator_ctrl": [
+          0.04,
+          -0.04
+        ],
+        "normalized_output": [
+          1.0,
+          -1.0
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          1.0,
+          -1.0
+        ],
+        "memory_before": [
+          1.0,
+          -1.0
+        ],
+        "native_actuator_ctrl": [
+          0.04,
+          -0.04
+        ],
+        "normalized_output": [
+          1.0,
+          -1.0
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4050,
+      "initial_memory": [
+        1.0,
+        -1.0
+      ],
+      "intervention": "positive-memory",
+      "last_overlap_target_difference_m": 0.4113628991397132,
+      "max_target_difference_m": 0.413788904708431,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "a4194cb439a626b5a19f45e0c6e1b5edafe5e8660d084958d302ac8865bc7f5a",
+      "native_success_any": false,
+      "native_success_final": false,
+      "peak_memory_bytes": 1070297088,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": false,
+        "body_xipos": false,
+        "body_xpos": false,
+        "body_xquat": false,
+        "ctrl": false,
+        "done": true,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": false,
+        "obs:alphabet_soup_1_quat": false,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": false,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": false,
+        "obs:basket_1_pos": false,
+        "obs:basket_1_quat": false,
+        "obs:basket_1_to_robot0_eef_pos": false,
+        "obs:basket_1_to_robot0_eef_quat": false,
+        "obs:bbq_sauce_1_pos": false,
+        "obs:bbq_sauce_1_quat": false,
+        "obs:bbq_sauce_1_to_robot0_eef_pos": false,
+        "obs:bbq_sauce_1_to_robot0_eef_quat": false,
+        "obs:chocolate_pudding_1_pos": false,
+        "obs:chocolate_pudding_1_quat": false,
+        "obs:chocolate_pudding_1_to_robot0_eef_pos": false,
+        "obs:chocolate_pudding_1_to_robot0_eef_quat": false,
+        "obs:cream_cheese_1_pos": false,
+        "obs:cream_cheese_1_quat": false,
+        "obs:cream_cheese_1_to_robot0_eef_pos": false,
+        "obs:cream_cheese_1_to_robot0_eef_quat": false,
+        "obs:ketchup_1_pos": true,
+        "obs:ketchup_1_quat": true,
+        "obs:ketchup_1_to_robot0_eef_pos": false,
+        "obs:ketchup_1_to_robot0_eef_quat": false,
+        "obs:object-state": false,
+        "obs:robot0_eef_pos": false,
+        "obs:robot0_eef_quat": false,
+        "obs:robot0_gripper_qpos": false,
+        "obs:robot0_gripper_qvel": false,
+        "obs:robot0_joint_pos": false,
+        "obs:robot0_joint_pos_cos": false,
+        "obs:robot0_joint_pos_sin": false,
+        "obs:robot0_joint_vel": false,
+        "obs:robot0_proprio-state": false,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": false,
+        "obs:salad_dressing_1_to_robot0_eef_quat": false,
+        "qfrc_actuator": false,
+        "reward": true,
+        "site_rgba": true,
+        "state": false,
+        "time": true
+      },
+      "resources_sha256": "a4e9dddc42ccf488ae163b46dbcf2be074f0b64b18d95fa0185958da7dc32f26",
+      "result_sha256": "a1c1743dd651b7cc0554a539dc492c4d8851cfb80ebf9ac04fe82b61830a58d2",
+      "task": "bbq",
+      "wall_s": 5.091577238985337
+    },
+    {
+      "actions": 162,
+      "case_id": "bbq-negative",
+      "first_action_arm_difference_rad": 5.276273280419019e-05,
+      "first_action_finger_difference_m": 0.008949623930890861,
+      "first_action_last_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          -0.7499999999999998,
+          0.7499999999999998
+        ],
+        "memory_before": [
+          -0.7599999999999998,
+          0.7599999999999998
+        ],
+        "native_actuator_ctrl": [
+          0.0050000000000000044,
+          -0.0050000000000000044
+        ],
+        "normalized_output": [
+          -0.7499999999999998,
+          0.7499999999999998
+        ],
+        "time_s": 0.2980000000000002
+      },
+      "first_action_target_difference_m": 0.0,
+      "first_command": {
+        "input": [
+          -1.0
+        ],
+        "memory_after": [
+          -0.99,
+          0.99
+        ],
+        "memory_before": [
+          -1.0,
+          1.0
+        ],
+        "native_actuator_ctrl": [
+          0.0001999999999999988,
+          -0.0001999999999999988
+        ],
+        "normalized_output": [
+          -0.99,
+          0.99
+        ],
+        "time_s": 0.25000000000000017
+      },
+      "format_calls": 4050,
+      "initial_memory": [
+        -1.0,
+        1.0
+      ],
+      "intervention": "negative-memory",
+      "last_overlap_target_difference_m": 0.008825321219464864,
+      "max_target_difference_m": 0.01395922461798633,
+      "native_identity": {
+        "actuator_ctrlrange": [
+          [
+            0.0,
+            0.04
+          ],
+          [
+            -0.04,
+            0.0
+          ]
+        ],
+        "actuator_indices": [
+          7,
+          8
+        ],
+        "actuators": [
+          "gripper0_gripper_finger_joint1",
+          "gripper0_gripper_finger_joint2"
+        ],
+        "control_timestep_s": 0.05,
+        "gripper_class": "PandaGripper",
+        "gripper_dof": 1,
+        "gripper_module": "robosuite.models.grippers.panda_gripper",
+        "gripper_source_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+        "model_timestep_s": 0.002,
+        "speed": 0.01
+      },
+      "native_result_sha256": "2f2179d96fdf0e400bb0ad53c0ffdc3ce3f1b052f43e9bc9274deebd90d1346b",
+      "native_success_any": true,
+      "native_success_final": true,
+      "peak_memory_bytes": 1071411200,
+      "reference_array_equal": {
+        "action_interval": true,
+        "actions": true,
+        "actuator_force": false,
+        "body_xipos": false,
+        "body_xpos": false,
+        "body_xquat": false,
+        "ctrl": false,
+        "done": false,
+        "goal_event_range": true,
+        "initial": true,
+        "obs:alphabet_soup_1_pos": false,
+        "obs:alphabet_soup_1_quat": false,
+        "obs:alphabet_soup_1_to_robot0_eef_pos": false,
+        "obs:alphabet_soup_1_to_robot0_eef_quat": false,
+        "obs:basket_1_pos": false,
+        "obs:basket_1_quat": false,
+        "obs:basket_1_to_robot0_eef_pos": false,
+        "obs:basket_1_to_robot0_eef_quat": false,
+        "obs:bbq_sauce_1_pos": false,
+        "obs:bbq_sauce_1_quat": false,
+        "obs:bbq_sauce_1_to_robot0_eef_pos": false,
+        "obs:bbq_sauce_1_to_robot0_eef_quat": false,
+        "obs:chocolate_pudding_1_pos": true,
+        "obs:chocolate_pudding_1_quat": false,
+        "obs:chocolate_pudding_1_to_robot0_eef_pos": false,
+        "obs:chocolate_pudding_1_to_robot0_eef_quat": false,
+        "obs:cream_cheese_1_pos": true,
+        "obs:cream_cheese_1_quat": false,
+        "obs:cream_cheese_1_to_robot0_eef_pos": false,
+        "obs:cream_cheese_1_to_robot0_eef_quat": false,
+        "obs:ketchup_1_pos": true,
+        "obs:ketchup_1_quat": true,
+        "obs:ketchup_1_to_robot0_eef_pos": false,
+        "obs:ketchup_1_to_robot0_eef_quat": false,
+        "obs:object-state": false,
+        "obs:robot0_eef_pos": false,
+        "obs:robot0_eef_quat": false,
+        "obs:robot0_gripper_qpos": false,
+        "obs:robot0_gripper_qvel": false,
+        "obs:robot0_joint_pos": false,
+        "obs:robot0_joint_pos_cos": false,
+        "obs:robot0_joint_pos_sin": false,
+        "obs:robot0_joint_vel": false,
+        "obs:robot0_proprio-state": false,
+        "obs:salad_dressing_1_pos": true,
+        "obs:salad_dressing_1_quat": true,
+        "obs:salad_dressing_1_to_robot0_eef_pos": false,
+        "obs:salad_dressing_1_to_robot0_eef_quat": false,
+        "qfrc_actuator": false,
+        "reward": false,
+        "site_rgba": true,
+        "state": false,
+        "time": true
+      },
+      "resources_sha256": "a804fbaee406a4e37c0aaf9b15e164da7b0b9f3be299133c7b5aa24f10d98e37",
+      "result_sha256": "d8501f04d148baee46c7cc186599ae02cd02112f381cc3ff812575f27cdf9974",
+      "task": "bbq",
+      "wall_s": 5.089493623003364
+    }
+  ],
+  "cumulative_native_starts": 430,
+  "cumulative_native_worker_s": 12509.978066866752,
+  "new_native_starts": 9,
+  "new_native_worker_s": 46.70671726902947,
+  "new_unique_baseline_records": 0,
+  "original_controller_history_reconstructed": false,
+  "physical_accuracy_established": false,
+  "plan_sha256": "20d68805223459f79e4a2778834a45e6329a7e662e11e80aaedef869e607fafc",
+  "scope": "Complete exposed-development failure set and two explicit memory interventions. Any native effect belongs to this intervention; historical memory and dataset generation remain unresolved. No selection of a new production initialization.",
+  "state": "gripper-memory-diagnostic-terminal-verified",
+  "validation_cases_used": 0,
+  "schema_version": 1,
+  "verification_sha256": "71e5fec8a12727d796b3c6fbee9b0420a05ea7524287f8b7b1cf5fd60268905a",
+  "comparison_sha256": "c2b757640d86c23a73608d0c327cc9d5efe9b8eb58bd2ab0e3f832fa72fd6418",
+  "source_preparation_verification_sha256": "41a060821bface117a3406a4342e52bcf7f75b094f4b7682ffa306cd4fad477f",
+  "source_preparation_service_s": 2.121222277986817,
+  "diagnostic_offline_service_s": 1.8012534839799628,
+  "native_service_s": 59.33925650897436,
+  "peak_memory_bytes": 1078919168,
+  "limits": {
+    "memory.max": "8589934592",
+    "memory.high": "7516192768",
+    "memory.swap.max": "0",
+    "cpu.max": "400000 100000",
+    "pids.max": "128",
+    "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+  },
+  "no_high_max_oom_events": true,
+  "candidate_commit": "7e2021823db2aca0d1636141adc72ede669849b2",
+  "numerical_environment": {
+    "MKL_NUM_THREADS": null,
+    "NUMBA_CPU_NAME": null,
+    "NUMBA_DISABLE_JIT": null,
+    "NUMBA_NUM_THREADS": null,
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "runtime_versions": {
+    "bddl": "1.0.1",
+    "gym": "0.25.2",
+    "h5py": "3.10.0",
+    "libero": "0.1.0",
+    "llvmlite": "0.40.1",
+    "mujoco": "2.3.7",
+    "numba": "0.57.1",
+    "numpy": "1.22.4",
+    "robosuite": "1.4.0",
+    "scipy": "1.10.1"
+  },
+  "implementation_sources": {
+    "libero_execute.py": "c2ead36ef16dc33ca03a2c248648f200c8c36d528a078c7b6ccb613eaf0627f4",
+    "libero_demo.py": "a56424f1750bc93c2fa97fb05680ff97f391a18b3dcbec36d654c7153d14fad1",
+    "libero_initialization.py": "2344b6df8cf38d9ff76015dbb62b8645102377e808ea42570df2eba821aa4f8b",
+    "libero_bindings.py": "574aced0b3fbd03f21932635480bdd3b965d17106f4b9ccecd5b3e5ce0a90b87",
+    "libero_goals.py": "58ea1d8028af7b8b5e68b0ded6dc139c27c74ee9f9649e2739effc624bd675de",
+    "libero_dataset.py": "e6e63f6037edeaaf73dd0c0d83996c2adf50d5761e326801c6772afee7e91390",
+    "libero_inputs.py": "20c2e929aa0cb6b80097271125ff9de88a1050fa00972e9bf86ed71c1148309a",
+    "libero_workflow.py": "53bddd0c8bbeaab4b09a2682b7bb966b9aad8ca58c0e4913ff93f8409db8eb97",
+    "migration_budget.py": "7e5276af8052f92479d7c73c9672fb0abc9552315db161a58cfdce0b922f03ad",
+    "libero_physics.py": "98c4395ec616323da3362942e5119fa9ad1d4bb1bbbfd3d711ce02a300542976",
+    "libero_substeps.py": "805c03acad14a2c8a97e110489de5037ba4d8c7a67e252cb4d22958fb3437804",
+    "libero_trials.py": "e94b26e21942a9ea34f8947a8f0a16cfedf56cdc90cea38c63f4fe86a68c29aa",
+    "libero_score_v2.py": "a5905729251adb0d58e86a44e0897b44236f15cdb04f0598a60605e8d39343d2",
+    "libero_dynamics.py": "7bcf57c39d10de5efed464c0ffcea30feb2154a7db6e76b21987d0ce0cffd686",
+    "libero_body_dynamics.py": "da6e82053d88c0d774a59d8dea0da66bbe916cab07969c1752422402e89091cf",
+    "libero_score.py": "fa913ae501a7c398416b1dc10b53f6fdf069483db7e57816be6138ad08cafdfe",
+    "contact_trials.py": "d13cdb0f799a2b776bb8cb40a9c2e19862e4dc21df1191411bdfe3301c945d71"
+  },
+  "native_source_identities": [
+    {
+      "role": "panda-gripper",
+      "relative_path": "models/grippers/panda_gripper.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb"
+    },
+    {
+      "role": "gripper-memory-initializer",
+      "relative_path": "models/grippers/gripper_model.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "0543b5a9e1d8b41e21880d8445c5d8fbf8535a4ac6fd55c5e70a3b1f323c3735"
+    },
+    {
+      "role": "gripper-registry",
+      "relative_path": "models/grippers/__init__.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "8669fcd5e67fa0371874034add25cad19e7fa5cc5bd4a6c3d8e7568d44371c1b"
+    },
+    {
+      "role": "actuator-command-map",
+      "relative_path": "robots/manipulator.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "d37ff4c00112cfba9bf4b96bf48ad5664422fd824dd4fbcd1eebda650a451b64"
+    },
+    {
+      "role": "robot-controller-schedule",
+      "relative_path": "robots/single_arm.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "d233b1b785e8f88ffb5df1357666b02a397ae930ce98181b079e0496ab35fc57"
+    },
+    {
+      "role": "physics-substep-schedule",
+      "relative_path": "environments/base.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "3d55a1d8b0350478b7e7e8d1c7a1250c8f173b69a67016ecb9e65c6965e741f6"
+    },
+    {
+      "role": "native-state-serializer",
+      "relative_path": "utils/binding_utils.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "f5c8aada3bc85d3e66b9c4719c62892f0a32e4ea3489f66cc9abcaa170282c04"
+    },
+    {
+      "role": "osc-controller",
+      "relative_path": "controllers/osc.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "cfa62a0e719bc53ef0c701efa66f7b3e2272d4fca2150ec73c05bb145eba85cb"
+    },
+    {
+      "role": "controller-reset-reference",
+      "relative_path": "controllers/base_controller.py",
+      "source_kind": "installed-robosuite-1.4.0",
+      "sha256": "61f99a2daeb4eb6e39bfb996d94c5a5689ef3bc771d030d070193ea56d6a8332"
+    },
+    {
+      "role": "dataset-generator",
+      "relative_path": "scripts/create_dataset.py",
+      "source_kind": "pinned-LIBERO-source",
+      "sha256": "6ff09687a6ca8cb5df16b828cce2326467099da2b4dd6e5af557644d3e60f37f"
+    },
+    {
+      "role": "exported-proprioception",
+      "relative_path": "libero/libero/envs/bddl_base_domain.py",
+      "source_kind": "pinned-LIBERO-source",
+      "sha256": "055836670ac5fcac7e033fc86404718fd53854996e5776b1ff68b646f7bbcc9d"
+    },
+    {
+      "role": "robot-default-gripper",
+      "relative_path": "libero/libero/envs/robots/mounted_panda.py",
+      "source_kind": "pinned-LIBERO-source",
+      "sha256": "c89ab36decca6d9fa242021971513960c3ce31aa42735009c73258f397be126c"
+    }
+  ],
+  "preserved_preflight": {
+    "native_starts": 0,
+    "reason": "An observation-hook keyword mismatch was identified before admission. The unexecuted first plan and worker were retained; the corrected observer passed source-extracted interface checks before the frozen nine-run package."
+  },
+  "coverage": {
+    "Object_unique_baseline_records": 157,
+    "Object_demonstration_denominator": 500,
+    "Object_remaining": 343,
+    "native_paths_qualified": 14,
+    "native_paths_remaining": 116,
+    "official_tasks": 130
+  },
+  "interpretation": "These controlled interventions demonstrate an effect of explicit gripper memory in the three exposed development failures. Improved first-action agreement is not sufficient for task success, and success does not identify historical memory. Source-generation revision, skipped prefix, original controller history and physical accuracy remain unresolved. No production default, historical score, validation split or accepted baseline record was changed."
+}

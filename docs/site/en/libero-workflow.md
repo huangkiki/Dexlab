@@ -2,7 +2,83 @@
 
 **First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. The historical case below uses only this task dataset. mjlab is deferred; scheduled development remains paused.
 
+## Complete affected-task records and remaining failures
+
+All **50 official demonstrations for each of three affected Object tasks** now have
+accepted records under `osc-restored-pose-v1`. Each task retains its frozen 40-development /
+10-validation split. All 150 records are valid; **147 replays meet the native task goal and none of the
+150 records passes all numerical diagnostics**. Numerical bounds are unchanged and are
+not universal physical-accuracy thresholds.
+
+| Task | Original development successes | Restored development successes | Fixed-candidate validation successes | Remaining native failure |
+| --- | --- | --- | --- | --- |
+| Alphabet soup | 36/40 | 39/40 | 10/10 | `demo_29` |
+| Salad dressing | 39/40 | 39/40 | 10/10 | `demo_25` |
+| BBQ sauce | 37/40 | 39/40 | 10/10 | `demo_31` |
+
+The paired development comparison changes 112/120 native successes to 117/120: seven
+failures improve, two successes regress and one failure persists. Salad's unchanged total
+therefore hides a changed failure. The 30 validation runs evaluate the frozen candidate;
+they are **not a paired original-versus-corrected validation comparison**. The new Salad
+and BBQ failures also reproduce with recording off. Their maximum target/source position
+differences increase from 101.12 to 281.88 mm and 12.91 to 408.58 mm, respectively. These
+outcome-selected source comparisons do not estimate an unbiased improvement or physical error.
+[Regression source audit](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/new-regression-source-audit-v1.json).
+
+After verified reuse and de-duplication, Object coverage is **157/500 demonstrations**:
+127/403 development and 30/97 validation, with 343 remaining. Fourteen of the 130 native
+task paths have representative recording qualification; the other 116 paths, full baseline
+coverage, physical references and visual-policy evaluation remain open. A qualified path,
+a complete task cohort and an individual successful replay are different denominators.
+[Per-case results, packet hashes and coverage index](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/restored-baseline-index-v1.json).
+
+### What explicit gripper-memory interventions change
+
+All three remaining development failures were replayed in full with the reset memory
+`[0]` and two explicit interventions. These are nine diagnostic runs, with 1,542 actions
+and 38,550 native gripper-command updates; they add **zero baseline records**. All 53 arrays (including the initial-state array)
+in each observation-only control match its archived recording-off reference exactly.
+Before intervention the state, actuator controls, warm start and OSC memory match; only
+gripper memory is changed. The actual pinned `PandaGripper` mapping is recorded at every call.
+
+| Development failure | Reset `[0]` | Memory `[1, -1]` | Memory `[-1, 1]` |
+| --- | --- | --- | --- |
+| Alphabet soup `demo_29` | Failed | Succeeded | Succeeded |
+| Salad dressing `demo_25` | Failed | Succeeded | Succeeded |
+| BBQ sauce `demo_31` | Failed | Failed | Succeeded |
+
+For BBQ, `[1, -1]` reduces the first-action finger difference from 5.392902 mm to about
+0.000156 mm, yet the task still fails and the maximum target/source difference increases
+from 408.58 to 413.79 mm. Conversely, `[-1, 1]` succeeds with a larger initial finger
+difference. Thus the declared intervention affects these exposed cases, but first-action
+agreement and native success do not identify historical memory. No production default,
+historical score, baseline failure or validation split is replaced.
+[All nine controls and source identities](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/gripper-memory-diagnostic-v2.json).
+
+The source-schema audit rehashed all three HDF5 files and inspected 150 demonstration
+headers. It found no dedicated controller/gripper-memory or warm-start datasets. Their
+metadata includes `tag` and lacks `bddl_file_content`, unlike the pinned exporter. This
+does not distinguish a different generating revision from subsequent metadata edits;
+the exporter revision, runtime and any unrecorded action prefix remain unknown. The pinned
+script's five-action skip is not proof that these files were produced that way.
+[Schema findings and audit limits](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/history-schema-audit-v1.json).
+
+The nine diagnostic runs used 46.71 native worker seconds and peaked at 1,078,919,168 bytes
+within 8 GiB hard /7 GiB high /four-core /zero-swap limits, with no high/max/OOM events.
+Cumulative native accounting is **430 starts /12,509.98 worker seconds**, including retained
+earlier attempts and controls; this is not the unique-baseline count. Source preparation
+and offline checking used a separate 2.12 and 1.80 service seconds. The unexecuted first
+observer candidate failed an interface preflight and is retained with zero native expense.
+
+The linked packets publish per-case summaries, hashes, audit findings and the exact executed
+[diagnostic source](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/gripper-memory-worker-v2.py).
+Full raw trajectories and resource archives are separately retained; summaries alone cannot
+independently re-audit every native step. The source snapshot requires an admitted plan and
+compatible raw inputs, and is not a standalone benchmark command.
+
 ## Restored controller state
+
+This section preserves the earlier initialization and representative-path qualification.
 
 The first-action investigation in [#198](https://github.com/huangkiki/Dexlab/issues/198)
 found that native state restoration left an OSC cache from reset. In the exposed Salad-dressing
@@ -15,8 +91,8 @@ New runs explicitly select `osc-restored-pose-v1`: one native state restore, one
 refresh/forward and position/orientation goals set to the restored pose, with reset nullspace
 and gripper memory retained and recorded. No dummy actions or stepwise state injection are
 added. Missing source controller history is unresolved. The real pinned-controller tests
-exercise first relative goals and zero-orientation actions; full affected-task regression is
-still required. [Initialization protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md#versioned-controller-initialization).
+exercise first relative goals and zero-orientation actions. The complete affected-task
+records are reported above. [Initialization protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md#versioned-controller-initialization).
 
 The representative paths and 120 development records produced before this change remain
 evidence of their original initialization. Their recording controls remain valid within that
@@ -53,11 +129,11 @@ retains constrained-acceleration and projected-body-effort negatives at unchange
 
 The package used 973.09 native worker seconds and at most 1,464,868,864 bytes peak cgroup
 memory within the same 8 GiB hard /7 GiB high /four-core /zero-swap limits. All processes and
-terminal resource receipts were verified. Cumulative native accounting is 277 starts /
+terminal resource receipts were verified. At this earlier stage, cumulative accounting was 277 starts /
 7,895.72 worker seconds; queue waits and offline checks are separate. Together, the two
 packages cover 19 exposed demonstrations across all fourteen previously qualified task
-paths. Complete affected-task baselines, the other 116 task paths, source-history questions,
-physical-reference validity and visual-policy evaluation remain open.
+paths. The later complete affected-task records are reported above; the other 116 task paths,
+source-history questions, physical-reference validity and visual-policy evaluation remain open.
 [Complete path-regression evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-path-regression-v1.json).
 
 The independent source comparison checks 1,035 overlapping states from the same examples,

@@ -1,0 +1,53 @@
+{
+  "Object_demonstration_denominator": 500,
+  "all_record_integrity_checks_passed": true,
+  "campaign_bytes": 797927,
+  "closure_verification_sha256": "eed82cd7209cca76c8e9aa359d09e29c13092b7c71a6ef9c9796b5801cd173ee",
+  "closure_worker_sha256": "0439f65b288b75e6553dd5f2611e69ee4adb37d91f3b5ae4f86bed6cef045652",
+  "comparison_sha256": "dbf1f5dccb0b5ed5a40f55e903afd5cdf2e8c3e0cf84fe506f65a9d905aa467a",
+  "controller_completed_sha256": "56f27083a9e01d9b5cc43f81147492ab8cc6705c0e6212a207011977f064f85c",
+  "cumulative_native_starts": 351,
+  "cumulative_native_worker_s": 10233.295265631517,
+  "development_denominator": 403,
+  "manifest_sha256": "ba42581e27af60c56b14ad31a27a876b330466bb935214ce7508eb9037410767",
+  "new_actions": 177,
+  "new_baseline_demonstrations": 0,
+  "new_runs": 1,
+  "no_observable_recorder_effect": true,
+  "official_task_denominator": 130,
+  "offline_service_total_s": 2.0584893389604986,
+  "package_native_worker_s": 6.23492989805527,
+  "peak_native_bytes": 1078054912,
+  "plan_sha256": "593b25ba6bdbf8dff785598f038e6de73a032a30af2378761dde1c263f2d8463",
+  "rows": [
+    {
+      "actions": 177,
+      "all_common_control_state_observation_arrays_exact": true,
+      "array_differences": {},
+      "compared_array_count": 52,
+      "configuration_artifact_matches": {
+        "bindings.json": true,
+        "effective-model.xml": true,
+        "initialization.json": true,
+        "visual-markers.json": true
+      },
+      "control_result_sha256": "85b0c7b7b5e7bab3e73c66d89027ad25edcf246825f48842c47173f9461aa007",
+      "demo_id": "demo_25",
+      "initialization_bindings_model_markers_exact": true,
+      "native_outcomes_equal": true,
+      "native_success_off": false,
+      "native_success_on": false,
+      "off_numerical_consistent": null,
+      "on_numerical_consistent": false,
+      "reference_result_sha256": "79d12d3afe207d36febdb08084d67bed0bd331877c5cf54e690735a0daa255c1"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Selected exposed development failures only. Equality is an observed hypothesis outcome, not a required pass condition. Differences are retained. This does not identify source-history divergence or establish general recorder/physics validity. No validation data exposed.",
+  "state": "negative-controls-terminal-verified",
+  "validation_denominator": 97,
+  "validation_payload_accessed": false,
+  "verification_sha256": "695b6833b091a82f3547e0a1a6a110230dbf682fd9c78afcf1b21694a676c2e6",
+  "verified_at": "2026-10-14T14:51:24.898291+00:00",
+  "verifier_sha256": "98d623f3a9bb63b0546520b4e779cfc8f2b5b07da1bc2124237d1cf31834c2dc"
+}
