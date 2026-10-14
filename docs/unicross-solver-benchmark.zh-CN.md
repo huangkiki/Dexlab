@@ -14,7 +14,7 @@
 
 ## 相比现有研究，究竟新增什么？
 
-现有[灵巧操作路线](dexterity-roadmap.zh-CN.md)与 [#48](https://github.com/huangkiki/Dexlab/issues/48)已经覆盖手内旋转、接触切换、掉落和独立评分。再加一个旋转演示，会与原范围大量重复。
+现有[灵巧操作路线](https://github.com/huangkiki/Dexlab/blob/main/docs/dexterity-roadmap.zh-CN.md)与 [#48](https://github.com/huangkiki/Dexlab/issues/48)已经覆盖手内旋转、接触切换、掉落和独立评分。再加一个旋转演示，会与原范围大量重复。
 
 增量假设应收窄为：**在不重置物体、不恢复预备抓姿的情况下，改变技能间的手物相对运动目标，是否会暴露单技能对照不能解释的可重复失败？** 研究过渡历史、首次接触分歧、支撑保持和误差累积。这是 DexLab 拟研究的问题，不是 UniCross 已经证明的物理精度结论。
 
@@ -36,4 +36,4 @@
 
 **暂缓：** 上游复现、策略训练、新仿真框架、大规模资产下载和比较性能主张，直到来源、控制器、许可及运行时证据齐备。本文不授权训练、付费服务、新调度器、引擎修改、阈值修改或原生运行。
 
-只有可用控制器和合格夹具能够检验超出现有 #48 的过渡机制假设时，再推进实现；否则保留为参考。第一项交付是来源／准入核查与增量问题，而不是成功率表。相关分类与执行入口修正已由 [#177 / PR #180](https://github.com/huangkiki/Dexlab/pull/180)交付；执行优先级以[当前工作](current-work.zh-CN.md)为准。[PR #176](https://github.com/huangkiki/Dexlab/pull/176)记录本参考资料的文档审查与验证。
+只有可用控制器和合格夹具能够检验超出现有 #48 的过渡机制假设时，再推进实现；否则保留为参考。第一项交付是来源／准入核查与增量问题，而不是成功率表。相关分类与执行入口修正已由 [#177 / PR #180](https://github.com/huangkiki/Dexlab/pull/180)交付；执行优先级以[当前工作](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.zh-CN.md)为准。[PR #176](https://github.com/huangkiki/Dexlab/pull/176)记录本参考资料的文档审查与验证。

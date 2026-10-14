@@ -14,7 +14,7 @@ Code revision, task assets, policy/controller availability, redistribution terms
 
 ## What would add information beyond existing work?
 
-The existing [dexterity roadmap](dexterity-roadmap.md) and [#48](https://github.com/huangkiki/Dexlab/issues/48) already cover in-hand rotation, contact switching, drops and independent scoring. Adding another rotation demonstration would largely duplicate that scope.
+The existing [dexterity roadmap](https://github.com/huangkiki/Dexlab/blob/main/docs/dexterity-roadmap.md) and [#48](https://github.com/huangkiki/Dexlab/issues/48) already cover in-hand rotation, contact switching, drops and independent scoring. Adding another rotation demonstration would largely duplicate that scope.
 
 The incremental hypothesis is narrower: **does changing the relational goal between skills, without resetting the object or restoring a prepared grasp, expose a reproducible failure not explained by the constituent single-skill cases?** Study transition history, the first divergent contact event, retained support and accumulated error. This is a proposed DexLab question, not a physics-accuracy claim established by UniCross.
 
@@ -36,4 +36,4 @@ Follow existing six-engine applicability and evidence rules, but do not launch a
 
 **Defer:** upstream reproduction, policy training, new simulation frameworks, broad asset downloads and comparative performance claims until the needed source, controller, license and runtime evidence exists. No training, paid service, new scheduler, engine patch, threshold change or native run is authorized by this note.
 
-Advance only when an available controller and qualified fixture can test a transition-specific hypothesis with information beyond #48. Otherwise keep this as a reference. The first deliverable is a source/admission checklist and the incremental question, not a success-rate table. The related taxonomy and workflow correction was delivered by [#177 / PR #180](https://github.com/huangkiki/Dexlab/pull/180). [Current work](current-work.md) governs execution priorities; [PR #176](https://github.com/huangkiki/Dexlab/pull/176) records the documentation review and validation for this reference.
+Advance only when an available controller and qualified fixture can test a transition-specific hypothesis with information beyond #48. Otherwise keep this as a reference. The first deliverable is a source/admission checklist and the incremental question, not a success-rate table. The related taxonomy and workflow correction was delivered by [#177 / PR #180](https://github.com/huangkiki/Dexlab/pull/180). [Current work](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.md) governs execution priorities; [PR #176](https://github.com/huangkiki/Dexlab/pull/176) records the documentation review and validation for this reference.

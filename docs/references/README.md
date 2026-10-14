@@ -7,6 +7,7 @@ External reading on contact, friction and robotics simulation evaluation. Each e
 | Reference | Reading entry | Question to investigate |
 | --- | --- | --- |
 | Manda Robotics — *Comparing physics engines for robotics simulation* (2026-10-05) | [Reading guide](manda-physics-engines.md) · [Chinese guide](manda-physics-engines.zh-CN.md) · [Original article](https://mandarobotics.com/blog/comparing-physics-engines/index.html) | How do model imports, controllers, contact dynamics and task outcomes differ? |
+| UniCross — *Unified Cross-Skill Dexterous Manipulation Synthesis* (arXiv v2, 2026-10-07) | [Reference review](../unicross-solver-benchmark.md) · [Chinese review](../unicross-solver-benchmark.zh-CN.md) · [Project page](https://zdchan.github.io/UniCross/) | Does a continuous skill transition reveal a failure beyond existing single-skill cases? Reference only; no DexLab reproduction. |
 
 ## Read alongside DexLab experiments
 

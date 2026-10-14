@@ -10,6 +10,10 @@
 
 [英文原文](https://mandarobotics.com/blog/comparing-physics-engines/index.html) · [仓库参考目录](https://github.com/huangkiki/Dexlab/tree/main/docs/references)
 
+## UniCross：连续技能过渡
+
+[参考调研](unicross.md)讨论不重置物体的技能过渡能否补充已有手内旋转研究。阅读深度仅为项目页及 arXiv 摘要／元数据，源码、控制器、资产和原生参数均未准入；本文是参考与复用／暂缓决定，不是可运行基准，也不是 DexLab 复现结果。
+
 ## 对照 DexLab 自己的证据
 
 - [引擎与模型](engines.md)：记录版本、求解配置和建模假设。
@@ -21,4 +25,5 @@
 :maxdepth: 1
 
 Manda 物理引擎比较导读 <manda-physics-engines>
+UniCross 参考调研 <unicross>
 ```
