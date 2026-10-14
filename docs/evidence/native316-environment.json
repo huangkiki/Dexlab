@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "classification": "native316-environment-provenance",
+  "checked_at": "2026-10-14T11:16:40.361763+00:00",
+  "issue": "https://github.com/huangkiki/Dexlab/issues/202",
+  "runtime": {
+    "installed": {
+      "mujoco": "3.16.0",
+      "superdex-physics": "1.0.0",
+      "superdex-robotics": "1.0.0",
+      "superdex-physics-fp64": "1.0.0",
+      "superdex-robotics-fp64": "1.0.0"
+    },
+    "native": {
+      "mujoco": "3.16.0",
+      "superdex": {
+        "version_api": null,
+        "precision": "fp64",
+        "identity_method": "loaded wheel payload SHA256",
+        "physics_sha256": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+        "robotics_sha256": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+      }
+    },
+    "artifact_sha256": {
+      "mujoco": "d89b5532a1ec9c4ca8744449d648233a2f7ae5d9e7b2ccddd692e11955f6cb04",
+      "superdex-physics-fp64": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+      "superdex-robotics-fp64": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+    },
+    "package_code_sha256": {
+      "mujoco": "57c74d2913f87cd84ab42ef235f14e35fe9eb15fab0899b5961db058a6c9c6a6",
+      "superdex-physics": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+      "superdex-robotics": "6de9e505d7413c332752dfc37c976db44baffed322e51c133dfd4165111b8d5b",
+      "superdex-physics-fp64": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+      "superdex-robotics-fp64": "eceed1c4ab5fa9b4190bd8bdf6900939e57dd9bf9aee56d1cfbedc4346c02037"
+    }
+  },
+  "official_wheels": {
+    "mujoco": {
+      "filename": "mujoco-3.16.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "a9ea38656fc75d9a6575b5fa7350882dc39461cb655e4ae8027ec58fda6245e1",
+      "package_code_sha256": "57c74d2913f87cd84ab42ef235f14e35fe9eb15fab0899b5961db058a6c9c6a6",
+      "code_files": 141
+    },
+    "superdex-physics": {
+      "filename": "superdex_physics-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "46fa446ed0bb86815d6970d14e11f2777bcc7391119c4ebe582ac698e1373377",
+      "package_code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+      "code_files": 74
+    },
+    "superdex-robotics": {
+      "filename": "superdex_robotics-1.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "a9de8feaf989f7ebae285b5bd2a57880c27abf91d0a98db1d4ef5f7ccdd306b2",
+      "package_code_sha256": "6de9e505d7413c332752dfc37c976db44baffed322e51c133dfd4165111b8d5b",
+      "code_files": 3
+    },
+    "superdex-physics-fp64": {
+      "filename": "superdex_physics_fp64-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "ce300f8a2b30f8043aad238f4c918f981d143256276e34935fa31382a22c02c4",
+      "package_code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+      "code_files": 7
+    },
+    "superdex-robotics-fp64": {
+      "filename": "superdex_robotics_fp64-1.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "7445d2d4415a98fad4040a0358f0e4c545d8d2cd73c20b2b877bc9b3c9f16589",
+      "package_code_sha256": "eceed1c4ab5fa9b4190bd8bdf6900939e57dd9bf9aee56d1cfbedc4346c02037",
+      "code_files": 3
+    }
+  },
+  "profile": {
+    "version": "3.16.0",
+    "compatibility_profile": "qualification-3.16.0",
+    "profile_status": "candidate",
+    "formal_batch_qualified": false
+  },
+  "native_episodes": 0,
+  "task_qualified": false,
+  "profile_source_sha256": "0350e37abe8676da60b56e8e863e7c0cee134dbb6680c9d65e0d363bde8b3219",
+  "dependencies": {
+    "method": "actual-interpreter importlib.metadata traversal with active markers, extras and version specifiers",
+    "packages": 150,
+    "active_requirements": 301,
+    "errors": [],
+    "audit_wall_s": 0.8170058890245855,
+    "audit_sha256": "fd6ed54b22566261dd28d8c42019634805c07c3493b4e4aa2c749b2a9781b8b7"
+  },
+  "preparation": {
+    "initial_check_failed": true,
+    "failure": "uv pip check inspected only two local distributions and did not discover the verified plain-path dependency installations",
+    "recovery": "dependency traversal in the actual isolated interpreter, followed by source, runtime, wheel and asset verification",
+    "assets_verified": 187,
+    "old_environment_preserved": true,
+    "phases": [
+      {
+        "phase": "environment-v1",
+        "state": "failed",
+        "exit_code": 1,
+        "service_wall_s": 16.626168004004285,
+        "peak_memory_bytes": 454672384,
+        "final_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "resource_sha256": "3f0af3e643640e62c1ba86fd18930a4d10f7caec6a8a0622e1b03cac45c8d4b4",
+        "window_sha256": "7f8ecfb4c453d361fd93a11519f4558ac4edb1d63bdd0fb52ab84de114de6b4d"
+      },
+      {
+        "phase": "environment-check-v1",
+        "state": "completed",
+        "exit_code": 0,
+        "service_wall_s": 0.8813181479927152,
+        "peak_memory_bytes": 85360640,
+        "final_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "resource_sha256": "9fe4c9cc3d93e253c814233d5b3ff2c3f2694c644822b8911b1988fb608df8e1",
+        "window_sha256": "9b86e5031b0195752efd625ba293b44ab7d9f5f3527e45baca04e7d29d44b9fc"
+      }
+    ],
+    "cumulative_service_and_dependency_audit_s": 18.324492041021585
+  },
+  "limits": [
+    "Environment and provenance only; no native task episode in this evidence",
+    "Candidate selection does not grant formal qualification",
+    "LIBERO runtime remains 2.3.7",
+    "No historical result is relabelled as 3.16.0 evidence"
+  ]
+}

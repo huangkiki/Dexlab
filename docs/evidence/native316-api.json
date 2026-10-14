@@ -1,0 +1,126 @@
+{
+  "state": "diagnostic-completed",
+  "runtime": {
+    "installed": {
+      "mujoco": "3.16.0",
+      "superdex-physics": "1.0.0",
+      "superdex-robotics": "1.0.0",
+      "superdex-physics-fp64": "1.0.0",
+      "superdex-robotics-fp64": "1.0.0"
+    },
+    "native": {
+      "mujoco": "3.16.0",
+      "superdex": {
+        "version_api": null,
+        "precision": "fp64",
+        "identity_method": "loaded wheel payload SHA256",
+        "physics_sha256": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+        "robotics_sha256": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+      }
+    },
+    "artifact_sha256": {
+      "mujoco": "d89b5532a1ec9c4ca8744449d648233a2f7ae5d9e7b2ccddd692e11955f6cb04",
+      "superdex-physics-fp64": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+      "superdex-robotics-fp64": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+    },
+    "package_code_sha256": {
+      "mujoco": "57c74d2913f87cd84ab42ef235f14e35fe9eb15fab0899b5961db058a6c9c6a6",
+      "superdex-physics": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+      "superdex-robotics": "6de9e505d7413c332752dfc37c976db44baffed322e51c133dfd4165111b8d5b",
+      "superdex-physics-fp64": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+      "superdex-robotics-fp64": "eceed1c4ab5fa9b4190bd8bdf6900939e57dd9bf9aee56d1cfbedc4346c02037"
+    }
+  },
+  "forward": {
+    "before": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      2.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      3.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "after": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      2.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      3.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "qpos_unchanged": true,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "cloth": {
+    "compiled": false,
+    "error_type": "ValueError",
+    "error": "Error: engine error: flex elasticity is no longer integrated implicitly under integrator='implicit' and 'implicitfast': set integrator='discrete'"
+  },
+  "source_sha256": {
+    "src/dexlab/engine_versions.py": "0350e37abe8676da60b56e8e863e7c0cee134dbb6680c9d65e0d363bde8b3219",
+    "src/dexlab/cloth_engines.py": "e650f2232e4b9f362209a87419eea99ab360b53f0f631ee08198c43b41016cae",
+    "src/dexlab/cloth.py": "d660ef36da2447bf30c81124152314989462eacf5880e6ae7a971ab972b6f35f",
+    "src/dexlab/apple_admission.py": "ca6016990c67239f618c7c274b7c878be8dbb577f6611929e61df0f324d9290d",
+    "src/dexlab/official_wheels.py": "f6182e7a95ff1b7fd5daac5d762d76f8d8faf808fcfd577f8a60c2ab335cda06",
+    "tests/test_libero_initialization.py": "82d456f40140ea16e13ba039d99421061752036f435ba7b5ca3ccac36ec0bbc8",
+    "pyproject.toml": "1ef59a3103847067300c0324641a72eaa80093da8dadf6d60432ddc901e77e0a"
+  },
+  "worker_wall_s": 0.18207566300407052,
+  "task_qualified": false,
+  "plan_sha256": "382663940b4a9ca77a58ba0dac4a3d309b2df8f57d7ecaf61f70d71beb33b132",
+  "classification": "native316-api-before-cloth-adapter-update",
+  "verification": {
+    "checked_at": "2026-10-14T11:33:54.556223+00:00",
+    "state": "native-api-observed-and-terminal-verified",
+    "artifact_sha256": {
+      "plan.json": "382663940b4a9ca77a58ba0dac4a3d309b2df8f57d7ecaf61f70d71beb33b132",
+      "result.json": "f868b352fd46cf82e449814aea6b9e6f3ab62a8115b22d6166d627c70045e5cc",
+      "resources.json": "ca6664b3c9cf65f1fc66a6749b92b37948f909de482dddd07df5cf7808e33c78",
+      "window.json": "abb59c181a24cfbc8fff2c07f7e04985de3cae3cbe9d6717c5bcfa68a38db5c3",
+      "run.log": "7d1313c71d719dde3a026f2b81b8c1b0e8e06f138f89e7db2ab2c37a193c80ed"
+    },
+    "service_wall_s": 0.9385847880039364,
+    "peak_memory_bytes": 129654784,
+    "cloth_compiled": false,
+    "forward_qpos_unchanged": true,
+    "task_qualified": false
+  }
+}

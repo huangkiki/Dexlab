@@ -19,6 +19,8 @@
 
 新批次分别准入原生最新稳定路径和框架官方兼容组合。核心、绑定、框架版本及其哈希、精度、计算路径分别记录，批次内冻结。较旧的内嵌核心不自动成为阻塞；归因实验另行匹配核心版本，版本不能匹配时不声称差异仅由框架造成。
 
+2026-10-14：MuJoCo 3.16.0 的官方环境与原生兼容性已核验。完整 4,000 步布料静置轨迹在 22.5 ms 首次检测到采样中面侵入（0.049681 mm），不代表材料或抓取资格；完整任务准入单独跟踪。[新版本资格记录](https://github.com/huangkiki/Dexlab/blob/main/docs/engine-qualification.zh-CN.md)与 [#202](https://github.com/huangkiki/Dexlab/issues/202)保留失败和后续验收。历史数据不升级标记，LIBERO 的 2.3.7 官方兼容路径保持独立。
+
 2026-10-04 已核实发布线索：[MuJoCo 3.14.0](https://github.com/google-deepmind/mujoco/releases/tag/3.14.0)、[Genesis 1.4.3](https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.4.3)、[Newton 1.6.0](https://github.com/newton-physics/newton/releases/tag/v1.6.0)。仅此带日期的清单不证明任务资格。MuJoCo 3.14.0 已有[结果报告](results.md)所列夹布与摩擦开发证据；更新的原生斜面批次见下文，与这些历史任务分别展示。
 
 已准入的 Newton 1.6.1 包在 `sim` 扩展声明 `mujoco~=3.12.0` 和 `mujoco-warp~=3.12.0`；不能称底层最新；ovphysx 0.6.3 的分发分类为 Alpha。稳定绑定、内嵌核心和独立 SDK 必须分别核查。[版本任务 #41](https://github.com/huangkiki/Dexlab/issues/41)

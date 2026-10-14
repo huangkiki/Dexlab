@@ -93,8 +93,8 @@ class LiberoInitializationTests(unittest.TestCase):
         self.assertTrue(record['normalized_indices'])
         json.dumps(record, allow_nan=False)
 
-    @unittest.skipUnless(mujoco is not None and mujoco.__version__ == '3.15.0',
-                         'Checks the separate MuJoCo 3.15.0 native forward contract')
+    @unittest.skipUnless(mujoco is not None and mujoco.__version__ in ('3.15.0', '3.16.0'),
+                         'Checks the separate MuJoCo 3.15.0/3.16.0 native forward contract')
     def test_newer_forward_contract_is_rejected_without_changing_source_state(self):
         env = NativeFixture()
         initial = env.state()

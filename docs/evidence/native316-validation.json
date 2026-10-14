@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "classification": "native316-compatibility-and-passive-settling-diagnostic",
+  "date": "2026-10-14",
+  "issue": "https://github.com/huangkiki/Dexlab/issues/202",
+  "source_tree": "9f7a4d51be7742d12d6d865eebd3557550d666c4",
+  "source_sha256": {
+    "src/dexlab/engine_versions.py": "0350e37abe8676da60b56e8e863e7c0cee134dbb6680c9d65e0d363bde8b3219",
+    "src/dexlab/cloth_engines.py": "c6bda24a493fb6a9dc8f3086cf381609345e70015dcff6b8d040d40162a7fc1d",
+    "src/dexlab/apple_admission.py": "ca6016990c67239f618c7c274b7c878be8dbb577f6611929e61df0f324d9290d",
+    "src/dexlab/cloth_table_audit.py": "30bc4494e7a07f4c44a3c4a0376478829e86d4cbf442d942d5f780fbe65ee8fe",
+    "demos/cloth-folding/src/cloth_control.py": "8f4719c43d7beaeaa49eae4ae144e08def280e9934af2486bbc80e93b4223941",
+    "demos/cloth-folding/src/cloth_model.py": "36894208693a4fa4b312424840e4b8fef3d42d5c6b2983fdd7a9854b4101b1ed",
+    "demos/cloth-folding/src/compare_scoring.py": "5b151b852ad0535a3cac101ba2cf9099dfde9b0803abebccb2501e2534701f71",
+    "demos/cloth-folding/src/diagnose_table_contact.py": "b5327a6b911616e8c083bffe46612d1efdb23ea7c875154568a49c8cfbf6ad4c",
+    "demos/cloth-folding/src/plot_robot_audit.py": "ec5e413aea8671d4be906f5d1da736681993955e5de7cd86e181a85274d64fe4",
+    "demos/cloth-folding/src/plot_scoring.py": "2159f078f19819a5c81df3e1305b8d90902b156a8e3cdee30ee16a6a2184d15c",
+    "demos/cloth-folding/src/plot_table_contact.py": "5a25acbbe2fd3530980fc428bbf5ed43302f54f84b416c2781f82a0ccae15ed0",
+    "demos/cloth-folding/src/probe_drop_compliance.py": "6111b0476e92220156f2aa67611461914515089fa874059784083cac85373616",
+    "demos/cloth-folding/src/probe_phase_initialization.py": "dbb46ddc9e1309255cb2e5e034ba1c740640145a02780c1e0a103662030b0803",
+    "demos/cloth-folding/src/probe_robot_audit.py": "a75c23b5cbcd4d6452290cbe37a158fb73438c2268e0beffa5084f7804c7ac27",
+    "demos/cloth-folding/src/render_cloth.py": "5cbe28905f457000922a8caaa625af09c0431780aa5006cb76ca1d230e3c9483",
+    "demos/cloth-folding/src/run_cloth.py": "d1ed696c70668833495fa1e2a069753d3c6316e57a73aa4265034e89411306af",
+    "demos/cloth-folding/src/settling_trace.py": "487f878df91af745a2ba50be1934e08501bb670e35ffc91e81f51dbae22765a1",
+    "demos/cloth-folding/src/verify_cloth.py": "3fadb4fd0ea187cbb5134d8da4bbbb39dec29d9429247b6df44c2e843dc09572",
+    "tests/test_mujoco_incline_qualification.py": "f75a0d3e7a684fa0ecdd0535059835368d05d973841a5f552ff3436ab03bc069",
+    "tests/test_engine_versions.py": "e7a4ebc522f545cc8606f78ff401e2b6dadadd6060fb57c0eab58143bafc017d",
+    "tests/test_cloth.py": "25430c04ed84baad2c417844fb5405a5919c8171f99fa91073bb80364be22a92",
+    "tests/test_libero_initialization.py": "e5024ed45ecfea7296f097163856b958dbb3563260acd096f81a34633db08dc0"
+  },
+  "runtime": {
+    "installed": {
+      "mujoco": "3.16.0",
+      "superdex-physics": "1.0.0",
+      "superdex-robotics": "1.0.0",
+      "superdex-physics-fp64": "1.0.0",
+      "superdex-robotics-fp64": "1.0.0"
+    },
+    "native": {
+      "mujoco": "3.16.0",
+      "superdex": {
+        "version_api": null,
+        "precision": "fp64",
+        "identity_method": "loaded wheel payload SHA256",
+        "physics_sha256": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+        "robotics_sha256": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+      }
+    },
+    "artifact_sha256": {
+      "mujoco": "d89b5532a1ec9c4ca8744449d648233a2f7ae5d9e7b2ccddd692e11955f6cb04",
+      "superdex-physics-fp64": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+      "superdex-robotics-fp64": "d9180f011d232d403fb10695ca47a5e546ac9255611e612342b0fc979b0100e3"
+    },
+    "package_code_sha256": {
+      "mujoco": "57c74d2913f87cd84ab42ef235f14e35fe9eb15fab0899b5961db058a6c9c6a6",
+      "superdex-physics": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+      "superdex-robotics": "6de9e505d7413c332752dfc37c976db44baffed322e51c133dfd4165111b8d5b",
+      "superdex-physics-fp64": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+      "superdex-robotics-fp64": "eceed1c4ab5fa9b4190bd8bdf6900939e57dd9bf9aee56d1cfbedc4346c02037"
+    }
+  },
+  "compatibility": {
+    "explicit_profile": "qualification-3.16.0",
+    "formal_batch_qualified": false,
+    "cloth_integrator": "discrete",
+    "historical_default": "historical-3.11.0 / implicitfast",
+    "native_tests": {
+      "run": 68,
+      "passed": 67,
+      "failed": 0,
+      "errors": 0,
+      "runtime_specific_skips": 1,
+      "skipped_contract": "MuJoCo 2.3.7 forward quaternion normalization; LIBERO runtime unchanged",
+      "unit_result_sha256": "5b2b590720cc95337fdacc069a6d8b86e04eb38dbd7e830da7966a353fad2b5d"
+    },
+    "earlier_failed_unit_attempt": {
+      "run": 68,
+      "passed": 66,
+      "failed": 1,
+      "runtime_specific_skips": 1,
+      "cause": "New API positive-control fixture had non-representable inertia in compiled XML; settling did not start",
+      "repair": "Use synthetic mass 6 kg, side 1 m, zero tilt: inertia 1; scientific protocol and 1e-12 export tolerance unchanged",
+      "unit_result_sha256": "57e5752badf1ad49c1a1303cfaa53e26167f63e08c1a9cbf91952a24f7f5f1bb"
+    }
+  },
+  "compiled_export": {
+    "native_integrated_steps": 0,
+    "cases": [
+      {
+        "fixture": "original",
+        "mass_kg": 0.064,
+        "side_m": 0.04,
+        "case": {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "angle_deg": 0.0,
+          "friction": 0.5,
+          "impedance": 0.9,
+          "timestep": 0.002
+        },
+        "precision": {
+          "within_tolerance": false,
+          "absolute_tolerance": 1e-12,
+          "absolute_max_errors": {
+            "body_inertia": 3.3333333333406424e-11,
+            "inertia": 3.3333333333406424e-11
+          },
+          "integrated_asset": "model.xml",
+          "compiled_xml_used_for_physics": false
+        },
+        "changed_fields": {
+          "body_inertia": {
+            "before": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                1.7066666666666667e-05,
+                1.7066666666666667e-05,
+                1.7066666666666667e-05
+              ]
+            ],
+            "after": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                1.70667e-05,
+                1.70667e-05,
+                1.70667e-05
+              ]
+            ],
+            "max_abs": 3.3333333333406424e-11
+          },
+          "inertia": {
+            "before": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                1.7066666666666667e-05,
+                1.7066666666666667e-05,
+                1.7066666666666667e-05
+              ]
+            ],
+            "after": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                1.70667e-05,
+                1.70667e-05,
+                1.70667e-05
+              ]
+            ],
+            "max_abs": 3.3333333333406424e-11
+          }
+        },
+        "artifact_sha256": {
+          "admission.json": "c28dd2264c968524a1578f8c57c3f871d658c46f771f0f1c1487b08b33247a72",
+          "export-readback.json": "9c229a16f483fe0a3af7bd72af7d2a7122a7b05ed067ecb6a8db7cf994a2e551",
+          "model.xml": "605360a1291be4dc7f386269eaa35481e422accdbbc6b890671ee0f37984f98c",
+          "compiled.xml": "3f266bdd7d07e490223f5d1acf56de935a2a81fa4efce4a6d772b49a7a3d3c5b"
+        }
+      },
+      {
+        "fixture": "exact-scalars",
+        "mass_kg": 6.0,
+        "side_m": 1.0,
+        "case": {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "angle_deg": 0.0,
+          "friction": 0.5,
+          "impedance": 0.9,
+          "timestep": 0.002
+        },
+        "precision": {
+          "within_tolerance": true,
+          "absolute_tolerance": 1e-12,
+          "absolute_max_errors": {},
+          "integrated_asset": "model.xml",
+          "compiled_xml_used_for_physics": false
+        },
+        "changed_fields": {},
+        "artifact_sha256": {
+          "admission.json": "2adb8edf94764320777579270df4212083e99128a03a4461646bacb8fb543bbb",
+          "export-readback.json": "2adb8edf94764320777579270df4212083e99128a03a4461646bacb8fb543bbb",
+          "model.xml": "c209737af7382f18bf6082cb030e2a02d4b427d6531595bc238fda8243c56994",
+          "compiled.xml": "9d10b774c38b7aa4fce4555f952c4f30a46a977e6c44d0f79f0084562245e4b5"
+        }
+      }
+    ],
+    "interpretation": "Original inertia loss also appears in retained MuJoCo 3.15.0 records; compiled XML is not used for incline integration."
+  },
+  "settling": {
+    "case": {
+      "geometry": "original 169-vertex/288-triangle panel and 96 box table tiles",
+      "material_source": "inherited uncalibrated demo settings, not physical truth",
+      "hand_friction": 1.0,
+      "floor_time_constant_s": 0.002,
+      "edge_time_constant_s": 0.002,
+      "compile_timestep_s": 0.00025,
+      "settling_timestep_s": 0.0005,
+      "settling_steps": 4000,
+      "duration_s": 2.0,
+      "solver": "CG",
+      "iterations": 100,
+      "integrator": "discrete",
+      "table_contact": "box",
+      "grasp": false
+    },
+    "model_dimensions": {
+      "nq": 561,
+      "nv": 561,
+      "vertices": 169,
+      "triangles": 288,
+      "compiled_mesh_count": 79
+    },
+    "native_result": {
+      "completed": true,
+      "error": null,
+      "native_and_recording_wall_s": 25.996998176909983,
+      "time_s": 1.9999999999998352,
+      "warning_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_native_contacts": 500,
+      "finite_qpos": true,
+      "finite_qvel": true,
+      "effective_timestep_s": 0.0005,
+      "effective_solver": 1,
+      "effective_iterations": 100,
+      "effective_integrator": 4
+    },
+    "record_manifest": {
+      "schema_version": 1,
+      "classification": "passive_settling_trace",
+      "completed": true,
+      "error_type": null,
+      "engine": {
+        "version": "3.16.0",
+        "native_library_sha256": "d89b5532a1ec9c4ca8744449d648233a2f7ae5d9e7b2ccddd692e11955f6cb04",
+        "wheel_record_matches": true,
+        "compatibility_profile": "qualification-3.16.0",
+        "profile_status": "candidate",
+        "formal_batch_qualified": false
+      },
+      "expected_steps": 4000,
+      "recorded_steps": 4000,
+      "timestep_s": 0.0005,
+      "initial_time_s": 0.0,
+      "solver": 1,
+      "iterations": 100,
+      "files": {
+        "states.npz": "cab0c73b8cc3f3bb928fea4edebaf5339d2def94730dfed7c53ef201c4446ed6",
+        "model.mjb": "7376b8453fe4f2962012d6fb0bec4434a52a3bc02c0d05763567f622bea1c3c0"
+      },
+      "source_sha256": {
+        "settling_trace.py": "487f878df91af745a2ba50be1934e08501bb670e35ffc91e81f51dbae22765a1",
+        "run_cloth.py": "d1ed696c70668833495fa1e2a069753d3c6316e57a73aa4265034e89411306af",
+        "cloth_model.py": "36894208693a4fa4b312424840e4b8fef3d42d5c6b2983fdd7a9854b4101b1ed",
+        "cloth_control.py": "8f4719c43d7beaeaa49eae4ae144e08def280e9934af2486bbc80e93b4223941"
+      },
+      "limits": [
+        "A Python exception preserves the recorded prefix; a killed process may leave an incomplete directory",
+        "No grasp acceptance, timing isolation or restart-state equivalence is claimed"
+      ]
+    },
+    "onset": {
+      "schema_version": 1,
+      "classification": "exploratory_settling_onset_diagnostic",
+      "record_completed": true,
+      "scientific_acceptance": "not_assessed",
+      "input_sha256": {
+        "states.npz": "cab0c73b8cc3f3bb928fea4edebaf5339d2def94730dfed7c53ef201c4446ed6",
+        "model.mjb": "7376b8453fe4f2962012d6fb0bec4434a52a3bc02c0d05763567f622bea1c3c0",
+        "manifest.json": "f560715968eb3e64e1a9dcb542e01fb92c1913dd26c68accbd9042944a2529af"
+      },
+      "auditor_sha256": "487f878df91af745a2ba50be1934e08501bb670e35ffc91e81f51dbae22765a1",
+      "table_auditor_sha256": "30bc4494e7a07f4c44a3c4a0376478829e86d4cbf442d942d5f780fbe65ee8fe",
+      "runtime_mujoco_version": "3.16.0",
+      "first_intrusion": {
+        "frame_index": 45,
+        "time_s": 0.022500000000000017,
+        "previous_sample_without_intrusion_s": 0.022000000000000016,
+        "triangle_id": 40,
+        "depth_m": 4.968106244802612e-05,
+        "triangle_vertices_m": [
+          [
+            0.21332105132979617,
+            0.39673798157651435,
+            0.4996275241990219
+          ],
+          [
+            0.22999955742607348,
+            0.3967325715125057,
+            0.4996313442614023
+          ],
+          [
+            0.22999626881833501,
+            0.41333100281714175,
+            0.5012448629628627
+          ]
+        ]
+      },
+      "evaluated_frames": 46,
+      "recorded_frames": 4001,
+      "table_bounds_m": [
+        [
+          -0.54,
+          0.39999999999999997,
+          0.494
+        ],
+        [
+          0.54,
+          0.84,
+          0.5
+        ]
+      ],
+      "numerical_zero_tolerance_m": 1e-08,
+      "table_geometry_verification": {
+        "box_count": 96,
+        "verified_cuboid_mesh_count": 0,
+        "maximum_corner_residual_m": 0.0,
+        "maximum_tile_plane_snap_m": 0.0,
+        "mesh_geometry_zero_tolerance_m": 1e-08
+      },
+      "limits": [
+        "Zero-thickness midsurface versus the verified solid table only",
+        "Stops at the first sampled intrusion; later states are not geometrically assessed",
+        "Consecutive physical steps do not prove continuous inter-step separation",
+        "The previous clear sample is not a continuous-time onset bound",
+        "No robot contact, support force, grasp success or physical repair is assessed"
+      ]
+    },
+    "independent_onset_recheck_exact": true,
+    "artifact_sha256": {
+      "prepared.json": "83aedec9af3f96986b9a386b2004063f50103bbe575f67de06b3d86d8c3aba61",
+      "native-result.json": "bf3c36445bb86f3c29a0d9610f6552225ee0fbac5c4b6e99867bac53bada336a",
+      "onset.json": "b12def0013952eaa5bd4b4af0d543ef226b6fa02e98c4e023b931c19bf30a92c",
+      "record/manifest.json": "f560715968eb3e64e1a9dcb542e01fb92c1913dd26c68accbd9042944a2529af"
+    },
+    "plan_sha256": "04609a5ddd539dcceaf4f5ec79dc00e5d1550d91bd9c665363e99698899b221b",
+    "output_bytes_before_summary": 81269549,
+    "task_qualified": false,
+    "limits": [
+      "Version-specific development diagnostic using inherited uncalibrated material",
+      "This is not a causal comparison with historical runs or a complete grasp",
+      "Midsurface intrusion uses the existing numerical zero tolerance",
+      "Later samples are not geometrically assessed after the first intrusion",
+      "Complete sampled clearance would not prove continuous-time separation"
+    ]
+  },
+  "attempts": {
+    "native-validation-v1": {
+      "state": "failed",
+      "returncode": 1,
+      "service_wall_s": 2.490160149987787,
+      "peak_memory_bytes": 294027264,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "effective_limits": {
+        "memory.max": "34359738368",
+        "memory.high": "33285996544",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128"
+      },
+      "artifact_sha256": {
+        "plan.json": "962f17f10324f2fe1785404926af2901575c9d875c95d692be607d58e8481d47",
+        "result.json": "b73599eac8b490436fdccaecdf0d645e28800a44895d799570334118935a05f6",
+        "resources.json": "469e9b511bec15bb820eb49f3902897941b3766ba7690c85e07beddd744d3cbd",
+        "window.json": "6f708bfa066afe0d8ea904e98e12905dae4c3dc963b32ac079f1f7d8530dfc78"
+      }
+    },
+    "export-contract-v1": {
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 0.8653669928899035,
+      "peak_memory_bytes": 112402432,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "effective_limits": {
+        "memory.max": "8589934592",
+        "memory.high": "7516192768",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128"
+      },
+      "artifact_sha256": {
+        "plan.json": "7bf2a6bc76e4a24451a4ecade3aa043f358bc89639e85a898d1b772a3eca2ca3",
+        "result.json": "d3f65ab4e1288bda120eb92a6a832c6bde89d0e855c7962dfc38ce37838db42a",
+        "resources.json": "9d7703790f7045c0bfbd492958d404e028c2ae066aa2ec1ab601ca862d5acb76",
+        "window.json": "58ca6720c5a9a2bb4fabc8a4a69f53d94dc8f1f93d91dc41b177d9d3cc4d05d5"
+      }
+    },
+    "native-validation-v2": {
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 30.178308591013774,
+      "peak_memory_bytes": 600784896,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "effective_limits": {
+        "memory.max": "34359738368",
+        "memory.high": "33285996544",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128"
+      },
+      "artifact_sha256": {
+        "plan.json": "6613db79373c48c5f53e9fde8b654ac1cab21bf8e56ef85a41dfb7be5feb3eaf",
+        "result.json": "7de282cd3d4f7f17b7bfeb60c9bcfd87fce4644ef2f5d6fbc6ad256ff9dcee00",
+        "resources.json": "8f343ff1116c57923c04824fbcf18ba4fb602276f811a6338752be2cb6a820ea",
+        "window.json": "912544e3b09b3846f11bebe9defcba5ce49330e8c352c824fab2c2ada93af7ce"
+      }
+    },
+    "native-verification-v1": {
+      "state": "completed",
+      "returncode": 0,
+      "service_wall_s": 1.9422367790248245,
+      "peak_memory_bytes": 181379072,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "effective_limits": {
+        "memory.max": "8589934592",
+        "memory.high": "7516192768",
+        "memory.swap.max": "0",
+        "cpu.max": "400000 100000",
+        "pids.max": "128"
+      },
+      "artifact_sha256": {
+        "plan.json": "e99c1cfc75e69a6c5376b86bf4267f4739fbe82869b6d5b57f9dc964bbaf2caa",
+        "result.json": "65843b62c0a8efce1a885e122b6f503de62ff37e4246bdc63b48a22870a4ebc5",
+        "resources.json": "97c169de979d4f0a6186c8634215d1115188d7ec2d27bf457223b6af94e56c11",
+        "window.json": "5b7836f3a9483a457c88918f3fe7bf84396f6a71ad3d7e73bee5b325f2801220"
+      }
+    }
+  },
+  "total_native_diagnostic_service_s": 35.47607251291629,
+  "native_diagnostic_budget_s": 720,
+  "verification_sha256": "c4dc63ac87805f9e3d7b730d2531997603bbd5c7cc4afc3b4210f821c8dba08b",
+  "remaining": "Complete repository gate, reviewed integration/deployment and #198 resumption; material and full cloth grasp qualification remain #179."
+}

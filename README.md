@@ -124,6 +124,8 @@
 
 <!-- visual-research:end -->
 
+MuJoCo 3.16.0 的[隔离资格记录](docs/engine-qualification.zh-CN.md)已核验官方环境、原生兼容性与完整 2 秒布料静置记录；首次采样中面侵入为 0.049681 mm，材料与抓取仍未获资格。完整任务准入由 [#202](https://github.com/huangkiki/Dexlab/issues/202) 单独跟踪，历史结果保留原版本，LIBERO 继续使用其单独准入的 2.3.7 路径。
+
 LIBERO 离线评分器 v2 增加逐接触距离、物体身份与汇总穿透的一致性检查；重新计算本地哈希不能让矛盾记录通过。原始证据与诊断阈值保持不变。[评分修复与回归](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
 
 ## 场景表现不好时如何分析
