@@ -1,5 +1,28 @@
 # DexLab
 
+From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
+
+```{raw} html
+<div class="cutting-showcase"><div class="cutting-showcase-grid"><section class="cutting-player" aria-label="Tofu halving">
+<header><h3>Tofu halving</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.mp4" data-poster="_static/cutting/tofu/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.mp4" data-poster="_static/cutting/tofu/particles-poster.png" aria-pressed="false">Particles</button></div></header>
+<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu/surface-poster.png" aria-label="Tofu halving"><source src="_static/cutting/tofu/surface.mp4" type="video/mp4"><a href="_static/cutting/tofu/surface.mp4">Watch video</a></video>
+<p>Cut, withdraw and check independent motion. <a href="cutting.html">Results and reproduction →</a></p>
+</section><section class="cutting-player" aria-label="Three banana cuts">
+<header><h3>Three banana cuts</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana/surface.mp4" data-poster="_static/cutting/banana/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana/particles.mp4" data-poster="_static/cutting/banana/particles-poster.png" aria-pressed="false">Particles</button></div></header>
+<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana/surface-poster.png" aria-label="Three banana cuts"><source src="_static/cutting/banana/surface.mp4" type="video/mp4"><a href="_static/cutting/banana/surface.mp4">Watch video</a></video>
+<p>Three sequential cuts with persistent separation. <a href="banana-cutting.html">Results and reproduction →</a></p>
+</section></div><p class="cutting-showcase-note">Replays of saved simulation states; synthetic material parameters, without real-food calibration.</p></div>
+```
+
+(cutting-comparison)=
+## Do cut pieces stay independent?
+
+```{raw} html
+:file: _cutting-comparison.html
+```
+
+[→ Comparison methods, sources and next protocol](cutting-comparison.md)
+
 **Use established physical laws and empirical relations in reproducible experiments to study how contact and friction affect robotic grasping, and assess the trustworthiness of physics simulation.**
 
 The research serves two goals:
@@ -12,43 +35,14 @@ The research serves two goals:
 [简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](experience.md) · [Diagnosis and trials](diagnosis.md) · [Scenario guide](selection.md)
 
 <!-- visual-research:start -->
-## Which engines and solvers are compared?
-
-| Engine | Roles in registered profiles (not peer algorithms) | Experiment versions and paths |
-| --- | --- | --- |
-| **MuJoCo** | Constraint method: CG (nonlinear) · Newton · PGS<br>Friction cone: elliptic · pyramidal<br>Integration: Euler · implicitfast<br>Unresolved role/identity: SolverMuJoCo; algorithm unqualified | 3.11.0, 3.14.0, 3.15.0; native / historical paths in matrix |
-| **SuperDex** | Deformable implementation: experimental-shell<br>Outer nonlinear: BFGS · Newton · SR1<br>Inner linear: ASYNC_CG · AUGMENTED_CG · CG · CUDA_CG · CUDA_GMRES · EXPERIMENTAL_CUDA_SPARSE_CHOLESKY · EXPERIMENTAL_CUDA_SPARSE_LDLT · EXPERIMENTAL_CUDA_SPARSE_LU · GMRES · LDLT · LU · MINRES · PARALLEL_CG<br>Linear selection: AUTO<br>Friction regularization/model: C1_REGULARIZED · CINF_REGULARIZED<br>Precision in label: FP64 | 1.0.0; native / historical paths in matrix |
-| **Genesis** | Deformable implementation: PBD<br>Constraint method: CG (nonlinear) · Newton<br>Friction cone: elliptic · pyramidal<br>Contact model: Signorini · convex<br>Coupling path: rigid coupling<br>Integration: approximate_implicitfast | 1.4.3; native / historical paths in matrix |
-| **Newton Physics** | Implementation/system: Featherstone · Kamino · SemiImplicit · VBD · VBD compliant · VBD legacy · XPBD<br>Deformable implementation: ImplicitMPM · Style3D<br>Dynamics backend: DVI · PADMM<br>Integration: Euler<br>Update/budget options: 100 sweeps | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / historical paths in matrix |
-| **PhysX** | Deformable implementation: surface cloth<br>Constraint method: PGS · TGS<br>Friction regularization/model: patch friction<br>Update/budget options: external forces every iteration · friction every iteration<br>Unresolved role/identity: historical readback incomplete (#126) · pending qualification | 5.9.0; native / historical paths in matrix |
-| **Drake** | Constraint method: SAP<br>Contact model: hydroelastic · point<br>Discrete contact approximation: kLagged · kSap · kSimilar<br>Unresolved role/identity: not qualified | 1.57.0; native / historical paths in matrix |
-
-Native and framework **MJWarp** are separate paths with their actual core identified. Newton Physics is an engine project; Newton is also an algorithm name. Tested SuperDex BFGS/SR1 with assembly period=1 execute Newton-equivalent steps; configuration names are not independent algorithm counts.
-
-This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons:  [完整矩阵 / Full matrix](coverage.md)。
-
-Roles interpret recorded names within each engine, not identical mathematical problems or evidence that every combination ran. AUTO is a selection policy; missing identities are not filled from defaults.
-
-**Comparison boundary:** distinguish system-profile selection from controlled algorithm attribution. Read record integrity, numerical consistency, physical references and task outcomes separately; original scores and failure denominators are unchanged. [Roles and evidence guide](solver-taxonomy.md)。
-
-Thin-feature SDF geometry/response qualification remains [#178](https://github.com/huangkiki/Dexlab/issues/178); cloth material, collision/coupling and grasp baselines remain [#179](https://github.com/huangkiki/Dexlab/issues/179). Existing development passes are not calibrated cross-engine material comparisons.
-
-**MJWarp path comparison (MuJoCo core)**
-
-| Runtime path | Actual physics core | Solver / contact path | Task acceptance |
-| --- | --- | --- | --- |
-| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](coverage.md) |
-| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
-| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
-
-Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question.
-
 (visual-experiment-catalogue)=
 ## What experiments have we run?
 
 ```{raw} html
 <div class="experiment-grid">
-<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/visual/tofu-poster.png" alt="Synthetic tofu halving"></a><div class="card-copy"><h3><a href="cutting.html">Synthetic tofu halving</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>Do the two cut pieces move independently after withdrawal?</p><p>Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven.</p></div></article>
+<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="Synthetic tofu halving"></a><div class="card-copy"><h3><a href="cutting.html">Synthetic tofu halving</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>Do the two cut pieces move independently after withdrawal?</p><p>Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven.</p></div></article>
+<article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="Two tofu cuts: three-method view"></a><div class="card-copy"><h3><a href="cutting-comparison.html">Two tofu cuts: three-method view</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>Can the left piece move independently after two cuts?</p><p>DexLab forms three equal pieces and 2.799 mm relative left-piece motion. The task is matched; complete author configurations remain unmatched.</p></div></article>
+<article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="Three sequential banana cuts"></a><div class="card-copy"><h3><a href="banana-cutting.html">Three sequential banana cuts</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>Do subsequent cuts preserve earlier discontinuities?</p><p>Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration.</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="Native LIBERO: diagnosis and change"></a><div class="card-copy"><h3><a href="libero-workflow.html">Native LIBERO: diagnosis and change</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>How can an existing benchmark expose and validate a change?</p><p>Stale observations identified; timestep trials retain successes, failures and regressions.</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="Normal &amp; transient response"></a><div class="card-copy"><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>How do parameters change loading, unloading and transients?</p><p>Static calibration works; dynamics and mass transfer need separate checks.</p></div></article>
 <article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="Six-engine incline &amp; friction"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">Six-engine incline &amp; friction</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>Where do static, sliding and low-friction cases differ?</p><p>Fixed-profile outcomes and observation validity are separate; failures remain.</p></div></article>
@@ -110,6 +104,37 @@ Same actions, initial state, Panda and native success; original 2 ms versus unqu
 
 [Synchronized replay, full-rate curves, parameters and original evidence](libero)
 
+## Which engines and solvers are compared?
+
+| Engine | Roles in registered profiles (not peer algorithms) | Experiment versions and paths |
+| --- | --- | --- |
+| **MuJoCo** | Constraint method: CG (nonlinear) · Newton · PGS<br>Friction cone: elliptic · pyramidal<br>Integration: Euler · implicitfast<br>Unresolved role/identity: SolverMuJoCo; algorithm unqualified | 3.11.0, 3.14.0, 3.15.0; native / historical paths in matrix |
+| **SuperDex** | Deformable implementation: experimental-shell<br>Outer nonlinear: BFGS · Newton · SR1<br>Inner linear: ASYNC_CG · AUGMENTED_CG · CG · CUDA_CG · CUDA_GMRES · EXPERIMENTAL_CUDA_SPARSE_CHOLESKY · EXPERIMENTAL_CUDA_SPARSE_LDLT · EXPERIMENTAL_CUDA_SPARSE_LU · GMRES · LDLT · LU · MINRES · PARALLEL_CG<br>Linear selection: AUTO<br>Friction regularization/model: C1_REGULARIZED · CINF_REGULARIZED<br>Precision in label: FP64 | 1.0.0; native / historical paths in matrix |
+| **Genesis** | Deformable implementation: PBD<br>Constraint method: CG (nonlinear) · Newton<br>Friction cone: elliptic · pyramidal<br>Contact model: Signorini · convex<br>Coupling path: rigid coupling<br>Integration: approximate_implicitfast | 1.4.3; native / historical paths in matrix |
+| **Newton Physics** | Implementation/system: Featherstone · Kamino · SemiImplicit · VBD · VBD compliant · VBD legacy · XPBD<br>Deformable implementation: ImplicitMPM · Style3D<br>Dynamics backend: DVI · PADMM<br>Integration: Euler<br>Update/budget options: 100 sweeps | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / historical paths in matrix |
+| **PhysX** | Deformable implementation: surface cloth<br>Constraint method: PGS · TGS<br>Friction regularization/model: patch friction<br>Update/budget options: external forces every iteration · friction every iteration<br>Unresolved role/identity: historical readback incomplete (#126) · pending qualification | 5.9.0; native / historical paths in matrix |
+| **Drake** | Constraint method: SAP<br>Contact model: hydroelastic · point<br>Discrete contact approximation: kLagged · kSap · kSimilar<br>Unresolved role/identity: not qualified | 1.57.0; native / historical paths in matrix |
+
+Native and framework **MJWarp** are separate paths with their actual core identified. Newton Physics is an engine project; Newton is also an algorithm name. Tested SuperDex BFGS/SR1 with assembly period=1 execute Newton-equivalent steps; configuration names are not independent algorithm counts.
+
+This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons:  [完整矩阵 / Full matrix](coverage.md)。
+
+Roles interpret recorded names within each engine, not identical mathematical problems or evidence that every combination ran. AUTO is a selection policy; missing identities are not filled from defaults.
+
+**Comparison boundary:** distinguish system-profile selection from controlled algorithm attribution. Read record integrity, numerical consistency, physical references and task outcomes separately; original scores and failure denominators are unchanged. [Roles and evidence guide](solver-taxonomy.md)。
+
+Thin-feature SDF geometry/response qualification remains [#178](https://github.com/huangkiki/Dexlab/issues/178); cloth material, collision/coupling and grasp baselines remain [#179](https://github.com/huangkiki/Dexlab/issues/179). Existing development passes are not calibrated cross-engine material comparisons.
+
+**MJWarp path comparison (MuJoCo core)**
+
+| Runtime path | Actual physics core | Solver / contact path | Task acceptance |
+| --- | --- | --- | --- |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](coverage.md) |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+
+Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question.
+
 <!-- visual-research:end -->
 
 ## How to diagnose a poorly performing scene
@@ -158,6 +183,9 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 :maxdepth: 1
 
 Synthetic tofu halving <cutting>
+Sequential banana slicing <banana-cutting>
+Cutting method comparison <cutting-comparison>
+Two tofu cuts and independent motion <tofu-comparison>
 
 Solver configuration roles <solver-taxonomy>
 

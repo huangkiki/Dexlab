@@ -4,13 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dexlab"
-version = "0.61.0"
+version = "0.62.0"
 description = "UniLab contact dynamics experiments"
 requires-python = ">=3.12,<3.13"
 dependencies = ["unilab==1.3.3", "unisim-core>=1.7.10,<=1.7.12", "torch==2.9.1"]
 
 [project.optional-dependencies]
 libero-inputs = ["h5py==3.16.0"]
+cutting-render = ["vtk>=9.4", "Pillow>=10"]
 cutting = ["numpy>=1.26", "scipy>=1.12", "numba>=0.61", "matplotlib>=3.8", "imageio>=2.34", "imageio-ffmpeg>=0.5"]
 
 [project.entry-points."unilab.tasks"]

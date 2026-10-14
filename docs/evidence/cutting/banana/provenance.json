@@ -1,0 +1,106 @@
+{
+  "source_artifacts": {
+    "states.npz": "7a0083db498b20d313c56cf68b8697f420aa6d5cf1a210fca7779dfb78948b02",
+    "trace.npz": "d96b4b9892b39a1e1fd9cc4f8e0ebc9e3306d80e9a6d787cefe81b8bb11032ca"
+  },
+  "score": {
+    "schema_version": 1,
+    "task": "banana",
+    "mode": "full",
+    "passed": true,
+    "checks": {
+      "complete_duration": true,
+      "initially_connected": true,
+      "persistent_cut_labels": true,
+      "momentum_balance": true,
+      "frame_momentum_matches": true,
+      "external_impulse_matches": true,
+      "blade_reaction_feedback": true,
+      "positive_jacobian": true,
+      "bounded_overlap": true,
+      "blade_withdrawn": true,
+      "independent_motion": true,
+      "nonzero_material_reaction": true,
+      "four_mechanical_components": true,
+      "piece_mass_inventory": true,
+      "progressive_separation": true
+    },
+    "component_mass_fractions": [
+      0.3278236914600551,
+      0.3278236914600551,
+      0.1721763085399449,
+      0.1721763085399449
+    ],
+    "progressive_components": [
+      2,
+      3,
+      4
+    ],
+    "initial_components": 1,
+    "final_components": 4,
+    "mass_kg": 0.0431244,
+    "particle_count": 1452,
+    "momentum_error_ns": 2.360850230587186e-17,
+    "frame_momentum_error_ns": 0.0,
+    "external_impulse_error_ns": 1.0842021724855044e-19,
+    "blade_impulse_error_ns": 5.55653613398821e-18,
+    "relative_motion_m": 0.0038074359540956923,
+    "left_displacement_m": [
+      1.0367618518385367e-06,
+      1.8977501389887753e-06,
+      -2.5757846467260964e-07
+    ],
+    "right_displacement_m": [
+      0.0038084727159475307,
+      0.00013599639533046096,
+      -4.579897809808657e-05
+    ],
+    "piece_displacements_m": [
+      [
+        3.364590241833332e-07,
+        7.284740080116311e-08,
+        9.628918231675831e-08
+      ],
+      [
+        7.194826634523283e-07,
+        9.700682845770886e-07,
+        6.013658006287503e-07
+      ],
+      [
+        2.0543438678799486e-06,
+        4.650334731588074e-06,
+        -1.4703903769633375e-06
+      ],
+      [
+        0.0038084727159475307,
+        0.00013599639533046096,
+        -4.579897809808657e-05
+      ]
+    ],
+    "peak_material_reaction_n": 0.030712698262796156,
+    "maximum_proxy_overlap_m": 0.0007544935317427521,
+    "det_f_range": [
+      0.8508911223919143,
+      1.055129950275336
+    ],
+    "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+  },
+  "renderer_sha256": {
+    "cutting_showcase.py": "c145b78120e2455767a820c1663e9ae5bf2656575ae57d2cf9ffd611af0d4500",
+    "cutting_surface.py": "732e506195d2b0148af9978f8bb8fe36bc51c63cb1aae73b6a5a187fac135e3f"
+  },
+  "frames": 141,
+  "fps": 20,
+  "physical_duration_s": 7.0,
+  "playback_duration_s": 7.05,
+  "vtk_version": "9.7.1",
+  "surface": "Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Completed separations from the native transfer graph create segment caps; incomplete incisions are not resolved by this skin and must be inspected in particles. Every skin vertex blends up to 32 local particle affine maps within its observed separated component. Subsequent smoothing retains embedded cap x coordinates. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.",
+  "maximum_display_smoothing_displacement_mm": 2.357964940051754,
+  "description": "Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation.",
+  "artifacts": {
+    "particles-poster.png": "b5355a4c2659cebb99f72d2747e5edd17f48ecdd2b9f5505a59501c0506939a9",
+    "particles.mp4": "30943cc6440c5cf640a85131c84ae969bed1001f098163eb4f87986e13ea58ae",
+    "surface-poster.png": "d0bbd73615bc35a46e01d279f98e13880c7f26ac02506908fcc39c2e16ab30d6",
+    "surface.mp4": "82d27f1079ef35d4b3d181e93498e1c94a49721f8669177b69e633d2cc382827"
+  }
+}

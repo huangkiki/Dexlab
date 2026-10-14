@@ -1,4 +1,4 @@
-"""Single-cut TLMPM reference implementation of BladeMaster, arXiv:2609.27342v2.
+"""Persistent-cut TLMPM reference implementation of BladeMaster, arXiv:2609.27342v2.
 
 This is independent CPU code, not the authors' implementation. SI units, FP64,
 trilinear reference basis, elastic fixed-corotated material, MUSL and PIC/FLIP.
@@ -12,6 +12,8 @@ from itertools import product
 import numpy as np
 from numba import njit
 from scipy.spatial import cKDTree
+
+from dexlab.cutting_geometry import material_points
 
 
 @dataclass(frozen=True)
@@ -35,9 +37,13 @@ class CutConfig:
     drive_stiffness: float = 250.0
     drive_damping: float = 14.0
     drive_force_limit: float = 10.0
+    shape: str = 'block'
+    blade_bevel_height: float = 0.0
 
     def __post_init__(self):
-        values = np.array([v for value in asdict(self).values()
+        if self.shape not in ('block', 'banana'):
+            raise ValueError('Unknown material shape')
+        values = np.array([v for key, value in asdict(self).items() if key not in ('shape', 'blade_bevel_height')
                            for v in (value if isinstance(value, tuple) else (value,))])
         if not np.isfinite(values).all() or (values <= 0).any():
             raise ValueError("All configuration values must be finite and positive")
@@ -45,6 +51,8 @@ class CutConfig:
             raise ValueError("Invalid Poisson ratio or blade sharpness")
         if self.flip_fraction > 1 or self.friction_dynamic > self.friction_static:
             raise ValueError("Invalid transfer/friction coefficient")
+        if not np.isfinite(self.blade_bevel_height) or not 0 <= self.blade_bevel_height < 2 * self.blade_half_size[2]:
+            raise ValueError("Invalid blade bevel height")
         cells = np.asarray(self.size) / self.grid_spacing
         if not np.allclose(cells, np.rint(cells), rtol=0, atol=1e-10):
             raise ValueError("Each dimension must contain an integer number of cells")
@@ -84,22 +92,38 @@ def corotated_stress(deformation, mu, lam):
 
 
 @njit(cache=True)
+def codes_compatible(a, b):
+    """Two histories conflict if any assigned ternary digit has opposite sides."""
+    while a or b:
+        left, right = a % 3, b % 3
+        if left and right and left != right:
+            return False
+        a, b = a // 3, b // 3
+    return True
+
+
+@njit(cache=True)
 def couple_grids(mass, state):
-    """Eq. 8 for one cut: 0↔1 and 0↔2 are compatible; 1↔2 conflict.
+    """Eq. 8: simultaneous antisymmetric exchanges between compatible codes.
 
     Every exchange uses the original states, not sequentially mutated states.
     Works for either momentum or accumulated impulse. Mass remains unchanged.
     """
     result = state.copy()
     for node in range(mass.shape[1]):
-        total = mass[0, node] + mass[1, node] + mass[2, node]
+        total = mass[:, node].sum()
         if total > 0:
-            for side in (1, 2):
-                for axis in range(3):
-                    exchange = (mass[0, node] * state[side, node, axis]
-                                - mass[side, node] * state[0, node, axis]) / total
-                    result[0, node, axis] += exchange
-                    result[side, node, axis] -= exchange
+            for a in range(len(mass)):
+                if mass[a, node] == 0:
+                    continue
+                for b in range(a + 1, len(mass)):
+                    if mass[b, node] == 0 or not codes_compatible(a, b):
+                        continue
+                    for axis in range(3):
+                        exchange = (mass[a, node] * state[b, node, axis]
+                                    - mass[b, node] * state[a, node, axis]) / total
+                        result[a, node, axis] += exchange
+                        result[b, node, axis] -= exchange
     return result
 
 
@@ -107,8 +131,9 @@ def couple_grids(mass, state):
 def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                   particle_impulse, mass, volume, mu, lam, dt, flip, node_count):
     """Eq. 1–2, 8–9; identical compatibility in P2G and MUSL remapping."""
-    gm = np.zeros((3, node_count))
-    momentum = np.zeros((3, node_count, 3))
+    code_count = int(sides.max()) + 1
+    gm = np.zeros((code_count, node_count))
+    momentum = np.zeros((code_count, node_count, 3))
     impulse = np.zeros_like(momentum)
     for p in range(len(x)):
         stress = corotated_stress(deformation[p], mu, lam)
@@ -126,7 +151,7 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
     coupled_impulse = couple_grids(gm, impulse)
     gv = np.zeros_like(momentum)
     old_gv = np.zeros_like(momentum)
-    for side in range(3):
+    for side in range(code_count):
         for node in range(node_count):
             if gm[side, node] > 0:
                 gv[side, node] = (coupled[side, node] + coupled_impulse[side, node]) / gm[side, node]
@@ -146,7 +171,7 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
         for a in range(8):
             remapped[sides[p], nodes[p, a]] += mass * weights[p, a] * velocity[p]
     remapped = couple_grids(gm, remapped)
-    for side in range(3):
+    for side in range(code_count):
         for node in range(node_count):
             if gm[side, node] > 0:
                 remapped[side, node] /= gm[side, node]
@@ -192,9 +217,57 @@ def box_query(point, center, half_size):
 
 
 @njit(cache=True)
+def blade_query(point, center, half_size, bevel_height=0.0):
+    """Closest point on a convex beveled prism, extruded along blade width.
+
+    Zero bevel preserves the original rectangular tofu blade. The nonzero
+    bevel is collision geometry, not a force correction or penetration clamp.
+    """
+    if bevel_height == 0:
+        return box_query(point, center, half_size)
+    local = point - center
+    hx, hy, hz = half_size
+    polygon = np.array([[0., -hz], [hx, -hz + bevel_height], [hx, hz],
+                        [-hx, hz], [-hx, -hz + bevel_height]])
+    query = np.array([local[0], local[2]])
+    inside = True
+    best_distance = np.inf
+    closest = np.zeros(2)
+    outward = np.zeros(2)
+    for i in range(5):
+        start, end = polygon[i], polygon[(i + 1) % 5]
+        edge = end - start
+        offset = query - start
+        inside = inside and edge[0] * offset[1] - edge[1] * offset[0] >= 0
+        fraction = min(1., max(0., np.dot(offset, edge) / np.dot(edge, edge)))
+        candidate = start + fraction * edge
+        distance = np.linalg.norm(query - candidate)
+        if distance < best_distance:
+            best_distance = distance
+            closest = candidate
+            outward = np.array([edge[1], -edge[0]]) / np.linalg.norm(edge)
+    nearest = np.array([closest[0], min(hy, max(-hy, local[1])), closest[1]])
+    if inside and abs(local[1]) <= hy:
+        normal = np.array([outward[0], 0., outward[1]])
+        distance = best_distance
+        if hy - abs(local[1]) < distance:
+            nearest = local.copy()
+            nearest[1] = hy if local[1] >= 0 else -hy
+            normal = np.array([0., 1. if local[1] >= 0 else -1., 0.])
+            distance = hy - abs(local[1])
+        return center + nearest, normal, -distance
+    if inside:
+        nearest[0], nearest[2] = local[0], local[2]
+    delta = local - nearest
+    distance = np.linalg.norm(delta)
+    normal = delta / distance if distance > 1e-14 else np.array([outward[0], 0., outward[1]])
+    return center + nearest, normal, distance
+
+
+@njit(cache=True)
 def rigid_contacts(x, velocity, blade_x, blade_v, half_size, radius, mass,
                    blade_mass, dt, normal_scale, mu_s, mu_d, gamma_k, gamma_c,
-                   histories, damage, work_threshold, cutting):
+                   histories, damage, work_threshold, cutting, bevel_height=0.0):
     """Eq. 14–16. One impulse feeds both material and rigid reaction."""
     impulses = np.zeros_like(x)
     reaction = np.zeros(3)
@@ -212,7 +285,7 @@ def rigid_contacts(x, velocity, blade_x, blade_v, half_size, radius, mass,
                 point = x[p].copy()
                 point[2] = 0
             else:
-                point, normal, distance = box_query(x[p], blade_x, half_size)
+                point, normal, distance = blade_query(x[p], blade_x, half_size, bevel_height)
                 gap = distance - radius
                 relative = velocity[p] - blade_v
                 effective = 1 / (1 / mass + 1 / blade_mass)
@@ -257,7 +330,7 @@ def particle_contacts(x, reference, velocity, sides, pairs, radius, spacing,
     impulses = np.zeros_like(x)
     maximum_overlap = 0.0
     for p, q in pairs:
-        conflict = sides[p] * sides[q] == 2
+        conflict = not codes_compatible(sides[p], sides[q])
         if not conflict and np.linalg.norm(reference[p] - reference[q]) < 2 * spacing:
             continue
         delta = x[p] - x[q]
@@ -284,29 +357,28 @@ def particle_contacts(x, reference, velocity, sides, pairs, radius, spacing,
 
 
 @njit(cache=True)
-def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt):
+def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt, cut_index=0):
     """Eq. 3–7: assign 0→1/2 behind the swept finite edge, never reset."""
     edge_z = blade_x[2] - half_size[2]
+    digit = 3**cut_index
     for p in range(len(x)):
         front = edge_z - x[p, 2]
         back = 2 * spacing + max((velocity[p, 2] - blade_v[2]) * dt, 0)
-        if (sides[p] == 0 and abs(x[p, 0] - blade_x[0]) <= 6 * spacing
+        if ((sides[p] // digit) % 3 == 0 and abs(x[p, 0] - blade_x[0]) <= 6 * spacing
                 and abs(x[p, 1] - blade_x[1]) <= half_size[1]
                 and -back <= front <= 0):
-            sides[p] = 1 if x[p, 0] < blade_x[0] else 2
+            sides[p] += digit * (1 if x[p, 0] < blade_x[0] else 2)
 
 
 class CuttingSimulation:
-    """One material block, one guided dynamic blade, one cut and a rigid board."""
+    """One material body, a guided dynamic blade, persistent cuts and a board."""
 
     def __init__(self, config=CutConfig()):
         self.config = config
         cells = np.rint(np.asarray(config.size) / config.grid_spacing).astype(int)
         self.origin = -np.array([config.size[0] / 2, config.size[1] / 2, 0.])
         particle_spacing = config.grid_spacing / 2
-        coordinates = [self.origin[i] + (np.arange(cells[i] * 2) + .5) * particle_spacing
-                       for i in range(3)]
-        self.reference = np.array(list(product(*coordinates)))
+        self.reference = material_points(config.size, config.grid_spacing, config.shape)
         self.x = self.reference.copy()
         self.velocity = np.zeros_like(self.x)
         self.deformation = np.tile(np.eye(3), (len(self.x), 1, 1))
@@ -329,12 +401,12 @@ class CuttingSimulation:
     def momentum(self):
         return self.mass * self.velocity.sum(axis=0) + self.config.blade_mass * self.blade_v
 
-    def step(self, target_edge, *, cutting=True, probe_velocity=None):
+    def step(self, target_edge, *, cutting=True, probe_velocity=None, probe_mask=None, cut_index=0):
         c = self.config
         before = self.momentum()
         external = np.zeros(3)
         if probe_velocity is not None:
-            selected = self.reference[:, 0] > 0
+            selected = self.reference[:, 0] > 0 if probe_mask is None else probe_mask
             impulse = self.mass * np.asarray(probe_velocity)
             self.velocity[selected] += np.asarray(probe_velocity)
             external += selected.sum() * impulse
@@ -349,7 +421,7 @@ class CuttingSimulation:
             c.friction_static, c.friction_dynamic, c.tangent_stiffness,
             c.tangent_damping, self.rigid_history, self.damage,
             c.cutting_energy * self.volume**(2 / 3) * (1 - c.sharpness) / c.sharpness,
-            cutting)
+            cutting, c.blade_bevel_height)
         pair_radius = 2 * self.radius + 2 * np.linalg.norm(self.velocity, axis=1).max() * c.dt
         pairs = cKDTree(self.x).query_pairs(pair_radius, output_type='ndarray')
         contact, pair_overlap = particle_contacts(
@@ -376,7 +448,7 @@ class CuttingSimulation:
                 self.blade_v[2] = 0
         if cutting:
             assign_cut_sides(self.x, self.velocity, self.sides, self.blade_x, self.blade_v,
-                             self.half_size, c.grid_spacing, c.dt)
+                             self.half_size, c.grid_spacing, c.dt, cut_index)
         external += board + blade_board + gravity * len(self.x) + c.dt * drive
         residual = self.momentum() - before - external
         self.step_count += 1
@@ -392,6 +464,7 @@ class CuttingSimulation:
             'external_impulse_ns': external,
             'momentum_ns': self.momentum(), 'momentum_residual_ns': residual,
             'maximum_proxy_overlap_m': max(overlap, pair_overlap),
+            'maximum_rigid_overlap_m': overlap, 'maximum_material_overlap_m': pair_overlap,
             'minimum_det_f': determinant.min(), 'maximum_det_f': determinant.max(),
             'labelled_particles': int(np.count_nonzero(self.sides)),
             'contact_work_j': work,

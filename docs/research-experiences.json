@@ -416,9 +416,9 @@
           "en": "Synthetic tofu halving"
         },
         "engines": "CPU TLMPM / BladeMaster v2 reference",
-        "thumbnail": "demos/tofu-cut/media/poster.png",
-        "thumbnail_sha256": "0dabb018e44316856b7b00a81a0406a1f9bae663be368557af9edc66d894fa8a",
-        "site_thumbnail": "_static/visual/tofu-poster.png",
+        "thumbnail": "docs/evidence/cutting/tofu/surface-poster.png",
+        "thumbnail_sha256": "c43842bdbdcec25871b611c73cb480674e97a0287571e4c63ed4574a42d1cb24",
+        "site_thumbnail": "_static/cutting/tofu/surface-poster.png",
         "link": "cutting.html",
         "question": {
           "zh": "撤刀后，切开的两块材料能否独立运动？",
@@ -428,6 +428,46 @@
           "zh": "三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。",
           "en": "Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven."
         }
+      },
+      {
+        "id": "tofu-sequential-cut",
+        "title": {
+          "zh": "豆腐连续两刀与三列对比",
+          "en": "Two tofu cuts: three-method view"
+        },
+        "engines": "CPU TLMPM / author reference videos",
+        "link": "cutting-comparison.html",
+        "question": {
+          "zh": "两刀之后，左块能否独立运动？",
+          "en": "Can the left piece move independently after two cuts?"
+        },
+        "finding": {
+          "zh": "本项目两刀形成三等份；撤刀后左块相对移动2.799mm。三列任务一致，原作完整参数尚未对齐。",
+          "en": "DexLab forms three equal pieces and 2.799 mm relative left-piece motion. The task is matched; complete author configurations remain unmatched."
+        },
+        "thumbnail": "docs/evidence/cutting/tofu-sequential/surface-poster.png",
+        "thumbnail_sha256": "e151370498178d32612a6e59174a2070d550a195bbcd0aa3f13bb811a3cc57df",
+        "site_thumbnail": "_static/cutting/tofu-sequential/surface-poster.png"
+      },
+      {
+        "id": "banana-cut",
+        "title": {
+          "zh": "香蕉连续三刀切片",
+          "en": "Three sequential banana cuts"
+        },
+        "engines": "CPU TLMPM / persistent cut history",
+        "link": "banana-cutting.html",
+        "question": {
+          "zh": "后续切割会保留之前的切面吗？",
+          "en": "Do subsequent cuts preserve earlier discontinuities?"
+        },
+        "finding": {
+          "zh": "逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。",
+          "en": "Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration."
+        },
+        "thumbnail": "docs/evidence/cutting/banana/surface-poster.png",
+        "thumbnail_sha256": "d0bbd73615bc35a46e01d279f98e13880c7f26ac02506908fcc39c2e16ab30d6",
+        "site_thumbnail": "_static/cutting/banana/surface-poster.png"
       },
       {
         "id": "libero-workflow",

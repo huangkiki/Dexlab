@@ -390,11 +390,11 @@ def update(root=ROOT, check_only=False):
             before, rest = text.split(start)
             _, after = rest.split(end)
             block = (
-                engine_table(inventory, lang, site)
-                + "\n"
-                + catalogue(index, lang, site)
+                catalogue(index, lang, site)
                 + "\n"
                 + highlights(index, lang, site)
+                + "\n"
+                + engine_table(inventory, lang, site)
             )
             save(path, before + start + "\n" + block + "\n" + end + after)
         save(

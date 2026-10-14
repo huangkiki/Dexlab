@@ -1,4 +1,4 @@
-"""Physical invariants for the independent single-cut TLMPM implementation."""
+"""Physical invariants for the independent persistent-cut TLMPM implementation."""
 
 import unittest
 
@@ -17,6 +17,43 @@ from dexlab.cutting_score import grid_components
 
 
 class CuttingInvariants(unittest.TestCase):
+    def test_multiple_cut_digits_preserve_earlier_discontinuities(self):
+        from dexlab.cutting import codes_compatible
+        from dexlab.cutting_score import histories_compatible
+        self.assertFalse(codes_compatible(4, 5))  # Same second side, opposing first sides.
+        self.assertTrue(codes_compatible(1, 4))   # Unassigned second digit stays compatible.
+        x = np.array([[-.002, 0., .01], [.002, 0., .01]])
+        sides = np.zeros(2, dtype=np.int64)
+        args = (x, np.zeros_like(x), sides, np.array([0., 0., .025]),
+                np.zeros(3), np.array([.0005, .02, .02]), .005, .0005)
+        assign_cut_sides(*args)
+        np.testing.assert_array_equal(sides, [1, 2])
+        args = (*args[:3], np.array([-.01, 0., .025]), *args[4:])
+        assign_cut_sides(*args, cut_index=1)
+        np.testing.assert_array_equal(sides, [7, 8])
+        self.assertFalse(histories_compatible(*sides))
+        nodes = np.zeros((2, 8), dtype=int)
+        self.assertEqual(len(grid_components(nodes, np.full((2, 8), .125), sides)[1]), 2)
+
+    def test_multicut_exchange_conserves_and_preserves_common_velocity(self):
+        rng = np.random.default_rng(197)
+        mass = rng.uniform(.1, 2., (27, 3))
+        momentum = rng.normal(size=(27, 3, 3))
+        coupled = couple_grids(mass, momentum)
+        np.testing.assert_allclose(coupled.sum(axis=0), momentum.sum(axis=0), atol=1e-13)
+        common = mass[:, :, None] * np.array([.2, -.1, .3])
+        np.testing.assert_allclose(couple_grids(mass, common), common, atol=1e-14)
+
+    def test_banana_geometry_is_curved_connected_and_equal_volume(self):
+        from dexlab.cutting_geometry import material_points
+        points = material_points((.12, .06, .03), .006, 'banana')
+        self.assertGreater(len(points), 500)
+        middle = np.abs(points[:, 0]) < .015
+        ends = np.abs(points[:, 0]) > .045
+        self.assertGreater(points[ends, 1].mean() - points[middle, 1].mean(), .015)
+        sim = CuttingSimulation(CutConfig(shape='banana', size=(.12, .06, .03), grid_spacing=.006))
+        self.assertEqual(len(grid_components(sim.nodes, sim.weights, sim.sides)[1]), 1)
+
     def test_configuration_rejects_nonfinite_and_invalid_geometry(self):
         for kwargs in ({'dt': np.nan}, {'density': -1}, {'poisson_ratio': .5},
                        {'sharpness': 1}, {'grid_spacing': .011}):
@@ -137,6 +174,28 @@ class CuttingInvariants(unittest.TestCase):
         # Same reference neighbours in intact material receive continuum
         # stress, not a duplicate proxy contact force.
         np.testing.assert_array_equal(contact(np.array([0, 0]))[0], 0)
+
+    def test_beveled_blade_closest_point_and_normal(self):
+        from dexlab.cutting import blade_query
+        half = np.array([.0005, .04, .02])
+        center = np.array([.03, 0., .025])
+        normal = np.array([1., 0., -.1]) / np.sqrt(1.01)
+        surface = np.array([.0002, 0., -.018])
+        for signed_distance in [-.00005, .00005]:
+            point = center + surface + signed_distance * normal
+            closest, observed_normal, distance = blade_query(point, center, half, .005)
+            np.testing.assert_allclose(closest, center + surface, atol=1e-14)
+            np.testing.assert_allclose(observed_normal, normal, atol=1e-14)
+            self.assertAlmostEqual(distance, signed_distance)
+        # The width end cap and edge corner are part of the same solid.
+        for point, expected in [(np.array([0., .041, 0.]), .001),
+                                (np.array([0., 0., -.021]), .001)]:
+            closest, observed_normal, distance = blade_query(center + point, center, half, .005)
+            self.assertAlmostEqual(distance, expected)
+            np.testing.assert_allclose(center + point - closest, distance * observed_normal, atol=1e-14)
+        point = center + np.array([.001, .003, -.019])
+        for observed, expected in zip(blade_query(point, center, half), box_query(point, center, half)):
+            np.testing.assert_allclose(observed, expected, atol=1e-14)
 
     def test_friction_opposes_slip_and_satisfies_coulomb_bound(self):
         impulse, history = friction_impulse(np.array([0., 0., 1.]),

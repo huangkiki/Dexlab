@@ -1,0 +1,89 @@
+{
+  "source_artifacts": {
+    "states.npz": "6d815dec03a3799e6068e26f22e24253b143db671ed77f240e75a8fb74acdd67",
+    "trace.npz": "3e2f4ed5e2ecb388af7f9f0d17b9ea029579f02cb4d0a3be8dcfc30c4b073340"
+  },
+  "score": {
+    "schema_version": 1,
+    "task": "tofu",
+    "mode": "full",
+    "passed": true,
+    "checks": {
+      "complete_duration": true,
+      "initially_connected": true,
+      "persistent_cut_labels": true,
+      "two_mechanical_components": true,
+      "half_mass": true,
+      "momentum_balance": true,
+      "frame_momentum_matches": true,
+      "external_impulse_matches": true,
+      "blade_reaction_feedback": true,
+      "positive_jacobian": true,
+      "bounded_overlap": true,
+      "blade_withdrawn": true,
+      "independent_motion": true,
+      "nonzero_material_reaction": true
+    },
+    "component_mass_fractions": [
+      0.5,
+      0.5
+    ],
+    "progressive_components": [],
+    "initial_components": 1,
+    "final_components": 2,
+    "mass_kg": 0.05939999999999999,
+    "particle_count": 1024,
+    "momentum_error_ns": 1.0516761073109393e-17,
+    "frame_momentum_error_ns": 0.0,
+    "external_impulse_error_ns": 2.710505431213761e-20,
+    "blade_impulse_error_ns": 1.3866988137736964e-18,
+    "relative_motion_m": 0.0032205312024384605,
+    "left_displacement_m": [
+      2.0525985428310536e-05,
+      6.230774360002633e-18,
+      -5.695362220269409e-06
+    ],
+    "right_displacement_m": [
+      0.003241057187866771,
+      1.2136288068259615e-17,
+      -1.3541532473838186e-05
+    ],
+    "piece_displacements_m": [
+      [
+        2.0525985428310536e-05,
+        6.230774360002633e-18,
+        -5.695362220269409e-06
+      ],
+      [
+        0.003241057187866771,
+        1.2136288068259615e-17,
+        -1.3541532473838186e-05
+      ]
+    ],
+    "peak_material_reaction_n": 0.07661317355271759,
+    "maximum_proxy_overlap_m": 0.0006327110433345781,
+    "det_f_range": [
+      0.9619579984461611,
+      1.0264993463499061
+    ],
+    "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+  },
+  "renderer_sha256": {
+    "cutting_showcase.py": "c145b78120e2455767a820c1663e9ae5bf2656575ae57d2cf9ffd611af0d4500",
+    "cutting_surface.py": "732e506195d2b0148af9978f8bb8fe36bc51c63cb1aae73b6a5a187fac135e3f"
+  },
+  "frames": 61,
+  "fps": 20,
+  "physical_duration_s": 3.0,
+  "playback_duration_s": 3.05,
+  "vtk_version": "9.7.1",
+  "surface": "Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Completed separations from the native transfer graph create segment caps; incomplete incisions are not resolved by this skin and must be inspected in particles. Every skin vertex blends up to 32 local particle affine maps within its observed separated component. Subsequent smoothing retains embedded cap x coordinates. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.",
+  "maximum_display_smoothing_displacement_mm": 0.0,
+  "description": "Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation.",
+  "artifacts": {
+    "particles-poster.png": "32af7624e81b77ac37f53bf6170c3a59efe8c2e84466bc36deca7af8b01c60f0",
+    "particles.mp4": "edd0b8fa623c0b620ef33c3213fef209d406f5a59d280352b64d76a478afa6d9",
+    "surface-poster.png": "c43842bdbdcec25871b611c73cb480674e97a0287571e4c63ed4574a42d1cb24",
+    "surface.mp4": "6da8f44f6cf1277b42ffbf7070078c2b9018234221ed8ddcfafce04ac80ae4f9"
+  }
+}

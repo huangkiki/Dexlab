@@ -2,9 +2,15 @@
 
 依据 [BladeMaster，arXiv:2609.27342v2](https://arxiv.org/abs/2609.27342v2) 的机制，实现一个**豆腐状软块对半切**任务：力驱动刀具切入、撤刀，再以单侧诊断冲量检查两块材料是否能够独立运动。这是独立编写的 CPU 实现，不是作者源码，也不代表复现其 GPU 速度或真实食材精度。
 
-![连续记录粒子回放](../../../demos/tofu-cut/media/replay.gif)
+```{raw} html
+<section class="cutting-player" aria-label="豆腐对半切">
+<header><h3>豆腐对半切</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.mp4" data-poster="_static/cutting/tofu/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.mp4" data-poster="_static/cutting/tofu/particles-poster.png" aria-pressed="false">粒子</button></div></header>
+<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu/surface-poster.png" aria-label="豆腐对半切"><source src="_static/cutting/tofu/surface.mp4" type="video/mp4"><a href="_static/cutting/tofu/surface.mp4">观看视频</a></video>
+<p>切开、撤刀，再检验两块独立运动。</p>
+</section>
+```
 
-回放直接使用记录的粒子和刀具位姿，以半速播放。蓝色、橙色代表持久切面标签；颜色不同本身不能证明力学分离。2.4 秒时对右半块施加已知外部冲量，这是诊断干预，不是机器人操作策略。首版不接机械臂、视觉控制器或学习策略。
+实体表面与粒子视图使用同一份保存的物理状态；当前展示按实际物理时间播放。蓝色、橙色代表持久切面标签；颜色不同本身不能证明力学分离。2.4 秒时对右半块施加已知外部冲量，这是诊断干预，不是机器人操作策略。首版不接机械臂、视觉控制器或学习策略。
 
 ## 已实现机制
 
@@ -16,9 +22,9 @@
 | 式 10–13：材料接触 | 当前空间球代理；排除参考距离小于 `2 Δx` 的近邻，切面两侧豁免；持久切向历史与库仑滑动 |
 | 式 14–16：刀具接触 | 长方体最近点、预测间隙冲量，同一冲量反向反馈到动态刀具；导向机构约束姿态，记录反作用力矩 |
 | 方向性切割阻力 | 接触功向 `Gc V^(2/3) (1−ζ)/ζ` 阈值累积，损伤饱和后的接触释放正切进方向冲量；损伤不缩放弹性，也不直接触发分离 |
-| 渲染 | 保存粒子状态回放；未实现论文的参考网格链接体积与局部双重轮廓表面重建 |
+| 渲染 | 从材料采样单元提取外表面和暴露切面，按相容切割历史嵌入保存的变形；提供粒子对照。不是论文的局部双重轮廓算法 |
 
-刀具质量 0.2 kg，有三个动态平移自由度。有限幅 PD 驱动跟踪刃口高度目标，材料反力会改变刀具速度。重力补偿导向机构固定刀具姿态，刚性砧板单边止挡产生单独记录的外部冲量。这不是论文中可自由旋转的落刀实验。一次切割使用三个逻辑网格；多刀／交叉切割、塑性、黏性、GPU 内核不在首版范围内。
+刀具质量 0.2 kg，有三个动态平移自由度。有限幅 PD 驱动跟踪刃口高度目标，材料反力会改变刀具速度。重力补偿导向机构固定刀具姿态，刚性砧板单边止挡产生单独记录的外部冲量。这不是论文中可自由旋转的落刀实验。此处保留 v0.61.0 单刀基线；新版本增加 [香蕉连续三刀](banana-cutting.md)。交叉刀路、塑性、黏性、GPU 内核尚未验收。
 
 ## 参数与冻结验收
 
@@ -48,7 +54,7 @@
 
 独立评分器不导入求解器，而是从原始记录中的参考插值图重建连接，包含未赋值粒子造成的间接连接。部分切割和未切割必须保持连接、不能通过对半切任务。短时探测、缺失观测、改变冻结阈值或改动文件哈希会被拒绝，或不能通过任务完成项。
 
-球代理接触允许有限重叠；粗粒子图像不是闭合表面，也不是切口质量测量。一次对称对半切不能证明四分之一切割精度、真实豆腐切割力、任意轨迹鲁棒性或真机安全。真机阶段仍需辨识弹性、摩擦和切割阻力，再独立验证力曲线与分离后的质量比例。
+球代理接触允许有限重叠；重建表面是显示近似，不是切口质量测量。一次对称对半切不能证明四分之一切割精度、真实豆腐切割力、任意轨迹鲁棒性或真机安全。真机阶段仍需辨识弹性、摩擦和切割阻力，再独立验证力曲线与分离后的质量比例。
 
 ## 复现
 
@@ -67,6 +73,6 @@ python scripts/bounded_run.py --profile adaptive \
 .venv/bin/python -m dexlab.cutting_score "$CUT_ROOT/full"
 ```
 
-挂载设备和共享锁路径替换为主机实际配置。`--mode partial`、`--mode uncut` 保留其负任务评分；`--dt 0.00025`、`--grid-spacing 0.006` 对应已记录的敏感性案例。运行器退出成功只表示记录完成，任务成败读取 `score.json` 或评分器退出码。回放命令为 `python -m dexlab.cutting_replay RUN --output MEDIA`，仅读取记录，应在单独受限后处理窗口中执行。
+挂载设备和共享锁路径替换为主机实际配置。`--mode partial`、`--mode uncut` 保留其负任务评分；`--dt 0.00025`、`--grid-spacing 0.006` 对应已记录的敏感性案例。运行器退出成功只表示记录完成，任务成败读取 `score.json` 或评分器退出码。回放命令为 `python -m dexlab.cutting_showcase RUN --output MEDIA`，仅读取记录，应在单独受限后处理窗口中执行。
 
 每次运行保存 `manifest.json`、`states.npz`、`trace.npz`、`score.json`，包含源码／依赖版本和 SHA-256。资源收据与累计账本保留失败及成本。[源码与实验入口](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut) · [实现任务 #192](https://github.com/huangkiki/Dexlab/issues/192) · [切割讨论 #191](https://github.com/huangkiki/Dexlab/discussions/191)。

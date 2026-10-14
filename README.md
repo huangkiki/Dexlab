@@ -1,5 +1,22 @@
 # DexLab
 
+从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
+
+[![豆腐对半切与香蕉连续切片回放](docs/evidence/cutting/showcase.gif)](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html)
+
+**豆腐对半切 · 香蕉三刀切片** — 基于实际保存状态的回放；合成材料参数，未做真实食材标定。
+
+[▶ 表面／粒子对照与完整视频](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html) · [豆腐实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)
+
+
+### 切后还能独立运动吗？
+
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="320" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="320" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles-poster.png" width="320" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀回放</td></tr></table>
+
+前两列为 BladeMaster 作者的原站对比视频；第三列为 DexLab 豆腐连续两刀实验。三列任务一致；原作完整配置尚待对齐，不作同条件性能排名。 [→ 三列播放与对比协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html) · [BladeMaster](https://jango6324.github.io/blademaster/#comparison) · [CRESSim-MPM](https://arxiv.org/abs/2502.18437)
+
+
+
 **以经典物理规律与已有经验公式为参照，通过可复现实验，研究接触与摩擦对机器人抓取的影响，评估物理仿真的可信度。**
 
 这项研究服务于两个目标：
@@ -12,42 +29,13 @@
 [English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](docs/site/zh/experience.md) · [诊断与试参方法](docs/site/zh/diagnosis.md) · [场景选型指南](docs/site/zh/selection.md)
 
 <!-- visual-research:start -->
-## 比较了哪些引擎与 solver
-
-| 引擎 | 已登记配置的角色（非同级算法清单） | 实验版本与路径 |
-| --- | --- | --- |
-| **MuJoCo** | 约束求解: CG (nonlinear) · Newton · PGS<br>摩擦锥: elliptic · pyramidal<br>积分配置: Euler · implicitfast<br>角色/身份待核实: SolverMuJoCo; algorithm unqualified | 3.11.0, 3.14.0, 3.15.0; native / 历史路径详见矩阵 |
-| **SuperDex** | 柔性实现: experimental-shell<br>外层非线性: BFGS · Newton · SR1<br>线性子求解: ASYNC_CG · AUGMENTED_CG · CG · CUDA_CG · CUDA_GMRES · EXPERIMENTAL_CUDA_SPARSE_CHOLESKY · EXPERIMENTAL_CUDA_SPARSE_LDLT · EXPERIMENTAL_CUDA_SPARSE_LU · GMRES · LDLT · LU · MINRES · PARALLEL_CG<br>线性分支选择: AUTO<br>摩擦正则化/模型: C1_REGULARIZED · CINF_REGULARIZED<br>标签中的精度: FP64 | 1.0.0; native / 历史路径详见矩阵 |
-| **Genesis** | 柔性实现: PBD<br>约束求解: CG (nonlinear) · Newton<br>摩擦锥: elliptic · pyramidal<br>接触模型: Signorini · convex<br>耦合路径: rigid coupling<br>积分配置: approximate_implicitfast | 1.4.3; native / 历史路径详见矩阵 |
-| **Newton Physics** | 实现/系统: Featherstone · Kamino · SemiImplicit · VBD · VBD compliant · VBD legacy · XPBD<br>柔性实现: ImplicitMPM · Style3D<br>动力学求解后端: DVI · PADMM<br>积分配置: Euler<br>更新/预算选项: 100 sweeps | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / 历史路径详见矩阵 |
-| **PhysX** | 柔性实现: surface cloth<br>约束求解: PGS · TGS<br>摩擦正则化/模型: patch friction<br>更新/预算选项: external forces every iteration · friction every iteration<br>角色/身份待核实: historical readback incomplete (#126) · pending qualification | 5.9.0; native / 历史路径详见矩阵 |
-| **Drake** | 约束求解: SAP<br>接触模型: hydroelastic · point<br>离散接触近似: kLagged · kSap · kSimilar<br>角色/身份待核实: not qualified | 1.57.0; native / 历史路径详见矩阵 |
-
-原生与框架 **MJWarp** 另列运行路径及实际核心。Newton Physics 是引擎项目，Newton 也是求解算法名。SuperDex BFGS／SR1 在已测 assembly period=1 时执行 Newton 等价步；配置名不计作独立算法。
-
-本表是研究对象概览，包含失败与未准入项；执行情况、CPU/GPU、精度、完整配置和不支持原因见 [完整矩阵 / Full matrix](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)。
-
-角色按各引擎的已记录名称解释，不代表这些算法求解同一问题，也不证明任意组合已经执行。AUTO 只是选择策略；未知身份不从默认值补写。
-
-**比较边界：** 系统配置选型与受控算法归因分开；记录完整性、数值一致性、物理参照和任务结果分别阅读，原始评分与失败分母不变。 [分类与证据说明](docs/solver-taxonomy.zh-CN.md)。
-
-细 SDF 几何与材料响应仍需 [#178](https://github.com/huangkiki/Dexlab/issues/178) 资格核验；布料材料、碰撞/耦合与夹持分别由 [#179](https://github.com/huangkiki/Dexlab/issues/179) 补齐基线。既有开发案例通过不等于公平的跨引擎材料比较。
-
-**MJWarp 运行路径对照（归入 MuJoCo 核心）**
-
-| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |
-| --- | --- | --- | --- |
-| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
-| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
-| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
-
-已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。
-
 ## 做了哪些实验
 
 | 实验画面／图表 | 比较对象与研究结论 |
 | --- | --- |
-| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="./demos/tofu-cut/media/poster.png" width="200" alt="豆腐状软块对半切"></a> | **[豆腐状软块对半切](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>撤刀后，切开的两块材料能否独立运动？<br>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="./docs/evidence/cutting/tofu/surface-poster.png" width="200" alt="豆腐状软块对半切"></a> | **[豆腐状软块对半切](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>撤刀后，切开的两块材料能否独立运动？<br>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="./docs/evidence/cutting/tofu-sequential/surface-poster.png" width="200" alt="豆腐连续两刀与三列对比"></a> | **[豆腐连续两刀与三列对比](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html)**<br>CPU TLMPM / author reference videos<br>两刀之后，左块能否独立运动？<br>本项目两刀形成三等份；撤刀后左块相对移动2.799mm。三列任务一致，原作完整参数尚未对齐。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="./docs/evidence/cutting/banana/surface-poster.png" width="200" alt="香蕉连续三刀切片"></a> | **[香蕉连续三刀切片](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html)**<br>CPU TLMPM / persistent cut history<br>后续切割会保留之前的切面吗？<br>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="LIBERO 原生抓取：诊断与改进"></a> | **[LIBERO 原生抓取：诊断与改进](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>如何从已有 benchmark 定位问题，再验证修改？<br>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="法向与瞬态响应"></a> | **[法向与瞬态响应](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>压入、卸载与动态响应如何随参数改变？<br>静态校准有效，动态响应和质量迁移须分别验证。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="六引擎斜面与摩擦"></a> | **[六引擎斜面与摩擦](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>静止、滑动和低摩擦有哪些差异？<br>原配置结果与观测有效性分列；全部失败保留。 |
@@ -102,6 +90,37 @@
 ![LIBERO：原任务、步长对照与观测修正 — curves](docs/evidence/visual/libero-demo0-curves.zh.svg)
 
 [同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#libero)
+
+## 比较了哪些引擎与 solver
+
+| 引擎 | 已登记配置的角色（非同级算法清单） | 实验版本与路径 |
+| --- | --- | --- |
+| **MuJoCo** | 约束求解: CG (nonlinear) · Newton · PGS<br>摩擦锥: elliptic · pyramidal<br>积分配置: Euler · implicitfast<br>角色/身份待核实: SolverMuJoCo; algorithm unqualified | 3.11.0, 3.14.0, 3.15.0; native / 历史路径详见矩阵 |
+| **SuperDex** | 柔性实现: experimental-shell<br>外层非线性: BFGS · Newton · SR1<br>线性子求解: ASYNC_CG · AUGMENTED_CG · CG · CUDA_CG · CUDA_GMRES · EXPERIMENTAL_CUDA_SPARSE_CHOLESKY · EXPERIMENTAL_CUDA_SPARSE_LDLT · EXPERIMENTAL_CUDA_SPARSE_LU · GMRES · LDLT · LU · MINRES · PARALLEL_CG<br>线性分支选择: AUTO<br>摩擦正则化/模型: C1_REGULARIZED · CINF_REGULARIZED<br>标签中的精度: FP64 | 1.0.0; native / 历史路径详见矩阵 |
+| **Genesis** | 柔性实现: PBD<br>约束求解: CG (nonlinear) · Newton<br>摩擦锥: elliptic · pyramidal<br>接触模型: Signorini · convex<br>耦合路径: rigid coupling<br>积分配置: approximate_implicitfast | 1.4.3; native / 历史路径详见矩阵 |
+| **Newton Physics** | 实现/系统: Featherstone · Kamino · SemiImplicit · VBD · VBD compliant · VBD legacy · XPBD<br>柔性实现: ImplicitMPM · Style3D<br>动力学求解后端: DVI · PADMM<br>积分配置: Euler<br>更新/预算选项: 100 sweeps | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / 历史路径详见矩阵 |
+| **PhysX** | 柔性实现: surface cloth<br>约束求解: PGS · TGS<br>摩擦正则化/模型: patch friction<br>更新/预算选项: external forces every iteration · friction every iteration<br>角色/身份待核实: historical readback incomplete (#126) · pending qualification | 5.9.0; native / 历史路径详见矩阵 |
+| **Drake** | 约束求解: SAP<br>接触模型: hydroelastic · point<br>离散接触近似: kLagged · kSap · kSimilar<br>角色/身份待核实: not qualified | 1.57.0; native / 历史路径详见矩阵 |
+
+原生与框架 **MJWarp** 另列运行路径及实际核心。Newton Physics 是引擎项目，Newton 也是求解算法名。SuperDex BFGS／SR1 在已测 assembly period=1 时执行 Newton 等价步；配置名不计作独立算法。
+
+本表是研究对象概览，包含失败与未准入项；执行情况、CPU/GPU、精度、完整配置和不支持原因见 [完整矩阵 / Full matrix](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)。
+
+角色按各引擎的已记录名称解释，不代表这些算法求解同一问题，也不证明任意组合已经执行。AUTO 只是选择策略；未知身份不从默认值补写。
+
+**比较边界：** 系统配置选型与受控算法归因分开；记录完整性、数值一致性、物理参照和任务结果分别阅读，原始评分与失败分母不变。 [分类与证据说明](docs/solver-taxonomy.zh-CN.md)。
+
+细 SDF 几何与材料响应仍需 [#178](https://github.com/huangkiki/Dexlab/issues/178) 资格核验；布料材料、碰撞/耦合与夹持分别由 [#179](https://github.com/huangkiki/Dexlab/issues/179) 补齐基线。既有开发案例通过不等于公平的跨引擎材料比较。
+
+**MJWarp 运行路径对照（归入 MuJoCo 核心）**
+
+| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |
+| --- | --- | --- | --- |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
+| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
+
+已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。
 
 <!-- visual-research:end -->
 
