@@ -2,6 +2,73 @@
 
 **First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. The historical case below uses only this task dataset. mjlab is deferred; scheduled development remains paused.
 
+## Restored controller state
+
+The first-action investigation in [#198](https://github.com/huangkiki/Dexlab/issues/198)
+found that native state restoration left an OSC cache from reset. In the exposed Salad-dressing
+`demo_35`, its cached end-effector position differed by 24.2377 mm; a cache-refresh control
+changed the native outcome while a forward-only control did not. Source-state differences
+remain, including finger coordinates. Native success does not establish source identity or
+physical accuracy.
+
+New runs explicitly select `osc-restored-pose-v1`: one native state restore, one OSC cache
+refresh/forward and position/orientation goals set to the restored pose, with reset nullspace
+and gripper memory retained and recorded. No dummy actions or stepwise state injection are
+added. Missing source controller history is unresolved. The real pinned-controller tests
+exercise first relative goals and zero-orientation actions; full affected-task regression is
+still required. [Initialization protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md#versioned-controller-initialization).
+
+The representative paths and 120 development records produced before this change remain
+evidence of their original initialization. Their recording controls remain valid within that
+protocol; they are not corrected baselines. The results below preserve their original scope.
+
+The same seven exposed diagnostic demonstrations now have **21 complete on/off/repeat runs**,
+3,126 actions and 52,100 recorded substeps under the new contract. All 14 instrumented records
+are valid; arrays are unchanged by recording, and repeated goals, scores and substep archives
+match exactly. Native outcomes agree across all three modes:
+
+| Development demonstration | Original native outcome | Restored-pose native outcome |
+| --- | --- | --- |
+| Alphabet soup `demo_9` | Failed | Succeeded |
+| Alphabet soup `demo_22` | Failed | Succeeded |
+| Alphabet soup `demo_27` | Failed | Succeeded |
+| Alphabet soup `demo_29` | Failed | Failed |
+| Alphabet soup `demo_1` | Succeeded | Succeeded |
+| Salad dressing `demo_35` | Failed | Succeeded |
+| Salad dressing `demo_1` | Succeeded | Succeeded |
+
+Constrained-acceleration and projected-body-effort negatives persist in every instrumented
+run at unchanged bounds; the other nine diagnostics have no violating substeps. This selected
+diagnostic set is not a full-task success-rate estimate or physical validation. The package
+used 518.89 native worker seconds, with all terminal resources and artifact hashes verified.
+[Qualification records and per-case negatives](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-restoration-v1.json).
+
+The follow-up covers the other twelve previously qualified paths: free objects, a drawer,
+a stove, simultaneous targets, a long sequence and the remaining Object tasks. **36 complete
+on/off/repeat runs contain 6,426 actions and 107,100 recorded substeps**. All 24 instrumented
+records are valid and all twelve examples retain native success in all three modes. Common
+control/state/non-image arrays are exact across recording modes; repeated goals, scores and
+substep files match, as do the original native model identities. Every instrumented run
+retains constrained-acceleration and projected-body-effort negatives at unchanged bounds.
+
+The package used 973.09 native worker seconds and at most 1,464,868,864 bytes peak cgroup
+memory within the same 8 GiB hard /7 GiB high /four-core /zero-swap limits. All processes and
+terminal resource receipts were verified. Cumulative native accounting is 277 starts /
+7,895.72 worker seconds; queue waits and offline checks are separate. Together, the two
+packages cover 19 exposed demonstrations across all fourteen previously qualified task
+paths. Complete affected-task baselines, the other 116 task paths, source-history questions,
+physical-reference validity and visual-policy evaluation remain open.
+[Complete path-regression evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-path-regression-v1.json).
+
+The independent source comparison checks 1,035 overlapping states from the same examples,
+after fully rehashing both source HDF5 files. All clocks match exactly. The still-failing
+Alphabet `demo_29` has a larger maximum target/source difference: **131.64 → 511.85 mm**;
+the successful Salad `demo_1` reference also increases, **22.80 → 25.31 mm**. First-action
+finger-coordinate differences remain **5.37–5.39 mm** in all seven cases. These retained
+negatives show that cache synchronization does not reconstruct missing controller/gripper
+history or guarantee closer source trajectories; they do not establish the remaining cause.
+[Complete source comparisons](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-source-comparison-v1.json).
+
 ## Task-aware recording qualification (in progress)
 
 The body-aware version-2 path completed five development sequences: a free object,

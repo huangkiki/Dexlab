@@ -130,6 +130,8 @@ MuJoCo 3.16.0's [isolated qualification record](docs/engine-qualification.md) ve
 
 LIBERO offline scorer v2 checks per-contact distances, target identity and summary overlap for consistency; refreshed local hashes cannot make contradictory records valid. Original evidence and diagnostic thresholds remain unchanged. [Scoring fix and regression](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
 
+LIBERO first-action diagnostics identified a stale OSC cache after state restoration. The new initialization contract synchronizes caches and pose goals while recording retained reset memory. Old experiments keep their original protocol; complete affected-task regression and source-history attribution remain open. One native success does not prove physical accuracy. [Controller state and evidence boundaries](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html) · [#198](https://github.com/huangkiki/Dexlab/issues/198)
+
 ## How to diagnose a poorly performing scene
 
 For an abnormal contact, declare the physical reference and assumptions, then check geometry, mass/inertia, frames, control epochs, effective parameters and contact readbacks. Fix the scene and objective, propose a testable hypothesis, run bounded parameter trials and independently score improvements and costs. Study the remaining differences through contact generation, friction representation, constraints, stopping rules, integration and precision.
