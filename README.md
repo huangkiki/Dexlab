@@ -2,7 +2,7 @@
 
 从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
 
-[![豆腐对半切与香蕉连续切片回放](docs/evidence/cutting/showcase.gif)](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html)
+<table><tr><th>豆腐对半切</th><th>香蕉连续三刀</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="460" alt="豆腐对半切"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="460" alt="香蕉连续三刀"></a></td></tr></table>
 
 **豆腐对半切 · 香蕉三刀切片** — 基于实际保存状态的回放；合成材料参数，未做真实食材标定。
 
@@ -11,9 +11,11 @@
 
 ### 切后还能独立运动吗？
 
-<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="320" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="320" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles-poster.png" width="320" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀回放</td></tr></table>
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="320" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="320" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="320" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀 · 动态测量</td></tr></table>
 
 前两列为 BladeMaster 作者的原站对比视频；第三列为 DexLab 豆腐连续两刀实验。三列任务一致；原作完整配置尚待对齐，不作同条件性能排名。 [→ 三列播放与对比协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html) · [BladeMaster](https://jango6324.github.io/blademaster/#comparison) · [CRESSim-MPM](https://arxiv.org/abs/2502.18437)
+
+动图逐帧显示切口宽度、中块体积变化与切后位移。[数值定义与论文细节对照](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-fidelity.html)。
 
 
 
@@ -34,7 +36,7 @@
 | 实验画面／图表 | 比较对象与研究结论 |
 | --- | --- |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="./docs/evidence/cutting/tofu/surface-poster.png" width="200" alt="豆腐状软块对半切"></a> | **[豆腐状软块对半切](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>撤刀后，切开的两块材料能否独立运动？<br>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。 |
-| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="./docs/evidence/cutting/tofu-sequential/surface-poster.png" width="200" alt="豆腐连续两刀与三列对比"></a> | **[豆腐连续两刀与三列对比](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html)**<br>CPU TLMPM / author reference videos<br>两刀之后，左块能否独立运动？<br>本项目两刀形成三等份；撤刀后左块相对移动2.799mm。三列任务一致，原作完整参数尚未对齐。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="./docs/evidence/cutting/tofu-sequential/surface-poster.png" width="200" alt="豆腐连续两刀与三列对比"></a> | **[豆腐连续两刀与三列对比](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html)**<br>CPU TLMPM / author reference videos<br>两刀之后，左块能否独立运动？<br>5 mm 网格形成三等份；左块相对移动2.398 mm，动图显示切口、体积与位移。三列任务一致，原作完整参数尚未对齐。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="./docs/evidence/cutting/banana/surface-poster.png" width="200" alt="香蕉连续三刀切片"></a> | **[香蕉连续三刀切片](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html)**<br>CPU TLMPM / persistent cut history<br>后续切割会保留之前的切面吗？<br>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="LIBERO 原生抓取：诊断与改进"></a> | **[LIBERO 原生抓取：诊断与改进](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>如何从已有 benchmark 定位问题，再验证修改？<br>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="法向与瞬态响应"></a> | **[法向与瞬态响应](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>压入、卸载与动态响应如何随参数改变？<br>静态校准有效，动态响应和质量迁移须分别验证。 |

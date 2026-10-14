@@ -19,6 +19,24 @@
 
 **三列任务一致，但尚未声称完整参数一致。** 原论文/视频没有给出足以逐项重建该组对比的所有尺寸、接触、驱动及初速度参数；以上未明确对应原作的数值均为 DexLab 合成设置。原作切口宽度/四面体体积收缩与本项目代理重叠/连接图指标不能互换，不作同条件精度或速度排名。
 
+## 新增细采样记录与数值动图
+
+这是 #203 的独立批次，原 v0.62.0 记录与失败保持不变。显示用网格为 5 mm，评分器与物理源码未改变；半步长、未切与第二刀浅切均在运行前冻结。
+
+| Case | Result | Particles | Components | Relative motion (mm) | Peak reaction (N) | Worker time (s) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| `physics-001-tofu-fine` | 通过 | 5184 | 3 | 2.398 | 0.02472 | 532.79 |
+| `physics-002-tofu-half` | 通过 | 5184 | 3 | 2.939 | 0.03088 | 1040.47 |
+| `physics-003-tofu-uncut` | 负对照拒绝 | 5184 | 1 | 0.234 | 0.00000 | 513.70 |
+| `physics-004-tofu-partial` | 负对照拒绝 | 5184 | 2 | 0.717 | 0.02472 | 523.23 |
+| `physics-005-banana-fine` | 通过 | 2480 | 4 | 2.350 | 0.06982 | 363.60 |
+
+本批共 5 次物理调用，累计工作进程 2973.79 秒；等待运行锁的时间单独记录。细网格与半步长的差异仍是灵敏度结果，不宣称力收敛。
+
+[完整新记录](https://github.com/huangkiki/Dexlab/blob/main/demos/cutting-refinement/evidence.json) · [测量口径与论文审计](cutting-fidelity.md)
+
+[新增原始记录与数值回放下载](https://github.com/huangkiki/Dexlab/releases/tag/v0.64.0)。
+
 ## 验收记录
 
 <!-- tofu-comparison-results:start -->

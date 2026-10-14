@@ -12,6 +12,8 @@ A force-driven blade descends and withdraws at three positions, cutting a curved
 
 At 6.2 s, the outer piece receives a known diagnostic impulse to test independent motion. This is not a robotic pushing policy. See also [tofu halving](cutting.md).
 
+The displayed new record uses a 5 mm grid and 2,480 native particles, ending with four pieces and 2.350 mm relative motion. The original 6 mm default and historical controls remain below; [additional fine-sampling records](tofu-comparison.md) are listed separately.
+
 ## Implementation and parameters
 
 This is an independent CPU TLMPM implementation of mechanisms in [BladeMaster v2](https://arxiv.org/abs/2609.27342v2). Cuts are at x = −30, 0 and 30 mm, in three 2 s cycles within a 7 s record. A bounded PD force drives the blade, material reactions change its velocity, and board support impulses are recorded separately.
@@ -45,9 +47,11 @@ All 18 bounded invocations consume 3610.32 s including guard waits. Final-batch 
 
 ## How the surface is made
 
-A dense peeled-fruit skin follows the initial material profile, with longitudinal ridges, fibre colour variation and fresh cut-core detail. Each vertex blends saved particle positions/deformation gradients from up to 32 nearby particles within its mechanical component. Caps appear only after the native transfer graph confirms complete separation; piece motion is not additionally prescribed.
+A dense peeled-fruit skin follows the initial material profile, with longitudinal ridges, fibre colours and fresh cut-core detail. Its reference seams lie at the three supported straight-cut planes. Native side-history conflicts expose local cap triangles as cutting proceeds; compatible or unassigned seam vertices in the same native mechanical component are welded, preserving the uncut lower bridge. No clock or prescribed visual displacement opens a cut.
 
-This skin does not resolve incomplete incisions: inspect those in the particle view. It is authored display geometry, not a photographic scan or calibrated food material. Particles retain their physical proxy sizes. Subsequent smoothing preserves embedded cap x coordinates. The provenance.json records raw-state, rendering-source and output hashes and display-smoothing displacement. Wood, lighting and the handle are scenery.
+Each authored reference interval follows its dominant observed native component; nearest anchors that fall into another component are reselected within that interval and component. This keeps the supported pieces separate, but the fixed reference seams do not recover the exact deformed cut geometry. Each vertex blends up to 64 nearby particle affine maps compatible with its native anchor history and mechanical component. Welded representatives share the mean of both compatible embeddings. This approximation reproduces common rigid/affine motion; it is not the paper's linked-volume dual contouring, a scan or a calibrated food model. No geometric smoothing is applied, and split normals preserve sharp cut rims. Particle views remain available to inspect the physical sampling.
+
+The measured GIF displays all three signed cut openings and per-piece probe displacement. Force and interior tetrahedral volume appear below; definitions and limitations are in the [paper audit](cutting-fidelity.md). Raw-state, renderer and output hashes plus actual frame mappings accompany the media. Board, pore/fibre colours, lighting and handle are scenery.
 
 ## Reproduce
 

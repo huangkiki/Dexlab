@@ -19,6 +19,24 @@ Defaults: grid 7.5 mm, timestep 0.25 ms, density 1,100 kg/m³, Young's modulus 6
 
 **The task is matched; complete parameter matching is not claimed.** The paper/videos do not expose all dimensions, contact/drive settings and initial velocities needed to recreate this comparison exactly. Values not explicitly matched above are synthetic DexLab choices. The authors' gap width/tetrahedral volume contraction cannot be substituted with our proxy overlap/connectivity metrics. No controlled accuracy or speed ranking is established.
 
+## Additional fine-sampling records and measured GIFs
+
+This is the separate #203 cohort; v0.62.0 records and failures remain unchanged. Displayed sampling uses a 5 mm grid with unchanged physics source and scorer. Half-step, uncut and partial-second-cut cases were frozen before execution.
+
+| Case | Result | Particles | Components | Relative motion (mm) | Peak reaction (N) | Worker time (s) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| `physics-001-tofu-fine` | Pass | 5184 | 3 | 2.398 | 0.02472 | 532.79 |
+| `physics-002-tofu-half` | Pass | 5184 | 3 | 2.939 | 0.03088 | 1040.47 |
+| `physics-003-tofu-uncut` | Rejected control | 5184 | 1 | 0.234 | 0.00000 | 513.70 |
+| `physics-004-tofu-partial` | Rejected control | 5184 | 2 | 0.717 | 0.02472 | 523.23 |
+| `physics-005-banana-fine` | Pass | 2480 | 4 | 2.350 | 0.06982 | 363.60 |
+
+This cohort contains 5 physics calls and 2973.79 worker seconds; guard waiting is recorded separately. Differences between sampling/timestep variants remain sensitivity results, not demonstrated force convergence.
+
+[Complete new records](https://github.com/huangkiki/Dexlab/blob/main/demos/cutting-refinement/evidence.json) · [Definitions and paper audit](cutting-fidelity.md)
+
+[New raw records and measured replay downloads](https://github.com/huangkiki/Dexlab/releases/tag/v0.64.0).
+
 ## Qualification records
 
 <!-- tofu-comparison-results:start -->

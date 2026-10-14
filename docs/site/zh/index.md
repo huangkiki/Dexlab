@@ -41,7 +41,7 @@
 ```{raw} html
 <div class="experiment-grid">
 <article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="豆腐状软块对半切"></a><div class="card-copy"><h3><a href="cutting.html">豆腐状软块对半切</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>撤刀后，切开的两块材料能否独立运动？</p><p>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。</p></div></article>
-<article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="豆腐连续两刀与三列对比"></a><div class="card-copy"><h3><a href="cutting-comparison.html">豆腐连续两刀与三列对比</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>两刀之后，左块能否独立运动？</p><p>本项目两刀形成三等份；撤刀后左块相对移动2.799mm。三列任务一致，原作完整参数尚未对齐。</p></div></article>
+<article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="豆腐连续两刀与三列对比"></a><div class="card-copy"><h3><a href="cutting-comparison.html">豆腐连续两刀与三列对比</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>两刀之后，左块能否独立运动？</p><p>5 mm 网格形成三等份；左块相对移动2.398 mm，动图显示切口、体积与位移。三列任务一致，原作完整参数尚未对齐。</p></div></article>
 <article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="香蕉连续三刀切片"></a><div class="card-copy"><h3><a href="banana-cutting.html">香蕉连续三刀切片</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>后续切割会保留之前的切面吗？</p><p>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="LIBERO 原生抓取：诊断与改进"></a><div class="card-copy"><h3><a href="libero-workflow.html">LIBERO 原生抓取：诊断与改进</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>如何从已有 benchmark 定位问题，再验证修改？</p><p>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="法向与瞬态响应"></a><div class="card-copy"><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>压入、卸载与动态响应如何随参数改变？</p><p>静态校准有效，动态响应和质量迁移须分别验证。</p></div></article>
@@ -190,6 +190,7 @@
 香蕉连续切片 <banana-cutting>
 切割方法对比 <cutting-comparison>
 豆腐连续两刀与独立运动 <tofu-comparison>
+切割保真度与动态测量 <cutting-fidelity>
 
 求解配置分层 <solver-taxonomy>
 

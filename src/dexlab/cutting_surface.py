@@ -91,37 +91,83 @@ class MaterialSurface:
 
 
 class BananaSkin:
-    """Smooth fruit skin embedded in saved material motion.
+    """Authored reference skin with locally history-aware straight-cut seams.
 
-    Only completed mechanical separations create caps. Partial incisions must
-    be inspected in the particle view: this skin is not a fracture estimator.
+    Native side conflicts expose cut faces progressively. Unassigned regions
+    weld the two skin representatives and retain the uncut bridge. This is a
+    particle-affine display embedding, not the paper's dual-contouring method.
     """
+
+    PLANES = (-.03, 0., .03)
 
     def __init__(self, reference):
         self.reference = np.asarray(reference)
-        self.cache = {}
+        self.rest, self.faces, self.cap_vertices, self.face_cut, self.anchors = self._rest_mesh()
+        self.particle_regions = np.searchsorted(self.PLANES, self.reference[:, 0])
+        self.vertex_regions = self.particle_regions[self.anchors]
+        distances, self.neighbours = cKDTree(reference).query(self.rest, k=min(64, len(reference)))
+        self.neighbours[:, 0] = self.anchors
+        distances[:, 0] = np.linalg.norm(self.rest-reference[self.anchors], axis=1)
+        self.weights = np.exp(-.5*(distances/.006)**2)
+        self.seams = []
+        by_position = {}
+        for i, point in enumerate(self.rest):
+            key = tuple(np.rint(point*1e12).astype(np.int64))
+            if key in by_position:
+                self.seams.append((by_position[key], i))
+            else:
+                by_position[key] = i
 
-    def mesh(self, positions, deformation, components):
-        boundaries = [-.06]
-        for cut in (-.03, 0., .03):
-            left = set(components[self.reference[:, 0] < cut])
-            right = set(components[self.reference[:, 0] > cut])
-            if left.isdisjoint(right):
-                boundaries.append(cut)
-        boundaries.append(.06)
-        signature = tuple(boundaries)
-        if signature not in self.cache:
-            self.cache[signature] = self._rest_mesh(boundaries)
-        rest, faces, cut_vertices, neighbours, weights = self.cache[signature]
+    def mesh(self, positions, deformation, codes, components):
+        anchors = self.anchors.copy()
+        # The authored seam lies in reference space, while a deformed cut can
+        # assign its nearest reference particle to the neighbouring piece.
+        # Bind each authored interval to its dominant observed component;
+        # local histories still decide partial openings inside that component.
+        for region in range(len(self.PLANES)+1):
+            candidates = np.flatnonzero(self.particle_regions == region)
+            labels, counts = np.unique(components[candidates], return_counts=True)
+            component = labels[counts.argmax()]
+            misplaced = (self.vertex_regions == region) & (components[anchors] != component)
+            if misplaced.any():
+                candidates = candidates[components[candidates] == component]
+                _, nearest = cKDTree(self.reference[candidates]).query(self.rest[misplaced])
+                anchors[misplaced] = candidates[nearest]
+        neighbours, weights = self.neighbours.copy(), self.weights.copy()
+        neighbours[:, 0] = anchors
+        distances = np.linalg.norm(self.rest-self.reference[anchors], axis=1)
+        weights[:, 0] = np.exp(-.5*(distances/.006)**2)
+        anchor_codes = codes[anchors]
+        anchor_components = components[anchors]
+        compatible = components[neighbours] == anchor_components[:, None]
+        for cut in range(3):
+            first = (anchor_codes // 3**cut % 3)[:, None]
+            second = codes[neighbours] // 3**cut % 3
+            compatible &= (first == 0) | (second == 0) | (first == second)
+        weights *= compatible
+        weights /= weights.sum(axis=1, keepdims=True)
         mapped = positions[neighbours] + np.einsum(
-            'pkij,pkj->pki', deformation[neighbours], rest[:, None]-self.reference[neighbours])
+            'pkij,pkj->pki', deformation[neighbours], self.rest[:, None]-self.reference[neighbours])
         moved = np.einsum('pk,pki->pi', weights, mapped)
-        return moved, faces, rest, cut_vertices
+        representatives = np.arange(len(self.rest))
+        separated = np.zeros(len(self.rest), dtype=bool)
+        for left, right in self.seams:
+            if (anchor_components[left] == anchor_components[right]
+                    and histories_compatible(int(anchor_codes[left]), int(anchor_codes[right]))):
+                representatives[right] = left
+                moved[left] = (moved[left]+moved[right])/2
+            else:
+                separated[[left, right]] = True
+        visible = (self.face_cut < 0) | separated[self.faces].all(axis=1)
+        faces = representatives[self.faces[visible]]
+        used, inverse = np.unique(faces, return_inverse=True)
+        return moved[used], inverse.reshape(-1, 3), self.rest[used], self.cap_vertices[used]
 
-    def _rest_mesh(self, boundaries):
-        vertices, faces, caps, neighbours, weights = [], [], [], [], []
+    def _rest_mesh(self):
+        vertices, faces, caps, face_cut, anchors = [], [], [], [], []
         sectors = 64
         theta = np.arange(sectors)*2*np.pi/sectors
+        boundaries = (-.06, *self.PLANES, .06)
         for low, high in zip(boundaries[:-1], boundaries[1:], strict=True):
             start = len(vertices)
             rings = max(8, round((high-low)/.0015))+1
@@ -137,12 +183,14 @@ class BananaSkin:
                     a = start+ring*sectors+angle
                     b = start+ring*sectors+(angle+1)%sectors
                     faces.extend(((a,b,b+sectors), (a,b+sectors,a+sectors)))
+                    face_cut.extend((-1, -1))
             is_cap = [False]*len(piece)
-            # Concentric end discs preserve the transverse flesh/core detail.
             for ring, sign in [(0, -1), (rings-1, 1)]:
                 x = axial[ring]
+                cut = self.PLANES.index(x) if x in self.PLANES else -1
                 center = np.array([x, .035*((x/.06)**2-.5), .012])
                 outer = np.asarray(piece[ring*sectors:(ring+1)*sectors])
+                is_cap[ring*sectors:(ring+1)*sectors] = [True]*sectors
                 previous = np.arange(sectors)+start+ring*sectors
                 for scale in (.75, .5, .25):
                     current = np.arange(sectors)+start+len(piece)
@@ -153,6 +201,7 @@ class BananaSkin:
                         triangles = [(previous[angle],current[nxt],current[angle]),
                                      (previous[angle],previous[nxt],current[nxt])]
                         faces.extend(triangles if sign > 0 else [t[::-1] for t in triangles])
+                        face_cut.extend((cut, cut))
                     previous = current
                 center_index = start+len(piece)
                 piece.append(center)
@@ -160,14 +209,12 @@ class BananaSkin:
                 for angle in range(sectors):
                     triangle = (previous[angle], previous[(angle+1)%sectors], center_index)
                     faces.append(triangle if sign > 0 else triangle[::-1])
+                    face_cut.append(cut)
             piece = np.asarray(piece)
             selected = np.flatnonzero((self.reference[:, 0] > low) & (self.reference[:, 0] < high))
-            distance, near = cKDTree(self.reference[selected]).query(piece, k=min(32, len(selected)))
-            weight = np.exp(-.5*(distance/.006)**2)
-            weight /= weight.sum(axis=1, keepdims=True)
+            _, nearest = cKDTree(self.reference[selected]).query(piece)
             vertices.extend(piece)
             caps.extend(is_cap)
-            neighbours.extend(selected[near])
-            weights.extend(weight)
+            anchors.extend(selected[nearest])
         return (np.asarray(vertices), np.asarray(faces), np.asarray(caps),
-                np.asarray(neighbours), np.asarray(weights))
+                np.asarray(face_cut), np.asarray(anchors))
