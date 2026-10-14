@@ -129,6 +129,149 @@ def run(root, candidate_id, demo, timeout=900, retry_reason=None):
     return result
 
 
+def task_sources():
+    """Version-2 execution/scoring sources, separate from historical v1 pins."""
+    from dexlab.libero_execute import source_hashes as execution_sources
+    result = execution_sources()
+    for name in ('libero_trials.py', 'libero_score_v2.py', 'libero_dynamics.py', 'libero_body_dynamics.py', 'libero_score.py', 'contact_trials.py'):
+        result[name] = file_hash(Path(__file__).with_name(name))
+    return result
+
+
+def validate_tasks(manifest):
+    """Admit a finite slice of the frozen task/demo denominator."""
+    from dexlab.libero_demo import load_demo
+    from dexlab.libero_execute import RUNTIME_PACKAGES, source_hashes as execution_sources, validate_numerical_environment
+
+    if manifest.get('schema_version') != 2 or manifest.get('kind') != 'libero-native-task-campaign':
+        raise ValueError('Expected a version-2 native task campaign')
+    cases = manifest['cases']
+    if not 1 <= len(cases) <= 64 or len({case['id'] for case in cases}) != len(cases):
+        raise ValueError('Freeze one to 64 distinct cases per bounded work package')
+    if type(manifest['max_output_bytes']) is not int or manifest['max_output_bytes'] <= 0:
+        raise ValueError('Freeze a positive archive budget')
+    for case in cases:
+        if not re.fullmatch(r'[a-z][a-z0-9-]*', case['id']):
+            raise ValueError('Invalid task case identifier')
+        payload = case['execution']
+        validate_numerical_environment(payload.get('numerical_environment'))
+        if (payload.get('schema_version') != 2 or type(payload.get('recording')) is not bool
+                or type(payload.get('substep_recording')) is not bool
+                or payload['recording'] != payload['substep_recording']
+                or type(payload.get('seed')) is not int or not 0 <= payload['seed'] < 2**32
+                or payload.get('purpose') not in ('baseline', 'development', 'validation')
+                or set(payload['runtime_versions']) != RUNTIME_PACKAGES
+                or payload['source_sha256'] != execution_sources()):
+            raise ValueError('Incomplete or changed frozen task execution')
+        inputs = load_demo(payload['input_dir'], payload['input_manifest_sha256'], payload['demo_id'])
+        if (inputs['task']['task_id'] != payload['task_id']
+                or payload['purpose'] != 'baseline' and inputs['demonstration']['split'] != payload['purpose']):
+            raise ValueError('Frozen task or demonstration split changed')
+        if payload['recording']:
+            protocol = case['numerical_protocol']
+            if (protocol.get('schema_version'), protocol.get('equations')) != (2, 'mujoco-2.3.7-euler-body-v2'):
+                raise ValueError('Instrumented cases require a frozen numerical protocol')
+        elif case['numerical_protocol'] is not None:
+            raise ValueError('Uninstrumented controls cannot claim substep scoring')
+    if not manifest.get('work_package'):
+        raise ValueError('Task campaigns require evidenced finite work-package limits')
+    references = manifest.get('evidence', [])
+    if (not references or not set(manifest['work_package']['evidence_sha256']) <= {r['sha256'] for r in references}
+            or any(file_hash(reference['path']) != reference['sha256'] for reference in references)):
+        raise ValueError('Work-package evidence is missing or changed')
+
+
+def create_tasks(root, manifest):
+    validate_tasks(manifest)
+    frozen = dict(manifest, matrix=[{'id': case['id']} for case in manifest['cases']],
+                  source_sha256=task_sources())
+    if not frozen.get('prior_budget'):
+        allowance(frozen, None)
+    return MigrationBudget.create(root, frozen)
+
+
+def run_task(root, case_id, timeout=900, retry_reason=None):
+    """Use the existing ledger/guard contract for native execution plus offline score."""
+    from dexlab.libero_demo import load_demo
+    root = Path(root).resolve()
+    manifest = json.loads((root / 'manifest.json').read_text())
+    validate_tasks(manifest)
+    if manifest['source_sha256'] != task_sources():
+        raise ValueError('Task source changed; inherit the existing ledger in a frozen revision')
+    case = next((case for case in manifest['cases'] if case['id'] == case_id), None)
+    if case is None:
+        raise ValueError('Case outside the frozen task matrix')
+    if sum(p.stat().st_size for p in root.rglob('*') if p.is_file()) >= manifest['max_output_bytes']:
+        raise ValueError('Campaign archive allowance exhausted')
+    budget = MigrationBudget(root)
+    attempt = budget.reserve(case_id, dict(parent_pid=os.getpid(), **execution_cgroup()),
+                             timeout_s=timeout, retry_reason=retry_reason)
+    directory = root / 'attempts' / f'{attempt:04d}'
+    directory.mkdir()
+    started = time.monotonic()
+    result = dict(case_id=case_id, attempt=attempt, outcome='failed', record_valid=False,
+                  numerical_consistent=None, native_success=None)
+    try:
+        payload = case['execution']
+        publish(directory / 'input.json', json_bytes(payload))
+        env = dict(os.environ, MUJOCO_GL='egl',
+                   PYTHONPATH=os.pathsep.join((str(Path(__file__).parents[1]), payload['libero_root'])),
+                   LIBERO_CONFIG_PATH=str(Path(manifest['config_dir']).resolve()),
+                   NUMBA_CACHE_DIR=str(Path(manifest['cache_dir']).resolve()))
+        # Apply before Python/NumPy/Numba import; an unset control is meaningful.
+        for key, value in payload['numerical_environment'].items():
+            env.pop(key, None)
+            if value is not None:
+                env[key] = value
+        result['run_exit'] = command([manifest['python'], '-m', 'dexlab.libero_execute',
+                    str(directory / 'input.json'), str(directory / 'raw')], directory / 'run.log',
+                    started + timeout, directory / 'process.json', environment=env)
+        publish(directory / 'native-process.json', (directory / 'process.json').read_bytes())
+        native = directory / 'raw/run.json'
+        if result['run_exit'] == 0 and native.is_file():
+            receipt = json.loads(native.read_bytes())
+            result['run_sha256'] = file_hash(native)
+            expected_actions = load_demo(payload['input_dir'], payload['input_manifest_sha256'],
+                                         payload['demo_id'])['demonstration']['action_count']
+            if (receipt.get('status') != 'completed' or receipt.get('actions_executed') != expected_actions
+                    or receipt.get('task_id') != payload['task_id'] or receipt.get('demo_id') != payload['demo_id']):
+                raise ValueError('Native process did not complete the declared case')
+            result['native_success'] = receipt['native_success_final']
+            if payload['recording']:
+                publish(directory / 'protocol.json', json_bytes(case['numerical_protocol']))
+                result['score_exit'] = command([manifest['scoring_python'], '-m', 'dexlab.libero_score_v2',
+                    str(directory / 'raw'), result['run_sha256'], str(directory / 'input.json'), payload['input_dir'],
+                    str(directory / 'protocol.json'), str(directory / 'score.json')], directory / 'score.log',
+                    started + timeout, directory / 'process.json', environment=env)
+                publish(directory / 'scoring-process.json', (directory / 'process.json').read_bytes())
+                if result['score_exit'] == 0:
+                    score = json.loads((directory / 'score.json').read_bytes())
+                    if (score['run_sha256'] != result['run_sha256'] or score['protocol'] != case['numerical_protocol']
+                            or type(score['record_valid']) is not bool or type(score['numerical_consistent']) is not bool):
+                        raise ValueError('Score result belongs to another run/protocol or has invalid status')
+                    result.update(record_valid=score['record_valid'], numerical_consistent=score['numerical_consistent'])
+                    if score['record_valid'] is True:
+                        result['outcome'] = 'recorded'
+            else:
+                result.update(outcome='recorded', record_valid=None,
+                              scope='Uninstrumented control; substep record validity was not evaluated.')
+        if sum(p.stat().st_size for p in root.rglob('*') if p.is_file()) > manifest['max_output_bytes']:
+            result['outcome'] = 'failed'
+            raise ValueError('Campaign exceeded frozen archive allowance')
+    except (KeyboardInterrupt, subprocess.TimeoutExpired) as error:
+        result.update(outcome='interrupted', error_type=type(error).__name__)
+    except Exception as error:
+        result.update(outcome='failed', error_type=type(error).__name__, error=str(error))
+    finally:
+        result['wall_s'] = time.monotonic() - started
+        result['artifact_sha256'] = {str(p.relative_to(directory)): file_hash(p)
+                                     for p in sorted(directory.rglob('*')) if p.is_file()}
+        raw = json_bytes(result)
+        publish(directory / 'result.json', raw)
+        budget.finish(attempt, wall_s=result['wall_s'], evidence_sha256=digest(raw), outcome=result['outcome'])
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='action', required=True)
@@ -141,6 +284,14 @@ def main():
     execute.add_argument('demo')
     execute.add_argument('--timeout', type=int, default=900)
     execute.add_argument('--retry-reason')
+    task_init = sub.add_parser('init-tasks')
+    task_init.add_argument('manifest', type=Path)
+    task_init.add_argument('root', type=Path)
+    task_run = sub.add_parser('run-task')
+    task_run.add_argument('root', type=Path)
+    task_run.add_argument('case')
+    task_run.add_argument('--timeout', type=int, default=900)
+    task_run.add_argument('--retry-reason')
     sub.add_parser('status').add_argument('root', type=Path)
     sub.add_parser('recover').add_argument('root', type=Path)
     args = parser.parse_args()
@@ -148,12 +299,16 @@ def main():
         result = create(args.root, json.loads(args.manifest.read_text())).status()
     elif args.action == 'run':
         result = run(args.root, args.candidate, args.demo, args.timeout, args.retry_reason)
+    elif args.action == 'init-tasks':
+        result = create_tasks(args.root, json.loads(args.manifest.read_text())).status()
+    elif args.action == 'run-task':
+        result = run_task(args.root, args.case, args.timeout, args.retry_reason)
     elif args.action == 'recover':
         result = recover(args.root)
     else:
         result = MigrationBudget(args.root).status()
     print(json.dumps(result, indent=2, allow_nan=False))
-    if args.action == 'run' and result['outcome'] != 'recorded':
+    if args.action in ('run', 'run-task') and result['outcome'] != 'recorded':
         raise SystemExit(1)
 
 

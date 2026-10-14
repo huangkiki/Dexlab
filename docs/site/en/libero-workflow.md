@@ -1,8 +1,56 @@
 # LIBERO: from a native task to a verifiable change
 
-**First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. Only this task dataset is used. mjlab is deferred; scheduled development remains paused.
+**First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. The historical case below uses only this task dataset. mjlab is deferred; scheduled development remains paused.
 
-## What this round establishes
+## Task-aware recording qualification (in progress)
+
+The body-aware version-2 path completed five development sequences: a free object,
+a drawer, a stove joint, simultaneous targets and a long sequence. Each ran with
+recording on, off and on again: **15 complete runs, 3,018 actions and 50,300 recorded
+substeps**. All native final task queries succeeded; all ten instrumented records were
+structurally valid. Current action/state/observation arrays and goals matched exactly,
+and repeated substep archives were byte-identical. This qualifies the recorded
+representative paths, not the 130-task baseline or learned-policy evaluation.
+
+| Development sequence | Actions per run | Recorded substeps per run | Violating substeps for each of two residuals |
+| --- | --- | --- | --- |
+| Free object | 139 | 3,475 | 507 |
+| Drawer | 138 | 3,450 | 166 |
+| Stove joint | 80 | 2,000 | 45 |
+| Simultaneous targets | 388 | 9,700 | 749 |
+| Long sequence | 261 | 6,525 | 367 |
+
+The two residuals are constrained acceleration and projected body effort, at their
+unchanged per-coordinate numerical bounds. The other nine metrics had no violating
+substeps. These negatives do not alone establish material inaccuracy or a recorder defect.
+The earlier exact comparison failure in seven relative-quaternion channels and their
+aggregate remains unchanged. Offline reconstruction isolated differing thread
+configurations; the new five-family batch pins those controls and relevant package versions.
+
+Small body/solver fixtures passed 20 native checks and offline replay of 139 retained
+substeps, followed by 83 recording/execution regressions without importing an engine.
+The body-aware protocol uses the original force epoch, reports rigid free-COM impulse
+diagnostics and retains current solver statistics. Inferred subtree loads are not measured
+joint reactions; physical-reference qualification and repository delivery remain open.
+
+Packed storage passed 86 record/storage/executor regressions and exact lossless conversion
+and full rescoring of all five complete reference sequences (1,006 actions / 25,150 substeps).
+Their substep chunks decreased from 1,837,228,156 to 442,665,669 bytes, a **75.91% reduction**.
+A subsequent three-run native integration check preserved all original free-object
+states/actions/goals/scores and repeated chunk bytes; native packed fields matched the
+offline reference exactly. This does not establish an all-task capacity or throughput claim.
+
+One earlier native startup failed before any task action because its new configuration
+directory lacked `config.yaml`. The failure and cost remain recorded; the corrected revision
+checked the known configuration hash and paths before dispatch. Original records,
+thresholds and numerical failures remain intact. Repository delivery is still pending.
+
+[Recording protocol and limitations](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md)
+and [qualification evidence](https://github.com/huangkiki/Dexlab/issues/188#issuecomment-6159417739)
+separate record integrity, numerical diagnostics, physical-reference validity and native
+success. Current implementation results do not change the historical case below.
+
+## What the original case establishes
 
 - **Reproduction:** the original configuration completes all three development and ten heldout demonstrations. Lift-and-slip was not reproduced. These are action-execution outcomes, not learned-policy benchmark scores.
 - **Verified workflow defect:** the independent evaluator discards five settling observations, while the training evaluator refreshes them. During a native 0.25 s audit, the largest end-effector position-component change is **4.481 mm**, and one finger-joint position changes **12.143 mm**. A reversible one-line patch refreshes the observation without changing the five zero actions.
