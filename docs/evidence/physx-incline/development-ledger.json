@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "scope": "Source identity, build admission and native observation diagnostics; no replacement historical data",
+  "wall_budget_s": 21600,
+  "native_start_limit": 64,
+  "native_starts_used": 64,
+  "native_updates_used": 2240,
+  "source_commit": "517a0073715120e114ee055b63b26c95e00d9039",
+  "sdk_release": "110.1-omni-and-physx-5.9.0",
+  "resource_plan": "development-v1-plan.json",
+  "cpu_cores": 4,
+  "formal_protocol": "frozen-v1",
+  "current_attempt": "repeat-v1: both full1000-step independent processes match original physics exactly",
+  "native_starts_reserved": 0,
+  "admission_v1": "10 zero-step starts; positive9 accepted, negative rejected mass1kg"
+}

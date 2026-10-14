@@ -2,6 +2,8 @@
 
 [English](NORMAL_RESPONSE.md) | [简体中文](NORMAL_RESPONSE.zh-CN.md)
 
+The [historical solver/version audit](../../docs/physx-solver-audit.md) separates native scene readbacks, source/report TGS profiles and missing fields; [P0 #126](https://github.com/huangkiki/Dexlab/issues/126) retains contemporaneous core/loaded-library identity gaps.
+
 **Matching a static response does not establish matching material dynamics.** This development protocol makes that distinction measurable with official MuJoCo 3.11.0, SuperDex 1.0.0 FP64 and PhysX/Isaac Sim 5.1. No engine source or binary is modified. PhysX uses a disclosed local UniSim adapter extension for native compliant contact.
 
 ![Response, mass transfer and settling](media/normal-response-v1.png)

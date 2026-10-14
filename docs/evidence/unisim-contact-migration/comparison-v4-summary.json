@@ -1,0 +1,577 @@
+{
+  "status": "complete_recording_passed_storage_aligned_comparison",
+  "manifest_sha256": "474de44f8900cb9ba0210434e8da37f9f9405bdf8f35508a804ad725ed2ee854",
+  "coverage_complete": true,
+  "runtime_reverified": true,
+  "all_sealed_attempts_verified": true,
+  "full_check_sha256": "c5c471fc85ec390eec8bbe7082ab43209fb581ecfcf71d7dc525004f7929c11f",
+  "base_revisions": {
+    "dexlab": "d33d6061655e3436534895ece1b500d1b8bf8cb1",
+    "unisim": "91470d714531894db5f645b48982bee91d441eb9"
+  },
+  "thresholds": {
+    "epoch_s": 1e-12,
+    "force_N": 1e-07,
+    "initial": 1e-12,
+    "state": 1e-09
+  },
+  "versions": {
+    "genesis-world": "1.4.3",
+    "mujoco": "3.15.0",
+    "numpy": "2.5.2",
+    "quadrants": "1.3.3",
+    "scipy": "1.18.1",
+    "torch": "2.9.1+cpu"
+  },
+  "candidate_launches": 38,
+  "candidate_episodes": 56,
+  "candidate_process_wall_s": 637.4934440228972,
+  "cumulative_launches": 108,
+  "cumulative_process_wall_s": 1895.5753030949272,
+  "work_package": {
+    "authorization": "https://github.com/huangkiki/Dexlab/issues/143#issuecomment-6081934903",
+    "evidence_sha256": [
+      "ac88593f973b2cab4bd0adb1d203618dbcb1874e71344b79e450b1db8153f052"
+    ],
+    "hypothesis": "Native thread count, batched parameter storage or environment count explains the six low-force pointwise migration failures; repeated fresh processes distinguish repeatability from adapter differences.",
+    "id": "issue143-isolation-20261009",
+    "max_starts": 64,
+    "wall_s": 21600
+  },
+  "package_starts_used": 62,
+  "package_wall_s": 998.9880097819841,
+  "remaining_launches": 2,
+  "passed_pairs": 19,
+  "total_pairs": 19,
+  "rows": [
+    {
+      "pair": "reset-1000us",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 4,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      },
+      "native_task_pass": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "pair": "reset-500us",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 4,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      },
+      "native_task_pass": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "pair": "reset-250us",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 4,
+      "reset_replay": {
+        "native-pinch": true,
+        "native-open_negative": true,
+        "unisim-pinch": true,
+        "unisim-open_negative": true
+      },
+      "native_task_pass": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "pair": "dev-cap-0.2",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 1.1102230246251565e-16,
+        "object_vel": 0.0,
+        "object_ang": 2.710505431213761e-20,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        false
+      ]
+    },
+    {
+      "pair": "dev-cap-0.4",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 2.168404344971009e-19,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        false
+      ]
+    },
+    {
+      "pair": "dev-cap-0.8",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "dev-cap-10",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "dev-repeat-10",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "dev-open",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "eval-left-cap-0.2",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 8.673617379884035e-19,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        false
+      ]
+    },
+    {
+      "pair": "eval-left-cap-0.4",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 1.0842021724855044e-19,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        false
+      ]
+    },
+    {
+      "pair": "eval-left-cap-0.8",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 4.1359030627651384e-25,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "eval-left-cap-10",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 4.1359030627651384e-25,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "eval-left-open",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "eval-right-cap-0.2",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 8.673617379884035e-19,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        false
+      ]
+    },
+    {
+      "pair": "eval-right-cap-0.4",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 2.168404344971009e-19,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        false
+      ]
+    },
+    {
+      "pair": "eval-right-cap-0.8",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 8.271806125530277e-25,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "eval-right-cap-10",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 2.220446049250313e-16,
+        "object_vel": 0.0,
+        "object_ang": 8.271806125530277e-25,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    },
+    {
+      "pair": "eval-right-open",
+      "comparison_passed": true,
+      "max_absolute_error": {
+        "q": 0.0,
+        "qvel": 0.0,
+        "object_pos": 0.0,
+        "object_quat": 0.0,
+        "object_vel": 0.0,
+        "object_ang": 0.0,
+        "command": 0.0,
+        "object_contact_force": 0.0
+      },
+      "contact_max_absolute_error": {
+        "position": 0.0,
+        "distance": 0.0,
+        "normal": 0.0,
+        "force": 0.0
+      },
+      "scientific_checks_equal": true,
+      "trials": 1,
+      "reset_replay": {},
+      "native_task_pass": [
+        true
+      ]
+    }
+  ],
+  "resources": {
+    "memory_GiB": 8,
+    "cpu_cores": 4,
+    "peak_GiB": 1.5661163330078125
+  },
+  "limitations": [
+    "This comparison explicitly aligns batch_links_info and batch_dofs_info; the historical unbatched path remains different.",
+    "Genesis 1.4.3 and MuJoCo 3.15.0 with the disclosed local UniSim patch form a development qualification, not an upstream compatible release.",
+    "The full raw archive remains private; hashes identify retained evidence, not public downloads.",
+    "A framework path and repeated cases add no task type; no all-engine or hardware qualification is claimed."
+  ]
+}

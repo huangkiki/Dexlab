@@ -1,0 +1,37 @@
+{
+  "attempts": [
+    {
+      "name": "source-v1",
+      "failure": "Strict full-archive Git blob comparison found CRLF/LF differences in22Windows command files outside PhysX; unchanged sources subsequently audited"
+    },
+    {
+      "name": "recorder-build-v1",
+      "failure": "Project recorder used obsolete geometry query API; fixed against5.9headers"
+    },
+    {
+      "name": "recorder-build-v2",
+      "failure": "GCCmaybe-uninitialized warnings in official inline headers; project still Werror, unchanged upstream headers marked external with-isystem"
+    },
+    {
+      "name": "admission-v1",
+      "failure": "Negative disabled collision before updateMassAndInertia; helper ignored shape, mass1kg. Fixed order before freeze; all10original zero-step records retained"
+    },
+    {
+      "name": "diagnostic-v1",
+      "failure": "Four20-step negative diagnostics have old incorrect mass; not accepted as formal negative controls"
+    },
+    {
+      "name": "formal-v1-pgs",
+      "failure": "Bounded service omitted PYTHONPATH; module not found,zero native starts; new launch identity used"
+    },
+    {
+      "name": "setup-gate-v1",
+      "failure": "Archive32task cap triggered302pids limit events during dependency installation; own environment recovered with adaptive128task limit, original receipt retained"
+    }
+  ],
+  "development_native_starts": 64,
+  "development_zero_step_starts": 50,
+  "development_positive_duration_starts": 14,
+  "development_updates": 2240,
+  "formal_updates": 92000
+}

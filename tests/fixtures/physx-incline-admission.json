@@ -1,0 +1,118 @@
+{
+  "kind": "admission",
+  "sdk_version": "5.9.0",
+  "sdk_version_integer": 84475904,
+  "real_bytes": 4,
+  "profile": "pgs",
+  "requested_timestep": 0.001,
+  "effective_timestep": 0.0010000000474974513,
+  "solver_type": 0,
+  "scene_flags": 16448,
+  "friction_type": 0,
+  "gravity": [
+    0,
+    0,
+    -9.8100004196167
+  ],
+  "position_iterations": 8,
+  "velocity_iterations": 2,
+  "dynamic_actors": 1,
+  "static_actors": 1,
+  "cpu_worker_count": 1,
+  "contact_capacity": 256,
+  "contact_report_bytes": 8192,
+  "friction_offset_threshold": 0.03999999910593033,
+  "friction_correlation_distance": 0.02500000037252903,
+  "bounce_threshold_velocity": 2,
+  "mass": 0.06400000303983688,
+  "inertia": [
+    1.7066666259779595e-05,
+    1.7066666259779595e-05,
+    1.7066666259779595e-05
+  ],
+  "mass_frame": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "plane_pose": [
+    0,
+    0,
+    0,
+    0.7933533191680908,
+    0,
+    -0.6087614297866821,
+    0
+  ],
+  "cube_shape": {
+    "geometry_type": 3,
+    "flags": 11,
+    "contact_offset": 9.999999747378752e-05,
+    "rest_offset": 0,
+    "local_pose": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "half_extents": [
+      0.019999999552965164,
+      0.019999999552965164,
+      0.019999999552965164
+    ]
+  },
+  "plane_shape": {
+    "geometry_type": 1,
+    "flags": 11,
+    "contact_offset": 9.999999747378752e-05,
+    "rest_offset": 0,
+    "local_pose": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "linear_damping": 0,
+  "angular_damping": 0,
+  "sleep_threshold": 0,
+  "stabilization_threshold": 0,
+  "body_flags": 0,
+  "actor_flags": 1,
+  "max_linear_velocity": 10000000272564224,
+  "max_angular_velocity": 100,
+  "max_depenetration_velocity": 1.0000000331813535e+32,
+  "static_friction": 0.5,
+  "dynamic_friction": 0.5,
+  "restitution": 0,
+  "friction_combine_mode": 0,
+  "material_flags": 0,
+  "scene_timestamp": 1,
+  "initial_state": [
+    0,
+    0.00517638074234128,
+    0,
+    0.019318515434861183,
+    0.9914448857307434,
+    0,
+    0.13052619993686676,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "errors": []
+}

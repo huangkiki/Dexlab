@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+  "upstream_commit": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+  "seed": 0,
+  "development": [
+    "demo_0",
+    "demo_1",
+    "demo_2"
+  ],
+  "heldout": [
+    "demo_3",
+    "demo_4",
+    "demo_5",
+    "demo_6",
+    "demo_7",
+    "demo_8",
+    "demo_9",
+    "demo_10",
+    "demo_11",
+    "demo_12"
+  ],
+  "candidates": [
+    {
+      "hypothesis": "Native action replay with complete substep observations; dataset terminal labels are not physical acceptance",
+      "id": "baseline",
+      "instrument": true,
+      "mode": "actions",
+      "timestep_scale": 1.0,
+      "solref_floor_s": 0.0
+    },
+    {
+      "hypothesis": "Instrumentation must preserve every control-rate native state and native success decision",
+      "id": "recording-off",
+      "instrument": false,
+      "mode": "actions",
+      "timestep_scale": 1.0,
+      "solref_floor_s": 0.0
+    },
+    {
+      "hypothesis": "Five native zero-action settle steps advance state while evaluate.py keeps the earlier observation; metric.py refreshes it",
+      "id": "settle-audit",
+      "instrument": true,
+      "mode": "observation-audit",
+      "timestep_scale": 1.0,
+      "solref_floor_s": 0.0
+    },
+    {
+      "id": "step-1000us",
+      "mode": "actions",
+      "instrument": true,
+      "timestep_scale": 0.5,
+      "solref_floor_s": 0.0,
+      "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change"
+    },
+    {
+      "id": "step-500us",
+      "mode": "actions",
+      "instrument": true,
+      "timestep_scale": 0.25,
+      "solref_floor_s": 0.0,
+      "hypothesis": "Reduce h at fixed 50 ms action period; coupled integration and refsafe contact-response change"
+    },
+    {
+      "id": "aligned-2000us",
+      "mode": "actions",
+      "instrument": true,
+      "timestep_scale": 1.0,
+      "solref_floor_s": 0.004,
+      "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration"
+    },
+    {
+      "id": "aligned-1000us",
+      "mode": "actions",
+      "instrument": true,
+      "timestep_scale": 0.5,
+      "solref_floor_s": 0.004,
+      "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration"
+    },
+    {
+      "id": "aligned-500us",
+      "mode": "actions",
+      "instrument": true,
+      "timestep_scale": 0.25,
+      "solref_floor_s": 0.004,
+      "hypothesis": "Within aligned family only: floor positive geom/pair time constants to 4 ms before mixing, then vary h; not material calibration"
+    }
+  ],
+  "diagnostic_protocol": {
+    "overlap_m": 0.001,
+    "momentum_p99_weight_fraction": 0.05,
+    "scope": "Numerical screening, not material truth or reliable coverage",
+    "selection": "Require all three development native successes and valid records; prefer all-screen-pass then lowest max-overlap, then summed native step cost; if none screen-pass choose least-overlap valid challenger and explicitly withhold recommendation. Compare baseline and selected challenger on frozen demo_3..12 once, no further fitting.",
+    "physics_reference": "World COM momentum change equals integrated target contact plus gravity; translational balance only. Contact overlap is numerical diagnostic, no unique analytical solution for basket placement.",
+    "step_attribution": "Original h sweep changes refsafe effective time constant. Aligned family fixes positive geom/pair lower floor at 4 ms. Geometry, friction, mass, drive, control period and success unchanged."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "normal_direction_max_ns": 1.0089733427009681e-10,
+  "frozen_normal_direction_limit_ns": 1e-10,
+  "tgs_moving_momentum_range_ns": [
+    1.0939181649816345e-07,
+    1.9647161736302056e-07
+  ],
+  "frozen_momentum_limit_ns": 1e-07,
+  "source": "https://github.com/NVIDIA-Omniverse/PhysX/blob/517a0073715120e114ee055b63b26c95e00d9039/physx/source/lowleveldynamics/src/DyTGSContactPrep.cpp#L1566-L1584",
+  "known": "Native FP32 impulse accumulation and velocity updates are separate operations; writeBackContact returns accumulated normal/friction impulses. Callback extraction multiplies normal by scalar normal impulse. Declared protocol constants versus native FP32 readbacks do not remove the observed residual.",
+  "interpretation": "Frozen engineering checks, not derived forward-error bounds. Failure alone does not prove state injection, missing force or task impossibility. No unique causal decomposition claimed.",
+  "followup": "https://github.com/huangkiki/Dexlab/issues/163",
+  "original_scores_unchanged": true
+}

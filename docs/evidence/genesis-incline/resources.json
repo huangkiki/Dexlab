@@ -1,0 +1,465 @@
+{
+  "runs": [
+    {
+      "state": "failed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 1,
+      "wall_s": 67.47026383300545,
+      "name": "campaign-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8962048",
+          "memory.peak": "9330688",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 27058\nuser_usec 24976\nsystem_usec 2081\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "33910784",
+          "memory.peak": "653672448",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 69155998\nuser_usec 65933833\nsystem_usec 3222164\ncore_sched.force_idle_usec 0\nnr_periods 673\nnr_throttled 1\nthrottled_usec 114528\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=815104 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=299008 wbytes=21479424 rios=3 wios=426 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=20\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=20",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=49647\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=49647",
+          "io.pressure": "some avg10=0.60 avg60=0.20 avg300=0.04 total=305978\nfull avg10=0.60 avg60=0.20 avg300=0.04 total=305978"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=49649\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=49649",
+          "io.pressure": "some avg10=0.60 avg60=0.20 avg300=0.04 total=306811\nfull avg10=0.60 avg60=0.20 avg300=0.04 total=306811"
+        },
+        "initial_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1215, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1215, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.05634958099108189,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1215, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.063333885045722,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1207, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.36734008003259,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1215, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.63550898199901,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1187, 23028"
+            ]
+          },
+          {
+            "wall_s": 40.81533584499266,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1214, 23028"
+            ]
+          },
+          {
+            "wall_s": 50.940340353001375,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1171, 23028"
+            ]
+          },
+          {
+            "wall_s": 60.987664322019555,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1230, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 2.1874288389397596,
+        "sampled_peak_read_bytes_s": 1015782.9007330163,
+        "sampled_peak_write_bytes_s": 10633853.788640562,
+        "sampling_interval_s": 0.25
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51242790912,
+        "data_free_bytes": 1383547326464,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 16.407828219991643,
+      "name": "campaign-v1-continuation",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "9097216",
+          "memory.peak": "9465856",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 32373\nuser_usec 26391\nsystem_usec 5982\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "14385152",
+          "memory.peak": "600477696",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 16333707\nuser_usec 15464350\nsystem_usec 869357\ncore_sched.force_idle_usec 0\nnr_periods 163\nnr_throttled 1\nthrottled_usec 108757\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=3264512 rios=0 wios=87 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=12\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=12",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=14408\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=14408",
+          "io.pressure": "some avg10=0.14 avg60=0.03 avg300=0.00 total=25815\nfull avg10=0.14 avg60=0.03 avg300=0.00 total=25815"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=14479\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=14479",
+          "io.pressure": "some avg10=0.12 avg60=0.02 avg300=0.00 total=28694\nfull avg10=0.12 avg60=0.02 avg300=0.00 total=28694"
+        },
+        "initial_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1215, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1175, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.2749797090073116,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1215, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.529495359980501,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1234, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 2.238824908685015,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 6504369.806324783,
+        "sampling_interval_s": 0.25
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51109171200,
+        "data_free_bytes": 1383523946496,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "c30db3dbbe6f66d31e898c8d538b34971aa4a409c09946d7922314ccc9094dc8",
+          "peak_mib": 623.390625
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 6.561967284011189,
+      "name": "diagnostic-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8994816",
+          "memory.peak": "9641984",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 20993\nuser_usec 17971\nsystem_usec 3022\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "9760768",
+          "memory.peak": "471592960",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 6746365\nuser_usec 6198254\nsystem_usec 548110\ncore_sched.force_idle_usec 0\nnr_periods 64\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=106496 rios=0 wios=26 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1509\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1509",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3466\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=3466"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1543\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1543",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3503\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=3503"
+        },
+        "initial_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1217, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1192, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.06069046398624778,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1217, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6536876815789254,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 67490.00964843732,
+        "sampling_interval_s": 0.25
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51101011968,
+        "data_free_bytes": 1383524671488,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "c30db3dbbe6f66d31e898c8d538b34971aa4a409c09946d7922314ccc9094dc8",
+          "peak_mib": 623.390625
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 8.135207590996288,
+      "name": "diagnostic-v2",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8966144",
+          "memory.peak": "9334784",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 31389\nuser_usec 23407\nsystem_usec 7982\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "9764864",
+          "memory.peak": "526491648",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 8154941\nuser_usec 7536035\nsystem_usec 618906\ncore_sched.force_idle_usec 0\nnr_periods 80\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=126976 rios=0 wios=31 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1363\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1363",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=187\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=187"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1367\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1367",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=204\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=204"
+        },
+        "initial_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1219, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1196, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.141591225983575,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1219, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.8839615664650093,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 41914.91123532433,
+        "sampling_interval_s": 0.25
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51144503296,
+        "data_free_bytes": 1383518429184,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "c30db3dbbe6f66d31e898c8d538b34971aa4a409c09946d7922314ccc9094dc8",
+          "peak_mib": 623.390625
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 6.769672537979204,
+      "name": "diagnostic-cli",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "9060352",
+          "memory.peak": "9433088",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 22254\nuser_usec 19152\nsystem_usec 3102\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "8802304",
+          "memory.peak": "458625024",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 6767983\nuser_usec 6129419\nsystem_usec 638564\ncore_sched.force_idle_usec 0\nnr_periods 65\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4096 rios=0 wios=1 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=106496 rios=0 wios=26 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=8\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=8",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2660\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2660",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2553\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2553"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2690\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2690",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2587"
+        },
+        "initial_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1219, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1219, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.26931637595407665,
+            "devices": [
+              "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab, 1219, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.8903825463824107,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 40510.85039377141,
+        "sampling_interval_s": 0.25
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51164237824,
+        "data_free_bytes": 1383517396992,
+        "desktop_reserve_bytes": 8589934592
+      }
+    }
+  ],
+  "next_equivalent_memory_gib": 8,
+  "acquisition_wall_s": 83.87809205299709,
+  "acquisition_peak_mib": 623.390625,
+  "diagnostic_wall_s": 21.46684741298668,
+  "interruption": "First wrapper intentionally stopped after the CG evidence-consistency failures; all four native children exited 0. Final independent profile resumed unchanged after diagnosis."
+}

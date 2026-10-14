@@ -138,3 +138,43 @@ class AppleAdmissionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "changed during"):
                 rescore_record(self.root, "superdex", expected_profile=profile,
                                expected_source=observation["source_sha256"], runtime=observation["runtime"])
+
+
+class OfficialMetadataRetryTests(unittest.TestCase):
+    def test_transient_tls_eof_recovers_with_fresh_response(self):
+        import io
+        import ssl
+        from urllib.error import URLError
+        from dexlab.apple_admission import official_json
+        with patch('urllib.request.urlopen', side_effect=[URLError(ssl.SSLEOFError('EOF')),
+                   io.BytesIO(b'{"fresh": true}')]) as fetch, patch('time.sleep') as sleep:
+            self.assertEqual(official_json('https://pypi.org/pypi/mujoco/json'), {'fresh': True})
+            self.assertEqual(fetch.call_count, 2)
+            sleep.assert_called_once_with(1)
+
+    def test_exhausted_transport_failure_still_blocks_qualification(self):
+        from urllib.error import URLError
+        from dexlab.apple_admission import official_json
+        with patch('urllib.request.urlopen', side_effect=URLError('offline')) as fetch, patch('time.sleep') as sleep:
+            with self.assertRaises(URLError):
+                official_json('https://pypi.org/pypi/mujoco/json')
+            self.assertEqual(fetch.call_count, 3)
+            self.assertEqual(sleep.call_count, 2)
+
+    def test_server_rejection_certificate_error_and_invalid_json_not_retried(self):
+        import io
+        import ssl
+        from urllib.error import HTTPError, URLError
+        from dexlab.apple_admission import official_json
+        for error in (HTTPError('https://pypi.org', 429, 'rate limit', {}, None),
+                      URLError(ssl.SSLCertVerificationError('untrusted certificate'))):
+            with self.subTest(error=error), patch('urllib.request.urlopen', side_effect=error) as fetch, patch('time.sleep') as sleep:
+                with self.assertRaises(type(error)):
+                    official_json('https://pypi.org/pypi/mujoco/json')
+                self.assertEqual(fetch.call_count, 1)
+                sleep.assert_not_called()
+        with patch('urllib.request.urlopen', return_value=io.BytesIO(b'not json')) as fetch, patch('time.sleep') as sleep:
+            with self.assertRaises(json.JSONDecodeError):
+                official_json('https://pypi.org/pypi/mujoco/json')
+            self.assertEqual(fetch.call_count, 1)
+            sleep.assert_not_called()

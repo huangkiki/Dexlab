@@ -1,0 +1,152 @@
+{
+  "profile": "kamino-padmm",
+  "positive_passed": 1,
+  "positive_total": 9,
+  "protocol_sha256": "f6b42e478a2f48d0abb3cd479f082257e5c99e10e2f0640bffd41f0213be2a95",
+  "raw_score": {
+    "path": "docs/evidence/newton-incline/raw-scores/kamino-padmm.json",
+    "sha256": "52ead9d677aff5959b41430a5de9f07868d0f238903fc76afeabb75ffdfa0e3d"
+  },
+  "representation": "Only field names normalized for the existing coverage inventory; no thresholds or verdicts changed",
+  "results": [
+    {
+      "passed": false,
+      "id": "static-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "static-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 1.7982774663275955e-06,
+        "static_speed_m_s": 3.757909370505352e-07,
+        "sliding_velocity_rmse_m_s": 5.389964374161787e-10,
+        "sliding_position_rmse_m": 4.552250224146834e-07,
+        "acceleration_error_m_s2": 4.40788082994442e-11,
+        "rotation_rad": 0.0,
+        "penetration_m": 4.844121036622181e-07,
+        "force_balance_rmse_n": 1.4544904491621314e-07
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "static_displacement_m": true,
+        "static_speed_m_s": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 4.40788082994442e-11,
+      "full_velocity_rmse_m_s": 3.743127732220785e-07,
+      "full_position_rmse_m": 1.0380413566801526e-06,
+      "impulse_residual_max_ns": 4.299775634668899e-11,
+      "id": "static-h0.0005",
+      "record_valid": true,
+      "expected_negative": false
+    },
+    {
+      "passed": false,
+      "id": "sliding-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "sliding-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "sliding-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "frictionless-h0.002",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "frictionless-h0.001",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "id": "frictionless-h0.0005",
+      "record_valid": false,
+      "expected_negative": false,
+      "failure": "ValueError: Incorrect unit quaternions",
+      "checks": {
+        "record_consistency": false
+      }
+    },
+    {
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 5.080621817856192,
+        "static_speed_m_s": 5.078069868431341,
+        "sliding_velocity_rmse_m_s": 2.199266942416197,
+        "sliding_position_rmse_m": 1.2791478620395766,
+        "acceleration_error_m_s2": 2.5390788643586495,
+        "rotation_rad": 0.0,
+        "penetration_m": 0.0,
+        "force_balance_rmse_n": 0.6278400000000001
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.5390788643586495,
+      "full_velocity_rmse_m_s": 2.9322063572952994,
+      "full_position_rmse_m": 2.273254791165008,
+      "impulse_residual_max_ns": 3.238281250008551e-08,
+      "negative_rejected": true,
+      "id": "negative-no-floor",
+      "record_valid": true,
+      "expected_negative": true
+    }
+  ]
+}

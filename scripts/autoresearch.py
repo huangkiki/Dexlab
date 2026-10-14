@@ -322,6 +322,7 @@ def check(worktree, resource_dir=None):
         raise ValueError("Candidate submission requires DEXLAB_QUALIFICATION_WHEELS")
     run(
         python,
+        "-I",
         "-c",
         "from pathlib import Path; import dexlab; "
         "assert Path(dexlab.__file__).resolve().is_relative_to(Path.cwd().resolve()), "
@@ -391,18 +392,68 @@ def check(worktree, resource_dir=None):
     return result
 
 
-def submit(number, summary_file, check_remote_at=None, remote_state=None):
-    worktree = ROOT / ".autoresearch/worktrees" / f"issue-{number}"
-    branch = f"autoresearch/issue-{number}"
-    if not worktree.is_dir():
-        raise SystemExit("Run start first")
+def submission_pull(number, branch, existing_pr):
+    """Resolve one same-repository PR without implicitly claiming another head."""
+    pulls = gh_json(
+        "pr", "list", "--state", "open", "--limit", "1000", "--json",
+        "number,url,state,body,closingIssuesReferences,baseRefName,headRefName,"
+        "headRefOid,isCrossRepository,headRepository,headRepositoryOwner",
+    )
+    related = [pull for pull in pulls
+               if number in linked_issues(pull) or pull["headRefName"] == branch]
+    if len(related) > 1:
+        raise SystemExit("Multiple PRs claim this issue or branch; resolve the ambiguity first")
+    pull = related[0] if related else None
+    if existing_pr is not None and (pull is None or pull["number"] != existing_pr):
+        raise SystemExit("The requested existing PR does not own this issue and branch")
+    if pull is not None:
+        owner = (pull.get("headRepositoryOwner") or {}).get("login", "")
+        repository = (pull.get("headRepository") or {}).get("name", "")
+        if (pull["state"] != "OPEN" or pull["baseRefName"] != "main"
+                or pull["headRefName"] != branch or number not in linked_issues(pull)
+                or pull.get("isCrossRepository") is not False
+                or f"{owner}/{repository}".lower() != REPO.lower()):
+            raise SystemExit("Existing PR repository, base, branch or issue identity differs")
+    return pull
+
+
+def submission_checkout(worktree, branch, pull, *, clean):
+    """Validate the publication destination and the exact recovery commit."""
     if run("git", "branch", "--show-current", cwd=worktree, capture=True) != branch:
         raise SystemExit("Refusing to submit from a different branch")
+    allowed = {f"git@github.com:{REPO}", f"https://github.com/{REPO}",
+               f"ssh://git@github.com/{REPO}"}
+    for options in ((), ("--push",)):
+        urls = run("git", "remote", "get-url", *options, "--all", "origin",
+                   cwd=worktree, capture=True).splitlines()
+        if len(urls) != 1 or urls[0].removesuffix(".git").lower() not in {
+                url.lower() for url in allowed}:
+            raise SystemExit("Origin must fetch and push only the declared repository")
+    if clean and run("git", "status", "--porcelain", "--untracked-files=all",
+                     cwd=worktree, capture=True):
+        raise SystemExit("Existing-PR recovery requires a clean, reviewed commit; preserve dirty work")
+    head = run("git", "rev-parse", "HEAD", cwd=worktree, capture=True)
+    if pull is not None:
+        try:
+            run("git", "merge-base", "--is-ancestor", pull["headRefOid"], head, cwd=worktree)
+        except subprocess.CalledProcessError as error:
+            raise SystemExit("Local head does not contain the existing PR head") from error
+    return head
+
+
+def submit(number, summary_file, check_remote_at=None, remote_state=None, *, existing_pr=None):
+    worktree = ROOT / ".autoresearch/worktrees" / f"issue-{number}"
+    if not worktree.is_dir():
+        raise SystemExit("Run start first, or restore the existing issue worktree")
+    branch = (run("git", "branch", "--show-current", cwd=worktree, capture=True)
+              if existing_pr is not None else f"autoresearch/issue-{number}")
     # Read review text before expensive verification or any mutation.
     summary = Path(summary_file).read_text().strip()
     if not summary:
         raise SystemExit("Provide a concrete implementation and validation summary")
     issue = authorized_issue(number)
+    pull = submission_pull(number, branch, existing_pr)
+    validated_head = submission_checkout(worktree, branch, pull, clean=existing_pr is not None)
     validated_tree = source_tree(worktree)
     if check_remote_at:
         check_remote(worktree, check_remote_at, remote_state)
@@ -411,6 +462,13 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None):
     if source_tree(worktree) != validated_tree:
         raise SystemExit("Source changed during verification; rerun the gate")
     issue = authorized_issue(number)  # Approval can be withdrawn during a long gate.
+    current_pull = submission_pull(number, branch, existing_pr)
+    identity = lambda p: None if p is None else (p["number"], p["headRefOid"])
+    if identity(current_pull) != identity(pull):
+        raise SystemExit("PR changed during verification; inspect it before publishing")
+    if submission_checkout(worktree, branch, current_pull,
+                           clean=existing_pr is not None) != validated_head:
+        raise SystemExit("Local commit changed during verification; rerun the gate")
     run("git", "add", "-A", cwd=worktree)
     staged = run("git", "diff", "--cached", "--name-only", cwd=worktree, capture=True)
     if run("git", "write-tree", cwd=worktree, capture=True) != validated_tree:
@@ -441,44 +499,32 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None):
         summary
         + f"\n\nValidation: unit tests and full MuJoCo/SuperDex 14 s SDF acceptance.\n\nRefs #{number}\n"
     )
-    existing = gh_json(
-        "pr", "list", "--head", branch, "--state", "open", "--json", "number,url"
-    )
-    if existing:
+    if pull is not None:
         run(
             "gh",
             "pr",
             "edit",
-            str(existing[0]["number"]),
+            str(pull["number"]),
             "--repo",
             REPO,
             "--body-file",
             "-",
             input=body,
         )
-        url = existing[0]["url"]
+        url = pull["url"]
     else:
-        url = run(
-            "gh",
-            "pr",
-            "create",
-            "--repo",
-            REPO,
-            "--base",
-            "main",
-            "--head",
-            branch,
-            "--title",
-            issue["title"],
-            "--body-file",
-            "-",
-            input=body,
+        created = json.loads(run(
+            "gh", "api", f"repos/{REPO}/pulls", "--input", "-",
+            input=json.dumps({"base": "main", "head": branch,
+                              "title": issue["title"], "body": body}),
             capture=True,
-        )
-    result = gh_json("pr", "view", url, "--json", "url,state,headRefName,headRefOid")
+        ))
+        url = created["html_url"]
+    result = gh_json("pr", "view", url, "--json", "url,state,baseRefName,headRefName,headRefOid")
     expected = run("git", "rev-parse", "HEAD", cwd=worktree, capture=True)
     if (
         result["state"] != "OPEN"
+        or result["baseRefName"] != "main"
         or result["headRefName"] != branch
         or result["headRefOid"] != expected
     ):
@@ -500,6 +546,8 @@ def main():
     submit_parser.add_argument("--summary-file", required=True, type=Path)
     submit_parser.add_argument("--check-remote", metavar="SSH_ALIAS:/CHECKOUT")
     submit_parser.add_argument("--remote-state", type=Path)
+    submit_parser.add_argument("--existing-pr", type=int,
+                               help="Recover this linked PR from a clean reviewed issue worktree")
     args = parser.parse_args()
     if args.command == "next":
         result = next_issue(explain=args.dry_run)
@@ -515,7 +563,8 @@ def main():
             raise SystemExit("Source changed during verification; rerun the gate")
         result = {"source_tree": before, "checks": "full", **checks}
     else:
-        result = submit(args.issue, args.summary_file, args.check_remote, args.remote_state)
+        result = submit(args.issue, args.summary_file, args.check_remote, args.remote_state,
+                        existing_pr=args.existing_pr)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
 

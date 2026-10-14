@@ -10,6 +10,166 @@ import tempfile
 from pathlib import Path
 
 
+def cpu_contact_address_valid(address, dimension, pyramidal, constraint_count):
+    """Check converted CPU bounds before passing a contact to native C code."""
+    if dimension not in (1, 3, 4, 6) or constraint_count < 0:
+        raise ValueError('Invalid contact dimension or constraint count')
+    if address == -1:
+        return True  # MuJoCo explicitly returns zero for an inactive contact.
+    width = 2 * (dimension - 1) if pyramidal and dimension > 1 else dimension
+    return 0 <= address and address + width <= constraint_count
+
+
+def warp_model_parameters(model):
+    """Read the effective GPU fields used by this rigid-body diagnostic.
+
+    Keep CPU authoring data separate: framework synchronization can overwrite
+    these arrays after put_model. Missing fields fail instead of guessing a
+    version's defaults. This is a scoped readback, not full model serialization.
+    """
+    import numpy as np
+
+    fields = {
+        '': ('body_pos', 'body_quat', 'body_ipos', 'body_iquat', 'body_mass',
+             'body_inertia', 'body_gravcomp', 'body_invweight0', 'qpos0',
+             'dof_armature', 'dof_damping', 'dof_frictionloss',
+             'geom_type', 'geom_bodyid', 'geom_pos', 'geom_quat', 'geom_size',
+             'geom_friction', 'geom_solref', 'geom_solimp', 'geom_margin',
+             'geom_gap', 'geom_condim', 'geom_priority', 'geom_solmix',
+             'geom_contype', 'geom_conaffinity', 'tree_sleep_policy'),
+        'opt': ('timestep', 'tolerance', 'ls_tolerance', 'ccd_tolerance',
+                'sleep_tolerance', 'gravity', 'wind', 'density', 'viscosity',
+                'integrator', 'cone', 'solver', 'iterations', 'ls_iterations',
+                'ccd_iterations', 'disableflags', 'enableflags',
+                'impratio_invsqrt', 'broadphase', 'broadphase_filter',
+                'graph_conditional', 'run_collision_detection'),
+        'stat': ('meaninertia',),
+        'block_dim': ('linesearch_iterative', 'update_gradient_grad',
+                      'update_gradient_cholesky', 'contact_jac_tiled'),
+    }
+    values, dtypes = {}, {}
+    for prefix, names in fields.items():
+        owner = getattr(model, prefix) if prefix else model
+        for name in names:
+            value = getattr(owner, name)
+            array = np.asarray(value.numpy() if hasattr(value, 'numpy') else value)
+            key = f'{prefix}.{name}' if prefix else name
+            if not np.isfinite(array).all():
+                raise ValueError(f'Non-finite GPU parameter: {key}')
+            values[key], dtypes[key] = array.tolist(), str(array.dtype)
+    return {'values': values, 'dtypes': dtypes,
+            'scope': 'Selected effective rigid-body GPU parameters; not all engine state.'}
+
+
+def warp_execution_options():
+    """Record compilation choices separately from mechanical model parameters."""
+    import importlib
+    import warp
+
+    result = {}
+    for name in ('solver', 'forward', 'smooth', 'collision_driver', 'collision_convex'):
+        module = importlib.import_module('mujoco_warp._src.' + name)
+        options = warp.get_module_options(module)
+        result[name] = {
+            key: options.get(key) for key in
+            ('enable_backward', 'fast_math', 'fuse_fp', 'max_unroll',
+             'deterministic_max_records')
+        }
+        result[name]['deterministic'] = str(options.get('deterministic'))
+    return result
+
+
+def conversion_parameters(model):
+    """Read the compiled model, including frames and drives often changed by import.
+
+    This is an initialization readback. A GPU solver can set its own effective
+    timestep later; this snapshot must not be presented as an observed clock.
+    """
+    import mujoco
+    from dexlab.incline_run import native_readback
+
+    data = mujoco.MjData(model)
+    mujoco.mj_forward(model, data)
+    values = native_readback(model, data)
+    for name in (
+        'body_pos', 'body_quat', 'qpos0', 'jnt_type', 'jnt_bodyid', 'jnt_pos',
+        'jnt_axis', 'jnt_range', 'jnt_limited', 'jnt_stiffness',
+        'actuator_trntype', 'actuator_trnid', 'actuator_dyntype',
+        'actuator_gaintype', 'actuator_biastype', 'actuator_dynprm',
+        'actuator_gainprm', 'actuator_biasprm', 'actuator_gear',
+        'actuator_ctrlrange', 'actuator_forcerange',
+    ):
+        values[name] = getattr(model, name).tolist()
+    return values
+
+
+def parameter_differences(before, after):
+    """Report exact structural changes and absolute errors; apply no tolerance.
+
+    A missing field or changed shape must never masquerade as a zero error.
+    Physical acceptance and unit-specific limits belong to the frozen protocol.
+    """
+    import numpy as np
+
+    if before.keys() != after.keys():
+        raise ValueError('Parameter fields differ')
+    differences = {}
+    for name, original in before.items():
+        a, b = np.asarray(original), np.asarray(after[name])
+        if a.shape != b.shape:
+            differences[name] = {'shape_before': list(a.shape), 'shape_after': list(b.shape),
+                                 'max_abs': None, 'equal': False}
+            continue
+        if not np.isfinite(a).all() or not np.isfinite(b).all():
+            raise ValueError(f'Non-finite parameter: {name}')
+        differences[name] = {
+            'equal': bool(np.array_equal(a, b)),
+            'max_abs': float(np.max(np.abs(a.astype(float) - b.astype(float)), initial=0.)),
+        }
+    return differences
+
+
+def save_conversion_evidence(model, directory, *, intermediate):
+    """Preserve the in-memory model and quantify a framework's MJCF export loss.
+
+    The caller preserves and hashes input assets and conversion sources. Use the
+    framework's own intermediate MJCF; MjSpec-built models cannot be exported
+    with mj_saveLastXML. Refuse to overwrite any earlier evidence.
+    """
+    import mujoco
+
+    directory, intermediate = Path(directory), Path(intermediate)
+    binary, receipt = directory / 'model.mjb', directory / 'conversion-readback.json'
+    if binary.exists() or receipt.exists():
+        raise FileExistsError('Preserve earlier conversion evidence')
+    before = conversion_parameters(model)
+    # Reserve the path before the native writer opens it.
+    with binary.open('xb'):
+        pass
+    mujoco.mj_saveModel(model, str(binary), None)
+    restored = conversion_parameters(mujoco.MjModel.from_binary_path(str(binary)))
+    binary_diff = parameter_differences(before, restored)
+    if not all(row['equal'] for row in binary_diff.values()):
+        raise ValueError('Binary model readback changed during save/reload')
+    exported = conversion_parameters(mujoco.MjModel.from_xml_path(str(intermediate)))
+    values = {
+        'schema_version': 1,
+        'epoch': 'initialization; effective GPU timestep must be observed at step',
+        'compiled': before,
+        'binary_readback_exact': True,
+        'intermediate_readback': exported,
+        'intermediate_differences': parameter_differences(before, exported),
+        'sha256': {
+            'model.mjb': hashlib.sha256(binary.read_bytes()).hexdigest(),
+            'intermediate_mjcf': hashlib.sha256(intermediate.read_bytes()).hexdigest(),
+        },
+    }
+    with receipt.open('x') as stream:
+        json.dump(values, stream, indent=2, allow_nan=False)
+        stream.write('\n')
+    return values
+
+
 def model_inputs(directory: Path) -> list[Path]:
     raw = directory / "model.mjb"
     if raw.exists():

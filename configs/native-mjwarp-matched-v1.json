@@ -1,0 +1,49 @@
+{
+  "device": "cuda:0",
+  "steps": 200,
+  "dt_s": 0.001,
+  "use_cuda_graph": true,
+  "gravity_m_s2": 9.81,
+  "limits": {
+    "clock_s": 1e-06,
+    "dt_s": 1e-10,
+    "momentum_Ns": 1e-07,
+    "force_N": 1e-05,
+    "velocity_m_s": 1e-06,
+    "freefall_m": 0.002,
+    "support_m": 0.01
+  },
+  "native_payload_sha256": {
+    "libmujoco.so.3.11.0": "7b47f06aa840d4f8fa3c66c2027d52de570bac6d11b9ddd19d55ae1469d40e22",
+    "warp.so": "4502f1ed3f92030c552cff529341e5a0777750fe65ecea8762d7935185673617"
+  },
+  "schema_version": 1,
+  "scope": "Development native matched-core diagnostic; no full task or holdout acceptance.",
+  "versions": {
+    "mujoco": "3.11.0",
+    "mujoco_warp": "3.11.0",
+    "warp": "1.16.0"
+  },
+  "nconmax": 200,
+  "njmax": 1200,
+  "sleep_policy_projection": "official-newton-1.5-runtime-policy",
+  "frozen_before_native_physics": true,
+  "cases": [
+    {
+      "id": "mjwarp-support",
+      "no_floor": false,
+      "source_sha256": {
+        "model.mjb": "ad3e5d84176def8189083cff36055431fb45d3fe12a4a2fdd9b35a5a6b8e595c",
+        "conversion-readback.json": "ef09cd2b99f76d5d62f053edbd50e2f246d8ff4f2cad02329087d5fda130050a"
+      }
+    },
+    {
+      "id": "mjwarp-no-floor",
+      "no_floor": true,
+      "source_sha256": {
+        "model.mjb": "1a372e70a7c559128dad886e55625bf4d779c3953600955a2613af48cb0f673b",
+        "conversion-readback.json": "2f38fea652c3f1a7664656c4dd5f4791a7611f1b659fc9254d2bd11caaaf9bf3"
+      }
+    }
+  ]
+}

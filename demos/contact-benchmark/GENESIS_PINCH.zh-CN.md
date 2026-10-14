@@ -1,5 +1,7 @@
 # Genesis 基础几何夹持与释放
 
+当前入口更新：`dexlab.genesis_pinch_probe` 已使用明确披露的公共接触适配接口；按[迁移报告](../../docs/unisim-contact-migration.zh-CN.md)准备独立补丁环境。本报告历史测量属于归档原生源码和计时模式；运行当前入口不能复现历史成本。显式原生对照参考为 `scripts/references/genesis_pinch_native.py`。
+
 [English](GENESIS_PINCH.md)
 
 **开发工况通过当前判据，但不是完整后端资格。** 官方 Genesis 1.4.3、CPU FP64、椭圆摩擦锥、0.5 ms 步长下，动态三关节夹具夹起自由方块并释放。两次重置轨迹完全一致；两次张指负对照始终留桌。这不是成功率统计、苹果梗 SDF、GPU 或真机结果。

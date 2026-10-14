@@ -1,0 +1,157 @@
+{
+  "state": [
+    0.0,
+    0.005176380902050415,
+    0.0,
+    0.019318516525781367,
+    0.9914448613738105,
+    0.0,
+    0.1305261922200516,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "timestep": 0.001,
+  "solver": "kSap",
+  "approximation": "kLagged",
+  "contact_model": "kHydroelastic",
+  "sampled_output": true,
+  "near_rigid_threshold": 1.0,
+  "gravity": [
+    0.0,
+    0.0,
+    -9.81
+  ],
+  "mass": 0.064,
+  "com": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "inertia": [
+    [
+      1.7066666666666667e-05,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.7066666666666667e-05,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.7066666666666667e-05
+    ]
+  ],
+  "cube_dimensions": [
+    0.04,
+    0.04,
+    0.04
+  ],
+  "cube_pose_in_body": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "plane_pose_in_world": [
+    [
+      0.9659258262890683,
+      0.0,
+      0.25881904510252074,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      -0.25881904510252074,
+      0.0,
+      0.9659258262890683,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "cube_properties": {
+    "material": {
+      "coulomb_friction": {
+        "static": 0.5,
+        "dynamic": 0.5
+      },
+      "hunt_crossley_dissipation": 0.0
+    },
+    "hydroelastic": {
+      "compliance_type": {
+        "native_readback": null,
+        "reason": "HydroelasticType has no Python value binding"
+      },
+      "resolution_hint": 0.01
+    },
+    "__default__": {}
+  },
+  "plane_properties": {
+    "material": {
+      "coulomb_friction": {
+        "static": 0.5,
+        "dynamic": 0.5
+      },
+      "hunt_crossley_dissipation": 0.0
+    },
+    "hydroelastic": {
+      "compliance_type": {
+        "native_readback": null,
+        "reason": "HydroelasticType has no Python value binding"
+      },
+      "hydroelastic_modulus": 100000000.0,
+      "slab_thickness": 0.1
+    },
+    "__default__": {}
+  },
+  "combined_friction_api": {
+    "static": 0.5,
+    "dynamic": 0.5
+  },
+  "stiction_tolerance": {
+    "authored": 0.0001,
+    "native_readback": null,
+    "reason": "No public pydrake getter in the qualified release"
+  },
+  "solver_statistics": null,
+  "solver_statistics_reason": "No public per-step SAP statistics/parameter getter",
+  "num_positions": 7,
+  "num_velocities": 6
+}

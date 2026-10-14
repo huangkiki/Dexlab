@@ -35,7 +35,7 @@ Runner exit 0 means complete recording; the separate scorer decides acceptance. 
 |---|---|
 | Object | Apple and stem form one free 0.2 kg body; no bending or fracture |
 | Collision | Native SDF resolution 256, subgrid 6; source surfaces are resampled, not identical discrete SDFs across engines |
-| Integration/solver | 1 ms, TGS 8 position / 2 velocity iterations, external forces every position iteration |
+| Integration/solver | 1 ms, reported TGS profile with 8/2 iteration settings and per-iteration external forces; [solver-name readback absent, audit #126](../../docs/physx-solver-audit.md) |
 | Material/offsets | Static/dynamic friction 1.0; contact offset 0.1 mm, rest offset zero; engineering settings, not calibrated material |
 | Torsion | Explicit 1 mm minimum torsional patch radius on scene colliders, through the official PhysX property |
 | Drives | Compiled source inertia/gains and target-velocity compensation; no claim of calibrated hardware motor/effort limits |

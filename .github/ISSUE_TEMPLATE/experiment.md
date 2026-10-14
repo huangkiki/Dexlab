@@ -8,6 +8,11 @@ assignees: ''
 
 ## Problem and evidence / 问题与证据
 
+## Uncertainty and public impact / 不确定项与公开影响
+
+<!-- Exact claim/artifact + version, unresolved question, known evidence, affected interpretation, verification route and recovery condition. Reuse existing Issues first. README/site ambiguity defaults to P0 before new capability work; label and dependency checks still apply. A wording edit or Issue link is not technical closure. -->
+<!-- 写明表述/产物与版本、待回答问题、已知证据、解释影响、核验和恢复条件；先复用已有 Issue。README/首页歧义默认 P0，优先于新增能力，但仍须核验标签与依赖。改措辞或挂链接不算技术解决。 -->
+
 ## Deliverable and exclusions / 交付与范围外内容
 
 ## Acceptance and commands / 验收与命令

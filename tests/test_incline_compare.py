@@ -1,5 +1,6 @@
 """Reject mismatched observations; synthetic traces are not engine evidence."""
 import itertools
+import copy
 import json
 import tempfile
 from unittest.mock import patch
@@ -8,7 +9,8 @@ import unittest
 
 import numpy as np
 
-from dexlab.incline_compare_score import score_superdex, validate_admission, geometric_penetration, compare
+from dexlab.incline_compare_score import score_superdex, validate_admission, geometric_penetration, compare, validate_contact_ledger
+from dexlab.incline_compare_run import run_case
 from dexlab.incline_score import score, file_hash
 from test_incline import ideal_trace
 
@@ -45,6 +47,56 @@ def superdex_trace(case):
 
 
 class ComparisonTests(unittest.TestCase):
+    def test_full_solver_override_or_frame_change_fails_admission(self):
+        case = PROTOCOL['cases'][0]
+        expected = {'non_linear_solver': {'solver_type': {'name': 'NEWTON', 'value': 0}}}
+        protocol = PROTOCOL | dict(solver_profile={}, effective_solver_expected=expected)
+        record = admission(case) | dict(effective_solver=copy.deepcopy(expected),
+            box_com_local=[0, 0, 0], box_dofs=6, plane_dofs=0, contact_pair_disabled_command=False)
+        validate_admission(protocol, case, record)
+        for mutate in [lambda r: r['effective_solver']['non_linear_solver']['solver_type'].update(name='BFGS'),
+                       lambda r: r.update(box_com_local=[.001, 0, 0]),
+                       lambda r: r.update(contact_pair_disabled_command=True),
+                       lambda r: r.update(plane_dofs=6)]:
+            changed = copy.deepcopy(record); mutate(changed)
+            with self.assertRaises(ValueError):
+                validate_admission(protocol, case, changed)
+
+    def test_contact_ownership_and_missing_force_are_rejected(self):
+        trace = dict(forces=np.array([[0, 0, 2.]]), contact_count=np.array([1]),
+            contact_distance=np.array([0.]), contact_torques=np.array([[0, -.2, 0]]),
+            states=np.array([[0.]*14, [0.]*14]))
+        point = dict(force_on_box=[0, 0, 2.], box_is_actor_a=True, normal_native=[0, 0, 1],
+                     point_a=[.1, 0, 0], point_b=[0, 0, 0], velocity_a=[0]*3, velocity_b=[0]*3, distance=0.)
+        stats = [dict(max_non_linear_iters=2, max_line_search_iters=1, residual_norm=1e-10)]
+        validate_contact_ledger(trace, [[point]], stats)
+        for ledger in [[], [[]], [[point | dict(box_is_actor_a=False)]], [[point | dict(force_on_box=[0, 0, 0])]]]:
+            with self.assertRaises(ValueError):
+                validate_contact_ledger(trace, ledger, stats)
+
+    def test_interrupted_acquisition_keeps_only_completed_steps(self):
+        class Interrupted:
+            step_timing = dict(native_call_seconds=0., observation_seconds=0.)
+            def __init__(self, *args, **kwargs): self.calls = 0
+            def step(self):
+                self.calls += 1
+                if self.calls == 2: raise SystemExit('test interruption')
+                return np.array([0, 0, .02, 1, 0, 0, 0]), np.zeros(6), np.zeros(3), [], True, 'CONVERGED'
+            def clock(self): return .002
+            def close(self): pass
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)/'case'
+            initial = dict(pose=[0, 0, .02, 1, 0, 0, 0], velocity=[0]*6)
+            with patch('dexlab.incline_compare_run.SuperDexPlane', Interrupted), patch('dexlab.incline_compare_run.admit', return_value=initial):
+                with self.assertRaises(SystemExit):
+                    run_case(PROTOCOL, PROTOCOL['cases'][0], folder)
+            done = json.loads((folder/'completion.json').read_text())
+            self.assertEqual(done['completed_steps'], 1)
+            self.assertEqual(done['error']['type'], 'SystemExit')
+            with np.load(folder/'trace.npz') as trace:
+                self.assertEqual(trace['states'].shape, (2, 14))
+                self.assertEqual(trace['forces'].shape, (1, 3))
+
     def test_same_motion_same_metrics_without_fake_friction(self):
         for case in PROTOCOL['cases']:
             validate_admission(PROTOCOL, case, admission(case))

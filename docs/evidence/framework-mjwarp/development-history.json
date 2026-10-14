@@ -1,0 +1,295 @@
+{
+  "started_utc": "2026-10-10T02:45:43.398788+00:00",
+  "budget_hours": 6,
+  "max_native_starts": 64,
+  "native_starts": 33,
+  "recorded_physics_updates": 4400,
+  "entries": [
+    {
+      "id": "isaac-probe-v1",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Torch libc10_cuda.so required cudaGetDriverEntryPointByVersion absent in selected libcudart.so.12; no physics. Bounded service ended, receipt retained."
+    },
+    {
+      "id": "isaac-probe-v2",
+      "state": "failed-cleanup",
+      "physics_duration_s": 0,
+      "failure": "Imports and switch completed; systemd stop-sigterm timeout killed owned omni.telemetry transmitter after main exited0. Zero physics. Do not treat overall exit as pass."
+    },
+    {
+      "id": "isaac-probe-v3",
+      "state": "completed-zero-duration",
+      "physics_duration_s": 0,
+      "cleanup": "clean service exit0; all limits enforced"
+    },
+    {
+      "id": "isaac-probe-v4",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Native std::system_error Resource temporarily unavailable during close; pids.events max1. No input asset or conversion report produced. 128-task cap reached; first Python exception obscured by shutdown."
+    },
+    {
+      "id": "isaac-probe-v5",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Captured Python AttributeError: resolver map contains string identifiers, not schema classes. Native stage cleanup then hit128-task cap; four-CPU affinity alone does not avoid that cleanup failure."
+    },
+    {
+      "id": "isaac-probe-v6",
+      "state": "failed",
+      "physics_duration_s": 0,
+      "failure": "Official Newton model.finalize / Warp GPU allocation aborted with std::system_error; pids.events max2 at128, no memory pressure. Input USD retained; no converted model or positive-duration physics."
+    },
+    {
+      "id": "isaac-probe-v7",
+      "state": "failed-export-api",
+      "physics_duration_s": 0,
+      "failure": "Official USD->Newton->MJWarp constructor completed with0 time/steps and exported intermediateMJCF. mj_saveLastXML rejects MjSpec-compiled models (No XML model loaded). 256-task envelope peak138/no PID events, memory6.249GiB; no physics. Nativeconverted.xml retained."
+    },
+    {
+      "id": "isaac-probe-v8",
+      "state": "failed-recorder-api",
+      "physics_duration_s": 0,
+      "failure": "MJB, sourceUSD and convertedMJCF saved; zero native time assertions passed. Recorder referenced nonexistentData.nconmax; official3.11 exposes naconmax shared across worlds, separately from per-world requested nconmax."
+    },
+    {
+      "id": "isaac-probe-v9",
+      "state": "failed-recorder-api",
+      "physics_duration_s": 0,
+      "failure": "Zero-time model and capacity reads succeeded; recorder requestedpublic use_mujoco_contacts but officialversion stores it as _use_mujoco_contacts. Readsourcepinnedfield explicitly; no physical configchange."
+    },
+    {
+      "id": "isaac-probe-v10",
+      "state": "completed-zero-duration",
+      "physics_duration_s": 0
+    },
+    {
+      "id": "clock-newton-support-v1",
+      "case": "newton-support",
+      "state": "completed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 44.035932302474976
+    },
+    {
+      "id": "clock-newton-no-floor-v1",
+      "case": "newton-no-floor",
+      "state": "failed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 15.327686309814453
+    },
+    {
+      "id": "clock-mjwarp-support-v1",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 57.47299122810364
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v1",
+      "case": "mjwarp-no-floor",
+      "state": "failed",
+      "protocol_sha256": "a30c430cfb1f7279818292cbb8e98aae4f9184944898ad56ca25dbffeb24b7ab",
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 20.317936182022095
+    },
+    {
+      "id": "clock-newton-no-floor-v2",
+      "case": "newton-no-floor",
+      "state": "failed",
+      "protocol_sha256": "872d0f66311a63868dc8f1f98d8d47e7aad00adbce6f063925a5048175588d51",
+      "physics_updates": 200,
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 122.32085227966309
+    },
+    {
+      "id": "clock-newton-no-floor-v3",
+      "case": "newton-no-floor",
+      "state": "failed",
+      "protocol_sha256": "50bc9adb589b5052189f8153d296d7234ed6ece97de8aa2b5f8f700ce5e62e1b",
+      "physics_updates": 200,
+      "exit_code": 1,
+      "observed_steps": 200,
+      "elapsed_s": 20.553496599197388
+    },
+    {
+      "id": "clock-newton-support-v4",
+      "case": "newton-support",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 45.553327560424805
+    },
+    {
+      "id": "clock-newton-no-floor-v4",
+      "case": "newton-no-floor",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 43.442230224609375
+    },
+    {
+      "id": "clock-mjwarp-support-v4",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 40.865132093429565
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v4",
+      "case": "mjwarp-no-floor",
+      "state": "completed",
+      "protocol_sha256": "9fb55f898f1321997aaf2c09ed52db9fce3e1e4507ff35ee1305e6a73043041c",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 41.046528816223145
+    },
+    {
+      "id": "clock-mjwarp-support-v5",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "65e05cb545eefe496305f2e3d643a29e176b1d39c28cd2bd0def00bd72f90245",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 44.88513112068176
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v5",
+      "case": "mjwarp-no-floor",
+      "state": "completed",
+      "protocol_sha256": "65e05cb545eefe496305f2e3d643a29e176b1d39c28cd2bd0def00bd72f90245",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 40.576475620269775
+    },
+    {
+      "id": "clock-mjwarp-support-v6",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 42.295735359191895
+    },
+    {
+      "id": "clock-mjwarp-no-floor-v6",
+      "case": "mjwarp-no-floor",
+      "state": "completed",
+      "protocol_sha256": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 43.48995232582092
+    },
+    {
+      "id": "clock-newton-support-v6",
+      "case": "newton-support",
+      "state": "completed",
+      "protocol_sha256": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 40.28868579864502
+    },
+    {
+      "id": "clock-newton-no-floor-v6",
+      "case": "newton-no-floor",
+      "state": "completed",
+      "protocol_sha256": "338d5ee3983d645aeef5010020e7c57ac26b0d7de87b0cc9c59d36f058a6a7aa",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 39.87275695800781
+    },
+    {
+      "id": "native-mjwarp-support-v1",
+      "case": "mjwarp-support",
+      "state": "failed",
+      "protocol_sha256": "0d080a5c539f2654c6c2b244d10ee6959029434e50bbbeeaa60159fd0d0f93d9",
+      "physics_updates": 0,
+      "exit_code": 1,
+      "observed_steps": 0,
+      "elapsed_s": 3.231501817703247
+    },
+    {
+      "id": "native-mjwarp-support-v2",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "0d080a5c539f2654c6c2b244d10ee6959029434e50bbbeeaa60159fd0d0f93d9",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 40.03519892692566
+    },
+    {
+      "id": "native-mjwarp-no-floor-v1",
+      "case": "mjwarp-no-floor",
+      "state": "completed",
+      "protocol_sha256": "0d080a5c539f2654c6c2b244d10ee6959029434e50bbbeeaa60159fd0d0f93d9",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 3.2452924251556396
+    },
+    {
+      "id": "native-mjwarp-support-aligned-v1",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 3.4586586952209473
+    },
+    {
+      "id": "native-mjwarp-no-floor-aligned-v1",
+      "case": "mjwarp-no-floor",
+      "state": "completed",
+      "protocol_sha256": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 3.2497284412384033
+    },
+    {
+      "id": "native-mjwarp-support-aligned-repeat2",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 3.4439539909362793
+    },
+    {
+      "id": "native-mjwarp-support-aligned-repeat3",
+      "case": "mjwarp-support",
+      "state": "completed",
+      "protocol_sha256": "e60e3e76bbd589af248145f67691b49bddb5212d2d510f1c64d7c6b444119de6",
+      "physics_updates": 200,
+      "exit_code": 0,
+      "observed_steps": 200,
+      "elapsed_s": 3.5878164768218994
+    }
+  ],
+  "note": "All originals retained. v5 stopped after two completed cases when invalid CPU reads were found. v6 guards the reads. Missing-packaging native start has zero updates; later success does not replace it."
+}

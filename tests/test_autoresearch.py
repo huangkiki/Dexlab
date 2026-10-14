@@ -27,6 +27,24 @@ def issue(number, state="OPEN", labels=("auto:approved", "priority:P1"),
 
 
 class QueueTest(unittest.TestCase):
+    def test_pythonpath_cannot_disguise_an_editable_install_in_another_checkout(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'dexlab').mkdir()
+            (root / 'dexlab/__init__.py').write_text('')
+
+            def preflight(*command, **kwargs):
+                if command[0] != sys.executable:
+                    self.fail('Wrong installed checkout reached the expensive gate')
+                return subprocess.run(command, cwd=kwargs['cwd'], check=True, capture_output=True)
+
+            environment = {'SUPERDEX_PYTHON': sys.executable, 'PYTHONPATH': directory,
+                           'DEXLAB_MUJOCO_PROFILE': 'historical-3.11.0'}
+            with patch.dict('os.environ', environment, clear=True), \
+                    patch.object(module, 'run', side_effect=preflight), \
+                    self.assertRaises(subprocess.CalledProcessError):
+                module.check(root)
+
     def test_only_opted_in_and_unclaimed_issues(self):
         issues = [
             issue(1, labels=()),
@@ -167,73 +185,243 @@ class QueueTest(unittest.TestCase):
 
 
 class SubmissionTest(unittest.TestCase):
-    def test_failed_verification_prevents_commit_and_push(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            (root / ".autoresearch/worktrees/issue-1").mkdir(parents=True)
-            summary = root / "review.md"
-            summary.write_text("Concrete change and validation evidence")
-            with (
-                patch.object(module, "ROOT", root),
-                patch.object(module, "source_tree", return_value="a" * 40),
-                patch.object(module, "authorized_issue", return_value=issue(1)),
-                patch.object(
-                    module, "run", return_value="autoresearch/issue-1"
-                ) as runner,
-                patch.object(
-                    module,
-                    "check",
-                    side_effect=subprocess.CalledProcessError(1, "physics"),
-                ),
-            ):
-                with self.assertRaises(subprocess.CalledProcessError):
-                    module.submit(1, summary)
-                self.assertEqual(runner.call_count, 1)
-                self.assertEqual(
-                    runner.call_args.args[:3], ("git", "branch", "--show-current")
-                )
+    """Exercise real branch/index/commit behavior while keeping publication offline."""
 
-    def test_failed_remote_verification_prevents_commit_and_push(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            (root / ".autoresearch/worktrees/issue-1").mkdir(parents=True)
-            summary = root / "review.md"
-            summary.write_text("Concrete change and validation evidence")
-            with (
-                patch.object(module, "ROOT", root),
-                patch.object(module, "source_tree", return_value="a" * 40),
-                patch.object(module, "authorized_issue", return_value=issue(1)),
-                patch.object(
-                    module, "run", return_value="autoresearch/issue-1"
-                ) as runner,
-                patch.object(
-                    module,
-                    "check_remote",
-                    side_effect=subprocess.CalledProcessError(1, "physics"),
-                ),
-            ):
-                with self.assertRaises(subprocess.CalledProcessError):
-                    module.submit(1, summary, "worker:/checkout")
-                self.assertEqual(runner.call_count, 1)
-                self.assertEqual(
-                    runner.call_args.args[:3], ("git", "branch", "--show-current")
-                )
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        self.worktree = self.root / ".autoresearch/worktrees/issue-1"
+        self.worktree.mkdir(parents=True)
+        self.git("init", "-q", "-b", "main")
+        self.git("config", "user.name", "Submission Test")
+        self.git("config", "user.email", "submission@example.invalid")
+        self.source = self.worktree / "source.py"
+        self.source.write_text("initial\n")
+        self.git("add", ".")
+        self.git("commit", "-qm", "initial")
+        self.git("remote", "add", "origin", "git@github.com:huangkiki/Dexlab.git")
+        self.git("update-ref", "refs/remotes/origin/main", "HEAD")
+        self.git("checkout", "-qb", "autoresearch/issue-1")
+        self.source.write_text("implementation\n")
+        self.summary = self.root / "review.md"
+        self.summary.write_text("Concrete change and validation evidence")
+        self.pulls = []
+        self.publications = []
+        self.real_run = module.run
+        patcher = patch.object(module, "ROOT", self.root)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        for name, kwargs in (
+            ("authorized_issue", {"return_value": issue(1)}),
+            ("run", {"side_effect": self.run_command}),
+            ("gh_json", {"side_effect": self.github}),
+            ("check", {}), ("check_remote", {}),
+        ):
+            patcher = patch.object(module, name, **kwargs)
+            setattr(self, name + "_mock", patcher.start())
+            self.addCleanup(patcher.stop)
 
-    def test_revoked_authorization_during_remote_gate_prevents_commit(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            (root / ".autoresearch/worktrees/issue-1").mkdir(parents=True)
-            summary = root / "review.md"
-            summary.write_text("Concrete change")
-            with (patch.object(module, "ROOT", root),
-                  patch.object(module, "source_tree", return_value="a" * 40),
-                  patch.object(module, "run", return_value="autoresearch/issue-1") as runner,
-                  patch.object(module, "check_remote"),
-                  patch.object(module, "authorized_issue",
-                               side_effect=[issue(1), SystemExit("approval revoked")])):
-                with self.assertRaisesRegex(SystemExit, "approval revoked"):
-                    module.submit(1, summary, "worker:/checkout")
-                self.assertEqual(runner.call_count, 1)
+    def git(self, *args):
+        return subprocess.check_output(["git", *args], cwd=self.worktree,
+                                       text=True, stderr=subprocess.PIPE).strip()
+
+    def recover(self):
+        self.git("branch", "-m", "fix/existing")
+        self.git("commit", "-qam", "existing implementation")
+        pull = dict(number=7, url="https://github.com/huangkiki/Dexlab/pull/7",
+                    state="OPEN", body="Refs #1", closingIssuesReferences=[],
+                    baseRefName="main", headRefName="fix/existing",
+                    headRefOid=self.git("rev-parse", "HEAD"), isCrossRepository=False,
+                    headRepository={"name": "Dexlab"}, headRepositoryOwner={"login": "huangkiki"})
+        self.pulls = [pull]
+        return pull
+
+    def github(self, *args):
+        if args[:2] == ("pr", "list"):
+            return json.loads(json.dumps(self.pulls))
+        if args[:2] == ("pr", "view"):
+            return dict(self.pulls[0])
+        self.fail(f"Unexpected GitHub command: {args}")
+
+    def run_command(self, *args, **kwargs):
+        if args[:2] == ("git", "push"):
+            self.publications.append(args)
+            if self.pulls:
+                self.pulls[0]["headRefOid"] = self.git("rev-parse", "HEAD")
+            return None
+        if args[:2] == ("gh", "api"):
+            self.assertEqual(args[2:], ("repos/huangkiki/Dexlab/pulls", "--input", "-"))
+            payload = json.loads(kwargs["input"])
+            self.assertEqual(payload["base"], "main")
+            self.assertEqual(payload["head"], "autoresearch/issue-1")
+            self.assertIn("Refs #1", payload["body"])
+            self.publications.append(args)
+            self.pulls = [dict(number=8, url="https://github.com/huangkiki/Dexlab/pull/8",
+                               state="OPEN", baseRefName="main", headRefName=payload["head"],
+                               headRefOid=self.git("rev-parse", "HEAD"))]
+            return json.dumps({"html_url": self.pulls[0]["url"]})
+        if args[:3] == ("gh", "pr", "edit"):
+            self.assertEqual(args[3], "7")
+            self.publications.append(args)
+            return None
+        if args[0] == "gh":
+            self.fail(f"Unexpected publication command: {args}")
+        return self.real_run(*args, **kwargs)
+
+    def test_standard_submission_validates_commits_pushes_and_creates_without_git_discovery(self):
+        result = module.submit(1, self.summary)
+        self.check_mock.assert_called_once_with(self.worktree)
+        self.assertEqual(result["headRefOid"], self.git("rev-parse", "HEAD"))
+        self.assertFalse(self.git("status", "--porcelain"))
+        self.assertEqual([p[:2] for p in self.publications], [("git", "push"), ("gh", "api")])
+
+    def test_explicit_recovery_updates_same_pr_after_new_reviewed_commit(self):
+        self.recover()
+        self.source.write_text("review correction\n")
+        self.git("commit", "-qam", "review correction")
+        result = module.submit(1, self.summary, existing_pr=7)
+        self.assertEqual(result["number"], 7)
+        self.check_mock.assert_called_once_with(self.worktree)
+        self.assertEqual([p[:2] for p in self.publications], [("git", "push"), ("gh", "pr")])
+
+    def test_standard_existing_pr_still_commits_reviewed_changes_after_gate(self):
+        pull = self.recover()
+        self.git("branch", "-m", "autoresearch/issue-1")
+        pull["headRefName"] = "autoresearch/issue-1"
+        self.source.write_text("reviewed standard-branch correction\n")
+        result = module.submit(1, self.summary)
+        self.assertEqual(result["number"], 7)
+        self.assertFalse(self.git("status", "--porcelain"))
+        self.check_mock.assert_called_once_with(self.worktree)
+        self.assertFalse(any(p[:2] == ("gh", "api") for p in self.publications))
+
+    def test_recovery_requires_explicit_pr(self):
+        self.recover()
+        with self.assertRaises(SystemExit):
+            module.submit(1, self.summary)
+        self.check_mock.assert_not_called()
+        self.assertFalse(self.publications)
+
+    def test_recovery_rejects_wrong_remote_pr_identity_and_ambiguity_before_gate(self):
+        pull = self.recover()
+        for field, value in (("state", "CLOSED"), ("baseRefName", "other"),
+                             ("headRefName", "another"), ("body", "Depends on: #1"),
+                             ("isCrossRepository", True), ("headRepositoryOwner", {"login": "other"}),
+                             ("headRepository", {"name": "other"})):
+            with self.subTest(field=field):
+                self.pulls = [{**pull, field: value}]
+                with self.assertRaises(SystemExit):
+                    module.submit(1, self.summary, existing_pr=7)
+        self.pulls = [pull, {**pull, "number": 8}]
+        with self.assertRaisesRegex(SystemExit, "Multiple PRs"):
+            module.submit(1, self.summary, existing_pr=7)
+        self.pulls = [pull]
+        with self.assertRaises(SystemExit):
+            module.submit(1, self.summary, existing_pr=99)
+        self.check_mock.assert_not_called()
+        self.assertFalse(self.publications)
+
+    def test_wrong_fetch_or_push_destination_is_rejected(self):
+        for option in ((), ("--push",)):
+            with self.subTest(option=option):
+                self.git("remote", "set-url", *option, "origin", "https://github.com/other/repo.git")
+                with self.assertRaisesRegex(SystemExit, "Origin"):
+                    module.submit(1, self.summary)
+                self.git("remote", "set-url", *option, "origin", "git@github.com:huangkiki/Dexlab.git")
+        self.check_mock.assert_not_called()
+        self.assertFalse(self.publications)
+
+    def test_recovery_preserves_unrelated_dirty_files_and_index(self):
+        self.recover()
+        other = self.worktree / "unrelated.py"
+        other.write_text("preserve me\n")
+        before = self.git("write-tree")
+        with self.assertRaisesRegex(SystemExit, "clean, reviewed"):
+            module.submit(1, self.summary, existing_pr=7)
+        self.assertEqual(other.read_text(), "preserve me\n")
+        self.assertEqual(self.git("write-tree"), before)
+        self.check_mock.assert_not_called()
+        self.assertFalse(self.publications)
+
+    def test_recovery_requires_ancestor_of_remote_head(self):
+        pull = self.recover()
+        self.git("checkout", "-qb", "unrelated", "origin/main")
+        self.source.write_text("different history\n")
+        self.git("commit", "-qam", "different history")
+        remote = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-q", "fix/existing")
+        self.pulls = [{**pull, "headRefOid": remote}]
+        with self.assertRaisesRegex(SystemExit, "does not contain"):
+            module.submit(1, self.summary, existing_pr=7)
+        self.check_mock.assert_not_called()
+        self.assertFalse(self.publications)
+
+    def test_failed_local_and_remote_gates_prevent_commit_and_publication(self):
+        initial = self.git("rev-parse", "HEAD")
+        for destination, gate in ((None, self.check_mock), ("worker:/checkout", self.check_remote_mock)):
+            gate.side_effect = subprocess.CalledProcessError(1, "physics")
+            with self.subTest(destination=destination), self.assertRaises(subprocess.CalledProcessError):
+                module.submit(1, self.summary, destination)
+            self.assertEqual(self.git("rev-parse", "HEAD"), initial)
+            self.assertFalse(self.publications)
+
+    def test_failed_recovery_gate_cannot_update_existing_pr(self):
+        self.recover()
+        self.check_mock.side_effect = subprocess.CalledProcessError(1, "physics")
+        with self.assertRaises(subprocess.CalledProcessError):
+            module.submit(1, self.summary, existing_pr=7)
+        self.assertFalse(self.publications)
+
+    def test_revoked_authorization_prevents_commit_and_publication(self):
+        self.authorized_issue_mock.side_effect = [issue(1), SystemExit("approval revoked")]
+        initial = self.git("rev-parse", "HEAD")
+        with self.assertRaisesRegex(SystemExit, "approval revoked"):
+            module.submit(1, self.summary, "worker:/checkout")
+        self.assertEqual(self.git("rev-parse", "HEAD"), initial)
+        self.assertFalse(self.publications)
+
+    def test_changed_source_during_gate_prevents_publication(self):
+        self.check_mock.side_effect = lambda _: self.source.write_text("changed during gate\n")
+        with self.assertRaisesRegex(SystemExit, "Source changed"):
+            module.submit(1, self.summary)
+        self.assertFalse(self.publications)
+
+    def test_changed_branch_during_gate_prevents_publication(self):
+        self.check_mock.side_effect = lambda _: self.git("checkout", "-qb", "other")
+        with self.assertRaisesRegex(SystemExit, "different branch"):
+            module.submit(1, self.summary)
+        self.assertFalse(self.publications)
+
+    def test_changed_pr_head_during_gate_prevents_publication(self):
+        self.recover()
+        self.check_mock.side_effect = lambda _: self.pulls[0].update(headRefOid="f" * 40)
+        with self.assertRaisesRegex(SystemExit, "PR changed"):
+            module.submit(1, self.summary, existing_pr=7)
+        self.assertFalse(self.publications)
+
+    def test_changed_commit_with_identical_tree_during_gate_is_rejected(self):
+        self.recover()
+        self.check_mock.side_effect = lambda _: self.git("commit", "--allow-empty", "-qm", "concurrent")
+        with self.assertRaisesRegex(SystemExit, "Local commit changed"):
+            module.submit(1, self.summary, existing_pr=7)
+        self.assertFalse(self.publications)
+
+    def test_wrong_pr_readback_is_rejected(self):
+        original = self.github
+        def wrong(*args):
+            result = original(*args)
+            return {**result, "baseRefName": "other"} if args[:2] == ("pr", "view") else result
+        self.gh_json_mock.side_effect = wrong
+        with self.assertRaisesRegex(SystemExit, "PR readback"):
+            module.submit(1, self.summary)
+
+    def test_cli_forwards_explicit_recovery_without_changing_defaults(self):
+        with patch.object(module, "submit", return_value={}) as submitter:
+            with patch.object(sys, "argv", ["autoresearch", "submit", "1", "--summary-file", str(self.summary),
+                                             "--existing-pr", "7"]):
+                module.main()
+            self.assertEqual(submitter.call_args.kwargs, {"existing_pr": 7})
 
 
 class VerifiedCheckoutTests(unittest.TestCase):

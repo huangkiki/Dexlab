@@ -1,0 +1,26 @@
+[
+  {
+    "profile": "similar-hydroelastic",
+    "case": "sliding-h0.001",
+    "same": {
+      "states": true,
+      "forces": true,
+      "generalized_contact_forces": true,
+      "contact_count": true,
+      "force_times": true,
+      "contacts": true
+    }
+  },
+  {
+    "profile": "sap-point",
+    "case": "sliding-h0.0005",
+    "same": {
+      "states": true,
+      "forces": true,
+      "generalized_contact_forces": true,
+      "contact_count": true,
+      "force_times": true,
+      "contacts": true
+    }
+  }
+]

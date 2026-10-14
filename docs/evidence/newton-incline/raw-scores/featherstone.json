@@ -1,0 +1,108 @@
+{
+  "profile": "featherstone",
+  "results": [
+    {
+      "case": "static-h0.002",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Position/velocity mismatch beyond representation bound"
+    },
+    {
+      "case": "static-h0.001",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 1.2784999999999967e-05
+    },
+    {
+      "case": "static-h0.0005",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 9.355879978370917e-06
+    },
+    {
+      "case": "sliding-h0.002",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Position/velocity mismatch beyond representation bound"
+    },
+    {
+      "case": "sliding-h0.001",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 2.9766084615774056e-05
+    },
+    {
+      "case": "sliding-h0.0005",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 9.538821787837513e-06
+    },
+    {
+      "case": "frictionless-h0.002",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 5.201864759165989e-07
+    },
+    {
+      "case": "frictionless-h0.001",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 1.3030427207451508e-05
+    },
+    {
+      "case": "frictionless-h0.0005",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ImpulseConsistencyError: State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 2.1633038152357624e-06
+    },
+    {
+      "case": "negative-no-floor",
+      "negative": true,
+      "valid": true,
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 5.080621817856192,
+        "static_speed_m_s": 5.078069897892866,
+        "sliding_velocity_rmse_m_s": 2.199266973748155,
+        "sliding_position_rmse_m": 1.2791478713086655,
+        "acceleration_error_m_s2": 2.539078888627732,
+        "rotation_rad": 0.0005117725163133251,
+        "penetration_m": 0.0,
+        "force_balance_rmse_n": 0.6278400000000001
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.539078888627732,
+      "full_velocity_rmse_m_s": 2.9322063752480023,
+      "full_position_rmse_m": 2.273254791164843,
+      "impulse_residual_max_ns": 3.238282621381454e-08,
+      "negative_rejected": true
+    }
+  ],
+  "positives_passed": 0,
+  "positives_total": 9,
+  "reliable_coverage_v1": false
+}

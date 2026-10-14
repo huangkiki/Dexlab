@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+历史配置归因见[分批求解器与版本审计](../../docs/physx-solver-audit.zh-CN.md)：区分原生场景读回、源码／报告中的 TGS 配置和缺失字段；[P0 #126](https://github.com/huangkiki/Dexlab/issues/126) 保留同期核心／加载库身份缺口。
+
 [Issue #5](https://github.com/huangkiki/Dexlab/issues/5) 的开发实现。
 
 完整机器人实验见 [PhysX SDF 抓梗](apple.zh-CN.md)：连续保持与独立表面检查通过，下文保留基础接触协议。

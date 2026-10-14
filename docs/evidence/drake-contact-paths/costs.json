@@ -1,0 +1,21 @@
+{
+  "formal_starts": 50,
+  "formal_updates": 115000,
+  "native_step_s": 4.67869812581921,
+  "setup_s": 0.45776944322278723,
+  "observation_s": 3.9618139545200393,
+  "case_wall_s": 16.85806212812895,
+  "development": {
+    "schema_version": 1,
+    "started_at": "2026-10-10T01:43:16.259526+00:00",
+    "scope": "Audit and qualify missing Drake native solver/contact paths; reuse117matchinghistory",
+    "wall_budget_s": 21600,
+    "native_start_limit": 64,
+    "native_starts_used": 34,
+    "native_updates_used": 13360,
+    "source_commit": "1e1466ba466e7ce8fa9fcca4e086ce1383e5427d",
+    "version": "1.57.0",
+    "formal_protocol": "frozen-v1/manifest.json",
+    "current_attempt": "diagnostic/sap-point/sliding-h0.0005"
+  }
+}

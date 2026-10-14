@@ -1,0 +1,3811 @@
+{
+  "runs": [
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 215.1689237600076,
+      "name": "campaign-v1-xpbd",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "9129984",
+          "memory.peak": "9502720",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 23315\nuser_usec 19200\nsystem_usec 4115\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "21139456",
+          "memory.peak": "388673536",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 215265809\nuser_usec 214544072\nsystem_usec 721736\ncore_sched.force_idle_usec 0\nnr_periods 2150\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=16523264 rios=0 wios=804 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=33905\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=33905",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=18242\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=18242"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=33925\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=33925",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=23898\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=23898"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.27159889601171017,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.273301824985538,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.5183004179853,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.81229968200205,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 41.08029890299076,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 51.16329817002406,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 61.470850665005855,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 71.49429909198079,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 81.63329891697504,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 91.74730092700338,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 102.0222989199683,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 112.3203878129716,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 122.53830146498512,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 132.62630033300957,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 142.91030089900596,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 153.0303008480114,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 163.12929870199878,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 173.4453010049765,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 183.74330099701183,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 193.93130978697445,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 204.03709635901032,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 214.34530833200552,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6514116583912988,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 6493104.770199503,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "251457536",
+          "memory.peak": "388673536",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 215217946\nuser_usec 214517234\nsystem_usec 700712\ncore_sched.force_idle_usec 0\nnr_periods 2147\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "4",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=16510976 rios=0 wios=802 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51165310976,
+        "data_free_bytes": 1380371484672,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 11.40886769403005,
+      "name": "campaign-v1-semiimplicit",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8699904",
+          "memory.peak": "9064448",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 39390\nuser_usec 30410\nsystem_usec 8980\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "12423168",
+          "memory.peak": "387960832",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 11114131\nuser_usec 10702793\nsystem_usec 411337\ncore_sched.force_idle_usec 0\nnr_periods 113\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=1740800 rios=0 wios=63 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=19\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=19",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1354\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1354",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=15855\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=15855"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1363\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1363",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=16202\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=16202"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.08722904400201514,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.242601556004956,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.3206051909337484,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 4870541.81070623,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "234045440",
+          "memory.peak": "387960832",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 11008959\nuser_usec 10619642\nsystem_usec 389316\ncore_sched.force_idle_usec 0\nnr_periods 110\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=1732608 rios=0 wios=61 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51192799232,
+        "data_free_bytes": 1380359356416,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 18.459427869005594,
+      "name": "campaign-v1-featherstone",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8818688",
+          "memory.peak": "9109504",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 37769\nuser_usec 28688\nsystem_usec 9081\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "13885440",
+          "memory.peak": "388255744",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 18191349\nuser_usec 17762034\nsystem_usec 429315\ncore_sched.force_idle_usec 0\nnr_periods 183\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=4898816 rios=0 wios=108 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=42\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=42",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2156\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2156",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=347\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=347"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2174\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2174",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=20420\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=20420"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.06899433501530439,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.162249799002893,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.4669516719072264,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 9819803.707237044,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "292167680",
+          "memory.peak": "388255744",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 18132794\nuser_usec 17724528\nsystem_usec 408265\ncore_sched.force_idle_usec 0\nnr_periods 180\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=4890624 rios=0 wios=106 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51139137536,
+        "data_free_bytes": 1380355846144,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 296.1755667569814,
+      "name": "campaign-v1-vbd-legacy",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8638464",
+          "memory.peak": "9490432",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 33171\nuser_usec 23016\nsystem_usec 10155\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "20959232",
+          "memory.peak": "388489216",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 295463197\nuser_usec 294650498\nsystem_usec 812699\ncore_sched.force_idle_usec 0\nnr_periods 2960\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=18313216 rios=0 wios=1041 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=10\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=10",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=29340\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=29340",
+          "io.pressure": "some avg10=0.00 avg60=0.06 avg300=0.23 total=1611796\nfull avg10=0.00 avg60=0.06 avg300=0.23 total=1611796"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=29353\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=29353",
+          "io.pressure": "some avg10=0.00 avg60=0.06 avg300=0.23 total=1616369\nfull avg10=0.00 avg60=0.06 avg300=0.23 total=1616369"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.08889111498137936,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.35321978398133,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.420440358982887,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.463444229972083,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 40.53944105200935,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 50.80425311101135,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 60.899441735993605,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 70.90344074100722,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 81.16743993898854,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 91.18352852197131,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 101.3828058859799,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 111.5707533499808,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 121.59896109398687,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 131.66044180997415,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 141.67244560300605,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 151.91844120097812,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 162.2095189190004,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 172.23944187298184,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 182.26844200497726,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 192.3506225059973,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 202.6254420990008,
+            "devices": [
+              "device-0, 1154, 23028"
+            ]
+          },
+          {
+            "wall_s": 212.62869249196956,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 222.91744570300216,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 233.049442559015,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 243.07744171697414,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 253.27644439297728,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 263.3174429630162,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 273.5419027879834,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 283.61457098898245,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 293.7197541130008,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.2362020552636217,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 5347020.857944618,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "305012736",
+          "memory.peak": "388489216",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 295385417\nuser_usec 294596735\nsystem_usec 788682\ncore_sched.force_idle_usec 0\nnr_periods 2957\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=18300928 rios=0 wios=1039 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51101806592,
+        "data_free_bytes": 1380350812160,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 297.9043335500173,
+      "name": "campaign-v1-vbd-compliant",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8982528",
+          "memory.peak": "9355264",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 36068\nuser_usec 29961\nsystem_usec 6106\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "19152896",
+          "memory.peak": "388100096",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 298307645\nuser_usec 297540016\nsystem_usec 767629\ncore_sched.force_idle_usec 0\nnr_periods 2978\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=15654912 rios=0 wios=923 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=9\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=9",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=32777\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=32777",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13686\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13686"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=32789\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=32789",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=25116\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=25116"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.0850033110473305,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.403656331007369,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.70353335700929,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.94160225702217,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 41.046526909049135,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 51.34452520904597,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 61.62552571599372,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 71.87152316700667,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 82.18352722399868,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 92.39752750203479,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 102.67584047099808,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 112.93252742901677,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 123.185313642025,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 133.21252510900376,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 143.47372910304694,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 153.6492129249964,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 163.940743210027,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 174.14352570503252,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 185.18152768799337,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 195.63368481799262,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 205.67402713402407,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 215.7691574470373,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 225.80716077500256,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 237.16152721800609,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 247.2143962639966,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 257.3012801820296,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 267.383526834019,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 277.6075272540329,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 287.60865719104186,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.31227100845074,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 3324407.3877149546,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "255062016",
+          "memory.peak": "388100096",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 298258649\nuser_usec 297507033\nsystem_usec 751616\ncore_sched.force_idle_usec 0\nnr_periods 2975\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=15642624 rios=0 wios=921 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51098267648,
+        "data_free_bytes": 1380338978816,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 967.1926205930067,
+      "name": "campaign-v1-kamino-padmm",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8990720",
+          "memory.peak": "9449472",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 31169\nuser_usec 24017\nsystem_usec 7152\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "19832832",
+          "memory.peak": "541044736",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 970121219\nuser_usec 968219991\nsystem_usec 1901228\ncore_sched.force_idle_usec 0\nnr_periods 9670\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=4096 wbytes=45129728 rios=1 wios=3311 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=29\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=29",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=101864\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=101864",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13887\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13887"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=101875\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=101875",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13924\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13924"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.07327344798250124,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.166890466993209,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.37193780700909,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.452941391966306,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 40.67993615701562,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 51.674941534991376,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 61.860991871973965,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 72.15004492097069,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 82.27128645498306,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 92.36493926896947,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 102.52893538598437,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 112.75438232097076,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 122.79393640800845,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 132.82993827800965,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 142.93203648697818,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 153.22599085996626,
+            "devices": [
+              "device-0, 1158, 23028"
+            ]
+          },
+          {
+            "wall_s": 163.45394065597793,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 173.4979434320121,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 183.58793808001792,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 193.67593728698557,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 203.85993837402202,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 213.87794451398076,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 223.935937214992,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 234.06193780899048,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 244.31744452699786,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 254.60593759798212,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 264.65193679300137,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 274.9404039969668,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 285.03840098599903,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 295.3549365840154,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 305.37894210300874,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 315.63205108296825,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 325.72951947397087,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 335.7499397000065,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 346.0379351900192,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 356.2759445810225,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 366.3185129489866,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 376.4122568909661,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 386.4239381250227,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 396.7000041750143,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 406.79377252596896,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 416.84293730801437,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 426.9569369429955,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 437.0139372929698,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 447.0229425369762,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 457.12893867096864,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 467.1771441879682,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 477.1879389969981,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 487.1909449149971,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 497.24093701998936,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 507.2669380599982,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 517.3012467779918,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 527.3689370449865,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 537.4859383350122,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 547.7749346380006,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 558.0329375329893,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 568.0839366929722,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 578.1069367519813,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 588.369938045973,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 598.4749409959768,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 608.5536506890203,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 618.553938913974,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 628.8499380649882,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 638.892094847979,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 649.0039368889993,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 659.2259390749969,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 669.5319394399994,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 679.6259400729905,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 689.7609367580153,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 699.9109463749919,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 709.9579369539861,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 720.214042712003,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 730.3669369099662,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 740.4349381609936,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 750.6389388950192,
+            "devices": [
+              "device-0, 1158, 23028"
+            ]
+          },
+          {
+            "wall_s": 760.7070364300162,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 770.9779385129805,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 781.2669378719875,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 791.4619368559797,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 801.5739379529841,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 811.7177526479936,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 821.7779354199884,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 831.9729386839899,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 842.230988930969,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 852.2454648839775,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 862.4019374049967,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 872.5359837620053,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 882.7479415640119,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 892.7869363399805,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 902.8189363809652,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 912.8369423120166,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 923.1359355759923,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 933.1479372680187,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 943.3319387959782,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 953.5031291189953,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 963.5372954179766,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.3796832219748052,
+        "sampled_peak_read_bytes_s": 11785.548286684902,
+        "sampled_peak_write_bytes_s": 5677306.75839155,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "320045056",
+          "memory.peak": "541044736",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 969950873\nuser_usec 968070672\nsystem_usec 1880201\ncore_sched.force_idle_usec 0\nnr_periods 9667\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=4096 wbytes=45109248 rios=1 wios=3309 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51153272832,
+        "data_free_bytes": 1380328841216,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "failed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 1,
+      "wall_s": 1800.802804670995,
+      "name": "campaign-v1-kamino-dvi",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8859648",
+          "memory.peak": "9232384",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 22972\nuser_usec 17751\nsystem_usec 5221\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": null,
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=137820\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=137820",
+          "io.pressure": "some avg10=0.00 avg60=0.03 avg300=0.04 total=2748234\nfull avg10=0.00 avg60=0.03 avg300=0.04 total=2748060"
+        },
+        "final_pressure": null,
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": null,
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.0714747509919107,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.287337310030125,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.59133834001841,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.896340887004044,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 40.91733496100642,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 51.09516932000406,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 61.36233563802671,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 71.99438037502114,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 82.20433483901434,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 92.2753363570082,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 102.28734078397974,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 112.45233335101511,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 122.49433620099444,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 132.9383355830214,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 142.98333475599065,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 153.15733968402492,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 163.43533597199712,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 173.70089643099345,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 183.845396284014,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 193.90433645801386,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 206.40833624597872,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 216.44333354802802,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 226.63033560401527,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 236.87337387597654,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 246.89233385497937,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 257.32465467602015,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 267.54344074300025,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 277.82333731401013,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 287.8403359479853,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 298.0963352340041,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 308.18199084798107,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 318.2643359969952,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 328.28893351502484,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 338.32333558698883,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 348.6188220399781,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 358.8393362649949,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 369.06721991300583,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 379.1552322980133,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 389.3253376359935,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 399.5549674240174,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 409.5715797190205,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 419.81133418600075,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 430.04133525001816,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 440.1743368820171,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 450.33833748701727,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 460.4833846699912,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 470.667337937979,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 480.9133359810221,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 491.17833503102884,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 501.47133707802277,
+            "devices": [
+              "device-0, 1159, 23028"
+            ]
+          },
+          {
+            "wall_s": 511.4899185160175,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 521.5353359049768,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 531.8113348060288,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 541.9873345150263,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 552.0333357449854,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 562.0523354299949,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 572.5676741279894,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 582.6966990419896,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 592.7003346260171,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 603.0163351069787,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 613.0553356920136,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 623.2090533400187,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 633.3103367940057,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 644.205333994003,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 654.3573361340095,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 664.5533361409907,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 674.8593361810199,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 685.0313352110097,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 695.3333359099925,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 705.6253329539904,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 715.9923345069983,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 726.4935186060029,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 736.543806769012,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 746.6119452029816,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 756.7533365620184,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 766.7718580060173,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 776.9445456389803,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 787.0930788739934,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 797.3723354570102,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 807.3883374360157,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 817.5043809880153,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 827.5223346910207,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 837.5353355230181,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 847.6066822879948,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 857.7564966009813,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 867.9523377650185,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 877.968787456979,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 888.0903361330274,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 898.2933335260022,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 908.5263348059962,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 918.6373350389767,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 928.953334284015,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 939.1513355220086,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 949.387496225012,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 959.5383870209916,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 969.640336750017,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 979.9483348909998,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 990.0613378380076,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 1000.3744935619761,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 1010.4363355769892,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 1020.4853355460218,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 1030.8043956949841,
+            "devices": [
+              "device-0, 1156, 23028"
+            ]
+          },
+          {
+            "wall_s": 1041.119335742027,
+            "devices": [
+              "device-0, 1160, 23028"
+            ]
+          },
+          {
+            "wall_s": 1051.1619132710039,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1061.207335338986,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1071.31439468998,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1081.471335952985,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1091.612334860023,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1101.7077054060064,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1111.7453346680268,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1121.7753364749951,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1131.8693366639782,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1141.9433339959942,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1152.070139525982,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1162.2561189670232,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1172.2593347500078,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1182.4025323680253,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1192.485332256998,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1202.6723431170103,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1212.6733356959885,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1222.7913383989944,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1233.0203320400324,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1243.222412904026,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1253.4703361759894,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1263.5783343990333,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1273.7963350649807,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1283.8813337439788,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1293.994387638988,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1304.069457287027,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1314.113333782996,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1324.2723350680317,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1334.461337567016,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1344.6514116299804,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1354.9144125619787,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1365.3073903670302,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1375.3463361539762,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1385.418331568013,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1395.720334889018,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1405.7467472180142,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1415.9233328700066,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1426.0553358430043,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1436.2973342009936,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1446.3633372110198,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1456.3983348070178,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1466.4283351210179,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1476.5153329570312,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1486.7393356100074,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1496.885010397993,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1507.1993379850173,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1517.8188294970314,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1528.0133369929972,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1538.2383367089787,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1548.5473333289847,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1558.7703887689859,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1568.894339890976,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1578.9503354140325,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1589.1205426939996,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1599.2754083600012,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1609.305336534977,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1619.4543308080174,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1629.6303363890038,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1639.7333356930176,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1650.0605471649906,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1660.1104029460112,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1670.1823375800159,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1680.4263360640034,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1690.4763322509825,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1700.5615451660124,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1710.7453336230246,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1720.8583348540124,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1731.058336912014,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1741.236332978995,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1751.3313351270044,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1761.4583369279862,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1771.6169584519812,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1781.6633374859812,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 1791.729332028015,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.3707872537270755,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 1983993.5891719002,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "527228928",
+          "memory.peak": "634376192",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 1806125680\nuser_usec 1803259850\nsystem_usec 2865829\ncore_sched.force_idle_usec 0\nnr_periods 18000\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=100679680 rios=0 wios=5700 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51111215104,
+        "data_free_bytes": 1380318441472,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 15.382786382979248,
+      "name": "inspection-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8843264",
+          "memory.peak": "9224192",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 23309\nuser_usec 19255\nsystem_usec 4053\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "36241408",
+          "memory.peak": "482287616",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 14264531\nuser_usec 13880301\nsystem_usec 384229\ncore_sched.force_idle_usec 0\nnr_periods 144\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=172032 wbytes=4571136 rios=35 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=16117760 rios=0 wios=393 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=61\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=61",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6710\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6710",
+          "io.pressure": "some avg10=1.09 avg60=0.37 avg300=0.08 total=284913\nfull avg10=1.09 avg60=0.37 avg300=0.08 total=284913"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6713\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6713",
+          "io.pressure": "some avg10=1.09 avg60=0.37 avg300=0.08 total=284995\nfull avg10=1.09 avg60=0.37 avg300=0.08 total=284995"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.8691485379822552,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 11.114232972962782,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6599581132032137,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 17458122.82064728,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "42614784",
+          "memory.peak": "482287616",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 14258049\nuser_usec 13874859\nsystem_usec 383189\ncore_sched.force_idle_usec 0\nnr_periods 142\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "2",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=172032 wbytes=4571136 rios=35 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=16113664 rios=0 wios=392 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51109801984,
+        "data_free_bytes": 1380579184640,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 19.852920030010864,
+      "name": "diagnostic-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8695808",
+          "memory.peak": "9342976",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 29083\nuser_usec 25025\nsystem_usec 4058\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "16625664",
+          "memory.peak": "500068352",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 19600509\nuser_usec 19218265\nsystem_usec 382243\ncore_sched.force_idle_usec 0\nnr_periods 196\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=5910528 rios=0 wios=93 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=3",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5567\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5567",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=191\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=191"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5596\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5596",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=232\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=232"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.26484030502615497,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.555456757021602,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.7063362307745638,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 5738015.357990085,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "353349632",
+          "memory.peak": "500068352",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 19386950\nuser_usec 19026710\nsystem_usec 360240\ncore_sched.force_idle_usec 0\nnr_periods 193\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=5902336 rios=0 wios=91 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51089817600,
+        "data_free_bytes": 1380397481984,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 11.816856189980172,
+      "name": "diagnostic-v2",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8699904",
+          "memory.peak": "9072640",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 23217\nuser_usec 20255\nsystem_usec 2961\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "10035200",
+          "memory.peak": "545054720",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 10894854\nuser_usec 10519756\nsystem_usec 375098\ncore_sched.force_idle_usec 0\nnr_periods 113\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=5857280 rios=0 wios=55 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2786\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2786",
+          "io.pressure": "some avg10=1.29 avg60=0.38 avg300=0.08 total=285091\nfull avg10=1.29 avg60=0.38 avg300=0.08 total=285091"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2800\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2800",
+          "io.pressure": "some avg10=1.29 avg60=0.38 avg300=0.08 total=285455\nfull avg10=1.29 avg60=0.38 avg300=0.08 total=285109"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.17238602798897773,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.242743365990464,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6404016636402345,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 2586210.836464339,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "22962176",
+          "memory.peak": "545054720",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 10881083\nuser_usec 10508012\nsystem_usec 373071\ncore_sched.force_idle_usec 0\nnr_periods 111\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "3",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=5853184 rios=0 wios=54 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51100057600,
+        "data_free_bytes": 1380390096896,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 7.76257694803644,
+      "name": "diagnostic-v3",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8802304",
+          "memory.peak": "9211904",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 25257\nuser_usec 21285\nsystem_usec 3971\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "9179136",
+          "memory.peak": "238186496",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 7486734\nuser_usec 7226813\nsystem_usec 259921\ncore_sched.force_idle_usec 0\nnr_periods 75\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=1667072 rios=0 wios=35 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=3",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1053\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1053",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1317\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1317"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1060\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1060",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1654\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1654"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.0638735550455749,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.668374502802549,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 1838999.7913291913,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "9322496",
+          "memory.peak": "238186496",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 7484742\nuser_usec 7225820\nsystem_usec 258921\ncore_sched.force_idle_usec 0\nnr_periods 73\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "2",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=1662976 rios=0 wios=34 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51148111872,
+        "data_free_bytes": 1380388814848,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 19.67573734500911,
+      "name": "admission-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8409088",
+          "memory.peak": "9256960",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 32569\nuser_usec 25594\nsystem_usec 6975\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "17928192",
+          "memory.peak": "682586112",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 19566092\nuser_usec 17975353\nsystem_usec 1590739\ncore_sched.force_idle_usec 0\nnr_periods 196\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=2174976 rios=0 wios=121 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=9\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=9",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6503\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6503",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=12988\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=12988"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6515\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6515",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=13032\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=13032"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.06954534398391843,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.145449918985832,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6870510942784882,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 5712154.249042868,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "385785856",
+          "memory.peak": "682586112",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 19428852\nuser_usec 17868141\nsystem_usec 1560711\ncore_sched.force_idle_usec 0\nnr_periods 193\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=2166784 rios=0 wios=119 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51149463552,
+        "data_free_bytes": 1380388229120,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 20.181525919993874,
+      "name": "admission-v2",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8704000",
+          "memory.peak": "9338880",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 25918\nuser_usec 14946\nsystem_usec 10971\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "18075648",
+          "memory.peak": "679235584",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 19587081\nuser_usec 17992319\nsystem_usec 1594762\ncore_sched.force_idle_usec 0\nnr_periods 197\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=1626112 rios=0 wios=82 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=3",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=11290\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=11290",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1840\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1840"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=11304\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=11304",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=2246\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=2246"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.38536800403380767,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.43413715902716,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6726553318398962,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 4541825.8179893205,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "31059968",
+          "memory.peak": "679235584",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 19565342\nuser_usec 17974558\nsystem_usec 1590783\ncore_sched.force_idle_usec 0\nnr_periods 195\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "3",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=9 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=1622016 rios=0 wios=81 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51097419776,
+        "data_free_bytes": 1380379979776,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 25.73559650196694,
+      "name": "diagnostic-v4",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8904704",
+          "memory.peak": "9539584",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 37430\nuser_usec 32494\nsystem_usec 4935\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "16232448",
+          "memory.peak": "616603648",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 25358498\nuser_usec 24748221\nsystem_usec 610276\ncore_sched.force_idle_usec 0\nnr_periods 255\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=6 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=11702272 rios=0 wios=114 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5258\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5258",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=593\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=593"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5263\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5263",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=15277\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=15277"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.08742238400736824,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.304402020003181,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.43549304699991,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.3461788916482718,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 5757865.841616472,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "30515200",
+          "memory.peak": "616603648",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 25338450\nuser_usec 24730199\nsystem_usec 608250\ncore_sched.force_idle_usec 0\nnr_periods 253\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "3",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=6 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=11698176 rios=0 wios=113 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51140608000,
+        "data_free_bytes": 1380293013504,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-16g-4c",
+        "measurement": null,
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 16.78040739399148,
+      "name": "diagnostic-v5",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "17179869184",
+          "memory.high": "16106127360",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8847360",
+          "memory.peak": "9232384",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 28996\nuser_usec 20997\nsystem_usec 7998\ncore_sched.force_idle_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "16179200",
+          "memory.peak": "615927808",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 16681873\nuser_usec 16104669\nsystem_usec 577203\ncore_sched.force_idle_usec 0\nnr_periods 166\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=5 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=10039296 rios=0 wios=86 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4929\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4929",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=12245\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=12245"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=4941\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=4941",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=12456\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=12456"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.05779410299146548,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.082233212015126,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.671999179400055,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 5642408.868615257,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "318201856",
+          "memory.peak": "615927808",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 16537244\nuser_usec 15986036\nsystem_usec 551208\ncore_sched.force_idle_usec 0\nnr_periods 163\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=5 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=10031104 rios=0 wios=84 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51064446976,
+        "data_free_bytes": 1380285292544,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "6645b52088d13e4462e9b8436bcb770edbc4229c3d2ace5f9a5b2d17dc080567",
+          "peak_mib": 519.8046875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 152.76272637600778,
+      "name": "continuation-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "8867840",
+          "memory.peak": "9551872",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 21523\nuser_usec 18294\nsystem_usec 3228\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "28004352",
+          "memory.peak": "446885888",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 152831821\nuser_usec 152161085\nsystem_usec 670736\ncore_sched.force_idle_usec 0\nnr_periods 1527\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=5 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=20762624 rios=0 wios=636 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=11\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=11",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=15474\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=15221",
+          "io.pressure": "some avg10=0.00 avg60=0.03 avg300=0.04 total=314529\nfull avg10=0.00 avg60=0.03 avg300=0.04 total=314507"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=15479\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=15226",
+          "io.pressure": "some avg10=0.00 avg60=0.03 avg300=0.04 total=314572\nfull avg10=0.00 avg60=0.03 avg300=0.04 total=314551"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.27227727498393506,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.491099939972628,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 20.555188536993228,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 30.693100047996268,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 40.86672103096498,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 50.96697008999763,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 61.102386716986075,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 71.35709953500191,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 81.53360556997359,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 91.60210035298951,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 101.63017701200442,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 111.63689558196347,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 121.84810655697947,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 131.93331177800428,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 141.94210911897244,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 151.9806466549635,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6361070078871163,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 11029682.67769738,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "318185472",
+          "memory.peak": "446885888",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 152685257\nuser_usec 152035550\nsystem_usec 649707\ncore_sched.force_idle_usec 0\nnr_periods 1524\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "8",
+          "pids.events": "max 0",
+          "io.stat": "259:0 rbytes=0 wbytes=4571136 rios=0 wios=5 dbytes=0 dios=0\n8:0 rbytes=0 wbytes=20750336 rios=0 wios=634 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51120807936,
+        "data_free_bytes": 1380311179264,
+        "desktop_reserve_bytes": 8589934592
+      }
+    },
+    {
+      "state": "completed",
+      "resource_plan": {
+        "schema_version": 1,
+        "profile": "adaptive-8g-4c",
+        "measurement": {
+          "sha256": "602ca0577f7a36b18765e23ccea96cff6ba81649331e1aadd0ee3bc2d1433e27",
+          "peak_mib": 370.66796875
+        },
+        "complex_model": false,
+        "cpu_cores": 4,
+        "peak_margin": 1.5,
+        "desktop_reserve_gib": 8
+      },
+      "returncode": 0,
+      "wall_s": 15.878963085997384,
+      "name": "score-v1",
+      "telemetry": {
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "initial": {
+          "memory.current": "9109504",
+          "memory.peak": "9486336",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 28392\nuser_usec 20491\nsystem_usec 7900\ncore_sched.force_idle_usec 0\nnr_periods 1\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0"
+        },
+        "final": {
+          "memory.current": "8929280",
+          "memory.peak": "112189440",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 15668313\nuser_usec 15461177\nsystem_usec 207136\ncore_sched.force_idle_usec 0\nnr_periods 157\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=290816 rios=0 wios=63 dbytes=0 dios=0"
+        },
+        "initial_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=3\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=3",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0"
+        },
+        "pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1608\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1608",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1450\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1450"
+        },
+        "final_pressure": {
+          "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "cpu.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1610\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1610",
+          "io.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1478\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1478"
+        },
+        "initial_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "final_gpu_memory_mib": [
+          "device-0, 1153, 23028"
+        ],
+        "gpu_memory_samples_mib": [
+          {
+            "wall_s": 0.2728306920034811,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          },
+          {
+            "wall_s": 10.5428894800134,
+            "devices": [
+              "device-0, 1153, 23028"
+            ]
+          }
+        ],
+        "sampled_peak_cpu_cores": 1.6759772552753414,
+        "sampled_peak_read_bytes_s": 0.0,
+        "sampled_peak_write_bytes_s": 125783.76732738757,
+        "sampling_interval_s": 0.25,
+        "latest": {
+          "memory.current": "82939904",
+          "memory.peak": "112189440",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 15416592\nuser_usec 15223472\nsystem_usec 193120\ncore_sched.force_idle_usec 0\nnr_periods 154\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "7",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=282624 rios=0 wios=61 dbytes=0 dios=0"
+        }
+      },
+      "launch_headroom": {
+        "available_memory_bytes": 51080638464,
+        "data_free_bytes": 1380285382656,
+        "desktop_reserve_bytes": 8589934592
+      }
+    }
+  ],
+  "original_acquisition_wall_s": 3607.112544894044,
+  "continuation_wall_s": 152.76272637600778,
+  "acquisition_wall_s": 3759.8752712700516,
+  "acquisition_peak_mib": 604.98828125,
+  "dataset_native_step_s": 3512.9888465825934,
+  "acquisition_native_step_s": 3638.1255428622826,
+  "acquisition_case_wall_s": 3619.4178269167314,
+  "acquisition_setup_s": 29.096842688915785,
+  "dataset_updates": 161000,
+  "acquisition_updates": 162588,
+  "unresolved_native_attempts": 1,
+  "next_equivalent_memory_gib": 8,
+  "interruption": "DVI original timeout retained; final telemetry absent, latest sample reported explicitly. Nine completed positives reused with a separate complete negative; original1588-step negative retained.",
+  "performance_scope": "Serial instrumented correctness acquisition; cold/warm cache and solver budgets differ; no cross-engine speed ranking"
+}

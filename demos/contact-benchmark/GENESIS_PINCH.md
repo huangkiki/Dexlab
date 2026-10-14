@@ -1,5 +1,7 @@
 # Genesis primitive pinch and release
 
+Current entry-point update: `dexlab.genesis_pinch_probe` now uses the disclosed public contact adapter; prepare the isolated patched environment in the [migration report](../../docs/unisim-contact-migration.md). Historical measurements in this report belong to their archived native source and timing schema; running the current entry point does not reproduce those historical costs. The explicit native comparison reference is `scripts/references/genesis_pinch_native.py`.
+
 [简体中文](GENESIS_PINCH.zh-CN.md)
 
 **The development fixture passes its current criteria, not full backend qualification.** Official Genesis 1.4.3, CPU FP64, elliptic friction cone and a 0.5 ms step drive a three-joint gripper around a free box. Two reset trajectories match exactly; two open-pad controls remain on the table. This is not a statistical success rate, apple SDF, GPU or hardware result.

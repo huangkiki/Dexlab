@@ -1,0 +1,37 @@
+{
+  "final_zero_duration_admissions": 70,
+  "formal_profiles": 7,
+  "prior_failures": [
+    {
+      "attempt": "inspection-v1",
+      "scope": "zero physics",
+      "failure": "Duplicate FREE joint in exploratory construction; optional MuJoCo dependency absent and particle-only solver constructor setup unsuitable"
+    },
+    {
+      "attempt": "diagnostic-v1",
+      "scope": "12 prefixes / 240 updates",
+      "failure": "Duplicate FREE joints and incorrect SemiImplicit/Featherstone force readback; original rows retained"
+    },
+    {
+      "attempt": "diagnostic-v2",
+      "scope": "14 prefixes / 280 updates",
+      "failure": "Fixed topology and SemiImplicit buffer; Featherstone sign still wrong; numerical force/state residuals remain"
+    },
+    {
+      "attempt": "diagnostic-v3",
+      "scope": "6 prefixes / 120 updates",
+      "failure": "Source-correct Featherstone sign; VBD100/1000 comparison; original failures retained"
+    },
+    {
+      "attempt": "admission-v1",
+      "scope": "zero physics",
+      "failure": "SemiImplicit optional joint arrays are None, requiring explicit null serialization"
+    }
+  ],
+  "frozen_binding": "Final admissions independently verified model and initial states; exact per-case hashes frozen before formal physics",
+  "development_processes": 8,
+  "development_native_updates": 1000,
+  "continuation_processes": 1,
+  "continuation_native_updates": 2000,
+  "formal_budget_independent": true
+}

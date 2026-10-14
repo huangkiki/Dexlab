@@ -1,0 +1,37 @@
+{
+  "profiles": [
+    {
+      "solver": "Newton",
+      "cone": "pyramidal",
+      "resolution": "signorini",
+      "status": "unsupported",
+      "native_error": "'contact_resolution' cannot be 'gs.contact_resolution.signorini' when it requires 'friction_cone' to be 'gs.friction_cone.elliptic'.",
+      "stage": "Scene construction; no native step",
+      "recovery": "A qualified official version supporting this combination and a new frozen protocol"
+    },
+    {
+      "solver": "CG",
+      "cone": "elliptic",
+      "resolution": "signorini",
+      "status": "unsupported",
+      "native_error": "'contact_resolution' cannot be 'gs.contact_resolution.signorini' when it requires 'constraint_solver' to be 'gs.constraint_solver.Newton'.",
+      "stage": "Scene construction; no native step",
+      "recovery": "A qualified official version supporting this combination and a new frozen protocol"
+    },
+    {
+      "solver": "CG",
+      "cone": "pyramidal",
+      "resolution": "signorini",
+      "status": "unsupported",
+      "native_error": "'contact_resolution' cannot be 'gs.contact_resolution.signorini' when it requires 'friction_cone' to be 'gs.friction_cone.elliptic'.",
+      "stage": "Scene construction; no native step",
+      "recovery": "A qualified official version supporting this combination and a new frozen protocol"
+    }
+  ],
+  "constructor_zero_friction": {
+    "stage": "Material constructor; no native scene",
+    "native_error": "Validation error for <gs.materials.Rigid>: Invalid attribute 'friction': input should be greater than or equal to 0.01. Got 0.",
+    "recovery": "Use public post-build geom.set_friction(0); effective contact still floors .01"
+  },
+  "native_positive_duration_steps": 0
+}

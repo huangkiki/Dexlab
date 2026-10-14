@@ -1,0 +1,17 @@
+{
+  "frozen_at": "2026-10-09T23:03:28.592705+00:00",
+  "source_sha256": "8a2b94e2b7e5108f1e18b32e7d956fb4a5b93a1dd0f9a814ef0ba7fc6e90d272",
+  "original_campaign_sha256": "aed765f250f6269302439a5163cbd140befe1d4e030e114c43e866158045e65f",
+  "source": "scripts/resume_newton_incline.py",
+  "reason": "1800s whole-profile timeout after all nine positives and1588/2000 negative steps; last cgroupsample604.988MiB, noOOM/limit events orCPUthrottling. Need independent complete negative under unchanged physics.",
+  "case": "negative-no-floor",
+  "native_starts": 1,
+  "native_updates": 2000,
+  "timeout_s": 600,
+  "memory_gib": 8,
+  "cpu_cores": 4,
+  "physics_recorder_sha256": "ea97863ae46f1e702a3d273180d8ccc029b55014ecdab4ff0331c7a902687090",
+  "original_attempt_preserved": true,
+  "positive_cases_reused": 9,
+  "original_budget_unchanged": true
+}

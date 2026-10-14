@@ -4,17 +4,142 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from contextlib import ExitStack
+from copy import deepcopy
 from unittest.mock import patch
 from types import SimpleNamespace
 
 SCRIPTS = Path(__file__).parents[1] / 'scripts'
 sys.path.insert(0, str(SCRIPTS))
-from bounded_run import verify_limits, verify_headroom, verify_service, main
+from bounded_run import (verify_limits, verify_headroom, verify_service, main,
+                         select_profile, freeze_resources, pressure, PROFILES, inside, read_values)
 from archive_run import record_stage
 sys.path.pop(0)
 
 
+class AdaptiveResourceTests(unittest.TestCase):
+    def test_larger_task_limit_preserves_legacy_limits(self):
+        name = select_profile(complex_model=True, task_limit=256)
+        self.assertEqual(name, 'adaptive-24g-4c-256t')
+        expected = {**PROFILES['adaptive-24g-4c'], 'tasks': 256}
+        self.assertEqual(PROFILES[name], expected)
+        self.assertEqual(PROFILES['adaptive-24g-4c']['tasks'], 128)
+        self.assertEqual(PROFILES['experiment']['tasks'], 128)
+        for value in (0, 127, 257, 1024):
+            with self.assertRaises(ValueError):
+                select_profile(task_limit=value)
+
+    def test_task_limit_is_frozen_across_resume(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'batch.json'
+            plan = freeze_resources(path)
+            self.assertNotIn('task_limit', plan)  # Historical plan bytes remain compatible.
+            original = path.read_bytes()
+            with self.assertRaisesRegex(ValueError, 'frozen'):
+                freeze_resources(path, task_limit=256)
+            self.assertEqual(path.read_bytes(), original)
+            larger = Path(directory) / 'new-batch.json'
+            plan = freeze_resources(larger, task_limit=256)
+            self.assertEqual(plan['task_limit'], 256)
+            self.assertEqual(freeze_resources(larger, task_limit=256), plan)
+            with self.assertRaisesRegex(ValueError, 'frozen'):
+                freeze_resources(larger)
+
+    def test_cli_passes_frozen_task_limit_to_launch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            args = ['bounded_run.py', '--profile', 'adaptive', '--resource-plan',
+                    str(Path(directory) / 'plan.json'), '--task-limit', '256',
+                    '--io-device', '/dev/test', '--data-dir', directory,
+                    '--receipt', str(Path(directory) / 'receipt.json'), '--', 'true']
+            with patch.object(sys, 'argv', args), patch('bounded_run.launch', return_value=0) as launch:
+                self.assertEqual(main(), 0)
+                self.assertEqual(launch.call_args.args[0].profile, 'adaptive-16g-4c-256t')
+
+    def test_slow_gpu_query_does_not_inflate_initial_cpu_rate(self):
+        clock, receipts = [0.], []
+
+        def gpu():
+            clock[0] += 2.
+            return []
+
+        def values(*args):
+            return {'cpu.stat': f'usage_usec {int(clock[0] * 1e6)}', 'io.stat': ''}
+
+        args = SimpleNamespace(device_number='8:0', memory_bytes=1, high_bytes=1,
+                               profile='archive', timeout=10, telemetry=Path('unused'), command=['unused'])
+        replacements = {'os.getuid': lambda: 1000, 'current_cgroup': lambda: Path('/unused'),
+                        'verify_limits': lambda *a: {}, 'verify_service': lambda *a: {},
+                        'read_values': values, 'pressure': lambda *a: {}, 'gpu_memory': gpu,
+                        'time.monotonic': lambda: clock[0],
+                        'time.sleep': lambda seconds: clock.__setitem__(0, clock[0] + seconds),
+                        'atomic_json': lambda path, state: receipts.append(deepcopy(state))}
+        with ExitStack() as stack:
+            for name, replacement in replacements.items():
+                stack.enter_context(patch('bounded_run.' + name, replacement))
+            child = stack.enter_context(patch('bounded_run.subprocess.Popen')).return_value
+            child.poll.side_effect = [None, 0]
+            child.returncode = 0
+            self.assertEqual(inside(args), 0)
+        self.assertAlmostEqual(receipts[-1]['sampled_peak_cpu_cores'], 1.)
+
+    def test_smallest_tier_reserves_fifty_percent_above_peak(self):
+        self.assertEqual(select_profile(), 'adaptive-16g-4c')
+        self.assertEqual(select_profile(complex_model=True), 'adaptive-24g-4c')
+        for peak_gib, tier in ((4, 8), (8, 16), (12, 24), (17, 32), (24, 40)):
+            self.assertEqual(select_profile(peak_gib * 1024, cores=8), f'adaptive-{tier}g-8c')
+        for peak in (0, -1, float('inf'), float('nan'), 28 * 1024):
+            with self.assertRaises(ValueError):
+                select_profile(peak)
+        self.assertEqual(PROFILES['experiment']['cpu'], 200)
+        self.assertEqual(PROFILES['experiment-24g']['memory'], 24576)
+
+    def test_batch_restart_reuses_plan_but_cannot_change_resources(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            receipt = root / 'prior.json'
+            receipt.write_text(json.dumps({'telemetry': {'final': {'memory.peak': str(12 * 1024**3)}}}))
+            path = root / 'batch.json'
+            plan = freeze_resources(path, receipt)
+            self.assertEqual(plan['profile'], 'adaptive-24g-4c')
+            original = path.read_bytes()
+            self.assertEqual(freeze_resources(path, receipt), plan)
+            with self.assertRaisesRegex(ValueError, 'frozen'):
+                freeze_resources(path, receipt, cores=8)
+            self.assertEqual(path.read_bytes(), original)
+            receipt.write_text('{}')
+            with self.assertRaises(KeyError):
+                freeze_resources(root / 'missing.json', receipt)
+            self.assertFalse((root / 'missing.json').exists())
+
+    def test_missing_pressure_is_not_zero(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.assertTrue(all(value is None for value in pressure(Path(directory)).values()))
+
+
 class EffectiveLimitTests(unittest.TestCase):
+    def test_missing_task_peak_is_null_but_missing_enforcement_is_an_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.assertIsNone(read_values(root, ['pids.peak'])['pids.peak'])
+            with self.assertRaises(FileNotFoundError):
+                read_values(root, ['pids.max'])
+            (root / 'pids.peak').write_text('138')
+            self.assertEqual(read_values(root, ['pids.peak'])['pids.peak'], '138')
+
+    def test_framework_task_limit_requires_exact_effective_bound(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            values = {'memory.max': '1024', 'memory.high': '768',
+                      'memory.swap.max': '0', 'cpu.max': '400000 100000',
+                      'pids.max': '256', 'io.max': '8:0 rbps=33554432 wbps=16777216'}
+            for name, value in values.items():
+                (root / name).write_text(value)
+            self.assertEqual(verify_limits(root, '8:0', 1024, 768, 'adaptive-24g-4c-256t'), values)
+            for bad in ('128', '512', 'max'):
+                (root / 'pids.max').write_text(bad)
+                with self.assertRaises(RuntimeError):
+                    verify_limits(root, '8:0', 1024, 768, 'adaptive-24g-4c-256t')
+
     def test_requested_but_missing_cpu_or_device_limits_are_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

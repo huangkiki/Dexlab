@@ -195,8 +195,13 @@ def score_force_case(directory, protocol):
     if (record.get('condition') != case['condition'] or record.get('repeat') != 0
             or record.get('case_id') != case['id']):
         raise ValueError('Mislabeled force-limit trajectory')
+    return score_force_record(record, case, include_timeline=True)
+
+
+def score_force_record(record, case, *, include_timeline=False):
+    """Score a case whose manifest and acquisition identity the caller verified."""
     result = score_trial(record, .0005, force_limit=case['force_limit_N'],
-                         initial_x=case['initial_x_m'], include_timeline=True)
+                         initial_x=case['initial_x_m'], include_timeline=include_timeline)
     checks = result['checks']
     observed = record['initial']
     checks['initial_rest_orientation'] = (

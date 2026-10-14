@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "scope": "Development clock/contact diagnostic only; not the three-task coverage cohort or a solver ranking.",
+  "versions": {
+    "mujoco": "3.11.0",
+    "mujoco_warp": "3.11.0",
+    "newton": "1.5.0",
+    "warp": "1.16.0"
+  },
+  "device": "cuda:0",
+  "dt_s": 0.001,
+  "steps": 200,
+  "gravity_m_s2": 9.81,
+  "angle_deg": 15.0,
+  "friction": 0.5,
+  "side_m": 0.04,
+  "mass_kg": 0.064,
+  "clearance_m": 1e-06,
+  "use_cuda_graph": true,
+  "limits": {
+    "clock_s": 1e-06,
+    "dt_s": 1e-10,
+    "momentum_Ns": 1e-07,
+    "force_N": 1e-05,
+    "velocity_m_s": 1e-06,
+    "freefall_m": 0.002,
+    "support_m": 0.01
+  },
+  "cases": [
+    {
+      "id": "newton-support",
+      "mujoco_contacts": false,
+      "no_floor": false
+    },
+    {
+      "id": "newton-no-floor",
+      "mujoco_contacts": false,
+      "no_floor": true
+    },
+    {
+      "id": "mjwarp-support",
+      "mujoco_contacts": true,
+      "no_floor": false
+    },
+    {
+      "id": "mjwarp-no-floor",
+      "mujoco_contacts": true,
+      "no_floor": true
+    }
+  ],
+  "frozen_before_physics": true,
+  "interpretation": "Support and free fall are basic diagnostic sanity checks. Full incline, collision, finite-pinch development/holdout/reset acceptance is still required. All failed diagnostics remain visible. No tuning budget or holdout has been spent.",
+  "native_payload_sha256": {
+    "libmujoco.so.3.11.0": "7b47f06aa840d4f8fa3c66c2027d52de570bac6d11b9ddd19d55ae1469d40e22",
+    "warp.so": "4502f1ed3f92030c552cff529341e5a0777750fe65ecea8762d7935185673617"
+  },
+  "force_readback": "Official mujoco_warp.contact_force on original GPU addresses; CPU-converted forces retained separately.",
+  "shutdown": "Close the completed USD stage, process10 app updates with no stage and stopped timeline, then official default fast shutdown.",
+  "changes_from_v1": "Observe native contact forces and addresses alongside CPU conversion. Preserve all originalv1 failures; numerical/physical thresholds unchanged.",
+  "changes_from_v2": "Full application teardown stalled after completed no-floor recording and was stopped; keep that failure. New hypothesis: drain stage events before shutdown; physics limits and inputs unchanged.",
+  "renderer_async_init": false,
+  "changes_from_v3": "Official base app enables renderer.asyncInit. Detaching plus10 app updates did not solve busy TaskGroup shutdown. Freeze synchronous renderer initialization to test outstanding startup tasks; no physics parameter or threshold changes."
+}

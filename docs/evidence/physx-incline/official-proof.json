@@ -1,0 +1,43 @@
+{
+  "sdk_version": "5.9.0",
+  "source_commit": "517a0073715120e114ee055b63b26c95e00d9039",
+  "exact_physx_source_blobs_after_build": 2155,
+  "engine_source_modified": false,
+  "compiler": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "cmake": "cmake version 3.22.1",
+  "preset": "linux-gcc-cpu-only",
+  "configuration": "release",
+  "parallel_jobs": 4,
+  "libraries": {
+    "lib/bin/linux.x86_64/release/libPhysXPvdSDK_static_64.a": {
+      "bytes": 721056,
+      "sha256": "2cfd7d35cd5bc69b54b6b2dba44590009b082aaa5399b524e32a3b5bf3e8d01f"
+    },
+    "lib/bin/linux.x86_64/release/libPhysXCommon_static_64.a": {
+      "bytes": 6594484,
+      "sha256": "4d0e74f5e24d077281f3340ddb70bc7a240bb1a32fe075e7f6d2427abd1ace51"
+    },
+    "lib/bin/linux.x86_64/release/libPhysXExtensions_static_64.a": {
+      "bytes": 3664832,
+      "sha256": "567ff668b1ec5ba5a3da88226cd6b10f1335c333ed0f4772cf9c453b72d7445c"
+    },
+    "lib/bin/linux.x86_64/release/libPhysXCooking_static_64.a": {
+      "bytes": 10934,
+      "sha256": "1856b1d48b301ad72f326ef100cec1e61ca951027ce192cb0c88d0a4accfda5e"
+    },
+    "lib/bin/linux.x86_64/release/libPhysXFoundation_static_64.a": {
+      "bytes": 167366,
+      "sha256": "d068f176315e2987f9d61f1f103470895fb2f6b72fdba3c4e845976d49b12e7d"
+    },
+    "lib/bin/linux.x86_64/release/libPhysX_static_64.a": {
+      "bytes": 7583496,
+      "sha256": "bbd89f7d7dbe944cad67e8a1df131425c6274ac100527c74906f26993c4cd54e"
+    }
+  },
+  "compile_commands_sha256": "41a56d577219a0919e661ec06ece30f912d66219535d70caefa57306ec183a02",
+  "native_simulation_qualified": false,
+  "binary_sha256": "046bbc1c7d478bb98a38a8cbe397b353ccc8f4700d34a47a4fcdef997c704aba",
+  "recorder_sha256": "32d90ba62a399c4ea381f3cbffa9b518762195aa70c08e0fda785dcaf54a3b6a",
+  "source_identity_sha256": "c56b07579b7d0ed5533a324c07c531fd622220c961a945649d1dd132ff74aa7b",
+  "source_archive_sha256": "bc894626070f0658a3235231c825c3e0f8ad1fd9d5077a63cb5bdaffe8816407"
+}

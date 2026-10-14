@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+The [historical solver/version audit](../../docs/physx-solver-audit.md) separates native scene readbacks, source/report TGS profiles and missing fields; [P0 #126](https://github.com/huangkiki/Dexlab/issues/126) retains contemporaneous core/loaded-library identity gaps.
+
 Three UniLab tasks measure planar sliding, normal loading/unloading, and two-pad cylinder loading/release. MuJoCo 3.11.0 and SuperDex 1.0.0 FP64 use official native APIs; PhysX uses the qualified UniSim/Isaac Sim 5.1 adapter. Engine sources and binaries are unchanged.
 
 **These are uncalibrated development experiments, not held-out results or engine-accuracy rankings.** Failures are retained. New [synthetic response–cost](RESPONSE_COST.md) and [prospective paired transfer](TRANSFER.md) studies preserve all failures. Complete internal cooking/combined-law readback remains unobservable. Real-material calibration belongs to #6, the apple suite to #3; #10 still requires its full acceptance audit.

@@ -2,6 +2,8 @@
 
 [English](drive.md) | [简体中文](drive.zh-CN.md)
 
+The [historical solver/version audit](../../docs/physx-solver-audit.md) separates native scene readbacks, source/report TGS profiles and missing fields; [P0 #126](https://github.com/huangkiki/Dexlab/issues/126) retains contemporaneous core/loaded-library identity gaps.
+
 A fixed-base prismatic joint runs through UniSim and official Isaac Sim 5.1. Enabling native per-iteration TGS external forces passes independent acceptance for the complete two-second record. The default setting fails the stationary-velocity check; its record is retained. This qualifies an ideal single joint, not OpenArm/Wuji actuators, drives in contact, or apple grasping.
 
 ## Finding and native control

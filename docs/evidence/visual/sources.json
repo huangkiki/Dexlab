@@ -1,0 +1,769 @@
+{
+  "schema_version": 1,
+  "scope": "Offline presentation of immutable historical cohorts; no new physics runs, scoring or reliable coverage.",
+  "variants": [
+    {
+      "id": "incline-static-0.001",
+      "kind": "incline",
+      "condition": {
+        "regime": "static",
+        "angle_deg": 15,
+        "friction": 0.5,
+        "timestep_s": 0.001,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "static-d0.9-h0.001",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "static-d0.9-h0.001",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "static-h0.001",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "static-h0.001",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "static-h0.001",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "static-h0.001",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-static-0.002",
+      "kind": "incline",
+      "condition": {
+        "regime": "static",
+        "angle_deg": 15,
+        "friction": 0.5,
+        "timestep_s": 0.002,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "static-d0.9-h0.002",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "static-d0.9-h0.002",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "static-h0.002",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "static-h0.002",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "static-h0.002",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "static-h0.002",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-static-0.0005",
+      "kind": "incline",
+      "condition": {
+        "regime": "static",
+        "angle_deg": 15,
+        "friction": 0.5,
+        "timestep_s": 0.0005,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "static-d0.9-h0.0005",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "static-d0.9-h0.0005",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "static-h0.0005",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "static-h0.0005",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "static-h0.0005",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "static-h0.0005",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-sliding-0.001",
+      "kind": "incline",
+      "condition": {
+        "regime": "sliding",
+        "angle_deg": 35,
+        "friction": 0.5,
+        "timestep_s": 0.001,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "sliding-d0.9-h0.001",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "sliding-d0.9-h0.001",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "sliding-h0.001",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "sliding-h0.001",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "sliding-h0.001",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "sliding-h0.001",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-sliding-0.002",
+      "kind": "incline",
+      "condition": {
+        "regime": "sliding",
+        "angle_deg": 35,
+        "friction": 0.5,
+        "timestep_s": 0.002,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "sliding-d0.9-h0.002",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "sliding-d0.9-h0.002",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "sliding-h0.002",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "sliding-h0.002",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "sliding-h0.002",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "sliding-h0.002",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-sliding-0.0005",
+      "kind": "incline",
+      "condition": {
+        "regime": "sliding",
+        "angle_deg": 35,
+        "friction": 0.5,
+        "timestep_s": 0.0005,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "sliding-d0.9-h0.0005",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "sliding-d0.9-h0.0005",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "sliding-h0.0005",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "sliding-h0.0005",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "sliding-h0.0005",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "sliding-h0.0005",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-frictionless-0.001",
+      "kind": "incline",
+      "condition": {
+        "regime": "frictionless",
+        "angle_deg": 15,
+        "friction": 0,
+        "timestep_s": 0.001,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "frictionless-d0.9-h0.001",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "frictionless-d0.9-h0.001",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "frictionless-h0.001",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "frictionless-h0.001",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "frictionless-h0.001",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "frictionless-h0.001",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-frictionless-0.002",
+      "kind": "incline",
+      "condition": {
+        "regime": "frictionless",
+        "angle_deg": 15,
+        "friction": 0,
+        "timestep_s": 0.002,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "frictionless-d0.9-h0.002",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "frictionless-d0.9-h0.002",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "frictionless-h0.002",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "frictionless-h0.002",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "frictionless-h0.002",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "frictionless-h0.002",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "incline-frictionless-0.0005",
+      "kind": "incline",
+      "condition": {
+        "regime": "frictionless",
+        "angle_deg": 15,
+        "friction": 0,
+        "timestep_s": 0.0005,
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "duration_s": 2
+      },
+      "entries": [
+        {
+          "id": "mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.15.0 / native CPU FP64 / PGS elliptic Euler",
+          "source_id": "146",
+          "record": "frictionless-d0.9-h0.0005",
+          "score": "docs/evidence/mujoco-incline/pgs-elliptic-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.50.0"
+        },
+        {
+          "id": "superdex",
+          "engine": "SuperDex",
+          "configuration": "1.0.0 / native CPU FP64 / Newton AUTO C1",
+          "source_id": "147",
+          "record": "frictionless-d0.9-h0.0005",
+          "score": "docs/evidence/superdex-incline/newton-auto-c1-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.51.0"
+        },
+        {
+          "id": "genesis",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / native CPU FP64 / Newton elliptic Signorini",
+          "source_id": "148",
+          "record": "frictionless-h0.0005",
+          "score": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.52.0"
+        },
+        {
+          "id": "newton",
+          "engine": "Newton Physics",
+          "configuration": "1.6.1 / native CPU FP32 / XPBD 100 sweeps",
+          "source_id": "149",
+          "record": "frictionless-h0.0005",
+          "score": "docs/evidence/newton-incline/xpbd-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.53.0"
+        },
+        {
+          "id": "physx",
+          "engine": "PhysX",
+          "configuration": "5.9.0 / native CPU FP32 / PGS patch friction",
+          "source_id": "150",
+          "record": "frictionless-h0.0005",
+          "score": "docs/evidence/physx-incline/pgs-score.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/tag/v0.54.0"
+        },
+        {
+          "id": "drake",
+          "engine": "Drake",
+          "configuration": "1.57.0 / native CPU FP64 / SAP kLagged hydroelastic",
+          "source_id": "117",
+          "record": "frictionless-h0.0005",
+          "score": "docs/evidence/drake-incline/score-v2.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.49.0/dexlab-drake-incline-v2.tar.gz"
+        }
+      ],
+      "references": [
+        "Ideal nonrotating Coulomb block; a=g max(0,sin(theta)-mu cos(theta)); support=mg cos(theta). Static inequality only below threshold; finite geometry, contact transitions and model differences remain.",
+        "Original batch baselines: MuJoCo first executed frozen profile; others original declared baseline/first frozen profile; never chosen by pass count."
+      ]
+    },
+    {
+      "id": "normal-calibration",
+      "kind": "normal",
+      "condition": {
+        "side_m": 0.04,
+        "mass_kg": 0.2,
+        "timestep_s": 0.0005,
+        "target_stiffness_n_m": 20000,
+        "duration_s": 0.8
+      },
+      "entries": [
+        {
+          "id": "initial-mujoco",
+          "engine": "MuJoCo",
+          "configuration": "3.11.0 / native Newton / Initial: solimp 0.9; solref stiffness -10000",
+          "source_id": "normal",
+          "record": "raw/initial-mujoco",
+          "score": "demos/contact-benchmark/evidence/normal-response-v1.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-normal-response-evidence.tar.gz"
+        },
+        {
+          "id": "validation-mujoco-reference",
+          "engine": "MuJoCo",
+          "configuration": "3.11.0 / native Newton / Calibrated: solimp 0.9; stiffness -2499.883",
+          "source_id": "normal",
+          "record": "raw/validation-mujoco-reference",
+          "score": "demos/contact-benchmark/evidence/normal-response-v1.json",
+          "archive": "https://github.com/huangkiki/Dexlab/releases/download/v0.13.0/v0.13.0-normal-response-evidence.tar.gz"
+        }
+      ],
+      "references": [
+        "20 kN/m is a synthetic response target, not measured material stiffness. Original 17-run protocol retained; calibrated parameters do not qualify transfer."
+      ]
+    },
+    {
+      "id": "pinch-retention",
+      "kind": "pinch",
+      "condition": {
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "timestep_s": 0.0005,
+        "friction": 0.5,
+        "hold_window_s": [
+          2,
+          3
+        ],
+        "duration_s": 4
+      },
+      "entries": [
+        {
+          "id": "dev-cap-0.4",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / CPU FP64 / Newton elliptic / dev-cap-0.4",
+          "record": "docs/evidence/force-limit/cases/dev-cap-0.4",
+          "replay": "docs/evidence/force-limit/replays/dev-cap-0.4",
+          "score": "docs/evidence/force-limit/summary.json"
+        },
+        {
+          "id": "dev-cap-0.8",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / CPU FP64 / Newton elliptic / dev-cap-0.8",
+          "record": "docs/evidence/force-limit/cases/dev-cap-0.8",
+          "replay": "docs/evidence/force-limit/replays/dev-cap-0.8",
+          "score": "docs/evidence/force-limit/summary.json"
+        }
+      ],
+      "references": [
+        "Ideal static sum normal-force reference mg/mu=1.25568 N; plotted pad x force is a projection proxy, not an actuator measurement. Hold height >=60 mm during 2-3 s; full original acceptance retained."
+      ]
+    },
+    {
+      "id": "pinch-negative",
+      "kind": "pinch",
+      "condition": {
+        "side_m": 0.04,
+        "mass_kg": 0.064,
+        "timestep_s": 0.0005,
+        "friction": 0.5,
+        "hold_window_s": [
+          2,
+          3
+        ],
+        "duration_s": 4
+      },
+      "entries": [
+        {
+          "id": "dev-open",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / CPU FP64 / Newton elliptic / dev-open",
+          "record": "docs/evidence/force-limit/cases/dev-open",
+          "replay": "docs/evidence/force-limit/replays/dev-open",
+          "score": "docs/evidence/force-limit/summary.json"
+        },
+        {
+          "id": "dev-cap-0.8",
+          "engine": "Genesis",
+          "configuration": "1.4.3 / CPU FP64 / Newton elliptic / dev-cap-0.8",
+          "record": "docs/evidence/force-limit/cases/dev-cap-0.8",
+          "replay": "docs/evidence/force-limit/replays/dev-cap-0.8",
+          "score": "docs/evidence/force-limit/summary.json"
+        }
+      ],
+      "references": [
+        "Ideal static sum normal-force reference mg/mu=1.25568 N; plotted pad x force is a projection proxy, not an actuator measurement. Hold height >=60 mm during 2-3 s; full original acceptance retained."
+      ]
+    }
+  ]
+}

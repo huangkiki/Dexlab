@@ -1,0 +1,29 @@
+{
+  "packages": {
+    "genesis-world": {
+      "version": "1.4.3",
+      "record_verified": true,
+      "code_sha256": "061c95aca53a9c40f514b098c211539062374324dbd5ebbff06017fcdcd8894b"
+    },
+    "quadrants": {
+      "version": "1.3.3",
+      "record_verified": true,
+      "code_sha256": "584954d89a1ea3a521252aacc9c1166bdf9d2c4e0319438e0d8403b22ed51e74"
+    }
+  },
+  "mapped_native": {
+    "quadrants/_lib/core/quadrants_python.cpython-312-x86_64-linux-gnu.so": "1be7a3d0967467cf3851f77587bcb43d7e69dc0c873d01bf01f5353f4fb655ec"
+  },
+  "backend": "cpu",
+  "precision": "float64",
+  "deterministic": true,
+  "seed": 0,
+  "compiler": {
+    "cpu_max_num_threads": 1,
+    "num_compile_threads": 1,
+    "fast_math": true,
+    "random_seed": 0
+  },
+  "compiler_default_fp": "f64",
+  "engine_patches": false
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "profile": "newton-elliptic-signorini",
+    "solver": "Newton",
+    "cone": "elliptic",
+    "resolution": "signorini",
+    "score": {
+      "path": "docs/evidence/genesis-incline/newton-elliptic-signorini-score.json",
+      "sha256": "a52cbceca63d9de7b3e97bf020b9abf1552bb9f9fbcf2321c91e90aa1d46e9e2"
+    },
+    "protocol": {
+      "path": "docs/evidence/genesis-incline/profiles/newton-elliptic-signorini.json",
+      "sha256": "812637712f5829e82c1741f785fc24d24e6702e5bd0b2f40cc924d061f8dffa4"
+    },
+    "passed": 6,
+    "total": 9,
+    "invalid": 0
+  },
+  {
+    "profile": "newton-elliptic-convex",
+    "solver": "Newton",
+    "cone": "elliptic",
+    "resolution": "convex",
+    "score": {
+      "path": "docs/evidence/genesis-incline/newton-elliptic-convex-score.json",
+      "sha256": "e938fb75c7ad87446eaf7823a3af86717e933ccd731b275ce8f6988aca600b42"
+    },
+    "protocol": {
+      "path": "docs/evidence/genesis-incline/profiles/newton-elliptic-convex.json",
+      "sha256": "b0576ac9e01fcbde11850f1f0fa7b29098bd45b5eea862c9ffdde8868d3f3138"
+    },
+    "passed": 3,
+    "total": 9,
+    "invalid": 0
+  },
+  {
+    "profile": "newton-pyramidal-convex",
+    "solver": "Newton",
+    "cone": "pyramidal",
+    "resolution": "convex",
+    "score": {
+      "path": "docs/evidence/genesis-incline/newton-pyramidal-convex-score.json",
+      "sha256": "0087e0ad79fbf04b2013ed58072a7f0cd6aa1a140856a95510008846fbce3d67"
+    },
+    "protocol": {
+      "path": "docs/evidence/genesis-incline/profiles/newton-pyramidal-convex.json",
+      "sha256": "0217ad78247ea4cef621e92a1ee471821ca566a1e8436ef4fee00e8a890b6829"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid": 0
+  },
+  {
+    "profile": "cg-elliptic-convex",
+    "solver": "CG",
+    "cone": "elliptic",
+    "resolution": "convex",
+    "score": {
+      "path": "docs/evidence/genesis-incline/cg-elliptic-convex-score.json",
+      "sha256": "11876e3381e293a43c79ed72326d023064a120cc3fa387d27fd9c3df87ecb675"
+    },
+    "protocol": {
+      "path": "docs/evidence/genesis-incline/profiles/cg-elliptic-convex.json",
+      "sha256": "4ec0bd0862537fc6b20478fbfc25fceac085d7de9af934fb8f325641309bdc69"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid": 4
+  },
+  {
+    "profile": "cg-pyramidal-convex",
+    "solver": "CG",
+    "cone": "pyramidal",
+    "resolution": "convex",
+    "score": {
+      "path": "docs/evidence/genesis-incline/cg-pyramidal-convex-score.json",
+      "sha256": "8489793f1b813792ac369394ea9192a0377a917405ec768e786c3f79e474bac7"
+    },
+    "protocol": {
+      "path": "docs/evidence/genesis-incline/profiles/cg-pyramidal-convex.json",
+      "sha256": "70b64a49d30f76be67173bf4656ff23ae2476aca456c14b182766191c669d563"
+    },
+    "passed": 0,
+    "total": 9,
+    "invalid": 3
+  }
+]

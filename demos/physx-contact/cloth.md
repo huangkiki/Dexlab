@@ -54,7 +54,7 @@ Development runs and prior API, initialization and boundary failures are retaine
 
 ## Frozen experiment results
 
-Pinned Isaac Sim 5.1.0.0 / IsaacLab 0.47.2 / PhysX 107.3 on RTX 4090. Existing scene manifests were used without held-out retuning. Results on the final source:
+Recorded host: Isaac Sim 5.1.0.0 / IsaacLab 0.47.2 on RTX 4090. The previous “PhysX 107.3” label conflated the integration family with the native core; [the audit and #126](../../docs/physx-solver-audit.md) preserve the missing historical core identity and distinguish the surface API from rigid PGS/TGS. Existing scene manifests were used without held-out retuning. Results on the final source:
 
 | Experiment set | Passed | Physics check failed | Unsupported |
 |---|---:|---:|---:|

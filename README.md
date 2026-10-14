@@ -2,95 +2,145 @@
 
 **以经典物理规律与已有经验公式为参照，通过可复现实验，研究接触与摩擦对机器人抓取的影响，评估物理仿真的可信度。**
 
-我们用斜面摩擦、一维碰撞和夹持实验，对照解析解、守恒律及有来源的经验关系，检查仿真中的力、运动与接触。这个仓库提供**实验结论、可复现代码和原始数据**，分析哪些可测因素影响抓取表现，并明确结论的适用条件。
+这项研究服务于两个目标：
 
-[English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [实验报告](docs/site/zh/results.md) · [安装与复现](docs/installation.zh-CN.md) · [版本与数据下载](https://github.com/huangkiki/Dexlab/releases)
+| 你面临的问题 | DexLab 提供的答案 |
+| --- | --- |
+| **场景表现不好，应该改什么？** | 找到偏离物理预期的位置，区分参数、接入、模型假设与求解过程的影响，给出有证据的配置修正和 solver 改进方向。 |
+| **面对新场景，怎样选择引擎／solver？** | 根据相近接触与摩擦条件的实验，选择候选配置，了解参数敏感性、适用边界、稳定性和成本，逐步积累场景适配经验。 |
 
-文档站按每次 main 合并自动更新；首页提供实验结论、同工况对照与六引擎覆盖状态。
+[English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](docs/site/zh/experience.md) · [诊断与试参方法](docs/site/zh/diagnosis.md) · [场景选型指南](docs/site/zh/selection.md)
 
-## 引擎、求解器与版本
+<!-- visual-research:start -->
+## 比较了哪些引擎与 solver
 
-下表区分**已有证据**与**同工况对照**；不同任务、版本的结果不能拼成统一排名。版本是报告中的实测版本，不代表当前最新版。
+| 引擎 | 已登记配置的角色（非同级算法清单） | 实验版本与路径 |
+| --- | --- | --- |
+| **MuJoCo** | 约束求解: CG (nonlinear) · Newton · PGS<br>摩擦锥: elliptic · pyramidal<br>积分配置: Euler · implicitfast<br>角色/身份待核实: SolverMuJoCo; algorithm unqualified | 3.11.0, 3.14.0, 3.15.0; native / 历史路径详见矩阵 |
+| **SuperDex** | 柔性实现: experimental-shell<br>外层非线性: BFGS · Newton · SR1<br>线性子求解: ASYNC_CG · AUGMENTED_CG · CG · CUDA_CG · CUDA_GMRES · EXPERIMENTAL_CUDA_SPARSE_CHOLESKY · EXPERIMENTAL_CUDA_SPARSE_LDLT · EXPERIMENTAL_CUDA_SPARSE_LU · GMRES · LDLT · LU · MINRES · PARALLEL_CG<br>线性分支选择: AUTO<br>摩擦正则化/模型: C1_REGULARIZED · CINF_REGULARIZED<br>标签中的精度: FP64 | 1.0.0; native / 历史路径详见矩阵 |
+| **Genesis** | 柔性实现: PBD<br>约束求解: CG (nonlinear) · Newton<br>摩擦锥: elliptic · pyramidal<br>接触模型: Signorini · convex<br>耦合路径: rigid coupling<br>积分配置: approximate_implicitfast | 1.4.3; native / 历史路径详见矩阵 |
+| **Newton Physics** | 实现/系统: Featherstone · Kamino · SemiImplicit · VBD · VBD compliant · VBD legacy · XPBD<br>柔性实现: ImplicitMPM · Style3D<br>动力学求解后端: DVI · PADMM<br>积分配置: Euler<br>更新/预算选项: 100 sweeps | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / 历史路径详见矩阵 |
+| **PhysX** | 柔性实现: surface cloth<br>约束求解: PGS · TGS<br>摩擦正则化/模型: patch friction<br>更新/预算选项: external forces every iteration · friction every iteration<br>角色/身份待核实: historical readback incomplete (#126) · pending qualification | 5.9.0; native / 历史路径详见矩阵 |
+| **Drake** | 约束求解: SAP<br>接触模型: hydroelastic · point<br>离散接触近似: kLagged · kSap · kSimilar<br>角色/身份待核实: not qualified | 1.57.0; native / 历史路径详见矩阵 |
 
-| 引擎 / 运行版本 | 求解器与数值配置 | 已有证据范围 |
-|---|---|---|
-| MuJoCo 3.15.0 | Newton 求解器；Euler 积分；elliptic 摩擦锥；100 次迭代上限，容差 1e-10 | 下方九组斜面配对，以及碰撞、夹持诊断 |
-| SuperDex 1.0.0 FP64 | 原生非线性求解器（记录未确认算法名称）；Backward Euler 积分；penalty 接触；100 次迭代上限，绝对/相对容差 1e-9 | 下方九组斜面配对；[冻结配置](docs/evidence/incline-comparison/manifest.json) |
-| Genesis 1.4.3 CPU FP64 | 原生刚体求解器；elliptic 摩擦锥，noslip_iterations=0；该记录未单独确认算法名称 | [16 组夹持力限额实验](docs/force-limit-results.zh-CN.md)，未参与下方斜面配对 |
-| Newton Physics 1.6.1 / Warp 1.18.0 | CPU SolverXPBD，float32；4 次迭代，dt=1 ms | [球–平面及负例](docs/newton-contact.zh-CN.md)，不等于抓取对照 |
-| PhysX（历史 Isaac Sim 5.1 / UniSim 1.7.10 接入） | 原生核心版本及算法须按各记录核验；不能用宿主版本替代 PhysX 版本 | [历史接触实验](demos/contact-benchmark/README.zh-CN.md)；不属于下方双引擎批次 |
-| Drake | 尚无已验收的运行版本或求解器结果 | 接入与首轮评测见 [#117](https://github.com/huangkiki/Dexlab/issues/117) |
+原生与框架 **MJWarp** 另列运行路径及实际核心。Newton Physics 是引擎项目，Newton 也是求解算法名。SuperDex BFGS／SR1 在已测 assembly period=1 时执行 Newton 等价步；配置名不计作独立算法。
 
-后续评测必须覆盖 **MuJoCo、SuperDex、Genesis、Newton Physics、PhysX、Drake** 及适用的已登记求解器配置。每份报告列出完整工况矩阵：已通过、已失败、受阻、不支持或未运行；缺项必须关联 Issue，补齐前仅称阶段结果。既有结果保留原范围，不追认成全引擎评测。ManiSkill/SAPIEN/Isaac Sim 是接入层，UniLab 是任务层，不能重复计作独立引擎；Newton Physics 与 MuJoCo 的 Newton 算法也不是一回事。
+本表是研究对象概览，包含失败与未准入项；执行情况、CPU/GPU、精度、完整配置和不支持原因见 [完整矩阵 / Full matrix](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)。
 
-## 引擎对比：同一个方块，两种固定配置
+角色按各引擎的已记录名称解释，不代表这些算法求解同一问题，也不证明任意组合已经执行。AUTO 只是选择策略；未知身份不从默认值补写。
 
-官方 **MuJoCo 3.15.0** 与 **SuperDex 1.0.0 FP64**：相同 40 mm／64 g 方块、初态与重力，三个步长（2／1／0.5 ms），每例 2 秒。复用已有 MuJoCo 数据，新增九例 SuperDex 对照。
+**比较边界：** 系统配置选型与受控算法归因分开；记录完整性、数值一致性、物理参照和任务结果分别阅读，原始评分与失败分母不变。 [分类与证据说明](docs/solver-taxonomy.zh-CN.md)。
 
-| 工况 | MuJoCo（impedance=0.9） | SuperDex（固定 penalty 配置） |
-|---|---|---|
-| 15° 静摩擦，μ=0.5 | 漂移 **1.301–1.336 mm**，0/3 通过 | 漂移 **0.708–1.132 mm**，2/3 通过 |
-| 35° 滑动，μ=0.5 | 转动、间歇失去支撑，0/3 通过 | 评分窗内稳定滑动，3/3 通过 |
-| 15° 名义零摩擦 | 速度 RMSE **8.21×10⁻⁵ m/s**，3/3 通过 | 速度 RMSE **8.04×10⁻¹²–1.52×10⁻¹⁰ m/s**，3/3 通过 |
+细 SDF 几何与材料响应仍需 [#178](https://github.com/huangkiki/Dexlab/issues/178) 资格核验；布料材料、碰撞/耦合与夹持分别由 [#179](https://github.com/huangkiki/Dexlab/issues/179) 补齐基线。既有开发案例通过不等于公平的跨引擎材料比较。
 
-**结论：接触配置会改变漂移和稳定性，不能只凭引擎名称判断。** SuperDex 在这组固定配置下满足更多判据，但细化步长反而增大了静态漂移；已有 MuJoCo impedance=0.99 结果的漂移仅 **0.141–0.179 mm**，小于上述 SuperDex 结果。零摩擦差异还涉及 MuJoCo 的原生摩擦下限。速度误差使用 0.5–2 s 窗口；初始瞬态、全部失败及不同接触模型的条件见报告。
+**MJWarp 运行路径对照（归入 MuJoCo 核心）**
 
-[完整对照、参数和原始数据](docs/incline-comparison-results.zh-CN.md)。这些计数是固定工况的容差判定，不能推广为真实材料精度或通用引擎排名。
+| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |
+| --- | --- | --- | --- |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
+| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
+| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html) |
 
-## 我们得出了什么结论
+已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。
 
-### 1. 碰撞后的速度正确，不代表碰撞过程准确
+## 做了哪些实验
 
-在官方 MuJoCo 3.15.0 的一维弹性碰撞实验中，18 个工况均通过末态判据，但接触重叠达到 **5–20 mm**。进一步改变刚度和步长后，27 个工况中有 **24 个末态通过，只有 2 个同时满足预设的 1 mm 重叠预算**。因此，评价碰撞必须同时看速度、能量和接触过程。
+| 实验画面／图表 | 比较对象与研究结论 |
+| --- | --- |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="LIBERO 原生抓取：诊断与改进"></a> | **[LIBERO 原生抓取：诊断与改进](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>如何从已有 benchmark 定位问题，再验证修改？<br>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="法向与瞬态响应"></a> | **[法向与瞬态响应](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>压入、卸载与动态响应如何随参数改变？<br>静态校准有效，动态响应和质量迁移须分别验证。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="六引擎斜面与摩擦"></a> | **[六引擎斜面与摩擦](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>静止、滑动和低摩擦有哪些差异？<br>原配置结果与观测有效性分列；全部失败保留。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html"><img src="./docs/evidence/impact-phase/sensitivity.png" width="200" alt="碰撞与接触起始"></a> | **[碰撞与接触起始](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)**<br>MuJoCo · SuperDex<br>步长、刚度及碰撞相位怎样影响瞬态？<br>已有相位与刚度扫描；更小步长不自动消除模型差异。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#pinch"><img src="./docs/evidence/force-limit/replays/dev-cap-0.8/frame-060.png" width="200" alt="夹具夹持、抬升与释放"></a> | **[夹具夹持、抬升与释放](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#pinch)**<br>Genesis · MuJoCo · SuperDex (separate protocols)<br>夹持为什么保持或滑脱？<br>Genesis 0.4 N 与 0.8 N 配置呈现不同保持结果。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html#apple-replays"><img src="./demos/apple-stem-grasp/media/superdex-sdf.png" width="200" alt="苹果抓梗 · SDF 接触"></a> | **[苹果抓梗 · SDF 接触](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html#apple-replays)**<br>MuJoCo · SuperDex · historical PhysX<br>复杂几何下能否连续保持？<br>已有原生连续回放与独立历史验收；不同批次分列。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html"><img src="./docs/evidence/visual/cloth-poster.png" width="200" alt="布料力学与机器人夹布"></a> | **[布料力学与机器人夹布](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)**<br>MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX<br>柔性形变、接触与保持何时失效？<br>历史柔顺夹布画面；力学、下落与夹布按独立协议记录，保留失败。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#mass-size-transfer"><img src="./docs/evidence/contact-transfer-v1.png" width="200" alt="质量／尺寸迁移"></a> | **[质量／尺寸迁移](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#mass-size-transfer)**<br>MuJoCo · SuperDex<br>固定参数能否迁移到邻近场景？<br>30 条历史迁移记录，联合验收 0/30；失败也是选型依据。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#transient-cost"><img src="./docs/evidence/response-cost-v1.png" width="200" alt="响应误差与计算成本"></a> | **[响应误差与计算成本](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#transient-cost)**<br>MuJoCo · SuperDex<br>更小误差需要什么计算代价？<br>27 条记录区分原生计算、记录和评分成本。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#framework-path"><img src="./docs/evidence/engine-qualification/contact-parameters.png" width="200" alt="原生与框架接入路径"></a> | **[原生与框架接入路径](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#framework-path)**<br>MuJoCo / MJWarp · Newton / Isaac Sim<br>相同核心为何仍可能出现轨迹差异？<br>对齐 CPU 模型后仍有 GPU 字段差异；参数概览图非轨迹证据。 |
 
-[弹性碰撞结果](docs/elastic-impact-results.zh-CN.md) · [刚度与穿透对照](docs/impact-stiffness-results.zh-CN.md) · [离散接触解释](docs/impact-discrete-results.zh-CN.md)
+**待开展／未完成：** 推动、手内旋转、主动折布及更广抓取迁移分别见现有 Issue。预折叠下落不等于主动折布成功；重复、步长扫描和框架切换不增加任务类型。
 
-### 2. 求解更精确，不一定抓得更稳
+## 我们已经知道什么
 
-在 MuJoCo 3.15.0 的标准方块夹持诊断中，收紧求解容差显著减小了力与运动记录之间的残差，但方块在加载一秒后仍下滑约 **2 mm**。数值力平衡改善与物体保持是两个不同结果，必须分别测量。
+### 六引擎斜面：相同工况，响应不同
 
-[夹持承载与滑移](docs/pinch-load-results.zh-CN.md) · [六个工况的残差诊断](docs/pinch-impulse-results.zh-CN.md)
+40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。
 
-### 3. 夹持力限额会改变抓取成败
+![六引擎斜面：相同工况，响应不同](docs/evidence/visual/incline-static-0.001.png)
 
-在 Genesis 的固定标准方块夹具中，16 个工况显示：**0.2/0.4 N 力限额无法保持物体，0.8/10 N 能保持并释放**；在 ±2 mm 初始偏移下保持了这一结果。这给出了该夹具的可复现实验边界。
+![六引擎斜面：相同工况，响应不同 — curves](docs/evidence/visual/incline-static-0.001-curves.zh.svg)
 
-[全部工况、失败和原始记录](docs/force-limit-results.zh-CN.md)
+[同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)
 
-![标准方块夹持、抬升与释放](demos/contact-benchmark/media/genesis-pinch.gif)
+### 法向响应：改参数，还是改 solver？
 
-*上图为 Genesis 实测状态的连续近景回放，由 MuJoCo 显示；对应固定配置演示，全部力限额工况见报告。*
+同一 MuJoCo 场景，从约 80 kN/m 到合成目标 20 kN/m。先看加载窗口的压入曲线，再看完整卸载；成功只属于规定的物理检查与条件。
 
-### 4. 一个场景调好的接触参数，不能直接当作通用材料参数
+![法向响应：改参数，还是改 solver？](docs/evidence/visual/normal-calibration.png)
 
-三个固定接触配置迁移到十组质量／尺寸组合后，**30 次运行均未满足指定的合成动态响应联合目标**。这说明这些参数映射的适用范围有限，需要在不同载荷和尺寸下检查。
+![法向响应：改参数，还是改 solver？ — curves](docs/evidence/visual/normal-summary.zh.svg)
 
-[参数迁移实验与全部结果](demos/contact-benchmark/TRANSFER.zh-CN.md)
+[同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#normal)
 
-这些结论分别对应报告中冻结的引擎版本、模型和工况，属于解析模型与数值实验结论；真实材料精度需要实测参照。它们不能合并成引擎优劣排名。
+### 夹持：0.4 N 滑脱，0.8 N 保持
 
-## 从哪里开始
+同一 Genesis 夹具与物体，只改变指关节驱动力限额。对照完整闭合、抬升、保持和释放，并保留张开负例。
 
-- **查阅外部研究：**[参考资料目录](docs/references/README.zh-CN.md) · [Manda Robotics 物理引擎比较中文导读](docs/references/manda-physics-engines.zh-CN.md)。外部结果与 DexLab 实验分别标注。
+![夹持：0.4 N 滑脱，0.8 N 保持](docs/evidence/force-limit/comparison.gif)
 
-- **看结论与图表：** [完整实验报告](docs/site/zh/results.md)，以及[阶段总结](docs/holiday-report.zh-CN.md)。
-- **复算结果：** 每份报告链接冻结协议、评分代码和原始记录；公开归档见 [Releases](https://github.com/huangkiki/Dexlab/releases)。
-- **运行演示：** 按[安装说明](docs/installation.zh-CN.md)配置环境后，运行下方苹果梗抓取示例。
+![夹持：0.4 N 滑脱，0.8 N 保持 — curves](docs/evidence/visual/pinch-retention-curves.zh.svg)
 
-```bash
-git clone https://github.com/huangkiki/Dexlab.git
-cd Dexlab
-bash scripts/setup.sh
-bash demos/apple-stem-grasp/run.sh --backend mujoco
-# 或 --backend superdex；无显示环境添加 --headless
-```
+[同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#pinch)
 
-演示的 SDF 构建和规划完成后打开窗口，无需模型 API key。各研究实验的版本与运行命令以对应报告为准。
+### LIBERO：原任务、步长对照与观测修正
 
-后续工作、未完成任务和阻塞统一在 [Issues](https://github.com/huangkiki/Dexlab/issues) 跟踪。
+相同动作、初态、Panda 和成功判定；原版 2 ms 与未通过筛查的 1 ms 对照。全部留出任务成功，物理诊断 5/10 对 3/10，成本约翻倍。观测刷新补丁的策略效果未验证。
 
-## 代码与来源
+![LIBERO：原任务、步长对照与观测修正](docs/evidence/visual/libero-summary.png)
 
-实验使用官方物理引擎，保留参数来源、失败工况与独立评分。[实验目录](demos/) · [开发流程](docs/autoresearch.zh-CN.md) · [资产来源与许可](docs/ASSETS.zh-CN.md)
+![LIBERO：原任务、步长对照与观测修正 — curves](docs/evidence/visual/libero-demo0-curves.zh.svg)
 
-感谢 [UniLab](https://github.com/unilabsim/UniLab)、[Project SuperDex](https://github.com/unilabsim/project_superdex)、[MuJoCo](https://github.com/google-deepmind/mujoco)、[Genesis](https://github.com/Genesis-Embodied-AI/Genesis)、[Newton](https://github.com/newton-physics/newton)、[OpenArm](https://github.com/enactic/openarm) 与 [Wuji](https://github.com/wuji-technology)。代码采用 [Apache-2.0](LICENSE)。
+[同步回放、逐步曲线、参数与原始证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#libero)
+
+<!-- visual-research:end -->
+
+LIBERO 离线评分器 v2 增加逐接触距离、物体身份与汇总穿透的一致性检查；重新计算本地哈希不能让矛盾记录通过。原始证据与诊断阈值保持不变。[评分修复与回归](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
+
+## 场景表现不好时如何分析
+
+以“接触表现异常”为例，先声明物理参照与假设，再检查几何、质量／惯量、坐标、控制时刻、有效参数和接触读回。随后固定场景与目标，提出可检验假设，做有限参数试验，用独立评分确认改善及成本。剩余差异再进入接触生成、摩擦表示、约束求解、停止条件、积分和精度的机制研究。
+
+已有 PhysX 案例中，禁碰撞前后初始化质量的顺序导致负例质量错误；修正接入后，其他数值残差仍然存在。参数改善、接入修正、算法研究方向和未解问题分别记录。[完整诊断方法与命令](docs/site/zh/diagnosis.md)
+
+**AI 自动试参是研究方法之一。** AI 利用已有经验提出假设与候选参数；现有执行器、预算账本和独立评分保留所有尝试、失败、有效参数与成本。有限搜索未找到配置时，结论是当前搜索范围尚未成功。新迁移条件事前冻结，历史日志不能充当新留出。
+
+## 新场景如何选择
+
+先描述接触尺度与载荷、粘着／滑动、接触切换、几何及柔顺性，再查找邻近实验。每个候选起点都附版本／路径、参数来源、误差与失败边界，并列出新场景首先要做的验证。
+
+| 新场景的主要困难 | 从哪里开始 |
+| --- | --- |
+| 法向柔顺、加载卸载或瞬态响应 | [法向／瞬态经验](docs/site/zh/selection.md)；核对合成目标和接触律，验证质量／尺寸迁移。 |
+| 支撑、斜面滑动、低摩擦 | [六引擎斜面证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#six-engine-incline)；先确认观测有效，再比较接近目标工况的配置。 |
+| 有限指面夹持、抬升与释放 | [夹持与 SDF 起点](docs/site/zh/selection.md)；核对驱动力、惯量、滑移和负例。 |
+| 更换框架或导入资产 | [原生／框架对照](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#framework-path)；比较转换来源、有效参数和时刻。 |
+
+推荐依赖与目标场景相关的证据，兼顾**物理可信度、稳定性和成本**。覆盖更多任务意味着积累了更广的已验证范围；覆盖表本身不决定某个新场景的最佳方案。
+
+## 研究范围与复现
+
+| 已有研究范围 | 证据入口 |
+| --- | --- |
+| 六引擎基础接触／斜面及适用 solver；碰撞、夹具夹持和机器人抓取 | [完整配置矩阵与各协议状态](docs/site/zh/coverage.md) |
+| 布料力学、预折叠下落、机器人夹布 | [历史协议与失败](docs/site/zh/coverage.md)；预折叠下落不等于主动折布成功。 |
+| 推动、手内旋转与扩展抓取 | [研究路线](docs/site/zh/dexterity.md)；未运行、受阻和不支持分别标注。 |
+
+矩阵保留引擎核心、solver、运行路径、版本、通过／部分通过／失败／未运行／接入受阻／不支持及证据。重复、步长扫描、更换框架不增加任务类型；不同历史协议不合并计数。新 coverage-v1 可靠覆盖尚未验收，历史能力仍以原协议为界。
+
+[安装与复现](docs/installation.zh-CN.md) · [全部报告](docs/site/zh/results.md) · [原始数据与版本](https://github.com/huangkiki/Dexlab/releases) · [研究与开发看板](https://github.com/users/huangkiki/projects/4)
+
+本轮优先复用证据、补齐诊断案例所需缺口，再向夹持／抓取迁移；六引擎矩阵和 594 回合夹持研究继续保留。**定时开发保持暂停。** [开发与验收约定](docs/autoresearch.zh-CN.md)
+
+[当前工作与暂停状态](docs/current-work.zh-CN.md)
+
+**查阅外部研究：** [参考资料目录](docs/references/README.zh-CN.md) · [Manda Robotics 物理引擎比较中文导读](docs/references/manda-physics-engines.zh-CN.md)。外部结果与 DexLab 实验分别标注。

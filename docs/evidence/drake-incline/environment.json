@@ -1,0 +1,15 @@
+{
+  "observation": "Post-acquisition inventory on the same local execution host and unchanged isolated environment; not a per-step hardware measurement",
+  "observed_at": "2026-10-09T16:12:27.130899+00:00",
+  "cpu_model": "Intel(R) Core(TM) i9-14900K",
+  "architecture": "x86_64",
+  "kernel": "6.8.0-138-generic",
+  "python": "3.12.12",
+  "packages": {
+    "drake": "1.57.0",
+    "numpy": "2.5.3"
+  },
+  "device": "CPU",
+  "precision": "float64",
+  "engine_patches": false
+}

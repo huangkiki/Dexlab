@@ -2,6 +2,8 @@
 
 [English](TRANSIENT_RESPONSE.md) | [简体中文](TRANSIENT_RESPONSE.zh-CN.md)
 
+The [historical solver/version audit](../../docs/physx-solver-audit.md) separates native scene readbacks, source/report TGS profiles and missing fields; [P0 #126](https://github.com/huangkiki/Dexlab/issues/126) retains contemporaneous core/loaded-library identity gaps.
+
 **Calibrate a response, then test its transfer. Matching a static indentation is insufficient.** This development comparison adds a declared damping target and timestep refinement to the normal-load fixture. Official MuJoCo 3.11.0, SuperDex 1.0.0 FP64 and PhysX/Isaac Sim 5.1 remain unmodified.
 
 ![Unfiltered transients and timestep refinement](media/transient-response-v1.png)

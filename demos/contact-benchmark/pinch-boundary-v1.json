@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "id": "pinch-boundary-v1",
+  "scope": "Common-fixture protocol; no backend admission or campaign execution implied",
+  "source": {
+    "baseline_commit": "eb689ece5b2ec180420a9f35dacf2d1f443c3ada",
+    "fixture": "src/dexlab/genesis_pinch_probe.py",
+    "fixture_sha256": "e195c50b5fb03a38c5e29914655d491f47f106cc3330225645c45f2def23528f",
+    "historical_criteria": "src/dexlab/genesis_pinch_score.py",
+    "historical_criteria_sha256": "988ec53e28d2ed4bae9249dba95ae6ff45ea8d5e98657abaebe475d0b4a3fb85",
+    "decision_issue": 131,
+    "discussion": 129
+  },
+  "clock": {"duration_us": 4000000, "control_period_us": 1000, "physics_steps_us": [1000, 500, 250]},
+  "matrix": {
+    "engines": ["mujoco", "genesis"],
+    "force_caps_mN": [200, 400, 450, 500, 550, 600, 650, 700, 750, 800, 10000],
+    "offsets_um": [-2000, 0, 2000],
+    "repeats": [0, 1, 2],
+    "seed": 0,
+    "formal_count": 594,
+    "open_count": 18,
+    "nominal_zero_friction_count": 6,
+    "control_force_cap_mN": 10000
+  },
+  "fixture": {
+    "length_unit": "m", "mass_unit": "kg", "frame": "right-handed world; z up", "quaternion_order": "wxyz",
+    "gravity_m_s2": [0, 0, -9.81],
+    "table": {"plane_z_m": 0, "normal": [0, 0, 1], "fixed": true},
+    "cube": {"half_size_m": [0.02, 0.02, 0.02], "mass_kg": 0.064, "inertia_kg_m2": [0.00001706666666666667, 0.00001706666666666667, 0.00001706666666666667], "initial_position_m": [0, 0, 0.02], "initial_quaternion": [1, 0, 0, 0]},
+    "carriage": {"mass_kg": 1, "inertia_kg_m2": [0.01, 0.01, 0.01], "initial_position_m": [0, 0, 0], "collision_geometry": null},
+    "fingers": {"names": ["left", "right"], "half_size_m": [0.01, 0.03, 0.02], "mass_kg_each": 0.1, "inertia_kg_m2_each": [0.00004333333333333334, 0.000016666666666666667, 0.000033333333333333335], "initial_centers_m": [[-0.04, 0, 0.025], [0.04, 0, 0.025]], "quaternion_each": [1, 0, 0, 0]},
+    "dof_names": ["lift", "left_slide", "right_slide"],
+    "dof_axes_world": [[0, 0, 1], [1, 0, 0], [-1, 0, 0]],
+    "dof_ranges_m": [[0, 0.15], [0, 0.03], [0, 0.03]],
+    "initial_q_m": [0, 0, 0], "initial_qdot_m_s": [0, 0, 0],
+    "initial_cube_linear_velocity_m_s": [0, 0, 0], "initial_cube_angular_velocity_rad_s": [0, 0, 0],
+    "collision_pairs": [["cube", "table"], ["cube", "left"], ["cube", "right"], ["left", "table"], ["right", "table"], ["left", "right"]],
+    "nominal_friction": 0.5,
+    "nominal_zero_friction": 0,
+    "native_contact_settings": "Admit and freeze each backend in B; preserve authored/effective settings, combination rules and friction floor; equal nominal friction is not material equivalence"
+  },
+  "control": {
+    "mode": "external_pd_direct_force", "kp_N_m": [1000, 500, 500], "kd_N_s_m": [50, 20, 20],
+    "lift_cap_N": 50, "target_velocity_feedforward": false, "gravity_compensation": false,
+    "passive_damping": 0, "armature": 0, "hidden_position_drive": false, "mujoco_gear": 1,
+    "closure_m": 0.012, "close_end_us": 500000, "lift_start_us": 1000000, "lift_end_us": 2000000, "lift_m": 0.08, "open_at_us": 3200000,
+    "hold_between_ticks": true
+  },
+  "acceptance": {
+    "hold_window_us": [2000000, 3000000], "hold_min_com_z_m": 0.06, "other_absolute_vertical_force_max_N": 0.01,
+    "release_window_us": [3800000, 4000000], "release_max_com_z_m": 0.03, "release_sum_contact_magnitudes_max_N": 0.01,
+    "effective_contact_magnitude_strict_min_N": 1e-8,
+    "open_max_com_z_m": 0.03,
+    "reference_penetration_max_m": 0.001, "native_penetration_max_m": 0.001,
+    "contact_ledger_linf_max_N": 1e-8,
+    "momentum_residual_l2_weight_impulse_max_ratio": 0.05,
+    "quaternion_squared_norm_abs_error": 1e-6,
+    "geometry_cross_axis_min_norm": 0,
+    "actuator_output_abs_error_N": 1e-9, "actuator_output_rel_error": 1e-9,
+    "known_force_impulse_abs_error_Ns": 1e-10, "known_force_impulse_rel_error": 1e-6,
+    "known_force_position_abs_error_m": 1e-8,
+    "model_relative_error": 1e-9, "model_length_abs_error_m": 1e-10, "model_mass_abs_error_kg": 1e-12, "model_inertia_abs_error_kg_m2": 1e-14
+  },
+  "qualification": {
+    "per_engine_per_step": ["known_force", "pd_clock", "contact_observation", "open_smoke"],
+    "per_engine_500us": ["hold_smoke"],
+    "genesis_per_step": ["bridge_native", "bridge_external"],
+    "maximum_cases": 32,
+    "short_duration_us": 40000,
+    "contact_observation_duration_us": 100000,
+    "known_force": {"gravity_m_s2": [0, 0, 0], "collision_pairs": [], "initial_q_m": [0.075, 0.015, 0.015], "effective_mass_kg": [1.2, 0.1, 0.1], "phase_us": 10000, "commands_N": [[0, 0, 0], [2, 1, -1], [-2, -1, 1], [0, 0, 0]]},
+    "bridge_cap_mN": 10000,
+    "bridge_scope": "New native-position-drive and external-PD records; not pooled with historical or formal results"
+  },
+  "budget": {
+    "process_wall_limit_s": 1800, "cumulative_process_wall_limit_s": 21600,
+    "maximum_starts": 700, "maximum_base_starts": 650, "maximum_extra_starts": 50,
+    "maximum_retries_per_case": 1, "retryable": ["infrastructure_error", "recording_error"],
+    "workers": 1, "new_cloud_resources": false,
+    "cost_scope": "Each process from launch through exit, including import, initialization, compilation, observation, writing and shutdown; interrupted unknown costs retain the full reservation",
+    "regression_scope": "Development and submission gates are separately accounted; campaign attempts cannot be relabeled as debugging"
+  },
+  "evidence": {
+    "step_format": "UTF-8 JSON Lines; finite JSON numbers only; initial state plus every complete physics step",
+    "force_frame": "world, force on cube; actuator forces in ordered generalized coordinates",
+    "force_epoch": "applied_during_step", "geometry_epoch": "state_after",
+    "manifest_lifecycle": {"campaign_identity": "immutable UUID shared by qualification and formal phases", "qualification": "freeze protocol/cases/model/acquisition/qualification-checker/environment before first attempt", "formal": "extend exact qualification-manifest hash with admission evidence and final scorer; retain same UUID and ledger", "authorization": "append authorized formal-manifest hash; reject unknown hashes or broken chains", "budget": "carry every prior attempt/start/wall charge; never reset at phase transition"},
+    "hash_algorithm": "sha256", "required_bindings": ["protocol", "expanded_cases", "model", "acquisition", "scorer", "environment"],
+    "terminal_outcomes": ["completed", "numerical_abort"],
+    "non_outcomes": ["not_run", "infrastructure_error", "recording_error", "budget_exhausted"],
+    "required_native_observations": ["state_before", "state_after", "actuator_force_N", "cube_net_contact_force_N", "contact_partners", "contact_positions", "contact_normals", "contact_forces"],
+    "optional_with_reason": ["persistent_contact_id", "native_penetration", "native_clock", "solver_status", "actual_solver_iterations", "convergence_residual"]
+  },
+  "coverage": [
+    {"engine": "mujoco", "status": "unqualified", "first_cohort": true, "issue": 132},
+    {"engine": "genesis", "status": "unqualified", "first_cohort": true, "issue": 132},
+    {"engine": "superdex", "status": "not_run", "first_cohort": false, "issue": 130},
+    {"engine": "newton", "status": "not_run", "first_cohort": false, "issue": 130},
+    {"engine": "physx", "status": "not_run", "first_cohort": false, "issue": 130},
+    {"engine": "drake", "status": "not_run", "first_cohort": false, "issue": 117}
+  ]
+}

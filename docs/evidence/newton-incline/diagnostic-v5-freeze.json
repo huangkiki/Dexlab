@@ -1,0 +1,22 @@
+{
+  "frozen_at": "2026-10-09T23:09:10.157722+00:00",
+  "source_sha256": "42965c374a6c3b645d5ab0d7ddf580579fe3a177c9817c2cf20b8238320467e0",
+  "hypothesis": "VBD compliant shows equal max residuals at100/1000 and101/1001 but full prefixes differ. Isolate iteration cycle from changed trajectory history by keeping steps1..15at100 and changing onlystep16.",
+  "profiles": [
+    "vbd-legacy",
+    "vbd-compliant"
+  ],
+  "iterations": [
+    99,
+    100,
+    101,
+    1000,
+    1001
+  ],
+  "probe_step": 16,
+  "native_starts": 1,
+  "native_updates": 160,
+  "timeout_s": 600,
+  "physical_tolerance_change": false,
+  "original_scores_replaced": false
+}

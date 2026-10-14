@@ -1,5 +1,7 @@
 # Genesis 刚体资格：误差与成本
 
+当前入口更新：`dexlab.genesis_pinch_probe` 已使用明确披露的公共接触适配接口；按[迁移报告](../../docs/unisim-contact-migration.zh-CN.md)准备独立补丁环境。本报告历史测量属于归档原生源码和计时模式；运行当前入口不能复现历史成本。显式原生对照参考为 `scripts/references/genesis_pinch_native.py`。
+
 [English](GENESIS_COST.md)
 
 **基础工况通过工程判据，但步长细化并未证明数值收敛。** 原生峰值穿透随步长细化从0.044变为0.665、0.758mm，均低于原1mm判据。粗步长峰值更小不能证明精度更高：接触事件采样和软约束响应会影响结果。不能推出引擎排名或真机精度。

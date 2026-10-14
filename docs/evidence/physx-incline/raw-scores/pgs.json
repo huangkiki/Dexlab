@@ -1,0 +1,282 @@
+{
+  "profile": "pgs",
+  "results": [
+    {
+      "case": "static-h0.002",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 3.367441560715708e-06,
+        "static_speed_m_s": 0.0004375691704096417,
+        "sliding_velocity_rmse_m_s": 1.8671567521667574e-06,
+        "sliding_position_rmse_m": 0.0003782069056569324,
+        "acceleration_error_m_s2": 4.540019438729971e-09,
+        "rotation_rad": 0.0004417190780474081,
+        "penetration_m": 2.592802047729492e-06,
+        "force_balance_rmse_n": 0.00012666389567700647
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "static_displacement_m": true,
+        "static_speed_m_s": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 4.540019438729971e-09,
+      "full_velocity_rmse_m_s": 0.00043494122962313447,
+      "full_position_rmse_m": 3.1608541058264864e-06,
+      "impulse_residual_max_ns": 7.353303000213445e-10
+    },
+    {
+      "case": "static-h0.001",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 8.420287732038893e-07,
+        "static_speed_m_s": 0.0002209609330049503,
+        "sliding_velocity_rmse_m_s": 6.691342069677602e-07,
+        "sliding_position_rmse_m": 0.00018852252222007813,
+        "acceleration_error_m_s2": 6.978541919418437e-09,
+        "rotation_rad": 0.0,
+        "penetration_m": 6.48200511932373e-07,
+        "force_balance_rmse_n": 0.0001146978156836132
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "static_displacement_m": true,
+        "static_speed_m_s": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 6.978541919418437e-09,
+      "full_velocity_rmse_m_s": 0.00021746212497831345,
+      "full_position_rmse_m": 7.875615959865308e-07,
+      "impulse_residual_max_ns": 4.4128792055968035e-10
+    },
+    {
+      "case": "static-h0.0005",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 2.0578435353153217e-07,
+        "static_speed_m_s": 0.00011704443176604029,
+        "sliding_velocity_rmse_m_s": 3.38847614520867e-06,
+        "sliding_position_rmse_m": 9.621043223158379e-05,
+        "acceleration_error_m_s2": 5.622972400732915e-09,
+        "rotation_rad": 0.0,
+        "penetration_m": 1.601874828338623e-07,
+        "force_balance_rmse_n": 0.0008000095974945769
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "static_displacement_m": true,
+        "static_speed_m_s": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 5.622972400732915e-09,
+      "full_velocity_rmse_m_s": 0.00010881193623052981,
+      "full_position_rmse_m": 1.968416111620845e-07,
+      "impulse_residual_max_ns": 2.211262945401688e-10
+    },
+    {
+      "case": "sliding-h0.002",
+      "negative": false,
+      "valid": false,
+      "passed": false,
+      "error": "ValueError: Incorrect normal impulse direction"
+    },
+    {
+      "case": "sliding-h0.001",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 3.218673927806771,
+        "static_speed_m_s": 3.2172113399581383,
+        "sliding_velocity_rmse_m_s": 0.0002759163523697289,
+        "sliding_position_rmse_m": 0.00042265429930935785,
+        "acceleration_error_m_s2": 0.00032240244778325433,
+        "rotation_rad": 0.0016953398136316182,
+        "penetration_m": 1.5795230865478516e-06,
+        "force_balance_rmse_n": 0.0018128626437452274
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6085216609184738,
+      "full_velocity_rmse_m_s": 0.0002512052566807615,
+      "full_position_rmse_m": 0.0006647409188206409,
+      "impulse_residual_max_ns": 9.330510988974217e-09
+    },
+    {
+      "case": "sliding-h0.0005",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 3.217836424435798,
+        "static_speed_m_s": 3.2170305468700535,
+        "sliding_velocity_rmse_m_s": 0.0003021955001868167,
+        "sliding_position_rmse_m": 0.00013172836448008157,
+        "acceleration_error_m_s2": 0.0003671008495842454,
+        "rotation_rad": 0.002619514755890897,
+        "penetration_m": 5.736947059631348e-07,
+        "force_balance_rmse_n": 0.00983742537471965
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6084769625166728,
+      "full_velocity_rmse_m_s": 0.00032500647141000904,
+      "full_position_rmse_m": 0.00020428049525538915,
+      "impulse_residual_max_ns": 8.772386032537894e-09
+    },
+    {
+      "case": "frictionless-h0.002",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 5.083099337642922,
+        "static_speed_m_s": 5.078022828347105,
+        "sliding_velocity_rmse_m_s": 4.22777161645396e-06,
+        "sliding_position_rmse_m": 0.002197084220445026,
+        "acceleration_error_m_s2": 3.9848072583836824e-06,
+        "rotation_rad": 0.0,
+        "penetration_m": 2.5704503059387207e-07,
+        "force_balance_rmse_n": 0.0006483714714013011
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.5390108476484703,
+      "full_velocity_rmse_m_s": 5.4898576191798796e-06,
+      "full_position_rmse_m": 0.002928535221798653,
+      "impulse_residual_max_ns": 1.6202253922671586e-08
+    },
+    {
+      "case": "frictionless-h0.001",
+      "negative": false,
+      "valid": true,
+      "passed": true,
+      "metrics": {
+        "static_displacement_m": 5.080573792172985,
+        "static_speed_m_s": 5.078028939422882,
+        "sliding_velocity_rmse_m_s": 3.119546920944289e-06,
+        "sliding_position_rmse_m": 0.0011024326955617223,
+        "acceleration_error_m_s2": 1.7000315613024952e-06,
+        "rotation_rad": 0.0,
+        "penetration_m": 1.3969838619232178e-07,
+        "force_balance_rmse_n": 0.0024829212214149987
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": true,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.53901653248729,
+      "full_velocity_rmse_m_s": 2.0936908206681774e-06,
+      "full_position_rmse_m": 0.001467000000340836,
+      "impulse_residual_max_ns": 1.52412939400552e-08
+    },
+    {
+      "case": "frictionless-h0.0005",
+      "negative": false,
+      "valid": true,
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 5.079295246982828,
+        "static_speed_m_s": 5.078024148407815,
+        "sliding_velocity_rmse_m_s": 9.76125532836483e-06,
+        "sliding_position_rmse_m": 0.0005464013629282095,
+        "acceleration_error_m_s2": 1.1020742079814738e-05,
+        "rotation_rad": 0.0,
+        "penetration_m": 2.5890767574310303e-07,
+        "force_balance_rmse_n": 0.010484708528830624
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.539003811713649,
+      "full_velocity_rmse_m_s": 7.92737825894901e-06,
+      "full_position_rmse_m": 0.0007311755580361136,
+      "impulse_residual_max_ns": 1.5352156541532536e-08
+    },
+    {
+      "case": "negative-no-support",
+      "negative": true,
+      "valid": true,
+      "passed": false,
+      "metrics": {
+        "static_displacement_m": 5.080621817374105,
+        "static_speed_m_s": 5.078069868431341,
+        "sliding_velocity_rmse_m_s": 2.199266942416197,
+        "sliding_position_rmse_m": 1.2791478114667907,
+        "acceleration_error_m_s2": 2.5390787437588807,
+        "rotation_rad": 0.0,
+        "penetration_m": 0.0,
+        "force_balance_rmse_n": 0.6278400000000001
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.5390787437588807,
+      "full_velocity_rmse_m_s": 2.9322063572952994,
+      "full_position_rmse_m": 2.273254790805729,
+      "impulse_residual_max_ns": 3.241263329988638e-08,
+      "negative_rejected": true
+    }
+  ],
+  "positives_passed": 7,
+  "positives_total": 9,
+  "reliable_coverage_v1": false
+}

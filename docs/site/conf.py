@@ -20,6 +20,7 @@ html_theme = 'pydata_sphinx_theme'
 html_title = 'DexLab · ' + ('接触动力学实验' if language == 'zh_CN' else 'Contact dynamics experiments')
 html_static_path = [str(HERE / '_static'), str(ROOT / 'docs/evidence')]
 html_css_files = ['dexlab.css']
+html_js_files = [('replay.js', {'defer': 'defer'})]
 templates_path = [str(HERE / '_templates')]
 html_show_sourcelink = False
 html_theme_options = {

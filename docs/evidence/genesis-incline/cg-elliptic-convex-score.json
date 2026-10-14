@@ -1,0 +1,425 @@
+{
+  "results": [
+    {
+      "record_valid": false,
+      "passed": false,
+      "checks": {
+        "impulse_consistency": false
+      },
+      "failure": "State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 5.864768301805209e-07,
+      "metrics": null,
+      "id": "static-h0.002",
+      "expected_negative": false,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 0.001,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 1.6752700849901885,
+        "native_step_s": 0.27039679401787,
+        "observation_s": 0.11809091421309859,
+        "total_case_wall_s": 2.142201064969413
+      }
+    },
+    {
+      "record_valid": false,
+      "passed": false,
+      "checks": {
+        "impulse_consistency": false
+      },
+      "failure": "State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 3.3181485115122193e-07,
+      "metrics": null,
+      "id": "static-h0.001",
+      "expected_negative": false,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 0.0005,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.15145452198339626,
+        "native_step_s": 0.23533169348957017,
+        "observation_s": 0.23120033740997314,
+        "total_case_wall_s": 0.7740400719922036
+      }
+    },
+    {
+      "record_valid": false,
+      "passed": false,
+      "checks": {
+        "impulse_consistency": false
+      },
+      "failure": "State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 1.503047203288719e-07,
+      "metrics": null,
+      "id": "static-h0.0005",
+      "expected_negative": false,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 0.00025,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.15026251500239596,
+        "native_step_s": 0.46665113157359883,
+        "observation_s": 0.4450261559104547,
+        "total_case_wall_s": 1.3756112880073488
+      }
+    },
+    {
+      "record_valid": false,
+      "passed": false,
+      "checks": {
+        "impulse_consistency": false
+      },
+      "failure": "State/force impulse inconsistency or possible state injection",
+      "impulse_residual_max_ns": 1.2369125797638627e-06,
+      "metrics": null,
+      "id": "sliding-h0.002",
+      "expected_negative": false,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 0.728,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.1434706050204113,
+        "native_step_s": 0.11628865887178108,
+        "observation_s": 0.09703094832366332,
+        "total_case_wall_s": 0.37908574898028746
+      }
+    },
+    {
+      "metrics": {
+        "static_displacement_m": 3.214585578356327,
+        "static_speed_m_s": 3.259939359755477,
+        "sliding_velocity_rmse_m_s": 0.07591789570586353,
+        "sliding_position_rmse_m": 0.043124100153405585,
+        "acceleration_error_m_s2": 0.006780945668602767,
+        "rotation_rad": 0.16236899203008534,
+        "penetration_m": 0.0008657391227557265,
+        "force_balance_rmse_n": 1.5923706119197978
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": false,
+        "sliding_position_rmse_m": false,
+        "acceleration_error_m_s2": true,
+        "continuous_support": false,
+        "requested_contact_model": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6020631176976543,
+      "full_velocity_rmse_m_s": 0.05220623181798761,
+      "full_position_rmse_m": 0.0009348459464715434,
+      "impulse_residual_max_ns": 8.575316259763555e-09,
+      "record_valid": true,
+      "id": "sliding-h0.001",
+      "expected_negative": false,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 0.7485,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.14548016502521932,
+        "native_step_s": 0.22756315465085208,
+        "observation_s": 0.19368435145588592,
+        "total_case_wall_s": 0.610706169041805
+      }
+    },
+    {
+      "metrics": {
+        "static_displacement_m": 3.2176210546639004,
+        "static_speed_m_s": 3.2812019172316833,
+        "sliding_velocity_rmse_m_s": 0.06166310649040397,
+        "sliding_position_rmse_m": 0.008444701367824886,
+        "acceleration_error_m_s2": 0.000642581027225031,
+        "rotation_rad": 0.10723936622665445,
+        "penetration_m": 0.0008958704378782059,
+        "force_balance_rmse_n": 1.6028692977578614
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": false,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": false,
+        "requested_contact_model": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.609486644393482,
+      "full_velocity_rmse_m_s": 0.05377054995871006,
+      "full_position_rmse_m": 0.0008949332483239021,
+      "impulse_residual_max_ns": 1.710731284886357e-09,
+      "record_valid": true,
+      "id": "sliding-h0.0005",
+      "expected_negative": false,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 0.73725,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.1462016980512999,
+        "native_step_s": 0.44236989779165015,
+        "observation_s": 0.38535919453715906,
+        "total_case_wall_s": 1.0647653490304947
+      }
+    },
+    {
+      "metrics": {
+        "static_displacement_m": 4.893403443725826,
+        "static_speed_m_s": 4.88848447975286,
+        "sliding_velocity_rmse_m_s": 0.0820439300000921,
+        "sliding_position_rmse_m": 0.045629867503198016,
+        "acceleration_error_m_s2": 0.09475772458030907,
+        "rotation_rad": 0.0040384871018007635,
+        "penetration_m": 0.00015373168115122293,
+        "force_balance_rmse_n": 0.2746923964441328
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": false,
+        "sliding_position_rmse_m": false,
+        "acceleration_error_m_s2": false,
+        "continuous_support": false,
+        "requested_contact_model": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.4442571078754196,
+      "full_velocity_rmse_m_s": 0.1094440749315068,
+      "full_position_rmse_m": 0.0820864867927103,
+      "impulse_residual_max_ns": 6.019366674526454e-11,
+      "record_valid": true,
+      "effective_friction_diagnostic": {
+        "metrics": {
+          "static_displacement_m": 4.893403443725826,
+          "static_speed_m_s": 4.88848447975286,
+          "sliding_velocity_rmse_m_s": 9.53614402290808e-05,
+          "sliding_position_rmse_m": 0.002163551458588722,
+          "acceleration_error_m_s2": 4.010213512373184e-07,
+          "rotation_rad": 0.0040384871018007635,
+          "penetration_m": 0.00015373168115122293,
+          "force_balance_rmse_n": 0.2746254661001992
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": false,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": false
+        },
+        "passed": false,
+        "acceleration_reference_m_s2": 2.444257508896771,
+        "acceleration_fitted_m_s2": 2.4442571078754196,
+        "full_velocity_rmse_m_s": 7.378808356671947e-05,
+        "full_position_rmse_m": 0.0028233113790909485,
+        "impulse_residual_max_ns": 6.019366674526454e-11
+      },
+      "id": "frictionless-h0.002",
+      "expected_negative": false,
+      "requested_friction": 0,
+      "effective_pair_friction": 0.01,
+      "contact_loss_fraction": 0.037,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.14725372701650485,
+        "native_step_s": 0.12334945664042607,
+        "observation_s": 0.11180704639991745,
+        "total_case_wall_s": 0.4432594010140747
+      }
+    },
+    {
+      "metrics": {
+        "static_displacement_m": 4.890959438092923,
+        "static_speed_m_s": 4.888499531436051,
+        "sliding_velocity_rmse_m_s": 0.08211341557412605,
+        "sliding_position_rmse_m": 0.04670978772882266,
+        "acceleration_error_m_s2": 0.09475730029935558,
+        "rotation_rad": 0.0025816292993104195,
+        "penetration_m": 9.092884376605756e-05,
+        "force_balance_rmse_n": 0.26974148259181385
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": false,
+        "sliding_position_rmse_m": false,
+        "acceleration_error_m_s2": false,
+        "continuous_support": false,
+        "requested_contact_model": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.444257532156373,
+      "full_velocity_rmse_m_s": 0.10943000444324906,
+      "full_position_rmse_m": 0.08341942232969472,
+      "impulse_residual_max_ns": 1.2361592961756921e-09,
+      "record_valid": true,
+      "effective_friction_diagnostic": {
+        "metrics": {
+          "static_displacement_m": 4.890959438092923,
+          "static_speed_m_s": 4.888499531436051,
+          "sliding_velocity_rmse_m_s": 6.7038085751638e-05,
+          "sliding_position_rmse_m": 0.0010210252552718493,
+          "acceleration_error_m_s2": 2.3259602244252164e-08,
+          "rotation_rad": 0.0025816292993104195,
+          "penetration_m": 9.092884376605756e-05,
+          "force_balance_rmse_n": 0.26967324524220954
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": false,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": false
+        },
+        "passed": false,
+        "acceleration_reference_m_s2": 2.444257508896771,
+        "acceleration_fitted_m_s2": 2.444257532156373,
+        "full_velocity_rmse_m_s": 4.615442498392024e-05,
+        "full_position_rmse_m": 0.0014114626066465518,
+        "impulse_residual_max_ns": 1.2361592961756921e-09
+      },
+      "id": "frictionless-h0.001",
+      "expected_negative": false,
+      "requested_friction": 0,
+      "effective_pair_friction": 0.01,
+      "contact_loss_fraction": 0.0415,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.14569711301010102,
+        "native_step_s": 0.2411270187003538,
+        "observation_s": 0.22613027959596366,
+        "total_case_wall_s": 0.7353657169733196
+      }
+    },
+    {
+      "metrics": {
+        "static_displacement_m": 4.889737168418034,
+        "static_speed_m_s": 4.888532812898367,
+        "sliding_velocity_rmse_m_s": 0.08207444315360972,
+        "sliding_position_rmse_m": 0.0471786536285591,
+        "acceleration_error_m_s2": 0.09475749921283505,
+        "rotation_rad": 0.0008824426031382019,
+        "penetration_m": 6.408141707837933e-05,
+        "force_balance_rmse_n": 0.26193490737972014
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": false,
+        "sliding_position_rmse_m": false,
+        "acceleration_error_m_s2": false,
+        "continuous_support": false,
+        "requested_contact_model": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.4442573332428936,
+      "full_velocity_rmse_m_s": 0.1094232189208117,
+      "full_position_rmse_m": 0.08408633766805758,
+      "impulse_residual_max_ns": 3.7352657156414333e-13,
+      "record_valid": true,
+      "effective_friction_diagnostic": {
+        "metrics": {
+          "static_displacement_m": 4.889737168418034,
+          "static_speed_m_s": 4.888532812898367,
+          "sliding_velocity_rmse_m_s": 3.192108796558061e-05,
+          "sliding_position_rmse_m": 0.0005239468064454001,
+          "acceleration_error_m_s2": 1.7565387722129344e-07,
+          "rotation_rad": 0.0008824426031382019,
+          "penetration_m": 6.408141707837933e-05,
+          "force_balance_rmse_n": 0.261864705438452
+        },
+        "checks": {
+          "rotation_rad": true,
+          "penetration_m": true,
+          "force_balance_rmse_n": false,
+          "sliding_velocity_rmse_m_s": true,
+          "sliding_position_rmse_m": true,
+          "acceleration_error_m_s2": true,
+          "continuous_support": false
+        },
+        "passed": false,
+        "acceleration_reference_m_s2": 2.444257508896771,
+        "acceleration_fitted_m_s2": 2.4442573332428936,
+        "full_velocity_rmse_m_s": 2.7871798546938916e-05,
+        "full_position_rmse_m": 0.0007056803874730027,
+        "impulse_residual_max_ns": 3.7352657156414333e-13
+      },
+      "id": "frictionless-h0.0005",
+      "expected_negative": false,
+      "requested_friction": 0,
+      "effective_pair_friction": 0.01,
+      "contact_loss_fraction": 0.036,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.14639321702998132,
+        "native_step_s": 0.48002404905855656,
+        "observation_s": 0.4555963962338865,
+        "total_case_wall_s": 1.329801693034824
+      }
+    },
+    {
+      "metrics": {
+        "static_displacement_m": 5.080568679743898,
+        "static_speed_m_s": 5.078029664911571,
+        "sliding_velocity_rmse_m_s": 2.199217790181892,
+        "sliding_position_rmse_m": 1.2791205138333879,
+        "acceleration_error_m_s2": 2.5390148324557664,
+        "rotation_rad": 0.0,
+        "penetration_m": 18.96094044414736,
+        "force_balance_rmse_n": 0.6278400000000001
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": false,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false,
+        "requested_contact_model": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 2.5390148324557664,
+      "full_velocity_rmse_m_s": 2.932168246311941,
+      "full_position_rmse_m": 2.2732349630284787,
+      "impulse_residual_max_ns": 1.0560129160008813e-16,
+      "record_valid": true,
+      "id": "negative-no-floor",
+      "expected_negative": true,
+      "requested_friction": 0.5,
+      "effective_pair_friction": 0.5,
+      "contact_loss_fraction": 1.0,
+      "native_error_max": 0,
+      "timing": {
+        "setup_s": 0.21329428296303377,
+        "native_step_s": 0.19271865201881155,
+        "observation_s": 0.185020444157999,
+        "total_case_wall_s": 0.6112485579797067
+      }
+    }
+  ],
+  "positive_passed": 0,
+  "positive_total": 9,
+  "negative_controls": 1,
+  "scorer_sha256": "1f6f06edf01e76a182dee6f4d1b2fde476bcea5cf4323a988510ec77c3e0aaca",
+  "scope": "Native CPU qualification; not hardware calibration or coverage-v1 admission",
+  "profile": "cg-elliptic-convex",
+  "protocol_sha256": "4ec0bd0862537fc6b20478fbfc25fceac085d7de9af934fb8f325641309bdc69"
+}

@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-09T19:15:41.274018+00:00",
+  "packages": {
+    "superdex-physics": {
+      "identity": {
+        "version": "1.0.0",
+        "record_verified": true,
+        "code_sha256": "3340cfec18d17cd41abb52d10a679d7bd5e09a8bfc7dbe6302d609bedbf5f7e0",
+        "installation_origin": null
+      },
+      "wheel": "superdex_physics-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "46fa446ed0bb86815d6970d14e11f2777bcc7391119c4ebe582ac698e1373377",
+      "source": "https://pypi.org/pypi/superdex-physics/json"
+    },
+    "superdex-physics-fp64": {
+      "identity": {
+        "version": "1.0.0",
+        "record_verified": true,
+        "code_sha256": "d6e4ac1e9e479a8f7187d19f58e4d3b9566bd2b2754471f3bb6026846d1a0cba",
+        "installation_origin": null
+      },
+      "wheel": "superdex_physics_fp64-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "ce300f8a2b30f8043aad238f4c918f981d143256276e34935fa31382a22c02c4",
+      "source": "https://pypi.org/pypi/superdex-physics-fp64/json"
+    }
+  },
+  "build_source": "1d7150946fa3f3d3fb09c2bff07eaa138cbfdee6",
+  "build_workflow": {
+    "url": "https://raw.githubusercontent.com/facebookresearch/project_superdex/1d7150946fa3f3d3fb09c2bff07eaa138cbfdee6/.github/workflows/wheels.yml",
+    "sha256": "254646990664067f7725d906f1abd490073fa35d293fb7718d0836f705789e99"
+  },
+  "historical_archive_sha256": "9c0e86425ec03c6d045d5db5a2282310216fa892c7677deb317e9ce306504079",
+  "mapped_native": {
+    "libmochi_physics_double.so": "a2a0d6e9711d16f1b07641a1192f12df24f6f7f011e864653f1f0fe9176b931d",
+    "mochi_physics_double.so": "d9bf294cbea65f7494fcbdb77e3bf02d672c04d24fea2206851830562aafeaf4",
+    "libmochi_pybind_core_double.so": "078ec606f0d34c23c6a3e376339e9cbc84c422674a21e87a0cf581154de40ec0"
+  }
+}

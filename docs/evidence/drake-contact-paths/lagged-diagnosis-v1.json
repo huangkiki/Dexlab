@@ -1,0 +1,93 @@
+{
+  "observations": [
+    {
+      "case": "sliding-h0.0005",
+      "same_old_arrays": {
+        "states": true,
+        "forces": true,
+        "generalized_contact_forces": true,
+        "contact_count": true,
+        "force_times": true
+      },
+      "old_absolute_max_delta": {
+        "states": 0.0,
+        "forces": 0.0,
+        "generalized_contact_forces": 0.0,
+        "contact_count": 0.0,
+        "force_times": 0.0
+      },
+      "face_normal_max_error": 1.392728480638675,
+      "plane_gradient_max_error": 0.0,
+      "normal_formula_max_error_n": 0.03615554146113098,
+      "normal_formula_rmse_n": 0.0024841264701577236,
+      "force_epoch": "sampled native update; all geometry and lever arms at initial state",
+      "instantaneous_cone_excess_max_n": 5.066999759613839,
+      "instantaneous_cone_excess_fraction": 0.8106666666666666,
+      "lagged_bound_excess_max_n": 4.841573772607077e-05,
+      "lagged_bound_excess_fraction": 0.004666666666666667,
+      "force_normal_mean_n": 0.5152483299508751,
+      "elastic_normal_mean_n": 0.825678446878081,
+      "force_tangent_mean_n": -0.36139158966806806
+    },
+    {
+      "case": "sliding-h0.001",
+      "same_old_arrays": {
+        "states": true,
+        "forces": true,
+        "generalized_contact_forces": true,
+        "contact_count": true,
+        "force_times": true
+      },
+      "old_absolute_max_delta": {
+        "states": 0.0,
+        "forces": 0.0,
+        "generalized_contact_forces": 0.0,
+        "contact_count": 0.0,
+        "force_times": 0.0
+      },
+      "face_normal_max_error": 1.3927284806399955,
+      "plane_gradient_max_error": 0.0,
+      "normal_formula_max_error_n": 0.030321752905874355,
+      "normal_formula_rmse_n": 0.0021336299956583567,
+      "force_epoch": "sampled native update; all geometry and lever arms at initial state",
+      "instantaneous_cone_excess_max_n": 1.7542547727695343,
+      "instantaneous_cone_excess_fraction": 0.9386666666666666,
+      "lagged_bound_excess_max_n": -5.42213675913672e-06,
+      "lagged_bound_excess_fraction": 0.0,
+      "force_normal_mean_n": 0.5146485247727631,
+      "elastic_normal_mean_n": 1.2514369677255885,
+      "force_tangent_mean_n": -0.3604992942323616
+    },
+    {
+      "case": "sliding-h0.002",
+      "same_old_arrays": {
+        "states": true,
+        "forces": true,
+        "generalized_contact_forces": true,
+        "contact_count": true,
+        "force_times": true
+      },
+      "old_absolute_max_delta": {
+        "states": 0.0,
+        "forces": 0.0,
+        "generalized_contact_forces": 0.0,
+        "contact_count": 0.0,
+        "force_times": 0.0
+      },
+      "face_normal_max_error": 1.3927284806399836,
+      "plane_gradient_max_error": 0.0,
+      "normal_formula_max_error_n": 0.17047314745889297,
+      "normal_formula_rmse_n": 0.012094192771330557,
+      "force_epoch": "sampled native update; all geometry and lever arms at initial state",
+      "instantaneous_cone_excess_max_n": 0.9981156074253245,
+      "instantaneous_cone_excess_fraction": 1.0,
+      "lagged_bound_excess_max_n": -3.88241819764823e-05,
+      "lagged_bound_excess_fraction": 0.0,
+      "force_normal_mean_n": 0.5148568892127839,
+      "elastic_normal_mean_n": 2.54806954625725,
+      "force_tangent_mean_n": -0.36075277050156124
+    }
+  ],
+  "acceptance_changed": false,
+  "scope": "Source-equation check with zero HC dissipation. Native solver per-patch impulses/Delassus and achieved iterations remain unavailable; aggregate bound is not full tangent-force reconstruction."
+}

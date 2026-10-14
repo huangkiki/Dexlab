@@ -1,0 +1,228 @@
+{
+  "model": {
+    "body_mass": [
+      0.06399999558925629
+    ],
+    "body_inertia": [
+      [
+        [
+          1.706666444079019e-05,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.706666444079019e-05,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.706666444079019e-05
+        ]
+      ]
+    ],
+    "body_com": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "body_q": [
+      [
+        0.00517638074234128,
+        0.0,
+        0.019318517297506332,
+        0.0,
+        0.13052619993686676,
+        0.0,
+        0.9914448857307434
+      ]
+    ],
+    "body_flags": [
+      1
+    ],
+    "shape_transform": [
+      [
+        -0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.13052618503570557,
+        0.0,
+        0.9914448261260986
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "shape_type": [
+      1,
+      7
+    ],
+    "shape_scale": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.019999999552965164,
+        0.019999999552965164,
+        0.019999999552965164
+      ]
+    ],
+    "shape_body": [
+      -1,
+      0
+    ],
+    "shape_material_mu": [
+      0.5,
+      0.5
+    ],
+    "shape_material_ke": [
+      2500.0,
+      2500.0
+    ],
+    "shape_material_kd": [
+      100.0,
+      100.0
+    ],
+    "shape_material_kf": [
+      1000.0,
+      1000.0
+    ],
+    "shape_material_ka": [
+      0.0,
+      0.0
+    ],
+    "shape_material_restitution": [
+      0.0,
+      0.0
+    ],
+    "shape_material_mu_torsional": [
+      0.0,
+      0.0
+    ],
+    "shape_material_mu_rolling": [
+      0.0,
+      0.0
+    ],
+    "shape_gap": [
+      0.009999999776482582,
+      0.009999999776482582
+    ],
+    "shape_margin": [
+      0.0,
+      0.0
+    ],
+    "shape_collision_group": [
+      1,
+      1
+    ],
+    "body_world": [
+      0
+    ],
+    "joint_type": [
+      4
+    ],
+    "joint_target_ke": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "joint_target_kd": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "joint_damping": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gravity": [
+      [
+        0.0,
+        0.0,
+        -9.8100004196167
+      ],
+      [
+        0.0,
+        0.0,
+        -9.8100004196167
+      ]
+    ]
+  },
+  "counts": {
+    "body_count": 1,
+    "joint_count": 1,
+    "joint_dof_count": 6,
+    "joint_coord_count": 7,
+    "articulation_count": 1,
+    "world_count": 1,
+    "shape_count": 2,
+    "particle_count": 0
+  },
+  "solver_scalars": {
+    "_applied_module_options_revision": 0,
+    "iterations": 100,
+    "soft_body_relaxation": 0.9,
+    "soft_contact_relaxation": 0.9,
+    "joint_linear_relaxation": 0.7,
+    "joint_angular_relaxation": 0.4,
+    "joint_linear_compliance": 0.0,
+    "joint_angular_compliance": 0.0,
+    "rigid_contact_relaxation": 0.8,
+    "rigid_contact_restitution_iterations": 2,
+    "_restitution_manifold_inner_iterations": 8,
+    "rigid_contact_con_weighting": true,
+    "angular_damping": 0.0,
+    "enable_restitution": false,
+    "_rigid_restitution_enabled": true,
+    "_compute_body_velocity_from_position_delta": false,
+    "_particle_delta_counter": 0,
+    "_body_delta_counter": 0
+  },
+  "contact_capacity": 1000,
+  "initial_state": [
+    0.0,
+    0.00517638074234128,
+    0.0,
+    0.019318517297506332,
+    0.9914448857307434,
+    0.0,
+    0.13052619993686676,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "control_joint_f": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ]
+}

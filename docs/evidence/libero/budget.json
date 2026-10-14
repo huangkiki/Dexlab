@@ -1,0 +1,913 @@
+{
+  "work_package": {
+    "evidence_sha256": [
+      "7ae50ed3a64bab8418fd6c8e346ba1c39da0fdaa62916a87b9d20f3745b45406",
+      "8efa81812ca1ae7a03e52381077c45a0f8cc70b80c9821eecd7f950c7f0c057c",
+      "84dea8f168406884e460acd5df9d2dcab5802e297b9a7b4333a5c17fcb24b50f",
+      "4fe37407f23cd9c1ceb4c93670f308d2fed6d34b2c2139d86123702c849cabcb",
+      "7019f37ee158d67a21338a6df0c441dd8f84979b946b5e20bb49463ef0508ea2"
+    ],
+    "hypothesis": "Qualify original cream-cheese workflow and diagnose native action/observation consistency",
+    "id": "libero-native-v1",
+    "max_starts": 64,
+    "wall_s": 21600
+  },
+  "package_ids": [
+    "libero-native-v1"
+  ],
+  "package_baseline_starts": 0,
+  "package_baseline_wall_s": 0.0,
+  "starts_limit": 64,
+  "wall_limit_s": 21600.0,
+  "manifest_sha256": "e47de4c1381efba2d06493fa5c2adcb298c58317f30f50cae733df182ebb3d66",
+  "attempts": [
+    {
+      "attempt": 0,
+      "case_id": "baseline-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "e5378679345fec2385647617eec3285fd6b28d2c94ac5706b8a67401bdfe8935",
+      "retry_reason": null,
+      "sequence": 1,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 0,
+        "evidence_sha256": "20d5cf51c7c991bec83bf362495787cb322f82a3847a849909853aef74936344",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "47c2ef0f1ab9edb4c869c9d7ae134a3b8ed35b37c3a66e0f2f63f6afb5964c8c",
+        "sequence": 2,
+        "wall_s": 6.068264527944848,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 1,
+      "case_id": "baseline-demo_1",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "3294793de105a7091d320e57b3dfb34f0179cd2f93770077f886c8695d9f17c5",
+      "retry_reason": null,
+      "sequence": 3,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 1,
+        "evidence_sha256": "7f077ac62ad665933020cbd530a67996d8016c462229327ce3b0f73eb2374d3b",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "5a9d3631a28cf921f304d82ad10f91ecc01824a99cabbac69f02fea99aacfb4d",
+        "sequence": 4,
+        "wall_s": 6.894448182953056,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 2,
+      "case_id": "baseline-demo_2",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "0e81125c97a6fc7a554859a4a4b016dfbd4a9d7e09565c1d78fed7ebb64aa659",
+      "retry_reason": null,
+      "sequence": 5,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 2,
+        "evidence_sha256": "fc21022702c2a1401af2c968f20e8943062e8c287a09ffb79b49e7dbda525fa7",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "47b210f742eb80a6f747a4f02e0c42a0791f94d33d30f6a00c4fadd49034da36",
+        "sequence": 6,
+        "wall_s": 5.911539298016578,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 3,
+      "case_id": "step-1000us-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "84842c58e00abdae96326980f532ff55bb27b3e7f35d835078bc0d59e1879216",
+      "retry_reason": null,
+      "sequence": 7,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 3,
+        "evidence_sha256": "238f6e571008743ab80bca70871467f74de6cf1997f1bbfde3a945dd5792fddd",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "e90caf43294b4d35bbe2a3baaa02713aaed3e20325c57ca13256af63b531c384",
+        "sequence": 8,
+        "wall_s": 8.211308570054825,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 4,
+      "case_id": "step-1000us-demo_1",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "6017b9e1a76e296966bd02f8d787deb15c3f7349fb083813308a9ef149dc27df",
+      "retry_reason": null,
+      "sequence": 9,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 4,
+        "evidence_sha256": "e9b633573e565503ea796868a992650076d718007f3b486a380815277ffdb7bc",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "0147804d601cd38bb23a6506eead2f194ce932e30dfcf598c0e0fd277eef40e9",
+        "sequence": 10,
+        "wall_s": 9.824741110031027,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 5,
+      "case_id": "step-1000us-demo_2",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "cbfad331f8aff2e93820a7ff11547c7ca294316f674b66d3726436f2fa5fc6b4",
+      "retry_reason": null,
+      "sequence": 11,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 5,
+        "evidence_sha256": "2b56a4524f2181308efe5fe658a0efcb2721e114c5b336d0ff02f70efc440a50",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "e6f37aaa391572ed2cf821ee65fcb5e1079ae40ad7f7d9f7f11ca891766faceb",
+        "sequence": 12,
+        "wall_s": 7.8824530490092,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 6,
+      "case_id": "step-500us-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "71b9e4f8eb53589679a97bd768d4a862212dc977d33e1834ce0552b5619af049",
+      "retry_reason": null,
+      "sequence": 13,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 6,
+        "evidence_sha256": "9da629296586980026e9c5aa690247419d9cc7241198a8d2c73814be05a992ea",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "c6a696ab0c6c0e5ee899993a6696093f8b7d1e4e5e475883dca06195e6dc9e6b",
+        "sequence": 14,
+        "wall_s": 12.59793540101964,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 7,
+      "case_id": "step-500us-demo_1",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "b3bc9c48b456a653eb7a90c64ad6c8abe59e993b0338c5e72066dbdc2500dc61",
+      "retry_reason": null,
+      "sequence": 15,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 7,
+        "evidence_sha256": "30916fc95af2384a5a99b699a39b1b1174522bd92a4eda016a412806511aed1c",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "6316648c303ce8a41ec8f83e5e311022393bf8ab01c698ad23b71638f81a67c1",
+        "sequence": 16,
+        "wall_s": 15.643880441959482,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 8,
+      "case_id": "step-500us-demo_2",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "cba861370018687fffed39c8a3119e805cbcb770323e1371ced55a6c04fdcd61",
+      "retry_reason": null,
+      "sequence": 17,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 8,
+        "evidence_sha256": "2e29b4bab63b81db1cfdcb7918b2e4ed9cdf8e9cfc0740c78f78424fb3733d18",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "23dfa25aebabc6b1061028859442c1bf4bfd0143a33e15f06013363220b7bb4f",
+        "sequence": 18,
+        "wall_s": 11.851616150001064,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 9,
+      "case_id": "aligned-2000us-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "5fe80755e8844382dd0e3f855c3141d103f4f5786e6ac639347b47185fb5ff28",
+      "retry_reason": null,
+      "sequence": 19,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 9,
+        "evidence_sha256": "aca33fac647901a92f8c72f48c95496ba26a3fac3d35459b99e8ce565c22cde4",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "7a1eb1e5e3d23c76bfbe78d3e0dc3275101cdebdadc7af29d363e335751c3552",
+        "sequence": 20,
+        "wall_s": 7.51212949102046,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 10,
+      "case_id": "aligned-2000us-demo_1",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "f8b1db410f01d811da0bf3a85910d934ee0aa5b1fc0427d9400cde9fd45cdfc5",
+      "retry_reason": null,
+      "sequence": 21,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 10,
+        "evidence_sha256": "cea4d85274ee555adec4ea96aca50cb06abf09483c29320e689ae22e62cbc100",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "16100baaedb2911d3f6ef89c8689def7dcb4330bd7d193f2863e2c9766a6b6b6",
+        "sequence": 22,
+        "wall_s": 6.951030227995943,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 11,
+      "case_id": "aligned-2000us-demo_2",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "d78cd2421e5ed6a906ac423dc3ae6910fb4da19175c7ea446e369ad9a60abf69",
+      "retry_reason": null,
+      "sequence": 23,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 11,
+        "evidence_sha256": "6242b2c9b45c103b0063e0ea841c2ce2209ce6e6552c96bfafc8525b6912dee6",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "4d5a985a0d0ae6350002e460b228abe0d82110a35d0bd96e06d10b525a29af90",
+        "sequence": 24,
+        "wall_s": 5.88436027005082,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 12,
+      "case_id": "aligned-1000us-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "6e4cc679a580a8a5f31805f59af1139128cd812af530499fc68962663800e560",
+      "retry_reason": null,
+      "sequence": 25,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 12,
+        "evidence_sha256": "0bd5e57cb9c05aca5069b6a633d0f37dc43286bef7a9561d3dd09cd3beb933e5",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "ba67fa3643bcf8ecb0529ac18b3cd9b6f1a125f77960399ec59278f7792919bf",
+        "sequence": 26,
+        "wall_s": 8.262897434993647,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 13,
+      "case_id": "aligned-1000us-demo_1",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "4773ef8b6d1a1293e5c622374194e194b590d4f77b7fffe7d606095aa59275bf",
+      "retry_reason": null,
+      "sequence": 27,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 13,
+        "evidence_sha256": "5dc4f1b4ebd6d523b432ebd7d0b5975a7ffe0f48d74d2c1f90b5279e94154901",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "154787f145f30bbe720ad0e3439372625a6c57769f2bb0187092e0cdeaf394e7",
+        "sequence": 28,
+        "wall_s": 9.86740025295876,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 14,
+      "case_id": "aligned-1000us-demo_2",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "ce8dcd8d6e9670bd063b9844d14d0e43cdbce5ec52ed31f06c35992c942ddaee",
+      "retry_reason": null,
+      "sequence": 29,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 14,
+        "evidence_sha256": "74fa1bb7093662a94998e531562352d9e2f85b199abbb59c9eb0b6c0c5ecd4f3",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "1163cae906468de1efeae2246cc1be34d085dbc85ea1456cb0b297d0991dabe6",
+        "sequence": 30,
+        "wall_s": 7.897238249017391,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 15,
+      "case_id": "aligned-500us-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "5aff43b2a4d2f26f723551d19fa81370696dd8f233c0737208253370c1c964af",
+      "retry_reason": null,
+      "sequence": 31,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 15,
+        "evidence_sha256": "7cf063a8c1acb29b7012ba98159fc41d722f2cc7c5eb07de6174ad55a1b049b9",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "a5577d64ce83c06303a5a7338a8652e9e5c78122e157a1957e5106501a28990f",
+        "sequence": 32,
+        "wall_s": 12.891371717967559,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 16,
+      "case_id": "aligned-500us-demo_1",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "de746ab15b850f24de448aa9cea90ab7a8b2f8287f9e0a567f6623d054457de3",
+      "retry_reason": null,
+      "sequence": 33,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 16,
+        "evidence_sha256": "c668509d7d67c5e767bffb639660f50ef8a06ab20c9d7c50b770a5e5eaa31983",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "e1d0924b5350f65976cce6034d238cca5721db86e66442f06d96d41e1611f48b",
+        "sequence": 34,
+        "wall_s": 16.014013043022715,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 17,
+      "case_id": "aligned-500us-demo_2",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "b348908c29b6bdfb4c7acb047f462d1fb1ca7c6b331335d22960c07c42ca8981",
+      "retry_reason": null,
+      "sequence": 35,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 17,
+        "evidence_sha256": "306b0ce7509563b87592b1ddce4a4184f1c8a6cefba3df75bcaf58c3b943a91f",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "e17fd401b95adcd5dd3fbdfacaf4605fb2d707cbc0febd2fb611639db7a9ca63",
+        "sequence": 36,
+        "wall_s": 11.969632977969013,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 18,
+      "case_id": "recording-off-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "29432b96c880465ce9931392780724e8efa8ab474eeeff8b95a00b8561a2d800",
+      "retry_reason": null,
+      "sequence": 37,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 18,
+        "evidence_sha256": "1e6d3248f984cd70a420ca9cd37bf2fa30166ba749bf32575045ca524314f25e",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "31554f72e5a839a9a75c27bb26331f6aa14e96b6c328552afbf3f1974256938a",
+        "sequence": 38,
+        "wall_s": 4.873974069952965,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 19,
+      "case_id": "settle-audit-demo_0",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "eb9dd025259214be3fec782cf3e8eb715796fc24a753b540e5c1e6b8113ef75a",
+      "retry_reason": null,
+      "sequence": 39,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 19,
+        "evidence_sha256": "b139934d9d3fd08596bde45855befe0a42a1a33bf79cfac766628b216f7cd2da",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "9206bec84ee6bfb76e622584f3ad6adf14f0286abb9ce9a74a614a733bf0f39e",
+        "sequence": 40,
+        "wall_s": 4.430681616009679,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 20,
+      "case_id": "baseline-demo_3",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "7f95888c140da913da6cf5b2fca6de6fcd3c91388ffe57a8a831b567a04a2743",
+      "retry_reason": null,
+      "sequence": 41,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 20,
+        "evidence_sha256": "e87504a3eaa7d30ce0733218c4164ced8cc203e9fdc38fad16a185bbe95024ef",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "fa7e8c9226df0f93d787fed2efcbe818086daac995dc57f31e4011197a1f72c3",
+        "sequence": 42,
+        "wall_s": 5.9138087870087475,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 21,
+      "case_id": "step-1000us-demo_3",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "b7988c54a4a5caff80629b46de99ab688e530a6a840b8b16a4a273169f239f19",
+      "retry_reason": null,
+      "sequence": 43,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 21,
+        "evidence_sha256": "1e97b7bee6c39bdc7e66c7eb4ed6b89a849fbf533cebaeb81ed5ddca7bc3a360",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "9b1ee86cdff11579eae46d319a92755c70dfb0df7e697161a6007fc5c4798c90",
+        "sequence": 44,
+        "wall_s": 8.063621457025874,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 22,
+      "case_id": "baseline-demo_4",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "b59f4158c8331b692a2a26448915279662711581b73f60a816b9961c0cfbc59f",
+      "retry_reason": null,
+      "sequence": 45,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 22,
+        "evidence_sha256": "ca3848ee2edc3fefee6056ed1511d4ab18b170271a1a0b90a5f2974daba5ae61",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "34e969047277ba213a0487fe37d38a7da9fb267888892eb93d4ead510f97eaa7",
+        "sequence": 46,
+        "wall_s": 5.974235741014127,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 23,
+      "case_id": "step-1000us-demo_4",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "9dd96fb0fade5459f8e7d0c32ecc2e2abeb74864364da397ca7cda897e1bc174",
+      "retry_reason": null,
+      "sequence": 47,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 23,
+        "evidence_sha256": "cd7029a749813605d08c75219d2e8305dacf2d7be33ab764beef29b1d196fba6",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "5d224828bd78cbb4353659db536ae46db250fbf9715375e98ae396020d542b61",
+        "sequence": 48,
+        "wall_s": 8.0539364789729,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 24,
+      "case_id": "baseline-demo_5",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "f52e73605430edffcd29be1feb7c3ce084f4dbcdd15c2359ee9d1575c1872f62",
+      "retry_reason": null,
+      "sequence": 49,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 24,
+        "evidence_sha256": "49347ac96f5e3de764fe976cd8a6e81c0f9382912ec52d1e653254ace338f6eb",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "0313419a13ba7e13e0e9e3e8cb56e42b0d33e585e3f116bf8b5e7bb304163f07",
+        "sequence": 50,
+        "wall_s": 6.350883766019251,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 25,
+      "case_id": "step-1000us-demo_5",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "e04f155bcc30b932cdfba26184b12f38bc66a3098bf6741aae6b7967100483e8",
+      "retry_reason": null,
+      "sequence": 51,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 25,
+        "evidence_sha256": "f41b74c23b8ae0779487be1d2559e8b1948743c1fe740ec6a0c81c903812e881",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "54be1ee16b67932cafad2a86be9b97e9043508f411338796d7a618af8acce317",
+        "sequence": 52,
+        "wall_s": 8.83404678403167,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 26,
+      "case_id": "baseline-demo_6",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "0f3c6142361f0f6f6f42458ce929fd04f96e47fef994a42950a6b0b6d71a9a33",
+      "retry_reason": null,
+      "sequence": 53,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 26,
+        "evidence_sha256": "262ced8483d58d1868d65451e63bb5a8387a8bda3795be4f2d6964e5a8f23788",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "71962d18bee5b7ae38b819c7ee045a9761991f3ad6c33c24488a031933ccd624",
+        "sequence": 54,
+        "wall_s": 6.51400660694344,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 27,
+      "case_id": "step-1000us-demo_6",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "efc04571de61510a6fe803e13315a994f748b4417a4b48752da4907882b7065b",
+      "retry_reason": null,
+      "sequence": 55,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 27,
+        "evidence_sha256": "c88c3afac7f09e5017787044ff78d48a70af6c8bdace0dc4d78b465b99b46faa",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "67c1db3842619111f63792428026515a4b415c27cc7374b45aa29421798b43fd",
+        "sequence": 56,
+        "wall_s": 9.158625031996053,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 28,
+      "case_id": "baseline-demo_7",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "693d49661d4b419dd746b757e3ef94f595239a844c096561cd5421caa793a8e5",
+      "retry_reason": null,
+      "sequence": 57,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 28,
+        "evidence_sha256": "3d74210c5ac0ec596864d39d1d4ddebe22453c0d9987d6c5568c6c33f47c8548",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "3fbd341e129d4418f769f02c077e8283cd4e2ba1ea63461fef7cedfdb2ba301c",
+        "sequence": 58,
+        "wall_s": 6.180081313999835,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 29,
+      "case_id": "step-1000us-demo_7",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "1d4ad8faadd85d1c9a853360ee27de61221bcc49f7a07adad85bf50ec00d0655",
+      "retry_reason": null,
+      "sequence": 59,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 29,
+        "evidence_sha256": "3be3311afe2e4aac63044a34678320e5431f00cdc86b31265d025e325e167733",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "757f6e5d2f0d4d1ae11575ccb38ebe40575d573adf87b74f6367c9c812c3ae7f",
+        "sequence": 60,
+        "wall_s": 8.50809062802,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 30,
+      "case_id": "baseline-demo_8",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "0e698efc1114216dd4cfe2fe5dd8b369f889ba8243d2128e236265968ac8fecb",
+      "retry_reason": null,
+      "sequence": 61,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 30,
+        "evidence_sha256": "b13aa04269aa8b5059015973c3a65a7a7ed996a129bb27f052229ce9a36e81de",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "809d4e3c482acc4510e20759fc998d3a6e1eba9b9b554d8a1227f9d8fed3ea1a",
+        "sequence": 62,
+        "wall_s": 7.082423175976146,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 31,
+      "case_id": "step-1000us-demo_8",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "4b0ecac4ff912c88767476e985ba0975610a6fa8f0e3dc859e81f582360f700c",
+      "retry_reason": null,
+      "sequence": 63,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 31,
+        "evidence_sha256": "366253051aefd55d2828a7d1e6422f42f10d6562f31e6e8e6e44c317e6d5c396",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "f0c8d9b4d52f873c8655b40cede42f4febc30fbb3df116fe88dd44cb5bbb355a",
+        "sequence": 64,
+        "wall_s": 9.785970113007352,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 32,
+      "case_id": "baseline-demo_9",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "c868438e01bfe16926ffa70cdf6aaa76f7fa343062050a0b809925dfc03d3bff",
+      "retry_reason": null,
+      "sequence": 65,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 32,
+        "evidence_sha256": "3d0c6086610c4533bab337b14bcfc9063fbc63a486f524063208373d9c904f85",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "bb6418e53733c0f2222140d16fdeb974cdf5139a4d9cceb720b8026c73725ca2",
+        "sequence": 66,
+        "wall_s": 6.456261918996461,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 33,
+      "case_id": "step-1000us-demo_9",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "6a5d3a9e4d628ec24c654ab97a0487cb629d9e3f6121c3fd7656c338d1d44e00",
+      "retry_reason": null,
+      "sequence": 67,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 33,
+        "evidence_sha256": "aa6207985aa316fadf4d8f32942d8a75f89701f8bd29ee15ca946a8d142c2fe4",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "c75333b390de3900ca505f243191afc12c515f8edeba5627266f2a6873cc0c0f",
+        "sequence": 68,
+        "wall_s": 9.271603380970191,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 34,
+      "case_id": "baseline-demo_10",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "a2ba2d376f510f97f5c257faae701ff0e4cd445459a351e64edbdff8f40c0757",
+      "retry_reason": null,
+      "sequence": 69,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 34,
+        "evidence_sha256": "150dd84e0d235baa867d152569c59ccea1c8e5b5b27f8b8497c656e9409b2477",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "e0da3be8d0c8df604ac9079a0012f7a379e3d7fab857dddafd465df5b1f8f20e",
+        "sequence": 70,
+        "wall_s": 6.205239453003742,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 35,
+      "case_id": "step-1000us-demo_10",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "b5f12c6588e4b2fd96275b310b84425103e2d57cc44ddf6016b3555c4915559e",
+      "retry_reason": null,
+      "sequence": 71,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 35,
+        "evidence_sha256": "4d6afd4aee09a4691893244d9643b2da46d6f62b16065bc0faec345d2f369fff",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "004dc175f9de416b5daeb15f30a2081b8a4082569f9e08200e6b5c9a5d853714",
+        "sequence": 72,
+        "wall_s": 8.378661146038212,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 36,
+      "case_id": "baseline-demo_11",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "5c593471c69c7d0a047cc3d344f801b830ddb511c3d068e0fc6927f2632ac211",
+      "retry_reason": null,
+      "sequence": 73,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 36,
+        "evidence_sha256": "73827a3c3daeae760d886f9d00bc70d79c947526437dc7c1fa30907e99270b41",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "7c80e79c58bafa0ae95722b9fcc5d1037c00a36bd3a9021d27a92fa3dddf3ec1",
+        "sequence": 74,
+        "wall_s": 6.388064927945379,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 37,
+      "case_id": "step-1000us-demo_11",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "081932c14b49c55f1f6073c776a5e5a504bee17fee14903b33f97ff10fb29ae2",
+      "retry_reason": null,
+      "sequence": 75,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 37,
+        "evidence_sha256": "24ffdc4c1746c9abe5ac25703dc1c3739a6da23214b3111a9a21bdbbc0b5ef8f",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "89b6c4913e89add992ccdd179563fe19037453c46d040ca85c1cae3c39999ca8",
+        "sequence": 76,
+        "wall_s": 8.822119702002965,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 38,
+      "case_id": "baseline-demo_12",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "f07ca140789a639ff46a4756c68090dc05b88de829a4ed4c5f4198018d399d81",
+      "retry_reason": null,
+      "sequence": 77,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 38,
+        "evidence_sha256": "1820f31a9764f1b367d9730cee7539454512858d620a98506ffc780913f352aa",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "fb14fdc559819b6b21f7674579a54ba74d734dfd07163edfcb68ddc3eec5be3b",
+        "sequence": 78,
+        "wall_s": 6.021268673997838,
+        "wall_source": "whole_process"
+      }
+    },
+    {
+      "attempt": 39,
+      "case_id": "step-1000us-demo_12",
+      "handle": {
+        "scope": "private process identity retained in original ledger"
+      },
+      "kind": "reserved",
+      "previous_sha256": "36784461b28a39d7afdb569fad9b329f1ae113f86e6cfb9b3479994df71011b9",
+      "retry_reason": null,
+      "sequence": 79,
+      "timeout_s": 900,
+      "terminal": {
+        "attempt": 39,
+        "evidence_sha256": "e9515a19aa24af0030ee02990a01a4a4e91116257a793a66e1dd922572bb649c",
+        "kind": "terminal",
+        "outcome": "recorded",
+        "previous_sha256": "9e3e4ae4b19a5ca003f97b48fa727dff922c635af9495c73d6513096039f26ba",
+        "sequence": 80,
+        "wall_s": 8.575368789955974,
+        "wall_source": "whole_process"
+      }
+    }
+  ],
+  "starts_used": 46,
+  "inherited_starts": 6,
+  "inherited_wall_s": 31.09091510606231,
+  "wall_charged_or_reserved_s": 363.07014906493714,
+  "package_starts_used": 46,
+  "package_wall_s": 363.07014906493714,
+  "remaining_starts": 18,
+  "remaining_wall_s": 21236.929850935063
+}
