@@ -15,6 +15,40 @@ The executor retains rejection of the latter under the pinned initialization con
 Tests separately verify 2.3.7 acceptance and 3.15.0 rejection, without changing source
 states, engine versions or tolerances. Latest-native SDF checks remain a separate path.
 
+## Complete affected-task results
+
+The restored-pose candidate now has valid records for all 50 official demonstrations in
+each of Alphabet soup, Salad dressing and BBQ sauce: **150 records, 147 native successes,
+zero records passing all numerical diagnostics**. Each task retains 40 development and
+10 validation cases. The paired development result changes from 112/120 to 117/120
+successes, with seven improvements, two regressions and one persistent failure. All 30
+fixed-candidate validation runs succeed; no paired old/new validation effect is claimed.
+These are new-contract records, not relabelled historical records. De-duplicated Object
+coverage is 157/500, and the full 130-task scope remains incomplete.
+[Per-case index and hashes](evidence/libero/restored-baseline-index-v1.json).
+
+Nine complete memory controls cover all three remaining development failures. Reset
+`[0]` fails all three; `[1, -1]` succeeds for Alphabet and Salad, and `[-1, 1]` succeeds
+for all three. The observation-only controls reproduce all 53 reference arrays, including the initial state, exactly.
+For BBQ, nearly eliminating the first-action finger difference with `[1, -1]` does not
+restore task success. These interventions add no baseline records and do not change the
+initialization contract. They demonstrate a memory-intervention effect in exposed examples,
+not reconstruction of the source history or a generally better default.
+[Complete comparison and costs](evidence/libero/gripper-memory-diagnostic-v2.json).
+
+The schema audit of the three source files and 150 demonstration headers finds no dedicated
+controller/gripper-memory or warm-start datasets. The files have `tag` and lack
+`bddl_file_content`, unlike the pinned exporter. Generating revision versus later metadata
+editing remains unresolved, so the pinned generator's five-action prefix cannot be assumed
+for these actual files. [Source-schema audit](evidence/libero/history-schema-audit-v1.json).
+
+The [paired reader report](site/en/libero-workflow.md) separates complete baselines,
+fixed-candidate validation, source comparisons and interventions. Published JSON contains
+per-case summaries and hashes; the full raw trajectories/resource archives are separately
+retained and cannot be reconstructed or independently re-audited from summaries alone.
+The [executed diagnostic source](evidence/libero/gripper-memory-worker-v2.py) is a method
+snapshot requiring an admitted plan and compatible raw inputs, not a standalone benchmark.
+
 ## Versioned controller initialization
 
 New execution payloads must explicitly declare
@@ -42,13 +76,13 @@ first goal and a zero-orientation action; synthetic record mutations test reject
 
 The reset `initial_joint` and gripper `current_action` remain unchanged and are recorded.
 Saved flat state does not provide source controller goals, integrated gripper action or
-the skipped source prefix; this contract makes a fresh restored-pose start explicit rather
+any unrecorded source prefix; this contract makes a fresh restored-pose start explicit rather
 than inventing those histories. Original records retain their original initialization and
 remain scoreable; they cannot be relabelled with this contract. Re-running an old manifest
 under changed sources is not allowed. Freeze a new payload/source identity and cumulative
-budget for each declared regression. Earlier representative-path controls and the 120-record
-development cohorts do not qualify the new initialization. Complete affected-task regression,
-remaining source-history attribution and the full 130-task scope remain open in
+budget for each declared regression. Earlier representative-path controls and the original
+120-record development cohorts do not qualify the new initialization. The later 150-record
+cohort is reported above. Remaining source-history attribution and the full 130-task scope stay open in
 [#198](https://github.com/huangkiki/Dexlab/issues/198), [#188](https://github.com/huangkiki/Dexlab/issues/188)
 and [#181](https://github.com/huangkiki/Dexlab/issues/181).
 
@@ -64,7 +98,7 @@ Every recorded run retains constrained-acceleration and projected-body-effort ne
 the original bounds; the other nine diagnostics have no violating substeps. The package used
 518.89 native worker seconds, with at most 1,104,654,336 bytes peak cgroup memory in the measured
 8 GiB hard /7 GiB high /four-core /zero-swap envelope. Terminal receipts and all artifact hashes
-were checked. Lifetime native accounting includes 241 starts /6,922.63 worker seconds; waiting
+were checked. At this earlier stage, accounting included 241 starts /6,922.63 worker seconds; waiting
 and offline verification are separate. [Frozen qualification report](evidence/libero/controller-restoration-v1.json).
 The follow-up covers the other twelve previously qualified paths: free objects, a drawer,
 a stove, simultaneous targets, a long sequence and the remaining Object tasks. **36 complete
@@ -76,11 +110,11 @@ retains constrained-acceleration and projected-body-effort negatives at unchange
 
 The package used 973.09 native worker seconds and at most 1,464,868,864 bytes peak cgroup
 memory within the same 8 GiB hard /7 GiB high /four-core /zero-swap limits. All processes and
-terminal resource receipts were verified. Cumulative native accounting is 277 starts /
+terminal resource receipts were verified. At this earlier stage, cumulative accounting was 277 starts /
 7,895.72 worker seconds; queue waits and offline checks are separate. Together, the two
 packages cover 19 exposed demonstrations across all fourteen previously qualified task
-paths. Complete affected-task baselines, the other 116 task paths, source-history questions,
-physical-reference validity and visual-policy evaluation remain open.
+paths. The later complete affected-task records are reported above; the other 116 task paths,
+source-history questions, physical-reference validity and visual-policy evaluation remain open.
 [Frozen twelve-path regression](evidence/libero/controller-path-regression-v1.json).
 
 A separate source comparison rehashed both complete HDF5 files and compared the same 1,035
@@ -88,8 +122,8 @@ overlapping post-action states, with exact clocks and no validation trajectories
 `demo_29` still fails and its maximum target/source translation difference increases from
 131.64 to 511.85 mm; the successful Salad `demo_1` reference increases from 22.80 to 25.31 mm.
 First-action finger-coordinate differences remain 5.37–5.39 mm across all seven examples.
-These are descriptive source differences, not physical-error thresholds. Missing gripper and
-controller history remains a hypothesis, not a demonstrated cause of the remaining failure.
+These are descriptive source differences, not physical-error thresholds. The later explicit
+memory interventions show an effect, while actual historical gripper/controller state remains unknown.
 [All joint/source comparisons](evidence/libero/controller-source-comparison-v1.json).
 
 ## Acquisition and persistence

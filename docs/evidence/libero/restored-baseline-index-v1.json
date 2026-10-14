@@ -1,0 +1,1530 @@
+{
+  "schema_version": 1,
+  "initialization_contract": "osc-restored-pose-v1",
+  "baseline_candidate_commit": "7e2021823db2aca0d1636141adc72ede669849b2",
+  "packets": [
+    {
+      "file": "restored-object-reuse-v1.json",
+      "sha256": "833fdd19956c144cd35a930afaa4c1aab2e085a12d868cd0b30229eb21707bd5",
+      "bytes": 13970
+    },
+    {
+      "file": "restored-alphabet-development-v1.json",
+      "sha256": "dc5c05f442cd72d9d364fd73f25f6224be7823728a782cfea2dc616ddd16d8bf",
+      "bytes": 912620
+    },
+    {
+      "file": "restored-salad-development-v1.json",
+      "sha256": "a46ffb44ff6b6bd3078692894bbd5b6b7b6ee0df64ce801966d43ede3eccbd4c",
+      "bytes": 914782
+    },
+    {
+      "file": "restored-bbq-development-v1.json",
+      "sha256": "9b94b6436a8927e8627467783bc62aa49fa66475df75647b501c7b904ba05346",
+      "bytes": 912888
+    },
+    {
+      "file": "restored-salad-negative-controls-v1.json",
+      "sha256": "e988765f1275542f5b6be063176bd0e86f4682987adc5339c9277c322d4fe82a",
+      "bytes": 2595
+    },
+    {
+      "file": "restored-bbq-negative-controls-v1.json",
+      "sha256": "a3c40c414d26fb4c89cfd99bddf61ee8c23ea7ef61ccbded2aca4f120f710bca",
+      "bytes": 4014
+    },
+    {
+      "file": "new-regression-source-audit-v1.json",
+      "sha256": "0816a0281233563d459d40f1a6540dd11bc43227f01665cddc6e0dd6be3f50b4",
+      "bytes": 50421
+    },
+    {
+      "file": "affected-validation-v1.json",
+      "sha256": "2b99e9af29a03ce8242f126d15c09cc817b86e9bb78611a400f754258b61e3fa",
+      "bytes": 672700
+    },
+    {
+      "file": "history-schema-audit-v1.json",
+      "sha256": "0d9e5f9fd8fd8ce39bc30aa1261060c66d331c9c0728d252b74294a863032778",
+      "bytes": 434229
+    },
+    {
+      "file": "gripper-memory-diagnostic-v2.json",
+      "sha256": "38204962422da7e1f31e50b0eeffdddab5e353c56690b5143904fbb898e4e502",
+      "bytes": 49750
+    }
+  ],
+  "diagnostic_source_snapshot": {
+    "file": "gripper-memory-worker-v2.py",
+    "sha256": "0606c5b6a5a879ae1fe6e7c6d3051bf4c28e313887f00e998fc6a1e655d3d7ec",
+    "scope": "Exact executed private diagnostic worker source, provided for method review. It requires a separately admitted plan, compatible raw references and source inputs; it is not a standalone benchmark command."
+  },
+  "affected_complete_tasks": [
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "development_records": 40,
+      "validation_records": 10,
+      "development_native_successes": 39,
+      "validation_native_successes": 10,
+      "native_failed_demonstrations": [
+        "demo_29"
+      ],
+      "record_valid_count": 50,
+      "numerically_consistent_count": 0
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "development_records": 40,
+      "validation_records": 10,
+      "development_native_successes": 39,
+      "validation_native_successes": 10,
+      "native_failed_demonstrations": [
+        "demo_25"
+      ],
+      "record_valid_count": 50,
+      "numerically_consistent_count": 0
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "development_records": 40,
+      "validation_records": 10,
+      "development_native_successes": 39,
+      "validation_native_successes": 10,
+      "native_failed_demonstrations": [
+        "demo_31"
+      ],
+      "record_valid_count": 50,
+      "numerically_consistent_count": 0
+    }
+  ],
+  "unique_Object_records": [
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "d3cdd4d2c0d07c38adaf3cdf2d6a3317b9ba05ce05f7ec73b5da8957e33ff780"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_1",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "fb47d45b13136053b6fc575e6289266c6b40633f57db33437d55f4444e8da6fd"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_10",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "6f9f4113087a4aafc9d346ddd99b5322a543b5c1c878e052c299bf16bb169111"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_11",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "4075c16761cb8bf7e5141d6ce07ac6ceafb5829a60009143ac8eb21832af5428"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_12",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "768a9ff42546f96110dfef28e6ea43262496552f09b89790ef3b21853efa1739"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_13",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "0ad7a2cfb092acc90a8acfc7ffa52afd6387207acbca59cc948e643e5bc0c650"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_14",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "06737f4276599053fe312bdc2e89d7b5a59005f9d706ee53c5eefb2729460ccf"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_15",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "db27fd00e463065ebfa00579dec00aaa9e9a37c9c15ecdcb4df3288da94e835e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_16",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "075e4bd0a7033a0c5acec70e4840bf712669ddfa05bdd203e211d59efeedfd66"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_17",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2384f738fbdab47b45871f39f25a80aef45bf8fbc2ede42e5452802202285985"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_18",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "a24d8107317698c61d8fa8429565ae2e306e675691d583b0b98e0e5ad7f31800"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_19",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ae2ac404ec02932a8402e337a3ac18ca94f4de38675314471011a5b46e8f0330"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_2",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "7601563dc478811278e64dcb07037eb5705097c609b5689d18f572fffb0be373"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_20",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "616c225dafbd0fbbad8cd8ffe4579cf0bcc67bbcbfc6179e5670fdd1bc3809ea"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_21",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "d0a13be92a1119b961d69e0cfa147f11b314d1e5598aa510e8aea52e23fb6e29"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_22",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "485a0f147c143a9d1a3b73a36ff99f2ae14b71a3b6478f766d52f49f50f31aba"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_23",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "c6fc57a1c821f9a2d5bccdf68a0dd54774ea656ebda63c3abf0a74464289799b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_24",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "48de02f25193f520b4ba71e61f4021fbe84c48208d0b04109efbc3a273f07efa"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_25",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "c6728aa4996787a1ad9ea66cd0a9b322eb3ed1499784a75a5eb645d8111cdfb3"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_26",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "311ea0dd59c1577ff595bc31b40e846482db9bdb83068e844ab1fb570522a683"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_27",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2e0902921f8ec765c84e0b86aa2ae9060afe446837420ab410a6585746ff1927"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_28",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "025ae7a27d005bccd1cf19ef5e2fd01ce990ba2bc2a9c207e21cf4c8eab7e643"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_29",
+      "split": "development",
+      "native_success": false,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "5b50813f1be3d3b1d815e1f3e901bd9e58ef1eacdc44645c0b5340c0d2110b45"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_3",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "396c4ae48359ec2a8afa545fa7d2d3e31ee84033aa25a5b52c3d91c9c81b36b5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_30",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f818baf4492e134ba0465d021cb7595dcada0f78d2ef139256f797f64d093aca"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_31",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "d5ac620a1bf919c72b12bf367cf5ff44ecc8f58a08ad48f423cfbc0ad7deb556"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_32",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f2ad3490c257b38bb995d986449adbefbed0ade223fbf1cce4f966c55e5e88c9"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_33",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "85ca8d808f8397a9a55acd96580eee9074649814a6c10e46c43320b17430722a"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_34",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "74c0be898b7932785ff64bd44053ddd9295fed39b736ac66bc6ff905bf34d4ea"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_35",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "b655837933795773012480824f9917262ee623a1fab5b678ebaaa24a954c4b08"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_36",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "87505360361b109e996292dec5a9ff42e6dfe65c1613488e0b43d449b0388d06"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_37",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "4548b9b34e272792c1887858cbc849aaa9e8e15ca5aa4a8d769f1c2a9e809add"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_38",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "55b71be29416594e5159a5dcea5f7148bad0b30d94ef3229736b616fbc2c3a2b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_39",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "38286dd0e69fd1b25faf8ef54f3b25f324d09a3f57e98d1589977d3199b9187e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_4",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "b8369407b3375a87edad3339e4ea844ba65477d02996bcdcb93fc5668432dfb5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_40",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "93d1baa5e546d0d0f4dcb1c90391ac5d3c850d99a93e811a7fe5e76d1bc3ef10"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_41",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e9258a094dc733dacab87299ab439fc38fd31cb3f988187f26052c19eeb59115"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_42",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "3637b2b89a2a50d1d28a0d805daab86c120c62910fcf8c407dd590f4d3d876df"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_43",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9fb7a450cc36ba995b6d9ebc60d13736b0b3b977a4352112ae7c572508152166"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_44",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e3f2a88c69f8db20d4a8bbdd8715e227424b15d59bbf7d25ccf9835ce2181fe6"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_45",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "8b3237f7d7958adf323ff6d162fe7788163e595286ebb52e99fec6f2511c60c1"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_46",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f2a779a7b14ba073cd6ae94be3b8a2c28326a731f5b470fd9a4c031dd34c80eb"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_47",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e243612f0a05751074e2ba520f916310f268f01226897fbe58e78345c580cafc"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_48",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "0573382b9194fae9c0e4179d8d7e0462e8158b4d8e51a13714a4b0619d4b35ac"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_49",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "6bb7b0489a8158ab063c494b85efe06db629654b3bae69d8ba40cf1bc6841459"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_5",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f837f48d040ebecedf694431ef87005665bd1012086cba25edc1c1065330126e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_6",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "3827b07284e2904d5e49f6b86d9a80234be01c998bda52330dba5305ddfa5bfe"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_7",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2b634d594a3825510404844ac6623b35288b040166099883faa2446d11aeb359"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_8",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f9d667a18ad811f7c5308e0688327e1b258bba4a754c81e497847ec26ec50309"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_9",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "47704d2a055441c59de0be7dd77a014c640a56b54b60b27b60cc212162727b1b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "8865a745e2ac767b89adf608e1c0ad02d3631a871950d6cd5bd878ff5e8b9054"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_1",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "1ddff3492ff5eb433492d59ca9178b88e60dcef35f64f052092116a2665b16b4"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_10",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ff2ed415f117f0cf7c1b69cde0f5bd4b38c0b035159e851c349a3f5f7a3569fe"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_11",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e435d014527f1c5b6b2b9fbce7ef0b46388dec0f3af8f20282adca73c223f469"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_12",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "8a1cfe69f08526f22f378e978b941e25b35ef341f7825be2b26aa1d3ab23c6dc"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_13",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "bd1b1aeff5f3c3f0451b5f14d6d2d5184d68d61951b3e73f384c9fc8d08977c3"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_14",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f0f8f26c97d197693a6b09b4dc4723591f83ff519362e6fbdcfb0b6936d5586f"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_15",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ec93ac7643784d83b073c0244f254a79b6dc23c1decc0894dc370af52960f849"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_16",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "eece349b069b98e088818ab0189376ce6df54871ffb06bf788291d396f95668e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_17",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2e38e0fefd8e174f06fbfd7f0fcb9d129a504a7339485307bfb6d3e6ce8e2de7"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_18",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "da7495a5709b08c3ec873d2eeb8c0fa106872ca5e16cb5b97b4d0485ec05c84f"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_19",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "28f2f00aa2719c0f6124eb342c820edabb408165b325333a3818685719524297"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_2",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "84fad535fab8e3295702edff1d78a45ab0476888514a0a100946964cfa8a65c7"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_20",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "a21fd27b4390ba9784ed83623ad77cde252a7e8b8ee5cef98f5b89773edc57f3"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_21",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "12a000e15083108a8f6950e843bf79e26681c620d8c9f0c30d2f245784471416"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_22",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f4b52d4418d8fc481bdb8bafde74a6067cc93c91ac8d755da06f2f38891d58a8"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_23",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "62d7ebb6f282e74e31d9b886e7379bbad8cdc485387dbb99e23ac5c0d1c0e899"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_24",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "797a4373001a65cf106c2099b798bd99b5eae2a0c29cea9e3026a247d9d43b3c"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_25",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "158c86295461bf8770c09752f065c9ea9d2aa640fc762c3fc4a9b3d14540a85a"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_26",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e4fe190e2621774bc6eafb17e5adef6d948f76bb1cff9b0aca841cc0ee98ba65"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_27",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "cfd56c441221c2b2b71cd7b414bbb5b15ee107ad1a8f2f531cfce381867005d4"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_28",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e71c578595286c3e79ebd4ad4f73ca3d22ea8fefaa2f6c459744d0bef0d62c36"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_29",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "6e19ad21e432f13784dd047f1ebc8ce8c196d2c10b1ce8aafdab4e2fe08b4c13"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_3",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "43306b24110b80e42dc4e27b9719ea7e2846cb5560708ab4ef907cc73dd6dd56"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_30",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "83f261e724f7d23a8860de7d55f332573f9deee2b0615f5378972850aa5d1f62"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_31",
+      "split": "development",
+      "native_success": false,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "1756b760e73c79974c9fd5c111d12814f18c127bccfb19954cad2d73ed92e6ff"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_32",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ec5f57d327c4c691c5962b21136507f9aae0db4521a87b2c177b13a0ca624a77"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_33",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "df92057a04a331493796fcce8a4f494c563501e42f4918c499a4a5def4a74edd"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_34",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "cc4f3d3ecf57dfd8b7a89cf020afd33e9d579a539c24aaa62d76c7c36ff6f280"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_35",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "788806c0696361a4cfc01130a40a228cf809611768579b0a5f83a7907116eb1a"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_36",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "0859229e2b4ab69b5f450f3a677777ae9e65438a25a019efb64b4dd3430990ed"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_37",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "d54551bd103f42bd8a39583c38abb558626212b41eaca45b8704490b578c2c52"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_38",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "abcf644b2e902fb1f21c62c7ee8ad8799318494feae7fb04c5b808e11eba865e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_39",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "b2d8b8417260cdccf068e928bfb49b42df3674c30ef188a99aea50bc7dafbf85"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_4",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "23ec5d883456d64687c413fe6a705a440b4c964446929df8b788429b60d665ac"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_40",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f0eabd29600c9aaf88fb6b2f2385aa65814131522efd6134e8fdf971eb72e498"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_41",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "de765b319d4974fad43e3f83b44214ec80d34e08ea85c28eceab095b3b7de0fe"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_42",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "a771db77433c74496a0c156e86e79d595513b9be9747223437f446686871e035"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_43",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "b0b552a929d2f50bd7f3d938998624715601d0274ee90d90239a37145f7d652f"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_44",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "5e17a7bcb13e1ae455b0a5c606ccf937eccf84705d1fa3572f8fd6e9474c67e5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_45",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9dc67b780ec3914924fcee2517398ff3e320b04cd3303013ee3b8c5457538b97"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_46",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "8a81abcef12bff69c05f467cd2c2f17ede115bc83651bd7d9e063e47ff8373f5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_47",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "897fe84c32ec2280c8fd7872651a2047de0c2f86f266cabf2cbdee5d7e2412b2"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_48",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9060e82b78275e475c6730d70b560fb3f4bad0ec3e08b6dfb789d0d93fd06992"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_49",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "36db12302afc1c15144b5bca6b39c7f284b3ead8b2b0d66df3ba4a42f0710429"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_5",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "dd0aed370d5b3d774ca7bb0f2ba5275046602c01776ceac571a73c97bc7ed0be"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_6",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "00b13248f22b13e9e30d462ff5e96292f5b08258832100ba83937ea597055099"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_7",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ea8c4cc790afc3f9c0eeb984659ce5ede59f2d91bcb16cc18087e910aece51d4"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_8",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "078dc9bd2c663f4f84417986a0ce8392aac4272357bb7f1fda21d260bec94de4"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_9",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "d46919a9cf7b1968934d97b6e891d431884f2fc2a57fe54609d8378f4290c5b6"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_butter_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e5e49d9c8a185d9d6ba5d6fb54f05ba294deab46491ea53aadc3c70822bfa3a1"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "1c9c6c9ad8462cd601c0f8866c695865e8d02035247a72e0d136202a8f35a2b5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_cream_cheese_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e96c515edb73070cb0b5d0ce9a05a5c0a3dde29f5c202bda28f81bc1e79ada3b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_ketchup_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ad70ab14d64f744a350b83403ec95af7550bb534dcc0bb2b43c019cd30556562"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_milk_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "a13bd4a94d91ecef6c106a39514724482458c7d483c06ec54da83d5647a37efd"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_orange_juice_and_place_it_in_the_basket",
+      "demo_id": "demo_1",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "6b8c57db47a56b7591038ce191014b5be6486ec1328aa43c2ae055987c034235"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "031771757893f92ba30078fb667fe05a6dbbc6e70bfe9e58d4efa05d8c53c475"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_1",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "19713f9a95071866e1e1c54c4cb57d99daac25e1a95979a76993e540d28b10b2"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_10",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "37129087c071c6978b370c82e38c1e82062d71c9ac152bfbe67275669cbb1ad9"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_11",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ca12c1f1fed43ed64918e2f516b8d8f14372eabf1ac35280ba12d68611eb3968"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_12",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "339bced3d4a6e5ff7407bdd8c50597fd8474df3b9f0bef69f2b23f0585842b2e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_13",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e71b1e82f55222a623823955439dbb99f8dad0d7f7e0d5260079e739e11169db"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_14",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "3cfdc5a188244ec3715050851ba38d261a51ef44ea834ba6bac8f26a9f50d68e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_15",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "591cfe79fbbd38572318151e76b506216087c5b65778f2986f476e0f8d155450"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_16",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "bd63f412681a1890bcc3c903cc663bf615ef48026e0aebcdff044cd33ae3f6b5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_17",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9b71b3b04f6b30b1be11852ceaa1f7a998604a9db51d0f9f554d4139ba6dbc9b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_18",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "25f27a41cdea7b7b723c180548df407b04dff43d52077c5933c81706dbc85512"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_19",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "343f7077988e17bdc3c4b3be0db1bf10a87fbf3c20d2e0e414594c40a429d2ed"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_2",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "788e4b62d1e23da17258a128e6f2310a4d7c6cc958479e36a645e36229c458fa"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_20",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ffb4f115ef695af192a9b520bc4ed8ce337aa764fad49eb4c31e020ab1d65e46"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_21",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f0c4da8181c545f1408159dd1e5624380c7d5406df5b596780eb9d6dffe859b4"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_22",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "d3096561bfd776ff22e1d02ed55643bea66a8661df34c45e3afe4bef8ad91771"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_23",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "73f976fa9096873083d2ab86d47e60a12f4a7319bec73a867265f7a6ac356f8f"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_24",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2fda688360a79517743a119abb40b37430f7fef2a377e9978a2901f5687b7104"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_25",
+      "split": "development",
+      "native_success": false,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "79d12d3afe207d36febdb08084d67bed0bd331877c5cf54e690735a0daa255c1"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_26",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "798c071e3aa00738b01c01d9c7c4d16db078a3ee98b4ec0e2dcb1563678dfe48"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_27",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2d9b2ea4e18be9c7aefa88f7ebc44d601d4a8b485b4a86ac6b20612b6ead8373"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_28",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "ce5b33271b52ea1375f4a60d4067f8058d457b2f550b47d9fb5a1a255e012d3c"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_29",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "74ecaa763a2010377e40e5733da58f28b58b5af17eb75bee8024dc941b0f95f8"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_3",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "805a37c4f6af61227dcc509cab85f371c37f870a0073c37591e0d1e03ab45358"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_30",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "37469589cd398b8e00cf14e6304849e928912273541eb9f752f8eefdfafedbe6"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_31",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "609246a769cf797f8237b56abb16b9add900ef9084aacecbb118a460b5ceb0f6"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_32",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "0d474b89c562e41f8d1d91cddcb2676ee298f482a6685c5b56dd158b2694a571"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_33",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "c5d840b9136de83954099a4260f796df3900d7e338af9053205bc4502b7d9e0d"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_34",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "97b560534ca0678770556572467ac0b6f152f52584193c389fbb7c0c28a91d35"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_35",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "aed26535beecb93393adcbc5ea5384498b3f250b88917c1cffb00f417d541983"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_36",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "cf8c87a096b1a3a14586a644131f35aec0bd019ad43d36f69331c363de9db180"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_37",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "e6ac4203fb13419c7d32a16c1a83edebffc0a4297de31b7c8bdb1cecabbc0cf6"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_38",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "a2ad531fd7f5938f0ba6417af74b781b568cc705e911dc8df67b9a5c3c83410b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_39",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "6b970beae9ee08da6105a567db3fef908aab9b55fce49ed74f1539213e0d6446"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_4",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "87e0e86f54211d02a24eb66029714afc529dca8241a81f32ae77f8011059a096"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_40",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "4d5f50e7f185dc74c6b2480af7c8c2c4d63650f0f017d37ba415151433176e06"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_41",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9e8ba9af37a3c6edd17e25abae2c645efd90a8bdfc861f381b607b5649434ad5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_42",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "df065e2f24936dd91480437fabd78253fb196fae67e3975b0a287533971330c8"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_43",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "7217a2006a575bb989432e888bd6043160bbb6449f6c715e656af8b8b601063e"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_44",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2a69d827579fdb73beaf0af758fd245255fe9a6993228759d386d668e2c09d5a"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_45",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "a982c8e553fb5cceccdd93d88cfcfc5baeea489bce81ede9e6543464ac49f854"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_46",
+      "split": "validation",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "bdc148e26e9c8ffdaf272091d2f2cf312d7ee0463f93bc9829c70c17a2dec0c5"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_47",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "2b3513f1901365b48a80bd6a2866da8f085658c16f09623656de4474b263ec1b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_48",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9217310899f3b5c493bb52ebf9dad7d61ff316dbc9f0b578c2b2b671629015e8"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_49",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "8923f88456ca9b17bde75c0220dae0e0abbd4e62d95ad713f7d6ab4edaddb627"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_5",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "f03dc874918ae825f001cb8b56647043bee4dcef0e19ac2895e175589750710c"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_6",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "43e0138ae4643606f0a3851b01936755a631ada00e082ee16318f2e2e8a16761"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_7",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "61c50492eea44b230f38fa7ee6b63b06f619631eee073f2af0fd5818fb9c3032"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_8",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "9a2f1d5aead81d2af83b4408b09b81341145335d217a8be7333c1ed46e80143b"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_9",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "abe3e005b6f4d5d3877422d46b9e2def25081237754a873e2fbe9a0cb0b6b275"
+    },
+    {
+      "task_id": "libero_object/pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+      "demo_id": "demo_0",
+      "split": "development",
+      "native_success": true,
+      "record_valid": true,
+      "numerical_consistent": false,
+      "result_sha256": "5a81baa77fb761a93be4f96df355dfc59a39b26a75b23fd5f95745eba2adcb9d"
+    }
+  ],
+  "coverage": {
+    "Object_records": 157,
+    "Object_demonstrations": 500,
+    "Object_development": 127,
+    "Object_development_denominator": 403,
+    "Object_validation": 30,
+    "Object_validation_denominator": 97,
+    "Object_remaining": 343,
+    "native_paths_qualified": 14,
+    "native_paths_remaining": 116,
+    "official_task_denominator": 130
+  },
+  "diagnostic_additional_unique_baselines": 0,
+  "interpretation": "All50official demonstrations for each of three affected tasks have accepted native records. Original and corrected cohorts, fixed-candidate validation and memory counterfactuals remain distinct. This is not source-history reconstruction, physical accuracy or full130completion.",
+  "artifact_scope": "Public per-case result summaries, hashes, audit findings and the executed diagnostic source. Full raw trajectories and resource archives remain separately retained; these JSON summaries alone cannot independently re-audit every native step."
+}
