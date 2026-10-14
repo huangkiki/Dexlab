@@ -3,8 +3,9 @@
 [English](libero-substeps.md) | [简体中文](libero-substeps.zh-CN.md)
 
 Implementation and qualification work for [#188](https://github.com/huangkiki/Dexlab/issues/188).
-Representative native paths have been checked; physical-reference qualification, repository
-delivery and the full task matrix remain open.
+The engineering implementation is merged in [PR #193](https://github.com/huangkiki/Dexlab/pull/193).
+Representative native paths have been checked; physical-reference qualification and the
+full task matrix remain open.
 Historical version-1 records and scores are unchanged.
 
 Initialization qualification is version-specific. A retained whole-repository test failure
@@ -218,8 +219,8 @@ paths and checked its hash before every dispatch. Its three worker times were 33
 6.4440 and 30.9712 seconds; separate final comparison passed in 6.0474 seconds.
 The cumulative native-process ledger retains 62 starts and 1,762.2619 worker seconds,
 including that failed launch. Offline conversion, builds and comparisons have separate
-receipts and are not hidden within a native-throughput figure. Repository delivery checks
-and the complete task matrix remain open. Generalized forces
+receipts and are not hidden within a native-throughput figure. The complete task matrix
+remains open after the engineering delivery. Generalized forces
 and inferred subtree loads do not by themselves qualify physical joint/support reactions;
 uncomputed `cfrc` buffers are not observations. Independent physical references retain their
 own acceptance. Numerical consistency, physical validity, native success and learned-policy
