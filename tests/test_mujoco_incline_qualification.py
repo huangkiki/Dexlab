@@ -114,6 +114,24 @@ class InvalidRecordTests(unittest.TestCase):
 
 
 class NativeAdmissionTests(unittest.TestCase):
+    def test_native_compiled_export_preserves_representable_admission_parameters(self):
+        import mujoco
+        from dexlab.incline_score import validate_admission
+
+        # Synthetic API fixture: unit inertia and zero tilt avoid XML rounding.
+        # Scientific protocols and their measured export loss remain unchanged.
+        protocol = dict(PROTOCOL, mass_kg=6., side_m=1.)
+        case = dict(PROTOCOL['cases'][0], angle_deg=0.)
+        with tempfile.TemporaryDirectory() as folder:
+            destination = Path(folder) / 'admission'
+            run_case(mujoco, protocol, case, destination, admission_only=True)
+            original = json.loads((destination / 'admission.json').read_text())
+            exported = json.loads((destination / 'export-readback.json').read_text())
+            validate_admission(protocol, case, original)
+            validate_admission(protocol, case, exported)
+            self.assertTrue(export_precision(original, exported)['within_tolerance'])
+            self.assertFalse((destination / 'trace.npz').exists())
+
     def test_frames_inertia_origin_geometry_and_control_overrides_rejected(self):
         from dexlab.incline_score import validate_admission
         protocol = json.loads((ROOT / 'docs/evidence/mujoco-incline/pgs-elliptic.json').read_text())

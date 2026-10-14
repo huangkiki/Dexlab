@@ -124,6 +124,8 @@ Model/clock diagnostics already exist; task acceptance retains the matrix state.
 
 <!-- visual-research:end -->
 
+MuJoCo 3.16.0's [isolated qualification record](docs/engine-qualification.md) verifies the official environment, native compatibility and complete 2-second cloth settling trace; the first sampled midsurface intrusion is 0.049681 mm, with material and grasp still unqualified. Complete task admission is tracked separately in [#202](https://github.com/huangkiki/Dexlab/issues/202). Historical results retain their versions, and LIBERO keeps its separately qualified 2.3.7 path.
+
 LIBERO offline scorer v2 checks per-contact distances, target identity and summary overlap for consistency; refreshed local hashes cannot make contradictory records valid. Original evidence and diagnostic thresholds remain unchanged. [Scoring fix and regression](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
 
 ## How to diagnose a poorly performing scene

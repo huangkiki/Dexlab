@@ -82,6 +82,20 @@ class MuJoCoCompatibilityProfileTests(unittest.TestCase):
                 mujoco_profile_identity({'version': installed}, native,
                                         profile='qualification-3.15.0')
 
+    def test_316_candidate_keeps_historical_and_formal_admission_boundaries(self):
+        identity = {'version': '3.16.0', 'code_sha256': 'new-official-payload'}
+        with patch.dict('os.environ', {}, clear=True), self.assertRaises(ValueError):
+            mujoco_profile_identity(identity, '3.16.0')
+        result = mujoco_profile_identity(identity, '3.16.0', profile='qualification-3.16.0')
+        self.assertEqual(result['profile_status'], 'candidate')
+        self.assertFalse(result['formal_batch_qualified'])
+        self.assertEqual(result['code_sha256'], identity['code_sha256'])
+        for installed, native in [('3.15.0', '3.15.0'), ('3.16.0', '3.15.0'),
+                                  ('3.15.0', '3.16.0')]:
+            with self.subTest(installed=installed, native=native), self.assertRaises(ValueError):
+                mujoco_profile_identity({'version': installed}, native,
+                                        profile='qualification-3.16.0')
+
 
 class RuntimeQualificationTests(unittest.TestCase):
     def setUp(self):

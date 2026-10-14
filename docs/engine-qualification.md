@@ -6,7 +6,25 @@ Current Newton core evidence is separate from the historical `sim`-extra constra
 
 Release metadata, successful import, device smoke, and full task qualification are different evidence stages. A compatible package combination does not qualify an apple or cloth scene.
 
-## Current delivery evidence
+## MuJoCo 3.16.0 qualification (2026-10-14)
+
+The official 3.16.0 wheel became available during the frozen 3.15.0 gate for [#198](https://github.com/huangkiki/Dexlab/issues/198). That gate passed its unit, documentation and two full apple regressions, then failed the latest-stable package admission. Its source, runtime, results and costs remain historical evidence. [#202](https://github.com/huangkiki/Dexlab/issues/202) tracks the new version's qualification before #198 resumes.
+
+The isolated candidate has verified official wheel-to-installed-code identities for all five participating packages, the loaded 3.16.0 native library and actual-interpreter dependency compatibility. [Environment evidence](evidence/native316-environment.json) records the retained preparation-check failure and subsequent verification. Environment readiness does not qualify an experiment. `DEXLAB_MUJOCO_PROFILE=qualification-3.16.0` retains candidate status and `formal_batch_qualified: false`; historical defaults and frozen runs are unchanged. LIBERO remains on its separately qualified 2.3.7 runtime.
+
+The [official release notes](https://github.com/google-deepmind/mujoco/releases/tag/3.16.0) describe changes to flex contact reduction, interpolated-flex stiffness, `mj_setConst` bounds and model-saving APIs. These upstream changes motivate native response and first-intrusion checks; they do not establish a DexLab improvement. Complete apple admission and repository delivery are tracked separately in [#202](https://github.com/huangkiki/Dexlab/issues/202); material and grasp qualification remains [#179](https://github.com/huangkiki/Dexlab/issues/179).
+
+The [initial native API diagnostic](evidence/native316-api.json) reproduced the compiler's rejection of `implicitfast` for flex elasticity. The existing candidate-only migration now selects `discrete` for 3.16.0, preserving the historical profile. Targeted checks passed 67 of 68 tests, with one intentional skip for the pinned LIBERO 2.3.7 contract. Native force-driven displacement, fixed vertices, dynamic mass, MjSpec/MJB behavior and the 3.16.0 initialization rejection boundary are covered; this is not material calibration.
+
+The [complete diagnostic packet](evidence/native316-validation.json) retains the original failed test, XML export controls, full passive trace and independent geometry audit. An original zero-tilt fixture lost `3.33333333334e-11 kg m²` in each nonzero principal inertia when exported and reloaded, exceeding the unchanged `1e-12` numerical export tolerance. The same loss exists in historical 3.15.0 records. A synthetic unit-inertia control round-trips without a detected difference. Incline integration uses the original model, never that compiled XML; this export observation does not establish a dynamics regression.
+
+The inherited, uncalibrated 169-vertex panel completed all 4,000 settling steps at 0.5 ms, yielding 4,001 finite state frames over 2 seconds with no native warnings. The independent table audit first observed midsurface intrusion at sample 45 (22.5 ms): **0.049681 mm**. Sample 44 had no detected intrusion at the existing numerical zero tolerance. The audit stops at the first witness; this is neither a maximum-depth estimate nor a continuous-time onset bound. All raw state/model hashes, sampling and topology were rechecked, and the independent audit reproduced exactly.
+
+Targeted validation, its retained failure, the export probe and final verification consumed **35.48 service seconds** within the frozen 720-second budget; the successful unit/settling package peaked at 600,784,896 bytes. These costs include setup, recording and offline auditing, and are not engine-throughput measurements. The full trace is a version-specific development diagnostic: it does not qualify real material response, robot contact, grasp or a causal improvement over earlier engines.
+
+## Historical 3.14.0 migration evidence
+
+The remainder of this page retains the dated migration observations and their then-pending checks. It is not the current queue or qualification status; use the linked Issues and recorded versions for subsequent delivery.
 
 The migration gate at tree `8ac3d71b27145ec664af37728b676dd6c8dd1f38` passed 335 tests and both complete 14-second apple episodes with separate acceptance. Later provenance additions pass 346 tests; the final submitted-tree gate remains pending. No held-out scenes have been dispatched.
 

@@ -50,7 +50,7 @@ class MuJoCoCloth:
         # Historical records retain their original integration scheme.
         integrator = (
             "discrete"
-            if identity["compatibility_profile"] in ("qualification-3.14.0", "qualification-3.15.0")
+            if identity["profile_status"] == "candidate"
             else "implicitfast"
         )
         vertices, triangles, masses = case.mesh()
