@@ -1,0 +1,68 @@
+{
+  "absolute_reference_error_maxima_by_unit": {
+    "acceleration_rad_s2": 7.105427357601002e-15,
+    "force_N": 1.1102230246251565e-14,
+    "impulse_N_s": 4.85722573273506e-17,
+    "position_m": 5.551115123125783e-17,
+    "torque_N_m": 4.440892098500626e-16,
+    "velocity_m_s": 3.774758283725532e-15
+  },
+  "fixture_absolute_arithmetic_allowance": 1e-10,
+  "fixture_configurations": 8,
+  "free_fall": {
+    "duration_s": 0.04,
+    "timesteps_s": [
+      0.004,
+      0.002,
+      0.001
+    ],
+    "vertical_position_errors_m": [
+      -0.0007848000000001409,
+      -0.00039240000000040354,
+      -0.00019619999999909155
+    ]
+  },
+  "libero_numerical_bounds_changed": false,
+  "native_mujoco_version": "2.3.7",
+  "native_result_sha256": "86c085beff3c7ad72c81264f2b484ae38d1936ab4ee7a06c36ce78521cb86984",
+  "native_skips": 0,
+  "native_tests": 3,
+  "negative_controls": [
+    {
+      "force_error_N": [
+        -0.11682550269259773,
+        0.27631829820087006,
+        0.0
+      ],
+      "torque_error_N_m": [
+        0.0,
+        0.0,
+        0.04000000000000048
+      ]
+    },
+    {
+      "force_error_N": [
+        0.16939274201851262,
+        0.24760068447290706,
+        0.0
+      ],
+      "torque_error_N_m": [
+        0.0,
+        0.0,
+        0.04000000000000026
+      ]
+    }
+  ],
+  "offline_check_sha256": "7bf72ccae26d07c7c6593397727a255bbbcd10aa3b0acdd7e1930ccb41467ee1",
+  "offline_raw_replay": true,
+  "plan_sha256": "fa10115a1eb3c042098aafe1fd6d808ec3cb406af2152297d38e505d2c1e95b8",
+  "private_verified_sha256": "dc006b1b235142cf2bee841d883500743806aac42aad813a64a85c610709f4e2",
+  "recorded_substeps": 142,
+  "recording_state_comparison": "exact",
+  "retained_check_wait_failure_sha256": "e217464a245caa778413eceb67ec1a9f0f944e47acafbd8b0f4811f6989e8e37",
+  "schema_version": 1,
+  "scope": "Independent synthetic body-load and integration references, not LIBERO material calibration, general joint reaction qualification or full task coverage.",
+  "test_file": "tests/test_libero_analytic_references.py",
+  "test_sha256": "df3ed2e81e3db150e4aecd0e37b5aab3e73435b430c4a894f06e5759387d4323",
+  "uninstrumented_control_substeps": 142
+}

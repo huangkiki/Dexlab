@@ -113,6 +113,36 @@ schema 2 模型必须使用另行冻结的 schema 2 协议 `mujoco-2.3.7-euler-b
 坐标语义核对依据为固定版本的[物体动力学源码](https://github.com/google-deepmind/mujoco/blob/2.3.7/src/engine/engine_core_smooth.c)
 和[空间代数源码](https://github.com/google-deepmind/mujoco/blob/2.3.7/src/engine/engine_util_spatial.c)。
 
+## 独立解析参考
+
+`tests/test_libero_analytic_references.py` 定义三类合成参考。预期值来自声明常量和
+闭式力学公式，不把原生惯量、偏置、力或加速度缓存本身作为参考答案：
+
+| 用例 | 独立比较 | 误差与解释 |
+| --- | --- | --- |
+| 受驱动阻尼滑块 | 质量 `m`、阻尼 `b`、恒定驱动力 `F` 和步长 `h` 下，令 `r = m/(m + b h)`，使用 `v_n = F/b + (v_0 - F/b) r^n`，对速度求和得到位置；物体载荷参考为 `[F - b v_n, 0, m g]`。 | 在 4、2、1 ms 下，分别与连续指数解比较有限时长的位置和速度。符合离散递推不代表积分误差消失。 |
+| 受驱动阻尼铰链 | 质心半径 `l`、中心惯量 `J` 下，使用 `alpha = (tau - b omega - m g l cos(theta))/(J + m l²)`，由平面牛顿–欧拉方程推导质心加速度和支撑力。 | 转轴处力矩包含已知驱动／阻尼力偶；推算子树载荷不是单独的轴承测量。故意损坏加速度后必须偏离独立参考。 |
+| 中心自由落体 | 保留重力方向，逐步将动量变化与 `m g h` 比较。 | 在该理想恒加速度模型中，时长 `T` 后半隐式 Euler 的竖直位置误差为 `-g T h/2`，另有算术误差；三个步长分别报告。 |
+
+重力、质量、惯量、阻尼和驱动均为明确声明的合成输入；这些用例不包含接触、材料不确定性、
+执行器动态或关节限位。预先声明的 `1e-10` 算术绝对验收余量按各量自身单位分别应用
+（N、N m、m、m/s、rad/s² 或 N s），不是置信区间，也不是 LIBERO 记录的新界限。
+已有数值协议保持不变；开启／关闭记录的原生状态还必须逐值相同。
+
+这些参考只覆盖声明的理想载荷和积分路径。一般关节系统的物理反力、接触／材料准确性和
+完整任务矩阵仍有各自的验收。固定版本的
+[积分说明](https://mujoco.readthedocs.io/en/2.3.7/computation.html#numerical-integration)
+解释了此处使用的隐式关节阻尼和半隐式位置更新。原生结果需要固定的 2.3.7 测试环境；
+跳过测试不构成资格证据。
+
+将 `LIBERO_PYTHON` 指向已准入的 MuJoCo 2.3.7 解释器，在仓库根目录运行：
+
+```bash
+PYTHONPATH=src:tests "$LIBERO_PYTHON" -m unittest test_libero_analytic_references -v
+```
+
+[实测结果与来源](evidence/libero/analytic-references-v1.json)保留参考误差和负对照。
+
 ## 资格边界
 
 小型原生夹具覆盖受外力／力矩的自由体、阻尼驱动滑动关节、带限位与驱动力截断的关节链、
