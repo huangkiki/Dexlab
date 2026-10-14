@@ -1,0 +1,59 @@
+[
+  {
+    "task": "tofu-sequential",
+    "frames_checked": 101,
+    "native_centroid_and_force": true,
+    "volume_scalar_triple_product": true,
+    "affine_face_opening_direct_check": true,
+    "gif_metadata": [
+      {
+        "view": "surface",
+        "frames": 101,
+        "duration_ms": 12120
+      },
+      {
+        "view": "particles",
+        "frames": 101,
+        "duration_ms": 12120
+      }
+    ]
+  },
+  {
+    "task": "banana",
+    "frames_checked": 141,
+    "native_centroid_and_force": true,
+    "volume_scalar_triple_product": true,
+    "affine_face_opening_direct_check": true,
+    "gif_metadata": [
+      {
+        "view": "surface",
+        "frames": 141,
+        "duration_ms": 16920
+      },
+      {
+        "view": "particles",
+        "frames": 141,
+        "duration_ms": 16920
+      }
+    ]
+  },
+  {
+    "task": "tofu",
+    "frames_checked": 61,
+    "native_centroid_and_force": true,
+    "volume_scalar_triple_product": true,
+    "affine_face_opening_direct_check": true,
+    "gif_metadata": [
+      {
+        "view": "surface",
+        "frames": 61,
+        "duration_ms": 7320
+      },
+      {
+        "view": "particles",
+        "frames": 61,
+        "duration_ms": 7320
+      }
+    ]
+  }
+]

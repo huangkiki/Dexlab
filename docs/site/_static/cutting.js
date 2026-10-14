@@ -8,6 +8,36 @@ document.addEventListener('DOMContentLoaded', () => {
       video.pause();
       video.removeAttribute('autoplay');
     }
+    // Keep the burned-in measurements visible, including while paused.
+    const chinese = document.documentElement.lang.startsWith('zh');
+    const controls = document.createElement('div');
+    controls.className = 'cutting-playback-controls';
+    const play = document.createElement('button');
+    const reset = document.createElement('button');
+    play.type = reset.type = 'button';
+    reset.textContent = chinese ? '重播' : 'Replay';
+    const seek = document.createElement('input');
+    seek.type = 'range'; seek.min = 0; seek.max = 0; seek.step = .01; seek.value = 0;
+    seek.setAttribute('aria-label', chinese ? 'DexLab 回放进度' : 'DexLab replay time');
+    const clock = document.createElement('output');
+    const update = () => {
+      const duration = Number.isFinite(video.duration) ? video.duration : 0;
+      seek.max = duration; seek.value = video.currentTime; seek.disabled = !duration;
+      clock.textContent = `${video.currentTime.toFixed(1)} / ${duration.toFixed(1)} s`;
+      play.textContent = video.paused ? (chinese ? '播放' : 'Play') : (chinese ? '暂停' : 'Pause');
+      play.setAttribute('aria-pressed', String(!video.paused));
+    };
+    play.addEventListener('click', () => {
+      if (video.paused) video.play().catch(update);
+      else video.pause();
+    });
+    reset.addEventListener('click', () => { video.pause(); video.currentTime = 0; update(); });
+    seek.addEventListener('input', () => { video.currentTime = Number(seek.value); update(); });
+    ['loadedmetadata', 'timeupdate', 'play', 'pause', 'ended'].forEach(event => video.addEventListener(event, update));
+    controls.append(play, reset, seek, clock);
+    video.after(controls);
+    video.controls = false;
+    update();
     let generation = 0;
     player.querySelectorAll('[data-cutting-view]').forEach(button => {
       button.addEventListener('click', () => {
@@ -35,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   // The two author clips share an input and clock. DexLab uses its own
-  // declared configuration and retains native controls and physical time.
+  // declared configuration and separate controls and physical time.
   document.querySelectorAll('.cutting-comparison').forEach(panel => {
     const videos = [...panel.querySelectorAll('[data-cutting-reference]')];
     const controls = panel.querySelector('.cutting-reference-controls');

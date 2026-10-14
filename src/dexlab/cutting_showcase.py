@@ -13,6 +13,7 @@ from vtk.util.numpy_support import numpy_to_vtk, numpy_to_vtkIdTypeArray, vtk_to
 
 from dexlab.cutting_score import grid_components, score_run
 from dexlab.cutting_surface import BananaSkin, MaterialSurface
+from dexlab.cutting_metrics import ReplayMeasurements
 
 
 def polydata(vertices, faces):
@@ -50,16 +51,37 @@ def cube(renderer, lengths, center, color):
 def wood_texture():
     y, x = np.mgrid[:512, :1024]
     rng = np.random.default_rng(197)
-    grain = (.025 * np.sin(.22 * y + .8 * np.sin(x / 170))
-             + .018 * np.sin(1.65 * y + 2 * np.sin(x / 400))
-             + .009 * rng.normal(size=x.shape))
-    planks = .012 * (y // 85 % 3) - .01 * (y % 85 < 2)
-    colors = np.clip(np.array([.82, .65, .44])[None, None] + (grain + planks)[:, :, None], 0, 1)
+    grain = (.012 * np.sin(.13 * y + 2.8 * np.sin(x / 240))
+             + .009 * np.sin(1.7 * y + 4 * np.sin(x / 330))
+             + .008 * rng.normal(size=x.shape))
+    planks = .008 * (y // 128 % 3) - .012 * (y % 128 < 1)
+    colors = np.clip(np.array([.81, .71, .55])[None, None] + (grain + planks)[:, :, None], 0, 1)
     data = vtk.vtkImageData()
     data.SetDimensions(1024, 512, 1)
     data.GetPointData().SetScalars(numpy_to_vtk((colors * 255).astype(np.uint8).reshape(-1, 3), deep=True))
     texture = vtk.vtkTexture()
     texture.SetInputData(data)
+    texture.InterpolateOn()
+    return texture
+
+
+def tofu_texture():
+    """Small material-attached pores; colour detail only, never a cut mask."""
+    rng = np.random.default_rng(203)
+    y, x = np.mgrid[:256, :256]
+    shade = np.ones((256, 256))
+    for cx, cy, radius in zip(rng.uniform(0, 256, 95), rng.uniform(0, 256, 95),
+                              rng.uniform(.7, 2.2, 95), strict=True):
+        distance = np.minimum(abs(x-cx), 256-abs(x-cx))**2 + np.minimum(abs(y-cy), 256-abs(y-cy))**2
+        shade -= .12*np.exp(-distance/(2*radius**2))
+    colors = np.clip(shade[:, :, None]*np.array([1., .996, .975]) +
+                     rng.normal(0, .003, (256, 256, 1)), 0, 1)
+    data = vtk.vtkImageData()
+    data.SetDimensions(256, 256, 1)
+    data.GetPointData().SetScalars(numpy_to_vtk((colors*255).astype(np.uint8).reshape(-1, 3), deep=True))
+    texture = vtk.vtkTexture()
+    texture.SetInputData(data)
+    texture.RepeatOn()
     texture.InterpolateOn()
     return texture
 
@@ -87,12 +109,12 @@ def knife_actor(renderer, half, bevel):
 
 
 class CuttingScene:
-    def __init__(self, config, width=960, height=640, *, task='tofu'):
+    def __init__(self, config, width=960, height=520, *, task='tofu'):
         self.config = config
         self.task = task
         self.renderer = vtk.vtkRenderer()
-        self.renderer.SetBackground(.88, .91, .91)
-        self.renderer.SetBackground2(.97, .98, .975)
+        self.renderer.SetBackground(.91, .93, .94)
+        self.renderer.SetBackground2(.985, .985, .98)
         self.renderer.GradientBackgroundOn()
         self.window = vtk.vtkEGLRenderWindow()
         self.window.SetOffScreenRendering(1)
@@ -108,7 +130,7 @@ class CuttingScene:
         ao.BlurOn()
         self.renderer.SetPass(ao)
         self.renderer.RemoveAllLights()
-        for position, intensity in [((-100, -80, 220), .65), ((140, 70, 140), .45), ((-100, 100, 90), .3)]:
+        for position, intensity in [((-80, -90, 220), .8), ((180, -30, 120), .5), ((-60, 130, 90), .35)]:
             light = vtk.vtkLight()
             light.SetLightTypeToSceneLight()
             light.SetPosition(*position)
@@ -117,7 +139,7 @@ class CuttingScene:
             self.renderer.AddLight(light)
         banana = config.get('shape') == 'banana'
         width_mm, depth_mm = (178, 110) if banana else (135, 105)
-        board = cube(self.renderer, (width_mm, depth_mm, 7), (0, 0, -3.7), (.8, .65, .44))
+        board = cube(self.renderer, (width_mm, depth_mm, 5), (0, 0, -2.7), (1., 1., 1.))
         texture_coordinates = vtk.vtkTextureMapToPlane()
         texture_coordinates.SetInputConnection(board.GetMapper().GetInputConnection(0, 0))
         texture_coordinates.SetOrigin(-width_mm/2, -depth_mm/2, 0)
@@ -137,27 +159,36 @@ class CuttingScene:
         self.blade = knife_actor(self.renderer, self.half, config.get('blade_bevel_height', 0) * 1000)
         self.blade.GetProperty().SetSpecular(.95)
         self.blade.GetProperty().SetSpecularPower(90)
-        self.blade.GetProperty().SetAmbient(.55)
+        self.blade.GetProperty().SetAmbient(.3)
         self.handle = cube(self.renderer, (6, 12, 27), (0, 0, 100), (.105, .125, .13))
         self.handle.GetProperty().SetSpecular(.4)
         self.bolster = cube(self.renderer, (7, 15, 3), (0, 0, 80), (.67, .73, .76))
         self.body = vtk.vtkActor()
-        self.body.GetProperty().SetSpecular(.22 if banana else .06)
-        self.body.GetProperty().SetSpecularPower(48)
-        self.body.GetProperty().SetAmbient(.3)
-        self.body.GetProperty().SetDiffuse(.7)
+        self.body.GetProperty().SetSpecular(.12 if banana else .04)
+        self.body.GetProperty().SetSpecularPower(35)
+        self.body.GetProperty().SetAmbient(.38)
+        self.body.GetProperty().SetDiffuse(.62)
+        if not banana:
+            self.body.SetTexture(tofu_texture())
         self.renderer.AddActor(self.body)
         self.particles = vtk.vtkActor()
+        self.particles.GetProperty().SetAmbient(.52)
+        self.particles.GetProperty().SetDiffuse(.48)
+        self.particles.GetProperty().SetSpecular(0)
         self.renderer.AddActor(self.particles)
         camera = self.renderer.GetActiveCamera()
-        camera.SetPosition(135, -210, 160)
-        camera.SetFocalPoint(0, 0, 30)
+        camera.SetPosition(110, -220, 175)
+        camera.SetFocalPoint(0, 0, 24)
         camera.SetViewUp(0, 0, 1)
         camera.ParallelProjectionOn()
-        camera.SetParallelScale(72 if banana else 62)
+        camera.SetParallelScale(57 if banana else 54)
         if task == 'tofu-sequential':
-            camera.SetPosition(0, -220, 125)
-            camera.SetFocalPoint(0, 0, 28)
+            camera.SetPosition(10, -240, 180)
+            camera.SetFocalPoint(0, 0, 20)
+            camera.SetParallelScale(47)
+            # These floor markers stay in reference space; they never follow a piece.
+            for x, color in [(-30, (.55, .47, .75)), (0, (.92, .63, .35)), (30, (.40, .65, .79))]:
+                cube(self.renderer, (.45, 20, .12), (x, -28, -.12), color)
         self.capture = vtk.vtkWindowToImageFilter()
         self.capture.SetInput(self.window)
         self.capture.SetInputBufferTypeToRGB()
@@ -167,22 +198,10 @@ class CuttingScene:
         mesh = polydata(vertices*1000, faces)
         triangle = vtk.vtkTriangleFilter()
         triangle.SetInputData(mesh)
-        smooth = vtk.vtkWindowedSincPolyDataFilter()
-        smooth.SetInputConnection(triangle.GetOutputPort())
-        smooth.SetNumberOfIterations(40 if self.config.get('shape') == 'banana' else 0)
-        smooth.SetPassBand(.015)
-        smooth.NormalizeCoordinatesOn()
-        smooth.BoundarySmoothingOff()
-        smooth.Update()
-        surface = smooth.GetOutput()
-        smoothed = vtk_to_numpy(surface.GetPoints().GetData())
-        # These examples have x-normal cuts. Preserve the measured cap x
-        # coordinates so filtering never creates a larger visual cut opening.
-        smoothed[cut_vertices, 0] = vertices[cut_vertices, 0]*1000
-        surface.GetPoints().Modified()
-        deviation = float(np.linalg.norm(smoothed - vertices*1000, axis=1).max())
+        triangle.Update()
+        surface = triangle.GetOutput()
         banana = self.config.get('shape') == 'banana'
-        base = np.array([.98, .956, .835]) if banana else np.array([.94, .925, .84])
+        base = np.array([.985, .95, .78]) if banana else np.array([.975, .965, .905])
         # Material-attached colour variation; it cannot change geometry or cuts.
         noise = np.sin(rest[:, 0]*4260 + np.sin(rest[:, 1]*3870))*np.sin(rest[:, 2]*5160)
         colors = np.clip(base + .012*noise[:, None], 0, 1)
@@ -199,17 +218,21 @@ class CuttingScene:
             colors = colors*(1-.55*end[:, None]) + np.array([.40,.27,.13])*.55*end[:, None]
             # Fresh transverse flesh has a faint three-fold core; this is
             # colour only and cannot create a crack or move a piece.
-            core = np.exp(-np.linalg.norm(radial, axis=1)**2/.003**2)
-            colors[cut_vertices] -= (core[cut_vertices]*.075)[:, None]
+            radius = np.linalg.norm(radial, axis=1)
+            core = np.exp(-radius**2/.0028**2)
+            star = np.exp(-radius**2/.005**2) * (.5+.5*np.cos(3*theta))**14
+            colors[cut_vertices] -= (core[cut_vertices]*.11+star[cut_vertices]*.055)[:, None]
             colors = np.clip(colors, 0, 1)
         scalars = numpy_to_vtk((colors*255).astype(np.uint8), deep=True)
         scalars.SetName('MaterialColor')
         surface.GetPointData().SetScalars(scalars)
+        if not banana:
+            uv = np.column_stack((rest[:, 0]+rest[:, 1], rest[:, 2]+.3*rest[:, 1]))/.012
+            surface.GetPointData().SetTCoords(numpy_to_vtk(np.ascontiguousarray(uv), deep=True))
         normals = vtk.vtkPolyDataNormals()
         normals.SetInputData(surface)
-        normals.SetFeatureAngle(65)
-        if banana:
-            normals.SplittingOff()
+        normals.SetFeatureAngle(45)
+        normals.SplittingOn()
         normals.ConsistencyOn()
         normals.AutoOrientNormalsOn()
         mapper = vtk.vtkPolyDataMapper()
@@ -221,8 +244,13 @@ class CuttingScene:
         particles.SetPoints(points)
         palette = np.array([[.90,.76,.47],[.24,.58,.70],[.95,.58,.31],[.51,.70,.47],[.68,.52,.76]])
         if self.task == 'tofu-sequential':
-            palette[:] = (.93, .90, .81)
-        particles.GetPointData().SetScalars(numpy_to_vtk((255*palette[codes % len(palette)]).astype(np.uint8), deep=True))
+            palette = np.array([[.94, .91, .81], [.85, .80, .94], [.98, .85, .68], [.75, .88, .95]])
+            # Native persistent side digits, not a prescribed spatial separation.
+            colour_index = np.where(codes == 0, 0, np.where(codes // 3 % 3 == 1, 1,
+                                     np.where(codes % 3 == 2, 3, 2)))
+        else:
+            colour_index = codes % len(palette)
+        particles.GetPointData().SetScalars(numpy_to_vtk((255*palette[colour_index]).astype(np.uint8), deep=True))
         sphere = vtk.vtkSphereSource()
         sphere.SetRadius(self.config['grid_spacing']*250)
         sphere.SetThetaResolution(10)
@@ -236,7 +264,7 @@ class CuttingScene:
         self.bolster.SetPosition(*(blade*1000 + [0, 0, self.half[2]+1.5]))
         self.handle.SetPosition(*(blade*1000 + [0, 0, self.half[2]+16.5]))
         self.renderer.ResetCameraClippingRange()
-        return deviation
+        return 0.
 
     def frame(self, particles=False):
         self.body.SetVisibility(not particles)
@@ -249,18 +277,64 @@ class CuttingScene:
         return vtk_to_numpy(output.GetPointData().GetScalars()).reshape(height, width, 3)[::-1].copy()
 
 
-def caption(rgb, title, time, duration, view):
-    image = Image.fromarray(rgb)
+def caption(rgb, title, time, duration, view, metrics, task, particle_count):
+    image = Image.new('RGB', (rgb.shape[1], rgb.shape[0]+180), (248, 249, 246))
+    image.paste(Image.fromarray(rgb), (0, 0))
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype('DejaVuSans.ttf', 23)
-    small = ImageFont.truetype('DejaVuSans.ttf', 15)
-    draw.text((30, 22), title, font=font, fill=(31, 49, 48))
-    draw.text((30, 54), f'{view}  /  recorded simulation', font=small, fill=(83, 104, 101))
-    draw.rounded_rectangle((image.width-118, 25, image.width-26, 55), radius=7, fill=(245, 248, 246))
-    draw.text((image.width-105, 31), f'{time:.2f} s', font=small, fill=(38, 62, 59))
-    draw.line((30, image.height-23, image.width-30, image.height-23), fill=(188, 205, 198), width=3)
-    draw.line((30, image.height-23, 30+(image.width-60)*time/duration, image.height-23), fill=(46, 101, 87), width=3)
+    font = ImageFont.truetype('DejaVuSans.ttf', 28)
+    small = ImageFont.truetype('DejaVuSans.ttf', 20)
+    number = ImageFont.truetype('DejaVuSans.ttf', 36)
+    draw.rectangle((0, 0, image.width, 83), fill=(248, 250, 248))
+    draw.text((26, 18), title, font=font, fill=(31, 49, 48))
+    draw.text((26, 54), f'{view} | {particle_count:,} native particles | {metrics["phase"]}', font=small, fill=(83, 104, 101))
+    draw.rounded_rectangle((image.width-150, 20, image.width-20, 60), radius=7, fill=(245, 248, 246))
+    draw.text((image.width-138, 24), f'{time:.2f} s', font=font, fill=(38, 62, 59))
+    top = rgb.shape[0]
+    draw.line((26, top, image.width-26, top), fill=(188, 205, 198), width=2)
+    gaps = metrics['face_opening_mm']
+    fields = [('Cut 1 opening', '--' if gaps[0] is None else f'{gaps[0]:+.3f} mm')]
+    if task == 'tofu-sequential':
+        fields.append(('Cut 2 opening', '--' if gaps[1] is None else f'{gaps[1]:+.3f} mm'))
+    else:
+        fields.append(('Knife reaction', f'{metrics["knife_material_force_n"]:.3f} N'))
+    fields.append(('Middle volume' if task == 'tofu-sequential' else 'Interior volume',
+                   f'{metrics["interior_volume_change_percent"]:+.3f}%'))
+    if task == 'banana':
+        fields = [(f'Cut {cut+1} opening', '--' if gap is None else f'{gap:+.3f} mm')
+                  for cut, gap in enumerate(gaps)]
+    for x, (label, value) in zip((26, 344, 662), fields, strict=True):
+        draw.text((x, top+13), label, font=small, fill=(83, 104, 101))
+        draw.text((x, top+41), value, font=number, fill=(30, 77, 64))
+    displacement = metrics['centroid_x_from_probe_mm']
+    names = ('L', 'M', 'R') if task == 'tofu-sequential' else tuple(str(i+1) for i in range(len(gaps)+1))
+    motion = 'After impulse: ' + ('pending' if displacement is None else '   '.join(
+        f'{name} {value:+.2f}' for name, value in zip(names, displacement, strict=True)) + ' mm')
+    draw.text((26, top+96), motion, font=font, fill=(31, 49, 48))
+    footnote = (f'Knife {metrics["knife_material_force_n"]:.3f} N | interior volume '
+                f'{metrics["interior_volume_change_percent"]:+.3f}% | synthetic material'
+                if task == 'banana' else 'Saved-state measurements | synthetic material | affine face / interior tetrahedra')
+    draw.text((26, top+137), footnote,
+              font=small, fill=(83, 104, 101))
+    draw.line((26, image.height-8, image.width-26, image.height-8), fill=(188, 205, 198), width=3)
+    draw.line((26, image.height-8, 26+(image.width-52)*time/duration, image.height-8), fill=(46, 101, 87), width=3)
     return np.asarray(image)
+
+
+def write_gif(frames, path):
+    """One palette avoids frame-to-frame colour noise and bloated static regions."""
+    sample = Image.new('RGB', (frames[0].width*3, frames[0].height))
+    for column, index in enumerate((0, len(frames)//2, len(frames)-1)):
+        sample.paste(frames[index], (column*frames[0].width, 0))
+    palette = sample.quantize(colors=192)
+    indexed = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames]
+    indexed[0].save(path, save_all=True, append_images=indexed[1:], duration=120,
+                    loop=0, optimize=True, disposal=1)
+    with Image.open(path) as encoded:
+        for index in (0, len(frames)//2, len(frames)-1):
+            encoded.seek(index)
+            if not np.array_equal(np.asarray(encoded.convert('RGB')),
+                                  np.asarray(indexed[index].convert('RGB'))):
+                raise ValueError('GIF encoding changed a composed frame')
 
 
 def render(directory, output, *, stride=5, fps=20, preview=False):
@@ -275,7 +349,8 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
     config = manifest['config']
     task = manifest.get('task', 'tofu')
     title = {'banana': 'Banana / three cuts', 'tofu': 'Tofu / cut in half',
-             'tofu-sequential': 'Tofu / two cuts + left-piece motion'}[task]
+             'tofu-sequential': 'Tofu / two cuts + left impulse'}[task]
+    measurements = ReplayMeasurements(states, trace, manifest)
     surface = (BananaSkin(states['reference']) if task == 'banana' else
                MaterialSurface(states['reference'], config['grid_spacing']/2))
     scene = CuttingScene(config, task=task)
@@ -283,17 +358,21 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
     if selected[-1] != len(states['time'])-1:
         selected.append(len(states['time'])-1)
     if preview:
-        selected = [0, len(states['time'])//2, len(states['time'])-1]
+        selected = sorted(set([0, int(np.argmin(abs(states['time']-.8))),
+                               len(states['time'])//2, len(states['time'])-1]))
     writers = {} if preview else {view: imageio.get_writer(output/f'{view}.mp4', fps=fps,
         codec='libx264', quality=8, macro_block_size=1, pixelformat='yuv420p') for view in ('surface', 'particles')}
     maximum_smoothing_mm = 0.
+    measured_frames, gif_frames = [], {'surface': [], 'particles': []}
     try:
         for i in selected:
             time = float(states['time'][i])
+            measured = measurements.frame(i)
+            measured_frames.append(measured)
             if task == 'banana':
                 components, _ = grid_components(states['nodes'], states['weights'], states['sides'][i])
                 vertices, faces, rest, cut_vertices = surface.mesh(
-                    states['position'][i], states['deformation'][i], components)
+                    states['position'][i], states['deformation'][i], states['sides'][i], components)
             else:
                 vertices, faces, rest, cut_vertices = surface.mesh(states['position'][i], states['sides'][i],
                     states['deformation'][i] if 'deformation' in states else None)
@@ -301,11 +380,13 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
             maximum_smoothing_mm = max(maximum_smoothing_mm, scene.update(
                 vertices, faces, rest, cut_vertices, states['position'][i], states['sides'][i], trace['blade_position_m'][trace_index]))
             for view in ('surface', 'particles'):
-                rgb = caption(scene.frame(view == 'particles'), title, time, states['time'][-1], view.capitalize())
+                rgb = caption(scene.frame(view == 'particles'), title, time, states['time'][-1],
+                              view.capitalize(), measured, task, len(states['reference']))
                 if preview:
                     Image.fromarray(rgb).save(output/f'{view}-{i:04d}.png')
                 else:
                     writers[view].append_data(rgb)
+                    gif_frames[view].append(Image.fromarray(rgb).resize((720, 525), Image.Resampling.LANCZOS))
                     if i == selected[-1]:
                         Image.fromarray(rgb).save(output/f'{view}-poster.png')
             if i % (stride*20) == 0:
@@ -314,12 +395,21 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
         for writer in writers.values():
             writer.close()
         scene.window.Finalize()
+    if not preview:
+        for view, frames in gif_frames.items():
+            # Slower playback makes measurements legible; displayed time remains native time.
+            write_gif(frames, output/f'{view}.gif')
+    (output/'measurements.json').write_text(json.dumps(
+        {'definitions': measurements.definitions(), 'frames': measured_frames}, indent=2, allow_nan=False)+'\n')
     provenance = {'source_artifacts': manifest['artifacts'], 'score': score,
         'renderer_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in
-                           (Path(__file__), Path(__file__).with_name('cutting_surface.py'))},
+                           (Path(__file__), Path(__file__).with_name('cutting_surface.py'),
+                            Path(__file__).with_name('cutting_metrics.py'))},
         'frames': len(selected), 'fps': fps, 'physical_duration_s': float(states['time'][-1]),
         'playback_duration_s': len(selected)/fps, 'vtk_version': vtk.vtkVersion.GetVTKVersion(),
-        'surface': 'Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Completed separations from the native transfer graph create segment caps; incomplete incisions are not resolved by this skin and must be inspected in particles. Every skin vertex blends up to 32 local particle affine maps within its observed separated component. Subsequent smoothing retains embedded cap x coordinates. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.',
+        'gif_playback': {'duration_per_frame_ms': 120, 'native_state_frames': selected,
+                         'description': 'Uniformly slowed recorded frames; no interpolated motion or invented physical time.'},
+        'surface': 'Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Fixed reference seams at the three supported straight-cut planes expose local cap triangles only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. This fixed-seam approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.',
         'maximum_display_smoothing_displacement_mm': maximum_smoothing_mm,
         'description': 'Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation.',
         'artifacts': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.iterdir())}}

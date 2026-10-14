@@ -1,0 +1,21 @@
+{
+  "source_artifacts": {
+    "states.npz": "7a0083db498b20d313c56cf68b8697f420aa6d5cf1a210fca7779dfb78948b02",
+    "trace.npz": "d96b4b9892b39a1e1fd9cc4f8e0ebc9e3306d80e9a6d787cefe81b8bb11032ca"
+  },
+  "physical_time_s": 7.0,
+  "before_renderer": {
+    "cutting_showcase.py": "c145b78120e2455767a820c1663e9ae5bf2656575ae57d2cf9ffd611af0d4500",
+    "cutting_surface.py": "732e506195d2b0148af9978f8bb8fe36bc51c63cb1aae73b6a5a187fac135e3f"
+  },
+  "after_renderer": {
+    "cutting_showcase.py": "ba404f26cccf51bb150a66df98a5b763149b4c8c6941663720d9950831864c53",
+    "cutting_surface.py": "13eb6db2ed1cc648fb9d0b6f8c83b91e20b26571dea56ad7400f3b1dcdd5e534",
+    "cutting_metrics.py": "2a2ea2e07812b5fb54c85e0af29a202b574ee385e7fd4d2d846fd552d16d4d3d"
+  },
+  "scope": "Same coarse native record, display-only diagnosis. Final fine-sampling media is a separate record.",
+  "artifacts": {
+    "same-state-after.png": "398303f2949bb3374799f0d3764d837f290b886ee66c7656573085727d1f3eae",
+    "same-state-before.png": "d0bbd73615bc35a46e01d279f98e13880c7f26ac02506908fcc39c2e16ab30d6"
+  }
+}
