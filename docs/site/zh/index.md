@@ -154,6 +154,8 @@
 
 [当前工作与暂停状态](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.zh-CN.md)
 
+[中文导读与外部参考](references.md)：阅读 Manda Robotics 的物理引擎比较；外部结果与 DexLab 实验分别标注。
+
 ```{toctree}
 :hidden:
 :maxdepth: 1
@@ -173,5 +175,6 @@ LIBERO 原生流程 <libero-workflow>
 研究路线 <dexterity>
 研究账本 <research-ledger>
 基准 <benchmark>
+外部参考 <references>
 参与贡献 <contributing>
 ```
