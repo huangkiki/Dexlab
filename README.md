@@ -130,6 +130,8 @@ MuJoCo 3.16.0 的[隔离资格记录](docs/engine-qualification.zh-CN.md)已核�
 
 LIBERO 离线评分器 v2 增加逐接触距离、物体身份与汇总穿透的一致性检查；重新计算本地哈希不能让矛盾记录通过。原始证据与诊断阈值保持不变。[评分修复与回归](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html#scoring-integrity) · [#183](https://github.com/huangkiki/Dexlab/issues/183)
 
+LIBERO 首动作排查定位了状态恢复后的旧 OSC 缓存，新初始化协议显式同步缓存与姿态目标，并记录保留的复位记忆。旧实验仍属原协议；完整受影响任务回归与源历史归因尚未完成，单例原生成功不证明物理准确性。[控制器状态与证据边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html) · [#198](https://github.com/huangkiki/Dexlab/issues/198)
+
 ## 场景表现不好时如何分析
 
 以“接触表现异常”为例，先声明物理参照与假设，再检查几何、质量／惯量、坐标、控制时刻、有效参数和接触读回。随后固定场景与目标，提出可检验假设，做有限参数试验，用独立评分确认改善及成本。剩余差异再进入接触生成、摩擦表示、约束求解、停止条件、积分和精度的机制研究。

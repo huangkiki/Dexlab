@@ -11,9 +11,86 @@ Historical version-1 records and scores are unchanged.
 Initialization qualification is version-specific. A retained whole-repository test failure
 exposed a mismatched test assumption: for the same non-unit free/ball quaternions,
 MuJoCo 2.3.7 `forward` normalized the saved coordinates while 3.15.0 retained them.
-The unchanged executor rejects the latter under the pinned initialization contract.
+The executor retains rejection of the latter under the pinned initialization contract.
 Tests separately verify 2.3.7 acceptance and 3.15.0 rejection, without changing source
 states, engine versions or tolerances. Latest-native SDF checks remain a separate path.
+
+## Versioned controller initialization
+
+New execution payloads must explicitly declare
+`initialization_contract: "osc-restored-pose-v1"`; admission rejects an omitted or unknown
+contract. This version restores time/qpos/qvel once, calls the pinned OSC controller's
+`update(force=True)` for its single native forward and cache refresh, then resets its
+Cartesian position and orientation goals to that restored pose. It adds no dummy action,
+settling step or per-action state injection. The qualified interface is one Panda arm,
+delta `OSC_POSE`, without interpolation, on MuJoCo 2.3.7 / robosuite 1.4.0.
+
+The earlier reset created the controller before restoring the saved native state, leaving
+its cache marked current. In one exposed Salad-dressing development example the first
+goal used an end-effector position 24.2377 mm away from the restored pose. A complete
+forward-only control still failed; refreshing the cache changed native success while
+source-trajectory differences remained. This identifies a controller-cache defect in
+that execution path, not an engine defect or a complete reconstruction of the demonstration.
+[Mechanism and retained controls](https://github.com/huangkiki/Dexlab/issues/198#issuecomment-6163777769).
+
+The record stores controller memory before and after restoration, arm joint/site identities,
+native cache readbacks and the state after goal reset. Offline scoring checks arm caches
+against the saved native state, pose goals against the recorded restored pose, and unchanged
+reset nullspace/gripper references. Pose-readback consistency is not independent forward
+kinematics or physical validation. Tests use the real pinned OSC to exercise a relative
+first goal and a zero-orientation action; synthetic record mutations test rejection separately.
+
+The reset `initial_joint` and gripper `current_action` remain unchanged and are recorded.
+Saved flat state does not provide source controller goals, integrated gripper action or
+the skipped source prefix; this contract makes a fresh restored-pose start explicit rather
+than inventing those histories. Original records retain their original initialization and
+remain scoreable; they cannot be relabelled with this contract. Re-running an old manifest
+under changed sources is not allowed. Freeze a new payload/source identity and cumulative
+budget for each declared regression. Earlier representative-path controls and the 120-record
+development cohorts do not qualify the new initialization. Complete affected-task regression,
+remaining source-history attribution and the full 130-task scope remain open in
+[#198](https://github.com/huangkiki/Dexlab/issues/198), [#188](https://github.com/huangkiki/Dexlab/issues/188)
+and [#181](https://github.com/huangkiki/Dexlab/issues/181).
+
+The first frozen regression covers the same seven exposed Alphabet-soup / Salad-dressing
+diagnostic demonstrations: **21 complete on/off/repeat runs, 3,126 actions and 52,100 recorded
+substeps**. All 14 instrumented records are valid. Control/state/non-image observation arrays
+are exact across recording modes; repeated goal records, scores and substep archives match.
+Four of the five original native failures become successes; Alphabet `demo_29` still fails,
+and the two original success references remain successful. All three modes agree on each
+native result. This selected set does not estimate a full-task improvement rate.
+
+Every recorded run retains constrained-acceleration and projected-body-effort negatives under
+the original bounds; the other nine diagnostics have no violating substeps. The package used
+518.89 native worker seconds, with at most 1,104,654,336 bytes peak cgroup memory in the measured
+8 GiB hard /7 GiB high /four-core /zero-swap envelope. Terminal receipts and all artifact hashes
+were checked. Lifetime native accounting includes 241 starts /6,922.63 worker seconds; waiting
+and offline verification are separate. [Frozen qualification report](evidence/libero/controller-restoration-v1.json).
+The follow-up covers the other twelve previously qualified paths: free objects, a drawer,
+a stove, simultaneous targets, a long sequence and the remaining Object tasks. **36 complete
+on/off/repeat runs contain 6,426 actions and 107,100 recorded substeps**. All 24 instrumented
+records are valid and all twelve examples retain native success in all three modes. Common
+control/state/non-image arrays are exact across recording modes; repeated goals, scores and
+substep files match, as do the original native model identities. Every instrumented run
+retains constrained-acceleration and projected-body-effort negatives at unchanged bounds.
+
+The package used 973.09 native worker seconds and at most 1,464,868,864 bytes peak cgroup
+memory within the same 8 GiB hard /7 GiB high /four-core /zero-swap limits. All processes and
+terminal resource receipts were verified. Cumulative native accounting is 277 starts /
+7,895.72 worker seconds; queue waits and offline checks are separate. Together, the two
+packages cover 19 exposed demonstrations across all fourteen previously qualified task
+paths. Complete affected-task baselines, the other 116 task paths, source-history questions,
+physical-reference validity and visual-policy evaluation remain open.
+[Frozen twelve-path regression](evidence/libero/controller-path-regression-v1.json).
+
+A separate source comparison rehashed both complete HDF5 files and compared the same 1,035
+overlapping post-action states, with exact clocks and no validation trajectories. Alphabet
+`demo_29` still fails and its maximum target/source translation difference increases from
+131.64 to 511.85 mm; the successful Salad `demo_1` reference increases from 22.80 to 25.31 mm.
+First-action finger-coordinate differences remain 5.37–5.39 mm across all seven examples.
+These are descriptive source differences, not physical-error thresholds. Missing gripper and
+controller history remains a hypothesis, not a demonstrated cause of the remaining failure.
+[All joint/source comparisons](evidence/libero/controller-source-comparison-v1.json).
 
 ## Acquisition and persistence
 

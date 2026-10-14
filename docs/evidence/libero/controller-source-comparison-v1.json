@@ -1,0 +1,1182 @@
+{
+  "schema_version": 1,
+  "scope": "Descriptive source/replay differences only. Source trajectories are not independent physical truth; source terminal labels are not native success. No cause, accuracy threshold or policy-performance claim.",
+  "alignment": "Replay post-action j versus source state j+1 for j=0..N-2. Source state[0] is the prepared initial state; last replay state has no stored counterpart.",
+  "plan_sha256": "44318bdd2bff6e25f190b2d6ad29169264db4d12877081836b67449fbb52a7ed",
+  "result_sha256": "02741a72c65d798613cc5c750675343cdf60ba2e8f94c9f9995debf0fee23c77",
+  "verification_sha256": "60834a622a8b15065245753b2a46af1ef7a422184c9cc7606c108a54553da50b",
+  "original_audit_result_sha256": "4b2d94f628251446a204569260ec489bb47ddb55ae4c63db88add8e862ded396",
+  "cases": [
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_9",
+      "original_native_success": false,
+      "restored_pose_native_success": true,
+      "compared_post_action_states": 140,
+      "original_max_target_difference_m": 0.5560776434748729,
+      "restored_max_target_difference_m": 0.004295195903689226,
+      "original_last_target_difference_m": 0.5443648360100708,
+      "restored_last_target_difference_m": 0.003255273451274607,
+      "first_action_max_arm_coordinate_difference_rad": 1.6323514999971867e-06,
+      "first_action_max_finger_coordinate_difference_m": 0.005370768229698411,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.16506353152868e-07,
+          "max_absolute_position_coordinate_difference": 2.0984990771633072e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00018034657586213365,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 8.856917893540484e-09,
+          "max_absolute_position_coordinate_difference": 4.2019061893161513e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0005626501618254676,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.6323514999971867e-06,
+          "max_absolute_position_coordinate_difference": 1.9326360032684287e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00024304887702354672,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.357288637038323e-08,
+          "max_absolute_position_coordinate_difference": 8.705985205925693e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0004374622101463929,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.353495753613019e-06,
+          "max_absolute_position_coordinate_difference": 7.781370727422132e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0007338634830874602,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.8663849576938674e-08,
+          "max_absolute_position_coordinate_difference": 5.190437100655032e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0004598574279455203,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.432944836236686e-07,
+          "max_absolute_position_coordinate_difference": 9.127954308359165e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0008834124021442902,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005370768229698411,
+          "max_absolute_position_coordinate_difference": 0.008071225475596407,
+          "max_absolute_velocity_coordinate_difference": 0.09768671405334371,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005363465813267267,
+          "max_absolute_position_coordinate_difference": 0.008061911081675352,
+          "max_absolute_velocity_coordinate_difference": 0.0973988731265773,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.003255273451274607,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 2.762740341279758,
+          "max_linear_velocity_difference_m_per_s": 0.1985201741042241,
+          "max_orientation_difference_rad": 0.1589258081937716,
+          "max_translation_difference_m": 0.004295195903689226,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.7608368054543634e-08,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0005987973655501212,
+          "max_linear_velocity_difference_m_per_s": 3.773352003881548e-05,
+          "max_orientation_difference_rad": 1.1795449091712777e-05,
+          "max_translation_difference_m": 1.278817719990553e-06,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.3540476063419014e-11,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.00014992928945261054,
+          "max_linear_velocity_difference_m_per_s": 9.237536983984994e-05,
+          "max_orientation_difference_rad": 1.1149809932374404e-05,
+          "max_translation_difference_m": 7.315820765504525e-06,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 5.198386870121524e-15,
+          "max_linear_velocity_difference_m_per_s": 5.432702258262706e-17,
+          "max_orientation_difference_rad": 3.4319860535346226e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 1.1382672403150513e-16,
+          "max_linear_velocity_difference_m_per_s": 7.605673740091366e-18,
+          "max_orientation_difference_rad": 0.0,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 1.0605647764260473e-05,
+          "last_overlap_translation_difference_m": 1.9546884568678543e-09,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0056667329159288005,
+          "max_linear_velocity_difference_m_per_s": 0.00033776608741701333,
+          "max_orientation_difference_rad": 0.000207799765288147,
+          "max_translation_difference_m": 1.0605647764260473e-05,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 7.856904996193515e-15,
+          "max_linear_velocity_difference_m_per_s": 8.203104826948264e-17,
+          "max_orientation_difference_rad": 1.9937467992269028e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "butter_1_joint0"
+        }
+      ]
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_22",
+      "original_native_success": false,
+      "restored_pose_native_success": true,
+      "compared_post_action_states": 145,
+      "original_max_target_difference_m": 0.5431159595910443,
+      "restored_max_target_difference_m": 0.005443202742294037,
+      "original_last_target_difference_m": 0.47684883814113255,
+      "restored_last_target_difference_m": 0.002224581406915802,
+      "first_action_max_arm_coordinate_difference_rad": 1.64599785628175e-06,
+      "first_action_max_finger_coordinate_difference_m": 0.005380033319012198,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.258242959486903e-07,
+          "max_absolute_position_coordinate_difference": 1.8038397946423812e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00010958876882336682,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.382773898161993e-08,
+          "max_absolute_position_coordinate_difference": 5.808233483117764e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00015002803883912372,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.64599785628175e-06,
+          "max_absolute_position_coordinate_difference": 2.085120732664425e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00023499511311493452,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 3.1235485309366595e-09,
+          "max_absolute_position_coordinate_difference": 8.838315467185609e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00014178003601034161,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.4794457602823954e-06,
+          "max_absolute_position_coordinate_difference": 2.0931869253393298e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00013447278448494582,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.4617244303849475e-08,
+          "max_absolute_position_coordinate_difference": 4.301148960439427e-05,
+          "max_absolute_velocity_coordinate_difference": 0.00025260945583302497,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 6.357126260958523e-07,
+          "max_absolute_position_coordinate_difference": 3.444146175279883e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0006614405963775161,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005380033319012198,
+          "max_absolute_position_coordinate_difference": 0.00807949066458983,
+          "max_absolute_velocity_coordinate_difference": 0.09790280028170861,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005372637391687023,
+          "max_absolute_position_coordinate_difference": 0.008070009187978445,
+          "max_absolute_velocity_coordinate_difference": 0.09761115331869441,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.002224581406915802,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 2.809444329821796,
+          "max_linear_velocity_difference_m_per_s": 0.0927603922843921,
+          "max_orientation_difference_rad": 0.11085582113812747,
+          "max_translation_difference_m": 0.005443202742294037,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.8173274091732846e-08,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0003214406958879177,
+          "max_linear_velocity_difference_m_per_s": 2.252374938217734e-05,
+          "max_orientation_difference_rad": 6.1875719740316604e-06,
+          "max_translation_difference_m": 1.7520319187941059e-07,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 6.781424163398598e-12,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.00011675180920353469,
+          "max_linear_velocity_difference_m_per_s": 7.253874872860978e-05,
+          "max_orientation_difference_rad": 1.1149809932374404e-05,
+          "max_translation_difference_m": 7.3158207656408035e-06,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 5.129992705273238e-15,
+          "max_linear_velocity_difference_m_per_s": 7.211238527789216e-17,
+          "max_orientation_difference_rad": 1.0848001724800792e-17,
+          "max_translation_difference_m": 1.734723475976807e-18,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 1.2063738987484017e-16,
+          "max_linear_velocity_difference_m_per_s": 5.3656434582235424e-18,
+          "max_orientation_difference_rad": 0.0,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 1.0605647764260473e-05,
+          "last_overlap_translation_difference_m": 1.0136629559089572e-05,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.013711785698378828,
+          "max_linear_velocity_difference_m_per_s": 0.0006164961382954204,
+          "max_orientation_difference_rad": 0.00020779976528814418,
+          "max_translation_difference_m": 1.0605647764260473e-05,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 8.515163035447892e-15,
+          "max_linear_velocity_difference_m_per_s": 8.727572709079419e-17,
+          "max_orientation_difference_rad": 1.7881613645292452e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "butter_1_joint0"
+        }
+      ]
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_27",
+      "original_native_success": false,
+      "restored_pose_native_success": true,
+      "compared_post_action_states": 153,
+      "original_max_target_difference_m": 0.5543921805283751,
+      "restored_max_target_difference_m": 0.006995417296283384,
+      "original_last_target_difference_m": 0.5059879658544737,
+      "restored_last_target_difference_m": 0.0016024415823765374,
+      "first_action_max_arm_coordinate_difference_rad": 1.6670421391570822e-06,
+      "first_action_max_finger_coordinate_difference_m": 0.005380098321106901,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.230978350131976e-07,
+          "max_absolute_position_coordinate_difference": 0.000383415540110954,
+          "max_absolute_velocity_coordinate_difference": 0.004415319270462181,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 7.664689646857958e-09,
+          "max_absolute_position_coordinate_difference": 0.0020160930785242392,
+          "max_absolute_velocity_coordinate_difference": 0.0075987644192818116,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.6670421391570822e-06,
+          "max_absolute_position_coordinate_difference": 0.0002777293223864691,
+          "max_absolute_velocity_coordinate_difference": 0.015180190707068553,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.5447515799849043e-07,
+          "max_absolute_position_coordinate_difference": 0.003713496247058967,
+          "max_absolute_velocity_coordinate_difference": 0.018007411420127156,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.3501768045473539e-06,
+          "max_absolute_position_coordinate_difference": 0.0003621766024840961,
+          "max_absolute_velocity_coordinate_difference": 0.012278582022411721,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.2654330916461731e-08,
+          "max_absolute_position_coordinate_difference": 0.0009694922055123456,
+          "max_absolute_velocity_coordinate_difference": 0.005019887081193941,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.339247346469733e-07,
+          "max_absolute_position_coordinate_difference": 0.00050648149882207,
+          "max_absolute_velocity_coordinate_difference": 0.002857798247235338,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005380098321106901,
+          "max_absolute_position_coordinate_difference": 0.008078398018035875,
+          "max_absolute_velocity_coordinate_difference": 0.09791062396522053,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005372705561135525,
+          "max_absolute_position_coordinate_difference": 0.008071624430238383,
+          "max_absolute_velocity_coordinate_difference": 0.09761904928267554,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0016024415823765374,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 4.6497025492547674,
+          "max_linear_velocity_difference_m_per_s": 0.2452835855199573,
+          "max_orientation_difference_rad": 0.16387122852281694,
+          "max_translation_difference_m": 0.006995417296283384,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 3.221488171889639e-08,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.003501401682293366,
+          "max_linear_velocity_difference_m_per_s": 0.00046954483851985437,
+          "max_orientation_difference_rad": 1.650863436807464e-05,
+          "max_translation_difference_m": 1.1999527552104788e-06,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 7.315818073823829e-06,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0002644282379073163,
+          "max_linear_velocity_difference_m_per_s": 0.00020637616672107383,
+          "max_orientation_difference_rad": 1.1149809932449014e-05,
+          "max_translation_difference_m": 7.315820765469412e-06,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 5.037992472739295e-15,
+          "max_linear_velocity_difference_m_per_s": 5.065464401969331e-17,
+          "max_orientation_difference_rad": 1.175052151739843e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 2.7755575615628914e-17,
+          "last_overlap_translation_difference_m": 6.206335383118183e-17,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 6.934453825059666e-15,
+          "max_linear_velocity_difference_m_per_s": 7.476292160307303e-16,
+          "max_orientation_difference_rad": 8.15843973306311e-16,
+          "max_translation_difference_m": 6.206335383118183e-17,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 1.0605647764260473e-05,
+          "last_overlap_translation_difference_m": 5.698897490323853e-10,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.012009681091903857,
+          "max_linear_velocity_difference_m_per_s": 0.0005209457675893875,
+          "max_orientation_difference_rad": 0.0002077997652881457,
+          "max_translation_difference_m": 1.0605647764260473e-05,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 9.04917121458328e-15,
+          "max_linear_velocity_difference_m_per_s": 9.05267499642511e-17,
+          "max_orientation_difference_rad": 1.7325661456918827e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "butter_1_joint0"
+        }
+      ]
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_29",
+      "original_native_success": false,
+      "restored_pose_native_success": false,
+      "compared_post_action_states": 174,
+      "original_max_target_difference_m": 0.13163744272138114,
+      "restored_max_target_difference_m": 0.511849922244983,
+      "original_last_target_difference_m": 0.1305401322704922,
+      "restored_last_target_difference_m": 0.4876146984663442,
+      "first_action_max_arm_coordinate_difference_rad": 1.6180392019490841e-06,
+      "first_action_max_finger_coordinate_difference_m": 0.005375413490895695,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.166391725975467e-07,
+          "max_absolute_position_coordinate_difference": 0.0006608445152874731,
+          "max_absolute_velocity_coordinate_difference": 0.0019211324168587063,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.2870067206405267e-08,
+          "max_absolute_position_coordinate_difference": 0.0018603567467254112,
+          "max_absolute_velocity_coordinate_difference": 0.018099733039432825,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.6180392019490841e-06,
+          "max_absolute_position_coordinate_difference": 0.001425959627876866,
+          "max_absolute_velocity_coordinate_difference": 0.012216783981832402,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 6.313393896562047e-08,
+          "max_absolute_position_coordinate_difference": 0.011730331391769822,
+          "max_absolute_velocity_coordinate_difference": 0.031184309622493772,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.4363247620627871e-06,
+          "max_absolute_position_coordinate_difference": 0.0028675415434621654,
+          "max_absolute_velocity_coordinate_difference": 0.007490282429357953,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.20826453076495e-08,
+          "max_absolute_position_coordinate_difference": 0.013169472965196771,
+          "max_absolute_velocity_coordinate_difference": 0.04274036443533502,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.083926600812916e-07,
+          "max_absolute_position_coordinate_difference": 0.003424229884613883,
+          "max_absolute_velocity_coordinate_difference": 0.013384651055476593,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005375413490895695,
+          "max_absolute_position_coordinate_difference": 0.020212071816705937,
+          "max_absolute_velocity_coordinate_difference": 0.11632269808800515,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005368053089665804,
+          "max_absolute_position_coordinate_difference": 0.01865032033520056,
+          "max_absolute_velocity_coordinate_difference": 0.09987128215168599,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.4876146984663442,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 7.804406573854839,
+          "max_linear_velocity_difference_m_per_s": 1.0572503052071898,
+          "max_orientation_difference_rad": 1.2879226948468045,
+          "max_translation_difference_m": 0.511849922244983,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 3.717978546106696e-06,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.23857215744108767,
+          "max_linear_velocity_difference_m_per_s": 0.017407790208969164,
+          "max_orientation_difference_rad": 0.006495928928210383,
+          "max_translation_difference_m": 0.0004486906347785583,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.357111586046749e-11,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.000366395196290876,
+          "max_linear_velocity_difference_m_per_s": 0.00023676840588620433,
+          "max_orientation_difference_rad": 1.114980993244902e-05,
+          "max_translation_difference_m": 7.315820762958677e-06,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 5.351276007980991e-15,
+          "max_linear_velocity_difference_m_per_s": 7.668357521889351e-17,
+          "max_orientation_difference_rad": 9.05013655779813e-18,
+          "max_translation_difference_m": 1.734723475976807e-18,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 1.0497491807453742e-16,
+          "max_linear_velocity_difference_m_per_s": 7.474049835493081e-18,
+          "max_orientation_difference_rad": 0.0,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 1.0605647764260473e-05,
+          "last_overlap_translation_difference_m": 5.070826988519555e-10,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.013711785654321932,
+          "max_linear_velocity_difference_m_per_s": 0.0006164961397629289,
+          "max_orientation_difference_rad": 0.00020779976528814519,
+          "max_translation_difference_m": 1.0605647764260473e-05,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 7.757471377159352e-15,
+          "max_linear_velocity_difference_m_per_s": 8.193754462642064e-17,
+          "max_orientation_difference_rad": 1.967461425031673e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "butter_1_joint0"
+        }
+      ]
+    },
+    {
+      "task_id": "libero_object/pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "demo_id": "demo_1",
+      "original_native_success": true,
+      "restored_pose_native_success": true,
+      "compared_post_action_states": 178,
+      "original_max_target_difference_m": 0.019953039116917162,
+      "restored_max_target_difference_m": 0.017693938892896124,
+      "original_last_target_difference_m": 0.009839519030314036,
+      "restored_last_target_difference_m": 0.015319638285799788,
+      "first_action_max_arm_coordinate_difference_rad": 3.043718522694784e-07,
+      "first_action_max_finger_coordinate_difference_m": 0.005393051795523782,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 9.605322000456884e-08,
+          "max_absolute_position_coordinate_difference": 9.506583371123034e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0005150502211214887,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 2.0577087811446404e-09,
+          "max_absolute_position_coordinate_difference": 0.0009181342075274823,
+          "max_absolute_velocity_coordinate_difference": 0.007501325968729898,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 3.043718522694784e-07,
+          "max_absolute_position_coordinate_difference": 0.00031700888428232155,
+          "max_absolute_velocity_coordinate_difference": 0.0009289462593259495,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 4.921433927052021e-09,
+          "max_absolute_position_coordinate_difference": 0.0015808225894682337,
+          "max_absolute_velocity_coordinate_difference": 0.00352968913049162,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 2.562626281975289e-07,
+          "max_absolute_position_coordinate_difference": 0.000353303659428747,
+          "max_absolute_velocity_coordinate_difference": 0.001042021398232798,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 4.821274934840858e-09,
+          "max_absolute_position_coordinate_difference": 0.0007583104634023563,
+          "max_absolute_velocity_coordinate_difference": 0.0023683651711856324,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 7.977227189925884e-08,
+          "max_absolute_position_coordinate_difference": 0.00028841797228351673,
+          "max_absolute_velocity_coordinate_difference": 0.0011834188173254698,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005393051795523782,
+          "max_absolute_position_coordinate_difference": 0.00809092836701204,
+          "max_absolute_velocity_coordinate_difference": 0.09818861384462568,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005391592786319458,
+          "max_absolute_position_coordinate_difference": 0.008094493944689796,
+          "max_absolute_velocity_coordinate_difference": 0.09812008157832341,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.015319638285799788,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 4.842852749794858,
+          "max_linear_velocity_difference_m_per_s": 0.6220635148705979,
+          "max_orientation_difference_rad": 0.14047537231193571,
+          "max_translation_difference_m": 0.017693938892896124,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0003278390133719747,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.24372646961056516,
+          "max_linear_velocity_difference_m_per_s": 0.02302388648895674,
+          "max_orientation_difference_rad": 0.0024756837480452167,
+          "max_translation_difference_m": 0.00037153684636496547,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 6.775760460659107e-12,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.00023829359465437415,
+          "max_linear_velocity_difference_m_per_s": 0.00014693988120048122,
+          "max_orientation_difference_rad": 1.1149703114305882e-05,
+          "max_translation_difference_m": 7.315622215728864e-06,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 4.85294262438665e-15,
+          "max_linear_velocity_difference_m_per_s": 7.660601119058084e-17,
+          "max_orientation_difference_rad": 9.970301718362202e-18,
+          "max_translation_difference_m": 1.734723475976807e-18,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.3877787807814457e-17,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 8.651594470599908e-15,
+          "max_linear_velocity_difference_m_per_s": 6.123242957881178e-16,
+          "max_orientation_difference_rad": 0.0,
+          "max_translation_difference_m": 1.3877787807814457e-17,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 1.0605647764260473e-05,
+          "last_overlap_translation_difference_m": 7.691569169385084e-10,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.01371178509873338,
+          "max_linear_velocity_difference_m_per_s": 0.0006164960085992056,
+          "max_orientation_difference_rad": 0.00020779976528814443,
+          "max_translation_difference_m": 1.0605647764260473e-05,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 8.81359520179837e-15,
+          "max_linear_velocity_difference_m_per_s": 8.98577214136985e-17,
+          "max_orientation_difference_rad": 1.9029273882478283e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "butter_1_joint0"
+        }
+      ]
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_35",
+      "original_native_success": false,
+      "restored_pose_native_success": true,
+      "compared_post_action_states": 122,
+      "original_max_target_difference_m": 0.4063457707738321,
+      "restored_max_target_difference_m": 0.03099424855106419,
+      "original_last_target_difference_m": 0.3733297774001704,
+      "restored_last_target_difference_m": 0.026604195990088127,
+      "first_action_max_arm_coordinate_difference_rad": 7.31087451090115e-07,
+      "first_action_max_finger_coordinate_difference_m": 0.005392018872913483,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 2.317156101907386e-07,
+          "max_absolute_position_coordinate_difference": 9.676128347596569e-06,
+          "max_absolute_velocity_coordinate_difference": 2.1343459048051364e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 3.0103955439564345e-09,
+          "max_absolute_position_coordinate_difference": 1.9963929716482198e-05,
+          "max_absolute_velocity_coordinate_difference": 9.590713021501163e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 7.31087451090115e-07,
+          "max_absolute_position_coordinate_difference": 1.4003598605885625e-05,
+          "max_absolute_velocity_coordinate_difference": 7.434480644075495e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.5109300477433862e-09,
+          "max_absolute_position_coordinate_difference": 1.8036278548461127e-05,
+          "max_absolute_velocity_coordinate_difference": 0.0002040294546488408,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.63196853649783e-07,
+          "max_absolute_position_coordinate_difference": 1.6080948678331985e-05,
+          "max_absolute_velocity_coordinate_difference": 4.609640969762199e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 2.8542403995857057e-09,
+          "max_absolute_position_coordinate_difference": 1.251487437770038e-05,
+          "max_absolute_velocity_coordinate_difference": 8.279981385364565e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 2.543130358523271e-07,
+          "max_absolute_position_coordinate_difference": 2.857914690901353e-05,
+          "max_absolute_velocity_coordinate_difference": 7.891240378343767e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005392018872913483,
+          "max_absolute_position_coordinate_difference": 0.008093789939597848,
+          "max_absolute_velocity_coordinate_difference": 0.09819106602614874,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005388584847087652,
+          "max_absolute_position_coordinate_difference": 0.008088618230146113,
+          "max_absolute_velocity_coordinate_difference": 0.09803373595294171,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.026604195990088127,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 3.425561827688036,
+          "max_linear_velocity_difference_m_per_s": 0.2646900730492132,
+          "max_orientation_difference_rad": 0.5106365805476292,
+          "max_translation_difference_m": 0.03099424855106419,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 6.506132118468143e-08,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0032842071463220685,
+          "max_linear_velocity_difference_m_per_s": 0.0002762360900966512,
+          "max_orientation_difference_rad": 4.19667116807831e-05,
+          "max_translation_difference_m": 4.234955180457589e-06,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 3.3993498887762956e-17,
+          "last_overlap_translation_difference_m": 1.7448385760306673e-11,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.00018975100179652188,
+          "max_linear_velocity_difference_m_per_s": 0.00018146398594491635,
+          "max_orientation_difference_rad": 7.014756114187697e-06,
+          "max_translation_difference_m": 7.284024736207567e-06,
+          "mujoco_joint_type": 0,
+          "name": "ketchup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 4.686235623805803e-15,
+          "max_linear_velocity_difference_m_per_s": 1.9516179102887494e-16,
+          "max_orientation_difference_rad": 1.0444418402013024e-17,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 7.325658921391468e-14,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 2.2665772568000615e-05,
+          "max_linear_velocity_difference_m_per_s": 0.00012239665681941403,
+          "max_orientation_difference_rad": 1.1127941584275462e-06,
+          "max_translation_difference_m": 7.173328205746193e-06,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.078892212819997e-11,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0001190912915234074,
+          "max_linear_velocity_difference_m_per_s": 0.0002597923577347453,
+          "max_orientation_difference_rad": 3.390129483825748e-06,
+          "max_translation_difference_m": 7.265092605091127e-06,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 4.44719303664839e-14,
+          "max_linear_velocity_difference_m_per_s": 1.7259112755380501e-15,
+          "max_orientation_difference_rad": 1.4798413945744454e-15,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        }
+      ]
+    },
+    {
+      "task_id": "libero_object/pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "demo_id": "demo_1",
+      "original_native_success": true,
+      "restored_pose_native_success": true,
+      "compared_post_action_states": 123,
+      "original_max_target_difference_m": 0.02280155873838201,
+      "restored_max_target_difference_m": 0.02530688865381528,
+      "original_last_target_difference_m": 0.012394129646275271,
+      "restored_last_target_difference_m": 0.010599202997048439,
+      "first_action_max_arm_coordinate_difference_rad": 0.00028845171565317074,
+      "first_action_max_finger_coordinate_difference_m": 0.005392917633182132,
+      "restored_joint_differences": [
+        {
+          "first_overlap_absolute_position_coordinate_difference": 8.76616622288301e-07,
+          "max_absolute_position_coordinate_difference": 4.1480609483356135e-05,
+          "max_absolute_velocity_coordinate_difference": 7.026975104854061e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint1",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 5.1637060247494704e-05,
+          "max_absolute_position_coordinate_difference": 0.0005890451549208087,
+          "max_absolute_velocity_coordinate_difference": 0.0018728958127009945,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint2",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 9.062639162930701e-07,
+          "max_absolute_position_coordinate_difference": 0.00010920408266851256,
+          "max_absolute_velocity_coordinate_difference": 9.234113896788854e-05,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint3",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.9644702744958664e-05,
+          "max_absolute_position_coordinate_difference": 0.0010162592643176982,
+          "max_absolute_velocity_coordinate_difference": 0.002722599725715053,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint4",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 1.0486940906984793e-05,
+          "max_absolute_position_coordinate_difference": 0.0005258314078409737,
+          "max_absolute_velocity_coordinate_difference": 0.00040562000162158024,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint5",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.00028845171565317074,
+          "max_absolute_position_coordinate_difference": 0.0013805568430882431,
+          "max_absolute_velocity_coordinate_difference": 0.008744766434796235,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint6",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 9.261714310926372e-06,
+          "max_absolute_position_coordinate_difference": 0.0004186865202979728,
+          "max_absolute_velocity_coordinate_difference": 0.0003855837425590673,
+          "mujoco_joint_type": 3,
+          "name": "robot0_joint7",
+          "position_coordinate_unit": "rad",
+          "velocity_coordinate_unit": "rad/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005392917633182132,
+          "max_absolute_position_coordinate_difference": 0.00809399910072178,
+          "max_absolute_velocity_coordinate_difference": 0.09817820541006234,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint1",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_absolute_position_coordinate_difference": 0.005392391721220639,
+          "max_absolute_position_coordinate_difference": 0.008092881852488677,
+          "max_absolute_velocity_coordinate_difference": 0.09814580390444712,
+          "mujoco_joint_type": 2,
+          "name": "gripper0_finger_joint2",
+          "position_coordinate_unit": "m",
+          "velocity_coordinate_unit": "m/s"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.010599202997048439,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 3.356851234455776,
+          "max_linear_velocity_difference_m_per_s": 0.9461656428678666,
+          "max_orientation_difference_rad": 0.2255285808627989,
+          "max_translation_difference_m": 0.02530688865381528,
+          "mujoco_joint_type": 0,
+          "name": "salad_dressing_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 6.760954843608022e-08,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.0012403945672628252,
+          "max_linear_velocity_difference_m_per_s": 0.00016709541938172897,
+          "max_orientation_difference_rad": 4.1199139025749534e-05,
+          "max_translation_difference_m": 5.518641924387874e-06,
+          "mujoco_joint_type": 0,
+          "name": "basket_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 1.5072851694139584e-16,
+          "max_linear_velocity_difference_m_per_s": 1.655828777865025e-17,
+          "max_orientation_difference_rad": 0.0,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "ketchup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 0.0,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 3.104730640007147e-15,
+          "max_linear_velocity_difference_m_per_s": 1.538578851053656e-16,
+          "max_orientation_difference_rad": 6.774311733017761e-18,
+          "max_translation_difference_m": 0.0,
+          "mujoco_joint_type": 0,
+          "name": "alphabet_soup_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.4435171950055464e-12,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 3.430552131433979e-05,
+          "max_linear_velocity_difference_m_per_s": 0.0002564477933485592,
+          "max_orientation_difference_rad": 1.1155412767633098e-06,
+          "max_translation_difference_m": 7.247904963170304e-06,
+          "mujoco_joint_type": 0,
+          "name": "cream_cheese_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 3.975785623630332e-11,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 0.00011674303576753915,
+          "max_linear_velocity_difference_m_per_s": 0.000249926926631953,
+          "max_orientation_difference_rad": 3.3901294837888916e-06,
+          "max_translation_difference_m": 7.265093918111226e-06,
+          "mujoco_joint_type": 0,
+          "name": "milk_1_joint0"
+        },
+        {
+          "first_overlap_translation_difference_m": 0.0,
+          "last_overlap_translation_difference_m": 1.3877787807814457e-17,
+          "max_angular_velocity_coordinate_difference_rad_per_s": 2.8093188434876185e-14,
+          "max_linear_velocity_difference_m_per_s": 1.1344628656883584e-15,
+          "max_orientation_difference_rad": 6.94784364219609e-16,
+          "max_translation_difference_m": 1.5515838457795457e-17,
+          "mujoco_joint_type": 0,
+          "name": "tomato_sauce_1_joint0"
+        }
+      ]
+    }
+  ],
+  "offline_worker_s": 21.136642058962025,
+  "peak_bytes": 710422528,
+  "complete_source_files_rehashed": 2,
+  "source_bytes_rehashed": 1444333391,
+  "compared_states": 1035,
+  "clock_exact_all_cases": true,
+  "new_native_starts": 0,
+  "validation_trajectories_read": 0,
+  "interpretation": "Four original failures become native successes. Alphabet demo_29 still fails and its maximum source-target difference increases; the Salad success reference also has a larger maximum difference. First-action finger differences remain about5.4mm in all seven cases. A synchronized arm cache is not source-controller-history reconstruction or a guarantee of smaller source error."
+}

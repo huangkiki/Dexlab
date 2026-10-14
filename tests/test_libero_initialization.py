@@ -24,6 +24,7 @@ class NativeFixture:
     """Tiny native scene with the pinned wrapper's time/qpos/qvel contract."""
 
     def __init__(self):
+        self.robots = []
         self.calls = []
         self.restore_count = 0
         self.corrupt_phase = None

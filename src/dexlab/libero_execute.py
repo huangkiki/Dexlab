@@ -19,7 +19,7 @@ import numpy as np
 from dexlab.libero_bindings import bind_task
 from dexlab.libero_demo import load_demo
 from dexlab.libero_goals import record_goal_queries
-from dexlab.libero_initialization import initialize_demo
+from dexlab.libero_initialization import INITIALIZATION_CONTRACT, initialize_demo
 from dexlab.libero_inputs import _source_identity
 from dexlab.libero_physics import record_substeps
 from dexlab.libero_substeps import SubstepArchive
@@ -119,6 +119,7 @@ def execute_actions(env, actions, definition, *, recording, rows, events, marker
 def run(payload, output):
     """Run one frozen case; the existing ledger owns admission, timeout and cost."""
     if (payload.get("schema_version") != 2 or type(payload.get("recording")) is not bool
+            or payload.get("initialization_contract") != INITIALIZATION_CONTRACT
             or type(payload.get("seed")) is not int or not 0 <= payload["seed"] < 2**32
             or payload.get("purpose") not in ("development", "baseline", "validation")):
         raise ValueError("Expected an explicit version-2 native execution case")
@@ -163,6 +164,7 @@ def run(payload, output):
                "input_manifest_sha256": payload["input_manifest_sha256"],
                "versions": versions, "source_sha256": payload["source_sha256"],
                "numerical_environment": numerical_environment,
+               "initialization_contract": payload["initialization_contract"],
                "instruction": {**inputs["admission"]["linkage"]["language"],
                                "native_contract": "pinned-bddl", "policy_used": False},
                "physics_qualification": "pending-substep-recording-and-independent-scoring"}
@@ -178,6 +180,9 @@ def run(payload, output):
         phase = "native-initialization"
         env = TASK_MAPPING[inputs["metadata"]["problem_name"]](**kwargs)
         initialize_demo(env, xml, inputs["initial"], initialization)
+        if (initialization.get("contract") != INITIALIZATION_CONTRACT
+                or not initialization.get("controller")):
+            raise ValueError("Native task requires the declared OSC restoration contract")
         phase = "binding"
         bindings = bind_task(env, task["definition"])
         publish(output / "bindings.json", json_bytes(bindings))

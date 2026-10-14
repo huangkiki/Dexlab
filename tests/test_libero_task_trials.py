@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from dexlab.libero_execute import NUMERICAL_ENVIRONMENT, RUNTIME_PACKAGES, source_hashes
+from dexlab.libero_execute import INITIALIZATION_CONTRACT, NUMERICAL_ENVIRONMENT, RUNTIME_PACKAGES, source_hashes
 from dexlab.libero_trials import create_tasks, run_task, task_sources
 from dexlab.libero_workflow import file_hash
 from dexlab.migration_budget import MigrationBudget, json_bytes, publish
@@ -28,6 +28,7 @@ class LiberoTaskTrialTests(unittest.TestCase):
         handle = patch('dexlab.libero_trials.execution_cgroup', return_value={'cgroup': '/fixture', 'boot_id': 'fixture'})
         handle.start(); self.addCleanup(handle.stop)
         payload = {'schema_version': 2, 'recording': True, 'substep_recording': True, 'seed': 0,
+                   'initialization_contract': INITIALIZATION_CONTRACT,
                    'purpose': 'development', 'runtime_versions': {name: 'fixture' for name in RUNTIME_PACKAGES},
                    'source_sha256': source_hashes(), 'input_dir': str(self.root),
                    'input_manifest_sha256': 'a' * 64, 'demo_id': 'demo_0', 'task_id': 'fixture/task',
@@ -118,6 +119,8 @@ class LiberoTaskTrialTests(unittest.TestCase):
         for change in (lambda m: m['cases'][0]['execution'].update(task_id='wrong'),
                        lambda m: m['cases'][0]['execution'].update(purpose='validation'),
                        lambda m: m['cases'][0]['execution'].update(source_sha256={}),
+                       lambda m: m['cases'][0]['execution'].pop('initialization_contract'),
+                       lambda m: m['cases'][0]['execution'].update(initialization_contract='undeclared'),
                        lambda m: m['cases'][0]['execution'].update(numerical_environment={}),
                        lambda m: m['cases'][0]['execution'].update(numerical_environment={key: 1 for key in NUMERICAL_ENVIRONMENT}),
                        lambda m: m.update(evidence=[])):

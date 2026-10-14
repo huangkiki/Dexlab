@@ -141,7 +141,7 @@ def task_sources():
 def validate_tasks(manifest):
     """Admit a finite slice of the frozen task/demo denominator."""
     from dexlab.libero_demo import load_demo
-    from dexlab.libero_execute import RUNTIME_PACKAGES, source_hashes as execution_sources, validate_numerical_environment
+    from dexlab.libero_execute import INITIALIZATION_CONTRACT, RUNTIME_PACKAGES, source_hashes as execution_sources, validate_numerical_environment
 
     if manifest.get('schema_version') != 2 or manifest.get('kind') != 'libero-native-task-campaign':
         raise ValueError('Expected a version-2 native task campaign')
@@ -156,6 +156,7 @@ def validate_tasks(manifest):
         payload = case['execution']
         validate_numerical_environment(payload.get('numerical_environment'))
         if (payload.get('schema_version') != 2 or type(payload.get('recording')) is not bool
+                or payload.get('initialization_contract') != INITIALIZATION_CONTRACT
                 or type(payload.get('substep_recording')) is not bool
                 or payload['recording'] != payload['substep_recording']
                 or type(payload.get('seed')) is not int or not 0 <= payload['seed'] < 2**32

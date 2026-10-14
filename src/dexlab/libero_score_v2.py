@@ -19,6 +19,7 @@ from dexlab.libero_demo import load_demo
 from dexlab.libero_dynamics import diagnostics
 from dexlab.libero_execute import validate_numerical_environment
 from dexlab.libero_goals import goal_atoms
+from dexlab.libero_initialization import INITIALIZATION_CONTRACT
 from dexlab.libero_substeps import read_chunk
 from dexlab.libero_workflow import file_hash
 from dexlab.migration_budget import json_bytes, publish
@@ -78,6 +79,52 @@ def _state_link(before, after, model):
     _equal(after[~mask], before[~mask], "state continuity outside quaternion normalization")
     _require(np.allclose(after[mask], expected[mask], rtol=0, atol=QUAT_NORMALIZATION_ATOL),
              "State discontinuity exceeds quaternion normalization")
+
+
+def _controller_initialization(init, run, expected, model):
+    """Validate the new restoration contract without reinterpreting old records."""
+    dims = model["dimensions"]
+    contract = expected.get("initialization_contract")
+    if contract is None:
+        _require("initialization_contract" not in run and "contract" not in init,
+                 "Historical initialization cannot be relabelled as a new contract")
+        return
+    _require(contract == INITIALIZATION_CONTRACT == run.get("initialization_contract") == init.get("contract"),
+             "Unfrozen or unsupported controller initialization contract")
+    _equal(init["after_controller_goals"], init["after_forward"], "controller goal reset state")
+    controller = init["controller"]
+    _require(controller["name"] == "OSC_POSE", "Unsupported restored controller")
+    for key in ("joint_ids", "qpos_indices", "qvel_indices"):
+        _numeric(controller[key], (7,), key, "iu")
+    site = controller["eef_site_id"]
+    _require(type(site) is int and 0 <= site < dims["nsite"]
+             and model["names"]["site"][site] == "gripper0_grip_site", "Restored end-effector site identity")
+    joint_ids = [model["names"]["joint"].index(f"robot0_joint{i}") for i in range(1, 8)]
+    _equal(controller["joint_ids"], joint_ids, "Panda arm joint identity")
+    _require(all(model["arrays"]["jnt_type"][i] == 3 for i in joint_ids), "Panda arm joint type")
+    q = [model["arrays"]["jnt_qposadr"][i] for i in joint_ids]
+    v = [model["arrays"]["jnt_dofadr"][i] for i in joint_ids]
+    _equal(controller["qpos_indices"], q, "controller qpos indices")
+    _equal(controller["qvel_indices"], v, "controller velocity indices")
+    before, after, native = controller["before"], controller["after"], controller["native_after"]
+    state = np.asarray(init["after_forward"])
+    _equal(after["joint_pos"], state[1:1 + dims["nq"]][q], "restored joint cache")
+    _equal(after["joint_vel"], state[1 + dims["nq"]:][v], "restored velocity cache")
+    shapes = {"joint_pos": (7,), "joint_vel": (7,), "initial_joint": (7,),
+              "ee_pos": (3,), "ee_ori_mat": (3, 3), "goal_pos": (3,), "goal_ori": (3, 3)}
+    for snapshot in (before, after):
+        for key, shape in shapes.items():
+            _numeric(snapshot[key], shape, "controller memory: " + key)
+        action = np.asarray(snapshot["gripper_current_action"])
+        _require(action.shape in ((1,), (2,)) and np.isfinite(action).all(), "Invalid gripper memory")
+        _require(type(snapshot["new_update"]) is bool, "Invalid native controller update flag")
+    _require(after["new_update"] is False, "Native OSC refresh did not finish")
+    for key in ("joint_pos", "joint_vel", "ee_pos", "ee_ori_mat"):
+        _equal(after[key], native[key], "native controller readback: " + key)
+    for goal, pose in (("goal_pos", "ee_pos"), ("goal_ori", "ee_ori_mat")):
+        _equal(after[goal], after[pose], "restored controller goal: " + goal)
+    for key in ("initial_joint", "gripper_current_action"):
+        _equal(before[key], after[key], "retained native reset history: " + key)
 
 
 def validate_bindings(binding, model, definition):
@@ -259,6 +306,7 @@ def score_run(directory, receipt_sha256, expected, inputs_directory, protocol):
     _equal(init["expected_after_forward"], init["after_forward"], "forward initialization")
     _equal(init["after_post"], init["after_forward"], "post-processing state")
     _equal(init["normalized_indices"], np.flatnonzero(np.asarray(init["source"]) != init["after_forward"]), "normalization indices")
+    _controller_initialization(init, run, expected, model)
     _require(run["initial_time_s"] == init["after_post"][0], "Initial epoch changed")
     with np.load(io.BytesIO((root / "trajectory.npz").read_bytes()), allow_pickle=False) as data:
         _require(len(data.files) == len(set(data.files)), "Duplicate trajectory member")

@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from dexlab.libero_execute import NUMERICAL_ENVIRONMENT, RUNTIME_PACKAGES, run, source_hashes
+from dexlab.libero_execute import INITIALIZATION_CONTRACT, NUMERICAL_ENVIRONMENT, RUNTIME_PACKAGES, run, source_hashes
 from dexlab.libero_workflow import file_hash
 import test_libero_execute as fixtures
 
@@ -33,6 +33,7 @@ class LiberoExecuteFailureTests(unittest.TestCase):
         env.closed = False
         env.close = lambda: setattr(env, 'closed', True)
         payload = {'schema_version': 2, 'recording': True, 'seed': 0, 'purpose': 'development',
+                   'initialization_contract': INITIALIZATION_CONTRACT,
                    'runtime_versions': {name: 'fixture' for name in RUNTIME_PACKAGES},
                    'source_sha256': source_hashes(), 'input_dir': str(root),
                    'input_manifest_sha256': 'a' * 64, 'demo_id': 'demo_0',
@@ -48,7 +49,8 @@ class LiberoExecuteFailureTests(unittest.TestCase):
         stack.enter_context(patch('dexlab.libero_execute.load_demo', return_value=inputs))
         stack.enter_context(patch('dexlab.libero_execute._source_identity'))
         stack.enter_context(patch('dexlab.libero_execute.initialize_demo',
-                                  side_effect=lambda env, xml, initial, record: record.update(status='completed')))
+                                  side_effect=lambda env, xml, initial, record: record.update(
+                                      status='completed', contract=INITIALIZATION_CONTRACT, controller={'fixture': True})))
         stack.enter_context(patch('dexlab.libero_execute.bind_task', return_value={'binding': 'fixture'}))
         return payload, stack
 
@@ -59,6 +61,17 @@ class LiberoExecuteFailureTests(unittest.TestCase):
             with stack, patch.dict('os.environ', {'OPENBLAS_NUM_THREADS': '2'}), \
                     patch('dexlab.libero_execute.load_demo') as loader:
                 with self.assertRaisesRegex(ValueError, 'numerical environment differs'):
+                    run(payload, root / 'output')
+                loader.assert_not_called()
+            self.assertFalse((root / 'output').exists())
+
+    def test_missing_restore_contract_is_rejected_before_loading_data(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); env = fixtures.NativeFixture()
+            payload, stack = self.prepare(root, env)
+            del payload['initialization_contract']
+            with stack, patch('dexlab.libero_execute.load_demo') as loader:
+                with self.assertRaisesRegex(ValueError, 'explicit version-2'):
                     run(payload, root / 'output')
                 loader.assert_not_called()
             self.assertFalse((root / 'output').exists())
