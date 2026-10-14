@@ -2,7 +2,7 @@
 
 从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
 
-<table><tr><th>豆腐对半切</th><th>香蕉连续三刀</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="460" alt="豆腐对半切"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="460" alt="香蕉连续三刀"></a></td></tr></table>
+<table><tr><th>豆腐对半切</th><th>香蕉连续三刀</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="豆腐对半切"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="香蕉连续三刀"></a></td></tr></table>
 
 **豆腐对半切 · 香蕉三刀切片** — 基于实际保存状态的回放；合成材料参数，未做真实食材标定。
 
@@ -11,7 +11,7 @@
 
 ### 切后还能独立运动吗？
 
-<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="320" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="320" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="320" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀 · 动态测量</td></tr></table>
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀 · 动态测量</td></tr></table>
 
 前两列为 BladeMaster 作者的原站对比视频；第三列为 DexLab 豆腐连续两刀实验。三列任务一致；原作完整配置尚待对齐，不作同条件性能排名。 [→ 三列播放与对比协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html) · [BladeMaster](https://jango6324.github.io/blademaster/#comparison) · [CRESSim-MPM](https://arxiv.org/abs/2502.18437)
 

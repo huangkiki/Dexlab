@@ -2,7 +2,7 @@
 
 From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
 
-<table><tr><th>Tofu halving</th><th>Three banana cuts</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="460" alt="Tofu halving"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="460" alt="Three banana cuts"></a></td></tr></table>
+<table><tr><th>Tofu halving</th><th>Three banana cuts</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="Tofu halving"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="Three banana cuts"></a></td></tr></table>
 
 **Tofu halving · Three sequential banana cuts** — Replays of saved simulation states; synthetic material parameters, without real-food calibration.
 
@@ -11,7 +11,7 @@ From tofu halving and banana slicing to robotic grasping: explore contact, frict
 
 ### Do cut pieces stay independent?
 
-<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="320" alt="BladeMaster reference video"></a><br>Author reference video</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="320" alt="CRESSim-MPM reference video"></a><br>Author reference video</td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="320" alt="DexLab two tofu cuts"></a><br>DexLab tofu · live measurements</td></tr></table>
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>Author reference video</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>Author reference video</td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>DexLab tofu · live measurements</td></tr></table>
 
 The first two clips are the BladeMaster authors’ comparison. The third is DexLab’s two-cut tofu experiment. The task is shared; complete author configurations remain unmatched, so no controlled performance ranking is implied. [→ Three-column playback and protocol](https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html) · [BladeMaster](https://jango6324.github.io/blademaster/#comparison) · [CRESSim-MPM](https://arxiv.org/abs/2502.18437)
 
