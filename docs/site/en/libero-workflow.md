@@ -31,7 +31,7 @@ Small body/solver fixtures passed 20 native checks and offline replay of 139 ret
 substeps, followed by 83 recording/execution regressions without importing an engine.
 The body-aware protocol uses the original force epoch, reports rigid free-COM impulse
 diagnostics and retains current solver statistics. Inferred subtree loads are not measured
-joint reactions; physical-reference qualification and repository delivery remain open.
+joint reactions; physical-reference qualification remains open.
 
 Packed storage passed 86 record/storage/executor regressions and exact lossless conversion
 and full rescoring of all five complete reference sequences (1,006 actions / 25,150 substeps).
@@ -43,7 +43,16 @@ offline reference exactly. This does not establish an all-task capacity or throu
 One earlier native startup failed before any task action because its new configuration
 directory lacked `config.yaml`. The failure and cost remain recorded; the corrected revision
 checked the known configuration hash and paths before dispatch. Original records,
-thresholds and numerical failures remain intact. Repository delivery is still pending.
+thresholds and numerical failures remain intact.
+
+The engineering implementation is merged in [PR #193](https://github.com/huangkiki/Dexlab/pull/193).
+Its complete gate ran 1,076 tests (1,055 passed and 21 runtime-specific skips), both full
+14-second backend regressions (MuJoCo 23/23 checks and SuperDex 22/22), raw-record rescoring,
+official-package identity checks and strict bilingual documentation builds. A subsequent
+Git fetch failure was retained; publication recovered against the same verified tree and
+unchanged base. These backend regressions qualify the declared existing profiles, not SDF
+parameter equivalence across engines. [#188](https://github.com/huangkiki/Dexlab/issues/188)
+retains its remaining qualifications; the full 130-task and visual-policy parents stay open.
 
 [Recording protocol and limitations](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md)
 and [qualification evidence](https://github.com/huangkiki/Dexlab/issues/188#issuecomment-6159417739)
