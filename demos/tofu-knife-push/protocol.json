@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "task": "tofu-sequential",
+  "motion_protocol": "knife-push",
+  "purpose": "Replace a hidden material velocity increment with visible native knife contact.",
+  "cases": [
+    [
+      "physics-001-push",
+      [
+        "--grid-spacing",
+        ".005"
+      ]
+    ],
+    [
+      "physics-002-half",
+      [
+        "--grid-spacing",
+        ".005",
+        "--dt",
+        ".000125"
+      ]
+    ],
+    [
+      "physics-003-no-push",
+      [
+        "--grid-spacing",
+        ".005",
+        "--motion-protocol",
+        "no-push"
+      ]
+    ],
+    [
+      "physics-004-legacy",
+      [
+        "--motion-protocol",
+        "impulse"
+      ]
+    ]
+  ],
+  "physics_sha256": {
+    "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+    "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+    "cutting_score.py": "6d1be341006d80c1e898d529873c21e2633280729613fff904a9d16c51c1640c",
+    "tofu_cut.py": "a11b9a74a22e445081c67dff0ea3d40d4eaf28e689b67a1f9ca86157fddaf8c7"
+  },
+  "geometry": {
+    "block_size_m": [
+      0.09,
+      0.03,
+      0.03
+    ],
+    "grid_spacing_m": 0.005,
+    "blade_half_size_m": [
+      0.00025,
+      0.025,
+      0.02
+    ],
+    "bevel_height_m": 0.005
+  },
+  "controls": {
+    "duration_s": 7.0,
+    "motion_start_time_s": 4.0,
+    "knife_target_time_s": [
+      4.0,
+      4.8,
+      6.0,
+      6.6,
+      7.0
+    ],
+    "knife_target_x_m": [
+      -0.015,
+      -0.015,
+      -0.027,
+      -0.027,
+      -0.027
+    ],
+    "knife_target_z_m": [
+      0.036,
+      0.002,
+      0.002,
+      0.036,
+      0.036
+    ],
+    "probe_velocity": null,
+    "cutting_during_push": false,
+    "description": "Original two cuts through 4 s, re-enter the second kerf, push left with the blade face, withdraw. Dynamic translation with native reaction; guided attitude."
+  },
+  "material": "Existing synthetic elastic profile, E6000Pa nu0.35 density1100kg/m3 Gc0.5J/m2 sharpness0.9. Not calibrated food.",
+  "acceptance": {
+    "fraction_error": 0.03,
+    "momentum_error_ns": 1e-09,
+    "minimum_det_f": 0.05,
+    "maximum_overlap_radii": 1.0,
+    "relative_motion_m": 0.001,
+    "passive_motion_m": 0.003,
+    "minimum_reaction_n": 0.001,
+    "minimum_push_impulse_ns": 0.001
+  },
+  "controls_acceptance": "No-push must fail only independent motion and knife-supplied push impulse; preserve three pieces and all numerical checks. Legacy impulse must pass original acceptance.",
+  "limits": {
+    "calls": 8,
+    "cumulative_worker_s": 5400,
+    "per_call_s": 1200
+  },
+  "scope": "Independent CPU TLMPM synthetic task; not a native six-engine cutting matrix. Author comparison videos retain their own impulse input; no matched-input ranking."
+}

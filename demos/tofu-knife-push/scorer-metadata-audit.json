@@ -1,0 +1,12 @@
+{
+  "scope": "Post-cohort output metadata correction: keep new motion fields scoped to sequential tofu and preserve other tasks original score schemas. Sequential task calculations and outputs are unchanged; the export independently re-scores all four raw records and compares their exact original score dictionaries.",
+  "recorded_scorer_sha256": "6d1be341006d80c1e898d529873c21e2633280729613fff904a9d16c51c1640c",
+  "final_scorer_sha256": "ec2807479bb3dfbf7b728f19f8c4f304d19e778da80011559e19eb4ac05a1191",
+  "only_scorer_change": {
+    "before": "'motion_protocol': motion, 'leftward_knife_impulse_ns': push_impulse,",
+    "after": "**({'motion_protocol': motion, 'leftward_knife_impulse_ns': push_impulse}\n           if task == 'tofu-sequential' else {}),"
+  },
+  "solver_control_acceptance_unchanged": true,
+  "validation": "Tiny actual scoring record plus full unit gate; exact re-score equality for all sequential records.",
+  "description_correction": "The initial audit accidentally quoted the metrics default change in the scorer after-snippet. Corrected from the exact source diff before publication; source hashes and all scored outputs are unchanged."
+}

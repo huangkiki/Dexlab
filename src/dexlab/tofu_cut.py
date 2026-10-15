@@ -12,7 +12,7 @@ import time
 import numpy as np
 
 from dexlab.cutting import CutConfig, CuttingSimulation
-from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, SCORING_ACCEPTANCE, score_run
+from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, PUSH_ACCEPTANCE, SCORING_ACCEPTANCE, score_run
 
 
 DURATION = 3.0
@@ -55,11 +55,31 @@ def scoring_target(t, mode):
         mode != 'uncut' and .35 <= local < 1.2), cut * np.pi / 2
 
 
-def run(directory, config, mode='full', duration=None, task='tofu'):
+def knife_push_target(t):
+    """Re-enter the second kerf, push with the blade face, then withdraw.
+
+    These are drive targets, not prescribed blade or material positions.
+    Cutting is disabled throughout this contact-only phase.
+    """
+    times = [4., 4.8, 6., 6.6, 7.]
+    return np.array([np.interp(t, times, [-.015, -.015, -.027, -.027, -.027]),
+                     0., np.interp(t, times, [.036, .002, .002, .036, .036])])
+
+
+def run(directory, config, mode='full', duration=None, task='tofu', motion_protocol=None):
     if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
         raise ValueError('Unknown task')
     full_duration, probe_time = {'banana': (7., 6.2), 'tofu-sequential': (5., 4.2),
                                  'tofu': (DURATION, PROBE_TIME), 'tofu-scoring': (4.2, None)}[task]
+    if motion_protocol is None:
+        motion_protocol = 'knife-push' if task == 'tofu-sequential' else 'impulse'
+    if motion_protocol not in ('impulse', 'knife-push', 'no-push'):
+        raise ValueError('Unknown motion protocol')
+    contact_motion = motion_protocol != 'impulse'
+    if contact_motion and task != 'tofu-sequential':
+        raise ValueError('Knife-push protocols require sequential tofu')
+    if contact_motion:
+        full_duration, probe_time = 7., None
     duration = full_duration if duration is None else duration
     if (config.shape == 'banana') != (task == 'banana'):
         raise ValueError('Task and geometry do not match')
@@ -76,6 +96,7 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
         'schema_version': 1, 'status': 'running', 'mode': mode, 'config': asdict(config),
         'duration_s': duration, 'probe_time_s': probe_time, 'task': task,
         'acceptance': (SCORING_ACCEPTANCE if task == 'tofu-scoring' else
+                       PUSH_ACCEPTANCE if contact_motion else
                        BANANA_ACCEPTANCE if task != 'tofu' else ACCEPTANCE),
         'paper': 'https://arxiv.org/abs/2609.27342v2',
         'implementation': 'independent CPU TLMPM reference, synthetic parameters',
@@ -84,6 +105,9 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
         'packages': {name: importlib.metadata.version(name) for name in ('numpy', 'scipy', 'numba')},
         'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=source_root, text=True).strip(),
     }
+    if task == 'tofu-sequential':
+        manifest.update(motion_protocol=motion_protocol,
+                        motion_start_time_s=4. if contact_motion else probe_time)
     write_json(directory / 'manifest.json', manifest)
     start = time.monotonic()
     sim = CuttingSimulation(config)
@@ -115,6 +139,8 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
                 probe_mask = None
             elif task != 'tofu':
                 target, cut_index, cutting = sequential_target(t, mode, task)
+                if motion_protocol == 'knife-push' and t >= 4.:
+                    target = knife_push_target(t)
                 probe_mask = (sim.reference[:, 0] > .03 if task == 'banana' else
                               sim.reference[:, 0] < -.015)
             else:
@@ -162,6 +188,8 @@ def main():
     parser.add_argument('--grid-spacing', type=float)
     parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'), default='tofu')
     parser.add_argument('--duration', type=float, default=None, help='Short probes do not establish task completion')
+    parser.add_argument('--motion-protocol', choices=('knife-push', 'no-push', 'impulse'),
+                        help='Sequential tofu defaults to knife-push; impulse preserves the historical velocity probe')
     args = parser.parse_args()
     banana = args.task == 'banana'
     options = {
@@ -180,7 +208,7 @@ def main():
                        blade_bevel_height=.005,
                        grid_spacing=args.grid_spacing if args.grid_spacing is not None else .005,
                        dt=args.dt if args.dt is not None else .00025)
-    run(args.output, CutConfig(**options), args.mode, args.duration, args.task)
+    run(args.output, CutConfig(**options), args.mode, args.duration, args.task, args.motion_protocol)
 
 
 if __name__ == '__main__':

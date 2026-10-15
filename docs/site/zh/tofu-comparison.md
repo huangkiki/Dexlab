@@ -1,25 +1,38 @@
-# 豆腐连续两刀与独立运动
+# 豆腐连续两刀与刀面推动
 
-本任务对应原站两段参考视频：长方体软块连续两刀，撤刀后检验左块能否独立运动。[香蕉连续切片](banana-cutting.md)独立展示。
+当前视频用实际刀具接触解释切后位移：切完后先回到左侧切缝，再横向推开左块。刀具由驱动力和材料反作用共同积分；材料速度没有直接修改。香蕉与交叉浅划保持各自任务。
 
 ```{raw} html
 <section class="cutting-player" aria-label="豆腐连续两刀与独立运动"><header><h3>DexLab · 豆腐两刀</h3>
 <div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-sequential/particles.mp4" data-poster="_static/cutting/tofu-sequential/particles-poster.png" aria-pressed="true">粒子</button><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-sequential/surface.mp4" data-poster="_static/cutting/tofu-sequential/surface-poster.png" aria-pressed="false">表面</button></div></header>
 <video controls muted playsinline preload="metadata" poster="_static/cutting/tofu-sequential/particles-poster.png" aria-label="豆腐连续两刀与独立运动"><source src="_static/cutting/tofu-sequential/particles.mp4" type="video/mp4"></video>
-<p>两刀分三块，撤刀后只给左块向左的初速度。</p></section>
+<p>两刀形成三块；刀具回到左侧切缝，以刀面接触向左推，再撤刀。材料没有直接施加速度增量。</p></section>
 ```
 
-[BladeMaster／CRESSim-MPM／DexLab 三列播放](cutting-comparison.md)
+**比较边界：** 原作者片末尾给左块初速度；当前 DexLab 片采用刀面接触推动。相同切割问题不等于相同末尾输入，不能比较这一步的位移、力或成本排名。下面保留旧初速度协议的数据与下载，不能把其位移数值套到新视频。
 
-## 输入与比较范围
+## 动作与验收
 
-本实验使用独立 CPU TLMPM 实现；刀具受驱动力和材料反力共同影响。软块长宽高 90×30×30 mm，切割位置依次为 x=+15、−15 mm，每刀包括下切与撤出。刀厚 0.5 mm，与论文该对比所述厚度一致；5 mm 对称刃口为本项目声明的几何选择。
+90×30×30 mm 合成软块，先在 x=+15、−15 mm 切两刀，每刀 2 s。前 4 s 与历史细采样记录逐数组相同。新动作从 4.00 s 开始：刀刃 z=36→2 mm（到 4.80 s），刀面 x=−15→−27 mm（到 6.00 s），撤至 z=36 mm（到 6.60 s），7.00 s 结束。推动阶段关闭切割，底层材料与接触求解器不改。
 
-默认网格 7.5 mm，步长 0.25 ms，密度 1,100 kg/m³、杨氏模量 6 kPa、泊松比 0.35、FLIP=0.95、法向比例 0.1。两刀各 2 s；4.2 s 时仅对参考坐标 x<−15 mm 的左块施加 Δv=(−0.12,0,0) m/s，记录至 5 s。该探针是预先声明的初速度条件，不是机械臂推块动作。
+图中 Fx 为刀对材料的真实接触力（负值向左），排除驱动和板支撑力；dx 以 4.00 s 为基准。独立评分要求三块拓扑保持、左块相对位移至少 1 mm、其余块 |dx|≤3 mm、净向左刀接触冲量≥0.001 N·s，且外力账本中没有材料速度冲量。原有动量、重叠、正 Jacobian 门槛不变。
 
-**三列任务一致，但尚未声称完整参数一致。** 原论文/视频没有给出足以逐项重建该组对比的所有尺寸、接触、驱动及初速度参数；以上未明确对应原作的数值均为 DexLab 合成设置。原作切口宽度/四面体体积收缩与本项目代理重叠/连接图指标不能互换，不作同条件精度或速度排名。
+展示网格 5 mm、步长 0.25 ms、刀厚 0.5 mm，刀刃斜面高 5 mm；密度 1100 kg/m³、E=6 kPa、ν=0.35、FLIP=0.95。全部为既有合成参数，未做真实豆腐标定。
 
-## 新增细采样记录与数值动图
+## 新刀推协议结果
+
+| Case | Result | Components | Relative motion (mm) | Leftward knife impulse (N·s) | Worker time (s) |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `physics-001-push` | 通过 | 3 | 11.102 | 0.105801 | 736.02 |
+| `physics-002-half` | 通过 | 3 | 11.234 | 0.104222 | 1467.43 |
+| `physics-003-no-push` | 负对照按预期拒绝 | 3 | 0.007 | 0.000000 | 729.26 |
+| `physics-004-legacy` | 通过 | 3 | 2.799 | — | 155.91 |
+
+半步长是敏感性检查，不等于收敛证明。无推动对照保留三块，但不能通过运动与刀推冲量门槛；旧 impulse 回归按原门槛通过。全部运行及成本保留。
+
+[完整记录](https://github.com/huangkiki/Dexlab/blob/main/demos/tofu-knife-push/evidence.json) · [协议](https://github.com/huangkiki/Dexlab/blob/main/demos/tofu-knife-push/protocol.json) · [原始记录与媒体下载](https://github.com/huangkiki/Dexlab/releases/tag/v0.66.0)
+
+## 历史初速度协议：更细采样（v0.64.0）
 
 这是 #203 的独立批次，原 v0.62.0 记录与失败保持不变。显示用网格为 5 mm，评分器与物理源码未改变；半步长、未切与第二刀浅切均在运行前冻结。
 
@@ -37,7 +50,7 @@
 
 [新增原始记录与数值回放下载](https://github.com/huangkiki/Dexlab/releases/tag/v0.64.0)。
 
-## 验收记录
+## 历史初速度协议验收（v0.62.0）
 
 <!-- tofu-comparison-results:start -->
 | Case | Task | Components | Overlap (mm) | Relative motion (mm) | Peak reaction (N) | Record time (s) |
@@ -59,16 +72,14 @@
 
 评分从保存的参考传递图、切割历史、位置、速度和外部冲量独立计算。完整任务须按顺序形成 2→3 个连通分量，每块质量与初始切割区域相符；撤刀后左块相对其余块向左移动至少 1 mm，中、右块各自横向漂移不超过 3 mm。数值门槛延用已冻结协议：动量误差≤10⁻⁹ N·s、det F≥0.05、代理重叠≤一个粒子半径，且存在非零材料反力。未切与第二刀浅切分别应保留一个、至多两个连通分量。
 
-## 显示与复现
+## 复现
 
-粒子视图使用实际代理尺寸，便于与原站粒子视频并列观察。表面视图提取材料单元的外露面，按保存的形变梯度与切割历史嵌入；没有增加缝隙或手工移动块体。当前对比回放采用中性灰地面、米白原生粒子和细刀片；粒子数、尺寸和位姿未变。橙色区域标记与数值定义见[三方数值对照](cutting-comparison.md)。显示不是食材标定。
-
-在[已有资源限制与共享锁](cutting.md#复现)内运行：
+在[既有资源限制和共享锁](cutting.md#复现)内运行：
 
 ```bash
-python -m dexlab.tofu_cut --task tofu-sequential --output RUN
+python -m dexlab.tofu_cut --task tofu-sequential --grid-spacing .005 --output RUN
 python -m dexlab.cutting_score RUN
 python -m dexlab.cutting_showcase RUN --output MEDIA
 ```
 
-使用 `--mode uncut` 或 `--mode partial` 运行负对照；半步长为 `--dt 0.000125`，细网格为 `--grid-spacing 0.006`。记录器正常退出不等于通过任务，应检查独立评分。所有失败、预算与原始数据保留在[实验记录](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-comparison)。
+`--motion-protocol no-push` 是同时间无推动对照；`--motion-protocol impulse` 恢复历史 5 s 初速度协议；`--dt .000125` 做半步长。默认网格仍为 7.5 mm；上面的命令明确指定展示用 5 mm。以独立评分而非录制器退出码判断成功。

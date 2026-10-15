@@ -27,6 +27,7 @@ class ScoringTopologyTests(unittest.TestCase):
                              duration=.001, task='tofu-scoring')
             self.assertFalse(result['passed'])
             self.assertIsNone(result['relative_motion_m'])
+            self.assertNotIn('motion_protocol', result)
             self.assertEqual(result['piece_displacements_m'], [])
             path = folder / 'trace.npz'
             with np.load(path) as archive:
@@ -144,6 +145,27 @@ class BananaRecordTests(unittest.TestCase):
 
 
 class SequentialTofuRecordTests(unittest.TestCase):
+    def test_material_kick_is_not_an_allowed_external_input_for_knife_push(self):
+        import numpy as np
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary) / 'knife-push'
+            config = CutConfig(size=(.09, .03, .03), dt=.00025)
+            with contextlib.redirect_stdout(io.StringIO()):
+                original = run(folder, config, duration=.001, task='tofu-sequential')
+            self.assertTrue(original['checks']['external_impulse_matches'])
+            path = folder / 'trace.npz'
+            with np.load(path) as data:
+                trace = {key: data[key] for key in data.files}
+            trace['external_impulse_ns'][0, 0] -= .001
+            np.savez_compressed(path, **trace)
+            manifest_path = folder / 'manifest.json'
+            manifest = json.loads(manifest_path.read_text())
+            manifest['artifacts']['trace.npz'] = hashlib.sha256(path.read_bytes()).hexdigest()
+            manifest_path.write_text(json.dumps(manifest))
+            altered = score_run(folder)
+            self.assertFalse(altered['checks']['external_impulse_matches'])
+            self.assertFalse(altered['checks']['momentum_balance'])
+
     def test_short_tofu_comparison_is_a_distinct_three_piece_task(self):
         with tempfile.TemporaryDirectory() as temporary:
             folder = Path(temporary) / 'two-cuts'
@@ -158,6 +180,10 @@ class SequentialTofuRecordTests(unittest.TestCase):
             self.assertEqual(len(result['piece_displacements_m']), 3)
             path = folder / 'manifest.json'
             manifest = json.loads(path.read_text())
+            self.assertEqual(manifest['motion_protocol'], 'knife-push')
+            self.assertIsNone(manifest['probe_time_s'])
+            self.assertEqual(manifest['motion_start_time_s'], 4.)
+            self.assertFalse(result['checks']['knife_supplies_push_impulse'])
             manifest['probe_time_s'] = 6.2
             path.write_text(json.dumps(manifest))
             with self.assertRaisesRegex(ValueError, 'probe protocol'):
