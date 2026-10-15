@@ -17,6 +17,42 @@ from dexlab.cutting_score import grid_components
 
 
 class CuttingInvariants(unittest.TestCase):
+    def test_guided_blade_contact_is_rotation_covariant(self):
+        from dexlab.cutting import blade_query, oriented_blade_query
+        rotation = np.array([[0., -1., 0.], [1., 0., 0.], [0., 0., 1.]])
+        center = np.array([.01, -.02, .06])
+        half = np.array([.00025, .0275, .02])
+        for bevel in (0., .005):
+            for local in ([-.001, .01, 0.], [.0001, -.03, -.019], [.00005, 0., -.018]):
+                point, normal, distance = blade_query(np.asarray(local), np.zeros(3), half, bevel)
+                actual = oriented_blade_query(center + rotation @ local, center, half, bevel, np.pi/2)
+                np.testing.assert_allclose(actual[0], center + rotation @ point, atol=1e-14)
+                np.testing.assert_allclose(actual[1], rotation @ normal, atol=1e-12)
+                self.assertAlmostEqual(actual[2], distance, places=13)
+
+    def test_crossed_labels_retain_first_cut_and_unassigned_base(self):
+        sim = CuttingSimulation(CutConfig(size=(.03, .03, .03), grid_spacing=.005))
+        blade = np.array([0., 0., .044])  # Edge at24mm, leaving a connected base.
+        half = np.array([.00025, .02, .02])
+        args = (sim.x, sim.velocity, sim.sides, blade, np.zeros(3), half, .005, .00025)
+        assign_cut_sides(*args)
+        first = sim.sides.copy()
+        assign_cut_sides(*args, cut_index=1, yaw=np.pi/2)
+        np.testing.assert_array_equal(sim.sides % 3, first)
+        top = sim.reference[:, 2] > .024
+        np.testing.assert_array_equal(sim.sides[top] // 3, np.where(sim.reference[top, 1] < 0, 1, 2))
+        self.assertFalse(sim.sides[sim.reference[:, 2] < .015].any())
+        self.assertEqual(len(grid_components(sim.nodes, sim.weights, sim.sides)[1]), 1)
+
+    def test_guide_cannot_rotate_inside_material(self):
+        sim = CuttingSimulation(CutConfig(size=(.015, .015, .015)))
+        sim.blade_x[2] = sim.half_size[2] + .01
+        before = sim.x.copy()
+        with self.assertRaisesRegex(ValueError, 'Withdraw'):
+            sim.step(np.array([0., 0., .01]), blade_yaw=np.pi/2)
+        np.testing.assert_array_equal(sim.x, before)
+        self.assertEqual(sim.blade_yaw, 0.)
+
     def test_multiple_cut_digits_preserve_earlier_discontinuities(self):
         from dexlab.cutting import codes_compatible
         from dexlab.cutting_score import histories_compatible

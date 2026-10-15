@@ -1,0 +1,153 @@
+{
+  "source_artifacts": {
+    "states.npz": "eefcdcbacb1c043c3cf7b8e5e0c447aad538cac94b71b03f078a9e063aaeafa3",
+    "trace.npz": "02a74855f0125f26fbbc1450be978a088ac81b91dea7534c340ff20ed528f524"
+  },
+  "surface_sha256": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+  "reference_location_mm": [
+    0,
+    0,
+    30
+  ],
+  "definition": "Split surface vertices at the original top intersection, embedded in native position/F. Openings here differ from mean interior affine-face samples. No visual widening.",
+  "frames": [
+    {
+      "time": 0.0,
+      "top_center_vertices_mm": [
+        [
+          0.0,
+          0.0,
+          30.0
+        ]
+      ],
+      "vertices": 1514,
+      "faces": 1512,
+      "cut_vertices": 0,
+      "top_codes": [
+        0
+      ],
+      "top_first_left_mean_x_mm": -11.25,
+      "cut_cap_quads": 0
+    },
+    {
+      "time": 1.2,
+      "top_center_vertices_mm": [
+        [
+          -0.20959881562268773,
+          -2.927345865710862e-14,
+          29.31607874486216
+        ],
+        [
+          0.20959881562267146,
+          4.369334755116583e-14,
+          29.316078744862125
+        ]
+      ],
+      "vertices": 1586,
+      "faces": 1584,
+      "cut_vertices": 95,
+      "top_codes": [
+        1,
+        2
+      ],
+      "top_first_left_mean_x_mm": -11.403312183992098,
+      "cut_cap_quads": 72
+    },
+    {
+      "time": 2.0,
+      "top_center_vertices_mm": [
+        [
+          -0.0036187782253058578,
+          -2.461138931542095e-14,
+          29.242980578114288
+        ],
+        [
+          0.003618778225290462,
+          1.1926223897340549e-15,
+          29.242980578114267
+        ]
+      ],
+      "vertices": 1586,
+      "faces": 1584,
+      "cut_vertices": 95,
+      "top_codes": [
+        1,
+        2
+      ],
+      "top_first_left_mean_x_mm": -11.325459136455663,
+      "cut_cap_quads": 72
+    },
+    {
+      "time": 3.2,
+      "top_center_vertices_mm": [
+        [
+          0.007842038095126104,
+          -0.21306733304356815,
+          29.31164765661348
+        ],
+        [
+          0.007842038095128923,
+          0.21306733304355102,
+          29.311647656613637
+        ],
+        [
+          -0.007842038095348365,
+          -0.2130673330434606,
+          29.31164765661329
+        ],
+        [
+          -0.00784203809530066,
+          0.21306733304347425,
+          29.311647656613623
+        ]
+      ],
+      "vertices": 1658,
+      "faces": 1656,
+      "cut_vertices": 189,
+      "top_codes": [
+        4,
+        5,
+        7,
+        8
+      ],
+      "top_first_left_mean_x_mm": -11.335840644962609,
+      "cut_cap_quads": 144
+    },
+    {
+      "time": 4.2,
+      "top_center_vertices_mm": [
+        [
+          -0.019662178926872817,
+          -0.0025212133836220903,
+          29.267598978322297
+        ],
+        [
+          -0.019662178926908597,
+          0.0025212133836953823,
+          29.26759897832254
+        ],
+        [
+          0.019662178926540617,
+          -0.0025212133833577618,
+          29.267598978322003
+        ],
+        [
+          0.01966217892643697,
+          0.0025212133839831296,
+          29.267598978322372
+        ]
+      ],
+      "vertices": 1658,
+      "faces": 1656,
+      "cut_vertices": 189,
+      "top_codes": [
+        4,
+        5,
+        7,
+        8
+      ],
+      "top_first_left_mean_x_mm": -11.327455550645716,
+      "cut_cap_quads": 144
+    }
+  ]
+}

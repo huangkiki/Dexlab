@@ -16,7 +16,11 @@ The [v2 paper](https://arxiv.org/html/2609.27342v2) separates material dynamics,
 | III-F: linked reference volumes, Hermite data and local dual contouring | Tofu uses exposed material-cell faces. Banana uses an authored embedded skin with local history-aware seams at three supported straight-cut planes. Opposing native histories expose cap triangles progressively; compatible/unassigned regions within the same native mechanical component retain the bridge. Each authored interval follows its dominant native component when deformation shifts the cut away from the nominal reference plane. Exact deformed cut geometry remains approximate. This is **not** the paper's dual-contouring reconstruction or an arbitrary-cut surface. |
 | III-G: compact active codes on GPU | Dense code storage on CPU. No GPU throughput claim. |
 
-The earlier banana render applied 40 smoothing iterations and blended normals across cut rims. Its recorded maximum display-only vertex displacement was **2.358 mm**. Those operations rounded the cut ends. The refined renderer applies **no geometric smoothing**, marks the full cap rim and splits normals at sharp edges. Surface vertices still use saved particle motion and deformation; no separation displacement is added. Fixed floor markers and native side colours clarify the tofu comparison.
+The earlier banana render applied 40 smoothing iterations and blended normals across cut rims. Its recorded maximum display-only vertex displacement was **2.358 mm**. Those operations rounded the cut ends. The refined renderer applies **no geometric smoothing**, marks the full cap rim and splits normals at sharp edges. Surface vertices still use saved particle motion and deformation; no separation displacement is added. The current tofu comparison uses a neutral gray scene and cream native particles with fixed reference floor markers. An orange rectangle projects the middle particle region; its contraction value comes from interior tetrahedra.
+
+## Added crossed shallow cuts
+
+The [cross-scoring task](tofu-scoring.md) computes contact and side assignment in the blade frame, withdraws, rotates 90° and makes a second shallow stroke. Native position, attitude and reaction are recorded; persistent histories and the lower transfer graph are checked separately. Depth is relative to the original upper surface, and the replay displays component count and base status. This extends guided orthogonal scoring, without reproducing the complete author knife-tip lateral path, free rotational dynamics or dual-contouring reconstruction.
 
 ## Same recorded state, before and after the display fix
 
@@ -30,8 +34,8 @@ Both frames use the **same original coarse record at 7.00 s**, verified by raw-s
 
 | Display | Definition |
 | --- | --- |
-| Cut opening, mm | Mean signed x distance between two affine images of the same reference face. Only pairs with opposing nonzero native digits for that cut contribute. `--` means no eligible pair, not a zero-width cut. |
-| Middle volume, % | Change in signed volume of fixed reference tetrahedra inside the middle third. Each complete native lattice cell contributes six tetrahedra; cells crossing a planned cut are excluded. Inversions are counted separately. |
+| Cut opening, mm | Mean signed normal distance between two affine images of the same reference face: x for the first cross-scoring cut, y for the second. Only pairs with opposing nonzero native digits for that cut contribute. `--` means no eligible pair, not a zero-width cut. |
+| Middle contraction / volume, % | Change in signed volume of fixed reference tetrahedra inside the middle third. Each complete native lattice cell contributes six tetrahedra; cells crossing a planned cut are excluded. Inversions are counted separately. The comparison GIF shows contraction -ΔV/V₀, while JSON retains signed volume change. |
 | Interior volume, % | The same estimator summed over sampled piece interiors for banana or tofu halving. It does not measure the volume of the decorative skin. |
 | After impulse, mm | Native equal-mass particle-centroid x displacement from the exact saved frame immediately before the diagnostic impulse, ordered left to right. |
 | Knife reaction, N | Norm of the recorded material reaction on the knife. Guide, drive and board forces are separate. |
@@ -46,4 +50,4 @@ The banana force experiment in IV-C uses E=0.4 MPa, ν=0.45, density 1,100 kg/m�
 
 Improved lighting, finer sampling and sharper cut rims do not close that material-model gap. Matching the banana experiment requires a separately qualified plastic material, stable timestep/contact settings and the force protocol, tracked in [#204](https://github.com/huangkiki/Dexlab/issues/204). The current fruit is an authored shape, not a scan; real-food calibration, robotic pushing and force agreement remain unverified.
 
-[Two-cut tofu records](tofu-comparison.md) · [Separate banana task](banana-cutting.md) · [Three-column comparison](cutting-comparison.md)
+[Cross-scoring records](tofu-scoring.md) · [Two-cut tofu records](tofu-comparison.md) · [Separate banana task](banana-cutting.md) · [Three-column comparison](cutting-comparison.md)

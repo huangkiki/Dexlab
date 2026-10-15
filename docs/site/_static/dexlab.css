@@ -138,7 +138,7 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-comparison-panel header { display:flex; min-height:4.25rem; padding:.8rem; justify-content:center; align-items:center; gap:.5rem; flex-wrap:wrap; box-sizing:border-box; }
 .cutting-comparison-panel header h3 { margin:0; }
 .cutting-comparison-panel h3 { text-align:center; font-size:1rem; margin:.6rem 0; }
-.cutting-comparison-panel video { display:block; width:100%; aspect-ratio:48/35; object-fit:contain; border-radius:6px; background:#eef0ef; }
+.cutting-comparison-panel video { display:block; width:100%; aspect-ratio:8/5; object-fit:contain; border-radius:6px; background:#f0f0ed; }
 .cutting-comparison-panel p { font-size:.78rem; line-height:1.6; margin:0; padding:.7rem .85rem; }
 .cutting-reference-controls { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; margin:.8rem 0; }
 .cutting-reference-controls[hidden] { display:none; }

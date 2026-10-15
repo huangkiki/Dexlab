@@ -12,7 +12,7 @@ import time
 import numpy as np
 
 from dexlab.cutting import CutConfig, CuttingSimulation
-from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, score_run
+from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, SCORING_ACCEPTANCE, score_run
 
 
 DURATION = 3.0
@@ -45,11 +45,21 @@ def sequential_target(t, mode, task):
     return np.array([x, 0., .036 if mode == 'uncut' else z]), cut, cutting
 
 
+def scoring_target(t, mode):
+    """Two guided perpendicular shallow incisions, with withdrawal between them."""
+    cut = min(int(t // 2), 1)
+    local = t - 2 * cut
+    z = np.interp(local, [0., .35, 1., 1.2, 1.75, 2.2],
+                  [.042, .042, .024, .024, .042, .042])
+    return np.array([0., 0., .042 if mode == 'uncut' else z]), cut, (
+        mode != 'uncut' and .35 <= local < 1.2), cut * np.pi / 2
+
+
 def run(directory, config, mode='full', duration=None, task='tofu'):
-    if task not in ('tofu', 'banana', 'tofu-sequential'):
+    if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
         raise ValueError('Unknown task')
     full_duration, probe_time = {'banana': (7., 6.2), 'tofu-sequential': (5., 4.2),
-                                 'tofu': (DURATION, PROBE_TIME)}[task]
+                                 'tofu': (DURATION, PROBE_TIME), 'tofu-scoring': (4.2, None)}[task]
     duration = full_duration if duration is None else duration
     if (config.shape == 'banana') != (task == 'banana'):
         raise ValueError('Task and geometry do not match')
@@ -57,13 +67,16 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
     directory.mkdir(parents=True, exist_ok=False)
     if mode not in ('full', 'partial', 'uncut'):
         raise ValueError('Unknown cutting mode')
+    if task == 'tofu-scoring' and mode == 'partial':
+        raise ValueError('Scoring is already a partial-cut task; choose full or uncut')
     if duration <= 0 or duration > full_duration or abs(round(duration / config.dt) * config.dt - duration) > 1e-12:
         raise ValueError('Duration must fit the protocol and contain an integer number of steps')
     source_root = Path(__file__).resolve().parent
     manifest = {
         'schema_version': 1, 'status': 'running', 'mode': mode, 'config': asdict(config),
         'duration_s': duration, 'probe_time_s': probe_time, 'task': task,
-        'acceptance': BANANA_ACCEPTANCE if task != 'tofu' else ACCEPTANCE,
+        'acceptance': (SCORING_ACCEPTANCE if task == 'tofu-scoring' else
+                       BANANA_ACCEPTANCE if task != 'tofu' else ACCEPTANCE),
         'paper': 'https://arxiv.org/abs/2609.27342v2',
         'implementation': 'independent CPU TLMPM reference, synthetic parameters',
         'source_sha256': {name: hashlib.sha256((source_root / name).read_bytes()).hexdigest()
@@ -82,7 +95,7 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
             snapshots[key].append(value.copy())
         snapshots['time'].append(t)
 
-    if task != 'tofu':
+    if task in ('banana', 'tofu-sequential'):
         sim.blade_x[0] = -.03 if task == 'banana' else .015
         sim.blade_x[2] = .036 + sim.half_size[2]
     snapshot(0.)
@@ -92,21 +105,26 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
     try:
         for step in range(round(duration / config.dt)):
             t = step * config.dt
-            probe = np.array([.12, 0., .1]) if step == round(probe_time / config.dt) else None
+            probe = (np.array([.12, 0., .1]) if probe_time is not None and
+                     step == round(probe_time / config.dt) else None)
             if task == 'tofu-sequential' and probe is not None:
                 probe = np.array([-.12, 0., 0.])
-            if task != 'tofu':
+            blade_yaw = 0.
+            if task == 'tofu-scoring':
+                target, cut_index, cutting, blade_yaw = scoring_target(t, mode)
+                probe_mask = None
+            elif task != 'tofu':
                 target, cut_index, cutting = sequential_target(t, mode, task)
-                if cut_index != previous_cut:
-                    sim.damage.fill(0.)  # Paper: reset progress, retain all earlier ternary digits.
-                    previous_cut = cut_index
                 probe_mask = (sim.reference[:, 0] > .03 if task == 'banana' else
                               sim.reference[:, 0] < -.015)
             else:
                 target, cut_index = target_edge(t, mode, config.size[2]), 0
                 cutting, probe_mask = mode != 'uncut' and .3 <= t < 1.6, None
+            if cut_index != previous_cut:
+                sim.damage.fill(0.)  # Reset progress, retain every earlier ternary digit.
+                previous_cut = cut_index
             observed = sim.step(target, cutting=cutting, probe_velocity=probe,
-                                probe_mask=probe_mask, cut_index=cut_index)
+                                probe_mask=probe_mask, cut_index=cut_index, blade_yaw=blade_yaw)
             observed.update(cut_index=cut_index, cutting_active=cutting)
             trace.append(observed)
             if (step + 1) % stride == 0 or step + 1 == round(duration / config.dt):
@@ -142,7 +160,7 @@ def main():
     parser.add_argument('--mode', choices=('full', 'partial', 'uncut'), default='full')
     parser.add_argument('--dt', type=float)
     parser.add_argument('--grid-spacing', type=float)
-    parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential'), default='tofu')
+    parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'), default='tofu')
     parser.add_argument('--duration', type=float, default=None, help='Short probes do not establish task completion')
     args = parser.parse_args()
     banana = args.task == 'banana'
@@ -156,6 +174,11 @@ def main():
     elif args.task == 'tofu-sequential':
         options.update(size=(.09, .03, .03), blade_half_size=(.00025, .025, .02),
                        blade_bevel_height=.005,
+                       dt=args.dt if args.dt is not None else .00025)
+    elif args.task == 'tofu-scoring':
+        options.update(size=(.045, .045, .03), blade_half_size=(.00025, .0275, .02),
+                       blade_bevel_height=.005,
+                       grid_spacing=args.grid_spacing if args.grid_spacing is not None else .005,
                        dt=args.dt if args.dt is not None else .00025)
     run(args.output, CutConfig(**options), args.mode, args.duration, args.task)
 

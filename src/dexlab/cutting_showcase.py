@@ -147,14 +147,11 @@ class CuttingScene:
         texture_coordinates.SetPoint2(-width_mm/2, depth_mm/2, 0)
         board.GetMapper().SetInputConnection(texture_coordinates.GetOutputPort())
         board.SetTexture(wood_texture())
-        if task == 'tofu-sequential':
-            board.SetTexture(None)
-            board.GetProperty().SetColor(.91, .93, .92)
         board.GetProperty().SetAmbient(.35)
         board.GetProperty().SetDiffuse(.6)
         board.GetProperty().SetSpecular(.08)
         board.GetProperty().SetSpecularPower(20)
-        cube(self.renderer, (500, 400, 5), (0, 0, -10), (.85, .89, .885))
+        floor = cube(self.renderer, (500, 400, 5), (0, 0, -10), (.85, .89, .885))
         self.half = np.asarray(config['blade_half_size']) * 1000
         self.blade = knife_actor(self.renderer, self.half, config.get('blade_bevel_height', 0) * 1000)
         self.blade.GetProperty().SetSpecular(.95)
@@ -183,18 +180,44 @@ class CuttingScene:
         camera.ParallelProjectionOn()
         camera.SetParallelScale(57 if banana else 54)
         if task == 'tofu-sequential':
-            camera.SetPosition(10, -240, 180)
-            camera.SetFocalPoint(0, 0, 20)
-            camera.SetParallelScale(47)
+            # Match the reference presentation, retaining native dimensions
+            # and particle inventory. Geometry is never rescaled for appearance.
+            self.renderer.GradientBackgroundOff()
+            self.renderer.SetBackground(.94, .94, .93)
+            ao.SetRadius(.8)
+            board.SetVisibility(False)
+            floor.SetPosition(0, 0, -2.62)
+            floor.GetProperty().SetColor(.94, .94, .93)
+            floor.GetProperty().SetAmbient(.8)
+            floor.GetProperty().SetDiffuse(.2)
+            self.handle.SetVisibility(False)
+            self.bolster.SetVisibility(False)
+            self.blade.GetProperty().SetColor(.77, .79, .79)
+            self.particles.GetProperty().SetAmbient(.78)
+            self.particles.GetProperty().SetDiffuse(.22)
+            camera.SetPosition(15, -300, 190)
+            camera.SetFocalPoint(0, 0, 15)
+            camera.SetParallelScale(90)
             # These floor markers stay in reference space; they never follow a piece.
             for x, color in [(-30, (.55, .47, .75)), (0, (.92, .63, .35)), (30, (.40, .65, .79))]:
                 cube(self.renderer, (.45, 20, .12), (x, -28, -.12), color)
+        elif task == 'tofu-scoring':
+            self.body.GetProperty().SetAmbient(.65)
+            self.body.GetProperty().SetDiffuse(.3)
+            ao.SetRadius(1.2)
+            ao.SetBias(.02)
+            antialias = vtk.vtkSSAAPass()
+            antialias.SetDelegatePass(ao)
+            self.renderer.SetPass(antialias)
+            camera.SetPosition(200, -80, 280)
+            camera.SetFocalPoint(0, 0, 17)
+            camera.SetParallelScale(48)
         self.capture = vtk.vtkWindowToImageFilter()
         self.capture.SetInput(self.window)
         self.capture.SetInputBufferTypeToRGB()
         self.capture.ReadFrontBufferOff()
 
-    def update(self, vertices, faces, rest, cut_vertices, positions, codes, blade):
+    def update(self, vertices, faces, rest, cut_vertices, positions, codes, blade, blade_yaw=0.):
         mesh = polydata(vertices*1000, faces)
         triangle = vtk.vtkTriangleFilter()
         triangle.SetInputData(mesh)
@@ -244,17 +267,23 @@ class CuttingScene:
         particles.SetPoints(points)
         palette = np.array([[.90,.76,.47],[.24,.58,.70],[.95,.58,.31],[.51,.70,.47],[.68,.52,.76]])
         if self.task == 'tofu-sequential':
-            palette = np.array([[.94, .91, .81], [.85, .80, .94], [.98, .85, .68], [.75, .88, .95]])
-            # Native persistent side digits, not a prescribed spatial separation.
-            colour_index = np.where(codes == 0, 0, np.where(codes // 3 % 3 == 1, 1,
-                                     np.where(codes % 3 == 2, 3, 2)))
+            palette = np.array([[.94, .915, .82]])
+            colour_index = np.zeros(len(codes), dtype=int)
+        elif self.task == 'tofu-scoring':
+            # Colour reveals recorded histories even when elastic faces reclose.
+            # The unassigned lower bridge remains cream; no position is changed.
+            palette = np.array([[.94, .915, .82], [.35, .65, .76], [.92, .61, .32],
+                                [.60, .80, .84], [.98, .78, .46]])
+            first, second = codes % 3, codes // 3 % 3
+            colour_index = np.where(first > 0, first, second)
+            colour_index[second == 2] += 2
         else:
             colour_index = codes % len(palette)
         particles.GetPointData().SetScalars(numpy_to_vtk((255*palette[colour_index]).astype(np.uint8), deep=True))
         sphere = vtk.vtkSphereSource()
         sphere.SetRadius(self.config['grid_spacing']*250)
-        sphere.SetThetaResolution(10)
-        sphere.SetPhiResolution(8)
+        sphere.SetThetaResolution(16)
+        sphere.SetPhiResolution(12)
         glyph = vtk.vtkGlyph3DMapper()
         glyph.SetInputData(particles)
         glyph.SetSourceConnection(sphere.GetOutputPort())
@@ -263,6 +292,8 @@ class CuttingScene:
         self.blade.SetPosition(*(blade*1000))
         self.bolster.SetPosition(*(blade*1000 + [0, 0, self.half[2]+1.5]))
         self.handle.SetPosition(*(blade*1000 + [0, 0, self.half[2]+16.5]))
+        for actor in (self.blade, self.bolster, self.handle):
+            actor.SetOrientation(0., 0., np.degrees(blade_yaw))
         self.renderer.ResetCameraClippingRange()
         return 0.
 
@@ -276,8 +307,25 @@ class CuttingScene:
         width, height, _ = output.GetDimensions()
         return vtk_to_numpy(output.GetPointData().GetScalars()).reshape(height, width, 3)[::-1].copy()
 
+    def projected_bounds(self, positions):
+        """Screen rectangle of a measured particle region, including proxy radii."""
+        radius = self.config['grid_spacing'] * 250
+        low, high = positions.min(axis=0)*1000-radius, positions.max(axis=0)*1000+radius
+        points = []
+        for x in (low[0], high[0]):
+            for y in (low[1], high[1]):
+                for z in (low[2], high[2]):
+                    self.renderer.SetWorldPoint(x, y, z, 1.)
+                    self.renderer.WorldToDisplay()
+                    px, py, _ = self.renderer.GetDisplayPoint()
+                    points.append((px, self.window.GetSize()[1]-py))
+        points = np.asarray(points)
+        return (*points.min(axis=0), *points.max(axis=0))
 
-def caption(rgb, title, time, duration, view, metrics, task, particle_count):
+
+def caption(rgb, title, time, duration, view, metrics, task, particle_count, annotation=None):
+    if task == 'tofu-sequential':
+        return comparison_caption(rgb, time, metrics, view, annotation)
     image = Image.new('RGB', (rgb.shape[1], rgb.shape[0]+180), (248, 249, 246))
     image.paste(Image.fromarray(rgb), (0, 0))
     draw = ImageDraw.Draw(image)
@@ -286,37 +334,73 @@ def caption(rgb, title, time, duration, view, metrics, task, particle_count):
     number = ImageFont.truetype('DejaVuSans.ttf', 36)
     draw.rectangle((0, 0, image.width, 83), fill=(248, 250, 248))
     draw.text((26, 18), title, font=font, fill=(31, 49, 48))
-    draw.text((26, 54), f'{view} | {particle_count:,} native particles | {metrics["phase"]}', font=small, fill=(83, 104, 101))
+    shown_view = 'Cut histories' if task == 'tofu-scoring' and view == 'Particles' else view
+    draw.text((26, 54), f'{shown_view} | {particle_count:,} native particles | {metrics["phase"]}', font=small, fill=(83, 104, 101))
     draw.rounded_rectangle((image.width-150, 20, image.width-20, 60), radius=7, fill=(245, 248, 246))
     draw.text((image.width-138, 24), f'{time:.2f} s', font=font, fill=(38, 62, 59))
     top = rgb.shape[0]
     draw.line((26, top, image.width-26, top), fill=(188, 205, 198), width=2)
     gaps = metrics['face_opening_mm']
-    fields = [('Cut 1 opening', '--' if gaps[0] is None else f'{gaps[0]:+.3f} mm')]
-    if task == 'tofu-sequential':
-        fields.append(('Cut 2 opening', '--' if gaps[1] is None else f'{gaps[1]:+.3f} mm'))
-    else:
-        fields.append(('Knife reaction', f'{metrics["knife_material_force_n"]:.3f} N'))
-    fields.append(('Middle volume' if task == 'tofu-sequential' else 'Interior volume',
-                   f'{metrics["interior_volume_change_percent"]:+.3f}%'))
+    fields = [('Cut 1 opening', '--' if gaps[0] is None else f'{gaps[0]:+.3f} mm'),
+              ('Knife reaction', f'{metrics["knife_material_force_n"]:.3f} N'),
+              ('Interior volume', f'{metrics["interior_volume_change_percent"]:+.3f}%')]
     if task == 'banana':
         fields = [(f'Cut {cut+1} opening', '--' if gap is None else f'{gap:+.3f} mm')
                   for cut, gap in enumerate(gaps)]
+    if task == 'tofu-scoring':
+        fields = [(f'Score {cut+1} opening', '--' if gap is None else f'{gap:+.3f} mm')
+                  for cut, gap in enumerate(gaps)] + [('Knife depth', f'{metrics["blade_depth_mm"]:.2f} mm')]
     for x, (label, value) in zip((26, 344, 662), fields, strict=True):
         draw.text((x, top+13), label, font=small, fill=(83, 104, 101))
         draw.text((x, top+41), value, font=number, fill=(30, 77, 64))
     displacement = metrics['centroid_x_from_probe_mm']
-    names = ('L', 'M', 'R') if task == 'tofu-sequential' else tuple(str(i+1) for i in range(len(gaps)+1))
+    names = tuple(str(i+1) for i in range(len(gaps)+1))
     motion = 'After impulse: ' + ('pending' if displacement is None else '   '.join(
         f'{name} {value:+.2f}' for name, value in zip(names, displacement, strict=True)) + ' mm')
+    if task == 'tofu-scoring':
+        motion = (f'Connected pieces: {metrics["native_components"]}  |  Base: '
+                  + ('intact' if metrics['base_intact'] else 'CHECK FAILED'))
     draw.text((26, top+96), motion, font=font, fill=(31, 49, 48))
     footnote = (f'Knife {metrics["knife_material_force_n"]:.3f} N | interior volume '
                 f'{metrics["interior_volume_change_percent"]:+.3f}% | synthetic material'
                 if task == 'banana' else 'Saved-state measurements | synthetic material | affine face / interior tetrahedra')
+    if task == 'tofu-scoring':
+        footnote = 'Mean interior openings | elastic surface can reclose | native cut histories persist'
     draw.text((26, top+137), footnote,
               font=small, fill=(83, 104, 101))
     draw.line((26, image.height-8, image.width-26, image.height-8), fill=(188, 205, 198), width=3)
     draw.line((26, image.height-8, 26+(image.width-52)*time/duration, image.height-8), fill=(46, 101, 87), width=3)
+    return np.asarray(image)
+
+
+def comparison_caption(rgb, time, metrics, view, bounds=None):
+    """Reference-sized neutral scene with readable measurements in its margins."""
+    image = Image.fromarray(rgb)
+    draw = ImageDraw.Draw(image)
+    label = ImageFont.truetype('DejaVuSans.ttf', 21)
+    number = ImageFont.truetype('DejaVuSans.ttf', 32)
+    ink, secondary = (52, 58, 59), (96, 101, 101)
+    draw.text((24, 16), f'DexLab  /  {view}  /  {metrics["phase"]}', font=label, fill=ink)
+    draw.text((image.width-145, 12), f'{time:.2f} s', font=number, fill=ink)
+    if bounds is not None and time >= 4.:
+        orange = (211, 121, 35)
+        draw.rectangle(bounds, outline=orange, width=2)
+        draw.text((bounds[2]+12, bounds[1]-32),
+                  f'{-metrics["interior_volume_change_percent"]:.3f}%', font=number, fill=orange)
+    top = image.height - 112
+    draw.rectangle((0, top-8, image.width, image.height), fill=(241, 241, 238))
+    gap = metrics['face_opening_mm'][0]
+    fields = [('Cut 1 opening', '--' if gap is None else f'{gap:+.3f} mm'),
+              ('Middle contraction', f'{-metrics["interior_volume_change_percent"]:.3f}%')]
+    for x, (name, value) in zip((24, 500), fields, strict=True):
+        draw.text((x, top), name, font=label, fill=secondary)
+        draw.text((x, top+27), value, font=number, fill=ink)
+    displacement = metrics['centroid_x_from_probe_mm']
+    line = 'Left-piece impulse at 4.20 s'
+    if displacement is not None:
+        line = 'dx (mm):  ' + '   '.join(f'{name} {value:+.3f}' for name, value in
+                                       zip(('L', 'M', 'R'), displacement, strict=True))
+    draw.text((24, top+75), line, font=label, fill=ink)
     return np.asarray(image)
 
 
@@ -349,11 +433,12 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
     config = manifest['config']
     task = manifest.get('task', 'tofu')
     title = {'banana': 'Banana / three cuts', 'tofu': 'Tofu / cut in half',
-             'tofu-sequential': 'Tofu / two cuts + left impulse'}[task]
+             'tofu-sequential': 'Tofu / two cuts + left impulse',
+             'tofu-scoring': 'Tofu / crossed shallow cuts'}[task]
     measurements = ReplayMeasurements(states, trace, manifest)
     surface = (BananaSkin(states['reference']) if task == 'banana' else
                MaterialSurface(states['reference'], config['grid_spacing']/2))
-    scene = CuttingScene(config, task=task)
+    scene = CuttingScene(config, task=task, height=600 if task == 'tofu-sequential' else 520)
     selected = list(range(0, len(states['time']), stride))
     if selected[-1] != len(states['time'])-1:
         selected.append(len(states['time'])-1)
@@ -378,16 +463,22 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
                     states['deformation'][i] if 'deformation' in states else None)
             trace_index = max(0, round(time/config['dt'])-1)
             maximum_smoothing_mm = max(maximum_smoothing_mm, scene.update(
-                vertices, faces, rest, cut_vertices, states['position'][i], states['sides'][i], trace['blade_position_m'][trace_index]))
+                vertices, faces, rest, cut_vertices, states['position'][i], states['sides'][i],
+                trace['blade_position_m'][trace_index],
+                trace['blade_yaw_rad'][trace_index] if 'blade_yaw_rad' in trace else 0.))
             for view in ('surface', 'particles'):
-                rgb = caption(scene.frame(view == 'particles'), title, time, states['time'][-1],
-                              view.capitalize(), measured, task, len(states['reference']))
+                scene_frame = scene.frame(view == 'particles')
+                bounds = (scene.projected_bounds(states['position'][i][measurements.regions == 1])
+                          if task == 'tofu-sequential' else None)
+                rgb = caption(scene_frame, title, time, states['time'][-1],
+                              view.capitalize(), measured, task, len(states['reference']), bounds)
                 if preview:
                     Image.fromarray(rgb).save(output/f'{view}-{i:04d}.png')
                 else:
                     writers[view].append_data(rgb)
-                    gif_frames[view].append(Image.fromarray(rgb).resize((720, 525), Image.Resampling.LANCZOS))
-                    if i == selected[-1]:
+                    gif_height = round(720 * rgb.shape[0] / rgb.shape[1])
+                    gif_frames[view].append(Image.fromarray(rgb).resize((720, gif_height), Image.Resampling.LANCZOS))
+                    if i == (selected[0] if task == 'tofu-sequential' else selected[-1]):
                         Image.fromarray(rgb).save(output/f'{view}-poster.png')
             if i % (stride*20) == 0:
                 print(f'{task}: rendered {time:.2f} s', flush=True)
@@ -406,12 +497,15 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
                            (Path(__file__), Path(__file__).with_name('cutting_surface.py'),
                             Path(__file__).with_name('cutting_metrics.py'))},
         'frames': len(selected), 'fps': fps, 'physical_duration_s': float(states['time'][-1]),
+        'poster_state_frame': selected[0] if task == 'tofu-sequential' else selected[-1],
+        'particle_colours': ('Native ternary cut histories; cream means unassigned. Elastic surface closure does not erase history.'
+                             if task == 'tofu-scoring' else 'Cream native particles for sequential tofu; history palette for other tasks.'),
         'playback_duration_s': len(selected)/fps, 'vtk_version': vtk.vtkVersion.GetVTKVersion(),
         'gif_playback': {'duration_per_frame_ms': 120, 'native_state_frames': selected,
                          'description': 'Uniformly slowed recorded frames; no interpolated motion or invented physical time.'},
         'surface': 'Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Fixed reference seams at the three supported straight-cut planes expose local cap triangles only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. This fixed-seam approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.',
         'maximum_display_smoothing_displacement_mm': maximum_smoothing_mm,
-        'description': 'Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation.',
+        'description': 'Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Sequential tofu uses a neutral ground and cream native particles with no board/handle. Its orange rectangle projects the middle native region including proxy radii; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.',
         'artifacts': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.iterdir())}}
     (output/'provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')
 
