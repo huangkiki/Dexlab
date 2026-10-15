@@ -34,6 +34,8 @@
 
 [English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](experience.md) · [诊断与试参方法](diagnosis.md) · [场景选型指南](selection.md)
 
+**先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
+
 <!-- visual-research:start -->
 (visual-experiment-catalogue)=
 ## 做了哪些实验

@@ -37,3 +37,7 @@
 ## 维护方式
 
 明确新标签角色后，凭来源更新 `docs/solver-taxonomy.json` 的分引擎映射；此前未知标签继续显示。通过 `scripts/build_visual_research.py` 同步生成中英 README 与首页，运行分类专项测试及已有完整适用门禁。展示词表不授予实验资格，也不改变任务覆盖。[当前工作入口](current-work.zh-CN.md)统一维护优先级和暂停状态。
+
+## 学习入口
+
+**先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。

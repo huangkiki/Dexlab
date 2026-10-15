@@ -37,3 +37,7 @@ For unavailable or unpublished implementations, identify whether a statement is 
 ## Maintenance
 
 Update `docs/solver-taxonomy.json` with a source-backed engine-specific role before presenting a newly understood label. Unknown labels remain visible until then. Regenerate both READMEs and site homepages with `scripts/build_visual_research.py`; run the focused taxonomy tests and the existing full applicable submission gate. The display vocabulary never grants qualification or changes task coverage. [Current work](current-work.md) keeps priorities and the pause state in one place.
+
+## Learning route
+
+**Learn before reading the configuration table:** [Sim Learning](https://github.com/huangkiki/sim-learning) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks remain separate from DexLab experimental qualification.
