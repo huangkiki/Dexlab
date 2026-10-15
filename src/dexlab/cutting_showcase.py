@@ -324,6 +324,8 @@ class CuttingScene:
 
 
 def caption(rgb, title, time, duration, view, metrics, task, particle_count, annotation=None):
+    if metrics['motion_protocol'] in ('cut-push', 'cut-no-push'):
+        return cut_push_caption(rgb, time, duration, view, metrics, task)
     if task == 'tofu-sequential':
         return comparison_caption(rgb, time, metrics, view, annotation)
     image = Image.new('RGB', (rgb.shape[1], rgb.shape[0]+180), (248, 249, 246))
@@ -370,6 +372,44 @@ def caption(rgb, title, time, duration, view, metrics, task, particle_count, ann
               font=small, fill=(83, 104, 101))
     draw.line((26, image.height-8, image.width-26, image.height-8), fill=(188, 205, 198), width=3)
     draw.line((26, image.height-8, 26+(image.width-52)*time/duration, image.height-8), fill=(46, 101, 87), width=3)
+    return np.asarray(image)
+
+
+def cut_push_caption(rgb, time, duration, view, metrics, task):
+    """Show measured contact and every piece throughout the continuous action."""
+    image = Image.new('RGB', (rgb.shape[1], rgb.shape[0] + 190), (248, 249, 246))
+    image.paste(Image.fromarray(rgb), (0, 0))
+    draw = ImageDraw.Draw(image)
+    label = ImageFont.truetype('DejaVuSans.ttf', 22)
+    number = ImageFont.truetype('DejaVuSans.ttf', 30)
+    ink, secondary = (31, 49, 48), (83, 104, 101)
+    title = 'Tofu / two cuts, then push' if task == 'tofu-sequential' else 'Banana / three cuts, then push'
+    draw.rectangle((0, 0, image.width, 80), fill=(248, 249, 246))
+    draw.text((24, 12), title, font=number, fill=ink)
+    draw.text((24, 49), f'{view} | eta {metrics["dynamic_viscosity_pa_s"]:g} Pa s | {metrics["phase"]}',
+              font=label, fill=secondary)
+    draw.text((image.width - 145, 12), f'{time:.2f} s', font=number, fill=ink)
+    top = rgb.shape[0]
+    draw.line((24, top, image.width - 24, top), fill=(188, 205, 198), width=2)
+    force = metrics['knife_on_material_n']
+    fields = [('Knife contact |F|', f'{metrics["knife_material_force_n"]:.3f} N'),
+              ('On material Fx', f'{force[0]:+.3f} N'),
+              ('On material Fz', f'{force[2]:+.3f} N')]
+    for column, (name, value) in enumerate(fields):
+        x = 24 + column * 310
+        draw.text((x, top + 9), name, font=label, fill=secondary)
+        draw.text((x, top + 36), value, font=number, fill=ink)
+    displacement = metrics['centroid_x_from_start_mm']
+    names = ('Left', 'Middle', 'Right') if len(displacement) == 3 else ('Piece 1', 'Piece 2', 'Piece 3', 'Piece 4')
+    for column, (name, value) in enumerate(zip(names, displacement, strict=True)):
+        x = 24 + column * (image.width - 48) // len(displacement)
+        draw.text((x, top + 85), name + ' dx', font=label, fill=secondary)
+        draw.text((x, top + 112), f'{value:+.3f} mm', font=number, fill=ink)
+    draw.text((24, top + 157), 'dx from initial state | pieces left to right | measured contact | synthetic material',
+              font=ImageFont.truetype('DejaVuSans.ttf', 19), fill=secondary)
+    draw.line((24, image.height - 6, image.width - 24, image.height - 6), fill=(188, 205, 198), width=3)
+    draw.line((24, image.height - 6, 24 + (image.width - 48) * time / duration, image.height - 6),
+              fill=(46, 101, 87), width=3)
     return np.asarray(image)
 
 
@@ -440,10 +480,14 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
              'tofu-scoring': 'Tofu / crossed shallow cuts'}[task]
     if task == 'tofu-sequential' and manifest.get('motion_protocol') in ('knife-push', 'no-push'):
         title = 'Tofu / two cuts + ' + manifest['motion_protocol']
+    if manifest.get('motion_protocol') in ('cut-push', 'cut-no-push'):
+        title = ('Banana / three cuts + ' if task == 'banana' else 'Tofu / two cuts + ') + manifest['motion_protocol']
     measurements = ReplayMeasurements(states, trace, manifest)
     surface = (BananaSkin(states['reference']) if task == 'banana' else
                MaterialSurface(states['reference'], config['grid_spacing']/2))
-    scene = CuttingScene(config, task=task, height=600 if task == 'tofu-sequential' else 520)
+    continuous = manifest.get('motion_protocol') in ('cut-push', 'cut-no-push')
+    scene = CuttingScene(config, task=('tofu' if continuous and task == 'tofu-sequential' else task),
+                         height=600 if task == 'tofu-sequential' and not continuous else 520)
     selected = list(range(0, len(states['time']), stride))
     if selected[-1] != len(states['time'])-1:
         selected.append(len(states['time'])-1)
@@ -510,7 +554,7 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
                          'description': 'Uniformly slowed recorded frames; no interpolated motion or invented physical time.'},
         'surface': 'Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Fixed reference seams at the three supported straight-cut planes expose local cap triangles only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. This fixed-seam approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.',
         'maximum_display_smoothing_displacement_mm': maximum_smoothing_mm,
-        'description': 'Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Sequential tofu uses a neutral ground and cream native particles with no board/handle. Its orange rectangle projects the middle native region including proxy radii; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.',
+        'description': 'Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Continuous cut-push tasks share the board/handle presentation and display measured force and all region displacements. Historical sequential tofu uses neutral ground, no board/handle, and an orange projected middle-region rectangle; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.',
         'artifacts': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.iterdir())}}
     (output/'provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')
 

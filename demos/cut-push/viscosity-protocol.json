@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "authorization": "User requested adding Newtonian viscosity on 2026-10-15; extension of issue217, PR only.",
+  "paper": "https://arxiv.org/html/2609.27342v2",
+  "source_sha256": {
+    "cutting.py": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+    "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+    "cutting_score.py": "2220f80f6d71b16c516905c720e4752a958377e422497a1d852e1f102c439478",
+    "tofu_cut.py": "3746004b486263982d19afc32b28b58a7087253366dbc517dfaf6ffad4000f91"
+  },
+  "equations": {
+    "spatial_rate": "L = grad_X(v) F^-1",
+    "symmetric_rate": "D = (L + L^T)/2",
+    "cauchy_viscous_stress": "sigma_v = 2 eta D",
+    "first_piola": "P_v = J sigma_v F^-T",
+    "substep_constitutive_dissipation_j": "dt sum_p V0_p P_v:grad_X(v) = dt sum_p 2 eta V0_p J D:D"
+  },
+  "constitutive_choice": "Zero second-viscosity coefficient, equivalent bulk viscosity 2 eta/3. Elastic stress remains fixed-corotated. Compatible current P2G velocity defines the rate before force impulses. Explicit integration.",
+  "coefficient": {
+    "dynamic_viscosity_pa_s": 5.0,
+    "source": "Synthetic predeclared coefficient, not measured food or an author-provided showcase parameter. E=6000 Pa, nu=.35 => eta/shear_modulus=.00225 s."
+  },
+  "default_dynamic_viscosity_pa_s": 0.0,
+  "banana_dynamic_viscosity_pa_s": 0.0,
+  "cases": [
+    {
+      "name": "viscosity-001-probe",
+      "task": "tofu-sequential",
+      "arguments": [
+        "--grid-spacing",
+        ".005",
+        "--viscosity",
+        "5",
+        "--dt",
+        ".00025",
+        "--duration",
+        "1.0"
+      ]
+    },
+    {
+      "name": "viscosity-002-tofu",
+      "task": "tofu-sequential",
+      "arguments": [
+        "--grid-spacing",
+        ".005",
+        "--viscosity",
+        "5",
+        "--dt",
+        ".00025"
+      ]
+    },
+    {
+      "name": "viscosity-003-tofu-half",
+      "task": "tofu-sequential",
+      "arguments": [
+        "--grid-spacing",
+        ".005",
+        "--viscosity",
+        "5",
+        "--dt",
+        ".000125"
+      ]
+    },
+    {
+      "name": "viscosity-004-tofu-half-control",
+      "task": "tofu-sequential",
+      "arguments": [
+        "--grid-spacing",
+        ".005",
+        "--viscosity",
+        "5",
+        "--dt",
+        ".000125",
+        "--motion-protocol",
+        "cut-no-push"
+      ]
+    }
+  ],
+  "acceptance": {
+    "fraction_error": 0.03,
+    "momentum_error_ns": 1e-09,
+    "minimum_det_f": 0.05,
+    "maximum_overlap_radii": 1.0,
+    "relative_motion_m": 0.001,
+    "passive_motion_m": 0.003,
+    "minimum_reaction_n": 0.001,
+    "minimum_push_impulse_ns": 0.001
+  },
+  "extra_dissipation_tolerance_j": 1e-14,
+  "selected_tofu_case": "viscosity-003-tofu-half",
+  "matched_elastic_baseline": "physics-003-tofu-half",
+  "negative_control": "Same eta5 and .125ms, complete cuts and vertical motion, no lateral drive. Expected to fail only independent_motion and knife_supplies_push_impulse.",
+  "diagnostic": {
+    "window_s": [
+      5.4,
+      6.0
+    ],
+    "sample_interval_s": 0.05,
+    "report": "Same-window native/centroid jitter, force and displacement; retain improvement or regression. Rigid rocking need not dissipate through material viscosity."
+  },
+  "zero_regression": "18 material-step comparisons (nine event states, two impulse patterns), plus unchanged seven elastic and two legacy scores. Reuses frozen raw records; no new full eta0 trajectory claimed.",
+  "limits": {
+    "calls": 6,
+    "cumulative_worker_s": 9000,
+    "per_call_s": 3000,
+    "original_phase_cap_unchanged_s": 8400,
+    "combined_reserved_physics_cap_s": 17400
+  },
+  "scope": "Synthetic tofu viscoelastic extension only; no parameter search, plasticity, material calibration, six-engine qualification, hidden velocity input or changed task thresholds."
+}

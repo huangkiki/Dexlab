@@ -1,0 +1,102 @@
+{
+  "state": "passed",
+  "checks": [
+    {
+      "time_s": 0.0,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 0.0,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 0.5,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 0.5,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 1.0,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 1.0,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 2.0,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 2.0,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 3.0,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 3.0,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 3.3,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 3.3,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 4.2,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 4.2,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 5.5,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 5.5,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 6.0,
+      "impulse_pattern": "zero",
+      "x_velocity_F_bitwise_equal": true
+    },
+    {
+      "time_s": 6.0,
+      "impulse_pattern": "balanced-random",
+      "x_velocity_F_bitwise_equal": true
+    }
+  ],
+  "source_artifacts": {
+    "states.npz": "2575d1b31dede406ddd9a24f44bc3410d3651ad8a49575c949e60f468fc5c0d0",
+    "trace.npz": "537f58a41c5031dcb27ad0102f283d2e766933d0604bffe85a5512126232feaa"
+  },
+  "baseline_source_sha256": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+  "new_source_sha256": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+  "scope": "Isolated material-step regression at nine saved event states, each with two impulse patterns. This is not a new full trajectory or a physical input applied to the showcase."
+}

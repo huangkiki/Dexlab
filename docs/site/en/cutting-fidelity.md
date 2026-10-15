@@ -14,13 +14,16 @@ The [v2 paper](https://arxiv.org/html/2609.27342v2) separates material dynamics,
 | Eqs. 10–16: proxy contact and equal/opposite tool reaction | Spherical material proxies, friction history and recorded reaction/impulse channels. The blade is guided; this is not the paper's freely rotating knife or robot controller. |
 | Appendix, Eqs. 17–18: PIC/FLIP and MUSL momentum balance | Common blend ratio and fixed mass/code within a substep; tests and saved-state scoring check total momentum against recorded external impulses. A small residual establishes numerical consistency, not food accuracy. |
 | III-F: linked reference volumes, Hermite data and local dual contouring | Tofu uses exposed material-cell faces. Banana uses an authored embedded skin with local history-aware seams at three supported straight-cut planes. Opposing native histories expose cap triangles progressively; compatible/unassigned regions within the same native mechanical component retain the bridge. Each authored interval follows its dominant native component when deformation shifts the cut away from the nominal reference plane. Exact deformed cut geometry remains approximate. This is **not** the paper's dual-contouring reconstruction or an arbitrary-cut surface. |
+| III-B: optional Newtonian viscosity | Continuous-push tofu uses `σᵥ=2ηD` with synthetic η=5 Pa·s and separate dissipation and matched-control checks; [model and results](cut-push.md). Default η=0 preserves the elastic path. Plasticity and food calibration remain unimplemented. |
 | III-G: compact active codes on GPU | Dense code storage on CPU. No GPU throughput claim. |
 
 The earlier banana render applied 40 smoothing iterations and blended normals across cut rims. Its recorded maximum display-only vertex displacement was **2.358 mm**. Those operations rounded the cut ends. The refined renderer applies **no geometric smoothing**, marks the full cap rim and splits normals at sharp edges. Surface vertices still use saved particle motion and deformation; no separation displacement is added. The current tofu comparison uses a neutral gray scene and cream native particles with fixed reference floor markers. An orange rectangle projects the middle particle region; its contraction value comes from interior tetrahedra.
 
 ## Visible knife contact replaces the direct velocity input
 
-[The current two-cut tofu replay](tofu-comparison.md) re-enters the left kerf and pushes the left piece with the knife face before withdrawing. The push phase leaves cut history unchanged and never directly modifies material velocity. Recorded native knife poses, contact force and displacement drive the display. Author reference clips retain their original initial-velocity input; these final inputs are explicitly different.
+[The historical two-cut tofu replay](tofu-comparison.md) re-enters the left kerf and pushes the left piece with the knife face before withdrawing. The push phase leaves cut history unchanged and never directly modifies material velocity. Recorded native knife poses, contact force and displacement drive the display. Author reference clips retain their original initial-velocity input; these final inputs are explicitly different.
+
+[The latest tofu and banana showcase](cut-push.md) instead stays inside the last kerf, pushes directly and then withdraws. Its HUD shows |F|, Fx/Fz and all piece displacements from the initial state. Acceptance uses the final-cut end (3.30/5.30 s). Historical event measurements below keep their own baseline.
 
 ## Added crossed shallow cuts
 

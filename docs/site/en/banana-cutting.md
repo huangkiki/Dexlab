@@ -1,5 +1,7 @@
 # Three sequential banana cuts
 
+**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and videos below retain their historical inputs; they are not the latest task.**
+
 A force-driven blade descends and withdraws at three positions, cutting a curved peeled-banana shape into four pieces. Surface and particle views replay the same physical states. Pause, scrub or switch representations to inspect each cut.
 
 ```{raw} html
@@ -58,7 +60,7 @@ The measured GIF displays all three signed cut openings and per-piece probe disp
 Install `.[cutting,cutting-render]` in the existing DexLab environment. Under the repository's bounded runner and shared research lock, use new output directories:
 
 ```bash
-python -m dexlab.tofu_cut --task banana --output RUN
+python -m dexlab.tofu_cut --task banana --motion-protocol impulse --output RUN
 python -m dexlab.cutting_score RUN
 python -m dexlab.cutting_showcase RUN --output MEDIA
 ```

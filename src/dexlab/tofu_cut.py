@@ -66,20 +66,38 @@ def knife_push_target(t):
                      0., np.interp(t, times, [.036, .002, .002, .036, .036])])
 
 
+def cut_push_target(t, task, *, push=True):
+    """Keep the final blade inside the kerf and transition directly to a face push.
+
+    First clear the board by 2 mm without leaving the material. The no-push
+    control follows the same vertical motion, with no lateral drive.
+    """
+    banana = task == 'banana'
+    start, x, direction = (5.3, .03, 1) if banana else (3.3, -.015, -1)
+    times = [start, start + .2, start + 1.4, start + 2., start + 2.7]
+    end = x + direction * .012 if push else x
+    return np.array([np.interp(t, times, [x, x, end, end, end]), 0.,
+                     np.interp(t, times, [-.004, .002, .002, .036, .036])])
+
+
 def run(directory, config, mode='full', duration=None, task='tofu', motion_protocol=None):
     if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
         raise ValueError('Unknown task')
     full_duration, probe_time = {'banana': (7., 6.2), 'tofu-sequential': (5., 4.2),
                                  'tofu': (DURATION, PROBE_TIME), 'tofu-scoring': (4.2, None)}[task]
     if motion_protocol is None:
-        motion_protocol = 'knife-push' if task == 'tofu-sequential' else 'impulse'
-    if motion_protocol not in ('impulse', 'knife-push', 'no-push'):
+        motion_protocol = 'cut-push' if task in ('tofu-sequential', 'banana') else 'impulse'
+    if motion_protocol not in ('impulse', 'knife-push', 'no-push', 'cut-push', 'cut-no-push'):
         raise ValueError('Unknown motion protocol')
     contact_motion = motion_protocol != 'impulse'
-    if contact_motion and task != 'tofu-sequential':
-        raise ValueError('Knife-push protocols require sequential tofu')
+    continuous = motion_protocol in ('cut-push', 'cut-no-push')
+    if contact_motion and task not in (('tofu-sequential', 'banana') if continuous else ('tofu-sequential',)):
+        raise ValueError('Knife-push protocols require a supported sequential task')
     if contact_motion:
         full_duration, probe_time = 7., None
+    if continuous:
+        full_duration = 8. if task == 'banana' else 6.
+    motion_start = (5.3 if task == 'banana' else 3.3) if continuous else 4.
     duration = full_duration if duration is None else duration
     if (config.shape == 'banana') != (task == 'banana'):
         raise ValueError('Task and geometry do not match')
@@ -105,9 +123,9 @@ def run(directory, config, mode='full', duration=None, task='tofu', motion_proto
         'packages': {name: importlib.metadata.version(name) for name in ('numpy', 'scipy', 'numba')},
         'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=source_root, text=True).strip(),
     }
-    if task == 'tofu-sequential':
+    if task == 'tofu-sequential' or continuous:
         manifest.update(motion_protocol=motion_protocol,
-                        motion_start_time_s=4. if contact_motion else probe_time)
+                        motion_start_time_s=motion_start if contact_motion else probe_time)
     write_json(directory / 'manifest.json', manifest)
     start = time.monotonic()
     sim = CuttingSimulation(config)
@@ -141,6 +159,9 @@ def run(directory, config, mode='full', duration=None, task='tofu', motion_proto
                 target, cut_index, cutting = sequential_target(t, mode, task)
                 if motion_protocol == 'knife-push' and t >= 4.:
                     target = knife_push_target(t)
+                if continuous and t >= motion_start:
+                    target = cut_push_target(t, task, push=motion_protocol == 'cut-push')
+                    cutting = False
                 probe_mask = (sim.reference[:, 0] > .03 if task == 'banana' else
                               sim.reference[:, 0] < -.015)
             else:
@@ -186,13 +207,16 @@ def main():
     parser.add_argument('--mode', choices=('full', 'partial', 'uncut'), default='full')
     parser.add_argument('--dt', type=float)
     parser.add_argument('--grid-spacing', type=float)
+    parser.add_argument('--viscosity', type=float, default=0.0,
+                        help='Newtonian dynamic viscosity in Pa s; 0 preserves the pure-elastic baseline')
     parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'), default='tofu')
     parser.add_argument('--duration', type=float, default=None, help='Short probes do not establish task completion')
-    parser.add_argument('--motion-protocol', choices=('knife-push', 'no-push', 'impulse'),
-                        help='Sequential tofu defaults to knife-push; impulse preserves the historical velocity probe')
+    parser.add_argument('--motion-protocol', choices=('cut-push', 'cut-no-push', 'knife-push', 'no-push', 'impulse'),
+                        help='Sequential tasks default to cut-push; legacy protocols remain reproducible')
     args = parser.parse_args()
     banana = args.task == 'banana'
     options = {
+        'dynamic_viscosity': args.viscosity,
         'dt': args.dt if args.dt is not None else (.00025 if banana else .0005),
         'grid_spacing': args.grid_spacing if args.grid_spacing is not None else (.006 if banana else .0075),
     }

@@ -8,6 +8,8 @@
 
 Three guided cuts, four pieces, persistent ternary cut history and a dynamic blade/material reaction loop. Synthetic geometry and parameters; no real-food calibration, arm or learned policy.
 
-Use `python -m dexlab.tofu_cut --task banana --output RUN` inside the repository's bounded execution guard. Independently score with `python -m dexlab.cutting_score RUN`, then render the saved states with `python -m dexlab.cutting_showcase RUN --output MEDIA`. See the linked experiment for frozen parameters, negative controls, resource limits and complete reproduction instructions.
+Use `python -m dexlab.tofu_cut --task banana --motion-protocol impulse --output RUN` inside the repository's bounded execution guard. Independently score with `python -m dexlab.cutting_score RUN`, then render the saved states with `python -m dexlab.cutting_showcase RUN --output MEDIA`. See the linked experiment for frozen parameters, negative controls, resource limits and complete reproduction instructions.
 
 [Evidence, including failed development attempts](evidence.json) · [Raw archives](https://github.com/huangkiki/Dexlab/releases/tag/v0.62.0)
+
+[Latest continuous knife-face push / 最新连续刀面推动](../cut-push/README.md).

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "motion_protocol": "cut-push",
+  "cases": [
+    [
+      "physics-001-tofu",
+      "tofu-sequential",
+      [
+        "--grid-spacing",
+        ".005"
+      ]
+    ],
+    [
+      "physics-002-banana",
+      "banana",
+      []
+    ],
+    [
+      "physics-003-tofu-half",
+      "tofu-sequential",
+      [
+        "--grid-spacing",
+        ".005",
+        "--dt",
+        ".000125"
+      ]
+    ],
+    [
+      "physics-004-banana-half",
+      "banana",
+      [
+        "--dt",
+        ".000125"
+      ]
+    ],
+    [
+      "physics-005-tofu-control",
+      "tofu-sequential",
+      [
+        "--grid-spacing",
+        ".005",
+        "--motion-protocol",
+        "cut-no-push"
+      ]
+    ],
+    [
+      "physics-006-banana-control",
+      "banana",
+      [
+        "--motion-protocol",
+        "cut-no-push"
+      ]
+    ]
+  ],
+  "physics_sha256": {
+    "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+    "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+    "cutting_score.py": "b5eac506c764842c2b65424f55314aaf3167ac4f64681d4094c029cf0d089790",
+    "tofu_cut.py": "405eca7eb0a02847d9a8f424f22eeeba12407cefae6c6ef52a2cd003cd7ddea6"
+  },
+  "input_source": "Existing synthetic CPU TLMPM material, geometry and knife. No engine modification or real-food calibration.",
+  "controls": {
+    "tofu": {
+      "start_s": 3.3,
+      "last_cut_x_m": -0.015,
+      "direction": -1,
+      "duration_s": 6.0
+    },
+    "banana": {
+      "start_s": 5.3,
+      "last_cut_x_m": 0.03,
+      "direction": 1,
+      "duration_s": 8.0
+    },
+    "time_after_last_cut_s": [
+      0.0,
+      0.2,
+      1.4,
+      2.0,
+      2.7
+    ],
+    "edge_z_m": [
+      -0.004,
+      0.002,
+      0.002,
+      0.036,
+      0.036
+    ],
+    "lateral_offset_m": [
+      0.0,
+      0.0,
+      0.012,
+      0.012,
+      0.012
+    ],
+    "material_velocity_injection": false,
+    "cutting_during_push": false
+  },
+  "acceptance": {
+    "fraction_error": 0.03,
+    "momentum_error_ns": 1e-09,
+    "minimum_det_f": 0.05,
+    "maximum_overlap_radii": 1.0,
+    "relative_motion_m": 0.001,
+    "passive_motion_m": 0.003,
+    "minimum_reaction_n": 0.001,
+    "minimum_push_impulse_ns": 0.001
+  },
+  "negative_control": "Same vertical drive and complete cutting; no lateral drive. Must fail motion and push impulse, while retaining numerical/topology checks.",
+  "limits": {
+    "calls": 8,
+    "cumulative_worker_s": 8400,
+    "per_call_s": 1800
+  },
+  "half_step_scope": "Timestep sensitivity, not convergence. Historical cases retain original score semantics.",
+  "matrix_scope": "Two synthetic cutting tasks only. No new six-native-engine cutting qualification or author-matched comparison."
+}

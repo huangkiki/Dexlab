@@ -1,5 +1,7 @@
 # Two tofu cuts and a knife-face push
 
+**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and videos below retain their historical inputs; they are not the latest task.**
+
 The current replay makes the source of post-cut motion visible: the knife returns to the left kerf and pushes the left piece sideways. Actuator forces and material reactions jointly integrate the blade; material velocity is never directly changed. Banana slicing and cross scoring remain separate tasks.
 
 ```{raw} html
@@ -77,7 +79,7 @@ The independent scorer uses saved reference stencils, cut history, positions, ve
 Run inside the [existing resource limits and shared lock](cutting.md#reproduce):
 
 ```bash
-python -m dexlab.tofu_cut --task tofu-sequential --grid-spacing .005 --output RUN
+python -m dexlab.tofu_cut --task tofu-sequential --grid-spacing .005 --motion-protocol knife-push --output RUN
 python -m dexlab.cutting_score RUN
 python -m dexlab.cutting_showcase RUN --output MEDIA
 ```

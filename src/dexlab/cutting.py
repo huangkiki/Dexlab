@@ -1,7 +1,8 @@
 """Persistent-cut TLMPM reference implementation of BladeMaster, arXiv:2609.27342v2.
 
 This is independent CPU code, not the authors' implementation. SI units, FP64,
-trilinear reference basis, elastic fixed-corotated material, MUSL and PIC/FLIP.
+trilinear reference basis, fixed-corotated elasticity with optional Newtonian
+viscosity, MUSL and PIC/FLIP.
 The blade translates dynamically; a guide constrains its attitude. See the
 experiment document for the equation mapping and unimplemented paper features.
 """
@@ -24,6 +25,7 @@ class CutConfig:
     density: float = 1100.0
     young_modulus: float = 6000.0
     poisson_ratio: float = 0.35
+    dynamic_viscosity: float = 0.0  # Pa s; zero retains the elastic baseline.
     flip_fraction: float = 0.95
     normal_scale: float = 0.1
     friction_static: float = 0.3
@@ -43,10 +45,13 @@ class CutConfig:
     def __post_init__(self):
         if self.shape not in ('block', 'banana'):
             raise ValueError('Unknown material shape')
-        values = np.array([v for key, value in asdict(self).items() if key not in ('shape', 'blade_bevel_height')
+        values = np.array([v for key, value in asdict(self).items()
+                           if key not in ('shape', 'blade_bevel_height', 'dynamic_viscosity')
                            for v in (value if isinstance(value, tuple) else (value,))])
         if not np.isfinite(values).all() or (values <= 0).any():
             raise ValueError("All configuration values must be finite and positive")
+        if not np.isfinite(self.dynamic_viscosity) or self.dynamic_viscosity < 0:
+            raise ValueError('Dynamic viscosity must be finite and nonnegative (Pa s)')
         if not 0 < self.poisson_ratio < 0.5 or not 0 < self.sharpness < 1:
             raise ValueError("Invalid Poisson ratio or blade sharpness")
         if self.flip_fraction > 1 or self.friction_dynamic > self.friction_static:
@@ -92,6 +97,23 @@ def corotated_stress(deformation, mu, lam):
 
 
 @njit(cache=True)
+def newtonian_stress(deformation, reference_velocity_gradient, viscosity):
+    """Viscous first Piola stress J eta (L + L.T) F^-T, in Pa.
+
+    L = grad_X(v) F^-1 is the spatial velocity gradient. This chooses zero
+    second-viscosity coefficient (bulk viscosity 2 eta / 3), not a calibrated
+    food law. Rigid spin has zero symmetric rate; uniform translation has
+    zero gradient. V0 P_v : grad_X(v) = 2 eta V0 J D:D is nonnegative.
+    """
+    determinant = np.linalg.det(deformation)
+    if determinant <= 0:
+        raise ValueError('Inverted material point; retain this failed run')
+    inverse = np.linalg.inv(deformation)
+    spatial_gradient = reference_velocity_gradient @ inverse
+    return viscosity * determinant * (spatial_gradient + spatial_gradient.T) @ inverse.T
+
+
+@njit(cache=True)
 def codes_compatible(a, b):
     """Two histories conflict if any assigned ternary digit has opposite sides."""
     while a or b:
@@ -129,8 +151,9 @@ def couple_grids(mass, state):
 
 @njit(cache=True)
 def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
-                  particle_impulse, mass, volume, mu, lam, dt, flip, node_count):
-    """Eq. 1–2, 8–9; identical compatibility in P2G and MUSL remapping."""
+                  particle_impulse, mass, volume, mu, lam, dt, flip, node_count,
+                  viscosity=0.0):
+    """Eq. 1–2, 8–9; return the explicit constitutive viscous dissipation (J)."""
     code_count = int(sides.max()) + 1
     gm = np.zeros((code_count, node_count))
     momentum = np.zeros((code_count, node_count, 3))
@@ -148,15 +171,36 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                     internal -= dt * volume * stress[j, k] * gradients[p, a, k]
                 impulse[side, node, j] += internal + w * particle_impulse[p, j]
     coupled = couple_grids(gm, momentum)
-    coupled_impulse = couple_grids(gm, impulse)
-    gv = np.zeros_like(momentum)
     old_gv = np.zeros_like(momentum)
     for side in range(code_count):
         for node in range(node_count):
             if gm[side, node] > 0:
-                gv[side, node] = (coupled[side, node] + coupled_impulse[side, node]) / gm[side, node]
-                # Eq. 17 uses the coupled old momentum in the FLIP difference.
                 old_gv[side, node] = coupled[side, node] / gm[side, node]
+    dissipation = 0.0
+    if viscosity > 0:
+        # Use current, compatibility-filtered velocity, before external and
+        # internal impulses. Opposing cut histories never share this gradient.
+        for p in range(len(x)):
+            rate = np.zeros((3, 3))
+            side = sides[p]
+            for a in range(8):
+                for j in range(3):
+                    for k in range(3):
+                        rate[j, k] += old_gv[side, nodes[p, a], j] * gradients[p, a, k]
+            stress = newtonian_stress(deformation[p], rate, viscosity)
+            dissipation += dt * volume * np.sum(stress * rate)
+            for a in range(8):
+                for j in range(3):
+                    internal = 0.0
+                    for k in range(3):
+                        internal -= dt * volume * stress[j, k] * gradients[p, a, k]
+                    impulse[side, nodes[p, a], j] += internal
+    coupled_impulse = couple_grids(gm, impulse)
+    gv = np.zeros_like(momentum)
+    for side in range(code_count):
+        for node in range(node_count):
+            if gm[side, node] > 0:
+                gv[side, node] = (coupled[side, node] + coupled_impulse[side, node]) / gm[side, node]
     for p in range(len(x)):
         pic = np.zeros(3)
         increment = np.zeros(3)
@@ -181,6 +225,7 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                 for k in range(3):
                     deformation[p, j, k] += (dt * remapped[sides[p], nodes[p, a], j]
                                               * gradients[p, a, k])
+    return dissipation
 
 
 @njit(cache=True)
@@ -456,12 +501,12 @@ class CuttingSimulation:
             c.friction_dynamic, c.tangent_stiffness, c.tangent_damping,
             self.pair_history, self.pair_seen, self.step_count)
         gravity = np.array([0., 0., -9.81]) * self.mass * c.dt
-        material_step(self.x, self.velocity, self.deformation, self.sides,
+        viscous_dissipation = material_step(self.x, self.velocity, self.deformation, self.sides,
                       self.nodes, self.weights, self.gradients,
                       impulses + contact + gravity, self.mass, self.volume,
                       c.young_modulus / (2 * (1 + c.poisson_ratio)),
                       c.young_modulus * c.poisson_ratio / ((1 + c.poisson_ratio) * (1 - 2 * c.poisson_ratio)),
-                      c.dt, c.flip_fraction, self.node_count)
+                      c.dt, c.flip_fraction, self.node_count, c.dynamic_viscosity)
         self.blade_v += (c.dt * drive + reaction) / c.blade_mass
         self.blade_x += c.dt * self.blade_v
         # Unilateral board stop on the guided blade. Its support impulse is
@@ -495,4 +540,5 @@ class CuttingSimulation:
             'minimum_det_f': determinant.min(), 'maximum_det_f': determinant.max(),
             'labelled_particles': int(np.count_nonzero(self.sides)),
             'contact_work_j': work,
+            **({'viscous_dissipation_j': viscous_dissipation} if c.dynamic_viscosity > 0 else {}),
         }

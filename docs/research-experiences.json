@@ -410,10 +410,30 @@
     "schema_version": 1,
     "catalogue": [
       {
+        "id": "cut-push",
+        "title": {
+          "zh": "最后一刀直接侧推：豆腐与香蕉",
+          "en": "Final cut directly into a side push: tofu and banana"
+        },
+        "engines": "CPU TLMPM / measured knife contact",
+        "link": "cut-push.html",
+        "question": {
+          "zh": "末块分离是否由可见刀面接触产生？",
+          "en": "Does visible blade-face contact drive the final piece apart?"
+        },
+        "finding": {
+          "zh": "豆腐三块、香蕉四块；最后一刀直接侧推，逐帧显示接触力与位移。豆腐增加牛顿黏性，并保留纯弹性、半步长及无侧推对照。",
+          "en": "Three tofu pieces and four banana pieces; the final cut transitions directly to a face push, displaying contact force and motion. Tofu adds Newtonian viscosity with retained elastic, half-step and no-push controls."
+        },
+        "thumbnail": "docs/evidence/cutting/tofu-cut-push/surface-poster.png",
+        "site_thumbnail": "_static/cutting/tofu-cut-push/surface-poster.png",
+        "thumbnail_sha256": "f4b5b1dd209f152dff9b10fd41af2bcd782afe5860cf251b956bd9445bb408cf"
+      },
+      {
         "id": "tofu-cut",
         "title": {
-          "zh": "豆腐状软块对半切",
-          "en": "Synthetic tofu halving"
+          "zh": "历史：豆腐状软块对半切",
+          "en": "Historical: Synthetic tofu halving"
         },
         "engines": "CPU TLMPM / BladeMaster v2 reference",
         "thumbnail": "docs/evidence/cutting/tofu/surface-poster.png",
@@ -432,8 +452,8 @@
       {
         "id": "tofu-sequential-cut",
         "title": {
-          "zh": "豆腐连续两刀与三列对比",
-          "en": "Two tofu cuts: three-method view"
+          "zh": "历史：豆腐连续两刀与三列对比",
+          "en": "Historical: Two tofu cuts: three-method view"
         },
         "engines": "CPU TLMPM / author reference videos",
         "link": "cutting-comparison.html",
@@ -472,8 +492,8 @@
       {
         "id": "banana-cut",
         "title": {
-          "zh": "香蕉连续三刀切片",
-          "en": "Three sequential banana cuts"
+          "zh": "历史：香蕉连续三刀切片",
+          "en": "Historical: Three sequential banana cuts"
         },
         "engines": "CPU TLMPM / persistent cut history",
         "link": "banana-cutting.html",
