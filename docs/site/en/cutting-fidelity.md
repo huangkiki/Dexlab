@@ -18,6 +18,10 @@ The [v2 paper](https://arxiv.org/html/2609.27342v2) separates material dynamics,
 
 The earlier banana render applied 40 smoothing iterations and blended normals across cut rims. Its recorded maximum display-only vertex displacement was **2.358 mm**. Those operations rounded the cut ends. The refined renderer applies **no geometric smoothing**, marks the full cap rim and splits normals at sharp edges. Surface vertices still use saved particle motion and deformation; no separation displacement is added. The current tofu comparison uses a neutral gray scene and cream native particles with fixed reference floor markers. An orange rectangle projects the middle particle region; its contraction value comes from interior tetrahedra.
 
+## Visible knife contact replaces the direct velocity input
+
+[The current two-cut tofu replay](tofu-comparison.md) re-enters the left kerf and pushes the left piece with the knife face before withdrawing. The push phase leaves cut history unchanged and never directly modifies material velocity. Recorded native knife poses, contact force and displacement drive the display. Author reference clips retain their original initial-velocity input; these final inputs are explicitly different.
+
 ## Added crossed shallow cuts
 
 The [cross-scoring task](tofu-scoring.md) computes contact and side assignment in the blade frame, withdraws, rotates 90° and makes a second shallow stroke. Native position, attitude and reaction are recorded; persistent histories and the lower transfer graph are checked separately. Depth is relative to the original upper surface, and the replay displays component count and base status. This extends guided orthogonal scoring, without reproducing the complete author knife-tip lateral path, free rotational dynamics or dual-contouring reconstruction.
@@ -37,7 +41,8 @@ Both frames use the **same original coarse record at 7.00 s**, verified by raw-s
 | Cut opening, mm | Mean signed normal distance between two affine images of the same reference face: x for the first cross-scoring cut, y for the second. Only pairs with opposing nonzero native digits for that cut contribute. `--` means no eligible pair, not a zero-width cut. |
 | Middle contraction / volume, % | Change in signed volume of fixed reference tetrahedra inside the middle third. Each complete native lattice cell contributes six tetrahedra; cells crossing a planned cut are excluded. Inversions are counted separately. The comparison GIF shows contraction -ΔV/V₀, while JSON retains signed volume change. |
 | Interior volume, % | The same estimator summed over sampled piece interiors for banana or tofu halving. It does not measure the volume of the decorative skin. |
-| After impulse, mm | Native equal-mass particle-centroid x displacement from the exact saved frame immediately before the diagnostic impulse, ordered left to right. |
+| After motion input, mm | Native equal-mass particle-centroid x displacement from the exact saved motion-start frame, ordered left to right. Knife push uses 4.00 s; historical impulse uses its original event time. |
+| Knife on material Fx, N | Negative of the material-on-knife reaction x component at the completed substep; negative means the knife pushes material left. Excludes actuator, guide and board forces. |
 | Knife reaction, N | Norm of the recorded material reaction on the knife. Guide, drive and board forces are separate. |
 
 Each media folder contains `measurements.json` with units, definitions, frame indices and sample counts. GIFs slow playback for legibility; the clock and every displayed value retain their physical recorded time. `provenance.json` records frame mapping, source hashes and rendering hashes. MP4 and GIF use the same measured frames.

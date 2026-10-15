@@ -391,12 +391,15 @@ def comparison_caption(rgb, time, metrics, view, bounds=None):
     draw.rectangle((0, top-8, image.width, image.height), fill=(241, 241, 238))
     gap = metrics['face_opening_mm'][0]
     fields = [('Cut 1 opening', '--' if gap is None else f'{gap:+.3f} mm'),
-              ('Middle contraction', f'{-metrics["interior_volume_change_percent"]:.3f}%')]
-    for x, (name, value) in zip((24, 500), fields, strict=True):
+              ('Middle contraction', f'{-metrics["interior_volume_change_percent"]:.3f}%'),
+              ('Knife on material / x', f'{metrics["knife_on_material_x_n"]:+.3f} N')]
+    for x, (name, value) in zip((24, 335, 660), fields, strict=True):
         draw.text((x, top), name, font=label, fill=secondary)
         draw.text((x, top+27), value, font=number, fill=ink)
     displacement = metrics['centroid_x_from_probe_mm']
-    line = 'Left-piece impulse at 4.20 s'
+    motion = metrics['motion_protocol']
+    line = ('Knife-face push after 4.00 s / negative force = left' if motion == 'knife-push' else
+            'No-push control / no material kick' if motion == 'no-push' else 'Left-piece impulse at 4.20 s')
     if displacement is not None:
         line = 'dx (mm):  ' + '   '.join(f'{name} {value:+.3f}' for name, value in
                                        zip(('L', 'M', 'R'), displacement, strict=True))
@@ -435,6 +438,8 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
     title = {'banana': 'Banana / three cuts', 'tofu': 'Tofu / cut in half',
              'tofu-sequential': 'Tofu / two cuts + left impulse',
              'tofu-scoring': 'Tofu / crossed shallow cuts'}[task]
+    if task == 'tofu-sequential' and manifest.get('motion_protocol') in ('knife-push', 'no-push'):
+        title = 'Tofu / two cuts + ' + manifest['motion_protocol']
     measurements = ReplayMeasurements(states, trace, manifest)
     surface = (BananaSkin(states['reference']) if task == 'banana' else
                MaterialSurface(states['reference'], config['grid_spacing']/2))

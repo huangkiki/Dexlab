@@ -193,6 +193,24 @@ class CuttingInvariants(unittest.TestCase):
         # A free blade's velocity changes by this actual reaction impulse.
         self.assertLess((reaction / .2)[0], 0)
 
+    def test_moving_knife_pushes_resting_material_only_in_contact(self):
+        half = np.array([.0005, .025, .02])
+        material = np.array([[-.001, 0., .02]])
+        for blade_x, touching in [(0., True), (.02, False)]:
+            damage = np.zeros(1)
+            impulse, reaction, _, board, _, _ = rigid_contacts(
+                material, np.zeros((1, 3)), np.array([blade_x, 0., .02]),
+                np.array([-.01, 0., 0.]), half, .001, .001,
+                .2, .0005, .1, .3, .2, .05, .1,
+                np.zeros((2, 1, 3)), damage, 1e-6, False)
+            np.testing.assert_allclose(impulse.sum(axis=0) + reaction, board, atol=1e-14)
+            np.testing.assert_array_equal(damage, 0.)
+            if touching:
+                self.assertLess(impulse[0, 0], 0.)
+                self.assertGreater(reaction[0], 0.)
+            else:
+                np.testing.assert_array_equal(impulse, 0.)
+
     def test_cut_faces_recontact_without_reconnecting(self):
         x = np.array([[-.0008, 0., 0.], [.0008, 0., 0.]])
         velocity = np.array([[.1, 0., 0.], [-.1, 0., 0.]])

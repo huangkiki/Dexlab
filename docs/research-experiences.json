@@ -442,11 +442,11 @@
           "en": "Can the left piece move independently after two cuts?"
         },
         "finding": {
-          "zh": "5 mm 网格形成三等份；左块相对移动2.398 mm，动图显示切口、体积与位移。三列任务一致，原作完整参数尚未对齐。",
-          "en": "A 5 mm grid forms three equal pieces and 2.398 mm relative motion; GIFs show opening, volume and displacement. The task is matched; complete author configurations remain unmatched."
+          "zh": "两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。",
+          "en": "Two cuts form three pieces; native knife contact pushes the left piece, with measured force and displacement. Author clips use a final velocity input, so inputs differ."
         },
         "thumbnail": "docs/evidence/cutting/tofu-sequential/surface-poster.png",
-        "thumbnail_sha256": "3167ef59c284a041dc4cb722b5e9a91f6fc5971dcf844b93e1e1ecedb986b22b",
+        "thumbnail_sha256": "7d623a067219023ec73441d092a1cbfc9a4c4b9d6c7b7dec984723aef212399b",
         "site_thumbnail": "_static/cutting/tofu-sequential/surface-poster.png"
       },
       {

@@ -20,6 +20,7 @@ ACCEPTANCE = {
 }
 
 BANANA_ACCEPTANCE = dict(ACCEPTANCE, fraction_error=.03)
+PUSH_ACCEPTANCE = dict(BANANA_ACCEPTANCE, minimum_push_impulse_ns=.001)
 SCORING_ACCEPTANCE = dict(ACCEPTANCE, base_height_m=.015,
                           minimum_depth_m=.002, maximum_depth_m=.012)
 
@@ -134,14 +135,23 @@ def score_run(directory):
     banana = task == 'banana'
     scoring = task == 'tofu-scoring'
     sequential = task in ('banana', 'tofu-sequential')
+    motion = manifest.get('motion_protocol', 'impulse')
+    if motion not in ('impulse', 'knife-push', 'no-push') or (motion != 'impulse' and task != 'tofu-sequential'):
+        raise ValueError('Invalid motion protocol')
+    contact_motion = motion != 'impulse'
     if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
         raise ValueError('Unknown cutting task')
     cut_count, duration, probe_time = {'banana': (3, 7., 6.2), 'tofu': (1, 3., 2.4),
                                       'tofu-sequential': (2, 5., 4.2),
                                       'tofu-scoring': (2, 4.2, None)}[task]
+    if contact_motion:
+        duration, probe_time = 7., None
+        if manifest.get('motion_start_time_s') != 4.:
+            raise ValueError('Altered knife-push motion window')
     if config.get('shape', 'block') != ('banana' if banana else 'block'):
         raise ValueError('Task and material geometry disagree')
-    expected_limits = SCORING_ACCEPTANCE if scoring else BANANA_ACCEPTANCE if sequential else ACCEPTANCE
+    expected_limits = (SCORING_ACCEPTANCE if scoring else PUSH_ACCEPTANCE if contact_motion else
+                       BANANA_ACCEPTANCE if sequential else ACCEPTANCE)
     if manifest['acceptance'] != expected_limits or manifest['probe_time_s'] != probe_time:
         raise ValueError('Altered frozen acceptance or probe protocol')
     dt = config['dt']
@@ -195,7 +205,7 @@ def score_run(directory):
     frame_error = float(np.abs(frame_momentum - trace['momentum_ns'][indices]).max())
     external = trace['board_impulse_ns'] + trace['blade_board_impulse_ns'] + dt * trace['drive_force_n']
     external[:, 2] -= mass * particles * 9.81 * dt
-    probe_step = expected_steps if scoring else round(manifest['probe_time_s'] / dt)
+    probe_step = expected_steps if probe_time is None else round(probe_time / dt)
     right = reference[:, 0] > (.03 if banana else 0)
     probe_mask = reference[:, 0] < -.015 if task == 'tofu-sequential' else right
     probe_velocity = np.array([-.12, 0., 0.]) if task == 'tofu-sequential' else np.array([.12, 0., .1])
@@ -206,7 +216,9 @@ def score_run(directory):
         np.vstack((np.zeros(3), trace['blade_velocity_m_s'])), axis=0)
     blade_error = float(np.abs(blade_impulse - dt * (trace['drive_force_n'] + trace['material_reaction_n'])
                                - trace['blade_board_impulse_ns']).max())
-    probe_frame = 0 if scoring else int(np.searchsorted(states['time'], manifest['probe_time_s'], side='right') - 1)
+    motion_start = 4. if contact_motion else probe_time
+    probe_frame = (0 if motion_start is None else
+                   int(np.searchsorted(states['time'], motion_start, side='right') - 1))
     displacements = [x[-1, mask].mean(axis=0) - x[probe_frame, mask].mean(axis=0)
                      for mask in (~right, right)]
     relative_motion = float(displacements[1][0] - displacements[0][0])
@@ -278,6 +290,27 @@ def score_run(directory):
             raise ValueError('Invalid cutting-active observation')
         if not np.array_equal(trace['cut_index'], expected_cut):
             raise ValueError('Invalid sequential-cut clock')
+    push_impulse = None
+    if contact_motion:
+        if 'target_edge_m' not in trace or trace['target_edge_m'].shape != (expected_steps, 3):
+            raise ValueError('Missing knife drive observations')
+        times = np.arange(expected_steps) * dt
+        after_cut = times >= 4.
+        targets = np.tile([-.015, 0., .036], (int(after_cut.sum()), 1))
+        if motion == 'knife-push':
+            targets[:, 0] = np.interp(times[after_cut], [4., 4.8, 6., 6.6, 7.],
+                                      [-.015, -.015, -.027, -.027, -.027])
+            targets[:, 2] = np.interp(times[after_cut], [4., 4.8, 6., 6.6, 7.],
+                                      [.036, .002, .002, .036, .036])
+        if not np.allclose(trace['target_edge_m'][after_cut], targets, rtol=0, atol=1e-12):
+            raise ValueError('Altered knife drive protocol')
+        # The knife receives +x reaction when it pushes material toward -x.
+        # Use the native impulse sum; drive targets and rendered motion are not evidence.
+        window = (trace['time_s'] > 4.) & (trace['time_s'] <= 6.6)
+        push_impulse = float(dt * trace['material_reaction_n'][window, 0].sum())
+        after = states['time'] >= 4.
+        checks['knife_supplies_push_impulse'] = push_impulse >= limits['minimum_push_impulse_ns']
+        checks['no_new_cuts_during_push'] = bool(after.any() and np.all(sides[after] == sides[probe_frame]))
     checks = {name: bool(value) for name, value in checks.items()}
     return {
         'schema_version': 1, 'task': task, 'mode': manifest['mode'], 'passed': all(checks.values()),
@@ -294,6 +327,8 @@ def score_run(directory):
         'piece_displacements_m': ([] if scoring else region_motion.tolist() if sequential else
                                   [d.tolist() for d in displacements]),
         'peak_material_reaction_n': float(np.linalg.norm(trace['material_reaction_n'], axis=1).max()),
+        **({'motion_protocol': motion, 'leftward_knife_impulse_ns': push_impulse}
+           if task == 'tofu-sequential' else {}),
         'maximum_proxy_overlap_m': float(trace['maximum_proxy_overlap_m'].max()),
         'det_f_range': [float(trace['minimum_det_f'].min()), float(trace['maximum_det_f'].max())],
         'evidence_scope': 'synthetic CPU reference task; not measured food or authors implementation',

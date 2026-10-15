@@ -94,9 +94,13 @@ class ReplayMeasurements:
         self.reference_volume = float(signed_volumes(self.reference, self.tetrahedra).sum())
         if self.reference_volume <= 0:
             raise ValueError('No interior reference volume available')
-        self.probe_frame = (None if manifest['probe_time_s'] is None else
-                            int(np.argmin(abs(states['time'] - manifest['probe_time_s']))))
-        if self.probe_frame is not None and not np.isclose(states['time'][self.probe_frame], manifest['probe_time_s']):
+        self.motion_start = (4. if manifest.get('motion_protocol') in ('knife-push', 'no-push')
+                             else manifest['probe_time_s'])
+        if manifest.get('motion_start_time_s', self.motion_start) != self.motion_start:
+            raise ValueError('Motion baseline disagrees with the recorded protocol')
+        self.probe_frame = (None if self.motion_start is None else
+                            int(np.argmin(abs(states['time'] - self.motion_start))))
+        if self.probe_frame is not None and not np.isclose(states['time'][self.probe_frame], self.motion_start):
             raise ValueError('The initial motion needs an exact saved pre-probe frame')
 
     def frame(self, index):
@@ -107,8 +111,12 @@ class ReplayMeasurements:
         trace_index = max(0, int(np.searchsorted(self.trace['time_s'], time + 1e-12, side='right')) - 1)
         if index == 0:
             phase = 'Initial'
-        elif self.probe_frame is not None and time > self.manifest['probe_time_s']:
-            phase = 'Motion probe'
+        elif self.probe_frame is not None and time > self.motion_start:
+            if self.manifest.get('motion_protocol') == 'knife-push':
+                phase = ('Re-entering kerf' if time <= 4.8 else 'Knife-face push' if time <= 6.
+                         else 'Withdrawing' if time <= 6.6 else 'Settling')
+            else:
+                phase = 'No-push control' if self.manifest.get('motion_protocol') == 'no-push' else 'Motion probe'
         elif self.trace['cutting_active'][trace_index]:
             phase = f'Cut {int(self.trace["cut_index"][trace_index])+1}'
         else:
@@ -133,6 +141,10 @@ class ReplayMeasurements:
                 'inverted_tetrahedra': int((volumes <= 0).sum()),
                 'centroid_x_from_start_mm': displacement,
                 'centroid_x_from_probe_mm': probe_displacement,
+                'motion_protocol': self.manifest.get('motion_protocol',
+                    None if self.motion_start is None else 'impulse'),
+                'knife_on_material_x_n': (-float(self.trace['material_reaction_n'][trace_index, 0])
+                                          if index else 0.),
                 'knife_material_force_n': (float(np.linalg.norm(self.trace['material_reaction_n'][trace_index]))
                                            if index else 0.)}
         if self.task == 'tofu-scoring':
@@ -148,7 +160,9 @@ class ReplayMeasurements:
         result = {'face_opening_mm': 'Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.',
                 'interior_volume_change_percent': '100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing planned cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().',
                 'centroid_x_from_start_mm': 'Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.',
-                'centroid_x_from_probe_mm': 'Same centroids relative to the exact saved pre-probe frame; null before the probe.',
+                'centroid_x_from_probe_mm': 'Same centroids relative to the exact saved motion-start frame; null before it. Knife-push/no-push: 4.00 s; legacy impulse: probe_time_s.',
+                'knife_on_material_x_n': 'Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.',
+                'motion_start_time_s': self.motion_start,
                 'knife_material_force_n': 'Norm of recorded material reaction on the knife at the preceding completed substep; excludes guide, drive and board forces.',
                 'reference_volume_m3': self.reference_volume, 'tetrahedra': len(self.tetrahedra),
                 'cut_planes_m_in_execution_order': list(self.planes),
