@@ -9,6 +9,19 @@ from dexlab.cutting_metrics import face_opening, face_pairs, reference_tetrahedr
 
 
 class ReplayMetricTests(unittest.TestCase):
+    def test_second_cross_cut_measures_y_opening_and_preserves_first_digit(self):
+        reference = material_points((.03, .03, .015), .0075)
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        first = np.where(reference[:, 0] < 0, 1, 2)
+        second = np.where(reference[:, 1] < 0, 1, 2)
+        pairs, locations = face_pairs(reference, 0., .00375, axis=1)
+        position = reference.copy()
+        position[second == 2, 1] += .0015
+        gap, count = face_opening(reference, position, deformation, first + 3*second,
+                                  pairs, locations, 1, axis=1)
+        self.assertAlmostEqual(gap, 1.5, places=12)
+        self.assertEqual(count, len(pairs))
+
     def setUp(self):
         self.reference = material_points((.03, .015, .015), .0075)
         self.deformation = np.tile(np.eye(3), (len(self.reference), 1, 1))

@@ -61,7 +61,7 @@ The independent scorer uses saved reference stencils, cut history, positions, ve
 
 ## Display and reproduction
 
-The particle view retains physical proxy sizes for comparison with the author's particle clips. The surface view embeds exposed material-cell faces with saved deformation gradients and cut history. No extra gaps or piece displacements are added. The white board, lighting and handle are scenery; rendering is not food calibration.
+The particle view retains physical proxy sizes for comparison with the author's particle clips. The surface view embeds exposed material-cell faces with saved deformation gradients and cut history. No extra gaps or piece displacements are added. The current comparison uses a neutral gray ground, cream native particles and a thin blade. Particle inventory, dimensions and poses remain unchanged. The orange marker and measurement definitions are explained in the [numerical comparison](cutting-comparison.md). Rendering is not food calibration.
 
 Inside the [existing resource limits and shared lock](cutting.md#reproduce), run:
 

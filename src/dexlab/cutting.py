@@ -265,9 +265,21 @@ def blade_query(point, center, half_size, bevel_height=0.0):
 
 
 @njit(cache=True)
+def oriented_blade_query(point, center, half_size, bevel_height, yaw):
+    """Query a guided blade in its local frame and return world-frame contact."""
+    if yaw == 0.:
+        return blade_query(point, center, half_size, bevel_height)
+    cosine, sine = np.cos(yaw), np.sin(yaw)
+    rotation = np.array([[cosine, -sine, 0.], [sine, cosine, 0.], [0., 0., 1.]])
+    local = rotation.T @ (point - center)
+    closest, normal, distance = blade_query(local, np.zeros(3), half_size, bevel_height)
+    return center + rotation @ closest, rotation @ normal, distance
+
+
+@njit(cache=True)
 def rigid_contacts(x, velocity, blade_x, blade_v, half_size, radius, mass,
                    blade_mass, dt, normal_scale, mu_s, mu_d, gamma_k, gamma_c,
-                   histories, damage, work_threshold, cutting, bevel_height=0.0):
+                   histories, damage, work_threshold, cutting, bevel_height=0.0, yaw=0.0):
     """Eq. 14–16. One impulse feeds both material and rigid reaction."""
     impulses = np.zeros_like(x)
     reaction = np.zeros(3)
@@ -285,7 +297,7 @@ def rigid_contacts(x, velocity, blade_x, blade_v, half_size, radius, mass,
                 point = x[p].copy()
                 point[2] = 0
             else:
-                point, normal, distance = blade_query(x[p], blade_x, half_size, bevel_height)
+                point, normal, distance = oriented_blade_query(x[p], blade_x, half_size, bevel_height, yaw)
                 gap = distance - radius
                 relative = velocity[p] - blade_v
                 effective = 1 / (1 / mass + 1 / blade_mass)
@@ -357,17 +369,21 @@ def particle_contacts(x, reference, velocity, sides, pairs, radius, spacing,
 
 
 @njit(cache=True)
-def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt, cut_index=0):
+def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt, cut_index=0, yaw=0.0):
     """Eq. 3–7: assign 0→1/2 behind the swept finite edge, never reset."""
     edge_z = blade_x[2] - half_size[2]
     digit = 3**cut_index
+    cosine, sine = np.cos(yaw), np.sin(yaw)
     for p in range(len(x)):
+        dx, dy = x[p, 0] - blade_x[0], x[p, 1] - blade_x[1]
+        signed = cosine * dx + sine * dy
+        along = -sine * dx + cosine * dy
         front = edge_z - x[p, 2]
         back = 2 * spacing + max((velocity[p, 2] - blade_v[2]) * dt, 0)
-        if ((sides[p] // digit) % 3 == 0 and abs(x[p, 0] - blade_x[0]) <= 6 * spacing
-                and abs(x[p, 1] - blade_x[1]) <= half_size[1]
+        if ((sides[p] // digit) % 3 == 0 and abs(signed) <= 6 * spacing
+                and abs(along) <= half_size[1]
                 and -back <= front <= 0):
-            sides[p] += digit * (1 if x[p, 0] < blade_x[0] else 2)
+            sides[p] += digit * (1 if signed < 0 else 2)
 
 
 class CuttingSimulation:
@@ -393,6 +409,7 @@ class CuttingSimulation:
         self.half_size = np.array(config.blade_half_size)
         self.blade_x = np.array([0., 0., config.size[2] + .012 + self.half_size[2]])
         self.blade_v = np.zeros(3)
+        self.blade_yaw = 0.
         self.rigid_history = np.zeros((2, len(self.x), 3))
         self.pair_history = np.zeros((len(self.x), len(self.x), 3))
         self.pair_seen = np.full((len(self.x), len(self.x)), -2, dtype=np.int32)
@@ -401,8 +418,17 @@ class CuttingSimulation:
     def momentum(self):
         return self.mass * self.velocity.sum(axis=0) + self.config.blade_mass * self.blade_v
 
-    def step(self, target_edge, *, cutting=True, probe_velocity=None, probe_mask=None, cut_index=0):
+    def step(self, target_edge, *, cutting=True, probe_velocity=None, probe_mask=None, cut_index=0,
+             blade_yaw=0.):
         c = self.config
+        if not np.isfinite(blade_yaw):
+            raise ValueError('Blade yaw must be finite')
+        if blade_yaw != self.blade_yaw:
+            # Attitude is an external guide, not free rotational dynamics.
+            # Reorientation is allowed only with the whole blade above material.
+            if self.blade_x[2] - self.half_size[2] <= self.x[:, 2].max() + self.radius:
+                raise ValueError('Withdraw the blade before changing its guided attitude')
+            self.blade_yaw = float(blade_yaw)
         before = self.momentum()
         external = np.zeros(3)
         if probe_velocity is not None:
@@ -421,7 +447,7 @@ class CuttingSimulation:
             c.friction_static, c.friction_dynamic, c.tangent_stiffness,
             c.tangent_damping, self.rigid_history, self.damage,
             c.cutting_energy * self.volume**(2 / 3) * (1 - c.sharpness) / c.sharpness,
-            cutting, c.blade_bevel_height)
+            cutting, c.blade_bevel_height, self.blade_yaw)
         pair_radius = 2 * self.radius + 2 * np.linalg.norm(self.velocity, axis=1).max() * c.dt
         pairs = cKDTree(self.x).query_pairs(pair_radius, output_type='ndarray')
         contact, pair_overlap = particle_contacts(
@@ -448,7 +474,7 @@ class CuttingSimulation:
                 self.blade_v[2] = 0
         if cutting:
             assign_cut_sides(self.x, self.velocity, self.sides, self.blade_x, self.blade_v,
-                             self.half_size, c.grid_spacing, c.dt, cut_index)
+                             self.half_size, c.grid_spacing, c.dt, cut_index, self.blade_yaw)
         external += board + blade_board + gravity * len(self.x) + c.dt * drive
         residual = self.momentum() - before - external
         self.step_count += 1
@@ -458,6 +484,7 @@ class CuttingSimulation:
         return {
             'time_s': self.step_count * c.dt,
             'blade_position_m': self.blade_x.copy(), 'blade_velocity_m_s': self.blade_v.copy(),
+            'blade_yaw_rad': self.blade_yaw,
             'target_edge_m': np.asarray(target_edge), 'drive_force_n': drive,
             'material_reaction_n': reaction / c.dt, 'guide_reaction_torque_nm': -torque / c.dt,
             'board_impulse_ns': board, 'blade_board_impulse_ns': blade_board,

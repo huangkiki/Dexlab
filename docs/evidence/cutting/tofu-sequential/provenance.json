@@ -34,6 +34,8 @@
       2,
       3
     ],
+    "scoring_side_counts": [],
+    "scoring_maximum_depth_m": [],
     "initial_components": 1,
     "final_components": 3,
     "mass_kg": 0.08910000000000003,
@@ -79,13 +81,15 @@
     "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
   },
   "renderer_sha256": {
-    "cutting_showcase.py": "45d57fb94288ad5b0091da7c93275ceea4f92073e7acdfbdb636627ecd0508ed",
+    "cutting_showcase.py": "87711147255a4e25867e7af6bd515a2a70e1eacda2ad6698f8243a1cd8b4b252",
     "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
-    "cutting_metrics.py": "667a9b16adf1fa21e0a5f6f4c62e89a5c7095b301ace64e33718c266d2c3ba65"
+    "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc"
   },
   "frames": 101,
   "fps": 20,
   "physical_duration_s": 5.0,
+  "poster_state_frame": 0,
+  "particle_colours": "Cream native particles for sequential tofu; history palette for other tasks.",
   "playback_duration_s": 5.05,
   "vtk_version": "9.7.1",
   "gif_playback": {
@@ -197,14 +201,14 @@
   },
   "surface": "Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Fixed reference seams at the three supported straight-cut planes expose local cap triangles only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. This fixed-seam approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.",
   "maximum_display_smoothing_displacement_mm": 0.0,
-  "description": "Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation.",
+  "description": "Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Sequential tofu uses a neutral ground and cream native particles with no board/handle. Its orange rectangle projects the middle native region including proxy radii; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.",
   "artifacts": {
-    "measurements.json": "32acb2716a75b04e00bd078829d1412078fe1088c10a222d935dac1ac323ce76",
-    "particles-poster.png": "94bf50d93a087521f6d12003790e8ba1e1cd07ba828425495d736cf4503403cd",
-    "particles.gif": "ff6d3daef51ac0a82b6e28e11cd7296961d3602c589f6dd251fc47b96ab00c10",
-    "particles.mp4": "91156bfb8050c34a0d8574db0572537d8f26892725a776de63f4b0d26636944c",
-    "surface-poster.png": "cf9d8a286cdbb07c0d08ac720d873a4fccea954db5605c43aad02901e4df1fba",
-    "surface.gif": "8bcb5f7f0d7ed187c93e1b77dcc847d99bc6c1f579311b77b3374f4955a1a486",
-    "surface.mp4": "5e1fe26ba1ac304ab19d1e3d95ac879e25d84efcc353bfa415a425e759cdb101"
+    "measurements.json": "dc05ad2981e9abb42713d850956d7fa9a16a217d7012458a865c7a10f55befc1",
+    "particles-poster.png": "bfdfb5edde7bdb2414b8c06ed2908ec930ec513d5025a59a685a58303a4ac0d8",
+    "particles.gif": "2c082561a09f97abcf41976a85669cbab29242dbc4b7694c4ad6da79ed69cf54",
+    "particles.mp4": "979e65d68858ac513f37bab45fbea88dd74d6d113a1ceb4d81cdaa87e6101aa5",
+    "surface-poster.png": "3167ef59c284a041dc4cb722b5e9a91f6fc5971dcf844b93e1e1ecedb986b22b",
+    "surface.gif": "aedd0e64081182eb4caf9e00ed72cab291c612e35dd2ecd4c8969f1076fff577",
+    "surface.mp4": "4be40e737acd986f69023113c33ca907b77c9d5b36a3ab9293fe1557c7f482de"
   }
 }

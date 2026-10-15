@@ -1,5 +1,16 @@
 # DexLab
 
+**Use established physical laws and empirical relations in reproducible experiments to study how contact and friction affect robotic grasping, and assess the trustworthiness of physics simulation.**
+
+The research serves two goals:
+
+| Your question | What DexLab provides |
+| --- | --- |
+| **A scene performs poorly. What should improve?** | Locate departures from physical expectations, separate parameters, integration, model assumptions and solving mechanisms, and identify evidenced configuration fixes and solver improvement directions. |
+| **A new scene needs an engine/solver. Where should I start?** | Use evidence from similar contact/friction conditions to choose candidate configurations, understand sensitivity, limits, stability and cost, and build practical scenario-selection knowledge. |
+
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](experience.md) · [Diagnosis and trials](diagnosis.md) · [Scenario guide](selection.md)
+
 From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
 
 ```{raw} html
@@ -21,18 +32,26 @@ From tofu halving and banana slicing to robotic grasping: explore contact, frict
 :file: _cutting-comparison.html
 ```
 
+| Measurement event and quantity | BladeMaster¹ | CRESSim-MPM¹ | DexLab² |
+| --- | ---: | ---: | ---: |
+| First cut at half depth: mean opening (mm) | 0.654 | 4.059 | 0.496 (0.82 s) |
+| Both cuts withdrawn: middle-piece contraction (%) | 0.506 | 8.746 | 2.509 (4.00 s) |
+| After left-piece velocity initialization: left x displacement (mm) | Not reported | Not reported | -2.417 |
+| Same window: middle / right x displacement (mm) | Not reported | Not reported | -0.030 / -0.008 |
+
+¹ Values reported by the [BladeMaster project / paper Fig. 5](https://jango6324.github.io/blademaster/#comparison), including its CRESSim-MPM comparison. ² [DexLab event measurements from saved states](https://github.com/huangkiki/Dexlab/blob/main/demos/cutting-refinement/evidence.json): 5 mm grid, 0.25 ms timestep and 0.5 mm blade; displacements cover 4.20–5.00 s. The half-depth event occurs at 0.82375 s; the table uses the nearest saved frame, 0.82 s. Openings use affine material faces and volumes use interior middle-piece tetrahedra; contraction is the negative relative volume change (-ΔV/V₀). These are **reported / measured values side by side**. Complete author settings and sampling remain [unmatched](https://github.com/huangkiki/Dexlab/issues/200), so the table does not establish a controlled accuracy ranking.
+
 [→ Comparison methods, sources and next protocol](cutting-comparison.md)
 
-**Use established physical laws and empirical relations in reproducible experiments to study how contact and friction affect robotic grasping, and assess the trustworthiness of physics simulation.**
+## Cross scoring: two incisions, one connected base
 
-The research serves two goals:
+The blade makes a shallow incision, withdraws, then turns 90° for a second stroke. The replay shows blade depth, both openings and connected-component count.
 
-| Your question | What DexLab provides |
+| Material surface (elastic recoil) | Native cut histories (colour) |
 | --- | --- |
-| **A scene performs poorly. What should improve?** | Locate departures from physical expectations, separate parameters, integration, model assumptions and solving mechanisms, and identify evidenced configuration fixes and solver improvement directions. |
-| **A new scene needs an engine/solver. Where should I start?** | Use evidence from similar contact/friction conditions to choose candidate configurations, understand sensitivity, limits, stability and cost, and build practical scenario-selection knowledge. |
+| ![Material surface (elastic recoil)](../../../docs/evidence/cutting/tofu-scoring/surface.gif) | ![Native cut histories (colour)](../../../docs/evidence/cutting/tofu-scoring/particles.gif) |
 
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](experience.md) · [Diagnosis and trials](diagnosis.md) · [Scenario guide](selection.md)
+The elastic surface nearly recloses after withdrawal; particle colours show both recorded cut histories, while the uncut lower bridge stays cream. [→ Cross scoring: two incisions, one connected base](tofu-scoring.md)
 
 <!-- visual-research:start -->
 (visual-experiment-catalogue)=
@@ -42,6 +61,7 @@ The research serves two goals:
 <div class="experiment-grid">
 <article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="Synthetic tofu halving"></a><div class="card-copy"><h3><a href="cutting.html">Synthetic tofu halving</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>Do the two cut pieces move independently after withdrawal?</p><p>Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven.</p></div></article>
 <article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="Two tofu cuts: three-method view"></a><div class="card-copy"><h3><a href="cutting-comparison.html">Two tofu cuts: three-method view</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>Can the left piece move independently after two cuts?</p><p>A 5 mm grid forms three equal pieces and 2.398 mm relative motion; GIFs show opening, volume and displacement. The task is matched; complete author configurations remain unmatched.</p></div></article>
+<article class="experiment-card"><a href="tofu-scoring.html"><img loading="lazy" src="_static/cutting/tofu-scoring/surface-poster.png" alt="Crossed shallow tofu cuts"></a><div class="card-copy"><h3><a href="tofu-scoring.html">Crossed shallow tofu cuts</a></h3><p class="engines">CPU TLMPM / guided orthogonal scoring</p><p>Does the lower bridge remain connected after crossing incisions?</p><p>Default and half-step cases form two shallow cuts while retaining one native component; the uncut control is rejected. Synthetic material, not food calibration.</p></div></article>
 <article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="Three sequential banana cuts"></a><div class="card-copy"><h3><a href="banana-cutting.html">Three sequential banana cuts</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>Do subsequent cuts preserve earlier discontinuities?</p><p>Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration.</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="Native LIBERO: diagnosis and change"></a><div class="card-copy"><h3><a href="libero-workflow.html">Native LIBERO: diagnosis and change</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>How can an existing benchmark expose and validate a change?</p><p>Stale observations identified; timestep trials retain successes, failures and regressions.</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="Normal &amp; transient response"></a><div class="card-copy"><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>How do parameters change loading, unloading and transients?</p><p>Static calibration works; dynamics and mass transfer need separate checks.</p></div></article>
@@ -184,6 +204,7 @@ This round reuses evidence and fills concrete diagnosis gaps before transfer to 
 
 Synthetic tofu halving <cutting>
 Sequential banana slicing <banana-cutting>
+Crossed shallow tofu cuts <tofu-scoring>
 Cutting method comparison <cutting-comparison>
 Two tofu cuts and independent motion <tofu-comparison>
 Cutting fidelity and measurements <cutting-fidelity>

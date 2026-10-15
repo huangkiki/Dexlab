@@ -1,5 +1,16 @@
 # DexLab
 
+**以经典物理规律与已有经验公式为参照，通过可复现实验，研究接触与摩擦对机器人抓取的影响，评估物理仿真的可信度。**
+
+这项研究服务于两个目标：
+
+| 你面临的问题 | DexLab 提供的答案 |
+| --- | --- |
+| **场景表现不好，应该改什么？** | 找到偏离物理预期的位置，区分参数、接入、模型假设与求解过程的影响，给出有证据的配置修正和 solver 改进方向。 |
+| **面对新场景，怎样选择引擎／solver？** | 根据相近接触与摩擦条件的实验，选择候选配置，了解参数敏感性、适用边界、稳定性和成本，逐步积累场景适配经验。 |
+
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](experience.md) · [诊断与试参方法](diagnosis.md) · [场景选型指南](selection.md)
+
 从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
 
 ```{raw} html
@@ -21,18 +32,26 @@
 :file: _cutting-comparison.html
 ```
 
+| 测量事件与指标 | BladeMaster¹ | CRESSim-MPM¹ | DexLab² |
+| --- | ---: | ---: | ---: |
+| 第一刀半深：平均切口宽度（mm） | 0.654 | 4.059 | 0.496（0.82 s） |
+| 两刀撤出：中间块体积收缩（%） | 0.506 | 8.746 | 2.509（4.00 s） |
+| 左块施加初速度后：左块 x 位移（mm） | 未报告数值 | 未报告数值 | -2.417 |
+| 同一窗口：中／右块 x 位移（mm） | 未报告数值 | 未报告数值 | -0.030／-0.008 |
+
+¹ [BladeMaster 原站／论文 Fig. 5](https://jango6324.github.io/blademaster/#comparison)报告的数值，包括其 CRESSim-MPM 对照。² [DexLab 保存状态的事件测量](https://github.com/huangkiki/Dexlab/blob/main/demos/cutting-refinement/evidence.json)，5 mm 网格、0.25 ms 步长、0.5 mm 刀片；位移窗口为 4.20–5.00 s。半深事件为 0.82375 s，表中取最近保存帧 0.82 s。切口采用材料面仿射估计，体积采用中块内部四面体；收缩量等于负的体积相对变化（-ΔV/V₀）。三列为**已报告／实测数值并列**，原作完整配置与采样口径仍待[对齐](https://github.com/huangkiki/Dexlab/issues/200)，尚非同条件精度排名。
+
 [→ 对比方法、出处与下一步协议](cutting-comparison.md)
 
-**以经典物理规律与已有经验公式为参照，通过可复现实验，研究接触与摩擦对机器人抓取的影响，评估物理仿真的可信度。**
+## 交叉浅划：两条切口，底部相连
 
-这项研究服务于两个目标：
+刀具先沿一个方向浅切，撤出后转过 90° 再切一次。动图显示刀刃深度、两条切口宽度和连通块数。
 
-| 你面临的问题 | DexLab 提供的答案 |
+| 材料表面（会回弹） | 原生切割历史（着色） |
 | --- | --- |
-| **场景表现不好，应该改什么？** | 找到偏离物理预期的位置，区分参数、接入、模型假设与求解过程的影响，给出有证据的配置修正和 solver 改进方向。 |
-| **面对新场景，怎样选择引擎／solver？** | 根据相近接触与摩擦条件的实验，选择候选配置，了解参数敏感性、适用边界、稳定性和成本，逐步积累场景适配经验。 |
+| ![材料表面（会回弹）](../../../docs/evidence/cutting/tofu-scoring/surface.gif) | ![原生切割历史（着色）](../../../docs/evidence/cutting/tofu-scoring/particles.gif) |
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](experience.md) · [诊断与试参方法](diagnosis.md) · [场景选型指南](selection.md)
+当前纯弹性表面撤刀后会接近闭合；粒子颜色显示已记录的两次切割历史，底部未切区域保持米白。 [→ 交叉浅划：两条切口，底部相连](tofu-scoring.md)
 
 <!-- visual-research:start -->
 (visual-experiment-catalogue)=
@@ -42,6 +61,7 @@
 <div class="experiment-grid">
 <article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="豆腐状软块对半切"></a><div class="card-copy"><h3><a href="cutting.html">豆腐状软块对半切</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>撤刀后，切开的两块材料能否独立运动？</p><p>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。</p></div></article>
 <article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="豆腐连续两刀与三列对比"></a><div class="card-copy"><h3><a href="cutting-comparison.html">豆腐连续两刀与三列对比</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>两刀之后，左块能否独立运动？</p><p>5 mm 网格形成三等份；左块相对移动2.398 mm，动图显示切口、体积与位移。三列任务一致，原作完整参数尚未对齐。</p></div></article>
+<article class="experiment-card"><a href="tofu-scoring.html"><img loading="lazy" src="_static/cutting/tofu-scoring/surface-poster.png" alt="豆腐交叉浅切"></a><div class="card-copy"><h3><a href="tofu-scoring.html">豆腐交叉浅切</a></h3><p class="engines">CPU TLMPM / guided orthogonal scoring</p><p>划出交叉切口后，底部是否仍然连接？</p><p>默认与半步长均形成两条浅切，保持一个原生连通块；未切负例被拒绝。合成材料，非食材标定。</p></div></article>
 <article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="香蕉连续三刀切片"></a><div class="card-copy"><h3><a href="banana-cutting.html">香蕉连续三刀切片</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>后续切割会保留之前的切面吗？</p><p>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="LIBERO 原生抓取：诊断与改进"></a><div class="card-copy"><h3><a href="libero-workflow.html">LIBERO 原生抓取：诊断与改进</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>如何从已有 benchmark 定位问题，再验证修改？</p><p>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="法向与瞬态响应"></a><div class="card-copy"><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>压入、卸载与动态响应如何随参数改变？</p><p>静态校准有效，动态响应和质量迁移须分别验证。</p></div></article>
@@ -188,6 +208,7 @@
 
 豆腐状软块对半切 <cutting>
 香蕉连续切片 <banana-cutting>
+豆腐交叉浅切 <tofu-scoring>
 切割方法对比 <cutting-comparison>
 豆腐连续两刀与独立运动 <tofu-comparison>
 切割保真度与动态测量 <cutting-fidelity>

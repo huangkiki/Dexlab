@@ -1,24 +1,5 @@
 # DexLab
 
-From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
-
-<table><tr><th>Tofu halving</th><th>Three banana cuts</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="Tofu halving"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="Three banana cuts"></a></td></tr></table>
-
-**Tofu halving · Three sequential banana cuts** — Replays of saved simulation states; synthetic material parameters, without real-food calibration.
-
-[▶ Surface / particle videos](https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html) · [Tofu experiment](https://huangkiki.github.io/Dexlab/en/latest/cutting.html)
-
-
-### Do cut pieces stay independent?
-
-<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>Author reference video</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>Author reference video</td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>DexLab tofu · live measurements</td></tr></table>
-
-The first two clips are the BladeMaster authors’ comparison. The third is DexLab’s two-cut tofu experiment. The task is shared; complete author configurations remain unmatched, so no controlled performance ranking is implied. [→ Three-column playback and protocol](https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html) · [BladeMaster](https://jango6324.github.io/blademaster/#comparison) · [CRESSim-MPM](https://arxiv.org/abs/2502.18437)
-
-The GIF displays cut openings, middle-volume change and post-cut displacement at each recorded frame. [Measurement definitions and paper audit](https://huangkiki.github.io/Dexlab/en/latest/cutting-fidelity.html).
-
-
-
 **Use established physical laws and empirical relations in reproducible experiments to study how contact and friction affect robotic grasping, and assess the trustworthiness of physics simulation.**
 
 The research serves two goals:
@@ -30,6 +11,45 @@ The research serves two goals:
 
 [简体中文](README.md) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](docs/site/en/experience.md) · [Diagnosis and trials](docs/site/en/diagnosis.md) · [Scenario guide](docs/site/en/selection.md)
 
+From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
+
+<table><tr><th>Tofu halving</th><th>Three banana cuts</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="Tofu halving"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="Three banana cuts"></a></td></tr></table>
+
+**Tofu halving · Three sequential banana cuts** — Replays of saved simulation states; synthetic material parameters, without real-food calibration.
+
+[▶ Surface / particle videos](https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html) · [Tofu experiment](https://huangkiki.github.io/Dexlab/en/latest/cutting.html)
+
+
+## Do cut pieces stay independent?
+
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>Author reference video</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>Author reference video</td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>DexLab tofu · live measurements</td></tr></table>
+
+**Numerical comparison of the three methods**
+
+| Measurement event and quantity | BladeMaster¹ | CRESSim-MPM¹ | DexLab² |
+| --- | ---: | ---: | ---: |
+| First cut at half depth: mean opening (mm) | 0.654 | 4.059 | 0.496 (0.82 s) |
+| Both cuts withdrawn: middle-piece contraction (%) | 0.506 | 8.746 | 2.509 (4.00 s) |
+| After left-piece velocity initialization: left x displacement (mm) | Not reported | Not reported | -2.417 |
+| Same window: middle / right x displacement (mm) | Not reported | Not reported | -0.030 / -0.008 |
+
+¹ Values reported by the [BladeMaster project / paper Fig. 5](https://jango6324.github.io/blademaster/#comparison), including its CRESSim-MPM comparison. ² [DexLab event measurements from saved states](demos/cutting-refinement/evidence.json): 5 mm grid, 0.25 ms timestep and 0.5 mm blade; displacements cover 4.20–5.00 s. The half-depth event occurs at 0.82375 s; the table uses the nearest saved frame, 0.82 s. Openings use affine material faces and volumes use interior middle-piece tetrahedra; contraction is the negative relative volume change (-ΔV/V₀). These are **reported / measured values side by side**. Complete author settings and sampling remain [unmatched](https://github.com/huangkiki/Dexlab/issues/200), so the table does not establish a controlled accuracy ranking.
+
+
+The first two clips are the BladeMaster authors’ comparison. The third is DexLab’s two-cut tofu experiment. The task is shared; complete author configurations remain unmatched, so no controlled performance ranking is implied. [→ Three-column playback and protocol](https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html) · [BladeMaster](https://jango6324.github.io/blademaster/#comparison) · [CRESSim-MPM](https://arxiv.org/abs/2502.18437)
+
+The GIF displays cut openings, middle-volume change and post-cut displacement at each recorded frame. [Measurement definitions and paper audit](https://huangkiki.github.io/Dexlab/en/latest/cutting-fidelity.html).
+
+## Cross scoring: two incisions, one connected base
+
+The blade makes a shallow incision, withdraws, then turns 90° for a second stroke. The replay shows blade depth, both openings and connected-component count.
+
+<table><tr><th>Material surface (elastic recoil)</th><th>Native cut histories (colour)</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html"><img src="docs/evidence/cutting/tofu-scoring/surface.gif" width="380" alt="Material surface (elastic recoil)"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html"><img src="docs/evidence/cutting/tofu-scoring/particles.gif" width="380" alt="Native cut histories (colour)"></a></td></tr></table>
+
+The elastic surface nearly recloses after withdrawal; particle colours show both recorded cut histories, while the uncut lower bridge stays cream.
+
+[Surface/particle videos, measurements and reproduction](https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html)
+
 <!-- visual-research:start -->
 ## What experiments have we run?
 
@@ -37,6 +57,7 @@ The research serves two goals:
 | --- | --- |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="./docs/evidence/cutting/tofu/surface-poster.png" width="200" alt="Synthetic tofu halving"></a> | **[Synthetic tofu halving](https://huangkiki.github.io/Dexlab/en/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>Do the two cut pieces move independently after withdrawal?<br>Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="./docs/evidence/cutting/tofu-sequential/surface-poster.png" width="200" alt="Two tofu cuts: three-method view"></a> | **[Two tofu cuts: three-method view](https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html)**<br>CPU TLMPM / author reference videos<br>Can the left piece move independently after two cuts?<br>A 5 mm grid forms three equal pieces and 2.398 mm relative motion; GIFs show opening, volume and displacement. The task is matched; complete author configurations remain unmatched. |
+| <a href="https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html"><img src="./docs/evidence/cutting/tofu-scoring/surface-poster.png" width="200" alt="Crossed shallow tofu cuts"></a> | **[Crossed shallow tofu cuts](https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html)**<br>CPU TLMPM / guided orthogonal scoring<br>Does the lower bridge remain connected after crossing incisions?<br>Default and half-step cases form two shallow cuts while retaining one native component; the uncut control is rejected. Synthetic material, not food calibration. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="./docs/evidence/cutting/banana/surface-poster.png" width="200" alt="Three sequential banana cuts"></a> | **[Three sequential banana cuts](https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html)**<br>CPU TLMPM / persistent cut history<br>Do subsequent cuts preserve earlier discontinuities?<br>Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="Native LIBERO: diagnosis and change"></a> | **[Native LIBERO: diagnosis and change](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>How can an existing benchmark expose and validate a change?<br>Stale observations identified; timestep trials retain successes, failures and regressions. |
 | <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="Normal & transient response"></a> | **[Normal & transient response](https://huangkiki.github.io/Dexlab/en/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>How do parameters change loading, unloading and transients?<br>Static calibration works; dynamics and mass transfer need separate checks. |

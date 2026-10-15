@@ -1,0 +1,1354 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "schema_version": 1,
+    "task": "tofu-scoring",
+    "purpose": "Two perpendicular shallow incisions with an intact lower bridge.",
+    "cases": [
+      [
+        "physics-001-cross",
+        [
+          "--task",
+          "tofu-scoring"
+        ]
+      ],
+      [
+        "physics-002-cross-half",
+        [
+          "--task",
+          "tofu-scoring",
+          "--dt",
+          ".000125"
+        ]
+      ],
+      [
+        "physics-003-cross-uncut",
+        [
+          "--task",
+          "tofu-scoring",
+          "--mode",
+          "uncut"
+        ]
+      ],
+      [
+        "physics-004-sequential-regression",
+        [
+          "--task",
+          "tofu-sequential"
+        ]
+      ]
+    ],
+    "physics_sha256": {
+      "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+      "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+      "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+      "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa"
+    },
+    "geometry": {
+      "block_size_m": [
+        0.045,
+        0.045,
+        0.03
+      ],
+      "grid_spacing_m": 0.005,
+      "blade_half_size_m": [
+        0.00025,
+        0.0275,
+        0.02
+      ],
+      "bevel_height_m": 0.005
+    },
+    "controls": {
+      "duration_s": 4.2,
+      "stroke_period_s": 2.0,
+      "yaw_rad": [
+        0.0,
+        1.5707963267948966
+      ],
+      "local_time_s": [
+        0.0,
+        0.35,
+        1.0,
+        1.2,
+        1.75,
+        2.2
+      ],
+      "target_edge_z_m": [
+        0.042,
+        0.042,
+        0.024,
+        0.024,
+        0.042,
+        0.042
+      ],
+      "cutting_window_s": [
+        0.35,
+        1.2
+      ],
+      "probe_velocity": null,
+      "description": "Guided perpendicular shallow incisions. The knife is reoriented only after withdrawal; no free rotational dynamics or exact author knife-tip path is claimed."
+    },
+    "material": "Synthetic existing elastic profile: E6000Pa, nu0.35, density1100kg/m3, Gc0.5J/m2, sharpness0.9. Not calibrated tofu.",
+    "acceptance": {
+      "momentum_error_ns": 1e-09,
+      "minimum_det_f": 0.05,
+      "maximum_overlap_radii": 1.0,
+      "minimum_reaction_n": 0.001,
+      "base_height_m": 0.015,
+      "minimum_depth_m": 0.002,
+      "maximum_depth_m": 0.012,
+      "topology": "One native component at0,1.2,2,3.2,4,4.2s; both histories have opposing sides and persist; lower15mm unassigned and connected."
+    },
+    "controls_acceptance": "Uncut must fail cutting outcome, retain one component and pass numerical checks except nonzero blade contact. Original sequential task must pass original frozen acceptance.",
+    "limits": {
+      "calls": 8,
+      "cumulative_worker_s": 5400,
+      "per_call_s": 1200
+    },
+    "scope": "Independent CPU TLMPM synthetic task; no new native six-engine cutting qualification or controlled three-method ranking."
+  },
+  "records": [
+    {
+      "id": "physics-001-cross",
+      "arguments": [
+        "--task",
+        "tofu-scoring"
+      ],
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.045,
+            0.045,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.00025,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.0275,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 4.2,
+        "probe_time_s": null,
+        "task": "tofu-scoring",
+        "acceptance": {
+          "fraction_error": 0.02,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "base_height_m": 0.015,
+          "minimum_depth_m": 0.002,
+          "maximum_depth_m": 0.012
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+          "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "5599c5939283e7f20896dd574dc41e9d3318713a",
+        "wall_s_including_jit": 341.33832746200005,
+        "completed_steps": 16800,
+        "artifacts": {
+          "states.npz": "eefcdcbacb1c043c3cf7b8e5e0c447aad538cac94b71b03f078a9e063aaeafa3",
+          "trace.npz": "02a74855f0125f26fbbc1450be978a088ac81b91dea7534c340ff20ed528f524"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-scoring",
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "nonzero_material_reaction": true,
+          "one_component_at_scoring_events": true,
+          "uncut_connected_base": true,
+          "two_opposing_partial_cuts": true,
+          "shallow_measured_depth": true
+        },
+        "component_mass_fractions": [
+          1.0
+        ],
+        "progressive_components": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "scoring_side_counts": [
+          [
+            324,
+            324
+          ],
+          [
+            324,
+            324
+          ]
+        ],
+        "scoring_maximum_depth_m": [
+          0.005977112248528028,
+          0.005966695224384633
+        ],
+        "initial_components": 1,
+        "final_components": 1,
+        "mass_kg": 0.06682500000000002,
+        "particle_count": 3888,
+        "momentum_error_ns": 4.4858864886587746e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 5.421010862427522e-20,
+        "blade_impulse_error_ns": 6.93892037368683e-19,
+        "relative_motion_m": null,
+        "left_displacement_m": [
+          -8.54269586701914e-05,
+          1.2860511695358921e-17,
+          -0.0005244900922711428
+        ],
+        "right_displacement_m": [
+          8.542695867014456e-05,
+          2.4557402293663446e-18,
+          -0.0005244900922711498
+        ],
+        "piece_displacements_m": [],
+        "peak_material_reaction_n": 0.007878908449616622,
+        "maximum_proxy_overlap_m": 0.00018184744366229154,
+        "det_f_range": [
+          0.9619699395566835,
+          1.0124474409873303
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "events": [
+        {
+          "state_frame": 0,
+          "trace_frame": 0,
+          "time_s": 0.0,
+          "phase": "Initial",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": 0.0,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 120,
+          "trace_frame": 4799,
+          "time_s": 1.2,
+          "phase": "Cut 1",
+          "face_opening_mm": [
+            0.5450419137841577,
+            null
+          ],
+          "paired_faces": [
+            36,
+            0
+          ],
+          "interior_volume_change_percent": -1.7929767626528204,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.006018129254596879,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 5.977004411873006
+        },
+        {
+          "state_frame": 200,
+          "trace_frame": 7999,
+          "time_s": 2.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.27693305087456294,
+            null
+          ],
+          "paired_faces": [
+            36,
+            0
+          ],
+          "interior_volume_change_percent": -1.8246904387428708,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 320,
+          "trace_frame": 12799,
+          "time_s": 3.2,
+          "phase": "Cut 2",
+          "face_opening_mm": [
+            0.2751100096500814,
+            0.5549330191471037
+          ],
+          "paired_faces": [
+            36,
+            36
+          ],
+          "interior_volume_change_percent": -1.8425704304806723,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.006662972270263631,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 5.966392895623448
+        },
+        {
+          "state_frame": 400,
+          "trace_frame": 15999,
+          "time_s": 4.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.27629088887938263,
+            0.27600781712671735
+          ],
+          "paired_faces": [
+            36,
+            36
+          ],
+          "interior_volume_change_percent": -1.8315183438910365,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 420,
+          "trace_frame": 16799,
+          "time_s": 4.2,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.27650745510289393,
+            0.2757749541446305
+          ],
+          "paired_faces": [
+            36,
+            36
+          ],
+          "interior_volume_change_percent": -1.8281370990641643,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        }
+      ],
+      "resources": {
+        "state": "completed",
+        "worker_wall_s": 342.98269487900006,
+        "peak_bytes": 878096384,
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        }
+      }
+    },
+    {
+      "id": "physics-002-cross-half",
+      "arguments": [
+        "--task",
+        "tofu-scoring",
+        "--dt",
+        ".000125"
+      ],
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.045,
+            0.045,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.000125,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.0275,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 4.2,
+        "probe_time_s": null,
+        "task": "tofu-scoring",
+        "acceptance": {
+          "fraction_error": 0.02,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "base_height_m": 0.015,
+          "minimum_depth_m": 0.002,
+          "maximum_depth_m": 0.012
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+          "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "5599c5939283e7f20896dd574dc41e9d3318713a",
+        "wall_s_including_jit": 679.149662321,
+        "completed_steps": 33600,
+        "artifacts": {
+          "states.npz": "3f5a21c539a91b2dfaa8e11d1bcd717d58c7d359f519aa0ed593dcd4848e97cd",
+          "trace.npz": "1eb39a7595cf92e04441a06b8ced9c1da9d86c3cf71a537243b3b860e0f30a08"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-scoring",
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "nonzero_material_reaction": true,
+          "one_component_at_scoring_events": true,
+          "uncut_connected_base": true,
+          "two_opposing_partial_cuts": true,
+          "shallow_measured_depth": true
+        },
+        "component_mass_fractions": [
+          1.0
+        ],
+        "progressive_components": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "scoring_side_counts": [
+          [
+            324,
+            324
+          ],
+          [
+            324,
+            324
+          ]
+        ],
+        "scoring_maximum_depth_m": [
+          0.005965845474885368,
+          0.005964191202951979
+        ],
+        "initial_components": 1,
+        "final_components": 1,
+        "mass_kg": 0.06682500000000002,
+        "particle_count": 3888,
+        "momentum_error_ns": 4.8382521947165635e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 6.939317420380856e-19,
+        "relative_motion_m": null,
+        "left_displacement_m": [
+          -8.718968138551712e-05,
+          7.224445093368431e-18,
+          -0.0004733661489568636
+        ],
+        "right_displacement_m": [
+          8.718968138556396e-05,
+          1.018703868402841e-17,
+          -0.0004733661489568705
+        ],
+        "piece_displacements_m": [],
+        "peak_material_reaction_n": 0.008679730589845627,
+        "maximum_proxy_overlap_m": 4.430628590097177e-05,
+        "det_f_range": [
+          0.9640404168999518,
+          1.0139708025578962
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "events": [
+        {
+          "state_frame": 0,
+          "trace_frame": 0,
+          "time_s": 0.0,
+          "phase": "Initial",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": 0.0,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 120,
+          "trace_frame": 9599,
+          "time_s": 1.2,
+          "phase": "Cut 1",
+          "face_opening_mm": [
+            0.6130901725159644,
+            null
+          ],
+          "paired_faces": [
+            36,
+            0
+          ],
+          "interior_volume_change_percent": -1.824410448247804,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.008076505691450209,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 5.965681367663112
+        },
+        {
+          "state_frame": 200,
+          "trace_frame": 15999,
+          "time_s": 2.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.29633098195204655,
+            null
+          ],
+          "paired_faces": [
+            36,
+            0
+          ],
+          "interior_volume_change_percent": -1.812357760904315,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 320,
+          "trace_frame": 25599,
+          "time_s": 3.2,
+          "phase": "Cut 2",
+          "face_opening_mm": [
+            0.303771170491715,
+            0.6075064993453508
+          ],
+          "paired_faces": [
+            36,
+            36
+          ],
+          "interior_volume_change_percent": -1.829293909402141,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.008153479862270305,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 5.964003145149343
+        },
+        {
+          "state_frame": 400,
+          "trace_frame": 31999,
+          "time_s": 4.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.2986060286609714,
+            0.2923711763875376
+          ],
+          "paired_faces": [
+            36,
+            36
+          ],
+          "interior_volume_change_percent": -1.8141096115182775,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 420,
+          "trace_frame": 33599,
+          "time_s": 4.2,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.29839308254510083,
+            0.2930092060685464
+          ],
+          "paired_faces": [
+            36,
+            36
+          ],
+          "interior_volume_change_percent": -1.8143849502934128,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        }
+      ],
+      "resources": {
+        "state": "completed",
+        "worker_wall_s": 680.825431661,
+        "peak_bytes": 934735872,
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        }
+      }
+    },
+    {
+      "id": "physics-003-cross-uncut",
+      "arguments": [
+        "--task",
+        "tofu-scoring",
+        "--mode",
+        "uncut"
+      ],
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "uncut",
+        "config": {
+          "size": [
+            0.045,
+            0.045,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.00025,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.0275,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 4.2,
+        "probe_time_s": null,
+        "task": "tofu-scoring",
+        "acceptance": {
+          "fraction_error": 0.02,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "base_height_m": 0.015,
+          "minimum_depth_m": 0.002,
+          "maximum_depth_m": 0.012
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+          "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "5599c5939283e7f20896dd574dc41e9d3318713a",
+        "wall_s_including_jit": 341.44605156399984,
+        "completed_steps": 16800,
+        "artifacts": {
+          "states.npz": "519849b90f63be069bb7651f5c389d6f0335ac2b474eb25c2a458c4e3b1f8b9b",
+          "trace.npz": "6481231341b9af99e55aca23ba662397a491b8b77d74e5da5ebbd530ae379260"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-scoring",
+        "mode": "uncut",
+        "passed": false,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "nonzero_material_reaction": false,
+          "one_component_at_scoring_events": true,
+          "uncut_connected_base": true,
+          "two_opposing_partial_cuts": false,
+          "shallow_measured_depth": false
+        },
+        "component_mass_fractions": [
+          1.0
+        ],
+        "progressive_components": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "scoring_side_counts": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "scoring_maximum_depth_m": [
+          -0.011999999999999997,
+          -0.011999999999999997
+        ],
+        "initial_components": 1,
+        "final_components": 1,
+        "mass_kg": 0.06682500000000002,
+        "particle_count": 3888,
+        "momentum_error_ns": 4.4858864886587746e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 5.421010862427522e-20,
+        "blade_impulse_error_ns": 0.0,
+        "relative_motion_m": null,
+        "left_displacement_m": [
+          -7.492395868038612e-05,
+          -6.182183251835041e-18,
+          -0.0005221201523025534
+        ],
+        "right_displacement_m": [
+          7.492395868045724e-05,
+          -8.668263295081638e-18,
+          -0.0005221201523025586
+        ],
+        "piece_displacements_m": [],
+        "peak_material_reaction_n": 0.0,
+        "maximum_proxy_overlap_m": 0.00018184744366229154,
+        "det_f_range": [
+          0.9619699395566835,
+          1.0100822978567627
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "events": [
+        {
+          "state_frame": 0,
+          "trace_frame": 0,
+          "time_s": 0.0,
+          "phase": "Initial",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": 0.0,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 120,
+          "trace_frame": 4799,
+          "time_s": 1.2,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": -1.7588599164366947,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 200,
+          "trace_frame": 7999,
+          "time_s": 2.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": -1.822497997121486,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 320,
+          "trace_frame": 12799,
+          "time_s": 3.2,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": -1.825253942370919,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 400,
+          "trace_frame": 15999,
+          "time_s": 4.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": -1.8258082402806575,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        },
+        {
+          "state_frame": 420,
+          "trace_frame": 16799,
+          "time_s": 4.2,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": -1.8257166012548343,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0,
+          "native_components": 1,
+          "base_intact": true,
+          "blade_depth_mm": 0.0
+        }
+      ],
+      "resources": {
+        "state": "completed",
+        "worker_wall_s": 343.00011709399996,
+        "peak_bytes": 805920768,
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        }
+      }
+    },
+    {
+      "id": "physics-004-sequential-regression",
+      "arguments": [
+        "--task",
+        "tofu-sequential"
+      ],
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.09,
+            0.03,
+            0.03
+          ],
+          "grid_spacing": 0.0075,
+          "dt": 0.00025,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.025,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 5.0,
+        "probe_time_s": 4.2,
+        "task": "tofu-sequential",
+        "acceptance": {
+          "fraction_error": 0.03,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+          "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "5599c5939283e7f20896dd574dc41e9d3318713a",
+        "wall_s_including_jit": 154.43289952299983,
+        "completed_steps": 20000,
+        "artifacts": {
+          "states.npz": "fea7fe3b235d6086b70cb68e8fb7ea6ca5d95538c6d94a3f8f179b97cb724ce4",
+          "trace.npz": "d5469475a5fe9d4277e08f098e226f162eefa9f5df5a09998832ab2d48d43eda"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-sequential",
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true,
+          "three_mechanical_components": true,
+          "piece_mass_inventory": true,
+          "progressive_separation": true
+        },
+        "component_mass_fractions": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "progressive_components": [
+          2,
+          3
+        ],
+        "scoring_side_counts": [],
+        "scoring_maximum_depth_m": [],
+        "initial_components": 1,
+        "final_components": 3,
+        "mass_kg": 0.08909999999999998,
+        "particle_count": 1536,
+        "momentum_error_ns": 1.8865117801247777e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 5.421010862427522e-20,
+        "blade_impulse_error_ns": 5.5294310796760726e-18,
+        "relative_motion_m": 0.0027988238290981896,
+        "left_displacement_m": [
+          -0.0028510925994121306,
+          1.1529812478025536e-17,
+          -1.3630514565153226e-05
+        ],
+        "right_displacement_m": [
+          -5.2268770313941034e-05,
+          -1.1841520602615119e-18,
+          -6.534806903968002e-06
+        ],
+        "piece_displacements_m": [
+          [
+            -0.0028510925994121306,
+            1.1529812478025536e-17,
+            -1.3630514565153226e-05
+          ],
+          [
+            -7.515898870320939e-05,
+            -1.2061749168901237e-18,
+            -1.3080404665934825e-05
+          ],
+          [
+            -2.9378551924672675e-05,
+            -1.1621292036329e-18,
+            1.0790857998821402e-08
+          ]
+        ],
+        "peak_material_reaction_n": 0.0325037307926027,
+        "maximum_proxy_overlap_m": 0.00010239519171150293,
+        "det_f_range": [
+          0.9643863981732022,
+          1.0264973930352372
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "events": [
+        {
+          "state_frame": 0,
+          "trace_frame": 0,
+          "time_s": 0.0,
+          "phase": "Initial",
+          "face_opening_mm": [
+            null,
+            null
+          ],
+          "paired_faces": [
+            0,
+            0
+          ],
+          "interior_volume_change_percent": 0.0,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0
+        },
+        {
+          "state_frame": 120,
+          "trace_frame": 4799,
+          "time_s": 1.2,
+          "phase": "Cut 1",
+          "face_opening_mm": [
+            0.541222359997321,
+            null
+          ],
+          "paired_faces": [
+            64,
+            0
+          ],
+          "interior_volume_change_percent": -1.6204553418362466,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [
+            -0.20340440793390147,
+            -0.14358468603576768,
+            0.27933633415560233
+          ],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.02043340538329577
+        },
+        {
+          "state_frame": 200,
+          "trace_frame": 7999,
+          "time_s": 2.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.11802938086391616,
+            null
+          ],
+          "paired_faces": [
+            64,
+            0
+          ],
+          "interior_volume_change_percent": -1.4807313035562042,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [
+            -0.1168437004043004,
+            0.011455397253993554,
+            0.14313482962787705
+          ],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0
+        },
+        {
+          "state_frame": 320,
+          "trace_frame": 12799,
+          "time_s": 3.2,
+          "phase": "Cut 2",
+          "face_opening_mm": [
+            0.501298835178136,
+            0.5324681321755371
+          ],
+          "paired_faces": [
+            64,
+            64
+          ],
+          "interior_volume_change_percent": -3.179330988908946,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [
+            -0.2879202820478319,
+            0.12445409854591206,
+            0.3578331413747051
+          ],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.024527335566553878
+        },
+        {
+          "state_frame": 400,
+          "trace_frame": 15999,
+          "time_s": 4.0,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.5539131958437701,
+            0.1273703752176067
+          ],
+          "paired_faces": [
+            64,
+            64
+          ],
+          "interior_volume_change_percent": -3.02102164279916,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [
+            -0.16836475626009423,
+            -0.04407805376514012,
+            0.29468842803638656
+          ],
+          "centroid_x_from_probe_mm": null,
+          "knife_material_force_n": 0.0
+        },
+        {
+          "state_frame": 420,
+          "trace_frame": 16799,
+          "time_s": 4.2,
+          "phase": "Knife clear",
+          "face_opening_mm": [
+            0.5537230840942533,
+            0.12604109597823326
+          ],
+          "paired_faces": [
+            64,
+            64
+          ],
+          "interior_volume_change_percent": -3.02218081923471,
+          "inverted_tetrahedra": 0,
+          "centroid_x_from_start_mm": [
+            -0.16605752446297178,
+            -0.04313330649310951,
+            0.2954909993981252
+          ],
+          "centroid_x_from_probe_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "knife_material_force_n": 0.0
+        }
+      ],
+      "resources": {
+        "state": "completed",
+        "worker_wall_s": 178.5044764260001,
+        "peak_bytes": 474189824,
+        "effective_limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        }
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "name": "physics-001-cross",
+      "state": "exited",
+      "worker_wall_s": 342.98269487900006,
+      "returncode": 0
+    },
+    {
+      "name": "physics-002-cross-half",
+      "state": "exited",
+      "worker_wall_s": 680.825431661,
+      "returncode": 0
+    },
+    {
+      "name": "physics-003-cross-uncut",
+      "state": "exited",
+      "worker_wall_s": 343.00011709399996,
+      "returncode": 0
+    },
+    {
+      "name": "physics-004-sequential-regression",
+      "state": "exited",
+      "worker_wall_s": 178.5044764260001,
+      "returncode": 0
+    }
+  ],
+  "cumulative_worker_s": 1545.3127200600002,
+  "scope": "Synthetic guided orthogonal scoring. No free rotation, author knife-tip trajectory reproduction or real-food calibration.",
+  "historical_comparison_source": "v0.64.0 physics-001-tofu-fine; reused physical record, new rendering only."
+}
