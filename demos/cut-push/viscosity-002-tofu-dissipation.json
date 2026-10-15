@@ -1,0 +1,13 @@
+{
+  "state": "passed",
+  "dynamic_viscosity_pa_s": 5.0,
+  "dt_s": 0.00025,
+  "source_artifacts": {
+    "states.npz": "648e2e681ec0da4c955a5677213a458eb4c139f7ceda1cdff1018f35d14fdab3",
+    "trace.npz": "b7e8c7815029cfd12e9561715217adc4706f94b6e86282b9fe82428e9e57155c"
+  },
+  "samples_checked": 600,
+  "maximum_sample_error_j": 2.8587361969832636e-21,
+  "native_total_constitutive_dissipation_j": 0.00017097368706960183,
+  "definition": "At each saved state with a following substep: dt * sum(2 eta V0 J D:D), using the current compatibility-filtered P2G velocity. This is constitutive dissipation, not the total mechanical energy change."
+}

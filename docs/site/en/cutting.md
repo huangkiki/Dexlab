@@ -24,7 +24,7 @@ Surface and particle views share the same saved physical states and play at phys
 | Directional resistance | Contact work accumulates toward `Gc V^(2/3) (1−ζ)/ζ`; saturated damage releases the positive cutting-direction impulse at subsequent contacts. Damage does not scale elasticity or directly trigger separation |
 | Rendering | Surface and particle replay from saved states; exposed material-cell faces with compatible deformation embedding. This differs from the paper's linked-grid dual contouring |
 
-The 0.2 kg blade has three dynamic translation coordinates. A bounded PD drive follows an edge-height target; material reaction changes its velocity. A gravity-compensated guide fixes attitude, and a unilateral rigid-board stop supplies a separately recorded external impulse. This is not the paper's freely rotating gravity-drop experiment. This page retains the v0.61.0 single-cut baseline; the new version adds [three sequential banana cuts](banana-cutting.md). Intersecting paths, plasticity, viscosity and GPU kernels are not qualified.
+The 0.2 kg blade has three dynamic translation coordinates. A bounded PD drive follows an edge-height target; material reaction changes its velocity. A gravity-compensated guide fixes attitude, and a unilateral rigid-board stop supplies a separately recorded external impulse. This is not the paper's freely rotating gravity-drop experiment. This page retains the v0.61.0 single-cut baseline; the new version adds [three sequential banana cuts](banana-cutting.md). Later [crossed scoring](tofu-scoring.md) and [continuous pushing with optional Newtonian viscosity](cut-push.md) have separate records; this historical page remains elastic. Plasticity and GPU kernels remain unqualified.
 
 ## Parameters and frozen acceptance
 

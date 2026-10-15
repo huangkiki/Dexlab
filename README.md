@@ -11,15 +11,26 @@
 
 [English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](docs/site/zh/experience.md) · [诊断与试参方法](docs/site/zh/diagnosis.md) · [场景选型指南](docs/site/zh/selection.md)
 
-## 豆腐连续两刀：切开，再用刀面推开
+## 最后一刀切完，直接用刀面推开
 
-<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-comparison.html"><img src="https://raw.githubusercontent.com/huangkiki/Dexlab/91e3f8e8d144cb709f4d3abda2195e31dce77d6e/docs/evidence/cutting/tofu-sequential/surface.gif" width="800" alt="豆腐两刀后，刀面进入切缝并向左推开一块；动图显示接触力和三块位移"></a>
+豆腐两刀成三块，香蕉三刀成四块；最后一刀后，刀刃稍抬离砧板，保持在切缝内直接侧推，再撤刀。画面逐帧显示刀对材料的接触力，以及每块材料从初始位置起的 x 位移。
 
-**两刀切开 → 刀面进入左侧切缝 → 向左推动 → 撤刀。** 画面逐帧显示刀对材料的接触力与三块位移；左块最终移动 11.128 mm，中／右块分别移动 0.038／0.015 mm。合成材料参数，未做真实豆腐标定。
+<table>
+<tr><th>豆腐两刀 → 三块 · 表面渲染</th><th>豆腐两刀 → 三块 · 原生粒子</th></tr>
+<tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/surface.gif" width="420" alt="豆腐两刀 → 三块 · 表面渲染"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/particles.gif" width="420" alt="豆腐两刀 → 三块 · 原生粒子"></a></td></tr>
+<tr><th>香蕉三刀 → 四块 · 表面渲染</th><th>香蕉三刀 → 四块 · 原生粒子</th></tr>
+<tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/banana-cut-push/surface.gif" width="420" alt="香蕉三刀 → 四块 · 表面渲染"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/banana-cut-push/particles.gif" width="420" alt="香蕉三刀 → 四块 · 原生粒子"></a></td></tr>
+</table>
 
-[▶ 表面／粒子视频与实验记录](https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-comparison.html) · [原始记录与校验文件](https://github.com/huangkiki/Dexlab/releases/tag/v0.66.0)
+力和位移来自保存的仿真状态；没有直接给材料速度增量。 豆腐采用 Newtonian viscosity η=5 Pa·s、0.125 ms 步长；香蕉保留 η=0、0.25 ms。黏性前后对照、抖动数值与成本见验收页。合成材料参数，未做真实食材标定。
+
+**同一记录，两种视图：** 每帧显示接触力 |F|、Fx、Fz（N）和全部分块的 Δx（mm）。豆腐在相同步长、5.4–6.0 s 窗口内，η=0 → 5 Pa·s 的粒子抖动指标为 **0.0323 → 0.0140 mm**，质心横向峰峰值为 **0.0711 → 0.0384 mm**；仍有残余运动，未对回放做平滑。
+
+[▶ 表面／粒子视频、接触力与完整验收](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html)
 
 ## 切后还能独立运动吗？
+
+以下为 v0.66.0 历史两刀基线，与本页上方的新连续侧推动作分开记录；数值对应这组三列视频。
 
 <table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="https://raw.githubusercontent.com/huangkiki/Dexlab/91e3f8e8d144cb709f4d3abda2195e31dce77d6e/docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀 · 刀面推动与测量</td></tr></table>
 
@@ -33,7 +44,7 @@
 | 同一窗口：中／右块 x 位移（mm） | 不同输入 | 不同输入 | -0.038／-0.015 |
 | 刀推阶段：净向左接触冲量（N·s） | 不同输入 | 不同输入 | 0.105801 |
 
-**末尾施力方式不同：** 作者参考片给左块初速度；DexLab 现在由刀面接触向左推，材料没有直接速度增量。前两行切割指标仍可并列阅读，后三行仅说明 DexLab 刀推动作，不能作为相同输入的三方对比。
+**末尾施力方式不同：** 作者参考片给左块初速度；该历史 DexLab 记录由刀面接触向左推，材料没有直接速度增量。前两行切割指标仍可并列阅读，后三行仅说明 DexLab 刀推动作，不能作为相同输入的三方对比。
 
 ¹ [BladeMaster 原站／论文 Fig. 5](https://jango6324.github.io/blademaster/#comparison)报告的数值，包括其 CRESSim-MPM 对照。² [DexLab 保存状态的事件测量](demos/tofu-knife-push/evidence.json)，5 mm 网格、0.25 ms 步长、0.5 mm 刀片；位移窗口为 4.00–7.00 s；刀接触冲量积分窗口为 4.00–6.60 s。半深事件为 0.82375 s，表中取最近保存帧 0.82 s。切口采用材料面仿射估计，体积采用中块内部四面体；收缩量等于负的体积相对变化（-ΔV/V₀）。三列为**已报告／实测数值并列**，原作完整配置与采样口径仍待[对齐](https://github.com/huangkiki/Dexlab/issues/200)，尚非同条件精度排名。
 
@@ -52,25 +63,16 @@
 
 [表面／粒子视频、数值与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-scoring.html)
 
-## 更多切割任务：豆腐对半切与香蕉切片
-
-从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
-
-<table><tr><th>豆腐对半切</th><th>香蕉连续三刀</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="豆腐对半切"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="香蕉连续三刀"></a></td></tr></table>
-
-**豆腐对半切 · 香蕉三刀切片** — 基于实际保存状态的回放；合成材料参数，未做真实食材标定。
-
-[▶ 表面／粒子对照与完整视频](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html) · [豆腐实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)
-
 <!-- visual-research:start -->
 ## 做了哪些实验
 
 | 实验画面／图表 | 比较对象与研究结论 |
 | --- | --- |
-| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="./docs/evidence/cutting/tofu/surface-poster.png" width="200" alt="豆腐状软块对半切"></a> | **[豆腐状软块对半切](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>撤刀后，切开的两块材料能否独立运动？<br>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。 |
-| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="./docs/evidence/cutting/tofu-sequential/surface-poster.png" width="200" alt="豆腐连续两刀与三列对比"></a> | **[豆腐连续两刀与三列对比](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html)**<br>CPU TLMPM / author reference videos<br>两刀之后，左块能否独立运动？<br>两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="./docs/evidence/cutting/tofu-cut-push/surface-poster.png" width="200" alt="最后一刀直接侧推：豆腐与香蕉"></a> | **[最后一刀直接侧推：豆腐与香蕉](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html)**<br>CPU TLMPM / measured knife contact<br>末块分离是否由可见刀面接触产生？<br>豆腐三块、香蕉四块；最后一刀直接侧推，逐帧显示接触力与位移。豆腐增加牛顿黏性，并保留纯弹性、半步长及无侧推对照。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="./docs/evidence/cutting/tofu/surface-poster.png" width="200" alt="历史：豆腐状软块对半切"></a> | **[历史：豆腐状软块对半切](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)**<br>CPU TLMPM / BladeMaster v2 reference<br>撤刀后，切开的两块材料能否独立运动？<br>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="./docs/evidence/cutting/tofu-sequential/surface-poster.png" width="200" alt="历史：豆腐连续两刀与三列对比"></a> | **[历史：豆腐连续两刀与三列对比](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html)**<br>CPU TLMPM / author reference videos<br>两刀之后，左块能否独立运动？<br>两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-scoring.html"><img src="./docs/evidence/cutting/tofu-scoring/surface-poster.png" width="200" alt="豆腐交叉浅切"></a> | **[豆腐交叉浅切](https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-scoring.html)**<br>CPU TLMPM / guided orthogonal scoring<br>划出交叉切口后，底部是否仍然连接？<br>默认与半步长均形成两条浅切，保持一个原生连通块；未切负例被拒绝。合成材料，非食材标定。 |
-| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="./docs/evidence/cutting/banana/surface-poster.png" width="200" alt="香蕉连续三刀切片"></a> | **[香蕉连续三刀切片](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html)**<br>CPU TLMPM / persistent cut history<br>后续切割会保留之前的切面吗？<br>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。 |
+| <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="./docs/evidence/cutting/banana/surface-poster.png" width="200" alt="历史：香蕉连续三刀切片"></a> | **[历史：香蕉连续三刀切片](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html)**<br>CPU TLMPM / persistent cut history<br>后续切割会保留之前的切面吗？<br>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html"><img src="./docs/evidence/visual/libero-summary.png" width="200" alt="LIBERO 原生抓取：诊断与改进"></a> | **[LIBERO 原生抓取：诊断与改进](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)**<br>LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic<br>如何从已有 benchmark 定位问题，再验证修改？<br>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response"><img src="./demos/contact-benchmark/media/normal-response-v1.png" width="200" alt="法向与瞬态响应"></a> | **[法向与瞬态响应](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#normal-response)**<br>MuJoCo · SuperDex · historical PhysX<br>压入、卸载与动态响应如何随参数改变？<br>静态校准有效，动态响应和质量迁移须分别验证。 |
 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline"><img src="./docs/evidence/incline-friction/error-cost.png" width="200" alt="六引擎斜面与摩擦"></a> | **[六引擎斜面与摩擦](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)**<br>MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake<br>静止、滑动和低摩擦有哪些差异？<br>原配置结果与观测有效性分列；全部失败保留。 |

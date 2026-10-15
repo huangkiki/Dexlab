@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "reason": "User-observed tofu jitter; select already-frozen half-step case after native/surface diagnosis",
+  "baseline_case": "physics-001-tofu",
+  "selected_tofu_case": "physics-003-tofu-half",
+  "selected_banana_case": "physics-002-banana",
+  "selected_tofu_dt_s": 0.000125,
+  "extra_control": {
+    "case": "physics-007-tofu-half-control",
+    "task": "tofu-sequential",
+    "arguments": [
+      "--grid-spacing",
+      ".005",
+      "--dt",
+      ".000125",
+      "--motion-protocol",
+      "cut-no-push"
+    ]
+  },
+  "physics_sha256": {
+    "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+    "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+    "cutting_score.py": "b5eac506c764842c2b65424f55314aaf3167ac4f64681d4094c029cf0d089790",
+    "tofu_cut.py": "405eca7eb0a02847d9a8f424f22eeeba12407cefae6c6ef52a2cd003cd7ddea6"
+  },
+  "acceptance": {
+    "fraction_error": 0.03,
+    "momentum_error_ns": 1e-09,
+    "minimum_det_f": 0.05,
+    "maximum_overlap_radii": 1.0,
+    "relative_motion_m": 0.001,
+    "passive_motion_m": 0.003,
+    "minimum_reaction_n": 0.001,
+    "minimum_push_impulse_ns": 0.001
+  },
+  "budget": "Shares unchanged v1 limit: 8 total physics calls, 8400 cumulative worker seconds, 1800 seconds per call. Seven cases planned; no ledger reset.",
+  "selection_evidence": {
+    "display_sample_interval_s": 0.05,
+    "window_s": [
+      5.4,
+      6.0
+    ],
+    "baseline_left_centroid_peak_to_peak_mm": 0.1987416814582712,
+    "half_step_left_centroid_peak_to_peak_mm": 0.07109999223597185,
+    "baseline_excess_reversing_travel_mm": 0.8566214705721329,
+    "half_step_excess_reversing_travel_mm": 0.18196074168973198,
+    "surface_second_difference_rms_mm": [
+      0.1521381050045874,
+      0.03691553108434908
+    ],
+    "native_particle_second_difference_rms_mm": [
+      0.13345971566545944,
+      0.032292162230221126
+    ]
+  },
+  "scope": "Timestep sensitivity including timestep-scaled contacts and transfer dissipation, not proof of physical convergence or calibrated tofu viscosity. Preserve initial gravity settling and every frame. No temporal filtering or extra damping added.",
+  "unused_candidate": "FLIP .80 proposal was not executed: existing half-step evidence already reduced the observed symptom with all original checks passing."
+}

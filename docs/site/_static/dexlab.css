@@ -132,6 +132,7 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-player a { font-weight:600; }
 .cutting-showcase-note { margin:.8rem 0; font-size:.86rem; color:var(--pst-color-text-muted); }
 @media(max-width:720px) { .cutting-showcase-grid { grid-template-columns:1fr; } }
+@media(min-width:960px) { body:has(.cut-push-showcase) #pst-primary-sidebar { display:none; } .bd-main:has(.cut-push-showcase) .bd-article-container { max-width:1200px; } }
 
 .cutting-comparison-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; }
 .cutting-comparison-panel { min-width:0; border:1px solid var(--pst-color-border); border-radius:12px; overflow:hidden; background:var(--pst-color-surface); }

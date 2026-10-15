@@ -131,12 +131,20 @@ def score_run(directory):
         raise ValueError('Invalid position dimensions')
     frames, particles, axes = x.shape
     config = manifest['config']
+    viscosity = config.get('dynamic_viscosity', 0.0)
+    if not np.isfinite(viscosity) or viscosity < 0:
+        raise ValueError('Invalid dynamic viscosity')
+    if viscosity > 0 and ('viscous_dissipation_j' not in trace
+                          or trace['viscous_dissipation_j'].ndim != 1):
+        raise ValueError('Missing viscous dissipation observation')
     task = manifest.get('task', 'tofu')
     banana = task == 'banana'
     scoring = task == 'tofu-scoring'
     sequential = task in ('banana', 'tofu-sequential')
     motion = manifest.get('motion_protocol', 'impulse')
-    if motion not in ('impulse', 'knife-push', 'no-push') or (motion != 'impulse' and task != 'tofu-sequential'):
+    continuous = motion in ('cut-push', 'cut-no-push')
+    if (motion not in ('impulse', 'knife-push', 'no-push', 'cut-push', 'cut-no-push')
+            or (motion != 'impulse' and not (sequential if continuous else task == 'tofu-sequential'))):
         raise ValueError('Invalid motion protocol')
     contact_motion = motion != 'impulse'
     if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
@@ -146,7 +154,10 @@ def score_run(directory):
                                       'tofu-scoring': (2, 4.2, None)}[task]
     if contact_motion:
         duration, probe_time = 7., None
-        if manifest.get('motion_start_time_s') != 4.:
+        motion_start = (5.3 if banana else 3.3) if continuous else 4.
+        if continuous:
+            duration = 8. if banana else 6.
+        if manifest.get('motion_start_time_s') != motion_start:
             raise ValueError('Altered knife-push motion window')
     if config.get('shape', 'block') != ('banana' if banana else 'block'):
         raise ValueError('Task and material geometry disagree')
@@ -216,7 +227,7 @@ def score_run(directory):
         np.vstack((np.zeros(3), trace['blade_velocity_m_s'])), axis=0)
     blade_error = float(np.abs(blade_impulse - dt * (trace['drive_force_n'] + trace['material_reaction_n'])
                                - trace['blade_board_impulse_ns']).max())
-    motion_start = 4. if contact_motion else probe_time
+    motion_start = motion_start if contact_motion else probe_time
     probe_frame = (0 if motion_start is None else
                    int(np.searchsorted(states['time'], motion_start, side='right') - 1))
     displacements = [x[-1, mask].mean(axis=0) - x[probe_frame, mask].mean(axis=0)
@@ -286,6 +297,8 @@ def score_run(directory):
         local_time = np.arange(expected_steps)*dt - 2*expected_cut
         expected_active = ((local_time >= .4) & (local_time < 1.3)
                            & (manifest['mode'] != 'uncut'))
+        if continuous:
+            expected_active &= np.arange(expected_steps) * dt < motion_start
         if not np.array_equal(trace['cutting_active'], expected_active):
             raise ValueError('Invalid cutting-active observation')
         if not np.array_equal(trace['cut_index'], expected_cut):
@@ -295,22 +308,35 @@ def score_run(directory):
         if 'target_edge_m' not in trace or trace['target_edge_m'].shape != (expected_steps, 3):
             raise ValueError('Missing knife drive observations')
         times = np.arange(expected_steps) * dt
-        after_cut = times >= 4.
+        after_cut = times >= motion_start
         targets = np.tile([-.015, 0., .036], (int(after_cut.sum()), 1))
         if motion == 'knife-push':
             targets[:, 0] = np.interp(times[after_cut], [4., 4.8, 6., 6.6, 7.],
                                       [-.015, -.015, -.027, -.027, -.027])
             targets[:, 2] = np.interp(times[after_cut], [4., 4.8, 6., 6.6, 7.],
                                       [.036, .002, .002, .036, .036])
+        if continuous:
+            # Independent protocol reconstruction, not imported from the driver.
+            start_x, direction = (.03, 1) if banana else (-.015, -1)
+            end_x = start_x + direction * .012 if motion == 'cut-push' else start_x
+            knots = np.array([0., .2, 1.4, 2., 2.7]) + motion_start
+            targets[:, 0] = np.interp(times[after_cut], knots, [start_x, start_x, end_x, end_x, end_x])
+            targets[:, 2] = np.interp(times[after_cut], knots, [-.004, .002, .002, .036, .036])
         if not np.allclose(trace['target_edge_m'][after_cut], targets, rtol=0, atol=1e-12):
             raise ValueError('Altered knife drive protocol')
         # The knife receives +x reaction when it pushes material toward -x.
         # Use the native impulse sum; drive targets and rendered motion are not evidence.
-        window = (trace['time_s'] > 4.) & (trace['time_s'] <= 6.6)
-        push_impulse = float(dt * trace['material_reaction_n'][window, 0].sum())
-        after = states['time'] >= 4.
+        push_end = motion_start + 2. if continuous else 6.6
+        window = (trace['time_s'] > motion_start) & (trace['time_s'] <= push_end)
+        push_impulse = float(dt * trace['material_reaction_n'][window, 0].sum()) * (-1 if banana else 1)
+        after = states['time'] >= motion_start
         checks['knife_supplies_push_impulse'] = push_impulse >= limits['minimum_push_impulse_ns']
         checks['no_new_cuts_during_push'] = bool(after.any() and np.all(sides[after] == sides[probe_frame]))
+    if viscosity > 0:
+        # This is constitutive dissipation, not the total mechanical energy
+        # change. A separate saved-state audit reconstructs the sampled rate.
+        checks['nonnegative_viscous_dissipation'] = bool(
+            np.all(trace['viscous_dissipation_j'] >= -1e-14))
     checks = {name: bool(value) for name, value in checks.items()}
     return {
         'schema_version': 1, 'task': task, 'mode': manifest['mode'], 'passed': all(checks.values()),
@@ -327,6 +353,10 @@ def score_run(directory):
         'piece_displacements_m': ([] if scoring else region_motion.tolist() if sequential else
                                   [d.tolist() for d in displacements]),
         'peak_material_reaction_n': float(np.linalg.norm(trace['material_reaction_n'], axis=1).max()),
+        **({'constitutive_viscous_dissipation_j': float(trace['viscous_dissipation_j'].sum())}
+           if viscosity > 0 else {}),
+        **({'motion_protocol': motion, 'push_direction_knife_impulse_ns': push_impulse}
+           if continuous else {}),
         **({'motion_protocol': motion, 'leftward_knife_impulse_ns': push_impulse}
            if task == 'tofu-sequential' else {}),
         'maximum_proxy_overlap_m': float(trace['maximum_proxy_overlap_m'].max()),

@@ -11,22 +11,20 @@
 
 [English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](experience.md) · [诊断与试参方法](diagnosis.md) · [场景选型指南](selection.md)
 
-从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
+## 最后一刀切完，直接用刀面推开
+
+豆腐两刀成三块，香蕉三刀成四块；最后一刀后，刀刃稍抬离砧板，保持在切缝内直接侧推，再撤刀。画面逐帧显示刀对材料的接触力，以及每块材料从初始位置起的 x 位移。
 
 ```{raw} html
-<div class="cutting-showcase"><div class="cutting-showcase-grid"><section class="cutting-player" aria-label="豆腐对半切">
-<header><h3>豆腐对半切</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.mp4" data-poster="_static/cutting/tofu/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.mp4" data-poster="_static/cutting/tofu/particles-poster.png" aria-pressed="false">粒子</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu/surface-poster.png" aria-label="豆腐对半切"><source src="_static/cutting/tofu/surface.mp4" type="video/mp4"><a href="_static/cutting/tofu/surface.mp4">观看视频</a></video>
-<p>切开、撤刀，再检验两块独立运动。 <a href="cutting.html">结果与复现 →</a></p>
-</section><section class="cutting-player" aria-label="香蕉三刀切片">
-<header><h3>香蕉三刀切片</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana/surface.mp4" data-poster="_static/cutting/banana/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana/particles.mp4" data-poster="_static/cutting/banana/particles-poster.png" aria-pressed="false">粒子</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana/surface-poster.png" aria-label="香蕉三刀切片"><source src="_static/cutting/banana/surface.mp4" type="video/mp4"><a href="_static/cutting/banana/surface.mp4">观看视频</a></video>
-<p>连续三刀，保留每一刀形成的分离。 <a href="banana-cutting.html">结果与复现 →</a></p>
-</section></div><p class="cutting-showcase-note">基于实际保存状态的回放；合成材料参数，未做真实食材标定。</p></div>
+<div class="cutting-showcase cut-push-showcase"><div class="cutting-showcase-grid"><section class="cutting-player" aria-label="豆腐：两刀成三块，直接侧推"><header><h3>豆腐：两刀成三块，直接侧推</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-cut-push/surface.mp4" data-poster="_static/cutting/tofu-cut-push/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-cut-push/particles.mp4" data-poster="_static/cutting/tofu-cut-push/particles-poster.png" aria-pressed="false">粒子</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu-cut-push/surface-poster.png"><source src="_static/cutting/tofu-cut-push/surface.mp4" type="video/mp4"></video></section><section class="cutting-player" aria-label="香蕉：三刀成四块，直接侧推"><header><h3>香蕉：三刀成四块，直接侧推</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana-cut-push/surface.mp4" data-poster="_static/cutting/banana-cut-push/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana-cut-push/particles.mp4" data-poster="_static/cutting/banana-cut-push/particles-poster.png" aria-pressed="false">粒子</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana-cut-push/surface-poster.png"><source src="_static/cutting/banana-cut-push/surface.mp4" type="video/mp4"></video></section></div></div>
 ```
+
+力和位移来自保存的仿真状态；没有直接给材料速度增量。 豆腐采用 Newtonian viscosity η=5 Pa·s、0.125 ms 步长；香蕉保留 η=0、0.25 ms。黏性前后对照、抖动数值与成本见验收页。合成材料参数，未做真实食材标定。 [→ 完整测量与验收](cut-push.md)
 
 (cutting-comparison)=
 ## 切后还能独立运动吗？
+
+以下为 v0.66.0 历史基线；最新连续侧推见上方。
 
 ```{raw} html
 :file: _cutting-comparison.html
@@ -40,7 +38,7 @@
 | 同一窗口：中／右块 x 位移（mm） | 不同输入 | 不同输入 | -0.038／-0.015 |
 | 刀推阶段：净向左接触冲量（N·s） | 不同输入 | 不同输入 | 0.105801 |
 
-**末尾施力方式不同：** 作者参考片给左块初速度；DexLab 现在由刀面接触向左推，材料没有直接速度增量。前两行切割指标仍可并列阅读，后三行仅说明 DexLab 刀推动作，不能作为相同输入的三方对比。
+**末尾施力方式不同：** 作者参考片给左块初速度；该历史 DexLab 记录由刀面接触向左推，材料没有直接速度增量。前两行切割指标仍可并列阅读，后三行仅说明 DexLab 刀推动作，不能作为相同输入的三方对比。
 
 ¹ [BladeMaster 原站／论文 Fig. 5](https://jango6324.github.io/blademaster/#comparison)报告的数值，包括其 CRESSim-MPM 对照。² [DexLab 保存状态的事件测量](https://github.com/huangkiki/Dexlab/blob/main/demos/tofu-knife-push/evidence.json)，5 mm 网格、0.25 ms 步长、0.5 mm 刀片；位移窗口为 4.00–7.00 s；刀接触冲量积分窗口为 4.00–6.60 s。半深事件为 0.82375 s，表中取最近保存帧 0.82 s。切口采用材料面仿射估计，体积采用中块内部四面体；收缩量等于负的体积相对变化（-ΔV/V₀）。三列为**已报告／实测数值并列**，原作完整配置与采样口径仍待[对齐](https://github.com/huangkiki/Dexlab/issues/200)，尚非同条件精度排名。
 
@@ -62,10 +60,11 @@
 
 ```{raw} html
 <div class="experiment-grid">
-<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="豆腐状软块对半切"></a><div class="card-copy"><h3><a href="cutting.html">豆腐状软块对半切</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>撤刀后，切开的两块材料能否独立运动？</p><p>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。</p></div></article>
-<article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="豆腐连续两刀与三列对比"></a><div class="card-copy"><h3><a href="cutting-comparison.html">豆腐连续两刀与三列对比</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>两刀之后，左块能否独立运动？</p><p>两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。</p></div></article>
+<article class="experiment-card"><a href="cut-push.html"><img loading="lazy" src="_static/cutting/tofu-cut-push/surface-poster.png" alt="最后一刀直接侧推：豆腐与香蕉"></a><div class="card-copy"><h3><a href="cut-push.html">最后一刀直接侧推：豆腐与香蕉</a></h3><p class="engines">CPU TLMPM / measured knife contact</p><p>末块分离是否由可见刀面接触产生？</p><p>豆腐三块、香蕉四块；最后一刀直接侧推，逐帧显示接触力与位移。豆腐增加牛顿黏性，并保留纯弹性、半步长及无侧推对照。</p></div></article>
+<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="历史：豆腐状软块对半切"></a><div class="card-copy"><h3><a href="cutting.html">历史：豆腐状软块对半切</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>撤刀后，切开的两块材料能否独立运动？</p><p>三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。</p></div></article>
+<article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="历史：豆腐连续两刀与三列对比"></a><div class="card-copy"><h3><a href="cutting-comparison.html">历史：豆腐连续两刀与三列对比</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>两刀之后，左块能否独立运动？</p><p>两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。</p></div></article>
 <article class="experiment-card"><a href="tofu-scoring.html"><img loading="lazy" src="_static/cutting/tofu-scoring/surface-poster.png" alt="豆腐交叉浅切"></a><div class="card-copy"><h3><a href="tofu-scoring.html">豆腐交叉浅切</a></h3><p class="engines">CPU TLMPM / guided orthogonal scoring</p><p>划出交叉切口后，底部是否仍然连接？</p><p>默认与半步长均形成两条浅切，保持一个原生连通块；未切负例被拒绝。合成材料，非食材标定。</p></div></article>
-<article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="香蕉连续三刀切片"></a><div class="card-copy"><h3><a href="banana-cutting.html">香蕉连续三刀切片</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>后续切割会保留之前的切面吗？</p><p>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。</p></div></article>
+<article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="历史：香蕉连续三刀切片"></a><div class="card-copy"><h3><a href="banana-cutting.html">历史：香蕉连续三刀切片</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>后续切割会保留之前的切面吗？</p><p>逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。</p></div></article>
 <article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="LIBERO 原生抓取：诊断与改进"></a><div class="card-copy"><h3><a href="libero-workflow.html">LIBERO 原生抓取：诊断与改进</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>如何从已有 benchmark 定位问题，再验证修改？</p><p>发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。</p></div></article>
 <article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="法向与瞬态响应"></a><div class="card-copy"><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>压入、卸载与动态响应如何随参数改变？</p><p>静态校准有效，动态响应和质量迁移须分别验证。</p></div></article>
 <article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="六引擎斜面与摩擦"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">六引擎斜面与摩擦</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>静止、滑动和低摩擦有哪些差异？</p><p>原配置结果与观测有效性分列；全部失败保留。</p></div></article>
@@ -209,6 +208,7 @@
 :hidden:
 :maxdepth: 1
 
+连续切割与刀面推动 <cut-push>
 豆腐状软块对半切 <cutting>
 香蕉连续切片 <banana-cutting>
 豆腐交叉浅切 <tofu-scoring>

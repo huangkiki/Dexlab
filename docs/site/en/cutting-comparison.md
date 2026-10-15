@@ -1,5 +1,7 @@
 # Do cut pieces stay independent?
 
+This page retains the historical v0.66.0 three-column comparison, with values and videos from that protocol. See the [current showcase](cut-push.md) for tofu/banana final cuts transitioning directly into a side push.
+
 ```{raw} html
 :file: _cutting-comparison.html
 ```

@@ -1,0 +1,151 @@
+{
+  "physics": {
+    "completed_attempts": [
+      {
+        "name": "physics-001-tofu",
+        "state": "exited",
+        "worker_wall_s": 627.3760287460009,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "physics-002-banana",
+        "state": "exited",
+        "worker_wall_s": 249.65553186999932,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "physics-003-tofu-half",
+        "state": "exited",
+        "worker_wall_s": 1254.2217165619986,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "physics-004-banana-half",
+        "state": "exited",
+        "worker_wall_s": 495.36199282899906,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "physics-005-tofu-control",
+        "state": "exited",
+        "worker_wall_s": 634.9543224900008,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "physics-006-banana-control",
+        "state": "exited",
+        "worker_wall_s": 249.54975054999886,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "physics-007-tofu-half-control",
+        "state": "exited",
+        "worker_wall_s": 1248.6060933189983,
+        "returncode": 0,
+        "resource_state": "completed"
+      }
+    ],
+    "worker_wall_s": 4759.725436365996
+  },
+  "viscosity": {
+    "completed_attempts": [
+      {
+        "name": "viscosity-001-probe",
+        "state": "exited",
+        "worker_wall_s": 121.10771211499741,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "viscosity-002-tofu",
+        "state": "exited",
+        "worker_wall_s": 726.9170131570027,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "viscosity-003-tofu-half",
+        "state": "exited",
+        "worker_wall_s": 1445.5438854329986,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "viscosity-004-tofu-half-control",
+        "state": "exited",
+        "worker_wall_s": 1449.9290992479982,
+        "returncode": 0,
+        "resource_state": "completed"
+      }
+    ],
+    "worker_wall_s": 3743.497709952997
+  },
+  "render": {
+    "completed_attempts": [
+      {
+        "name": "checks-001",
+        "state": "exited",
+        "worker_wall_s": 10.264526509999996,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "render-002-final",
+        "state": "exited",
+        "worker_wall_s": 39.69093013100064,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "preview-003",
+        "state": "exited",
+        "worker_wall_s": 8.665151684999728,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "diagnostic-004-jitter",
+        "state": "exited",
+        "worker_wall_s": 4.669649849998677,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "render-005-tofu-half",
+        "state": "exited",
+        "worker_wall_s": 27.045665732002817,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "checks-006-viscosity",
+        "state": "exited",
+        "worker_wall_s": 12.427062929000385,
+        "returncode": 0,
+        "resource_state": "completed"
+      },
+      {
+        "name": "checks-007-viscosity-regression",
+        "state": "exited",
+        "worker_wall_s": 0.8837350870016962,
+        "returncode": 1,
+        "resource_state": "failed"
+      },
+      {
+        "name": "checks-008-viscosity-regression",
+        "state": "exited",
+        "worker_wall_s": 28.3151045300001,
+        "returncode": 0,
+        "resource_state": "completed"
+      }
+    ],
+    "worker_wall_s": 131.96182645400404
+  },
+  "scope": "Snapshot through completed qualification/cohort checks, before final media and submission gate. Original phase retained; viscosity adds a separate authorized budget. Observer interruptions and failed checks remain visible."
+}

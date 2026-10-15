@@ -96,6 +96,8 @@ class ReplayMeasurements:
             raise ValueError('No interior reference volume available')
         self.motion_start = (4. if manifest.get('motion_protocol') in ('knife-push', 'no-push')
                              else manifest['probe_time_s'])
+        if manifest.get('motion_protocol') in ('cut-push', 'cut-no-push'):
+            self.motion_start = 5.3 if self.task == 'banana' else 3.3
         if manifest.get('motion_start_time_s', self.motion_start) != self.motion_start:
             raise ValueError('Motion baseline disagrees with the recorded protocol')
         self.probe_frame = (None if self.motion_start is None else
@@ -112,7 +114,12 @@ class ReplayMeasurements:
         if index == 0:
             phase = 'Initial'
         elif self.probe_frame is not None and time > self.motion_start:
-            if self.manifest.get('motion_protocol') == 'knife-push':
+            if self.manifest.get('motion_protocol') in ('cut-push', 'cut-no-push'):
+                elapsed = time - self.motion_start
+                phase = ('Clear board / blade stays in cut' if elapsed <= .2 else
+                         ('Knife-face push' if self.manifest['motion_protocol'] == 'cut-push' else 'No lateral push')
+                         if elapsed <= 1.4 else 'Withdraw' if elapsed <= 2. else 'Settle')
+            elif self.manifest.get('motion_protocol') == 'knife-push':
                 phase = ('Re-entering kerf' if time <= 4.8 else 'Knife-face push' if time <= 6.
                          else 'Withdrawing' if time <= 6.6 else 'Settling')
             else:
@@ -145,6 +152,9 @@ class ReplayMeasurements:
                     None if self.motion_start is None else 'impulse'),
                 'knife_on_material_x_n': (-float(self.trace['material_reaction_n'][trace_index, 0])
                                           if index else 0.),
+                'knife_on_material_n': (-self.trace['material_reaction_n'][trace_index]).tolist()
+                                      if index else [0., 0., 0.],
+                'dynamic_viscosity_pa_s': self.manifest['config'].get('dynamic_viscosity', 0.),
                 'knife_material_force_n': (float(np.linalg.norm(self.trace['material_reaction_n'][trace_index]))
                                            if index else 0.)}
         if self.task == 'tofu-scoring':
@@ -160,8 +170,10 @@ class ReplayMeasurements:
         result = {'face_opening_mm': 'Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.',
                 'interior_volume_change_percent': '100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing planned cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().',
                 'centroid_x_from_start_mm': 'Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.',
-                'centroid_x_from_probe_mm': 'Same centroids relative to the exact saved motion-start frame; null before it. Knife-push/no-push: 4.00 s; legacy impulse: probe_time_s.',
+                'centroid_x_from_probe_mm': 'Same centroids relative to the exact saved motion-start frame; null before it. Continuous push: final-cut end (tofu 3.30 s, banana 5.30 s); legacy knife-push/no-push: 4.00 s; impulse: probe_time_s.',
                 'knife_on_material_x_n': 'Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.',
+                'knife_on_material_n': 'World xyz force of the knife on the material, N; negative of the saved material reaction on the knife at the preceding completed substep. Zero at the initial state. Excludes drive and board.',
+                'dynamic_viscosity_pa_s': 'Newtonian dynamic viscosity from the saved material configuration, Pa s; missing historical configuration fields mean the elastic value zero.',
                 'motion_start_time_s': self.motion_start,
                 'knife_material_force_n': 'Norm of recorded material reaction on the knife at the preceding completed substep; excludes guide, drive and board forces.',
                 'reference_volume_m3': self.reference_volume, 'tetrahedra': len(self.tetrahedra),

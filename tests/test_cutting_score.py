@@ -180,9 +180,9 @@ class SequentialTofuRecordTests(unittest.TestCase):
             self.assertEqual(len(result['piece_displacements_m']), 3)
             path = folder / 'manifest.json'
             manifest = json.loads(path.read_text())
-            self.assertEqual(manifest['motion_protocol'], 'knife-push')
+            self.assertEqual(manifest['motion_protocol'], 'cut-push')
             self.assertIsNone(manifest['probe_time_s'])
-            self.assertEqual(manifest['motion_start_time_s'], 4.)
+            self.assertEqual(manifest['motion_start_time_s'], 3.3)
             self.assertFalse(result['checks']['knife_supplies_push_impulse'])
             manifest['probe_time_s'] = 6.2
             path.write_text(json.dumps(manifest))

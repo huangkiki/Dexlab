@@ -1,5 +1,7 @@
 # 豆腐连续两刀与刀面推动
 
+**历史协议存档。最新连续切割与刀面侧推，以及逐帧接触力／位移，见[当前展示](cut-push.md)。下文数值与视频仍对应各自历史输入，不是最新任务。**
+
 当前视频用实际刀具接触解释切后位移：切完后先回到左侧切缝，再横向推开左块。刀具由驱动力和材料反作用共同积分；材料速度没有直接修改。香蕉与交叉浅划保持各自任务。
 
 ```{raw} html
@@ -77,7 +79,7 @@
 在[既有资源限制和共享锁](cutting.md#复现)内运行：
 
 ```bash
-python -m dexlab.tofu_cut --task tofu-sequential --grid-spacing .005 --output RUN
+python -m dexlab.tofu_cut --task tofu-sequential --grid-spacing .005 --motion-protocol knife-push --output RUN
 python -m dexlab.cutting_score RUN
 python -m dexlab.cutting_showcase RUN --output MEDIA
 ```
