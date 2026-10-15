@@ -52,6 +52,10 @@ The six-engine matrix, 594-episode pinch study and later tasks remain. Preserve 
 
 The executed integration check retains two runtime-version admission failures. After freezing the explicit profile and inheriting the ledger, two 1600-step MuJoCo 3.15.0 cases complete: the initial profile fails physically and the historical fitted profile passes. Effective parameters and independent scores are retained. This validates the workflow with known candidates, not new holdouts. [Results, costs and archive](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/contact-trials-integration-v1.json). Recovery also verifies termination of the bounded cgroup, covering interruption before a child PID can be published.
 
+## SDF query qualification
+
+SDF representation qualification has a separate [prospective query protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/sdf-near-surface-protocol.md): 5,130 fixed analytic-box queries, explicit unsupported points and three requested spatial levels. The conservative actor-AABB policy currently leaves surface/exterior-center metrics unavailable. Offline checks and capture-order helpers do not constitute native qualification; [#178](https://github.com/huangkiki/Dexlab/issues/178) retains the missing domain, geometry/contact and complete-task work.
+
 ## Native LIBERO workflow case
 
 [Diagnose contacts and observations in the complete native task](libero-workflow.md): observation refresh has source/readback evidence, while the smaller-step candidate fails transfer screening. Action execution, physics diagnostics and policy-validation limits remain separate.
