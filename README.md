@@ -11,18 +11,17 @@
 
 [English](README.en.md) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](docs/site/zh/experience.md) · [诊断与试参方法](docs/site/zh/diagnosis.md) · [场景选型指南](docs/site/zh/selection.md)
 
-从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
+## 豆腐连续两刀：切开，再用刀面推开
 
-<table><tr><th>豆腐对半切</th><th>香蕉连续三刀</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="豆腐对半切"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="香蕉连续三刀"></a></td></tr></table>
+<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-comparison.html"><img src="https://raw.githubusercontent.com/huangkiki/Dexlab/91e3f8e8d144cb709f4d3abda2195e31dce77d6e/docs/evidence/cutting/tofu-sequential/surface.gif" width="800" alt="豆腐两刀后，刀面进入切缝并向左推开一块；动图显示接触力和三块位移"></a>
 
-**豆腐对半切 · 香蕉三刀切片** — 基于实际保存状态的回放；合成材料参数，未做真实食材标定。
+**两刀切开 → 刀面进入左侧切缝 → 向左推动 → 撤刀。** 画面逐帧显示刀对材料的接触力与三块位移；左块最终移动 11.128 mm，中／右块分别移动 0.038／0.015 mm。合成材料参数，未做真实豆腐标定。
 
-[▶ 表面／粒子对照与完整视频](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html) · [豆腐实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)
-
+[▶ 表面／粒子视频与实验记录](https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-comparison.html) · [原始记录与校验文件](https://github.com/huangkiki/Dexlab/releases/tag/v0.66.0)
 
 ## 切后还能独立运动吗？
 
-<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀 · 刀面推动与测量</td></tr></table>
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>作者原站视频</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>作者原站视频</td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-comparison.html"><img src="https://raw.githubusercontent.com/huangkiki/Dexlab/91e3f8e8d144cb709f4d3abda2195e31dce77d6e/docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>本项目豆腐两刀 · 刀面推动与测量</td></tr></table>
 
 **三种方法的数值对照**
 
@@ -52,6 +51,16 @@
 当前纯弹性表面撤刀后会接近闭合；粒子颜色显示已记录的两次切割历史，底部未切区域保持米白。
 
 [表面／粒子视频、数值与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-scoring.html)
+
+## 更多切割任务：豆腐对半切与香蕉切片
+
+从豆腐对半切、香蕉连续切片，到机器人抓取：观察接触、摩擦与分离。
+
+<table><tr><th>豆腐对半切</th><th>香蕉连续三刀</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="豆腐对半切"></a></td><td><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="香蕉连续三刀"></a></td></tr></table>
+
+**豆腐对半切 · 香蕉三刀切片** — 基于实际保存状态的回放；合成材料参数，未做真实食材标定。
+
+[▶ 表面／粒子对照与完整视频](https://huangkiki.github.io/Dexlab/zh-cn/latest/banana-cutting.html) · [豆腐实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting.html)
 
 <!-- visual-research:start -->
 ## 做了哪些实验
