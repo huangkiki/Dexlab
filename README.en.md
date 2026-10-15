@@ -11,18 +11,17 @@ The research serves two goals:
 
 [简体中文](README.md) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](docs/site/en/experience.md) · [Diagnosis and trials](docs/site/en/diagnosis.md) · [Scenario guide](docs/site/en/selection.md)
 
-From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
+## Two tofu cuts: separate with a visible knife push
 
-<table><tr><th>Tofu halving</th><th>Three banana cuts</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="Tofu halving"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="Three banana cuts"></a></td></tr></table>
+<a href="https://huangkiki.github.io/Dexlab/en/latest/tofu-comparison.html"><img src="https://raw.githubusercontent.com/huangkiki/Dexlab/91e3f8e8d144cb709f4d3abda2195e31dce77d6e/docs/evidence/cutting/tofu-sequential/surface.gif" width="800" alt="After two tofu cuts, the knife enters the kerf and pushes the left piece; measured contact force and three-piece displacement appear in the replay"></a>
 
-**Tofu halving · Three sequential banana cuts** — Replays of saved simulation states; synthetic material parameters, without real-food calibration.
+**Two cuts → knife re-enters the left kerf → leftward push → withdrawal.** The replay displays measured knife-on-material contact force and each piece’s displacement. The left piece moves 11.128 mm; the middle/right pieces move 0.038/0.015 mm. Synthetic material parameters, without real-tofu calibration.
 
-[▶ Surface / particle videos](https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html) · [Tofu experiment](https://huangkiki.github.io/Dexlab/en/latest/cutting.html)
-
+[▶ Surface / particle videos and experiment](https://huangkiki.github.io/Dexlab/en/latest/tofu-comparison.html) · [Raw records and checksums](https://github.com/huangkiki/Dexlab/releases/tag/v0.66.0)
 
 ## Do cut pieces stay independent?
 
-<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>Author reference video</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>Author reference video</td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>DexLab tofu · knife push and measurements</td></tr></table>
+<table><tr><th>BladeMaster</th><th>CRESSim-MPM</th><th>DexLab</th></tr><tr><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-blademaster-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-blademaster-start.jpg" width="245" alt="BladeMaster reference video"></a><br>Author reference video</td><td><a href="https://jango6324.github.io/assets/blademaster/videos/10-cressim-mpm-comparison-cressim-mpm-30fps.mp4"><img src="https://jango6324.github.io/assets/blademaster/posters/10-cressim-mpm-comparison-cressim-mpm-start.jpg" width="245" alt="CRESSim-MPM reference video"></a><br>Author reference video</td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting-comparison.html"><img src="https://raw.githubusercontent.com/huangkiki/Dexlab/91e3f8e8d144cb709f4d3abda2195e31dce77d6e/docs/evidence/cutting/tofu-sequential/particles.gif" width="245" alt="DexLab two tofu cuts"></a><br>DexLab tofu · knife push and measurements</td></tr></table>
 
 **Numerical comparison of the three methods**
 
@@ -52,6 +51,16 @@ The blade makes a shallow incision, withdraws, then turns 90° for a second stro
 The elastic surface nearly recloses after withdrawal; particle colours show both recorded cut histories, while the uncut lower bridge stays cream.
 
 [Surface/particle videos, measurements and reproduction](https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html)
+
+## More cutting tasks: tofu halving and banana slicing
+
+From tofu halving and banana slicing to robotic grasping: explore contact, friction and separation.
+
+<table><tr><th>Tofu halving</th><th>Three banana cuts</th></tr><tr><td><a href="https://huangkiki.github.io/Dexlab/en/latest/cutting.html"><img src="docs/evidence/cutting/tofu/surface.gif" width="380" alt="Tofu halving"></a></td><td><a href="https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html"><img src="docs/evidence/cutting/banana/surface.gif" width="380" alt="Three banana cuts"></a></td></tr></table>
+
+**Tofu halving · Three sequential banana cuts** — Replays of saved simulation states; synthetic material parameters, without real-food calibration.
+
+[▶ Surface / particle videos](https://huangkiki.github.io/Dexlab/en/latest/banana-cutting.html) · [Tofu experiment](https://huangkiki.github.io/Dexlab/en/latest/cutting.html)
 
 <!-- visual-research:start -->
 ## What experiments have we run?
