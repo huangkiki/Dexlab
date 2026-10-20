@@ -13,11 +13,15 @@
 
 ## RSS 擦拭复现：辅助保持与滑脱
 
-未改动的官方测试 **9/9 通过**。固定碰撞几何和初始状态后，原版 **3/3 任务通过**，清洁率 **95.5%–95.9%**；关闭辅助节点约束后 **0/3 通过**，清洁率 **39.9%–41.2%**，海绵在擦拭时脱离夹爪。保持阶段材料区域质心相对手的最大位移分别约 **0.061 mm** 与 **440–450 mm**。
+复现 RoboSimStudio（RSS）的双夹爪擦拭：一只夹爪固定杆件，另一只夹持海绵清除杆上墨迹。**左：原版的辅助节点约束让海绵保持在夹爪中；右：关闭该约束后，海绵在擦拭中滑脱。**
 
-六次记录均通过独立检查；初始状态、碰撞模型与跟踪材料点一致。这是 RSS 双夹爪擦拭基线，手内旋转尚未实现。视频使用原生碰撞几何视图，并叠加实测数值。
+<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html"><img src="docs/evidence/rss-wiping/preview.gif" width="960" alt="RSS 同步对照动图：左侧原版保持海绵，右侧无 latch 海绵滑脱；两侧显示相同仿真时间与实测数值"></a>
 
-[完整对照、力／位移曲线与边界](docs/site/zh/rss-wiping.md) · [复现代码与固定几何](demos/rss-wiping/README.md) · [原版视频](docs/evidence/rss-wiping/original.mp4) · [无 latch 视频](docs/evidence/rss-wiping/no-latch.mp4)
+第 1 组记录的 **10–30 s 连续片段，2 倍速**；两侧按仿真时间同步，保留原生碰撞几何视图和实测数值。点击动图查看完整录像与曲线。[预览来源与制作方式](docs/evidence/rss-wiping/preview.md)。
+
+固定碰撞几何与初始状态的三组重复中，原版 **3/3 通过，清洁率 95.5%–95.9%**；无 latch **0/3 通过，清洁率 39.9%–41.2%**。这支持当前配置下辅助保持的作用；手内旋转仍待实现。
+
+[完整对照与复现边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html) · [复现代码与固定几何](demos/rss-wiping/README.md) · [原版完整视频](docs/evidence/rss-wiping/original.mp4) · [无 latch 完整视频](docs/evidence/rss-wiping/no-latch.mp4)
 
 [先看原理：不同 solver 会互相等吗？preCICE 做什么？](#solver-coupling)
 

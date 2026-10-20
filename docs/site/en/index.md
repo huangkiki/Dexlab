@@ -13,11 +13,17 @@ The research serves two goals:
 
 ## RSS wiping: grasp assistance and slippage
 
-The unchanged upstream test passed **9/9 assertions**. With frozen collision geometry and initial states, the original passed **3/3 tasks**, cleaning **95.5–95.9%**; removing the compliant node constraints passed **0/3**, cleaning **39.9–41.2%**, with the sponge leaving the gripper during wiping. Maximum held material-patch centroid motion in the hand frame was about **0.061 mm** versus **440–450 mm**.
+Reproducing RoboSimStudio (RSS) wiping: one gripper holds the bar while the other wipes its ink with a sponge. **Left: the original's compliant node constraints retain the sponge. Right: removing those constraints lets the sponge slip out during wiping.**
 
-All six records passed independent consistency checks and share the same initial states, collision model and tracked material nodes. This is the RSS two-gripper wiping baseline; in-hand rotation remains unimplemented. Videos use the native collision view with measured-value annotations.
+```{raw} html
+<a href="rss-wiping.html"><img src="_static/rss-wiping/preview.gif" width="960" alt="Synchronized RSS comparison: original retains the sponge on the left; no-latch loses it on the right; both show the same simulation time and measured values"></a>
+```
 
-[Complete videos, force/motion curves and limits](rss-wiping.md) · [Reproduction code and frozen geometry](https://github.com/huangkiki/Dexlab/tree/autoresearch/issue-223/demos/rss-wiping)
+A **continuous 10–30 s excerpt from paired trial 01, played at 2× speed**. Both panels share the simulation clock and preserve the native collision view and measured annotations. Click for full recordings and curves. [Preview provenance and processing](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/rss-wiping/preview.md).
+
+Across three paired repetitions with frozen collision geometry and initial states, the original passed **3/3 tasks, cleaning 95.5–95.9%**; no-latch passed **0/3, cleaning 39.9–41.2%**. This supports the contribution of grasp assistance in this configuration; in-hand rotation remains unimplemented.
+
+[Complete comparison and reproduction limits](rss-wiping.md) · [Reproduction code and frozen geometry](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping)
 
 [Start with the basics: do solvers wait for each other, and what does preCICE do?](solver-coupling)
 
