@@ -1,0 +1,915 @@
+{
+  "schema_version": 1,
+  "rss_commit": "23417de77edf59d614531a833334ed4e2206fc2c",
+  "compiled_model_sha256": "87804477f990e24c48b023d5d9b6d42a79f3123765fa15a1e98d0e2824b268bf",
+  "initial_particles_sha256": "09f8a3dddb799721c86f8bc2cd9d5df7ccd8a404b9b44289fae84166a80f3464",
+  "settled_particles_sha256": "d9448f23d6e3b51b8b7b9bfd531aea767512c501a531b306039ce7aa93a49fca",
+  "code_sha256": {
+    "run.py": "65ba792f69e8ea4a1ad8462ea4cec618a137f8ab9320252e323974d396e7ca7a",
+    "geometry.py": "d29d5678179f3eaed40e970ba7886e7a1e4d12f33103345f959ecde6e1602dbe",
+    "score.py": "b218b8a9db17a6010529f9f14a039e29f3e654fef0fcd9c5bb5e2bf3c04ddf0a",
+    "plot.py": "37ac22bdd54da1aa103757b1ba9f6262de5baf8fe4cff849d08a9b9051364e50"
+  },
+  "resource_plan": {
+    "schema_version": 1,
+    "profile": "adaptive-8g-4c",
+    "measurement": {
+      "sha256": "115eafcc22ded4a5f714e9728289a7c5d75a85636e86c65fc251669851b42700",
+      "peak_mib": 1456.86328125
+    },
+    "complex_model": true,
+    "cpu_cores": 4,
+    "peak_margin": 1.5,
+    "desktop_reserve_gib": 8
+  },
+  "renderer": "tiled",
+  "timing_interpretation": "Whole workload costs only. Unrelated host workloads were observed; no exclusive throughput or comparative performance claim.",
+  "records": [
+    {
+      "id": "controlled-original-01",
+      "summary": {
+        "mode": "original",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; latched 106 nodes",
+          "press 0: seated 29 mm down at 4.49 N",
+          "stroke 0: cleaned 0.91, press 3.74 N",
+          "press 1: seated 29 mm down at 4.50 N",
+          "stroke 1: cleaned 0.94, press 3.65 N",
+          "press 2: seated 29 mm down at 4.50 N",
+          "stroke 2: cleaned 0.95, press 3.74 N",
+          "press 3: seated 29 mm down at 4.49 N",
+          "stroke 3: cleaned 0.95, press 3.76 N",
+          "done: cleaned 0.955, the sponge 0 mm from where it lay"
+        ],
+        "sim_time_s": 59.81666666666455,
+        "recorded_steps": 3590,
+        "video_frames": 599,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "engaged",
+            {
+              "opening": 0.04563023199696581,
+              "still": 0.00028451404018796367,
+              "press": [
+                8.617011602158563,
+                8.907940855753282
+              ],
+              "free": 0.05002203147317397,
+              "nodes": 106
+            }
+          ],
+          [
+            3103,
+            "released",
+            {
+              "opening": 0.04563023199696581,
+              "still": 0.00028451404018796367,
+              "press": [
+                8.617011602158563,
+                8.907940855753282
+              ],
+              "free": 0.05002203147317397
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.9547325102880658,
+        "peak_bar_force_n": 4.910084774110819,
+        "peak_pressure_pa": 84200.6899151787,
+        "max_hold_patch_centroid_slip_m": 6.063108127112956e-05,
+        "max_hold_patch_node_displacement_m": 0.0007644381148748872,
+        "max_active_pins": 1,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 4.551512662896647e-05,
+        "sponge_return_min_z_error_m": 2.384185791015625e-07,
+        "home_errors_m": {
+          "right": 0.0005054445427827965,
+          "left": 0.0002705530316162224
+        },
+        "finite": true,
+        "wall_s": 160.4827722440241,
+        "build_wall_s": 5.371522076020483,
+        "step_wall_s": 140.06895658897702,
+        "render_wall_s": 2.1781649945187382,
+        "record_wall_s": 12.682925367727876
+      },
+      "score": {
+        "schema_version": 2,
+        "mode": "original",
+        "measured": {
+          "final_cleaned_fraction": 0.9547325102880658,
+          "peak_bar_force_n": 4.910084774110819,
+          "peak_pressure_pa": 84200.6899151787,
+          "sponge_return_xy_error_m": 4.551512662896647e-05,
+          "sponge_return_min_z_error_m": 2.384185791015625e-07
+        },
+        "record_integrity_pass": true,
+        "record_failures": [],
+        "task_outcomes": {
+          "routine_finished": true,
+          "finite": true,
+          "cleaned_at_least_90_percent": true,
+          "bar_force_over_1_n": true,
+          "bar_pressure_over_5_kpa": true,
+          "sponge_return_xy_under_20_mm": true,
+          "sponge_return_height_within_3_mm": true,
+          "arms_home_within_6_mm": true
+        },
+        "task_pass": true,
+        "max_hold_patch_centroid_slip_m": 6.063108127112975e-05,
+        "max_hold_patch_node_displacement_m": 0.0007644381148748868,
+        "holding_under_10_mm": true,
+        "actual_max_pin_count": 1,
+        "video_recorded": true,
+        "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+      },
+      "pin_and_readiness_audit_pass": true,
+      "raw_video": {
+        "width": 960,
+        "height": 544,
+        "r_frame_rate": "10/1",
+        "duration": "59.900000",
+        "nb_frames": "599"
+      },
+      "cost": {
+        "bounded_wall_s": 162.55557213601423,
+        "memory_peak_mib": 1454.8671875,
+        "resource_receipt_sha256": "14d5f72a5725015b38194e175e7dec9a0131eb554366d824ca1ab9d28cdfc33d"
+      }
+    },
+    {
+      "id": "controlled-no-latch-01",
+      "summary": {
+        "mode": "no-latch",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; tracked 106 material nodes; no pins",
+          "press 0: seated 30 mm down at 4.13 N",
+          "stroke 0: cleaned 0.37, press 11.66 N",
+          "press 1: 55 mm down and nothing pressing; the sponge is out of the jaws",
+          "done: cleaned 0.399, the sponge 436 mm from where it lay"
+        ],
+        "sim_time_s": 41.68333333333225,
+        "recorded_steps": 2502,
+        "video_frames": 417,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "grasp_ready_without_pin",
+            {
+              "opening": 0.04562248347618058,
+              "still": 0.0002697502157531437,
+              "press": [
+                8.616024158264516,
+                8.895291827043675
+              ],
+              "free": 0.050023602935608036,
+              "nodes": 106
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.3991769547325103,
+        "peak_bar_force_n": 11.885741578578592,
+        "peak_pressure_pa": 114416.77444866525,
+        "max_hold_patch_centroid_slip_m": 0.449981050570136,
+        "max_hold_patch_node_displacement_m": 0.47930452824054365,
+        "max_active_pins": 0,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 0.43580597654233866,
+        "sponge_return_min_z_error_m": 5.364418029785156e-07,
+        "home_errors_m": {
+          "right": 0.000501122247308485,
+          "left": 0.0002705211517890549
+        },
+        "finite": true,
+        "wall_s": 104.39946924801916,
+        "build_wall_s": 5.409365110972431,
+        "step_wall_s": 89.57303386455169,
+        "render_wall_s": 1.5672869140398689,
+        "record_wall_s": 7.655875684984494
+      },
+      "score": {
+        "schema_version": 2,
+        "mode": "no-latch",
+        "measured": {
+          "final_cleaned_fraction": 0.3991769547325103,
+          "peak_bar_force_n": 11.885741578578592,
+          "peak_pressure_pa": 114416.77444866525,
+          "sponge_return_xy_error_m": 0.43580597654233866,
+          "sponge_return_min_z_error_m": 5.364418029785156e-07
+        },
+        "record_integrity_pass": true,
+        "record_failures": [],
+        "task_outcomes": {
+          "routine_finished": true,
+          "finite": true,
+          "cleaned_at_least_90_percent": false,
+          "bar_force_over_1_n": true,
+          "bar_pressure_over_5_kpa": true,
+          "sponge_return_xy_under_20_mm": false,
+          "sponge_return_height_within_3_mm": true,
+          "arms_home_within_6_mm": true
+        },
+        "task_pass": false,
+        "max_hold_patch_centroid_slip_m": 0.44998105057013593,
+        "max_hold_patch_node_displacement_m": 0.47930452824054376,
+        "holding_under_10_mm": false,
+        "actual_max_pin_count": 0,
+        "video_recorded": true,
+        "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+      },
+      "pin_and_readiness_audit_pass": true,
+      "raw_video": {
+        "width": 960,
+        "height": 544,
+        "r_frame_rate": "10/1",
+        "duration": "41.700000",
+        "nb_frames": "417"
+      },
+      "cost": {
+        "bounded_wall_s": 106.54696964402683,
+        "memory_peak_mib": 1312.53125,
+        "resource_receipt_sha256": "23597588ba25481e0100c2aa18119da4af37931e645557860ed5951fd2b243f7"
+      }
+    },
+    {
+      "id": "controlled-original-02",
+      "summary": {
+        "mode": "original",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; latched 106 nodes",
+          "press 0: seated 29 mm down at 4.49 N",
+          "stroke 0: cleaned 0.91, press 3.76 N",
+          "press 1: seated 29 mm down at 4.50 N",
+          "stroke 1: cleaned 0.94, press 3.72 N",
+          "press 2: seated 29 mm down at 4.49 N",
+          "stroke 2: cleaned 0.95, press 3.75 N",
+          "press 3: seated 29 mm down at 4.49 N",
+          "stroke 3: cleaned 0.95, press 3.73 N",
+          "done: cleaned 0.959, the sponge 0 mm from where it lay"
+        ],
+        "sim_time_s": 59.81666666666455,
+        "recorded_steps": 3590,
+        "video_frames": 599,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "engaged",
+            {
+              "opening": 0.04562015118247774,
+              "still": 0.0002733647183162935,
+              "press": [
+                8.623637656667476,
+                8.898283657785615
+              ],
+              "free": 0.05002336042267079,
+              "nodes": 106
+            }
+          ],
+          [
+            3103,
+            "released",
+            {
+              "opening": 0.04562015118247774,
+              "still": 0.0002733647183162935,
+              "press": [
+                8.623637656667476,
+                8.898283657785615
+              ],
+              "free": 0.05002336042267079
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.9588477366255144,
+        "peak_bar_force_n": 4.894728899800032,
+        "peak_pressure_pa": 84081.9946870326,
+        "max_hold_patch_centroid_slip_m": 6.058143737699034e-05,
+        "max_hold_patch_node_displacement_m": 0.0007595985739415733,
+        "max_active_pins": 1,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 5.866875358907517e-05,
+        "sponge_return_min_z_error_m": 2.384185791015625e-07,
+        "home_errors_m": {
+          "right": 0.0005115488286358393,
+          "left": 0.000270525687961597
+        },
+        "finite": true,
+        "wall_s": 159.11456278397236,
+        "build_wall_s": 5.570945578976534,
+        "step_wall_s": 138.65864695055643,
+        "render_wall_s": 2.1909871214302257,
+        "record_wall_s": 12.51246043771971
+      },
+      "score": {
+        "schema_version": 2,
+        "mode": "original",
+        "measured": {
+          "final_cleaned_fraction": 0.9588477366255144,
+          "peak_bar_force_n": 4.894728899800032,
+          "peak_pressure_pa": 84081.9946870326,
+          "sponge_return_xy_error_m": 5.866875358907517e-05,
+          "sponge_return_min_z_error_m": 2.384185791015625e-07
+        },
+        "record_integrity_pass": true,
+        "record_failures": [],
+        "task_outcomes": {
+          "routine_finished": true,
+          "finite": true,
+          "cleaned_at_least_90_percent": true,
+          "bar_force_over_1_n": true,
+          "bar_pressure_over_5_kpa": true,
+          "sponge_return_xy_under_20_mm": true,
+          "sponge_return_height_within_3_mm": true,
+          "arms_home_within_6_mm": true
+        },
+        "task_pass": true,
+        "max_hold_patch_centroid_slip_m": 6.0581437376990116e-05,
+        "max_hold_patch_node_displacement_m": 0.0007595985739415779,
+        "holding_under_10_mm": true,
+        "actual_max_pin_count": 1,
+        "video_recorded": true,
+        "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+      },
+      "pin_and_readiness_audit_pass": true,
+      "raw_video": {
+        "width": 960,
+        "height": 544,
+        "r_frame_rate": "10/1",
+        "duration": "59.900000",
+        "nb_frames": "599"
+      },
+      "cost": {
+        "bounded_wall_s": 161.29172418097733,
+        "memory_peak_mib": 1450.921875,
+        "resource_receipt_sha256": "6d0440d25173284c2a1b32403011db5dec0bf6ad23ecfea81eca3fbe5b73960e"
+      }
+    },
+    {
+      "id": "controlled-no-latch-02",
+      "summary": {
+        "mode": "no-latch",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; tracked 106 material nodes; no pins",
+          "press 0: seated 30 mm down at 4.09 N",
+          "stroke 0: cleaned 0.38, press 11.98 N",
+          "press 1: 55 mm down and nothing pressing; the sponge is out of the jaws",
+          "done: cleaned 0.412, the sponge 431 mm from where it lay"
+        ],
+        "sim_time_s": 41.699999999998916,
+        "recorded_steps": 2503,
+        "video_frames": 418,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "grasp_ready_without_pin",
+            {
+              "opening": 0.045630674137952125,
+              "still": 0.0002831397186221496,
+              "press": [
+                8.61988714444947,
+                8.904460091976926
+              ],
+              "free": 0.05002274054093045,
+              "nodes": 106
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.411522633744856,
+        "peak_bar_force_n": 12.260646898262447,
+        "peak_pressure_pa": 112693.02207623335,
+        "max_hold_patch_centroid_slip_m": 0.4449448792888932,
+        "max_hold_patch_node_displacement_m": 0.46722155503394,
+        "max_active_pins": 0,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 0.4305529209868356,
+        "sponge_return_min_z_error_m": 0.0,
+        "home_errors_m": {
+          "right": 0.0004964992296832584,
+          "left": 0.0002705389414279215
+        },
+        "finite": true,
+        "wall_s": 106.2075086979894,
+        "build_wall_s": 5.462214266997762,
+        "step_wall_s": 90.6818235408864,
+        "render_wall_s": 1.5585776696098037,
+        "record_wall_s": 8.389590584323741
+      },
+      "score": {
+        "schema_version": 2,
+        "mode": "no-latch",
+        "measured": {
+          "final_cleaned_fraction": 0.411522633744856,
+          "peak_bar_force_n": 12.260646898262447,
+          "peak_pressure_pa": 112693.02207623335,
+          "sponge_return_xy_error_m": 0.4305529209868356,
+          "sponge_return_min_z_error_m": 0.0
+        },
+        "record_integrity_pass": true,
+        "record_failures": [],
+        "task_outcomes": {
+          "routine_finished": true,
+          "finite": true,
+          "cleaned_at_least_90_percent": false,
+          "bar_force_over_1_n": true,
+          "bar_pressure_over_5_kpa": true,
+          "sponge_return_xy_under_20_mm": false,
+          "sponge_return_height_within_3_mm": true,
+          "arms_home_within_6_mm": true
+        },
+        "task_pass": false,
+        "max_hold_patch_centroid_slip_m": 0.4449448792888931,
+        "max_hold_patch_node_displacement_m": 0.46722155503394,
+        "holding_under_10_mm": false,
+        "actual_max_pin_count": 0,
+        "video_recorded": true,
+        "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+      },
+      "pin_and_readiness_audit_pass": true,
+      "raw_video": {
+        "width": 960,
+        "height": 544,
+        "r_frame_rate": "10/1",
+        "duration": "41.800000",
+        "nb_frames": "418"
+      },
+      "cost": {
+        "bounded_wall_s": 109.35731108702021,
+        "memory_peak_mib": 1309.33984375,
+        "resource_receipt_sha256": "3670722029d512a59a4ff3a1a2e40baa2222d78ed2b75479a179c37130ab8ddf"
+      }
+    },
+    {
+      "id": "controlled-original-03",
+      "summary": {
+        "mode": "original",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; latched 106 nodes",
+          "press 0: seated 29 mm down at 4.52 N",
+          "stroke 0: cleaned 0.91, press 3.67 N",
+          "press 1: seated 29 mm down at 4.49 N",
+          "stroke 1: cleaned 0.94, press 3.71 N",
+          "press 2: seated 29 mm down at 4.51 N",
+          "stroke 2: cleaned 0.95, press 3.76 N",
+          "press 3: seated 29 mm down at 4.49 N",
+          "stroke 3: cleaned 0.95, press 3.74 N",
+          "done: cleaned 0.955, the sponge 0 mm from where it lay"
+        ],
+        "sim_time_s": 59.81666666666455,
+        "recorded_steps": 3590,
+        "video_frames": 599,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "engaged",
+            {
+              "opening": 0.045619605875261274,
+              "still": 0.0002740868819272671,
+              "press": [
+                8.622449111812681,
+                8.905645988310951
+              ],
+              "free": 0.050022553709848476,
+              "nodes": 106
+            }
+          ],
+          [
+            3103,
+            "released",
+            {
+              "opening": 0.045619605875261274,
+              "still": 0.0002740868819272671,
+              "press": [
+                8.622449111812681,
+                8.905645988310951
+              ],
+              "free": 0.050022553709848476
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.9547325102880658,
+        "peak_bar_force_n": 4.932285838454957,
+        "peak_pressure_pa": 84217.06453628643,
+        "max_hold_patch_centroid_slip_m": 6.0836780672009566e-05,
+        "max_hold_patch_node_displacement_m": 0.000764377028611834,
+        "max_active_pins": 1,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 4.350789657266676e-05,
+        "sponge_return_min_z_error_m": 2.384185791015625e-07,
+        "home_errors_m": {
+          "right": 0.000496570231869069,
+          "left": 0.00027049917808456765
+        },
+        "finite": true,
+        "wall_s": 161.48911327298265,
+        "build_wall_s": 5.372328938974533,
+        "step_wall_s": 140.93397391802864,
+        "render_wall_s": 2.1950259418808855,
+        "record_wall_s": 12.796037565043662
+      },
+      "score": {
+        "schema_version": 2,
+        "mode": "original",
+        "measured": {
+          "final_cleaned_fraction": 0.9547325102880658,
+          "peak_bar_force_n": 4.932285838454957,
+          "peak_pressure_pa": 84217.06453628643,
+          "sponge_return_xy_error_m": 4.350789657266676e-05,
+          "sponge_return_min_z_error_m": 2.384185791015625e-07
+        },
+        "record_integrity_pass": true,
+        "record_failures": [],
+        "task_outcomes": {
+          "routine_finished": true,
+          "finite": true,
+          "cleaned_at_least_90_percent": true,
+          "bar_force_over_1_n": true,
+          "bar_pressure_over_5_kpa": true,
+          "sponge_return_xy_under_20_mm": true,
+          "sponge_return_height_within_3_mm": true,
+          "arms_home_within_6_mm": true
+        },
+        "task_pass": true,
+        "max_hold_patch_centroid_slip_m": 6.083678067200958e-05,
+        "max_hold_patch_node_displacement_m": 0.0007643770286118299,
+        "holding_under_10_mm": true,
+        "actual_max_pin_count": 1,
+        "video_recorded": true,
+        "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+      },
+      "pin_and_readiness_audit_pass": true,
+      "raw_video": {
+        "width": 960,
+        "height": 544,
+        "r_frame_rate": "10/1",
+        "duration": "59.900000",
+        "nb_frames": "599"
+      },
+      "cost": {
+        "bounded_wall_s": 164.7223193460377,
+        "memory_peak_mib": 1441.921875,
+        "resource_receipt_sha256": "972d9e47c47b027340a0cf3827522dd2b454dd6763b724cc0abd1f3379fd2552"
+      }
+    },
+    {
+      "id": "controlled-no-latch-03",
+      "summary": {
+        "mode": "no-latch",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; tracked 106 material nodes; no pins",
+          "press 0: seated 30 mm down at 4.08 N",
+          "stroke 0: cleaned 0.37, press 12.07 N",
+          "press 1: 55 mm down and nothing pressing; the sponge is out of the jaws",
+          "done: cleaned 0.403, the sponge 426 mm from where it lay"
+        ],
+        "sim_time_s": 41.699999999998916,
+        "recorded_steps": 2503,
+        "video_frames": 418,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "grasp_ready_without_pin",
+            {
+              "opening": 0.04561146679660479,
+              "still": 0.0002651630030200691,
+              "press": [
+                8.616391421415386,
+                8.902140166728241
+              ],
+              "free": 0.05002303752124597,
+              "nodes": 106
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.40329218106995884,
+        "peak_bar_force_n": 12.358662649680033,
+        "peak_pressure_pa": 114661.08369506388,
+        "max_hold_patch_centroid_slip_m": 0.44046935269763354,
+        "max_hold_patch_node_displacement_m": 0.4661249838118861,
+        "max_active_pins": 0,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 0.42592713046314995,
+        "sponge_return_min_z_error_m": 2.384185791015625e-07,
+        "home_errors_m": {
+          "right": 0.0005132976464745777,
+          "left": 0.00027054476463534766
+        },
+        "finite": true,
+        "wall_s": 104.51871894102078,
+        "build_wall_s": 5.455550371028949,
+        "step_wall_s": 89.55709461303195,
+        "render_wall_s": 1.562167743977625,
+        "record_wall_s": 7.825884053658228
+      },
+      "score": {
+        "schema_version": 2,
+        "mode": "no-latch",
+        "measured": {
+          "final_cleaned_fraction": 0.40329218106995884,
+          "peak_bar_force_n": 12.358662649680033,
+          "peak_pressure_pa": 114661.08369506388,
+          "sponge_return_xy_error_m": 0.42592713046314995,
+          "sponge_return_min_z_error_m": 2.384185791015625e-07
+        },
+        "record_integrity_pass": true,
+        "record_failures": [],
+        "task_outcomes": {
+          "routine_finished": true,
+          "finite": true,
+          "cleaned_at_least_90_percent": false,
+          "bar_force_over_1_n": true,
+          "bar_pressure_over_5_kpa": true,
+          "sponge_return_xy_under_20_mm": false,
+          "sponge_return_height_within_3_mm": true,
+          "arms_home_within_6_mm": true
+        },
+        "task_pass": false,
+        "max_hold_patch_centroid_slip_m": 0.44046935269763354,
+        "max_hold_patch_node_displacement_m": 0.4661249838118861,
+        "holding_under_10_mm": false,
+        "actual_max_pin_count": 0,
+        "video_recorded": true,
+        "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+      },
+      "pin_and_readiness_audit_pass": true,
+      "raw_video": {
+        "width": 960,
+        "height": 544,
+        "r_frame_rate": "10/1",
+        "duration": "41.800000",
+        "nb_frames": "418"
+      },
+      "cost": {
+        "bounded_wall_s": 107.82335022004554,
+        "memory_peak_mib": 1306.36328125,
+        "resource_receipt_sha256": "e5a438bb33d951560f890af6ab3197057728d29c5918d44e10d4c6a6b71f37c0"
+      }
+    }
+  ],
+  "other_attempts": [
+    {
+      "id": "probe-01",
+      "bounded_wall_s": 539.7949259270099,
+      "returncode": 1,
+      "resource_receipt_sha256": "13341cf39f9db5e03ff34e96222731601ecb436d05587b26f475c68989d1cfbd"
+    },
+    {
+      "id": "probe-02",
+      "bounded_wall_s": 43.24835367896594,
+      "returncode": 1,
+      "resource_receipt_sha256": "115eafcc22ded4a5f714e9728289a7c5d75a85636e86c65fc251669851b42700",
+      "summary": {
+        "mode": "original",
+        "error": "simulation_time_limit",
+        "phase": "steady",
+        "status_text": "Wipe the bar, 2.5 s",
+        "routine_log": [],
+        "sim_time_s": 2.9999999999999942,
+        "recorded_steps": 181,
+        "video_frames": 31,
+        "ready_step": null,
+        "events": [],
+        "final_cleaned_fraction": 0.0,
+        "peak_bar_force_n": 0.0,
+        "peak_pressure_pa": 0.0,
+        "max_hold_patch_centroid_slip_m": null,
+        "max_hold_patch_node_displacement_m": null,
+        "max_active_pins": 0,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 1.3243813421813837e-08,
+        "sponge_return_min_z_error_m": 1.7881393432617188e-07,
+        "home_errors_m": {
+          "right": 1.7183701719323485e-06,
+          "left": 0.1991200715508984
+        },
+        "finite": true,
+        "wall_s": 35.567290018021595,
+        "build_wall_s": 16.05960124899866,
+        "step_wall_s": 15.197683609498199,
+        "render_wall_s": 3.713857764028944,
+        "record_wall_s": 0.526028826541733
+      }
+    },
+    {
+      "id": "probe-03",
+      "bounded_wall_s": 30.33929062099196,
+      "returncode": 1,
+      "resource_receipt_sha256": "8c2ac626cc44068287081f0f9b351528b49aa21c8229f7c98c3442fb0d5e5ef5",
+      "summary": {
+        "mode": "original",
+        "error": "simulation_time_limit",
+        "phase": "steady",
+        "status_text": "Wipe the bar, 2.5 s",
+        "routine_log": [],
+        "sim_time_s": 2.9999999999999942,
+        "recorded_steps": 181,
+        "video_frames": 31,
+        "ready_step": null,
+        "events": [],
+        "final_cleaned_fraction": 0.0,
+        "peak_bar_force_n": 0.0,
+        "peak_pressure_pa": 0.0,
+        "max_hold_patch_centroid_slip_m": null,
+        "max_hold_patch_node_displacement_m": null,
+        "max_active_pins": 0,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 1.3243813421813837e-08,
+        "sponge_return_min_z_error_m": 1.7881393432617188e-07,
+        "home_errors_m": {
+          "right": 1.5910807050855538e-06,
+          "left": 0.1991201465107151
+        },
+        "finite": true,
+        "wall_s": 25.130851997004356,
+        "build_wall_s": 11.205309528973885,
+        "step_wall_s": 12.036885866546072,
+        "render_wall_s": 0.1734178041224368,
+        "record_wall_s": 1.650600299530197
+      }
+    },
+    {
+      "id": "probe-04",
+      "bounded_wall_s": 20.271317912032828,
+      "returncode": 1,
+      "resource_receipt_sha256": "51e7bdda5ae630edca43164dd00a105efdd0a14dfa60b1fdad159046180d921c",
+      "summary": {
+        "mode": "no-latch",
+        "error": "simulation_time_limit",
+        "phase": "steady",
+        "status_text": "Wipe the bar, 2.5 s",
+        "routine_log": [],
+        "sim_time_s": 2.9999999999999942,
+        "recorded_steps": 181,
+        "video_frames": 31,
+        "ready_step": null,
+        "events": [],
+        "final_cleaned_fraction": 0.0,
+        "peak_bar_force_n": 0.0,
+        "peak_pressure_pa": 0.0,
+        "max_hold_patch_centroid_slip_m": null,
+        "max_hold_patch_node_displacement_m": null,
+        "max_active_pins": 0,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 1.3243813421813837e-08,
+        "sponge_return_min_z_error_m": 1.7881393432617188e-07,
+        "home_errors_m": {
+          "right": 1.5974736061011744e-06,
+          "left": 0.199120176523766
+        },
+        "finite": true,
+        "wall_s": 18.020149057963863,
+        "build_wall_s": 5.360694091010373,
+        "step_wall_s": 11.89543402910931,
+        "render_wall_s": 0.17009830090682954,
+        "record_wall_s": 0.5292215900262818
+      }
+    },
+    {
+      "id": "native-test",
+      "bounded_wall_s": 153.84984119498404,
+      "returncode": 0,
+      "resource_receipt_sha256": "dc134c03e38e4ce921e58d15b9bf603375f7e7a13884a4be28d2ab426314d705"
+    },
+    {
+      "id": "original-01",
+      "bounded_wall_s": 169.40402716299286,
+      "returncode": 0,
+      "resource_receipt_sha256": "c0980dc80c2ee444a6fe02da631801073d4128d50524af27a9f3bba6154f5ddf",
+      "summary": {
+        "mode": "original",
+        "error": null,
+        "phase": "done",
+        "status_text": "Wipe the bar: done",
+        "routine_log": [
+          "left hand on the far elbow",
+          "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; latched 106 nodes",
+          "press 0: seated 29 mm down at 4.49 N",
+          "stroke 0: cleaned 0.91, press 3.71 N",
+          "press 1: seated 29 mm down at 4.50 N",
+          "stroke 1: cleaned 0.94, press 3.65 N",
+          "press 2: seated 29 mm down at 4.51 N",
+          "stroke 2: cleaned 0.95, press 3.69 N",
+          "press 3: seated 29 mm down at 4.48 N",
+          "stroke 3: cleaned 0.95, press 3.75 N",
+          "done: cleaned 0.955, the sponge 0 mm from where it lay"
+        ],
+        "sim_time_s": 59.81666666666455,
+        "recorded_steps": 3590,
+        "video_frames": 599,
+        "ready_step": 601,
+        "events": [
+          [
+            601,
+            "engaged",
+            {
+              "opening": 0.04561553080917071,
+              "still": 0.00027225199683405393,
+              "press": [
+                8.619561085976693,
+                8.900438959229206
+              ],
+              "free": 0.05002282069827017,
+              "nodes": 106
+            }
+          ],
+          [
+            3103,
+            "released",
+            {
+              "opening": 0.04561553080917071,
+              "still": 0.00027225199683405393,
+              "press": [
+                8.619561085976693,
+                8.900438959229206
+              ],
+              "free": 0.05002282069827017
+            }
+          ]
+        ],
+        "final_cleaned_fraction": 0.9547325102880658,
+        "peak_bar_force_n": 4.9304245233548425,
+        "peak_pressure_pa": 84196.3492561301,
+        "max_hold_patch_centroid_slip_m": 6.095106215959522e-05,
+        "max_hold_patch_node_displacement_m": 0.0007584972712285383,
+        "max_active_pins": 1,
+        "final_active_pins": 0,
+        "sponge_return_xy_error_m": 5.528522687210368e-05,
+        "sponge_return_min_z_error_m": 2.384185791015625e-07,
+        "home_errors_m": {
+          "right": 0.0005033118694482318,
+          "left": 0.0002705389414279215
+        },
+        "finite": true,
+        "wall_s": 167.10937569098314,
+        "build_wall_s": 11.058544387982693,
+        "step_wall_s": 140.47845179017168,
+        "render_wall_s": 2.203185671940446,
+        "record_wall_s": 13.184937498823274
+      }
+    }
+  ],
+  "native_test": {
+    "assertions": 9,
+    "passed": 9
+  },
+  "retained_diagnostic": {
+    "rtx": "Manually stopped after first-frame initialization; not a proved deadlock.",
+    "preprocessing": "499/505 shape difference found before the controlled cohort.",
+    "scoring": "Unnormalized quaternion score retained; corrected independently without threshold changes."
+  },
+  "scope": "Upstream reproduction; cached geometry cohort; no in-hand skill, held-out or material-validity claim.",
+  "score_environment": {
+    "python": "3.10.12",
+    "numpy": "2.2.6",
+    "role": "Independent score execution during the frozen batch"
+  },
+  "tracked_patch_sha256": "f34073e4f339bece3ea6dd0fd4d865dc508c0b1c8197f27c711076a7828407a3",
+  "processing_attempts": [
+    {
+      "id": "postprocess",
+      "returncode": 1,
+      "wall_s": 0.47266448999289423,
+      "note": "Exporter expected wrong resource-state label; no physics run"
+    },
+    {
+      "id": "postprocess-02",
+      "returncode": 1,
+      "wall_s": 0.43692829000065103,
+      "note": "Exporter used hashlib.file_digest under Python 3.10; no physics run"
+    },
+    {
+      "id": "postprocess-03",
+      "returncode": 0,
+      "wall_s": 6.420643498015124,
+      "note": "Completed under explicit Python 3.12; plots, videos and raw hashes exported"
+    }
+  ]
+}

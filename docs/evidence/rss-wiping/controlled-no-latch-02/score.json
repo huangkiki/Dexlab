@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "mode": "no-latch",
+  "measured": {
+    "final_cleaned_fraction": 0.411522633744856,
+    "peak_bar_force_n": 12.260646898262447,
+    "peak_pressure_pa": 112693.02207623335,
+    "sponge_return_xy_error_m": 0.4305529209868356,
+    "sponge_return_min_z_error_m": 0.0
+  },
+  "record_integrity_pass": true,
+  "record_failures": [],
+  "task_outcomes": {
+    "routine_finished": true,
+    "finite": true,
+    "cleaned_at_least_90_percent": false,
+    "bar_force_over_1_n": true,
+    "bar_pressure_over_5_kpa": true,
+    "sponge_return_xy_under_20_mm": false,
+    "sponge_return_height_within_3_mm": true,
+    "arms_home_within_6_mm": true
+  },
+  "task_pass": false,
+  "max_hold_patch_centroid_slip_m": 0.4449448792888931,
+  "max_hold_patch_node_displacement_m": 0.46722155503394,
+  "holding_under_10_mm": false,
+  "actual_max_pin_count": 0,
+  "video_recorded": true,
+  "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+}

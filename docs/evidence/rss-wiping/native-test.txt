@@ -1,0 +1,12 @@
+[wipe_the_bar] 59.5 s, cleaned 0.955, press 4.93 N, peak 84 kPa, sponge 0.0 mm from where it lay; first close at step 541; latch [(601, 'engaged', {'opening': 0.04561567450499126, 'still': 0.00027355631274369324, 'press': [8.610855879682484, 8.903057120998646], 'free': 0.05002242195459361}), (3103, 'released', {'opening': 0.04561567450499126, 'still': 0.00027355631274369324, 'press': [8.610855879682484, 8.903057120998646], 'free': 0.05002242195459361})], jump 8.156461732050297e-06, lift 1.3625011183207154e-05, held 6.059971603503796e-05; Wipe the bar: done
+test_1_it_starts_at_home_with_the_hands_open_and_the_sponge_on_the_mat (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_1_it_starts_at_home_with_the_hands_open_and_the_sponge_on_the_mat) ... ok
+test_2_the_job_plays_to_the_end_and_both_arms_go_home (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_2_the_job_plays_to_the_end_and_both_arms_go_home) ... ok
+test_3_the_foam_presses_the_bar (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_3_the_foam_presses_the_bar) ... ok
+test_4_the_stripe_is_clean (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_4_the_stripe_is_clean) ... ok
+test_5_the_sponge_goes_back_where_it_lay (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_5_the_sponge_goes_back_where_it_lay) ... ok
+test_6_nothing_is_pinned_before_the_close_or_after_the_open (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_6_nothing_is_pinned_before_the_close_or_after_the_open) ... ok
+test_7_it_latched_only_on_a_grasp_the_contact_made (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_7_it_latched_only_on_a_grasp_the_contact_made) ... ok
+test_8_the_latch_pins_the_foam_where_the_squeeze_left_it (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_8_the_latch_pins_the_foam_where_the_squeeze_left_it) ... ok
+test_9_the_latch_holds_it_through_the_wipe (tests.test_demo_wipe_the_bar.TestWipeTheBar.test_9_the_latch_holds_it_through_the_wipe) ... ok
+Ran 9 tests in 152.278s
+OK

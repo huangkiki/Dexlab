@@ -1,0 +1,53 @@
+{
+  "mode": "no-latch",
+  "error": null,
+  "phase": "done",
+  "status_text": "Wipe the bar: done",
+  "routine_log": [
+    "left hand on the far elbow",
+    "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; tracked 106 material nodes; no pins",
+    "press 0: seated 30 mm down at 4.13 N",
+    "stroke 0: cleaned 0.37, press 11.66 N",
+    "press 1: 55 mm down and nothing pressing; the sponge is out of the jaws",
+    "done: cleaned 0.399, the sponge 436 mm from where it lay"
+  ],
+  "sim_time_s": 41.68333333333225,
+  "recorded_steps": 2502,
+  "video_frames": 417,
+  "ready_step": 601,
+  "events": [
+    [
+      601,
+      "grasp_ready_without_pin",
+      {
+        "opening": 0.04562248347618058,
+        "still": 0.0002697502157531437,
+        "press": [
+          8.616024158264516,
+          8.895291827043675
+        ],
+        "free": 0.050023602935608036,
+        "nodes": 106
+      }
+    ]
+  ],
+  "final_cleaned_fraction": 0.3991769547325103,
+  "peak_bar_force_n": 11.885741578578592,
+  "peak_pressure_pa": 114416.77444866525,
+  "max_hold_patch_centroid_slip_m": 0.449981050570136,
+  "max_hold_patch_node_displacement_m": 0.47930452824054365,
+  "max_active_pins": 0,
+  "final_active_pins": 0,
+  "sponge_return_xy_error_m": 0.43580597654233866,
+  "sponge_return_min_z_error_m": 5.364418029785156e-07,
+  "home_errors_m": {
+    "right": 0.000501122247308485,
+    "left": 0.0002705211517890549
+  },
+  "finite": true,
+  "wall_s": 104.39946924801916,
+  "build_wall_s": 5.409365110972431,
+  "step_wall_s": 89.57303386455169,
+  "render_wall_s": 1.5672869140398689,
+  "record_wall_s": 7.655875684984494
+}
