@@ -580,8 +580,8 @@ class LinkedVolumeSurface:
 
     def _disconnected_component_mesh(self, positions, deformation, codes, components):
         """Reconstruct each observed native component as a closed local volume."""
-        key = (codes.tobytes(), components.tobytes())
-        if self._component_cache is not None and self._component_cache[0] == key:
+        cache_key = (codes.tobytes(), components.tobytes())
+        if self._component_cache is not None and self._component_cache[0] == cache_key:
             return self._move_components(
                 self._component_cache[1], positions, deformation, codes, components)
         rest, faces, anchors, cut_vertices = [], [], [], []
@@ -590,10 +590,17 @@ class LinkedVolumeSurface:
             particles = np.flatnonzero(components == component)
             constraints = {}
             for cut in range(len(self.cut_planes)):
-                digits = np.unique((codes[particles]//(3**cut)) % 3)
+                particle_digits = (codes[particles]//(3**cut)) % 3
+                digits = np.unique(particle_digits)
                 labelled = digits[digits != 0]
                 if len(labelled) == 1:
-                    constraints[cut] = int(labelled[0])
+                    digit = int(labelled[0])
+                    unlabelled = particles[particle_digits == 0]
+                    offsets = self.reference[unlabelled, self.cut_axes[cut]]-self.cut_planes[cut]
+                    # A few newly labelled particles do not bound the whole
+                    # connected component: unlabelled material may cross the plane.
+                    if np.all(offsets <= 0 if digit == 1 else offsets >= 0):
+                        constraints[cut] = digit
 
             phi = self._component_level_set(self.node_positions, constraints)
             inside = phi <= 0
@@ -654,7 +661,7 @@ class LinkedVolumeSurface:
         query_components = np.asarray(query_components, dtype=np.int64)
         topology = (rest, faces, anchors, query_codes, query_components,
                     np.asarray(cut_vertices, dtype=bool))
-        self._component_cache = (key, topology)
+        self._component_cache = (cache_key, topology)
         return self._move_components(topology, positions, deformation, codes, components)
 
     def _move_components(self, topology, positions, deformation, codes, components):

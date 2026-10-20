@@ -2,6 +2,7 @@
 
 from collections import Counter
 import unittest
+from unittest import mock
 
 import numpy as np
 
@@ -34,6 +35,31 @@ def edge_multiplicity(faces):
 
 
 class SurfaceEvidence(unittest.TestCase):
+    def test_one_sided_new_cut_labels_do_not_hide_connected_material(self):
+        reference = material_points((.03, .015, .015), .0075)
+        surface = LinkedVolumeSurface(
+            reference, (-.005, .005), size=(.03, .015, .015), grid_spacing=.0075,
+            surface_spacing=.001875, shape='block')
+        gradient = np.tile(np.eye(3), (len(reference), 1, 1))
+        components_at_first_cut = np.where(reference[:, 0] < -.005, 1, 2)
+        baseline = surface.mesh(
+            reference, gradient, components_at_first_cut, components_at_first_cut)
+        for digit in (1, 2):
+            with self.subTest(first_observed_side=digit):
+                codes = components_at_first_cut.copy()
+                side = reference[:, 0] < .005 if digit == 1 else reference[:, 0] > .005
+                touched = (components_at_first_cut == 2) & side & (reference[:, 2] > .0075)
+                self.assertTrue(touched.any())
+                codes[touched] += 3*digit
+                moved, faces, rest, _ = surface.mesh(
+                    reference, gradient, codes, components_at_first_cut)
+                np.testing.assert_allclose(rest.min(axis=0), baseline[2].min(axis=0), atol=1e-12)
+                np.testing.assert_allclose(rest.max(axis=0), baseline[2].max(axis=0), atol=1e-12)
+                self.assertEqual(components(faces), 2)
+                self.assertEqual(set(edge_multiplicity(faces).values()), {2})
+                np.testing.assert_allclose(rest, baseline[2], atol=1e-12)
+                np.testing.assert_allclose(moved, rest, atol=1e-14)
+
     def test_reused_topology_moves_again_and_invalidates_on_a_new_cut(self):
         reference = material_points((.03, .015, .015), .0075)
         surface = LinkedVolumeSurface(
@@ -44,13 +70,35 @@ class SurfaceEvidence(unittest.TestCase):
         first = surface.mesh(reference, gradient, codes, codes)
         first[2][:] = 100  # Must not mutate the retained reference topology.
         shift = np.array([.001, .002, .003])
-        second = surface.mesh(reference+shift, gradient, codes, codes)
+        with mock.patch.object(surface, '_component_normal',
+                               side_effect=AssertionError('Unchanged topology was rebuilt')):
+            second = surface.mesh(reference+shift, gradient, codes, codes)
         np.testing.assert_allclose(second[0], second[2]+shift, atol=1e-14)
         self.assertEqual(components(second[1]), 2)
         codes = codes + 3*np.where(reference[:, 0] < .005, 1, 2)
         third = surface.mesh(reference+shift, gradient, codes, codes)
         self.assertEqual(components(third[1]), 3)
         np.testing.assert_allclose(third[0], third[2]+shift, atol=1e-14)
+
+    def test_cached_topology_matches_fresh_mesh_for_non_affine_motion(self):
+        reference = material_points((.03, .015, .015), .0075)
+        arguments = dict(size=(.03, .015, .015), grid_spacing=.0075,
+                         surface_spacing=.001875, shape='block')
+        surface = LinkedVolumeSurface(reference, (-.005, .005), **arguments)
+        gradient = np.tile(np.eye(3), (len(reference), 1, 1))
+        codes = np.where(reference[:, 0] < -.005, 1, 2)
+        surface.mesh(reference, gradient, codes, codes)
+        positions = reference.copy()
+        positions[:, 2] += .001*np.sin(300*reference[:, 0])
+        gradient[:, 2, 0] += .3*np.cos(300*reference[:, 0])
+        with mock.patch.object(surface, '_component_normal',
+                               side_effect=AssertionError('Unchanged topology was rebuilt')):
+            reused = surface.mesh(positions, gradient, codes, codes)
+        fresh = LinkedVolumeSurface(reference, (-.005, .005), **arguments).mesh(
+            positions, gradient, codes, codes)
+        for cached_array, rebuilt_array in zip(reused, fresh, strict=True):
+            np.testing.assert_allclose(cached_array, rebuilt_array, rtol=0, atol=1e-14)
+        self.assertGreater(np.max(abs(reused[0]-reused[2])), .0001)
 
     def test_concave_dual_quad_keeps_both_triangles_facing_outward(self):
         vertices = np.array([[0., 0., 0.], [.6, .6, 0.], [2., 0., 0.], [0., 2., 0.]])
