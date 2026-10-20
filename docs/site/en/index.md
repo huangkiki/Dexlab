@@ -25,10 +25,10 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [RSS wiping](rss-wiping.md)
-  - ```{image} ../../../docs/evidence/rss-wiping/preview.gif
-    :alt: RSS original / no latch, 2×
+  - ```{image} ../../../docs/evidence/studio/rss.gif
+    :alt: RSS original recorded trajectory in RTX, 10–19.9 s
     :width: 300px
-    :target: rss-wiping.html
+    :target: studio-rendering.html
     ```
 
   - Retains the sponge with auxiliary constraints; slips without them. Wiping reproduction.
@@ -55,31 +55,25 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [Cross scoring](tofu-scoring.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/particles.gif
-    :alt: Native particle cut history
+  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/surface.gif
+    :alt: Surface reconstruction from recorded states
     :width: 300px
     :target: tofu-scoring.html
     ```
 
-  - Two shallow cuts leave a connected base; colors show cut history.
+  - Two shallow cuts leave a connected base; the elastic surface can rebound. Native particle views remain available.
 * - ```{raw} html
     <span id="apple"></span>
     ```
 
     [Apple-stem grasp](apple-replays)
-  - ```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
-    :alt: Historical scripted MuJoCo / SuperDex runs
-    :width: 145px
-    :target: experiments.html#apple-replays
+  - ```{image} ../../../docs/evidence/studio/apple.gif
+    :alt: MuJoCo 3.16 / SuperDex 1.0 RTX replay
+    :width: 300px
+    :target: studio-rendering.html
     ```
 
-    ```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
-    :alt: Historical scripted MuJoCo / SuperDex runs
-    :width: 145px
-    :target: experiments.html#apple-replays
-    ```
-
-  - Historical scripted MuJoCo / SuperDex runs both complete a 3 s hold.
+  - Both 14 s MuJoCo 3.16 / SuperDex 1.0 records pass the 3 s hold check; scripted control.
 * - ```{raw} html
     <span id="cloth-comparison"></span>
     ```
@@ -109,10 +103,10 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [Force-limit comparison](pinch)
-  - ```{image} ../../../docs/evidence/force-limit/comparison.gif
+  - ```{image} ../../../docs/evidence/studio/pinch.gif
     :alt: Actuator limit 0.4 N / 0.8 N
     :width: 300px
-    :target: visual-comparisons.html#pinch
+    :target: studio-rendering.html
     ```
 
   - In the same Genesis protocol, actuator limits of 0.4 N slip and 0.8 N hold.
@@ -121,10 +115,10 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [LIBERO replay](libero-workflow.md)
-  - ```{image} ../../../docs/evidence/visual/libero-demo0-baseline.gif
+  - ```{image} ../../../docs/evidence/studio/libero.gif
     :alt: Demo 0 native baseline state replay
     :width: 300px
-    :target: libero-workflow.html
+    :target: studio-rendering.html
     ```
 
   - 500 official demonstrations: 495 task successes; none pass every numerical diagnostic.
@@ -133,10 +127,10 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [Six-engine incline](incline)
-  - ```{image} ../../../docs/evidence/visual/incline-sliding-0.001.gif
+  - ```{image} ../../../docs/evidence/studio/incline.gif
     :alt: Sliding records at 1 ms timestep
     :width: 300px
-    :target: visual-comparisons.html#incline
+    :target: studio-rendering.html
     ```
 
   - Compare sliding responses across six engines; equal parameter values do not imply equivalent models.
@@ -145,10 +139,10 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [Normal contact calibration](normal)
-  - ```{image} ../../../docs/evidence/visual/normal-calibration.gif
+  - ```{image} ../../../docs/evidence/studio/normal.gif
     :alt: Loading, hold and unloading against a synthetic target
     :width: 300px
-    :target: visual-comparisons.html#normal
+    :target: studio-rendering.html
     ```
 
   - Loading fits a synthetic target better; unloading and transfer need separate validation.
@@ -207,6 +201,7 @@ Classical physical laws and existing empirical relations serve as references. Su
 :hidden:
 :maxdepth: 1
 
+Studio replay rendering <studio-rendering>
 Cloth engine comparison <cloth-comparison>
 
 Experiments <experiments>

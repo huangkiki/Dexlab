@@ -25,10 +25,10 @@
     ```
 
     [RSS 擦拭](rss-wiping.md)
-  - ```{image} ../../../docs/evidence/rss-wiping/preview.gif
-    :alt: RSS 原版／关闭约束，2 倍速
+  - ```{image} ../../../docs/evidence/studio/rss.gif
+    :alt: RSS 原版记录的 RTX 回放，10–19.9 s
     :width: 300px
-    :target: rss-wiping.html
+    :target: studio-rendering.html
     ```
 
   - 辅助约束开启时保持，关闭后滑脱；当前复现的是擦拭。
@@ -55,31 +55,25 @@
     ```
 
     [交叉浅划](tofu-scoring.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/particles.gif
-    :alt: 原生粒子切割历史
+  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/surface.gif
+    :alt: 记录状态的表面重建
     :width: 300px
     :target: tofu-scoring.html
     ```
 
-  - 两次浅切后底部仍相连；颜色标记切割历史。
+  - 两次浅切后底部仍相连；弹性表面可回弹，原生粒子对照保留。
 * - ```{raw} html
     <span id="apple"></span>
     ```
 
     [苹果抓梗](apple-replays)
-  - ```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
-    :alt: MuJoCo／SuperDex 历史脚本轨迹
-    :width: 145px
-    :target: experiments.html#apple-replays
+  - ```{image} ../../../docs/evidence/studio/apple.gif
+    :alt: MuJoCo 3.16 / SuperDex 1.0 RTX replay
+    :width: 300px
+    :target: studio-rendering.html
     ```
 
-    ```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
-    :alt: MuJoCo／SuperDex 历史脚本轨迹
-    :width: 145px
-    :target: experiments.html#apple-replays
-    ```
-
-  - MuJoCo／SuperDex 历史脚本轨迹均完成 3 s 保持。
+  - MuJoCo 3.16／SuperDex 1.0 两条 14 s 记录均通过 3 s 保持检查；固定脚本控制。
 * - ```{raw} html
     <span id="cloth-comparison"></span>
     ```
@@ -109,10 +103,10 @@
     ```
 
     [夹持力对照](pinch)
-  - ```{image} ../../../docs/evidence/force-limit/comparison.gif
+  - ```{image} ../../../docs/evidence/studio/pinch.gif
     :alt: 驱动力限额 0.4 N／0.8 N
     :width: 300px
-    :target: visual-comparisons.html#pinch
+    :target: studio-rendering.html
     ```
 
   - 同一 Genesis 协议下，驱动力限额 0.4 N 滑脱、0.8 N 保持。
@@ -121,10 +115,10 @@
     ```
 
     [LIBERO 回放](libero-workflow.md)
-  - ```{image} ../../../docs/evidence/visual/libero-demo0-baseline.gif
+  - ```{image} ../../../docs/evidence/studio/libero.gif
     :alt: demo 0 原生基线状态回放
     :width: 300px
-    :target: libero-workflow.html
+    :target: studio-rendering.html
     ```
 
   - 500 条官方示范：任务成功 495 条，全部数值诊断通过 0 条。
@@ -133,10 +127,10 @@
     ```
 
     [六引擎斜面滑动](incline)
-  - ```{image} ../../../docs/evidence/visual/incline-sliding-0.001.gif
+  - ```{image} ../../../docs/evidence/studio/incline.gif
     :alt: 1 ms 步长滑动记录
     :width: 300px
-    :target: visual-comparisons.html#incline
+    :target: studio-rendering.html
     ```
 
   - 比较六引擎滑动响应；相同参数数值不代表模型等效。
@@ -145,10 +139,10 @@
     ```
 
     [法向接触标定](normal)
-  - ```{image} ../../../docs/evidence/visual/normal-calibration.gif
+  - ```{image} ../../../docs/evidence/studio/normal.gif
     :alt: 合成目标的加载、保持与卸载
     :width: 300px
-    :target: visual-comparisons.html#normal
+    :target: studio-rendering.html
     ```
 
   - 合成目标的加载拟合改善，卸载和迁移仍需分别验证。
@@ -207,6 +201,7 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 :hidden:
 :maxdepth: 1
 
+高质量轨迹回放 <studio-rendering>
 布料引擎对比 <cloth-comparison>
 
 实验目录 <experiments>
