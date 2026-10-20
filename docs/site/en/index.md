@@ -37,14 +37,14 @@ Click an experiment or GIF for the full report and reproduction steps.
     ```
 
     [Cutting and pushing](cut-push.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface.gif
-    :alt: Tofu-like / banana-like material
+  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface-rtx.gif
+    :alt: RTX replay: tofu-like / banana-like material
     :width: 145px
     :target: cut-push.html
     ```
 
-    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface.gif
-    :alt: Tofu-like / banana-like material
+    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface-rtx.gif
+    :alt: RTX replay: tofu-like / banana-like material
     :width: 145px
     :target: cut-push.html
     ```

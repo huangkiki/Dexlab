@@ -2,7 +2,7 @@
 
 Studio replays make contact, material surfaces and object motion easier to see. They reuse saved states: rendering never advances a physics engine, changes a task score or repairs a failed grasp.
 
-The homepage gathers the experiments in one preview table. Cutting uses the existing linked-volume surface reconstruction and cloth uses the recorded mesh studio views. Rigid scenes use the official MuJoCo USD exporter and OVRTX path tracing. RSS uses its separately pinned upstream RTX replay. These are different presentation paths with explicit source records, not a claim of one unified physical model.
+The homepage gathers the experiments in one preview table. Cut-push uses repaired linked-volume surfaces with RTX path tracing, and cloth uses the recorded mesh studio views. Rigid scenes use the official MuJoCo USD exporter and OVRTX path tracing. RSS uses its separately pinned upstream RTX replay. These are different presentation paths with explicit source records, not a claim of one unified physical model.
 
 ## Actual replay gallery
 

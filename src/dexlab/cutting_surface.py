@@ -158,6 +158,7 @@ class LinkedVolumeSurface:
             tuple(self.node_shape))
         self.inside = self.node_level_set <= 0
         self.reference_tree = cKDTree(self.reference)
+        self._component_cache = None
 
         self.boundary_edges = {}
         self.cut_edges = [dict() for _ in self.cut_planes]
@@ -311,10 +312,11 @@ class LinkedVolumeSurface:
         coefficients = u.T @ (np.einsum('ij,ij->i', normals, points)-normals@centre)
         # Near-planar Hermite samples leave tangential directions weakly
         # constrained. Treat those directions as null and retain the mass
-        # point instead of amplifying normal-estimation noise into cell-edge
-        # spikes. The constrained normal direction is unchanged.
+        # point instead of amplifying weak curvature into cell-edge spikes.
+        # A 10% relative cutoff retains resolved planes/corners while dropping
+        # the poorly constrained tangent of a locally smooth surface.
         inverse = np.divide(coefficients, singular, out=np.zeros_like(coefficients),
-                            where=singular > max(singular[0]*1e-3, 1e-12))
+                            where=singular > max(singular[0]*.1, 1e-12))
         vertex = centre + vt.T@inverse
         return np.clip(vertex, lower, upper)
 
@@ -423,10 +425,17 @@ class LinkedVolumeSurface:
         if len(quad) != 4 or len(set(quad)) != 4:
             return
         a, b, c, d = quad
-        oriented = np.cross(vertices[b]-vertices[a], vertices[c]-vertices[a])
+        # A clipped dual quad can be concave. Orient its whole area, then use
+        # the diagonal with the better minimum projected triangle area.
+        oriented = np.cross(vertices[c]-vertices[a], vertices[d]-vertices[b])
         if np.dot(oriented, normal) < 0:
             b, d = d, b
-        faces.extend(((a, b, c), (a, c, d)))
+        candidates = (((a, b, c), (a, c, d)), ((a, b, d), (b, c, d)))
+        def quality(pair):
+            points = vertices[np.asarray(pair)]
+            areas = np.cross(points[:, 1]-points[:, 0], points[:, 2]-points[:, 0])
+            return float(np.min(areas@normal))
+        faces.extend(max(candidates, key=quality))
 
     def _faces(self, vertices, cell_node_vertex, active):
         faces = []
@@ -571,6 +580,10 @@ class LinkedVolumeSurface:
 
     def _disconnected_component_mesh(self, positions, deformation, codes, components):
         """Reconstruct each observed native component as a closed local volume."""
+        key = (codes.tobytes(), components.tobytes())
+        if self._component_cache is not None and self._component_cache[0] == key:
+            return self._move_components(
+                self._component_cache[1], positions, deformation, codes, components)
         rest, faces, anchors, cut_vertices = [], [], [], []
         query_codes, query_components = [], []
         for component in np.unique(components):
@@ -604,7 +617,9 @@ class LinkedVolumeSurface:
                 vertex = self._qef(samples, lower, upper)
                 for cut in constraints:
                     axis, plane = self.cut_axes[cut], self.cut_planes[cut]
-                    if abs(vertex[axis]-plane) <= self.surface_spacing*1e-6:
+                    # Remove finite-difference/SVD roundoff at an exact cut
+                    # plane before classifying its rim (at most 30 nm here).
+                    if abs(vertex[axis]-plane) <= self.surface_spacing*1e-5:
                         vertex[axis] = plane
                 anchor = int(particles[np.argmin(
                     np.linalg.norm(self.reference[particles]-vertex, axis=1))])
@@ -637,6 +652,14 @@ class LinkedVolumeSurface:
         anchors = np.asarray(anchors, dtype=np.int64)
         query_codes = np.asarray(query_codes, dtype=np.int64)
         query_components = np.asarray(query_components, dtype=np.int64)
+        topology = (rest, faces, anchors, query_codes, query_components,
+                    np.asarray(cut_vertices, dtype=bool))
+        self._component_cache = (key, topology)
+        return self._move_components(topology, positions, deformation, codes, components)
+
+    def _move_components(self, topology, positions, deformation, codes, components):
+        """Reuse only reference topology; evaluate the current x/F field every time."""
+        rest, faces, anchors, query_codes, query_components, cut_vertices = topology
         moved = self._compatible_motion(
             rest, anchors, query_codes, query_components,
             positions, deformation, codes, components)
@@ -650,7 +673,8 @@ class LinkedVolumeSurface:
                 vertices = query_components == component
                 moved[vertices] = np.column_stack(
                     (rest[vertices], np.ones(np.count_nonzero(vertices))))@coefficients
-        return moved, faces, rest, np.asarray(cut_vertices, dtype=bool)
+        # The caller may own/mutate its returned arrays without corrupting the cache.
+        return moved, faces.copy(), rest.copy(), cut_vertices.copy()
 
     def mesh(self, positions, deformation, codes, components):
         positions = np.asarray(positions)

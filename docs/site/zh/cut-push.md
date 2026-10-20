@@ -3,10 +3,12 @@
 豆腐两刀成三块，香蕉三刀成四块；最后一刀后，刀刃稍抬离砧板，保持在切缝内直接侧推，再撤刀。画面逐帧显示刀对材料的接触力，以及每块材料从初始位置起的 x 位移。
 
 ```{raw} html
-<div class="cutting-showcase cut-push-showcase"><div class="cutting-showcase-grid"><section class="cutting-player" aria-label="豆腐：两刀成三块，直接侧推"><header><h3>豆腐：两刀成三块，直接侧推</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-cut-push/surface.mp4" data-poster="_static/cutting/tofu-cut-push/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-cut-push/particles.mp4" data-poster="_static/cutting/tofu-cut-push/particles-poster.png" aria-pressed="false">粒子</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu-cut-push/surface-poster.png"><source src="_static/cutting/tofu-cut-push/surface.mp4" type="video/mp4"></video></section><section class="cutting-player" aria-label="香蕉：三刀成四块，直接侧推"><header><h3>香蕉：三刀成四块，直接侧推</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana-cut-push/surface.mp4" data-poster="_static/cutting/banana-cut-push/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana-cut-push/particles.mp4" data-poster="_static/cutting/banana-cut-push/particles-poster.png" aria-pressed="false">粒子</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana-cut-push/surface-poster.png"><source src="_static/cutting/banana-cut-push/surface.mp4" type="video/mp4"></video></section></div></div>
+<div class="cutting-showcase cut-push-showcase"><div class="cutting-showcase-grid"><section class="cutting-player" aria-label="豆腐：两刀成三块，直接侧推"><header><h3>豆腐：两刀成三块，直接侧推</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-cut-push/surface-rtx.mp4" data-poster="_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-pressed="true">表面 · RTX</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-cut-push/particles.mp4" data-poster="_static/cutting/tofu-cut-push/particles-poster.png" aria-pressed="false">粒子</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu-cut-push/surface-rtx-poster.png"><source src="_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4"></video></section><section class="cutting-player" aria-label="香蕉：三刀成四块，直接侧推"><header><h3>香蕉：三刀成四块，直接侧推</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana-cut-push/surface-rtx.mp4" data-poster="_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-pressed="true">表面 · RTX</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana-cut-push/particles.mp4" data-poster="_static/cutting/banana-cut-push/particles-poster.png" aria-pressed="false">粒子</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana-cut-push/surface-rtx-poster.png"><source src="_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4"></video></section></div></div>
 ```
 
 力和位移来自保存的仿真状态；没有直接给材料速度增量。合成材料参数，未做真实食材标定。
+
+表面视图采用 RTX 路径追踪、柔和面光源，以及随材料运动的果肉纹理；仍可切换到原始粒子视图。[表面重建与回放记录](cutting-surface.md)说明这次几何修复，原始粒子、刀具运动、力和任务评分保持不变。
 
 ## 如何读画面
 
@@ -84,7 +86,11 @@ python -m dexlab.tofu_cut --task tofu-sequential --grid-spacing .005 --dt .00012
 python -m dexlab.tofu_cut --task banana --motion-protocol cut-push --output BANANA
 python -m dexlab.cutting_score TOFU
 python -m dexlab.cutting_showcase TOFU --output TOFU_MEDIA
+python scripts/render_cutting_studio.py TOFU TOFU_RTX
+python scripts/render_cutting_studio.py BANANA BANANA_RTX
 ```
+
+可选 RTX 命令需要[渲染环境](studio-rendering.md)、切割依赖和 VTK；直接读取已有 `manifest.json`、`states.npz`、`trace.npz`，输出目录必须是新目录。加 `--preview` 可检查四个已有帧。
 
 按[资源限制](cutting.md#复现)运行；`--motion-protocol cut-no-push` 为无侧推对照，需保留对应正例的步长和黏度。`--viscosity 0 --dt .00025` 复现保留的纯弹性豆腐基线；香蕉用 `--dt .000125` 复现半步长。旧 `knife-push`（撤出后重新入缝）和 `impulse` 记录保留各自协议。
 

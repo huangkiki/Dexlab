@@ -37,14 +37,14 @@
     ```
 
     [连续切割与推动](cut-push.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface.gif
-    :alt: 豆腐状／香蕉状软材料
+  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface-rtx.gif
+    :alt: 豆腐状／香蕉状软材料的 RTX 回放
     :width: 145px
     :target: cut-push.html
     ```
 
-    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface.gif
-    :alt: 豆腐状／香蕉状软材料
+    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface-rtx.gif
+    :alt: 豆腐状／香蕉状软材料的 RTX 回放
     :width: 145px
     :target: cut-push.html
     ```
