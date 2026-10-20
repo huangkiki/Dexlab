@@ -126,6 +126,8 @@ def run(directory, config, mode='full', duration=None, task='tofu', motion_proto
     if task == 'tofu-sequential' or continuous:
         manifest.update(motion_protocol=motion_protocol,
                         motion_start_time_s=motion_start if contact_motion else probe_time)
+    if task in ('banana', 'tofu-sequential'):
+        manifest['planned_cut_planes_m'] = list((-.03, 0., .03) if task == 'banana' else (.015, -.015))
     write_json(directory / 'manifest.json', manifest)
     start = time.monotonic()
     sim = CuttingSimulation(config)

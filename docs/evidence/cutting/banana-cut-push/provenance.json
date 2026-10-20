@@ -92,9 +92,9 @@
     "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
   },
   "renderer_sha256": {
-    "cutting_showcase.py": "e648d7faad17005413841b3d2fbce377c4db9f3ac5c8b984e89fb651c45a4e4c",
-    "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
-    "cutting_metrics.py": "3ec0d1744235677aa9d47e8c90c491e108b2267444bc0ce786247d6ee5dd1600"
+    "cutting_showcase.py": "b8e6ba6d1b0950dd143992d74157b1bff799b288d55275b8bbf2b7acdca6d401",
+    "cutting_surface.py": "64429bc8bf9f66f66dc3f4d9924c8fa4879886e67394698e3e27730713343366",
+    "cutting_metrics.py": "103878a6a2f01007a8667f6be78153bdbec6eb62a4b937d83157a83634ba0f33"
   },
   "frames": 161,
   "fps": 20,
@@ -270,16 +270,16 @@
     ],
     "description": "Uniformly slowed recorded frames; no interpolated motion or invented physical time."
   },
-  "surface": "Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Fixed reference seams at the three supported straight-cut planes expose local cap triangles only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. This fixed-seam approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.",
+  "surface": "Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Straight reference seams are generated at the median recorded blade position for each active cut; the numerical replay uses the same recorded planes. Local cap triangles appear only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. Paths with lateral sweep beyond half a material spacing are rejected instead of rendered as one plane. This planar approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.",
   "maximum_display_smoothing_displacement_mm": 0.0,
   "description": "Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Continuous cut-push tasks share the board/handle presentation and display measured force and all region displacements. Historical sequential tofu uses neutral ground, no board/handle, and an orange projected middle-region rectangle; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.",
   "artifacts": {
-    "measurements.json": "bdc19ce1b3affb900054636fd0ea68c60d74e66dd7891b993377e9bbce48f64b",
+    "measurements.json": "27dcc47442d0047fb25b2362c1528e2c3e44aeb5c99f4775dd1f6613fc1d80c4",
     "particles-poster.png": "2e40c0312497db553f8ae0ddfea26b7798a9b1e236bf5be7a01a4580301d9670",
     "particles.gif": "77f34454d51bcc9c3d173d498181757d553ffb35cb63d5c26b1087551a58e58c",
     "particles.mp4": "f97dfb8d7189bc58b641fadff5e9cb464ee139712f126f5e39fa46d0949c452f",
-    "surface-poster.png": "86624dad5f8a89a646f9a4c437ffb4672ed6cf86c4e0d02e8392edd83bef6906",
-    "surface.gif": "ee10a2557e8b653f1a22b304fe6d4788f62888664927d2842f9595ce9f4a7276",
-    "surface.mp4": "bc33b5afe431823b6370635bcbd84962e5562f8ccedb92d485eef6ed1b9c9728"
+    "surface-poster.png": "11f08de026578e2bb91d06abf64517e5f145c111968bd310588ae8bdbbe7e817",
+    "surface.gif": "088a938458d6014addaabf727df2010b8595220016c26320c9ab6c86a4c16d54",
+    "surface.mp4": "50451f6a34b315d68dda2af5f60c498d77cea22d5513df0ca49993eff9034194"
   }
 }

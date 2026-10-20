@@ -9,6 +9,7 @@ from itertools import permutations, product
 
 import numpy as np
 
+from dexlab.cutting_geometry import recorded_cut_geometry
 from dexlab.cutting_score import SCORING_ACCEPTANCE, grid_components
 
 
@@ -76,13 +77,12 @@ class ReplayMeasurements:
         self.states, self.trace, self.manifest = states, trace, manifest
         self.reference = states['reference']
         self.task = manifest['task']
-        self.planes = {'tofu': (0.,), 'tofu-sequential': (.015, -.015),
-                       'banana': (-.03, 0., .03), 'tofu-scoring': (0., 0.)}[self.task]
-        self.axes = (0, 1) if self.task == 'tofu-scoring' else (0,) * len(self.planes)
         spacing = manifest['config']['grid_spacing'] / 2
+        self.planes, self.axes = recorded_cut_geometry(trace, spacing)
         self.pairs = [face_pairs(self.reference, plane, spacing, axis)
                       for plane, axis in zip(self.planes, self.axes, strict=True)]
-        self.regions = np.searchsorted(sorted(self.planes), self.reference[:, 0])
+        self.regions = np.searchsorted(sorted(plane for plane, axis in zip(self.planes, self.axes)
+                                              if axis == 0), self.reference[:, 0])
         if self.task == 'tofu-scoring':
             self.base = self.reference[:, 2] < SCORING_ACCEPTANCE['base_height_m']
             self.tetrahedra = reference_tetrahedra(self.reference, spacing, self.base)
@@ -168,7 +168,7 @@ class ReplayMeasurements:
 
     def definitions(self):
         result = {'face_opening_mm': 'Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.',
-                'interior_volume_change_percent': '100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing planned cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().',
+                'interior_volume_change_percent': '100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing recorded cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().',
                 'centroid_x_from_start_mm': 'Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.',
                 'centroid_x_from_probe_mm': 'Same centroids relative to the exact saved motion-start frame; null before it. Continuous push: final-cut end (tofu 3.30 s, banana 5.30 s); legacy knife-push/no-push: 4.00 s; impulse: probe_time_s.',
                 'knife_on_material_x_n': 'Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.',
@@ -178,6 +178,7 @@ class ReplayMeasurements:
                 'knife_material_force_n': 'Norm of recorded material reaction on the knife at the preceding completed substep; excludes guide, drive and board forces.',
                 'reference_volume_m3': self.reference_volume, 'tetrahedra': len(self.tetrahedra),
                 'cut_planes_m_in_execution_order': list(self.planes),
+                'cut_plane_source': 'Median recorded blade position while cutting; uncut controls use the densest recorded position cluster. Axis-aligned paths that sweep laterally by more than half a material spacing are rejected.',
                 'cut_normal_axes': list(self.axes),
                 'comparison_scope': 'Native DexLab measurements; original authors sampling and full configuration are unavailable, so these are not same-condition cross-method scores.'}
         if self.task == 'tofu-scoring':

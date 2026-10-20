@@ -24,6 +24,8 @@ Two tofu cuts create three pieces; three banana cuts create four. After the last
 
 Force and displacement come from saved simulation states; no direct material velocity increment. Tofu uses Newtonian viscosity η=5 Pa·s at 0.125 ms; banana retains η=0 at 0.25 ms. Matched viscosity results, jitter and costs are on the validation page. Synthetic materials, without real-food calibration.
 
+Banana surface seams, frame measurements and complete-task scoring now share the recorded blade path: each straight seam and scored region is generated from the actual cutting phase instead of preset −30/0/+30 mm locations. A path that sweeps laterally by more than half a material spacing is rejected as a single-plane replay. This remains a planar approximation, not the paper's Hermite/local dual-contouring reconstruction. Incomplete resource probes use only their manifest-declared planned planes for failed-run diagnostics and cannot qualify the complete task.
+
 **One recording, two views:** each frame shows contact force |F|, Fx and Fz (N), plus Δx (mm) for every piece. At the same timestep over 5.4–6.0 s, changing tofu viscosity from η=0 to 5 Pa·s lowers the particle jitter metric from **0.0323 to 0.0140 mm** and centroid x peak-to-peak motion from **0.0711 to 0.0384 mm**. Residual motion remains; playback is not smoothed.
 
 [▶ Surface / particle videos, contact force and complete validation](https://huangkiki.github.io/Dexlab/en/latest/cut-push.html)

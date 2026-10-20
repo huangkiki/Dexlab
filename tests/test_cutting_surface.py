@@ -61,7 +61,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_skin_blend_does_not_drag_the_other_cut_piece(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         sides = np.where(reference[:, 0] < 0, 1, 2)
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         positions = reference.copy()
@@ -74,7 +74,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_cap_rim_remains_flat_under_rigid_piece_motion(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         sides = np.where(reference[:, 0] < 0, 1, 2)
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         moved, _, rest, caps = surface.mesh(reference, deformation, sides, sides)
@@ -85,7 +85,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_partial_cut_keeps_bridge_and_exposes_local_caps(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         codes = np.where(reference[:, 0] < 0, 1, 2)
         codes[reference[:, 2] < .012] = 0
@@ -98,7 +98,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_uncut_surface_is_connected_under_affine_deformation(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         gradient = np.array([[1., .1, 0.], [0., .95, .1], [0., 0., 1.05]])
         deformation = np.tile(gradient, (len(reference), 1, 1))
         moved, faces, rest, _ = surface.mesh(reference @ gradient.T, deformation,
@@ -109,7 +109,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_cut_caps_have_opposing_outward_normals(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         codes = np.where(reference[:, 0] < 0, 1, 2)
         positions = reference.copy()
@@ -124,7 +124,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_compatible_codes_cannot_reconnect_disjoint_native_components(self):
         reference = material_points((.12, .06, .03), .005, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         groups = np.searchsorted([-.03, 0., .03], reference[:, 0])
         # Compatibility alone is not spatial connectivity: an unassigned anchor
         # may belong to a native component with no shared stencil to its neighbour.
@@ -139,7 +139,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_shifted_material_boundary_does_not_misassign_the_authored_seam(self):
         reference = material_points((.12, .06, .03), .005, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         # A cut in deformed material need not coincide with the nominal
         # reference plane. Some left-seam nearest particles belong to the right.
         groups = np.searchsorted([-.03, 0., .027], reference[:, 0])
@@ -154,6 +154,23 @@ class SurfaceEvidence(unittest.TestCase):
         # The third authored interval remains attached to its own native piece.
         interior = (rest[:, 0] > .001) & (rest[:, 0] < .029)
         np.testing.assert_allclose(shifts[interior], 2., atol=1e-12)
+
+    def test_banana_skin_places_the_seam_at_the_recorded_cut_plane(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        cut_plane = .015
+        surface = BananaSkin(reference, (cut_plane,))
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        codes = np.where(reference[:, 0] < cut_plane, 1, 2)
+
+        moved, faces, rest, caps = surface.mesh(reference, deformation, codes, codes)
+
+        seam_vertices = np.isclose(rest[:, 0], cut_plane)
+        self.assertTrue(seam_vertices.any())
+        self.assertTrue(caps[seam_vertices].all())
+        self.assertTrue(np.isclose(rest[faces, 0], cut_plane).all(axis=1).any())
+        default_plane = np.isclose(rest[:, 0, None], [-.03, 0., .03]).any(axis=1)
+        self.assertFalse(caps[default_plane].any())
+        np.testing.assert_allclose(moved, rest, atol=1e-14)
 
 
 

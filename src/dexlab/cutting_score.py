@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-from dexlab.cutting_geometry import material_points
+from dexlab.cutting_geometry import material_points, recorded_sequential_regions
 
 
 # Frozen before the first run: numerical accounting (FP64), complete topology,
@@ -234,8 +234,9 @@ def score_run(directory):
                      for mask in (~right, right)]
     relative_motion = float(displacements[1][0] - displacements[0][0])
     limits = manifest['acceptance']
+    complete_duration = abs(manifest['duration_s'] - duration) < 1e-12
     checks = {
-        'complete_duration': abs(manifest['duration_s'] - duration) < 1e-12,
+        'complete_duration': complete_duration,
         'initially_connected': len(initial_sizes) == 1,
         'persistent_cut_labels': persistent,
         'two_mechanical_components': len(final_sizes) == 2,
@@ -270,7 +271,19 @@ def score_run(directory):
         topology, progressive, side_counts, depths = scoring_topology(states, trace, config)
         checks.update(topology)
     if sequential:
-        regions = np.digitize(reference[:, 0], [-.03, 0., .03] if banana else [-.015, .015])
+        if complete_duration:
+            regions, recorded_planes = recorded_sequential_regions(
+                reference, trace, config['grid_spacing'] / 2, cut_count)
+            cut_geometry_complete = True
+        else:
+            planned = np.asarray(manifest.get('planned_cut_planes_m', ()), dtype=float)
+            if planned.shape != (cut_count,) or not np.isfinite(planned).all() or len(set(planned)) != cut_count:
+                raise ValueError('Incomplete sequential record is missing its planned cut geometry')
+            regions = np.searchsorted(np.sort(planned), reference[:, 0])
+            if np.any(np.bincount(regions, minlength=cut_count + 1) == 0):
+                raise ValueError('Planned cut planes must leave particles in every scored region')
+            recorded_planes = ()
+            cut_geometry_complete = False
         piece_count = cut_count+1
         expected_fractions = sorted((np.bincount(regions, minlength=piece_count) / particles).tolist(), reverse=True)
         region_motion = np.array([x[-1, regions == k].mean(axis=0) - x[probe_frame, regions == k].mean(axis=0)
@@ -352,6 +365,8 @@ def score_run(directory):
         'left_displacement_m': displacements[0].tolist(), 'right_displacement_m': displacements[1].tolist(),
         'piece_displacements_m': ([] if scoring else region_motion.tolist() if sequential else
                                   [d.tolist() for d in displacements]),
+        **({'cut_planes_m_in_execution_order': list(recorded_planes),
+            'cut_geometry_complete': cut_geometry_complete} if sequential else {}),
         'peak_material_reaction_n': float(np.linalg.norm(trace['material_reaction_n'], axis=1).max()),
         **({'constitutive_viscous_dissipation_j': float(trace['viscous_dissipation_j'].sum())}
            if viscosity > 0 else {}),
