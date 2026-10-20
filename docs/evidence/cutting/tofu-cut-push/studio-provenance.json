@@ -4843,5 +4843,7 @@
     "surface.gif": "f1ebeb9a7ae7e440d0abf8b1487e26b57806da48a61c6438dbee4674a5a11aa9"
   },
   "usd_sha256": "37147bb42d578aa4f4083ca190111f5a5209f3c52510ac0468a8e5fa601fccff",
-  "packaging": "Surface derivatives renamed to surface-rtx.*; historical surface/particle assets retained."
+  "packaging": "Surface derivatives renamed to surface-rtx.*; historical surface/particle assets retained.",
+  "render_source_commit": "eb4f5bb0d08694c22dbc06ee8ad5cea0bfc9bb04",
+  "post_render_cache_correction": "The published batch rebuilt disconnected reference topology because an edge-loop variable shadowed the cache key. The subsequent cache-key correction changes reuse only; regression checks compare fresh and cached meshes with changed non-affine x/F. Rendering costs above describe the actual uncached batch."
 }

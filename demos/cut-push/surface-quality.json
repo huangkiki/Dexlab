@@ -88,5 +88,5 @@
     "cutting_surface.py": "0acd5229c736747058357db14d677d25ca79db3ca273d5d392d7e86cdbdbf6e3",
     "cutting_showcase.py": "06c6f0053abbb8f7bc1c4328a423b66c0451612a5332e9763e5acda6eb6dbd79"
   },
-  "final_followup": "The complete replay additionally reuses unchanged reference topology and snaps finite-difference cut-plane roundoff; its exact source hashes are in studio-provenance.json."
+  "final_followup": "The complete replay additionally snaps finite-difference cut-plane roundoff; exact rendered source hashes and commit are in studio-provenance.json. A later cache-key correction enables unchanged-topology reuse without changing mesh formulas."
 }
