@@ -58,6 +58,8 @@
 
 论文只写“von Mises-type plasticity projection”，没有给出投影公式、屈服应力约定、硬化规律或代码。DexLab 明确选择常规等效应力 `q=√(3/2)||s||`，在主对数应变中径向回归并保留体积应变。解析测试覆盖屈服前加载、屈服后投影、卸载、叠加刚体转动、正 Jacobian 与非负塑性耗散；每个塑性记录必须保存逐子步耗散通道。[材料协议与源码身份](https://github.com/huangkiki/Dexlab/blob/main/demos/banana-force/material-protocol.json)同时列出论文未说明的字段。
 
-这仍不等于完成香蕉力实验。单刀轨迹、稳定步长／接触敏感性、20 组粒子采样、四分之一网格间距的 64 倍粒子精化，以及材料力／砧板力／驱动与导向力的分离尚待 [#204](https://github.com/huangkiki/Dexlab/issues/204) 后续阶段。当前香蕉是人工建模，非扫描模型；真实食材标定、机器人推块及力值一致性仍未验证。
+独立[香蕉单刀测力实验](banana-force.md)现已执行 20 组不同粒子采样、一因子时间步／接触敏感性和四分之一网格的精确 64× 粒子细化。材料、砧板支撑和总阻力分列，驱动与导向通道不并入阻力。20 次切板前材料峰值为 **0.8469 ± 0.1511 N**；半时间步的归一化 RMSE 为 **0.621**。64× 运行的 RMSE 为 **2.051**，并因 0.5 s 内没有接触砧板而验收失败，说明当前力曲线尚未证明数值收敛。作者原始机器人力曲线不可用，因此没有真实力误差或作者实现等价结论。
 
-[交叉浅切记录](tofu-scoring.md) · [豆腐两刀记录](tofu-comparison.md) · [独立香蕉任务](banana-cutting.md) · [三列对比](cutting-comparison.md)
+[#204](https://github.com/huangkiki/Dexlab/issues/204) 仍需完成论文 III-F 的 linked-volume／Hermite／局部 dual-contouring 表面重建。当前香蕉是人工建模而非扫描模型，刀具为导向平移刚体；真实食材标定、六自由度工具接口和机器人推块力值一致性仍未验证。
+
+[香蕉单刀测力](banana-force.md) · [交叉浅切记录](tofu-scoring.md) · [豆腐两刀记录](tofu-comparison.md) · [独立香蕉任务](banana-cutting.md) · [三列对比](cutting-comparison.md)
