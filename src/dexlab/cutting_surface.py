@@ -309,8 +309,12 @@ class LinkedVolumeSurface:
         centre = points.mean(axis=0)
         u, singular, vt = np.linalg.svd(normals, full_matrices=False)
         coefficients = u.T @ (np.einsum('ij,ij->i', normals, points)-normals@centre)
+        # Near-planar Hermite samples leave tangential directions weakly
+        # constrained. Treat those directions as null and retain the mass
+        # point instead of amplifying normal-estimation noise into cell-edge
+        # spikes. The constrained normal direction is unchanged.
         inverse = np.divide(coefficients, singular, out=np.zeros_like(coefficients),
-                            where=singular > max(singular[0]*1e-10, 1e-12))
+                            where=singular > max(singular[0]*1e-3, 1e-12))
         vertex = centre + vt.T@inverse
         return np.clip(vertex, lower, upper)
 
@@ -499,10 +503,6 @@ class LinkedVolumeSurface:
                            positions, deformation, codes, components):
         nodes, weights = self._motion_stencil(rest)
         moved = np.empty_like(rest)
-        particle_node_position = self.motion_node_positions[self.particle_nodes]
-        affine_nodes = positions[:, None, :] + np.einsum(
-            'pij,pnj->pni', deformation,
-            particle_node_position-self.reference[:, None, :])
         for component, code in sorted(set(zip(query_components, query_codes, strict=True))):
             vertices = np.flatnonzero((query_components == component) & (query_codes == code))
             selected = np.asarray([p for p in np.flatnonzero(components == component)
@@ -510,52 +510,29 @@ class LinkedVolumeSurface:
             if not len(selected):
                 raise ValueError('Surface region has no compatible TLMPM field')
             field = np.zeros_like(self.motion_node_positions)
-            occupied = np.zeros(len(field), dtype=bool)
-            local_nodes = self.particle_nodes[selected]
-            for node in np.unique(local_nodes):
-                rows, stencil = np.nonzero(local_nodes == node)
-                particles = selected[rows]
-                local_weights = self.particle_weights[particles, stencil]
-                reference_centre = np.average(
-                    self.reference[particles], axis=0, weights=local_weights)
-                current_centre = np.average(
-                    positions[particles], axis=0, weights=local_weights)
-                reference_offset = self.reference[particles]-reference_centre
-                current_offset = positions[particles]-current_centre
-                covariance = np.einsum(
-                    'p,pi,pj->ij', local_weights, reference_offset, reference_offset)
-                if np.linalg.matrix_rank(covariance, tol=1e-14) == 3:
-                    cross = np.einsum(
-                        'p,pi,pj->ij', local_weights, current_offset, reference_offset)
-                    gradient = np.linalg.solve(covariance, cross.T).T
-                    field[node] = current_centre + gradient@(
-                        self.motion_node_positions[node]-reference_centre)
-                else:
-                    field[node] = np.average(
-                        affine_nodes[particles, stencil], axis=0, weights=local_weights)
-                occupied[node] = True
-
             needed_nodes = np.unique(nodes[vertices])
-            missing_nodes = needed_nodes[~occupied[needed_nodes]]
-            if len(missing_nodes):
-                tree = cKDTree(self.reference[selected])
-                distances, neighbours = tree.query(
-                    self.motion_node_positions[missing_nodes], k=min(64, len(selected)))
-                distances, neighbours = np.asarray(distances), np.asarray(neighbours)
-                if distances.ndim == 1:
-                    shape = (1, -1) if len(missing_nodes) == 1 else (-1, 1)
-                    distances = distances.reshape(shape)
-                    neighbours = neighbours.reshape(shape)
-                particle_indices = selected[neighbours]
-                weights_to_node = np.exp(-.5*(distances/self.motion_spacing)**2)
-                node_offsets = (self.motion_node_positions[missing_nodes, None, :]
-                                - self.reference[particle_indices])
-                predictions = positions[particle_indices] + np.einsum(
-                    'pnij,pnj->pni', deformation[particle_indices], node_offsets)
-                field[missing_nodes] = np.einsum(
-                    'pn,pni->pi', weights_to_node, predictions
-                ) / weights_to_node.sum(axis=1, keepdims=True)
-                occupied[missing_nodes] = True
+            # Historical records do not contain the logical-grid field. Each
+            # compatible particle therefore predicts a fixed motion node from
+            # its saved x/F state, and a local Gaussian average reconstructs
+            # that node. This remains exact for a common affine field while a
+            # wider neighbourhood suppresses coarse boundary-particle noise.
+            tree = cKDTree(self.reference[selected])
+            distances, neighbours = tree.query(
+                self.motion_node_positions[needed_nodes], k=min(64, len(selected)))
+            distances, neighbours = np.asarray(distances), np.asarray(neighbours)
+            if distances.ndim == 1:
+                shape = (1, -1) if len(needed_nodes) == 1 else (-1, 1)
+                distances = distances.reshape(shape)
+                neighbours = neighbours.reshape(shape)
+            particle_indices = selected[neighbours]
+            weights_to_node = np.exp(-.5*(distances/self.motion_spacing)**2)
+            node_offsets = (self.motion_node_positions[needed_nodes, None, :]
+                            - self.reference[particle_indices])
+            predictions = positions[particle_indices] + np.einsum(
+                'pnij,pnj->pni', deformation[particle_indices], node_offsets)
+            field[needed_nodes] = np.einsum(
+                'pn,pni->pi', weights_to_node, predictions
+            ) / weights_to_node.sum(axis=1, keepdims=True)
             for vertex in vertices:
                 local_nodes = nodes[vertex]
                 moved[vertex] = weights[vertex]@field[local_nodes]
