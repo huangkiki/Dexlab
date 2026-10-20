@@ -1,250 +1,215 @@
 # DexLab
 
-**Use established physical laws and empirical relations in reproducible experiments to study how contact and friction affect robotic grasping, and assess the trustworthiness of physics simulation.**
+**Reproducible contact, friction and manipulation experiments to understand why robots hold or slip, and how to choose and tune a physics simulation.**
 
-The research serves two goals:
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
 
-| Your question | What DexLab provides |
-| --- | --- |
-| **A scene performs poorly. What should improve?** | Locate departures from physical expectations, separate parameters, integration, model assumptions and solving mechanisms, and identify evidenced configuration fixes and solver improvement directions. |
-| **A new scene needs an engine/solver. Where should I start?** | Use evidence from similar contact/friction conditions to choose candidate configurations, understand sensitivity, limits, stability and cost, and build practical scenario-selection knowledge. |
-
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](experience.md) · [Diagnosis and trials](diagnosis.md) · [Scenario guide](selection.md)
-
-## RSS wiping: grasp assistance and slippage
-
-Reproducing RoboSimStudio (RSS) wiping: one gripper holds the bar while the other wipes its ink with a sponge. **Left: the original's compliant node constraints retain the sponge. Right: removing those constraints lets the sponge slip out during wiping.**
+(research-findings)=
+## Experiments we have run
 
 ```{raw} html
-<a href="rss-wiping.html"><img src="_static/rss-wiping/preview.gif" width="960" alt="Synchronized RSS comparison: original retains the sponge on the left; no-latch loses it on the right; both show the same simulation time and measured values"></a>
+<span id="visual-experiment-catalogue"></span>
 ```
 
-A **continuous 10–30 s excerpt from paired trial 01, played at 2× speed**. Both panels share the simulation clock and preserve the native collision view and measured annotations. Click for full recordings and curves. [Preview provenance and processing](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/rss-wiping/preview.md).
+Click a GIF from actual simulation or recorded-state replay for full videos, curves and reproduction. Successes, failures and conditions stay together.
 
-Across three paired repetitions with frozen collision geometry and initial states, the original passed **3/3 tasks, cleaning 95.5–95.9%**; no-latch passed **0/3, cleaning 39.9–41.2%**. This supports the contribution of grasp assistance in this configuration; in-hand rotation remains unimplemented.
+(rss)=
+### RSS wiping: why does the sponge slip?
 
-[Complete comparison and reproduction limits](rss-wiping.md) · [Reproduction code and frozen geometry](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping)
-
-[Start with the basics: do solvers wait for each other, and what does preCICE do?](solver-coupling)
-
-## Finish the last cut, then push with the blade
-
-Two tofu cuts create three pieces; three banana cuts create four. After the last cut, the blade lifts just clear of the board, stays inside the kerf, pushes sideways, then withdraws. Every frame shows measured knife contact force and each material region’s x displacement from its initial position.
+One gripper holds the bar while the other wipes off ink with a sponge. The left run retains RSS’s auxiliary node constraint; the right disables it.
 
 ```{raw} html
-<div class="cutting-showcase cut-push-showcase"><div class="cutting-showcase-grid"><section class="cutting-player" aria-label="Tofu: two cuts, then push"><header><h3>Tofu: two cuts, then push</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-cut-push/surface.mp4" data-poster="_static/cutting/tofu-cut-push/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-cut-push/particles.mp4" data-poster="_static/cutting/tofu-cut-push/particles-poster.png" aria-pressed="false">Particles</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu-cut-push/surface-poster.png"><source src="_static/cutting/tofu-cut-push/surface.mp4" type="video/mp4"></video></section><section class="cutting-player" aria-label="Banana: three cuts, then push"><header><h3>Banana: three cuts, then push</h3><div class="cutting-view-switch"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana-cut-push/surface.mp4" data-poster="_static/cutting/banana-cut-push/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana-cut-push/particles.mp4" data-poster="_static/cutting/banana-cut-push/particles-poster.png" aria-pressed="false">Particles</button></div></header><video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana-cut-push/surface-poster.png"><source src="_static/cutting/banana-cut-push/surface.mp4" type="video/mp4"></video></section></div></div>
+<a href="rss-wiping.html"><img src="_static/rss-wiping/preview.gif" width="880" alt="RSS wiping: why does the sponge slip?" loading="lazy"></a>
 ```
 
-Force and displacement come from saved simulation states; no direct material velocity increment. Tofu uses Newtonian viscosity η=5 Pa·s at 0.125 ms; banana retains η=0 at 0.25 ms. Matched viscosity results, jitter and costs are on the validation page. Synthetic materials, without real-food calibration. [→ Full measurements and validation](cut-push.md)
+Across three repeats with fixed geometry and initial states, the original passed 3/3 with 95.5%–95.9% cleaning; disabling the constraint passed 0/3 with 39.9%–41.2% cleaning. This configuration depends on assisted retention; in-hand rotation is not reproduced. The GIF shows synchronized 10–30 s excerpts from trial 1 at 2× speed in the native collision-geometry view.
 
-(cutting-comparison)=
-## Do cut pieces stay independent?
+[Results and reproduction](rss-wiping.md)
 
-Historical v0.66.0 baseline; the latest continuous side push is shown above.
+(cut-push)=
+### Sequential cutting: push the pieces with the final cut
+
+Cut a tofu-like block into three pieces and a banana-like body into four, then lift the blade slightly and push sideways through knife contact.
 
 ```{raw} html
-:file: _cutting-comparison.html
+<a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface.gif" width="420" alt="Sequential cutting: push the pieces with the final cut" loading="lazy"></a>
+<a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface.gif" width="420" alt="Sequential cutting: push the pieces with the final cut" loading="lazy"></a>
 ```
 
-| Measurement event and quantity | BladeMaster¹ | CRESSim-MPM¹ | DexLab² |
-| --- | ---: | ---: | ---: |
-| First cut at half depth: mean opening (mm) | 0.654 | 4.059 | 0.496 (0.82 s) |
-| Both cuts withdrawn: middle-piece contraction (%) | 0.506 | 8.746 | 2.509 (4.00 s) |
-| After knife-face push: left x displacement (mm) | Different input | Different input | -11.128 |
-| Same window: middle / right x displacement (mm) | Different input | Different input | -0.038 / -0.015 |
-| Push phase: net leftward contact impulse (N·s) | Different input | Different input | 0.105801 |
+Piece motion comes from knife contact, with no direct velocity increment applied to the material. The overlays show recorded contact forces and piece displacements; the report pairs surface and particle views. These are synthetic materials, without real-food calibration or the paper’s force-measurement experiment.
 
-**Different final inputs:** author clips initialize left-piece velocity; DexLab now pushes through native knife contact with no direct material velocity increment. The first two cutting metrics remain side by side; the last three rows describe only DexLab’s knife-push phase, not a matched-input comparison.
+[Results and reproduction](cut-push.md)
 
-¹ Values reported by the [BladeMaster project / paper Fig. 5](https://jango6324.github.io/blademaster/#comparison), including its CRESSim-MPM comparison. ² [DexLab event measurements from saved states](https://github.com/huangkiki/Dexlab/blob/main/demos/tofu-knife-push/evidence.json): 5 mm grid, 0.25 ms timestep and 0.5 mm blade; displacements cover 4.00–7.00 s; contact impulse is integrated over 4.00–6.60 s. The half-depth event occurs at 0.82375 s; the table uses the nearest saved frame, 0.82 s. Openings use affine material faces and volumes use interior middle-piece tetrahedra; contraction is the negative relative volume change (-ΔV/V₀). These are **reported / measured values side by side**. Complete author settings and sampling remain [unmatched](https://github.com/huangkiki/Dexlab/issues/200), so the table does not establish a controlled accuracy ranking.
+(scoring)=
+### Cross scoring: cuts with a connected base
 
-[→ Comparison methods, sources and next protocol](cutting-comparison.md)
-
-## Cross scoring: two incisions, one connected base
-
-The blade makes a shallow incision, withdraws, then turns 90° for a second stroke. The replay shows blade depth, both openings and connected-component count.
-
-| Material surface (elastic recoil) | Native cut histories (colour) |
-| --- | --- |
-| ![Material surface (elastic recoil)](../../../docs/evidence/cutting/tofu-scoring/surface.gif) | ![Native cut histories (colour)](../../../docs/evidence/cutting/tofu-scoring/particles.gif) |
-
-The elastic surface nearly recloses after withdrawal; particle colours show both recorded cut histories, while the uncut lower bridge stays cream. [→ Cross scoring: two incisions, one connected base](tofu-scoring.md)
-
-<!-- visual-research:start -->
-(visual-experiment-catalogue)=
-## What experiments have we run?
+Make a shallow cut, withdraw and rotate the knife by 90°, then cut again to inspect the incisions and connectivity.
 
 ```{raw} html
-<div class="experiment-grid">
-<article class="experiment-card"><a href="cut-push.html"><img loading="lazy" src="_static/cutting/tofu-cut-push/surface-poster.png" alt="Final cut directly into a side push: tofu and banana"></a><div class="card-copy"><h3><a href="cut-push.html">Final cut directly into a side push: tofu and banana</a></h3><p class="engines">CPU TLMPM / measured knife contact</p><p>Does visible blade-face contact drive the final piece apart?</p><p>Three tofu pieces and four banana pieces; the final cut transitions directly to a face push, displaying contact force and motion. Tofu adds Newtonian viscosity with retained elastic, half-step and no-push controls.</p></div></article>
-<article class="experiment-card"><a href="cutting.html"><img loading="lazy" src="_static/cutting/tofu/surface-poster.png" alt="Historical: Synthetic tofu halving"></a><div class="card-copy"><h3><a href="cutting.html">Historical: Synthetic tofu halving</a></h3><p class="engines">CPU TLMPM / BladeMaster v2 reference</p><p>Do the two cut pieces move independently after withdrawal?</p><p>Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven.</p></div></article>
-<article class="experiment-card"><a href="cutting-comparison.html"><img loading="lazy" src="_static/cutting/tofu-sequential/surface-poster.png" alt="Historical: Two tofu cuts: three-method view"></a><div class="card-copy"><h3><a href="cutting-comparison.html">Historical: Two tofu cuts: three-method view</a></h3><p class="engines">CPU TLMPM / author reference videos</p><p>Can the left piece move independently after two cuts?</p><p>Two cuts form three pieces; native knife contact pushes the left piece, with measured force and displacement. Author clips use a final velocity input, so inputs differ.</p></div></article>
-<article class="experiment-card"><a href="tofu-scoring.html"><img loading="lazy" src="_static/cutting/tofu-scoring/surface-poster.png" alt="Crossed shallow tofu cuts"></a><div class="card-copy"><h3><a href="tofu-scoring.html">Crossed shallow tofu cuts</a></h3><p class="engines">CPU TLMPM / guided orthogonal scoring</p><p>Does the lower bridge remain connected after crossing incisions?</p><p>Default and half-step cases form two shallow cuts while retaining one native component; the uncut control is rejected. Synthetic material, not food calibration.</p></div></article>
-<article class="experiment-card"><a href="banana-cutting.html"><img loading="lazy" src="_static/cutting/banana/surface-poster.png" alt="Historical: Three sequential banana cuts"></a><div class="card-copy"><h3><a href="banana-cutting.html">Historical: Three sequential banana cuts</a></h3><p class="engines">CPU TLMPM / persistent cut history</p><p>Do subsequent cuts preserve earlier discontinuities?</p><p>Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration.</p></div></article>
-<article class="experiment-card"><a href="libero-workflow.html"><img loading="lazy" src="_static/visual/libero-summary.png" alt="Native LIBERO: diagnosis and change"></a><div class="card-copy"><h3><a href="libero-workflow.html">Native LIBERO: diagnosis and change</a></h3><p class="engines">LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic</p><p>How can an existing benchmark expose and validate a change?</p><p>Stale observations identified; timestep trials retain successes, failures and regressions.</p></div></article>
-<article class="experiment-card"><a href="experience.html#normal-response"><img loading="lazy" src="_static/visual/catalogue/normal-response-v1.png" alt="Normal &amp; transient response"></a><div class="card-copy"><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>How do parameters change loading, unloading and transients?</p><p>Static calibration works; dynamics and mass transfer need separate checks.</p></div></article>
-<article class="experiment-card"><a href="visual-comparisons.html#incline"><img loading="lazy" src="_static/visual/catalogue/error-cost.png" alt="Six-engine incline &amp; friction"></a><div class="card-copy"><h3><a href="visual-comparisons.html#incline">Six-engine incline &amp; friction</a></h3><p class="engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p><p>Where do static, sliding and low-friction cases differ?</p><p>Fixed-profile outcomes and observation validity are separate; failures remain.</p></div></article>
-<article class="experiment-card"><a href="results.html"><img loading="lazy" src="_static/visual/catalogue/sensitivity.png" alt="Impact &amp; contact onset"></a><div class="card-copy"><h3><a href="results.html">Impact &amp; contact onset</a></h3><p class="engines">MuJoCo · SuperDex</p><p>How do timestep, stiffness and impact phase affect transients?</p><p>Existing phase/stiffness sweeps; smaller steps do not automatically remove model differences.</p></div></article>
-<article class="experiment-card"><a href="visual-comparisons.html#pinch"><img loading="lazy" src="_static/visual/catalogue/frame-060.png" alt="Fixture pinch, lift &amp; release"></a><div class="card-copy"><h3><a href="visual-comparisons.html#pinch">Fixture pinch, lift &amp; release</a></h3><p class="engines">Genesis · MuJoCo · SuperDex (separate protocols)</p><p>Why does the grasp hold or slip?</p><p>Genesis 0.4 N and 0.8 N configurations have different retention outcomes.</p></div></article>
-<article class="experiment-card"><a href="experiments.html#apple-replays"><img loading="lazy" src="_static/visual/catalogue/superdex-sdf.png" alt="Apple-stem grasp · SDF contact"></a><div class="card-copy"><h3><a href="experiments.html#apple-replays">Apple-stem grasp · SDF contact</a></h3><p class="engines">MuJoCo · SuperDex · historical PhysX</p><p>Can a grasp maintain contact on complex geometry?</p><p>Native continuous replays and historical independent checks; cohorts stay separate.</p></div></article>
-<article class="experiment-card"><a href="coverage.html"><img loading="lazy" src="_static/visual/catalogue/cloth-poster.png" alt="Cloth mechanics &amp; robot grasp"></a><div class="card-copy"><h3><a href="coverage.html">Cloth mechanics &amp; robot grasp</a></h3><p class="engines">MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX</p><p>When do deformation, contact and retention fail?</p><p>Historical compliant-grasp frame; mechanics, drop and grasp retain separate protocols and failures.</p></div></article>
-<article class="experiment-card"><a href="experience.html#mass-size-transfer"><img loading="lazy" src="_static/visual/catalogue/contact-transfer-v1.png" alt="Mass / size transfer"></a><div class="card-copy"><h3><a href="experience.html#mass-size-transfer">Mass / size transfer</a></h3><p class="engines">MuJoCo · SuperDex</p><p>Do fixed parameters transfer to nearby scenes?</p><p>30 historical transfer records, 0/30 joint passes; failures guide selection.</p></div></article>
-<article class="experiment-card"><a href="experience.html#transient-cost"><img loading="lazy" src="_static/visual/catalogue/response-cost-v1.png" alt="Response error &amp; cost"></a><div class="card-copy"><h3><a href="experience.html#transient-cost">Response error &amp; cost</a></h3><p class="engines">MuJoCo · SuperDex</p><p>What does lower error cost?</p><p>27 records separate native computation, recording and scoring costs.</p></div></article>
-<article class="experiment-card"><a href="experience.html#framework-path"><img loading="lazy" src="_static/visual/catalogue/contact-parameters.png" alt="Native &amp; framework paths"></a><div class="card-copy"><h3><a href="experience.html#framework-path">Native &amp; framework paths</a></h3><p class="engines">MuJoCo / MJWarp · Newton / Isaac Sim</p><p>Why can matching cores still produce different trajectories?</p><p>GPU field differences remain after CPU alignment; parameter-map thumbnail is not trajectory evidence.</p></div></article>
-</div>
+<a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/particles.gif" width="880" alt="Cross scoring: cuts with a connected base" loading="lazy"></a>
 ```
 
-**Pending / incomplete:** pushing, in-hand rotation, active folding and broader grasp transfer remain in their existing Issues. Folded drop is not active folding; repeats, timestep sweeps and framework switches do not add task types.
+Both the default and half-step records produce two shallow cuts with a connected base; the uncut control is rejected. Colors show native cut history. The current elastic surface rebounds after withdrawal, so color does not imply a permanently open incision.
 
-## What we already know
+[Results and reproduction](tofu-scoring.md)
 
-(visual-highlight-incline)=
-### Six-engine incline: shared conditions, different responses
+(apple)=
+### Apple-stem grasping: can two fingers hold the stem?
 
-A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at three timesteps. Curves and replays retain the original passes, failures and invalid records.
+OpenArm + Wuji pinch the apple stem with thumb and index finger, lift and hold. Historical development runs: MuJoCo on the left, SuperDex FP64 on the right.
 
-![Six-engine incline: shared conditions, different responses](../../../docs/evidence/visual/incline-static-0.001.png)
+::::{grid} 1 1 2 2
+:gutter: 3
+:::{grid-item}
+```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
+:alt: Apple-stem grasping: can two fingers hold the stem?
+:width: 420px
+:target: experiments.html#apple-replays
+```
+:::
+:::{grid-item}
+```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
+:alt: Apple-stem grasping: can two fingers hold the stem?
+:width: 420px
+:target: experiments.html#apple-replays
+```
+:::
+::::
 
-![Six-engine incline: shared conditions, different responses — curves](../../../docs/evidence/visual/incline-static-0.001-curves.svg)
+Both recorded 14 s trajectories pass the full 3 s hold check. Actions use known poses and fixed joint targets, with no attachment constraint on the apple. This qualifies the fixed simulation scene, not a vision policy or real-robot accuracy.
 
-[Synchronized replay, full-rate curves, parameters and original evidence](incline)
+[Results and reproduction](apple-replays)
 
-(visual-highlight-normal)=
-### Normal response: change parameters or the solver?
+(cloth)=
+### Cloth grasping: hold and release after lifting
 
-The same MuJoCo fixture moves from about 80 kN/m toward the synthetic 20 kN/m target. Inspect loaded-window indentation, then the complete unloading trace; success belongs to the stated checks and conditions.
+The robot grasps cloth through contact and friction, then lifts, holds and releases it.
 
-![Normal response: change parameters or the solver?](../../../docs/evidence/visual/normal-calibration.png)
+```{image} ../../../demos/cloth-folding/media/compliance-grasp.gif
+:alt: Cloth grasping: hold and release after lifting
+:width: 880px
+:target: experiments.html
+```
 
-![Normal response: change parameters or the solver? — curves](../../../docs/evidence/visual/normal-summary.en.svg)
+After geometry and compliance corrections, one 9 s development scene passes the fixed v3 criteria. The historical table-intersection failure is retained, and self-contact penetration remains near the threshold. This is cloth grasping, not successful active folding or cross-material robustness.
 
-[Synchronized replay, full-rate curves, parameters and original evidence](normal)
+[Results and reproduction](experiments.md)
 
 (visual-highlight-pinch)=
-### Pinch: 0.4 N slips, 0.8 N holds
+### Gripper force limits: slipping at 0.4 N, holding at 0.8 N
 
-The same Genesis fixture and object, changing the finger-joint force limit. Compare complete closing, lifting, holding and release, with an open-gripper negative control retained.
+Change the finger-joint drive-force limit in the same Genesis gripper scene and compare closing, lifting, holding and release.
 
-![Pinch: 0.4 N slips, 0.8 N holds](../../../docs/evidence/visual/pinch-summary.png)
+```{raw} html
+<a href="visual-comparisons.html#pinch"><img src="_static/force-limit/comparison.gif" width="880" alt="Gripper force limits: slipping at 0.4 N, holding at 0.8 N" loading="lazy"></a>
+```
 
-![Pinch: 0.4 N slips, 0.8 N holds — curves](../../../docs/evidence/visual/pinch-retention-curves.svg)
+Under this protocol, the 0.4 N setting slips while 0.8 N retains the object; open-gripper controls and offset scenes are also recorded. A drive-force limit is not a measured contact force and cannot be read as a real gripper-force requirement.
 
-[Synchronized replay, full-rate curves, parameters and original evidence](pinch)
+[Results and reproduction](pinch)
 
 (visual-highlight-libero)=
-### LIBERO: native task, timestep control and observation fix
+### LIBERO: does task success also pass physical diagnostics?
 
-Same actions, initial state, Panda and native success; original 2 ms versus unqualified 1 ms control. Heldout task success stays 10/10, screens change from 5/10 to 3/10, and cost doubles. Policy effects of observation refresh remain unverified.
+Replay official actions, retain successes and failures, and inspect contact and state records. Below is the recorded-state replay of native baseline demo 0.
 
-![LIBERO: native task, timestep control and observation fix](../../../docs/evidence/visual/libero-summary.png)
+```{raw} html
+<a href="libero-workflow.html"><img src="_static/visual/libero-demo0-baseline.gif" width="880" alt="LIBERO: does task success also pass physical diagnostics?" loading="lazy"></a>
+```
 
-![LIBERO: native task, timestep control and observation fix — curves](../../../docs/evidence/visual/libero-demo0-curves.svg)
+The Object suite has valid records for all 500 official demonstrations across ten tasks: 495 native task successes, five failures, and zero passes of all numerical diagnostics. The GIF is one existing replay, not evidence that all 500 succeed; this is not a closed-loop vision-policy evaluation.
 
-[Synchronized replay, full-rate curves, parameters and original evidence](libero)
+[Results and reproduction](libero-workflow.md)
 
-## Which engines and solvers are compared?
+(visual-highlight-incline)=
+### Six-engine incline: why does the same block slide differently?
 
-| Engine | Roles in registered profiles (not peer algorithms) | Experiment versions and paths |
-| --- | --- | --- |
-| **MuJoCo** | Constraint method: CG (nonlinear) · Newton · PGS<br>Friction cone: elliptic · pyramidal<br>Integration: Euler · implicitfast<br>Unresolved role/identity: SolverMuJoCo; algorithm unqualified | 3.11.0, 3.14.0, 3.15.0; native / historical paths in matrix |
-| **SuperDex** | Deformable implementation: experimental-shell<br>Outer nonlinear: BFGS · Newton · SR1<br>Inner linear: ASYNC_CG · AUGMENTED_CG · CG · CUDA_CG · CUDA_GMRES · EXPERIMENTAL_CUDA_SPARSE_CHOLESKY · EXPERIMENTAL_CUDA_SPARSE_LDLT · EXPERIMENTAL_CUDA_SPARSE_LU · GMRES · LDLT · LU · MINRES · PARALLEL_CG<br>Linear selection: AUTO<br>Friction regularization/model: C1_REGULARIZED · CINF_REGULARIZED<br>Precision in label: FP64 | 1.0.0; native / historical paths in matrix |
-| **Genesis** | Deformable implementation: PBD<br>Constraint method: CG (nonlinear) · Newton<br>Friction cone: elliptic · pyramidal<br>Contact model: Signorini · convex<br>Coupling path: rigid coupling<br>Integration: approximate_implicitfast | 1.4.3; native / historical paths in matrix |
-| **Newton Physics** | Implementation/system: Featherstone · Kamino · SemiImplicit · VBD · VBD compliant · VBD legacy · XPBD<br>Deformable implementation: ImplicitMPM · Style3D<br>Dynamics backend: DVI · PADMM<br>Integration: Euler<br>Update/budget options: 100 sweeps | 1.6.1 / Warp 1.18.0, 1.7.0.dev0 @ 2dee3234; native / historical paths in matrix |
-| **PhysX** | Deformable implementation: surface cloth<br>Constraint method: PGS · TGS<br>Friction regularization/model: patch friction<br>Update/budget options: external forces every iteration · friction every iteration<br>Unresolved role/identity: historical readback incomplete (#126) · pending qualification | 5.9.0; native / historical paths in matrix |
-| **Drake** | Constraint method: SAP<br>Contact model: hydroelastic · point<br>Discrete contact approximation: kLagged · kSap · kSimilar<br>Unresolved role/identity: not qualified | 1.57.0; native / historical paths in matrix |
+Compare static, sliding and nominally frictionless responses of a block with the same dimensions and mass. The GIF shows the sliding records at a 1 ms timestep.
 
-Native and framework **MJWarp** are separate paths with their actual core identified. Newton Physics is an engine project; Newton is also an algorithm name. Tested SuperDex BFGS/SR1 with assembly period=1 execute Newton-equivalent steps; configuration names are not independent algorithm counts.
+```{raw} html
+<a href="visual-comparisons.html#incline"><img src="_static/visual/incline-sliding-0.001.gif" width="880" alt="Six-engine incline: why does the same block slide differently?" loading="lazy"></a>
+```
 
-This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons:  [完整矩阵 / Full matrix](coverage.md)。
+Responses from MuJoCo, SuperDex, Genesis, Newton Physics, PhysX and Drake retain their configurations, failures and invalid observations. Equal parameter values do not establish equivalent contact models; full curves help distinguish motion differences from observation problems.
 
-Roles interpret recorded names within each engine, not identical mathematical problems or evidence that every combination ran. AUTO is a selection policy; missing identities are not filled from defaults.
+[Results and reproduction](incline)
 
-**Comparison boundary:** distinguish system-profile selection from controlled algorithm attribution. Read record integrity, numerical consistency, physical references and task outcomes separately; original scores and failure denominators are unchanged. [Roles and evidence guide](solver-taxonomy.md)。
+(visual-highlight-normal)=
+### Normal contact: after fitting loading, what happens on unloading?
 
-Thin-feature SDF geometry/response qualification remains [#178](https://github.com/huangkiki/Dexlab/issues/178); cloth material, collision/coupling and grasp baselines remain [#179](https://github.com/huangkiki/Dexlab/issues/179). Existing development passes are not calibrated cross-engine material comparisons.
+Adjust contact parameters in one MuJoCo scene and compare indentation, holding and unloading.
 
-**MJWarp path comparison (MuJoCo core)**
+```{raw} html
+<a href="visual-comparisons.html#normal"><img src="_static/visual/normal-calibration.gif" width="880" alt="Normal contact: after fitting loading, what happens on unloading?" loading="lazy"></a>
+```
 
-| Runtime path | Actual physics core | Solver / contact path | Task acceptance |
-| --- | --- | --- | --- |
-| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / Newton contacts | [not-run](coverage.md) |
-| Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0 | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
-| Native matched core / vendor Warp1.16.0; original and four-field aligned | MuJoCo 3.11.0 | MJWarp Newton / pyramidal / MJWarp contacts | [not-run](coverage.md) |
+Loading response can improve against the synthetic 20 kN/m target, while unloading, dynamics and mass transfer need separate validation. The replay preserves physical proportions; inspect the report curves for small displacements. A synthetic reference is not real-material calibration.
 
-Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question.
+[Results and reproduction](normal)
 
-<!-- visual-research:end -->
+For historical cutting, collision, cloth mechanics, mass/size transfer and error–cost sweeps, see the [full experiment index](experiments.md).
+
+[Sources and conversion records for the new GIFs](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/visual/homepage-previews.json).
+
+(quickstart)=
+## Start with apple-stem grasping
+
+Start with the MuJoCo apple-stem grasp covered by the existing setup script. You need Linux x86_64 and [uv](https://docs.astral.sh/uv/getting-started/installation/), with no model API key. This reproduces the pinned historical demo, not a latest-version six-engine comparison environment.
+
+```bash
+git clone https://github.com/huangkiki/Dexlab.git
+cd Dexlab
+bash scripts/setup.sh
+bash demos/apple-stem-grasp/run.sh --backend mujoco
+```
+
+After SDF preparation, settling and planning, the viewer shows the stem grasp, lift and hold. Outputs go to `demos/apple-stem-grasp/runs/latest-mujoco-sdf/`. Add `--headless` without a display, or select `--backend superdex`. The 14 s simulation takes longer in wall time.
+
+```bash
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
+  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+```
+
+The verifier writes `summary.json`. When every check passes, `passed` is `true`; failures retain the individual checks and return a nonzero exit code.
+
+[Installation, dependencies and asset provenance](https://github.com/huangkiki/Dexlab/blob/main/docs/installation.md) · [Task interface and commands](https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.md)
+
+(research-diagnosis)=
+## When a scene behaves unexpectedly
+
+Check geometry, mass/inertia, control timing and actual contact readback first. Adjust parameters around one concrete question and evaluate the recorded result independently. See the [diagnostic workflow](diagnosis.md) for failures, fixes and next decisions.
+
+(research-selection)=
+## Choosing an engine and configuration for a new task
+
+Find nearby experiments by load, contact scale, sticking/sliding, contact transitions and compliance, then validate candidate configurations. The research includes MuJoCo, SuperDex, Genesis, Newton Physics, PhysX and Drake, with different task coverage and acceptance. See [coverage and versions](coverage.md) and [starting strategies](selection.md).
 
 (solver-coupling)=
-## How do solvers synchronize, and what does preCICE do?
+## How multiple solvers work together
 
-Imagine one solver computing **finger motion** and another computing **sponge deformation**. Both must cover simulation time **0–10 ms** in this round: the finger runs first and takes 1 ms of computer time; the sponge then takes 100 ms. These are teaching assumptions, not engine benchmarks.
+Simulation time, wall time and data-exchange intervals are distinct. Waiting affects speed, while delayed feedback can also affect the interaction. [Understand synchronization, iteration and preCICE through a finger-and-sponge example](solver-coupling.md). preCICE is a methodological reference here, not an integrated DexLab component.
 
-| Elapsed computer time | Finger's computed simulation time | Sponge's computed simulation time |
-| --- | --- | --- |
-| 0 ms | 0 ms | 0 ms |
-| 1 ms | 10 ms, waiting | 0 ms |
-| 101 ms | 10 ms | 10 ms |
+(research-scope)=
+## Current limits and further reading
 
-**The user waits 101 ms, but the simulated world advances only 10 ms.** Taking a minute to generate one second of animation does not add 59 seconds to the animation. Offline, with the controller following simulation time, this waiting mainly reduces throughput; hardware control has additional real-time deadlines.
+Classical physical laws and existing empirical relations serve as references. Success applies to each experiment’s versions, scenes and criteria. Task success, numerical diagnostics and real-world physical accuracy are reported separately. In-hand rotation, active folding, real-material calibration and vision-policy capability still need their own validation.
 
-Internal steps may differ: the finger takes ten 1 ms steps, the sponge takes two 5 ms steps, and both meet at simulation time 10 ms. **Ten internal finger steps do not mean ten fresh sponge-force updates.** Computer time, internal integration steps and coupling exchange intervals are different quantities. [Aligning different step sizes](https://precice.org/couple-your-code-time-step-sizes)
+[Research findings](experience.md) · [Solver configuration roles](solver-taxonomy.md) · [Research directions](dexterity.md) · [External references](references.md) · [Data and releases](https://github.com/huangkiki/Dexlab/releases)
 
-Even when their times align, ask: **which sponge force did the finger use to compute that motion?**
-
-- **Compute once and advance (one explicit coupling arrangement):** the finger reaches 10 ms using the old reaction force; the sponge computes a new force from that motion; the finger uses it in the next round. Errors from stale forces can remain even if computation is instantaneous.
-- **Correct the same interval repeatedly (implicit coupling):** the sponge returns a new force, the finger recomputes 0–10 ms, and the sponge updates again until the exchanged results meet convergence requirements. Every correction concerns the same interval; it must not add another 10 ms to simulation time. Failure to converge is not a valid converged result.
-
-Running solvers sequentially or simultaneously is separate from deciding whether to repeat an interval. Shorter exchange intervals and additional corrections may improve the interaction at a cost in computation or communication; smaller internal steps in one solver do not automatically refresh feedback from the other. [Coupling schemes](https://precice.org/configuration-coupling)
-
-**preCICE is an open-source multiphysics coupling library—a coordinator between solvers.** Once connected, it coordinates time, communicates data, maps data between different meshes and organizes iterative corrections as configured. For water hitting a flexible plate, a fluid program computes pressure and a structural program computes deformation; preCICE coordinates their exchange. The solvers and their integration still determine the physical equations, contact and friction. [Official introduction](https://precice.org/docs.html)
-
-For grasping, old forces may remain close to current forces when contact changes slowly; rolling, slipping and finger changes need timely, complete feedback. Slow computation alone does not establish that in-hand manipulation is impossible, and successful holding does not establish reliable finger changes. preCICE is a methodological reference here: connecting MuJoCo, SuperDex or other engines still requires adapters and validation. This primer does not establish a DexLab preCICE integration or imply that RSS uses it. [RSS coupling source analysis and discussion](https://github.com/huangkiki/Dexlab/discussions/220#discussioncomment-19056253)
-
-## How to diagnose a poorly performing scene
-
-For an abnormal contact, declare the physical reference and assumptions, then check geometry, mass/inertia, frames, control epochs, effective parameters and contact readbacks. Fix the scene and objective, propose a testable hypothesis, run bounded parameter trials and independently score improvements and costs. Study the remaining differences through contact generation, friction representation, constraints, stopping rules, integration and precision.
-
-One PhysX case exposed incorrect negative-control mass caused by the order of inertia initialization and collision disabling. Correcting the integration left other numerical residuals unresolved. Record configuration improvements, integration fixes, algorithm research directions and open questions separately. [Diagnosis method and commands](diagnosis.md)
-
-**AI parameter exploration is a research method.** AI uses prior experience to propose hypotheses and candidates; existing execution, accounting and independent scoring retain every attempt, failure, effective configuration and cost. An unsuccessful finite search establishes only that its tested range did not succeed. Freeze new transfer conditions beforehand; historical logs cannot become new holdouts.
-
-## How to choose for a new scene
-
-Describe contact scale and load, sticking/sliding, contact switches, geometry and compliance, then find nearby experiments. Every starting candidate states version/path, parameter sources, errors and failure boundaries, plus the first checks required in your scene.
-
-| Main difficulty | Starting evidence |
-| --- | --- |
-| Normal compliance, loading/unloading or transients | [Normal/transient experience](selection.md): check the synthetic target and contact law, then mass/size transfer. |
-| Support, incline sliding or low friction | [Six-engine inclines](six-engine-incline): validate observations before comparing nearby configurations. |
-| Finite-pad pinch, lift and release | [Pinch and SDF starting points](selection.md): check drives, inertia, slip and negative controls. |
-| Framework changes or asset import | [Native/framework comparison](framework-path): inspect conversion, effective parameters and epochs. |
-
-Recommendations depend on evidence relevant to the target scene, considering **physical credibility, stability and cost** together. Broader validated coverage extends known scope; the coverage table alone does not choose the best solution for a new scene.
-
-## Research scope and reproduction
-
-| Existing scope | Evidence |
-| --- | --- |
-| Six-engine basic contact/inclines and applicable solvers; collision, fixture pinch and robot grasp | [Full configuration matrix and protocol states](coverage.md) |
-| Cloth mechanics, folded drop and robot cloth grasp | [Historical protocols and failures](coverage.md); folded drop is not successful active folding. |
-| Pushing, in-hand rotation and grasp extensions | [Research roadmap](dexterity.md); not run, blocked and unsupported remain distinct. |
-
-The matrix preserves core, solver, runtime path, version, passed/partial/failed/not-run/blocked/unsupported states and evidence. Repetitions, step scans and framework changes do not add task types; historical protocols are not pooled. New coverage-v1 reliability is not yet admitted; historical capabilities retain their original scope.
-
-[Installation and reproduction](https://github.com/huangkiki/Dexlab/blob/main/docs/installation.md) · [All reports](results.md) · [Raw data and releases](https://github.com/huangkiki/Dexlab/releases) · [Research Project](https://github.com/users/huangkiki/projects/4)
-
-This round reuses evidence and fills concrete diagnosis gaps before transfer to pinch/grasp. The six-engine matrix and 594-episode pinch study remain. **Scheduled development stays paused.** [Development and acceptance](https://github.com/huangkiki/Dexlab/blob/main/docs/autoresearch.md)
-
-
-
-[Current work and pause state](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.md)
-
-[Reading guides and references](references.md): explore Manda Robotics’ engine comparison. External findings are distinct from DexLab experiments.
+[Development and acceptance](https://github.com/huangkiki/Dexlab/blob/main/docs/autoresearch.md) · [Current work and pause state](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.md)
 
 ```{toctree}
 :hidden:
 :maxdepth: 1
+
+Experiments <experiments>
+Quickstart <quickstart>
+Results <results>
+Coverage <coverage>
+Findings <experience>
+Diagnosis <diagnosis>
+
+Solver synchronization and preCICE <solver-coupling>
 
 RSS wiping and latch ablation <rss-wiping>
 Continuous cutting and blade-face pushing <cut-push>
@@ -259,13 +224,7 @@ Solver configuration roles <solver-taxonomy>
 
 Visual comparisons <visual-comparisons>
 Native LIBERO workflow <libero-workflow>
-Findings <experience>
-Diagnosis <diagnosis>
 Selection <selection>
-Coverage <coverage>
-Quickstart <quickstart>
-Experiments <experiments>
-Results <results>
 Engines <engines>
 Roadmap <dexterity>
 Ledger <research-ledger>
