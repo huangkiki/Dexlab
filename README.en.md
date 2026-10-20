@@ -11,6 +11,14 @@ The research serves two goals:
 
 [简体中文](README.md) · [Documentation](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research experience](docs/site/en/experience.md) · [Diagnosis and trials](docs/site/en/diagnosis.md) · [Scenario guide](docs/site/en/selection.md)
 
+## RSS wiping: grasp assistance and slippage
+
+The unchanged upstream test passed **9/9 assertions**. With frozen collision geometry and initial states, the original passed **3/3 tasks**, cleaning **95.5–95.9%**; removing the compliant node constraints passed **0/3**, cleaning **39.9–41.2%**, with the sponge leaving the gripper during wiping. Maximum held material-patch centroid motion in the hand frame was about **0.061 mm** versus **440–450 mm**.
+
+All six records passed independent consistency checks and share the same initial states, collision model and tracked material nodes. This is the RSS two-gripper wiping baseline; in-hand rotation remains unimplemented. Videos use the native collision view with measured-value annotations.
+
+[Complete comparison, force/motion curves and limits](docs/site/en/rss-wiping.md) · [Reproduction code and frozen geometry](demos/rss-wiping/README.md) · [Original video](docs/evidence/rss-wiping/original.mp4) · [No-latch video](docs/evidence/rss-wiping/no-latch.mp4)
+
 ## Finish the last cut, then push with the blade
 
 Two tofu cuts create three pieces; three banana cuts create four. After the last cut, the blade lifts just clear of the board, stays inside the kerf, pushes sideways, then withdraws. Every frame shows measured knife contact force and each material region’s x displacement from its initial position.

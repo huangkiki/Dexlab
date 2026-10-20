@@ -11,6 +11,14 @@
 
 [English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [中文文档站](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [研究经验](experience.md) · [诊断与试参方法](diagnosis.md) · [场景选型指南](selection.md)
 
+## RSS 擦拭复现：辅助保持与滑脱
+
+未改动的官方测试 **9/9 通过**。固定碰撞几何和初始状态后，原版 **3/3 任务通过**，清洁率 **95.5%–95.9%**；关闭辅助节点约束后 **0/3 通过**，清洁率 **39.9%–41.2%**，海绵在擦拭时脱离夹爪。保持阶段材料区域质心相对手的最大位移分别约 **0.061 mm** 与 **440–450 mm**。
+
+六次记录均通过独立检查；初始状态、碰撞模型与跟踪材料点一致。这是 RSS 双夹爪擦拭基线，手内旋转尚未实现。视频使用原生碰撞几何视图，并叠加实测数值。
+
+[完整视频、力／位移曲线与边界](rss-wiping.md) · [复现代码与固定几何](https://github.com/huangkiki/Dexlab/tree/autoresearch/issue-223/demos/rss-wiping)
+
 ## 最后一刀切完，直接用刀面推开
 
 豆腐两刀成三块，香蕉三刀成四块；最后一刀后，刀刃稍抬离砧板，保持在切缝内直接侧推，再撤刀。画面逐帧显示刀对材料的接触力，以及每块材料从初始位置起的 x 位移。
@@ -208,6 +216,7 @@
 :hidden:
 :maxdepth: 1
 
+RSS 擦拭与 latch 对照 <rss-wiping>
 连续切割与刀面推动 <cut-push>
 豆腐状软块对半切 <cutting>
 香蕉连续切片 <banana-cutting>

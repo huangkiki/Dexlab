@@ -1,0 +1,71 @@
+{
+  "mode": "original",
+  "error": null,
+  "phase": "done",
+  "status_text": "Wipe the bar: done",
+  "routine_log": [
+    "left hand on the far elbow",
+    "sponge gripped: jaws 45.6 mm apart on 50 mm of foam, pads 8.6 N and 8.9 N; latched 106 nodes",
+    "press 0: seated 29 mm down at 4.49 N",
+    "stroke 0: cleaned 0.91, press 3.74 N",
+    "press 1: seated 29 mm down at 4.50 N",
+    "stroke 1: cleaned 0.94, press 3.65 N",
+    "press 2: seated 29 mm down at 4.50 N",
+    "stroke 2: cleaned 0.95, press 3.74 N",
+    "press 3: seated 29 mm down at 4.49 N",
+    "stroke 3: cleaned 0.95, press 3.76 N",
+    "done: cleaned 0.955, the sponge 0 mm from where it lay"
+  ],
+  "sim_time_s": 59.81666666666455,
+  "recorded_steps": 3590,
+  "video_frames": 599,
+  "ready_step": 601,
+  "events": [
+    [
+      601,
+      "engaged",
+      {
+        "opening": 0.04563023199696581,
+        "still": 0.00028451404018796367,
+        "press": [
+          8.617011602158563,
+          8.907940855753282
+        ],
+        "free": 0.05002203147317397,
+        "nodes": 106
+      }
+    ],
+    [
+      3103,
+      "released",
+      {
+        "opening": 0.04563023199696581,
+        "still": 0.00028451404018796367,
+        "press": [
+          8.617011602158563,
+          8.907940855753282
+        ],
+        "free": 0.05002203147317397
+      }
+    ]
+  ],
+  "final_cleaned_fraction": 0.9547325102880658,
+  "peak_bar_force_n": 4.910084774110819,
+  "peak_pressure_pa": 84200.6899151787,
+  "max_hold_patch_centroid_slip_m": 6.063108127112956e-05,
+  "max_hold_patch_node_displacement_m": 0.0007644381148748872,
+  "max_active_pins": 1,
+  "final_active_pins": 0,
+  "sponge_return_xy_error_m": 4.551512662896647e-05,
+  "sponge_return_min_z_error_m": 2.384185791015625e-07,
+  "home_errors_m": {
+    "right": 0.0005054445427827965,
+    "left": 0.0002705530316162224
+  },
+  "finite": true,
+  "wall_s": 160.4827722440241,
+  "build_wall_s": 5.371522076020483,
+  "step_wall_s": 140.06895658897702,
+  "render_wall_s": 2.1781649945187382,
+  "record_wall_s": 12.682925367727876
+}

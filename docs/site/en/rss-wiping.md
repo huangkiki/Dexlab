@@ -1,0 +1,74 @@
+# RSS sponge wiping: reproduction and latch ablation
+
+The unchanged RoboSimStudio wiping test passed **all nine assertions**. Its independent execution cleaned **95.5%** of the stripe, with **4.93 N** peak bar contact force and **0.061 mm** maximum held material-patch centroid displacement in the measured hand frame. This establishes reproduction of the public assisted wiping example; in-hand rotation remains a separate task.
+
+## Controlled repetitions
+
+<!-- rss-results:start -->
+**Original: 3/3 task passes; no latch: 0/3.** All six records passed independent consistency checks. Compiled geometry, initial and settled particles, and tracked material-node indices are identical across the six runs.
+
+| Run | Cleaned (%) | Held patch centroid (mm) | Max. node motion (mm) | Peak bar force (N) | Return XY error (mm) | Task |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Original 1 | 95.473 | 0.0606 | 0.764 | 4.910 | 0.046 | Pass |
+| No latch 1 | 39.918 | 449.9811 | 479.305 | 11.886 | 435.806 | Fail |
+| Original 2 | 95.885 | 0.0606 | 0.760 | 4.895 | 0.059 | Pass |
+| No latch 2 | 41.152 | 444.9449 | 467.222 | 12.261 | 430.553 | Fail |
+| Original 3 | 95.473 | 0.0608 | 0.764 | 4.932 | 0.044 | Pass |
+| No latch 3 | 40.329 | 440.4694 | 466.125 | 12.359 | 425.927 | Fail |
+
+The no-latch sponge slips out during wiping. The controller later detects a failed press, leaves the wiping loop and returns home; its `done` message marks routine completion, while cleaning and sponge-return criteria fail. All no-latch pin counts remain zero.
+
+The original cleaning range agrees with the author's reported 95.5–95.9%. This no-latch cohort performs worse than the reported 68.7–76.1%; the cross-cohort cause has not been isolated. The causal comparison here is between the two modes sharing our frozen geometry. [Author reference](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/README.md).
+
+<!-- rss-results:end -->
+
+The first repetition of each mode is the predetermined video pair. Both show the entire recorded task at 10 frames per simulation second, using RSS's native tiled collision view.
+
+```{raw} html
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<section><h3>Original: compliant latch</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
+<section><h3>No latch: contact alone</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/no-latch.png" src="_static/rss-wiping/no-latch.mp4"></video></section>
+</div>
+```
+
+![All six trajectories: cleaned fraction, material-patch motion and measured contact force](../../evidence/rss-wiping/comparison.png)
+
+## What was held fixed
+
+RSS commit [`23417de`](https://github.com/robosimstudio/robosimstudio/tree/23417de77edf59d614531a833334ed4e2206fc2c) supplies the two YAM arms, sponge, bar, materials and scripted controller. The locked combination is Newton 1.6.0, Warp 1.18.0, MuJoCo/MJWarp 3.12.0 and SuperDex 1.0.0. Native readback confirms single-precision SuperDex. The control rate is 60 Hz, with 16 rigid substeps and two SuperDex steps per control period. The authored foam has Young's modulus 80 kPa, Poisson ratio 0.3, density 110 kg/m³, friction 0.9 and friction falloff 0.1 mm/s. These are upstream example parameters, not measured sponge properties.
+
+Repeated official CoACD preprocessing produced different compiled collision models: 499 versus 505 shapes. We retained the first instrumented run as an **unpaired reference**, then captured the official method's outputs once. Both controlled modes reuse the exact 49/48-piece decompositions. Input hashes, call order, cached-array hashes and the complete compiled-model hash agree. The source checkout and engine binaries are unchanged.
+
+The no-latch variant preserves grasp readiness: 12 settled control steps, jaw variation at most 0.3 mm, at least 2 N normal force on each pad, and at least 2 mm squeeze. It tracks the same selected material patch but removes `pin_nodes` and `ride`; the routine proceeds on readiness rather than waiting for a constraint that was deliberately removed. Every recorded step checks the actual bridge pin count.
+
+The displayed pin count is the number of registered constraint groups: the original has one group covering 106 material nodes; no-latch has zero groups.
+
+## How to interpret the measurements
+
+Independent NumPy scoring reconstructs material-point motion in the measured hand frame, normalizing the native quaternion before forming a rotation. Patch centroid displacement and maximum node displacement are separate: deformation can contribute to both, and opposing deformations can cancel in the centroid. Motion after deliberate opening is excluded from the holding maximum.
+
+Cleaned fraction is recomputed from saved stripe ink; return and home errors are checked against saved positions. The task thresholds remain upstream's: at least 90% clean, bar force above 1 N, pressure above 5 kPa, sponge return within 20 mm horizontally and 3 mm vertically, arms within 6 mm of home, finite states and a completed routine. Missing pins are not themselves a failed no-latch task.
+
+Cleaning is the upstream simulated wear metric, not measured removal of real ink. These are three development repetitions per mode, not held-out validation or a statistical estimate of deployment reliability. The comparison isolates grasp assistance for this geometry/configuration; it does not identify friction-law error, coupling-delay causality, material accuracy or engine superiority.
+
+## Attempts, costs and reproduction
+
+<!-- rss-attempts:start -->
+The finite budget used **4 short probes, 1 unchanged upstream test and 7 full instrumented attempts**: one unpaired reference plus six controlled runs. The unpaired reference also cleaned 95.47% and passed task/record checks; it is excluded from the controlled denominator. Three probes deliberately ended at 3 simulated seconds; the first was interrupted during startup.
+
+| Mode | Simulated duration (s) | Bounded wall cost (s) | Peak memory (MiB) |
+| --- | ---: | ---: | ---: |
+| original | 59.82–59.82 | 161.3–164.7 | 1441.9–1454.9 |
+| no-latch | 41.68–41.70 | 106.5–109.4 | 1306.4–1312.5 |
+
+The isolated installation cost 1072.2 s, separately from physics. Raw particle/contact records are retained locally; the public evidence contains per-step curve data, summaries, manifests and raw-file hashes.
+
+<!-- rss-attempts:end -->
+
+The initial RTX diagnostic was manually stopped after 539.8 wall seconds; its first frame completed immediately before termination. That supports a high initialization cost, not a deadlock claim. Subsequent recordings use the upstream tiled renderer, which displays collision geometry without RTX room materials. An earlier scoring discrepancy from unnormalized float32 quaternions was corrected and regression-tested; the rejected score is retained.
+
+The controlled resource envelope is 8 GiB memory, four CPU equivalents, 128 tasks, zero swap and 8 GiB desktop reserve. Limits are enforced by the existing cgroup runner. Other host work was observed, so wall costs are workload costs, not exclusive throughput measurements.
+
+[Per-run summaries, curve data, manifests and raw-file hashes](https://github.com/huangkiki/Dexlab/tree/autoresearch/issue-223/docs/evidence/rss-wiping).
+
+[Code, frozen geometry and reproduction commands](https://github.com/huangkiki/Dexlab/tree/autoresearch/issue-223/demos/rss-wiping) · [Issue #223](https://github.com/huangkiki/Dexlab/issues/223) · [Discussion #220](https://github.com/huangkiki/Dexlab/discussions/220) · [Upstream unchanged test](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/tests/test_demo_wipe_the_bar.py).
