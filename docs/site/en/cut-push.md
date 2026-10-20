@@ -75,7 +75,7 @@ Each material has nominal-step, half-step and no-lateral-push cases; the origina
 Worker time includes initialization/JIT, recording and scoring, not just the solver. Each nominal/control pair is array-identical through the final cut; historical tofu rescoring is unchanged. Large raw NPZ files are retained and hashed. This PR provides compact evidence and reproduction commands, without a new data release.
 <!-- cut-push-results:end -->
 
-Half-step runs show timestep sensitivity, not convergence. Reconstructed surfaces follow native states; banana now generates straight seams from the recorded blade path, while Hermite/local dual contouring and material qualification remain tracked in [#204](https://github.com/huangkiki/Dexlab/issues/204). This is neither a six-native-engine cutting comparison nor a matched-author-configuration accuracy ranking ([#200](https://github.com/huangkiki/Dexlab/issues/200)).
+Half-step runs show timestep sensitivity, not convergence. Surfaces now use recorded-plane linked volumes, Hermite data and local dual vertices. This remains an offline CPU reconstruction limited to x/y straight cuts; coarse particle deformation can create small spikes, and visual topology cannot replace native connectivity/contact scoring. [Implementation and paper differences](cutting-surface.md). This is neither a six-native-engine cutting comparison nor a matched-author-configuration accuracy ranking ([#200](https://github.com/huangkiki/Dexlab/issues/200)).
 
 ## Reproduction and history
 

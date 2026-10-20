@@ -3,14 +3,19 @@
     "face_opening_mm": "Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.",
     "interior_volume_change_percent": "Signed tetrahedral volume change of the fixed reference base below 15 mm; not the volume of a separated piece.",
     "centroid_x_from_start_mm": "Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.",
-    "centroid_x_from_probe_mm": "Same centroids relative to the exact saved pre-probe frame; null before the probe.",
+    "centroid_x_from_probe_mm": "Same centroids relative to the exact saved motion-start frame; null before it. Continuous push: final-cut end (tofu 3.30 s, banana 5.30 s); legacy knife-push/no-push: 4.00 s; impulse: probe_time_s.",
+    "knife_on_material_x_n": "Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.",
+    "knife_on_material_n": "World xyz force of the knife on the material, N; negative of the saved material reaction on the knife at the preceding completed substep. Zero at the initial state. Excludes drive and board.",
+    "dynamic_viscosity_pa_s": "Newtonian dynamic viscosity from the saved material configuration, Pa s; missing historical configuration fields mean the elastic value zero.",
+    "motion_start_time_s": null,
     "knife_material_force_n": "Norm of recorded material reaction on the knife at the preceding completed substep; excludes guide, drive and board forces.",
     "reference_volume_m3": 2.2578125000000015e-05,
     "tetrahedra": 8670,
     "cut_planes_m_in_execution_order": [
       0.0,
-      0.0
+      -8.848156182660645e-38
     ],
+    "cut_plane_source": "Median recorded blade position while cutting; uncut controls use the densest recorded position cluster. Axis-aligned paths that sweep laterally by more than half a material spacing are rejected.",
     "cut_normal_axes": [
       0,
       1
@@ -38,6 +43,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 0.0,
+      "knife_on_material_n": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -60,6 +73,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -82,6 +103,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -104,6 +133,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -126,6 +163,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -148,6 +193,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -170,6 +223,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -192,6 +253,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -214,6 +283,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -236,6 +313,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -258,6 +343,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -280,6 +373,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -302,6 +403,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -324,6 +433,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -346,6 +463,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -368,6 +493,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -390,6 +523,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -412,6 +553,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -434,6 +583,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -456,6 +613,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 2.5652525156494494e-16,
+      "knife_on_material_n": [
+        2.5652525156494494e-16,
+        -9.905901425628783e-18,
+        -0.00010239632099165826
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.00010239632099165826,
       "native_components": 1,
       "base_intact": true,
@@ -478,6 +643,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -1.3970220278183582e-15,
+      "knife_on_material_n": [
+        -1.3970220278183582e-15,
+        1.0360395813196044e-16,
+        -0.0029313321230876343
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0029313321230876343,
       "native_components": 1,
       "base_intact": true,
@@ -500,6 +673,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 1.7692400685774198e-16,
+      "knife_on_material_n": [
+        1.7692400685774198e-16,
+        5.613082200662335e-17,
+        -0.005697469749598251
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.005697469749598251,
       "native_components": 1,
       "base_intact": true,
@@ -522,6 +703,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -4.571860332805086e-16,
+      "knife_on_material_n": [
+        -4.571860332805086e-16,
+        7.263555676889391e-17,
+        -0.0067112291100784385
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0067112291100784385,
       "native_components": 1,
       "base_intact": true,
@@ -544,6 +733,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -4.824911425797308e-16,
+      "knife_on_material_n": [
+        -4.824911425797308e-16,
+        2.232345406321358e-16,
+        -0.007068265210325583
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.007068265210325583,
       "native_components": 1,
       "base_intact": true,
@@ -566,6 +763,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 5.687826240812627e-16,
+      "knife_on_material_n": [
+        5.687826240812627e-16,
+        1.8666137023356309e-16,
+        -0.006018129254596879
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.006018129254596879,
       "native_components": 1,
       "base_intact": true,
@@ -588,6 +793,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 3.120787015040063e-16,
+      "knife_on_material_n": [
+        3.120787015040063e-16,
+        -9.44474823413047e-18,
+        0.002339661173864972
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.002339661173864972,
       "native_components": 1,
       "base_intact": true,
@@ -610,6 +823,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 2.711034826805795e-16,
+      "knife_on_material_n": [
+        2.711034826805795e-16,
+        1.9441846322293224e-18,
+        0.001407966105185242
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.001407966105185242,
       "native_components": 1,
       "base_intact": true,
@@ -632,6 +853,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 3.482628902195259e-16,
+      "knife_on_material_n": [
+        3.482628902195259e-16,
+        1.231478061635391e-18,
+        0.0004166800969234209
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0004166800969234209,
       "native_components": 1,
       "base_intact": true,
@@ -654,6 +883,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -676,6 +913,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -698,6 +943,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -720,6 +973,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -742,6 +1003,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -764,6 +1033,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -786,6 +1063,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -808,6 +1093,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -830,6 +1123,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -852,6 +1153,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -874,6 +1183,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -896,6 +1213,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -918,6 +1243,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -940,6 +1273,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -962,6 +1303,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -984,6 +1333,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1006,6 +1363,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1028,6 +1393,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1050,6 +1423,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1072,6 +1453,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1094,6 +1483,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1116,6 +1513,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1138,6 +1543,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1160,6 +1573,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1182,6 +1603,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1204,6 +1633,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1226,6 +1663,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1248,6 +1693,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1270,6 +1723,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1292,6 +1753,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1314,6 +1783,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1336,6 +1813,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 4.051432089469562e-17,
+      "knife_on_material_n": [
+        4.051432089469562e-17,
+        1.42481529640014e-15,
+        -0.00039783112927623514
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.00039783112927623514,
       "native_components": 1,
       "base_intact": true,
@@ -1358,6 +1843,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 5.811357393491296e-18,
+      "knife_on_material_n": [
+        5.811357393491296e-18,
+        -5.716201844545646e-15,
+        -0.0024825515025369
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0024825515025369,
       "native_components": 1,
       "base_intact": true,
@@ -1380,6 +1873,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 1.9396764978909084e-17,
+      "knife_on_material_n": [
+        1.9396764978909084e-17,
+        3.661299914506713e-16,
+        -0.0053036010859991356
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0053036010859991356,
       "native_components": 1,
       "base_intact": true,
@@ -1402,6 +1903,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 3.082554727127862e-16,
+      "knife_on_material_n": [
+        3.082554727127862e-16,
+        3.0989759166482646e-15,
+        -0.006948147475480221
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.006948147475480221,
       "native_components": 1,
       "base_intact": true,
@@ -1424,6 +1933,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 1.6327552675061703e-16,
+      "knife_on_material_n": [
+        1.6327552675061703e-16,
+        3.614395465052506e-15,
+        -0.007811587052220309
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.007811587052220309,
       "native_components": 1,
       "base_intact": true,
@@ -1446,6 +1963,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -1.3162097906943776e-17,
+      "knife_on_material_n": [
+        -1.3162097906943776e-17,
+        1.91228275754499e-15,
+        -0.006662972270263631
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.006662972270263631,
       "native_components": 1,
       "base_intact": true,
@@ -1468,6 +1993,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 7.109617364893273e-17,
+      "knife_on_material_n": [
+        7.109617364893273e-17,
+        1.8393849845219166e-15,
+        0.002388554622018047
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.002388554622018047,
       "native_components": 1,
       "base_intact": true,
@@ -1490,6 +2023,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -4.194891380197826e-18,
+      "knife_on_material_n": [
+        -4.194891380197826e-18,
+        2.3872035431586353e-15,
+        0.0015547002271981136
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0015547002271981136,
       "native_components": 1,
       "base_intact": true,
@@ -1512,6 +2053,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -1.6539217854056366e-18,
+      "knife_on_material_n": [
+        -1.6539217854056366e-18,
+        2.940527815952507e-15,
+        0.0005676511447211199
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0005676511447211199,
       "native_components": 1,
       "base_intact": true,
@@ -1534,6 +2083,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1556,6 +2113,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1578,6 +2143,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1600,6 +2173,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1622,6 +2203,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1644,6 +2233,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1666,6 +2263,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1688,6 +2293,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1710,6 +2323,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1732,6 +2353,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1754,6 +2383,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1776,6 +2413,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1798,6 +2443,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1820,6 +2473,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1842,6 +2503,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1864,6 +2533,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
@@ -1886,6 +2563,14 @@
       "inverted_tetrahedra": 0,
       "centroid_x_from_start_mm": [],
       "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
       "knife_material_force_n": 0.0,
       "native_components": 1,
       "base_intact": true,
