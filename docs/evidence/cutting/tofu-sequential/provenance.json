@@ -90,8 +90,8 @@
     "evidence_scope": "synthetic task values; independent CPU implementation, not measured food or author code"
   },
   "renderer_sha256": {
-    "cutting_showcase.py": "ff9795912c842b976eff7505486564e2d43fdf600553a844538099fefd371012",
-    "cutting_surface.py": "fc4abf44937131d959a91d2c92deb4af1cb55318808c1deec68d388178ff371b",
+    "cutting_showcase.py": "9c4f8af55447e7da828f7ee11d44c15416a757327138a2e9221fa82cc9d84977",
+    "cutting_surface.py": "dad190643a3d8d8650937911a163791f1e96fde202236c1386cedc401351995f",
     "cutting_metrics.py": "1fda3e0d2f6dc6f8fece520b27e76b33ba0afe4bd9539cfa697e3aa92b65a5fc"
   },
   "frames": 141,
@@ -248,7 +248,7 @@
     ],
     "description": "Uniformly slowed recorded frames; no interpolated motion or invented physical time."
   },
-  "surface": "Tofu and banana use a linked reference volume that stores point/normal Hermite samples on primal links for the authored original boundary and the recorded axis-aligned blade paths. Native opposing side digits disconnect candidate links only after the blade sweep labels both sides; unassigned links retain a partial-cut bridge. Connected material uses per-cell link components and QEF dual vertices. Once the saved mechanical state contains disjoint components, each observed component is reconstructed as a closed local dual-contouring volume clipped by its recorded cut half-spaces; this prevents a triangle from sharing two incompatible motion fields. Representatives inherit native cut codes/components and normally move through fixed trilinear weights in a compatible TLMPM nodal field reconstructed from saved particle positions/F; an exactly affine saved component uses its fitted affine map without numerical interpolation drift. The surface grid spacing is one quarter of the mechanical grid spacing. Paths with lateral sweep beyond half a material spacing remain rejected by recorded-cut extraction. Fully intersecting through-cut motion is analytically tested but not qualified as a public recorded task; the public crossed task retains a connected lower bridge. This is a paper-inspired independent implementation for the current axis-aligned guided blade family, not an arbitrary curved-cut or author-code reproduction. No geometric smoothing or prescribed piece motion. Particles remain the physical geometry reference. The fruit is authored, not scanned or food-calibrated.",
+  "surface": "Tofu and banana use a linked reference volume that stores point/normal Hermite samples on primal links for the authored original boundary and the recorded axis-aligned blade paths. Native opposing side digits disconnect candidate links only after the blade sweep labels both sides; unassigned links retain a partial-cut bridge. Connected material uses per-cell link components and QEF dual vertices. Once the saved mechanical state contains disjoint components, each observed component is reconstructed as a closed local dual-contouring volume clipped by its recorded cut half-spaces; this prevents a triangle from sharing two incompatible motion fields. Representatives inherit native cut codes/components and move through fixed trilinear weights in a compatible nodal field reconstructed by locally averaging saved particle x/F affine predictions; common affine motion remains exact. The surface grid spacing is one quarter of the mechanical grid spacing. Paths with lateral sweep beyond half a material spacing remain rejected by recorded-cut extraction. Fully intersecting through-cut motion is analytically tested but not qualified as a public recorded task; the public crossed task retains a connected lower bridge. This is a paper-inspired independent implementation for the current axis-aligned guided blade family, not an arbitrary curved-cut or author-code reproduction. Display normals average facets below 80 degrees, but no vertex smoothing or prescribed piece motion is applied. Particles remain the physical geometry reference. The fruit is authored, not scanned or food-calibrated.",
   "maximum_display_smoothing_displacement_mm": 0.0,
   "description": "Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Continuous cut-push tasks share the board/handle presentation and display measured force and all region displacements. Historical sequential tofu uses neutral ground, no board/handle, and an orange projected middle-region rectangle; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.",
   "artifacts": {
@@ -256,8 +256,8 @@
     "particles-poster.png": "8704364570db99238dc4c31ed019ae41c5b6b95ee845a5d4cc204237784b7f37",
     "particles.gif": "6fe113450cd2b3dcb298841619381d34f9b5bdb1dd146c79d49eafcc42483b8e",
     "particles.mp4": "8b7eed04c03318e57b69e56674dd2a01bbca001a67e6193cbdb7aedcf27fe147",
-    "surface-poster.png": "7ff0d471e94633fe83b7c18d817e4abfae6a2ebaf29320ba095e9f13e9cfea8d",
-    "surface.gif": "42c164b7ceba7068e5fc22788a386514edea57260ed8c0e3a7eede67387fca80",
-    "surface.mp4": "c3970a890859a44928a3abb6dc424588276be55511b546603aae051abc7218fe"
+    "surface-poster.png": "909ecf6809c16faf23c633f4c2a9d111e284046f4bb9e0d2e75e75b7da2b3245",
+    "surface.gif": "4103977efc9dddebc3af9c841d5a7131e7cfa379122b7b3afcc5c268c2abdfe1",
+    "surface.mp4": "2e563e9ab5f25e16c801069921c70354f20be2530814dffb14600c29a459f3d0"
   }
 }
