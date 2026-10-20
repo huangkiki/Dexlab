@@ -249,6 +249,9 @@ class CuttingScene:
         scalars = numpy_to_vtk((colors*255).astype(np.uint8), deep=True)
         scalars.SetName('MaterialColor')
         surface.GetPointData().SetScalars(scalars)
+        material_coordinates = numpy_to_vtk(np.ascontiguousarray(rest), deep=True)
+        material_coordinates.SetName('MaterialRest')
+        surface.GetPointData().AddArray(material_coordinates)
         if not banana:
             uv = np.column_stack((rest[:, 0]+rest[:, 1], rest[:, 2]+.3*rest[:, 1]))/.012
             surface.GetPointData().SetTCoords(numpy_to_vtk(np.ascontiguousarray(uv), deep=True))

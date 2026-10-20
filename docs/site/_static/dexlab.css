@@ -125,6 +125,7 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-player header { display:flex; align-items:center; justify-content:space-between; gap:.65rem; padding:.85rem 1rem; flex-wrap:wrap; }
 .cutting-player h3 { margin:0; font-size:1.05rem; }
 .cutting-player video { display:block; width:100%; aspect-ratio:48/35; object-fit:contain; background:#e7eeeb; }
+.cut-push-showcase .cutting-player video { aspect-ratio:96/79; }
 .cutting-view-switch { display:flex; gap:3px; padding:3px; background:var(--pst-color-background); border-radius:7px; border:1px solid var(--pst-color-border); }
 .cutting-view-switch button { padding:.2rem .6rem; font-size:.8rem; border:0; border-radius:4px; background:transparent; color:var(--pst-color-text-muted); cursor:pointer; }
 .cutting-view-switch button[aria-pressed=true] { background:var(--pst-color-surface); color:var(--pst-color-text-base); box-shadow:0 1px 3px #0002; }

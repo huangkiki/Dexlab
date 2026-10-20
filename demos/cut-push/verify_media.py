@@ -14,6 +14,39 @@ def digest(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def verify_studio(media, manifest, measured):
+    """Check the optional RTX derivative against the independently checked captions."""
+    path = media / 'studio-provenance.json'
+    if not path.exists():
+        return None
+    studio = json.loads(path.read_text())
+    if studio['source_artifacts'] != manifest['artifacts'] or studio['physics_steps'] != 0:
+        raise ValueError('RTX media does not describe the original saved-state replay')
+    frames = studio['frames']
+    if len(frames) != len(measured['frames']) or studio['fps'] != 20:
+        raise ValueError('RTX frame schedule differs from the complete source schedule')
+    for row, original in zip(frames, measured['frames'], strict=True):
+        current = row['metrics']
+        if (row['sample'] != original['state_frame'] or row['time_s'] != original['time_s']
+                or current['state_frame'] != row['sample'] or current['time_s'] != row['time_s']):
+            raise ValueError('RTX frame mapping differs from its displayed state')
+        for name in ('knife_on_material_n', 'knife_material_force_n', 'centroid_x_from_start_mm',
+                     'dynamic_viscosity_pa_s'):
+            np.testing.assert_allclose(current[name], original[name], rtol=0, atol=1e-12)
+    for name, expected in studio['assets'].items():
+        if Path(name).name != name or digest(media / name) != expected:
+            raise ValueError(f'RTX artifact changed: {name}')
+    with Image.open(media / 'surface-rtx.gif') as gif:
+        if gif.n_frames != len(frames):
+            raise ValueError('RTX GIF frame inventory differs from its source schedule')
+        for frame in range(gif.n_frames):
+            gif.seek(frame)
+            if gif.info['duration'] != 120:
+                raise ValueError('Unexpected RTX GIF playback timing')
+    return {'frames_verified':len(frames), 'captions_match_native':True,
+            'artifact_hashes_match':True, 'gif_timing_verified':True}
+
+
 def verify(run, media, planes):
     manifest = json.loads((run / 'manifest.json').read_text())
     for name in ('states.npz', 'trace.npz'):
@@ -57,10 +90,11 @@ def verify(run, media, planes):
                 gif.seek(index)
                 if gif.info['duration'] != 120:
                     raise ValueError('Unexpected GIF playback timing')
+    studio = verify_studio(media, manifest, measured)
     return {'task': manifest['task'], 'frames_verified': len(measured['frames']),
             'pieces': len(planes) + 1, 'force_and_displacements_match': True,
             'artifact_hashes_match': True, 'gif_timing_verified': True,
-            'material_viscosity_matches': True}
+            'material_viscosity_matches': True, 'studio':studio}
 
 
 def main():
