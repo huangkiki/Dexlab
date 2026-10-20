@@ -15,6 +15,7 @@ except ModuleNotFoundError as error:
         raise
     raise unittest.SkipTest("Install dexlab[cutting] to run cutting physics checks") from error
 from dexlab.cutting_score import grid_components
+from dexlab.cutting_geometry import material_points
 
 
 class CuttingInvariants(unittest.TestCase):
@@ -265,6 +266,21 @@ class CuttingInvariants(unittest.TestCase):
         # Same reference neighbours in intact material receive continuum
         # stress, not a duplicate proxy contact force.
         np.testing.assert_array_equal(contact(np.array([0, 0]))[0], 0)
+
+    def test_simulation_keeps_pair_history_linear_in_candidate_count(self):
+        sim = CuttingSimulation(CutConfig(size=(.03, .015, .015), grid_spacing=.0075))
+        self.assertEqual(sim.pair_history.shape, (0, 3))
+        sim.step(np.array([0., 0., .04]), cutting=False)
+        self.assertEqual(sim.pair_history.shape, (len(sim.pair_keys), 3))
+        self.assertLess(len(sim.pair_history), len(sim.x) ** 2)
+
+    def test_explicit_reference_sampling_is_validated(self):
+        config = CutConfig(size=(.03, .015, .015), grid_spacing=.0075)
+        reference = material_points(config.size, config.grid_spacing)
+        sim = CuttingSimulation(config, reference + np.array([1e-5, 0., 0.]))
+        np.testing.assert_allclose(sim.reference, reference + np.array([1e-5, 0., 0.]))
+        with self.assertRaisesRegex(ValueError, 'reference grid'):
+            CuttingSimulation(config, reference + np.array([1., 0., 0.]))
 
     def test_beveled_blade_closest_point_and_normal(self):
         from dexlab.cutting import blade_query

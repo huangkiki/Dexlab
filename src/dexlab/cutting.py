@@ -463,6 +463,46 @@ def particle_contacts(x, reference, velocity, sides, pairs, radius, spacing,
 
 
 @njit(cache=True)
+def particle_contacts_compact(x, reference, velocity, sides, pairs, radius, spacing,
+                              mass, dt, normal_scale, mu_s, mu_d, gamma_k, gamma_c,
+                              histories):
+    """Eq. 10–13 with one history vector per current candidate pair.
+
+    ``histories`` is already matched to candidate pairs from the immediately
+    preceding substep. Non-contacting rows are cleared. This has the same
+    contact law as :func:`particle_contacts` without allocating O(N^2) state.
+    """
+    impulses = np.zeros_like(x)
+    maximum_overlap = 0.0
+    for row in range(len(pairs)):
+        p, q = pairs[row]
+        conflict = not codes_compatible(sides[p], sides[q])
+        if not conflict and np.linalg.norm(reference[p] - reference[q]) < 2 * spacing:
+            histories[row] *= 0
+            continue
+        delta = x[p] - x[q]
+        distance = np.linalg.norm(delta)
+        if distance < 1e-14:
+            raise ValueError("Coincident contact proxies; undefined normal")
+        normal = delta / distance
+        relative = velocity[p] - velocity[q]
+        overlap = 2 * radius - distance
+        predicted = overlap - dt * min(np.dot(relative, normal), 0)
+        if predicted <= 0:
+            histories[row] *= 0
+            continue
+        maximum_overlap = max(maximum_overlap, overlap)
+        jn = normal_scale * (mass / 2) / dt * predicted
+        tangent, updated = friction_impulse(normal, relative, jn, histories[row],
+                                             mass / 2, dt, mu_s, mu_d, gamma_k, gamma_c)
+        histories[row] = updated
+        impulse = jn * normal + tangent
+        impulses[p] += impulse
+        impulses[q] -= impulse
+    return impulses, maximum_overlap
+
+
+@njit(cache=True)
 def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt, cut_index=0, yaw=0.0):
     """Eq. 3–7: assign 0→1/2 behind the swept finite edge, never reset."""
     edge_z = blade_x[2] - half_size[2]
@@ -483,12 +523,20 @@ def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, d
 class CuttingSimulation:
     """One material body, a guided dynamic blade, persistent cuts and a board."""
 
-    def __init__(self, config=CutConfig()):
+    def __init__(self, config=CutConfig(), reference_points=None):
         self.config = config
         cells = np.rint(np.asarray(config.size) / config.grid_spacing).astype(int)
         self.origin = -np.array([config.size[0] / 2, config.size[1] / 2, 0.])
         particle_spacing = config.grid_spacing / 2
-        self.reference = material_points(config.size, config.grid_spacing, config.shape)
+        self.reference = (material_points(config.size, config.grid_spacing, config.shape)
+                          if reference_points is None else np.asarray(reference_points, dtype=float))
+        if (self.reference.ndim != 2 or self.reference.shape[1:] != (3,)
+                or not len(self.reference) or not np.isfinite(self.reference).all()):
+            raise ValueError('Reference points must be a nonempty finite N x 3 array')
+        fractional = (self.reference - self.origin) / config.grid_spacing
+        if (fractional < 0).any() or (fractional >= cells).any():
+            raise ValueError('Reference points must remain inside the configured reference grid')
+        self.reference = self.reference.copy()
         self.x = self.reference.copy()
         self.velocity = np.zeros_like(self.x)
         self.deformation = np.tile(np.eye(3), (len(self.x), 1, 1))
@@ -505,9 +553,32 @@ class CuttingSimulation:
         self.blade_v = np.zeros(3)
         self.blade_yaw = 0.
         self.rigid_history = np.zeros((2, len(self.x), 3))
-        self.pair_history = np.zeros((len(self.x), len(self.x), 3))
-        self.pair_seen = np.full((len(self.x), len(self.x)), -2, dtype=np.int32)
+        self.pair_keys = np.empty(0, dtype=np.int64)
+        self.pair_history = np.empty((0, 3))
         self.step_count = 0
+
+    def _pair_contact(self, pairs):
+        """Map only previous-step candidate histories onto current candidates."""
+        c = self.config
+        if len(pairs) == 0:
+            self.pair_keys = np.empty(0, dtype=np.int64)
+            self.pair_history = np.empty((0, 3))
+            return np.zeros_like(self.x), 0.0
+        keys = pairs[:, 0].astype(np.int64) * len(self.x) + pairs[:, 1]
+        order = np.argsort(keys)
+        pairs, keys = pairs[order], keys[order]
+        histories = np.zeros((len(pairs), 3))
+        if len(self.pair_keys):
+            previous = np.searchsorted(self.pair_keys, keys)
+            matched = (previous < len(self.pair_keys))
+            matched[matched] &= self.pair_keys[previous[matched]] == keys[matched]
+            histories[matched] = self.pair_history[previous[matched]]
+        contact, overlap = particle_contacts_compact(
+            self.x, self.reference, self.velocity, self.sides, pairs, self.radius,
+            c.grid_spacing, self.mass, c.dt, c.normal_scale, c.friction_static,
+            c.friction_dynamic, c.tangent_stiffness, c.tangent_damping, histories)
+        self.pair_keys, self.pair_history = keys, histories
+        return contact, overlap
 
     def momentum(self):
         return self.mass * self.velocity.sum(axis=0) + self.config.blade_mass * self.blade_v
@@ -544,11 +615,7 @@ class CuttingSimulation:
             cutting, c.blade_bevel_height, self.blade_yaw)
         pair_radius = 2 * self.radius + 2 * np.linalg.norm(self.velocity, axis=1).max() * c.dt
         pairs = cKDTree(self.x).query_pairs(pair_radius, output_type='ndarray')
-        contact, pair_overlap = particle_contacts(
-            self.x, self.reference, self.velocity, self.sides, pairs, self.radius,
-            c.grid_spacing, self.mass, c.dt, c.normal_scale, c.friction_static,
-            c.friction_dynamic, c.tangent_stiffness, c.tangent_damping,
-            self.pair_history, self.pair_seen, self.step_count)
+        contact, pair_overlap = self._pair_contact(pairs)
         gravity = np.array([0., 0., -9.81]) * self.mass * c.dt
         viscous_dissipation, plastic_dissipation = material_step(
                       self.x, self.velocity, self.deformation, self.sides,
