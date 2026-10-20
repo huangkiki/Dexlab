@@ -44,6 +44,35 @@ python demos/rss-wiping/annotate.py /path/to/fresh-original-run \
 
 `annotate.py` uses FFmpeg with subtitles support to label the existing frames from saved measurements. It preserves their order and playback rate; the raw recording remains available. The annotation is postprocessing, not a controller input.
 
+## Render a saved trajectory / 重渲染已有轨迹
+
+![Same recorded state: tiled left, RTX right; simulation 10–20 s, 1× playback / 同一状态左 tiled、右 RTX，原速回放](../../docs/evidence/rss-wiping/rtx/comparison.gif)
+
+`render.py` loads a complete raw recording and renders matching tiled and RTX views. It reuses the pinned RSS materials, room and area lighting. Both views share the recorded camera and exact simulation timestamps. The command does not advance physics, interpolate particles, or change the existing scores.
+
+`render.py` 从完整原始记录恢复刚体位姿、海绵材料点与墨迹，输出同机位、同时刻的 tiled／RTX 对照。它复用固定版本的材质、房间与面光源，不推进物理、不插值顶点，也不改变原评分。
+
+Use the pinned upstream environment with its RTX dependency group and an NVIDIA GPU with RT cores. The input must contain `manifest.json`, `compiled-model.npz`, `observations.jsonl` and `states/*.npz`. The smaller public summary/CSV bundle alone cannot reconstruct the deforming sponge; use a retained raw recording or produce one with the recorder above.
+
+需要固定上游环境的 RTX 依赖组、具备 RT 核心的 NVIDIA 显卡，以及完整原始状态。公开的摘要／CSV 不包含重建海绵所需的全部顶点；应使用保留的原始记录，或先按上面的命令录制。
+
+Inside the bounded execution window / 在受限运行窗口内：
+
+```bash
+python demos/rss-wiping/render.py /path/to/fresh-original-run \
+  --source /path/to/robosimstudio \
+  --output /path/to/new-render \
+  --start 10 --end 20 --fps 10 --passes 12
+```
+
+The default 10-second segment produces 100 frames at the recorded 960×544 camera resolution. `comparison.mp4` places the tiled collision view on the left and RTX on the right; `tiled.mp4` and `rtx.mp4` retain each full-size view. First/middle PNGs allow frame inspection. `render.json` records the input/output hashes, frame-to-simulation mapping, camera, material/lighting preset, package versions, state readbacks and measured rendering costs. A directory without the final report is an incomplete attempt.
+
+默认输出 10 秒、100 帧的片段，沿用记录中的 960×544 相机。`comparison.mp4` 左侧为碰撞视图、右侧为 RTX；两路独立视频和首帧／中间帧 PNG 同时保留。`render.json` 包含哈希、逐帧仿真时间、相机、外观配置、版本、状态读回与耗时；缺少最终报告的目录表示尝试未完成。
+
+The input geometry and compiled-model fingerprints must match. Missing, duplicated, nonfinite or incompatible states fail the replay. After every pair of renders, loaded state and live colors must remain unchanged. The playback rate is not a real-time simulator speed claim.
+
+输入几何与编译模型指纹必须一致。缺帧、重复帧、非有限值或维度不匹配会使回放失败；每对画面输出后检查状态与动态颜色未改变。视频播放帧率不表示实时仿真速度。
+
 ## Freeze preprocessing / 固定碰撞预处理
 
 Repeated unchanged upstream CoACD preprocessing produced different collision decompositions. The retained unpaired reference therefore cannot isolate the effect of the latch. `geometry-cache` contains one set of arrays produced by the original upstream `_convex_pieces` method: 49 and 48 convex pieces for its two input meshes. Both controlled modes replay these exact arrays at the asset-preprocessing boundary. Input hashes, call order, file hashes and complete compiled-model hashes are checked; material, inertia and contact settings are preserved.

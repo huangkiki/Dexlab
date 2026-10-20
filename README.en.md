@@ -23,6 +23,8 @@ Across three paired repetitions with frozen collision geometry and initial state
 
 [Complete comparison and reproduction limits](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html) · [Reproduction code and frozen geometry](demos/rss-wiping/README.md) · [Full original video](docs/evidence/rss-wiping/original.mp4) · [Full no-latch video](docs/evidence/rss-wiping/no-latch.mp4)
 
+The same recorded trajectory also supports **high-quality RTX replay**, retaining poses and sponge deformation while adding reflections, textures and soft shadows. [Matched views and reproduction](demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹).
+
 [Start with the basics: do solvers wait for each other, and what does preCICE do?](#solver-coupling)
 
 ## Finish the last cut, then push with the blade

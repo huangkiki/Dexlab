@@ -23,6 +23,8 @@
 
 [完整对照与复现边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html) · [复现代码与固定几何](demos/rss-wiping/README.md) · [原版完整视频](docs/evidence/rss-wiping/original.mp4) · [无 latch 完整视频](docs/evidence/rss-wiping/no-latch.mp4)
 
+同一条已记录轨迹现可输出 **RTX 高质量回放**：保留位姿与海绵形变，增加金属反射、纹理和柔和阴影。[同机位画面对照与复现](demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹)。
+
 [先看原理：不同 solver 会互相等吗？preCICE 做什么？](#solver-coupling)
 
 ## 最后一刀切完，直接用刀面推开

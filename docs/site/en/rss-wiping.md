@@ -33,6 +33,20 @@ The first repetition of each mode is the predetermined video pair. Both show the
 
 ![All six trajectories: cleaned fraction, material-patch motion and measured contact force](../../evidence/rss-wiping/comparison.png)
 
+## RTX appearance replay of the same trajectory
+
+The original condition's first recording now has a **continuous 10–20 s replay**: 100 frames at 10 fps and 960×544 per view. Left is the tiled collision view; right is OVRTX path tracing, using the same camera, timestamps and recorded state. Metal reflections, mat texture, robot-shell highlights and soft shadows come from the pinned RSS materials, room and lighting.
+
+![Same state and camera: tiled left, RTX right; simulation 10–20 s at original speed](../../evidence/rss-wiping/rtx/comparison.gif)
+
+[Full comparison video](../../evidence/rss-wiping/rtx/comparison-labeled.mp4) · [Frame map, input hashes and state checks](../../evidence/rss-wiping/rtx/render.json) · [Media processing record](../../evidence/rss-wiping/rtx/media.json)
+
+Replay executed **zero physics steps**. Maximum absolute loading error was zero for rigid poses, joints, sponge material points and ink; state and live colors remained unchanged after all 100 paired renders. Input file hashes also remained unchanged. The recorded ground-visibility toggle is restored before the complete compiled model is checked array by array and by hash; collision-bit changes are rejected. Replay neither interpolates nor smooths material points and produces no new task-success result.
+
+In this bounded RTX 4090 job with four CPU equivalents, RTX calls at 12 passes averaged **81.75 ms/frame**, versus **3.61 ms/frame** for tiled; scene construction and warm-up took **9.80 s**. These are this job's rendering costs, excluding video encoding, not exclusive-hardware or end-to-end simulation throughput. The first pilot was rejected because the saved ground visibility had not been restored. After correction, the two-frame pilot and continuous segment passed; the failed attempt remains retained.
+
+Reproduction requires the complete raw `states/*.npz` recording and pinned upstream RTX environment; public summaries/CSV cannot substitute for soft-body vertices. See the [replay command](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹) and [rendering task #229](https://github.com/huangkiki/Dexlab/issues/229).
+
 ## What was held fixed
 
 RSS commit [`23417de`](https://github.com/robosimstudio/robosimstudio/tree/23417de77edf59d614531a833334ed4e2206fc2c) supplies the two YAM arms, sponge, bar, materials and scripted controller. The locked combination is Newton 1.6.0, Warp 1.18.0, MuJoCo/MJWarp 3.12.0 and SuperDex 1.0.0. Native readback confirms single-precision SuperDex. The control rate is 60 Hz, with 16 rigid substeps and two SuperDex steps per control period. The authored foam has Young's modulus 80 kPa, Poisson ratio 0.3, density 110 kg/m³, friction 0.9 and friction falloff 0.1 mm/s. These are upstream example parameters, not measured sponge properties.
