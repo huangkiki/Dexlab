@@ -11,145 +11,138 @@
 <span id="visual-experiment-catalogue"></span>
 ```
 
-Click a GIF from actual simulation or recorded-state replay for full videos, curves and reproduction. Successes, failures and conditions stay together.
+Click an experiment or GIF for the full report and reproduction steps.
 
-(rss)=
-### RSS wiping: why does the sponge slip?
+````{list-table}
+:header-rows: 1
+:widths: 20 45 35
 
-One gripper holds the bar while the other wipes off ink with a sponge. The left run retains RSS’s auxiliary node constraint; the right disables it.
+* - Experiment
+  - Animated preview
+  - Result
+* - ```{raw} html
+    <span id="rss"></span>
+    ```
 
-```{raw} html
-<a href="rss-wiping.html"><img src="_static/rss-wiping/preview.gif" width="880" alt="RSS wiping: why does the sponge slip?" loading="lazy"></a>
-```
+    [RSS wiping](rss-wiping.md)
+  - ```{image} ../../../docs/evidence/rss-wiping/preview.gif
+    :alt: RSS original / no latch, 2×
+    :width: 300px
+    :target: rss-wiping.html
+    ```
 
-Across three repeats with fixed geometry and initial states, the original passed 3/3 with 95.5%–95.9% cleaning; disabling the constraint passed 0/3 with 39.9%–41.2% cleaning. This configuration depends on assisted retention; in-hand rotation is not reproduced. The GIF shows synchronized 10–30 s excerpts from trial 1 at 2× speed in the native collision-geometry view.
+  - Retains the sponge with auxiliary constraints; slips without them. Wiping reproduction.
+* - ```{raw} html
+    <span id="cut-push"></span>
+    ```
 
-[Results and reproduction](rss-wiping.md)
+    [Cutting and pushing](cut-push.md)
+  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface.gif
+    :alt: Tofu-like / banana-like material
+    :width: 145px
+    :target: cut-push.html
+    ```
 
-(cut-push)=
-### Sequential cutting: push the pieces with the final cut
+    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface.gif
+    :alt: Tofu-like / banana-like material
+    :width: 145px
+    :target: cut-push.html
+    ```
 
-Cut a tofu-like block into three pieces and a banana-like body into four, then lift the blade slightly and push sideways through knife contact.
+  - Knife contact separates and pushes synthetic soft pieces.
+* - ```{raw} html
+    <span id="scoring"></span>
+    ```
 
-```{raw} html
-<a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface.gif" width="420" alt="Sequential cutting: push the pieces with the final cut" loading="lazy"></a>
-<a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface.gif" width="420" alt="Sequential cutting: push the pieces with the final cut" loading="lazy"></a>
-```
+    [Cross scoring](tofu-scoring.md)
+  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/particles.gif
+    :alt: Native particle cut history
+    :width: 300px
+    :target: tofu-scoring.html
+    ```
 
-Piece motion comes from knife contact, with no direct velocity increment applied to the material. The overlays show recorded contact forces and piece displacements; the report pairs surface and particle views. These are synthetic materials, without real-food calibration or the paper’s force-measurement experiment.
+  - Two shallow cuts leave a connected base; colors show cut history.
+* - ```{raw} html
+    <span id="apple"></span>
+    ```
 
-[Results and reproduction](cut-push.md)
+    [Apple-stem grasp](apple-replays)
+  - ```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
+    :alt: Historical scripted MuJoCo / SuperDex runs
+    :width: 145px
+    :target: experiments.html#apple-replays
+    ```
 
-(scoring)=
-### Cross scoring: cuts with a connected base
+    ```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
+    :alt: Historical scripted MuJoCo / SuperDex runs
+    :width: 145px
+    :target: experiments.html#apple-replays
+    ```
 
-Make a shallow cut, withdraw and rotate the knife by 90°, then cut again to inspect the incisions and connectivity.
+  - Historical scripted MuJoCo / SuperDex runs both complete a 3 s hold.
+* - ```{raw} html
+    <span id="cloth"></span>
+    ```
 
-```{raw} html
-<a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/particles.gif" width="880" alt="Cross scoring: cuts with a connected base" loading="lazy"></a>
-```
+    [Robot cloth grasp](experiments.md)
+  - ```{image} ../../../demos/cloth-folding/media/compliance-grasp.gif
+    :alt: Cloth grasp, lift and release
+    :width: 300px
+    :target: experiments.html
+    ```
 
-Both the default and half-step records produce two shallow cuts with a connected base; the uncut control is rejected. Colors show native cut history. The current elastic surface rebounds after withdrawal, so color does not imply a permanently open incision.
+  - One development scene lifts, holds and releases; active folding remains unverified.
+* - ```{raw} html
+    <span id="visual-highlight-pinch"></span>
+    ```
 
-[Results and reproduction](tofu-scoring.md)
+    [Force-limit comparison](pinch)
+  - ```{image} ../../../docs/evidence/force-limit/comparison.gif
+    :alt: Actuator limit 0.4 N / 0.8 N
+    :width: 300px
+    :target: visual-comparisons.html#pinch
+    ```
 
-(apple)=
-### Apple-stem grasping: can two fingers hold the stem?
+  - In the same Genesis protocol, actuator limits of 0.4 N slip and 0.8 N hold.
+* - ```{raw} html
+    <span id="visual-highlight-libero"></span>
+    ```
 
-OpenArm + Wuji pinch the apple stem with thumb and index finger, lift and hold. Historical development runs: MuJoCo on the left, SuperDex FP64 on the right.
+    [LIBERO replay](libero-workflow.md)
+  - ```{image} ../../../docs/evidence/visual/libero-demo0-baseline.gif
+    :alt: Demo 0 native baseline state replay
+    :width: 300px
+    :target: libero-workflow.html
+    ```
 
-::::{grid} 1 1 2 2
-:gutter: 3
-:::{grid-item}
-```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
-:alt: Apple-stem grasping: can two fingers hold the stem?
-:width: 420px
-:target: experiments.html#apple-replays
-```
-:::
-:::{grid-item}
-```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
-:alt: Apple-stem grasping: can two fingers hold the stem?
-:width: 420px
-:target: experiments.html#apple-replays
-```
-:::
-::::
+  - 500 official demonstrations: 495 task successes; none pass every numerical diagnostic.
+* - ```{raw} html
+    <span id="visual-highlight-incline"></span>
+    ```
 
-Both recorded 14 s trajectories pass the full 3 s hold check. Actions use known poses and fixed joint targets, with no attachment constraint on the apple. This qualifies the fixed simulation scene, not a vision policy or real-robot accuracy.
+    [Six-engine incline](incline)
+  - ```{image} ../../../docs/evidence/visual/incline-sliding-0.001.gif
+    :alt: Sliding records at 1 ms timestep
+    :width: 300px
+    :target: visual-comparisons.html#incline
+    ```
 
-[Results and reproduction](apple-replays)
+  - Compare sliding responses across six engines; equal parameter values do not imply equivalent models.
+* - ```{raw} html
+    <span id="visual-highlight-normal"></span>
+    ```
 
-(cloth)=
-### Cloth grasping: hold and release after lifting
+    [Normal contact calibration](normal)
+  - ```{image} ../../../docs/evidence/visual/normal-calibration.gif
+    :alt: Loading, hold and unloading against a synthetic target
+    :width: 300px
+    :target: visual-comparisons.html#normal
+    ```
 
-The robot grasps cloth through contact and friction, then lifts, holds and releases it.
+  - Loading fits a synthetic target better; unloading and transfer need separate validation.
+````
 
-```{image} ../../../demos/cloth-folding/media/compliance-grasp.gif
-:alt: Cloth grasping: hold and release after lifting
-:width: 880px
-:target: experiments.html
-```
-
-After geometry and compliance corrections, one 9 s development scene passes the fixed v3 criteria. The historical table-intersection failure is retained, and self-contact penetration remains near the threshold. This is cloth grasping, not successful active folding or cross-material robustness.
-
-[Results and reproduction](experiments.md)
-
-(visual-highlight-pinch)=
-### Gripper force limits: slipping at 0.4 N, holding at 0.8 N
-
-Change the finger-joint drive-force limit in the same Genesis gripper scene and compare closing, lifting, holding and release.
-
-```{raw} html
-<a href="visual-comparisons.html#pinch"><img src="_static/force-limit/comparison.gif" width="880" alt="Gripper force limits: slipping at 0.4 N, holding at 0.8 N" loading="lazy"></a>
-```
-
-Under this protocol, the 0.4 N setting slips while 0.8 N retains the object; open-gripper controls and offset scenes are also recorded. A drive-force limit is not a measured contact force and cannot be read as a real gripper-force requirement.
-
-[Results and reproduction](pinch)
-
-(visual-highlight-libero)=
-### LIBERO: does task success also pass physical diagnostics?
-
-Replay official actions, retain successes and failures, and inspect contact and state records. Below is the recorded-state replay of native baseline demo 0.
-
-```{raw} html
-<a href="libero-workflow.html"><img src="_static/visual/libero-demo0-baseline.gif" width="880" alt="LIBERO: does task success also pass physical diagnostics?" loading="lazy"></a>
-```
-
-The Object suite has valid records for all 500 official demonstrations across ten tasks: 495 native task successes, five failures, and zero passes of all numerical diagnostics. The GIF is one existing replay, not evidence that all 500 succeed; this is not a closed-loop vision-policy evaluation.
-
-[Results and reproduction](libero-workflow.md)
-
-(visual-highlight-incline)=
-### Six-engine incline: why does the same block slide differently?
-
-Compare static, sliding and nominally frictionless responses of a block with the same dimensions and mass. The GIF shows the sliding records at a 1 ms timestep.
-
-```{raw} html
-<a href="visual-comparisons.html#incline"><img src="_static/visual/incline-sliding-0.001.gif" width="880" alt="Six-engine incline: why does the same block slide differently?" loading="lazy"></a>
-```
-
-Responses from MuJoCo, SuperDex, Genesis, Newton Physics, PhysX and Drake retain their configurations, failures and invalid observations. Equal parameter values do not establish equivalent contact models; full curves help distinguish motion differences from observation problems.
-
-[Results and reproduction](incline)
-
-(visual-highlight-normal)=
-### Normal contact: after fitting loading, what happens on unloading?
-
-Adjust contact parameters in one MuJoCo scene and compare indentation, holding and unloading.
-
-```{raw} html
-<a href="visual-comparisons.html#normal"><img src="_static/visual/normal-calibration.gif" width="880" alt="Normal contact: after fitting loading, what happens on unloading?" loading="lazy"></a>
-```
-
-Loading response can improve against the synthetic 20 kN/m target, while unloading, dynamics and mass transfer need separate validation. The replay preserves physical proportions; inspect the report curves for small displacements. A synthetic reference is not real-material calibration.
-
-[Results and reproduction](normal)
-
-For historical cutting, collision, cloth mechanics, mass/size transfer and error–cost sweeps, see the [full experiment index](experiments.md).
-
-[Sources and conversion records for the new GIFs](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/visual/homepage-previews.json).
+[Full experiment index](experiments.md) · GIFs show actual simulation or recorded-state replay; results apply to each report’s configuration and conditions.
 
 (quickstart)=
 ## Start with apple-stem grasping
