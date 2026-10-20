@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "analytical-qualification-only",
+  "paper": {
+    "url": "https://arxiv.org/html/2609.27342v2",
+    "specified_model": "fixed-corotated elasticity, optionally augmented by a von Mises-type plasticity projection and Newtonian viscosity",
+    "specified_banana_values": {
+      "young_modulus_pa": 400000.0,
+      "poisson_ratio": 0.45,
+      "density_kg_m3": 1100.0,
+      "yield_stress_pa": 30000.0,
+      "knife_mass_kg": 0.1,
+      "friction_coefficient": 0.2,
+      "cutting_energy_j_m2": 700.0,
+      "sharpness": 0.9
+    },
+    "omitted_fields": [
+      "exact plastic projection and yield-stress convention",
+      "hardening law",
+      "banana viscosity",
+      "normal contact scale",
+      "tangential stiffness and damping scales",
+      "banana-force timestep",
+      "numerical end-effector trajectory and controller gains",
+      "particle-sampling distribution and real-force raw samples"
+    ]
+  },
+  "independent_choice": {
+    "model": "perfect J2 radial projection in principal logarithmic elastic strain",
+    "equivalent_stress": "q = sqrt(3/2) ||s||",
+    "yield_surface": "||dev(log(sigma(F)))|| <= yield_stress / (sqrt(6) shear_modulus)",
+    "volume_rule": "retain mean logarithmic strain; plastic projection is isochoric",
+    "stress_after_projection": "fixed-corotated first Piola stress evaluated from projected F",
+    "hardening": "none",
+    "default_behavior": "yield_stress=0 disables projection and preserves prior elastic records",
+    "literature_basis": [
+      {
+        "title": "Algorithms for static and dynamic multiplicative plasticity that preserve the classical return mapping schemes of the infinitesimal theory",
+        "doi": "10.1016/0045-7825(92)90123-2"
+      },
+      {
+        "title": "PlasticineLab public von-Mises projection used as implementation precedent, not BladeMaster source",
+        "repository": "https://github.com/hzaskywalker/PlasticineLab",
+        "commit": "ac1a2f7b0bbbe88706b51bf3aa9d72483e1d05b6",
+        "path": "plb/engine/mpm_simulator.py",
+        "sha256": "ae1fb1e44f759822b58e09085f1825451b1dad2c0cfd757da628345c4dd1e8d8"
+      }
+    ]
+  },
+  "analytical_acceptance": {
+    "elastic_loading": "below-yield deformation is unchanged",
+    "plastic_loading": "projected equivalent stress reaches the declared 30 kPa surface",
+    "unloading": "removing recoverable elastic deformation gives zero stress",
+    "rigid_motion": "superposed rotation preserves singular values, plastic increment and rotates the projected state",
+    "volume": "projection preserves positive determinant",
+    "energy": "fixed-corotated elastic energy removed by yielding is nonnegative",
+    "record_integrity": "plastic runs require finite nonnegative per-substep plastic-dissipation telemetry"
+  },
+  "source_sha256": {
+    "src/dexlab/cutting.py": "7a43f6155d0519f513b6a02edf6e1d040e0e263c49cb30f7624bc7f25d19d1a8",
+    "src/dexlab/tofu_cut.py": "d04f60183802d97540ab8abec3fa0ec7f6a3e9956d7a057a2cc2f8776e9e3f85",
+    "tests/test_cutting.py": "4ec1c2dda668c02b15ac422f8e0431b4f310e8823293479a49536e6c141c2f86",
+    "tests/test_cutting_plasticity.py": "76eada69b982c5e076e41245d37fa14e465974f5bb67ab94c3c5cd4ef6c7c134"
+  },
+  "execution_boundary": "No banana cutting-force simulation or paper-force agreement claim is part of this material-only qualification. The single-cut trajectory, force epochs, timestep/contact sensitivity, 20 sampling cohort and quarter-grid refined run require the next frozen protocol."
+}

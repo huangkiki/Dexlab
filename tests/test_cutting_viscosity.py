@@ -67,10 +67,13 @@ class NewtonianViscosityTests(unittest.TestCase):
 
     @staticmethod
     def advance(sim, viscosity):
-        return material_step(sim.x, sim.velocity, sim.deformation, sim.sides,
-                             sim.nodes, sim.weights, sim.gradients, np.zeros_like(sim.x),
-                             sim.mass, sim.volume, 2000., 3000., 1e-6, 1., sim.node_count,
-                             viscosity)
+        viscous, plastic = material_step(sim.x, sim.velocity, sim.deformation, sim.sides,
+                                         sim.nodes, sim.weights, sim.gradients,
+                                         np.zeros_like(sim.x), sim.mass, sim.volume,
+                                         2000., 3000., 1e-6, 1., sim.node_count, viscosity)
+        if plastic != 0:
+            raise AssertionError('Plasticity is disabled in the viscosity tests')
+        return viscous
 
     def test_internal_viscosity_loses_energy_without_external_impulse(self):
         sim = CuttingSimulation(CutConfig(size=(.015, .015, .015)))

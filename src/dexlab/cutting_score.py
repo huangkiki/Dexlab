@@ -132,11 +132,17 @@ def score_run(directory):
     frames, particles, axes = x.shape
     config = manifest['config']
     viscosity = config.get('dynamic_viscosity', 0.0)
+    yield_stress = config.get('yield_stress', 0.0)
     if not np.isfinite(viscosity) or viscosity < 0:
         raise ValueError('Invalid dynamic viscosity')
+    if not np.isfinite(yield_stress) or yield_stress < 0:
+        raise ValueError('Invalid yield stress')
     if viscosity > 0 and ('viscous_dissipation_j' not in trace
                           or trace['viscous_dissipation_j'].ndim != 1):
         raise ValueError('Missing viscous dissipation observation')
+    if yield_stress > 0 and ('plastic_dissipation_j' not in trace
+                             or trace['plastic_dissipation_j'].ndim != 1):
+        raise ValueError('Missing plastic dissipation observation')
     task = manifest.get('task', 'tofu')
     banana = task == 'banana'
     scoring = task == 'tofu-scoring'
@@ -350,6 +356,9 @@ def score_run(directory):
         # change. A separate saved-state audit reconstructs the sampled rate.
         checks['nonnegative_viscous_dissipation'] = bool(
             np.all(trace['viscous_dissipation_j'] >= -1e-14))
+    if yield_stress > 0:
+        checks['nonnegative_plastic_dissipation'] = bool(
+            np.all(trace['plastic_dissipation_j'] >= -1e-14))
     checks = {name: bool(value) for name, value in checks.items()}
     return {
         'schema_version': 1, 'task': task, 'mode': manifest['mode'], 'passed': all(checks.values()),
@@ -370,13 +379,16 @@ def score_run(directory):
         'peak_material_reaction_n': float(np.linalg.norm(trace['material_reaction_n'], axis=1).max()),
         **({'constitutive_viscous_dissipation_j': float(trace['viscous_dissipation_j'].sum())}
            if viscosity > 0 else {}),
+        **({'constitutive_plastic_dissipation_j': float(trace['plastic_dissipation_j'].sum())}
+           if yield_stress > 0 else {}),
         **({'motion_protocol': motion, 'push_direction_knife_impulse_ns': push_impulse}
            if continuous else {}),
         **({'motion_protocol': motion, 'leftward_knife_impulse_ns': push_impulse}
            if task == 'tofu-sequential' else {}),
         'maximum_proxy_overlap_m': float(trace['maximum_proxy_overlap_m'].max()),
         'det_f_range': [float(trace['minimum_det_f'].min()), float(trace['maximum_det_f'].max())],
-        'evidence_scope': 'synthetic CPU reference task; not measured food or authors implementation',
+        'evidence_scope': (manifest.get('material_parameter_source', 'synthetic task values')
+                           + '; independent CPU implementation, not measured food or author code'),
     }
 
 
