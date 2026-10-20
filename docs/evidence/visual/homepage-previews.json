@@ -1,0 +1,48 @@
+{
+  "source_commit": "ef27b6d1d8959a2cee2034321259a0549cfbd83e",
+  "method": "Full existing MP4 clips converted to looping GIF at 20 fps, at most 960 px wide. Existing video timing and overlays retained; simulated time is shown in the overlays. No new physics runs, state interpolation or outcome rescoring.",
+  "previews": [
+    {
+      "source": "docs/evidence/visual/libero-demo0-baseline.mp4",
+      "source_sha256": "37e84fa770514cd892f3688843add4a34ffa80b655148e67a1f64e2dbd16cb58",
+      "gif": "docs/evidence/visual/libero-demo0-baseline.gif",
+      "gif_sha256": "db188f6d7704470204aabd258144412c9a6c94ee6c61cc4a189831c348c37b49",
+      "size": [
+        640,
+        480
+      ],
+      "frames": 140,
+      "duration_ms": 7000,
+      "bytes": 2989746,
+      "ffmpeg_filter": "fps=20,scale='min(960,iw)':-2:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3"
+    },
+    {
+      "source": "docs/evidence/visual/incline-sliding-0.001.mp4",
+      "source_sha256": "c549f8904f3cdc9cf4bc92c9df762a664311b30b8ef7983843d3402aa62215bb",
+      "gif": "docs/evidence/visual/incline-sliding-0.001.gif",
+      "gif_sha256": "cb78c07b7eafbd44ebf58944014a3c9cebf95e3c3fca4bf450c7b43da78b495a",
+      "size": [
+        960,
+        494
+      ],
+      "frames": 41,
+      "duration_ms": 2050,
+      "bytes": 4335301,
+      "ffmpeg_filter": "fps=20,scale='min(960,iw)':-2:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3"
+    },
+    {
+      "source": "docs/evidence/visual/normal-calibration.mp4",
+      "source_sha256": "a894593f94a57313375c779711f7350b0fe9566faa9fb53c14ce2bc24c2c14f9",
+      "gif": "docs/evidence/visual/normal-calibration.gif",
+      "gif_sha256": "8aa959108aeb50b6de1917d24b04d33319a3864d2c7ee94fff1b40ac74faf2cb",
+      "size": [
+        960,
+        420
+      ],
+      "frames": 17,
+      "duration_ms": 850,
+      "bytes": 287397,
+      "ffmpeg_filter": "fps=20,scale='min(960,iw)':-2:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3"
+    }
+  ]
+}
