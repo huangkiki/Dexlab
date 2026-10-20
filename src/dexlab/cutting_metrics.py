@@ -12,6 +12,57 @@ import numpy as np
 from dexlab.cutting_score import SCORING_ACCEPTANCE, grid_components
 
 
+def recorded_cut_geometry(trace, spacing):
+    """Estimate each axis-aligned straight cut from its recorded blade motion.
+
+    Active cutting samples are authoritative. Uncut negative controls have no
+    active samples, so their intended planes use the densest position cluster
+    for each recorded cut index. A path that sweeps laterally by half a material
+    spacing cannot be represented by this planar replay and is rejected.
+    """
+    required = ('cut_index', 'cutting_active', 'blade_position_m')
+    missing = [name for name in required if name not in trace]
+    if missing:
+        raise ValueError(f'Missing recorded cut geometry fields: {missing}')
+    indices = np.asarray(trace['cut_index'], dtype=int)
+    active = np.asarray(trace['cutting_active'], dtype=bool)
+    positions = np.asarray(trace['blade_position_m'], dtype=float)
+    yaws = np.asarray(trace.get('blade_yaw_rad', np.zeros(len(indices))), dtype=float)
+    if not (len(indices) == len(active) == len(positions) == len(yaws)) or not len(indices):
+        raise ValueError('Recorded cut geometry arrays have inconsistent lengths')
+    cuts = np.unique(indices)
+    if not np.array_equal(cuts, np.arange(cuts[-1] + 1)):
+        raise ValueError('Recorded cut indices must be contiguous from zero')
+
+    planes, axes = [], []
+    for cut in cuts:
+        cut_rows = indices == cut
+        samples = cut_rows & active
+        if not samples.any():
+            samples = cut_rows
+        normals = np.column_stack((np.cos(yaws[samples]), np.sin(yaws[samples])))
+        dominant = np.argmax(abs(normals), axis=1)
+        if not np.all(dominant == dominant[0]) or np.max(abs(normals[:, 1 - dominant[0]])) > 1e-6:
+            raise ValueError('Recorded blade orientation is not one axis-aligned straight plane')
+        axis = int(dominant[0])
+        coordinates = positions[samples, axis]
+        if active[cut_rows].any():
+            plane = float(np.median(coordinates))
+            spread = float(np.ptp(coordinates))
+        else:
+            bins = np.rint(coordinates / (spacing / 8)).astype(np.int64)
+            labels, counts = np.unique(bins, return_counts=True)
+            cluster = labels[counts.argmax()]
+            selected = coordinates[bins == cluster]
+            plane = float(np.median(selected))
+            spread = float(np.ptp(selected))
+        if spread > spacing / 2 + 1e-12:
+            raise ValueError('Recorded blade path cannot be represented by a single straight plane')
+        planes.append(plane)
+        axes.append(axis)
+    return tuple(planes), tuple(axes)
+
+
 def reference_tetrahedra(reference, spacing, selected):
     """Split complete selected lattice cells into six consistently oriented tets."""
     cells = np.rint((reference - reference.min(axis=0)) / spacing).astype(int)
@@ -76,13 +127,12 @@ class ReplayMeasurements:
         self.states, self.trace, self.manifest = states, trace, manifest
         self.reference = states['reference']
         self.task = manifest['task']
-        self.planes = {'tofu': (0.,), 'tofu-sequential': (.015, -.015),
-                       'banana': (-.03, 0., .03), 'tofu-scoring': (0., 0.)}[self.task]
-        self.axes = (0, 1) if self.task == 'tofu-scoring' else (0,) * len(self.planes)
         spacing = manifest['config']['grid_spacing'] / 2
+        self.planes, self.axes = recorded_cut_geometry(trace, spacing)
         self.pairs = [face_pairs(self.reference, plane, spacing, axis)
                       for plane, axis in zip(self.planes, self.axes, strict=True)]
-        self.regions = np.searchsorted(sorted(self.planes), self.reference[:, 0])
+        self.regions = np.searchsorted(sorted(plane for plane, axis in zip(self.planes, self.axes)
+                                              if axis == 0), self.reference[:, 0])
         if self.task == 'tofu-scoring':
             self.base = self.reference[:, 2] < SCORING_ACCEPTANCE['base_height_m']
             self.tetrahedra = reference_tetrahedra(self.reference, spacing, self.base)
@@ -168,7 +218,7 @@ class ReplayMeasurements:
 
     def definitions(self):
         result = {'face_opening_mm': 'Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.',
-                'interior_volume_change_percent': '100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing planned cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().',
+                'interior_volume_change_percent': '100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing recorded cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().',
                 'centroid_x_from_start_mm': 'Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.',
                 'centroid_x_from_probe_mm': 'Same centroids relative to the exact saved motion-start frame; null before it. Continuous push: final-cut end (tofu 3.30 s, banana 5.30 s); legacy knife-push/no-push: 4.00 s; impulse: probe_time_s.',
                 'knife_on_material_x_n': 'Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.',
@@ -178,6 +228,7 @@ class ReplayMeasurements:
                 'knife_material_force_n': 'Norm of recorded material reaction on the knife at the preceding completed substep; excludes guide, drive and board forces.',
                 'reference_volume_m3': self.reference_volume, 'tetrahedra': len(self.tetrahedra),
                 'cut_planes_m_in_execution_order': list(self.planes),
+                'cut_plane_source': 'Median recorded blade position while cutting; uncut controls use the densest recorded position cluster. Axis-aligned paths that sweep laterally by more than half a material spacing are rejected.',
                 'cut_normal_axes': list(self.axes),
                 'comparison_scope': 'Native DexLab measurements; original authors sampling and full configuration are unavailable, so these are not same-condition cross-method scores.'}
         if self.task == 'tofu-scoring':

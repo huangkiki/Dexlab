@@ -98,12 +98,21 @@ class BananaSkin:
     particle-affine display embedding, not the paper's dual-contouring method.
     """
 
-    PLANES = (-.03, 0., .03)
-
-    def __init__(self, reference):
+    def __init__(self, reference, cut_planes):
         self.reference = np.asarray(reference)
+        self.cut_planes = tuple(float(plane) for plane in cut_planes)
+        self.sorted_planes = tuple(sorted(self.cut_planes))
+        if not self.cut_planes or len(set(self.cut_planes)) != len(self.cut_planes):
+            raise ValueError('Banana skin requires distinct recorded cut planes')
+        axial = np.unique(self.reference[:, 0])
+        spacing = np.diff(axial).min()
+        self.axial_bounds = (float(axial[0] - spacing / 2), float(axial[-1] + spacing / 2))
+        if not all(self.axial_bounds[0] < plane < self.axial_bounds[1] for plane in self.cut_planes):
+            raise ValueError('Recorded cut plane lies outside the banana material')
+        self.particle_regions = np.searchsorted(self.sorted_planes, self.reference[:, 0])
+        if np.any(np.bincount(self.particle_regions, minlength=len(self.cut_planes) + 1) == 0):
+            raise ValueError('Recorded cut planes must leave particles in every banana region')
         self.rest, self.faces, self.cap_vertices, self.face_cut, self.anchors = self._rest_mesh()
-        self.particle_regions = np.searchsorted(self.PLANES, self.reference[:, 0])
         self.vertex_regions = self.particle_regions[self.anchors]
         distances, self.neighbours = cKDTree(reference).query(self.rest, k=min(64, len(reference)))
         self.neighbours[:, 0] = self.anchors
@@ -124,7 +133,7 @@ class BananaSkin:
         # assign its nearest reference particle to the neighbouring piece.
         # Bind each authored interval to its dominant observed component;
         # local histories still decide partial openings inside that component.
-        for region in range(len(self.PLANES)+1):
+        for region in range(len(self.cut_planes)+1):
             candidates = np.flatnonzero(self.particle_regions == region)
             labels, counts = np.unique(components[candidates], return_counts=True)
             component = labels[counts.argmax()]
@@ -140,7 +149,7 @@ class BananaSkin:
         anchor_codes = codes[anchors]
         anchor_components = components[anchors]
         compatible = components[neighbours] == anchor_components[:, None]
-        for cut in range(3):
+        for cut in range(len(self.cut_planes)):
             first = (anchor_codes // 3**cut % 3)[:, None]
             second = codes[neighbours] // 3**cut % 3
             compatible &= (first == 0) | (second == 0) | (first == second)
@@ -167,7 +176,7 @@ class BananaSkin:
         vertices, faces, caps, face_cut, anchors = [], [], [], [], []
         sectors = 64
         theta = np.arange(sectors)*2*np.pi/sectors
-        boundaries = (-.06, *self.PLANES, .06)
+        boundaries = (self.axial_bounds[0], *self.sorted_planes, self.axial_bounds[1])
         for low, high in zip(boundaries[:-1], boundaries[1:], strict=True):
             start = len(vertices)
             rings = max(8, round((high-low)/.0015))+1
@@ -187,7 +196,8 @@ class BananaSkin:
             is_cap = [False]*len(piece)
             for ring, sign in [(0, -1), (rings-1, 1)]:
                 x = axial[ring]
-                cut = self.PLANES.index(x) if x in self.PLANES else -1
+                cut = next((index for index, plane in enumerate(self.cut_planes)
+                            if np.isclose(x, plane, atol=1e-12)), -1)
                 center = np.array([x, .035*((x/.06)**2-.5), .012])
                 outer = np.asarray(piece[ring*sectors:(ring+1)*sectors])
                 is_cap[ring*sectors:(ring+1)*sectors] = [True]*sectors

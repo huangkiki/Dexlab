@@ -75,7 +75,7 @@
 Worker 时间包括初始化/JIT、录制与评分，不是纯 solver 耗时。同任务正例与无侧推对照在推动前逐数组完全一致；旧豆腐协议离线重评分保持不变。原始大体积 NPZ 已保存并记录哈希，本 PR 提供紧凑证据与复现命令，未发布新数据 Release。
 <!-- cut-push-results:end -->
 
-半步长只说明时间步长敏感性，不证明收敛。表面是原生状态驱动的重建外观；香蕉固定切面近似的资格边界仍见 [#204](https://github.com/huangkiki/Dexlab/issues/204)。本任务不是六原生引擎切割对比，也不是与原作者完整配置对齐的精度排名（[#200](https://github.com/huangkiki/Dexlab/issues/200)）。
+半步长只说明时间步长敏感性，不证明收敛。表面是原生状态驱动的重建外观；香蕉已由记录刀路生成直线切面，但 Hermite／局部对偶轮廓与材料资格仍由 [#204](https://github.com/huangkiki/Dexlab/issues/204) 跟踪。本任务不是六原生引擎切割对比，也不是与原作者完整配置对齐的精度排名（[#200](https://github.com/huangkiki/Dexlab/issues/200)）。
 
 ## 复现与历史
 

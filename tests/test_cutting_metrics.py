@@ -5,10 +5,58 @@ import unittest
 import numpy as np
 
 from dexlab.cutting_geometry import material_points
-from dexlab.cutting_metrics import face_opening, face_pairs, reference_tetrahedra, signed_volumes
+from dexlab.cutting_metrics import (
+    face_opening,
+    face_pairs,
+    recorded_cut_geometry,
+    reference_tetrahedra,
+    signed_volumes,
+)
 
 
 class ReplayMetricTests(unittest.TestCase):
+    def test_recorded_cut_geometry_uses_the_measured_blade_path(self):
+        trace = {
+            'cut_index': np.array([0, 0, 0, 1, 1, 1]),
+            'cutting_active': np.array([False, True, True, False, True, True]),
+            'blade_position_m': np.array([
+                [.014, 0., .04], [.0148, 0., .03], [.0152, 0., .02],
+                [0., -.011, .04], [0., -.0108, .03], [0., -.0112, .02],
+            ]),
+            'blade_yaw_rad': np.array([0., 0., 0., np.pi / 2, np.pi / 2, np.pi / 2]),
+        }
+
+        planes, axes = recorded_cut_geometry(trace, spacing=.003)
+
+        np.testing.assert_allclose(planes, [.015, -.011])
+        self.assertEqual(axes, (0, 1))
+
+    def test_recorded_cut_geometry_rejects_a_nonplanar_lateral_sweep(self):
+        trace = {
+            'cut_index': np.zeros(2, dtype=int),
+            'cutting_active': np.ones(2, dtype=bool),
+            'blade_position_m': np.array([[-.01, 0., .03], [.01, 0., .02]]),
+            'blade_yaw_rad': np.zeros(2),
+        }
+
+        with self.assertRaisesRegex(ValueError, 'single straight plane'):
+            recorded_cut_geometry(trace, spacing=.003)
+
+    def test_uncut_control_uses_the_densest_recorded_position_cluster(self):
+        trace = {
+            'cut_index': np.zeros(7, dtype=int),
+            'cutting_active': np.zeros(7, dtype=bool),
+            'blade_position_m': np.array([
+                [.0150, 0., .04], [.0150, 0., .04], [.0151, 0., .04],
+                [.0150, 0., .04], [.018, 0., .04], [.021, 0., .04], [.024, 0., .04],
+            ]),
+        }
+
+        planes, axes = recorded_cut_geometry(trace, spacing=.003)
+
+        self.assertAlmostEqual(planes[0], .015)
+        self.assertEqual(axes, (0,))
+
     def test_second_cross_cut_measures_y_opening_and_preserves_first_digit(self):
         reference = material_points((.03, .03, .015), .0075)
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
