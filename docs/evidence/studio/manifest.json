@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "scope": "13 complete rigid-scene recorded-state RTX replays; unchanged source physics and scores",
+  "individual": {
+    "apple-mujoco": {
+      "frames": 280,
+      "native_time_range_s": [
+        0.0,
+        13.950000000000001
+      ],
+      "wall_s": 125.01449353300268,
+      "video_sha256": "e1d09e58284465099155604108d52b6a1cb58d1242956614737a23f1e244e4a6",
+      "provenance_sha256": "842b4bb87edcb3919070964afd4dda84256d6e65c4953f1d5c29f23bb30c9ed6"
+    },
+    "apple-superdex": {
+      "frames": 280,
+      "native_time_range_s": [
+        0.0,
+        13.950000000000001
+      ],
+      "wall_s": 126.16619451995939,
+      "video_sha256": "8aaf6bad5674d2ef56d6b9a0d76188690098db303d162401870c0eaed49244f0",
+      "provenance_sha256": "de562cdfb71288f2e80ca79de2419fdacad4201df1adb34a54d92f625ad0ad1b"
+    },
+    "incline-drake": {
+      "frames": 41,
+      "native_time_range_s": [
+        0.0,
+        2.0
+      ],
+      "wall_s": 18.251377286971547,
+      "video_sha256": "452c742c43696152051c523cac08313cd24d4317f46b60677a8e74ba9e475c7c",
+      "provenance_sha256": "20b1bc42ef4578043b43b10f247803ff4053902fe829ab97eec46de974dd1408"
+    },
+    "incline-genesis": {
+      "frames": 41,
+      "native_time_range_s": [
+        0.0,
+        2.0
+      ],
+      "wall_s": 17.12839923897991,
+      "video_sha256": "fb2c327f54a81006a35aa9765cb71daa657b6ab4c3b7de51eb991d9593c2c140",
+      "provenance_sha256": "a0438ac7c802ed3821aa52479e397338cb25a027bce5e9033421f09a94b446d0"
+    },
+    "incline-mujoco": {
+      "frames": 41,
+      "native_time_range_s": [
+        0.0,
+        1.9999999999998905
+      ],
+      "wall_s": 18.431748744042125,
+      "video_sha256": "9adb9d2368b740eba482e711e5c24e9f9cb28054e5a75d708b2682cf839c38d9",
+      "provenance_sha256": "b7032cd6cb1d4fa441528e55599bcbe499879b59d653f707dcb03eb5d79a5a41"
+    },
+    "incline-newton": {
+      "frames": 41,
+      "native_time_range_s": [
+        0.0,
+        2.0
+      ],
+      "wall_s": 17.117448379984125,
+      "video_sha256": "b0cc9c70514c0cac6030048679cdb8a6c46c5166338286f18fd21d4eddceedd2",
+      "provenance_sha256": "2ee0548945904d2a649b34555c7c593f9ec08cbe013b5090da40abca6d713acd"
+    },
+    "incline-physx": {
+      "frames": 41,
+      "native_time_range_s": [
+        0.0,
+        2.0000000949949026
+      ],
+      "wall_s": 17.246664021979086,
+      "video_sha256": "58526524c6d5b88d12d9489b8df46a691ecc9fe9cbeb923bef46fa43ba725fab",
+      "provenance_sha256": "e06e62d436f5707e5b5f377aaf854a7634524129153589cb487cbb2b71f8db33"
+    },
+    "incline-superdex": {
+      "frames": 41,
+      "native_time_range_s": [
+        0.0,
+        1.9999999999998905
+      ],
+      "wall_s": 17.134792233002372,
+      "video_sha256": "841f702f7c1bf782f14caaf45728c1809a4e05f05a4949c0d6009dc15365d60e",
+      "provenance_sha256": "009c21390f116ab985b2b359c0a220512e09dcffca8c3094584c6c2c9e336008"
+    },
+    "libero": {
+      "frames": 140,
+      "native_time_range_s": [
+        0.25000000000000017,
+        7.199999999999429
+      ],
+      "wall_s": 93.00393519498175,
+      "video_sha256": "0d29f6d325231e3764afa2f2ee27153529359ca336687ea42402018e805990c5",
+      "provenance_sha256": "bb655a9b2740b81135608322ebdb8b488774e46795a6b2234598dc25a3c936f0"
+    },
+    "normal-initial-mujoco": {
+      "frames": 17,
+      "native_time_range_s": [
+        0.0,
+        0.7999999999999673
+      ],
+      "wall_s": 9.82389704399975,
+      "video_sha256": "2dec5eeaa908101b4162bdb6fb1b58ce186ebf03b6dc70cd45fd8b67f84a93c1",
+      "provenance_sha256": "040b9de30416c2e44dfc03022a05fbb8c105b2a5dd21ee85eecae7e06249dd9a"
+    },
+    "normal-validation-mujoco-reference": {
+      "frames": 17,
+      "native_time_range_s": [
+        0.0,
+        0.7999999999999673
+      ],
+      "wall_s": 8.516401870991103,
+      "video_sha256": "f949d09dd788b076ec55992ed5bf05853328a7f47d6fca565daa4b9bfce5dbef",
+      "provenance_sha256": "bf757444841d949fdb94d0c2562d186fcf6e9514bd3499038968eb7a759b2075"
+    },
+    "pinch-0.4": {
+      "frames": 81,
+      "native_time_range_s": [
+        0.0005,
+        4.0
+      ],
+      "wall_s": 35.83404163795058,
+      "video_sha256": "0b5f2fd9526f0eeee713c6c3601e371922b4937ac346d00c533562957ead27bc",
+      "provenance_sha256": "422191ee82eafa66e86aa3e94dad9ecb970ad886235f1b78f06bc781c16c4291"
+    },
+    "pinch-0.8": {
+      "frames": 81,
+      "native_time_range_s": [
+        0.0005,
+        4.0
+      ],
+      "wall_s": 35.854694391950034,
+      "video_sha256": "99979cba062202c59d6852194d074cfa0316d3608a0e68a0b2272028369214c7",
+      "provenance_sha256": "706cdfc89ada66bae73918e64f5a0423a55db098f9a59934796314402e4ae4d4"
+    }
+  },
+  "groups": {
+    "apple": {
+      "panels": [
+        "apple-mujoco",
+        "apple-superdex"
+      ],
+      "fps": 20,
+      "frame_count": 280,
+      "video_sha256": "b10a08159c665e044bb8e583961a8362bf59b8bdbe4a54fdec3da0fd8ad80cb7",
+      "gif_sha256": "31e9092a37eff430a7ae5e96cf08994472fb7bc798cd8af48f7952e9eda8552f"
+    },
+    "pinch": {
+      "panels": [
+        "pinch-0.4",
+        "pinch-0.8"
+      ],
+      "fps": 20,
+      "frame_count": 81,
+      "video_sha256": "ddf0871f72b6918aea68a297ab472db45eec010ed23c4d7f0b35fef2988e6c95",
+      "gif_sha256": "4c4a43dbd03d30947b0ac4be6532fd41fdf3ed2ceea7ec40890c8c4551aeabb0"
+    },
+    "incline": {
+      "panels": [
+        "incline-mujoco",
+        "incline-superdex",
+        "incline-genesis",
+        "incline-newton",
+        "incline-physx",
+        "incline-drake"
+      ],
+      "fps": 20,
+      "frame_count": 41,
+      "video_sha256": "b3e12becc09e63dbf9fa5771cb60bf4133a540cd9e8f503c46542dd81a3315b2",
+      "gif_sha256": "6f4791ee957cbc059e141ca68ebb01c520bde22660dbf53c8ff935da8efd3031"
+    },
+    "normal": {
+      "panels": [
+        "normal-initial-mujoco",
+        "normal-validation-mujoco-reference"
+      ],
+      "fps": 20,
+      "frame_count": 17,
+      "video_sha256": "43b0dc04c8934dee76f8baad7a0a3bc60a6a8f0497b8840cbd350cd17f93a13d",
+      "gif_sha256": "01b4c28489747b55ed8028d829be5617807db9a0ff934e622c41f27f7699616a"
+    },
+    "rss": {
+      "source": "docs/evidence/rss-wiping/rtx/rtx.mp4",
+      "source_sha256": "f87d74384febc6b9eece2e23d95d8d20fde53c30b97ff35ba2eeb33387030cae",
+      "gif_sha256": "467cc5807932aa4759de67a0af8e544bdf93c6a6fb7a477b89d68b31dff06e1d",
+      "native_time_range_s": [
+        10,
+        19.9
+      ],
+      "fps": 10
+    }
+  },
+  "packager_sha256": "a400ad24dc726ee9507e7d5a8dd3655b8870cdc3758d2c6d2b8638d6027440ad"
+}

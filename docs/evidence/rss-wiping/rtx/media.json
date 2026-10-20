@@ -1,0 +1,26 @@
+{
+  "source_video_sha256": "d91f61082be37842eab6d381abced2063b948de50e3a974a8e4ce1ce1c4b277c",
+  "processing": "Raw renderer media retained unchanged. Labeled video adds borders; GIF downsamples that labeled video. No frame selection, retiming or interpolation.",
+  "video_filter": "pad=1920:608:0:36:color=0x162234,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='Tiled collision view':fontsize=24:fontcolor=white:x=16:y=5,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='RTX path tracing - 12 passes':fontsize=24:fontcolor=white:x=976:y=5,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='Recorded simulation 10-20 s | 1x playback | No physics stepping':fontsize=22:fontcolor=white:x=(w-tw)/2:y=582",
+  "frames": 100,
+  "fps": 10,
+  "duration_s": 10,
+  "source_simulation_interval": "[10, 20)",
+  "outputs_sha256": {
+    "comparison-first.png": "01c9bb774adc4aef338fff29b2cdba6192920b410707ca5876ff4d90dbc3b069",
+    "comparison-labeled.mp4": "a74f3d49e04aba18044a8eb4d893b88acc69544cc561cec50e489c8c871b9dd1",
+    "comparison-middle.png": "0ce0b7b68ddc1a25f3d4287b5dc572267280b0eba884bc524ac675eaea4e99b8",
+    "comparison.gif": "4d6b36d9049a0779164b0797a0b8fd8570775d3be7bd0c99791f3e0bfdfa3d9c",
+    "comparison.mp4": "d91f61082be37842eab6d381abced2063b948de50e3a974a8e4ce1ce1c4b277c",
+    "poster.png": "10e136bb74a04e96a4cf45d596ae00f20ce22d8b2a6c56a7e13df4ef30105d14",
+    "render.json": "371046f19ac8f6b0ca133636cced34ad84a3cf8f31a434caf88fa3fd5b00378b",
+    "rtx-first.png": "2b1cc295c43023b73c3248b34235418a37e64ce56b976d25978a3e4120c0254a",
+    "rtx-middle.png": "0db4eaa6e190647f3631ae3f41e2a0e7ad2d3ed2839ab2646a472329d0c42433",
+    "rtx.mp4": "f87d74384febc6b9eece2e23d95d8d20fde53c30b97ff35ba2eeb33387030cae",
+    "tiled-first.png": "d9c13a5364d41fba2fc46334a91dda54ff5ededd57a8c51c639361938d9d77fa",
+    "tiled-middle.png": "a2210a3ba3c6de8624502a2131ba9515adb3ec9134aede835f2336f6c4bd9a84",
+    "tiled.mp4": "8e778036f2dec3eaafeccd940e337f4834098848c08cde42073358f33034254c"
+  },
+  "source_video": "comparison.mp4",
+  "labeled_video": "comparison-labeled.mp4"
+}

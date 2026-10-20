@@ -33,6 +33,20 @@
 
 ![六次完整轨迹：清洁率、材料区域相对位移与实测接触力](../../evidence/rss-wiping/comparison.png)
 
+## 同一轨迹的 RTX 外观回放
+
+已将原版第 1 次记录的 **10–20 s 连续片段**重渲染为 100 帧、10 fps、960×544 的 RTX 视频。下图左侧为 tiled 碰撞视图，右侧为 OVRTX 路径追踪，使用相同机位、相同时间戳与原始状态。金属反射、桌面纹理、机器人外壳光泽和柔和阴影来自固定版本 RSS 的材质、房间和灯光。
+
+![同一状态与机位：左 tiled，右 RTX；10–20 s，原速回放](../../evidence/rss-wiping/rtx/comparison.gif)
+
+[完整对照视频](../../evidence/rss-wiping/rtx/comparison-labeled.mp4) · [逐帧映射、输入哈希与状态核验](../../evidence/rss-wiping/rtx/render.json) · [媒体处理记录](../../evidence/rss-wiping/rtx/media.json)
+
+此次回放执行 **0 个物理步**；刚体位姿、关节、海绵材料点和墨迹加载的最大绝对误差均为 0，100 对画面输出后状态与动态颜色保持不变。原始输入文件哈希也保持不变。恢复了录制时保存的地面显示开关，完整编译模型随后逐数组及哈希匹配；碰撞标志不允许改变。回放不插值、不平滑材料点，也不产生新的任务成功率。
+
+在本次 RTX 4090、4 核等效配额的受限作业中，12 pass 的 RTX 渲染调用平均耗时 **81.75 ms/帧**，tiled 为 **3.61 ms/帧**；场景构建与预热合计 **9.80 s**。这些是该作业的渲染成本，不包含视频编码，也不构成独占硬件或端到端仿真吞吐基准。初次预检因地面显示标志未恢复而被完整模型检查拒绝；修正后两帧预检和连续片段均通过，失败记录保留。
+
+复现需要完整 `states/*.npz` 原始记录及固定上游 RTX 环境；公开的摘要／CSV 无法代替软体顶点。见 [重渲染命令](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹) 与 [渲染任务 #229](https://github.com/huangkiki/Dexlab/issues/229)。
+
 ## 固定了哪些条件
 
 RSS 提交 [`23417de`](https://github.com/robosimstudio/robosimstudio/tree/23417de77edf59d614531a833334ed4e2206fc2c) 提供双 YAM 机械臂、海绵、杆、材料与脚本控制器。锁定组合为 Newton 1.6.0、Warp 1.18.0、MuJoCo/MJWarp 3.12.0 和 SuperDex 1.0.0；原生接口读回确认 SuperDex 使用单精度。控制频率为 60 Hz，每个控制周期有 16 个刚体子步、2 个 SuperDex 步。原版海绵参数为杨氏模量 80 kPa、泊松比 0.3、密度 110 kg/m³、摩擦系数 0.9、摩擦正则化速度尺度 0.1 mm/s。这些是示例设定，不是真实海绵的测量参数。
