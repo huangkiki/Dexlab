@@ -37,6 +37,8 @@
 
 切块的运动来自刀面接触，没有直接给材料速度增量。画面显示记录中的接触力与各块位移，表面与粒子视图可在报告中对照。这里使用合成材料；尚未完成真实食材标定或论文测力实验。
 
+豆腐与香蕉现共用论文启发的 reference linked volume：原始边界和记录刀面的 Hermite 点／法向量保存在 primal links 上，原生切割历史决定 link 何时断开，单元内区域由 QEF local dual vertices 重建；原生机械连通分量分离后，每个分量重建为闭合体，表面代表点以固定权重跟随兼容的 TLMPM 运动场。粒子视图和逐帧数值继续保留，视觉裂缝不替代机械验收。当前是 CPU 离线重建，只支持记录中的 x/y 直切面；任意曲面或倾斜刀路、论文的在线局部 GPU 更新和真实食材几何仍未实现。[表面实现与限制](docs/site/zh/cutting-surface.md)
+
 [完整结果与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html)
 
 <a id="banana-force"></a>

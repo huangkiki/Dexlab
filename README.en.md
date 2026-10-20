@@ -37,6 +37,8 @@ Cut a tofu-like block into three pieces and a banana-like body into four, then l
 
 Piece motion comes from knife contact, with no direct velocity increment applied to the material. The overlays show recorded contact forces and piece displacements; the report pairs surface and particle views. These are synthetic materials, without real-food calibration or the paper’s force-measurement experiment.
 
+Tofu and banana now share a paper-inspired reference linked volume: primal links store Hermite points and normals for the original boundary and recorded blade surfaces, native cut histories decide when links disconnect, and per-cell regions use QEF local dual vertices. Once native mechanical components separate, each is reconstructed as a closed volume; surface representatives follow a compatible TLMPM motion field through fixed weights. Particle views and frame measurements remain public, so a visible gap never substitutes for mechanical acceptance. The current CPU offline reconstruction supports recorded x/y straight planes only; arbitrary curved or tilted paths, the paper's online local GPU update and real-food geometry remain unimplemented. [Surface implementation and limits](docs/site/en/cutting-surface.md)
+
 [Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/cut-push.html)
 
 <a id="banana-force"></a>

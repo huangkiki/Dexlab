@@ -1,7 +1,7 @@
 {
   "definitions": {
     "face_opening_mm": "Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.",
-    "interior_volume_change_percent": "100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing planned cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().",
+    "interior_volume_change_percent": "100 * (current signed tetrahedral volume / reference volume - 1); six tetrahedra per complete interior lattice cell, excluding cells crossing recorded cut planes. Middle third for two-cut tofu, all sampled piece interiors otherwise. Inverted tets are counted, never hidden with abs().",
     "centroid_x_from_start_mm": "Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.",
     "centroid_x_from_probe_mm": "Same centroids relative to the exact saved motion-start frame; null before it. Continuous push: final-cut end (tofu 3.30 s, banana 5.30 s); legacy knife-push/no-push: 4.00 s; impulse: probe_time_s.",
     "knife_on_material_x_n": "Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.",
@@ -12,9 +12,10 @@
     "reference_volume_m3": 2.0796875000000023e-05,
     "tetrahedra": 7986,
     "cut_planes_m_in_execution_order": [
-      0.015,
-      -0.015
+      0.015033939109272282,
+      -0.015004397360391828
     ],
+    "cut_plane_source": "Median recorded blade position while cutting; uncut controls use the densest recorded position cluster. Axis-aligned paths that sweep laterally by more than half a material spacing are rejected.",
     "cut_normal_axes": [
       0,
       0
@@ -400,7 +401,7 @@
       "time_s": 0.6,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.053130706088657206,
+        0.05323421883631664,
         null
       ],
       "paired_faces": [
@@ -431,7 +432,7 @@
       "time_s": 0.65,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.274012925256181,
+        0.2741071125314928,
         null
       ],
       "paired_faces": [
@@ -462,7 +463,7 @@
       "time_s": 0.7000000000000001,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5554762465530455,
+        0.5555485828647287,
         null
       ],
       "paired_faces": [
@@ -493,7 +494,7 @@
       "time_s": 0.75,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5640339573205565,
+        0.564143612879878,
         null
       ],
       "paired_faces": [
@@ -524,7 +525,7 @@
       "time_s": 0.8,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5504595693586718,
+        0.550566351316347,
         null
       ],
       "paired_faces": [
@@ -555,7 +556,7 @@
       "time_s": 0.85,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.6232196317669201,
+        0.6233073971333849,
         null
       ],
       "paired_faces": [
@@ -586,7 +587,7 @@
       "time_s": 0.9,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5314489905530485,
+        0.531524242191172,
         null
       ],
       "paired_faces": [
@@ -617,7 +618,7 @@
       "time_s": 0.9500000000000001,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5795067202832026,
+        0.5795851986847552,
         null
       ],
       "paired_faces": [
@@ -648,7 +649,7 @@
       "time_s": 1.0,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5716893014659143,
+        0.5717668145924436,
         null
       ],
       "paired_faces": [
@@ -679,7 +680,7 @@
       "time_s": 1.05,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5799412206866726,
+        0.5800113658185784,
         null
       ],
       "paired_faces": [
@@ -710,7 +711,7 @@
       "time_s": 1.1,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5639363357352529,
+        0.5639951150645605,
         null
       ],
       "paired_faces": [
@@ -741,7 +742,7 @@
       "time_s": 1.1500000000000001,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5646404575689941,
+        0.5646986111632174,
         null
       ],
       "paired_faces": [
@@ -772,7 +773,7 @@
       "time_s": 1.2,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.564594796349748,
+        0.5646527039139082,
         null
       ],
       "paired_faces": [
@@ -803,7 +804,7 @@
       "time_s": 1.25,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5644421104510152,
+        0.5644997002498041,
         null
       ],
       "paired_faces": [
@@ -834,7 +835,7 @@
       "time_s": 1.3,
       "phase": "Cut 1",
       "face_opening_mm": [
-        0.5644480439227161,
+        0.5645059188838485,
         null
       ],
       "paired_faces": [
@@ -865,7 +866,7 @@
       "time_s": 1.35,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.5644817733422488,
+        0.5645395334750205,
         null
       ],
       "paired_faces": [
@@ -896,7 +897,7 @@
       "time_s": 1.4000000000000001,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.5829262367750532,
+        0.5829919000748093,
         null
       ],
       "paired_faces": [
@@ -927,7 +928,7 @@
       "time_s": 1.45,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.5310952210989252,
+        0.5311583881313403,
         null
       ],
       "paired_faces": [
@@ -958,7 +959,7 @@
       "time_s": 1.5,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.4549670553477293,
+        0.45503061431464226,
         null
       ],
       "paired_faces": [
@@ -989,7 +990,7 @@
       "time_s": 1.55,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.366845614364252,
+        0.36690820612078556,
         null
       ],
       "paired_faces": [
@@ -1020,7 +1021,7 @@
       "time_s": 1.6,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.28854954425914325,
+        0.2886184977180576,
         null
       ],
       "paired_faces": [
@@ -1051,7 +1052,7 @@
       "time_s": 1.6500000000000001,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.24119786681917282,
+        0.2412585830053326,
         null
       ],
       "paired_faces": [
@@ -1082,7 +1083,7 @@
       "time_s": 1.7,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.21560291086126104,
+        0.2156541573021467,
         null
       ],
       "paired_faces": [
@@ -1113,7 +1114,7 @@
       "time_s": 1.75,
       "phase": "Withdrawing",
       "face_opening_mm": [
-        0.1295288384264113,
+        0.1295626174121946,
         null
       ],
       "paired_faces": [
@@ -1144,7 +1145,7 @@
       "time_s": 1.8,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12487028848132854,
+        0.12487210250774534,
         null
       ],
       "paired_faces": [
@@ -1175,7 +1176,7 @@
       "time_s": 1.85,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12125063325245469,
+        0.12125398145034372,
         null
       ],
       "paired_faces": [
@@ -1206,7 +1207,7 @@
       "time_s": 1.9000000000000001,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12197204756953622,
+        0.1219756743974176,
         null
       ],
       "paired_faces": [
@@ -1237,7 +1238,7 @@
       "time_s": 1.95,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12195543362117266,
+        0.1219589650814983,
         null
       ],
       "paired_faces": [
@@ -1268,7 +1269,7 @@
       "time_s": 2.0,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12197162951810653,
+        0.12197522413023651,
         null
       ],
       "paired_faces": [
@@ -1299,7 +1300,7 @@
       "time_s": 2.05,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.1218596575259965,
+        0.12186321131066126,
         null
       ],
       "paired_faces": [
@@ -1330,7 +1331,7 @@
       "time_s": 2.1,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12196378694280471,
+        0.1219673656034618,
         null
       ],
       "paired_faces": [
@@ -1361,7 +1362,7 @@
       "time_s": 2.15,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12190444458302513,
+        0.12190800675057487,
         null
       ],
       "paired_faces": [
@@ -1392,7 +1393,7 @@
       "time_s": 2.2,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12193425330124912,
+        0.12193782625338996,
         null
       ],
       "paired_faces": [
@@ -1423,7 +1424,7 @@
       "time_s": 2.25,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12191595944146308,
+        0.1219195259748806,
         null
       ],
       "paired_faces": [
@@ -1454,7 +1455,7 @@
       "time_s": 2.3000000000000003,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12192903437587739,
+        0.12193260455681687,
         null
       ],
       "paired_faces": [
@@ -1485,7 +1486,7 @@
       "time_s": 2.35,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12192007424671181,
+        0.12192364235551359,
         null
       ],
       "paired_faces": [
@@ -1516,7 +1517,7 @@
       "time_s": 2.4,
       "phase": "Knife clear",
       "face_opening_mm": [
-        0.12192564792972209,
+        0.1219292172310678,
         null
       ],
       "paired_faces": [
@@ -1547,7 +1548,7 @@
       "time_s": 2.45,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.12192230519610905,
+        0.12192587382458972,
         null
       ],
       "paired_faces": [
@@ -1578,7 +1579,7 @@
       "time_s": 2.5,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.1219243304613365,
+        0.12192789945011999,
         null
       ],
       "paired_faces": [
@@ -1609,7 +1610,7 @@
       "time_s": 2.5500000000000003,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.12192307329444836,
+        0.12192664210196634,
         null
       ],
       "paired_faces": [
@@ -1640,8 +1641,8 @@
       "time_s": 2.6,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.11966861956891897,
-        0.05342822381480802
+        0.11967515285761664,
+        0.05343952561107033
       ],
       "paired_faces": [
         144,
@@ -1671,8 +1672,8 @@
       "time_s": 2.65,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.12591965374615535,
-        0.2717413266790219
+        0.12592540612252134,
+        0.2717515156252098
       ],
       "paired_faces": [
         144,
@@ -1702,8 +1703,8 @@
       "time_s": 2.7,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.1410950522699241,
-        0.5585154536882916
+        0.14109607872143795,
+        0.5585227676870337
       ],
       "paired_faces": [
         144,
@@ -1733,8 +1734,8 @@
       "time_s": 2.75,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.14764487193202716,
-        0.5617227801862855
+        0.14766178196387342,
+        0.5617327890268462
       ],
       "paired_faces": [
         144,
@@ -1764,8 +1765,8 @@
       "time_s": 2.8000000000000003,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.15759432954513494,
-        0.5519575617075893
+        0.1576139642595224,
+        0.5519660488805547
       ],
       "paired_faces": [
         144,
@@ -1795,8 +1796,8 @@
       "time_s": 2.85,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.14296386997678168,
-        0.623420477087674
+        0.1430339336196774,
+        0.6234280576093623
       ],
       "paired_faces": [
         144,
@@ -1826,8 +1827,8 @@
       "time_s": 2.9,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.13904168121920416,
-        0.5440775362442514
+        0.1391466919712073,
+        0.5440839831634612
       ],
       "paired_faces": [
         144,
@@ -1857,8 +1858,8 @@
       "time_s": 2.95,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.09154698412629382,
-        0.6227104500780207
+        0.09168535180196549,
+        0.6227167782374562
       ],
       "paired_faces": [
         144,
@@ -1888,8 +1889,8 @@
       "time_s": 3.0,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.06558121095681414,
-        0.647361357592297
+        0.06575923755287039,
+        0.6473664663579233
       ],
       "paired_faces": [
         144,
@@ -1919,8 +1920,8 @@
       "time_s": 3.0500000000000003,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.033832949102362064,
-        0.6773247665569521
+        0.034043034857059076,
+        0.6773299481622743
       ],
       "paired_faces": [
         144,
@@ -1950,8 +1951,8 @@
       "time_s": 3.1,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.04493598430923379,
-        0.6563078546202362
+        0.045165411764304456,
+        0.6563144656048626
       ],
       "paired_faces": [
         144,
@@ -1981,8 +1982,8 @@
       "time_s": 3.15,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.04499346394724962,
-        0.6574713516512597
+        0.045223136108321633,
+        0.6574778243007054
       ],
       "paired_faces": [
         144,
@@ -2012,8 +2013,8 @@
       "time_s": 3.2,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.044618942344422756,
-        0.6563618366430755
+        0.04484855690036996,
+        0.6563684713343921
       ],
       "paired_faces": [
         144,
@@ -2043,8 +2044,8 @@
       "time_s": 3.25,
       "phase": "Cut 2",
       "face_opening_mm": [
-        0.044900630305329585,
-        0.6574341699016766
+        0.04513022127991875,
+        0.6574407070349885
       ],
       "paired_faces": [
         144,
@@ -2074,8 +2075,8 @@
       "time_s": 3.3000000000000003,
       "phase": "Clear board / blade stays in cut",
       "face_opening_mm": [
-        0.04467341873463306,
-        0.6567219339792518
+        0.0449030094205262,
+        0.6567285188547735
       ],
       "paired_faces": [
         144,
@@ -2109,8 +2110,8 @@
       "time_s": 3.35,
       "phase": "Clear board / blade stays in cut",
       "face_opening_mm": [
-        0.0448162233089047,
-        0.6571360874104559
+        0.04504581321918359,
+        0.6571426508168637
       ],
       "paired_faces": [
         144,
@@ -2144,8 +2145,8 @@
       "time_s": 3.4,
       "phase": "Clear board / blade stays in cut",
       "face_opening_mm": [
-        0.04473890036398989,
-        0.6569279171551049
+        0.04496848939254511,
+        0.6569344878813426
       ],
       "paired_faces": [
         144,
@@ -2179,8 +2180,8 @@
       "time_s": 3.45,
       "phase": "Clear board / blade stays in cut",
       "face_opening_mm": [
-        0.044667584561324664,
-        0.6590493629727897
+        0.04489747575640835,
+        0.6590557983241851
       ],
       "paired_faces": [
         144,
@@ -2214,8 +2215,8 @@
       "time_s": 3.5,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.04195798412798281,
-        0.6868147534281773
+        0.0421855894836501,
+        0.686821419727796
       ],
       "paired_faces": [
         144,
@@ -2249,8 +2250,8 @@
       "time_s": 3.5500000000000003,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.048861634229780085,
-        0.6833301389401446
+        0.04908377331870435,
+        0.6833215612108435
       ],
       "paired_faces": [
         144,
@@ -2284,8 +2285,8 @@
       "time_s": 3.6,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07163906515758016,
-        0.7846427157904335
+        0.07185151412603444,
+        0.7846100679201202
       ],
       "paired_faces": [
         144,
@@ -2319,8 +2320,8 @@
       "time_s": 3.65,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07246685293658989,
-        1.164051239210088
+        0.0726815162803219,
+        1.1640169680581345
       ],
       "paired_faces": [
         144,
@@ -2354,8 +2355,8 @@
       "time_s": 3.7,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07383483718798309,
-        1.6312668485080215
+        0.07404892785537244,
+        1.6312336761173458
       ],
       "paired_faces": [
         144,
@@ -2389,8 +2390,8 @@
       "time_s": 3.75,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.0739485555691836,
-        2.121474975403199
+        0.07416319697317025,
+        2.121441636199968
       ],
       "paired_faces": [
         144,
@@ -2424,8 +2425,8 @@
       "time_s": 3.8000000000000003,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07361095216122135,
-        2.6260543336796607
+        0.0738252645901878,
+        2.6260214302095766
       ],
       "paired_faces": [
         144,
@@ -2459,8 +2460,8 @@
       "time_s": 3.85,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07378681065600166,
-        3.1214675492891697
+        0.07400132245918914,
+        3.121434335641414
       ],
       "paired_faces": [
         144,
@@ -2494,8 +2495,8 @@
       "time_s": 3.9,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07372828217238346,
-        3.624744026860169
+        0.07394269890696721,
+        3.6247108833261255
       ],
       "paired_faces": [
         144,
@@ -2529,8 +2530,8 @@
       "time_s": 3.95,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375633460858975,
-        4.122337665838502
+        0.073970795840082,
+        4.122304446792758
       ],
       "paired_faces": [
         144,
@@ -2564,8 +2565,8 @@
       "time_s": 4.0,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07374474480436777,
-        4.623978631957483
+        0.07395919074843385,
+        4.6239454895581265
       ],
       "paired_faces": [
         144,
@@ -2599,8 +2600,8 @@
       "time_s": 4.05,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375172610091715,
-        5.122909447648705
+        0.07396617690831397,
+        5.122876268181068
       ],
       "paired_faces": [
         144,
@@ -2634,8 +2635,8 @@
       "time_s": 4.1,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07374878847190192,
-        5.623640830721818
+        0.07396323938942811,
+        5.623607679278535
       ],
       "paired_faces": [
         144,
@@ -2669,8 +2670,8 @@
       "time_s": 4.15,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375073570353886,
-        6.123258083110702
+        0.07396518477998096,
+        6.123224917026366
       ],
       "paired_faces": [
         144,
@@ -2704,8 +2705,8 @@
       "time_s": 4.2,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07374990212260303,
-        6.623497915623859
+        0.07396435370334511,
+        6.623464761668821
       ],
       "paired_faces": [
         144,
@@ -2739,8 +2740,8 @@
       "time_s": 4.25,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375044285294041,
-        7.123353581784678
+        0.07396489218455884,
+        7.123320429022243
       ],
       "paired_faces": [
         144,
@@ -2774,8 +2775,8 @@
       "time_s": 4.3,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375034869481122,
-        7.623432811691826
+        0.07396479995529194,
+        7.6233996601486576
       ],
       "paired_faces": [
         144,
@@ -2809,8 +2810,8 @@
       "time_s": 4.3500000000000005,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375041174259782,
-        8.123364817006076
+        0.07396486157858116,
+        8.123331650970457
       ],
       "paired_faces": [
         144,
@@ -2844,8 +2845,8 @@
       "time_s": 4.4,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.0737504877112911,
-        8.623366447138022
+        0.07396493861311242,
+        8.62333327713178
       ],
       "paired_faces": [
         144,
@@ -2879,8 +2880,8 @@
       "time_s": 4.45,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.0737504502013659,
-        9.123363117191378
+        0.07396490038953912,
+        9.123329954123925
       ],
       "paired_faces": [
         144,
@@ -2914,8 +2915,8 @@
       "time_s": 4.5,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375052819174942,
-        9.623361663954555
+        0.07396497887437316,
+        9.62332851191449
       ],
       "paired_faces": [
         144,
@@ -2949,8 +2950,8 @@
       "time_s": 4.55,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.07375049011172857,
-        10.123393221174254
+        0.07396494048818084,
+        10.123360071790753
       ],
       "paired_faces": [
         144,
@@ -2984,8 +2985,8 @@
       "time_s": 4.6000000000000005,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.0737505391411376,
-        10.62341062096199
+        0.07396498971749232,
+        10.623377466671784
       ],
       "paired_faces": [
         144,
@@ -3019,8 +3020,8 @@
       "time_s": 4.65,
       "phase": "Knife-face push",
       "face_opening_mm": [
-        0.073750517323869,
-        11.123424899926675
+        0.07396496778669542,
+        11.123391759130689
       ],
       "paired_faces": [
         144,
@@ -3054,8 +3055,8 @@
       "time_s": 4.7,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054275059098,
-        11.623395123659822
+        0.07396499328333077,
+        11.623361969531347
       ],
       "paired_faces": [
         144,
@@ -3089,8 +3090,8 @@
       "time_s": 4.75,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375053307952115,
-        12.006812436866372
+        0.07396498357742888,
+        12.00677889545656
       ],
       "paired_faces": [
         144,
@@ -3124,8 +3125,8 @@
       "time_s": 4.8,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054481880312,
-        12.088442198193018
+        0.0739649953365643,
+        12.08840689597762
       ],
       "paired_faces": [
         144,
@@ -3159,8 +3160,8 @@
       "time_s": 4.8500000000000005,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.0737505414604491,
-        12.08762294865124
+        0.07396499197097041,
+        12.08758937535129
       ],
       "paired_faces": [
         144,
@@ -3194,8 +3195,8 @@
       "time_s": 4.9,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054644411363,
-        12.04178578002345
+        0.0739649969580477,
+        12.041756618181351
       ],
       "paired_faces": [
         144,
@@ -3229,8 +3230,8 @@
       "time_s": 4.95,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054571873363,
-        12.028597810843612
+        0.0739649962331511,
+        12.028570933921067
       ],
       "paired_faces": [
         144,
@@ -3264,8 +3265,8 @@
       "time_s": 5.0,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054770945053,
-        11.963335046764714
+        0.0739649982231369,
+        11.963310608160352
       ],
       "paired_faces": [
         144,
@@ -3299,8 +3300,8 @@
       "time_s": 5.05,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054784438463,
-        11.938998042958563
+        0.07396499835973842,
+        11.938975504541887
       ],
       "paired_faces": [
         144,
@@ -3334,8 +3335,8 @@
       "time_s": 5.1000000000000005,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054861354928,
-        11.871991678135192
+        0.0739649991277753,
+        11.87197135383551
       ],
       "paired_faces": [
         144,
@@ -3369,8 +3370,8 @@
       "time_s": 5.15,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054890927428,
-        11.796887534228363
+        0.07396499942473124,
+        11.796872405290834
       ],
       "paired_faces": [
         144,
@@ -3404,8 +3405,8 @@
       "time_s": 5.2,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054921127722,
-        11.732525962607413
+        0.07396499972600164,
+        11.732513889999309
       ],
       "paired_faces": [
         144,
@@ -3439,8 +3440,8 @@
       "time_s": 5.25,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054945481194,
-        11.556522769860676
+        0.07396499997021397,
+        11.55652618641636
       ],
       "paired_faces": [
         144,
@@ -3474,8 +3475,8 @@
       "time_s": 5.3,
       "phase": "Withdraw",
       "face_opening_mm": [
-        0.07375054958433562,
-        11.384698364278707
+        0.07396500009937303,
+        11.384707552431568
       ],
       "paired_faces": [
         144,
@@ -3509,8 +3510,8 @@
       "time_s": 5.3500000000000005,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375054974345699,
-        11.551450765542267
+        0.07396500025881333,
+        11.551454923591264
       ],
       "paired_faces": [
         144,
@@ -3544,8 +3545,8 @@
       "time_s": 5.4,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375054980782371,
-        11.454892941052169
+        0.07396500032302815,
+        11.454899582027624
       ],
       "paired_faces": [
         144,
@@ -3579,8 +3580,8 @@
       "time_s": 5.45,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375054990130842,
-        11.481797154137416
+        0.07396500041664646,
+        11.481803388040426
       ],
       "paired_faces": [
         144,
@@ -3614,8 +3615,8 @@
       "time_s": 5.5,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375054993804821,
-        11.4954110180064
+        0.07396500045333401,
+        11.49541660528134
       ],
       "paired_faces": [
         144,
@@ -3649,8 +3650,8 @@
       "time_s": 5.55,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375054999000993,
-        11.470505037350621
+        0.07396500050534573,
+        11.470511436323601
       ],
       "paired_faces": [
         144,
@@ -3684,8 +3685,8 @@
       "time_s": 5.6000000000000005,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055001265349,
-        11.489765375177011
+        0.07396500052797646,
+        11.489771230097112
       ],
       "paired_faces": [
         144,
@@ -3719,8 +3720,8 @@
       "time_s": 5.65,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055004076492,
-        11.480912099293175
+        0.07396500055610454,
+        11.480918159186578
       ],
       "paired_faces": [
         144,
@@ -3754,8 +3755,8 @@
       "time_s": 5.7,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055005497579,
-        11.481703699915988
+        0.07396500057031523,
+        11.481709782860756
       ],
       "paired_faces": [
         144,
@@ -3789,8 +3790,8 @@
       "time_s": 5.75,
       "phase": "Settle",
       "face_opening_mm": [
-        0.0737505500700996,
-        11.484625707801706
+        0.07396500058544402,
+        11.484631681595712
       ],
       "paired_faces": [
         144,
@@ -3824,8 +3825,8 @@
       "time_s": 5.8,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055007895988,
-        11.481364718993392
+        0.07396500059430662,
+        11.481370792493902
       ],
       "paired_faces": [
         144,
@@ -3859,8 +3860,8 @@
       "time_s": 5.8500000000000005,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055008711559,
-        11.483407154947233
+        0.07396500060246364,
+        11.48341317432233
       ],
       "paired_faces": [
         144,
@@ -3894,8 +3895,8 @@
       "time_s": 5.9,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055009246041,
-        11.482728346608573
+        0.07396500060781046,
+        11.482734378407109
       ],
       "paired_faces": [
         144,
@@ -3929,8 +3930,8 @@
       "time_s": 5.95,
       "phase": "Settle",
       "face_opening_mm": [
-        0.0737505500969105,
-        11.482551649003044
+        0.07396500061226068,
+        11.482557691065383
       ],
       "paired_faces": [
         144,
@@ -3964,8 +3965,8 @@
       "time_s": 6.0,
       "phase": "Settle",
       "face_opening_mm": [
-        0.07375055010011883,
-        11.483013618271253
+        0.07396500061547034,
+        11.483019644832522
       ],
       "paired_faces": [
         144,

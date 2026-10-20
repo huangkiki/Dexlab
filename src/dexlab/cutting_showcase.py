@@ -12,7 +12,7 @@ import vtk
 from vtk.util.numpy_support import numpy_to_vtk, numpy_to_vtkIdTypeArray, vtk_to_numpy
 
 from dexlab.cutting_score import grid_components, score_run
-from dexlab.cutting_surface import BananaSkin, MaterialSurface
+from dexlab.cutting_surface import LinkedVolumeSurface
 from dexlab.cutting_metrics import ReplayMeasurements
 
 
@@ -254,7 +254,9 @@ class CuttingScene:
             surface.GetPointData().SetTCoords(numpy_to_vtk(np.ascontiguousarray(uv), deep=True))
         normals = vtk.vtkPolyDataNormals()
         normals.SetInputData(surface)
-        normals.SetFeatureAngle(45)
+        # Average the small dual-contouring facets while retaining the near
+        # right-angle edge between an outer skin and a fresh cut cap.
+        normals.SetFeatureAngle(80)
         normals.SplittingOn()
         normals.ConsistencyOn()
         normals.AutoOrientNormalsOn()
@@ -483,10 +485,10 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
     if manifest.get('motion_protocol') in ('cut-push', 'cut-no-push'):
         title = ('Banana / three cuts + ' if task == 'banana' else 'Tofu / two cuts + ') + manifest['motion_protocol']
     measurements = ReplayMeasurements(states, trace, manifest)
-    if task == 'banana' and any(axis != 0 for axis in measurements.axes):
-        raise ValueError('Banana skin replay currently supports x-normal straight cuts')
-    surface = (BananaSkin(states['reference'], measurements.planes) if task == 'banana' else
-               MaterialSurface(states['reference'], config['grid_spacing']/2))
+    surface = LinkedVolumeSurface(
+        states['reference'], measurements.planes, measurements.axes,
+        config['size'], config['grid_spacing'], config['grid_spacing']/4,
+        config.get('shape', 'block'))
     continuous = manifest.get('motion_protocol') in ('cut-push', 'cut-no-push')
     scene = CuttingScene(config, task=('tofu' if continuous and task == 'tofu-sequential' else task),
                          height=600 if task == 'tofu-sequential' and not continuous else 520)
@@ -505,13 +507,9 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
             time = float(states['time'][i])
             measured = measurements.frame(i)
             measured_frames.append(measured)
-            if task == 'banana':
-                components, _ = grid_components(states['nodes'], states['weights'], states['sides'][i])
-                vertices, faces, rest, cut_vertices = surface.mesh(
-                    states['position'][i], states['deformation'][i], states['sides'][i], components)
-            else:
-                vertices, faces, rest, cut_vertices = surface.mesh(states['position'][i], states['sides'][i],
-                    states['deformation'][i] if 'deformation' in states else None)
+            components, _ = grid_components(states['nodes'], states['weights'], states['sides'][i])
+            vertices, faces, rest, cut_vertices = surface.mesh(
+                states['position'][i], states['deformation'][i], states['sides'][i], components)
             trace_index = max(0, round(time/config['dt'])-1)
             maximum_smoothing_mm = max(maximum_smoothing_mm, scene.update(
                 vertices, faces, rest, cut_vertices, states['position'][i], states['sides'][i],
@@ -554,7 +552,7 @@ def render(directory, output, *, stride=5, fps=20, preview=False):
         'playback_duration_s': len(selected)/fps, 'vtk_version': vtk.vtkVersion.GetVTKVersion(),
         'gif_playback': {'duration_per_frame_ms': 120, 'native_state_frames': selected,
                          'description': 'Uniformly slowed recorded frames; no interpolated motion or invented physical time.'},
-        'surface': 'Tofu: exposed material-cell faces embedded in saved positions/F, with local reconstruction for older records. Banana: a dense authored fruit skin fitted to the seed profile, with longitudinal ridges, fibres and end/core colours. Straight reference seams are generated at the median recorded blade position for each active cut; the numerical replay uses the same recorded planes. Local cap triangles appear only where native side histories conflict. Compatible/unassigned seam vertices are welded only within the same native mechanical component, preserving the uncut bridge without reconnecting remote compatible histories. Each authored reference interval is bound to its dominant observed native component; misplaced nearest anchors are reselected within that interval and component. Paths with lateral sweep beyond half a material spacing are rejected instead of rendered as one plane. This planar approximation does not recover the exact deformed cut geometry. Each vertex blends up to 64 local particle affine maps compatible with its native anchor history and mechanical component; welded vertices share the mean of both compatible embeddings. This is an approximation, not linked-volume dual contouring or arbitrary cut reconstruction. No geometric smoothing; split normals preserve cut rims. No prescribed piece motion. Particles remain the physical geometry reference. This is not a scan or calibrated food model.',
+        'surface': 'Tofu and banana use a linked reference volume that stores point/normal Hermite samples on primal links for the authored original boundary and the recorded axis-aligned blade paths. Native opposing side digits disconnect candidate links only after the blade sweep labels both sides; unassigned links retain a partial-cut bridge. Connected material uses per-cell link components and QEF dual vertices. Once the saved mechanical state contains disjoint components, each observed component is reconstructed as a closed local dual-contouring volume clipped by its recorded cut half-spaces; this prevents a triangle from sharing two incompatible motion fields. Representatives inherit native cut codes/components and move through fixed trilinear weights in a compatible nodal field reconstructed by locally averaging saved particle x/F affine predictions; common affine motion remains exact. The surface grid spacing is one quarter of the mechanical grid spacing. Paths with lateral sweep beyond half a material spacing remain rejected by recorded-cut extraction. Fully intersecting through-cut motion is analytically tested but not qualified as a public recorded task; the public crossed task retains a connected lower bridge. This is a paper-inspired independent implementation for the current axis-aligned guided blade family, not an arbitrary curved-cut or author-code reproduction. Display normals average facets below 80 degrees, but no vertex smoothing or prescribed piece motion is applied. Particles remain the physical geometry reference. The fruit is authored, not scanned or food-calibrated.',
         'maximum_display_smoothing_displacement_mm': maximum_smoothing_mm,
         'description': 'Authored board, lighting and knife handle are scenery. Object and blade motion use saved native states; no added visual separation. Continuous cut-push tasks share the board/handle presentation and display measured force and all region displacements. Historical sequential tofu uses neutral ground, no board/handle, and an orange projected middle-region rectangle; contraction comes from interior tetrahedra, not rectangle area. Cross scoring uses saved blade yaw and retains the material-cell bridge; it is guided orthogonal scoring, not the author knife-tip path.',
         'artifacts': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.iterdir())}}
