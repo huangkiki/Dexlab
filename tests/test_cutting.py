@@ -6,8 +6,9 @@ import numpy as np
 
 try:
     from dexlab.cutting import (
-        CutConfig, CuttingSimulation, assign_cut_sides, box_query, corotated_stress,
+        CutConfig, CuttingSimulation, assign_cut_sides, box_query, corotated_energy, corotated_stress,
         couple_grids, friction_impulse, material_step, particle_contacts, rigid_contacts,
+        von_mises_project,
     )
 except ModuleNotFoundError as error:
     if error.name not in ("numba", "scipy"):
@@ -92,7 +93,8 @@ class CuttingInvariants(unittest.TestCase):
 
     def test_configuration_rejects_nonfinite_and_invalid_geometry(self):
         for kwargs in ({'dt': np.nan}, {'density': -1}, {'poisson_ratio': .5},
-                       {'sharpness': 1}, {'grid_spacing': .011}):
+                       {'sharpness': 1}, {'grid_spacing': .011}, {'yield_stress': -1},
+                       {'yield_stress': np.nan}):
             with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
                 CutConfig(**kwargs)
 
@@ -115,6 +117,41 @@ class CuttingInvariants(unittest.TestCase):
             np.testing.assert_allclose(corotated_stress(deformation, 2000., 3000.), 0, atol=1e-10)
         with self.assertRaises(ValueError):
             corotated_stress(np.diag([1., 1., -1.]), 2000., 3000.)
+
+    def test_von_mises_projection_has_elastic_and_plastic_loading_branches(self):
+        mu, yield_stress = 100_000., 30_000.
+        limit = yield_stress / (np.sqrt(6.) * mu)
+        elastic = np.diag(np.exp([.5 * limit, -.25 * limit, -.25 * limit]))
+        projected, increment = von_mises_project(elastic, mu, yield_stress)
+        np.testing.assert_allclose(projected, elastic, atol=1e-14)
+        self.assertEqual(increment, 0.)
+
+        plastic = np.diag(np.exp([2 * limit, -limit, -limit]))
+        projected, increment = von_mises_project(plastic, mu, yield_stress)
+        strain = np.log(np.linalg.svd(projected, compute_uv=False))
+        equivalent = np.sqrt(6.) * mu * np.linalg.norm(strain - strain.mean())
+        self.assertAlmostEqual(equivalent, yield_stress, places=8)
+        self.assertGreater(increment, 0.)
+        self.assertAlmostEqual(np.linalg.det(projected), np.linalg.det(plastic), places=13)
+
+    def test_von_mises_projection_is_objective_and_unloads_elastically(self):
+        mu, lam, yield_stress = 100_000., 400_000., 30_000.
+        trial = np.diag(np.exp([.3, -.15, -.15]))
+        projected, increment = von_mises_project(trial, mu, yield_stress)
+        self.assertGreater(increment, 0.)
+        self.assertLess(corotated_energy(projected, mu, lam), corotated_energy(trial, mu, lam))
+
+        angle = .7
+        rotation = np.array([[np.cos(angle), -np.sin(angle), 0.],
+                             [np.sin(angle), np.cos(angle), 0.], [0., 0., 1.]])
+        rotated, rotated_increment = von_mises_project(rotation @ trial, mu, yield_stress)
+        np.testing.assert_allclose(rotated, rotation @ projected, atol=1e-13)
+        self.assertAlmostEqual(rotated_increment, increment, places=14)
+
+        # F stores the projected elastic part. Removing that recoverable part
+        # leaves identity and zero stress; particle positions retain the
+        # permanent motion generated while the point yielded.
+        np.testing.assert_allclose(corotated_stress(np.eye(3), mu, lam), 0., atol=1e-14)
 
     def test_grid_exchange_conserves_momentum_and_shared_velocity(self):
         rng = np.random.default_rng(3)

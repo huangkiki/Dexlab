@@ -17,6 +17,23 @@ from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, PUSH_ACCEPTANCE,
 
 DURATION = 3.0
 PROBE_TIME = 2.4
+BLADEMASTER_BANANA_MATERIAL = {
+    'density': 1100.,
+    'young_modulus': 400_000.,
+    'poisson_ratio': .45,
+    'yield_stress': 30_000.,
+    'friction_static': .2,
+    'friction_dynamic': .2,
+    'cutting_energy': 700.,
+    'sharpness': .9,
+    'blade_mass': .1,
+}
+
+
+def uses_blademaster_banana_material(config):
+    """Whether every IV-C value exposed by CutConfig matches the paper mode."""
+    return config.shape == 'banana' and all(
+        getattr(config, name) == value for name, value in BLADEMASTER_BANANA_MATERIAL.items())
 
 
 def target_edge(t, mode, height):
@@ -110,6 +127,7 @@ def run(directory, config, mode='full', duration=None, task='tofu', motion_proto
     if duration <= 0 or duration > full_duration or abs(round(duration / config.dt) * config.dt - duration) > 1e-12:
         raise ValueError('Duration must fit the protocol and contain an integer number of steps')
     source_root = Path(__file__).resolve().parent
+    paper_material = uses_blademaster_banana_material(config)
     manifest = {
         'schema_version': 1, 'status': 'running', 'mode': mode, 'config': asdict(config),
         'duration_s': duration, 'probe_time_s': probe_time, 'task': task,
@@ -117,7 +135,12 @@ def run(directory, config, mode='full', duration=None, task='tofu', motion_proto
                        PUSH_ACCEPTANCE if contact_motion else
                        BANANA_ACCEPTANCE if task != 'tofu' else ACCEPTANCE),
         'paper': 'https://arxiv.org/abs/2609.27342v2',
-        'implementation': 'independent CPU TLMPM reference, synthetic parameters',
+        'implementation': ('independent CPU TLMPM with BladeMaster IV-C numeric values and '
+                           'an independently specified perfect-J2 projection' if paper_material else
+                           'independent CPU TLMPM reference, synthetic parameters'),
+        'material_parameter_source': ('BladeMaster IV-C reported values; omitted fields remain '
+                                      'independent choices' if paper_material else
+                                      'DexLab synthetic task values'),
         'source_sha256': {name: hashlib.sha256((source_root / name).read_bytes()).hexdigest()
                           for name in ('cutting.py', 'cutting_geometry.py', 'cutting_score.py', 'tofu_cut.py')},
         'packages': {name: importlib.metadata.version(name) for name in ('numpy', 'scipy', 'numba')},
@@ -211,12 +234,16 @@ def main():
     parser.add_argument('--grid-spacing', type=float)
     parser.add_argument('--viscosity', type=float, default=0.0,
                         help='Newtonian dynamic viscosity in Pa s; 0 preserves the pure-elastic baseline')
+    parser.add_argument('--paper-banana-material', action='store_true',
+                        help='Use the BladeMaster IV-C values with DexLab independent J2 projection')
     parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'), default='tofu')
     parser.add_argument('--duration', type=float, default=None, help='Short probes do not establish task completion')
     parser.add_argument('--motion-protocol', choices=('cut-push', 'cut-no-push', 'knife-push', 'no-push', 'impulse'),
                         help='Sequential tasks default to cut-push; legacy protocols remain reproducible')
     args = parser.parse_args()
     banana = args.task == 'banana'
+    if args.paper_banana_material and not banana:
+        parser.error('--paper-banana-material requires --task banana')
     options = {
         'dynamic_viscosity': args.viscosity,
         'dt': args.dt if args.dt is not None else (.00025 if banana else .0005),
@@ -225,6 +252,8 @@ def main():
     if banana:
         options.update(shape='banana', size=(.12, .06, .03),
                        blade_half_size=(.0005, .04, .02), blade_bevel_height=.005)
+        if args.paper_banana_material:
+            options.update(BLADEMASTER_BANANA_MATERIAL)
     elif args.task == 'tofu-sequential':
         options.update(size=(.09, .03, .03), blade_half_size=(.00025, .025, .02),
                        blade_bevel_height=.005,

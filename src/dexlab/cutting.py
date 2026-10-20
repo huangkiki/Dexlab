@@ -1,8 +1,8 @@
 """Persistent-cut TLMPM reference implementation of BladeMaster, arXiv:2609.27342v2.
 
 This is independent CPU code, not the authors' implementation. SI units, FP64,
-trilinear reference basis, fixed-corotated elasticity with optional Newtonian
-viscosity, MUSL and PIC/FLIP.
+trilinear reference basis, fixed-corotated elasticity with optional perfect-J2
+plasticity and Newtonian viscosity, MUSL and PIC/FLIP.
 The blade translates dynamically; a guide constrains its attitude. See the
 experiment document for the equation mapping and unimplemented paper features.
 """
@@ -25,6 +25,7 @@ class CutConfig:
     density: float = 1100.0
     young_modulus: float = 6000.0
     poisson_ratio: float = 0.35
+    yield_stress: float = 0.0  # Pa; zero retains the elastic baseline.
     dynamic_viscosity: float = 0.0  # Pa s; zero retains the elastic baseline.
     flip_fraction: float = 0.95
     normal_scale: float = 0.1
@@ -46,12 +47,15 @@ class CutConfig:
         if self.shape not in ('block', 'banana'):
             raise ValueError('Unknown material shape')
         values = np.array([v for key, value in asdict(self).items()
-                           if key not in ('shape', 'blade_bevel_height', 'dynamic_viscosity')
+                           if key not in ('shape', 'blade_bevel_height', 'dynamic_viscosity',
+                                          'yield_stress')
                            for v in (value if isinstance(value, tuple) else (value,))])
         if not np.isfinite(values).all() or (values <= 0).any():
             raise ValueError("All configuration values must be finite and positive")
         if not np.isfinite(self.dynamic_viscosity) or self.dynamic_viscosity < 0:
             raise ValueError('Dynamic viscosity must be finite and nonnegative (Pa s)')
+        if not np.isfinite(self.yield_stress) or self.yield_stress < 0:
+            raise ValueError('Yield stress must be finite and nonnegative (Pa)')
         if not 0 < self.poisson_ratio < 0.5 or not 0 < self.sharpness < 1:
             raise ValueError("Invalid Poisson ratio or blade sharpness")
         if self.flip_fraction > 1 or self.friction_dynamic > self.friction_static:
@@ -94,6 +98,43 @@ def corotated_stress(deformation, mu, lam):
         raise ValueError("Inverted material point; retain this failed run")
     return (2 * mu * (deformation - rotation)
             + lam * (determinant - 1) * determinant * np.linalg.inv(deformation).T)
+
+
+@njit(cache=True)
+def corotated_energy(deformation, mu, lam):
+    """Fixed-corotated elastic energy density per reference volume (J/m^3)."""
+    u, _, vt = np.linalg.svd(deformation)
+    rotation = u @ vt
+    determinant = np.linalg.det(deformation)
+    if determinant <= 0:
+        raise ValueError('Inverted material point; retain this failed run')
+    return mu * np.sum((deformation - rotation)**2) + .5 * lam * (determinant - 1)**2
+
+
+@njit(cache=True)
+def von_mises_project(deformation, mu, yield_stress):
+    """Project principal logarithmic elastic strain onto a perfect-J2 surface.
+
+    BladeMaster specifies only a ``von Mises-type plasticity projection``. This
+    independent choice uses the conventional equivalent-stress definition
+    q=sqrt(3/2)||s||, giving ||dev(log sigma)|| <= yield/(sqrt(6) mu).
+    The hydrostatic logarithmic strain is retained, so the projection preserves
+    det(F). The returned scalar is the removed deviatoric log-strain norm.
+    """
+    if yield_stress <= 0:
+        return deformation.copy(), 0.
+    u, stretches, vt = np.linalg.svd(deformation)
+    if np.linalg.det(deformation) <= 0 or np.min(stretches) <= 0:
+        raise ValueError('Inverted material point; retain this failed run')
+    logarithmic = np.log(stretches)
+    mean = logarithmic.sum() / 3
+    deviatoric = logarithmic - mean
+    norm = np.linalg.norm(deviatoric)
+    limit = yield_stress / (np.sqrt(6.) * mu)
+    if norm <= limit:
+        return deformation.copy(), 0.
+    projected = mean + deviatoric * (limit / norm)
+    return u @ np.diag(np.exp(projected)) @ vt, norm - limit
 
 
 @njit(cache=True)
@@ -152,13 +193,21 @@ def couple_grids(mass, state):
 @njit(cache=True)
 def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                   particle_impulse, mass, volume, mu, lam, dt, flip, node_count,
-                  viscosity=0.0):
-    """Eq. 1–2, 8–9; return the explicit constitutive viscous dissipation (J)."""
+                  viscosity=0.0, yield_stress=0.0):
+    """Eq. 1–2, 8–9; return viscous and plastic constitutive dissipation (J)."""
     code_count = int(sides.max()) + 1
     gm = np.zeros((code_count, node_count))
     momentum = np.zeros((code_count, node_count, 3))
     impulse = np.zeros_like(momentum)
+    plastic_dissipation = 0.0
     for p in range(len(x)):
+        if yield_stress > 0:
+            trial_energy = corotated_energy(deformation[p], mu, lam)
+            projected, plastic_increment = von_mises_project(deformation[p], mu, yield_stress)
+            deformation[p] = projected
+            projected_energy = corotated_energy(projected, mu, lam)
+            if plastic_increment > 0:
+                plastic_dissipation += volume * (trial_energy - projected_energy)
         stress = corotated_stress(deformation[p], mu, lam)
         side = sides[p]
         for a in range(8):
@@ -225,7 +274,7 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                 for k in range(3):
                     deformation[p, j, k] += (dt * remapped[sides[p], nodes[p, a], j]
                                               * gradients[p, a, k])
-    return dissipation
+    return dissipation, plastic_dissipation
 
 
 @njit(cache=True)
@@ -501,12 +550,13 @@ class CuttingSimulation:
             c.friction_dynamic, c.tangent_stiffness, c.tangent_damping,
             self.pair_history, self.pair_seen, self.step_count)
         gravity = np.array([0., 0., -9.81]) * self.mass * c.dt
-        viscous_dissipation = material_step(self.x, self.velocity, self.deformation, self.sides,
+        viscous_dissipation, plastic_dissipation = material_step(
+                      self.x, self.velocity, self.deformation, self.sides,
                       self.nodes, self.weights, self.gradients,
                       impulses + contact + gravity, self.mass, self.volume,
                       c.young_modulus / (2 * (1 + c.poisson_ratio)),
                       c.young_modulus * c.poisson_ratio / ((1 + c.poisson_ratio) * (1 - 2 * c.poisson_ratio)),
-                      c.dt, c.flip_fraction, self.node_count, c.dynamic_viscosity)
+                      c.dt, c.flip_fraction, self.node_count, c.dynamic_viscosity, c.yield_stress)
         self.blade_v += (c.dt * drive + reaction) / c.blade_mass
         self.blade_x += c.dt * self.blade_v
         # Unilateral board stop on the guided blade. Its support impulse is
@@ -541,4 +591,5 @@ class CuttingSimulation:
             'labelled_particles': int(np.count_nonzero(self.sides)),
             'contact_work_j': work,
             **({'viscous_dissipation_j': viscous_dissipation} if c.dynamic_viscosity > 0 else {}),
+            **({'plastic_dissipation_j': plastic_dissipation} if c.yield_stress > 0 else {}),
         }
