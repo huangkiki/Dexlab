@@ -27,6 +27,8 @@
 
 [完整实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · 动图来自实际仿真或记录回放；结果仅适用于各报告的配置与条件。
 
+[切割表面重建与限制](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-surface.html)
+
 <a id="quickstart"></a>
 
 ## 先运行苹果抓梗

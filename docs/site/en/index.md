@@ -227,6 +227,7 @@ Crossed shallow tofu cuts <tofu-scoring>
 Cutting method comparison <cutting-comparison>
 Two tofu cuts and independent motion <tofu-comparison>
 Cutting fidelity and measurements <cutting-fidelity>
+Cutting-surface reconstruction <cutting-surface>
 
 Solver configuration roles <solver-taxonomy>
 

@@ -225,6 +225,7 @@ RSS 擦拭与 latch 对照 <rss-wiping>
 切割方法对比 <cutting-comparison>
 豆腐连续两刀与独立运动 <tofu-comparison>
 切割保真度与动态测量 <cutting-fidelity>
+切割表面重建 <cutting-surface>
 
 多求解器同步与 preCICE <solver-coupling>
 

@@ -27,6 +27,8 @@ Click an experiment or GIF for the full report and reproduction steps.
 
 [Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · GIFs show actual simulation or recorded-state replay; results apply to each report’s configuration and conditions.
 
+[Cutting-surface reconstruction and limits](https://huangkiki.github.io/Dexlab/en/latest/cutting-surface.html)
+
 <a id="quickstart"></a>
 
 ## Start with apple-stem grasping
