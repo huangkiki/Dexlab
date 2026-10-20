@@ -4,9 +4,11 @@
 
 **当前结论：** 调整地面接触和布边约束时间常数后的完整 9 秒开发案例，通过 v3 原生协议及保存帧几何检查，完成夹持、抬升和完全释放。它是已知状态的脚本控制，材料尚未校准；自接触穿透仅比上限低 **7.95 µm**，不能称为稳健修复或留出集 benchmark。官方引擎与验收阈值未改。
 
-![完整抓取与释放连续近景](media/compliance-grasp.gif)
+![完整抓取与释放连续近景](../../docs/evidence/cloth-studio/grasp.gif)
 
-[连续 9 秒视频](media/compliance-grasp.mp4) · [媒体来源](evidence/settling314/compliance-media-provenance.json)
+[连续 9 秒视频](../../docs/evidence/cloth-studio/grasp.mp4) · [双视角回放来源](../../docs/evidence/cloth-studio/grasp.json) · [旧版媒体来源](evidence/settling314/compliance-media-provenance.json)
+
+同一条原始记录的新呈现：固定全景与跟随布料的近景同步播放，物理状态与评分不变。
 
 ![应变与接触力曲线](media/compliance-diagnostic.svg)
 

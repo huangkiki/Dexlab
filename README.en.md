@@ -10,137 +10,24 @@
 
 <span id="visual-experiment-catalogue"></span>
 
-Click a GIF from actual simulation or recorded-state replay for full videos, curves and reproduction. Successes, failures and conditions stay together.
-
-<a id="rss"></a>
-
-### RSS wiping: why does the sponge slip?
-
-One gripper holds the bar while the other wipes off ink with a sponge. The left run retains RSS’s auxiliary node constraint; the right disables it.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html"><img src="docs/evidence/rss-wiping/preview.gif" width="880" alt="RSS wiping: why does the sponge slip?" loading="lazy"></a>
-
-Across three repeats with fixed geometry and initial states, the original passed 3/3 with 95.5%–95.9% cleaning; disabling the constraint passed 0/3 with 39.9%–41.2% cleaning. This configuration depends on assisted retention; in-hand rotation is not reproduced. The GIF shows synchronized 10–30 s excerpts from trial 1 at 2× speed in the native collision-geometry view.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html)
-
-The same recorded trajectory also supports **high-quality RTX replay**, retaining poses and sponge deformation while adding reflections, textures and soft shadows. [Matched views and reproduction](demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹).
-
-<a id="cut-push"></a>
-
-### Sequential cutting: push the pieces with the final cut
-
-Cut a tofu-like block into three pieces and a banana-like body into four, then lift the blade slightly and push sideways through knife contact.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/surface.gif" width="420" alt="Sequential cutting: push the pieces with the final cut" loading="lazy"></a>
-<a href="https://huangkiki.github.io/Dexlab/en/latest/cut-push.html"><img src="docs/evidence/cutting/banana-cut-push/surface.gif" width="420" alt="Sequential cutting: push the pieces with the final cut" loading="lazy"></a>
-
-Piece motion comes from knife contact, with no direct velocity increment applied to the material. The overlays show recorded contact forces and piece displacements; the report pairs surface and particle views. These are synthetic materials, without real-food calibration or the paper’s force-measurement experiment.
-
-Tofu and banana now share a paper-inspired reference linked volume: primal links store Hermite points and normals for the original boundary and recorded blade surfaces, native cut histories decide when links disconnect, and per-cell regions use QEF local dual vertices. Once native mechanical components separate, each is reconstructed as a closed volume; surface representatives follow a compatible TLMPM motion field through fixed weights. Particle views and frame measurements remain public, so a visible gap never substitutes for mechanical acceptance. The current CPU offline reconstruction supports recorded x/y straight planes only; arbitrary curved or tilted paths, the paper's online local GPU update and real-food geometry remain unimplemented. [Surface implementation and limits](docs/site/en/cutting-surface.md)
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/cut-push.html)
-
-<a id="banana-force"></a>
-
-### Banana single-cut force: does particle refinement converge?
-
-Use the paper's published banana values, an independent perfect-J2 return, and a frozen protocol for the blade path, sampling, timestep and contact sensitivity.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/banana-force.html"><img src="docs/evidence/cutting/banana-force/force-protocol.svg" width="880" alt="Banana single-cut force: 20 samplings, 64-times particle refinement, force channels and sensitivity" loading="lazy"></a>
-
-The pre-support material peak across 20 baseline runs is **0.8469 ± 0.1511 N**, with **0.07341 ± 0.01249 N·s** material impulse. The 64× particle run completes, but never reaches the support during the frozen 0.5 s path; its peak rises to **4.3059 N** and normalized RMSE against the baseline mean is **2.051**. The evidence therefore establishes neither timestep, contact or particle-refinement convergence nor real-banana force accuracy. Material, support, total resistance, actuator and guide channels remain separate.
-
-[Complete result, frozen protocol and limits](https://huangkiki.github.io/Dexlab/en/latest/banana-force.html)
-
-<a id="scoring"></a>
-
-### Cross scoring: cuts with a connected base
-
-Make a shallow cut, withdraw and rotate the knife by 90°, then cut again to inspect the incisions and connectivity.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html"><img src="docs/evidence/cutting/tofu-scoring/particles.gif" width="880" alt="Cross scoring: cuts with a connected base" loading="lazy"></a>
-
-Both the default and half-step records produce two shallow cuts with a connected base; the uncut control is rejected. Colors show native cut history. The current elastic surface rebounds after withdrawal, so color does not imply a permanently open incision.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html)
-
-<a id="apple"></a>
-
-### Apple-stem grasping: can two fingers hold the stem?
-
-OpenArm + Wuji pinch the apple stem with thumb and index finger, lift and hold. Historical development runs: MuJoCo on the left, SuperDex FP64 on the right.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays"><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" width="420" alt="Apple-stem grasping: can two fingers hold the stem?" loading="lazy"></a>
-<a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays"><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" width="420" alt="Apple-stem grasping: can two fingers hold the stem?" loading="lazy"></a>
-
-Both recorded 14 s trajectories pass the full 3 s hold check. Actions use known poses and fixed joint targets, with no attachment constraint on the apple. This qualifies the fixed simulation scene, not a vision policy or real-robot accuracy.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays)
-
-<a id="cloth"></a>
-
-### Cloth grasping: hold and release after lifting
-
-The robot grasps cloth through contact and friction, then lifts, holds and releases it.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html"><img src="demos/cloth-folding/media/compliance-grasp.gif" width="880" alt="Cloth grasping: hold and release after lifting" loading="lazy"></a>
-
-After geometry and compliance corrections, one 9 s development scene passes the fixed v3 criteria. The historical table-intersection failure is retained, and self-contact penetration remains near the threshold. This is cloth grasping, not successful active folding or cross-material robustness.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/experiments.html)
-
-<a id="visual-highlight-pinch"></a>
-
-### Gripper force limits: slipping at 0.4 N, holding at 0.8 N
-
-Change the finger-joint drive-force limit in the same Genesis gripper scene and compare closing, lifting, holding and release.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch"><img src="docs/evidence/force-limit/comparison.gif" width="880" alt="Gripper force limits: slipping at 0.4 N, holding at 0.8 N" loading="lazy"></a>
-
-Under this protocol, the 0.4 N setting slips while 0.8 N retains the object; open-gripper controls and offset scenes are also recorded. A drive-force limit is not a measured contact force and cannot be read as a real gripper-force requirement.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch)
-
-<a id="visual-highlight-libero"></a>
-
-### LIBERO: does task success also pass physical diagnostics?
-
-Replay official actions, retain successes and failures, and inspect contact and state records. Below is the recorded-state replay of native baseline demo 0.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html"><img src="docs/evidence/visual/libero-demo0-baseline.gif" width="880" alt="LIBERO: does task success also pass physical diagnostics?" loading="lazy"></a>
-
-The Object suite has valid records for all 500 official demonstrations across ten tasks: 495 native task successes, five failures, and zero passes of all numerical diagnostics. The GIF is one existing replay, not evidence that all 500 succeed; this is not a closed-loop vision-policy evaluation.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html)
-
-<a id="visual-highlight-incline"></a>
-
-### Six-engine incline: why does the same block slide differently?
-
-Compare static, sliding and nominally frictionless responses of a block with the same dimensions and mass. The GIF shows the sliding records at a 1 ms timestep.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline"><img src="docs/evidence/visual/incline-sliding-0.001.gif" width="880" alt="Six-engine incline: why does the same block slide differently?" loading="lazy"></a>
-
-Responses from MuJoCo, SuperDex, Genesis, Newton Physics, PhysX and Drake retain their configurations, failures and invalid observations. Equal parameter values do not establish equivalent contact models; full curves help distinguish motion differences from observation problems.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline)
-
-<a id="visual-highlight-normal"></a>
-
-### Normal contact: after fitting loading, what happens on unloading?
-
-Adjust contact parameters in one MuJoCo scene and compare indentation, holding and unloading.
-
-<a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#normal"><img src="docs/evidence/visual/normal-calibration.gif" width="880" alt="Normal contact: after fitting loading, what happens on unloading?" loading="lazy"></a>
-
-Loading response can improve against the synthetic 20 kN/m target, while unloading, dynamics and mass transfer need separate validation. The replay preserves physical proportions; inspect the report curves for small displacements. A synthetic reference is not real-material calibration.
-
-[Results and reproduction](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#normal)
-
-For historical cutting, collision, cloth mechanics, mass/size transfer and error–cost sweeps, see the [full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html).
-
-[Sources and conversion records for the new GIFs](docs/evidence/visual/homepage-previews.json).
+Click an experiment or GIF for the full report and reproduction steps.
+
+| Experiment | Animated preview | Result |
+| --- | --- | --- |
+| <a id="rss"></a>[RSS wiping](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html) | <a href="https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html"><img src="docs/evidence/rss-wiping/preview.gif" width="300" alt="RSS original / no latch, 2×" loading="lazy"></a> | Retains the sponge with auxiliary constraints; slips without them. Wiping reproduction. |
+| <a id="cut-push"></a><a id="banana-force"></a>[Cutting and pushing](https://huangkiki.github.io/Dexlab/en/latest/cut-push.html) | <a href="https://huangkiki.github.io/Dexlab/en/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/surface.gif" width="145" alt="Tofu-like / banana-like material" loading="lazy"></a> <a href="https://huangkiki.github.io/Dexlab/en/latest/cut-push.html"><img src="docs/evidence/cutting/banana-cut-push/surface.gif" width="145" alt="Tofu-like / banana-like material" loading="lazy"></a> | Blade contact pushes synthetic material; [separate single-cut force results do not establish convergence](https://huangkiki.github.io/Dexlab/en/latest/banana-force.html). |
+| <a id="scoring"></a>[Cross scoring](https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html) | <a href="https://huangkiki.github.io/Dexlab/en/latest/tofu-scoring.html"><img src="docs/evidence/cutting/tofu-scoring/particles.gif" width="300" alt="Native particle cut history" loading="lazy"></a> | Two shallow cuts leave a connected base; colors show cut history. |
+| <a id="apple"></a>[Apple-stem grasp](https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays) | <a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays"><img src="demos/apple-stem-grasp/media/mujoco-sdf.gif" width="145" alt="Historical scripted MuJoCo / SuperDex runs" loading="lazy"></a> <a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html#apple-replays"><img src="demos/apple-stem-grasp/media/superdex-sdf.gif" width="145" alt="Historical scripted MuJoCo / SuperDex runs" loading="lazy"></a> | Historical scripted MuJoCo / SuperDex runs both complete a 3 s hold. |
+| <a id="cloth-comparison"></a>[Cloth engine comparison](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html) | <a href="https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html"><img src="docs/evidence/cloth-studio/sag.gif" width="300" alt="Matched sag across four engines" loading="lazy"></a> | Historical cloth responses across four engines, retaining failures and coverage gaps. |
+| <a id="cloth"></a>[Robot cloth grasp](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) | <a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html"><img src="docs/evidence/cloth-studio/grasp.gif" width="300" alt="Cloth grasp, lift and release" loading="lazy"></a> | One development scene lifts, holds and releases; active folding remains unverified. |
+| <a id="visual-highlight-pinch"></a>[Force-limit comparison](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch) | <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch"><img src="docs/evidence/force-limit/comparison.gif" width="300" alt="Actuator limit 0.4 N / 0.8 N" loading="lazy"></a> | In the same Genesis protocol, actuator limits of 0.4 N slip and 0.8 N hold. |
+| <a id="visual-highlight-libero"></a>[LIBERO replay](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html) | <a href="https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html"><img src="docs/evidence/visual/libero-demo0-baseline.gif" width="300" alt="Demo 0 native baseline state replay" loading="lazy"></a> | 500 official demonstrations: 495 task successes; none pass every numerical diagnostic. |
+| <a id="visual-highlight-incline"></a>[Six-engine incline](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline) | <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline"><img src="docs/evidence/visual/incline-sliding-0.001.gif" width="300" alt="Sliding records at 1 ms timestep" loading="lazy"></a> | Compare sliding responses across six engines; equal parameter values do not imply equivalent models. |
+| <a id="visual-highlight-normal"></a>[Normal contact calibration](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#normal) | <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#normal"><img src="docs/evidence/visual/normal-calibration.gif" width="300" alt="Loading, hold and unloading against a synthetic target" loading="lazy"></a> | Loading fits a synthetic target better; unloading and transfer need separate validation. |
+
+[Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · GIFs show actual simulation or recorded-state replay; results apply to each report’s configuration and conditions.
+
+[Cutting-surface reconstruction and limits](https://huangkiki.github.io/Dexlab/en/latest/cutting-surface.html)
 
 <a id="quickstart"></a>
 
