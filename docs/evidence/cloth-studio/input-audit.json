@@ -1,0 +1,146 @@
+[
+  {
+    "run": "test-sag-00-mujoco",
+    "inputs_sha256": {
+      "trajectory.npz": "c4e5d1f3d574b803f1237c1b67e160d8a78743733995f6500f275f2a87836fb4",
+      "run.json": "149e7c71cddbbde88c9cf3a39bfa8b9024d644b5668a94f21e538351358a6610",
+      "summary.json": "e1c8da955b932538fbdaee3bcdb89e81748189b44f9956765e572ddbf6a96c56"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-superdex-shell",
+    "inputs_sha256": {
+      "trajectory.npz": "d1f51801643db88a832141265cf29209fac305dfe43c46ebaa3f5cf963c61c19",
+      "run.json": "dddcf293adfd98e45ece893e51d03afe50bf3dda9d5b6d3fdf8be11431410417",
+      "summary.json": "8d13ca7fde25c8ba10c468f14bcebba1364420e3dc3c87322573697bf59299ec"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-newton-vbd",
+    "inputs_sha256": {
+      "trajectory.npz": "bf39427066b76f3bf9cfd7198d55b30fdd0b9ef2d79020f9dff582b59d4bb66d",
+      "run.json": "f853e1bb0a41be62256a07f24ab05a50917bebcafbc805b06c902f164e2a53be",
+      "summary.json": "5a348086b328775e3531c7b087a5053bd49ab1035851704ece6b732146dcbb7e"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-physx-surface",
+    "inputs_sha256": {
+      "trajectory.npz": "5f24abba201ed57e2e0e7900882831bf2e4d6a18d746c7e5a62232121c02d89d",
+      "run.json": "b36adb677aac2b20a42a89139c8a8035263520f4f38e7b89af82540800a2bae4",
+      "summary.json": "1eaf7a14ebca99ce40bb991e1c0ef38ed239e42c26f2c2141f06ee5b2f577075"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-newton-xpbd",
+    "inputs_sha256": {
+      "trajectory.npz": "db0a900f0b3738d14e1af46e818a22ab598e47009f9bcbba995b2b58f16d2dfa",
+      "run.json": "652c628d48cf893b62652435943c74f438d2e91046f3566dadd56ef17af18622",
+      "summary.json": "9ea83f1bce85256ed0f52b12fdf9fdd57007d26f149f61c43e9a5530b86489e2"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-newton-style3d",
+    "inputs_sha256": {
+      "trajectory.npz": "23172e659ed69be7fe1380fc3c9bfcb7b9cf63031d130d900a2797529a2a3c28",
+      "run.json": "819b4174a0b67f8554f94d0e9dbe1526be21160ba4ff4f0b6c93c016563913d7",
+      "summary.json": "8344b92ec830856b71467a3bffd3c8e0d5cef8bd280dcb26aca4bd40c25164b6"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-newton-semi_implicit",
+    "inputs_sha256": {
+      "trajectory.npz": "a482ccb0c61df075d4fdefa658996aa7acf9bd03304b9209febeef60eb5d2ca2",
+      "run.json": "9589bc7288e623b9885c05fc01c0bc96170df41170da10b13d71925be6575b47",
+      "summary.json": "e632d8af8dc9d659f40d1d239a569805d55335d83d0255b5d7bce8e0ef0a246b"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-sag-00-newton-featherstone",
+    "inputs_sha256": {
+      "trajectory.npz": "9f694637cfbc4c9a9c2871212d20b75053c71e13152c51a72d881f4b87aabc87",
+      "run.json": "19d8b89c192653aeef46f2c8a80a089f4bcb34e31496826f567739ce0ad86825",
+      "summary.json": "e632d8af8dc9d659f40d1d239a569805d55335d83d0255b5d7bce8e0ef0a246b"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-mujoco",
+    "inputs_sha256": {
+      "trajectory.npz": "42e1b8f4207b13b8130e3577edbdd733501372075bb63d0157d1dcd0d93d3061",
+      "run.json": "9989d54a315488795211cd590b351ef96782c8c17e79b37da1f2db52dbf4bde8",
+      "summary.json": "b18bd48a6f051512849b640be1b6b3f80976e0efa3f6015fc55dd52aed64c2c6"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-superdex-shell",
+    "inputs_sha256": {
+      "trajectory.npz": "7ef6befa78141d5fb3527a0db475ae2abae984fdd2eb25126cc2e921612ffcd3",
+      "run.json": "36544bd674929ae896270b2cdb34d3b1a8b0f83ddb15a1e3a64f1ae17c588ce8",
+      "summary.json": "885747a5a4abc5959d7660a4f6710f69795faf2a96ede9ef5d2c6d0f6f4b481d"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-newton-vbd",
+    "inputs_sha256": {
+      "trajectory.npz": "ef09a2004a0fe7b883acf08ec291b595d6ba8603e4be5767867803e3f0839bf8",
+      "run.json": "70d6cd980a0b2db1c0a33a28da541bd9c062e3037c87634c6eeaf66ffce82f01",
+      "summary.json": "78cf082cba1137b93695979b1c53e142d3f3da2ddf42a025491273f0b0116428"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-physx-surface",
+    "inputs_sha256": {
+      "trajectory.npz": "eed8f77b00c90ab8982e90d72be1d3038f67c03c83a001c50fe5808bd23199c7",
+      "run.json": "97f4f79d3a8eb64f3c5ac6bd30b150f5d8a2091b74fa7e5628195aa543e2a23d",
+      "summary.json": "38fd5af332ce47e9082ba33177f208c35d118472707e41c6b5703a4092cfb89e"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-newton-xpbd",
+    "inputs_sha256": {
+      "trajectory.npz": "855c33ed568141059d051f4eac1ca4a24bce6c1c49ae256fc4980d3294015abc",
+      "run.json": "6d7fa8da65cbeb36b57e88b48d904c46385d18ac18b8207e7bf585b0ae840baf",
+      "summary.json": "fbd8763e83f2ef7060e6ed1daeea38103a58def59b2659aaefc71112113cfbae"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-newton-style3d",
+    "inputs_sha256": {
+      "trajectory.npz": "892ea30dde5480a048e3e2890968c270d59afe888d09e6460601e235c26eb14d",
+      "run.json": "f1959da321983c6e427fe79430d972cd4e51b890cdb7a914364e907fabf9a5e4",
+      "summary.json": "acedb809e0e4b07394c98cebff2f22d1d4faafe3828670672da9c19ec8722dfb"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-newton-semi_implicit",
+    "inputs_sha256": {
+      "trajectory.npz": "c8c4a14346491550636aefeae5813e50cd5cb6511ae0a0755566aed4504706cc",
+      "run.json": "92f469653f707807d0530d52670e0a2c983c12f7e8a38faa6d5f71ac6a1d1d2c",
+      "summary.json": "cd833a48b138d59b0e12c459b0f7dfce2e1c99789a30b6477be6686333778c4f"
+    },
+    "published_metadata_and_summary_match": true
+  },
+  {
+    "run": "test-drape-00-newton-featherstone",
+    "inputs_sha256": {
+      "trajectory.npz": "0bb48bef066328c58d68b2f5fefaa35115ca4c5caa4d034a8b3a9d97ae87b2b5",
+      "run.json": "a6ab2c280a7772035b0db7245b4cde3299c9d4dd598cec7aa432a5df049d70a6",
+      "summary.json": "0b6d64576d794feed45e87df7612c84db329239427adf1f93cca6d208bd8b46d"
+    },
+    "published_metadata_and_summary_match": true
+  }
+]

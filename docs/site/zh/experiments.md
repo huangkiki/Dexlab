@@ -13,7 +13,7 @@
 | 苹果梗抓取 | [demos/apple-stem-grasp/](https://github.com/huangkiki/Dexlab/tree/main/demos/apple-stem-grasp/) | OpenArm 双臂＋Wuji，SDF–SDF 摩擦夹持；默认场景与历史扰动测试分列 |
 | 机器人夹布 | [demos/cloth-folding/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-folding/) | 夹持、抬升、释放；保留历史桌体相交失败；修复后一个 9 秒开发场景通过，鲁棒性未验证 |
 | 接触与驱动 | [demos/contact-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/contact-benchmark/) | 滑动、压入/卸载、载荷与瞬态；合成响应不等于真机标定 |
-| 基础布料 | [demos/cloth-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-benchmark/) | 拉伸、下垂、碰撞与折叠下落；各材料与求解器能力单列 |
+| 基础布料 | [布料引擎对比](cloth-comparison.md) | 拉伸、下垂、碰撞与折叠下落；各材料与求解器能力单列 |
 | PhysX | [demos/physx-contact/](https://github.com/huangkiki/Dexlab/tree/main/demos/physx-contact/) | 原生刚体、SDF、关节和表面布料；不把单例成功外推到留出测试 |
 | Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | 刚体限定范围证据已交付；[PBD 薄布诊断](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)包含失败对照，当前摩擦夹持配置不准入；等时长响应、连通折叠与两个独立偏移位置已记录 |
 
@@ -58,7 +58,7 @@
 
 ## 修复后的夹布开发场景
 
-![连续夹持、抬升与释放近景](../../../demos/cloth-folding/media/compliance-grasp.gif)
+![连续夹持、抬升与释放近景](../../../docs/evidence/cloth-studio/grasp.gif)
 
 一个 9 秒候选通过固定 v3 标准，自接触穿透仍接近阈值。[指标、失败对照、录像溯源与完整命令](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.zh-CN.md)。该结果不替换上方历史失败，也不证明鲁棒性。
 

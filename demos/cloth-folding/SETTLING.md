@@ -4,9 +4,11 @@
 
 **Current conclusion:** the complete 9 s development case with adjusted floor-contact and edge-constraint time constants passes the v3 native protocol and saved-frame geometry checks, including pinch, lift and complete release. This is scripted known-state control with uncalibrated material. Self-contact penetration is only **7.95 µm** below its limit: this is not a robustness or held-out benchmark claim. Official engines and acceptance thresholds are unchanged.
 
-![Continuous grasp and complete release close-up](media/compliance-grasp.gif)
+![Continuous grasp and complete release close-up](../../docs/evidence/cloth-studio/grasp.gif)
 
-[Continuous 9 s video](media/compliance-grasp.mp4) · [Media provenance](evidence/settling314/compliance-media-provenance.json)
+[Continuous 9 s video](../../docs/evidence/cloth-studio/grasp.mp4) · [Two-view replay provenance](../../docs/evidence/cloth-studio/grasp.json) · [Older media provenance](evidence/settling314/compliance-media-provenance.json)
+
+A new presentation of the same recording: synchronized fixed overview and tracking cloth detail; physical states and scoring are unchanged.
 
 ![Strain and contact-force history](media/compliance-diagnostic.svg)
 

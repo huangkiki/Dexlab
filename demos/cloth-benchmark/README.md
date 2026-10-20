@@ -4,6 +4,15 @@
 
 Measure native MuJoCo flex, SuperDex experimental shells, Newton cloth and PhysX surface-deformable motion using shared surface meshes, areal density, loads, and boundary conditions. MuJoCo/Newton use explicit area-lumped vertex masses; SuperDex retains its native shell FEM inertia, with total mass checked. These are **nominal-material numerical experiments**. Constitutive responses are not yet calibrated across solvers; the results cannot rank real-material accuracy.
 
+## Watch the experiments
+
+| Experiment | Synchronized playback | What to inspect |
+| --- | --- | --- |
+| Sag | [![Four-engine sag](../../docs/evidence/cloth-studio/sag.gif)](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html) | Fixed edge, hanging shape and oscillation |
+| Sphere drape | [![Four-engine sphere drape](../../docs/evidence/cloth-studio/drape.gif)](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html) | Contact, penetration and surface crossings |
+
+The previews show historical case 00 across four engines; the linked report expands all eight profiles. Complete 0–3 s at normal speed. Camera and display settings are shared; original geometry and failed scores remain. [Six-engine coverage, full videos, provenance and reproduction](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html). This is not calibrated material or engine-accuracy ranking.
+
 ## Experiments and inputs
 
 | Experiment | Boundary conditions | Independent measurements |
@@ -55,9 +64,7 @@ Render the complete recorded episode as a close-up MP4 and GIF, without advancin
   demos/cloth-benchmark/runs/mujoco-extension
 ```
 
-![SuperDex native shell sag](media/superdex-shell-sag.gif)
-
-Continuous 3-second playback of the recorded SuperDex shell development case. [MP4](media/superdex-shell-sag.mp4) · [Media provenance](media/superdex-shell-sag.json). This shows numerical sag, not a calibrated fabric.
+[The older single-profile development preview provenance](media/superdex-shell-sag.json) remains available.
 
 ## Development results
 
