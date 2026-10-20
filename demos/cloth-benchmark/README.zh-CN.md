@@ -4,6 +4,15 @@
 
 采用共同的表面网格、面密度、外力和边界条件，记录 MuJoCo flex、SuperDex 实验性薄壳、Newton 布料求解器及可选 PhysX 表面布料的实际运动。MuJoCo/Newton 显式使用面积集中的顶点质量；SuperDex 保留原生薄壳 FEM 惯性，并核对总质量。当前是**名义材料的数值实验**；不同求解器尚未完成材料响应校准，不能据此排名真实物理精度。
 
+## 先看动图
+
+| 实验 | 同步回放 | 看什么 |
+| --- | --- | --- |
+| 下垂 | [![四引擎下垂](../../docs/evidence/cloth-studio/sag.gif)](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html) | 固定边、悬垂形状与振荡 |
+| 球面覆盖 | [![四引擎覆盖球体](../../docs/evidence/cloth-studio/drape.gif)](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html) | 贴合、穿透与表面穿越 |
+
+预览四个引擎的历史 case 00，完整页展开八种配置；完整 0–3 s、正常速度；相同相机与显示设置，原始几何与失败评分保留。[六引擎覆盖、完整视频、来源与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html)。这不是已标定材料或引擎精度排名。
+
 ## 实验与输入
 
 | 实验 | 边界条件 | 独立测量 |
@@ -55,9 +64,7 @@ uv pip install --python .venv/bin/python \
   demos/cloth-benchmark/runs/mujoco-extension
 ```
 
-![SuperDex 原生薄壳下垂](media/superdex-shell-sag.gif)
-
-完整 3 秒 SuperDex 薄壳开发场景的记录回放。[MP4](media/superdex-shell-sag.mp4) · [媒体来源](media/superdex-shell-sag.json)。展示的是数值下垂实验，不代表材料已校准。
+[旧版单配置开发场景与来源](media/superdex-shell-sag.json)保留供追溯。
 
 ## 开发结果
 

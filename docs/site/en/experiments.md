@@ -13,7 +13,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 | Apple stem grasp | [demos/apple-stem-grasp/](https://github.com/huangkiki/Dexlab/tree/main/demos/apple-stem-grasp/) | OpenArm + Wuji SDF-SDF frictional holding; distinguish default cases and historical perturbations |
 | Robot cloth grasp | [demos/cloth-folding/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-folding/) | Pinch, lift and release; historical intersections retained; one repaired 9 s development case passes, robustness untested |
 | Contact and drives | [demos/contact-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/contact-benchmark/) | Sliding, loading/unloading and transients; synthetic response is not hardware calibration |
-| Basic cloth | [demos/cloth-benchmark/](https://github.com/huangkiki/Dexlab/tree/main/demos/cloth-benchmark/) | Stretch, drape, collision and falling folds; separate material/solver capabilities |
+| Basic cloth | [Cloth engine comparison](cloth-comparison.md) | Stretch, drape, collision and falling folds; separate material/solver capabilities |
 | PhysX | [demos/physx-contact/](https://github.com/huangkiki/Dexlab/tree/main/demos/physx-contact/) | Native rigid bodies, SDFs, joints and surface cloth; one success does not establish held-out performance |
 | Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | Scoped rigid evidence in #42; [PBD cloth diagnostics](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md) retain failed momentum/grasp checks; tested frictional grasp profile rejected; equal-time response, connected folds and two held-out offsets recorded |
 
@@ -58,7 +58,7 @@ The [16-run planar report](https://github.com/huangkiki/Dexlab/blob/main/demos/c
 
 ## Repaired cloth development case
 
-![Continuous repaired pinch, lift and release](../../../demos/cloth-folding/media/compliance-grasp.gif)
+![Continuous repaired pinch, lift and release](../../../docs/evidence/cloth-studio/grasp.gif)
 
 One 9 s candidate passes the fixed v3 criteria; self penetration remains close to its limit. [Metrics, failed controls, video provenance and exact command](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-folding/SETTLING.md). This does not replace the historical failure above or establish robustness.
 

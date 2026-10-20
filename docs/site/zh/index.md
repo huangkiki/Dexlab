@@ -11,159 +11,150 @@
 <span id="visual-experiment-catalogue"></span>
 ```
 
-点击真实动图查看完整录像、曲线与复现方法；成功、失败和适用条件一起保留。
+点击实验名或动图查看完整报告与复现方法。
 
-(rss)=
-### RSS 擦拭：海绵为什么会滑脱？
+````{list-table}
+:header-rows: 1
+:widths: 20 45 35
 
-一只夹爪固定杆件，另一只夹持海绵擦去墨迹。左侧保留 RSS 的辅助节点约束，右侧关闭该约束。
+* - 实验
+  - 动图预览
+  - 一句结果
+* - ```{raw} html
+    <span id="rss"></span>
+    ```
 
-```{raw} html
-<a href="rss-wiping.html"><img src="_static/rss-wiping/preview.gif" width="880" alt="RSS 擦拭：海绵为什么会滑脱？" loading="lazy"></a>
-```
+    [RSS 擦拭](rss-wiping.md)
+  - ```{image} ../../../docs/evidence/rss-wiping/preview.gif
+    :alt: RSS 原版／关闭约束，2 倍速
+    :width: 300px
+    :target: rss-wiping.html
+    ```
 
-固定几何与初态的三组重复中，原版 3/3 通过，清洁率 95.5%–95.9%；关闭约束后 0/3 通过，清洁率 39.9%–41.2%。这说明当前配置依赖辅助保持，尚未复现手内旋转。动图为第 1 组的 10–30 s 同步片段，2 倍速，保留原生碰撞几何视图。
+  - 辅助约束开启时保持，关闭后滑脱；当前复现的是擦拭。
+* - ```{raw} html
+    <span id="cut-push"></span><span id="banana-force"></span>
+    ```
 
-[完整结果与复现](rss-wiping.md)
+    [连续切割与推动](cut-push.md)
+  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface.gif
+    :alt: 豆腐状／香蕉状软材料
+    :width: 145px
+    :target: cut-push.html
+    ```
 
-(cut-push)=
-### 连续切割：最后一刀直接推开切块
+    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface.gif
+    :alt: 豆腐状／香蕉状软材料
+    :width: 145px
+    :target: cut-push.html
+    ```
 
-豆腐状软块切成三块，香蕉状材料切成四块；最后一刀后稍抬刀刃，再由刀面接触侧推。
+  - 合成材料可接触侧推；[独立单刀测力未证明收敛](banana-force.md)。
+* - ```{raw} html
+    <span id="scoring"></span>
+    ```
 
-```{raw} html
-<a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface.gif" width="420" alt="连续切割：最后一刀直接推开切块" loading="lazy"></a>
-<a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface.gif" width="420" alt="连续切割：最后一刀直接推开切块" loading="lazy"></a>
-```
+    [交叉浅划](tofu-scoring.md)
+  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/particles.gif
+    :alt: 原生粒子切割历史
+    :width: 300px
+    :target: tofu-scoring.html
+    ```
 
-切块的运动来自刀面接触，没有直接给材料速度增量。画面显示记录中的接触力与各块位移，表面与粒子视图可在报告中对照。这里使用合成材料；尚未完成真实食材标定或论文测力实验。
+  - 两次浅切后底部仍相连；颜色标记切割历史。
+* - ```{raw} html
+    <span id="apple"></span>
+    ```
 
-[完整结果与复现](cut-push.md)
+    [苹果抓梗](apple-replays)
+  - ```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
+    :alt: MuJoCo／SuperDex 历史脚本轨迹
+    :width: 145px
+    :target: experiments.html#apple-replays
+    ```
 
-(banana-force)=
-### 香蕉单刀测力：粒子细化后是否收敛？
+    ```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
+    :alt: MuJoCo／SuperDex 历史脚本轨迹
+    :width: 145px
+    :target: experiments.html#apple-replays
+    ```
 
-采用论文公开的香蕉材料数值，独立实现理想 J2 回归，并冻结单刀轨迹、采样、步长与接触敏感性协议。
+  - MuJoCo／SuperDex 历史脚本轨迹均完成 3 s 保持。
+* - ```{raw} html
+    <span id="cloth-comparison"></span>
+    ```
 
-```{image} ../../../docs/evidence/cutting/banana-force/force-protocol.svg
-:alt: 香蕉单刀测力：20 次采样、64 倍粒子细化、力通道和敏感性
-:width: 880
-```
+    [布料引擎对比](cloth-comparison.md)
+  - ```{image} ../../../docs/evidence/cloth-studio/sag.gif
+    :alt: 布料引擎对比
+    :width: 300px
+    :target: cloth-comparison.html
+    ```
 
-20 次基准运行的切板前材料峰值为 **0.8469 ± 0.1511 N**，材料冲量为 **0.07341 ± 0.01249 N·s**。64× 粒子运行完整结束，但冻结的 0.5 s 刀路内没有接触砧板，峰值升至 **4.3059 N**，相对基准均值的归一化 RMSE 为 **2.051**，因此没有证明步长、接触或粒子细化收敛，也不能据此声称真实香蕉测力精度。材料、支撑、总阻力、执行器和导向力分别记账。
+  - 四引擎的历史布料响应并排展示，失败与缺项保留。
+* - ```{raw} html
+    <span id="cloth"></span>
+    ```
 
-[完整结果、冻结协议与限制](banana-force.md)
+    [机器人夹布](experiments.md)
+  - ```{image} ../../../docs/evidence/cloth-studio/grasp.gif
+    :alt: 夹布、抬升与释放
+    :width: 300px
+    :target: experiments.html
+    ```
 
-(scoring)=
-### 交叉浅划：留下切口，底部仍然相连
+  - 一个开发场景完成抬升、保持与释放；尚非主动折布。
+* - ```{raw} html
+    <span id="visual-highlight-pinch"></span>
+    ```
 
-浅切一次，撤刀并转过 90° 后再切一次，观察切口和材料连通性。
+    [夹持力对照](pinch)
+  - ```{image} ../../../docs/evidence/force-limit/comparison.gif
+    :alt: 驱动力限额 0.4 N／0.8 N
+    :width: 300px
+    :target: visual-comparisons.html#pinch
+    ```
 
-```{raw} html
-<a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/particles.gif" width="880" alt="交叉浅划：留下切口，底部仍然相连" loading="lazy"></a>
-```
+  - 同一 Genesis 协议下，驱动力限额 0.4 N 滑脱、0.8 N 保持。
+* - ```{raw} html
+    <span id="visual-highlight-libero"></span>
+    ```
 
-默认与半步长记录均形成两条浅切，底部保持连接；未切负例被拒绝。动图中的颜色表示原生切割历史。当前纯弹性表面撤刀后会回弹，不能把颜色当成永久张开的切口。
+    [LIBERO 回放](libero-workflow.md)
+  - ```{image} ../../../docs/evidence/visual/libero-demo0-baseline.gif
+    :alt: demo 0 原生基线状态回放
+    :width: 300px
+    :target: libero-workflow.html
+    ```
 
-[完整结果与复现](tofu-scoring.md)
+  - 500 条官方示范：任务成功 495 条，全部数值诊断通过 0 条。
+* - ```{raw} html
+    <span id="visual-highlight-incline"></span>
+    ```
 
-(apple)=
-### 苹果抓梗：两指接触能否持续保持？
+    [六引擎斜面滑动](incline)
+  - ```{image} ../../../docs/evidence/visual/incline-sliding-0.001.gif
+    :alt: 1 ms 步长滑动记录
+    :width: 300px
+    :target: visual-comparisons.html#incline
+    ```
 
-OpenArm＋Wuji 用拇指和食指夹住苹果梗，抬升并保持。左为 MuJoCo，右为 SuperDex FP64 的历史开发记录。
+  - 比较六引擎滑动响应；相同参数数值不代表模型等效。
+* - ```{raw} html
+    <span id="visual-highlight-normal"></span>
+    ```
 
-::::{grid} 1 1 2 2
-:gutter: 3
-:::{grid-item}
-```{image} ../../../demos/apple-stem-grasp/media/mujoco-sdf.gif
-:alt: 苹果抓梗：两指接触能否持续保持？
-:width: 420px
-:target: experiments.html#apple-replays
-```
-:::
-:::{grid-item}
-```{image} ../../../demos/apple-stem-grasp/media/superdex-sdf.gif
-:alt: 苹果抓梗：两指接触能否持续保持？
-:width: 420px
-:target: experiments.html#apple-replays
-```
-:::
-::::
+    [法向接触标定](normal)
+  - ```{image} ../../../docs/evidence/visual/normal-calibration.gif
+    :alt: 合成目标的加载、保持与卸载
+    :width: 300px
+    :target: visual-comparisons.html#normal
+    ```
 
-两条已记录的 14 s 轨迹均通过完整 3 s 保持检查。动作来自已知位姿和固定关节目标，苹果无附着约束；这是固定场景的仿真验收，尚未验证视觉策略或真机精度。
+  - 合成目标的加载拟合改善，卸载和迁移仍需分别验证。
+````
 
-[完整结果与复现](apple-replays)
-
-(cloth)=
-### 机器人夹布：抬起之后还能保持和释放吗？
-
-机器人依靠接触和摩擦夹住布料，再执行抬升、保持和释放。
-
-```{image} ../../../demos/cloth-folding/media/compliance-grasp.gif
-:alt: 机器人夹布：抬起之后还能保持和释放吗？
-:width: 880px
-:target: experiments.html
-```
-
-修复几何与柔顺设置后，一个 9 s 开发场景通过固定 v3 标准；历史桌体相交失败仍保留，自接触穿透仍接近阈值。动图展示夹布，不代表主动折布成功或跨材料鲁棒性。
-
-[完整结果与复现](experiments.md)
-
-(visual-highlight-pinch)=
-### 夹持力限额：0.4 N 滑脱，0.8 N 保持
-
-在同一 Genesis 夹具和物体上改变指关节驱动力限额，比较闭合、抬升、保持和释放。
-
-```{raw} html
-<a href="visual-comparisons.html#pinch"><img src="_static/force-limit/comparison.gif" width="880" alt="夹持力限额：0.4 N 滑脱，0.8 N 保持" loading="lazy"></a>
-```
-
-该协议中，0.4 N 配置滑脱，0.8 N 配置保持；张开负例和偏移场景一并记录。驱动力限额不是实测接触力，结果不能直接换算成真机夹持力。
-
-[完整结果与复现](pinch)
-
-(visual-highlight-libero)=
-### LIBERO：任务成功之后，物理诊断是否也通过？
-
-回放官方动作，保留成功与失败，再检查接触和状态记录。下面展示 demo 0 的原生基线状态回放。
-
-```{raw} html
-<a href="libero-workflow.html"><img src="_static/visual/libero-demo0-baseline.gif" width="880" alt="LIBERO：任务成功之后，物理诊断是否也通过？" loading="lazy"></a>
-```
-
-Object 套件十项任务的 500 条官方示范已有有效记录：495 条原生任务成功、5 条失败，0 条通过全部数值诊断。动图只是其中一个已有回放，不能代表 500 条全部成功；这也不是视觉策略闭环评测。
-
-[完整结果与复现](libero-workflow.md)
-
-(visual-highlight-incline)=
-### 六引擎斜面：同一方块，为什么滑动不同？
-
-比较同一尺寸与质量的方块在斜面上的静止、滑动和名义零摩擦响应。动图为 1 ms 步长的滑动记录。
-
-```{raw} html
-<a href="visual-comparisons.html#incline"><img src="_static/visual/incline-sliding-0.001.gif" width="880" alt="六引擎斜面：同一方块，为什么滑动不同？" loading="lazy"></a>
-```
-
-MuJoCo、SuperDex、Genesis、Newton Physics、PhysX 和 Drake 的响应按各自配置记录，保留失败与无效观测。参数数值相同不代表接触模型等效；完整曲线用于区分运动差异和观测问题。
-
-[完整结果与复现](incline)
-
-(visual-highlight-normal)=
-### 法向接触：调过加载曲线，卸载表现如何？
-
-在同一个 MuJoCo 场景中调整接触参数，比较压入、保持和卸载。
-
-```{raw} html
-<a href="visual-comparisons.html#normal"><img src="_static/visual/normal-calibration.gif" width="880" alt="法向接触：调过加载曲线，卸载表现如何？" loading="lazy"></a>
-```
-
-相对合成的 20 kN/m 目标，加载响应可以改善，但完整卸载、动态响应和质量迁移需要分别验证。回放保持实际几何比例，微小位移需结合报告曲线阅读；合成参照不等于真实材料标定。
-
-[完整结果与复现](normal)
-
-更多历史切割、碰撞、布料力学、质量／尺寸迁移和误差—成本扫描见[完整实验目录](experiments.md).
-
-[新增动图的来源与转换记录](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/visual/homepage-previews.json)。
+[完整实验目录](experiments.md) · 动图来自实际仿真或记录回放；结果仅适用于各报告的配置与条件。
 
 (quickstart)=
 ## 先运行苹果抓梗
@@ -215,6 +206,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 ```{toctree}
 :hidden:
 :maxdepth: 1
+
+布料引擎对比 <cloth-comparison>
 
 实验目录 <experiments>
 安装复现 <quickstart>
