@@ -57,9 +57,9 @@
     "record_integrity": "plastic runs require finite nonnegative per-substep plastic-dissipation telemetry"
   },
   "source_sha256": {
-    "src/dexlab/cutting.py": "7a43f6155d0519f513b6a02edf6e1d040e0e263c49cb30f7624bc7f25d19d1a8",
+    "src/dexlab/cutting.py": "df1fa57226783d7e414fa66e9a81accf929ec2c83e4963e824637911aae0c7e1",
     "src/dexlab/tofu_cut.py": "d04f60183802d97540ab8abec3fa0ec7f6a3e9956d7a057a2cc2f8776e9e3f85",
-    "tests/test_cutting.py": "4ec1c2dda668c02b15ac422f8e0431b4f310e8823293479a49536e6c141c2f86",
+    "tests/test_cutting.py": "161c9784fcf886d846622022b7c3d97afaedf6c48ce14e3b596c4e9b8a427e94",
     "tests/test_cutting_plasticity.py": "76eada69b982c5e076e41245d37fa14e465974f5bb67ab94c3c5cd4ef6c7c134"
   },
   "execution_boundary": "No banana cutting-force simulation or paper-force agreement claim is part of this material-only qualification. The single-cut trajectory, force epochs, timestep/contact sensitivity, 20 sampling cohort and quarter-grid refined run require the next frozen protocol."

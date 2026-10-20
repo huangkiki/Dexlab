@@ -410,6 +410,26 @@
     "schema_version": 1,
     "catalogue": [
       {
+        "id": "banana-force",
+        "title": {
+          "zh": "香蕉单刀测力：20 次采样与 64× 粒子",
+          "en": "Banana single-cut force: 20 samplings and 64× particles"
+        },
+        "engines": "CPU TLMPM / independent paper-value protocol",
+        "link": "banana-force.html",
+        "question": {
+          "zh": "材料力是否对采样、步长、接触尺度和粒子细化稳定？",
+          "en": "Is material resistance stable across sampling, timestep, contact scale and particle refinement?"
+        },
+        "finding": {
+          "zh": "20 次基准记账合格；64× 在 0.5 s 内未接触砧板，RMSE 为 2.051，不能支持收敛或真实力精度。",
+          "en": "Twenty baseline runs qualify numerically; the 64× case misses support contact within 0.5 s and gives 2.051 RMSE, so convergence and real-force accuracy remain unsupported."
+        },
+        "thumbnail": "docs/evidence/cutting/banana-force/force-protocol.svg",
+        "site_thumbnail": "_static/cutting/banana-force/force-protocol.svg",
+        "thumbnail_sha256": "c3d76cf18f17ea8bee695366485b50ed199142a07db75fd580babee1f0b317d6"
+      },
+      {
         "id": "cut-push",
         "title": {
           "zh": "最后一刀直接侧推：豆腐与香蕉",
