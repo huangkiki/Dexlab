@@ -8,7 +8,7 @@
 
 Three guided cuts, four pieces, persistent ternary cut history and a dynamic blade/material reaction loop. Synthetic geometry and parameters; no real-food calibration, arm or learned policy.
 
-Surface seams and frame-wise opening measurements derive from the same recorded blade path instead of three built-in planes. This remains a planar approximation, not Hermite/local dual contouring.
+Surface seams, frame-wise opening measurements and complete-task scoring derive from the same recorded blade path instead of three built-in planes or scoring regions. This remains a planar approximation, not Hermite/local dual contouring. Incomplete probes may use manifest-declared planned planes only for failed-run diagnostics.
 
 Use `python -m dexlab.tofu_cut --task banana --motion-protocol impulse --output RUN` inside the repository's bounded execution guard. Independently score with `python -m dexlab.cutting_score RUN`, then render the saved states with `python -m dexlab.cutting_showcase RUN --output MEDIA`. See the linked experiment for frozen parameters, negative controls, resource limits and complete reproduction instructions.
 

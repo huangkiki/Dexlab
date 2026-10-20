@@ -8,7 +8,7 @@
 
 连续三刀、四段材料，持久三进制切割历史，以及刀具—材料双向反力闭环。几何和参数为合成设置；尚未做真实香蕉标定，不含机械臂或学习策略。
 
-表面直线切缝和逐帧开口数值从同一份记录刀路生成，不再内置三条固定切面；这仍是平面近似，不是 Hermite／局部对偶轮廓重建。
+表面直线切缝、逐帧开口数值和完整任务评分从同一份记录刀路生成，不再内置三条固定切面或评分分区；这仍是平面近似，不是 Hermite／局部对偶轮廓重建。未完成的短探针只能使用清单声明的计划切面输出失败诊断。
 
 在仓库的资源限额与共享运行锁内执行 `python -m dexlab.tofu_cut --task banana --motion-protocol impulse --output RUN`，用 `python -m dexlab.cutting_score RUN` 独立评分，再用 `python -m dexlab.cutting_showcase RUN --output MEDIA` 渲染保存状态。参数、负对照、资源限制与复现步骤见上面的实验页。
 

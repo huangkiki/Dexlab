@@ -4,11 +4,10 @@ import unittest
 
 import numpy as np
 
-from dexlab.cutting_geometry import material_points
+from dexlab.cutting_geometry import material_points, recorded_cut_geometry, recorded_sequential_regions
 from dexlab.cutting_metrics import (
     face_opening,
     face_pairs,
-    recorded_cut_geometry,
     reference_tetrahedra,
     signed_volumes,
 )
@@ -56,6 +55,38 @@ class ReplayMetricTests(unittest.TestCase):
 
         self.assertAlmostEqual(planes[0], .015)
         self.assertEqual(axes, (0,))
+
+    def test_sequential_regions_follow_recorded_planes_instead_of_task_defaults(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        planes = (-.024, .006, .036)
+        trace = {
+            'cut_index': np.repeat(np.arange(3), 2),
+            'cutting_active': np.ones(6, dtype=bool),
+            'blade_position_m': np.repeat(
+                np.column_stack((planes, np.zeros(3), np.full(3, .02))), 2, axis=0),
+        }
+
+        regions, measured = recorded_sequential_regions(reference, trace, .003, 3)
+
+        self.assertEqual(measured, planes)
+        np.testing.assert_array_equal(
+            np.bincount(regions, minlength=4),
+            [np.count_nonzero(reference[:, 0] < -.024),
+             np.count_nonzero((reference[:, 0] >= -.024) & (reference[:, 0] < .006)),
+             np.count_nonzero((reference[:, 0] >= .006) & (reference[:, 0] < .036)),
+             np.count_nonzero(reference[:, 0] >= .036)],
+        )
+
+    def test_sequential_regions_require_every_recorded_cut(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        trace = {
+            'cut_index': np.array([0, 1]),
+            'cutting_active': np.ones(2, dtype=bool),
+            'blade_position_m': np.array([[-.03, 0., .02], [0., 0., .02]]),
+        }
+
+        with self.assertRaisesRegex(ValueError, 'missing recorded cut geometry'):
+            recorded_sequential_regions(reference, trace, .003, 3)
 
     def test_second_cross_cut_measures_y_opening_and_preserves_first_digit(self):
         reference = material_points((.03, .03, .015), .0075)
