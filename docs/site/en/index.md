@@ -13,140 +13,18 @@
 
 Click an experiment or GIF for the full report and reproduction steps.
 
-````{list-table}
-:header-rows: 1
-:widths: 20 45 35
-
-* - Experiment
-  - Animated preview
-  - Result
-* - ```{raw} html
-    <span id="rss"></span>
-    ```
-
-    [RSS wiping](rss-wiping.md)
-  - ```{image} ../../../docs/evidence/studio/rss.gif
-    :alt: RSS original recorded trajectory in RTX, 10–19.9 s
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - Retains the sponge with auxiliary constraints; slips without them. Wiping reproduction.
-* - ```{raw} html
-    <span id="cut-push"></span><span id="banana-force"></span>
-    ```
-
-    [Cutting and pushing](cut-push.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface-rtx.gif
-    :alt: RTX replay: tofu-like / banana-like material
-    :width: 145px
-    :target: cut-push.html
-    ```
-
-    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface-rtx.gif
-    :alt: RTX replay: tofu-like / banana-like material
-    :width: 145px
-    :target: cut-push.html
-    ```
-
-  - Blade contact pushes synthetic material; [separate single-cut force results do not establish convergence](banana-force.md).
-* - ```{raw} html
-    <span id="scoring"></span>
-    ```
-
-    [Cross scoring](tofu-scoring.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/surface.gif
-    :alt: Surface reconstruction from recorded states
-    :width: 300px
-    :target: tofu-scoring.html
-    ```
-
-  - Two shallow cuts leave a connected base; the elastic surface can rebound. Native particle views remain available.
-* - ```{raw} html
-    <span id="apple"></span>
-    ```
-
-    [Apple-stem grasp](apple-replays)
-  - ```{image} ../../../docs/evidence/studio/apple.gif
-    :alt: MuJoCo 3.16 / SuperDex 1.0 RTX replay
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - Both 14 s MuJoCo 3.16 / SuperDex 1.0 records pass the 3 s hold check; scripted control.
-* - ```{raw} html
-    <span id="cloth-comparison"></span>
-    ```
-
-    [Cloth engine comparison](cloth-comparison.md)
-  - ```{image} ../../../docs/evidence/cloth-studio/sag.gif
-    :alt: Cloth engine comparison
-    :width: 300px
-    :target: cloth-comparison.html
-    ```
-
-  - Historical cloth responses across four engines, retaining failures and coverage gaps.
-* - ```{raw} html
-    <span id="cloth"></span>
-    ```
-
-    [Robot cloth grasp](experiments.md)
-  - ```{image} ../../../docs/evidence/cloth-studio/grasp.gif
-    :alt: Cloth grasp, lift and release
-    :width: 300px
-    :target: experiments.html
-    ```
-
-  - One development scene lifts, holds and releases; active folding remains unverified.
-* - ```{raw} html
-    <span id="visual-highlight-pinch"></span>
-    ```
-
-    [Force-limit comparison](pinch)
-  - ```{image} ../../../docs/evidence/studio/pinch.gif
-    :alt: Actuator limit 0.4 N / 0.8 N
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - In the same Genesis protocol, actuator limits of 0.4 N slip and 0.8 N hold.
-* - ```{raw} html
-    <span id="visual-highlight-libero"></span>
-    ```
-
-    [LIBERO replay](libero-workflow.md)
-  - ```{image} ../../../docs/evidence/studio/libero.gif
-    :alt: Demo 0 native baseline state replay
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - 500 official demonstrations: 495 task successes; none pass every numerical diagnostic.
-* - ```{raw} html
-    <span id="visual-highlight-incline"></span>
-    ```
-
-    [Six-engine incline](incline)
-  - ```{image} ../../../docs/evidence/studio/incline.gif
-    :alt: Sliding records at 1 ms timestep
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - Compare sliding responses across six engines; equal parameter values do not imply equivalent models.
-* - ```{raw} html
-    <span id="visual-highlight-normal"></span>
-    ```
-
-    [Normal contact calibration](normal)
-  - ```{image} ../../../docs/evidence/studio/normal.gif
-    :alt: Loading, hold and unloading against a synthetic target
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - Loading fits a synthetic target better; unloading and transfer need separate validation.
-````
+| Experiment | Animated preview |
+| --- | :---: |
+| <a id="rss"></a>**[RSS wiping](rss-wiping.md)** | <a href="studio-rendering.html"><img src="_static/studio/rss.gif" width="300" alt="RSS original recorded trajectory in RTX, 10–19.9 s" loading="lazy"></a> |
+| <a id="cut-push"></a><a id="banana-force"></a>**[Cutting and pushing](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="Tofu cutting and pushing in RTX" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="Banana cutting and pushing in RTX" loading="lazy"></a> |
+| <a id="scoring"></a>**[Cross scoring](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="Surface reconstruction from recorded states" loading="lazy"></a> |
+| <a id="apple"></a>**[Apple-stem grasp](apple-replays)** | <a href="studio-rendering.html"><img src="_static/studio/apple.gif" width="412" alt="MuJoCo 3.16 / SuperDex 1.0 RTX replay" loading="lazy"></a> |
+| <a id="cloth-comparison"></a>**[Cloth engine comparison](cloth-comparison.md)** | <a href="cloth-comparison.html"><img src="_static/cloth-studio/sag.gif" width="208" alt="Matched sag across four engines" loading="lazy"></a> |
+| <a id="cloth"></a>**[Robot cloth grasp](experiments.md)** | <a href="experiments.html"><img src="_static/cloth-studio/grasp.gif" width="262" alt="Cloth grasp, lift and release" loading="lazy"></a> |
+| <a id="visual-highlight-pinch"></a>**[Force-limit comparison](pinch)** | <a href="studio-rendering.html"><img src="_static/studio/pinch.gif" width="412" alt="Actuator limit 0.4 N / 0.8 N" loading="lazy"></a> |
+| <a id="visual-highlight-libero"></a>**[LIBERO replay](libero-workflow.md)** | <a href="studio-rendering.html"><img src="_static/studio/libero.gif" width="206" alt="Demo 0 native baseline state replay" loading="lazy"></a> |
+| <a id="visual-highlight-incline"></a>**[Six-engine incline](incline)** | <a href="studio-rendering.html"><img src="_static/studio/incline.gif" width="309" alt="Sliding records at 1 ms timestep" loading="lazy"></a> |
+| <a id="visual-highlight-normal"></a>**[Normal contact calibration](normal)** | <a href="studio-rendering.html"><img src="_static/studio/normal.gif" width="412" alt="Loading, hold and unloading against a synthetic target" loading="lazy"></a> |
 
 [Full experiment index](experiments.md) · GIFs show actual simulation or recorded-state replay; results apply to each report’s configuration and conditions.
 
