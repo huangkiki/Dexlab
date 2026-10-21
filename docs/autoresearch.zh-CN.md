@@ -20,6 +20,21 @@
 
 ## 提交路径
 
+### 明确选择测试运行时
+
+通过统一入口运行测试，选择与目标环境对应的配置：
+
+```bash
+# 历史复现环境（MuJoCo 3.11.0）
+.venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
+# MuJoCo 包和原生库均为 3.16.0 的候选环境
+.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.16.0
+```
+
+命令行参数优先于 `DEXLAB_MUJOCO_PROFILE`；两者均未设置时，在发现测试前停止。入口输出解释器、审查源码、配置和包／原生库版本，并用本工作树的绝对源码路径运行测试。运行时缺失或版本不匹配会在测试启动前报错。`--check-only` 只做预检；`--pattern test_NAME.py` 可选择单个测试文件，不能代替完整提交门禁。
+
+`autoresearch.py check` 和 `submit` 共用此入口，运行它们时须明确设置 `DEXLAB_MUJOCO_PROFILE`；候选环境提交仍须提供 `DEXLAB_QUALIFICATION_WHEELS` 并通过隔离的 editable 源码检查。入口不安装或更改软件包，不改变引擎的历史默认值，配置匹配也不代表正式实验资格。纯文字检查可只读复用未改动的依赖环境；代码提交仍须正确安装当前工作树源码。
+
 | 改动 | 合格交付前需要的验证 |
 | --- | --- |
 | 纯文字 README／AGENTS／报告 | 完整单测、严格双语构建、`git diff --check`、全部 diff 审查；绑定真实 base/head/tree，核实导入的是审查源码。完成后才可直接 Git/GitHub 提交。 |

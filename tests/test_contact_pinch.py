@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.spatial.transform import Rotation
+from native_fixture import require_completed_run
 
 from dexlab.contact_pinch import PAD_HALF, CylinderCase, cylinder_box_overlap, score
 from dexlab.contact_pinch_run import normal_components_consistent, run, verify
@@ -118,15 +119,13 @@ class CylinderEvidenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.temp = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(cls.temp.cleanup)
         cls.output = Path(cls.temp.name) / "native"
         cls.case = CylinderCase()
         cls.result = run(cls.case, "mujoco", cls.output)
+        require_completed_run(cls.output)
         with np.load(cls.output / "states.npz", allow_pickle=False) as saved:
             cls.data = dict(saved)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.temp.cleanup()
 
     def copy_data(self):
         return {k: v.copy() for k, v in self.data.items()}

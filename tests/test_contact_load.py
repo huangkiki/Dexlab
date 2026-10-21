@@ -7,6 +7,7 @@ from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
+from native_fixture import require_completed_run
 
 from dexlab.contact_indent_run import run, verify
 from dexlab.contact_load import LoadCase, score
@@ -17,16 +18,14 @@ class NormalResponseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(cls.tmp.cleanup)
         cls.path = Path(cls.tmp.name) / "run"
         cls.case = LoadCase()
         cls.profile = {"solref": [-2500, -100], "solimp": [0.9, 0.9, 0.001, 0.5, 2]}
         cls.result = run(cls.case, "mujoco", cls.path, normal_parameters=cls.profile)
+        require_completed_run(cls.path)
         with np.load(cls.path / "states.npz", allow_pickle=False) as saved:
             cls.data = dict(saved)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.tmp.cleanup()
 
     def copy_data(self):
         return {k: v.copy() for k, v in self.data.items()}
