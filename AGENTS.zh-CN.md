@@ -28,6 +28,6 @@
 ## 验证与交付
 
 - 中英文同步，README.md 是中文首页，使用带来源的连续抓取近景。每个 PR 审查首页影响：新增能力、结果、重要失败或复现变化同步读者入口；纯内部改动说明不更新理由。必须严格双语构建，配置完成不等于部署完成。
-- 运行 `git diff --check` 和 `.venv/bin/python -m unittest discover -s tests -p 'test_*.py'`。可执行内容、机器读取元数据、科学协议、控制、模型、任务或评分变化使用 `scripts/autoresearch.py submit` 完整门禁，包括双后端各完整 14 秒及独立 `verify_sdf_grasp.py`。纯文字遵循文档专用门禁；混合改动从严，未执行检查不能说通过。
+- 运行 `git diff --check` 和 `.venv/bin/python scripts/run_tests.py --mujoco-profile PROFILE`，按[操作指南](docs/autoresearch.zh-CN.md#明确选择测试运行时)选择与目标环境对应的明确配置。可执行内容、机器读取元数据、科学协议、控制、模型、任务或评分变化使用 `scripts/autoresearch.py submit` 完整门禁，包括双后端各完整 14 秒及独立 `verify_sdf_grasp.py`。纯文字遵循文档专用门禁；混合改动从严，未执行检查不能说通过。
 - 维护者于 2026-09-29 授权符合条件的自动合并与 GitHub Release。按[操作指南](docs/autoresearch.zh-CN.md)审查实际 head，满足检查与未决线程要求，验证组合树后绑定 head SHA squash 合并。不强推 main、不绕保护、不移动旧标签。缺环境／门禁时保持候选 Draft，不合并。
 - 核验合并树、真实站点构建／部署和线上版本；Issue 必须完整满足自身范围才关闭，不以部分 PR 代替。发版使用新不可变标签并核验公开附件，不发空版、不覆盖旧附件、不隐式发布 PyPI。缺外部数据写明确阻塞，不编造证据。

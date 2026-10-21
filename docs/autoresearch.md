@@ -20,6 +20,21 @@ Keep source/environment/configuration frozen through each batch, retain failed a
 
 ## Submission paths
 
+### Select the test runtime explicitly
+
+Run tests through the shared entry point, choosing the profile for the intended environment:
+
+```bash
+# Historical reproduction environment (MuJoCo 3.11.0)
+.venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
+# Candidate environment with MuJoCo package/native 3.16.0
+.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.16.0
+```
+
+The CLI option overrides `DEXLAB_MUJOCO_PROFILE`; if neither is set, the command stops before discovering tests. It reports the interpreter, reviewed source, profile and package/native versions, then runs the suite with absolute source paths from this checkout. Missing or mismatched runtimes fail before tests start. `--check-only` performs only this preflight; `--pattern test_NAME.py` selects a focused test file and does not replace the full submission gate.
+
+`autoresearch.py check` and `submit` use this entry point. Set `DEXLAB_MUJOCO_PROFILE` explicitly for those commands; candidate submission also still requires `DEXLAB_QUALIFICATION_WHEELS` and the isolated editable-source check. No package is installed or changed, the engine's historical default remains unchanged, and a matching profile does not grant formal experiment qualification. Pure prose may reuse an unchanged dependency environment read-only; executable submission still requires its own correctly installed worktree source.
+
 | Change | Required validation before eligible delivery |
 | --- | --- |
 | Pure prose README/AGENTS/report changes | Full unit suite, strict bilingual site build, `git diff --check`, entire-diff review; bind actual base/head/tree and verify reviewed source imports. Direct Git/GitHub submission is allowed only after that gate. |

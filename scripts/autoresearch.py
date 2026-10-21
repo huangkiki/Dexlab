@@ -341,13 +341,7 @@ def check(worktree, resource_dir=None):
     )
     run(
         python,
-        "-m",
-        "unittest",
-        "discover",
-        "-s",
-        "tests",
-        "-p",
-        "test_*.py",
+        "scripts/run_tests.py",
         cwd=worktree,
     )
     run_id = uuid.uuid4().hex
