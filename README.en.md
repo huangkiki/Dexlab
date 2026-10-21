@@ -29,6 +29,8 @@ Click an experiment or GIF for the full report and reproduction steps.
 
 [Studio replay and reproduction](https://huangkiki.github.io/Dexlab/en/latest/studio-rendering.html) · [Cutting-surface reconstruction and limits](https://huangkiki.github.io/Dexlab/en/latest/cutting-surface.html)
 
+[Which solver failed?](docs/site/en/solver-failure-audit.md) compares RSS tasks and existing DexLab evidence, separating missing coupling, failed configurations and execution errors.
+
 <a id="quickstart"></a>
 
 ## Start with apple-stem grasping

@@ -28,6 +28,8 @@
 
 [完整实验目录](experiments.md) · 动图来自实际仿真或记录回放；结果仅适用于各报告的配置与条件。
 
+[到底哪个 solver 失败了？](solver-failure-audit.md) 查看 RSS 任务、已有失败及归因边界。
+
 (quickstart)=
 ## 先运行苹果抓梗
 
@@ -78,6 +80,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco
 ```{toctree}
 :hidden:
 :maxdepth: 1
+
+Solver 失败复盘 <solver-failure-audit>
 
 高质量轨迹回放 <studio-rendering>
 布料引擎对比 <cloth-comparison>

@@ -1,5 +1,7 @@
 # Results and failures
 
+The [solver failure audit](solver-failure-audit.md) separates missing coupling, failed configurations and execution errors across RSS and existing DexLab evidence.
+
 ## Paired engine incline comparison
 
 [Same cube, three timesteps, complete paired report](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md): fixed profiles yield MuJoCo 3/9 and SuperDex 8/9 passes. Drift, initial transients and the lower drift of higher-impedance MuJoCo remain visible; no universal ranking.

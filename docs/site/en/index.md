@@ -28,6 +28,8 @@ Click an experiment or GIF for the full report and reproduction steps.
 
 [Full experiment index](experiments.md) · GIFs show actual simulation or recorded-state replay; results apply to each report’s configuration and conditions.
 
+[Which solver failed?](solver-failure-audit.md) reviews RSS tasks, existing failures and attribution limits.
+
 (quickstart)=
 ## Start with apple-stem grasping
 
@@ -78,6 +80,8 @@ Classical physical laws and existing empirical relations serve as references. Su
 ```{toctree}
 :hidden:
 :maxdepth: 1
+
+Solver failure audit <solver-failure-audit>
 
 Studio replay rendering <studio-rendering>
 Cloth engine comparison <cloth-comparison>

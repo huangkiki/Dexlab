@@ -29,6 +29,8 @@
 
 [高质量回放与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/studio-rendering.html) · [切割表面重建与限制](https://huangkiki.github.io/Dexlab/zh-cn/latest/cutting-surface.html)
 
+[到底哪个 solver 失败了？](docs/site/zh/solver-failure-audit.md) 对照 RSS 任务与 DexLab 既有记录，区分耦合缺失、配置失败和运行错误。
+
 <a id="quickstart"></a>
 
 ## 先运行苹果抓梗
