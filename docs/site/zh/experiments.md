@@ -6,7 +6,7 @@
 
 | 实验 | 代码入口 | 研究问题与状态 |
 |---|---|---|
-| [RSS 擦拭与辅助保持](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | 固定几何下比较原版与关闭 latch；保留保持、滑脱和清洁率结果 |
+| [RSS 擦拭与辅助保持](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | 原版用 latch 柔顺约束辅助海绵随手运动；固定几何下另测无辅助的接触保持、滑脱和清洁率 |
 | [连续切割与刀面推动](cut-push.md) | [demos/tofu-knife-push/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-knife-push/) | 豆腐三块、香蕉四块；用记录的刀面接触力解释分离运动，合成材料 |
 | [交叉浅划](tofu-scoring.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 两条浅切、底部连通；区分弹性回弹与原生切割历史 |
 | [豆腐状软块对半切](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 单次切割 CPU TLMPM、刀具反力闭环与撤刀后分离；独立 BladeMaster 参考实现 |

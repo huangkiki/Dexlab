@@ -18,7 +18,7 @@ These 13 complete replays retain the source times and scale. Apple uses two inde
 <p><a href="_static/studio/manifest.json">13-scene manifest</a></p>
 ```
 
-[Cutting surface reconstruction](cutting-surface.md) and [cloth studio comparisons](cloth-comparison.md) retain their separate geometry and provenance. [RSS matched tiled/RTX views](rss-wiping.md) remain available.
+[Cutting surface reconstruction](cutting-surface.md) and [cloth studio comparisons](cloth-comparison.md) retain their separate geometry and provenance. [RSS matched tiled/RTX views](rss-wiping.md) remain available. The RSS homepage GIF and these appearance comparisons use the original recording with compliant latch assistance. Changing the renderer does not remove that constraint; see the [latch explanation and no-latch comparison](latch) for contact-only outcomes.
 
 ## Replay a rigid scene
 

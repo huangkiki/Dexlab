@@ -6,6 +6,16 @@ This experiment runs RoboSimStudio's public wiping scene independently and compa
 
 **Observed result / 实测结果:** unchanged native test 9/9; controlled original 3/3 task passes, no-latch 0/3. See the [English report](../../docs/site/en/rss-wiping.md), [中文报告](../../docs/site/zh/rss-wiping.md), and [per-run summaries, trajectories and raw hashes / 逐次摘要、轨迹与原始哈希](../../docs/evidence/rss-wiping/results.json).
 
+## What latch means / latch 是什么
+
+The original's latch is **compliant grasp assistance**. Contact first squeezes the sponge; after grasp readiness, `pin_nodes` adds position constraints to nodes near the pads and `ride` moves their targets with the hand at each soft-body substep. An open command releases them. The authored stiffness is 4000 N/m and damping is 20 N·s/m, so nodes may deviate from their targets and the sponge still deforms. This is extra retention beyond friction, not a rigid weld or a physical glue model. [Pinned upstream implementation](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/bar.py#L425-L559).
+
+原版的 latch 是**柔顺辅助固定**：先靠接触夹住海绵，达到抓取就绪条件后，用 `pin_nodes` 约束夹持区域附近的节点，再由 `ride` 在每个软体子步更新随手运动的目标；收到张开命令时解除。设定刚度为 4000 N/m、阻尼为 20 N·s/m，节点可以小幅偏离目标，海绵仍能变形。这是摩擦之外的保持作用，不是刚性焊接或真实胶水模型。
+
+`--mode original` reproduces assisted wiping. `--mode no-latch` removes that assistance while retaining the same readiness and contact settings. Its failure does not by itself identify a friction, controller or coupling defect; see the paired report before interpreting success as physical accuracy.
+
+`--mode original` 复现带辅助保持的擦拭；`--mode no-latch` 保留相同就绪条件与接触设置，撤去辅助固定。带 latch 成功不能证明纯摩擦保持可靠；无 latch 失败也不能单独归因为摩擦、控制器或耦合缺陷。
+
 ## Frozen upstream / 固定上游
 
 - Repository: [RoboSimStudio](https://github.com/robosimstudio/robosimstudio).
