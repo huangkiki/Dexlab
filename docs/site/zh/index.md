@@ -13,140 +13,18 @@
 
 点击实验名或动图查看完整报告与复现方法。
 
-````{list-table}
-:header-rows: 1
-:widths: 20 45 35
-
-* - 实验
-  - 动图预览
-  - 一句结果
-* - ```{raw} html
-    <span id="rss"></span>
-    ```
-
-    [RSS 擦拭](rss-wiping.md)
-  - ```{image} ../../../docs/evidence/studio/rss.gif
-    :alt: RSS 原版记录的 RTX 回放，10–19.9 s
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - 辅助约束开启时保持，关闭后滑脱；当前复现的是擦拭。
-* - ```{raw} html
-    <span id="cut-push"></span><span id="banana-force"></span>
-    ```
-
-    [连续切割与推动](cut-push.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-cut-push/surface-rtx.gif
-    :alt: 豆腐状／香蕉状软材料的 RTX 回放
-    :width: 145px
-    :target: cut-push.html
-    ```
-
-    ```{image} ../../../docs/evidence/cutting/banana-cut-push/surface-rtx.gif
-    :alt: 豆腐状／香蕉状软材料的 RTX 回放
-    :width: 145px
-    :target: cut-push.html
-    ```
-
-  - 合成材料可接触侧推；[独立单刀测力未证明收敛](banana-force.md)。
-* - ```{raw} html
-    <span id="scoring"></span>
-    ```
-
-    [交叉浅划](tofu-scoring.md)
-  - ```{image} ../../../docs/evidence/cutting/tofu-scoring/surface.gif
-    :alt: 记录状态的表面重建
-    :width: 300px
-    :target: tofu-scoring.html
-    ```
-
-  - 两次浅切后底部仍相连；弹性表面可回弹，原生粒子对照保留。
-* - ```{raw} html
-    <span id="apple"></span>
-    ```
-
-    [苹果抓梗](apple-replays)
-  - ```{image} ../../../docs/evidence/studio/apple.gif
-    :alt: MuJoCo 3.16 / SuperDex 1.0 RTX replay
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - MuJoCo 3.16／SuperDex 1.0 两条 14 s 记录均通过 3 s 保持检查；固定脚本控制。
-* - ```{raw} html
-    <span id="cloth-comparison"></span>
-    ```
-
-    [布料引擎对比](cloth-comparison.md)
-  - ```{image} ../../../docs/evidence/cloth-studio/sag.gif
-    :alt: 布料引擎对比
-    :width: 300px
-    :target: cloth-comparison.html
-    ```
-
-  - 四引擎的历史布料响应并排展示，失败与缺项保留。
-* - ```{raw} html
-    <span id="cloth"></span>
-    ```
-
-    [机器人夹布](experiments.md)
-  - ```{image} ../../../docs/evidence/cloth-studio/grasp.gif
-    :alt: 夹布、抬升与释放
-    :width: 300px
-    :target: experiments.html
-    ```
-
-  - 一个开发场景完成抬升、保持与释放；尚非主动折布。
-* - ```{raw} html
-    <span id="visual-highlight-pinch"></span>
-    ```
-
-    [夹持力对照](pinch)
-  - ```{image} ../../../docs/evidence/studio/pinch.gif
-    :alt: 驱动力限额 0.4 N／0.8 N
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - 同一 Genesis 协议下，驱动力限额 0.4 N 滑脱、0.8 N 保持。
-* - ```{raw} html
-    <span id="visual-highlight-libero"></span>
-    ```
-
-    [LIBERO 回放](libero-workflow.md)
-  - ```{image} ../../../docs/evidence/studio/libero.gif
-    :alt: demo 0 原生基线状态回放
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - 500 条官方示范：任务成功 495 条，全部数值诊断通过 0 条。
-* - ```{raw} html
-    <span id="visual-highlight-incline"></span>
-    ```
-
-    [六引擎斜面滑动](incline)
-  - ```{image} ../../../docs/evidence/studio/incline.gif
-    :alt: 1 ms 步长滑动记录
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - 比较六引擎滑动响应；相同参数数值不代表模型等效。
-* - ```{raw} html
-    <span id="visual-highlight-normal"></span>
-    ```
-
-    [法向接触标定](normal)
-  - ```{image} ../../../docs/evidence/studio/normal.gif
-    :alt: 合成目标的加载、保持与卸载
-    :width: 300px
-    :target: studio-rendering.html
-    ```
-
-  - 合成目标的加载拟合改善，卸载和迁移仍需分别验证。
-````
+| 实验 | 动图预览 |
+| --- | :---: |
+| <a id="rss"></a>**[RSS 擦拭](rss-wiping.md)** | <a href="studio-rendering.html"><img src="_static/studio/rss.gif" width="300" alt="RSS 原版记录的 RTX 回放，10–19.9 s" loading="lazy"></a> |
+| <a id="cut-push"></a><a id="banana-force"></a>**[连续切割与推动](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="豆腐切块与推动 · RTX 回放" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="香蕉切割与推动 · RTX 回放" loading="lazy"></a> |
+| <a id="scoring"></a>**[交叉浅划](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="记录状态的表面重建" loading="lazy"></a> |
+| <a id="apple"></a>**[苹果抓梗](apple-replays)** | <a href="studio-rendering.html"><img src="_static/studio/apple.gif" width="412" alt="MuJoCo 3.16 / SuperDex 1.0 RTX replay" loading="lazy"></a> |
+| <a id="cloth-comparison"></a>**[布料引擎对比](cloth-comparison.md)** | <a href="cloth-comparison.html"><img src="_static/cloth-studio/sag.gif" width="208" alt="四引擎同场景下垂" loading="lazy"></a> |
+| <a id="cloth"></a>**[机器人夹布](experiments.md)** | <a href="experiments.html"><img src="_static/cloth-studio/grasp.gif" width="262" alt="夹布、抬升与释放" loading="lazy"></a> |
+| <a id="visual-highlight-pinch"></a>**[夹持力对照](pinch)** | <a href="studio-rendering.html"><img src="_static/studio/pinch.gif" width="412" alt="驱动力限额 0.4 N／0.8 N" loading="lazy"></a> |
+| <a id="visual-highlight-libero"></a>**[LIBERO 回放](libero-workflow.md)** | <a href="studio-rendering.html"><img src="_static/studio/libero.gif" width="206" alt="demo 0 原生基线状态回放" loading="lazy"></a> |
+| <a id="visual-highlight-incline"></a>**[六引擎斜面滑动](incline)** | <a href="studio-rendering.html"><img src="_static/studio/incline.gif" width="309" alt="1 ms 步长滑动记录" loading="lazy"></a> |
+| <a id="visual-highlight-normal"></a>**[法向接触标定](normal)** | <a href="studio-rendering.html"><img src="_static/studio/normal.gif" width="412" alt="合成目标的加载、保持与卸载" loading="lazy"></a> |
 
 [完整实验目录](experiments.md) · 动图来自实际仿真或记录回放；结果仅适用于各报告的配置与条件。
 
