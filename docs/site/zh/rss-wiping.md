@@ -1,6 +1,16 @@
 # RSS 海绵擦拭：复现与 latch 对照
 
-未改动的 RoboSimStudio 官方擦拭测试已通过 **全部 9 项断言**。独立运行的清洁率为 **95.5%**，对杆峰值接触力 **4.93 N**，保持阶段材料点区域质心在实测手坐标系下的最大位移约 **0.061 mm**。这复现了公开的辅助保持擦拭效果；手内旋转仍是另一个任务。
+未改动的 RoboSimStudio 官方擦拭测试已通过 **全部 9 项断言**。独立运行的清洁率为 **95.5%**，对杆峰值接触力 **4.93 N**，保持阶段材料点区域质心在实测手坐标系下的最大位移约 **0.061 mm**。**原版使用 latch 辅助固定海绵；成功复现的是带辅助保持的擦拭，不是纯摩擦抓持。** 手内旋转仍是另一个任务。
+
+(latch)=
+
+## latch 是什么，为什么影响结论
+
+这里的 latch 是仿真中的辅助固定机制：夹爪先通过接触挤压海绵，达到抓取就绪条件后，再给接触区域附近的海绵节点添加柔顺位置约束，让约束目标随手运动；收到张开命令时解除。海绵仍能变形，受约束节点也允许小幅偏离目标，不能理解为整块海绵被完全焊死。
+
+固定版本用 `pin_nodes` 建立约束，刚度为 **4000 N/m**、阻尼为 **20 N·s/m**，再用 `ride` 在每个软体子步更新随手运动的目标。它提供了接触摩擦之外的保持作用，不是真实胶水模型，也不是增大摩擦系数。[上游 latch 实现](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/bar.py#L425-L559)。
+
+因此，带 latch 的成功能说明这个辅助配置完成了擦拭；不能单凭它证明接触与摩擦足以维持抓持。下方无 latch 对照保留相同抓取就绪条件和接触设置，仅撤去辅助约束。**无 latch 后滑脱也不自动证明求解器错误**：实际载荷、控制、材料、摩擦模型与耦合误差仍需分别检查。
 
 ## 固定条件的重复实验
 
@@ -26,7 +36,7 @@
 
 ```{raw} html
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
-<section><h3>原版：柔顺 latch</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
+<section><h3>原版：latch 柔顺辅助固定</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
 <section><h3>无 latch：仅靠接触保持</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/no-latch.png" src="_static/rss-wiping/no-latch.mp4"></video></section>
 </div>
 ```
@@ -35,7 +45,7 @@
 
 ## 同一轨迹的 RTX 外观回放
 
-已将原版第 1 次记录的 **10–20 s 连续片段**重渲染为 100 帧、10 fps、960×544 的 RTX 视频。下图左侧为 tiled 碰撞视图，右侧为 OVRTX 路径追踪，使用相同机位、相同时间戳与原始状态。金属反射、桌面纹理、机器人外壳光泽和柔和阴影来自固定版本 RSS 的材质、房间和灯光。
+已将使用 latch 的原版第 1 次记录的 **10–20 s 连续片段**重渲染为 100 帧、10 fps、960×544 的 RTX 视频。下图左侧为 tiled 碰撞视图，右侧为 OVRTX 路径追踪，**两侧都保留 latch 辅助保持**，使用相同机位、相同时间戳与原始状态。金属反射、桌面纹理、机器人外壳光泽和柔和阴影来自固定版本 RSS 的材质、房间和灯光。
 
 ![同一状态与机位：左 tiled，右 RTX；10–20 s，原速回放](../../evidence/rss-wiping/rtx/comparison.gif)
 

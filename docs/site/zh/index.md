@@ -15,7 +15,7 @@
 
 | 实验 | 动图预览 |
 | --- | :---: |
-| <a id="rss"></a>**[RSS 擦拭](rss-wiping.md)** | <a href="studio-rendering.html"><img src="_static/studio/rss.gif" width="300" alt="RSS 原版记录的 RTX 回放，10–19.9 s" loading="lazy"></a> |
+| <a id="rss"></a>**[RSS 擦拭](rss-wiping.md)**<br>使用 latch 辅助固定：夹稳后用柔顺约束带动海绵局部随手运动，松开时解除。成功不代表纯摩擦保持；[查看无 latch 对照](latch)。 | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="RSS 使用 latch 辅助固定的原版 RTX 回放，10–19.9 s" loading="lazy"></a> |
 | <a id="cut-push"></a><a id="banana-force"></a>**[连续切割与推动](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="豆腐切块与推动 · RTX 回放" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="香蕉切割与推动 · RTX 回放" loading="lazy"></a> |
 | <a id="scoring"></a>**[交叉浅划](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="记录状态的表面重建" loading="lazy"></a> |
 | <a id="apple"></a>**[苹果抓梗](apple-replays)** | <a href="studio-rendering.html"><img src="_static/studio/apple.gif" width="412" alt="MuJoCo 3.16 / SuperDex 1.0 RTX replay" loading="lazy"></a> |

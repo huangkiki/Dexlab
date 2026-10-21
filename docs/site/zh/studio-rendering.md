@@ -18,7 +18,7 @@ Studio 回放让接触部位、材料表面和物体运动更清楚。它使用�
 <p><a href="_static/studio/manifest.json">13-scene manifest</a></p>
 ```
 
-[切割表面重建](cutting-surface.md)与[布料 Studio 对比](cloth-comparison.md)保留各自的几何和来源记录；另有 [RSS 同机位默认／RTX 对照](rss-wiping.md)。
+[切割表面重建](cutting-surface.md)与[布料 Studio 对比](cloth-comparison.md)保留各自的几何和来源记录；另有 [RSS 同机位默认／RTX 对照](rss-wiping.md)。RSS 首页动图及这组外观对照都来自使用 latch 柔顺辅助固定的原版记录；渲染方式改变不表示去掉了辅助约束，纯接触结果见 [latch 说明与无 latch 对照](latch)。
 
 ## 回放刚体场景
 

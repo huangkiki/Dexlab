@@ -1,6 +1,16 @@
 # RSS sponge wiping: reproduction and latch ablation
 
-The unchanged RoboSimStudio wiping test passed **all nine assertions**. Its independent execution cleaned **95.5%** of the stripe, with **4.93 N** peak bar contact force and **0.061 mm** maximum held material-patch centroid displacement in the measured hand frame. This establishes reproduction of the public assisted wiping example; in-hand rotation remains a separate task.
+The unchanged RoboSimStudio wiping test passed **all nine assertions**. Its independent execution cleaned **95.5%** of the stripe, with **4.93 N** peak bar contact force and **0.061 mm** maximum held material-patch centroid displacement in the measured hand frame. **The original uses a latch to assist retention: this reproduces assisted wiping, not friction-only grasping.** In-hand rotation remains a separate task.
+
+(latch)=
+
+## What the latch does and why it matters
+
+The latch is an auxiliary retention mechanism in the simulation. The jaws first squeeze the sponge through contact. Once grasp readiness is met, compliant position constraints are added to sponge nodes near the contact region, with targets that move with the hand; an open command releases them. The sponge can still deform, and constrained nodes can deviate slightly from their targets. The whole sponge is not rigidly welded to the hand.
+
+The pinned version creates these constraints with `pin_nodes`, using stiffness **4000 N/m** and damping **20 N·s/m**. `ride` updates their moving targets at every soft-body substep. This supplies holding action beyond contact friction; it is neither a physical glue model nor an increased friction coefficient. [Upstream latch implementation](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/bar.py#L425-L559).
+
+A successful latched run shows that the assisted configuration completes wiping; it does not establish retention by contact and friction alone. The no-latch comparison below keeps the same grasp-readiness conditions and contact settings while removing the assistance. **Slipping without the latch does not by itself establish a solver error:** actual loads, control, material behavior, friction modeling and coupling error still need separate checks.
 
 ## Controlled repetitions
 
@@ -26,7 +36,7 @@ The first repetition of each mode is the predetermined video pair. Both show the
 
 ```{raw} html
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
-<section><h3>Original: compliant latch</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
+<section><h3>Original: compliant latch assistance</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
 <section><h3>No latch: contact alone</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/no-latch.png" src="_static/rss-wiping/no-latch.mp4"></video></section>
 </div>
 ```
@@ -35,7 +45,7 @@ The first repetition of each mode is the predetermined video pair. Both show the
 
 ## RTX appearance replay of the same trajectory
 
-The original condition's first recording now has a **continuous 10–20 s replay**: 100 frames at 10 fps and 960×544 per view. Left is the tiled collision view; right is OVRTX path tracing, using the same camera, timestamps and recorded state. Metal reflections, mat texture, robot-shell highlights and soft shadows come from the pinned RSS materials, room and lighting.
+The original latched condition's first recording now has a **continuous 10–20 s replay**: 100 frames at 10 fps and 960×544 per view. Left is the tiled collision view; right is OVRTX path tracing. **Both views retain latch assistance**, using the same camera, timestamps and recorded state. Metal reflections, mat texture, robot-shell highlights and soft shadows come from the pinned RSS materials, room and lighting.
 
 ![Same state and camera: tiled left, RTX right; simulation 10–20 s at original speed](../../evidence/rss-wiping/rtx/comparison.gif)
 
