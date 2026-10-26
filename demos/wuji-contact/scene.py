@@ -92,6 +92,15 @@ def verify_assets(robot_root, manifest_path):
     return hashlib.sha256(Path(manifest_path).read_bytes()).hexdigest()
 
 
+def load_model(path, config):
+    import mujoco
+
+    spec = mujoco.MjSpec.from_file(str(path))
+    if config.get("wrist_contact", "convex") == "sdf":
+        spec.mesh("r_wrist").octree_maxdepth = config["wrist_octree_depth"]
+    return spec.compile()
+
+
 def build(robot_root, output, config):
     """Export the exact source inertias and meshes; native mesh contact is convex."""
     robot_root, output = Path(robot_root), Path(output)
@@ -111,7 +120,8 @@ def build(robot_root, output, config):
     ET.SubElement(root, "compiler", angle="radian", inertiafromgeom="false", fusestatic="false")
     ET.SubElement(root, "option", timestep=str(config["dt_s"]), gravity="0 0 -9.81",
                   integrator="implicitfast", solver="Newton", cone="elliptic",
-                  iterations="100", tolerance="1e-10", impratio="1")
+                  iterations="100", tolerance="1e-10", impratio="1",
+                  sdf_initpoints="40", sdf_iterations="100")
     ET.SubElement(root, "size", memory="128M")
     default = ET.SubElement(root, "default")
     ET.SubElement(default, "geom", density="0", condim="3", friction="1 0 0",
@@ -163,7 +173,8 @@ def build(robot_root, output, config):
                 for f in faces:
                     stream.write("f " + " ".join(str(int(i) + 1) for i in f) + "\n")
             ET.SubElement(asset, "mesh", name=name, file="meshes/" + path.name, inertia="shell")
-            ET.SubElement(body, "geom", name=name + "_collision", type="mesh", mesh=name,
+            kind = "sdf" if name == "r_wrist" and config.get("wrist_contact") == "sdf" else "mesh"
+            ET.SubElement(body, "geom", name=name + "_collision", type=kind, mesh=name,
                           group="3", rgba=".4 .4 .4 0")
             render_path = mesh_dir / (name + "_render.obj")
             shutil.copyfile(robot_root / render_path.name, render_path)
@@ -207,7 +218,9 @@ def build(robot_root, output, config):
                 open_errors_m=open_errors, closed_errors_m=close_errors,
                 wrist_position=wrist_position.tolist(), wrist_quaternion=wrist_rotation.as_quat().tolist(),
                 object_position=object_position.tolist(),
-                collision="MuJoCo convex hull of each source collision mesh; analytic object sphere",
+                collision=("Native SDF wrist, other source collision meshes convex, analytic sphere"
+                           if config.get("wrist_contact") == "sdf" else
+                           "MuJoCo convex hull of each source collision mesh; analytic object sphere"),
                 fixed_wrist="Source free root replaced by declared world-fixed wrist",
                 source_prefab_sha256=hashlib.sha256((robot_root / PREFAB).read_bytes()).hexdigest())
     (output / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")

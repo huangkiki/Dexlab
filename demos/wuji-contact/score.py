@@ -83,7 +83,9 @@ def evaluate(directory):
                      and np.max(raw["max_penetration_m"][hold]) <= p["max_penetration_m"])
     release_drop = anchor[2] - raw["qpos_after"][-1, 22]
     free_tail = bool(np.max(np.linalg.norm(reconstructed[tail], axis=1)) <= p["release_max_contact_n"])
-    release_pass = bool(release_drop >= p["release_min_drop_m"] and free_tail)
+    release_conditions = bool(release_drop >= p["release_min_drop_m"] and free_tail)
+    # Falling after failed acquisition is not evidence of commanded release.
+    release_pass = bool(hold_pass and release_conditions)
     unload = None
     if manifest["case"].startswith("unload-"):
         finger = 0 if manifest["case"] == "unload-index_finger" else 1
@@ -102,6 +104,7 @@ def evaluate(directory):
                              impulse_error_max_ns=float(np.max(np.linalg.norm(impulse_residual, axis=1))),
                              impulse_error_total_ns=np.sum(impulse_residual, axis=0).tolist(),
                              release_drop_m=float(release_drop), release_no_contact=free_tail,
+                             release_conditions_met=release_conditions,
                              max_penetration_m=float(np.max(raw["max_penetration_m"])),
                              saturation_fraction=float(np.mean(np.abs(raw["requested_torque"]) >= limits)),
                              solver_iterations_max=int(np.max(raw["solver_niter"])),

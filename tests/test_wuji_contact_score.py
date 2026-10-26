@@ -105,6 +105,23 @@ class WujiContactScoreTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"hash mismatch"):
             SCORE.evaluate(self.path)
 
+    def test_ballistic_drop_without_grasp_is_not_active_release(self):
+        dt = self.manifest["effective"]["timestep"]
+        n = len(self.raw["time_s"])
+        self.raw["contacts"] = np.empty((0,22))
+        self.raw["contact_offsets"][:] = 0
+        self.raw["object_contact_force"][:] = 0
+        for i in range(n):
+            self.raw["qvel_before"][i,22] = -9.81*i*dt
+            self.raw["qvel_after"][i,22] = -9.81*(i+1)*dt
+            self.raw["qpos_before"][i,22] = -9.81*dt**2*i*(i+1)/2
+            self.raw["qpos_after"][i,22] = -9.81*dt**2*(i+1)*(i+2)/2
+        self.save();report=SCORE.evaluate(self.path)
+        self.assertTrue(report["numerical_balance_pass"])
+        self.assertTrue(report["metrics"]["release_conditions_met"])
+        self.assertFalse(report["hold_pass"])
+        self.assertFalse(report["release_pass"])
+
 
 if __name__ == "__main__":
     unittest.main()

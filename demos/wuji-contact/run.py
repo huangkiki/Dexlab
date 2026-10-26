@@ -11,6 +11,8 @@ import numpy as np
 
 import scene
 import plan_wuji_pinch
+import preflight
+import control
 
 
 def smooth(value):
@@ -44,12 +46,13 @@ def record(output, robot_root, protocol_path, case):
     output.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
     source = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-              for p in (Path(__file__), Path(scene.__file__), Path(plan_wuji_pinch.__file__), protocol_path)}
+              for p in (Path(__file__), Path(scene.__file__), Path(preflight.__file__), Path(control.__file__),
+                        Path(plan_wuji_pinch.__file__), protocol_path)}
     metadata = dict(state="started", case=case, source_sha256=source,
                     asset_manifest_sha256=asset_sha, version=mujoco.__version__, config=config)
     (output / "manifest.json").write_text(json.dumps(metadata, indent=2) + "\n")
     plan = scene.build(robot_root, output / "model", config)
-    model = mujoco.MjModel.from_xml_path(str(output / "model/scene.xml"))
+    model = scene.load_model(output / "model/scene.xml", config)
     data = mujoco.MjData(model)
     object_body, object_geom = model.body("object").id, model.geom("object").id
     if model.nu != 20 or model.nq != 27 or model.neq != 0:
@@ -59,6 +62,13 @@ def record(output, robot_root, protocol_path, case):
     if case == "zero-friction":
         model.geom_friction[:] = 0
     data.qpos[:20] = plan["open"]
+    initial_geometry = preflight.inspect_initial_state(model, data, config["max_penetration_m"])
+    (output / "initial-geometry.json").write_text(json.dumps(initial_geometry, indent=2) + "\n")
+    if not initial_geometry["pass_initial_geometry"]:
+        metadata.update(state="rejected-before-stepping", failure_layer="initial-geometry",
+                        reason="Initial penetration exceeds the frozen task tolerance; no physics steps executed.")
+        (output / "manifest.json").write_text(json.dumps(metadata, indent=2) + "\n")
+        raise ValueError(metadata["reason"])
     initial = np.asarray(plan["object_position"])
     dt, control_steps = model.opt.timestep, config["control_steps"]
     steps = round(config["duration_s"] / dt)
@@ -74,14 +84,22 @@ def record(output, robot_root, protocol_path, case):
     contact_offsets = [0]
     requested = np.zeros(model.nu)
     target = target_at(0., case, plan, config)
+    mass_matrix = np.empty((model.nv, model.nv))
     try:
         for step in range(steps):
             t = step * dt
             if step % control_steps == 0:
                 target = target_at(t, case, plan, config)
                 mujoco.mj_forward(model, data)
-                requested = (config["kp_nm_rad"] * (target - data.qpos[:20])
-                             - config["kd_nms_rad"] * data.qvel[:20] + data.qfrc_bias[:20])
+                if config.get("controller") == "implicit-sampled-pd":
+                    mujoco.mj_fullM(model, data, mass_matrix)
+                    requested = control.sampled_pd(data.qpos[:20], data.qvel[:20], target,
+                                                   mass_matrix[:20, :20], data.qfrc_bias[:20],
+                                                   config["kp_nm_rad"], config["kd_nms_rad"],
+                                                   dt, control_steps)
+                else:
+                    requested = (config["kp_nm_rad"] * (target - data.qpos[:20])
+                                 - config["kd_nms_rad"] * data.qvel[:20] + data.qfrc_bias[:20])
                 data.ctrl[:] = np.clip(requested, -limits, limits)
             data.xfrc_applied[:] = 0
             if t < config["support_end_s"]:
@@ -153,6 +171,9 @@ def record(output, robot_root, protocol_path, case):
                                    geom_contype=model.geom_contype.tolist(), geom_conaffinity=model.geom_conaffinity.tolist(),
                                    body_names=[model.body(i).name for i in range(model.nbody)],
                                    geom_names=[model.geom(i).name for i in range(model.ngeom)],
+                                   wrist_contact_geom_type=int(model.geom_type[model.geom("r_wrist_collision").id]),
+                                   configured_wrist_octree_depth=config.get("wrist_octree_depth"),
+                                   sdf_initpoints=model.opt.sdf_initpoints, sdf_iterations=model.opt.sdf_iterations,
                                    solver=int(model.opt.solver), iterations=model.opt.iterations,
                                    tolerance=model.opt.tolerance, cone=int(model.opt.cone),
                                    integrator=int(model.opt.integrator), precision="float64"))
@@ -165,7 +186,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--robot-assets", type=Path, required=True)
-    parser.add_argument("--protocol", type=Path, default=Path(__file__).with_name("protocol.json"))
+    parser.add_argument("--protocol", type=Path, default=Path(__file__).with_name("protocol-v2.json"))
     parser.add_argument("--case", required=True)
     args = parser.parse_args()
     record(args.output, args.robot_assets, args.protocol, args.case)
