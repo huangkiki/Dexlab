@@ -37,6 +37,8 @@
 
 候选提交会先检查 editable 源码、所选 profile、实时官方稳定版本及 wheel 身份，然后才启动全量测试和两后端运行。结束时仍重新核验官方发行与原始记录；预检通过不等于物理任务已合格。若上游发布新版本，旧环境会在实验前退出，并显示已安装版本与当前稳定版本；在独立环境完成新资格验证，保留旧记录和历史 profile。资源隔离入口不继承任意环境变量，请把 `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` 放在 `bounded_run.py ... --` 后的实际子命令中。
 
+薄壳适配器接受版本相同的 SuperDex 1.0.0 或 1.0.1 FP64 软件包，并记录实际安装版本。自由落体／reset 回归只检查基本兼容性，不重新授予历史布料实验资格，也不证明不同发行版等价。MuJoCo 新候选 profile 沿用现有 discrete flex 积分器，历史 3.11 profile 保留 implicitfast。
+
 | 改动 | 合格交付前需要的验证 |
 | --- | --- |
 | 纯文字 README／AGENTS／报告 | 完整单测、严格双语构建、`git diff --check`、全部 diff 审查；绑定真实 base/head/tree，核实导入的是审查源码。完成后才可直接 Git/GitHub 提交。 |

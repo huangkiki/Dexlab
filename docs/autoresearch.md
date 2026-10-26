@@ -37,6 +37,8 @@ The CLI option overrides `DEXLAB_MUJOCO_PROFILE`; if neither is set, the command
 
 Candidate submission checks the editable source, selected profile, current official stable versions and wheel identity before the full test suite and either native episode. Final admission still rechecks releases and raw records; preflight success is not task qualification. A new upstream release rejects an outdated environment before physics, with installed and current stable versions in the error. Qualify it in a separate environment and preserve old records and profiles. Resource isolation does not inherit arbitrary environment variables: put `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` inside the actual child command after `bounded_run.py ... --`.
 
+The thin-shell adapter accepts matching SuperDex 1.0.0 or 1.0.1 FP64 packages and records the installed version. Its free-fall/reset regression checks basic compatibility; this does not requalify historical cloth campaigns or establish equivalence between releases. New MuJoCo candidate profiles retain the existing discrete flex integrator; the historical 3.11 profile retains implicitfast.
+
 | Change | Required validation before eligible delivery |
 | --- | --- |
 | Pure prose README/AGENTS/report changes | Full unit suite, strict bilingual site build, `git diff --check`, entire-diff review; bind actual base/head/tree and verify reviewed source imports. Direct Git/GitHub submission is allowed only after that gate. |
