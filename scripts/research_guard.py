@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Serialize managed research windows and retain crash evidence on Linux.
 
-All commands must remain in the guard's process group (no daemonization). A
+Foreground commands must remain in the guard's process group (no daemonization).
+Managed bounded system services are also checked because they can outlive a
+terminated launcher and its lock. A
 remote controller first probes this guard remotely, then guards each remote
 command, while holding its local guard across the entire window. This keeps
 local postprocessing out of a timed window and detects surviving remote jobs.
@@ -22,6 +24,27 @@ import uuid
 
 class BusyWindow(RuntimeError):
     pass
+
+
+def other_bounded_services():
+    """Reject surviving system services, including an orphan of a dead launcher."""
+    if not Path('/run/systemd/system').is_dir():
+        return []  # No local system manager; foreground process checks still apply.
+    try:
+        result = subprocess.run([
+            'systemctl', '--system', 'list-units', '--type=service',
+            '--state=activating,active,deactivating', '--plain', '--no-legend',
+            '--no-pager', 'dexlab-bounded-*',
+        ], check=True, capture_output=True, text=True, timeout=5)
+        cgroup = Path('/proc/self/cgroup').read_text()
+    except (OSError, subprocess.SubprocessError) as error:
+        raise BusyWindow('Cannot verify surviving bounded system services') from error
+    # Tests/subcommands can themselves run inside the current bounded envelope.
+    # Exclude only an ancestor of this process, never a service inferred from PID.
+    ancestors = {part for line in cgroup.splitlines()
+                 for part in line.split(':', 2)[-1].split('/')}
+    units = [line.split()[0] for line in result.stdout.splitlines() if line.strip()]
+    return [unit for unit in units if unit not in ancestors]
 
 
 def group_members(group):
@@ -62,6 +85,9 @@ def run_window(lock_path, kind, receipt, command):
         raise ValueError('Receipt must be separate from lock and active marker')
     with lock_path.open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
+        services = other_bounded_services()
+        if services:
+            raise BusyWindow('Bounded system services remain active: ' + ', '.join(services))
         recovered = None
         recovery_reason = None
         boot_id = Path('/proc/sys/kernel/random/boot_id').read_text().strip()

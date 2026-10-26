@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "cohort": "wuji-contact-v4",
+  "bundle_manifest_sha256": "1334dcb87db141e6cccd4135c70cf848c4b8703af2ca74fe7ff056062e311ad6",
+  "episode_paths": [
+    "runs/03-v4-hold-release",
+    "runs/04-v4-unload-index_finger",
+    "runs/05-v4-unload-thumb",
+    "runs/06-v4-open",
+    "runs/07-v4-no-contact",
+    "runs/08-v4-zero-friction"
+  ],
+  "partition": "diagnostic-only",
+  "horizons_s": [
+    0.02,
+    0.1,
+    0.2
+  ],
+  "origin_stride_s": 0.02,
+  "contact_normal_threshold_n": 0.02,
+  "threshold_source": "Unchanged protocol-v4 min_pad_normal_n; event label, not a new success threshold.",
+  "origin_epoch": "qpos/qvel before solve i; latest available solved contact is i-1. Forecast target state and solved contact at i+h.",
+  "baselines": [
+    "hold",
+    "constant-velocity"
+  ],
+  "contact_predictor": "Persist the last completed pair-load label for both baselines.",
+  "aggregation": "Each whole episode separately; overlapping windows are correlated diagnostics, not independent trials or held-out validation. No training partition.",
+  "native_intervention_protocol": null,
+  "candidate_model": null,
+  "physical_runs": 0,
+  "scope": "Offline descriptive analysis of existing synthetic data. No causal response, policy improvement, hardware validation, training or new physics."
+}
