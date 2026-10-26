@@ -6,11 +6,31 @@ import unittest
 import numpy as np
 
 from dexlab.amp_lift_audit import (articulated_momentum, compare_contact_decoding,
-                                 decode_contact_forces, object_contact_loads)
+                                 decode_contact_forces, object_contact_loads, static_plane_geoms)
 from dexlab.amp_lift_record import native_counts
 
 
 class AmpLiftAuditTests(unittest.TestCase):
+    def test_ground_includes_named_fixed_terrain_without_reclassifying_other_support(self):
+        import mujoco
+
+        model = mujoco.MjModel.from_xml_string('''
+        <mujoco><compiler fusestatic="false"/><worldbody>
+          <geom name="world_ground" type="plane" size="2 2 .1"/>
+          <body name="terrain"><body name="nested_terrain">
+            <geom name="fixed_ground" type="plane" size="2 2 .1"/>
+            <geom name="fixed_platform" type="box" size=".1 .1 .1"/>
+          </body></body>
+          <body name="object" pos="0 0 1"><freejoint/>
+            <geom name="object_box" type="box" size=".1 .1 .1"/>
+          </body>
+        </worldbody></mujoco>''')
+        ground = static_plane_geoms(model.geom_type, model.geom_bodyid, model.body_weldid)
+        self.assertNotEqual(model.geom_bodyid[model.geom("fixed_ground").id], 0)
+        self.assertEqual(ground, {model.geom("world_ground").id, model.geom("fixed_ground").id})
+        with self.assertRaisesRegex(ValueError, "compiled geometry/body IDs"):
+            static_plane_geoms(np.array([0]), np.array([-1]), model.body_weldid)
+
     def test_momentum_frame_conversion_matches_cpu_subtree_kinematics(self):
         import mujoco
 

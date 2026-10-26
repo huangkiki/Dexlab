@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "native_qualified": false,
+  "task_success": null,
+  "first_failed_field": "actions/action-000001.npz.feedback.qvel",
+  "state_parity_atol": 1e-05,
+  "state_parity_rtol": 0,
+  "initial_state_exact": true,
+  "effective_model_exact": true,
+  "identity_equal": {
+    "source": true,
+    "runtime": true,
+    "native_payload": true,
+    "runner_sha256": true,
+    "recorder_sha256": true,
+    "effective_conditions": true
+  },
+  "per_action_component_errors": [
+    {
+      "action_index": 0,
+      "control_end_s": 0.02,
+      "feedback.qpos": 5.960464477539063e-08,
+      "feedback.qvel": 2.86102294921875e-06,
+      "policy_action": 0.0,
+      "executed_action": 0.0
+    },
+    {
+      "action_index": 1,
+      "control_end_s": 0.04,
+      "feedback.qpos": 2.980232238769531e-07,
+      "feedback.qvel": 2.193450927734375e-05,
+      "policy_action": 1.430511474609375e-06,
+      "executed_action": 1.1920928955078125e-06
+    },
+    {
+      "action_index": 2,
+      "control_end_s": 0.06,
+      "feedback.qpos": 1.2069940567016602e-06,
+      "feedback.qvel": 9.059906005859375e-05,
+      "policy_action": 5.4836273193359375e-06,
+      "executed_action": 5.4836273193359375e-06
+    },
+    {
+      "action_index": 3,
+      "control_end_s": 0.08,
+      "feedback.qpos": 3.0621886253356934e-06,
+      "feedback.qvel": 9.250640869140625e-05,
+      "policy_action": 2.193450927734375e-05,
+      "executed_action": 6.079673767089844e-06
+    },
+    {
+      "action_index": 4,
+      "control_end_s": 0.1,
+      "feedback.qpos": 5.036592483520508e-06,
+      "feedback.qvel": 0.0001068115234375,
+      "policy_action": 3.3855438232421875e-05,
+      "executed_action": 1.2874603271484375e-05
+    },
+    {
+      "action_index": 5,
+      "control_end_s": 0.12,
+      "feedback.qpos": 7.145106792449951e-06,
+      "feedback.qvel": 0.00011157989501953125,
+      "policy_action": 4.6253204345703125e-05,
+      "executed_action": 4.6253204345703125e-05
+    },
+    {
+      "action_index": 6,
+      "control_end_s": 0.14,
+      "feedback.qpos": 9.566545486450195e-06,
+      "feedback.qvel": 0.00015735626220703125,
+      "policy_action": 4.863739013671875e-05,
+      "executed_action": 8.344650268554688e-06
+    },
+    {
+      "action_index": 7,
+      "control_end_s": 0.16,
+      "feedback.qpos": 1.2412667274475098e-05,
+      "feedback.qvel": 0.000194549560546875,
+      "policy_action": 8.320808410644531e-05,
+      "executed_action": 2.1457672119140625e-05
+    },
+    {
+      "action_index": 8,
+      "control_end_s": 0.18,
+      "feedback.qpos": 1.481175422668457e-05,
+      "feedback.qvel": 0.0005917549133300781,
+      "policy_action": 0.0001201629638671875,
+      "executed_action": 0.0001201629638671875
+    },
+    {
+      "action_index": 9,
+      "control_end_s": 0.2,
+      "feedback.qpos": 1.6808509826660156e-05,
+      "feedback.qvel": 0.00032901763916015625,
+      "policy_action": 0.0001862049102783203,
+      "executed_action": 7.605552673339844e-05
+    }
+  ],
+  "record_integrity": "passed",
+  "native_substeps": 40,
+  "force_decode_maximum_error": 1.52587890625e-05,
+  "native_budget": {
+    "starts_used": 2,
+    "starts_limit": 6,
+    "wall_charged_or_reserved_s": 92.08483294490725,
+    "wall_limit_s": 5400.0,
+    "remaining_starts": 4
+  },
+  "full_cases_status": {
+    "policy-seed-137": "not-run: probe qualification failed",
+    "policy-seed-138": "not-run: probe qualification failed",
+    "policy-seed-139": "not-run: probe qualification failed",
+    "no-hand-seed-137": "not-run: probe qualification failed"
+  },
+  "archive": {
+    "file": "probe-v1.zip",
+    "bytes": 434513,
+    "sha256": "b6f422e01b9b97771ebc35dff46a10fe0b925eb050fc58f9b32438b418b22576",
+    "files": 72,
+    "crc_verified": true,
+    "all_entry_hashes_verified": true,
+    "roundtrip_score_equal": true,
+    "roundtrip_series_exact": true
+  },
+  "replay": {
+    "frames": 11,
+    "fps": 50,
+    "native_span_s": 0.2,
+    "presentation_s": 0.22,
+    "physics_rerun": false
+  },
+  "interpretation": "A single unrecorded/recorded pair cannot identify native repeat variability versus an observer effect. The frozen qualification remains failed. No full episode ran."
+}

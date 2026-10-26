@@ -47,7 +47,10 @@ def source_identity(source, protocol):
             "uv_lock_sha256": file_sha256(source / "uv.lock")}
 
 
-def runtime_identity(protocol):
+def runtime_identity(protocol, mujoco_warp_wheel):
+    from dexlab.cloth_engines import package_identity
+    from dexlab.official_wheels import verify_official_wheel
+
     actual = {name: importlib.metadata.version(name) for name in protocol["runtime"]}
     if actual != protocol["runtime"]:
         raise ValueError(f"Native versions differ from the frozen AMP candidate: {actual}")
@@ -58,12 +61,13 @@ def runtime_identity(protocol):
         if provenance.get("vcs_info", {}).get("commit_id") != commit:
             raise ValueError(f"Pinned Git dependency provenance is missing or changed: {name}")
         sources[name] = provenance
-    raw = importlib.metadata.distribution("mujoco-warp").read_text("direct_url.json")
-    provenance = json.loads(raw) if raw else {}
-    if provenance.get("archive_info", {}).get("hashes", {}).get("sha256") != \
-            protocol["runtime_revision"]["wheel_sha256"]:
-        raise ValueError("Install the verified official MuJoCo Warp wheel by its local path")
-    return {"packages": actual, "sources": sources, "mujoco_warp_wheel": provenance,
+    # Some installers omit archive hashes from PEP 610 metadata. Bind the
+    # installed code to the actual official archive instead of trusting a URL.
+    wheel = verify_official_wheel(mujoco_warp_wheel, package="mujoco-warp",
+        version=protocol["runtime"]["mujoco-warp"],
+        official_sha256=protocol["runtime_revision"]["wheel_sha256"],
+        installed_code_sha256=package_identity("mujoco-warp")["code_sha256"])
+    return {"packages": actual, "sources": sources, "mujoco_warp_wheel": wheel,
             "installed_packages": sorted([d.metadata["Name"], d.version]
                                          for d in importlib.metadata.distributions())}
 
@@ -272,6 +276,8 @@ def main():
     parser.add_argument("--resources", required=True, type=Path,
                         help="The enclosing bounded_run.py receipt; qualification requires its final telemetry")
     parser.add_argument("--case", required=True)
+    parser.add_argument("--mujoco-warp-wheel", required=True, type=Path,
+                        help="Official archive; its SHA256 and installed code are checked before a scene")
     args = parser.parse_args()
     raw = Path(__file__).with_name("protocol.json").read_bytes()
     protocol = json.loads(raw)
@@ -324,7 +330,7 @@ def main():
             raise ValueError("Select the bounded GPU UUID explicitly through CUDA_VISIBLE_DEVICES")
         manifest["gpu_budget"] = gpu_budget
         manifest["source"] = source_identity(source, protocol)
-        manifest["runtime"] = runtime_identity(protocol)
+        manifest["runtime"] = runtime_identity(protocol, args.mujoco_warp_wheel)
         if not args.case.startswith("probe-"):
             require_probe_qualification(budget, output, protocol_sha, manifest["source"], manifest["runtime"])
         # Source motion paths are relative to its project directory.

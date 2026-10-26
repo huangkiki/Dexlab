@@ -180,6 +180,20 @@ def compare_contact_decoding(contacts, efc_force, *, cone, atol, rtol):
     }
 
 
+def static_plane_geoms(geom_type, geom_bodyid, body_weldid):
+    """Identify ground planes on world or any body welded to world.
+
+    Compiled terrain can retain a named fixed body with a nonzero body ID.
+    Other fixed geometry remains other support, not a ground-plane guess.
+    """
+    types, bodies, welds = map(np.asarray, (geom_type, geom_bodyid, body_weldid))
+    if types.ndim != 1 or types.shape != bodies.shape or welds.ndim != 1 or \
+            any(value.dtype.kind not in "iu" for value in (types, bodies, welds)) or \
+            np.any(bodies < 0) or np.any(bodies >= len(welds)):
+        raise ValueError("Invalid compiled geometry/body IDs")
+    return set(np.flatnonzero((types == 0) & (welds[bodies] == 0)))
+
+
 def object_contact_loads(contacts, *, object_geoms, left_geoms, right_geoms,
                          ground_geoms, object_com, ngeom, loaded_threshold_n):
     """Separate external support on the object from internal contacts.

@@ -35,7 +35,7 @@ class AmpScoreTests(unittest.TestCase):
                 "options": {"gravity": [[0., 0., -9.81]], "cone": 0, "disableflags": 0}}
             (root / "native/recording.json").write_text(json.dumps(metadata))
             np.savez(root / "native/effective-model.npz", body_mass=np.array([[0., 1., 1., 1.]]),
-                body_inertia=np.ones((1, 4, 3)), body_rootid=np.arange(4),
+                body_inertia=np.ones((1, 4, 3)), body_rootid=np.arange(4), body_weldid=np.arange(4),
                 geom_bodyid=np.array([0, 1, 2, 2, 3, 3]), geom_type=np.array([0, 6, 6, 6, 6, 6]),
                 body_gravcomp=np.zeros((1, 4)), dof_armature=np.zeros(1),
                 jnt_type=np.array([0]), jnt_bodyid=np.array([1]), jnt_qposadr=np.array([0]),

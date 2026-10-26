@@ -11,7 +11,7 @@ import numpy as np
 from dexlab.amp_lift_audit import (
     articulated_momentum, carrying_windows, check_step_clock, compare_contact_decoding,
     compare_probe_values, hand_relative_positions, momentum_residual,
-    object_contact_loads,
+    object_contact_loads, static_plane_geoms,
 )
 from dexlab.libero_substeps import read_chunk
 
@@ -68,7 +68,7 @@ def score(directory, protocol):
         "object_geoms": set(np.flatnonzero(np.isin(geom_bodies, bodies))),
         "left_geoms": {meta["geom_names"].index(f"robot/left_{part}_collision") for part in ("hand", "wrist")},
         "right_geoms": {meta["geom_names"].index(f"robot/right_{part}_collision") for part in ("hand", "wrist")},
-        "ground_geoms": set(np.flatnonzero((geom_types == 0) & (geom_bodies == 0))),
+        "ground_geoms": static_plane_geoms(geom_types, geom_bodies, field("body_weldid", (nbody,))),
     }
     palms = [meta["site_names"].index(f"robot/{side}_palm") for side in ("left", "right")]
     gravity = np.asarray(meta["options"]["gravity"], dtype=float).reshape(3)

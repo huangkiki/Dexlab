@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-Prepare the public `Mjlab-G1-DualArm` checkpoint for an independent contact-supported lift evaluation. This is the AMP task with the Toaster003 asset. It is distinct from the same repository's SuperMimic/PPO-Sim tracking task and its 1.5 kg box. No native AMP evaluation has run in DexLab yet.
+Prepare the public `Mjlab-G1-DualArm` checkpoint for an independent contact-supported lift evaluation. This is the AMP task with the Toaster003 asset. It is distinct from the same repository's SuperMimic/PPO-Sim tracking task and its 1.5 kg box. Two 0.2 s native probes completed, but recorder parity failed at the second control endpoint (qvel difference 2.193451e-5 > 1e-5). The three full seeds and no-hand control have not run. See the [complete probe report](../../docs/site/en/amp-lift.md), including the full short replay and downloadable numerical evidence.
 
 ## Prepare the fixed inputs
 
@@ -26,7 +26,7 @@ The [asset provenance record](provenance.json) identifies all 35 meshes referenc
 - The source hold predicate uses height above a one-sided threshold and both marker sensors for 20 control steps, or 0.4 s. A sensor `found` flag is not evidence of a loaded contact. Preserve that source score separately from independent carrying, slip, support and momentum diagnostics.
 - The play horizon is 60 s. Record the final native substep before its automatic timeout reset; a reset observation must not replace the trajectory endpoint.
 
-The source lockfile pins mjlab 1.4.0, MuJoCo 3.10.0, MuJoCo Warp 3.8.0.2, Warp 1.15.0 and Torch 2.13.0. This reference stack is separate from the landing case and DexLab's current submission profile. Environment compatibility and recorder qualification remain pending.
+The source lockfile pins mjlab 1.4.0, MuJoCo 3.10.0, MuJoCo Warp 3.8.0.2, Warp 1.15.0 and Torch 2.13.0. This reference stack is separate from the landing case and DexLab's current submission profile. The isolated candidate executes the two short probes; five dependency declarations remain inconsistent and recorder parity failed.
 
 The pinned dependency metadata is inconsistent: [mjlab's pyproject](https://github.com/mujocolab/mjlab/blob/4360096b49c1bcc478668c11ce7d458db747e49d/pyproject.toml) requires MuJoCo Warp `>=3.8.0.3,~=3.8.0`, while its selected [Warp commit declares 3.8.0.2](https://github.com/google-deepmind/mujoco_warp/blob/88b55fc2696960b927bc12584994bb8412b36558/pyproject.toml). The selected candidate uses official MuJoCo Warp **3.8.0.3**, preserving all other source lock pins. Its [release comparison](https://github.com/google-deepmind/mujoco_warp/compare/88b55fc2696960b927bc12584994bb8412b36558...79c37d3e8630aba40c2b8023fa9a073fb27b62d0) changes version metadata and benchmark scripts; the complete `mujoco_warp` runtime subtree has the same Git identity, `97b878909d10a074f357f5b2a9b588e6cd696a67`, at both commits. This resolves the version constraint without modifying engine payloads. It does not establish native compatibility. The source's explicit MuJoCo dependency override is retained; do not silently replace MuJoCo 3.10.0 with a different version.
 
@@ -39,14 +39,20 @@ Set `DEXLAB_ROOT` to this checkout, `SOURCE` to the verified source directory an
 ```bash
 test "$(uname -s)" = Linux && test "$(uname -m)" = x86_64 || exit 1
 test ! -e "$AMP_ENV" || exit 1
-uv venv --python 3.12 "$AMP_ENV"
-uv pip install --python "$AMP_ENV/bin/python" --no-deps \
+uv --no-config venv --python 3.12 "$AMP_ENV"
+uv --no-config pip install --python "$AMP_ENV/bin/python" --no-deps \
   -r "$DEXLAB_ROOT/demos/amp-box-lift/requirements-linux-cp312.txt"
-uv pip install --python "$AMP_ENV/bin/python" --no-deps \
+uv --no-config pip install --python "$AMP_ENV/bin/python" --no-deps \
   -e "$SOURCE/rsl_rl" -e "$SOURCE" -e "$DEXLAB_ROOT"
 ```
 
 Use this environment's Python for the native commands below. The runner independently checks package versions, Git provenance, wheel hash and imported source paths before environment construction. Successful installation alone does not qualify CUDA execution or recorder parity.
+
+Keep `--no-config`: the source project's broad `mujoco>=3.8.0.dev0` override otherwise replaces even the explicit wheel requirement. The first installation selected 3.17.0; the metadata check stopped before any native attempt. Only the frozen 3.10.0 package was restored, with the failed audit and install logs retained. The corrected environment matches all 130 selected wheel versions/install locators and the three source packages. MuJoCo and MuJoCo Warp installed code were independently compared with the hash-verified official archives. Missing installer archive-hash fields are not fabricated.
+
+Five dependency declarations still conflict: DexLab's application-level UniLab/UniSim dependencies are absent and its Torch declaration differs from this reference stack; mjlab declares MuJoCo `~=3.8.0` and mjviser `>=0.0.14`, whereas the source pins 3.10.0 and the selected mjviser commit declares 0.0.13. Preserve these conflicts and the original source override; no general environment-compatibility claim follows. The finite headless probes must qualify the exercised path.
+
+Set `MUJOCO_WARP_WHEEL` to a retained copy of the [official 3.8.0.3 wheel](https://files.pythonhosted.org/packages/82/f5/30c736dfe87ad7e8f7a7f8f43b80e0ff43c6af46cef65ba95d3ba172129a/mujoco_warp-3.8.0.3-py3-none-any.whl), downloaded inside the transfer window. Its frozen SHA-256 is `dfbfa24e376e0b03bf6dcebaed7ef69b4885280a020e5f0fd805c125fae3d129`. Every native launch checks the archive and compares its code payload to the installed distribution; it does not rely on optional PEP 610 hash metadata.
 
 ## Bounded evaluation entry
 
@@ -57,14 +63,15 @@ After those prerequisites, create a new durable budget once, then run each named
 ```bash
 python demos/amp-box-lift/init_budget.py "$BUDGET" --resource-plan "$RESOURCE_PLAN"
 CUDA_VISIBLE_DEVICES="$GPU_UUID" python demos/amp-box-lift/run.py --upstream "$SOURCE" --budget "$BUDGET" \
-  --case probe-native --output "$RUN" --resources "$RESOURCE_RECEIPT"
+  --case probe-native --output "$RUN" --resources "$RESOURCE_RECEIPT" \
+  --mujoco-warp-wheel "$MUJOCO_WARP_WHEEL"
 ```
 
 `RESOURCE_RECEIPT` is the enclosing `bounded_run.py` receipt, not a manually supplied success flag. Run `probe-recorded` in a separate process and fresh output directory, then execute `python demos/amp-box-lift/qualify.py --budget "$BUDGET"` offline. Qualification compares the complete control records, actual randomized model, native substeps and independent force decoding, and requires both services' final telemetry. Full episodes reject missing or changed qualification. A timeout or interrupted budget must be recovered; never recreate it to clear spent attempts.
 
 For each native invocation, the outer bounded runner must use `--gpu-uuid "$GPU_UUID" --gpu-memory-limit-mib 20480`, with the same UUID in `CUDA_VISIBLE_DEVICES`. The protocol requires at least 2,048 MiB device reserve. The opt-in guard samples whole-device usage every 2 s and stops only its workload process group on overage or missing telemetry, preserving the final resource receipt. This is a sampled stop threshold, not a hard GPU allocation cap; intervening peaks are unobserved. Existing bounded runs without these options keep their prior behavior. The AMP runner rejects absent or mismatched live resource telemetry before creating the environment.
 
-The runner follows the source actor-loading and inference path, keeps the original action clipping and sole initial reset, and captures terminal feedback before the original automatic reset. It saves both that endpoint and the returned post-reset observations with their different meanings. No renderer, training call or new state injection is introduced. Native runs, physical episode scoring and videos are still pending.
+The runner follows the source actor-loading and inference path, keeps the original action clipping and sole initial reset, and captures terminal feedback before the original automatic reset. It saves both that endpoint and the returned post-reset observations with their different meanings. No renderer, training call or new state injection is introduced. The short recorded probe has independent integrity diagnostics and a complete saved-pose replay. Full episodes and their physical scoring/videos remain blocked by failed parity.
 
 ## Recorder implementation status
 
@@ -88,8 +95,21 @@ The report preserves every continuous bilateral carrying window, loaded ground/o
 
 Window durations use native step count times the protocol timestep; quantized native-clock elapsed time is retained separately. Net lift uses the identified object free joint's initial and final integrated positions before reset. The contact-epoch sampled lift is reported separately, so the last derived position cannot replace the integrated endpoint.
 
-The 2 s carrying diagnostic rejects ground support and isolated final-frame height. Hand-relative drift removes common hand/object motion but is not material contact-patch slip. Momentum residuals currently include contacts and gravity; armature, applied generalized forces, non-contact constraints and integration effects require attribution before physical qualification. The last integrated endpoint has no following native kinematic sample, so a complete 12,000-step run provides 11,999 adjacent momentum intervals. Source success and `task_success: null` remain separate. Analytical fixtures test these distinctions; native runs and video acceptance remain pending.
+The 2 s carrying diagnostic rejects ground support and isolated final-frame height. Hand-relative drift removes common hand/object motion but is not material contact-patch slip. Momentum residuals currently include contacts and gravity; armature, applied generalized forces, non-contact constraints and integration effects require attribution before physical qualification. The last integrated endpoint has no following native kinematic sample, so a complete 12,000-step run provides 11,999 adjacent momentum intervals. Source success and `task_success: null` remain separate. Analytical fixtures test these distinctions. The real short probe also exposed fixed-child terrain classification; the scorer now uses world weld IDs, with the original failure preserved. Short-probe integrity passes, while full native evaluation remains blocked.
 
 `pair.py` checks the two completed seed-137 cases against their checkpoint/runtime identity, initial state and effective physical model. Only the four declared hand/wrist collision masks may change. Compiler-generated collision candidate lists are excluded because disabling geometries changes their extent; explicit pairs that bypass the masks are rejected. A changed mass or unmatched initial state prevents interpreting the negative as a paired control.
+
+## Saved-pose replay
+
+After a complete recorded case passes independent record-integrity scoring, render its full trajectory using the same MuJoCo version and the existing system FFmpeg:
+
+```bash
+python -m dexlab.amp_lift_replay --run "$RUN" --audit "$AUDIT" \
+  --protocol "$DEXLAB_ROOT/demos/amp-box-lift/protocol.json" --output "$REPLAY"
+```
+
+This entry verifies all scored inputs and diagnostic-series hashes. It keeps the initial pose and every 50 Hz control endpoint, including the endpoint before automatic reset; returned reset observations never replace it. Every boundary occupies one frame, so a 60 s episode includes an extra final frame. The manifest retains the actual native clock, presentation duration and each frame's last completed force substep.
+
+The saved compiled geometry is updated only with `mj_kinematics` and `mj_camlight`. No integration, collision query or force solve runs. Curves retain the recorded native force/derived-state epoch; this is not a new physics result, and the CPU geometry template does not simulate GPU mass/COM/friction randomization. The complete 11-frame short probe has been rendered; full 60 s replay still requires qualified full-episode records.
 
 [Issue #259](https://github.com/huangkiki/Dexlab/issues/259) retains the finite native protocol, positive/negative controls, independent scoring, complete trajectories and bilingual results. Missing tracking checkpoints, the squat/lift comparison and any matched SuperMimic/PPO comparison remain separate obligations; this AMP preparation does not resolve them.

@@ -14,6 +14,7 @@
 
 | 实验 | 动图预览 |
 | --- | :---: |
+| **[AMP 抬箱短探针：记录前后一致性未通过，完整评测尚未运行。](docs/site/zh/amp-lift.md)** | <a href="docs/site/zh/amp-lift.md"><img src="docs/evidence/amp-lift/probe.gif" width="412" alt="完整 0.2 秒 AMP 探针回放，未通过抬箱资格" loading="lazy"></a> |
 | <a id="rss"></a>**[RSS 擦拭](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html)**<br>使用 latch 辅助固定：夹稳后用柔顺约束带动海绵局部随手运动，松开时解除。成功不代表纯摩擦保持；[查看无 latch 对照](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#latch)。 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#latch"><img src="docs/evidence/studio/rss.gif" width="300" alt="RSS 使用 latch 辅助固定的原版 RTX 回放，10–19.9 s" loading="lazy"></a> |
 | <a id="cut-push"></a><a id="banana-force"></a>**[连续切割与推动](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html)** | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="豆腐切块与推动 · RTX 回放" loading="lazy"></a> <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="香蕉切割与推动 · RTX 回放" loading="lazy"></a> |
 | <a id="scoring"></a>**[交叉浅划](https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-scoring.html)** | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/tofu-scoring.html"><img src="docs/evidence/cutting/tofu-scoring/surface.gif" width="233" alt="记录状态的表面重建" loading="lazy"></a> |
