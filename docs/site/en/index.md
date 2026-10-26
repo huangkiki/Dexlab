@@ -143,6 +143,7 @@ Solver configuration roles <solver-taxonomy>
 
 Visual comparisons <visual-comparisons>
 Native LIBERO workflow <libero-workflow>
+Public AMP lift preparation <amp-lift>
 Selection <selection>
 Engines <engines>
 Roadmap <dexterity>

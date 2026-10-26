@@ -143,6 +143,7 @@ RSS 擦拭与 latch 对照 <rss-wiping>
 
 可视对照 <visual-comparisons>
 LIBERO 原生流程 <libero-workflow>
+公开 AMP 抬箱准备 <amp-lift>
 场景选型 <selection>
 引擎与模型 <engines>
 研究路线 <dexterity>
