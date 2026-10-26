@@ -80,7 +80,7 @@ Cleaning is the upstream simulated wear metric, not measured removal of real ink
 
 The [evidence bundle](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) contains `controlled-original-01` and `controlled-no-latch-01` from the same frozen-geometry cohort. Its 159 files occupy about 126 MiB compressed / 349 MiB extracted, including observations, contacts, state arrays, continuous videos, effective parameters, historical sources, the current independent scorer and licenses. Each file has provenance, size, SHA-256, purpose and attempt ownership. Inputs remain unchanged; curves and reports go into a new output directory.
 
-Follow the [homepage CPU quickstart](index.md#quickstart). The isolated environment was checked to contain no MuJoCo, SuperDex, Newton or Genesis. This pair was rescored offline with Python 3.12.12, NumPy 2.5.2 and Matplotlib 3.11.2. The curves below derive from saved particle and ink arrays; holding displacement excludes intentional release.
+Follow the {ref}`homepage CPU quickstart <quickstart>`. The isolated environment was checked to contain no MuJoCo, SuperDex, Newton or Genesis. This pair was rescored offline with Python 3.12.12, NumPy 2.5.2 and Matplotlib 3.11.2. The curves below derive from saved particle and ink arrays; holding displacement excludes intentional release.
 
 ![Independent raw-state rescore of one pair: cleaning above, holding displacement below](../../evidence/rss-wiping/bundle-v1/comparison.png)
 

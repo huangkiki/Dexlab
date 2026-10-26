@@ -80,7 +80,7 @@ RSS 提交 [`23417de`](https://github.com/robosimstudio/robosimstudio/tree/23417
 
 [下载证据包](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)包含同一固定几何 cohort 的 `controlled-original-01` 和 `controlled-no-latch-01`。159 个文件约 126 MiB 压缩／349 MiB 解包，含完整观测、接触与状态数组、连续录像、有效参数、历史源码、当前独立评分器和许可。清单逐项给出来源、大小、SHA-256、用途和所属尝试。原始数据不修改；图与报告写入一个新的输出目录。
 
-按照[首页 CPU 快速开始](index.md#quickstart)下载后复算。隔离环境经检查不含 MuJoCo、SuperDex、Newton 或 Genesis；本轮在 Python 3.12.12、NumPy 2.5.2、Matplotlib 3.11.2 下离线复算这一对记录。下图来自保存的材料点与墨迹数组，保持位移不包含主动张开后的运动。
+按照{ref}`首页 CPU 快速开始 <quickstart>`下载后复算。隔离环境经检查不含 MuJoCo、SuperDex、Newton 或 Genesis；本轮在 Python 3.12.12、NumPy 2.5.2、Matplotlib 3.11.2 下离线复算这一对记录。下图来自保存的材料点与墨迹数组，保持位移不包含主动张开后的运动。
 
 ![一组原始记录的独立复算：上为清洁率，下为保持阶段区域位移](../../evidence/rss-wiping/bundle-v1/comparison.png)
 
