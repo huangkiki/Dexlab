@@ -182,6 +182,11 @@ else:
         self.assertEqual(result.returncode, 73, result.stdout + result.stderr)
         self.assertIn("source-build-requirements.txt", self.calls.read_text())
 
+    def test_source_option_after_profile_still_selects_source_installer(self):
+        result = self.run_setup("setup.sh", "--mujoco-profile", "historical-3.11.0", "--source")
+        self.assertEqual(result.returncode, 73, result.stdout + result.stderr)
+        self.assertIn("source-build-requirements.txt", self.calls.read_text())
+
     def test_unknown_inspection_flag_cannot_bypass_installer_admission(self):
         for script in ("setup.sh", "setup_source.sh"):
             self.assert_rejected(script, "--inspect", message="unrecognized arguments")

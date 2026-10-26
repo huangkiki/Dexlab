@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-if [[ "${1:-}" == --source ]]; then
-  shift
-  exec bash "$root/scripts/setup_source.sh" "$@"
-fi
+for argument in "$@"; do
+  if [[ "$argument" == --source ]]; then
+    exec bash "$root/scripts/setup_source.sh" "$@"
+  fi
+done
 for argument in "$@"; do
   if [[ "$argument" == --help || "$argument" == -h ]]; then
     exec python3 "$root/scripts/setup_preflight.py" "$@"
