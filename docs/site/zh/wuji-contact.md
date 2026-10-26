@@ -1,79 +1,91 @@
-# Wuji 双指夹球：夹紧力增加，为什么仍未通过保持检查？
+# Wuji 双指夹球：点接触与抗扭接触
 
-**这次尚未找到合格的 solver failure。** 固定手腕的 Wuji 手在后两次实验中一直夹着球，但最大位移分别为 **2.459 mm、2.734 mm**，超过事前冻结的 **2 mm** 要求。两点接触还保留了一个未被接触力矩约束的转动方向。当前证据支持继续检查抓持与接触建模，不能据此评价引擎的普遍能力。
+**同一只手、同一控制器和动作，改变接触模型后，保持最大位移从 2.734 mm 降到 1.025 mm，通过原定 2 mm 门槛。** 这里使用 MuJoCo 已有的抗扭接触能力，没有修改求解器。结果说明这一合成夹持配置对接触模型敏感；目前没有建立合格的 solver failure，也没有验证真实指垫材料。
 
-![v3 完整 4.4 秒记录回放：准备、保持和张开；球上的方向标记只用于展示原始姿态](../../evidence/wuji-contact/v3.gif)
+![同时间、原速的完整 4.4 秒回放：左为点接触 v3，右为抗扭接触 v4](../../evidence/wuji-contact/comparison.gif)
 
-动图来自同一原始轨迹，包含失败和释放阶段，原速播放。球上的十字是**回放时添加的方向纹理**，没有改变碰撞形状或物理轨迹；动图不能用于测量角速度。物理记录为 2 kHz，视频为 30 fps，动图为 15 fps。[完整视频](../../evidence/wuji-contact/v3.mp4) · [回放来源与帧映射](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/v3-render.json)。
+左侧点接触配置保持失败，右侧抗扭配置保持及张开释放通过。两侧均包含准备、保持和释放，原速播放。球上的十字是**回放时添加的方向纹理**，不参与碰撞或物理计算。视频为 30 fps、动图为 15 fps；转动指标来自 2 kHz 原始记录，不能从动图估算。[完整视频](../../evidence/wuji-contact/comparison.mp4) · [原始轨迹与帧映射](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/comparison.json)。
 
-## 先复算已有记录
+## 不装仿真引擎，先复算结果
 
-在 DexLab 仓库根目录执行，需要 [uv](https://docs.astral.sh/uv/getting-started/installation/)。使用隔离的 Python 3.12.12，只安装 NumPy 和 Matplotlib 及其依赖；不安装仿真引擎，不需要 GPU、真机或模型 API key。首次下载依赖和[不可变原始证据包](https://github.com/huangkiki/Dexlab/releases/tag/wuji-contact-evidence-v1)，随后可以离线复算。
+需要 Git 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。下面从新目录下载代码和不可变证据包，用隔离的 Python 3.12.12、NumPy、Matplotlib 复算；不需要 GPU、真机、SuperDex、Torch 或 API key。证据包约 **141 MiB**，展开约 **382 MiB**，建议预留 2 GB 空间。
 
 ```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git Dexlab-wuji
+cd Dexlab-wuji
+git sparse-checkout init --cone
+git sparse-checkout set scripts demos/wuji-contact
 uv run --no-project --isolated --python 3.12.12 \
   --with-requirements demos/wuji-contact/offline-requirements.txt \
   python scripts/download_assets.py --manifest demos/wuji-contact/evidence-bundle.json \
   --destination downloads/wuji-contact-v1
 uv run --offline --no-project --isolated --python 3.12.12 \
   --with-requirements demos/wuji-contact/offline-requirements.txt \
-  python demos/wuji-contact/plot.py downloads/wuji-contact-v1/runs/02-v3-hold-release \
-  --output results/wuji-contact-v1-rescore
+  python demos/wuji-contact/plot.py downloads/wuji-contact-v1/runs/03-v4-hold-release \
+  --output results/wuji-contact-v4
 ```
 
-打开 `measurements.png` 看位移、速度、原生接触力和实际力矩；同目录的 CSV 保留完整时间序列，JSON 给出独立评分与输入哈希。应看到 `record_integrity_pass: true`、`numerical_balance_pass: true`，以及 **`hold_pass: false`**。这是保留的实验失败，不是复算失败。换成包中的 `00-hold-release` 或 `01-v2-hold-release` 可检查前两次记录；每次使用新的输出目录。
+打开 `results/wuji-contact-v4/measurements.png` 看曲线。同目录 CSV 保留完整时间序列，`report.json` 应给出 `record_integrity_pass`、`numerical_balance_pass`、`hold_pass`、`release_pass` 均为 `true`，保持位移约 **0.001025 m**。把输入改为 `02-v3-hold-release`、输出换成新目录，可复算原点接触失败：位移约 **0.002734 m**，保持和释放资格均为 `false`。失败结果保留在包中，不表示下载或复算失败。
 
-![v3 完整记录的独立复算；绿色区间为评分保持段](../../evidence/wuji-contact/v3-measurements.png)
+[原始数据、逐文件哈希与许可](https://github.com/huangkiki/Dexlab/releases/tag/wuji-contact-evidence-v1)包含四批开发记录、所有已执行与未执行项、历史评分及更正、模型和源码。不要在原始输入目录内写输出。
 
-## 三次实验分别说明了什么
+## 比较改变了什么
 
-对象为半径 10 mm、质量 20 g 的合成球，惯量为 `2mr²/5`。手腕固定；0.2–0.8 s 闭合，1.0 s 移除所有准备力，1.2–3.2 s 评分，随后张开至 4.4 s。保持位移始终相对 **1.0 s** 的状态计算，没有移动参考点或放宽门槛。2 mm 是球直径的 10%，是本任务约定，不是普遍精度标准。
+对象是半径 10 mm、质量 20 g、惯量 `2mr²/5` 的合成球。Wuji 手腕固定，0.2–0.8 s 闭合，1.0 s 移除全部准备力，1.2–3.2 s 评分，随后张开至 4.4 s。位移始终相对 **1.0 s** 的状态；没有移动参考点或放宽门槛。
 
-| 批次 | 事前确定的设置 | 保持最大位移 | 结果与首个已知问题 |
+| 批次 | 事前确定的设置 | 保持最大位移 | 结论 |
 | --- | --- | ---: | --- |
-| v1 | 凸包手掌，显式采样 PD | 24.422 m | 首帧已有 4.981 mm 手掌/拇指根部自穿透；控制线性化也不稳定。输入不合格，不能用来归因 solver。 |
-| v2 | 同源手掌改原生 SDF；同增益改隐式采样 PD，2 ms 控制周期 | 2.459 mm | 持续双指接触，但未满足 2 mm 保持。两项输入修正不能被解释为单一算法因果效应。 |
-| v3 | 只将 v2 控制周期缩短为 0.5 ms；物理步长仍 0.5 ms | 2.734 mm | 夹紧力增加，位移没有改善；该控制频率假设未获支持。 |
+| v1 | 凸包手掌，显式采样 PD | 24.422 m | 首帧已有 4.981 mm 自穿透，控制线性化也不稳定；输入不合格。 |
+| v2 | 同源手掌改原生 SDF；隐式采样 PD，2 ms 控制周期 | 2.459 mm | 持续双指接触，未通过 2 mm 保持。两项输入修正不隔离单一因果效应。 |
+| v3 | 仅将控制周期缩短为 0.5 ms；物理步长不变 | 2.734 mm | 夹紧力增加，保持仍失败；频率假设未获支持。 |
+| v4 | 沿用 v3，只给球接触增加合成抗扭定律 | 1.025 mm | 原保持、主动释放及新增角动量检查通过。 |
 
-三个批次各执行一条完整正例，并按各自停止条件不再执行其余五项。**逐指卸载、张指、禁用接触和零摩擦对照均未获得本轮资格**，没有把未执行项写成通过。更早的 v1 报告曾把掉落后无接触写为释放通过；原报告保留，更正报告要求先通过保持，不能把“没抓稳后掉出去”当成成功主动释放。[完整尝试、未执行项与成本](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/results.json)。
+v4 使用 `condim=4`，滑动摩擦系数仍为 1，抗扭摩擦长度为 **0.002 m**，没有激活滚动摩擦。用均匀压力圆斑作解析近似：合成半径 `a=3 mm`、`mu=1` 时，纯扭转极限 `T/N=(2/3)*mu*a=0.002 m`。抗扭长度和保持位移门槛碰巧都为 2 mm，但含义不同。
 
-## 已有轨迹揭示的接触结构
+这没有模拟弹性体积或真实接触斑变形，`a` 也不是实测值。MuJoCo 的联合滑动/扭转椭圆锥是进一步近似，上式只确定纯扭转截距。参数在本批启动前冻结，没有按结果扫参。[v4 协议](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/PROTOCOL-v4.zh-CN.md) · [原生接触模型](https://mujoco.readthedocs.io/en/stable/computation/index.html#condim)。
 
-以下是**事后诊断**，没有改变原评分，也没有增加物理采集。
+![原始状态给出的完整保持段比较；灰色为不评分的沉降段](../../evidence/wuji-contact/hold-comparison.png)
 
-| 保持段观测 | v2 | v3 |
+**v4 仍存在缓慢漂移。** 上图绿色位移曲线继续增加；通过两秒保持窗口，不等于无限时长静止抓持。这里没有延长已冻结的实验去补结论，长时间保持仍需另行验证。
+
+## 为什么点接触一直夹着，球仍然转动
+
+v2、v3 的两个保持段各有 4,000 个物理步，每一步均为两个有效指垫接触，原生接触力矩为零。两点任意施力都不能产生绕两点连线的力矩；按球半径归一化的纯力抓持映射 `G=[I,I; skew(p1-c)/r,skew(p2-c)/r]` 秩为 5。
+
+v3 中，球心距离接触连线 0.310–0.985 mm，重力绕该线的力矩非零；两指固定参考点中点最多只移动约 0.093 mm，球相对其中点却移动约 2.696 mm。提高法向力不会增加点接触本身缺少的力矩方向。这是事后结构诊断，不是“所有秩 5 抓持都失败”的证明：特殊重力对齐状态仍可能平衡，而且这里的手指与接触点会移动。
+
+| 保持段测量 | 点接触 v3 | 抗扭接触 v4 |
 | --- | ---: | ---: |
-| 两指持续有效接触 | 100% | 100% |
-| 指垫平均法向力 | 0.265 / 0.280 N | 0.758 / 0.772 N |
-| 切向力/法向力范围（名义摩擦系数 1.0） | 0.321–0.472 | 0.101–0.240 |
+| 双指有效接触 | 100% | 100% |
+| 平均指垫法向力 | 0.758 / 0.772 N | 0.815 / 0.829 N |
+| 最大线速度 | 25.110 mm/s | 0.539 mm/s |
+| 最大角速度 | 29.336 rad/s | 0.024992 rad/s |
+| 单接触最大内禀力矩 | 0 | 0.022138 mN·m |
 | 驱动饱和、其他部位支撑 | 均为零 | 均为零 |
-| 两指固定参考点中点的最大移动，10 ms 抽样 | 0.186 mm | 0.093 mm |
-| 球相对该中点的最大移动，同样抽样 | 2.345 mm | 2.696 mm |
-| 每个保持步的有效接触点数 / 纯接触力映射秩 | 2 / 5 | 2 / 5 |
 
-每个保持段的 4,000 步都只有两个有效指垫接触点，原生读回的接触力矩为零。在两个接触点任意施加力，都不能产生绕它们连线的力矩。用接触点 `p1,p2` 和球心 `c` 构造的映射为：
+v4 从准备阶段起就使用新接触定律，因此也影响准备结束时的状态。这个开发对照支持“新接触模型使该夹持配置通过验收”；不能把全部历史位移唯一归因于一个自由度，也不能把转动路径长度当成受控净旋转。[可执行诊断](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/diagnose.py) · [各次诊断](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/diagnosis.json)。
 
-```text
-G = [ I                  I               ]
-    [ skew(p1-c) / r     skew(p2-c) / r  ]
-```
+## 保持以外的对照
 
-长度用球半径 `r` 归一化后，两条记录中 G 的秩均为 5。球心到接触连线的距离分别为 0.298–0.774 mm、0.310–0.985 mm；重力相对该连线存在非零力矩，最大绝对值约 0.119、0.154 mN·m。**提高法向力不会凭空补出这个抗扭方向。** 球的记录姿态也发生了明显转动，不能仅因表面没有纹理而把它看作静止。
+| 对照 | 实测结果 | 判定 |
+| --- | --- | --- |
+| 保持与主动释放 | 保持 1.025 mm；张开后无接触并掉落 | 符合冻结要求 |
+| 卸载食指 | 所选指垫末段最大法向力 0 N；保持位移 1.025 mm | 符合冻结要求 |
+| 卸载拇指 | 所选指垫末段最大法向力 0 N；保持位移 1.025 mm | 符合冻结要求 |
+| 保持张指 | 保持评分 拒绝；最大位移 23.7456 m | 符合冻结要求 |
+| 禁用球接触 | 保持评分 拒绝；最大位移 23.7456 m | 符合冻结要求 |
+| 名义零摩擦 | 保持评分 拒绝；最大位移 23.3643 m | 符合冻结要求 |
 
-这不是“秩 5 必然抓不住”的结论：某些特殊重力对齐状态仍能平衡。接触点会迁移、手指也在运动，当前诊断尚未唯一解释全部位移，更没有建立固定转轴摆模型或真实柔性指垫的准确性。[可执行诊断与方程](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/diagnose.py) · [结果](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/diagnosis.json)。
+名义零摩擦是把所有 geom 的三项系数置零；原生接触读回仍有 **1e-5** 的数值下限，所以不能描述为严格数学零。单指卸载后掉落可以是合理结果，卸载按所选指垫的实测法向力单独验收。v1–v3 各因正例失败停止，其余 **15 项仍为未运行**，没有用 v4 替写历史批次。v1 原评分曾把掉落后无接触计作释放通过；原评分保留，更正评分要求先通过保持。[完整尝试与成本](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/results.json)。
 
-## 数值一致性通过，不等于任务或真机验证通过
+## 数值一致性、复现与边界
 
-独立评分从接触坐标系重建世界力，检查 `mΔv = Δt(Fcontact + mg + Fprep)`。v2、v3 最大残差约为 `1.65e-17 N·s`。利用球的各向同性惯量，另检查角冲量；最大残差约 `1.4e-20 N·m·s`。自由关节角速度先从物体系转换到世界系，转换约定见 [MuJoCo 官方文档](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects)。
+独立评分重建原生接触力，检查 `mΔv=Δt(Fcontact+mg+Fprep)`；v4 最大残差约 `1.65e-17 N·s`。角动量检查包含接触点力臂、内禀力矩及外力矩，最大残差约 `4.74e-22 N·m·s`。自由关节角速度按[官方约定](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects)从物体系转到世界系。这些检查验证符号、时刻与记录一致性，不证明真实材料准确性，也不代替数值收敛研究。
 
-这些检查用于发现单位、坐标系、力的符号和记录时刻问题，不证明接触模型符合真实材料。记录没有数值警告，v3 最高迭代数为 5，但这些字段也不代替求解器终止原因或收敛性研究。这里报告的是抓持配置未达到约定的稳定性要求。
+[原生运行与回放说明](https://github.com/huangkiki/Dexlab/tree/main/demos/wuji-contact)提供固定依赖和资产校验。物理为未修改的 MuJoCo 3.17.0、CPU/float64；手的质量、惯量、关节和力矩上限来自固定源资产，控制与材料参数为合成设置。手掌采用原生 SDF，其余手部碰撞仍为源网格凸包。
 
-## 重跑、已修复入口和剩余边界
+入口修复包括：全手初态穿透预检、主动释放判据、资产下载清单格式、状态/力的时间标注，以及核心/绑定版本和二进制身份记录。前三批原始数据不变。v3 外层观察进程退出后，受限服务仍完整结束，按实际终态恢复记账且没有重跑；后续会计驱动独立于前台会话运行。
 
-[原生复现说明](https://github.com/huangkiki/Dexlab/tree/main/demos/wuji-contact)给出固定依赖、资产校验、独立输出、评分与回放命令。使用未修改的 MuJoCo 3.17.0；刚体物理为 CPU/float64，合成摩擦与控制增益不是硬件标定值。手的质量、惯量、关节与力矩上限来自固定 Wuji 源资产；手掌 SDF 和其他手指凸包是明确的碰撞近似。
+本轮累计 **9 次原生启动 / 3433.724 s**，原 12 次 / 7,200 s 预算剩余 3 次 / 3766.276 s，未重置额度。v4 六项开发对照均达到各自冻结要求。本页面不把历史未运行项算作完成。
 
-入口现检查**全手初态接触**，超过原 1 mm 穿透容差便在第一步物理推进前拒绝；更正主动释放判据，补齐资产下载清单格式，并分开记录状态、力和实际控制周期。v3 另保存核心/绑定版本及原生二进制哈希；早期记录没有这些新增字段，不能追补为当时已观测。
-
-三个原生过程总计 740.956 s，原 12 次 / 7,200 s 账本剩余 9 次 / 6,459.044 s；未增加预算。v3 外层观察进程退出后，受限仿真服务仍完整结束，按实际终态恢复记账，没有重复运行。该事件与物理失败分别保留。
-
-目前仅有这一原生路径的开发记录。[适用性矩阵](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/applicability.json)仍保留其他引擎和历史配置的未执行状态。本结果没有完成 [#251](https://github.com/huangkiki/Dexlab/issues/251) 的合格正例与全部对照，也没有启动 [#48](https://github.com/huangkiki/Dexlab/issues/48) 的接触切换、受控旋转和十个开发后验证条件。
+这只是首个原生路径的开发资格；[适用性矩阵](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/applicability.json)保留其他引擎和历史配置的未执行状态。[#251](https://github.com/huangkiki/Dexlab/issues/251) 的交付状态以合并、部署和逐项验收为准；[#48](https://github.com/huangkiki/Dexlab/issues/48) 的接触切换、受控旋转和十个开发后验证条件尚未完成。

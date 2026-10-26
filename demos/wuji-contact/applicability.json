@@ -7,9 +7,16 @@
       "solver": "Newton / elliptic / implicitfast",
       "runtime_path": "native",
       "version": "3.17.0",
-      "state": "ready-for-first-attempt",
-      "scope": "This protocol only; prior engine admission reused, task outcome not yet known",
-      "reference": "https://github.com/huangkiki/Dexlab/issues/251"
+      "state": "qualified-development-v4",
+      "scope": "All six v4 controls meet their frozen case-specific criteria for this synthetic two-second native fixture only; no hardware, other-engine or #48 holdout qualification.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/251",
+      "cohort_results": {
+        "v1": "positive failed; five not-run",
+        "v2": "positive failed; five not-run",
+        "v3": "positive failed; five not-run",
+        "v4": "six recorded; all case-specific criteria met"
+      },
+      "evidence": "docs/evidence/wuji-contact/results.json"
     },
     {
       "engine": "MuJoCo",

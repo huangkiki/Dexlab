@@ -15,6 +15,7 @@
 
 | 实验 | 动图预览 |
 | --- | :---: |
+| **[Wuji 双指夹球](wuji-contact.md)**<br>同一控制和动作下，点接触改为合成抗扭接触，两秒保持位移从 2.734 降至 1.025 mm，通过原 2 mm 门槛；可离线复算，不证明 solver 失效或真机准确性。 | <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="300" alt="Wuji v3 point contact and v4 torsional contact, full synchronized replay" loading="lazy"></a> |
 | <a id="rss"></a>**[RSS 擦拭](rss-wiping.md)**<br>使用 latch 辅助固定：夹稳后用柔顺约束带动海绵局部随手运动，松开时解除。成功不代表纯摩擦保持；[查看无 latch 对照](latch)。 | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="RSS 使用 latch 辅助固定的原版 RTX 回放，10–19.9 s" loading="lazy"></a> |
 | <a id="cut-push"></a><a id="banana-force"></a>**[连续切割与推动](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="豆腐切块与推动 · RTX 回放" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="香蕉切割与推动 · RTX 回放" loading="lazy"></a> |
 | <a id="scoring"></a>**[交叉浅划](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="记录状态的表面重建" loading="lazy"></a> |
@@ -126,6 +127,7 @@ Solver 失败复盘 <solver-failure-audit>
 研究经验 <experience>
 诊断方法 <diagnosis>
 
+Wuji 抓持与抗扭接触 <wuji-contact>
 RSS 擦拭与 latch 对照 <rss-wiping>
 连续切割与刀面推动 <cut-push>
 香蕉单刀测力 <banana-force>

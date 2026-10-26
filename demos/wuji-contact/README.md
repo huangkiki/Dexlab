@@ -4,13 +4,17 @@
 
 Run a fixed-wrist Wuji hand pinching a 20 g sphere, then inspect whether measured contacts actually hold and release it. The object has no latch, weld or external support after preparation. This is a synthetic numerical fixture, not a calibrated hardware model.
 
-The preserved v2 record maintained two-pad contact but moved **2.459 mm**, exceeding the frozen **2 mm** hold limit. [The separately frozen v3 batch](PROTOCOL-v3.md) shortened the control period from 2 ms to 0.5 ms: mean pad forces increased from about 0.27 N to 0.76 N, but displacement increased to **2.734 mm**. Both failed the original hold criterion. The earlier v1 record already had initial geometry/control defects. All three attempts remain available; each batch stopped before its five remaining controls. A small force/momentum residual did not make any failed task pass, and no qualified solver failure has been established.
+The v3 point-contact configuration failed holding at **2.734 mm**. Adding the separately frozen synthetic torsional contact law in v4 reduced it to **1.025 mm**, passing the original **2 mm** limit and active release. All six v4 controls meet their respective frozen criteria. The first three failures and their 15 not-run cases remain preserved. Slow drift remains; acceptance covers only the frozen two-second hold. This is contact-model sensitivity, not a qualified solver failure.
 
-The next separately frozen [v4 protocol](PROTOCOL-v4.md) adds a synthetic torsional contact law, retaining the sphere, two fingers, 2 mm limit and remaining budget. Its outcome is pending; the command below selects v4 explicitly.
+![Synchronized point-contact / torsional-contact replay](../../docs/evidence/wuji-contact/comparison.gif)
+
+[Start with the offline rescore and full report](https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html) before installing a native runtime.
 
 ## Run the native fixture
 
 From the repository root, use Linux x86_64, [uv](https://docs.astral.sh/uv/getting-started/installation/), Python 3.12 and an isolated environment. Physics uses CPU MuJoCo 3.17.0; it does not need a GPU, SuperDex, Torch or a model API key. The pinned robot archive is about 16 MB. The native SDF scene has measured memory use above 2 GiB; allow 8 GiB and expect several minutes for 4.4 simulated seconds. These commands install only the demo's dependencies in uv's isolated environment.
+
+If you used the sparse offline checkout, first run `git sparse-checkout add demos/apple-stem-grasp/src` to include the IK helper.
 
 ```bash
 uv run --no-project --isolated --python 3.12.12 \
@@ -29,7 +33,7 @@ The output contains the exact native scene, planned joint targets, runtime/sourc
 
 ## Score and plot the saved record
 
-This step imports no simulation engine and never advances physics. It first checks the raw hash, clocks, state continuity, native force reconstruction and linear momentum balance, then evaluates the unchanged task criteria.
+This step imports no simulation engine and never advances physics. It first checks the raw hash, clocks, state continuity, native force reconstruction and linear momentum balance (plus angular balance for v4), then evaluates the unchanged task criteria.
 
 ```bash
 uv run --no-project --isolated --python 3.12.12 \
@@ -45,3 +49,16 @@ The frozen cases also include `unload-index_finger`, `unload-thumb`, `open`, `no
 [Original protocol and criteria](PROTOCOL.md) · [v2 geometry/controller correction](PROTOCOL-v2.md) · [v3 control-rate hypothesis](PROTOCOL-v3.md) · [Explicit applicability](applicability.json) · [Issue #251](https://github.com/huangkiki/Dexlab/issues/251)
 
 This first native fixture does not establish a cross-engine comparison, material accuracy, in-hand rotation or a numerical solver failure. Contact switching and post-development validation remain separate work in [#48](https://github.com/huangkiki/Dexlab/issues/48).
+
+## Replay the same observations
+
+Rendering needs an OpenGL/EGL-capable environment. It loads the saved scene and poses without advancing physics; orientation marks are visual only.
+
+```bash
+uv run --no-project --isolated --python 3.12.12 \
+  --with-requirements demos/wuji-contact/render-requirements.txt \
+  python demos/wuji-contact/render.py results/wuji-contact-first \
+  --output results/wuji-contact-first-replay
+```
+
+The MP4/GIF include all preparation, holding and release frames at original speed. `render.json` binds frames to raw-state indices and records input/output hashes.

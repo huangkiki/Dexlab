@@ -4,13 +4,17 @@
 
 运行固定手腕的 Wuji 双指夹球，再检查实测接触是否真的保持和释放了这个 20 g 球。准备结束后，物体没有 latch、焊接或外部支撑。这是合成数值实验，不是经过真机标定的手模型。
 
-保留的 v2 记录持续双指接触，但最大位移为 **2.459 mm**，超过事前冻结的 **2 mm** 门槛。[另行冻结的 v3](PROTOCOL-v3.zh-CN.md)只把控制周期从 2 ms 改为 0.5 ms：平均指垫法向力从约 0.27 N 增至 0.76 N，位移却增至 **2.734 mm**，仍未通过原门槛。更早的 v1 已有初始几何和控制缺陷。三次尝试全部保留，各批其余五项均按停止条件未执行。很小的力与动量残差不能把任务失败改成成功，目前没有建立合格的 solver failure 结论。
+v3 点接触配置保持位移 **2.734 mm**，未通过验收。v4 按独立冻结协议增加合成抗扭接触后降至 **1.025 mm**，通过原 **2 mm** 门槛及主动释放。v4 六项对照均达到各自冻结要求。前三批失败与 15 个未执行项全部保留。仍存在缓慢漂移，验收只覆盖冻结的两秒保持。这说明接触模型影响该配置，不是合格的 solver failure。
 
-下一批[独立冻结的 v4 协议](PROTOCOL-v4.zh-CN.md)增加合成抗扭接触模型，保留双指、球、2 mm 门槛及剩余预算，结果尚待验证。下方命令显式选择 v4。
+![点接触与抗扭接触的同时间回放](../../docs/evidence/wuji-contact/comparison.gif)
+
+建议先看[离线复算入口和完整报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)，不必先安装原生引擎。
 
 ## 运行原生夹持实验
 
 在仓库根目录执行，需要 Linux x86_64、[uv](https://docs.astral.sh/uv/getting-started/installation/)、Python 3.12 和隔离环境。物理使用 CPU MuJoCo 3.17.0，不需要 GPU、SuperDex、Torch 或模型 API key。固定机器人压缩包约 16 MB；原生 SDF 场景实测内存超过 2 GiB，建议预留 8 GiB，4.4 秒仿真通常需要计算数分钟。以下命令只在 uv 隔离环境安装本实验依赖。
+
+若使用了前面的稀疏检出，先运行 `git sparse-checkout add demos/apple-stem-grasp/src`，补齐 IK 辅助源码。
 
 ```bash
 uv run --no-project --isolated --python 3.12.12 \
@@ -45,3 +49,16 @@ uv run --no-project --isolated --python 3.12.12 \
 [原始协议和判据](PROTOCOL.md) · [v2 几何与控制修正](PROTOCOL-v2.md) · [v3 控制频率假设](PROTOCOL-v3.zh-CN.md) · [适用性范围](applicability.json) · [Issue #251](https://github.com/huangkiki/Dexlab/issues/251)
 
 首个原生夹持配置不等于跨引擎比较、真实材料准确性、手内旋转或数值求解器失败。接触切换与开发后验证仍由 [#48](https://github.com/huangkiki/Dexlab/issues/48)承接。
+
+## 回放同一条原始轨迹
+
+需要可用的 OpenGL/EGL 渲染环境。回放读取已保存场景和位姿，不推进物理；方向纹理只用于展示。
+
+```bash
+uv run --no-project --isolated --python 3.12.12 \
+  --with-requirements demos/wuji-contact/render-requirements.txt \
+  python demos/wuji-contact/render.py results/wuji-contact-first \
+  --output results/wuji-contact-first-replay
+```
+
+MP4/GIF 包含准备、保持和释放的完整过程，原速播放；`render.json` 记录帧与原始状态索引的对应关系及输入输出哈希。

@@ -1,79 +1,91 @@
-# Wuji sphere pinch: more grip force did not qualify holding
+# Wuji sphere pinch: point contact versus torsional contact
 
-**This experiment has not established a qualified solver failure.** The fixed-wrist Wuji hand kept contact with the sphere in the last two attempts, but maximum displacement was **2.459 mm and 2.734 mm**, above the prospectively frozen **2 mm** criterion. Two point contacts also leave a rotational direction without a contact-moment reaction. The evidence calls for further grasp/contact-model diagnosis, not a general engine ranking.
+**With the same hand, controller and commands, changing the contact model reduced maximum holding displacement from 2.734 mm to 1.025 mm, passing the original 2 mm limit.** This uses MuJoCo's existing torsional-contact capability; the solver was not modified. It demonstrates contact-model sensitivity in this synthetic fixture, not a qualified solver failure or a validated real fingertip material.
 
-![Complete 4.4-second v3 saved-state replay; sphere orientation markings are visual only](../../evidence/wuji-contact/v3.gif)
+![Synchronized, real-time complete 4.4-second replay: point contact v3 left, torsional contact v4 right](../../evidence/wuji-contact/comparison.gif)
 
-The real-time replay includes preparation, failed holding and opening. Crosses were **added as a visual orientation texture during replay**; collision geometry and the physical trajectory are unchanged. Do not estimate angular speed from this GIF. Raw observations are 2 kHz, video is 30 fps and GIF is 15 fps. [Full video](../../evidence/wuji-contact/v3.mp4) · [Provenance and frame map](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/v3-render.json).
+The point-contact hold fails; the torsional-contact hold and commanded release pass. Both show preparation, holding and release at original speed. Crosses are **orientation textures added only during replay**, without changing collision geometry or physics. Video is 30 fps and GIF is 15 fps; angular measurements come from the 2 kHz raw record, not the animation. [Full video](../../evidence/wuji-contact/comparison.mp4) · [Raw identities and frame map](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/comparison.json).
 
-## Rescore the existing record first
+## Rescore without installing a simulator
 
-Run from the DexLab checkout root with [uv](https://docs.astral.sh/uv/getting-started/installation/). This uses isolated Python 3.12.12 with NumPy and Matplotlib dependencies; no simulation engine, GPU, hardware or model API key is required. The first command downloads dependencies and the [immutable raw bundle](https://github.com/huangkiki/Dexlab/releases/tag/wuji-contact-evidence-v1); the second runs offline.
+Install Git and [uv](https://docs.astral.sh/uv/getting-started/installation/). From a new directory, download the code and immutable evidence bundle, then rescore with isolated Python 3.12.12, NumPy and Matplotlib. No GPU, hardware, SuperDex, Torch or API key is needed. The archive is about **141 MiB**, expanding to **382 MiB**; allow 2 GB of free space.
 
 ```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git Dexlab-wuji
+cd Dexlab-wuji
+git sparse-checkout init --cone
+git sparse-checkout set scripts demos/wuji-contact
 uv run --no-project --isolated --python 3.12.12 \
   --with-requirements demos/wuji-contact/offline-requirements.txt \
   python scripts/download_assets.py --manifest demos/wuji-contact/evidence-bundle.json \
   --destination downloads/wuji-contact-v1
 uv run --offline --no-project --isolated --python 3.12.12 \
   --with-requirements demos/wuji-contact/offline-requirements.txt \
-  python demos/wuji-contact/plot.py downloads/wuji-contact-v1/runs/02-v3-hold-release \
-  --output results/wuji-contact-v1-rescore
+  python demos/wuji-contact/plot.py downloads/wuji-contact-v1/runs/03-v4-hold-release \
+  --output results/wuji-contact-v4
 ```
 
-Open `measurements.png` for motion, native contact force and actual actuator effort. CSV retains the complete series; JSON separates outcomes and identifies inputs by hash. Expect `record_integrity_pass: true`, `numerical_balance_pass: true` and **`hold_pass: false`**. That is the retained experiment failure, not a failed rescore. Select `00-hold-release` or `01-v2-hold-release` for earlier attempts and use a new output directory each time.
+Open `results/wuji-contact-v4/measurements.png`. CSV preserves the complete series; `report.json` should report `record_integrity_pass`, `numerical_balance_pass`, `hold_pass` and `release_pass` all `true`, with displacement about **0.001025 m**. Select input `02-v3-hold-release` and a fresh output directory to rescore the point-contact failure: about **0.002734 m**, with holding and qualified release both `false`. Retained experiment failures do not indicate failed downloads or rescoring.
 
-![Independent full-record v3 rescore; green denotes the scored hold](../../evidence/wuji-contact/v3-measurements.png)
+[Raw data, per-file hashes and licenses](https://github.com/huangkiki/Dexlab/releases/tag/wuji-contact-evidence-v1) include four development cohorts, every executed/not-run case, historical and corrected scores, models and source. Never write outputs into an immutable input directory.
 
-## What the three attempts establish
+## What changed
 
-The synthetic sphere has radius 10 mm, mass 20 g and inertia `2mr²/5`. The wrist is fixed. Close during 0.2–0.8 s, remove all preparation forces at 1.0 s, score 1.2–3.2 s, then open and observe through 4.4 s. Displacement always refers to the **1.0 s** state. Neither the reference nor the threshold moved. The 2 mm bound is 10% of sphere diameter: a declared task tolerance, not a universal accuracy standard.
+The synthetic sphere has radius 10 mm, mass 20 g and inertia `2mr²/5`. The Wuji wrist is fixed. Close during 0.2–0.8 s, remove every preparation force at 1.0 s, score 1.2–3.2 s, then open and observe through 4.4 s. Displacement always refers to the **1.0 s** state; neither reference nor threshold moved.
 
-| Cohort | Prospectively defined setting | Maximum hold displacement | Outcome and first known problem |
+| Cohort | Prospectively defined setting | Maximum hold displacement | Result |
 | --- | --- | ---: | --- |
-| v1 | Convex wrist, explicit sampled PD | 24.422 m | Initial wrist/thumb-root overlap was already 4.981 mm; the unconstrained controller linearization was also unstable. Invalid inputs cannot establish solver failure. |
-| v2 | Same-source native SDF wrist and implicit sampled PD; 2 ms control | 2.459 mm | Continuous bilateral contact, but failed 2 mm holding. Two input corrections do not isolate one algorithmic cause. |
-| v3 | Only shorten v2 control period to 0.5 ms; native step remains 0.5 ms | 2.734 mm | Grip force increased without improving displacement; this control-rate hypothesis was not supported. |
+| v1 | Convex wrist, explicit sampled PD | 24.422 m | Initial self-penetration was already 4.981 mm; the controller linearization was also unstable. Inputs were unqualified. |
+| v2 | Same-source native SDF wrist; implicit sampled PD, 2 ms control period | 2.459 mm | Continuous two-pad contact, but failed 2 mm holding. Two corrections do not isolate one causal effect. |
+| v3 | Only shorten control period to 0.5 ms; native timestep unchanged | 2.734 mm | More grip force did not qualify holding; the control-rate hypothesis was not supported. |
+| v4 | Retain v3, add a synthetic torsional law to object contacts | 1.025 mm | Original hold/release and the added angular-momentum check pass. |
 
-Each cohort executed one complete positive control and stopped before its five remaining cases. **Individual unloading, open-hand, contact-disabled and nominal zero-friction controls remain unqualified in this round.** Not-run cases are not passes. The original v1 report counted falling clear as successful release. It remains preserved alongside a corrected report requiring a qualified preceding hold. [All attempts, not-run cases and cost](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/results.json).
+v4 uses `condim=4`, with sliding coefficient still 1 and torsional friction length **0.002 m**; rolling friction is not active. An analytical uniform-pressure circular-patch approximation with synthetic radius `a=3 mm` and `mu=1` gives pure-twist limit `T/N=(2/3)*mu*a=0.002 m`. Its numerical equality to the 2 mm displacement threshold is coincidental: the parameters have different meanings.
 
-## Contact structure exposed by the saved trajectory
+No elastic volume or actual patch deformation is resolved; `a` is not measured. MuJoCo's combined sliding/twisting elliptic cone is a further approximation: the derivation establishes only the pure-twist intercept. Parameters were frozen before this batch, without an outcome-driven sweep. [v4 protocol](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/PROTOCOL-v4.md) · [Native contact model](https://mujoco.readthedocs.io/en/stable/computation/index.html#condim).
 
-This is **post-hoc diagnosis**, without changing acceptance or collecting new physics.
+![Complete hold-interval comparison from raw states; gray indicates unscored settling](../../evidence/wuji-contact/hold-comparison.png)
 
-| Hold observation | v2 | v3 |
+**v4 still drifts slowly.** The green displacement curve continues rising; passing the two-second hold does not establish indefinitely stationary grasping. The frozen experiment was not extended to infer a long-duration outcome; that remains separate validation.
+
+## Why sustained point contact still allowed rotation
+
+Each of the 4,000 holding steps in both v2 and v3 had two active pad contacts and zero intrinsic contact moment. Arbitrary forces at two points cannot create a moment about their connecting line. The radius-scaled force-only grasp map `G=[I,I; skew(p1-c)/r,skew(p2-c)/r]` has rank 5.
+
+In v3, the COM lay 0.310–0.985 mm from that line and gravity produced a nonzero moment about it. The midpoint of two fixed pad-reference markers moved at most about 0.093 mm, while the sphere moved about 2.696 mm relative to it. Increasing normal force does not supply the missing point-contact moment direction. This is post-hoc structural diagnosis, not proof that all rank-five grasps fail: special gravity-aligned equilibria remain possible, and these fingers/contact points move.
+
+| Holding observation | Point contact v3 | Torsional contact v4 |
 | --- | ---: | ---: |
-| Bilateral effective contact | 100% | 100% |
-| Mean pad normal forces | 0.265 / 0.280 N | 0.758 / 0.772 N |
-| Tangential/normal force ratio, nominal friction coefficient 1.0 | 0.321–0.472 | 0.101–0.240 |
+| Bilateral active contact | 100% | 100% |
+| Mean pad normal forces | 0.758 / 0.772 N | 0.815 / 0.829 N |
+| Maximum linear speed | 25.110 mm/s | 0.539 mm/s |
+| Maximum angular speed | 29.336 rad/s | 0.024992 rad/s |
+| Maximum intrinsic moment at one contact | 0 | 0.022138 mN·m |
 | Actuator saturation / other-body support | Both zero | Both zero |
-| Maximum fixed pad-reference midpoint motion, sampled every 10 ms | 0.186 mm | 0.093 mm |
-| Sphere motion relative to that midpoint, same sampling | 2.345 mm | 2.696 mm |
-| Active contact count / force-only wrench-map rank at every hold step | 2 / 5 | 2 / 5 |
 
-All 4,000 hold steps in each record have exactly two effective pad contact points and zero intrinsic native contact moment. Arbitrary forces at two points cannot supply moment about their connecting line. With contact points `p1,p2`, center `c` and radius `r`, the map is:
+v4 applies its contact law from preparation onward, so the state at support removal also changes. This development comparison supports qualification of the new contact configuration; it does not uniquely attribute all prior displacement to one freedom. Rotation path length is not controlled net rotation. [Executable diagnosis](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/diagnose.py) · [Per-attempt diagnostics](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/diagnosis.json).
 
-```text
-G = [ I                  I               ]
-    [ skew(p1-c) / r     skew(p2-c) / r  ]
-```
+## Controls beyond holding
 
-After length normalization by radius, G has rank 5 throughout both records. Center-to-contact-line distance is 0.298–0.774 mm and 0.310–0.985 mm respectively. Gravity has nonzero moment about that line, with peak magnitude about 0.119 and 0.154 mN·m. **Increasing normal force does not create the missing moment direction.** Recorded sphere orientation also changes substantially; an untextured sphere can conceal this motion visually.
+| Control | Measurement | Verdict |
+| --- | --- | --- |
+| Hold and active release | Hold 1.025 mm; clear contact and fall after opening | Meets frozen criterion |
+| Unload index | Selected pad late maximum normal 0 N; hold displacement 1.025 mm | Meets frozen criterion |
+| Unload thumb | Selected pad late maximum normal 0 N; hold displacement 1.025 mm | Meets frozen criterion |
+| Remain open | Hold rejected; maximum displacement 23.7456 m | Meets frozen criterion |
+| Disable object contact | Hold rejected; maximum displacement 23.7456 m | Meets frozen criterion |
+| Nominal zero friction | Hold rejected; maximum displacement 23.3643 m | Meets frozen criterion |
 
-Rank 5 does not imply every such grasp must fail: special gravity alignments can still balance. Contacts migrate and fingers move, so this does not uniquely explain all displacement, prove a fixed-pivot pendulum model or validate real compliant pads. [Executable diagnosis and equations](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/diagnose.py) · [Results](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/diagnosis.json).
+Nominal zero friction sets all three coefficients on every geom to zero; native contact readbacks retain a **1e-5** numerical floor, so this is not strict mathematical zero. Dropping after unloading one finger can be physically reasonable; unloading is judged separately by that pad's measured normal force. Each of v1–v3 stopped after its failed positive, leaving **15 cases not run**. v4 does not replace those historical outcomes. The original v1 score incorrectly counted falling clear as release; it is preserved alongside the correction requiring a preceding qualified hold. [All attempts and cost](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/results.json).
 
-## Numerical consistency is separate from task and hardware validation
+## Numerical consistency, reproduction and limits
 
-The independent scorer reconstructs world forces from native contact frames and checks `mΔv = Δt(Fcontact + mg + Fprep)`. Maximum v2/v3 residual is about `1.65e-17 N·s`. An additional isotropic-sphere angular-impulse audit has residual about `1.4e-20 N·m·s`. Free-joint angular velocity is converted from body to world coordinates using the convention in the [official MuJoCo documentation](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects).
+Independent scoring reconstructs native forces and checks `mΔv=Δt(Fcontact+mg+Fprep)`; v4's maximum residual is about `1.65e-17 N·s`. Angular balance includes contact lever arms, intrinsic moments and external moments, with maximum residual about `4.74e-22 N·m·s`. Free-joint angular velocity is rotated from body to world coordinates following the [official convention](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects). These check signs, epochs and record consistency, not real material accuracy or numerical convergence.
 
-These checks target units, frames, signs and observation epochs; they do not validate real contact materials. No numerical warnings were recorded and v3 used at most five solver iterations, but those observations do not replace termination-reason or convergence studies. The measured failure is the fixture's declared holding stability criterion.
+[Native execution and replay instructions](https://github.com/huangkiki/Dexlab/tree/main/demos/wuji-contact) provide pinned dependencies and verified assets. Physics uses unmodified MuJoCo 3.17.0, CPU/float64. Hand masses, inertias, joints and effort limits come from the pinned source asset; control/material settings are synthetic. The wrist uses native SDF, while other hand collision meshes remain convex approximations.
 
-## Reproduction, corrected entry points and remaining scope
+Entry-point fixes include whole-hand initial-penetration checks, the active-release predicate, asset-manifest format, state/force time labels, and core/binding/binary identity records. Original raw observations remain unchanged. When v3's outer observer exited, its bounded service still completed; accounting was recovered from final telemetry without rerunning. Subsequent accounting drivers run independently of the foreground session.
 
-[Native reproduction instructions](https://github.com/huangkiki/Dexlab/tree/main/demos/wuji-contact) cover pinned dependencies, asset checks, exclusive output, scoring and replay. The unmodified native engine is MuJoCo 3.17.0, CPU/float64. Friction and control gains are synthetic. Hand inertias, joints and effort caps come from the pinned Wuji assets; the native SDF wrist and convex finger meshes are disclosed collision approximations.
+Cumulative use is **9 native starts / 3433.724 s**. The unchanged 12-start / 7,200 s package retains 3 starts / 3766.276 s; no allowance was reset. All six v4 development controls meet their respective frozen criteria. Historical not-run cases are not counted as completed.
 
-The entry now checks **all initial hand contacts** and rejects penetration beyond the original 1 mm tolerance before any physics step. It also corrects active-release qualification, repairs the asset-download manifest and separates state/force epochs and actual control periods. V3 records core/binding versions and native binary hashes; those new fields are absent from earlier records and cannot be retroactively claimed as observed then.
-
-The three native processes consumed 740.956 s. The original 12-start / 7,200-second package retains 9 starts and 6,459.044 s; there is no new allowance. V3's outer observer exited while the bounded native service continued and completed; accounting was recovered from actual final telemetry without a duplicate run. Operational and physical outcomes remain separate.
-
-Only this native development path has run. The [applicability matrix](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/applicability.json) retains other engines and historical configurations as not-run here. This result does not complete [#251](https://github.com/huangkiki/Dexlab/issues/251)'s positive and negative controls, or begin [#48](https://github.com/huangkiki/Dexlab/issues/48)'s contact switching, controlled rotation and ten post-development conditions.
+This qualifies only the first native development path. The [applicability matrix](https://github.com/huangkiki/Dexlab/blob/main/demos/wuji-contact/applicability.json) retains other engines and historical configurations as not run. [#251](https://github.com/huangkiki/Dexlab/issues/251) delivery still requires merge, deployment and item-by-item acceptance; [#48](https://github.com/huangkiki/Dexlab/issues/48) contact switching, controlled rotation and ten new post-development validation conditions remain unfinished.
