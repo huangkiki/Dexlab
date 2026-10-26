@@ -48,6 +48,7 @@ def evaluate(directory):
         raise ValueError("Incomplete contact record")
     obj = effective["object_geom_id"]
     reconstructed = np.zeros((n, 3))
+    largest_contact_force = np.zeros(n)
     contact_torque = np.zeros((n, 3))
     normals = np.zeros((n, 2))
     other_support = np.zeros(n)
@@ -63,6 +64,7 @@ def evaluate(directory):
                 raise ValueError("Non-orthonormal contact frame")
             force = (1 if geom2 == obj else -1) * frame.T @ local[:3]
             reconstructed[i] += force
+            largest_contact_force[i] = max(largest_contact_force[i], np.linalg.norm(force))
             moment = (1 if geom2 == obj else -1) * frame.T @ local[3:]
             contact_torque[i] += np.cross(c[3:6] - raw["qpos_before"][i, 20:23], force) + moment
             if body in pads:
@@ -107,7 +109,9 @@ def evaluate(directory):
                      and bilateral >= p["min_bilateral_fraction"]
                      and np.max(raw["max_penetration_m"][hold]) <= p["max_penetration_m"])
     release_drop = anchor[2] - raw["qpos_after"][-1, 22]
-    free_tail = bool(np.max(np.linalg.norm(reconstructed[tail], axis=1)) <= p["release_max_contact_n"])
+    # Opposing pad forces can cancel without releasing the object.
+    release_peak_contact = float(np.max(largest_contact_force[tail]))
+    free_tail = release_peak_contact <= p["release_max_contact_n"]
     release_conditions = bool(release_drop >= p["release_min_drop_m"] and free_tail)
     # Falling after failed acquisition is not evidence of commanded release.
     release_pass = bool(hold_pass and release_conditions)
@@ -134,6 +138,7 @@ def evaluate(directory):
                              impulse_error_total_ns=np.sum(impulse_residual, axis=0).tolist(),
                              angular_impulse_error_max_nms=angular_error,
                              release_drop_m=float(release_drop), release_no_contact=free_tail,
+                             release_max_single_contact_n=release_peak_contact,
                              release_conditions_met=release_conditions,
                              max_penetration_m=float(np.max(raw["max_penetration_m"])),
                              saturation_fraction=float(np.mean(np.abs(raw["requested_torque"]) >= limits)),

@@ -122,6 +122,30 @@ class WujiContactScoreTests(unittest.TestCase):
         self.assertFalse(report["hold_pass"])
         self.assertFalse(report["release_pass"])
 
+    def test_opposing_tail_contacts_do_not_count_as_release(self):
+        # Zero net force still permits a falling sphere to touch both pads.
+        # Active release requires each contact force to clear the threshold.
+        contacts, offsets = [], [0]
+        for i, time_s in enumerate(self.raw["time_s"]):
+            start, end = self.raw["contact_offsets"][i:i + 2]
+            contacts.extend(self.raw["contacts"][start:end])
+            if time_s >= 3.6:
+                for geom, frame in ((1, np.eye(3)), (2, np.diag([-1., 1., -1.]))):
+                    contacts.append(np.r_[geom, 3, geom,
+                                          self.raw["qpos_before"][i, 20:23],
+                                          frame.reshape(-1), 0., [1., 0., 0., 0., 0., 0.]])
+            offsets.append(len(contacts))
+        self.raw["contacts"] = np.array(contacts)
+        self.raw["contact_offsets"] = np.array(offsets)
+        self.save()
+        report = SCORE.evaluate(self.path)
+        self.assertTrue(report["record_integrity_pass"])
+        self.assertTrue(report["numerical_balance_pass"])
+        self.assertTrue(report["hold_pass"])
+        self.assertGreater(report["metrics"]["release_drop_m"], .05)
+        self.assertFalse(report["metrics"]["release_no_contact"])
+        self.assertFalse(report["release_pass"])
+
     def test_torsional_impulse_and_missing_moment(self):
         self.manifest["config"]["angular_impulse_error_nms"] = 1e-8
         inertia = 8e-7
