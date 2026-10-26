@@ -2,8 +2,10 @@
 
 import argparse
 import hashlib
+from importlib.metadata import version
 import json
 from pathlib import Path
+import platform
 import time
 
 import mujoco
@@ -42,6 +44,8 @@ def record(output, robot_root, protocol_path, case):
         raise ValueError("Case must be frozen in the protocol")
     if mujoco.__version__ != config["mujoco_version"]:
         raise ValueError("Native runtime differs from frozen protocol")
+    if mujoco.mj_versionString() != mujoco.__version__:
+        raise ValueError("Native core and Python binding versions differ")
     asset_sha = scene.verify_assets(robot_root, Path(__file__).with_name("assets.json"))
     output.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
@@ -49,7 +53,15 @@ def record(output, robot_root, protocol_path, case):
               for p in (Path(__file__), Path(scene.__file__), Path(preflight.__file__), Path(control.__file__),
                         Path(plan_wuji_pinch.__file__), protocol_path)}
     metadata = dict(state="started", case=case, source_sha256=source,
-                    asset_manifest_sha256=asset_sha, version=mujoco.__version__, config=config)
+                    asset_manifest_sha256=asset_sha, version=mujoco.__version__, config=config,
+                    runtime=dict(python=platform.python_version(), platform=platform.platform(),
+                                 native_core=mujoco.mj_versionString(),
+                                 packages={name: version(name) for name in ("mujoco", "numpy", "scipy", "h5py")},
+                                 native_binary_sha256={
+                                     str(path.relative_to(Path(mujoco.__file__).parent)):
+                                     hashlib.sha256(path.read_bytes()).hexdigest()
+                                     for path in sorted(Path(mujoco.__file__).parent.rglob("*.so*"))
+                                     if path.is_file()}))
     (output / "manifest.json").write_text(json.dumps(metadata, indent=2) + "\n")
     plan = scene.build(robot_root, output / "model", config)
     model = scene.load_model(output / "model/scene.xml", config)
@@ -82,6 +94,7 @@ def record(output, robot_root, protocol_path, case):
            "max_penetration_m": [], "step_wall_s": [], "qfrc_applied": [], "external_wrenches": []}
     contacts = []
     contact_offsets = [0]
+    contact_friction = set()
     requested = np.zeros(model.nu)
     target = target_at(0., case, plan, config)
     mass_matrix = np.empty((model.nv, model.nv))
@@ -128,6 +141,8 @@ def record(output, robot_root, protocol_path, case):
                 force = sign * contact.frame.reshape(3, 3).T @ local[:3]
                 total += force
                 other = int(contact.geom1 if contact.geom2 == object_geom else contact.geom2)
+                contact_friction.add((int(contact.geom1), int(contact.geom2),
+                                      *map(float, contact.friction)))
                 # Native force is on geom2; preserve ordering and frame for independent reconstruction.
                 contacts.append(np.r_[contact.geom1, contact.geom2, model.geom_bodyid[other],
                                        contact.pos, contact.frame, contact.dist, local])
@@ -168,6 +183,9 @@ def record(output, robot_root, protocol_path, case):
                                    actuator_force_limits=limits.tolist(), geom_friction=model.geom_friction.tolist(),
                                    geom_solref=model.geom_solref.tolist(), geom_solimp=model.geom_solimp.tolist(),
                                    geom_condim=model.geom_condim.tolist(), joint_range=model.jnt_range.tolist(),
+                                   object_contact_friction_readbacks=[
+                                       dict(geom1=row[0], geom2=row[1], friction=list(row[2:]))
+                                       for row in sorted(contact_friction)],
                                    geom_contype=model.geom_contype.tolist(), geom_conaffinity=model.geom_conaffinity.tolist(),
                                    body_names=[model.body(i).name for i in range(model.nbody)],
                                    geom_names=[model.geom(i).name for i in range(model.ngeom)],
@@ -186,7 +204,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--robot-assets", type=Path, required=True)
-    parser.add_argument("--protocol", type=Path, default=Path(__file__).with_name("protocol-v2.json"))
+    parser.add_argument("--protocol", type=Path, default=Path(__file__).with_name("protocol-v3.json"))
     parser.add_argument("--case", required=True)
     args = parser.parse_args()
     record(args.output, args.robot_assets, args.protocol, args.case)

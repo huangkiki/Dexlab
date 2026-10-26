@@ -102,7 +102,7 @@ def load_model(path, config):
 
 
 def build(robot_root, output, config):
-    """Export the exact source inertias and meshes; native mesh contact is convex."""
+    """Export source inertias/meshes, with the protocol's explicit wrist contact type."""
     robot_root, output = Path(robot_root), Path(output)
     output.mkdir(exist_ok=False)
     mesh_dir = output / "meshes"
