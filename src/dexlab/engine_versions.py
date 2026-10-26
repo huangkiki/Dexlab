@@ -27,7 +27,8 @@ def validate_versions(audit, installed, native, *, extras=None, now=None):
         if parsed.is_prerelease or parsed.is_devrelease or parsed.local:
             raise ValueError("Pre-release, development and local versions are not stable")
         if parsed != Version(row["version"]):
-            raise ValueError("Installed pin differs from the audited latest stable version")
+            raise ValueError(f"{name}: installed {version} differs from audited latest stable {row['version']}; "
+                             "prepare a separate matching qualification environment")
         if row.get("yanked") is not False:
             raise ValueError("Non-yanked distribution evidence is required")
         if row.get("source") != f"https://pypi.org/pypi/{name}/json":
@@ -62,7 +63,8 @@ def mujoco_profile_identity(identity, native_version, *, profile=None):
     if profile is None:
         profile = os.environ.get("DEXLAB_MUJOCO_PROFILE", "historical-3.11.0")
     versions = {"historical-3.11.0": "3.11.0", "qualification-3.14.0": "3.14.0",
-                "qualification-3.15.0": "3.15.0", "qualification-3.16.0": "3.16.0"}
+                "qualification-3.15.0": "3.15.0", "qualification-3.16.0": "3.16.0",
+                "qualification-3.17.0": "3.17.0"}
     if profile not in versions:
         raise ValueError("Unknown MuJoCo compatibility profile")
     expected = versions[profile]

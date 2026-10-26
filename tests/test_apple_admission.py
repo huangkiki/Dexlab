@@ -178,3 +178,48 @@ class OfficialMetadataRetryTests(unittest.TestCase):
                 official_json('https://pypi.org/pypi/mujoco/json')
             self.assertEqual(fetch.call_count, 1)
             sleep.assert_not_called()
+
+
+class RuntimePreflightTests(unittest.TestCase):
+    def row(self, filename='mujoco.whl'):
+        from datetime import datetime, timezone
+        return dict(package='mujoco', version='3.17.0',
+                    checked_at=datetime.now(timezone.utc).isoformat(), yanked=False,
+                    classifiers=[], requires_dist=[], source='https://pypi.org/pypi/mujoco/json',
+                    distribution_sha256={filename: 'official-sha'})
+
+    def test_outdated_runtime_fails_before_wheel_scan_with_both_versions(self):
+        from dexlab.apple_admission import admit_runtime
+        runtime = {'installed': {'mujoco': '3.16.0'}, 'native': {'mujoco': '3.16.0'}}
+        with patch('dexlab.apple_admission.observe_runtime', return_value=runtime), \
+             patch('dexlab.apple_admission.refresh_inventory', return_value=[self.row()]), \
+             patch('dexlab.official_wheels.verify_official_wheel') as verify:
+            with self.assertRaisesRegex(ValueError, 'mujoco: installed 3.16.0.*3.17.0'):
+                admit_runtime(Path('/unused'))
+        verify.assert_not_called()
+
+    def test_current_runtime_still_requires_wheel_identity(self):
+        from dexlab.apple_admission import admit_runtime
+        runtime = {'installed': {'mujoco': '3.17.0'}, 'native': {'mujoco': '3.17.0'},
+                   'package_code_sha256': {'mujoco': 'loaded-code'}}
+        with tempfile.TemporaryDirectory() as directory, \
+             patch('dexlab.apple_admission.observe_runtime', return_value=runtime), \
+             patch('dexlab.apple_admission.refresh_inventory', return_value=[self.row()]), \
+             patch('dexlab.official_wheels.verify_official_wheel', return_value={'verified': True}) as verify:
+            root = Path(directory)
+            with self.assertRaisesRegex(ValueError, 'Expected one official wheel'):
+                admit_runtime(root)
+            verify.assert_not_called()
+            (root / 'mujoco.whl').touch()
+            actual, audit, wheels = admit_runtime(root)
+            self.assertEqual(actual, runtime)
+            self.assertEqual(wheels, {'mujoco': {'verified': True}})
+            verify.assert_called_once_with(root / 'mujoco.whl', package='mujoco',
+                version='3.17.0', official_sha256='official-sha', installed_code_sha256='loaded-code')
+
+    def test_final_record_admission_rechecks_runtime_instead_of_trusting_preflight(self):
+        from dexlab.apple_admission import admit_records
+        with patch('dexlab.apple_admission.admit_runtime', side_effect=ValueError('release changed')) as check:
+            with self.assertRaisesRegex(ValueError, 'release changed'):
+                admit_records({}, {}, {}, wheel_dir=Path('/wheels'))
+        check.assert_called_once_with(Path('/wheels'))

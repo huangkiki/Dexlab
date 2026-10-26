@@ -329,6 +329,17 @@ def check(worktree, resource_dir=None):
         "'Editable install points outside this worktree; rerun setup here'",
         cwd=worktree,
     )
+    run_id = uuid.uuid4().hex
+    output_root = Path(os.environ.get("DEXLAB_RUN_ROOT") or worktree / "demos/apple-stem-grasp/runs")
+    if not output_root.is_absolute():
+        raise ValueError("DEXLAB_RUN_ROOT must be an absolute output directory")
+    run(python, "scripts/run_tests.py", "--check-only", cwd=worktree)
+    if wheel_dir:
+        output_root.mkdir(parents=True, exist_ok=True)
+        run(python, "-m", "dexlab.apple_admission", "--preflight",
+            "--wheel-dir", wheel_dir,
+            "--output", str(output_root / f"autoresearch-preflight-{run_id}.json"),
+            cwd=worktree)
     run("git", "diff", "--check", cwd=worktree)
     run(
         python,
@@ -344,7 +355,6 @@ def check(worktree, resource_dir=None):
         "scripts/run_tests.py",
         cwd=worktree,
     )
-    run_id = uuid.uuid4().hex
     resource_dir = None if resource_dir is None else Path(resource_dir)
     if resource_dir is not None:
         resource_dir.mkdir(parents=True, exist_ok=True)
@@ -357,9 +367,6 @@ def check(worktree, resource_dir=None):
         return run("env", "LC_ALL=C", "/usr/bin/time", "-q", "-f", layout,
                    "-o", str(receipt), "--", *command, cwd=worktree)
     outputs = {}
-    output_root = Path(os.environ.get("DEXLAB_RUN_ROOT") or worktree / "demos/apple-stem-grasp/runs")
-    if not output_root.is_absolute():
-        raise ValueError("DEXLAB_RUN_ROOT must be an absolute output directory")
     for backend in ("mujoco", "superdex"):
         output = output_root / f"autoresearch-{backend}-{run_id}"
         outputs[backend] = str(output)

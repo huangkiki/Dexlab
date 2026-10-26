@@ -27,13 +27,15 @@
 ```bash
 # 历史复现环境（MuJoCo 3.11.0）
 .venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
-# MuJoCo 包和原生库均为 3.16.0 的候选环境
-.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.16.0
+# MuJoCo 包和原生库均为 3.17.0 的候选环境
+.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.17.0
 ```
 
 命令行参数优先于 `DEXLAB_MUJOCO_PROFILE`；两者均未设置时，在发现测试前停止。入口输出解释器、审查源码、配置和包／原生库版本，并用本工作树的绝对源码路径运行测试。运行时缺失或版本不匹配会在测试启动前报错。`--check-only` 只做预检；`--pattern test_NAME.py` 可选择单个测试文件，不能代替完整提交门禁。
 
 `autoresearch.py check` 和 `submit` 共用此入口，运行它们时须明确设置 `DEXLAB_MUJOCO_PROFILE`；候选环境提交仍须提供 `DEXLAB_QUALIFICATION_WHEELS` 并通过隔离的 editable 源码检查。入口不安装或更改软件包，不改变引擎的历史默认值，配置匹配也不代表正式实验资格。纯文字检查可只读复用未改动的依赖环境；代码提交仍须正确安装当前工作树源码。
+
+候选提交会先检查 editable 源码、所选 profile、实时官方稳定版本及 wheel 身份，然后才启动全量测试和两后端运行。结束时仍重新核验官方发行与原始记录；预检通过不等于物理任务已合格。若上游发布新版本，旧环境会在实验前退出，并显示已安装版本与当前稳定版本；在独立环境完成新资格验证，保留旧记录和历史 profile。资源隔离入口不继承任意环境变量，请把 `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` 放在 `bounded_run.py ... --` 后的实际子命令中。
 
 | 改动 | 合格交付前需要的验证 |
 | --- | --- |
