@@ -35,12 +35,12 @@
 
 ## 先运行苹果抓梗
 
-推荐从已有安装脚本覆盖的 MuJoCo 苹果抓梗开始。需要 Linux x86_64 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)；不需要模型 API key。该入口复现固定版本的历史演示，不是六引擎最新版本比较环境。
+推荐从已有安装脚本覆盖的 MuJoCo 苹果抓梗开始。需要 Linux x86_64 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)；不需要模型 API key。该入口复现固定版本的历史演示，不是六引擎最新版本比较环境。 安装前会检查已有 `.venv` 的版本与归属；不兼容或共享环境会被拒绝，请保留原环境，在独立检出目录安装。
 
 ```bash
 git clone https://github.com/huangkiki/Dexlab.git
 cd Dexlab
-bash scripts/setup.sh
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
 bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 ```
 

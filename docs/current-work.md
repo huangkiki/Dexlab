@@ -2,7 +2,7 @@
 
 [English](current-work.md) | [简体中文](current-work.zh-CN.md)
 
-**Decision date: 2026-10-26. This round delivers a development plan and issue reconciliation; scheduled development remains PAUSED.** This is the sole current ordering entry referenced by AGENTS and the operating guide. Existing interactive authorization remains valid. This round starts no new physics campaign, training or background dispatch.
+**Decision date: 2026-10-26. The maintainer has authorized interactive autodev execution of the sequence below; scheduled development remains PAUSED.** This is the sole current ordering entry referenced by AGENTS and the operating guide. Continue eligible slices through acceptance and delivery. Each new physics campaign still requires its frozen protocol and finite resource budget; no training or background dispatch is authorized.
 
 ## Intended delivery
 

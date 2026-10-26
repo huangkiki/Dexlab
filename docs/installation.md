@@ -5,7 +5,7 @@
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run from the repository root:
 
 ```bash
-bash scripts/setup.sh
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
 bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 # Or:
 bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
@@ -22,6 +22,28 @@ On a server without a desktop:
 ```bash
 bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
+
+## Preserve an existing environment
+
+Both wheel and source installers target `historical-3.11.0`. Before package installation, native builds or asset downloads, they inspect Python 3.12, the actual interpreter location, installed pinned versions and the editable DexLab checkout. They reject a different profile, conflicting packages (including MuJoCo 3.16/3.17), a foreign editable checkout, or packages inherited/linked from another environment. They do not repair or downgrade that environment. The explicit `--mujoco-profile` option overrides `DEXLAB_MUJOCO_PROFILE`; otherwise the variable is honored, with the historical profile as the default.
+
+A compatible local `.venv` can be reused. Admission records this checkout and profile in `.venv/dexlab-environment.json`; this ownership record is **not** physics qualification. A new checkout needs its own environment. On refusal, preserve the original and use an unused path:
+
+```bash
+git clone https://github.com/huangkiki/Dexlab.git ../Dexlab-historical
+cd ../Dexlab-historical
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
+```
+
+Mounted storage is supported when the environment is dedicated to this checkout. From a checkout without `.venv`, create a **new** environment at an unused mounted path, then explicitly claim it:
+
+```bash
+uv venv --python 3.12 /path/on/mounted-data/dexlab-historical-venv
+ln -s /path/on/mounted-data/dexlab-historical-venv .venv
+bash scripts/setup.sh --mujoco-profile historical-3.11.0 --claim-environment
+```
+
+Claiming accepts a clean target or one whose compatible editable DexLab already belongs to this checkout; it cannot take over another owner's environment or bypass version checks. Later compatible runs need no claim flag. `bash scripts/setup.sh --help` inspects no environment and installs nothing. Latest-version qualification uses the [explicit test-runtime workflow](autoresearch.md#select-the-test-runtime-explicitly) in a separate environment, not this historical installer.
 
 ## Verification and video
 
@@ -58,7 +80,7 @@ This implementation uses UniLab registration and environment lifecycle with task
 For developers who need the original UniLab source baseline:
 
 ```bash
-bash scripts/setup.sh --source
+bash scripts/setup.sh --source --mujoco-profile historical-3.11.0
 SUPERDEX_ROOT="$PWD/vendor/project_superdex" bash demos/apple-stem-grasp/run.sh --backend superdex
 ```
 
