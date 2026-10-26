@@ -55,6 +55,8 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco --stem-only --headless \
 
 MuJoCo 路径使用 SuperDex 读取原始机器人资产，并计算初始运动学先验与静置后的规划位姿；随后全部实验动力学通过 MuJoCo `mj_step` 执行，不回放 SuperDex 的物体位姿。MuJoCo 使用隔离的正运动学计算，将腕部路径与自身静置后的苹果位置对齐一次。两个控制器都明确接收已知物体位姿，没有 Astra 视觉策略参与。
 
+显式输出目录必须为空；重复运行请指定新目录，旧成功、失败和中断记录都会保留。省略 `--output` 时自动创建独立目录，后续检查使用终端 `Run output:` 打印的路径。
+
 ## 验证与视频导出
 
 对任一运行目录执行：

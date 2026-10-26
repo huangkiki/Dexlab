@@ -39,15 +39,25 @@ Start with the MuJoCo apple-stem grasp covered by the existing setup script. You
 git clone https://github.com/huangkiki/Dexlab.git
 cd Dexlab
 bash scripts/setup.sh
-bash demos/apple-stem-grasp/run.sh --backend mujoco
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-After SDF preparation, settling and planning, the viewer shows the stem grasp, lift and hold. Outputs go to `demos/apple-stem-grasp/runs/latest-mujoco-sdf/`. Add `--headless` without a display, or select `--backend superdex`. The 14 s simulation takes longer in wall time.
+After SDF preparation, settling and planning, the viewer shows the stem grasp, lift and hold. Outputs go to `demos/apple-stem-grasp/runs/first-mujoco/`. Add `--headless` without a display, or select `--backend superdex` with a new output directory. The 14 s simulation takes longer in wall time.
 
 ```bash
 .venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+  demos/apple-stem-grasp/runs/first-mujoco
 ```
+
+Use a new directory for a second run, check it independently, then compare the reports:
+
+```bash
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/second-mujoco
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/second-mujoco
+diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-grasp/runs/second-mujoco/summary.json
+```
+
+`diff` returns 1 when reports differ. An explicit directory must be empty; successful and failed records are both preserved. Omitting `--output` generates a separate directory printed as `Run output:`; use that actual path for scoring.
 
 The verifier writes `summary.json`. When every check passes, `passed` is `true`; failures retain the individual checks and return a nonzero exit code.
 

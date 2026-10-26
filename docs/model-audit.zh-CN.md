@@ -10,7 +10,7 @@
 
 ```bash
 bash demos/apple-stem-grasp/run.sh --backend superdex --headless
-bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
 
 每次运行在输出目录生成 `model-audit.superdex.json`。MuJoCo 路径先使用 SuperDex 加载和规划场景，因此还生成 `model-audit.mujoco.json`。快照位于苹果静置、机器人放置到预抓取姿态之后，14 秒抓取轨迹开始之前。
@@ -19,7 +19,7 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
 
 ```bash
 .venv/bin/python -m dexlab.model_audit \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf/model-audit.mujoco.json
+  demos/apple-stem-grasp/runs/first-mujoco/model-audit.mujoco.json
 ```
 
 命令打印发现项，参数错误返回退出码 1；几何警告保持可见，不自动判定模型不可用。它不修复参数，也不替代独立动力学验收。没有这些 JSON 的历史记录需要重新运行，才能获得对应快照。

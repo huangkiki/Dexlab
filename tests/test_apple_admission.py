@@ -93,7 +93,7 @@ class AppleAdmissionTests(unittest.TestCase):
         from wuji_stem_grasp import parse_args
         args = parse_args(["--backend", "superdex", "--headless", "--output", str(self.root)])
         state = SimpleNamespace(terminated=[True], info={"summary": {"passed": True}})
-        env = SimpleNamespace(init_state=lambda: state, close=lambda: None)
+        env = SimpleNamespace(init_state=lambda: state, close=lambda: None, output_directory=self.root)
         with patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "historical-3.11.0"}), \
              patch("wuji_stem_grasp.parse_args", return_value=args), \
              patch("dexlab.tasks.apple_stem.registry.make", return_value=env), \

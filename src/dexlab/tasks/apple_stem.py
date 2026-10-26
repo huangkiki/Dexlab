@@ -64,6 +64,7 @@ class AppleStemEnv(ABEnv):
         self._state = None
         self._steps = 0
         self._owns_scene = False
+        self.output_directory: Path | None = None
 
     @property
     def cfg(self):
@@ -127,6 +128,7 @@ class AppleStemEnv(ABEnv):
     def reset(self):
         """Rebuild and settle the scene; never reuse the previous apple state."""
         self.close()
+        self.output_directory = None
         if not SCENE_LOCK.acquire(blocking=False):
             raise RuntimeError(
                 "Close the active native scene before resetting another environment"
@@ -152,6 +154,7 @@ class AppleStemEnv(ABEnv):
                 argv.append(f"--{key.replace('_', '-')}={value}")
         args = parse_args(argv)
         self._episode = episode(args)
+        self.output_directory = args.output
         self._steps = 0
         self._frame = next(self._episode)
         metadata = {
@@ -257,12 +260,13 @@ def main():
     finally:
         env.close()
         timing["total_task_seconds"] = time.perf_counter() - started
-        if Path(args.output).is_dir():
-            (Path(args.output) / "runtime-timing.json").write_text(json.dumps(timing, indent=2))
+        output = env.output_directory
+        if output is not None:
+            (output / "runtime-timing.json").write_text(json.dumps(timing, indent=2))
             if qualification is not None:
                 qualification["source_unchanged"] = source_hashes() == qualification["source_sha256"]
                 qualification["runtime_unchanged"] = observe_runtime() == qualification["runtime"]
-                write_json(Path(args.output) / "qualification-observation.json", qualification)
+                write_json(output / "qualification-observation.json", qualification)
                 if not qualification["source_unchanged"] or not qualification["runtime_unchanged"]:
                     raise RuntimeError("Source or native runtime changed during qualification episode")
 

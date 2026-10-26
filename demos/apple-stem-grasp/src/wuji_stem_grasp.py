@@ -36,6 +36,7 @@ import argparse
 import hashlib
 import json
 import time
+import uuid
 import numpy as np
 import trimesh
 
@@ -43,12 +44,32 @@ DT = 0.002
 
 
 def episode(args):
+    """Reserve one empty output before creating the native scene coroutine.
+
+    The persistent exclusive marker also rejects concurrent starts and retries
+    after interruption. A failed attempt is evidence, never a reusable directory.
+    """
+    dest = args.output
+    if dest.is_symlink():
+        raise FileExistsError(f"Output must not be a symlink: {dest}")
+    dest.mkdir(parents=True, exist_ok=True)
+    if any(dest.iterdir()):
+        raise FileExistsError(f"Output is not empty: {dest}; choose a new --output")
+    with (dest / "attempt.json").open("x") as stream:
+        json.dump({"schema_version": 1, "attempt_id": uuid.uuid4().hex,
+                   "backend": args.backend}, stream, indent=2)
+        stream.write("\n")
+    args.output = dest.resolve()
+    print(f"Run output: {args.output}", flush=True)
+    return _episode(args)
+
+
+def _episode(args):
     dt = args.timestep or 0.002
     physics_step_seconds = 0.0
     if not physics.uses_double_precision():
         raise RuntimeError("This audited task requires SuperDex FP64")
     dest = args.output
-    dest.mkdir(parents=True, exist_ok=True)
     (dest / "source-sha256.json").write_text(
         json.dumps(
             {
@@ -770,7 +791,10 @@ def episode(args):
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--output", type=Path)
+    p.add_argument(
+        "--output", type=Path,
+        help="New or empty run directory; existing records are never overwritten.",
+    )
     p.add_argument("--headless", action="store_true")
     p.add_argument("--seconds", type=float)
     p.add_argument("--sequence", action="store_true")
@@ -807,8 +831,8 @@ def parse_args(argv=None):
     if args.stem_only or args.backend == "mujoco":
         args.sequence = False
     if args.output is None:
-        name = "latest" if args.sequence else f"latest-{args.backend}-sdf"
-        args.output = OUT.parent / "runs" / name
+        name = "sequence" if args.sequence else f"{args.backend}-sdf"
+        args.output = OUT.parent / "runs" / f"{name}-{uuid.uuid4().hex}"
     if args.seconds is None:
         args.seconds = 40 if args.sequence else 14
     if args.backend == "mujoco" and (args.sequence or args.seconds > 14):

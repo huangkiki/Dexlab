@@ -10,7 +10,7 @@ After [installation](installation.md), run either complete episode:
 
 ```bash
 bash demos/apple-stem-grasp/run.sh --backend superdex --headless
-bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
 
 Each run writes `model-audit.superdex.json` in its output directory. The MuJoCo path also writes `model-audit.mujoco.json`, because it first loads and plans with the native SuperDex scene. The snapshot is after apple settling and robot pre-grasp placement, before the 14-second grasp trajectory.
@@ -19,7 +19,7 @@ Recheck an existing report without constructing or advancing either simulation:
 
 ```bash
 .venv/bin/python -m dexlab.model_audit \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf/model-audit.mujoco.json
+  demos/apple-stem-grasp/runs/first-mujoco/model-audit.mujoco.json
 ```
 
 The command prints findings and exits 1 for parameter errors; geometry warnings remain visible but do not automatically reject the model. There is no implicit repair or replacement of the independent dynamics verifier. An old run without the JSON reports must be rerun to obtain these snapshots.
