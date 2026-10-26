@@ -40,7 +40,7 @@ Download **one matched latch / no-latch raw recording pair** and recompute displ
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
 cd Dexlab
-git sparse-checkout set scripts demos/rss-wiping
+git sparse-checkout set --cone scripts demos/rss-wiping
 uv run --no-project --isolated --python 3.12 \
   --with-requirements demos/rss-wiping/offline-requirements.txt \
   python scripts/download_assets.py \
