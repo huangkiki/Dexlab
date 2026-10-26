@@ -3,6 +3,8 @@
 import os
 import unittest
 from dataclasses import replace
+from importlib.metadata import version
+from unittest.mock import patch
 
 import numpy as np
 
@@ -70,6 +72,16 @@ class ClothMeasurementsTest(unittest.TestCase):
 
 
 class ClothTaskTest(unittest.TestCase):
+    def test_superdex_shell_rejects_mismatched_packages_before_initializing(self):
+        from dexlab.cloth_superdex import SuperDexCloth
+
+        with patch("dexlab.cloth_superdex.package_identity", side_effect=[
+            {"version": "1.0.1"}, {"version": "1.0.0"},
+        ]), patch("superdex.physics.initialize") as initialize:
+            with self.assertRaisesRegex(ValueError, "matching SuperDex"):
+                SuperDexCloth(ClothCase(), 0.0005)
+            initialize.assert_not_called()
+
     def test_superdex_shell_freefall_and_reset(self):
         os.environ.setdefault("SUPERDEX_PRECISION", "double")
         import superdex.physics as physics
@@ -78,6 +90,8 @@ class ClothTaskTest(unittest.TestCase):
         env = ClothEnv(ClothCfg(case={"experiment": "drape"}), backend_type="superdex")
         try:
             first = env.init_state()
+            self.assertEqual(env.native.metadata["version"], version("superdex-physics-fp64"))
+            self.assertEqual(env.native.metadata["api_identity"]["version"], env.native.metadata["version"])
             initial = first.info["positions"].copy()
             solver = env.native.scene.get_solver_params()
             solver.non_linear_solver.abs_tol = 1e-12
@@ -101,7 +115,7 @@ class ClothTaskTest(unittest.TestCase):
             np.testing.assert_allclose(env.init_state().info["positions"], initial)
         finally:
             env.close()
-            if owned_context:
+            if owned_context and physics.is_initialized():
                 physics.shutdown()
 
     def test_actual_native_step_and_mass(self):
@@ -123,7 +137,7 @@ class ClothTaskTest(unittest.TestCase):
             )
             self.assertAlmostEqual(env.native.metadata["dynamic_mass_kg"], 0.00375)
             expected_integrator = (
-                "discrete" if env.native.metadata["version"] in ("3.14.0", "3.15.0", "3.16.0") else "implicitfast"
+                "implicitfast" if env.native.metadata["version"] == "3.11.0" else "discrete"
             )
             self.assertEqual(env.native.metadata["integrator"], expected_integrator)
             self.assertEqual(

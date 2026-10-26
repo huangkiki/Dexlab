@@ -39,15 +39,25 @@
 git clone https://github.com/huangkiki/Dexlab.git
 cd Dexlab
 bash scripts/setup.sh
-bash demos/apple-stem-grasp/run.sh --backend mujoco
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-等待 SDF 准备、静置与规划后，窗口会显示抓梗、抬升和保持。输出保存在 `demos/apple-stem-grasp/runs/latest-mujoco-sdf/`；无桌面时在运行命令后加 `--headless`，切换后端用 `--backend superdex`。14 s 是仿真时长，实际计算会更久。
+等待 SDF 准备、静置与规划后，窗口会显示抓梗、抬升和保持。输出保存在 `demos/apple-stem-grasp/runs/first-mujoco/`；无桌面时在运行命令后加 `--headless`，切换后端用 `--backend superdex` 并指定新输出目录。14 s 是仿真时长，实际计算会更久。
 
 ```bash
 .venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+  demos/apple-stem-grasp/runs/first-mujoco
 ```
+
+再次运行时换一个目录；下面可独立检查第二次记录，并比较两次报告：
+
+```bash
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/second-mujoco
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/second-mujoco
+diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-grasp/runs/second-mujoco/summary.json
+```
+
+`diff` 返回 1 表示报告不同。显式目录必须为空，已有成功或失败记录均拒绝覆盖。省略 `--output` 会生成独立目录，终端的 `Run output:` 给出实际路径；后续评分请使用该路径。
 
 验收器会写出 `summary.json`；全部检查通过时 `passed` 为 `true`，失败时保留具体检查项并返回非零退出码。
 

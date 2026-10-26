@@ -9,8 +9,8 @@ The offline analyzer reads existing physics-step archives. It does not run a con
 After [installation](installation.md) and a completed or interrupted recording:
 
 ```bash
-.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/latest-mujoco-sdf
-.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/latest-superdex-sdf
+.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/first-mujoco
+.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/first-superdex
 ```
 
 Each command writes `jitter-diagnostics.json` in that run directory and prints the same JSON. `--output path.json` changes the destination. Input files are read-only. A successful command means that a report was generated, not that the grasp or data quality passed. Malformed archive structure raises an error; incomplete traces remain visible in the report.

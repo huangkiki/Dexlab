@@ -27,13 +27,17 @@ Run tests through the shared entry point, choosing the profile for the intended 
 ```bash
 # Historical reproduction environment (MuJoCo 3.11.0)
 .venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
-# Candidate environment with MuJoCo package/native 3.16.0
-.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.16.0
+# Candidate environment with MuJoCo package/native 3.17.0
+.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.17.0
 ```
 
 The CLI option overrides `DEXLAB_MUJOCO_PROFILE`; if neither is set, the command stops before discovering tests. It reports the interpreter, reviewed source, profile and package/native versions, then runs the suite with absolute source paths from this checkout. Missing or mismatched runtimes fail before tests start. `--check-only` performs only this preflight; `--pattern test_NAME.py` selects a focused test file and does not replace the full submission gate.
 
 `autoresearch.py check` and `submit` use this entry point. Set `DEXLAB_MUJOCO_PROFILE` explicitly for those commands; candidate submission also still requires `DEXLAB_QUALIFICATION_WHEELS` and the isolated editable-source check. No package is installed or changed, the engine's historical default remains unchanged, and a matching profile does not grant formal experiment qualification. Pure prose may reuse an unchanged dependency environment read-only; executable submission still requires its own correctly installed worktree source.
+
+Candidate submission checks the editable source, selected profile, current official stable versions and wheel identity before the full test suite and either native episode. Final admission still rechecks releases and raw records; preflight success is not task qualification. A new upstream release rejects an outdated environment before physics, with installed and current stable versions in the error. Qualify it in a separate environment and preserve old records and profiles. Resource isolation does not inherit arbitrary environment variables: put `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` inside the actual child command after `bounded_run.py ... --`.
+
+The thin-shell adapter accepts matching SuperDex 1.0.0 or 1.0.1 FP64 packages and records the installed version. Its free-fall/reset regression checks basic compatibility; this does not requalify historical cloth campaigns or establish equivalence between releases. New MuJoCo candidate profiles retain the existing discrete flex integrator; the historical 3.11 profile retains implicitfast.
 
 | Change | Required validation before eligible delivery |
 | --- | --- |

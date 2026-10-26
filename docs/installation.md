@@ -6,21 +6,21 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run 
 
 ```bash
 bash scripts/setup.sh
-bash demos/apple-stem-grasp/run.sh --backend mujoco
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 # Or:
-bash demos/apple-stem-grasp/run.sh --backend superdex
+bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
 ```
 
 The installer uses **official SuperDex 1.0.0 wheels from PyPI** and obtains Python 3.12 automatically. No Clang, CMake, Git checkout of SuperDex, or API key is required. The install script currently supports Linux x86_64. Although upstream provides other platform wheels, this Demo's native macOS and Windows execution has not been validated.
 
 Both commands open an interactive MuJoCo window after SDF creation, apple settling and grasp planning. The selected backend computes dynamics; MuJoCo renders both. Startup and simulation take time, even with a fast installation.
 
-Both run the [14-second SDF–SDF grasp](sdf-backends.md). The MuJoCo backend uses the official pinned `mujoco==3.11.0` wheel and generates its dynamics model locally; no engine patch or compiler is needed. These commands write to separate `runs/latest-superdex-sdf/` and `runs/latest-mujoco-sdf/` directories within the demo by default.
+Both run the [14-second SDF–SDF grasp](sdf-backends.md). The MuJoCo backend uses the official pinned `mujoco==3.11.0` wheel and generates its dynamics model locally; no engine patch or compiler is needed. These commands explicitly name separate output directories. They must be empty; existing records, including failures, cannot be reused. Without `--output`, each run gets `runs/<backend>-sdf-<unique ID>/`, printed as `Run output:`.
 
 On a server without a desktop:
 
 ```bash
-bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
 
 ## Verification and video
@@ -28,11 +28,11 @@ bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
 Each demo records 14 seconds of simulated motion. Dynamics run on the CPU and take longer than the simulated duration. Setup fetches the robot asset pack and apple albedo texture using the versioned [asset manifest](../demos/apple-stem-grasp/assets.json). Small task-specific apple meshes and parameters stay in Git.
 
 ```bash
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/latest-mujoco-sdf
-MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py demos/apple-stem-grasp/runs/latest-mujoco-sdf
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/first-mujoco
+MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-Replace `latest-mujoco-sdf` with `latest-superdex-sdf` for the other backend. Video export requires FFmpeg and working OpenGL / EGL drivers. To preserve a recording, pass `--output demos/apple-stem-grasp/runs/my-run` to `run.sh`.
+Replace `first-mujoco` with `first-superdex` for the other backend. Video export requires FFmpeg and working OpenGL / EGL drivers. For a second run, choose a new empty directory such as `--output demos/apple-stem-grasp/runs/second-mujoco` and use that path in the scoring and rendering commands. Compare reports with `diff -u <first-directory>/summary.json <second-directory>/summary.json` (exit 1 means differences).
 
 Both recorded runs pass the full three-second hold checks. See the [MuJoCo report](../demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json), [SuperDex report](../demos/apple-stem-grasp/evidence/sdf-superdex/summary.json), and [acceptance criteria](sdf-backends.md#verify-and-render).
 

@@ -18,11 +18,11 @@
 完成[安装](../../docs/installation.zh-CN.md)后，在仓库根目录执行以下任一命令：
 
 ```bash
-bash demos/apple-stem-grasp/run.sh --backend mujoco
-bash demos/apple-stem-grasp/run.sh --backend superdex
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
+bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
 ```
 
-SDF 准备与规划完成后会打开窗口。添加 `--headless` 可关闭窗口；添加 `--output demos/apple-stem-grasp/runs/my-run` 可单独保存记录。两个后端的默认输出分别位于本演示目录下的 `runs/latest-mujoco-sdf/` 和 `runs/latest-superdex-sdf/`。
+SDF 准备与规划完成后会打开窗口，添加 `--headless` 可关闭窗口。显式 `--output` 必须是新目录或空目录，已有成功、失败或中断记录都拒绝复用。省略它时，每次生成 `runs/<backend>-sdf-<唯一 ID>/`，终端 `Run output:` 给出实际路径。旧 `latest-*` 目录保持原样，不再写入。
 
 ## 验证与视频导出
 
@@ -30,17 +30,25 @@ SDF 准备与规划完成后会打开窗口。添加 `--headless` 可关闭窗�
 
 ```bash
 .venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+  demos/apple-stem-grasp/runs/first-mujoco
 MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+  demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-验证另一个后端时，将目录替换为 `latest-superdex-sdf`。视频导出需要 FFmpeg 和 OpenGL / EGL。物理检查失败或记录不完整时返回非零退出码。
+验证另一个后端时，将目录替换为 `first-superdex`。视频导出需要 FFmpeg 和 OpenGL / EGL。物理检查失败或记录不完整时返回非零退出码。
 
 检查覆盖完整的 11–14 s 保持阶段，包括离桌高度、两指指腹持续支撑苹果梗、穿透、相对腕部运动和动量平衡。接近阶段允许果身接触；保持阶段不允许通过果身接触提供支撑。
 
 位置/速度/力的 RMS、峰值和逐指腹低载荷区间可用[离线抖动诊断](../../docs/jitter.zh-CN.md)分析。缺失记录保持未知，不会被当成零接触。
 
+
+再次运行与比较（`diff` 返回 1 表示有差异）：
+
+```bash
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/second-mujoco
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/second-mujoco
+diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-grasp/runs/second-mujoco/summary.json
+```
 
 ## UniLab 任务接口
 
@@ -64,6 +72,8 @@ finally:
 `obs["obs"]` 的形状为 `(1, 关节数 + 8)`，依次包含**实际关节角**、苹果位置／四元数真值（`xyz`、`xyzw`）及实验时间。关节顺序见 `info["joint_names"]`。动作形状为 `(1, 关节数)`，含义是弧度制的绝对关节目标；脚本目标是显式控制先验，不是观测或学习输出。奖励为零，终止后的物理验收位于 `info["summary"]`。非法形状和非有限动作在步进前报错。重置会重新构建场景，不自动重置；每进程仅支持一个场景。此接口不表示已具备 RL 训练或视觉策略。
 
 `unilab.json` 保存任务、运行库和生效参数。证据记录器独立记录每个物理步；正常结束或提前退出均释放原生资源。实时窗口在创建时配置，视频导出则单独回放记录的位姿。
+
+默认配置每次 `reset()` 都创建独立目录；`env.output_directory` 返回实际记录路径。显式配置 `output` 时，第二次 reset 会拒绝复用该目录；创建另一个环境并指定新目录即可。启动失败也保留 `attempt.json`，不会借用旧成功报告。
 
 ## 实现
 
