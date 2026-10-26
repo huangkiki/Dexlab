@@ -211,7 +211,12 @@ def build(robot_root, output, config):
     radius, mass = config["radius_m"], config["mass_kg"]
     ET.SubElement(obj, "inertial", pos="0 0 0", mass=str(mass),
                   diaginertia=numbers([.4 * mass * radius**2] * 3))
-    ET.SubElement(obj, "geom", name="object", type="sphere", size=str(radius), rgba=".92 .33 .12 1")
+    object_geom = ET.SubElement(obj, "geom", name="object", type="sphere", size=str(radius), rgba=".92 .33 .12 1")
+    if config.get("object_contact_model") == "torsional-patch-surrogate":
+        # Only object contacts change; hand self-contact keeps its original model.
+        # This is an effective moment law, not a resolved elastic contact patch.
+        object_geom.set("condim", "4")
+        object_geom.set("friction", numbers([1., config["torsional_friction_m"], 0.]))
     ET.indent(root)
     ET.ElementTree(root).write(output / "scene.xml", encoding="unicode")
     plan = dict(joint_names=[j["name"] for j in joints], open=opened.tolist(), closed=closed.tolist(),

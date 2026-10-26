@@ -8,6 +8,17 @@ from pathlib import Path
 import numpy as np
 
 
+def world_angular_velocity(qpos, qvel):
+    """Rotate free-joint local angular velocity by its saved wxyz quaternion."""
+    quaternion = qpos[:, 23:27]
+    if not np.allclose(np.linalg.norm(quaternion, axis=1), 1., atol=1e-10, rtol=0):
+        raise ValueError("Non-unit object quaternion")
+    vector, scalar = quaternion[:, 1:], quaternion[:, :1]
+    local = qvel[:, 23:26]
+    cross = np.cross(vector, local)
+    return local + 2 * (scalar * cross + np.cross(vector, cross))
+
+
 def evaluate(directory):
     directory = Path(directory)
     manifest = json.loads((directory / "manifest.json").read_text())
@@ -37,6 +48,7 @@ def evaluate(directory):
         raise ValueError("Incomplete contact record")
     obj = effective["object_geom_id"]
     reconstructed = np.zeros((n, 3))
+    contact_torque = np.zeros((n, 3))
     normals = np.zeros((n, 2))
     other_support = np.zeros(n)
     pads = [effective["body_names"].index("r_" + finger + "_pad")
@@ -51,6 +63,8 @@ def evaluate(directory):
                 raise ValueError("Non-orthonormal contact frame")
             force = (1 if geom2 == obj else -1) * frame.T @ local[:3]
             reconstructed[i] += force
+            moment = (1 if geom2 == obj else -1) * frame.T @ local[3:]
+            contact_torque[i] += np.cross(c[3:6] - raw["qpos_before"][i, 20:23], force) + moment
             if body in pads:
                 normals[i, pads.index(body)] += local[0]
             else:
@@ -75,6 +89,17 @@ def evaluate(directory):
                  and np.all(np.abs(raw["actuator_force"]) <= limits + 1e-10)
                  and not np.any(raw["warnings"]))
     numeric = np.max(np.linalg.norm(impulse_residual, axis=1)) <= p["impulse_error_ns"]
+    angular_error = None
+    if "angular_impulse_error_nms" in p:
+        inertia = np.asarray(effective["object_inertia"])
+        if not np.allclose(inertia, inertia[0], atol=1e-16, rtol=0):
+            raise ValueError("Angular audit requires the frozen isotropic sphere")
+        omega_before = world_angular_velocity(raw["qpos_before"], raw["qvel_before"])
+        omega_after = world_angular_velocity(raw["qpos_after"], raw["qvel_after"])
+        external_torque = raw["external_wrenches"][:, effective["object_body_id"], 3:]
+        angular_residual = inertia[0] * (omega_after - omega_before) - dt * (contact_torque + external_torque)
+        angular_error = float(np.linalg.norm(angular_residual, axis=1).max())
+        numeric = numeric and angular_error <= p["angular_impulse_error_nms"]
     geometric = np.max(other_support[hold]) <= p["max_other_contact_n"]
     hold_pass = bool(integrity and numeric and geometric
                      and np.max(displacement[hold]) <= p["hold_max_displacement_m"]
@@ -94,7 +119,11 @@ def evaluate(directory):
         unload = dict(baseline_normal_n=baseline, tail_max_normal_n=measured,
                       pass_unload=bool(measured <= max(p["min_pad_normal_n"], .05 * baseline)),
                       drop_m=float(release_drop))
-    return dict(case=manifest["case"], record_integrity_pass=bool(integrity),
+    return dict(case=manifest["case"],
+                observations_sha256=manifest["observations_sha256"],
+                manifest_sha256=hashlib.sha256((directory / "manifest.json").read_bytes()).hexdigest(),
+                scorer_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                record_integrity_pass=bool(integrity),
                 numerical_balance_pass=bool(numeric), hold_pass=hold_pass, release_pass=release_pass,
                 qualification_pass=bool(hold_pass and release_pass), unload=unload,
                 metrics=dict(hold_max_displacement_m=float(np.max(displacement[hold])),
@@ -103,6 +132,7 @@ def evaluate(directory):
                              other_support_max_n=float(np.max(other_support[hold])),
                              impulse_error_max_ns=float(np.max(np.linalg.norm(impulse_residual, axis=1))),
                              impulse_error_total_ns=np.sum(impulse_residual, axis=0).tolist(),
+                             angular_impulse_error_max_nms=angular_error,
                              release_drop_m=float(release_drop), release_no_contact=free_tail,
                              release_conditions_met=release_conditions,
                              max_penetration_m=float(np.max(raw["max_penetration_m"])),

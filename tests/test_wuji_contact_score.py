@@ -122,6 +122,38 @@ class WujiContactScoreTests(unittest.TestCase):
         self.assertFalse(report["hold_pass"])
         self.assertFalse(report["release_pass"])
 
+    def test_torsional_impulse_and_missing_moment(self):
+        self.manifest["config"]["angular_impulse_error_nms"] = 1e-8
+        inertia = 8e-7
+        self.manifest["effective"]["object_inertia"] = [inertia] * 3
+        dt = self.manifest["effective"]["timestep"]
+        angle = omega = 0.
+        for i in range(len(self.raw["time_s"])):
+            start, end = self.raw["contact_offsets"][i:i+2]
+            torque = 1e-5 if end > start else 0.
+            if torque:
+                self.raw["contacts"][start, 21] = torque
+            self.raw["qpos_before"][i, 23:27] = [np.cos(angle/2), 0, 0, np.sin(angle/2)]
+            self.raw["qvel_before"][i, 25] = omega
+            omega += dt * torque / inertia
+            angle += dt * omega
+            self.raw["qpos_after"][i, 23:27] = [np.cos(angle/2), 0, 0, np.sin(angle/2)]
+            self.raw["qvel_after"][i, 25] = omega
+        self.save()
+        self.assertTrue(SCORE.evaluate(self.path)["numerical_balance_pass"])
+        # Linear balance still holds, but dropping the moment must reject v4.
+        self.raw["contacts"][:, 21] = 0
+        self.save()
+        report = SCORE.evaluate(self.path)
+        self.assertFalse(report["numerical_balance_pass"])
+        self.assertFalse(report["qualification_pass"])
+
+    def test_local_angular_velocity_is_rotated_to_world(self):
+        qpos, qvel = np.zeros((1, 27)), np.zeros((1, 26))
+        qpos[0, 23:27] = [np.sqrt(.5), 0, np.sqrt(.5), 0]
+        qvel[0, 25] = 2.
+        np.testing.assert_allclose(SCORE.world_angular_velocity(qpos, qvel), [[2., 0, 0]], atol=1e-14)
+
 
 if __name__ == "__main__":
     unittest.main()

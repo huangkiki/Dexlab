@@ -4,7 +4,9 @@
 
 Run a fixed-wrist Wuji hand pinching a 20 g sphere, then inspect whether measured contacts actually hold and release it. The object has no latch, weld or external support after preparation. This is a synthetic numerical fixture, not a calibrated hardware model.
 
-The preserved v2 record maintained two-pad contact but moved **2.459 mm**, exceeding the frozen **2 mm** hold limit. A small force/momentum residual did not make the task pass. The earlier v1 record failed initial geometry/control admission. [The new prospective batch](PROTOCOL-v3.md) changes only the control period, from 2 ms to 0.5 ms; its outcome must be established from its own raw record. All batches retain the same hold reference and acceptance thresholds.
+The preserved v2 record maintained two-pad contact but moved **2.459 mm**, exceeding the frozen **2 mm** hold limit. [The separately frozen v3 batch](PROTOCOL-v3.md) shortened the control period from 2 ms to 0.5 ms: mean pad forces increased from about 0.27 N to 0.76 N, but displacement increased to **2.734 mm**. Both failed the original hold criterion. The earlier v1 record already had initial geometry/control defects. All three attempts remain available; each batch stopped before its five remaining controls. A small force/momentum residual did not make any failed task pass, and no qualified solver failure has been established.
+
+The next separately frozen [v4 protocol](PROTOCOL-v4.md) adds a synthetic torsional contact law, retaining the sphere, two fingers, 2 mm limit and remaining budget. Its outcome is pending; the command below selects v4 explicitly.
 
 ## Run the native fixture
 
@@ -19,7 +21,7 @@ PYTHONPATH=demos/apple-stem-grasp/src \
 uv run --offline --no-project --isolated --python 3.12.12 \
   --with-requirements demos/wuji-contact/native-requirements.txt \
   python demos/wuji-contact/run.py --robot-assets downloads/wuji-contact-assets/robot \
-  --protocol demos/wuji-contact/protocol-v3.json --case hold-release \
+  --protocol demos/wuji-contact/protocol-v4.json --case hold-release \
   --output results/wuji-contact-first
 ```
 
@@ -36,7 +38,7 @@ uv run --no-project --isolated --python 3.12.12 \
   --output results/wuji-contact-first-report
 ```
 
-Open `measurements.png`; `measurements.csv` retains the full recorded time series and `report.json` separates record integrity, numerical balance, holding, release and unloading. Write each report to a new directory outside its input. The graph uses labelled symmetric-log scales to show both millimetre-scale holding and the later free fall. A failed hold cannot qualify as successful active release simply because the object falls clear.
+Open `measurements.png`; `measurements.csv` retains the full recorded time series and `report.json` separates record integrity, numerical balance, holding, release and unloading. The CSV identifies pre/post-step times: positions and speeds are post-step, while contact force and actuator force belong to the pre-integration solve. Write each report to a new directory outside its input. The graph uses labelled symmetric-log scales to show both millimetre-scale holding and the later free fall. A failed hold cannot qualify as successful active release simply because the object falls clear.
 
 The frozen cases also include `unload-index_finger`, `unload-thumb`, `open`, `no-contact` and `zero-friction`. In the qualification batch, run them only after the positive hold/release passes. The two unloading commands are judged by the selected pad's measured force; object loss after losing one of two contacts is reported separately. Zero-friction retention would require examining geometric support, not immediately blaming the solver.
 

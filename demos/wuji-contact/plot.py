@@ -25,6 +25,7 @@ def make_report(directory, output):
         raw = dict(archive)
     config, effective = manifest["config"], manifest["effective"]
     time = raw["time_s"]
+    state_time = time + effective["timestep"]
     anchor_index = round(config["support_end_s"] / effective["timestep"])
     anchor = raw["qpos_before"][anchor_index, 20:23]
     displacement_mm = 1000 * np.linalg.norm(raw["qpos_after"][:, 20:23] - anchor, axis=1)
@@ -36,17 +37,19 @@ def make_report(directory, output):
     (output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     with (output / "measurements.csv").open("w", newline="") as stream:
         writer = csv.writer(stream)
-        writer.writerow(["time_s", "displacement_mm", "speed_mm_s", "contact_z_n", "max_torque_fraction"])
-        writer.writerows(zip(time, displacement_mm, speed_mm_s, contact_z, torque_ratio, strict=True))
+        writer.writerow(["time_before_s", "time_after_s", "displacement_mm", "speed_mm_s",
+                         "contact_z_n", "max_torque_fraction"])
+        writer.writerows(zip(time, state_time, displacement_mm, speed_mm_s, contact_z, torque_ratio, strict=True))
 
     figure, axes = plt.subplots(2, 2, figsize=(11, 7), constrained_layout=True)
     curves = [displacement_mm, speed_mm_s, contact_z, torque_ratio]
+    clocks = [state_time, state_time, time, time]
     labels = ["Displacement from support removal (mm)", "Object speed (mm/s)",
               "Measured upward contact force (N)", "Largest actual torque / source limit"]
     limits = [1000 * config["hold_max_displacement_m"],
               1000 * config["hold_max_speed_m_s"], weight, 1.]
-    for axis, curve, label, limit in zip(axes.flat, curves, labels, limits, strict=True):
-        axis.plot(time, curve, color="#216e8e", linewidth=1)
+    for axis, clock, curve, label, limit in zip(axes.flat, clocks, curves, labels, limits, strict=True):
+        axis.plot(clock, curve, color="#216e8e", linewidth=1)
         axis.axhline(limit, color="#b44838", linestyle="--", linewidth=1,
                      label="Weight" if label.endswith("(N)") else "Hold criterion / effort cap")
         axis.axvspan(config["hold_start_s"], config["action_start_s"], color="#d8e8dd", alpha=.55,
@@ -57,6 +60,8 @@ def make_report(directory, output):
     # Full free fall remains visible without hiding the millimetre-scale hold.
     axes[0, 0].set_yscale("symlog", linthresh=3)
     axes[0, 1].set_yscale("symlog", linthresh=50)
+    axes[0, 0].set_ylim(bottom=0)
+    axes[0, 1].set_ylim(bottom=0)
     axes[0, 0].legend(fontsize=8)
     figure.suptitle(f"{manifest['config'].get('cohort', 'v1')} | {manifest['case']} | "
                    f"hold: {'PASS' if report['hold_pass'] else 'FAIL'}")
