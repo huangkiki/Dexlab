@@ -40,6 +40,7 @@
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
 cd Dexlab
+git sparse-checkout init --cone
 git sparse-checkout set scripts demos/rss-wiping
 uv run --no-project --isolated --python 3.12 \
   --with-requirements demos/rss-wiping/offline-requirements.txt \
