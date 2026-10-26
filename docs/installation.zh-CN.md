@@ -5,7 +5,7 @@
 安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，然后在仓库根目录执行：
 
 ```bash
-bash scripts/setup.sh
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
 bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 # 或：
 bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
@@ -22,6 +22,28 @@ bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-
 ```bash
 bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
+
+## 保留已有环境
+
+wheel 和源码安装入口均面向 `historical-3.11.0`。在安装包、原生编译或下载资产之前，两者检查 Python 3.12、实际解释器位置、已安装固定版本和 editable DexLab 所属检出目录。不同 profile、冲突版本（包括 MuJoCo 3.16/3.17）、其他目录的 editable，以及从外部环境继承或链接的包都会被拒绝；安装器不会修复或降级该环境。显式 `--mujoco-profile` 优先于 `DEXLAB_MUJOCO_PROFILE`；未显式指定时遵从该变量，两者均未设置则使用历史 profile。
+
+兼容的本地 `.venv` 可以重复使用。准入后会在 `.venv/dexlab-environment.json` 记录所属检出目录和 profile；这个归属记录**不代表物理验收**。新检出目录应使用自己的环境。遇到拒绝时保留原目录，选择尚未使用的路径：
+
+```bash
+git clone https://github.com/huangkiki/Dexlab.git ../Dexlab-historical
+cd ../Dexlab-historical
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
+```
+
+支持把本检出目录独占的环境放到挂载盘。先确保当前检出目录没有 `.venv`，在挂载盘尚未使用的路径**新建**环境，再显式声明归属：
+
+```bash
+uv venv --python 3.12 /path/on/mounted-data/dexlab-historical-venv
+ln -s /path/on/mounted-data/dexlab-historical-venv .venv
+bash scripts/setup.sh --mujoco-profile historical-3.11.0 --claim-environment
+```
+
+归属声明只接受干净环境，或兼容且 editable DexLab 已属于当前目录的环境；不能接管其他所有者或绕过版本检查。后续兼容重入无需再次加 claim 参数。`bash scripts/setup.sh --help` 不探测环境，也不安装包。最新版本资格检查走独立环境的[显式测试运行库流程](autoresearch.zh-CN.md#明确选择测试运行时)，不用这个历史安装器。
 
 ## 验证与视频
 
@@ -58,7 +80,7 @@ MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py d
 需要原始 UniLab 源码基线的开发者可执行：
 
 ```bash
-bash scripts/setup.sh --source
+bash scripts/setup.sh --source --mujoco-profile historical-3.11.0
 SUPERDEX_ROOT="$PWD/vendor/project_superdex" bash demos/apple-stem-grasp/run.sh --backend superdex
 ```
 
