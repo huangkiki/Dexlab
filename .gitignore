@@ -26,3 +26,7 @@ docs/_build/
 
 # Isolated optional Newton core environment
 .venv-newton/
+
+# Public RSS evidence and independently generated rescore outputs.
+/downloads/rss-wiping-*/
+/results/rss-wiping-*/

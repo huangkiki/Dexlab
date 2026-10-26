@@ -33,13 +33,35 @@
 
 <a id="quickstart"></a>
 
-## 先运行苹果抓梗
+## 先复算一组擦拭记录（无需 GPU）
 
-推荐从已有安装脚本覆盖的 MuJoCo 苹果抓梗开始。需要 Linux x86_64 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)；不需要模型 API key。该入口复现固定版本的历史演示，不是六引擎最新版本比较环境。 安装前会检查已有 `.venv` 的版本与归属；不兼容或共享环境会被拒绝，请保留原环境，在独立检出目录安装。
+下载一组同条件的 **latch／无 latch 原始记录**，从材料点与墨迹状态重算滑移和清洁度。需要 [uv](https://docs.astral.sh/uv/getting-started/installation/)；命令使用隔离的 Python 3.12 环境，只安装 NumPy、Matplotlib 及其依赖。首次需要联网获取源码和依赖；证据包本身约 **126 MiB**，解包约 **349 MiB**，建议预留 2 GB 空间。下面只检出复算需要的目录。复算不需要仿真引擎、GPU 或模型 API key。
 
 ```bash
-git clone https://github.com/huangkiki/Dexlab.git
+git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
 cd Dexlab
+git sparse-checkout set scripts demos/rss-wiping
+uv run --no-project --isolated --python 3.12 \
+  --with-requirements demos/rss-wiping/offline-requirements.txt \
+  python scripts/download_assets.py \
+  --manifest demos/rss-wiping/evidence-bundle.json \
+  --destination downloads/rss-wiping-v1
+uv run --offline --no-project --isolated --python 3.12 \
+  --with-requirements demos/rss-wiping/offline-requirements.txt \
+  python demos/rss-wiping/rescore_bundle.py downloads/rss-wiping-v1 \
+  --output results/rss-wiping-v1
+```
+
+打开 `results/rss-wiping-v1/comparison.png` 看曲线；同目录包含两份 CSV 和 `report.json`。这一对记录的保持阶段区域质心最大位移为 **0.061／449.981 mm**，最终清洁率为 **95.47%／39.92%**。两份记录均应通过一致性检查；无 latch 的 `task_pass: false` 是保留的实验失败，不表示下载或复算失败。再次复算请换一个输出目录。
+
+[原始数据与逐文件许可](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) · [完整范围、失败索引和原生重跑前提](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#offline-evidence)。公开包包含一个历史配对；它不证明某个 solver 的普遍缺陷。
+
+## 想重跑仿真：苹果抓梗
+
+在上面克隆的仓库目录中，已有安装脚本可以运行 MuJoCo 苹果抓梗。需要 Linux x86_64 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)；不需要模型 API key。该入口复现固定版本的历史演示，不是六引擎最新版本比较环境。 安装前会检查已有 `.venv` 的版本与归属；不兼容或共享环境会被拒绝，请保留原环境，在独立检出目录安装。
+
+```bash
+git sparse-checkout disable
 bash scripts/setup.sh --mujoco-profile historical-3.11.0
 bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 ```

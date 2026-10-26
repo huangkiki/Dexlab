@@ -31,13 +31,35 @@ Click an experiment or GIF for the full report and reproduction steps.
 [Which solver failed?](solver-failure-audit.md) reviews RSS tasks, existing failures and attribution limits.
 
 (quickstart)=
-## Start with apple-stem grasping
+## Rescore one wiping pair first (no GPU)
 
-Start with the MuJoCo apple-stem grasp covered by the existing setup script. You need Linux x86_64 and [uv](https://docs.astral.sh/uv/getting-started/installation/), with no model API key. This reproduces the pinned historical demo, not a latest-version six-engine comparison environment. Setup checks the versions and ownership of an existing `.venv` first. It refuses incompatible or shared environments; preserve them and install in a separate checkout.
+Download **one matched latch / no-latch raw recording pair** and recompute displacement and cleaning from particle and ink states. You need [uv](https://docs.astral.sh/uv/getting-started/installation/); the commands use an isolated Python 3.12 environment with only NumPy, Matplotlib and their dependencies. The first run needs network access for source and dependencies. The evidence archive itself is about **126 MiB**, expanding to **349 MiB**; allow 2 GB of free space. The checkout below includes only the directories needed for rescoring. Rescoring requires no simulator, GPU or model API key.
 
 ```bash
-git clone https://github.com/huangkiki/Dexlab.git
+git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
 cd Dexlab
+git sparse-checkout set scripts demos/rss-wiping
+uv run --no-project --isolated --python 3.12 \
+  --with-requirements demos/rss-wiping/offline-requirements.txt \
+  python scripts/download_assets.py \
+  --manifest demos/rss-wiping/evidence-bundle.json \
+  --destination downloads/rss-wiping-v1
+uv run --offline --no-project --isolated --python 3.12 \
+  --with-requirements demos/rss-wiping/offline-requirements.txt \
+  python demos/rss-wiping/rescore_bundle.py downloads/rss-wiping-v1 \
+  --output results/rss-wiping-v1
+```
+
+Open `results/rss-wiping-v1/comparison.png`; the same directory contains two CSV files and `report.json`. This pair has maximum holding-patch centroid displacement of **0.061 / 449.981 mm** and final cleaning of **95.47% / 39.92%**. Both records should pass consistency checks; the no-latch `task_pass: false` is the retained experimental failure, not a failed download or rescore. Choose a new output directory for each rescore.
+
+[Raw data and per-file licensing](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) · [Scope, failed-attempt index and native rerun prerequisites](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html#offline-evidence). The bundle covers one historical pair and does not establish a general solver defect.
+
+## To rerun a simulation: apple-stem grasping
+
+From the checkout cloned above, the existing setup script runs the MuJoCo apple-stem grasp. You need Linux x86_64 and [uv](https://docs.astral.sh/uv/getting-started/installation/), with no model API key. This reproduces the pinned historical demo, not a latest-version six-engine comparison environment. Setup checks the versions and ownership of an existing `.venv` first. It refuses incompatible or shared environments; preserve them and install in a separate checkout.
+
+```bash
+git sparse-checkout disable
 bash scripts/setup.sh --mujoco-profile historical-3.11.0
 bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 ```

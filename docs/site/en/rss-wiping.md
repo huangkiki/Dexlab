@@ -55,7 +55,7 @@ Replay executed **zero physics steps**. Maximum absolute loading error was zero 
 
 In this bounded RTX 4090 job with four CPU equivalents, RTX calls at 12 passes averaged **81.75 ms/frame**, versus **3.61 ms/frame** for tiled; scene construction and warm-up took **9.80 s**. These are this job's rendering costs, excluding video encoding, not exclusive-hardware or end-to-end simulation throughput. The first pilot was rejected because the saved ground visibility had not been restored. After correction, the two-frame pilot and continuous segment passed; the failed attempt remains retained.
 
-Reproduction requires the complete raw `states/*.npz` recording and pinned upstream RTX environment; public summaries/CSV cannot substitute for soft-body vertices. See the [replay command](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹) and [rendering task #229](https://github.com/huangkiki/Dexlab/issues/229).
+Reproduction requires complete raw `states/*.npz` and the pinned upstream RTX environment. The [bundle](#offline-evidence) supplies the first pair; summaries/CSV alone still cannot substitute for soft-body vertices. See the [replay command](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹) and [rendering task #229](https://github.com/huangkiki/Dexlab/issues/229).
 
 ## What was held fixed
 
@@ -75,6 +75,25 @@ Cleaned fraction is recomputed from saved stripe ink; return and home errors are
 
 Cleaning is the upstream simulated wear metric, not measured removal of real ink. These are three development repetitions per mode, not held-out validation or a statistical estimate of deployment reliability. The comparison isolates grasp assistance for this geometry/configuration; it does not identify friction-law error, coupling-delay causality, material accuracy or engine superiority.
 
+(offline-evidence)=
+## Download raw records and rescore offline
+
+The [evidence bundle](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) contains `controlled-original-01` and `controlled-no-latch-01` from the same frozen-geometry cohort. Its 159 files occupy about 126 MiB compressed / 349 MiB extracted, including observations, contacts, state arrays, continuous videos, effective parameters, historical sources, the current independent scorer and licenses. Each file has provenance, size, SHA-256, purpose and attempt ownership. Inputs remain unchanged; curves and reports go into a new output directory.
+
+Follow the [homepage CPU quickstart](index.md#quickstart). The isolated environment was checked to contain no MuJoCo, SuperDex, Newton or Genesis. This pair was rescored offline with Python 3.12.12, NumPy 2.5.2 and Matplotlib 3.11.2. The curves below derive from saved particle and ink arrays; holding displacement excludes intentional release.
+
+![Independent raw-state rescore of one pair: cleaning above, holding displacement below](../../evidence/rss-wiping/bundle-v1/comparison.png)
+
+The [rescore report](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/rss-wiping/bundle-v1/rescore-report.json) gives original / no-latch maximum holding-patch centroid displacement of **0.060631 / 449.981051 mm**, and final cleaning of **95.473251% / 39.917695%**. Both records pass integrity checks; task results are pass / fail. File hashes and compiled-model array identity are checked separately. Missing files, wrong hashes, mixed attempts, summary-only substitutes and overwriting inputs are rejected.
+
+`attempt-index.json` retains all **12 execution entries**: four probes (one interrupted during startup, three intentionally truncated at 3 s), the unchanged native test, one unpaired reference and six controlled runs. Preparation failure, three postprocessing attempts and the quaternion-scoring correction are listed separately. Only the first pair has complete raw data here; other records and cross-cohort interpretation remain in [#247](https://github.com/huangkiki/Dexlab/issues/247). This is not full RSS public reproduction. Three derived bytecode caches that can embed host paths are omitted; their source, excluded-file hashes and original local files are preserved.
+
+### Then rerun the native simulation
+
+The native path uses RSS commit `23417de77edf59d614531a833334ed4e2206fc2c`, its lockfile and the SuperDex extra. Recorded versions are SuperDex Physics 1.0.0 (single precision), Newton 1.6.0, MuJoCo / MuJoCo Warp 3.12.0, Warp 1.18.0 and CoACD 1.0.11; the bundled manifests retain the full package and physics settings. Use the [pinned-source rerun commands](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#frozen-upstream--固定上游) in a separate environment. The apple-grasp environment, a CPU fallback or newer dependencies are not automatically the same cohort.
+
+Historical physics recording used NVIDIA CUDA and tiled rendering; native reproduction requires a matching GPU, driver and upstream dependencies. RTX appearance replay additionally needs RT cores and [OVRTX 0.4.0.346409, under NVIDIA's proprietary software license](https://pypi.org/project/ovrtx/0.4.0.346409/). [SuperDex Physics 1.0.0](https://pypi.org/project/superdex-physics/1.0.0/) declares Apache-2.0 for first-party code, with separate third-party terms; do not conflate it with OVRTX licensing. No engine binaries are distributed in the bundle. The new download/rescore path was executed this round; native rerun instructions preserve the existing reproduction path, with no new RSS physics collection.
+
 ## Attempts, costs and reproduction
 
 <!-- rss-attempts:start -->
@@ -85,7 +104,7 @@ The finite budget used **4 short probes, 1 unchanged upstream test and 7 full in
 | original | 59.82–59.82 | 161.3–164.7 | 1441.9–1454.9 |
 | no-latch | 41.68–41.70 | 106.5–109.4 | 1306.4–1312.5 |
 
-The isolated installation cost 1072.2 s, separately from physics. Raw particle/contact records are retained locally; the public evidence contains per-step curve data, summaries, manifests and raw-file hashes.
+The isolated installation cost 1072.2 s, separately from physics. The complete first controlled pair is now published in the bundle above; remaining raw records are retained, and existing per-step curves, summaries, manifests and hashes remain available.
 
 <!-- rss-attempts:end -->
 
