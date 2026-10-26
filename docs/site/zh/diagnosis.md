@@ -21,7 +21,21 @@
 
 ## 落地几何与原生接触力的核对
 
-[G1 落地审计](https://github.com/huangkiki/Dexlab/blob/main/demos/landing-contact/README.zh-CN.md)独立对齐公开记录中的 571 个控制步和 2284 个原生子步，29 个关节的位置完全一致，因此简单关节错序不能解释这份记录的几何/受力差异。公开包缺少原生模型和完整接触对，原生资格和因果解释仍待验证。审计保留作者首次失败及另一次通过的复评，将缺失信号明确列出，不当作零值。
+<p><img src="_static/landing/replays/policy-repeat-1/preview.gif" width="768" alt="G1 原生几何完整原速回放与记录的力曲线"></p>
+
+全部 572 个状态边界按原始 50 Hz 播放 11.44 秒，包括末端点。画面使用保存姿态和原生模型几何，每只脚为四个半径 5 mm 的接触球，不重新积分。<a href="_static/landing/replays/policy-repeat-1/replay.mp4">完整视频 1</a> · <a href="_static/landing/replays/policy-repeat-2/replay.mp4">视频 2</a> · <a href="_static/landing/replays/policy-repeat-3/replay.mp4">视频 3</a> · <a href="_static/landing/replays/policy-repeat-1/curves.svg">力曲线</a>。
+
+<video controls muted playsinline preload="metadata" poster="_static/landing/replays/policy-repeat-1/frame-0000.png" aria-label="G1 第一次完整复跑及同步原生接触力曲线"><source src="_static/landing/replays/policy-repeat-1/replay.mp4" type="video/mp4"></video>
+
+<a href="_static/landing/native-v1.zip">完整记录与模型（17.75 MB ZIP）</a> · <a href="_static/landing/native-summary.json">批次报告</a> · <a href="_static/landing/native-bundle.json">归档验收</a> · <a href="_static/landing/asset-lineage.json">资产来源</a>。解压后核验全部 99 个清单条目，三份独立几何审计均精确复现。上游固定 URDF 与固定官方 Unitree 文件不同，仿真设置不代表已核实的硬件限值。归档保留原始许可和评测参考样本，不含权重及原始动作 NPZ。
+
+[G1 落地审计](https://github.com/huangkiki/Dexlab/blob/main/demos/landing-contact/README.zh-CN.md)已在 RTX 4090 上通过固定参考栈资格：原始支撑检查与三次独立进程策略复跑均通过。每次包含 571 个控制步、2284 个物理子步及末尾 5 秒保持；末尾两秒漂移为 1.21–1.42 mm，独立步前／步后几何重建均未发现非脚部穿透或承载。
+
+新记录还显示了时序差异：共享相同接触对集合的 6,428 个子步中，6,427 个的记录距离更接近步前几何。步前误差低于 2.38e-7 m，步后误差达到 0.0202 m。这些是三份相同种子记录中的相关子步，不是独立可靠性试验。
+
+历史公开记录仍单独保留：29 个关节的位置完全对齐，但第 119 帧标记了几何上的非脚部接触，记录中却没有相应承载接触对。该包缺少原始模型和完整接触流；新批次没有复现此差异，不能确定其原因。保留作者首次失败及另一次通过的复评，缺失信号不当作零值。未修改的上游环境有 7 项依赖声明冲突，转换及本轮原生路径实际运行成功，其他包的调用路径仍未验证。
+
+每次记录中有 74 个关节力样本恰好达到声明的 CPU 模型限值，没有超出。GPU 限幅分支、求解收敛残差／状态及整机质心动量仍不可观测；达到限值或任务通过都不能证明这些字段。
 
 ## AI 受控试参入口
 

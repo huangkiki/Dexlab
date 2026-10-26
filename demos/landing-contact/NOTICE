@@ -4,6 +4,20 @@ liudi159/supermimic-backflip-5090, commit
 The complete upstream code license is retained in UPSTREAM_LICENSE.
 
 The upstream case uses zita-ch/supermimic_vibed (MIT) and a motion from
-kevinzakka/mjbatch (Apache-2.0). Motion, policy weights and robot assets are
-not bundled or relicensed here. Downloaded data retains its original provenance
-and license notices. See the pinned source's docs/METHOD_AND_PROVENANCE.md.
+kevinzakka/mjbatch (Apache-2.0, commit
+77966f85bcd8f7ef4351cb4a1a6f42e133d19725). The evidence archive retains the
+evaluator's cropped/static-padded reference samples embedded in rollout.npz,
+alongside the actual measured trajectory. MJBATCH_LICENSE and
+SUPERMIMIC_LICENSE preserve those upstream notices. Neither the original
+flip.npz dataset file nor policy weights are redistributed.
+
+The generated native_model.mjb contains converted robot geometry derived from
+unitreerobotics/unitree_ros, commit
+15ebe53f4cd77e7d745ae83b9d7ff90e685e8998 (BSD-3-Clause). Its 38 source meshes
+match the pinned official Git blobs. UNITREE_LICENSE retains the copyright
+notice and license. The frozen upstream URDF is a derivative, not the official
+file: six joint effort/velocity limits, two palm fixed-joint attributes and
+the mid360 transform differ; named materials are inlined. Full identities and
+the structural comparison accompany the evidence. These simulation settings
+are not verified hardware limits. Conversion and display do not relicense
+the source assets. See the pinned source's docs/METHOD_AND_PROVENANCE.md.

@@ -24,6 +24,7 @@
 | <a id="visual-highlight-libero"></a>**[LIBERO 回放](https://huangkiki.github.io/Dexlab/zh-cn/latest/libero-workflow.html)** | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/studio-rendering.html"><img src="docs/evidence/studio/libero.gif" width="206" alt="demo 0 原生基线状态回放" loading="lazy"></a> |
 | <a id="visual-highlight-incline"></a>**[六引擎斜面滑动](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline)** | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/studio-rendering.html"><img src="docs/evidence/studio/incline.gif" width="309" alt="1 ms 步长滑动记录" loading="lazy"></a> |
 | <a id="visual-highlight-normal"></a>**[法向接触标定](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#normal)** | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/studio-rendering.html"><img src="docs/evidence/studio/normal.gif" width="412" alt="合成目标的加载、保持与卸载" loading="lazy"></a> |
+| **[G1 落地接触](demos/landing-contact/README.zh-CN.md)**<br>固定 RTX 4090 参考栈：支撑资格与三次完整复跑通过；历史异常未复现。 | <a href="demos/landing-contact/README.zh-CN.md"><img src="docs/evidence/landing/replays/policy-repeat-1/preview.gif" width="412" alt="G1 原生几何与接触力，完整原速回放" loading="lazy"></a> |
 
 [完整实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · 动图来自实际仿真或记录回放；结果仅适用于各报告的配置与条件。
 
@@ -92,7 +93,7 @@ diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-g
 
 ## 场景不对时，先查什么
 
-先核对几何、质量／惯量、控制时刻和实际接触读回，再围绕一个明确问题调整参数，用原始记录和独立评分检查结果。已有失败、修正和下一步判断见[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)。 [落地接触记录核对](demos/landing-contact/README.zh-CN.md)可独立检查公开轨迹的状态对齐；原生落地复现仍待资格验证。
+先核对几何、质量／惯量、控制时刻和实际接触读回，再围绕一个明确问题调整参数，用原始记录和独立评分检查结果。已有失败、修正和下一步判断见[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)。[G1 落地接触核对](demos/landing-contact/README.zh-CN.md)已在固定 RTX 4090 参考栈通过支撑资格与三次完整策略复跑；接触距离更接近步前几何，缺少原始模型的历史异常仍不能归因。
 
 <a id="research-selection"></a>
 

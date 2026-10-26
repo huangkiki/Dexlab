@@ -1,0 +1,44 @@
+{
+  "archive_sha256": "70c7a6f6c4119a13cb3d20b33348d859a8e89dc00cf3aad35cc17a1098772802",
+  "archive_bytes": 17754397,
+  "uncompressed_bytes": 25130709,
+  "manifest_sha256": "b6d51a55ca724168e6c4936af4d441ef74639add8846789ae686b63ca76e9667",
+  "summary_sha256": "df5a437a1d30c8a0bed3b967dcdac99209875aafcf5953283473da4fd75b4f86",
+  "files_verified": 99,
+  "native_audits_reproduced": 3,
+  "visual_qa": "All three complete videos decoded; saved first, landing and final frames inspected. Native contact geometry is shown, not a cosmetic robot skin.",
+  "native_budget_unchanged": {
+    "manifest_sha256": "ab2f0f8c086a6615c650dafa0671057f74904e2352763765ef81ac5afcc2eb12",
+    "starts_used": 4,
+    "wall_charged_or_reserved_s": 156.06826111394912,
+    "wall_limit_s": 3600.0,
+    "distinct_processes": 4,
+    "clock_scope": "Ledger reservations begin after input/runtime identity checks; full bounded-window durations are reported separately.",
+    "attempts": [
+      {
+        "case": "support-probe",
+        "outcome": "recorded",
+        "wall_s": 73.67132960900199,
+        "invocation_sha256": "a2089a44006b151fa5782fc5ba6adf578456cb6bc28f991d48a277320ce30afe"
+      },
+      {
+        "case": "policy-repeat-1",
+        "outcome": "recorded",
+        "wall_s": 27.926651501096785,
+        "invocation_sha256": "fecb14f61e39ba651486c2c4fd42b17db3dd068dcb3c7c8ef1b42be2208e21ad"
+      },
+      {
+        "case": "policy-repeat-2",
+        "outcome": "recorded",
+        "wall_s": 27.147477280930616,
+        "invocation_sha256": "d6e7d1ff33697c98481a2360ffe584db1590e8bf5db4a2b4fbcaa4b71b735df8"
+      },
+      {
+        "case": "policy-repeat-3",
+        "outcome": "recorded",
+        "wall_s": 27.322802722919732,
+        "invocation_sha256": "24ac5477537a7451eac5e9dc4061793af133b4a8c93175587a609b62344f1dd9"
+      }
+    ]
+  }
+}

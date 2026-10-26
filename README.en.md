@@ -24,6 +24,7 @@ Click an experiment or GIF for the full report and reproduction steps.
 | <a id="visual-highlight-libero"></a>**[LIBERO replay](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html)** | <a href="https://huangkiki.github.io/Dexlab/en/latest/studio-rendering.html"><img src="docs/evidence/studio/libero.gif" width="206" alt="Demo 0 native baseline state replay" loading="lazy"></a> |
 | <a id="visual-highlight-incline"></a>**[Six-engine incline](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline)** | <a href="https://huangkiki.github.io/Dexlab/en/latest/studio-rendering.html"><img src="docs/evidence/studio/incline.gif" width="309" alt="Sliding records at 1 ms timestep" loading="lazy"></a> |
 | <a id="visual-highlight-normal"></a>**[Normal contact calibration](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#normal)** | <a href="https://huangkiki.github.io/Dexlab/en/latest/studio-rendering.html"><img src="docs/evidence/studio/normal.gif" width="412" alt="Loading, hold and unloading against a synthetic target" loading="lazy"></a> |
+| **[G1 landing contact](demos/landing-contact/README.md)**<br>Fixed RTX 4090 reference: support probe and three complete repeats pass; historical anomaly not reproduced. | <a href="demos/landing-contact/README.md"><img src="docs/evidence/landing/replays/policy-repeat-1/preview.gif" width="412" alt="G1 native geometry and contact forces, complete original-speed replay" loading="lazy"></a> |
 
 [Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · GIFs show actual simulation or recorded-state replay; results apply to each report’s configuration and conditions.
 
@@ -94,7 +95,7 @@ The verifier writes `summary.json`. When every check passes, `passed` is `true`;
 
 Check geometry, mass/inertia, control timing and actual contact readback first. Adjust parameters around one concrete question and evaluate the recorded result independently. See the [diagnostic workflow](https://huangkiki.github.io/Dexlab/en/latest/diagnosis.html) for failures, fixes and next decisions.
 
-[Landing contact record audit](demos/landing-contact/README.md) independently checks state alignment in a public trajectory; native landing reproduction still awaits qualification.
+[G1 landing contact audit](demos/landing-contact/README.md) now passes the support probe and three complete policy repeats in the fixed RTX 4090 reference stack. Recorded contact distances agree more closely with pre-step geometry; the historical anomaly still lacks its original model for attribution.
 
 <a id="research-selection"></a>
 

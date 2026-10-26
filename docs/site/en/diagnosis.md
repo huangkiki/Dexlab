@@ -21,7 +21,21 @@ Separate **verified configuration improvements, localized integration fixes, evi
 
 ## Landing geometry versus native force
 
-The [G1 landing audit](https://github.com/huangkiki/Dexlab/blob/main/demos/landing-contact/README.md) independently aligns a public 571-control-step record with its 2284 native substeps. The 29 joint positions agree exactly, so simple joint reordering does not explain that archive’s geometric-contact/force disagreement. The public archive lacks the original model and complete contact-pair stream; source qualification and causal interpretation remain pending. The audit preserves the author’s failed result and separate passing reevaluation, and exposes missing signals rather than treating them as zero.
+<p><img src="_static/landing/replays/policy-repeat-1/preview.gif" width="768" alt="Complete original-speed G1 native-geometry replay with recorded force curves"></p>
+
+All 572 boundaries, including the final endpoint, play at the original 50 Hz for 11.44 seconds. The display uses saved poses and native model geometry, including four 5 mm contact spheres per foot; it does not integrate physics. <a href="_static/landing/replays/policy-repeat-1/replay.mp4">Full video 1</a> · <a href="_static/landing/replays/policy-repeat-2/replay.mp4">video 2</a> · <a href="_static/landing/replays/policy-repeat-3/replay.mp4">video 3</a> · <a href="_static/landing/replays/policy-repeat-1/curves.svg">force curves</a>.
+
+<video controls muted playsinline preload="metadata" poster="_static/landing/replays/policy-repeat-1/frame-0000.png" aria-label="G1 full repeat 1 with synchronized native contact-force curves"><source src="_static/landing/replays/policy-repeat-1/replay.mp4" type="video/mp4"></video>
+
+<a href="_static/landing/native-v1.zip">Complete records and models (17.75 MB ZIP)</a> · <a href="_static/landing/native-summary.json">batch report</a> · <a href="_static/landing/native-bundle.json">archive verification</a> · <a href="_static/landing/asset-lineage.json">asset lineage</a>. All 99 manifest entries were verified after extraction, and all three independent geometry audits reproduced exactly. The fixed upstream URDF differs from the pinned official Unitree file; its simulation settings are not verified hardware limits. The archive retains original notices and evaluated reference samples, excluding the checkpoint and original motion NPZ.
+
+The [G1 landing audit](https://github.com/huangkiki/Dexlab/blob/main/demos/landing-contact/README.md) now qualifies the fixed reference on an RTX 4090: the original support probe and three fresh-process policy repeats pass. Every repeat includes 571 controls, 2284 physics substeps and the five-second final hold. Final two-second drift is 1.21–1.42 mm; independent pre/post geometry reconstruction finds no nonfoot penetration or loaded nonfoot contact.
+
+The new records also expose a timing distinction: among 6,428 substeps with the same shared contact-pair set, 6,427 distances agree more closely with pre-step geometry. Pre-step error stays below 2.38e-7 m, while post-step error reaches 0.0202 m. These are correlated substeps of three same-seed records, not independent reliability trials.
+
+The historical public record remains separate: its 29 joint positions align exactly, but it flags geometric nonfoot contact at frame 119 with no recorded loaded pair. That archive lacks the original model and complete pair stream. The new batch does not reproduce the discrepancy, so it cannot establish its cause. Preserve the author's failed result and separate passing reevaluation; missing signals are not zero. Seven dependency declarations conflict in the unchanged upstream environment, although the converter and this native path ran successfully; unrelated package paths remain unqualified.
+
+The saved joint-force records touch a declared CPU-model limit in 74 samples per repeat, with none outside. The GPU clamp branch, solver convergence residual/status and whole-system COM momentum remain unavailable; neither limit equality nor task success establishes them.
 
 ## AI-controlled trial entry point
 
