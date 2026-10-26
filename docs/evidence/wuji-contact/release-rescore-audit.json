@@ -1,0 +1,84 @@
+{
+  "scope": "Offline scoring correction; original observations, protocols, previous reports and presentation metadata retained. No new native development run.",
+  "regression": {
+    "test": "test_opposing_tail_contacts_do_not_count_as_release",
+    "before": "Failed: release_no_contact was True for two nonzero opposing contact forces.",
+    "after": "11 focused score tests passed, including this counterexample and ordinary hold/release.",
+    "before_receipt_sha256": "9e0e2609bf603fcb3ca99d7bc3db2062c86d9e8a8ad2fd8980d294c0f6c0249e",
+    "after_receipt_sha256": "08ad8336c3618225533b1b00d4800cef722ca5a594eb272c4a6d313a9397303c"
+  },
+  "records": [
+    {
+      "attempt": "00-hold-release",
+      "raw_sha256": "114abe4742f7442eef49e71493d76d7dd7a114cd9ac2314bcfc90c95daec74b2",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "01-v2-hold-release",
+      "raw_sha256": "ad6ca01f2c2c5dac7a4ac685005e415d9cfe622bce35de7bafb949c03fcf78ce",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "02-v3-hold-release",
+      "raw_sha256": "dc9480922e569e595f6c63fc69e9163a1a6d480e026dcbe24e9163e75b660da3",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "03-v4-hold-release",
+      "raw_sha256": "19e4e7f4d24eec81aec855d8b8eea074178d9702444a0f8581ee386015765ad4",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "04-v4-unload-index_finger",
+      "raw_sha256": "8c996d0f6fcbad5c074fb750266011e37e9d9192c54d846599d2d30aeabcbff5",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "05-v4-unload-thumb",
+      "raw_sha256": "e7ce1e54740a39642e1d2ed9b6b9101801cb52bbffecc5b385c442ebeef65186",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "06-v4-open",
+      "raw_sha256": "8b2741b19297856ee6723f9cea7fa8fbceb3be6647d596e429abb422919202fe",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "07-v4-no-contact",
+      "raw_sha256": "6b98fd5b0ca4b9e801a5eb37d83f43c1d66a1b808dea0bab077826343742a689",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    },
+    {
+      "attempt": "08-v4-zero-friction",
+      "raw_sha256": "ddaefe983b25ea79b8200c287b87c6b094f6f8b55b66bf8c05a3ff12e5fe5c45",
+      "original_scorer_sha256": "15c41ff5c5c534834d80ef34e3a2445e8f59ef3ef4dfb69e3659af35f352eeef",
+      "corrected_scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+      "task_verdicts_unchanged": true,
+      "late_maximum_single_contact_force_n": 0.0
+    }
+  ]
+}

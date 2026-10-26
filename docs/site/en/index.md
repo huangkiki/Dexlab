@@ -15,6 +15,7 @@ Click an experiment or GIF for the full report and reproduction steps.
 
 | Experiment | Animated preview |
 | --- | :---: |
+| **[Wuji sphere pinch](wuji-contact.md)**<br>Same control and commands: synthetic torsional contact reduces two-second hold displacement from 2.734 to 1.025 mm, passing the original 2 mm limit. Rescore offline; not solver failure or hardware validation. | <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="300" alt="Wuji v3 point contact and v4 torsional contact, full synchronized replay" loading="lazy"></a> |
 | <a id="rss"></a>**[RSS wiping](rss-wiping.md)**<br>Uses latch assistance: compliant constraints carry part of the sponge with the hand after grasping and release when it opens. Success does not establish friction-only retention; [see the no-latch comparison](latch). | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="RSS original with latch assistance, RTX replay at 10–19.9 s" loading="lazy"></a> |
 | <a id="cut-push"></a><a id="banana-force"></a>**[Cutting and pushing](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="Tofu cutting and pushing in RTX" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="Banana cutting and pushing in RTX" loading="lazy"></a> |
 | <a id="scoring"></a>**[Cross scoring](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="Surface reconstruction from recorded states" loading="lazy"></a> |
@@ -128,6 +129,7 @@ Diagnosis <diagnosis>
 
 Solver synchronization and preCICE <solver-coupling>
 
+Wuji grasp and torsional contact <wuji-contact>
 RSS wiping and latch ablation <rss-wiping>
 Continuous cutting and blade-face pushing <cut-push>
 Banana single-cut force <banana-force>

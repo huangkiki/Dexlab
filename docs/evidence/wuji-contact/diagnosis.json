@@ -1,0 +1,482 @@
+{
+  "06-v4-open": {
+    "attempt": "06-v4-open",
+    "raw_sha256": "8b2741b19297856ee6723f9cea7fa8fbceb3be6647d596e429abb422919202fe",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      0
+    ],
+    "measured_force_only_grasp_matrix_ranks": [],
+    "rank_evaluated_steps": 0,
+    "maximum_intrinsic_contact_moment_nm": 0.0,
+    "gravity_moment_about_contact_chord_nm": null,
+    "com_distance_from_contact_chord_m": null,
+    "tangential_over_normal_range": null,
+    "angular_impulse_residual_max_nms": 0.0,
+    "object_rotation_from_support_removal_max_rad": 0.0,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 0.0,
+    "hold_angular_speed_max_rad_s": 0.0,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "preparation_angular_speed_max_rad_s": 0.0,
+    "angular_speed_about_contact_chord_range_rad_s": null,
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 0.0,
+      "object_relative_midpoint_max_displacement_m": 23.530241475001414,
+      "individual_pad_marker_max_displacement_m": [
+        0.0,
+        0.0
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "00-hold-release": {
+    "attempt": "00-hold-release",
+    "raw_sha256": "114abe4742f7442eef49e71493d76d7dd7a114cd9ac2314bcfc90c95daec74b2",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      0
+    ],
+    "measured_force_only_grasp_matrix_ranks": [],
+    "rank_evaluated_steps": 0,
+    "maximum_intrinsic_contact_moment_nm": 0.0,
+    "gravity_moment_about_contact_chord_nm": null,
+    "com_distance_from_contact_chord_m": null,
+    "tangential_over_normal_range": null,
+    "angular_impulse_residual_max_nms": 7.958078640513123e-20,
+    "object_rotation_from_support_removal_max_rad": 3.135856360241877,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 174.54650368751606,
+    "hold_angular_speed_max_rad_s": 87.2732518437595,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      37.98711258653161,
+      23.198923430377334,
+      -205.78553036484504
+    ],
+    "preparation_angular_speed_max_rad_s": 280.9007401186787,
+    "angular_speed_about_contact_chord_range_rad_s": null,
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 0.02576787858187967,
+      "object_relative_midpoint_max_displacement_m": 24.204421443521667,
+      "individual_pad_marker_max_displacement_m": [
+        0.05258626907780622,
+        0.015087565348095319
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "08-v4-zero-friction": {
+    "attempt": "08-v4-zero-friction",
+    "raw_sha256": "ddaefe983b25ea79b8200c287b87c6b094f6f8b55b66bf8c05a3ff12e5fe5c45",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      0
+    ],
+    "measured_force_only_grasp_matrix_ranks": [],
+    "rank_evaluated_steps": 0,
+    "maximum_intrinsic_contact_moment_nm": 0.0,
+    "gravity_moment_about_contact_chord_nm": null,
+    "com_distance_from_contact_chord_m": null,
+    "tangential_over_normal_range": null,
+    "angular_impulse_residual_max_nms": 6.69465526696018e-21,
+    "object_rotation_from_support_removal_max_rad": 0.12033548873532277,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 0.11102368556342081,
+    "hold_angular_speed_max_rad_s": 0.055511842781818886,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      -0.00010152883299469978,
+      -2.5174660218730174e-05,
+      8.0749243650998e-06
+    ],
+    "preparation_angular_speed_max_rad_s": 0.09162434980990768,
+    "angular_speed_about_contact_chord_range_rad_s": null,
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 0.0003392056040422141,
+      "object_relative_midpoint_max_displacement_m": 23.15085427633766,
+      "individual_pad_marker_max_displacement_m": [
+        0.0006061853525835517,
+        0.0005490475929950052
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "04-v4-unload-index_finger": {
+    "attempt": "04-v4-unload-index_finger",
+    "raw_sha256": "8c996d0f6fcbad5c074fb750266011e37e9d9192c54d846599d2d30aeabcbff5",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      2
+    ],
+    "measured_force_only_grasp_matrix_ranks": [
+      5
+    ],
+    "rank_evaluated_steps": 4000,
+    "maximum_intrinsic_contact_moment_nm": 2.213831008969939e-05,
+    "gravity_moment_about_contact_chord_nm": {
+      "min": 1.930805336715105e-05,
+      "max": 3.9071763569115874e-05,
+      "max_abs": 3.9071763569115874e-05
+    },
+    "com_distance_from_contact_chord_m": {
+      "min": 0.00017832396462413828,
+      "max": 0.0003833930160292108
+    },
+    "tangential_over_normal_range": [
+      0.08261248581011771,
+      0.12799961107608263
+    ],
+    "angular_impulse_residual_max_nms": 4.736447393166756e-22,
+    "object_rotation_from_support_removal_max_rad": 0.04419316000001434,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 0.04256643571640341,
+    "hold_angular_speed_max_rad_s": 0.024992267546978066,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      0.009240945863057843,
+      0.0031056705847206634,
+      0.0011144493003265301
+    ],
+    "preparation_angular_speed_max_rad_s": 0.2455755222733857,
+    "angular_speed_about_contact_chord_range_rad_s": [
+      0.011972539296571253,
+      0.02433708529832998
+    ],
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 8.022490631765036e-05,
+      "object_relative_midpoint_max_displacement_m": 0.0009522616143469168,
+      "individual_pad_marker_max_displacement_m": [
+        4.350936694436763e-05,
+        0.00013536826877071
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "03-v4-hold-release": {
+    "attempt": "03-v4-hold-release",
+    "raw_sha256": "19e4e7f4d24eec81aec855d8b8eea074178d9702444a0f8581ee386015765ad4",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      2
+    ],
+    "measured_force_only_grasp_matrix_ranks": [
+      5
+    ],
+    "rank_evaluated_steps": 4000,
+    "maximum_intrinsic_contact_moment_nm": 2.213831008969939e-05,
+    "gravity_moment_about_contact_chord_nm": {
+      "min": 1.930805336715105e-05,
+      "max": 3.9071763569115874e-05,
+      "max_abs": 3.9071763569115874e-05
+    },
+    "com_distance_from_contact_chord_m": {
+      "min": 0.00017832396462413828,
+      "max": 0.0003833930160292108
+    },
+    "tangential_over_normal_range": [
+      0.08261248581011771,
+      0.12799961107608263
+    ],
+    "angular_impulse_residual_max_nms": 4.736447393166756e-22,
+    "object_rotation_from_support_removal_max_rad": 0.04419316000001434,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 0.04256643571640341,
+    "hold_angular_speed_max_rad_s": 0.024992267546978066,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      0.009240945863057843,
+      0.0031056705847206634,
+      0.0011144493003265301
+    ],
+    "preparation_angular_speed_max_rad_s": 0.2455755222733857,
+    "angular_speed_about_contact_chord_range_rad_s": [
+      0.011972539296571253,
+      0.02433708529832998
+    ],
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 8.022490631765036e-05,
+      "object_relative_midpoint_max_displacement_m": 0.0009522616143469168,
+      "individual_pad_marker_max_displacement_m": [
+        4.350936694436763e-05,
+        0.00013536826877071
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "01-v2-hold-release": {
+    "attempt": "01-v2-hold-release",
+    "raw_sha256": "ad6ca01f2c2c5dac7a4ac685005e415d9cfe622bce35de7bafb949c03fcf78ce",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      2
+    ],
+    "measured_force_only_grasp_matrix_ranks": [
+      5
+    ],
+    "rank_evaluated_steps": 4000,
+    "maximum_intrinsic_contact_moment_nm": 0.0,
+    "gravity_moment_about_contact_chord_nm": {
+      "min": -0.0001192092564527888,
+      "max": 0.00011764010303481086,
+      "max_abs": 0.0001192092564527888
+    },
+    "com_distance_from_contact_chord_m": {
+      "min": 0.0002984223165904689,
+      "max": 0.0007744305271697995
+    },
+    "tangential_over_normal_range": [
+      0.32093039502943366,
+      0.4720249902461121
+    ],
+    "angular_impulse_residual_max_nms": 1.406608315089643e-20,
+    "object_rotation_from_support_removal_max_rad": 3.140383606068439,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 30.644742506552575,
+    "hold_angular_speed_max_rad_s": 28.2431238632085,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      1.97481815683158,
+      0.028425415117446444,
+      -0.12422530053541266
+    ],
+    "preparation_angular_speed_max_rad_s": 3.1453683921461435,
+    "angular_speed_about_contact_chord_range_rad_s": [
+      -26.28542081697054,
+      28.243056384588098
+    ],
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 0.000186160620485262,
+      "object_relative_midpoint_max_displacement_m": 0.0023454769782416574,
+      "individual_pad_marker_max_displacement_m": [
+        0.00024021974966312513,
+        0.00025864000923236214
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "05-v4-unload-thumb": {
+    "attempt": "05-v4-unload-thumb",
+    "raw_sha256": "e7ce1e54740a39642e1d2ed9b6b9101801cb52bbffecc5b385c442ebeef65186",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      2
+    ],
+    "measured_force_only_grasp_matrix_ranks": [
+      5
+    ],
+    "rank_evaluated_steps": 4000,
+    "maximum_intrinsic_contact_moment_nm": 2.213831008969939e-05,
+    "gravity_moment_about_contact_chord_nm": {
+      "min": 1.930805336715105e-05,
+      "max": 3.9071763569115874e-05,
+      "max_abs": 3.9071763569115874e-05
+    },
+    "com_distance_from_contact_chord_m": {
+      "min": 0.00017832396462413828,
+      "max": 0.0003833930160292108
+    },
+    "tangential_over_normal_range": [
+      0.08261248581011771,
+      0.12799961107608263
+    ],
+    "angular_impulse_residual_max_nms": 4.736447393166756e-22,
+    "object_rotation_from_support_removal_max_rad": 0.04419316000001434,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 0.04256643571640341,
+    "hold_angular_speed_max_rad_s": 0.024992267546978066,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      0.009240945863057843,
+      0.0031056705847206634,
+      0.0011144493003265301
+    ],
+    "preparation_angular_speed_max_rad_s": 0.2455755222733857,
+    "angular_speed_about_contact_chord_range_rad_s": [
+      0.011972539296571253,
+      0.02433708529832998
+    ],
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 8.022490631765036e-05,
+      "object_relative_midpoint_max_displacement_m": 0.0009522616143469168,
+      "individual_pad_marker_max_displacement_m": [
+        4.350936694436763e-05,
+        0.00013536826877071
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "07-v4-no-contact": {
+    "attempt": "07-v4-no-contact",
+    "raw_sha256": "6b98fd5b0ca4b9e801a5eb37d83f43c1d66a1b808dea0bab077826343742a689",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      0
+    ],
+    "measured_force_only_grasp_matrix_ranks": [],
+    "rank_evaluated_steps": 0,
+    "maximum_intrinsic_contact_moment_nm": 0.0,
+    "gravity_moment_about_contact_chord_nm": null,
+    "com_distance_from_contact_chord_m": null,
+    "tangential_over_normal_range": null,
+    "angular_impulse_residual_max_nms": 0.0,
+    "object_rotation_from_support_removal_max_rad": 0.0,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 0.0,
+    "hold_angular_speed_max_rad_s": 0.0,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "preparation_angular_speed_max_rad_s": 0.0,
+    "angular_speed_about_contact_chord_range_rad_s": null,
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 0.0,
+      "object_relative_midpoint_max_displacement_m": 23.530241475001414,
+      "individual_pad_marker_max_displacement_m": [
+        0.0,
+        0.0
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  },
+  "02-v3-hold-release": {
+    "attempt": "02-v3-hold-release",
+    "raw_sha256": "dc9480922e569e595f6c63fc69e9163a1a6d480e026dcbe24e9163e75b660da3",
+    "source_sha256": "f3ef813a45c1d4eebf17f040a70d45c997e59aa441a19c39752eeca2643cebf5",
+    "wrench_source_sha256": "8f75d4e2e6d1f51376dfa3561a3c9141de52a154817bd1133f9f602422409819",
+    "hold_steps": 4000,
+    "active_contact_counts": [
+      2
+    ],
+    "measured_force_only_grasp_matrix_ranks": [
+      5
+    ],
+    "rank_evaluated_steps": 4000,
+    "maximum_intrinsic_contact_moment_nm": 0.0,
+    "gravity_moment_about_contact_chord_nm": {
+      "min": -0.00015442800808282807,
+      "max": 0.00014601115265817872,
+      "max_abs": 0.00015442800808282807
+    },
+    "com_distance_from_contact_chord_m": {
+      "min": 0.00031046983025195514,
+      "max": 0.0009845525713396033
+    },
+    "tangential_over_normal_range": [
+      0.10085938122240222,
+      0.23990144612893602
+    ],
+    "angular_impulse_residual_max_nms": 1.4083308228122427e-20,
+    "object_rotation_from_support_removal_max_rad": 3.141101848948611,
+    "rotation_metric": "Principal relative angle in [0, pi], not unwrapped turns.",
+    "hold_rotation_path_length_rad": 32.45964027772467,
+    "hold_angular_speed_max_rad_s": 29.336296348502096,
+    "angular_velocity_world_at_support_removal_rad_s": [
+      1.4742439147797455,
+      0.043896638213846234,
+      -0.08211111629501569
+    ],
+    "preparation_angular_speed_max_rad_s": 2.2766584630427773,
+    "angular_speed_about_contact_chord_range_rad_s": [
+      -27.939785741305027,
+      29.336243171188862
+    ],
+    "sampled_marker_motion": {
+      "stride_steps": 20,
+      "interval_s": 0.01,
+      "marker": "Fixed source IK contact reference points on the two pads; not a claim that the actual contact stays at these markers.",
+      "midpoint_max_displacement_m": 9.345602525505646e-05,
+      "object_relative_midpoint_max_displacement_m": 0.002695879804595428,
+      "individual_pad_marker_max_displacement_m": [
+        0.00016561721880183885,
+        0.00014038423747606745
+      ]
+    },
+    "equations": {
+      "grasp_matrix": "[I,I; skew(p1-COM)/r,skew(p2-COM)/r]; numerical rank threshold1e-10 after length scaling.",
+      "chord_moment": "axis dot ((COM-p1) cross m*g); point forces at p1,p2 cannot supply moment about their connecting line.",
+      "angular_balance": "Isotropic sphere: I*(R_after*w_local_after - R_before*w_local_before) - h*sum((contact_pos-COM_before) cross F_world + moment_world).",
+      "boundary": "Post-hoc diagnosis, not a new acceptance criterion. Rank5 does not rule out special static gravity equilibria; changing contacts/moving fingers prevent treating this as a fixed-pivot pendulum proof."
+    }
+  }
+}

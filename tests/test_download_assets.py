@@ -52,6 +52,16 @@ class AssetInstallTests(unittest.TestCase):
         self.install()
         self.assertEqual((self.root / 'robot/model.obj').read_bytes(), b'mesh')
 
+    def test_wuji_manifest_is_accepted_by_the_real_installer(self):
+        declared = Path(__file__).resolve().parents[1] / 'demos/wuji-contact/assets.json'
+        data = json.loads(declared.read_text())
+        # Substitute only the remote archive payload; keep the authored schema.
+        data['archives'] = self.data['archives']
+        self.manifest.write_text(json.dumps(data))
+        self.install()
+        self.assertEqual((self.root / 'robot/model.obj').read_bytes(), b'mesh')
+        self.assertFalse((self.root / 'apple/texture.png').exists())
+
     def test_modified_asset_is_preserved(self):
         self.install()
         target = self.root / 'robot/model.obj'
