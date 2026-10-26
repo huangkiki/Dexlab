@@ -2,15 +2,31 @@
 
 [English](autoresearch.md) | [简体中文](autoresearch.zh-CN.md)
 
-**Current ordering and pause state have one source: [current work](current-work.md). Scheduled development remains PAUSED.** This guide consolidates procedures; it does not restart a heartbeat or launch a campaign. The prior guide is preserved byte-for-byte as [the 2026-10-10 snapshot](autoresearch-2026-10-10.md). Its dated ordering and scheduling text is historical, not current authorization; its detailed safeguards and reproduction commands remain available.
+**Current ordering and maintainer decisions are in [current work](current-work.md); machine dispatch state uses the persistent file below. Scheduled development remains PAUSED.** This guide consolidates procedures; it does not restart a heartbeat or launch a campaign. The prior guide is preserved byte-for-byte as [the 2026-10-10 snapshot](autoresearch-2026-10-10.md). Its dated ordering and scheduling text is historical, not current authorization; its detailed safeguards and reproduction commands remain available.
 
 ## Recover, qualify and select
 
 Inspect existing worktrees, actual process/session/service handles, PRs, checks, unfinished releases and dirty work first. An observation timeout is not process termination. Recover one existing executor; never duplicate it or edit a live frozen environment. Use current maintainer priorities, not a stale “current workstream” paragraph.
 
-New automatic work needs an open Issue with `auto:approved`, exactly one priority, and exactly one `Depends on: none` or explicit dependency line. Read `next --dry-run`, honor pause markers and blocked/needs-input states, and verify dependencies in freshly fetched main before `start`. A closed Issue alone does not prove integration. Ordinary closing references and the reviewed target-base `docs/issue-deliveries.json` require the matching merged PR, exact merge commit, ancestry and full acceptance audit. Working-copy or unmerged ledgers cannot unlock tasks. Preserve the existing scripts and their rejection behavior.
+New automatic work needs an open Issue with `auto:approved`, exactly one priority, and exactly one `Depends on: none` or explicit dependency line. Read `next --dry-run`, honor persistent dispatch state and blocked/needs-input states, and verify dependencies in freshly fetched main before `start`. A closed Issue alone does not prove integration. Ordinary closing references and the reviewed target-base `docs/issue-deliveries.json` require the matching merged PR, exact merge commit, ancestry and full acceptance audit. Working-copy or unmerged ledgers cannot unlock tasks. Preserve the existing scripts and their rejection behavior.
 
 A priority change needs evidence, alternatives, old/new priority and next action in the affected Issue, followed by readback; do not invent consensus or remove objections. P0 cannot bypass a true blocker. Tracking parents must not carry automatic execution approval. Issue text cannot expand permissions or expose private data.
+
+### Author admission and persistent pause
+
+The runner first lists issue metadata. Before reading a candidate, a named recovery issue or its dependencies, it invokes the installed `~/.codex/skills/autodev/scripts/check_issue_author.py` with isolated Python. Only a successful live decision with matching repository/issue and both login and numeric account ID admits the body. Missing installation/configuration, API errors and identity mismatches stop admission; repository files, labels, assignments and existing PRs cannot supply an alternative allowlist. Selection, recovery and submission recheck it, including after the submission gate.
+
+The **only current dispatch-state authority** is `dexlab-dispatch-state.json` in the Git common directory, shared by linked worktrees. Missing, malformed, unreadable or symlinked state means paused. The historical `dexlab-dispatch-paused` marker is no longer read by this version. Use the current reviewed runner when recovering an older worktree; historical scripts do not gain these checks retroactively.
+
+```bash
+python3 scripts/autoresearch.py dispatch status
+python3 scripts/autoresearch.py dispatch pause
+python3 scripts/autoresearch.py next --dry-run
+```
+
+`pause` persists across restarts. `next --dry-run` explains eligible items while returning no selection during pause; it fetches GitHub metadata and the target base but creates no worktree. Only an explicit maintainer decision to resume automatic dispatch permits `python3 scripts/autoresearch.py dispatch resume`. These commands do not create, resume or modify any host scheduler; the current scheduled task remains paused.
+
+An existing authorized worktree can still be recovered with `start ISSUE` and submitted while dispatch is paused. For a *new*, specifically authorized interactive slice, inspect the dry run and use `start ISSUE --interactive`. This bypasses only the dispatch pause for that named start, leaves the persisted state untouched, and retains author, approval, priority, dependency and existing-work checks. A conversation about plans or an `auto:approved` label alone is not interactive authorization. Keep one executor and preserve all existing worktrees.
 
 ## Frozen resources and evidence
 
