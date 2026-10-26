@@ -80,7 +80,7 @@ v4 从准备阶段起就使用新接触定律，因此也影响准备结束时�
 
 ## 数值一致性、复现与边界
 
-独立评分重建原生接触力，检查 `mΔv=Δt(Fcontact+mg+Fprep)`；v4 最大残差约 `1.65e-17 N·s`。角动量检查包含接触点力臂、内禀力矩及外力矩，最大残差约 `4.74e-22 N·m·s`。自由关节角速度按[官方约定](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects)从物体系转到世界系。这些检查验证符号、时刻与记录一致性，不证明真实材料准确性，也不代替数值收敛研究。
+独立评分重建原生接触力，检查 `mΔv=Δt(Fcontact+mg+Fprep)`；v4 保持/释放正例的最大残差约 `1.65e-17 N·s`。同一正例的角动量检查包含接触点力臂、内禀力矩及外力矩，最大残差约 `4.74e-22 N·m·s`。自由关节角速度按[官方约定](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects)从物体系转到世界系。这些检查验证符号、时刻与记录一致性，不证明真实材料准确性，也不代替数值收敛研究。
 
 [原生运行与回放说明](https://github.com/huangkiki/Dexlab/tree/main/demos/wuji-contact)提供固定依赖和资产校验。物理为未修改的 MuJoCo 3.17.0、CPU/float64；手的质量、惯量、关节和力矩上限来自固定源资产，控制与材料参数为合成设置。手掌采用原生 SDF，其余手部碰撞仍为源网格凸包。
 

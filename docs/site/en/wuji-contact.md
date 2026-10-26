@@ -80,7 +80,7 @@ Nominal zero friction sets all three coefficients on every geom to zero; native 
 
 ## Numerical consistency, reproduction and limits
 
-Independent scoring reconstructs native forces and checks `mΔv=Δt(Fcontact+mg+Fprep)`; v4's maximum residual is about `1.65e-17 N·s`. Angular balance includes contact lever arms, intrinsic moments and external moments, with maximum residual about `4.74e-22 N·m·s`. Free-joint angular velocity is rotated from body to world coordinates following the [official convention](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects). These check signs, epochs and record consistency, not real material accuracy or numerical convergence.
+Independent scoring reconstructs native forces and checks `mΔv=Δt(Fcontact+mg+Fprep)`; the v4 hold/release positive's maximum residual is about `1.65e-17 N·s`. For that same positive, angular balance includes contact lever arms, intrinsic moments and external moments, with maximum residual about `4.74e-22 N·m·s`. Free-joint angular velocity is rotated from body to world coordinates following the [official convention](https://mujoco.readthedocs.io/en/stable/overview.html#floating-objects). These check signs, epochs and record consistency, not real material accuracy or numerical convergence.
 
 [Native execution and replay instructions](https://github.com/huangkiki/Dexlab/tree/main/demos/wuji-contact) provide pinned dependencies and verified assets. Physics uses unmodified MuJoCo 3.17.0, CPU/float64. Hand masses, inertias, joints and effort limits come from the pinned source asset; control/material settings are synthetic. The wrist uses native SDF, while other hand collision meshes remain convex approximations.
 
