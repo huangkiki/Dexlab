@@ -1,0 +1,755 @@
+{
+  "registry_sha256": "6c74b47f095de582199a1728a4c047aded9e01c06e60a75cf5a38c03e178bc80",
+  "scope": "One new native first-case qualification plus every historical registered profile; no all-engine comparison",
+  "rows": [
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / elliptic / implicitfast",
+      "runtime_path": "native",
+      "version": "3.17.0",
+      "state": "ready-for-first-attempt",
+      "scope": "This protocol only; prior engine admission reused, task outcome not yet known",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/251"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / Euler",
+      "runtime_path": "native",
+      "version": "3.15.0",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "PGS / elliptic / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-pgs-elliptic-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "PGS / pyramidal / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-pgs-pyramidal-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "CG / elliptic / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-cg-elliptic-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "CG / pyramidal / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-cg-pyramidal-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / elliptic / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-newton-elliptic-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / pyramidal / Euler",
+      "runtime_path": "native CPU FP64",
+      "version": "3.15.0",
+      "cohort": "mujoco-incline-newton-pyramidal-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "Newton / AUTO / FP64",
+      "runtime_path": "native",
+      "version": "1.0.0",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / approximate_implicitfast",
+      "runtime_path": "native CPU FP64",
+      "version": "1.4.3",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / approximate_implicitfast",
+      "runtime_path": "UniSim 1.7.12 + disclosed local patch",
+      "version": "1.4.3",
+      "cohort": "genesis-contact-migration-v4",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "XPBD",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "historical readback incomplete (#126)",
+      "runtime_path": "SDK historical",
+      "version": "historical core identity unrecovered (#126)",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "pending qualification",
+      "runtime_path": "ManiSkill / SAPIEN",
+      "version": "official combination pending #47",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kLagged / hydroelastic",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "cohort": "drake-incline-qualification-v2",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / implicitfast",
+      "runtime_path": "native",
+      "version": "3.14.0",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton",
+      "runtime_path": "native cpu float64",
+      "version": "3.11.0",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "experimental-shell",
+      "runtime_path": "native cpu float64",
+      "version": "1.0.0",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "xpbd",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "vbd",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "semi_implicit",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "featherstone",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "style3d",
+      "runtime_path": "native cpu float32",
+      "version": "1.7.0.dev0 @ 2dee3234",
+      "cohort": "cloth-heldout-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "PBD / rigid coupling",
+      "runtime_path": "native CPU FP64",
+      "version": "1.4.3",
+      "cohort": "genesis-cloth-diagnostic",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "not qualified",
+      "runtime_path": "native",
+      "version": "not qualified",
+      "cohort": "rigid-history",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "surface cloth",
+      "runtime_path": "Isaac Sim 5.1.0.0 / IsaacLab 0.47.2",
+      "version": "historical core identity unrecovered (#126)",
+      "cohort": "physx-cloth-final-v2",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "Newton / implicitfast",
+      "runtime_path": "native",
+      "version": "3.11.0",
+      "cohort": "apple-sdf-14s",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "Newton / GMRES / FP64",
+      "runtime_path": "native",
+      "version": "1.0.0",
+      "cohort": "apple-sdf-14s",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / AUTO / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-auto-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-cg-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / GMRES / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-gmres-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / AUGMENTED_CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-augmented-cg-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / LDLT / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-ldlt-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / LU / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-lu-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / ASYNC_CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-async-cg-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / PARALLEL_CG / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-parallel-cg-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / MINRES / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-minres-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "BFGS / AUTO / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-bfgs-auto-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "SR1 / AUTO / C1_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-sr1-auto-c1-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / AUTO / CINF_REGULARIZED",
+      "runtime_path": "native CPU FP64",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-newton-auto-cinf-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / CUDA_CG / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / CUDA_GMRES / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / EXPERIMENTAL_CUDA_SPARSE_CHOLESKY / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / EXPERIMENTAL_CUDA_SPARSE_LDLT / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "SuperDex",
+      "solver": "NEWTON / EXPERIMENTAL_CUDA_SPARSE_LU / C1_REGULARIZED",
+      "runtime_path": "official FP64 wheel, CUDA disabled",
+      "version": "1.0.0",
+      "cohort": "superdex-incline-cuda-unavailable-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / elliptic / signorini / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-incline-v1-newton-elliptic-signorini",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / elliptic / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-incline-v1-newton-elliptic-convex",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / pyramidal / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-incline-v1-newton-pyramidal-convex",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / elliptic / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-incline-v1-cg-elliptic-convex",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / pyramidal / convex / approximate_implicitfast",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-incline-v1-cg-pyramidal-convex",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "Newton / pyramidal / Signorini",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-signorini-unsupported-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / elliptic / Signorini",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-signorini-unsupported-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Genesis",
+      "solver": "CG / pyramidal / Signorini",
+      "runtime_path": "native CPU FP64 / Quadrants 1.3.3",
+      "version": "1.4.3",
+      "cohort": "genesis-signorini-unsupported-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "XPBD / 100 sweeps",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-xpbd",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "SemiImplicit",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-semiimplicit",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Featherstone",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-featherstone",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "VBD legacy / 100 sweeps",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-vbd-legacy",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "VBD compliant / 100 sweeps",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-vbd-compliant",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Kamino / PADMM / Euler",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-kamino-padmm",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Kamino / DVI / Euler",
+      "runtime_path": "native CPU FP32",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-v1-kamino-dvi",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "Style3D",
+      "runtime_path": "native particle solver",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-particle-scope-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Newton Physics",
+      "solver": "ImplicitMPM",
+      "runtime_path": "native particle solver",
+      "version": "1.6.1 / Warp 1.18.0",
+      "cohort": "newton-incline-particle-scope-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "SolverMuJoCo; algorithm unqualified",
+      "runtime_path": "Newton wrapper / unqualified",
+      "version": "Newton 1.6.1; MuJoCo core unqualified",
+      "cohort": "newton-mujoco-wrapper-unqualified",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "PGS / patch friction",
+      "runtime_path": "native SDK CPU FP32",
+      "version": "5.9.0",
+      "cohort": "physx-incline-v1-pgs",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "PGS / friction every iteration",
+      "runtime_path": "native SDK CPU FP32",
+      "version": "5.9.0",
+      "cohort": "physx-incline-v1-pgs-friction",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "TGS / patch friction",
+      "runtime_path": "native SDK CPU FP32",
+      "version": "5.9.0",
+      "cohort": "physx-incline-v1-tgs",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "PhysX",
+      "solver": "TGS / external forces every iteration",
+      "runtime_path": "native SDK CPU FP32",
+      "version": "5.9.0",
+      "cohort": "physx-incline-v1-tgs-external",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kLagged / point",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "cohort": "drake-contact-paths-v1-lagged-point",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSimilar / hydroelastic",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "cohort": "drake-contact-paths-v1-similar-hydroelastic",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSimilar / point",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "cohort": "drake-contact-paths-v1-similar-point",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSap / hydroelastic",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "cohort": "drake-contact-paths-v1-sap-hydroelastic",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "Drake",
+      "solver": "SAP / kSap / point",
+      "runtime_path": "native CPU FP64",
+      "version": "1.57.0",
+      "cohort": "drake-contact-paths-v1-sap-point",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "MJWarp Newton / pyramidal / Newton contacts",
+      "runtime_path": "Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0",
+      "version": "3.11.0",
+      "cohort": "isaac-mjwarp-clock-v6",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "MJWarp Newton / pyramidal / MJWarp contacts",
+      "runtime_path": "Isaac Sim6.1.0 local tag build / Newton1.5.0 / vendor Warp1.16.0",
+      "version": "3.11.0",
+      "cohort": "isaac-mjwarp-clock-v6",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    },
+    {
+      "engine": "MuJoCo",
+      "solver": "MJWarp Newton / pyramidal / MJWarp contacts",
+      "runtime_path": "Native matched core / vendor Warp1.16.0; original and four-field aligned",
+      "version": "3.11.0",
+      "cohort": "native-mjwarp-matched-v1",
+      "state": "not-run",
+      "reason": "Historical registry profile; no matched fixed-wrist scene, control and recorder qualification under this new protocol. Retained for independent later extension, not an executed failure or unsupported claim.",
+      "reference": "https://github.com/huangkiki/Dexlab/issues/48"
+    }
+  ]
+}
