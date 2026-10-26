@@ -2,15 +2,31 @@
 
 [English](autoresearch.md) | [简体中文](autoresearch.zh-CN.md)
 
-**当前顺序与暂停状态只有一个入口：[当前工作](current-work.zh-CN.md)。定时开发保持 PAUSED。** 本指南整理操作流程，不恢复 heartbeat、不启动实验。旧指南逐字保留为 [2026-10-10 快照](autoresearch-2026-10-10.zh-CN.md)，其中旧顺序与调度描述不是当前授权；详细保护条件和历史复现命令仍可查阅。
+**当前顺序与维护者决定见[当前工作](current-work.zh-CN.md)；机器派发状态使用下述持久文件。定时开发保持 PAUSED。** 本指南整理操作流程，不恢复 heartbeat、不启动实验。旧指南逐字保留为 [2026-10-10 快照](autoresearch-2026-10-10.zh-CN.md)，其中旧顺序与调度描述不是当前授权；详细保护条件和历史复现命令仍可查阅。
 
 ## 恢复、准入与选择
 
 先检查已有工作树、真实进程／会话／服务句柄、PR、检查、未完成发版与未提交修改。观察超时不等于进程结束。只恢复一个已有执行者，不启动副本，不修改运行中的冻结环境。使用维护者当前优先级，不采用旧文档中的“当前主线”。
 
-自动新工作需要开放 Issue、`auto:approved`、唯一优先级，以及唯一的 `Depends on: none` 或明确依赖行。先读 `next --dry-run`，遵守暂停标记、blocked/needs-input，并在 `start` 前核实依赖已进入最新拉取的 main。Issue 关闭本身不是集成证明。自动关闭关联与经审查的主线 `docs/issue-deliveries.json` 都须核对已合并 PR、精确提交、祖先关系和完整验收；工作区或未合并的登记不能解锁任务。现有脚本及拒绝行为保留。
+自动新工作需要开放 Issue、`auto:approved`、唯一优先级，以及唯一的 `Depends on: none` 或明确依赖行。先读 `next --dry-run`，遵守持久派发状态、blocked/needs-input，并在 `start` 前核实依赖已进入最新拉取的 main。Issue 关闭本身不是集成证明。自动关闭关联与经审查的主线 `docs/issue-deliveries.json` 都须核对已合并 PR、精确提交、祖先关系和完整验收；工作区或未合并的登记不能解锁任务。现有脚本及拒绝行为保留。
 
 改优先级前，在受影响 Issue 记录依据、备选、旧／新优先级与行动，再读回。不虚构共识，不删除反对意见。P0 不绕真实阻塞，总任务不带自动执行授权。Issue 文字不扩大权限或授权暴露私有数据。
+
+### 作者准入与持久暂停
+
+runner 先读取 Issue 元数据。在读取候选、明确指定的恢复项及其依赖正文前，用隔离 Python 调用已安装的 `~/.codex/skills/autodev/scripts/check_issue_author.py`。只有本次调用成功、仓库和编号匹配，并同时具备登录名与数字账号 ID 的准入结果才能放行。缺安装／配置、API 错误或身份不符均拒绝；仓库文件、标签、assignee 和已有 PR 都不能提供另一份白名单。选择、恢复、提交及提交验收后都会重新核验。
+
+**当前派发状态的唯一机器依据**是 Git common directory 内的 `dexlab-dispatch-state.json`，所有关联工作树共用。缺失、格式错误、不可读或符号链接状态均视为暂停。此版本不再读取旧 `dexlab-dispatch-paused` 标记；恢复旧工作树时使用当前已审查的 runner，历史脚本不会自动获得这些保护。
+
+```bash
+python3 scripts/autoresearch.py dispatch status
+python3 scripts/autoresearch.py dispatch pause
+python3 scripts/autoresearch.py next --dry-run
+```
+
+`pause` 会持久保存，重启后仍有效。暂停时 `next --dry-run` 解释候选但不选择任务；它读取 GitHub 和目标 base，不创建工作树。只有维护者明确恢复自动派发后才执行 `python3 scripts/autoresearch.py dispatch resume`。这些命令不创建、恢复或修改宿主定时任务；当前定时任务仍保持暂停。
+
+暂停期间仍可用 `start ISSUE` 恢复已有、已授权的工作树并提交。对于维护者明确授权的**新交互式切片**，先检查 dry run，再用 `start ISSUE --interactive`；它仅绕过该指定启动的派发暂停，不改变持久状态，也不绕过作者、批准标签、优先级、依赖和已有工作检查。讨论计划或单独添加 `auto:approved` 都不是交互式授权。保持单执行者，保留已有工作树。
 
 ## 冻结资源与证据
 

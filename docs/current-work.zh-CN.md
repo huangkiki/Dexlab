@@ -33,7 +33,7 @@
 - [#249](https://github.com/huangkiki/Dexlab/issues/249)限定先做 Newton SolverMuJoCo 与 direct MuJoCo Warp 的身份/封装对照，列 P2；#152 的 Isaac Sim 路径与其他任务范围仍独立保留。libuipc #218 为候选评估。#200 缺原作者同条件切割输入，保留 P0/needs-input；硬件 #6 保留 Blocked，纯数值工作不依赖它。
 - 草稿 [PR #199](https://github.com/huangkiki/Dexlab/pull/199)仍需解决与 main 的冲突、当前树完整文档门禁及链接核验。保留原 PR 和已有工作树；旧 CI 通过不代表当前可合并，本轮不重复新建阅读路线 PR。
 
-本轮计划项不授予自动派发。旧 `auto:approved` 已按排期清除；这不撤回会话中的交互式授权。**机器暂停标记与文档可能仍不一致，该缺陷由 #244 修复，不能把本次标签整理称为 runner 已修复。** 恢复自动执行前必须通过受信作者检查、暂停/依赖验证和实际 `next --dry-run`；不可仅凭本页派发。
+本轮计划项不授予自动派发。旧 `auto:approved` 已按排期清除；这不撤回会话中的交互式授权。**runner 的持久派发状态缺失或损坏时默认暂停；只有显式 resume 才能放行新自动任务。** 具体命令与交互式继续规则见[操作指南](autoresearch.zh-CN.md#作者准入与持久暂停)。 恢复自动执行前必须通过受信作者检查、暂停/依赖验证和实际 `next --dry-run`；不可仅凭本页派发。
 
 ## 恢复与交付入口
 

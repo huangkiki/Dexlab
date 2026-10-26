@@ -18,6 +18,7 @@ def issue(number, state="OPEN", labels=("auto:approved", "priority:P1"),
           dependencies="none", created_at=None):
     return {
         "number": number,
+        "author_admission": {"allowed": True, "author": "huangkiki", "author_id": 45757984},
         "state": state,
         "labels": [{"name": label} for label in labels],
         "body": f"Depends on: {dependencies}\n",

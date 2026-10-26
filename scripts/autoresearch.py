@@ -12,6 +12,7 @@ import os
 import re
 import shlex
 import subprocess
+import sys
 import tempfile
 import uuid
 from pathlib import Path
@@ -36,6 +37,115 @@ def run(*args, cwd=None, capture=False, input=None):
 
 def gh_json(*args):
     return json.loads(run("gh", *args, "--repo", REPO, capture=True))
+
+
+def author_admission(number):
+    """Invoke installed policy before reading task text; never trust repository policy."""
+    gate = Path.home() / ".codex/skills/autodev/scripts/check_issue_author.py"
+    try:
+        resolved = gate.resolve(strict=True)
+        if resolved.is_relative_to(ROOT.resolve()):
+            raise ValueError("author gate must be installed outside the checkout")
+        result = subprocess.run(
+            [sys.executable, "-I", str(gate), "--repo", REPO, "--issue", str(number)],
+            cwd=gate.parent, text=True, capture_output=True, timeout=45,
+        )
+        decision = json.loads(result.stdout)
+        if (result.returncode != 0 or not isinstance(decision, dict)
+                or decision.get("allowed") is not True
+                or not isinstance(decision.get("repository"), str)
+                or decision["repository"].lower() != REPO.lower()
+                or type(decision.get("issue")) is not int or decision["issue"] != number
+                or not isinstance(decision.get("author"), str) or not decision["author"]
+                or type(decision.get("author_id")) is not int or decision["author_id"] <= 0):
+            return {"allowed": False, "reason": "installed author gate rejected or returned incomplete identity"}
+        return decision
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return {"allowed": False, "reason": "installed author gate unavailable or invalid"}
+
+
+def queue_issues(target=None):
+    """Read metadata first; admit candidate, recovery and dependency bodies separately."""
+    fields = "number,state,labels,url,createdAt,author"
+    issues = gh_json("issue", "list", "--state", "all", "--limit", "1000", "--json", fields)
+    if len(issues) >= 1000:
+        raise SystemExit("Queue inventory limit reached; refusing an incomplete snapshot")
+    by_number = {item["number"]: dict(item) for item in issues}
+    pending = {item["number"] for item in issues if item["state"] == "OPEN"
+               and APPROVAL in {label["name"] for label in item["labels"]}}
+    if target is not None:
+        pending.add(target)
+    inspected = set()
+    while pending:
+        number = min(pending)
+        pending.remove(number)
+        if number in inspected or number not in by_number:
+            continue
+        inspected.add(number)
+        item = by_number[number]
+        decision = author_admission(number)
+        item["author_admission"] = decision
+        if decision["allowed"] is not True:
+            continue
+        if (item.get("author") or {}).get("login", "").lower() != decision["author"].lower():
+            item["author_admission"] = {"allowed": False, "reason": "metadata author differs from live admission"}
+            continue
+        body = gh_json("issue", "view", str(number), "--json", fields + ",title,body")
+        if (body.get("number") != number
+                or body.get("url", "").lower() != f"https://github.com/{REPO}/issues/{number}".lower()
+                or (body.get("author") or {}).get("login", "").lower() != decision["author"].lower()):
+            raise SystemExit(f"Issue #{number} changed identity during author admission")
+        item = by_number[number] = {**body, "author_admission": decision}
+        try:
+            pending.update(dependencies(item))
+        except ValueError:
+            pass  # queue_report explains the malformed dependency without dispatching.
+    return list(by_number.values())
+
+
+def dispatch_path():
+    common = Path(run("git", "rev-parse", "--git-common-dir", capture=True))
+    return (common if common.is_absolute() else ROOT / common) / "dexlab-dispatch-state.json"
+
+
+def dispatch_state():
+    """Missing or damaged state never enables dispatch after checkout or restart."""
+    path = dispatch_path()
+    report = {"path": str(path.resolve()), "paused": True, "reason": "not initialized"}
+    try:
+        if path.is_symlink():
+            raise ValueError("symlink state")
+        state = json.loads(path.read_text())
+        if (not isinstance(state, dict) or set(state) != {"schema_version", "paused"}
+                or type(state["schema_version"]) is not int or state["schema_version"] != 1
+                or type(state["paused"]) is not bool):
+            raise ValueError("invalid state")
+        report.update(paused=state["paused"], reason="explicit pause" if state["paused"] else "explicit resume")
+    except FileNotFoundError:
+        pass
+    except (OSError, ValueError):
+        report["reason"] = "invalid or unreadable state; dispatch remains paused"
+    return report
+
+
+def set_dispatch(paused):
+    """Atomically set local dispatch state; never alter the host's scheduler."""
+    path = dispatch_path()
+    if path.is_symlink():
+        raise SystemExit("Preserve the symlinked dispatch state; resolve its ownership before writing")
+    if path.exists() and dispatch_state()["reason"].startswith("invalid"):
+        raise SystemExit("Preserve the invalid dispatch state; inspect it before changing authorization")
+    with tempfile.NamedTemporaryFile("w", dir=path.parent, prefix=path.name + ".", delete=False) as stream:
+        temporary = Path(stream.name)
+        try:
+            json.dump({"schema_version": 1, "paused": paused}, stream)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+            temporary.replace(path)
+        finally:
+            temporary.unlink(missing_ok=True)
+    return dispatch_state()
 
 
 def dependencies(issue):
@@ -87,6 +197,8 @@ def queue_report(issues, pulls, *, integrated=(), claimed=(), paused=False):
         item = by_number.get(number)
         if item is None:
             return [f"unknown dependency #{number}"]
+        if item.get("author_admission", {}).get("allowed") is not True:
+            return [f"#{number}: author admission required or rejected"]
         try:
             required = dependencies(item)
         except ValueError as error:
@@ -185,13 +297,10 @@ def manual_integrations(issues, pulls):
         raise SystemExit(f"Invalid {path} in origin/main: {error}; review the delivery evidence") from error
 
 
-def queue_context():
+def queue_context(target=None):
     """Refresh the base and verify merged dependency commits against its ancestry."""
     run("git", "fetch", "origin", "main")
-    issues = gh_json(
-        "issue", "list", "--state", "all", "--limit", "1000", "--json",
-        "number,title,body,state,labels,url,createdAt",
-    )
+    issues = queue_issues(target)
     pulls = gh_json(
         "pr", "list", "--state", "all", "--limit", "1000", "--json",
         "number,headRefName,state,baseRefName,mergeCommit,closingIssuesReferences,body,url",
@@ -216,13 +325,10 @@ def queue_context():
         match = re.fullmatch(r"branch refs/heads/autoresearch/issue-(\d+)", line)
         if match:
             claimed.add(int(match[1]))
-    common = Path(run("git", "rev-parse", "--git-common-dir", capture=True))
-    if not common.is_absolute():
-        common = ROOT / common
     return issues, pulls, {
         "integrated": integrated,
         "claimed": claimed,
-        "paused": (common / "dexlab-dispatch-paused").exists(),
+        "paused": dispatch_state()["paused"],
     }
 
 
@@ -234,7 +340,7 @@ def next_issue(explain=False):
 
 def authorized_issue(number):
     """Authorization/dependencies also apply to resuming and submitting work."""
-    issues, _, context = queue_context()
+    issues, _, context = queue_context(number)
     item = next((item for item in issues if item["number"] == number), None)
     report = queue_report(issues, [], integrated=context["integrated"])
     if item is None or number not in {item["number"] for item in report["eligible"]}:
@@ -244,14 +350,15 @@ def authorized_issue(number):
     return item
 
 
-def start(number):
+def start(number, *, interactive=False):
     issue = authorized_issue(number)
     branch = f"autoresearch/issue-{number}"
     worktree = ROOT / ".autoresearch" / "worktrees" / f"issue-{number}"
     if not worktree.exists():
         issues, pulls, context = queue_context()
         report = queue_report(issues, pulls, **context)
-        if report["paused"] or number not in {item["number"] for item in report["eligible"]}:
+        if ((report["paused"] and not interactive)
+                or number not in {item["number"] for item in report["eligible"]}):
             raise SystemExit("New dispatch is paused or work already exists; inspect next --dry-run")
         exists = (
             subprocess.run(
@@ -261,6 +368,8 @@ def start(number):
             ).returncode
             == 0
         )
+        if not interactive and dispatch_state()["paused"]:
+            raise SystemExit("Dispatch was paused before worktree creation")
         if exists:
             run("git", "worktree", "add", str(worktree), branch)
         else:
@@ -537,7 +646,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("next").add_argument("--dry-run", action="store_true")
-    sub.add_parser("start").add_argument("issue", type=int)
+    start_parser = sub.add_parser("start")
+    start_parser.add_argument("issue", type=int)
+    start_parser.add_argument("--interactive", action="store_true",
+                              help="Start the explicitly authorized item without resuming automatic dispatch")
+    sub.add_parser("dispatch").add_argument("action", choices=("status", "pause", "resume"))
     check_parser = sub.add_parser("check")
     check_parser.add_argument("worktree", type=Path)
     check_parser.add_argument("--expected-tree")
@@ -553,7 +666,9 @@ def main():
     if args.command == "next":
         result = next_issue(explain=args.dry_run)
     elif args.command == "start":
-        result = start(args.issue)
+        result = start(args.issue, interactive=args.interactive)
+    elif args.command == "dispatch":
+        result = dispatch_state() if args.action == "status" else set_dispatch(args.action == "pause")
     elif args.command == "check":
         worktree = args.worktree.resolve()
         before = source_tree(worktree)
