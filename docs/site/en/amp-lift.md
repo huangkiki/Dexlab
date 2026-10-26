@@ -4,7 +4,7 @@
 
 The public `Mjlab-G1-DualArm` checkpoint uses Toaster003. It is distinct from the same repository's SuperMimic/PPO-Sim tracking task and its 1.5 kg box; unavailable tracking weights cannot be replaced by AMP scores.
 
-![Complete recorded probe: 0.2 s, no lift qualification](_static/amp-lift/probe.gif)
+![Complete recorded probe: 0.2 s, no lift qualification](../../evidence/amp-lift/probe.gif)
 
 The GIF shows all 11 saved pose boundaries at 50 fps: 0.2 s of native motion plus one endpoint frame (0.22 s presentation). The object remains ground-supported in this short probe. This interval cannot assess a 60 s lift. No dynamics were rerun for playback.
 
@@ -29,7 +29,7 @@ The first offline scoring attempt also found a separate classifier defect: terra
 
 ## Recompute the evidence
 
-Download the [numerical evidence archive](_static/amp-lift/probe-v1.zip), [result and archive hashes](_static/amp-lift/summary.json), and [replay provenance](_static/amp-lift/probe-replay.json). The archive includes both complete control streams, 40 recorded substeps, effective model arrays, source snapshots, failed qualification, resource receipts and corrected offline diagnostics. Every entry hash and ZIP CRC was verified; rescoring extracted data reproduced the report and all series arrays exactly.
+Download the [numerical evidence archive](../../evidence/amp-lift/probe-v1.zip), [result and archive hashes](../../evidence/amp-lift/summary.json), and [replay provenance](../../evidence/amp-lift/probe-replay.json). The archive includes both complete control streams, 40 recorded substeps, effective model arrays, source snapshots, failed qualification, resource receipts and corrected offline diagnostics. Every entry hash and ZIP CRC was verified; rescoring extracted data reproduced the report and all series arrays exactly.
 
 ```bash
 unzip probe-v1.zip -d probe-v1

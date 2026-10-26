@@ -4,7 +4,7 @@
 
 公开 `Mjlab-G1-DualArm` 权重使用 Toaster003。它与同仓库 SuperMimic/PPO-Sim tracking 的 1.5 kg 箱体任务不同；AMP 成绩不能替代缺失的 tracking 权重与评测。
 
-![完整记录探针：0.2 秒，未通过抬箱资格](_static/amp-lift/probe.gif)
+![完整记录探针：0.2 秒，未通过抬箱资格](../../evidence/amp-lift/probe.gif)
 
 动图以 50 fps 展示全部 11 个保存的姿态边界：原生运动 0.2 秒，另加一个终点帧，播放长 0.22 秒。短探针中物体仍由地面支撑，这段时间不能评价 60 秒抬箱任务。回放没有重新推进物理。
 
@@ -29,7 +29,7 @@ qpos／qvel 使用原始数组比较，广义坐标含平移和转动分量；�
 
 ## 独立复算证据
 
-下载[数值证据归档](_static/amp-lift/probe-v1.zip)、[结果与归档哈希](_static/amp-lift/summary.json)及[回放来源记录](_static/amp-lift/probe-replay.json)。归档含两个完整控制流、40 个记录子步、有效模型数组、源码快照、失败资格记录、资源凭据和修正后的离线诊断。全部条目哈希与 ZIP CRC 已核对；解包复算的报告和全部数组与原评分完全相同。
+下载[数值证据归档](../../evidence/amp-lift/probe-v1.zip)、[结果与归档哈希](../../evidence/amp-lift/summary.json)及[回放来源记录](../../evidence/amp-lift/probe-replay.json)。归档含两个完整控制流、40 个记录子步、有效模型数组、源码快照、失败资格记录、资源凭据和修正后的离线诊断。全部条目哈希与 ZIP CRC 已核对；解包复算的报告和全部数组与原评分完全相同。
 
 ```bash
 unzip probe-v1.zip -d probe-v1
