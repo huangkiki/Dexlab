@@ -55,7 +55,7 @@
 
 在本次 RTX 4090、4 核等效配额的受限作业中，12 pass 的 RTX 渲染调用平均耗时 **81.75 ms/帧**，tiled 为 **3.61 ms/帧**；场景构建与预热合计 **9.80 s**。这些是该作业的渲染成本，不包含视频编码，也不构成独占硬件或端到端仿真吞吐基准。初次预检因地面显示标志未恢复而被完整模型检查拒绝；修正后两帧预检和连续片段均通过，失败记录保留。
 
-复现需要完整 `states/*.npz` 原始记录及固定上游 RTX 环境；公开的摘要／CSV 无法代替软体顶点。见 [重渲染命令](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹) 与 [渲染任务 #229](https://github.com/huangkiki/Dexlab/issues/229)。
+复现需要完整 `states/*.npz` 原始记录及固定上游 RTX 环境；下方[数据包](#offline-evidence)提供首对完整 raw，摘要／CSV 本身仍无法代替软体顶点。见 [重渲染命令](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#render-a-saved-trajectory--重渲染已有轨迹) 与 [渲染任务 #229](https://github.com/huangkiki/Dexlab/issues/229)。
 
 ## 固定了哪些条件
 
@@ -75,6 +75,25 @@ RSS 提交 [`23417de`](https://github.com/robosimstudio/robosimstudio/tree/23417
 
 清洁率是原版的仿真磨损指标，不是真实墨水去除率。每组 3 次是开发复现重复，不是留出验证，也不足以估计部署可靠性。该对照只识别当前几何和配置下辅助保持的贡献，不能直接归因于摩擦定律、耦合延迟、材料精度或某个引擎的总体优劣。
 
+(offline-evidence)=
+## 下载原始记录，先离线复算
+
+[下载证据包](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)包含同一固定几何 cohort 的 `controlled-original-01` 和 `controlled-no-latch-01`。159 个文件约 126 MiB 压缩／349 MiB 解包，含完整观测、接触与状态数组、连续录像、有效参数、历史源码、当前独立评分器和许可。清单逐项给出来源、大小、SHA-256、用途和所属尝试。原始数据不修改；图与报告写入一个新的输出目录。
+
+按照{ref}`首页 CPU 快速开始 <quickstart>`下载后复算。隔离环境经检查不含 MuJoCo、SuperDex、Newton 或 Genesis；本轮在 Python 3.12.12、NumPy 2.5.2、Matplotlib 3.11.2 下离线复算这一对记录。下图来自保存的材料点与墨迹数组，保持位移不包含主动张开后的运动。
+
+![一组原始记录的独立复算：上为清洁率，下为保持阶段区域位移](../../evidence/rss-wiping/bundle-v1/comparison.png)
+
+[复算报告](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/rss-wiping/bundle-v1/rescore-report.json)给出原版／无 latch 的最大保持区域质心位移 **0.060631／449.981051 mm**、最终清洁率 **95.473251%／39.917695%**。两份记录一致性通过，任务结果分别为通过／失败。文件哈希与编译模型数组哈希分开核验；缺项、错 hash、跨尝试混合、摘要伪装原始数据或覆盖输入均拒绝。
+
+包内 `attempt-index.json` 保留全部 **12 条执行记录**：4 次诊断（一次启动阶段主动中断、三次刻意截短到 3 s）、未改动的原生测试、1 次未配对参考、6 次受控运行；准备失败、3 次后处理和四元数评分修正单列。完整 raw 只公开首对，其他记录和跨 cohort 解释仍由 [#247](https://github.com/huangkiki/Dexlab/issues/247)保留；不能把本包当作全 RSS 公开复现。3 个可能包含本机路径的派生字节码缓存未打包，对应源码、排除项哈希及本地原文件保留。
+
+### 再重跑原生仿真
+
+原生路径使用固定 RSS 提交 `23417de77edf59d614531a833334ed4e2206fc2c`、其锁文件与 SuperDex extra；记录中 SuperDex Physics 为 1.0.0（单精度），Newton 1.6.0，MuJoCo／MuJoCo Warp 3.12.0，Warp 1.18.0，CoACD 1.0.11。完整包内 manifest 保留实际包版本和物理配置。按[固定版本与复现命令](https://github.com/huangkiki/Dexlab/blob/main/demos/rss-wiping/README.md#frozen-upstream--固定上游)另建环境，不用苹果抓梗环境替代，也不把 CPU fallback 或新版本自动视为同一 cohort。
+
+历史物理录制使用 NVIDIA CUDA 环境与 tiled 渲染；重跑前先具备匹配 GPU、驱动和上游依赖。RTX 外观回放还需要有 RT 核心的显卡及 [OVRTX 0.4.0.346409（NVIDIA 专有软件许可）](https://pypi.org/project/ovrtx/0.4.0.346409/)。[SuperDex Physics 1.0.0](https://pypi.org/project/superdex-physics/1.0.0/)的第一方代码声明 Apache-2.0，第三方依赖保留各自条款；不要把它与 OVRTX 的许可混为一谈。数据包不分发引擎二进制。新下载复算已在本轮执行；本节原生重跑沿用既有复现入口，本轮没有新增 RSS 物理采集。
+
 ## 尝试、成本与复现
 
 <!-- rss-attempts:start -->
@@ -85,7 +104,7 @@ RSS 提交 [`23417de`](https://github.com/robosimstudio/robosimstudio/tree/23417
 | 原版 | 59.82–59.82 | 161.3–164.7 | 1441.9–1454.9 |
 | 无 latch | 41.68–41.70 | 106.5–109.4 | 1306.4–1312.5 |
 
-独立环境安装耗时 1072.2 s，与物理运行分列。原始材料点和接触记录保留在本地；公开证据包含逐步曲线数据、摘要、配置清单与原始文件哈希。
+独立环境安装耗时 1072.2 s，与物理运行分列。首个受控配对的完整原始记录已通过上方数据包公开；其余原始记录继续保留，既有逐步曲线、摘要、配置与哈希仍可查看。
 
 <!-- rss-attempts:end -->
 

@@ -16,6 +16,32 @@ The original's latch is **compliant grasp assistance**. Contact first squeezes t
 
 `--mode original` 复现带辅助保持的擦拭；`--mode no-latch` 保留相同就绪条件与接触设置，撤去辅助固定。带 latch 成功不能证明纯摩擦保持可靠；无 latch 失败也不能单独归因为摩擦、控制器或耦合缺陷。
 
+## Download and rescore first / 先下载并复算
+
+The [immutable evidence release](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) publishes the complete first controlled original/no-latch pair: 159 files, about 126 MiB compressed and 349 MiB extracted. Follow the [homepage CPU quickstart](../../README.en.md#quickstart) or run these commands from the checkout root. The isolated Python 3.12 environment needs NumPy and Matplotlib, with no simulator or GPU; the first command downloads dependencies/data, and the second uses offline mode.
+
+[不可变证据包](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)公开首个受控配对的完整 raw。按[首页 CPU 快速开始](../../README.md#quickstart)，或在仓库根目录运行：首次下载依赖与数据，随后离线复算；不安装仿真引擎，不使用 GPU，不修改项目已有环境。
+
+```bash
+uv run --no-project --isolated --python 3.12 \
+  --with-requirements demos/rss-wiping/offline-requirements.txt \
+  python scripts/download_assets.py \
+  --manifest demos/rss-wiping/evidence-bundle.json \
+  --destination downloads/rss-wiping-v1
+uv run --offline --no-project --isolated --python 3.12 \
+  --with-requirements demos/rss-wiping/offline-requirements.txt \
+  python demos/rss-wiping/rescore_bundle.py downloads/rss-wiping-v1 \
+  --output results/rss-wiping-v1
+```
+
+`comparison.png`, two CSV files and `report.json` reconstruct this pair's cleaning and material-patch displacement from saved states. Both records pass integrity checks; the no-latch task still fails. Output must be a new directory outside the bundle. Missing/corrupt files, mixed attempts, mismatched compiled arrays and summary-only substitutes are rejected before successful reporting. Original input hashes are checked before and after scoring.
+
+结果是曲线图、两份 CSV 与 JSON 报告；无 latch 的 `task_pass: false` 是预期保留的物理任务失败。输入保持不变，输出目录必须新建且位于包外。包中 `attempt-index.json` 保留全部 12 条执行记录及单列的准备／后处理失败；仅首对具有完整公开 raw，其他范围仍由 [#247](https://github.com/huangkiki/Dexlab/issues/247)承接。三份派生 `.pyc` 缓存因可携带本机路径而省略，源码与排除哈希保留。
+
+Native reproduction below has additional requirements: the historical cohort used NVIDIA CUDA, pinned RSS/lockfile, SuperDex Physics 1.0.0 single precision, Newton 1.6.0, MuJoCo/Warp 3.12.0 and Warp 1.18.0. Use its own environment, not the apple demo environment. RTX appearance replay separately needs RT cores and [OVRTX's NVIDIA proprietary license](https://pypi.org/project/ovrtx/0.4.0.346409/); [SuperDex Physics 1.0.0](https://pypi.org/project/superdex-physics/1.0.0/) declares Apache-2.0 for first-party code. No engine binaries are included. This publication reruns offline scoring only; it adds no RSS physics collection.
+
+下述原生重跑需要匹配的 NVIDIA CUDA 环境、固定上游依赖与独立环境；RTX 外观回放还受 OVRTX 专有许可与 RT 核心要求约束。SuperDex 的许可与 OVRTX 不同，不要混称为商业依赖。数据包不含引擎二进制，本轮没有新增 RSS 物理采集。
+
 ## Frozen upstream / 固定上游
 
 - Repository: [RoboSimStudio](https://github.com/robosimstudio/robosimstudio).
@@ -62,9 +88,9 @@ python demos/rss-wiping/annotate.py /path/to/fresh-original-run \
 
 `render.py` 从完整原始记录恢复刚体位姿、海绵材料点与墨迹，输出同机位、同时刻的 tiled／RTX 对照。它复用固定版本的材质、房间与面光源，不推进物理、不插值顶点，也不改变原评分。
 
-Use the pinned upstream environment with its RTX dependency group and an NVIDIA GPU with RT cores. The input must contain `manifest.json`, `compiled-model.npz`, `observations.jsonl` and `states/*.npz`. The smaller public summary/CSV bundle alone cannot reconstruct the deforming sponge; use a retained raw recording or produce one with the recorder above.
+Use the pinned upstream environment with its RTX dependency group and an NVIDIA GPU with RT cores. The input must contain `manifest.json`, `compiled-model.npz`, `observations.jsonl` and `states/*.npz`. Summary/CSV files alone cannot reconstruct the deforming sponge. The downloadable evidence bundle now supplies the complete first controlled pair; use its raw run directories, another retained recording, or a new recording made with the pinned environment.
 
-需要固定上游环境的 RTX 依赖组、具备 RT 核心的 NVIDIA 显卡，以及完整原始状态。公开的摘要／CSV 不包含重建海绵所需的全部顶点；应使用保留的原始记录，或先按上面的命令录制。
+需要固定上游环境的 RTX 依赖组、具备 RT 核心的 NVIDIA 显卡，以及完整原始状态。摘要／CSV 本身不包含重建海绵所需的全部顶点；现在可使用可下载证据包中的首对完整原始记录，或在固定环境中另行录制。
 
 Inside the bounded execution window / 在受限运行窗口内：
 
