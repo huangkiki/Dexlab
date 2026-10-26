@@ -3,8 +3,8 @@
   "archives": [
     {
       "url": "https://github.com/huangkiki/Dexlab/releases/download/wuji-contact-evidence-v1/wuji-contact-evidence-v1.tar.xz",
-      "sha256": "1fa3730eb35513a7a92853e6e1a811ac1902d31435f1e168862c1ac22447c53e",
-      "bytes": 147939648,
+      "sha256": "8d7fdfe0ba5d8fc4e4bd5704adf689f4e7926b2ee387cda999f16ab9b7419d2c",
+      "bytes": 150472288,
       "files": {
         "admission/static-v4.json": "1f3082d9cadd714998a0bfad61d7c62a221632dbb857e8f79f6862be630bc223",
         "comparison/comparison.gif": "48a5e170dfd2fa2d3ee4ea096e3da9318e744783936568515c7aeb2cecbcef84",
@@ -61,6 +61,33 @@
         "delivery-reports-v4/08-v4-zero-friction/measurements.csv": "91f5c6479187d5a32360527dbe605485a72a9a6674c277981005eedcf399ac21",
         "delivery-reports-v4/08-v4-zero-friction/measurements.png": "c12955d4d25b3209e9424cfb9fac329b1ce25d40ae900fd95b79ee2a124e010c",
         "delivery-reports-v4/08-v4-zero-friction/report.json": "cd3be2ed575046e752d48dc1829cca8c363e0199a87b7417f6456634ddb277df",
+        "delivery-reports-v5/00-hold-release/measurements.csv": "0f0c3d50031b1e3a2669ffc14047eb53fca30b2595181af016be1c555bf266c3",
+        "delivery-reports-v5/00-hold-release/measurements.png": "e149c9429bbd9f708d0be0a48c6bf6d7ba1e6ca24c450b17bad8d18e8c6dd551",
+        "delivery-reports-v5/00-hold-release/report.json": "7645e90ad3e7b515efb899c3933bd04c7f55c3884189c631281101bdb5c10dfa",
+        "delivery-reports-v5/01-v2-hold-release/measurements.csv": "c5618277d160a78bfccb2c0240173526493dd45a1005095b6c0fd03f23b0301f",
+        "delivery-reports-v5/01-v2-hold-release/measurements.png": "ba2ed79336816297c6075cf5b21cc69b2625e566fa45168e16eff3e84d1739b5",
+        "delivery-reports-v5/01-v2-hold-release/report.json": "63ede33aefa07e67f321ac872dd4d0da8226c5e01c331d8e7a206db69e56ed0b",
+        "delivery-reports-v5/02-v3-hold-release/measurements.csv": "9d3782efc7261c26590c6c92387f5181be2c52d9e5025cb82152819f7751c868",
+        "delivery-reports-v5/02-v3-hold-release/measurements.png": "c47908c91f7b582178291f02a33a7565d8f2c8ee85f7c56f4a4b09ac4790c49c",
+        "delivery-reports-v5/02-v3-hold-release/report.json": "bd1821e8370a9482bf6ef96e07db1a2762bb6b86f4044577feaf7c01e545d482",
+        "delivery-reports-v5/03-v4-hold-release/measurements.csv": "3cb94f0396c03091a4a38837e5a21e9b9d2164f417ee6fc41f1c55070936ae18",
+        "delivery-reports-v5/03-v4-hold-release/measurements.png": "9d47120e837bf73e6817a1ba296e988f201dc13f6de8afd5c2d0c60d488cdc8e",
+        "delivery-reports-v5/03-v4-hold-release/report.json": "e42150f3c79c9520a2f61d06e3914780d7a62304f0e4d9adc9873483da7787e3",
+        "delivery-reports-v5/04-v4-unload-index_finger/measurements.csv": "7c93c9a38b83439e5b38797ab73e9141c370cf5a99cb3c32f37a4418185b3b92",
+        "delivery-reports-v5/04-v4-unload-index_finger/measurements.png": "2554c641c69d9ad7a05dbf53b13aa5b03d5b5765d61d2557e42b9f5ac9b8cd7a",
+        "delivery-reports-v5/04-v4-unload-index_finger/report.json": "c67d0ba0905e812fb76eb9280353c5cff4288c17db2a14bd9556e69898ffbf2f",
+        "delivery-reports-v5/05-v4-unload-thumb/measurements.csv": "7ba309884713459723e85104ac6981c6e994c80d1b48406e3ff414c1236eeeef",
+        "delivery-reports-v5/05-v4-unload-thumb/measurements.png": "e2316a4ee09eb8bcaf6932f21c97054bdb249c9aecd45325f5e0b5b2714797d0",
+        "delivery-reports-v5/05-v4-unload-thumb/report.json": "c8ce883309ffe2ac1acbfa1b2f831bbea8ed4ffbe9b1663c697bd8839284bd89",
+        "delivery-reports-v5/06-v4-open/measurements.csv": "7dc5ef0719d9bd81e405c3f8e125edc7c9cc21d7bf9d105d443a4f9598debbdd",
+        "delivery-reports-v5/06-v4-open/measurements.png": "cf9f47e26f1d391af5d5ab922d299c39930f98ba3d779b41e8105f712c7c2949",
+        "delivery-reports-v5/06-v4-open/report.json": "284ba2fe697d185264cd5f12becd11e0a080dd3ca78dc74fb562365d76e039b8",
+        "delivery-reports-v5/07-v4-no-contact/measurements.csv": "0c2bea29502aa056debf6cc566950b7fe3ec16699aabf0eecab43fbbdbe63a7f",
+        "delivery-reports-v5/07-v4-no-contact/measurements.png": "817c874dfb3b541c327d361552f2d58f30f1846ec06e73661bdedfaba0b23b34",
+        "delivery-reports-v5/07-v4-no-contact/report.json": "06e95a5e5b5d6a6bec8b09424986080ae4334c0a354ecef6d4e8a2a5573b64e1",
+        "delivery-reports-v5/08-v4-zero-friction/measurements.csv": "91f5c6479187d5a32360527dbe605485a72a9a6674c277981005eedcf399ac21",
+        "delivery-reports-v5/08-v4-zero-friction/measurements.png": "c12955d4d25b3209e9424cfb9fac329b1ce25d40ae900fd95b79ee2a124e010c",
+        "delivery-reports-v5/08-v4-zero-friction/report.json": "b55cb24013bec8d40efe29a1533545e1d7196bea0a5c99e2ce6e3ee3f0eeb9c6",
         "historical-scores/score-00-corrected.json": "3bd4b10528b0f77dbbc1ee0dad162ed8b7449ab5f76a73beaa8d5a85fb7c478b",
         "historical-scores/score-00.json": "07a22c381258196c4ccb73e156fa9b08ed249fd0894900990a05fecca5704fc1",
         "historical-scores/score-01.json": "1dcffbeb2ba655391bc0783cc75a3de8d200ef74896f50b56ad832272bd3099c",
@@ -127,9 +154,12 @@
         "presentation-qa/same-prefix-diagnosis.json": "37bf54da7172553ac4132f22314ac03ffd3f4e7f2e629bde8ee3009cb0fb30e7",
         "processing-source/compare-motion.py": "b6070b4a845f80df97428bbdd4b90d5e2beced385ab2648954bc5dca7309ee70",
         "processing-source/compare-replays.py": "76a550548fd416a264bb0eb47cbb9ddddd300856631a89528f0cad949f8b41d2",
+        "processing-source/demos/wuji-contact/plot.py": "92d257272381613214f5f5aeadf5c39cf215529b7b7b78c49465f1f683cf003d",
+        "processing-source/demos/wuji-contact/score.py": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
         "processing-source/render-attempts.py": "ccb1926896bb3416bf9344243fa7fc6567b76e3ce345f670499c10d68af77199",
-        "provenance.json": "bed42625fe4aaee52564d04cc4cba4d7e66a5504b2e4401c54adcffbddd7a8d8",
-        "results.json": "60c16f2f5c5815ee8a929336de41a6f62e43b9c6647ae2943ff25c77c1534ab7",
+        "processing-source/tests/test_wuji_contact_score.py": "0cb1be2a8e1b7fc6531b1b3420c82affeddc8c088b14fd7070c1ac42a73bfaa0",
+        "provenance.json": "481378a7c9a41e9e4a36c1011ca8377c7b4c024f1621c1d06f392091f5dfe5e8",
+        "results.json": "8a9b67591e41b5ca7d77b762cd5a2d115477c1a29427085197adbc83176b67b5",
         "robot/upstream/hands/wuji_hand2_beta1/right/wuji_hand2_beta1_right.superdex_bot": "624af8b45f2bef30302d082a806d9839fc007dc2e60cbf23155e90734b346567",
         "runs/00-hold-release/manifest.json": "ad498c4fd97486e1b8a3aaf847e7b1c41fe086d05e272c48633c4efc143943fd",
         "runs/00-hold-release/model/meshes/r_index_finger_distal_collision.obj": "36d038b90404769f55d17e286a3e563ddb6c8a1f00a9fabdae36e00f5a182748",
@@ -733,6 +763,7 @@
         "runs/08-v4-zero-friction/model/plan.json": "f02f8ef3054261d31c84472ab3cd237f87f7fa0c64fd9bb82278989a65add906",
         "runs/08-v4-zero-friction/model/scene.xml": "06d5a3fcd16bf95dcd6ab37e9b6e84095bfef4b84dbc57cdbd3a4c88f24bb6a6",
         "runs/08-v4-zero-friction/observations.npz": "ddaefe983b25ea79b8200c287b87c6b094f6f8b55b66bf8c05a3ff12e5fe5c45",
+        "scoring-correction/release-rescore-audit.json": "0e1af6e30e9abdd2b9dec0c56e4aa39343a11f48194d62127fbf1378ff870ef7",
         "source/wuji-contact-v1/demos/apple-stem-grasp/src/plan_wuji_pinch.py": "bc87925c065156e98a28377f95794efd8b097308f60bd51cd10002e03ad0927a",
         "source/wuji-contact-v1/demos/wuji-contact/PROTOCOL.md": "ad383f2bba1d634a111ef82fcb6065390a2a3314633bdedb13f55a86bd055ea5",
         "source/wuji-contact-v1/demos/wuji-contact/applicability.json": "007b440cb9fa96875239c3b65933e82980e198cd177142e2c0fb7b4718510f5d",
@@ -1333,12 +1364,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "00-hold-release"
     },
+    "delivery-reports-v5/00-hold-release/measurements.csv": {
+      "bytes": 572186,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/00-hold-release/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "00-hold-release"
+    },
+    "delivery-reports-v5/00-hold-release/measurements.png": {
+      "bytes": 179955,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/00-hold-release/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "00-hold-release"
+    },
+    "delivery-reports-v5/00-hold-release/report.json": {
+      "bytes": 1427,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/00-hold-release/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "00-hold-release"
+    },
     "delivery-reports-v4/00-hold-release/measurements.csv": {
       "bytes": 572186,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/00-hold-release/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "00-hold-release"
     },
     "delivery-reports-v4/00-hold-release/measurements.png": {
@@ -1346,7 +1401,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/00-hold-release/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "00-hold-release"
     },
     "delivery-reports-v4/00-hold-release/report.json": {
@@ -1354,7 +1409,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/00-hold-release/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "00-hold-release"
     },
     "delivery-diagnostics-v4/00-hold-release/diagnosis.json": {
@@ -1957,12 +2012,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "01-v2-hold-release"
     },
+    "delivery-reports-v5/01-v2-hold-release/measurements.csv": {
+      "bytes": 777199,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/01-v2-hold-release/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "01-v2-hold-release"
+    },
+    "delivery-reports-v5/01-v2-hold-release/measurements.png": {
+      "bytes": 161802,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/01-v2-hold-release/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "01-v2-hold-release"
+    },
+    "delivery-reports-v5/01-v2-hold-release/report.json": {
+      "bytes": 1449,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/01-v2-hold-release/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "01-v2-hold-release"
+    },
     "delivery-reports-v4/01-v2-hold-release/measurements.csv": {
       "bytes": 777199,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/01-v2-hold-release/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "01-v2-hold-release"
     },
     "delivery-reports-v4/01-v2-hold-release/measurements.png": {
@@ -1970,7 +2049,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/01-v2-hold-release/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "01-v2-hold-release"
     },
     "delivery-reports-v4/01-v2-hold-release/report.json": {
@@ -1978,7 +2057,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/01-v2-hold-release/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "01-v2-hold-release"
     },
     "delivery-diagnostics-v4/01-v2-hold-release/diagnosis.json": {
@@ -2581,12 +2660,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "02-v3-hold-release"
     },
+    "delivery-reports-v5/02-v3-hold-release/measurements.csv": {
+      "bytes": 776330,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/02-v3-hold-release/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "02-v3-hold-release"
+    },
+    "delivery-reports-v5/02-v3-hold-release/measurements.png": {
+      "bytes": 176743,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/02-v3-hold-release/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "02-v3-hold-release"
+    },
+    "delivery-reports-v5/02-v3-hold-release/report.json": {
+      "bytes": 1446,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/02-v3-hold-release/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "02-v3-hold-release"
+    },
     "delivery-reports-v4/02-v3-hold-release/measurements.csv": {
       "bytes": 776330,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/02-v3-hold-release/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "02-v3-hold-release"
     },
     "delivery-reports-v4/02-v3-hold-release/measurements.png": {
@@ -2594,7 +2697,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/02-v3-hold-release/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "02-v3-hold-release"
     },
     "delivery-reports-v4/02-v3-hold-release/report.json": {
@@ -2602,7 +2705,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/02-v3-hold-release/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "02-v3-hold-release"
     },
     "delivery-diagnostics-v4/02-v3-hold-release/diagnosis.json": {
@@ -3205,12 +3308,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "03-v4-hold-release"
     },
+    "delivery-reports-v5/03-v4-hold-release/measurements.csv": {
+      "bytes": 785853,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/03-v4-hold-release/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "03-v4-hold-release"
+    },
+    "delivery-reports-v5/03-v4-hold-release/measurements.png": {
+      "bytes": 157381,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/03-v4-hold-release/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "03-v4-hold-release"
+    },
+    "delivery-reports-v5/03-v4-hold-release/report.json": {
+      "bytes": 1461,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/03-v4-hold-release/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "03-v4-hold-release"
+    },
     "delivery-reports-v4/03-v4-hold-release/measurements.csv": {
       "bytes": 785853,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/03-v4-hold-release/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "03-v4-hold-release"
     },
     "delivery-reports-v4/03-v4-hold-release/measurements.png": {
@@ -3218,7 +3345,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/03-v4-hold-release/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "03-v4-hold-release"
     },
     "delivery-reports-v4/03-v4-hold-release/report.json": {
@@ -3226,7 +3353,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/03-v4-hold-release/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "03-v4-hold-release"
     },
     "delivery-diagnostics-v4/03-v4-hold-release/diagnosis.json": {
@@ -3829,12 +3956,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "04-v4-unload-index_finger"
     },
+    "delivery-reports-v5/04-v4-unload-index_finger/measurements.csv": {
+      "bytes": 787392,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/04-v4-unload-index_finger/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "04-v4-unload-index_finger"
+    },
+    "delivery-reports-v5/04-v4-unload-index_finger/measurements.png": {
+      "bytes": 159790,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/04-v4-unload-index_finger/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "04-v4-unload-index_finger"
+    },
+    "delivery-reports-v5/04-v4-unload-index_finger/report.json": {
+      "bytes": 1601,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/04-v4-unload-index_finger/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "04-v4-unload-index_finger"
+    },
     "delivery-reports-v4/04-v4-unload-index_finger/measurements.csv": {
       "bytes": 787392,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/04-v4-unload-index_finger/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "04-v4-unload-index_finger"
     },
     "delivery-reports-v4/04-v4-unload-index_finger/measurements.png": {
@@ -3842,7 +3993,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/04-v4-unload-index_finger/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "04-v4-unload-index_finger"
     },
     "delivery-reports-v4/04-v4-unload-index_finger/report.json": {
@@ -3850,7 +4001,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/04-v4-unload-index_finger/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "04-v4-unload-index_finger"
     },
     "delivery-diagnostics-v4/04-v4-unload-index_finger/diagnosis.json": {
@@ -4453,12 +4604,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "05-v4-unload-thumb"
     },
+    "delivery-reports-v5/05-v4-unload-thumb/measurements.csv": {
+      "bytes": 787601,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/05-v4-unload-thumb/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "05-v4-unload-thumb"
+    },
+    "delivery-reports-v5/05-v4-unload-thumb/measurements.png": {
+      "bytes": 159445,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/05-v4-unload-thumb/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "05-v4-unload-thumb"
+    },
+    "delivery-reports-v5/05-v4-unload-thumb/report.json": {
+      "bytes": 1593,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/05-v4-unload-thumb/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "05-v4-unload-thumb"
+    },
     "delivery-reports-v4/05-v4-unload-thumb/measurements.csv": {
       "bytes": 787601,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/05-v4-unload-thumb/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "05-v4-unload-thumb"
     },
     "delivery-reports-v4/05-v4-unload-thumb/measurements.png": {
@@ -4466,7 +4641,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/05-v4-unload-thumb/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "05-v4-unload-thumb"
     },
     "delivery-reports-v4/05-v4-unload-thumb/report.json": {
@@ -4474,7 +4649,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/05-v4-unload-thumb/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "05-v4-unload-thumb"
     },
     "delivery-diagnostics-v4/05-v4-unload-thumb/diagnosis.json": {
@@ -5077,12 +5252,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "06-v4-open"
     },
+    "delivery-reports-v5/06-v4-open/measurements.csv": {
+      "bytes": 652826,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/06-v4-open/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "06-v4-open"
+    },
+    "delivery-reports-v5/06-v4-open/measurements.png": {
+      "bytes": 146845,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/06-v4-open/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "06-v4-open"
+    },
+    "delivery-reports-v5/06-v4-open/report.json": {
+      "bytes": 1328,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/06-v4-open/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "06-v4-open"
+    },
     "delivery-reports-v4/06-v4-open/measurements.csv": {
       "bytes": 652826,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/06-v4-open/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "06-v4-open"
     },
     "delivery-reports-v4/06-v4-open/measurements.png": {
@@ -5090,7 +5289,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/06-v4-open/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "06-v4-open"
     },
     "delivery-reports-v4/06-v4-open/report.json": {
@@ -5098,7 +5297,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/06-v4-open/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "06-v4-open"
     },
     "delivery-diagnostics-v4/06-v4-open/diagnosis.json": {
@@ -5701,12 +5900,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "07-v4-no-contact"
     },
+    "delivery-reports-v5/07-v4-no-contact/measurements.csv": {
+      "bytes": 652358,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/07-v4-no-contact/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "07-v4-no-contact"
+    },
+    "delivery-reports-v5/07-v4-no-contact/measurements.png": {
+      "bytes": 147554,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/07-v4-no-contact/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "07-v4-no-contact"
+    },
+    "delivery-reports-v5/07-v4-no-contact/report.json": {
+      "bytes": 1334,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/07-v4-no-contact/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "07-v4-no-contact"
+    },
     "delivery-reports-v4/07-v4-no-contact/measurements.csv": {
       "bytes": 652358,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/07-v4-no-contact/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "07-v4-no-contact"
     },
     "delivery-reports-v4/07-v4-no-contact/measurements.png": {
@@ -5714,7 +5937,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/07-v4-no-contact/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "07-v4-no-contact"
     },
     "delivery-reports-v4/07-v4-no-contact/report.json": {
@@ -5722,7 +5945,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/07-v4-no-contact/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "07-v4-no-contact"
     },
     "delivery-diagnostics-v4/07-v4-no-contact/diagnosis.json": {
@@ -6325,12 +6548,36 @@
       "purpose": "Unmodified native record / exact generated model",
       "attempt": "08-v4-zero-friction"
     },
+    "delivery-reports-v5/08-v4-zero-friction/measurements.csv": {
+      "bytes": 707016,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/08-v4-zero-friction/measurements.csv",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "08-v4-zero-friction"
+    },
+    "delivery-reports-v5/08-v4-zero-friction/measurements.png": {
+      "bytes": 161041,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/08-v4-zero-friction/measurements.png",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "08-v4-zero-friction"
+    },
+    "delivery-reports-v5/08-v4-zero-friction/report.json": {
+      "bytes": 1432,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "delivery-reports-v5/08-v4-zero-friction/report.json",
+      "purpose": "Corrected independent rescore and curves; per-contact release check",
+      "attempt": "08-v4-zero-friction"
+    },
     "delivery-reports-v4/08-v4-zero-friction/measurements.csv": {
       "bytes": 707016,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/08-v4-zero-friction/measurements.csv",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "08-v4-zero-friction"
     },
     "delivery-reports-v4/08-v4-zero-friction/measurements.png": {
@@ -6338,7 +6585,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/08-v4-zero-friction/measurements.png",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "08-v4-zero-friction"
     },
     "delivery-reports-v4/08-v4-zero-friction/report.json": {
@@ -6346,7 +6593,7 @@
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "delivery-reports-v4/08-v4-zero-friction/report.json",
-      "purpose": "Independent rescore and curves",
+      "purpose": "Preserved earlier rescore before the cancelling-force correction",
       "attempt": "08-v4-zero-friction"
     },
     "delivery-diagnostics-v4/08-v4-zero-friction/diagnosis.json": {
@@ -7069,6 +7316,38 @@
       "purpose": "Frozen execution source and protocol",
       "attempt": null
     },
+    "scoring-correction/release-rescore-audit.json": {
+      "bytes": 4518,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "scoring-correction/release-rescore-audit.json",
+      "purpose": "Analytical regression and unchanged verdicts for all nine immutable native records",
+      "attempt": null
+    },
+    "processing-source/demos/wuji-contact/score.py": {
+      "bytes": 9606,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "processing-source/demos/wuji-contact/score.py",
+      "purpose": "Final corrected scoring/presentation source; native cohort snapshots remain unchanged",
+      "attempt": null
+    },
+    "processing-source/demos/wuji-contact/plot.py": {
+      "bytes": 3983,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "processing-source/demos/wuji-contact/plot.py",
+      "purpose": "Final corrected scoring/presentation source; native cohort snapshots remain unchanged",
+      "attempt": null
+    },
+    "processing-source/tests/test_wuji_contact_score.py": {
+      "bytes": 8975,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
+      "source_path": "processing-source/tests/test_wuji_contact_score.py",
+      "purpose": "Final corrected scoring/presentation source; native cohort snapshots remain unchanged",
+      "attempt": null
+    },
     "admission/static-v4.json": {
       "bytes": 886,
       "license": "Apache-2.0",
@@ -7142,7 +7421,7 @@
       "attempt": null
     },
     "results.json": {
-      "bytes": 34922,
+      "bytes": 35917,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "results.json",
@@ -7150,7 +7429,7 @@
       "attempt": null
     },
     "provenance.json": {
-      "bytes": 319682,
+      "bytes": 332834,
       "license": "Apache-2.0",
       "source_url": "https://github.com/huangkiki/Dexlab/issues/251",
       "source_path": "provenance.json",

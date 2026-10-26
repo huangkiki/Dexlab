@@ -8,7 +8,7 @@
 
 ## 不装仿真引擎，先复算结果
 
-需要 Git 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。下面从新目录下载代码和不可变证据包，用隔离的 Python 3.12.12、NumPy、Matplotlib 复算；不需要 GPU、真机、SuperDex、Torch 或 API key。证据包约 **141 MiB**，展开约 **382 MiB**，建议预留 2 GB 空间。
+需要 Git 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。下面从新目录下载代码和不可变证据包，用隔离的 Python 3.12.12、NumPy、Matplotlib 复算；不需要 GPU、真机、SuperDex、Torch 或 API key。证据包约 **144 MiB**，展开约 **390 MiB**，建议预留 2 GB 空间。
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git Dexlab-wuji

@@ -8,7 +8,7 @@ The point-contact hold fails; the torsional-contact hold and commanded release p
 
 ## Rescore without installing a simulator
 
-Install Git and [uv](https://docs.astral.sh/uv/getting-started/installation/). From a new directory, download the code and immutable evidence bundle, then rescore with isolated Python 3.12.12, NumPy and Matplotlib. No GPU, hardware, SuperDex, Torch or API key is needed. The archive is about **141 MiB**, expanding to **382 MiB**; allow 2 GB of free space.
+Install Git and [uv](https://docs.astral.sh/uv/getting-started/installation/). From a new directory, download the code and immutable evidence bundle, then rescore with isolated Python 3.12.12, NumPy and Matplotlib. No GPU, hardware, SuperDex, Torch or API key is needed. The archive is about **144 MiB**, expanding to **390 MiB**; allow 2 GB of free space.
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git Dexlab-wuji
