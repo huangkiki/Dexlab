@@ -8,7 +8,7 @@
 
 以 **Wuji 手的抓持、卸载和接触切换** 为主线，得到一个别人能重跑、能检查失败原因的起步案例。先证明抓持正例与负例成立，再研究切换时的失效。没有找到 solver failure 也是可报告结果；任务失败、接近/控制失败、几何问题和求解器不收敛分别归因。
 
-[已发布复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)没有证明合格的 Wuji 手内 solver failure：RSS 擦拭说明固定配置对辅助保持的依赖；Proxy 布料先在 acquisition 阶段失败。新计划据此补充判别条件，不预设统一多物理系统就是答案。[Discussion #222](https://github.com/huangkiki/Dexlab/discussions/222)的接触要求与反馈分离，以及 [#189](https://github.com/huangkiki/Dexlab/discussions/189)的任务起步入口，在下面的一个具体案例中落实；仍不声称已实现或已测得用户上手加速。
+[已发布复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)没有证明合格的 Wuji 手内 solver failure：RSS 擦拭说明固定配置对辅助保持的依赖；Proxy 布料先在 acquisition 阶段失败。新计划据此补充判别条件，不预设统一多物理系统就是答案。[Discussion #222](https://github.com/huangkiki/Dexlab/discussions/222)的接触要求与反馈分离，以及 [#189](https://github.com/huangkiki/Dexlab/discussions/189)的任务起步入口，在下面的一个具体案例中落实；[首个原生 Wuji 案例](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)现已在合成抗扭接触下通过六项开发对照，明确保留两秒保持窗口和缓慢漂移的限制；尚未测量用户上手时间的改善。
 
 ## 执行顺序与验收出口
 
@@ -20,7 +20,7 @@
 | 4 | [Wuji 抓持资格 #251](https://github.com/huangkiki/Dexlab/issues/251) | 固定手腕的简单物体正例成立，保持/卸载/释放指令产生可检查的实际接触效果，负例能被拒绝；正例不成立就停在该层诊断。复用输出入口先依赖 #243。 |
 | 5 | [Wuji 手内操作父项 #48](https://github.com/huangkiki/Dexlab/issues/48) | 在合格抓持上完成受控接触切换与有符号旋转，排除手掌旋转、摇摆累计、隐藏支撑和状态注入；冻结后验证 10 个新条件。 |
 
-这是一条交付顺序，不把所有前项设为技术硬依赖。#250 可独立利用现有记录；#251 的静态准备可先做。原生实验前，须在对应 Issue 冻结配置、指标依据、完整适用矩阵、具体案例与测得的有限资源预算。#251 的次数/时长只是待执行阶段核定的上限提案，不是已运行协议。没有新增云算力、训练、引擎源码修改或硬件动作。
+这是一条交付顺序，不把所有前项设为技术硬依赖。#250 可独立利用现有记录；#251 的静态准备可先做。原生实验前，须在对应 Issue 冻结配置、指标依据、完整适用矩阵、具体案例与测得的有限资源预算。#251 的事前冻结批次、实际结果和累计预算保存在对应 Issue 与证据包中。没有新增云算力、训练、引擎源码修改或硬件动作。
 
 ## 本次整理与保留范围
 

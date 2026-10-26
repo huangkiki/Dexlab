@@ -1,0 +1,867 @@
+{
+  "schema_version": 1,
+  "scope": "Four synthetic development cohorts, not hardware validation, solver failure, a cross-engine comparison or #48 holdouts.",
+  "attempts": [
+    {
+      "id": "00-hold-release",
+      "cohort": "wuji-contact-v1",
+      "case": "hold-release",
+      "status": "recorded",
+      "criteria_pass": false,
+      "source_revision": "461a986e0dc8ed994ae75cbe93ff36a52ef07830",
+      "score": {
+        "case": "hold-release",
+        "observations_sha256": "114abe4742f7442eef49e71493d76d7dd7a114cd9ac2314bcfc90c95daec74b2",
+        "manifest_sha256": "ad498c4fd97486e1b8a3aaf847e7b1c41fe086d05e272c48633c4efc143943fd",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": false,
+        "release_pass": false,
+        "qualification_pass": false,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 24.422230834705225,
+          "hold_max_speed_m_s": 21.87508743046637,
+          "bilateral_fraction": 0.0,
+          "hold_mean_pad_normals_n": [
+            0.0,
+            0.0
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 5.460763669768067e-17,
+          "impulse_error_total_ns": [
+            -5.135365666339244e-16,
+            3.571647860227202e-16,
+            -8.434156777005787e-14
+          ],
+          "angular_impulse_error_max_nms": null,
+          "release_drop_m": 57.63502156821528,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 0.004980795658773562,
+          "saturation_fraction": 0.9101590909090909,
+          "solver_iterations_max": 13,
+          "solver_last_gradient_max": 5.418506929866626e-05,
+          "physics_wall_s": 0.30785112909507006
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "ca90c6235620a43a12a8d0076421b523f259ea4970af200b43b61c88d86eab33",
+        "whole_process_wall_s": 2.752769698970951,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "47435776",
+          "memory.peak": "455872512",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 2957137\nuser_usec 2738571\nsystem_usec 218566\ncore_sched.force_idle_usec 0\nnr_periods 27\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "18",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=65536 rios=0 wios=11 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "01-v2-hold-release",
+      "cohort": "wuji-contact-v2",
+      "case": "hold-release",
+      "status": "recorded",
+      "criteria_pass": false,
+      "source_revision": "62158a471c52c38f383e57d3c8c9bb0f497d7245",
+      "score": {
+        "case": "hold-release",
+        "observations_sha256": "ad6ca01f2c2c5dac7a4ac685005e415d9cfe622bce35de7bafb949c03fcf78ce",
+        "manifest_sha256": "81f5d629eaa9e43965a62f144863d6fbc1546931a88d2cb261cc899c517be8c3",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": false,
+        "release_pass": false,
+        "qualification_pass": false,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 0.0024586829981469616,
+          "hold_max_speed_m_s": 0.01825191255179323,
+          "bilateral_fraction": 1.0,
+          "hold_mean_pad_normals_n": [
+            0.2652499120029166,
+            0.27958145058829403
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 1.6518302421969243e-17,
+          "impulse_error_total_ns": [
+            -2.1922429856214222e-18,
+            8.193120989658741e-17,
+            -8.368819980234684e-15
+          ],
+          "angular_impulse_error_max_nms": null,
+          "release_drop_m": 6.167259502775556,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 7.257709487304073e-06,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 7,
+          "solver_last_gradient_max": 1.0136049245714566e-05,
+          "physics_wall_s": 216.0302654466359
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "a3c24b92e3ba48336422b2f4bc699a5a9003a7eca300eb7d34e12704fdad714b",
+        "whole_process_wall_s": 284.02281448210124,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "47632384",
+          "memory.peak": "2333507584",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 285208513\nuser_usec 283800521\nsystem_usec 1407992\ncore_sched.force_idle_usec 0\nnr_periods 2839\nnr_throttled 1\nthrottled_usec 7397\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=36069376 rios=0 wios=984 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "02-v3-hold-release",
+      "cohort": "wuji-contact-v3",
+      "case": "hold-release",
+      "status": "recorded",
+      "criteria_pass": false,
+      "source_revision": "ed182a5ecee41b228c2f8cdd05ef7a1d048ce9ad",
+      "score": {
+        "case": "hold-release",
+        "observations_sha256": "dc9480922e569e595f6c63fc69e9163a1a6d480e026dcbe24e9163e75b660da3",
+        "manifest_sha256": "786f7ff124afb71d0e74959633fddbba1442a50ecde412f705daa45dd61dd026",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": false,
+        "release_pass": false,
+        "qualification_pass": false,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 0.0027337908151317753,
+          "hold_max_speed_m_s": 0.0251100454669035,
+          "bilateral_fraction": 1.0,
+          "hold_mean_pad_normals_n": [
+            0.7581041379076259,
+            0.7721715096020081
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 1.653077360975206e-17,
+          "impulse_error_total_ns": [
+            3.3235301548652202e-18,
+            4.581500945827713e-17,
+            -8.007104326553679e-15
+          ],
+          "angular_impulse_error_max_nms": null,
+          "release_drop_m": 6.045561938273201,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 2.0405734595567784e-05,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 5,
+          "solver_last_gradient_max": 5.995891553158043e-06,
+          "physics_wall_s": 223.39526792336255
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "0d22ccb446628e5214711c205352826cc167e4aa3c4aecc917c7e7772c2507e7",
+        "whole_process_wall_s": 454.18043255608063,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "45649920",
+          "memory.peak": "2342187008",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 456063025\nuser_usec 454386478\nsystem_usec 1676547\ncore_sched.force_idle_usec 0\nnr_periods 4541\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=41234432 rios=0 wios=1516 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "03-v4-hold-release",
+      "cohort": "wuji-contact-v4",
+      "case": "hold-release",
+      "status": "recorded",
+      "criteria_pass": true,
+      "source_revision": "2f84e7fb6dd07e28a15a7c5a3c81ac6209fdd636",
+      "score": {
+        "case": "hold-release",
+        "observations_sha256": "19e4e7f4d24eec81aec855d8b8eea074178d9702444a0f8581ee386015765ad4",
+        "manifest_sha256": "f15673b255980fe34fb58c173008f23354ab6f067bd5e450bb85ae30c9c9f567",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": true,
+        "release_pass": true,
+        "qualification_pass": true,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 0.001025008056682794,
+          "hold_max_speed_m_s": 0.0005392718399448726,
+          "bilateral_fraction": 1.0,
+          "hold_mean_pad_normals_n": [
+            0.8145568431246475,
+            0.8288021682574048
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 1.649381325578846e-17,
+          "impulse_error_total_ns": [
+            7.27270814488496e-18,
+            1.6159039488736062e-18,
+            -7.746581197095668e-15
+          ],
+          "angular_impulse_error_max_nms": 4.743162549241883e-22,
+          "release_drop_m": 5.955987406147232,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 2.0452089171877144e-05,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 6,
+          "solver_last_gradient_max": 7.730735437722466e-06,
+          "physics_wall_s": 216.35685253248084
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "1c0dddd384c51869ed90e1b49a3c71f73b898c191f8ae771f732bc5f65c5916d",
+        "whole_process_wall_s": 447.6078907659976,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "45342720",
+          "memory.peak": "2343800832",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 449475877\nuser_usec 447691141\nsystem_usec 1784735\ncore_sched.force_idle_usec 0\nnr_periods 4475\nnr_throttled 1\nthrottled_usec 7493\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=61440 wbytes=41119744 rios=2 wios=1529 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "04-v4-unload-index_finger",
+      "cohort": "wuji-contact-v4",
+      "case": "unload-index_finger",
+      "status": "recorded",
+      "criteria_pass": true,
+      "source_revision": "2f84e7fb6dd07e28a15a7c5a3c81ac6209fdd636",
+      "score": {
+        "case": "unload-index_finger",
+        "observations_sha256": "8c996d0f6fcbad5c074fb750266011e37e9d9192c54d846599d2d30aeabcbff5",
+        "manifest_sha256": "03ed04a76f99e978aa5ffcd672b8bce5b0fa3df0ec0fd103d53122862f299903",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": true,
+        "release_pass": true,
+        "qualification_pass": true,
+        "unload": {
+          "baseline_normal_n": 0.8145568431246474,
+          "tail_max_normal_n": 0.0,
+          "pass_unload": true,
+          "drop_m": 5.504349448116054
+        },
+        "metrics": {
+          "hold_max_displacement_m": 0.001025008056682794,
+          "hold_max_speed_m_s": 0.0005392718399448726,
+          "bilateral_fraction": 1.0,
+          "hold_mean_pad_normals_n": [
+            0.8145568431246475,
+            0.8288021682574048
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 1.649435203914987e-17,
+          "impulse_error_total_ns": [
+            -5.382430699677827e-18,
+            6.071830431576426e-20,
+            -6.3037937652075745e-15
+          ],
+          "angular_impulse_error_max_nms": 7.242875823676483e-22,
+          "release_drop_m": 5.504349448116054,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 2.0452089171877144e-05,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 6,
+          "solver_last_gradient_max": 6.106889498306492e-06,
+          "physics_wall_s": 216.444540951401
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "ab19efc3de110761e94ba59e07b848a5a9ef193d679832786eb0353f01be9cbf",
+        "whole_process_wall_s": 447.96765433391556,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "45232128",
+          "memory.peak": "2343530496",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 449815761\nuser_usec 447982959\nsystem_usec 1832802\ncore_sched.force_idle_usec 0\nnr_periods 4478\nnr_throttled 2\nthrottled_usec 502027\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=40988672 rios=0 wios=1519 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "05-v4-unload-thumb",
+      "cohort": "wuji-contact-v4",
+      "case": "unload-thumb",
+      "status": "recorded",
+      "criteria_pass": true,
+      "source_revision": "2f84e7fb6dd07e28a15a7c5a3c81ac6209fdd636",
+      "score": {
+        "case": "unload-thumb",
+        "observations_sha256": "e7ce1e54740a39642e1d2ed9b6b9101801cb52bbffecc5b385c442ebeef65186",
+        "manifest_sha256": "41c9355b8ad7c783c9b175cc59be8bcfb1e13c532322d4d5fd4127cd6fd08985",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": true,
+        "release_pass": true,
+        "qualification_pass": true,
+        "unload": {
+          "baseline_normal_n": 0.8288021682574029,
+          "tail_max_normal_n": 0.0,
+          "pass_unload": true,
+          "drop_m": 5.395914923649797
+        },
+        "metrics": {
+          "hold_max_displacement_m": 0.001025008056682794,
+          "hold_max_speed_m_s": 0.0005392718399448726,
+          "bilateral_fraction": 1.0,
+          "hold_mean_pad_normals_n": [
+            0.8145568431246475,
+            0.8288021682574048
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 1.649380506878252e-17,
+          "impulse_error_total_ns": [
+            5.601002414715174e-18,
+            -1.02430919589772e-18,
+            -5.986579036104307e-15
+          ],
+          "angular_impulse_error_max_nms": 5.823727491423478e-22,
+          "release_drop_m": 5.395914923649797,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 2.0452089171877144e-05,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 7,
+          "solver_last_gradient_max": 8.38439080696571e-06,
+          "physics_wall_s": 217.38154696207494
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "02f5b91f47cfb2ef7a2d16f3905aedf52f5d797124e04dad3e365fcbc82b5218",
+        "whole_process_wall_s": 450.2655204719631,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "45174784",
+          "memory.peak": "2343206912",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 451942216\nuser_usec 450172819\nsystem_usec 1769396\ncore_sched.force_idle_usec 0\nnr_periods 4501\nnr_throttled 1\nthrottled_usec 754556\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=39456768 rios=0 wios=1344 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "06-v4-open",
+      "cohort": "wuji-contact-v4",
+      "case": "open",
+      "status": "recorded",
+      "criteria_pass": true,
+      "source_revision": "2f84e7fb6dd07e28a15a7c5a3c81ac6209fdd636",
+      "score": {
+        "case": "open",
+        "observations_sha256": "8b2741b19297856ee6723f9cea7fa8fbceb3be6647d596e429abb422919202fe",
+        "manifest_sha256": "4aedfac91e4d695ae796c4d3f3a35201327bca16c2d97b71423678f6257c1727",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": false,
+        "release_pass": false,
+        "qualification_pass": false,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 23.745595500001436,
+          "hold_max_speed_m_s": 21.5820000000022,
+          "bilateral_fraction": 0.0,
+          "hold_mean_pad_normals_n": [
+            0.0,
+            0.0
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 5.456247433033301e-17,
+          "impulse_error_total_ns": [
+            0.0,
+            0.0,
+            -8.346304875526955e-14
+          ],
+          "angular_impulse_error_max_nms": 0.0,
+          "release_drop_m": 56.71013850000525,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 0.0,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 0,
+          "solver_last_gradient_max": 0.0,
+          "physics_wall_s": 217.18219487927854
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "ec66080302759ddda63b1784fc528e5fe27f3ca125a7977c8a68930752867458",
+        "whole_process_wall_s": 448.28335906995926,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "40108032",
+          "memory.peak": "2342252544",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 450219563\nuser_usec 448520920\nsystem_usec 1698643\ncore_sched.force_idle_usec 0\nnr_periods 4481\nnr_throttled 1\nthrottled_usec 728777\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=40845312 rios=0 wios=1499 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "07-v4-no-contact",
+      "cohort": "wuji-contact-v4",
+      "case": "no-contact",
+      "status": "recorded",
+      "criteria_pass": true,
+      "source_revision": "2f84e7fb6dd07e28a15a7c5a3c81ac6209fdd636",
+      "score": {
+        "case": "no-contact",
+        "observations_sha256": "6b98fd5b0ca4b9e801a5eb37d83f43c1d66a1b808dea0bab077826343742a689",
+        "manifest_sha256": "abeff49df3e96f7a692fd3aefb1f521673145df5fb457f5bfa95a83d1df83fe3",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": false,
+        "release_pass": false,
+        "qualification_pass": false,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 23.745595500001436,
+          "hold_max_speed_m_s": 21.5820000000022,
+          "bilateral_fraction": 0.0,
+          "hold_mean_pad_normals_n": [
+            0.0,
+            0.0
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 5.456247433033301e-17,
+          "impulse_error_total_ns": [
+            0.0,
+            0.0,
+            -8.346304875526955e-14
+          ],
+          "angular_impulse_error_max_nms": 0.0,
+          "release_drop_m": 56.71013850000525,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 0.0,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 0,
+          "solver_last_gradient_max": 0.0,
+          "physics_wall_s": 216.91683268803172
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "35282ec48aa1a359a6d3f09236b441a3b6307f3312f38c1bdbb657bec7c02a49",
+        "whole_process_wall_s": 448.9614112660056,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "41353216",
+          "memory.peak": "2344239104",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 450644870\nuser_usec 448900207\nsystem_usec 1744663\ncore_sched.force_idle_usec 0\nnr_periods 4489\nnr_throttled 1\nthrottled_usec 636524\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=40927232 rios=0 wios=1494 dbytes=0 dios=0"
+        }
+      }
+    },
+    {
+      "id": "08-v4-zero-friction",
+      "cohort": "wuji-contact-v4",
+      "case": "zero-friction",
+      "status": "recorded",
+      "criteria_pass": true,
+      "source_revision": "2f84e7fb6dd07e28a15a7c5a3c81ac6209fdd636",
+      "score": {
+        "case": "zero-friction",
+        "observations_sha256": "ddaefe983b25ea79b8200c287b87c6b094f6f8b55b66bf8c05a3ff12e5fe5c45",
+        "manifest_sha256": "37f99ac749c3b78d1fe3addf76058ecaf09d43d64c3234d020e51a2f37175166",
+        "scorer_sha256": "caae860b30f1cc0fb4665f8bfdcd2b79a826925ac3903bc736bc95c1bd63f012",
+        "record_integrity_pass": true,
+        "numerical_balance_pass": true,
+        "hold_pass": false,
+        "release_pass": false,
+        "qualification_pass": false,
+        "unload": null,
+        "metrics": {
+          "hold_max_displacement_m": 23.36425771655832,
+          "hold_max_speed_m_s": 21.407292498925788,
+          "bilateral_fraction": 0.0,
+          "hold_mean_pad_normals_n": [
+            0.0,
+            0.0
+          ],
+          "other_support_max_n": 0.0,
+          "impulse_error_max_ns": 1.6493425548935736e-17,
+          "impulse_error_total_ns": [
+            2.2618557532207834e-20,
+            1.113818185245835e-18,
+            -8.297917883387192e-14
+          ],
+          "angular_impulse_error_max_nms": 1.1235485576611897e-20,
+          "release_drop_m": 56.11657507698173,
+          "release_no_contact": true,
+          "release_max_single_contact_n": 0.0,
+          "release_conditions_met": true,
+          "max_penetration_m": 1.7416011479469418e-05,
+          "saturation_fraction": 0.0,
+          "solver_iterations_max": 6,
+          "solver_last_gradient_max": 1.255643630291584e-05,
+          "physics_wall_s": 217.01401766820345
+        },
+        "scope": "Synthetic fixed-wrist native contact qualification. Task failure alone is not solver failure or hardware validation."
+      },
+      "resources": {
+        "scope": "Derived public summary; not the original byte-identical receipt or private ledger",
+        "original_receipt_sha256": "9cf70a97c7dd688231056634502e1d969ad051732dc7da954b882aed62d2ce46",
+        "whole_process_wall_s": 449.6822804659605,
+        "limits": {
+          "memory.max": "8589934592",
+          "memory.high": "7516192768",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "final": {
+          "memory.current": "42438656",
+          "memory.peak": "2343063552",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+          "cpu.stat": "usage_usec 450015965\nuser_usec 448282043\nsystem_usec 1733922\ncore_sched.force_idle_usec 0\nnr_periods 4483\nnr_throttled 1\nthrottled_usec 398478\nnr_bursts 0\nburst_usec 0",
+          "pids.current": "1",
+          "pids.peak": "20",
+          "pids.events": "max 0",
+          "io.stat": "8:0 rbytes=0 wbytes=38604800 rios=0 wios=1209 dbytes=0 dios=0"
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "cohort": "wuji-contact-v1",
+      "case": "hold-release",
+      "status": "recorded",
+      "attempt": "00-hold-release",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v1",
+      "case": "unload-index_finger",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v1",
+      "case": "unload-thumb",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v1",
+      "case": "open",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v1",
+      "case": "no-contact",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v1",
+      "case": "zero-friction",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v2",
+      "case": "hold-release",
+      "status": "recorded",
+      "attempt": "01-v2-hold-release",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v2",
+      "case": "unload-index_finger",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v2",
+      "case": "unload-thumb",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v2",
+      "case": "open",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v2",
+      "case": "no-contact",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v2",
+      "case": "zero-friction",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v3",
+      "case": "hold-release",
+      "status": "recorded",
+      "attempt": "02-v3-hold-release",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v3",
+      "case": "unload-index_finger",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v3",
+      "case": "unload-thumb",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v3",
+      "case": "open",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v3",
+      "case": "no-contact",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v3",
+      "case": "zero-friction",
+      "status": "not-run",
+      "attempt": null,
+      "reason": "Stopped under prospective positive-control / record / budget condition; not evidence of success."
+    },
+    {
+      "cohort": "wuji-contact-v4",
+      "case": "hold-release",
+      "status": "recorded",
+      "attempt": "03-v4-hold-release",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v4",
+      "case": "unload-index_finger",
+      "status": "recorded",
+      "attempt": "04-v4-unload-index_finger",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v4",
+      "case": "unload-thumb",
+      "status": "recorded",
+      "attempt": "05-v4-unload-thumb",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v4",
+      "case": "open",
+      "status": "recorded",
+      "attempt": "06-v4-open",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v4",
+      "case": "no-contact",
+      "status": "recorded",
+      "attempt": "07-v4-no-contact",
+      "reason": null
+    },
+    {
+      "cohort": "wuji-contact-v4",
+      "case": "zero-friction",
+      "status": "recorded",
+      "attempt": "08-v4-zero-friction",
+      "reason": null
+    }
+  ],
+  "counts": {
+    "recorded": 9,
+    "not_run": 15,
+    "declared": 24
+  },
+  "budget": {
+    "work_package": {
+      "evidence_sha256": [
+        "57e7158541e62b5d236d0ee4868b4a422dc9fe392bb75fed545f8fa96d72e9c0",
+        "ad383f2bba1d634a111ef82fcb6065390a2a3314633bdedb13f55a86bd055ea5",
+        "007b440cb9fa96875239c3b65933e82980e198cd177142e2c0fb7b4718510f5d",
+        "7f1facc97bda84e007c529b00bebc3350d600ff7b58ed83eb07212f36e39b01c",
+        "697e290e1887d4d5d8df99d2d3676bbfca3844c1b3ed64cba98b71275790d160"
+      ],
+      "hypothesis": "The frozen finite-torque two-pad Wuji fixture can hold a sphere, unload individual contacts and actively release; negative controls expose false retention.",
+      "id": "wuji-contact-251-v1",
+      "max_starts": 12,
+      "wall_s": 7200
+    },
+    "starts_used": 9,
+    "wall_charged_or_reserved_s": 3433.7241331109544,
+    "remaining_starts": 3,
+    "remaining_wall_s": 3766.2758668890456,
+    "manifest_sha256": "d91f7b1e7efd92611b4e3fcb6caff0956f459b8ee3094263cdb14d546b7f4da7"
+  },
+  "operational_events": [
+    {
+      "event": "First submission gate explicitly stopped during final self-review",
+      "effect": "Net contact force could cancel despite nonzero opposing contacts. An analytical regression failed before the correction and passed after it. Native records rescored without rerunning; old gate was not accepted.",
+      "original_receipt_sha256": "b3d5343ff46f53c0ea06e0c1f8e9d4f78c0f50d026dc598170cbb501c9942eb5"
+    },
+    {
+      "event": "Side-by-side FFmpeg replay exceeded the unchanged 128-task envelope",
+      "effect": "Preserved failed attempt; restricted decoder/filter/encoder threads; successful final receipt at the same limits; no physics rerun.",
+      "failed_receipt_sha256": "963bab071718a10b65ef18a1de35344161186350f9aec84bf570b0a6556bcecc",
+      "fixed_receipt_sha256": "11bf69428a89eeb83177263d164aaa03a70e9ec4b67bcb6207cd36266eac7971"
+    },
+    {
+      "event": "v3 outer observer exited but bounded service completed",
+      "effect": "Final receipt recovered; actual wall cost charged once; no native rerun."
+    },
+    {
+      "event": "Asset manifest lacked top-level files list",
+      "effect": "Fixed real installer schema; regression test and fresh public download verified; native scene asset verifier was unaffected."
+    },
+    {
+      "event": "Static resource receipt path typo before v4",
+      "effect": "Rejected before service or physics; retained private failure; corrected static check completed."
+    }
+  ],
+  "score_correction": "v1 original release=true tested free fall only. Original kept; corrected release requires qualified holding. The final scorer additionally rejects cancelling nonzero contact forces during release. All nine task verdicts are unchanged by this correction. No original raw states or frozen thresholds changed."
+}
