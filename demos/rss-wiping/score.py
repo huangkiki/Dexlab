@@ -33,7 +33,7 @@ def patch_motion(particles, hand_position, hand_quaternion, indices, reference=N
     return local, float(np.linalg.norm(displacement.mean(axis=0))), float(np.linalg.norm(displacement, axis=1).max())
 
 
-def score(folder: Path):
+def score(folder: Path, *, include_curves=False):
     rows = [json.loads(line) for line in (folder / "observations.jsonl").read_text().splitlines()]
     summary = json.loads((folder / "summary.json").read_text())
     manifest = json.loads((folder / "manifest.json").read_text())
@@ -64,6 +64,7 @@ def score(folder: Path):
     finite = True
     final_particles = None
     cursor = 0
+    curves = []
     for chunk in sorted((folder / "states").glob("*.npz")):
         with np.load(chunk) as data:
             for i, step in enumerate(data["step"]):
@@ -81,6 +82,7 @@ def score(folder: Path):
                     failures.append(f"cleaned_readback:{step}")
                 if not np.allclose(particles.mean(axis=0), row["sponge_centroid_m"], atol=1e-10, rtol=0):
                     failures.append(f"centroid_readback:{step}")
+                slip = node = None
                 if indices is not None and step >= summary["ready_step"]:
                     local, slip, node = patch_motion(
                         particles, np.asarray(row["hand_position_m"]), row["hand_quaternion_xyzw"],
@@ -95,6 +97,15 @@ def score(folder: Path):
                     if row["grip_command"] >= 0.5:
                         maximum_slip = max(maximum_slip or 0, slip)
                         maximum_node = max(maximum_node or 0, node)
+                if include_curves:
+                    curves.append({
+                        "step": int(step), "sim_time_s": row["sim_time_s"],
+                        "cleaned_fraction": cleaned,
+                        "patch_centroid_slip_m": slip,
+                        "patch_max_node_displacement_m": node,
+                        "grip_command": row.get("grip_command"),
+                        "active_pins": row["active_pins"],
+                    })
                 final_particles = particles
                 cursor += 1
     if cursor != len(rows):
@@ -141,7 +152,7 @@ def score(folder: Path):
         "sponge_return_height_within_3_mm": measured["sponge_return_min_z_error_m"] <= 0.003,
         "arms_home_within_6_mm": all(x < 0.006 for x in home_errors.values()),
     }
-    return {
+    result = {
         "schema_version": 2, "mode": summary["mode"], "measured": measured,
         "record_integrity_pass": not failures, "record_failures": failures,
         "task_outcomes": outcomes, "task_pass": all(outcomes.values()),
@@ -153,6 +164,10 @@ def score(folder: Path):
         "scope": "Saved-state consistency and upstream task thresholds. "
                  "Not material validation or a substitute for the unchanged upstream test.",
     }
+
+    if include_curves:
+        result["curves"] = curves
+    return result
 
 
 def main():
