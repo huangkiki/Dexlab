@@ -25,7 +25,7 @@
 
 全部 572 个状态边界按原始 50 Hz 播放 11.44 秒，包括末端点。画面使用保存姿态和原生模型几何，每只脚为四个半径 5 mm 的接触球，不重新积分。<a href="_static/landing/replays/policy-repeat-1/replay.mp4">完整视频 1</a> · <a href="_static/landing/replays/policy-repeat-2/replay.mp4">视频 2</a> · <a href="_static/landing/replays/policy-repeat-3/replay.mp4">视频 3</a> · <a href="_static/landing/replays/policy-repeat-1/curves.svg">力曲线</a>。
 
-<video controls muted playsinline preload="metadata" poster="_static/landing/replays/policy-repeat-1/frame-0000.png" aria-label="G1 第一次完整复跑及同步原生接触力曲线"><source src="_static/landing/replays/policy-repeat-1/replay.mp4" type="video/mp4"></video>
+<video controls muted playsinline preload="metadata" style="width:100%;height:auto" poster="_static/landing/replays/policy-repeat-1/frame-0000.png" aria-label="G1 第一次完整复跑及同步原生接触力曲线"><source src="_static/landing/replays/policy-repeat-1/replay.mp4" type="video/mp4"></video>
 
 <a href="_static/landing/native-v1.zip">完整记录与模型（17.75 MB ZIP）</a> · <a href="_static/landing/native-summary.json">批次报告</a> · <a href="_static/landing/native-bundle.json">归档验收</a> · <a href="_static/landing/asset-lineage.json">资产来源</a>。解压后核验全部 99 个清单条目，三份独立几何审计均精确复现。上游固定 URDF 与固定官方 Unitree 文件不同，仿真设置不代表已核实的硬件限值。归档保留原始许可和评测参考样本，不含权重及原始动作 NPZ。
 
