@@ -94,6 +94,8 @@ The verifier writes `summary.json`. When every check passes, `passed` is `true`;
 
 Check geometry, mass/inertia, control timing and actual contact readback first. Adjust parameters around one concrete question and evaluate the recorded result independently. See the [diagnostic workflow](https://huangkiki.github.io/Dexlab/en/latest/diagnosis.html) for failures, fixes and next decisions.
 
+[Landing contact record audit](demos/landing-contact/README.md) independently checks state alignment in a public trajectory; native landing reproduction still awaits qualification.
+
 <a id="research-selection"></a>
 
 ## Choosing an engine and configuration for a new task

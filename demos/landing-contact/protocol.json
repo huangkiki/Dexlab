@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "issue": 260,
+  "kind": "frozen reference evaluation; no training",
+  "upstream_commit": "5b313d75e804cdd2ff1ce9bdcfa899a98eca856b",
+  "release": "v14-baseline-9029",
+  "release_evaluation_sha256": "51a5126210c36cc9a297105684b1bcebbad0489b2e739fda143c34245f57ac4a",
+  "joint_names": [
+    "left_hip_pitch_joint",
+    "left_hip_roll_joint",
+    "left_hip_yaw_joint",
+    "left_knee_joint",
+    "left_ankle_pitch_joint",
+    "left_ankle_roll_joint",
+    "right_hip_pitch_joint",
+    "right_hip_roll_joint",
+    "right_hip_yaw_joint",
+    "right_knee_joint",
+    "right_ankle_pitch_joint",
+    "right_ankle_roll_joint",
+    "waist_yaw_joint",
+    "waist_roll_joint",
+    "waist_pitch_joint",
+    "left_shoulder_pitch_joint",
+    "left_shoulder_roll_joint",
+    "left_shoulder_yaw_joint",
+    "left_elbow_joint",
+    "left_wrist_roll_joint",
+    "left_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_shoulder_pitch_joint",
+    "right_shoulder_roll_joint",
+    "right_shoulder_yaw_joint",
+    "right_elbow_joint",
+    "right_wrist_roll_joint",
+    "right_wrist_pitch_joint",
+    "right_wrist_yaw_joint"
+  ],
+  "control_steps": 571,
+  "motion_frames": 321,
+  "extra_hold_steps": 250,
+  "physics_dt_s": 0.005,
+  "substeps_per_control": 4,
+  "seed": 137,
+  "state_alignment_tolerance": 1e-05,
+  "penetration_threshold_m": 0,
+  "loaded_pair_force_threshold_n": 0.001,
+  "strict_task_gate": "Unchanged upstream strict_v3 and legacy gates; audit never overrides original success",
+  "repeat_plan": {
+    "support_probe": 1,
+    "fresh_process_policy_repeats": 3,
+    "conditional_single_variable_repeats": 2,
+    "conditional_rule": "Only after a mismatch is localized; preregister the changed parameter and matched control before either intervention. Otherwise not-run.",
+    "max_native_attempts": 6,
+    "max_attempt_wall_s": 600,
+    "max_total_native_wall_s": 3600,
+    "failure_policy": "Retain all attempts including initialization and timeout. Stop policy evaluation if support probe fails. No unbounded retries."
+  },
+  "reference_stack": {
+    "core": "MuJoCo 3.15.0 / MuJoCo Warp 3.15.0",
+    "framework": "IsaacLab 46d6cc3d7b115906fad12efd372fbf69f4e3d3ed; Newton 71eeba16a717d4dcf0b9dd7056a7b6f863054dc3",
+    "warp": "1.17.0+cu12",
+    "torch": "2.11.0+cu128",
+    "hardware": "single local RTX 4090; source used RTX 5090 so this is a distinct hardware cohort",
+    "collision": "use_mujoco_contacts=True; exact native filters and geometry captured per run",
+    "self_collision": false,
+    "integrator": "implicitfast",
+    "cone": "pyramidal",
+    "control_precision": "BF16 network when checkpoint requests it; native state dtype and solver options read back",
+    "unresolved": "solver cache, contact epoch, actuator saturation and force-copy semantics require native qualification"
+  },
+  "applicability": [
+    {
+      "engine": "MuJoCo",
+      "profile": "source MuJoCo Warp 3.15.0 through Newton/IsaacLab",
+      "status": "not-run",
+      "reason": "native runtime and recorder qualification pending"
+    },
+    {
+      "engine": "MuJoCo",
+      "profile": "direct historical-3.11.0; qualification-3.14.0/3.15.0/3.16.0/3.17.0",
+      "status": "unsupported",
+      "reason": "No qualified identical G1 policy/asset adapter; CPU geometry reconstruction is not a policy rollout"
+    },
+    {
+      "engine": "SuperDex",
+      "profile": "all registered native profiles",
+      "status": "unsupported",
+      "reason": "No qualified identical G1 policy/asset adapter in this case"
+    },
+    {
+      "engine": "Genesis",
+      "profile": "all registered native profiles",
+      "status": "unsupported",
+      "reason": "No qualified identical G1 policy/asset adapter in this case"
+    },
+    {
+      "engine": "Newton Physics (independent solver)",
+      "profile": "all registered native profiles",
+      "status": "unsupported",
+      "reason": "No qualified identical G1 policy/asset adapter in this case"
+    },
+    {
+      "engine": "PhysX",
+      "profile": "all registered native profiles",
+      "status": "unsupported",
+      "reason": "No qualified identical G1 policy/asset adapter in this case"
+    },
+    {
+      "engine": "Drake",
+      "profile": "all registered native profiles",
+      "status": "unsupported",
+      "reason": "No qualified identical G1 policy/asset adapter in this case"
+    }
+  ],
+  "reporting": {
+    "failure_frequency": "Report each of three matched repeats and exact binomial interval; do not pool historical results or interpret as random-initial-condition reliability",
+    "geometry": "Reconstruct collision only; never overwrite native contacts/forces",
+    "momentum": "Use whole-system COM momentum with gravity and external forces if observable; root linear velocity is not COM momentum",
+    "missing_signals": "unavailable, not zero",
+    "recording_time": "Synthetic substep schedule and copied native time are separate fields"
+  },
+  "checkpoint_sha256": "7933f7638b02f0c378606b23c361e328fb3bd6da97086cc2ff9c20aff9aefab2"
+}

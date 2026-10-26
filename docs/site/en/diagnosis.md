@@ -19,6 +19,10 @@ Start with a physical question. “Excessive penetration” needs a contact scal
 
 Separate **verified configuration improvements, localized integration fixes, evidenced algorithm research directions and unresolved questions**. This round automates parameter changes and evidenced integration fixes; solver-source changes first require research evidence.
 
+## Landing geometry versus native force
+
+The [G1 landing audit](https://github.com/huangkiki/Dexlab/blob/main/demos/landing-contact/README.md) independently aligns a public 571-control-step record with its 2284 native substeps. The 29 joint positions agree exactly, so simple joint reordering does not explain that archive’s geometric-contact/force disagreement. The public archive lacks the original model and complete contact-pair stream; source qualification and causal interpretation remain pending. The audit preserves the author’s failed result and separate passing reevaluation, and exposes missing signals rather than treating them as zero.
+
 ## AI-controlled trial entry point
 
 The first integrated path is native MuJoCo/SuperDex `normal-load` development. It reuses `contact_indent_run`, independent `--verify` and `MigrationBudget`, with no new model service or scheduler. Native PhysX inclines, framework comparisons and pinch continue through their own frozen protocols and runners; this path does not qualify their parameters.

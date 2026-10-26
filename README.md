@@ -92,7 +92,7 @@ diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-g
 
 ## 场景不对时，先查什么
 
-先核对几何、质量／惯量、控制时刻和实际接触读回，再围绕一个明确问题调整参数，用原始记录和独立评分检查结果。已有失败、修正和下一步判断见[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)。
+先核对几何、质量／惯量、控制时刻和实际接触读回，再围绕一个明确问题调整参数，用原始记录和独立评分检查结果。已有失败、修正和下一步判断见[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)。 [落地接触记录核对](demos/landing-contact/README.zh-CN.md)可独立检查公开轨迹的状态对齐；原生落地复现仍待资格验证。
 
 <a id="research-selection"></a>
 
