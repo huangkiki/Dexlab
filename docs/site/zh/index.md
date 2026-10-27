@@ -128,6 +128,7 @@ Solver 失败复盘 <solver-failure-audit>
 诊断方法 <diagnosis>
 
 Wuji 抓持与抗扭接触 <wuji-contact>
+接触预测诊断 <contact-response>
 RSS 擦拭与 latch 对照 <rss-wiping>
 连续切割与刀面推动 <cut-push>
 香蕉单刀测力 <banana-force>

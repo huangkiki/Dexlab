@@ -130,6 +130,7 @@ Diagnosis <diagnosis>
 Solver synchronization and preCICE <solver-coupling>
 
 Wuji grasp and torsional contact <wuji-contact>
+Contact prediction diagnostics <contact-response>
 RSS wiping and latch ablation <rss-wiping>
 Continuous cutting and blade-face pushing <cut-push>
 Banana single-cut force <banana-force>

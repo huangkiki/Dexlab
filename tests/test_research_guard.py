@@ -1,4 +1,5 @@
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -8,8 +9,12 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 
 SCRIPT = Path(__file__).parents[1] / 'scripts/research_guard.py'
+SPEC = importlib.util.spec_from_file_location('research_guard_under_test', SCRIPT)
+GUARD = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(GUARD)
 
 
 def wait_for(predicate, timeout=10):
@@ -136,3 +141,34 @@ class GuardTests(unittest.TestCase):
                 self.assertEqual(self.launch(name, 'archive', 'raise SystemExit(99)').wait(timeout=10), 75)
                 self.assertEqual(json.loads(active.read_text()), old)
                 self.assertFalse((self.root / (name + '.json')).exists())
+
+    def test_orphan_system_service_blocks_even_without_live_foreground_group(self):
+        active = self.lock.with_name(self.lock.name + '.active.json')
+        original = '{"id":"orphaned-launcher","process_group":99999999}'
+        active.write_text(original)
+        receipt = self.root / 'must-not-start.json'
+        with patch.object(GUARD.os, 'getpgrp', return_value=os.getpid()), \
+                patch.object(GUARD.os, 'getsid', return_value=os.getpid()), \
+                patch.object(GUARD, 'other_bounded_services', return_value=['dexlab-bounded-orphan.service']), \
+                patch.object(GUARD.subprocess, 'run') as run:
+            with self.assertRaisesRegex(GUARD.BusyWindow, 'orphan.service'):
+                GUARD.run_window(self.lock, 'archive', receipt, ['must-not-run'])
+            run.assert_not_called()
+        self.assertEqual(active.read_text(), original)
+        self.assertFalse(receipt.exists())
+
+    def test_service_inventory_excludes_only_current_cgroup_ancestor(self):
+        result = subprocess.CompletedProcess([], 0, stdout=(
+            'dexlab-bounded-own.service loaded active running test\n'
+            'dexlab-bounded-other.service loaded active running download\n'))
+        with patch.object(GUARD.Path, 'is_dir', return_value=True), \
+                patch.object(GUARD.Path, 'read_text', return_value='0::/system.slice/dexlab-bounded-own.service\n'), \
+                patch.object(GUARD.subprocess, 'run', return_value=result) as run:
+            self.assertEqual(GUARD.other_bounded_services(), ['dexlab-bounded-other.service'])
+            self.assertIn('--system', run.call_args.args[0])
+
+    def test_unavailable_service_inventory_fails_closed(self):
+        with patch.object(GUARD.Path, 'is_dir', return_value=True), \
+                patch.object(GUARD.subprocess, 'run', side_effect=subprocess.CalledProcessError(1, 'systemctl')):
+            with self.assertRaisesRegex(GUARD.BusyWindow, 'Cannot verify'):
+                GUARD.other_bounded_services()
