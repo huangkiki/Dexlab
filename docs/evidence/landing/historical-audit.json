@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "state_alignment": {
+    "controls": 571,
+    "native_substeps": 2284,
+    "physics_dt_s": 0.005,
+    "control_dt_s": 0.02,
+    "native_order_for_reference": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "joint_order_identical": true,
+    "unmapped_joint_position_max_rad": 0.0,
+    "mapped_max_errors": {
+      "root_position_m": 0.0,
+      "root_quaternion_chord": 1.1922474995817124e-07,
+      "joint_position_rad": 0.0,
+      "root_linear_velocity_m_s": 2.384185791015625e-07,
+      "root_angular_velocity_rad_s": 2.384185791015625e-06,
+      "joint_velocity_rad_s": 0.0
+    },
+    "mismatched_control_frames": [],
+    "aligned": true,
+    "limitation": "Agreement of exposed states does not establish solver-cache equality or physical success."
+  },
+  "time_basis": "declared substep schedule; native clock and contact epoch require qualification",
+  "native_pairs": "unavailable",
+  "geometry_reconstruction": "not requested",
+  "task_success": null,
+  "causal_conclusion": "No solver-failure attribution follows from this audit alone.",
+  "recorded_nonfoot": {
+    "loaded_pair_samples": [],
+    "loaded_resultant_samples": [],
+    "max_resultant_n": 0.0
+  },
+  "native_clock": "unavailable",
+  "upstream_geometric_nonfoot_frames": [
+    119
+  ],
+  "upstream_geometric_source": "Author's stored classification, not an independent reconstruction",
+  "input_sha256": {
+    "rollout.npz": "033310c93b469c7cf3900ff52fd0c884ea6710cb7efe612a2532b19d9bf7e979",
+    "contact_forces_200hz.npz": "05c4f68db865fc70e7ecadcf5d2cb42e7bdcb6401d3053c5271bd5ca2b68598e"
+  },
+  "protocol_sha256": "659ff4587f07ac3c3fe7ff155907490cf7d48b17245d31729f5eaa07da81408c"
+}
