@@ -12,12 +12,78 @@ from types import SimpleNamespace
 SCRIPTS = Path(__file__).parents[1] / 'scripts'
 sys.path.insert(0, str(SCRIPTS))
 from bounded_run import (verify_limits, verify_headroom, verify_service, main,
-                         select_profile, freeze_resources, pressure, PROFILES, inside, read_values)
+                         select_profile, freeze_resources, pressure, PROFILES, inside, read_values,
+                         verify_gpu_budget, stop_workload_group)
 from archive_run import record_stage
 sys.path.pop(0)
 
 
 class AdaptiveResourceTests(unittest.TestCase):
+    def test_gpu_budget_rejects_unknown_usage_and_preserves_headroom(self):
+        rows = ['GPU-selected, 2000, 23028', 'GPU-other, 22000, 24000']
+        self.assertEqual(verify_gpu_budget(rows, 'GPU-selected', 20480)['used_mib'], 2000)
+        for observation, uuid, limit in ((None, 'GPU-selected', 20480),
+                (rows, 'GPU-missing', 20480), (rows, 'GPU-selected', 23028),
+                (rows, 'GPU-other', 20480), (['GPU-selected, N/A, 23028'], 'GPU-selected', 20480)):
+            with self.assertRaises(RuntimeError):
+                verify_gpu_budget(observation, uuid, limit)
+
+    def test_gpu_overage_stops_only_workload_and_retains_final_receipt(self):
+        clock, receipts, usage = [0.], [], iter([100, 201, 100])
+
+        def gpu():
+            clock[0] += .1
+            return [f'GPU-selected, {next(usage)}, 1000']
+
+        def values(*args):
+            return {'cpu.stat': f'usage_usec {int(clock[0] * 1e6)}', 'io.stat': ''}
+
+        args = SimpleNamespace(device_number='8:0', memory_bytes=1, high_bytes=1,
+            profile='archive', timeout=10, telemetry=Path('unused'), command=['unused'],
+            gpu_uuid='GPU-selected', gpu_memory_limit_mib=200)
+        replacements = {'os.getuid': lambda: 1000, 'current_cgroup': lambda: Path('/unused'),
+            'verify_limits': lambda *a: {}, 'verify_service': lambda *a: {}, 'read_values': values,
+            'pressure': lambda *a: {}, 'gpu_memory': gpu, 'time.monotonic': lambda: clock[0],
+            'time.sleep': lambda seconds: clock.__setitem__(0, clock[0] + seconds),
+            'atomic_json': lambda path, state: receipts.append(deepcopy(state))}
+        with ExitStack() as stack:
+            for name, replacement in replacements.items():
+                stack.enter_context(patch('bounded_run.' + name, replacement))
+            popen = stack.enter_context(patch('bounded_run.subprocess.Popen'))
+            child = popen.return_value
+            child.poll.return_value = None
+            child.returncode = -15
+            stop = stack.enter_context(patch('bounded_run.stop_workload_group'))
+            self.assertEqual(inside(args), 125)
+            popen.assert_called_once_with(['unused'], start_new_session=True)
+            stop.assert_called_once_with(child)
+        self.assertEqual(receipts[-1]['returncode'], 125)
+        self.assertEqual(receipts[-1]['state'], 'completed')
+        self.assertIn('exceeds', receipts[-1]['gpu_budget_stop_reason'])
+        self.assertIn('final', receipts[-1])
+
+    def test_workload_group_termination_does_not_target_telemetry_process(self):
+        import signal
+        from unittest.mock import Mock
+        child = Mock(pid=12345)
+        child.wait.return_value = -15
+        with patch('bounded_run.os.killpg') as kill:
+            self.assertEqual(stop_workload_group(child), -15)
+            kill.assert_called_once_with(12345, signal.SIGTERM)
+            child.wait.assert_called_once_with(timeout=5)
+
+    def test_workload_group_stops_a_real_child_without_stopping_the_test_process(self):
+        import subprocess
+        child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'],
+                                 start_new_session=True)
+        try:
+            self.assertLess(stop_workload_group(child), 0)
+            self.assertIsNotNone(child.poll())
+        finally:
+            if child.poll() is None:
+                child.kill()
+                child.wait(timeout=5)
+
     def test_larger_task_limit_preserves_legacy_limits(self):
         name = select_profile(complex_model=True, task_limit=256)
         self.assertEqual(name, 'adaptive-24g-4c-256t')

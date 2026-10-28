@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "amp-toaster-reference-20261026-v1",
+  "question": "Does the public AMP policy acquire and sustain bilateral contact-supported lifting in its own Toaster003 task?",
+  "status": "native admission pending; no executed results",
+  "source_commit": "4889389118e0c88d3945dff54d2cd3f992ed815e",
+  "checkpoint_sha256": "9699eb8268ee2d05eebc841bb776eb9b0db9fe308f6050eeb80163bc9560690e",
+  "task": "Mjlab-G1-DualArm",
+  "runtime": {
+    "mujoco": "3.10.0",
+    "mujoco-warp": "3.8.0.3",
+    "warp-lang": "1.15.0",
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "numpy": "2.5.1",
+    "mjlab": "1.4.0",
+    "rsl-rl-lib": "5.2.0"
+  },
+  "dependency_sources": {
+    "mjlab": "4360096b49c1bcc478668c11ce7d458db747e49d",
+    "mjviser": "1bdfd6fe79066b847a5f430000fcfbb53ec31a6f"
+  },
+  "runtime_revision": {
+    "source_mujoco_warp_commit": "88b55fc2696960b927bc12584994bb8412b36558",
+    "selected_official_release_commit": "79c37d3e8630aba40c2b8023fa9a073fb27b62d0",
+    "identical_mujoco_warp_runtime_tree": "97b878909d10a074f357f5b2a9b588e6cd696a67",
+    "wheel_sha256": "dfbfa24e376e0b03bf6dcebaed7ef69b4885280a020e5f0fd805c125fae3d129",
+    "reason": "Resolve mjlab's >=3.8.0.3 metadata constraint using the official release with the identical runtime source tree; preserve every other source lock pin. Native compatibility is not established by tree equality."
+  },
+  "conditions": {
+    "worlds": 1,
+    "play": true,
+    "physics_dt_s": 0.005,
+    "decimation": 4,
+    "control_dt_s": 0.02,
+    "episode_s": 60.0,
+    "policy_observation_corruption": false,
+    "virtual_pd_enabled": false,
+    "assistance_scale": 0.0,
+    "reset_height_fraction": 0.0,
+    "rsi_fraction": 0.25,
+    "initialization": "Preserve original reset and RNG order, including startup mass/COM/friction and reset XY/yaw/joints. Save actual initial state; do not assume a standing start.",
+    "render_mode": null,
+    "training": false
+  },
+  "cases": [
+    {"id": "probe-native", "seed": 137, "actions": 10, "record_substeps": false, "disable_hand_contacts": false},
+    {"id": "probe-recorded", "seed": 137, "actions": 10, "record_substeps": true, "disable_hand_contacts": false},
+    {"id": "policy-seed-137", "seed": 137, "actions": 3000, "record_substeps": true, "disable_hand_contacts": false},
+    {"id": "policy-seed-138", "seed": 138, "actions": 3000, "record_substeps": true, "disable_hand_contacts": false},
+    {"id": "policy-seed-139", "seed": 139, "actions": 3000, "record_substeps": true, "disable_hand_contacts": false},
+    {"id": "no-hand-seed-137", "seed": 137, "actions": 3000, "record_substeps": true, "disable_hand_contacts": true}
+  ],
+  "negative_control": {
+    "change": "Disable collision type and affinity on the four left/right hand/wrist collision geometries through the original scene configuration before compilation. Preserve their source condim=1 and priority=0; no other geometry is disabled.",
+    "limitation": "Disables these four geoms against every partner, including ground. Arm/torso support remains possible and must be counted as other support. This is not a matched policy-training comparison.",
+    "pairing": "Compare initial qpos/qvel, effective mass/inertia/friction and checkpoint to policy-seed-137 before interpreting the negative; retain mismatches as admission failures."
+  },
+  "checks": {
+    "state_parity_atol": 0.00001,
+    "state_parity_rtol": 0.0,
+    "force_decode_atol": 0.0001,
+    "force_decode_rtol": 0.00001,
+    "loaded_contact_threshold_n": 0.001,
+    "source_hold_control_steps": 20,
+    "source_height_tolerance_m": 0.115,
+    "independent_hold_s": 2.0,
+    "independent_window": "Report every contiguous native-step window with height above the source goal threshold, loaded left and right hand contacts, and no loaded ground/other support; longest window is the carrying diagnostic. A 2 s window is five times the source's 0.4 s predicate, not a hardware criterion.",
+    "separate_diagnostics": ["net lift", "hand-relative slip", "object tilt", "penetration", "actuator saturation", "applied assistance", "linear and angular impulse balance"],
+    "task_success": null,
+    "interpretation": "Parity and decoding tolerances qualify observation consistency only. Carrying duration alone does not establish complete physical qualification. Keep missing epoch/force/provenance checks explicit; never replace them by a source success flag."
+  },
+  "repeat_plan": {
+    "max_native_attempts": 6,
+    "max_total_native_wall_s": 5400,
+    "max_process_wall_s": 900,
+    "order": "Two fresh-process parity probes, then three named seeds and the paired no-hand control only after probe qualification.",
+    "stop": "Stop dependent runs on source/runtime/provenance admission failure, probe mismatch, capacity overflow, nonfinite records, missing telemetry or exhausted budget. Preserve every attempted output. No automatic training or budget extension."
+  },
+  "gpu_budget": {
+    "limit_mib": 20480,
+    "minimum_device_reserve_mib": 2048,
+    "sampling_interval_s": 2,
+    "scope": "Whole selected device, including display/other processes. The existing bounded runner stops only its workload when sampled usage exceeds the threshold or telemetry is unavailable. This is not a hard allocation cap; peaks between samples are unobserved."
+  },
+  "applicability": [
+    {"engine": "MuJoCo", "profile": "official MuJoCo Warp 3.8.0.3 / mjlab 1.4.0 source-compatible candidate", "status": "not-run", "recovery": "Complete provenance/runtime admission and recorder parity before policy evaluation."},
+    {"engine": "MuJoCo", "profile": "direct CPU latest-stable", "status": "unsupported", "recovery": "No qualified identical scene/action/sensor adapter; do not relabel CPU audit fixtures as policy evaluation."},
+    {"engine": "SuperDex", "status": "unsupported", "recovery": "No qualified identical policy task adapter; production integration follows #142."},
+    {"engine": "Genesis", "status": "unsupported", "recovery": "No qualified identical policy task adapter; production integration follows #142."},
+    {"engine": "Newton Physics", "status": "unsupported", "recovery": "No qualified identical policy task adapter; production integration follows #142."},
+    {"engine": "PhysX", "status": "unsupported", "recovery": "No qualified identical policy task adapter; production integration follows #142."},
+    {"engine": "Drake", "status": "unsupported", "recovery": "No qualified identical policy task adapter; production integration follows #142."}
+  ],
+  "claims_excluded": ["SuperMimic/PPO-Sim tracking reproduction", "matched algorithm ranking", "all-engine comparison", "hardware validation", "solver failure without discriminating evidence"]
+}

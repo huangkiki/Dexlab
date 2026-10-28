@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-10-26",
+  "source_commit": "4889389118e0c88d3945dff54d2cd3f992ed815e",
+  "g1": {
+    "unitree_commit": "15ebe53f4cd77e7d745ae83b9d7ff90e685e8998",
+    "license_blob": "6dfdadaa90baa4f7bea7400d3c4e8b9c784ae37f",
+    "declared_license": "BSD-3-Clause",
+    "referenced_meshes": [
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/head_link.STL",
+        "git_blob": "2ee5fba15de3ccd4c31774bc7a66de7aeefab770",
+        "unitree_blob": "2ee5fba15de3ccd4c31774bc7a66de7aeefab770"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_ankle_pitch_link.STL",
+        "git_blob": "69de8490184afc698f633e34bb74e65351bd4689",
+        "unitree_blob": "69de8490184afc698f633e34bb74e65351bd4689"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_ankle_roll_link.STL",
+        "git_blob": "8864e9f98103190883d1ba027aba5469925f2bca",
+        "unitree_blob": "8864e9f98103190883d1ba027aba5469925f2bca"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_elbow_link.STL",
+        "git_blob": "1a96d99ba469960173129084ab6dd3bf8a732a71",
+        "unitree_blob": "1a96d99ba469960173129084ab6dd3bf8a732a71"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_hip_pitch_link.STL",
+        "git_blob": "5b751c767ecf03b29c707b19f1faf5367e8d33d2",
+        "unitree_blob": "5b751c767ecf03b29c707b19f1faf5367e8d33d2"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_hip_roll_link.STL",
+        "git_blob": "778437ffe61731915fa4cb7cf2390e9cbe738c43",
+        "unitree_blob": "778437ffe61731915fa4cb7cf2390e9cbe738c43"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_hip_yaw_link.STL",
+        "git_blob": "383093ab96ed3a099ab79f5d6ed144fc0b7067a9",
+        "unitree_blob": "383093ab96ed3a099ab79f5d6ed144fc0b7067a9"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_knee_link.STL",
+        "git_blob": "f2e98e54e8f1980eb62ad25c7a838044c23bbadf",
+        "unitree_blob": "f2e98e54e8f1980eb62ad25c7a838044c23bbadf"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_rubber_hand.STL",
+        "git_blob": "c44830f1fd519ee28750cad04d7d0adb209c265f",
+        "unitree_blob": "c44830f1fd519ee28750cad04d7d0adb209c265f"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_shoulder_pitch_link.STL",
+        "git_blob": "e698311fb12d3f22f018b668c40dab667c39b8d3",
+        "unitree_blob": "e698311fb12d3f22f018b668c40dab667c39b8d3"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_shoulder_roll_link.STL",
+        "git_blob": "80bca84aca41137f8270fb35e263dcc5d9658e43",
+        "unitree_blob": "80bca84aca41137f8270fb35e263dcc5d9658e43"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_shoulder_yaw_link.STL",
+        "git_blob": "281e699055ffafe094f52a440547eb4b64f83bfa",
+        "unitree_blob": "281e699055ffafe094f52a440547eb4b64f83bfa"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_wrist_pitch_link.STL",
+        "git_blob": "82cc224a8e41251d879502f9809e31d0988ec7f9",
+        "unitree_blob": "82cc224a8e41251d879502f9809e31d0988ec7f9"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_wrist_roll_link.STL",
+        "git_blob": "f3c263a7ab3fc1e902bf2513064d4bc666c6b59f",
+        "unitree_blob": "f3c263a7ab3fc1e902bf2513064d4bc666c6b59f"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/left_wrist_yaw_link.STL",
+        "git_blob": "31be4fd45fa18987b35b3386fdce2ce98c798774",
+        "unitree_blob": "31be4fd45fa18987b35b3386fdce2ce98c798774"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/logo_link.STL",
+        "git_blob": "e9792098504b64b359fbffa983373e5e6fa1b50a",
+        "unitree_blob": "e9792098504b64b359fbffa983373e5e6fa1b50a"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/pelvis.STL",
+        "git_blob": "691a779b9c9f4c97f48eaa9edf9eb336ca3b4411",
+        "unitree_blob": "691a779b9c9f4c97f48eaa9edf9eb336ca3b4411"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/pelvis_contour_link.STL",
+        "git_blob": "42434339abf5a0a3816f890389e3e61af3b1e03c",
+        "unitree_blob": "42434339abf5a0a3816f890389e3e61af3b1e03c"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_ankle_pitch_link.STL",
+        "git_blob": "e77d8a2fe1e5d56fac049833d254d6ffa4f6b350",
+        "unitree_blob": "e77d8a2fe1e5d56fac049833d254d6ffa4f6b350"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_ankle_roll_link.STL",
+        "git_blob": "d4261dd7ccf39dd9c54cad37c1982f1d50e6fccc",
+        "unitree_blob": "d4261dd7ccf39dd9c54cad37c1982f1d50e6fccc"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_elbow_link.STL",
+        "git_blob": "f259e3812efb9985d6463c04d3e8a4b53793a699",
+        "unitree_blob": "f259e3812efb9985d6463c04d3e8a4b53793a699"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_hip_pitch_link.STL",
+        "git_blob": "998a0a0f5c248b217cf82c5088d6d365d9654ecd",
+        "unitree_blob": "998a0a0f5c248b217cf82c5088d6d365d9654ecd"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_hip_roll_link.STL",
+        "git_blob": "47b2eebdd36c7289679eebb9583c65a15514e194",
+        "unitree_blob": "47b2eebdd36c7289679eebb9583c65a15514e194"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_hip_yaw_link.STL",
+        "git_blob": "371856427c7cc31ae7463c83f00ef6652c72d672",
+        "unitree_blob": "371856427c7cc31ae7463c83f00ef6652c72d672"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_knee_link.STL",
+        "git_blob": "76d21a3d81e4e34520c5d6b3f28d7e43c1874364",
+        "unitree_blob": "76d21a3d81e4e34520c5d6b3f28d7e43c1874364"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_rubber_hand.STL",
+        "git_blob": "0aacffbb8168f0bb588f8cba3f37f9e2c6e0421a",
+        "unitree_blob": "0aacffbb8168f0bb588f8cba3f37f9e2c6e0421a"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_shoulder_pitch_link.STL",
+        "git_blob": "3f5b4ed47ade68e83f617ef3fd65cb810e9b0e07",
+        "unitree_blob": "3f5b4ed47ade68e83f617ef3fd65cb810e9b0e07"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_shoulder_roll_link.STL",
+        "git_blob": "179d61753d48b3a55165b81ded2c14e84deb81c2",
+        "unitree_blob": "179d61753d48b3a55165b81ded2c14e84deb81c2"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_shoulder_yaw_link.STL",
+        "git_blob": "2ba6076a8853edac5e3e17cffd2c256318e88d92",
+        "unitree_blob": "2ba6076a8853edac5e3e17cffd2c256318e88d92"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_wrist_pitch_link.STL",
+        "git_blob": "da194543c40df9d492abb0553c06cc614a78caae",
+        "unitree_blob": "da194543c40df9d492abb0553c06cc614a78caae"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_wrist_roll_link.STL",
+        "git_blob": "26868d2282b7e38c2ba40e00968d2c92c421fbd2",
+        "unitree_blob": "26868d2282b7e38c2ba40e00968d2c92c421fbd2"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/right_wrist_yaw_link.STL",
+        "git_blob": "d788902867014c5984e6029fce822508579f73dc",
+        "unitree_blob": "d788902867014c5984e6029fce822508579f73dc"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/torso_link_rev_1_0.STL",
+        "git_blob": "8a759a709750ad97e1f372db0ebbff246daedcc1",
+        "unitree_blob": "8a759a709750ad97e1f372db0ebbff246daedcc1"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/waist_roll_link_rev_1_0.STL",
+        "git_blob": "a64f330c592582dc31cdf38f4d08cfff06681c5f",
+        "unitree_blob": "a64f330c592582dc31cdf38f4d08cfff06681c5f"
+      },
+      {
+        "path": "src/mjlab_g1/assets/g1/assets/waist_yaw_link_rev_1_0.STL",
+        "git_blob": "0fabb63d37627cb77f64c5d2a46cf25d4acc66fc",
+        "unitree_blob": "0fabb63d37627cb77f64c5d2a46cf25d4acc66fc"
+      }
+    ],
+    "scope": "All 35 meshes referenced by g1_realsense.xml match official files. Unused merged-elbow meshes are not covered by this finding."
+  },
+  "toaster": {
+    "robocasa_commit": "2ce1aecdd76e29b52d32fdb160436c5a3e230b07",
+    "asset_registry_blob": "1d889086878dd0c7733e038e4aca3ad8ce30cc51",
+    "readme_license_blob": "ab7cf853658bb5625f176bebb8ce338ce1b3b212",
+    "asset_license_declaration": "CC BY 4.0 in the RoboCasa README; separate from the different Lightwheel Kitchen package",
+    "url": "https://utexas.box.com/shared/static/idbncsadpnaz1jfl4i6m8qejawk7p9pi.zip",
+    "archive_bytes": 529745465,
+    "etag": null,
+    "transferred_bytes": 1608936,
+    "files": [
+      {
+        "file": "model.xml",
+        "reference_sha256": "1250c251b992fdbcf346f8e66f0fe6db8d2e21bb0ef72104efbbab0db1b52c5b",
+        "amp_sha256": "856288b1144fcd122a1ebda23920136ed0763374f1607a08a7b288b66ca3441d",
+        "identical": false,
+        "reference_bytes": 9389,
+        "crc32": 3993771475
+      },
+      {
+        "file": "visuals/T_BC001.png",
+        "reference_sha256": "108c86f4c28c1bf76b8eeb4c3937bd40d4de84df2f320027552ee99243440ea0",
+        "amp_sha256": "108c86f4c28c1bf76b8eeb4c3937bd40d4de84df2f320027552ee99243440ea0",
+        "identical": true,
+        "reference_bytes": 189221,
+        "crc32": 3634576731
+      },
+      {
+        "file": "visuals/Body002.obj",
+        "reference_sha256": "c8944b6f80bae4638a03011db63fbfdbbc8b1dd5a56702cfc37820cc774d58d3",
+        "amp_sha256": "c8944b6f80bae4638a03011db63fbfdbbc8b1dd5a56702cfc37820cc774d58d3",
+        "identical": true,
+        "reference_bytes": 592198,
+        "crc32": 2924195744
+      },
+      {
+        "file": "visuals/lever.obj",
+        "reference_sha256": "6fded7ee9c71197eadb07106d70aa45996d5ab586bcfefb697a77495300fdee5",
+        "amp_sha256": "6fded7ee9c71197eadb07106d70aa45996d5ab586bcfefb697a77495300fdee5",
+        "identical": true,
+        "reference_bytes": 65047,
+        "crc32": 3701907147
+      },
+      {
+        "file": "visuals/button_cancel.obj",
+        "reference_sha256": "6890572103a270b569b0b904282a3be39b0293d1f04e472e254fcbfd5aa12c4d",
+        "amp_sha256": "6890572103a270b569b0b904282a3be39b0293d1f04e472e254fcbfd5aa12c4d",
+        "identical": true,
+        "reference_bytes": 2358,
+        "crc32": 3382297867
+      },
+      {
+        "file": "visuals/Body001.obj",
+        "reference_sha256": "a428855cdf9e31e1f58edb2ed98e79d4e6472b2cd71a25b0deea8b716a55f182",
+        "amp_sha256": "a428855cdf9e31e1f58edb2ed98e79d4e6472b2cd71a25b0deea8b716a55f182",
+        "identical": true,
+        "reference_bytes": 1324694,
+        "crc32": 1158112312
+      },
+      {
+        "file": "visuals/knob_doneness.obj",
+        "reference_sha256": "846a622bead34726257a6a557ea99ff90e9cf8caf125b4c833b0c0afb6c97f9c",
+        "amp_sha256": "846a622bead34726257a6a557ea99ff90e9cf8caf125b4c833b0c0afb6c97f9c",
+        "identical": true,
+        "reference_bytes": 135710,
+        "crc32": 599746211
+      }
+    ],
+    "native_qualification": false,
+    "redistributed": false
+  },
+  "amp_model_changes": [
+    "Named and positioned free root with a free joint",
+    "Two grasp sites and two grasp-marker collision geometries",
+    "Explicit inertial parameters for five bodies, nominal total mass 1.30 kg"
+  ],
+  "code_motion_weight": {
+    "declared_license": "Apache-2.0 in source README and pyproject.toml",
+    "separate_license_file_present": false,
+    "independent_motion_capture_and_training_lineage": "not established",
+    "scope": "Repository declarations and byte identities; not an independent clearance of original capture or checkpoint training inputs."
+  },
+  "redistribution": "No external weights, motion clips, textures or meshes are included in this change.",
+  "native_qualification": false
+}
