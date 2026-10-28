@@ -7,3 +7,7 @@
 [完整配置矩阵](coverage.md) · [诊断方法](diagnosis.md) · [当前工作与暂停状态](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.zh-CN.md)
 
 细 SDF 几何资格见 [#178](https://github.com/huangkiki/Dexlab/issues/178)，布料材料与接触基线见 [#179](https://github.com/huangkiki/Dexlab/issues/179)。创建任务不代表实验通过；历史任务成功、数值一致性和真实材料精度继续分开。
+
+## 学习入口
+
+**先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
