@@ -4,6 +4,8 @@
 
 [简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
 
+**Learn before reading the configuration table:** [Sim Learning](https://github.com/huangkiki/sim-learning) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks remain separate from DexLab experimental qualification.
+
 (live-lab)=
 ## Browser live lab
 

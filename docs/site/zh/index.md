@@ -4,6 +4,8 @@
 
 [English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
 
+**先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
+
 (live-lab)=
 ## 浏览器实时实验
 
