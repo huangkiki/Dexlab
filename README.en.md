@@ -2,7 +2,7 @@
 
 **Reproducible contact, friction and manipulation experiments to understand why robots hold or slip, and how to choose and tune a physics simulation.**
 
-[简体中文](README.md) · [Quickstart](#quickstart) · [Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Reports](https://huangkiki.github.io/Dexlab/en/latest/results.html)
+[简体中文](README.md) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab) · [Quickstart](#quickstart) · [Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Reports](https://huangkiki.github.io/Dexlab/en/latest/results.html)
 
 <a id="research-findings"></a>
 
