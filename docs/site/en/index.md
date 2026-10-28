@@ -2,7 +2,29 @@
 
 **Reproducible contact, friction and manipulation experiments to understand why robots hold or slip, and how to choose and tune a physics simulation.**
 
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
+
+(live-lab)=
+## Browser live lab
+
+Run MuJoCo 3.17 WebAssembly and render with the browser's local WebGPU device directly
+on this page. Three solver configurations share the same box, gravity, friction,
+initial state and timestep. After pressing Run, inspect contacts, tangential displacement,
+solver iterations and the measured simulation speed.
+
+```{raw} html
+<div class="dexlab-live-lab">
+  <iframe
+    src="../../_static/live-lab/index.html?embed=1"
+    title="DexLab browser live simulation lab"
+    loading="lazy"
+    allow="fullscreen"
+  ></iframe>
+</div>
+```
+
+Browser runs do not inherit native experiment results. The renderer, MuJoCo version,
+runtime and measured simulation speed are reported separately.
 
 (research-findings)=
 ## Experiments we have run

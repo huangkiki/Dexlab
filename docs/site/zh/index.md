@@ -2,7 +2,27 @@
 
 **用可复现的接触、摩擦与操作实验，研究机器人为什么抓得住、会滑脱，以及怎样选择和调整物理仿真。**
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+
+(live-lab)=
+## 浏览器实时实验
+
+下面直接在当前网页运行 MuJoCo 3.17 WebAssembly，并使用浏览器本地 WebGPU 渲染。
+三种求解配置共享相同方块、重力、摩擦、初态和时间步长。点击“运行”后可观察接触数、
+切向位移、solver iterations 和实际仿真速度。
+
+```{raw} html
+<div class="dexlab-live-lab">
+  <iframe
+    src="../../_static/live-lab/index.html?embed=1"
+    title="DexLab 浏览器实时仿真实验"
+    loading="lazy"
+    allow="fullscreen"
+  ></iframe>
+</div>
+```
+
+实时页面不会继承原生实验成绩；浏览器版本、渲染后端、MuJoCo 版本和实际运行速度会单独显示。
 
 (research-findings)=
 ## 做了哪些实验

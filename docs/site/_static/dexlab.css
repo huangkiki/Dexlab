@@ -153,3 +153,12 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-playback-controls output { font-size:.72rem; font-variant-numeric:tabular-nums; }
 @media(max-width:720px) { .cutting-comparison-grid { grid-template-columns:1fr; } }
 @media(min-width:960px) { body:has(.cutting-comparison) #pst-primary-sidebar { display:none; } .bd-main:has(.cutting-comparison) .bd-article-container { max-width:1200px; } }
+
+/* The existing Sphinx homepage hosts the browser-native contact lab. */
+.dexlab-live-lab { margin:1.1rem 0 2rem; border:1px solid var(--pst-color-border); border-radius:14px; overflow:hidden; background:#0b0e12; }
+.dexlab-live-lab iframe { display:block; width:100%; height:760px; border:0; background:#0b0e12; }
+@media(max-width:700px) { .dexlab-live-lab iframe { height:680px; } }
+@media(min-width:960px) {
+  body:has(.dexlab-live-lab) #pst-primary-sidebar { display:none; }
+  .bd-main:has(.dexlab-live-lab) .bd-article-container { max-width:1280px; }
+}
