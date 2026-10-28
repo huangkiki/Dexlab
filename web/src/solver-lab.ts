@@ -271,10 +271,15 @@ export class SolverLab {
     canvas: HTMLCanvasElement,
     onSnapshot: (snapshot: SolverLabSnapshot) => void,
   ): Promise<SolverLab> {
-    const module = await loadMujoco({
-      locateFile: (path: string) =>
-        path.endsWith(".wasm") ? mujocoWasmUrl : path,
-    });
+    // Fetch the binary explicitly. GitHub Pages serves the asset correctly, but
+    // Emscripten's streaming instantiation can remain pending inside a lazy
+    // iframe. Supplying wasmBinary avoids that deployment-specific loader path.
+    const response = await fetch(mujocoWasmUrl);
+    if (!response.ok) {
+      throw new Error(`MuJoCo WASM download failed: HTTP ${response.status}`);
+    }
+    const wasmBinary = await response.arrayBuffer();
+    const module = await loadMujoco({ wasmBinary });
     const lab = new SolverLab(canvas, module, onSnapshot);
     await lab.initializeRenderer();
     lab.initializeScene();
