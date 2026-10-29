@@ -4,6 +4,12 @@
 
 **Decision date: 2026-10-26. The maintainer has authorized interactive autodev execution of the sequence below; scheduled development remains PAUSED.** This is the sole current ordering entry referenced by AGENTS and the operating guide. Continue eligible slices through acceptance and delivery. Each new physics campaign still requires its frozen protocol and finite resource budget; no training or background dispatch is authorized.
 
+## Status reconciliation — 2026-10-29
+
+The first four rows below are delivered: #243, #245, #244, #250 and #251 are closed. #48 remains the in-hand parent; its receiving-finger versus rolling decision and new transition protocol are still pending. This review resumes the existing #211 SDF engineering candidate through its full delivery gate, without launching the parent's native SDF campaign.
+
+The three imported cases have separate outcomes: #260 is completed after PR #262 and the documented non-reproduction acceptance; PR #264 is merged but #259 remains blocked by the AMP recorder-parity failure; PR #265 is merged but #261 still lacks a compatible model and qualified native intervention evidence. Merged infrastructure does not complete either parent. Preserve the original records and budgets; existing eligible engineering work can continue while those decisions or inputs are missing.
+
 ## Intended delivery
 
 Build a reproducible starting case around **Wuji grasping, unloading and contact switching**, so another user can rerun it and inspect why it fails. Qualify positive and negative grasp controls before interpreting a transition failure. Finding no solver failure is an acceptable result; separate task, acquisition/control, geometry and numerical-solver failures.
@@ -31,7 +37,7 @@ The audit starts from 36 open issues and one draft PR, checking relevant source,
 - LIBERO [#181](https://github.com/huangkiki/Dexlab/issues/181) retains **all 130 native tasks and every official demonstration**. Defer #185/#188/#174/#198 and visual-policy #182. #198 remains a P0 public-interpretation gap; #185 retains transfer failures and cumulative limits. Partial Object/Spatial evidence does not complete the parent or resume downloads/weight acquisition.
 - Retain original acceptance and candidate code for SDF #178/#211, cloth #28/#179, six-engine incline #121 and #157/#159/#163/#165, pinch #130/#132/#133/#134, UniSim #142/#145, ManiSkill #47, replay audit #52 and material benchmark #3. Defer these to P2 this cycle. Old In Progress items without an actual executor return to Todo; genuine external/dependency blockers remain Blocked. #28 and #179 are parent/child, not duplicates. The 594+24 campaign and cumulative budgets remain unchanged.
 - [#249](https://github.com/huangkiki/Dexlab/issues/249) first addresses Newton SolverMuJoCo versus direct MuJoCo Warp identity/wrapper parity at P2; #152 retains its independent Isaac Sim and other task scope. libuipc #218 remains candidate assessment. #200 lacks the author's matched cutting inputs and remains P0/needs-input. Hardware #6 remains Blocked; numerical work does not depend on it.
-- Draft [PR #199](https://github.com/huangkiki/Dexlab/pull/199) still needs main-conflict resolution, its current-tree complete prose gate and link checks. Preserve that PR/worktree; historical green CI does not establish present mergeability. Do not create a duplicate reading-route PR this round.
+- [PR #199](https://github.com/huangkiki/Dexlab/pull/199) merged on 2026-10-28 as `43debaf917cbcafbd853bfd5d942ef054f005979`. The reading route is no longer a draft awaiting recovery; do not create a duplicate PR.
 
 Planning adds no automated-dispatch approval. Historical `auto:approved` labels are cleared according to this ordering without revoking existing interactive authority. **Missing or invalid persistent dispatch state now defaults to paused; only explicit resume enables new automatic work.** See the [operating guide](autoresearch.md#author-admission-and-persistent-pause) for commands and interactive recovery. Before restoring automatic execution, require trusted-author admission, pause/dependency checks and actual `next --dry-run`, never this document alone.
 

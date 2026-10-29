@@ -70,6 +70,10 @@ python -m dexlab.contact_trials status "$OUT"
 
 已执行的集成检查保留两次运行版本准入失败，修正显式 profile 后继承原账本，完成 MuJoCo 3.15.0 的两个 1600 步案例：初始配置物理失败、历史校准配置通过；有效参数与独立评分均保存。这是已知候选的流程验证，不是新留出。[结果、成本与归档](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/contact-trials-integration-v1.json)。恢复还检查受限 cgroup 已结束，覆盖子进程 PID 尚未来得及写入的中断窗口。
 
+## SDF 查询资格
+
+SDF 表示资格另有[前瞻查询协议](https://github.com/huangkiki/Dexlab/blob/main/docs/sdf-near-surface-protocol.zh-CN.md)：固定 5,130 个解析盒体查询、保留未支持点，并声明三个请求空间层级。当前保守 actor-AABB 规则使表面和外部中心指标仍不可计算。离线检查及采集顺序函数不构成原生资格；[#178](https://github.com/huangkiki/Dexlab/issues/178) 继续保留查询域、几何/接触和完整任务工作。
+
 ## LIBERO 原生工作流案例
 
 [从完整原任务定位接触与观测问题](libero-workflow.md)：一行观测刷新修正有源码与读回证据；缩小步长的候选未通过迁移筛查。分别保存动作执行、物理诊断及策略验证边界。

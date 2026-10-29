@@ -76,6 +76,8 @@ MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py \
 
 ## 结果与限制
 
+近表面表示资格由 [#178](https://github.com/huangkiki/Dexlab/issues/178) 单独跟踪。[前瞻静态查询协议](sdf-near-surface-protocol.zh-CN.md) 固定 5,130 个解析盒体查询、保留缺失分母，并声明三个请求空间层级；当前保守 actor-AABB 掩码仍使表面和外部中心指标不可计算。离线算术与采集顺序测试不证明原生查询域、有效网格分辨率、苹果/指腹准确性或接触响应。下面的历史调参抓取结果不能隔离 solver 优劣，也不建立 SDF 表示等价性。
+
 Linux 上使用发布默认配置、通过完整公开命令重新运行后，两个后端均通过全部检查：
 
 | 指标 | MuJoCo | SuperDex |

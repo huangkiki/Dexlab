@@ -76,6 +76,8 @@ The rendered `mujoco-sdf.gif` / `superdex-sdf.gif` and matching MP4 are continuo
 
 ## Results and limits
 
+Near-surface representation qualification is tracked separately in [#178](https://github.com/huangkiki/Dexlab/issues/178). The [prospective static-query protocol](sdf-near-surface-protocol.md) fixes 5,130 analytic-box queries, explicit missing denominators and three requested spatial levels. Its current conservative actor-AABB mask leaves surface/exterior-center metrics unavailable. Offline arithmetic and capture-order tests do not qualify a native query domain, effective grid resolution, apple/pad accuracy or contact response. The historical tuned grasp results below do not isolate solver quality or establish equivalent SDF representations.
+
 Fresh full-command runs on Linux passed all checks with the shipped defaults:
 
 | Measurement | MuJoCo | SuperDex |
