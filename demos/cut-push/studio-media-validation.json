@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "state": "passed",
+  "checks": [
+    {
+      "task": "tofu-sequential",
+      "frames_verified": 121,
+      "pieces": 3,
+      "force_and_displacements_match": true,
+      "artifact_hashes_match": true,
+      "gif_timing_verified": true,
+      "material_viscosity_matches": true,
+      "studio": {
+        "frames_verified": 121,
+        "captions_match_native": true,
+        "artifact_hashes_match": true,
+        "gif_timing_verified": true
+      }
+    },
+    {
+      "task": "banana",
+      "frames_verified": 161,
+      "pieces": 4,
+      "force_and_displacements_match": true,
+      "artifact_hashes_match": true,
+      "gif_timing_verified": true,
+      "material_viscosity_matches": true,
+      "studio": {
+        "frames_verified": 161,
+        "captions_match_native": true,
+        "artifact_hashes_match": true,
+        "gif_timing_verified": true
+      }
+    }
+  ]
+}

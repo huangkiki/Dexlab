@@ -13,3 +13,6 @@ demos/libero-contact/licenses/robosuite-MIT.txt -whitespace
 
 # Preserve the exact SDK log bytes authenticated by the evidence manifest.
 demos/physx-contact/evidence/contact-details-v1/worker-stderr.log -whitespace
+
+# Preserve Matplotlib SVG bytes authenticated by the landing replay manifests.
+docs/evidence/landing/replays/policy-repeat-*/curves.svg -whitespace

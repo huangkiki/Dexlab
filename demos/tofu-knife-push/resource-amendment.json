@@ -1,0 +1,11 @@
+{
+  "reason": "Pre-execution half-step cost projection: historical 5 s fine half-step took 1040.47 worker s; the new 7 s run projects about 1457 s, above the initial 1200 s call cap.",
+  "prior_receipt": "cutting-203/physics-002-tofu-half/resources.json",
+  "prior_worker_s": 1040.4664129489101,
+  "initial_per_call_s": 1200,
+  "revised_per_call_s": 1800,
+  "cumulative_worker_s": 5400,
+  "calls": 8,
+  "physics_and_acceptance_unchanged": true,
+  "applies_to": "Future calls; physics-001-push already admitted at1200s."
+}

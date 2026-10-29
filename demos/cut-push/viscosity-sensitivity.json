@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "varied_parameter": "viscosity",
+  "window_s": [
+    5.4,
+    6.0
+  ],
+  "display_sample_interval_s": 0.05,
+  "definitions": {
+    "excess_reversing_travel": "Sum of absolute successive centroid x increments minus absolute net x displacement; mm.",
+    "particle_second_difference_rms": "RMS of successive second differences of native left-piece xyz positions sampled at display times; mm. No filtering.",
+    "visual_alarm": "More than 0.3 mm excess reversing travel in this display window flags the reported symptom; this is a diagnostic, not food-fidelity acceptance.",
+    "scope": "Only dynamic viscosity changes; this is a synthetic material comparison, not calibrated tofu. Rigid rocking need not dissipate through material viscosity."
+  },
+  "baseline": {
+    "source_artifacts": {
+      "states.npz": "2575d1b31dede406ddd9a24f44bc3410d3651ad8a49575c949e60f468fc5c0d0",
+      "trace.npz": "537f58a41c5031dcb27ad0102f283d2e766933d0604bffe85a5512126232feaa"
+    },
+    "config": {
+      "size": [
+        0.09,
+        0.03,
+        0.03
+      ],
+      "grid_spacing": 0.005,
+      "dt": 0.000125,
+      "density": 1100.0,
+      "young_modulus": 6000.0,
+      "poisson_ratio": 0.35,
+      "flip_fraction": 0.95,
+      "normal_scale": 0.1,
+      "friction_static": 0.3,
+      "friction_dynamic": 0.2,
+      "tangent_stiffness": 0.05,
+      "tangent_damping": 0.1,
+      "cutting_energy": 0.5,
+      "sharpness": 0.9,
+      "blade_mass": 0.2,
+      "blade_half_size": [
+        0.00025,
+        0.025,
+        0.02
+      ],
+      "drive_stiffness": 250.0,
+      "drive_damping": 14.0,
+      "drive_force_limit": 10.0,
+      "shape": "block",
+      "blade_bevel_height": 0.005
+    },
+    "native_centroid_x_peak_to_peak_mm": 0.10448786868096777,
+    "display_centroid_x_peak_to_peak_mm": 0.07109999223602159,
+    "display_centroid_x_excess_reversing_travel_mm": 0.18196074168963605,
+    "display_particle_second_difference_rms_mm": 0.032292162230221126,
+    "maximum_knife_contact_n": 0.0,
+    "visual_alarm": false
+  },
+  "selected": {
+    "source_artifacts": {
+      "states.npz": "c1cbf38621b1f652945ec1396c92e3e9e00b383ae22857912cf5afe6cca94367",
+      "trace.npz": "dc91e3737777fd4da3d0653e3618a4a71423c44380b3546850c2fab7c26d65cc"
+    },
+    "config": {
+      "size": [
+        0.09,
+        0.03,
+        0.03
+      ],
+      "grid_spacing": 0.005,
+      "dt": 0.000125,
+      "density": 1100.0,
+      "young_modulus": 6000.0,
+      "poisson_ratio": 0.35,
+      "dynamic_viscosity": 5.0,
+      "flip_fraction": 0.95,
+      "normal_scale": 0.1,
+      "friction_static": 0.3,
+      "friction_dynamic": 0.2,
+      "tangent_stiffness": 0.05,
+      "tangent_damping": 0.1,
+      "cutting_energy": 0.5,
+      "sharpness": 0.9,
+      "blade_mass": 0.2,
+      "blade_half_size": [
+        0.00025,
+        0.025,
+        0.02
+      ],
+      "drive_stiffness": 250.0,
+      "drive_damping": 14.0,
+      "drive_force_limit": 10.0,
+      "shape": "block",
+      "blade_bevel_height": 0.005
+    },
+    "native_centroid_x_peak_to_peak_mm": 0.057585258100553705,
+    "display_centroid_x_peak_to_peak_mm": 0.03838306404228575,
+    "display_centroid_x_excess_reversing_travel_mm": 0.07125600548683053,
+    "display_particle_second_difference_rms_mm": 0.013979026437812923,
+    "maximum_knife_contact_n": 0.0,
+    "visual_alarm": false
+  }
+}

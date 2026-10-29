@@ -1,0 +1,40 @@
+--- upstream/bar.py
++++ no-latch/bar.py
+@@ -471,0 +472 @@
++        self.grasp_ready = False
+@@ -486,0 +488 @@
++            self.grasp_ready = False
+@@ -493,2 +495,2 @@
+-        if self.pin is not None:
+-            return  # riding the hand: the bridge re-aims it every engine substep
++        if self.grasp_ready:
++            return  # retain the selected material patch, without constraining it
+@@ -525,14 +527,3 @@
+-        self.pin = self.bridge.pin_nodes(
+-            "sponge",
+-            self.sponge.particles[self.nodes],
+-            here.copy(),
+-            stiffness=LATCH_STIFFNESS,
+-            damping=LATCH_DAMPING,
+-        )
+-        # Carried on the hand's body and re-aimed every engine substep. Re-aimed
+-        # once a control step from here, the pinned foam trailed a lifting hand by
+-        # that step's travel: 1.6 mm, 10 mm into the lift, measured.
+-        body = sim.arm(self.arm).ee_body
+-        frame = sim.state.body_q.numpy()[body]
+-        self.bridge.ride(self.pin, body, (here - frame[:3]) @ quat_to_mat(frame[3:7]))
+-        self.events.append((sim.step_count, "engaged", dict(self.readings, nodes=int(len(self.nodes)))))
++        self.grasp_ready = True
++        self.events.append((sim.step_count, "grasp_ready_without_pin", dict(self.readings, nodes=int(len(self.nodes)))))
++
+--- upstream/routine.py
++++ no-latch/routine.py
+@@ -155 +155 @@
+-            if self.latch.latched:
++            if self.latch.grasp_ready:
+@@ -159 +159 @@
+-        if not self.latch.latched:
++        if not self.latch.grasp_ready:
+@@ -166 +166 @@
+-            f"pads {r['press'][0]:.1f} N and {r['press'][1]:.1f} N; latched {len(self.latch.nodes)} nodes"
++            f"pads {r['press'][0]:.1f} N and {r['press'][1]:.1f} N; tracked {len(self.latch.nodes)} material nodes; no pins"

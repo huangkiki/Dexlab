@@ -1,4 +1,4 @@
-"""Generate bilingual visual entry points from the coverage and experience indexes."""
+"""Generate detailed experiment pages from the coverage and experience indexes."""
 
 import argparse
 import html
@@ -146,9 +146,9 @@ def engine_table(inventory, language, site):
 
 def catalogue(index, language, site):
     zh = language == "zh"
-    lines = ["## " + ("做了哪些实验" if zh else "What experiments have we run?"), ""]
+    lines = ["## " + ("完整实验与历史记录" if zh else "Full experiment and historical index"), ""]
     if site:
-        lines.insert(0, "(visual-experiment-catalogue)=")
+        lines.insert(0, "(full-experiment-catalogue)=")
     if site:
         lines += ["```{raw} html", '<div class="experiment-grid">']
     else:
@@ -196,9 +196,9 @@ def catalogue(index, language, site):
     lines += [
         "",
         (
-            "**待开展／未完成：** 推动、手内旋转、主动折布及更广抓取迁移分别见现有 Issue。预折叠下落不等于主动折布成功；重复、步长扫描和框架切换不增加任务类型。"
+            "**待开展／未完成：** 更广推动、手内旋转、主动折布及抓取迁移分别见现有 Issue。已有刀面推动按其单独协议报告；预折叠下落不等于主动折布成功。"
             if zh
-            else "**Pending / incomplete:** pushing, in-hand rotation, active folding and broader grasp transfer remain in their existing Issues. Folded drop is not active folding; repeats, timestep sweeps and framework switches do not add task types."
+            else "**Pending / incomplete:** broader pushing, in-hand rotation, active folding and grasp transfer remain in their existing Issues. Existing knife-driven pushing has its own protocol; folded drop is not active folding."
         ),
         "",
     ]
@@ -321,8 +321,6 @@ def comparisons(index, experiences, language):
 def highlights(index, language, site):
     zh = language == "zh"
     lines = ["## " + ("我们已经知道什么" if zh else "What we already know"), ""]
-    if site and zh:
-        lines.insert(0, "(research-findings)=")
     for case in index["cases"]:
         target = (
             case["id"]
@@ -349,7 +347,7 @@ def highlights(index, language, site):
         )
         prefix = "../../../" if site else ""
         if site:
-            lines.append(f"(visual-highlight-{case['id']})=")
+            lines.append(f"(experiment-highlight-{case['id']})=")
         lines += [
             "### " + case["title"][language],
             "",
@@ -378,25 +376,23 @@ def update(root=ROOT, check_only=False):
             if not check_only:
                 path.write_text(content)
 
-    for lang, readme in [("zh", "README.md"), ("en", "README.en.md")]:
-        for path, site in [
-            (root / readme, False),
-            (root / f"docs/site/{lang}/index.md", True),
-        ]:
-            text = path.read_text()
-            start, end = MARKERS
-            if text.count(start) != 1 or text.count(end) != 1:
-                raise ValueError("Expected generated visual marker pair")
-            before, rest = text.split(start)
-            _, after = rest.split(end)
-            block = (
-                catalogue(index, lang, site)
-                + "\n"
-                + highlights(index, lang, site)
-                + "\n"
-                + engine_table(inventory, lang, site)
-            )
-            save(path, before + start + "\n" + block + "\n" + end + after)
+    for lang in ("zh", "en"):
+        # Homepages are curated reading paths; detailed indexes stay reproducible.
+        path = root / f"docs/site/{lang}/experiments.md"
+        text = path.read_text()
+        start, end = MARKERS
+        if text.count(start) != 1 or text.count(end) != 1:
+            raise ValueError("Expected generated visual marker pair")
+        before, rest = text.split(start)
+        _, after = rest.split(end)
+        block = (
+            catalogue(index, lang, True)
+            + "\n"
+            + highlights(index, lang, True)
+            + "\n"
+            + engine_table(inventory, lang, True)
+        )
+        save(path, before + start + "\n" + block + "\n" + end + after)
         save(
             root / f"docs/site/{lang}/visual-comparisons.md",
             comparisons(index, manifest["experiences"], lang),

@@ -5,10 +5,17 @@ root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 source_root="$root/vendor/project_superdex"
 revision="f216dace36464d70f224caa4253074ec365ed14f"
 
+for argument in "$@"; do
+  if [[ "$argument" == --help || "$argument" == -h ]]; then
+    exec python3 "$root/scripts/setup_preflight.py" --source "$@"
+  fi
+done
+
 if [[ "$(uname -s)" != Linux ]]; then
   echo "This installer supports Linux. See docs/installation.md."
   exit 1
 fi
+python3 "$root/scripts/setup_preflight.py" --source "$@"
 uv_bin="$(command -v uv || true)"
 if [[ -z "$uv_bin" && -x "$HOME/.local/bin/uv" ]]; then
   uv_bin="$HOME/.local/bin/uv"
@@ -27,10 +34,9 @@ done
 if [[ ! -e "$root/.venv/bin/python" ]]; then
   "$uv_bin" venv --python 3.12 "$root/.venv"
 fi
-"$root/.venv/bin/python" -c \
-  'import sys; sys.exit(0 if sys.version_info[:2] == (3, 12) else "Existing .venv must use Python 3.12.")'
+python3 "$root/scripts/setup_preflight.py" --source "$@"
 "$uv_bin" pip install --python "$root/.venv/bin/python" \
-  -r "$root/demos/apple-stem-grasp/requirements.txt" cmake==4.4.0 ninja==1.13.2
+  -r "$root/demos/apple-stem-grasp/requirements.txt" -r "$root/scripts/source-build-requirements.txt"
 
 "$uv_bin" pip install --python "$root/.venv/bin/python" --torch-backend cpu -c "$root/scripts/python-constraints.txt" -e "$root"
 

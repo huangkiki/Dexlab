@@ -1,0 +1,1465 @@
+{
+  "version": 1,
+  "archives": [
+    {
+      "url": "https://github.com/huangkiki/Dexlab/releases/download/rss-wiping-evidence-v1/rss-wiping-evidence-v1.tar.gz",
+      "files": {
+        "runs/controlled-original-01/compiled-model.npz": "9c4671f7178044753cbbb36a21f5dcba9259e124ea50fcbabd11d56609e330d0",
+        "runs/controlled-original-01/contacts.jsonl": "b746a9b6856e85e3117bb53d40af7f773e1bd5e60d2a8012132b3e0589fb9b40",
+        "runs/controlled-original-01/first-frame.png": "88c4c753608207e25ff6297f6e99b03bc66dc2a93194c2f85627985b6e542218",
+        "runs/controlled-original-01/initial-particles.npy": "09f8a3dddb799721c86f8bc2cd9d5df7ccd8a404b9b44289fae84166a80f3464",
+        "runs/controlled-original-01/manifest.json": "2d2a8f5b9382487eb01c2361c208b4d603bddf0fcc52de299a6a627bdf23d029",
+        "runs/controlled-original-01/observations.jsonl": "f02c762aaf9fa101ea5d4742d8689a675b5de4dc915d3bfe3e0cca107d3739e7",
+        "runs/controlled-original-01/score.json": "a3143854bb6570cdabf677f1fc05f27e0693d2ac5feda394b394cf8b3103af6a",
+        "runs/controlled-original-01/settled-particles.npy": "d9448f23d6e3b51b8b7b9bfd531aea767512c501a531b306039ce7aa93a49fca",
+        "runs/controlled-original-01/states/0000.npz": "f01483bd47158f0f4ea90252178a314a35d8c1b181690063ff2f1a86e29bff68",
+        "runs/controlled-original-01/states/0001.npz": "fe5269cbb0b4e15adb5c6b85cc07c6c1a0660d845b901e96de2725563c2cf496",
+        "runs/controlled-original-01/states/0002.npz": "9291c104dcb622d99273bf7d649bb2bc127d27ec6e0fb0ce2ab071dc2ff0cdd8",
+        "runs/controlled-original-01/states/0003.npz": "995eeb262bbc67db3c7395476cc20a4a0409d9a4a3b98bb385752e4a564d3d93",
+        "runs/controlled-original-01/states/0004.npz": "ff86d4f5c794560ee14747be2c88cd42535ae6fe6caa5ade92a42e817ef5e294",
+        "runs/controlled-original-01/states/0005.npz": "02a84bb8d7f900165a99b8cb9ee92ec41827c5d5b64be20431786eb933181f8d",
+        "runs/controlled-original-01/states/0006.npz": "c8875c719e81c314d51b6ac8227111b78bc92a5d05eae82a111535f7b03c1459",
+        "runs/controlled-original-01/states/0007.npz": "ed5d44e6931f2391b878546101edb809c2631afcb9df52854e5e562ac7d70643",
+        "runs/controlled-original-01/states/0008.npz": "51ec52776ba64cf0cc2a6cecd4bdf6e00ed5396194191d7a3579739513ef02e8",
+        "runs/controlled-original-01/states/0009.npz": "3d8fa8e2af5b0afe3e60d4aa300bfe3988254f9867ebd78b90bb8a39044225c8",
+        "runs/controlled-original-01/states/0010.npz": "1c4f1a8a9bb42d7807c2d0034f830c9dd8c6aa631c63db8dab2ebf249b49a85d",
+        "runs/controlled-original-01/states/0011.npz": "060a5ea6a1d44eb057cdb3ace2cc6d0fc683884d046793bd811dcde9f8a45425",
+        "runs/controlled-original-01/states/0012.npz": "b9235898cbdbd06d411167dcdb84800270161cda49d978b4755e157197ce962f",
+        "runs/controlled-original-01/states/0013.npz": "43e68d080e9c6d260929822884b5ea88d4ee1ad500d5fce7963ab0fba289c811",
+        "runs/controlled-original-01/states/0014.npz": "019228c51c2e16e3ccf7721fd5743d27cea811a9539232f88bd2052c1123dc2f",
+        "runs/controlled-original-01/states/0015.npz": "52913ad204cd6f0c3bff2604af6ca8abc0b73be3faa290c246df6a500e5c92c1",
+        "runs/controlled-original-01/states/0016.npz": "c7cb232b9a4354a2a9f42e2ab2fac40503be4ca535d7155147db042f8b7b918b",
+        "runs/controlled-original-01/states/0017.npz": "f4b58c1c3bc02441bb3122112b28fe48b125e18e7585ce429dcc2ae43b1421ae",
+        "runs/controlled-original-01/states/0018.npz": "359a31203c85ae5072fc8a0883635e4583c05115ca9f6d75c453d37a2eae288e",
+        "runs/controlled-original-01/states/0019.npz": "20d1fe39e7bdac6a507b28dee47dbd94478e4f0c6f2d820a9579f21bfe11b8fd",
+        "runs/controlled-original-01/states/0020.npz": "e37afe672a5f6e13814e182fbf4688eed18a7e0886996fe1db54a59676594839",
+        "runs/controlled-original-01/states/0021.npz": "62ca4c3af8918cae30c4b906e17609a42ba0db90c82fecffd80fa831fadeea56",
+        "runs/controlled-original-01/states/0022.npz": "f549e6862fc356341d52700ec61976679e590f08a8582246afb59c4e0428416b",
+        "runs/controlled-original-01/states/0023.npz": "eeacb5582a4d9c0e8d41a0610c4bb10717a67d4124e48bc1dc8f6beeafdc1ec3",
+        "runs/controlled-original-01/states/0024.npz": "78794112e7fc7f5c902d79a631846e04a828b9e7e7dde9f9e65580679eb466ae",
+        "runs/controlled-original-01/states/0025.npz": "4a80d45b56580279b7a53e8b354c0f6fbbd0191680e32f0f247f803c1522e9c6",
+        "runs/controlled-original-01/states/0026.npz": "c7e89b7dfd55c623a69d7d109eed91c0c7dfbf7b87932b5f53ff30ef74dc9123",
+        "runs/controlled-original-01/states/0027.npz": "6d567f46b6348a3ba2c212c39e6f33722e0821e2e410c8f3496016eb9bf7c7e9",
+        "runs/controlled-original-01/states/0028.npz": "9f0e1272375237cbc7601f6113543b33001ea97fbfdcab5a62c7d244e10fda33",
+        "runs/controlled-original-01/states/0029.npz": "d3a5d05444821e2370ed3b80e02ceabd92ada8224e8ef7ef894fac6dc1a3604a",
+        "runs/controlled-original-01/states/0030.npz": "6479314195496532310c6a214656331f726a5bdf03cf8f5fd9468488e22c1051",
+        "runs/controlled-original-01/states/0031.npz": "b7d68056b89c9b377d9769ec40ddc711d42530f9158ea6890e6454c1a5de065a",
+        "runs/controlled-original-01/states/0032.npz": "e0f622ed5e50f5110d86e0a56b6797fa17d8b82700b132c5ef798809b538aa6a",
+        "runs/controlled-original-01/states/0033.npz": "0eb0ed3b756430f52545bfb0b0073be55f81132de6f612679c56e6b5086db799",
+        "runs/controlled-original-01/states/0034.npz": "7909393c845b1b1ce280f8d0ac6c6a70d8ef7c8c236a5b884774871d8f31848f",
+        "runs/controlled-original-01/states/0035.npz": "0f9ec9e0bd9ff5755a6e30dbd25ff8ce0baf8f1219c925a5dcae2e5727244b5a",
+        "runs/controlled-original-01/states/0036.npz": "749203caf689f767645c2e1416b6f9146363b084b454954c6c21ea4764699edf",
+        "runs/controlled-original-01/states/0037.npz": "72ae9a4a0ec12ea5773fd68892f9dbd6e9290ce05f8d8fbb4adf7fdda31f9664",
+        "runs/controlled-original-01/states/0038.npz": "5c5cbc05996c90588cdc06db8734c89d06337a2d6e6bf6ccfef955fa05884045",
+        "runs/controlled-original-01/states/0039.npz": "ba17ea7ac4b3b602aeb96c847a89a5ef7f74fffc572c8047e5025cd15ac230cb",
+        "runs/controlled-original-01/states/0040.npz": "835d066c35c497e9eddfad9ef74bc649e590df150f63a6fd732d844ef56fc16f",
+        "runs/controlled-original-01/states/0041.npz": "8e0b131b2328800327b91b5da112d0257f4d5f85248643a68e59ed1969ac8c2f",
+        "runs/controlled-original-01/states/0042.npz": "acd0220d78769eca58eb53a7dfefcf2dfe5951b6f794147f9fa8b22c664a2a92",
+        "runs/controlled-original-01/states/0043.npz": "167313f71fa78dcf30437a134469f31826249557e88b0ed297bf537d1c422600",
+        "runs/controlled-original-01/states/0044.npz": "30f8f60513cf6fef47730589e75dc4a5656675e4b28f91b38af95a5141a8f829",
+        "runs/controlled-original-01/states/0045.npz": "b4a0ae0f6a9a3721a97a78abb59b611687accf495580de72e1c7b567306c615b",
+        "runs/controlled-original-01/states/0046.npz": "98cb6f5eb0c8b8862543f34abaf1e38ab7dca4b6e2f5d5fd0b0ad0a4caf0f711",
+        "runs/controlled-original-01/states/0047.npz": "9c49ce840dddb63ebb968e62aec5f81a1ab0a8f01e3a7d916761b0899234adcb",
+        "runs/controlled-original-01/states/0048.npz": "b73bc2b451b0595981f82f6948053629aa1619aadc972f796075ffd2be7fb4d7",
+        "runs/controlled-original-01/states/0049.npz": "e1dd33a00468e0a3f42d86c8a65e31030f9e72c1f32bfc85f8f203d6df56491b",
+        "runs/controlled-original-01/states/0050.npz": "bbe8812b1702a9141525a65669e7973b148ded1600a362e7abe50c889e95de50",
+        "runs/controlled-original-01/states/0051.npz": "71d24ac351a3b41dc2923acc730f1c404e61adc7a99fc8999697fffad8565f5f",
+        "runs/controlled-original-01/states/0052.npz": "42c44554e974ab2b7ec44dfe1e822aa1ffb7b2160a2a43db7b3169e8d206b4c5",
+        "runs/controlled-original-01/states/0053.npz": "83165f1d68d7de071d34b0d2f9c7b4a23307715864a625583c7bf27f247113e6",
+        "runs/controlled-original-01/states/0054.npz": "8c8f8e700b317224b324da38b9c6ed032696d2a3d5239826fea66d0491ed8c7f",
+        "runs/controlled-original-01/states/0055.npz": "ab260bf7aa9d24e6d5dcacd69aeebc8e503da5491e99c50dd3b7b8279af069c4",
+        "runs/controlled-original-01/states/0056.npz": "bb24835d58060a8d33b6a941a9d7c1556d28db9a184069bb928551082185b60b",
+        "runs/controlled-original-01/states/0057.npz": "1fdbd487639995c3329cb0ad4d5c1979c9e21501655455d16d425e29aaf34b09",
+        "runs/controlled-original-01/states/0058.npz": "b7467ef51d9e6d90d7425e19c58388852b22b5715cbdb4c903cde7a4cdcfa113",
+        "runs/controlled-original-01/states/0059.npz": "f4823faff65d2b18df9472e26130ffac7a345b093be9b25c24c3abbcfdd5f546",
+        "runs/controlled-original-01/summary.json": "2ee014615b0c4e74baacbc05f800bc6b4c2168235d515b9ee95f8b9b4b7ade8d",
+        "runs/controlled-original-01/tracked-patch.npy": "f34073e4f339bece3ea6dd0fd4d865dc508c0b1c8197f27c711076a7828407a3",
+        "runs/controlled-original-01/video-times.npy": "cf2a12f91ec261fc5de2a24d5b5df7d8687847f5db6789c351576aada212c0c9",
+        "runs/controlled-original-01/video.mp4": "6954efdfca3f0a8bf3c51bf7b2adfb137e87161f316ab69c098f0ae3f806f2c1",
+        "runs/controlled-no-latch-01/ablation-source/bar.py": "c7c4390d27fd58494198a2f65662d004be48b818915084265f38c64568822837",
+        "runs/controlled-no-latch-01/ablation-source/routine.py": "b84fba2e7c79b28fb84b6b68bf20d74fc9012c2be55d35c5349f575eb2e61b44",
+        "runs/controlled-no-latch-01/ablation-source/wipe_the_bar.py": "fffc877a0312dee205c509e2014494f00692520299256bb5bb091d1390b28672",
+        "runs/controlled-no-latch-01/compiled-model.npz": "9c4671f7178044753cbbb36a21f5dcba9259e124ea50fcbabd11d56609e330d0",
+        "runs/controlled-no-latch-01/contacts.jsonl": "3b91be0a17cee21ff043e0c4b647f5ed848594a70632978b529e2a7ca659a6bc",
+        "runs/controlled-no-latch-01/first-frame.png": "c2776c941613d5058714f2bda8512c2f588aa4e3dba5c80582d508c30f2558de",
+        "runs/controlled-no-latch-01/initial-particles.npy": "09f8a3dddb799721c86f8bc2cd9d5df7ccd8a404b9b44289fae84166a80f3464",
+        "runs/controlled-no-latch-01/manifest.json": "42065c2b39b64679de3bb7513d1347d5ff98a66b1fcb1325c3bbe1c9901f6f4c",
+        "runs/controlled-no-latch-01/no-latch.patch": "3eccb8eabbd9d888c9f408f350d9b2fb2a25532ab04d2cb13aca4e19f1939d6d",
+        "runs/controlled-no-latch-01/observations.jsonl": "37b91d97f8e4f9e24379e8a412aae92831bc8ff061a208978a703cfee1ee109e",
+        "runs/controlled-no-latch-01/score.json": "cd4aca4019fb80bd5ab9f5eca3cd0ed5c53b68297ad5af68d7d8272387478101",
+        "runs/controlled-no-latch-01/settled-particles.npy": "d9448f23d6e3b51b8b7b9bfd531aea767512c501a531b306039ce7aa93a49fca",
+        "runs/controlled-no-latch-01/states/0000.npz": "1c2f2b2835242dca5463930dd2dbe9d2a9c315874cfd6dde1b02c14be6db6fa7",
+        "runs/controlled-no-latch-01/states/0001.npz": "3d3814f56b233ecc0ea13d697d26bb6078838a71627ed1692cc28c171fccbb81",
+        "runs/controlled-no-latch-01/states/0002.npz": "fd5a622a381c0b8ac967fbc8cab9f4e6f313dc616f396855a3f238cf80740ff5",
+        "runs/controlled-no-latch-01/states/0003.npz": "7f58d35a5861e68cc3498713fb42365f84ae81f7d63192dee4b56afda7fe2f4e",
+        "runs/controlled-no-latch-01/states/0004.npz": "64d31a36d3e5c36f25434ed089f5679a49c4213df7b63a84d23b5b5474964072",
+        "runs/controlled-no-latch-01/states/0005.npz": "19086c52647274857a2f5ef04af7f6b031f87629fb5bdc2f349c1cd25b98e9d7",
+        "runs/controlled-no-latch-01/states/0006.npz": "578b59f93868047de57c2c777f293098878de14dbce9bcf041652f64d61117dc",
+        "runs/controlled-no-latch-01/states/0007.npz": "145dc096f9f2dd3bfad59d7306a24dde60f54831e14d570ac249f4eb59f70129",
+        "runs/controlled-no-latch-01/states/0008.npz": "4e680e5439ef5b14ebf6da005b5f6520ef7abd0cae034f76d4b773922f0249bf",
+        "runs/controlled-no-latch-01/states/0009.npz": "62799543069ad77ad1bc9fcbf747659fe7ed8559893d6a1bd559688e5d1b5dc9",
+        "runs/controlled-no-latch-01/states/0010.npz": "741a5e636f0fa274a49feec459374a51112c60c47137c4f0475cc53338a1be84",
+        "runs/controlled-no-latch-01/states/0011.npz": "d0a7464416118c1e57d1ede79691bcf276ea540d8457d03b29397a3f36c3ae4b",
+        "runs/controlled-no-latch-01/states/0012.npz": "6ad6950e1cc245ba33b5b366ded62fe1ee9dcf7e24396b17e9711d58f90db2f6",
+        "runs/controlled-no-latch-01/states/0013.npz": "3138a5f4c367548b0e78a5e9cf18c75662b736cd75613ef6c3e7f45ff3d150f1",
+        "runs/controlled-no-latch-01/states/0014.npz": "ceb3e7dbde4edb7d63647f7a3c5f1378347f929f9a2e0693a56aac307f8d1ded",
+        "runs/controlled-no-latch-01/states/0015.npz": "02cff7a1286a026ff7df31bdbd4185a9b6c02356ea15be23facfbc2856ec879e",
+        "runs/controlled-no-latch-01/states/0016.npz": "53ee692e632ec11c67e0bc1ef0fe0eb07deb14d0a51128590f9a0967b72f0ad9",
+        "runs/controlled-no-latch-01/states/0017.npz": "e7c26e68ddb63b7fef379f71c1f9519b6568ada9c49424d4f01cde760e9ceb82",
+        "runs/controlled-no-latch-01/states/0018.npz": "5d82685f40ff43a3f6f7eae376ea5ee7208c42aa98b1683c3d93cf5d3fbd01a7",
+        "runs/controlled-no-latch-01/states/0019.npz": "2cd5a5d069c2d21466290f41762d54610f0e21f06fe5a8eb5dbaf91b866139e2",
+        "runs/controlled-no-latch-01/states/0020.npz": "e14a8b29a58f53e85cc57cdd9756aa0435dc42d641f9fe16e6ac34bbeb89a1ec",
+        "runs/controlled-no-latch-01/states/0021.npz": "74d3116dc4bea554152766f7fa7099647a4acd6374364cd6eeaec96ba18a26cc",
+        "runs/controlled-no-latch-01/states/0022.npz": "70a9d89ce7aeb2262a5d6886ad15e88f8653298a009f6ae11ad3b04c89809c23",
+        "runs/controlled-no-latch-01/states/0023.npz": "a178e260aa883618051d32912ccf869223bd64c67d1ae110a8a545fc74386d48",
+        "runs/controlled-no-latch-01/states/0024.npz": "1385543547a98033fa31437d05829b54b14512e16e96300968f082394b7ca25b",
+        "runs/controlled-no-latch-01/states/0025.npz": "59bade84a7ef09637d943f50cad28f175636d43beade94ca23bd7893e8d86794",
+        "runs/controlled-no-latch-01/states/0026.npz": "6917867a3e0d70c9e8aee8ab4d50bf37d95420edc73b6d5df10330c0b0ee000c",
+        "runs/controlled-no-latch-01/states/0027.npz": "c26c052a021465dbb7598b439b0dd39944679487d0f0667862199f8a1dc370f3",
+        "runs/controlled-no-latch-01/states/0028.npz": "22b4b1459ddff808109305f30f7a9c406062b0ce47bc3d1ddbdab7012a5f8dc4",
+        "runs/controlled-no-latch-01/states/0029.npz": "5a83ade11b5d07cb9f3be084996ef528de7278a0dd625ddd8d71b579be09feba",
+        "runs/controlled-no-latch-01/states/0030.npz": "209334a7950c3ac871c15c1d2375c811c0155f4a187e93b1adc1f78a31a5d594",
+        "runs/controlled-no-latch-01/states/0031.npz": "6792acd9f26db9ff00d8c497b91f087f76b73ca137e860f2db16531aa1b506f4",
+        "runs/controlled-no-latch-01/states/0032.npz": "461f400693fd6dcf445f135af61a6181e2aee16bddcd13af1d0eae87d7a3eae8",
+        "runs/controlled-no-latch-01/states/0033.npz": "a2456e9d9b3631045251a4ba90657b3492d52fd2b426defba38d5d3738d7d6ae",
+        "runs/controlled-no-latch-01/states/0034.npz": "e9a8aea77f84f29f488c2c633b1f6a6f7d653177a149e88e89fd248d6daeff1d",
+        "runs/controlled-no-latch-01/states/0035.npz": "81f6bdad58aa7a175db39f00765f4ee1e2afde6acc8555bfe5ac6123751bc01b",
+        "runs/controlled-no-latch-01/states/0036.npz": "fdc746c156d67cae071733610eb0e4fb30061b4d8264c4112ce7691e729e8551",
+        "runs/controlled-no-latch-01/states/0037.npz": "15d41680833b48537bd7323d2796ee59d98e569cf0567881868743b8c82a7170",
+        "runs/controlled-no-latch-01/states/0038.npz": "00b9a0ef8759af0c4561265a9225dc9d323f9b54e23c82779127066bac088ca9",
+        "runs/controlled-no-latch-01/states/0039.npz": "9298627b98b2f8b7ff81f3b7d31bbaf2c0678b3b7fed9cb4767a62a964c88656",
+        "runs/controlled-no-latch-01/states/0040.npz": "ee5f7c53ee31211c73ea1b72b5fb5b0e2faa202a422aea297843ce675e0f6073",
+        "runs/controlled-no-latch-01/states/0041.npz": "c165e9c3c1a44e767663e5a413e6e11d78dcbbf7c7b751c22387bd6776583a07",
+        "runs/controlled-no-latch-01/summary.json": "b4bdbbd7e26a19fea69ff910b0ef1452303e14667b0d70947d6e33aa73f89cab",
+        "runs/controlled-no-latch-01/tracked-patch.npy": "f34073e4f339bece3ea6dd0fd4d865dc508c0b1c8197f27c711076a7828407a3",
+        "runs/controlled-no-latch-01/video-times.npy": "1d3e0cd2334ad6d67a54b9dc50ef38c7d9e818ecf427a3aa1fa386b66d594de7",
+        "runs/controlled-no-latch-01/video.mp4": "a9fbc80d2d08d553523e3df1419fb8aff331647659846affa523b2349cc16d76",
+        "runs/controlled-no-latch-01/wipe-frame.png": "5b5262fff31d80a02937074e95089d25584ab56de5f4ba3621f0c3e058b4e96b",
+        "source/recording/run.py": "65ba792f69e8ea4a1ad8462ea4cec618a137f8ab9320252e323974d396e7ca7a",
+        "source/recording/geometry.py": "d29d5678179f3eaed40e970ba7886e7a1e4d12f33103345f959ecde6e1602dbe",
+        "source/recording/score.py": "b218b8a9db17a6010529f9f14a039e29f3e654fef0fcd9c5bb5e2bf3c04ddf0a",
+        "source/recording/plot.py": "37ac22bdd54da1aa103757b1ba9f6262de5baf8fe4cff849d08a9b9051364e50",
+        "source/scoring/score.py": "a17c8fe22c2b09328bea09ff3d3dd6862ddccc68a66da98356ccf7d51b953595",
+        "source/scoring/rescore_bundle.py": "5f1d058dc169bbee26a5675af53a1e2ce6fd230dc91b63ab7ec1b9fe502b4d61",
+        "source/scoring/offline-requirements.txt": "a1299ccbe1f9470922343b379e8294e9ad66e8eaf15c2f53958a1dfdd3828245",
+        "source/upstream/examples/08_demos/wipe_the_bar/bar.py": "f15baf305238bbb49443003cd6ec6cf446675fdb352d297f3d8a558c09c8c1f3",
+        "source/upstream/examples/08_demos/wipe_the_bar/routine.py": "677b85db1dd3f32a3ac40237f03c3b72ea5446de9f87595a7ea98bb019803146",
+        "source/upstream/examples/08_demos/wipe_the_bar/wipe_the_bar.py": "fffc877a0312dee205c509e2014494f00692520299256bb5bb091d1390b28672",
+        "source/upstream/pyproject.toml": "880400f43391bd76ce3d512c0d157e090899f00be508a1e6372243324717d57d",
+        "source/upstream/uv.lock": "1661aaa8fe314c00e669c68b9a271b5428dbc6366adff67856c2706b0325c538",
+        "source/geometry-cache/0000.npz": "e4e8ba1a3d1c821bd0a14be1d19a787ff8646480573651617c04fcec8dd8a6e8",
+        "source/geometry-cache/0001.npz": "19e7e271dbc8c51e282ce8129e19b957dd10361f836be0c0e0de900c32a6a8c9",
+        "source/geometry-cache/LICENSE.i2rt": "7cd0a0224a287ebd6c45703eb6623d264c7810f8958d65de8f99e87ccd9f4891",
+        "source/geometry-cache/LICENSE.rss": "243b5de614a38e490ec5de01fce7bb73d84cd0bb1f8f32b0bca12cd1b58714a1",
+        "source/geometry-cache/NOTICE.upstream": "c1ae73a7d00715788a1e43728aa687d3f2c6930d9722eada429e28c704f132e5",
+        "source/geometry-cache/README.md": "2940b3c5bb88b120850fec3785e2db60c730233afcad2a040dd80db8c225231d",
+        "source/geometry-cache/index.json": "d6e1df0738610c838f7a6a65797f7e70e7e62f18e7e64837145495516d4346bf",
+        "licenses/DexLab-Apache-2.0.txt": "0b81e2ea9cf9c447b3317b84e5bbaca9f3cf98a5d08ef8d754a3286f21c3392a",
+        "licenses/RSS-Apache-2.0.txt": "243b5de614a38e490ec5de01fce7bb73d84cd0bb1f8f32b0bca12cd1b58714a1",
+        "licenses/RSS-NOTICE.txt": "c1ae73a7d00715788a1e43728aa687d3f2c6930d9722eada429e28c704f132e5",
+        "licenses/RSS-ASSET-PROVENANCE.md": "19d18a082196b96f52ef27949b1518bd5453268b785adf749ede2389df65fc97",
+        "licenses/I2RT-MIT.txt": "7cd0a0224a287ebd6c45703eb6623d264c7810f8958d65de8f99e87ccd9f4891",
+        "licenses/YAM-Arena-Apache-2.0.txt": "1296f601b312777d3aaaf3c36a9999f489a0e0d1dc5a341fedeccf25918366f1",
+        "attempt-index.json": "898b166f39559c1cce297625a2d5c396704712547f4cf01775f7b80f633de25b",
+        "source/campaign.json": "276ac64830ad85fa96803c028949daaf4ed3786680527a40e7c97433ad40e930",
+        "source/campaign-controlled.json": "dfb71b1ed557b29db46d7357ea803659e4f53d1d519218fd755242b391f93fb3"
+      },
+      "sha256": "ed78d647100ec0965330a131f827336fc7b388c72315d8d51a858c91e2013a0a",
+      "bytes": 131967207
+    }
+  ],
+  "files": [],
+  "provenance": {
+    "runs/controlled-original-01/compiled-model.npz": {
+      "bytes": 3642952,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/compiled-model.npz",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/contacts.jsonl": {
+      "bytes": 148304109,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/contacts.jsonl",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/first-frame.png": {
+      "bytes": 48432,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/first-frame.png",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/initial-particles.npy": {
+      "bytes": 23648,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/initial-particles.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/manifest.json": {
+      "bytes": 45746,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/manifest.json",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/observations.jsonl": {
+      "bytes": 3323713,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/observations.jsonl",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/score.json": {
+      "bytes": 1052,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/score.json",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/settled-particles.npy": {
+      "bytes": 23648,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/settled-particles.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0000.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0000.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0001.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0001.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0002.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0002.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0003.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0003.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0004.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0004.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0005.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0005.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0006.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0006.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0007.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0007.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0008.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0008.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0009.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0009.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0010.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0010.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0011.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0011.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0012.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0012.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0013.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0013.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0014.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0014.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0015.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0015.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0016.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0016.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0017.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0017.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0018.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0018.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0019.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0019.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0020.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0020.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0021.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0021.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0022.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0022.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0023.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0023.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0024.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0024.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0025.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0025.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0026.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0026.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0027.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0027.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0028.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0028.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0029.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0029.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0030.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0030.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0031.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0031.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0032.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0032.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0033.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0033.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0034.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0034.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0035.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0035.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0036.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0036.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0037.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0037.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0038.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0038.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0039.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0039.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0040.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0040.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0041.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0041.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0042.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0042.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0043.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0043.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0044.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0044.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0045.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0045.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0046.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0046.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0047.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0047.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0048.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0048.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0049.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0049.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0050.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0050.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0051.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0051.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0052.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0052.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0053.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0053.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0054.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0054.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0055.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0055.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0056.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0056.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0057.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0057.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0058.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0058.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/states/0059.npz": {
+      "bytes": 1307454,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/states/0059.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/summary.json": {
+      "bytes": 2047,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/summary.json",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/tracked-patch.npy": {
+      "bytes": 976,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/tracked-patch.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/video-times.npy": {
+      "bytes": 4920,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/video-times.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-original-01/video.mp4": {
+      "bytes": 3743108,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-original-01/video.mp4",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-original-01"
+    },
+    "runs/controlled-no-latch-01/ablation-source/bar.py": {
+      "bytes": 27154,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/ablation-source/bar.py",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/ablation-source/routine.py": {
+      "bytes": 12143,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/ablation-source/routine.py",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/ablation-source/wipe_the_bar.py": {
+      "bytes": 2006,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/ablation-source/wipe_the_bar.py",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/compiled-model.npz": {
+      "bytes": 3642952,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/compiled-model.npz",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/contacts.jsonl": {
+      "bytes": 37903715,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/contacts.jsonl",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/first-frame.png": {
+      "bytes": 48445,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/first-frame.png",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/initial-particles.npy": {
+      "bytes": 23648,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/initial-particles.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/manifest.json": {
+      "bytes": 45746,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/manifest.json",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/no-latch.patch": {
+      "bytes": 3737,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/no-latch.patch",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/observations.jsonl": {
+      "bytes": 2222481,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/observations.jsonl",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/score.json": {
+      "bytes": 1053,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/score.json",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/settled-particles.npy": {
+      "bytes": 23648,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/settled-particles.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0000.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0000.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0001.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0001.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0002.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0002.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0003.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0003.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0004.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0004.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0005.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0005.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0006.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0006.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0007.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0007.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0008.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0008.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0009.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0009.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0010.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0010.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0011.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0011.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0012.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0012.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0013.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0013.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0014.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0014.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0015.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0015.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0016.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0016.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0017.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0017.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0018.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0018.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0019.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0019.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0020.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0020.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0021.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0021.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0022.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0022.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0023.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0023.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0024.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0024.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0025.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0025.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0026.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0026.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0027.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0027.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0028.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0028.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0029.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0029.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0030.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0030.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0031.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0031.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0032.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0032.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0033.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0033.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0034.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0034.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0035.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0035.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0036.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0036.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0037.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0037.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0038.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0038.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0039.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0039.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0040.npz": {
+      "bytes": 1568694,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0040.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/states/0041.npz": {
+      "bytes": 1098462,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/states/0041.npz",
+      "purpose": "raw state",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/summary.json": {
+      "bytes": 1629,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/summary.json",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/tracked-patch.npy": {
+      "bytes": 976,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/tracked-patch.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/video-times.npy": {
+      "bytes": 3464,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/video-times.npy",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/video.mp4": {
+      "bytes": 2207796,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/video.mp4",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "runs/controlled-no-latch-01/wipe-frame.png": {
+      "bytes": 79270,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "controlled-no-latch-01/wipe-frame.png",
+      "purpose": "raw record / metadata / continuous media",
+      "attempt": "controlled-no-latch-01"
+    },
+    "source/recording/run.py": {
+      "bytes": 19228,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/run.py",
+      "source_path": "frozen-harness/run.py",
+      "purpose": "Preserved historical recorder/scorer source",
+      "attempt": null
+    },
+    "source/recording/geometry.py": {
+      "bytes": 2747,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry.py",
+      "source_path": "frozen-harness/geometry.py",
+      "purpose": "Preserved historical recorder/scorer source",
+      "attempt": null
+    },
+    "source/recording/score.py": {
+      "bytes": 8209,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/score.py",
+      "source_path": "frozen-harness/score.py",
+      "purpose": "Preserved historical recorder/scorer source",
+      "attempt": null
+    },
+    "source/recording/plot.py": {
+      "bytes": 2237,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/plot.py",
+      "source_path": "frozen-harness/plot.py",
+      "purpose": "Preserved historical recorder/scorer source",
+      "attempt": null
+    },
+    "source/scoring/score.py": {
+      "bytes": 8828,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/3a341c9b66b4ef20808e6f691061644cae09fe1c/demos/rss-wiping/score.py",
+      "source_path": "demos/rss-wiping/score.py",
+      "purpose": "Reviewed offline scoring and raw curve export",
+      "attempt": null
+    },
+    "source/scoring/rescore_bundle.py": {
+      "bytes": 8686,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/3a341c9b66b4ef20808e6f691061644cae09fe1c/demos/rss-wiping/rescore_bundle.py",
+      "source_path": "demos/rss-wiping/rescore_bundle.py",
+      "purpose": "Reviewed offline scoring and raw curve export",
+      "attempt": null
+    },
+    "source/scoring/offline-requirements.txt": {
+      "bytes": 32,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/3a341c9b66b4ef20808e6f691061644cae09fe1c/demos/rss-wiping/offline-requirements.txt",
+      "source_path": "demos/rss-wiping/offline-requirements.txt",
+      "purpose": "Reviewed offline scoring and raw curve export",
+      "attempt": null
+    },
+    "source/upstream/examples/08_demos/wipe_the_bar/bar.py": {
+      "bytes": 27667,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/bar.py",
+      "source_path": "examples/08_demos/wipe_the_bar/bar.py",
+      "purpose": "Exact upstream wiping example",
+      "attempt": null
+    },
+    "source/upstream/examples/08_demos/wipe_the_bar/routine.py": {
+      "bytes": 12117,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/routine.py",
+      "source_path": "examples/08_demos/wipe_the_bar/routine.py",
+      "purpose": "Exact upstream wiping example",
+      "attempt": null
+    },
+    "source/upstream/examples/08_demos/wipe_the_bar/wipe_the_bar.py": {
+      "bytes": 2006,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/08_demos/wipe_the_bar/wipe_the_bar.py",
+      "source_path": "examples/08_demos/wipe_the_bar/wipe_the_bar.py",
+      "purpose": "Exact upstream wiping example",
+      "attempt": null
+    },
+    "source/upstream/pyproject.toml": {
+      "bytes": 11664,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/pyproject.toml",
+      "source_path": "pyproject.toml",
+      "purpose": "Pinned native rerun dependency identity; no bundled engine binaries",
+      "attempt": null
+    },
+    "source/upstream/uv.lock": {
+      "bytes": 1070510,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/uv.lock",
+      "source_path": "uv.lock",
+      "purpose": "Pinned native rerun dependency identity; no bundled engine binaries",
+      "attempt": null
+    },
+    "source/geometry-cache/0000.npz": {
+      "bytes": 144968,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/0000.npz",
+      "source_path": "geometry-cache/0000.npz",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "source/geometry-cache/0001.npz": {
+      "bytes": 149010,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/0001.npz",
+      "source_path": "geometry-cache/0001.npz",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "source/geometry-cache/LICENSE.i2rt": {
+      "bytes": 1073,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/LICENSE.i2rt",
+      "source_path": "geometry-cache/LICENSE.i2rt",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "source/geometry-cache/LICENSE.rss": {
+      "bytes": 11343,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/LICENSE.rss",
+      "source_path": "geometry-cache/LICENSE.rss",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "source/geometry-cache/NOTICE.upstream": {
+      "bytes": 2195,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/NOTICE.upstream",
+      "source_path": "geometry-cache/NOTICE.upstream",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "source/geometry-cache/README.md": {
+      "bytes": 826,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/README.md",
+      "source_path": "geometry-cache/README.md",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "source/geometry-cache/index.json": {
+      "bytes": 441,
+      "license": "Apache-2.0 AND MIT",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/demos/rss-wiping/geometry-cache/index.json",
+      "source_path": "geometry-cache/index.json",
+      "purpose": "Frozen collision preprocessing and its notices",
+      "attempt": null
+    },
+    "licenses/DexLab-Apache-2.0.txt": {
+      "bytes": 10775,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/LICENSE",
+      "source_path": "LICENSE",
+      "purpose": "Redistribution license, attribution or derivative-asset provenance",
+      "attempt": null
+    },
+    "licenses/RSS-Apache-2.0.txt": {
+      "bytes": 11343,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/LICENSE",
+      "source_path": "LICENSE",
+      "purpose": "Redistribution license, attribution or derivative-asset provenance",
+      "attempt": null
+    },
+    "licenses/RSS-NOTICE.txt": {
+      "bytes": 2195,
+      "license": "Apache-2.0 AND MIT AND BSD-2-Clause AND BSD-3-Clause",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/NOTICE",
+      "source_path": "NOTICE",
+      "purpose": "Redistribution license, attribution or derivative-asset provenance",
+      "attempt": null
+    },
+    "licenses/RSS-ASSET-PROVENANCE.md": {
+      "bytes": 13098,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/assets/PROVENANCE.md",
+      "source_path": "assets/PROVENANCE.md",
+      "purpose": "Redistribution license, attribution or derivative-asset provenance",
+      "attempt": null
+    },
+    "licenses/I2RT-MIT.txt": {
+      "bytes": 1073,
+      "license": "MIT",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/assets/embodiments/yam_i2rt_arena/LICENSE",
+      "source_path": "assets/embodiments/yam_i2rt_arena/LICENSE",
+      "purpose": "Redistribution license, attribution or derivative-asset provenance",
+      "attempt": null
+    },
+    "licenses/YAM-Arena-Apache-2.0.txt": {
+      "bytes": 11370,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/assets/embodiments/yam/LICENSE",
+      "source_path": "assets/embodiments/yam/LICENSE",
+      "purpose": "Redistribution license, attribution or derivative-asset provenance",
+      "attempt": null
+    },
+    "attempt-index.json": {
+      "bytes": 35100,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/blob/b2ffa586ed2ff6009f18ea55ddd2a764554b5cab/docs/evidence/rss-wiping/results.json",
+      "source_path": "results.json + retained preparation record",
+      "purpose": "Complete index of the twelve execution entries and separate preparation/processing failures",
+      "attempt": null
+    },
+    "source/campaign.json": {
+      "bytes": 1065,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "campaign.json",
+      "purpose": "Preserved historical protocol; code corrections separately indexed",
+      "attempt": null
+    },
+    "source/campaign-controlled.json": {
+      "bytes": 1551,
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/huangkiki/Dexlab/issues/223",
+      "source_path": "campaign-controlled.json",
+      "purpose": "Preserved historical protocol; code corrections separately indexed",
+      "attempt": null
+    }
+  },
+  "evidence": {
+    "bundle_id": "rss-wiping-evidence-v1",
+    "rss_commit": "23417de77edf59d614531a833334ed4e2206fc2c",
+    "scoring_source_commit": "3a341c9b66b4ef20808e6f691061644cae09fe1c",
+    "cases": [
+      {
+        "id": "controlled-original-01",
+        "mode": "original"
+      },
+      {
+        "id": "controlled-no-latch-01",
+        "mode": "no-latch"
+      }
+    ],
+    "compiled_model_sha256": "87804477f990e24c48b023d5d9b6d42a79f3123765fa15a1e98d0e2824b268bf",
+    "index": "attempt-index.json",
+    "source_report_commit": "b2ffa586ed2ff6009f18ea55ddd2a764554b5cab",
+    "scope": "One historical controlled pair; no new physics, no hardware accuracy or solver-failure attribution."
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "before": [
+    {
+      "frame": 0,
+      "vertices": 5352,
+      "triangles": 10700,
+      "degenerate": 0,
+      "reversed_skin": 540,
+      "nonmanifold_edges": 0,
+      "mesh_wall_s": 3.2848778769839555,
+      "level_set_residual_mm": 1.2334882637509512
+    },
+    {
+      "frame": 80,
+      "vertices": 5452,
+      "triangles": 10900,
+      "degenerate": 0,
+      "reversed_skin": 522,
+      "nonmanifold_edges": 2,
+      "mesh_wall_s": 3.252205236000009,
+      "level_set_residual_mm": 1.2334882637509512
+    },
+    {
+      "frame": 400,
+      "vertices": 6056,
+      "triangles": 12100,
+      "degenerate": 0,
+      "reversed_skin": 508,
+      "nonmanifold_edges": 0,
+      "mesh_wall_s": 11.569486673979554,
+      "level_set_residual_mm": 1.2334882637509512
+    },
+    {
+      "frame": 800,
+      "vertices": 6362,
+      "triangles": 12708,
+      "degenerate": 0,
+      "reversed_skin": 498,
+      "nonmanifold_edges": 0,
+      "mesh_wall_s": 13.70148676802637,
+      "level_set_residual_mm": 1.2334882637509512
+    }
+  ],
+  "after": [
+    {
+      "frame": 0,
+      "reversed_skin": 8,
+      "minimum_triangle_area_m2": 9.456718321748762e-09,
+      "rest_max_displacement_mm": 1.806465807268593,
+      "world_max_displacement_mm": 1.8064658072685913,
+      "level_set_residual_mm": 0.4543642557997816
+    },
+    {
+      "frame": 80,
+      "reversed_skin": 8,
+      "minimum_triangle_area_m2": 9.456718321748762e-09,
+      "rest_max_displacement_mm": 1.806465807268593,
+      "world_max_displacement_mm": 1.828137657356194,
+      "level_set_residual_mm": 0.4543642557997816
+    },
+    {
+      "frame": 800,
+      "reversed_skin": 16,
+      "minimum_triangle_area_m2": 9.456718321748762e-09,
+      "rest_max_displacement_mm": 1.806465807268593,
+      "world_max_displacement_mm": 1.8337268234568735,
+      "level_set_residual_mm": 0.48995482400406887
+    }
+  ],
+  "schema_version": 1,
+  "source_record": "physics-002-banana",
+  "definition": "Reference triangle normal dot analytic level-set normal at its centroid; exclude recorded cut-cap vertices. The authored axial end caps are non-differentiable, so their remaining flags are not a smooth-flank diagnostic.",
+  "scope": "Selected visual probes at 0, 0.8 and 8 seconds; not a full physical validation or a scanned-food comparison.",
+  "physical_state_changes": 0,
+  "level_set_residual_definition": "Absolute authored level-set value in reference space; it is not a Euclidean point-to-surface distance.",
+  "source_artifacts": {
+    "states.npz": "eb8a544a562abdec6a02b72504448b9454c0331b6136d5771e48e86c21b296cc",
+    "trace.npz": "dec2d6a17844d79e209103b93f3e69ffde54489073eb104fd1d355e9ab4fba72"
+  },
+  "before_renderer_sha256": {
+    "cutting_showcase.py": "9c4f8af55447e7da828f7ee11d44c15416a757327138a2e9221fa82cc9d84977",
+    "cutting_surface.py": "dad190643a3d8d8650937911a163791f1e96fde202236c1386cedc401351995f",
+    "cutting_metrics.py": "1fda3e0d2f6dc6f8fece520b27e76b33ba0afe4bd9539cfa697e3aa92b65a5fc"
+  },
+  "after_renderer_sha256": {
+    "render_cutting_studio.py": "d9a79a5b06cfa01a4cbe96ef21ac590d83415117a2e4b3f1129d20b869f8349b",
+    "render_studio_replay.py": "c1ce08096b888fd903897805fdc0d5bbcba1544118fdc23da87944272bf798cf",
+    "cutting_surface.py": "0acd5229c736747058357db14d677d25ca79db3ca273d5d392d7e86cdbdbf6e3",
+    "cutting_showcase.py": "06c6f0053abbb8f7bc1c4328a423b66c0451612a5332e9763e5acda6eb6dbd79"
+  },
+  "final_followup": "The complete replay additionally snaps finite-difference cut-plane roundoff; exact rendered source hashes and commit are in studio-provenance.json. A later cache-key correction enables unchanged-topology reuse without changing mesh formulas."
+}

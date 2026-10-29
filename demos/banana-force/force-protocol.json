@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "protocol_id": "blademaster-banana-force-independent-v1",
+  "status": "frozen-before-acceptance-runs",
+  "paper": {
+    "url": "https://arxiv.org/html/2609.27342v2#S4.SS3",
+    "experiment": "single vertical cut through a banana",
+    "reported_force_channels": "total resistance includes material and rigid-support reactions",
+    "sampling": "pointwise mean over 20 simulations with different particle samplings at the same resolution",
+    "refinement": "one-quarter grid spacing and 64 times as many particles",
+    "specified_values": {
+      "young_modulus_pa": 400000.0,
+      "poisson_ratio": 0.45,
+      "density_kg_m3": 1100.0,
+      "yield_stress_pa": 30000.0,
+      "knife_mass_kg": 0.1,
+      "friction_coefficient": 0.2,
+      "cutting_energy_j_m2": 700.0,
+      "sharpness": 0.9
+    },
+    "unpublished_fields": [
+      "banana geometry and physical specimen dimensions",
+      "particle-sampling distribution and random seeds",
+      "base grid spacing and force-experiment timestep",
+      "normal response, tangential stiffness and damping scales",
+      "numerical end-effector trajectory and controller gains",
+      "raw robot and simulation force samples"
+    ]
+  },
+  "independent_choices": {
+    "geometry": {
+      "shape": "authored curved voxel banana; not a scan of the paper specimen",
+      "size_m": [0.12, 0.06, 0.03],
+      "base_grid_spacing_m": 0.0075,
+      "particles_per_grid_cell_axis": 2
+    },
+    "sampling": {
+      "method": "one equal-volume point per base particle voxel with deterministic uniform stratified jitter",
+      "jitter_fraction_of_particle_spacing": 0.35,
+      "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    },
+    "trajectory": {
+      "kind": "vertical PD target for a dynamic translation-only knife",
+      "duration_s": 0.5,
+      "time_s": [0.0, 0.05, 0.45, 0.5],
+      "edge_height_m": [0.04, 0.04, -0.002, -0.002],
+      "drive_stiffness_n_m": 2000.0,
+      "drive_damping_n_s_m": 28.0,
+      "drive_force_limit_n": 50.0
+    },
+    "contact": {
+      "normal_scale": 0.1,
+      "tangent_stiffness_scale": 0.05,
+      "tangent_damping_ratio": 0.1,
+      "base_timestep_s": 0.000125
+    },
+    "blade": {
+      "half_size_m": [0.0005, 0.04, 0.02],
+      "bevel_height_m": 0.005
+    },
+    "transfer": {
+      "pic_fraction": 0.05,
+      "flip_fraction": 0.95
+    }
+  },
+  "sensitivity": {
+    "sampling_seed": 0,
+    "timestep_s": [0.0000625, 0.000125, 0.00025],
+    "normal_scale": [0.05, 0.1, 0.2],
+    "vary_one_factor_at_a_time": true
+  },
+  "refinement": {
+    "factor_per_axis": 4,
+    "grid_spacing_m": 0.001875,
+    "timestep_s": 0.00003125,
+    "construction": "split every unjittered base particle voxel into 4 x 4 x 4 equal-volume children",
+    "required_particle_ratio": 64
+  },
+  "force_definition": {
+    "positive_axis": "+z, upward resistance on the knife",
+    "material_resistance_n": "material_reaction_n[:, 2]",
+    "rigid_support_resistance_n": "blade_board_impulse_ns[:, 2] / dt",
+    "total_resistance_n": "material_resistance_n + rigid_support_resistance_n",
+    "excluded_from_resistance": "drive_force_n; it is recorded as the actuation input"
+  },
+  "acceptance": {
+    "maximum_momentum_residual_ns": 1e-08,
+    "minimum_jacobian": 0.0,
+    "require_support_epoch": true,
+    "require_material_epoch_before_support": true,
+    "require_twenty_distinct_sampling_hashes": true,
+    "require_exact_refined_particle_ratio": 64,
+    "report_sensitivity_without_claiming_real_force_accuracy": true
+  },
+  "execution_budget": {
+    "memory_mib": 12288,
+    "swap_mib": 0,
+    "cpu_cores": 6,
+    "maximum_wall_s": {
+      "baseline": 900,
+      "sensitivity": 300,
+      "refined": 14400,
+      "all_cases_cumulative": 15600
+    },
+    "checkpoint_segment_wall_s": 3300,
+    "maximum_segments_per_case": 4,
+    "maximum_attempts_per_segment": 1
+  },
+  "execution_boundary": "This protocol can test numerical repeatability and refinement of the independent DexLab model. With no author trajectory, contact scales, specimen geometry or raw robot trace, it cannot establish an exact reproduction or real-banana accuracy."
+}

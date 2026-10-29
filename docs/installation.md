@@ -5,34 +5,56 @@
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run from the repository root:
 
 ```bash
-bash scripts/setup.sh
-bash demos/apple-stem-grasp/run.sh --backend mujoco
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 # Or:
-bash demos/apple-stem-grasp/run.sh --backend superdex
+bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
 ```
 
 The installer uses **official SuperDex 1.0.0 wheels from PyPI** and obtains Python 3.12 automatically. No Clang, CMake, Git checkout of SuperDex, or API key is required. The install script currently supports Linux x86_64. Although upstream provides other platform wheels, this Demo's native macOS and Windows execution has not been validated.
 
 Both commands open an interactive MuJoCo window after SDF creation, apple settling and grasp planning. The selected backend computes dynamics; MuJoCo renders both. Startup and simulation take time, even with a fast installation.
 
-Both run the [14-second SDF–SDF grasp](sdf-backends.md). The MuJoCo backend uses the official pinned `mujoco==3.11.0` wheel and generates its dynamics model locally; no engine patch or compiler is needed. These commands write to separate `runs/latest-superdex-sdf/` and `runs/latest-mujoco-sdf/` directories within the demo by default.
+Both run the [14-second SDF–SDF grasp](sdf-backends.md). The MuJoCo backend uses the official pinned `mujoco==3.11.0` wheel and generates its dynamics model locally; no engine patch or compiler is needed. These commands explicitly name separate output directories. They must be empty; existing records, including failures, cannot be reused. Without `--output`, each run gets `runs/<backend>-sdf-<unique ID>/`, printed as `Run output:`.
 
 On a server without a desktop:
 
 ```bash
-bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
+
+## Preserve an existing environment
+
+Both wheel and source installers target `historical-3.11.0`. Before package installation, native builds or asset downloads, they inspect Python 3.12, the actual interpreter location, installed pinned versions and the editable DexLab checkout. They reject a different profile, conflicting packages (including MuJoCo 3.16/3.17), a foreign editable checkout, or packages inherited/linked from another environment. They do not repair or downgrade that environment. The explicit `--mujoco-profile` option overrides `DEXLAB_MUJOCO_PROFILE`; otherwise the variable is honored, with the historical profile as the default.
+
+A compatible local `.venv` can be reused. Admission records this checkout and profile in `.venv/dexlab-environment.json`; this ownership record is **not** physics qualification. A new checkout needs its own environment. On refusal, preserve the original and use an unused path:
+
+```bash
+git clone https://github.com/huangkiki/Dexlab.git ../Dexlab-historical
+cd ../Dexlab-historical
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
+```
+
+Mounted storage is supported when the environment is dedicated to this checkout. From a checkout without `.venv`, create a **new** environment at an unused mounted path, then explicitly claim it:
+
+```bash
+uv venv --python 3.12 /path/on/mounted-data/dexlab-historical-venv
+ln -s /path/on/mounted-data/dexlab-historical-venv .venv
+bash scripts/setup.sh --mujoco-profile historical-3.11.0 --claim-environment
+```
+
+Claiming accepts a clean target or one whose compatible editable DexLab already belongs to this checkout; it cannot take over another owner's environment or bypass version checks. Later compatible runs need no claim flag. `bash scripts/setup.sh --help` inspects no environment and installs nothing. Latest-version qualification uses the [explicit test-runtime workflow](autoresearch.md#select-the-test-runtime-explicitly) in a separate environment, not this historical installer.
 
 ## Verification and video
 
 Each demo records 14 seconds of simulated motion. Dynamics run on the CPU and take longer than the simulated duration. Setup fetches the robot asset pack and apple albedo texture using the versioned [asset manifest](../demos/apple-stem-grasp/assets.json). Small task-specific apple meshes and parameters stay in Git.
 
 ```bash
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/latest-mujoco-sdf
-MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py demos/apple-stem-grasp/runs/latest-mujoco-sdf
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/first-mujoco
+MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-Replace `latest-mujoco-sdf` with `latest-superdex-sdf` for the other backend. Video export requires FFmpeg and working OpenGL / EGL drivers. To preserve a recording, pass `--output demos/apple-stem-grasp/runs/my-run` to `run.sh`.
+Replace `first-mujoco` with `first-superdex` for the other backend. Video export requires FFmpeg and working OpenGL / EGL drivers. For a second run, choose a new empty directory such as `--output demos/apple-stem-grasp/runs/second-mujoco` and use that path in the scoring and rendering commands. Compare reports with `diff -u <first-directory>/summary.json <second-directory>/summary.json` (exit 1 means differences).
 
 Both recorded runs pass the full three-second hold checks. See the [MuJoCo report](../demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json), [SuperDex report](../demos/apple-stem-grasp/evidence/sdf-superdex/summary.json), and [acceptance criteria](sdf-backends.md#verify-and-render).
 
@@ -58,7 +80,7 @@ This implementation uses UniLab registration and environment lifecycle with task
 For developers who need the original UniLab source baseline:
 
 ```bash
-bash scripts/setup.sh --source
+bash scripts/setup.sh --source --mujoco-profile historical-3.11.0
 SUPERDEX_ROOT="$PWD/vendor/project_superdex" bash demos/apple-stem-grasp/run.sh --backend superdex
 ```
 

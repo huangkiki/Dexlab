@@ -253,6 +253,6 @@ Continuous replay of native Genesis states, displayed by MuJoCo. In16 fixed case
 
 
 
-## Learn the engines: Sim Atlas
+## Learn the engines: Sim Learning
 
-The [Sim Atlas learning home](https://github.com/huangkiki/sim-atlas) organizes application and physics/source tracks for six engines, shared foundations and their course repositories. The [project tracker](https://github.com/users/huangkiki/projects/2) records actual development progress. Courses currently focus on engine mechanisms; later cases reuse DexLab versions, workloads and evidence. Course completion and experimental coverage are tracked separately.
+The [Sim Learning home](https://github.com/huangkiki/sim-learning) organizes application and physics/source tracks for six engines, shared foundations and their course repositories. The [project tracker](https://github.com/users/huangkiki/projects/2) records actual development progress. Courses currently focus on engine mechanisms; later cases reuse DexLab versions, workloads and evidence. Course completion and experimental coverage are tracked separately.

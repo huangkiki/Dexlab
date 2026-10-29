@@ -6,17 +6,55 @@ import numpy as np
 
 try:
     from dexlab.cutting import (
-        CutConfig, CuttingSimulation, assign_cut_sides, box_query, corotated_stress,
+        CutConfig, CuttingSimulation, assign_cut_sides, box_query, corotated_energy, corotated_stress,
         couple_grids, friction_impulse, material_step, particle_contacts, rigid_contacts,
+        von_mises_project,
     )
 except ModuleNotFoundError as error:
     if error.name not in ("numba", "scipy"):
         raise
     raise unittest.SkipTest("Install dexlab[cutting] to run cutting physics checks") from error
 from dexlab.cutting_score import grid_components
+from dexlab.cutting_geometry import material_points
 
 
 class CuttingInvariants(unittest.TestCase):
+    def test_guided_blade_contact_is_rotation_covariant(self):
+        from dexlab.cutting import blade_query, oriented_blade_query
+        rotation = np.array([[0., -1., 0.], [1., 0., 0.], [0., 0., 1.]])
+        center = np.array([.01, -.02, .06])
+        half = np.array([.00025, .0275, .02])
+        for bevel in (0., .005):
+            for local in ([-.001, .01, 0.], [.0001, -.03, -.019], [.00005, 0., -.018]):
+                point, normal, distance = blade_query(np.asarray(local), np.zeros(3), half, bevel)
+                actual = oriented_blade_query(center + rotation @ local, center, half, bevel, np.pi/2)
+                np.testing.assert_allclose(actual[0], center + rotation @ point, atol=1e-14)
+                np.testing.assert_allclose(actual[1], rotation @ normal, atol=1e-12)
+                self.assertAlmostEqual(actual[2], distance, places=13)
+
+    def test_crossed_labels_retain_first_cut_and_unassigned_base(self):
+        sim = CuttingSimulation(CutConfig(size=(.03, .03, .03), grid_spacing=.005))
+        blade = np.array([0., 0., .044])  # Edge at24mm, leaving a connected base.
+        half = np.array([.00025, .02, .02])
+        args = (sim.x, sim.velocity, sim.sides, blade, np.zeros(3), half, .005, .00025)
+        assign_cut_sides(*args)
+        first = sim.sides.copy()
+        assign_cut_sides(*args, cut_index=1, yaw=np.pi/2)
+        np.testing.assert_array_equal(sim.sides % 3, first)
+        top = sim.reference[:, 2] > .024
+        np.testing.assert_array_equal(sim.sides[top] // 3, np.where(sim.reference[top, 1] < 0, 1, 2))
+        self.assertFalse(sim.sides[sim.reference[:, 2] < .015].any())
+        self.assertEqual(len(grid_components(sim.nodes, sim.weights, sim.sides)[1]), 1)
+
+    def test_guide_cannot_rotate_inside_material(self):
+        sim = CuttingSimulation(CutConfig(size=(.015, .015, .015)))
+        sim.blade_x[2] = sim.half_size[2] + .01
+        before = sim.x.copy()
+        with self.assertRaisesRegex(ValueError, 'Withdraw'):
+            sim.step(np.array([0., 0., .01]), blade_yaw=np.pi/2)
+        np.testing.assert_array_equal(sim.x, before)
+        self.assertEqual(sim.blade_yaw, 0.)
+
     def test_multiple_cut_digits_preserve_earlier_discontinuities(self):
         from dexlab.cutting import codes_compatible
         from dexlab.cutting_score import histories_compatible
@@ -56,7 +94,8 @@ class CuttingInvariants(unittest.TestCase):
 
     def test_configuration_rejects_nonfinite_and_invalid_geometry(self):
         for kwargs in ({'dt': np.nan}, {'density': -1}, {'poisson_ratio': .5},
-                       {'sharpness': 1}, {'grid_spacing': .011}):
+                       {'sharpness': 1}, {'grid_spacing': .011}, {'yield_stress': -1},
+                       {'yield_stress': np.nan}):
             with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
                 CutConfig(**kwargs)
 
@@ -79,6 +118,41 @@ class CuttingInvariants(unittest.TestCase):
             np.testing.assert_allclose(corotated_stress(deformation, 2000., 3000.), 0, atol=1e-10)
         with self.assertRaises(ValueError):
             corotated_stress(np.diag([1., 1., -1.]), 2000., 3000.)
+
+    def test_von_mises_projection_has_elastic_and_plastic_loading_branches(self):
+        mu, yield_stress = 100_000., 30_000.
+        limit = yield_stress / (np.sqrt(6.) * mu)
+        elastic = np.diag(np.exp([.5 * limit, -.25 * limit, -.25 * limit]))
+        projected, increment = von_mises_project(elastic, mu, yield_stress)
+        np.testing.assert_allclose(projected, elastic, atol=1e-14)
+        self.assertEqual(increment, 0.)
+
+        plastic = np.diag(np.exp([2 * limit, -limit, -limit]))
+        projected, increment = von_mises_project(plastic, mu, yield_stress)
+        strain = np.log(np.linalg.svd(projected, compute_uv=False))
+        equivalent = np.sqrt(6.) * mu * np.linalg.norm(strain - strain.mean())
+        self.assertAlmostEqual(equivalent, yield_stress, places=8)
+        self.assertGreater(increment, 0.)
+        self.assertAlmostEqual(np.linalg.det(projected), np.linalg.det(plastic), places=13)
+
+    def test_von_mises_projection_is_objective_and_unloads_elastically(self):
+        mu, lam, yield_stress = 100_000., 400_000., 30_000.
+        trial = np.diag(np.exp([.3, -.15, -.15]))
+        projected, increment = von_mises_project(trial, mu, yield_stress)
+        self.assertGreater(increment, 0.)
+        self.assertLess(corotated_energy(projected, mu, lam), corotated_energy(trial, mu, lam))
+
+        angle = .7
+        rotation = np.array([[np.cos(angle), -np.sin(angle), 0.],
+                             [np.sin(angle), np.cos(angle), 0.], [0., 0., 1.]])
+        rotated, rotated_increment = von_mises_project(rotation @ trial, mu, yield_stress)
+        np.testing.assert_allclose(rotated, rotation @ projected, atol=1e-13)
+        self.assertAlmostEqual(rotated_increment, increment, places=14)
+
+        # F stores the projected elastic part. Removing that recoverable part
+        # leaves identity and zero stress; particle positions retain the
+        # permanent motion generated while the point yielded.
+        np.testing.assert_allclose(corotated_stress(np.eye(3), mu, lam), 0., atol=1e-14)
 
     def test_grid_exchange_conserves_momentum_and_shared_velocity(self):
         rng = np.random.default_rng(3)
@@ -157,6 +231,24 @@ class CuttingInvariants(unittest.TestCase):
         # A free blade's velocity changes by this actual reaction impulse.
         self.assertLess((reaction / .2)[0], 0)
 
+    def test_moving_knife_pushes_resting_material_only_in_contact(self):
+        half = np.array([.0005, .025, .02])
+        material = np.array([[-.001, 0., .02]])
+        for blade_x, touching in [(0., True), (.02, False)]:
+            damage = np.zeros(1)
+            impulse, reaction, _, board, _, _ = rigid_contacts(
+                material, np.zeros((1, 3)), np.array([blade_x, 0., .02]),
+                np.array([-.01, 0., 0.]), half, .001, .001,
+                .2, .0005, .1, .3, .2, .05, .1,
+                np.zeros((2, 1, 3)), damage, 1e-6, False)
+            np.testing.assert_allclose(impulse.sum(axis=0) + reaction, board, atol=1e-14)
+            np.testing.assert_array_equal(damage, 0.)
+            if touching:
+                self.assertLess(impulse[0, 0], 0.)
+                self.assertGreater(reaction[0], 0.)
+            else:
+                np.testing.assert_array_equal(impulse, 0.)
+
     def test_cut_faces_recontact_without_reconnecting(self):
         x = np.array([[-.0008, 0., 0.], [.0008, 0., 0.]])
         velocity = np.array([[.1, 0., 0.], [-.1, 0., 0.]])
@@ -174,6 +266,21 @@ class CuttingInvariants(unittest.TestCase):
         # Same reference neighbours in intact material receive continuum
         # stress, not a duplicate proxy contact force.
         np.testing.assert_array_equal(contact(np.array([0, 0]))[0], 0)
+
+    def test_simulation_keeps_pair_history_linear_in_candidate_count(self):
+        sim = CuttingSimulation(CutConfig(size=(.03, .015, .015), grid_spacing=.0075))
+        self.assertEqual(sim.pair_history.shape, (0, 3))
+        sim.step(np.array([0., 0., .04]), cutting=False)
+        self.assertEqual(sim.pair_history.shape, (len(sim.pair_keys), 3))
+        self.assertLess(len(sim.pair_history), len(sim.x) ** 2)
+
+    def test_explicit_reference_sampling_is_validated(self):
+        config = CutConfig(size=(.03, .015, .015), grid_spacing=.0075)
+        reference = material_points(config.size, config.grid_spacing)
+        sim = CuttingSimulation(config, reference + np.array([1e-5, 0., 0.]))
+        np.testing.assert_allclose(sim.reference, reference + np.array([1e-5, 0., 0.]))
+        with self.assertRaisesRegex(ValueError, 'reference grid'):
+            CuttingSimulation(config, reference + np.array([1., 0., 0.]))
 
     def test_beveled_blade_closest_point_and_normal(self):
         from dexlab.cutting import blade_query

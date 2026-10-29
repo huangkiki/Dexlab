@@ -212,7 +212,7 @@
         },
         {
           "path": "demos/apple-stem-grasp/README.md",
-          "sha256": "00b915284da013e48900a014432e6681f7a1706e2bd52cafca152f1fd221a881"
+          "sha256": "b5af67ffb66de2782ff89508b728a18e96556cd8407041fd689aa8f20b256fbc"
         },
         {
           "path": "docs/pinch-boundary-roadmap.md",
@@ -410,14 +410,54 @@
     "schema_version": 1,
     "catalogue": [
       {
+        "id": "banana-force",
+        "title": {
+          "zh": "香蕉单刀测力：20 次采样与 64× 粒子",
+          "en": "Banana single-cut force: 20 samplings and 64× particles"
+        },
+        "engines": "CPU TLMPM / independent paper-value protocol",
+        "link": "banana-force.html",
+        "question": {
+          "zh": "材料力是否对采样、步长、接触尺度和粒子细化稳定？",
+          "en": "Is material resistance stable across sampling, timestep, contact scale and particle refinement?"
+        },
+        "finding": {
+          "zh": "20 次基准记账合格；64× 在 0.5 s 内未接触砧板，RMSE 为 2.051，不能支持收敛或真实力精度。",
+          "en": "Twenty baseline runs qualify numerically; the 64× case misses support contact within 0.5 s and gives 2.051 RMSE, so convergence and real-force accuracy remain unsupported."
+        },
+        "thumbnail": "docs/evidence/cutting/banana-force/force-protocol.svg",
+        "site_thumbnail": "_static/cutting/banana-force/force-protocol.svg",
+        "thumbnail_sha256": "c3d76cf18f17ea8bee695366485b50ed199142a07db75fd580babee1f0b317d6"
+      },
+      {
+        "id": "cut-push",
+        "title": {
+          "zh": "最后一刀直接侧推：豆腐与香蕉",
+          "en": "Final cut directly into a side push: tofu and banana"
+        },
+        "engines": "CPU TLMPM / measured knife contact",
+        "link": "cut-push.html",
+        "question": {
+          "zh": "末块分离是否由可见刀面接触产生？",
+          "en": "Does visible blade-face contact drive the final piece apart?"
+        },
+        "finding": {
+          "zh": "豆腐三块、香蕉四块；最后一刀直接侧推，逐帧显示接触力与位移。豆腐增加牛顿黏性，并保留纯弹性、半步长及无侧推对照。",
+          "en": "Three tofu pieces and four banana pieces; the final cut transitions directly to a face push, displaying contact force and motion. Tofu adds Newtonian viscosity with retained elastic, half-step and no-push controls."
+        },
+        "thumbnail": "docs/evidence/cutting/tofu-cut-push/surface-poster.png",
+        "site_thumbnail": "_static/cutting/tofu-cut-push/surface-poster.png",
+        "thumbnail_sha256": "23b0b45045caeb1ca7c4258d7eee92f24fbb3bb6a6bd97070cc448faecd754f8"
+      },
+      {
         "id": "tofu-cut",
         "title": {
-          "zh": "豆腐状软块对半切",
-          "en": "Synthetic tofu halving"
+          "zh": "历史：豆腐状软块对半切",
+          "en": "Historical: Synthetic tofu halving"
         },
         "engines": "CPU TLMPM / BladeMaster v2 reference",
         "thumbnail": "docs/evidence/cutting/tofu/surface-poster.png",
-        "thumbnail_sha256": "d18668a7219a579343dc0263ca529e39f58ab3c47d134cda4ceb226c125d1a1d",
+        "thumbnail_sha256": "e2f053a4252f55a2a28c43836a729d39b0229ada5d64e5d168f733523b07d5bc",
         "site_thumbnail": "_static/cutting/tofu/surface-poster.png",
         "link": "cutting.html",
         "question": {
@@ -432,8 +472,8 @@
       {
         "id": "tofu-sequential-cut",
         "title": {
-          "zh": "豆腐连续两刀与三列对比",
-          "en": "Two tofu cuts: three-method view"
+          "zh": "历史：豆腐连续两刀与三列对比",
+          "en": "Historical: Two tofu cuts: three-method view"
         },
         "engines": "CPU TLMPM / author reference videos",
         "link": "cutting-comparison.html",
@@ -442,18 +482,38 @@
           "en": "Can the left piece move independently after two cuts?"
         },
         "finding": {
-          "zh": "5 mm 网格形成三等份；左块相对移动2.398 mm，动图显示切口、体积与位移。三列任务一致，原作完整参数尚未对齐。",
-          "en": "A 5 mm grid forms three equal pieces and 2.398 mm relative motion; GIFs show opening, volume and displacement. The task is matched; complete author configurations remain unmatched."
+          "zh": "两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。",
+          "en": "Two cuts form three pieces; native knife contact pushes the left piece, with measured force and displacement. Author clips use a final velocity input, so inputs differ."
         },
         "thumbnail": "docs/evidence/cutting/tofu-sequential/surface-poster.png",
-        "thumbnail_sha256": "cf9d8a286cdbb07c0d08ac720d873a4fccea954db5605c43aad02901e4df1fba",
+        "thumbnail_sha256": "909ecf6809c16faf23c633f4c2a9d111e284046f4bb9e0d2e75e75b7da2b3245",
         "site_thumbnail": "_static/cutting/tofu-sequential/surface-poster.png"
+      },
+      {
+        "id": "tofu-scoring",
+        "title": {
+          "zh": "豆腐交叉浅切",
+          "en": "Crossed shallow tofu cuts"
+        },
+        "engines": "CPU TLMPM / guided orthogonal scoring",
+        "thumbnail": "docs/evidence/cutting/tofu-scoring/surface-poster.png",
+        "site_thumbnail": "_static/cutting/tofu-scoring/surface-poster.png",
+        "link": "tofu-scoring.html",
+        "question": {
+          "zh": "划出交叉切口后，底部是否仍然连接？",
+          "en": "Does the lower bridge remain connected after crossing incisions?"
+        },
+        "finding": {
+          "zh": "默认与半步长均形成两条浅切，保持一个原生连通块；未切负例被拒绝。合成材料，非食材标定。",
+          "en": "Default and half-step cases form two shallow cuts while retaining one native component; the uncut control is rejected. Synthetic material, not food calibration."
+        },
+        "thumbnail_sha256": "a029509d2326ce8a778d73825788b43c4419dd307efa1227637ac210564975c7"
       },
       {
         "id": "banana-cut",
         "title": {
-          "zh": "香蕉连续三刀切片",
-          "en": "Three sequential banana cuts"
+          "zh": "历史：香蕉连续三刀切片",
+          "en": "Historical: Three sequential banana cuts"
         },
         "engines": "CPU TLMPM / persistent cut history",
         "link": "banana-cutting.html",
@@ -466,7 +526,7 @@
           "en": "Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration."
         },
         "thumbnail": "docs/evidence/cutting/banana/surface-poster.png",
-        "thumbnail_sha256": "5f1913482611db8e14dadd00c960625fc906d81ecb85aeb1557e0d25c78bb6f8",
+        "thumbnail_sha256": "6a625636097befc13dd2cd95681b45828679f827a06084a56ea08dc671185f4b",
         "site_thumbnail": "_static/cutting/banana/surface-poster.png"
       },
       {

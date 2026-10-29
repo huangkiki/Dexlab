@@ -1,0 +1,183 @@
+"""Analytical force/impulse fixtures distinguish retention from record integrity."""
+
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import tempfile
+import unittest
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location("wuji_contact_score", ROOT / "demos/wuji-contact/score.py")
+SCORE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(SCORE)
+
+
+class WujiContactScoreTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.path = Path(self.temp.name)
+        config = json.loads((ROOT / "demos/wuji-contact/protocol.json").read_text())
+        dt = .01
+        config["dt_s"] = dt
+        n = round(config["duration_s"] / dt)
+        raw = dict(time_s=np.arange(n)*dt, qpos_before=np.zeros((n,27)), qpos_after=np.zeros((n,27)),
+                   qvel_before=np.zeros((n,26)), qvel_after=np.zeros((n,26)),
+                   support_force=np.zeros((n,3)), object_contact_force=np.zeros((n,3)),
+                   external_wrenches=np.zeros((n,4,6)), qfrc_applied=np.zeros((n,26)),
+                   actuator_force=np.zeros((n,20)), requested_torque=np.zeros((n,20)),
+                   warnings=np.zeros((n,8)), max_penetration_m=np.zeros(n),
+                   solver_niter=np.ones((n,20)), solver_last_gradient=np.zeros(n), step_wall_s=np.zeros(n))
+        contacts, offsets = [], [0]
+        position, velocity = np.zeros(3), np.zeros(3)
+        mass, gravity = config["mass_kg"], np.array([0.,0.,-9.81])
+        for i,t in enumerate(raw["time_s"]):
+            raw["qpos_before"][i,20:23] = position
+            raw["qvel_before"][i,20:23] = velocity
+            if t < 3.6:
+                for geom, frame in [(1,np.eye(3)), (2,np.diag([-1.,1.,-1.]))]:
+                    force = np.array([1. if geom==1 else -1.,0.,-mass*gravity[2]/2])
+                    local = np.r_[frame @ force, np.zeros(3)]
+                    contacts.append(np.r_[geom,3,geom,np.zeros(3),frame.reshape(-1),0.,local])
+                raw["object_contact_force"][i] = -mass*gravity
+            else:
+                velocity = velocity + dt*gravity
+            position = position + dt*velocity
+            raw["qpos_after"][i,20:23] = position
+            raw["qvel_after"][i,20:23] = velocity
+            offsets.append(len(contacts))
+        raw["contacts"],raw["contact_offsets"] = np.array(contacts),np.array(offsets)
+        self.raw=raw
+        self.manifest=dict(state="recorded",case="hold-release",config=config,
+                           effective=dict(timestep=dt,object_geom_id=3,object_body_id=3,
+                                          body_names=["world","r_index_finger_pad","r_thumb_pad","object"],
+                                          object_mass=mass,gravity=gravity.tolist(),eq_count=0,
+                                          actuator_force_limits=[1.]*20))
+
+    def save(self):
+        np.savez(self.path/"observations.npz",**self.raw)
+        self.manifest["observations_sha256"]=hashlib.sha256((self.path/"observations.npz").read_bytes()).hexdigest()
+        (self.path/"manifest.json").write_text(json.dumps(self.manifest))
+
+    def test_supported_then_ballistic_release(self):
+        self.save(); report=SCORE.evaluate(self.path)
+        self.assertTrue(report["qualification_pass"])
+        self.assertTrue(report["numerical_balance_pass"])
+
+    def test_false_contact_force_cannot_pass_balance(self):
+        self.raw["contacts"][:,18]*=.5
+        # Keep the redundant total consistent, so the independent m*dv check is exercised.
+        self.raw["object_contact_force"][:360,2]*=.5
+        self.save();report=SCORE.evaluate(self.path)
+        self.assertFalse(report["numerical_balance_pass"])
+        self.assertFalse(report["hold_pass"])
+
+    def test_hidden_support_rejects_qualification(self):
+        self.raw["external_wrenches"][200,3,2]=.1
+        self.save();self.assertFalse(SCORE.evaluate(self.path)["record_integrity_pass"])
+
+    def test_state_injection_rejected(self):
+        self.raw["qpos_before"][200,20]+=.01
+        self.save()
+        with self.assertRaisesRegex(ValueError,"discontinuity"):
+            SCORE.evaluate(self.path)
+
+    def test_dropped_contacts_rejected(self):
+        self.raw["contact_offsets"][-1]-=1
+        self.save()
+        with self.assertRaisesRegex(ValueError,"contact record"):
+            SCORE.evaluate(self.path)
+
+    def test_no_release_is_not_qualification(self):
+        # A valid held trajectory can satisfy holding without active release.
+        self.raw["qpos_before"][:]=0;self.raw["qpos_after"][:]=0
+        self.raw["qvel_before"][:]=0;self.raw["qvel_after"][:]=0
+        self.save();report=SCORE.evaluate(self.path)
+        self.assertFalse(report["release_pass"])
+        self.assertFalse(report["qualification_pass"])
+
+    def test_raw_hash_change_rejected(self):
+        self.save()
+        with (self.path/"observations.npz").open("ab") as stream:stream.write(b"changed")
+        with self.assertRaisesRegex(ValueError,"hash mismatch"):
+            SCORE.evaluate(self.path)
+
+    def test_ballistic_drop_without_grasp_is_not_active_release(self):
+        dt = self.manifest["effective"]["timestep"]
+        n = len(self.raw["time_s"])
+        self.raw["contacts"] = np.empty((0,22))
+        self.raw["contact_offsets"][:] = 0
+        self.raw["object_contact_force"][:] = 0
+        for i in range(n):
+            self.raw["qvel_before"][i,22] = -9.81*i*dt
+            self.raw["qvel_after"][i,22] = -9.81*(i+1)*dt
+            self.raw["qpos_before"][i,22] = -9.81*dt**2*i*(i+1)/2
+            self.raw["qpos_after"][i,22] = -9.81*dt**2*(i+1)*(i+2)/2
+        self.save();report=SCORE.evaluate(self.path)
+        self.assertTrue(report["numerical_balance_pass"])
+        self.assertTrue(report["metrics"]["release_conditions_met"])
+        self.assertFalse(report["hold_pass"])
+        self.assertFalse(report["release_pass"])
+
+    def test_opposing_tail_contacts_do_not_count_as_release(self):
+        # Zero net force still permits a falling sphere to touch both pads.
+        # Active release requires each contact force to clear the threshold.
+        contacts, offsets = [], [0]
+        for i, time_s in enumerate(self.raw["time_s"]):
+            start, end = self.raw["contact_offsets"][i:i + 2]
+            contacts.extend(self.raw["contacts"][start:end])
+            if time_s >= 3.6:
+                for geom, frame in ((1, np.eye(3)), (2, np.diag([-1., 1., -1.]))):
+                    contacts.append(np.r_[geom, 3, geom,
+                                          self.raw["qpos_before"][i, 20:23],
+                                          frame.reshape(-1), 0., [1., 0., 0., 0., 0., 0.]])
+            offsets.append(len(contacts))
+        self.raw["contacts"] = np.array(contacts)
+        self.raw["contact_offsets"] = np.array(offsets)
+        self.save()
+        report = SCORE.evaluate(self.path)
+        self.assertTrue(report["record_integrity_pass"])
+        self.assertTrue(report["numerical_balance_pass"])
+        self.assertTrue(report["hold_pass"])
+        self.assertGreater(report["metrics"]["release_drop_m"], .05)
+        self.assertFalse(report["metrics"]["release_no_contact"])
+        self.assertFalse(report["release_pass"])
+
+    def test_torsional_impulse_and_missing_moment(self):
+        self.manifest["config"]["angular_impulse_error_nms"] = 1e-8
+        inertia = 8e-7
+        self.manifest["effective"]["object_inertia"] = [inertia] * 3
+        dt = self.manifest["effective"]["timestep"]
+        angle = omega = 0.
+        for i in range(len(self.raw["time_s"])):
+            start, end = self.raw["contact_offsets"][i:i+2]
+            torque = 1e-5 if end > start else 0.
+            if torque:
+                self.raw["contacts"][start, 21] = torque
+            self.raw["qpos_before"][i, 23:27] = [np.cos(angle/2), 0, 0, np.sin(angle/2)]
+            self.raw["qvel_before"][i, 25] = omega
+            omega += dt * torque / inertia
+            angle += dt * omega
+            self.raw["qpos_after"][i, 23:27] = [np.cos(angle/2), 0, 0, np.sin(angle/2)]
+            self.raw["qvel_after"][i, 25] = omega
+        self.save()
+        self.assertTrue(SCORE.evaluate(self.path)["numerical_balance_pass"])
+        # Linear balance still holds, but dropping the moment must reject v4.
+        self.raw["contacts"][:, 21] = 0
+        self.save()
+        report = SCORE.evaluate(self.path)
+        self.assertFalse(report["numerical_balance_pass"])
+        self.assertFalse(report["qualification_pass"])
+
+    def test_local_angular_velocity_is_rotated_to_world(self):
+        qpos, qvel = np.zeros((1, 27)), np.zeros((1, 26))
+        qpos[0, 23:27] = [np.sqrt(.5), 0, np.sqrt(.5), 0]
+        qvel[0, 25] = 2.
+        np.testing.assert_allclose(SCORE.world_angular_velocity(qpos, qvel), [[2., 0, 0]], atol=1e-14)
+
+
+if __name__ == "__main__":
+    unittest.main()

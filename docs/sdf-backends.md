@@ -55,6 +55,8 @@ Omit `--headless` to open the interactive viewer. Each episode records 14 second
 
 The MuJoCo route uses SuperDex to read the original robot assets and compute the initial kinematic motion prior and settled planning pose, then runs all episode dynamics through MuJoCo `mj_step`. It does not replay the SuperDex object's poses. MuJoCo aligns its wrist path once to its own settled apple position using isolated FK. Both controllers intentionally receive known object poses. No Astra vision policy is involved.
 
+Explicit output directories must be empty. Choose a new directory for each rerun; successful, failed and interrupted records are preserved. Without `--output`, a separate directory is created automatically; use the printed `Run output:` path for later checks.
+
 ## Verify and render
 
 For either run directory:

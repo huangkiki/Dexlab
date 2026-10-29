@@ -96,6 +96,16 @@ class MuJoCoCompatibilityProfileTests(unittest.TestCase):
                 mujoco_profile_identity({'version': installed}, native,
                                         profile='qualification-3.16.0')
 
+    def test_317_candidate_still_requires_explicit_profile_and_native_match(self):
+        identity = {'version': '3.17.0'}
+        with patch.dict('os.environ', {}, clear=True), self.assertRaises(ValueError):
+            mujoco_profile_identity(identity, '3.17.0')
+        result = mujoco_profile_identity(identity, '3.17.0', profile='qualification-3.17.0')
+        self.assertFalse(result['formal_batch_qualified'])
+        self.assertEqual(result['profile_status'], 'candidate')
+        with self.assertRaises(ValueError):
+            mujoco_profile_identity(identity, '3.16.0', profile='qualification-3.17.0')
+
 
 class RuntimeQualificationTests(unittest.TestCase):
     def setUp(self):

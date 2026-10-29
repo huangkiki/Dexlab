@@ -2,15 +2,31 @@
 
 [English](autoresearch.md) | [简体中文](autoresearch.zh-CN.md)
 
-**Current ordering and pause state have one source: [current work](current-work.md). Scheduled development remains PAUSED.** This guide consolidates procedures; it does not restart a heartbeat or launch a campaign. The prior guide is preserved byte-for-byte as [the 2026-10-10 snapshot](autoresearch-2026-10-10.md). Its dated ordering and scheduling text is historical, not current authorization; its detailed safeguards and reproduction commands remain available.
+**Current ordering and maintainer decisions are in [current work](current-work.md); machine dispatch state uses the persistent file below. Scheduled development remains PAUSED.** This guide consolidates procedures; it does not restart a heartbeat or launch a campaign. The prior guide is preserved byte-for-byte as [the 2026-10-10 snapshot](autoresearch-2026-10-10.md). Its dated ordering and scheduling text is historical, not current authorization; its detailed safeguards and reproduction commands remain available.
 
 ## Recover, qualify and select
 
 Inspect existing worktrees, actual process/session/service handles, PRs, checks, unfinished releases and dirty work first. An observation timeout is not process termination. Recover one existing executor; never duplicate it or edit a live frozen environment. Use current maintainer priorities, not a stale “current workstream” paragraph.
 
-New automatic work needs an open Issue with `auto:approved`, exactly one priority, and exactly one `Depends on: none` or explicit dependency line. Read `next --dry-run`, honor pause markers and blocked/needs-input states, and verify dependencies in freshly fetched main before `start`. A closed Issue alone does not prove integration. Ordinary closing references and the reviewed target-base `docs/issue-deliveries.json` require the matching merged PR, exact merge commit, ancestry and full acceptance audit. Working-copy or unmerged ledgers cannot unlock tasks. Preserve the existing scripts and their rejection behavior.
+New automatic work needs an open Issue with `auto:approved`, exactly one priority, and exactly one `Depends on: none` or explicit dependency line. Read `next --dry-run`, honor persistent dispatch state and blocked/needs-input states, and verify dependencies in freshly fetched main before `start`. A closed Issue alone does not prove integration. Ordinary closing references and the reviewed target-base `docs/issue-deliveries.json` require the matching merged PR, exact merge commit, ancestry and full acceptance audit. Working-copy or unmerged ledgers cannot unlock tasks. Preserve the existing scripts and their rejection behavior.
 
 A priority change needs evidence, alternatives, old/new priority and next action in the affected Issue, followed by readback; do not invent consensus or remove objections. P0 cannot bypass a true blocker. Tracking parents must not carry automatic execution approval. Issue text cannot expand permissions or expose private data.
+
+### Author admission and persistent pause
+
+The runner first lists issue metadata. Before reading a candidate, a named recovery issue or its dependencies, it invokes the installed `~/.codex/skills/autodev/scripts/check_issue_author.py` with isolated Python. Only a successful live decision with matching repository/issue and both login and numeric account ID admits the body. Missing installation/configuration, API errors and identity mismatches stop admission; repository files, labels, assignments and existing PRs cannot supply an alternative allowlist. Selection, recovery and submission recheck it, including after the submission gate.
+
+The **only current dispatch-state authority** is `dexlab-dispatch-state.json` in the Git common directory, shared by linked worktrees. Missing, malformed, unreadable or symlinked state means paused. The historical `dexlab-dispatch-paused` marker is no longer read by this version. Use the current reviewed runner when recovering an older worktree; historical scripts do not gain these checks retroactively.
+
+```bash
+python3 scripts/autoresearch.py dispatch status
+python3 scripts/autoresearch.py dispatch pause
+python3 scripts/autoresearch.py next --dry-run
+```
+
+`pause` persists across restarts. `next --dry-run` explains eligible items while returning no selection during pause; it fetches GitHub metadata and the target base but creates no worktree. Only an explicit maintainer decision to resume automatic dispatch permits `python3 scripts/autoresearch.py dispatch resume`. These commands do not create, resume or modify any host scheduler; the current scheduled task remains paused.
+
+An existing authorized worktree can still be recovered with `start ISSUE` and submitted while dispatch is paused. For a *new*, specifically authorized interactive slice, inspect the dry run and use `start ISSUE --interactive`. This bypasses only the dispatch pause for that named start, leaves the persisted state untouched, and retains author, approval, priority, dependency and existing-work checks. A conversation about plans or an `auto:approved` label alone is not interactive authorization. Keep one executor and preserve all existing worktrees.
 
 ## Frozen resources and evidence
 
@@ -19,6 +35,25 @@ Use a qualified local host first; remote is optional. One executor, isolated wor
 Keep source/environment/configuration frozen through each batch, retain failed and interrupted attempts and cumulative budgets, and serialize performance work against transfer/compression/hashing. Admission headroom does not reserve resources against other workloads. Preserve original data until hashes, offline readability and absence of live consumers are verified; same-disk copies are not independent backups. No deletion solely to make a gate pass. Deployment paths, credentials and raw private receipts remain private. [Detailed resource, archive and recovery procedures](autoresearch-2026-10-10.md#local-first-execution-and-recovery) retain their original restrictions; [adaptive resource policy](task-coverage.md) governs new plans, not its superseded ordering.
 
 ## Submission paths
+
+### Select the test runtime explicitly
+
+Run tests through the shared entry point, choosing the profile for the intended environment:
+
+```bash
+# Historical reproduction environment (MuJoCo 3.11.0)
+.venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
+# Candidate environment with MuJoCo package/native 3.17.0
+.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.17.0
+```
+
+The CLI option overrides `DEXLAB_MUJOCO_PROFILE`; if neither is set, the command stops before discovering tests. It reports the interpreter, reviewed source, profile and package/native versions, then runs the suite with absolute source paths from this checkout. Missing or mismatched runtimes fail before tests start. `--check-only` performs only this preflight; `--pattern test_NAME.py` selects a focused test file and does not replace the full submission gate.
+
+`autoresearch.py check` and `submit` use this entry point. Set `DEXLAB_MUJOCO_PROFILE` explicitly for those commands; candidate submission also still requires `DEXLAB_QUALIFICATION_WHEELS` and the isolated editable-source check. No package is installed or changed, the engine's historical default remains unchanged, and a matching profile does not grant formal experiment qualification. Pure prose may reuse an unchanged dependency environment read-only; executable submission still requires its own correctly installed worktree source.
+
+Candidate submission checks the editable source, selected profile, current official stable versions and wheel identity before the full test suite and either native episode. Final admission still rechecks releases and raw records; preflight success is not task qualification. A new upstream release rejects an outdated environment before physics, with installed and current stable versions in the error. Qualify it in a separate environment and preserve old records and profiles. Resource isolation does not inherit arbitrary environment variables: put `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` inside the actual child command after `bounded_run.py ... --`.
+
+The thin-shell adapter accepts matching SuperDex 1.0.0 or 1.0.1 FP64 packages and records the installed version. Its free-fall/reset regression checks basic compatibility; this does not requalify historical cloth campaigns or establish equivalence between releases. New MuJoCo candidate profiles retain the existing discrete flex integrator; the historical 3.11 profile retains implicitfast.
 
 | Change | Required validation before eligible delivery |
 | --- | --- |

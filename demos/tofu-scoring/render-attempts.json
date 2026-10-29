@@ -1,0 +1,202 @@
+{
+  "scope": "Rendering/diagnostics through verified site build; archive and repository-gate resources are separate.",
+  "attempts": [
+    {
+      "name": "diagnostic-001-tests",
+      "state": "exited",
+      "worker_wall_s": 15.965190889000041,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "bba9d7c8dab7bcc58c3af3833e3a3fa2eb48005d62d090b5759135ece0202e80",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "45d57fb94288ad5b0091da7c93275ceea4f92073e7acdfbdb636627ecd0508ed"
+      }
+    },
+    {
+      "name": "render-002-preview",
+      "state": "exited",
+      "worker_wall_s": 11.856556041000204,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "bba9d7c8dab7bcc58c3af3833e3a3fa2eb48005d62d090b5759135ece0202e80",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "44317b9ea3b6aa8a332c61b3cf8d1d97e7af726efa6370e927cac4ff0a13c50d"
+      }
+    },
+    {
+      "name": "render-003-preview",
+      "state": "exited",
+      "worker_wall_s": 0.6244400400000814,
+      "returncode": 2,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "bba9d7c8dab7bcc58c3af3833e3a3fa2eb48005d62d090b5759135ece0202e80",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "7b6620d146d98edbc69cad3c49f106101e70328fc3d0ab80104a1339d36cb326"
+      }
+    },
+    {
+      "name": "render-004-preview",
+      "state": "exited",
+      "worker_wall_s": 5.966905238999971,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "b47936a025654e083a6050b1232c6a4eee7c53f08e615f649421d1e4e5234151"
+      }
+    },
+    {
+      "name": "render-005-lighting-preview",
+      "state": "exited",
+      "worker_wall_s": 4.191192190000038,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "11bb08f1e6649454961c84100c691f40f2e9d885fb1154b3b952c30b9902ba88"
+      }
+    },
+    {
+      "name": "render-006-surface-diagnostic",
+      "state": "exited",
+      "worker_wall_s": 2.580977119000181,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "11bb08f1e6649454961c84100c691f40f2e9d885fb1154b3b952c30b9902ba88"
+      }
+    },
+    {
+      "name": "render-007-antialias-preview",
+      "state": "exited",
+      "worker_wall_s": 3.3560695669998495,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "a012cbb93b4b33e1a48b51b5a5bf9aae4c8943202a6e1b260c564c5f8eea5a35"
+      }
+    },
+    {
+      "name": "render-008-final",
+      "state": "exited",
+      "worker_wall_s": 30.84445529100003,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "d3f85eb8acfb288e35307049c95be4e6d9dcd8781b12a7346b42d27e57355391"
+      }
+    },
+    {
+      "name": "render-009-final",
+      "state": "exited",
+      "worker_wall_s": 30.249226604999876,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "935ff1422d13d1ca7a5e7f51511faa27c840ee0b245dfcbd70a19affc9a843a7"
+      }
+    },
+    {
+      "name": "render-010-final",
+      "state": "exited",
+      "worker_wall_s": 30.024981986000057,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "87711147255a4e25867e7af6bd515a2a70e1eacda2ad6698f8243a1cd8b4b252"
+      }
+    },
+    {
+      "name": "export-011-verified",
+      "state": "exited",
+      "worker_wall_s": 34.778686202000245,
+      "returncode": 1,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "87711147255a4e25867e7af6bd515a2a70e1eacda2ad6698f8243a1cd8b4b252"
+      }
+    },
+    {
+      "name": "site-012-verified",
+      "state": "exited",
+      "worker_wall_s": 3.667568772999857,
+      "returncode": 0,
+      "source_sha256": {
+        "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+        "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+        "cutting_replay.py": "00979069c6c6b8458ae9c64aa53081c23d28267b3ea1ebae14281537f078ded3",
+        "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+        "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa",
+        "cutting_metrics.py": "1af1284a09e72c9e0df166e386f790357dcbad0c7f56a6042e438a2ad42423cc",
+        "cutting_surface.py": "a3567bb1312aabb110b2b6728fae04ea9e5d18cebf02bcada67dd4fddc27e9e5",
+        "cutting_showcase.py": "87711147255a4e25867e7af6bd515a2a70e1eacda2ad6698f8243a1cd8b4b252"
+      }
+    }
+  ],
+  "cumulative_worker_s": 174.10624994200043,
+  "retained_failures": {
+    "render-003-preview": "Private helper invoked with an invalid relative path; no rendering ran. Corrected to absolute path in004.",
+    "export-011-verified": "All4native records and186media frames verified; strict docs build rejected a wrong English reproduction anchor. Fixed anchor and rebuilt in012."
+  }
+}

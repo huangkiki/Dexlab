@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "bundle_id": "rss-wiping-evidence-v1",
+  "manifest_sha256": "31492df894c143b56db72a6075214d0e6eeca9cd75939e2dc6ecf7092dd852b5",
+  "python": "3.12.12",
+  "numpy": "2.5.2",
+  "records": {
+    "controlled-original-01": {
+      "schema_version": 2,
+      "mode": "original",
+      "measured": {
+        "final_cleaned_fraction": 0.9547325102880658,
+        "peak_bar_force_n": 4.910084774110819,
+        "peak_pressure_pa": 84200.6899151787,
+        "sponge_return_xy_error_m": 4.551512662896647e-05,
+        "sponge_return_min_z_error_m": 2.384185791015625e-07
+      },
+      "record_integrity_pass": true,
+      "record_failures": [],
+      "task_outcomes": {
+        "routine_finished": true,
+        "finite": true,
+        "cleaned_at_least_90_percent": true,
+        "bar_force_over_1_n": true,
+        "bar_pressure_over_5_kpa": true,
+        "sponge_return_xy_under_20_mm": true,
+        "sponge_return_height_within_3_mm": true,
+        "arms_home_within_6_mm": true
+      },
+      "task_pass": true,
+      "max_hold_patch_centroid_slip_m": 6.063108127112975e-05,
+      "max_hold_patch_node_displacement_m": 0.0007644381148748868,
+      "holding_under_10_mm": true,
+      "actual_max_pin_count": 1,
+      "video_recorded": true,
+      "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+    },
+    "controlled-no-latch-01": {
+      "schema_version": 2,
+      "mode": "no-latch",
+      "measured": {
+        "final_cleaned_fraction": 0.3991769547325103,
+        "peak_bar_force_n": 11.885741578578592,
+        "peak_pressure_pa": 114416.77444866525,
+        "sponge_return_xy_error_m": 0.43580597654233866,
+        "sponge_return_min_z_error_m": 5.364418029785156e-07
+      },
+      "record_integrity_pass": true,
+      "record_failures": [],
+      "task_outcomes": {
+        "routine_finished": true,
+        "finite": true,
+        "cleaned_at_least_90_percent": false,
+        "bar_force_over_1_n": true,
+        "bar_pressure_over_5_kpa": true,
+        "sponge_return_xy_under_20_mm": false,
+        "sponge_return_height_within_3_mm": true,
+        "arms_home_within_6_mm": true
+      },
+      "task_pass": false,
+      "max_hold_patch_centroid_slip_m": 0.44998105057013593,
+      "max_hold_patch_node_displacement_m": 0.47930452824054376,
+      "holding_under_10_mm": false,
+      "actual_max_pin_count": 0,
+      "video_recorded": true,
+      "scope": "Saved-state consistency and upstream task thresholds. Not material validation or a substitute for the unchanged upstream test."
+    }
+  },
+  "wall_s": 7.093504522927105,
+  "scope": "One existing paired cohort, saved-state checks and raw-state curves. Task failure is retained. No physics execution, hardware validation or solver attribution."
+}

@@ -18,6 +18,7 @@ def issue(number, state="OPEN", labels=("auto:approved", "priority:P1"),
           dependencies="none", created_at=None):
     return {
         "number": number,
+        "author_admission": {"allowed": True, "author": "huangkiki", "author_id": 45757984},
         "state": state,
         "labels": [{"name": label} for label in labels],
         "body": f"Depends on: {dependencies}\n",
@@ -622,6 +623,11 @@ class ResourceGateTests(unittest.TestCase):
                 result = module.check(root)
             self.assertTrue(all(Path(path).parent == output for path in result["outputs"].values()))
             self.assertTrue(any(call.args[0] == python for call in runner.call_args_list))
+            commands = [call.args for call in runner.call_args_list]
+            self.assertIn((python, "scripts/run_tests.py"), commands)
+            first_episode = next(i for i, command in enumerate(commands)
+                                 if "demos/apple-stem-grasp/run.sh" in command)
+            self.assertLess(commands.index((python, "scripts/run_tests.py")), first_episode)
 
     def test_each_gate_preserves_old_outputs_and_measures_episode_and_verifier(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -654,3 +660,27 @@ class ResourceGateTests(unittest.TestCase):
                 self.assertEqual(runner.call_args.args[1:3], ("-m", "dexlab.apple_admission"))
                 self.assertIn(result["outputs"]["mujoco"], runner.call_args.args)
                 self.assertIn(result["admission"], runner.call_args.args)
+                commands = [call.args for call in runner.call_args_list]
+                preflight = next(i for i, cmd in enumerate(commands) if '--preflight' in cmd)
+                units = next(i for i, cmd in enumerate(commands)
+                             if 'scripts/run_tests.py' in cmd and '--check-only' not in cmd)
+                self.assertLess(preflight, units)
+                self.assertNotIn('--preflight', runner.call_args.args)
+
+    def test_failed_runtime_preflight_stops_before_unit_suite_and_native_episodes(self):
+        commands = []
+        def run(*command, **kwargs):
+            commands.append(command)
+            if '--preflight' in command:
+                raise subprocess.CalledProcessError(1, command)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.dict('os.environ', {
+                    'DEXLAB_MUJOCO_PROFILE': 'qualification-3.17.0',
+                    'DEXLAB_QUALIFICATION_WHEELS': str(root / 'wheels')}, clear=True), \
+                 patch.object(module, 'run', side_effect=run):
+                with self.assertRaises(subprocess.CalledProcessError):
+                    module.check(root)
+        self.assertFalse(any('demos/apple-stem-grasp/run.sh' in cmd for cmd in commands))
+        self.assertFalse(any('scripts/run_tests.py' in cmd and '--check-only' not in cmd
+                             for cmd in commands))

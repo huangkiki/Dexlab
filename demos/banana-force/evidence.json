@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment": "independent BladeMaster-style single vertical banana cut",
+  "qualified": false,
+  "execution_complete": true,
+  "baseline_and_sensitivity_passed": true,
+  "refined_acceptance": {
+    "passed": false,
+    "failed_checks": [
+      "support_epoch_observed"
+    ],
+    "interpretation": "The frozen 64x case did not reach rigid-support contact within 0.5 s. Its material response is retained as a negative result; it does not establish refinement convergence."
+  },
+  "qualification_scope": "Numerical integrity, 20-sampling dispersion, one-factor sensitivity and a completed 64x-particle refinement of the frozen DexLab model. The refined case is a retained negative acceptance result. No raw robot-force agreement or author-code equivalence claim.",
+  "paper_reference": "https://arxiv.org/html/2609.27342v2#S4.SS3",
+  "protocol_sha256": "fcd18153f4c73be5a70b4520225ad3e505d24f58d78815f010fddc554d38a605",
+  "source_git_head": "3be006ebefb3f9277e5daffa147d30b5d2218ec3",
+  "source_sha256": {
+    "src/dexlab/banana_force.py": "211749e6b2308015a90ee62c4d64679cf1b718e64ba230b9bb86700c40b0de3c",
+    "src/dexlab/banana_force_score.py": "d74a48a0f4472c0e452591375819469a9ed3eded1c20e197e277ea0baafbeed6",
+    "src/dexlab/cutting.py": "df1fa57226783d7e414fa66e9a81accf929ec2c83e4963e824637911aae0c7e1",
+    "src/dexlab/cutting_geometry.py": "8bd675ce801dd07d53800a60216db2dce6695e7e100b0caf421bd96e37be2846",
+    "src/dexlab/tofu_cut.py": "d04f60183802d97540ab8abec3fa0ec7f6a3e9956d7a057a2cc2f8776e9e3f85"
+  },
+  "sampling": {
+    "runs": 20,
+    "distinct_particle_sampling_hashes": 20,
+    "individual_material_peak_mean_n": 0.8468567175301731,
+    "individual_material_peak_standard_deviation_n": 0.1511226972629517,
+    "pointwise_mean_pre_support_peak_n": 0.6661091628273764,
+    "maximum_pointwise_standard_deviation_pre_support_n": 0.2766644650219605,
+    "material_impulse_mean_ns": 0.07340610513692652,
+    "material_impulse_standard_deviation_ns": 0.012487634375658564
+  },
+  "refinement": {
+    "particle_ratio": 64.0,
+    "particle_count": 47488,
+    "timestep_s": 3.125e-05,
+    "pre_support_material_peak_n": 4.305912913961726,
+    "material_impulse_ns_before_support": 0.6018314189585247,
+    "first_support_time_s": null,
+    "vs_twenty_sampling_mean_pre_support_normalized_rmse": 2.050541761469466
+  },
+  "sensitivity_vs_seed_0_pre_support_normalized_rmse": {
+    "sensitivity-dt-6.25e-05": 0.6205068565529703,
+    "sensitivity-dt-0.00025": 0.21886031896188898,
+    "sensitivity-normal-0.05": 0.1527213147122664,
+    "sensitivity-normal-0.2": 0.3865994097718674
+  },
+  "force_channels": {
+    "resistance_total": "material resistance + rigid-support resistance",
+    "actuator": "recorded separately and excluded from resistance"
+  },
+  "source_frozen_unpublished_controls": {
+    "paper_specified_cut_band_half_width": "6 * reference_grid_spacing",
+    "particle_contact_radius_scale_s_r": 1.0,
+    "cut_band_rear_extent": "2 * reference_grid_spacing",
+    "cut_band_lead_extent": "2 * particle_radius",
+    "minimum_cut_advance_speed_m_s": 0.0,
+    "intact_reference_neighbor_exclusion_distance": "2 * reference_grid_spacing",
+    "qualification_boundary": "The first field matches the paper. The other values were frozen in the exact hashed source before execution because the paper does not publish them; this experiment does not vary them independently."
+  },
+  "numerical_integrity": {
+    "maximum_momentum_residual_ns": 4.660258785176701e-17,
+    "minimum_jacobian": 0.9046188464042468
+  },
+  "inputs": {
+    "baseline_summary_sha256": "468cd858261146ddcfee71ef449078da6e09390a7872bb296c576d3511f54a35",
+    "sensitivity_summary_sha256": "ae1144eb2dc1369afa69f74e090e96ce831bfe158afeccb55bf0076d2dc81d7c",
+    "refined_summary_sha256": "ed1f72ee1d05921ef39a18c9b4ba7c6e9acc504ebc4b17534a98f52f6d79def1",
+    "bounded_receipt_sha256": [
+      "dd13d4c6b1cc0fa276b18ad806bf31e92ad6e68352d5750893d55055939c64e2",
+      "92910a570f0113b8e91282aa45f57d4ec27e1bae42bd41dcda709f28b8d70eb0",
+      "0aaed21f1338c85041655f436e7d587c67401e954408603bf0e315e6d377fc5c",
+      "400efa2b9efc39fd22739d761924d647e7e4170b997177c7a7b43333c0f4ea5d",
+      "b35672dbccea7eda6c3cc7472842970d390c073a85dcab00a642a91d0a9dc3b7"
+    ],
+    "bounded_wall_s": [
+      652.3266224479885,
+      186.23285109101562,
+      3335.1147720279987,
+      3302.2269036099897,
+      1940.3769304979942
+    ],
+    "bounded_wall_s_total": 9416.278079674987,
+    "frozen_cumulative_wall_s_limit": 15600
+  },
+  "figure": "docs/evidence/cutting/banana-force/force-protocol.svg"
+}

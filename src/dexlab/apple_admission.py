@@ -233,16 +233,15 @@ contact_ledger_matches_hand_force two_sdf_pads_throughout_hold
 no_fruit_support_during_hold only_two_pads_support momentum_balance""".split())
 
 
-def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None):
-    """Derive qualification from actual raw runs; paths never enter public freeze."""
-    from dexlab.engine_versions import require_formal_batch_qualification
-
-    if set(record_map) != set(profiles):
-        raise ValueError("Qualification records must exactly cover requested profiles")
+def admit_runtime(wheel_dir):
+    """Check current official metadata and actual wheel bytes without a scene."""
     if wheel_dir is None:
         raise ValueError("Official wheel directory required for new qualification")
     runtime = observe_runtime()
     audit = refresh_inventory()
+    from dexlab.engine_versions import validate_versions
+
+    validate_versions(audit, runtime["installed"], runtime["native"])
     from dexlab.official_wheels import verify_official_wheel
 
     official_wheels = {}
@@ -258,6 +257,16 @@ def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None):
             path, package=package, version=runtime["installed"][package],
             official_sha256=digest,
             installed_code_sha256=runtime["package_code_sha256"][package])
+    return runtime, audit, official_wheels
+
+
+def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None):
+    """Derive qualification from actual raw runs; paths never enter public freeze."""
+    from dexlab.engine_versions import require_formal_batch_qualification
+
+    if set(record_map) != set(profiles):
+        raise ValueError("Qualification records must exactly cover requested profiles")
+    runtime, audit, official_wheels = admit_runtime(wheel_dir)
     evidence = {}
     required = {}
     for key, profile in profiles.items():
@@ -297,18 +306,32 @@ def publication_status(frozen):
 
 
 def main():
-    """Requalify the completed paired gate without dispatching held-out scenes."""
+    """Preflight the runtime or requalify completed records without new scenes."""
     import argparse
     from dexlab.benchmark import source_hashes
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mujoco", type=Path, required=True)
-    parser.add_argument("--superdex", type=Path, required=True)
+    parser.add_argument("--preflight", action="store_true",
+                        help="Check runtime and official wheels before running any scenes.")
+    parser.add_argument("--mujoco", type=Path)
+    parser.add_argument("--superdex", type=Path)
     parser.add_argument("--wheel-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.preflight and (args.mujoco is not None or args.superdex is not None):
+        parser.error("--preflight does not accept completed episode directories")
+    if not args.preflight and (args.mujoco is None or args.superdex is None):
+        parser.error("Provide both --mujoco and --superdex completed records")
     if args.output.exists():
         raise FileExistsError("Keep previous qualification evidence; use a new output")
+    if args.preflight:
+        runtime, audit, wheels = admit_runtime(args.wheel_dir)
+        with args.output.open("x") as stream:
+            json.dump({"runtime": runtime, "audit": audit, "official_wheels": wheels,
+                       "runtime_qualified": False}, stream, indent=2, allow_nan=False)
+            stream.write("\n")
+        print("Official runtime preflight passed; task qualification still required")
+        return
     profiles, records = {}, {}
     for backend in ("mujoco", "superdex"):
         directory = getattr(args, backend)

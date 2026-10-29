@@ -1,5 +1,7 @@
 # Three sequential banana cuts
 
+**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and videos below retain their historical inputs; they are not the latest task.**
+
 A force-driven blade descends and withdraws at three positions, cutting a curved peeled-banana shape into four pieces. Surface and particle views replay the same physical states. Pause, scrub or switch representations to inspect each cut.
 
 ```{raw} html
@@ -47,9 +49,9 @@ All 18 bounded invocations consume 3610.32 s including guard waits. Final-batch 
 
 ## How the surface is made
 
-A dense peeled-fruit skin follows the initial material profile, with longitudinal ridges, fibre colours and fresh cut-core detail. Its reference seams lie at the three supported straight-cut planes. Native side-history conflicts expose local cap triangles as cutting proceeds; compatible or unassigned seam vertices in the same native mechanical component are welded, preserving the uncut lower bridge. No clock or prescribed visual displacement opens a cut.
+A dense peeled-fruit skin follows the initial material profile, with longitudinal ridges, fibre colours and fresh cut-core detail. Replay reads each blade path from `trace.npz` and generates a straight reference seam at the median actual blade position during that active cut; frame measurements and complete-task scoring use the same planes. Native side-history conflicts expose local cap triangles as cutting proceeds; compatible or unassigned seam vertices in the same native mechanical component are welded, preserving the uncut lower bridge. No clock or prescribed visual displacement opens a cut. Complete records are rejected if any cut is missing, planes coincide, or the paths are not parallel x-normal straight cuts; manifest-declared planes in incomplete probes serve failed-run diagnostics only.
 
-Each authored reference interval follows its dominant observed native component; nearest anchors that fall into another component are reselected within that interval and component. This keeps the supported pieces separate, but the fixed reference seams do not recover the exact deformed cut geometry. Each vertex blends up to 64 nearby particle affine maps compatible with its native anchor history and mechanical component. Welded representatives share the mean of both compatible embeddings. This approximation reproduces common rigid/affine motion; it is not the paper's linked-volume dual contouring, a scan or a calibrated food model. No geometric smoothing is applied, and split normals preserve sharp cut rims. Particle views remain available to inspect the physical sampling.
+The current reference linked volume stores Hermite points/normals for the original boundary and recorded blade surfaces on uniform primal links. A link disconnects only when local native histories contain opposing side labels; uncut material remains connected. While material is connected, each within-cell link component receives a QEF dual vertex. Once saved native mechanical components separate, each is rebuilt as a closed local volume clipped by the recorded cut half-spaces, preventing triangles from spanning incompatible motion fields. Surface representatives inherit native component/cut codes and follow a compatible TLMPM field reconstructed from saved particle positions and deformation through fixed trilinear weights. Replay adds no opening and applies no geometric smoothing. Support remains limited to recorded x/y straight planes in an offline CPU rebuild; it is not scanned food or the authors' online GPU arbitrary-path update. Coarse particle deformation can leave small outer-surface spikes, and particle views expose the underlying mechanical sampling. [Detailed implementation and qualification boundary](cutting-surface.md).
 
 The measured GIF displays all three signed cut openings and per-piece probe displacement. Force and interior tetrahedral volume appear below; definitions and limitations are in the [paper audit](cutting-fidelity.md). Raw-state, renderer and output hashes plus actual frame mappings accompany the media. Board, pore/fibre colours, lighting and handle are scenery.
 
@@ -58,7 +60,7 @@ The measured GIF displays all three signed cut openings and per-piece probe disp
 Install `.[cutting,cutting-render]` in the existing DexLab environment. Under the repository's bounded runner and shared research lock, use new output directories:
 
 ```bash
-python -m dexlab.tofu_cut --task banana --output RUN
+python -m dexlab.tofu_cut --task banana --motion-protocol impulse --output RUN
 python -m dexlab.cutting_score RUN
 python -m dexlab.cutting_showcase RUN --output MEDIA
 ```

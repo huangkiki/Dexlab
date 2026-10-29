@@ -7,6 +7,8 @@ build/
 *.log
 MUJOCO_LOG.TXT
 dist/
+/web/node_modules/
+/web/dist/
 .env
 .env.*
 !.env.example
@@ -26,3 +28,11 @@ docs/_build/
 
 # Isolated optional Newton core environment
 .venv-newton/
+
+# Public RSS evidence and independently generated rescore outputs.
+/downloads/rss-wiping-*/
+/results/rss-wiping-*/
+
+# Wuji contact assets and independently generated records/reports.
+/downloads/wuji-contact*/
+/results/wuji-contact*/

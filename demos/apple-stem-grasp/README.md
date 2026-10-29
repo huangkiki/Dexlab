@@ -18,11 +18,11 @@ Both GIFs show a continuous 14-second close-up, rendered by MuJoCo from recorded
 After [installation](../../docs/installation.md), run either command from the repository root:
 
 ```bash
-bash demos/apple-stem-grasp/run.sh --backend mujoco
-bash demos/apple-stem-grasp/run.sh --backend superdex
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
+bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
 ```
 
-The viewer opens after SDF preparation and planning. Add `--headless` to disable it, or `--output demos/apple-stem-grasp/runs/my-run` to preserve a separate recording. Default outputs are `runs/latest-mujoco-sdf/` and `runs/latest-superdex-sdf/` within this demo.
+The viewer opens after SDF preparation and planning; add `--headless` to disable it. Explicit `--output` must name a new or empty directory; successful, failed and interrupted attempts cannot be reused. Without it, each run gets `runs/<backend>-sdf-<unique ID>/`, printed as `Run output:`. Existing `latest-*` directories remain untouched.
 
 ## Verify and render
 
@@ -30,17 +30,25 @@ Each run executes physical checks automatically. To repeat the independent check
 
 ```bash
 .venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+  demos/apple-stem-grasp/runs/first-mujoco
 MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py \
-  demos/apple-stem-grasp/runs/latest-mujoco-sdf
+  demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-Use `latest-superdex-sdf` for the other backend. Video export needs FFmpeg and OpenGL / EGL. Failed or incomplete physical checks return a nonzero exit code.
+Use `first-superdex` for the other backend. Video export needs FFmpeg and OpenGL / EGL. Failed or incomplete physical checks return a nonzero exit code.
 
 The checks cover clearance, continuous two-pad stem support, penetration, wrist-relative motion, and momentum balance over the full 11–14 s hold. Fruit contact is allowed during approach; fruit-body support is excluded during the hold.
 
 For offline position/velocity/force RMS, peaks and per-pad low-load intervals, use the [jitter diagnostics](../../docs/jitter.md). Missing records remain unknown rather than becoming zero contact.
 
+
+Run again and compare (`diff` returns 1 for differences):
+
+```bash
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/second-mujoco
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/second-mujoco
+diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-grasp/runs/second-mujoco/summary.json
+```
 
 ## UniLab task API
 
@@ -64,6 +72,8 @@ finally:
 `obs["obs"]` is a `(1, number_of_joints + 8)` array: **actual joint positions**, privileged apple position/quaternion (`xyz`, `xyzw`), and episode time. Joint order is `info["joint_names"]`. Actions are `(1, number_of_joints)` absolute targets in radians. The scripted target is an explicit control prior, not an observation or a learned action. Rewards are zero; terminal acceptance is `info["summary"]`. Invalid/nonfinite actions fail before physics advances. Reset rebuilds the scene; there is no automatic reset. One scene per process is supported. This task does not claim RL-training or visual-policy support.
 
 `unilab.json` records task/runtime identity and resolved parameters. The evidence writer records every physics step independently of the environment observation. Final and early exit both close native resources. Interactive display is configured at creation; video export replays the recorded poses separately.
+
+With default configuration, every `reset()` creates a separate directory; `env.output_directory` exposes its actual path. With an explicit `output`, a second reset rejects reuse; create another environment with a new directory. Startup failures retain `attempt.json` and cannot inherit an old success report.
 
 ## Implementation
 

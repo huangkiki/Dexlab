@@ -7,6 +7,7 @@ import json
 import math
 import os
 import re
+import signal
 from pathlib import Path
 import stat
 import shutil
@@ -100,6 +101,37 @@ def gpu_memory():
         return result.stdout.strip().splitlines()
     except (OSError, subprocess.SubprocessError):
         return None
+
+
+def verify_gpu_budget(rows, uuid, limit_mib):
+    """Check whole-device sampled usage; this is not a driver allocation cap."""
+    if not rows or not uuid.startswith('GPU-') or limit_mib <= 0:
+        raise RuntimeError('GPU budget requires a UUID and available memory telemetry')
+    matches = [line.split(',') for line in rows if line.split(',')[0].strip() == uuid]
+    if len(matches) != 1 or len(matches[0]) != 3:
+        raise RuntimeError('Selected GPU is missing or ambiguous in memory telemetry')
+    try:
+        used, total = map(int, matches[0][1:])
+    except ValueError as error:
+        raise RuntimeError('GPU memory telemetry is not numeric') from error
+    if not 0 <= used <= total or not 0 < limit_mib < total:
+        raise RuntimeError('GPU memory budget must leave device headroom')
+    if used > limit_mib:
+        raise RuntimeError(f'Sampled GPU usage {used} MiB exceeds {limit_mib} MiB')
+    return {'used_mib': used, 'total_mib': total}
+
+
+def stop_workload_group(child):
+    """Stop only the workload's new session, leaving the telemetry writer alive."""
+    try:
+        os.killpg(child.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return child.wait()
+    try:
+        return child.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        os.killpg(child.pid, signal.SIGKILL)
+        return child.wait(timeout=5)
 
 
 def read_values(root, names):
@@ -196,17 +228,26 @@ def inside(args):
     # Taking its timestamp afterwards inflates the first sampled CPU/I/O rate.
     start = time.monotonic()
     state = {'state': 'running', 'profile': args.profile, 'admission': admission,
+             'cgroup_path': str(root),
              'effective_service_properties': service,
              'effective_limits': limits,
              'started_at_unix_s': time.time(), 'initial': read_values(root, METRICS),
              'initial_pressure': pressure(root), 'initial_gpu_memory_mib': gpu_memory()}
+    gpu_limit = None
+    if getattr(args, 'gpu_uuid', None):
+        gpu_limit = {'uuid': args.gpu_uuid, 'limit_mib': args.gpu_memory_limit_mib,
+                     'sampling_interval_s': 2,
+                     'scope': 'Whole-device sampled stop threshold, not a hard allocation limit'}
+        verify_gpu_budget(state['initial_gpu_memory_mib'], args.gpu_uuid, args.gpu_memory_limit_mib)
+        state['gpu_budget'] = gpu_limit
     atomic_json(args.telemetry, state)
     previous_time = start
     previous = counters(state['initial'], args.device_number)
     peaks = [0.0, 0.0, 0.0]
     next_gpu_sample = start
     gpu_samples = []
-    child = subprocess.Popen(args.command)
+    child = subprocess.Popen(args.command, **({'start_new_session': True} if gpu_limit else {}))
+    stop_reason = None
     while child.poll() is None:
         now = time.monotonic()
         latest = read_values(root, METRICS)
@@ -221,15 +262,32 @@ def inside(args):
         if now >= next_gpu_sample:
             gpu_samples.append({'wall_s': now - start, 'devices': gpu_memory()})
             state['gpu_memory_samples_mib'] = gpu_samples
-            next_gpu_sample = now + 10
+            next_gpu_sample = now + (2 if gpu_limit else 10)
+            if gpu_limit:
+                try:
+                    verify_gpu_budget(gpu_samples[-1]['devices'], gpu_limit['uuid'], gpu_limit['limit_mib'])
+                except RuntimeError as error:
+                    stop_reason = str(error)
+                    state['gpu_budget_stop_reason'] = stop_reason
+                    atomic_json(args.telemetry, state)
+                    stop_workload_group(child)
+                    break
         previous_time, previous = now, current
         atomic_json(args.telemetry, state)
         time.sleep(0.25)
-    state.update(state='completed', returncode=child.returncode,
+    final_gpu = gpu_memory()
+    if gpu_limit and stop_reason is None:
+        try:
+            verify_gpu_budget(final_gpu, gpu_limit['uuid'], gpu_limit['limit_mib'])
+        except RuntimeError as error:
+            stop_reason = str(error)
+            state['gpu_budget_stop_reason'] = stop_reason
+    code = 125 if stop_reason is not None else child.returncode
+    state.update(state='completed', returncode=code, workload_returncode=child.returncode,
                  wall_s=time.monotonic() - start, final=read_values(root, METRICS),
-                 final_pressure=pressure(root), final_gpu_memory_mib=gpu_memory())
+                 final_pressure=pressure(root), final_gpu_memory_mib=final_gpu)
     atomic_json(args.telemetry, state)
-    return child.returncode
+    return code
 
 
 def launch(args):
@@ -277,6 +335,8 @@ def launch(args):
                 '--telemetry', str(telemetry)]
     if args.data_dir is not None:
         command += ['--data-dir', str(args.data_dir.resolve())]
+    if args.gpu_uuid:
+        command += ['--gpu-uuid', args.gpu_uuid, '--gpu-memory-limit-mib', str(args.gpu_memory_limit_mib)]
     command += ['--', *args.command]
     start = time.monotonic()
     result = subprocess.run(command, check=False)
@@ -316,6 +376,9 @@ def main():
     parser.add_argument('--task-limit', type=int, choices=(128, 256), default=128,
                         help='Threads/processes allowed; 256 requires a new frozen adaptive plan')
     parser.add_argument('--data-dir', type=Path, help='Required existing data volume directory for experiments')
+    parser.add_argument('--gpu-uuid', help='Opt in to sampled whole-device memory admission and stopping')
+    parser.add_argument('--gpu-memory-limit-mib', type=int,
+                        help='Paired with --gpu-uuid; sampled every 2 s, not a hard GPU allocation cap')
     parser.add_argument('--timeout', type=int)
     parser.add_argument('--memory-mib', type=int)
     parser.add_argument('--high-mib', type=int)
@@ -325,6 +388,9 @@ def main():
     parser.add_argument('--telemetry', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('command', nargs=argparse.REMAINDER)
     args = parser.parse_args()
+    if bool(args.gpu_uuid) != (args.gpu_memory_limit_mib is not None) or \
+            (args.gpu_memory_limit_mib is not None and args.gpu_memory_limit_mib <= 0):
+        parser.error('Provide a GPU UUID together with a positive sampled memory limit')
     if args.profile == 'adaptive':
         if args.inside or args.resource_plan is None or args.memory_mib is not None or args.high_mib is not None:
             parser.error('Adaptive launch requires --resource-plan and forbids memory overrides')

@@ -9,8 +9,8 @@
 完成[安装](installation.zh-CN.md)，取得完整或中断的运行记录后：
 
 ```bash
-.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/latest-mujoco-sdf
-.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/latest-superdex-sdf
+.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/first-mujoco
+.venv/bin/python -m dexlab.jitter demos/apple-stem-grasp/runs/first-superdex
 ```
 
 命令在运行目录生成 `jitter-diagnostics.json`，并打印相同 JSON；`--output path.json` 可改变输出位置。输入文件只读。命令正常退出表示已生成报告，不代表抓取或数据质量通过。档案结构损坏会报错；记录不完整则保留在报告中。

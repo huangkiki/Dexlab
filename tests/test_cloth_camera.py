@@ -6,11 +6,29 @@ import unittest
 
 import numpy as np
 
+from dexlab.cloth_display import fixed_view
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'demos/cloth-folding/src'))
 from render_cloth import cloth_view
 
 
 class ClothCameraTests(unittest.TestCase):
+    def test_fixed_camera_keeps_complete_motion_below_caption_margin(self):
+        points = np.array(list(product((-.4, .2), (-.06, .08), (.01, .7))))
+        for azimuth, elevation, aspect in ((15, -20, 4 / 3), (90, -25, 2 / 3)):
+            center, distance = fixed_view(points, azimuth, elevation, aspect=aspect)
+            az, altitude = np.deg2rad([azimuth, -elevation])
+            right = np.array([-np.sin(az), np.cos(az), 0])
+            outward = np.array([np.cos(altitude) * np.cos(az),
+                                np.cos(altitude) * np.sin(az), np.sin(altitude)])
+            up = np.cross(outward, right)
+            relative = points - center - distance * outward
+            depth = -relative @ outward
+            self.assertTrue(np.all(depth > 0))
+            tangent = np.tan(np.deg2rad(45 / 2))
+            self.assertTrue(np.all(np.abs(relative @ up) < .75 * depth * tangent))
+            self.assertTrue(np.all(np.abs(relative @ right) < .85 * depth * tangent * aspect))
+
     def test_translation_to_floor_preserves_closeup_and_tracks_cloth(self):
         points = np.array(list(product((-.1, .1), repeat=3))) + [0, 0, .6]
         center, distance = cloth_view(points, 45)

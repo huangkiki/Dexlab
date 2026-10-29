@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-from dexlab.cutting_geometry import material_points
+from dexlab.cutting_geometry import material_points, recorded_sequential_regions
 
 
 # Frozen before the first run: numerical accounting (FP64), complete topology,
@@ -20,6 +20,9 @@ ACCEPTANCE = {
 }
 
 BANANA_ACCEPTANCE = dict(ACCEPTANCE, fraction_error=.03)
+PUSH_ACCEPTANCE = dict(BANANA_ACCEPTANCE, minimum_push_impulse_ns=.001)
+SCORING_ACCEPTANCE = dict(ACCEPTANCE, base_height_m=.015,
+                          minimum_depth_m=.002, maximum_depth_m=.012)
 
 
 def histories_compatible(a, b):
@@ -71,6 +74,31 @@ def grid_components(nodes, weights, sides):
     return labels, sizes
 
 
+def scoring_topology(states, trace, config):
+    """Check partial intersections independently of the solver and its render."""
+    times, sides = states['time'], states['sides']
+    event_counts = []
+    for time in (0., 1.2, 2., 3.2, 4., 4.2):
+        frame = min(int(np.argmin(abs(times - time))), len(times) - 1)
+        event_counts.append(len(grid_components(states['nodes'], states['weights'], sides[frame])[1]))
+    base = states['reference'][:, 2] < SCORING_ACCEPTANCE['base_height_m']
+    base_components = len(grid_components(states['nodes'][base], states['weights'][base], sides[-1, base])[1])
+    digits = [(sides[-1] // 3**cut) % 3 for cut in range(2)]
+    side_counts = [[int(np.count_nonzero(digit == side)) for side in (1, 2)] for digit in digits]
+    depths = [float(config['size'][2] - np.min(trace['blade_position_m'][trace['cut_index'] == cut, 2]
+                                             - config['blade_half_size'][2]))
+              for cut in range(2) if np.any(trace['cut_index'] == cut)]
+    checks = {
+        'one_component_at_scoring_events': event_counts == [1] * 6,
+        'uncut_connected_base': bool(base.any() and base_components == 1 and not sides[:, base].any()),
+        'two_opposing_partial_cuts': all(min(counts) > 0 for counts in side_counts),
+        'shallow_measured_depth': len(depths) == 2 and all(
+            SCORING_ACCEPTANCE['minimum_depth_m'] <= value <= SCORING_ACCEPTANCE['maximum_depth_m']
+            for value in depths),
+    }
+    return checks, event_counts, side_counts, depths
+
+
 def score_run(directory):
     directory = Path(directory)
     manifest = json.loads((directory / 'manifest.json').read_text())
@@ -103,16 +131,44 @@ def score_run(directory):
         raise ValueError('Invalid position dimensions')
     frames, particles, axes = x.shape
     config = manifest['config']
+    viscosity = config.get('dynamic_viscosity', 0.0)
+    yield_stress = config.get('yield_stress', 0.0)
+    if not np.isfinite(viscosity) or viscosity < 0:
+        raise ValueError('Invalid dynamic viscosity')
+    if not np.isfinite(yield_stress) or yield_stress < 0:
+        raise ValueError('Invalid yield stress')
+    if viscosity > 0 and ('viscous_dissipation_j' not in trace
+                          or trace['viscous_dissipation_j'].ndim != 1):
+        raise ValueError('Missing viscous dissipation observation')
+    if yield_stress > 0 and ('plastic_dissipation_j' not in trace
+                             or trace['plastic_dissipation_j'].ndim != 1):
+        raise ValueError('Missing plastic dissipation observation')
     task = manifest.get('task', 'tofu')
     banana = task == 'banana'
-    sequential = task != 'tofu'
-    if task not in ('tofu', 'banana', 'tofu-sequential'):
+    scoring = task == 'tofu-scoring'
+    sequential = task in ('banana', 'tofu-sequential')
+    motion = manifest.get('motion_protocol', 'impulse')
+    continuous = motion in ('cut-push', 'cut-no-push')
+    if (motion not in ('impulse', 'knife-push', 'no-push', 'cut-push', 'cut-no-push')
+            or (motion != 'impulse' and not (sequential if continuous else task == 'tofu-sequential'))):
+        raise ValueError('Invalid motion protocol')
+    contact_motion = motion != 'impulse'
+    if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
         raise ValueError('Unknown cutting task')
     cut_count, duration, probe_time = {'banana': (3, 7., 6.2), 'tofu': (1, 3., 2.4),
-                                      'tofu-sequential': (2, 5., 4.2)}[task]
+                                      'tofu-sequential': (2, 5., 4.2),
+                                      'tofu-scoring': (2, 4.2, None)}[task]
+    if contact_motion:
+        duration, probe_time = 7., None
+        motion_start = (5.3 if banana else 3.3) if continuous else 4.
+        if continuous:
+            duration = 8. if banana else 6.
+        if manifest.get('motion_start_time_s') != motion_start:
+            raise ValueError('Altered knife-push motion window')
     if config.get('shape', 'block') != ('banana' if banana else 'block'):
         raise ValueError('Task and material geometry disagree')
-    expected_limits = BANANA_ACCEPTANCE if sequential else ACCEPTANCE
+    expected_limits = (SCORING_ACCEPTANCE if scoring else PUSH_ACCEPTANCE if contact_motion else
+                       BANANA_ACCEPTANCE if sequential else ACCEPTANCE)
     if manifest['acceptance'] != expected_limits or manifest['probe_time_s'] != probe_time:
         raise ValueError('Altered frozen acceptance or probe protocol')
     dt = config['dt']
@@ -166,7 +222,7 @@ def score_run(directory):
     frame_error = float(np.abs(frame_momentum - trace['momentum_ns'][indices]).max())
     external = trace['board_impulse_ns'] + trace['blade_board_impulse_ns'] + dt * trace['drive_force_n']
     external[:, 2] -= mass * particles * 9.81 * dt
-    probe_step = round(manifest['probe_time_s'] / dt)
+    probe_step = expected_steps if probe_time is None else round(probe_time / dt)
     right = reference[:, 0] > (.03 if banana else 0)
     probe_mask = reference[:, 0] < -.015 if task == 'tofu-sequential' else right
     probe_velocity = np.array([-.12, 0., 0.]) if task == 'tofu-sequential' else np.array([.12, 0., .1])
@@ -177,13 +233,16 @@ def score_run(directory):
         np.vstack((np.zeros(3), trace['blade_velocity_m_s'])), axis=0)
     blade_error = float(np.abs(blade_impulse - dt * (trace['drive_force_n'] + trace['material_reaction_n'])
                                - trace['blade_board_impulse_ns']).max())
-    probe_frame = int(np.searchsorted(states['time'], manifest['probe_time_s'], side='right') - 1)
+    motion_start = motion_start if contact_motion else probe_time
+    probe_frame = (0 if motion_start is None else
+                   int(np.searchsorted(states['time'], motion_start, side='right') - 1))
     displacements = [x[-1, mask].mean(axis=0) - x[probe_frame, mask].mean(axis=0)
                      for mask in (~right, right)]
     relative_motion = float(displacements[1][0] - displacements[0][0])
     limits = manifest['acceptance']
+    complete_duration = abs(manifest['duration_s'] - duration) < 1e-12
     checks = {
-        'complete_duration': abs(manifest['duration_s'] - duration) < 1e-12,
+        'complete_duration': complete_duration,
         'initially_connected': len(initial_sizes) == 1,
         'persistent_cut_labels': persistent,
         'two_mechanical_components': len(final_sizes) == 2,
@@ -200,8 +259,37 @@ def score_run(directory):
     }
     if 'deformation' in states and states['deformation'].shape != (frames, particles, 3, 3):
         raise ValueError('Invalid deformation dimensions')
+    if scoring:
+        if manifest['mode'] not in ('full', 'uncut') or 'blade_yaw_rad' not in trace:
+            raise ValueError('Scoring mode or guided blade orientation is missing')
+        if 'cut_index' not in trace or 'cutting_active' not in trace or 'deformation' not in states:
+            raise ValueError('Missing crossed-cut observations')
+        expected_cut = np.minimum(np.floor((np.arange(expected_steps) * dt + 1e-12) / 2), 1).astype(int)
+        local = np.arange(expected_steps) * dt - 2 * expected_cut
+        active = (local >= .35) & (local < 1.2) & (manifest['mode'] != 'uncut')
+        if (not np.array_equal(trace['cut_index'], expected_cut)
+                or not np.array_equal(trace['cutting_active'], active)
+                or trace['blade_yaw_rad'].shape != (expected_steps,)
+                or not np.allclose(trace['blade_yaw_rad'], expected_cut * np.pi / 2, rtol=0, atol=1e-12)):
+            raise ValueError('Invalid crossed-cut clock or blade orientation')
+        for name in ('two_mechanical_components', 'half_mass', 'independent_motion'):
+            del checks[name]
+        topology, progressive, side_counts, depths = scoring_topology(states, trace, config)
+        checks.update(topology)
     if sequential:
-        regions = np.digitize(reference[:, 0], [-.03, 0., .03] if banana else [-.015, .015])
+        if complete_duration:
+            regions, recorded_planes = recorded_sequential_regions(
+                reference, trace, config['grid_spacing'] / 2, cut_count)
+            cut_geometry_complete = True
+        else:
+            planned = np.asarray(manifest.get('planned_cut_planes_m', ()), dtype=float)
+            if planned.shape != (cut_count,) or not np.isfinite(planned).all() or len(set(planned)) != cut_count:
+                raise ValueError('Incomplete sequential record is missing its planned cut geometry')
+            regions = np.searchsorted(np.sort(planned), reference[:, 0])
+            if np.any(np.bincount(regions, minlength=cut_count + 1) == 0):
+                raise ValueError('Planned cut planes must leave particles in every scored region')
+            recorded_planes = ()
+            cut_geometry_complete = False
         piece_count = cut_count+1
         expected_fractions = sorted((np.bincount(regions, minlength=piece_count) / particles).tolist(), reverse=True)
         region_motion = np.array([x[-1, regions == k].mean(axis=0) - x[probe_frame, regions == k].mean(axis=0)
@@ -228,26 +316,79 @@ def score_run(directory):
         local_time = np.arange(expected_steps)*dt - 2*expected_cut
         expected_active = ((local_time >= .4) & (local_time < 1.3)
                            & (manifest['mode'] != 'uncut'))
+        if continuous:
+            expected_active &= np.arange(expected_steps) * dt < motion_start
         if not np.array_equal(trace['cutting_active'], expected_active):
             raise ValueError('Invalid cutting-active observation')
         if not np.array_equal(trace['cut_index'], expected_cut):
             raise ValueError('Invalid sequential-cut clock')
+    push_impulse = None
+    if contact_motion:
+        if 'target_edge_m' not in trace or trace['target_edge_m'].shape != (expected_steps, 3):
+            raise ValueError('Missing knife drive observations')
+        times = np.arange(expected_steps) * dt
+        after_cut = times >= motion_start
+        targets = np.tile([-.015, 0., .036], (int(after_cut.sum()), 1))
+        if motion == 'knife-push':
+            targets[:, 0] = np.interp(times[after_cut], [4., 4.8, 6., 6.6, 7.],
+                                      [-.015, -.015, -.027, -.027, -.027])
+            targets[:, 2] = np.interp(times[after_cut], [4., 4.8, 6., 6.6, 7.],
+                                      [.036, .002, .002, .036, .036])
+        if continuous:
+            # Independent protocol reconstruction, not imported from the driver.
+            start_x, direction = (.03, 1) if banana else (-.015, -1)
+            end_x = start_x + direction * .012 if motion == 'cut-push' else start_x
+            knots = np.array([0., .2, 1.4, 2., 2.7]) + motion_start
+            targets[:, 0] = np.interp(times[after_cut], knots, [start_x, start_x, end_x, end_x, end_x])
+            targets[:, 2] = np.interp(times[after_cut], knots, [-.004, .002, .002, .036, .036])
+        if not np.allclose(trace['target_edge_m'][after_cut], targets, rtol=0, atol=1e-12):
+            raise ValueError('Altered knife drive protocol')
+        # The knife receives +x reaction when it pushes material toward -x.
+        # Use the native impulse sum; drive targets and rendered motion are not evidence.
+        push_end = motion_start + 2. if continuous else 6.6
+        window = (trace['time_s'] > motion_start) & (trace['time_s'] <= push_end)
+        push_impulse = float(dt * trace['material_reaction_n'][window, 0].sum()) * (-1 if banana else 1)
+        after = states['time'] >= motion_start
+        checks['knife_supplies_push_impulse'] = push_impulse >= limits['minimum_push_impulse_ns']
+        checks['no_new_cuts_during_push'] = bool(after.any() and np.all(sides[after] == sides[probe_frame]))
+    if viscosity > 0:
+        # This is constitutive dissipation, not the total mechanical energy
+        # change. A separate saved-state audit reconstructs the sampled rate.
+        checks['nonnegative_viscous_dissipation'] = bool(
+            np.all(trace['viscous_dissipation_j'] >= -1e-14))
+    if yield_stress > 0:
+        checks['nonnegative_plastic_dissipation'] = bool(
+            np.all(trace['plastic_dissipation_j'] >= -1e-14))
     checks = {name: bool(value) for name, value in checks.items()}
     return {
         'schema_version': 1, 'task': task, 'mode': manifest['mode'], 'passed': all(checks.values()),
         'checks': checks, 'component_mass_fractions': fractions,
-        'progressive_components': progressive if sequential else [],
+        'progressive_components': progressive if sequential or scoring else [],
+        'scoring_side_counts': side_counts if scoring else [],
+        'scoring_maximum_depth_m': depths if scoring else [],
         'initial_components': len(initial_sizes), 'final_components': len(final_sizes),
         'mass_kg': mass * particles, 'particle_count': particles,
         'momentum_error_ns': momentum_error, 'frame_momentum_error_ns': frame_error,
         'external_impulse_error_ns': external_error, 'blade_impulse_error_ns': blade_error,
-        'relative_motion_m': relative_motion,
+        'relative_motion_m': None if scoring else relative_motion,
         'left_displacement_m': displacements[0].tolist(), 'right_displacement_m': displacements[1].tolist(),
-        'piece_displacements_m': region_motion.tolist() if sequential else [d.tolist() for d in displacements],
+        'piece_displacements_m': ([] if scoring else region_motion.tolist() if sequential else
+                                  [d.tolist() for d in displacements]),
+        **({'cut_planes_m_in_execution_order': list(recorded_planes),
+            'cut_geometry_complete': cut_geometry_complete} if sequential else {}),
         'peak_material_reaction_n': float(np.linalg.norm(trace['material_reaction_n'], axis=1).max()),
+        **({'constitutive_viscous_dissipation_j': float(trace['viscous_dissipation_j'].sum())}
+           if viscosity > 0 else {}),
+        **({'constitutive_plastic_dissipation_j': float(trace['plastic_dissipation_j'].sum())}
+           if yield_stress > 0 else {}),
+        **({'motion_protocol': motion, 'push_direction_knife_impulse_ns': push_impulse}
+           if continuous else {}),
+        **({'motion_protocol': motion, 'leftward_knife_impulse_ns': push_impulse}
+           if task == 'tofu-sequential' else {}),
         'maximum_proxy_overlap_m': float(trace['maximum_proxy_overlap_m'].max()),
         'det_f_range': [float(trace['minimum_det_f'].min()), float(trace['maximum_det_f'].max())],
-        'evidence_scope': 'synthetic CPU reference task; not measured food or authors implementation',
+        'evidence_scope': (manifest.get('material_parameter_source', 'synthetic task values')
+                           + '; independent CPU implementation, not measured food or author code'),
     }
 
 

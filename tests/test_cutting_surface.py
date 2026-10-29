@@ -1,11 +1,13 @@
 """A surface may explain recorded motion; it must not invent separation."""
 
+from collections import Counter
 import unittest
+from unittest import mock
 
 import numpy as np
 
 try:
-    from dexlab.cutting_surface import BananaSkin, MaterialSurface
+    from dexlab.cutting_surface import BananaSkin, LinkedVolumeSurface, MaterialSurface
 except ModuleNotFoundError as error:
     if error.name != 'scipy':
         raise
@@ -26,7 +28,104 @@ def components(faces):
     return len({root(v) for v in parent})
 
 
+def edge_multiplicity(faces):
+    return Counter(tuple(sorted((int(first), int(second))))
+                   for face in faces
+                   for first, second in zip(face, np.roll(face, -1), strict=True))
+
+
 class SurfaceEvidence(unittest.TestCase):
+    def test_one_sided_new_cut_labels_do_not_hide_connected_material(self):
+        reference = material_points((.03, .015, .015), .0075)
+        surface = LinkedVolumeSurface(
+            reference, (-.005, .005), size=(.03, .015, .015), grid_spacing=.0075,
+            surface_spacing=.001875, shape='block')
+        gradient = np.tile(np.eye(3), (len(reference), 1, 1))
+        components_at_first_cut = np.where(reference[:, 0] < -.005, 1, 2)
+        baseline = surface.mesh(
+            reference, gradient, components_at_first_cut, components_at_first_cut)
+        for digit in (1, 2):
+            with self.subTest(first_observed_side=digit):
+                codes = components_at_first_cut.copy()
+                side = reference[:, 0] < .005 if digit == 1 else reference[:, 0] > .005
+                touched = (components_at_first_cut == 2) & side & (reference[:, 2] > .0075)
+                self.assertTrue(touched.any())
+                codes[touched] += 3*digit
+                moved, faces, rest, _ = surface.mesh(
+                    reference, gradient, codes, components_at_first_cut)
+                np.testing.assert_allclose(rest.min(axis=0), baseline[2].min(axis=0), atol=1e-12)
+                np.testing.assert_allclose(rest.max(axis=0), baseline[2].max(axis=0), atol=1e-12)
+                self.assertEqual(components(faces), 2)
+                self.assertEqual(set(edge_multiplicity(faces).values()), {2})
+                np.testing.assert_allclose(rest, baseline[2], atol=1e-12)
+                np.testing.assert_allclose(moved, rest, atol=1e-14)
+
+    def test_reused_topology_moves_again_and_invalidates_on_a_new_cut(self):
+        reference = material_points((.03, .015, .015), .0075)
+        surface = LinkedVolumeSurface(
+            reference, (-.005, .005), size=(.03, .015, .015), grid_spacing=.0075,
+            surface_spacing=.001875, shape='block')
+        gradient = np.tile(np.eye(3), (len(reference), 1, 1))
+        codes = np.where(reference[:, 0] < -.005, 1, 2)
+        first = surface.mesh(reference, gradient, codes, codes)
+        first[2][:] = 100  # Must not mutate the retained reference topology.
+        shift = np.array([.001, .002, .003])
+        with mock.patch.object(surface, '_component_normal',
+                               side_effect=AssertionError('Unchanged topology was rebuilt')):
+            second = surface.mesh(reference+shift, gradient, codes, codes)
+        np.testing.assert_allclose(second[0], second[2]+shift, atol=1e-14)
+        self.assertEqual(components(second[1]), 2)
+        codes = codes + 3*np.where(reference[:, 0] < .005, 1, 2)
+        third = surface.mesh(reference+shift, gradient, codes, codes)
+        self.assertEqual(components(third[1]), 3)
+        np.testing.assert_allclose(third[0], third[2]+shift, atol=1e-14)
+
+    def test_cached_topology_matches_fresh_mesh_for_non_affine_motion(self):
+        reference = material_points((.03, .015, .015), .0075)
+        arguments = dict(size=(.03, .015, .015), grid_spacing=.0075,
+                         surface_spacing=.001875, shape='block')
+        surface = LinkedVolumeSurface(reference, (-.005, .005), **arguments)
+        gradient = np.tile(np.eye(3), (len(reference), 1, 1))
+        codes = np.where(reference[:, 0] < -.005, 1, 2)
+        surface.mesh(reference, gradient, codes, codes)
+        positions = reference.copy()
+        positions[:, 2] += .001*np.sin(300*reference[:, 0])
+        gradient[:, 2, 0] += .3*np.cos(300*reference[:, 0])
+        with mock.patch.object(surface, '_component_normal',
+                               side_effect=AssertionError('Unchanged topology was rebuilt')):
+            reused = surface.mesh(positions, gradient, codes, codes)
+        fresh = LinkedVolumeSurface(reference, (-.005, .005), **arguments).mesh(
+            positions, gradient, codes, codes)
+        for cached_array, rebuilt_array in zip(reused, fresh, strict=True):
+            np.testing.assert_allclose(cached_array, rebuilt_array, rtol=0, atol=1e-14)
+        self.assertGreater(np.max(abs(reused[0]-reused[2])), .0001)
+
+    def test_concave_dual_quad_keeps_both_triangles_facing_outward(self):
+        vertices = np.array([[0., 0., 0.], [.6, .6, 0.], [2., 0., 0.], [0., 2., 0.]])
+        faces = []
+        LinkedVolumeSurface._append_quad(faces, [0, 1, 2, 3], vertices, np.array([0., 0., 1.]))
+        triangles = vertices[np.asarray(faces)]
+        normals = np.cross(triangles[:, 1]-triangles[:, 0], triangles[:, 2]-triangles[:, 0])
+        self.assertTrue((normals[:, 2] > 0).all())
+        self.assertEqual({index for face in faces for index in face}, {0, 1, 2, 3})
+
+    def test_public_banana_grid_has_no_folded_smooth_flanks(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        surface = BananaSkin(reference, (0.,), grid_spacing=.006, surface_spacing=.0015)
+        codes = np.zeros(len(reference), dtype=int)
+        gradient = np.tile(np.eye(3), (len(reference), 1, 1))
+        moved, faces, rest, _ = surface.mesh(reference, gradient, codes, codes)
+        triangle = rest[faces]
+        center = triangle.mean(axis=1)
+        # The authored axial end cap is non-differentiable. Test the smooth flank.
+        smooth = abs(center[:, 0]) < .059
+        normals = np.cross(triangle[:, 1]-triangle[:, 0], triangle[:, 2]-triangle[:, 0])
+        expected = np.array([surface._normal(point) for point in center[smooth]])
+        self.assertTrue((np.einsum('ij,ij->i', normals[smooth], expected) > 0).all())
+        self.assertLess(float(np.max(abs(surface._level_set(rest)))), .0005)
+        self.assertEqual(set(edge_multiplicity(faces).values()), {2})
+        np.testing.assert_allclose(moved, rest, atol=1e-14)
+
     def setUp(self):
         self.reference = material_points((.03, .015, .015), .0075)
         self.surface = MaterialSurface(self.reference, .00375)
@@ -59,9 +158,9 @@ class SurfaceEvidence(unittest.TestCase):
         _, faces, _, _ = self.surface.mesh(self.reference, sides)
         self.assertEqual(components(faces), 1)
 
-    def test_banana_skin_blend_does_not_drag_the_other_cut_piece(self):
+    def test_linked_volume_motion_does_not_drag_the_other_cut_piece(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (0.,))
         sides = np.where(reference[:, 0] < 0, 1, 2)
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         positions = reference.copy()
@@ -71,10 +170,12 @@ class SurfaceEvidence(unittest.TestCase):
         self.assertTrue(np.isfinite(moved).all())
         shifts = moved[:, 0] - rest[:, 0]
         self.assertTrue(np.all(np.isclose(shifts, 0) | np.isclose(shifts, .004)))
+        displacement = moved-rest
+        self.assertLess(float(np.ptp(displacement[faces], axis=1).max()), 1e-12)
 
     def test_banana_cap_rim_remains_flat_under_rigid_piece_motion(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (0.,))
         sides = np.where(reference[:, 0] < 0, 1, 2)
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         moved, _, rest, caps = surface.mesh(reference, deformation, sides, sides)
@@ -85,7 +186,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_partial_cut_keeps_bridge_and_exposes_local_caps(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (0.,))
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         codes = np.where(reference[:, 0] < 0, 1, 2)
         codes[reference[:, 2] < .012] = 0
@@ -98,7 +199,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_uncut_surface_is_connected_under_affine_deformation(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (0.,))
         gradient = np.array([[1., .1, 0.], [0., .95, .1], [0., 0., 1.05]])
         deformation = np.tile(gradient, (len(reference), 1, 1))
         moved, faces, rest, _ = surface.mesh(reference @ gradient.T, deformation,
@@ -109,7 +210,7 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_banana_cut_caps_have_opposing_outward_normals(self):
         reference = material_points((.12, .06, .03), .006, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (0.,))
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         codes = np.where(reference[:, 0] < 0, 1, 2)
         positions = reference.copy()
@@ -124,11 +225,12 @@ class SurfaceEvidence(unittest.TestCase):
 
     def test_compatible_codes_cannot_reconnect_disjoint_native_components(self):
         reference = material_points((.12, .06, .03), .005, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         groups = np.searchsorted([-.03, 0., .03], reference[:, 0])
-        # Compatibility alone is not spatial connectivity: an unassigned anchor
-        # may belong to a native component with no shared stencil to its neighbour.
-        codes = np.zeros(len(reference), dtype=int)
+        # Compatible history alone is not spatial connectivity: a surface
+        # representative must stay with its observed native component.
+        codes = sum(np.where(reference[:, 0] < plane, 1, 2)*3**cut
+                    for cut, plane in enumerate((-.03, 0., .03)))
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         positions = reference.copy()
         positions[:, 0] += groups*.004
@@ -136,24 +238,150 @@ class SurfaceEvidence(unittest.TestCase):
         self.assertEqual(components(faces), 4)
         shifts = (moved[:, 0]-rest[:, 0])/.004
         np.testing.assert_allclose(shifts, np.rint(shifts), atol=1e-12)
+        self.assertLess(float(np.ptp((moved-rest)[faces], axis=1).max()), 1e-12)
 
-    def test_shifted_material_boundary_does_not_misassign_the_authored_seam(self):
+    def test_shifted_material_boundary_does_not_misassign_the_recorded_cut(self):
         reference = material_points((.12, .06, .03), .005, 'banana')
-        surface = BananaSkin(reference)
+        surface = BananaSkin(reference, (-.03, 0., .03))
         # A cut in deformed material need not coincide with the nominal
         # reference plane. Some left-seam nearest particles belong to the right.
         groups = np.searchsorted([-.03, 0., .027], reference[:, 0])
         deformation = np.tile(np.eye(3), (len(reference), 1, 1))
         positions = reference.copy()
         positions[:, 0] += groups*.004
-        moved, faces, rest, _ = surface.mesh(positions, deformation,
-                                            np.zeros(len(reference), dtype=int), groups)
+        codes = sum(np.where(reference[:, 0] < plane, 1, 2)*3**cut
+                    for cut, plane in enumerate((-.03, 0., .027)))
+        moved, faces, rest, _ = surface.mesh(positions, deformation, codes, groups)
         self.assertEqual(components(faces), 4)
         shifts = (moved[:, 0]-rest[:, 0])/.004
         np.testing.assert_allclose(shifts, np.rint(shifts), atol=1e-12)
-        # The third authored interval remains attached to its own native piece.
-        interior = (rest[:, 0] > .001) & (rest[:, 0] < .029)
+        # Representatives inherit the observed native component even when its
+        # reference-side boundary does not coincide exactly with the blade plane.
+        interior = (rest[:, 0] > .001) & (rest[:, 0] < .025)
         np.testing.assert_allclose(shifts[interior], 2., atol=1e-12)
+
+    def test_banana_skin_places_the_seam_at_the_recorded_cut_plane(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        cut_plane = .015
+        surface = BananaSkin(reference, (cut_plane,))
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        codes = np.where(reference[:, 0] < cut_plane, 1, 2)
+
+        moved, faces, rest, caps = surface.mesh(reference, deformation, codes, codes)
+
+        seam_vertices = np.isclose(rest[:, 0], cut_plane)
+        self.assertTrue(seam_vertices.any())
+        seam_faces = np.isclose(rest[faces, 0], cut_plane).all(axis=1)
+        self.assertTrue(seam_faces.any())
+        self.assertTrue(any(caps[face].all() for face in faces[seam_faces]))
+        default_plane = np.isclose(rest[:, 0, None], [-.03, 0., .03]).any(axis=1)
+        self.assertFalse(caps[default_plane].any())
+        np.testing.assert_allclose(moved, rest, atol=1e-14)
+
+    def test_banana_original_boundary_is_stored_as_hermite_points_and_unit_normals(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        surface = BananaSkin(reference, (0.,))
+        self.assertGreater(len(surface.boundary_edges), 100)
+        for point, normal, _ in surface.boundary_edges.values():
+            self.assertAlmostEqual(float(surface._level_set(point)), 0., places=9)
+            self.assertAlmostEqual(float(np.linalg.norm(normal)), 1., places=10)
+
+    def test_linked_volume_has_no_open_or_degenerate_faces(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        complete = np.where(reference[:, 0] < 0, 1, 2)
+        partial = complete.copy()
+        partial[reference[:, 2] < .012] = 0
+        cases = (
+            (BananaSkin(reference, (0.,)), np.zeros(len(reference), dtype=int),
+             np.zeros(len(reference), dtype=int), {2}),
+            (BananaSkin(reference, (0.,)), complete, complete, {2}),
+            # A progressive zero-thickness slit has one embedded crack-front
+            # edge with four incident triangles while its lower bridge remains
+            # connected. It must still have no open edges or degenerate faces.
+            (BananaSkin(reference, (0.,)), partial,
+             np.zeros(len(reference), dtype=int), {2, 4}),
+        )
+        for surface, codes, native_components, allowed in cases:
+            with self.subTest(allowed=allowed):
+                moved, faces, _, _ = surface.mesh(
+                    reference, deformation, codes, native_components)
+                self.assertTrue(set(edge_multiplicity(faces).values()) <= allowed)
+                area = np.linalg.norm(np.cross(
+                    moved[faces[:, 1]]-moved[faces[:, 0]],
+                    moved[faces[:, 2]]-moved[faces[:, 0]]), axis=1)/2
+                self.assertGreater(float(area.min()), 1e-14)
+
+    def test_explicit_grid_spacing_accepts_jittered_particle_sampling(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        rng = np.random.default_rng(12)
+        reference += rng.uniform(-3e-4, 3e-4, reference.shape)
+        surface = BananaSkin(reference, (0.,), grid_spacing=.006)
+        codes = np.where(reference[:, 0] < 0, 1, 2)
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        moved, faces, _, _ = surface.mesh(reference, deformation, codes, codes)
+        self.assertEqual(components(faces), 2)
+        self.assertTrue(np.isfinite(moved).all())
+
+    def test_linked_block_uses_hermite_boundary_and_progressive_cut_topology(self):
+        reference = material_points((.03, .015, .015), .0075)
+        surface = LinkedVolumeSurface(
+            reference, (0.,), size=(.03, .015, .015),
+            grid_spacing=.0075, surface_spacing=.001875, shape='block')
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        complete = np.where(reference[:, 0] < 0, 1, 2)
+        partial = complete.copy()
+        partial[reference[:, 2] < .0075] = 0
+
+        moved, faces, rest, _ = surface.mesh(
+            reference, deformation, partial, np.zeros(len(reference), dtype=int))
+        self.assertEqual(components(faces), 1)
+        self.assertTrue(np.isclose(rest[faces, 0], 0.).all(axis=1).any())
+        np.testing.assert_allclose(moved, rest, atol=1e-14)
+
+        moved, faces, rest, caps = surface.mesh(
+            reference, deformation, complete, complete)
+        self.assertEqual(components(faces), 2)
+        self.assertTrue(caps[np.isclose(rest[:, 0], 0.)].all())
+        self.assertEqual(set(edge_multiplicity(faces).values()), {2})
+
+    def test_intersecting_recorded_cuts_create_four_local_dual_regions(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        surface = BananaSkin(reference, (0., 0.), cut_axes=(0, 1))
+        x_digit = np.where(reference[:, 0] < 0, 1, 2)
+        y_digit = np.where(reference[:, 1] < 0, 1, 2)
+        codes = x_digit + 3*y_digit
+        native_components = (reference[:, 0] >= 0).astype(int) + 2*(reference[:, 1] >= 0)
+        deformation = np.tile(np.eye(3), (len(reference), 1, 1))
+        shifts = np.array([[0., 0., 0.], [.004, 0., 0.],
+                           [0., .004, 0.], [.004, .004, 0.]])
+        positions = reference + shifts[native_components]
+
+        moved, faces, rest, caps = surface.mesh(
+            positions, deformation, codes, native_components)
+
+        self.assertEqual(components(faces), 4)
+        self.assertTrue(caps.any())
+        observed = moved-rest
+        for shift in shifts:
+            self.assertTrue(np.any(np.linalg.norm(observed-shift, axis=1) < 1e-12))
+        self.assertTrue(np.all(np.min(
+            np.linalg.norm(observed[:, None, :]-shifts[None, :, :], axis=2), axis=1) < 1e-12))
+
+    def test_cut_links_disconnect_only_after_both_native_sides_are_labelled(self):
+        reference = material_points((.12, .06, .03), .006, 'banana')
+        surface = BananaSkin(reference, (0.,))
+        partial = np.where(reference[:, 0] < 0, 1, 2)
+        partial[reference[:, 2] < .012] = 0
+        complete = np.where(reference[:, 0] < 0, 1, 2)
+
+        partial_links = surface._active_cut_edges(partial)
+        complete_links = surface._active_cut_edges(complete)
+
+        self.assertGreater(len(partial_links), 0)
+        self.assertGreater(len(complete_links), len(partial_links))
+        self.assertTrue(all(np.isclose(edge['point'][0], 0.)
+                            for _, edge in complete_links.values()))
 
 
 

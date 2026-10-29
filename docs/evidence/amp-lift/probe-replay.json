@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "input_sha256": {
+    "invocation.json": "67e1b10791c9c9db3b7dd0819c0ab5bbf5efac0e71a2b9dff809b13e35d239f7",
+    "initial-state.npz": "3606a11e7d52340c07434bd3dd7944350304a382f568ba42ec9b75c373c36c32",
+    "native/recording.json": "1c7f04ffe2512261c5587731f3877c0c6479e530db9e655b1f9bb71b85b0ff9c",
+    "native/effective-model.npz": "de4f9fd439d74d6b91d4cb3cdfe345da3e5f0f399b7a667e525695f102fc9972",
+    "actions/action-000000.npz": "dfa70700c7b0356d0c5b42d4cc7186b6144a4d63f3a57580eb76828a80f4442c",
+    "native/substeps/action-000000.npz": "1be2807f8eba50f434932c6253fba27d072a0fc3d9ffbc9fa1546dcdf5ae3cb1",
+    "actions/action-000001.npz": "3e663738a4b9b7a500dbc9d53bc562034bcc94aa3c911d259de7f7b9ebcdf98f",
+    "native/substeps/action-000001.npz": "1b83c7f6d82b124493fdb55c37790809282e66846c0a2ba0028fd786a326f88c",
+    "actions/action-000002.npz": "fbf59fe773740918e2e5fa33927696d15c91cb75017497c820be286d4ea8f23e",
+    "native/substeps/action-000002.npz": "a9ae87ed69f9910ad2a94e5840ae0d5796cb14a7b049b31e075b8da286365fda",
+    "actions/action-000003.npz": "ea2a22763511f2d772751b097e9c9f5daf700a69adcb9c62dd596578c1ac44d9",
+    "native/substeps/action-000003.npz": "e544a3c9fc217caffe42a5da960ab0bb6c0e7c48609336e23be11e54135d524c",
+    "actions/action-000004.npz": "b17fb47b4f104e01dd726bc07a3eab1cabd8382bf804664666b9f789f3be34a3",
+    "native/substeps/action-000004.npz": "3d3a076676a6e09332bc2e526e99ca5da0826150db7aedb8ff999559bd1b6a16",
+    "actions/action-000005.npz": "6b7c6966252379c2a16691fd3c326a969a122e520b9053e9e311b33b0846042c",
+    "native/substeps/action-000005.npz": "cf1cd7f6b6416697632327f807f840b0a52976c96401f40c6190285ae7230e1b",
+    "actions/action-000006.npz": "c8c0e29121dcb0e600976b97ec3800a4cb50698ab8b6c46a8e316ee569eb6c5b",
+    "native/substeps/action-000006.npz": "e1671dd16427f00340a5e43dd9e12fdb96cd41e0b032e61b36f29684f3a4e99b",
+    "actions/action-000007.npz": "340f8ed71ca6ff9b2f44a0a11b5bd055395574dc2c8ffbf6bb7967f15be498f6",
+    "native/substeps/action-000007.npz": "159bf034a75d151ca0a2578fe28e7206907d7b99329e5ce5fb98668b0fc5ca89",
+    "actions/action-000008.npz": "e4f3a1e6ca35eef57ff5b1956b7b7a9b4955c205f8865fc14e7f91db39ab72a3",
+    "native/substeps/action-000008.npz": "73b95fb69c2c1014dfe77276aee15a29d95dceb30dcb9286600648ebe5080108",
+    "actions/action-000009.npz": "65351e97ac02f74c012f350806e20c3ec8c3283036e40cac26bb146c767e5170",
+    "native/substeps/action-000009.npz": "b83814c8ec0a4659bb32c9da6bf7d664c24ba44035a8aef5f4094acc76e2a7a4",
+    "protocol.json": "a5e83eba6a96601d08d04f28848dd6518784b78cb36ab2a8d6abbbd75750256f",
+    "diagnostics.json": "09f0b839da467073b733e66c4683640720445595f5e073d3f774871a115b9a2e",
+    "diagnostic-series.npz": "89f2ecacd86c4116b322c631afcb790d6662d09c16f8e4c6b3c22a73c8ff9a29",
+    "native/compiled-template.mjb": "269643a334a2e2dea9178c5d1f4b9b9fd1b52c75228293fdb7bd024229b230a4"
+  },
+  "renderer_sha256": "6f8602078b24b32bcfb8b43ef8a1b802e5e9d64b02f77f2ab6e2f50516a2d409",
+  "mujoco_version": "3.10.0",
+  "scope": "Saved poses and native diagnostic curves; no physics integration or replacement force.",
+  "geometry": "Saved compiled geometry template; GPU mass/COM/friction randomization is not simulated in playback.",
+  "force_epoch": "Last completed substep indexed by its before-step clock; initial pose has no force sample.",
+  "fps": 50,
+  "expected_frames": 11,
+  "frames_completed": 11,
+  "native_state_span_s": 0.19999994337558746,
+  "presentation_duration_s": 0.22,
+  "duration_note": "One frame per boundary, including one extra frame displaying the final pre-reset endpoint.",
+  "task_success": null,
+  "frame_map": [
+    {
+      "frame": 0,
+      "native_time_s": 0.0,
+      "last_completed_force_substep": null
+    },
+    {
+      "frame": 1,
+      "native_time_s": 0.019999999552965164,
+      "last_completed_force_substep": 3
+    },
+    {
+      "frame": 2,
+      "native_time_s": 0.03999999538064003,
+      "last_completed_force_substep": 7
+    },
+    {
+      "frame": 3,
+      "native_time_s": 0.059999991208314896,
+      "last_completed_force_substep": 11
+    },
+    {
+      "frame": 4,
+      "native_time_s": 0.07999999821186066,
+      "last_completed_force_substep": 15
+    },
+    {
+      "frame": 5,
+      "native_time_s": 0.10000000894069672,
+      "last_completed_force_substep": 19
+    },
+    {
+      "frame": 6,
+      "native_time_s": 0.12000001966953278,
+      "last_completed_force_substep": 23
+    },
+    {
+      "frame": 7,
+      "native_time_s": 0.14000000059604645,
+      "last_completed_force_substep": 27
+    },
+    {
+      "frame": 8,
+      "native_time_s": 0.15999998152256012,
+      "last_completed_force_substep": 31
+    },
+    {
+      "frame": 9,
+      "native_time_s": 0.1799999624490738,
+      "last_completed_force_substep": 35
+    },
+    {
+      "frame": 10,
+      "native_time_s": 0.19999994337558746,
+      "last_completed_force_substep": 39
+    }
+  ],
+  "camera": {
+    "lookat": [
+      -0.049885962158441544,
+      0.10093290358781815,
+      0.8
+    ],
+    "distance": 2.6,
+    "azimuth": 120.0,
+    "elevation": -15.0,
+    "fixed": true
+  },
+  "display_only_changes": {
+    "headlight_ambient": 0.45,
+    "headlight_diffuse": 0.7
+  },
+  "encoder_version": "ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers",
+  "video_sha256": "f12f4878cbf5e612cb5e751a360135d849bcc90f451ce79e41e20180fdc33635",
+  "curve_sha256": {
+    "curves.png": "28d373d8be350f68f706a450e1ee00777e0dfcf0af5951c9ff6baea9180127bd",
+    "curves.svg": "7a72d2397bcca4d19f80cfca19cdf20bff13b93ecf6e27aad99c259f48748290"
+  },
+  "render_encode_wall_s": 0.9772541529964656
+}

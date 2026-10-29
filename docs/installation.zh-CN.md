@@ -5,34 +5,56 @@
 安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，然后在仓库根目录执行：
 
 ```bash
-bash scripts/setup.sh
-bash demos/apple-stem-grasp/run.sh --backend mujoco
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
+bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
 # 或：
-bash demos/apple-stem-grasp/run.sh --backend superdex
+bash demos/apple-stem-grasp/run.sh --backend superdex --output demos/apple-stem-grasp/runs/first-superdex
 ```
 
 安装脚本使用 **PyPI 上的官方 SuperDex 1.0.0 wheel**，并自动获取 Python 3.12，无需 Clang、CMake、SuperDex 源码仓库或 API key。目前安装脚本支持 Linux x86_64。上游虽然提供其他平台的 wheel，但本演示尚未验证原生 macOS 和 Windows 运行。
 
 两个命令都会在 SDF 创建、苹果静置和抓取规划完成后打开交互式 MuJoCo 窗口。所选后端负责动力学，MuJoCo 负责两者的渲染。即使安装较快，启动和仿真也需要一定时间。
 
-两者均运行 [14 秒 SDF–SDF 抓取](sdf-backends.zh-CN.md)。MuJoCo 后端使用固定版本的官方 `mujoco==3.11.0` wheel，并在本地生成动力学模型，无需引擎补丁或编译器。默认输出分别位于演示目录下的 `runs/latest-superdex-sdf/` 和 `runs/latest-mujoco-sdf/`。
+两者均运行 [14 秒 SDF–SDF 抓取](sdf-backends.zh-CN.md)。MuJoCo 后端使用固定版本的官方 `mujoco==3.11.0` wheel，并在本地生成动力学模型，无需引擎补丁或编译器。以上命令显式指定各自的输出目录。目录必须为空；已有记录（包括失败记录）会被拒绝复用。省略 `--output` 时，每次生成 `runs/<backend>-sdf-<唯一 ID>/`，终端 `Run output:` 会打印实际路径。
 
 无桌面的服务器可执行：
 
 ```bash
-bash demos/apple-stem-grasp/run.sh --backend mujoco --headless
+bash demos/apple-stem-grasp/run.sh --backend mujoco --headless --output demos/apple-stem-grasp/runs/first-mujoco
 ```
+
+## 保留已有环境
+
+wheel 和源码安装入口均面向 `historical-3.11.0`。在安装包、原生编译或下载资产之前，两者检查 Python 3.12、实际解释器位置、已安装固定版本和 editable DexLab 所属检出目录。不同 profile、冲突版本（包括 MuJoCo 3.16/3.17）、其他目录的 editable，以及从外部环境继承或链接的包都会被拒绝；安装器不会修复或降级该环境。显式 `--mujoco-profile` 优先于 `DEXLAB_MUJOCO_PROFILE`；未显式指定时遵从该变量，两者均未设置则使用历史 profile。
+
+兼容的本地 `.venv` 可以重复使用。准入后会在 `.venv/dexlab-environment.json` 记录所属检出目录和 profile；这个归属记录**不代表物理验收**。新检出目录应使用自己的环境。遇到拒绝时保留原目录，选择尚未使用的路径：
+
+```bash
+git clone https://github.com/huangkiki/Dexlab.git ../Dexlab-historical
+cd ../Dexlab-historical
+bash scripts/setup.sh --mujoco-profile historical-3.11.0
+```
+
+支持把本检出目录独占的环境放到挂载盘。先确保当前检出目录没有 `.venv`，在挂载盘尚未使用的路径**新建**环境，再显式声明归属：
+
+```bash
+uv venv --python 3.12 /path/on/mounted-data/dexlab-historical-venv
+ln -s /path/on/mounted-data/dexlab-historical-venv .venv
+bash scripts/setup.sh --mujoco-profile historical-3.11.0 --claim-environment
+```
+
+归属声明只接受干净环境，或兼容且 editable DexLab 已属于当前目录的环境；不能接管其他所有者或绕过版本检查。后续兼容重入无需再次加 claim 参数。`bash scripts/setup.sh --help` 不探测环境，也不安装包。最新版本资格检查走独立环境的[显式测试运行库流程](autoresearch.zh-CN.md#明确选择测试运行时)，不用这个历史安装器。
 
 ## 验证与视频
 
 每个演示记录 14 秒仿真运动。动力学在 CPU 上运行，实际计算时间长于仿真时长。安装脚本根据带版本的[资产清单](../demos/apple-stem-grasp/assets.json)获取机器人资产包和苹果基础色纹理。小型任务专用苹果网格和参数保留在 Git 中。
 
 ```bash
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/latest-mujoco-sdf
-MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py demos/apple-stem-grasp/runs/latest-mujoco-sdf
+.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/first-mujoco
+MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-另一个后端使用 `latest-superdex-sdf` 替换 `latest-mujoco-sdf`。视频导出需要 FFmpeg 和可用的 OpenGL / EGL 驱动。若要单独保留一份记录，在 `run.sh` 命令后添加 `--output demos/apple-stem-grasp/runs/my-run`。
+另一个后端使用 `first-superdex` 替换 `first-mujoco`。视频导出需要 FFmpeg 和可用的 OpenGL / EGL 驱动。再次运行请换一个空目录，例如 `--output demos/apple-stem-grasp/runs/second-mujoco`，随后将评分和渲染命令中的路径同步替换。两次记录可用 `diff -u <首次目录>/summary.json <再次目录>/summary.json` 比较（返回 1 表示不同）。
 
 两个已记录运行均通过完整三秒保持检查，详见 [MuJoCo 报告](../demos/apple-stem-grasp/evidence/sdf-mujoco/summary.json)、[SuperDex 报告](../demos/apple-stem-grasp/evidence/sdf-superdex/summary.json)及[验收标准](sdf-backends.zh-CN.md#验证与视频导出)。
 
@@ -58,7 +80,7 @@ MUJOCO_GL=egl .venv/bin/python demos/apple-stem-grasp/src/render_stem_focus.py d
 需要原始 UniLab 源码基线的开发者可执行：
 
 ```bash
-bash scripts/setup.sh --source
+bash scripts/setup.sh --source --mujoco-profile historical-3.11.0
 SUPERDEX_ROOT="$PWD/vendor/project_superdex" bash demos/apple-stem-grasp/run.sh --backend superdex
 ```
 

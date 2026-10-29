@@ -13,8 +13,11 @@ class SuperDexCloth:
         import superdex.physics as physics
 
         identity = package_identity("superdex-physics-fp64")
-        if identity["version"] != "1.0.0" or not physics.uses_double_precision():
-            raise ValueError("This shell profile requires official SuperDex 1.0.0 FP64")
+        api_identity = package_identity("superdex-physics")
+        if (identity["version"] not in ("1.0.0", "1.0.1")
+                or api_identity["version"] != identity["version"]
+                or not physics.uses_double_precision()):
+            raise ValueError("This shell profile requires matching SuperDex 1.0.0 or 1.0.1 FP64 packages")
         if device != "cpu":
             raise ValueError("This SuperDex shell profile runs on CPU")
         if not physics.is_initialized():
@@ -23,12 +26,12 @@ class SuperDexCloth:
         self.dt = dt
         self.scene = physics.create_scene(f"cloth-{case.name}")
         try:
-            self._build(case, iterations, identity)
+            self._build(case, iterations, identity, api_identity)
         except Exception:
             self.close()
             raise
 
-    def _build(self, case, iterations, identity):
+    def _build(self, case, iterations, identity, api_identity):
         physics = self.physics
         vertices, triangles, masses = case.mesh()
         self.scene.set_gravity(case.gravity)
@@ -73,7 +76,7 @@ class SuperDexCloth:
         if not np.isclose(self.actor.get_mass(), masses.sum(), rtol=1e-10, atol=1e-12):
             raise RuntimeError("Native shell mass differs from declared areal mass")
         self.metadata = {
-            "engine": "superdex", "version": "1.0.0", "solver": "experimental-shell",
+            "engine": "superdex", "version": identity["version"], "solver": "experimental-shell",
             "integrator": "backward_euler", "precision": "float64", "device": "cpu",
             "iterations": iterations,
             "solver_parameters": {
@@ -86,7 +89,7 @@ class SuperDexCloth:
                 "linear_max_iter": solver.linear_solver.max_iter,
             },
             "package_identity": identity,
-            "api_identity": package_identity("superdex-physics"),
+            "api_identity": api_identity,
             "material": {name: getattr(material, name) for name in (
                 "membrane_lambda", "membrane_mu", "bending_alpha", "bending_beta",
                 "density", "mass_damping_coefficient", "stiffness_damping_coefficient",

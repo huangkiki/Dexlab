@@ -125,6 +125,7 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-player header { display:flex; align-items:center; justify-content:space-between; gap:.65rem; padding:.85rem 1rem; flex-wrap:wrap; }
 .cutting-player h3 { margin:0; font-size:1.05rem; }
 .cutting-player video { display:block; width:100%; aspect-ratio:48/35; object-fit:contain; background:#e7eeeb; }
+.cut-push-showcase .cutting-player video { aspect-ratio:96/79; }
 .cutting-view-switch { display:flex; gap:3px; padding:3px; background:var(--pst-color-background); border-radius:7px; border:1px solid var(--pst-color-border); }
 .cutting-view-switch button { padding:.2rem .6rem; font-size:.8rem; border:0; border-radius:4px; background:transparent; color:var(--pst-color-text-muted); cursor:pointer; }
 .cutting-view-switch button[aria-pressed=true] { background:var(--pst-color-surface); color:var(--pst-color-text-base); box-shadow:0 1px 3px #0002; }
@@ -132,13 +133,14 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-player a { font-weight:600; }
 .cutting-showcase-note { margin:.8rem 0; font-size:.86rem; color:var(--pst-color-text-muted); }
 @media(max-width:720px) { .cutting-showcase-grid { grid-template-columns:1fr; } }
+@media(min-width:960px) { body:has(.cut-push-showcase) #pst-primary-sidebar { display:none; } .bd-main:has(.cut-push-showcase) .bd-article-container { max-width:1200px; } }
 
 .cutting-comparison-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; }
 .cutting-comparison-panel { min-width:0; border:1px solid var(--pst-color-border); border-radius:12px; overflow:hidden; background:var(--pst-color-surface); }
 .cutting-comparison-panel header { display:flex; min-height:4.25rem; padding:.8rem; justify-content:center; align-items:center; gap:.5rem; flex-wrap:wrap; box-sizing:border-box; }
 .cutting-comparison-panel header h3 { margin:0; }
 .cutting-comparison-panel h3 { text-align:center; font-size:1rem; margin:.6rem 0; }
-.cutting-comparison-panel video { display:block; width:100%; aspect-ratio:48/35; object-fit:contain; border-radius:6px; background:#eef0ef; }
+.cutting-comparison-panel video { display:block; width:100%; aspect-ratio:8/5; object-fit:contain; border-radius:6px; background:#f0f0ed; }
 .cutting-comparison-panel p { font-size:.78rem; line-height:1.6; margin:0; padding:.7rem .85rem; }
 .cutting-reference-controls { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; margin:.8rem 0; }
 .cutting-reference-controls[hidden] { display:none; }
@@ -151,3 +153,12 @@ html[data-theme="dark"] .verdict.pass {color:#85d9ba}html[data-theme="dark"] .ve
 .cutting-playback-controls output { font-size:.72rem; font-variant-numeric:tabular-nums; }
 @media(max-width:720px) { .cutting-comparison-grid { grid-template-columns:1fr; } }
 @media(min-width:960px) { body:has(.cutting-comparison) #pst-primary-sidebar { display:none; } .bd-main:has(.cutting-comparison) .bd-article-container { max-width:1200px; } }
+
+/* The existing Sphinx homepage hosts the browser-native contact lab. */
+.dexlab-live-lab { margin:1.1rem 0 2rem; border:1px solid var(--pst-color-border); border-radius:14px; overflow:hidden; background:#0b0e12; }
+.dexlab-live-lab iframe { display:block; width:100%; height:760px; border:0; background:#0b0e12; }
+@media(max-width:700px) { .dexlab-live-lab iframe { height:680px; } }
+@media(min-width:960px) {
+  body:has(.dexlab-live-lab) #pst-primary-sidebar { display:none; }
+  .bd-main:has(.dexlab-live-lab) .bd-article-container { max-width:1280px; }
+}

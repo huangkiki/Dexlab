@@ -1,0 +1,787 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "schema_version": 1,
+    "authorization": "User requested adding Newtonian viscosity on 2026-10-15; extension of issue217, PR only.",
+    "paper": "https://arxiv.org/html/2609.27342v2",
+    "source_sha256": {
+      "cutting.py": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+      "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+      "cutting_score.py": "2220f80f6d71b16c516905c720e4752a958377e422497a1d852e1f102c439478",
+      "tofu_cut.py": "3746004b486263982d19afc32b28b58a7087253366dbc517dfaf6ffad4000f91"
+    },
+    "equations": {
+      "spatial_rate": "L = grad_X(v) F^-1",
+      "symmetric_rate": "D = (L + L^T)/2",
+      "cauchy_viscous_stress": "sigma_v = 2 eta D",
+      "first_piola": "P_v = J sigma_v F^-T",
+      "substep_constitutive_dissipation_j": "dt sum_p V0_p P_v:grad_X(v) = dt sum_p 2 eta V0_p J D:D"
+    },
+    "constitutive_choice": "Zero second-viscosity coefficient, equivalent bulk viscosity 2 eta/3. Elastic stress remains fixed-corotated. Compatible current P2G velocity defines the rate before force impulses. Explicit integration.",
+    "coefficient": {
+      "dynamic_viscosity_pa_s": 5.0,
+      "source": "Synthetic predeclared coefficient, not measured food or an author-provided showcase parameter. E=6000 Pa, nu=.35 => eta/shear_modulus=.00225 s."
+    },
+    "default_dynamic_viscosity_pa_s": 0.0,
+    "banana_dynamic_viscosity_pa_s": 0.0,
+    "cases": [
+      {
+        "name": "viscosity-001-probe",
+        "task": "tofu-sequential",
+        "arguments": [
+          "--grid-spacing",
+          ".005",
+          "--viscosity",
+          "5",
+          "--dt",
+          ".00025",
+          "--duration",
+          "1.0"
+        ]
+      },
+      {
+        "name": "viscosity-002-tofu",
+        "task": "tofu-sequential",
+        "arguments": [
+          "--grid-spacing",
+          ".005",
+          "--viscosity",
+          "5",
+          "--dt",
+          ".00025"
+        ]
+      },
+      {
+        "name": "viscosity-003-tofu-half",
+        "task": "tofu-sequential",
+        "arguments": [
+          "--grid-spacing",
+          ".005",
+          "--viscosity",
+          "5",
+          "--dt",
+          ".000125"
+        ]
+      },
+      {
+        "name": "viscosity-004-tofu-half-control",
+        "task": "tofu-sequential",
+        "arguments": [
+          "--grid-spacing",
+          ".005",
+          "--viscosity",
+          "5",
+          "--dt",
+          ".000125",
+          "--motion-protocol",
+          "cut-no-push"
+        ]
+      }
+    ],
+    "acceptance": {
+      "fraction_error": 0.03,
+      "momentum_error_ns": 1e-09,
+      "minimum_det_f": 0.05,
+      "maximum_overlap_radii": 1.0,
+      "relative_motion_m": 0.001,
+      "passive_motion_m": 0.003,
+      "minimum_reaction_n": 0.001,
+      "minimum_push_impulse_ns": 0.001
+    },
+    "extra_dissipation_tolerance_j": 1e-14,
+    "selected_tofu_case": "viscosity-003-tofu-half",
+    "matched_elastic_baseline": "physics-003-tofu-half",
+    "negative_control": "Same eta5 and .125ms, complete cuts and vertical motion, no lateral drive. Expected to fail only independent_motion and knife_supplies_push_impulse.",
+    "diagnostic": {
+      "window_s": [
+        5.4,
+        6.0
+      ],
+      "sample_interval_s": 0.05,
+      "report": "Same-window native/centroid jitter, force and displacement; retain improvement or regression. Rigid rocking need not dissipate through material viscosity."
+    },
+    "zero_regression": "18 material-step comparisons (nine event states, two impulse patterns), plus unchanged seven elastic and two legacy scores. Reuses frozen raw records; no new full eta0 trajectory claimed.",
+    "limits": {
+      "calls": 6,
+      "cumulative_worker_s": 9000,
+      "per_call_s": 3000,
+      "original_phase_cap_unchanged_s": 8400,
+      "combined_reserved_physics_cap_s": 17400
+    },
+    "scope": "Synthetic tofu viscoelastic extension only; no parameter search, plasticity, material calibration, six-engine qualification, hidden velocity input or changed task thresholds."
+  },
+  "records": [
+    {
+      "case": "viscosity-001-probe",
+      "result": "short probe; not full task acceptance",
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.09,
+            0.03,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.00025,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "dynamic_viscosity": 5.0,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.025,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 1.0,
+        "probe_time_s": null,
+        "task": "tofu-sequential",
+        "acceptance": {
+          "fraction_error": 0.03,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "minimum_push_impulse_ns": 0.001
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "2220f80f6d71b16c516905c720e4752a958377e422497a1d852e1f102c439478",
+          "tofu_cut.py": "3746004b486263982d19afc32b28b58a7087253366dbc517dfaf6ffad4000f91"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "052d1934ba1a2c976ddcd79210afb7c528a36827",
+        "motion_protocol": "cut-push",
+        "motion_start_time_s": 3.3,
+        "wall_s_including_jit": 120.11339571099961,
+        "completed_steps": 4000,
+        "artifacts": {
+          "states.npz": "f161dc8bb58041aef1a1dbf573cb2b4cac2d1e4bd9ad0d7c55944491c876e472",
+          "trace.npz": "a77986d4c3f3089a3109911825a850609b3a7615254c3cb678a3dd43f7a09a25"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-sequential",
+        "mode": "full",
+        "passed": false,
+        "checks": {
+          "complete_duration": false,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": false,
+          "independent_motion": false,
+          "nonzero_material_reaction": true,
+          "three_mechanical_components": false,
+          "piece_mass_inventory": false,
+          "progressive_separation": false,
+          "knife_supplies_push_impulse": false,
+          "no_new_cuts_during_push": false,
+          "nonnegative_viscous_dissipation": true
+        },
+        "component_mass_fractions": [
+          1.0
+        ],
+        "progressive_components": [
+          1,
+          1
+        ],
+        "scoring_side_counts": [],
+        "scoring_maximum_depth_m": [],
+        "initial_components": 1,
+        "final_components": 1,
+        "mass_kg": 0.08910000000000003,
+        "particle_count": 5184,
+        "momentum_error_ns": 4.138941793463413e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 5.421010862427522e-20,
+        "blade_impulse_error_ns": 6.945670167485263e-19,
+        "relative_motion_m": -0.0,
+        "left_displacement_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "right_displacement_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "piece_displacements_m": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "peak_material_reaction_n": 0.01818267367795162,
+        "constitutive_viscous_dissipation_j": 0.00016158447366638223,
+        "motion_protocol": "cut-push",
+        "push_direction_knife_impulse_ns": 0.0,
+        "leftward_knife_impulse_ns": 0.0,
+        "maximum_proxy_overlap_m": 0.00015549570786098843,
+        "det_f_range": [
+          0.9656052543010972,
+          1.0066740495745172
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "worker_wall_s": 121.10771211499741,
+      "resource_receipt_sha256": "13af9a535281f922d6a40d2cdf9c9120acb8ac4410beebcc914f9d39c28d0e61",
+      "dissipation_audit": "viscosity-001-probe-dissipation.json"
+    },
+    {
+      "case": "viscosity-002-tofu",
+      "result": "passed",
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.09,
+            0.03,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.00025,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "dynamic_viscosity": 5.0,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.025,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 6.0,
+        "probe_time_s": null,
+        "task": "tofu-sequential",
+        "acceptance": {
+          "fraction_error": 0.03,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "minimum_push_impulse_ns": 0.001
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "2220f80f6d71b16c516905c720e4752a958377e422497a1d852e1f102c439478",
+          "tofu_cut.py": "3746004b486263982d19afc32b28b58a7087253366dbc517dfaf6ffad4000f91"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "052d1934ba1a2c976ddcd79210afb7c528a36827",
+        "motion_protocol": "cut-push",
+        "motion_start_time_s": 3.3,
+        "wall_s_including_jit": 724.8360401259997,
+        "completed_steps": 24000,
+        "artifacts": {
+          "states.npz": "648e2e681ec0da4c955a5677213a458eb4c139f7ceda1cdff1018f35d14fdab3",
+          "trace.npz": "b7e8c7815029cfd12e9561715217adc4706f94b6e86282b9fe82428e9e57155c"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-sequential",
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true,
+          "three_mechanical_components": true,
+          "piece_mass_inventory": true,
+          "progressive_separation": true,
+          "knife_supplies_push_impulse": true,
+          "no_new_cuts_during_push": true,
+          "nonnegative_viscous_dissipation": true
+        },
+        "component_mass_fractions": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "progressive_components": [
+          2,
+          3
+        ],
+        "scoring_side_counts": [],
+        "scoring_maximum_depth_m": [],
+        "initial_components": 1,
+        "final_components": 3,
+        "mass_kg": 0.08910000000000003,
+        "particle_count": 5184,
+        "momentum_error_ns": 4.138941793463413e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 5.421010862427522e-20,
+        "blade_impulse_error_ns": 5.5514539363046844e-18,
+        "relative_motion_m": 0.010905160896912916,
+        "left_displacement_m": [
+          -0.011004131576564661,
+          7.5482556804801e-18,
+          -3.224949261893158e-05
+        ],
+        "right_displacement_m": [
+          -9.89706796517445e-05,
+          5.500820189013261e-18,
+          -1.052215307655556e-05
+        ],
+        "piece_displacements_m": [
+          [
+            -0.011004131576564661,
+            7.5482556804801e-18,
+            -3.224949261893158e-05
+          ],
+          [
+            -0.00014412492014971494,
+            6.43192899918021e-18,
+            -2.368371843296073e-05
+          ],
+          [
+            -5.381643915377404e-05,
+            4.569711378846312e-18,
+            2.6394122798496095e-06
+          ]
+        ],
+        "peak_material_reaction_n": 0.07267759699489106,
+        "constitutive_viscous_dissipation_j": 0.00017097368706960183,
+        "motion_protocol": "cut-push",
+        "push_direction_knife_impulse_ns": 0.09502641355716065,
+        "leftward_knife_impulse_ns": 0.09502641355716065,
+        "maximum_proxy_overlap_m": 0.00015549570786098843,
+        "det_f_range": [
+          0.9545854191185222,
+          1.034733985545622
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "worker_wall_s": 726.9170131570027,
+      "resource_receipt_sha256": "57cd80a17cf1bb30695b707eedba487110bddaff7b1c2536e7fa3fc2ef2f79fb",
+      "dissipation_audit": "viscosity-002-tofu-dissipation.json"
+    },
+    {
+      "case": "viscosity-003-tofu-half",
+      "result": "passed",
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.09,
+            0.03,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.000125,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "dynamic_viscosity": 5.0,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.025,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 6.0,
+        "probe_time_s": null,
+        "task": "tofu-sequential",
+        "acceptance": {
+          "fraction_error": 0.03,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "minimum_push_impulse_ns": 0.001
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "2220f80f6d71b16c516905c720e4752a958377e422497a1d852e1f102c439478",
+          "tofu_cut.py": "3746004b486263982d19afc32b28b58a7087253366dbc517dfaf6ffad4000f91"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "052d1934ba1a2c976ddcd79210afb7c528a36827",
+        "motion_protocol": "cut-push",
+        "motion_start_time_s": 3.3,
+        "wall_s_including_jit": 1443.4614590980018,
+        "completed_steps": 48000,
+        "artifacts": {
+          "states.npz": "c1cbf38621b1f652945ec1396c92e3e9e00b383ae22857912cf5afe6cca94367",
+          "trace.npz": "dc91e3737777fd4da3d0653e3618a4a71423c44380b3546850c2fab7c26d65cc"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-sequential",
+        "mode": "full",
+        "passed": true,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": true,
+          "nonzero_material_reaction": true,
+          "three_mechanical_components": true,
+          "piece_mass_inventory": true,
+          "progressive_separation": true,
+          "knife_supplies_push_impulse": true,
+          "no_new_cuts_during_push": true,
+          "nonnegative_viscous_dissipation": true
+        },
+        "component_mass_fractions": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "progressive_components": [
+          2,
+          3
+        ],
+        "scoring_side_counts": [],
+        "scoring_maximum_depth_m": [],
+        "initial_components": 1,
+        "final_components": 3,
+        "mass_kg": 0.08910000000000003,
+        "particle_count": 5184,
+        "momentum_error_ns": 5.2475385148298415e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 5.549759870410176e-18,
+        "relative_motion_m": 0.011001074781610021,
+        "left_displacement_m": [
+          -0.011096325664476027,
+          1.3452138066023852e-17,
+          -3.304721952782086e-05
+        ],
+        "right_displacement_m": [
+          -9.525088286600644e-05,
+          1.9686300557815503e-18,
+          -1.1393122205641606e-05
+        ],
+        "piece_displacements_m": [
+          [
+            -0.011096325664476027,
+            1.3452138066023852e-17,
+            -3.304721952782086e-05
+          ],
+          [
+            -0.0001373499433927767,
+            6.716030124007432e-19,
+            -2.3779556953805805e-05
+          ],
+          [
+            -5.315182233923618e-05,
+            3.2656570991623573e-18,
+            9.933125425225925e-07
+          ]
+        ],
+        "peak_material_reaction_n": 0.07251106869959112,
+        "constitutive_viscous_dissipation_j": 0.00013578906622760753,
+        "motion_protocol": "cut-push",
+        "push_direction_knife_impulse_ns": 0.09262521741658886,
+        "leftward_knife_impulse_ns": 0.09262521741658886,
+        "maximum_proxy_overlap_m": 3.8157797323851725e-05,
+        "det_f_range": [
+          0.9564246022634897,
+          1.0302543194983425
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "worker_wall_s": 1445.5438854329986,
+      "resource_receipt_sha256": "5dbf0b42bd89e810608fbf71931f9f5a205314c93bf314ba3bbd3a20fea1cb23",
+      "dissipation_audit": "viscosity-003-tofu-half-dissipation.json"
+    },
+    {
+      "case": "viscosity-004-tofu-half-control",
+      "result": "expected rejection",
+      "manifest": {
+        "schema_version": 1,
+        "status": "complete",
+        "mode": "full",
+        "config": {
+          "size": [
+            0.09,
+            0.03,
+            0.03
+          ],
+          "grid_spacing": 0.005,
+          "dt": 0.000125,
+          "density": 1100.0,
+          "young_modulus": 6000.0,
+          "poisson_ratio": 0.35,
+          "dynamic_viscosity": 5.0,
+          "flip_fraction": 0.95,
+          "normal_scale": 0.1,
+          "friction_static": 0.3,
+          "friction_dynamic": 0.2,
+          "tangent_stiffness": 0.05,
+          "tangent_damping": 0.1,
+          "cutting_energy": 0.5,
+          "sharpness": 0.9,
+          "blade_mass": 0.2,
+          "blade_half_size": [
+            0.00025,
+            0.025,
+            0.02
+          ],
+          "drive_stiffness": 250.0,
+          "drive_damping": 14.0,
+          "drive_force_limit": 10.0,
+          "shape": "block",
+          "blade_bevel_height": 0.005
+        },
+        "duration_s": 6.0,
+        "probe_time_s": null,
+        "task": "tofu-sequential",
+        "acceptance": {
+          "fraction_error": 0.03,
+          "momentum_error_ns": 1e-09,
+          "minimum_det_f": 0.05,
+          "maximum_overlap_radii": 1.0,
+          "relative_motion_m": 0.001,
+          "passive_motion_m": 0.003,
+          "minimum_reaction_n": 0.001,
+          "minimum_push_impulse_ns": 0.001
+        },
+        "paper": "https://arxiv.org/abs/2609.27342v2",
+        "implementation": "independent CPU TLMPM reference, synthetic parameters",
+        "source_sha256": {
+          "cutting.py": "de0990c6a3fce3ac8e435053f5b4474827094c4ba4305e93352c3ac478aa1c5c",
+          "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+          "cutting_score.py": "2220f80f6d71b16c516905c720e4752a958377e422497a1d852e1f102c439478",
+          "tofu_cut.py": "3746004b486263982d19afc32b28b58a7087253366dbc517dfaf6ffad4000f91"
+        },
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "numba": "0.67.0"
+        },
+        "git_head": "052d1934ba1a2c976ddcd79210afb7c528a36827",
+        "motion_protocol": "cut-no-push",
+        "motion_start_time_s": 3.3,
+        "wall_s_including_jit": 1447.223565831002,
+        "completed_steps": 48000,
+        "artifacts": {
+          "states.npz": "65b9cedb7c10344bad3bfa2d5b25e9d8e0b8b6d8dbee76f744f70f722e1b69b8",
+          "trace.npz": "76bdc25cecc03b049b93d7ebb09bf224a2faff361284b3ada9332fc7473b1ddb"
+        }
+      },
+      "score": {
+        "schema_version": 1,
+        "task": "tofu-sequential",
+        "mode": "full",
+        "passed": false,
+        "checks": {
+          "complete_duration": true,
+          "initially_connected": true,
+          "persistent_cut_labels": true,
+          "momentum_balance": true,
+          "frame_momentum_matches": true,
+          "external_impulse_matches": true,
+          "blade_reaction_feedback": true,
+          "positive_jacobian": true,
+          "bounded_overlap": true,
+          "blade_withdrawn": true,
+          "independent_motion": false,
+          "nonzero_material_reaction": true,
+          "three_mechanical_components": true,
+          "piece_mass_inventory": true,
+          "progressive_separation": true,
+          "knife_supplies_push_impulse": false,
+          "no_new_cuts_during_push": true,
+          "nonnegative_viscous_dissipation": true
+        },
+        "component_mass_fractions": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "progressive_components": [
+          2,
+          3
+        ],
+        "scoring_side_counts": [],
+        "scoring_maximum_depth_m": [],
+        "initial_components": 1,
+        "final_components": 3,
+        "mass_kg": 0.08910000000000003,
+        "particle_count": 5184,
+        "momentum_error_ns": 5.2475385148298415e-17,
+        "frame_momentum_error_ns": 0.0,
+        "external_impulse_error_ns": 2.710505431213761e-20,
+        "blade_impulse_error_ns": 5.549759870410176e-18,
+        "relative_motion_m": -0.0002403788968079439,
+        "left_displacement_m": [
+          0.0001659294759123603,
+          4.825703558460944e-18,
+          -6.587279421356451e-06
+        ],
+        "right_displacement_m": [
+          -7.44494208955836e-05,
+          3.1090501186922287e-18,
+          -9.29823383251805e-06
+        ],
+        "piece_displacements_m": [
+          [
+            0.0001659294759123603,
+            4.825703558460944e-18,
+            -6.587279421356451e-06
+          ],
+          [
+            -0.0001071867680457588,
+            -1.765844093890743e-18,
+            -2.0122723710684284e-05
+          ],
+          [
+            -4.171207374540839e-05,
+            7.9839443312752e-18,
+            1.5262560456481833e-06
+          ]
+        ],
+        "peak_material_reaction_n": 0.03144095235660243,
+        "constitutive_viscous_dissipation_j": 0.00013331880578018677,
+        "motion_protocol": "cut-no-push",
+        "push_direction_knife_impulse_ns": -0.001005824771200643,
+        "leftward_knife_impulse_ns": -0.001005824771200643,
+        "maximum_proxy_overlap_m": 3.8157797323851725e-05,
+        "det_f_range": [
+          0.9564246022634897,
+          1.030333773460855
+        ],
+        "evidence_scope": "synthetic CPU reference task; not measured food or authors implementation"
+      },
+      "worker_wall_s": 1449.9290992479982,
+      "resource_receipt_sha256": "1e69d89b4f1c3ed15942386ddd2b5488a2d7b9c132ace9cba219f5dccb757fa6",
+      "dissipation_audit": "viscosity-004-tofu-half-control-dissipation.json"
+    }
+  ],
+  "paired_control_same_through_s": 3.3,
+  "pre_push_exact_array_equality": {
+    "states.npz/position": true,
+    "states.npz/velocity": true,
+    "states.npz/sides": true,
+    "states.npz/deformation": true,
+    "trace.npz/blade_position_m": true,
+    "trace.npz/target_edge_m": true,
+    "trace.npz/momentum_ns": true,
+    "trace.npz/external_impulse_ns": true,
+    "trace.npz/material_reaction_n": true,
+    "trace.npz/viscous_dissipation_j": true
+  },
+  "zero_viscosity_regression": "zero-viscosity-regression.json",
+  "elastic_cohort": "evidence.json",
+  "counts": {
+    "full_cases": 3,
+    "positive_full_cases": 2,
+    "negative_full_controls": 1,
+    "short_resource_probes": 1
+  },
+  "scope": "Synthetic viscosity; no food calibration. Source and raw hashes retained. Full cases and short probes have separate denominators."
+}

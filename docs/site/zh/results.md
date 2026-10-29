@@ -1,5 +1,7 @@
 # 实验结果与失败
 
+[Solver 失败复盘](solver-failure-audit.md) 汇总 RSS 与 DexLab 既有实验，区分耦合缺失、配置失败和运行错误。
+
 ## 双引擎斜面对照
 
 [相同方块、三个步长的完整配对报告](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.zh-CN.md)：固定配置下 MuJoCo 3/9、SuperDex 8/9 通过；保留静态漂移、初始瞬态及 MuJoCo 更高阻抗下漂移更小的反例，不作通用排名。

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "task": "tofu-scoring",
+  "purpose": "Two perpendicular shallow incisions with an intact lower bridge.",
+  "cases": [
+    [
+      "physics-001-cross",
+      [
+        "--task",
+        "tofu-scoring"
+      ]
+    ],
+    [
+      "physics-002-cross-half",
+      [
+        "--task",
+        "tofu-scoring",
+        "--dt",
+        ".000125"
+      ]
+    ],
+    [
+      "physics-003-cross-uncut",
+      [
+        "--task",
+        "tofu-scoring",
+        "--mode",
+        "uncut"
+      ]
+    ],
+    [
+      "physics-004-sequential-regression",
+      [
+        "--task",
+        "tofu-sequential"
+      ]
+    ]
+  ],
+  "physics_sha256": {
+    "cutting.py": "ef9064563013f465d66dc0740b3517c8b1e0f1322d29440ddd71c372b92ab6d3",
+    "cutting_geometry.py": "e88c41a5b9c51c96acefe00a1aaffd07f3e2a1529bc9d77447fb40907dc26db4",
+    "cutting_score.py": "b35027b60d68a7646e5e93d65ccd8eac5391017505a65f1f113fe908dffe9530",
+    "tofu_cut.py": "dd1c43a8a8aa0e2e516d998e4bbbf5bf27c343a06eeabd53f43138455a4fbcfa"
+  },
+  "geometry": {
+    "block_size_m": [
+      0.045,
+      0.045,
+      0.03
+    ],
+    "grid_spacing_m": 0.005,
+    "blade_half_size_m": [
+      0.00025,
+      0.0275,
+      0.02
+    ],
+    "bevel_height_m": 0.005
+  },
+  "controls": {
+    "duration_s": 4.2,
+    "stroke_period_s": 2.0,
+    "yaw_rad": [
+      0.0,
+      1.5707963267948966
+    ],
+    "local_time_s": [
+      0.0,
+      0.35,
+      1.0,
+      1.2,
+      1.75,
+      2.2
+    ],
+    "target_edge_z_m": [
+      0.042,
+      0.042,
+      0.024,
+      0.024,
+      0.042,
+      0.042
+    ],
+    "cutting_window_s": [
+      0.35,
+      1.2
+    ],
+    "probe_velocity": null,
+    "description": "Guided perpendicular shallow incisions. The knife is reoriented only after withdrawal; no free rotational dynamics or exact author knife-tip path is claimed."
+  },
+  "material": "Synthetic existing elastic profile: E6000Pa, nu0.35, density1100kg/m3, Gc0.5J/m2, sharpness0.9. Not calibrated tofu.",
+  "acceptance": {
+    "momentum_error_ns": 1e-09,
+    "minimum_det_f": 0.05,
+    "maximum_overlap_radii": 1.0,
+    "minimum_reaction_n": 0.001,
+    "base_height_m": 0.015,
+    "minimum_depth_m": 0.002,
+    "maximum_depth_m": 0.012,
+    "topology": "One native component at0,1.2,2,3.2,4,4.2s; both histories have opposing sides and persist; lower15mm unassigned and connected."
+  },
+  "controls_acceptance": "Uncut must fail cutting outcome, retain one component and pass numerical checks except nonzero blade contact. Original sequential task must pass original frozen acceptance.",
+  "limits": {
+    "calls": 8,
+    "cumulative_worker_s": 5400,
+    "per_call_s": 1200
+  },
+  "scope": "Independent CPU TLMPM synthetic task; no new native six-engine cutting qualification or controlled three-method ranking."
+}

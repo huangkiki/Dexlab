@@ -1,0 +1,2580 @@
+{
+  "definitions": {
+    "face_opening_mm": "Mean signed normal distance between affine images of the same reference face; only opposing nonzero native digits for that cut are included. Null means no eligible pairs.",
+    "interior_volume_change_percent": "Signed tetrahedral volume change of the fixed reference base below 15 mm; not the volume of a separated piece.",
+    "centroid_x_from_start_mm": "Equal-mass native particle centroids of fixed reference regions, ordered left to right; displacement from reference positions.",
+    "centroid_x_from_probe_mm": "Same centroids relative to the exact saved motion-start frame; null before it. Continuous push: final-cut end (tofu 3.30 s, banana 5.30 s); legacy knife-push/no-push: 4.00 s; impulse: probe_time_s.",
+    "knife_on_material_x_n": "Negative of recorded material reaction on the knife in world x at the preceding completed substep; negative means the knife pushes material left. Excludes drive and board.",
+    "knife_on_material_n": "World xyz force of the knife on the material, N; negative of the saved material reaction on the knife at the preceding completed substep. Zero at the initial state. Excludes drive and board.",
+    "dynamic_viscosity_pa_s": "Newtonian dynamic viscosity from the saved material configuration, Pa s; missing historical configuration fields mean the elastic value zero.",
+    "motion_start_time_s": null,
+    "knife_material_force_n": "Norm of recorded material reaction on the knife at the preceding completed substep; excludes guide, drive and board forces.",
+    "reference_volume_m3": 2.2578125000000015e-05,
+    "tetrahedra": 8670,
+    "cut_planes_m_in_execution_order": [
+      0.0,
+      -8.848156182660645e-38
+    ],
+    "cut_plane_source": "Median recorded blade position while cutting; uncut controls use the densest recorded position cluster. Axis-aligned paths that sweep laterally by more than half a material spacing are rejected.",
+    "cut_normal_axes": [
+      0,
+      1
+    ],
+    "comparison_scope": "Native DexLab measurements; original authors sampling and full configuration are unavailable, so these are not same-condition cross-method scores.",
+    "blade_depth_mm": "Positive downward distance of the recorded knife edge below the original material top; zero after withdrawal. Not prescribed groove depth.",
+    "native_components": "Number of components in the native reference transfer graph, including unassigned bridges.",
+    "base_intact": "One native component and no assigned cut digits in the fixed lower 15 mm of reference material; an empty gap metric does not establish intactness."
+  },
+  "frames": [
+    {
+      "state_frame": 0,
+      "trace_frame": 0,
+      "time_s": 0.0,
+      "phase": "Initial",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": 0.0,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 0.0,
+      "knife_on_material_n": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 5,
+      "trace_frame": 199,
+      "time_s": 0.05,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -0.8369042033164353,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 10,
+      "trace_frame": 399,
+      "time_s": 0.1,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -0.9896762189103514,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 15,
+      "trace_frame": 599,
+      "time_s": 0.15,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.153549629866668,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 20,
+      "trace_frame": 799,
+      "time_s": 0.2,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.5034867757719672,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 25,
+      "trace_frame": 999,
+      "time_s": 0.25,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.6740684100266967,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 30,
+      "trace_frame": 1199,
+      "time_s": 0.3,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.871351150402878,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 35,
+      "trace_frame": 1399,
+      "time_s": 0.35000000000000003,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.033708960248004,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 40,
+      "trace_frame": 1599,
+      "time_s": 0.4,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.1218980172663215,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 45,
+      "trace_frame": 1799,
+      "time_s": 0.45,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.1839698723461254,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 50,
+      "trace_frame": 1999,
+      "time_s": 0.5,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.197516505600061,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 55,
+      "trace_frame": 2199,
+      "time_s": 0.55,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.1751374676298507,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 60,
+      "trace_frame": 2399,
+      "time_s": 0.6,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.131609899910669,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 65,
+      "trace_frame": 2599,
+      "time_s": 0.65,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.06975901608224,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 70,
+      "trace_frame": 2799,
+      "time_s": 0.7000000000000001,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -2.000782025345893,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 75,
+      "trace_frame": 2999,
+      "time_s": 0.75,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.932020764791842,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 80,
+      "trace_frame": 3199,
+      "time_s": 0.8,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.8685365417636657,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 85,
+      "trace_frame": 3399,
+      "time_s": 0.85,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.8151916088376852,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.29538475112598706
+    },
+    {
+      "state_frame": 90,
+      "trace_frame": 3599,
+      "time_s": 0.9,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        null,
+        null
+      ],
+      "paired_faces": [
+        0,
+        0
+      ],
+      "interior_volume_change_percent": -1.7741687532747408,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 1.6800000202408552
+    },
+    {
+      "state_frame": 95,
+      "trace_frame": 3799,
+      "time_s": 0.9500000000000001,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        0.11231561070405449,
+        null
+      ],
+      "paired_faces": [
+        18,
+        0
+      ],
+      "interior_volume_change_percent": -1.7505204312521228,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 2.5652525156494494e-16,
+      "knife_on_material_n": [
+        2.5652525156494494e-16,
+        -9.905901425628783e-18,
+        -0.00010239632099165826
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.00010239632099165826,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 3.0645968541769784
+    },
+    {
+      "state_frame": 100,
+      "trace_frame": 3999,
+      "time_s": 1.0,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        0.2132626336480657,
+        null
+      ],
+      "paired_faces": [
+        20,
+        0
+      ],
+      "interior_volume_change_percent": -1.7363475240175674,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -1.3970220278183582e-15,
+      "knife_on_material_n": [
+        -1.3970220278183582e-15,
+        1.0360395813196044e-16,
+        -0.0029313321230876343
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0029313321230876343,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 4.44747455562192
+    },
+    {
+      "state_frame": 105,
+      "trace_frame": 4199,
+      "time_s": 1.05,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        0.518211835200893,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.740089008982848,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 1.7692400685774198e-16,
+      "knife_on_material_n": [
+        1.7692400685774198e-16,
+        5.613082200662335e-17,
+        -0.005697469749598251
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.005697469749598251,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.502212529371098
+    },
+    {
+      "state_frame": 110,
+      "trace_frame": 4399,
+      "time_s": 1.1,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        0.5587497861761271,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.7429508230398127,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -4.571860332805086e-16,
+      "knife_on_material_n": [
+        -4.571860332805086e-16,
+        7.263555676889391e-17,
+        -0.0067112291100784385
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0067112291100784385,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.863030730969731
+    },
+    {
+      "state_frame": 115,
+      "trace_frame": 4599,
+      "time_s": 1.1500000000000001,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        0.5504112636863814,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.769730229234956,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -4.824911425797308e-16,
+      "knife_on_material_n": [
+        -4.824911425797308e-16,
+        2.232345406321358e-16,
+        -0.007068265210325583
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.007068265210325583,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.955550084787524
+    },
+    {
+      "state_frame": 120,
+      "trace_frame": 4799,
+      "time_s": 1.2,
+      "phase": "Cut 1",
+      "face_opening_mm": [
+        0.5450419137841577,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.7929767626528204,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 5.687826240812627e-16,
+      "knife_on_material_n": [
+        5.687826240812627e-16,
+        1.8666137023356309e-16,
+        -0.006018129254596879
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.006018129254596879,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.977004411873006
+    },
+    {
+      "state_frame": 125,
+      "trace_frame": 4999,
+      "time_s": 1.25,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.5001589847691706,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.7683961178733498,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 3.120787015040063e-16,
+      "knife_on_material_n": [
+        3.120787015040063e-16,
+        -9.44474823413047e-18,
+        0.002339661173864972
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.002339661173864972,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.607756270749598
+    },
+    {
+      "state_frame": 130,
+      "trace_frame": 5199,
+      "time_s": 1.3,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.406532040001706,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.7720411736827701,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 2.711034826805795e-16,
+      "knife_on_material_n": [
+        2.711034826805795e-16,
+        1.9441846322293224e-18,
+        0.001407966105185242
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.001407966105185242,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 4.421846607722973
+    },
+    {
+      "state_frame": 135,
+      "trace_frame": 5399,
+      "time_s": 1.35,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.3029380218043596,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.781894668118733,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 3.482628902195259e-16,
+      "knife_on_material_n": [
+        3.482628902195259e-16,
+        1.231478061635391e-18,
+        0.0004166800969234209
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0004166800969234209,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 2.89731595635306
+    },
+    {
+      "state_frame": 140,
+      "trace_frame": 5599,
+      "time_s": 1.4000000000000001,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.25914752700355337,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.7895076966817025,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 1.2830152610337173
+    },
+    {
+      "state_frame": 145,
+      "trace_frame": 5799,
+      "time_s": 1.45,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.26785121882348945,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.7950731141851306,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 150,
+      "trace_frame": 5999,
+      "time_s": 1.5,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2723422303698242,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8022537623022972,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 155,
+      "trace_frame": 6199,
+      "time_s": 1.55,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27496875563728584,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8086749206186692,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 160,
+      "trace_frame": 6399,
+      "time_s": 1.6,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2764614703722564,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8149028708014936,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 165,
+      "trace_frame": 6599,
+      "time_s": 1.6500000000000001,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2773341062765675,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8200342669931646,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 170,
+      "trace_frame": 6799,
+      "time_s": 1.7,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2777092116644402,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8239169507413888,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 175,
+      "trace_frame": 6999,
+      "time_s": 1.75,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27778783442534916,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8265296313515145,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 180,
+      "trace_frame": 7199,
+      "time_s": 1.8,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2777022328476031,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8278830360524245,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 185,
+      "trace_frame": 7399,
+      "time_s": 1.85,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27752577020506264,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8281270503411218,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 190,
+      "trace_frame": 7599,
+      "time_s": 1.9000000000000001,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2773179922986143,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8275137766378236,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 195,
+      "trace_frame": 7799,
+      "time_s": 1.95,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27711205882295836,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.826288557324962,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 200,
+      "trace_frame": 7999,
+      "time_s": 2.0,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27693305087456294,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8246904387428708,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 205,
+      "trace_frame": 8199,
+      "time_s": 2.05,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2767961649927502,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8229350425543855,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 210,
+      "trace_frame": 8399,
+      "time_s": 2.1,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.276705922967649,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8212112719250495,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 215,
+      "trace_frame": 8599,
+      "time_s": 2.15,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27666182162115893,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8196633827321396,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 220,
+      "trace_frame": 8799,
+      "time_s": 2.2,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2766583408319018,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8183899601840081,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 225,
+      "trace_frame": 8999,
+      "time_s": 2.25,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2766873102721167,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8174425381536685,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 230,
+      "trace_frame": 9199,
+      "time_s": 2.3000000000000003,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27673959867661163,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8168290854494784,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 235,
+      "trace_frame": 9399,
+      "time_s": 2.35,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27680546088907293,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.816532317109898,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 240,
+      "trace_frame": 9599,
+      "time_s": 2.4,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27687648847799795,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.81650171582588,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 245,
+      "trace_frame": 9799,
+      "time_s": 2.45,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27694582517381966,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8166894993152938,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 250,
+      "trace_frame": 9999,
+      "time_s": 2.5,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2770077388410563,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8170296140123332,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 255,
+      "trace_frame": 10199,
+      "time_s": 2.5500000000000003,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27705860098017315,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8174599110103773,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 260,
+      "trace_frame": 10399,
+      "time_s": 2.6,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27709654669899064,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8179175857509167,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 265,
+      "trace_frame": 10599,
+      "time_s": 2.65,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2771212808957114,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8183607173759664,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 270,
+      "trace_frame": 10799,
+      "time_s": 2.7,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27713373164630606,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8187501279408713,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 275,
+      "trace_frame": 10999,
+      "time_s": 2.75,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27713560204933435,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.819066326624974,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 280,
+      "trace_frame": 11199,
+      "time_s": 2.8000000000000003,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.277129142287662,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.819296811517901,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 285,
+      "trace_frame": 11399,
+      "time_s": 2.85,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2771168569126961,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.819439245984722,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.29538475112598706
+    },
+    {
+      "state_frame": 290,
+      "trace_frame": 11599,
+      "time_s": 2.9,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2771011707421179,
+        null
+      ],
+      "paired_faces": [
+        36,
+        0
+      ],
+      "interior_volume_change_percent": -1.8195025003869159,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 1.6800000202408552
+    },
+    {
+      "state_frame": 295,
+      "trace_frame": 11799,
+      "time_s": 2.95,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.28057318407444765,
+        0.09861801619627134
+      ],
+      "paired_faces": [
+        36,
+        18
+      ],
+      "interior_volume_change_percent": -1.8290256492117574,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 4.051432089469562e-17,
+      "knife_on_material_n": [
+        4.051432089469562e-17,
+        1.42481529640014e-15,
+        -0.00039783112927623514
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.00039783112927623514,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 3.064599370633917
+    },
+    {
+      "state_frame": 300,
+      "trace_frame": 11999,
+      "time_s": 3.0,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2844219970706486,
+        0.20758494163108437
+      ],
+      "paired_faces": [
+        36,
+        20
+      ],
+      "interior_volume_change_percent": -1.8386187464507042,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 5.811357393491296e-18,
+      "knife_on_material_n": [
+        5.811357393491296e-18,
+        -5.716201844545646e-15,
+        -0.0024825515025369
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0024825515025369,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 4.446548539694135
+    },
+    {
+      "state_frame": 305,
+      "trace_frame": 12199,
+      "time_s": 3.0500000000000003,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2803668932355491,
+        0.5087682990922421
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8466637575620837,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 1.9396764978909084e-17,
+      "knife_on_material_n": [
+        1.9396764978909084e-17,
+        3.661299914506713e-16,
+        -0.0053036010859991356
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0053036010859991356,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.500789755572899
+    },
+    {
+      "state_frame": 310,
+      "trace_frame": 12399,
+      "time_s": 3.1,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.27608032895489143,
+        0.5548850854378228
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.844285915914523,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 3.082554727127862e-16,
+      "knife_on_material_n": [
+        3.082554727127862e-16,
+        3.0989759166482646e-15,
+        -0.006948147475480221
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.006948147475480221,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.861408909231227
+    },
+    {
+      "state_frame": 315,
+      "trace_frame": 12599,
+      "time_s": 3.15,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2751174539746203,
+        0.5563549685977466
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8438502225642472,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 1.6327552675061703e-16,
+      "knife_on_material_n": [
+        1.6327552675061703e-16,
+        3.614395465052506e-15,
+        -0.007811587052220309
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.007811587052220309,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.948507368779551
+    },
+    {
+      "state_frame": 320,
+      "trace_frame": 12799,
+      "time_s": 3.2,
+      "phase": "Cut 2",
+      "face_opening_mm": [
+        0.2751100096500814,
+        0.5549330191471037
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8425704304806723,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -1.3162097906943776e-17,
+      "knife_on_material_n": [
+        -1.3162097906943776e-17,
+        1.91228275754499e-15,
+        -0.006662972270263631
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.006662972270263631,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.966392895623448
+    },
+    {
+      "state_frame": 325,
+      "trace_frame": 12999,
+      "time_s": 3.25,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.277014638304293,
+        0.5039234827289396
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.7899467053580809,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": 7.109617364893273e-17,
+      "knife_on_material_n": [
+        7.109617364893273e-17,
+        1.8393849845219166e-15,
+        0.002388554622018047
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.002388554622018047,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 5.599934605086332
+    },
+    {
+      "state_frame": 330,
+      "trace_frame": 13199,
+      "time_s": 3.3000000000000003,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.2780161530116299,
+        0.4018261532228057
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8002783527612864,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -4.194891380197826e-18,
+      "knife_on_material_n": [
+        -4.194891380197826e-18,
+        2.3872035431586353e-15,
+        0.0015547002271981136
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0015547002271981136,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 4.419786813130943
+    },
+    {
+      "state_frame": 335,
+      "trace_frame": 13399,
+      "time_s": 3.35,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.2779820567488966,
+        0.29804087836755544
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8050330071751608,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -1.6539217854056366e-18,
+      "knife_on_material_n": [
+        -1.6539217854056366e-18,
+        2.940527815952507e-15,
+        0.0005676511447211199
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0005676511447211199,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 2.8973697082152854
+    },
+    {
+      "state_frame": 340,
+      "trace_frame": 13599,
+      "time_s": 3.4,
+      "phase": "Withdrawing",
+      "face_opening_mm": [
+        0.2765846053224894,
+        0.2504218727053414
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8102721834039381,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 1.2834125732896045
+    },
+    {
+      "state_frame": 345,
+      "trace_frame": 13799,
+      "time_s": 3.45,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27601699224156195,
+        0.2649495171627535
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8140281470997444,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 350,
+      "trace_frame": 13999,
+      "time_s": 3.5,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2759990849029554,
+        0.2704210237602816
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8168995293541212,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 355,
+      "trace_frame": 14199,
+      "time_s": 3.5500000000000003,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2760262342614923,
+        0.27327071259371744
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8207397382055235,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 360,
+      "trace_frame": 14399,
+      "time_s": 3.6,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2761879916823925,
+        0.2748945650309498
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.824325215120326,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 365,
+      "trace_frame": 14599,
+      "time_s": 3.65,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27624878935648467,
+        0.27577997324366516
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8273103607455599,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 370,
+      "trace_frame": 14799,
+      "time_s": 3.7,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27621913090646666,
+        0.27622325115677676
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8298038468111066,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 375,
+      "trace_frame": 14999,
+      "time_s": 3.75,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27629800191545223,
+        0.27638666395859196
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.831540271592691,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 380,
+      "trace_frame": 15199,
+      "time_s": 3.8000000000000003,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27631530989088077,
+        0.2763993936130476
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8325581366361976,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 385,
+      "trace_frame": 15399,
+      "time_s": 3.85,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2763104804453317,
+        0.27633212019206443
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8329574023936646,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 390,
+      "trace_frame": 15599,
+      "time_s": 3.9,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2762960041352524,
+        0.2762284251649721
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8328103258134276,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 395,
+      "trace_frame": 15799,
+      "time_s": 3.95,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2762858733289691,
+        0.27611440124773656
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8322906822320295,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 400,
+      "trace_frame": 15999,
+      "time_s": 4.0,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27629088887938263,
+        0.27600781712671735
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8315183438910365,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 405,
+      "trace_frame": 16199,
+      "time_s": 4.05,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2763153536348927,
+        0.27591838830860327
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8306186957483983,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 410,
+      "trace_frame": 16399,
+      "time_s": 4.1,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2763605310359764,
+        0.27585020927575205
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8297022279955666,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 415,
+      "trace_frame": 16599,
+      "time_s": 4.15,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.2764254528976946,
+        0.27580322998803314
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8288547437099067,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    },
+    {
+      "state_frame": 420,
+      "trace_frame": 16799,
+      "time_s": 4.2,
+      "phase": "Knife clear",
+      "face_opening_mm": [
+        0.27650745510289393,
+        0.2757749541446305
+      ],
+      "paired_faces": [
+        36,
+        36
+      ],
+      "interior_volume_change_percent": -1.8281370990641643,
+      "inverted_tetrahedra": 0,
+      "centroid_x_from_start_mm": [],
+      "centroid_x_from_probe_mm": null,
+      "motion_protocol": null,
+      "knife_on_material_x_n": -0.0,
+      "knife_on_material_n": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "dynamic_viscosity_pa_s": 0.0,
+      "knife_material_force_n": 0.0,
+      "native_components": 1,
+      "base_intact": true,
+      "blade_depth_mm": 0.0
+    }
+  ]
+}

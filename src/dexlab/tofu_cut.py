@@ -12,11 +12,28 @@ import time
 import numpy as np
 
 from dexlab.cutting import CutConfig, CuttingSimulation
-from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, score_run
+from dexlab.cutting_score import ACCEPTANCE, BANANA_ACCEPTANCE, PUSH_ACCEPTANCE, SCORING_ACCEPTANCE, score_run
 
 
 DURATION = 3.0
 PROBE_TIME = 2.4
+BLADEMASTER_BANANA_MATERIAL = {
+    'density': 1100.,
+    'young_modulus': 400_000.,
+    'poisson_ratio': .45,
+    'yield_stress': 30_000.,
+    'friction_static': .2,
+    'friction_dynamic': .2,
+    'cutting_energy': 700.,
+    'sharpness': .9,
+    'blade_mass': .1,
+}
+
+
+def uses_blademaster_banana_material(config):
+    """Whether every IV-C value exposed by CutConfig matches the paper mode."""
+    return config.shape == 'banana' and all(
+        getattr(config, name) == value for name, value in BLADEMASTER_BANANA_MATERIAL.items())
 
 
 def target_edge(t, mode, height):
@@ -45,11 +62,59 @@ def sequential_target(t, mode, task):
     return np.array([x, 0., .036 if mode == 'uncut' else z]), cut, cutting
 
 
-def run(directory, config, mode='full', duration=None, task='tofu'):
-    if task not in ('tofu', 'banana', 'tofu-sequential'):
+def scoring_target(t, mode):
+    """Two guided perpendicular shallow incisions, with withdrawal between them."""
+    cut = min(int(t // 2), 1)
+    local = t - 2 * cut
+    z = np.interp(local, [0., .35, 1., 1.2, 1.75, 2.2],
+                  [.042, .042, .024, .024, .042, .042])
+    return np.array([0., 0., .042 if mode == 'uncut' else z]), cut, (
+        mode != 'uncut' and .35 <= local < 1.2), cut * np.pi / 2
+
+
+def knife_push_target(t):
+    """Re-enter the second kerf, push with the blade face, then withdraw.
+
+    These are drive targets, not prescribed blade or material positions.
+    Cutting is disabled throughout this contact-only phase.
+    """
+    times = [4., 4.8, 6., 6.6, 7.]
+    return np.array([np.interp(t, times, [-.015, -.015, -.027, -.027, -.027]),
+                     0., np.interp(t, times, [.036, .002, .002, .036, .036])])
+
+
+def cut_push_target(t, task, *, push=True):
+    """Keep the final blade inside the kerf and transition directly to a face push.
+
+    First clear the board by 2 mm without leaving the material. The no-push
+    control follows the same vertical motion, with no lateral drive.
+    """
+    banana = task == 'banana'
+    start, x, direction = (5.3, .03, 1) if banana else (3.3, -.015, -1)
+    times = [start, start + .2, start + 1.4, start + 2., start + 2.7]
+    end = x + direction * .012 if push else x
+    return np.array([np.interp(t, times, [x, x, end, end, end]), 0.,
+                     np.interp(t, times, [-.004, .002, .002, .036, .036])])
+
+
+def run(directory, config, mode='full', duration=None, task='tofu', motion_protocol=None):
+    if task not in ('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'):
         raise ValueError('Unknown task')
     full_duration, probe_time = {'banana': (7., 6.2), 'tofu-sequential': (5., 4.2),
-                                 'tofu': (DURATION, PROBE_TIME)}[task]
+                                 'tofu': (DURATION, PROBE_TIME), 'tofu-scoring': (4.2, None)}[task]
+    if motion_protocol is None:
+        motion_protocol = 'cut-push' if task in ('tofu-sequential', 'banana') else 'impulse'
+    if motion_protocol not in ('impulse', 'knife-push', 'no-push', 'cut-push', 'cut-no-push'):
+        raise ValueError('Unknown motion protocol')
+    contact_motion = motion_protocol != 'impulse'
+    continuous = motion_protocol in ('cut-push', 'cut-no-push')
+    if contact_motion and task not in (('tofu-sequential', 'banana') if continuous else ('tofu-sequential',)):
+        raise ValueError('Knife-push protocols require a supported sequential task')
+    if contact_motion:
+        full_duration, probe_time = 7., None
+    if continuous:
+        full_duration = 8. if task == 'banana' else 6.
+    motion_start = (5.3 if task == 'banana' else 3.3) if continuous else 4.
     duration = full_duration if duration is None else duration
     if (config.shape == 'banana') != (task == 'banana'):
         raise ValueError('Task and geometry do not match')
@@ -57,20 +122,35 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
     directory.mkdir(parents=True, exist_ok=False)
     if mode not in ('full', 'partial', 'uncut'):
         raise ValueError('Unknown cutting mode')
+    if task == 'tofu-scoring' and mode == 'partial':
+        raise ValueError('Scoring is already a partial-cut task; choose full or uncut')
     if duration <= 0 or duration > full_duration or abs(round(duration / config.dt) * config.dt - duration) > 1e-12:
         raise ValueError('Duration must fit the protocol and contain an integer number of steps')
     source_root = Path(__file__).resolve().parent
+    paper_material = uses_blademaster_banana_material(config)
     manifest = {
         'schema_version': 1, 'status': 'running', 'mode': mode, 'config': asdict(config),
         'duration_s': duration, 'probe_time_s': probe_time, 'task': task,
-        'acceptance': BANANA_ACCEPTANCE if task != 'tofu' else ACCEPTANCE,
+        'acceptance': (SCORING_ACCEPTANCE if task == 'tofu-scoring' else
+                       PUSH_ACCEPTANCE if contact_motion else
+                       BANANA_ACCEPTANCE if task != 'tofu' else ACCEPTANCE),
         'paper': 'https://arxiv.org/abs/2609.27342v2',
-        'implementation': 'independent CPU TLMPM reference, synthetic parameters',
+        'implementation': ('independent CPU TLMPM with BladeMaster IV-C numeric values and '
+                           'an independently specified perfect-J2 projection' if paper_material else
+                           'independent CPU TLMPM reference, synthetic parameters'),
+        'material_parameter_source': ('BladeMaster IV-C reported values; omitted fields remain '
+                                      'independent choices' if paper_material else
+                                      'DexLab synthetic task values'),
         'source_sha256': {name: hashlib.sha256((source_root / name).read_bytes()).hexdigest()
                           for name in ('cutting.py', 'cutting_geometry.py', 'cutting_score.py', 'tofu_cut.py')},
         'packages': {name: importlib.metadata.version(name) for name in ('numpy', 'scipy', 'numba')},
         'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=source_root, text=True).strip(),
     }
+    if task == 'tofu-sequential' or continuous:
+        manifest.update(motion_protocol=motion_protocol,
+                        motion_start_time_s=motion_start if contact_motion else probe_time)
+    if task in ('banana', 'tofu-sequential'):
+        manifest['planned_cut_planes_m'] = list((-.03, 0., .03) if task == 'banana' else (.015, -.015))
     write_json(directory / 'manifest.json', manifest)
     start = time.monotonic()
     sim = CuttingSimulation(config)
@@ -82,7 +162,7 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
             snapshots[key].append(value.copy())
         snapshots['time'].append(t)
 
-    if task != 'tofu':
+    if task in ('banana', 'tofu-sequential'):
         sim.blade_x[0] = -.03 if task == 'banana' else .015
         sim.blade_x[2] = .036 + sim.half_size[2]
     snapshot(0.)
@@ -92,21 +172,31 @@ def run(directory, config, mode='full', duration=None, task='tofu'):
     try:
         for step in range(round(duration / config.dt)):
             t = step * config.dt
-            probe = np.array([.12, 0., .1]) if step == round(probe_time / config.dt) else None
+            probe = (np.array([.12, 0., .1]) if probe_time is not None and
+                     step == round(probe_time / config.dt) else None)
             if task == 'tofu-sequential' and probe is not None:
                 probe = np.array([-.12, 0., 0.])
-            if task != 'tofu':
+            blade_yaw = 0.
+            if task == 'tofu-scoring':
+                target, cut_index, cutting, blade_yaw = scoring_target(t, mode)
+                probe_mask = None
+            elif task != 'tofu':
                 target, cut_index, cutting = sequential_target(t, mode, task)
-                if cut_index != previous_cut:
-                    sim.damage.fill(0.)  # Paper: reset progress, retain all earlier ternary digits.
-                    previous_cut = cut_index
+                if motion_protocol == 'knife-push' and t >= 4.:
+                    target = knife_push_target(t)
+                if continuous and t >= motion_start:
+                    target = cut_push_target(t, task, push=motion_protocol == 'cut-push')
+                    cutting = False
                 probe_mask = (sim.reference[:, 0] > .03 if task == 'banana' else
                               sim.reference[:, 0] < -.015)
             else:
                 target, cut_index = target_edge(t, mode, config.size[2]), 0
                 cutting, probe_mask = mode != 'uncut' and .3 <= t < 1.6, None
+            if cut_index != previous_cut:
+                sim.damage.fill(0.)  # Reset progress, retain every earlier ternary digit.
+                previous_cut = cut_index
             observed = sim.step(target, cutting=cutting, probe_velocity=probe,
-                                probe_mask=probe_mask, cut_index=cut_index)
+                                probe_mask=probe_mask, cut_index=cut_index, blade_yaw=blade_yaw)
             observed.update(cut_index=cut_index, cutting_active=cutting)
             trace.append(observed)
             if (step + 1) % stride == 0 or step + 1 == round(duration / config.dt):
@@ -142,22 +232,38 @@ def main():
     parser.add_argument('--mode', choices=('full', 'partial', 'uncut'), default='full')
     parser.add_argument('--dt', type=float)
     parser.add_argument('--grid-spacing', type=float)
-    parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential'), default='tofu')
+    parser.add_argument('--viscosity', type=float, default=0.0,
+                        help='Newtonian dynamic viscosity in Pa s; 0 preserves the pure-elastic baseline')
+    parser.add_argument('--paper-banana-material', action='store_true',
+                        help='Use the BladeMaster IV-C values with DexLab independent J2 projection')
+    parser.add_argument('--task', choices=('tofu', 'banana', 'tofu-sequential', 'tofu-scoring'), default='tofu')
     parser.add_argument('--duration', type=float, default=None, help='Short probes do not establish task completion')
+    parser.add_argument('--motion-protocol', choices=('cut-push', 'cut-no-push', 'knife-push', 'no-push', 'impulse'),
+                        help='Sequential tasks default to cut-push; legacy protocols remain reproducible')
     args = parser.parse_args()
     banana = args.task == 'banana'
+    if args.paper_banana_material and not banana:
+        parser.error('--paper-banana-material requires --task banana')
     options = {
+        'dynamic_viscosity': args.viscosity,
         'dt': args.dt if args.dt is not None else (.00025 if banana else .0005),
         'grid_spacing': args.grid_spacing if args.grid_spacing is not None else (.006 if banana else .0075),
     }
     if banana:
         options.update(shape='banana', size=(.12, .06, .03),
                        blade_half_size=(.0005, .04, .02), blade_bevel_height=.005)
+        if args.paper_banana_material:
+            options.update(BLADEMASTER_BANANA_MATERIAL)
     elif args.task == 'tofu-sequential':
         options.update(size=(.09, .03, .03), blade_half_size=(.00025, .025, .02),
                        blade_bevel_height=.005,
                        dt=args.dt if args.dt is not None else .00025)
-    run(args.output, CutConfig(**options), args.mode, args.duration, args.task)
+    elif args.task == 'tofu-scoring':
+        options.update(size=(.045, .045, .03), blade_half_size=(.00025, .0275, .02),
+                       blade_bevel_height=.005,
+                       grid_spacing=args.grid_spacing if args.grid_spacing is not None else .005,
+                       dt=args.dt if args.dt is not None else .00025)
+    run(args.output, CutConfig(**options), args.mode, args.duration, args.task, args.motion_protocol)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,2106 @@
+{
+  "schema_version": 1,
+  "protocol_sha256": "659ff4587f07ac3c3fe7ff155907490cf7d48b17245d31729f5eaa07da81408c",
+  "reporter_sha256": "56a6ad11491d9d22d28daf7268566ec4d077cda7af27a0520ebcf846146c5f3d",
+  "cohort": "RTX 4090; fixed source reference; seed 137",
+  "source_commit": "5b313d75e804cdd2ff1ce9bdcfa899a98eca856b",
+  "runtime": {
+    "packages": {
+      "mujoco": "3.15.0",
+      "mujoco-warp": "3.15.0",
+      "warp-lang": "1.17.0+cu12",
+      "torch": "2.11.0+cu128"
+    },
+    "sources": {
+      "isaaclab": "46d6cc3d7b115906fad12efd372fbf69f4e3d3ed",
+      "isaaclab_newton": "46d6cc3d7b115906fad12efd372fbf69f4e3d3ed",
+      "newton": "71eeba16a717d4dcf0b9dd7056a7b6f863054dc3"
+    },
+    "native_mujoco": {
+      "version": "3.15.0",
+      "payload_sha256": "d3a1476dd52e220031aca40b2b00f69d1febce2ee85c57d5015f68b0cc72afa9"
+    },
+    "package_code_sha256": {
+      "mujoco": "a48c3263e40378576b39f2739cc8d5b151a56ffd69ca0fcc11d66b32b60668e1",
+      "mujoco-warp": "d0b65719a624a3408fc1e345715b74e381446b9608967bd6ae0ec94e941b5962"
+    }
+  },
+  "asset_sha256": {
+    "g1_description/g1_29dof.xml": "a9922c0d522d0a3feb23699d32d3e92ce5e831c0bfb917f985cb8a9d21518737",
+    "g1_description/g1_29dof_rev_1_0.urdf": "824ce02c2c1e489aa8dece47a10fe02d1872289c0e6d01ba51abd291e66b7b2c",
+    "g1_description/meshes/head_link.STL": "005fb67fbd3eff94aa8bf4a6e83238174e9f91b6721f7111594322f223724411",
+    "g1_description/meshes/left_ankle_pitch_link.STL": "d49e3abc6f5b12e532062cd575b87b5ef40cd2a3fc18f54a1ca5bba4f773d51d",
+    "g1_description/meshes/left_ankle_roll_link.STL": "c4092af943141d4d9f74232f3cfa345afc6565f46a077793b8ae0e68b39dc33f",
+    "g1_description/meshes/left_elbow_link.STL": "fa752198accd104d5c4c3a01382e45165b944fbbc5acce085059223324e5bed3",
+    "g1_description/meshes/left_hip_pitch_link.STL": "4725168105ee768ee31638ef22b53f6be2d7641bfd7cfefe803488d884776fa4",
+    "g1_description/meshes/left_hip_roll_link.STL": "91f25922ee8a7c3152790051bebad17b4d9cd243569c38fe340285ff93a97acf",
+    "g1_description/meshes/left_hip_yaw_link.STL": "a16d88aa6ddac8083aa7ad55ed317bea44b1fa003d314fba88965b7ed0f3b55b",
+    "g1_description/meshes/left_knee_link.STL": "8d92b9e3d3a636761150bb8025e32514c4602b91c7028d523ee42b3e632de477",
+    "g1_description/meshes/left_rubber_hand.STL": "cff2221a690fa69303f61fce68f2d155c1517b52efb6ca9262dd56e0bc6e70fe",
+    "g1_description/meshes/left_shoulder_pitch_link.STL": "f0d1cfd02fcf0d42f95e678eeca33da3afbcc366ffba5c052847773ec4f31d52",
+    "g1_description/meshes/left_shoulder_roll_link.STL": "fb9df21687773522598dc384f1a2945c7519f11cbc8bd372a49170316d6eee88",
+    "g1_description/meshes/left_shoulder_yaw_link.STL": "1aa97e9748e924336567992181f78c7cd0652fd52a4afcca3df6b2ef6f9e712e",
+    "g1_description/meshes/left_wrist_pitch_link.STL": "b251d8e05047f695d0f536cd78c11973cfa4e78d08cfe82759336cc3471de3a9",
+    "g1_description/meshes/left_wrist_roll_link.STL": "edc387c9a0ba8c2237e9b296d32531426fabeb6f53e58df45c76106bca74148c",
+    "g1_description/meshes/left_wrist_roll_rubber_hand.STL": "e81030abd023bd9e4a308ef376d814a2c12d684d8a7670c335bbd5cd7809c909",
+    "g1_description/meshes/left_wrist_yaw_link.STL": "83f8fb3a726bf9613d65dd14f0f447cb918c3c95b3938042a0c9c09749267d3b",
+    "g1_description/meshes/logo_link.STL": "8571a0a19bc4916fa55f91449f51d5fdefd751000054865a842449429d5f155b",
+    "g1_description/meshes/pelvis.STL": "5ba6bbc888e630550140d3c26763f10206da8c8bd30ed886b8ede41c61f57a31",
+    "g1_description/meshes/pelvis_contour_link.STL": "5cc5c2c7a312329e3feeb2b03d3fc09fc29705bd01864f6767e51be959662420",
+    "g1_description/meshes/right_ankle_pitch_link.STL": "15be426539ec1be70246d4d82a168806db64a41301af8b35c197a33348c787a9",
+    "g1_description/meshes/right_ankle_roll_link.STL": "4b66222ea56653e627711b56d0a8949b4920da5df091da0ceb343f54e884e3a5",
+    "g1_description/meshes/right_elbow_link.STL": "1be925d7aa268bb8fddf5362b9173066890c7d32092c05638608126e59d1e2ab",
+    "g1_description/meshes/right_hip_pitch_link.STL": "e4f3c99d7f4a7d34eadbef9461fc66e3486cb5442db1ec50c86317d459f1a9c6",
+    "g1_description/meshes/right_hip_roll_link.STL": "4c254ef66a356f492947f360dd931965477b631e3fcc841f91ccc46d945d54f6",
+    "g1_description/meshes/right_hip_yaw_link.STL": "e479c2936ca2057e9eb2f7dff6c189b7419d7b8484dea0b298cbb36a2a6aa668",
+    "g1_description/meshes/right_knee_link.STL": "63c4008449c9bbe701a6e2b557b7a252e90cf3a5abcf54cee46862b9a69f8ec8",
+    "g1_description/meshes/right_rubber_hand.STL": "99533b778bca6246144fa511bb9d4e555e075c641f2a0251e04372869cd99d67",
+    "g1_description/meshes/right_shoulder_pitch_link.STL": "24cdb387e0128dfe602770a81c56cdce3a0181d34d039a11d1aaf8819b7b8c02",
+    "g1_description/meshes/right_shoulder_roll_link.STL": "962b97c48f9ce9e8399f45dd9522e0865d19aa9fd299406b2d475a8fc4a53e81",
+    "g1_description/meshes/right_shoulder_yaw_link.STL": "a0b76489271da0c72461a344c9ffb0f0c6e64f019ea5014c1624886c442a2fe5",
+    "g1_description/meshes/right_wrist_pitch_link.STL": "d22f8f3b3127f15a63e5be1ee273cd5075786c3142f1c3d9f76cbf43d2a26477",
+    "g1_description/meshes/right_wrist_roll_link.STL": "a7ee9212ff5b94d6cb7f52bb1bbf3f352194d5b598acff74f4c77d340c5b344f",
+    "g1_description/meshes/right_wrist_roll_rubber_hand.STL": "0729aff1ac4356f9314de13a46906267642e58bc47f0d8a7f17f6590a6242ccf",
+    "g1_description/meshes/right_wrist_yaw_link.STL": "bc9dece2d12509707e0057ba2e48df8f3d56db0c79410212963a25e8a50f61a6",
+    "g1_description/meshes/torso_link_rev_1_0.STL": "11ddb46f2098efbbd8816b1d65893632d8e78be936376c7cdcd6771899ccc723",
+    "g1_description/meshes/waist_roll_link_rev_1_0.STL": "b67c347a05abc3e8ddae600d98a082bee273bb39f8e651647708b0a7140a8a97",
+    "g1_description/meshes/waist_support_link.STL": "1fae9e1bb609848a1667d32eed8d6083ae443538a306843056a2a660f1b2926a",
+    "g1_description/meshes/waist_yaw_link_rev_1_0.STL": "ec6db442b11f25eed898b5add07940c85d804f300de24dcbd264ccd8be7d554c",
+    "g1_usd/g1_29dof/g1_29dof.usda": "b79f5d54982304f3b33919d24fdd1290f470a2f0629409572cb2f7b2d0b28b67",
+    "g1_usd/g1_29dof/payloads/Physics/mujoco.usda": "d3a6e446d52970817cc776ec21309a242bad8e339eb822fa355f5987c819b884",
+    "g1_usd/g1_29dof/payloads/Physics/physics.usda": "39a1cc6cd53b718c57f3708c2c400a91636b05704f96bf9328fcfa23e0bfdb34",
+    "g1_usd/g1_29dof/payloads/Physics/physx.usda": "e812e9ed3252b5ab9382cdffdfba7965ca096fe5a1b4de1ebfe34c50cb20feea",
+    "g1_usd/g1_29dof/payloads/base.usda": "a41a40535c29c2cdcc9e717e6935945d4ba836366cbec3751ed9949ca2a66eba",
+    "g1_usd/g1_29dof/payloads/geometries.usd": "23c30eedf453bdf4b61a4d631e142e6e3172441dce06074bc1389bce60398530",
+    "g1_usd/g1_29dof/payloads/instances.usda": "cdefbd46319a6b23a0b273c87779ed7fa4a98e63546e3c57de826d01ba363581",
+    "g1_usd/g1_29dof/payloads/robot.usda": "972ef22f13d66e2b64e24774f3d2fcbfa57b8e558458c7163431b84a12d8be9f",
+    "backflip/backflip.csv": "0d7dcb9ac79834bec3f3db16b5a0d8e582b71b3854435d09ad3b886631adb007"
+  },
+  "checkpoint_sha256": "7933f7638b02f0c378606b23c361e328fb3bd6da97086cc2ff9c20aff9aefab2",
+  "native_support_probe": {
+    "source": "pristine upstream env + evaluation-only recorder",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "frames": 321,
+    "roundtrip_max": {
+      "p": 0.0,
+      "R": 0.0,
+      "v": 0.0,
+      "w": 0.0,
+      "q": 0.0,
+      "qd": 0.0
+    },
+    "fk_position_max_m": 4.512985753990506e-07,
+    "fk_rotation_max_rad": 0.001423572306521237,
+    "joint_order_matches": true,
+    "calibration_joint_feedforward_Nm": [
+      1.01474830328812,
+      -0.3582059112720587,
+      0.18234742157702033,
+      -10.125173333667837,
+      5.616425831459906,
+      0.0,
+      1.01474830328812,
+      0.3582059112720587,
+      -0.18234742157702033,
+      -10.125173333667837,
+      5.616425831459906,
+      -1.1102230246251565e-16,
+      0.0,
+      0.026416448171969885,
+      -1.567136911027918,
+      -0.546508906721183,
+      1.2687965601851654,
+      0.35767847647353423,
+      -1.1902664136929146,
+      -0.0027443970760459013,
+      -0.2738783257710775,
+      0.035753822664929824,
+      -0.5465089067211831,
+      -1.2687965601851658,
+      -0.35767847647353435,
+      -1.1902664136929146,
+      0.0027443970760459013,
+      -0.2738783257710777,
+      -0.03575382266492971
+    ],
+    "unrecorded_repeat_max_abs": 2.3934058845043182e-05,
+    "recorder_trajectory_max_abs": 2.5033950805664062e-05,
+    "recorder_position_rotation_joint_max": 7.361173629760742e-06,
+    "recorder_velocity_max": 2.5033950805664062e-05,
+    "contact_sampling_hz": 200.0,
+    "total_mass_kg": 33.341143417870626,
+    "static_tail_mean_ground_force_N": [
+      -19.358871264457704,
+      0.03401735305786133,
+      322.79936962127687
+    ],
+    "static_support_weight_ratio": 0.9869227970247767,
+    "left_right_tail_vertical_force_N": [
+      161.68971117258073,
+      161.10965844869614
+    ],
+    "total_ground_force_tail_N": [
+      -19.358871264457704,
+      0.03401735305786133,
+      322.79936962127687
+    ],
+    "total_constraint_force_tail_N": [
+      -19.358872134685516,
+      0.03401741849258542,
+      322.79936935424803
+    ],
+    "root_height_final_m": 0.7289964556694031,
+    "force_sum_vs_root_constraint_max_N": 0.000835418701171875,
+    "calibration_fixture": "Only horizontal force and attitude torque; zero vertical force. Not used in training/evaluation.",
+    "force_on_robot_convention": "actual GPU-solved force on each foot, world XYZ, upward Z positive",
+    "passed": true
+  },
+  "support_probe_sha256": "37f723a53eacfbb7ab04de75424c4362665eb3aa6da1cb51b0ee26c719be8ef7",
+  "probe_resources": {
+    "receipt_sha256": "b6dc67215ec67a2de86ef5e0873aaf6a3d6e8f76f79b80760860a70a744da79b",
+    "whole_window_wall_s": 94.67758040106855,
+    "bounded_child_wall_s": 94.53009323298465,
+    "peak_ram_bytes": 3501977600,
+    "effective_limits": {
+      "memory.max": "34359738368",
+      "memory.high": "33285996544",
+      "memory.swap.max": "0",
+      "cpu.max": "400000 100000",
+      "pids.max": "128",
+      "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+    },
+    "oom_events": {
+      "low": "0",
+      "high": "0",
+      "max": "0",
+      "oom": "0",
+      "oom_kill": "0",
+      "oom_group_kill": "0"
+    },
+    "sampled_gpu_guard": {
+      "uuid": "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab",
+      "limit_mib": 20480,
+      "sampling_interval_s": 2,
+      "scope": "Whole-device sampled stop threshold, not a hard allocation limit"
+    },
+    "gpu_stop_reason": null
+  },
+  "audit_resources": {
+    "receipt_sha256": "0633319834cb096ad4b8ef192a10ea6bb71212dea13913dce93b4dbaaba34052",
+    "whole_window_wall_s": 5.387204127968289,
+    "bounded_child_wall_s": 5.211677934974432,
+    "peak_ram_bytes": 69984256,
+    "effective_limits": {
+      "memory.max": "8589934592",
+      "memory.high": "6442450944",
+      "memory.swap.max": "0",
+      "cpu.max": "100000 100000",
+      "pids.max": "32",
+      "io.max": "8:0 rbps=16777216 wbps=8388608 riops=max wiops=max"
+    },
+    "oom_events": {
+      "low": "0",
+      "high": "0",
+      "max": "0",
+      "oom": "0",
+      "oom_kill": "0",
+      "oom_group_kill": "0"
+    },
+    "sampled_gpu_guard": null,
+    "gpu_stop_reason": null
+  },
+  "original_environment": {
+    "requirements_checked": 217,
+    "pin_mismatches": [],
+    "dependency_metadata_passed": false,
+    "constraint_diagnostics": [
+      "The package `mujoco-usd-converter` requires `mujoco>=3.12.0,<3.13`, but `3.15.0` is installed",
+      "The package `numba` requires `numpy>=1.22,<2.5`, but `2.5.1` is installed",
+      "The package `isaacsim-asset-isolated` requires `usd-exchange==2.3.0`, but `3.0.1` is installed",
+      "The package `isaacsim-asset-isolated` requires `mujoco==3.12.0`, but `3.15.0` is installed",
+      "The package `isaacsim-asset-isolated` requires `usd-optimize==1.1.0`, but `1.3.1` is installed",
+      "The package `cmeel-boost` requires `numpy>=2.3,<2.4 ; python_full_version >= '3.11'`, but `2.5.1` is installed",
+      "The package `isaacsim-robot-schema` requires `usd-exchange==2.3.0`, but `3.0.1` is installed"
+    ],
+    "qualification_scope": "The unchanged converter, native support fixture and three full policy repeats ran; other installed package paths remain unqualified.",
+    "audit_sha256": "08eb6a0c238a75a2936502ec290e5a1e5936466b83d04b7467dd8489a63b509f"
+  },
+  "cases": [
+    {
+      "case": "policy-repeat-1",
+      "input_sha256": {
+        "contact_forces_200hz.npz": "429aec7cf55e8ed2a92fb773ad15d1aee15ea678eb76666050bf1266986c4fde",
+        "native_contacts.npz": "a0d403d193fdef215f31c8f2f473d4cd1da292bbeb9f8b13554176fe8c2a2488",
+        "native_metadata.json": "27f52b16f390ed6c2be06ebc9dda8d8e0802c9d98a569a165d503de583857092",
+        "native_model.mjb": "7b4d5c733c92867f72671f9603bfff1cc68872c7ec9ad79c181230e7a0831b9f",
+        "rollout.npz": "0d6aea439693cbd96269d85ea223fc3cbec05fadf54a4927fc5672a21297f1d2",
+        "warp_candidates.npz": "f8312107bd1ba588818e909af32f9a8bebb5bd930928f0d6b3139eee576c8989",
+        "audit.json": "7004e47c11fcc75011f13f78bdc27382a39e0c8f36e13988c17155f693c494af",
+        "invocation.json": "fecb14f61e39ba651486c2c4fd42b17db3dd068dcb3c7c8ef1b42be2208e21ad",
+        "protocol.json": "659ff4587f07ac3c3fe7ff155907490cf7d48b17245d31729f5eaa07da81408c",
+        "metrics.json": "84b00ca95e46349ac9c7eb8a30af8ecdc150ec5eee044e0ab1f4a9ee9fad0593"
+      },
+      "upstream_strict_success": true,
+      "upstream_legacy_gate_pass": true,
+      "upstream_quality_checks": {
+        "zero_initial_speed": true,
+        "full_backward_turn": true,
+        "aerial_rotation": true,
+        "no_nonfoot_contact": true,
+        "stable_last_two_seconds": true,
+        "tracking_return": true,
+        "reference_leg_posture": true
+      },
+      "normalized_return": 0.9315162755525743,
+      "first_failure_step": null,
+      "last_2s_horizontal_drift_m": 0.0014160503633320332,
+      "last_2s_linear_speed_rms_m_s": 0.0009779658867046237,
+      "state_alignment": {
+        "controls": 571,
+        "native_substeps": 2284,
+        "physics_dt_s": 0.005,
+        "control_dt_s": 0.02,
+        "native_order_for_reference": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "joint_order_identical": true,
+        "unmapped_joint_position_max_rad": 0.0,
+        "mapped_max_errors": {
+          "root_position_m": 0.0,
+          "root_quaternion_chord": 1.687930637480198e-07,
+          "joint_position_rad": 0.0,
+          "root_linear_velocity_m_s": 1.1920928955078125e-07,
+          "root_angular_velocity_rad_s": 3.814697265625e-06,
+          "joint_velocity_rad_s": 0.0
+        },
+        "mismatched_control_frames": [],
+        "aligned": true,
+        "limitation": "Agreement of exposed states does not establish solver-cache equality or physical success."
+      },
+      "native_clock": {
+        "initial_time_s": 0.0,
+        "final_time_s": 11.42021369934082,
+        "max_step_duration_error_s": 1.2397766113291658e-07,
+        "max_boundary_discontinuity_s": 0.0,
+        "nonadvancing_substeps": [],
+        "contact_epoch": "A native clock alone does not timestamp the collision cache"
+      },
+      "native_pairs": {
+        "contacts": 17014,
+        "complete_substeps": 2284,
+        "active_contacts": 12650,
+        "unfiltered_candidates": 17014,
+        "candidate_type_counts": {
+          "1": 17014
+        },
+        "copy_filter": "get_data_into exports CONSTRAINT|PASSIVE; all raw candidates retained separately"
+      },
+      "recorded_nonfoot": {
+        "loaded_pair_samples": [],
+        "loaded_resultant_samples": [],
+        "max_resultant_n": 0.0
+      },
+      "effective_native_parameters": {
+        "physics_dt_s": 0.005,
+        "gravity": [
+          0.0,
+          0.0,
+          -9.8100004196167
+        ],
+        "cone": 0,
+        "integrator": 3,
+        "solver": 2,
+        "iterations": 100,
+        "tolerance": 1e-06,
+        "warp_options": {
+          "integrator": 3,
+          "cone": 0,
+          "solver": 2,
+          "iterations": 100,
+          "ls_iterations": 50,
+          "ccd_iterations": 35,
+          "disableflags": 524288,
+          "enableflags": 0,
+          "sdf_initpoints": 40,
+          "sdf_iterations": 10,
+          "broadphase": 0,
+          "broadphase_filter": 11,
+          "run_collision_detection": true,
+          "run_rne_postconstraint": false,
+          "graph_conditional": true,
+          "timestep": {
+            "values": [
+              0.004999999888241291
+            ],
+            "dtype": "float32"
+          },
+          "tolerance": {
+            "values": [
+              9.999999974752427e-07
+            ],
+            "dtype": "float32"
+          },
+          "ls_tolerance": {
+            "values": [
+              0.009999999776482582
+            ],
+            "dtype": "float32"
+          },
+          "ccd_tolerance": {
+            "values": [
+              9.999999974752427e-07
+            ],
+            "dtype": "float32"
+          },
+          "gravity": {
+            "values": [
+              [
+                0.0,
+                0.0,
+                -9.8100004196167
+              ]
+            ],
+            "dtype": "float32"
+          },
+          "impratio_invsqrt": {
+            "values": [
+              1.0
+            ],
+            "dtype": "float32"
+          }
+        },
+        "native_state_dtype": "float32",
+        "newton_update_data_interval": 1,
+        "contact_capacity": 128,
+        "constraint_capacity": 500,
+        "recording_hook": "SolverMuJoCo._mujoco_warp_step, after _apply_mjc_control/_update_mjc_data",
+        "contact_copy_stage": "after solver step; collision evaluation epoch requires separate qualification",
+        "solver_convergence_telemetry": "iteration count copied; residual and convergence status unavailable"
+      },
+      "upstream_geometric_nonfoot_frames": [],
+      "actuators": {
+        "scope": "Recorded qfrc_actuator compared with scalar-joint limits in the saved CPU model. Exact equality is descriptive, not a tolerance-based task gate.",
+        "native_gpu_clamp_branch": "unavailable; measured bound hits alone do not establish which clipping branch ran",
+        "individual_actuator_force_limits_enabled": 0,
+        "control_limits_enabled": 0,
+        "joints": [
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_pitch_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -29.8138427734375,
+              74.49120330810547
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_roll_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -19.418190002441406,
+              26.26266860961914
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_hip_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -11.485428810119629,
+              10.735724449157715
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_knee_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -115.45407104492188,
+              68.23155975341797
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_ankle_pitch_link_left_ankle_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -16.646484375,
+              50.0
+            ],
+            "samples_exactly_at_bound": 23,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_ankle_pitch_link_left_ankle_roll_link_left_ankle_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -10.934530258178711,
+              5.1111040115356445
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_pitch_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -31.097627639770508,
+              71.47217559814453
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_roll_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -30.798242568969727,
+              20.040496826171875
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_hip_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -14.994388580322266,
+              15.190088272094727
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_knee_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -123.99311065673828,
+              89.51600646972656
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_ankle_pitch_link_right_ankle_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -26.953136444091797,
+              50.0
+            ],
+            "samples_exactly_at_bound": 16,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_ankle_pitch_link_right_ankle_roll_link_right_ankle_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -13.04805850982666,
+              7.174559116363525
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -9.257102966308594,
+              7.199178695678711
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_waist_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -9.405609130859375,
+              12.158281326293945
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_waist_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -50.0,
+              50.0
+            ],
+            "samples_exactly_at_bound": 35,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_pitch_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -23.845539093017578,
+              22.68610382080078
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.066981315612793,
+              12.463382720947266
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_shoulder_yaw_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -9.746505737304688,
+              11.94729232788086
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_elbow_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -8.340045928955078,
+              2.2723073959350586
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -5.810088157653809,
+              2.612271785736084
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_pitch_link_left_wrist_pitch_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -2.6702628135681152,
+              2.986328601837158
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_pitch_link_left_wrist_yaw_link_left_wrist_yaw_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -2.643036365509033,
+              1.4434103965759277
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_pitch_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -24.91152000427246,
+              24.861961364746094
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -9.711019515991211,
+              13.41563892364502
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_shoulder_yaw_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.862737655639648,
+              10.80893325805664
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_elbow_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.20866870880127,
+              4.071115493774414
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -4.552383899688721,
+              2.137539863586426
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_pitch_link_right_wrist_pitch_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -3.0599093437194824,
+              1.5079501867294312
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_pitch_link_right_wrist_yaw_link_right_wrist_yaw_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -1.35496187210083,
+              1.4862279891967773
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          }
+        ],
+        "whole_system_momentum_balance": "unavailable: whole-system COM momentum was not recorded; root velocity is not substituted"
+      },
+      "geometry": {
+        "complete_substeps": 2284,
+        "same_common_native_pair_set_substeps": 2143,
+        "pre_closer_substeps": 2143,
+        "post_closer_substeps": 0,
+        "equal_error_substeps": 0,
+        "max_pre_distance_error_m": 2.0724927118215275e-07,
+        "max_post_distance_error_m": 0.020130531472771367,
+        "pre_nonfoot_penetration_samples": 0,
+        "post_nonfoot_penetration_samples": 0,
+        "native_nonfoot_active_samples": 0,
+        "native_nonfoot_loaded_samples": 0,
+        "interpretation": "Distance agreement on identical pairs supports a pre-step geometry association in these records; it does not identify the cause of the historical nonfoot discrepancy."
+      },
+      "resources": {
+        "receipt_sha256": "28e8ce66e741093a2075629303265a8399e6f0061b237dfc4229fbd3488dc026",
+        "whole_window_wall_s": 30.42505664099008,
+        "bounded_child_wall_s": 30.289729892043397,
+        "peak_ram_bytes": 2220904448,
+        "effective_limits": {
+          "memory.max": "34359738368",
+          "memory.high": "33285996544",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "oom_events": {
+          "low": "0",
+          "high": "0",
+          "max": "0",
+          "oom": "0",
+          "oom_kill": "0",
+          "oom_group_kill": "0"
+        },
+        "sampled_gpu_guard": {
+          "uuid": "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab",
+          "limit_mib": 20480,
+          "sampling_interval_s": 2,
+          "scope": "Whole-device sampled stop threshold, not a hard allocation limit"
+        },
+        "gpu_stop_reason": null
+      }
+    },
+    {
+      "case": "policy-repeat-2",
+      "input_sha256": {
+        "contact_forces_200hz.npz": "45b8fefaa4792750b2615a2587b9e7d97a47cf8080d6a446b384b0f25b8c8c41",
+        "native_contacts.npz": "988aee7ff59a15d48a0d0d455119ee332ac3b96bd1b09c81f1a9ac3b76cd5a27",
+        "native_metadata.json": "27f52b16f390ed6c2be06ebc9dda8d8e0802c9d98a569a165d503de583857092",
+        "native_model.mjb": "7b4d5c733c92867f72671f9603bfff1cc68872c7ec9ad79c181230e7a0831b9f",
+        "rollout.npz": "af37a2a9b74dddc8ab54c0c4092d7179f3dde0996a0d5fdf5b1efc92241e6d01",
+        "warp_candidates.npz": "a7ef5efc246d08bb086f339cfe92e32eb1be6fe0749d05e1ad2cf616cfd13030",
+        "audit.json": "68e9a724eef76fa8916ec6cd3a84f3b0d6456101f3c12489576314bbf0ee44a6",
+        "invocation.json": "d6e7d1ff33697c98481a2360ffe584db1590e8bf5db4a2b4fbcaa4b71b735df8",
+        "protocol.json": "659ff4587f07ac3c3fe7ff155907490cf7d48b17245d31729f5eaa07da81408c",
+        "metrics.json": "6be486dff93943bdccb55ce5e07dea11141c16a3ffe58d249aa32c88bb7392a3"
+      },
+      "upstream_strict_success": true,
+      "upstream_legacy_gate_pass": true,
+      "upstream_quality_checks": {
+        "zero_initial_speed": true,
+        "full_backward_turn": true,
+        "aerial_rotation": true,
+        "no_nonfoot_contact": true,
+        "stable_last_two_seconds": true,
+        "tracking_return": true,
+        "reference_leg_posture": true
+      },
+      "normalized_return": 0.9311120928122989,
+      "first_failure_step": null,
+      "last_2s_horizontal_drift_m": 0.0012074831174686551,
+      "last_2s_linear_speed_rms_m_s": 0.001090112142264843,
+      "state_alignment": {
+        "controls": 571,
+        "native_substeps": 2284,
+        "physics_dt_s": 0.005,
+        "control_dt_s": 0.02,
+        "native_order_for_reference": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "joint_order_identical": true,
+        "unmapped_joint_position_max_rad": 0.0,
+        "mapped_max_errors": {
+          "root_position_m": 0.0,
+          "root_quaternion_chord": 1.686516927690135e-07,
+          "joint_position_rad": 0.0,
+          "root_linear_velocity_m_s": 2.384185791015625e-07,
+          "root_angular_velocity_rad_s": 2.86102294921875e-06,
+          "joint_velocity_rad_s": 0.0
+        },
+        "mismatched_control_frames": [],
+        "aligned": true,
+        "limitation": "Agreement of exposed states does not establish solver-cache equality or physical success."
+      },
+      "native_clock": {
+        "initial_time_s": 0.0,
+        "final_time_s": 11.42021369934082,
+        "max_step_duration_error_s": 1.2397766113291658e-07,
+        "max_boundary_discontinuity_s": 0.0,
+        "nonadvancing_substeps": [],
+        "contact_epoch": "A native clock alone does not timestamp the collision cache"
+      },
+      "native_pairs": {
+        "contacts": 17013,
+        "complete_substeps": 2284,
+        "active_contacts": 12683,
+        "unfiltered_candidates": 17013,
+        "candidate_type_counts": {
+          "1": 17013
+        },
+        "copy_filter": "get_data_into exports CONSTRAINT|PASSIVE; all raw candidates retained separately"
+      },
+      "recorded_nonfoot": {
+        "loaded_pair_samples": [],
+        "loaded_resultant_samples": [],
+        "max_resultant_n": 0.0
+      },
+      "effective_native_parameters": {
+        "physics_dt_s": 0.005,
+        "gravity": [
+          0.0,
+          0.0,
+          -9.8100004196167
+        ],
+        "cone": 0,
+        "integrator": 3,
+        "solver": 2,
+        "iterations": 100,
+        "tolerance": 1e-06,
+        "warp_options": {
+          "integrator": 3,
+          "cone": 0,
+          "solver": 2,
+          "iterations": 100,
+          "ls_iterations": 50,
+          "ccd_iterations": 35,
+          "disableflags": 524288,
+          "enableflags": 0,
+          "sdf_initpoints": 40,
+          "sdf_iterations": 10,
+          "broadphase": 0,
+          "broadphase_filter": 11,
+          "run_collision_detection": true,
+          "run_rne_postconstraint": false,
+          "graph_conditional": true,
+          "timestep": {
+            "values": [
+              0.004999999888241291
+            ],
+            "dtype": "float32"
+          },
+          "tolerance": {
+            "values": [
+              9.999999974752427e-07
+            ],
+            "dtype": "float32"
+          },
+          "ls_tolerance": {
+            "values": [
+              0.009999999776482582
+            ],
+            "dtype": "float32"
+          },
+          "ccd_tolerance": {
+            "values": [
+              9.999999974752427e-07
+            ],
+            "dtype": "float32"
+          },
+          "gravity": {
+            "values": [
+              [
+                0.0,
+                0.0,
+                -9.8100004196167
+              ]
+            ],
+            "dtype": "float32"
+          },
+          "impratio_invsqrt": {
+            "values": [
+              1.0
+            ],
+            "dtype": "float32"
+          }
+        },
+        "native_state_dtype": "float32",
+        "newton_update_data_interval": 1,
+        "contact_capacity": 128,
+        "constraint_capacity": 500,
+        "recording_hook": "SolverMuJoCo._mujoco_warp_step, after _apply_mjc_control/_update_mjc_data",
+        "contact_copy_stage": "after solver step; collision evaluation epoch requires separate qualification",
+        "solver_convergence_telemetry": "iteration count copied; residual and convergence status unavailable"
+      },
+      "upstream_geometric_nonfoot_frames": [],
+      "actuators": {
+        "scope": "Recorded qfrc_actuator compared with scalar-joint limits in the saved CPU model. Exact equality is descriptive, not a tolerance-based task gate.",
+        "native_gpu_clamp_branch": "unavailable; measured bound hits alone do not establish which clipping branch ran",
+        "individual_actuator_force_limits_enabled": 0,
+        "control_limits_enabled": 0,
+        "joints": [
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_pitch_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -30.13109588623047,
+              74.55980682373047
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_roll_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -19.392202377319336,
+              26.173017501831055
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_hip_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -11.40523910522461,
+              10.791406631469727
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_knee_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -115.6314697265625,
+              68.19345092773438
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_ankle_pitch_link_left_ankle_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -16.6561279296875,
+              50.0
+            ],
+            "samples_exactly_at_bound": 23,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_ankle_pitch_link_left_ankle_roll_link_left_ankle_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -10.955586433410645,
+              4.975790977478027
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_pitch_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -31.16248893737793,
+              71.5113754272461
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_roll_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -30.58448028564453,
+              19.914474487304688
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_hip_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -14.936873435974121,
+              15.179524421691895
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_knee_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -126.48780822753906,
+              89.4593505859375
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_ankle_pitch_link_right_ankle_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -26.912124633789062,
+              50.0
+            ],
+            "samples_exactly_at_bound": 16,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_ankle_pitch_link_right_ankle_roll_link_right_ankle_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -13.020994186401367,
+              8.158957481384277
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -9.2855863571167,
+              7.165212154388428
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_waist_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -9.44697380065918,
+              12.27889347076416
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_waist_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -50.0,
+              50.0
+            ],
+            "samples_exactly_at_bound": 35,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_pitch_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -23.878299713134766,
+              22.686630249023438
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.02677059173584,
+              12.45699691772461
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_shoulder_yaw_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -9.742036819458008,
+              11.931884765625
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_elbow_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -8.334199905395508,
+              2.2593867778778076
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -5.757891654968262,
+              2.6641438007354736
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_pitch_link_left_wrist_pitch_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -2.668489694595337,
+              2.95949387550354
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_pitch_link_left_wrist_yaw_link_left_wrist_yaw_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -2.643036365509033,
+              1.4434373378753662
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_pitch_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -24.966684341430664,
+              24.810688018798828
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -9.705595970153809,
+              13.386384963989258
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_shoulder_yaw_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.85222053527832,
+              10.792251586914062
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_elbow_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.213691711425781,
+              4.051980972290039
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -4.566405296325684,
+              2.143170118331909
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_pitch_link_right_wrist_pitch_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -3.061660051345825,
+              1.5135316848754883
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_pitch_link_right_wrist_yaw_link_right_wrist_yaw_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -1.3518657684326172,
+              1.485764503479004
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          }
+        ],
+        "whole_system_momentum_balance": "unavailable: whole-system COM momentum was not recorded; root velocity is not substituted"
+      },
+      "geometry": {
+        "complete_substeps": 2284,
+        "same_common_native_pair_set_substeps": 2143,
+        "pre_closer_substeps": 2142,
+        "post_closer_substeps": 1,
+        "equal_error_substeps": 0,
+        "max_pre_distance_error_m": 2.3740674318095678e-07,
+        "max_post_distance_error_m": 0.020165462422339436,
+        "pre_nonfoot_penetration_samples": 0,
+        "post_nonfoot_penetration_samples": 0,
+        "native_nonfoot_active_samples": 0,
+        "native_nonfoot_loaded_samples": 0,
+        "interpretation": "Distance agreement on identical pairs supports a pre-step geometry association in these records; it does not identify the cause of the historical nonfoot discrepancy."
+      },
+      "resources": {
+        "receipt_sha256": "b9a5853ae66cbc767d62f24b9e850cf7a3beb4f6b069f82b8e7217edc1b614ca",
+        "whole_window_wall_s": 29.89719360496383,
+        "bounded_child_wall_s": 29.758403726038523,
+        "peak_ram_bytes": 2237984768,
+        "effective_limits": {
+          "memory.max": "34359738368",
+          "memory.high": "33285996544",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "oom_events": {
+          "low": "0",
+          "high": "0",
+          "max": "0",
+          "oom": "0",
+          "oom_kill": "0",
+          "oom_group_kill": "0"
+        },
+        "sampled_gpu_guard": {
+          "uuid": "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab",
+          "limit_mib": 20480,
+          "sampling_interval_s": 2,
+          "scope": "Whole-device sampled stop threshold, not a hard allocation limit"
+        },
+        "gpu_stop_reason": null
+      }
+    },
+    {
+      "case": "policy-repeat-3",
+      "input_sha256": {
+        "contact_forces_200hz.npz": "fb2516605904889d91a5e255ce330593fea9c8cdec776ee6f43a90022be084df",
+        "native_contacts.npz": "0062cb5fdd375f5cb8ed241d1bc5b80a6a7c9abfba42eb15639e6f85b9f12cb4",
+        "native_metadata.json": "27f52b16f390ed6c2be06ebc9dda8d8e0802c9d98a569a165d503de583857092",
+        "native_model.mjb": "7b4d5c733c92867f72671f9603bfff1cc68872c7ec9ad79c181230e7a0831b9f",
+        "rollout.npz": "9b20acf0c7e54ab6a8c22d5d02986e7ac83ba5cb7f8170377b8d5f17b45f2e2e",
+        "warp_candidates.npz": "597c7c433fef3760e7321afa4d453f759bd98e7380d0219c0e240f935453453c",
+        "audit.json": "7ce47751821e34f1b5c034eeb45e17c97d1208a86213ade7bf352cd0e8692abf",
+        "invocation.json": "24ac5477537a7451eac5e9dc4061793af133b4a8c93175587a609b62344f1dd9",
+        "protocol.json": "659ff4587f07ac3c3fe7ff155907490cf7d48b17245d31729f5eaa07da81408c",
+        "metrics.json": "3b17c7634251fa5b8e595e4465989510e25b06364de77077363b361c2178b749"
+      },
+      "upstream_strict_success": true,
+      "upstream_legacy_gate_pass": true,
+      "upstream_quality_checks": {
+        "zero_initial_speed": true,
+        "full_backward_turn": true,
+        "aerial_rotation": true,
+        "no_nonfoot_contact": true,
+        "stable_last_two_seconds": true,
+        "tracking_return": true,
+        "reference_leg_posture": true
+      },
+      "normalized_return": 0.9313017527378422,
+      "first_failure_step": null,
+      "last_2s_horizontal_drift_m": 0.0013347093481570482,
+      "last_2s_linear_speed_rms_m_s": 0.0010642455890774727,
+      "state_alignment": {
+        "controls": 571,
+        "native_substeps": 2284,
+        "physics_dt_s": 0.005,
+        "control_dt_s": 0.02,
+        "native_order_for_reference": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "joint_order_identical": true,
+        "unmapped_joint_position_max_rad": 0.0,
+        "mapped_max_errors": {
+          "root_position_m": 0.0,
+          "root_quaternion_chord": 1.686902602402508e-07,
+          "joint_position_rad": 0.0,
+          "root_linear_velocity_m_s": 4.76837158203125e-07,
+          "root_angular_velocity_rad_s": 3.814697265625e-06,
+          "joint_velocity_rad_s": 0.0
+        },
+        "mismatched_control_frames": [],
+        "aligned": true,
+        "limitation": "Agreement of exposed states does not establish solver-cache equality or physical success."
+      },
+      "native_clock": {
+        "initial_time_s": 0.0,
+        "final_time_s": 11.42021369934082,
+        "max_step_duration_error_s": 1.2397766113291658e-07,
+        "max_boundary_discontinuity_s": 0.0,
+        "nonadvancing_substeps": [],
+        "contact_epoch": "A native clock alone does not timestamp the collision cache"
+      },
+      "native_pairs": {
+        "contacts": 17015,
+        "complete_substeps": 2284,
+        "active_contacts": 12669,
+        "unfiltered_candidates": 17015,
+        "candidate_type_counts": {
+          "1": 17015
+        },
+        "copy_filter": "get_data_into exports CONSTRAINT|PASSIVE; all raw candidates retained separately"
+      },
+      "recorded_nonfoot": {
+        "loaded_pair_samples": [],
+        "loaded_resultant_samples": [],
+        "max_resultant_n": 0.0
+      },
+      "effective_native_parameters": {
+        "physics_dt_s": 0.005,
+        "gravity": [
+          0.0,
+          0.0,
+          -9.8100004196167
+        ],
+        "cone": 0,
+        "integrator": 3,
+        "solver": 2,
+        "iterations": 100,
+        "tolerance": 1e-06,
+        "warp_options": {
+          "integrator": 3,
+          "cone": 0,
+          "solver": 2,
+          "iterations": 100,
+          "ls_iterations": 50,
+          "ccd_iterations": 35,
+          "disableflags": 524288,
+          "enableflags": 0,
+          "sdf_initpoints": 40,
+          "sdf_iterations": 10,
+          "broadphase": 0,
+          "broadphase_filter": 11,
+          "run_collision_detection": true,
+          "run_rne_postconstraint": false,
+          "graph_conditional": true,
+          "timestep": {
+            "values": [
+              0.004999999888241291
+            ],
+            "dtype": "float32"
+          },
+          "tolerance": {
+            "values": [
+              9.999999974752427e-07
+            ],
+            "dtype": "float32"
+          },
+          "ls_tolerance": {
+            "values": [
+              0.009999999776482582
+            ],
+            "dtype": "float32"
+          },
+          "ccd_tolerance": {
+            "values": [
+              9.999999974752427e-07
+            ],
+            "dtype": "float32"
+          },
+          "gravity": {
+            "values": [
+              [
+                0.0,
+                0.0,
+                -9.8100004196167
+              ]
+            ],
+            "dtype": "float32"
+          },
+          "impratio_invsqrt": {
+            "values": [
+              1.0
+            ],
+            "dtype": "float32"
+          }
+        },
+        "native_state_dtype": "float32",
+        "newton_update_data_interval": 1,
+        "contact_capacity": 128,
+        "constraint_capacity": 500,
+        "recording_hook": "SolverMuJoCo._mujoco_warp_step, after _apply_mjc_control/_update_mjc_data",
+        "contact_copy_stage": "after solver step; collision evaluation epoch requires separate qualification",
+        "solver_convergence_telemetry": "iteration count copied; residual and convergence status unavailable"
+      },
+      "upstream_geometric_nonfoot_frames": [],
+      "actuators": {
+        "scope": "Recorded qfrc_actuator compared with scalar-joint limits in the saved CPU model. Exact equality is descriptive, not a tolerance-based task gate.",
+        "native_gpu_clamp_branch": "unavailable; measured bound hits alone do not establish which clipping branch ran",
+        "individual_actuator_force_limits_enabled": 0,
+        "control_limits_enabled": 0,
+        "joints": [
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_pitch_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -29.760995864868164,
+              74.53291320800781
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_roll_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -19.303993225097656,
+              25.979610443115234
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_hip_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -11.418664932250977,
+              10.749643325805664
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_knee_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -115.21075439453125,
+              67.95086669921875
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_ankle_pitch_link_left_ankle_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -16.44112777709961,
+              50.0
+            ],
+            "samples_exactly_at_bound": 23,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_left_hip_pitch_link_left_hip_roll_link_left_hip_yaw_link_left_knee_link_left_ankle_pitch_link_left_ankle_roll_link_left_ankle_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -10.951092720031738,
+              5.058211326599121
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_pitch_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -31.098817825317383,
+              71.5323486328125
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_roll_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -30.572227478027344,
+              19.778520584106445
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_hip_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -14.860311508178711,
+              15.101245880126953
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_knee_joint",
+            "declared_cpu_range": [
+              -139.0,
+              139.0
+            ],
+            "measured_range": [
+              -123.7523193359375,
+              89.67221069335938
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_ankle_pitch_link_right_ankle_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -27.161745071411133,
+              50.0
+            ],
+            "samples_exactly_at_bound": 16,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_right_hip_pitch_link_right_hip_roll_link_right_hip_yaw_link_right_knee_link_right_ankle_pitch_link_right_ankle_roll_link_right_ankle_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -13.030941009521484,
+              7.211916923522949
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_yaw_joint",
+            "declared_cpu_range": [
+              -88.0,
+              88.0
+            ],
+            "measured_range": [
+              -9.261232376098633,
+              7.085261344909668
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_waist_roll_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -9.36933422088623,
+              12.14252758026123
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_waist_pitch_joint",
+            "declared_cpu_range": [
+              -50.0,
+              50.0
+            ],
+            "measured_range": [
+              -50.0,
+              50.0
+            ],
+            "samples_exactly_at_bound": 35,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_pitch_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -23.833755493164062,
+              22.712369918823242
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.050078392028809,
+              12.45525074005127
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_shoulder_yaw_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -9.711743354797363,
+              11.942763328552246
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_elbow_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -8.320239067077637,
+              2.2717032432556152
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -5.759986877441406,
+              2.615459680557251
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_pitch_link_left_wrist_pitch_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -2.662972927093506,
+              2.94216251373291
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_left_shoulder_pitch_link_left_shoulder_roll_link_left_shoulder_yaw_link_left_elbow_link_left_wrist_roll_link_left_wrist_pitch_link_left_wrist_yaw_link_left_wrist_yaw_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -2.643036365509033,
+              1.4445151090621948
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_pitch_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -24.868982315063477,
+              24.845870971679688
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -9.763666152954102,
+              13.386702537536621
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_shoulder_yaw_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.839614868164062,
+              10.732372283935547
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_elbow_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -11.182084083557129,
+              4.04591178894043
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_roll_joint",
+            "declared_cpu_range": [
+              -25.0,
+              25.0
+            ],
+            "measured_range": [
+              -4.591724872589111,
+              2.1276769638061523
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_pitch_link_right_wrist_pitch_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -3.057075023651123,
+              1.507775902748108
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          },
+          {
+            "joint": "_World_envs_env_0_Robot_Geometry_pelvis_waist_yaw_link_waist_roll_link_torso_link_right_shoulder_pitch_link_right_shoulder_roll_link_right_shoulder_yaw_link_right_elbow_link_right_wrist_roll_link_right_wrist_pitch_link_right_wrist_yaw_link_right_wrist_yaw_joint",
+            "declared_cpu_range": [
+              -5.0,
+              5.0
+            ],
+            "measured_range": [
+              -1.352644681930542,
+              1.4966132640838623
+            ],
+            "samples_exactly_at_bound": 0,
+            "samples_outside_declared_range": 0
+          }
+        ],
+        "whole_system_momentum_balance": "unavailable: whole-system COM momentum was not recorded; root velocity is not substituted"
+      },
+      "geometry": {
+        "complete_substeps": 2284,
+        "same_common_native_pair_set_substeps": 2142,
+        "pre_closer_substeps": 2142,
+        "post_closer_substeps": 0,
+        "equal_error_substeps": 0,
+        "max_pre_distance_error_m": 2.2382004200363625e-07,
+        "max_post_distance_error_m": 0.02013152138989051,
+        "pre_nonfoot_penetration_samples": 0,
+        "post_nonfoot_penetration_samples": 0,
+        "native_nonfoot_active_samples": 0,
+        "native_nonfoot_loaded_samples": 0,
+        "interpretation": "Distance agreement on identical pairs supports a pre-step geometry association in these records; it does not identify the cause of the historical nonfoot discrepancy."
+      },
+      "resources": {
+        "receipt_sha256": "0cbe300513eae5a798d307ab5cdf1d44b384069d0b8068187a5ec4ddf344bb48",
+        "whole_window_wall_s": 29.77181909000501,
+        "bounded_child_wall_s": 29.618696874007583,
+        "peak_ram_bytes": 2208768000,
+        "effective_limits": {
+          "memory.max": "34359738368",
+          "memory.high": "33285996544",
+          "memory.swap.max": "0",
+          "cpu.max": "400000 100000",
+          "pids.max": "128",
+          "io.max": "8:0 rbps=33554432 wbps=16777216 riops=max wiops=max"
+        },
+        "oom_events": {
+          "low": "0",
+          "high": "0",
+          "max": "0",
+          "oom": "0",
+          "oom_kill": "0",
+          "oom_group_kill": "0"
+        },
+        "sampled_gpu_guard": {
+          "uuid": "GPU-9674a5eb-facd-7f69-0ed8-e57cb00fffab",
+          "limit_mib": 20480,
+          "sampling_interval_s": 2,
+          "scope": "Whole-device sampled stop threshold, not a hard allocation limit"
+        },
+        "gpu_stop_reason": null
+      }
+    }
+  ],
+  "native_budget": {
+    "manifest_sha256": "ab2f0f8c086a6615c650dafa0671057f74904e2352763765ef81ac5afcc2eb12",
+    "starts_used": 4,
+    "wall_charged_or_reserved_s": 156.06826111394912,
+    "wall_limit_s": 3600.0,
+    "distinct_processes": 4,
+    "clock_scope": "Ledger reservations begin after input/runtime identity checks; full bounded-window durations are reported separately.",
+    "attempts": [
+      {
+        "case": "support-probe",
+        "outcome": "recorded",
+        "wall_s": 73.67132960900199,
+        "invocation_sha256": "a2089a44006b151fa5782fc5ba6adf578456cb6bc28f991d48a277320ce30afe"
+      },
+      {
+        "case": "policy-repeat-1",
+        "outcome": "recorded",
+        "wall_s": 27.926651501096785,
+        "invocation_sha256": "fecb14f61e39ba651486c2c4fd42b17db3dd068dcb3c7c8ef1b42be2208e21ad"
+      },
+      {
+        "case": "policy-repeat-2",
+        "outcome": "recorded",
+        "wall_s": 27.147477280930616,
+        "invocation_sha256": "d6e7d1ff33697c98481a2360ffe584db1590e8bf5db4a2b4fbcaa4b71b735df8"
+      },
+      {
+        "case": "policy-repeat-3",
+        "outcome": "recorded",
+        "wall_s": 27.322802722919732,
+        "invocation_sha256": "24ac5477537a7451eac5e9dc4061793af133b4a8c93175587a609b62344f1dd9"
+      }
+    ]
+  },
+  "failure_frequency": {
+    "failed": 0,
+    "total": 3,
+    "two_sided_clopper_pearson_95": [
+      0.0,
+      0.7075982261787133
+    ],
+    "interpretation": "Binomial-model interval for the requested descriptive report. Independence is not established; same-seed process repeats do not estimate random-initial-condition reliability."
+  },
+  "historical_comparison": "The author archive flags geometric frame119 but lacks its original model and complete pair stream. No nonfoot discrepancy was reproduced in this distinct hardware cohort; no historical solver-failure attribution follows.",
+  "conditional_interventions": "Not run: no localized historical mismatch supports a preregistered intervention.",
+  "scientific_scope": "Source task gates, record integrity, geometry association and physical validity remain separate. No hardware validation, new training, all-engine comparison or production UniSim adapter."
+}

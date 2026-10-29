@@ -1,7 +1,8 @@
 """Persistent-cut TLMPM reference implementation of BladeMaster, arXiv:2609.27342v2.
 
 This is independent CPU code, not the authors' implementation. SI units, FP64,
-trilinear reference basis, elastic fixed-corotated material, MUSL and PIC/FLIP.
+trilinear reference basis, fixed-corotated elasticity with optional perfect-J2
+plasticity and Newtonian viscosity, MUSL and PIC/FLIP.
 The blade translates dynamically; a guide constrains its attitude. See the
 experiment document for the equation mapping and unimplemented paper features.
 """
@@ -24,6 +25,8 @@ class CutConfig:
     density: float = 1100.0
     young_modulus: float = 6000.0
     poisson_ratio: float = 0.35
+    yield_stress: float = 0.0  # Pa; zero retains the elastic baseline.
+    dynamic_viscosity: float = 0.0  # Pa s; zero retains the elastic baseline.
     flip_fraction: float = 0.95
     normal_scale: float = 0.1
     friction_static: float = 0.3
@@ -43,10 +46,16 @@ class CutConfig:
     def __post_init__(self):
         if self.shape not in ('block', 'banana'):
             raise ValueError('Unknown material shape')
-        values = np.array([v for key, value in asdict(self).items() if key not in ('shape', 'blade_bevel_height')
+        values = np.array([v for key, value in asdict(self).items()
+                           if key not in ('shape', 'blade_bevel_height', 'dynamic_viscosity',
+                                          'yield_stress')
                            for v in (value if isinstance(value, tuple) else (value,))])
         if not np.isfinite(values).all() or (values <= 0).any():
             raise ValueError("All configuration values must be finite and positive")
+        if not np.isfinite(self.dynamic_viscosity) or self.dynamic_viscosity < 0:
+            raise ValueError('Dynamic viscosity must be finite and nonnegative (Pa s)')
+        if not np.isfinite(self.yield_stress) or self.yield_stress < 0:
+            raise ValueError('Yield stress must be finite and nonnegative (Pa)')
         if not 0 < self.poisson_ratio < 0.5 or not 0 < self.sharpness < 1:
             raise ValueError("Invalid Poisson ratio or blade sharpness")
         if self.flip_fraction > 1 or self.friction_dynamic > self.friction_static:
@@ -92,6 +101,60 @@ def corotated_stress(deformation, mu, lam):
 
 
 @njit(cache=True)
+def corotated_energy(deformation, mu, lam):
+    """Fixed-corotated elastic energy density per reference volume (J/m^3)."""
+    u, _, vt = np.linalg.svd(deformation)
+    rotation = u @ vt
+    determinant = np.linalg.det(deformation)
+    if determinant <= 0:
+        raise ValueError('Inverted material point; retain this failed run')
+    return mu * np.sum((deformation - rotation)**2) + .5 * lam * (determinant - 1)**2
+
+
+@njit(cache=True)
+def von_mises_project(deformation, mu, yield_stress):
+    """Project principal logarithmic elastic strain onto a perfect-J2 surface.
+
+    BladeMaster specifies only a ``von Mises-type plasticity projection``. This
+    independent choice uses the conventional equivalent-stress definition
+    q=sqrt(3/2)||s||, giving ||dev(log sigma)|| <= yield/(sqrt(6) mu).
+    The hydrostatic logarithmic strain is retained, so the projection preserves
+    det(F). The returned scalar is the removed deviatoric log-strain norm.
+    """
+    if yield_stress <= 0:
+        return deformation.copy(), 0.
+    u, stretches, vt = np.linalg.svd(deformation)
+    if np.linalg.det(deformation) <= 0 or np.min(stretches) <= 0:
+        raise ValueError('Inverted material point; retain this failed run')
+    logarithmic = np.log(stretches)
+    mean = logarithmic.sum() / 3
+    deviatoric = logarithmic - mean
+    norm = np.linalg.norm(deviatoric)
+    limit = yield_stress / (np.sqrt(6.) * mu)
+    if norm <= limit:
+        return deformation.copy(), 0.
+    projected = mean + deviatoric * (limit / norm)
+    return u @ np.diag(np.exp(projected)) @ vt, norm - limit
+
+
+@njit(cache=True)
+def newtonian_stress(deformation, reference_velocity_gradient, viscosity):
+    """Viscous first Piola stress J eta (L + L.T) F^-T, in Pa.
+
+    L = grad_X(v) F^-1 is the spatial velocity gradient. This chooses zero
+    second-viscosity coefficient (bulk viscosity 2 eta / 3), not a calibrated
+    food law. Rigid spin has zero symmetric rate; uniform translation has
+    zero gradient. V0 P_v : grad_X(v) = 2 eta V0 J D:D is nonnegative.
+    """
+    determinant = np.linalg.det(deformation)
+    if determinant <= 0:
+        raise ValueError('Inverted material point; retain this failed run')
+    inverse = np.linalg.inv(deformation)
+    spatial_gradient = reference_velocity_gradient @ inverse
+    return viscosity * determinant * (spatial_gradient + spatial_gradient.T) @ inverse.T
+
+
+@njit(cache=True)
 def codes_compatible(a, b):
     """Two histories conflict if any assigned ternary digit has opposite sides."""
     while a or b:
@@ -129,13 +192,22 @@ def couple_grids(mass, state):
 
 @njit(cache=True)
 def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
-                  particle_impulse, mass, volume, mu, lam, dt, flip, node_count):
-    """Eq. 1–2, 8–9; identical compatibility in P2G and MUSL remapping."""
+                  particle_impulse, mass, volume, mu, lam, dt, flip, node_count,
+                  viscosity=0.0, yield_stress=0.0):
+    """Eq. 1–2, 8–9; return viscous and plastic constitutive dissipation (J)."""
     code_count = int(sides.max()) + 1
     gm = np.zeros((code_count, node_count))
     momentum = np.zeros((code_count, node_count, 3))
     impulse = np.zeros_like(momentum)
+    plastic_dissipation = 0.0
     for p in range(len(x)):
+        if yield_stress > 0:
+            trial_energy = corotated_energy(deformation[p], mu, lam)
+            projected, plastic_increment = von_mises_project(deformation[p], mu, yield_stress)
+            deformation[p] = projected
+            projected_energy = corotated_energy(projected, mu, lam)
+            if plastic_increment > 0:
+                plastic_dissipation += volume * (trial_energy - projected_energy)
         stress = corotated_stress(deformation[p], mu, lam)
         side = sides[p]
         for a in range(8):
@@ -148,15 +220,36 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                     internal -= dt * volume * stress[j, k] * gradients[p, a, k]
                 impulse[side, node, j] += internal + w * particle_impulse[p, j]
     coupled = couple_grids(gm, momentum)
-    coupled_impulse = couple_grids(gm, impulse)
-    gv = np.zeros_like(momentum)
     old_gv = np.zeros_like(momentum)
     for side in range(code_count):
         for node in range(node_count):
             if gm[side, node] > 0:
-                gv[side, node] = (coupled[side, node] + coupled_impulse[side, node]) / gm[side, node]
-                # Eq. 17 uses the coupled old momentum in the FLIP difference.
                 old_gv[side, node] = coupled[side, node] / gm[side, node]
+    dissipation = 0.0
+    if viscosity > 0:
+        # Use current, compatibility-filtered velocity, before external and
+        # internal impulses. Opposing cut histories never share this gradient.
+        for p in range(len(x)):
+            rate = np.zeros((3, 3))
+            side = sides[p]
+            for a in range(8):
+                for j in range(3):
+                    for k in range(3):
+                        rate[j, k] += old_gv[side, nodes[p, a], j] * gradients[p, a, k]
+            stress = newtonian_stress(deformation[p], rate, viscosity)
+            dissipation += dt * volume * np.sum(stress * rate)
+            for a in range(8):
+                for j in range(3):
+                    internal = 0.0
+                    for k in range(3):
+                        internal -= dt * volume * stress[j, k] * gradients[p, a, k]
+                    impulse[side, nodes[p, a], j] += internal
+    coupled_impulse = couple_grids(gm, impulse)
+    gv = np.zeros_like(momentum)
+    for side in range(code_count):
+        for node in range(node_count):
+            if gm[side, node] > 0:
+                gv[side, node] = (coupled[side, node] + coupled_impulse[side, node]) / gm[side, node]
     for p in range(len(x)):
         pic = np.zeros(3)
         increment = np.zeros(3)
@@ -181,6 +274,7 @@ def material_step(x, velocity, deformation, sides, nodes, weights, gradients,
                 for k in range(3):
                     deformation[p, j, k] += (dt * remapped[sides[p], nodes[p, a], j]
                                               * gradients[p, a, k])
+    return dissipation, plastic_dissipation
 
 
 @njit(cache=True)
@@ -265,9 +359,21 @@ def blade_query(point, center, half_size, bevel_height=0.0):
 
 
 @njit(cache=True)
+def oriented_blade_query(point, center, half_size, bevel_height, yaw):
+    """Query a guided blade in its local frame and return world-frame contact."""
+    if yaw == 0.:
+        return blade_query(point, center, half_size, bevel_height)
+    cosine, sine = np.cos(yaw), np.sin(yaw)
+    rotation = np.array([[cosine, -sine, 0.], [sine, cosine, 0.], [0., 0., 1.]])
+    local = rotation.T @ (point - center)
+    closest, normal, distance = blade_query(local, np.zeros(3), half_size, bevel_height)
+    return center + rotation @ closest, rotation @ normal, distance
+
+
+@njit(cache=True)
 def rigid_contacts(x, velocity, blade_x, blade_v, half_size, radius, mass,
                    blade_mass, dt, normal_scale, mu_s, mu_d, gamma_k, gamma_c,
-                   histories, damage, work_threshold, cutting, bevel_height=0.0):
+                   histories, damage, work_threshold, cutting, bevel_height=0.0, yaw=0.0):
     """Eq. 14–16. One impulse feeds both material and rigid reaction."""
     impulses = np.zeros_like(x)
     reaction = np.zeros(3)
@@ -285,7 +391,7 @@ def rigid_contacts(x, velocity, blade_x, blade_v, half_size, radius, mass,
                 point = x[p].copy()
                 point[2] = 0
             else:
-                point, normal, distance = blade_query(x[p], blade_x, half_size, bevel_height)
+                point, normal, distance = oriented_blade_query(x[p], blade_x, half_size, bevel_height, yaw)
                 gap = distance - radius
                 relative = velocity[p] - blade_v
                 effective = 1 / (1 / mass + 1 / blade_mass)
@@ -357,28 +463,80 @@ def particle_contacts(x, reference, velocity, sides, pairs, radius, spacing,
 
 
 @njit(cache=True)
-def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt, cut_index=0):
+def particle_contacts_compact(x, reference, velocity, sides, pairs, radius, spacing,
+                              mass, dt, normal_scale, mu_s, mu_d, gamma_k, gamma_c,
+                              histories):
+    """Eq. 10–13 with one history vector per current candidate pair.
+
+    ``histories`` is already matched to candidate pairs from the immediately
+    preceding substep. Non-contacting rows are cleared. This has the same
+    contact law as :func:`particle_contacts` without allocating O(N^2) state.
+    """
+    impulses = np.zeros_like(x)
+    maximum_overlap = 0.0
+    for row in range(len(pairs)):
+        p, q = pairs[row]
+        conflict = not codes_compatible(sides[p], sides[q])
+        if not conflict and np.linalg.norm(reference[p] - reference[q]) < 2 * spacing:
+            histories[row] *= 0
+            continue
+        delta = x[p] - x[q]
+        distance = np.linalg.norm(delta)
+        if distance < 1e-14:
+            raise ValueError("Coincident contact proxies; undefined normal")
+        normal = delta / distance
+        relative = velocity[p] - velocity[q]
+        overlap = 2 * radius - distance
+        predicted = overlap - dt * min(np.dot(relative, normal), 0)
+        if predicted <= 0:
+            histories[row] *= 0
+            continue
+        maximum_overlap = max(maximum_overlap, overlap)
+        jn = normal_scale * (mass / 2) / dt * predicted
+        tangent, updated = friction_impulse(normal, relative, jn, histories[row],
+                                             mass / 2, dt, mu_s, mu_d, gamma_k, gamma_c)
+        histories[row] = updated
+        impulse = jn * normal + tangent
+        impulses[p] += impulse
+        impulses[q] -= impulse
+    return impulses, maximum_overlap
+
+
+@njit(cache=True)
+def assign_cut_sides(x, velocity, sides, blade_x, blade_v, half_size, spacing, dt, cut_index=0, yaw=0.0):
     """Eq. 3–7: assign 0→1/2 behind the swept finite edge, never reset."""
     edge_z = blade_x[2] - half_size[2]
     digit = 3**cut_index
+    cosine, sine = np.cos(yaw), np.sin(yaw)
     for p in range(len(x)):
+        dx, dy = x[p, 0] - blade_x[0], x[p, 1] - blade_x[1]
+        signed = cosine * dx + sine * dy
+        along = -sine * dx + cosine * dy
         front = edge_z - x[p, 2]
         back = 2 * spacing + max((velocity[p, 2] - blade_v[2]) * dt, 0)
-        if ((sides[p] // digit) % 3 == 0 and abs(x[p, 0] - blade_x[0]) <= 6 * spacing
-                and abs(x[p, 1] - blade_x[1]) <= half_size[1]
+        if ((sides[p] // digit) % 3 == 0 and abs(signed) <= 6 * spacing
+                and abs(along) <= half_size[1]
                 and -back <= front <= 0):
-            sides[p] += digit * (1 if x[p, 0] < blade_x[0] else 2)
+            sides[p] += digit * (1 if signed < 0 else 2)
 
 
 class CuttingSimulation:
     """One material body, a guided dynamic blade, persistent cuts and a board."""
 
-    def __init__(self, config=CutConfig()):
+    def __init__(self, config=CutConfig(), reference_points=None):
         self.config = config
         cells = np.rint(np.asarray(config.size) / config.grid_spacing).astype(int)
         self.origin = -np.array([config.size[0] / 2, config.size[1] / 2, 0.])
         particle_spacing = config.grid_spacing / 2
-        self.reference = material_points(config.size, config.grid_spacing, config.shape)
+        self.reference = (material_points(config.size, config.grid_spacing, config.shape)
+                          if reference_points is None else np.asarray(reference_points, dtype=float))
+        if (self.reference.ndim != 2 or self.reference.shape[1:] != (3,)
+                or not len(self.reference) or not np.isfinite(self.reference).all()):
+            raise ValueError('Reference points must be a nonempty finite N x 3 array')
+        fractional = (self.reference - self.origin) / config.grid_spacing
+        if (fractional < 0).any() or (fractional >= cells).any():
+            raise ValueError('Reference points must remain inside the configured reference grid')
+        self.reference = self.reference.copy()
         self.x = self.reference.copy()
         self.velocity = np.zeros_like(self.x)
         self.deformation = np.tile(np.eye(3), (len(self.x), 1, 1))
@@ -393,16 +551,49 @@ class CuttingSimulation:
         self.half_size = np.array(config.blade_half_size)
         self.blade_x = np.array([0., 0., config.size[2] + .012 + self.half_size[2]])
         self.blade_v = np.zeros(3)
+        self.blade_yaw = 0.
         self.rigid_history = np.zeros((2, len(self.x), 3))
-        self.pair_history = np.zeros((len(self.x), len(self.x), 3))
-        self.pair_seen = np.full((len(self.x), len(self.x)), -2, dtype=np.int32)
+        self.pair_keys = np.empty(0, dtype=np.int64)
+        self.pair_history = np.empty((0, 3))
         self.step_count = 0
+
+    def _pair_contact(self, pairs):
+        """Map only previous-step candidate histories onto current candidates."""
+        c = self.config
+        if len(pairs) == 0:
+            self.pair_keys = np.empty(0, dtype=np.int64)
+            self.pair_history = np.empty((0, 3))
+            return np.zeros_like(self.x), 0.0
+        keys = pairs[:, 0].astype(np.int64) * len(self.x) + pairs[:, 1]
+        order = np.argsort(keys)
+        pairs, keys = pairs[order], keys[order]
+        histories = np.zeros((len(pairs), 3))
+        if len(self.pair_keys):
+            previous = np.searchsorted(self.pair_keys, keys)
+            matched = (previous < len(self.pair_keys))
+            matched[matched] &= self.pair_keys[previous[matched]] == keys[matched]
+            histories[matched] = self.pair_history[previous[matched]]
+        contact, overlap = particle_contacts_compact(
+            self.x, self.reference, self.velocity, self.sides, pairs, self.radius,
+            c.grid_spacing, self.mass, c.dt, c.normal_scale, c.friction_static,
+            c.friction_dynamic, c.tangent_stiffness, c.tangent_damping, histories)
+        self.pair_keys, self.pair_history = keys, histories
+        return contact, overlap
 
     def momentum(self):
         return self.mass * self.velocity.sum(axis=0) + self.config.blade_mass * self.blade_v
 
-    def step(self, target_edge, *, cutting=True, probe_velocity=None, probe_mask=None, cut_index=0):
+    def step(self, target_edge, *, cutting=True, probe_velocity=None, probe_mask=None, cut_index=0,
+             blade_yaw=0.):
         c = self.config
+        if not np.isfinite(blade_yaw):
+            raise ValueError('Blade yaw must be finite')
+        if blade_yaw != self.blade_yaw:
+            # Attitude is an external guide, not free rotational dynamics.
+            # Reorientation is allowed only with the whole blade above material.
+            if self.blade_x[2] - self.half_size[2] <= self.x[:, 2].max() + self.radius:
+                raise ValueError('Withdraw the blade before changing its guided attitude')
+            self.blade_yaw = float(blade_yaw)
         before = self.momentum()
         external = np.zeros(3)
         if probe_velocity is not None:
@@ -421,21 +612,18 @@ class CuttingSimulation:
             c.friction_static, c.friction_dynamic, c.tangent_stiffness,
             c.tangent_damping, self.rigid_history, self.damage,
             c.cutting_energy * self.volume**(2 / 3) * (1 - c.sharpness) / c.sharpness,
-            cutting, c.blade_bevel_height)
+            cutting, c.blade_bevel_height, self.blade_yaw)
         pair_radius = 2 * self.radius + 2 * np.linalg.norm(self.velocity, axis=1).max() * c.dt
         pairs = cKDTree(self.x).query_pairs(pair_radius, output_type='ndarray')
-        contact, pair_overlap = particle_contacts(
-            self.x, self.reference, self.velocity, self.sides, pairs, self.radius,
-            c.grid_spacing, self.mass, c.dt, c.normal_scale, c.friction_static,
-            c.friction_dynamic, c.tangent_stiffness, c.tangent_damping,
-            self.pair_history, self.pair_seen, self.step_count)
+        contact, pair_overlap = self._pair_contact(pairs)
         gravity = np.array([0., 0., -9.81]) * self.mass * c.dt
-        material_step(self.x, self.velocity, self.deformation, self.sides,
+        viscous_dissipation, plastic_dissipation = material_step(
+                      self.x, self.velocity, self.deformation, self.sides,
                       self.nodes, self.weights, self.gradients,
                       impulses + contact + gravity, self.mass, self.volume,
                       c.young_modulus / (2 * (1 + c.poisson_ratio)),
                       c.young_modulus * c.poisson_ratio / ((1 + c.poisson_ratio) * (1 - 2 * c.poisson_ratio)),
-                      c.dt, c.flip_fraction, self.node_count)
+                      c.dt, c.flip_fraction, self.node_count, c.dynamic_viscosity, c.yield_stress)
         self.blade_v += (c.dt * drive + reaction) / c.blade_mass
         self.blade_x += c.dt * self.blade_v
         # Unilateral board stop on the guided blade. Its support impulse is
@@ -448,7 +636,7 @@ class CuttingSimulation:
                 self.blade_v[2] = 0
         if cutting:
             assign_cut_sides(self.x, self.velocity, self.sides, self.blade_x, self.blade_v,
-                             self.half_size, c.grid_spacing, c.dt, cut_index)
+                             self.half_size, c.grid_spacing, c.dt, cut_index, self.blade_yaw)
         external += board + blade_board + gravity * len(self.x) + c.dt * drive
         residual = self.momentum() - before - external
         self.step_count += 1
@@ -458,6 +646,7 @@ class CuttingSimulation:
         return {
             'time_s': self.step_count * c.dt,
             'blade_position_m': self.blade_x.copy(), 'blade_velocity_m_s': self.blade_v.copy(),
+            'blade_yaw_rad': self.blade_yaw,
             'target_edge_m': np.asarray(target_edge), 'drive_force_n': drive,
             'material_reaction_n': reaction / c.dt, 'guide_reaction_torque_nm': -torque / c.dt,
             'board_impulse_ns': board, 'blade_board_impulse_ns': blade_board,
@@ -468,4 +657,6 @@ class CuttingSimulation:
             'minimum_det_f': determinant.min(), 'maximum_det_f': determinant.max(),
             'labelled_particles': int(np.count_nonzero(self.sides)),
             'contact_work_j': work,
+            **({'viscous_dissipation_j': viscous_dissipation} if c.dynamic_viscosity > 0 else {}),
+            **({'plastic_dissipation_j': plastic_dissipation} if c.yield_stress > 0 else {}),
         }
