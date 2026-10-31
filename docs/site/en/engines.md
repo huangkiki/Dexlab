@@ -2,6 +2,10 @@
 
 Matching visual meshes, parameter names or joint targets does not establish matching physical problems.
 
+## Generative environment backends
+
+Uranus is a candidate generative observation backend in DexLab and is not part of the native MuJoCo, SuperDex, Genesis, Newton, PhysX or Drake engine denominator. It consumes future `qpos` and generates multi-view video; it does not provide contact force, solver state or task success. See the [Uranus backend](uranus-backend.md) for its interface, candidate tasks and evidence boundary.
+
 ## Historical apple configurations
 
 | Item | MuJoCo | SuperDex FP64 | PhysX |

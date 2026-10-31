@@ -21,6 +21,8 @@ DexLab 面向通用操作模型、VLA/WAM、Agent-as-policy 与远程机器人 A
 
 [申请模型评测 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [查看现有实验](experiments.md) · [复算一组证据](quickstart.md)
 
+环境后端可以是原生物理引擎，也可以是负责生成观测的候选 world model；后者仍必须由独立任务评分器判定 success。Uranus 的接口、任务候选和证据等级见 [Uranus 后端](uranus-backend.md)。
+
 ## 适合评测什么
 
 首批聚焦接触丰富操作，而不是用大量普通 pick-and-place 场景稀释接触能力：

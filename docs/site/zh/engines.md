@@ -2,6 +2,10 @@
 
 同一个视觉网格、参数名称或关节目标，不保证引擎求解了同一个物理问题。
 
+## 生成式环境后端
+
+Uranus 是 DexLab 的候选生成式 observation backend，不在 MuJoCo、SuperDex、Genesis、Newton、PhysX 或 Drake 的原生物理引擎分母中。它接收未来 `qpos` 并生成多视角视频，不提供接触力、求解器状态或任务 success；界面、评测任务和证据边界见 [Uranus 后端](uranus-backend.md)。
+
 ## 历史苹果配置的差别
 
 | 项目 | MuJoCo | SuperDex FP64 | PhysX |

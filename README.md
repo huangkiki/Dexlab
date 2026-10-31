@@ -4,9 +4,35 @@
 
 DexLab 把一次接触任务跑成证据：记录原生接触与失败层级，再决定改模型还是改仿真器。每次更新绑定模型、仿真器、协议与证据，回到同一 cohort 重跑。榜单只是这个闭环的一个视图。
 
-[共同进化](#coevolution) · [Poke RoboAPI 适配](demos/roboapi-poke/README.md) · [English](README.en.md) · [已完成实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [评测与防刷榜协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html) · [在线实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)
+[共同进化](#coevolution) · [系统组成](#architecture) · [Uranus 后端](https://huangkiki.github.io/Dexlab/zh-cn/latest/uranus-backend.html) · [Poke RoboAPI 适配](demos/roboapi-poke/README.md) · [English](README.en.md) · [已完成实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [评测与防刷榜协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html) · [在线实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)
 
 > 当前：任务、评分与证据链可用；远程执行器与公开 leaderboard 仍在建设。
+
+<a id="architecture"></a>
+## 系统组成
+
+```text
+DexLab
+├── 任务与协议：场景、初始状态、seeds、预算
+├── 被测对象：RoboAPI / VLA / policy
+├── 环境后端：MuJoCo / Newton / SuperDex / Genesis / Uranus
+├── 动作执行：IK / controller / session
+└── 证据与评分：成功率、接触状态、失败归因、cohort、防刷榜
+```
+
+原生物理后端负责状态推进与接触读回；Uranus 是候选生成式观测后端，提供未来 `qpos` 对应的多视角视频。它不拥有任务、成功判据或物理真值。
+
+## 环境后端：Uranus
+
+**Uranus: Building the Next-Generation Simulation Infrastructure for Embodied AI**<br>
+Wenkang Qin, Yukun Zhou, Noah Shen, Jisong Cai, Dongxiao Mao, Baicheng Li, Yue Zhang, Wei Sui<br>
+D-Robotics / Peking University / Shanghai Jiao Tong University · arXiv 2026
+
+Uranus 从参考观测、历史 latent、未来关节位置轨迹、机器人描述和相机几何生成同步多视角 RGB。接入 DexLab 时，RoboAPI 的末端目标需先经 IK/controller 转为 `qpos`；Uranus 生成观测后，再由独立任务判据决定 success/failure。
+
+[论文](https://arxiv.org/abs/2609.24815) · [项目页](https://d-robotics-ai-lab.github.io/large-model-team/blog/uranus/) · [推理代码](https://github.com/D-Robotics-AI-Lab/Uranus-OSS) · [权重](https://huggingface.co/collections/D-Robotics/uranus) · [完整接口、任务与证据边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/uranus-backend.html)
+
+> 状态：文档化候选后端。DexLab 尚未提供 Uranus adapter、runner、cohort 或正式成绩；论文结果不计作 DexLab 复现。
 
 <a id="coevolution"></a>
 ## 共同进化
