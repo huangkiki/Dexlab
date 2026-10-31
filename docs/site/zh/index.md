@@ -4,7 +4,7 @@
 
 模型在接触丰富任务上执行，DexLab 记录原生接触读回并归因失败；发现物理缺口就升级仿真器，发现策略缺口就回到模型。每次改动都绑定模型版本、仿真器版本和原始证据，再回到同一协议重跑。
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [共同进化协议](model-evaluation.md) · [申请 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [共同进化协议](model-evaluation.md) · [Uranus 环境后端](uranus-backend.md) · [申请 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
 
 (model-evaluation)=
 ## 仿真器与模型共同进化
@@ -157,6 +157,8 @@ diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-g
 Solver 失败复盘 <solver-failure-audit>
 
 共同进化与模型评测 <model-evaluation>
+
+Uranus 生成式环境后端 <uranus-backend>
 
 高质量轨迹回放 <studio-rendering>
 布料引擎对比 <cloth-comparison>

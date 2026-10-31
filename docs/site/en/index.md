@@ -4,7 +4,7 @@
 
 The model executes contact-rich tasks; DexLab records native contact readback and attributes failures. A physical gap improves the simulator; a policy gap returns to the model. Every change binds model version, simulator version, and raw evidence, then reruns the same protocol.
 
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Co-evolution protocol](model-evaluation.md) · [Request a pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Co-evolution protocol](model-evaluation.md) · [Uranus environment backend](uranus-backend.md) · [Request a pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
 
 (model-evaluation)=
 ## Simulator and model co-evolution
@@ -159,6 +159,8 @@ Classical physical laws and existing empirical relations serve as references. Su
 Solver failure audit <solver-failure-audit>
 
 Co-evolution and model evaluation <model-evaluation>
+
+Uranus generative environment backend <uranus-backend>
 
 Studio replay rendering <studio-rendering>
 Cloth engine comparison <cloth-comparison>

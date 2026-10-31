@@ -21,6 +21,8 @@ The repository already contains task scenes, native observations, independent sc
 
 [Request a model-evaluation pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Browse experiments](experiments.md) · [Rescore one evidence pair](quickstart.md)
 
+An environment backend can be a native physics engine or a candidate world model that generates observations; the latter still requires an independent task scorer to decide success. See the [Uranus backend](uranus-backend.md) for its interface, task candidates and evidence level.
+
 ## What is evaluated
 
 The first benchmark focus is contact-rich manipulation:

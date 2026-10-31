@@ -4,9 +4,35 @@
 
 DexLab turns a contact task into evidence: record native contact and the failing layer, then decide whether to change the model or the simulator. Every update binds model, simulator, protocol, and evidence, then reruns the same cohort. A leaderboard is only one view of that loop.
 
-[Co-evolution](#coevolution) · [Poke RoboAPI adapter](demos/roboapi-poke/README.md) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
+[Co-evolution](#coevolution) · [System architecture](#architecture) · [Uranus backend](https://huangkiki.github.io/Dexlab/en/latest/uranus-backend.html) · [Poke RoboAPI adapter](demos/roboapi-poke/README.md) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
 
 > Current: tasks, scoring, and evidence work; the remote executor and public leaderboard are still being built.
+
+<a id="architecture"></a>
+## System architecture
+
+```text
+DexLab
+├── Tasks and protocols: scenes, initial states, seeds, budgets
+├── System under test: RoboAPI / VLA / policy
+├── Environment backends: MuJoCo / Newton / SuperDex / Genesis / Uranus
+├── Action execution: IK / controller / session
+└── Evidence and scoring: success, contact state, attribution, cohorts, anti-gaming
+```
+
+Native physics backends own state evolution and contact readback. Uranus is a candidate generative observation backend that produces multi-view video from future `qpos`. It does not own tasks, success predicates or physical truth.
+
+## Environment backend: Uranus
+
+**Uranus: Building the Next-Generation Simulation Infrastructure for Embodied AI**<br>
+Wenkang Qin, Yukun Zhou, Noah Shen, Jisong Cai, Dongxiao Mao, Baicheng Li, Yue Zhang, Wei Sui<br>
+D-Robotics / Peking University / Shanghai Jiao Tong University · arXiv 2026
+
+Uranus generates synchronized multi-view RGB from reference observations, latent history, future joint-position trajectories, robot descriptions and camera geometry. A RoboAPI end-effector target must first pass through IK/controller conversion into `qpos`; an independent task predicate then decides success or failure from the generated observation.
+
+[Paper](https://arxiv.org/abs/2609.24815) · [Project](https://d-robotics-ai-lab.github.io/large-model-team/blog/uranus/) · [Inference code](https://github.com/D-Robotics-AI-Lab/Uranus-OSS) · [Weights](https://huggingface.co/collections/D-Robotics/uranus) · [Full interface, tasks and evidence boundary](https://huangkiki.github.io/Dexlab/en/latest/uranus-backend.html)
+
+> Status: documented candidate backend. DexLab has no Uranus adapter, runner, cohort or official score yet; paper results are not DexLab reproductions.
 
 <a id="coevolution"></a>
 ## Co-evolution
