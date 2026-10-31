@@ -1,33 +1,42 @@
 # DexLab
 
-**Unified evaluation and failure diagnosis for contact-rich robot models.**
+**Let robot models and physics simulators point out each other's blind spots on the same failures, then improve together.**
 
-Connect a remote model service and customer robot configuration, then evaluate grasping, holding, wiping, cloth, cutting, and insertion under frozen tasks, simulator versions, seeds, and resource budgets. DexLab returns equal-task macro success, repeat stability, a per-task matrix, and failure evidence. **Official leaderboard scores are produced by DexLab's evaluation environment; self-reported scores are not accepted.**
+DexLab turns a contact task into traceable evidence: run the model, record native state, contact readback, and the failing layer; when the gap is physical, improve the simulator, and when it is strategic, go back to the model. Every update binds model version, simulator version, task protocol, and raw evidence, then reruns the same cohort. A public leaderboard is one verifiable view left by that loop, not the goal itself.
 
-[Request a model-evaluation pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Evaluation protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
+[Understand co-evolution](#coevolution) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
 
 > Current stage: task scenes, native observations, independent scoring, and evidence records exist; the remote model executor and public leaderboard are being built. Public issues may contain publishable information only. Never post API keys, private addresses, or checkpoint credentials.
 
-## What the evaluation returns
+<a id="coevolution"></a>
+## Why co-evolution instead of one-way evaluation
 
-| Output | Description |
+A simulator is not only a model's test room. A single failure usually mixes three possibilities: the model did not learn it, the scene was not configured correctly, or the physics itself is wrong. DexLab separates them before deciding what to change.
+
+1. **Run the model.** Execute one contact task under a fixed task, robot configuration, simulator version, and budget.
+2. **Record real contact.** Keep native states, contact forces, impulses, solver status, commands, and raw trajectories, not just a success video.
+3. **Attribute the failure.** Decide whether the failure comes from the model, adapter, controller, scene, or physics. An invalid engine run does not become a model penalty.
+4. **Improve one side, then rerun the same protocol.** A physical gap improves the simulator; a policy gap improves the model. Either change creates a new versioned cohort.
+
+Those four steps let the model and simulator trade roles: the model reveals where simulation is wrong, and simulation in turn raises physical conditions the model must survive.
+
+## Two directions of co-evolution
+
+| Direction | Existing evidence | What it shows |
+| --- | --- | --- |
+| **The model exposes a simulator boundary** | Sponge wiping passes **3/3** with assistance and **0/3** without it; final cleaning is about **95.47% / 39.92%**. | The result depends heavily on the simulated retention mechanism. One pass is not evidence for the policy, and one unassisted failure is not evidence against a solver. |
+| **Physical change exposes a policy boundary** | Changing the Wuji pinch from point contact to synthetic torsional contact reduces two-second hold displacement from **2.734 mm to 1.025 mm**. | The same control performs differently under different physics; for a model, that is a new condition it must handle. |
+
+The repository currently demonstrates the side where physical conditions change the result. Once external models are connected, it can also record the side where model strategy changes the result. Until then, co-evolution is an expanding method, not a completed loop.
+
+## What every round leaves behind
+
+| Artifact | Purpose |
 | --- | --- |
-| **Leaderboard score** | Equal-task macro success over a frozen suite, with every task result visible so longer tasks cannot gain hidden weight from a pooled raw episode count. |
-| **Stability and cost** | Success dispersion across repeats, timeouts, request latency, action errors, and resource budget. |
-| **Failure diagnosis** | Whether failure starts in observation/interface handling, grasp, hold, slip, contact switching, action timeout, or an invalid physics run, with the corresponding evidence. |
-| **Verification state** | Separate local unverified results, DexLab-official results, and externally reproducible results where the team releases enough material. |
-
-## Why not judge from one success video
-
-In contact-rich manipulation, lifting an object is not proof of a stable grasp, and a completed routine is not proof that the contact physics was meaningful. DexLab records native state, contact readback, issued commands, scoring outcomes, and failure denominators, then separates:
-
-- whether a model completes the full task;
-- where the failure begins;
-- whether an engine or scene problem makes the run invalid;
-- whether the result only works on one memorized layout;
-- whether another team can inspect or reproduce the result.
-
-The evaluation is for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. It scores the **end-to-end system** made of the model, adapter, controller, and customer robot configuration. It does not invent a capability coefficient that pretends different embodiments reveal one model-only score.
+| **Versioned result** | Every cohort binds model version, simulator version, task protocol, seeds, budget, and evidence so a later upgrade cannot reuse an old score. |
+| **Failure attribution** | Shows whether failure starts in observation/interface handling, grasp, hold, slip, contact switching, action timeout, or an invalid physics run. |
+| **Rescorable evidence** | Raw records, independent scoring, and reproduction entrypoints remain for the next model or simulator iteration. |
+| **Verification state** | Separates `local / unverified`, `official verified`, and `reproducible`; internal review is not external reproduction. |
 
 ## Completed experiments
 
@@ -46,38 +55,13 @@ These scenes demonstrate working task environments, observations, and scorers. T
 
 The [RSS public-entry inventory](https://huangkiki.github.io/Dexlab/en/latest/solver-failure-inventory.html) covers **50 public entrypoints** at upstream `b001cc7`: 40 have task-scoped assertions and 10 are teaching, rendering, or hardware mocks. They are indexed by rigid grasp, cloth/soft body, rope/cable, wiping/bag/tape, cutting, granular/liquid/dough, and policy execution. A goal scorer and its scene can share one episode, so this is not 50 independent operations. The 18 exact paper scenes in Figure 5 still lack original inputs and are not the same denominator as the 50 public entrypoints.
 
-## How a model is scored
+## How a result is scored
 
-Before an official cohort, DexLab freezes the tasks, embodiment, engine versions, seeds, repeats, timeouts, resource caps, and scorer. Each task first receives an independent success rate; the headline score is the equal-task macro average.
+Each task receives its own success rate; the headline score is the equal-task macro average. Every episode stays in its task's denominator, and a longer task does not gain hidden weight. Infrastructure failure and model failure are recorded separately. An invalid engine, scene, or record does not silently become a model failure. Retries and failures remain visible; teams cannot publish only the best attempt.
 
-- Every episode for a task stays in that task's denominator;
-- a task does not gain extra weight because it uses more episodes or costs more;
-- infrastructure failure and model failure are recorded separately;
-- an invalid engine, scene, or record does not silently become a model failure;
-- retries and failures remain visible; teams cannot publish only the best attempt.
+## Verifiable anti-gaming for co-evolution
 
-Reports show the complete task matrix, success dispersion, and failure classes. A task failure does not disappear inside an aggregate.
-
-## Anti-gaming
-
-DexLab borrows the official-execution and hidden-verification principles used by public benchmarks while retaining contact-specific evidence boundaries:
-
-- **Official scoring.** DexLab controls tasks, resets, observations, model calls, and scoring. Customer-run results can only be labeled `local / unverified`.
-- **Public plus hidden verification layouts.** Public layouts support reproduction and iteration; unpublished scene variations detect hardcoded coordinates, memorized trajectories, and tuning restricted to released tasks.
-- **Frozen budgets.** Seeds, repeat counts, timeouts, and resource caps are fixed. Teams cannot rerun indefinitely and submit the best outcome.
-- **One fixed system.** A leaderboard entry uses one checkpoint and inference procedure across all tasks. Per-task routing to different models is not allowed.
-- **Technical review.** DexLab reviews adapters, action interfaces, duplicate systems, minimally changed variants, and suspicious task selection.
-- **Every attempt retained.** Model failures, interface failures, timeouts, invalid executions, and platform faults remain distinct.
-
-Formal boards expose these states:
-
-| State | Meaning | Leaderboard eligible |
-| --- | --- | --- |
-| `local / unverified` | The team ran it without official frozen conditions or scoring. | No |
-| `official verified` | DexLab ran it and it passed interface, leakage, and anti-gaming checks. | Yes |
-| `reproducible` | An official result also publishes enough configuration and material for external review. | Separate badge |
-
-Raw video, trajectories, and weights are private by default and may be released by the customer. Internal DexLab review is not equivalent to independent community review. See the [full evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html).
+To keep "evolving together" from becoming result cherry-picking, DexLab uses public layouts for reproduction, hidden layout consistency checks, frozen seeds and budgets, one checkpoint across all tasks, and complete attempt retention. Official scores are produced by DexLab; customer-run results can only be labeled `local / unverified`. [Full evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html)
 
 ## Join the pilot
 
@@ -86,7 +70,7 @@ Raw video, trajectories, and weights are private by default and may be released 
 3. Freeze one cohort and complete interface qualification plus the pilot run.
 4. Receive a private report first, then decide whether to request a public score or publish reproducible material.
 
-A remote model service is the preferred integration. The endpoint only receives deployable observations and returns actions; it cannot read scorer state, future state, or simulator-privileged information. The concrete schema will be frozen before a pilot. The repository does not yet publish a hosted endpoint.
+A remote model service is the preferred integration. The endpoint only receives deployable observations and returns actions; it cannot read scorer state, future state, or simulator-privileged information. The repository does not yet publish a hosted endpoint.
 
 ## Inspect existing evidence now
 
@@ -114,6 +98,6 @@ Open `results/rss-wiping-v1/comparison.png` for the curves. The directory also c
 
 ## Result boundaries
 
-Task success is not physical truth. Physical validity is primarily the responsibility of the engine and scene qualification; the model is evaluated mainly by task success and stability. A simulation pass does not prove hardware success, and hidden verification does not prove real-world generalization. Real materials, sensors, robot safety, and deployment reliability still require independent validation.
+Task success is not physical truth. Physical validity belongs first to a specific simulator version and scene qualification; the model is evaluated mainly by task success and stability. A simulation pass does not prove hardware success, and hidden verification does not prove real-world generalization. Real materials, sensors, robot safety, and deployment reliability still require independent validation.
 
 [Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html) · [Solver configuration roles](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) · [Development and acceptance](docs/autoresearch.md)

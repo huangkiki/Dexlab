@@ -1,24 +1,25 @@
 # DexLab
 
-**为机器人模型提供接触丰富操作的统一评测与失败诊断。**
+**让仿真器与机器人模型在同一批失败样本上互相指出盲点，然后一起改进。**
 
-接入远程模型服务与客户机器人配置，在冻结条件下评测抓取、保持、擦拭、布料、切割与插接，输出任务等权成功率和失败证据。正式榜成绩由 DexLab 官方环境运行，不接受团队自报分数。
+模型在接触丰富任务上执行，DexLab 记录原生接触读回并归因失败；发现物理缺口就升级仿真器，发现策略缺口就回到模型。每次改动都绑定模型版本、仿真器版本和原始证据，再回到同一协议重跑。
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [模型评测协议](model-evaluation.md) · [申请 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [共同进化协议](model-evaluation.md) · [申请 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
 
 (model-evaluation)=
-## 机器人模型评测
+## 仿真器与模型共同进化
 
-DexLab 面向通用操作模型、VLA/WAM、Agent-as-policy 和远程机器人 API 团队。客户自带机器人与接口，DexLab 固定任务、引擎版本、seeds、重复次数和预算，按端到端系统报告结果。
+DexLab 面向通用操作模型、VLA/WAM、Agent-as-policy 和远程机器人 API 团队。客户自带机器人与接口；模型执行，DexLab 记录接触与失败，再把结论送回模型或仿真器其中一边。
 
+- **闭环：** 模型跑任务 → 记录真实接触 → 归因到模型或物理 → 升级其中一边并重跑同协议。
 - **主成绩：** 每个任务先单独计算成功率，再对任务等权求宏平均；逐任务矩阵不会隐藏失败。
-- **物理边界：** 引擎或场景未通过资格检查时，运行无效，不把仿真器缺陷算成模型失败。
+- **物理边界：** 引擎或场景导致运行无效时，不把仿真器缺陷算成模型失败，而是作为下一次升级仿真器的证据。
 - **防刷榜：** 正式榜只接受官方执行；公开集用于复现，隐藏场景变化用于检测过拟合，全部尝试与重跑都保留。
 - **状态分层：** `local / unverified`、`official verified` 和 `reproducible` 分开显示，不用“官方跑过”冒充“外部可复现”。
 
-远程模型服务是首选接入方式。当前仓库已有任务、独立评分和证据链；远程执行器与公开 leaderboard 仍在建设中，pilot 先以人工方式确认接口、预算和隐私边界。
+远程模型服务是首选接入方式。当前仓库已经证明“物理条件改变结果”这一侧；外部模型接入后，再记录“模型策略改变结果”的另一侧。远程执行器与公开 leaderboard 仍在建设中。
 
-[查看完整评测与防刷榜协议](model-evaluation.md) · [申请模型评测](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
+[查看共同进化与防刷榜协议](model-evaluation.md) · [申请模型评测](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
 
 **先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
 
@@ -155,7 +156,7 @@ diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-g
 
 Solver 失败复盘 <solver-failure-audit>
 
-模型评测与防刷榜 <model-evaluation>
+共同进化与模型评测 <model-evaluation>
 
 高质量轨迹回放 <studio-rendering>
 布料引擎对比 <cloth-comparison>
