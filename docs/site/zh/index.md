@@ -1,34 +1,73 @@
 # DexLab
 
-**让仿真器与机器人模型在同一批失败样本上互相指出盲点，然后一起改进。**
+## Contact-rich robotics, beyond rigid-body simulation.
 
-模型在接触丰富任务上执行，DexLab 记录原生接触读回并归因失败；发现物理缺口就升级仿真器，发现策略缺口就回到模型。每次改动都绑定模型版本、仿真器版本和原始证据，再回到同一协议重跑。
+DexLab 是一个以物理为中心的研究平台，用于研究接触、形变和材料分离条件下的机器人操作。
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [共同进化协议](model-evaluation.md) · [Uranus 环境后端](uranus-backend.md) · [申请 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [实验目录](experiments.md) · [研究协议](model-evaluation.md) · [快速开始](#quickstart) · [系统结构](#architecture) · [Uranus 后端](uranus-backend.md)
 
-(model-evaluation)=
-## 仿真器与模型共同进化
+> 当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。
 
-DexLab 面向通用操作模型、VLA/WAM、Agent-as-policy 和远程机器人 API 团队。客户自带机器人与接口；模型执行，DexLab 记录接触与失败，再把结论送回模型或仿真器其中一边。
+## Demo gallery
 
-- **闭环：** 模型跑任务 → 记录真实接触 → 归因到模型或物理 → 升级其中一边并重跑同协议。
-- **主成绩：** 每个任务先单独计算成功率，再对任务等权求宏平均；逐任务矩阵不会隐藏失败。
-- **物理边界：** 引擎或场景导致运行无效时，不把仿真器缺陷算成模型失败，而是作为下一次升级仿真器的证据。
-- **防刷榜：** 正式榜只接受官方执行；公开集用于复现，隐藏场景变化用于检测过拟合，全部尝试与重跑都保留。
-- **状态分层：** `local / unverified`、`official verified` 和 `reproducible` 分开显示，不用“官方跑过”冒充“外部可复现”。
+以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
 
-远程模型服务是首选接入方式。当前仓库已经证明“物理条件改变结果”这一侧；外部模型接入后，再记录“模型策略改变结果”的另一侧。远程执行器与公开 leaderboard 仍在建设中。
+| 抓取与抗滑移 | 海绵擦拭与接触依赖 |
+| --- | --- |
+| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji 点接触与合成抗扭接触对照" loading="lazy"></a><br>相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 **2.734 mm** 降至 **1.025 mm**。 | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="辅助保持下的海绵擦拭回放" loading="lazy"></a><br>辅助保持下 **3/3** 通过；去掉辅助后 **0/3**，最终清洁率约 **95.47% / 39.92%**。 |
+| **柔性物体操作** | **切割与拓扑变化** |
+| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="记录仿真中的机器人夹布" loading="lazy"></a><br>机器人能够夹住并移动布片，但完整折叠仍失败：当前记录的最大边长应变为 **12.55%**，超过预设 5% 上限。 | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="豆腐和香蕉切割的记录状态表面回放" loading="lazy"></a><br>连续切割与刀面推动会产生真实的状态拓扑变化；完整报告还记录接触力、材料分离与失败。 |
 
-[查看共同进化与防刷榜协议](model-evaluation.md) · [申请模型评测](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
+<section id="model-evaluation"></section>
 
-**先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
+## Why DexLab?
+
+机器人策略在仿真中失败时，我们通常只看到一次失败。它可能来自策略、控制器、场景配置、接触离散、材料模型或数值求解。
+
+> **When a robot fails in simulation, is it the policy that fails, or the physics we trusted?**
+
+DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面这些问题可以被实验和证据回答：
+
+- 相同几何、载荷和控制下，不同接触模型会改变“抓住、滑动、释放”的判断吗？
+- 更小步长、更密网格或更多迭代，真的更接近物理，还是只改变了数值行为？
+- 机器人能夹住布片，何时才会真正完成折叠、送布和正确释放？
+- 切割、摩擦和材料分离应该怎样记录和验收，而不是只看一段视频？
+- 一个 policy 或 API 的排名，能否在替换物理后端后保持不变？
+
+当前主体是 **Physics Research Platform**。长期愿景是 **Simulation–Learning Co-evolution**：用模型暴露仿真缺口，再用更可信的仿真改善模型。Model/API benchmark 是连接两者的实验基础设施。
+
+<section id="research-selection"></section>
+
+## Research areas
+
+| 方向 | 研究问题 | 当前入口 |
+| --- | --- | --- |
+| **Contact physics** | 法向响应、摩擦、保持、滑动、冲量和释放是否能被独立复核？ | [接触力学](contact-response.md) · [保持与滑移](wuji-contact.md) |
+| **Deformable objects** | 夹持、垂坠、拉伸、层间接触和脱手如何分别验收？ | [布料对比](cloth-comparison.md) · [回放与近景](studio-rendering.md) |
+| **Topology-changing interaction** | 切割和材料分离如何记录接触、连通性与材料响应？ | [切割与推动](cut-push.md) |
+| **Cross-backend evaluation** | 相同物理目标和控制下，不同引擎、积分器与求解器何时可以比较？ | [引擎与求解器](engines.md) · [选型](selection.md) |
+| **Policy and API evaluation** | 模型失败、适配器失败和物理无效运行如何分开？ | [评测协议](model-evaluation.md) · [RoboAPI 适配](https://github.com/huangkiki/Dexlab/blob/main/docs/roboapi-poke.zh-CN.md) |
+
+<section id="research-findings"></section>
+
+## Experiments and findings
+
+| 实验 | 条件 | 结果和解释 |
+| --- | --- | --- |
+| **接触表示改变抓取结论** | Wuji 双指夹球，相同控制和保持窗口 | `condim=3` 漂移 **2.734 mm**，超过 2 mm；`condim=4` 为 **1.025 mm**。接触模型本身就是模型结论的一部分。 |
+| **擦拭成功率依赖辅助保持** | RoboSimStudio `wipe_the_bar`，固定记录与评分 | 原版 **3/3**，清洁率约 **95.47%**；去掉辅助后 **0/3**，约 **39.92%**。 |
+| **接触离散改变失效边界** | 同一圆柱、质量、力命令和步长，只改变表面三角数 | `256 → 1,024 → 4,096` 三角形时，峰值穿透为 **2.267 → 0.858 → 0.481 mm**。 |
+| **同场景抓取可能依赖于后端** | 苹果抓梗，10 个配对回归场景 | 当前默认配置 MuJoCo 通过 **1/10**，SuperDex 通过 **10/10**；更小步长没有单调改善穿透。 |
+| **夹住布不等于完成折叠** | OpenArm + Wuji，被动布料 | 单手夹点、抬升与释放通过；完整折叠因应变、残余接触和最终几何未达标而失败。 |
+
+这些结果共同指向一个问题：**成功视频不足以证明材料模型、接触响应和下游策略都可迁移。**
+
+[完整实验目录](experiments.md) · [全部结果与失败](results.md) · [研究经验](experience.md)
 
 (live-lab)=
-## 浏览器实时实验
+## Browser live lab
 
-下面直接在当前网页运行 MuJoCo 3.17 WebAssembly，并使用浏览器本地 WebGPU 渲染。
-三种求解配置共享相同方块、重力、摩擦、初态和时间步长。点击“运行”后可观察接触数、
-切向位移、solver iterations 和实际仿真速度。
+下面直接在当前网页运行 MuJoCo 3.17 WebAssembly，并使用浏览器本地 WebGPU 渲染。它展示同一方块、重力、摩擦、初态和时间步长下的不同求解配置；浏览器运行不会继承原生实验成绩。
 
 ```{raw} html
 <div class="dexlab-live-lab">
@@ -41,135 +80,102 @@ DexLab 面向通用操作模型、VLA/WAM、Agent-as-policy 和远程机器人 A
 </div>
 ```
 
-实时页面不会继承原生实验成绩；浏览器版本、渲染后端、MuJoCo 版本和实际运行速度会单独显示。
+<a id="architecture"></a>
+## Architecture
 
-(research-findings)=
-## 做了哪些实验
-
-```{raw} html
-<span id="visual-experiment-catalogue"></span>
+```text
+DexLab
+├── Tasks and protocols
+│   └── scenes, initial states, seeds, budgets, acceptance
+├── Systems under test
+│   └── RoboAPI / VLA / policy / world model
+├── Environment backends
+│   ├── Native physics: MuJoCo / Newton / SuperDex / Genesis / PhysX / Drake
+│   └── Candidate generative backend: Uranus
+├── Action execution
+│   └── IK / controller / session adapter
+└── Evidence and scoring
+    └── success, native state, contact readback, attribution, cohorts, anti-gaming
 ```
 
-点击实验名或动图查看完整报告与复现方法。
+原生物理后端拥有状态推进和接触读回；控制器把模型动作映射成可执行目标；任务评分器独立于被测模型。每次生成结果都有机会保留完整尝试、失败原因和可复算证据。
 
-| 实验 | 动图预览 |
-| --- | :---: |
-| **[Wuji 双指夹球](wuji-contact.md)**<br>同一控制和动作下，点接触改为合成抗扭接触，两秒保持位移从 2.734 降至 1.025 mm，通过原 2 mm 门槛；可离线复算，不证明 solver 失效或真机准确性。 | <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="300" alt="Wuji v3 point contact and v4 torsional contact, full synchronized replay" loading="lazy"></a> |
-| <a id="rss"></a>**[海绵擦拭](rss-wiping.md)**<br>来源为 RoboSimStudio `wipe_the_bar`。原版使用辅助保持：夹稳后用柔顺约束带动海绵局部随手运动，松开时解除。成功不代表纯摩擦保持；[查看无辅助对照](latch)。 | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="海绵擦拭辅助保持原版 RTX 回放，10–19.9 s" loading="lazy"></a> |
-| <a id="cut-push"></a><a id="banana-force"></a>**[连续切割与推动](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="豆腐切块与推动 · RTX 回放" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="香蕉切割与推动 · RTX 回放" loading="lazy"></a> |
-| <a id="scoring"></a>**[交叉浅划](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="记录状态的表面重建" loading="lazy"></a> |
-| <a id="apple"></a>**[苹果抓梗](apple-replays)** | <a href="studio-rendering.html"><img src="_static/studio/apple.gif" width="412" alt="MuJoCo 3.16 / SuperDex 1.0 RTX replay" loading="lazy"></a> |
-| <a id="cloth-comparison"></a>**[布料引擎对比](cloth-comparison.md)** | <a href="cloth-comparison.html"><img src="_static/cloth-studio/sag.gif" width="208" alt="四引擎同场景下垂" loading="lazy"></a> |
-| <a id="cloth"></a>**[机器人夹布](experiments.md)** | <a href="experiments.html"><img src="_static/cloth-studio/grasp.gif" width="262" alt="夹布、抬升与释放" loading="lazy"></a> |
-| <a id="visual-highlight-pinch"></a>**[夹持力对照](pinch)** | <a href="studio-rendering.html"><img src="_static/studio/pinch.gif" width="412" alt="驱动力限额 0.4 N／0.8 N" loading="lazy"></a> |
-| <a id="visual-highlight-libero"></a>**[LIBERO 回放](libero-workflow.md)** | <a href="studio-rendering.html"><img src="_static/studio/libero.gif" width="206" alt="demo 0 原生基线状态回放" loading="lazy"></a> |
-| <a id="visual-highlight-incline"></a>**[六引擎斜面滑动](incline)** | <a href="studio-rendering.html"><img src="_static/studio/incline.gif" width="309" alt="1 ms 步长滑动记录" loading="lazy"></a> |
-| <a id="visual-highlight-normal"></a>**[法向接触标定](normal)** | <a href="studio-rendering.html"><img src="_static/studio/normal.gif" width="412" alt="合成目标的加载、保持与卸载" loading="lazy"></a> |
+### Ecosystem backend: Uranus
 
-[完整实验目录](experiments.md) · 动图来自实际仿真或记录回放；结果仅适用于各报告的配置与条件。
+[Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前是 **documented candidate generative backend**，不是已验证物理后端。
 
-[到底哪个 solver 失败了？](solver-failure-audit.md) 查看 RSS 任务、已有失败及归因边界。
+接入链路为 `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`。它提供视觉观测，不提供原生接触状态、任务 success 或物理真值。[阅读完整介绍、候选任务和证据边界](uranus-backend.md)。
 
 (quickstart)=
-## 先复算一组擦拭记录（无需 GPU）
+## Quick start
 
-下载一组同条件的 **latch／无 latch 原始记录**，从材料点与墨迹状态重算滑移和清洁度。需要 [uv](https://docs.astral.sh/uv/getting-started/installation/)；命令使用隔离的 Python 3.12 环境，只安装 NumPy、Matplotlib 及其依赖。首次需要联网获取源码和依赖；证据包本身约 **126 MiB**，解包约 **349 MiB**，建议预留 2 GB 空间。下面只检出复算需要的目录。复算不需要仿真引擎、GPU 或模型 API key。
+Linux x86_64 上安装 [uv](https://docs.astral.sh/uv/getting-started/installation/) 后，运行苹果抓梗：
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
+git clone https://github.com/huangkiki/Dexlab.git
 cd Dexlab
-git sparse-checkout init --cone
-git sparse-checkout set scripts demos/rss-wiping
-uv run --no-project --isolated --python 3.12 \
-  --with-requirements demos/rss-wiping/offline-requirements.txt \
-  python scripts/download_assets.py \
-  --manifest demos/rss-wiping/evidence-bundle.json \
-  --destination downloads/rss-wiping-v1
-uv run --offline --no-project --isolated --python 3.12 \
-  --with-requirements demos/rss-wiping/offline-requirements.txt \
-  python demos/rss-wiping/rescore_bundle.py downloads/rss-wiping-v1 \
-  --output results/rss-wiping-v1
-```
-
-打开 `results/rss-wiping-v1/comparison.png` 看曲线；同目录包含两份 CSV 和 `report.json`。这一对记录的保持阶段区域质心最大位移为 **0.061／449.981 mm**，最终清洁率为 **95.47%／39.92%**。两份记录均应通过一致性检查；无 latch 的 `task_pass: false` 是保留的实验失败，不表示下载或复算失败。再次复算请换一个输出目录。
-
-[原始数据与逐文件许可](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) · [完整范围、失败索引和原生重跑前提](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#offline-evidence)。公开包包含一个历史配对；它不证明某个 solver 的普遍缺陷。
-
-## 想重跑仿真：苹果抓梗
-
-在上面克隆的仓库目录中，已有安装脚本可以运行 MuJoCo 苹果抓梗。需要 Linux x86_64 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)；不需要模型 API key。该入口复现固定版本的历史演示，不是六引擎最新版本比较环境。 安装前会检查已有 `.venv` 的版本与归属；不兼容或共享环境会被拒绝，请保留原环境，在独立检出目录安装。
-
-```bash
-git sparse-checkout disable
 bash scripts/setup.sh --mujoco-profile historical-3.11.0
-bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/first-mujoco
-```
-
-等待 SDF 准备、静置与规划后，窗口会显示抓梗、抬升和保持。输出保存在 `demos/apple-stem-grasp/runs/first-mujoco/`；无桌面时在运行命令后加 `--headless`，切换后端用 `--backend superdex` 并指定新输出目录。14 s 是仿真时长，实际计算会更久。
-
-```bash
+bash demos/apple-stem-grasp/run.sh \
+  --backend mujoco \
+  --output demos/apple-stem-grasp/runs/first-mujoco
 .venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
   demos/apple-stem-grasp/runs/first-mujoco
 ```
 
-再次运行时换一个目录；下面可独立检查第二次记录，并比较两次报告：
+验收器会写出 `summary.json`；全部检查通过时 `passed: true`。14 秒是仿真时长，实际计算通常更久。无桌面环境添加 `--headless`，每次运行使用新输出目录。
 
-```bash
-bash demos/apple-stem-grasp/run.sh --backend mujoco --output demos/apple-stem-grasp/runs/second-mujoco
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py demos/apple-stem-grasp/runs/second-mujoco
-diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-grasp/runs/second-mujoco/summary.json
+如果只想检查证据链、不安装仿真器，可从[安装与最小复现](quickstart.md)开始。完整依赖、资产和命令见该页。
+
+## Research roadmap
+
+1. **Contact and material response：** 将接触刚度、阻尼、摩擦与真实测量分开校准，再讨论 engine ranking。
+2. **Deformable manipulation：** 从夹持、送布和释放扩展到可复核的折叠几何、自接触和材料点跟踪。
+3. **Topology-changing tasks：** 为切割、分离和粘连建立连续几何、接触力与结果判据。
+4. **Cross-backend attribution：** 区分 solver、integrator、collision geometry、precision、timestep 和 framework wrapper。
+5. **Policy and neural backends：** 检查 API 排名和任务结论能否从原生物理迁移到 learned world model。
+6. **Co-evolution：** 在证据支持后，用模型失败推动仿真改进，再用改进的仿真产生更可信的策略训练与评测。
+
+<section id="research-diagnosis"></section>
+
+## Evidence and boundaries
+
+- 任务成功不等于物理真实；数值一致不等于现实正确。
+- 仿真通过不等于真机成功；渲染通过不等于视觉控制。
+- 不同引擎覆盖的任务、材料模型和验收条件不同，不是统一排行榜。
+- 失败、无效运行和缺失读数都必须保留；不通过放宽阈值或删除反例制造成功。
+- Uranus 和远程模型评测仍是候选能力，不应从论文或接口存在推断 DexLab 已完成复现。
+
+<section id="research-scope"></section>
+
+## Documentation and citation
+
+[实验目录](experiments.md) · [研究经验](experience.md) · [求解配置](solver-taxonomy.md) · [覆盖矩阵](coverage.md) · [参与贡献](contributing.md) · [当前工作与暂停状态](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.zh-CN.md)
+
+项目尚未发布配套论文；引用本仓库时请使用仓库 URL 和具体 commit / release，而不是引用尚未存在的论文结果。
+
+```bibtex
+@software{dexlab2026,
+  author  = {DexLab contributors},
+  title   = {DexLab: A Physics-Centric Research Platform for Contact-Rich Robot Manipulation},
+  year    = {2026},
+  url     = {https://github.com/huangkiki/Dexlab}
+}
 ```
-
-`diff` 返回 1 表示报告不同。显式目录必须为空，已有成功或失败记录均拒绝覆盖。省略 `--output` 会生成独立目录，终端的 `Run output:` 给出实际路径；后续评分请使用该路径。
-
-验收器会写出 `summary.json`；全部检查通过时 `passed` 为 `true`，失败时保留具体检查项并返回非零退出码。
-
-[安装、依赖与资产来源](https://github.com/huangkiki/Dexlab/blob/main/docs/installation.zh-CN.md) · [任务接口与命令](https://github.com/huangkiki/Dexlab/blob/main/demos/apple-stem-grasp/README.zh-CN.md)
-
-(research-diagnosis)=
-## 场景不对时，先查什么
-
-先核对几何、质量／惯量、控制时刻和实际接触读回，再围绕一个明确问题调整参数，用原始记录和独立评分检查结果。已有失败、修正和下一步判断见[诊断方法](diagnosis.md)。
-
-(research-selection)=
-## 新任务怎样选引擎和配置
-
-按载荷、接触尺度、粘着／滑动、接触切换和柔顺性找相近实验，再验证候选配置。研究涉及 MuJoCo、SuperDex、Genesis、Newton Physics、PhysX 和 Drake，但各任务覆盖与验收不同；完整配置、版本和失败见[覆盖矩阵](coverage.md)，具体起点见[场景选型](selection.md)。
-
-(solver-coupling)=
-## 多个求解器怎样协同
-
-仿真时间、电脑耗时和数据交换周期是三个不同的量。求解器之间等待会影响运行速度，反馈延迟还会影响相互作用。[用手指与海绵理解同步、迭代与 preCICE](solver-coupling.md)；preCICE 在这里是方法参考，尚未接入 DexLab。
-
-(research-scope)=
-## 当前边界与深入阅读
-
-以经典物理规律和已有经验关系为参照。实验成功只适用于各自版本、场景和验收条件；任务成功、数值诊断与真实物理准确性分别报告。手内旋转、主动折布、真实材料标定和视觉策略能力仍需各自验证，不能从上面的动图推出。
-
-[研究经验](experience.md) · [求解配置如何分类](solver-taxonomy.md) · [研究路线](dexterity.md) · [外部参考](references.md) · [数据与版本](https://github.com/huangkiki/Dexlab/releases)
-
-[开发与验收约定](https://github.com/huangkiki/Dexlab/blob/main/docs/autoresearch.zh-CN.md) · [当前工作与暂停状态](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.zh-CN.md)
 
 ```{toctree}
 :hidden:
 :maxdepth: 1
 
 Solver 失败复盘 <solver-failure-audit>
-
 共同进化与模型评测 <model-evaluation>
-
-Uranus 生成式环境后端 <uranus-backend>
-
 高质量轨迹回放 <studio-rendering>
 布料引擎对比 <cloth-comparison>
-
 实验目录 <experiments>
 安装复现 <quickstart>
 研究结果 <results>
 完整覆盖 <coverage>
 研究经验 <experience>
 诊断方法 <diagnosis>
-
 Wuji 抓持与抗扭接触 <wuji-contact>
 接触预测诊断 <contact-response>
 海绵擦拭与辅助保持对照 <rss-wiping>
@@ -182,16 +188,14 @@ Wuji 抓持与抗扭接触 <wuji-contact>
 豆腐连续两刀与独立运动 <tofu-comparison>
 切割保真度与动态测量 <cutting-fidelity>
 切割表面重建 <cutting-surface>
-
 多求解器同步与 preCICE <solver-coupling>
-
 求解配置分层 <solver-taxonomy>
-
 可视对照 <visual-comparisons>
 LIBERO 原生流程 <libero-workflow>
 AMP 记录器一致性失败 <amp-lift>
 场景选型 <selection>
 引擎与模型 <engines>
+Uranus 生成式环境后端 <uranus-backend>
 研究路线 <dexterity>
 研究账本 <research-ledger>
 基准 <benchmark>
