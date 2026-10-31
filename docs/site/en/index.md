@@ -1,24 +1,25 @@
 # DexLab
 
-**Unified evaluation and failure diagnosis for contact-rich robot models.**
+**Let robot models and physics simulators point out each other's blind spots on the same failures, then improve together.**
 
-Connect a remote model service and customer robot configuration, then evaluate grasping, holding, wiping, cloth, cutting, and insertion under frozen conditions. Official leaderboard scores are produced by DexLab, not self-reported by teams.
+The model executes contact-rich tasks; DexLab records native contact readback and attributes failures. A physical gap improves the simulator; a policy gap returns to the model. Every change binds model version, simulator version, and raw evidence, then reruns the same protocol.
 
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Evaluation protocol](model-evaluation.md) · [Request a pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Co-evolution protocol](model-evaluation.md) · [Request a pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
 
 (model-evaluation)=
-## Robot model evaluation
+## Simulator and model co-evolution
 
-DexLab is for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. Customers provide their robot and interfaces; DexLab freezes tasks, engine versions, seeds, repeats, and budgets and reports end-to-end system results.
+DexLab is for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. Customers provide their robot and interfaces; the model executes while DexLab records contact and failure, then feeds the result back to either the model or the simulator.
 
+- **Loop:** run the model → record real contact → attribute the failure → improve one side and rerun the same protocol.
 - **Score:** each task receives its own success rate; the headline metric is the equal-task macro average, with the full task matrix retained.
-- **Physics boundary:** failed engine or scene qualification invalidates the run; simulator defects are not charged to the model.
+- **Physics boundary:** an invalid engine or scene run is not charged to the model; it becomes evidence for the next simulator improvement.
 - **Anti-gaming:** only official execution enters the formal board. Public layouts support reproduction, hidden variations detect overfitting, and every attempt remains visible.
 - **Evidence states:** `local / unverified`, `official verified`, and `reproducible` remain distinct; an official run is not presented as externally reproducible.
 
-A remote model service is the preferred integration. The repository already contains tasks, independent scoring, and evidence records; the remote executor and public leaderboard are still under construction. Pilots first agree on interfaces, budgets, and privacy manually.
+A remote model service is the preferred integration. The repository already shows that physical conditions change outcomes; once external models are connected, it can also record how model strategy changes outcomes. The remote executor and public leaderboard are still under construction.
 
-[Read the full evaluation and anti-gaming protocol](model-evaluation.md) · [Request a model evaluation](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
+[Read the full co-evolution and anti-gaming protocol](model-evaluation.md) · [Request a model evaluation](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
 
 **Learn before reading the configuration table:** [Sim Learning](https://github.com/huangkiki/sim-learning) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks remain separate from DexLab experimental qualification.
 
@@ -157,7 +158,7 @@ Classical physical laws and existing empirical relations serve as references. Su
 
 Solver failure audit <solver-failure-audit>
 
-Model evaluation and anti-gaming <model-evaluation>
+Co-evolution and model evaluation <model-evaluation>
 
 Studio replay rendering <studio-rendering>
 Cloth engine comparison <cloth-comparison>

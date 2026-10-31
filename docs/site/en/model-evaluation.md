@@ -1,8 +1,19 @@
-# Robot model evaluation
+# Simulator and model co-evolution
 
-DexLab is an end-to-end evaluation protocol for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. The model is served through a remote endpoint and evaluated under frozen robot configurations, tasks, simulator versions, seeds, and resource budgets. Reports expose per-task success, repeat stability, a complete task matrix, and failure evidence.
+DexLab is a co-evolution protocol for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. The model is served through a remote endpoint and evaluated under frozen robot configurations, tasks, simulator versions, seeds, and resource budgets. Reports expose per-task success, repeat stability, a complete task matrix, and failure evidence.
 
 **Official leaderboard entries are scored by DexLab's evaluation environment; self-reported scores are not accepted.**
+
+## The co-evolution loop
+
+A failure may come from the model, adapter, controller, scene, or physics. DexLab's job is not to label a model good or bad, but to point the next change at the correct side:
+
+1. run the model under a fixed task and simulator version;
+2. record native state, contact readback, commands, solver status, and raw trajectories;
+3. attribute the failure and separate invalid engine runs from model failures;
+4. improve the simulator or the model, then place the result in a new versioned cohort.
+
+Every result binds model version, simulator version, task protocol, seeds, budget, and evidence. Without that version pair, we cannot tell whether changing the model or the simulator produced the change.
 
 ## Current status
 
@@ -45,9 +56,9 @@ Each report also shows:
 
 Episodes from different tasks are never pooled into one raw pass-rate denominator. A task does not receive extra weight merely because it uses more episodes or costs more to run.
 
-### Physical validity is an admission gate
+### Physical validity evolves with the versioned loop
 
-Physical validity belongs primarily to the simulator and evaluation environment. Every official cohort must first pass version, scene, unit, and contact-readback qualification. Invalid runs caused by the engine or evaluator are excluded from the model denominator while their receipts, causes, and recovery conditions remain preserved.
+Physical validity belongs first to a specific simulator version and evaluation environment. Every official cohort must pass version, scene, unit, and contact-readback qualification. Invalid runs caused by the engine or evaluator are excluded from the model denominator while their receipts, causes, and recovery conditions remain preserved; those failures become the input for the next simulator improvement.
 
 A model is charged with a failure only when evidence shows that it repeatedly emits invalid actions, depends on simulator-privileged observations that would not be deployed, or bypasses the declared interface.
 

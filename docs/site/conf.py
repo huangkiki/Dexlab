@@ -17,7 +17,7 @@ root_doc = 'index'
 myst_enable_extensions = ['colon_fence', 'deflist']
 myst_heading_anchors = 3
 html_theme = 'pydata_sphinx_theme'
-html_title = 'DexLab · ' + ('机器人模型评测与接触诊断' if language == 'zh_CN' else 'Robot model evaluation and contact diagnosis')
+html_title = 'DexLab · ' + ('仿真器与模型共同进化' if language == 'zh_CN' else 'Simulator and model co-evolution')
 html_static_path = [str(HERE / '_static'), str(ROOT / 'docs/evidence')]
 html_css_files = ['dexlab.css']
 html_js_files = [('replay.js', {'defer': 'defer'}), ('cutting.js', {'defer': 'defer'})]
