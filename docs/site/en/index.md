@@ -1,8 +1,24 @@
 # DexLab
 
-**Reproducible contact, friction and manipulation experiments to understand why robots hold or slip, and how to choose and tune a physics simulation.**
+**Unified evaluation and failure diagnosis for contact-rich robot models.**
 
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
+Connect a remote model service and customer robot configuration, then evaluate grasping, holding, wiping, cloth, cutting, and insertion under frozen conditions. Official leaderboard scores are produced by DexLab, not self-reported by teams.
+
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Evaluation protocol](model-evaluation.md) · [Request a pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [Quickstart](#quickstart) · [Full experiment index](experiments.md) · [Reports](results.md)
+
+(model-evaluation)=
+## Robot model evaluation
+
+DexLab is for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. Customers provide their robot and interfaces; DexLab freezes tasks, engine versions, seeds, repeats, and budgets and reports end-to-end system results.
+
+- **Score:** each task receives its own success rate; the headline metric is the equal-task macro average, with the full task matrix retained.
+- **Physics boundary:** failed engine or scene qualification invalidates the run; simulator defects are not charged to the model.
+- **Anti-gaming:** only official execution enters the formal board. Public layouts support reproduction, hidden variations detect overfitting, and every attempt remains visible.
+- **Evidence states:** `local / unverified`, `official verified`, and `reproducible` remain distinct; an official run is not presented as externally reproducible.
+
+A remote model service is the preferred integration. The repository already contains tasks, independent scoring, and evidence records; the remote executor and public leaderboard are still under construction. Pilots first agree on interfaces, budgets, and privacy manually.
+
+[Read the full evaluation and anti-gaming protocol](model-evaluation.md) · [Request a model evaluation](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
 
 **Learn before reading the configuration table:** [Sim Learning](https://github.com/huangkiki/sim-learning) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks remain separate from DexLab experimental qualification.
 
@@ -40,7 +56,7 @@ Click an experiment or GIF for the full report and reproduction steps.
 | Experiment | Animated preview |
 | --- | :---: |
 | **[Wuji sphere pinch](wuji-contact.md)**<br>Same control and commands: synthetic torsional contact reduces two-second hold displacement from 2.734 to 1.025 mm, passing the original 2 mm limit. Rescore offline; not solver failure or hardware validation. | <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="300" alt="Wuji v3 point contact and v4 torsional contact, full synchronized replay" loading="lazy"></a> |
-| <a id="rss"></a>**[RSS wiping](rss-wiping.md)**<br>Uses latch assistance: compliant constraints carry part of the sponge with the hand after grasping and release when it opens. Success does not establish friction-only retention; [see the no-latch comparison](latch). | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="RSS original with latch assistance, RTX replay at 10–19.9 s" loading="lazy"></a> |
+| <a id="rss"></a>**[Sponge wiping](rss-wiping.md)**<br>Source: RoboSimStudio `wipe_the_bar`. The original uses compliant grasp assistance after contact readiness and releases it when the hand opens. Success does not establish friction-only retention; [see the unassisted comparison](latch). | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="Assisted sponge wiping, RTX replay at 10–19.9 s" loading="lazy"></a> |
 | <a id="cut-push"></a><a id="banana-force"></a>**[Cutting and pushing](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="Tofu cutting and pushing in RTX" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="Banana cutting and pushing in RTX" loading="lazy"></a> |
 | <a id="scoring"></a>**[Cross scoring](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="Surface reconstruction from recorded states" loading="lazy"></a> |
 | <a id="apple"></a>**[Apple-stem grasp](apple-replays)** | <a href="studio-rendering.html"><img src="_static/studio/apple.gif" width="412" alt="MuJoCo 3.16 / SuperDex 1.0 RTX replay" loading="lazy"></a> |
@@ -141,6 +157,8 @@ Classical physical laws and existing empirical relations serve as references. Su
 
 Solver failure audit <solver-failure-audit>
 
+Model evaluation and anti-gaming <model-evaluation>
+
 Studio replay rendering <studio-rendering>
 Cloth engine comparison <cloth-comparison>
 
@@ -155,7 +173,7 @@ Solver synchronization and preCICE <solver-coupling>
 
 Wuji grasp and torsional contact <wuji-contact>
 Contact prediction diagnostics <contact-response>
-RSS wiping and latch ablation <rss-wiping>
+Sponge wiping and grasp-assistance comparison <rss-wiping>
 Continuous cutting and blade-face pushing <cut-push>
 Banana single-cut force <banana-force>
 Synthetic tofu halving <cutting>

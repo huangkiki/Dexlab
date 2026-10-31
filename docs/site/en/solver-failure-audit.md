@@ -47,7 +47,7 @@ Failure to lift does not automatically mean a successfully acquired grasp later 
 
 The four/sixteen outer-iteration and lagged-transfer configurations were frozen as diagnostics after observing the initial failure. They are not independent holdouts or an exhaustive tuning search. Engine source and physical thresholds remain unchanged; all failures are retained.
 
-### Current RSS sponge wiping: paired retention-assistance ablation
+### Current sponge wiping: paired retention-assistance ablation
 
 Newton 1.7 / MuJoCo 3.15 / SuperDex 1.0 FP32. The ablation removes extra node constraints and their hand-following updates while retaining the original control and twelve-tick contact-readiness gate. It uses unchanged task thresholds and the existing independent DexLab material-point scorer. Displacement follows a fixed material patch in the measured hand frame; it is not interchangeable with another cohort's slip definition.
 

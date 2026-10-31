@@ -1,4 +1,4 @@
-# RSS sponge wiping: reproduction and latch ablation
+# Sponge wiping: reproduction and grasp-assistance comparison
 
 The unchanged RoboSimStudio wiping test passed **all nine assertions**. Its independent execution cleaned **95.5%** of the stripe, with **4.93 N** peak bar contact force and **0.061 mm** maximum held material-patch centroid displacement in the measured hand frame. **The original uses a latch to assist retention: this reproduces assisted wiping, not friction-only grasping.** In-hand rotation remains a separate task.
 

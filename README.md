@@ -1,73 +1,96 @@
 # DexLab
 
-**接触仿真的失败归因实验台。**
+**为机器人模型提供接触丰富操作的统一评测与失败诊断。**
 
-DexLab 把“机器人为什么抓不住、会滑脱，碰撞结果为什么不对”拆成几何与输入、控制、接触模型、求解器和评分／记录五层。它用冻结工况、原生读回、独立评分、负例与可下载原始记录定位**第一处失效**，而不是用一段成功视频猜测哪个引擎更好。
+接入远程模型服务与客户机器人配置，在冻结的任务、仿真版本、随机种子和资源预算下评测抓取、保持、擦拭、布料、切割与插接等能力。DexLab 返回任务等权成功率、多次运行稳定性、逐任务矩阵和失败证据；**正式榜成绩由 DexLab 官方环境运行，不接受团队自报分数。**
 
-[English](README.en.md) · [Live Lab](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab) · [完整实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [全部报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) · [快速复算](#quickstart)
+[申请模型评测 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [评测协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html) · [English](README.en.md) · [已完成实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [在线实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)
 
-## 先看一个完整案例
+> 当前阶段：评测所需的场景、原生观测、独立评分和证据链已存在；远程模型执行器与公开 leaderboard 正在建设中。公开 Issue 只提交可公开信息，不要填写 API Key、私有地址或权重凭据。
 
-![Wuji v3 点接触与 v4 合成抗扭接触的完整同步回放](docs/evidence/wuji-contact/comparison.gif)
+## 你会得到什么
 
-[Wuji 双指夹球](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)：同一控制与动作下，将点接触改为合成抗扭接触，两秒保持位移从 **2.734 mm** 降到 **1.025 mm**，通过原 2 mm 门槛。记录可以离线复算；这个结果说明该夹具的接触项发生了变化，**不证明 solver 失效或真机准确性**。
-
-## 研究深度不只体现在动图
-
-下面四项覆盖不同研究问题；分母、配置和参考并不相同，不能合并成总成功率或引擎排行榜。
-
-| 已研究的问题 | 冻结实验 | 关键实测结果 | 不能据此说什么 |
-| --- | --- | --- | --- |
-| **同一物理问题，换求解配置会怎样？** | 40 mm、64 g 方块；15° 静摩擦、35° 滑动、名义零摩擦；0.5／1／2 ms。[双引擎斜面对照](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) | MuJoCo 3.15.0 `Newton / Euler / elliptic` 的静摩擦漂移为 **1.301–1.336 mm**，0/3 通过；SuperDex 1.0.0 FP64 为 **0.708–1.132 mm**，2/3 通过。MuJoCo 的滑动工况还出现显著转动与接触丢失。 | 固定基线差异不是通用引擎排名；历史 MuJoCo `impedance=0.99` 的漂移反而更小。 |
-| **更小步长或更紧容差是否自动解决问题？** | 16 次接触起始步长实验＋12 次独立容差对照。[接触起始细化](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/REFINEMENT.zh-CN.md) | SuperDex 在收紧停止容差后，有摩擦 `0.5 vs 0.125 ms` 的位置差仍约 **3.206 mm**。细化不是自动真值；改变步长、改变容差和改变物理模型必须分开解释。 | 不能把“更细网格”直接当作真值，也不能仅凭求解器返回 `CONVERGED` 宣称跨步长收敛。 |
-| **一个场景通过后，参数能否直接迁移？** | 3 个固定配置 × 10 组质量／尺寸条件，共 30 次配对运行。[迁移报告](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TRANSFER.zh-CN.md) | 工程检查 **1/30** 通过，瞬态目标 **0/30** 通过，联合目标 **0/30** 通过；全部失败保留。 | 失败不支持“所有映射都无效”或“某引擎算法错误”的结论，只支持：这组固定参数不能直接迁移。 |
-| **从数值诊断怎样回到机器人接触？** | Wuji 抓持、保持、卸载和合成抗扭接触对照。[完整协议与证据](https://github.com/huangkiki/Dexlab/blob/main/docs/site/zh/wuji-contact.md) | 点接触改为合成抗扭接触后，两秒保持位移 **2.734 → 1.025 mm**；评分同时保留缓慢漂移条件。 | 抓持通过不等于手内操作完成，也不等于真实指腹材料已标定。 |
-
-![30 组质量／尺寸迁移的全部失败](docs/evidence/contact-transfer-v1.png)
-
-## 一个结论怎样成立
-
-DexLab 区分“能跑起来”“数值自洽”“物理参照成立”“任务完成”和“根因可信”，再按下面的顺序排除竞争解释：
-
-1. **冻结问题。** 先写明参考物理、几何、质量／惯量、初态、控制时刻、指标、阈值、版本、预算和停止条件。
-2. **保留原生证据。** 保存实际参数、状态、速度、接触力／冲量、求解状态、原始记录和源码／资产哈希；缺测量记未知，不填零。
-3. **独立验收。** 用解析关系、力／动量平衡、禁碰撞／零摩擦／释放等负例检查记录和评分，不只相信单次末态或成功视频。
-4. **做受控敏感性。** 分别改变步长、求解容差、载荷、质量或接触尺度；可以归因的变量必须隔离，不能把几何、控制器和 solver 一起换掉后宣称算法优劣。
-5. **保留失败和外推边界。** 原始数据、失败分母、成本、未观测字段和恢复条件一起发布；一个配置的结果只属于该版本、场景和验收条件。
-
-### 不要把一个名字当成一种算法
-
-| 必须分开的记录层 | 例子 | 为什么不能压平成一行 |
-| --- | --- | --- |
-| 时间积分 | MuJoCo Euler；SuperDex backward Euler | 积分方法、步长和状态更新时刻不同会改变接触瞬态。 |
-| 外层约束／非线性 solver | MuJoCo PGS／CG／Newton；SuperDex Newton；PhysX PGS／TGS | PGS、Newton 和 TGS 不都在同一数学层；相同迭代数也不代表相同工作量。 |
-| 内层线性 solver | SuperDex GMRES／LDLᵀ 等可选路径 | `AUTO` 是选择策略，不是“实际执行了某个分支”的证据。 |
-| 接触与摩擦模型 | elliptic／pyramidal 摩擦锥、C1 正则化、PhysX patch friction | 相同名义 μ 不保证相同低速响应、粘滑或组合律。 |
-| 精度与预算 | FP32／FP64、0.125–2 ms、迭代上限、绝对／相对容差 | 数值精度和停止条件会改变误差—成本关系。 |
-| 运行路径 | 原生引擎、MJWarp、Isaac Sim 等框架接入 | 同一核心经过导入、转换或不同状态布局后，有效模型仍可能不同。 |
-
-这六层共同构成“被比较的配置”。完整术语、源码依据和未知身份见[求解配置分层](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html)，逐配置覆盖与失败见[完整矩阵](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)。
-
-## 已经能运行和检查什么
-
-以下只列代表性入口。点击实验或动图可看完整报告、冻结参数、原始数据和复现方法；没有展示成功率的实验不会被暗示为已通过完整基准。
-
-| 实验 | 已记录效果 |
+| 输出 | 内容 |
 | --- | --- |
-| **[RSS 擦拭](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html)**<br>latch 辅助保持的完整记录与无 latch 对照保留；离线复算得到 0.061／449.981 mm 的保持位移差异。 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html"><img src="docs/evidence/studio/rss.gif" width="280" alt="RSS 擦拭原版 RTX 回放"></a> |
-| **[接触夹具诊断](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.zh-CN.md)**<br>平面滑动、法向加载、圆柱夹持，以及释放、穿透、动量和成本诊断；失败全部保留。 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#pinch"><img src="demos/contact-benchmark/media/genesis-pinch.gif" width="220" alt="Genesis 夹持、抬升与释放"></a> |
-| **[连续切割与推动](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html)**<br>软体变形、刀面接触、推块和表面重建；保留粘性、半步长与无推动对照。 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/surface-rtx.gif" width="220" alt="豆腐切割与推动"></a> |
-| **[布料引擎与机器人夹布](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html)**<br>下垂、拉伸、球面覆盖、预折叠下落和机器人夹布分开验收；穿透与失败不会被删除。 | <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html"><img src="docs/evidence/cloth-studio/grasp.gif" width="250" alt="机器人夹布、抬升与释放"></a> |
-| **[G1 落地接触](demos/landing-contact/README.zh-CN.md)**<br>固定 RTX 4090 参考栈完成支撑检查与三次完整策略复跑；历史异常缺少原模型，仍不归因。 | <a href="demos/landing-contact/README.zh-CN.md"><img src="docs/evidence/landing/replays/policy-repeat-1/preview.gif" width="340" alt="G1 原生接触力完整回放"></a> |
-| **[AMP 抬箱短探针](docs/site/zh/amp-lift.md)**<br>0.2 秒记录前后一致性检查未通过，完整抬箱评测因此没有运行；未通过证据保留。 | <a href="docs/site/zh/amp-lift.md"><img src="docs/evidence/amp-lift/probe.gif" width="340" alt="AMP 抬箱短探针回放"></a> |
+| **榜单主成绩** | 固定任务集上的任务等权宏平均成功率，同时展示每个任务的结果，避免用原始回合数把长任务偷偷加权。 |
+| **稳定性与成本** | 多次运行的成功率分布、超时、调用延迟、动作错误和资源预算。 |
+| **失败诊断** | 说明失败发生在观测/接口、抓取、保持、滑移、接触切换、动作超时还是物理无效运行，并保留对应证据。 |
+| **可复核状态** | 区分本地未验证结果、DexLab 官方执行结果，以及客户自愿公开材料后的外部可复现结果。 |
 
-[完整实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [全部结果与失败](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)。动图来自实际仿真或记录回放；结果只适用于各报告的版本、配置和验收条件。
+## 为什么用 DexLab，而不是只看一段成功视频
 
-<a id="quickstart"></a>
+接触丰富操作里，“物体被抬起来”并不等于夹住了，“任务结束”也不等于物理过程可信。DexLab 记录原生状态、接触读回、实际命令、评分结果和失败分母，再把以下问题分开：
 
-## 先复算一组记录（无需 GPU）
+- 模型能否完成完整任务；
+- 失败从哪一步开始；
+- 仿真引擎或场景配置是否让这次评测无效；
+- 结果是否只能在一个固定布局上成立；
+- 其他团队能否复核或复现这个成绩。
 
-下面下载一组同条件的 **latch／无 latch 原始记录**，从材料点与墨迹状态重算滑移和清洁度。只需要 [uv](https://docs.astral.sh/uv/getting-started/installation/)；首次运行需要联网。证据包约 **126 MiB**，解包约 **349 MiB**，建议预留 2 GB。复算不需要仿真引擎、GPU 或模型 API key。
+适合通用操作模型、VLA/WAM、Agent-as-policy 和远程机器人 API 团队；它评的是模型、适配器、控制器和客户机器人配置共同组成的**端到端系统**，不把不同本体折算成一个虚构的“模型纯能力”系数。
+
+## 已经完成哪些实验
+
+这些场景证明任务环境、观测和评分链可运行，**还不是任何外部模型的排行榜成绩**。
+
+| 接触任务 | 已记录结果 |
+| --- | --- |
+| **[抓取、保持与抗滑移](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)**<br>Wuji 双指夹球，同一控制下比较点接触与合成抗扭接触。 | 两秒保持位移由 **2.734 mm** 降到 **1.025 mm**，通过原 2 mm 门槛；抓持通过不等于手内操作完成。 |
+| **[海绵擦拭](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html)**<br>来源为 RoboSimStudio `wipe_the_bar`；保留辅助保持与无辅助对照。 | 原版 **3/3** 任务通过，无辅助保持 **0/3**；最终清洁率约 **95.47% / 39.92%**。 |
+| **[布料夹取与释放](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html)**<br>下垂、拉伸、覆盖、下落和机器人夹布分开验收。 | 保留穿透、回弹和夹持失败；不把布料动图直接写成完整折布能力。 |
+| **[切割与刀面推动](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html)**<br>豆腐和香蕉的连续切割、刀面接触与推动。 | 展示材料分离和实测接触力；合成材料结果不等于真实食材标定。 |
+
+[查看完整实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [查看全部结果和失败](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)
+
+### RSS 实验怎样纳入目录
+
+现有 [RSS 公开入口盘点](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-inventory.html) 覆盖上游 `b001cc7` 的 **50 个公开入口**，其中 40 个带任务范围断言、10 个是教学/渲染/硬件 mock。它们按刚性抓取、布料/软体、绳索/线缆、擦拭/袋/胶带、切割、颗粒/液体/面团和策略执行等任务族纳入检索；目标评分与其场景可能共享同一回合，不能写成 50 种独立操作。论文图 5 的 18 个精确场景仍缺原始输入，与 50 个公开入口不是同一分母。
+
+## 怎样给一个模型计分
+
+正式 cohort 在运行前冻结任务、本体、引擎版本、seeds、重复次数、超时、资源上限和评分器。每个任务先独立计算成功率，主榜再对任务等权求宏平均。
+
+- 同一任务的所有回合都进入分母；
+- 不因为某个任务回合多或运行贵就获得额外权重；
+- 基础设施故障与模型失败分别记录；
+- 引擎、场景或记录无效导致无法评测时，不把环境缺陷算成模型失败；
+- 所有重试和失败保留，不能从多次尝试中只提交最好一次。
+
+报告同时显示任务矩阵、成功率波动和失败类别。单项任务失败不会因为没有进入一个平均值就消失。
+
+## 防刷榜
+
+DexLab 借鉴公开 benchmark 的官方执行与隐藏验证思路，并保留接触实验自己的证据边界：
+
+- **官方计分**：正式成绩由 DexLab 控制任务、场景重置、观测、模型调用和评分；客户自跑结果只能标为 `local / unverified`。
+- **公开集 + 隐藏验证集**：公开布局用于复现和迭代，隐藏场景变化用于检测坐标硬编码、固定轨迹和只针对公开任务调参。
+- **固定预算**：seeds、重复次数、超时和资源上限预先冻结，不允许无限重跑到最高分。
+- **固定系统**：同一榜单项必须使用同一 checkpoint 和推理流程完成所有任务，不按任务暗中切换不同模型。
+- **技术复核**：检查适配器、动作接口、重复模型、最小改动换名和异常的逐任务选择。
+- **保留全部尝试**：模型失败、接口失败、超时、无效运行和平台故障分开记账。
+
+正式榜会区分以下状态：
+
+| 状态 | 含义 | 是否上榜 |
+| --- | --- | --- |
+| `local / unverified` | 团队自行运行，尚未使用官方冻结条件计分 | 否 |
+| `official verified` | DexLab 官方执行并通过接口、泄漏和反刷榜检查 | 是 |
+| `reproducible` | 在 official verified 基础上，公开足够配置与材料供外部复核 | 独立徽章 |
+
+原始视频、轨迹和权重默认私有；客户可自愿公开。DexLab 内部完成官方复核，不等于社区已经独立复核。[完整评测与防刷榜协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html)
+
+## 怎样参加 pilot
+
+1. 提交一个不含密钥的 [模型评测申请](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)：模型类型、机器人配置、观测/动作接口、关注任务和公开意愿。
+2. 通过私密渠道确认 endpoint、凭据、预算和数据处理方式。
+3. 冻结一次 cohort，完成接口资格和 pilot 运行。
+4. 先收到私有报告；决定是否申请公开榜或公开可复现材料。
+
+远程模型服务是首选接入方式。模型端只需要接收部署时可获得的观测并返回动作，不读取评分器、未来状态或仿真特权信息。正式接口 schema 会在一轮 pilot 前冻结；当前仓库尚未发布可直接连接的托管服务端点。
+
+## 先检查现有证据
+
+无需 GPU，可以先下载一组海绵擦拭原始记录，从材料点和墨迹状态离线重算保持位移与清洁率：
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
@@ -85,43 +108,12 @@ uv run --offline --no-project --isolated --python 3.12 \
   --output results/rss-wiping-v1
 ```
 
-打开 `results/rss-wiping-v1/comparison.png` 查看曲线。同目录还有两份 CSV 和 `report.json`；这对记录的保持阶段区域质心最大位移为 **0.061／449.981 mm**，最终清洁率为 **95.47%／39.92%**。无 latch 的 `task_pass: false` 是保留的实验失败，不是下载或复算失败。
+打开 `results/rss-wiping-v1/comparison.png` 查看曲线；同目录包含 CSV 和 `report.json`。证据包约 **126 MiB**，解包约 **349 MiB**。无辅助保持的 `task_pass: false` 是保留的物理任务失败，不是下载失败。
 
-[原始数据与逐文件许可](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) · [复算范围和失败索引](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#offline-evidence)
+[复算范围与失败索引](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#offline-evidence) · [原始数据与逐文件许可](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)
 
-## 想重跑仿真：苹果抓梗
+## 结果边界
 
-上面的仓库目录安装好依赖后，可直接跑 MuJoCo 历史基线。需要 Linux x86_64 和 `uv`；不需要模型 API key。这是固定版本的历史演示，不是最新版六引擎比较环境。
+任务成功不是物理真实性本身。物理真实性先由引擎和场景资格检查负责；模型主要按任务成功率与稳定性评测。仿真通过不证明真机成功，隐藏验证集也不证明真实世界泛化。真实材料、传感器、机器人安全和部署可靠性仍需独立验证。
 
-```bash
-git sparse-checkout disable
-bash scripts/setup.sh --mujoco-profile historical-3.11.0
-bash demos/apple-stem-grasp/run.sh --backend mujoco \
-  --output demos/apple-stem-grasp/runs/first-mujoco
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/first-mujoco
-```
-
-窗口会显示抓梗、抬升与保持；输出保存在 `demos/apple-stem-grasp/runs/first-mujoco/`。无桌面时在运行命令后加 `--headless`；切换 SuperDex 用 `--backend superdex`，并指定新的输出目录。显式目录必须为空，运行器不会覆盖已有成功或失败记录。
-
-验收器写出 `summary.json`：全部检查通过时 `passed` 为 `true`；失败时保留具体检查项并返回非零退出码。14 s 是仿真时长，实际计算会更久。
-
-[安装与资产来源](docs/installation.zh-CN.md) · [任务接口与命令](demos/apple-stem-grasp/README.zh-CN.md)
-
-## 场景不对时，先查什么
-
-先核对几何、质量／惯量、控制时刻和实际接触读回，再围绕一个明确问题调整参数。不要先扫一套 solver 参数，再在结果里寻找能解释失败的那一项。已有失败、受控修复和下一步判断见[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)。
-
-## 新任务怎样选引擎和配置
-
-按载荷、接触尺度、粘着／滑动、接触切换和柔顺性找相近实验，再验证候选配置。研究覆盖 MuJoCo、SuperDex、Genesis、Newton Physics、PhysX 和 Drake，但任务覆盖、版本和验收不同；从[场景选型](https://huangkiki.github.io/Dexlab/zh-cn/latest/selection.html)进入，不要从引擎名字直接下结论。
-
-想先补背景，可沿 [Sim Learning 的 Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md)阅读，再进入 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核查与 DexLab 实验资格分别记录。
-
-## 当前边界
-
-实验成功只适用于各自版本、场景和验收条件。任务成功、数值诊断、物理参照与真实系统准确性分别报告。手内旋转、主动折布、真实材料标定和大规模视觉策略评测仍需各自验证，不能从上文的抓取、切割或布料动图推出。
-
-[研究经验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html) · [求解配置如何分类](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html) · [研究路线](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterity.html) · [外部参考](https://huangkiki.github.io/Dexlab/zh-cn/latest/references.html) · [数据与版本](https://github.com/huangkiki/Dexlab/releases)
-
-[开发与验收约定](docs/autoresearch.zh-CN.md) · [当前工作与暂停状态](docs/current-work.zh-CN.md)
+[研究经验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html) · [求解配置如何分类](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html) · [开发与验收约定](docs/autoresearch.zh-CN.md)

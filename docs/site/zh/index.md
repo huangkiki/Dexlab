@@ -1,8 +1,24 @@
 # DexLab
 
-**用可复现的接触、摩擦与操作实验，研究机器人为什么抓得住、会滑脱，以及怎样选择和调整物理仿真。**
+**为机器人模型提供接触丰富操作的统一评测与失败诊断。**
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+接入远程模型服务与客户机器人配置，在冻结条件下评测抓取、保持、擦拭、布料、切割与插接，输出任务等权成功率和失败证据。正式榜成绩由 DexLab 官方环境运行，不接受团队自报分数。
+
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [模型评测协议](model-evaluation.md) · [申请 pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Live Lab](#live-lab) · [快速开始](#quickstart) · [完整实验目录](experiments.md) · [全部报告](results.md)
+
+(model-evaluation)=
+## 机器人模型评测
+
+DexLab 面向通用操作模型、VLA/WAM、Agent-as-policy 和远程机器人 API 团队。客户自带机器人与接口，DexLab 固定任务、引擎版本、seeds、重复次数和预算，按端到端系统报告结果。
+
+- **主成绩：** 每个任务先单独计算成功率，再对任务等权求宏平均；逐任务矩阵不会隐藏失败。
+- **物理边界：** 引擎或场景未通过资格检查时，运行无效，不把仿真器缺陷算成模型失败。
+- **防刷榜：** 正式榜只接受官方执行；公开集用于复现，隐藏场景变化用于检测过拟合，全部尝试与重跑都保留。
+- **状态分层：** `local / unverified`、`official verified` 和 `reproducible` 分开显示，不用“官方跑过”冒充“外部可复现”。
+
+远程模型服务是首选接入方式。当前仓库已有任务、独立评分和证据链；远程执行器与公开 leaderboard 仍在建设中，pilot 先以人工方式确认接口、预算和隐私边界。
+
+[查看完整评测与防刷榜协议](model-evaluation.md) · [申请模型评测](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+)
 
 **先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
 
@@ -38,7 +54,7 @@
 | 实验 | 动图预览 |
 | --- | :---: |
 | **[Wuji 双指夹球](wuji-contact.md)**<br>同一控制和动作下，点接触改为合成抗扭接触，两秒保持位移从 2.734 降至 1.025 mm，通过原 2 mm 门槛；可离线复算，不证明 solver 失效或真机准确性。 | <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="300" alt="Wuji v3 point contact and v4 torsional contact, full synchronized replay" loading="lazy"></a> |
-| <a id="rss"></a>**[RSS 擦拭](rss-wiping.md)**<br>使用 latch 辅助固定：夹稳后用柔顺约束带动海绵局部随手运动，松开时解除。成功不代表纯摩擦保持；[查看无 latch 对照](latch)。 | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="RSS 使用 latch 辅助固定的原版 RTX 回放，10–19.9 s" loading="lazy"></a> |
+| <a id="rss"></a>**[海绵擦拭](rss-wiping.md)**<br>来源为 RoboSimStudio `wipe_the_bar`。原版使用辅助保持：夹稳后用柔顺约束带动海绵局部随手运动，松开时解除。成功不代表纯摩擦保持；[查看无辅助对照](latch)。 | <a href="rss-wiping.html#latch"><img src="_static/studio/rss.gif" width="300" alt="海绵擦拭辅助保持原版 RTX 回放，10–19.9 s" loading="lazy"></a> |
 | <a id="cut-push"></a><a id="banana-force"></a>**[连续切割与推动](cut-push.md)** | <a href="cut-push.html"><img src="_static/cutting/tofu-cut-push/surface-rtx.gif" width="207" alt="豆腐切块与推动 · RTX 回放" loading="lazy"></a> <a href="cut-push.html"><img src="_static/cutting/banana-cut-push/surface-rtx.gif" width="207" alt="香蕉切割与推动 · RTX 回放" loading="lazy"></a> |
 | <a id="scoring"></a>**[交叉浅划](tofu-scoring.md)** | <a href="tofu-scoring.html"><img src="_static/cutting/tofu-scoring/surface.gif" width="233" alt="记录状态的表面重建" loading="lazy"></a> |
 | <a id="apple"></a>**[苹果抓梗](apple-replays)** | <a href="studio-rendering.html"><img src="_static/studio/apple.gif" width="412" alt="MuJoCo 3.16 / SuperDex 1.0 RTX replay" loading="lazy"></a> |
@@ -139,6 +155,8 @@ diff -u demos/apple-stem-grasp/runs/first-mujoco/summary.json demos/apple-stem-g
 
 Solver 失败复盘 <solver-failure-audit>
 
+模型评测与防刷榜 <model-evaluation>
+
 高质量轨迹回放 <studio-rendering>
 布料引擎对比 <cloth-comparison>
 
@@ -151,7 +169,7 @@ Solver 失败复盘 <solver-failure-audit>
 
 Wuji 抓持与抗扭接触 <wuji-contact>
 接触预测诊断 <contact-response>
-RSS 擦拭与 latch 对照 <rss-wiping>
+海绵擦拭与辅助保持对照 <rss-wiping>
 连续切割与刀面推动 <cut-push>
 香蕉单刀测力 <banana-force>
 豆腐状软块对半切 <cutting>
