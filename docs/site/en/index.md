@@ -17,9 +17,11 @@ The near-term center is a **Physics Research Platform**: contact, deformation, a
 <a id="architecture"></a>
 ## Architecture
 
-<img src="_static/images/dexlab-architecture.svg" width="100%" alt="DexLab execution and evaluation architecture with tasks, model, action execution, environment backends, independent evidence, and co-evolution feedback">
+<a href="_static/images/dexlab-architecture.jpg"><img src="_static/images/dexlab-architecture.jpg" width="100%" alt="DexLab execution and evaluation architecture with tasks, model, action execution, environment backends, independent evidence, and co-evolution feedback"></a>
 
 The task protocol fixes scenes and budgets. A model emits actions, a controller maps them to native physics or a candidate generative backend, and an independent evidence layer records native state, contact readback, and outcomes. The feedback loop is credited only when the corresponding evidence exists.
+
+*Task thumbnails illustrate task categories; real experiment recordings and evidence appear in the Demo gallery below.*
 
 ## What's new
 
