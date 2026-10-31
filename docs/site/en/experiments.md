@@ -6,7 +6,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 
 | Experiment | Code | Question and status |
 |---|---|---|
-| [RSS wiping and assisted retention](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | The original uses compliant latch constraints to carry the sponge with the hand; matched no-latch runs measure contact-only holding, slipping and cleaning |
+| [Sponge wiping and assisted retention](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | Source: RoboSimStudio `wipe_the_bar`. The original uses compliant constraints to carry the sponge with the hand; matched unassisted runs measure contact-only holding, slipping and cleaning |
 | [Sequential cutting and knife-driven pushing](cut-push.md) | [demos/tofu-knife-push/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-knife-push/) | Three tofu pieces and four banana pieces; explain separation through recorded knife-contact forces, using synthetic materials |
 | [Cross scoring](tofu-scoring.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Two shallow cuts and a connected base; distinguish elastic rebound from native cut history |
 | [Synthetic tofu halving](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Single-cut CPU TLMPM, dynamic blade reaction and separation after withdrawal; independent BladeMaster reference |

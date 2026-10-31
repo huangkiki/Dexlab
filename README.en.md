@@ -1,73 +1,96 @@
 # DexLab
 
-**A failure-attribution bench for contact simulation.**
+**Unified evaluation and failure diagnosis for contact-rich robot models.**
 
-DexLab separates a robot's "why did it fail to grasp or start slipping?" and "why is this collision response wrong?" result into five layers: geometry and input, control, contact model, solver, and scoring/recording. It uses frozen conditions, native readback, independent scoring, negative controls, and downloadable raw records to find the **first failing layer** instead of guessing which engine is better from one successful video.
+Connect a remote model service and customer robot configuration, then evaluate grasping, holding, wiping, cloth, cutting, and insertion under frozen tasks, simulator versions, seeds, and resource budgets. DexLab returns equal-task macro success, repeat stability, a per-task matrix, and failure evidence. **Official leaderboard scores are produced by DexLab's evaluation environment; self-reported scores are not accepted.**
 
-[简体中文](README.md) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab) · [Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Reports](https://huangkiki.github.io/Dexlab/en/latest/results.html) · [Quickstart](#quickstart)
+[Request a model-evaluation pilot](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) · [Evaluation protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
 
-## Start with one complete case
+> Current stage: task scenes, native observations, independent scoring, and evidence records exist; the remote model executor and public leaderboard are being built. Public issues may contain publishable information only. Never post API keys, private addresses, or checkpoint credentials.
 
-![Full synchronized replay of Wuji v3 point contact and v4 synthetic torsional contact](docs/evidence/wuji-contact/comparison.gif)
+## What the evaluation returns
 
-[Wuji sphere pinch](https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html): under the same control and commands, changing point contact to synthetic torsional contact reduces two-second hold displacement from **2.734 mm to 1.025 mm**, passing the original 2 mm limit. The record can be rescored offline; this shows that the contact term changed in this fixture, **not solver failure or hardware validation**.
-
-## Research depth is more than a replay
-
-These four studies answer different questions. Their denominators, profiles, and references differ, so they cannot be merged into one success rate or engine leaderboard.
-
-| Question studied | Frozen experiment | Key measured result | What it does not establish |
-| --- | --- | --- | --- |
-| **What changes when the solver profile changes on the same physical problem?** | 40 mm, 64 g cube; 15° static friction, 35° sliding, nominal zero friction; 0.5/1/2 ms. [Paired incline study](https://huangkiki.github.io/Dexlab/en/latest/results.html) | MuJoCo 3.15.0 `Newton / Euler / elliptic` drifts **1.301–1.336 mm** in the static case, passing 0/3; SuperDex 1.0.0 FP64 drifts **0.708–1.132 mm**, passing 2/3. MuJoCo's sliding cases also rotate and lose contact substantially. | A difference between fixed baselines is not a universal engine ranking; a historical MuJoCo `impedance=0.99` profile drifted less. |
-| **Does a smaller timestep or tighter tolerance automatically fix it?** | 16 contact-onset timestep runs plus 12 independent tolerance controls. [Contact-onset refinement](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/REFINEMENT.md) | After SuperDex's stopping tolerance was tightened, the frictional `0.5 vs 0.125 ms` position difference remained about **3.206 mm**. Refinement is not automatically ground truth; timestep, tolerance, and physical model must be separated. | A finer grid is not a truth reference, and `CONVERGED` alone does not establish cross-timestep convergence. |
-| **Can one passing scene be transferred directly?** | Three fixed profiles × ten mass/size conditions, 30 paired runs. [Transfer report](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/TRANSFER.md) | Engineering checks pass **1/30**; transient targets pass **0/30**; the joint target passes **0/30**. Every failure remains. | This does not show that every mapping is impossible or that one engine algorithm is wrong. It shows that these fixed parameters did not transfer. |
-| **How does numerical diagnosis connect back to robot contact?** | Wuji grasp, hold, unload, and synthetic torsional-contact controls. [Full protocol and evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/site/en/wuji-contact.md) | The point-to-synthetic-torsional change reduces two-second hold displacement from **2.734 to 1.025 mm**; scoring also retains the slow-drift condition. | A grasp pass is not completed in-hand manipulation, and it is not measured pad-material calibration. |
-
-![All failures over 30 mass/size transfer cases](docs/evidence/contact-transfer-v1.png)
-
-## How a conclusion is established
-
-DexLab distinguishes "it runs," "the numbers are consistent," "the physical reference applies," "the task passes," and "the attribution is credible." Competitive explanations are excluded in this order:
-
-1. **Freeze the problem.** Declare the physical reference, geometry, mass/inertia, initial state, control epochs, metrics, thresholds, versions, budget, and stop conditions.
-2. **Preserve native evidence.** Save actual parameters, states, velocities, contact forces/impulses, solver status, raw records, and source/asset hashes. Missing measurements remain unknown, never zero.
-3. **Score independently.** Use analytical relations, force/momentum balance, no-contact/zero-friction/release controls, and injected failures to check both the record and the scorer. Do not trust one final state or one success video.
-4. **Run controlled sensitivity studies.** Change timestep, tolerance, load, mass, or contact scale separately. Variables must be isolated before claiming an algorithm difference; changing geometry, controller, and solver together does not do that.
-5. **Retain failures and transfer limits.** Publish raw data, failure denominators, cost, unobserved fields, and recovery conditions. A profile's result belongs only to that version, scene, and acceptance rule.
-
-### Do not flatten names into one "algorithm"
-
-| Layer that must remain separate | Examples | Why it cannot be one row |
-| --- | --- | --- |
-| Time integration | MuJoCo Euler; SuperDex backward Euler | Integration, timestep, and state-update epochs change contact transients. |
-| Outer constraint/nonlinear solver | MuJoCo PGS/CG/Newton; SuperDex Newton; PhysX PGS/TGS | PGS, Newton, and TGS are not all at the same mathematical layer; equal iteration counts do not imply equal work. |
-| Inner linear solver | SuperDex GMRES/LDLᵀ options | `AUTO` is a selection policy, not evidence of the branch actually executed. |
-| Contact and friction model | elliptic/pyramidal cones, C1 regularization, PhysX patch friction | Equal nominal μ does not guarantee equal low-speed response, stick-slip, or combination law. |
-| Precision and budget | FP32/FP64, 0.125–2 ms, iteration caps, absolute/relative tolerance | Precision and stopping conditions change the error/cost relation. |
-| Runtime path | native engine, MJWarp, Isaac Sim adapters | Importing or converting the same core through different state layouts can still change the effective model. |
-
-Those six layers define the compared profile. See [solver configuration roles](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) for source-backed terminology and unknown identities, and the [full matrix](https://huangkiki.github.io/Dexlab/en/latest/coverage.html) for per-profile coverage and failures.
-
-## What can already be run and inspected
-
-This is a representative set. Click an experiment or GIF for frozen parameters, raw evidence, failure records, and reproduction steps. Nothing without a full result is implied to have passed a complete benchmark.
-
-| Experiment | Recorded behavior |
+| Output | Description |
 | --- | --- |
-| **[RSS wiping](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html)**<br>Complete latch-assisted records and a no-latch control are preserved; offline rescoring gives a holding-displacement difference of 0.061/449.981 mm. | <a href="https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html"><img src="docs/evidence/studio/rss.gif" width="280" alt="RTX replay of RSS wiping"></a> |
-| **[Contact-fixture diagnostics](https://github.com/huangkiki/Dexlab/blob/main/demos/contact-benchmark/README.md)**<br>Planar sliding, normal loading, cylindrical pinching, release, penetration, momentum, and cost are diagnosed separately; failures remain. | <a href="https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#pinch"><img src="demos/contact-benchmark/media/genesis-pinch.gif" width="220" alt="Genesis pinch, lift, and release"></a> |
-| **[Cutting and pushing](https://huangkiki.github.io/Dexlab/en/latest/cut-push.html)**<br>Soft-body deformation, blade contact, piece pushing, and surface reconstruction; viscosity, half-step, and no-push controls are retained. | <a href="https://huangkiki.github.io/Dexlab/en/latest/cut-push.html"><img src="docs/evidence/cutting/tofu-cut-push/surface-rtx.gif" width="220" alt="Tofu cutting and pushing"></a> |
-| **[Cloth engines and robot cloth grasp](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html)**<br>Sag, stretch, sphere coverage, folded drop, and robot cloth grasp are evaluated separately; penetration and failures remain. | <a href="https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html"><img src="docs/evidence/cloth-studio/grasp.gif" width="250" alt="Robot cloth grasp, lift, and release"></a> |
-| **[G1 landing contact](demos/landing-contact/README.md)**<br>A fixed RTX 4090 reference passes support checks and three complete policy repeats; the historical anomaly lacks its original model and remains unattributed. | <a href="demos/landing-contact/README.md"><img src="docs/evidence/landing/replays/policy-repeat-1/preview.gif" width="340" alt="Complete G1 native contact-force replay"></a> |
-| **[AMP lift probe](docs/site/en/amp-lift.md)**<br>The 0.2 s record-parity check failed, so the full lift evaluation did not run; the failed evidence remains. | <a href="docs/site/en/amp-lift.md"><img src="docs/evidence/amp-lift/probe.gif" width="340" alt="AMP box-lift short probe"></a> |
+| **Leaderboard score** | Equal-task macro success over a frozen suite, with every task result visible so longer tasks cannot gain hidden weight from a pooled raw episode count. |
+| **Stability and cost** | Success dispersion across repeats, timeouts, request latency, action errors, and resource budget. |
+| **Failure diagnosis** | Whether failure starts in observation/interface handling, grasp, hold, slip, contact switching, action timeout, or an invalid physics run, with the corresponding evidence. |
+| **Verification state** | Separate local unverified results, DexLab-official results, and externally reproducible results where the team releases enough material. |
 
-[Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [All results and failures](https://huangkiki.github.io/Dexlab/en/latest/results.html). GIFs show actual simulation or recorded-state replay; results apply only to each report's version, profile, and acceptance rule.
+## Why not judge from one success video
 
-<a id="quickstart"></a>
+In contact-rich manipulation, lifting an object is not proof of a stable grasp, and a completed routine is not proof that the contact physics was meaningful. DexLab records native state, contact readback, issued commands, scoring outcomes, and failure denominators, then separates:
 
-## Rescore one recorded pair first (no GPU)
+- whether a model completes the full task;
+- where the failure begins;
+- whether an engine or scene problem makes the run invalid;
+- whether the result only works on one memorized layout;
+- whether another team can inspect or reproduce the result.
 
-The commands below download one matched **latch / no-latch raw pair** and recompute slip and cleaning from particle and ink states. Only [uv](https://docs.astral.sh/uv/getting-started/installation/) is required; the first run needs network access. The evidence archive is about **126 MiB**, expanding to **349 MiB**; allow 2 GB. Rescoring needs no simulator, GPU, or model API key.
+The evaluation is for generalist manipulation models, VLA/WAM policies, agents acting as policies, and remote robot APIs. It scores the **end-to-end system** made of the model, adapter, controller, and customer robot configuration. It does not invent a capability coefficient that pretends different embodiments reveal one model-only score.
+
+## Completed experiments
+
+These scenes demonstrate working task environments, observations, and scorers. They are **not leaderboard results for any external model**.
+
+| Contact task | Recorded result |
+| --- | --- |
+| **[Grasp, hold, and slip resistance](https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html)**<br>Wuji sphere pinch under one controller, comparing point contact with synthetic torsional contact. | Two-second hold displacement falls from **2.734 mm to 1.025 mm**, passing the original 2 mm limit. A grasp pass is not completed in-hand manipulation. |
+| **[Sponge wiping](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html)**<br>Source: RoboSimStudio `wipe_the_bar`; retained assisted and unassisted controls. | The original passes **3/3** tasks; the unassisted variant passes **0/3**. Final cleaning is approximately **95.47% / 39.92%**. |
+| **[Cloth grasp and release](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html)**<br>Sag, stretch, coverage, drop, and robot cloth grasp are evaluated separately. | Penetration, rebound, and grasp failures remain. A cloth replay is not promoted to complete active folding. |
+| **[Cutting and blade-face pushing](https://huangkiki.github.io/Dexlab/en/latest/cut-push.html)**<br>Continuous cutting, blade contact, and pushing for tofu and banana. | Separation and measured contact forces are shown; synthetic material cases are not real-food calibration. |
+
+[Full experiment index](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [All results and failures](https://huangkiki.github.io/Dexlab/en/latest/results.html)
+
+### How the RSS experiments enter the catalogue
+
+The [RSS public-entry inventory](https://huangkiki.github.io/Dexlab/en/latest/solver-failure-inventory.html) covers **50 public entrypoints** at upstream `b001cc7`: 40 have task-scoped assertions and 10 are teaching, rendering, or hardware mocks. They are indexed by rigid grasp, cloth/soft body, rope/cable, wiping/bag/tape, cutting, granular/liquid/dough, and policy execution. A goal scorer and its scene can share one episode, so this is not 50 independent operations. The 18 exact paper scenes in Figure 5 still lack original inputs and are not the same denominator as the 50 public entrypoints.
+
+## How a model is scored
+
+Before an official cohort, DexLab freezes the tasks, embodiment, engine versions, seeds, repeats, timeouts, resource caps, and scorer. Each task first receives an independent success rate; the headline score is the equal-task macro average.
+
+- Every episode for a task stays in that task's denominator;
+- a task does not gain extra weight because it uses more episodes or costs more;
+- infrastructure failure and model failure are recorded separately;
+- an invalid engine, scene, or record does not silently become a model failure;
+- retries and failures remain visible; teams cannot publish only the best attempt.
+
+Reports show the complete task matrix, success dispersion, and failure classes. A task failure does not disappear inside an aggregate.
+
+## Anti-gaming
+
+DexLab borrows the official-execution and hidden-verification principles used by public benchmarks while retaining contact-specific evidence boundaries:
+
+- **Official scoring.** DexLab controls tasks, resets, observations, model calls, and scoring. Customer-run results can only be labeled `local / unverified`.
+- **Public plus hidden verification layouts.** Public layouts support reproduction and iteration; unpublished scene variations detect hardcoded coordinates, memorized trajectories, and tuning restricted to released tasks.
+- **Frozen budgets.** Seeds, repeat counts, timeouts, and resource caps are fixed. Teams cannot rerun indefinitely and submit the best outcome.
+- **One fixed system.** A leaderboard entry uses one checkpoint and inference procedure across all tasks. Per-task routing to different models is not allowed.
+- **Technical review.** DexLab reviews adapters, action interfaces, duplicate systems, minimally changed variants, and suspicious task selection.
+- **Every attempt retained.** Model failures, interface failures, timeouts, invalid executions, and platform faults remain distinct.
+
+Formal boards expose these states:
+
+| State | Meaning | Leaderboard eligible |
+| --- | --- | --- |
+| `local / unverified` | The team ran it without official frozen conditions or scoring. | No |
+| `official verified` | DexLab ran it and it passed interface, leakage, and anti-gaming checks. | Yes |
+| `reproducible` | An official result also publishes enough configuration and material for external review. | Separate badge |
+
+Raw video, trajectories, and weights are private by default and may be released by the customer. Internal DexLab review is not equivalent to independent community review. See the [full evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html).
+
+## Join the pilot
+
+1. Open a [model-evaluation request](https://github.com/huangkiki/Dexlab/issues/new?template=model-evaluation.md&title=%5BModel+eval%5D+) with publishable model type, robot configuration, observation/action interfaces, target tasks, and publication preference.
+2. Agree on endpoint, credentials, budget, and data handling through a private channel.
+3. Freeze one cohort and complete interface qualification plus the pilot run.
+4. Receive a private report first, then decide whether to request a public score or publish reproducible material.
+
+A remote model service is the preferred integration. The endpoint only receives deployable observations and returns actions; it cannot read scorer state, future state, or simulator-privileged information. The concrete schema will be frozen before a pilot. The repository does not yet publish a hosted endpoint.
+
+## Inspect existing evidence now
+
+No GPU is required to download one matched sponge-wiping recording pair and recompute holding displacement and cleaning from saved material and ink states:
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/huangkiki/Dexlab.git
@@ -85,43 +108,12 @@ uv run --offline --no-project --isolated --python 3.12 \
   --output results/rss-wiping-v1
 ```
 
-Open `results/rss-wiping-v1/comparison.png` to inspect the curves. The directory also contains two CSV files and `report.json`. This pair has a maximum holding-patch centroid displacement of **0.061/449.981 mm** and final cleaning of **95.47%/39.92%**. The no-latch `task_pass: false` is a retained experimental failure, not a failed download or rescore.
+Open `results/rss-wiping-v1/comparison.png` for the curves. The directory also contains CSV files and `report.json`. The evidence archive is about **126 MiB** compressed and **349 MiB** extracted. The unassisted `task_pass: false` is a retained physical task failure, not a failed download.
 
-[Raw data and per-file licensing](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) · [Rescoring scope and failure index](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html#offline-evidence)
+[Rescoring scope and failure index](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html#offline-evidence) · [Raw data and per-file licensing](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)
 
-## To rerun a simulation: apple-stem grasp
+## Result boundaries
 
-After installing dependencies in the checkout above, run the pinned MuJoCo historical baseline. Linux x86_64 and `uv` are required; no model API key is needed. This is a fixed-version historical demo, not a latest-version six-engine comparison environment.
+Task success is not physical truth. Physical validity is primarily the responsibility of the engine and scene qualification; the model is evaluated mainly by task success and stability. A simulation pass does not prove hardware success, and hidden verification does not prove real-world generalization. Real materials, sensors, robot safety, and deployment reliability still require independent validation.
 
-```bash
-git sparse-checkout disable
-bash scripts/setup.sh --mujoco-profile historical-3.11.0
-bash demos/apple-stem-grasp/run.sh --backend mujoco \
-  --output demos/apple-stem-grasp/runs/first-mujoco
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/first-mujoco
-```
-
-The viewer shows the stem grasp, lift, and hold; outputs go to `demos/apple-stem-grasp/runs/first-mujoco/`. Add `--headless` without a display. Select SuperDex with `--backend superdex` and a new output directory. An explicit directory must be empty; successful and failed records are never overwritten.
-
-The verifier writes `summary.json`. When every check passes, `passed` is `true`; otherwise individual checks remain and the command exits nonzero. The 14 s field is simulation time; wall time is longer.
-
-[Installation and asset provenance](docs/installation.md) · [Task interface and commands](demos/apple-stem-grasp/README.md)
-
-## When a scene behaves unexpectedly
-
-Check geometry, mass/inertia, control timing, and actual contact readback before changing parameters. Do not sweep solver settings first and then look for a result that explains the failure. See the [diagnostic workflow](https://huangkiki.github.io/Dexlab/en/latest/diagnosis.html) for retained failures, controlled fixes, and next decisions.
-
-## Choosing an engine and profile for a new task
-
-Find nearby experiments by load, contact scale, sticking/sliding, contact transitions, and compliance, then validate candidate profiles. The research covers MuJoCo, SuperDex, Genesis, Newton Physics, PhysX, and Drake, but task coverage, versions, and acceptance differ. Start from [scenario selection](https://huangkiki.github.io/Dexlab/en/latest/selection.html), not from an engine name.
-
-For background, follow the [Sim Learning Physics-Based Simulation route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) and then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks and DexLab experimental qualification are recorded separately.
-
-## Current limits
-
-Success applies only to each experiment's versions, scene, and acceptance rule. Task success, numerical diagnostics, physical references, and real-system accuracy are reported separately. In-hand rotation, active folding, real-material calibration, and broad vision-policy evaluation still need independent validation; grasp, cutting, or cloth replays above do not establish them.
-
-[Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html) · [Solver configuration roles](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) · [Research directions](https://huangkiki.github.io/Dexlab/en/latest/dexterity.html) · [External references](https://huangkiki.github.io/Dexlab/en/latest/references.html) · [Data and releases](https://github.com/huangkiki/Dexlab/releases)
-
-[Development and acceptance](docs/autoresearch.md) · [Current work and pause state](docs/current-work.md)
+[Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html) · [Solver configuration roles](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) · [Development and acceptance](docs/autoresearch.md)
