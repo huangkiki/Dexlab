@@ -4,7 +4,7 @@
 
 DexLab turns a contact task into traceable evidence: run the model, record native state, contact readback, and the failing layer; when the gap is physical, improve the simulator, and when it is strategic, go back to the model. Every update binds model version, simulator version, task protocol, and raw evidence, then reruns the same cohort. A public leaderboard is one verifiable view left by that loop, not the goal itself.
 
-[Understand co-evolution](#coevolution) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
+[Understand co-evolution](#coevolution) · [Poke RoboAPI adapter](demos/roboapi-poke/README.md) · [简体中文](README.md) · [Completed experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Evaluation and anti-gaming protocol](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html) · [Live Lab](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab)
 
 > Current stage: task scenes, native observations, independent scoring, and evidence records exist; the remote model executor and public leaderboard are being built. Public issues may contain publishable information only. Never post API keys, private addresses, or checkpoint credentials.
 
@@ -71,6 +71,8 @@ To keep "evolving together" from becoming result cherry-picking, DexLab uses pub
 4. Receive a private report first, then decide whether to request a public score or publish reproducible material.
 
 A remote model service is the preferred integration. The endpoint only receives deployable observations and returns actions; it cannot read scorer state, future state, or simulator-privileged information. The repository does not yet publish a hosted endpoint.
+
+The [Poke RoboAPI adapter](demos/roboapi-poke/README.md) is available: set `POKE_ROBOAPI_KEY` to query models and schema or make one non-controlling inference call. Per-task observation and action mapping is documented in the [adapter and sim2real guide](docs/roboapi-poke.md).
 
 ## Inspect existing evidence now
 

@@ -4,7 +4,7 @@
 
 DexLab 把一次接触任务跑成可追溯证据：模型执行，记录原生状态、接触读回和失败层级；发现物理缺口就升级仿真器，发现策略缺口就回到模型。任何一边更新后，绑定模型版本、仿真器版本、任务协议和原始证据，重新跑同一 cohort。公开评测榜只是这个闭环留下的一个可验证视图，不是目标本身。
 
-[理解共同进化](#coevolution) · [English](README.en.md) · [已完成实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [评测与防刷榜协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html) · [在线实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)
+[理解共同进化](#coevolution) · [Poke RoboAPI 适配](demos/roboapi-poke/README.md) · [English](README.en.md) · [已完成实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [评测与防刷榜协议](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html) · [在线实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)
 
 > 当前阶段：任务场景、原生观测、独立评分和证据链已存在；远程模型执行器与公开 leaderboard 正在建设中。公开 Issue 只提交可公开信息，不要填写 API Key、私有地址或权重凭据。
 
@@ -71,6 +71,8 @@ DexLab 把一次接触任务跑成可追溯证据：模型执行，记录原生�
 4. 先收到私有报告；决定是否申请公开榜或公开可复现材料。
 
 远程模型服务是首选接入方式。模型端只需要接收部署时可获得的观测并返回动作，不读取评分器、未来状态或仿真特权信息。当前仓库尚未发布可直接连接的托管服务端点。
+
+已提供 [Poke RoboAPI 适配层](demos/roboapi-poke/README.md)：填写 `POKE_ROBOAPI_KEY` 后即可查询模型、读取 schema，并做一次不控制机器人的推理调用。逐任务的仿真观测与动作执行映射见[适配与 sim2real 对照](docs/roboapi-poke.zh-CN.md)。
 
 ## 先检查现有证据
 
