@@ -8,6 +8,27 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 > 当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。
 
+## Research vision: Simulation–Learning Co-evolution
+
+> **用模型暴露仿真缺口，再用更可信的仿真改善模型。**
+
+近期以 **Physics Research Platform** 为主体：把接触、形变和材料分离做成可观察、可归因、可复算的实验。长期再用模型失败反馈仿真器，用改进后的仿真器训练和评测模型。
+
+<a id="architecture"></a>
+## Architecture
+
+![DexLab execution and evaluation architecture](docs/site/_static/images/dexlab-architecture.svg)
+
+任务协议固定场景与预算；模型输出动作，经控制器映射到物理后端或候选生成式后端；原生状态、接触读回与结果由独立证据层记录和评分。反馈回路只有在对应证据成立后才算完成。
+
+## What's new
+
+- **2026-10-31 · Uranus generative backend:** added the candidate backend contract, candidate tasks, paired native/generative evaluation plan, and evidence boundaries. It is documented, not yet a DexLab runner. [Details](https://huangkiki.github.io/Dexlab/zh-cn/latest/uranus-backend.html)
+- **2026-10-31 · Poke RoboAPI adapter:** added model discovery, schema/session handling, action validation, execution feedback, and a credential-safe CLI. Per-task observation/action mappings remain pending. [Details](docs/roboapi-poke.zh-CN.md)
+- **2026-10-31 · Model-evaluation protocol:** added the public evaluation, anti-gaming, evidence-state, and hidden-layout protocol. Remote execution and the public leaderboard are still under construction. [Details](https://huangkiki.github.io/Dexlab/zh-cn/latest/model-evaluation.html)
+
+[All releases](https://github.com/huangkiki/Dexlab/releases)
+
 ## Demo gallery
 
 以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
@@ -61,10 +82,6 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 - 切割、摩擦和材料分离应该怎样记录和验收，而不是只看一段视频？
 - 一个 policy 或 API 的排名，能否在替换物理后端后保持不变？
 
-这是 DexLab 当前的主体：**Physics Research Platform**。<br>
-长期愿景是 **Simulation–Learning Co-evolution**：用模型暴露仿真缺口，再用更可信的仿真改善模型。<br>
-Model/API benchmark 是连接两者的实验基础设施，不是当前唯一目标。
-
 ## Research areas
 
 | 方向 | 研究问题 | 当前入口 |
@@ -100,32 +117,6 @@ Model/API benchmark 是连接两者的实验基础设施，不是当前唯一目
 
 [完整实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [全部结果与失败](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) · [研究经验](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html)
 
-<a id="architecture"></a>
-## Architecture
-
-```text
-DexLab
-├── Tasks and protocols
-│   └── scenes, initial states, seeds, budgets, acceptance
-├── Systems under test
-│   └── RoboAPI / VLA / policy / world model
-├── Environment backends
-│   ├── Native physics: MuJoCo / Newton / SuperDex / Genesis / PhysX / Drake
-│   └── Candidate generative backend: Uranus
-├── Action execution
-│   └── IK / controller / session adapter
-└── Evidence and scoring
-    └── success, native state, contact readback, attribution, cohorts, anti-gaming
-```
-
-原生物理后端拥有状态推进和接触读回；控制器把模型动作映射成可执行目标；任务评分器独立于被测模型。每次生成结果都有机会保留完整尝试、失败原因和可复算证据。
-
-### Ecosystem backend: Uranus
-
-[Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前作为 **documented candidate generative backend** 出现在 DexLab，而不是已验证物理后端。
-
-接入链路为 `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`。它提供视觉观测，不提供原生接触状态、任务 success 或物理真值。[阅读完整介绍、候选任务和证据边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/uranus-backend.html)。
-
 <a id="quickstart"></a>
 ## Quick start
 
@@ -156,6 +147,12 @@ bash demos/apple-stem-grasp/run.sh \
 6. **Co-evolution：** 在证据支持后，用模型失败推动仿真改进，再用改进的仿真产生更可信的策略训练与评测。
 
 当前状态、阻塞和下一阶段入口在 [Current Work](docs/current-work.zh-CN.md) 中维护；它不是已完成的 roadmap。
+
+## Ecosystem backend: Uranus
+
+[Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前作为 **documented candidate generative backend** 出现在 DexLab，而不是已验证物理后端。
+
+接入链路为 `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`。它提供视觉观测，不提供原生接触状态、任务 success 或物理真值。[阅读完整介绍、候选任务和证据边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/uranus-backend.html)。
 
 ## Evidence and boundaries
 
