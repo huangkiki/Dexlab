@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="200mm" height="116mm" viewBox="0 0 200 116">
+<defs>
+<marker markerWidth="2.4" markerHeight="2.4" viewBox="-2 -1 2 2" orient="auto" id="arrow-355a73" markerUnits="userSpaceOnUse" refX="0.0" refY="0.0">
+<path d="M-2,-1 L0,0 L-2,1 Z" fill="#355A73" />
+</marker>
+<marker markerWidth="2.4" markerHeight="2.4" viewBox="-2 -1 2 2" orient="auto" id="arrow-0f766e" markerUnits="userSpaceOnUse" refX="0.0" refY="0.0">
+<path d="M-2,-1 L0,0 L-2,1 Z" fill="#0F766E" />
+</marker>
+</defs>
+<rect x="0" y="0" width="200" height="116" fill="#F7FAFC" />
+<g id="layer-background"></g>
+<g id="layer-connectors">
+<path d="M 47.000 35.500 L 58.000 35.500" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 98.000 35.500 L 109.000 35.500" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 148.000 35.500 L 160.000 25.500" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 148.000 35.500 L 160.000 53.500" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 195.685 25.500 L 197.092 25.500 Q 198.500 25.500 198.500 26.908 L 198.500 79.500 Q 198.500 82.000 196.000 82.000 L 187.000 82.000" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 177.000 60.000 L 140.500 72.000" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 94.000 82.000 L 183.000 106.500" stroke="#355A73" stroke-width="0.55" fill="none" marker-end="url(#arrow-355a73)" />
+<path d="M 17.000 106.500 L 7.000 106.500 Q 5.000 106.500 5.000 104.500 L 5.000 37.000 Q 5.000 35.500 6.500 35.500 L 8.000 35.500" stroke="#0F766E" stroke-width="0.6" fill="none" marker-end="url(#arrow-0f766e)" />
+</g>
+<g id="layer-boxes">
+<g>
+<rect x="8" y="25" width="39" height="21" rx="1.5" ry="1.5" fill="#E6F4EA" stroke="#2D6A4F" stroke-width="0.55" />
+<text x="27.5" y="33.6774785625" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#2D6A4F">Task &amp; protocol</text>
+<text x="27.5" y="36.0546804375" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#2D6A4F">scenes · resets · seeds</text>
+<text x="27.5" y="38.4318823125" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#2D6A4F">budget · acceptance</text>
+</g>
+<g>
+<rect x="58" y="25" width="40" height="21" rx="1.5" ry="1.5" fill="#FFF4D6" stroke="#9A6700" stroke-width="0.55" />
+<text x="78.0" y="33.6774785625" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#9A6700">System under test</text>
+<text x="78.0" y="36.0546804375" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#9A6700">RoboAPI · VLA</text>
+<text x="78.0" y="38.4318823125" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#9A6700">policy · world model</text>
+</g>
+<g>
+<rect x="109" y="25" width="39" height="21" rx="1.5" ry="1.5" fill="#E3EEFB" stroke="#245A93" stroke-width="0.55" />
+<text x="128.5" y="33.6774785625" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#245A93">Action execution</text>
+<text x="128.5" y="36.0546804375" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#245A93">IK · controller</text>
+<text x="128.5" y="38.4318823125" font-size="2.363611111111111" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#245A93">session adapter</text>
+</g>
+<g>
+<rect x="160" y="17" width="35.684818793402776" height="17" rx="1.5" ry="1.5" fill="#EEF3F8" stroke="#486581" stroke-width="0.55" />
+<text x="177.84240939670138" y="23.813487625" font-size="2.187222222222222" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#486581">Native physics</text>
+<text x="177.84240939670138" y="26.013286375" font-size="2.187222222222222" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#486581">MuJoCo · SuperDex · Genesis</text>
+<text x="177.84240939670138" y="28.213085125" font-size="2.187222222222222" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#486581">Newton · PhysX · Drake</text>
+</g>
+<g>
+<rect x="160" y="47" width="34" height="13" rx="1.5" ry="1.5" fill="#F0EAFB" stroke="#6B4FA0" stroke-width="0.55" />
+<text x="177.0" y="52.894464" font-size="2.2577777777777777" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#6B4FA0">Generative backend</text>
+<text x="177.0" y="55.165224" font-size="2.2577777777777777" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#6B4FA0">Uranus · candidate</text>
+</g>
+<g>
+<rect x="94" y="72" width="93" height="20" rx="1.5" ry="1.5" fill="#FDECEC" stroke="#9B3D3D" stroke-width="0.55" />
+<text x="140.5" y="80.204680375" font-size="2.328333333333333" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#9B3D3D">Evidence &amp; scoring</text>
+<text x="140.5" y="82.546401625" font-size="2.328333333333333" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#9B3D3D">success · native state · contact readback</text>
+<text x="140.5" y="84.888122875" font-size="2.328333333333333" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#9B3D3D">failure attribution · cohorts · anti-gaming</text>
+</g>
+<g>
+<rect x="17" y="100" width="166" height="13" rx="1.5" ry="1.5" fill="#E8F4EF" stroke="#0F766E" stroke-width="0.7" />
+<text x="100.0" y="105.856618" font-size="2.3988888888888886" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#0F766E">Simulation–Learning co-evolution</text>
+<text x="100.0" y="108.2693005" font-size="2.3988888888888886" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#0F766E">model gaps improve simulation  •  simulation gaps improve models</text>
+</g>
+</g>
+<g id="layer-labels">
+<g>
+<text x="8" y="8" font-size="3.5277777777777777" font-family="Helvetica, Arial, sans-serif" text-anchor="start" fill="#17324D">DexLab: a verifiable execution and evaluation loop</text>
+</g>
+<g>
+<text x="8" y="15" font-size="2.2577777777777777" font-family="Helvetica, Arial, sans-serif" text-anchor="start" fill="#52677D">Protocol  →  model  →  control  →  environment  →  independent evidence</text>
+</g>
+<g>
+<text x="8.2" y="96.2" font-size="2.0461111111111108" font-family="Helvetica, Arial, sans-serif" text-anchor="start" fill="#0F766E">versioned feedback: data, model, physics</text>
+</g>
+</g>
+</svg>

@@ -8,6 +8,27 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 > 当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。
 
+## Research vision: Simulation–Learning Co-evolution
+
+> **用模型暴露仿真缺口，再用更可信的仿真改善模型。**
+
+近期以 **Physics Research Platform** 为主体：把接触、形变和材料分离做成可观察、可归因、可复算的实验。长期再用模型失败反馈仿真器，用改进后的仿真器训练和评测模型。
+
+<a id="architecture"></a>
+## Architecture
+
+<img src="_static/images/dexlab-architecture.svg" width="100%" alt="DexLab 执行与评测架构：任务协议、被测模型、动作执行、环境后端、独立证据和共同进化反馈">
+
+任务协议固定场景与预算；模型输出动作，经控制器映射到物理后端或候选生成式后端；原生状态、接触读回与结果由独立证据层记录和评分。反馈回路只有在对应证据成立后才算完成。
+
+## What's new
+
+- **2026-10-31 · Uranus 生成式后端：** 新增候选后端契约、候选任务、native/generative 配对评测方案与证据边界。当前是文档化候选，尚无 DexLab runner。[查看详情](uranus-backend.md)
+- **2026-10-31 · Poke RoboAPI 适配：** 新增模型发现、schema/session、动作校验、执行反馈和凭据安全 CLI；逐任务观测/动作映射仍待接入。[查看详情](https://github.com/huangkiki/Dexlab/blob/main/docs/roboapi-poke.zh-CN.md)
+- **2026-10-31 · 模型评测协议：** 新增公开评测、防刷榜、证据状态与隐藏布局协议；远程执行和公开榜仍在建设。[查看详情](model-evaluation.md)
+
+[全部 Releases](https://github.com/huangkiki/Dexlab/releases)
+
 ## Demo gallery
 
 以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
@@ -33,8 +54,6 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 - 机器人能夹住布片，何时才会真正完成折叠、送布和正确释放？
 - 切割、摩擦和材料分离应该怎样记录和验收，而不是只看一段视频？
 - 一个 policy 或 API 的排名，能否在替换物理后端后保持不变？
-
-当前主体是 **Physics Research Platform**。长期愿景是 **Simulation–Learning Co-evolution**：用模型暴露仿真缺口，再用更可信的仿真改善模型。Model/API benchmark 是连接两者的实验基础设施。
 
 <section id="research-selection"></section>
 
@@ -80,32 +99,6 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 </div>
 ```
 
-<a id="architecture"></a>
-## Architecture
-
-```text
-DexLab
-├── Tasks and protocols
-│   └── scenes, initial states, seeds, budgets, acceptance
-├── Systems under test
-│   └── RoboAPI / VLA / policy / world model
-├── Environment backends
-│   ├── Native physics: MuJoCo / Newton / SuperDex / Genesis / PhysX / Drake
-│   └── Candidate generative backend: Uranus
-├── Action execution
-│   └── IK / controller / session adapter
-└── Evidence and scoring
-    └── success, native state, contact readback, attribution, cohorts, anti-gaming
-```
-
-原生物理后端拥有状态推进和接触读回；控制器把模型动作映射成可执行目标；任务评分器独立于被测模型。每次生成结果都有机会保留完整尝试、失败原因和可复算证据。
-
-### Ecosystem backend: Uranus
-
-[Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前是 **documented candidate generative backend**，不是已验证物理后端。
-
-接入链路为 `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`。它提供视觉观测，不提供原生接触状态、任务 success 或物理真值。[阅读完整介绍、候选任务和证据边界](uranus-backend.md)。
-
 (quickstart)=
 ## Quick start
 
@@ -134,6 +127,12 @@ bash demos/apple-stem-grasp/run.sh \
 4. **Cross-backend attribution：** 区分 solver、integrator、collision geometry、precision、timestep 和 framework wrapper。
 5. **Policy and neural backends：** 检查 API 排名和任务结论能否从原生物理迁移到 learned world model。
 6. **Co-evolution：** 在证据支持后，用模型失败推动仿真改进，再用改进的仿真产生更可信的策略训练与评测。
+
+## Ecosystem backend: Uranus
+
+[Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前是 **documented candidate generative backend**，不是已验证物理后端。
+
+接入链路为 `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`。它提供视觉观测，不提供原生接触状态、任务 success 或物理真值。[阅读完整介绍、候选任务和证据边界](uranus-backend.md)。
 
 <section id="research-diagnosis"></section>
 

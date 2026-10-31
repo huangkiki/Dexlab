@@ -8,6 +8,27 @@ DexLab is a physics-centric research platform for robot manipulation involving c
 
 > Native commands, contact readback, independent scoring, offline evidence, and several contact experiments are available today. Remote model execution, a public leaderboard, and cross-task unified conclusions are still being built.
 
+## Research vision: Simulation–Learning Co-evolution
+
+> **Models expose simulation gaps; more trustworthy simulation then produces better models.**
+
+The near-term center is a **Physics Research Platform**: contact, deformation, and material separation become observable, attributable, and rescorable experiments. The long-term loop feeds model failures back into simulation, then uses improved simulation to train and evaluate models.
+
+<a id="architecture"></a>
+## Architecture
+
+![DexLab execution and evaluation architecture](docs/site/_static/images/dexlab-architecture.svg)
+
+The task protocol fixes scenes and budgets. A model emits actions, a controller maps them to native physics or a candidate generative backend, and an independent evidence layer records native state, contact readback, and outcomes. The feedback loop is credited only when the corresponding evidence exists.
+
+## What's new
+
+- **2026-10-31 · Uranus generative backend:** added the candidate backend contract, candidate tasks, paired native/generative evaluation plan, and evidence boundaries. It is documented, not yet a DexLab runner. [Details](https://huangkiki.github.io/Dexlab/en/latest/uranus-backend.html)
+- **2026-10-31 · Poke RoboAPI adapter:** added model discovery, schema/session handling, action validation, execution feedback, and a credential-safe CLI. Per-task observation/action mappings remain pending. [Details](docs/roboapi-poke.md)
+- **2026-10-31 · Model-evaluation protocol:** added the public evaluation, anti-gaming, evidence-state, and hidden-layout protocol. Remote execution and the public leaderboard are still under construction. [Details](https://huangkiki.github.io/Dexlab/en/latest/model-evaluation.html)
+
+[All releases](https://github.com/huangkiki/Dexlab/releases)
+
 ## Demo gallery
 
 These animations come from DexLab simulation recordings or recorded-state replays. Every result applies only to its reported version, material assumptions, and acceptance protocol.
@@ -61,10 +82,6 @@ DexLab makes these questions testable:
 - How should cutting, friction, and material separation be recorded and accepted beyond a video?
 - Does a policy or API ranking survive replacement of the physics backend?
 
-The current project center is a **Physics Research Platform**.<br>
-The long-term goal is **Simulation–Learning Co-evolution**: models expose simulation gaps, and improved simulation produces better models.<br>
-Model/API benchmarking connects the two; it is not the only product DexLab claims today.
-
 ## Research areas
 
 | Area | Research question | Current entry |
@@ -100,32 +117,6 @@ Together, these results show why a success video is insufficient: **material mod
 
 [Full experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [All results and failures](https://huangkiki.github.io/Dexlab/en/latest/results.html) · [Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html)
 
-<a id="architecture"></a>
-## Architecture
-
-```text
-DexLab
-├── Tasks and protocols
-│   └── scenes, initial states, seeds, budgets, acceptance
-├── Systems under test
-│   └── RoboAPI / VLA / policy / world model
-├── Environment backends
-│   ├── Native physics: MuJoCo / Newton / SuperDex / Genesis / PhysX / Drake
-│   └── Candidate generative backend: Uranus
-├── Action execution
-│   └── IK / controller / session adapter
-└── Evidence and scoring
-    └── success, native state, contact readback, attribution, cohorts, anti-gaming
-```
-
-Native backends own state evolution and contact readback. The controller maps model actions to executable targets, and a separate task scorer evaluates the episode. Every result can retain complete attempts, failure reasons, and rescorable evidence.
-
-### Ecosystem backend: Uranus
-
-[Uranus](https://arxiv.org/abs/2609.24815) is a D-Robotics robot video world model that generates multi-view observations from future `qpos`, cameras, and robot geometry. It is currently a **documented candidate generative backend**, not a verified physics backend.
-
-The integration path is `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`. Uranus supplies visual observations; it does not provide native contact state, task success, or physical truth. [Read the full introduction, candidate tasks, and evidence boundary](https://huangkiki.github.io/Dexlab/en/latest/uranus-backend.html).
-
 <a id="quickstart"></a>
 ## Quick start
 
@@ -156,6 +147,12 @@ To inspect the evidence chain without installing a simulator, start with the [GP
 6. **Co-evolution:** after evidence supports it, use model failures to improve simulation and improved simulation to train and evaluate better models.
 
 The actual status, blockers, and next-stage entry remain in [Current Work](docs/current-work.md); it is not a completed roadmap.
+
+## Ecosystem backend: Uranus
+
+[Uranus](https://arxiv.org/abs/2609.24815) is a D-Robotics robot video world model that generates multi-view observations from future `qpos`, cameras, and robot geometry. It is currently a **documented candidate generative backend**, not a verified physics backend.
+
+The integration path is `RoboAPI → IK/controller → qpos → Uranus → RGB → task scorer`. Uranus supplies visual observations; it does not provide native contact state, task success, or physical truth. [Read the full introduction, candidate tasks, and evidence boundary](https://huangkiki.github.io/Dexlab/en/latest/uranus-backend.html).
 
 ## Evidence and boundaries
 
