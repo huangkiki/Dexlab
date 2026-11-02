@@ -2,6 +2,10 @@
 
 Reading on research context and evaluation methods. External experiments are identified separately from DexLab results and do not count toward this project's engine coverage or passes.
 
+## Start with the questions behind dexterous-hand simulation
+
+[What are we discussing when we discuss dexterous-hand simulation?](dexterous-hand-simulation.md) starts with rotating a bottle and connects six layers: tasks, bodies, physics, sensing, policies and validation. It introduces seven representative papers alongside DexLab's holding, wiping and cloth cases, providing context before choosing an engine or reading individual papers.
+
 ## Publications using Newton
 
 [The topic guide](newton-reading-guide.md) explains all 35 papers across seven topics, with routes through contact and differentiation, simulation calibration, and world models. Each entry has a plain-language summary and source link; the reading scope is abstracts and author pages.
