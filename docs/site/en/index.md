@@ -22,6 +22,7 @@ These animations come from DexLab simulation recordings or recorded-state replay
 
 | What would you like to do? | Suggested entry |
 | --- | --- |
+| Understand what dexterous-hand simulation studies | [What are we discussing when we discuss dexterous-hand simulation?](dexterous-hand-simulation.md): from holding and finger transitions to touch and hardware validation. |
 | Inspect experiments, rescore evidence or reproduce a task | [Experiments](experiments.md) → [Quickstart](quickstart.md); inspect existing evidence with the {ref}`GPU-free wiping rescore <offline-evidence>`. |
 | Understand contact failures and backend differences | [Failure attribution](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
 | Integrate a model or understand evaluation rules | [Model-evaluation protocol](model-evaluation.md); remote execution and public leaderboards are not yet complete. |
@@ -172,6 +173,7 @@ No companion paper is published yet. When citing the repository, use its URL and
 
 Experiments <experiments>
 Quickstart <quickstart>
+Dexterous-hand simulation guide <dexterous-hand-simulation>
 References <references>
 Co-evolution and model evaluation <model-evaluation>
 Solver failure audit <solver-failure-audit>

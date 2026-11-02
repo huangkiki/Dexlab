@@ -22,6 +22,7 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 | 你想做什么 | 推荐入口 |
 | --- | --- |
+| 先理解灵巧手仿真在研究什么 | [当我们在讨论灵巧手仿真时，我们在讨论什么](dexterous-hand-simulation.md)：从抓持、换指到触觉与真实验证。 |
 | 看实验、复查结果或复现任务 | [实验目录](experiments.md) → [安装复现](quickstart.md)；只核对已有证据可从{ref}`无需 GPU 的擦拭复算 <offline-evidence>`开始。 |
 | 理解接触失败与后端差异 | [失败归因](solver-failure-audit.md) → [求解配置分层](solver-taxonomy.md) → [完整结果](results.md)。 |
 | 接入模型或理解评测约定 | [模型评测协议](model-evaluation.md)；远程执行与公开榜单尚未完成。 |
@@ -172,6 +173,7 @@ bash demos/apple-stem-grasp/run.sh \
 
 实验目录 <experiments>
 安装复现 <quickstart>
+灵巧手仿真导读 <dexterous-hand-simulation>
 外部参考 <references>
 共同进化与模型评测 <model-evaluation>
 Solver 失败复盘 <solver-failure-audit>
