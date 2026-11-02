@@ -75,10 +75,10 @@
 <a id="whats-new"></a>
 ## What's new
 
+- **2026-11-02** — [CHORD 纸巾盒有限训练](https://huangkiki.github.io/Dexlab/zh-cn/latest/chord-native.html)：38,400 样本、1,000 次 Adam 更新及 600 步原生重载；记录器一致性未通过，完整迁移仍为 0/3。
 - **2026-11-02** — 新增[灵巧手仿真导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html)与 [Newton 35 篇论文分类](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)。
 - **2026-10-31** — 发布 [RoboAPI 会话适配](docs/roboapi-poke.zh-CN.md)：模型发现、连续会话与动作回执；任务映射待接入。
 - **2026-10-28** — 上线 [MuJoCo 浏览器实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)，交互查看接触行为。
-- **2026-10-26** — 发布 [Wuji 双指夹球对照](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)、独立评分与离线复算包。
 
 <a id="quickstart"></a>
 ## 快速开始

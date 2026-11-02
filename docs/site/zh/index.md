@@ -132,7 +132,7 @@ bash demos/apple-stem-grasp/run.sh \
 5. **Policy and neural backends：** 检查 API 排名和任务结论能否从原生物理迁移到 learned world model。
 6. **Co-evolution：** 在证据支持后，用模型失败推动仿真改进，再用改进的仿真产生更可信的策略训练与评测。
 
-**CHORD 迁移准备：** 已有固定任务卡、资产预检和有限上游命令准备入口；原生训练、记录与评分尚待贯通（0/3）。[准备任务](https://github.com/huangkiki/Dexlab/blob/main/demos/chord/README.zh-CN.md)。
+**CHORD 有限训练：** 纸巾盒完成 38,400 样本、1,000 次 Adam 更新和 600 步原生 checkpoint 重载。训练/重载为 1/3；记录器一致性未通过，独立评分及完整迁移仍为 0/3。[运行证据与复现](chord-native.md)。
 
 ## Ecosystem backend: Uranus
 
@@ -200,6 +200,7 @@ Wuji 抓持与抗扭接触 <wuji-contact>
 可视对照 <visual-comparisons>
 LIBERO 原生流程 <libero-workflow>
 AMP 记录器一致性失败 <amp-lift>
+CHORD 有限训练与记录器一致性 <chord-native>
 场景选型 <selection>
 引擎与模型 <engines>
 Uranus 生成式环境后端 <uranus-backend>
