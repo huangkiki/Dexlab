@@ -75,6 +75,7 @@ The long-term goal is to improve simulation and models together: use model failu
 <a id="whats-new"></a>
 ## What's new
 
+- **2026-11-03** — Published the [original dexterous simulation review](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) with 14 relevant October works and one background reference organized by its six layers.
 - **2026-11-02** — Added a [dexterous-hand simulation guide](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html) and a [topic guide to 35 Newton papers](https://huangkiki.github.io/Dexlab/en/latest/newton-reading-guide.html).
 - **2026-10-31** — Released the [RoboAPI session adapter](docs/roboapi-poke.md): model discovery, continuous sessions and action receipts; task mappings remain pending.
 - **2026-10-28** — Launched the [MuJoCo browser experiment](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab) for interactive inspection of contact behavior.
@@ -107,7 +108,8 @@ The verifier writes `summary.json`, with `passed: true` when all checks pass. Fo
 The website maintains full experiment reports, usage guides and research material:
 
 - **Explore experiments:** [Experiment gallery](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Results and coverage](https://huangkiki.github.io/Dexlab/en/latest/results.html) · [Failure audit](https://huangkiki.github.io/Dexlab/en/latest/solver-failure-audit.html)
-- **Understand the methods:** [Dexterous-hand simulation](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html) · [Solvers and contact models](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) · [Papers and references](https://huangkiki.github.io/Dexlab/en/latest/references.html)
+- **Research guide:** [What are we discussing when we discuss dexterous manipulation simulation?](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) (Chinese original), preserving its layout, text and filters, with [October papers](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026) added to the six-layer framework. [English companion](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html).
+- **Understand the methods:** [Solvers and contact models](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) · [Papers and references](https://huangkiki.github.io/Dexlab/en/latest/references.html)
 - **Contribute:** [Contribution guide](https://huangkiki.github.io/Dexlab/en/latest/contributing.html) · [Current work](docs/current-work.md) · [Issues and suggestions](https://github.com/huangkiki/Dexlab/issues)
 
 Code is licensed under [Apache-2.0](LICENSE); third-party assets retain their own licenses. See the [citation guide](https://huangkiki.github.io/Dexlab/en/latest/index.html#documentation-and-citation) for research use.
