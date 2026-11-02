@@ -9,6 +9,8 @@
 
 分组沿用 Newton 维护者的分类。收录不表示 DexLab 已逐篇精读、核实其 Newton 配置或复现实验；外部结果不计入 DexLab 的实验覆盖或通过数量。
 
+先看[七类主题与推荐阅读顺序](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)，了解每篇论文在解决什么问题。
+
 ## 使用或开发 Newton 的研究
 
 ### 2026

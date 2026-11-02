@@ -4,6 +4,8 @@
 
 ## 使用 Newton 的研究论文
 
+[分类导读](newton-reading-guide.md)按七个方向解释全部 35 篇论文，并提供接触与可微仿真、仿真校准、世界模型三条阅读路线。每篇附一句话说明和原始来源，阅读范围为摘要及作者页面。
+
 [完整论文索引](newton-publications.md)收录 Newton 官方 `PUBLICATIONS.md` 截至 2026-11-02 核对的全部 35 项文献：34 项研究和 1 项仅用作对照基线的研究。保留题名、作者、日期和原始链接，注明 The Newton Developers 署名及 CC BY 4.0 许可。这是外部文献目录，不是 DexLab 的复现记录。
 
 ## Manda Robotics：物理引擎对比
@@ -28,6 +30,7 @@
 ```{toctree}
 :maxdepth: 1
 
+Newton 论文分类导读 <newton-reading-guide>
 Newton 研究论文 <newton-publications>
 Manda 物理引擎比较导读 <manda-physics-engines>
 UniCross 参考调研 <unicross>

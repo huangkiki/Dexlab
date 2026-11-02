@@ -1,12 +1,31 @@
 # DexLab
 
-## Contact-rich robotics, beyond rigid-body simulation.
+**Contact-rich robotics, beyond rigid-body simulation.**
 
 DexLab is a physics-centric research platform for robot manipulation involving contact, deformation, and material separation.
 
-[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiments](experiments.md) · [Research protocol](model-evaluation.md) · [Quick start](#quickstart) · [Architecture](#architecture) · [Uranus backend](uranus-backend.md)
+[简体中文](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiments](experiments.md) · [Research protocol](model-evaluation.md) · [Quick start](#quickstart) · [Architecture](#architecture) · [Paper guide](newton-reading-guide.md)
 
 > Native commands, contact readback, independent scoring, offline evidence, and several contact experiments are available today. Remote model execution, a public leaderboard, and cross-task unified conclusions are still being built.
+
+## Experiment previews
+
+These animations come from DexLab simulation recordings or recorded-state replays. Every result applies only to its reported version, material assumptions, and acceptance protocol.
+
+| Grasp and slip resistance | Sponge wiping and grasp dependence |
+| --- | --- |
+| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji point and torsional contact comparison" loading="lazy"></a><br>Under the same control, synthetic torsional contact reduces two-second hold drift from **2.734 mm** to **1.025 mm**. | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="Assisted sponge wiping replay" loading="lazy"></a><br>Assisted retention passes **3/3**; no assistance gives **0/3**, with final cleaning around **95.47% / 39.92%**. |
+| **Deformable manipulation** | **Cutting and topology change** |
+| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="Robot grasping a deformable cloth in recorded simulation" loading="lazy"></a><br>The robot can pinch and move a cloth patch, but complete folding still fails: the current record reaches **12.55%** edge strain against a 5% limit. | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="Tofu and banana cutting recorded-state replay" loading="lazy"></a><br>Continuous cutting and blade-face pushing change the simulated topology; the full report records contact force, material separation, and retained failures. |
+
+## Start here
+
+| What would you like to do? | Suggested entry |
+| --- | --- |
+| Inspect experiments, rescore evidence or reproduce a task | [Experiments](experiments.md) → [Quickstart](quickstart.md); inspect existing evidence with the {ref}`GPU-free wiping rescore <offline-evidence>`. |
+| Understand contact failures and backend differences | [Failure attribution](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
+| Integrate a model or understand evaluation rules | [Model-evaluation protocol](model-evaluation.md); remote execution and public leaderboards are not yet complete. |
+| Read related research | [Newton topic guide](newton-reading-guide.md) → [Complete bibliography](newton-publications.md); find other reading in [References](references.md). |
 
 ## Research vision: Simulation–Learning Co-evolution
 
@@ -21,25 +40,7 @@ The near-term center is a **Physics Research Platform**: contact, deformation, a
 
 The task protocol fixes scenes and budgets. A model emits actions, a controller maps them to native physics or a candidate generative backend, and an independent evidence layer records native state, contact readback, and outcomes. The feedback loop is credited only when the corresponding evidence exists.
 
-*Task thumbnails illustrate task categories; real experiment recordings and evidence appear in the Demo gallery below.*
-
-## What's new
-
-- **2026-10-31 · Uranus generative backend:** added the candidate backend contract, candidate tasks, paired native/generative evaluation plan, and evidence boundaries. It is documented, not yet a DexLab runner. [Details](uranus-backend.md)
-- **2026-10-31 · Poke RoboAPI adapter:** added model discovery, schema/session handling, action validation, execution feedback, and a credential-safe CLI. Per-task observation/action mappings remain pending. [Details](https://github.com/huangkiki/Dexlab/blob/main/docs/roboapi-poke.md)
-- **2026-10-31 · Model-evaluation protocol:** added the public evaluation, anti-gaming, evidence-state, and hidden-layout protocol. Remote execution and the public leaderboard are still under construction. [Details](model-evaluation.md)
-
-[All releases](https://github.com/huangkiki/Dexlab/releases)
-
-## Demo gallery
-
-These animations come from DexLab simulation recordings or recorded-state replays. Every result applies only to its reported version, material assumptions, and acceptance protocol.
-
-| Grasp and slip resistance | Sponge wiping and grasp dependence |
-| --- | --- |
-| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji point and torsional contact comparison" loading="lazy"></a><br>Under the same control, synthetic torsional contact reduces two-second hold drift from **2.734 mm** to **1.025 mm**. | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="Assisted sponge wiping replay" loading="lazy"></a><br>Assisted retention passes **3/3**; no assistance gives **0/3**, with final cleaning around **95.47% / 39.92%**. |
-| **Deformable manipulation** | **Cutting and topology change** |
-| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="Robot grasping a deformable cloth in recorded simulation" loading="lazy"></a><br>The robot can pinch and move a cloth patch, but complete folding still fails: the current record reaches **12.55%** edge strain against a 5% limit. | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="Tofu and banana cutting recorded-state replay" loading="lazy"></a><br>Continuous cutting and blade-face pushing create real topology changes; the full report records contact force, material separation, and retained failures. |
+*Task thumbnails illustrate task categories; real experiment recordings and evidence appear in the experiment previews above.*
 
 <section id="model-evaluation"></section>
 
@@ -169,12 +170,13 @@ No companion paper is published yet. When citing the repository, use its URL and
 :hidden:
 :maxdepth: 1
 
-Solver failure audit <solver-failure-audit>
-Co-evolution and model evaluation <model-evaluation>
-Studio replay rendering <studio-rendering>
-Cloth engine comparison <cloth-comparison>
 Experiments <experiments>
 Quickstart <quickstart>
+References <references>
+Co-evolution and model evaluation <model-evaluation>
+Solver failure audit <solver-failure-audit>
+Studio replay rendering <studio-rendering>
+Cloth engine comparison <cloth-comparison>
 Results <results>
 Coverage <coverage>
 Findings <experience>
@@ -202,6 +204,5 @@ Uranus generative environment backend <uranus-backend>
 Roadmap <dexterity>
 Ledger <research-ledger>
 Benchmark <benchmark>
-References <references>
 Contributing <contributing>
 ```
