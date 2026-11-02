@@ -1,0 +1,335 @@
+{
+  "trellis_source": "https://github.com/microsoft/TRELLIS",
+  "trellis_revision": "193e0502b5cb3eb5997ec457d5340e95d09b158e",
+  "model": "microsoft/TRELLIS-image-large",
+  "model_revision": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+  "samplers": {
+    "steps": 25,
+    "cfg_strength": 5,
+    "cfg_interval": [
+      0.5,
+      1
+    ],
+    "rescale_t": 3
+  },
+  "web_export": {
+    "simplify": 0.94,
+    "texture_size": 1024,
+    "fill_holes": true,
+    "material": {
+      "metallicFactor": 0.0,
+      "roughnessFactor": 1.0,
+      "note": "Explicit nonmetallic fabric; source export omitted metallicFactor, whose glTF default is 1. Texture and geometry binary chunks are unchanged."
+    }
+  },
+  "coacd_version": "1.0.14",
+  "assets": [
+    {
+      "source_glb_sha256": "875f90fdf22ef127c46de879b64a7d49774162157de3928476ca17f5f761fe88",
+      "height_m": 0.086,
+      "yaw_degrees": 90.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08607910792383693,
+      "source_bounds": [
+        [
+          -0.2927435040473938,
+          -0.4989413917064667,
+          -0.3093850910663605
+        ],
+        [
+          0.2917347848415375,
+          0.500139594078064,
+          0.31319794058799744
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 11,
+      "triangles": 8306,
+      "glb_sha256": "7d946b9bacd09ebf6905801f05829b9cf36d1984dbf2699d9279494e345aceac",
+      "texture_recovery": "Pillow enabled embedded texture decoding; faces equal and vertices match the original collider input within 1e-8 m absolute / 1e-6 relative tolerance.",
+      "kind": "frog",
+      "input": "inputs/frog.png",
+      "seed": 1,
+      "generation_input_sha256": "2fe572172c3ad6bac28646f3077f6544cc6fdede486626da2270fdb4cfbdc768",
+      "source_png_sha256": "00b52654f74be5a9548d0a5c126879779543b9b3053b01bae4f1fb017def5034",
+      "glb_bytes": 1272380,
+      "collision_note": "Threshold is an optimization target, not a guaranteed error bound; the 16-hull cap may exceed it.",
+      "mass_distribution": {
+        "uniform_volume_fraction": 0.4,
+        "foot_ballast_fraction": 0.6,
+        "foot_hulls": [
+          3,
+          4
+        ],
+        "reason": "Synthetic weighted feet to stabilize the generated sloped soles; no added constraints or attachment."
+      },
+      "collision_warnings": []
+    },
+    {
+      "source_glb_sha256": "3110be6064dd54c9bcbc659a4a9fc0c5ae2224cce805d7588e5b593cae059dcf",
+      "height_m": 0.094,
+      "yaw_degrees": 180,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.09403379725202499,
+      "source_bounds": [
+        [
+          -0.4352032542228699,
+          -0.4996350407600403,
+          -0.3230574429035187
+        ],
+        [
+          0.43771955370903015,
+          0.5000055432319641,
+          0.3293348252773285
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 13516,
+      "glb_sha256": "acae7a19b079cb93e5a709798f027af66ed97e5b364490cf2152dc8bee9d141b",
+      "texture_recovery": "Pillow enabled embedded texture decoding; faces equal and vertices match the original collider input within 1e-8 m absolute / 1e-6 relative tolerance.",
+      "kind": "mouse",
+      "input": "inputs/mouse.png",
+      "seed": 1,
+      "generation_input_sha256": "c20bc577bf7e8aae86737cac6ce26a78210c33724b06780bf432a5fb833380bd",
+      "source_png_sha256": "516c44fbc47d7d42abac0d34aa02a5c30a948726efe5fe692c8dfece403f4bba",
+      "glb_bytes": 1495556,
+      "collision_note": "Threshold is an optimization target, not a guaranteed error bound; the 16-hull cap may exceed it.",
+      "facing_note": "Front verified from camera formula: native yaw0 is +Y, yaw180 is -Y. Visual and collision vertices rotated together.",
+      "collision_warnings": [
+        "Max concavity 0.13122024141298705 exceeds the threshold 0.055 due to 16 convex hull limitation"
+      ]
+    },
+    {
+      "source_glb_sha256": "09fd9210a0a79b93efea2877b112a1737c32868990c03ed7d6dcf630a978314d",
+      "height_m": 0.069,
+      "yaw_degrees": 180,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.06946220109164515,
+      "source_bounds": [
+        [
+          -0.48277658224105835,
+          -0.4993317127227783,
+          -0.4821707606315613
+        ],
+        [
+          0.4824945032596588,
+          0.49401429295539856,
+          0.483104407787323
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 10,
+      "triangles": 27472,
+      "glb_sha256": "ffc0ed61d5a889fa556e34acec6b207d81e9269e39b6268276ee6dae0e73eff0",
+      "texture_recovery": "Pillow enabled embedded texture decoding; faces equal and vertices match the original collider input within 1e-8 m absolute / 1e-6 relative tolerance.",
+      "kind": "bean",
+      "input": "inputs/bean.png",
+      "seed": 1,
+      "generation_input_sha256": "884b9bf60487fa1bd2241cb49265b127631f9b9b3080886b1674796b2242f5f6",
+      "source_png_sha256": "ed427aad3f2a3ca2f4162fc4698c557ef7880c82191de7f3c959e7a9aedd0b1c",
+      "glb_bytes": 1773316,
+      "collision_note": "Threshold is an optimization target, not a guaranteed error bound; the 16-hull cap may exceed it.",
+      "facing_note": "Front verified from camera formula: native yaw0 is +Y, yaw180 is -Y. Visual and collision vertices rotated together.",
+      "collision_warnings": []
+    },
+    {
+      "source_glb_sha256": "88d7eeae33a68499daf26786ae939f2a2f7c974380b8d502243761076830637c",
+      "height_m": 0.087,
+      "yaw_degrees": 0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08704373661873913,
+      "source_bounds": [
+        [
+          -0.3686634600162506,
+          -0.49897706508636475,
+          -0.4498292803764343
+        ],
+        [
+          0.36386850476264954,
+          0.5005204677581787,
+          0.4537609815597534
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 20578,
+      "glb_sha256": "0179b88d414e7ce4f2a7f83241702f00e3eee4f3e5ee0ba49b03a72552d083a9",
+      "texture_recovery": "Pillow enabled embedded texture decoding; faces equal and vertices match the original collider input within 1e-8 m absolute / 1e-6 relative tolerance.",
+      "kind": "chicken",
+      "input": "inputs/chicken.png",
+      "seed": 1,
+      "generation_input_sha256": "b13f9c68ff42e47f637ccc8855b23b65f20a4cb370699c65100062e1983f1d9d",
+      "source_png_sha256": "7fd96f0e5eb86408e70f4a9ee2f7127f0770ac0f506f142c5cb5d046d8a9a71e",
+      "glb_bytes": 1732340,
+      "collision_note": "Threshold is an optimization target, not a guaranteed error bound; the 16-hull cap may exceed it.",
+      "mass_distribution": {
+        "uniform_volume_fraction": 0.4,
+        "foot_ballast_fraction": 0.6,
+        "foot_hulls": [
+          9,
+          11
+        ],
+        "reason": "Synthetic weighted feet to stabilize the generated sloped soles; no added constraints or attachment."
+      },
+      "facing_note": "Front verified from camera formula: native yaw0 is +Y, yaw180 is -Y. Visual and collision vertices rotated together.",
+      "collision_warnings": [
+        "Max concavity 0.14813485233336524 exceeds the threshold 0.055 due to 16 convex hull limitation"
+      ]
+    },
+    {
+      "source_glb_sha256": "f90f123ba84ce202f2af35d13420c0061abf94b7fccfc6f299ff27432836e248",
+      "height_m": 0.076,
+      "yaw_degrees": 0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.0761793053501231,
+      "source_bounds": [
+        [
+          -0.4997410476207733,
+          -0.4975810647010803,
+          -0.4754222333431244
+        ],
+        [
+          0.49975723028182983,
+          0.5000652074813843,
+          0.4800926446914673
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 25118,
+      "glb_sha256": "9cbb7755efab22f88b9eb62561ec3e94f8e5b9273c28e3a56ac183036b23a789",
+      "kind": "cat",
+      "input": "inputs/cat.png",
+      "seed": 0,
+      "generation_input_sha256": "3bcd49906e2878ac2d1c20c304cbe7227b2d5ad4241ee4e82bcfb255179aeab8",
+      "source_png_sha256": "e08bf7c64d56f8a6cdd71fc400641d7eb93e224cad929b6a1c0f3aac6d0502a4",
+      "glb_bytes": 1820984,
+      "collision_note": "Threshold is an optimization target, not a guaranteed error bound; the 16-hull cap may exceed it.",
+      "facing_note": "Front verified from camera formula: native yaw0 is +Y, yaw180 is -Y. Visual and collision vertices rotated together.",
+      "collision_warnings": [
+        "Max concavity 0.17525634770248796 exceeds the threshold 0.055 due to 16 convex hull limitation"
+      ]
+    },
+    {
+      "source_glb_sha256": "46273ad28d12a1f505ba09c2338cb157a9073480546a0b7ce620219ce3adbb4e",
+      "height_m": 0.112,
+      "yaw_degrees": 0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.11196547714392749,
+      "source_bounds": [
+        [
+          -0.27503785490989685,
+          -0.5002110600471497,
+          -0.3647240698337555
+        ],
+        [
+          0.2750415802001953,
+          0.5000972747802734,
+          0.37128257751464844
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 13860,
+      "glb_sha256": "72d2ff7b2fa3cf25114eaa43194fed00145c8a811b16cb486222ec6da561d988",
+      "texture_recovery": "Pillow enabled embedded texture decoding; faces equal and vertices match the original collider input within 1e-8 m absolute / 1e-6 relative tolerance.",
+      "kind": "rabbit",
+      "input": "inputs/rabbit.png",
+      "seed": 1,
+      "generation_input_sha256": "36c0b8e92c95ad9fb15081215260d5c1170c7fbaa6950a3408d67d1f309b2922",
+      "source_png_sha256": "4132d422a567d3b6a4a86dbde333f5363e8ee5750b1768e721ceab9366747e65",
+      "glb_bytes": 1445804,
+      "collision_note": "Threshold is an optimization target, not a guaranteed error bound; the 16-hull cap may exceed it.",
+      "facing_note": "Front verified from camera formula: native yaw0 is +Y, yaw180 is -Y. Visual and collision vertices rotated together.",
+      "collision_warnings": [
+        "Max concavity 0.11714611723340176 exceeds the threshold 0.055 due to 16 convex hull limitation"
+      ]
+    }
+  ],
+  "collisions_sha256": "c9663ce4c71c4b06767fe190bf274f8b066a8a275c1b8c381d1d581570ec1f21"
+}

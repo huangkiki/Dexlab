@@ -1,0 +1,475 @@
+:root {
+  color-scheme: dark;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  color: #edf2f4;
+  background: #121a22;
+  --muted: #b6c3cc;
+  --edge: #354752;
+  --mint: #a4e5cb;
+}
+* {
+  box-sizing: border-box;
+  scrollbar-color: #657888 #121a22;
+  scrollbar-width: thin;
+}
+body {
+  margin: 0;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.48;
+  cursor: default;
+}
+a {
+  color: #b5d5f7;
+  text-underline-offset: 0.22em;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+canvas:focus-visible {
+  outline: 3px solid #b5d5f7;
+  outline-offset: 3px;
+}
+::selection {
+  background: var(--mint);
+  color: #12261d;
+}
+[hidden] {
+  display: none !important;
+}
+.claw-page {
+  max-width: 1160px;
+  padding: 24px;
+  margin: auto;
+}
+.game-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: clamp(24px, 3vw, 31px);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+}
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+.game-heading p {
+  font-size: 14px;
+  color: var(--muted);
+}
+.quiet-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  background: #17232d;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.quiet-button:hover {
+  background: #2a3b48;
+}
+.machine-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.scene-panel {
+  position: relative;
+  min-width: 0;
+  background: #17212b;
+}
+#claw-canvas {
+  display: block;
+  width: 100%;
+  height: 480px;
+  touch-action: none;
+}
+.scene-tools {
+  position: absolute;
+  z-index: 1;
+  inset: 14px 14px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+.scene-tools span {
+  color: #edf2f4;
+  background: #17232d;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+.scene-tools button {
+  pointer-events: auto;
+}
+.camera-help {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  color: #c2ced7;
+  background: #17232d;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 11px;
+  pointer-events: none;
+}
+.controls {
+  padding: 19px 17px;
+  background: #1d2933;
+}
+.round-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--edge);
+  font-size: 13px;
+}
+.round-stats strong {
+  font-size: 18px;
+  margin-left: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.round-stats > span + span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.play-controls {
+  padding-top: 18px;
+}
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+.move-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 51px;
+  border: 1px solid #546c7a;
+  border-radius: 8px;
+  background: #304451;
+  touch-action: none;
+  user-select: none;
+  font-size: 11px;
+  gap: 2px;
+}
+.move-button svg {
+  height: 20px;
+  width: 20px;
+}
+.move-button:hover,
+.move-button.is-held {
+  background: #496373;
+}
+.forward {
+  grid-column: 2;
+}
+.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.back {
+  grid-column: 2;
+  grid-row: 2;
+}
+.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+.left svg {
+  transform: rotate(-90deg);
+}
+.back svg {
+  transform: rotate(180deg);
+}
+.right svg {
+  transform: rotate(90deg);
+}
+.drop-button {
+  width: 100%;
+  min-height: 57px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  border-radius: 9px;
+  color: #173a2f;
+  background: var(--mint);
+  font-size: 20px;
+  font-weight: 700;
+}
+.drop-button:hover:not(:disabled) {
+  background: #c0f2df;
+}
+kbd {
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 400;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+.input-help {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 10px 0 18px;
+}
+.input-help span {
+  display: block;
+  margin-top: 2px;
+}
+.toy-collection h2 {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.toy-collection ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 6px;
+}
+.toy-collection li {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 0 5px;
+  align-items: center;
+  font-size: 11px;
+}
+.toy-portrait {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background-size: 300% 200%;
+  background-color: #f6f2e6;
+  grid-row: span 2;
+}
+.toy-status {
+  font-size: 9px;
+  color: #a6b6c0;
+}
+.is-won .toy-portrait {
+  opacity: 1;
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+}
+.is-won .toy-status {
+  color: var(--mint);
+}
+.round-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 65px;
+  padding: 13px 0;
+}
+.round-feedback p {
+  font-size: 15px;
+}
+.round-feedback > span {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.is-win p {
+  color: var(--mint);
+}
+footer {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--edge);
+  padding-top: 13px;
+  color: var(--muted);
+  font-size: 11px;
+}
+footer details {
+  width: 100%;
+}
+summary {
+  cursor: pointer;
+  min-height: 30px;
+  line-height: 30px;
+}
+details p {
+  max-width: 78ch;
+  margin: 8px 0;
+}
+@media (max-width: 760px) {
+  .claw-page {
+    padding: 16px;
+  }
+  .machine-layout {
+    grid-template-columns: 1fr;
+  }
+  #claw-canvas {
+    height: 390px;
+  }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    padding: 16px;
+  }
+  .round-stats {
+    grid-column: 1/-1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 11px;
+  }
+  .play-controls {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  .input-help {
+    margin: 0;
+    align-self: end;
+    grid-column: 1;
+  }
+  .toy-collection {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    align-self: center;
+  }
+  .drop-button kbd {
+    display: none;
+  }
+  .round-feedback {
+    align-items: start;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .camera-help {
+    font-size: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .claw-page {
+    padding: 12px;
+  }
+  .game-heading {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .game-heading h1 {
+    font-size: 24px;
+  }
+  .game-heading p {
+    font-size: 12px;
+  }
+  .quiet-button {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+  .scene-tools {
+    inset: 10px 10px auto;
+  }
+  .scene-tools span {
+    font-size: 10px;
+  }
+  #claw-canvas {
+    height: 350px;
+  }
+  .controls {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 10px;
+  }
+  .play-controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .drop-button {
+    height: 82px;
+    margin: 0;
+    font-size: 23px;
+  }
+  .direction-pad {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .move-button {
+    min-height: 46px;
+    font-size: 10px;
+  }
+  .input-help {
+    grid-column: 1;
+    font-size: 10px;
+    margin: 0;
+  }
+  .input-help br {
+    display: none;
+  }
+  .input-help span {
+    display: none;
+  }
+  .toy-collection {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .toy-collection h2 {
+    display: none;
+  }
+  .toy-collection ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;
+  }
+  .toy-collection li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+  }
+  .toy-status {
+    display: none;
+  }
+  .round-feedback p {
+    font-size: 13px;
+  }
+  footer {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+}

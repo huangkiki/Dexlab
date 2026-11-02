@@ -75,16 +75,16 @@
 <a id="whats-new"></a>
 ## What's new
 
+- **2026-11-03** — [在线抓娃娃机](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)：移动、瞄准、下爪，收集六只奶家族玩偶。
 - **2026-11-03** — 上线[灵巧操作仿真调研原版](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)，并沿原有六层框架补入 14 篇相关工作与 1 篇背景参考。
 - **2026-11-02** — 新增[灵巧手仿真导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html)与 [Newton 35 篇论文分类](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)。
 - **2026-10-31** — 发布 [RoboAPI 会话适配](docs/roboapi-poke.zh-CN.md)：模型发现、连续会话与动作回执；任务映射待接入。
-- **2026-10-28** — 上线 [MuJoCo 浏览器实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)，交互查看接触行为。
 - **2026-10-26** — 发布 [Wuji 双指夹球对照](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)、独立评分与离线复算包。
 
 <a id="quickstart"></a>
 ## 快速开始
 
-**先试一下，无需安装：** 打开[在线实验室](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)，在浏览器中运行 MuJoCo 并查看接触行为。
+**先试一下，无需安装：** 打开[在线实验室](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)，玩一局 MuJoCo 抓娃娃机：瞄准、下爪，玩偶落入取物盒才计分。
 
 **运行第一个本地任务：** 推荐从苹果抓梗开始。Linux x86_64 上安装 [uv](https://docs.astral.sh/uv/getting-started/installation/) 后：
 

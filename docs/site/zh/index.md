@@ -88,20 +88,19 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 [完整实验目录](experiments.md) · [全部结果与失败](results.md) · [研究经验](experience.md)
 
 (live-lab)=
-## Browser live lab
+## 来抓一只娃娃
 
-下面直接在当前网页运行 MuJoCo 3.17 WebAssembly，并使用浏览器本地 WebGPU 渲染。它展示同一方块、重力、摩擦、初态和时间步长下的不同求解配置；浏览器运行不会继承原生实验成绩。
+用方向键、WASD 或屏幕按钮移动爪子，瞄准后按空格或「下爪」。三爪会自动下降、合拢、提起并送往金色取物口；玩偶真正落进盒子并停稳，才算抓到。可以切换俯视瞄准，随时再来一局。
 
 ```{raw} html
+<p><a href="../../_static/live-lab/index.html?lang=zh" target="_blank" rel="noopener">放大玩抓娃娃机</a></p>
 <div class="dexlab-live-lab">
-  <iframe
-    src="../../_static/live-lab/index.html?embed=1"
-    title="DexLab 浏览器实时仿真实验"
-    loading="lazy"
-    allow="fullscreen"
-  ></iframe>
+  <iframe src="../../_static/live-lab/index.html?embed=1&amp;lang=zh"
+    title="DexLab 抓娃娃机" loading="eager" allow="fullscreen"></iframe>
 </div>
 ```
+
+MuJoCo 在你的浏览器本地计算接触。这里的奶蛙、奶鼠、奶豆、奶鸡、奶猫、奶兔由本地图生 3D 模型生成毛绒外观，物理上仍是使用近似碰撞外形的合成刚体；抓取没有吸附或随机中奖，也不代表软体玩偶或真机验证。实验内保留了原来的求解配置对比。
 
 (quickstart)=
 ## Quick start

@@ -88,20 +88,19 @@ Together, these results show why a success video is insufficient: **material mod
 [Full experiments](experiments.md) · [All results and failures](results.md) · [Research findings](experience.md)
 
 (live-lab)=
-## Browser live lab
+## Play the claw machine
 
-Run MuJoCo 3.17 WebAssembly and render with the browser's WebGPU device. These browser runs do not inherit native experiment scores.
+Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Space or Drop claw. The three-finger claw descends, closes, lifts and returns to the gold chute. A prize counts only after it actually lands and settles in the bin. Switch to top view to aim, and try as often as you like.
 
 ```{raw} html
+<p><a href="../../_static/live-lab/index.html?lang=en" target="_blank" rel="noopener">Open the claw machine in a larger view</a></p>
 <div class="dexlab-live-lab">
-  <iframe
-    src="../../_static/live-lab/index.html?embed=1"
-    title="DexLab browser live simulation lab"
-    loading="lazy"
-    allow="fullscreen"
-  ></iframe>
+  <iframe src="../../_static/live-lab/index.html?embed=1&amp;lang=en"
+    title="DexLab claw machine" loading="eager" allow="fullscreen"></iframe>
 </div>
 ```
+
+MuJoCo computes contact locally in your browser. The six Nai-family prizes (frog, mouse, bean, chicken, cat and rabbit) use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The original solver comparison remains available inside the lab.
 
 (quickstart)=
 ## Quick start
