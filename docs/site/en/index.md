@@ -130,6 +130,8 @@ To inspect the evidence chain without installing a simulator, start with [Quicks
 5. **Policy and neural backends:** test whether API rankings and task conclusions transfer from native physics to learned world models.
 6. **Co-evolution:** after evidence supports it, use model failures to improve simulation and improved simulation to train and evaluate better models.
 
+**CHORD migration preparation:** fixed task cards, asset preflight and finite upstream command preparation are available; native training/recording/scoring remain pending (0/3 migrated). [Prepare a task](https://github.com/huangkiki/Dexlab/blob/main/demos/chord/README.md).
+
 ## Ecosystem backend: Uranus
 
 [Uranus](https://arxiv.org/abs/2609.24815) is a D-Robotics robot video world model that generates multi-view observations from future `qpos`, cameras, and robot geometry. It is currently a **documented candidate generative backend**, not a verified physics backend.

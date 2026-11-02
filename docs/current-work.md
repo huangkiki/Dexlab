@@ -2,7 +2,11 @@
 
 [English](current-work.md) | [简体中文](current-work.zh-CN.md)
 
-**Decision date: 2026-10-26. The maintainer has authorized interactive autodev execution of the sequence below; scheduled development remains PAUSED.** This is the sole current ordering entry referenced by AGENTS and the operating guide. Continue eligible slices through acceptance and delivery. Each new physics campaign still requires its frozen protocol and finite resource budget; no training or background dispatch is authorized.
+**Decision date: 2026-10-26. The maintainer has authorized interactive autodev execution of the sequence below; scheduled development remains PAUSED.** This is the sole current ordering entry referenced by AGENTS and the operating guide. Continue eligible slices through acceptance and delivery. Each new physics campaign still requires its frozen protocol and finite resource budget; the CHORD scope below is the only new training preparation authorization, and background dispatch remains paused.
+
+## Interactive CHORD migration — 2026-11-02
+
+The maintainer requested the first CHORD task migration batch in [#282](https://github.com/huangkiki/Dexlab/issues/282). Start with the bounded preparation slice [#283](https://github.com/huangkiki/Dexlab/issues/283), then qualify native tissue-box execution before the two licensed ARCTIC tasks. The parent retains all three tasks and actual finite training, recording and independent evaluation. This interactive authorization does not resume scheduled dispatch; training requires its own measured resource plan.
 
 ## Status reconciliation — 2026-10-29
 

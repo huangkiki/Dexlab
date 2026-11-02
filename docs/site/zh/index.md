@@ -130,6 +130,8 @@ bash demos/apple-stem-grasp/run.sh \
 5. **Policy and neural backends：** 检查 API 排名和任务结论能否从原生物理迁移到 learned world model。
 6. **Co-evolution：** 在证据支持后，用模型失败推动仿真改进，再用改进的仿真产生更可信的策略训练与评测。
 
+**CHORD 迁移准备：** 已有固定任务卡、资产预检和有限上游命令准备入口；原生训练、记录与评分尚待贯通（0/3）。[准备任务](https://github.com/huangkiki/Dexlab/blob/main/demos/chord/README.zh-CN.md)。
+
 ## Ecosystem backend: Uranus
 
 [Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前是 **documented candidate generative backend**，不是已验证物理后端。

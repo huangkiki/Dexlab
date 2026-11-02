@@ -150,6 +150,8 @@ To inspect the evidence chain without installing a simulator, start with the [GP
 
 The actual status, blockers, and next-stage entry remain in [Current Work](docs/current-work.md); it is not a completed roadmap.
 
+**CHORD migration preparation:** three task cards, asset preflight and finite train/eval command preparation are available. Native training, recording and independent scoring remain pending: 0/3 migrated. [Prepare a task](demos/chord/README.md)
+
 ## Ecosystem backend: Uranus
 
 [Uranus](https://arxiv.org/abs/2609.24815) is a D-Robotics robot video world model that generates multi-view observations from future `qpos`, cameras, and robot geometry. It is currently a **documented candidate generative backend**, not a verified physics backend.
