@@ -2,6 +2,10 @@
 
 Reading on research context and evaluation methods. External experiments are identified separately from DexLab results and do not count toward this project's engine coverage or passes.
 
+## Publications using Newton
+
+The [complete publication index](newton-publications.md) includes all 35 works in Newton's official `PUBLICATIONS.md` snapshot checked on 2026-11-02: 34 research entries and one comparison-only entry. It preserves paper titles, authors, dates and source links, with attribution to The Newton Developers under CC BY 4.0. This is an external bibliography, not a record of DexLab reproductions.
+
 ## Manda Robotics: comparing physics engines
 
 What should be compared when a task runs in different simulation configurations? The [reading guide](manda-physics-engines.md) provides configuration identities, navigation, terminology and limits, with links to the original figures and interactive replays.
@@ -24,6 +28,7 @@ Turn related work into checkable questions: do imported models match, how are fe
 ```{toctree}
 :maxdepth: 1
 
+Publications using Newton <newton-publications>
 Manda engine-comparison guide <manda-physics-engines>
 UniCross reference review <unicross>
 ```
