@@ -150,6 +150,8 @@ bash demos/apple-stem-grasp/run.sh \
 
 当前状态、阻塞和下一阶段入口在 [Current Work](docs/current-work.zh-CN.md) 中维护；它不是已完成的 roadmap。
 
+**CHORD 任务迁移准备：** 已提供三任务清单、资产预检与有限训练/评估命令准备入口；原生训练、记录与独立评分仍待贯通，当前为 0/3。[开始准备](demos/chord/README.zh-CN.md)
+
 ## Ecosystem backend: Uranus
 
 [Uranus](https://arxiv.org/abs/2609.24815) 是 D-Robotics 的机器人视频世界模型，从未来 `qpos`、相机和机器人结构生成多视角观测。它目前作为 **documented candidate generative backend** 出现在 DexLab，而不是已验证物理后端。
