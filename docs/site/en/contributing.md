@@ -6,11 +6,23 @@
 2. Keep code, configuration and entrypoints in the corresponding `demos/` directory; shared scoring lives in `src/dexlab/`.
 3. Save actual initial states, actions, trajectories, contacts and every outcome. Separate scoring from control and retain failures.
 4. Update the experiment card and report in both languages: finding, setup, metric plots, failures, limitations and reproduction.
-5. Explain the homepage impact in the PR. New capabilities, findings, significant failures and reproduction changes update README; internal-only maintenance may explain why no reader-facing update is needed.
+5. Explain reader-entry changes in the PR. Update the relevant website pages for capabilities, findings, significant failures and reproduction changes; update the concise README when positioning, representative previews or the recommended starting point changes.
 
 ## README and documentation
 
-README presents the project, current conclusions, key plots, continuous close-ups and documentation entrypoints. This site and linked source reports maintain full parameters, methods, per-case results and failure analysis. Keep code runnable and private deployment details out of public documentation.
+Keep README short: project purpose, representative experiment animations, one recommended starting point and website links. The site maintains research and usage details without duplicating full reports across README and the homepage.
+
+| Content | Where to maintain it |
+| --- | --- |
+| Purpose, representative previews and minimal commands | Both READMEs; previews link to site reports. |
+| Navigation by reader goal | The homepage Start here section, navigation and indexes. |
+| Full methods, parameters, outcomes, failures and reproduction | The relevant experiment or usage page, linked from the experiment index. |
+| External papers | References, topic guides and complete bibliographies, with sources, check dates and reading depth. |
+| Plans, blockers and incremental progress | Current Work, issues, PRs and releases. |
+
+Maintain the Newton guide in `docs/references/newton-reading-guide*.md` and its bibliography in `newton-publications*.md`; language pages include that content directly. When updating the upstream snapshot, reconcile the bibliography and seven-topic guide entry sets in both languages, preserving the comparison-only marker. Abstract checks must not be presented as full-paper reviews or reproductions.
+
+Before publication, check source pages, site navigation, language switching and README entrypoints. After merge, verify the live revision and page content. Keep code runnable and private deployment details out of public documentation.
 
 Every figure identifies versions, units, sample size, time window, uncertainty and provenance. Retain failed cases; unmatched calibration, geometry or tuning budgets do not support fair engine rankings.
 

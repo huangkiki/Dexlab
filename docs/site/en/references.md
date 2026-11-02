@@ -4,6 +4,8 @@ Reading on research context and evaluation methods. External experiments are ide
 
 ## Publications using Newton
 
+[The topic guide](newton-reading-guide.md) explains all 35 papers across seven topics, with routes through contact and differentiation, simulation calibration, and world models. Each entry has a plain-language summary and source link; the reading scope is abstracts and author pages.
+
 The [complete publication index](newton-publications.md) includes all 35 works in Newton's official `PUBLICATIONS.md` snapshot checked on 2026-11-02: 34 research entries and one comparison-only entry. It preserves paper titles, authors, dates and source links, with attribution to The Newton Developers under CC BY 4.0. This is an external bibliography, not a record of DexLab reproductions.
 
 ## Manda Robotics: comparing physics engines
@@ -28,6 +30,7 @@ Turn related work into checkable questions: do imported models match, how are fe
 ```{toctree}
 :maxdepth: 1
 
+Newton topic reading guide <newton-reading-guide>
 Publications using Newton <newton-publications>
 Manda engine-comparison guide <manda-physics-engines>
 UniCross reference review <unicross>

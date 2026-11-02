@@ -1,12 +1,31 @@
 # DexLab
 
-## Contact-rich robotics, beyond rigid-body simulation.
+**Contact-rich robotics, beyond rigid-body simulation.**
 
 DexLab 是一个以物理为中心的研究平台，用于研究接触、形变和材料分离条件下的机器人操作。
 
-[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [实验目录](experiments.md) · [研究协议](model-evaluation.md) · [快速开始](#quickstart) · [系统结构](#architecture) · [Uranus 后端](uranus-backend.md)
+[English](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [实验目录](experiments.md) · [研究协议](model-evaluation.md) · [快速开始](#quickstart) · [系统结构](#architecture) · [论文导读](newton-reading-guide.md)
 
 > 当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。
+
+## 实验预览
+
+以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
+
+| 抓取与抗滑移 | 海绵擦拭与接触依赖 |
+| --- | --- |
+| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji 点接触与合成抗扭接触对照" loading="lazy"></a><br>相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 **2.734 mm** 降至 **1.025 mm**。 | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="辅助保持下的海绵擦拭回放" loading="lazy"></a><br>辅助保持下 **3/3** 通过；去掉辅助后 **0/3**，最终清洁率约 **95.47% / 39.92%**。 |
+| **柔性物体操作** | **切割与拓扑变化** |
+| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="记录仿真中的机器人夹布" loading="lazy"></a><br>机器人能够夹住并移动布片，但完整折叠仍失败：当前记录的最大边长应变为 **12.55%**，超过预设 5% 上限。 | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="豆腐和香蕉切割的记录状态表面回放" loading="lazy"></a><br>连续切割与刀面推动会产生仿真状态的拓扑变化；完整报告还记录接触力、材料分离与失败。 |
+
+## 从这里开始
+
+| 你想做什么 | 推荐入口 |
+| --- | --- |
+| 看实验、复查结果或复现任务 | [实验目录](experiments.md) → [安装复现](quickstart.md)；只核对已有证据可从{ref}`无需 GPU 的擦拭复算 <offline-evidence>`开始。 |
+| 理解接触失败与后端差异 | [失败归因](solver-failure-audit.md) → [求解配置分层](solver-taxonomy.md) → [完整结果](results.md)。 |
+| 接入模型或理解评测约定 | [模型评测协议](model-evaluation.md)；远程执行与公开榜单尚未完成。 |
+| 阅读相关论文 | [Newton 七类论文导读](newton-reading-guide.md) → [完整书目](newton-publications.md)；其他资料见[参考目录](references.md)。 |
 
 ## Research vision: Simulation–Learning Co-evolution
 
@@ -21,25 +40,7 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 任务协议固定场景与预算；模型输出动作，经控制器映射到物理后端或候选生成式后端；原生状态、接触读回与结果由独立证据层记录和评分。反馈回路只有在对应证据成立后才算完成。
 
-*架构图中的任务缩略图用于说明任务类型；真实实验录像和证据见下方 Demo gallery。*
-
-## What's new
-
-- **2026-10-31 · Uranus 生成式后端：** 新增候选后端契约、候选任务、native/generative 配对评测方案与证据边界。当前是文档化候选，尚无 DexLab runner。[查看详情](uranus-backend.md)
-- **2026-10-31 · Poke RoboAPI 适配：** 新增模型发现、schema/session、动作校验、执行反馈和凭据安全 CLI；逐任务观测/动作映射仍待接入。[查看详情](https://github.com/huangkiki/Dexlab/blob/main/docs/roboapi-poke.zh-CN.md)
-- **2026-10-31 · 模型评测协议：** 新增公开评测、防刷榜、证据状态与隐藏布局协议；远程执行和公开榜仍在建设。[查看详情](model-evaluation.md)
-
-[全部 Releases](https://github.com/huangkiki/Dexlab/releases)
-
-## Demo gallery
-
-以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
-
-| 抓取与抗滑移 | 海绵擦拭与接触依赖 |
-| --- | --- |
-| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji 点接触与合成抗扭接触对照" loading="lazy"></a><br>相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 **2.734 mm** 降至 **1.025 mm**。 | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="辅助保持下的海绵擦拭回放" loading="lazy"></a><br>辅助保持下 **3/3** 通过；去掉辅助后 **0/3**，最终清洁率约 **95.47% / 39.92%**。 |
-| **柔性物体操作** | **切割与拓扑变化** |
-| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="记录仿真中的机器人夹布" loading="lazy"></a><br>机器人能够夹住并移动布片，但完整折叠仍失败：当前记录的最大边长应变为 **12.55%**，超过预设 5% 上限。 | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="豆腐和香蕉切割的记录状态表面回放" loading="lazy"></a><br>连续切割与刀面推动会产生真实的状态拓扑变化；完整报告还记录接触力、材料分离与失败。 |
+*架构图中的任务缩略图用于说明任务类型；真实实验录像和证据见上方实验预览。*
 
 <section id="model-evaluation"></section>
 
@@ -169,12 +170,13 @@ bash demos/apple-stem-grasp/run.sh \
 :hidden:
 :maxdepth: 1
 
-Solver 失败复盘 <solver-failure-audit>
-共同进化与模型评测 <model-evaluation>
-高质量轨迹回放 <studio-rendering>
-布料引擎对比 <cloth-comparison>
 实验目录 <experiments>
 安装复现 <quickstart>
+外部参考 <references>
+共同进化与模型评测 <model-evaluation>
+Solver 失败复盘 <solver-failure-audit>
+高质量轨迹回放 <studio-rendering>
+布料引擎对比 <cloth-comparison>
 研究结果 <results>
 完整覆盖 <coverage>
 研究经验 <experience>
@@ -202,6 +204,5 @@ Uranus 生成式环境后端 <uranus-backend>
 研究路线 <dexterity>
 研究账本 <research-ledger>
 基准 <benchmark>
-外部参考 <references>
 参与贡献 <contributing>
 ```

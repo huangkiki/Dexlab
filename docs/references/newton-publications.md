@@ -9,6 +9,8 @@ Source: **The Newton Developers**, [fixed revision `a35c691`](https://github.com
 
 The categories reflect Newton's maintainers' classification. Inclusion here does not mean DexLab has read every full paper, qualified its Newton configuration or reproduced its results. External results do not count toward DexLab's experiment coverage or passes.
 
+Start with the [seven topics and suggested reading routes](https://huangkiki.github.io/Dexlab/en/latest/newton-reading-guide.html) for a plain-language explanation of what each paper studies.
+
 ## Research using or developing Newton
 
 ### 2026
