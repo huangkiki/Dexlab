@@ -75,6 +75,7 @@
 <a id="whats-new"></a>
 ## What's new
 
+- **2026-11-03** — 上线[灵巧操作仿真调研原版](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)，并沿原有六层框架补入 14 篇相关工作与 1 篇背景参考。
 - **2026-11-02** — 新增[灵巧手仿真导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html)与 [Newton 35 篇论文分类](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)。
 - **2026-10-31** — 发布 [RoboAPI 会话适配](docs/roboapi-poke.zh-CN.md)：模型发现、连续会话与动作回执；任务映射待接入。
 - **2026-10-28** — 上线 [MuJoCo 浏览器实验](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)，交互查看接触行为。
@@ -107,7 +108,8 @@ bash demos/apple-stem-grasp/run.sh \
 网站持续维护完整实验报告、使用指南和研究资料：
 
 - **看实验**：[实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [结果与覆盖](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) · [失败复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)
-- **理解方法**：[灵巧手仿真导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html) · [求解器与接触模型](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html) · [论文与参考资料](https://huangkiki.github.io/Dexlab/zh-cn/latest/references.html)
+- **研究导览**：[当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)——保留本机原版的排版、正文和筛选功能，追加[10 月相关论文](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026)。
+- **理解方法**：[求解器与接触模型](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html) · [论文与参考资料](https://huangkiki.github.io/Dexlab/zh-cn/latest/references.html)
 - **参与项目**：[贡献指南](https://huangkiki.github.io/Dexlab/zh-cn/latest/contributing.html) · [当前工作](docs/current-work.zh-CN.md) · [问题与建议](https://github.com/huangkiki/Dexlab/issues)
 
 代码采用 [Apache-2.0](LICENSE) 许可；第三方资产遵循各自许可。研究使用请参考[引用说明](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#documentation-and-citation)。

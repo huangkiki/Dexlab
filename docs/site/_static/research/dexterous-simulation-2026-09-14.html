@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="2024–2026灵巧操作仿真：分层筛选38篇arXiv论文，核验19个仓库，完整精读7篇。保留原六层结构，补入HydroShear。" name="description"/><title>当我们在讨论灵巧操作仿真时，我们在讨论什么？</title><style>
+:root{--ink:#172b2d;--muted:#5e706f;--paper:#f5f4ee;--card:#fffefa;--line:#d8ded5;--green:#176652;--lime:#d9efaa;--orange:#ad512d}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}a:hover{color:var(--orange)}button,input,select{font:inherit}button,a,input,select,summary{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #b57935;outline-offset:4px}header{border-bottom:1px solid var(--line);background:rgba(245,244,238,.97);position:sticky;top:0;z-index:5}.nav{max-width:1340px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:15px 36px;gap:24px}.brand{font-size:13px;font-weight:800;letter-spacing:.12em}.nav-links{display:flex;gap:24px;white-space:nowrap}.nav a{text-decoration:none;font-size:14px}main{max-width:1340px;margin:auto;padding:0 36px}.hero{padding:76px 0 58px;display:grid;grid-template-columns:1.35fr 1fr;gap:65px;align-items:center}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--green)}h1{font-size:clamp(35px,4.3vw,62px);line-height:1.26;letter-spacing:-.045em;margin:22px 0 24px;font-weight:800}h1 span{color:var(--green)}.lead{font-size:19px;line-height:1.9;max-width:710px;color:#3d5656}.hero-side{background:var(--ink);color:#f4f5e8;border-radius:20px;padding:30px;box-shadow:0 15px 40px #132e2a0d}.hero-side h2{font-size:22px;margin:0 0 20px}.loop{display:grid;grid-template-columns:1fr 1fr;gap:12px}.loop div{padding:15px;background:#274445;border:1px solid #45605d;border-radius:9px}.loop b{color:var(--lime);font-size:13px}.loop span{display:block;font-size:17px;margin-top:4px}.hero-side p{font-size:14px;color:#c6d8cd;margin-bottom:0}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.chip,.tag{display:inline-block;font-size:12px;padding:3px 10px;border-radius:30px;background:#e9ede4;color:#446052}.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;margin-bottom:64px}.stat{padding:0 24px;border-right:1px solid var(--line)}.stat:first-child{padding-left:0}.stat:last-child{border:0}.stat b{font-size:40px;line-height:1.15;font-weight:750;letter-spacing:-.035em}.stat span{display:block;color:var(--muted);font-size:13px;margin-top:7px}.section{margin:0 0 76px}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:24px}.section-heading h2{font-size:30px;line-height:1.35;letter-spacing:-.03em;margin:6px 0}.section-heading p{margin:0;max-width:480px;color:var(--muted);font-size:14px}.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}.funnel{display:flex;flex-direction:column;gap:10px}.stage{padding:19px 24px;display:flex;justify-content:space-between;align-items:center;background:#e1e7d8;border-radius:8px}.stage:nth-child(2){width:89%;background:#cbd9b9}.stage:nth-child(3){width:77%;background:#84b499}.stage:nth-child(4){width:65%;background:var(--green);color:white}.stage b{font-size:27px}.stage small{display:block;font-size:12px}.method{padding:24px 28px;background:#efeee3;border-radius:12px}.method h3{margin-top:0}.method p{font-size:14px}.method .tiny{font-size:12px;color:var(--muted)}.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.layer{border:1px solid var(--line);border-radius:12px;padding:25px;background:var(--card)}.number{font:600 13px ui-monospace,monospace;color:var(--green)}h3{font-size:19px;line-height:1.5;margin:12px 0}.terms{font-size:13px;color:var(--green)}.layer p{font-size:14px}.layer small{color:var(--muted);font-size:12px}.deep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.deep-card{padding:26px;background:var(--card);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column}.card-top{display:flex;justify-content:space-between;gap:8px;font-size:13px}.metric{font-size:37px;color:var(--green);font-weight:760;margin:10px 0 0;line-height:1.3}.unit{font-size:12px;color:var(--muted);margin:5px 0 10px}.deep-card p{font-size:14px;flex:1}.note-link{font-size:12px;border-top:1px solid var(--line);padding-top:14px}.filterbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#e8ecdf;padding:16px;border-radius:10px;margin-bottom:14px}input,select{border:1px solid #c8d1c3;border-radius:7px;background:var(--card);padding:10px 12px;color:var(--ink);min-width:0}input{flex:1;min-width:200px}select{max-width:100%}.filter-count{font-size:12px;color:var(--muted);margin:0 0 16px}.paper-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-height:920px;overflow-y:auto;padding:2px 8px 10px 2px;overscroll-behavior:contain}.paper{padding:22px;background:var(--card);border:1px solid var(--line);border-radius:10px}.paper-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);gap:8px}.deep-tag{color:var(--green);background:var(--lime)}.paper h3{font-size:18px;overflow-wrap:anywhere}.paper-title{font-size:12px;line-height:1.55;color:var(--muted);min-height:56px}.paper p{font-size:13px}.paper p strong{display:block;color:var(--ink);font-size:11px;letter-spacing:.08em}.boundary{color:#805339}.paper small{display:block;font-size:10px;line-height:1.65;color:var(--muted)}[hidden]{display:none!important}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}table{border-collapse:collapse;width:100%;text-align:left;font-size:13px}th{background:#e6ebdd;color:#35524a;white-space:nowrap}td,th{padding:17px 18px;border-bottom:1px solid var(--line);vertical-align:top}td small{display:block;font-size:11px;line-height:1.65;color:var(--muted);margin-top:8px}td:first-child{min-width:220px}td:nth-child(2),td:nth-child(3){min-width:230px}td:last-child{min-width:118px}tr:last-child td{border:0}.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route{background:#e4e9d9;border-radius:12px;padding:26px}.route b{font-size:34px;font-weight:550;color:var(--green)}.route p{font-size:14px}.route .exit{border-top:1px solid #c4ceb8;padding-top:12px;color:#755137;font-size:13px}.callout{padding:26px 30px;border-left:4px solid var(--green);background:#e5ebdd;margin:28px 0;font-size:18px;line-height:1.9}details.full{border:1px solid var(--line);border-radius:12px;background:var(--card)}summary{cursor:pointer;padding:22px 28px;font-weight:650;list-style-position:inside}.full-body{max-width:1040px;padding:10px 32px 32px;margin:auto;overflow-wrap:anywhere}.full-body h1{font-size:32px}.full-body h2{font-size:24px;margin-top:40px}.full-body h3{font-size:19px;margin-top:26px}.full-body p,.full-body li{font-size:15px}.full-body table{display:block;overflow-x:auto;margin:22px 0}.full-body td{min-width:120px}.full-body blockquote{margin:24px 0;border-left:3px solid var(--green);padding:8px 20px;background:#eef1e6}.equation-text{padding:20px;background:#e8eddf;border-radius:8px;text-align:center;font-size:15px}.export{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.export a{padding:10px 17px;border:1px solid var(--green);border-radius:7px;text-decoration:none;font-size:13px}.footer{padding:25px 0 40px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.empty{padding:25px;color:var(--muted)}
+@media(max-width:960px){.hero{grid-template-columns:1fr;gap:24px;padding:46px 0}.hero-side{max-width:none}.layers,.deep-grid,.paper-grid{grid-template-columns:repeat(2,1fr)}.section-heading{align-items:start;flex-direction:column;gap:8px}.routes{grid-template-columns:1fr}.funnel-grid{gap:20px}.nav-links{gap:15px}.stat{padding:0 16px}}
+@media(max-width:600px){body{font-size:15px}main{padding:0 20px}.nav{padding:12px 20px;flex-direction:column;align-items:start;gap:6px}.nav-links{gap:16px;width:100%;overflow:auto}.nav a{font-size:12px}h1{font-size:36px}.hero{padding-top:32px}.lead{font-size:16px}.hero-side{padding:22px}.loop div{padding:12px}.stats{grid-template-columns:1fr 1fr;gap:24px;margin-bottom:45px}.stat{padding:0;border:0}.stat b{font-size:32px}.section{margin-bottom:48px}.section-heading h2{font-size:26px}.funnel-grid,.layers,.deep-grid,.paper-grid{grid-template-columns:1fr}.stage{padding:15px 17px}.stage:nth-child(4){width:75%}.filterbar{padding:12px}input{flex-basis:100%}.paper-grid{max-height:900px}.full-body{padding:0 17px 22px}.full-body h1{font-size:25px}.full-body h2{font-size:21px}.callout{padding:19px 22px;font-size:16px}.hero .chips{margin-top:16px}.layer,.deep-card{padding:22px}html{scroll-padding-top:110px}}
+@media print{header,.filterbar,.filter-count,.export{display:none}.hero{padding-top:20px}.paper-grid{max-height:none;overflow:visible}.paper[hidden]{display:block!important}.section{break-inside:auto}.deep-card,.layer,.paper,.route{break-inside:avoid}body{background:white}main{padding:0}.full-body{display:block}a{color:inherit}}
+</style></head><body>
+<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a></div></nav></header>
+<main id="top"><section class="hero"><div><div class="eyebrow">2024.09.10 — 2026.09.10 · 2026.09.14补充HydroShear</div><h1>当我们在讨论<br/><span>灵巧操作仿真</span>时，<br/>我们在讨论什么？</h1><p class="lead">在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</p><div class="chips"><span class="chip">多指 / 双手</span><span class="chip">接触与触觉</span><span class="chip">数据与迁移</span><span class="chip">来源可追溯</span></div></div><aside class="hero-side"><h2>仿真是一整条闭环</h2><div class="loop"><div><b>WORLD</b><span>接触如何演化</span></div><div><b>OBSERVATION</b><span>机器人看见什么</span></div><div><b>ACTION</b><span>动作如何执行</span></div><div><b>VALIDATION</b><span>真机获得什么</span></div></div><p>引擎、画面和FPS各回答一部分。选型从具体接触失效与验收方法开始。</p></aside></section>
+<div class="stats"><div class="stat"><b>38 → 29 → 7</b><span>候选论文 → 核心 → 全文精读</span></div><div class="stat"><b>19</b><span>仓库快照 · 18技术项目 + 1网页</span></div><div class="stat"><b>20</b><span>笔记映射 · 含3条历史线索</span></div><div class="stat"><b>3</b><span>可执行研究路线 · 尚未复现</span></div></div>
+<section class="section" id="funnel"><div class="section-heading"><div class="eyebrow">01 / SCREENING</div><h2>先筛证据，再分问题</h2><p>投入精力的漏斗与技术系统的层次分开；七篇精读由机制互补选出。</p></div><div class="funnel-grid"><div class="funnel"><div class="stage"><div>可审计候选<small>官方标题、v1日期与摘要核验</small></div><b>38</b></div><div class="stage"><div>核心问题层<small>多指 / 双手 + 共享接触与触觉机制</small></div><b>29</b></div><div class="stage"><div>完整精读层<small>全文、图表、公式与局限</small></div><b>7</b></div><div class="stage"><div>决策层<small>假设、基线、退出条件</small></div><b>3</b></div></div><aside class="method"><h3>范围与阅读口径</h3><p>时间窗按arXiv首次提交日期；原六篇保留9月10日核验的版本，HydroShear在9月14日复核后补入。9篇邻接工作单列背景。</p><p>原Obsidian关键词匹配222个文件，本次累计连接20条笔记线索，其中17篇可定位、3条为历史记录。GitHub保留原18仓库快照，新增HydroShear。</p><p class="tiny">这是定向范围调研，未宣称穷尽arXiv。HydroShear作为共享触觉机制纳入；其夹爪实验不当作多指全手验证。本次未运行训练或真机实验。</p></aside></div></section>
+<section class="section" id="layers"><div class="section-heading"><div><div class="eyebrow">02 / THE SYSTEM</div><h2>六层问题，六种验收</h2></div><p>每层都可能产生迁移误差。单独增加物理保真或样本量，无法替代对其他层的检查。</p></div><div class="layers"><article class="layer"><div class="number">01</div><h3>任务与接触</h3><p class="terms">保持、滑移、滚动、换指、释放</p><p>先说明要完成什么接触过程，再定义成功。</p><small>BODex · Labimus · LabDex</small></article><article class="layer"><div class="number">02</div><h3>本体与执行器</h3><p class="terms">形态、驱动耦合、饱和、延迟</p><p>URDF之外，还要固定腕部约束、增益与控制时钟。</p><small>DexMachina · Tendon Hand MPC</small></article><article class="layer"><div class="number">03</div><h3>物理与接触求解</h3><p class="terms">刚柔耦合、摩擦、非穿透</p><p>只为会改变策略行为的物理误差支付计算成本。</p><small>Taccel · TacEx · SuperDex</small></article><article class="layer"><div class="number">04</div><h3>传感与观测</h3><p class="terms">净力、深度、凝胶、光学图像</p><p>给策略什么，以及真机能否用同一方式取得。</p><small>Tacmap · PTLD · Dex-X</small></article><article class="layer"><div class="number">05</div><h3>数据与策略</h3><p class="terms">扩增、重定向、探索、筛选</p><p>样本量之外，衡量接触类型与有效轨迹的覆盖。</p><small>DexMimicGen · SPIDER · CHORD</small></article><article class="layer"><div class="number">06</div><h3>校准与真实收益</h3><p class="terms">失败预测、排序一致、采集成本</p><p>最终验收仿真是否改善真实机器人行为。</p><small>DexScrew · TeleOpBench</small></article></div><div class="callout">先问：<strong>哪个真实任务、哪种接触失效，需要仿真改善？</strong><br/>再问：用什么实验确认改善来自仿真，以及为此花了多少成本？</div><aside class="method" id="sandbox"><h3>仿真作为sandbox，benchmark是其中一环</h3><p>同一套仿真，可以用来试接触策略、生成数据、重放失败，也可以固定条件比较方法。前者是实验沙盒的用途；固定任务、重置、动作与观测、预算和计分协议，就形成其中的benchmark。评测发现失败后，再回到沙盒改变条件、查找原因。</p><p>这些用途对各种仿真都重要。灵巧操作需要进一步记录多指力分配、黏着与滑移历史，以及换指和恢复过程。即使暂时没有真机，沙盒也能用于调试与方法比较；外推到真实机器人则需要额外验证。</p></aside></section>
+<section class="section" id="evidence"><div class="section-heading"><div><div class="eyebrow">03 / CLOSE READING</div><h2>七篇论文，七个关键取舍</h2></div><p>原六篇保持原有阅读顺序，补入HydroShear。论文笔记合计62幅图、36张表；公式沿各笔记的原登记口径。</p></div><div class="deep-grid"><article class="deep-card"><div class="card-top"><span class="eyebrow">评测</span><a href="https://arxiv.org/abs/2412.16490">BODex ↗</a></div><h3>抓取能否扛住扰动？</h3><div class="metric">79.9%</div><div class="unit">仿真 SSR；真机为81%（20物体×5次）</div><p>六方向重力测试验证稳定抓取。基准main与原论文baseline参数不同；它不直接证明长程操作能力。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FBODex">完整论文笔记 · 8图 / 4表 ↗</a></article><article class="deep-card"><div class="card-top"><span class="eyebrow">接触触觉</span><a href="https://arxiv.org/abs/2504.12908">Taccel ↗</a></div><h3>触觉保真值多少算力？</h3><div class="metric">18.30×</div><div class="unit">低分辨率双触觉插入的实时倍率</div><p>H100 80GB、4096环境对应特定配置；全手17块凝胶属于另一组吞吐测试。不要把净力、凝胶形变和光学图像视为同一种触觉。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FTaccel">完整论文笔记 · 8图 / 2表 ↗</a></article><article class="deep-card"><div class="card-top"><span class="eyebrow">数据</span><a href="https://arxiv.org/abs/2410.24185">DexMimicGen ↗</a></div><h3>少量示范如何扩增？</h3><div class="metric">60 → 21K</div><div class="unit">源示范到合成仿真轨迹</div><p>真机实验另外采集40条真实轨迹，测试20次得到90%。真实收益包含采集闭环，不能概括成全部视觉策略零样本迁移。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDexMimicGen">完整论文笔记 · 7图 / 3表 ↗</a></article><article class="deep-card"><div class="card-top"><span class="eyebrow">策略</span><a href="https://arxiv.org/abs/2505.24853">DexMachina ↗</a></div><h3>跨手型要复刻什么？</h3><div class="metric">物体功能</div><div class="unit">以物体目标指导接触探索</div><p>评估按物体部件计算ADD-AUC；悬浮腕与特权观测限定结论。仓库已存在评测代码，README中的TODO有滞后。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDexMachina">完整论文笔记 · 8图 / 0表 ↗</a></article><article class="deep-card"><div class="card-top"><span class="eyebrow">真机闭环</span><a href="https://arxiv.org/abs/2512.02011">DexScrew ↗</a></div><h3>不完美仿真如何有用？</h3><div class="metric">95%</div><div class="unit">螺丝刀平均进度比，10次试验</div><p>简化仿真学指步，再用真实触觉与历史信息补齐。95%不是95%的任务全部成功；螺丝刀预先插入。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDexScrew">完整论文笔记 · 6图 / 7表 ↗</a></article><article class="deep-card"><div class="card-top"><span class="eyebrow">数据</span><a href="https://arxiv.org/abs/2609.07747">Dex-X ↗</a></div><h3>视频缺失的触觉如何补？</h3><div class="metric">28 / 30</div><div class="unit">真机cube成功次数</div><p>六类仿真专家平均65.9%，与真机cube指标分开。仍需运动参考和资产；公开GitHub入口是网页模板，算法代码未确认发布。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDex-X">完整论文笔记 · 8图 / 10表 ↗</a></article><article class="deep-card" id="hydroshear"><div class="card-top"><span class="eyebrow">触觉观测</span><a href="https://arxiv.org/abs/2603.00446">HydroShear ↗</a></div><h3>触觉为什么需要接触历史？</h3><div class="metric">112 / 120</div><div class="unit">四任务真机完成次数 · 并行夹爪</div><p>用30个真实样本标定、40个样本检查marker场。模型保留黏着与滑移历史，输出进入策略观测；底层动力学仍由Isaac Gym/TacSL负责。它补上触觉机制，不直接证明多指换指能力。</p><a class="note-link" href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FHydroShear">完整论文笔记 · 17图 / 10表 ↗</a></article></div></section>
+<section class="section" id="papers"><div class="section-heading"><div><div class="eyebrow">04 / PAPER EXPLORER</div><h2>38篇论文的筛选账本</h2></div><p>可按技术主题、阅读层级筛选；每篇保留纳入理由、结论边界与官方来源。</p></div><div class="filterbar"><input aria-label="搜索论文" id="paper-search" placeholder="搜索论文、任务或关键词，例如 tactile / 抓取" type="search"/><select aria-label="阅读层级" id="decision"><option value="all">全部阅读层级</option><option>精读</option><option>核心</option><option>背景</option></select><select aria-label="技术主题" id="layer"><option value="all">全部技术主题</option><option>平台</option><option>接触触觉</option><option>数据</option><option>本体</option><option>真机闭环</option><option>策略</option><option>评测</option><option>触觉观测</option></select></div><p aria-live="polite" class="filter-count" id="paper-count"></p><div class="paper-grid"><article class="paper" data-decision="精读" data-layer="数据"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2024-10-31</span></div><h3><a href="https://arxiv.org/abs/2410.24185">DexMimicGen ↗</a></h3><p class="paper-title">DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning</p><span class="chip">数据</span><p><strong>为何纳入</strong> 双臂示范变换、同步和任务成功过滤；仿真用于扩增</p><p class="boundary"><strong>阅读边界</strong> 真实执行采集后训练；不是纯合成视觉策略直接迁移</p><small>全文+图表公式核验 · arXiv:2410.24185</small></article><article class="paper" data-decision="精读" data-layer="策略"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2025-05-30</span></div><h3><a href="https://arxiv.org/abs/2505.24853">DexMachina ↗</a></h3><p class="paper-title">DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation</p><span class="chip">策略</span><p><strong>为何纳入</strong> 从动作像人到物体功能一致；虚拟物体控制器课程</p><p class="boundary"><strong>阅读边界</strong> 悬浮双手、特权状态、仿真评测；不推出真机手型总排名</p><small>全文+图表公式核验 · arXiv:2505.24853</small></article><article class="paper" data-decision="精读" data-layer="接触触觉"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2025-04-17</span></div><h3><a href="https://arxiv.org/abs/2504.12908">Taccel ↗</a></h3><p class="paper-title">Taccel: Scaling Up Vision-based Tactile Robotics via High-performance GPU Simulation</p><span class="chip">接触触觉</span><p><strong>为何纳入</strong> 统一刚柔接触与触觉信号；直接回答精度—吞吐权衡</p><p class="boundary"><strong>阅读边界</strong> 低分辨率双指速度不可套用于全手高密触觉</p><small>全文+图表公式核验 · arXiv:2504.12908</small></article><article class="paper" data-decision="精读" data-layer="真机闭环"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2025-12-01</span></div><h3><a href="https://arxiv.org/abs/2512.02011">DexScrew ↗</a></h3><p class="paper-title">Learning Dexterous Manipulation Skills from Imperfect Simulations</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> 简化仿真学指步，真机采集补触觉与螺纹动力学</p><p class="boundary"><strong>阅读边界</strong> 95% 是进度比；起始状态已装好螺母或插好工具</p><small>全文+图表公式核验 · arXiv:2512.02011</small></article><article class="paper" data-decision="精读" data-layer="数据"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2026-09-07</span></div><h3><a href="https://arxiv.org/abs/2609.07747">Dex-X ↗</a></h3><p class="paper-title">Dex-X: Learning Visual-Tactile Dexterous Manipulation From Human Videos with Simulated Interaction</p><span class="chip">数据</span><p><strong>为何纳入</strong> 最新视频→仿真交互→触觉补全→视觉触觉策略</p><p class="boundary"><strong>阅读边界</strong> 仍需物体资产与动作参考；任务、分布与模态条件需分开</p><small>全文+图表公式核验 · arXiv:2609.07747</small></article><article class="paper" data-decision="精读" data-layer="评测"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2024-12-21</span></div><h3><a href="https://arxiv.org/abs/2412.16490">BODex ↗</a></h3><p class="paper-title">BODex: Scalable and Efficient Robotic Dexterous Grasp Synthesis Using Bilevel Optimization</p><span class="chip">评测</span><p><strong>为何纳入</strong> 接触力可行性优化与统一动态抓取验证</p><p class="boundary"><strong>阅读边界</strong> main 与论文 baseline 物理参数不同；静态抓取不等于操作</p><small>全文+图表公式核验 · arXiv:2412.16490</small></article><article class="paper" data-decision="核心" data-layer="接触触觉"><div class="paper-head"><span class="tag">核心</span><span>2024-11-07</span></div><h3><a href="https://arxiv.org/abs/2411.04776">TacEx ↗</a></h3><p class="paper-title">TacEx: GelSight Tactile Simulation in Isaac Sim -- Combining Soft-Body and Visuotactile Simulators</p><span class="chip">接触触觉</span><p><strong>为何纳入</strong> 软体、触觉成像与 Isaac Lab 集成</p><p class="boundary"><strong>阅读边界</strong> 模块组合的成本与仿真到真机证据分别检查</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2411.04776</small></article><article class="paper" data-decision="核心" data-layer="接触触觉"><div class="paper-head"><span class="tag">核心</span><span>2025-05-16</span></div><h3><a href="https://arxiv.org/abs/2505.11032">DexGarmentLab ↗</a></h3><p class="paper-title">DexGarmentLab: Dexterous Garment Manipulation Environment with Generalizable Policy</p><span class="chip">接触触觉</span><p><strong>为何纳入</strong> 柔性衣物、15 类场景及结构对应扩增</p><p class="boundary"><strong>阅读边界</strong> 不能用刚体抓取成功率衡量布料任务</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2505.11032</small></article><article class="paper" data-decision="核心" data-layer="评测"><div class="paper-head"><span class="tag">核心</span><span>2025-05-19</span></div><h3><a href="https://arxiv.org/abs/2505.12748">TeleOpBench ↗</a></h3><p class="paper-title">TeleOpBench: A Simulator-Centric Benchmark for Dual-Arm Dexterous Teleoperation</p><span class="chip">评测</span><p><strong>为何纳入</strong> 30 项双臂遥操作仿真任务及镜像真机比较</p><p class="boundary"><strong>阅读边界</strong> 遥操作评价与自主策略泛化不是同一问题</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2505.12748</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2025-07-01</span></div><h3><a href="https://arxiv.org/abs/2507.00833">HumanoidGen ↗</a></h3><p class="paper-title">HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning</p><span class="chip">数据</span><p><strong>为何纳入</strong> 原子灵巧操作与空间约束生成示范</p><p class="boundary"><strong>阅读边界</strong> LLM 规划质量与物理执行成功须分开</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2507.00833</small></article><article class="paper" data-decision="核心" data-layer="评测"><div class="paper-head"><span class="tag">核心</span><span>2026-06-30</span></div><h3><a href="https://arxiv.org/abs/2606.31037">Labimus ↗</a></h3><p class="paper-title">Labimus: A Simulation and Benchmark for Humanoid Dexterous Manipulation in Chemical Laboratory</p><span class="chip">评测</span><p><strong>为何纳入</strong> 粉体、铰接仪器与精度容差的实验室仿真</p><p class="boundary"><strong>阅读边界</strong> 完成操作不保证称量结果满足实验要求</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2606.31037</small></article><article class="paper" data-decision="核心" data-layer="评测"><div class="paper-head"><span class="tag">核心</span><span>2026-08-19</span></div><h3><a href="https://arxiv.org/abs/2608.18618">LabDex ↗</a></h3><p class="paper-title">LabDex: A Hierarchical Benchmark for Dexterous Manipulation in Laboratories</p><span class="chip">评测</span><p><strong>为何纳入</strong> 原子技能→组合技能→长程实验的跨平台协议</p><p class="boundary"><strong>阅读边界</strong> 摘要级核验；尚不据此宣称全部代码可运行</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2608.18618</small></article><article class="paper" data-decision="核心" data-layer="本体"><div class="paper-head"><span class="tag">核心</span><span>2026-09-04</span></div><h3><a href="https://arxiv.org/abs/2609.05206">Morphology and actuation ↗</a></h3><p class="paper-title">Morphology and actuation as inductive biases in robotic hand manipulation</p><span class="chip">本体</span><p><strong>为何纳入</strong> 分开分析运动学映射与驱动映射的条件数</p><p class="boundary"><strong>阅读边界</strong> 限定两种手和任务；人体相似度不是控制便利性的充分条件</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2609.05206</small></article><article class="paper" data-decision="核心" data-layer="真机闭环"><div class="paper-head"><span class="tag">核心</span><span>2026-06-10</span></div><h3><a href="https://arxiv.org/abs/2606.11767">Blind Dexterous Grasping ↗</a></h3><p class="paper-title">Blind Dexterous Grasping via Real2Sim2Real Tactile Policy Learning</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> 接触事件校准、触觉编码、专家聚合</p><p class="boundary"><strong>阅读边界</strong> 20 个实物总体成功率 27%；无视觉仍有真机校准</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2606.11767</small></article><article class="paper" data-decision="核心" data-layer="真机闭环"><div class="paper-head"><span class="tag">核心</span><span>2025-09-27</span></div><h3><a href="https://arxiv.org/abs/2509.23075">Articulated Tool Sim2Real ↗</a></h3><p class="paper-title">In-Hand Manipulation of Articulated Tools with Dexterous Robot Hands with Sim-to-Real Transfer</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> 仿真基础策略加触觉/力反馈修正关节工具</p><p class="boundary"><strong>阅读边界</strong> 真实示范参与；不能标为完全零真机数据</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2509.23075</small></article><article class="paper" data-decision="核心" data-layer="接触触觉"><div class="paper-head"><span class="tag">核心</span><span>2026-02-25</span></div><h3><a href="https://arxiv.org/abs/2602.21625">Tacmap ↗</a></h3><p class="paper-title">Tacmap: Bridging the Tactile Sim-to-Real Gap via Geometry-Consistent Penetration Depth Map</p><span class="chip">接触触觉</span><p><strong>为何纳入</strong> 共用几何穿透深度表示连接仿真与真实触觉</p><p class="boundary"><strong>阅读边界</strong> 表示对齐并非完整凝胶剪切动力学求解</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2602.21625</small></article><article class="paper" data-decision="核心" data-layer="策略"><div class="paper-head"><span class="tag">核心</span><span>2026-02-17</span></div><h3><a href="https://arxiv.org/abs/2602.15828">Dex4D ↗</a></h3><p class="paper-title">Dex4D: Task-Agnostic Point Track Policy for Sim-to-Real Dexterous Manipulation</p><span class="chip">策略</span><p><strong>为何纳入</strong> 任务无关点轨迹条件技能在部署时组合</p><p class="boundary"><strong>阅读边界</strong> 目标点轨迹来源与在线跟踪质量也是系统前提</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2602.15828</small></article><article class="paper" data-decision="核心" data-layer="真机闭环"><div class="paper-head"><span class="tag">核心</span><span>2026-03-04</span></div><h3><a href="https://arxiv.org/abs/2603.04531">PTLD ↗</a></h3><p class="paper-title">PTLD: Sim-to-real Privileged Tactile Latent Distillation for Dexterous Manipulation</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> 用真实特权传感数据蒸馏触觉状态估计，绕开触觉模拟</p><p class="boundary"><strong>阅读边界</strong> 不需要触觉模拟不等于不需要真实数据</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2603.04531</small></article><article class="paper" data-decision="核心" data-layer="策略"><div class="paper-head"><span class="tag">核心</span><span>2026-06-22</span></div><h3><a href="https://arxiv.org/abs/2607.00033">CHORD ↗</a></h3><p class="paper-title">Learning Dexterous Manipulation Using Contact Wrench Guidance From Human Demonstration</p><span class="chip">策略</span><p><strong>为何纳入</strong> 接触扳手空间指导；规模化双手操作基准</p><p class="boundary"><strong>阅读边界</strong> 4739 项构建任务与1831项评测任务必须分开</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2607.00033</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2026-03-05</span></div><h3><a href="https://arxiv.org/abs/2603.05312">UltraDexGrasp ↗</a></h3><p class="paper-title">UltraDexGrasp: Learning Universal Dexterous Grasping for Bimanual Robots with Synthetic Data</p><span class="chip">数据</span><p><strong>为何纳入</strong> 双手通用抓取与合成数据扩展</p><p class="boundary"><strong>阅读边界</strong> 抓取覆盖度不能直接外推连续工具操作</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2603.05312</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2026-02-09</span></div><h3><a href="https://arxiv.org/abs/2602.09013">VideoManip ↗</a></h3><p class="paper-title">Dexterous Manipulation Policies from RGB Human Videos via 3D Hand-Object Trajectory Reconstruction</p><span class="chip">数据</span><p><strong>为何纳入</strong> RGB 视频重建手物轨迹后在仿真中学策略</p><p class="boundary"><strong>阅读边界</strong> 几何重建和接触校准仍是关键依赖</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2602.09013</small></article><article class="paper" data-decision="核心" data-layer="真机闭环"><div class="paper-head"><span class="tag">核心</span><span>2025-02-27</span></div><h3><a href="https://arxiv.org/abs/2502.20396">Humanoid Vision Sim2Real RL ↗</a></h3><p class="paper-title">Sim-to-Real Reinforcement Learning for Vision-Based Dexterous Manipulation on Humanoids</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> real-to-sim 调参、奖励设计、分治蒸馏与视觉表示</p><p class="boundary"><strong>阅读边界</strong> 三项任务证据；自动调参不同于无需硬件标定</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2502.20396</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2025-06-20</span></div><h3><a href="https://arxiv.org/abs/2506.17198">Dex1B ↗</a></h3><p class="paper-title">Dex1B: Learning with 1B Demonstrations for Dexterous Manipulation</p><span class="chip">数据</span><p><strong>为何纳入</strong> 十亿级示范、几何约束生成与动态任务测试</p><p class="boundary"><strong>阅读边界</strong> 示范数据单位、有效接触和任务覆盖比总量更重要</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2506.17198</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2024-10-30</span></div><h3><a href="https://arxiv.org/abs/2410.23004">DexGraspNet2 ↗</a></h3><p class="paper-title">DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes</p><span class="chip">数据</span><p><strong>为何纳入</strong> 杂乱场景的大规模抓取合成与深度恢复</p><p class="boundary"><strong>阅读边界</strong> 抓取场景和测试协议需与 BODex 分开</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2410.23004</small></article><article class="paper" data-decision="核心" data-layer="本体"><div class="paper-head"><span class="tag">核心</span><span>2024-11-09</span></div><h3><a href="https://arxiv.org/abs/2411.06183">Tendon Hand MPC ↗</a></h3><p class="paper-title">Sampling-Based Model Predictive Control for Dexterous Manipulation on a Biomimetic Tendon-Driven Hand</p><span class="chip">本体</span><p><strong>为何纳入</strong> 腱绳手采样 MPC；仿真作为在线预测模型</p><p class="boundary"><strong>阅读边界</strong> 任务目标仍需适配，非完全免调参通用控制</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2411.06183</small></article><article class="paper" data-decision="背景" data-layer="真机闭环"><div class="paper-head"><span class="tag">背景</span><span>2026-03-24</span></div><h3><a href="https://arxiv.org/abs/2603.22876">Grounding Sim2Real ↗</a></h3><p class="paper-title">Grounding Sim-to-Real Generalization in Robotic Manipulation: An Empirical Study with Vision-Language-Action Models</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> 一般机器人 VLA 仿真到真机实证研究</p><p class="boundary"><strong>阅读边界</strong> 当前官方标题已写 Robotic；不作为多指手专属核心证据</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2603.22876</small></article><article class="paper" data-decision="背景" data-layer="评测"><div class="paper-head"><span class="tag">背景</span><span>2026-09-01</span></div><h3><a href="https://arxiv.org/abs/2609.01453">ParcelStow temporal robustness ↗</a></h3><p class="paper-title">Does Imitation Learning Preserve Temporal Robustness in Dexterous Manipulation? An Expert-Learner Comparison Across Task Execution Speeds</p><span class="chip">评测</span><p><strong>为何纳入</strong> 任务速度变化暴露阶段性失效</p><p class="boundary"><strong>阅读边界</strong> 作为时间鲁棒性方法参考，不作为多指灵巧手代表</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2609.01453</small></article><article class="paper" data-decision="背景" data-layer="策略"><div class="paper-head"><span class="tag">背景</span><span>2026-03-04</span></div><h3><a href="https://arxiv.org/abs/2603.03960">SAT ↗</a></h3><p class="paper-title">Structural Action Transformer for 3D Dexterous Manipulation</p><span class="chip">策略</span><p><strong>为何纳入</strong> 结构化动作建模</p><p class="boundary"><strong>阅读边界</strong> 本文调研重点是仿真链条，策略架构仅侧链</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2603.03960</small></article><article class="paper" data-decision="背景" data-layer="数据"><div class="paper-head"><span class="tag">背景</span><span>2026-02-13</span></div><h3><a href="https://arxiv.org/abs/2602.13444">FlowHOI ↗</a></h3><p class="paper-title">FlowHOI: Flow-based Semantics-Grounded Generation of Hand-Object Interactions for Dexterous Robot Manipulation</p><span class="chip">数据</span><p><strong>为何纳入</strong> 人手物体交互生成</p><p class="boundary"><strong>阅读边界</strong> 动作生成不自动保证闭环物理执行</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2602.13444</small></article><article class="paper" data-decision="背景" data-layer="真机闭环"><div class="paper-head"><span class="tag">背景</span><span>2026-07-08</span></div><h3><a href="https://arxiv.org/abs/2607.07287">TouchWorld ↗</a></h3><p class="paper-title">TouchWorld: A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation</p><span class="chip">真机闭环</span><p><strong>为何纳入</strong> 预测与反应触觉模型</p><p class="boundary"><strong>阅读边界</strong> 触觉世界模型不等价于可验证的接触求解器</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2607.07287</small></article><article class="paper" data-decision="背景" data-layer="策略"><div class="paper-head"><span class="tag">背景</span><span>2026-02-24</span></div><h3><a href="https://arxiv.org/abs/2602.20466">G2A ↗</a></h3><p class="paper-title">Grasp to Act: Dexterous Grasping for Tool Use in Dynamic Settings</p><span class="chip">策略</span><p><strong>为何纳入</strong> 面向工具用途的动态抓取</p><p class="boundary"><strong>阅读边界</strong> 补充任务语义，非仿真平台或接触建模主线</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2602.20466</small></article><article class="paper" data-decision="背景" data-layer="平台"><div class="paper-head"><span class="tag">背景</span><span>2025-02-12</span></div><h3><a href="https://arxiv.org/abs/2502.08844">MuJoCo Playground ↗</a></h3><p class="paper-title">MuJoCo Playground</p><span class="chip">平台</span><p><strong>为何纳入</strong> 批量仿真与学习环境基础设施</p><p class="boundary"><strong>阅读边界</strong> 平台能力不等于任一多指任务可直接复现</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2502.08844</small></article><article class="paper" data-decision="背景" data-layer="平台"><div class="paper-head"><span class="tag">背景</span><span>2024-10-01</span></div><h3><a href="https://arxiv.org/abs/2410.00425">ManiSkill3 ↗</a></h3><p class="paper-title">ManiSkill3: GPU Parallelized Robotics Simulation and Rendering for Generalizable Embodied AI</p><span class="chip">平台</span><p><strong>为何纳入</strong> GPU 物理与渲染并行的机器人任务框架</p><p class="boundary"><strong>阅读边界</strong> 吞吐结果取决于任务、观测和配置</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2410.00425</small></article><article class="paper" data-decision="背景" data-layer="平台"><div class="paper-head"><span class="tag">背景</span><span>2025-05-01</span></div><h3><a href="https://arxiv.org/abs/2505.01458">Robotic Simulation Survey ↗</a></h3><p class="paper-title">A Survey of Robotic Navigation and Manipulation with Physics Simulators in the Era of Embodied AI</p><span class="chip">平台</span><p><strong>为何纳入</strong> 仿真器领域全景索引</p><p class="boundary"><strong>阅读边界</strong> 综述是检索入口，不作为具体功能实现的唯一依据</p><small>官方摘要/元数据；局部原文或已有笔记交叉 · arXiv:2505.01458</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2025-04-26</span></div><h3><a href="https://arxiv.org/abs/2504.18829">Dexonomy ↗</a></h3><p class="paper-title">Dexonomy: Synthesizing All Dexterous Grasp Types in a Grasp Taxonomy</p><span class="chip">数据</span><p><strong>为何纳入</strong> 按抓取类型而非仅总量扩展数据；BODex官方推荐后继</p><p class="boundary"><strong>阅读边界</strong> 31类型、9.5M抓取；类型覆盖不代表接触时序覆盖</p><small>官方摘要/元数据；追溯重点项目引用 · arXiv:2504.18829</small></article><article class="paper" data-decision="核心" data-layer="策略"><div class="paper-head"><span class="tag">核心</span><span>2025-03-27</span></div><h3><a href="https://arxiv.org/abs/2503.21860">ManipTrans ↗</a></h3><p class="paper-title">ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning</p><span class="chip">策略</span><p><strong>为何纳入</strong> 通用轨迹模仿器与任务残差；重要功能重定向对照</p><p class="boundary"><strong>阅读边界</strong> 基准跨平台再实现需区分论文原始系统</p><small>官方摘要/元数据；追溯重点项目引用 · arXiv:2503.21860</small></article><article class="paper" data-decision="核心" data-layer="数据"><div class="paper-head"><span class="tag">核心</span><span>2025-11-12</span></div><h3><a href="https://arxiv.org/abs/2511.09484">SPIDER ↗</a></h3><p class="paper-title">SPIDER: Scalable Physics-Informed Dexterous Retargeting</p><span class="chip">数据</span><p><strong>为何纳入</strong> 物理采样与虚拟接触课程生成动态可行轨迹</p><p class="boundary"><strong>阅读边界</strong> 2.4M是帧，不是完整示范；10倍加速需保留任务与硬件条件</p><small>官方摘要/元数据；追溯重点项目引用 · arXiv:2511.09484</small></article><article class="paper" data-decision="精读" data-layer="触觉观测"><div class="paper-head"><span class="tag deep-tag">精读</span><span>2026-02-28</span></div><h3><a href="https://arxiv.org/abs/2603.00446">HydroShear ↗</a></h3><p class="paper-title">HydroShear: Hydroelastic Shear Simulation for Tactile Sim-to-Real Reinforcement Learning</p><span class="chip">触觉观测</span><p><strong>为何纳入</strong>有历史的剪切观测、真实标定和策略验证；共享触觉机制补入核心层</p><p class="boundary"><strong>阅读边界</strong>双平面GelSight Mini并行夹爪；标定触觉模型不等于唯一辨识真实材料或全动力学；无全手实验，无去历史等逐因素定量消融。</p><small>2026-09-14复核既有全文笔记、17幅图、10张表、公式与公开代码；未运行训练 · arXiv:2603.00446</small></article></div><p class="empty" hidden="" id="no-papers">没有匹配的论文，请调整关键词或筛选条件。</p></section>
+<section class="section" id="projects"><div class="section-heading"><div><div class="eyebrow">05 / REPRODUCIBILITY</div><h2>名字背后的软件层级</h2></div><p>区分物理引擎、任务环境、传感组件与方法管线。提交ID链接锁定核验快照；公开入口不等于完整复现。</p></div><div class="filterbar"><input aria-label="搜索开源项目" id="repo-search" placeholder="搜索项目、引擎、发布内容或限制" type="search"/></div><p aria-live="polite" class="filter-count" id="repo-count"></p><div class="table-wrap"><table><thead><tr><th>仓库 / 所在层</th><th>可见发布内容</th><th>复现边界</th><th>核验快照</th></tr></thead><tbody><tr class="repo-row"><td><a href="https://github.com/NVlabs/dexmimicgen">NVlabs/dexmimicgen</a><small>数据/环境 · robosuite / MuJoCo</small></td><td>环境、数据下载、BC-RNN配置<small>入口：scripts/generate_training_config.py</small></td><td>确认发布内容；在线生成器完整性不能从论文推定<small>许可：NVIDIA Source Code License；数据CC-BY4.0</small></td><td><a href="https://github.com/NVlabs/dexmimicgen/blob/940e8a1b3ad70eb1925ada6b364b197de6bb2af9/README.md"><code>940e8a1b3a</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/MandiZhao/dexmachina">MandiZhao/dexmachina</a><small>功能重定向 · 定制Genesis + rl_games</small></td><td>手资产、训练、ADD-AUC评测<small>入口：dexmachina/rl/eval_rl_games.py</small></td><td>README TODO滞后，评测代码与数据入口实际存在<small>许可：MIT</small></td><td><a href="https://github.com/MandiZhao/dexmachina/blob/adae5bf620c57723d185b2757ee3ce9656927c20/README.md"><code>adae5bf620</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/Taccel-Simulator/Taccel">Taccel-Simulator/Taccel</a><small>接触/触觉 · ABD-IPC / Warp</small></td><td>源码、传感构建、插入和Tac-Man示例<small>入口：examples/peg.py</small></td><td>精度、网格和环境数影响端到端速度<small>许可：MIT</small></td><td><a href="https://github.com/Taccel-Simulator/Taccel/blob/cb23bc251b531ba6908a3788c2f91423cd543149/README.md"><code>cb23bc251b</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/x-robotics-lab/dexscrew">x-robotics-lab/dexscrew</a><small>仿真到真机 · IsaacGym + XHand</small></td><td>专家、学生、部署；真机训练连到skill-teleop<small>入口：configs/train/XHandHoraScrewDriver.yaml</small></td><td>旧依赖；训练步数多种口径需run级追溯<small>许可：MIT</small></td><td><a href="https://github.com/x-robotics-lab/dexscrew/blob/3bde4e3a4d973743921c75719ca88167de144e83/README.md"><code>3bde4e3a4d</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/JYChen18/BODex">JYChen18/BODex</a><small>抓取合成 · cuRobo / QP / Coal</small></td><td>合成和规划入口、资产链接<small>入口：example_grasp/plan_batch_env.py</small></td><td>README推荐后继Dexonomy；用途受分组件许可约束<small>许可：自有CC-BY-NC4.0；cuRobo NVIDIA</small></td><td><a href="https://github.com/JYChen18/BODex/blob/06b9a3c90870d33bde9d6c665d4ed2819471407e/README.md"><code>06b9a3c908</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/JYChen18/DexGraspBench">JYChen18/DexGraspBench</a><small>抓取评测 · MuJoCo</small></td><td>标准评测、示例数据、baseline分支<small>入口：README.md</small></td><td>main质量100g、kp5；原论文30g、kp1<small>许可：需逐项查看LICENSE/依赖</small></td><td><a href="https://github.com/JYChen18/DexGraspBench/blob/d9ea6cf282de1f463c20fa54b4f68d7025bad40e/README.md"><code>d9ea6cf282</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/DH-Ng/TacEx">DH-Ng/TacEx</a><small>触觉扩展 · IsaacSim4.5 / IsaacLab2.1.1 / UIPC</small></td><td>GelSight Mini、Taxim、FOTS与软体集成<small>入口：README.md</small></td><td>beta；论文GIPC与当前UIPC路线有版本差别<small>许可：MIT及第三方组件条款</small></td><td><a href="https://github.com/DH-Ng/TacEx/blob/adceed41afb7cb48f9ec1f66a662fb8e5a06627f/README.md"><code>adceed41af</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/wayrise/DexGarmentLab">wayrise/DexGarmentLab</a><small>柔性操作 · IsaacSim4.5</small></td><td>任务环境、资产、数据生成、HALO及基线<small>入口：README.md</small></td><td>15场景；柔性体和资产下载有额外依赖<small>许可：代码及HuggingFace资产分别核对</small></td><td><a href="https://github.com/wayrise/DexGarmentLab/blob/e4e298e696bae5d866ded3b31e0ae27becea5376/README.md"><code>e4e298e696</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/cyjdlhy/TeleOpBench">cyjdlhy/TeleOpBench</a><small>遥操作评测 · 动捕 / VR / IK / MeshCat</small></td><td>相机与VisionPro遥操作流程<small>入口：README.md</small></td><td>README入口不等于已验收所有30任务和4模态<small>许可：本次未完整核对许可</small></td><td><a href="https://github.com/cyjdlhy/TeleOpBench/blob/4cc410d149ce63c86f485b257cba3b3e0ec031d6/README.md"><code>4cc410d149</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/InternRobotics/UltraDexGrasp">InternRobotics/UltraDexGrasp</a><small>多策略抓取数据 · BODex_api / cuRobo</small></td><td>多种抓取rollout与物体配置<small>入口：rollout.py</small></td><td>README主要给生成管线；不据此声称全策略训练复现<small>许可：Apache2.0；派生依赖保留原许可</small></td><td><a href="https://github.com/InternRobotics/UltraDexGrasp/blob/e0f9784a9bf3030995b635c21ef8621ca3477ea8/README.md"><code>e0f9784a9b</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/facebookresearch/project_superdex">facebookresearch/project_superdex</a><small>物理/任务平台 · 自有Physics / Robotics / Studio / Lab</small></td><td>核心模块、示例；Lab早期预览<small>入口：README.md</small></td><td>Teleop Q4 2026为计划；按模块分别评价<small>许可：核心Apache2.0；资产/文档CC-BY4.0，mesh CLI GPLv3等</small></td><td><a href="https://github.com/facebookresearch/project_superdex/blob/06b5d2b9d65c40b65ac280dbb844294b75678664/README.md"><code>06b5d2b9d6</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/google-deepmind/mujoco">google-deepmind/mujoco</a><small>物理引擎 · MuJoCo / 加速后端生态</small></td><td>动力学、接触、模型接口<small>入口：README.md</small></td><td>引擎与学习任务框架分开选择；不替代系统标定<small>许可：Apache2.0</small></td><td><a href="https://github.com/google-deepmind/mujoco/blob/0b5d32047d17ccd14760938240bd76e5c07841a1/README.md"><code>0b5d32047d</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/google-deepmind/mujoco_playground">google-deepmind/mujoco_playground</a><small>学习环境 · MJX / MuJoCo Warp</small></td><td>训练环境、视觉与灵巧操作入口<small>入口：README.md</small></td><td>后端和资产版本需固定；不同任务不是同一吞吐条件<small>许可：Apache2.0</small></td><td><a href="https://github.com/google-deepmind/mujoco_playground/blob/4057c147714b6ac09b395377f1a1724bbeacc4d3/README.md"><code>4057c14771</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/isaac-sim/IsaacLab">isaac-sim/IsaacLab</a><small>学习框架 · Isaac Sim生态</small></td><td>任务、传感、控制和策略训练接口<small>入口：README.md</small></td><td>有平台不等于自动获得某论文的手资产/传感配置<small>许可：核心及底层组件分别核对</small></td><td><a href="https://github.com/isaac-sim/IsaacLab/blob/99f1423e5d4a26216c0eedeb2aa78099a8c3a7d1/README.md"><code>99f1423e5d</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/haosulab/ManiSkill">haosulab/ManiSkill</a><small>操作学习平台 · SAPIEN</small></td><td>GPU物理/渲染、任务和数据工具<small>入口：README.md</small></td><td>v2/v3、任务/渲染设置区分；指标不能无配置比较<small>许可：核心及资产许可分别核对</small></td><td><a href="https://github.com/haosulab/ManiSkill/blob/62ff3a5896b4d5b4cf0ac4c8d79afe600c9404a3/README.md"><code>62ff3a5896</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/Genesis-Embodied-AI/Genesis">Genesis-Embodied-AI/Genesis</a><small>物理/仿真平台 · Genesis</small></td><td>多物理求解与机器人接口<small>入口：README.md</small></td><td>论文的定制fork不可直接替换为当前上游<small>许可：Apache2.0及资产条款</small></td><td><a href="https://github.com/Genesis-Embodied-AI/Genesis/blob/b3c6c73a7a671fc486df5d69c9f481a91b1d57b6/README.md"><code>b3c6c73a7a</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/newton-physics/newton">newton-physics/newton</a><small>物理引擎 · Warp / MuJoCo Warp等</small></td><td>GPU物理、可扩展求解器与机器人示例<small>入口：README.md</small></td><td>求解器、可微性、平台支持须按具体功能验证<small>许可：Apache2.0；文档CC-BY4.0</small></td><td><a href="https://github.com/newton-physics/newton/blob/5cdf9cbf629a523513da685eeb355d6aaf21f472/README.md"><code>5cdf9cbf62</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/dexx-code/dexx-code">dexx-code/dexx-code</a><small>项目网页 · HTML/CSS页面模板</small></td><td>论文展示页面；未见训练算法入口<small>入口：README.md</small></td><td>排除出可运行算法项目；保留最新论文观察<small>许可：网站模板CC-BY-SA4.0不代表算法许可</small></td><td><a href="https://github.com/dexx-code/dexx-code/blob/0cb9766bd274cf0d9ece7ee821fe7cc8943630b5/README.md"><code>0cb9766bd2</code> ↗</a></td></tr><tr class="repo-row"><td><a href="https://github.com/MMintLab/hydroshear">MMintLab/hydroshear</a><small>触觉观测/任务训练 · IsaacGym / Preview TacSL</small></td><td>模型、demo、四类任务、教师/学生训练、play；README提供插入checkpoint下载命令<small>入口：scripts/experiments/hydroshear/train_student_aacd.py</small></td><td>有历史的marker位移观测；未见该生成力直接耦合刚体积分器；未发现HydroShear四参数拟合脚本<small>许可：本仓库MIT；IsaacGym及其他依赖另遵其许可</small></td><td><a href="https://github.com/MMintLab/hydroshear/blob/f815b82fdf3451852acd918933020a82cede1f3b/README.md"><code>f815b82fdf</code> ↗</a><small>2026-09-14</small></td></tr></tbody></table></div><p class="filter-count">原18仓库保留2026-09-10快照；HydroShear于9月14日复核。许可按代码、资产、数据与依赖分别记录。</p></section>
+<section class="section" id="routes"><div class="section-heading"><div><div class="eyebrow">06 / NEXT EXPERIMENTS</div><h2>把调研收束到三个实验</h2></div><p>以下是建议的实验设计。没有把论文结果当作本次复现实测。</p></div><div class="routes"><article class="route"><b>A</b><h3>预测真实抓取失效</h3><p>BODex / DexGraspBench起步。固定一个手与10–20个物体，测试摩擦、质量和延迟；记录滑移、掉落与仿真/真机排序。</p><p class="exit">退出条件：仿真无法预测真机失败时，先定位资产与控制误差，暂停扩数据。</p></article><article class="route"><b>B</b><h3>比较触觉的必要精度</h3><p>同任务、同预算比较无触觉、指尖力、几何深度与软体触觉。Taccel/TacEx、HydroShear、Tacmap、PTLD提供互补路线。</p><p class="exit">退出条件：图像相似度提高而真机策略没有改善时，回到任务所需状态与标定。</p></article><article class="route"><b>C</b><h3>降低真实数据成本</h3><p>分别比较示范扩增、功能重定向与简化仿真辅助采集；记录GPU时、真机人时、有效轨迹率及接触类型覆盖。</p><p class="exit">退出条件：样本更多但未见任务收益停滞时，优先补接触策略与失败恢复示范。</p></article></div></section>
+<section class="section" id="full"><div class="section-heading"><div><div class="eyebrow">07 / FULL REPORT</div><h2>完整论证与来源</h2></div><p>展开阅读两年的变化、五种技术路线、指标口径与既有笔记关联；HydroShear和sandbox用途补充在原结构中。</p></div><details class="full"><summary>展开完整调研正文与引用</summary><div class="full-body"><h1>当我们在讨论灵巧操作仿真时，我们在讨论什么？</h1>
+<blockquote>
+<p>核心判断
+我们讨论的是：<strong>在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</strong> 仿真的对象既有物理状态，也有传感信号、执行器、控制时钟、任务分布和评价协议。引擎名字、画面逼真度和FPS，只能回答其中一部分。</p>
+</blockquote>
+<p>本报告把灵巧操作限定为多指手或双手通过接触完成抓取、重定向、手内调整、工具使用、柔性物体处理和组合操作。普通夹爪、通用VLA和世界模型通常作为邻接证据，单列背景；HydroShear因其可共享的触觉机制纳入核心分析，保留并行夹爪的实验边界。<strong>“用了仿真”不等于“研究了仿真”；“动作像人”不等于“接触能完成任务”。</strong></p>
+<p>阅读入口：<a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%88%86%E5%B1%82%E7%AD%9B%E9%80%89%E4%B8%8E%E8%AF%81%E6%8D%AE%E8%B4%A6%E6%9C%AC">完整筛选账本</a> · <a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-GitHub%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%A4%8D%E7%8E%B0%E8%B7%AF%E7%BA%BF">项目核验与路线</a> · <a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%B7%B2%E6%9C%89%E7%AC%94%E8%AE%B0%E6%98%A0%E5%B0%84">已有笔记映射</a>。HTML在本目录的附件中，目录链接见文末。</p>
+<h2>1. 调研范围与筛选漏斗</h2>
+<p>时间窗为 <strong>2024-09-10—2026-09-10</strong>，按arXiv <strong>v1首次提交日期</strong>决定纳入；精读使用截至检索日可见的明确版本。首轮仓库按2026-09-10公开状态核验，可早于论文时间窗创立；HydroShear于2026-09-14补核。不把较新的会议年份或更新日期冒充新论文。</p>
+<p>这是围绕问题的定向范围调研，不是穷尽arXiv的系统综述。检索采用arXiv限定域关键词、论文引用回溯、项目主页到官方仓库追踪，以及现有Obsidian全文检索。没有把搜索引擎命中总数虚报为已筛选论文数。</p>
+<table>
+<thead>
+<tr>
+<th>入口/阶段</th>
+<th align="right">实际数量</th>
+<th>通过条件</th>
+<th>去向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>arXiv可审计候选</td>
+<td align="right">38篇</td>
+<td>已核对官方标题、v1日期、摘要和来源链接</td>
+<td>全部逐项登记</td>
+</tr>
+<tr>
+<td>核心问题层</td>
+<td align="right">29篇</td>
+<td>多指/双手任务及直接相关的共享组件，涉及仿真物理、感知、数据、控制或验证</td>
+<td>按问题分层比较</td>
+</tr>
+<tr>
+<td>邻接背景层</td>
+<td align="right">9篇</td>
+<td>通用基础设施、一般操作评测或策略/世界模型侧链</td>
+<td>不冒充灵巧仿真核心证据</td>
+</tr>
+<tr>
+<td>完整精读层</td>
+<td align="right">7篇</td>
+<td>机制互补、证据可取、能代表不同技术取舍</td>
+<td>原6篇，补接已有HydroShear完整笔记</td>
+</tr>
+<tr>
+<td>GitHub独立入口</td>
+<td align="right">19个仓库</td>
+<td>官方主页/论文/组织链接+README/源码核验</td>
+<td>18个技术项目，1个项目网页仓库</td>
+</tr>
+<tr>
+<td>Obsidian独立入口</td>
+<td align="right">222个关键词匹配文件（9月10日）</td>
+<td>包括日报、概念与重复引用；不计作222篇研究论文</td>
+<td>累计20条映射：17篇可定位，3条保留为历史线索</td>
+</tr>
+<tr>
+<td>可执行决策层</td>
+<td align="right">3条实验路线</td>
+<td>明确任务、假设、基线、配置与退出条件</td>
+<td>实验设计，尚未执行复现</td>
+</tr>
+</tbody></table>
+<p>这里的漏斗有两种“分层”：<strong>先按证据筛选投入精力，再按技术层解释问题</strong>。它们不是把29篇排成单一分数榜。七篇精读不代表七个最好的算法；Dex-X代码未确认公开仍被选中，是为了分析最新论文的机制和证据边界。</p>
+<p><strong>9月14日补漏：</strong> 原37篇候选、6篇精读之外，接入9月13日已单独整理的HydroShear；保留原检索时间窗，不把本次补充描述为重新穷尽检索。</p>
+<p>精读组合：<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FBODex">BODex</a>（抓取物理验证）、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FTaccel">Taccel</a>（接触触觉求解）、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FHydroShear">HydroShear</a>（有历史的触觉观测）、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDexMimicGen">DexMimicGen</a>（示范扩增）、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDexMachina">DexMachina</a>（功能重定向）、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDexScrew">DexScrew</a>（不完美仿真与真机闭环）、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDex-X">Dex-X</a>（视频到视觉触觉策略）。</p>
+<h2>2. 六层问题：先确定你希望仿真帮什么忙</h2>
+<table>
+<thead>
+<tr>
+<th>技术层</th>
+<th>真正要问的问题</th>
+<th>最小实验/可测量量</th>
+<th>代表线索</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>任务与接触</td>
+<td>手需要保持、滑动、滚动、换指还是释放接触？目标是物体姿态还是工艺精度？</td>
+<td>接触模式、阶段完成、扰动恢复、精度容差</td>
+<td>BODex、Labimus、LabDex</td>
+</tr>
+<tr>
+<td>本体与执行器</td>
+<td>关节和电机是一一对应吗？腕部能自由移动吗？摩擦、腱绳、回差、饱和与延迟怎么进入动作？</td>
+<td>力矩/速度限幅、控制增益、负载响应、动作频率</td>
+<td>DexMachina、Tendon Hand MPC、Morphology and actuation</td>
+</tr>
+<tr>
+<td>物理求解</td>
+<td>接触和形变用什么状态与近似？什么误差会改变策略行为？</td>
+<td>穿透、滑移阈值、力分配、软体形变、时间步敏感性</td>
+<td>Taccel、TacEx、SuperDex</td>
+</tr>
+<tr>
+<td>传感与观测</td>
+<td>给策略的是物体真值、指尖净力、压力图还是光学触觉？真机能否取得？</td>
+<td>噪声、遮挡、迟滞、频率、标定误差、观测延迟</td>
+<td>HydroShear、Tacmap、PTLD、Dex-X、Blind Grasping</td>
+</tr>
+<tr>
+<td>数据与策略</td>
+<td>用仿真规划、探索、筛选还是扩增？新增样本是否带来新接触策略？</td>
+<td>有效轨迹率、类型覆盖、物体划分、学习曲线、端到端GPU时</td>
+<td>DexMimicGen、Dexonomy、Dex1B、SPIDER、CHORD</td>
+</tr>
+<tr>
+<td>校准与真机验证</td>
+<td>仿真中的排序、失败和收益能否预测真实世界？</td>
+<td>独立试验、未见对象、跨参数曲线、sim/real排序一致性</td>
+<td>DexScrew、TeleOpBench、视觉Sim2Real RL</td>
+</tr>
+</tbody></table>
+<p>以下是报告的系统分析记号，不是某篇论文提出的新定理：</p>
+<div aria-label="物理演化、传感生成与控制执行" class="equation-text"><div>xₜ₊₁ = Fθ(xₜ, uₜ)</div><div>oₜ = Hφ(x≤ₜ) + εₜ</div><div>uₜ = Cψ(π(o≤ₜ, g), xₜ)</div></div>
+<p><i>x</i>是物理状态，<i>Fθ</i>是物理演化，<i>Hφ</i>是可依赖状态历史的传感生成（实现中可用递推状态压缩历史），<i>Cψ</i>是把策略动作变成执行器输入的控制链，<i>g</i>是任务目标。真实迁移失败可能来自任何一段；调大摩擦随机化无法保证补偿错误的控制延迟，也不能消除视觉观测中的特权泄漏。</p>
+<h3>Sandbox与benchmark：仿真还能用来做什么</h3>
+<p>仿真也可以作为sandbox：执行动作、生成数据、重放失败，并改变接触、观测或控制条件来比较替代方案。Benchmark是其中冻结任务分布、初态、接口、预算和计分协议的一环，而不是另一种独立用途。例如DexGraspBench把候选抓取放到相同加载条件下比较；发现某类失效后，又可回到沙盒中改变条件追查原因。可重置、可观测、可干预对各类仿真都重要；灵巧操作尤其要保留接触预载、剪切历史和控制状态。即使暂时没有真机，这些能力也能用于方法比较和调试；是否能外推到真实任务需要另外检验。</p>
+<h3>接触模式比“有没有手”更能定义难度</h3>
+<p>抓住一个静态物体、在手里转动、双手交接、用刮板保持工具—桌面接触，是不同约束问题。多指手可能只是充当一个高维夹爪，也可能真的需要指间换接触。数据与评测必须说明它究竟覆盖哪种情况。</p>
+<p>BODex的六方向抗重力测试适合筛掉不稳抓取，但不包含长程技能链。DexScrew的螺母预装、螺丝刀预插，所以其结果不能直接等同于从散件完成装配。Labimus进一步指出，做完称量动作并不意味着达到实验容差。<a href="https://arxiv.org/html/2412.16490v3#S5">BODex §V</a>、<a href="https://arxiv.org/html/2512.02011v2">DexScrew局限</a>、<a href="https://arxiv.org/abs/2606.31037">Labimus</a>。</p>
+<h3>本体资产是实验条件，不只是一个URDF文件</h3>
+<p>需要同时审查碰撞网格、质量惯量、关节限位、驱动耦合、控制增益和腕部约束。DexMachina对手资产做过质量/惯量与碰撞处理，并采用6-DoF悬浮腕；其手型差异是在这一组建模和控制条件下观察到的。腱绳手的采样MPC则说明仿真也可以用作<strong>在线短时预测模型</strong>，不必都走离线大规模RL。对手型的研究应拆开运动学雅可比和驱动矩阵，外观越像人并不保证控制条件数更好。<a href="https://arxiv.org/html/2505.24853v1#A1">DexMachina附录</a>、<a href="https://arxiv.org/abs/2411.06183">Tendon Hand MPC</a>、<a href="https://arxiv.org/abs/2609.05206">Morphology and actuation</a>。</p>
+<h3>接触求解和触觉生成必须分别验收</h3>
+<p>触觉相机图像逼真，可以来自渲染模型；力分配合理，需要动力学和材料参数支持。指尖净力、接触位置、几何压痕、凝胶形变、光学图像属于不同抽象层。</p>
+<p>Taccel用刚柔统一求解保留凝胶形变；Tacmap把仿真和真实信号映射到共同几何深度表示；PTLD用真实特权传感与触觉数据学习状态估计，绕开触觉模拟。这三条路各自降低不同误差，并不互相否定。<a href="https://arxiv.org/html/2504.12908v2">Taccel</a>、<a href="https://arxiv.org/abs/2602.21625">Tacmap</a>、<a href="https://arxiv.org/abs/2603.04531">PTLD</a>。</p>
+<p>HydroShear补上了“接触历史”这一层：它跟踪物体表面点在接触中的累积量，经摩擦限幅描述黏着与滑移，再汇聚成marker位移场。因此，相同的当前位姿，经历不同的横移、滑动或重新接触后，可能产生不同触觉。在已核查的公开任务中，它从Isaac Gym/TacSL推进后的位姿生成观测，没有把输出回写为刚体接触力来替换底层solver。恢复中途状态时，也不能只恢复物体pose而丢掉这段历史。</p>
+<p>它用30个真实标定样本（按压、组合剪切、受控滑动各10个）拟合有效参数，另用40个样本测试dilation、shear、twist与roll。四项真机任务合计112/120次成功；这些是带两块GelSight Mini的并行夹爪实验，其中插入与抽屉任务分别从已抓持物体、已夹住把手的状态开始。结果支持这组条件下的触觉迁移，不能直接当作多指全手换指能力。局部剪切场计算比原FOTS快、比重实现FOTS慢，也不宜概括为全面提速。方法、分项结果和代码边界见<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FHydroShear">HydroShear完整笔记</a>及<a href="https://arxiv.org/html/2603.00446v1#S4">原文实验</a>。</p>
+<h2>3. 两年的变化：从抓得住，到接触经验如何规模化</h2>
+<h3>2024下半年：先把数据与评价接起来</h3>
+<p>DexMimicGen把少量示范变成可执行的新轨迹，DexGraspNet2扩大杂乱场景抓取数据，BODex把抓取几何与接触力可行性、执行姿态和动态筛选连接起来。TacEx则展示在既有Isaac平台中插入触觉和软体模块的路线。共同关注点是让仿真成为<strong>有任务语义、可重复利用的数据生产和验证设施</strong>。<a href="https://arxiv.org/abs/2410.24185">DexMimicGen</a>、<a href="https://arxiv.org/abs/2410.23004">DexGraspNet2</a>、<a href="https://arxiv.org/abs/2412.16490">BODex</a>、<a href="https://arxiv.org/abs/2411.04776">TacEx</a>。</p>
+<h3>2025：开始明确拆解“规模”与“物理可行”</h3>
+<p>DexMachina、ManipTrans和SPIDER将人类运动转换为机器人真正能执行的交互；Dexonomy强调31类抓取类型，Dex1B扩大示范数量；DexGarmentLab把柔性衣物纳入场景；Taccel为刚柔接触与高密触觉支付额外算力。另一端，DexScrew反过来证明：可以让仿真只负责学适当的指步，把难以模拟的细节交给真实数据闭环。<a href="https://arxiv.org/abs/2503.21860">ManipTrans</a>、<a href="https://arxiv.org/abs/2504.18829">Dexonomy</a>、<a href="https://arxiv.org/abs/2511.09484">SPIDER</a>、<a href="https://arxiv.org/abs/2506.17198">Dex1B</a>、<a href="https://arxiv.org/abs/2505.11032">DexGarmentLab</a>。</p>
+<h3>2026截至9月10日：表示、校准和功能评价继续细分</h3>
+<p>Dex4D以点轨迹条件组合技能；Tacmap与PTLD选择不同触觉对齐路线；CHORD在物体接触扳手空间提供指导；实验室基准把精度与长程任务纳入评价。最新Dex-X将仿真当作视频中缺失触觉监督的补全环节，但其部署仍需要运动参考，较大物体几何变化下成功率也明显下降。<a href="https://arxiv.org/abs/2602.15828">Dex4D</a>、<a href="https://arxiv.org/abs/2607.00033">CHORD</a>、<a href="https://arxiv.org/abs/2608.18618">LabDex</a>、<a href="https://arxiv.org/html/2609.07747v2">Dex-X v2</a>。</p>
+<p>这是本报告对所选样本的归纳，<strong>不是按年份证明整个领域已经完成某个阶段</strong>。2026年的新结果仍包括预印本与初始发布，工程稳定性要另外检查。</p>
+<h2>4. 五种使用仿真的方式，分别在优化什么</h2>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>仿真负责</th>
+<th>真实世界仍负责</th>
+<th>合适的问题</th>
+<th>主要风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>高保真接触</td>
+<td>凝胶、摩擦、非穿透、力学演化</td>
+<td>材料和传感器标定</td>
+<td>剪切滑移、触觉设计、非凸接触研究</td>
+<td>计算成本和参数不可辨识</td>
+</tr>
+<tr>
+<td>共用观测表示</td>
+<td>构造可与真实对齐的几何/力信息</td>
+<td>从传感器到共用表示的标定</td>
+<td>快速触觉RL、表示迁移</td>
+<td>共用表示丢失对任务重要的状态</td>
+</tr>
+<tr>
+<td>物理约束数据生成</td>
+<td>变换、规划、执行、失败过滤</td>
+<td>资产构建、演示或标定</td>
+<td>扩增示范、跨物体初始条件</td>
+<td>“数据增多”但接触策略和错误不变</td>
+</tr>
+<tr>
+<td>功能重定向与课程</td>
+<td>用物体目标指导接触探索</td>
+<td>真实驱动与感知转换</td>
+<td>人类视频/动捕到机器人技能</td>
+<td>训练特权、虚拟辅助和部署条件混淆</td>
+</tr>
+<tr>
+<td>简化仿真＋真实补齐</td>
+<td>学低成本、可复用技能</td>
+<td>触觉、恢复、精细动力学</td>
+<td>仿真难以覆盖的高价值技能</td>
+<td>真机人时及预先布置被漏算</td>
+</tr>
+</tbody></table>
+<p>这张表是基于上面论文的技术归纳。选型应从任务失败机制出发：如果失败发生在首次触碰的位置，优先看几何和标定；如果每次接触都对、动作一加速就掉落，优先看执行器与时钟；如果只在胶垫切向滑动时失效，才有理由增加该部分的物理保真度。</p>
+<h2>5. 最容易被读错的数字</h2>
+<table>
+<thead>
+<tr>
+<th>工作/说法</th>
+<th>原文实际口径</th>
+<th>能支持什么</th>
+<th>不能直接支持什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DexMimicGen：21K示范、真机90%</td>
+<td>60条源示范生成仿真数据；真机另由4条源示范辅助采集40条真实轨迹，20次测试</td>
+<td>指定任务上的采集与学习收益</td>
+<td>所有任务纯仿真视觉零样本迁移</td>
+</tr>
+<tr>
+<td>Taccel：18.30倍实时</td>
+<td>H100 80G、低分辨率双触觉插入；全手17块凝胶是另一组条件</td>
+<td>该配置下的仿真吞吐</td>
+<td>任意全手高密触觉均以该速度运行</td>
+</tr>
+<tr>
+<td>HydroShear：93.33%</td>
+<td>四项真机任务合计112/120；另用30个真实样本标定传感模型</td>
+<td>已标定传感器与指定任务初态下的触觉策略迁移</td>
+<td>多指全手能力、无需真实标定，或替换底层接触solver</td>
+</tr>
+<tr>
+<td>DexMachina：手型效果</td>
+<td>按物体部件的ADD-AUC、仿真悬浮腕、特定示范与再实现</td>
+<td>特定设置下功能重定向与手型适配</td>
+<td>实物硬件综合排名、完整任务成功概率</td>
+</tr>
+<tr>
+<td>BODex：79.9% SSR、81%真机</td>
+<td>仿真六向重力测试；真实20物体×5次</td>
+<td>抓取稳定与真实抓取可行</td>
+<td>手内操作、连续工具使用可靠率</td>
+</tr>
+<tr>
+<td>DexScrew：95%</td>
+<td>螺丝刀平均进度比95.00±13.24%，10试验</td>
+<td>任务推进显著改善</td>
+<td>95%的独立任务全部成功</td>
+</tr>
+<tr>
+<td>Dex-X：65.9%、93%</td>
+<td>65.9%为六类仿真专家均值；93.3%为真机cube28/30</td>
+<td>指定任务的视触觉迁移</td>
+<td>六类都93%、任意物体93%</td>
+</tr>
+<tr>
+<td>Dex1B / SPIDER / CHORD</td>
+<td>分别有“示范”“帧”“任务”单位；CHORD构建4739项、评测1831项</td>
+<td>不同维度的规模扩展</td>
+<td>直接比较三个总数大小得出能力排序</td>
+</tr>
+</tbody></table>
+<p>数字来源为对应精读笔记的完整表格与实验定位；其他来源为<a href="https://arxiv.org/abs/2506.17198">Dex1B摘要</a>、<a href="https://arxiv.org/abs/2511.09484">SPIDER摘要</a>、<a href="https://arxiv.org/abs/2607.00033">CHORD摘要</a>。新项目的摘要承诺、论文实验与本次实际复现是三个层次；本次没有重跑上述实验。</p>
+<p>还应避免一个乐观偏差：看到了27%的盲抓真实成功率，仍然可以认为其触觉校准路线有研究价值；没有必要把它改写成“稳定解决盲抓”。<a href="https://arxiv.org/abs/2606.11767">Blind Dexterous Grasping</a>。</p>
+<h2>6. 项目名字背后的软件层级</h2>
+<ul>
+<li><strong>MuJoCo / Genesis / Newton / SuperDex Physics</strong>：主要回答物理世界如何表示和演化。后端、接触方式与支持特性需按版本检查。</li>
+<li><strong>Isaac Lab / ManiSkill / MuJoCo Playground / SuperDex Lab</strong>：主要组织任务、观测、动作、并行环境与学习接口。</li>
+<li><strong>Taccel / TacEx / HydroShear</strong>：将触觉传感和接触物理纳入仿真链条，具体耦合方式不同；HydroShear在已核查路径中生成有历史的触觉观测。</li>
+<li><strong>BODex / Dexonomy / DexMimicGen / DexMachina / DexScrew</strong>：主要承载某条方法或数据、策略管线，不能仅按“谁的引擎更先进”比较。</li>
+</ul>
+<p>依据为本次官方README和源码入口核验，详见<a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-GitHub%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%A4%8D%E7%8E%B0%E8%B7%AF%E7%BA%BF">灵巧操作仿真-GitHub项目与复现路线</a>。尤其要保留三个版本事实：</p>
+<ol>
+<li><strong>SuperDex</strong>：核心Physics/Robotics/Studio与Lab早期预览可见；README把Teleop写为Q4 2026计划，不能当作已发布能力。<a href="https://github.com/facebookresearch/project_superdex/blob/06b5d2b9d65c40b65ac280dbb844294b75678664/README.md">官方README</a>。</li>
+<li><strong>TacEx</strong>：2024论文写GIPC组合，当前代码README以UIPC集成描述实现，并限定Isaac Sim4.5/IsaacLab2.1.1；论文与当前软件不能无版本地混用。<a href="https://github.com/DH-Ng/TacEx/blob/adceed41afb7cb48f9ec1f66a662fb8e5a06627f/README.md">官方README</a>。</li>
+<li><strong>DexGraspBench</strong>：main将物体质量从30g改100g、kp从1改5；论文原版在baseline分支。一次同名benchmark运行未必复现原论文。<a href="https://github.com/JYChen18/DexGraspBench/blob/d9ea6cf282de1f463c20fa54b4f68d7025bad40e/README.md">官方README</a>。</li>
+</ol>
+<h2>7. 我建议的三条起步路线</h2>
+<p>这些是调研后的实验设计，不是已经获得的实验结论。统一要求：固定仓库SHA、资产校验值、时间步/子步、控制频率、控制增益、观测延迟、随机化范围、种子、终止和成功条件。</p>
+<h3>A. 先判断：仿真能否预测真实抓取失效？</h3>
+<p>采用BODex/DexGraspBench建立可解释基线；同时把Dexonomy作为抓取类型扩展的后继路线。先只选择一个手和10—20个覆盖薄片、长条、圆滑和重心偏置的物体，而不是立即生成百万数据。</p>
+<p>以物体为单位划分训练/校准与测试；测试低/高摩擦、质量变化和控制延迟。记录成功率、滑移起始时刻、穿透、力矩峰值和失败类别。若仿真排序不能预测真机排序，应先定位资产/控制误差，暂不扩大数据规模。</p>
+<h3>B. 再判断：什么层次的触觉值得模拟？</h3>
+<p>在相同手、物体与动作下比较无触觉、指尖力、几何深度表示、软体触觉四种输入；Taccel/TacEx用于高保真对照，HydroShear用于接触历史与剪切观测对照，Tacmap用于表示路线，PTLD作为真实蒸馏路线。</p>
+<p>先做接触事件时间、滑移阈值与表示误差测试，再比较相同训练预算的策略收益。分别报告每环境实时率和聚合步数、显存、渲染与学习总耗时。若图像更像但真实策略不改善，说明应回到任务所需状态，而不是继续优化渲染相似度。</p>
+<h3>C. 最后判断：仿真如何降低真实数据成本？</h3>
+<p>任务可由少量源示范覆盖时，采用DexMimicGen式扩增；已有大量人类动作时，比较DexMachina/ManipTrans/SPIDER的功能重定向；关键物理难以模拟时，采用DexScrew式技能采集。Dex-X作为视频—触觉补全的前沿观察项，先解决代码公开与参考依赖。</p>
+<p>统一记账：人类标注/采集时长、真实机器人运行时长、生成尝试数、成功保留数、GPU时与未见任务收益。接触类型覆盖不足时，优先增加不同策略与失败恢复示范，而非重复同一条轨迹的轻微位姿扰动。</p>
+<h3>最小验收表</h3>
+<table>
+<thead>
+<tr>
+<th>验收项</th>
+<th>推荐记录</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>成功</td>
+<td>每对象、每条件的成功次数/总次数，区间及种子</td>
+<td>小样本百分比容易过度解释</td>
+</tr>
+<tr>
+<td>泛化</td>
+<td>未见几何、材质、任务、初始姿态分别测试</td>
+<td>不把“新位置”当“新技能”</td>
+</tr>
+<tr>
+<td>接触</td>
+<td>滑移、掉落、力峰、非穿透、接触切换</td>
+<td>失败定位比最终均值更能指导改进</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>物理步、控制步、传感时间戳、推理耗时</td>
+<td>保证闭环时序可迁移</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>仿真/渲染/学习总时间+真机人时</td>
+<td>避免只优化局部FPS</td>
+</tr>
+<tr>
+<td>外部有效性</td>
+<td>sim/real趋势与策略排序的一致性</td>
+<td>让仿真成为可信测试工具</td>
+</tr>
+</tbody></table>
+<h2>8. 从已有Obsidian笔记中补上的连接</h2>
+<p>现有笔记分别讨论接触求解、数据闭环、灵巧手触觉和世界模型，本报告将它们连到具体的可测量接口。</p>
+<ul>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%9C%9F%E5%AE%9E%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%95%B0%E6%8D%AE%E9%97%AD%E7%8E%AF%E4%B8%AD%EF%BC%8C%E7%8E%B0%E4%BB%A3%E4%BB%BF%E7%9C%9F%E4%B8%8E%E7%89%A9%E7%90%86%E6%B1%82%E8%A7%A3%E5%99%A8%E7%A9%B6%E7%AB%9F%E8%BF%98%E8%83%BD%E8%B4%A1%E7%8C%AE%E4%BB%80%E4%B9%88">真实数据闭环中的仿真定位</a> → DexScrew提供“学技能—辅助采集—真实补齐”的具体实例。</li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FHydroShear">HydroShear</a> → 有历史的剪切观测为“接触状态怎样进入触觉、如何标定和重置”提供具体例子。</li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FTacmap">Tacmap</a>、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FPTLD">PTLD</a> → 触觉可以通过共用表示或真实蒸馏对齐，仿真不必复制传感器所有细节。</li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FTouchWorld">TouchWorld</a> → 预测/反应模型与接触求解器解决不同问题；未来接触预测要经过可干预、可重复的物理测试。</li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FCHORD">CHORD</a>、<a href="obsidian://open?vault=Obsidian&amp;file=%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%2F1-%E6%9C%BA%E5%99%A8%E4%BA%BA%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%2FDex4D">Dex4D</a> → 技能可以在物体效果、点轨迹和扳手空间组织，而不只在机器人关节空间模仿。</li>
+</ul>
+<p>所有既有笔记都作为线索或解读来源；关键外部事实优先回到官方arXiv/仓库。共20条重点映射，其中17篇可定位、3条仅保留为历史线索；来源状态及纳入方式见<a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%B7%B2%E6%9C%89%E7%AC%94%E8%AE%B0%E6%98%A0%E5%B0%84">灵巧操作仿真-已有笔记映射</a>。</p>
+<h2>9. 仍未被这些证据解决的问题</h2>
+<ol>
+<li><strong>已有标定能否预测新的接触？</strong> HydroShear用按压、剪切和滑动拟合，再测试twist/roll；但新的法向负载或重新接触仍需另验。尤其是不发生滑移的轨迹，无法唯一确定从未触发限幅的摩擦参数。下一步应看留出接触条件的预测，而不只是原轨迹拟合误差。</li>
+<li><strong>成功示范覆盖了哪些恢复机会？</strong> DexMimicGen保留执行成功的示范，但轨迹总量不能说明策略是否学过“换指刚开始滑落”的状态。可以在同一换指阶段施加固定扰动，比较等量正常示范与成功恢复片段训练后的条件恢复率；这项检验尚未由当前结果回答。</li>
+<li><strong>增加哪部分复杂度才值得？</strong> HydroShear、Taccel与DexScrew分别投入触觉历史、刚柔求解和真实补齐，现有论文的不同任务与预算不足以排出优先级。需要选定同一任务和硬件，分别按相同交互量、相同算力与人时上限比较留出真机表现，才能指导下一笔投入。</li>
+</ol>
+<p>因此，下一次讨论“灵巧操作仿真选什么”时，最有用的起点是：<strong>想改善哪个真实任务、哪种接触失效，以及准备如何检验仿真是否确实帮上了忙。</strong></p>
+<h2>10. 交付与证据边界</h2>
+<ul>
+<li>首轮新增6篇完整论文笔记，覆盖45幅Figure、26张Table与57组陈列公式，另登记行内关系式；本次接入已有HydroShear完整笔记，增加17幅图、10张表及公式索引，合计7篇、62幅图和36张表。公式沿各笔记口径登记；含公式/超参数疑点，不擅自改写为已证实结论。</li>
+<li>候选清单逐项注明核心/背景/精读和原因；未精读的论文明确写摘要/元数据级核验。</li>
+<li>GitHub记录19个仓库快照：首轮18个及11个具体代码/配置入口，另补HydroShear传感器与任务调用链核查。快照不等于已运行，API限流后以官方原始README、git或页面提交ID补核。</li>
+<li>未进行大规模训练、真机试验或软件性能复测；三条路线是后续研究设计。</li>
+<li>自包含HTML无需外部JS/CSS；原6篇论文笔记使用在线原图，HydroShear图像已有本地归档，离线HTML总结不依赖这些原图。</li>
+</ul>
+<h3>附件与继续阅读</h3>
+<ul>
+<li><a href="#top">自包含HTML总结</a></li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%88%86%E5%B1%82%E7%AD%9B%E9%80%89%E4%B8%8E%E8%AF%81%E6%8D%AE%E8%B4%A6%E6%9C%AC">38篇候选、纳入理由与证据等级</a></li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-GitHub%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%A4%8D%E7%8E%B0%E8%B7%AF%E7%BA%BF">19个仓库快照与代码入口</a></li>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%B7%B2%E6%9C%89%E7%AC%94%E8%AE%B0%E6%98%A0%E5%B0%84">20条重点映射：17篇可定位、3条历史线索</a></li>
+</ul>
+<h3>从一小时课程开始</h3>
+<ul>
+<li><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E7%AC%AC1%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%B9%A0">第1小时：六层问题框架、交互模型、自测与实验卡片</a>（60分钟，离线HTML课程）</li>
+</ul>
+</div></details><div class="export"><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E5%BD%93%E6%88%91%E4%BB%AC%E5%9C%A8%E8%AE%A8%E8%AE%BA%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F%E6%97%B6%EF%BC%8C%E6%88%91%E4%BB%AC%E5%9C%A8%E8%AE%A8%E8%AE%BA%E4%BB%80%E4%B9%88">Obsidian主笔记 ↗</a><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%88%86%E5%B1%82%E7%AD%9B%E9%80%89%E4%B8%8E%E8%AF%81%E6%8D%AE%E8%B4%A6%E6%9C%AC">完整证据账本 ↗</a><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-GitHub%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%A4%8D%E7%8E%B0%E8%B7%AF%E7%BA%BF">项目复现路线 ↗</a><a href="obsidian://open?vault=Obsidian&amp;file=%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%2F%E7%81%B5%E5%B7%A7%E6%93%8D%E4%BD%9C%E4%BB%BF%E7%9C%9F-%E5%B7%B2%E6%9C%89%E7%AC%94%E8%AE%B0%E6%98%A0%E5%B0%84">既有笔记映射 ↗</a></div></section>
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
+<script>
+const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
+function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}
+[q,d,l].forEach(e=>e.addEventListener(e===q?'input':'change',filterPapers));filterPapers();
+const rows=[...document.querySelectorAll('.repo-row')],rq=document.querySelector('#repo-search');function filterRepos(){let n=0;rows.forEach(r=>{r.hidden=!r.textContent.toLowerCase().includes(rq.value.trim().toLowerCase());if(!r.hidden)n++});document.querySelector('#repo-count').textContent=`显示 ${n} / ${rows.length} 个仓库 · 其中Dex-X仓库为学术网页模板`};rq.addEventListener('input',filterRepos);filterRepos();
+</script></body></html>

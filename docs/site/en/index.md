@@ -12,7 +12,7 @@ DexLab is a physics-centric research platform for robot manipulation involving c
 
 | What would you like to do? | Suggested entry |
 | --- | --- |
-| Understand what dexterous-hand simulation studies | [What are we discussing when we discuss dexterous-hand simulation?](dexterous-hand-simulation.md): from holding and finger transitions to touch and hardware validation. |
+| Understand what dexterous-hand simulation studies | [What are we discussing when we discuss dexterous manipulation simulation?](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) (Chinese original): the full six-layer review, paper filters and repository comparison, with an [October supplement](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026). [English reading companion](dexterous-hand-simulation.md). |
 | Inspect experiments, rescore evidence or reproduce a task | [Experiments](experiments.md) → [Quickstart](quickstart.md); inspect existing evidence with the {ref}`GPU-free wiping rescore <offline-evidence>`. |
 | Understand contact failures and backend differences | [Failure attribution](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
 | Integrate a model or understand evaluation rules | [Model-evaluation protocol](model-evaluation.md); remote execution and public leaderboards are not yet complete. |

@@ -12,7 +12,7 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 | 你想做什么 | 推荐入口 |
 | --- | --- |
-| 先理解灵巧手仿真在研究什么 | [当我们在讨论灵巧手仿真时，我们在讨论什么](dexterous-hand-simulation.md)：从抓持、换指到触觉与真实验证。 |
+| 先理解灵巧手仿真在研究什么 | [当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)：本机原版，保留六层框架、论文筛选与仓库对照；[10 月增补](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026)已按原框架归位。 |
 | 看实验、复查结果或复现任务 | [实验目录](experiments.md) → [安装复现](quickstart.md)；只核对已有证据可从{ref}`无需 GPU 的擦拭复算 <offline-evidence>`开始。 |
 | 理解接触失败与后端差异 | [失败归因](solver-failure-audit.md) → [求解配置分层](solver-taxonomy.md) → [完整结果](results.md)。 |
 | 接入模型或理解评测约定 | [模型评测协议](model-evaluation.md)；远程执行与公开榜单尚未完成。 |
