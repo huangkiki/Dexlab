@@ -75,10 +75,10 @@ The long-term goal is to improve simulation and models together: use model failu
 <a id="whats-new"></a>
 ## What's new
 
+- **2026-11-02** — [Finite CHORD tissue-box training](https://huangkiki.github.io/Dexlab/en/latest/chord-native.html): 38,400 samples, 1,000 Adam updates and a 600-step native reload; recorder parity failed and full migration remains 0/3.
 - **2026-11-02** — Added a [dexterous-hand simulation guide](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html) and a [topic guide to 35 Newton papers](https://huangkiki.github.io/Dexlab/en/latest/newton-reading-guide.html).
 - **2026-10-31** — Released the [RoboAPI session adapter](docs/roboapi-poke.md): model discovery, continuous sessions and action receipts; task mappings remain pending.
 - **2026-10-28** — Launched the [MuJoCo browser experiment](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab) for interactive inspection of contact behavior.
-- **2026-10-26** — Published the [Wuji sphere-pinch comparison](https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html), independent scoring and an offline rescore bundle.
 
 <a id="quickstart"></a>
 ## Quick start

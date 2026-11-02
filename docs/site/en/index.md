@@ -132,7 +132,7 @@ To inspect the evidence chain without installing a simulator, start with [Quicks
 5. **Policy and neural backends:** test whether API rankings and task conclusions transfer from native physics to learned world models.
 6. **Co-evolution:** after evidence supports it, use model failures to improve simulation and improved simulation to train and evaluate better models.
 
-**CHORD migration preparation:** fixed task cards, asset preflight and finite upstream command preparation are available; native training/recording/scoring remain pending (0/3 migrated). [Prepare a task](https://github.com/huangkiki/Dexlab/blob/main/demos/chord/README.md).
+**CHORD finite training:** tissue-box completed 38,400 samples, 1,000 Adam updates and a 600-step native checkpoint reload. Training/reload: 1/3; recorder parity failed, so independent scoring and full migration remain 0/3. [Evidence and reproduction](chord-native.md).
 
 ## Ecosystem backend: Uranus
 
@@ -200,6 +200,7 @@ Solver configuration roles <solver-taxonomy>
 Visual comparisons <visual-comparisons>
 Native LIBERO workflow <libero-workflow>
 AMP recorder parity failure <amp-lift>
+CHORD finite training and recorder parity <chord-native>
 Selection <selection>
 Engines <engines>
 Uranus generative environment backend <uranus-backend>
