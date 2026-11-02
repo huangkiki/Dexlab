@@ -6,15 +6,15 @@
 2. Keep code, configuration and entrypoints in the corresponding `demos/` directory; shared scoring lives in `src/dexlab/`.
 3. Save actual initial states, actions, trajectories, contacts and every outcome. Separate scoring from control and retain failures.
 4. Update the experiment card and report in both languages: finding, setup, metric plots, failures, limitations and reproduction.
-5. Explain reader-entry changes in the PR. Update the relevant website pages for capabilities, findings, significant failures and reproduction changes; update the concise README when positioning, representative previews or the recommended starting point changes.
+5. Explain reader-entry changes in the PR. Update the relevant website pages for capabilities, findings, significant failures and reproduction changes; update README when positioning, architecture, representative previews or the recommended starting point changes, or an important milestone is delivered.
 
 ## README and documentation
 
-Keep README short: project purpose, representative experiment animations, one recommended starting point and website links. The site maintains research and usage details without duplicating full reports across README and the homepage.
+Keep README concise and self-contained: use the architecture image and accompanying prose to explain purpose and workflow, retaining Why DexLab, representative experiment animations, one recommended starting point and website links. What's new contains only the latest 3–4 delivered milestones, dated and linked to details; individual commits are not news. The site maintains research and usage details without duplicating full reports across README and the homepage.
 
 | Content | Where to maintain it |
 | --- | --- |
-| Purpose, representative previews and minimal commands | Both READMEs; previews link to site reports. |
+| Purpose, architecture, motivation, selected updates, representative previews and minimal commands | Both READMEs; label illustration scope/status and link updates and previews to detailed pages. |
 | Navigation by reader goal | The homepage Start here section, navigation and indexes. |
 | Full methods, parameters, outcomes, failures and reproduction | The relevant experiment or usage page, linked from the experiment index. |
 | External papers | References, topic guides and complete bibliographies, with sources, check dates and reading depth. |
