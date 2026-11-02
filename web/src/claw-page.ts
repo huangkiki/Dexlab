@@ -1,0 +1,255 @@
+import "./claw.css";
+import prizeAtlas from "./assets/nai-family-atlas.png";
+import { ClawLab } from "./claw-lab";
+import {
+  TOYS,
+  type ClawPhase,
+  type ClawSnapshot,
+  type MoveAxis,
+} from "./claw-task";
+const en = new URLSearchParams(location.search).get("lang") === "en";
+const t = (zh: string, english: string) => (en ? english : zh);
+const arrow =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg>';
+const messages: Record<ClawPhase, string> = {
+  aim: t(
+    "把光圈移到玩偶正上方，准备好了就下爪。",
+    "Move the ring over a toy. Drop when you are ready.",
+  ),
+  descend: t(
+    "下爪中……看看这次对准了没有。",
+    "Going down… let’s see how you lined it up.",
+  ),
+  close: t("合爪！", "Closing the claw!"),
+  lift: t("提起来……抓稳了吗？", "Lifting… will the grip hold?"),
+  carry: t("送往金色取物口，别掉呀。", "Heading for the gold chute. Hang on!"),
+  release: t(
+    "松爪，等它落进取物盒。",
+    "Letting go. Wait for it to land in the prize bin.",
+  ),
+  return: t("爪子回位中。", "Returning the claw."),
+  result: "",
+};
+export async function startClawPage() {
+  const app = document.querySelector<HTMLDivElement>("#app")!;
+  app.innerHTML = `<main class="claw-page">
+    <header class="game-heading"><div><h1>${t("DexLab 抓娃娃", "DexLab Claw Machine")}</h1><p>${t("移动爪子，瞄准你喜欢的那一只。", "Line up the claw. Pick your favorite.")}</p></div>
+      <button type="button" id="new-cabinet" class="quiet-button">${t("换一柜", "New cabinet")}</button></header>
+    <div class="machine-layout">
+      <section class="scene-panel" aria-label="${t("抓娃娃机", "Claw machine")}">
+        <div class="scene-tools"><span>${t("金色口：领奖处", "Gold chute: prize bin")}</span><button type="button" id="view" class="quiet-button" aria-pressed="false">${t("俯视瞄准", "Top view")}</button></div>
+        <canvas id="claw-canvas" tabindex="0" aria-label="${t("抓娃娃场景。方向键或 WASD 移动，空格下爪。", "Claw machine. Arrow keys or WASD move; Space drops the claw.")}"></canvas>
+        <p class="camera-help">${t("拖动画面转动视角 · 滚轮缩放", "Drag to orbit · Scroll to zoom")}</p>
+      </section>
+      <section class="controls" aria-label="${t("操作台", "Control panel")}">
+        <div class="round-stats"><span>${t("已抓到", "Collected")} <strong id="score">0 / 6</strong></span><span id="attempts">${t("尚未下爪", "First try awaits")}</span></div>
+        <div class="play-controls"><div class="direction-pad" aria-label="${t("移动爪子", "Move the claw")}">
+          ${[
+            ["forward", "y", 1, t("向前", "Forward")],
+            ["left", "x", -1, t("向左", "Left")],
+            ["back", "y", -1, t("向后", "Back")],
+            ["right", "x", 1, t("向右", "Right")],
+          ]
+            .map(
+              ([name, axis, sign, label]) =>
+                `<button type="button" class="move-button ${name}" data-axis="${axis}" data-direction="${sign}" aria-label="${label}">${arrow}<span>${label}</span></button>`,
+            )
+            .join("")}
+        </div><button type="button" id="drop" class="drop-button">${t("下爪", "Drop claw")}<kbd>Space</kbd></button></div>
+        <p class="input-help">${t("按住方向移动，点按微调。", "Hold a direction to move. Tap to fine-tune.")}<br><span>${t("方向键 / WASD · 空格下爪", "Arrow keys / WASD · Space to drop")}</span></p>
+        <div class="toy-collection"><h2>${t("这一柜的小伙伴", "Meet the prizes")}</h2><ul>${TOYS.map((toy, i) => `<li data-toy="${i}"><span class="toy-portrait" style="background-image:url(${prizeAtlas});background-position:${(i % 3) * 50}% ${Math.floor(i / 3) * 100}%" aria-hidden="true"></span><span>${en ? toy.name : toy.zh}</span><span class="toy-status">${t("待抓取", "In cabinet")}</span></li>`).join("")}</ul></div>
+      </section>
+    </div>
+    <div class="round-feedback" id="feedback"><p id="hint" role="status" aria-live="polite">${messages.aim}</p><span id="live-contact"></span></div>
+    <footer><span>${t("MuJoCo 本地物理 · 免费玩，随时重来", "Local MuJoCo physics · Free play, unlimited tries")}</span><a href="?mode=solver&embed=1&lang=${en ? "en" : "zh"}">${t("求解配置对比", "Solver comparison")}</a>
+      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("六只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Six Nai-family toys have plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGL · Newton / elliptic · 2 ms</p></details>
+    </footer></main>`;
+  const el = <T extends HTMLElement>(id: string) =>
+    document.getElementById(id) as T;
+  const canvas = el<HTMLCanvasElement>("claw-canvas"),
+    drop = el<HTMLButtonElement>("drop");
+  const moves = [...app.querySelectorAll<HTMLButtonElement>("[data-axis]")];
+  const buttons = [...app.querySelectorAll<HTMLButtonElement>("button")];
+  buttons.forEach((b) => (b.disabled = true));
+  let lastMessage = "";
+  let failed = false;
+  function update(s: ClawSnapshot) {
+    if (failed) return;
+    el("score").textContent = `${s.score} / ${TOYS.length}`;
+    el("attempts").textContent = s.attempts
+      ? t(
+          `已下爪 ${s.attempts} 次`,
+          `${s.attempts} ${s.attempts === 1 ? "attempt" : "attempts"}`,
+        )
+      : t("尚未下爪", "First try awaits");
+    let message = messages[s.phase];
+    if (s.phase === "result")
+      message =
+        s.roundWon > 0
+          ? t(
+              `抓到了！${s.roundWon} 只小伙伴落入取物盒。`,
+              `Got it! ${s.roundWon} ${s.roundWon === 1 ? "prize" : "prizes"} landed in the bin.`,
+            )
+          : t(
+              "这次没抓到。试着对准身体中心，再来一次。",
+              "A miss this time. Aim for the center of the body and try again.",
+            );
+    if (s.score === TOYS.length)
+      message = t(
+        "这一柜全抓到了！换一柜再玩。",
+        "You collected the whole cabinet! Start a new one.",
+      );
+    if (message !== lastMessage) {
+      el("hint").textContent = message;
+      lastMessage = message;
+    }
+    const ready = s.phase === "aim",
+      result = s.phase === "result";
+    moves.forEach((b) => (b.disabled = !ready));
+    drop.disabled = !(ready || result);
+    drop.innerHTML = `${s.score === TOYS.length ? t("再玩一柜", "Play a new cabinet") : result ? t("再抓一次", "Try again") : ready ? t("下爪", "Drop claw") : t("抓取中…", "Grabbing…")}<kbd>Space</kbd>`;
+    el("feedback").classList.toggle("is-win", s.roundWon > 0 && result);
+    el("live-contact").textContent =
+      ready || result
+        ? ""
+        : t(
+            `${s.contacts} 指接触 · 离桌 ${s.highestMm.toFixed(0)} mm`,
+            `${s.contacts} fingers touching · ${s.highestMm.toFixed(0)} mm lift`,
+          );
+    app.querySelectorAll<HTMLElement>("[data-toy]").forEach((node) => {
+      const won = s.won.includes(Number(node.dataset.toy));
+      node.classList.toggle("is-won", won);
+      node.querySelector(".toy-status")!.textContent = won
+        ? t("已抓到", "Collected")
+        : t("待抓取", "In cabinet");
+    });
+  }
+  const lab = await ClawLab.create(canvas, update, (e) => {
+    failed = true;
+    el("hint").textContent = t(
+      "仿真暂停了，重新加载再玩。",
+      "Simulation stopped. Reload to play again.",
+    );
+    el("live-contact").textContent = e instanceof Error ? e.message : String(e);
+    buttons.forEach((b) => (b.disabled = true));
+    const reload = document.createElement("a");
+    reload.href = location.href;
+    reload.className = "quiet-button";
+    reload.textContent = t("重新加载", "Reload");
+    el("feedback").append(reload);
+  });
+  // The first animation frame can fail synchronously during construction.
+  if (failed) {
+    lab.dispose();
+    return;
+  }
+  buttons.forEach((b) => (b.disabled = false));
+  const clear = () => {
+    lab.clearInput();
+    app
+      .querySelectorAll(".is-held")
+      .forEach((node) => node.classList.remove("is-held"));
+  };
+  const action = () => {
+    if (failed) return;
+    clear();
+    if (lab.task.won.size === TOYS.length) lab.reset();
+    else if (lab.task.phase === "result") lab.task.retry();
+    else lab.task.drop();
+  };
+  drop.addEventListener("click", action);
+  el("new-cabinet").addEventListener("click", () => {
+    clear();
+    lab.reset();
+  });
+  let top = false;
+  el("view").addEventListener("click", () => {
+    top = !top;
+    lab.setTopView(top);
+    el("view").setAttribute("aria-pressed", String(top));
+    el("view").textContent = top
+      ? t("斜视", "Angled view")
+      : t("俯视瞄准", "Top view");
+  });
+  moves.forEach((button) => {
+    const axis = button.dataset.axis as MoveAxis,
+      direction = Number(button.dataset.direction);
+    let downAt = 0;
+    button.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 || button.disabled) return;
+      event.preventDefault();
+      canvas.focus({ preventScroll: true });
+      downAt = performance.now();
+      button.setPointerCapture(event.pointerId);
+      lab.input.set(`pointer-${event.pointerId}`, { axis, direction });
+      button.classList.add("is-held");
+    });
+    button.addEventListener("pointerup", (event) => {
+      const held = lab.input.delete(`pointer-${event.pointerId}`);
+      button.classList.remove("is-held");
+      if (held && performance.now() - downAt < 130)
+        lab.task.move(axis, direction * 0.005);
+    });
+    for (const name of ["pointercancel", "lostpointercapture"])
+      button.addEventListener(name, (event) => {
+        lab.input.delete(`pointer-${(event as PointerEvent).pointerId}`);
+        button.classList.remove("is-held");
+      });
+    button.addEventListener("click", (event) => {
+      if (event.detail === 0) lab.task.move(axis, direction * 0.005);
+    });
+  });
+  const keys: Record<string, { axis: MoveAxis; direction: number }> = {
+    ArrowLeft: { axis: "x", direction: -1 },
+    KeyA: { axis: "x", direction: -1 },
+    ArrowRight: { axis: "x", direction: 1 },
+    KeyD: { axis: "x", direction: 1 },
+    ArrowUp: { axis: "y", direction: 1 },
+    KeyW: { axis: "y", direction: 1 },
+    ArrowDown: { axis: "y", direction: -1 },
+    KeyS: { axis: "y", direction: -1 },
+  };
+  window.addEventListener("keydown", (event) => {
+    if (
+      failed ||
+      event.ctrlKey ||
+      event.altKey ||
+      event.metaKey ||
+      (event.target as HTMLElement).matches("input, select, textarea, summary")
+    )
+      return;
+    if (keys[event.code]) {
+      event.preventDefault();
+      lab.input.set(event.code, keys[event.code]!);
+    }
+    if (
+      event.code === "Space" &&
+      !(event.target as HTMLElement).closest("button,a")
+    ) {
+      event.preventDefault();
+      if (!event.repeat) action();
+    }
+  });
+  window.addEventListener("keyup", (event) => lab.input.delete(event.code));
+  window.addEventListener("blur", clear);
+  document.addEventListener("visibilitychange", () => {
+    clear();
+    lab.setActive(!document.hidden);
+  });
+  // BFCache keeps the scene alive but paused; Back resumes the same cabinet.
+  window.addEventListener("pagehide", (event) => {
+    clear();
+    if (event.persisted) lab.setActive(false);
+    else lab.dispose();
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) lab.setActive(!document.hidden);
+  });
+  if (window.parent !== window)
+    new ResizeObserver(() =>
+      window.parent.postMessage(
+        { type: "dexlab-lab-height", height: app.scrollHeight },
+        location.origin,
+      ),
+    ).observe(app);
+}

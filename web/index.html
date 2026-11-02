@@ -7,9 +7,49 @@
       name="description"
       content="DexLab browser-native dexterous contact experiments."
     />
-    <title>DexLab Contact Lab</title>
+    <title>DexLab · Claw Machine</title>
+    <style>
+      body {
+        margin: 0;
+        background: #121a22;
+        color: #ecf0f3;
+        font:
+          16px/1.6 system-ui,
+          sans-serif;
+      }
+      #boot-status {
+        max-width: 640px;
+        margin: 32px auto;
+        padding: 24px;
+      }
+      #boot-status h1 {
+        font-size: 26px;
+        line-height: 1.3;
+      }
+      #boot-status a {
+        color: #a4e5cb;
+      }
+      #boot-status button {
+        min-height: 48px;
+        padding: 10px 20px;
+        font: inherit;
+        cursor: pointer;
+      }
+      #boot-status details {
+        margin-top: 20px;
+        overflow-wrap: anywhere;
+      }
+    </style>
   </head>
   <body>
+    <section id="boot-status" aria-live="polite">
+      <h1 id="boot-title">这次，你来抓娃娃</h1>
+      <p id="boot-message">正在加载互动实验 / Loading the interactive lab…</p>
+      <p><a id="boot-retry" href="">重新加载 / Reload</a></p>
+      <noscript
+        ><p>请启用 JavaScript 后重试。This lab needs JavaScript.</p></noscript
+      >
+    </section>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
