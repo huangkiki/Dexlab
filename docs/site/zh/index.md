@@ -8,16 +8,6 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 > 当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。
 
-## 实验预览
-
-以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
-
-| 抓取与抗滑移 | 海绵擦拭与接触依赖 |
-| --- | --- |
-| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji 点接触与合成抗扭接触对照" loading="lazy"></a><br>相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 **2.734 mm** 降至 **1.025 mm**。 | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="辅助保持下的海绵擦拭回放" loading="lazy"></a><br>辅助保持下 **3/3** 通过；去掉辅助后 **0/3**，最终清洁率约 **95.47% / 39.92%**。 |
-| **柔性物体操作** | **切割与拓扑变化** |
-| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="记录仿真中的机器人夹布" loading="lazy"></a><br>机器人能够夹住并移动布片，但完整折叠仍失败：当前记录的最大边长应变为 **12.55%**，超过预设 5% 上限。 | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="豆腐和香蕉切割的记录状态表面回放" loading="lazy"></a><br>连续切割与刀面推动会产生仿真状态的拓扑变化；完整报告还记录接触力、材料分离与失败。 |
-
 ## 从这里开始
 
 | 你想做什么 | 推荐入口 |
@@ -41,7 +31,7 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 
 任务协议固定场景与预算；模型输出动作，经控制器映射到物理后端或候选生成式后端；原生状态、接触读回与结果由独立证据层记录和评分。反馈回路只有在对应证据成立后才算完成。
 
-*架构图中的任务缩略图用于说明任务类型；真实实验录像和证据见上方实验预览。*
+*架构图中的任务缩略图用于说明任务类型；真实实验录像和证据见下方实验预览。*
 
 <section id="model-evaluation"></section>
 
@@ -70,6 +60,16 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 | **Topology-changing interaction** | 切割和材料分离如何记录接触、连通性与材料响应？ | [切割与推动](cut-push.md) |
 | **Cross-backend evaluation** | 相同物理目标和控制下，不同引擎、积分器与求解器何时可以比较？ | [引擎与求解器](engines.md) · [选型](selection.md) |
 | **Policy and API evaluation** | 模型失败、适配器失败和物理无效运行如何分开？ | [评测协议](model-evaluation.md) · [RoboAPI 适配](https://github.com/huangkiki/Dexlab/blob/main/docs/roboapi-poke.zh-CN.md) |
+
+## 实验预览
+
+以下动图来自 DexLab 的真实仿真录像或记录状态回放。每项结果只适用于对应版本、材料假设和验收协议。
+
+| 抓取与抗滑移 | 海绵擦拭与接触依赖 |
+| --- | --- |
+| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji 点接触与合成抗扭接触对照" loading="lazy"></a><br>相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 **2.734 mm** 降至 **1.025 mm**。 | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="辅助保持下的海绵擦拭回放" loading="lazy"></a><br>辅助保持下 **3/3** 通过；去掉辅助后 **0/3**，最终清洁率约 **95.47% / 39.92%**。 |
+| **柔性物体操作** | **切割与拓扑变化** |
+| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="记录仿真中的机器人夹布" loading="lazy"></a><br>机器人能够夹住并移动布片，但完整折叠仍失败：当前记录的最大边长应变为 **12.55%**，超过预设 5% 上限。 | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="豆腐和香蕉切割的记录状态表面回放" loading="lazy"></a><br>连续切割与刀面推动会产生仿真状态的拓扑变化；完整报告还记录接触力、材料分离与失败。 |
 
 <section id="research-findings"></section>
 
