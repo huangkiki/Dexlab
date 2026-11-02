@@ -216,6 +216,31 @@ def verify_service(unit, timeout, tasks):
     return values
 
 
+def delegate_containers(root):
+    """Keep Docker descendants inside the measured service envelope.
+
+    A cgroup with resident processes cannot host domain-controller children.
+    Move this sole supervisor into a child before enabling those controllers;
+    limits and telemetry remain on the original service ancestor.
+    """
+    delegation = subprocess.check_output(
+        ['systemctl', '--system', 'show', root.name, '-p', 'Delegate', '--value'], text=True).strip()
+    if delegation != 'yes':
+        raise RuntimeError('Container execution requires effective systemd delegation')
+    if set((root / 'cgroup.procs').read_text().split()) != {str(os.getpid())}:
+        raise RuntimeError('Container delegation requires a sole supervisor before launch')
+    controllers = {'cpu', 'io', 'memory', 'pids'}
+    if not controllers <= set((root / 'cgroup.controllers').read_text().split()):
+        raise RuntimeError('Required container resource controllers are unavailable')
+    supervisor = root / 'supervisor'
+    supervisor.mkdir()
+    (supervisor / 'cgroup.procs').write_text(str(os.getpid()))
+    (root / 'cgroup.subtree_control').write_text(' '.join('+' + c for c in sorted(controllers)))
+    if not controllers <= set((root / 'cgroup.subtree_control').read_text().split()):
+        raise RuntimeError('Container resource controllers were not enabled')
+    return {'parent': str(root.relative_to('/sys/fs/cgroup')), 'controllers': sorted(controllers)}
+
+
 def inside(args):
     if os.getuid() == 0:
         raise RuntimeError('Workload must run as an unprivileged user')
@@ -224,6 +249,7 @@ def inside(args):
     admission = (experiment_admission(args.data_dir, args.device_number, args.memory_bytes)
                  if args.profile != 'archive' else None)
     service = verify_service(root.name, args.timeout, PROFILES[args.profile]['tasks'])
+    delegation = delegate_containers(root) if getattr(args, 'delegate_containers', False) else None
     # Include initialization/GPU-query time in the first counter interval.
     # Taking its timestamp afterwards inflates the first sampled CPU/I/O rate.
     start = time.monotonic()
@@ -233,6 +259,8 @@ def inside(args):
              'effective_limits': limits,
              'started_at_unix_s': time.time(), 'initial': read_values(root, METRICS),
              'initial_pressure': pressure(root), 'initial_gpu_memory_mib': gpu_memory()}
+    if delegation:
+        state['container_delegation'] = delegation
     gpu_limit = None
     if getattr(args, 'gpu_uuid', None):
         gpu_limit = {'uuid': args.gpu_uuid, 'limit_mib': args.gpu_memory_limit_mib,
@@ -246,7 +274,10 @@ def inside(args):
     peaks = [0.0, 0.0, 0.0]
     next_gpu_sample = start
     gpu_samples = []
-    child = subprocess.Popen(args.command, **({'start_new_session': True} if gpu_limit else {}))
+    child_options = {'start_new_session': True} if gpu_limit else {}
+    if delegation:
+        child_options['env'] = {**os.environ, 'DEXLAB_BOUNDED_CGROUP': '/' + delegation['parent']}
+    child = subprocess.Popen(args.command, **child_options)
     stop_reason = None
     while child.poll() is None:
         now = time.monotonic()
@@ -319,6 +350,8 @@ def launch(args):
                   'IOSchedulingClass=idle', f'WorkingDirectory={Path.cwd()}',
                   f"IOReadBandwidthMax={device} {policy['read']}",
                   f"IOWriteBandwidthMax={device} {policy['write']}"]
+    if args.delegate_containers:
+        properties.append('Delegate=yes')
     command = ['sudo', '-n', 'systemd-run', '--wait', '--pipe', '--unit=' + unit,
                '--uid=' + str(os.getuid()), '--gid=' + str(os.getgid())]
     for prop in properties:
@@ -337,6 +370,8 @@ def launch(args):
         command += ['--data-dir', str(args.data_dir.resolve())]
     if args.gpu_uuid:
         command += ['--gpu-uuid', args.gpu_uuid, '--gpu-memory-limit-mib', str(args.gpu_memory_limit_mib)]
+    if args.delegate_containers:
+        command += ['--delegate-containers']
     command += ['--', *args.command]
     start = time.monotonic()
     result = subprocess.run(command, check=False)
@@ -366,6 +401,8 @@ def launch(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inside', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--delegate-containers', action='store_true',
+                        help='Expose DEXLAB_BOUNDED_CGROUP for Docker children inside this measured envelope')
     parser.add_argument('--io-device', type=Path)
     parser.add_argument('--receipt', type=Path)
     parser.add_argument('--profile', choices=[*PROFILES, 'adaptive'], default='archive')

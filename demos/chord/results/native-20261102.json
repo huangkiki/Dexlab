@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "scope": "Local finite CHORD migration evidence; not learned-skill qualification",
+  "parent_issue": 282,
+  "implementation_issue": 285,
+  "denominators": {
+    "demonstration_tasks": 3,
+    "tasks_with_finite_training_and_native_reload": 1,
+    "tasks_with_qualified_recorder_parity": 0,
+    "tasks_with_independent_qualified_task_score": 0,
+    "fully_migrated_tasks": 0,
+    "synthetic_smoke_included": false
+  },
+  "upstream_commit": "0530204f3a085fb9ba9cc41b771fc4c853edeab8",
+  "official_image_manifest": "sha256:f07c37e3f0c9f58f7febd0aa9a425523d282be623c0db81ac61006d0e24be07f",
+  "image_id": "sha256:cdd5dbb5f25fd8cd469d61390286ff54e16969ea9457db97de505dabd36fb980",
+  "runtime": {
+    "python": "3.11.13",
+    "packages": {
+      "isaaclab": "0.54.2",
+      "isaacsim": null,
+      "rsl-rl-lib": "3.1.2",
+      "torch": "2.7.0+cu128",
+      "pyarrow": "17.0.0",
+      "tensordict": "0.8.3",
+      "wandb": "0.22.2"
+    },
+    "releases": {
+      "isaaclab": {
+        "version": "2.3.2",
+        "source": "/workspace/isaaclab/VERSION"
+      },
+      "isaacsim": {
+        "version": "5.1.0-rc.19+release.26219.9c81211b.gl",
+        "source": "/isaac-sim/VERSION"
+      }
+    },
+    "robotic_grounding": "/workspace/video_to_data/robotic_grounding/source/robotic_grounding/robotic_grounding/__init__.py"
+  },
+  "native_identity": {
+    "usd_version": [
+      0,
+      24,
+      5
+    ],
+    "extension_ids": {
+      "omni.physx": "omni.physx-107.3.26",
+      "omni.physx.tensors": "omni.physx.tensors-107.3.26",
+      "isaacsim.asset.importer.urdf": "isaacsim.asset.importer.urdf-2.4.31"
+    },
+    "physx_core_version": null,
+    "physx_core_version_status": "not_exposed_by_this_readback; extension IDs are not core versions",
+    "device": "cuda:0",
+    "torch_default_dtype": "torch.float32",
+    "cuda_matmul_allow_tf32": false
+  },
+  "native_physics_scenes": {
+    "/physicsScene": {
+      "physics:gravityDirection": "(0, 0, -1)",
+      "physics:gravityMagnitude": "9.8100004196167",
+      "physxScene:bounceThreshold": "0.20000000298023224",
+      "physxScene:broadphaseType": "GPU",
+      "physxScene:collisionSystem": "PCM",
+      "physxScene:enableCCD": "False",
+      "physxScene:enableEnhancedDeterminism": "False",
+      "physxScene:enableExternalForcesEveryIteration": "False",
+      "physxScene:enableGPUDynamics": "True",
+      "physxScene:enableResidualReporting": "False",
+      "physxScene:enableSceneQuerySupport": "False",
+      "physxScene:enableStabilization": "False",
+      "physxScene:frictionCorrelationDistance": "0.02500000037252903",
+      "physxScene:frictionOffsetThreshold": "0.03999999910593033",
+      "physxScene:frictionType": "patch",
+      "physxScene:gpuCollisionStackSize": "67108864",
+      "physxScene:gpuFoundLostAggregatePairsCapacity": "33554432",
+      "physxScene:gpuFoundLostPairsCapacity": "2097152",
+      "physxScene:gpuHeapCapacity": "67108864",
+      "physxScene:gpuMaxDeformableSurfaceContacts": "1048576",
+      "physxScene:gpuMaxNumPartitions": "8",
+      "physxScene:gpuMaxParticleContacts": "1048576",
+      "physxScene:gpuMaxRigidContactCount": "8388608",
+      "physxScene:gpuMaxRigidPatchCount": "8388608",
+      "physxScene:gpuMaxSoftBodyContacts": "1048576",
+      "physxScene:gpuTempBufferCapacity": "16777216",
+      "physxScene:gpuTotalAggregatePairsCapacity": "2097152",
+      "physxScene:invertCollisionGroupFilter": "False",
+      "physxScene:maxBiasCoefficient": "inf",
+      "physxScene:maxPositionIterationCount": "255",
+      "physxScene:maxVelocityIterationCount": "255",
+      "physxScene:minPositionIterationCount": "1",
+      "physxScene:minVelocityIterationCount": "0",
+      "physxScene:reportKinematicKinematicPairs": "False",
+      "physxScene:reportKinematicStaticPairs": "False",
+      "physxScene:solveArticulationContactLast": "False",
+      "physxScene:solverType": "TGS",
+      "physxScene:timeStepsPerSecond": "100",
+      "physxScene:updateType": "Synchronous"
+    }
+  },
+  "training": {
+    "synthbox-train-005": {
+      "environments": 1,
+      "iterations": 1,
+      "rollout_steps_per_environment": 8,
+      "samples": 8,
+      "wall_s": 98.03925983199952,
+      "memory_peak_mib": 5175.30859375,
+      "checkpoint": {
+        "path": "synthbox-train-005/logs/rsl_rl/sharpa_v2d/2026-11-01_23-31-07_synthbox-smoke/model_0.pt",
+        "checkpoint_sha256": "1fbb7521867f218a5f6d6dd37dd33d1c0079befbad8b08d9e1614e13dc04f4de",
+        "model_tensors_sha256": "f22ddf746231a4b383e75e47f164ffd40ccd5addad63824f8f3f959fbf0296f5",
+        "model_tensor_count": 21,
+        "saved_iteration": 0,
+        "optimizer_parameter_states": 21,
+        "optimizer_step_min": 20,
+        "optimizer_step_max": 20,
+        "nonzero_moment_elements": 4061154,
+        "native_reload": "requires_separate_evaluation",
+        "task_success": "not_inferred"
+      }
+    },
+    "tissue-pilot-002": {
+      "environments": 1,
+      "iterations": 1,
+      "rollout_steps_per_environment": 24,
+      "samples": 24,
+      "wall_s": 31.569529741002043,
+      "memory_peak_mib": 5109.0546875,
+      "checkpoint": {
+        "path": "tissue-pilot-002/logs/rsl_rl/sharpa_v2d/2026-11-01_23-35-02_tissue-box/model_0.pt",
+        "checkpoint_sha256": "129921dc20ca755f8b8dfac3af28735a1856399946af4109061383476e81533f",
+        "model_tensors_sha256": "224acf7582e6b86f9a5724d7c46be650a907b0e9097dbaa43bfc0cfcf66793eb",
+        "model_tensor_count": 21,
+        "saved_iteration": 0,
+        "optimizer_parameter_states": 21,
+        "optimizer_step_min": 20,
+        "optimizer_step_max": 20,
+        "nonzero_moment_elements": 4369369,
+        "native_reload": "requires_separate_evaluation",
+        "task_success": "not_inferred"
+      }
+    },
+    "tissue-train-001": {
+      "environments": 32,
+      "iterations": 50,
+      "rollout_steps_per_environment": 24,
+      "samples": 38400,
+      "wall_s": 127.16937343000245,
+      "memory_peak_mib": 6150.7734375,
+      "checkpoint": {
+        "path": "tissue-train-001/logs/rsl_rl/sharpa_v2d/2026-11-01_23-35-55_tissue-box/model_49.pt",
+        "checkpoint_sha256": "600aabb06349897921ab61ffaabc1e31bd8e43c39ddf4df71e0d7d888fa0c893",
+        "model_tensors_sha256": "54da4620c6280635312915eaf7c3663c907a48e90b0fb153c4ae7677ee2a1734",
+        "model_tensor_count": 21,
+        "saved_iteration": 49,
+        "optimizer_parameter_states": 21,
+        "optimizer_step_min": 1000,
+        "optimizer_step_max": 1000,
+        "nonzero_moment_elements": 4741090,
+        "native_reload": "requires_separate_evaluation",
+        "task_success": "not_inferred"
+      }
+    }
+  },
+  "reloads": {
+    "synthbox-smoke": {
+      "attempt": "synthbox-eval-003",
+      "control_steps": 600,
+      "voc_off_qualified": false
+    },
+    "tissue-box": {
+      "attempt": "tissue-eval-off-001",
+      "control_steps": 600,
+      "timing": {
+        "physics_dt_s": 0.01,
+        "control_dt_s": 0.05,
+        "motion_speed": 0.5,
+        "resampled_frames": 518
+      },
+      "assistance": {
+        "upstream_initial_reset_scale": [
+          [
+            1.0
+          ]
+        ],
+        "initial_voc_scale": [
+          [
+            0.0
+          ]
+        ],
+        "initial_reset_correction": "zero per-env VOC scale before first action; no physics advance",
+        "curriculum": null,
+        "reset_to_first_frame": true
+      }
+    }
+  },
+  "record_completeness": {
+    "attempt": "tissue-eval-on-001",
+    "counts": {
+      "post_reset": 6,
+      "pre_step": 600,
+      "applied_virtual_control_after_physics": 3000,
+      "post_step_before_reset": 600
+    },
+    "maximum_abs_voc_scale": 0.0,
+    "maximum_abs_applied_voc_component": 0.0,
+    "applied_voc_is": "controller output, not measured contact force",
+    "trajectory_parity_qualified": false
+  },
+  "parity": {
+    "gpu_off_on": {
+      "passed": false,
+      "absolute_tolerance": 1e-06,
+      "max_absolute_error": 12.692210674285889,
+      "control_steps": 600,
+      "recorded_invocation_sha256": "a76759bc46df9086e918a27aaa18523b2d2ba68594372a240d7d99b1d5ec4ccc",
+      "native_sha256": "d4724d2388b1c5e00937617d2a2b00e0daf96e7538f9edac49f1091ce7baa92c",
+      "baseline_trajectory_sha256": "64e92640ba1e5502bc7dc70147cc58facb2dab355bc06efe4ce6d0656a17194a",
+      "recorded_trajectory_sha256": "a486f6a1154274063e50d73637388dc90d9af6df7d9206022219f67fcf785791"
+    },
+    "cpu_off_on": {
+      "passed": false,
+      "absolute_tolerance": 1e-06,
+      "max_absolute_error": 15.984450817108154,
+      "control_steps": 600,
+      "recorded_invocation_sha256": "dc1d36b2ceb854ed56de40544b2d4a2eb0fbd43c74ab4745af2faf715f5dc470",
+      "native_sha256": "ad434c47c1eb5c3df0697ca468ff91d1dfde915cbe7a1ca9cb849ec2683af3a2",
+      "baseline_trajectory_sha256": "55aeec8e546fbe791a487be2d94a5cec07875cbf1c5ab3315e46a2d1a8056c4f",
+      "recorded_trajectory_sha256": "1d0efe0d5e3022d7786b725fb6ed5d82c27436b1ef12092564f9818564a8dbb2"
+    }
+  },
+  "gpu_repeatability_control": {
+    "off1_off2": {
+      "max_abs": 16.666613578796387,
+      "first_over_1e-6": 28
+    },
+    "off1_on1": {
+      "max_abs": 12.692210674285889,
+      "first_over_1e-6": 28
+    },
+    "off2_on1": {
+      "max_abs": 11.90222755074501,
+      "first_over_1e-6": 32
+    }
+  },
+  "parity_metric_units": "Mixed observation/action/reward/state units; maximum absolute discrepancy is not a position error",
+  "independent_tracking_score": {
+    "status": "blocked",
+    "reason": "600-step recorder parity failed the prospectively fixed absolute tolerance1e-6; thresholds unchanged"
+  },
+  "failed_and_cancelled_attempts": [
+    {
+      "attempt": "synthbox-train-001",
+      "first_failing_layer": "runtime-filesystem",
+      "reason": "Kit data/cache/log paths not writable"
+    },
+    {
+      "attempt": "synthbox-train-002",
+      "first_failing_layer": "dependency",
+      "reason": "onnxruntime missing through whole-body task auto-import"
+    },
+    {
+      "attempt": "synthbox-train-003",
+      "first_failing_layer": "output-routing",
+      "reason": "Hydra tried to write into read-only checkout"
+    },
+    {
+      "attempt": "synthbox-train-004",
+      "first_failing_layer": "dependency",
+      "reason": "America/Los_Angeles timezone database missing"
+    },
+    {
+      "attempt": "tissue-pilot-001",
+      "first_failing_layer": "launcher",
+      "reason": "kit_args required equals-form for dash-prefixed value"
+    },
+    {
+      "attempt": "synthbox-eval-001",
+      "first_failing_layer": "source-check",
+      "reason": "LFS filter absent in container; materialized assets appeared changed"
+    },
+    {
+      "attempt": "synthbox-eval-002",
+      "first_failing_layer": "source-check",
+      "reason": "LFS clean-filter storage not writable"
+    },
+    {
+      "attempt": "tissue-deterministic-off-001",
+      "first_failing_layer": "native-initialization",
+      "reason": "Diagnostic CPU enhanced determinism / one-thread profile produced no trajectory; manually stopped after inspecting native stack"
+    },
+    {
+      "attempt": "tissue-deterministic-on-001",
+      "first_failing_layer": "cancelled-before-execution",
+      "reason": "Queued diagnostic duplicate cancelled; no native run"
+    }
+  ],
+  "limitations": [
+    "GPU and default CPU recorder parity failed; neither profile supplies qualified independent tracking/hold/slip scores.",
+    "CPU contact reporting warned that collisions are supported only in one collision group; do not qualify filtered contact matrices from this profile.",
+    "PhysX extension identity is observed; native PhysX core version remains unresolved.",
+    "ARCTIC box/mixer motion and matching licensed assets remain unavailable.",
+    "Short training with VOC assistance is not evidence of successful unaided manipulation.",
+    "No native task video was captured.",
+    "Full raw attempts remain preserved locally; this compact manifest is not a public raw-data archive."
+  ],
+  "artifacts": {
+    "checkpoint-inspection-001.json": {
+      "sha256": "bc3c36eacba969cc39b19856a0a4b8a671c0e9eb40cd52d032a6ec0e90e6d580",
+      "bytes": 3253
+    },
+    "native-protocol-001.json": {
+      "sha256": "8d72561db98b8e2677fc9395a545bc52bd9832230f6b438486c5c7fb0bf3ed4b",
+      "bytes": 2429
+    },
+    "native-protocol-002.json": {
+      "sha256": "0fbe5a87fe8be8fab0de27bc111808838c4442e66a419c59d94f42307c7705c1",
+      "bytes": 3020
+    },
+    "native-protocol-003.json": {
+      "sha256": "6a7ec2d11f2b93a591d227c4e9b6134830bf0f0ef77ca55ca43f127b3eb8fecf",
+      "bytes": 3385
+    },
+    "native-protocol-004.json": {
+      "sha256": "9a61271d48fa0c76ab63472df5bf7863a4b6c0c458b8163d8f27253396723f9a",
+      "bytes": 3380
+    },
+    "python-deps-manifest.json": {
+      "sha256": "cbd93fd7cebf400177f2fcc55fc1fb9b6ad3be8f41ff203101f1586e1d6bb448",
+      "bytes": 441551
+    },
+    "python-deps-002-manifest.json": {
+      "sha256": "972562b50c95da73c18a723145c652368416894a5e0aaa4e972b816b8416bb25",
+      "bytes": 165058
+    },
+    "kit-extensions-manifest-002.json": {
+      "sha256": "8453eeeb961554719babf23ec6c7677e02f95cb5dd9b43d6365f94c19e273e2b",
+      "bytes": 30224
+    },
+    "tissue-eval-off-001/invocation.json": {
+      "sha256": "69df3b30e76183fae0ad7ed957830d08c2f9d945bb0b26f674f99a7e93c547c5",
+      "bytes": 9162
+    },
+    "tissue-eval-off-001/trajectory.jsonl": {
+      "sha256": "64e92640ba1e5502bc7dc70147cc58facb2dab355bc06efe4ce6d0656a17194a",
+      "bytes": 5541670
+    },
+    "tissue-eval-on-001/invocation.json": {
+      "sha256": "a76759bc46df9086e918a27aaa18523b2d2ba68594372a240d7d99b1d5ec4ccc",
+      "bytes": 9161
+    },
+    "tissue-eval-on-001/trajectory.jsonl": {
+      "sha256": "a486f6a1154274063e50d73637388dc90d9af6df7d9206022219f67fcf785791",
+      "bytes": 5551396
+    },
+    "tissue-eval-on-001/native.jsonl": {
+      "sha256": "d4724d2388b1c5e00937617d2a2b00e0daf96e7538f9edac49f1091ce7baa92c",
+      "bytes": 12232621
+    },
+    "tissue-cpu-off-001/invocation.json": {
+      "sha256": "20a9dba92d6b955531a5258dd974a2185bb2552333aa76fa07f5387b5f31dcd4",
+      "bytes": 9159
+    },
+    "tissue-cpu-on-001/invocation.json": {
+      "sha256": "dc1d36b2ceb854ed56de40544b2d4a2eb0fbd43c74ab4745af2faf715f5dc470",
+      "bytes": 9158
+    },
+    "parity-repeatability-001.json": {
+      "sha256": "8c28ee7c94ac64430dc0e27e28ca39e64a55a7ef592ef8fb07d93b5a0f6deff2",
+      "bytes": 249
+    }
+  }
+}

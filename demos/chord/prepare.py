@@ -92,33 +92,30 @@ def source_check(source, commit):
         return {"status": "pinned-clean" if actual == commit and not dirty else "mismatch",
                 "expected_commit": commit, "actual_commit": actual, "changes": dirty}
     except (OSError, subprocess.SubprocessError) as error:
-        return {"status": "unavailable", "detail": str(error)}
+        return {"status": "unavailable", "detail": str(error),
+                "stderr": getattr(error, "stderr", None)}
 
 
 def runtime_check(python):
     # Metadata only: importing Isaac before AppLauncher changes its behavior.
-    probe = """
-import importlib.metadata as m, importlib.util as u, json, sys
-versions = {}
-for name in ('isaaclab', 'isaacsim', 'rsl-rl-lib', 'torch', 'pyarrow'):
-    try: versions[name] = m.version(name)
-    except m.PackageNotFoundError: versions[name] = None
-spec = u.find_spec('robotic_grounding')
-print('DEXLAB_CHORD_PROBE=' + json.dumps({'python':sys.version.split()[0], 'packages':versions,
-                 'robotic_grounding':None if spec is None else spec.origin}))
-"""
+    probe = (HERE / "runtime.py").read_text()
     try:
-        output = capture([str(python), "-I", "-c", probe])
+        output = capture([str(python), "-c", probe])
         probes = [line.removeprefix("DEXLAB_CHORD_PROBE=") for line in output.splitlines()
                   if line.startswith("DEXLAB_CHORD_PROBE=")]
         if len(probes) != 1:
             raise ValueError("runtime wrapper did not return exactly one metadata probe")
         result = json.loads(probes[0])
-        result["status"] = ("metadata-present" if result["packages"]["isaaclab"] == "2.3.2"
-                            and all(result["packages"].values()) and result["robotic_grounding"]
-                            else "missing-or-incompatible")
+        releases = result["releases"]
+        lab = releases["isaaclab"]["version"]
+        sim = releases["isaacsim"]["version"] or ""
+        required = ("isaaclab", "rsl-rl-lib", "torch", "pyarrow")
+        result["status"] = ("metadata-present" if lab == "2.3.2"
+                            and sim.split("-")[0] == "5.1.0"
+                            and all(result["packages"].get(name) for name in required)
+                            and result["robotic_grounding"] else "missing-or-incompatible")
         return result
-    except (OSError, subprocess.SubprocessError, ValueError) as error:
+    except (OSError, subprocess.SubprocessError, ValueError, KeyError) as error:
         return {"status": "unavailable", "detail": str(error)}
 
 
@@ -215,6 +212,7 @@ def command(task, source, data_root, python, attempt, operation, seed,
         # Upstream exports policy/video alongside the checkpoint. Isolate that directory.
         argv += ["--max_steps", str(steps), "--checkpoint", str(attempt / "checkpoint.pt")]
     argv += task["reward_overrides"]
+    argv.append(f"hydra.run.dir={attempt / 'hydra'}")
     return {"argv": argv, "cwd": str(source / "robotic_grounding"),
             "environment": {"HUMAN_MOTION_DATA_DIR": str(data_root)},
             "operation": operation, "seed": seed, "num_envs": num_envs,

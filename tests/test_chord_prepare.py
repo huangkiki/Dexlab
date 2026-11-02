@@ -39,6 +39,7 @@ class ChordPreparationTests(unittest.TestCase):
             self.assertIn(f"env.curriculum.fixed_timestep_curriculum.params.rewards_{term}=0.0", args)
         self.assertEqual(plan["sample_budget"], 144)
         self.assertNotIn("--use_primitive_urdfs", args)
+        self.assertIn(f"hydra.run.dir={self.root / 'attempt/hydra'}", args)
         self.assertFalse(plan["execution_admitted"])
 
     def test_synthetic_smoke_cannot_be_used_as_a_training_campaign(self):
@@ -100,11 +101,24 @@ class ChordPreparationTests(unittest.TestCase):
                 self.assertEqual(chord.source_check(self.root, MANIFEST["upstream"]["commit"])["status"], "mismatch")
 
     def test_runtime_wrapper_stdout_does_not_corrupt_metadata_probe(self):
-        metadata = {"python": "3.11.13", "packages": {"isaaclab": "2.3.2", "isaacsim": "5.1.0"},
+        metadata = {"python": "3.11.13", "packages": {"isaaclab": "0.54.2", "isaacsim": None,
+                        "rsl-rl-lib": "3.1.2", "torch": "2.7.0", "pyarrow": "17.0.0"},
+                    "releases": {"isaaclab": {"version": "2.3.2"},
+                                 "isaacsim": {"version": "5.1.0-rc.19+release.26219"}},
                     "robotic_grounding": str(self.root / "robotic_grounding/__init__.py")}
         output = '[INFO] Using python wrapper\nDEXLAB_CHORD_PROBE=' + json.dumps(metadata)
         with patch.object(chord, "capture", return_value=output):
             self.assertEqual(chord.runtime_check(self.root / "python")["status"], "metadata-present")
+
+    def test_internal_extension_version_is_not_a_lab_release(self):
+        for lab, sim in (("0.54.2", "5.1.0"), ("2.3.2", "5.0.0"), (None, "5.1.0")):
+            metadata = {"packages": {"isaaclab": "0.54.2", "torch": "2.7.0",
+                                     "rsl-rl-lib": "3.1.2", "pyarrow": "17.0.0"},
+                        "releases": {"isaaclab": {"version": lab}, "isaacsim": {"version": sim}},
+                        "robotic_grounding": "/source/robotic_grounding/__init__.py"}
+            with self.subTest(lab=lab, sim=sim), patch.object(
+                    chord, "capture", return_value="DEXLAB_CHORD_PROBE=" + json.dumps(metadata)):
+                self.assertEqual(chord.runtime_check(self.root / "python")["status"], "missing-or-incompatible")
 
     def test_missing_inputs_are_reported_without_native_claims(self):
         with patch.object(chord, "source_check", return_value={"status": "pinned-clean"}), \

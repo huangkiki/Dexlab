@@ -13,12 +13,30 @@ SCRIPTS = Path(__file__).parents[1] / 'scripts'
 sys.path.insert(0, str(SCRIPTS))
 from bounded_run import (verify_limits, verify_headroom, verify_service, main,
                          select_profile, freeze_resources, pressure, PROFILES, inside, read_values,
-                         verify_gpu_budget, stop_workload_group)
+                         verify_gpu_budget, stop_workload_group, delegate_containers)
 from archive_run import record_stage
 sys.path.pop(0)
 
 
 class AdaptiveResourceTests(unittest.TestCase):
+    def test_container_delegation_fails_before_mutation_without_service_permission(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch('bounded_run.subprocess.check_output', return_value='no\n'):
+                with self.assertRaisesRegex(RuntimeError, 'effective systemd delegation'):
+                    delegate_containers(root)
+            self.assertEqual(list(root.iterdir()), [])
+
+    def test_container_delegation_refuses_to_move_unrelated_processes(self):
+        import os
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'cgroup.procs').write_text(f'{os.getpid()}\n999999999\n')
+            with patch('bounded_run.subprocess.check_output', return_value='yes\n'):
+                with self.assertRaisesRegex(RuntimeError, 'sole supervisor'):
+                    delegate_containers(root)
+            self.assertFalse((root / 'supervisor').exists())
+
     def test_gpu_budget_rejects_unknown_usage_and_preserves_headroom(self):
         rows = ['GPU-selected, 2000, 23028', 'GPU-other, 22000, 24000']
         self.assertEqual(verify_gpu_budget(rows, 'GPU-selected', 20480)['used_mib'], 2000)
