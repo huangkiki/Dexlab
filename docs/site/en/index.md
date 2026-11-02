@@ -8,16 +8,6 @@ DexLab is a physics-centric research platform for robot manipulation involving c
 
 > Native commands, contact readback, independent scoring, offline evidence, and several contact experiments are available today. Remote model execution, a public leaderboard, and cross-task unified conclusions are still being built.
 
-## Experiment previews
-
-These animations come from DexLab simulation recordings or recorded-state replays. Every result applies only to its reported version, material assumptions, and acceptance protocol.
-
-| Grasp and slip resistance | Sponge wiping and grasp dependence |
-| --- | --- |
-| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji point and torsional contact comparison" loading="lazy"></a><br>Under the same control, synthetic torsional contact reduces two-second hold drift from **2.734 mm** to **1.025 mm**. | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="Assisted sponge wiping replay" loading="lazy"></a><br>Assisted retention passes **3/3**; no assistance gives **0/3**, with final cleaning around **95.47% / 39.92%**. |
-| **Deformable manipulation** | **Cutting and topology change** |
-| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="Robot grasping a deformable cloth in recorded simulation" loading="lazy"></a><br>The robot can pinch and move a cloth patch, but complete folding still fails: the current record reaches **12.55%** edge strain against a 5% limit. | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="Tofu and banana cutting recorded-state replay" loading="lazy"></a><br>Continuous cutting and blade-face pushing change the simulated topology; the full report records contact force, material separation, and retained failures. |
-
 ## Start here
 
 | What would you like to do? | Suggested entry |
@@ -41,7 +31,7 @@ The near-term center is a **Physics Research Platform**: contact, deformation, a
 
 The task protocol fixes scenes and budgets. A model emits actions, a controller maps them to native physics or a candidate generative backend, and an independent evidence layer records native state, contact readback, and outcomes. The feedback loop is credited only when the corresponding evidence exists.
 
-*Task thumbnails illustrate task categories; real experiment recordings and evidence appear in the experiment previews above.*
+*Task thumbnails illustrate task categories; real experiment recordings and evidence appear in the experiment previews below.*
 
 <section id="model-evaluation"></section>
 
@@ -70,6 +60,16 @@ DexLab makes these questions testable:
 | **Topology-changing interaction** | How should cutting and material separation record contact, connectivity, and material response? | [Cutting and pushing](cut-push.md) |
 | **Cross-backend evaluation** | When can engines, integrators, and solvers be compared under matched physical inputs? | [Engines](engines.md) · [Selection](selection.md) |
 | **Policy and API evaluation** | How can model, adapter, and invalid-physics failures be separated? | [Evaluation](model-evaluation.md) · [RoboAPI adapter](https://github.com/huangkiki/Dexlab/blob/main/docs/roboapi-poke.md) |
+
+## Experiment previews
+
+These animations come from DexLab simulation recordings or recorded-state replays. Every result applies only to its reported version, material assumptions, and acceptance protocol.
+
+| Grasp and slip resistance | Sponge wiping and grasp dependence |
+| --- | --- |
+| <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji point and torsional contact comparison" loading="lazy"></a><br>Under the same control, synthetic torsional contact reduces two-second hold drift from **2.734 mm** to **1.025 mm**. | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="Assisted sponge wiping replay" loading="lazy"></a><br>Assisted retention passes **3/3**; no assistance gives **0/3**, with final cleaning around **95.47% / 39.92%**. |
+| **Deformable manipulation** | **Cutting and topology change** |
+| <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="Robot grasping a deformable cloth in recorded simulation" loading="lazy"></a><br>The robot can pinch and move a cloth patch, but complete folding still fails: the current record reaches **12.55%** edge strain against a 5% limit. | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="Tofu and banana cutting recorded-state replay" loading="lazy"></a><br>Continuous cutting and blade-face pushing change the simulated topology; the full report records contact force, material separation, and retained failures. |
 
 <section id="research-findings"></section>
 
