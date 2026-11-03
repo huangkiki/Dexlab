@@ -62,17 +62,25 @@ test("display derivatives retain source provenance and bound GPU geometry and te
     assert.equal(createHash('sha256').update(source).digest('hex'),entry.sourceSha256);
     assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.sha256);
     assert.ok(entry.relativeError <= manifest.maxRelativeError);
+    const sourceGltf = JSON.parse(source.subarray(20,20+source.readUInt32LE(12)).toString());
+    const sourcePrimitives = sourceGltf.meshes.flatMap(mesh => mesh.primitives);
     const length = bytes.readUInt32LE(12);
     const gltf = JSON.parse(bytes.subarray(20,20+length).toString());
     const binary = bytes.subarray(28+length);
     let triangles = 0;
-    for (const mesh of gltf.meshes) for (const primitive of mesh.primitives) {
+    const primitives = gltf.meshes.flatMap(mesh => mesh.primitives);
+    assert.equal(primitives.length,sourcePrimitives.length);
+    for (const [primitiveIndex,primitive] of primitives.entries()) {
       triangles += gltf.accessors[primitive.indices].count / 3;
       const accessor = gltf.accessors[primitive.indices], view = gltf.bufferViews[accessor.bufferView];
       const indices = binary.subarray(view.byteOffset,view.byteOffset+view.byteLength);
       const vertexCount = gltf.accessors[primitive.attributes.POSITION].count;
       for (let i=0;i<indices.length;i+=2) assert.ok(indices.readUInt16LE(i)<vertexCount);
-      assert.ok(primitive.attributes.NORMAL !== undefined && primitive.attributes.TEXCOORD_0 !== undefined);
+      // These source GLBs omit normals; retain their attributes and loader shading semantics.
+      assert.deepEqual(Object.keys(primitive.attributes).sort(),Object.keys(sourcePrimitives[primitiveIndex].attributes).sort());
+      assert.ok(primitive.attributes.TEXCOORD_0 !== undefined);
+      for (const index of Object.values(primitive.attributes))
+        assert.equal(gltf.accessors[index].count,vertexCount);
     }
     assert.equal(triangles,entry.triangles);
     assert.ok(triangles <= manifest.targetTriangles);
