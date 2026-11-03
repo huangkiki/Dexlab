@@ -4,6 +4,8 @@
 
 The original layout, six-layer framework, 38-paper explorer, 19-repository comparison and full report are preserved. Its [October supplement](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026) adds 14 relevant works and one background reference. The [September snapshot](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation-2026-09-14.html) is byte-identical to the author's local file. Original Obsidian links still open local notes; paper and repository sources remain public. This English page is a shorter reading companion.
 
+**2026-11-03 focused addition: [sharing policies and dynamics across demonstrations](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#shared-dexterous-tracking).** FlashDexRetarget, ReDexT, Dex-SuperMimic and the Weave integration extend the existing DONIC and SuperMimic coverage. These outside works do not change the original 38-paper or 19-repository counts and are not DexLab replications.
+
 ## October 2026 additions
 
 Start with **DiffContact, RoboJEPA and Rollback**, then use DiffGIPC for coupled derivatives, HandsOn for failure stages and SuperMimic for learned-model gradients. The entries below inherit the original six layers; they are research leads, not DexLab replications. They do not change the September screening counts. Relevance scores from the monthly review are 4/4 for these 14 works and 3/4 for the PDE reference, not quality or performance rankings. The first three have full-reading notes; the other three priorities received targeted text/figure checks, and eight supporting works received abstract/available-text screening.
@@ -94,6 +96,32 @@ Simulation supports repeated attempts, failure replay and controlled interventio
 | **Simplified simulation plus real data** | Learn reusable coarse skills. | Real touch, fine control, recovery, and the required real data and human time. |
 
 This table synthesizes the papers below. It is neither a list of five implemented DexLab capabilities nor a method ranking. Added simulation complexity earns its cost by improving a measurable failure.
+
+## Sharing policies and dynamics across demonstrations
+
+Picking up, rotating and putting down a bottle can reuse control experience on one hand. Different references may share dynamics, while changes in geometry, mass, friction or articulation require suitable conditioning and state representations. This connects the data/policy, physics and validation layers.
+
+A **shared policy** selects actions from execution state and reference motion. A **shared world model** learns transitions from state and actual actions; differentiating imagined rollouts can then train the policy. Shared policy training also works with model-free FlashSAC or PPO. Simulator throughput, experience reuse and differentiable optimization are separate possible gains.
+
+| Work and checked source | What is shared | Evidence boundary |
+| --- | --- | --- |
+| [FlashDexRetarget, v2](https://arxiv.org/html/2610.01849v2) | Multi-reference FlashSAC; each hand's actor–critic shares parameters across demonstrations, conditioned on geometry, distances and future references. | A joint-training precedent without a SuperMimic-style differentiable WM. Its CHORD comparison uses PPO, not the current FlashCHORD recipe. |
+| [DONIC, v1](https://arxiv.org/html/2610.29997v1) | A shared bimanual tracker using PPO, BC, contact-role rewards and successful-execution recycling. | Up to 3,420 training references; one frozen checkpoint evaluates unseen trajectories and objects. This differs from cumulative conversion during training. |
+| [ReDexT, official project](https://aim-uofa.github.io/ReDexT/) | A feedback residual policy corrects IK commands, with frozen execution or optional shared adaptation. | Each hand has its own policy shared over trajectories. Target-collection adaptation is not zero-shot generalization. |
+| [Dex-SuperMimic, fixed snapshot](https://github.com/CumulusAlpha/Dex-Supermimic/blob/2becb7380fed86171056f9bf4338b2a6a0c14b01/README.md) | Learned-model rollouts and policy updates for Wuji cube reorientation and pen spinning. | Three task configurations do not establish one jointly trained checkpoint or CHORD-scale reference coverage. |
+| [rethinking-supermimic, fixed snapshot](https://github.com/btx0424/rethinking-supermimic/blob/c2b1126e1de9990354290c2c231481b29bc265db/README.md) | Weave / Weave XHand references and policy updates through a learned model. | Implemented data/training entry points; the checked README gives no success-rate or speed benchmark for the added hand–object tasks. |
+
+The [FlashDexRetarget project](https://holiday-robot.github.io/FlashDexRetarget/) reports 90% conversion on 50 XHand references in 29 GPU-hours and over 600 of 1,000 converted within 60 GPU-hours. These are author-reported cumulative conversions, not final frozen-checkpoint success. Different hands, resets, thresholds and cost accounting prevent a direct ranking.
+
+### A possible SuperCHORD research question
+
+Multi-reference policies already have precedents. Combining CHORD wrench-space guidance with a shared hand–object WM and reference-conditioned policy is a proposal; this targeted search establishes neither priority nor a DexLab training result.
+
+Compare independent per-reference training, joint FlashSAC and joint training with model-gradient policy updates. Match rewards before separately testing contact guidance. One hand with compatible object representations and uniform reference sampling is a reasonable starting point, not a frozen or executed protocol.
+
+Record total GPU-hours, simulator transitions, cumulative conversions, final-checkpoint training coverage, unseen-trajectory performance and unseen-object performance separately. Check forward prediction, action response near contact and native-simulator benefit after updates; low prediction error alone does not establish useful gradients. Read FlashDexRetarget first, DONIC/ReDexT for generalization, then the two SuperMimic implementations for model-based optimization.
+
+Checked on 2026-11-03 against the linked papers, official project pages and fixed repository snapshots. This was targeted reading, not a new full-paper review or reproduction campaign.
 
 ## Seven representative works and their questions
 
