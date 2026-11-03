@@ -4,6 +4,8 @@
 
 原版保留完整排版、六层问题、38 篇论文筛选、19 个仓库对照和展开正文，并追加[10 月论文增补](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026)：14 篇相关工作与 1 篇背景参考按六层框架归位。优先读 DiffContact、RoboJEPA、Rollback，再结合 DiffGIPC、HandsOn、SuperMimic。原版中的 Obsidian 链接仍打开本地笔记；论文与仓库链接可公开访问。[未增补的 9 月原版](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation-2026-09-14.html)与本机文件逐字节一致。
 
+**2026-11-03 专题增补：[多示范共享策略与动力学模型](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#shared-dexterous-tracking)。** 补入 FlashDexRetarget、ReDexT、Dex-SuperMimic 与 Weave 接入，展开已有 DONIC、SuperMimic 条目。这些外部工作不计入原来的 38 篇论文、19 个仓库或 DexLab 复现实验。
+
 以下保留较短的阅读路线，原版研究页面是完整调研入口。
 
 **我们在讨论：怎样在可控的虚拟环境中研究手如何完成操作、为什么失败，以及哪些结果值得拿到真实机器人上验证。** 要模拟的既有物体运动，也有手的驱动、接触、传感、控制时钟和任务条件。引擎名称、画面和运行速度各自只能回答一部分问题。
@@ -81,6 +83,32 @@
 | **简化仿真并用真实数据补齐** | 学习可复用的粗粒度技能。 | 真实触觉、精细控制与恢复，以及所需真实数据和人时。 |
 
 这张表是对下列文献的研究归纳，不是 DexLab 已实现的五项能力，也不构成方法排名。更复杂的仿真是否值得，取决于它改善了哪个可测量的失败。
+
+## 多条示范，怎样共用策略与动力学模型
+
+同一只手拿起瓶子、转动瓶子和放下瓶子，可以共享控制经验；动作目标不同，部分接触动力学仍然相同。但物体形状、质量、摩擦或关节结构改变时，共享模型也需要相应条件与状态表示。这条路线连接第五层“数据与策略”、第三层“物理演化”和第六层“验证”。
+
+**共享策略**让同一套参数根据当前状态与参考动作选择控制；**共享 world model**学习状态和实际动作如何产生下一状态，并可通过想象 rollout 的梯度训练策略。前者可以只用 FlashSAC 或 PPO，二者并不绑定。物理仿真吞吐、经验复用和可微优化带来的收益应分别比较。
+
+| 工作与核查入口 | 共享什么、怎样学习 | 结果应该怎样理解 |
+| --- | --- | --- |
+| [FlashDexRetarget · v2](https://arxiv.org/html/2610.01849v2) | 多参考 FlashSAC；左右手各有 actor–critic，每侧参数跨示范共享。几何、距离和未来参考帮助区分交互。 | 已有多示范联合训练，没有 SuperMimic 式可微 WM。论文的 CHORD 对照使用 PPO，不能将其加速比移植到当前 FlashCHORD。 |
+| [DONIC · v1](https://arxiv.org/html/2610.29997v1) | PPO + BC、接触角色奖励与成功轨迹回收；共享双手跟踪策略。 | 最大训练集合为 3,420 条参考。同一冻结 checkpoint 分别评估未见轨迹与未见物体，与训练期间累计转换数不同。 |
+| [ReDexT · 官方项目页](https://aim-uofa.github.io/ReDexT/) | 共享残差策略根据执行反馈修正 IK 命令，支持冻结执行和整批适应。 | 每种手分别训练一套策略，跨该手的轨迹共享；共享适应后的结果不是零样本泛化。 |
+| [Dex-SuperMimic · 仓库快照](https://github.com/CumulusAlpha/Dex-Supermimic/blob/2becb7380fed86171056f9bf4338b2a6a0c14b01/README.md) | 学习到的 WM、想象 rollout 与策略更新用于 Wuji 手转方块、转笔。 | 三个任务配置不等于一个权重联合完成三个任务，也没有建立 CHORD 多示范规模的结果。 |
+| [rethinking-supermimic · 仓库快照](https://github.com/btx0424/rethinking-supermimic/blob/c2b1126e1de9990354290c2c231481b29bc265db/README.md) | 接入 Weave / Weave XHand 手—物参考，提供基于学习模型的策略更新入口。 | 数据与训练接口属于实现证据；所查 README 未报告新增手—物任务的成功率或加速基准。 |
+
+[FlashDexRetarget 项目页](https://holiday-robot.github.io/FlashDexRetarget/)报告 XHand 的 50 条示范中 90% 在 29 GPU 小时内转换成功，1,000 条示范中 600 多条在 60 GPU 小时内成功转换。这是作者的累计数据转换结果，不能直接解释成最终冻结策略在全部示范上的稳定成功率。不同论文的手型、初态、阈值和计算成本口径不同，本表不构成性能排名。
+
+### SuperCHORD 可以提出什么问题
+
+“多示范共用策略”已有上述先例。将 CHORD 接触力旋量指导、共享手—物 WM 与参考条件策略结合起来，可以作为研究设想；本次定向检索不足以支持“首次”的主张，也没有建立 DexLab 的训练结果。
+
+有辨别力的比较是：每条示范独立训练、相同示范联合 FlashSAC、相同联合设置下通过 WM 梯度更新策略。先固定奖励来区分共享与模型的收益，再比较接触指导的增益。可以从同一种手与兼容物体表示开始，先按示范均匀采样；这是建议，不是已经冻结或执行的实验协议。
+
+统一记录总 GPU 小时、仿真交互量、累计转换数、最终 checkpoint 的训练集覆盖、未见轨迹与未见物体表现。模型还需检查前向误差、接触附近动作响应以及更新后原生仿真收益；低预测误差本身不能证明优化方向有用。首次阅读建议按 FlashDexRetarget → DONIC / ReDexT → 两个 SuperMimic 实现的顺序，分别理解共享训练、泛化和动力学模型优化。
+
+本专题核查于 2026-11-03，依据上述论文、官方项目页与固定仓库快照；没有重新完成所有论文的全文精读，也没有复测作者结果。
 
 ## 七篇代表工作，分别回答什么问题
 
