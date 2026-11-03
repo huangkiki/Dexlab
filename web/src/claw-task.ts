@@ -15,11 +15,13 @@ export type ClawPhase =
   | "return"
   | "result";
 export type MoveAxis = "x" | "y";
+export const CLAW_SOLVERS = ["Newton", "CG", "PGS"] as const;
+export type ClawSolver = (typeof CLAW_SOLVERS)[number];
 const padNames = ["pad0", "pad1", "pad2"];
 const clamp = (v: number, lo: number, hi: number) =>
   Math.max(lo, Math.min(hi, v));
 
-export function clawXml() {
+export function clawXml(solver: ClawSolver = "Newton") {
   const fingers = [0, 120, 240]
     .map(
       (angle, i) => `<body euler="0 0 ${angle}">
@@ -33,7 +35,7 @@ export function clawXml() {
     )
     .join("");
   return `<mujoco model="DexLab claw machine">
-    <option timestep="${STEP}" gravity="0 0 -9.81" integrator="implicitfast" solver="Newton" cone="elliptic" iterations="60"/>
+    <option timestep="${STEP}" gravity="0 0 -9.81" integrator="implicitfast" solver="${solver}" cone="elliptic" iterations="60" tolerance="1e-8"/>
     <default><geom friction="0.9 0.005 0.0001" condim="4" solref="0.008 1" solimp="0.95 0.99 0.001"/></default>
     <asset>${TOY_ASSETS}</asset>
     <worldbody>
@@ -79,8 +81,22 @@ export interface ClawSnapshot {
   target: typeof HOME;
 }
 
+export interface ClawCheckpoint {
+  physics: number[];
+  target: typeof HOME;
+  phase: ClawPhase;
+  closed: boolean;
+  attempts: number;
+  won: number[];
+  roundWon: number;
+  phaseTime: number;
+  scoreAtDrop: number;
+  settled: number[];
+}
+
 /** Synthetic rigid toys; all in-round motion comes from actuator forces and contact. */
 export class ClawTask {
+  readonly solver: ClawSolver;
   readonly model: InstanceType<MainModule["MjModel"]>;
   readonly data: InstanceType<MainModule["MjData"]>;
   readonly toyBodies: number[];
@@ -94,6 +110,7 @@ export class ClawTask {
   attempts = 0;
   won = new Set<number>();
   roundWon = 0;
+  stepMs = 0;
   private phaseTime = 0;
   private scoreAtDrop = 0;
   private settled = TOYS.map(() => 0);
@@ -102,9 +119,10 @@ export class ClawTask {
   private axisQpos: number[];
   private module: MainModule;
 
-  constructor(module: MainModule) {
+  constructor(module: MainModule, solver: ClawSolver = "Newton") {
     this.module = module;
-    this.model = module.MjModel.from_xml_string(clawXml());
+    this.solver = solver;
+    this.model = module.MjModel.from_xml_string(clawXml(solver));
     this.data = new module.MjData(this.model);
     const id = (kind: number, name: string) => {
       const value = module.mj_name2id(this.model, kind, name);
@@ -138,6 +156,57 @@ export class ClawTask {
       ...[0, 1, 2].flatMap((i) => [geom(`guide${i}`), geom(`joint${i}`)]),
     ];
     this.reset();
+  }
+
+  checkpoint(): ClawCheckpoint {
+    const spec = this.module.mjtState.mjSTATE_INTEGRATION.value;
+    const buffer = new this.module.DoubleBuffer(
+      this.module.mj_stateSize(this.model, spec),
+    );
+    try {
+      this.module.mj_getState(this.model, this.data, buffer, spec);
+      return {
+        physics: Array.from(buffer.GetView()),
+        target: { ...this.target },
+        phase: this.phase,
+        closed: this.closed,
+        attempts: this.attempts,
+        won: [...this.won],
+        roundWon: this.roundWon,
+        phaseTime: this.phaseTime,
+        scoreAtDrop: this.scoreAtDrop,
+        settled: [...this.settled],
+      };
+    } finally {
+      buffer.delete();
+    }
+  }
+
+  restore(state: ClawCheckpoint) {
+    this.module.mj_setState(
+      this.model,
+      this.data,
+      state.physics,
+      this.module.mjtState.mjSTATE_INTEGRATION.value,
+    );
+    this.target = { ...state.target };
+    this.phase = state.phase;
+    this.closed = state.closed;
+    this.attempts = state.attempts;
+    this.won = new Set(state.won);
+    this.roundWon = state.roundWon;
+    this.phaseTime = state.phaseTime;
+    this.scoreAtDrop = state.scoreAtDrop;
+    this.settled = [...state.settled];
+    this.module.mj_forward(this.model, this.data);
+  }
+
+  setIterations(iterations: number) {
+    if (!Number.isInteger(iterations) || iterations < 1 || iterations > 100)
+      throw new Error("Iteration limit must be an integer between 1 and 100");
+    const option = this.model.opt;
+    option.iterations = iterations;
+    option.delete();
   }
 
   reset(layout = 0) {
@@ -271,7 +340,9 @@ export class ClawTask {
       }
     }
     this.writeControls();
+    const started = performance.now();
     this.module.mj_step(this.model, this.data);
+    this.stepMs = performance.now() - started;
     for (let i = 0; i < TOYS.length; i++) {
       const p = this.position(i);
       if (!Object.values(p).every(Number.isFinite))

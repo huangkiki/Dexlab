@@ -90,7 +90,7 @@ Together, these results show why a success video is insufficient: **material mod
 (live-lab)=
 ## Play the claw machine
 
-Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Space or Drop claw. The three-finger claw descends, closes, lifts and returns to the gold chute. A prize counts only after it actually lands and settles in the bin. Switch to top view to aim, and try as often as you like.
+Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Space or Drop claw. The three-finger claw descends, closes, lifts and returns to the gold chute. A prize counts only after it actually lands and settles in the bin. After you drop, Newton, CG and PGS run from the same state with elliptic friction cones, implicitfast and 2 ms steps. Scrub the shared replay, slow it down, or change the iteration cap and repeat the original grab. Re-aiming continues the Newton cabinet.
 
 ```{raw} html
 <p><a href="../../_static/live-lab/index.html?lang=en" target="_blank" rel="noopener">Open the claw machine in a larger view</a></p>
@@ -100,7 +100,7 @@ Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Spa
 </div>
 ```
 
-MuJoCo computes contact locally in your browser. The six Nai-family prizes (frog, mouse, bean, chicken, cat and rabbit) use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The original solver comparison remains available inside the lab.
+MuJoCo computes contact locally in your browser. The six Nai-family prizes (frog, mouse, bean, chicken, cat and rabbit) use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The guide below the game explains all three solvers and explicit, semi-implicit and implicit integration. Agreement is a valid result; a successful catch alone does not establish physical accuracy.
 
 (quickstart)=
 ## Quick start

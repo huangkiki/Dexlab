@@ -473,3 +473,276 @@ details p {
     scroll-behavior: auto;
   }
 }
+
+/* One cabinet for aiming; three synchronized windows for the experiment. */
+select,
+input {
+  font: inherit;
+  accent-color: var(--mint);
+}
+select {
+  color: inherit;
+  background: #17232d;
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  padding: 8px;
+  min-height: 40px;
+}
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid #b5d5f7;
+  outline-offset: 3px;
+}
+.iteration-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.is-comparing {
+  grid-template-columns: 1fr;
+}
+.is-comparing #claw-canvas {
+  height: 440px;
+}
+.is-comparing .controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  padding: 14px 18px;
+}
+.is-comparing .round-stats {
+  border: 0;
+  padding: 0;
+}
+.is-comparing .iteration-control {
+  margin: 0;
+}
+.is-comparing .play-controls {
+  padding: 0;
+}
+.is-comparing .drop-button {
+  margin: 0;
+  min-width: 130px;
+  height: 46px;
+  font-size: 17px;
+}
+.is-comparing .direction-pad,
+.is-comparing .input-help,
+.is-comparing .toy-collection {
+  display: none;
+}
+.world-labels {
+  position: absolute;
+  inset: 56px 0 34px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  pointer-events: none;
+}
+.world-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 14px;
+  min-width: 0;
+}
+.world-label + .world-label {
+  border-left: 1px solid var(--edge);
+}
+.world-label h2 {
+  width: fit-content;
+  background: #17212b;
+  padding: 0 6px 4px 0;
+  font-size: 21px;
+  margin: 0;
+  color: #b5d5f7;
+}
+.world-label:nth-child(2) h2 {
+  color: var(--mint);
+}
+.world-label:nth-child(3) h2 {
+  color: #f4cc79;
+}
+.world-label h2 small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.world-label > div {
+  background: #17212be8;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.world-label strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.world-label p {
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.comparison-tools {
+  padding: 4px 0 24px;
+}
+.transport {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.transport label,
+.transport output {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+#repeat-grab {
+  margin-left: auto;
+}
+.timeline-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+#timeline {
+  width: 100%;
+  margin: 6px 0;
+  min-height: 28px;
+  cursor: pointer;
+}
+#timeline:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.spread-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.comparison-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.physics-guide {
+  border-top: 1px solid var(--edge);
+  padding: 24px 0;
+}
+.physics-guide h2 {
+  margin: 0 0 10px;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+.physics-guide > p {
+  max-width: 74ch;
+  font-size: 14px;
+  color: var(--muted);
+}
+.physics-guide details {
+  border-bottom: 1px solid var(--edge);
+  padding: 10px 0;
+}
+.physics-guide summary {
+  font-size: 15px;
+  min-height: 44px;
+  line-height: 1.5;
+  padding: 10px 0;
+}
+.physics-guide details p,
+.method-list dd {
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 74ch;
+}
+.method-list {
+  margin: 6px 0 18px;
+}
+.method-list > div {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 20px;
+  padding: 12px 0;
+}
+.method-list dt {
+  font-weight: 650;
+  font-size: 15px;
+}
+.method-list dt span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.method-list dd {
+  margin: 0;
+  color: var(--muted);
+}
+.physics-guide .guide-source {
+  font-size: 12px;
+  margin-top: 14px;
+}
+@media (max-width: 760px) {
+  .iteration-control {
+    grid-column: 1/-1;
+    margin: 0;
+    justify-content: start;
+  }
+  .method-list > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .method-list dt span {
+    display: inline;
+    margin-left: 8px;
+  }
+}
+@media (max-width: 731px) {
+  .is-comparing #claw-canvas {
+    height: 1080px;
+  }
+  .world-labels {
+    inset: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .world-label {
+    padding: 44px 14px 12px;
+  }
+  .world-label + .world-label {
+    border-left: 0;
+    border-top: 1px solid var(--edge);
+    padding-top: 14px;
+  }
+  .is-comparing .camera-help {
+    display: none;
+  }
+  .world-label h2 {
+    width: fit-content;
+    background: #17212b;
+    padding: 0 6px 4px 0;
+    font-size: 19px;
+  }
+  .world-label h2 small {
+    display: inline;
+    margin-left: 8px;
+  }
+  .is-comparing .controls {
+    align-items: start;
+  }
+  .physics-guide h2 {
+    font-size: 19px;
+  }
+}

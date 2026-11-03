@@ -1,8 +1,11 @@
 import "./claw.css";
 import prizeAtlas from "./assets/nai-family-atlas.png";
 import { ClawLab } from "./claw-lab";
+import { clawExplainer } from "./claw-explainer";
+import type { ClawComparison } from "./claw-comparison";
 import {
   TOYS,
+  CLAW_SOLVERS,
   type ClawPhase,
   type ClawSnapshot,
   type MoveAxis,
@@ -33,16 +36,18 @@ const messages: Record<ClawPhase, string> = {
 export async function startClawPage() {
   const app = document.querySelector<HTMLDivElement>("#app")!;
   app.innerHTML = `<main class="claw-page">
-    <header class="game-heading"><div><h1>${t("DexLab 抓娃娃", "DexLab Claw Machine")}</h1><p>${t("移动爪子，瞄准你喜欢的那一只。", "Line up the claw. Pick your favorite.")}</p></div>
+    <header class="game-heading"><div><h1>${t("DexLab 抓娃娃", "DexLab Claw Machine")}</h1><p>${t("你来瞄准，让三个求解器抓同一只娃娃。", "You aim. Three solvers try the same grab.")}</p></div>
       <button type="button" id="new-cabinet" class="quiet-button">${t("换一柜", "New cabinet")}</button></header>
     <div class="machine-layout">
       <section class="scene-panel" aria-label="${t("抓娃娃机", "Claw machine")}">
         <div class="scene-tools"><span>${t("金色口：领奖处", "Gold chute: prize bin")}</span><button type="button" id="view" class="quiet-button" aria-pressed="false">${t("俯视瞄准", "Top view")}</button></div>
         <canvas id="claw-canvas" tabindex="0" aria-label="${t("抓娃娃场景。方向键或 WASD 移动，空格下爪。", "Claw machine. Arrow keys or WASD move; Space drops the claw.")}"></canvas>
+        <div id="world-labels" class="world-labels" hidden>${CLAW_SOLVERS.map((solver, i) => `<article class="world-label"><h2>${solver}<small>${[t("牛顿法", "Newton method"), t("非线性共轭梯度", "Nonlinear CG"), t("投影高斯–赛德尔", "Projected Gauss–Seidel")][i]}</small></h2><div><strong id="world-result-${i}"></strong><p id="world-metrics-${i}"></p></div></article>`).join("")}</div>
         <p class="camera-help">${t("拖动画面转动视角 · 滚轮缩放", "Drag to orbit · Scroll to zoom")}</p>
       </section>
       <section class="controls" aria-label="${t("操作台", "Control panel")}">
-        <div class="round-stats"><span>${t("已抓到", "Collected")} <strong id="score">0 / 6</strong></span><span id="attempts">${t("尚未下爪", "First try awaits")}</span></div>
+        <div class="round-stats"><span>${t("本柜收藏 · Newton", "Cabinet · Newton")} <strong id="score">0 / 6</strong></span><span id="attempts">${t("尚未下爪", "First try awaits")}</span></div>
+        <label class="iteration-control" for="iterations">${t("每步迭代上限", "Iterations per step")}<select id="iterations"><option value="5">5</option><option value="20">20</option><option value="60" selected>60</option><option value="100">100</option></select></label>
         <div class="play-controls"><div class="direction-pad" aria-label="${t("移动爪子", "Move the claw")}">
           ${[
             ["forward", "y", 1, t("向前", "Forward")],
@@ -61,8 +66,15 @@ export async function startClawPage() {
       </section>
     </div>
     <div class="round-feedback" id="feedback"><p id="hint" role="status" aria-live="polite">${messages.aim}</p><span id="live-contact"></span></div>
-    <footer><span>${t("MuJoCo 本地物理 · 免费玩，随时重来", "Local MuJoCo physics · Free play, unlimited tries")}</span><a href="?mode=solver&embed=1&lang=${en ? "en" : "zh"}">${t("求解配置对比", "Solver comparison")}</a>
-      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("六只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Six Nai-family toys have plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGL · Newton / elliptic · 2 ms</p></details>
+    <section id="comparison-tools" class="comparison-tools" aria-label="${t("同步回放", "Synchronized replay")}" hidden>
+      <div class="transport"><button type="button" id="play-pause" class="quiet-button">${t("暂停", "Pause")}</button><label for="speed">${t("播放速度", "Speed")} <select id="speed"><option value="1">1×</option><option value="0.5">0.5×</option><option value="0.25">0.25×</option></select></label><output id="comparison-time">0.00 s</output><button type="button" id="repeat-grab" class="quiet-button">${t("原局重试", "Repeat this grab")}</button></div>
+      <label class="timeline-label" for="timeline">${t("共同时间轴 · 抓取结束后可拖动复盘", "Shared timeline · Scrub after the grab finishes")}</label><input id="timeline" type="range" min="0" max="1" value="0" step="1" disabled>
+      <div class="spread-row"><span id="spread"></span><button type="button" id="first-difference" class="quiet-button" disabled>${t("查看首次位置差 > 1 mm", "First spread > 1 mm")}</button></div>
+      <p class="comparison-note">${t("同一起点 · 同一指令 · elliptic · implicitfast · 2 ms。重新瞄准会继续 Newton 那一柜。", "Same start · same commands · elliptic · implicitfast · 2 ms. Re-aim continues the Newton cabinet.")}</p>
+    </section>
+    ${clawExplainer(en)}
+    <footer><span>${t("MuJoCo 本地物理 · 免费玩，随时重来", "Local MuJoCo physics · Free play, unlimited tries")}</span><a href="?mode=solver&embed=1&lang=${en ? "en" : "zh"}">${t("简化场景对比", "Simple-scene comparison")}</a>
+      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("六只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Six Nai-family toys have plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGL · Newton / CG / PGS · elliptic · implicitfast · 2 ms</p></details>
     </footer></main>`;
   const el = <T extends HTMLElement>(id: string) =>
     document.getElementById(id) as T;
@@ -84,16 +96,10 @@ export async function startClawPage() {
       : t("尚未下爪", "First try awaits");
     let message = messages[s.phase];
     if (s.phase === "result")
-      message =
-        s.roundWon > 0
-          ? t(
-              `抓到了！${s.roundWon} 只小伙伴落入取物盒。`,
-              `Got it! ${s.roundWon} ${s.roundWon === 1 ? "prize" : "prizes"} landed in the bin.`,
-            )
-          : t(
-              "这次没抓到。试着对准身体中心，再来一次。",
-              "A miss this time. Aim for the center of the body and try again.",
-            );
+      message = t(
+        "三路抓取结束。拖动时间轴复盘，或调整迭代上限后原局重试。",
+        "All three grabs finished. Scrub the replay, or change the iteration cap and repeat.",
+      );
     if (s.score === TOYS.length)
       message = t(
         "这一柜全抓到了！换一柜再玩。",
@@ -107,15 +113,10 @@ export async function startClawPage() {
       result = s.phase === "result";
     moves.forEach((b) => (b.disabled = !ready));
     drop.disabled = !(ready || result);
-    drop.innerHTML = `${s.score === TOYS.length ? t("再玩一柜", "Play a new cabinet") : result ? t("再抓一次", "Try again") : ready ? t("下爪", "Drop claw") : t("抓取中…", "Grabbing…")}<kbd>Space</kbd>`;
+    drop.innerHTML = `${s.score === TOYS.length ? t("再玩一柜", "Play a new cabinet") : result ? t("重新瞄准", "Re-aim") : ready ? t("下爪", "Drop claw") : t("抓取中…", "Grabbing…")}<kbd>Space</kbd>`;
+    el<HTMLSelectElement>("iterations").disabled = !(ready || result);
     el("feedback").classList.toggle("is-win", s.roundWon > 0 && result);
-    el("live-contact").textContent =
-      ready || result
-        ? ""
-        : t(
-            `${s.contacts} 指接触 · 离桌 ${s.highestMm.toFixed(0)} mm`,
-            `${s.contacts} fingers touching · ${s.highestMm.toFixed(0)} mm lift`,
-          );
+    el("live-contact").textContent = "";
     app.querySelectorAll<HTMLElement>("[data-toy]").forEach((node) => {
       const won = s.won.includes(Number(node.dataset.toy));
       node.classList.toggle("is-won", won);
@@ -124,26 +125,96 @@ export async function startClawPage() {
         : t("待抓取", "In cabinet");
     });
   }
-  const lab = await ClawLab.create(canvas, update, (e) => {
-    failed = true;
-    el("hint").textContent = t(
-      "仿真暂停了，重新加载再玩。",
-      "Simulation stopped. Reload to play again.",
+  function updateComparison(comparison: ClawComparison) {
+    app
+      .querySelector(".machine-layout")!
+      .classList.toggle("is-comparing", comparison.started);
+    el("world-labels").hidden = el("comparison-tools").hidden =
+      !comparison.started;
+    if (!comparison.started || !comparison.current) return;
+    const frame = comparison.current;
+    el("comparison-time").textContent = `${frame.time.toFixed(2)} s`;
+    frame.worlds.forEach((world, i) => {
+      const phase = world.snapshot.phase;
+      el(`world-result-${i}`).textContent =
+        phase === "result"
+          ? t(
+              `本轮入盒 ${world.snapshot.roundWon} 只`,
+              `${world.snapshot.roundWon} prizes this grab`,
+            )
+          : messages[phase];
+      el(`world-metrics-${i}`).textContent = t(
+        `抬升 ${world.liftMm.toFixed(0)} mm · ${world.meanIterations.toFixed(1)} 次/步 · ${world.meanStepMs.toFixed(2)} ms/步`,
+        `Lift ${world.liftMm.toFixed(0)} mm · ${world.meanIterations.toFixed(1)} it/step · ${world.meanStepMs.toFixed(2)} ms/step`,
+      );
+    });
+    el<HTMLButtonElement>("repeat-grab").disabled = !comparison.complete;
+    const timeline = el<HTMLInputElement>("timeline");
+    timeline.disabled = !comparison.complete;
+    timeline.max = String(Math.max(1, comparison.frames.length - 1));
+    timeline.value = String(comparison.cursor);
+    timeline.setAttribute("aria-valuetext", `${frame.time.toFixed(2)} s`);
+    el("play-pause").textContent = comparison.paused
+      ? t("播放", "Play")
+      : t("暂停", "Pause");
+    el<HTMLButtonElement>("first-difference").disabled =
+      !comparison.complete || comparison.firstDifference === null;
+    el("spread").textContent = t(
+      `此刻最大位置差 ${frame.spreadMm.toFixed(2)} mm`,
+      `Current max position spread ${frame.spreadMm.toFixed(2)} mm`,
     );
-    el("live-contact").textContent = e instanceof Error ? e.message : String(e);
-    buttons.forEach((b) => (b.disabled = true));
-    const reload = document.createElement("a");
-    reload.href = location.href;
-    reload.className = "quiet-button";
-    reload.textContent = t("重新加载", "Reload");
-    el("feedback").append(reload);
-  });
+  }
+  const lab = await ClawLab.create(
+    canvas,
+    update,
+    (e) => {
+      failed = true;
+      el("hint").textContent = t(
+        "仿真暂停了，重新加载再玩。",
+        "Simulation stopped. Reload to play again.",
+      );
+      el("live-contact").textContent =
+        e instanceof Error ? e.message : String(e);
+      buttons.forEach((b) => (b.disabled = true));
+      const reload = document.createElement("a");
+      reload.href = location.href;
+      reload.className = "quiet-button";
+      reload.textContent = t("重新加载", "Reload");
+      el("feedback").append(reload);
+      app
+        .querySelectorAll<HTMLInputElement | HTMLSelectElement>("input,select")
+        .forEach((control) => (control.disabled = true));
+    },
+    updateComparison,
+  );
   // The first animation frame can fail synchronously during construction.
   if (failed) {
     lab.dispose();
     return;
   }
   buttons.forEach((b) => (b.disabled = false));
+  update(lab.task.snapshot());
+  const iterationLimit = () =>
+    Number(el<HTMLSelectElement>("iterations").value);
+  el("repeat-grab").addEventListener("click", () =>
+    lab.startComparison(iterationLimit(), true),
+  );
+  el("play-pause").addEventListener("click", () => {
+    lab.comparison.togglePlayback();
+    updateComparison(lab.comparison);
+  });
+  el("speed").addEventListener("change", () => {
+    lab.speed = Number(el<HTMLSelectElement>("speed").value);
+  });
+  el("timeline").addEventListener("input", () => {
+    lab.comparison.seek(Number(el<HTMLInputElement>("timeline").value));
+    updateComparison(lab.comparison);
+  });
+  el("first-difference").addEventListener("click", () => {
+    if (lab.comparison.firstDifference !== null)
+      lab.comparison.seek(lab.comparison.firstDifference);
+    updateComparison(lab.comparison);
+  });
   const clear = () => {
     lab.clearInput();
     app
@@ -154,8 +225,8 @@ export async function startClawPage() {
     if (failed) return;
     clear();
     if (lab.task.won.size === TOYS.length) lab.reset();
-    else if (lab.task.phase === "result") lab.task.retry();
-    else lab.task.drop();
+    else if (lab.task.phase === "result") lab.reaim();
+    else lab.startComparison(iterationLimit());
   };
   drop.addEventListener("click", action);
   el("new-cabinet").addEventListener("click", () => {

@@ -75,7 +75,7 @@ The long-term goal is to improve simulation and models together: use model failu
 <a id="whats-new"></a>
 ## What's new
 
-- **2026-11-03** — Try [the claw machine in your browser](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab): aim, drop, and collect six Nai-family toys.
+- **2026-11-03** — Try [the claw machine in your browser](https://huangkiki.github.io/Dexlab/en/latest/index.html#live-lab): compare one grab across Newton, CG and PGS, with slow replay, original-state repetition and solver/integrator explanations.
 - **2026-11-03** — Published the [original dexterous simulation review](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) with 14 relevant October works and one background reference organized by its six layers.
 - **2026-11-02** — Added a [dexterous-hand simulation guide](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html) and a [topic guide to 35 Newton papers](https://huangkiki.github.io/Dexlab/en/latest/newton-reading-guide.html).
 - **2026-10-31** — Released the [RoboAPI session adapter](docs/roboapi-poke.md): model discovery, continuous sessions and action receipts; task mappings remain pending.
