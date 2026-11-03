@@ -730,6 +730,7 @@ input:focus-visible {
   .world-label {
     padding: 44px 14px 12px;
   }
+  .world-label:last-child { padding-bottom: 40px; }
   .world-label + .world-label {
     border-left: 0;
     border-top: 1px solid var(--edge);

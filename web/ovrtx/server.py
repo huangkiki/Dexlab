@@ -80,13 +80,12 @@ def session(socket, output):
                 vertical = 36 * np.tan(np.deg2rad(request["fov"]) / 2)
                 for name, value in (("verticalAperture", vertical), ("horizontalAperture", vertical * width / height)):
                     renderer.write_attribute(camera_paths, name, np.full(len(worlds), value, dtype=np.float32))
+                # omni:xform is local; the lane root already offsets meshes, cameras and lights.
                 cameras = np.repeat(camera, len(worlds), axis=0)
-                cameras[:, 3, 0] += np.arange(len(worlds)) * 4.
                 renderer.write_attribute(camera_paths, "omni:xform", cameras, semantic=ovrtx.Semantic.XFORM_MAT4x4)
                 composite = Image.new("RGB", (width * columns, height * (len(worlds) // columns)))
                 for i, transforms in enumerate(worlds):
                     lane_paths = paths if i == 0 else [p.replace("/World/", f"/Lane{i}/") for p in paths]
-                    transforms[:, 3, 0] += i * 4.
                     renderer.write_attribute(lane_paths, "omni:xform", transforms, semantic=ovrtx.Semantic.XFORM_MAT4x4)
                 # Separate render products retain independent temporal histories.
                 # All products consume the same accepted snapshot in one native step.
@@ -138,12 +137,21 @@ def main():
     args.work_dir.mkdir(parents=True, exist_ok=True)
     # Loopback and an exact origin list prevent arbitrary sites from using the GPU.
     origins = [f"http://{host}:{port}" for host in ("localhost", "127.0.0.1") for port in (8877, 8878)]
-    with serve(lambda socket: session(socket, args.work_dir), "127.0.0.1", 8879,
-               origins=origins, max_size=64 * 1024 * 1024, max_queue=1, ping_interval=None) as server:
+    sockets = set()
+    def handle(socket):
+        sockets.add(socket)
+        try:
+            session(socket, args.work_dir)
+        finally:
+            sockets.discard(socket)
+    with serve(handle, "127.0.0.1", 8879,
+               origins=origins, close_timeout=2, max_size=64 * 1024 * 1024, max_queue=1, ping_interval=None) as server:
         print("OVRTX bridge listening at ws://127.0.0.1:8879", flush=True)
         # Detached shells can inherit SIGINT ignored; explicitly enable graceful stop.
         def stop(_signum, _frame):
             server.shutdown()
+            for socket in tuple(sockets):
+                socket.close(1001, "Renderer stopping")
         signal.signal(signal.SIGINT, stop)
         signal.signal(signal.SIGTERM, stop)
         try:

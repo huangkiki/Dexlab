@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-03T09:13:59.771469+00:00",
+  "title": "Design System: DexLab claw-machine surface",
+  "extensions": {
+    "colorMeta": {
+      "page-plum": {
+        "role": "neutral",
+        "displayName": "Page Plum",
+        "canonical": "#15111e",
+        "tonalRamp": [
+          "oklch(15.00% 0.02654 297.96)",
+          "oklch(26.43% 0.02654 297.96)",
+          "oklch(37.86% 0.02654 297.96)",
+          "oklch(49.29% 0.02654 297.96)",
+          "oklch(60.71% 0.02654 297.96)",
+          "oklch(72.14% 0.02654 297.96)",
+          "oklch(83.57% 0.02654 297.96)",
+          "oklch(95.00% 0.02654 297.96)"
+        ]
+      },
+      "scene-plum": {
+        "role": "neutral",
+        "displayName": "Scene Plum",
+        "canonical": "#1c1627",
+        "tonalRamp": [
+          "oklch(15.00% 0.03370 299.82)",
+          "oklch(26.43% 0.03370 299.82)",
+          "oklch(37.86% 0.03370 299.82)",
+          "oklch(49.29% 0.03370 299.82)",
+          "oklch(60.71% 0.03370 299.82)",
+          "oklch(72.14% 0.03370 299.82)",
+          "oklch(83.57% 0.03370 299.82)",
+          "oklch(95.00% 0.03370 299.82)"
+        ]
+      },
+      "control-plum": {
+        "role": "neutral",
+        "displayName": "Control Plum",
+        "canonical": "#251c30",
+        "tonalRamp": [
+          "oklch(15.00% 0.03904 304.35)",
+          "oklch(26.43% 0.03904 304.35)",
+          "oklch(37.86% 0.03904 304.35)",
+          "oklch(49.29% 0.03904 304.35)",
+          "oklch(60.71% 0.03904 304.35)",
+          "oklch(72.14% 0.03904 304.35)",
+          "oklch(83.57% 0.03904 304.35)",
+          "oklch(95.00% 0.03904 304.35)"
+        ]
+      },
+      "quiet-plum": {
+        "role": "neutral",
+        "displayName": "Quiet Plum",
+        "canonical": "#241a30",
+        "tonalRamp": [
+          "oklch(15.00% 0.04304 304.27)",
+          "oklch(26.43% 0.04304 304.27)",
+          "oklch(37.86% 0.04304 304.27)",
+          "oklch(49.29% 0.04304 304.27)",
+          "oklch(60.71% 0.04304 304.27)",
+          "oklch(72.14% 0.04304 304.27)",
+          "oklch(83.57% 0.04304 304.27)",
+          "oklch(95.00% 0.04304 304.27)"
+        ]
+      },
+      "quiet-hover": {
+        "role": "neutral",
+        "displayName": "Quiet Hover",
+        "canonical": "#3b294a",
+        "tonalRamp": [
+          "oklch(15.00% 0.06135 308.35)",
+          "oklch(26.43% 0.06135 308.35)",
+          "oklch(37.86% 0.06135 308.35)",
+          "oklch(49.29% 0.06135 308.35)",
+          "oklch(60.71% 0.06135 308.35)",
+          "oklch(72.14% 0.06135 308.35)",
+          "oklch(83.57% 0.06135 308.35)",
+          "oklch(95.00% 0.06135 308.35)"
+        ]
+      },
+      "move-plum": {
+        "role": "neutral",
+        "displayName": "Move Plum",
+        "canonical": "#40304e",
+        "tonalRamp": [
+          "oklch(15.00% 0.05508 308.14)",
+          "oklch(26.43% 0.05508 308.14)",
+          "oklch(37.86% 0.05508 308.14)",
+          "oklch(49.29% 0.05508 308.14)",
+          "oklch(60.71% 0.05508 308.14)",
+          "oklch(72.14% 0.05508 308.14)",
+          "oklch(83.57% 0.05508 308.14)",
+          "oklch(95.00% 0.05508 308.14)"
+        ]
+      },
+      "move-hover": {
+        "role": "neutral",
+        "displayName": "Move Hover",
+        "canonical": "#5c426c",
+        "tonalRamp": [
+          "oklch(15.00% 0.07448 311.86)",
+          "oklch(26.43% 0.07448 311.86)",
+          "oklch(37.86% 0.07448 311.86)",
+          "oklch(49.29% 0.07448 311.86)",
+          "oklch(60.71% 0.07448 311.86)",
+          "oklch(72.14% 0.07448 311.86)",
+          "oklch(83.57% 0.07448 311.86)",
+          "oklch(95.00% 0.07448 311.86)"
+        ]
+      },
+      "text-pale": {
+        "role": "neutral",
+        "displayName": "Text Pale",
+        "canonical": "#f3eaf6",
+        "tonalRamp": [
+          "oklch(15.00% 0.01858 317.73)",
+          "oklch(26.43% 0.01858 317.73)",
+          "oklch(37.86% 0.01858 317.73)",
+          "oklch(49.29% 0.01858 317.73)",
+          "oklch(60.71% 0.01858 317.73)",
+          "oklch(72.14% 0.01858 317.73)",
+          "oklch(83.57% 0.01858 317.73)",
+          "oklch(95.00% 0.01858 317.73)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Text Muted",
+        "canonical": "#c9b9d4",
+        "tonalRamp": [
+          "oklch(15.00% 0.04126 311.68)",
+          "oklch(26.43% 0.04126 311.68)",
+          "oklch(37.86% 0.04126 311.68)",
+          "oklch(49.29% 0.04126 311.68)",
+          "oklch(60.71% 0.04126 311.68)",
+          "oklch(72.14% 0.04126 311.68)",
+          "oklch(83.57% 0.04126 311.68)",
+          "oklch(95.00% 0.04126 311.68)"
+        ]
+      },
+      "edge-plum": {
+        "role": "neutral",
+        "displayName": "Edge Plum",
+        "canonical": "#4a3959",
+        "tonalRamp": [
+          "oklch(15.00% 0.05737 308.15)",
+          "oklch(26.43% 0.05737 308.15)",
+          "oklch(37.86% 0.05737 308.15)",
+          "oklch(49.29% 0.05737 308.15)",
+          "oklch(60.71% 0.05737 308.15)",
+          "oklch(72.14% 0.05737 308.15)",
+          "oklch(83.57% 0.05737 308.15)",
+          "oklch(95.00% 0.05737 308.15)"
+        ]
+      },
+      "action-rose": {
+        "role": "primary",
+        "displayName": "Action Rose",
+        "canonical": "#e8afe0",
+        "tonalRamp": [
+          "oklch(15.00% 0.09198 331.25)",
+          "oklch(26.43% 0.09198 331.25)",
+          "oklch(37.86% 0.09198 331.25)",
+          "oklch(49.29% 0.09198 331.25)",
+          "oklch(60.71% 0.09198 331.25)",
+          "oklch(72.14% 0.09198 331.25)",
+          "oklch(83.57% 0.09198 331.25)",
+          "oklch(95.00% 0.09198 331.25)"
+        ]
+      },
+      "action-hover": {
+        "role": "primary",
+        "displayName": "Action Hover",
+        "canonical": "#f6d1ef",
+        "tonalRamp": [
+          "oklch(15.00% 0.05687 332.50)",
+          "oklch(26.43% 0.05687 332.50)",
+          "oklch(37.86% 0.05687 332.50)",
+          "oklch(49.29% 0.05687 332.50)",
+          "oklch(60.71% 0.05687 332.50)",
+          "oklch(72.14% 0.05687 332.50)",
+          "oklch(83.57% 0.05687 332.50)",
+          "oklch(95.00% 0.05687 332.50)"
+        ]
+      },
+      "action-ink": {
+        "role": "primary",
+        "displayName": "Action Ink",
+        "canonical": "#321e37",
+        "tonalRamp": [
+          "oklch(15.00% 0.05244 319.43)",
+          "oklch(26.43% 0.05244 319.43)",
+          "oklch(37.86% 0.05244 319.43)",
+          "oklch(49.29% 0.05244 319.43)",
+          "oklch(60.71% 0.05244 319.43)",
+          "oklch(72.14% 0.05244 319.43)",
+          "oklch(83.57% 0.05244 319.43)",
+          "oklch(95.00% 0.05244 319.43)"
+        ]
+      },
+      "focus-lilac": {
+        "role": "secondary",
+        "displayName": "Focus Lilac",
+        "canonical": "#dec1f5",
+        "tonalRamp": [
+          "oklch(15.00% 0.07735 309.92)",
+          "oklch(26.43% 0.07735 309.92)",
+          "oklch(37.86% 0.07735 309.92)",
+          "oklch(49.29% 0.07735 309.92)",
+          "oklch(60.71% 0.07735 309.92)",
+          "oklch(72.14% 0.07735 309.92)",
+          "oklch(83.57% 0.07735 309.92)",
+          "oklch(95.00% 0.07735 309.92)"
+        ]
+      },
+      "cabinet-enamel": {
+        "role": "secondary",
+        "displayName": "Cabinet Enamel",
+        "canonical": "#30223f",
+        "tonalRamp": [
+          "oklch(15.00% 0.05465 305.40)",
+          "oklch(26.43% 0.05465 305.40)",
+          "oklch(37.86% 0.05465 305.40)",
+          "oklch(49.29% 0.05465 305.40)",
+          "oklch(60.71% 0.05465 305.40)",
+          "oklch(72.14% 0.05465 305.40)",
+          "oklch(83.57% 0.05465 305.40)",
+          "oklch(95.00% 0.05465 305.40)"
+        ]
+      },
+      "cabinet-mauve": {
+        "role": "secondary",
+        "displayName": "Cabinet Mauve",
+        "canonical": "#885e93",
+        "tonalRamp": [
+          "oklch(15.00% 0.09369 319.15)",
+          "oklch(26.43% 0.09369 319.15)",
+          "oklch(37.86% 0.09369 319.15)",
+          "oklch(49.29% 0.09369 319.15)",
+          "oklch(60.71% 0.09369 319.15)",
+          "oklch(72.14% 0.09369 319.15)",
+          "oklch(83.57% 0.09369 319.15)",
+          "oklch(95.00% 0.09369 319.15)"
+        ]
+      },
+      "cabinet-silver": {
+        "role": "secondary",
+        "displayName": "Cabinet Silver",
+        "canonical": "#e2c2eb",
+        "tonalRamp": [
+          "oklch(15.00% 0.06565 318.76)",
+          "oklch(26.43% 0.06565 318.76)",
+          "oklch(37.86% 0.06565 318.76)",
+          "oklch(49.29% 0.06565 318.76)",
+          "oklch(60.71% 0.06565 318.76)",
+          "oklch(72.14% 0.06565 318.76)",
+          "oklch(83.57% 0.06565 318.76)",
+          "oklch(95.00% 0.06565 318.76)"
+        ]
+      },
+      "seam-rose": {
+        "role": "primary",
+        "displayName": "Seam Rose",
+        "canonical": "#e8a5d5",
+        "tonalRamp": [
+          "oklch(15.00% 0.10003 337.33)",
+          "oklch(26.43% 0.10003 337.33)",
+          "oklch(37.86% 0.10003 337.33)",
+          "oklch(49.29% 0.10003 337.33)",
+          "oklch(60.71% 0.10003 337.33)",
+          "oklch(72.14% 0.10003 337.33)",
+          "oklch(83.57% 0.10003 337.33)",
+          "oklch(95.00% 0.10003 337.33)"
+        ]
+      },
+      "moon-gold": {
+        "role": "secondary",
+        "displayName": "Moon Gold",
+        "canonical": "#ffe3ad",
+        "tonalRamp": [
+          "oklch(15.00% 0.07572 83.59)",
+          "oklch(26.43% 0.07572 83.59)",
+          "oklch(37.86% 0.07572 83.59)",
+          "oklch(49.29% 0.07572 83.59)",
+          "oklch(60.71% 0.07572 83.59)",
+          "oklch(72.14% 0.07572 83.59)",
+          "oklch(83.57% 0.07572 83.59)",
+          "oklch(95.00% 0.07572 83.59)"
+        ]
+      },
+      "claw-lilac": {
+        "role": "secondary",
+        "displayName": "Claw Lilac",
+        "canonical": "#d7b6df",
+        "tonalRamp": [
+          "oklch(15.00% 0.06692 319.64)",
+          "oklch(26.43% 0.06692 319.64)",
+          "oklch(37.86% 0.06692 319.64)",
+          "oklch(49.29% 0.06692 319.64)",
+          "oklch(60.71% 0.06692 319.64)",
+          "oklch(72.14% 0.06692 319.64)",
+          "oklch(83.57% 0.06692 319.64)",
+          "oklch(95.00% 0.06692 319.64)"
+        ]
+      },
+      "comparison-gold": {
+        "role": "secondary",
+        "displayName": "Comparison gold",
+        "canonical": "#f4cc79",
+        "tonalRamp": [
+          "oklch(15.00% 0.11146 84.38)",
+          "oklch(26.43% 0.11146 84.38)",
+          "oklch(37.86% 0.11146 84.38)",
+          "oklch(49.29% 0.11146 84.38)",
+          "oklch(60.71% 0.11146 84.38)",
+          "oklch(72.14% 0.11146 84.38)",
+          "oklch(83.57% 0.11146 84.38)",
+          "oklch(95.00% 0.11146 84.38)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "Body",
+        "purpose": "Heading descriptions and teaching introductions."
+      },
+      "explanation": {
+        "displayName": "Explanation",
+        "purpose": "Longer teaching paragraphs."
+      },
+      "ui-heading": {
+        "displayName": "Ui Heading",
+        "purpose": "Existing interface title; no new display-face mandate."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Teaching section title."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Primary gameplay action."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Compact control and secondary labels."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "stacked-play-controls",
+        "value": "760px"
+      },
+      {
+        "name": "narrow-touch-layout",
+        "value": "480px"
+      },
+      {
+        "name": "comparison-scene-container",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Drop / Re-aim",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary gameplay action; visible copy changes with the round state.",
+      "html": "<button class=\"ds-drop\">Drop claw <kbd>Space</kbd></button>",
+      "css": ".ds-drop{font-family:ui-sans-serif,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:57px;border:0;border-radius:9px;background:var(--accent,#e8afe0);color:#321e37;font-size:20px;font-weight:700;cursor:pointer}.ds-drop:hover:not(:disabled){background:#f6d1ef}.ds-drop:disabled{opacity:.48;cursor:default}.ds-drop:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}.ds-drop kbd{font:400 11px/1.2 ui-sans-serif,system-ui,sans-serif;border:1px solid currentColor;border-radius:4px;padding:3px 5px}"
+    },
+    {
+      "name": "Quiet action",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "New cabinet, camera and replay actions.",
+      "html": "<button class=\"ds-quiet\">New cabinet</button>",
+      "css": ".ds-quiet{font-family:ui-sans-serif,system-ui,sans-serif;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 13px;border:1px solid var(--edge,#4a3959);border-radius:8px;background:#241a30;color:#f3eaf6;font-size:13px;white-space:nowrap;cursor:pointer}.ds-quiet:hover{background:#3b294a}.ds-quiet:disabled{opacity:.48;cursor:default}.ds-quiet:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}"
+    },
+    {
+      "name": "Direction control",
+      "kind": "button",
+      "refersTo": "button-direction",
+      "description": "Hold to move and tap to fine-tune; the held state shares its hover fill.",
+      "html": "<button class=\"ds-direction\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M12 19V5m-6 6 6-6 6 6\"/></svg><span>Forward</span></button>",
+      "css": ".ds-direction{font-family:ui-sans-serif,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:51px;border:1px solid #735984;border-radius:8px;background:#40304e;color:#f3eaf6;font-size:11px;touch-action:none;user-select:none;cursor:pointer}.ds-direction svg{height:20px;width:20px}.ds-direction:hover,.ds-direction.is-held{background:#5c426c}.ds-direction:disabled{opacity:.48;cursor:default}.ds-direction:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}"
+    },
+    {
+      "name": "Lineup select",
+      "kind": "input",
+      "refersTo": "select",
+      "description": "Native select used for lineup, iteration, rendering and speed controls.",
+      "html": "<label class=\"ds-field\">Prizes · 16 characters <select aria-label=\"Prizes\"><option>Original friends</option><option>New friends</option><option>Curious crew</option></select></label>",
+      "css": ".ds-field{font-family:ui-sans-serif,system-ui,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#f3eaf6;font-size:12px}.ds-field select{font:inherit;color:inherit;background:#241a30;border:1px solid var(--edge,#4a3959);border-radius:6px;padding:8px;min-height:40px;accent-color:var(--accent,#e8afe0)}.ds-field select:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}"
+    },
+    {
+      "name": "Replay timeline",
+      "kind": "input",
+      "description": "Native range input becomes available after a grab finishes.",
+      "html": "<label class=\"ds-timeline\">Shared timeline<input type=\"range\" min=\"0\" max=\"100\" value=\"20\" aria-label=\"Shared timeline\"></label>",
+      "css": ".ds-timeline{font-family:ui-sans-serif,system-ui,sans-serif;display:block;font-size:12px;color:var(--muted,#c9b9d4)}.ds-timeline input{width:100%;margin:6px 0;min-height:28px;accent-color:var(--accent,#e8afe0);cursor:pointer}.ds-timeline input:disabled{opacity:.5;cursor:default}.ds-timeline input:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}"
+    },
+    {
+      "name": "Scene caption",
+      "kind": "chip",
+      "refersTo": "scene-caption",
+      "description": "Noninteractive destination caption with a stable dark backing.",
+      "html": "<span class=\"ds-caption\">Gold chute: prize bin</span>",
+      "css": ".ds-caption{font-family:ui-sans-serif,system-ui,sans-serif;display:inline-block;color:#f3eaf6;background:#241a30;border-radius:6px;padding:5px 8px;font-size:12px}"
+    },
+    {
+      "name": "Comparison readout",
+      "kind": "custom",
+      "description": "A backed method heading and measured-state readout within one solver view; sample numbers are illustrative.",
+      "html": "<article class=\"ds-world\"><h2>Newton<small>Newton method</small></h2><div><strong>Returning the claw.</strong><p>Lift 0 mm · 0.0 it/step · 0.00 ms/step</p></div></article>",
+      "css": ".ds-world{font-family:ui-sans-serif,system-ui,sans-serif;display:flex;flex-direction:column;justify-content:space-between;gap:8px;color:#f3eaf6;background:#1c1627;padding:0 14px}.ds-world h2{width:fit-content;background:#1c1627;padding:0 6px 4px 0;font-size:21px;margin:0;color:#dec1f5}.ds-world small{display:block;font-size:11px;font-weight:400;color:var(--muted,#c9b9d4);margin-top:3px}.ds-world>div{background:#1c1627e8;border-radius:6px;padding:6px 8px}.ds-world strong{font-size:12px;font-weight:500}.ds-world p{margin:0;font-size:10px;line-height:1.6;color:var(--muted,#c9b9d4);font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Secondary navigation",
+      "kind": "nav",
+      "description": "Quiet text link to the existing simple-scene comparison.",
+      "html": "<a class=\"ds-link\" href=\"?mode=solver&amp;embed=1&amp;lang=en\">Simple-scene comparison</a>",
+      "css": ".ds-link{font-family:ui-sans-serif,system-ui,sans-serif;color:#dec1f5;text-underline-offset:.22em;font-size:11px}.ds-link:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Dark dreamy cute claw machine",
+    "overview": "This record applies only to the claw-machine scene and its supporting play, collection and comparison interface in `web/src/claw*`. It captures the user-approved dark dreamy cabinet and claw change. It does not redefine the DexLab documentation site, the older solver page or the repository brand.\n\nDeep plum enamel, rose luminous seams, dimensional moon and star ornaments, a silver-lilac moving claw and warm prizes establish the scene. The surrounding interface uses the same plum family with one clear rose action. The familiar control layout and compact interface typography remain; no new display-font identity was approved.\n\nThe cabinet housing and ornaments are decorative meshes. Toy materials suggest plush, while MuJoCo still owns rigid-body poses and contact. WebGL is the public renderer; local OVRTX receives exported scene materials and native pose snapshots. Rendering, replay and material appearance do not establish physical accuracy. Motion follows native state or an explicit replay/inspection command, with no ambient interface animation.",
+    "keyCharacteristics": [
+      "Plum enclosure with rounded physical edges and rose luminous seams.",
+      "Warm textured toy models, a silver-lilac claw and an unmistakable gold chute.",
+      "Quiet bordered controls, visible input focus and scene-independent caption backing.",
+      "One aiming view; synchronized comparison views share camera and time."
+    ],
+    "rules": [
+      {
+        "name": "Rose Action Rule",
+        "body": "Use the rose fill for Drop/Re-aim and the same accent for collection completion; retain pale text and muted lilac for ordinary information.",
+        "section": "colors"
+      },
+      {
+        "name": "Geometry First Rule",
+        "body": "Keep the moon, stars, cabinet seams and claw details as scene geometry; do not substitute floating page decoration for the approved cabinet materials.",
+        "section": "elevation"
+      },
+      {
+        "name": "Readable Overlay Rule",
+        "body": "Keep scene captions on their dark backing so moving geometry cannot determine text contrast.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the plum, rose, silver-lilac and warm-gold material roles within the claw surface.",
+      "**Do** fit the complete cabinet in the ordinary overview and keep the prize chute visibly open.",
+      "**Do** show grouped portraits with collected/available counts; the catalog has 16 characters and each curated lineup has 16 toy instances across six character kinds.",
+      "**Do** label the active renderer and visible WebGL fallback, and keep native outcome claims separate from appearance."
+    ],
+    "donts": [
+      "**Don't** propagate this scoped palette or cabinet motif into the documentation site or older solver page without a separate decision.",
+      "**Don't** add gratuitous background effects or decorative motion outside the cabinet.",
+      "**Don't** describe plush-looking materials as deformable simulation or measured hardware fidelity.",
+      "**Don't** use collected state, renderer status or decorative motion to imply a guaranteed physical catch."
+    ]
+  }
+}
