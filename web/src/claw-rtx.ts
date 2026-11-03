@@ -123,7 +123,11 @@ export class ClawRtx {
         `OVRTX · ${info.time.toFixed(2)} s · ${info.render_ms.toFixed(0)} ms/frame`);
     } finally { bitmap.close(); this.pending = false; }
   }
-  invalidate() { this.epoch++; this.image.hidden = true; }
+  invalidate() {
+    this.epoch++;
+    this.image.hidden = true;
+    if (this.ready) this.setStatus("OVRTX 更新中 · 当前显示 WebGL", "OVRTX updating · showing WebGL");
+  }
   private fail() {
     this.image.hidden = true;
     this.ready = false;

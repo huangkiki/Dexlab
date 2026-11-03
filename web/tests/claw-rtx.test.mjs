@@ -6,7 +6,7 @@ test("an RTX response already decoding cannot repaint after a replay jump", asyn
   const client = Object.create(ClawRtx.prototype);
   let draws = 0, closed = 0, resolve;
   Object.assign(client, { epoch: 0, requestedEpoch: 0, sequence: 1, closed: false,
-    pending: true, image: { hidden: false }, context: { drawImage() { draws++; } } });
+    pending: true, ready: true, en: false, status: {}, image: { hidden: false }, context: { drawImage() { draws++; } } });
   const previous = globalThis.createImageBitmap;
   globalThis.createImageBitmap = () => new Promise(r => { resolve = r; });
   try {
@@ -21,6 +21,7 @@ test("an RTX response already decoding cannot repaint after a replay jump", asyn
     assert.equal(draws, 0);
     assert.equal(closed, 1);
     assert.equal(client.image.hidden, true);
+    assert.match(client.status.textContent, /当前显示 WebGL/);
     assert.equal(client.pending, false);
   } finally { globalThis.createImageBitmap = previous; }
 });

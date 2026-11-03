@@ -62,8 +62,8 @@ export function buildCabinet(scene: THREE.Scene) {
     scene.add(emblem(star, mauve, scale, [x, .219, z]));
   scene.add(emblem(crescent, mauve, .044, [-.015, .218, .27]));
   // The gold opening remains unmistakable against the plum deck in both renderers.
-  for (const x of [-.278, -.152]) box([.004, .13, .005], [x, -.135, .003], moon, .001);
-  for (const y of [-.20, -.07]) box([.13, .004, .005], [-.215, y, .003], moon, .001);
+  for (const x of [-.278, -.152]) box([.004, .13, .005], [x, -.135, .014], moon, .001);
+  for (const y of [-.20, -.07]) box([.13, .004, .005], [-.215, y, .014], moon, .001);
 
   const crossbeam = box([.6, .014, .014], [0, 0, .365], silver, .004);
   const trolley = box([.065, .065, .028], [0, 0, .35], mauve);

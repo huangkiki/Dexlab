@@ -5,6 +5,7 @@ import argparse
 from io import BytesIO
 import json
 from pathlib import Path
+import signal
 import struct
 import tempfile
 import threading
@@ -140,6 +141,11 @@ def main():
     with serve(lambda socket: session(socket, args.work_dir), "127.0.0.1", 8879,
                origins=origins, max_size=64 * 1024 * 1024, max_queue=1, ping_interval=None) as server:
         print("OVRTX bridge listening at ws://127.0.0.1:8879", flush=True)
+        # Detached shells can inherit SIGINT ignored; explicitly enable graceful stop.
+        def stop(_signum, _frame):
+            server.shutdown()
+        signal.signal(signal.SIGINT, stop)
+        signal.signal(signal.SIGTERM, stop)
         try:
             server.serve_forever()
         except KeyboardInterrupt:

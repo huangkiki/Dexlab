@@ -122,6 +122,8 @@ def build_scene(glb: Path, output: Path):
         product.CreateOrderedVarsRel().SetTargets([var.GetPath()])
         prim = product.GetPrim()
         prim.AddAppliedSchema("OmniRtxSettingsCommonAPI_1")
+        prim.CreateAttribute("omni:rtx:background:source:type", Sdf.ValueTypeNames.Token).Set("color")
+        prim.CreateAttribute("omni:rtx:background:source:color", Sdf.ValueTypeNames.Color3f).Set((.0018, .0011, .0028))
         prim.CreateAttribute("omni:rtx:rendermode", Sdf.ValueTypeNames.Token).Set("RealTimePathTracing")
         prim.CreateAttribute("omni:rtx:rtpt:maxBounces", Sdf.ValueTypeNames.UInt).Set(4)
     stage.GetRootLayer().Save()

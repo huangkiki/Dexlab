@@ -101,8 +101,11 @@ export class ClawLab {
     const ring = new THREE.RingGeometry(0.035, 0.037, 48);
     this.aim = new THREE.Mesh(
       ring,
-      new THREE.MeshBasicMaterial({
+      new THREE.MeshStandardMaterial({
         color: 0xf0b7ed,
+        emissive: 0xe385d8,
+        emissiveIntensity: 1.2,
+        roughness: .7,
         side: THREE.DoubleSide,
         depthTest: false,
       }),
