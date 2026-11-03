@@ -50,6 +50,9 @@ export async function loadToyModels(urls: readonly string[]) {
     model.traverse((node) => {
       if (!(node instanceof THREE.Mesh)) return;
       node.castShadow = node.receiveShadow = true;
+      const material = node.material as THREE.MeshStandardMaterial;
+      material.roughness = 0.92;
+      material.metalness = 0;
     });
     const body = new THREE.Group();
     body.add(model);

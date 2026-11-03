@@ -329,6 +329,516 @@
       "collision_warnings": [
         "Max concavity 0.11714611723340176 exceeds the threshold 0.055 due to 16 convex hull limitation"
       ]
+    },
+    {
+      "source_glb_sha256": "b267a3066ae89a2fd447135d8620fd4bcd3c2b1d6ffd52b49024576f0cafe88f",
+      "height_m": 0.075,
+      "yaw_degrees": 180.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08192843286799247,
+      "source_bounds": [
+        [
+          -0.3961730897426605,
+          -0.4564640522003174,
+          -0.3953339457511902
+        ],
+        [
+          0.39605778455734253,
+          0.4589690566062927,
+          0.3953208923339844
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 4,
+      "triangles": 34216,
+      "glb_sha256": "72aed9634da6ac8ed607338aa548e73155ecfa4c6c9d93183c917e4cc95303c6",
+      "kind": "egg",
+      "input": "inputs/egg.png",
+      "seed": 1,
+      "glb_bytes": 4925400,
+      "source_png_sha256": "4f98efc31e4ab829f8d830aaa30127e73726896054ca8fd73c50670055fd015e",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "18d2098ea53be5d5b59f45ebb011aeb39db70c3e4edd2c2046efa536ca5d5aa0"
+    },
+    {
+      "source_glb_sha256": "e65c316a9ce8614cfaf8709ccaab569fc3c01c2511b018718687aaf12525f6a0",
+      "height_m": 0.075,
+      "yaw_degrees": 0.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.07510878478980063,
+      "source_bounds": [
+        [
+          -0.49814650416374207,
+          -0.4991164207458496,
+          -0.3139082193374634
+        ],
+        [
+          0.5000432133674622,
+          0.4994352161884308,
+          0.3145448565483093
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 29328,
+      "glb_sha256": "b390e14af97612df1f90b1bc2e82c006a592844b4947b53b78cec8863902002d",
+      "kind": "baby-frog",
+      "input": "inputs/baby-frog.png",
+      "seed": 1,
+      "glb_bytes": 5047540,
+      "source_png_sha256": "d6c73eea4439659d54072731842f4d607cd94fe80e2ed3e853d7d436ffa19fa7",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "a8d11b18eadb944069b8f3253560d56191eb058086c5b99e9a3bc29c17e1a2ba"
+    },
+    {
+      "source_glb_sha256": "cf8e6bb081802d9bee2cef29b2200930a10278b4d65aacd4d871ff0efdea22f4",
+      "height_m": 0.075,
+      "yaw_degrees": 0.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08340024576831763,
+      "source_bounds": [
+        [
+          -0.3357997238636017,
+          -0.45426520705223083,
+          -0.5000089406967163
+        ],
+        [
+          0.33579739928245544,
+          0.4450127184391022,
+          0.49829035997390747
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 34000,
+      "glb_sha256": "c7b71d18bd9a53afcc8cdf32397e656462a5a069f3e6990faab4726c85c5ea0c",
+      "kind": "dog",
+      "input": "inputs/dog.png",
+      "seed": 1,
+      "glb_bytes": 5566264,
+      "source_png_sha256": "37151b967fac9973d906b4b2cc396651b6d000bc9c8a175cad378fb616d98167",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "f820f095349e0f018c3c1b87187caca31fcb011f6e0feb38ca9423aece1dbbe2"
+    },
+    {
+      "source_glb_sha256": "6a7c636ec8bc985e95654f785ea51a9833824a3dcf1a01391cd79f84e46d897a",
+      "height_m": 0.086,
+      "yaw_degrees": 0.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08614545233852383,
+      "source_bounds": [
+        [
+          -0.2758217751979828,
+          -0.4984930753707886,
+          -0.2788510322570801
+        ],
+        [
+          0.27657508850097656,
+          0.49981847405433655,
+          0.2808826267719269
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 12,
+      "triangles": 18002,
+      "glb_sha256": "bb3a836ebddbda44dbefec773f6f2c3990f7a5f76ef2b98dd12014383b030f18",
+      "kind": "pink-frog",
+      "input": "inputs/pink-frog.png",
+      "seed": 1,
+      "glb_bytes": 4412296,
+      "source_png_sha256": "d188846e3ff5628c80980911409103af43796f2857f017b90495b77893864738",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "62c7eb6fb134d89a1546b63b1275d7656dd469c01384bd89e6a3e99903c070ec"
+    },
+    {
+      "source_glb_sha256": "5ae0831ded3ffc7287027ebf2d9b650afa8043b6aec03bc7b660dd09898f5255",
+      "height_m": 0.073,
+      "yaw_degrees": 180.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.07316526406090569,
+      "source_bounds": [
+        [
+          -0.45988914370536804,
+          -0.4977889657020569,
+          -0.46013861894607544
+        ],
+        [
+          0.4664652347564697,
+          0.4999522566795349,
+          0.4724155068397522
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 120734,
+      "glb_sha256": "fef52ce445408f85e6168267ba3d0929de5f487fdbb3549961b3b9430432b724",
+      "kind": "poop",
+      "input": "inputs/poop.png",
+      "seed": 1,
+      "glb_bytes": 6411956,
+      "source_png_sha256": "e384b946a83b363e1d1bb0dee3c50ad455297786dfb645dc2116b157c917dbfa",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "a945d5a0a4c1685edd7097ac27100a154c3ae9c186de5714bd4557ff0ad7d94d"
+    },
+    {
+      "source_glb_sha256": "1870131985ef00745542a3e93070d1073299986a59ae2da5f5bd19461ad190eb",
+      "height_m": 0.085,
+      "yaw_degrees": 0.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08520938933484569,
+      "source_bounds": [
+        [
+          -0.29475244879722595,
+          -0.4997652769088745,
+          -0.2654576599597931
+        ],
+        [
+          0.28818243741989136,
+          0.49777737259864807,
+          0.26153501868247986
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 20788,
+      "glb_sha256": "76d97c0c3571b1d0168ceee766107a98a18a1afe1d4be8de8c7cd96f7b1fddd0",
+      "kind": "soy-milk",
+      "input": "inputs/soy-milk.png",
+      "seed": 1,
+      "glb_bytes": 5216564,
+      "source_png_sha256": "a0cb5d45f35b46f638004674717eda4d91c5423947e86b42b3b03bd96d783235",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "70453b1c8fd358e5432e86d4a828acae9329a80be658a2d5a11a7c7b17916dc1"
+    },
+    {
+      "source_glb_sha256": "3b0e77bba3b3560714931642604a66b521807b9cbc4948a9970618abfb63f85a",
+      "height_m": 0.085,
+      "yaw_degrees": -90.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.0909866312060007,
+      "source_bounds": [
+        [
+          -0.3366604447364807,
+          -0.47148650884628296,
+          -0.3413015305995941
+        ],
+        [
+          0.3359138071537018,
+          0.462716668844223,
+          0.3705238699913025
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 15,
+      "triangles": 13814,
+      "glb_sha256": "cd24cab63256266aaf9977f0d06750ed338bd8639123bf50b815180d3b49dfdc",
+      "kind": "fish",
+      "input": "inputs/fish.png",
+      "seed": 1,
+      "glb_bytes": 4053444,
+      "source_png_sha256": "97404fc5f611e28ef8091107fd784a6e790d0db808ade7cf9d3dd5029df11077",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "3533e1edba0b1d896efe34bc0cdf902c7e4e67dc11eabbd059ce62eb0428178b"
+    },
+    {
+      "source_glb_sha256": "82b62b735b4fbdd7688cc59e2f8dc8db10359f3189917edf1870bd99aa19fab5",
+      "height_m": 0.078,
+      "yaw_degrees": 0.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.08796007491599375,
+      "source_bounds": [
+        [
+          -0.4821225702762604,
+          -0.4493250250816345,
+          -0.41623175144195557
+        ],
+        [
+          0.5000935792922974,
+          0.4374409317970276,
+          0.4210597574710846
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 35072,
+      "glb_sha256": "d28c5dda4f2129b5ab3840ee0abba9d7c10c8e7c73a6240aecd5b159304caf84",
+      "kind": "tea-cup",
+      "input": "inputs/tea-cup.png",
+      "seed": 1,
+      "glb_bytes": 5405524,
+      "source_png_sha256": "c3ca88d228c2c0bfc30501f4a684aa61960afd85bb55762719068c6974fad355",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "1a6d38cd3a42e0787e8d7785dd5531fc8f25d5ddfb0781c56287994526dfb694"
+    },
+    {
+      "source_glb_sha256": "b43145b950295b33d2a2f757e09ba8ac7fc1fd2ff44d06497157496cbc984b63",
+      "height_m": 0.078,
+      "yaw_degrees": 180.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.07809413813648655,
+      "source_bounds": [
+        [
+          -0.34096184372901917,
+          -0.49990999698638916,
+          -0.3109264075756073
+        ],
+        [
+          0.3407081365585327,
+          0.49888455867767334,
+          0.3181696832180023
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 4,
+      "triangles": 19422,
+      "glb_sha256": "62244f15ae6e2e952f7c2c40dd692e3ee6e8d61cc5b153e06774bf862dce3676",
+      "kind": "bottle",
+      "input": "inputs/bottle.png",
+      "seed": 1,
+      "glb_bytes": 4410044,
+      "source_png_sha256": "cf9d0b85d2e5ef1b0af87bc43d6f1a234715ba0443836a6b0c6edb894a405f50",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "fde4892130ed6598f80faad95a3a522413ca9b609863834b90489a9decda59d4"
+    },
+    {
+      "source_glb_sha256": "81c596629b77caa552642179117e8b7bac1d8b0b14f7d044ac7d3653063949b3",
+      "height_m": 0.078,
+      "yaw_degrees": 180.0,
+      "bottom_y_m": -0.035,
+      "uniform_scale": 0.07814623642956163,
+      "source_bounds": [
+        [
+          -0.44946467876434326,
+          -0.4980035722255707,
+          -0.38631466031074524
+        ],
+        [
+          0.44940969347953796,
+          0.5001251101493835,
+          0.4052959382534027
+        ]
+      ],
+      "mass_kg": 0.08,
+      "collision_method": "CoACD convex decomposition; rigid approximation of the visible mesh",
+      "coacd": {
+        "threshold": 0.055,
+        "max_convex_hull": 16,
+        "preprocess_mode": "auto",
+        "resolution": 2000,
+        "mcts_nodes": 20,
+        "mcts_iterations": 100,
+        "mcts_max_depth": 3,
+        "merge": true,
+        "decimate": true,
+        "max_ch_vertex": 32,
+        "seed": 0
+      },
+      "hulls": 16,
+      "triangles": 42312,
+      "glb_sha256": "05c4285fd60e0fe9c5d299e99dd2d12448432b7e7b8764200bc0bf3d5b695bb8",
+      "kind": "sigma-frog",
+      "input": "inputs/sigma-frog.png",
+      "seed": 1,
+      "glb_bytes": 5640668,
+      "source_png_sha256": "3a2ebc1ba277ac48d63cad6afd659ea6d6921e1c33c69c851c7d7f90c13b8d53",
+      "web_export": {
+        "simplify": 0.9,
+        "texture_size": 2048,
+        "fill_holes": true,
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.92
+      },
+      "collision_note": "Rigid convex approximation, at most 16 hulls; not a geometric error guarantee or measured plush material.",
+      "generation_input_sha256": "44910e4e6e6ddb1754c7f42e5663f46945b44b3788f317b352632a4e3225eb8b"
     }
   ],
   "collisions_sha256": "c9663ce4c71c4b06767fe190bf274f8b066a8a275c1b8c381d1d581570ec1f21"

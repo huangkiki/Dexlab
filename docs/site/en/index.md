@@ -100,7 +100,9 @@ Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Spa
 </div>
 ```
 
-MuJoCo computes contact locally in your browser. The six Nai-family prizes (frog, mouse, bean, chicken, cat and rabbit) use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The guide below the game explains all three solvers and explicit, semi-implicit and implicit integration. Agreement is a valid result; a successful catch alone does not establish physical accuracy.
+MuJoCo computes contact locally in your browser. Sixteen Nai-family prizes are available in three lineups of six. Click a portrait to inspect a mesh up close. They use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The guide below the game explains all three solvers and explicit, semi-implicit and implicit integration. Agreement is a valid result; a successful catch alone does not establish physical accuracy.
+
+The public page uses WebGL. Follow the [local OVRTX setup](https://github.com/huangkiki/Dexlab/tree/main/web/ovrtx) to render the same poses on an RTX GPU. Connection state, image timestamp and render cost are shown explicitly, with WebGL fallback on disconnect.
 
 (quickstart)=
 ## Quick start

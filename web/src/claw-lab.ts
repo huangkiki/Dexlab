@@ -7,6 +7,7 @@ import { STEP, BIN, type ClawSnapshot, type MoveAxis } from "./claw-task";
 
 import { ClawComparison, type ClawFrame } from "./claw-comparison";
 import type { ClawTask } from "./claw-task";
+import { ClawRtx } from "./claw-rtx";
 
 export class ClawLab {
   get task() {
@@ -36,6 +37,7 @@ export class ClawLab {
   private topView = false;
   private angledFov = 37;
   private normalView: [number, number, number] = [0.3, -0.83, 0.66];
+  private rtx?: ClawRtx;
 
   private constructor(
     private canvas: HTMLCanvasElement,
@@ -55,7 +57,7 @@ export class ClawLab {
     this.controls = new OrbitControls(this.camera, canvas);
     this.controls.target.set(0, 0, 0.13);
     this.controls.enablePan = false;
-    this.controls.minDistance = 0.8;
+    this.controls.minDistance = 0.25;
     this.controls.maxDistance = 1.65;
     this.controls.minPolarAngle = 0.08;
     this.controls.maxPolarAngle = Math.PI / 2.1;
@@ -240,6 +242,7 @@ export class ClawLab {
     }
   }
   private resize(canvas: HTMLCanvasElement) {
+    this.rtx?.invalidate();
     const r = canvas.getBoundingClientRect();
     this.renderer.setSize(Math.max(1, r.width), Math.max(1, r.height), false);
     const columns = this.comparison.started && r.width >= 700 ? 3 : 1;
@@ -269,6 +272,18 @@ export class ClawLab {
   clearInput() {
     this.input.clear();
   }
+  focusToy(index: number) {
+    const p = this.task.position(index);
+    this.setTopView(false);
+    this.controls.target.set(p.x, p.y, p.z + 0.015);
+    this.camera.position.set(p.x + 0.07, p.y - 0.27, p.z + 0.11);
+    this.controls.update();
+    this.rtx?.invalidate();
+  }
+  setRtx(enabled: boolean, en: boolean) {
+    this.rtx?.dispose();
+    this.rtx = enabled ? new ClawRtx(this.canvas, this.scene, en) : undefined;
+  }
   setActive(active: boolean) {
     if (this.disposed || this.failed) return;
     this.clearInput();
@@ -281,6 +296,7 @@ export class ClawLab {
     } else cancelAnimationFrame(this.frame);
   }
   reset() {
+    this.rtx?.invalidate();
     this.clearInput();
     this.comparison.reset(++this.layout);
     this.onComparison(this.comparison);
@@ -303,6 +319,7 @@ export class ClawLab {
     this.onSnapshot(this.task.snapshot());
   }
   setTopView(top: boolean) {
+    this.rtx?.invalidate();
     this.topView = top;
     this.camera.fov = top ? 37 : this.angledFov;
     this.camera.updateProjectionMatrix();
@@ -425,6 +442,8 @@ export class ClawLab {
     const count = this.comparison.started ? 3 : 1;
     const columns = count === 3 && size.x >= 700 ? 3 : 1;
     const rows = count / columns;
+    const capture = this.rtx?.canRequest;
+    const worlds: number[][][] = [];
     this.renderer.setScissorTest(true);
     for (let i = 0; i < count; i++) {
       const x = ((i % columns) * size.x) / columns;
@@ -437,8 +456,11 @@ export class ClawLab {
           ? this.comparison.current?.worlds[i]
           : undefined,
       );
+      if (capture) worlds.push(this.rtx!.capture());
     }
     this.renderer.setScissorTest(false);
+    if (capture) this.rtx!.request(worlds, this.camera,
+      this.comparison.started ? this.comparison.current!.time : this.task.data.time, columns);
   }
   dispose() {
     if (this.disposed) return;
@@ -446,6 +468,7 @@ export class ClawLab {
     cancelAnimationFrame(this.frame);
     this.observer.disconnect();
     this.controls.dispose();
+    this.rtx?.dispose();
     disposeMeshes(this.scene);
     this.renderer.dispose();
     this.comparison.dispose();

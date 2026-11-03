@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文：本次对比](#同一次下爪对比求解器)
 
-Move with arrow keys / WASD or the on-screen D-pad, then press Space or **Drop claw**. The three-finger claw descends, closes, lifts, carries to the gold chute and releases. A toy counts after it actually lands in the bin. Use top view to aim, try again after a miss, or reset the cabinet to reshuffle its six characters. Everything runs locally; there are no payments or accounts.
+Move with arrow keys / WASD or the on-screen D-pad, then press Space or **Drop claw**. The three-finger claw descends, closes, lifts, carries to the gold chute and releases. A toy counts after it actually lands in the bin. Use top view to aim, try again after a miss, or reset the cabinet to reshuffle its six characters. Select one of three lineups covering all 16 characters; switching lineups starts a new collection. Click a portrait to inspect the real mesh up close. Everything runs locally; there are no payments or accounts.
 
 ## Compare the same grab
 
@@ -22,7 +22,7 @@ Each view reports its own settled-bin outcome, peak toy-height gain from the ini
 
 ## Physics and scoring
 
-MuJoCo 3.17 WASM owns the state. Three carriage slide joints and three radial finger slides are driven by position actuators; each finger has a connected radial guide, joint, curved capsule segments and an inward-facing tip. A visible trolley and cable suspend the hub. The six Nai-family characters (frog, mouse, bean, chicken, cat and rabbit) are textured meshes generated locally with Microsoft's TRELLIS image-to-3D model from the generated character art. Their visible meshes follow MuJoCo body positions and orientations. CoACD convex parts derived from those same meshes provide approximate rigid collision geometry, including the ears and tails. Each toy has a synthetic total mass of 80 g; part masses follow hull volume, with 60% foot ballast on frog and chicken to stabilize their generated soles. These are not measured material or inertia values. The floor has a physical opening with a 300 mm deep collection bin, sized to hold all six toys without changing scoring thresholds.
+MuJoCo 3.17 WASM owns the state. Three carriage slide joints and three radial finger slides are driven by position actuators; each finger has a connected radial guide, joint, curved capsule segments and an inward-facing tip. A visible trolley and cable suspend the hub. The 16 Nai-family characters are textured meshes generated locally with Microsoft's TRELLIS image-to-3D model from the generated character art. Their visible meshes follow MuJoCo body positions and orientations. CoACD convex parts derived from those same meshes provide approximate rigid collision geometry, including the ears and tails. Each toy has a synthetic total mass of 80 g; part masses follow hull volume, with 60% foot ballast on frog and chicken to stabilize their generated soles. These are not measured material or inertia values. The floor has a physical opening with a 300 mm deep collection bin, sized to hold all six toys without changing scoring thresholds.
 
 Contact uses synthetic friction 0.9, `condim=4`, Newton, nonlinear CG and PGS with a common elliptic cone, implicitfast and a 2 ms timestep. There is no attachment, weld, in-round object-state injection, probability roll or guaranteed catch. The automatic sequence changes actuator targets only. Toy centers must settle inside the bin's inner scoring area (within 40 mm of its center), below −70 mm, with speed under 40 mm/s for 0.3 simulated seconds. Each toy scores once. This game is not a calibrated robot, deformable-plush simulation or frozen native benchmark result.
 
@@ -37,12 +37,22 @@ npm run dev
 
 Open `http://localhost:5173/lab/`; add `?lang=en` for English. Tests also check complete start-state equality, matched commands and time across solvers, repeatable trajectories, replay isolation, original-state retries and clearing on reset. Tests execute the real WASM engine: a centered catch, release-before-score, an empty drop, idle open-claw behavior, duplicate-input rejection, reset and collecting all six toys by aiming at measured positions. The longer multi-round case also exercises contact-wrapper lifetime: both the returned vector and individual embind contact handles must be deleted.
 
-The generated character atlas and individual image-to-3D inputs follow the user-provided Nai-family reference. The atlas is used for collection thumbnails; gameplay renders the actual textured GLBs. Inputs, prompts, model revision, export parameters and collider provenance are recorded in `src/assets/README.md` and `src/assets/nai/`. Meshes are generated offline; the browser only loads finished assets and never downloads or runs the generation model. Plush appearance does not imply soft-body simulation.
+The generated character atlas and individual image-to-3D inputs follow the user-provided Nai-family reference. Individual input portraits identify each prize; gameplay renders the actual textured GLBs. Inputs, prompts, model revision, export parameters and collider provenance are recorded in `src/assets/README.md` and `src/assets/nai/`. Meshes are generated offline; the browser only loads finished assets and never downloads or runs the generation model. Plush appearance does not imply soft-body simulation.
 
 The state/controller/scorer is in `src/claw-task.ts`, comparison/recording in `src/claw-comparison.ts`, bilingual teaching copy in `src/claw-explainer.ts`, rendering in `src/claw-lab.ts`, and bilingual controls in `src/claw-page.ts`. The scene pauses when hidden and preserves resources across BFCache navigation. A static loading/reload state appears before heavy imports; the docs parent accepts frame height messages only from its own same-origin lab frame.
 
-`?mode=solver&embed=1` preserves the existing solver-configuration comparison. The claw machine uses WebGL; the older comparison retains WebGPU with a WebGL fallback. Browser scores are not written into the native experiment catalog.
+`?mode=solver&embed=1` preserves the existing solver-configuration comparison. The public claw machine uses WebGL; a local RTX GPU can render the same live poses through the optional [OVRTX bridge](ovrtx/README.md). GitHub Pages does not run that native service. The older comparison retains WebGPU with a WebGL fallback. Browser scores are not written into the native experiment catalog.
 
 ## Interaction reference
 
 The aim/drop/return/prize-loop interaction was informed by [neciszhang/claw3d](https://github.com/neciszhang/claw3d/tree/02d5c53d0175e0018d791a7e89e5c45cf12b51f4). Source inspection of its [GrabController](https://github.com/neciszhang/claw3d/blob/02d5c53d0175e0018d791a7e89e5c45cf12b51f4/src/game/GrabController.tsx) on 2026-11-02 found that caught toys switch to kinematic following, with randomized slipping and a pity mechanic. DexLab implements its own MuJoCo contact path and does not adopt those mechanisms or copy code/models. The reference's live demo was not successfully runtime-verified in this session.
+
+## Sixteen characters and PBR / 16 款角色与 PBR
+
+The original six are joined by Nai Egg, Baby Nai Frog, Nai Dog, Pink Nai Frog, Nai Swirl, Soy Milk, Nai Fish, Nai Tea, Nai Bottle and Sigma Nai Frog. Each cabinet contains six toys; only that lineup's models are loaded. The ten additions use 2048-pixel baked base-color textures and a less aggressive mesh simplification setting (`0.90` versus the originals' `0.94`). Both viewers use nonmetallic rough fabric, while the claw retains metallic material. No fabricated normal maps or material measurements are implied.
+
+新增奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙，共 16 款。每柜仍放六只，仅加载所选组合的模型；切换组合会开始新收藏。点头像可近看真实网格，拖动旋转，俯视按钮返回全景。新增模型采用 2048 像素颜色贴图和更少的网格简化（`0.90`，原六款为 `0.94`）；娃娃为粗糙非金属 PBR，夹爪为金属材质。这不代表实测织物或生成了真实法线贴图。
+
+[Local OVRTX setup / 本机 OVRTX 启动](ovrtx/README.md) describes the optional RTX stream. Three solver views are rendered together from one timestamped request. The visible renderer status reports connection and per-frame render time; stale or disconnected streams fall back explicitly to WebGL. Public Pages remains WebGL.
+
+可选 OVRTX 服务把同一时间戳的三路状态一起渲染，页面显示真实连接状态和每帧渲染耗时。断线或画面过期时明确回退 WebGL；公网 Pages 仍运行 WebGL。原生 WASM 测试覆盖新增两柜的静置、同步抓取、有限状态和放下之前不计分，不能当成所有角色必抓成功的保证。

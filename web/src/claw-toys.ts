@@ -1,7 +1,7 @@
-import collisions from "./assets/nai/collisions.json" with { type: "json" };
+import allCollisions from "./assets/nai/collisions.json" with { type: "json" };
 
 /** Visual assets and convex collision parts come from the same generated meshes. */
-export const TOYS = [
+const classic = [
   {
     name: "Nai Frog",
     zh: "奶蛙",
@@ -51,6 +51,36 @@ export const TOYS = [
     color: 0xf8df94,
   },
 ] as const;
+
+export const CATALOG = [
+  ...classic,
+  { name: "Nai Egg", zh: "奶蛋", kind: "egg" },
+  { name: "Baby Nai Frog", zh: "小奶蛙", kind: "baby-frog" },
+  { name: "Nai Dog", zh: "奶狗", kind: "dog" },
+  { name: "Pink Nai Frog", zh: "奶粉", kind: "pink-frog" },
+  { name: "Nai Swirl", zh: "奶屎", kind: "poop" },
+  { name: "Soy Milk", zh: "豆奶", kind: "soy-milk" },
+  { name: "Nai Fish", zh: "奶鱼", kind: "fish" },
+  { name: "Nai Tea", zh: "奶茶", kind: "tea-cup" },
+  { name: "Nai Bottle", zh: "奶瓶", kind: "bottle" },
+  { name: "Sigma Nai Frog", zh: "西格玛奶蛙", kind: "sigma-frog" },
+] as const;
+export const CABINETS = {
+  classic: { zh: "经典六只", name: "Original six", toys: [0, 1, 2, 3, 4, 5] },
+  friends: { zh: "新朋友", name: "New friends", toys: [6, 7, 8, 9, 10, 11] },
+  curios: { zh: "奇妙小队", name: "Curious crew", toys: [12, 13, 14, 15, 0, 4] },
+} as const;
+export function cabinetFromSearch(search: string): keyof typeof CABINETS {
+  const key = new URLSearchParams(search).get("cabinet");
+  return key === "friends" || key === "curios" ? key : "classic";
+}
+// A cabinet is immutable for the lifetime of a page and shared by all three worlds.
+// Choosing another cabinet explicitly reloads the page and starts a fresh collection.
+export const CABINET = cabinetFromSearch(typeof location === "undefined" ? "" : location.search);
+export const TOYS = CABINETS[CABINET].toys.map((index, slot) => ({
+  ...classic[slot]!, ...CATALOG[index],
+}));
+const collisions = CABINETS[CABINET].toys.map((index) => allCollisions[index]!);
 
 export const TOY_ASSETS = collisions
   .map((parts, i) =>
