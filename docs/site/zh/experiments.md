@@ -1,5 +1,17 @@
 # 实验目录
 
+```{toctree}
+:maxdepth: 1
+:caption: 本栏目录
+
+Wuji 抓持与抗扭接触 <wuji-contact>
+海绵擦拭与辅助保持对照 <rss-wiping>
+布料引擎对比 <cloth-comparison>
+切割与推动 <cutting-experiments>
+LIBERO 原生流程 <libero-workflow>
+AMP 记录器一致性失败 <amp-lift>
+```
+
 标准方块[16例力限额实验](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.zh-CN.md)完成：0.2/0.4 N保持失败，0.8/10 N保持释放通过，±2 mm偏移保持此结果；数值有效性与任务成败分别报告，不代表真机精度。
 
 代码继续使用现有目录，避免改路径破坏资产引用、复现命令或历史证据。每个实验连接问题、配置、原始记录、独立评分、结果报告和失败。

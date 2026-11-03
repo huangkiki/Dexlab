@@ -1,4 +1,17 @@
-# External references
+(external-references)=
+# Research guides and references
+
+```{toctree}
+:maxdepth: 1
+:caption: In this section
+
+Dexterous-hand simulation guide <dexterous-hand-simulation>
+Newton topic reading guide <newton-reading-guide>
+Publications using Newton <newton-publications>
+Manda engine-comparison guide <manda-physics-engines>
+UniCross reference review <unicross>
+Roadmap <dexterity>
+```
 
 Reading on research context and evaluation methods. External experiments are identified separately from DexLab results and do not count toward this project's engine coverage or passes.
 
@@ -30,12 +43,3 @@ The [reference review](unicross.md) examines the question of transitioning betwe
 - [Research results](results.md): this project's frozen protocols, raw records and failed cases.
 
 Turn related work into checkable questions: do imported models match, how are feedback inputs generated, when are forces and impulses recorded, and how are task failures distinguished from numerical invalidity? External parameters and results do not automatically become project acceptance criteria.
-
-```{toctree}
-:maxdepth: 1
-
-Newton topic reading guide <newton-reading-guide>
-Publications using Newton <newton-publications>
-Manda engine-comparison guide <manda-physics-engines>
-UniCross reference review <unicross>
-```
