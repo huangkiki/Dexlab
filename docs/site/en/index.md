@@ -167,43 +167,13 @@ No companion paper is published yet. When citing the repository, use its URL and
 ```
 
 ```{toctree}
-:hidden:
 :maxdepth: 1
+:hidden:
 
+Getting started <quickstart>
 Experiments <experiments>
-Quickstart <quickstart>
-Dexterous-hand simulation guide <dexterous-hand-simulation>
-References <references>
-Co-evolution and model evaluation <model-evaluation>
-Solver failure audit <solver-failure-audit>
-Studio replay rendering <studio-rendering>
-Cloth engine comparison <cloth-comparison>
-Results <results>
-Coverage <coverage>
-Findings <experience>
-Diagnosis <diagnosis>
-Wuji grasp and torsional contact <wuji-contact>
-Contact prediction diagnostics <contact-response>
-Sponge wiping and grasp-assistance comparison <rss-wiping>
-Continuous cutting and blade-face pushing <cut-push>
-Banana single-cut force <banana-force>
-Synthetic tofu halving <cutting>
-Sequential banana slicing <banana-cutting>
-Crossed shallow tofu cuts <tofu-scoring>
-Cutting method comparison <cutting-comparison>
-Two tofu cuts and independent motion <tofu-comparison>
-Cutting fidelity and measurements <cutting-fidelity>
-Cutting-surface reconstruction <cutting-surface>
-Solver synchronization and preCICE <solver-coupling>
-Solver configuration roles <solver-taxonomy>
-Visual comparisons <visual-comparisons>
-Native LIBERO workflow <libero-workflow>
-AMP recorder parity failure <amp-lift>
-Selection <selection>
-Engines <engines>
-Uranus generative environment backend <uranus-backend>
-Roadmap <dexterity>
-Ledger <research-ledger>
-Benchmark <benchmark>
+Results & diagnosis <results>
+Engines & models <engines>
+Research guides <references>
 Contributing <contributing>
 ```

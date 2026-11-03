@@ -1,5 +1,17 @@
 # Experiment catalog
 
+```{toctree}
+:maxdepth: 1
+:caption: In this section
+
+Wuji grasp and torsional contact <wuji-contact>
+Sponge wiping and grasp-assistance comparison <rss-wiping>
+Cloth engine comparison <cloth-comparison>
+Cutting & pushing <cutting-experiments>
+Native LIBERO workflow <libero-workflow>
+AMP recorder parity failure <amp-lift>
+```
+
 The [16-case block force-limit experiment](https://github.com/huangkiki/Dexlab/blob/main/docs/force-limit-results.md) is complete: 0.2/0.4 N fail retention, 0.8/10 N hold and release, including ±2 mm offsets. Numerical validity and task outcome are separate; no hardware-fidelity claim.
 
 Keep existing code paths to preserve asset references, reproduction commands and historical evidence. Each experiment connects a question, configuration, raw record, independent score, report and failures.

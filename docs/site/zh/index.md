@@ -167,43 +167,13 @@ bash demos/apple-stem-grasp/run.sh \
 ```
 
 ```{toctree}
-:hidden:
 :maxdepth: 1
+:hidden:
 
-实验目录 <experiments>
-安装复现 <quickstart>
-灵巧手仿真导读 <dexterous-hand-simulation>
-外部参考 <references>
-共同进化与模型评测 <model-evaluation>
-Solver 失败复盘 <solver-failure-audit>
-高质量轨迹回放 <studio-rendering>
-布料引擎对比 <cloth-comparison>
-研究结果 <results>
-完整覆盖 <coverage>
-研究经验 <experience>
-诊断方法 <diagnosis>
-Wuji 抓持与抗扭接触 <wuji-contact>
-接触预测诊断 <contact-response>
-海绵擦拭与辅助保持对照 <rss-wiping>
-连续切割与刀面推动 <cut-push>
-香蕉单刀测力 <banana-force>
-豆腐状软块对半切 <cutting>
-香蕉连续切片 <banana-cutting>
-豆腐交叉浅切 <tofu-scoring>
-切割方法对比 <cutting-comparison>
-豆腐连续两刀与独立运动 <tofu-comparison>
-切割保真度与动态测量 <cutting-fidelity>
-切割表面重建 <cutting-surface>
-多求解器同步与 preCICE <solver-coupling>
-求解配置分层 <solver-taxonomy>
-可视对照 <visual-comparisons>
-LIBERO 原生流程 <libero-workflow>
-AMP 记录器一致性失败 <amp-lift>
-场景选型 <selection>
+开始使用 <quickstart>
+实验案例 <experiments>
+结果与诊断 <results>
 引擎与模型 <engines>
-Uranus 生成式环境后端 <uranus-backend>
-研究路线 <dexterity>
-研究账本 <research-ledger>
-基准 <benchmark>
-参与贡献 <contributing>
+研究导读 <references>
+参与开发 <contributing>
 ```

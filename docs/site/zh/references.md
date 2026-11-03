@@ -1,4 +1,16 @@
-# 外部参考资料
+# 研究导读与外部参考
+
+```{toctree}
+:maxdepth: 1
+:caption: 本栏目录
+
+灵巧手仿真导读 <dexterous-hand-simulation>
+Newton 论文分类导读 <newton-reading-guide>
+Newton 研究论文 <newton-publications>
+Manda 物理引擎比较导读 <manda-physics-engines>
+UniCross 参考调研 <unicross>
+研究路线 <dexterity>
+```
 
 这些资料提供研究背景与评测方法参考。外部实验与 DexLab 自己的结果分别标注，不计入本站的引擎覆盖或通过数量。
 
@@ -30,12 +42,3 @@
 - [研究结果](results.md)：查看本项目的冻结协议、原始记录与失败工况。
 
 将外部资料转化为可核查的问题：导入后模型是否匹配，反馈控制输入怎样产生，力与冲量何时记录，任务失败与数值无效怎样区分？文献中的参数与结果不会自动成为本项目的验收依据。
-
-```{toctree}
-:maxdepth: 1
-
-Newton 论文分类导读 <newton-reading-guide>
-Newton 研究论文 <newton-publications>
-Manda 物理引擎比较导读 <manda-physics-engines>
-UniCross 参考调研 <unicross>
-```
