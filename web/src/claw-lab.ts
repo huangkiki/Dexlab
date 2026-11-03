@@ -7,6 +7,7 @@ import { STEP, BIN, type ClawSnapshot, type MoveAxis } from "./claw-task";
 
 import { ClawComparison, type ClawFrame } from "./claw-comparison";
 import type { ClawTask } from "./claw-task";
+import { buildCabinet } from "./claw-cabinet";
 import { ClawRtx } from "./claw-rtx";
 
 export class ClawLab {
@@ -23,6 +24,7 @@ export class ClawLab {
   private geoms = new Map<number, THREE.Mesh>();
   private overhead: THREE.Mesh[] = [];
   private cable: THREE.Mesh;
+  private charm: THREE.Group;
   private trolley: THREE.Mesh;
   private aim: THREE.Mesh;
   private frame = 0;
@@ -36,7 +38,7 @@ export class ClawLab {
   private compactView = false;
   private topView = false;
   private angledFov = 37;
-  private normalView: [number, number, number] = [0.3, -0.83, 0.66];
+  private normalView: [number, number, number] = [0.35, -1.15, 0.65];
   private rtx?: ClawRtx;
 
   private constructor(
@@ -49,7 +51,7 @@ export class ClawLab {
   ) {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    this.renderer.setClearColor(0x17212b);
+    this.renderer.setClearColor(0x181322);
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.camera.up.set(0, 0, 1);
@@ -63,10 +65,10 @@ export class ClawLab {
     this.controls.maxPolarAngle = Math.PI / 2.1;
     this.controls.update();
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    const fill = new THREE.HemisphereLight(0xfff8e9, 0x68747b, 2.5);
+    const fill = new THREE.HemisphereLight(0xf9e8ff, 0x44314c, 2.1);
     fill.position.set(0, 0, 1);
-    this.scene.add(fill, new THREE.AmbientLight(0xfff8ef, 0.7));
-    const light = new THREE.DirectionalLight(0xfff5e7, 2.5);
+    this.scene.add(fill, new THREE.AmbientLight(0xf7e6f3, 0.65));
+    const light = new THREE.DirectionalLight(0xffeedd, 3);
     light.position.set(-0.3, -0.6, 1.2);
     light.castShadow = true;
     light.shadow.mapSize.set(1024, 1024);
@@ -82,27 +84,14 @@ export class ClawLab {
     light.shadow.radius = 4;
     this.scene.add(light);
     this.buildNativeGeoms();
-    // The crossbeam rides on the two side rails; all trim is decorative.
-    for (const x of [-0.3, 0.3])
-      for (const y of [-0.225, 0.225]) {
-        const post = this.box([0.01, 0.01, 0.4], [x, y, 0.17], 0x8aa4b1);
-        if (y < 0) {
-          const material = post.material as THREE.MeshStandardMaterial;
-          material.transparent = true;
-          material.opacity = 0.22;
-          material.depthWrite = false;
-          post.castShadow = false;
-        }
-      }
-    this.box([0.62, 0.022, 0.026], [0, 0.225, 0.375], 0x93b6b9);
-    for (const x of [-0.3, 0.3])
-      this.box([0.024, 0.47, 0.028], [x, 0, 0.375], 0x93b6b9);
-    this.overhead.push(this.box([0.6, 0.018, 0.018], [0, 0, 0.365], 0xd7e3e5));
-    this.trolley = this.box([0.065, 0.065, 0.028], [0, 0, 0.35], 0xf4cc79);
+    const cabinet = buildCabinet(this.scene);
+    this.overhead.push(cabinet.crossbeam);
+    this.trolley = cabinet.trolley;
+    this.charm = cabinet.charm;
     this.cable = new THREE.Mesh(
       new THREE.CylinderGeometry(0.003, 0.003, 1, 12),
       new THREE.MeshStandardMaterial({
-        color: 0x9eb0b8,
+        color: 0x9b82ad,
         metalness: 0.7,
         roughness: 0.35,
       }),
@@ -113,7 +102,7 @@ export class ClawLab {
     this.aim = new THREE.Mesh(
       ring,
       new THREE.MeshBasicMaterial({
-        color: 0x20745b,
+        color: 0xf0b7ed,
         side: THREE.DoubleSide,
         depthTest: false,
       }),
@@ -170,26 +159,6 @@ export class ClawLab {
       throw error;
     }
   }
-  private box(
-    size: [number, number, number],
-    p: [number, number, number],
-    color: number,
-  ) {
-    const mesh = new THREE.Mesh(
-      new THREE.BoxGeometry(...size),
-      new THREE.MeshStandardMaterial({
-        color,
-        roughness: 0.6,
-        metalness: 0.15,
-      }),
-    );
-    mesh.position.set(...p);
-    // Thin cabinet beams should not lay hard stripes over the small prizes.
-    mesh.castShadow = false;
-    mesh.receiveShadow = true;
-    this.scene.add(mesh);
-    return mesh;
-  }
   private buildNativeGeoms() {
     const m = this.task.model;
     for (let i = 0; i < m.ngeom; i++) {
@@ -220,14 +189,14 @@ export class ClawLab {
       const claw = this.task.clawParts.includes(i);
       const material = new THREE.MeshPhysicalMaterial({
         color: claw
-          ? 0xd9e3e6
+          ? (i === this.task.hub ? 0x775180 : 0xd7b6df)
           : wall
-            ? 0xb3d7e7
+            ? 0x6b4779
             : i < 3
-              ? 0xe1e3dd
+              ? 0x62506f
               : i >= 4 && i <= 7
-                ? 0xc99c51
-                : 0x718696,
+                ? 0x49344f
+                : 0x38293e,
         roughness: claw ? 0.26 : 0.65,
         metalness: claw ? 0.65 : 0.05,
         transparent: wall,
@@ -263,7 +232,7 @@ export class ClawLab {
       : 37;
     if (compact !== this.compactView) {
       this.compactView = compact;
-      this.normalView = compact ? [0, -1, 0.66] : [0.3, -0.83, 0.66];
+      this.normalView = compact ? [0, -1.3, 0.6] : [0.35, -1.15, 0.65];
       this.setTopView(this.topView);
     }
     this.camera.fov = this.topView ? 37 : this.angledFov;
@@ -279,6 +248,14 @@ export class ClawLab {
     this.camera.position.set(p.x + 0.07, p.y - 0.27, p.z + 0.11);
     this.controls.update();
     this.rtx?.invalidate();
+  }
+  seek(frame: number) {
+    this.rtx?.invalidate();
+    this.comparison.seek(frame);
+  }
+  togglePlayback() {
+    this.rtx?.invalidate();
+    this.comparison.togglePlayback();
   }
   setRtx(enabled: boolean, en: boolean) {
     this.rtx?.dispose();
@@ -323,7 +300,7 @@ export class ClawLab {
     this.topView = top;
     this.camera.fov = top ? 37 : this.angledFov;
     this.camera.updateProjectionMatrix();
-    this.controls.target.set(0, 0, this.compactView && !top ? 0.1 : 0.13);
+    this.controls.target.set(0, 0, !top ? -0.07 : 0.13);
     this.camera.position.set(
       ...((top ? [0, -0.03, 1.15] : this.normalView) as [
         number,
@@ -427,6 +404,8 @@ export class ClawLab {
       );
     });
     const hub = this.geoms.get(task.hub)!.position;
+    this.charm.position.copy(hub);
+    this.charm.visible = !this.topView;
     this.trolley.position.set(hub.x, hub.y, 0.35);
     this.overhead[0]!.position.y = hub.y;
     const length = Math.max(0.01, 0.335 - hub.z);

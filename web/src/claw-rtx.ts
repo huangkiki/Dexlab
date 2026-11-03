@@ -19,7 +19,13 @@ export class ClawRtx {
   private status = document.createElement("span");
   private context: CanvasRenderingContext2D;
 
-  constructor(private canvas: HTMLCanvasElement, private scene: THREE.Scene, private en: boolean) {
+  private canvas: HTMLCanvasElement;
+  private scene: THREE.Scene;
+  private en: boolean;
+  constructor(canvas: HTMLCanvasElement, scene: THREE.Scene, en: boolean) {
+    this.canvas = canvas;
+    this.scene = scene;
+    this.en = en;
     this.image.className = "rtx-frame";
     this.image.hidden = true;
     this.image.setAttribute("aria-hidden", "true");
@@ -74,7 +80,9 @@ export class ClawRtx {
     return this.meshes.map((mesh) => {
       const m = mesh.matrixWorld.clone();
       const material = mesh.material as THREE.Material;
-      if (!mesh.visible || (material.transparent && material.opacity < 0.3))
+      let visible = true;
+      for (let node: THREE.Object3D | null = mesh; node; node = node.parent) visible &&= node.visible;
+      if (!visible || (material.transparent && material.opacity < 0.3))
         m.scale(new THREE.Vector3(0, 0, 0));
       return m.toArray();
     });

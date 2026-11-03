@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文：本次对比](#同一次下爪对比求解器)
 
-Move with arrow keys / WASD or the on-screen D-pad, then press Space or **Drop claw**. The three-finger claw descends, closes, lifts, carries to the gold chute and releases. A toy counts after it actually lands in the bin. Use top view to aim, try again after a miss, or reset the cabinet to reshuffle its six characters. Select one of three lineups covering all 16 characters; switching lineups starts a new collection. Click a portrait to inspect the real mesh up close. Everything runs locally; there are no payments or accounts.
+Move with arrow keys / WASD or the on-screen D-pad, then press Space or **Drop claw**. The three-finger claw descends, closes, lifts, carries to the gold chute and releases. A toy counts after it actually lands in the bin. Use top view to aim, try again after a miss, or reset the cabinet to reshuffle its 16 toys. Select one of three lineups covering all 16 characters; switching lineups starts a new collection. Click a portrait to inspect the real mesh up close. Everything runs locally; there are no payments or accounts.
 
 ## Compare the same grab
 
@@ -22,7 +22,7 @@ Each view reports its own settled-bin outcome, peak toy-height gain from the ini
 
 ## Physics and scoring
 
-MuJoCo 3.17 WASM owns the state. Three carriage slide joints and three radial finger slides are driven by position actuators; each finger has a connected radial guide, joint, curved capsule segments and an inward-facing tip. A visible trolley and cable suspend the hub. The 16 Nai-family characters are textured meshes generated locally with Microsoft's TRELLIS image-to-3D model from the generated character art. Their visible meshes follow MuJoCo body positions and orientations. CoACD convex parts derived from those same meshes provide approximate rigid collision geometry, including the ears and tails. Each toy has a synthetic total mass of 80 g; part masses follow hull volume, with 60% foot ballast on frog and chicken to stabilize their generated soles. These are not measured material or inertia values. The floor has a physical opening with a 300 mm deep collection bin, sized to hold all six toys without changing scoring thresholds.
+MuJoCo 3.17 WASM owns the state. Three carriage slide joints and three radial finger slides are driven by position actuators; each finger has a connected radial guide, joint, curved capsule segments and an inward-facing tip. A visible trolley and cable suspend the hub. The 16 Nai-family characters are textured meshes generated locally with Microsoft's TRELLIS image-to-3D model from the generated character art. Their visible meshes follow MuJoCo body positions and orientations. CoACD convex parts derived from those same meshes provide approximate rigid collision geometry, including the ears and tails. Each toy has a synthetic total mass of 80 g; part masses follow hull volume, with 60% foot ballast on frog and chicken to stabilize their generated soles. These are not measured material or inertia values. The floor has a physical opening with a 600 mm deep collection bin, enlarged for the 16-prize cabinet without changing scoring thresholds.
 
 Contact uses synthetic friction 0.9, `condim=4`, Newton, nonlinear CG and PGS with a common elliptic cone, implicitfast and a 2 ms timestep. There is no attachment, weld, in-round object-state injection, probability roll or guaranteed catch. The automatic sequence changes actuator targets only. Toy centers must settle inside the bin's inner scoring area (within 40 mm of its center), below −70 mm, with speed under 40 mm/s for 0.3 simulated seconds. Each toy scores once. This game is not a calibrated robot, deformable-plush simulation or frozen native benchmark result.
 
@@ -35,7 +35,7 @@ npm run build
 npm run dev
 ```
 
-Open `http://localhost:5173/lab/`; add `?lang=en` for English. Tests also check complete start-state equality, matched commands and time across solvers, repeatable trajectories, replay isolation, original-state retries and clearing on reset. Tests execute the real WASM engine: a centered catch, release-before-score, an empty drop, idle open-claw behavior, duplicate-input rejection, reset and collecting all six toys by aiming at measured positions. The longer multi-round case also exercises contact-wrapper lifetime: both the returned vector and individual embind contact handles must be deleted.
+Open `http://localhost:5173/lab/`; add `?lang=en` for English. Tests also check complete start-state equality, matched commands and time across solvers, repeatable trajectories, replay isolation, original-state retries and clearing on reset. Tests execute the real WASM engine: a centered catch, release-before-score, an empty drop, idle open-claw behavior, duplicate-input rejection, reset and collecting all 16 toys by aiming at measured positions. The longer multi-round case also exercises contact-wrapper lifetime: both the returned vector and individual embind contact handles must be deleted.
 
 The generated character atlas and individual image-to-3D inputs follow the user-provided Nai-family reference. Individual input portraits identify each prize; gameplay renders the actual textured GLBs. Inputs, prompts, model revision, export parameters and collider provenance are recorded in `src/assets/README.md` and `src/assets/nai/`. Meshes are generated offline; the browser only loads finished assets and never downloads or runs the generation model. Plush appearance does not imply soft-body simulation.
 
@@ -49,9 +49,9 @@ The aim/drop/return/prize-loop interaction was informed by [neciszhang/claw3d](h
 
 ## Sixteen characters and PBR / 16 款角色与 PBR
 
-The original six are joined by Nai Egg, Baby Nai Frog, Nai Dog, Pink Nai Frog, Nai Swirl, Soy Milk, Nai Fish, Nai Tea, Nai Bottle and Sigma Nai Frog. Each cabinet contains six toys; only that lineup's models are loaded. The ten additions use 2048-pixel baked base-color textures and a less aggressive mesh simplification setting (`0.90` versus the originals' `0.94`). Both viewers use nonmetallic rough fabric, while the claw retains metallic material. No fabricated normal maps or material measurements are implied.
+The original six are joined by Nai Egg, Baby Nai Frog, Nai Dog, Pink Nai Frog, Nai Swirl, Soy Milk, Nai Fish, Nai Tea, Nai Bottle and Sigma Nai Frog. Each cabinet contains 16 toys from a curated group, including repeats; repeated toys share decoded mesh and texture resources. The ten additions use 2048-pixel baked base-color textures and a less aggressive mesh simplification setting (`0.90` versus the originals' `0.94`). Both viewers use nonmetallic rough fabric. The cabinet has deep-purple lacquer, rose light strips and sculpted moon/star trim; the metallic claw has matching cat-ear and moon decorations. The decorations do not alter its collision geometry. No fabricated normal maps or material measurements are implied.
 
-新增奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙，共 16 款。每柜仍放六只，仅加载所选组合的模型；切换组合会开始新收藏。点头像可近看真实网格，拖动旋转，俯视按钮返回全景。新增模型采用 2048 像素颜色贴图和更少的网格简化（`0.90`，原六款为 `0.94`）；娃娃为粗糙非金属 PBR，夹爪为金属材质。这不代表实测织物或生成了真实法线贴图。
+新增奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙，共 16 款。每柜放 16 只，按组搭配并含有同款玩偶；同款复用解码后的网格和纹理；切换组合会开始新收藏。点头像可近看真实网格，拖动旋转，俯视按钮返回全景。新增模型采用 2048 像素颜色贴图和更少的网格简化（`0.90`，原六款为 `0.94`）；娃娃为粗糙非金属 PBR；柜体采用深紫漆面、粉色灯条和立体星月装饰，金属夹爪配猫耳与月牙。这些装饰不改变夹爪碰撞形状。这不代表实测织物或生成了真实法线贴图。
 
 [Local OVRTX setup / 本机 OVRTX 启动](ovrtx/README.md) describes the optional RTX stream. Three solver views are rendered together from one timestamped request. The visible renderer status reports connection and per-frame render time; stale or disconnected streams fall back explicitly to WebGL. Public Pages remains WebGL.
 

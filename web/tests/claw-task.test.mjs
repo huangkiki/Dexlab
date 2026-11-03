@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import loadMujoco from "@mujoco/mujoco";
-import { ClawTask, TOYS, STEP } from "../src/claw-task.ts";
+import { ClawTask, TOYS, STEP, BIN } from "../src/claw-task.ts";
 const mj = await loadMujoco({
   wasmBinary: await readFile(
     fileURLToPath(import.meta.resolve("@mujoco/mujoco/mujoco.wasm")),
@@ -58,8 +58,8 @@ test("centered native three-finger grab carries a toy into the actual bin", () =
 test("dropping in empty space finishes without awarding a prize", () => {
   const task = new ClawTask(mj);
   try {
-    task.move("x", 0.23);
-    task.move("y", -0.13 - task.target.y);
+    task.move("x", BIN.x);
+    task.move("y", BIN.y - task.target.y);
     for (let i = 0; i < 250; i++) task.step();
     task.drop();
     runRound(task);
@@ -87,7 +87,7 @@ test("idle open claw never lifts or awards toys and repeated drop cannot restart
   }
 });
 
-test("all six toys can be collected by re-aiming at their measured positions", () => {
+test("all sixteen toys can be collected by re-aiming at their measured positions", () => {
   const task = new ClawTask(mj);
   try {
     for (let i = 0; i < 500; i++) task.step();

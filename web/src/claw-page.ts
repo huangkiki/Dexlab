@@ -15,6 +15,9 @@ const en = new URLSearchParams(location.search).get("lang") === "en";
 const t = (zh: string, english: string) => (en ? english : zh);
 const arrow =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg>';
+const prizeGroups = [...new Set(TOYS.map(toy => toy.kind))].map(kind => ({
+  kind, indices: TOYS.flatMap((toy, i) => toy.kind === kind ? [i] : []),
+}));
 const messages: Record<ClawPhase, string> = {
   aim: t(
     "把光圈移到玩偶正上方，准备好了就下爪。",
@@ -47,9 +50,9 @@ export async function startClawPage() {
         <p class="camera-help">${t("拖动画面转动视角 · 滚轮缩放", "Drag to orbit · Scroll to zoom")}</p>
       </section>
       <section class="controls" aria-label="${t("操作台", "Control panel")}">
-        <div class="round-stats"><span>${t("本柜收藏 · Newton", "Cabinet · Newton")} <strong id="score">0 / 6</strong></span><span id="attempts">${t("尚未下爪", "First try awaits")}</span></div>
+        <div class="round-stats"><span>${t("本柜收藏 · Newton", "Cabinet · Newton")} <strong id="score">0 / ${TOYS.length}</strong></span><span id="attempts">${t("尚未下爪", "First try awaits")}</span></div>
         <label class="iteration-control" for="cabinet">${t("选择娃娃 · 16 款", "Prizes · 16 characters")}<select id="cabinet">${Object.entries(CABINETS).map(([key, value]) => `<option value="${key}" ${key === CABINET ? "selected" : ""}>${en ? value.name : value.zh}</option>`).join("")}</select></label>
-        <p class="input-help">${t("切换组合会开始新的一柜。", "Changing the lineup starts a fresh cabinet.")}</p>
+        <p class="input-help">${t("每柜 16 只 · 切换组合重新开始。", "16 prizes per cabinet. Changing lineup starts fresh.")}</p>
         <label class="iteration-control" for="iterations">${t("每步迭代上限", "Iterations per step")}<select id="iterations"><option value="5">5</option><option value="20">20</option><option value="60" selected>60</option><option value="100">100</option></select></label>
         <label class="iteration-control" for="renderer">${t("画面渲染", "Renderer")}<select id="renderer"><option value="webgl">WebGL</option><option value="ovrtx">OVRTX · ${t("本机 RTX", "local RTX")}</option></select></label>
         <p id="renderer-help" class="input-help" hidden>${t("OVRTX 需要本机渲染服务。", "OVRTX needs the local render service.")} <a href="https://github.com/huangkiki/Dexlab/tree/main/web/ovrtx">${t("启动说明", "Setup")}</a></p>
@@ -67,7 +70,7 @@ export async function startClawPage() {
             .join("")}
         </div><button type="button" id="drop" class="drop-button">${t("下爪", "Drop claw")}<kbd>Space</kbd></button></div>
         <p class="input-help">${t("按住方向移动，点按微调。", "Hold a direction to move. Tap to fine-tune.")}<br><span>${t("方向键 / WASD · 空格下爪", "Arrow keys / WASD · Space to drop")}</span></p>
-        <div class="toy-collection"><h2>${t("这一柜的小伙伴", "Meet the prizes")}</h2><p class="input-help">${t("点头像近看 · 俯视按钮回到全景", "Click a portrait to inspect · Top view restores the overview")}</p><ul>${TOYS.map((toy, i) => `<li data-toy="${i}"><button type="button" class="toy-portrait-button" data-look="${i}" aria-label="${t("近看", "Look at")} ${en ? toy.name : toy.zh}"><img class="toy-portrait" src="${toyPortraitUrls[i]}" alt="" /></button><span>${en ? toy.name : toy.zh}</span><span class="toy-status">${t("待抓取", "In cabinet")}</span></li>`).join("")}</ul></div>
+        <div class="toy-collection"><h2>${t("这一柜的小伙伴", "Meet the prizes")}</h2><p class="input-help">${t("点头像近看 · 俯视按钮回到全景", "Click a portrait to inspect · Top view restores the overview")}</p><ul>${prizeGroups.map(({kind, indices}) => { const i = indices[0]!, toy = TOYS[i]!; return `<li data-kind="${kind}"><button type="button" class="toy-portrait-button" data-look="${i}" aria-label="${t("近看", "Look at")} ${en ? toy.name : toy.zh}"><img class="toy-portrait" src="${toyPortraitUrls[i]}" alt="" /></button><span>${en ? toy.name : toy.zh}</span><span class="toy-status">0 / ${indices.length}</span></li>`; }).join("")}</ul></div>
       </section>
     </div>
     <div class="round-feedback" id="feedback"><p id="hint" role="status" aria-live="polite">${messages.aim}</p><span id="live-contact"></span></div>
@@ -79,7 +82,7 @@ export async function startClawPage() {
     </section>
     ${clawExplainer(en)}
     <footer><span>${t("MuJoCo 本地物理 · 免费玩，随时重来", "Local MuJoCo physics · Free play, unlimited tries")}</span><a href="?mode=solver&embed=1&lang=${en ? "en" : "zh"}">${t("简化场景对比", "Simple-scene comparison")}</a>
-      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("每柜六只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Each cabinet has six Nai-family toys with plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGL / local OVRTX · Newton / CG / PGS · elliptic · implicitfast · 2 ms</p></details>
+      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("每柜 16 只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Each cabinet has 16 Nai-family toys with plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGL / local OVRTX · Newton / CG / PGS · elliptic · implicitfast · 2 ms</p></details>
     </footer></main>`;
   const el = <T extends HTMLElement>(id: string) =>
     document.getElementById(id) as T;
@@ -122,13 +125,13 @@ export async function startClawPage() {
     el<HTMLSelectElement>("iterations").disabled = !(ready || result);
     el("feedback").classList.toggle("is-win", s.roundWon > 0 && result);
     el("live-contact").textContent = "";
-    app.querySelectorAll<HTMLElement>("[data-toy]").forEach((node) => {
-      const won = s.won.includes(Number(node.dataset.toy));
-      node.classList.toggle("is-won", won);
-      node.querySelector(".toy-status")!.textContent = won
-        ? t("已抓到", "Collected")
-        : t("待抓取", "In cabinet");
-    });
+    for (const { kind, indices } of prizeGroups) {
+      const node = app.querySelector<HTMLElement>(`[data-kind="${kind}"]`)!;
+      const count = indices.filter(i => s.won.includes(i)).length;
+      node.classList.toggle("is-won", count === indices.length);
+      node.querySelector(".toy-status")!.textContent = `${count} / ${indices.length} ${t("已抓到", "collected")}`;
+      node.querySelector<HTMLButtonElement>("[data-look]")!.dataset.look = String(indices.find(i => !s.won.includes(i)) ?? indices[0]);
+    }
   }
   function updateComparison(comparison: ClawComparison) {
     app
@@ -236,19 +239,19 @@ export async function startClawPage() {
     lab.startComparison(iterationLimit(), true),
   );
   el("play-pause").addEventListener("click", () => {
-    lab.comparison.togglePlayback();
+    lab.togglePlayback();
     updateComparison(lab.comparison);
   });
   el("speed").addEventListener("change", () => {
     lab.speed = Number(el<HTMLSelectElement>("speed").value);
   });
   el("timeline").addEventListener("input", () => {
-    lab.comparison.seek(Number(el<HTMLInputElement>("timeline").value));
+    lab.seek(Number(el<HTMLInputElement>("timeline").value));
     updateComparison(lab.comparison);
   });
   el("first-difference").addEventListener("click", () => {
     if (lab.comparison.firstDifference !== null)
-      lab.comparison.seek(lab.comparison.firstDifference);
+      lab.seek(lab.comparison.firstDifference);
     updateComparison(lab.comparison);
   });
   const clear = () => {

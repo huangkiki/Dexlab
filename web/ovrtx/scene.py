@@ -67,6 +67,9 @@ def build_scene(glb: Path, output: Path):
         metallic = getattr(source, "metallicFactor", None)
         shader.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(float(roughness if roughness is not None else 1.))
         shader.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(float(metallic if metallic is not None else 0.))
+        emission = getattr(source, "emissiveFactor", None)
+        if emission is not None:
+            shader.CreateInput("emissiveColor", Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(*np.asarray(emission, dtype=float)))
         texture = getattr(source, "baseColorTexture", None)
         if texture is not None:
             if not hasattr(mesh.visual, "uv") or mesh.visual.uv is None:
@@ -92,9 +95,9 @@ def build_scene(glb: Path, output: Path):
     camera.CreateVerticalApertureAttr(18.)
     camera.AddTransformOp().Set(look_at((0, -1, .66), (0, 0, .10)))
     for name, pos, power, color in [
-        ("Key", (-.3, -.6, 1.1), 650., (1., .94, .84)),
-        ("Fill", (.5, -.1, .75), 300., (.82, .91, 1.)),
-        ("Rim", (0., .5, .9), 450., (1., 1., 1.)),
+        ("Key", (-.3, -.6, 1.1), 650., (1., .93, .86)),
+        ("Fill", (.5, -.1, .75), 300., (.88, .75, 1.)),
+        ("Rim", (0., .5, .9), 400., (1., .70, .89)),
     ]:
         light = UsdLux.RectLight.Define(stage, f"/World/{name}")
         light.CreateIntensityAttr(power)
@@ -104,7 +107,7 @@ def build_scene(glb: Path, output: Path):
         light.AddTransformOp().Set(look_at(pos, (0, 0, .05)))
     ambient = UsdLux.DomeLight.Define(stage, "/Lighting/Ambient")
     ambient.CreateIntensityAttr(80.)
-    ambient.CreateColorAttr((.8, .87, 1.))
+    ambient.CreateColorAttr((.76, .66, .88))
     for lane in range(3):
         root = "/World" if lane == 0 else f"/Lane{lane}"
         if lane:

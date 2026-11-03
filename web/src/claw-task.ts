@@ -2,7 +2,7 @@ import type { MainModule } from "@mujoco/mujoco";
 
 export const STEP = 0.002;
 export const HOME = { x: 0, y: -0.02, z: 0.23 };
-export const BIN = { x: -0.215, y: -0.135, half: 0.06, floor: -0.3 };
+export const BIN = { x: -0.215, y: -0.135, half: 0.06, floor: -0.6 };
 import { TOYS, TOY_ASSETS, toyXml } from "./claw-toys.ts";
 export { TOYS } from "./claw-toys.ts";
 export type ClawPhase =

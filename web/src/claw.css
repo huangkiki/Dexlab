@@ -1,19 +1,20 @@
 :root {
   color-scheme: dark;
   font-family: ui-sans-serif, system-ui, sans-serif;
-  color: #edf2f4;
-  background: #121a22;
-  --muted: #b6c3cc;
-  --edge: #354752;
-  --mint: #a4e5cb;
+  color: #f3eaf6;
+  background: #15111e;
+  --muted: #c9b9d4;
+  --edge: #4a3959;
+  --accent: #e8afe0;
 }
 * {
   box-sizing: border-box;
-  scrollbar-color: #657888 #121a22;
+  scrollbar-color: #8d719f #15111e;
   scrollbar-width: thin;
 }
 body {
   margin: 0;
+  background: #15111e;
 }
 button,
 a {
@@ -29,19 +30,19 @@ button:disabled {
   cursor: default;
 }
 a {
-  color: #b5d5f7;
+  color: #dec1f5;
   text-underline-offset: 0.22em;
 }
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible,
 canvas:focus-visible {
-  outline: 3px solid #b5d5f7;
+  outline: 3px solid #dec1f5;
   outline-offset: 3px;
 }
 ::selection {
-  background: var(--mint);
-  color: #12261d;
+  background: var(--accent);
+  color: #24162d;
 }
 [hidden] {
   display: none !important;
@@ -80,13 +81,13 @@ p {
   padding: 8px 13px;
   border: 1px solid var(--edge);
   border-radius: 8px;
-  background: #17232d;
+  background: #241a30;
   font-size: 13px;
   white-space: nowrap;
   text-decoration: none;
 }
 .quiet-button:hover {
-  background: #2a3b48;
+  background: #3b294a;
 }
 .machine-layout {
   display: grid;
@@ -99,13 +100,14 @@ p {
   position: relative;
   container-type: inline-size;
   min-width: 0;
-  background: #17212b;
-  align-self: start;
+  background: #1c1627;
+  align-self: stretch;
 }
 #claw-canvas {
   display: block;
   width: 100%;
-  height: 480px;
+  height: 100%;
+  min-height: 480px;
   touch-action: none;
 }
 .scene-tools {
@@ -119,8 +121,8 @@ p {
   pointer-events: none;
 }
 .scene-tools span {
-  color: #edf2f4;
-  background: #17232d;
+  color: #f3eaf6;
+  background: #241a30;
   border-radius: 6px;
   padding: 5px 8px;
   font-size: 12px;
@@ -132,8 +134,8 @@ p {
   position: absolute;
   bottom: 10px;
   left: 14px;
-  color: #c2ced7;
-  background: #17232d;
+  color: #d6c0de;
+  background: #241a30;
   border-radius: 4px;
   padding: 3px 6px;
   font-size: 11px;
@@ -141,7 +143,7 @@ p {
 }
 .controls {
   padding: 19px 17px;
-  background: #1d2933;
+  background: #251c30;
 }
 .round-stats {
   display: flex;
@@ -174,9 +176,9 @@ p {
   align-items: center;
   justify-content: center;
   min-height: 51px;
-  border: 1px solid #546c7a;
+  border: 1px solid #735984;
   border-radius: 8px;
-  background: #304451;
+  background: #40304e;
   touch-action: none;
   user-select: none;
   font-size: 11px;
@@ -188,7 +190,7 @@ p {
 }
 .move-button:hover,
 .move-button.is-held {
-  background: #496373;
+  background: #5c426c;
 }
 .forward {
   grid-column: 2;
@@ -224,13 +226,13 @@ p {
   gap: 12px;
   border: 0;
   border-radius: 9px;
-  color: #173a2f;
-  background: var(--mint);
+  color: #321e37;
+  background: var(--accent);
   font-size: 20px;
   font-weight: 700;
 }
 .drop-button:hover:not(:disabled) {
-  background: #c0f2df;
+  background: #f6d1ef;
 }
 kbd {
   font-family: inherit;
@@ -286,11 +288,11 @@ kbd {
 }
 .is-won .toy-portrait {
   opacity: 1;
-  outline: 2px solid var(--mint);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 .is-won .toy-status {
-  color: var(--mint);
+  color: var(--accent);
 }
 .round-feedback {
   display: flex;
@@ -309,7 +311,7 @@ kbd {
   white-space: nowrap;
 }
 .is-win p {
-  color: var(--mint);
+  color: var(--accent);
 }
 footer {
   display: flex;
@@ -341,6 +343,7 @@ details p {
     grid-template-columns: 1fr;
   }
   #claw-canvas {
+    min-height: 0;
     height: 390px;
   }
   .controls {
@@ -481,11 +484,11 @@ details p {
 select,
 input {
   font: inherit;
-  accent-color: var(--mint);
+  accent-color: var(--accent);
 }
 select {
   color: inherit;
-  background: #17232d;
+  background: #241a30;
   border: 1px solid var(--edge);
   border-radius: 6px;
   padding: 8px;
@@ -493,7 +496,7 @@ select {
 }
 select:focus-visible,
 input:focus-visible {
-  outline: 3px solid #b5d5f7;
+  outline: 3px solid #dec1f5;
   outline-offset: 3px;
 }
 .iteration-control {
@@ -508,6 +511,7 @@ input:focus-visible {
   grid-template-columns: 1fr;
 }
 .is-comparing #claw-canvas {
+  min-height: 0;
   height: 440px;
 }
 .is-comparing .controls {
@@ -559,14 +563,14 @@ input:focus-visible {
 }
 .world-label h2 {
   width: fit-content;
-  background: #17212b;
+  background: #1c1627;
   padding: 0 6px 4px 0;
   font-size: 21px;
   margin: 0;
-  color: #b5d5f7;
+  color: #dec1f5;
 }
 .world-label:nth-child(2) h2 {
-  color: var(--mint);
+  color: var(--accent);
 }
 .world-label:nth-child(3) h2 {
   color: #f4cc79;
@@ -579,7 +583,7 @@ input:focus-visible {
   margin-top: 3px;
 }
 .world-label > div {
-  background: #17212be8;
+  background: #1c1627e8;
   border-radius: 6px;
   padding: 6px 8px;
 }
@@ -734,7 +738,7 @@ input:focus-visible {
   }
   .world-label h2 {
     width: fit-content;
-    background: #17212b;
+    background: #1c1627;
     padding: 0 6px 4px 0;
     font-size: 19px;
   }
@@ -761,11 +765,11 @@ input:focus-visible {
   padding: .25rem .5rem;
   border-radius: .3rem;
   color: #eaf4f2;
-  background: #15262ee6;
+  background: #24162ee6;
   font-size: .72rem;
   pointer-events: none;
 }
 
 .toy-portrait-button { padding: 0; border: 0; background: transparent; grid-row: span 2; width: 38px; height: 38px; border-radius: 8px; cursor: pointer; }
 .toy-portrait-button img { display: block; }
-.toy-portrait-button:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+.toy-portrait-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

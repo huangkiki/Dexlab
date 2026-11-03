@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import loadMujoco from "@mujoco/mujoco";
 import { ClawComparison } from "../src/claw-comparison.ts";
-import { TOYS } from "../src/claw-task.ts";
+import { TOYS, BIN } from "../src/claw-task.ts";
 
 const mj = await loadMujoco({
   wasmBinary: await readFile(
@@ -12,8 +12,8 @@ const mj = await loadMujoco({
   ),
 });
 function prepare(c, empty = false) {
-  c.reference.move("x", (empty ? 0.23 : TOYS[0].x) - c.reference.target.x);
-  c.reference.move("y", (empty ? -0.13 : TOYS[0].y) - c.reference.target.y);
+  c.reference.move("x", (empty ? BIN.x : TOYS[0].x) - c.reference.target.x);
+  c.reference.move("y", (empty ? BIN.y : TOYS[0].y) - c.reference.target.y);
   for (let i = 0; i < 250; i++) c.reference.step();
 }
 function finish(c) {

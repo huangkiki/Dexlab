@@ -32,7 +32,7 @@ export function disposeMeshes(root: THREE.Object3D) {
 export async function loadToyModels(urls: readonly string[]) {
   const loader = new GLTFLoader();
   const results = await Promise.allSettled(
-    urls.map((url) => loader.loadAsync(url)),
+    [...new Set(urls)].map((url) => loader.loadAsync(url)),
   );
   const failed = results.find((result) => result.status === "rejected");
   if (failed) {
@@ -42,7 +42,7 @@ export async function loadToyModels(urls: readonly string[]) {
       cause: failed.reason,
     });
   }
-  return results.map((result) => {
+  const models = results.map((result) => {
     if (result.status !== "fulfilled")
       throw new Error("Unreachable asset state");
     const model = result.value.scene;
@@ -54,8 +54,12 @@ export async function loadToyModels(urls: readonly string[]) {
       material.roughness = 0.92;
       material.metalness = 0;
     });
+    return model;
+  });
+  const byUrl = new Map([...new Set(urls)].map((url, index) => [url, models[index]!]));
+  return urls.map((url) => {
     const body = new THREE.Group();
-    body.add(model);
+    body.add(byUrl.get(url)!.clone(true));
     return body;
   });
 }
