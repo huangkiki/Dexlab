@@ -97,6 +97,7 @@ p {
 }
 .scene-panel {
   position: relative;
+  container-type: inline-size;
   min-width: 0;
   background: #17212b;
 }
@@ -709,7 +710,7 @@ input:focus-visible {
     margin-left: 8px;
   }
 }
-@media (max-width: 731px) {
+@container (width < 700px) {
   .is-comparing #claw-canvas {
     height: 1080px;
   }
@@ -738,11 +739,5 @@ input:focus-visible {
   .world-label h2 small {
     display: inline;
     margin-left: 8px;
-  }
-  .is-comparing .controls {
-    align-items: start;
-  }
-  .physics-guide h2 {
-    font-size: 19px;
   }
 }
