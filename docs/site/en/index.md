@@ -90,17 +90,19 @@ Together, these results show why a success video is insufficient: **material mod
 (live-lab)=
 ## Play the claw machine
 
-Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Space or Drop claw. The three-finger claw descends, closes, lifts and returns to the gold chute. A prize counts only after it actually lands and settles in the bin. Switch to top view to aim, and try as often as you like.
+Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Space or Drop claw. The three-finger claw descends, closes, lifts and returns to the gold chute. A prize counts only after it actually lands and settles in the bin. After you drop, Newton, CG and PGS run from the same state with elliptic friction cones, implicitfast and 2 ms steps. Scrub the shared replay, slow it down, or change the iteration cap and repeat the original grab. Re-aiming continues the Newton cabinet.
 
 ```{raw} html
 <p><a href="../../_static/live-lab/index.html?lang=en" target="_blank" rel="noopener">Open the claw machine in a larger view</a></p>
 <div class="dexlab-live-lab">
   <iframe src="../../_static/live-lab/index.html?embed=1&amp;lang=en"
-    title="DexLab claw machine" loading="eager" allow="fullscreen"></iframe>
+    title="DexLab claw machine" loading="lazy" allow="fullscreen"></iframe>
 </div>
 ```
 
-MuJoCo computes contact locally in your browser. The six Nai-family prizes (frog, mouse, bean, chicken, cat and rabbit) use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The original solver comparison remains available inside the lab.
+MuJoCo computes contact locally in your browser. One fixed mix of 30 prizes covers all 16 Nai-family characters, with no lineup selector. Larger toys settle under gravity into a pile, and the claw uses the measured surface height at drop. The deep-purple cabinet has rose lighting, moon/star trim and a matching cat-ear claw. Click a portrait to inspect a mesh up close. They use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The guide below the game explains all three solvers and explicit, semi-implicit and implicit integration. Agreement is a valid result; a successful catch alone does not establish physical accuracy.
+
+The page prefers local WebGPU, falls back to WebGL 2 when needed and displays the actual backend. Physics and replay run in a separate worker. Phones use capped rendering resolution and frame rate, with lighter meshes and textures. All three worlds retain the same collision models, 2 ms step and iteration budget; simulation time can run slower than wall time on a busy device.
 
 (quickstart)=
 ## Quick start

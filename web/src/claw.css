@@ -1,19 +1,20 @@
 :root {
   color-scheme: dark;
   font-family: ui-sans-serif, system-ui, sans-serif;
-  color: #edf2f4;
-  background: #121a22;
-  --muted: #b6c3cc;
-  --edge: #354752;
-  --mint: #a4e5cb;
+  color: #f3eaf6;
+  background: #15111e;
+  --muted: #c9b9d4;
+  --edge: #4a3959;
+  --accent: #e8afe0;
 }
 * {
   box-sizing: border-box;
-  scrollbar-color: #657888 #121a22;
+  scrollbar-color: #8d719f #15111e;
   scrollbar-width: thin;
 }
 body {
   margin: 0;
+  background: #15111e;
 }
 button,
 a {
@@ -29,19 +30,19 @@ button:disabled {
   cursor: default;
 }
 a {
-  color: #b5d5f7;
+  color: #dec1f5;
   text-underline-offset: 0.22em;
 }
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible,
 canvas:focus-visible {
-  outline: 3px solid #b5d5f7;
+  outline: 3px solid #dec1f5;
   outline-offset: 3px;
 }
 ::selection {
-  background: var(--mint);
-  color: #12261d;
+  background: var(--accent);
+  color: #24162d;
 }
 [hidden] {
   display: none !important;
@@ -80,13 +81,13 @@ p {
   padding: 8px 13px;
   border: 1px solid var(--edge);
   border-radius: 8px;
-  background: #17232d;
+  background: #241a30;
   font-size: 13px;
   white-space: nowrap;
   text-decoration: none;
 }
 .quiet-button:hover {
-  background: #2a3b48;
+  background: #3b294a;
 }
 .machine-layout {
   display: grid;
@@ -97,13 +98,16 @@ p {
 }
 .scene-panel {
   position: relative;
+  container-type: inline-size;
   min-width: 0;
-  background: #17212b;
+  background: #1c1627;
+  align-self: stretch;
 }
 #claw-canvas {
   display: block;
   width: 100%;
-  height: 480px;
+  height: 100%;
+  min-height: 480px;
   touch-action: none;
 }
 .scene-tools {
@@ -117,8 +121,8 @@ p {
   pointer-events: none;
 }
 .scene-tools span {
-  color: #edf2f4;
-  background: #17232d;
+  color: #f3eaf6;
+  background: #241a30;
   border-radius: 6px;
   padding: 5px 8px;
   font-size: 12px;
@@ -130,8 +134,8 @@ p {
   position: absolute;
   bottom: 10px;
   left: 14px;
-  color: #c2ced7;
-  background: #17232d;
+  color: #d6c0de;
+  background: #241a30;
   border-radius: 4px;
   padding: 3px 6px;
   font-size: 11px;
@@ -139,7 +143,7 @@ p {
 }
 .controls {
   padding: 19px 17px;
-  background: #1d2933;
+  background: #251c30;
 }
 .round-stats {
   display: flex;
@@ -172,9 +176,9 @@ p {
   align-items: center;
   justify-content: center;
   min-height: 51px;
-  border: 1px solid #546c7a;
+  border: 1px solid #735984;
   border-radius: 8px;
-  background: #304451;
+  background: #40304e;
   touch-action: none;
   user-select: none;
   font-size: 11px;
@@ -186,7 +190,7 @@ p {
 }
 .move-button:hover,
 .move-button.is-held {
-  background: #496373;
+  background: #5c426c;
 }
 .forward {
   grid-column: 2;
@@ -222,13 +226,13 @@ p {
   gap: 12px;
   border: 0;
   border-radius: 9px;
-  color: #173a2f;
-  background: var(--mint);
+  color: #321e37;
+  background: var(--accent);
   font-size: 20px;
   font-weight: 700;
 }
 .drop-button:hover:not(:disabled) {
-  background: #c0f2df;
+  background: #f6d1ef;
 }
 kbd {
   font-family: inherit;
@@ -248,6 +252,7 @@ kbd {
   display: block;
   margin-top: 2px;
 }
+.toy-collection { margin: 20px 0 28px; }
 .toy-collection h2 {
   font-size: 12px;
   font-weight: 500;
@@ -259,8 +264,8 @@ kbd {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 6px;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 14px 10px;
 }
 .toy-collection li {
   display: grid;
@@ -275,6 +280,7 @@ kbd {
   border-radius: 8px;
   background-size: 300% 200%;
   background-color: #f6f2e6;
+  object-fit: cover;
   grid-row: span 2;
 }
 .toy-status {
@@ -283,11 +289,11 @@ kbd {
 }
 .is-won .toy-portrait {
   opacity: 1;
-  outline: 2px solid var(--mint);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 .is-won .toy-status {
-  color: var(--mint);
+  color: var(--accent);
 }
 .round-feedback {
   display: flex;
@@ -306,7 +312,7 @@ kbd {
   white-space: nowrap;
 }
 .is-win p {
-  color: var(--mint);
+  color: var(--accent);
 }
 footer {
   display: flex;
@@ -338,6 +344,7 @@ details p {
     grid-template-columns: 1fr;
   }
   #claw-canvas {
+    min-height: 0;
     height: 390px;
   }
   .controls {
@@ -364,11 +371,7 @@ details p {
     align-self: end;
     grid-column: 1;
   }
-  .toy-collection {
-    grid-column: 2;
-    grid-row: 2 / span 2;
-    align-self: center;
-  }
+  .toy-collection ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .drop-button kbd {
     display: none;
   }
@@ -440,18 +443,7 @@ details p {
   .input-help span {
     display: none;
   }
-  .toy-collection {
-    grid-column: 1;
-    grid-row: auto;
-  }
-  .toy-collection h2 {
-    display: none;
-  }
-  .toy-collection ul {
-    display: flex;
-    justify-content: space-between;
-    gap: 3px;
-  }
+  .toy-collection ul { gap: 14px 6px; }
   .toy-collection li {
     display: flex;
     flex-direction: column;
@@ -459,7 +451,9 @@ details p {
     font-size: 10px;
   }
   .toy-status {
-    display: none;
+    display: block;
+    font-size: 9px;
+    text-align: center;
   }
   .round-feedback p {
     font-size: 13px;
@@ -473,3 +467,276 @@ details p {
     scroll-behavior: auto;
   }
 }
+
+/* One cabinet for aiming; three synchronized windows for the experiment. */
+select,
+input {
+  font: inherit;
+  accent-color: var(--accent);
+}
+select {
+  color: inherit;
+  background: #241a30;
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  padding: 8px;
+  min-height: 40px;
+}
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid #dec1f5;
+  outline-offset: 3px;
+}
+.iteration-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.is-comparing {
+  grid-template-columns: 1fr;
+}
+.is-comparing #claw-canvas {
+  min-height: 0;
+  height: 440px;
+}
+.is-comparing .controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  padding: 14px 18px;
+}
+.is-comparing .round-stats {
+  border: 0;
+  padding: 0;
+}
+.is-comparing .iteration-control {
+  margin: 0;
+}
+.is-comparing .play-controls {
+  padding: 0;
+}
+.is-comparing .drop-button {
+  margin: 0;
+  min-width: 130px;
+  height: 46px;
+  font-size: 17px;
+}
+.is-comparing .direction-pad,
+.is-comparing .input-help {
+  display: none;
+}
+.world-labels {
+  position: absolute;
+  inset: 56px 0 34px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  pointer-events: none;
+}
+.world-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 14px;
+  min-width: 0;
+}
+.world-label + .world-label {
+  border-left: 1px solid var(--edge);
+}
+.world-label h2 {
+  width: fit-content;
+  background: #1c1627;
+  padding: 0 6px 4px 0;
+  font-size: 21px;
+  margin: 0;
+  color: #dec1f5;
+}
+.world-label:nth-child(2) h2 {
+  color: var(--accent);
+}
+.world-label:nth-child(3) h2 {
+  color: #f4cc79;
+}
+.world-label h2 small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.world-label > div {
+  background: #1c1627e8;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.world-label strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.world-label p {
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.comparison-tools {
+  padding: 4px 0 24px;
+}
+.transport {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.transport label,
+.transport output {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+#repeat-grab {
+  margin-left: auto;
+}
+.timeline-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+#timeline {
+  width: 100%;
+  margin: 6px 0;
+  min-height: 28px;
+  cursor: pointer;
+}
+#timeline:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.spread-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.comparison-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.physics-guide {
+  border-top: 1px solid var(--edge);
+  padding: 24px 0;
+}
+.physics-guide h2 {
+  margin: 0 0 10px;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+.physics-guide > p {
+  max-width: 74ch;
+  font-size: 14px;
+  color: var(--muted);
+}
+.physics-guide details {
+  border-bottom: 1px solid var(--edge);
+  padding: 10px 0;
+}
+.physics-guide summary {
+  font-size: 15px;
+  min-height: 44px;
+  line-height: 1.5;
+  padding: 10px 0;
+}
+.physics-guide details p,
+.method-list dd {
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 74ch;
+}
+.method-list {
+  margin: 6px 0 18px;
+}
+.method-list > div {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 20px;
+  padding: 12px 0;
+}
+.method-list dt {
+  font-weight: 650;
+  font-size: 15px;
+}
+.method-list dt span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.method-list dd {
+  margin: 0;
+  color: var(--muted);
+}
+.physics-guide .guide-source {
+  font-size: 12px;
+  margin-top: 14px;
+}
+@media (max-width: 760px) {
+  .iteration-control {
+    grid-column: 1/-1;
+    margin: 0;
+    justify-content: start;
+  }
+  .method-list > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .method-list dt span {
+    display: inline;
+    margin-left: 8px;
+  }
+}
+@container (width < 700px) {
+  .is-comparing #claw-canvas {
+    height: 1080px;
+  }
+  .world-labels {
+    inset: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .world-label {
+    padding: 44px 14px 12px;
+  }
+  .world-label:last-child { padding-bottom: 40px; }
+  .world-label + .world-label {
+    border-left: 0;
+    border-top: 1px solid var(--edge);
+    padding-top: 14px;
+  }
+  .is-comparing .camera-help {
+    display: none;
+  }
+  .world-label h2 {
+    width: fit-content;
+    background: #1c1627;
+    padding: 0 6px 4px 0;
+    font-size: 19px;
+  }
+  .world-label h2 small {
+    display: inline;
+    margin-left: 8px;
+  }
+}
+.toy-portrait-button { padding: 0; border: 0; background: transparent; grid-row: span 2; width: 38px; height: 38px; border-radius: 8px; cursor: pointer; }
+.toy-portrait-button img { display: block; }
+.toy-portrait-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.is-comparing .camera-help { display: none; }
+.is-comparing #renderer-status { display: block; }

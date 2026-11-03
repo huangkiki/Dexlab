@@ -4,13 +4,13 @@ The maintainer's Nai-family chart is the identity reference. OpenAI ImageGen pro
 
 角色沿用维护者提供的奶家族谱。2D 毛绒形象由 ImageGen 生成，3D 网格在本地通过 TRELLIS v1 生成；网页加载预先导出的模型。物理上采用近似的刚体碰撞外形，不模拟毛绒变形。
 
-- `nai-family-atlas.png`: three columns by two rows, frog / mouse / bean / chicken / cat / rabbit. Used in the collection list.
-- `nai/*.glb`: six textured Y-up models, normalized in meters with their front along +Z. The renderer rotates them to MuJoCo's Z-up frame and reads each body's measured pose.
+- `nai-family-atlas.png`: three columns by two rows, frog / mouse / bean / chicken / cat / rabbit. Retained as the original six-character design reference.
+- `nai/*.glb`: 16 textured Y-up models, normalized in meters with their front along +Z. The renderer rotates them to MuJoCo's Z-up frame and reads each body's measured pose.
 - `nai/collisions.json`: separate convex parts derived from those meshes with CoACD 1.0.14. They are rigid collision approximations, not exact surface collisions. The 16-part cap exceeded the requested concavity target for mouse, chicken, cat and rabbit; the actual warnings are retained in the manifest.
 - `nai/inputs/*.png` and `nai/prompts.json`: exact generation inputs and prompts. Each copied PNG embeds its prompt; the manifest distinguishes the original generation-input hash from the metadata-bearing source copy.
 - `nai/manifest.json`: model/source revisions, seeds, dimensions, transforms, export settings, collider settings and hashes. Every toy weighs a synthetic 80 g. Frog and chicken use 60% foot ballast to stabilize their sloped generated soles; other masses follow convex-part volume. These are gameplay parameters, not measurements of real plush toys.
 
-Generation used the official [TRELLIS source](https://github.com/microsoft/TRELLIS/tree/193e0502b5cb3eb5997ec457d5340e95d09b158e) and `microsoft/TRELLIS-image-large` revision `25e0d31ffbebe4b5a97464dd851910efc3002d96`, with the upstream 25-step samplers and guidance 5. Exports use `simplify=0.94`, 1024-pixel textures and hole filling. The final GLBs explicitly set `metallicFactor=0` and retain `roughnessFactor=1`: the source exporter omitted metallicity, which otherwise loads as fully metallic. This metadata correction preserves texture and geometry bytes. Frog uses seed 1; mouse, bean, chicken and rabbit use seed 1; cat uses seed 0 after rejecting duplicated eyes in its first output. Duplicated-face frog variants were also rejected before integration. This is offline asset generation, not a model executed in the browser.
+Generation used the official [TRELLIS source](https://github.com/microsoft/TRELLIS/tree/193e0502b5cb3eb5997ec457d5340e95d09b158e) and `microsoft/TRELLIS-image-large` revision `25e0d31ffbebe4b5a97464dd851910efc3002d96`, with the upstream 25-step samplers and guidance 5. The original six exports use `simplify=0.94`, 1024-pixel textures and hole filling. The ten additional characters use seed 1, `simplify=0.90` and 2048-pixel textures; per-asset settings override the legacy defaults in the manifest. The final GLBs explicitly set `metallicFactor=0` and use rough fabric (`roughnessFactor=1` in the original six assets, `0.92` in the additions and the live material): the source exporter omitted metallicity, which otherwise loads as fully metallic. This metadata correction preserves texture and geometry bytes. Frog uses seed 1; mouse, bean, chicken and rabbit use seed 1; cat uses seed 0 after rejecting duplicated eyes in its first output. Duplicated-face frog variants were also rejected before integration. This is offline asset generation, not a model executed in the browser.
 
 The original compound-primitive visual candidate and its bump map were replaced. Native contact, actuator-only motion and independent bin scoring remain the gameplay mechanism.
 
@@ -27,3 +27,12 @@ Use case: stylized-concept. Asset type: a production prize-character atlas for t
 Edit only the background of this six-character 3 by 2 plush atlas. Replace every checkerboard square with one perfectly uniform opaque warm ivory background, color #f6f2e6. Keep all six toys, their order, poses, proportions, detailed fabric texture, eye and face details, lighting and exact grid placement unchanged. No text, labels, grid lines, extra items or checkerboard. The output is an opaque production thumbnail atlas, not a transparency preview.
 
 ```
+
+新增十款为奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙。它们沿用相同本地 TRELLIS 模型和默认推理参数，采用 2048 像素贴图与 `simplify=0.90`。单柜固定混放 30 只，覆盖全部 16 款角色；可视网格与原生碰撞网格在场景中同步放大 1.6 倍。原六款碰撞数据保持原样；新款碰撞形状从各自归一化后的网格分解得到，总质量仍为合成 80 g，按凸块体积分配。
+
+
+## Browser display derivatives / 浏览器展示资源
+
+`nai/display/` retains each source mesh's normalized coordinates, UVs and materials while reducing it to 6,000 triangles with meshoptimizer 0.25.0 (relative error limit 0.005, normal/UV weights 0.5/1). Textures are resized to at most 512 px and collection portraits to 128 px. `web/scripts/optimize-toys.mjs` regenerates the files; the display manifest records source and derivative hashes. Original GLBs and native collision hulls are unchanged.
+
+`nai/display/` 保留源模型坐标、UV 和材质，每款简化至 6,000 三角面，相对误差上限 0.005，法线/UV 权重分别为 0.5/1；贴图上限 512 像素，收藏头像 128 像素。生成脚本与清单记录来源及衍生资源哈希，原模型和物理碰撞外形不变。
