@@ -5,7 +5,7 @@
 @media(max-width:600px){body{font-size:15px}main{padding:0 20px}.nav{padding:12px 20px;flex-direction:column;align-items:start;gap:6px}.nav-links{gap:16px;width:100%;overflow:auto}.nav a{font-size:12px}h1{font-size:36px}.hero{padding-top:32px}.lead{font-size:16px}.hero-side{padding:22px}.loop div{padding:12px}.stats{grid-template-columns:1fr 1fr;gap:24px;margin-bottom:45px}.stat{padding:0;border:0}.stat b{font-size:32px}.section{margin-bottom:48px}.section-heading h2{font-size:26px}.funnel-grid,.layers,.deep-grid,.paper-grid{grid-template-columns:1fr}.stage{padding:15px 17px}.stage:nth-child(4){width:75%}.filterbar{padding:12px}input{flex-basis:100%}.paper-grid{max-height:900px}.full-body{padding:0 17px 22px}.full-body h1{font-size:25px}.full-body h2{font-size:21px}.callout{padding:19px 22px;font-size:16px}.hero .chips{margin-top:16px}.layer,.deep-card{padding:22px}html{scroll-padding-top:110px}}
 @media print{header,.filterbar,.filter-count,.export{display:none}.hero{padding-top:20px}.paper-grid{max-height:none;overflow:visible}.paper[hidden]{display:block!important}.section{break-inside:auto}.deep-card,.layer,.paper,.route{break-inside:avoid}body{background:white}main{padding:0}.full-body{display:block}a{color:inherit}}
 </style></head><body>
-<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a></div></nav></header>
+<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a></div></nav></header>
 <main id="top"><section class="hero"><div><div class="eyebrow">2024.09.10 — 2026.09.10 · 2026.09.14补充HydroShear</div><h1>当我们在讨论<br/><span>灵巧操作仿真</span>时，<br/>我们在讨论什么？</h1><p class="lead">在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</p><div class="chips"><span class="chip">多指 / 双手</span><span class="chip">接触与触觉</span><span class="chip">数据与迁移</span><span class="chip">来源可追溯</span></div></div><aside class="hero-side"><h2>仿真是一整条闭环</h2><div class="loop"><div><b>WORLD</b><span>接触如何演化</span></div><div><b>OBSERVATION</b><span>机器人看见什么</span></div><div><b>ACTION</b><span>动作如何执行</span></div><div><b>VALIDATION</b><span>真机获得什么</span></div></div><p>引擎、画面和FPS各回答一部分。选型从具体接触失效与验收方法开始。</p></aside></section>
 <div class="stats"><div class="stat"><b>38 → 29 → 7</b><span>候选论文 → 核心 → 全文精读</span></div><div class="stat"><b>19</b><span>仓库快照 · 18技术项目 + 1网页</span></div><div class="stat"><b>20</b><span>笔记映射 · 含3条历史线索</span></div><div class="stat"><b>3</b><span>可执行研究路线 · 尚未复现</span></div></div>
 <section class="section" id="funnel"><div class="section-heading"><div class="eyebrow">01 / SCREENING</div><h2>先筛证据，再分问题</h2><p>投入精力的漏斗与技术系统的层次分开；七篇精读由机制互补选出。</p></div><div class="funnel-grid"><div class="funnel"><div class="stage"><div>可审计候选<small>官方标题、v1日期与摘要核验</small></div><b>38</b></div><div class="stage"><div>核心问题层<small>多指 / 双手 + 共享接触与触觉机制</small></div><b>29</b></div><div class="stage"><div>完整精读层<small>全文、图表、公式与局限</small></div><b>7</b></div><div class="stage"><div>决策层<small>假设、基线、退出条件</small></div><b>3</b></div></div><aside class="method"><h3>范围与阅读口径</h3><p>时间窗按arXiv首次提交日期；原六篇保留9月10日核验的版本，HydroShear在9月14日复核后补入。9篇邻接工作单列背景。</p><p>原Obsidian关键词匹配222个文件，本次累计连接20条笔记线索，其中17篇可定位、3条为历史记录。GitHub保留原18仓库快照，新增HydroShear。</p><p class="tiny">这是定向范围调研，未宣称穷尽arXiv。HydroShear作为共享触觉机制纳入；其夹爪实验不当作多指全手验证。本次未运行训练或真机实验。</p></aside></div></section>
@@ -456,6 +456,57 @@
 <article class="route"><b>B</b><h3>比较触觉的必要精度</h3><p>DeXplicit、Slot-JEPA 与 SWIM 补预测表示的对照。这些视觉／状态方法没有新增与 HydroShear 等价的触觉标定证据，不能替代原文的同任务、同预算传感比较。</p></article>
 <article class="route"><b>C</b><h3>降低真实数据成本</h3><p>Dex-One2Many、DONIC、RynnWorld-Latent 补数据与跨本体路线；Rollback、RoboJEPA、LeWAM 和 SuperMimic 补模型与策略路线。继续记录有效轨迹率、GPU 时、真机人时和未见任务收益。</p></article></div>
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/293">DexLab 具体借鉴与证据讨论 ↗</a><a href="dexterous-simulation-2026-09-14.html">查看未增补的 9 月原版</a><a href="../../index.html">返回 DexLab 主页</a><a href="#top">回到开头</a></div>
+</section>
+<!-- Focused literature addition; original screening counts and scripts are unchanged. -->
+<section class="section" id="shared-dexterous-tracking">
+<div class="section-heading"><div><div class="eyebrow">09 / SHARED POLICIES AND DYNAMICS</div><h2>多条示范，怎样共用策略与动力学模型？</h2></div><p>2026-11-03 专题增补 · 数据与策略 / 物理演化 / 验证</p></div>
+<div class="callout"><strong>多示范共享策略已有直接先例；共享可微动力学模型是另一层机制。</strong> 先看复用了什么，再比较累计数据转换、冻结策略覆盖与未见条件泛化。</div>
+<p>此前 10 月增补已介绍 DONIC 和 SuperMimic。本节补入 FlashDexRetarget、ReDexT、Dex-SuperMimic 与 Weave 接入，保持原有 38 篇候选、19 个仓库与 14 篇 10 月工作的历史口径。以下是外部文献和实现核查，不是 DexLab 复现。</p>
+<p>同一只手拿起瓶子、转动瓶子和放下瓶子，可以共享控制经验；动作目标不同，部分接触动力学仍然相同。但物体形状、质量、摩擦或关节结构改变时，共享模型也需要相应条件与状态表示。这条路线连接第五层“数据与策略”、第三层“物理演化”和第六层“验证”。</p>
+<p><strong>共享策略</strong>让同一套参数根据当前状态与参考动作选择控制；<strong>共享 world model</strong>学习状态和实际动作如何产生下一状态，并可通过想象 rollout 的梯度训练策略。前者可以只用 FlashSAC 或 PPO，二者并不绑定。物理仿真吞吐、经验复用和可微优化带来的收益应分别比较。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工作与核查入口</th>
+<th>共享什么、怎样学习</th>
+<th>结果应该怎样理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2610.01849v2">FlashDexRetarget · v2</a></td>
+<td>多参考 FlashSAC；左右手各有 actor–critic，每侧参数跨示范共享。几何、距离和未来参考帮助区分交互。</td>
+<td>已有多示范联合训练，没有 SuperMimic 式可微 WM。论文的 CHORD 对照使用 PPO，不能将其加速比移植到当前 FlashCHORD。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2610.29997v1">DONIC · v1</a></td>
+<td>PPO + BC、接触角色奖励与成功轨迹回收；共享双手跟踪策略。</td>
+<td>最大训练集合为 3,420 条参考。同一冻结 checkpoint 分别评估未见轨迹与未见物体，与训练期间累计转换数不同。</td>
+</tr>
+<tr>
+<td><a href="https://aim-uofa.github.io/ReDexT/">ReDexT · 官方项目页</a></td>
+<td>共享残差策略根据执行反馈修正 IK 命令，支持冻结执行和整批适应。</td>
+<td>每种手分别训练一套策略，跨该手的轨迹共享；共享适应后的结果不是零样本泛化。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/CumulusAlpha/Dex-Supermimic/blob/2becb7380fed86171056f9bf4338b2a6a0c14b01/README.md">Dex-SuperMimic · 仓库快照</a></td>
+<td>学习到的 WM、想象 rollout 与策略更新用于 Wuji 手转方块、转笔。</td>
+<td>三个任务配置不等于一个权重联合完成三个任务，也没有建立 CHORD 多示范规模的结果。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/btx0424/rethinking-supermimic/blob/c2b1126e1de9990354290c2c231481b29bc265db/README.md">rethinking-supermimic · 仓库快照</a></td>
+<td>接入 Weave / Weave XHand 手—物参考，提供基于学习模型的策略更新入口。</td>
+<td>数据与训练接口属于实现证据；所查 README 未报告新增手—物任务的成功率或加速基准。</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="https://holiday-robot.github.io/FlashDexRetarget/">FlashDexRetarget 项目页</a>报告 XHand 的 50 条示范中 90% 在 29 GPU 小时内转换成功，1,000 条示范中 600 多条在 60 GPU 小时内成功转换。这是作者的累计数据转换结果，不能直接解释成最终冻结策略在全部示范上的稳定成功率。不同论文的手型、初态、阈值和计算成本口径不同，本表不构成性能排名。</p>
+<h3>SuperCHORD 可以提出什么问题</h3>
+<p>“多示范共用策略”已有上述先例。将 CHORD 接触力旋量指导、共享手—物 WM 与参考条件策略结合起来，可以作为研究设想；本次定向检索不足以支持“首次”的主张，也没有建立 DexLab 的训练结果。</p>
+<p>有辨别力的比较是：每条示范独立训练、相同示范联合 FlashSAC、相同联合设置下通过 WM 梯度更新策略。先固定奖励来区分共享与模型的收益，再比较接触指导的增益。可以从同一种手与兼容物体表示开始，先按示范均匀采样；这是建议，不是已经冻结或执行的实验协议。</p>
+<p>统一记录总 GPU 小时、仿真交互量、累计转换数、最终 checkpoint 的训练集覆盖、未见轨迹与未见物体表现。模型还需检查前向误差、接触附近动作响应以及更新后原生仿真收益；低预测误差本身不能证明优化方向有用。首次阅读建议按 FlashDexRetarget → DONIC / ReDexT → 两个 SuperMimic 实现的顺序，分别理解共享训练、泛化和动力学模型优化。</p>
+<p>本专题核查于 2026-11-03，依据上述论文、官方项目页与固定仓库快照；没有重新完成所有论文的全文精读，也没有复测作者结果。</p>
+<div class="export"><a href="#october-donic">已有 DONIC 条目</a><a href="#october-supermimic">已有 SuperMimic 条目</a><a href="../../dexterous-hand-simulation.html">中文导读</a><a href="#top">回到开头</a></div>
 </section>
 <footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
 <script>
