@@ -1,5 +1,12 @@
 # Add experiments and maintain reports
 
+```{toctree}
+:maxdepth: 1
+:caption: In this section
+
+Studio replay rendering <studio-rendering>
+```
+
 ## Deliver an experiment
 
 1. State the hypothesis, official versions, parameter provenance, approximations, budget, controls and acceptance in an issue.
@@ -25,6 +32,8 @@ Maintain the Newton guide in `docs/references/newton-reading-guide*.md` and its 
 Before publication, check source pages, site navigation, language switching and README entrypoints. After merge, verify the live revision and page content. Keep code runnable and private deployment details out of public documentation.
 
 Every figure identifies versions, units, sample size, time window, uncertainty and provenance. Retain failed cases; unmatched calibration, geometry or tuning budgets do not support fair engine rankings.
+
+Keep six top-level entries: Getting started, Experiments, Results & diagnosis, Engines & models, Research guides and Contributing. Add pages to the relevant section’s toctree; cutting cases belong under Cutting & pushing. Give each page one toctree parent, mirror the hierarchy and filenames in both languages, and keep existing page URLs stable.
 
 ## Publishing documentation
 

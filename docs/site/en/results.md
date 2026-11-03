@@ -1,5 +1,19 @@
 # Results and failures
 
+```{toctree}
+:maxdepth: 1
+:caption: In this section
+
+Findings <experience>
+Coverage <coverage>
+Visual comparisons <visual-comparisons>
+Diagnosis <diagnosis>
+Solver failure audit <solver-failure-audit>
+Contact prediction diagnostics <contact-response>
+Benchmark <benchmark>
+Ledger <research-ledger>
+```
+
 The [solver failure audit](solver-failure-audit.md) separates missing coupling, failed configurations and execution errors across RSS and existing DexLab evidence.
 
 ## Paired engine incline comparison

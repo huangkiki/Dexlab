@@ -1,5 +1,16 @@
 # Engines, solvers and modeling assumptions
 
+```{toctree}
+:maxdepth: 1
+:caption: In this section
+
+Selection <selection>
+Solver configuration roles <solver-taxonomy>
+Solver synchronization and preCICE <solver-coupling>
+Co-evolution and model evaluation <model-evaluation>
+Uranus generative environment backend <uranus-backend>
+```
+
 Matching visual meshes, parameter names or joint targets does not establish matching physical problems.
 
 ## Generative environment backends
