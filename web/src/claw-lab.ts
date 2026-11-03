@@ -1,26 +1,30 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { loadPhysics } from "./mujoco-loader";
+import { WebGPURenderer } from "three/webgpu";
+import { ClawSimulation, type ClawSimulationState } from "./claw-simulation";
 import { loadToyModels, disposeMeshes } from "./claw-meshes";
 import { toyModelUrls } from "./claw-model-urls";
-import { STEP, BIN, CLAW_SCALE, CHUTE_LIP, type ClawSnapshot, type MoveAxis } from "./claw-task";
+import { BIN, CLAW_SCALE, CHUTE_LIP, type ClawSnapshot, type MoveAxis } from "./claw-task";
 
-import { ClawComparison, type ClawFrame } from "./claw-comparison";
-import type { ClawTask } from "./claw-task";
+import type { ClawFrame } from "./claw-comparison";
 import { buildCabinet } from "./claw-cabinet";
-import { ClawRtx } from "./claw-rtx";
 
 export class ClawLab {
-  get task() {
-    return this.comparison.reference;
+  get snapshot() { return this.simulation.state.reference.snapshot; }
+  get comparison() { return this.simulation.state; }
+  get rendererName() {
+    return (this.renderer.backend as { isWebGPUBackend?: boolean }).isWebGPUBackend ? "WebGPU" : "WebGL 2";
   }
   speed = 1;
   readonly input = new Map<string, { axis: MoveAxis; direction: number }>();
-  private renderer: THREE.WebGLRenderer;
   private scene = new THREE.Scene();
   private camera = new THREE.PerspectiveCamera(37, 1, 0.01, 5);
   private controls: OrbitControls;
   private observer: ResizeObserver;
+  private visibility: IntersectionObserver;
+  private visible = new Set<Element>();
+  private viewLabels: Element[];
+  private page: Element;
   private geoms = new Map<number, THREE.Mesh>();
   private overhead: THREE.Mesh[] = [];
   private cable: THREE.Mesh;
@@ -32,27 +36,28 @@ export class ClawLab {
   private failed = false;
   private disposed = false;
   private lastTime = performance.now();
-  private accumulator = 0;
+  private lastPhysics = performance.now();
   private lastEmit = 0;
+  private comparing = false;
   private layout = 0;
   private compactView = false;
   private topView = false;
   private angledFov = 37;
   private normalView: [number, number, number] = [0.45, -1.25, 0.63];
-  private rtx?: ClawRtx;
+  private mobile = matchMedia("(pointer: coarse)").matches || innerWidth < 600;
 
   private constructor(
     private canvas: HTMLCanvasElement,
-    readonly comparison: ClawComparison,
+    private readonly simulation: ClawSimulation,
+    private readonly renderer: WebGPURenderer,
     private readonly toys: THREE.Group[],
     private onSnapshot: (s: ClawSnapshot) => void,
     private onError: (e: unknown) => void,
-    private onComparison: (comparison: ClawComparison) => void,
+    private onComparison: (comparison: ClawSimulationState) => void,
   ) {
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, this.mobile ? 1 : 1.5));
     this.renderer.setClearColor(0x181322);
-    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.enabled = !this.mobile;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.camera.up.set(0, 0, 1);
     this.camera.position.set(...this.normalView);
@@ -113,13 +118,14 @@ export class ClawLab {
     this.aim.renderOrder = 10;
     this.aim.position.z = 0.002;
     this.scene.add(this.aim);
-    const rim = new THREE.LineLoop(
+    const rim = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(
         [
           [-1, -1],
           [1, -1],
           [1, 1],
           [-1, 1],
+          [-1, -1],
         ].map(
           ([x, y]) =>
             new THREE.Vector3(
@@ -133,6 +139,16 @@ export class ClawLab {
     );
     this.scene.add(rim);
     this.scene.add(...this.toys);
+    this.page = canvas.closest(".claw-page")!;
+    this.viewLabels = [...canvas.parentElement!.querySelectorAll(".world-label")];
+    // IntersectionObserver includes the embedding page's clip, unlike innerHeight.
+    this.visibility = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) this.visible.add(entry.target);
+        else this.visible.delete(entry.target);
+      }
+    });
+    for (const element of [this.page, canvas, ...this.viewLabels]) this.visibility.observe(element);
     this.observer = new ResizeObserver(() => this.resize(canvas));
     this.observer.observe(canvas);
     this.resize(canvas);
@@ -142,30 +158,42 @@ export class ClawLab {
     canvas: HTMLCanvasElement,
     onSnapshot: (s: ClawSnapshot) => void,
     onError: (e: unknown) => void,
-    onComparison: (comparison: ClawComparison) => void,
+    onComparison: (comparison: ClawSimulationState) => void,
   ) {
-    const toys = await loadToyModels(toyModelUrls);
-    let comparison: ClawComparison | undefined;
+    const mobile = matchMedia("(pointer: coarse)").matches || innerWidth < 600;
+    const renderer = new WebGPURenderer({ canvas, antialias: !mobile });
+    let simulation: ClawSimulation | undefined;
+    let toys: THREE.Group[] = [];
+    let lab: ClawLab | undefined;
     try {
-      comparison = new ClawComparison(await loadPhysics());
-      return new ClawLab(
-        canvas,
-        comparison,
-        toys,
-        onSnapshot,
-        onError,
-        onComparison,
-      );
+      await renderer.init();
+      simulation = await ClawSimulation.create(() => lab?.receive(),
+        error => lab ? lab.fail(error) : onError(error));
+      toys = await loadToyModels(toyModelUrls);
+      lab = new ClawLab(canvas, simulation, renderer, toys, onSnapshot, onError, onComparison);
+      return lab;
     } catch (error) {
       for (const toy of toys) disposeMeshes(toy);
-      comparison?.dispose();
+      simulation?.dispose();
+      renderer.dispose();
       throw error;
     }
   }
+  private receive() {
+    const changed = this.comparing !== this.comparison.started;
+    this.comparing = this.comparison.started;
+    this.onComparison(this.comparison);
+    if (changed) this.resize(this.canvas);
+    const now = performance.now();
+    if (now - this.lastEmit > 100) {
+      this.lastEmit = now;
+      this.onSnapshot(this.snapshot);
+    }
+  }
   private buildNativeGeoms() {
-    const m = this.task.model;
+    const m = this.simulation.model;
     for (let i = 0; i < m.ngeom; i++) {
-      if (this.task.toyBodies.includes(m.geom_bodyid[i])) continue;
+      if (this.simulation.model.toyBodies.includes(m.geom_bodyid[i]!)) continue;
       const size = Array.from(m.geom_size.slice(i * 3, i * 3 + 3)) as number[];
       const type = m.geom_type[i];
       let geometry: THREE.BufferGeometry;
@@ -189,10 +217,10 @@ export class ClawLab {
         );
       else throw new Error(`Unsupported cabinet geometry: ${type}`);
       const wall = i >= 8 && i <= 11;
-      const claw = this.task.clawParts.includes(i);
+      const claw = this.simulation.model.clawParts.includes(i);
       const material = new THREE.MeshPhysicalMaterial({
         color: claw
-          ? (i === this.task.hub ? 0x775180 : 0xd7b6df)
+          ? (i === this.simulation.model.hub ? 0x775180 : 0xd7b6df)
           : wall
             ? 0x6b4779
             : i < 3
@@ -214,7 +242,6 @@ export class ClawLab {
     }
   }
   private resize(canvas: HTMLCanvasElement) {
-    this.rtx?.invalidate();
     const r = canvas.getBoundingClientRect();
     this.renderer.setSize(Math.max(1, r.width), Math.max(1, r.height), false);
     const columns = this.comparison.started && r.width >= 700 ? 3 : 1;
@@ -245,29 +272,24 @@ export class ClawLab {
     this.input.clear();
   }
   focusToy(index: number) {
-    const p = this.task.position(index);
+    const id = this.simulation.model.toyBodies[index]! * 3;
+    const positions = this.simulation.state.reference.bodyPosition;
+    const p = { x: positions[id]!, y: positions[id+1]!, z: positions[id+2]! };
     this.setTopView(false);
     this.controls.target.set(p.x, p.y, p.z + 0.015);
     this.camera.position.set(p.x + 0.07, p.y - 0.27, p.z + 0.11);
     this.controls.update();
-    this.rtx?.invalidate();
   }
   seek(frame: number) {
-    this.rtx?.invalidate();
-    this.comparison.seek(frame);
+    this.simulation.send({ type: "seek", frame });
   }
   togglePlayback() {
-    this.rtx?.invalidate();
-    this.comparison.togglePlayback();
-  }
-  setRtx(enabled: boolean, en: boolean) {
-    this.rtx?.dispose();
-    this.rtx = enabled ? new ClawRtx(this.canvas, this.scene, en) : undefined;
+    this.simulation.send({ type: "play" });
   }
   setActive(active: boolean) {
     if (this.disposed || this.failed) return;
     this.clearInput();
-    this.accumulator = 0;
+    this.lastPhysics = performance.now();
     if (active === this.active) return;
     this.active = active;
     if (active) {
@@ -276,30 +298,28 @@ export class ClawLab {
     } else cancelAnimationFrame(this.frame);
   }
   reset() {
-    this.rtx?.invalidate();
     this.clearInput();
-    this.comparison.reset(++this.layout);
+    this.simulation.send({ type: "reset", layout: ++this.layout });
     this.onComparison(this.comparison);
-    this.accumulator = 0;
-    this.onSnapshot(this.task.snapshot());
+    this.lastPhysics = performance.now();
+    this.onSnapshot(this.snapshot);
   }
   startComparison(iterations: number, repeat = false) {
     this.clearInput();
-    this.comparison.start(iterations, repeat);
-    this.accumulator = 0;
+    this.simulation.send({ type: "start", iterations, repeat });
+    this.lastPhysics = performance.now();
     this.onComparison(this.comparison);
     this.resize(this.canvas);
-    this.onSnapshot(this.task.snapshot());
+    this.onSnapshot(this.snapshot);
   }
   reaim() {
-    this.comparison.aim();
-    this.accumulator = 0;
+    this.simulation.send({ type: "aim" });
+    this.lastPhysics = performance.now();
     this.onComparison(this.comparison);
     this.resize(this.canvas);
-    this.onSnapshot(this.task.snapshot());
+    this.onSnapshot(this.snapshot);
   }
   setTopView(top: boolean) {
-    this.rtx?.invalidate();
     this.topView = top;
     this.camera.fov = top ? 37 : this.angledFov;
     this.camera.updateProjectionMatrix();
@@ -315,7 +335,7 @@ export class ClawLab {
     [...this.overhead, this.trolley, this.cable].forEach(
       (mesh) => (mesh.visible = !top),
     );
-    for (const id of this.task.clawParts) {
+    for (const id of this.simulation.model.clawParts) {
       const material = this.geoms.get(id)!
         .material as THREE.MeshStandardMaterial;
       material.transparent = top;
@@ -323,67 +343,56 @@ export class ClawLab {
       material.depthWrite = !top;
     }
   }
+  move(axis: MoveAxis, distance: number) { this.simulation.send({ type: "move", axis, distance }); }
+  private fail(error: unknown) {
+    if (this.failed || this.disposed) return;
+    this.failed = true;
+    cancelAnimationFrame(this.frame);
+    this.clearInput();
+    this.simulation.dispose();
+    this.onError(error);
+  }
   private animate = () => {
     if (this.disposed || !this.active || this.failed) return;
     try {
       const now = performance.now();
-      this.accumulator +=
-        Math.min((now - this.lastTime) / 1000, 0.05) *
-        (this.comparison.started ? this.speed : 1);
-      this.lastTime = now;
-      while (this.accumulator >= STEP) {
-        if (this.comparison.started) {
-          this.comparison.step();
-          this.accumulator -= STEP;
-          continue;
-        }
-        const v = { x: 0, y: 0 };
-        for (const value of this.input.values())
-          v[value.axis] += value.direction;
-        for (const axis of ["x", "y"] as const)
-          this.task.move(
-            axis,
-            Math.max(-1, Math.min(1, v[axis])) * 0.11 * STEP,
-          );
-        this.task.step();
-        this.accumulator -= STEP;
-      }
-      this.render();
-      if (now - this.lastEmit > 100) {
-        this.lastEmit = now;
-        this.onSnapshot(this.task.snapshot());
-        this.onComparison(this.comparison);
+      const v = { x: 0, y: 0 };
+      for (const value of this.input.values()) v[value.axis] += value.direction;
+      if (!this.visible.has(this.page)) this.lastPhysics = now;
+      else if (this.simulation.advance((now - this.lastPhysics) / 1000, this.speed,
+        Math.max(-1, Math.min(1, v.x)), Math.max(-1, Math.min(1, v.y)))) this.lastPhysics = now;
+      const interval = this.mobile ? 1000 / 30 : 1000 / 60;
+      if (now - this.lastTime >= interval) {
+        this.lastTime = now - (now - this.lastTime) % interval;
+        this.render();
       }
       this.frame = requestAnimationFrame(this.animate);
     } catch (e) {
-      this.failed = true;
-      this.clearInput();
-      this.onError(e);
+      this.fail(e);
     }
   };
-  private draw(task: ClawTask, pose?: ClawFrame) {
-    const r = new THREE.Matrix4(),
-      positions = pose?.geomPosition ?? task.data.geom_xpos,
-      matrices = pose?.geomMatrix ?? task.data.geom_xmat;
+  private draw(pose: ClawFrame) {
+    const model = this.simulation.model;
+    const r = new THREE.Matrix4(), positions = pose.geomPosition, matrices = pose.geomMatrix;
     for (const [i, mesh] of this.geoms) {
       mesh.position.set(
-        positions[i * 3],
-        positions[i * 3 + 1],
-        positions[i * 3 + 2],
+        positions[i * 3]!,
+        positions[i * 3 + 1]!,
+        positions[i * 3 + 2]!,
       );
       const k = i * 9;
       r.set(
-        matrices[k],
-        matrices[k + 1],
-        matrices[k + 2],
+        matrices[k]!,
+        matrices[k + 1]!,
+        matrices[k + 2]!,
         0,
-        matrices[k + 3],
-        matrices[k + 4],
-        matrices[k + 5],
+        matrices[k + 3]!,
+        matrices[k + 4]!,
+        matrices[k + 5]!,
         0,
-        matrices[k + 6],
-        matrices[k + 7],
-        matrices[k + 8],
+        matrices[k + 6]!,
+        matrices[k + 7]!,
+        matrices[k + 8]!,
         0,
         0,
         0,
@@ -393,20 +402,19 @@ export class ClawLab {
       mesh.quaternion.setFromRotationMatrix(r);
     }
     this.toys.forEach((toy, i) => {
-      const body = task.toyBodies[i]!;
+      const body = model.toyBodies[i]!;
       const p = body * 3,
         q = body * 4;
-      const position = pose?.bodyPosition ?? task.data.xpos,
-        rotation = pose?.bodyQuaternion ?? task.data.xquat;
-      toy.position.set(position[p], position[p + 1], position[p + 2]);
+      const position = pose.bodyPosition, rotation = pose.bodyQuaternion;
+      toy.position.set(position[p]!, position[p + 1]!, position[p + 2]!);
       toy.quaternion.set(
-        rotation[q + 1],
-        rotation[q + 2],
-        rotation[q + 3],
-        rotation[q],
+        rotation[q + 1]!,
+        rotation[q + 2]!,
+        rotation[q + 3]!,
+        rotation[q]!,
       );
     });
-    const hub = this.geoms.get(task.hub)!.position;
+    const hub = this.geoms.get(model.hub)!.position;
     this.charm.position.copy(hub);
     this.charm.visible = !this.topView;
     this.trolley.position.set(hub.x, hub.y, 0.51);
@@ -418,45 +426,38 @@ export class ClawLab {
     this.aim.position.y = hub.y;
     if (!this.comparison.started) {
       const overChute = Math.abs(hub.x - BIN.x) < BIN.half && Math.abs(hub.y - BIN.y) < BIN.half;
-      this.aim.position.z = Math.max(task.surfaceHeight(hub.x, hub.y), overChute ? CHUTE_LIP : 0) + .004;
+      this.aim.position.z = Math.max(this.simulation.state.surfaceHeight, overChute ? CHUTE_LIP : 0) + .004;
     }
     this.aim.visible = !this.comparison.started;
     this.renderer.render(this.scene, this.camera);
   }
   private render() {
+    if (!this.visible.has(this.canvas)) return;
     const size = this.renderer.getSize(new THREE.Vector2());
     const count = this.comparison.started ? 3 : 1;
     const columns = count === 3 && size.x >= 700 ? 3 : 1;
     const rows = count / columns;
-    const capture = this.rtx?.canRequest;
-    const worlds: number[][][] = [];
     this.renderer.setScissorTest(true);
     for (let i = 0; i < count; i++) {
       const x = ((i % columns) * size.x) / columns;
       const y = ((rows - 1 - Math.floor(i / columns)) * size.y) / rows;
       this.renderer.setViewport(x, y, size.x / columns, size.y / rows);
       this.renderer.setScissor(x, y, size.x / columns, size.y / rows);
-      this.draw(
-        this.comparison.tasks[i]!,
-        this.comparison.started
-          ? this.comparison.current?.worlds[i]
-          : undefined,
-      );
-      if (capture) worlds.push(this.rtx!.capture());
+      if (count === 3 && !this.visible.has(this.viewLabels[i]!)) continue;
+      this.draw(this.comparison.started
+        ? this.comparison.current!.worlds[i]! : this.simulation.state.reference);
     }
     this.renderer.setScissorTest(false);
-    if (capture) this.rtx!.request(worlds, this.camera,
-      this.comparison.started ? this.comparison.current!.time : this.task.data.time, columns);
   }
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
     cancelAnimationFrame(this.frame);
     this.observer.disconnect();
+    this.visibility.disconnect();
     this.controls.dispose();
-    this.rtx?.dispose();
     disposeMeshes(this.scene);
     this.renderer.dispose();
-    this.comparison.dispose();
+    this.simulation.dispose();
   }
 }

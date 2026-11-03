@@ -51,3 +51,35 @@ for (const layout of [0, 1, 29]) {
     console.log(output.trim());
   });
 }
+
+test("display derivatives retain source provenance and bound GPU geometry and texture sizes", () => {
+  const root = new URL('../src/assets/nai/', import.meta.url);
+  const manifest = JSON.parse(readFileSync(new URL('display/manifest.json', root)));
+  assert.equal(manifest.assets.length, CATALOG.length);
+  for (const entry of manifest.assets) {
+    const source = readFileSync(new URL(entry.name,root));
+    const bytes = readFileSync(new URL('display/'+entry.name,root));
+    assert.equal(createHash('sha256').update(source).digest('hex'),entry.sourceSha256);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.sha256);
+    assert.ok(entry.relativeError <= manifest.maxRelativeError);
+    const length = bytes.readUInt32LE(12);
+    const gltf = JSON.parse(bytes.subarray(20,20+length).toString());
+    const binary = bytes.subarray(28+length);
+    let triangles = 0;
+    for (const mesh of gltf.meshes) for (const primitive of mesh.primitives) {
+      triangles += gltf.accessors[primitive.indices].count / 3;
+      const accessor = gltf.accessors[primitive.indices], view = gltf.bufferViews[accessor.bufferView];
+      const indices = binary.subarray(view.byteOffset,view.byteOffset+view.byteLength);
+      const vertexCount = gltf.accessors[primitive.attributes.POSITION].count;
+      for (let i=0;i<indices.length;i+=2) assert.ok(indices.readUInt16LE(i)<vertexCount);
+      assert.ok(primitive.attributes.NORMAL !== undefined && primitive.attributes.TEXCOORD_0 !== undefined);
+    }
+    assert.equal(triangles,entry.triangles);
+    assert.ok(triangles <= manifest.targetTriangles);
+    for (const image of gltf.images) {
+      const view = gltf.bufferViews[image.bufferView], png = binary.subarray(view.byteOffset,view.byteOffset+view.byteLength);
+      assert.equal(png.subarray(1,4).toString(),'PNG');
+      assert.ok(png.readUInt32BE(16)<=512 && png.readUInt32BE(20)<=512);
+    }
+  }
+});

@@ -29,3 +29,10 @@ Edit only the background of this six-character 3 by 2 plush atlas. Replace every
 ```
 
 新增十款为奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙。它们沿用相同本地 TRELLIS 模型和默认推理参数，采用 2048 像素贴图与 `simplify=0.90`。单柜固定混放 30 只，覆盖全部 16 款角色；可视网格与原生碰撞网格在场景中同步放大 1.6 倍。原六款碰撞数据保持原样；新款碰撞形状从各自归一化后的网格分解得到，总质量仍为合成 80 g，按凸块体积分配。
+
+
+## Browser display derivatives / 浏览器展示资源
+
+`nai/display/` retains each source mesh's normalized coordinates, UVs and materials while reducing it to 6,000 triangles with meshoptimizer 0.25.0 (relative error limit 0.005, normal/UV weights 0.5/1). Textures are resized to at most 512 px and collection portraits to 128 px. `web/scripts/optimize-toys.mjs` regenerates the files; the display manifest records source and derivative hashes. Original GLBs and native collision hulls are unchanged.
+
+`nai/display/` 保留源模型坐标、UV 和材质，每款简化至 6,000 三角面，相对误差上限 0.005，法线/UV 权重分别为 0.5/1；贴图上限 512 像素，收藏头像 128 像素。生成脚本与清单记录来源及衍生资源哈希，原模型和物理碰撞外形不变。

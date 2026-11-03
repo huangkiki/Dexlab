@@ -104,7 +104,7 @@ This record applies only to the claw-machine scene and its supporting play, coll
 
 Deep plum enamel, rose luminous seams, dimensional moon and star ornaments, a silver-lilac moving claw and a dense pile of warm prizes establish the scene. One fixed cabinet contains 30 toy instances spanning all 16 Nai-family identities; there is no lineup selector. The surrounding interface uses the same plum family with one clear rose action. Compact interface typography remains; no new display-font identity was approved.
 
-The cabinet housing and ornaments are decorative meshes. Toy materials suggest plush, while MuJoCo still owns rigid-body poses and contact. WebGL is the public renderer; local OVRTX receives exported scene materials and native pose snapshots. Rendering, replay and material appearance do not establish physical accuracy. Motion follows native state or an explicit replay/inspection command, with no ambient interface animation.
+The cabinet housing and ornaments are decorative meshes. Toy materials suggest plush, while MuJoCo still owns rigid-body poses and contact in one simulation Worker. The browser renders locally through WebGPU, with WebGL 2 fallback and a visible readback of the initialized backend. Display-only asset derivatives and a reduced small-device rendering profile limit presentation work without changing the fixed 2 ms physics step or native collision assets. These are implementation settings, not verified responsiveness or frame-rate results. Rendering, replay and material appearance do not establish physical accuracy. Motion follows native state or an explicit replay/inspection command, with no ambient interface animation.
 
 **Key Characteristics:**
 
@@ -112,6 +112,7 @@ The cabinet housing and ornaments are decorative meshes. Toy materials suggest p
 - Thirty enlarged textured toys in a gravity-driven pile, a complete silver-lilac claw and a raised gold-rimmed chute.
 - Quiet bordered controls, visible input focus and scene-independent caption backing.
 - One aiming view; synchronized comparison views share camera and time.
+- Local backend readback and bounded display work preserve the same dark 30-prize scene across rendering profiles.
 
 ## Colors
 
@@ -161,11 +162,13 @@ Spacing uses compact 5–8px internal gaps and repeated 12–24px group, panel a
 
 ## Elevation & Depth
 
-The interface is flat: tonal surfaces, thin borders and focus outlines provide hierarchy without CSS box shadows. Physical depth comes from the rendered cabinet, rounded edges, light, material response and contact shadows. Emission belongs to the rose seams, moon and aim marker; there is no CSS glow or bloom requirement.
+The interface is flat: tonal surfaces, thin borders and focus outlines provide hierarchy without CSS box shadows. Physical depth comes from the rendered cabinet, rounded edges, light and material response. Real-time shadows are enabled in the desktop profile and disabled in the small-device profile. Emission belongs to the rose seams, moon and aim marker; there is no CSS glow or bloom requirement.
 
 The cabinet's reused Three.js materials have these configured source settings: enamel metalness 0.35 / roughness 0.28; mauve 0.5 / 0.3; silver 0.65 / 0.24; rose roughness 0.4 with emissive intensity 0.65; moon metalness 0.25 / roughness 0.4 with emissive intensity 0.4. The native claw's visible material uses metalness 0.65 / roughness 0.26. Toy models use roughness 0.92 and metalness 0; their textures carry the warm character colors. These are rendering parameters, not measured material properties.
 
-OVRTX imports exported base color, roughness, metallicity, emission and base-color textures through USD materials. Its lighting and image pipeline differ from WebGL, so this document does not promise pixel-identical renderers. Faint orbit-aid walls are omitted from the RTX export, and top-view-hidden parts do not cover the view. The local renderer's current status remains visible.
+The active scene uses Three.js `WebGPURenderer` with its WebGL 2 fallback. The status text reads the initialized backend rather than inferring support from a browser capability check. The scene remains local to the browser; its renderer is not a user-selectable remote service. The two backends do not carry a promise of pixel-identical appearance.
+
+At initialization, a coarse pointer or a viewport narrower than 600px selects the small-device profile: pixel ratio capped at 1, antialiasing disabled, real-time shadows disabled and rendering scheduled no more often than 30 frames per second. The other profile caps pixel ratio at 1.5 and rendering at 60 frames per second. Views outside the browser viewport are skipped, which reduces drawing for vertically stacked comparison views. These limits describe source configuration, not a demonstrated sustained frame rate or absence of phone freezes.
 
 **The Geometry First Rule.** Keep the moon, stars, cabinet seams and claw details as scene geometry; do not substitute floating page decoration for the approved cabinet materials.
 
@@ -185,15 +188,17 @@ The rose primary button carries Drop/Re-aim and changes its visible text with th
 
 ### Inputs / Fields
 
-Native selects choose iteration cap, renderer and replay speed; the fixed 30-prize mixture has no selector. They use quiet plum, a thin border, rounded corners and visible focus. The replay range remains a native range input with the rose accent and a 28px minimum interaction height; its disabled appearance is 0.5 opacity. No custom text-entry field is introduced by this surface.
+Native selects choose iteration cap and replay speed. The fixed 30-prize mixture has no selector, and the local renderer is selected automatically. They use quiet plum, a thin border, rounded corners and visible focus. The replay range remains a native range input with the rose accent and a 28px minimum interaction height; its disabled appearance is 0.5 opacity. No custom text-entry field is introduced by this surface.
 
 ### Cards / Containers
 
-One bordered scene/control enclosure carries the game; the interface is not a collection of decorative cards. The scene header caption and camera hint have dark backings. Comparison views use backed method labels and measured-state readouts separated by thin borders. The renderer readout sits below the camera hint and reports connection, delay or active frame status.
+One bordered scene/control enclosure carries the game; the interface is not a collection of decorative cards. The scene header caption and camera hint have dark backings. Comparison views use backed method labels and measured-state readouts separated by thin borders. A small status line in the control panel identifies the initialized WebGPU or WebGL 2 backend and local rendering.
 
 ### Collection and inspection
 
-Portraits identify the character assets and open an inspection of an actual model. The fixed mixture groups its 30 instances into all 16 character identities below the machine, with collected/available counts under each identity; a completed group receives the rose outline. The whole collection block is hidden during comparison. New cabinet resets and rearranges the same mixture rather than selecting another lineup. The portrait image is an identity aid, not a substitute for the in-scene 3D mesh. Asset provenance stays in `src/assets/README.md` and the corresponding manifest.
+Portraits identify the character assets and open an inspection of an actual model. The fixed mixture groups its 30 instances into all 16 character identities below the machine, with collected/available counts under each identity; a completed group receives the rose outline. The whole collection block is hidden during comparison. New cabinet resets and rearranges the same mixture rather than selecting another lineup. The portrait image is an identity aid, not a substitute for the in-scene 3D mesh.
+
+The display path loads derived GLBs and portraits from `src/assets/nai/display/`. Its manifest records 6,000 triangles for each of the 16 derived models. The derivative script limits texture edges to 512px and portrait edges to 128px while retaining aspect ratio. The original GLBs, generation inputs and native collision data remain the source assets; the display simplification does not redefine collision geometry. Generation provenance stays in `src/assets/README.md` and the original manifest, while `src/assets/nai/display/manifest.json` records derivative hashes, sizes and simplification metadata and `scripts/optimize-toys.mjs` records the transformation.
 
 ### Navigation and explanation
 
@@ -201,9 +206,11 @@ A quiet footer link reaches the older simple-scene comparison. Teaching sections
 
 ### Motion and renderer status
 
-No CSS transitions or keyframe animations are defined for the claw interface. Camera inspection and top-view commands apply direct view changes. The moving claw, toys, trolley and cable follow native transforms; synchronized replay displays recorded poses on a shared timeline with explicit pause and speed controls. Layered spawn positions initialize the cabinet; ongoing gravity and contact produce motion. The aim ring follows a downward native ray hit on toy collision geometry. At Drop, the descent target is derived from that surface and frozen into the shared start state rather than continuously tracking or attaching to a toy. Hidden-page lifecycle pauses activity. The existing reduced-motion rule disables smooth scrolling; it does not claim to stop simulation or provide an alternative reduced-motion gameplay mode.
+No CSS transitions or keyframe animations are defined for the claw interface. Camera inspection and top-view commands apply direct view changes. The moving claw, toys, trolley and cable follow native transforms; synchronized replay displays recorded poses on a shared timeline with explicit pause and speed controls. Layered spawn positions initialize the cabinet; ongoing gravity and contact produce motion. The aim ring follows a downward native ray hit on toy collision geometry, with the raised chute lip respected when over the opening. At Drop, the descent target is derived from the surface and frozen into the shared start state rather than continuously tracking or attaching to a toy.
 
-A stale local RTX image is hidden and WebGL becomes visible with an explicit status. A disconnected service also exposes WebGL and a message. Retain that truthful fallback rather than displaying an old image as a current simulation frame.
+One Worker owns all native worlds and replay history, sending display poses and state summaries to the interface. At most one tick request is in flight. Tick processing uses the fixed 2 ms physics step, caps accumulated elapsed work at 50 ms and checks an 8 ms processing budget between complete simulation steps; a single complete step may exceed that budget. Rendering cadence is separate from simulation time, so reduced display work does not imply faster-than-real-time or real-time physics. Hidden-page lifecycle stops new render/tick scheduling; an already requested Worker batch may finish. The existing reduced-motion rule disables smooth scrolling; it does not claim to stop simulation or provide an alternative reduced-motion gameplay mode.
+
+Keep the actual backend label visible after initialization. A WebGL 2 fallback uses the same scene and control interface; it must not be labeled WebGPU. Renderer or simulation startup/runtime failure follows the existing visible failure and Reload flow, without presenting an unverified frame-rate or compatibility claim.
 
 ## Do's and Don'ts
 
@@ -212,7 +219,7 @@ A stale local RTX image is hidden and WebGL becomes visible with an explicit sta
 - **Do** preserve the plum, rose, silver-lilac and warm-gold material roles within the claw surface.
 - **Do** frame the enlarged prize pile and complete claw prominently; let the lower collection well extend below the overview while retaining the gold chute cue.
 - **Do** keep one fixed mix of 30 toy instances spanning all 16 identities, with grouped collection counts below the machine and no lineup selector.
-- **Do** label the active renderer and visible WebGL fallback, and keep native outcome claims separate from appearance.
+- **Do** label the initialized WebGPU or WebGL 2 backend accurately, and keep display-quality settings and native outcome claims separate from measured performance.
 
 ### Don't:
 

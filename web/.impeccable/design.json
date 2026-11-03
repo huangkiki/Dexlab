@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-03T09:46:40.321187+00:00",
+  "generatedAt": "2026-11-03T10:58:31.008145+00:00",
   "title": "Design System: DexLab claw-machine surface",
   "extensions": {
     "colorMeta": {
@@ -392,7 +392,7 @@
       "name": "Iteration select",
       "kind": "input",
       "refersTo": "select",
-      "description": "Native select used for iteration cap, rendering and replay speed; no prize-lineup selector is present.",
+      "description": "Native select used for iteration cap and replay speed; no prize-lineup or renderer selector is present.",
       "html": "<label class=\"ds-field\">Iterations per step <select aria-label=\"Iterations per step\"><option>5</option><option>20</option><option selected>60</option><option>100</option></select></label>",
       "css": ".ds-field{font-family:ui-sans-serif,system-ui,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#f3eaf6;font-size:12px}.ds-field select{font:inherit;color:inherit;background:#241a30;border:1px solid var(--edge,#4a3959);border-radius:6px;padding:8px;min-height:40px;accent-color:var(--accent,#e8afe0)}.ds-field select:focus-visible{outline:3px solid #dec1f5;outline-offset:3px;}"
     },
@@ -428,12 +428,13 @@
   ],
   "narrative": {
     "northStar": "Dark dreamy cute claw machine",
-    "overview": "This record applies only to the claw-machine scene and its supporting play, collection and comparison interface in `web/src/claw*`. It captures the user-approved dark dreamy cabinet and claw change. It does not redefine the DexLab documentation site, the older solver page or the repository brand.\n\nDeep plum enamel, rose luminous seams, dimensional moon and star ornaments, a silver-lilac moving claw and a dense pile of warm prizes establish the scene. One fixed cabinet contains 30 toy instances spanning all 16 Nai-family identities; there is no lineup selector. The surrounding interface uses the same plum family with one clear rose action. Compact interface typography remains; no new display-font identity was approved.\n\nThe cabinet housing and ornaments are decorative meshes. Toy materials suggest plush, while MuJoCo still owns rigid-body poses and contact. WebGL is the public renderer; local OVRTX receives exported scene materials and native pose snapshots. Rendering, replay and material appearance do not establish physical accuracy. Motion follows native state or an explicit replay/inspection command, with no ambient interface animation.",
+    "overview": "This record applies only to the claw-machine scene and its supporting play, collection and comparison interface in `web/src/claw*`. It captures the user-approved dark dreamy cabinet and claw change. It does not redefine the DexLab documentation site, the older solver page or the repository brand.\n\nDeep plum enamel, rose luminous seams, dimensional moon and star ornaments, a silver-lilac moving claw and a dense pile of warm prizes establish the scene. One fixed cabinet contains 30 toy instances spanning all 16 Nai-family identities; there is no lineup selector. The surrounding interface uses the same plum family with one clear rose action. Compact interface typography remains; no new display-font identity was approved.\n\nThe cabinet housing and ornaments are decorative meshes. Toy materials suggest plush, while MuJoCo still owns rigid-body poses and contact in one simulation Worker. The browser renders locally through WebGPU, with WebGL 2 fallback and a visible readback of the initialized backend. Display-only asset derivatives and a reduced small-device rendering profile limit presentation work without changing the fixed 2 ms physics step or native collision assets. These are implementation settings, not verified responsiveness or frame-rate results. Rendering, replay and material appearance do not establish physical accuracy. Motion follows native state or an explicit replay/inspection command, with no ambient interface animation.",
     "keyCharacteristics": [
       "Plum enclosure with rounded physical edges and rose luminous seams.",
       "Thirty enlarged textured toys in a gravity-driven pile, a complete silver-lilac claw and a raised gold-rimmed chute.",
       "Quiet bordered controls, visible input focus and scene-independent caption backing.",
-      "One aiming view; synchronized comparison views share camera and time."
+      "One aiming view; synchronized comparison views share camera and time.",
+      "Local backend readback and bounded display work preserve the same dark 30-prize scene across rendering profiles."
     ],
     "rules": [
       {
@@ -456,7 +457,7 @@
       "**Do** preserve the plum, rose, silver-lilac and warm-gold material roles within the claw surface.",
       "**Do** frame the enlarged prize pile and complete claw prominently; let the lower collection well extend below the overview while retaining the gold chute cue.",
       "**Do** keep one fixed mix of 30 toy instances spanning all 16 identities, with grouped collection counts below the machine and no lineup selector.",
-      "**Do** label the active renderer and visible WebGL fallback, and keep native outcome claims separate from appearance."
+      "**Do** label the initialized WebGPU or WebGL 2 backend accurately, and keep display-quality settings and native outcome claims separate from measured performance."
     ],
     "donts": [
       "**Don't** propagate this scoped palette or cabinet motif into the documentation site or older solver page without a separate decision.",

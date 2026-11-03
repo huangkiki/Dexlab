@@ -96,13 +96,13 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 <p><a href="../../_static/live-lab/index.html?lang=zh" target="_blank" rel="noopener">放大玩抓娃娃机</a></p>
 <div class="dexlab-live-lab">
   <iframe src="../../_static/live-lab/index.html?embed=1&amp;lang=zh"
-    title="DexLab 抓娃娃机" loading="eager" allow="fullscreen"></iframe>
+    title="DexLab 抓娃娃机" loading="lazy" allow="fullscreen"></iframe>
 </div>
 ```
 
-MuJoCo 在你的浏览器本地计算接触。16 款奶家族角色分三组切换，每柜 16 只、含同款玩偶；深紫星月机柜配粉色灯条和猫耳夹爪，点头像可近看真实网格。它们由本地图生 3D 模型生成毛绒外观，物理上仍是使用近似碰撞外形的合成刚体；抓取没有吸附或随机中奖，也不代表软体玩偶或真机验证。实验下方解释三种求解器，以及显式、半隐式、隐式积分的区别。三路结果可能一致；抓到娃娃不等于物理模型更准确。
+MuJoCo 在你的浏览器本地计算接触。一柜固定混放 30 只、覆盖全部 16 款奶家族角色，无需选择组合；放大的娃娃经重力下落自然堆叠，夹爪按堆顶高度下爪。深紫星月机柜配粉色灯条和猫耳夹爪，点头像可近看真实网格。它们由本地图生 3D 模型生成毛绒外观，物理上仍是使用近似碰撞外形的合成刚体；抓取没有吸附或随机中奖，也不代表软体玩偶或真机验证。实验下方解释三种求解器，以及显式、半隐式、隐式积分的区别。三路结果可能一致；抓到娃娃不等于物理模型更准确。
 
-公网页面使用 WebGL；有 RTX 显卡时可按[本机 OVRTX 启动说明](https://github.com/huangkiki/Dexlab/tree/main/web/ovrtx)实时渲染相同状态。页面明确显示连接状态、图像时间戳和渲染耗时，断线时回退 WebGL。
+页面优先使用本地 WebGPU，不支持时自动回退 WebGL 2，并显示实际后端。物理与回放在独立 Worker 中运行；手机限制渲染分辨率和帧率，并使用轻量网格与贴图。三路仍共用原来的碰撞模型、2 ms 步长和迭代预算；设备算得慢时仿真时间会慢于现实时间。
 
 (quickstart)=
 ## Quick start

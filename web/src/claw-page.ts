@@ -2,7 +2,7 @@ import "./claw.css";
 import { toyPortraitUrls } from "./claw-model-urls";
 import { ClawLab } from "./claw-lab";
 import { clawExplainer } from "./claw-explainer";
-import type { ClawComparison } from "./claw-comparison";
+import type { ClawSimulationState } from "./claw-simulation";
 import {
   TOYS,
   CLAW_SOLVERS,
@@ -52,8 +52,7 @@ export async function startClawPage() {
         <div class="round-stats"><span>${t("本柜收藏 · Newton", "Cabinet · Newton")} <strong id="score">0 / ${TOYS.length}</strong></span><span id="attempts">${t("尚未下爪", "First try awaits")}</span></div>
         <p class="input-help">${t("一柜 30 只 · 16 个奶家族角色", "30 prizes · all 16 Nai-family characters")}</p>
         <label class="iteration-control" for="iterations">${t("每步迭代上限", "Iterations per step")}<select id="iterations"><option value="5">5</option><option value="20">20</option><option value="60" selected>60</option><option value="100">100</option></select></label>
-        <label class="iteration-control" for="renderer">${t("渲染", "Renderer")}<select id="renderer"><option value="webgl">WebGL</option><option value="ovrtx">OVRTX · ${t("本机 RTX", "local RTX")}</option></select></label>
-        <p id="renderer-help" class="input-help" hidden>${t("OVRTX 需要本机渲染服务。", "OVRTX needs the local render service.")} <a href="https://github.com/huangkiki/Dexlab/tree/main/web/ovrtx">${t("启动说明", "Setup")}</a></p>
+        <p id="renderer-status" class="input-help" role="status"></p>
         <div class="play-controls"><div class="direction-pad" aria-label="${t("移动爪子", "Move the claw")}">
           ${[
             ["forward", "y", 1, t("向前", "Forward")],
@@ -81,7 +80,7 @@ export async function startClawPage() {
     </section>
     ${clawExplainer(en)}
     <footer><span>${t("MuJoCo 本地物理 · 免费玩，随时重来", "Local MuJoCo physics · Free play, unlimited tries")}</span><a href="?mode=solver&embed=1&lang=${en ? "en" : "zh"}">${t("简化场景对比", "Simple-scene comparison")}</a>
-      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("每柜 30 只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Each cabinet has 30 Nai-family toys with plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGL / local OVRTX · Newton / CG / PGS · elliptic · implicitfast · 2 ms</p></details>
+      <details><summary>${t("里面的物理是怎么回事？", "What drives the physics?")}</summary><p>${t("每柜 30 只奶家族玩偶采用毛绒外观，物理上仍是刚体；三指爪由关节驱动。抓取、滑落和落入取物盒由 MuJoCo 接触计算决定；没有吸附、随机中奖或保底抓取。玩偶进入取物盒并停稳后才计分。这是互动教学场景，不代表软体玩偶或真机验证。", "Each cabinet has 30 Nai-family toys with plush materials but rigid-body physics, with an actuated three-finger claw. MuJoCo contact determines grasping, slipping and landing; there is no attachment, random win or guaranteed catch. A toy scores after settling inside the actual bin. This is an interactive teaching scene, not deformable-plush or hardware validation.")}</p><p>MuJoCo 3.17 WASM / CPU · WebGPU / WebGL 2 fallback · physics worker · Newton / CG / PGS · elliptic · implicitfast · 2 ms</p></details>
     </footer></main>`;
   const el = <T extends HTMLElement>(id: string) =>
     document.getElementById(id) as T;
@@ -132,7 +131,7 @@ export async function startClawPage() {
       node.querySelector<HTMLButtonElement>("[data-look]")!.dataset.look = String(indices.find(i => !s.won.includes(i)) ?? indices[0]);
     }
   }
-  function updateComparison(comparison: ClawComparison) {
+  function updateComparison(comparison: ClawSimulationState) {
     app
       .querySelector(".machine-layout")!
       .classList.toggle("is-comparing", comparison.started);
@@ -159,7 +158,7 @@ export async function startClawPage() {
     el<HTMLButtonElement>("repeat-grab").disabled = !comparison.complete;
     const timeline = el<HTMLInputElement>("timeline");
     timeline.disabled = !comparison.complete;
-    timeline.max = String(Math.max(1, comparison.frames.length - 1));
+    timeline.max = String(Math.max(1, comparison.frameCount - 1));
     timeline.value = String(comparison.cursor);
     timeline.setAttribute("aria-valuetext", `${frame.time.toFixed(2)} s`);
     el("play-pause").textContent = comparison.paused
@@ -201,24 +200,7 @@ export async function startClawPage() {
     return;
   }
   buttons.forEach((b) => (b.disabled = false));
-  const renderer = el<HTMLSelectElement>("renderer");
-  const local = ["127.0.0.1", "localhost"].includes(location.hostname);
-  const chooseRenderer = () => {
-    const rtx = renderer.value === "ovrtx";
-    const url = new URL(location.href);
-    url.searchParams.set("renderer", renderer.value);
-    history.replaceState(null, "", url);
-    el("renderer-help").hidden = !rtx;
-    lab.setRtx(rtx && local, en);
-    if (rtx && !local) el("renderer-help").firstChild!.textContent = t(
-      "请在本机启动页面和 OVRTX 服务；公网页面当前仍显示 WebGL。 ",
-      "Start the page and OVRTX service locally; this public page still uses WebGL. ");
-  };
-  renderer.addEventListener("change", chooseRenderer);
-  if (new URLSearchParams(location.search).get("renderer") === "ovrtx") {
-    renderer.value = "ovrtx";
-    chooseRenderer();
-  }
+  el("renderer-status").textContent = lab.rendererName + t(" · 本地渲染", " · local rendering");
   app.querySelectorAll<HTMLButtonElement>("[data-look]").forEach((button) => {
     button.addEventListener("click", () => {
       lab.focusToy(Number(button.dataset.look));
@@ -227,7 +209,7 @@ export async function startClawPage() {
       el("view").textContent = t("俯视瞄准", "Top view");
     });
   });
-  update(lab.task.snapshot());
+  update(lab.snapshot);
   const iterationLimit = () =>
     Number(el<HTMLSelectElement>("iterations").value);
   el("repeat-grab").addEventListener("click", () =>
@@ -258,8 +240,8 @@ export async function startClawPage() {
   const action = () => {
     if (failed) return;
     clear();
-    if (lab.task.won.size === TOYS.length) lab.reset();
-    else if (lab.task.phase === "result") lab.reaim();
+    if (lab.snapshot.score === TOYS.length) lab.reset();
+    else if (lab.snapshot.phase === "result") lab.reaim();
     else lab.startComparison(iterationLimit());
   };
   drop.addEventListener("click", action);
@@ -293,7 +275,7 @@ export async function startClawPage() {
       const held = lab.input.delete(`pointer-${event.pointerId}`);
       button.classList.remove("is-held");
       if (held && performance.now() - downAt < 130)
-        lab.task.move(axis, direction * 0.005);
+        lab.move(axis, direction * 0.005);
     });
     for (const name of ["pointercancel", "lostpointercapture"])
       button.addEventListener(name, (event) => {
@@ -301,7 +283,7 @@ export async function startClawPage() {
         button.classList.remove("is-held");
       });
     button.addEventListener("click", (event) => {
-      if (event.detail === 0) lab.task.move(axis, direction * 0.005);
+      if (event.detail === 0) lab.move(axis, direction * 0.005);
     });
   });
   const keys: Record<string, { axis: MoveAxis; direction: number }> = {

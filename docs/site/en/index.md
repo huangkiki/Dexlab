@@ -96,13 +96,13 @@ Move with the arrow keys, WASD or on-screen buttons. Line up a toy and press Spa
 <p><a href="../../_static/live-lab/index.html?lang=en" target="_blank" rel="noopener">Open the claw machine in a larger view</a></p>
 <div class="dexlab-live-lab">
   <iframe src="../../_static/live-lab/index.html?embed=1&amp;lang=en"
-    title="DexLab claw machine" loading="eager" allow="fullscreen"></iframe>
+    title="DexLab claw machine" loading="lazy" allow="fullscreen"></iframe>
 </div>
 ```
 
-MuJoCo computes contact locally in your browser. Sixteen Nai-family prizes are available in three lineups of 16 toys, including duplicates. The deep-purple cabinet has rose lighting, moon/star trim and a matching cat-ear claw. Click a portrait to inspect a mesh up close. They use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The guide below the game explains all three solvers and explicit, semi-implicit and implicit integration. Agreement is a valid result; a successful catch alone does not establish physical accuracy.
+MuJoCo computes contact locally in your browser. One fixed mix of 30 prizes covers all 16 Nai-family characters, with no lineup selector. Larger toys settle under gravity into a pile, and the claw uses the measured surface height at drop. The deep-purple cabinet has rose lighting, moon/star trim and a matching cat-ear claw. Click a portrait to inspect a mesh up close. They use locally generated textured meshes and approximate rigid collision shapes, with no attachment or random win. This is not deformable-plush or hardware validation. The guide below the game explains all three solvers and explicit, semi-implicit and implicit integration. Agreement is a valid result; a successful catch alone does not establish physical accuracy.
 
-The public page uses WebGL. Follow the [local OVRTX setup](https://github.com/huangkiki/Dexlab/tree/main/web/ovrtx) to render the same poses on an RTX GPU. Connection state, image timestamp and render cost are shown explicitly, with WebGL fallback on disconnect.
+The page prefers local WebGPU, falls back to WebGL 2 when needed and displays the actual backend. Physics and replay run in a separate worker. Phones use capped rendering resolution and frame rate, with lighter meshes and textures. All three worlds retain the same collision models, 2 ms step and iteration budget; simulation time can run slower than wall time on a busy device.
 
 (quickstart)=
 ## Quick start

@@ -41,7 +41,7 @@ The generated character atlas and individual image-to-3D inputs follow the user-
 
 The state/controller/scorer is in `src/claw-task.ts`, comparison/recording in `src/claw-comparison.ts`, bilingual teaching copy in `src/claw-explainer.ts`, rendering in `src/claw-lab.ts`, and bilingual controls in `src/claw-page.ts`. The scene pauses when hidden and preserves resources across BFCache navigation. A static loading/reload state appears before heavy imports; the docs parent accepts frame height messages only from its own same-origin lab frame.
 
-`?mode=solver&embed=1` preserves the existing solver-configuration comparison. The public claw machine uses WebGL; a local RTX GPU can render the same live poses through the optional [OVRTX bridge](ovrtx/README.md). GitHub Pages does not run that native service. The older comparison retains WebGPU with a WebGL fallback. Browser scores are not written into the native experiment catalog.
+`?mode=solver&embed=1` preserves the existing solver-configuration comparison. Both pages prefer local WebGPU with a WebGL 2 fallback. The claw page reports the actual initialized backend. Browser scores are not written into the native experiment catalog.
 
 ## Interaction reference
 
@@ -49,10 +49,24 @@ The aim/drop/return/prize-loop interaction was informed by [neciszhang/claw3d](h
 
 ## Sixteen characters and PBR / 16 款角色与 PBR
 
-The original six are joined by Nai Egg, Baby Nai Frog, Nai Dog, Pink Nai Frog, Nai Swirl, Soy Milk, Nai Fish, Nai Tea, Nai Bottle and Sigma Nai Frog. Each cabinet contains 30 toys mixing all 16 characters, including repeats; repeated toys share decoded mesh and texture resources. The ten additions use 2048-pixel baked base-color textures and a less aggressive mesh simplification setting (`0.90` versus the originals' `0.94`). Visual meshes and convex collision meshes use the same 1.6× scale. Thirty toys spawn in three layers and settle under gravity into a pile; the claw is 1.35× its original size. At drop, a native ray measures the surface under the aim marker and freezes the descent depth for all three worlds. Both viewers use nonmetallic rough fabric. The cabinet has deep-purple lacquer, rose light strips and sculpted moon/star trim; the metallic claw has matching cat-ear and moon decorations. The decorations do not alter its collision geometry. No fabricated normal maps or material measurements are implied.
+The original six are joined by Nai Egg, Baby Nai Frog, Nai Dog, Pink Nai Frog, Nai Swirl, Soy Milk, Nai Fish, Nai Tea, Nai Bottle and Sigma Nai Frog. Each cabinet contains 30 toys mixing all 16 characters, including repeats; repeated toys share decoded mesh and texture resources. The retained source meshes use the original 1024/2048-pixel textures. Browser display derivatives use 6,000 triangles and 512-pixel textures per identity, generated with UV/normal-aware mesh simplification and a recorded error bound. Visual meshes and convex collision meshes use the same 1.6× scale. Thirty toys spawn in three layers and settle under gravity into a pile; the claw is 1.35× its original size. At drop, a native ray measures the surface under the aim marker and freezes the descent depth for all three worlds. The viewer uses nonmetallic rough fabric. The cabinet has deep-purple lacquer, rose light strips and sculpted moon/star trim; the metallic claw has matching cat-ear and moon decorations. The decorations do not alter its collision geometry. No fabricated normal maps or material measurements are implied.
 
-新增奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙，共 16 款。每柜固定混放 30 只，覆盖全部 16 款角色；不需要选择组合，“换一柜”只重新摆放同一组娃娃。同款复用解码后的网格和纹理。模型与碰撞形状同步放大为原来的 1.6 倍，分三层装柜后自然下落、堆叠；夹爪放大为 1.35 倍。瞄准环跟随堆顶，下爪时用原生射线测出表面高度，三路共用由该起点确定的下降深度。点头像可近看真实网格，拖动旋转，俯视按钮返回全景。新增模型采用 2048 像素颜色贴图和更少的网格简化（`0.90`，原六款为 `0.94`）；娃娃为粗糙非金属 PBR；柜体采用深紫漆面、粉色灯条和立体星月装饰，金属夹爪配猫耳与月牙。这些装饰不改变夹爪碰撞形状。这不代表实测织物或生成了真实法线贴图。
+新增奶蛋、小奶蛙、奶狗、奶粉、奶屎、豆奶、奶鱼、奶茶、奶瓶、西格玛奶蛙，共 16 款。每柜固定混放 30 只，覆盖全部 16 款角色；不需要选择组合，“换一柜”只重新摆放同一组娃娃。同款复用解码后的网格和纹理。模型与碰撞形状同步放大为原来的 1.6 倍，分三层装柜后自然下落、堆叠；夹爪放大为 1.35 倍。瞄准环跟随堆顶，下爪时用原生射线测出表面高度，三路共用由该起点确定的下降深度。点头像可近看真实网格，拖动旋转，俯视按钮返回全景。保留原始 1024/2048 像素贴图的源模型；浏览器展示模型每款 6,000 三角面、512 像素贴图，简化过程考虑法线与 UV 并记录误差界限；娃娃为粗糙非金属 PBR；柜体采用深紫漆面、粉色灯条和立体星月装饰，金属夹爪配猫耳与月牙。这些装饰不改变夹爪碰撞形状。这不代表实测织物或生成了真实法线贴图。
 
-[Local OVRTX setup / 本机 OVRTX 启动](ovrtx/README.md) describes the optional RTX stream. Three solver views are rendered together from one timestamped request. The visible renderer status reports connection and per-frame render time; stale or disconnected streams fall back explicitly to WebGL. Public Pages remains WebGL.
+## Browser performance / 浏览器性能
 
-可选 OVRTX 服务把同一时间戳的三路状态一起渲染，页面显示真实连接状态和每帧渲染耗时。断线或画面过期时明确回退 WebGL；公网 Pages 仍运行 WebGL。原生 WASM 检查覆盖三种固定摆放的 30 只玩偶堆叠、真实相互接触、同步抓取和空抓负例，以及全部 30 种初始排列不穿插。若低迭代预算触发引擎自动重置，会明确暂停并报错；不能把重置后的状态当作有效结果。这里不承诺埋在底层的角色一次就能抓到，也不声称完成了整柜 30 只的收集验证。
+The three native worlds and replay stay in `claw-worker.ts`. The main thread receives display snapshots with at most one physics-tick request in flight. Worker batches yield after an 8 ms budget, checked between complete three-world steps; no simulation steps or solvers are omitted. A slow device advances simulation time more slowly. Hidden tabs stop requesting work.
+
+Coarse-pointer devices or pages initially narrower than 600 px use a pixel ratio capped at 1, a 30 fps render cap and no real-time shadow map. Other pages cap the pixel ratio at 1.5. Offscreen stacked views are skipped. These are resource limits, not a measured frame-rate guarantee for every phone. The public game no longer uses an OVRTX stream.
+
+三个原生世界及回放保存在 `claw-worker.ts`；主线程只接收画面状态，最多保留一个未完成的物理帧请求。Worker 每批在完整的三路步进后检查 8 ms 工作预算，不跳过物理步或某个求解器；性能不足时仿真时间自然变慢。页面隐藏时停止请求计算。触屏或首次打开宽度小于 600 px 的页面采用 1 倍像素比、30 fps 渲染上限并关闭实时阴影；桌面像素比上限为 1.5。上下排列时跳过屏幕外的视窗。这些是资源限制，不等于所有手机都已实测达到相应帧率；游戏不再使用 OVRTX 视频流。
+
+Generate display assets after installing Pillow for the selected Python interpreter:
+
+```bash
+PYTHON=python3 node scripts/optimize-toys.mjs
+```
+
+The source GLBs, source portraits and native collision hulls stay unchanged. `src/assets/nai/display/manifest.json` records source/derivative hashes, byte counts, triangle counts and simplification error. The browser loads the derivatives, including 128-pixel portraits, without loading the original generation inputs.
+
+原生 WASM 检查覆盖三种固定摆放的 30 只玩偶堆叠、真实相互接触、同步抓取和空抓负例，以及全部 30 种初始排列不穿插。低迭代预算触发引擎自动重置时会明确暂停并报错；不能把重置后的状态当作有效结果。不承诺底层角色一次就能抓到，也不声称完成了整柜 30 只的收集验证。

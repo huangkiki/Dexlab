@@ -75,7 +75,7 @@
 <a id="whats-new"></a>
 ## What's new
 
-- **2026-11-03** — [在线抓娃娃机](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)：一次下爪，同步对比 Newton、CG、PGS；支持慢放、原局重试及求解器与积分方法说明；提供 16 款角色、每柜 30 只自然堆叠玩偶的暗紫星月机柜和[本机 OVRTX 渲染](web/ovrtx/README.md)。
+- **2026-11-03** — [在线抓娃娃机](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#live-lab)：一次下爪，同步对比 Newton、CG、PGS；支持慢放、原局重试及求解器与积分方法说明；提供 16 款角色、每柜 30 只自然堆叠玩偶的暗紫星月机柜；采用本地 WebGPU 渲染、后台物理计算和轻量模型。
 - **2026-11-03** — 上线[灵巧操作仿真调研原版](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)，并沿原有六层框架补入 14 篇相关工作与 1 篇背景参考。
 - **2026-11-02** — 新增[灵巧手仿真导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html)与 [Newton 35 篇论文分类](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)。
 - **2026-10-31** — 发布 [RoboAPI 会话适配](docs/roboapi-poke.zh-CN.md)：模型发现、连续会话与动作回执；任务映射待接入。
