@@ -252,6 +252,7 @@ kbd {
   display: block;
   margin-top: 2px;
 }
+.toy-collection { margin: 20px 0 28px; }
 .toy-collection h2 {
   font-size: 12px;
   font-weight: 500;
@@ -263,8 +264,8 @@ kbd {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 6px;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 14px 10px;
 }
 .toy-collection li {
   display: grid;
@@ -370,11 +371,7 @@ details p {
     align-self: end;
     grid-column: 1;
   }
-  .toy-collection {
-    grid-column: 2;
-    grid-row: 2 / span 2;
-    align-self: center;
-  }
+  .toy-collection ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .drop-button kbd {
     display: none;
   }
@@ -446,18 +443,7 @@ details p {
   .input-help span {
     display: none;
   }
-  .toy-collection {
-    grid-column: 1;
-    grid-row: auto;
-  }
-  .toy-collection h2 {
-    display: none;
-  }
-  .toy-collection ul {
-    display: flex;
-    justify-content: space-between;
-    gap: 3px;
-  }
+  .toy-collection ul { gap: 14px 6px; }
   .toy-collection li {
     display: flex;
     flex-direction: column;
@@ -541,8 +527,7 @@ input:focus-visible {
   font-size: 17px;
 }
 .is-comparing .direction-pad,
-.is-comparing .input-help,
-.is-comparing .toy-collection {
+.is-comparing .input-help {
   display: none;
 }
 .world-labels {

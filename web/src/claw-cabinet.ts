@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { BIN, CLAW_SCALE, CHUTE_LIP } from "./claw-task";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
 // Decorative housing only. Native collision geometry and actuator motion stay in ClawTask.
@@ -37,36 +38,39 @@ export function buildCabinet(scene: THREE.Scene) {
   crescent.closePath();
 
   // Lacquered rounded frame, open viewing face, luminous seams and a dark back panel.
-  for (const x of [-.302, .302]) for (const y of [-.23, .23]) {
-    box([.025, .025, .44], [x, y, .19]);
-    box([.005, .005, .405], [x, y - .014, .19], rose, .002);
+  for (const x of [-.332, .332]) for (const y of [-.285, .285]) {
+    box([.025, .025, .60], [x, y, .27]);
+    box([.005, .005, .565], [x, y - .014, .27], rose, .002);
   }
   // Keep the chute open: the deck is already represented by native floor geometry.
-  box([.44, .035, .06], [.075, -.235, -.03]);
-  box([.64, .49, .045], [0, 0, -.64]);
-  box([.43, .47, .60], [.075, 0, -.33]);
-  box([.41, .012, .055], [.075, -.242, -.57], mauve);
-  scene.add(emblem(crescent, mauve, .075, [.075, -.242, -.29]));
-  for (const x of [-.04, .19]) scene.add(emblem(star, rose, .013, [x, -.244, -.30]));
-  box([.59, .025, .315], [0, .238, .19]);
-  box([.59, .006, .008], [0, .22, .045], rose, .002);
-  box([.65, .045, .07], [0, -.232, .415]);
-  box([.64, .035, .045], [0, .23, .402]);
-  for (const x of [-.302, .302]) box([.03, .47, .035], [x, 0, .395]);
-  box([.57, .006, .004], [0, -.258, .389], rose, .001);
+  box([.44, .035, .06], [.095, -.285, -.03]);
+  box([.70, .58, .045], [0, 0, -.64]);
+  box([.44, .56, .60], [.095, 0, -.33]);
+  box([.42, .012, .055], [.095, -.297, -.57], mauve);
+  scene.add(emblem(crescent, mauve, .075, [.075, -.297, -.29]));
+  for (const x of [-.04, .19]) scene.add(emblem(star, rose, .013, [x, -.299, -.30]));
+  box([.65, .025, .475], [0, .293, .27]);
+  box([.65, .006, .008], [0, .275, .045], rose, .002);
+  box([.71, .045, .07], [0, -.287, .575]);
+  box([.70, .035, .045], [0, .285, .562]);
+  for (const x of [-.332, .332]) box([.03, .56, .035], [x, 0, .555]);
+  box([.63, .006, .004], [0, -.313, .549], rose, .001);
   // Sculpted celestial marquee; these are mesh silhouettes, not flat image stickers.
-  scene.add(emblem(crescent, moon, .023, [0, -.258, .418]));
+  scene.add(emblem(crescent, moon, .023, [0, -.313, .578]));
   for (const [x, scale] of [[-.075, .011], [.075, .011], [-.18, .008], [.18, .008]] as const)
-    scene.add(emblem(star, silver, scale, [x, -.258, .418]));
+    scene.add(emblem(star, silver, scale, [x, -.313, .578]));
   for (const [x, z, scale] of [[-.20, .28, .014], [.19, .22, .009], [-.08, .17, .007], [.075, .32, .012]] as const)
-    scene.add(emblem(star, mauve, scale, [x, .219, z]));
-  scene.add(emblem(crescent, mauve, .044, [-.015, .218, .27]));
+    scene.add(emblem(star, mauve, scale, [x, .274, z]));
+  scene.add(emblem(crescent, mauve, .044, [-.015, .273, .35]));
   // The gold opening remains unmistakable against the plum deck in both renderers.
-  for (const x of [-.278, -.152]) box([.004, .13, .005], [x, -.135, .014], moon, .001);
-  for (const y of [-.20, -.07]) box([.13, .004, .005], [-.215, y, .014], moon, .001);
+  for (const x of [BIN.x - BIN.half - .006, BIN.x + BIN.half + .006])
+    box([.004, .194, .005], [x, BIN.y, CHUTE_LIP + .003], moon, .001);
+  for (const y of [BIN.y - BIN.half - .006, BIN.y + BIN.half + .006])
+    box([.186, .004, .005], [BIN.x, y, CHUTE_LIP + .003], moon, .001);
 
-  const crossbeam = box([.6, .014, .014], [0, 0, .365], silver, .004);
-  const trolley = box([.065, .065, .028], [0, 0, .35], mauve);
+
+  const crossbeam = box([.66, .014, .014], [0, 0, .525], silver, .004);
+  const trolley = box([.065, .065, .028], [0, 0, .51], mauve);
   const charm = new THREE.Group();
   const face = emblem(crescent, moon, .012, [0, -.0265, 0]);
   charm.add(face);
@@ -76,6 +80,7 @@ export function buildCabinet(scene: THREE.Scene) {
     ear.position.set(x, 0, .026);
     charm.add(ear);
   }
+  charm.scale.setScalar(CLAW_SCALE);
   scene.add(charm);
   return { crossbeam, trolley, charm };
 }

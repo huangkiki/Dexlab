@@ -1,8 +1,10 @@
 import type { MainModule } from "@mujoco/mujoco";
 
 export const STEP = 0.002;
-export const HOME = { x: 0, y: -0.02, z: 0.23 };
-export const BIN = { x: -0.215, y: -0.135, half: 0.06, floor: -0.6 };
+export const BIN = { x: -0.215, y: -0.16, half: 0.085, floor: -0.6 };
+export const HOME = { x: BIN.x, y: BIN.y, z: 0.39 };
+export const CLAW_SCALE = 1.35;
+export const CHUTE_LIP = .18;
 import { TOYS, TOY_ASSETS, toyXml } from "./claw-toys.ts";
 export { TOYS } from "./claw-toys.ts";
 export type ClawPhase =
@@ -22,15 +24,16 @@ const clamp = (v: number, lo: number, hi: number) =>
   Math.max(lo, Math.min(hi, v));
 
 export function clawXml(solver: ClawSolver = "Newton") {
+  const scaled = (...values: number[]) => values.map(v => v * CLAW_SCALE).join(" ");
   const fingers = [0, 120, 240]
     .map(
       (angle, i) => `<body euler="0 0 ${angle}">
-    <geom name="guide${i}" type="capsule" fromto="0.012 0 0.070 0.066 0 0.070" size="0.006" mass="0.005"/>
-    <body pos="0.058 0 0"><joint name="finger${i}" type="slide" axis="-1 0 0" range="0 0.04" damping="1" armature="0.004"/>
-      <geom name="joint${i}" type="sphere" pos="0 0 0.070" size="0.009" mass="0.005"/>
-      <geom name="upper${i}" type="capsule" fromto="0 0 0.070 0.010 0 0.035" size="0.006" mass="0.015"/>
-      <geom name="${padNames[i]}" type="capsule" fromto="0.010 0 0.035 0 0 -0.025" size="0.006" mass="0.025"/>
-      <geom name="tip${i}" type="capsule" fromto="0 0 -0.025 -0.013 0 -0.031" size="0.006" mass="0.01"/>
+    <geom name="guide${i}" type="capsule" fromto="${scaled(0.012,0,0.070,0.066,0,0.070)}" size="${scaled(0.006)}" mass="0.005"/>
+    <body pos="${scaled(0.058,0,0)}"><joint name="finger${i}" type="slide" axis="-1 0 0" range="${scaled(0,0.04)}" damping="1" armature="0.004"/>
+      <geom name="joint${i}" type="sphere" pos="${scaled(0,0,0.070)}" size="${scaled(0.009)}" mass="0.005"/>
+      <geom name="upper${i}" type="capsule" fromto="${scaled(0,0,0.070,0.010,0,0.035)}" size="${scaled(0.006)}" mass="0.015"/>
+      <geom name="${padNames[i]}" type="capsule" fromto="${scaled(0.010,0,0.035,0,0,-0.025)}" size="${scaled(0.006)}" mass="0.025"/>
+      <geom name="tip${i}" type="capsule" fromto="${scaled(0,0,-0.025,-0.013,0,-0.031)}" size="${scaled(0.006)}" mass="0.01"/>
     </body></body>`,
     )
     .join("");
@@ -39,24 +42,24 @@ export function clawXml(solver: ClawSolver = "Newton") {
     <default><geom friction="0.9 0.005 0.0001" condim="4" solref="0.008 1" solimp="0.95 0.99 0.001"/></default>
     <asset>${TOY_ASSETS}</asset>
     <worldbody>
-      <geom name="floor_main" type="box" pos="0.065 0 -0.012" size="0.215 0.205 0.012"/>
-      <geom name="floor_back" type="box" pos="-0.215 0.0675 -0.012" size="0.065 0.1375 0.012"/>
-      <geom name="floor_front" type="box" pos="-0.215 -0.2025 -0.012" size="0.065 0.0075 0.012"/>
-      <geom name="bin_floor" type="box" pos="${BIN.x} ${BIN.y} ${BIN.floor - 0.01}" size="0.065 0.065 0.01"/>
-      <geom name="bin_left" type="box" pos="-0.28 ${BIN.y} ${BIN.floor / 2}" size="0.006 0.07 ${-BIN.floor / 2 + 0.01}"/>
-      <geom name="bin_right" type="box" pos="-0.15 ${BIN.y} ${BIN.floor / 2}" size="0.006 0.07 ${-BIN.floor / 2 + 0.01}"/>
-      <geom name="bin_front" type="box" pos="${BIN.x} -0.20 ${BIN.floor / 2}" size="0.065 0.006 ${-BIN.floor / 2 + 0.01}"/>
-      <geom name="bin_back" type="box" pos="${BIN.x} -0.07 ${BIN.floor / 2}" size="0.065 0.006 ${-BIN.floor / 2 + 0.01}"/>
-      <geom name="wall_left" type="box" pos="-0.29 0 0.12" size="0.01 0.22 0.14"/>
-      <geom name="wall_right" type="box" pos="0.29 0 0.12" size="0.01 0.22 0.14"/>
-      <geom name="wall_back" type="box" pos="0 0.215 0.12" size="0.29 0.01 0.14"/>
-      <geom name="wall_front" type="box" pos="0 -0.215 0.12" size="0.29 0.01 0.14"/>
+      <geom name="floor_main" type="box" pos="0.09 0 -0.012" size="0.22 0.26 0.012"/>
+      <geom name="floor_back" type="box" pos="-0.22 0.0925 -0.012" size="0.09 0.1675 0.012"/>
+      <geom name="floor_front" type="box" pos="-0.22 -0.2525 -0.012" size="0.09 0.0075 0.012"/>
+      <geom name="bin_floor" type="box" pos="${BIN.x} ${BIN.y} ${BIN.floor - 0.01}" size="0.09 0.09 0.01"/>
+      <geom name="bin_left" type="box" pos="${BIN.x - BIN.half - .006} ${BIN.y} ${(BIN.floor + CHUTE_LIP) / 2}" size="0.006 0.097 ${(CHUTE_LIP - BIN.floor) / 2}"/>
+      <geom name="bin_right" type="box" pos="${BIN.x + BIN.half + .006} ${BIN.y} ${(BIN.floor + CHUTE_LIP) / 2}" size="0.006 0.097 ${(CHUTE_LIP - BIN.floor) / 2}"/>
+      <geom name="bin_front" type="box" pos="${BIN.x} ${BIN.y - BIN.half - .006} ${(BIN.floor + CHUTE_LIP) / 2}" size="0.097 0.006 ${(CHUTE_LIP - BIN.floor) / 2}"/>
+      <geom name="bin_back" type="box" pos="${BIN.x} ${BIN.y + BIN.half + .006} ${(BIN.floor + CHUTE_LIP) / 2}" size="0.097 0.006 ${(CHUTE_LIP - BIN.floor) / 2}"/>
+      <geom name="wall_left" type="box" pos="-0.32 0 0.24" size="0.01 0.28 0.26"/>
+      <geom name="wall_right" type="box" pos="0.32 0 0.24" size="0.01 0.28 0.26"/>
+      <geom name="wall_back" type="box" pos="0 0.27 0.24" size="0.31 0.01 0.26"/>
+      <geom name="wall_front" type="box" pos="0 -0.27 0.24" size="0.31 0.01 0.26"/>
       ${TOYS.map((_, i) => toyXml(i)).join("")}
       <body name="carriage">
-        <joint name="x" type="slide" axis="1 0 0" range="-0.24 0.24" damping="4" armature="0.02"/>
-        <joint name="y" type="slide" axis="0 1 0" range="-0.16 0.16" damping="4" armature="0.02"/>
-        <joint name="z" type="slide" axis="0 0 1" range="0.035 0.25" damping="4" armature="0.02"/>
-        <geom name="hub" type="cylinder" pos="0 0 0.080" size="0.026 0.016" mass="0.3"/>
+        <joint name="x" type="slide" axis="1 0 0" range="-0.31 0.31" damping="4" armature="0.02"/>
+        <joint name="y" type="slide" axis="0 1 0" range="-0.25 0.25" damping="4" armature="0.02"/>
+        <joint name="z" type="slide" axis="0 0 1" range="0.048 0.41" damping="4" armature="0.02"/>
+        <geom name="hub" type="cylinder" pos="${scaled(0,0,.08)}" size="${scaled(.026,.016)}" mass="0.3"/>
         ${fingers}
       </body>
     </worldbody>
@@ -90,6 +93,7 @@ export interface ClawCheckpoint {
   won: number[];
   roundWon: number;
   phaseTime: number;
+  dropHeight: number;
   scoreAtDrop: number;
   settled: number[];
 }
@@ -112,6 +116,7 @@ export class ClawTask {
   roundWon = 0;
   stepMs = 0;
   private phaseTime = 0;
+  private dropHeight = .058;
   private scoreAtDrop = 0;
   private settled = TOYS.map(() => 0);
   private toyDofs: number[];
@@ -174,6 +179,7 @@ export class ClawTask {
         won: [...this.won],
         roundWon: this.roundWon,
         phaseTime: this.phaseTime,
+        dropHeight: this.dropHeight,
         scoreAtDrop: this.scoreAtDrop,
         settled: [...this.settled],
       };
@@ -196,6 +202,7 @@ export class ClawTask {
     this.won = new Set(state.won);
     this.roundWon = state.roundWon;
     this.phaseTime = state.phaseTime;
+    this.dropHeight = state.dropHeight;
     this.scoreAtDrop = state.scoreAtDrop;
     this.settled = [...state.settled];
     this.module.mj_forward(this.model, this.data);
@@ -218,6 +225,7 @@ export class ClawTask {
     this.won.clear();
     this.roundWon = 0;
     this.phaseTime = 0;
+    this.dropHeight = .058;
     this.scoreAtDrop = 0;
     this.settled.fill(0);
     this.axisQpos.forEach(
@@ -228,6 +236,7 @@ export class ClawTask {
       const slot = TOYS[(i + layout) % TOYS.length]!;
       this.data.qpos[q] = slot.x;
       this.data.qpos[q + 1] = slot.y;
+      this.data.qpos[q + 2] = slot.z;
     });
     this.writeControls();
     this.module.mj_forward(this.model, this.data);
@@ -236,12 +245,21 @@ export class ClawTask {
     if (this.phase !== "aim" || !Number.isFinite(distance)) return;
     this.target[axis] = clamp(
       this.target[axis] + distance,
-      axis === "x" ? -0.235 : -0.155,
-      axis === "x" ? 0.235 : 0.155,
+      axis === "x" ? -0.305 : -0.245,
+      axis === "x" ? 0.305 : 0.245,
     );
+  }
+  surfaceHeight(x = this.target.x, y = this.target.y) {
+    const hit = new Int32Array(1), normal = new Float64Array(3);
+    const distance = this.module.mj_ray(this.model, this.data,
+      [x, y, 1], [0, 0, -1], [0, 1, 0, 0, 0, 0], false, -1, hit, normal);
+    return distance < 0 ? 0 : Math.max(0, 1 - distance);
   }
   drop() {
     if (this.phase !== "aim" || this.won.size === TOYS.length) return;
+    // Freeze the descent depth from the native surface at the shared start state.
+    // Only toy geoms are in group 1; the cabinet and claw cannot hit this ray.
+    this.dropHeight = clamp(this.surfaceHeight() - .055, .058, HOME.z - .06);
     this.attempts++;
     this.scoreAtDrop = this.won.size;
     this.roundWon = 0;
@@ -270,7 +288,7 @@ export class ClawTask {
       this.target.x,
       this.target.y,
       this.target.z,
-      ...[0, 1, 2].map(() => (this.closed ? 0.04 : 0)),
+      ...[0, 1, 2].map(() => (this.closed ? 0.04 * CLAW_SCALE : 0)),
     ].forEach((value, i) => (this.data.ctrl[i] = value));
   }
   position(index: number) {
@@ -306,7 +324,7 @@ export class ClawTask {
     this.phaseTime += STEP;
     switch (this.phase) {
       case "descend":
-        if (this.approach("z", 0.043, 0.09)) {
+        if (this.approach("z", this.dropHeight, 0.09)) {
           this.closed = true;
           this.enter("close");
         }
@@ -340,9 +358,12 @@ export class ClawTask {
       }
     }
     this.writeControls();
+    const expectedTime = this.data.time + STEP;
     const started = performance.now();
     this.module.mj_step(this.model, this.data);
     this.stepMs = performance.now() - started;
+    if (Math.abs(this.data.time - expectedTime) > 1e-8)
+      throw new Error(`${this.solver}: native state reset at ${expectedTime.toFixed(3)} s. Reload and choose a higher iteration cap.`);
     for (let i = 0; i < TOYS.length; i++) {
       const p = this.position(i);
       if (!Object.values(p).every(Number.isFinite))

@@ -12,8 +12,11 @@ const mj = await loadMujoco({
   ),
 });
 function prepare(c, empty = false) {
-  c.reference.move("x", (empty ? BIN.x : TOYS[0].x) - c.reference.target.x);
-  c.reference.move("y", (empty ? BIN.y : TOYS[0].y) - c.reference.target.y);
+  c.reference.reset(29); // The fixed exposed-cat control also supports repeatability checks.
+  for (let i = 0; i < 1500; i++) c.reference.step();
+  const target = empty ? BIN : c.reference.position(28);
+  c.reference.move("x", target.x - c.reference.target.x);
+  c.reference.move("y", target.y - c.reference.target.y);
   for (let i = 0; i < 250; i++) c.reference.step();
 }
 function finish(c) {
@@ -117,7 +120,7 @@ test("empty-space comparisons do not award prizes; reset clears replay and retai
   const c = new ClawComparison(mj);
   try {
     prepare(c, true);
-    c.start(5);
+    c.start(60);
     finish(c);
     assert.ok(
       c.tasks.every((task) => task.roundWon === 0 && task.won.size === 0),
@@ -135,4 +138,21 @@ test("empty-space comparisons do not award prizes; reset clears replay and retai
   } finally {
     c.dispose();
   }
+});
+
+test("an unstable low-budget solver cannot silently reset and continue a comparison", () => {
+  const c = new ClawComparison(mj);
+  try {
+    prepare(c, true);
+    c.start(5);
+    try {
+      finish(c);
+      assert.ok(c.tasks.every(task => task.won.size === 0));
+      console.log("5-iteration empty drop completed without a native reset");
+    } catch (error) {
+      assert.match(error.message, /^(Newton|CG|PGS): native state reset at /);
+      assert.equal(c.complete, false);
+      console.log("5-iteration failure explicitly surfaced:", error.message);
+    }
+  } finally { c.dispose(); }
 });

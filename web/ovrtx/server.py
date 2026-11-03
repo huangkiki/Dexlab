@@ -145,7 +145,7 @@ def main():
         finally:
             sockets.discard(socket)
     with serve(handle, "127.0.0.1", 8879,
-               origins=origins, close_timeout=2, max_size=64 * 1024 * 1024, max_queue=1, ping_interval=None) as server:
+               origins=origins, close_timeout=2, max_size=128 * 1024 * 1024, max_queue=1, ping_interval=None) as server:
         print("OVRTX bridge listening at ws://127.0.0.1:8879", flush=True)
         # Detached shells can inherit SIGINT ignored; explicitly enable graceful stop.
         def stop(_signum, _frame):

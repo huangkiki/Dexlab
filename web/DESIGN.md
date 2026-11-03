@@ -102,14 +102,14 @@ components:
 
 This record applies only to the claw-machine scene and its supporting play, collection and comparison interface in `web/src/claw*`. It captures the user-approved dark dreamy cabinet and claw change. It does not redefine the DexLab documentation site, the older solver page or the repository brand.
 
-Deep plum enamel, rose luminous seams, dimensional moon and star ornaments, a silver-lilac moving claw and warm prizes establish the scene. The surrounding interface uses the same plum family with one clear rose action. The familiar control layout and compact interface typography remain; no new display-font identity was approved.
+Deep plum enamel, rose luminous seams, dimensional moon and star ornaments, a silver-lilac moving claw and a dense pile of warm prizes establish the scene. One fixed cabinet contains 30 toy instances spanning all 16 Nai-family identities; there is no lineup selector. The surrounding interface uses the same plum family with one clear rose action. Compact interface typography remains; no new display-font identity was approved.
 
 The cabinet housing and ornaments are decorative meshes. Toy materials suggest plush, while MuJoCo still owns rigid-body poses and contact. WebGL is the public renderer; local OVRTX receives exported scene materials and native pose snapshots. Rendering, replay and material appearance do not establish physical accuracy. Motion follows native state or an explicit replay/inspection command, with no ambient interface animation.
 
 **Key Characteristics:**
 
 - Plum enclosure with rounded physical edges and rose luminous seams.
-- Warm textured toy models, a silver-lilac claw and an unmistakable gold chute.
+- Thirty enlarged textured toys in a gravity-driven pile, a complete silver-lilac claw and a raised gold-rimmed chute.
 - Quiet bordered controls, visible input focus and scene-independent caption backing.
 - One aiming view; synchronized comparison views share camera and time.
 
@@ -149,13 +149,15 @@ At 480px and below, the interface title is 24px, the primary action becomes 23px
 
 ## Layout
 
-The page is centered at a maximum width of 1160px with 24px outer padding. The ordinary enclosure places a flexible scene beside a 220px control column. Its canvas fills the column height with a 480px minimum, allowing the taller 16-prize control inventory to determine desktop height.
+The page is centered at a maximum width of 1160px with 24px outer padding. The ordinary enclosure places a flexible scene beside a 220px control column. Its canvas fills the column height with a 480px minimum. Collection portraits sit below the enclosure and round feedback, so the inventory no longer determines the control-column height.
 
-At 760px and below, outer padding becomes 16px, the scene moves above controls and the canvas is 390px tall. At 480px and below, outer padding becomes 12px, the canvas is 350px tall, the D-pad and primary action sit side by side, and grouped portraits form a single row. Direction targets are at least 46px high and the primary action is 82px high in this narrow layout. Secondary controls retain a 44px minimum; selects have a 40px minimum.
+At 760px and below, outer padding becomes 16px, the scene moves above controls and the canvas is 390px tall. At 480px and below, outer padding becomes 12px, the canvas is 350px tall and the D-pad and primary action sit side by side. Direction targets are at least 46px high and the primary action is 82px high in this narrow layout. Secondary controls retain a 44px minimum; selects have a 40px minimum.
+
+The collection inventory uses eight columns on desktop and four columns at 760px and below. Its block has 20px top and 28px bottom margins, with 14px row gaps and 10px column gaps; narrow screens at 480px and below reduce the column gap to 6px and place each portrait above its name and count. These local inventory measurements do not change the shared spacing tokens.
 
 Comparison mode uses the full enclosure width. At scene-container widths of 700px or more, three synchronized views sit side by side in a 440px-high canvas. Below 700px they stack in a 1080px-high canvas. This is a container breakpoint, not a page-width assumption. Comparison controls wrap underneath; aim controls and the collection inventory are hidden during comparison.
 
-Spacing uses compact 5–8px internal gaps and repeated 12–24px group, panel and page spacing. The 19px by 17px desktop control padding is an existing local fit, not a new spacing-system increment. The camera adjusts its field of view and position for compact aspects to retain the complete cabinet in the ordinary overview; portrait inspection and top view intentionally change that composition.
+Spacing uses compact 5–8px internal gaps and repeated 12–24px group, panel and page spacing. The 19px by 17px desktop control padding is an existing local fit, not a new spacing-system increment. The ordinary camera targets the prize pile and complete claw, with field of view and position adjusted for compact aspects. The lower collection well intentionally extends outside this play-bay framing. Portrait inspection and top view provide alternate compositions; fitting the full cabinet base is no longer an overview requirement.
 
 ## Elevation & Depth
 
@@ -171,7 +173,9 @@ OVRTX imports exported base color, roughness, metallicity, emission and base-col
 
 The enclosure has softly rounded corners; buttons, selects and caption backings use smaller radii from the token set. Borders remain thin and structural. The direction icons are inline SVG paths with text labels, not Unicode arrow glyphs.
 
-The cabinet uses rounded boxes, beveled extruded crescent/star silhouettes and a cat-ear/moon claw hub. These objects are authored geometry; source settings include a common rounded-box radius of 0.008 m with smaller seams and trim. Exact object dimensions remain in `src/claw-cabinet.ts`, not in a global CSS shape scale. The open front and unblocked gold chute are functional parts of the scene composition.
+The cabinet uses rounded boxes, beveled extruded crescent/star silhouettes and a cat-ear/moon claw hub. These objects are authored geometry; source settings include a common rounded-box radius of 0.008 m with smaller seams and trim. Exact object dimensions remain in `src/claw-cabinet.ts`, not in a global CSS shape scale. The open front, packed tray and gold-rimmed chute are functional parts of the scene composition.
+
+The current source applies `TOY_SCALE = 1.6` to both loaded visual meshes and native collision meshes. Thirty instances begin at ten horizontal positions across three vertical spawn layers; gravity and contact determine their subsequent arrangement. The enlarged toy scale and layered initialization support the requested overlapping pile instead of separated miniature prizes on an empty floor. `CLAW_SCALE = 1.35` enlarges the articulated claw geometry, aim ring and hub charm. The chute lip is raised to 0.18 m and the gold rim follows it. These are scoped geometry settings, not CSS tokens or a claim that the resulting pile and grasp behavior have passed validation.
 
 ## Components
 
@@ -181,7 +185,7 @@ The rose primary button carries Drop/Re-aim and changes its visible text with th
 
 ### Inputs / Fields
 
-Native selects choose lineup, iteration cap, renderer and replay speed. They use quiet plum, a thin border, rounded corners and visible focus. The replay range remains a native range input with the rose accent and a 28px minimum interaction height; its disabled appearance is 0.5 opacity. No custom text-entry field is introduced by this surface.
+Native selects choose iteration cap, renderer and replay speed; the fixed 30-prize mixture has no selector. They use quiet plum, a thin border, rounded corners and visible focus. The replay range remains a native range input with the rose accent and a 28px minimum interaction height; its disabled appearance is 0.5 opacity. No custom text-entry field is introduced by this surface.
 
 ### Cards / Containers
 
@@ -189,7 +193,7 @@ One bordered scene/control enclosure carries the game; the interface is not a co
 
 ### Collection and inspection
 
-Portraits identify the character assets and open an inspection of an actual model. A lineup groups repeated character kinds under one portrait with collected/available counts; a completed group receives the rose outline. The portrait image is an identity aid, not a substitute for the in-scene 3D mesh. Asset provenance stays in `src/assets/README.md` and the corresponding manifest.
+Portraits identify the character assets and open an inspection of an actual model. The fixed mixture groups its 30 instances into all 16 character identities below the machine, with collected/available counts under each identity; a completed group receives the rose outline. The whole collection block is hidden during comparison. New cabinet resets and rearranges the same mixture rather than selecting another lineup. The portrait image is an identity aid, not a substitute for the in-scene 3D mesh. Asset provenance stays in `src/assets/README.md` and the corresponding manifest.
 
 ### Navigation and explanation
 
@@ -197,7 +201,7 @@ A quiet footer link reaches the older simple-scene comparison. Teaching sections
 
 ### Motion and renderer status
 
-No CSS transitions or keyframe animations are defined for the claw interface. Camera inspection and top-view commands apply direct view changes. The moving claw, toys, trolley and cable follow native transforms; synchronized replay displays recorded poses on a shared timeline with explicit pause and speed controls. Hidden-page lifecycle pauses activity. The existing reduced-motion rule disables smooth scrolling; it does not claim to stop simulation or provide an alternative reduced-motion gameplay mode.
+No CSS transitions or keyframe animations are defined for the claw interface. Camera inspection and top-view commands apply direct view changes. The moving claw, toys, trolley and cable follow native transforms; synchronized replay displays recorded poses on a shared timeline with explicit pause and speed controls. Layered spawn positions initialize the cabinet; ongoing gravity and contact produce motion. The aim ring follows a downward native ray hit on toy collision geometry. At Drop, the descent target is derived from that surface and frozen into the shared start state rather than continuously tracking or attaching to a toy. Hidden-page lifecycle pauses activity. The existing reduced-motion rule disables smooth scrolling; it does not claim to stop simulation or provide an alternative reduced-motion gameplay mode.
 
 A stale local RTX image is hidden and WebGL becomes visible with an explicit status. A disconnected service also exposes WebGL and a message. Retain that truthful fallback rather than displaying an old image as a current simulation frame.
 
@@ -206,8 +210,8 @@ A stale local RTX image is hidden and WebGL becomes visible with an explicit sta
 ### Do:
 
 - **Do** preserve the plum, rose, silver-lilac and warm-gold material roles within the claw surface.
-- **Do** fit the complete cabinet in the ordinary overview and keep the prize chute visibly open.
-- **Do** show grouped portraits with collected/available counts; the catalog has 16 characters and each curated lineup has 16 toy instances across six character kinds.
+- **Do** frame the enlarged prize pile and complete claw prominently; let the lower collection well extend below the overview while retaining the gold chute cue.
+- **Do** keep one fixed mix of 30 toy instances spanning all 16 identities, with grouped collection counts below the machine and no lineup selector.
 - **Do** label the active renderer and visible WebGL fallback, and keep native outcome claims separate from appearance.
 
 ### Don't:

@@ -3,7 +3,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { loadPhysics } from "./mujoco-loader";
 import { loadToyModels, disposeMeshes } from "./claw-meshes";
 import { toyModelUrls } from "./claw-model-urls";
-import { STEP, BIN, type ClawSnapshot, type MoveAxis } from "./claw-task";
+import { STEP, BIN, CLAW_SCALE, CHUTE_LIP, type ClawSnapshot, type MoveAxis } from "./claw-task";
 
 import { ClawComparison, type ClawFrame } from "./claw-comparison";
 import type { ClawTask } from "./claw-task";
@@ -38,7 +38,7 @@ export class ClawLab {
   private compactView = false;
   private topView = false;
   private angledFov = 37;
-  private normalView: [number, number, number] = [0.35, -1.15, 0.65];
+  private normalView: [number, number, number] = [0.45, -1.25, 0.63];
   private rtx?: ClawRtx;
 
   private constructor(
@@ -57,7 +57,7 @@ export class ClawLab {
     this.camera.up.set(0, 0, 1);
     this.camera.position.set(...this.normalView);
     this.controls = new OrbitControls(this.camera, canvas);
-    this.controls.target.set(0, 0, 0.13);
+    this.controls.target.set(0, 0, 0.20);
     this.controls.enablePan = false;
     this.controls.minDistance = 0.25;
     this.controls.maxDistance = 1.65;
@@ -98,7 +98,7 @@ export class ClawLab {
     );
     this.cable.rotation.x = Math.PI / 2;
     this.scene.add(this.cable);
-    const ring = new THREE.RingGeometry(0.035, 0.037, 48);
+    const ring = new THREE.RingGeometry(0.035 * CLAW_SCALE, 0.037 * CLAW_SCALE, 48);
     this.aim = new THREE.Mesh(
       ring,
       new THREE.MeshStandardMaterial({
@@ -223,7 +223,7 @@ export class ClawLab {
       Math.max(1, r.width / columns) / Math.max(1, r.height / rows);
     const compact =
       this.comparison.started || r.width < 600 || this.camera.aspect < 1.55;
-    // Fit the full gantry and deep prize bin, even below a square aspect ratio.
+    // Frame the pile and complete claw; the deep collection well extends below the play bay.
     this.angledFov = compact
       ? THREE.MathUtils.radToDeg(
           2 *
@@ -235,7 +235,7 @@ export class ClawLab {
       : 37;
     if (compact !== this.compactView) {
       this.compactView = compact;
-      this.normalView = compact ? [0, -1.3, 0.6] : [0.35, -1.15, 0.65];
+      this.normalView = compact ? [0, -1.3, 0.63] : [0.45, -1.25, 0.63];
       this.setTopView(this.topView);
     }
     this.camera.fov = this.topView ? 37 : this.angledFov;
@@ -303,7 +303,7 @@ export class ClawLab {
     this.topView = top;
     this.camera.fov = top ? 37 : this.angledFov;
     this.camera.updateProjectionMatrix();
-    this.controls.target.set(0, 0, !top ? -0.07 : 0.13);
+    this.controls.target.set(0, 0, !top ? 0.20 : 0.13);
     this.camera.position.set(
       ...((top ? [0, -0.03, 1.15] : this.normalView) as [
         number,
@@ -409,13 +409,17 @@ export class ClawLab {
     const hub = this.geoms.get(task.hub)!.position;
     this.charm.position.copy(hub);
     this.charm.visible = !this.topView;
-    this.trolley.position.set(hub.x, hub.y, 0.35);
+    this.trolley.position.set(hub.x, hub.y, 0.51);
     this.overhead[0]!.position.y = hub.y;
-    const length = Math.max(0.01, 0.335 - hub.z);
+    const length = Math.max(0.01, 0.495 - hub.z);
     this.cable.scale.y = length;
     this.cable.position.set(hub.x, hub.y, hub.z + length / 2);
     this.aim.position.x = hub.x;
     this.aim.position.y = hub.y;
+    if (!this.comparison.started) {
+      const overChute = Math.abs(hub.x - BIN.x) < BIN.half && Math.abs(hub.y - BIN.y) < BIN.half;
+      this.aim.position.z = Math.max(task.surfaceHeight(hub.x, hub.y), overChute ? CHUTE_LIP : 0) + .004;
+    }
     this.aim.visible = !this.comparison.started;
     this.renderer.render(this.scene, this.camera);
   }

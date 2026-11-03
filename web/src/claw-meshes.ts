@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { TOY_SCALE } from "./claw-toys";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 /** Release decoded image textures as well as GPU resources, including failed loads. */
@@ -47,6 +48,7 @@ export async function loadToyModels(urls: readonly string[]) {
       throw new Error("Unreachable asset state");
     const model = result.value.scene;
     model.rotation.x = Math.PI / 2;
+    model.scale.setScalar(TOY_SCALE);
     model.traverse((node) => {
       if (!(node instanceof THREE.Mesh)) return;
       node.castShadow = node.receiveShadow = true;

@@ -4,12 +4,11 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { CATALOG, CABINETS, cabinetFromSearch, toysForCabinet } from "../src/claw-toys.ts";
+import { CATALOG, TOYS, TOY_SCALE } from "../src/claw-toys.ts";
 
-test("every character is selectable and its shipped mesh matches recorded provenance", () => {
+test("every character is present and its shipped mesh matches recorded provenance", () => {
   assert.equal(CATALOG.length, 16);
-  assert.equal(new Set(Object.values(CABINETS).flatMap(c => c.toys)).size, 16);
-  assert.equal(cabinetFromSearch("?cabinet=invalid"), "classic");
+  assert.equal(new Set(TOYS.map(t => t.kind)).size, 16);
   const root = new URL("../src/assets/nai/", import.meta.url);
   const manifest = JSON.parse(readFileSync(new URL("manifest.json", root)));
   const collisions = JSON.parse(readFileSync(new URL("collisions.json", root)));
@@ -22,33 +21,33 @@ test("every character is selectable and its shipped mesh matches recorded proven
   }
 });
 
-test("all cabinets have sixteen separate spawn slots, outside the prize chute", () => {
+test("thirty nonpenetrating spawn poses form three layers in every reshuffle", () => {
   const collisions = JSON.parse(readFileSync(new URL("../src/assets/nai/collisions.json", import.meta.url)));
-  for (const key of Object.keys(CABINETS)) {
-    const toys = toysForCabinet(key);
-    assert.equal(toys.length, 16);
-    assert.equal(new Set(toys.map(t => `${t.x},${t.y}`)).size, 16);
-    for (let layout = 0; layout < 16; layout++) {
-      const bounds = toys.map((toy, i) => {
-        const slot = toys[(i + layout) % toys.length];
-        const parts = collisions[CATALOG.findIndex(t => t.kind === toy.kind)];
-        const xs = parts.flatMap(p => p.vertices.filter((_, j) => j % 3 === 0));
-        const ys = parts.flatMap(p => p.vertices.filter((_, j) => j % 3 === 1));
-        return [slot.x + Math.min(...xs), slot.x + Math.max(...xs), slot.y + Math.min(...ys), slot.y + Math.max(...ys)];
+  assert.equal(TOYS.length, 30);
+  assert.equal(new Set(TOYS.map(t => `${t.x},${t.y},${t.z}`)).size, 30);
+  assert.equal(new Set(TOYS.map(t => t.z)).size, 3);
+  for (let layout = 0; layout < TOYS.length; layout++) {
+    const bounds = TOYS.map((toy, i) => {
+      const slot = TOYS[(i + layout) % TOYS.length];
+      const parts = collisions[CATALOG.findIndex(t => t.kind === toy.kind)];
+      return [slot.x, slot.y, slot.z].flatMap((center, axis) => {
+        const values = parts.flatMap(p => p.vertices.filter((_, j) => j % 3 === axis));
+        return [center + Math.min(...values) * TOY_SCALE, center + Math.max(...values) * TOY_SCALE];
       });
-      for (const [i, a] of bounds.entries()) {
-        assert.ok(a[0] >= -.28 && a[1] <= .28 && a[2] >= -.205 && a[3] <= .205);
-        assert.ok(a[0] >= -.15 || a[2] >= -.07, `${key}/${layout}/${i} intersects chute`);
-        for (const b of bounds.slice(i + 1)) assert.ok(a[1] < b[0] || b[1] < a[0] || a[3] < b[2] || b[3] < a[2], `${key}/${layout}: overlapping toys`);
-      }
+    });
+    for (const [i, a] of bounds.entries()) {
+      assert.ok(a[0] >= -.31 && a[1] <= .31 && a[2] >= -.26 && a[3] <= .26 && a[4] > 0);
+      assert.ok(a[0] >= -.13 || a[2] >= -.075, `${layout}/${i} intersects chute`);
+      for (const b of bounds.slice(i + 1))
+        assert.ok([0, 2, 4].some(axis => a[axis + 1] < b[axis] || b[axis + 1] < a[axis]), `${layout}: penetrating spawn`);
     }
   }
 });
 
-for (const cabinet of ["friends", "curios"]) {
-  test(`${cabinet}: settled native toys and synchronized three-solver grab remain finite`, () => {
-    const output = execFileSync(process.execPath, ["--experimental-strip-types", fileURLToPath(new URL("fixtures/cabinet-round.mjs", import.meta.url)), cabinet], { timeout: 90000, encoding: "utf8" });
-    assert.match(output, new RegExp(`"cabinet":"${cabinet}"`));
+for (const layout of [0, 1, 29]) {
+  test(`layout ${layout}: thirty prizes settle into a native pile and three-solver grabs remain finite`, () => {
+    const output = execFileSync(process.execPath, ["--experimental-strip-types", fileURLToPath(new URL("fixtures/cabinet-round.mjs", import.meta.url)), String(layout)], { timeout: 120000, encoding: "utf8" });
+    assert.match(output, new RegExp(`"layout":${layout}`));
     console.log(output.trim());
   });
 }
