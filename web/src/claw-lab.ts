@@ -246,7 +246,8 @@ export class ClawLab {
     const rows = this.comparison.started && columns === 1 ? 3 : 1;
     this.camera.aspect =
       Math.max(1, r.width / columns) / Math.max(1, r.height / rows);
-    const compact = r.width < 600 || this.camera.aspect < 1.55;
+    const compact =
+      this.comparison.started || r.width < 600 || this.camera.aspect < 1.55;
     // Fit the full gantry and deep prize bin, even below a square aspect ratio.
     this.angledFov = compact
       ? THREE.MathUtils.radToDeg(
