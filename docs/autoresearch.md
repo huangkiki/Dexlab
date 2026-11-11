@@ -63,29 +63,46 @@ Keep source/environment/configuration frozen through each batch, retain failed a
 
 ### Select the test runtime explicitly
 
-Run tests through the shared entry point, choosing the profile for the intended environment:
+Choose checks for the changed behavior before running them. The developer selects the affected tests and explains coverage in the PR; this is not an extra user approval step. Direct chat development needs no new Issue. `check` compares the complete candidate tree against the merge-base of `origin/main`, including commits, staged/unstaged edits, deletions, renames and untracked files. Refresh the base before final delivery; `--base REF` selects another reviewed base.
 
 ```bash
-# Historical reproduction environment (MuJoCo 3.11.0)
-.venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
-# Candidate environment with MuJoCo package/native 3.17.0
-.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.17.0
+# Prose/media: diff and strict bilingual build, no engine or unit preflight.
+python scripts/autoresearch.py check .
+# Tool/scorer change: run the affected regressions without global MuJoCo preflight.
+python scripts/autoresearch.py check . --test test_apple_admission.py --test test_official_wheels.py
+# A quick development check, without the final documentation build.
+python scripts/run_tests.py --offline --pattern test_autoresearch.py
+# Native apple change: relevant tests and one affected backend.
+DEXLAB_MUJOCO_PROFILE=historical-3.11.0 python scripts/autoresearch.py check . --test test_sdf_acceptance.py --backend mujoco
+# Shared apple runtime/recording or explicit complete qualification.
+DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 python scripts/autoresearch.py check . --full
 ```
 
-The CLI option overrides `DEXLAB_MUJOCO_PROFILE`; if neither is set, the command stops before discovering tests. It reports the interpreter, reviewed source, profile and package/native versions, then runs the suite with absolute source paths from this checkout. Missing or mismatched runtimes fail before tests start. `--check-only` performs only this preflight; `--pattern test_NAME.py` selects a focused test file and does not replace the full submission gate.
+Use an interpreter with the dependencies for the selected tests/build; `SUPERDEX_PYTHON` overrides the check interpreter. No packages are installed or upgraded. Ordinary tests run the current checkout through explicit source paths and can reuse a compatible environment. `--offline` skips only the global native preflight, not test failures or the selected tests' own dependencies; it requires a specific filename pattern and rejects an empty match. Native/full validation retains an explicit MuJoCo profile, the isolated editable-source check and early package/native identity validation. `run_tests.py --check-only --mujoco-profile PROFILE` checks that runtime without tests.
 
-`autoresearch.py check` and `submit` use this entry point. Set `DEXLAB_MUJOCO_PROFILE` explicitly for those commands; candidate submission also still requires `DEXLAB_QUALIFICATION_WHEELS` and the isolated editable-source check. No package is installed or changed, the engine's historical default remains unchanged, and a matching profile does not grant formal experiment qualification. Pure prose may reuse an unchanged dependency environment read-only; executable submission still requires its own correctly installed worktree source.
-
-Candidate submission checks the editable source, selected profile, current official stable versions and wheel identity before the full test suite and either native episode. Final admission still rechecks releases and raw records; preflight success is not task qualification. A new upstream release rejects an outdated environment before physics, with installed and current stable versions in the error. Qualify it in a separate environment and preserve old records and profiles. Resource isolation does not inherit arbitrary environment variables: put `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` inside the actual child command after `bounded_run.py ... --`.
-
-The thin-shell adapter accepts matching SuperDex 1.0.0 or 1.0.1 FP64 packages and records the installed version. Its free-fall/reset regression checks basic compatibility; this does not requalify historical cloth campaigns or establish equivalence between releases. New MuJoCo candidate profiles retain the existing discrete flex integrator; the historical 3.11 profile retains implicitfast.
+`check` and `submit` automatically recognize prose/media, changed test files and the two workflow entrypoints. Other executable or machine-consumed changes require explicit `--test` patterns; an unknown change stops with its filenames rather than guessing coverage. Repeat `--backend` for a paired apple check; `--full` selects the entire unit suite and both 14-second apple episodes. Selected tests may require additional task-specific commands or existing-record rescoring, documented in the PR. The apple gate cannot establish acceptance for cloth, LIBERO, a browser task or another task. Local and remote submission use the same selection, exact candidate tree and base, and the PR lists only completed checks.
 
 | Change | Required validation before eligible delivery |
 | --- | --- |
-| Pure prose README/AGENTS/report changes | Full unit suite, strict bilingual site build, `git diff --check`, entire-diff review; bind actual base/head/tree and verify reviewed source imports. Direct Git/GitHub submission is allowed only after that gate. |
-| Executable code, generator, machine-consumed metadata, workflow/build/dependency, model/controller/task/protocol/scorer/acceptance changes | Existing `scripts/autoresearch.py submit`, complete tests, both full 14-second backends and independent acceptance, official/raw identity checks, strict bilingual docs and exact-tree review. A mixed PR uses this stricter path. |
+| Prose, links, architecture image | Diff/link/render review as relevant and strict bilingual build; no unit or physics environment requirement. |
+| Workflow tools, build/CI, frontend | Affected regressions and failure/recovery scenarios; frontend tests for changed frontend/test inputs. No unrelated apple episodes. |
+| Offline scoring or record analysis | Semantic negative cases and rescoring of applicable existing records. Run new native evidence only when changed observations or execution semantics require it. |
+| Native model/controller/solver/recorder | Relevant native task/backend and independent scoring; shared apple paths require both apple backends. Preserve the task's frozen acceptance scope. |
+| Engine upgrade or a new formal comparison | Separate environment, official version/wheel audit, complete applicable task/engine qualification and frozen protocol. Preserve the existing baseline. |
 
-A filename or “documentation” label does not determine behavioral scope. Workflow prose also requires authorization/dependency/recovery/failure scenario review against a live dry run. Full backend tests must never be claimed for a prose-only check. Preserve each failure; missing qualified runtime or checks keeps a candidate draft and unmerged. Draft review is not scientific delivery. [Original gate details](autoresearch-2026-10-10.md#documentation-only-delivery) remain binding.
+All deliveries retain `git diff --check`, strict bilingual docs, exact-tree review and applicable CI. Direct Git/GitHub delivery is allowed for chat tasks; Issue submissions use `submit` with the same selection options. Mixed changes take the union of relevant checks. These rules replace the blanket full-suite/dual-engine gates in the historical guide; scientific thresholds, author admission, pause state and merge protections remain unchanged.
+
+### Frozen baseline and release upgrades
+
+Candidate native validation still requires `DEXLAB_QUALIFICATION_WHEELS`. Its first `apple_admission --preflight` collects official stable metadata and checks actual loaded packages/native payloads against official wheels. It writes a dated runtime receipt before any episode; this receipt is not task qualification. Set `DEXLAB_RUNTIME_PREFLIGHT=/private/path/to/preflight.json` on later native checks to reuse that official audit, while rechecking the installed runtime and wheel bytes offline. Without a saved receipt, a candidate native check performs a fresh release audit. Keep profiles and wheel archives for the intended environment; the scripts never replace it automatically.
+
+Final paired admission consumes the receipt produced before execution, independently rescores raw records, and verifies unchanged runtime/source. It does not query latest releases or reset the audit date. A new upstream release, elapsed day or offline registry cannot invalidate the frozen baseline. An altered runtime, wheel, source observation or failed physical check still fails. Use `apple_admission --check-latest` explicitly for a freshness report: a newer release labels the completed evidence as historical and calls for a separate upgrade qualification, without failing the completed batch. The formal benchmark's new-batch admission retains its existing fresh qualification rule; resumed batches retain their original freeze.
+
+Resource isolation does not inherit arbitrary environment variables: pass the required profile, wheel and saved-preflight variables in the actual child command after `bounded_run.py ... --`. The existing native resource and attempt-isolation rules remain in effect.
+
+### Lessons from closed Issues
+
+[#241](https://github.com/huangkiki/Dexlab/issues/241) justified early native-profile checks, but not requiring MuJoCo for ordinary Python tests. [#202](https://github.com/huangkiki/Dexlab/issues/202) exposed release freshness changing during a passing run: freeze it before execution and separate upgrades. Keep the useful protections from [#243](https://github.com/huangkiki/Dexlab/issues/243) (unique output attempts), [#245](https://github.com/huangkiki/Dexlab/issues/245) (environment preservation) and [#184](https://github.com/huangkiki/Dexlab/issues/184) (resume failed publication without repeating unchanged validation). The documentation CI still builds the deployable frontend, but runs its expensive regressions only when `web/` or the documentation workflow changes, or on manual dispatch.
 
 ### Recover an existing PR branch
 
@@ -95,7 +112,7 @@ Restore the original branch at `.autoresearch/worktrees/issue-N`; do not create 
 python3 scripts/autoresearch.py submit 177 --existing-pr 180 --summary-file /path/to/review.md
 ```
 
-Recovery verifies the Issue authorization, fetch/push repository, PR ownership, `main` base, branch and remote-head ancestry. Multiple claiming PRs, unrelated dirty files, foreign remotes and identity changes during verification stop publication. The complete gate and before/after tree checks still run; the original PR is updated and its actual head/base are read back. Ordinary standard-branch submissions continue to commit their reviewed changes after validation.
+Recovery verifies the Issue authorization, fetch/push repository, PR ownership, `main` base, branch and remote-head ancestry. Multiple claiming PRs, unrelated dirty files, foreign remotes and identity changes during verification stop publication. The selected gate and before/after tree checks still run; the original PR is updated and its actual head/base are read back. Ordinary standard-branch submissions continue to commit their reviewed changes after validation.
 
 New PR creation uses the explicit repository API and pushed branch, without asking the packaged CLI to discover a local Git checkout. A publication error does not erase successful validation or make the whole wrapper successful. Preserve the failure, inspect remote branch/PR state before retrying, and recover only the unfinished publication step when the reviewed head/tree and base still match the completed checks. Changed source or a changed combined tree needs the applicable gate again. This workflow changes no host access controls, scientific thresholds or scheduling state. [Recovery defect and acceptance](https://github.com/huangkiki/Dexlab/issues/184).
 

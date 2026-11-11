@@ -181,6 +181,35 @@ class OfficialMetadataRetryTests(unittest.TestCase):
 
 
 class RuntimePreflightTests(unittest.TestCase):
+    def test_cli_preserves_successful_admission_when_explicit_freshness_check_finds_new_release(self):
+        from dexlab.apple_admission import main
+        runtime = {"installed": {"mujoco": "3.17.0"}}
+        frozen = {"runtime": runtime}
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for backend in ("mujoco", "superdex"):
+                (root / backend).mkdir()
+                (root / backend / "qualification-observation.json").write_text(json.dumps({
+                    "backend": backend, "profile": {"backend": backend},
+                }))
+            preflight = root / "preflight.json"
+            preflight.write_text(json.dumps({"frozen_at": "2026-11-10T10:00:00+00:00"}))
+            output = root / "admission.json"
+            argv = ["apple_admission", "--mujoco", str(root / "mujoco"),
+                    "--superdex", str(root / "superdex"), "--wheel-dir", str(root / "wheels"),
+                    "--runtime-preflight", str(preflight), "--output", str(output), "--check-latest"]
+            with patch.object(sys, "argv", argv), \
+                 patch("dexlab.benchmark.source_hashes", return_value={"task.py": "frozen"}), \
+                 patch("dexlab.apple_admission.admit_records", return_value=frozen) as admit, \
+                 patch("dexlab.apple_admission.observe_runtime", return_value=runtime), \
+                 patch("dexlab.apple_admission.publication_status", return_value={
+                     "classification": "historical_new_qualification_required"}):
+                main()
+            saved = json.loads(output.read_text())
+            self.assertEqual(saved["admission"], frozen)
+            self.assertEqual(saved["publication"]["classification"], "historical_new_qualification_required")
+            self.assertEqual(admit.call_args.kwargs["preflight"], json.loads(preflight.read_text()))
+
     def row(self, filename='mujoco.whl'):
         from datetime import datetime, timezone
         return dict(package='mujoco', version='3.17.0',

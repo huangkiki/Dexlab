@@ -63,39 +63,56 @@ python3 scripts/autoresearch.py next --dry-run
 
 ### 明确选择测试运行时
 
-通过统一入口运行测试，选择与目标环境对应的配置：
+先按改动行为选择检查，由开发者决定相关测试并在 PR 说明覆盖范围，不增加用户确认步骤。直接聊天开发不需要新建 Issue。`check` 对比完整候选文件树与 `origin/main` 的 merge-base，覆盖已提交、暂存／未暂存、删除、重命名和未跟踪文件。最终交付前刷新 base；`--base REF` 可指定另一个已审查基点。
 
 ```bash
-# 历史复现环境（MuJoCo 3.11.0）
-.venv/bin/python scripts/run_tests.py --mujoco-profile historical-3.11.0
-# MuJoCo 包和原生库均为 3.17.0 的候选环境
-.venv/bin/python scripts/run_tests.py --mujoco-profile qualification-3.17.0
+# 文字／图片：差异与严格双语构建，不启动引擎或单测预检。
+python scripts/autoresearch.py check .
+# 工具／评分修改：相关回归，不做全局 MuJoCo 预检。
+python scripts/autoresearch.py check . --test test_apple_admission.py --test test_official_wheels.py
+# 开发中快速检查，不包含最终文档构建。
+python scripts/run_tests.py --offline --pattern test_autoresearch.py
+# 原生 apple 修改：相关测试与受影响的一个后端。
+DEXLAB_MUJOCO_PROFILE=historical-3.11.0 python scripts/autoresearch.py check . --test test_sdf_acceptance.py --backend mujoco
+# 共享 apple 运行／记录路径或显式完整资格验证。
+DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 python scripts/autoresearch.py check . --full
 ```
 
-命令行参数优先于 `DEXLAB_MUJOCO_PROFILE`；两者均未设置时，在发现测试前停止。入口输出解释器、审查源码、配置和包／原生库版本，并用本工作树的绝对源码路径运行测试。运行时缺失或版本不匹配会在测试启动前报错。`--check-only` 只做预检；`--pattern test_NAME.py` 可选择单个测试文件，不能代替完整提交门禁。
+使用具备所选测试／构建依赖的解释器；`SUPERDEX_PYTHON` 可覆盖检查解释器。脚本不安装或升级包。普通测试通过明确源码路径使用当前工作树，可复用兼容环境。`--offline` 仅省略全局原生预检，不忽略测试失败，也不免除所选测试自身依赖；必须指定文件模式，空匹配会失败。原生／完整验证保留明确 MuJoCo profile、隔离 editable 源码核验和包／原生版本预检。`run_tests.py --check-only --mujoco-profile PROFILE` 只检查运行时。
 
-`autoresearch.py check` 和 `submit` 共用此入口，运行它们时须明确设置 `DEXLAB_MUJOCO_PROFILE`；候选环境提交仍须提供 `DEXLAB_QUALIFICATION_WHEELS` 并通过隔离的 editable 源码检查。入口不安装或更改软件包，不改变引擎的历史默认值，配置匹配也不代表正式实验资格。纯文字检查可只读复用未改动的依赖环境；代码提交仍须正确安装当前工作树源码。
+`check` 和 `submit` 自动识别文字／图片、修改的测试文件及两个工作流入口。其他可执行或机器读取内容必须显式给出 `--test`；未知改动会列出文件后停止，避免猜测覆盖。重复 `--backend` 可选择 apple 双后端，`--full` 执行全量单测及两个完整 14 秒 apple 回合。必要的任务专用命令或历史记录重评分仍须执行并在 PR 记录；apple 门禁不能证明布料、LIBERO、浏览器或其他任务的验收。远端和本地提交沿用同一选择、候选文件树与 base，PR 仅列实际完成的检查。
 
-候选提交会先检查 editable 源码、所选 profile、实时官方稳定版本及 wheel 身份，然后才启动全量测试和两后端运行。结束时仍重新核验官方发行与原始记录；预检通过不等于物理任务已合格。若上游发布新版本，旧环境会在实验前退出，并显示已安装版本与当前稳定版本；在独立环境完成新资格验证，保留旧记录和历史 profile。资源隔离入口不继承任意环境变量，请把 `env DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 DEXLAB_QUALIFICATION_WHEELS=...` 放在 `bounded_run.py ... --` 后的实际子命令中。
-
-薄壳适配器接受版本相同的 SuperDex 1.0.0 或 1.0.1 FP64 软件包，并记录实际安装版本。自由落体／reset 回归只检查基本兼容性，不重新授予历史布料实验资格，也不证明不同发行版等价。MuJoCo 新候选 profile 沿用现有 discrete flex 积分器，历史 3.11 profile 保留 implicitfast。
-
-| 改动 | 合格交付前需要的验证 |
+| 改动 | 合格交付所需验证 |
 | --- | --- |
-| 纯文字 README／AGENTS／报告 | 完整单测、严格双语构建、`git diff --check`、全部 diff 审查；绑定真实 base/head/tree，核实导入的是审查源码。完成后才可直接 Git/GitHub 提交。 |
-| 代码、生成器、机器读取元数据、工作流／构建／依赖、模型／控制／任务／协议／评分／阈值 | 使用已有 `scripts/autoresearch.py submit`：完整测试、双后端各完整 14 秒与独立验收、官方／原始身份核查、严格双语构建和精确文件树审查。混合 PR 从严。 |
+| 文字、链接、架构图 | 相应差异／链接／渲染审查及严格双语构建；不要求单测或物理环境。 |
+| 工作流工具、构建／CI、前端 | 相关回归及失败／恢复场景；前端输入变化才跑前端测试，不附加无关 apple 回合。 |
+| 离线评分或记录分析 | 语义负例及适用历史记录重评分；只有观测或执行语义变化确实需要时才补原生证据。 |
+| 原生模型／控制／求解器／记录器 | 对应任务／后端及独立评分；共享 apple 路径验证双后端，不缩减原任务冻结的验收范围。 |
+| 引擎升级或新正式对比 | 独立环境、官方版本／wheel 审计、完整适用任务／引擎资格验证与冻结协议，保留现有基线。 |
 
-按行为影响分类，不按扩展名或 documentation 标签。工作流文字还需对照真实 dry-run 审查授权、依赖、恢复与失败场景。纯文字检查不能冒充双后端通过。所有失败保留；缺合格运行时或必要门禁时，候选保持 Draft，不合并。草稿审查不是科学交付。[原始门禁细则](autoresearch-2026-10-10.zh-CN.md)继续约束执行。
+所有交付保留 `git diff --check`、严格双语构建、精确文件树审查和适用 CI。聊天任务可直接 Git/GitHub 交付，Issue 提交使用具有相同选择参数的 `submit`；混合改动取相关检查并集。本节替代历史指南中无条件全量单测／双引擎门禁，科学阈值、作者准入、暂停状态与合并保护不变。
+
+### 冻结基线与发行升级
+
+候选原生验证仍需 `DEXLAB_QUALIFICATION_WHEELS`。首次 `apple_admission --preflight` 获取官方稳定元数据，核验实际加载的包／原生载荷与官方 wheel，并在回合开始前保存带日期的运行时记录；预检不等于任务合格。后续原生检查设置 `DEXLAB_RUNTIME_PREFLIGHT=/private/path/to/preflight.json`，即可复用官方审计，同时离线重新核验当前运行时和 wheel 字节。未指定已有记录时，候选原生检查仍做新的发行审计。保留目标环境的 profile 和 wheel 文件，脚本不自动替换环境。
+
+最终双后端准入读取执行前保存的预检，独立重评原始记录并核验源码／运行时未变，不查询最新版本或刷新审计日期。上游新版、跨天或软件仓库离线不能否决冻结基线；运行时、wheel、源码观测变化或物理检查失败仍会拒绝。显式使用 `apple_admission --check-latest` 获取发行新鲜度报告：若出现新版，将已完成证据标记为历史版本，另行安排升级验证，但不否决该批次。正式 benchmark 的新批次入口保留现有新资格验证规则，恢复批次继续沿用原冻结状态。
+
+资源隔离不继承任意环境变量：将 profile、wheel 和已有预检变量放在 `bounded_run.py ... --` 后的实际子命令中。原生资源限制和独立输出尝试规则继续生效。
+
+### 已关闭 Issue 的反思
+
+[#241](https://github.com/huangkiki/Dexlab/issues/241) 说明原生 profile 应提前核对，但不能扩展为普通 Python 测试依赖 MuJoCo。[#202](https://github.com/huangkiki/Dexlab/issues/202) 暴露运行中发行版本变化的问题，应在执行前冻结，并将升级独立处理。保留 [#243](https://github.com/huangkiki/Dexlab/issues/243) 的输出尝试隔离、[#245](https://github.com/huangkiki/Dexlab/issues/245) 的环境保全和 [#184](https://github.com/huangkiki/Dexlab/issues/184) 的发布失败恢复，不重复未变化的验证。文档 CI 仍构建可部署前端，但仅在 `web/` 或文档工作流变化、以及手动触发时运行耗时前端回归。
 
 ### 恢复现有 PR 分支
 
-在 `.autoresearch/worktrees/issue-N` 恢复原分支，不为满足标准命名重复开 PR 或重命名原分支。先审查并在本地仅提交本项修改，使恢复工作树保持干净，再在正常资源约束内显式指定关联 PR，运行完整提交门禁：
+在 `.autoresearch/worktrees/issue-N` 恢复原分支，不为满足标准命名重复开 PR 或重命名原分支。先审查并在本地仅提交本项修改，使恢复工作树保持干净，再在正常资源约束内显式指定关联 PR，运行按范围选择的提交门禁：
 
 ```bash
 python3 scripts/autoresearch.py submit 177 --existing-pr 180 --summary-file /path/to/review.md
 ```
 
-恢复会核验 Issue 授权、拉取与推送仓库、PR 归属、`main` base、分支与远端 head 祖先关系。多个 PR 声明同一任务、无关脏文件、外部 remote 或验证中发生身份变化时停止发布。完整门禁和前后文件树检查仍会运行，更新原 PR 后读回实际 head/base。普通标准分支仍在验证后提交已审查的修改。
+恢复会核验 Issue 授权、拉取与推送仓库、PR 归属、`main` base、分支与远端 head 祖先关系。多个 PR 声明同一任务、无关脏文件、外部 remote 或验证中发生身份变化时停止发布。所选门禁和前后文件树检查仍会运行，更新原 PR 后读回实际 head/base。普通标准分支仍在验证后提交已审查的修改。
 
 新建 PR 使用明确仓库与已推送分支的 API，不要求打包安装的 CLI 自动发现本地 Git checkout。发布失败不会抹去已通过的验证，也不能把整条命令改报成功。保留失败记录，重试前先核对远端分支与 PR；仅当已审查 head/tree 和 base 仍匹配已完成检查时恢复未完成的发布步骤。源码或组合树变化后须重新运行适用门禁。此流程不更改主机访问权限、科学阈值或定时状态。[恢复缺口与验收](https://github.com/huangkiki/Dexlab/issues/184)。
 

@@ -69,6 +69,39 @@ class WheelIdentityTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'official distribution'):
             verify_official_wheel(self.wheel, **(self.arguments | {'official_sha256': '0' * 64}))
 
+    def test_frozen_admission_survives_new_release_and_age_but_rejects_runtime_drift(self):
+        from dexlab.apple_admission import admit_records, admit_runtime, COMMON_CHECKS
+        from datetime import timedelta
+
+        frozen_at = datetime.now(timezone.utc) - timedelta(days=3)
+        runtime = {"installed": {"fixture": "1.0"}, "native": {"fixture": "1.0"},
+                   "artifact_sha256": {"fixture": "2" * 64},
+                   "package_code_sha256": {"fixture": self.arguments["installed_code_sha256"]}}
+        row = {"package": "fixture", "version": "1.0", "checked_at": frozen_at.isoformat(),
+               "source": "https://pypi.org/pypi/fixture/json", "yanked": False,
+               "classifiers": [], "requires_dist": [],
+               "distribution_sha256": {self.wheel.name: self.digest()}}
+        preflight = {"runtime": runtime, "audit": [row], "frozen_at": frozen_at.isoformat(),
+                     "official_wheels": {"fixture": verify_official_wheel(self.wheel, **self.arguments)}}
+        profiles = {"fixture-profile": {"backend": "superdex"}}
+        evidence = {"raw_record_sha256": "3" * 64, "profile": profiles["fixture-profile"],
+                    "checks": {name: True for name in COMMON_CHECKS | {"fp64"}}}
+        with patch("dexlab.apple_admission.observe_runtime", return_value=runtime), \
+             patch("dexlab.apple_admission.refresh_inventory", side_effect=AssertionError("latest queried")), \
+             patch("dexlab.apple_admission.rescore_record", return_value=evidence) as scorer:
+            frozen = admit_records({"fixture-profile": "raw"}, profiles, {"task.py": "4" * 64},
+                                   wheel_dir=self.wheel.parent, preflight=preflight)
+            self.assertEqual(frozen["audit"], [row])
+            scorer.assert_called_once()
+            with patch("dexlab.apple_admission.observe_runtime", return_value={**runtime, "native": {"fixture": "2.0"}}):
+                with self.assertRaisesRegex(ValueError, "runtime changed"):
+                    admit_runtime(self.wheel.parent, preflight=preflight)
+            with self.assertRaisesRegex(ValueError, "Official wheel identity changed"):
+                admit_runtime(self.wheel.parent, preflight={**preflight, "official_wheels": {}})
+            with self.assertRaisesRegex(ValueError, "stale"):
+                admit_runtime(self.wheel.parent, preflight={**preflight, "frozen_at": datetime.now(timezone.utc).isoformat()})
+
+
     def test_self_consistent_rebuilt_install_not_enough(self):
         with self.assertRaisesRegex(ValueError, 'Installed code differs'):
             verify_official_wheel(self.wheel, **(self.arguments | {'installed_code_sha256': '0' * 64}))

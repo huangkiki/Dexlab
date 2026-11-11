@@ -394,7 +394,7 @@ def source_tree(worktree):
         return git("write-tree")
 
 
-def check_remote(worktree, destination, remote_state=None):
+def check_remote(worktree, destination, remote_state=None, **selection):
     """Run the same gate on a prepared SSH checkout, bound to the local source tree.
 
     The caller prepares the checkout/environment; this command never syncs over
@@ -405,7 +405,16 @@ def check_remote(worktree, destination, remote_state=None):
             or not directory.startswith("/") or "\n" in directory):
         raise SystemExit("Expected SSH_ALIAS:/absolute/check-out; use an SSH config alias")
     expected = source_tree(worktree)
-    arguments = ["python3", "scripts/autoresearch.py", "check", ".", "--expected-tree", expected]
+    plan = validation_plan(worktree, **selection)
+    arguments = ["python3", "scripts/autoresearch.py", "check", ".", "--expected-tree", expected,
+                 "--base", plan["base"]]
+    if plan["full"]:
+        arguments.append("--full")
+    else:
+        for pattern in plan["tests"]:
+            arguments += ["--test", pattern]
+        for backend in plan["backends"]:
+            arguments += ["--backend", backend]
     if remote_state is not None:
         state = Path(remote_state)
         if not state.is_absolute():
@@ -420,11 +429,83 @@ def check_remote(worktree, destination, remote_state=None):
         host, command, cwd=worktree)
     if source_tree(worktree) != expected:
         raise SystemExit("Local source changed during remote verification; rerun the gate")
-    return {"source_tree": expected, "checks": "full", "execution": "remote"}
+    return {"source_tree": expected, "checks": plan["checks"], "execution": "remote"}
 
 
-def check(worktree, resource_dir=None):
-    """Always verify both physical episodes; test logs stay inside the worktree."""
+# These are workflow tools, not simulation implementations. Unknown executable
+# changes require the developer to name their tests instead of guessing coverage.
+TOOL_TESTS = {
+    "scripts/autoresearch.py": "test_autoresearch.py",
+    "scripts/run_tests.py": "test_test_entrypoint.py",
+}
+
+
+def validation_plan(worktree, *, base="origin/main", tests=(), backends=(), full=False):
+    """Compare the complete candidate tree, including committed and untracked work."""
+    base = run("git", "merge-base", base, "HEAD", cwd=worktree, capture=True)
+    paths = subprocess.check_output(
+        ["git", "diff", "--name-only", "--no-renames", "-z", base, source_tree(worktree)],
+        cwd=worktree,
+    ).decode().split("\0")[:-1]
+    selected = set(tests)
+    unknown = []
+    for name in paths:
+        path = Path(name)
+        if name in TOOL_TESTS:
+            selected.add(TOOL_TESTS[name])
+        elif name.startswith("tests/test_") and path.suffix == ".py":
+            if (worktree / path).is_file():
+                selected.add(path.name)
+            else:
+                unknown.append(name)
+        elif path.suffix.lower() in {".md", ".rst", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}:
+            continue
+        else:
+            unknown.append(name)
+    if full and (tests or backends):
+        raise ValueError("Use --full alone, or select --test / --backend")
+    if unknown and not (tests or full):
+        raise ValueError("Select affected --test patterns (and --backend for native apple changes), "
+                         "or --full. Unmapped changes: " + ", ".join(unknown))
+    checks = ["git diff --check", "strict bilingual documentation build"]
+    if full:
+        selected = {"test_*.py"}
+        backends = ("mujoco", "superdex")
+    elif backends and not selected:
+        selected = {"test_*.py"}
+    for pattern in sorted(selected):
+        if Path(pattern).name != pattern or not pattern.startswith("test_") or not pattern.endswith(".py"):
+            raise ValueError("Test patterns must be test_*.py filenames inside tests/")
+        if not any((worktree / "tests").glob(pattern)):
+            raise ValueError("No test files match: " + pattern)
+        checks.append("tests: " + pattern)
+    backends = sorted(set(backends))
+    if set(backends) - {"mujoco", "superdex"}:
+        raise ValueError("Unknown native apple backend")
+    checks += [backend + " full 14 s apple episode + independent acceptance" for backend in backends]
+    return {"base": base, "tests": sorted(selected), "backends": backends,
+            "full": full, "checks": checks}
+
+
+def check(worktree, resource_dir=None, **selection):
+    """Run reviewed, scoped checks; native episodes require an explicit selection."""
+    plan = validation_plan(worktree, **selection)
+    print("Validation plan: " + json.dumps(plan), flush=True)
+    python = os.environ.get("SUPERDEX_PYTHON") or sys.executable
+    run("git", "diff", "--check", cwd=worktree)
+    result = {}
+    if plan["backends"]:
+        result = check_native(worktree, resource_dir, backends=plan["backends"],
+                              tests=plan["tests"] or ("test_*.py",))
+    else:
+        for pattern in plan["tests"]:
+            run(python, "scripts/run_tests.py", "--offline", "--pattern", pattern, cwd=worktree)
+    run(python, "scripts/build_docs.py", cwd=worktree)
+    return {**result, "checks": plan["checks"]}
+
+
+def check_native(worktree, resource_dir=None, *, backends=("mujoco", "superdex"), tests=("test_*.py",)):
+    """Explicit native acceptance, with isolated output attempts and source binding."""
     python = os.environ.get("SUPERDEX_PYTHON") or str(worktree / ".venv/bin/python")
     wheel_dir = os.environ.get("DEXLAB_QUALIFICATION_WHEELS")
     if os.environ.get("DEXLAB_MUJOCO_PROFILE", "").startswith("qualification-") and not wheel_dir:
@@ -445,9 +526,11 @@ def check(worktree, resource_dir=None):
     run(python, "scripts/run_tests.py", "--check-only", cwd=worktree)
     if wheel_dir:
         output_root.mkdir(parents=True, exist_ok=True)
+        baseline = os.environ.get("DEXLAB_RUNTIME_PREFLIGHT")
         run(python, "-m", "dexlab.apple_admission", "--preflight",
             "--wheel-dir", wheel_dir,
             "--output", str(output_root / f"autoresearch-preflight-{run_id}.json"),
+            *(["--runtime-preflight", baseline] if baseline else []),
             cwd=worktree)
     run("git", "diff", "--check", cwd=worktree)
     run(
@@ -459,11 +542,8 @@ def check(worktree, resource_dir=None):
         "demos/apple-stem-grasp/src",
         cwd=worktree,
     )
-    run(
-        python,
-        "scripts/run_tests.py",
-        cwd=worktree,
-    )
+    for pattern in tests:
+        run(python, "scripts/run_tests.py", "--pattern", pattern, cwd=worktree)
     resource_dir = None if resource_dir is None else Path(resource_dir)
     if resource_dir is not None:
         resource_dir.mkdir(parents=True, exist_ok=True)
@@ -476,7 +556,7 @@ def check(worktree, resource_dir=None):
         return run("env", "LC_ALL=C", "/usr/bin/time", "-q", "-f", layout,
                    "-o", str(receipt), "--", *command, cwd=worktree)
     outputs = {}
-    for backend in ("mujoco", "superdex"):
+    for backend in backends:
         output = output_root / f"autoresearch-{backend}-{run_id}"
         outputs[backend] = str(output)
         measured(backend, "episode",
@@ -491,10 +571,11 @@ def check(worktree, resource_dir=None):
         measured(backend, "verify", python,
                  "demos/apple-stem-grasp/src/verify_sdf_grasp.py", str(output))
     result = {"run_id": run_id, "outputs": outputs}
-    if wheel_dir:
+    if wheel_dir and set(backends) == {"mujoco", "superdex"}:
         admission = output_root / f"autoresearch-admission-{run_id}.json"
         run(python, "-m", "dexlab.apple_admission", "--mujoco", outputs["mujoco"],
             "--superdex", outputs["superdex"], "--wheel-dir", wheel_dir,
+            "--runtime-preflight", str(output_root / f"autoresearch-preflight-{run_id}.json"),
             "--output", str(admission), cwd=worktree)
         result["admission"] = str(admission)
     if resource_dir is not None:
@@ -551,7 +632,7 @@ def submission_checkout(worktree, branch, pull, *, clean):
     return head
 
 
-def submit(number, summary_file, check_remote_at=None, remote_state=None, *, existing_pr=None):
+def submit(number, summary_file, check_remote_at=None, remote_state=None, *, existing_pr=None, **selection):
     worktree = ROOT / ".autoresearch/worktrees" / f"issue-{number}"
     if not worktree.is_dir():
         raise SystemExit("Run start first, or restore the existing issue worktree")
@@ -566,9 +647,9 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None, *, exi
     validated_head = submission_checkout(worktree, branch, pull, clean=existing_pr is not None)
     validated_tree = source_tree(worktree)
     if check_remote_at:
-        check_remote(worktree, check_remote_at, remote_state)
+        validation = check_remote(worktree, check_remote_at, remote_state, **selection)
     else:
-        check(worktree)
+        validation = check(worktree, **selection)
     if source_tree(worktree) != validated_tree:
         raise SystemExit("Source changed during verification; rerun the gate")
     issue = authorized_issue(number)  # Approval can be withdrawn during a long gate.
@@ -607,7 +688,8 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None, *, exi
     run("git", "push", "--set-upstream", "origin", branch, cwd=worktree)
     body = (
         summary
-        + f"\n\nValidation: unit tests and full MuJoCo/SuperDex 14 s SDF acceptance.\n\nRefs #{number}\n"
+        + "\n\nValidation completed:\n" + "\n".join("- " + item for item in validation["checks"])
+        + f"\n\nRefs #{number}\n"
     )
     if pull is not None:
         run(
@@ -662,6 +744,13 @@ def main():
     submit_parser.add_argument("--remote-state", type=Path)
     submit_parser.add_argument("--existing-pr", type=int,
                                help="Recover this linked PR from a clean reviewed issue worktree")
+    for command_parser in (check_parser, submit_parser):
+        command_parser.add_argument("--base", default="origin/main")
+        command_parser.add_argument("--test", dest="tests", action="append", default=[],
+                                    help="Affected unittest filename pattern; repeat for multiple suites")
+        command_parser.add_argument("--backend", dest="backends", action="append", default=[],
+                                    choices=("mujoco", "superdex"), help="Run this native apple acceptance")
+        command_parser.add_argument("--full", action="store_true", help="All tests and both apple backends")
     args = parser.parse_args()
     if args.command == "next":
         result = next_issue(explain=args.dry_run)
@@ -674,13 +763,15 @@ def main():
         before = source_tree(worktree)
         if args.expected_tree and before != args.expected_tree:
             raise SystemExit("Remote checkout does not match the expected source tree")
-        checks = check(worktree, args.resource_dir)
+        checks = check(worktree, args.resource_dir, base=args.base, tests=args.tests,
+                       backends=args.backends, full=args.full)
         if source_tree(worktree) != before:
             raise SystemExit("Source changed during verification; rerun the gate")
-        result = {"source_tree": before, "checks": "full", **checks}
+        result = {"source_tree": before, **checks}
     else:
         result = submit(args.issue, args.summary_file, args.check_remote, args.remote_state,
-                        existing_pr=args.existing_pr)
+                        existing_pr=args.existing_pr, base=args.base, tests=args.tests,
+                        backends=args.backends, full=args.full)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
