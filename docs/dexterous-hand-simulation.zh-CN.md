@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-11 专题增补：[现有仿真 benchmark 与 DexLab 的借鉴顺序](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#simulation-benchmarks-2026)。** 按物理误差、任务能力、重复性与真实预测价值整理代表工作，并给出源码快照和实施边界。
+
 **[打开本机原版研究页面：当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)**
 
 原版保留完整排版、六层问题、38 篇论文筛选、19 个仓库对照和展开正文，并追加[10 月论文增补](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026)：14 篇相关工作与 1 篇背景参考按六层框架归位。优先读 DiffContact、RoboJEPA、Rollback，再结合 DiffGIPC、HandsOn、SuperMimic。原版中的 Obsidian 链接仍打开本地笔记；论文与仓库链接可公开访问。[未增补的 9 月原版](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation-2026-09-14.html)与本机文件逐字节一致。
@@ -145,6 +147,91 @@
 **最后判断仿真减少了什么真实成本。** 比较示范扩增、功能重定向与真实数据补齐时，固定测试对象和任务要求，分别记录真实示范数、采集人时、仿真交互量及留出表现。没有真实测试时，可以先验证数值和任务条件，但迁移收益应保持待验证。
 
 无论选哪条路线，运行前都应写下一张实验卡：**目标与初态、模型及版本、动作与观测接口、时钟、成功与失败条件、对照、预算、原始记录位置。** 任务、参数和验收变更要形成新的条件记录。继续阅读可从 [Newton 七类论文导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)、[实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html)和[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)进入。
+
+## 现有仿真 benchmark：它们测什么，DexLab 应当借什么
+
+**2026-11-11 调研结论：优先借鉴评测方法，把接触模型误差、计算重复性、任务完成与真实预测能力分别报告。** SimBenchmark、ContactBench、GPUSimBench、GAUGE 最贴近 DexLab 的物理诊断；DexGraspBench、ContactBench 1.0、HandsOn 提供操作任务设计；SIMPLER 提供仿真是否能帮助选择真实策略的验收思路。任务更多、成功率更高或 FPS 更大，各自只能支持对应范围的结论。
+
+本专题覆盖机器人操作与接触仿真，兼顾柔性物体、任务泛化和 GPU 性能；不把自动驾驶、导航或视频生成的所有 benchmark 收作同一排行榜。以下是代表性调研，不声称穷尽。内容是外部机制分析与迁移建议，没有新增 DexLab 物理实验，也没有改变已有验收协议或工作顺序。
+
+### 用一次“拿起瓶子、转动、放下”区分评测对象
+
+这是自拟的说明例子。瓶子没掉下来，可能是接触真的能承载，也可能是手腕运动、辅助约束或评分窗口掩盖了问题。瓶子转到了目标角度，也可能是整个手腕转动，尚未发生预期的手内换指。放到目标区域后立即计分，还可能接受尚在运动或仍被手指夹住的物体。
+
+同一段动作因此需要几种不同的检查：物体相对手掌的位姿、承载与接触切换、松手后的稳定状态、超时与失败原因，以及计算成本。若要据此选真实机器人策略，还需要在相同条件下对多种策略做仿真与真机配对。这个例子贯穿下面的取舍，不能用任一单项分数替代全部证据。
+
+### 代表性 benchmark 地图
+
+表中的“可借鉴”是本次分析，不代表已经接入 DexLab。论文覆盖、代码覆盖与排行榜使用的子集可能不同。
+
+| 评测对象 | 工作与主要机制 | DexLab 可借鉴什么 | 结论边界 |
+| --- | --- | --- | --- |
+| 引擎数值与成本 | [SimBenchmark](https://leggedrobotics.github.io/SimBenchmark/about/methodology.html)：简单碰撞体、接触/多体场景，报告误差与实时倍率。 | 在相同物理问题下画误差—成本曲线，说明控制、步长和预算。 | 历史软件与 CPU 配置；不能照搬为当前 GPU 引擎排名。 |
+| 接触模型与算法 | [ContactBench / Contact Models in Robotics](https://arxiv.org/html/2304.06372v3)：统一实现不同接触问题及求解方法，检查互补性、摩擦和数值自洽。 | 区分“模型选择改变了物理行为”和“同一模型求解不充分”。 | 算法重实现不等于各官方引擎全部实现；论文明确讨论了实现差异。 |
+| GPU 扩展与重复性 | [GPUSimBench](https://arxiv.org/html/2607.13059v1)：吞吐、显存、批内差异、重复运行差异及真实斜面碰撞分布。 | 把并行环境数也当实验变量，检查扩容是否改变结果。 | 两个扩展性场景和一个真实对照场景，单套软硬件；不覆盖全部接触、柔性或视觉工作负载。 |
+| 真实动力学参照 | [GAUGE](https://arxiv.org/html/2608.05948v1)：真实轨迹、物理参数与不确定度，涵盖刚体、绳、织物、体积软体。 | 记录测量重复性、参数来源及机制相关的误差。 | 22 个任务族不等于全部完成引擎评测；论文引擎实验用 14 个任务族。代码发布边界见下文。 |
+| 抓取稳定性 | [DexGraspBench](https://github.com/JYChen18/DexGraspBench)：MuJoCo 中的桌面提升、外力扰动、解析抓取指标与穿透检查。 | 将初始几何、抓持过程、扰动保持和解析指标分开。 | 当前主分支与论文 baseline 分支不同；稳定抓取不证明换指或长程操作。 |
+| 日常接触技能 | [ContactBench 1.0](https://jingyi-xiang.github.io/contactbench/)：8 类技能、36 项参考任务，可打印机构及阻力变化。 | 用插入阻力、旋转需求等行为变量定义难度，同时报告进度与用力。 | 与上面的求解器 ContactBench 无关；论文任务数、仿真实现数和已评测策略子集要分别计数。 |
+| 灵巧操作与迁移 | [HandsOn](https://arxiv.org/abs/2610.26765)：Core-50 与无目标任务示范的 Transfer-16，含组合与柔性任务。 | 用任务阶段定位首次失败，区分接触建立、协调和已达目标的保持。 | 论文的定性真机展示不构成全任务定量迁移；当前代码扩展也不能并入原论文数据口径。 |
+| 操作学习与采样 | [ManiSkill3](https://github.com/mani-skill/ManiSkill)：SAPIEN 上的操作任务、GPU 物理和视觉采样。 | 规范任务接口，并分开测无视觉、带视觉和记录数据时的成本。 | 框架吞吐不等于策略训练吞吐；同一底层引擎的不同框架不是独立引擎样本。 |
+| 多任务/元学习 | [Meta-World](https://github.com/Farama-Foundation/Metaworld)：相关操作任务上的多任务与元强化学习。 | 分开训练任务与未见任务，比较学习预算和适应能力。 | 学习能力基准，没有单独校准接触力和真实材料。 |
+| 视觉操作与示范 | [RLBench](https://github.com/stepjam/RLBench)：任务变体、示范生成和多种观测/动作模式。 | 固定任务变体、相机与控制模式，再比较策略。 | 路径规划产生的示范和任务成功判定，不是独立的物理真实性证明。 |
+| 知识迁移 | [LIBERO](https://github.com/Lifelong-Robot-Learning/LIBERO)：空间、物体、目标及混合知识迁移。 | 保留受控分布变化，避免同时更换物体、目标和控制器后无法归因。 | 常用 LIBERO-10 与完整 130 任务集合不是同一分母；成功率不测材料保真。 |
+| 连续任务链 | [CALVIN](https://github.com/mees/calvin)：语言指令串联，报告完成前 1 至 5 项的比例及平均链长。 | 保留跨子任务物理状态，查看失败在哪一环累积。 | 原脚本序列开头重置环境、每个子任务重置模型；物理连续与策略记忆连续要分开。 |
+| 双臂鲁棒性 | [RoboTwin 2.0](https://robotwin-platform.github.io/leaderboard.html)：clean / randomized 评测。 | 固定训练数据后测随机化条件下的退化。 | 随机化抗性并不自动等于真实迁移；须注明训练配置及随机化轴。 |
+| 场景与组合泛化 | [RoboCasa365](https://github.com/robocasa-benchmark/leaderboard)：Atomic-Seen、Composite-Seen、Composite-Unseen。 | 将见过的基本技能与未见组合分开计分。 | 365 项任务库与当前榜单的 50 个目标任务不同，不能互换成功率分母。 |
+| 家庭活动语义 | [BEHAVIOR-1K](https://arxiv.org/abs/2403.09227)：BDDL 初态/目标、OmniGibson 对象状态与活动。 | 明确任务意图、对象状态和必要事件。 | 部分活动涉及显式状态转换规则；语义完成不能一概解释为连续物理机制已验证。 |
+| 柔性物体策略 | [SoftGym](https://proceedings.mlr.press/v155/lin21a.html)：布、绳和流体等高维、部分可观测操作。 | 定义形变任务与观测差异，检查覆盖、铺平等任务目标。 | 主要比较策略学习；真实材料验证需要另外的测量参照。 |
+| 仿真对真实策略的预测 | [SIMPLER](https://simpler-env.github.io/)：控制和视觉对齐、仿真/真机配对评估。 | 检查仿真是否保留策略优劣次序，并报告绝对成功率误差。 | 结论依赖已测机器人、任务与策略；相关性高不等于接触参数正确。 |
+| 持续作业 | [HolidayFactory / DexLab 既有分析](https://github.com/huangkiki/Dexlab/discussions/302)：job 事件与跨 job 状态。 | 先审计评分，再设计保持—卸载/重建接触—释放的短序列。 | DexLab 中仍是提案；持续状态、恢复和 run 级统计尚未因此完成。 |
+
+近期的 [RoboLab](https://github.com/NVlabs/RoboLab) 与 [RoboDojo](https://arxiv.org/abs/2607.04434) 也提供规模化任务评测入口，本次作广度索引，没有审计其完整评分实现。它们的任务目录可供后续选例；当前优先级仍是把已有接触实验的判据与失败解释做清楚。
+
+### 最值得迁移的五个机制
+
+**1. 同时问“解得准不准”和“选的物理模型对不对”。** SimBenchmark 的 rolling 场景将速度与解析参照比较；ContactBench 进一步把接触律偏离、求解精度与步长敏感性拆开。对瓶子抓持，接触模型若缺少必要的抗扭作用，仅增加迭代不一定能保持住。DexLab 已有这种区别的直接证据：Wuji 合成夹球的抗扭接触改变了保持位移，但没有建立真实指垫参数或求解器失效。建议沿已有解析斜面与夹球记录，分别整理参考误差、同模型残差、步长/容差敏感性和耗时；理想刚性库仑关系只在所声明假设下作为参照，不用它无条件否定有意建模的柔顺接触。[ContactBench §IV](https://arxiv.org/html/2304.06372v3#S4) · [DexLab Wuji 证据](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)
+
+**2. 向真实重复测量对齐，同时保留任务需要的观测。** GAUGE 将几何、物理参数、真实轨迹和实验波动放在一起，避免把一个更细步长的仿真当成真值。其 §3.2 的刚体广义轨迹是位置，织物与体积软体使用各自形变表示；对 DexLab 的瓶子转动，还必须保留姿态、相对手掌旋转和接触事件。它使用的轨迹时间对齐也应与原时间轴误差分开，避免隐藏延迟。先借鉴测量与参数来源的组织方式；真实材料准确性仍要有相应的实物数据。[GAUGE §3.2 与附录 B](https://arxiv.org/html/2608.05948v1#S3.SS2)
+
+**3. 用并行规模与重复运行检查计算稳定性。** GPUSimBench 区分同一批环境间的差异和独立运行间的差异。DexLab 若后续扩展 GPU 批量接触实验，可在相同初态、输入和计时边界下改变并行数，观察位姿误差、接触丢失及成功判定是否变化，再联合看吞吐和显存。源码中的 MuJoCo Warp 吞吐按“环境数 × 测试步数 / 墙钟时间”计算，包含显式同步；这不是单环境控制频率。还应单列冷启动/编译、稳态步进、观测/渲染和记录成本。这是建议的检查维度，不预设哪种引擎必然不确定。[GPUSimBench §III–VII](https://arxiv.org/html/2607.13059v1#S3)
+
+**4. 把成功过程、合理用力与评分漏洞放在同一张结果单上。** DexGraspBench 提供保持与扰动协议，ContactBench 1.0 通过机构阻力改变行为要求，HandsOn 则把复杂任务分阶段观察。迁移到 DexLab 时，先复用现有夹球、释放和 LIBERO 记录审计评分：只进入目标区域、仍被夹持、隐藏支撑、错误事件顺序或直接改写评分状态，分别会不会被接受；合理成功又是否误拒。随后才设计接触阶段任务。ContactBench 1.0 同时报告成功、进度和峰值用力，但其具体力阈值不能直接成为另一只手的安全阈值。[ContactBench 1.0 实验](https://jingyi-xiang.github.io/contactbench/) · [DexLab 当前设计顺序](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.md)
+
+**5. 最终检查仿真是否帮助作出正确选择。** SIMPLER 的价值是比较同一批策略在仿真与真实环境中的表现。其指标代码同时提供 Pearson 相关性和 mean maximum rank violation（MMRV）：后者衡量仿真排错顺序时，涉及的真实表现差距有多大。DexLab 后续若具备配对真机条件，应在未用于调参的条件上同时看绝对成功率偏差、排序错误和不确定度。当前的物理诊断与脚本回放不能冒称这种策略评价已经完成。CALVIN 的链长统计可借来描述连续任务可靠性，但还要声明策略记忆和环境状态分别何时重置。[SIMPLER 指标源码](https://github.com/simpler-env/SimplerEnv/blob/eddb5690749a1e34267807c0f7b5eede323918d7/simpler_env/utils/metrics.py#L134) · [CALVIN 序列实现](https://github.com/mees/calvin/blob/fa03f01f19c65920e18cf37398a9ce859274af76/calvin_models/calvin_agent/evaluation/evaluate_policy.py#L124)
+
+### 对 DexLab 的具体取舍
+
+DexLab 已有独立评分、解析斜面、接触保持和任务/诊断分离的记录。本次调研补充的是：怎样给这些结果提供更明确的比较轴，以及哪些外部证据能够改变下一步决策；不把现有工作重新包装成一套新平台。
+
+| 借鉴顺序 | 对应缺口与最小验证建议 | 通过后能说什么；仍不能说什么 |
+| --- | --- | --- |
+| **先审计既有评分** | 基于当前 Wuji / LIBERO 记录准备合理成功和伪完成反例，保存每个反例被哪一层拒绝；先检查信号是否足以判断。 | 可说明已检查反例下判据符合任务意图；不能说明所有漏洞已穷尽。 |
+| **再建立接触机制的误差—成本对照** | 在已有合格案例上分开改接触模型、步长或容差；保留绝对误差、敏感性、耗时和全部失败。 | 可说明条件内的数值/任务取舍；不能推为全引擎或真实材料排名。 |
+| **有批量运行需求时检查并行影响** | 冻结设备、版本、输入和随机性，改变批量规模并重复独立运行；把记录开/关作为受控变量。 | 可界定该软件栈和场景的稳定区间；不能从终态差异直接断言某个 GPU 内核是原因。 |
+| **评分可靠后做短连续序列** | 保持→卸载/重建接触→释放；明确环境、控制器、策略和传感历史的重置边界，以整条 run 统计。 | 可检验错误如何跨阶段积累；不替代既有手内滚动/换指验收。 |
+| **具备真实参照后检验选择价值** | GAUGE 式重复测量与 SIMPLER 式多策略配对分开设计，留出条件，报告不确定度。 | 可检验具体物理量或策略排序的外推；无真实记录时保持未验证。 |
+
+这些是候选设计，执行时仍需遵守 DexLab 已冻结的适用引擎矩阵、资源预算与完整验收；一个小例子不会缩小原有义务。现阶段暂缓引入完整家庭任务库、统一替换后端或把各种指标压成一个总分。如果已有评分在有力反例下可靠，而主要误差出现在柔性物体或真实策略排序，优先级才应转向相应的材料测量或 sim/real 配对。
+
+### 发布状态、源码核查与证据边界
+
+本轮为单执行者调研，读取论文相关章节、官方项目/评测文档及下列固定版本关键文件。未安装运行外部 benchmark、复测论文排行榜、训练策略或做硬件实验。表中多数广度条目只核查官方描述，未逐项审计完整实现；“源码可见”也不等于“本轮运行通过”。
+
+GAUGE 的 [Hugging Face 数据仓库](https://huggingface.co/datasets/InternRobotics/GAUGE-Dataset/tree/main) 可见资产、轨迹与元数据目录；本轮只核查目录，未下载或校验全量数据。其 GitHub 快照仅有说明、许可及媒体，README 仍写评测工具待发布，因此可以研究协议和数据组织，不能称为已核实可直接运行的完整工具链。ContactBench 1.0 则已存在官方项目页链接的仿真仓库：README 列出 22 个基础任务对应 73 个可运行行、另一个仅场景任务，并明确不含策略学习/评估管线；这些发布说明不等于本轮复现，也不能与论文的 36 项参考任务等同。
+
+| 固定快照 | 本轮检查位置与用途 |
+| --- | --- |
+| [SimBenchmark `3fd1764635`](https://github.com/leggedrobotics/SimBenchmark/tree/3fd17646352f4c1c2c3108f93dae00f2a2d60097) | `benchmark/include/RollingBenchmark.hpp`、MuJoCo rolling 实现：解析速度误差和耗时记录。 |
+| [ContactBench `76fd04b814`](https://github.com/Simple-Robotics/ContactBench/tree/76fd04b8149fbc9360ff3a4fd2454c0fc7011c02) | `contact-problem.hxx`、`examples/cube.py`：不同互补性量与场景入口；论文采用 v3（2024-07-21）。 |
+| [GPUSimBench `7d39254e66`](https://github.com/zhanghuzhenyu/gpu_sim_bench/tree/7d39254e6642bef924166ac74e7c6940c713a471) | 公共默认值、MuJoCo Warp 计时、Genesis 斜面脚本；论文采用 v1。没有据此断言所有后端默认参数已等价。 |
+| [GAUGE `5a6207c22d`](https://github.com/InternRobotics/GAUGE/tree/5a6207c22d1dc0bf321369875963e7fa259bcbfb) | 仓库树、README 与论文 v1 的 §3、附录 B：发布范围、观测与误差定义。 |
+| [DexGraspBench `d9ea6cf282`](https://github.com/JYChen18/DexGraspBench/tree/d9ea6cf282de1f463c20fa54b4f68d7025bad40e) | `eval.yaml`、`fc_mocap.py`、`tabletop_mocap.py`：主分支阈值、六向外力与桌面评测入口。 |
+| [ContactBench 1.0 仿真 `f51f6aab24`](https://github.com/Michaelwyx/contactbench-sim/tree/f51f6aab24ac72c8b4435643efe058c07d73c735) | 仓库树及 README：任务/变体、机构参数来源与策略管线发布边界；未审计全部机构实现。 |
+| [HandsOn `fee28452fa`](https://github.com/TsinghuaC3I/HandsOn/tree/fee28452fa50d3ee906445f1717ce2449cc83798) | README、评估边界文件：区分原论文任务、PhysX/Wuji1 示范与后续 Newton/Wuji2 扩展；阶段结论归于论文报告。 |
+| [SIMPLER `eddb569074`](https://github.com/simpler-env/SimplerEnv/tree/eddb5690749a1e34267807c0f7b5eede323918d7) | `simpler_env/utils/metrics.py`：Pearson 与 MMRV；未把相关性解释为参数标定。 |
+| [CALVIN `fa03f01f19`](https://github.com/mees/calvin/tree/fa03f01f19c65920e18cf37398a9ce859274af76) | `evaluate_policy.py`：默认 1,000 条序列、最多 5 个子任务、环境与模型不同的 reset 位置。 |
+
+与本次迁移判断直接相关的 DexLab 基线是 [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989)：`docs/current-work.md`、`incline_score.py`、`pinch_score.py` 和 `libero_score_v2.py`。其中 LIBERO v2 明确把记录与数值诊断同物理有效性、学习策略评价分开。本专题延续这些边界；不改变原 38 篇论文、19 个仓库的历史计数。
 
 ## 来源与维护范围
 
