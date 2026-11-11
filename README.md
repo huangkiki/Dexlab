@@ -4,12 +4,26 @@
 
 <p align="center">
   <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/">文档</a> ·
+  <a href="#architecture">平台架构</a> ·
   <a href="#findings">研究结论</a> ·
   <a href="#quickstart">快速开始</a> ·
   <a href="README.en.md">English</a>
 </p>
 
 **DexLab 是研究机器人接触操作的开源实验平台。** 它把任务场景、控制、原生物理记录和独立评分连在一起，用来判断一次仿真失败来自策略、控制、几何、接触模型还是数值求解。
+
+<a id="architecture"></a>
+## 平台架构
+
+<p align="center">
+  <a href="docs/site/_static/images/dexlab-architecture.png">
+    <img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分">
+  </a>
+</p>
+
+脚本、策略与模型通过动作适配和控制器连接环境，环境返回观测；原生状态与接触记录进入独立评分，诊断结果用于改进下一轮实验。
+
+图为平台架构示意；任务、模型与后端的实际实现及验证范围见[覆盖矩阵](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)，生成式后端为研究候选。
 
 <a id="findings"></a>
 ## 目前得到的结论

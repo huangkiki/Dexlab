@@ -27,11 +27,11 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 <a id="architecture"></a>
 ## Architecture
 
-<a href="_static/images/dexlab-architecture.jpg"><img src="_static/images/dexlab-architecture.jpg" width="100%" alt="DexLab 执行与评测架构：任务协议、被测模型、动作执行、环境后端、独立证据和共同进化反馈"></a>
+<a href="_static/images/dexlab-architecture.png"><img src="_static/images/dexlab-architecture.png" width="100%" alt="DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分"></a>
 
-任务协议固定场景与预算；模型输出动作，经控制器映射到物理后端或候选生成式后端；原生状态、接触读回与结果由独立证据层记录和评分。反馈回路只有在对应证据成立后才算完成。
+脚本、策略与模型通过动作适配和控制器连接环境，环境返回观测；原生状态与接触记录进入独立评分，诊断结果用于改进下一轮实验。
 
-*架构图中的任务缩略图用于说明任务类型；真实实验录像和证据见下方实验预览。*
+*图为平台架构示意，任务缩略图用于说明任务类型。实际实现及验证范围见[覆盖矩阵](coverage.md)；生成式后端为研究候选。真实实验录像和证据见下方实验预览。*
 
 <section id="model-evaluation"></section>
 
