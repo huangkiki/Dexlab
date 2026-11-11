@@ -4,12 +4,26 @@
 
 <p align="center">
   <a href="https://huangkiki.github.io/Dexlab/en/latest/">Documentation</a> ·
+  <a href="#architecture">Architecture</a> ·
   <a href="#findings">Findings</a> ·
   <a href="#quickstart">Quick start</a> ·
   <a href="README.md">简体中文</a>
 </p>
 
 **DexLab is an open-source platform for studying contact-rich robotic manipulation.** It connects task scenes, control, native physics records and independent scoring to determine whether a simulation failure comes from the policy, controller, geometry, contact model or numerical solver.
+
+<a id="architecture"></a>
+## Architecture
+
+<p align="center">
+  <a href="docs/site/_static/images/dexlab-architecture.png">
+    <img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab overview: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring">
+  </a>
+</p>
+
+Scripts, policies and models connect to environments through action adapters and controllers, with observations fed back to the system under test. Native state and contact records support independent scoring, and diagnosis guides the next experiment.
+
+This is a conceptual architecture overview. See the [coverage matrix](https://huangkiki.github.io/Dexlab/en/latest/coverage.html) for implemented and validated task, model and backend coverage; the generative backend is a research candidate.
 
 <a id="findings"></a>
 ## What we have learned
