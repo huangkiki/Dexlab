@@ -93,6 +93,10 @@ class WheelIdentityTests(unittest.TestCase):
                                    wheel_dir=self.wheel.parent, preflight=preflight)
             self.assertEqual(frozen["audit"], [row])
             scorer.assert_called_once()
+            legacy = {key: value for key, value in preflight.items() if key != "frozen_at"}
+            legacy_frozen = admit_records({"fixture-profile": "raw"}, profiles, {"task.py": "4" * 64},
+                                          wheel_dir=self.wheel.parent, preflight=legacy)
+            self.assertEqual(legacy_frozen, frozen)
             with patch("dexlab.apple_admission.observe_runtime", return_value={**runtime, "native": {"fixture": "2.0"}}):
                 with self.assertRaisesRegex(ValueError, "runtime changed"):
                     admit_runtime(self.wheel.parent, preflight=preflight)

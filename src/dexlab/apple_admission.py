@@ -233,6 +233,18 @@ contact_ledger_matches_hand_force two_sdf_pads_throughout_hold
 no_fruit_support_during_hold only_two_pads_support momentum_balance""".split())
 
 
+def preflight_time(preflight):
+    """Keep the original audit date, including receipts predating frozen_at."""
+    from datetime import datetime
+
+    if "frozen_at" in preflight:
+        return datetime.fromisoformat(preflight["frozen_at"])
+    dates = [datetime.fromisoformat(row["checked_at"]) for row in preflight["audit"]]
+    if not dates or any(date.tzinfo is None for date in dates):
+        raise ValueError("Runtime preflight needs a dated official inventory")
+    return max(dates)
+
+
 def admit_runtime(wheel_dir, *, preflight=None):
     """Verify actual wheel bytes against a frozen baseline or a new release audit."""
     if wheel_dir is None:
@@ -244,7 +256,7 @@ def admit_runtime(wheel_dir, *, preflight=None):
     frozen_at = None
     if preflight is not None:
         from datetime import datetime, timezone
-        frozen_at = datetime.fromisoformat(preflight["frozen_at"])
+        frozen_at = preflight_time(preflight)
         if frozen_at.tzinfo is None or frozen_at > datetime.now(timezone.utc):
             raise ValueError("Runtime preflight freeze is invalid or future-dated")
         if runtime != preflight["runtime"]:
@@ -280,9 +292,8 @@ def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None, prefli
         runtime, audit, official_wheels = admit_runtime(wheel_dir)
         frozen_at = None
     else:
-        from datetime import datetime
         runtime, audit, official_wheels = admit_runtime(wheel_dir, preflight=preflight)
-        frozen_at = datetime.fromisoformat(preflight["frozen_at"])
+        frozen_at = preflight_time(preflight)
     evidence = {}
     required = {}
     for key, profile in profiles.items():
@@ -350,7 +361,7 @@ def main():
     if args.preflight:
         from datetime import datetime, timezone
         runtime, audit, wheels = admit_runtime(args.wheel_dir, preflight=preflight)
-        frozen_at = datetime.now(timezone.utc).isoformat() if preflight is None else preflight["frozen_at"]
+        frozen_at = (datetime.now(timezone.utc) if preflight is None else preflight_time(preflight)).isoformat()
         with args.output.open("x") as stream:
             json.dump({"runtime": runtime, "audit": audit, "official_wheels": wheels,
                        "frozen_at": frozen_at,
@@ -370,7 +381,7 @@ def main():
     source = source_hashes()
     frozen = admit_records(records, profiles, source, wheel_dir=args.wheel_dir, preflight=preflight)
     publication = (publication_status(frozen) if args.check_latest else {
-        "classification": "frozen_baseline", "frozen_at": preflight["frozen_at"],
+        "classification": "frozen_baseline", "frozen_at": preflight_time(preflight).isoformat(),
         "scope": "Validated against the frozen official audit; latest releases not queried",
     })
     if source_hashes() != source or observe_runtime() != frozen["runtime"]:
