@@ -8,6 +8,8 @@ The original layout, six-layer framework, 38-paper explorer, 19-repository compa
 
 **2026-11-03 focused addition: [sharing policies and dynamics across demonstrations](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#shared-dexterous-tracking).** FlashDexRetarget, ReDexT, Dex-SuperMimic and the Weave integration extend the existing DONIC and SuperMimic coverage. These outside works do not change the original 38-paper or 19-repository counts and are not DexLab replications.
 
+**2026-11-11 addition: [RoboDojo / Astra: model decisions, execution and scoring](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-astra).**
+
 ## October 2026 additions
 
 Start with **DiffContact, RoboJEPA and Rollback**, then use DiffGIPC for coupled derivatives, HandsOn for failure stages and SuperMimic for learned-model gradients. The entries below inherit the original six layers; they are research leads, not DexLab replications. They do not change the September screening counts. Relevance scores from the monthly review are 4/4 for these 14 works and 3/4 for the PDE reference, not quality or performance rankings. The first three have full-reading notes; the other three priorities received targeted text/figure checks, and eight supporting works received abstract/available-text screening.
@@ -245,6 +247,28 @@ GAUGE's [Hugging Face repository](https://huggingface.co/datasets/InternRobotics
 | [CALVIN `fa03f01f19`](https://github.com/mees/calvin/tree/fa03f01f19c65920e18cf37398a9ce859274af76) | `evaluate_policy.py`: default 1,000 sequences, up to five subtasks, distinct environment/model reset locations. |
 
 The directly relevant DexLab baseline is [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989): `docs/current-work.md`, `incline_score.py`, `pinch_score.py` and `libero_score_v2.py`. LIBERO v2 explicitly separates record/numerical diagnostics from physical validity and learned-policy evaluation. This addition preserves those limits and the historical counts of 38 papers and 19 repositories.
+
+<a id="robodojo-astra"></a>
+## RoboDojo / Astra: separate model decisions, execution and scoring
+
+**2026-11-11 addition: [full Chinese analysis and audit entry](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-astra).** The useful transfer is an observable action loop and controlled failure probes. This work supports investigating a language model that selects motion targets; it does not establish a replacement for fast, continuous contact control.
+
+Consider picking up scissors as a teaching example. The model estimates a grasp location from images, requests an end-effector motion, then uses the achieved pose and new images to correct, close and lift. A non-learned harness validates and converts targets into interpolated joint paths. The inspected [implementation](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/policy/RoboDojo_Agent_L3_Inspect_EEF/policy.py#L545) also synchronizes arms and changes the gripper after arm travel. These choices contribute control knowledge. Its 25 Hz trajectory execution is not the model's observation-and-decision rate. Diagnose action expressiveness, observation timing, inference delay and tracking separately before attributing every failure to physical reasoning.
+
+Recomputing the published [layout JSON](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/results/l3_inspect_eef_official_2100/astra_task_layouts.json) gives 472 successes in 2,100 slots across 42 tasks, a five-axis macro SR of 22.48% and process Score of 28.97. Precision SR is 4%, Long-Horizon 8.25%, and sixteen tasks have no successes. Partial progress and full success answer different questions. The [report](https://robodojo-benchmark.com/report/gpt-6-astra-eval#zero-shot-real) says unsafe actions and hardware damage stopped real testing before completion of the official 18-task protocol. Other embodiments and piano controllers are separate case studies.
+
+Three boundaries materially affect interpretation:
+
+- [Paper §3 and Appendix H](https://arxiv.org/html/2609.24170v1#S3) disclose extra wiki-derived task and scoring-stage text for LLMs; public VLAs were not rerun with equivalent inputs. The main LLM results use one seed.
+- The paper states a default 100-call budget; the current [result README](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/results/l3_inspect_eef_official_2100/README.md) and code say 170 and disclose targeted reruns for two tasks. Recover actual per-task settings before reproducing the comparison. This version discrepancy does not by itself establish misconduct or incorrect scores.
+- [Appendices C/D](https://arxiv.org/html/2609.24170v1#A3) do not establish that few-shot learning generally fails, or that observed corrections are uniquely learned adaptation. The perturbation layouts were eight baseline successes, with no history ablation or matched VLA control; transformed coordinate bounds supply a cue.
+
+DexLab's [Poke adapter](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.md) already maintains sessions and tool receipts, while task-specific observations and action mappings still need integration. Following the [current scoring-audit direction](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.md), first record one qualified task from observation through request, tool handling, actual execution and independent score. Preserve requested versus executed targets, chunk duration, arrival error and stop reason. An accepted API request is not physical success.
+
+Next, a candidate comparison could hold prompts, conversion, model-call and environment-step budgets fixed, compare full history with current-observation-only control, and introduce one coordinate bias. Score semantic choice, arrival, contact retention and release separately; retain failures, timeouts, abandonment, infrastructure errors and missing cost records. This is an unexecuted proposal. Defer a larger leaderboard and a new agent framework until repeated matched comparisons justify them. Evidence of contact-control gains and transfer to another simulator or hardware would change that priority.
+
+Checked on 2026-11-11 against paper v1, the live report and RoboProbe commit `3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e`. This was static inspection and arithmetic recomputation, not a model or physics rerun. Slots retain actual layout IDs, including thirteen IDs ≥ 50; 134 scored Astra episodes lack cost transcripts. Original collection, budget-version correspondence and transfer remain unverified here. The historical 38-paper and 19-repository counts are unchanged.
+
 
 ## Sources and maintenance scope
 
