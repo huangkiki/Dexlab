@@ -6,6 +6,8 @@
 
 Read [current work and pause state](docs/current-work.md) before selection or recovery. It is the sole current ordering entry; the dated history linked there is not an active queue instruction. Scheduled development remains **PAUSED**. This consolidation does not launch experiments, alter frozen acceptance or grant additional permissions.
 
+Use the [research loop](docs/autoresearch.md#research-loop) to turn a question into a bounded comparison and a finding. Audit scoring semantics before interpreting a new result; proposals, implementation, runtime evidence and publication remain separate. Existing protocols, delivery gates and historical scores remain binding.
+
 ## Implementation and evidence
 
 - Use the smallest direct implementation. Keep scene ownership, control commands, native measured observations, rendering and independent scoring distinct. Follow the accepted UniSim ownership boundary in the current-work entry; preserve qualified native references and explicit migration gaps. The historical UniLab SDF task is not thereby a built-in UniSim backend. No new generic framework or scheduler.

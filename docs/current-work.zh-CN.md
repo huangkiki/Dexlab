@@ -2,53 +2,37 @@
 
 [English](current-work.md) | [简体中文](current-work.zh-CN.md)
 
-**决策日期：2026-10-26。维护者已授权按下面顺序交互式推进 autodev；定时开发保持 PAUSED。** 本页是 AGENTS 和操作指南引用的唯一当前排序入口。持续推进具备条件的切片，完成验收与交付。新物理实验仍须先冻结协议和有限资源预算；新增训练准备仅限下述 CHORD 范围，后台派发仍保持暂停。
+**更新：2026-11-11。当前采用“问题 → 评分语义 → 对照 → 归因 → 结论”的开发流程；定时开发保持 PAUSED。** 本页是研究选择与恢复的唯一当前入口。本次更新采纳设计顺序，不启动训练或物理实验，不修改队列标签、已有协议、科学阈值或执行权限。[完整流程](autoresearch.zh-CN.md#research-loop)
 
-## CHORD 交互迁移 — 2026-11-02
+## 从已有结论出发
 
-维护者要求开始 [#282](https://github.com/huangkiki/Dexlab/issues/282) 的首批 CHORD 迁移。先交付准备切片 [#283](https://github.com/huangkiki/Dexlab/issues/283)，再准入纸巾盒原生执行及两项有数据许可前置条件的 ARCTIC 任务。父项保留三任务、实际有限训练、记录与独立评估。此交互授权不恢复后台调度；训练仍须实测并冻结资源计划。
+Wuji 合成抗扭接触使两秒保持最大位移由 2.734 mm 降到 1.025 mm，但尚无合格 solver failure 或真机标定；RSS 对照说明辅助保持会决定任务成败；接触响应基线降低位移误差却仍漏报接触丢失。[结论与证据](../README.md#findings)因此决定下一轮先查“测对没有、失败在哪”，再选择扩展。
 
-## 状态核对 — 2026-10-29
+## 恢复与设计顺序
 
-下表前四步已交付：#243、#245、#244、#250、#251 均已关闭。#48 仍是手内操作父项，承接手指或滚动路线的决定及新切换协议尚待明确。本次恢复已有 #211 SDF 工程候选，补齐完整交付门禁，不启动父项的原生 SDF 批次。
-
-三个外部案例分别记录：#260 经 PR #262 及有完整证据的未复现验收完成；PR #264 已合并，但 #259 仍受 AMP 记录一致性失败阻塞；PR #265 已合并，但 #261 仍缺兼容模型和合格的原生干预证据。基础设施合入不关闭这两个父项。原始记录和预算保留，等待决定或输入期间仍可推进独立的工程工作。
-
-## 本轮要交付什么
-
-以 **Wuji 手的抓持、卸载和接触切换** 为主线，得到一个别人能重跑、能检查失败原因的起步案例。先证明抓持正例与负例成立，再研究切换时的失效。没有找到 solver failure 也是可报告结果；任务失败、接近/控制失败、几何问题和求解器不收敛分别归因。
-
-[已发布复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)没有证明合格的 Wuji 手内 solver failure：RSS 擦拭说明固定配置对辅助保持的依赖；Proxy 布料先在 acquisition 阶段失败。新计划据此补充判别条件，不预设统一多物理系统就是答案。[Discussion #222](https://github.com/huangkiki/Dexlab/discussions/222)的接触要求与反馈分离，以及 [#189](https://github.com/huangkiki/Dexlab/discussions/189)的任务起步入口，在下面的一个具体案例中落实；[首个原生 Wuji 案例](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)现已在合成抗扭接触下通过六项开发对照，明确保留两秒保持窗口和缓慢漂移的限制；尚未测量用户上手时间的改善。
-
-## 执行顺序与验收出口
-
-| 顺序 | 现有/新任务 | 完成时应该能证明什么 |
+| 方向 | 已有入口与当前证据 | 下一步及出口 |
 | --- | --- | --- |
-| 1 | [输出记录隔离 #243](https://github.com/huangkiki/Dexlab/issues/243) | 重复启动、中断和 reset 不覆盖旧产物，不把新 manifest 与旧成功摘要混在一起；完整回归通过。 |
-| 2 | [安装环境保护 #245](https://github.com/huangkiki/Dexlab/issues/245)；自动派发前解决 [作者准入与暂停 #244](https://github.com/huangkiki/Dexlab/issues/244) | wheel/source 安装入口在副作用前拒绝不兼容环境；新派发遵守受信作者、依赖和唯一暂停依据。#244 不阻塞已授权的独立交互式工作。 |
-| 3 | [公开复算包 #250](https://github.com/huangkiki/Dexlab/issues/250) | 从可下载资产离线重建一组既有 latch/no-latch 结果和曲线；原始观测、失败索引、许可与 hash 可核验。完整 RSS raw 的缺口仍归 #247。 |
-| 4 | [Wuji 抓持资格 #251](https://github.com/huangkiki/Dexlab/issues/251) | 固定手腕的简单物体正例成立，保持/卸载/释放指令产生可检查的实际接触效果，负例能被拒绝；正例不成立就停在该层诊断。复用输出入口先依赖 #243。 |
-| 5 | [Wuji 手内操作父项 #48](https://github.com/huangkiki/Dexlab/issues/48) | 在合格抓持上完成受控接触切换与有符号旋转，排除手掌旋转、摇摆累计、隐藏支撑和状态注入；冻结后验证 10 个新条件。 |
+| **先恢复在手候选** | CHORD 准备切片 [#283 / PR #284](https://github.com/huangkiki/Dexlab/pull/284) 已合并。[PR #292](https://github.com/huangkiki/Dexlab/pull/292) 于本次核查仍为草稿，公开记录报告有限训练／checkpoint 重载，但 off/on 和 off/off 一致性失败；完整迁移仍为 0/3。 | 在 [#285](https://github.com/huangkiki/Dexlab/issues/285) 恢复原句柄、记录和累计预算，先定位重复性与记录问题；不能从 off/on 差异单独断言记录器有因果影响。取得合格记录后再独立评分，沿用原交付门禁。 |
+| **首选的新设计：评分语义审计** | [Discussion #302](https://github.com/huangkiki/Dexlab/discussions/302) 建议先用已有 Wuji 证据；该审计尚未实现或执行。 | 先列出必要事件与任务意图，再设计区域／容差、事件顺序、idle、隐藏支撑与状态注入反例，说明各项应由哪一层识别。先修语义误判或缺失观测，再解释实验收益。 |
+| **条件性后续：短连续接触序列** | 现有单回合通过不证明跨 job 状态继承可靠；reset／不 reset 对照仍是提案。 | 评分语义明确后，围绕保持、卸载／重建、释放设计最短序列；冻结 job 边界、carry state 与 run 级统计。正例不稳、负例误通过或没有可解释差异时停止扩展；不改变 [#48](https://github.com/huangkiki/Dexlab/issues/48) 的原验收。 |
+| **有兼容输入才推进：学习与动作响应** | [#261](https://github.com/huangkiki/Dexlab/issues/261) 的离线基线已交付，原生动作干预与兼容模型仍缺；CHORD 父项 [#282](https://github.com/huangkiki/Dexlab/issues/282) 保留三个原生任务。 | 依 [#281](https://github.com/huangkiki/Dexlab/discussions/281)、[#293](https://github.com/huangkiki/Dexlab/discussions/293)，先固定策略比较动作／物理变化。物理调整有独立依据后才考虑重训及交叉评估，分别报告任务与物理收益。 |
 
-这是一条交付顺序，不把所有前项设为技术硬依赖。#250 可独立利用现有记录；#251 的静态准备可先做。原生实验前，须在对应 Issue 冻结配置、指标依据、完整适用矩阵、具体案例与测得的有限资源预算。#251 的事前冻结批次、实际结果和累计预算保存在对应 Issue 与证据包中。没有新增云算力、训练、引擎源码修改或硬件动作。
+这是恢复优先与研究设计顺序，不是一条串行硬依赖链。评分审计可以利用现有证据独立准备；CHORD 恢复不等待新序列。新设计未建立执行任务或预算，Discussion 也不授予启动权限。后续原生实验仍按原规则冻结完整适用矩阵、具体案例、协议和有限资源计划，不以最小案例为由缩小既有验收范围。
 
-## 本次整理与保留范围
+## 保留的范围与阻塞
 
-复盘起点为 36 个开放 Issue、1 个草稿 PR，并核对相关源码、合并证据及 Discussion #189/#220/#222；这是任务和证据审计，没有重新运行全部历史实验。
+- **Wuji #48：** 接收指／滚动路线与新切换协议仍待决定；合格抓持之后的有符号旋转、无隐藏支撑与十个新条件等原义务保留。连续序列不代替手内操作验收。
+- **CHORD #282：** 先纸巾盒、后两项 ARCTIC；合法数据／许可与运行条件继续约束后两项。有限训练成功不等于独立任务成功，未合并候选不计入主线成果。
+- **已有失败与证据缺口：** AMP #259 的记录一致性、RSS #247 的来源／raw 缺口、LIBERO #181 的完整范围及 #198 的公开解释、切割 #200 的同条件输入、硬件 #6 的实测缺失继续保留。缺真机不阻塞有独立依据的数值分析。
+- **已交付工程基础：** 输出隔离 #243、安装保护 #245、作者准入／暂停 #244、离线包 #250、Wuji 抓持 #251、SDF 工程 #211 已交付；不重新排作待办。SDF 原生研究、布料、适用引擎矩阵及 UniSim 迁移的父项义务不因此关闭。
+- **暂缓扩展：** 生成式资产／世界、七任务工厂、全引擎可微接口和扩大任务库。浏览器抓娃娃保留为 toy 展示，不能替代主线研究结果或自动进入 README 里程碑。
 
-- [#246](https://github.com/huangkiki/Dexlab/issues/246)跟踪本次实际状态修复：已交付的 #177/#183/#184 不再排在待办首位；#174 的依赖语法修正；#6 明确当前无真机；#223 不再重复派发。验收、合并、部署和回读之后才关闭 #246。
-- [#223](https://github.com/huangkiki/Dexlab/issues/223)八项擦拭复现已由 PR #225 交付。跨批次数值解释的未完成义务转到 [#247](https://github.com/huangkiki/Dexlab/issues/247)，原 cohort、指标与恢复条件全部保留；关闭复现项不代表差异已解释。#247 的 18 个论文场景输入、Proxy 归因和未公开 raw 仍开放。
-- LIBERO [#181](https://github.com/huangkiki/Dexlab/issues/181)保留全部 **130 项原生任务及全部官方示范**，#185/#188/#174/#198 与视觉策略 #182 后移。#198 的公开解释缺口仍为 P0；#185 的下载失败和累计额度保持真实阻塞。部分 Object/Spatial 结果不关闭父项，不恢复下载或权重获取。
-- SDF #178/#211、布料 #28/#179、六引擎斜面 #121 及 #157/#159/#163/#165、夹持 #130/#132/#133/#134、UniSim #142/#145、ManiSkill #47、数据审计 #52 和物性基准 #3 保留原验收与候选代码。本轮后移到 P2；无实际执行者的旧 In Progress 回到 Todo，真实外部/依赖阻塞仍为 Blocked。#28 与 #179 是父子关系，不作重复关闭。594+24 回合范围与累计预算不变。
-- [#249](https://github.com/huangkiki/Dexlab/issues/249)限定先做 Newton SolverMuJoCo 与 direct MuJoCo Warp 的身份/封装对照，列 P2；#152 的 Isaac Sim 路径与其他任务范围仍独立保留。libuipc #218 为候选评估。#200 缺原作者同条件切割输入，保留 P0/needs-input；硬件 #6 保留 Blocked，纯数值工作不依赖它。
-- [PR #199](https://github.com/huangkiki/Dexlab/pull/199) 已于 2026-10-28 合入 `43debaf917cbcafbd853bfd5d942ef054f005979`；阅读路线不再列为待恢复草稿，不新建重复 PR。
+各项详细验收、历史优先级与累计范围保存在 [11 月 3 日主线快照](https://github.com/huangkiki/Dexlab/blob/4c3dafc1cd96b90c09a36f0c178c6eeab9bd015b/docs/current-work.zh-CN.md)及各自 Issue。快照用于追溯，旧排序不是新派发指令；本次不关闭任务、不变更它们的范围或状态。
 
-本轮计划项不授予自动派发。旧 `auto:approved` 已按排期清除；这不撤回会话中的交互式授权。**runner 的持久派发状态缺失或损坏时默认暂停；只有显式 resume 才能放行新自动任务。** 具体命令与交互式继续规则见[操作指南](autoresearch.zh-CN.md#作者准入与持久暂停)。 恢复自动执行前必须通过受信作者检查、暂停/依赖验证和实际 `next --dry-run`；不可仅凭本页派发。
+## 执行与交付入口
 
-## 恢复与交付入口
+[Project 4](https://github.com/users/huangkiki/projects/4)与 Issue 保存实时执行范围、依赖、预算和阻塞；恢复时读回真实状态。沿用 [UniSim #142](https://github.com/huangkiki/Dexlab/issues/142) 的所有权边界：DexLab 管实验、记录和独立评分，生产适配缺口由 UniSim 承担，已合格原生参考保留。
 
-[Project 4](https://github.com/users/huangkiki/projects/4)管实时队列，Issue 管范围、依赖、协议、预算、验收和阻塞，PR/冻结记录证明结果。保留 [UniSim #142](https://github.com/huangkiki/Dexlab/issues/142)的所有权边界：实验直接使用已合格原生参考时披露路径；新增生产适配缺口由 UniSim 承担，不为本轮搭新框架。
+遵守[操作指南](autoresearch.zh-CN.md)与 [AGENTS](../AGENTS.zh-CN.md)：单执行者，保留未提交工作、失败与累计预算；机器派发状态缺失或损坏时默认暂停。`next --dry-run` 只检查候选，不恢复定时器。优先级、讨论或文档计划不能绕过作者、依赖、资源与授权检查。
 
-沿用[操作指南](autoresearch.zh-CN.md)和 [AGENTS](../AGENTS.zh-CN.md)的单执行者、不可覆盖证据、显式 runtime profile、资源与完整适用门禁。小切片按既有授权完成审查、精确 head 合并、部署/附件回读；完整验收后才关闭，不停在 PR 创建。
-
-上一轮优先级保存在 [2026-10-21 main 快照](https://github.com/huangkiki/Dexlab/blob/af788be6be4a265edb1ec1b95671e11f05d1d1d2/docs/current-work.zh-CN.md)。更早规则见 [AGENTS 历史快照](https://github.com/huangkiki/Dexlab/blob/e3561c8def027f777df25ad41e67a2aea3b21144/AGENTS.md)与[操作历史](autoresearch-2026-10-10.md)。历史排序不是当前启动指令；科学验收与数据保留义务继续有效。
+每次交付更新相应报告中的结论、适用范围和下一步；README 只保留能改变读者判断的发现与关键节点。沿用已授权的精确 head 审查、适用门禁、合并及部署读回；部分交付不关闭父项。Obsidian 提交／推送仍暂停。
