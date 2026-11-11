@@ -4,6 +4,31 @@
 
 **Current ordering and maintainer decisions are in [current work](current-work.md); machine dispatch state uses the persistent file below. Scheduled development remains PAUSED.** This guide consolidates procedures; it does not restart a heartbeat or launch a campaign. The prior guide is preserved byte-for-byte as [the 2026-10-10 snapshot](autoresearch-2026-10-10.md). Its dated ordering and scheduling text is historical, not current authorization; its detailed safeguards and reproduction commands remain available.
 
+<a id="research-loop"></a>
+## From a research question to a finding
+
+Each cycle answers one question that changes the next decision. Use the existing Issue, experiment directory and report for the information below; ordinary prose edits need no new task or research protocol. This is a design and review workflow. Scientific acceptance remains defined by each prospectively frozen protocol; historical scores are unchanged.
+
+| Step | What the cycle leaves behind | When to stop or change direction |
+| --- | --- | --- |
+| 1. Frame the question | The current finding, one competing explanation, an observation that could change the decision, and exclusions. Check existing records first. | Rescore or summarize sufficient evidence instead of rerunning a baseline. |
+| 2. Audit scoring semantics | Start, required conditions, completion, failure and time windows; distinguish measured physics, visual evidence and unmeasured fields. Use existing trajectories and targeted counterexamples to check task intent. | If a positive control fails, a negative control passes, or a required observation is missing, diagnose scoring/recording before interpreting policy or physics gains. |
+| 3. Make the smallest discriminating comparison | Fix actions/policy and other physics, changing only what distinguishes the explanations. Declare the independent unit, applicable backends, budget and stopping conditions; execute every applicable cell required by the original protocol. | Retain an unresolved finding when conditions are incomparable, repeat variation is unexplained or the budget is exhausted; do not expand the task set. |
+| 4. Repair from measurements | Record the first failing stage and discrepancies with units, change only the implicated layer, then check affected behavior. | If alternatives remain, discriminate further or report unknown; higher pass rates do not establish more realistic physics. |
+| 5. Publish the finding | State the conclusion, conditions, denominator, failures, limits, rescore entry and next decision. Keep detail in the report and consequential findings in README. | No improvement or no solver failure can still answer a research question; broader claims need corresponding evidence. |
+
+### How the latest Discussions guide development
+
+- **[#302](https://github.com/huangkiki/Dexlab/discussions/302): first ask whether the scorer measures the intended task.** Start with existing Wuji records and design region/tolerance, event-order, missing-required-event, idle, hidden-support and state-injection counterexamples. Declare whether static checks, trajectory scoring or task-intent review should identify each one. A schema cannot establish the meaning of a structurally valid tolerance. A model critic may flag concerns, but cannot replace native observations or independent scoring.
+- **[#302](https://github.com/huangkiki/Dexlab/discussions/302): then ask whether carried state introduces new failures.** Only after scoring semantics are clear, design a short Wuji sequence with reset/no-reset controls. Candidate records include job events, boundary carry state, completed/failed/timed-out/censored outcomes and run termination. Jobs within one run are dependent; independent runs are the statistical unit. Freeze failure-versus-same-frame-completion precedence, event duration and boundaries in the new protocol. These are design inputs; the current runner/scorer does not implement this capability.
+- **[#281](https://github.com/huangkiki/Dexlab/discussions/281) and [#293](https://github.com/huangkiki/Dexlab/discussions/293): separate learning gains from physical changes.** Recover CHORD repeatability and recording first; failing off/off repeats do not isolate the recorder as the cause. Then compare learning signals under fixed physics and physical interventions under a fixed policy. Only retrain for a justified change, followed by old/new policy × old/new physics evaluation. Report prediction error, contact events and task outcomes separately.
+
+See [current work](current-work.md) for ordering. Scorer auditing gates only the proposed sequence that depends on it, not independent existing work. If carried state exposes no interpretable new difference, retain that result and stop extending the sequence. Defer generative worlds, the full factory task suite, generic multi-agent frameworks and new default engines until a minimal case establishes decision value.
+
+### Documentation and delivery
+
+README answers what was learned and how it affects a choice; experiment reports preserve complete protocols and outcomes; Discussions preserve the reasoning behind proposals; current work records adopted design ordering and recovery points. Distinguish discussion, design adoption, implementation, runtime validation and public delivery. The submission and merge gates below still apply; design documentation neither resumes dispatch nor launches an experiment.
+
 ## Recover, qualify and select
 
 Inspect existing worktrees, actual process/session/service handles, PRs, checks, unfinished releases and dirty work first. An observation timeout is not process termination. Recover one existing executor; never duplicate it or edit a live frozen environment. Use current maintainer priorities, not a stale “current workstream” paragraph.

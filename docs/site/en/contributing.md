@@ -7,6 +7,12 @@
 Studio replay rendering <studio-rendering>
 ```
 
+## From a question to an experiment
+
+Start with a question that can change a decision: **question → scoring-semantics audit → minimal comparison → failure attribution → finding**. Reuse existing records and check positive controls, counterexamples and required observations before deciding to run more physics. Discussion #302 prioritizes scorer semantics; a short persistent contact sequence remains a design candidate. CHORD and model work first need repeatability and action-response evidence.
+
+[Full research workflow](https://github.com/huangkiki/Dexlab/blob/main/docs/autoresearch.md#research-loop) · [Current selection and recovery](https://github.com/huangkiki/Dexlab/blob/main/docs/current-work.md)
+
 ## Deliver an experiment
 
 1. State the hypothesis, official versions, parameter provenance, approximations, budget, controls and acceptance in an issue.
@@ -17,11 +23,11 @@ Studio replay rendering <studio-rendering>
 
 ## README and documentation
 
-Keep README concise and self-contained: use the architecture image and accompanying prose to explain purpose and workflow, retaining Why DexLab, representative experiment animations, one recommended starting point and website links. What's new contains only the latest 3–4 delivered milestones, dated and linked to details; individual commits are not news. The site maintains research and usage details without duplicating full reports across README and the homepage.
+Organize README as purpose → findings and conditions → representative experiments → research milestones → recommended start. Each finding should explain a development decision and link nearby evidence and limits; keep architecture and full research detail on the site. Select milestones from merged commits that add a finding, reproducible evidence or a necessary research entry, explicitly labeling preparation. Toy projects such as the claw machine, interface polish and individual commits belong in demonstration pages and history, not research progress.
 
 | Content | Where to maintain it |
 | --- | --- |
-| Purpose, architecture, motivation, selected updates, representative previews and minimal commands | Both READMEs; label illustration scope/status and link updates and previews to detailed pages. |
+| Project purpose, findings and conditions, research milestones, representative previews and the shortest start | Both READMEs; findings and previews link to evidence, and preparation is not presented as a completed experiment. |
 | Navigation by reader goal | The homepage Start here section, navigation and indexes. |
 | Full methods, parameters, outcomes, failures and reproduction | The relevant experiment or usage page, linked from the experiment index. |
 | External papers | References, topic guides and complete bibliographies, with sources, check dates and reading depth. |
