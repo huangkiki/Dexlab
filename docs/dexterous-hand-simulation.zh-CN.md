@@ -8,6 +8,8 @@
 
 **2026-11-03 专题增补：[多示范共享策略与动力学模型](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#shared-dexterous-tracking)。** 补入 FlashDexRetarget、ReDexT、Dex-SuperMimic 与 Weave 接入，展开已有 DONIC、SuperMimic 条目。这些外部工作不计入原来的 38 篇论文、19 个仓库或 DexLab 复现实验。
 
+**2026-11-11 专题增补：[RoboDojo / Astra：模型、动作执行和评分](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-astra)。**
+
 以下保留较短的阅读路线，原版研究页面是完整调研入口。
 
 **我们在讨论：怎样在可控的虚拟环境中研究手如何完成操作、为什么失败，以及哪些结果值得拿到真实机器人上验证。** 要模拟的既有物体运动，也有手的驱动、接触、传感、控制时钟和任务条件。引擎名称、画面和运行速度各自只能回答一部分问题。
@@ -232,6 +234,26 @@ GAUGE 的 [Hugging Face 数据仓库](https://huggingface.co/datasets/InternRobo
 | [CALVIN `fa03f01f19`](https://github.com/mees/calvin/tree/fa03f01f19c65920e18cf37398a9ce859274af76) | `evaluate_policy.py`：默认 1,000 条序列、最多 5 个子任务、环境与模型不同的 reset 位置。 |
 
 与本次迁移判断直接相关的 DexLab 基线是 [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989)：`docs/current-work.md`、`incline_score.py`、`pinch_score.py` 和 `libero_score_v2.py`。其中 LIBERO v2 明确把记录与数值诊断同物理有效性、学习策略评价分开。本专题延续这些边界；不改变原 38 篇论文、19 个仓库的历史计数。
+
+<a id="robodojo-astra"></a>
+## RoboDojo / Astra：把模型、动作执行和评分分开
+
+**2026-11-11 蒸馏：[完整专题与核查入口](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-astra)。** 最值得借鉴的是动作回执和受控扰动诊断。这项工作让语言模型选择末端目标，固定的非学习程序完成检查、路径转换与插值，最后由环境判分；它支持研究通用模型的动作闭环，尚不足以支持替代快速、连续的接触控制。
+
+以夹起剪刀为教学例子：模型估计位置并请求移动，工具层执行，下一轮用实际到达位置和图像纠偏，再闭爪、抬升。当前[源码](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/policy/RoboDojo_Agent_L3_Inspect_EEF/policy.py#L545)还安排先移臂、后改变夹爪并同步双臂。“没有 VLA”不等于没有控制先验；25 Hz 轨迹执行也不等于模型以 25 Hz 闭环决策。
+
+从公开[逐布局 JSON](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/results/l3_inspect_eef_official_2100/astra_task_layouts.json)复算，42 项、2,100 次试验中成功 472 次，五维等权 SR 为 22.48%、过程 Score 为 28.97；精度 SR 只有 4%，长时序 8.25%，16 项任务没有成功。过程分和完整成功率应分别解释。作者[报告](https://robodojo-benchmark.com/report/gpt-6-astra-eval#zero-shot-real)的真机试验因不安全动作和设备损坏中止，没有完成官方 18 任务协议。
+
+解释比较还需保留三条边界：
+
+- [论文 §3 与附录 H](https://arxiv.org/html/2609.24170v1#S3)说明 LLM 收到了 wiki 任务说明和阶段评分提示，公开 VLA 没有在同等输入下重跑；主结果为单种子。
+- 论文写默认 100 次调用，当前[结果说明](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/results/l3_inspect_eef_official_2100/README.md)与代码写 170，并披露两个任务的定向重跑。必须按实际记录恢复配置，不能混成一个历史条件。
+- [附录 C/D](https://arxiv.org/html/2609.24170v1#A3)的单示范结果不代表少样本学习普遍无效；扰动选择了原本成功的八个布局，没有历史消融或同扰动 VLA 对照，取反后的工具边界也提供线索。纠正动作不自动证明历史学习或独有的适应能力。
+
+DexLab [已有 Poke 适配](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.zh-CN.md)具备会话与工具回执，但任务观测和动作映射仍需逐项接入。结合[当前评分审计方向](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.zh-CN.md)，先在一个合格案例保存观测、请求、工具处理、实际执行、到达误差和独立评分，再比较完整历史与仅当前观测，在固定提示、转换和双重预算下加入一种坐标偏差。分别检查语义选择、运动到达、接触保持与释放，并保留失败、超时、主动放弃、基础设施错误和成本缺失。这是待验证设计，没有启动实验；暂不扩任务榜单或新建代理框架。
+
+核查于 2026-11-11：论文 v1、当日报告和 RoboProbe `3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e`。本轮做了静态源码核对和已发布结果的算术复算，没有重跑模型或物理任务。原始采集、预算版本对应和跨仿真器/真机泛化仍未独立验证；134 个已评分 Astra episode 的成本 transcript 缺失。槽位保留真实布局 ID，其中 13 个 ID ≥ 50。钢琴及其他本体案例不并入主榜；原 38 篇论文、19 个仓库统计不变。
+
 
 ## 来源与维护范围
 
