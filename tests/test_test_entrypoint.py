@@ -18,6 +18,23 @@ spec.loader.exec_module(entry)
 
 
 class TestEntryPointTests(unittest.TestCase):
+    def test_offline_selection_does_not_import_or_inspect_mujoco(self):
+        with patch.dict(os.environ, {}, clear=True), \
+                patch.dict(sys.modules, {"mujoco": None, "dexlab.engine_versions": None}), \
+                patch.object(entry, "version", side_effect=AssertionError("native metadata queried")), \
+                patch.object(entry.subprocess, "run", return_value=SimpleNamespace(returncode=7)) as run:
+            code = entry.main(["--offline", "--pattern", "test_autoresearch.py"])
+        self.assertEqual(code, 7)
+        self.assertNotIn("DEXLAB_MUJOCO_PROFILE", run.call_args.kwargs["env"])
+
+    def test_offline_requires_a_real_selected_suite(self):
+        for arguments in (["--offline"], ["--offline", "--pattern", "test_missing_123.py"],
+                          ["--offline", "--pattern", "test_autoresearch.py", "--check-only"]):
+            with self.subTest(arguments=arguments):
+                code, _, run = self.invoke(arguments)
+                self.assertEqual(code, 2)
+                run.assert_not_called()
+
     def invoke(self, arguments=(), *, package="3.16.0", native="3.16.0", environment=None):
         output = io.StringIO()
         engine = SimpleNamespace(mj_versionString=lambda: native)
@@ -98,11 +115,12 @@ class TestEntryPointTests(unittest.TestCase):
         self.assertIn("test suite was not started", output.getvalue())
         run.assert_not_called()
 
-    def test_cli_from_another_directory_fails_early_with_actual_runtime(self):
+    def test_offline_cli_from_another_directory_uses_reviewed_source_without_native_runtime(self):
         environment = {**os.environ, "DEXLAB_MUJOCO_PROFILE": "unknown", "PYTHONPATH": "/old/source"}
-        result = subprocess.run([sys.executable, str(ROOT / "scripts/run_tests.py")],
+        result = subprocess.run([sys.executable, str(ROOT / "scripts/run_tests.py"),
+                                 "--offline", "--pattern", "test_missing_123.py"],
                                 cwd="/tmp", env=environment, text=True, capture_output=True)
         self.assertEqual(result.returncode, 2)
-        self.assertIn("Unknown MuJoCo compatibility profile", result.stderr)
+        self.assertIn("No test files match", result.stderr)
         self.assertIn(str(ROOT / "src/dexlab"), result.stdout)
         self.assertNotIn("Ran ", result.stderr)

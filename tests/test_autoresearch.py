@@ -44,7 +44,7 @@ class QueueTest(unittest.TestCase):
             with patch.dict('os.environ', environment, clear=True), \
                     patch.object(module, 'run', side_effect=preflight), \
                     self.assertRaises(subprocess.CalledProcessError):
-                module.check(root)
+                module.check_native(root)
 
     def test_only_opted_in_and_unclaimed_issues(self):
         issues = [
@@ -217,7 +217,8 @@ class SubmissionTest(unittest.TestCase):
             ("authorized_issue", {"return_value": issue(1)}),
             ("run", {"side_effect": self.run_command}),
             ("gh_json", {"side_effect": self.github}),
-            ("check", {}), ("check_remote", {}),
+            ("check", {"return_value": {"checks": ["selected unit regression"]}}),
+            ("check_remote", {"return_value": {"checks": ["selected unit regression"]}}),
         ):
             patcher = patch.object(module, name, **kwargs)
             setattr(self, name + "_mock", patcher.start())
@@ -257,6 +258,8 @@ class SubmissionTest(unittest.TestCase):
             self.assertEqual(payload["base"], "main")
             self.assertEqual(payload["head"], "autoresearch/issue-1")
             self.assertIn("Refs #1", payload["body"])
+            self.assertIn("selected unit regression", payload["body"])
+            self.assertNotIn("14 s", payload["body"])
             self.publications.append(args)
             self.pulls = [dict(number=8, url="https://github.com/huangkiki/Dexlab/pull/8",
                                state="OPEN", baseRefName="main", headRefName=payload["head"],
@@ -422,11 +425,17 @@ class SubmissionTest(unittest.TestCase):
             with patch.object(sys, "argv", ["autoresearch", "submit", "1", "--summary-file", str(self.summary),
                                              "--existing-pr", "7"]):
                 module.main()
-            self.assertEqual(submitter.call_args.kwargs, {"existing_pr": 7})
+            self.assertEqual(submitter.call_args.kwargs, {"existing_pr": 7, "base": "origin/main", "tests": [], "backends": [], "full": False})
 
 
 class VerifiedCheckoutTests(unittest.TestCase):
     def setUp(self):
+        planner = patch.object(module, "validation_plan", return_value={
+            "base": "a" * 40, "tests": ["test_tool.py"], "backends": [],
+            "full": False, "checks": ["selected unit regression"],
+        })
+        planner.start()
+        self.addCleanup(planner.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
@@ -463,6 +472,9 @@ class VerifiedCheckoutTests(unittest.TestCase):
         command = runner.call_args.args
         self.assertIn("ForwardAgent=no", command)
         self.assertIn("--expected-tree " + result["source_tree"], command[-1])
+        self.assertIn("--base " + "a" * 40, command[-1])
+        self.assertIn("--test test_tool.py", command[-1])
+        self.assertNotIn("--full", command[-1])
         self.assertIn("cd '/checkout with space'", command[-1])
 
     def test_remote_gate_propagates_failure(self):
@@ -597,7 +609,93 @@ class VerifiedCheckoutTests(unittest.TestCase):
 
 
 
+class ScopedValidationTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.git("init", "-q")
+        self.git("config", "user.name", "Test")
+        self.git("config", "user.email", "test@example.invalid")
+        (self.root / "README.md").write_text("original\n")
+        (self.root / "tests").mkdir()
+        for name in ("test_tool.py", "test_autoresearch.py", "test_test_entrypoint.py"):
+            (self.root / "tests" / name).write_text("# fixture\n")
+        self.git("add", ".")
+        self.git("commit", "-qm", "base")
+        self.git("update-ref", "refs/remotes/origin/main", "HEAD")
+
+    def git(self, *args):
+        return subprocess.check_output(["git", *args], cwd=self.root, text=True).strip()
+
+    def test_docs_gate_runs_without_native_environment_or_unit_suite(self):
+        (self.root / "README.md").write_text("revised\n")
+        plan = module.validation_plan(self.root)
+        commands = []
+        original = module.run
+        def execute(*args, **kwargs):
+            commands.append(args)
+            return original(*args, **kwargs) if args[0] == "git" else None
+        with patch.dict("os.environ", {}, clear=True), patch.object(module, "run", side_effect=execute):
+            result = module.check(self.root)
+        self.assertEqual(plan["tests"], [])
+        self.assertEqual(result["checks"], ["git diff --check", "strict bilingual documentation build"])
+        self.assertEqual([c for c in commands if c[0] != "git"],
+                         [(sys.executable, "scripts/build_docs.py")])
+
+    def test_diff_includes_committed_staged_untracked_and_deleted_paths(self):
+        (self.root / "scripts").mkdir()
+        (self.root / "scripts/autoresearch.py").write_text("# changed tool\n")
+        self.git("add", ".")
+        self.git("commit", "-qm", "tool")
+        self.assertIn("test_autoresearch.py", module.validation_plan(self.root)["tests"])
+        (self.root / "scripts/run_tests.py").write_text("# untracked tool\n")
+        self.assertIn("test_test_entrypoint.py", module.validation_plan(self.root)["tests"])
+        (self.root / "unknown.py").write_text("# native?\n")
+        with self.assertRaisesRegex(ValueError, "unknown.py"):
+            module.validation_plan(self.root)
+        self.git("add", "unknown.py")
+        self.assertEqual(module.validation_plan(self.root, tests=["test_tool.py"])["backends"], [])
+        self.git("commit", "-qm", "unknown")
+        self.git("update-ref", "refs/remotes/origin/main", "HEAD")
+        self.git("mv", "unknown.py", "renamed.md")
+        with self.assertRaisesRegex(ValueError, "unknown.py"):
+            module.validation_plan(self.root)
+
+    def test_mixed_docs_and_executable_cannot_silently_get_docs_only_gate(self):
+        (self.root / "README.md").write_text("changed\n")
+        (self.root / "controller.py").write_text("# native control\n")
+        with self.assertRaisesRegex(ValueError, "--test"):
+            module.validation_plan(self.root)
+        plan = module.validation_plan(self.root, tests=["test_tool.py"], backends=["mujoco"])
+        self.assertEqual(plan["backends"], ["mujoco"])
+        self.assertFalse(any("superdex" in check for check in plan["checks"]))
+
+    def test_typo_in_test_selection_is_rejected_before_any_execution(self):
+        with self.assertRaisesRegex(ValueError, "No test files"):
+            module.validation_plan(self.root, tests=["test_missing.py"])
+        with self.assertRaisesRegex(ValueError, "filenames"):
+            module.validation_plan(self.root, tests=["../test_tool.py"])
+
+    def test_single_backend_preserves_only_its_attempt_and_independent_verifier(self):
+        with patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "historical-3.11.0"}, clear=True), \
+                patch.object(module, "run") as execute:
+            result = module.check_native(self.root, backends=["mujoco"], tests=["test_tool.py"])
+        self.assertEqual(set(result["outputs"]), {"mujoco"})
+        self.assertEqual(sum("demos/apple-stem-grasp/run.sh" in c.args for c in execute.call_args_list), 1)
+        self.assertTrue(any("demos/apple-stem-grasp/src/verify_sdf_grasp.py" in c.args
+                            for c in execute.call_args_list))
+
+
 class ResourceGateTests(unittest.TestCase):
+    def setUp(self):
+        planner = patch.object(module, "validation_plan", return_value={
+            "base": "a" * 40, "tests": ["test_*.py"], "backends": ["mujoco", "superdex"],
+            "full": True, "checks": ["full native acceptance"],
+        })
+        planner.start()
+        self.addCleanup(planner.stop)
+
     def test_remote_guard_wraps_full_gate_with_private_resource_receipts(self):
         with (patch.object(module, "source_tree", return_value="a" * 40),
               patch.object(module, "run") as runner):
@@ -606,6 +704,7 @@ class ResourceGateTests(unittest.TestCase):
         self.assertIn("scripts/research_guard.py run --lock /state/window.lock", command)
         self.assertIn("--kind qualification", command)
         self.assertIn("--resource-dir /state/receipts", command)
+        self.assertIn("--full", command)
         with patch.object(module, "run") as runner, patch.object(module, "source_tree"):
             with self.assertRaises(SystemExit):
                 module.check_remote(Path("/source"), "worker:/checkout", Path("relative"))
@@ -620,22 +719,22 @@ class ResourceGateTests(unittest.TestCase):
                                              "DEXLAB_RUN_ROOT": str(output),
                                              "DEXLAB_MUJOCO_PROFILE": "historical-3.11.0"}), \
                  patch.object(module, "run") as runner:
-                result = module.check(root)
+                result = module.check_native(root)
             self.assertTrue(all(Path(path).parent == output for path in result["outputs"].values()))
             self.assertTrue(any(call.args[0] == python for call in runner.call_args_list))
             commands = [call.args for call in runner.call_args_list]
-            self.assertIn((python, "scripts/run_tests.py"), commands)
+            self.assertIn((python, "scripts/run_tests.py", "--pattern", "test_*.py"), commands)
             first_episode = next(i for i, command in enumerate(commands)
                                  if "demos/apple-stem-grasp/run.sh" in command)
-            self.assertLess(commands.index((python, "scripts/run_tests.py")), first_episode)
+            self.assertLess(commands.index((python, "scripts/run_tests.py", "--pattern", "test_*.py")), first_episode)
 
     def test_each_gate_preserves_old_outputs_and_measures_episode_and_verifier(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             with patch.object(module, "run") as runner, \
                  patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "historical-3.11.0"}):
-                first = module.check(root, root / "receipts")
-                second = module.check(root, root / "receipts")
+                first = module.check_native(root, root / "receipts")
+                second = module.check_native(root, root / "receipts")
             self.assertNotEqual(first["run_id"], second["run_id"])
             self.assertTrue(set(first["outputs"].values()).isdisjoint(second["outputs"].values()))
             commands = [call.args for call in runner.call_args_list if "/usr/bin/time" in call.args]
@@ -653,10 +752,10 @@ class ResourceGateTests(unittest.TestCase):
             with patch.dict("os.environ", {"DEXLAB_MUJOCO_PROFILE": "qualification-3.14.0"}, clear=True), \
                  patch.object(module, "run") as runner:
                 with self.assertRaisesRegex(ValueError, "DEXLAB_QUALIFICATION_WHEELS"):
-                    module.check(root)
+                    module.check_native(root)
                 runner.assert_not_called()
                 with patch.dict("os.environ", {"DEXLAB_QUALIFICATION_WHEELS": str(root / "wheels")}):
-                    result = module.check(root)
+                    result = module.check_native(root)
                 self.assertEqual(runner.call_args.args[1:3], ("-m", "dexlab.apple_admission"))
                 self.assertIn(result["outputs"]["mujoco"], runner.call_args.args)
                 self.assertIn(result["admission"], runner.call_args.args)
@@ -680,7 +779,7 @@ class ResourceGateTests(unittest.TestCase):
                     'DEXLAB_QUALIFICATION_WHEELS': str(root / 'wheels')}, clear=True), \
                  patch.object(module, 'run', side_effect=run):
                 with self.assertRaises(subprocess.CalledProcessError):
-                    module.check(root)
+                    module.check_native(root)
         self.assertFalse(any('demos/apple-stem-grasp/run.sh' in cmd for cmd in commands))
         self.assertFalse(any('scripts/run_tests.py' in cmd and '--check-only' not in cmd
                              for cmd in commands))

@@ -233,15 +233,35 @@ contact_ledger_matches_hand_force two_sdf_pads_throughout_hold
 no_fruit_support_during_hold only_two_pads_support momentum_balance""".split())
 
 
-def admit_runtime(wheel_dir):
-    """Check current official metadata and actual wheel bytes without a scene."""
+def preflight_time(preflight):
+    """Keep the original audit date, including receipts predating frozen_at."""
+    from datetime import datetime
+
+    if "frozen_at" in preflight:
+        return datetime.fromisoformat(preflight["frozen_at"])
+    dates = [datetime.fromisoformat(row["checked_at"]) for row in preflight["audit"]]
+    if not dates or any(date.tzinfo is None for date in dates):
+        raise ValueError("Runtime preflight needs a dated official inventory")
+    return max(dates)
+
+
+def admit_runtime(wheel_dir, *, preflight=None):
+    """Verify actual wheel bytes against a frozen baseline or a new release audit."""
     if wheel_dir is None:
         raise ValueError("Official wheel directory required for new qualification")
     runtime = observe_runtime()
-    audit = refresh_inventory()
+    audit = refresh_inventory() if preflight is None else preflight["audit"]
     from dexlab.engine_versions import validate_versions
 
-    validate_versions(audit, runtime["installed"], runtime["native"])
+    frozen_at = None
+    if preflight is not None:
+        from datetime import datetime, timezone
+        frozen_at = preflight_time(preflight)
+        if frozen_at.tzinfo is None or frozen_at > datetime.now(timezone.utc):
+            raise ValueError("Runtime preflight freeze is invalid or future-dated")
+        if runtime != preflight["runtime"]:
+            raise ValueError("Loaded runtime changed since preflight")
+    validate_versions(audit, runtime["installed"], runtime["native"], now=frozen_at)
     from dexlab.official_wheels import verify_official_wheel
 
     official_wheels = {}
@@ -257,16 +277,23 @@ def admit_runtime(wheel_dir):
             path, package=package, version=runtime["installed"][package],
             official_sha256=digest,
             installed_code_sha256=runtime["package_code_sha256"][package])
+    if preflight is not None and official_wheels != preflight["official_wheels"]:
+        raise ValueError("Official wheel identity changed since preflight")
     return runtime, audit, official_wheels
 
 
-def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None):
+def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None, preflight=None):
     """Derive qualification from actual raw runs; paths never enter public freeze."""
     from dexlab.engine_versions import require_formal_batch_qualification
 
     if set(record_map) != set(profiles):
         raise ValueError("Qualification records must exactly cover requested profiles")
-    runtime, audit, official_wheels = admit_runtime(wheel_dir)
+    if preflight is None:
+        runtime, audit, official_wheels = admit_runtime(wheel_dir)
+        frozen_at = None
+    else:
+        runtime, audit, official_wheels = admit_runtime(wheel_dir, preflight=preflight)
+        frozen_at = preflight_time(preflight)
     evidence = {}
     required = {}
     for key, profile in profiles.items():
@@ -281,7 +308,7 @@ def admit_records(record_map, profiles, source_hashes, *, wheel_dir=None):
                "evidence_sha256": {key: row["raw_record_sha256"] for key, row in evidence.items()}}
     frozen = require_formal_batch_qualification(
         "apple-stem", profiles, receipt=receipt, source_hashes=source_hashes,
-        runtime=runtime, evidence=evidence, required_checks=required,
+        runtime=runtime, evidence=evidence, required_checks=required, now=frozen_at,
     )
     frozen["official_wheels"] = official_wheels
     return frozen
@@ -316,18 +343,28 @@ def main():
     parser.add_argument("--mujoco", type=Path)
     parser.add_argument("--superdex", type=Path)
     parser.add_argument("--wheel-dir", type=Path, required=True)
+    parser.add_argument("--runtime-preflight", type=Path,
+                        help="Reuse the frozen official audit; verify current runtime and wheels offline")
+    parser.add_argument("--check-latest", action="store_true",
+                        help="Also report current releases; newer versions do not invalidate this batch")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.preflight and (args.mujoco is not None or args.superdex is not None):
         parser.error("--preflight does not accept completed episode directories")
     if not args.preflight and (args.mujoco is None or args.superdex is None):
         parser.error("Provide both --mujoco and --superdex completed records")
+    if not args.preflight and args.runtime_preflight is None:
+        parser.error("Final admission requires the --runtime-preflight saved before execution")
     if args.output.exists():
         raise FileExistsError("Keep previous qualification evidence; use a new output")
+    preflight = None if args.runtime_preflight is None else json.loads(args.runtime_preflight.read_text())
     if args.preflight:
-        runtime, audit, wheels = admit_runtime(args.wheel_dir)
+        from datetime import datetime, timezone
+        runtime, audit, wheels = admit_runtime(args.wheel_dir, preflight=preflight)
+        frozen_at = (datetime.now(timezone.utc) if preflight is None else preflight_time(preflight)).isoformat()
         with args.output.open("x") as stream:
             json.dump({"runtime": runtime, "audit": audit, "official_wheels": wheels,
+                       "frozen_at": frozen_at,
                        "runtime_qualified": False}, stream, indent=2, allow_nan=False)
             stream.write("\n")
         print("Official runtime preflight passed; task qualification still required")
@@ -342,16 +379,17 @@ def main():
         key = profile_key(profile)
         profiles[key], records[key] = profile, str(directory)
     source = source_hashes()
-    frozen = admit_records(records, profiles, source, wheel_dir=args.wheel_dir)
-    publication = publication_status(frozen)
+    frozen = admit_records(records, profiles, source, wheel_dir=args.wheel_dir, preflight=preflight)
+    publication = (publication_status(frozen) if args.check_latest else {
+        "classification": "frozen_baseline", "frozen_at": preflight_time(preflight).isoformat(),
+        "scope": "Validated against the frozen official audit; latest releases not queried",
+    })
     if source_hashes() != source or observe_runtime() != frozen["runtime"]:
         raise ValueError("Source or runtime changed during final qualification")
     with args.output.open("x") as stream:
         json.dump({"admission": frozen, "publication": publication}, stream, indent=2, allow_nan=False)
         stream.write("\n")
-    if publication["classification"] != "latest_stable":
-        raise ValueError("New upstream release requires qualification; dated evidence retained")
-    print("Paired raw acceptance, official wheel identity and latest-stable publication check passed")
+    print("Paired raw acceptance and frozen official wheel identity passed; " + publication["classification"])
 
 
 if __name__ == "__main__":

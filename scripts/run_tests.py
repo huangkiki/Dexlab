@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the selected MuJoCo runtime before discovering this checkout's tests."""
+"""Run selected checkout tests; preflight MuJoCo only for native validation."""
 
 import argparse
 from importlib.metadata import version
@@ -18,9 +18,13 @@ def main(argv=None):
     parser.add_argument("--mujoco-profile", default=os.environ.get("DEXLAB_MUJOCO_PROFILE"),
                         help="Explicit compatibility profile; otherwise use DEXLAB_MUJOCO_PROFILE")
     parser.add_argument("--pattern", default="test_*.py", help="Unittest discovery filename pattern")
+    parser.add_argument("--offline", action="store_true",
+                        help="Run selected tests without the global native-runtime preflight")
     parser.add_argument("--check-only", action="store_true", help="Check runtime without running tests")
     args = parser.parse_args(argv)
-    if not args.mujoco_profile:
+    if args.offline and (args.check_only or args.pattern == "test_*.py"):
+        parser.error("--offline requires a specific --pattern and cannot use --check-only")
+    if not args.offline and not args.mujoco_profile:
         parser.error("Select --mujoco-profile or set DEXLAB_MUJOCO_PROFILE explicitly "
                      "(for example historical-3.11.0 for the historical environment, "
                      "or qualification-3.16.0 for a matching candidate environment).")
@@ -31,16 +35,20 @@ def main(argv=None):
                "checkout": str(ROOT)}
     try:
         import dexlab
-        from dexlab.engine_versions import mujoco_profile_identity
         runtime["source"] = str(Path(dexlab.__file__).resolve())
         if not Path(runtime["source"]).is_relative_to(ROOT / "src/dexlab"):
             raise ValueError("DexLab was already imported from another checkout")
-        runtime["package"] = version("mujoco")
-        import mujoco
-        runtime["native"] = mujoco.mj_versionString()
-        print("Test runtime: " + json.dumps(runtime), flush=True)
-        mujoco_profile_identity({"version": runtime["package"]}, runtime["native"],
-                                profile=args.mujoco_profile)
+        if not args.offline:
+            from dexlab.engine_versions import mujoco_profile_identity
+            runtime["package"] = version("mujoco")
+            import mujoco
+            runtime["native"] = mujoco.mj_versionString()
+            print("Test runtime: " + json.dumps(runtime), flush=True)
+            mujoco_profile_identity({"version": runtime["package"]}, runtime["native"],
+                                    profile=args.mujoco_profile)
+        else:
+            runtime["validation"] = "selected tests; no global native preflight"
+            print("Test runtime: " + json.dumps(runtime), flush=True)
     except (ImportError, OSError, ValueError) as error:
         print("Test preflight failed: " + str(error), file=sys.stderr)
         print(json.dumps(runtime), file=sys.stderr)
@@ -51,9 +59,14 @@ def main(argv=None):
 
     if args.check_only:
         return 0
-    environment = {**os.environ, "DEXLAB_MUJOCO_PROFILE": args.mujoco_profile}
+    environment = dict(os.environ)
+    if args.mujoco_profile:
+        environment["DEXLAB_MUJOCO_PROFILE"] = args.mujoco_profile
     inherited = environment.get("PYTHONPATH")
     environment["PYTHONPATH"] = os.pathsep.join((*SOURCE_DIRS, *([inherited] if inherited else [])))
+    if not any((ROOT / "tests").glob(args.pattern)):
+        print("No test files match: " + args.pattern, file=sys.stderr)
+        return 2
     return subprocess.run(
         [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", args.pattern],
         cwd=ROOT, env=environment, check=False,
