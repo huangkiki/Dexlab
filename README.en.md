@@ -36,6 +36,7 @@ This is a conceptual architecture overview. See the [coverage matrix](https://hu
 | **Task completion does not establish the intended physical mechanism.** | RSS wiping passes **3/3** with auxiliary retention and **0/3** when only that assistance is removed; LIBERO completes **10/10** original tasks while physical diagnostics pass **5/10**. [Wiping](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html) · [LIBERO](https://huangkiki.github.io/Dexlab/en/latest/experience.html) | Report task scores separately from contact, assistance and record checks. |
 | **Tuning one condition does not establish transfer.** | Three frozen profiles pass **0/30** combined synthetic-response targets across ten mass/size cases, without mass or area compensation. [Report](https://huangkiki.github.io/Dexlab/en/latest/experience.html#mass-size-transfer) | Recheck parameter mapping and scope; these failures do not identify an engine algorithm error. |
 | **Lower prediction error does not establish contact-loss prediction.** | In 100 ms offline diagnostics from six existing Wuji episodes, constant velocity reduces position error, but contact-persistence baselines still miss release/unloading losses. [Report](https://huangkiki.github.io/Dexlab/en/latest/contact-response.html) | Test contact events and action response separately; overlapping windows are not independent trials, and no learned-model or control benefit is established. |
+| **A closed command does not establish a valid grasp.** | In two local RoboDojo toast failures, the command stays closed while bilateral normal impulse drops from about **0.25 N·s** to near zero. One case is amplified by neighbor contact; the other slips directly from a top-edge pinch. [Report](https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html) | Fix grasp depth, regrasp criteria and clearance before controlled A/B tests of material readback, compliance and tangential impulse; do not attribute the whole batch to the simulator. |
 
 [Full results, failures and open gaps →](https://huangkiki.github.io/Dexlab/en/latest/results.html)
 
@@ -58,6 +59,22 @@ Under the same control, replacing point contact with synthetic torsional contact
 </a>
 <strong>Wiping: does it still work without assistance?</strong><br>
 Assisted retention passes <strong>3/3</strong>; removing assistance gives <strong>0/3</strong>, with final cleaning around <strong>95.47% / 39.92%</strong>.
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html">
+<img src="docs/evidence/robodojo-bread-slip/layout-002-preview.gif" width="100%" alt="RoboDojo bread roll-out after neighbor contact" loading="lazy">
+</a>
+<strong>RoboDojo toast: why does a neighbor knock the slice out?</strong><br>
+The close command is correct, but neighbor/shelf interaction amplifies a shallow pinch; the slice rolls out after bilateral normal load reaches zero.
+</td>
+<td width="50%" valign="top">
+<a href="https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html#case-2">
+<img src="docs/evidence/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo bread slipping directly from a shallow upper-edge pinch" loading="lazy">
+</a>
+<strong>RoboDojo toast: why can it fall without a collision?</strong><br>
+Contact lies only about 1.4 cm below the top edge; with no measured pre-release external impact, normal load vanishes and the slice drops.
 </td>
 </tr>
 </table>
