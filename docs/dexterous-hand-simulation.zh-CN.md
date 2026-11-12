@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-12 专题增补：[CoRL 2026 哪些论文最值得 DexLab 学](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#corl-2026-dexlab-lessons)。** 逐项筛查官方录取清单，结论是先借随机实例统计评测、接触失败分层诊断与接触事件校准，不先换大模型或仿真引擎。
+
 **2026-11-12 专题增补：[从“评分漏洞”到“榜单投机”](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#benchmark-gaming-audit)。** 以 CoRL 2026 Oral Best Paper Award Finalist 为例，把缺失能力探针、训练支持内重采样、数据距离和统计可检测性接到 DexLab 当前评分审计。
 
 **2026-11-11 专题增补：[现有仿真 benchmark 与 DexLab 的借鉴顺序](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#simulation-benchmarks-2026)。** 按物理误差、任务能力、重复性与真实预测价值整理代表工作，并给出源码快照和实施边界。
@@ -278,6 +280,50 @@ GAUGE 的 [Hugging Face 数据仓库](https://huggingface.co/datasets/InternRobo
 | [Manipulation Benchmark Audit `a5ad04ab0f`](https://github.com/ripl/ManipulationBenchmarkAudit/tree/a5ad04ab0f26d46680c4d1c24911c728d37f7d16) | `CLAIMS.md`、claim-to-artifact map、逐 episode/sequence 摘要与统计代码；本轮 `recompute_claims.py` 和 `validate_release.py --skip-exact-inputs` 通过。arXiv v1 的 LIBERO 19.8% 与 camera-ready 产物 144/789 = 18.3% 分开引用。 |
 
 与本次迁移判断直接相关的 DexLab 基线是 [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989)：`docs/current-work.md`、`incline_score.py`、`pinch_score.py` 和 `libero_score_v2.py`。其中 LIBERO v2 明确把记录与数值诊断同物理有效性、学习策略评价分开。本专题延续这些边界；不改变原 38 篇论文、19 个仓库的历史计数。
+
+<a id="corl-2026-dexlab-lessons"></a>
+## CoRL 2026 录取论文：DexLab 最应该先学什么
+
+> **TL;DR：** 这届最值得 DexLab 学的不是又一个大 VLA 或 GPU 引擎，而是三个能让当前结果更可信的机制：**用 seed 分布和方差分解决定评测预算；把低速精密修正与持续接触力分开诊断；先校准接触事件的时间和误报，再追求稠密触觉或更复杂形变。**
+>
+> **一个连贯例子：** 评测以太网插头插入时，seed 冻结初始偏差、间隙、支撑和摩擦档位；日志分开接触进入/退出、微小动作、力历史和首个失败层；按到达→对齐→插入→坐实评分；最后用 seed 方差与同 seed 试次方差决定增加场景还是增加重复。
+>
+> **证据边界：** 这些是论文和官方项目的静态精读结论；本轮没有重跑作者代码、真机或 DexLab 新实验。
+
+### 筛选方法
+
+2026-11-12 按 [CoRL 2026 官方录取页](https://2026.corl.org/program/accepted-papers) 逐项筛查 687 篇录取论文，先按任务/接触、本体/执行、物理、观测、数据/策略、真实验证六层筛选，再精读与 DexLab 当前缺口最相关的论文。已经单独整理的 Manipulation Benchmark Audit、SuperMimic、RLT/CAP 等不重复冲高本次推荐数。优先级依据是“能否改善物理失败归因、评测可识别性或 sim/real 证据”，不是 oral/spotlight 头衔或模型规模。
+
+### 优先借的五个机制
+
+| 顺序 | 工作与作者证据 | DexLab 应该借什么 | 不能借题发挥的结论 |
+| --- | --- | --- | --- |
+| **1. 随机挑战评测** | [Benchmarking Real-World Robotic Manipulation through Stochastic Challenges](https://arxiv.org/html/2611.12804v1)：两个实验室、Spot/Stretch、568 次真机试验；区分 seed 难度方差与同 seed 试次方差。 | 保存 `seed → task → repeat → outcome`；在实验前声明最小重要差值、显著性和 power；方法间优先保留配对 seed。 | KALLAX 任务不是灵巧接触物理标定；不同团队的场景重建方差未测，成功标签仍需审计。 |
+| **2. 先分开精度失败与力失败** | [Demystifying When and Why VLAs Fail in Contact-Rich Tasks and How to Fix Them](https://arxiv.org/html/2608.01402v2) (FACT, Spotlight)：5 项真机接触任务、约 2,500 rollouts；报告 FACT 平均 66%，最强对照约 40.5%。 | 日志增加低幅动作分布、接触进入/退出、当前力与力历史；用 first-failing-layer 区分“没对准”和“对准了但没维持正确力”。 | 作者结论依赖单一机器人/F-T 传感器，低噪采样分析与力注入都与具体架构相关；不支持“多加力通道必然有效”。 |
+| **3. 先校准接触事件，再造稠密触觉** | [Blind Dexterous Grasping via Real2Sim2Real Tactile Policy Learning](https://arxiv.org/html/2606.11767v2)：用真实接触 onset/offset 校准 SDF 阈值和 penalty；onset 误差从 426 ms 降到 96 ms，FPR 从 4.2% 降到 2.2%。 | 对已有 pinch/hold 记录先做事件级对齐：接触进入/退出时间、F1、FPR，并保留空抓、滑移、脱落三类失败。 | 论文真机总抓取成功率仅 27%（seen/unseen 各10 件、每件 5 次）。它证明校准改善事件一致性，不证明已解决稳定抓取。 |
+| **4. 参数化柔性任务与分阶段评分** | [WireCraft](https://arxiv.org/html/2606.18097v3) (Spotlight)：连接器插入、clip routing、channel seating；铰接链/FEM 线缆，仿真与 UR5 数据。 | 借“到达 vs 插入/坐实”分阶段指标，为切割、绳/线操作冻结几何、难度轴和失败类型，再记录载荷与损伤代理。 | 两种线缆模型都未与真实线缆定量标定，力未验证，真机只覆盖一台 UR5 的选定设置；不能称为物理保真已证明。 |
+| **5. 用消融证明“广度先验”与“精密微调”的分工** | [Play2Perfect](https://arxiv.org/html/2606.26428v4) (Oral)：无任务 dexterous play 预训练后做稀疏奖励精密装配；作者报告比 scratch 省 33× 样本。 | 学它的对称消融：物体/接触多样性先验、精密接触任务微调、不同公差和阶段成功分开评估。 | 主成功容差为 1 cm，紧配合实验是另一组机械间隙；真机试次少，任务依赖位姿跟踪和外部技能编排，不是完整自主装配管线。 |
+
+### 有条件借鉴，不是当前第一顺位
+
+| 方向 | 候选工作 | 触发条件 |
+| --- | --- | --- |
+| 触觉 policy 时间角色 | [PACE](https://arxiv.org/html/2610.16308v1) (Oral) 将慢变持续接触状态、突发事件与未来接触后果分开。 | DexLab 真正训练 chunk policy 时；现在可先按三种时间角色记日志，不急着复制网络。 |
+| 低成本外力估计 | [FACTR 2](https://arxiv.org/html/2606.12406v2) (Oral) 从电机力矩减去学习的自由空间逆动力学，估计外部关节力矩。 | 做 HIL/真机采集且没有 F/T 传感器时；绝对力标度仍需外部标定。 |
+| 统一触觉表示 | [UniVTAC](https://arxiv.org/html/2602.10093v1) 覆盖 3 种传感器、8 任务，报告仿真编码器平均 +17.1%、真机三任务 43.3%→68.3%。 | 已经有两种以上真实触觉传感器与统一任务时；当前 60 次真机 rollout 与人工判分不足以代替物理校准。 |
+| 柔性物体预测与不确定性 | [PGRD](https://arxiv.org/html/2607.13451v1) (Spotlight) 用可优化弹簧质点模型+残差速度 Transformer；[CORD-SLS](https://arxiv.org/html/2606.14188v1) (Spotlight) 用平滑接触可微仿真和 conformal uncertainty 做绳/布 MPC。 | 切割/绳/布成为当前主线时；残差轨迹精度不等于材料/力可识别，接触平滑梯度不等于原始刚性接触梯度。 |
+| 引擎与工具链 | [Kamino](https://arxiv.org/html/2603.16536v2) (Spotlight) 针对含闭环约束的 GPU 并行多体；[RoboKit](https://github.com/OpenRoboKit/RoboKit) 提供 batch/differentiable kinematics 与优化器。 | 只在实际遇到闭环/模仿关节瓶颈，或需要统一批量运动学目标时审计；它们不直接解决当前 scorer 和接触证据缺口。 |
+
+### 对当前 DexLab 顺序的影响
+
+CoRL 2026 没有推翻当前顺序，而是把它补完：
+
+1. **scorer semantics audit 仍然第一。** 如果伪完成也能得分，更大的 $K$ 只会更精确地估计错误量。
+2. **通过后立即保存分层、配对原始结果。** 从一个小型先导批估计 seed 方差与试次方差，再冻结预算；不把这一步冒充新实验已获批或已完成。
+3. **短 persistent sequence 沿用同一合同。** 保持→卸载/重建接触→释放的整条 run 才是独立统计单位；链内各帧、接触或阶段不能冒充独立样本。
+4. **暂不引入新大引擎/大任务库。** 只当当前 scorer 可靠，且 first-failing-layer 明确指向闭环约束、柔性物体或触觉表示时，再启动 Kamino、PGRD/CORD-SLS 或 UniVTAC 的定向复现。
+
+本专题是官方录取清单筛选与优先论文全文审读。表中数字是作者报告，没有作为 DexLab 实测数据；除公开项目页/仓库外，本轮没有安装运行外部系统。完整统计推导、3 张图和 2 张表已另行保存在 Obsidian 的 `StochasticChallenges` 笔记。
 
 <a id="robodojo-astra"></a>
 ## RoboDojo / Astra：把模型、动作执行和评分分开
