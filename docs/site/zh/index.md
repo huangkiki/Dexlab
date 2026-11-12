@@ -70,6 +70,8 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 | <a href="wuji-contact.html"><img src="_static/wuji-contact/comparison.gif" width="100%" alt="Wuji 点接触与合成抗扭接触对照" loading="lazy"></a><br>相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 **2.734 mm** 降至 **1.025 mm**。 | <a href="rss-wiping.html"><img src="_static/studio/rss.gif" width="100%" alt="辅助保持下的海绵擦拭回放" loading="lazy"></a><br>辅助保持下 **3/3** 通过；去掉辅助后 **0/3**，最终清洁率约 **95.47% / 39.92%**。 |
 | **柔性物体操作** | **切割与拓扑变化** |
 | <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="记录仿真中的机器人夹布" loading="lazy"></a><br>机器人能够夹住并移动布片，但完整折叠仍失败：当前记录的最大边长应变为 **12.55%**，超过预设 5% 上限。 | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="豆腐和香蕉切割的记录状态表面回放" loading="lazy"></a><br>连续切割与刀面推动会产生仿真状态的拓扑变化；完整报告还记录接触力、材料分离与失败。 |
+| **RoboDojo：邻片放大的滚边脱落** | **RoboDojo：纯浅夹持滑脱** |
+| <a href="robodojo-bread-slip.html"><img src="_static/robodojo-bread-slip/layout-002-preview.gif" width="100%" alt="RoboDojo 邻片接触放大的滚边脱落" loading="lazy"></a><br>闭爪命令保持不变，但邻片／货架接触放大了上缘浅夹持；双指法向载荷归零后脱落。 | <a href="robodojo-bread-slip.html#case-2"><img src="_static/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo 无明显外碰撞的浅夹持滑脱" loading="lazy"></a><br>没有测到释放前外碰撞；夹持点只比上缘低约 1.4 cm，法向载荷消失后直接下落。 |
 
 <section id="research-findings"></section>
 
@@ -82,6 +84,7 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 | **接触离散改变失效边界** | 同一圆柱、质量、力命令和步长，只改变表面三角数 | `256 → 1,024 → 4,096` 三角形时，峰值穿透为 **2.267 → 0.858 → 0.481 mm**。 |
 | **同场景抓取可能依赖于后端** | 苹果抓梗，10 个配对回归场景 | 当前默认配置 MuJoCo 通过 **1/10**，SuperDex 通过 **10/10**；更小步长没有单调改善穿透。 |
 | **夹住布不等于完成折叠** | OpenArm + Wuji，被动布料 | 单手夹点、抬升与释放通过；完整折叠因应变、残余接触和最终几何未达标而失败。 |
+| **闭爪命令不等于有效夹持** | RoboDojo `make_toast` 两个外部记录局部事件 | 双指法向冲量从约 0.25 N·s 降到接近 0；一例有邻片冲量，一例没有。先修抓取几何，再验证材质读回和顺应性。 |
 
 这些结果共同指向一个问题：**成功视频不足以证明材料模型、接触响应和下游策略都可迁移。**
 

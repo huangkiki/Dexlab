@@ -12,6 +12,8 @@ The original layout, six-layer framework, 38-paper explorer, 19-repository compa
 
 **2026-11-11 addition: [RoboDojo / Astra: model decisions, execution and scoring](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-astra).**
 
+**2026-11-12 failure diagnosis: [two bread-loss mechanisms in RoboDojo toast](https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html).**
+
 ## October 2026 additions
 
 Start with **DiffContact, RoboJEPA and Rollback**, then use DiffGIPC for coupled derivatives, HandsOn for failure stages and SuperMimic for learned-model gradients. The entries below inherit the original six layers; they are research leads, not DexLab replications. They do not change the September screening counts. Relevance scores from the monthly review are 4/4 for these 14 works and 3/4 for the PDE reference, not quality or performance rankings. The first three have full-reading notes; the other three priorities received targeted text/figure checks, and eight supporting works received abstract/available-text screening.
@@ -304,6 +306,12 @@ Three boundaries materially affect interpretation:
 - [Paper §3 and Appendix H](https://arxiv.org/html/2609.24170v1#S3) disclose extra wiki-derived task and scoring-stage text for LLMs; public VLAs were not rerun with equivalent inputs. The main LLM results use one seed.
 - The paper states a default 100-call budget; the current [result README](https://github.com/RoboProbe/RoboProbe/blob/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e/results/l3_inspect_eef_official_2100/README.md) and code say 170 and disclose targeted reruns for two tasks. Recover actual per-task settings before reproducing the comparison. This version discrepancy does not by itself establish misconduct or incorrect scores.
 - [Appendices C/D](https://arxiv.org/html/2609.24170v1#A3) do not establish that few-shot learning generally fails, or that observed corrections are uniquely learned adaptation. The perturbation layouts were eight baseline successes, with no history ablation or matched VLA control; transformed coordinate bounds supply a cue.
+
+### Toast case study: a close command is not contact retention
+
+A 2026-11-12 offline Code-as-Policy batch covers 100 distinct seed/layout cases and succeeds in 19. Episode-level attribution assigns 79 of 81 failures to policy execution and two to policy mechanics; two local drop clips must not be used to relabel the whole batch as simulator failure. Both local events nevertheless expose the same observable mechanism: the close command remains `0`, while bilateral normal impulse falls from about 0.25 N·s to near zero and the empty gripper closes farther.
+
+The [synchronized videos, contact curves and energy boundary](https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html) separate two mechanisms. In layout 002, neighbor and shelf interaction amplify an upper-edge pinch and the slice rolls out; layout 011 has no measured pre-release external impact and drops from a contact about 4.42 cm above its center of mass. The first intervention is deeper grasping, rejection of narrow pinches and a slow test lift. Simulation A/B tests should then read back the resolved finger–bread material pair, combine mode, tangential impulse and contact patch, comparing the rigid thin-slice model against a compliant proxy. The current 0.07 kg rigid bread omits compression, roughness and fingertip compliance, which can amplify edge-contact discontinuity; it does not yet establish a PhysX solver defect, real-bread calibration or an engine ranking.
 
 DexLab's [Poke adapter](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.md) already maintains sessions and tool receipts, while task-specific observations and action mappings still need integration. Following the [current scoring-audit direction](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.md), first record one qualified task from observation through request, tool handling, actual execution and independent score. Preserve requested versus executed targets, chunk duration, arrival error and stop reason. An accepted API request is not physical success.
 

@@ -1,0 +1,72 @@
+[
+  {
+    "layout": "002",
+    "event_step": 982,
+    "stable_step": 977,
+    "event_time_s": 39.28,
+    "classification": "edge roll-out after neighbor/shelf interaction",
+    "video": "layout-002.mp4",
+    "gripper_command": [
+      0.0
+    ],
+    "open_fraction_stable": 0.3086112317180744,
+    "open_fraction_event": 0.18523078658004294,
+    "finger_impulse_stable_ns": 0.25191040884552385,
+    "finger_impulse_event_ns": 0.0,
+    "equivalent_peak_normal_force_stable_n": 62.97760221138096,
+    "equivalent_peak_normal_force_event_n": 0.0,
+    "contact_lever_arm_cm": 4.8545772382587264,
+    "contact_height_above_com_cm": 4.595115780830383,
+    "peak_speed_after_m_s": 0.7015161030170696,
+    "peak_angular_speed_after_rad_s": 11.413428437807994,
+    "peak_translational_ke_after_mj": 17.224369497728954,
+    "peak_rotational_ke_after_mj": 6.030886896599726,
+    "potential_drop_after_mj": 62.397456711530744,
+    "peak_external_impulses_near_release_ns": {
+      "neighbor bread": 0.06198207310339025,
+      "shelf": 0.048331798188793275,
+      "table": 0.029863862320780754
+    },
+    "first_impact": {
+      "step": 984,
+      "kind": "shelf",
+      "impulse_ns": 0.048331798188793275
+    },
+    "short_video": null
+  },
+  {
+    "layout": "011",
+    "event_step": 188,
+    "stable_step": 186,
+    "event_time_s": 7.5200000000000005,
+    "classification": "pure shallow top-edge grip loss",
+    "video": "layout-011.mp4",
+    "gripper_command": [
+      0.0
+    ],
+    "open_fraction_stable": 0.2536670082069274,
+    "open_fraction_event": 0.19199199713680343,
+    "finger_impulse_stable_ns": 0.25257323127599374,
+    "finger_impulse_event_ns": 0.0018726327716308989,
+    "equivalent_peak_normal_force_stable_n": 63.14330781899843,
+    "equivalent_peak_normal_force_event_n": 0.4681581929077247,
+    "contact_lever_arm_cm": 4.4403978984192385,
+    "contact_height_above_com_cm": 4.419320821762085,
+    "peak_speed_after_m_s": 1.0891178938460917,
+    "peak_angular_speed_after_rad_s": 5.556416306534801,
+    "peak_translational_ke_after_mj": 41.516222534351144,
+    "peak_rotational_ke_after_mj": 2.425721472296569,
+    "potential_drop_after_mj": 93.42392901778229,
+    "peak_external_impulses_near_release_ns": {
+      "neighbor bread": 0.0,
+      "shelf": 0.0,
+      "table": 0.11085090041160583
+    },
+    "first_impact": {
+      "step": 192,
+      "kind": "table",
+      "impulse_ns": 0.11085090041160583
+    },
+    "short_video": null
+  }
+]

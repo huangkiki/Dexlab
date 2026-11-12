@@ -36,6 +36,7 @@
 | **完成任务，不代表依靠预期的物理机制完成。** | RSS 擦拭有辅助保持时 **3/3** 通过，仅去掉辅助后 **0/3**；LIBERO 原任务 **10/10** 完成，物理诊断仅 **5/10** 通过。[擦拭](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html) · [LIBERO](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html) | 任务评分与接触、辅助力、记录检查分开报告。 |
 | **一个工况调好的参数，不足以保证迁移。** | 三个冻结配置在十组质量／尺寸条件下，合成响应联合目标 **0/30** 通过；未做质量或面积补偿。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#mass-size-transfer) | 复核参数映射与适用范围，不能把这批失败归为引擎算法错误。 |
 | **预测误差更低，不等于能预报接触失效。** | 六个已有 Wuji 回合的 100 ms 离线诊断中，常速预测降低位移误差，但接触保持基线仍漏报释放／卸载中的接触丢失。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/contact-response.html) | 另测接触事件与动作响应；重叠窗口不算独立重复，目前没有学习模型或控制收益结论。 |
+| **闭爪命令正确，不代表夹持接触有效。** | RoboDojo 烤面包的两个局部失稳片段中，命令保持闭合，但双指法向冲量由约 **0.25 N·s** 降到接近 0；一例被邻片接触放大，另一例直接从上缘滑脱。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html) | 先修抓取深度、重抓门槛和净空，再对材质读回、顺应性与切向冲量做受控 A/B；不能把整批失败都归咎于仿真器。 |
 
 [完整结果、失败与未完成项 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)
 
@@ -58,6 +59,22 @@
 </a>
 <strong>擦拭：去掉辅助还能完成任务吗？</strong><br>
 辅助保持下 <strong>3/3</strong> 通过；去掉辅助后 <strong>0/3</strong>，最终清洁率约 <strong>95.47% / 39.92%</strong>。
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html">
+<img src="docs/evidence/robodojo-bread-slip/layout-002-preview.gif" width="100%" alt="RoboDojo 面包片受相邻接触后滚边脱落" loading="lazy">
+</a>
+<strong>RoboDojo 烤面包：为什么被旁边面包顶掉？</strong><br>
+闭爪命令正确，但浅夹持被相邻面包／货架接触放大，双指法向载荷归零后滚边脱落。
+</td>
+<td width="50%" valign="top">
+<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html#case-2">
+<img src="docs/evidence/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo 面包片从浅上缘夹持中直接滑脱" loading="lazy">
+</a>
+<strong>RoboDojo 烤面包：为什么没有碰撞也会掉？</strong><br>
+夹持点只比上缘低约 1.4 cm；没有明显外碰撞，双指载荷消失后面包直接下落。
 </td>
 </tr>
 </table>
