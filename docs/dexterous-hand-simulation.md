@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-12 addition: [from scorer exploits to leaderboard gaming](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#benchmark-gaming-audit).** A CoRL 2026 Oral Best Paper Award Finalist connects missing-capability probes, in-support resampling, data proximity and statistical detectability to DexLab's current scoring audit.
+
 **2026-11-11 addition: [simulation benchmarks and transfer priorities for DexLab](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#simulation-benchmarks-2026).** Representative work is separated by physics error, task capability, repeatability and real-world predictive value, with source snapshots and implementation limits.
 
 **[Open the original research page (Chinese): What are we discussing when we discuss dexterous manipulation simulation?](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)**
@@ -226,13 +228,34 @@ Recent [RoboLab](https://github.com/NVlabs/RoboLab) and [RoboDojo](https://arxiv
 
 **5. Ultimately test whether simulation supports the right decision.** SIMPLER compares the same policies in simulation and reality. Its metrics include Pearson correlation and mean maximum rank violation (MMRV), which measures the real-performance gap involved when simulation reverses policy order. With paired hardware conditions, DexLab should evaluate absolute success-rate bias, ordering errors and uncertainty on held-out conditions. Present physics diagnostics and scripted replay do not establish this policy-evaluation capability. CALVIN's chain statistics can describe sequential reliability, provided policy-memory and environment resets are declared separately. [SIMPLER metrics](https://github.com/simpler-env/SimplerEnv/blob/eddb5690749a1e34267807c0f7b5eede323918d7/simpler_env/utils/metrics.py#L134) · [CALVIN sequence implementation](https://github.com/mees/calvin/blob/fa03f01f19c65920e18cf37398a9ce859274af76/calvin_models/calvin_agent/evaluation/evaluate_policy.py#L124)
 
+<a id="benchmark-gaming-audit"></a>
+### From scorer exploits to leaderboard gaming: what does a high score identify?
+
+Jiang et al.'s [What Are We Actually Benchmarking in Robot Manipulation?](https://arxiv.org/abs/2606.04233) (CoRL 2026 Oral, Best Paper Award Finalist) does not show that every leaderboard is fraudulent. Its narrower and more consequential conclusion is that **a total score can mix the target capability with shortcuts, adaptation to a narrow public test distribution, training-data proximity and statistical noise, so the score need not uniquely identify the claimed capability.** Direct scorer manipulation is one layer; protocol gaming remains possible even when the evaluator is implemented as intended.
+
+| Diagnostic | Smallest falsifying result | Leaderboard interpretation it breaks |
+| --- | --- | --- |
+| Missing-capability probe | On LIBERO, a roughly 0.09B DINOv2+MLP reads task-ID embeddings rather than language and reaches 99.0%/100.0%/98.8% on Spatial/Object/Goal. | A high score alone does not prove language understanding, model scale or broad generalization. It also does not prove that a high-scoring VLA lacks those capabilities. |
+| Detectability and paired statistics | With only top-line scores, paired-Wald variance envelopes separate comparisons that must reject, cannot reject, or remain indeterminate. | A slightly higher score is not automatically progress; indeterminate is not evidence of no effect. |
+| In-training-support resampling | CALVIN keeps the 1,000-sequence manifest but resamples block poses within training support. X-VLA/GR-1/RoboFlamingo ATC falls by 1.027/0.749/0.498, with 95% CIs excluding zero. | Long-term tuning may fit a narrow test distribution. Fresh sequence manifests move ATC only slightly, so the evidence does not support strong sample memorization. |
+| Data-source dependence | In SimplerEnv, four 22M task-specific policies trained on 120 scripted simulation demonstrations per task near the official grid score 91/96; X-VLA reports 92/96. | The same score need not demonstrate transfer from real BridgeData V2 to the simulated test. This deliberately test-proximal existence result is not a controlled model ranking. |
+
+DexLab should not answer these findings with another aggregate metric. The minimum sequence added to [Discussion #302](https://github.com/huangkiki/Dexlab/discussions/302#discussioncomment-19558057) is:
+
+1. Keep the region/tolerance, event-order, idle, hidden-support and state-injection **scorer mutation audit** to establish scoring semantics.
+2. For each claimed language, vision, tactile or in-hand capability, remove the corresponding signal or replace it with task IDs, fixed actions or privileged state. Near-original performance supports only completion on the tested distribution.
+3. Resample object pose, support height, camera, contact initialization and semantically symmetric conditions within declared training support. Keep this distinct from deliberately out-of-distribution stress tests.
+4. Disclose shared assets, scene templates, seeds/grids, simulators and generators between train and test. Freeze instances, denominators and independent statistical units in advance, then publish paired episode/run outcomes rather than only totals.
+
+These are one-way falsification tests. Finding a shortcut can refute “the score necessarily proves the capability”; failing to find this shortcut does not complete a benchmark-validity proof. The simple probes remain far below the best reported RoboCasa and RoboTwin 2.0 scores, which means only that these probes did not break those benchmarks. This is an adopted design input, not a new DexLab experiment or result.
+
 ### Concrete choices for DexLab
 
 DexLab already has independent scoring, analytic incline cases, retention records and separate task/numerical diagnostics. The survey adds comparison axes and evidence that could change the next decision, rather than repackaging that work as a new platform.
 
 | Priority | Gap and minimum proposed check | Supported claim and remaining limit |
 | --- | --- | --- |
-| **Audit existing scoring first** | Prepare valid positives and false-completion cases from Wuji/LIBERO records; identify which layer rejects each and whether necessary signals exist. | Criteria match intent for tested counterexamples, not an exhaustive proof against all exploits. |
+| **Audit scoring and capability identifiability first** | Build valid positives and false-completion cases from current Wuji/LIBERO records; then remove one claimed capability and run one in-support resampling, retaining paired instance outcomes. | Criteria match intent for checked counterexamples and the current minimal shortcut was not reproduced; this neither exhausts exploits nor fully identifies the capability. |
 | **Build contact error–cost comparisons** | Independently vary model, timestep or tolerance in qualified existing cases; retain absolute errors, sensitivity, cost and failures. | Conditional numerical/task trade-offs, not universal engine or material rankings. |
 | **Check parallelism when batching is needed** | Freeze stack/input/randomness, vary batch size and repeat independent runs; control recording on/off. | Stability bounds for the tested scene/stack; final-state differences alone do not identify a responsible GPU kernel. |
 | **Try a short sequence after scoring is reliable** | Hold → unload/re-establish → release; declare environment, controller, policy and sensor-history resets; count whole runs. | Tests error accumulation, without replacing existing in-hand rolling/finger-exchange acceptance. |
@@ -242,7 +265,7 @@ These are candidate designs. Execution still follows the frozen applicable-engin
 
 ### Release status, source checks and evidence limits
 
-This was a single-executor review of relevant paper sections, official documents and the fixed files below. No external benchmark installation/run, leaderboard reproduction, training or hardware experiment was performed. Most breadth entries were checked against official descriptions, not their complete implementations. Visible source is not a passed runtime test.
+The earlier breadth review covered relevant paper sections, official documents and the fixed files below without installing or running those external benchmarks, reproducing leaderboards, training policies or performing hardware experiments. The 2026-11-12 addition separately read the full Manipulation Benchmark Audit paper and appendices and recomputed its current public CPU statistical artifacts; it did not rerun policies, simulator rollouts or hardware. Most breadth entries were checked against official descriptions rather than complete implementations. Visible source is not a passed runtime test.
 
 GAUGE's [Hugging Face repository](https://huggingface.co/datasets/InternRobotics/GAUGE-Dataset/tree/main) exposes asset, trajectory and metadata directories. We checked the listing, without downloading or validating the full dataset. Its inspected GitHub tree contains documentation, license and media; the README still lists the evaluation toolkit as forthcoming. The protocol and data organization are useful references, but a complete runnable toolkit was not verified. ContactBench 1.0 has a simulation repository linked from its official project page: its README lists 22 base tasks as 73 runnable rows plus one scene-only task, and explicitly excludes policy learning/evaluation pipelines. Those release descriptions are not a reproduction and cannot be equated with the paper's 36 reference tasks.
 
@@ -257,6 +280,7 @@ GAUGE's [Hugging Face repository](https://huggingface.co/datasets/InternRobotics
 | [HandsOn `fee28452fa`](https://github.com/TsinghuaC3I/HandsOn/tree/fee28452fa50d3ee906445f1717ce2449cc83798) | README and evaluation boundary file: paper tasks, PhysX/Wuji1 demonstrations and later Newton/Wuji2 additions remain separate. Stage findings are paper-reported. |
 | [SIMPLER `eddb569074`](https://github.com/simpler-env/SimplerEnv/tree/eddb5690749a1e34267807c0f7b5eede323918d7) | `simpler_env/utils/metrics.py`: Pearson and MMRV, without treating correlation as parameter calibration. |
 | [CALVIN `fa03f01f19`](https://github.com/mees/calvin/tree/fa03f01f19c65920e18cf37398a9ce859274af76) | `evaluate_policy.py`: default 1,000 sequences, up to five subtasks, distinct environment/model reset locations. |
+| [Manipulation Benchmark Audit `a5ad04ab0f`](https://github.com/ripl/ManipulationBenchmarkAudit/tree/a5ad04ab0f26d46680c4d1c24911c728d37f7d16) | `CLAIMS.md`, claim-to-artifact map, per-episode/sequence summaries and statistical code. This review passed `recompute_claims.py` and `validate_release.py --skip-exact-inputs`. Cite arXiv v1's LIBERO 19.8% separately from the camera-ready artifact's 144/789 = 18.3%. |
 
 The directly relevant DexLab baseline is [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989): `docs/current-work.md`, `incline_score.py`, `pinch_score.py` and `libero_score_v2.py`. LIBERO v2 explicitly separates record/numerical diagnostics from physical validity and learned-policy evaluation. This addition preserves those limits and the historical counts of 38 papers and 19 repositories.
 
