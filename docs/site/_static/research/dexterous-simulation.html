@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="2024–2026灵巧操作仿真：分层筛选38篇arXiv论文，核验19个仓库，完整精读7篇。保留原六层结构，补入HydroShear。" name="description"/><title>当我们在讨论灵巧操作仿真时，我们在讨论什么？</title><style>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="2024–2026灵巧操作仿真：从接触、触觉与策略证据出发，补充RLT/CAP精细插接边界与可复核评测方法。" name="description"/><title>当我们在讨论灵巧操作仿真时，我们在讨论什么？</title><style>
 /* Research blog: presentation only. The article and its filters stay unchanged. */
 :root {
   color-scheme: light;
@@ -225,7 +225,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
   a { color: inherit; }
 }
 </style></head><body>
-<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">仿真评测</a><a href="#robodojo-astra">LLM 操作评测</a></div></nav></header>
+<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">仿真评测</a><a href="#robodojo-astra">LLM 操作评测</a><a href="#precision-insertion-rlt-cap">精细插接</a></div></nav></header>
 <main id="top"><section class="hero"><div><div class="eyebrow">2024.09.10 — 2026.09.10 · 2026.09.14补充HydroShear</div><h1>当我们在讨论<br/><span>灵巧操作仿真</span>时，<br/>我们在讨论什么？</h1><p class="lead">在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</p><div class="chips"><span class="chip">多指 / 双手</span><span class="chip">接触与触觉</span><span class="chip">数据与迁移</span><span class="chip">来源可追溯</span></div></div><aside class="hero-side"><h2>仿真是一整条闭环</h2><div class="loop"><div><b>WORLD</b><span>接触如何演化</span></div><div><b>OBSERVATION</b><span>机器人看见什么</span></div><div><b>ACTION</b><span>动作如何执行</span></div><div><b>VALIDATION</b><span>真机获得什么</span></div></div><p>引擎、画面和FPS各回答一部分。选型从具体接触失效与验收方法开始。</p></aside></section>
 <div class="stats"><div class="stat"><b>38 → 29 → 7</b><span>候选论文 → 核心 → 全文精读</span></div><div class="stat"><b>19</b><span>仓库快照 · 18技术项目 + 1网页</span></div><div class="stat"><b>20</b><span>笔记映射 · 含3条历史线索</span></div><div class="stat"><b>3</b><span>可执行研究路线 · 尚未复现</span></div></div>
 <section class="section" id="funnel"><div class="section-heading"><div class="eyebrow">01 / SCREENING</div><h2>先筛证据，再分问题</h2><p>投入精力的漏斗与技术系统的层次分开；七篇精读由机制互补选出。</p></div><div class="funnel-grid"><div class="funnel"><div class="stage"><div>可审计候选<small>官方标题、v1日期与摘要核验</small></div><b>38</b></div><div class="stage"><div>核心问题层<small>多指 / 双手 + 共享接触与触觉机制</small></div><b>29</b></div><div class="stage"><div>完整精读层<small>全文、图表、公式与局限</small></div><b>7</b></div><div class="stage"><div>决策层<small>假设、基线、退出条件</small></div><b>3</b></div></div><aside class="method"><h3>范围与阅读口径</h3><p>时间窗按arXiv首次提交日期；原六篇保留9月10日核验的版本，HydroShear在9月14日复核后补入。9篇邻接工作单列背景。</p><p>原Obsidian关键词匹配222个文件，本次累计连接20条笔记线索，其中17篇可定位、3条为历史记录。GitHub保留原18仓库快照，新增HydroShear。</p><p class="tiny">这是定向范围调研，未宣称穷尽arXiv。HydroShear作为共享触觉机制纳入；其夹爪实验不当作多指全手验证。本次未运行训练或真机实验。</p></aside></div></section>
@@ -982,7 +982,21 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <div class="export"><a href="https://robodojo-benchmark.com/report/gpt-6-astra-eval">原报告</a><a href="https://arxiv.org/html/2609.24170v1">论文 v1</a><a href="https://github.com/RoboProbe/RoboProbe/tree/3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e">源码快照</a><a href="../../dexterous-hand-simulation.html#robodojo-astra">中文导读</a><a href="#top">回到开头</a></div>
 </section>
 
-<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
+<section class="section" id="precision-insertion-rlt-cap">
+<div class="section-heading"><div><div class="eyebrow">12 / PRECISION INSERTION</div><h2>RLT 与 CAP：先分开目标锚定、关键阶段和真实交互成本</h2></div><p>2026-11-12 蒸馏 · 精细接触 / 在线强化 / 评测预算</p></div>
+<div class="callout"><strong>RLT 与 CAP 不是“哪个更精细”的替代关系。</strong>RLT 用轻量在线强化改进已有 VLA 的最后接触阶段；CAP 用三维接触点明确“在哪里交互”。DexLab 应先定位失败层，再选择机制。</div>
+<p>以 Ethernet 插接为例，找错接口或接触目标不明确更接近 CAP 的目标条件化问题；已经对准却反复试探、退回或接触后犹豫，更接近 RLT 的关键阶段改进问题；碰撞体卡住、力控失配或评分把“到达”误当“插入”，则必须先查几何、柔顺、观测与判据。机械间隙、位姿误差、控制分辨率和成功窗口不能统称为“1 mm 精度”。RLT 没有为 Ethernet 单独给出 1 mm 公差，CAP 也没有公开精密插接实验。</p>
+<div class="table-wrap"><table><thead><tr><th>工作</th><th>实际机制与数据</th><th>证据边界</th></tr></thead><tbody>
+<tr><td><a href="https://arxiv.org/abs/2604.23073">RL Token / RLT</a></td><td>每项任务先用 1–10 小时遥操作示范适配 VLA；冻结 VLA 后，小型 actor–critic 使用 RL token、状态与参考 action chunk 改进 5–20 秒 critical phase。论文的 400–1000 是在线 episode，作者另报约 15 分钟至 5 小时实际机器人运动数据。</td><td>Ethernet 基础策略已接近高成功率，主要收益是吞吐和减少试探。reset、人工奖励、干预、阶段切换、墙钟、失败与磨损仍须计成本。</td></tr>
+<tr><td><a href="https://arxiv.org/abs/2602.09017">Contact-Anchored Policies / CAP</a></td><td>三维 contact anchor 经深度反投影、正向运动学持续跟踪；20,365 条示范、约 23.1 小时，覆盖 Pick / Open / Close。EgoGym 用于 checkpoint 筛选与失败分析。</td><td>没有 Ethernet、peg-in-hole 或 1 mm 插接结果；Pick 上的 sim/real checkpoint 相关性不能外推到精密装配，也不能证明 CAP 是 RLT 的低数据替代。</td></tr>
+</tbody></table></div>
+<h3>DexLab 应保留的四层验收</h3>
+<p><strong>目标锚定：</strong>坐标系、深度、标定误差与目标更新；<strong>关键接触阶段：</strong>进入/退出、局部动作、接触和力；<strong>交互预算：</strong>示范、episode、机器人运动时间、墙钟、reset、干预、失败和磨损；<strong>完整任务：</strong>从抓取、搬运、对准到插入/锁止定位首次失败。critical-phase reset 与 home-position full-task 分开评测，成功率、完成时间、重试和接触力也分别报告。</p>
+<p>只有基础策略稳定到达目标附近、失败集中在最后接触阶段时，RLT 式局部在线强化才是合理候选；只有主要问题是“在哪里交互”时，CAP 式锚定才应优先。组合二者仍是未验证提案。本节是论文与公开入口的静态核查，没有运行策略、checkpoint、仿真或真机实验，也没有新增 DexLab 插接实现。</p>
+<div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/309">完整讨论与证据边界 ↗</a><a href="https://www.pi.website/research/rlt">RLT 官方项目页</a><a href="https://github.com/omarrayyann/EgoGym">EgoGym 公开入口</a><a href="../../dexterous-hand-simulation.html#精细插接不要把-rlt-与-cap-当作替代方案">中文导读</a><a href="#top">回到开头</a></div>
+</section>
+
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · 精细插接专题：2026-11-12 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
 <script>
 const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
 function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}

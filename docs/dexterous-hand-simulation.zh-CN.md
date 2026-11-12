@@ -150,6 +150,18 @@
 
 无论选哪条路线，运行前都应写下一张实验卡：**目标与初态、模型及版本、动作与观测接口、时钟、成功与失败条件、对照、预算、原始记录位置。** 任务、参数和验收变更要形成新的条件记录。继续阅读可从 [Newton 七类论文导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/newton-reading-guide.html)、[实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html)和[诊断方法](https://huangkiki.github.io/Dexlab/zh-cn/latest/diagnosis.html)进入。
 
+## 精细插接：不要把 RLT 与 CAP 当作替代方案
+
+以 Ethernet 插接为例，至少要分开三个问题：目标接口和接触位置是否明确，机器人到达接口后能否完成接触阶段，以及几何、柔顺、力控和评分是否允许真正插入。把它们都称为“1 mm 精度”会混淆机械间隙、位姿误差、控制分辨率和成功窗口。
+
+[RL Token（RLT）](https://arxiv.org/abs/2604.23073)面向第二层：基础 VLA 先完成大范围动作，冻结后的小型 actor–critic 在 RL token、机器人状态和 VLA 参考 action chunk 上改进最后 5–20 秒的关键阶段。论文的 400–1000 是按任务变化的**在线训练 episode 数**，不是示范条数；此前还需要每项任务 1–10 小时遥操作数据。作者另报实际机器人运动数据约 15 分钟至 5 小时，但 reset、人工奖励、干预、阶段切换和总墙钟也属于真实成本。Ethernet 基础策略本来已接近高成功率，RLT 的主要收益是减少试探、提高关键阶段吞吐，不能概括成从零学会插接。
+
+[Contact-Anchored Policies（CAP）](https://arxiv.org/abs/2602.09017)面向第一层：用三维 contact anchor 明确交互位置，并通过正向运动学持续跟踪。其 Close 任务消融中，RGB-only 为 58%，CAP 为 96%，支持接触点条件化在该条件下的价值；公开训练集有 20,365 条示范、约 23.1 小时，覆盖 Pick / Open / Close。论文和 [EgoGym](https://github.com/omarrayyann/EgoGym) checkpoint 没有 Ethernet、peg-in-hole 或 1 mm 插接结果，因此 CAP 不是已验证的 RLT 低数据或更高精度替代。
+
+对 DexLab，更可迁移的是四层验收：**目标锚定**记录坐标系、深度和标定误差；**关键接触阶段**记录进入/退出、局部动作、接触与力；**交互预算**同时记录示范、episode、机器人运动时间、墙钟、reset、人工干预、失败和磨损；**完整任务**从抓取、搬运、对准到插入/锁止定位首次失败层。critical-phase reset 与 home-position full-task 应分别评测，成功率、完成时间、重试和接触力也不能压成一个分数。
+
+只有基础策略稳定到达目标附近、主要失败确实在最后接触阶段时，RLT 式局部在线强化才是合理候选；只有主要问题是“在哪里交互”时，CAP 式锚定才应优先。二者可以组合，但目前仍是待验证提案。完整证据、成本拆分和评分负例见 [Discussion #309](https://github.com/huangkiki/Dexlab/discussions/309)；本节没有新增 DexLab 插接实现或实验。
+
 ## 现有仿真 benchmark：它们测什么，DexLab 应当借什么
 
 **2026-11-11 调研结论：优先借鉴评测方法，把接触模型误差、计算重复性、任务完成与真实预测能力分别报告。** SimBenchmark、ContactBench、GPUSimBench、GAUGE 最贴近 DexLab 的物理诊断；DexGraspBench、ContactBench 1.0、HandsOn 提供操作任务设计；SIMPLER 提供仿真是否能帮助选择真实策略的验收思路。任务更多、成功率更高或 FPS 更大，各自只能支持对应范围的结论。
@@ -260,3 +272,5 @@ DexLab [已有 Poke 适配](https://github.com/huangkiki/Dexlab/blob/4867a8637b5
 本文由 2026-09-10 建立、2026-09-14 补充的《当我们在讨论灵巧操作仿真时，我们在讨论什么》研究笔记整理为公开导读，保留六层框架、研究路线和证据边界。**2026-11-02** 核对了本文引用的官方摘要、文档与 DexLab 已发表案例；HydroShear 和 Dex-X 的入口分别更新到 v2、v3。这里没有重新完成原笔记的全部文献筛选，也没有将旧版细节无条件移植到新版。
 
 2026-11-03 按作者要求公开原版自包含 HTML，保留其 9 月来源和核查口径，再独立追加 10 月工作；本页仍是简版阅读路线。外部论文不记作 DexLab 复现，推荐的实验仍需单独冻结协议后执行。原版快照 SHA-256：`2c41d2ee32f8094298d2398e3950d5b749a3030a62a07e25128df6d709823c00`。
+
+2026-11-12 增补 RLT / CAP 精细插接边界，依据论文、官方项目页与公开仓库入口做静态核查；没有运行策略、checkpoint、仿真或真机实验。Discussion 先行记录取舍，页面只保留长期结论。
