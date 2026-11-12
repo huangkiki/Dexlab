@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-12 addition: [which CoRL 2026 papers DexLab should learn from first](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#corl-2026-dexlab-lessons).** Screening the official accepted-paper list points to stochastic evaluation, layered contact-failure diagnosis and contact-event calibration before another large model or simulator backend.
+
 **2026-11-12 addition: [from scorer exploits to leaderboard gaming](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#benchmark-gaming-audit).** A CoRL 2026 Oral Best Paper Award Finalist connects missing-capability probes, in-support resampling, data proximity and statistical detectability to DexLab's current scoring audit.
 
 **2026-11-11 addition: [simulation benchmarks and transfer priorities for DexLab](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#simulation-benchmarks-2026).** Representative work is separated by physics error, task capability, repeatability and real-world predictive value, with source snapshots and implementation limits.
@@ -291,6 +293,50 @@ GAUGE's [Hugging Face repository](https://huggingface.co/datasets/InternRobotics
 | [Manipulation Benchmark Audit `a5ad04ab0f`](https://github.com/ripl/ManipulationBenchmarkAudit/tree/a5ad04ab0f26d46680c4d1c24911c728d37f7d16) | `CLAIMS.md`, claim-to-artifact map, per-episode/sequence summaries and statistical code. This review passed `recompute_claims.py` and `validate_release.py --skip-exact-inputs`. Cite arXiv v1's LIBERO 19.8% separately from the camera-ready artifact's 144/789 = 18.3%. |
 
 The directly relevant DexLab baseline is [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989): `docs/current-work.md`, `incline_score.py`, `pinch_score.py` and `libero_score_v2.py`. LIBERO v2 explicitly separates record/numerical diagnostics from physical validity and learned-policy evaluation. This addition preserves those limits and the historical counts of 38 papers and 19 repositories.
+
+<a id="corl-2026-dexlab-lessons"></a>
+## CoRL 2026 accepted papers: what DexLab should learn first
+
+> **TL;DR:** The highest-value transfers are not another large VLA or GPU backend. They are three mechanisms that make current results more trustworthy: **use seed distributions and variance decomposition to budget evaluation; diagnose low-amplitude precision separately from sustained contact force; calibrate contact-event timing and false positives before dense tactile rendering or richer deformables.**
+>
+> **One connected example:** For Ethernet insertion, let a seed freeze initial misalignment, clearance, support and friction band. Log contact entry/exit, small action deltas, force history and the first failing layer; score reach → align → insert → seat; then use between-seed and within-seed variance to decide whether to add configurations or repetitions.
+>
+> **Evidence boundary:** This is a static review of papers and official project pages. This pass did not rerun author code, hardware trials or a new DexLab experiment.
+
+### Screening method
+
+On 2026-11-12, the [official CoRL 2026 accepted-paper page](https://2026.corl.org/program/accepted-papers) was screened paper by paper (687 accepted papers). Candidates were first mapped to DexLab's six layers—task/contact, embodiment/actuation, physics, observation, data/policy and real validation—then the papers closest to current gaps were read in depth. Manipulation Benchmark Audit, SuperMimic and RLT/CAP already have dedicated sections and were not reused to inflate this shortlist. Priority reflects improvement to failure attribution, benchmark identifiability or sim/real evidence, not presentation status or model scale.
+
+### Five mechanisms to borrow first
+
+| Priority | Work and author-reported evidence | What DexLab should borrow | What it does not establish |
+| --- | --- | --- | --- |
+| **1. Stochastic evaluation challenges** | [Benchmarking Real-World Robotic Manipulation through Stochastic Challenges](https://arxiv.org/html/2611.12804v1): two labs, Spot/Stretch and 568 real trials; separates seed-difficulty variance from repeated-trial variance. | Store `seed → task → repeat → outcome`; declare the smallest important effect, significance and power before evaluation; preserve paired seeds across methods. | KALLAX is not a calibration of dexterous contact physics. Cross-team reconstruction variance is unmeasured and success labels still need an audit. |
+| **2. Separate precision failure from force failure** | [Demystifying When and Why VLAs Fail in Contact-Rich Tasks and How to Fix Them](https://arxiv.org/html/2608.01402v2) (FACT, Spotlight): five real tasks and about 2,500 rollouts; FACT reports 66% mean success versus about 40.5% for the strongest comparator. | Log low-amplitude action distributions, contact entry/exit, current force and force history. Use the first failing layer to distinguish “not aligned” from “aligned but failed to sustain the right force.” | The evidence uses one robot/F-T sensor; low-noise sampling and force injection are architecture-specific. It does not show that simply adding force channels always helps. |
+| **3. Calibrate contact events before dense tactile simulation** | [Blind Dexterous Grasping via Real2Sim2Real Tactile Policy Learning](https://arxiv.org/html/2606.11767v2): calibrates SDF/penalty contact using real onset/offset; onset error drops 426 ms→96 ms and FPR 4.2%→2.2%. | On existing pinch/hold records, align contact onset/offset and report timing, F1 and FPR while retaining empty-grasp, slip and drop failures. | Real grasp success is only 27% over 20 objects and five trials/object. Better event agreement does not establish robust grasping. |
+| **4. Parameterized deformable tasks and staged scoring** | [WireCraft](https://arxiv.org/html/2606.18097v3) (Spotlight): connector insertion, clip routing and channel seating with articulated/FEM cable models and simulation plus selected UR5 data. | Borrow reach-versus-insert/seat metrics and freeze geometry, difficulty axes and failure types for cutting/rope/wire tasks; add load and damage proxies. | Neither cable model is quantitatively calibrated to the real wire, forces are unvalidated and hardware covers selected settings on one UR5. |
+| **5. Ablate broad play priors against precise task fine-tuning** | [Play2Perfect](https://arxiv.org/html/2606.26428v4) (Oral): task-agnostic dexterous play followed by sparse-reward assembly; authors report 33× sample efficiency over scratch. | Borrow the symmetric ablations: object/contact diversity in pretraining, precision-contact fine-tuning, and separate tolerances/stage success. | The main success tolerance is 1 cm; tight-clearance tests use separate mechanics, few real trials, pose tracking and external skill sequencing. This is not a complete autonomous assembly pipeline. |
+
+### Conditional transfers, not the present first step
+
+| Direction | Candidate work | Trigger for DexLab |
+| --- | --- | --- |
+| Temporal roles for tactile policies | [PACE](https://arxiv.org/html/2610.16308v1) (Oral) separates persistent contact state, abrupt events and predicted future contact consequences. | When DexLab actually trains chunk policies. Logs can adopt these temporal roles now without copying the network. |
+| Low-cost external-force estimation | [FACTR 2](https://arxiv.org/html/2606.12406v2) (Oral) subtracts learned free-space inverse dynamics from motor torque. | For HIL/hardware collection without an F/T sensor; absolute force scale still needs external calibration. |
+| Unified tactile representations | [UniVTAC](https://arxiv.org/html/2602.10093v1) covers three sensors and eight tasks, reporting +17.1% mean in simulation and 43.3%→68.3% on three real tasks. | When two or more real tactile sensors share a task. Sixty real rollouts and human scoring do not replace physics calibration. |
+| Deformable prediction and uncertainty | [PGRD](https://arxiv.org/html/2607.13451v1) (Spotlight) adds learned residual velocity to an optimizable spring-mass model; [CORD-SLS](https://arxiv.org/html/2606.14188v1) (Spotlight) combines smoothed-contact differentiable simulation with conformal uncertainty for rope/cloth MPC. | When cutting/rope/cloth becomes the active line. Better residual trajectories do not imply identifiable material/force parameters, and smoothed-contact gradients are not raw rigid-contact gradients. |
+| Engines and toolchains | [Kamino](https://arxiv.org/html/2603.16536v2) (Spotlight) targets GPU-parallel multibodies with closed loops; [RoboKit](https://github.com/OpenRoboKit/RoboKit) offers batched differentiable kinematics and optimizers. | Audit only when closed-loop/mimic joints or shared batched kinematic objectives are an observed bottleneck; neither addresses current scorer/contact-evidence gaps directly. |
+
+### Effect on DexLab's current ordering
+
+CoRL 2026 reinforces rather than replaces the current order:
+
+1. **Scorer semantics audit remains first.** If pseudo-completion passes, a larger $K$ estimates the wrong quantity more precisely.
+2. **After it passes, retain hierarchical paired raw outcomes immediately.** Estimate between-seed and within-seed variance on a small pilot, then freeze the budget. This is a design proposal, not approval or completion of a new experiment.
+3. **Use the same contract for the short persistent sequence.** Hold → unload/re-establish → release is one run-level statistical unit; frames, contacts and stages within it are not independent samples.
+4. **Do not add a large engine or task suite yet.** Start a targeted Kamino, PGRD/CORD-SLS or UniVTAC reproduction only when a reliable scorer and first-failing-layer evidence identify closed loops, deformables or tactile representation as the actual bottleneck.
+
+This section is an official-list screen and full-text audit of priority papers. Numbers in the tables are author-reported, not DexLab measurements. Except for public project pages/repositories, no external system was installed or run. The complete derivation, three figures and two tables for Stochastic Challenges are separately preserved in the Obsidian note `StochasticChallenges`.
 
 <a id="robodojo-astra"></a>
 ## RoboDojo / Astra: separate model decisions, execution and scoring

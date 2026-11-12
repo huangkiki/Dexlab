@@ -225,7 +225,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
   a { color: inherit; }
 }
 </style></head><body>
-<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">仿真评测</a><a href="#robodojo-astra">LLM 操作评测</a><a href="#precision-insertion-rlt-cap">精细插接</a></div></nav></header>
+<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">仿真评测</a><a href="#corl-2026-dexlab-lessons">CoRL 2026</a><a href="#robodojo-astra">LLM 操作评测</a><a href="#precision-insertion-rlt-cap">精细插接</a></div></nav></header>
 <main id="top"><section class="hero"><div><div class="eyebrow">2024.09.10 — 2026.09.10 · 2026.09.14补充HydroShear</div><h1>当我们在讨论<br/><span>灵巧操作仿真</span>时，<br/>我们在讨论什么？</h1><p class="lead">在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</p><div class="chips"><span class="chip">多指 / 双手</span><span class="chip">接触与触觉</span><span class="chip">数据与迁移</span><span class="chip">来源可追溯</span></div></div><aside class="hero-side"><h2>仿真是一整条闭环</h2><div class="loop"><div><b>WORLD</b><span>接触如何演化</span></div><div><b>OBSERVATION</b><span>机器人看见什么</span></div><div><b>ACTION</b><span>动作如何执行</span></div><div><b>VALIDATION</b><span>真机获得什么</span></div></div><p>引擎、画面和FPS各回答一部分。选型从具体接触失效与验收方法开始。</p></aside></section>
 <div class="stats"><div class="stat"><b>38 → 29 → 7</b><span>候选论文 → 核心 → 全文精读</span></div><div class="stat"><b>19</b><span>仓库快照 · 18技术项目 + 1网页</span></div><div class="stat"><b>20</b><span>笔记映射 · 含3条历史线索</span></div><div class="stat"><b>3</b><span>可执行研究路线 · 尚未复现</span></div></div>
 <section class="section" id="funnel"><div class="section-heading"><div class="eyebrow">01 / SCREENING</div><h2>先筛证据，再分问题</h2><p>投入精力的漏斗与技术系统的层次分开；七篇精读由机制互补选出。</p></div><div class="funnel-grid"><div class="funnel"><div class="stage"><div>可审计候选<small>官方标题、v1日期与摘要核验</small></div><b>38</b></div><div class="stage"><div>核心问题层<small>多指 / 双手 + 共享接触与触觉机制</small></div><b>29</b></div><div class="stage"><div>完整精读层<small>全文、图表、公式与局限</small></div><b>7</b></div><div class="stage"><div>决策层<small>假设、基线、退出条件</small></div><b>3</b></div></div><aside class="method"><h3>范围与阅读口径</h3><p>时间窗按arXiv首次提交日期；原六篇保留9月10日核验的版本，HydroShear在9月14日复核后补入。9篇邻接工作单列背景。</p><p>原Obsidian关键词匹配222个文件，本次累计连接20条笔记线索，其中17篇可定位、3条为历史记录。GitHub保留原18仓库快照，新增HydroShear。</p><p class="tiny">这是定向范围调研，未宣称穷尽arXiv。HydroShear作为共享触觉机制纳入；其夹爪实验不当作多指全手验证。本次未运行训练或真机实验。</p></aside></div></section>
@@ -980,8 +980,41 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 
 <div class="export"><a href="../../dexterous-hand-simulation.html">中文导读</a><a href="https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html">English guide</a><a href="#top">回到开头</a></div>
 </section>
+<section class="section" id="corl-2026-dexlab-lessons">
+<div class="section-heading"><div><div class="eyebrow">11 / CORL 2026 DISTILLATION</div><h2>CoRL 2026 录取论文：DexLab 最应该先学什么？</h2></div><p>2026-11-12 专题增补 · 评测统计 / 接触诊断 / sim-real 校准</p></div>
+<div class="callout"><strong>TL;DR：</strong> 这届最值得 DexLab 学的不是又一个大 VLA 或 GPU 引擎，而是三个能让当前结果更可信的机制：<strong>用 seed 分布和方差分解决定评测预算；把低速精密修正与持续接触力分开诊断；先校准接触事件的时间和误报，再追求稠密触觉或复杂形变。</strong><br/><br/><strong>一个连贯例子：</strong> 以太网插头插入中，seed 冻结初始偏差、间隙、支撑和摩擦档位；日志分开接触进入/退出、微小动作、力历史和首个失败层；按到达→对齐→插入→坐实评分；最后用 seed 方差与同 seed 试次方差决定增加场景还是重复。<br/><br/><strong>证据边界：</strong> 本轮是论文和官方项目的静态审读，没有重跑作者代码、真机或 DexLab 新实验。</div>
+<h3>筛选方法</h3>
+<p>2026-11-12 按 <a href="https://2026.corl.org/program/accepted-papers">CoRL 2026 官方录取页</a>逐项筛查 687 篇录取论文，先按任务/接触、本体/执行、物理、观测、数据/策略、真实验证六层筛选，再精读与 DexLab 当前缺口最相关的论文。已单独整理的 Manipulation Benchmark Audit、SuperMimic 和 RLT/CAP 不重复计入推荐。优先级看能否改善物理失败归因、评测可识别性或 sim/real 证据，不看 oral/spotlight 头衔或模型规模。</p>
+<h3>优先借的五个机制</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>顺序</th><th>工作与作者证据</th><th>DexLab 应该借什么</th><th>不能外推什么</th></tr></thead>
+<tbody>
+<tr><td><strong>1. 随机挑战评测</strong></td><td><a href="https://arxiv.org/html/2611.12804v1">Stochastic Challenges</a>：两个实验室、Spot/Stretch、568 次真机试验；区分 seed 难度方差与同 seed 试次方差。</td><td>保存 <code>seed → task → repeat → outcome</code>；预先声明最小重要差值、显著性和 power；方法间保留配对 seed。</td><td>KALLAX 不是灵巧接触物理标定；跨团队场景重建方差未测，成功标签仍需审计。</td></tr>
+<tr><td><strong>2. 分开精度与力失败</strong></td><td><a href="https://arxiv.org/html/2608.01402v2">FACT</a> (Spotlight)：5 项真机任务、约 2,500 rollouts；作者报告 66% 平均成功，最强对照约 40.5%。</td><td>记录低幅动作、接触进入/退出、当前力和力历史；用 first-failing-layer 区分没对准与没维持正确力。</td><td>单机器人/F-T 传感器与架构特定设计，不证明多加力通道必然有效。</td></tr>
+<tr><td><strong>3. 先校准接触事件</strong></td><td><a href="https://arxiv.org/html/2606.11767v2">Blind Dexterous Grasping</a>：真实 onset/offset 校准后 onset 误差 426 ms→96 ms，FPR 4.2%→2.2%。</td><td>在 pinch/hold 记录上先报接触进入/退出时间、F1、FPR，保留空抓、滑移和脱落失败。</td><td>真机总抓取成功率仅 27%；事件一致性改善不等于稳定抓取已解决。</td></tr>
+<tr><td><strong>4. 柔性任务与分阶段评分</strong></td><td><a href="https://arxiv.org/html/2606.18097v3">WireCraft</a> (Spotlight)：连接器插入、clip routing、channel seating；铰接链/FEM 线缆和选定 UR5 数据。</td><td>借到达→插入/坐实的分阶段指标，为切割、绳/线操作冻结难度轴、失败类型、载荷和损伤代理。</td><td>线缆模型未定量标定，力未验证，不能称物理保真已证明。</td></tr>
+<tr><td><strong>5. 广度先验 vs 精密微调</strong></td><td><a href="https://arxiv.org/html/2606.26428v4">Play2Perfect</a> (Oral)：先 dexterous play 后精密装配，作者报告比 scratch 省 33× 样本。</td><td>借对称消融：物体/接触多样性预训练、精密任务微调、容差与阶段成功分开评估。</td><td>主成功容差 1 cm；紧配合、少量真机试次、位姿跟踪和外部技能编排不是完整自主装配。</td></tr>
+</tbody></table></div>
+<h3>有条件借鉴，不是当前第一顺位</h3>
+<ul>
+<li><a href="https://arxiv.org/html/2610.16308v1">PACE</a> (Oral)：将慢变持续接触、突发事件和未来接触后果分开；真正训练 chunk policy 时再复现。</li>
+<li><a href="https://arxiv.org/html/2606.12406v2">FACTR 2</a> (Oral)：从电机力矩估外部关节力矩；适合 HIL/真机无 F/T 采集，绝对标度仍需外部校准。</li>
+<li><a href="https://arxiv.org/html/2602.10093v1">UniVTAC</a>：3 种传感器、8 任务；有多种真实触觉传感器与统一任务时再导入，60 次真机 rollout 不代替物理校准。</li>
+<li><a href="https://arxiv.org/html/2607.13451v1">PGRD</a> / <a href="https://arxiv.org/html/2606.14188v1">CORD-SLS</a> (Spotlight)：等切割/绳/布成为主线；残差轨迹精度不等于材料/力可识别，平滑梯度也不是原始刚性接触梯度。</li>
+<li><a href="https://arxiv.org/html/2603.16536v2">Kamino</a> / <a href="https://github.com/OpenRoboKit/RoboKit">RoboKit</a>：只在闭环/模仿关节或批量运动学目标成为实际瓶颈时审计；它们不直接修复当前 scorer 和接触证据缺口。</li>
+</ul>
+<h3>对当前 DexLab 顺序的影响</h3>
+<ol>
+<li><strong>scorer semantics audit 仍然第一。</strong>如果伪完成也能得分，更大的 <em>K</em> 只会更精确地估计错误量。</li>
+<li><strong>通过后保存分层、配对原始结果。</strong>先用小型先导批估计 seed 方差与试次方差，再冻结预算；这是设计建议，不是新实验已获批或已完成。</li>
+<li><strong>短 persistent sequence 沿用同一合同。</strong>保持→卸载/重建接触→释放的整条 run 才是独立统计单位，链内帧/接触/阶段不能冒充独立样本。</li>
+<li><strong>暂不引入新大引擎/大任务库。</strong>只当可靠 scorer 和 first-failing-layer 指向闭环、柔性物体或触觉表示时，再做定向复现。</li>
+</ol>
+<p>表中数字是作者报告，不是 DexLab 实测。除公开项目页/仓库外，本轮没有安装运行外部系统。Stochastic Challenges 的完整统计推导、3 张图和 2 张表已另存 Obsidian 笔记。</p>
+<div class="export"><a href="../../dexterous-hand-simulation.html#corl-2026-dexlab-lessons">中文导读</a><a href="https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#corl-2026-dexlab-lessons">English guide</a><a href="https://2026.corl.org/program/accepted-papers">官方录取页</a><a href="#top">回到开头</a></div>
+</section>
 <section class="section" id="robodojo-astra">
-<div class="section-heading"><div><div class="eyebrow">11 / POLICY, HARNESS AND FEEDBACK</div><h2>RoboDojo / Astra：会纠正动作，离可靠接触控制还有多远？</h2></div><p>2026-11-11 蒸馏 · 本体与执行器 / 传感与观测 / 数据与策略 / 验证</p></div>
+<div class="section-heading"><div><div class="eyebrow">12 / POLICY, HARNESS AND FEEDBACK</div><h2>RoboDojo / Astra：会纠正动作，离可靠接触控制还有多远？</h2></div><p>2026-11-11 蒸馏 · 本体与执行器 / 传感与观测 / 数据与策略 / 验证</p></div>
 <p><strong>最值得借鉴的是把模型决策、动作执行和独立评分拆开记录，再用受控扰动定位失败。</strong>这份工作支持把通用语言模型放进机器人动作闭环；它尚不足以支持用语言推理替代快速、连续的接触控制。对 DexLab，优先补齐已有策略适配的动作回执和可复算证据，再讨论扩大模型榜单。</p>
 <h3>从一次夹取看清谁在控制</h3>
 <p>以“夹起剪刀”为教学例子：模型从相机图像估计夹取位置，请求末端移动；工具层检查目标、把抓取点转换到机器人末端、规划并插值关节轨迹；执行后回传实际到达位置和图像，模型再决定修正、闭爪或抬升。最终由环境判定成功。这里的 <em>harness</em> 就是连接模型工具调用与机器人执行的本地程序；它的能力和限制会进入最终成绩。</p>
@@ -1027,7 +1060,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/309">完整讨论与证据边界 ↗</a><a href="https://www.pi.website/research/rlt">RLT 官方项目页</a><a href="https://github.com/omarrayyann/EgoGym">EgoGym 公开入口</a><a href="../../dexterous-hand-simulation.html#精细插接不要把-rlt-与-cap-当作替代方案">中文导读</a><a href="#top">回到开头</a></div>
 </section>
 
-<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · 精细插接专题：2026-11-12 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
 <script>
 const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
 function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}
