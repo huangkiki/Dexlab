@@ -218,6 +218,12 @@
 <a id="benchmark-gaming-audit"></a>
 ### 从“评分漏洞”到“榜单投机”：高分究竟识别了什么
 
+> **TL;DR：** 机器人榜单不需要篡改 scorer 也能被“hack”——模型可以不学榜单声称要考的能力，只利用任务编号、固定测试分布或贴近测试的训练数据，仍然拿到高分。
+>
+> **例子：** LIBERO 本来想考“机器人能否读懂指令并完成操作”，但一个不读语言、只查 task ID 的约 0.09B DINOv2+MLP，在 Spatial/Object/Goal 上仍得到 99.0%/100.0%/98.8%。这就像声称考阅读理解，学生不读文章，只记住“第 3 题选 B”也能拿满分。
+>
+> **它证明** LIBERO 总分本身不能证明语言理解能力。**它不证明** 高分 VLA 一定没有语言能力，也不证明所有 benchmark 都无效。对 DexLab，先审计 scorer，再做“去掉声称能力”的最小探针和训练支持内重采样，最后才扩展 persistent contact sequence。
+
 Jiang 等人的 [What Are We Actually Benchmarking in Robot Manipulation?](https://arxiv.org/abs/2606.04233)（CoRL 2026 Oral, Best Paper Award Finalist）并不是在证明“所有榜单都造假”。它更严格的结论是：**总分可能同时由目标能力、任务捷径、长期适配的窄测试分布、训练数据距离和统计噪声产生，因而高分未必能唯一识别所声称的能力。** 这与直接改 scorer 是两个层次：先问 evaluator 是否接受伪完成，再问协议是否允许不具备目标能力的系统得高分。
 
 | 诊断 | 论文的最小反证 | 被破坏的榜单解释 |

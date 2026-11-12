@@ -231,6 +231,12 @@ Recent [RoboLab](https://github.com/NVlabs/RoboLab) and [RoboDojo](https://arxiv
 <a id="benchmark-gaming-audit"></a>
 ### From scorer exploits to leaderboard gaming: what does a high score identify?
 
+> **TL;DR:** A robot leaderboard can be “hacked” without altering its scorer: a model may ignore the capability the benchmark claims to test and exploit task IDs, a fixed test distribution or training data close to the test instead.
+>
+> **Example:** LIBERO is commonly read as testing whether a robot can understand an instruction and execute it. Yet a roughly 0.09B DINOv2+MLP that reads no language and only looks up a task ID reaches 99.0%/100.0%/98.8% on Spatial/Object/Goal. This is like a reading-comprehension exam where a student ignores the passage, memorizes “question 3 is B,” and still receives full marks.
+>
+> **This shows** that the LIBERO total alone cannot establish language understanding. **It does not show** that a high-scoring VLA necessarily lacks language ability or that every benchmark is invalid. For DexLab, audit the scorer first, then run a missing-capability probe and an in-training-support resampling before extending a persistent contact sequence.
+
 Jiang et al.'s [What Are We Actually Benchmarking in Robot Manipulation?](https://arxiv.org/abs/2606.04233) (CoRL 2026 Oral, Best Paper Award Finalist) does not show that every leaderboard is fraudulent. Its narrower and more consequential conclusion is that **a total score can mix the target capability with shortcuts, adaptation to a narrow public test distribution, training-data proximity and statistical noise, so the score need not uniquely identify the claimed capability.** Direct scorer manipulation is one layer; protocol gaming remains possible even when the evaluator is implemented as intended.
 
 | Diagnostic | Smallest falsifying result | Leaderboard interpretation it breaks |
