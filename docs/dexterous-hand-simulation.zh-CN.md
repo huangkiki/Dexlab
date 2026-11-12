@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-12 专题增补：[从“评分漏洞”到“榜单投机”](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#benchmark-gaming-audit)。** 以 CoRL 2026 Oral Best Paper Award Finalist 为例，把缺失能力探针、训练支持内重采样、数据距离和统计可检测性接到 DexLab 当前评分审计。
+
 **2026-11-11 专题增补：[现有仿真 benchmark 与 DexLab 的借鉴顺序](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#simulation-benchmarks-2026)。** 按物理误差、任务能力、重复性与真实预测价值整理代表工作，并给出源码快照和实施边界。
 
 **[打开本机原版研究页面：当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)**
@@ -213,13 +215,34 @@
 
 **5. 最终检查仿真是否帮助作出正确选择。** SIMPLER 的价值是比较同一批策略在仿真与真实环境中的表现。其指标代码同时提供 Pearson 相关性和 mean maximum rank violation（MMRV）：后者衡量仿真排错顺序时，涉及的真实表现差距有多大。DexLab 后续若具备配对真机条件，应在未用于调参的条件上同时看绝对成功率偏差、排序错误和不确定度。当前的物理诊断与脚本回放不能冒称这种策略评价已经完成。CALVIN 的链长统计可借来描述连续任务可靠性，但还要声明策略记忆和环境状态分别何时重置。[SIMPLER 指标源码](https://github.com/simpler-env/SimplerEnv/blob/eddb5690749a1e34267807c0f7b5eede323918d7/simpler_env/utils/metrics.py#L134) · [CALVIN 序列实现](https://github.com/mees/calvin/blob/fa03f01f19c65920e18cf37398a9ce859274af76/calvin_models/calvin_agent/evaluation/evaluate_policy.py#L124)
 
+<a id="benchmark-gaming-audit"></a>
+### 从“评分漏洞”到“榜单投机”：高分究竟识别了什么
+
+Jiang 等人的 [What Are We Actually Benchmarking in Robot Manipulation?](https://arxiv.org/abs/2606.04233)（CoRL 2026 Oral, Best Paper Award Finalist）并不是在证明“所有榜单都造假”。它更严格的结论是：**总分可能同时由目标能力、任务捷径、长期适配的窄测试分布、训练数据距离和统计噪声产生，因而高分未必能唯一识别所声称的能力。** 这与直接改 scorer 是两个层次：先问 evaluator 是否接受伪完成，再问协议是否允许不具备目标能力的系统得高分。
+
+| 诊断 | 论文的最小反证 | 被破坏的榜单解释 |
+| --- | --- | --- |
+| 缺失能力探针 | LIBERO 上约 0.09B 的 DINOv2+MLP 不读语言，只用 task-ID embedding；Spatial/Object/Goal 为 99.0%/100.0%/98.8%。 | “高分必然证明语言理解、大模型或广泛泛化”不成立。这不证明高分 VLA 没有这些能力。 |
+| 可检测性与配对统计 | 从只有总分的记录构造 paired Wald 方差上下包络，分成必然显著、必然不显著与无法判断。 | “新分数略高就是真进步”不成立；无法判断也不能偷换成已证明不显著。 |
+| 训练支持内重采样 | CALVIN 保持同一 1,000-sequence manifest，只重采样训练范围内 block pose；X-VLA/GR-1/RoboFlamingo 的 ATC 下降 1.027/0.749/0.498，95% CI 均不跨 0。 | 长期调参可能适配了窄测试分布。只换 sequence manifest 影响很小，当前证据不支持强样本记忆解释。 |
+| 数据来源依赖 | SimplerEnv 中，每任务 120 条贴近官方 grid 的脚本仿真 demo 训练 22M policy，合计 91/96；X-VLA 报告 92/96。 | 同一总分未必证明从真实 BridgeData V2 到仿真测试的跨域泛化。这是有意偏向测试域的存在性反例，不是公平模型排名。 |
+
+对 DexLab，不应以又加一个总分来回应这些结果。当前 [Discussion #302](https://github.com/huangkiki/Dexlab/discussions/302#discussioncomment-19558057) 的最小顺序是：
+
+1. 保留 region/tolerance、事件顺序、idle、隐藏支撑与 state injection 的 **scorer mutation audit**，先确认评分语义。
+2. 对每项声称的语言、视觉、触觉或手内能力，去掉该信号，或用 task ID、固定动作、特权状态替代。若仍接近原分，只能声称完成了当前测试分布。
+3. 在已声明的训练支持内重采样物体初姿、支撑高度、相机、接触初态与语义对称条件；这与故意制造 OOD 应激分开。
+4. 披露训练数据是否共享资产、scene template、seed/grid、仿真器或生成器；评测前冻结实例、分母和独立统计单位，保存逐 episode/run 的成对结果。
+
+这些诊断是单向反证：找到捷径能否定“分数必然证明能力”，未找到当前捷径不能完成 benchmark validity proof。RoboCasa/RoboTwin 2.0 的简单探针明显落后于榜首，只能说它们没被这一探针破掉。当前方案仍是设计输入，没有启动 DexLab 新实验。
+
 ### 对 DexLab 的具体取舍
 
 DexLab 已有独立评分、解析斜面、接触保持和任务/诊断分离的记录。本次调研补充的是：怎样给这些结果提供更明确的比较轴，以及哪些外部证据能够改变下一步决策；不把现有工作重新包装成一套新平台。
 
 | 借鉴顺序 | 对应缺口与最小验证建议 | 通过后能说什么；仍不能说什么 |
 | --- | --- | --- |
-| **先审计既有评分** | 基于当前 Wuji / LIBERO 记录准备合理成功和伪完成反例，保存每个反例被哪一层拒绝；先检查信号是否足以判断。 | 可说明已检查反例下判据符合任务意图；不能说明所有漏洞已穷尽。 |
+| **先审计评分与能力可识别性** | 基于当前 Wuji / LIBERO 记录准备合理成功和伪完成反例；再去掉一项声称能力并做一个训练支持内重采样，保存逐实例配对结果。 | 可说明已检查反例下判据符合任务意图，且当前最小捷径未复现；不能说明所有漏洞已穷尽或能力已被完整识别。 |
 | **再建立接触机制的误差—成本对照** | 在已有合格案例上分开改接触模型、步长或容差；保留绝对误差、敏感性、耗时和全部失败。 | 可说明条件内的数值/任务取舍；不能推为全引擎或真实材料排名。 |
 | **有批量运行需求时检查并行影响** | 冻结设备、版本、输入和随机性，改变批量规模并重复独立运行；把记录开/关作为受控变量。 | 可界定该软件栈和场景的稳定区间；不能从终态差异直接断言某个 GPU 内核是原因。 |
 | **评分可靠后做短连续序列** | 保持→卸载/重建接触→释放；明确环境、控制器、策略和传感历史的重置边界，以整条 run 统计。 | 可检验错误如何跨阶段积累；不替代既有手内滚动/换指验收。 |
@@ -229,7 +252,7 @@ DexLab 已有独立评分、解析斜面、接触保持和任务/诊断分离的
 
 ### 发布状态、源码核查与证据边界
 
-本轮为单执行者调研，读取论文相关章节、官方项目/评测文档及下列固定版本关键文件。未安装运行外部 benchmark、复测论文排行榜、训练策略或做硬件实验。表中多数广度条目只核查官方描述，未逐项审计完整实现；“源码可见”也不等于“本轮运行通过”。
+前一轮广度调研读取了论文相关章节、官方项目/评测文档及下列固定版本关键文件，未安装运行这些外部 benchmark、复测排行榜、训练策略或做硬件实验。2026-11-12 增补另外通读 Manipulation Benchmark Audit 全文/附录，并复算其当前公开 CPU 统计产物；没有重跑 policy、仿真 rollout 或真机。表中多数广度条目只核查官方描述，未逐项审计完整实现；“源码可见”也不等于“本轮运行通过”。
 
 GAUGE 的 [Hugging Face 数据仓库](https://huggingface.co/datasets/InternRobotics/GAUGE-Dataset/tree/main) 可见资产、轨迹与元数据目录；本轮只核查目录，未下载或校验全量数据。其 GitHub 快照仅有说明、许可及媒体，README 仍写评测工具待发布，因此可以研究协议和数据组织，不能称为已核实可直接运行的完整工具链。ContactBench 1.0 则已存在官方项目页链接的仿真仓库：README 列出 22 个基础任务对应 73 个可运行行、另一个仅场景任务，并明确不含策略学习/评估管线；这些发布说明不等于本轮复现，也不能与论文的 36 项参考任务等同。
 
@@ -244,6 +267,7 @@ GAUGE 的 [Hugging Face 数据仓库](https://huggingface.co/datasets/InternRobo
 | [HandsOn `fee28452fa`](https://github.com/TsinghuaC3I/HandsOn/tree/fee28452fa50d3ee906445f1717ce2449cc83798) | README、评估边界文件：区分原论文任务、PhysX/Wuji1 示范与后续 Newton/Wuji2 扩展；阶段结论归于论文报告。 |
 | [SIMPLER `eddb569074`](https://github.com/simpler-env/SimplerEnv/tree/eddb5690749a1e34267807c0f7b5eede323918d7) | `simpler_env/utils/metrics.py`：Pearson 与 MMRV；未把相关性解释为参数标定。 |
 | [CALVIN `fa03f01f19`](https://github.com/mees/calvin/tree/fa03f01f19c65920e18cf37398a9ce859274af76) | `evaluate_policy.py`：默认 1,000 条序列、最多 5 个子任务、环境与模型不同的 reset 位置。 |
+| [Manipulation Benchmark Audit `a5ad04ab0f`](https://github.com/ripl/ManipulationBenchmarkAudit/tree/a5ad04ab0f26d46680c4d1c24911c728d37f7d16) | `CLAIMS.md`、claim-to-artifact map、逐 episode/sequence 摘要与统计代码；本轮 `recompute_claims.py` 和 `validate_release.py --skip-exact-inputs` 通过。arXiv v1 的 LIBERO 19.8% 与 camera-ready 产物 144/789 = 18.3% 分开引用。 |
 
 与本次迁移判断直接相关的 DexLab 基线是 [`4867a8637b`](https://github.com/huangkiki/Dexlab/tree/4867a8637b5999f4169a6dd8a36ecf6ffdede989)：`docs/current-work.md`、`incline_score.py`、`pinch_score.py` 和 `libero_score_v2.py`。其中 LIBERO v2 明确把记录与数值诊断同物理有效性、学习策略评价分开。本专题延续这些边界；不改变原 38 篇论文、19 个仓库的历史计数。
 
