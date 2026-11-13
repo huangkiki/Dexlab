@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-13 addition: [RoboColiseum: command replay, simulation validity, and complete-task evaluation](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#robocoliseum).** Discussion first, then transferable mechanisms and timing, reaction-force, and validation boundaries.
+
 **2026-11-12 addition: [which CoRL 2026 papers DexLab should learn from first](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#corl-2026-dexlab-lessons).** Screening the official accepted-paper list points to stochastic evaluation, layered contact-failure diagnosis and contact-event calibration before another large model or simulator backend.
 
 **2026-11-12 addition: [from scorer exploits to leaderboard gaming](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#benchmark-gaming-audit).** A CoRL 2026 Oral Best Paper Award Finalist connects missing-capability probes, in-support resampling, data proximity and statistical detectability to DexLab's current scoring audit.
@@ -366,6 +368,38 @@ DexLab's [Poke adapter](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f
 Next, a candidate comparison could hold prompts, conversion, model-call and environment-step budgets fixed, compare full history with current-observation-only control, and introduce one coordinate bias. Score semantic choice, arrival, contact retention and release separately; retain failures, timeouts, abandonment, infrastructure errors and missing cost records. This is an unexecuted proposal. Defer a larger leaderboard and a new agent framework until repeated matched comparisons justify them. Evidence of contact-control gains and transfer to another simulator or hardware would change that priority.
 
 Checked on 2026-11-11 against paper v1, the live report and RoboProbe commit `3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e`. This was static inspection and arithmetic recomputation, not a model or physics rerun. Slots retain actual layout IDs, including thirteen IDs ≥ 50; 134 scored Astra episodes lack cost transcripts. Original collection, budget-version correspondence and transfer remain unverified here. The historical 38-paper and 19-repository counts are unchanged.
+
+
+<a id="robocoliseum"></a>
+## RoboColiseum: replay commands, validate responses, then compare complete tasks
+
+**The useful contribution is a connection between simulation validity and model evaluation.** Freeze issued commands, let dynamics produce robot and object responses, validate fitted behavior on independent conditions, and compare complete tasks under explicit budgets. Scene scale and leaderboard scores cannot replace this chain. [Discussion and trade-offs](https://github.com/huangkiki/Dexlab/discussions/329)
+
+Consider picking up a cup, turning it, and placing it down: retain joint/gripper targets together with measured arrival, contact establishment, retention, and release. Writing the cup pose every frame reproduces images; letting contact dynamics move it tests the response to a fixed input. This is a teaching example, not an additional author experiment. The [platform report, §1](https://robocoliseum.ai/techreport/robocoliseum#en-sub-1-1), describes approximately 100 Hz command replay with 1 ms physics substeps, separating source fitting, frozen-parameter transfer, and target-backend adaptation.
+
+### Three distinctions worth transferring
+
+| Distinction | Why it changes interpretation | What DexLab should retain |
+| --- | --- | --- |
+| Control, contact, and observation residuals | Strong position feedback can hide plant error; pixel error can come from cameras | Requested/measured responses, contact events, valid-observation masks; effective fitted parameters separate from measured material properties |
+| Physical state and rendering | Appearance can change independently of contact; shared interfaces do not establish equivalent dynamics | State ownership, frames, clocks, controller/solver settings, parameter conversion, and any backend-specific refitting |
+| Progress, full success, and cost | Substep scores, complete tasks, and resource consumption answer different questions | Native scores, full success, inference calls, issued/completed steps, simulation/wall time, and original failure/timeout denominators |
+
+The platform's [§1.4](https://robocoliseum.ai/techreport/robocoliseum#en-sub-1-4) reports Pearson `r=0.9686` across 22 robot–task pairs spanning 16 tasks. Its [paired-score figure](https://sim-challenge-frontend.ks3-cn-beijing.ksyuncs.com/reports/robocoliseum/figure-fa13c3bb2eab.png) fits `sim=0.913×real+0.054`. This supports score association in those configurations, not a universal per-case error below 10%, reliable within-task model ranking, or prediction on new tasks. Those uses require independent held-out conditions, individual errors, and uncertainty. Calibrating a scale at one weight does not validate its entire range; the analogy only illustrates separating fitting from validation.
+
+### Trace reaction forces and timing beyond the shared interface
+
+The report's [§2.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-2-3) describes CPU MuJoCo advancing the robot while link states drive libuipc objects/deformable contact, without returning IPC contact forces to the CPU robot. The checked Genie Sim `083793f23876` [driver](https://github.com/AgibotTech/genie_sim/blob/083793f238762d336ce8570d22118a60a6830875/source/geniesim_ros/src/ros_ws/src/genie_sim_engine_libuipc/genie_sim_engine_libuipc/driver.py#L309) also supports optional barrier synchronization and rigid proxies: the previous completed object state seeds CPU proxies, local proxy contacts can affect the robot, and robot state then drives IPC. This is neither native IPC reaction-force feedback nor a same-step joint solve. Default asynchronous `latest` and explicit `barrier` modes also have different clock semantics.
+
+A cloth-shape demonstration can therefore be useful, while predicting how cloth tension slows the hand, changes wrist torque, or causes grasp loss requires additional evidence about reaction forces entering robot dynamics. More substeps, shared interfaces, and convincing images cannot supply that evidence.
+
+### Preserve historical protocols as evaluation changes
+
+Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3) describes separate Agent and VLA/WAM boards, fixed official and dynamic checking sets, execution/inference budgets, and a full-completion reward. The dynamic set does not contribute to the total score. This is a useful direction beyond progress alone; exact server thresholds, raw results, and scoring versions remain necessary for reproduction. Season I and II are different evaluation protocols, not one interchangeable ranking.
+
+[Agent2Act v1, §III-A](https://arxiv.org/html/2610.27865v1#S3.SS1), aggregates native substep scores with equal task weights and runs each case once. This does not measure full success or repeated-run stability. Its [execution layer](https://github.com/AgibotTech/genie_sim/blob/083793f238762d336ce8570d22118a60a6830875/source/agent2act/docs/architecture.md#a-pure-motion-request) validates and converts model actions, uses subsequent observations for feedback, and leaves scoring to the environment. Acceptance by a tool, issuing a command, and physical completion remain separate events.
+
+**DexLab should retain its scorer-audit priority, organize the input–response–contact–score chain for one existing qualified record, then design independent conditions and both budgets.** Without hardware data, internal consistency remains useful but is not Real2Sim calibration. Defer a wholesale platform migration until the first failing layer establishes a need for new material/contact capability; production integration retains the existing UniSim boundary. This November 13, 2026 review checked reports, figures, and pinned source only. It ran no external model/physics experiment, changed no DexLab physics implementation, and leaves the original paper/repository screening counts unchanged.
 
 
 ## Sources and maintenance scope

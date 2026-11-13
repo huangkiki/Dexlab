@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-13 专题增补：[RoboColiseum：动作回放、仿真可信度与完整任务评测](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#robocoliseum)。** 先 Discussion，再沉淀可迁移机制、时序/反力边界与验证条件。
+
 **2026-11-12 专题增补：[CoRL 2026 哪些论文最值得 DexLab 学](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#corl-2026-dexlab-lessons)。** 逐项筛查官方录取清单，结论是先借随机实例统计评测、接触失败分层诊断与接触事件校准，不先换大模型或仿真引擎。
 
 **2026-11-12 专题增补：[从“评分漏洞”到“榜单投机”](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#benchmark-gaming-audit)。** 以 CoRL 2026 Oral Best Paper Award Finalist 为例，把缺失能力探针、训练支持内重采样、数据距离和统计可检测性接到 DexLab 当前评分审计。
@@ -351,6 +353,38 @@ CoRL 2026 没有推翻当前顺序，而是把它补完：
 DexLab [已有 Poke 适配](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.zh-CN.md)具备会话与工具回执，但任务观测和动作映射仍需逐项接入。结合[当前评分审计方向](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.zh-CN.md)，先在一个合格案例保存观测、请求、工具处理、实际执行、到达误差和独立评分，再比较完整历史与仅当前观测，在固定提示、转换和双重预算下加入一种坐标偏差。分别检查语义选择、运动到达、接触保持与释放，并保留失败、超时、主动放弃、基础设施错误和成本缺失。这是待验证设计，没有启动实验；暂不扩任务榜单或新建代理框架。
 
 核查于 2026-11-11：论文 v1、当日报告和 RoboProbe `3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e`。本轮做了静态源码核对和已发布结果的算术复算，没有重跑模型或物理任务。原始采集、预算版本对应和跨仿真器/真机泛化仍未独立验证；134 个已评分 Astra episode 的成本 transcript 缺失。槽位保留真实布局 ID，其中 13 个 ID ≥ 50。钢琴及其他本体案例不并入主榜；原 38 篇论文、19 个仓库统计不变。
+
+
+<a id="robocoliseum"></a>
+## RoboColiseum：回放动作、检验响应，再比较完整任务
+
+**最值得借鉴的是把仿真可信度与模型评测接起来。** 先固定真实发出的动作，让仿真自己算出机器人和物体的响应；再用独立条件检验拟合是否有效，最后在明确预算内比较完整任务。平台的场景规模与榜单不应替代这条证据链。[完整讨论与取舍](https://github.com/huangkiki/Dexlab/discussions/329)
+
+以“抓起杯子、转向、放下”为教学例子：记录关节与夹爪目标，同时保留实际到达、接触建立、持物和释放。如果逐帧写入杯子位姿，只能复现画面；让它通过接触动力学自行运动，才能检查同一输入是否产生相近响应。该例不是作者新增实验。RoboColiseum [平台报告 §1](https://robocoliseum.ai/techreport/robocoliseum#en-sub-1-1)描述约 100 Hz 指令回放与 1 ms 物理子步，并把源后端拟合、冻结参数迁移和目标后端适配分开。
+
+### 三个值得迁移的区分
+
+| 区分 | 为什么会改变判断 | DexLab 应保留什么 |
+| --- | --- | --- |
+| 控制、接触与观测残差 | 强位置反馈能掩盖动力学误差；像素偏差也可能来自相机 | 请求与实测响应、接触事件、观测有效掩码；有效拟合参数与实测材料参数分开 |
+| 物理状态与渲染 | 改外观可以不改接触，但接口相同不保证动力学等价 | 状态所有者、坐标系、时钟、控制与求解配置；跨引擎结论必须保留参数转换与重新拟合条件 |
+| 进度、完整成功与成本 | 子步骤得分、整段任务完成和资源消耗回答不同问题 | 原生评分、完整成功率、推理调用、发出/实际完成的步数、仿真时间与墙钟，保留失败和超时分母 |
+
+平台 [§1.4](https://robocoliseum.ai/techreport/robocoliseum#en-sub-1-4)报告 16 项任务、22 组机器人—任务配对的 Pearson `r=0.9686`；[配对图](https://sim-challenge-frontend.ks3-cn-beijing.ksyuncs.com/reports/robocoliseum/figure-fa13c3bb2eab.png)的拟合为 `sim=0.913×real+0.054`。这支持已测配置下的分数相关性，不能推出每项误差小于 10%，也不证明固定任务内的模型排名或新任务预测可靠。后两者需要独立留出条件、逐项误差和不确定性；校准一个砝码不能保证整台秤全量程准确，类比只用于说明拟合与验证的分离。
+
+### 多引擎接口之后，还要追反作用与时序
+
+报告 [§2.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-2-3)说明 CPU MuJoCo 推进机器人，连杆状态驱动 libuipc 物体/柔性接触，IPC 接触力不回传 CPU。核查的 Genie Sim `083793f23876` [driver](https://github.com/AgibotTech/genie_sim/blob/083793f238762d336ce8570d22118a60a6830875/source/geniesim_ros/src/ros_ws/src/genie_sim_engine_libuipc/genie_sim_engine_libuipc/driver.py#L309)已支持可选同步屏障与刚体代理：上一完成时刻的物体状态送入 CPU，本地代理接触可影响机器人，再把机器人状态交给 IPC。这不等于 IPC 原生反力回传或同一步联合求解；默认异步 `latest` 与显式 `barrier` 也不能混为同一时间协议。
+
+因此，拉布料的形状演示可以有价值，但要研究布料拉力如何拖慢手、改变腕力矩或触发失握，必须另查反作用如何进入机器人动力学。统一接口、更多子步和漂亮画面都不能替代这个证据。
+
+### 评测协议随难度变化，历史结果要保留
+
+Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描述 Agent 与 VLA/WAM 分榜、固定官方集与动态检查集、执行/推理预算及完整完成奖励；动态集不进入总分。它提供了比单一进度榜更完整的方向，但服务器具体阈值、原始结果与评分版本仍是复算所需条件。不要把 Season I 与 Season II 混成同一排名。
+
+[Agent2Act v1 §III-A](https://arxiv.org/html/2610.27865v1#S3.SS1)的主实验按任务等权聚合子步骤分，每个 case 运行一次；这不是完整成功率或重复运行稳定性。其[执行层](https://github.com/AgibotTech/genie_sim/blob/083793f238762d336ce8570d22118a60a6830875/source/agent2act/docs/architecture.md#a-pure-motion-request)检查并转换模型动作，以后续观测形成反馈，环境独立判分。工具接受、发出动作和物理完成应分别记录。
+
+**DexLab 的优先顺序：先沿用评分语义审计，把一条已有合格记录的输入—响应—接触—评分链整理清楚，再设计独立条件和双重预算。** 缺少实机数据时，内部一致性可以研究，但不称为 Real2Sim 标定。暂缓整个平台迁移；只有第一失效层明确需要新材料或接触能力时，再按既有 UniSim 分工论证接入。本轮为 2026-11-13 的报告、图表与固定源码核查，没有运行外部模型/仿真或改变 DexLab 物理实现；原论文与仓库筛选统计不变。
 
 
 ## 来源与维护范围
