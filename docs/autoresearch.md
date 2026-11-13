@@ -15,7 +15,7 @@ Each cycle answers one question that changes the next decision. Use the existing
 | 2. Audit scoring semantics | Start, required conditions, completion, failure and time windows; distinguish measured physics, visual evidence and unmeasured fields. Use existing trajectories and targeted counterexamples to check task intent. | If a positive control fails, a negative control passes, or a required observation is missing, diagnose scoring/recording before interpreting policy or physics gains. |
 | 3. Make the smallest discriminating comparison | Fix actions/policy and other physics, changing only what distinguishes the explanations. Declare the independent unit, applicable backends, budget and stopping conditions; execute every applicable cell required by the original protocol. | Retain an unresolved finding when conditions are incomparable, repeat variation is unexplained or the budget is exhausted; do not expand the task set. |
 | 4. Repair from measurements | Record the first failing stage and discrepancies with units, change only the implicated layer, then check affected behavior. | If alternatives remain, discriminate further or report unknown; higher pass rates do not establish more realistic physics. |
-| 5. Publish the finding | State the conclusion, conditions, denominator, failures, limits, rescore entry and next decision. Keep detail in the report and consequential findings in README. | No improvement or no solver failure can still answer a research question; broader claims need corresponding evidence. |
+| 5. Publish the finding | State the conclusion, conditions, denominator, failures, limits, rescore entry and next decision. Keep detail in the report and consequential findings on the website; README remains a concise architecture and Blog entrance. | No improvement or no solver failure can still answer a research question; broader claims need corresponding evidence. |
 
 ### How the latest Discussions guide development
 
@@ -27,7 +27,7 @@ See [current work](current-work.md) for ordering. Scorer auditing gates only the
 
 ### Documentation and delivery
 
-README answers what was learned and how it affects a choice; experiment reports preserve complete protocols and outcomes; Discussions preserve the reasoning behind proposals; current work records adopted design ordering and recovery points. Distinguish discussion, design adoption, implementation, runtime validation and public delivery. The submission and merge gates below still apply; design documentation neither resumes dispatch nor launches an experiment.
+README introduces the research direction and architecture and links to the Blog; the website explains findings and their implications; experiment reports preserve complete protocols and outcomes; Discussions preserve the reasoning behind proposals; current work records adopted design ordering and recovery points. Distinguish discussion, design adoption, implementation, runtime validation and public delivery. The submission and merge gates below still apply; design documentation neither resumes dispatch nor launches an experiment.
 
 ## Recover, qualify and select
 

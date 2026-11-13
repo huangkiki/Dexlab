@@ -6,7 +6,7 @@
 
 ## Start from the findings
 
-Synthetic torsional contact reduces Wuji's two-second maximum hold displacement from 2.734 to 1.025 mm, without establishing solver failure or hardware calibration. RSS controls show that assistance can determine task success. Contact-response baselines reduce position error but still miss contact loss. These [findings and evidence](../README.en.md#findings) put measurement semantics and the first failing layer ahead of expansion.
+Synthetic torsional contact reduces Wuji's two-second maximum hold displacement from 2.734 to 1.025 mm, without establishing solver failure or hardware calibration. RSS controls show that assistance can determine task success. Contact-response baselines reduce position error but still miss contact loss. These [findings and evidence](https://huangkiki.github.io/Dexlab/en/latest/#experiments) put measurement semantics and the first failing layer ahead of expansion.
 
 ## Recovery and design order
 
@@ -35,4 +35,4 @@ Detailed acceptance, historical priorities and cumulative scope remain in the [N
 
 Follow the [operating guide](autoresearch.md) and [AGENTS](../AGENTS.md): one executor, preserved dirty work, failures and cumulative budgets; missing or malformed dispatch state means paused. `next --dry-run` inspects candidates without resuming a scheduler. Priorities, Discussions and plans cannot bypass author, dependency, resource or authorization checks.
 
-Each delivery updates the report's finding, scope and next decision; README retains consequential findings and milestones. Continue authorized exact-head review, applicable gates, merge and deployment readback; partial delivery does not close a parent. Obsidian commit/push remains paused.
+Each delivery updates the report's finding, scope and next decision; the website carries the findings, while README remains a concise architecture and Blog entrance. Continue authorized exact-head review, applicable gates, merge and deployment readback; partial delivery does not close a parent. Obsidian commit/push remains paused.

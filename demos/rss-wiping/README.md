@@ -18,9 +18,9 @@ The original's latch is **compliant grasp assistance**. Contact first squeezes t
 
 ## Download and rescore first / 先下载并复算
 
-The [immutable evidence release](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) publishes the complete first controlled original/no-latch pair: 159 files, about 126 MiB compressed and 349 MiB extracted. Follow the [homepage CPU quickstart](../../README.en.md#quickstart) or run these commands from the checkout root. The isolated Python 3.12 environment needs NumPy and Matplotlib, with no simulator or GPU; the first command downloads dependencies/data, and the second uses offline mode.
+The [immutable evidence release](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1) publishes the complete first controlled original/no-latch pair: 159 files, about 126 MiB compressed and 349 MiB extracted. Run these commands from the checkout root. The isolated Python 3.12 environment needs NumPy and Matplotlib, with no simulator or GPU; the first command downloads dependencies/data, and the second uses offline mode.
 
-[不可变证据包](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)公开首个受控配对的完整 raw。按[首页 CPU 快速开始](../../README.md#quickstart)，或在仓库根目录运行：首次下载依赖与数据，随后离线复算；不安装仿真引擎，不使用 GPU，不修改项目已有环境。
+[不可变证据包](https://github.com/huangkiki/Dexlab/releases/tag/rss-wiping-evidence-v1)公开首个受控配对的完整 raw。在仓库根目录运行：首次下载依赖与数据，随后离线复算；不安装仿真引擎，不使用 GPU，不修改项目已有环境。
 
 ```bash
 uv run --no-project --isolated --python 3.12 \
