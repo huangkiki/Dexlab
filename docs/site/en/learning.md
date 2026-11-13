@@ -1,41 +1,58 @@
-# Learn simulation
+# Understand simulation, starting with MuJoCo
 
-Follow a research finding into the physics and engine implementation behind it. Read the shared foundations, solver guide and existing courses for six engines here, without installing an environment.
+Why does an object slip even as the fingers tighten? Does a smaller step always help? When simulation runs faster, has the controller changed too?
 
-**The course text is primarily Chinese, with English terminology and summaries.** Both language entrances preserve the original course content.
+Follow one question: **how does an action pass through stepping, contact and numerical solving to become the next state?** Then use that chain to understand MuJoCo 4 and choose changes worth investigating in a real system.
 
-## Choose a starting point
+**[Start with time: one step, several clocks →](mujoco-learning/step.md)**
 
-- **Build intuition:** the [Physics-Based Simulation study route](learn/sim/docs/physics-based-simulation.md) connects state, time, dynamics and optimization.
-- **Understand contact:** the [nine-part solver guide](learn/sim/docs/solver-guide/README.md) covers stepping, contact, friction, constraints and solving.
-- **Look up a concept:** explore the [shared foundations](learn/sim/docs/foundations.md) and [term index](learn/sim/docs/solver-guide/term-index.md).
-- **Choose a route:** follow the [application or physics/source track](learn/sim/docs/learning-paths.md).
+## Build the complete chain
 
-## Explore an engine
+Control input → actuator forces → contact and constraint solving → state integration → observations → next control update.
 
-Each contents page leads to the full chapters. The application track explains models, state, control and observations; the physics track follows dynamics, contact, solvers and source code. Course directories distinguish delivered material from planned units.
+A change anywhere can affect what follows. A dropped object in the last frame does not identify a solver defect; smooth rendering does not establish real-time physics.
 
-| Engine | Reading focus |
-| --- | --- |
-| [MuJoCo](learn/mujoco/docs/curriculum.md) | MJCF, state and actuators, soft contact, solving and integration |
-| [SuperDex](learn/superdex/docs/curriculum.md) | Scene / Actor, contact geometry, implicit solving and force observations |
-| [Genesis](learn/genesis/docs/curriculum.md) | Scene / Entity, multiple physics models, batched state and control |
-| [Newton Physics](learn/newton/docs/curriculum.md) | ModelBuilder, State / Control, Warp and solver boundaries |
-| [PhysX](learn/physx/docs/curriculum.md) | Scene / Actor / Shape, articulations, PGS / TGS |
-| [Drake](learn/drake/docs/curriculum.md) | Systems / Context, MultibodyPlant, contact and optimization |
+This route covers time, contact, version 4, performance and an existing failure case. Each lesson starts with a question, then offers expandable explanations, a self-check and links to detailed courses.
 
-## Connect knowledge to research
+## Connect learning to system optimization
 
-[Friction and contact torque](learn/sim/docs/solver-guide/03-friction.md) → [Wuji grasp comparison](wuji-contact.md) · [Deformation and coupling](learn/sim/docs/solver-guide/07-representations.md) → [Cloth experiments](cloth-comparison.md) · [State and observations](learn/sim/docs/solver-guide/01-simulation-step.md) → [LIBERO record checks](libero-workflow.md)
+For a robot system built on MuJoCo, start with three questions: how often does control update; which instant do the recorded forces and states describe; and where is time spent across physics, control, rendering and communication? The same questions help investigate MATRiX integration.
 
-Courses come from Sim Learning and the six independent community course repositories. Original wording, version references and validation limits are preserved. Each page includes its source and license; GitHub remains available for inspecting source code. [About the courses](learn/sim/README.en.md) · <a href="index.html#blog">Back to the research Blog</a>
+This course does not assume MATRiX's current version, defaults or performance. Browser timing diagrams are teaching calculations. Optimization claims need the actual version, model and measurements.
+
+<details class="explanation"><summary>A running example</summary>
+<p>A gripper receives a new target every 20 ms while physics advances every 2 ms. Ten physics steps occur between targets. Contact can form, carry a load or disappear during those steps.</p>
+<p>Change the physics step to 1 ms but keep updating control every ten steps, and the control period becomes 10 ms. A changed result can no longer be attributed only to physical resolution. The next lesson makes this visible with an adjustable timeline.</p>
+</details>
+
+## Where MuJoCo 4 fits
+
+The [version 4 lesson](mujoco-learning/mujoco4.md) connects changes to problems: speculative contacts to fast thin-object encounters, plasticity to history dependence, Studio to inspection, and batching to throughput. Understand the question before selecting a capability.
+
+As checked on **2026-11-13**, the official stable release is [4.0.1](https://github.com/google-deepmind/mujoco/releases/tag/4.0.1). The existing [detailed courses](learn/mujoco/docs/curriculum.md) retain a **3.15.0** source-reading baseline. They are not relabeled as validated 4.0 runtime experiments.
+
+(all-courses)=
+## All courses
+
+These six lessons are a guided entry. Continue into the existing courses for derivations, APIs and source code. **Those detailed courses are primarily Chinese; this introductory route is bilingual.**
+
+- **Shared foundations:** [Physics-Based Simulation](learn/sim/docs/physics-based-simulation.md) · [Nine-part solver guide](learn/sim/docs/solver-guide/README.md) · [Term index](learn/sim/docs/solver-guide/term-index.md) · [Application and theory tracks](learn/sim/docs/learning-paths.md)
+- **MuJoCo:** [Full contents](learn/mujoco/docs/curriculum.md) · [State and time](learn/mujoco/docs/state-and-time.md) · [Contact models](learn/mujoco/docs/contact-models.md) · [Versions and evidence](learn/mujoco/docs/versions.md)
+- **Other engines:** [SuperDex](learn/superdex/docs/curriculum.md) · [Genesis](learn/genesis/docs/curriculum.md) · [Newton Physics](learn/newton/docs/curriculum.md) · [PhysX](learn/physx/docs/curriculum.md) · [Drake](learn/drake/docs/curriculum.md)
+
+Courses come from Sim Learning and the independent engine-course repositories. Original text and provenance remain intact. Read here; find source and license information on each course page.
 
 ```{toctree}
 :hidden:
-:maxdepth: 2
+:maxdepth: 1
 
+mujoco-learning/step
+mujoco-learning/contact
+mujoco-learning/mujoco4
+mujoco-learning/performance
+mujoco-learning/diagnosis
 Foundations and solver guide <learn/sim/README>
-MuJoCo <learn/mujoco/docs/curriculum>
+MuJoCo detailed courses <learn/mujoco/docs/curriculum>
 SuperDex <learn/superdex/docs/curriculum>
 Genesis <learn/genesis/docs/curriculum>
 Newton Physics <learn/newton/docs/curriculum>

@@ -41,6 +41,15 @@ html_context = {
 
 
 def setup(app):
+    lessons = [
+        ('learning', '从一个问题开始', 'Start with a question'),
+        ('mujoco-learning/step', '一步仿真，几种时间', 'One step, several clocks'),
+        ('mujoco-learning/contact', '接触、摩擦与求解', 'Contact, friction and solving'),
+        ('mujoco-learning/mujoco4', '读懂 MuJoCo 4', 'Understand MuJoCo 4'),
+        ('mujoco-learning/performance', '性能与运行路径', 'Performance and execution'),
+        ('mujoco-learning/diagnosis', '从失败到下一次改进', 'From failure to improvement'),
+    ]
+
     def select_home_template(app, pagename, templatename, context, doctree):
         # Nested course pages need a language switch relative to their own route.
         context['other_language_root'] = '../' * (len(pagename.split('/')) + 1) + (
@@ -48,6 +57,14 @@ def setup(app):
         if pagename == 'index':
             context['homepage_is_chinese'] = app.config.language in ('zh_CN', 'zh')
             return 'research-home.html'
+        for index, (route, _, _) in enumerate(lessons):
+            if pagename == route:
+                context.update(
+                    learning_is_chinese=app.config.language == 'zh_CN',
+                    learning_lessons=lessons,
+                    learning_index=index,
+                )
+                return 'simulation-learning.html'
 
     app.connect('html-page-context', select_home_template)
 

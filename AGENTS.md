@@ -13,6 +13,7 @@ Use the [research loop](docs/autoresearch.md#research-loop) to turn a question i
 - Make the research guide, [What are we talking about when we talk about dexterous simulation?](docs/site/_static/research/dexterous-simulation.html), an immediately visible homepage entry. Readers should reach findings and evidence before installation or reproduction.
 - Match the homepage to the guide's reading style: warm paper, restrained green links, serif opening titles, comfortable text measure and fine separators. Maintain the implemented tokens in [the site design system](docs/site/DESIGN.md); preserve article content and scientific scope during visual changes.
 - **Avoid unnecessary secondary labels and descriptions. Let the layout do the explaining.** Use spacing, hierarchy and grouping before adding badges, repeated subtitles or explanatory UI copy. Keep labels that clarify actions, accessibility or evidence boundaries. Maintain Chinese/English parity and verify desktop and mobile rendering.
+- Keep learning MuJoCo-first and question-led, with explicit reading bookmarks rather than competence scores. Separate teaching examples and MuJoCo 4 release notes from native evidence; preserve the original courses' pinned baseline and the established reading identity.
 
 ## Implementation and evidence
 

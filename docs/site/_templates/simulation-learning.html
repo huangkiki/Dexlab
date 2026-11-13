@@ -1,0 +1,53 @@
+{% set zh = learning_is_chinese %}
+{% set label_index = 1 if zh else 2 %}
+<!doctype html>
+<html lang="{{ 'zh-CN' if zh else 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ '从步进、接触与控制理解 MuJoCo，学习 4.0 新特性，再回到仿真失败与改进。' if zh else 'Learn MuJoCo through stepping, contact and control, explore version 4, and connect concepts to simulation diagnosis.' }}">
+  <title>{{ title|striptags }} · DexLab</title>
+  <link rel="stylesheet" href="{{ pathto('_static/simulation-learning.css', 1) }}">
+  <script src="{{ pathto('_static/simulation-learning.js', 1) }}" defer></script>
+</head>
+<body data-lesson="{{ pagename }}">
+  <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>
+  <header class="learn-header">
+    <a class="brand" href="{{ pathto('index') }}">DexLab</a>
+    <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
+      <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
+      <a href="{{ pathto('learning') }}" aria-current="{{ 'page' if pagename == 'learning' else 'true' }}">{{ '仿真学习' if zh else 'Learn simulation' }}</a>
+    </nav>
+    <div class="header-tools"><a href="{{ pathto('search') }}">{{ '搜索' if zh else 'Search' }}</a><a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a></div>
+  </header>
+  <div class="learn-layout">
+    <aside class="lesson-rail">
+      <details class="chapter-menu" open>
+        <summary>{{ 'MuJoCo 学习路线' if zh else 'MuJoCo learning route' }}</summary>
+        <div class="progress-info" data-enhanced hidden><span id="read-count" aria-live="polite"></span><progress id="read-progress" max="6" value="0" aria-label="{{ '阅读进度' if zh else 'Reading progress' }}"></progress></div>
+        <nav aria-label="{{ '课程目录' if zh else 'Course contents' }}"><ol>
+          {% for lesson in learning_lessons %}
+          <li><a href="{{ pathto(lesson[0]) }}" data-lesson-link="{{ lesson[0] }}"{% if loop.index0 == learning_index %} aria-current="page"{% endif %}><span class="lesson-number">{{ loop.index }}</span><span>{{ lesson[label_index] }}<small class="read-state" hidden>{{ '已读' if zh else 'Read' }}</small></span></a></li>
+          {% endfor %}
+        </ol></nav>
+        <a class="resume-link" id="resume-learning" hidden></a>
+        <div class="rail-links"><a href="{{ pathto('learn/mujoco/docs/curriculum') }}">{{ 'MuJoCo 深入课程' if zh else 'MuJoCo detailed courses' }}</a><a href="{{ '' if pagename == 'learning' else pathto('learning') }}#all-courses">{{ '全部引擎与基础课程' if zh else 'All engines and foundations' }}</a></div>
+      </details>
+    </aside>
+    <main id="main-content" role="main" class="lesson-article">
+      <div class="reading-controls" data-enhanced hidden><button type="button" id="detail-mode" aria-pressed="false">{{ '展开深入讲解' if zh else 'Expand explanations' }}</button><span>{{ '第' if zh else 'Lesson' }} {{ learning_index + 1 }} / {{ learning_lessons|length }} {{ '课' if zh else '' }}</span></div>
+      {{ body }}
+      <div class="completion" data-enhanced hidden>
+        <button type="button" id="mark-read" aria-pressed="false">{{ '标记为已读' if zh else 'Mark as read' }}</button>
+        <p id="save-status" role="status">{{ '进度仅保存在此浏览器，可随时取消。' if zh else 'Progress stays in this browser. You can unmark a lesson.' }}</p>
+      </div>
+      <nav class="lesson-pagination" aria-label="{{ '前后课程' if zh else 'Adjacent lessons' }}">
+      {% if learning_index > 0 %}{% set prev = learning_lessons[learning_index - 1] %}<a href="{{ pathto(prev[0]) }}"><small>{{ '上一课' if zh else 'Previous' }}</small>{{ prev[label_index] }}</a>{% endif %}
+      {% if learning_index + 1 < learning_lessons|length %}{% set next = learning_lessons[learning_index + 1] %}<a class="next" href="{{ pathto(next[0]) }}"><small>{{ '下一课' if zh else 'Next' }}</small>{{ next[label_index] }} <span aria-hidden="true">→</span></a>{% endif %}
+      </nav>
+      <footer class="lesson-footer"><a href="https://rl-robotics.github.io/#/learn/intro">{{ '交互组织参考：RL × Robotics' if zh else 'Learning interaction reference: RL × Robotics' }}</a><p>{{ '深入课程保留原始版本与证据边界；本路线的 4.0 更新另列来源。' if zh else 'Detailed courses retain their original version and evidence limits. Version 4 updates have separate sources.' }}</p></footer>
+    </main>
+    <aside class="section-rail" aria-label="{{ '本课内容' if zh else 'On this page' }}">{{ toc }}</aside>
+  </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-13T07:27:47+00:00",
-  "title": "Design System: DexLab Research Homepage",
+  "generatedAt": "2026-11-13T08:05:58+00:00",
+  "title": "Design System: DexLab Research Homepage and Learning",
   "extensions": {
     "colorMeta": {
       "accent": {
@@ -121,6 +121,34 @@
       "step-number": {
         "displayName": "Learning number",
         "purpose": "Plain serif numerals beside course steps."
+      },
+      "learning-display": {
+        "displayName": "Lesson title",
+        "purpose": "The course reader opening title, with its own mobile size steps."
+      },
+      "learning-headline": {
+        "displayName": "Lesson section",
+        "purpose": "Major sections inside the learning article."
+      },
+      "learning-title": {
+        "displayName": "Lesson subsection",
+        "purpose": "Subsections in the learning article."
+      },
+      "learning-body": {
+        "displayName": "Lesson reading text",
+        "purpose": "Course text and native action controls, within a 74ch article measure."
+      },
+      "learning-label": {
+        "displayName": "Lesson navigation and inputs",
+        "purpose": "Chapter links, range labels and compact supporting text."
+      },
+      "learning-caption": {
+        "displayName": "Reading progress and supporting text",
+        "purpose": "Browser reading state, supporting links and timing labels."
+      },
+      "learning-output": {
+        "displayName": "Timing result",
+        "purpose": "Bold tabular control-period and frequency outputs in the teaching example."
       }
     },
     "shadows": [],
@@ -133,6 +161,18 @@
       {
         "name": "mobile-max",
         "value": "700px"
+      },
+      {
+        "name": "learning-section-rail-max",
+        "value": "1200px"
+      },
+      {
+        "name": "learning-chapter-disclosure-max",
+        "value": "800px"
+      },
+      {
+        "name": "learning-narrow-max",
+        "value": "440px"
       }
     ]
   },
@@ -208,16 +248,25 @@
       "description": "Native disclosure keeps scope and limitations available beneath the comparison.",
       "html": "<details class=\"ds-boundary\"><summary>What does this result establish?</summary><p>The result is limited to the synthetic sphere, this controller and the two-second window; slow drift remains. Longer holds, contact switching and new validation conditions are the next tests. Real fingertip calibration and a complete autonomous RSI loop remain unverified.</p></details>",
       "css": ".ds-boundary{font-family:var(--sans,Arial,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);margin-top:28px;border-top:1px solid var(--rule,#dcded4);padding-top:16px;font-size:14px;line-height:1.95;color:var(--muted,#60675a)}.ds-boundary summary{width:fit-content;color:var(--ink,#282b26);cursor:pointer}.ds-boundary p{max-width:740px;margin:16px 0 0}.ds-boundary summary:focus-visible{outline:2px solid var(--accent,#4f664c);outline-offset:4px}"
+    },
+    {
+      "name": "MuJoCo reading bookmark",
+      "kind": "button",
+      "refersTo": "learning-action",
+      "description": "Explicit reading state, not competence. This preview shows the read state; production JavaScript owns browser storage and progress updates.",
+      "html": "<div class=\"ds-learning-bookmark\"><button type=\"button\" aria-pressed=\"true\">Read · unmark</button><p>Progress stays in this browser. You can unmark a lesson.</p></div>",
+      "css": ".ds-learning-bookmark{font:16px/1.9 var(--sans,Arial,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);border-top:1px solid var(--rule,#dcded4);padding-top:24px}.ds-learning-bookmark button{font:inherit;cursor:pointer;color:var(--green,#4f664c);border:1px solid var(--rule,#dcded4);background:transparent;padding:8px 14px;border-radius:4px;min-height:44px}.ds-learning-bookmark button:hover{background:var(--panel,#f0f1eb);border-color:var(--green,#4f664c)}.ds-learning-bookmark button[aria-pressed=\"true\"]{background:var(--green,#4f664c);color:var(--paper,#fafaf6)}.ds-learning-bookmark button:focus-visible{outline:2px solid var(--green,#4f664c);outline-offset:4px}.ds-learning-bookmark p{font-size:13px;color:var(--muted,#60675a);margin-top:10px}"
     }
   ],
   "narrative": {
     "northStar": "The Research Reading Index",
-    "overview": "The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.\n\nThis system governs only the Chinese and English research homepages. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.",
+    "overview": "The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.\n\nThis system governs the Chinese and English research homepages and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.",
     "keyCharacteristics": [
       "Warm paper and charcoal, with restrained green reading accents.",
       "A serif opening title beside a desktop reading rail; navigation wraps above the title on smaller screens.",
       "Open sections and ruled reading rows, with hierarchy carried by spacing and type.",
-      "Original experiment media, native controls and explicit evidence boundaries."
+      "Original experiment media, native controls and explicit evidence boundaries.",
+      "A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions."
     ],
     "rules": [
       {
@@ -235,11 +284,12 @@
       "Do keep the homepage aligned with the article's warm paper, serif opening title and green links.",
       "Do let spacing, hierarchy and open rows explain the page before adding secondary labels.",
       "Do preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.",
-      "Do maintain Chinese/English parity, on-site learning links and original evidence provenance."
+      "Do maintain Chinese/English parity, on-site learning links and original evidence provenance.",
+      "Do preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline."
     ],
     "donts": [
-      "Don't restore the old blue-white centered hero, filled action buttons or rounded promotional panels.",
-      "Don't restyle the article, other Sphinx pages or the separate web application through this homepage system.",
+      "Don't restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.",
+      "Don't restyle the article, unrelated Sphinx pages or the separate web application through this reading system.",
       "Don't replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.",
       "Don't invent component variants, radius scales or motion tokens absent from the implementation."
     ]
