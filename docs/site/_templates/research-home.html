@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ 'DexLab：围绕接触操作，让智能体与仿真在实验中共同进化。研究 Blog、实验与仿真学习地图。' if homepage_is_chinese else 'DexLab: agents and simulation improving together through contact-rich manipulation research. Explore the Blog, experiments and simulation learning map.' }}">
+  <meta name="description" content="{{ 'DexLab：围绕接触操作，让智能体与仿真在实验中共同进化。研究结论、Blog 与仿真学习地图。' if homepage_is_chinese else 'DexLab: agents and simulation improving together through contact-rich manipulation research. Read findings, the Blog and the simulation learning map.' }}">
   <title>DexLab · {{ '让智能体与仿真共同进化' if homepage_is_chinese else 'Agents and simulation, improving together' }}</title>
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
@@ -14,8 +14,8 @@
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="DexLab {{ '首页' if homepage_is_chinese else 'home' }}">Dex<span>Lab</span></a>
       <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
+        <a href="#experiments">{{ '研究结论' if homepage_is_chinese else 'Findings' }}</a>
         <a href="#blog">Blog</a>
-        <a href="#experiments">{{ '实验' if homepage_is_chinese else 'Experiments' }}</a>
         <a href="#learn">{{ '学习地图' if homepage_is_chinese else 'Learning map' }}</a>
         <a href="about.html">{{ '文档' if homepage_is_chinese else 'Docs' }}</a>
       </nav>
@@ -28,7 +28,7 @@
   <main id="main-content">{{ body }}</main>
   <footer class="site-footer">
     <a class="brand" href="#top">Dex<span>Lab</span></a>
-    <p>{{ '从任务出发，让每次实验留下可继续的知识。' if homepage_is_chinese else 'Start with a task. Leave knowledge the next experiment can build on.' }}</p>
+    <p>{{ '读懂一个结论，也看清它成立的条件。' if homepage_is_chinese else 'Understand a finding and the conditions that support it.' }}</p>
     <div><a href="contributing.html">{{ '参与研究' if homepage_is_chinese else 'Contribute' }}</a><a href="https://github.com/huangkiki/Dexlab">GitHub</a><a href="https://github.com/huangkiki/sim-learning">Sim Learning</a><a href="about.html#documentation-and-citation">{{ '引用与许可' if homepage_is_chinese else 'Citation & license' }}</a></div>
   </footer>
 </body>
