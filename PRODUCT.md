@@ -8,14 +8,14 @@ web
 
 ## Users and purpose
 
-The primary reader researches robot learning or embodied intelligence. DexLab focuses on contact-rich manipulation, including grippers and dexterous hands. The research direction is reciprocal improvement: agent failures expose simulation gaps; improved simulation helps improve agents.
+The primary reader researches robot learning or embodied intelligence. Their primary task is to read findings, understand the evidence and limits, and take away implications for their own research. Reading must not depend on installing an environment or rerunning an experiment. DexLab focuses on contact-rich manipulation, including grippers and dexterous hands. The research direction is reciprocal improvement: agent failures expose simulation gaps; improved simulation helps improve agents.
 
 ## Confirmed publishing brief
 
 The November 2026 ten-question interview established these choices:
 
 - Humans set goals and boundaries. Agents should both execute experiments and help discover questions, hypotheses and subsequent experiments. This is a direction, not a claim of completed autonomous RSI.
-- Show task improvement first, explain it with failure attribution, and treat research efficiency as an additional benefit.
+- Show the finding first, then its evidence, implications and scope. Keep task improvement supported by failure attribution. Installation and reproduction are optional deeper paths, not the homepage conversion goal.
 - Keep README to roughly one or two screens: positioning, RSI idea, one real case, Blog / experiments / learning entrances.
 - Give the website clear reading paths and explicit connections between questions, experiments, findings and further work. The reference is https://rl-robotics.github.io/.
 - Organize Blog articles around specific research questions, connected by persistent topics. Retain the existing long-form review as a reading guide.
