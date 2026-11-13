@@ -41,6 +41,11 @@ html_context = {
 
 
 def setup(app):
+    # Sphinx reports linked from the English homepage's Blog topics.
+    blog_reports = {
+        'contact-response', 'failure-root-cause-atlas', 'model-evaluation',
+        'robodojo-bread-slip', 'rss-wiping', 'solver-taxonomy', 'wuji-contact',
+    }
     lessons = [
         ('learning', '从一个问题开始', 'Start with a question'),
         ('mujoco-learning/step', '一步仿真，几种时间', 'One step, several clocks'),
@@ -57,6 +62,8 @@ def setup(app):
         if pagename == 'index':
             context['homepage_is_chinese'] = app.config.language in ('zh_CN', 'zh')
             return 'research-home.html'
+        if app.config.language == 'en' and pagename in blog_reports:
+            app.add_css_file('research-report.css', priority=900)
         for index, (route, _, _) in enumerate(lessons):
             if pagename == route:
                 context.update(
