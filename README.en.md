@@ -1,17 +1,16 @@
-<h1 align="center">DexLab</h1>
-<p align="center"><strong>Agents and simulation, improving together through experiments.</strong></p>
+# DexLab
 
-DexLab is my personal research project on robotic manipulation and physics simulation.
+DexLab is my personal research project exploring how Agent Skills and simulation can improve each other.
 
-**The idea I want to explore is how skills and simulation can improve each other.** Let agents attempt manipulation tasks, use failures to expose problems, and run controlled experiments to identify their causes. Improve the skill or physical model, then validate the change independently. Better simulation can support skill learning, while new skills and tasks keep testing the simulation.
+A grasp can fail because of the policy or because the simulator does not handle contact and friction accurately.
 
-<h2 align="center"><a href="https://huangkiki.github.io/Dexlab/en/latest/#blog">Read the Blog →</a></h2>
-<p align="center">
-  <a href="https://huangkiki.github.io/Dexlab/en/latest/experience.html">Research findings</a> ·
-  <a href="https://huangkiki.github.io/Dexlab/en/latest/experiments.html">Experiments</a> ·
-  <a href="https://huangkiki.github.io/Dexlab/en/latest/learning.html">Learn simulation</a> ·
-  <a href="README.md">简体中文</a>
-</p>
+DexLab starts with concrete problems like this. **Use tasks to expose problems, run controlled experiments to identify their causes, then improve the relevant part of the simulation.**
+
+The improved simulation helps the Agent learn new Skills. With those Skills, the Agent can take on harder tasks and probe the limits of the simulation.
+
+## [📖 Read the Blog →](https://huangkiki.github.io/Dexlab/en/latest/#blog)
+
+[Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html) · [简体中文](README.md)
 
 <a id="architecture"></a>
 <a href="https://huangkiki.github.io/Dexlab/en/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab architecture concept: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring"></a>
