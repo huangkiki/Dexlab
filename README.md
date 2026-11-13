@@ -1,7 +1,9 @@
 <h1 align="center">DexLab</h1>
 <p align="center"><strong>让智能体与仿真，在实验中共同进化。</strong></p>
 
-DexLab 是我的个人研究项目，关注机器人操作与物理仿真：从任务失败中发现问题，通过对照实验改进技能与仿真模型。
+DexLab 是我的个人研究项目，关注机器人操作与物理仿真。
+
+**我想探索的是技能与仿真的相互改进：** 让智能体尝试操作任务，从失败中发现问题，用对照实验定位原因，改进技能或物理模型后再独立复验。更可靠的仿真帮助技能学习，新的技能和任务也继续检验仿真。
 
 <h2 align="center"><a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog">阅读 Blog →</a></h2>
 <p align="center">
