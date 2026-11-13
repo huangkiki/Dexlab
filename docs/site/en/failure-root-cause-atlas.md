@@ -86,6 +86,7 @@ These cohorts are not separate task directories, but they are part of the histor
 | Wuji sphere pinch | **C: incomplete contact wrench space** | The point-contact force grasp map has rank five and cannot resist gravity torque about the pinch line; more normal force cannot create the missing moment direction |
 | RoboDojo layout 002 | **P/G: top-edge pinch plus insufficient neighbor/shelf clearance** | Neighbor impulse amplifies rotation and the contact rolls over the edge; the close command is not missing |
 | RoboDojo layout 011 | **P: top-edge shallow pinch**, with lifting as an amplifier | In-plane rotation and loss of edge margin precede the normal-impulse collapse; load does not “vanish for no reason” |
+| RoboDojo v67 `s0/l025`, `s1/l026`, `s1/l049` | **P → U(A/C/N): deep insertion continues after a slot jam; internal escape attribution remains unresolved** | During a downward target, observed-joint FK places TCP 10.6–28.3 cm higher. This establishes simulated state escape, not that the solver alone supplied all energy |
 | AMP box lift | **O: recorder-parity qualification failure** | Two probes finish but recorded/unrecorded state differences exceed the gate. This does not establish an AMP policy lift failure; full episodes were not run |
 | Contact-loss prediction | **O / model target** | Constant velocity lowers pose error while missing release events; low pose error is not contact-event prediction |
 
@@ -184,6 +185,17 @@ The [complete legacy inventory](solver-failure-inventory.md) retains all 50 publ
 - **Boundary:** this is experimental-instrument failure, not an AMP lifting-policy failure; the full task was not run.
 
 [AMP recorder report](amp-lift.md)
+
+### 12. RoboDojo v67: why does a downward press jump upward?
+
+- **Symptom:** all three cases target `z=0.924 m`, but post-action TCP reaches `1.049–1.258 m`, rising 10.6–28.3 cm from its pre-action pose with 13.0–47.8 cm total target error.
+- **First failing layer: P, a deep position target continues after slot jamming.** `s1/l026` and `s1/l049` have already stopped 19/28 mm high before escape; in `s0/l025`, jam and escape occur in the same `seat` action. Transport did not first lose the slice.
+- **Causal chain:** insertion-pose/clearance miss → bread/finger/rim enters constrained multi-contact → stiff active drive continues doing work → observed joint state escapes upward and sideways over 40–44 ms → grasp releases or withdrawal/IK fails → slot occupancy cannot be confirmed and the task stops.
+- **Proved:** `final_xyz` is FK of post-step observed joints, not planner fallback. The frozen source also contains risk amplifiers—4400 arm stiffness, zero velocity iterations, stabilization off and a mismapped bread-friction field.
+- **Not proved:** the batch lacks per-step drive effort, contact impulse, penetration and resolved runtime material pairing. The actuator is itself an energy source, so endpoint pose cannot prove that a passive solver created all excess energy. The A/C/N split remains U.
+- **Next gate:** retreat 20–30 mm on first jam; freeze the three cases and A/B velocity/position iterations, stabilization, depenetration velocity and timestep; close a 4 ms energy ledger with `Στ·Δq`, contact impulses and `Δ(K+U)`.
+
+[Full wrist videos, per-case timelines and repair order](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/contact-escape-v67.json">Machine-readable evidence</a>
 
 ## Six-engine incline: why not force one root cause?
 

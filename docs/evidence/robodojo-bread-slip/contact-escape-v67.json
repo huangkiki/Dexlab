@@ -1,0 +1,103 @@
+{
+  "schema": "robodojo-contact-escape-v1",
+  "batch": {
+    "date": "2026-11-13",
+    "task": "make_toast",
+    "policy": "pyrua_rsi_v67_eval_20261112",
+    "policy_sha256": "78528e7022f11bee754b05c8b319d28a8ecd982f16160cfff156ad4c7a0bc7a1",
+    "robodojo_revision": "cb2a37d58dbbeb2777b0c2b30e97ecb8ab91095c",
+    "successes": 65,
+    "trials": 100,
+    "failed_trials": 35,
+    "contact_escape_cases": 3
+  },
+  "runtime_configuration": {
+    "physics_dt_s": 0.004,
+    "decimation": 1,
+    "robot_solver_position_iterations": 8,
+    "robot_solver_velocity_iterations": 0,
+    "enable_ccd": false,
+    "enable_stabilization": false,
+    "max_depenetration_velocity_m_s": 5.0,
+    "arm_effort_limit_sim": 100.0,
+    "arm_stiffness": 4400.0,
+    "arm_damping": 40.0,
+    "bread_mass_kg": 0.07,
+    "bread_metadata_friction": 0.45,
+    "bread_loader_static_friction_fallback": 0.6,
+    "bread_loader_dynamic_friction_fallback": 1.5,
+    "bread_loader_restitution_fallback": 0.0,
+    "contact_force_tracking_enabled_for_rigid_objects": false
+  },
+  "cases": [
+    {
+      "case": "s0/l025",
+      "first_failing_action": "seat",
+      "target_z_m": 0.924,
+      "pre_action_tcp_z_m": 0.951,
+      "final_tcp_z_m": 1.212,
+      "vertical_target_error_m": 0.288,
+      "total_target_error_m": 0.342,
+      "observed_tcp_rise_m": 0.261,
+      "command_steps": 10,
+      "command_duration_s": 0.04,
+      "mean_observed_vertical_speed_m_s": 6.525,
+      "blocked": true,
+      "video": "v67-s0-l025-right.mp4"
+    },
+    {
+      "case": "s1/l026",
+      "first_failing_action": "seat",
+      "seat_stop_height_above_target_m": 0.019,
+      "escape_action": "rs-down",
+      "target_z_m": 0.924,
+      "pre_action_tcp_z_m": 0.943,
+      "final_tcp_z_m": 1.049,
+      "vertical_target_error_m": 0.125,
+      "total_target_error_m": 0.13,
+      "observed_tcp_rise_m": 0.106,
+      "command_steps": 10,
+      "command_duration_s": 0.04,
+      "mean_observed_vertical_speed_m_s": 2.65,
+      "blocked": true,
+      "video": "v67-s1-l026-right.mp4"
+    },
+    {
+      "case": "s1/l049",
+      "first_failing_action": "seat",
+      "seat_stop_height_above_target_m": 0.028,
+      "escape_action": "rs-down",
+      "target_z_m": 0.924,
+      "pre_action_tcp_z_m": 0.975,
+      "final_tcp_z_m": 1.258,
+      "vertical_target_error_m": 0.334,
+      "total_target_error_m": 0.478,
+      "observed_tcp_rise_m": 0.283,
+      "command_steps": 11,
+      "command_duration_s": 0.044,
+      "mean_observed_vertical_speed_m_s": 6.432,
+      "blocked": true,
+      "video": "v67-s1-l049-right.mp4"
+    }
+  ],
+  "attribution": {
+    "first_failing_layer": "slot-region geometric jam under active position control; exact contact pair unresolved",
+    "supported": [
+      "The transport remains stable until the insertion contact phase.",
+      "The logged final TCP is forward kinematics of observed post-step joints, not an IK fallback pose.",
+      "The robot state moves upward and laterally while the requested line target moves downward.",
+      "The baseline has multiple static risk amplifiers: stiff active drives, zero articulation velocity iterations, disabled stabilization, and a mismapped bread friction field."
+    ],
+    "not_yet_supported": [
+      "A passive PhysX solver injected the full excess mechanical energy.",
+      "Friction alone caused the escape.",
+      "The three cases share one identical contact pair or penetration topology."
+    ],
+    "missing_measurements": [
+      "per-substep joint position, velocity, target, and drive effort",
+      "per-contact normal and tangential impulses and penetration depth",
+      "resolved runtime material pairs and combine modes",
+      "bread pose and grasp state at every 4 ms physics step"
+    ]
+  }
+}

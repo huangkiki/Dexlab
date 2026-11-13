@@ -14,7 +14,7 @@
 
 **2026-11-11 专题增补：[RoboDojo / Astra：模型、动作执行和评分](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-astra)。**
 
-**2026-11-12 失败诊断：[RoboDojo 烤面包的两种面包脱落](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html)。**
+**2026-11-12—13 失败诊断：[RoboDojo 烤面包的面包脱落与入槽接触逃逸](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html)。**
 
 以下保留较短的阅读路线，原版研究页面是完整调研入口。
 
@@ -345,6 +345,8 @@ CoRL 2026 没有推翻当前顺序，而是把它补完：
 2026-11-12 的一批离线 Code-as-Policy 运行覆盖 100 个不同 seed/layout 工况，成功 19 个。81 个失败的回合级归因中，79 个是策略执行问题、2 个是策略机械问题；不能用两个掉落片段把整批失败改写为仿真器失败。但两个局部事件揭示了同一个可观测机制：闭爪命令持续为 `0`，双指法向冲量却从约 0.25 N·s 降至接近 0，之后空夹爪继续闭合。
 
 [完整同步视频、接触曲线和能量边界](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html)区分两种失效。layout 002 的上缘浅夹持被相邻面包和货架接触放大，面包绕接触边滚出；layout 011 没有释放前的明显外碰撞，面包直接从离质心约 4.42 cm 的上缘接触滑落。第一优先级是加深抓取、拒绝窄夹持并做低速试提；仿真侧再读回 finger–bread 材质 pair、combine mode、切向冲量与接触面积，并对刚性薄片和顺应性代理做匹配 A/B。当前 0.07 kg 刚体面包没有压缩、粗糙度或指垫顺应性，这会放大边缘接触的突变，但尚未建立 PhysX 求解器错误、真实面包标定或跨引擎排名。
+
+独立的 2026-11-13 v67 批次成功 65/100；35 个失败中有三个入槽接触逃逸。搬运阶段没有先掉片，异常从槽口卡滞开始：`s1/l026`、`s1/l049` 先停在目标上方 19/28 mm，继续向下后，观测关节 FK 的 TCP 却在 40–44 ms 内向上移动 10.6–28.3 cm；`s0/l025` 在首个深压动作内发生同类逃逸。固定实现证明这是真实仿真状态，不是 IK 回退；但高刚度主动驱动本身会做功，且缺逐步驱动力矩、接触冲量和穿透记录，所以当前根因写作“槽口卡滞后的主动控制—刚性接触耦合失稳”，A/C/N 的内部归因仍为 U，不能直接写成 solver 凭空注入全部能量。
 
 DexLab [已有 Poke 适配](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.zh-CN.md)具备会话与工具回执，但任务观测和动作映射仍需逐项接入。结合[当前评分审计方向](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.zh-CN.md)，先在一个合格案例保存观测、请求、工具处理、实际执行、到达误差和独立评分，再比较完整历史与仅当前观测，在固定提示、转换和双重预算下加入一种坐标偏差。分别检查语义选择、运动到达、接触保持与释放，并保留失败、超时、主动放弃、基础设施错误和成本缺失。这是待验证设计，没有启动实验；暂不扩任务榜单或新建代理框架。
 
