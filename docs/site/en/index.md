@@ -14,7 +14,7 @@ DexLab is a physics-centric research platform for robot manipulation involving c
 | --- | --- |
 | Understand what dexterous-hand simulation studies | [What are we discussing when we discuss dexterous manipulation simulation?](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) (Chinese original): the full six-layer review, paper filters and repository comparison, with an [October supplement](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026). [English reading companion](dexterous-hand-simulation.md). |
 | Inspect experiments, rescore evidence or reproduce a task | [Experiments](experiments.md) → [Quickstart](quickstart.md); inspect existing evidence with the {ref}`GPU-free wiping rescore <offline-evidence>`. |
-| Understand contact failures and backend differences | [Failure attribution](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
+| Understand contact failures and backend differences | [Failure root-cause atlas](failure-root-cause-atlas.md) → [Per-configuration audit](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
 | Integrate a model or understand evaluation rules | [Model-evaluation protocol](model-evaluation.md); remote execution and public leaderboards are not yet complete. |
 | Read related research | [Newton topic guide](newton-reading-guide.md) → [Complete bibliography](newton-publications.md); find other reading in [References](references.md). |
 
@@ -71,7 +71,7 @@ These animations come from DexLab simulation recordings or recorded-state replay
 | **Deformable manipulation** | **Cutting and topology change** |
 | <a href="cloth-comparison.html"><img src="_static/cloth-studio/grasp.gif" width="100%" alt="Robot grasping a deformable cloth in recorded simulation" loading="lazy"></a><br>The robot can pinch and move a cloth patch, but complete folding still fails: the current record reaches **12.55%** edge strain against a 5% limit. | <a href="cut-push.html"><img src="_static/cutting/showcase.gif" width="100%" alt="Tofu and banana cutting recorded-state replay" loading="lazy"></a><br>Continuous cutting and blade-face pushing change the simulated topology; the full report records contact force, material separation, and retained failures. |
 | **RoboDojo: neighbor-amplified roll-out** | **RoboDojo: pure shallow-grip loss** |
-| <a href="robodojo-bread-slip.html"><img src="_static/robodojo-bread-slip/layout-002-preview.gif" width="100%" alt="RoboDojo roll-out amplified by neighbor contact" loading="lazy"></a><br>The close command remains active, but neighbor/shelf interaction amplifies an upper-edge pinch; the slice falls after bilateral normal load reaches zero. | <a href="robodojo-bread-slip.html#case-2"><img src="_static/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo shallow-grip loss without a measured pre-release impact" loading="lazy"></a><br>No pre-release external impact is measured; contact lies about 1.4 cm below the top edge and the slice drops after normal load disappears. |
+| <a href="robodojo-bread-slip.html"><img src="_static/robodojo-bread-slip/layout-002-preview.gif" width="100%" alt="RoboDojo roll-out amplified by neighbor contact" loading="lazy"></a><br>The close command remains active, but neighbor/shelf interaction amplifies an upper-edge pinch; the slice falls after bilateral normal load reaches zero. | <a href="robodojo-bread-slip.html#case-2"><img src="_static/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo shallow-grip loss without a measured pre-release impact" loading="lazy"></a><br>No pre-release external impact occurs. During lifting the slice rotates, edge margin falls from 14.41 to 2.87 mm, and only then does contact disappear. |
 
 <section id="research-findings"></section>
 
@@ -84,11 +84,11 @@ These animations come from DexLab simulation recordings or recorded-state replay
 | **Surface discretization changes the failure boundary** | Same cylinder, mass, force command, and step; only meshing changes | `256 → 1,024 → 4,096` triangles gives peak penetration **2.267 → 0.858 → 0.481 mm**. |
 | **Grasp behavior can depend on the backend** | Apple-stem grasp, ten paired scenes | Current defaults pass MuJoCo **1/10** and SuperDex **10/10**; smaller steps do not monotonically reduce penetration. |
 | **A stable cloth grasp is not a fold** | OpenArm + Wuji with passive cloth | Pinch, lift, and release pass; complete folding fails on strain, residual contact, and final geometry. |
-| **A close command is not a valid grasp** | Two local events from external RoboDojo `make_toast` records | Bilateral normal impulse falls from about 0.25 N·s to near zero; one has a neighbor impulse and one does not. Fix grasp geometry before testing material readback and compliance. |
+| **A close command is not a valid grasp** | Two local events from external RoboDojo `make_toast` records | Bilateral normal impulse falls from about 0.25 N·s to near zero; one has a neighbor impulse, while rotation and edge-margin loss precede collapse in the other. Fix grasp geometry before testing material readback and compliance. |
 
 Together, these results show why a success video is insufficient: **material models, contact response, and downstream policy transfer must be checked separately.**
 
-[Full experiments](experiments.md) · [All results and failures](results.md) · [Research findings](experience.md)
+[Full experiments](experiments.md) · [Failure root-cause atlas](failure-root-cause-atlas.md) · [All results and failures](results.md) · [Research findings](experience.md)
 
 (live-lab)=
 ## Play the claw machine

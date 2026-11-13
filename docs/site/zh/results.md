@@ -8,13 +8,14 @@
 完整覆盖 <coverage>
 可视对照 <visual-comparisons>
 诊断方法 <diagnosis>
+失败根因图谱 <failure-root-cause-atlas>
 Solver 失败复盘 <solver-failure-audit>
 接触预测诊断 <contact-response>
 基准 <benchmark>
 研究账本 <research-ledger>
 ```
 
-[Solver 失败复盘](solver-failure-audit.md) 汇总 RSS 与 DexLab 既有实验，区分耦合缺失、配置失败和运行错误。
+[失败根因图谱](failure-root-cause-atlas.md)把 15 个历史 demo、8 项研究经验、其余注册证据族和后续新增入口统一整理为“现象 → 第一失效层 → 因果链 → 证据边界 → 下一门槛”。[Solver 失败复盘](solver-failure-audit.md)继续保留逐引擎、逐配置的历史证据。
 
 ## 双引擎斜面对照
 

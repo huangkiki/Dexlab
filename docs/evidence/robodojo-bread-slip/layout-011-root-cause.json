@@ -1,0 +1,70 @@
+{
+  "source": {
+    "run": "RoboDojo make_toast, seed 0, layout 011",
+    "trace_rate_hz": 25,
+    "physics_callback_rate_hz": 250,
+    "raw_trace_redistributed": false,
+    "raw_trace_bytes": 2623465,
+    "raw_trace_sha256": "f074ee2c33896f6f293fef082a5408c648236ff57a24fdef51e0c82ee385adcd"
+  },
+  "method": {
+    "orientation": "bread pose relative to the wrist at step 180",
+    "edge_margin": "mean distance from the two recorded finger-contact proxies to the top edge of an oriented bounding-box proxy",
+    "acceleration": "finite difference of the 25 Hz wrist pose",
+    "limits": [
+      "The edge margin uses an OBB proxy, not the native PhysX collision mesh.",
+      "The trace does not contain full tangential impulse or the resolved runtime material pair.",
+      "The 25 Hz finite differences cannot uniquely separate friction, compliance, collision-mesh and acceleration contributions."
+    ]
+  },
+  "first_failing_layer": "shallow grasp geometry loses edge margin during in-plane rotation",
+  "causal_chain": [
+    "The grasp starts only about 14 mm below the top edge.",
+    "Upward wrist acceleration raises effective load while the slice rotates in the gripper plane.",
+    "The two contact proxies roll toward the top edge and lose geometric support.",
+    "Bilateral normal impulse collapses while the close command remains active.",
+    "The empty fingers close farther and the slice enters free fall."
+  ],
+  "timeline": [
+    {
+      "step": 186,
+      "relative_in_plane_rotation_deg": 6.93,
+      "mean_top_edge_margin_mm": 14.41,
+      "bilateral_normal_impulse_ns": 0.25257323127599374
+    },
+    {
+      "step": 187,
+      "relative_in_plane_rotation_deg": 10.08,
+      "mean_top_edge_margin_mm": 9.66,
+      "bilateral_normal_impulse_ns": 0.2497
+    },
+    {
+      "step": 188,
+      "relative_in_plane_rotation_deg": 12.45,
+      "mean_top_edge_margin_mm": 2.87,
+      "bilateral_normal_impulse_ns": 0.0018726327716308989
+    }
+  ],
+  "amplifier": {
+    "peak_upward_wrist_acceleration_m_s2": 4.58,
+    "peak_steps": [181, 182, 183],
+    "interpretation": "The lift transient is a plausible amplifier of a shallow, torsionally weak grasp, not a uniquely identified parameter-level root cause."
+  },
+  "post_release": {
+    "first_table_impact_step": 192,
+    "first_table_impact_impulse_ns": 0.11085090041160583,
+    "external_impulse_before_release_ns": 0.0
+  },
+  "proven": [
+    "The close command remains active.",
+    "In-plane rotation and loss of top-edge margin precede the normal-impulse collapse.",
+    "No neighbor or shelf impact is recorded before release.",
+    "The table impact occurs after contact loss."
+  ],
+  "not_proven": [
+    "A PhysX solver defect",
+    "An exact friction coefficient error",
+    "A unique contribution from missing fingertip or bread compliance",
+    "Hardware bread behavior"
+  ]
+}

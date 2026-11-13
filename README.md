@@ -36,9 +36,25 @@
 | **完成任务，不代表依靠预期的物理机制完成。** | RSS 擦拭有辅助保持时 **3/3** 通过，仅去掉辅助后 **0/3**；LIBERO 原任务 **10/10** 完成，物理诊断仅 **5/10** 通过。[擦拭](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html) · [LIBERO](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html) | 任务评分与接触、辅助力、记录检查分开报告。 |
 | **一个工况调好的参数，不足以保证迁移。** | 三个冻结配置在十组质量／尺寸条件下，合成响应联合目标 **0/30** 通过；未做质量或面积补偿。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#mass-size-transfer) | 复核参数映射与适用范围，不能把这批失败归为引擎算法错误。 |
 | **预测误差更低，不等于能预报接触失效。** | 六个已有 Wuji 回合的 100 ms 离线诊断中，常速预测降低位移误差，但接触保持基线仍漏报释放／卸载中的接触丢失。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/contact-response.html) | 另测接触事件与动作响应；重叠窗口不算独立重复，目前没有学习模型或控制收益结论。 |
-| **闭爪命令正确，不代表夹持接触有效。** | RoboDojo 烤面包的两个局部失稳片段中，命令保持闭合，但双指法向冲量由约 **0.25 N·s** 降到接近 0；一例被邻片接触放大，另一例直接从上缘滑脱。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html) | 先修抓取深度、重抓门槛和净空，再对材质读回、顺应性与切向冲量做受控 A/B；不能把整批失败都归咎于仿真器。 |
+| **闭爪命令正确，不代表夹持接触有效。** | RoboDojo 烤面包的两个局部失稳片段中，命令保持闭合；一例被邻片接触放大，另一例先发生平面内转动、上缘余量由 **14.41→2.87 mm**，随后双指法向冲量才从约 **0.25 N·s** 降到接近 0。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html) | 先修抓取深度、重抓门槛和净空，再对材质读回、顺应性与切向冲量做受控 A/B；不能把“载荷归零”本身或整批失败都归咎于仿真器。 |
 
 [完整结果、失败与未完成项 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)
+
+### 失败根因图谱
+
+已有实验统一按“**现象 → 第一失效层 → 因果链 → 证据边界 → 下一门槛**”复盘。成功或只有准入检查的实验明确记为“未观察到可归因失败”，证据不能区分多个机制时保留“未唯一确定”。
+
+| 第一失效层 | 代表案例 | 已经定位到的最早原因 |
+| --- | --- | --- |
+| **策略／任务几何** | RoboDojo 烤面包 | 上缘浅夹持先丢失几何余量；邻片干涉是另一例的放大器 |
+| **控制／执行器／辅助** | Genesis 力限额、RSS 擦拭 | 指力预算不足，或任务依赖额外 latch，而不是 solver 无故失败 |
+| **碰撞／几何离散** | 旧夹布、圆柱接触 | 顶点评分漏掉三角形穿桌；表面离散改变穿透边界 |
+| **接触／材料／耦合** | Wuji、Genesis PBD 布料 | 接触扳手缺抗扭方向，或切向保持／双向耦合不足 |
+| **数值离散／停止条件** | 接触起始、夹持、斜面 | 缩步或收紧容差能改变残差，但不自动修复接触模型 |
+| **观测／适配器／评分／证据** | LIBERO、AMP、旧夹布 | 状态未刷新、记录器不一致或评分覆盖不足，物理结论尚未获得有效输入 |
+| **未唯一确定** | MJWarp 路径、部分斜面记录 | 已缩小到运行路径／接触／数值范围，但缺少能区分候选机制的受控 A/B |
+
+[查看全部 15 个历史 demo、8 项研究经验、其余注册证据族和新增案例的根因卡片 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/failure-root-cause-atlas.html)
 
 ## 代表实验
 
@@ -74,7 +90,7 @@
 <img src="docs/evidence/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo 面包片从浅上缘夹持中直接滑脱" loading="lazy">
 </a>
 <strong>RoboDojo 烤面包：为什么没有碰撞也会掉？</strong><br>
-夹持点只比上缘低约 1.4 cm；没有明显外碰撞，双指载荷消失后面包直接下落。
+夹持点只比上缘低约 1.4 cm；抬升中面包先转动，上缘余量在 80 ms 内从 14.41 缩到 2.87 mm，随后接触消失并自由落体。
 </td>
 </tr>
 </table>
@@ -113,7 +129,7 @@ bash demos/apple-stem-grasp/run.sh \
 
 网站持续维护完整实验报告、使用指南和研究资料：
 
-- **看实验**：[实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [结果与覆盖](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) · [失败复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)
+- **看实验**：[实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [结果与覆盖](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) · [失败根因图谱](https://huangkiki.github.io/Dexlab/zh-cn/latest/failure-root-cause-atlas.html) · [旧版 solver 复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)
 - **研究导读**：[当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)
 - **理解方法**：[求解器与接触模型](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html) · [论文与参考资料](https://huangkiki.github.io/Dexlab/zh-cn/latest/references.html)
 - **参与项目**：[贡献指南](https://huangkiki.github.io/Dexlab/zh-cn/latest/contributing.html) · [当前工作](docs/current-work.zh-CN.md) · [问题与建议](https://github.com/huangkiki/Dexlab/issues)

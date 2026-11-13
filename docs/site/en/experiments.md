@@ -20,7 +20,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 | Experiment | Code | Question and status |
 |---|---|---|
 | [Sponge wiping and assisted retention](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | Source: RoboSimStudio `wipe_the_bar`. The original uses compliant constraints to carry the sponge with the hand; matched unassisted runs measure contact-only holding, slipping and cleaning |
-| [RoboDojo bread-slip diagnosis](robodojo-bread-slip.md) | External run records with DexLab offline diagnosis | Both local events keep the close command while normal contact collapses; the report separates neighbor-amplified roll-out from pure shallow-grip loss and preserves the batch boundary: 19/100 success, with 79/81 failures classified as policy execution |
+| [RoboDojo bread-slip diagnosis](robodojo-bread-slip.md) | External run records with DexLab offline diagnosis | Both events keep the close command. One is neighbor-amplified; the other first develops in-plane rotation and loses top-edge margin before normal impulse collapses. The batch boundary remains 19/100 success, with 79/81 failures classified as policy execution |
 | [Sequential cutting and knife-driven pushing](cut-push.md) | [demos/tofu-knife-push/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-knife-push/) | Three tofu pieces and four banana pieces; explain separation through recorded knife-contact forces, using synthetic materials |
 | [Cross scoring](tofu-scoring.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Two shallow cuts and a connected base; distinguish elastic rebound from native cut history |
 | [Synthetic tofu halving](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Single-cut CPU TLMPM, dynamic blade reaction and separation after withdrawal; independent BladeMaster reference |
@@ -32,6 +32,8 @@ Keep existing code paths to preserve asset references, reproduction commands and
 | Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | Scoped rigid evidence in #42; [PBD cloth diagnostics](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md) retain failed momentum/grasp checks; tested frictional grasp profile rejected; equal-time response, connected folds and two held-out offsets recorded |
 
 `src/dexlab/` contains shared task registration, scoring and recording. `scripts/` contains setup, rescoring, documentation and research tools. Share code only for real duplication or invariants; this is not a new general simulation framework.
+
+[Inspect root causes, unresolved cases and success boundaries for every historical experiment by first failing layer →](failure-root-cause-atlas.md)
 
 ## Apple control and dynamics
 

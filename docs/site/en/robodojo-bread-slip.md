@@ -1,6 +1,6 @@
 # RoboDojo toast: why do the two slices fall?
 
-**Bottom line: neither case is a missing close command, and neither is explained by “the bread is too slippery” alone.** The gripper command remains `0` (closed). Both grasps act near the upper edge, roughly 4.4–4.6 cm above the slice center of mass. The slice falls only after bilateral normal contact collapses and the now-empty gripper closes farther. Layout 002 adds neighbor/shelf interaction; layout 011 is a cleaner shallow-grip loss without a measured pre-release external impact.
+**Bottom line: neither case is a missing close command, and neither is explained by “the bread is too slippery” alone.** The gripper command remains `0` (closed). Both grasps act near the upper edge, roughly 4.4–4.6 cm above the slice center of mass. The slice falls only after bilateral normal contact collapses and the now-empty gripper closes farther. Layout 002 adds neighbor/shelf interaction. In layout 011, the slice first rotates in the gripper plane during lifting, the contact proxies roll toward the top edge and geometric margin is exhausted; only then does normal impulse collapse. “Load vanishes” is an outcome, not the first cause.
 
 This is a **DexLab diagnosis of external RoboDojo `make_toast` offline Code-as-Policy records**, not a native DexLab backend reproduction or a cross-engine comparison. The frozen 100 seed/layout batch succeeds in 19 cases. Episode-level classification attributes 79 of 81 failures to policy execution and two to policy mechanics. The two local drop segments below explain contact-loss mechanisms; they do not turn all 81 failures into simulator failures.
 
@@ -32,14 +32,18 @@ After release, recorded peaks reach about **0.70 m/s** translation and **11.4 ra
 <p><a href="_static/robodojo-bread-slip/layout-011.mp4">Download the full layout 011 MP4</a></p>
 ```
 
-Seed 0 / layout 011 loses contact at step 188. Normal impulse falls from about **0.253 N·s** to **0.0019 N·s**. No neighbor or shelf impulse is measured near release; the slice next hits the table at about **0.111 N·s**. Contact is **4.42 cm** above the center of mass—only about 1.4 cm below the top edge of the roughly 11.8 cm-tall slice. Peak translation is about **1.09 m/s**, while peak rotation is lower at **5.56 rad/s**. This is consistent with direct downward loss after normal load disappears.
+Seed 0 / layout 011 loses contact at step 188. Normal impulse falls from about **0.253 N·s** to **0.0019 N·s**. No neighbor or shelf impulse is measured near release; the slice first hits the table at step 192 with about **0.111 N·s**. Contact is **4.42 cm** above the center of mass—only about 1.4 cm below the top edge of the roughly 11.8 cm-tall slice.
+
+Frame-by-frame reanalysis moves the first failing layer earlier. From step 186 to 188, in-plane bread rotation relative to the wrist grows from about **6.93° to 12.45°**, while mean distance from the two contact proxies to the OBB top edge shrinks from **14.41 mm to 2.87 mm**. Normal impulse remains about **0.253 / 0.250 N·s** in the first two frames and collapses only at step 188. Upward wrist acceleration peaks near **4.58 m/s²** at steps 181–183, amplifying effective load on a shallow grasp, although the present trace cannot uniquely separate its contribution from friction, rigid-edge contact and missing compliance.
+
+The supported chain is therefore: **shallow top-edge pinch → lifting amplifies in-plane rotation about the pinch line → contacts roll toward the edge and exhaust geometric margin → bilateral impulse collapses → empty fingers close farther → free fall.** Peak falling translation is about **1.09 m/s**, with about **5.56 rad/s** rotation. This is more specific than “normal load disappears for no reason,” without over-attributing the parameter-level cause to PhysX.
 
 ## Separate policy errors from simulator gaps
 
 | Layer | Supported by this evidence | Not supported |
 | --- | --- | --- |
 | Policy / grasp geometry | Both contact lines are too high; layout 002 also lacks neighbor and shelf clearance | A missing close command; the command remains closed |
-| Contact dynamics | Bilateral normal load collapses at release; layout 002 has a neighbor impulse, layout 011 does not | Reducing the pre-release load to “static friction is slightly too low” |
+| Contact dynamics | Bilateral normal load collapses at release; layout 002 has a neighbor impulse; in layout 011 rotation and edge-margin loss precede collapse | Reducing the pre-release load to “static friction is slightly too low,” or treating zero impulse itself as the first cause |
 | Task execution | The 100-case batch succeeds 19 times; most failures are early finish, incomplete execution or unreached targets | Two drop clips do not explain the other 79 policy-execution failures |
 | Simulation validity | A rigid thin-slice model amplifies abrupt edge-contact changes; effective material pairing and tangential impulses need better readback | A proven PhysX solver defect, real-bread calibration or engine ranking |
 
@@ -66,5 +70,5 @@ For simulation A/B tests, save the resolved finger–bread material pair, fricti
 - Run date: 2026-11-12; 100 distinct seed/layout cases, 19 successes and 81 failures.
 - RGB and rigid poses at 25 Hz; diagnostics aggregate 250 Hz PhysX contact callbacks.
 - Each video shows roughly four seconds before and after release at 2× slow motion; release is centered at eight seconds.
-- Machine-readable metrics: <a href="_static/robodojo-bread-slip/metrics.json">metrics.json</a>.
+- Machine-readable metrics: <a href="_static/robodojo-bread-slip/metrics.json">metrics.json</a>; the layout 011 OBB-proxy timeline and attribution boundary are in <a href="_static/robodojo-bread-slip/layout-011-root-cause.json">layout-011-root-cause.json</a>.
 - No second engine, hardware bread experiment or material calibration was run. Conclusions are limited to these recorded local events and the batch-level episode statistics.
