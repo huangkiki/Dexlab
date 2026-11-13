@@ -6,6 +6,8 @@ DexLab's most reliable lesson is not that one engine is best. It is: **find the 
 
 This page applies five questions to the existing experiments: **symptom → first failing layer → causal chain → what the evidence proves and does not prove → the next attribution gate**. “Root cause” means only the earliest layer supported by present evidence. Insufficient cases remain `not uniquely identified`; successful or admission-only experiments are marked `no attributable failure observed`.
 
+Every failure case that this page lists, classifies or uses to support a conclusion should reach this explanatory depth rather than stop at an error string or final-frame symptom. When the physics maps cleanly, add an everyday analogy and state its limits. The analogy explains a mechanism already supported by measurements and chronology; it is not evidence by itself. Summary tables may compress presentation, but detailed cards, linked evidence or an explicit `not uniquely identified` status must preserve the attribution boundary.
+
 ## Seven first-failure layers
 
 | Code | First failing layer | Test | Representative case |
