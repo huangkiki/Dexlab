@@ -25,7 +25,9 @@ Ask a question that evidence can distinguish. For example: would the torsional c
 
 Use the same chain in an actual system: define the task → locate the first failing layer → change one mechanism → reassess under the original criteria. Questions already answered by retained records do not require another full engine matrix.
 
-## How this connects to RSI simulation
+<a id="how-this-connects-to-rsi-simulation"></a>
+
+## Connecting skill improvement with simulation improvement
 
 Policy failures can expose gaps in simulation or observations. After improving simulation, separately test whether the policy benefits. Reciprocal improvement requires evidence on both sides. The case above completes a contact-configuration comparison; it does not demonstrate a fully autonomous loop of discovering a problem, changing an engine and improving a policy.
 
