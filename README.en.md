@@ -36,9 +36,25 @@ This is a conceptual architecture overview. See the [coverage matrix](https://hu
 | **Task completion does not establish the intended physical mechanism.** | RSS wiping passes **3/3** with auxiliary retention and **0/3** when only that assistance is removed; LIBERO completes **10/10** original tasks while physical diagnostics pass **5/10**. [Wiping](https://huangkiki.github.io/Dexlab/en/latest/rss-wiping.html) · [LIBERO](https://huangkiki.github.io/Dexlab/en/latest/experience.html) | Report task scores separately from contact, assistance and record checks. |
 | **Tuning one condition does not establish transfer.** | Three frozen profiles pass **0/30** combined synthetic-response targets across ten mass/size cases, without mass or area compensation. [Report](https://huangkiki.github.io/Dexlab/en/latest/experience.html#mass-size-transfer) | Recheck parameter mapping and scope; these failures do not identify an engine algorithm error. |
 | **Lower prediction error does not establish contact-loss prediction.** | In 100 ms offline diagnostics from six existing Wuji episodes, constant velocity reduces position error, but contact-persistence baselines still miss release/unloading losses. [Report](https://huangkiki.github.io/Dexlab/en/latest/contact-response.html) | Test contact events and action response separately; overlapping windows are not independent trials, and no learned-model or control benefit is established. |
-| **A closed command does not establish a valid grasp.** | In two local RoboDojo toast failures, the command stays closed while bilateral normal impulse drops from about **0.25 N·s** to near zero. One case is amplified by neighbor contact; the other slips directly from a top-edge pinch. [Report](https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html) | Fix grasp depth, regrasp criteria and clearance before controlled A/B tests of material readback, compliance and tangential impulse; do not attribute the whole batch to the simulator. |
+| **A closed command does not establish a valid grasp.** | In two local RoboDojo toast failures the command stays closed. One is amplified by neighbor contact; in the other, in-plane rotation reduces top-edge margin from **14.41→2.87 mm** before bilateral normal impulse falls from about **0.25 N·s** to near zero. [Report](https://huangkiki.github.io/Dexlab/en/latest/robodojo-bread-slip.html) | Fix grasp depth, regrasp criteria and clearance before controlled A/B tests of material readback, compliance and tangential impulse; do not call zero load itself—or the whole batch—a simulator defect. |
 
 [Full results, failures and open gaps →](https://huangkiki.github.io/Dexlab/en/latest/results.html)
+
+### Failure root-cause atlas
+
+Existing experiments now follow one review contract: **symptom → first failing layer → causal chain → evidence boundary → next attribution gate**. Successful or admission-only work is explicitly marked “no attributable failure observed”; cases that cannot separate mechanisms remain “not uniquely identified.”
+
+| First failing layer | Representative case | Earliest cause currently identified |
+| --- | --- | --- |
+| **Policy / task geometry** | RoboDojo toast | A shallow top-edge pinch loses geometric margin first; neighbor interference amplifies the other case |
+| **Control / actuator / assistance** | Genesis force limit and RSS wiping | Insufficient force budget or dependence on an extra latch, not an unexplained solver failure |
+| **Collision / geometric discretization** | Historical cloth and cylinder contact | Vertex scoring misses triangle/table crossing; surface discretization moves the penetration boundary |
+| **Contact / material / coupling** | Wuji and Genesis PBD cloth | Missing torsional wrench direction or insufficient tangential retention/bidirectional coupling |
+| **Numerical discretization / stopping** | Contact onset, pinch and incline | Smaller steps or tighter tolerances change residuals but do not automatically repair the contact model |
+| **Observation / adapter / scorer / evidence** | LIBERO, AMP and historical cloth | Stale state, recorder inconsistency or incomplete score coverage invalidates the input to a physics claim |
+| **Not uniquely identified** | MJWarp path and some incline records | Scope is narrowed to runtime path/contact/numerics, but a discriminating controlled A/B is still missing |
+
+[Read the root-cause cards for all 15 historical demos, eight research experiences, remaining registered evidence families and later additions →](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html)
 
 ## Representative experiments
 
@@ -74,7 +90,7 @@ The close command is correct, but neighbor/shelf interaction amplifies a shallow
 <img src="docs/evidence/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo bread slipping directly from a shallow upper-edge pinch" loading="lazy">
 </a>
 <strong>RoboDojo toast: why can it fall without a collision?</strong><br>
-Contact lies only about 1.4 cm below the top edge; with no measured pre-release external impact, normal load vanishes and the slice drops.
+Contact lies only about 1.4 cm below the top edge. During lifting the slice rotates, edge margin shrinks from 14.41 to 2.87 mm in 80 ms, and only then does contact disappear into free fall.
 </td>
 </tr>
 </table>
@@ -113,7 +129,7 @@ The verifier writes `summary.json`, with `passed: true` when all checks pass. Fo
 
 The website maintains full experiment reports, usage guides and research material:
 
-- **Explore experiments:** [Experiment gallery](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Results and coverage](https://huangkiki.github.io/Dexlab/en/latest/results.html) · [Failure audit](https://huangkiki.github.io/Dexlab/en/latest/solver-failure-audit.html)
+- **Explore experiments:** [Experiment gallery](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Results and coverage](https://huangkiki.github.io/Dexlab/en/latest/results.html) · [Failure root-cause atlas](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html) · [Legacy solver audit](https://huangkiki.github.io/Dexlab/en/latest/solver-failure-audit.html)
 - **Research guide:** [What are we discussing when we discuss dexterous manipulation simulation?](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) (Chinese original), with an [English companion](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html).
 - **Understand the methods:** [Solvers and contact models](https://huangkiki.github.io/Dexlab/en/latest/solver-taxonomy.html) · [Papers and references](https://huangkiki.github.io/Dexlab/en/latest/references.html)
 - **Contribute:** [Contribution guide](https://huangkiki.github.io/Dexlab/en/latest/contributing.html) · [Current work](docs/current-work.md) · [Issues and suggestions](https://github.com/huangkiki/Dexlab/issues)

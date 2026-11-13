@@ -20,7 +20,7 @@ AMP 记录器一致性失败 <amp-lift>
 | 实验 | 代码入口 | 研究问题与状态 |
 |---|---|---|
 | [海绵擦拭与辅助保持](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | 来源为 RoboSimStudio `wipe_the_bar`；原版用柔顺约束辅助海绵随手运动，固定几何下另测无辅助的接触保持、滑脱和清洁率 |
-| [RoboDojo 面包脱落诊断](robodojo-bread-slip.md) | 外部运行记录与 DexLab 离线诊断 | 两个局部事件均为闭爪命令正确但法向接触塌缩；区分邻片放大的滚边脱落与纯浅夹持滑脱，并保留 19/100 成功、79/81 失败归为策略执行的批次边界 |
+| [RoboDojo 面包脱落诊断](robodojo-bread-slip.md) | 外部运行记录与 DexLab 离线诊断 | 两个局部事件均为闭爪命令正确；一例由邻片放大，另一例先发生平面内转动和上缘余量损失，之后法向冲量才塌缩；保留 19/100 成功、79/81 失败归为策略执行的批次边界 |
 | [连续切割与刀面推动](cut-push.md) | [demos/tofu-knife-push/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-knife-push/) | 豆腐三块、香蕉四块；用记录的刀面接触力解释分离运动，合成材料 |
 | [交叉浅划](tofu-scoring.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 两条浅切、底部连通；区分弹性回弹与原生切割历史 |
 | [豆腐状软块对半切](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 单次切割 CPU TLMPM、刀具反力闭环与撤刀后分离；独立 BladeMaster 参考实现 |
@@ -32,6 +32,8 @@ AMP 记录器一致性失败 <amp-lift>
 | Genesis | [#42](https://github.com/huangkiki/Dexlab/issues/42) | 刚体限定范围证据已交付；[PBD 薄布诊断](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.zh-CN.md)包含失败对照，当前摩擦夹持配置不准入；等时长响应、连通折叠与两个独立偏移位置已记录 |
 
 `src/dexlab/` 保留共享任务注册、评分与记录逻辑；`scripts/` 放安装、复算、文档及研究工具。只有有实际重复或不变量的部分进入共享代码，不另建通用仿真框架。
+
+[按第一失效层查看全部历史实验的根因、未判定项与成功边界 →](failure-root-cause-atlas.md)
 
 ## 苹果抓梗的控制与动力学
 

@@ -1032,13 +1032,13 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <p><a href="https://arxiv.org/html/2609.24170v1#A3">示范实验</a>只检验特定的跨布局单示范输入，结果没有总体收益；这不能推出少样本学习普遍无效。<a href="https://arxiv.org/html/2609.24170v1#A4">扰动实验</a>则选用原本成功的八个布局，没有历史消融或相同扰动下的 VLA 对照，坐标取反后的工具边界也提供了线索。因此可观察到纠正动作，尚不能确认其原因是历史学习，更不能确认这种恢复优于其他控制器。</p>
 <p>对 DexLab，更有辨别力的问题是：<strong>在当前观测相同的条件下，保留交互历史是否真的提高恢复率？</strong>可先用已能稳定执行的任务，比较完整历史与仅当前观测；固定提示、动作转换、模型调用数和环境步数，再加入一种明确的坐标偏差。把语义选择、运动到达、接触保持和最终释放分开计分。只有跨重复试验的收益成立，才值得继续增加记忆机制。以上是候选设计，没有冻结或启动实验。</p>
 <h3 id="robodojo-bread-slip">烤面包失败诊断：闭爪命令不等于有效夹持</h3>
-<p><strong>2026-11-12 的 100 个离线 Code-as-Policy seed/layout 工况成功 19 个；81 个失败的回合级归因中，79 个是策略执行问题、2 个是策略机械问题。</strong>因此下方两段局部脱落不能把整批失败都改写成仿真器问题。但它们揭示了同一个接触机制：闭爪命令持续为 <code>0</code>，双指法向冲量却从约 0.25 N·s 降到接近 0，之后空夹爪继续闭合。</p>
+<p><strong>2026-11-12 的 100 个离线 Code-as-Policy seed/layout 工况成功 19 个；81 个失败的回合级归因中，79 个是策略执行问题、2 个是策略机械问题。</strong>因此下方两段局部脱落不能把整批失败都改写成仿真器问题。它们共享“闭爪命令持续为 <code>0</code>、双指法向冲量从约 0.25 N·s 降到接近 0、空夹爪继续闭合”的末端现象，但第一失效链不同：layout 002 有邻片接触放大，layout 011 则先发生平面内转动和上缘余量损失。</p>
 <div class="deep-grid">
 <article class="deep-card"><h3>layout 002 · 邻片放大的滚边脱落</h3><video controls preload="metadata" poster="../robodojo-bread-slip/layout-002-preview.gif" style="width:100%;height:auto"><source src="../robodojo-bread-slip/layout-002.mp4" type="video/mp4"></video><p>接触点比质心高约 4.60 cm；释放附近相邻面包冲量约 0.062 N·s，随后先撞货架。浅夹持受到侧向挤压后，接触法线旋转，面包绕上缘滚出。</p></article>
-<article class="deep-card"><h3>layout 011 · 无明显外碰撞的浅夹持滑脱</h3><video controls preload="metadata" poster="../robodojo-bread-slip/layout-011-preview.gif" style="width:100%;height:auto"><source src="../robodojo-bread-slip/layout-011.mp4" type="video/mp4"></video><p>接触点比质心高约 4.42 cm，只比面包上缘低约 1.4 cm；释放前没有测到邻片或货架冲量，法向载荷消失后直接下落。</p></article>
+<article class="deep-card"><h3>layout 011 · 无明显外碰撞的浅夹持滑脱</h3><video controls preload="metadata" poster="../robodojo-bread-slip/layout-011-preview.gif" style="width:100%;height:auto"><source src="../robodojo-bread-slip/layout-011.mp4" type="video/mp4"></video><p>接触点只比面包上缘低约 1.4 cm；step 186→188，面包相对腕部的平面内转角约 6.93°→12.45°，OBB 代理上缘余量从 14.41→2.87 mm，之后法向冲量才塌缩。释放前没有邻片或货架冲量。</p></article>
 </div>
 <p>第一优先级是加深抓取、拒绝窄夹持、增加邻片净空并做低速试提。仿真侧的可验证缺口是：0.07 kg 刚体面包没有压缩、表面粗糙度或指垫顺应性；metadata 与对象加载路径使用的摩擦字段不同，最终 finger–bread 材质 pair 和 combine mode 尚未完整读回；现有记录只有 40 ms 窗内法向冲量峰值和 25 Hz 位姿微分，不含完整切向冲量。它们会影响边缘接触突变的可信度，但当前证据尚未建立 PhysX 求解器错误、真实面包标定或跨引擎排名。</p>
-<p><a href="../../robodojo-bread-slip.html">完整中英文报告、参数建议和机器可读指标</a>。第三栏青色／橙色框是根据刚体位姿和包围盒绘制的诊断代理，不是 PhysX 原生碰撞网格导出。</p>
+<p><a href="../../robodojo-bread-slip.html">完整中英文报告、参数建议和机器可读指标</a>；其余历史实验按同一结构整理在<a href="../../failure-root-cause-atlas.html">仿真失败根因图谱</a>。第三栏青色／橙色框是根据刚体位姿和包围盒绘制的诊断代理，不是 PhysX 原生碰撞网格导出。</p>
 <h3>DexLab 先学哪一步</h3>
 <p><a href="https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.zh-CN.md">已有 Poke 适配</a>具备会话与工具回执，任务侧的观测和动作映射仍需逐项接入。沿用<a href="https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.zh-CN.md">当前评分语义审计方向</a>，先为一个合格案例记录完整链条：模型看到什么 → 请求什么 → 工具接受、拒绝或改写什么 → 实际执行什么 → 原生状态如何变化 → 独立评分器判了什么。尤其要保存请求值与实际执行值、动作块时长、到达误差和退出原因；API 成功返回不能代替物理动作成功。</p>
 <p>之后再做历史对照和小扰动诊断，并同时报告失败、超时、主动放弃、基础设施错误，以及成本记录缺失。动作块时长和推理等待应分别计时。暂不扩充大规模任务榜单，不新增通用代理框架，也不把模型生成的钢琴控制程序视作已学会通用多指策略。若相同输入和预算的对照显示快速接触控制收益，或另一仿真器及真机重复了优势，再调整这一优先级。</p>
