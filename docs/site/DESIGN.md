@@ -1,6 +1,6 @@
 ---
-name: DexLab Research Homepage
-description: A warm-paper reading index shaped by the existing dexterous-simulation guide.
+name: DexLab Research Homepage and Learning
+description: A warm-paper research index and learning route shaped by the existing dexterous-simulation guide.
 colors:
   accent: '#4f664c'
   page: '#fafaf6'
@@ -46,6 +46,41 @@ typography:
     fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
     fontSize: 22px
     lineHeight: 1.55
+  learning-display:
+    fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
+    fontSize: 36px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: -.02em
+  learning-headline:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 24px
+    fontWeight: 600
+    lineHeight: 1.5
+  learning-title:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 19px
+    fontWeight: 700
+    lineHeight: 1.9
+  learning-body:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 16px
+    lineHeight: 1.9
+  learning-label:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 14px
+    lineHeight: 1.9
+  learning-caption:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 13px
+    lineHeight: 1.9
+  learning-output:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 22px
+    fontWeight: 700
+    lineHeight: 1.9
+rounded:
+  learning-control: 4px
 spacing:
   compact: 8px
   inline: 12px
@@ -91,9 +126,28 @@ components:
     textColor: '{colors.muted}'
     typography: '{typography.label}'
     padding: 16px 0 0
+  learning-action:
+    backgroundColor: transparent
+    textColor: '{colors.accent}'
+    typography: '{typography.learning-body}'
+    rounded: '{rounded.learning-control}'
+    padding: 8px 14px
+  learning-action-read:
+    backgroundColor: '{colors.accent}'
+    textColor: '{colors.page}'
+  learning-chapter-current:
+    backgroundColor: '{colors.panel}'
+    textColor: '{colors.accent}'
+    typography: '{typography.learning-label}'
+    rounded: '{rounded.learning-control}'
+    padding: 10px 12px
+  learning-time-example:
+    backgroundColor: '{colors.panel}'
+    textColor: '{colors.ink}'
+    padding: 24px
 ---
 
-# Design System: DexLab Research Homepage
+# Design System: DexLab Research Homepage and Learning
 
 ## Overview
 
@@ -101,7 +155,7 @@ components:
 
 The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.
 
-This system governs only the Chinese and English research homepages. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.
+This system governs the Chinese and English research homepages and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.
 
 **Key Characteristics:**
 
@@ -109,8 +163,11 @@ This system governs only the Chinese and English research homepages. The existin
 - A serif opening title beside a desktop reading rail; navigation wraps above the title on smaller screens.
 - Open sections and ruled reading rows, with hierarchy carried by spacing and type.
 - Original experiment media, native controls and explicit evidence boundaries.
+- A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
 Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+
+The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The sections below keep homepage composition separate from this ordinary extension.
 
 ## Colors
 
@@ -128,6 +185,8 @@ One restrained green accent sits among warm, low-chroma neutrals shared with the
 - **Muted Olive Gray** (`muted`): supporting text, captions and resting navigation.
 - **Fine Rule** (`rule`): reading-rail edge, section separators and reading rows.
 
+The learning surface reuses these colors. Paper Wash also marks the current chapter, teaching example, code and blockquotes; Reading Green identifies links, controls and explicit read state. Its CSS names `page` as `--paper` and `accent` as `--green` without changing their values.
+
 **The Evidence Color Rule.** Interface color organizes reading; recorded experiment colors retain their original meaning.
 
 ## Typography
@@ -137,6 +196,10 @@ The opening title and masthead use the serif stack; the body, section headings a
 Use display for the full linked guide title, headline for major sections, title for research questions, body for reading text, label for navigation and caption for the replay explanation. The lead is larger (18px) and limited to (700px); supporting introductions and evidence-boundary prose use a measure of up to (740px). Research-direction headings use (23px), case headings (20px), and learning headings (18px).
 
 At the intermediate breakpoint, the opening title becomes (46px). On mobile it uses `clamp(28px, 8.7vw, 34px)` with line height (1.48); the lead and guide link become (16px), section headings (24px), and the research-direction heading (21px). English removes its explicit title line breaks on mobile; Chinese retains them. Let the languages wrap naturally rather than forcing matching line counts.
+
+### MuJoCo learning typography
+
+The `learning-*` tokens apply only to the course reader: a regular serif lesson title, sans-serif section and subsection headings, readable body text, smaller navigation and supporting text, and bold numeric outputs. The article measure stops at (74ch). At (800px) and below, the lesson title becomes (30px) and section headings (23px); at (440px) and below, the title becomes (28px) and timing outputs (19px). These steps preserve the homepage scale above.
 
 ## Layout
 
@@ -151,15 +214,25 @@ Evidence uses equal columns with a (28px) gap; question and reading columns use 
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
+### MuJoCo learning layout
+
+The learning masthead is in normal flow, (80px) tall with (40px) horizontal padding and a maximum width of (1600px). The centered course grid has columns (240px / minmax(0, 760px) / 160px), a (40px) gap, maximum width (1440px) and padding (36px 40px 72px). Chapter and section rails stick (28px) below the viewport top; the central article remains the reading focus.
+
+- At (1200px) and below, the section rail disappears and the grid uses a (220px) chapter rail, flexible article, (32px) gap and maximum width (1120px).
+- At (800px) and below, the article stacks under a native chapter disclosure, with page padding (20px 22px 48px). JavaScript initially collapses the chapter disclosure; without it, the links remain visible. Chapter links use two columns, becoming one at (440px). The masthead wraps, and its tools take a separate row at the narrow breakpoint.
+- The teaching example uses two numeric result columns. Print removes reading navigation and bookmark controls and lets the article fill the page. Learning anchor scroll padding is (100px), becoming (24px) on mobile.
+
 ## Elevation & Depth
 
-There are no shadows, gradients or decorative transitions. Thin rules, whitespace and typography separate content; the paper wash is confined to the replay backdrop. Hover changes are immediate. Keyboard focus uses a green outline (2px) with an offset (4px).
+There are no shadows, gradients or decorative transitions. Thin rules, whitespace and typography separate content; the homepage confines the paper wash to the replay backdrop, while learning uses it for the teaching and reading states described above. Hover changes are immediate. Keyboard focus uses a green outline (2px) with an offset (4px).
 
 **The Flat Reading Rule.** Use spacing, type and fine rules to separate content without enclosing it in raised panels.
 
 ## Shapes
 
 The homepage defines no rounded-corner scale. Reading actions and topic buttons remain unfilled, the video is rectangular, and learning numbers are plain serif numerals. Topic selection uses a bottom stroke (2px). Reading entries are open rows with single-pixel rules; chapter and engine links wrap within similarly open ruled groups.
+
+The course reader's `learning-control` radius belongs only to its outlined buttons and chapter links. The teaching panel remains rectangular; native ranges, radios, progress and disclosures keep their browser affordances. The filled read button is an explicit reading state, not a homepage action style.
 
 ## Components
 
@@ -189,6 +262,14 @@ Each panel pairs a research question with an open reading list. Links use regula
 
 Four steps form two columns on desktop and a single column on mobile. Each has a plain green serif number, a content inset of (38px), a heading, subjects, prerequisite and course link. Engine choices sit between fine rules; related concepts link across to experiments. Course and engine links open the on-site `learn/` reader. The authored courses remain maintained by Sim Learning; the English homepage retains its language note.
 
+### MuJoCo learning controls
+
+Six ordered chapter links retain `aria-current`, with a paper-wash current row and explicit read labels. Previous/next links and the deeper-course links remain ordinary navigation. The optional section rail follows the lesson headings. A skip link, visible focus and native mobile disclosure keep the reader keyboard accessible.
+
+Readers mark or unmark lessons explicitly. A thin native progress bar counts read lessons; browser-local storage also supplies a last-lesson link. Neither page visits nor quiz results mark a lesson read. Storage failure produces a readable status message. The bookmark counts reading, not competence; both languages share the same lesson identifiers.
+
+Native explanations can be expanded together. Self-checks use labeled radios, a fieldset and textual status feedback, with explanations available without JavaScript. The timing example uses native ranges, numeric outputs and an SVG timeline to connect physics-step duration to control-update period. It depicts simulated time, not wall-clock speed or measured engine behavior. Script-only controls are revealed after initialization; lesson text, disclosures and navigation remain usable without JavaScript.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -197,10 +278,11 @@ Four steps form two columns on desktop and a single column on mobile. Each has a
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
+- **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
 
 ### Don't:
 
-- **Don't** restore the old blue-white centered hero, filled action buttons or rounded promotional panels.
-- **Don't** restyle the article, other Sphinx pages or the separate web application through this homepage system.
+- **Don't** restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.
+- **Don't** restyle the article, unrelated Sphinx pages or the separate web application through this reading system.
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.
