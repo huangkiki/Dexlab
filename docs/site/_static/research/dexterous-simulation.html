@@ -1060,7 +1060,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/309">完整讨论与证据边界 ↗</a><a href="https://www.pi.website/research/rlt">RLT 官方项目页</a><a href="https://github.com/omarrayyann/EgoGym">EgoGym 公开入口</a><a href="../../dexterous-hand-simulation.html#精细插接不要把-rlt-与-cap-当作替代方案">中文导读</a><a href="#top">回到开头</a></div>
 </section>
 
-<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer><section class="section" id="robocoliseum">
+<section class="section" id="robocoliseum">
 <div class="section-heading"><div><div class="eyebrow">13 / ROBOCOLISEUM</div><h2>RoboColiseum：回放动作、检验响应，再比较完整任务</h2></div><p>2026-11-13 · Real2Sim / 状态归属 / 预算与评分</p></div>
 <p><strong>最值得借鉴的是把仿真可信度与模型评测接起来。</strong> 先固定真实发出的动作，让仿真自己算出机器人和物体的响应；再用独立条件检验拟合是否有效，最后在明确预算内比较完整任务。平台的场景规模与榜单不应替代这条证据链。<a href="https://github.com/huangkiki/Dexlab/discussions/329">完整讨论与取舍</a></p>
 <p>以“抓起杯子、转向、放下”为教学例子：记录关节与夹爪目标，同时保留实际到达、接触建立、持物和释放。如果逐帧写入杯子位姿，只能复现画面；让它通过接触动力学自行运动，才能检查同一输入是否产生相近响应。该例不是作者新增实验。RoboColiseum <a href="https://robocoliseum.ai/techreport/robocoliseum#en-sub-1-1">平台报告 §1</a>描述约 100 Hz 指令回放与 1 ms 物理子步，并把源后端拟合、冻结参数迁移和目标后端适配分开。</p>
@@ -1078,7 +1078,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <p><strong>DexLab 的优先顺序：先沿用评分语义审计，把一条已有合格记录的输入—响应—接触—评分链整理清楚，再设计独立条件和双重预算。</strong> 缺少实机数据时，内部一致性可以研究，但不称为 Real2Sim 标定。暂缓整个平台迁移；只有第一失效层明确需要新材料或接触能力时，再按既有 UniSim 分工论证接入。本轮为 2026-11-13 的报告、图表与固定源码核查，没有运行外部模型/仿真或改变 DexLab 物理实现；原论文与仓库筛选统计不变。</p>
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/329">完整讨论与判因门槛 ↗</a><a href="../../dexterous-hand-simulation.html#robocoliseum">导读 / Reading companion</a><a href="#top">回到开头</a></div>
 </section>
-</main>
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
 <script>
 const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
 function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}
