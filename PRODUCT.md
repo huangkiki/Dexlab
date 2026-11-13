@@ -8,6 +8,8 @@ web
 
 ## Users and purpose
 
+DexLab is a personal research project maintained by huangkiki. Use singular first person or the project name in project descriptions; do not imply a research team. Preserve existing article titles and quotations.
+
 The primary reader researches robot learning or embodied intelligence. Their primary task is to read findings, understand the evidence and limits, and take away implications for their own research. Reading must not depend on installing an environment or rerunning an experiment. DexLab focuses on contact-rich manipulation, including grippers and dexterous hands. The research direction is reciprocal improvement: agent failures expose simulation gaps; improved simulation helps improve agents.
 
 ## Confirmed publishing brief
