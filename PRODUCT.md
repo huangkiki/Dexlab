@@ -15,10 +15,10 @@ The primary reader researches robot learning or embodied intelligence. Their pri
 The November 2026 ten-question interview established these choices:
 
 - Humans set goals and boundaries. Agents should both execute experiments and help discover questions, hypotheses and subsequent experiments. This is a direction, not a claim of completed autonomous RSI.
-- Show the finding first, then its evidence, implications and scope. Keep task improvement supported by failure attribution. Installation and reproduction are optional deeper paths, not the homepage conversion goal.
+- Open with the research guide. Within each case, show the finding first, then its evidence, implications and scope. Keep task improvement supported by failure attribution. Installation and reproduction are optional deeper paths, not the homepage conversion goal.
 - Keep README to roughly one or two screens: positioning, RSI idea, one real case, Blog / experiments / learning entrances.
-- Give the website clear reading paths and explicit connections between questions, experiments, findings and further work. The reference is https://rl-robotics.github.io/.
-- Organize Blog articles around specific research questions, connected by persistent topics. Retain the existing long-form review as a reading guide.
+- Give the website clear reading paths and explicit connections between questions, experiments, findings and further work. The learning-map reference is https://rl-robotics.github.io/. The homepage now follows the existing dexterous-simulation guide’s reading style: warm paper, serif opening title, restrained green links and quiet separators.
+- Organize Blog articles around specific research questions, connected by persistent topics. Make the existing long-form research guide the main first-screen reading entry, with its full title and a direct link. Avoid unnecessary secondary labels and descriptions; let layout explain the hierarchy.
 - Show the learning map, prerequisites and complete existing courses on this site. Reading links stay within DexLab; canonical learning repositories remain the authored sources and source-code references. Publish pinned snapshots through the shared documentation reader and sync upstream changes explicitly rather than editing two copies.
 - This revision covers README and the website entrance. Existing articles, research evidence and technical documentation stay available; it is not a redesign of every report.
 
