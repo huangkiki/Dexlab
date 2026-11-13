@@ -10,4 +10,4 @@
 
 ## 学习入口
 
-**先学再读配置表：**[Sim Learning](https://github.com/huangkiki/sim-learning) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide)。课程来源核对与 DexLab 实验资格分别记录。
+**先学再读配置表：**[Sim Learning](learning.md) 提供中文教程和六引擎原生课程。建议先沿 [Physics-Based Simulation 伴读路线](learn/sim/docs/physics-based-simulation.md) 学习，再读 [Solver 教程](learn/sim/docs/solver-guide/README.md)。课程来源核对与 DexLab 实验资格分别记录。

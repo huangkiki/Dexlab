@@ -29,7 +29,7 @@ This completed contact-model comparison still shows slow drift; it does not esta
 | --- | --- |
 | **Read the findings** | [Findings and scope](https://huangkiki.github.io/Dexlab/en/latest/#experiments): start with the result, then inspect comparisons, evidence and implications. |
 | **Continue through the Blog** | [Follow questions and topics](https://huangkiki.github.io/Dexlab/en/latest/#blog): contact and physics, failure and evaluation, agents and simulation. |
-| **Learn simulation systematically** | The [learning map](https://huangkiki.github.io/Dexlab/en/latest/#learn) connects prerequisites to experiments. Courses are maintained in [Sim Learning](https://github.com/huangkiki/sim-learning), primarily in Chinese with English terminology and summaries. |
+| **Learn simulation systematically** | The [learning map](https://huangkiki.github.io/Dexlab/en/latest/#learn) connects prerequisites to experiments. [Read the courses on this site](https://huangkiki.github.io/Dexlab/en/latest/learning.html), maintained by Sim Learning, primarily in Chinese with English terminology and summaries. |
 
 <a id="architecture"></a><a id="quickstart"></a>
 [Architecture](https://huangkiki.github.io/Dexlab/en/latest/about.html#architecture) · [Setup & reproduction](https://huangkiki.github.io/Dexlab/en/latest/quickstart.html) · [Contribute](https://huangkiki.github.io/Dexlab/en/latest/contributing.html) · [Apache-2.0](LICENSE)

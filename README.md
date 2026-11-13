@@ -29,7 +29,7 @@
 | --- | --- |
 | **直接看研究结论** | [发现与适用范围](https://huangkiki.github.io/Dexlab/zh-cn/latest/#experiments)：先读结论，再看对照、依据和启发。 |
 | **继续读研究 Blog** | [按问题和专题阅读](https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog)：接触与物理、失败与评测、智能体与仿真。 |
-| **系统学习仿真** | [学习地图](https://huangkiki.github.io/Dexlab/zh-cn/latest/#learn)连接先修知识与实验，课程由 [Sim Learning](https://github.com/huangkiki/sim-learning) 维护。 |
+| **系统学习仿真** | [学习地图](https://huangkiki.github.io/Dexlab/zh-cn/latest/#learn)连接先修知识与实验，[完整课程在本站阅读](https://huangkiki.github.io/Dexlab/zh-cn/latest/learning.html)，由 Sim Learning 维护。 |
 
 <a id="architecture"></a><a id="quickstart"></a>
 [平台架构](https://huangkiki.github.io/Dexlab/zh-cn/latest/about.html#architecture) · [安装与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/quickstart.html) · [参与研究](https://huangkiki.github.io/Dexlab/zh-cn/latest/contributing.html) · [Apache-2.0](LICENSE)

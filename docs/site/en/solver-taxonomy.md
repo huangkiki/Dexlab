@@ -10,4 +10,4 @@ Fine-feature SDF validation is tracked in [#178](https://github.com/huangkiki/De
 
 ## Learning route
 
-**Learn before reading the configuration table:** [Sim Learning](https://github.com/huangkiki/sim-learning) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](https://github.com/huangkiki/sim-learning/blob/main/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](https://github.com/huangkiki/sim-learning/tree/main/docs/solver-guide). Course source checks remain separate from DexLab experimental qualification.
+**Learn before reading the configuration table:** [Sim Learning](learning.md) provides Chinese lessons, English terminology and native engine courses. Start with the [Physics-Based Simulation study route](learn/sim/docs/physics-based-simulation.md#english-reading-guide), then the [solver guide](learn/sim/docs/solver-guide/README.md). Course source checks remain separate from DexLab experimental qualification.

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="340" viewBox="0 0 1280 340" role="img" aria-labelledby="title desc">
+  <title id="title">Sim Learning · 仿真学习</title>
+  <desc id="desc">Six engines, two learning tracks. Native APIs, physics and source code.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101d2a"/>
+      <stop offset="1" stop-color="#102f35"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#87c6c3" stroke-opacity=".075"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="340" rx="18" fill="url(#bg)"/>
+  <rect x="650" width="630" height="340" rx="18" fill="url(#grid)"/>
+  <g font-family="Arial, 'Noto Sans CJK SC', sans-serif">
+    <text x="55" y="50" font-size="13" letter-spacing="3" fill="#71d5ca">OPEN LEARNING SERIES</text>
+    <text x="50" y="148" font-size="72" font-weight="700" letter-spacing="-3" fill="#f1f7f5">SIM LEARNING</text>
+    <text x="55" y="207" font-size="34" font-weight="500" fill="#f1f7f5">仿真学习</text>
+    <text x="55" y="250" font-size="21" fill="#aac8cd">原生接口 · 物理机制 · 源码实现</text>
+    <path d="M55 281H112" stroke="#e9b76b" stroke-width="3"/>
+    <text x="131" y="288" font-size="14" letter-spacing="2" fill="#c4d9dc">6 ENGINES / 2 TRACKS</text>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M703 167C764 14 1116 15 1183 167S775 320 703 167Z" stroke="#68cbc0" stroke-opacity=".28" stroke-width="1.5"/>
+    <path d="M744 231C807 65 1069 10 1130 109S1007 322 820 268" stroke="#68cbc0" stroke-opacity=".18" stroke-width="1.5"/>
+    <path d="M755 91L940 70L1138 112L1155 229L955 277L754 231Z" stroke="#72d4c8" stroke-opacity=".6" stroke-width="2"/>
+    <path d="M755 91L955 277M940 70L754 231M1138 112L955 277" stroke="#72d4c8" stroke-opacity=".17"/>
+    <path d="M900 153H940V193M940 153L972 120" stroke="#e9b76b" stroke-width="2"/>
+    <circle cx="940" cy="153" r="5" fill="#e9b76b" stroke="#e9b76b"/>
+  </g>
+  <g fill="#102a33" stroke="#72d4c8" stroke-width="2">
+    <circle cx="755" cy="91" r="7"/><circle cx="940" cy="70" r="7"/>
+    <circle cx="1138" cy="112" r="7"/><circle cx="1155" cy="229" r="7"/>
+    <circle cx="955" cy="277" r="7"/><circle cx="754" cy="231" r="7"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="17" fill="#deeeec">
+    <text x="711" y="69">MuJoCo</text><text x="902" y="46">SuperDex</text>
+    <text x="1153" y="98">Genesis</text><text x="1115" y="268">Newton</text>
+    <text x="930" y="313">PhysX</text><text x="703" y="269">Drake</text>
+  </g>
+</svg>

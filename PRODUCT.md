@@ -19,7 +19,7 @@ The November 2026 ten-question interview established these choices:
 - Keep README to roughly one or two screens: positioning, RSI idea, one real case, Blog / experiments / learning entrances.
 - Give the website clear reading paths and explicit connections between questions, experiments, findings and further work. The reference is https://rl-robotics.github.io/.
 - Organize Blog articles around specific research questions, connected by persistent topics. Retain the existing long-form review as a reading guide.
-- Show a learning map and prerequisites on this site; link courses to their canonical sim-learning sources. Do not duplicate the courses.
+- Show the learning map, prerequisites and complete existing courses on this site. Reading links stay within DexLab; canonical learning repositories remain the authored sources and source-code references. Publish pinned snapshots through the shared documentation reader and sync upstream changes explicitly rather than editing two copies.
 - This revision covers README and the website entrance. Existing articles, research evidence and technical documentation stay available; it is not a redesign of every report.
 
 ## Evidence and constraints

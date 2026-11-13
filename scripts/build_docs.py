@@ -7,6 +7,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+from learning_docs import copy_course_assets, prepare_courses
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -34,10 +36,12 @@ def main():
     output = args.output.resolve()
     source = ROOT / 'docs/site'
     for directory, language, route in [('zh', 'zh_CN', 'zh-cn'), ('en', 'en', 'en')]:
+        courses = prepare_courses(source / directory)
         subprocess.run([
             sys.executable, '-m', 'sphinx', '-W', '--keep-going', '-n', '-b', 'html',
             '-c', str(source), str(source / directory), str(output / route / 'latest'),
         ], env={**os.environ, 'DEXLAB_DOCS_LANGUAGE': language}, check=True)
+        copy_course_assets(output / route / 'latest', courses)
         if directory == 'zh':
             homepage = output / route / 'latest/index.html'
             homepage.write_text(preserve_homepage_anchors(homepage.read_text()))
