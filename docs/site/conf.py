@@ -41,6 +41,13 @@ html_context = {
 
 
 def setup(app):
+    def select_home_template(app, pagename, templatename, context, doctree):
+        if pagename == 'index':
+            context['homepage_is_chinese'] = app.config.language in ('zh_CN', 'zh')
+            return 'research-home.html'
+
+    app.connect('html-page-context', select_home_template)
+
     # Sphinx 9.1 selects the JS constructor from language_name, but Chinese
     # indexing deliberately uses english-stemmer.js. Retain Chinese tokenization.
     from sphinx.search.zh import SearchChinese
