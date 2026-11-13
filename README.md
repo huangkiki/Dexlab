@@ -1,137 +1,35 @@
 <h1 align="center">DexLab</h1>
-
-<p align="center"><strong>机器人接触操作的实验与评测平台</strong></p>
-
+<p align="center"><strong>让智能体与仿真，在实验中共同进化。</strong></p>
 <p align="center">
-  <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/">文档</a> ·
-  <a href="#architecture">平台架构</a> ·
-  <a href="#findings">研究结论</a> ·
-  <a href="#quickstart">快速开始</a> ·
+  <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/">网站</a> ·
+  <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog">Blog</a> ·
+  <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#experiments">实验</a> ·
+  <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#learn">学习地图</a> ·
   <a href="README.en.md">English</a>
 </p>
 
-**DexLab 是研究机器人接触操作的开源实验平台。** 它把任务场景、控制、原生物理记录和独立评分连在一起，用来判断一次仿真失败来自策略、控制、几何、接触模型还是数值求解。
+**DexLab 面向机器人学习与具身智能研究者，聚焦接触丰富的机器人操作。** 我们探索 RSI（递归自我改进）：让智能体的任务失败暴露仿真缺口，再用更可信的仿真帮助智能体提升能力。
 
-<a id="architecture"></a>
-## 平台架构
+**任务试验 → 诊断失败 → 改进技能与仿真 → 独立复验 → 下一个问题。**
 
-<p align="center">
-  <a href="docs/site/_static/images/dexlab-architecture.png">
-    <img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分">
-  </a>
-</p>
-
-脚本、策略与模型通过动作适配和控制器连接环境，环境返回观测；原生状态与接触记录进入独立评分，诊断结果用于改进下一轮实验。
-
-图为平台架构示意；任务、模型与后端的实际实现及验证范围见[覆盖矩阵](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)，生成式后端为研究候选。
+人确定目标与边界，Agent 逐步参与问题发现、实验和迭代。已有成果以接触对照、失败诊断和可复算证据为基础；完整自主 RSI 闭环仍是研究方向。
 
 <a id="findings"></a>
-## 目前得到的结论
+## 从一次失败开始
 
-**目前最有用的结论是：先定位失败发生在哪一层，再决定改策略、接触模型还是求解器。** 已有证据还不支持通用引擎排名或真机精度结论。
+<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html"><img src="docs/evidence/wuji-contact/comparison.gif" width="720" alt="Wuji 双指夹球的原速 4.4 秒记录回放：左为点接触，右为合成抗扭接触"></a>
 
-| 已有结论 | 证据与适用范围 | 对开发的影响 |
-| --- | --- | --- |
-| **接触模型能改变同一抓取的成败。** | Wuji 合成夹球中，仅增加抗扭接触，两秒保持最大位移由 **2.734 → 1.025 mm**，跨过原定 2 mm 门槛；仍有慢漂移。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html) | 先核对接触建模；这个结果没有建立求解器失效或真实指垫标定。 |
-| **完成任务，不代表依靠预期的物理机制完成。** | RSS 擦拭有辅助保持时 **3/3** 通过，仅去掉辅助后 **0/3**；LIBERO 原任务 **10/10** 完成，物理诊断仅 **5/10** 通过。[擦拭](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html) · [LIBERO](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html) | 任务评分与接触、辅助力、记录检查分开报告。 |
-| **一个工况调好的参数，不足以保证迁移。** | 三个冻结配置在十组质量／尺寸条件下，合成响应联合目标 **0/30** 通过；未做质量或面积补偿。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html#mass-size-transfer) | 复核参数映射与适用范围，不能把这批失败归为引擎算法错误。 |
-| **预测误差更低，不等于能预报接触失效。** | 六个已有 Wuji 回合的 100 ms 离线诊断中，常速预测降低位移误差，但接触保持基线仍漏报释放／卸载中的接触丢失。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/contact-response.html) | 另测接触事件与动作响应；重叠窗口不算独立重复，目前没有学习模型或控制收益结论。 |
-| **闭爪命令正确，不代表夹持接触有效。** | RoboDojo 烤面包的两个局部失稳片段中，命令保持闭合；一例被邻片接触放大，另一例先发生平面内转动、上缘余量由 **14.41→2.87 mm**，随后双指法向冲量才从约 **0.25 N·s** 降到接近 0。[报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html) | 先修抓取深度、重抓门槛和净空，再对材质读回、顺应性与切向冲量做受控 A/B；不能把“载荷归零”本身或整批失败都归咎于仿真器。 |
+**一直夹着，球为什么还会转？** 同一控制下，两点接触缺少绕接触连线的力矩方向，偏心重力驱动转动，保持位移超过门槛。加入合成抗扭接触后，两秒保持最大位移 **2.734 → 1.025 mm**，通过原定 **2 mm** 门槛及主动释放检查。
 
-[完整结果、失败与未完成项 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html)
+这是已完成的接触模型对照，仍有慢漂移；不是完整自主 RSI 或真实指垫标定。新接触定律也影响准备阶段，不能把全部位移唯一归因于一个自由度。[读完整因果链、对照与下一步 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)
 
-### 失败根因图谱
+## 继续探索
 
-已有实验统一按“**现象 → 第一失效层 → 因果链 → 证据边界 → 下一门槛**”复盘。成功或只有准入检查的实验明确记为“未观察到可归因失败”，证据不能区分多个机制时保留“未唯一确定”。
+| 想做什么 | 从这里开始 |
+| --- | --- |
+| **读研究 Blog** | [按问题和专题阅读](https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog)：接触与物理、失败与评测、智能体与仿真。 |
+| **看实验与证据** | [实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html)：任务、记录、对照和复现入口。 |
+| **系统学习仿真** | [学习地图](https://huangkiki.github.io/Dexlab/zh-cn/latest/#learn)连接先修知识与实验，课程由 [Sim Learning](https://github.com/huangkiki/sim-learning) 维护。 |
 
-| 第一失效层 | 代表案例 | 已经定位到的最早原因 |
-| --- | --- | --- |
-| **策略／任务几何** | RoboDojo 烤面包 | 上缘浅夹持先丢失几何余量；邻片干涉是另一例的放大器 |
-| **控制／执行器／辅助** | Genesis 力限额、RSS 擦拭 | 指力预算不足，或任务依赖额外 latch，而不是 solver 无故失败 |
-| **碰撞／几何离散** | 旧夹布、圆柱接触 | 顶点评分漏掉三角形穿桌；表面离散改变穿透边界 |
-| **接触／材料／耦合** | Wuji、Genesis PBD 布料 | 接触扳手缺抗扭方向，或切向保持／双向耦合不足 |
-| **数值离散／停止条件** | 接触起始、夹持、斜面 | 缩步或收紧容差能改变残差，但不自动修复接触模型 |
-| **观测／适配器／评分／证据** | LIBERO、AMP、旧夹布 | 状态未刷新、记录器不一致或评分覆盖不足，物理结论尚未获得有效输入 |
-| **未唯一确定** | MJWarp 路径、部分斜面记录 | 已缩小到运行路径／接触／数值范围，但缺少能区分候选机制的受控 A/B |
-
-[查看全部 15 个历史 demo、8 项研究经验、其余注册证据族和新增案例的根因卡片 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/failure-root-cause-atlas.html)
-
-## 代表实验
-
-以下动图来自实际仿真录像或记录状态回放。点击查看实验条件、完整结果与复现方法。
-
-<table>
-<tr>
-<td width="50%" valign="top">
-<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html">
-<img src="docs/evidence/wuji-contact/comparison.gif" width="100%" alt="Wuji point contact and torsional contact comparison" loading="lazy">
-</a>
-<strong>抓取：接触模型如何影响滑移？</strong><br>
-相同控制下，点接触改为合成抗扭接触，两秒保持漂移从 <strong>2.734 mm</strong> 降至 <strong>1.025 mm</strong>。
-</td>
-<td width="50%" valign="top">
-<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html">
-<img src="docs/evidence/studio/rss.gif" width="100%" alt="Assisted sponge wiping replay" loading="lazy">
-</a>
-<strong>擦拭：去掉辅助还能完成任务吗？</strong><br>
-辅助保持下 <strong>3/3</strong> 通过；去掉辅助后 <strong>0/3</strong>，最终清洁率约 <strong>95.47% / 39.92%</strong>。
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html">
-<img src="docs/evidence/robodojo-bread-slip/layout-002-preview.gif" width="100%" alt="RoboDojo 面包片受相邻接触后滚边脱落" loading="lazy">
-</a>
-<strong>RoboDojo 烤面包：为什么被旁边面包顶掉？</strong><br>
-闭爪命令正确，但浅夹持被相邻面包／货架接触放大，双指法向载荷归零后滚边脱落。
-</td>
-<td width="50%" valign="top">
-<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/robodojo-bread-slip.html#case-2">
-<img src="docs/evidence/robodojo-bread-slip/layout-011-preview.gif" width="100%" alt="RoboDojo 面包片从浅上缘夹持中直接滑脱" loading="lazy">
-</a>
-<strong>RoboDojo 烤面包：为什么没有碰撞也会掉？</strong><br>
-夹持点只比上缘低约 1.4 cm；抬升中面包先转动，上缘余量在 80 ms 内从 14.41 缩到 2.87 mm，随后接触消失并自由落体。
-</td>
-</tr>
-</table>
-
-更多实验与失败：[布料折叠](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html) · [切割与推动](https://huangkiki.github.io/Dexlab/zh-cn/latest/cut-push.html) · [全部实验 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html)
-
-## 研究主线的三个节点
-
-- **2026-10-26｜解释抓取为什么改变：** [Wuji 接触对照](https://github.com/huangkiki/Dexlab/commit/c8d4e29586a140a7df241b928720e82ed6008f3a)连同独立评分和离线复算交付，让“看起来抓住”变成可检查的接触证据。
-- **2026-10-27｜追问模型能否提前发现失败：** [接触响应诊断](https://github.com/huangkiki/Dexlab/commit/b1cb02561e0e291bdbc1ac232a46c352dd48e946)交付离线基线，保留“位移误差下降、接触丢失仍漏报”的结果；原生动作干预尚待验证。
-- **2026-11-02｜连接学习与物理归因：** [CHORD 准备入口](https://github.com/huangkiki/Dexlab/commit/1a8855ccfd26ff6f1434a109954190c2775a8167)固定三任务、资产预检和有限预算命令。主线尚未完成原生任务迁移；训练候选与阻塞见[当前工作](docs/current-work.zh-CN.md)。
-
-后续按 **研究问题 → 审计评分语义 → 最小对照 → 失败归因 → 更新结论** 推进。[开发流程与下一步](docs/autoresearch.zh-CN.md#research-loop)吸收了最新 Discussion；连续接触序列仍是待验证设计。
-
-<a id="quickstart"></a>
-## 快速开始
-
-推荐从苹果抓梗开始。Linux x86_64 上安装 [uv](https://docs.astral.sh/uv/getting-started/installation/) 后：
-
-```bash
-git clone https://github.com/huangkiki/Dexlab.git
-cd Dexlab
-bash scripts/setup.sh --mujoco-profile historical-3.11.0
-bash demos/apple-stem-grasp/run.sh \
-  --backend mujoco \
-  --output demos/apple-stem-grasp/runs/first-mujoco
-.venv/bin/python demos/apple-stem-grasp/src/verify_sdf_grasp.py \
-  demos/apple-stem-grasp/runs/first-mujoco
-```
-
-验收器会写出 `summary.json`，全部检查通过时 `passed: true`。14 秒是仿真时长，实际计算通常更久；无桌面环境添加 `--headless`，每次运行使用新输出目录。
-
-[完整安装指南](https://huangkiki.github.io/Dexlab/zh-cn/latest/quickstart.html) · [无需 GPU 的离线复算](https://huangkiki.github.io/Dexlab/zh-cn/latest/rss-wiping.html#offline-evidence)
-
-## 文档与参与
-
-网站持续维护完整实验报告、使用指南和研究资料：
-
-- **看实验**：[实验目录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [结果与覆盖](https://huangkiki.github.io/Dexlab/zh-cn/latest/results.html) · [失败根因图谱](https://huangkiki.github.io/Dexlab/zh-cn/latest/failure-root-cause-atlas.html) · [旧版 solver 复盘](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-failure-audit.html)
-- **研究导读**：[当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)
-- **理解方法**：[求解器与接触模型](https://huangkiki.github.io/Dexlab/zh-cn/latest/solver-taxonomy.html) · [论文与参考资料](https://huangkiki.github.io/Dexlab/zh-cn/latest/references.html)
-- **参与项目**：[贡献指南](https://huangkiki.github.io/Dexlab/zh-cn/latest/contributing.html) · [当前工作](docs/current-work.zh-CN.md) · [问题与建议](https://github.com/huangkiki/Dexlab/issues)
-
-代码采用 [Apache-2.0](LICENSE) 许可；第三方资产遵循各自许可。研究使用请参考[引用说明](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#documentation-and-citation)。
+<a id="architecture"></a><a id="quickstart"></a>
+[平台架构](https://huangkiki.github.io/Dexlab/zh-cn/latest/about.html#architecture) · [安装与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/quickstart.html) · [参与研究](https://huangkiki.github.io/Dexlab/zh-cn/latest/contributing.html) · [Apache-2.0](LICENSE)

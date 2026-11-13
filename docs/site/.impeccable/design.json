@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T04:29:30+00:00",
+  "title": "Design System: DexLab Research Homepage",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Research Blue",
+        "tonalRamp": [
+          "oklch(15.00% 0.17835 262.31)",
+          "oklch(26.43% 0.17835 262.31)",
+          "oklch(37.86% 0.17835 262.31)",
+          "oklch(49.29% 0.17835 262.31)",
+          "oklch(60.71% 0.17835 262.31)",
+          "oklch(72.14% 0.17835 262.31)",
+          "oklch(83.57% 0.17835 262.31)",
+          "oklch(95.00% 0.17835 262.31)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Deep Research Blue",
+        "tonalRamp": [
+          "oklch(15.00% 0.14145 262.74)",
+          "oklch(26.43% 0.14145 262.74)",
+          "oklch(37.86% 0.14145 262.74)",
+          "oklch(49.29% 0.14145 262.74)",
+          "oklch(60.71% 0.14145 262.74)",
+          "oklch(72.14% 0.14145 262.74)",
+          "oklch(83.57% 0.14145 262.74)",
+          "oklch(95.00% 0.14145 262.74)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Pale Research Blue",
+        "tonalRamp": [
+          "oklch(15.00% 0.01733 264.49)",
+          "oklch(26.43% 0.01733 264.49)",
+          "oklch(37.86% 0.01733 264.49)",
+          "oklch(49.29% 0.01733 264.49)",
+          "oklch(60.71% 0.01733 264.49)",
+          "oklch(72.14% 0.01733 264.49)",
+          "oklch(83.57% 0.01733 264.49)",
+          "oklch(95.00% 0.01733 264.49)"
+        ]
+      },
+      "page": {
+        "role": "neutral",
+        "displayName": "White Canvas",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Cool Panel",
+        "tonalRamp": [
+          "oklch(15.00% 0.00287 264.54)",
+          "oklch(26.43% 0.00287 264.54)",
+          "oklch(37.86% 0.00287 264.54)",
+          "oklch(49.29% 0.00287 264.54)",
+          "oklch(60.71% 0.00287 264.54)",
+          "oklch(72.14% 0.00287 264.54)",
+          "oklch(83.57% 0.00287 264.54)",
+          "oklch(95.00% 0.00287 264.54)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "tonalRamp": [
+          "oklch(15.00% 0.02761 266.54)",
+          "oklch(26.43% 0.02761 266.54)",
+          "oklch(37.86% 0.02761 266.54)",
+          "oklch(49.29% 0.02761 266.54)",
+          "oklch(60.71% 0.02761 266.54)",
+          "oklch(72.14% 0.02761 266.54)",
+          "oklch(83.57% 0.02761 266.54)",
+          "oklch(95.00% 0.02761 266.54)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "tonalRamp": [
+          "oklch(15.00% 0.02753 264.28)",
+          "oklch(26.43% 0.02753 264.28)",
+          "oklch(37.86% 0.02753 264.28)",
+          "oklch(49.29% 0.02753 264.28)",
+          "oklch(60.71% 0.02753 264.28)",
+          "oklch(72.14% 0.02753 264.28)",
+          "oklch(83.57% 0.02753 264.28)",
+          "oklch(95.00% 0.02753 264.28)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Quiet Rule",
+        "tonalRamp": [
+          "oklch(15.00% 0.01216 259.82)",
+          "oklch(26.43% 0.01216 259.82)",
+          "oklch(37.86% 0.01216 259.82)",
+          "oklch(49.29% 0.01216 259.82)",
+          "oklch(60.71% 0.01216 259.82)",
+          "oklch(72.14% 0.01216 259.82)",
+          "oklch(83.57% 0.01216 259.82)",
+          "oklch(95.00% 0.01216 259.82)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Opening statement",
+        "purpose": "Centered homepage hero, with responsive reductions."
+      },
+      "headline": {
+        "displayName": "Section heading",
+        "purpose": "Major reading sections."
+      },
+      "title": {
+        "displayName": "Research question",
+        "purpose": "Question introduction within the selected topic."
+      },
+      "body": {
+        "displayName": "Reading text",
+        "purpose": "Default prose with generous line spacing."
+      },
+      "label": {
+        "displayName": "Navigation label",
+        "purpose": "Quiet header destinations."
+      },
+      "caption": {
+        "displayName": "Evidence caption",
+        "purpose": "Replay explanation and source context."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "tablet-max",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "650px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid link for the principal reading or reproduction action.",
+      "html": "<a class=\"ds-button\" href=\"#blog\">Explore the research Blog</a>",
+      "css": ".ds-button{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:20px;background:var(--accent,#2358c4);color:var(--page,#fff);text-decoration:none;padding:12px 22px;border-radius:8px;font-size:16px;line-height:1.75;font-weight:600;white-space:nowrap}.ds-button:hover{background:var(--accent-hover,#173d8e);color:var(--page,#fff)}.ds-button:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}@media(max-width:650px){.ds-button{padding:11px 18px;gap:12px;font-size:14px}}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "Secondary action using link color and a hover underline.",
+      "html": "<a class=\"ds-text-link\" href=\"#experiments\">See an improvement case</a>",
+      "css": ".ds-text-link{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);color:var(--accent,#2358c4);font-size:15px;line-height:1.75;font-weight:600;text-decoration:none;text-underline-offset:.22em;text-decoration-thickness:1px}.ds-text-link:hover{color:var(--accent-hover,#173d8e);text-decoration:underline}.ds-text-link:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}@media(max-width:650px){.ds-text-link{font-size:14px}}"
+    },
+    {
+      "name": "Reading navigation",
+      "kind": "nav",
+      "refersTo": "navigation-link",
+      "description": "Quiet anchor navigation with blue hover and explicit focus.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#blog\">Blog</a><a href=\"#experiments\">Experiments</a><a href=\"#learn\">Learning map</a><a href=\"about.html\">Docs</a></nav>",
+      "css": ".ds-nav{display:flex;gap:30px}.ds-nav a{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);color:var(--muted,#596171);text-decoration:none;font-size:14px;line-height:1.75;font-weight:550;padding:7px 0}.ds-nav a:hover{color:var(--accent,#2358c4)}.ds-nav a:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}@media(max-width:1000px){.ds-nav{gap:20px}}@media(max-width:650px){.ds-nav{justify-content:space-between;gap:15px}.ds-nav a{font-size:13px;padding:9px 0}}"
+    },
+    {
+      "name": "Topic selection",
+      "kind": "custom",
+      "refersTo": "topic-button",
+      "description": "Selected and resting topic buttons; the production script manages panel visibility.",
+      "html": "<div class=\"ds-topics\" aria-label=\"Choose a Blog topic\"><button type=\"button\" aria-pressed=\"true\">Contact &amp; physics</button><button type=\"button\" aria-pressed=\"false\">Failure &amp; evaluation</button><button type=\"button\" aria-pressed=\"false\">Agents &amp; simulation</button></div>",
+      "css": ".ds-topics{display:flex;gap:28px;border-bottom:1px solid var(--rule,#dce1e9)}.ds-topics button{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);cursor:pointer;color:var(--muted,#596171);background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;padding:14px 0;font-size:16px;line-height:1.75;font-weight:600}.ds-topics button:hover{color:var(--accent,#2358c4)}.ds-topics button[aria-pressed=\"true\"]{color:var(--accent,#2358c4);border-bottom-color:var(--accent,#2358c4)}.ds-topics button:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}@media(max-width:650px){.ds-topics{gap:18px;justify-content:space-between}.ds-topics button{font-size:13px;padding:12px 0}}"
+    },
+    {
+      "name": "Research loop",
+      "kind": "custom",
+      "refersTo": "research-loop",
+      "description": "A static reading diagram with the two improvement paths emphasized together.",
+      "html": "<div class=\"ds-loop\" aria-label=\"RSI research loop\"><span>Try a task</span><span aria-hidden=\"true\">→</span><span>Diagnose failure</span><span aria-hidden=\"true\">→</span><span class=\"ds-loop-fork\">Improve skills · Improve simulation</span><span aria-hidden=\"true\">→</span><span>Independently retest</span><span class=\"ds-loop-return\">↩ Ask the next question</span></div>",
+      "css": ".ds-loop{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px;padding:22px 24px;background:var(--panel,#f5f6f8);color:var(--ink,#202634);border-radius:14px;font-size:15px;line-height:1.75;font-weight:550;text-align:center;max-width:980px}.ds-loop>[aria-hidden]{color:var(--muted,#596171)}.ds-loop-fork{color:var(--accent,#2358c4)}.ds-loop-return{width:100%;color:var(--muted,#596171);font-size:13px;font-weight:400}@media(max-width:650px){.ds-loop{display:grid;grid-template-columns:1.3fr 14px 1fr;padding:18px 16px;gap:12px 8px;font-size:13px}.ds-loop>:nth-child(4){display:none}.ds-loop-return{grid-column:1/-1}}"
+    },
+    {
+      "name": "Reading row",
+      "kind": "custom",
+      "refersTo": "reading-link",
+      "description": "A ruled article link with an explanatory descriptor.",
+      "html": "<div class=\"ds-reading-row\"><a href=\"wuji-contact.html\"><span>Point versus torsional contact: a grasp comparison</span><small>Change &amp; retest</small></a></div>",
+      "css": ".ds-reading-row{border-top:1px solid var(--rule,#dce1e9);border-bottom:1px solid var(--rule,#dce1e9)}.ds-reading-row a{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);display:block;padding:19px 2px;text-decoration:none;color:var(--ink,#202634);font-size:16px;line-height:1.75;font-weight:600}.ds-reading-row a:hover{color:var(--accent,#2358c4)}.ds-reading-row a:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}.ds-reading-row small{display:block;color:var(--muted,#596171);font-size:13px;font-weight:400;margin-top:5px}@media(max-width:650px){.ds-reading-row a{font-size:15px}}"
+    },
+    {
+      "name": "Learning step",
+      "kind": "custom",
+      "refersTo": "learning-step",
+      "description": "Number, subject, prerequisites and canonical course destination.",
+      "html": "<div class=\"ds-step\"><span class=\"ds-step-number\">2</span><h3>Understand contact &amp; friction</h3><p>Geometry, forces, torques &amp; constraints</p><small>Prerequisite: physical and state foundations</small><a href=\"https://github.com/huangkiki/sim-learning/blob/main/docs/solver-guide/02-contact.md\">Contact lesson</a></div>",
+      "css": ".ds-step{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);color:var(--ink,#202634);line-height:1.75;position:relative}.ds-step-number{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;background:var(--accent-soft,#edf3ff);color:var(--accent,#2358c4);border-radius:50%;font-size:14px;font-weight:650}.ds-step h3{font-size:19px;line-height:1.3;margin:20px 0 10px;text-wrap:balance}.ds-step p{margin:0;color:var(--muted,#596171);font-size:14px}.ds-step small{display:block;font-size:12px;color:var(--muted,#596171);margin:8px 0 16px;min-height:42px}.ds-step a{display:block;width:fit-content;font-size:14px;font-weight:550;color:var(--accent,#2358c4);text-underline-offset:.22em;text-decoration-thickness:1px}.ds-step a:hover{color:var(--accent-hover,#173d8e)}.ds-step a:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}@media(max-width:1000px){.ds-step small{min-height:0}}@media(max-width:650px){.ds-step{padding-left:52px}.ds-step-number{position:absolute;left:0;top:0}.ds-step h3{margin:3px 0 6px}.ds-step small{margin:6px 0 12px}}"
+    },
+    {
+      "name": "Evidence boundary disclosure",
+      "kind": "custom",
+      "refersTo": "evidence-boundary",
+      "description": "Native expandable scope and limitation text beneath the experiment.",
+      "html": "<details class=\"ds-boundary\"><summary>What does this result establish?</summary><p>The result is limited to the synthetic sphere, this controller and the two-second window; slow drift remains.</p></details>",
+      "css": ".ds-boundary{font-family:var(--font,Inter,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);border-top:1px solid var(--rule,#dce1e9);border-bottom:1px solid var(--rule,#dce1e9);padding:16px 0;font-size:14px;line-height:1.75;color:var(--muted,#596171)}.ds-boundary summary{width:fit-content;color:var(--ink,#202634);cursor:pointer;font-weight:600}.ds-boundary summary:focus-visible{outline:3px solid var(--accent,#2358c4);outline-offset:5px}.ds-boundary p{max-width:880px;margin:16px 0 0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Research Reading Index",
+    "overview": "A clean white-and-blue index, following the confirmed reference at rl-robotics.github.io. Generous space and clear type make research questions, evidence and next reading steps easy to find. The character is calm, direct and precise; the implementation is code-led, with no approved image comp or generated scientific imagery.\n\nScope is limited to the Chinese and English homepages rendered by the dedicated homepage template and stylesheet. This file does not govern other Sphinx pages, the long-form research article, or the separate web application. Keep their existing styles and web/DESIGN.md intact.",
+    "keyCharacteristics": [
+      "White reading canvas, restrained blue actions and pale neutral grouping.",
+      "Clear hierarchy, open section spacing and thin rules instead of raised cards.",
+      "The same visual grammar in Chinese and English, with room for different text lengths.",
+      "Actual experiment media with native, reader-controlled playback."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Color Rule",
+        "body": "Interface color organizes reading; recorded experiment colors retain their original meaning.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Reading Rule",
+        "body": "Use whitespace, tonal grouping and rules to establish hierarchy without raising content above the page.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do apply these tokens only to the dedicated research homepages.",
+      "Do preserve visible keyboard focus, native disclosure and video controls, and the complete reading index without JavaScript.",
+      "Do keep both languages aligned while allowing their text to wrap independently.",
+      "Do reuse original evidence assets and retain their provenance and explanatory captions."
+    ],
+    "donts": [
+      "Don't restyle existing articles, Sphinx documentation or the web application through this homepage system.",
+      "Don't replace recorded evidence with generated scientific imagery or autoplay the replay.",
+      "Don't turn the flat reading index into a grid of raised decorative cards.",
+      "Don't invent input fields, chips, animation tokens or component variants that this homepage does not use."
+    ]
+  }
+}
