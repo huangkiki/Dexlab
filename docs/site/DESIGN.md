@@ -1,99 +1,96 @@
 ---
 name: DexLab Research Homepage
-description: A clear white-and-blue reading index for reciprocal agent and simulation research.
+description: A warm-paper reading index shaped by the existing dexterous-simulation guide.
 colors:
-  accent: '#2358c4'
-  accent-hover: '#173d8e'
-  accent-soft: '#edf3ff'
-  page: '#fff'
-  panel: '#f5f6f8'
-  ink: '#202634'
-  muted: '#596171'
-  rule: '#dce1e9'
+  accent: '#4f664c'
+  page: '#fafaf6'
+  panel: '#f0f1eb'
+  ink: '#282b26'
+  muted: '#60675a'
+  rule: '#dcded4'
 typography:
   display:
-    fontFamily: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
-    fontSize: 54px
-    fontWeight: 750
-    lineHeight: 1.23
-    letterSpacing: -.035em
-  headline:
-    fontFamily: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
-    fontSize: 32px
-    fontWeight: 700
-    lineHeight: 1.3
+    fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
+    fontSize: 52px
+    fontWeight: 400
+    lineHeight: 1.42
     letterSpacing: -.025em
+  headline:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 26px
+    fontWeight: 600
+    lineHeight: 1.55
   title:
-    fontFamily: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
-    fontSize: 25px
-    lineHeight: 1.3
-    letterSpacing: -.02em
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 21px
+    fontWeight: 700
+    lineHeight: 1.55
   body:
-    fontFamily: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
     fontSize: 16px
-    lineHeight: 1.75
+    lineHeight: 1.95
   label:
-    fontFamily: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
     fontSize: 14px
-    fontWeight: 550
+    lineHeight: 1.95
   caption:
-    fontFamily: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
     fontSize: 13px
-    lineHeight: 1.7
-rounded:
-  action: 8px
-  media-panel: 12px
-  loop: 14px
-  step: 50%
+    lineHeight: 1.8
+  guide-link:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 18px
+    fontWeight: 600
+    lineHeight: 1.95
+  step-number:
+    fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
+    fontSize: 22px
+    lineHeight: 1.55
 spacing:
-  compact: 12px
+  compact: 8px
+  inline: 12px
   text: 16px
-  control: 20px
-  panel: 24px
-  gutter: 28px
-  group: 30px
-  column: 36px
-  section: 64px
-  section-end: 76px
+  group: 24px
+  media-gap: 28px
+  learning-gap: 32px
+  column-gap: 36px
+  desktop-gutter: 40px
 components:
-  button-primary:
-    backgroundColor: '{colors.accent}'
-    textColor: '{colors.page}'
-    rounded: '{rounded.action}'
-    padding: 12px 22px
-  button-primary-hover:
-    backgroundColor: '{colors.accent-hover}'
-    textColor: '{colors.page}'
+  guide-title:
+    textColor: '{colors.ink}'
+    typography: '{typography.display}'
+  guide-link:
+    textColor: '{colors.accent}'
+    typography: '{typography.guide-link}'
   text-link:
     textColor: '{colors.accent}'
+    typography: '{typography.label}'
   navigation-link:
     textColor: '{colors.muted}'
     typography: '{typography.label}'
-    padding: 7px 0
+    padding: 4px 0
   topic-button:
     backgroundColor: transparent
     textColor: '{colors.muted}'
-    rounded: '0'
-    padding: 14px 0
+    padding: 12px 0
   topic-button-selected:
     textColor: '{colors.accent}'
   research-loop:
-    backgroundColor: '{colors.panel}'
     textColor: '{colors.ink}'
-    rounded: '{rounded.loop}'
-    padding: 22px 24px
+    typography: '{typography.label}'
   reading-link:
     textColor: '{colors.ink}'
-    padding: 19px 2px
-  learning-step:
-    backgroundColor: '{colors.accent-soft}'
+    padding: 18px 0
+  learning-number:
     textColor: '{colors.accent}'
-    rounded: '{rounded.step}'
-    width: 34px
-    height: 34px
+    typography: '{typography.step-number}'
+  evidence-video:
+    backgroundColor: '{colors.panel}'
+    width: 100%
   evidence-boundary:
     textColor: '{colors.muted}'
-    padding: 16px 0
+    typography: '{typography.label}'
+    padding: 16px 0 0
 ---
 
 # Design System: DexLab Research Homepage
@@ -102,99 +99,108 @@ components:
 
 **Creative North Star: "The Research Reading Index"**
 
-A clean white-and-blue index, following the confirmed reference at rl-robotics.github.io. Generous space and clear type make research questions, evidence and next reading steps easy to find. The character is calm, direct and precise; the implementation is code-led, with no approved image comp or generated scientific imagery.
+The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.
 
-Scope is limited to the Chinese and English homepages rendered by the dedicated homepage template and stylesheet. This file does not govern other Sphinx pages, the long-form research article, or the separate web application. Keep their existing styles and web/DESIGN.md intact.
+This system governs only the Chinese and English research homepages. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.
 
 **Key Characteristics:**
 
-- White reading canvas, restrained blue actions and pale neutral grouping.
-- Clear hierarchy, open section spacing and thin rules instead of raised cards.
-- The same visual grammar in Chinese and English, with room for different text lengths.
-- Actual experiment media with native, reader-controlled playback.
+- Warm paper and charcoal, with restrained green reading accents.
+- A serif opening title beside a desktop reading rail; navigation wraps above the title on smaller screens.
+- Open sections and ruled reading rows, with hierarchy carried by spacing and type.
+- Original experiment media, native controls and explicit evidence boundaries.
 
-Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and the matching `zh/index.md` / `en/index.md`. Frontmatter records implemented tokens; the sidecar adds preview snippets, responsive metadata and descriptive color ramps. Those ramps are preview aids, not additional production colors.
+Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 ## Colors
 
-The palette uses one clear blue accent against cool, quiet neutrals.
+One restrained green accent sits among warm, low-chroma neutrals shared with the article.
 
 ### Primary
 
-- **Research Blue** (`accent`): primary actions, links, selected topics, step numbers and the improvement branch in the loop.
-- **Deep Research Blue** (`accent-hover`): hovered primary actions and ordinary links.
-- **Pale Research Blue** (`accent-soft`): the numbered learning markers.
+- **Reading Green** (`accent`): links, the first navigation destination, selected topic controls, learning numbers and the improvement branch in the research loop.
 
 ### Neutral
 
-- **White Canvas** (`page`): the reading surface and text on the primary action.
-- **Cool Panel** (`panel`): the research loop, engine directory, replay backdrop and footer.
-- **Graphite** (`ink`): headings, body text and reading-list titles.
-- **Slate** (`muted`): supporting explanations, prerequisites, captions and resting navigation.
-- **Quiet Rule** (`rule`): section boundaries, reading rows and learning connectors.
+- **Warm Paper** (`page`): the page canvas and text on the focused skip link.
+- **Paper Wash** (`panel`): the native video's backdrop.
+- **Charcoal** (`ink`): titles, body text, reading rows, summary labels and hovered ordinary links.
+- **Muted Olive Gray** (`muted`): supporting text, captions and resting navigation.
+- **Fine Rule** (`rule`): reading-rail edge, section separators and reading rows.
 
 **The Evidence Color Rule.** Interface color organizes reading; recorded experiment colors retain their original meaning.
 
 ## Typography
 
-Display and body share the frontmatter's sans-serif stack. Inter is requested first, followed by Chinese system fonts and a generic sans-serif fallback; the homepage template does not load an external font. The system must remain readable with those fallbacks.
+The opening title and masthead use the serif stack; the body, section headings and controls use the sans-serif stack. Both use installed system fallbacks without an external font request. The opening title is regular weight; section headings are semibold, while topic headings inherit the browser's bold heading weight. Learning numbers return to the serif face.
 
-Use the display role for the centered opening statement, headline for section headings, title for question introductions, body for prose, label for navigation and caption for media explanations. Supporting prose uses muted ink. Headlines are balanced; body text stays left aligned outside the hero. The hero lead is capped at (700px), and section introductions at (720px).
+Use display for the full linked guide title, headline for major sections, title for research questions, body for reading text, label for navigation and caption for the replay explanation. The lead is larger (18px) and limited to (700px); supporting introductions and evidence-boundary prose use a measure of up to (740px). Research-direction headings use (23px), case headings (20px), and learning headings (18px).
 
-The desktop scale is normative in frontmatter. At the tablet breakpoint the hero becomes (46px); on mobile it becomes (34px) with line height (1.3), section headings become (27px), and topic titles become (23px). Do not force equal line counts across languages.
+At the intermediate breakpoint, the opening title becomes (46px). On mobile it uses `clamp(28px, 8.7vw, 34px)` with line height (1.48); the lead and guide link become (16px), section headings (24px), and the research-direction heading (21px). English removes its explicit title line breaks on mobile; Chinese retains them. Let the languages wrap naturally rather than forcing matching line counts.
 
 ## Layout
 
-The centered page and header use a maximum width of (1200px), with horizontal gutters from the gutter spacing token. The header is sticky; its desktop minimum height is (76px). The hero has an open top inset of (82px), centered copy and a compact research-loop panel. Below it, left-aligned evidence and reading sections use thin separators and substantial vertical spacing.
+The desktop header has a maximum width of (1440px) and padding of (24px 40px). Navigation forms a fixed left rail at (160px) from the top, with width (190px), left inset `max(40px, calc((100vw - 1440px) / 2 + 40px))`, and an inner inset of (18px). The masthead itself is in normal document flow.
 
-The evidence grid uses (1.1fr / 1fr); the question-and-reading layout uses (0.8fr / 1.2fr). The learning route is four columns. At (1000px) or below, the evidence columns become equal, the learning route becomes two columns, and engine links wrap beneath their label. At (650px) or below, the header navigation moves to a second row, gutters become (20px), evidence and topic layouts stack, and the learning route becomes a vertical sequence with connectors. Anchor offsets are (100px), increasing to (128px) on mobile.
+The reading column uses width `calc(100% - 310px)`, maximum width (1100px), left margin `max(270px, calc((100vw - 1440px) / 2 + 270px))`, and padding (24px 40px 0). The opening and research-direction sections stop at (840px). The opening title is left aligned; a prominent text link and three chapter links make the guide the first reading entry. Research direction, recorded findings, question-led reading and learning follow. This composition belongs to this homepage, not every article.
 
-The homepage's committed composition moves from mutual agent/simulation improvement and its task–diagnose–improve–retest loop to the actual Wuji comparison, then question-led reading and the four-step learning map. This describes this surface; it is not a prescribed layout for other pages. Print hides chrome and topic buttons, exposes all topic panels, and avoids splitting the principal content grids.
+Evidence uses equal columns with a (28px) gap; question and reading columns use (0.8fr / 1.2fr) with a (36px) gap. Learning uses two columns with a (32px) gap. Main reading sections have a top rule and padding (32px 0 56px).
+
+- At (1100px) and below, the rail becomes a static, wrapping row below the masthead, bounded by horizontal rules. The main column centers at a maximum width of (940px), with (32px) gutters and (20px) top padding. The header uses (22px 32px 0) padding.
+- At (700px) and below, gutters become (22px) and main top padding becomes (12px). Navigation labels are (13px) with a minimum height of (32px). Evidence, topic content and learning stack into one column. Learning gaps become (26px); major sections use padding (28px 0 36px). Engine links move below their label, and concept/experiment bridges use a three-column row.
+
+Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
 ## Elevation & Depth
 
-The implemented system has no box shadows, gradients or elevation animation. Pale panels separate grouped material; quiet rules separate adjacent reading sections. Interactive state changes are immediate color or underline changes. Keyboard focus uses a blue outline (3px) with an offset (5px).
+There are no shadows, gradients or decorative transitions. Thin rules, whitespace and typography separate content; the paper wash is confined to the replay backdrop. Hover changes are immediate. Keyboard focus uses a green outline (2px) with an offset (4px).
 
-**The Flat Reading Rule.** Use whitespace, tonal grouping and rules to establish hierarchy without raising content above the page.
+**The Flat Reading Rule.** Use spacing, type and fine rules to separate content without enclosing it in raised panels.
 
 ## Shapes
 
-Actions use the compact action radius; media and the engine directory use the media-panel radius; the research loop uses its slightly softer loop radius. Learning markers are circular. Topic buttons remain square and are distinguished by an underline, not a pill. Reading entries are open rows bounded by thin rules, not enclosed cards.
+The homepage defines no rounded-corner scale. Reading actions and topic buttons remain unfilled, the video is rectangular, and learning numbers are plain serif numerals. Topic selection uses a bottom stroke (2px). Reading entries are open rows with single-pixel rules; chapter and engine links wrap within similarly open ruled groups.
 
 ## Components
 
-### Actions and navigation
+### Guide entry and navigation
 
-The primary action is a solid blue inline link with white text and a darker hover. Secondary actions are blue text links that gain an underline on hover. Navigation uses muted labels that turn blue on hover; language and repository access remain in the header. Mobile primary actions reduce padding to (11px 18px) and type to (14px). Every interactive element retains visible keyboard focus, and a skip link appears on focus.
+The full guide title links directly to the article in charcoal and turns green on hover. The separate guide link is underlined green text with an inline arrow (22px), a gap of (12px) and a minimum height of (44px). Ordinary links turn charcoal on hover. Chapter links wrap beneath a fine rule and retain a minimum height of (36px). The English homepage identifies the guide's language.
+
+Navigation is a reading rail on desktop and a wrapping row at the intermediate breakpoint. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. Language and repository links stay beside the masthead. A skip link becomes visible on focus; all links, buttons and summaries retain keyboard focus.
 
 ### Research loop
 
-A pale rounded panel carries the short task sequence, with the skill/simulation improvement branch emphasized in blue. Its next-question return sits on a separate line. It wraps on desktop and becomes a compact grid on mobile. This is explanatory content, not a live experiment-status display.
+The task–diagnose–improve–retest sequence is an unboxed, wrapping text row (14px). The improvement branch is green; arrows and the next-question return are muted. On mobile the return occupies a new row. This describes a research direction, with the existing note preserving the boundary around an unverified autonomous loop.
 
 ### Recorded comparison and evidence disclosure
 
-Use the existing native video element with controls, inline playback and no autoplay. It is initially paused with `preload="none"`; its source is the existing comparison MP4. The homepage PNG poster is a lossless extraction of original GIF frame 33 with embedded origin metadata. Keep the source framing, speed, labels and evidence meaning. The caption explains the left/right comparison; the adjacent story leads to the full report. A native details/summary disclosure exposes the scope and limitations beneath the comparison.
+Use the original comparison MP4 in a native video with controls, inline playback and `preload="none"`; do not autoplay. The HTML declares dimensions (896px × 504px), and CSS scales it to its column. Retain the existing provenance-bearing PNG poster and the caption identifying the two conditions and original playback speed. Place the finding, evidence, takeaway and scope beside the video, stacking beneath it on mobile.
 
-### Topic switcher and reading rows
+A native details/summary disclosure follows under a top rule. Its text is muted (14px), its summary is charcoal, and its expanded paragraphs retain the evidence limits. Keep it a native disclosure rather than a custom animated accordion.
 
-Three plain buttons identify the selected topic with blue text and a bottom stroke (2px). Preserve `aria-pressed` and `aria-controls`; do not present these controls as a tab widget without implementing tab semantics. JavaScript reveals the buttons and selects one panel. Without JavaScript, all three topic panels remain readable. Each panel pairs a question and introduction with ruled reading rows, using a bold title and smaller muted descriptor.
+### Topic controls and reading rows
 
-### Learning route and knowledge bridges
+Three transparent buttons use muted text (15px), padding (12px 0), and a green label and bottom stroke when selected. They become (13px) on mobile. Preserve `aria-pressed` and `aria-controls`; the implementation uses buttons, not tab-widget semantics. JavaScript reveals the controls and selects one panel; without it, all three panels remain readable.
 
-Numbered pale-blue circles establish the four-step route. Each step has a heading, short subject list, prerequisite and course link. A pale engine directory follows, then text links connect course concepts with corresponding experiments. Keep those links directed to their canonical sources; course contents are maintained elsewhere. The English surface retains its note about course language.
+Each panel pairs a research question with an open reading list. Links use regular charcoal text (15px), padding (18px 0), and green underlined hover. The current rows contain titles without secondary descriptors.
+
+### Learning and knowledge bridges
+
+Four steps form two columns on desktop and a single column on mobile. Each has a plain green serif number, a content inset of (38px), a heading, subjects, prerequisite and course link. Engine choices sit between fine rules; related concepts link across to experiments. Course and engine links open the on-site `learn/` reader. The authored courses remain maintained by Sim Learning; the English homepage retains its language note.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** apply these tokens only to the dedicated research homepages.
-- **Do** preserve visible keyboard focus, native disclosure and video controls, and the complete reading index without JavaScript.
-- **Do** keep both languages aligned while allowing their text to wrap independently.
-- **Do** reuse original evidence assets and retain their provenance and explanatory captions.
+- **Do** keep the homepage aligned with the article's warm paper, serif opening title and green links.
+- **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
+- **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
+- **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 
 ### Don't:
 
-- **Don't** restyle existing articles, Sphinx documentation or the web application through this homepage system.
-- **Don't** replace recorded evidence with generated scientific imagery or autoplay the replay.
-- **Don't** turn the flat reading index into a grid of raised decorative cards.
-- **Don't** invent input fields, chips, animation tokens or component variants that this homepage does not use.
+- **Don't** restore the old blue-white centered hero, filled action buttons or rounded promotional panels.
+- **Don't** restyle the article, other Sphinx pages or the separate web application through this homepage system.
+- **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
+- **Don't** invent component variants, radius scales or motion tokens absent from the implementation.
