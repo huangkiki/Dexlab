@@ -40,6 +40,8 @@ def rewrite_url(url, source, path, sources):
         if parts.netloc != 'github.com':
             return url
         segments = unquote(parts.path).strip('/').split('/')
+        if segments == ['huangkiki', 'Dexlab'] or segments == ['huangkiki', 'DexLab']:
+            return posixpath.relpath('index.md', posixpath.dirname(f'learn/{source["slug"]}/{path}'))
         target = next((item for item in sources if item['repo'] == '/'.join(segments[:2])), None)
         if target is None:
             return url
@@ -72,6 +74,8 @@ def prepare_markdown(text, source, path, sources):
         chunk = re.sub(r'(!?\[[^\]\n]*\]\()([^\s)]+)', rewrite, chunk)
         chunk = re.sub(r'(?m)^(\[[^\]\n]+\]:\s*)(\S+)', rewrite, chunk)
         chunk = re.sub(r'((?:href|src)=["\'])([^"\']+)', rewrite, chunk)
+        chunk = re.sub(r'(?m)^\\\[\s*\n([\s\S]*?)^\\\]\s*$', lambda m: '$$\n' + m[1].rstrip() + '\n$$\n', chunk)
+        chunk = re.sub(r'\\\(([^\n]+?)\\\)', lambda m: '$' + m[1] + '$', chunk)
         return re.sub(r'\$`([^`\n]+)`\$', r'$\1$', chunk)
 
     # Do not rewrite paths or dollar syntax inside executable examples.

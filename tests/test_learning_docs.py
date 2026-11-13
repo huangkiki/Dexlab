@@ -40,6 +40,17 @@ class LearningDocsTests(unittest.TestCase):
         url = rewrite_url('../examples/contact-solvers/check.py', self.mujoco, 'docs/guide.md', self.sources)
         self.assertEqual(url, f'https://github.com/huangkiki/mujoco-learning/blob/{self.mujoco["revision"]}/examples/contact-solvers/check.py')
 
+    def test_tex_delimiters_render_without_changing_the_equation(self):
+        equation = r'M(q)\dot v+c(q,v)=\tau+J^Tf.'
+        text = '\\[\n' + equation + '\n\\]\n\nInline \\(q\\).'
+        rendered = prepare_markdown(text, self.mujoco, 'docs/guide.md', self.sources)
+        self.assertIn('$$\n' + equation + '\n$$', rendered)
+        self.assertIn('Inline $q$.', rendered)
+
+    def test_course_to_research_home_does_not_leave_the_site(self):
+        self.assertEqual(rewrite_url('https://github.com/huangkiki/Dexlab', self.mujoco, 'docs/guide.md', self.sources),
+                         '../../../index.md')
+
 
 if __name__ == '__main__':
     unittest.main()
