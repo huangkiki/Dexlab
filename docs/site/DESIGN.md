@@ -155,7 +155,7 @@ components:
 
 The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.
 
-This system governs the Chinese and English research homepages and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.
+This system governs the Chinese and English research homepages and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. English reports linked from the Blog topics use the same reading palette and title typography through `_static/research-report.css`, with the existing Sphinx navigation and table of contents. The homepage and reports share their light palette in `_static/research-palette.css`. Other Sphinx pages and the separate web application retain their own design systems.
 
 **Key Characteristics:**
 

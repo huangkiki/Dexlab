@@ -1,14 +1,6 @@
-:root {
-  color-scheme: light;
-  --page: #fafaf6;
-  --panel: #f0f1eb;
-  --ink: #282b26;
-  --muted: #60675a;
-  --accent: #4f664c;
-  --rule: #dcded4;
-  --serif: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif;
-  --sans: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-}
+@import url("research-palette.css");
+
+:root { color-scheme: light; }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 32px; scrollbar-color: #a7afa0 var(--page); }
 body { margin: 0; color: var(--ink); background: var(--page); font: 16px/1.95 var(--sans); -webkit-font-smoothing: antialiased; }
