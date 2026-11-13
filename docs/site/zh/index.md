@@ -10,10 +10,10 @@
 </section>
 <section class="research-direction" aria-labelledby="direction-heading">
   <h2 id="direction-heading">让智能体与仿真，在实验中共同进化。</h2>
-  <div class="research-loop" aria-label="RSI 研究循环">
+  <div class="research-loop" aria-label="实验与改进流程">
     <span>任务试验</span><span aria-hidden="true">→</span><span>诊断失败</span><span aria-hidden="true">→</span><span class="loop-fork">改进技能 · 改进仿真</span><span aria-hidden="true">→</span><span>独立复验</span><span class="loop-return">↩ 提出下一问题</span>
   </div>
-  <p class="vision-note">RSI（递归自我改进）是 DexLab 的研究方向：人确定目标与边界，Agent 逐步参与问题发现、实验和迭代。完整自主闭环尚未验证，已有成果以具体实验为准。</p>
+  <p class="vision-note">我关注智能体如何通过实验改进操作技能与物理仿真：由人确定目标与边界，让智能体参与问题发现、实验和迭代。完整自主闭环尚未验证，已有成果以具体实验为准。</p>
 </section>
 <section class="feature" id="experiments" aria-labelledby="case-heading">
   <section id="research-findings"></section>
@@ -28,7 +28,7 @@
       <li><strong>范围</strong><p>结论限于这组合成接触与两秒窗口，仍有慢漂移；新定律也影响准备阶段，不能把全部位移唯一归因于一个自由度。</p></li>
     </ol><a class="text-link" href="wuji-contact.html">看完整分析与证据</a></div>
   </div>
-  <details class="case-boundary"><summary>这个结果能说明什么？</summary><p>最早定位到的是接触扳手的结构缺口；偏心重力提供绕接触连线的驱动力矩。直觉上，两点连线像一个缺少抗扭能力的轴，但实际手指和接触点会移动，不能把它当成固定铰链。v4 从准备阶段就采用新定律，因此初态也受影响；该开发对照没有把全部位移唯一归因于一个自由度。</p><p>结论限于合成球、这组控制与两秒窗口，仍有慢漂移。长时间保持、接触切换与新的验证条件是后续门槛；真实指垫标定及完整自主 RSI 闭环尚未验证。</p></details>
+  <details class="case-boundary"><summary>这个结果能说明什么？</summary><p>最早定位到的是接触扳手的结构缺口；偏心重力提供绕接触连线的驱动力矩。直觉上，两点连线像一个缺少抗扭能力的轴，但实际手指和接触点会移动，不能把它当成固定铰链。v4 从准备阶段就采用新定律，因此初态也受影响；该开发对照没有把全部位移唯一归因于一个自由度。</p><p>结论限于合成球、这组控制与两秒窗口，仍有慢漂移。长时间保持、接触切换与新的验证条件是后续门槛；真实指垫标定及完整自主改进流程尚未验证。</p></details>
 </section>
 <section class="blog-section" id="blog" aria-labelledby="blog-heading">
   <section id="research-diagnosis"></section>
@@ -36,7 +36,7 @@
   <div class="topic-controls" hidden aria-label="选择 Blog 专题"><button type="button" data-topic="contact" aria-controls="topic-contact" aria-pressed="true">接触与物理</button><button type="button" data-topic="diagnosis" aria-controls="topic-diagnosis" aria-pressed="false">失败与评测</button><button type="button" data-topic="agents" aria-controls="topic-agents" aria-pressed="false">智能体与仿真</button></div>
   <section class="topic-panel" id="topic-contact" aria-labelledby="heading-contact"><div class="topic-intro"><h3 id="heading-contact">夹得更紧，为什么仍会滑？</h3><p>从接触需要提供的力与力矩出发，再讨论模型、参数和求解。</p><a class="text-link" href="#learn">连接到学习地图</a></div><ol class="reading-list"><li><a href="wuji-contact.html"><span>点接触与抗扭接触：一次抓持对照</span></a></li><li><a href="contact-response.html"><span>预测误差更低，就能预报接触失效吗？</span></a></li><li><a href="solver-taxonomy.html"><span>物理模型、数值问题与 solver，分别负责什么？</span></a></li></ol></section>
 <section class="topic-panel" id="topic-diagnosis" aria-labelledby="heading-diagnosis"><div class="topic-intro"><h3 id="heading-diagnosis">任务完成，真的说明能力提高了吗？</h3><p>沿动作、状态和受力追踪第一失效层，把任务评分与物理证据放在一起读。</p><a class="text-link" href="#learn">连接到学习地图</a></div><ol class="reading-list"><li><a href="failure-root-cause-atlas.html"><span>失败根因图谱：沿着证据找第一失效层</span></a></li><li><a href="robodojo-bread-slip.html"><span>闭爪命令正确，面包为什么仍会掉？</span></a></li><li><a href="rss-wiping.html"><span>去掉辅助保持，再看擦拭任务</span></a></li></ol></section>
-<section class="topic-panel" id="topic-agents" aria-labelledby="heading-agents"><div class="topic-intro"><h3 id="heading-agents">怎样让一次失败推动下一轮改进？</h3><p>连接技能、观测、仿真和独立评价，寻找值得验证的下一步。完整自主 RSI 闭环仍是研究方向。</p><a class="text-link" href="#learn">连接到学习地图</a></div><ol class="reading-list"><li><a href="_static/research/dexterous-simulation.html#robodojo-astra"><span>RoboDojo / Astra：纠正动作与可靠接触控制</span></a></li><li><a href="_static/research/dexterous-simulation.html#shared-dexterous-tracking"><span>多条示范，怎样共用策略与动力学模型？</span></a></li><li><a href="model-evaluation.html"><span>怎样把模型、执行与评分分开？</span></a></li></ol></section>
+<section class="topic-panel" id="topic-agents" aria-labelledby="heading-agents"><div class="topic-intro"><h3 id="heading-agents">怎样让一次失败推动下一轮改进？</h3><p>连接技能、观测、仿真和独立评价，寻找值得验证的下一步。完整自主改进流程仍是研究方向。</p><a class="text-link" href="#learn">连接到学习地图</a></div><ol class="reading-list"><li><a href="_static/research/dexterous-simulation.html#robodojo-astra"><span>RoboDojo / Astra：纠正动作与可靠接触控制</span></a></li><li><a href="_static/research/dexterous-simulation.html#shared-dexterous-tracking"><span>多条示范，怎样共用策略与动力学模型？</span></a></li><li><a href="model-evaluation.html"><span>怎样把模型、执行与评分分开？</span></a></li></ol></section>
 
 </section>
 <section class="learning-section" id="learn" aria-labelledby="learn-heading">
