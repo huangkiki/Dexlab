@@ -8,9 +8,9 @@
     <p class="hero-thesis"><span>让智能体与仿真，</span><strong>在实验中共同进化。</strong></p>
     <p class="hero-lead">我关注智能体如何通过实验改进操作技能与物理仿真。由人确定目标与边界，让智能体参与问题发现、实验和迭代；完整自主闭环尚未验证，已有成果以具体实验为准。</p>
   </div>
-  <a class="directory-entry" href="blog.html">
-    <span class="directory-action">打开研究内容目录</span>
-    <span class="directory-summary">也可以继续往下，先看 DexLab 如何从失败走到可独立复验的结论。</span>
+  <a class="directory-entry" href="#experiments">
+    <span class="directory-action">直接看实验与研究结论</span>
+    <span class="directory-summary">同一页看完代表性实验、Solver 边界、失败根因和深读入口。</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
   <div class="scroll-note" aria-hidden="true"><span>向下滚动</span><i></i></div>
@@ -35,59 +35,147 @@
   </figure>
 </section>
 
-<section class="loop-story" aria-labelledby="loop-heading">
-  <div class="loop-intro">
-    <h2 id="loop-heading">一个结论，<br>不是一次运行。</h2>
-    <p>每次实验既可能暴露技能缺口，也可能暴露仿真缺口。沿最早的失效层定位原因，再把修复放回独立条件中复验。</p>
-    <p class="loop-current"><span>当前路径</span><strong data-loop-current>任务试验 → 独立复验</strong></p>
-  </div>
-  <ol class="loop-route">
-    <li data-loop-step="任务试验" data-loop-label="任务试验">
-      <span class="step-mark">01</span>
-      <h3>任务先失败</h3>
-      <p>真实任务暴露抓取、接触、控制或策略的问题，而不是先挑一个指标。</p>
-    </li>
-    <li data-loop-step="第一失效层" data-loop-label="第一失效层">
-      <span class="step-mark">02</span>
-      <h3>找到第一失效层</h3>
-      <p>沿动作、状态与受力向前追，分清主因、放大器和仍不确定的机制。</p>
-    </li>
-    <li data-loop-step="改进技能或仿真" data-loop-label="改进技能或仿真">
-      <span class="step-mark">03</span>
-      <h3>改进技能，或改进仿真</h3>
-      <p>修复对应的策略、执行边界或物理模型；每条证据分别保存。</p>
-    </li>
-    <li data-loop-step="独立复验" data-loop-label="独立复验">
-      <span class="step-mark">04</span>
-      <h3>重新独立复验</h3>
-      <p>换条件重测。任务成功、视觉通过和物理解释不能互相替代。</p>
-    </li>
-  </ol>
-</section>
-
-<section class="reading-map" aria-labelledby="map-heading">
-  <header class="map-intro">
-    <h2 id="map-heading">从这里开始。</h2>
-    <p>首页解释项目与架构；Blog 记录实验与失败；学习页从仿真基础开始。</p>
+<section class="home-evidence" id="experiments" aria-labelledby="evidence-heading">
+  <section id="research-findings"></section>
+  <span id="research-content"></span>
+  <span id="evidence-feature"></span>
+  <span id="blog-preview"></span>
+  <header class="home-section-head">
+    <p>Representative experiments</p>
+    <h2 id="evidence-heading">从画面直接进入判据。</h2>
+    <span>任务试验 → 第一失效层 → 修复 → 独立复验</span>
   </header>
 
-  <div class="reading-paths">
-    <a class="reading-path" href="#architecture-heading">
-      <span>01 / 项目</span>
-      <strong>DexLab 是什么，以及任务如何走到证据。</strong>
-      <small>项目定位、系统架构与研究闭环</small>
-    </a>
-    <a class="reading-path" href="blog.html">
-      <span>02 / Blog</span>
-      <strong>看实验、Solver 边界与失败根因。</strong>
-      <small>画面、判据、对照矩阵与完整文章目录</small>
-    </a>
-    <a class="reading-path" href="learning.html">
-      <span>03 / 学习</span>
-      <strong>从时间、接触与数值求解开始。</strong>
-      <small>MuJoCo 路线与六个引擎课程</small>
-    </a>
+  <div class="home-evidence-grid" data-reveal-group>
+    <article class="home-evidence-card home-evidence-card-wide" data-reveal-item>
+      <div class="home-evidence-media home-evidence-split">
+        <video controls muted loop playsinline preload="metadata" poster="_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="豆腐两刀三块后直接侧推的最新记录">
+          <source src="_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4">
+        </video>
+        <video controls muted loop playsinline preload="metadata" poster="_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="香蕉三刀四块后直接侧推的最新记录">
+          <source src="_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">01 / 切割与侧推</p>
+      <h3>切完，仍要证明三块、四块能独立运动。</h3>
+      <p>最新记录：豆腐两刀三块、香蕉三刀四块；最后一块不再被同一切面带动。</p>
+    </article>
+
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" aria-label="Wuji 点接触与抗扭接触的同时间原速比较">
+          <source src="_static/wuji-contact/comparison.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">02 / 摩擦与抗扭力矩</p>
+      <h3>一直有接触，球仍可能绕夹持线转动。</h3>
+      <p>点接触缺少力矩方向；补上抗扭接触后，保持才进入原定门槛。</p>
+    </article>
+
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" poster="_static/studio/apple.png" aria-label="OpenArm 与 Wuji 苹果梗抓取记录">
+          <source src="_static/studio/apple.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">03 / 苹果梗抓取</p>
+      <h3>同一条抓梗任务，固定配置仍可能给出不同结果。</h3>
+      <p>MuJoCo 与 SuperDex 的差异必须连同步长、驱动和接触表示一起读。</p>
+    </article>
+
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" aria-label="布料夹持与运动记录">
+          <source src="_static/cloth-studio/grasp.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">04 / 布料</p>
+      <h3>夹住、抬起与完成折叠是三个不同验收。</h3>
+      <p>7 个原生配置共 105 条冻结记录；材料未做跨求解器等效标定。</p>
+    </article>
+
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" poster="_static/studio/incline.png" aria-label="六引擎斜面同步比较记录">
+          <source src="_static/studio/incline.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">05 / 六引擎斜面</p>
+      <h3>同一任务，接触表达和数值门禁仍会改变结果。</h3>
+      <p>固定配置可以逐项比较，但不能拼成通用 solver 排名。</p>
+    </article>
   </div>
+
+  <div class="home-result-table" data-reveal-group>
+    <table data-reveal-item>
+      <caption>代表性实验的控制变量与验收结果</caption>
+      <thead><tr><th>实验</th><th>控制变量</th><th>关键读回</th><th>结果</th></tr></thead>
+      <tbody>
+        <tr><th>切割与侧推</th><td>豆腐 0.125 ms、η=5 Pa·s；香蕉 0.25 ms、η=0</td><td>活动块相对位移；刀面接触冲量</td><td><strong>通过</strong><small>11.096 / 10.209 mm</small></td></tr>
+        <tr><th>接触力矩</th><td>只把点接触改为抗扭接触</td><td>保持位移；峰值角速度</td><td><strong>2.734 → 1.025 mm</strong><small>29.336 → 0.024992 rad/s</small></td></tr>
+        <tr><th>苹果抓取</th><td>同一组 10 个固定回归场景</td><td>离桌、支撑、保持、穿透与释放</td><td><strong>MuJoCo 1/10 · SuperDex 10/10</strong><small>固定配置</small></td></tr>
+        <tr><th>布料</th><td>同一冻结留出集</td><td>形变、下垂、穿透、残余运动与成本</td><td><strong>52 / 105 通过</strong><small>材料未等效标定</small></td></tr>
+        <tr><th>六引擎斜面</th><td>静止、滑动与名义零摩擦；三个步长</td><td>位移、速度、力与数值一致性</td><td><strong>逐配置判定</strong><small>不合并为引擎排名</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="home-answers" aria-labelledby="answer-heading">
+  <section id="research-diagnosis"></section>
+  <header class="home-section-head">
+    <p>Three conclusions</p>
+    <h2 id="answer-heading">先读三个判断。</h2>
+  </header>
+  <div class="home-answer-grid" data-reveal-group>
+    <article id="experiment-findings" data-reveal-item>
+      <span>01 / 实验结论</span>
+      <h3>结果是失效边界，不是引擎排行榜。</h3>
+      <p>接触模型、几何离散、耦合方式和辅助保持都可能直接改变任务结果。小步长和更多迭代不是通用修复。</p>
+      <a href="experiments.html">查看实验目录 →</a>
+    </article>
+    <article id="solver-map" data-reveal-item>
+      <span>02 / Solver 认知</span>
+      <h3>先分清引擎、模型、耦合和数值配置。</h3>
+      <p>同一个名字可能属于不同层；只有冻结版本、接触表示、预算和运行时读回后，配置之间才可能比较。</p>
+      <a href="solver-taxonomy.html">查看求解配置 →</a>
+    </article>
+    <article id="root-causes" data-reveal-item>
+      <span>03 / 失败根因</span>
+      <h3>很多“solver 失败”在迭代前已经注定。</h3>
+      <p>先查任务、几何、控制和耦合，再查离散、残差与评分；证据不足时保留为未唯一确定。</p>
+      <a href="failure-root-cause-atlas.html">查看失败根因图谱 →</a>
+    </article>
+  </div>
+</section>
+
+<section class="home-next" aria-labelledby="next-heading">
+  <section id="research-selection"></section>
+  <span id="blog-guide"></span>
+  <span id="blog-policy"></span>
+  <span id="blog-learn"></span>
+  <header class="home-section-head">
+    <p>Keep exploring</p>
+    <h2 id="next-heading">按需要继续。</h2>
+  </header>
+  <div class="home-next-grid">
+    <a href="experiments.html"><strong>全部实验</strong><span>任务、协议、结果与失败记录</span></a>
+    <a href="_static/research/dexterous-simulation.html"><strong>研究导读</strong><span>灵巧操作仿真的六层问题</span></a>
+    <a href="learning.html"><strong>仿真学习</strong><span>MuJoCo 起点与六个引擎课程</span></a>
+  </div>
+</section>
+
+<section class="home-contact" id="research-scope" aria-labelledby="contact-heading">
+  <span id="contact-author"></span>
+  <div>
+    <p>DexLab · Kiki Huang</p>
+    <h2 id="contact-heading">联系作者</h2>
+    <span>想复现实验、指出问题，或者只是想聊聊仿真，都欢迎。</span>
+  </div>
+  <nav aria-label="联系作者">
+    <a href="mailto:huangyue0719@outlook.com">邮件</a>
+    <a href="https://github.com/huangkiki">GitHub ↗</a>
+  </nav>
 </section>
 </div>
 ```
@@ -102,7 +190,7 @@
 实验目录 <experiments>
 结果与诊断 <results>
 引擎与模型 <engines>
-Blog <blog>
+研究旧链接 <blog>
 研究资料 <references>
 参与项目 <contributing>
 ```

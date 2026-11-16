@@ -4,9 +4,9 @@ DexLab 是我的个人研究项目，探索 Agent Skills 与仿真如何相互�
 
 用任务暴露问题，用对照实验定位原因，再改进对应的仿真。
 
-## [打开 DexLab 研究目录 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/blog.html)
+## [打开 DexLab 研究总览 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html)
 
-目录直接展开研究导读、接触与物理、失败与诊断、策略与评测、仿真学习，不需要逐类点开才能看到文章标题。
+研究总览把项目介绍、系统架构、代表性实验、Solver 边界、失败根因与深读入口放在同一页。
 
 [English](README.md)
 

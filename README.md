@@ -4,9 +4,9 @@ DexLab is my personal research project exploring how Agent Skills and simulation
 
 Use tasks to expose problems, run controlled experiments to identify their causes, then improve the relevant part of the simulation.
 
-## [Open the DexLab research index →](https://huangkiki.github.io/Dexlab/zh-cn/latest/blog.html)
+## [Open the DexLab research overview →](https://huangkiki.github.io/Dexlab/en/latest/index.html)
 
-The index lists research guides, contact and physics, failure diagnosis, policy and evaluation, and simulation learning without hiding article titles behind category pages.
+The overview combines the project introduction, system architecture, representative experiments, solver boundaries, failure causes and deeper reading in one page.
 
 [简体中文](README.zh-CN.md)
 

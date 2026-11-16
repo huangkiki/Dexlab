@@ -8,9 +8,9 @@
     <p class="hero-thesis"><span>Agents and simulation,</span><strong>improving together through experiments.</strong></p>
     <p class="hero-lead">I study how agents can help improve manipulation skills and physics simulation through experiments. Humans set goals and boundaries; agents help identify questions, experiment and iterate. A complete autonomous loop remains unverified; current findings come from individual experiments.</p>
   </div>
-  <a class="directory-entry" href="../../zh-cn/latest/blog.html" lang="zh-CN" hreflang="zh-CN">
-    <span class="directory-action">打开研究内容目录</span>
-    <span class="directory-summary">Or keep scrolling to see how DexLab moves from a failure to an independently checked finding.</span>
+  <a class="directory-entry" href="#experiments">
+    <span class="directory-action">See experiments and findings</span>
+    <span class="directory-summary">Representative comparisons, solver boundaries, failure causes and deeper reading in one page.</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
   <div class="scroll-note" aria-hidden="true"><span>Scroll to read</span><i></i></div>
@@ -35,59 +35,143 @@
   </figure>
 </section>
 
-<section class="loop-story" aria-labelledby="loop-heading">
-  <div class="loop-intro">
-    <h2 id="loop-heading">A finding is more<br>than a single run.</h2>
-    <p>A task can expose a skill gap or a simulation gap. Locate the earliest failing layer, then put the fix back into an independent test.</p>
-    <p class="loop-current"><span>Current path</span><strong data-loop-current>Task trial → Independent retest</strong></p>
-  </div>
-  <ol class="loop-route">
-    <li data-loop-step="Task trial" data-loop-label="Task trial">
-      <span class="step-mark">01</span>
-      <h3>The task fails first</h3>
-      <p>A real task exposes a grasp, contact, control or policy problem before a metric is chosen.</p>
-    </li>
-    <li data-loop-step="First failing layer" data-loop-label="First failing layer">
-      <span class="step-mark">02</span>
-      <h3>Find the first failing layer</h3>
-      <p>Trace action, state and force backward; separate the primary cause, amplifiers and unresolved mechanisms.</p>
-    </li>
-    <li data-loop-step="Improve skill or simulation" data-loop-label="Improve skill or simulation">
-      <span class="step-mark">03</span>
-      <h3>Improve the skill or the simulation</h3>
-      <p>Fix the policy, execution boundary or physics model, and retain the evidence for each change separately.</p>
-    </li>
-    <li data-loop-step="Independent retest" data-loop-label="Independent retest">
-      <span class="step-mark">04</span>
-      <h3>Retest independently</h3>
-      <p>Change conditions and rerun. Task success, visual plausibility and physical explanation do not substitute for one another.</p>
-    </li>
-  </ol>
-</section>
-
-<section class="reading-map" aria-labelledby="map-heading">
-  <header class="map-intro">
-    <h2 id="map-heading">Start here.</h2>
-    <p>The homepage explains the project and architecture; the Blog records experiments and failures; learning starts from simulation fundamentals.</p>
+<section class="home-evidence" id="experiments" aria-labelledby="evidence-heading">
+  <section id="research-findings"></section>
+  <span id="research-content"></span>
+  <span id="evidence-feature"></span>
+  <span id="blog-preview"></span>
+  <header class="home-section-head">
+    <p>Representative experiments</p>
+    <h2 id="evidence-heading">From recorded behaviour to criteria.</h2>
+    <span>Task trial → First failing layer → Repair → Independent retest</span>
   </header>
 
-  <div class="reading-paths">
-    <a class="reading-path" href="#architecture-heading">
-      <span>01 / Project</span>
-      <strong>What DexLab is, and how a task becomes evidence.</strong>
-      <small>Positioning, system architecture and research loop</small>
-    </a>
-    <a class="reading-path" href="../../zh-cn/latest/blog.html" lang="zh-CN" hreflang="zh-CN">
-      <span>02 / Blog</span>
-      <strong>Read experiments, solver boundaries and failure causes.</strong>
-      <small>Recorded comparisons, criteria, matrices and the complete index</small>
-    </a>
-    <a class="reading-path" href="learning.html">
-      <span>03 / Learn</span>
-      <strong>Start with time, contact and numerical solving.</strong>
-      <small>The MuJoCo route and courses for six engines</small>
-    </a>
+  <div class="home-evidence-grid" data-reveal-group>
+    <article class="home-evidence-card home-evidence-card-wide" data-reveal-item>
+      <div class="home-evidence-media home-evidence-split">
+        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="Latest tofu two-cut and side-push recording">
+          <source src="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4">
+        </video>
+        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="Latest banana three-cut and side-push recording">
+          <source src="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">01 / Cutting and pushing</p>
+      <h3>Three or four pieces must move independently after the cuts.</h3>
+      <p>Latest records: tofu becomes three pieces after two cuts; banana becomes four after three.</p>
+    </article>
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" aria-label="Wuji point and torsional contact comparison">
+          <source src="../../zh-cn/latest/_static/wuji-contact/comparison.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">02 / Friction and torque</p>
+      <h3>Persistent contact does not prevent rotation about the grasp line.</h3>
+      <p>Point contact lacks the required torque direction; synthetic torsional contact brings retention back inside its original threshold.</p>
+    </article>
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/studio/apple.png" aria-label="OpenArm and Wuji apple-stem grasp record">
+          <source src="../../zh-cn/latest/_static/studio/apple.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">03 / Apple-stem grasping</p>
+      <h3>A fixed task can still produce different outcomes across configurations.</h3>
+      <p>Read MuJoCo and SuperDex differences together with step size, drive and contact representation.</p>
+    </article>
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" aria-label="Cloth grasp and motion record">
+          <source src="../../zh-cn/latest/_static/cloth-studio/grasp.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">04 / Cloth</p>
+      <h3>Grasping, lifting and completing a fold are separate checks.</h3>
+      <p>Seven native configurations produced 105 frozen records; material responses are not cross-engine calibrated.</p>
+    </article>
+    <article class="home-evidence-card" data-reveal-item>
+      <div class="home-evidence-media">
+        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/studio/incline.png" aria-label="Six-engine incline comparison record">
+          <source src="../../zh-cn/latest/_static/studio/incline.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="home-evidence-label">05 / Six-engine incline</p>
+      <h3>Contact representation and numerical gates still change the result.</h3>
+      <p>Fixed profiles can be compared individually, but not combined into a universal solver ranking.</p>
+    </article>
   </div>
+
+  <div class="home-result-table" data-reveal-group>
+    <table data-reveal-item>
+      <caption>Controlled variables and acceptance results</caption>
+      <thead><tr><th>Experiment</th><th>Controlled variable</th><th>Key readback</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><th>Cutting and pushing</th><td>Tofu 0.125 ms, η=5 Pa·s; banana 0.25 ms, η=0</td><td>Active-piece displacement; knife–material impulse</td><td><strong>Pass</strong><small>11.096 / 10.209 mm</small></td></tr>
+        <tr><th>Contact torque</th><td>Point contact replaced only by torsional contact</td><td>Retention displacement; peak angular velocity</td><td><strong>2.734 → 1.025 mm</strong><small>29.336 → 0.024992 rad/s</small></td></tr>
+        <tr><th>Apple grasp</th><td>Same set of ten fixed regression scenes</td><td>Lift, support, retention, penetration and release</td><td><strong>MuJoCo 1/10 · SuperDex 10/10</strong><small>Fixed profiles</small></td></tr>
+        <tr><th>Cloth</th><td>Same frozen holdout set</td><td>Deformation, sag, penetration, residual motion and cost</td><td><strong>52 / 105 pass</strong><small>Materials not calibrated</small></td></tr>
+        <tr><th>Six-engine incline</th><td>Static, sliding and nominal zero friction; three steps</td><td>Displacement, velocity, force and numerical consistency</td><td><strong>Per-profile verdicts</strong><small>No composite ranking</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="home-answers" aria-labelledby="answer-heading">
+  <section id="research-diagnosis"></section>
+  <header class="home-section-head">
+    <p>Three conclusions</p>
+    <h2 id="answer-heading">Read these three judgments first.</h2>
+  </header>
+  <div class="home-answer-grid" data-reveal-group>
+    <article id="experiment-findings" data-reveal-item>
+      <span>01 / Experiment findings</span>
+      <h3>Results are failure boundaries, not engine rankings.</h3>
+      <p>Contact model, geometry, coupling and assisted retention can change the task verdict. Smaller steps and more iterations are not universal fixes.</p>
+      <a href="experiments.html">Open the experiment catalogue →</a>
+    </article>
+    <article id="solver-map" data-reveal-item>
+      <span>02 / Solver understanding</span>
+      <h3>Separate engine, model, coupling and numerical configuration.</h3>
+      <p>A name can belong to different layers. Profiles become comparable only after versions, contact representation, budgets and runtime readbacks are frozen.</p>
+      <a href="solver-taxonomy.html">Read the solver taxonomy →</a>
+    </article>
+    <article id="root-causes" data-reveal-item>
+      <span>03 / Failure causes</span>
+      <h3>Many “solver failures” are decided before iteration.</h3>
+      <p>Check task, geometry, control and coupling before discretisation, residuals and scoring. Keep unresolved mechanisms explicitly labelled.</p>
+      <a href="failure-root-cause-atlas.html">Open the failure atlas →</a>
+    </article>
+  </div>
+</section>
+
+<section class="home-next" aria-labelledby="next-heading">
+  <section id="research-selection"></section>
+  <span id="blog-guide"></span>
+  <span id="blog-policy"></span>
+  <span id="blog-learn"></span>
+  <header class="home-section-head">
+    <p>Keep exploring</p>
+    <h2 id="next-heading">Continue by need.</h2>
+  </header>
+  <div class="home-next-grid">
+    <a href="experiments.html"><strong>All experiments</strong><span>Tasks, protocols, results and retained failures</span></a>
+    <a href="../../zh-cn/latest/_static/research/dexterous-simulation.html"><strong>Research guide</strong><span>Six layers of dexterous simulation</span></a>
+    <a href="learning.html"><strong>Learn simulation</strong><span>MuJoCo route and six engine courses</span></a>
+  </div>
+</section>
+
+<section class="home-contact" id="research-scope" aria-labelledby="contact-heading">
+  <span id="contact-author"></span>
+  <div>
+    <p>DexLab · Kiki Huang</p>
+    <h2 id="contact-heading">Contact the author</h2>
+    <span>For reproduction questions, corrections or a conversation about simulation, get in touch.</span>
+  </div>
+  <nav aria-label="Contact the author">
+    <a href="mailto:huangyue0719@outlook.com">Email</a>
+    <a href="https://github.com/huangkiki">GitHub ↗</a>
+  </nav>
 </section>
 </div>
 ```
