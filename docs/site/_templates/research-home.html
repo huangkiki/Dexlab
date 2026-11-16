@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ 'DexLab：围绕接触操作，让智能体与仿真在实验中共同进化。研究结论、Blog 与仿真学习地图。' if homepage_is_chinese else 'DexLab: agents and simulation improving together through contact-rich manipulation research. Read findings, the Blog and the simulation learning map.' }}">
+  <meta name="description" content="{{ 'DexLab：围绕接触操作，让智能体与仿真在实验中共同进化。研究结论、Blog 与仿真学习地图。' if homepage_is_chinese else 'DexLab: agents and simulation improving together through contact-rich manipulation research. Read findings, the Chinese Blog index and the simulation learning map.' }}">
   <title>DexLab · {{ '让智能体与仿真共同进化' if homepage_is_chinese else 'Agents and simulation, improving together' }}</title>
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
@@ -16,7 +16,7 @@
       <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
         <a href="_static/research/dexterous-simulation.html">{{ '研究导读' if homepage_is_chinese else 'Research guide' }}</a>
         <a href="#experiments">{{ '研究结论' if homepage_is_chinese else 'Findings' }}</a>
-        <a href="#blog">Blog</a>
+        <a href="{{ '#blog' if homepage_is_chinese else other_language_root + 'index.html#blog' }}"{% if not homepage_is_chinese %} lang="zh-CN" hreflang="zh-CN"{% endif %}>{{ 'Blog' if homepage_is_chinese else 'Blog · 中文' }}</a>
         <a href="#learn">{{ '学习地图' if homepage_is_chinese else 'Learning map' }}</a>
         <a href="about.html">{{ '文档' if homepage_is_chinese else 'Docs' }}</a>
       </nav>
