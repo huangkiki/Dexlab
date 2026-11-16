@@ -281,6 +281,74 @@ main > section > h1 {
   transform: rotate(45deg);
 }
 
+.architecture-view {
+  padding: 112px 0 128px;
+  border-top: 1px solid var(--rule);
+}
+
+.architecture-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.architecture-intro h2 {
+  font: 400 clamp(2.4rem, 4vw, 3.2rem)/1.2 var(--serif);
+  letter-spacing: -.025em;
+}
+
+.architecture-intro p {
+  max-width: 56ch;
+  justify-self: end;
+  color: var(--muted);
+}
+
+.architecture-figure {
+  margin: 0;
+}
+
+.architecture-scroll-hint {
+  display: none;
+}
+
+.architecture-scroll {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  border-block: 1px solid var(--rule);
+  background: white;
+  scrollbar-color: #a7afa0 white;
+}
+
+.architecture-image-link {
+  display: block;
+}
+
+.architecture-image-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.architecture-figure figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.architecture-figure figcaption span {
+  max-width: 78ch;
+}
+
+.architecture-figure figcaption a {
+  flex-shrink: 0;
+}
+
 .loop-story {
   display: grid;
   grid-template-columns: minmax(260px, .78fr) minmax(0, 1.22fr);
@@ -572,6 +640,10 @@ main > section > h1 {
     gap: 48px;
   }
 
+  .architecture-view {
+    padding-block: 96px 112px;
+  }
+
   .topic-cluster {
     gap: 40px;
   }
@@ -590,6 +662,15 @@ main > section > h1 {
   .loop-story {
     grid-template-columns: 1fr;
     padding: 88px 0;
+  }
+
+  .architecture-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .architecture-intro p {
+    justify-self: start;
   }
 
   .loop-intro {
@@ -682,6 +763,27 @@ main > section > h1 {
     margin-top: 34px;
   }
 
+  .architecture-view {
+    padding: 80px 0 88px;
+  }
+
+  .architecture-image-link {
+    width: 820px;
+    min-width: 820px;
+  }
+
+  .architecture-scroll-hint {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .architecture-figure figcaption {
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .loop-intro h2,
   .map-intro h2 {
     font-size: 36px;
@@ -764,6 +866,11 @@ main > section > h1 {
 
   .story-hero {
     min-height: 0;
+  }
+
+  .architecture-image-link {
+    width: auto;
+    min-width: 0;
   }
 
   .loop-intro {

@@ -16,6 +16,22 @@
   <div class="scroll-note" aria-hidden="true"><span>Scroll to read</span><i></i></div>
 </section>
 
+<section class="architecture-view" aria-labelledby="architecture-heading">
+  <header class="architecture-intro">
+    <h2 id="architecture-heading">From a task<br>to checkable evidence.</h2>
+    <p>DexLab puts tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring on one path. Observations and failure records return to skill and simulation improvement for the next experiment.</p>
+  </header>
+  <figure class="architecture-figure">
+    <p class="architecture-scroll-hint">Scroll horizontally to view the full architecture</p>
+    <div class="architecture-scroll" tabindex="0" role="region" aria-label="DexLab system architecture diagram, horizontally scrollable">
+      <a class="architecture-image-link" href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="Open the original DexLab architecture image">
+        <img src="../../zh-cn/latest/_static/images/dexlab-architecture.png" width="1774" height="887" loading="lazy" alt="DexLab architecture: tasks and protocols, systems under test, action execution, environment backends, evidence and scoring, and the observation loop returning to system improvement">
+      </a>
+    </div>
+    <figcaption><span>The system view: tasks enter the execution stack and physics backends; observations and evidence return to skill and simulation improvement. On mobile, scroll horizontally or open the original image.</span><a href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener">Open original</a></figcaption>
+  </figure>
+</section>
+
 <section class="loop-story" aria-labelledby="loop-heading">
   <div class="loop-intro">
     <h2 id="loop-heading">A finding is more<br>than a single run.</h2>

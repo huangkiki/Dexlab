@@ -169,7 +169,7 @@ components:
 
 **Creative North Star: "The Research Reading Index"**
 
-The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals a four-stage research trace and five pre-expanded topic groups. Fine rules and open rows carry the hierarchy.
+The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a four-stage research trace and five pre-expanded topic groups. Fine rules and open rows carry the hierarchy.
 
 This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: the learning route's slim masthead, chapter rail, 760px reading column and section rail now frame reports, documentation and course pages as well. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
@@ -177,7 +177,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
-- A scroll-linked research trace followed by asymmetric, pre-expanded topic rows.
+- The original architecture diagram followed by a scroll-linked research trace and asymmetric topic rows.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
@@ -221,11 +221,11 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The research trace uses a sticky left statement and a four-stage right column. The topic map then uses one ruled row per theme: an editorial heading on the left and direct article links in two columns on the right. A final ruled action opens the exhaustive Blog index.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. The research trace then uses a sticky left statement and a four-stage right column. The topic map uses one ruled row per theme: an editorial heading on the left and direct article links in two columns on the right. A final ruled action opens the exhaustive Blog index.
 
 - At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and the trace and topic columns use tighter gaps.
-- At (800px) and below, the trace and topic rows stack into one column; the left statement stops being sticky.
-- At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow.
+- At (800px) and below, the architecture introduction, trace and topic rows stack into one column; the left statement stops being sticky.
+- At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow. The architecture image keeps an (820px) reading width inside a keyboard-focusable horizontal scroll region.
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
@@ -264,6 +264,12 @@ The course reader's `learning-control` radius belongs only to its outlined butto
 The first screen shows the project title, a two-line research thesis, a scope paragraph and one primary content action. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
 
 Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. Language and repository links stay beside the masthead. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
+
+### Architecture view
+
+The architecture section follows the first screen and explains the system before the research trace. A serif heading and short scope paragraph introduce the official diagram; the (1774×887) PNG spans the reading column between fine rules without cropping, recoloring or overlaying explanatory chrome. Its authored blue, green, peach and dark diagram colors are treated as source-evidence colors, not as a second interface palette.
+
+The image itself opens the original asset. On narrow screens, the figure becomes a keyboard-focusable horizontal scroll region with an (820px) image width so labels remain legible; a visible “scroll horizontally” hint appears above it, and the caption also provides an explicit original-image link. This is the only nested scroll surface on the homepage.
 
 ### Scroll-linked research trace
 
@@ -307,6 +313,7 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 
 - **Do** keep the homepage aligned with the article's warm paper, serif opening title and green links.
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
+- **Do** present the architecture diagram uncropped with its authored colors and a direct path to the original PNG.
 - **Do** use scroll motion only for the research trace and preserve complete content without JavaScript or with reduced motion.
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
@@ -317,6 +324,7 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 
 - **Don't** restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.
 - **Don't** reintroduce the old wide Sphinx report shell or restore per-page report palettes; the separate browser application remains outside this reading system.
+- **Don't** crop the architecture diagram or shrink it below readable label size on mobile.
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
 - **Don't** turn the topic map into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.
