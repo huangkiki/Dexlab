@@ -26,6 +26,26 @@ class VisualEvidenceTests(unittest.TestCase):
         )
         self.assertEqual(len(index["cases"][0]["variants"]), 9)
 
+    def test_comparison_pages_keep_conclusion_guide_and_matrix(self):
+        for language in ("zh", "en"):
+            text = (
+                ROOT / f"docs/site/{language}/visual-comparisons.md"
+            ).read_text()
+            anchors = [
+                text.index(f"({case_id})=")
+                for case_id in ("incline", "normal", "pinch", "libero")
+            ]
+            for start, end in zip(anchors, anchors[1:] + [len(text)]):
+                section = text[start:end]
+                summary = section.index('<div class="comparison-summary">')
+                guide = section.index('<div class="replay-guide"')
+                replay = section.index('<details class="replay-fallback">')
+                matrix = section.index('<div class="comparison-matrix">')
+                self.assertLess(summary, guide)
+                self.assertLess(guide, replay)
+                self.assertLess(replay, matrix)
+                self.assertNotIn('<details class="replay-fallback" open', section)
+
     def test_replay_must_not_hide_clock_shift(self):
         data = copy.deepcopy(self.bundle)
         data["videos"][0]["frames"][50]["samples"]["dev-cap-0.4"]["time_s"] += 0.1

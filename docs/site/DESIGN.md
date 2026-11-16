@@ -180,6 +180,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - The original architecture diagram followed by a scroll-linked research trace and asymmetric topic rows.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
+- Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
@@ -238,6 +239,8 @@ The research guide uses a fixed (190px) reading rail with six labeled groups and
 - At (600px) and below, the internal reading rail becomes a native “阅读目录” disclosure; its expanded groups use two columns and the article keeps a (22px) gutter. The separate guide map below the hero remains visible.
 
 The shared Sphinx reader centers a (760px) article with an optional (160px) current-page outline, inside a (1040px) maximum grid. It does not render a second full-site toctree. Pages without a useful outline collapse to an (840px) centered column. The Blog uses an (880px) centered index with no section rail. At (1200px) and below, the outline disappears and the article centers; at (800px) and below, the grid becomes a single flow with the shared page gutters.
+
+Comparative experiment pages may widen the article to (960px) through their own content components. A comparison summary uses a two-column open rule between the claim and its criteria/scope. A three-column replay guide names pane order, what to watch and what the video cannot establish. Result matrices keep (760px) minimum width in their own horizontal scroll region and mark pass, failure, partial result and invalid evidence with text plus color, never color alone.
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
@@ -325,6 +328,14 @@ Reports, experiment pages, project documentation and generated course pages shar
 
 Sphinx-specific content keeps its native semantics: local toctrees become open ruled reading lists, tables scroll within the article, code blocks use the paper wash, admonitions use top and bottom rules, and existing video/replay/experiment components retain their controls and scripts. No report introduces rounded promotional cards, shadows, gradients or a separate palette.
 
+### Engine comparison experiment
+
+Each experiment leads with a plain conclusion, then separates criteria from scope. The synchronized recorder follows with an annotation strip that names the pane order, what the visual evidence can show, and the numerical decision the video cannot make. Pane labels use the recorded series names above the media; playback remains muted and manually started.
+
+A compact evidence matrix follows the replay. Rows identify the tested configuration; columns separate conditions or metrics and end with a total where meaningful. Results are expressed as counts and text labels—not isolated percentages—so an invalid record remains visible in the denominator. Every matrix includes a legend and a direct statement that fixed configurations do not become a cross-engine ranking.
+
+Supporting conditions, source links and limitations remain below the matrix. Detailed curves, native state and raw data remain available in the existing replay panel and fallback disclosure.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -335,6 +346,7 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Do** use scroll motion only for the research trace and preserve complete content without JavaScript or with reduced motion.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
+- **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 - **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
@@ -349,4 +361,5 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Don't** turn the topic map into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
 - **Don't** append newly added systems or observations as more chapter numbers in the original guide sequence.
 - **Don't** restore the full-site Sphinx tree as a second left sidebar on article pages.
+- **Don't** present an engine table as a universal ranking when cohorts, tuning budgets or invalid records differ.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.
