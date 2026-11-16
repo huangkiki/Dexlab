@@ -1,5 +1,10 @@
 // Keep published homepage fragments working after the global Sphinx labels
 // moved to their destination pages.
+if (document.documentElement.lang === "en" && location.hash === "#blog") {
+  // Keep old links working without creating an English-CN history loop on Back.
+  location.replace(new URL("../../zh-cn/latest/index.html#blog", location.href).href);
+}
+
 const legacyAnchorRoutes = {
   quickstart: 'quickstart.html',
   'live-lab': 'about.html#live-lab',

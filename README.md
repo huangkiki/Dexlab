@@ -8,12 +8,12 @@ DexLab starts with concrete problems like this. **Use tasks to expose problems, 
 
 The improved simulation helps the Agent learn new Skills. With those Skills, the Agent can take on harder tasks and probe the limits of the simulation.
 
-## [📖 Read the Blog →](https://huangkiki.github.io/Dexlab/en/latest/#blog)
+## [📖 Read the Blog in Chinese →](https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog)
 
 [Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html) · [简体中文](README.zh-CN.md)
 
 <a id="architecture"></a>
-<a href="https://huangkiki.github.io/Dexlab/en/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab architecture concept: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring"></a>
+<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab architecture concept: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring"></a>
 
 ## Citation
 
