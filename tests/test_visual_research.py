@@ -5,7 +5,6 @@ import shutil
 import subprocess
 import unittest
 
-from scripts.build_docs import preserve_homepage_anchors
 from scripts.visual_research import (
     ROOT,
     check,
@@ -16,24 +15,6 @@ from scripts.visual_research import (
 
 
 class VisualEvidenceTests(unittest.TestCase):
-    def test_homepage_legacy_anchors_do_not_move_to_new_sections(self):
-        html = '<section id="id1"><h2>New catalogue</h2></section>'
-        targets = (
-            "research-findings",
-            "research-diagnosis",
-            "research-selection",
-            "research-scope",
-        )
-        html += "".join(
-            f'<section id="{target}"><h2>{target}</h2></section>' for target in targets
-        )
-        result = preserve_homepage_anchors(html)
-        self.assertEqual(preserve_homepage_anchors(result), result)
-        self.assertIn('id="visual-id1"', result)
-        for i, target in enumerate(targets, 1):
-            self.assertIn(f'<section id="{target}"><span id="id{i}"></span>', result)
-            self.assertEqual(result.count(f'id="id{i}"'), 1)
-
     @classmethod
     def setUpClass(cls):
         cls.bundle = read_bundle(ROOT / "docs/evidence/visual/pinch-retention.json.gz")

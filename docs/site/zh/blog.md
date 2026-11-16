@@ -1,12 +1,25 @@
 # Blog
 
-<p class="blog-index-lead">沿着问题继续读：从接触与失败归因，走向策略、技能记忆和可信评测。</p>
+<p class="blog-index-lead">DexLab 的完整内容目录。研究导读、实验文章与学习路线都在下方直接展开，不需要逐类点开。</p>
 
 <nav class="blog-jump" aria-label="Blog 专题">
+  <a href="#blog-guide">研究导读</a>
   <a href="#blog-contact">接触与物理</a>
   <a href="#blog-diagnosis">失败与诊断</a>
   <a href="#blog-policy">策略、技能与评测</a>
+  <a href="#blog-learn">仿真学习</a>
 </nav>
+
+(blog-guide)=
+## 研究导读
+
+先看完整问题框架，再进入具体文章：接触需要提供什么、失败发生在哪一层，以及实验结论在哪里成立。
+
+<ul class="blog-links">
+  <li><a href="_static/research/dexterous-simulation.html">当我们在讨论灵巧操作仿真时，我们在讨论什么？</a></li>
+  <li><a href="_static/research/dexterous-simulation.html#layers">六层问题：从接触、策略到真实迁移</a></li>
+  <li><a href="_static/research/dexterous-simulation.html#corl-2026-dexlab-lessons">CoRL 2026：DexLab 的阅读结论</a></li>
+</ul>
 
 (blog-contact)=
 ## 接触与物理
@@ -76,3 +89,18 @@
 </ul>
 </section>
 </div>
+
+(blog-learn)=
+## 仿真学习
+
+从 MuJoCo 的时间、接触和数值求解开始，再沿同一套问题进入其他引擎课程。
+
+<ul class="blog-links">
+  <li><a href="learning.html">MuJoCo：从时间、接触到性能的学习路线</a></li>
+  <li><a href="learn/sim/docs/solver-guide/README.html">共同基础：九单元 Solver 教程</a></li>
+  <li><a href="learn/superdex/docs/curriculum.html">SuperDex 课程</a></li>
+  <li><a href="learn/genesis/docs/curriculum.html">Genesis 课程</a></li>
+  <li><a href="learn/newton/docs/curriculum.html">Newton Physics 课程</a></li>
+  <li><a href="learn/physx/docs/curriculum.html">PhysX 课程</a></li>
+  <li><a href="learn/drake/docs/curriculum.html">Drake 课程</a></li>
+</ul>
