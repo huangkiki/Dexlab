@@ -22,7 +22,7 @@ DexLab 从这样的具体问题出发，**用任务暴露问题，用对照实�
 ```bibtex
 @misc{huang2026dexlab,
   author = {Kiki Huang},
-  title = {DexLab: Robotics Simulation Solver Diagnosis and Selection},
+  title = {DexLab: A Benchmark and Platform for Contact-Rich Manipulation},
   year = {2026},
   url = {https://github.com/huangkiki/Dexlab},
   note = {GitHub repository}

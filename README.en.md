@@ -22,7 +22,7 @@ If you use DexLab in your work, please cite the repository:
 ```bibtex
 @misc{huang2026dexlab,
   author = {Kiki Huang},
-  title = {DexLab: Robotics Simulation Solver Diagnosis and Selection},
+  title = {DexLab: A Benchmark and Platform for Contact-Rich Manipulation},
   year = {2026},
   url = {https://github.com/huangkiki/Dexlab},
   note = {GitHub repository}
