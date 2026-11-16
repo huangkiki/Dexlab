@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-15 专题增补：[把吞吐、成本和完整训练闭环分开](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop)。** 以 RaiSim 供应商自建对照为例，小批量、大批量、FP32/FP64 与不同接触工作不能压成一个引擎总分。
+
 **2026-11-13 专题增补：[RoboColiseum：动作回放、仿真可信度与完整任务评测](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#robocoliseum)。** 先 Discussion，再沉淀可迁移机制、时序/反力边界与验证条件。
 
 **2026-11-12 专题增补：[CoRL 2026 哪些论文最值得 DexLab 学](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#corl-2026-dexlab-lessons)。** 逐项筛查官方录取清单，结论是先借随机实例统计评测、接触失败分层诊断与接触事件校准，不先换大模型或仿真引擎。
@@ -220,6 +222,17 @@
 **4. 把成功过程、合理用力与评分漏洞放在同一张结果单上。** DexGraspBench 提供保持与扰动协议，ContactBench 1.0 通过机构阻力改变行为要求，HandsOn 则把复杂任务分阶段观察。迁移到 DexLab 时，先复用现有夹球、释放和 LIBERO 记录审计评分：只进入目标区域、仍被夹持、隐藏支撑、错误事件顺序或直接改写评分状态，分别会不会被接受；合理成功又是否误拒。随后才设计接触阶段任务。ContactBench 1.0 同时报告成功、进度和峰值用力，但其具体力阈值不能直接成为另一只手的安全阈值。[ContactBench 1.0 实验](https://jingyi-xiang.github.io/contactbench/) · [DexLab 当前设计顺序](https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.md)
 
 **5. 最终检查仿真是否帮助作出正确选择。** SIMPLER 的价值是比较同一批策略在仿真与真实环境中的表现。其指标代码同时提供 Pearson 相关性和 mean maximum rank violation（MMRV）：后者衡量仿真排错顺序时，涉及的真实表现差距有多大。DexLab 后续若具备配对真机条件，应在未用于调参的条件上同时看绝对成功率偏差、排序错误和不确定度。当前的物理诊断与脚本回放不能冒称这种策略评价已经完成。CALVIN 的链长统计可借来描述连续任务可靠性，但还要声明策略记忆和环境状态分别何时重置。[SIMPLER 指标源码](https://github.com/simpler-env/SimplerEnv/blob/eddb5690749a1e34267807c0f7b5eede323918d7/simpler_env/utils/metrics.py#L134) · [CALVIN 序列实现](https://github.com/mees/calvin/blob/fa03f01f19c65920e18cf37398a9ce859274af76/calvin_models/calvin_agent/evaluation/evaluate_policy.py#L124)
+
+<a id="throughput-cost-closed-loop"></a>
+### 吞吐、成本与完整训练闭环：FPS 只回答其中一段
+
+> **TL;DR：** RaiSim 的对照最值得借鉴的不是“CPU 全面胜过 GPU”，而是把选择拆成小批量延迟、大批量吞吐、每美元成本和完整训练闭环。物理步更快，只在物理占端到端时间的主要部分时才可能转成训练收益。
+
+以 Wuji 批量任务为例，一轮包含“接触状态 → 策略动作 → 物理推进 → 新观测／奖励”。若一轮 100 ms、物理只占 20 ms，即使物理快 10×，理想情况下整轮也只从 100 ms 降到 38 ms；这个 100/20 ms 只说明算术关系，不是任何一方的实测。[作者的随机动作报告](https://raisim.com/sections/BenchmarkNewton.html)在作者指定硬件与价格口径下报告：1 world 的吞吐为 RaiSim/Newton 的 95.77×（ANYmal）和 13.43×（Strandbeest），到 4,096 worlds 的 FPS/USD 仍为 3.40×／2.04×。计时每十步更新随机目标，包含目标生成与物理，但排除策略推理、观测、奖励、episode reset、渲染和记录。[固定文档快照](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/sections/BenchmarkNewton.md) · [原始测量数据](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/public/raisim_newton_random_actions.json)
+
+这也是一组不同数值工作的比较：RaiSim CPU 使用 FP64，Newton SolverMuJoCo / MuJoCo Warp 使用 FP32；求解器、约束与轨迹不同，轨迹平均接触数也不同。动作目标逐位相同只证明输入一致，不能把比率解释为接触正确性排名。对 DexLab，下一次获得授权的批量学习实验应分别记录物理稳态、观测／奖励、推理与传输、reset／恢复、记录／渲染五个时钟，再合成每个有效 transition 的成本；同时冻结并行规模、动作序列和任务判据，保留不同规模下的接触事件与首次失败层。
+
+迁移顺序应先用现有日志估算物理是否为端到端主瓶颈，再决定是否比较 1、少量 world 与填满设备的批量；本轮没有启动这类性能实验。只有物理占比高，且小批量候选路径保持接触／任务结果稳定时，才把后端迁移前移；若主要耗时在 reset、观测或策略侧，先换物理引擎不会解决主要问题。完整取舍与证据边界见 [Discussion #334](https://github.com/huangkiki/Dexlab/discussions/334)。
 
 <a id="benchmark-gaming-audit"></a>
 ### 从“评分漏洞”到“榜单投机”：高分究竟识别了什么
