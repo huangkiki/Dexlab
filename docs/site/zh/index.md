@@ -48,7 +48,7 @@
 
 </section>
 <section id="research-scope"></section>
-<nav class="technical-links" aria-label="技术文档入口"><a id="architecture" href="about.html#architecture">平台架构</a><a id="quickstart" href="quickstart.html">安装与复现</a><a id="model-evaluation" href="model-evaluation.html">评测协议</a><a id="documentation-and-citation" href="about.html#documentation-and-citation">项目说明与引用</a><a id="live-lab" href="about.html#live-lab">浏览器演示</a></nav>
+<nav class="technical-links" aria-label="技术文档入口"><a id="architecture" href="about.html#architecture">平台架构</a><a id="home-quickstart" href="quickstart.html">安装与复现</a><a id="model-evaluation" href="model-evaluation.html">评测协议</a><a id="documentation-and-citation" href="about.html#documentation-and-citation">项目说明与引用</a><a id="home-live-lab" href="about.html#live-lab">浏览器演示</a></nav>
 </div>
 ```
 

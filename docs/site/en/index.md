@@ -49,7 +49,7 @@
   <p class="language-note">Sim Learning courses are primarily in Chinese, with English terminology and reading summaries.</p>
 </section>
 <section id="research-scope"></section>
-<nav class="technical-links" aria-label="Technical documentation"><a id="architecture" href="about.html#architecture">Architecture</a><a id="quickstart" href="quickstart.html">Setup & reproduction</a><a id="model-evaluation" href="model-evaluation.html">Evaluation protocol</a><a id="documentation-and-citation" href="about.html#documentation-and-citation">About & citation</a><a id="live-lab" href="about.html#live-lab">Browser demo</a></nav>
+<nav class="technical-links" aria-label="Technical documentation"><a id="architecture" href="about.html#architecture">Architecture</a><a id="home-quickstart" href="quickstart.html">Setup & reproduction</a><a id="model-evaluation" href="model-evaluation.html">Evaluation protocol</a><a id="documentation-and-citation" href="about.html#documentation-and-citation">About & citation</a><a id="home-live-lab" href="about.html#live-lab">Browser demo</a></nav>
 </div>
 ```
 
