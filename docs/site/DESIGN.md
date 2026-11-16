@@ -267,7 +267,7 @@ Navigation is one horizontal masthead row on desktop and wraps below the brand o
 
 ### Architecture view
 
-The architecture section follows the first screen and explains the system before the research trace. A serif heading and short scope paragraph introduce the official diagram; the (1774×887) PNG spans the reading column between fine rules without cropping, recoloring or overlaying explanatory chrome. Its authored blue, green, peach and dark diagram colors are treated as source-evidence colors, not as a second interface palette.
+The architecture section follows the first screen and explains the system before the research trace. A serif heading and short scope paragraph introduce the official diagram; the (1774×887) diagram spans the reading column between fine rules without cropping, recoloring or overlaying explanatory chrome. The homepage uses a (199 KB) WebP rendition and falls back to the (2.1 MB) authored PNG; both preserve the source dimensions. Its authored blue, green, peach and dark diagram colors are treated as source-evidence colors, not as a second interface palette.
 
 The image itself opens the original asset. On narrow screens, the figure becomes a keyboard-focusable horizontal scroll region with an (820px) image width so labels remain legible; a visible “scroll horizontally” hint appears above it, and the caption also provides an explicit original-image link. This is the only nested scroll surface on the homepage.
 
