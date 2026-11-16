@@ -1,74 +1,79 @@
-# DexLab 项目与对比实验
+# 对比实验与失败根因
 
-<div class="blog-intro">
-<p class="blog-tagline"><strong>Contact-rich robotics, beyond rigid-body simulation.</strong></p>
-<p>DexLab 是一个以物理为中心的研究平台，研究接触、形变和材料分离下的机器人操作。它把失败拆成可观察、可归因、可复算的证据，再反馈给技能与仿真。</p>
-<blockquote><p><strong>用模型暴露仿真缺口，再用更可信的仿真改善模型。</strong></p></blockquote>
-<nav class="blog-intro-links" aria-label="DexLab 介绍与阅读入口">
-  <a href="about.html">项目与技术文档</a>
-  <a href="index.html">研究首页</a>
-  <a href="_static/research/dexterous-simulation.html">研究导读</a>
+<p class="blog-deck">从已保存的画面和数值出发：先看实验改变了什么，再判断 solver 边界，最后追到第一失效层。</p>
+
+<p class="blog-backnav"><a href="index.html">← 返回 DexLab 项目首页</a><span>·</span><a href="index.html#architecture">查看系统架构</a></p>
+
+<nav class="blog-jump" aria-label="Blog 专题">
+  <a href="#evidence-feature">代表实验</a>
+  <a href="#blog-preview">三个判断</a>
+  <a href="#experiment-findings">实验结论</a>
+  <a href="#solver-map">Solver 认知</a>
+  <a href="#root-causes">失败根因</a>
+  <a href="#blog-guide">文章目录</a>
+  <a href="#contact-author">联系作者</a>
 </nav>
-<p class="blog-scope">当前范围：接触、抓取、布料、切割与多引擎对比。跨任务统一结论仍在建设中。</p>
-</div>
-
-(architecture)=
-## 架构
-
-<div class="blog-architecture-signals" aria-label="DexLab 架构特征">
-  <span>Diverse Tasks</span>
-  <span>Multi-Backend</span>
-  <span>Unified Evaluation</span>
-  <span>Reproducible</span>
-</div>
-
-<ol class="blog-architecture-stages" aria-label="DexLab 架构阶段">
-  <li><span>01</span><strong>Tasks &amp; Protocols</strong></li>
-  <li><span>02</span><strong>Systems under Test</strong></li>
-  <li><span>03</span><strong>Action Execution</strong></li>
-  <li><span>04</span><strong>Environment Backends</strong></li>
-  <li><span>05</span><strong>Evidence and Scoring</strong></li>
-</ol>
-
-<figure class="blog-architecture">
-<a href="_static/images/dexlab-architecture.png"><img src="_static/images/dexlab-architecture.png" width="100%" alt="DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分"></a>
-<figcaption>DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分。任务缩略图仅说明任务类型；实际实现与验证范围见覆盖矩阵。</figcaption>
-</figure>
-
-<p class="blog-deck blog-architecture-note">脚本、策略与模型通过动作适配和控制器连接环境，环境返回观测；原生状态与接触记录进入独立评分，诊断结果再用于改进下一轮实验。</p>
-
-(why-dexlab)=
-## Why DexLab?
-
-<p class="blog-deck">机器人策略在仿真中失败时，我们通常只看到一次失败。它可能来自策略、控制器、场景配置、接触离散、材料模型或数值求解。</p>
-
-<blockquote class="blog-question"><p><strong>When a robot fails in simulation, is it the policy that fails, or the physics we trusted?</strong><br>仿真里的失败，是策略失败，还是我们信任的物理失败？</p></blockquote>
-
-<p class="blog-deck"><strong>这页从对比实验读起：</strong>它不给出“谁赢了”的引擎排行榜，而是把接触、抓持、布料、耦合和斜面实验整理成三条线索：对比实验测出了什么，几个 solver 各自显示出什么边界，以及失败最早发生在哪一层。</p>
 
 (evidence-feature)=
 ## 代表性实验
 
 <div class="blog-evidence-grid">
-<article class="blog-evidence-card">
-  <a class="blog-evidence-media" href="cut-push.html"><img src="_static/cutting/showcase.gif" alt="豆腐与香蕉切割后直接侧推的记录回放" loading="lazy"></a>
+<article class="blog-evidence-card blog-evidence-card-wide">
+  <div class="blog-evidence-media blog-evidence-split">
+    <video controls muted loop playsinline preload="metadata" poster="_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="豆腐两刀三块后直接侧推的最新记录">
+      <source src="_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4">
+    </video>
+    <video controls muted loop playsinline preload="metadata" poster="_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="香蕉三刀四块后直接侧推的最新记录">
+      <source src="_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4">
+    </video>
+  </div>
   <p class="blog-evidence-kicker">01 / 切割与侧推</p>
   <h3>切完，仍要证明三块、四块能独立运动。</h3>
-  <p>最后一块不再被同一切面带动，才不是只切出了画面。</p>
+  <p>最新记录：豆腐两刀三块、香蕉三刀四块；最后一块不再被同一切面带动。</p>
 </article>
 
 <article class="blog-evidence-card">
-  <a class="blog-evidence-media" href="wuji-contact.html"><img src="_static/wuji-contact/hold-comparison.png" alt="点接触与抗扭接触的保持段轨迹比较" loading="lazy"></a>
+  <div class="blog-evidence-media">
+    <video controls muted loop playsinline preload="metadata" aria-label="Wuji 点接触与抗扭接触的同时间原速比较">
+      <source src="_static/wuji-contact/comparison.mp4" type="video/mp4">
+    </video>
+  </div>
   <p class="blog-evidence-kicker">02 / 摩擦与抗扭力矩</p>
   <h3>一直有接触，球仍可能绕夹持线转动。</h3>
   <p>点接触缺少力矩方向；补上抗扭接触后，保持才进入原定门槛。</p>
 </article>
 
 <article class="blog-evidence-card">
-  <a class="blog-evidence-media" href="benchmark.html"><img src="_static/studio/apple.png" alt="苹果梗抓取实验记录" loading="lazy"></a>
+  <div class="blog-evidence-media">
+    <video controls muted loop playsinline preload="metadata" poster="_static/studio/apple.png" aria-label="OpenArm 与 Wuji 苹果梗抓取记录">
+      <source src="_static/studio/apple.mp4" type="video/mp4">
+    </video>
+  </div>
   <p class="blog-evidence-kicker">03 / 苹果梗抓取</p>
   <h3>同一条抓梗任务，固定配置仍可能给出不同结果。</h3>
   <p>MuJoCo 与 SuperDex 的差异必须连同步长、驱动和接触表示一起读。</p>
+</article>
+
+<article class="blog-evidence-card">
+  <div class="blog-evidence-media">
+    <video controls muted loop playsinline preload="metadata" aria-label="布料夹持与运动记录">
+      <source src="_static/cloth-studio/grasp.mp4" type="video/mp4">
+    </video>
+  </div>
+  <p class="blog-evidence-kicker">04 / 布料</p>
+  <h3>夹住、抬起与完成折叠是三个不同验收。</h3>
+  <p>7 个原生配置共 105 条冻结记录；材料未做跨求解器等效标定。</p>
+</article>
+
+<article class="blog-evidence-card">
+  <div class="blog-evidence-media">
+    <video controls muted loop playsinline preload="metadata" poster="_static/studio/incline.png" aria-label="六引擎斜面同步比较记录">
+      <source src="_static/studio/incline.mp4" type="video/mp4">
+    </video>
+  </div>
+  <p class="blog-evidence-kicker">05 / 六引擎斜面</p>
+  <h3>同一任务，接触表达和数值门禁仍会改变结果。</h3>
+  <p>固定配置可以逐项比较，但不能拼成通用 solver 排名。</p>
 </article>
 </div>
 
@@ -94,6 +99,14 @@
 <td>同一组 10 个固定回归场景</td>
 <td>离桌、支撑、保持、穿透与释放</td>
 <td><span class="matrix-result mixed">MuJoCo 1/10 · SuperDex 10/10</span><small>固定配置，不是纯 solver 排名</small></td></tr>
+<tr><th scope="row"><strong>布料</strong><small>7 个原生配置</small></th>
+<td>同一冻结留出集</td>
+<td>形变、下垂、穿透、残余运动与成本</td>
+<td><span class="matrix-result mixed">52 / 105 通过</span><small>材料未做跨求解器等效标定</small></td></tr>
+<tr><th scope="row"><strong>六引擎斜面</strong><small>固定发布配置</small></th>
+<td>静止、滑动与名义零摩擦；三个步长</td>
+<td>位移、速度、力与数值一致性</td>
+<td><span class="matrix-result mixed">逐配置判定</span><small>不合并为引擎排名</small></td></tr>
 </tbody>
 </table>
 </div>
@@ -113,13 +126,6 @@
   <p>差别是固定配置的鲁棒性，不是纯 solver 排名；20 个回归记录中 11 通过、9 失败。</p>
 </div>
 </div>
-
-<nav class="blog-entry-links" aria-label="开始阅读">
-  <a class="blog-entry-primary" href="#blog-preview">先看三个判断</a>
-  <a href="#experiment-findings">实验结论</a>
-  <a href="#solver-map">Solver 认知</a>
-  <a href="#root-causes">失败根因</a>
-</nav>
 
 (blog-preview)=
 ## 先看三个判断
@@ -158,16 +164,6 @@
   <a href="#root-causes">查看失败根因与本轮验证门槛</a>
 </article>
 </div>
-
-<nav class="blog-jump" aria-label="Blog 专题">
-  <a href="#experiment-findings">实验结论</a>
-  <a href="#solver-map">Solver 认知</a>
-  <a href="#root-causes">失败根因</a>
-  <a href="#blog-guide">研究导读</a>
-  <a href="#blog-policy">策略与评测</a>
-  <a href="#blog-learn">仿真学习</a>
-  <a href="#contact-author">联系作者</a>
-</nav>
 
 <p class="blog-reading-note"><strong>先读方式：</strong>表中保留绝对数值和限定条件。不同实验族的分母不同，不能加总成成功率，也不能据此给出“某引擎更强”的结论。</p>
 
