@@ -1,17 +1,35 @@
-# DexLab 对比实验阅读指南
+# DexLab 项目与对比实验
 
 <div class="blog-intro">
 <p class="blog-tagline"><strong>Contact-rich robotics, beyond rigid-body simulation.</strong></p>
-<p>DexLab 是我用于研究接触、形变和材料分离条件下机器人操作的物理研究平台。这个 Blog 页面集中整理其中已经完成的 solver 与接触对比实验。</p>
-<p>机器人策略在仿真中失败时，我们通常只看到一次失败。它可能来自策略、控制器、场景配置、接触离散、材料模型或数值求解。这组对比实验要追问的正是：<strong>失败的到底是策略，还是我们信任的物理？</strong></p>
+<p>DexLab 是一个以物理为中心的研究平台，用于研究接触、形变和材料分离条件下的机器人操作。近期以 <strong>Physics Research Platform</strong> 为主体：把接触、形变和材料分离做成可观察、可归因、可复算的实验；长期再用模型失败反馈仿真器，用改进后的仿真器训练和评测模型。</p>
+<blockquote><p><strong>用模型暴露仿真缺口，再用更可信的仿真改善模型。</strong></p></blockquote>
 <nav class="blog-intro-links" aria-label="DexLab 介绍与阅读入口">
-  <a href="about.html">完整项目介绍</a>
+  <a href="about.html">项目与技术文档</a>
   <a href="index.html">研究首页</a>
   <a href="_static/research/dexterous-simulation.html">研究导读</a>
 </nav>
+<blockquote class="blog-status"><p>当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。</p></blockquote>
 </div>
 
-<p class="blog-deck"><strong>这个页面怎么读：</strong>它不给出“谁赢了”的引擎排行榜，而是把接触、抓持、布料、耦合和斜面实验整理成三条线索：对比实验测出了什么，几个 solver 各自显示出什么边界，以及失败最早发生在哪一层。</p>
+(architecture)=
+## 架构
+
+<figure class="blog-architecture">
+<a href="_static/images/dexlab-architecture.png"><img src="_static/images/dexlab-architecture.png" width="100%" alt="DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分"></a>
+<figcaption>DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分。任务缩略图仅说明任务类型；实际实现与验证范围见覆盖矩阵。</figcaption>
+</figure>
+
+<p class="blog-deck blog-architecture-note">脚本、策略与模型通过动作适配和控制器连接环境，环境返回观测；原生状态与接触记录进入独立评分，诊断结果再用于改进下一轮实验。</p>
+
+(why-dexlab)=
+## Why DexLab?
+
+<p class="blog-deck">机器人策略在仿真中失败时，我们通常只看到一次失败。它可能来自策略、控制器、场景配置、接触离散、材料模型或数值求解。</p>
+
+<blockquote class="blog-question"><p><strong>When a robot fails in simulation, is it the policy that fails, or the physics we trusted?</strong><br>仿真里的失败，是策略失败，还是我们信任的物理失败？</p></blockquote>
+
+<p class="blog-deck"><strong>这页从对比实验读起：</strong>它不给出“谁赢了”的引擎排行榜，而是把接触、抓持、布料、耦合和斜面实验整理成三条线索：对比实验测出了什么，几个 solver 各自显示出什么边界，以及失败最早发生在哪一层。</p>
 
 <nav class="blog-entry-links" aria-label="开始阅读">
   <a class="blog-entry-primary" href="#blog-preview">先看三个判断</a>

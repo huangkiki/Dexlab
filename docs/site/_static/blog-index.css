@@ -39,6 +39,30 @@ body[data-reader-page="blog"] .section-rail {
   color: var(--ink);
 }
 
+.blog-intro blockquote,
+.blog-question {
+  margin: 18px 0;
+  padding: 14px 18px;
+  border: 0;
+  border-left: 2px solid var(--green);
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.blog-intro blockquote p,
+.blog-question p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.blog-intro .blog-status {
+  border-left: 0;
+  border-block: 1px solid var(--rule);
+  background: transparent;
+  color: var(--muted);
+}
+
 .blog-intro .blog-tagline {
   margin-top: 0;
   color: var(--green);
@@ -60,12 +84,40 @@ body[data-reader-page="blog"] .section-rail {
   text-underline-offset: 4px;
 }
 
+.blog-architecture {
+  margin: 22px 0 0;
+}
+
+.blog-architecture img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--rule);
+}
+
+.blog-architecture figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.blog-architecture-note {
+  margin-top: 18px;
+  font: 400 15px/1.85 var(--sans);
+}
+
+.blog-question {
+  max-width: 760px;
+  margin-top: 20px;
+}
+
 .blog-entry-links {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px 22px;
-  margin: 26px 0 clamp(120px, 18vh, 180px);
+  margin: 26px 0 80px;
   font-size: 14px;
 }
 
@@ -433,7 +485,7 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
   }
 
   .blog-entry-links {
-    margin-bottom: 100px;
+    margin-bottom: 64px;
   }
 
   .blog-links,
