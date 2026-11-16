@@ -252,22 +252,22 @@ body[data-reader-page="blog"] .lesson-article .blog-evidence-matrix table {
 
 .blog-evidence-matrix th:nth-child(1),
 .blog-evidence-matrix td:nth-child(1) {
-  width: 23%;
+  width: 20%;
 }
 
 .blog-evidence-matrix th:nth-child(2),
 .blog-evidence-matrix td:nth-child(2) {
-  width: 31%;
+  width: 25%;
 }
 
 .blog-evidence-matrix th:nth-child(3),
 .blog-evidence-matrix td:nth-child(3) {
-  width: 31%;
+  width: 23%;
 }
 
 .blog-evidence-matrix th:nth-child(4),
 .blog-evidence-matrix td:nth-child(4) {
-  width: 15%;
+  width: 32%;
 }
 
 .blog-evidence-matrix td:nth-child(2) {
@@ -276,6 +276,14 @@ body[data-reader-page="blog"] .lesson-article .blog-evidence-matrix table {
 
 .blog-evidence-matrix :is(th, td) {
   overflow-wrap: anywhere;
+}
+
+.blog-evidence-matrix td small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
 }
 
 .blog-evidence-detail {
@@ -914,15 +922,15 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
   }
 
   #evidence-feature td:nth-child(2)::before {
-    content: "DexLab 实测";
+    content: "控制变量";
   }
 
   #evidence-feature td:nth-child(3)::before {
-    content: "MotrixSim";
+    content: "关键读回";
   }
 
   #evidence-feature td:nth-child(4)::before {
-    content: "可比性";
+    content: "结果";
   }
 }
 
