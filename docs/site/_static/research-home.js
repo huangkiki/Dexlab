@@ -11,6 +11,10 @@ if (location.hash === "#blog") {
 const legacyAnchorRoutes = {
   quickstart: 'quickstart.html',
   'live-lab': 'about.html#live-lab',
+  'research-findings': 'about.html#research-findings',
+  'research-diagnosis': 'about.html#research-diagnosis',
+  'research-selection': 'about.html#research-selection',
+  'research-scope': 'about.html#research-scope',
 };
 if (legacyAnchorRoutes[location.hash.slice(1)]) {
   location.replace(legacyAnchorRoutes[location.hash.slice(1)]);
