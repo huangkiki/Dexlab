@@ -19,8 +19,14 @@ myst_heading_anchors = 6
 html_theme = 'pydata_sphinx_theme'
 html_title = 'DexLab · ' + ('仿真器与模型共同进化' if language == 'zh_CN' else 'Simulator and model co-evolution')
 html_static_path = [str(HERE / '_static'), str(ROOT / 'docs/evidence')]
-html_css_files = ['dexlab.css']
-html_js_files = [('replay.js', {'defer': 'defer'}), ('cutting.js', {'defer': 'defer'}), ('live-lab.js', {'defer': 'defer'}), ('learning-diagrams.js', {'type': 'module'})]
+html_css_files = ['dexlab.css', 'simulation-learning.css', 'reader-page.css']
+html_js_files = [
+    ('replay.js', {'defer': 'defer'}),
+    ('cutting.js', {'defer': 'defer'}),
+    ('live-lab.js', {'defer': 'defer'}),
+    ('learning-diagrams.js', {'type': 'module'}),
+    ('reader-page.js', {'defer': 'defer'}),
+]
 templates_path = [str(HERE / '_templates')]
 html_show_sourcelink = False
 html_theme_options = {
@@ -41,11 +47,6 @@ html_context = {
 
 
 def setup(app):
-    # Sphinx reports linked from the English homepage's Blog topics.
-    blog_reports = {
-        'code-as-policy', 'contact-response', 'failure-root-cause-atlas', 'model-evaluation',
-        'robodojo-bread-slip', 'rss-wiping', 'solver-taxonomy', 'wuji-contact',
-    }
     lessons = [
         ('learning', '从一个问题开始', 'Start with a question'),
         ('mujoco-learning/step', '一步仿真，几种时间', 'One step, several clocks'),
@@ -62,8 +63,6 @@ def setup(app):
         if pagename == 'index':
             context['homepage_is_chinese'] = app.config.language in ('zh_CN', 'zh')
             return 'research-home.html'
-        if app.config.language == 'en' and pagename in blog_reports:
-            app.add_css_file('research-report.css', priority=900)
         for index, (route, _, _) in enumerate(lessons):
             if pagename == route:
                 context.update(
@@ -72,6 +71,8 @@ def setup(app):
                     learning_index=index,
                 )
                 return 'simulation-learning.html'
+        context['reader_is_chinese'] = app.config.language == 'zh_CN'
+        return 'reader-page.html'
 
     app.connect('html-page-context', select_home_template)
 

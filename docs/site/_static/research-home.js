@@ -1,3 +1,13 @@
+// Keep published homepage fragments working after the global Sphinx labels
+// moved to their destination pages.
+const legacyAnchorRoutes = {
+  quickstart: 'quickstart.html',
+  'live-lab': 'about.html#live-lab',
+};
+if (legacyAnchorRoutes[location.hash.slice(1)]) {
+  location.replace(legacyAnchorRoutes[location.hash.slice(1)]);
+}
+
 // Topic navigation progressively enhances an otherwise complete reading index.
 const controls = document.querySelector('.topic-controls');
 if (controls) {

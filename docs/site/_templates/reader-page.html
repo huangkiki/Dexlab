@@ -1,0 +1,89 @@
+{% set zh = reader_is_chinese %}
+<!doctype html>
+<html lang="{{ 'zh-CN' if zh else 'en' }}" data-content_root="{{ content_root }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title|striptags }} · DexLab</title>
+  {{ metatags }}
+  {%- for css in css_files %}
+    {%- if css|attr("filename") %}
+      {{ css_tag(css) }}
+    {%- else %}
+      <link rel="stylesheet" href="{{ pathto(css, 1)|e }}" type="text/css">
+    {%- endif %}
+  {%- endfor %}
+  {%- for script in script_files %}
+    {{ js_tag(script) }}
+  {%- endfor %}
+  {%- if pagename == 'search' %}
+  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
+  <script src="{{ pathto('searchindex.js', 1) }}" defer></script>
+  <meta name="robots" content="noindex">
+  {%- endif %}
+</head>
+<body data-reader-page="{{ pagename }}">
+  <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>
+  <header class="learn-header">
+    <a class="brand" href="{{ pathto('index') }}">DexLab</a>
+    <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
+      <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
+      <a href="{{ pathto('index') }}#experiments">{{ '研究结论' if zh else 'Findings' }}</a>
+      <a href="{{ pathto('index') }}#blog">Blog</a>
+      <a href="{{ pathto('learning') }}">{{ '仿真学习' if zh else 'Learn simulation' }}</a>
+      <a href="{{ pathto('about') }}">{{ '文档' if zh else 'Docs' }}</a>
+    </nav>
+    <div class="header-tools">
+      <a href="{{ pathto('search') }}">{{ '搜索' if zh else 'Search' }}</a>
+      <a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a>
+      <a href="https://github.com/huangkiki/Dexlab" aria-label="DexLab on GitHub">GitHub</a>
+    </div>
+  </header>
+  <div class="learn-layout reader-layout">
+    <aside class="lesson-rail">
+      <details class="chapter-menu" open>
+        <summary>{{ '全部内容' if zh else 'All content' }}</summary>
+        <nav class="reader-navigation" aria-label="{{ '内容目录' if zh else 'Content navigation' }}">
+          {{ toctree(collapse=True, maxdepth=2, includehidden=True) }}
+        </nav>
+        <div class="rail-links">
+          <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
+          <a href="{{ pathto('learning') }}">{{ 'MuJoCo 学习路线' if zh else 'MuJoCo learning route' }}</a>
+        </div>
+      </details>
+    </aside>
+    <main id="main-content" role="main" class="lesson-article bd-article">
+      {% if pagename == 'search' %}
+      <h1 id="search-documentation">{{ '搜索' if zh else 'Search' }}</h1>
+      <noscript><p class="note">{{ '请启用 JavaScript 后使用站内搜索。' if zh else 'Enable JavaScript to use site search.' }}</p></noscript>
+      <p>{{ '多个关键词只返回同时包含全部关键词的页面。' if zh else 'Multiple words return pages that contain every word.' }}</p>
+      <form class="reader-search-form" action="" method="get">
+        <label for="reader-search-input">{{ '搜索关键词' if zh else 'Search terms' }}</label>
+        <div>
+          <input id="reader-search-input" type="search" name="q" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <button type="submit">{{ '搜索' if zh else 'Search' }}</button>
+          <span id="search-progress" role="status"></span>
+        </div>
+      </form>
+      <div id="search-results"></div>
+      {% else %}
+      {{ body }}
+      {% endif %}
+      <nav class="lesson-pagination" aria-label="{{ '前后文章' if zh else 'Adjacent pages' }}">
+        {% if prev %}
+        <a href="{{ prev.link|e }}"><small>{{ '上一篇' if zh else 'Previous' }}</small>{{ prev.title|striptags }}</a>
+        {% endif %}
+        {% if next %}
+        <a class="next" href="{{ next.link|e }}"><small>{{ '下一篇' if zh else 'Next' }}</small>{{ next.title|striptags }} <span aria-hidden="true">→</span></a>
+        {% endif %}
+      </nav>
+      <footer class="lesson-footer">
+        <a href="{{ pathto('index') }}">DexLab</a>
+        <p>{{ '读懂一个结论，也看清它成立的条件。' if zh else 'Understand a finding and the conditions that support it.' }}</p>
+      </footer>
+    </main>
+    <aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>
+  </div>
+</body>
+</html>

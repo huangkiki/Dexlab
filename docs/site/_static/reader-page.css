@@ -1,0 +1,405 @@
+/* Sphinx reports inherit the same reading world as the homepage and lessons. */
+html {
+  --pst-color-background: var(--paper);
+  --pst-color-on-background: var(--paper);
+  --pst-color-surface: var(--panel);
+  --pst-color-on-surface: var(--ink);
+  --pst-color-text-base: var(--ink);
+  --pst-color-text-muted: var(--muted);
+  --pst-color-heading: var(--ink);
+  --pst-color-primary: var(--green);
+  --pst-color-primary-bg: var(--panel);
+  --pst-color-secondary: var(--green);
+  --pst-color-link: var(--green);
+  --pst-color-link-hover: var(--ink);
+  --pst-color-link-higher-contrast: var(--green);
+  --pst-color-border: var(--rule);
+  --pst-color-border-muted: var(--rule);
+  --pst-color-table: var(--ink);
+  --pst-color-table-inner-border: var(--rule);
+  --pst-color-table-outer-border: var(--rule);
+  --pst-color-table-row-hover-bg: var(--panel);
+  --pst-color-inline-code: var(--green);
+  --pst-color-target: var(--panel);
+}
+
+.reader-layout {
+  align-items: start;
+}
+
+.reader-navigation .toctree-wrapper {
+  display: block;
+}
+
+.reader-navigation .toctree-wrapper > ul {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+}
+
+.reader-navigation ul {
+  list-style: none;
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.reader-navigation .toctree-wrapper > ul {
+  padding-left: 0;
+}
+
+.reader-navigation li {
+  margin: 0;
+}
+
+.reader-navigation li > a {
+  display: block;
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  text-decoration: none;
+}
+
+.reader-navigation li > a:hover {
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.reader-navigation li > a.current {
+  background: var(--panel);
+  color: var(--green);
+  font-weight: 700;
+}
+
+.reader-navigation .caption {
+  display: block;
+  margin: 20px 10px 6px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.reader-navigation .caption-text {
+  font: inherit;
+}
+
+.reader-navigation ul ul a {
+  padding-block: 5px;
+  font-size: 13px;
+}
+
+.lesson-article > section > h1:first-child,
+.lesson-article > h1:first-child {
+  margin-top: 0;
+}
+
+.lesson-article h2 {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.lesson-article h3,
+.lesson-article h4 {
+  text-wrap: pretty;
+}
+
+.lesson-article :is(img, video, iframe) {
+  max-width: 100%;
+  height: auto;
+}
+
+.lesson-article img {
+  display: block;
+  margin: 24px auto;
+}
+
+.lesson-article video {
+  display: block;
+  width: 100%;
+  background: var(--panel);
+}
+
+.lesson-article figure {
+  margin: 28px 0;
+}
+
+.lesson-article figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.lesson-article .toctree-wrapper {
+  display: block;
+  margin: 28px 0;
+  border-block: 1px solid var(--rule);
+  padding-block: 10px;
+}
+
+.lesson-article .toctree-wrapper ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.lesson-article .toctree-wrapper > ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.lesson-article .toctree-wrapper li {
+  margin: 0;
+}
+
+.lesson-article .toctree-wrapper li > a {
+  display: block;
+  padding: 10px 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.lesson-article .toctree-wrapper li > a:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.lesson-article :is(.table-wrapper, .pst-scrollable-table-container) {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.lesson-article :is(.admonition, .sd-card, .lab-showcase, .lab-chart, .experiment-card, .dexlab-replay, .cutting-player, .cutting-comparison-panel, .dexlab-live-lab) {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.lesson-article :is(.admonition, .lab-note, .research-caution, .visual-note) {
+  border: 0;
+  border-block: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 16px 20px;
+}
+
+.lesson-article .admonition-title {
+  background: transparent;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.lesson-article .sd-card {
+  border-color: var(--rule);
+  background: transparent;
+}
+
+.lesson-article .sd-card-header {
+  background: transparent;
+  border-color: var(--rule);
+}
+
+.lesson-article .lab-kicker,
+.lesson-article .research-eyebrow {
+  color: var(--muted);
+  font: 700 12px/1.6 var(--sans);
+  letter-spacing: 0.08em;
+}
+
+.lesson-article:has(.lab-kicker) > section > h1,
+.lesson-article:has(.research-eyebrow) > section > h1 {
+  color: var(--ink);
+  font: 400 36px/1.4 var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.lesson-article .lab-subtitle,
+.lesson-article .research-deck {
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.lesson-article :is(.lab-link, .research-links a) {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.lesson-article .lab-button {
+  background: transparent;
+  border-bottom: 2px solid var(--green);
+  color: var(--green) !important;
+  padding: 4px 0;
+}
+
+.lesson-article :is(.lab-tags span, .verdict) {
+  border-radius: 0;
+}
+
+.lesson-article :is(.lab-finding, .research-finding) {
+  border: 0;
+  border-block: 1px solid var(--rule);
+  background: var(--panel);
+  padding: 20px 0;
+}
+
+.lesson-article :is(.lab-score strong, .research-meta) {
+  letter-spacing: normal;
+}
+
+.lesson-article :is(.research-finding .sd-card-header, .research-finding .sd-card-body) {
+  padding-inline: 20px;
+}
+
+.lesson-article .research-meta {
+  border-color: var(--rule);
+}
+
+.lesson-article .research-footer {
+  border-color: var(--rule);
+}
+
+.lesson-article .visual-note {
+  font-size: 14px;
+}
+
+.lesson-article .dexlab-live-lab {
+  border-color: var(--rule);
+}
+
+.lesson-article .cutting-view-switch,
+.lesson-article .cutting-view-switch button,
+.lesson-article .cutting-reference-controls button,
+.lesson-article .cutting-playback-controls button {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.lesson-article .headerlink {
+  color: var(--muted);
+}
+
+.lesson-article :not(pre) > code {
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.lesson-article pre {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+.lesson-article .math {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.reader-search-form {
+  margin: 28px 0 20px;
+  border-block: 1px solid var(--rule);
+  padding-block: 20px;
+}
+
+.reader-search-form label {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.reader-search-form > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reader-search-form input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+.reader-search-form input:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+#search-results {
+  margin-top: 24px;
+}
+
+#search-results ul {
+  padding-left: 20px;
+}
+
+#search-results li {
+  margin: 16px 0;
+}
+
+#search-results a {
+  font-weight: 600;
+}
+
+#search-results p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.lesson-pagination:empty {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .reader-navigation {
+    max-height: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .reader-navigation .toctree-wrapper > ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .reader-navigation .toctree-wrapper > ul > li > ul {
+    grid-column: 1 / -1;
+    padding-left: 18px;
+  }
+
+  .lesson-article:has(.lab-kicker) > section > h1,
+  .lesson-article:has(.research-eyebrow) > section > h1 {
+    font-size: 30px;
+  }
+
+  .lesson-article .lab-subtitle,
+  .lesson-article .research-deck {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 440px) {
+  .reader-navigation .toctree-wrapper > ul {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-article:has(.lab-kicker) > section > h1,
+  .lesson-article:has(.research-eyebrow) > section > h1 {
+    font-size: 28px;
+  }
+}
+
+@media print {
+  .reader-navigation,
+  .rail-links,
+  .lesson-pagination {
+    display: none;
+  }
+}

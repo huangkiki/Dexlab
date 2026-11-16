@@ -52,6 +52,16 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: -.02em
+  learning-display-compact:
+    fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
+    fontSize: 30px
+    fontWeight: 400
+    lineHeight: 1.4
+  learning-display-narrow:
+    fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
+    fontSize: 28px
+    fontWeight: 400
+    lineHeight: 1.4
   learning-headline:
     fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
     fontSize: 24px
@@ -155,7 +165,7 @@ components:
 
 The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.
 
-This system governs the Chinese and English research homepages and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. English reports linked from the Blog topics use the same reading palette and title typography through `_static/research-report.css`, with the existing Sphinx navigation and table of contents. The homepage and reports share their light palette in `_static/research-palette.css`. Other Sphinx pages and the separate web application retain their own design systems.
+This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: the learning route's slim masthead, chapter rail, 760px reading column and section rail now frame reports, documentation and course pages as well. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
 **Key Characteristics:**
 
@@ -167,7 +177,7 @@ This system governs the Chinese and English research homepages and their MuJoCo 
 
 Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
-The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The sections below keep homepage composition separate from this ordinary extension.
+The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
 ## Colors
 
@@ -270,6 +280,12 @@ Readers mark or unmark lessons explicitly. A thin native progress bar counts rea
 
 Native explanations can be expanded together. Self-checks use labeled radios, a fieldset and textual status feedback, with explanations available without JavaScript. The timing example uses native ranges, numeric outputs and an SVG timeline to connect physics-step duration to control-update period. It depicts simulated time, not wall-clock speed or measured engine behavior. Script-only controls are revealed after initialization; lesson text, disclosures and navigation remain usable without JavaScript.
 
+### Unified content reader
+
+Reports, experiment pages, project documentation and generated course pages share one responsive shell. The desktop page header, brand, navigation spacing, chapter rail, article heading, body measure, right section rail and footer match the learning route. The left rail contains the generated Sphinx document tree rather than a second hand-maintained list. The current document uses the same paper-wash selected state as a current lesson.
+
+Sphinx-specific content keeps its native semantics: local toctrees become open ruled reading lists, tables scroll within the article, code blocks use the paper wash, admonitions use top and bottom rules, and existing video/replay/experiment components retain their controls and scripts. No report introduces rounded promotional cards, shadows, gradients or a separate palette.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -279,10 +295,11 @@ Native explanations can be expanded together. Self-checks use labeled radios, a 
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 - **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
+- **Do** send every ordinary content page through the shared reader template so navigation, type, spacing and responsive behavior stay identical across the Blog.
 
 ### Don't:
 
 - **Don't** restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.
-- **Don't** restyle the article, unrelated Sphinx pages or the separate web application through this reading system.
+- **Don't** reintroduce the old wide Sphinx report shell or restore per-page report palettes; the separate browser application remains outside this reading system.
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.
