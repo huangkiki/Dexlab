@@ -1,6 +1,6 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
-**2026-11-15 专题增补：[把吞吐、成本和完整训练闭环分开](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop)。** 以 RaiSim 供应商自建对照为例，小批量、大批量、FP32/FP64 与不同接触工作不能压成一个引擎总分。
+**2026-11-15 专题增补：[把吞吐、成本和完整训练闭环分开](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop)。** 以 RaiSim 供应商自建的 CPU MuJoCo 与 GPU Newton 对照为例，小批量、大批量、FP32/FP64、射线查询与不同接触工作不能压成一个引擎总分。
 
 **2026-11-13 专题增补：[RoboColiseum：动作回放、仿真可信度与完整任务评测](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#robocoliseum)。** 先 Discussion，再沉淀可迁移机制、时序/反力边界与验证条件。
 
@@ -233,6 +233,17 @@
 这也是一组不同数值工作的比较：RaiSim CPU 使用 FP64，Newton SolverMuJoCo / MuJoCo Warp 使用 FP32；求解器、约束与轨迹不同，轨迹平均接触数也不同。动作目标逐位相同只证明输入一致，不能把比率解释为接触正确性排名。对 DexLab，下一次获得授权的批量学习实验应分别记录物理稳态、观测／奖励、推理与传输、reset／恢复、记录／渲染五个时钟，再合成每个有效 transition 的成本；同时冻结并行规模、动作序列和任务判据，保留不同规模下的接触事件与首次失败层。
 
 迁移顺序应先用现有日志估算物理是否为端到端主瓶颈，再决定是否比较 1、少量 world 与填满设备的批量；本轮没有启动这类性能实验。只有物理占比高，且小批量候选路径保持接触／任务结果稳定时，才把后端迁移前移；若主要耗时在 reset、观测或策略侧，先换物理引擎不会解决主要问题。完整取舍与证据边界见 [Discussion #334](https://github.com/huangkiki/Dexlab/discussions/334)。
+
+<a id="mujoco-workload-spectrum"></a>
+### 单线程 CPU 对照：2.36–147.16× 是一条瓶颈谱
+
+RaiSim 的 MuJoCo 页面补足了单线程 CPU 视角：10 个有效 workload 的中位耗时比为 2.36–147.16×。接触密集项约为 2.4–4.8×，Strandbeest 闭环为 2.74×，布料为 11.92×，heightmap LiDAR 与 primitive ray 分别为 25.71×、147.16×。这些数字支持“不同瓶颈产生不同倍率”，不支持一个可跨任务搬运的全局引擎系数。[固定文档](https://github.com/raisimTech/raisim2Lib/blob/7cddae549d59f4ff3cbe05236f6c101fbab4894/docs/sections/Benchmark.md) · [原始结果](https://github.com/raisimTech/raisim2Lib/blob/7cddae549d59f4ff3cbe05236f6c101fbab4894/docs/public/benchmark_results.json)
+
+同一个 `primitive_ray_scaling` workload 就能显示计时边界为何重要：完整 launcher 为 RaiSim 0.016 s、MuJoCo 2.427 s（147.16×）；JSON 的中位场景构建约 7.31 ms 对 1,535.95 ms（约 210×），纯 10,000-ray query 约 2.803 ms 对 836.698 ms（约 299×）。若任务只构建一次却持续扫描，构建与查询成本应分别决定优化目标；若每次 reset 都重建，构建成本才进入高频路径。
+
+MuJoCo 八块软体堆叠行必须排除：公开配置使用不同粒子、质量和碰撞半径，时间推进到 0.020 s、约第 20 步时 QACC 出现 `NaN/Inf/huge`。launcher 虽返回 0，作者没有用 9.17 s 对 0.445 s 生成速度比。现有证据只能定位到“软体接触／形变数值演化在 20 ms 内失去有限性”；要区分材料、几何、迭代或 solver 主因，还需匹配参数并保存第 0–20 步的 QACC、粒子间距、穿透、接触力、约束残差和能量。
+
+对 DexLab，下一步仍是先分解场景构建、持续物理、接触查询、LiDAR／ray、观测、策略、reset 和记录，再按主导瓶颈选优化层。这份 MuJoCo 3.13.0 单线程结果也不能与 Newton 页的 MuJoCo Warp 3.17.0 FP32 GPU 批量结果合成总排名。失败 case 判因门槛与完整边界见 [Discussion #334 补充](https://github.com/huangkiki/Dexlab/discussions/334#discussioncomment-19645295)。
 
 <a id="benchmark-gaming-audit"></a>
 ### 从“评分漏洞”到“榜单投机”：高分究竟识别了什么

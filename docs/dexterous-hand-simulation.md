@@ -1,6 +1,6 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
-**2026-11-15 addition: [separate throughput, cost and the complete training loop](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop).** In RaiSim's vendor-authored comparison, small batches, large batches, FP32/FP64 and different contact work do not collapse into one engine score.
+**2026-11-15 addition: [separate throughput, cost and the complete training loop](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop).** In RaiSim's vendor-authored CPU-MuJoCo and GPU-Newton comparisons, small batches, large batches, FP32/FP64, ray queries and different contact work do not collapse into one engine score.
 
 **2026-11-13 addition: [RoboColiseum: command replay, simulation validity, and complete-task evaluation](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#robocoliseum).** Discussion first, then transferable mechanisms and timing, reaction-force, and validation boundaries.
 
@@ -246,6 +246,17 @@ Consider a batched Wuji cycle: contact state → policy action → physics advan
 This also compares different numerical work. RaiSim uses FP64 on CPU, while Newton SolverMuJoCo / MuJoCo Warp uses FP32; solver, constraints, trajectories and mean contact counts also differ. Bit-identical action targets establish identical input, not identical contact computation or contact accuracy. For the next authorized batched-learning experiment, DexLab should record five clocks separately: steady-state physics, observation/reward, inference and transfer, reset/recovery, and recording/rendering. It should then derive cost per useful transition while freezing parallel scale, action sequence and task criteria, and retaining contact events and first-failure layers at each scale.
 
 Use existing logs first to estimate whether physics dominates end-to-end time. Only then compare one world, a small number of worlds and a device-saturating batch; this review started no performance run. A backend migration moves forward only if physics is the bottleneck and the small-batch candidate preserves contact/task outcomes. If reset, observation or policy work dominates, replacing the physics engine does not address the main cost. See [Discussion #334](https://github.com/huangkiki/Dexlab/discussions/334) for the full trade-offs and evidence limits.
+
+<a id="mujoco-workload-spectrum"></a>
+### Single-thread CPU comparison: 2.36–147.16× is a bottleneck spectrum
+
+RaiSim's MuJoCo page adds a single-thread CPU view: across ten valid workloads, median wall-clock ratios span 2.36–147.16×. Contact-heavy cases are about 2.4–4.8×, Strandbeest closed loops are 2.74×, cloth is 11.92×, and heightmap LiDAR and primitive rays are 25.71× and 147.16×. These numbers support workload-dependent ratios, not one global engine coefficient that can be moved across tasks. [Fixed document](https://github.com/raisimTech/raisim2Lib/blob/7cddae549d59f4ff3cbe05236f6c101fbab4894/docs/sections/Benchmark.md) · [Raw results](https://github.com/raisimTech/raisim2Lib/blob/7cddae549d59f4ff3cbe05236f6c101fbab4894/docs/public/benchmark_results.json)
+
+One `primitive_ray_scaling` workload shows why the timing boundary matters: the complete launcher takes 0.016 s in RaiSim and 2.427 s in MuJoCo (147.16×); the JSON separates median scene construction at about 7.31 ms versus 1,535.95 ms (about 210×), while a pure 10,000-ray query takes about 2.803 ms versus 836.698 ms (about 299×). If a task builds once and scans repeatedly, construction and query costs should drive different optimizations; construction joins the hot path only when it recurs after reset.
+
+The MuJoCo eight-cube deformable row must be excluded: the recorded variants use different particles, masses and collision radii, and QACC becomes `NaN/Inf/huge` at 0.020 s, roughly step 20. Although the launcher exits 0, the authors do not turn 9.17 s versus 0.445 s into a speedup. The evidence locates a first failure layer—deformable contact/deformation loses numerical finiteness within 20 ms—but not a unique material, geometry, iteration or solver cause. A causal test needs matched parameters and steps 0–20 of QACC, particle spacing, penetration, contact force, constraint residual and energy.
+
+For DexLab, the next step remains to decompose scene construction, steady physics, contact queries, LiDAR/rays, observations, policies, resets and recording before choosing an optimization layer. This MuJoCo 3.13.0 single-thread result also cannot be combined into a total ranking with the Newton page's MuJoCo Warp 3.17.0 FP32 GPU batches. See the [Discussion #334 supplement](https://github.com/huangkiki/Dexlab/discussions/334#discussioncomment-19645295) for the full failure-analysis gate and limits.
 
 <a id="benchmark-gaming-audit"></a>
 ### From scorer exploits to leaderboard gaming: what does a high score identify?
