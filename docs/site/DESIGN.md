@@ -171,7 +171,7 @@ components:
 
 The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a four-stage research trace and five pre-expanded topic groups. Fine rules and open rows carry the hierarchy.
 
-This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: the learning route's slim masthead, chapter rail, 760px reading column and section rail now frame reports, documentation and course pages as well. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
+This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: one global masthead, a 760px reading column and an optional current-page outline. The dedicated left chapter rail remains only on the course route, where it represents an ordered lesson sequence rather than the entire website. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
 **Key Characteristics:**
 
@@ -179,6 +179,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
 - The original architecture diagram followed by a scroll-linked research trace and asymmetric topic rows.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
+- A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
@@ -235,6 +236,8 @@ The research guide uses a fixed (190px) reading rail with six labeled groups and
 - At (1000px) and below, the guide rail becomes a static three-column group map above the article, and the main column centers at (900px).
 - At (760px) and below, the guide map, evidence grids, layer grid and experiment routes stack to one column.
 - At (600px) and below, the internal reading rail becomes a native “阅读目录” disclosure; its expanded groups use two columns and the article keeps a (22px) gutter. The separate guide map below the hero remains visible.
+
+The shared Sphinx reader centers a (760px) article with an optional (160px) current-page outline, inside a (1040px) maximum grid. It does not render a second full-site toctree. Pages without a useful outline collapse to an (840px) centered column. The Blog uses an (880px) centered index with no section rail. At (1200px) and below, the outline disappears and the article centers; at (800px) and below, the grid becomes a single flow with the shared page gutters.
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
@@ -318,7 +321,7 @@ Native explanations can be expanded together. Self-checks use labeled radios, a 
 
 ### Unified content reader
 
-Reports, experiment pages, project documentation and generated course pages share one responsive shell. The desktop page header, brand, navigation spacing, chapter rail, article heading, body measure, right section rail and footer match the learning route. The left rail contains the generated Sphinx document tree rather than a second hand-maintained list. The current document uses the same paper-wash selected state as a current lesson.
+Reports, experiment pages, project documentation and generated course pages share one responsive shell. The global masthead is the only site-level navigation. Long documents may add a single right-hand current-page outline; Blog and short pages omit it. There is no second left rail containing the full Sphinx tree. This reduces navigation from “global category → all-site tree → current page” to “global category → current page”.
 
 Sphinx-specific content keeps its native semantics: local toctrees become open ruled reading lists, tables scroll within the article, code blocks use the paper wash, admonitions use top and bottom rules, and existing video/replay/experiment components retain their controls and scripts. No report introduces rounded promotional cards, shadows, gradients or a separate palette.
 
@@ -331,6 +334,7 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Do** present the architecture diagram uncropped with its authored colors and a direct path to the original PNG.
 - **Do** use scroll motion only for the research trace and preserve complete content without JavaScript or with reduced motion.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
+- **Do** keep one global site navigation and at most one current-page outline in the shared reader.
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 - **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
@@ -344,4 +348,5 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
 - **Don't** turn the topic map into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
 - **Don't** append newly added systems or observations as more chapter numbers in the original guide sequence.
+- **Don't** restore the full-site Sphinx tree as a second left sidebar on article pages.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.

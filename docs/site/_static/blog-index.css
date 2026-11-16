@@ -5,8 +5,8 @@
 }
 
 body[data-reader-page="blog"] .learn-layout {
-  grid-template-columns: 240px minmax(0, 880px);
-  max-width: 1320px;
+  grid-template-columns: minmax(0, 880px);
+  max-width: 960px;
 }
 
 body[data-reader-page="blog"] .lesson-article {
@@ -98,7 +98,7 @@ body[data-reader-page="blog"] .section-rail {
 
 @media (max-width: 1200px) {
   body[data-reader-page="blog"] .learn-layout {
-    grid-template-columns: 220px minmax(0, 1fr);
-    max-width: 1120px;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 920px;
   }
 }
