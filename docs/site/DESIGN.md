@@ -9,6 +9,12 @@ colors:
   muted: '#60675a'
   rule: '#dcded4'
 typography:
+  hero-display:
+    fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
+    fontSize: 96px
+    fontWeight: 400
+    lineHeight: .88
+    letterSpacing: -.04em
   display:
     fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
     fontSize: 52px
@@ -163,15 +169,15 @@ components:
 
 **Creative North Star: "The Research Reading Index"**
 
-The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is a README-like cover with one content action: open the canonical research index. Fine rules and open rows keep attention on the reading destination.
+The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals a four-stage research trace and five pre-expanded topic groups. Fine rules and open rows carry the hierarchy.
 
 This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: the learning route's slim masthead, chapter rail, 760px reading column and section rail now frame reports, documentation and course pages as well. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
 **Key Characteristics:**
 
 - Warm paper and charcoal, with restrained green reading accents.
-- A horizontal masthead, serif opening title and one ruled content entrance at every supported width.
-- Open sections and ruled reading rows, with hierarchy carried by spacing and type.
+- A horizontal masthead, oversized serif opening title and one ruled content entrance.
+- A scroll-linked research trace followed by asymmetric, pre-expanded topic rows.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
@@ -201,11 +207,11 @@ The learning surface reuses these colors. Paper Wash also marks the current chap
 
 ## Typography
 
-The opening title and masthead use the serif stack; the body, section headings and controls use the sans-serif stack. Both use installed system fallbacks without an external font request. The homepage opening title is regular weight; directory and section headings are semibold, while topic headings inherit the browser's bold heading weight. Learning numbers return to the serif face.
+The opening title and masthead use the serif stack; the body, section headings and controls use the sans-serif stack. Both use installed system fallbacks without an external font request. The homepage opening title uses the 96px hero display at regular weight; the two-line thesis and major map headings return to the serif face. Topic headings and article titles use the sans stack at semibold or bold weight.
 
-Use display for the DexLab homepage title, headline for directory sections, title for research questions, body for reading text, label for navigation and caption for evidence explanations. The homepage lead is larger (18px) and limited to (700px); the entrance action is (20px) with a (15px) supporting summary.
+Use hero display for the DexLab title, display for the two-line thesis and map headings, title for research questions and topic headings, body for reading text, label for navigation and caption for evidence explanations. The homepage lead is (17px) and limited to (700px); the entrance action is (20px) with a (14px) supporting line.
 
-The homepage title remains (52px) down through the intermediate breakpoint. At (700px) and below it becomes (42px), the research-direction line (21px), the lead (16px), the entrance action (18px), and navigation labels (13px). The directory entrance stacks its arrow below the text rather than shrinking the action.
+The homepage title uses `clamp(4.2rem, 12vw, 6rem)`. At (700px) and below it becomes `clamp(4rem, 18vw, 5rem)`, the thesis (30px), map headings (36px), lead (16px), entrance action (18px), and navigation labels (13px). The entrance stacks its arrow below the text rather than shrinking the action.
 
 ### MuJoCo learning typography
 
@@ -213,12 +219,13 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 ## Layout
 
-The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. Brand, navigation and language/repository links use the same reading header as content pages rather than a fixed side rail.
+The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The cover column has a maximum width of (980px), a (64px) top inset and (96px) bottom padding. It contains the DexLab title, one research-direction line, one explanatory paragraph and one ruled directory entrance. The entrance remains a single row on desktop and stacks its text with the arrow below on narrow screens.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The research trace uses a sticky left statement and a four-stage right column. The topic map then uses one ruled row per theme: an editorial heading on the left and direct article links in two columns on the right. A final ruled action opens the exhaustive Blog index.
 
-- At (1100px) and below, the masthead wraps navigation onto a second row bounded by horizontal rules; the cover keeps its centered maximum width and (32px) gutters.
-- At (700px) and below, gutters become (22px), title size becomes (42px), navigation labels are (13px), and the entrance summary wraps within the same ruled action.
+- At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and the trace and topic columns use tighter gaps.
+- At (800px) and below, the trace and topic rows stack into one column; the left statement stops being sticky.
+- At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow.
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
@@ -236,25 +243,45 @@ There are no shadows, gradients or decorative transitions. Thin rules, whitespac
 
 **The Flat Reading Rule.** Use spacing, type and fine rules to separate content without enclosing it in raised panels.
 
+## Motion
+
+**Motion thesis:** one scroll relationship explains how a failed task becomes a checked finding. The vertical trace and reached node are the focal sequence; the page-progress hairline provides quiet orientation. Article rows do not receive repeated entrance animations.
+
+The trace uses a transform-only draw at roughly a (120ms) linear response cadence to follow scroll, while stage contrast and the node fill settle over (220–320ms) with `cubic-bezier(.16, 1, .3, 1)`. The sticky current-stage label changes as the line reaches a stage. There is no autoplay loop, parallax or unrelated hover motion.
+
+With `prefers-reduced-motion: reduce`, the trace is complete from the start, all stages retain their active-level contrast, and no draw transition runs. Scroll remains the only way the sequence advances.
+
 ## Shapes
 
-The homepage defines no rounded-corner scale. Its directory entrance remains unfilled, and learning numbers are plain serif numerals. Reading entries are open rows with single-pixel rules; chapter and engine links wrap within similarly open ruled groups.
+The homepage defines no component radius scale. Its directory entrance and topic rows remain unfilled; the research-trace nodes are (13px) editorial circles, not controls. Learning numbers are plain serif numerals. Chapter and engine links wrap within similarly open ruled groups.
 
 The course reader's `learning-control` radius belongs only to its outlined buttons and chapter links. The teaching panel remains rectangular; native ranges, radios, progress and disclosures keep their browser affordances. The filled read button is an explicit reading state, not a homepage action style.
 
 ## Components
 
-### README entrance and navigation
+### Research entrance and navigation
 
-The homepage shows one project title and one primary content action. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (15px) explanatory summary and a (22px) inline arrow. It turns green on hover and focus without becoming a filled button.
+The first screen shows the project title, a two-line research thesis, a scope paragraph and one primary content action. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
 
 Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. Language and repository links stay beside the masthead. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
+
+### Scroll-linked research trace
+
+The trace is the page's single authored motion moment. A fine vertical rule marks the complete path; a green line draws over it as the stage advances. Four open stages describe task failure, first failing layer, the skill/simulation fork and independent retest. The reached marker and active heading turn Reading Green, while the sticky summary names the current stage. Every stage keeps full readable contrast rather than being hidden or faded below body-text contrast.
+
+A hairline page-progress rule stays at the top as supporting orientation. The enhancement is driven by passive scroll updates with `requestAnimationFrame`; without JavaScript the complete trace and all stages remain visible. Under reduced motion the trace is shown complete, no draw transition runs, and the current-stage state remains textual.
+
+### Topic map
+
+Five ruled topic rows put the category name and question on the left and direct article titles on the right. Research guide, contact/physics, failure/diagnosis, policy/skills/evaluation and simulation learning use the same row grammar but keep their own emphasis: the first row leads with the full guide title and chapter anchors; policy includes the skill-memory link; learning leads with the on-site route. No row hides its contents behind a tab, accordion or category page.
+
+A final open band names the exhaustive catalogue and opens the canonical Blog. Its serif statement and arrow are larger than ordinary link rows, making it the only closing call to action.
 
 ### Blog index and reading rows
 
 The Chinese Blog is a first-class reader page and the canonical complete content index. A short jump row links to five sections: research guide, contact and physics, failure and diagnosis, policy/skills/evaluation, and simulation learning. All headings, article rows and course links remain visible without tabs or hidden panels. The policy section divides into four two-column subtopics. The page omits the right-hand outline rail and uses a wider reading column so the grouped index is visible at once.
 
-The homepage has exactly one content action into this index. Legacy `#blog` links resolve to `blog.html`; the English Blog entry points to the same canonical Chinese index.
+The homepage opens this index from both the first-screen action and the closing catalogue band. Legacy `#blog` links resolve to `blog.html`; the English Blog entry points to the same canonical Chinese index.
 
 ### Learning and knowledge bridges
 
@@ -280,6 +307,7 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 
 - **Do** keep the homepage aligned with the article's warm paper, serif opening title and green links.
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
+- **Do** use scroll motion only for the research trace and preserve complete content without JavaScript or with reduced motion.
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 - **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
@@ -290,4 +318,5 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Don't** restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.
 - **Don't** reintroduce the old wide Sphinx report shell or restore per-page report palettes; the separate browser application remains outside this reading system.
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
+- **Don't** turn the topic map into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.

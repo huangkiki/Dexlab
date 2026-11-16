@@ -1,17 +1,19 @@
 # Research homepage
 
-Mode: Read. Code-led implementation. Scope: bilingual homepages, their template and stylesheet. The homepage is a minimal README-like cover with one visible content action: open the canonical Chinese research index.
+Mode: Read. Code-led implementation. Scope: bilingual homepages, their template, stylesheet and scroll enhancement. The homepage is a research entrance whose first screen contains one primary index action, followed by a scroll-linked research trace and five pre-expanded topic groups.
 
 ## Direction contract
 
-THESIS: Separate the front door from the library. The homepage introduces DexLab and hands the reader to one complete, pre-expanded research index; it does not reproduce selected findings, the Blog or the learning route.
+THESIS: Make the space between arrival and the full index readable. The visitor understands DexLab's research direction, sees how failures become checked findings, and meets the actual article titles while scrolling; the canonical Blog remains the exhaustive catalogue.
 
-OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif opening title and fine rules. Use one horizontal masthead and a single ruled entrance row; open structure replaces promotional panels.
+OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif display title and fine rules. Use an editorial long page, an unboxed vertical trace and asymmetric open topic rows; no cards, gradients or decorative depth.
 
-STORY: Understand the research direction, open the directory once, then choose an article from visible category lists. RSI remains a direction without claiming a completed autonomous loop.
+STORY: The task fails, the reader follows the first failing layer, sees the skill/simulation fork, and reaches independent retest. The page then opens five reading threads with direct article links. RSI remains a direction without claiming a completed autonomous loop.
 
-FIRST VIEWPORT: A compact horizontal DexLab masthead, a short project statement and one full-width ruled link labelled 打开研究内容目录. The link preview names the categories and explains that article titles are already visible on the destination page. Mobile keeps the same reading order and a large touch target; no decorative motion.
+FIRST VIEWPORT: A horizontal masthead, oversized DexLab title, two-line research thesis, short scope note, one ruled index action and a quiet downward cue. The primary action remains visible without requiring the motion layer. Mobile preserves the same order, with the scroll cue moved into normal flow.
 
-FORM: User-pinned README-like research cover, matching the existing article. No concept tournament or generated comp. Seed: none (user-pinned).
+FORM: User-directed editorial scroll, matching the existing article. No concept tournament or generated comp. Seed: none (user-pinned).
+
+MOTION: One scroll-linked vertical trace draws through the four research stages. The current stage and the thin page-progress rule provide orientation; topic rows stay visible and do not receive repeated fade-and-rise entrances. Reduced motion leaves the complete trace and all text visible without the draw transition.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
