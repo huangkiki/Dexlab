@@ -178,12 +178,15 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
 - The original architecture diagram followed by a scroll-linked research trace and asymmetric topic rows.
+- A grouped research-guide taxonomy that separates core reading, evidence, 2026 observations and systems/policies.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
 Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` and `_static/blog-index.css` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
+
+The standalone research guide in `_static/research/dexterous-simulation.html` keeps its self-contained HTML and filters. Its taxonomy and responsive page contract are recorded in `.impeccable/surfaces/research-guide.md`.
 
 ## Colors
 
@@ -226,6 +229,12 @@ The first screen is at least the viewport height minus the masthead. The DexLab 
 - At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and the trace and topic columns use tighter gaps.
 - At (800px) and below, the architecture introduction, trace and topic rows stack into one column; the left statement stops being sticky.
 - At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow. The architecture image keeps an (820px) reading width inside a keyboard-focusable horizontal scroll region.
+
+The research guide uses a fixed (190px) reading rail with four labeled groups and the same four-entry guide map below the opening statistics. The map is an open two-column set of ruled rows, not cards. Core evidence items use a two-column grid; the six problem layers use two columns; the three starting experiments use three equal open columns. Long prose remains at its (740px) reading measure, while grouped evidence can use (900px).
+
+- At (1000px) and below, the guide rail becomes a static four-column group map above the article, and the main column centers at (900px).
+- At (760px) and below, the guide map, evidence grids, layer grid and experiment routes stack to one column.
+- At (600px) and below, the group map uses two columns and the article keeps a (22px) gutter.
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
@@ -283,6 +292,12 @@ Five ruled topic rows put the category name and question on the left and direct 
 
 A final open band names the exhaustive catalogue and opens the canonical Blog. Its serif statement and arrow are larger than ordinary link rows, making it the only closing call to action.
 
+### Research-guide lanes
+
+The research guide uses four semantic lanes rather than a single numbered sequence: 核心导读, 证据索引, 2026 观察 and 系统与策略. A two-column open guide map repeats these lanes below the opening counts. The desktop rail uses the same group labels, and the current destination receives `aria-current="location"` without moving content.
+
+Core reading keeps a (740px) prose measure but allows equivalent evidence groups to share a (900px) editorial field. The six-layer problem model uses two columns; seven key paper trade-offs use two columns with the odd final item spanning both; the three proposed experiments use three open columns. Borders stay above or below groups rather than enclosing cards. Appendix labels switch from global sequence numbers to `2026 / ...` or `SYSTEM / ...` so dated additions do not masquerade as one continuing chapter list.
+
 ### Blog index and reading rows
 
 The Chinese Blog is a first-class reader page and the canonical complete content index. A short jump row links to five sections: research guide, contact and physics, failure and diagnosis, policy/skills/evaluation, and simulation learning. All headings, article rows and course links remain visible without tabs or hidden panels. The policy section divides into four two-column subtopics. The page omits the right-hand outline rail and uses a wider reading column so the grouped index is visible at once.
@@ -315,6 +330,7 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
 - **Do** present the architecture diagram uncropped with its authored colors and a direct path to the original PNG.
 - **Do** use scroll motion only for the research trace and preserve complete content without JavaScript or with reduced motion.
+- **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 - **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
@@ -327,4 +343,5 @@ Sphinx-specific content keeps its native semantics: local toctrees become open r
 - **Don't** crop the architecture diagram or shrink it below readable label size on mobile.
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
 - **Don't** turn the topic map into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
+- **Don't** append newly added systems or observations as more chapter numbers in the original guide sequence.
 - **Don't** invent component variants, radius scales or motion tokens absent from the implementation.
