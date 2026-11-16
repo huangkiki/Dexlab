@@ -8,6 +8,7 @@ Selection <selection>
 Solver configuration roles <solver-taxonomy>
 Solver synchronization and preCICE <solver-coupling>
 Co-evolution and model evaluation <model-evaluation>
+Code as Policy topic <code-as-policy>
 Uranus generative environment backend <uranus-backend>
 ```
 

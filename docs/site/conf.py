@@ -43,7 +43,7 @@ html_context = {
 def setup(app):
     # Sphinx reports linked from the English homepage's Blog topics.
     blog_reports = {
-        'contact-response', 'failure-root-cause-atlas', 'model-evaluation',
+        'code-as-policy', 'contact-response', 'failure-root-cause-atlas', 'model-evaluation',
         'robodojo-bread-slip', 'rss-wiping', 'solver-taxonomy', 'wuji-contact',
     }
     lessons = [

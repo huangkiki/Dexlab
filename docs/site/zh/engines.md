@@ -8,6 +8,7 @@
 求解配置分层 <solver-taxonomy>
 多求解器同步与 preCICE <solver-coupling>
 共同进化与模型评测 <model-evaluation>
+Code as Policy 专题 <code-as-policy>
 Uranus 生成式环境后端 <uranus-backend>
 ```
 
