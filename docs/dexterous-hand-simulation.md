@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-16 addition: [COAP: auditable state, task programs and first-failure layers](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#coap).** The useful transfer is explicit state, a task/primitive boundary and controlled code changes, not a wholesale switch to code-only policies.
+
 **2026-11-15 addition: [separate throughput, cost and the complete training loop](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop).** In RaiSim's vendor-authored comparison, small batches, large batches, FP32/FP64 and different contact work do not collapse into one engine score.
 
 **2026-11-13 addition: [RoboColiseum: command replay, simulation validity, and complete-task evaluation](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#robocoliseum).** Discussion first, then transferable mechanisms and timing, reaction-force, and validation boundaries.
@@ -415,6 +417,28 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3) de
 **DexLab should retain its scorer-audit priority, organize the input–response–contact–score chain for one existing qualified record, then design independent conditions and both budgets.** Without hardware data, internal consistency remains useful but is not Real2Sim calibration. Defer a wholesale platform migration until the first failing layer establishes a need for new material/contact capability; production integration retains the existing UniSim boundary. This November 13, 2026 review checked reports, figures, and pinned source only. It ran no external model/physics experiment, changed no DexLab physics implementation, and leaves the original paper/repository screening counts unchanged.
 
 
+<a id="coap"></a>
+## COAP: auditable state, task programs and first-failure layers
+
+**2026-11-16 distillation: [full discussion and validation gates](https://github.com/huangkiki/Dexlab/discussions/335).** The durable lesson from [Code-Only-as-Policy](https://arxiv.org/abs/2610.12369) is not that a code policy reports 70.24% on one RoboDojo version. It is that robot/environment/task state, task logic and diagnostic changes can be made inspectable and versioned. This does not justify replacing DexLab's physics backend or acceptance contract.
+
+Use the existing toast-slip case. The close command stayed at `0`, bilateral normal impulse decayed, and the slice escaped a shallow pinch. A COAP-style record would connect task stage, requested motion, achieved pose, finger–object relative pose, contact establishment/loss, hold check, carry speed, object response and score. “Deepen the grasp”, “reject a narrow pinch”, “lower carry speed” and “contact parameters are mismatched” then become competing explanations with a shared evidence chain. This is an explanatory example, not an additional author experiment.
+
+Three mechanisms transfer:
+
+1. **Explicit state makes decision premises auditable.** Robot, environment and task state are distinct; measurements retain source, error and time rather than remaining implicit in weights or context.
+2. **Task logic and shared primitives are separated.** Task programs specify ordering, parameters, recovery and termination; shared perception, motion and manipulation code defines how operations execute. DexLab does not need the library, but should preserve state ownership across task, controller, contact readback and scoring.
+3. **Changes require compatibility and held-out evidence.** The authors report runnable code branches, numeric/kinematic checks, validation margins above rerun noise, and default-off shared-code extensions that keep old call paths unchanged.
+
+On 42 simulated bimanual RoboDojo tasks, the paper reports 70.24% SR, versus 29.64% for the strongest WAM and 27.96% for the strongest VLA; about 83% of code run by new tasks comes from the shared library. Its failure labels assign 62% to state measurement and 37% to code logic using the smallest preventing change. These are author-reported results under one public benchmark configuration, not cross-embodiment or hardware constants.
+
+Boundaries matter: all results are simulated; camera calibration, meshes, object dimensions and table height come from benchmark constants; every task still needs code and offline development; the failure labels are diagnostic categories rather than independent physical root-cause shares; and no author code release was found in the checked version and public GitHub search. Inputs, budgets, model versions and evaluators differ from the current RoboDojo/Astra record, so total scores alone do not establish a matched policy ranking.
+
+**First DexLab step:** retain one qualified toast-slip or slot-contact record, then add the chain `task stage → requested action → achieved pose → contact/hold state → object 6D response → score`, with `value / source / time / uncertainty` and commanded, measured, estimated and scored values kept distinct. Change only grasp depth or carry speed under the same initial condition. Acceptance is a clearer first-failure layer, a reproducible state chain, complete failure denominators and an unchanged legacy path—not merely a higher success rate.
+
+If this chain does not improve attribution or reproducibility, do not build a shared policy library. If the dominant error remains scoring or physical response, retain the scorer-audit or contact-calibration priority. Defer automated RSI, a general task library and code success as a substitute for physical/hardware acceptance. Checked on 2026-11-16 against paper `2610.12369v1`; no code reproduction, model run, physics rerun or hardware experiment was performed here.
+
+
 ## Sources and maintenance scope
 
 This public guide adapts the research note “What are we discussing when we discuss dexterous manipulation simulation?”, created on 2026-09-10 and supplemented on 2026-09-14. It preserves the six-layer framework, research approaches and evidence boundaries. On **2026-11-02**, the cited official abstracts, documentation and published DexLab cases were checked; HydroShear and Dex-X links were updated to v2 and v3 respectively. This did not repeat the original note's complete literature screening or carry old-version details into newer versions without verification.
@@ -422,3 +446,5 @@ This public guide adapts the research note “What are we discussing when we dis
 On 2026-11-03, the author's original self-contained HTML was published at their request, retaining its September sources and verification scope, with October work appended separately. This page remains the shorter companion. Outside papers are not DexLab replications; proposed studies still require separately frozen protocols. The original snapshot SHA-256 is `2c41d2ee32f8094298d2398e3950d5b749a3030a62a07e25128df6d709823c00`.
 
 On 2026-11-12, the RLT/CAP precision-insertion boundary was added after static review of the papers, official project page and public repository entry points. No policy, checkpoint, simulator or hardware experiment was run. The Discussion records the full reasoning first; this guide retains only the durable conclusion.
+
+On 2026-11-16, the COAP state-evidence and code-change gates were added without changing the current scorer-audit priority or claiming an external reproduction. The full reasoning and version boundaries are in [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335).
