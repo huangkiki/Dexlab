@@ -14,3 +14,19 @@ DexLab 从这样的具体问题出发，**用任务暴露问题，用对照实�
 
 <a id="architecture"></a>
 <a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab 架构示意：任务与协议、被测系统、动作执行、环境后端、证据与评分"></a>
+
+## 引用
+
+如果你在研究中使用了 DexLab，请引用本仓库：
+
+```bibtex
+@misc{huang2026dexlab,
+  author = {Kiki Huang},
+  title = {DexLab: Robotics Simulation Solver Diagnosis and Selection},
+  year = {2026},
+  url = {https://github.com/huangkiki/Dexlab},
+  note = {GitHub repository}
+}
+```
+
+GitHub 也会读取 [`CITATION.cff`](CITATION.cff) 提供一键引用。
