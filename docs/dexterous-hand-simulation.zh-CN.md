@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-16 专题增补：[CaP-X 与 ASPIRE：先验证反馈，再晋升技能](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#capx-aspire)。** 两篇同属 Code-as-Policy：CaP-X 把 API 抽象层级和反馈通道变成受控变量；ASPIRE 要求失败修复经隔离复现后才进入技能库。DexLab 先借这两道证据门，不先迁移整套 Agent。
+
 **2026-11-16 专题增补：[COAP：可审计状态、任务程序与首次失效层](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#coap)。** 最值得借的不是“纯代码超过 VLA”，而是显式状态、任务/原语分层和受控代码改动；DexLab 先把它用于一条已有接触失败记录，不整体切换策略路线。
 
 **2026-11-15 专题增补：[把吞吐、成本和完整训练闭环分开](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop)。** 以 RaiSim 供应商自建的 CPU MuJoCo 与 GPU Newton 对照为例，小批量、大批量、FP32/FP64、射线查询与不同接触工作不能压成一个引擎总分。
@@ -449,6 +451,22 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描
 核查于 2026-11-16，论文 `2610.12369v1`。本轮读取摘要、方法、层级、失败分类、扩展/RSI 统计与限制，没有公开代码复现、模型推理、物理重跑或真机实验；原论文与仓库筛选统计不变。
 
 
+(capx-aspire)=
+## CaP-X 与 ASPIRE：先验证反馈，再晋升技能
+
+**2026-11-16 蒸馏：[CaP-X 完整讨论](https://github.com/huangkiki/Dexlab/discussions/341)与 [ASPIRE 完整讨论](https://github.com/huangkiki/Dexlab/discussions/342)。** 两篇都是 Code-as-Policy，但给 DexLab 的启发应分开：CaP-X 是实验设计模板，ASPIRE 是技能记忆的准入协议。
+
+仍以“闭爪后法向冲量衰减、面包滑落”为例。高层反馈只会留下“抓取函数已调用、最后失败”；结构化视觉差分可以说“搬运中物体先移动、后离开夹爪”；逐原语 trace 才能把闭爪命令、实际指宽、相对位姿、冲量和首次滑移放到同一时间轴。若提出“增加抓取深度并低速试提”，这仍只是候选修复；只有验证者在不看原修复代码时，凭失败签名、触发条件和修复说明在留出场景复现，才能晋升为共享技能。
+
+[CaP-X](https://arxiv.org/abs/2603.22435)最值得借的是受控变量：API 从人工高层宏切到低层原语、单轮切到多轮、反馈从终态文本切到 RGB 或结构化视觉差分，并保留模型、提示和采样预算。作者报告高层抽象提高分数，移除后性能下降；文本化的视觉差分通常比直接交错原图更适合程序修复。因此策略比较不能只报总分，必须登记抽象层、交互轮数和反馈表达。其固定源码仍主要从成功 trial 抽取函数，评分器若接受错误成功，技能库也会固化错误。
+
+[ASPIRE](https://arxiv.org/abs/2607.00272)进一步把逐原语 trace、修复技能、独立验证和留出评测接起来。当前公开实现要求 fresh verifier 看不到提出者最终程序，以 5 个开发 seed、最多 2 次尝试、至少 4/5 成功作为单次晋升门槛；文档同时明确，这证明文字能传递修复，不证明跨任务泛化。作者并报告细粒度执行引擎比再增加进化搜索带来更大的主要收益；进化搜索应解决明确平台期，而不是成为默认开销。
+
+**DexLab 的优先顺序：**先为一个已有失败案例建立反馈契约，并比较“终态/视觉进度”与“逐原语/接触状态”两种观察包的归因能力；再把根因整理成 `失败签名 → 触发前提 → 修复动作 → 适用边界 → 支持证据 → 反例/未测范围` 的 skill card；最后才评估技能库晋升、进化搜索或反向重跑。被测程序不能读取 reward、success 或 privileged state；开发与留出 seed 分开，`verified_once`、`transferred` 和 `refuted` 不得混写。
+
+最小验收不是平均成功率上升，而是首次失效层更明确、proposal 在隔离条件下可复现、反例能阻止错误触发、失败分母不变且留出结果未回流调参。若反馈没有改善归因，先改测量选择性；若主要误差来自评分或物理，仍回到 scorer audit 或接触标定。本轮核查 CaP-X `2603.22435v2`、固定源码 `53e9966d`，以及 ASPIRE `2607.00272v2`、固定源码 `fa00f0ef`；没有运行外部 Agent、仿真、物理重跑或真机实验，全部性能数字均为作者报告。
+
+
 ## 来源与维护范围
 
 本文由 2026-09-10 建立、2026-09-14 补充的《当我们在讨论灵巧操作仿真时，我们在讨论什么》研究笔记整理为公开导读，保留六层框架、研究路线和证据边界。**2026-11-02** 核对了本文引用的官方摘要、文档与 DexLab 已发表案例；HydroShear 和 Dex-X 的入口分别更新到 v2、v3。这里没有重新完成原笔记的全部文献筛选，也没有将旧版细节无条件移植到新版。
@@ -458,3 +476,5 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描
 2026-11-12 增补 RLT / CAP 精细插接边界，依据论文、官方项目页与公开仓库入口做静态核查；没有运行策略、checkpoint、仿真或真机实验。Discussion 先行记录取舍，页面只保留长期结论。
 
 2026-11-16 增补 COAP 的状态证据与代码改动门槛。该节沿用现有评分审计优先顺序，没有新增策略实现、实验或外部复现；完整讨论与版本边界见 [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335)。
+
+2026-11-16 增补 CaP-X / ASPIRE 的反馈契约与技能晋升门槛。两者分别以实验设计和技能准入影响后续评测，不代表已采用代码 Agent、自动技能库或进化搜索；完整讨论见 [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341) 与 [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342)。
