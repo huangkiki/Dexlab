@@ -72,7 +72,7 @@
   </header>
 
   <div class="reading-paths">
-    <a class="reading-path" href="#architecture">
+    <a class="reading-path" href="#architecture-heading">
       <span>01 / Project</span>
       <strong>What DexLab is, and how a task becomes evidence.</strong>
       <small>Positioning, system architecture and research loop</small>

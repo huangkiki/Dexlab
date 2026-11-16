@@ -72,7 +72,7 @@
   </header>
 
   <div class="reading-paths">
-    <a class="reading-path" href="#architecture">
+    <a class="reading-path" href="#architecture-heading">
       <span>01 / 项目</span>
       <strong>DexLab 是什么，以及任务如何走到证据。</strong>
       <small>项目定位、系统架构与研究闭环</small>
