@@ -36,10 +36,24 @@ body[data-reader-page="search"] .reader-layout {
   max-width: 840px;
 }
 
+body[data-reader-page="visual-comparisons"] .reader-layout {
+  grid-template-columns: minmax(0, 960px) 160px;
+  max-width: 1200px;
+}
+
+body[data-reader-page="visual-comparisons"] .lesson-article {
+  max-width: 960px;
+}
+
 @media (max-width: 1200px) {
   .reader-layout {
     grid-template-columns: minmax(0, 760px);
     max-width: 840px;
+  }
+
+  body[data-reader-page="visual-comparisons"] .reader-layout {
+    grid-template-columns: minmax(0, 960px);
+    max-width: 960px;
   }
 }
 

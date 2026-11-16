@@ -219,6 +219,24 @@ def replay_html(case, language):
     bundle = read_bundle(ROOT / first)
     video = bundle["videos"][0]
     attrs = html.escape(json.dumps(variants, ensure_ascii=False), quote=True)
+    launch = {
+        "incline": {
+            "zh": "加载六引擎同步回放与逐帧曲线",
+            "en": "Load the six-engine synchronized replay and frame-by-frame curves",
+        },
+        "normal": {
+            "zh": "加载法向校准回放与响应曲线",
+            "en": "Load the normal-response replay and curves",
+        },
+        "pinch": {
+            "zh": "加载 0.4 N／0.8 N 夹持边界回放",
+            "en": "Load the 0.4 N / 0.8 N pinch-boundary replay",
+        },
+        "libero": {
+            "zh": "加载 LIBERO 原任务与 1 ms 对照回放",
+            "en": "Load the LIBERO native-task and 1 ms comparison replay",
+        },
+    }[case["id"]][language]
     caption = (
         "静态图表与完整数据（无需 JavaScript）"
         if language == "zh"
@@ -244,9 +262,9 @@ def replay_html(case, language):
     return "\n".join(
         [
             "```{raw} html",
-            f'<div class="dexlab-replay" data-language="{language}" data-variants="{attrs}">',
+            f'<div class="dexlab-replay" data-language="{language}" data-launch="{html.escape(launch, quote=True)}" data-variants="{attrs}">',
             f'<div class="visual-hero"><img loading="lazy" src="_static/visual/{video["poster"]}" alt="{html.escape(case["title"][language])}"></div>',
-            f'<details class="replay-fallback" open><summary>{caption}</summary><img loading="lazy" src="_static/visual/{stem}-curves{".zh" if language == "zh" else ""}.svg" alt="{caption}"><ul>{"".join(downloads)}</ul></details>',
+            f'<details class="replay-fallback"><summary>{caption}</summary><img loading="lazy" src="_static/visual/{stem}-curves{".zh" if language == "zh" else ""}.svg" alt="{caption}"><ul>{"".join(downloads)}</ul></details>',
             "</div>",
             "```",
             "",
@@ -254,16 +272,224 @@ def replay_html(case, language):
     )
 
 
+COMPARISON_CLAIMS = {
+    "incline": {
+        "zh": "在这组固定配置中，没有任何引擎通过全部九例。差异集中在静止漂移、滑动受力响应，以及名义零摩擦时的有效接触。",
+        "en": "Under these fixed settings, no engine passes all nine cases. The differences separate into static drift, sliding force response, and effective contact at nominal zero friction.",
+    },
+    "normal": {
+        "zh": "参数校准可以把这组夹具的加载响应带到合成目标附近，但固定参数直接迁移到其他质量时会失效；明确写出质量补偿后，两个迁移载荷才重新接近目标。",
+        "en": "Parameter calibration brings this fixture's loaded response close to the synthetic target, but fixed parameters do not transfer to other masses. A predeclared mass conversion restores both transfer loads.",
+    },
+    "pinch": {
+        "zh": "在同一夹具中，保持边界位于 0.4 N 与 0.8 N 之间；±2 mm 初态偏移没有改变这条边界。",
+        "en": "In this fixture, the retention boundary lies between 0.4 N and 0.8 N. A ±2 mm initial offset does not move that boundary.",
+    },
+    "libero": {
+        "zh": "1 ms 没有改善原任务成功率，反而让物理诊断从 5/10 降到 3/10，并使原生步进成本约翻倍。",
+        "en": "A 1 ms step does not improve native task success. It reduces physical screens from 5/10 to 3/10 and roughly doubles native stepping cost.",
+    },
+}
+
+COMPARISON_GUIDES = {
+    "incline": {
+        "watch": {
+            "zh": "在同一两秒窗口内，看方块是否保持、转动或失去支撑；每个画面同时标出运行状态。",
+            "en": "In the same two-second window, see whether the cube holds, rotates or loses support; each pane also reports its outcome.",
+        },
+        "limit": {
+            "zh": "画面相似不等于物理等价；通过或失败仍由同时间轴的力、位移和速度判据决定。",
+            "en": "Similar video does not establish physical equivalence; force, displacement and velocity criteria on the shared clock decide the result.",
+        },
+    },
+    "normal": {
+        "watch": {
+            "zh": "先看加载窗的压入量，再看卸载、离面段和其他质量下的响应是否仍接近目标。",
+            "en": "Inspect indentation during loading, then whether unloading, separation and other masses remain close to the target.",
+        },
+        "limit": {
+            "zh": "画面不能证明材料真实刚度；有效响应只在声明的夹具、载荷和合成目标内成立。",
+            "en": "The video does not establish real material stiffness; the response is limited to the declared fixture, loads and synthetic target.",
+        },
+    },
+    "pinch": {
+        "watch": {
+            "zh": "依次看闭合、抬升、保持和释放，重点确认物体相对指面是否持续滑移。",
+            "en": "Watch closing, lift, hold and release in order, focusing on continued object slip relative to the fingers.",
+        },
+        "limit": {
+            "zh": "抬起或离开画面不等于完成保持；张开负例与原生物体运动共同防止错误成功。",
+            "en": "Lifting or leaving the frame is not valid retention; the open negative and native object motion prevent false success.",
+        },
+    },
+    "libero": {
+        "watch": {
+            "zh": "先确认两种步长都完成原任务，再对照同一动作下的接触重叠、相对高度和法向力。",
+            "en": "First verify both timesteps complete the native task, then compare overlap, relative height and normal force under the same actions.",
+        },
+        "limit": {
+            "zh": "原任务成功不能替代物理筛查；画面也不能唯一解释 5/10 到 3/10 的退化。",
+            "en": "Native task success does not replace physical screening, and the video does not uniquely explain the 5/10 → 3/10 regression.",
+        },
+    },
+}
+
+REPLAY_SERIES_LABELS = {
+    "mujoco": ("MuJoCo", "MuJoCo"),
+    "superdex": ("SuperDex", "SuperDex"),
+    "genesis": ("Genesis", "Genesis"),
+    "newton": ("Newton Physics", "Newton Physics"),
+    "physx": ("PhysX", "PhysX"),
+    "drake": ("Drake", "Drake"),
+    "initial-mujoco": ("初始 MuJoCo", "Initial MuJoCo"),
+    "validation-mujoco-reference": ("校准后 MuJoCo", "Calibrated MuJoCo"),
+    "dev-cap-0.4": ("0.4 N 力限额", "0.4 N limit"),
+    "dev-cap-0.8": ("0.8 N 力限额", "0.8 N limit"),
+    "dev-open": ("张开负例", "Open negative"),
+    "baseline": ("原版 2 ms", "Original 2 ms"),
+    "step-1000us": ("对照 1 ms", "1 ms control"),
+}
+
+
+def comparison_summary(case, row, language):
+    zh = language == "zh"
+    claim = COMPARISON_CLAIMS[case["id"]][language]
+    return "\n".join(
+        [
+            '<div class="comparison-summary">',
+            f'  <p class="comparison-claim"><strong>{"结论" if zh else "Conclusion"}</strong> {html.escape(claim)}</p>',
+            '  <div class="comparison-terms">',
+            f'    <p><strong>{"实验条件" if zh else "Setup"}</strong> {html.escape(row[language]["condition"])}</p>',
+            f'    <p><strong>{"结论边界" if zh else "Scope"}</strong> {html.escape(row[language]["boundary"])}</p>',
+            "  </div>",
+            "</div>",
+            "",
+        ]
+    )
+
+
+def replay_guide(case, language):
+    zh = language == "zh"
+    first = case["variants"][0]["data"]["path"]
+    bundle = read_bundle(ROOT / first)
+    names = []
+    for video in bundle["videos"]:
+        for name in video["series"]:
+            pair = REPLAY_SERIES_LABELS.get(name.lower())
+            names.append(pair[0 if zh else 1] if pair else name.replace("-", " "))
+    return "\n".join(
+        [
+            '<div class="replay-guide" aria-label="'
+            + ("同步回放阅读说明" if zh else "Synchronized replay reading guide")
+            + '">',
+            f'  <p><strong>{"画面顺序" if zh else "Pane order"}</strong> {html.escape(" / ".join(names))}</p>',
+            f'  <p><strong>{"看什么" if zh else "What to watch"}</strong> {html.escape(COMPARISON_GUIDES[case["id"]]["watch"][language])}</p>',
+            f'  <p><strong>{"不要直接推出" if zh else "Do not infer"}</strong> {html.escape(COMPARISON_GUIDES[case["id"]]["limit"][language])}</p>',
+            "</div>",
+            "",
+        ]
+    )
+
+
+def comparison_table(case, language):
+    zh = language == "zh"
+    if case["id"] == "incline":
+        caption = (
+            "固定发布配置的分条件结果（通过数 / 该条件三例）"
+            if zh
+            else "Published fixed configurations by condition (passes / three cases per condition)"
+        )
+        headers = (
+            ["引擎与配置", "静止", "滑动", "名义零摩擦", "总计"]
+            if zh
+            else ["Engine and configuration", "Static", "Sliding", "Nominal zero friction", "Total"]
+        )
+        rows = [
+            ("MuJoCo", "3.15 · PGS / elliptic", [("0 / 3", "fail"), ("0 / 3", "fail"), ("3 / 3", "pass"), ("3 / 9", "fail")]),
+            ("SuperDex", "1.0 · Newton / AUTO / C1", [("2 / 3", "mixed"), ("3 / 3", "pass"), ("3 / 3", "pass"), ("8 / 9", "mixed")]),
+            ("Genesis", "1.4.3 · Newton / elliptic / Signorini", [("3 / 3", "pass"), ("3 / 3", "pass"), ("0 / 3", "fail"), ("6 / 9", "mixed")]),
+            ("Newton Physics", "1.6.1 · XPBD / 100 sweeps", [("1 / 3", "mixed"), ("0 / 3†", "invalid"), ("0 / 3†", "invalid"), ("1 / 9†", "invalid")]),
+            ("PhysX", "5.9.0 · PGS / patch friction", [("3 / 3", "pass"), ("2 / 3†", "mixed"), ("2 / 3", "mixed"), ("7 / 9†", "mixed")]),
+            ("Drake", "1.57 · SAP / kLagged / hydroelastic", [("3 / 3", "pass"), ("0 / 3", "fail"), ("3 / 3", "pass"), ("6 / 9", "mixed")]),
+        ]
+        note = (
+            "† 无效记录保留在分母中，不计为通过；不能解释成物理失败。"
+            if zh
+            else "† Invalid records remain in the denominator; they are not passes and are not physical failures."
+        )
+    elif case["id"] == "normal":
+        caption = "加载窗口的有效响应（合成目标 20 kN/m）" if zh else "Effective loaded-window response against the synthetic 20 kN/m target"
+        headers = ["阶段", "实测响应", "目标或检查", "读法"] if zh else ["Stage", "Measured response", "Target or check", "Reading"]
+        rows = [
+            ("初始配置", "MuJoCo · 0.2 kg", [("≈80 kN/m", "plain"), ("20 kN/m", "plain"), ("未校准", "fail")]),
+            ("校准后", "同一夹具与载荷", [("≈20 kN/m", "plain"), ("20 kN/m", "plain"), ("目标区间", "pass")]),
+            ("直接迁移", "0.1 kg / 0.4 kg", [("10.01 / 40.04 kN/m", "plain"), ("20 kN/m", "plain"), ("迁移失败", "fail")]),
+            ("质量补偿", "预声明规则", [("20.04 / 19.93 kN/m", "plain"), ("20 kN/m", "plain"), ("重新接近", "pass")]),
+        ] if zh else [
+            ("Initial", "MuJoCo · 0.2 kg", [("≈80 kN/m", "plain"), ("20 kN/m", "plain"), ("uncalibrated", "fail")]),
+            ("Calibrated", "same fixture and load", [("≈20 kN/m", "plain"), ("20 kN/m", "plain"), ("target range", "pass")]),
+            ("Direct transfer", "0.1 kg / 0.4 kg", [("10.01 / 40.04 kN/m", "plain"), ("20 kN/m", "plain"), ("transfer fails", "fail")]),
+            ("Mass conversion", "predeclared rule", [("20.04 / 19.93 kN/m", "plain"), ("20 kN/m", "plain"), ("restored", "pass")]),
+        ]
+        note = ""
+    elif case["id"] == "pinch":
+        caption = "指关节驱动力限额与保持结果" if zh else "Finger-joint force limit and retention outcome"
+        headers = ["力限额", "保持", "释放检查", "读法"] if zh else ["Force limit", "Retention", "Release check", "Reading"]
+        rows = [
+            ("0.2 N", "", [("滑脱", "plain"), ("无有效保持", "plain"), ("失败", "fail")]),
+            ("0.4 N", "", [("滑脱", "plain"), ("无有效保持", "plain"), ("失败", "fail")]),
+            ("0.8 N", "", [("保持", "plain"), ("完成释放", "plain"), ("通过", "pass")]),
+            ("10 N", "", [("保持", "plain"), ("完成释放", "plain"), ("通过", "pass")]),
+        ] if zh else [
+            ("0.2 N", "", [("slips", "plain"), ("no valid hold", "plain"), ("fail", "fail")]),
+            ("0.4 N", "", [("slips", "plain"), ("no valid hold", "plain"), ("fail", "fail")]),
+            ("0.8 N", "", [("holds", "plain"), ("released", "plain"), ("pass", "pass")]),
+            ("10 N", "", [("holds", "plain"), ("released", "plain"), ("pass", "pass")]),
+        ]
+        note = ""
+    else:
+        caption = "原版 2 ms 与 1 ms 的同动作对照" if zh else "Original 2 ms and 1 ms execution under the same actions"
+        headers = ["指标", "原版 2 ms", "对照 1 ms", "读法"] if zh else ["Measure", "Original 2 ms", "1 ms control", "Reading"]
+        rows = [
+            ("留出原任务", "", [("10 / 10", "plain"), ("10 / 10", "plain"), ("无法区分", "mixed")]),
+            ("物理诊断", "", [("5 / 10", "plain"), ("3 / 10", "plain"), ("退化", "fail")]),
+            ("原生步进成本", "", [("2.239 s", "plain"), ("4.481 s", "plain"), ("约翻倍", "fail")]),
+        ] if zh else [
+            ("Heldout native task", "", [("10 / 10", "plain"), ("10 / 10", "plain"), ("not discriminating", "mixed")]),
+            ("Physical screen", "", [("5 / 10", "plain"), ("3 / 10", "plain"), ("regression", "fail")]),
+            ("Native stepping cost", "", [("2.239 s", "plain"), ("4.481 s", "plain"), ("≈2×", "fail")]),
+        ]
+        note = ""
+    lines = ['<div class="comparison-matrix">', "<table>", f"<caption>{html.escape(caption)}</caption>", "<thead><tr>"]
+    lines += [f'<th scope="col">{html.escape(h)}</th>' for h in headers]
+    lines += ["</tr></thead>", "<tbody>"]
+    for name, detail, cells in rows:
+        label = f"<strong>{html.escape(name)}</strong>"
+        if detail:
+            label += f"<small>{html.escape(detail)}</small>"
+        lines.append("<tr><th scope=\"row\">" + label + "</th>")
+        for text, state in cells:
+            cls = "matrix-result" if state != "plain" else ""
+            value = f'<span class="{cls} {state}">{html.escape(text)}</span>' if cls else html.escape(text)
+            lines.append(f"<td>{value}</td>")
+        lines.append("</tr>")
+    lines += ["</tbody>", "</table>", "</div>"]
+    if note:
+        lines += [f'<p class="matrix-note">{html.escape(note)}</p>']
+    lines.append("")
+    return "\n".join(lines)
+
+
 def comparisons(index, experiences, language):
     zh = language == "zh"
     lines = [
         "# "
-        + ("从画面到物理差异" if zh else "From visible motion to physical differences"),
+        + ("对比实验：从画面到判据" if zh else "Comparative experiments: from visible motion to criteria"),
         "",
         (
-            "同步查看记录状态、原生观测与物理参照。图表来自各自归档实验；回放只读取记录，不推进物理，也不改变评分或容差。"
+            "每个实验按同一顺序阅读：先看结论与判据，再看同条件的同步回放，随后用结果矩阵定位差异。最后才进入协议、解释和边界。"
             if zh
-            else "Inspect recorded states, native observations and physical references together. Each plot links its archived experiment; playback reads records without advancing physics or changing scores or tolerances."
+            else "Read every experiment in the same order: conclusion and criteria first, then the synchronized replay under shared conditions, then a result matrix that locates the differences. Protocols, explanation and limits follow."
         ),
         "",
         (
@@ -288,7 +514,10 @@ def comparisons(index, experiences, language):
             "",
             case["intro"][language],
             "",
+            comparison_summary(case, row, language),
+            replay_guide(case, language),
             replay_html(case, language),
+            comparison_table(case, language),
         ]
         for key, z, e in labels:
             lines += ["**" + (z if zh else e) + "：** " + row[language][key], ""]

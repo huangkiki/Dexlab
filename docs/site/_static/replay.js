@@ -23,6 +23,7 @@
   if(typeof module!=='undefined')module.exports=api;
   if(typeof document==='undefined')return;
   const colors={'MuJoCo':'#0072B2','SuperDex':'#009E73','Genesis':'#CC79A7','Newton Physics':'#D55E00','PhysX':'#E69F00','Drake':'#6B5B95'};
+  const seriesNames={mujoco:['MuJoCo','MuJoCo'],superdex:['SuperDex','SuperDex'],genesis:['Genesis','Genesis'],newton:['Newton Physics','Newton Physics'],physx:['PhysX','PhysX'],drake:['Drake','Drake'],'initial-mujoco':['初始 MuJoCo','Initial MuJoCo'],'validation-mujoco-reference':['校准后 MuJoCo','Calibrated MuJoCo'],'dev-cap-0.4':['0.4 N 力限额','0.4 N limit'],'dev-cap-0.8':['0.8 N 力限额','0.8 N limit'],'dev-open':['张开负例','Open negative'],baseline:['原版 2 ms','Original 2 ms'],'step-1000us':['对照 1 ms','1 ms control']};
   const titles={gripper_relative_z:['夹爪坐标系相对高度（非纯滑移）','Relative height in gripper frame (not pure slip)'],finger_normal:['指部接触法向力之和','Sum finger contact normal force'],contact_overlap:['目标物体原生接触穿透','Target native contact penetration'],indentation_loaded:['加载窗口压入量（0–0.6 s）','Loaded-window indentation (0–0.6 s)'],displacement:['沿斜面位移','Down-slope displacement'],velocity:['沿斜面速度','Down-slope velocity'],support:['法向支撑力','Normal support'],overlap:['参考平面几何重叠','Reference-plane overlap'],indentation:['法向压入','Normal indentation'],normal_force:['法向接触力','Normal contact force'],load:['外加载荷','Applied load'],velocity_z:['竖直速度','Vertical velocity'],height:['物体高度','Object height'],relative_slip:['相对夹具滑移','Slip relative to fixture'],pad_force:['指面力 x 分量绝对值之和','Sum absolute pad x force']};
   function element(tag,text,attrs={}){const e=document.createElement(tag);if(text)e.textContent=text;for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);return e;}
   function svg(tag,attrs,text){const e=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);if(text)e.textContent=text;return e;}
@@ -30,8 +31,9 @@
     constructor(root){
       this.root=root;this.zh=root.dataset.language==='zh';this.generation=0;this.videos=[];this.raf=null;this.playing=false;this.playRequest=0;
       this.text=(a,b)=>this.zh?a:b;
+      this.seriesName=name=>{const pair=seriesNames[name.toLowerCase()];return pair?pair[this.zh?0:1]:name.replaceAll('-',' ')};
       this.variants=JSON.parse(root.dataset.variants);
-      this.launch=element('button',this.text('加载同步回放与曲线','Load synchronized replay and curves'),{type:'button',class:'replay-launch'});
+      this.launch=element('button',root.dataset.launch||this.text('加载同步回放与曲线','Load synchronized replay and curves'),{type:'button',class:'replay-launch'});
       this.status=element('p','',{role:'status','aria-live':'polite',class:'replay-status'});
       this.launch.onclick=()=>{this.launch.disabled=true;this.load(0);};root.prepend(this.launch);root.append(this.status);
     }
@@ -55,7 +57,7 @@
       for(const[delta,zh,en]of[[-1,'上一帧','Previous frame'],[1,'下一帧','Next frame']]){const b=element('button',this.text(zh,en),{type:'button'});b.onclick=()=>{this.pause();this.setTime(this.time+delta/this.bundle.videos[0].fps);};controls.append(b);}
       const rateLabel=element('label',this.text('速度 ','Speed '));this.rate=element('select','',{'aria-label':this.text('播放速度','Playback speed')});for(const rate of [.25,.5,1,2])this.rate.append(element('option',rate+'×',{value:String(rate)}));this.rate.value='1';this.rate.onchange=()=>this.videos.forEach(v=>v.playbackRate=Number(this.rate.value));rateLabel.append(this.rate);controls.append(rateLabel);
       this.panel.append(controls);const grid=element('div','',{class:'replay-videos'});this.videos=[];
-      for(const spec of this.bundle.videos){const v=element('video','',{preload:'metadata',playsinline:'',muted:'',poster:this.asset(spec.poster),'aria-label':spec.series.join(' / ')});v.muted=true;v.src=this.asset(spec.path);v.addEventListener('error',()=>this.fail(Error('Video unavailable')));this.videos.push(v);grid.append(v);}
+      for(const spec of this.bundle.videos){const block=element('div','',{class:'replay-video-block'}),paneMap=element('div','',{class:'replay-pane-map','aria-hidden':'true'});paneMap.style.setProperty('--pane-columns',String(Math.min(3,Math.max(1,spec.series.length))));for(const name of spec.series){const item=element('span','',{class:'replay-pane-label'});const pretty=this.seriesName(name);item.textContent=pretty;item.style.setProperty('--series-color',colors[pretty]||colors[name]||'#6f766a');paneMap.append(item);}const v=element('video','',{preload:'metadata',playsinline:'',muted:'',poster:this.asset(spec.poster),'aria-label':spec.series.map(name=>this.seriesName(name)).join(' / ')});v.muted=true;v.src=this.asset(spec.path);v.addEventListener('error',()=>this.fail(Error('Video unavailable')));this.videos.push(v);block.append(paneMap,v);grid.append(block);}
       this.videos[0].onended=()=>{this.pause();this.setTime(this.bundle.duration_s);};this.panel.append(grid);
       const timeline=element('label',this.text('仿真时间 ','Simulation time '),{class:'replay-timeline'});
       this.slider=element('input','',{type:'range',min:'0',max:String(this.bundle.duration_s),step:String(1/this.bundle.videos[0].fps),value:'0','aria-label':this.text('拖动仿真时间','Seek simulation time')});

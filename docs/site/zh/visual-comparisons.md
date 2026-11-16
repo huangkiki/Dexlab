@@ -1,6 +1,6 @@
-# 从画面到物理差异
+# 对比实验：从画面到判据
 
-同步查看记录状态、原生观测与物理参照。图表来自各自归档实验；回放只读取记录，不推进物理，也不改变评分或容差。
+每个实验按同一顺序阅读：先看结论与判据，再看同条件的同步回放，随后用结果矩阵定位差异。最后才进入协议、解释和边界。
 
 画面采用实物比例；微小变化看局部曲线。虚线是案例声明的解析／工程参照，并不代表真实材料测量。不同历史协议的结果不汇总为引擎排行榜。
 
@@ -9,12 +9,78 @@
 
 40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。
 
+<div class="comparison-summary">
+  <p class="comparison-claim"><strong>结论</strong> 在这组固定配置中，没有任何引擎通过全部九例。差异集中在静止漂移、滑动受力响应，以及名义零摩擦时的有效接触。</p>
+  <div class="comparison-terms">
+    <p><strong>实验条件</strong> MuJoCo 3.15.0、SuperDex 1.0.0、Genesis 1.4.3、Newton Physics 1.6.1、PhysX 5.9.0、Drake 1.57.0 原生斜面；每个 solver 的接触律、精度与适用配置分别记录。</p>
+    <p><strong>结论边界</strong> 各批协议和准入范围保持独立；完整配置表给研究范围，不给普遍排名。#157/#159/#163/#165 的数值问题仍未全部解决。</p>
+  </div>
+</div>
+
+<div class="replay-guide" aria-label="同步回放阅读说明">
+  <p><strong>画面顺序</strong> MuJoCo / SuperDex / Genesis / Newton Physics / PhysX / Drake</p>
+  <p><strong>看什么</strong> 在同一两秒窗口内，看方块是否保持、转动或失去支撑；每个画面同时标出运行状态。</p>
+  <p><strong>不要直接推出</strong> 画面相似不等于物理等价；通过或失败仍由同时间轴的力、位移和速度判据决定。</p>
+</div>
+
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-variants="[{&quot;label&quot;: &quot;静止 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;静止 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;静止 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.0005.json.gz&quot;}]">
+<div class="dexlab-replay" data-language="zh" data-launch="加载六引擎同步回放与逐帧曲线" data-variants="[{&quot;label&quot;: &quot;静止 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;静止 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;静止 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.0005.json.gz&quot;}]">
 <div class="visual-hero"><img loading="lazy" src="_static/visual/incline-static-0.001.png" alt="六引擎斜面：相同工况，响应不同"></div>
-<details class="replay-fallback" open><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>静止 · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>静止 · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>静止 · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li></ul></details>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>静止 · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>静止 · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>静止 · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li></ul></details>
 </div>
 ```
+
+<div class="comparison-matrix">
+<table>
+<caption>固定发布配置的分条件结果（通过数 / 该条件三例）</caption>
+<thead><tr>
+<th scope="col">引擎与配置</th>
+<th scope="col">静止</th>
+<th scope="col">滑动</th>
+<th scope="col">名义零摩擦</th>
+<th scope="col">总计</th>
+</tr></thead>
+<tbody>
+<tr><th scope="row"><strong>MuJoCo</strong><small>3.15 · PGS / elliptic</small></th>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result fail">3 / 9</span></td>
+</tr>
+<tr><th scope="row"><strong>SuperDex</strong><small>1.0 · Newton / AUTO / C1</small></th>
+<td><span class="matrix-result mixed">2 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">8 / 9</span></td>
+</tr>
+<tr><th scope="row"><strong>Genesis</strong><small>1.4.3 · Newton / elliptic / Signorini</small></th>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result mixed">6 / 9</span></td>
+</tr>
+<tr><th scope="row"><strong>Newton Physics</strong><small>1.6.1 · XPBD / 100 sweeps</small></th>
+<td><span class="matrix-result mixed">1 / 3</span></td>
+<td><span class="matrix-result invalid">0 / 3†</span></td>
+<td><span class="matrix-result invalid">0 / 3†</span></td>
+<td><span class="matrix-result invalid">1 / 9†</span></td>
+</tr>
+<tr><th scope="row"><strong>PhysX</strong><small>5.9.0 · PGS / patch friction</small></th>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">2 / 3†</span></td>
+<td><span class="matrix-result mixed">2 / 3</span></td>
+<td><span class="matrix-result mixed">7 / 9†</span></td>
+</tr>
+<tr><th scope="row"><strong>Drake</strong><small>1.57 · SAP / kLagged / hydroelastic</small></th>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">6 / 9</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="matrix-note">† 无效记录保留在分母中，不计为通过；不能解释成物理失败。</p>
 
 **条件：** MuJoCo 3.15.0、SuperDex 1.0.0、Genesis 1.4.3、Newton Physics 1.6.1、PhysX 5.9.0、Drake 1.57.0 原生斜面；每个 solver 的接触律、精度与适用配置分别记录。
 
@@ -37,12 +103,60 @@
 
 同一 MuJoCo 场景，从约 80 kN/m 到合成目标 20 kN/m。先看加载窗口的压入曲线，再看完整卸载；成功只属于规定的物理检查与条件。
 
+<div class="comparison-summary">
+  <p class="comparison-claim"><strong>结论</strong> 参数校准可以把这组夹具的加载响应带到合成目标附近，但固定参数直接迁移到其他质量时会失效；明确写出质量补偿后，两个迁移载荷才重新接近目标。</p>
+  <div class="comparison-terms">
+    <p><strong>实验条件</strong> 40 mm 方块，0.2 kg，0.5 ms；2/4/6/−1 N 加载。20 kN/m 是合成响应目标。</p>
+    <p><strong>结论边界</strong> 仅适用于此恒定阻抗、四点面接触夹具；不是任意几何的公式，也不是真实材料标定。历史 PhysX 核心身份缺失仍见 #126 审计。</p>
+  </div>
+</div>
+
+<div class="replay-guide" aria-label="同步回放阅读说明">
+  <p><strong>画面顺序</strong> 初始 MuJoCo / 校准后 MuJoCo</p>
+  <p><strong>看什么</strong> 先看加载窗的压入量，再看卸载、离面段和其他质量下的响应是否仍接近目标。</p>
+  <p><strong>不要直接推出</strong> 画面不能证明材料真实刚度；有效响应只在声明的夹具、载荷和合成目标内成立。</p>
+</div>
+
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-variants="[{&quot;label&quot;: &quot;初始／校准 · 0.2 kg · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/normal-calibration.json.gz&quot;}]">
+<div class="dexlab-replay" data-language="zh" data-launch="加载法向校准回放与响应曲线" data-variants="[{&quot;label&quot;: &quot;初始／校准 · 0.2 kg · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/normal-calibration.json.gz&quot;}]">
 <div class="visual-hero"><img loading="lazy" src="_static/visual/normal-calibration.png" alt="法向响应：改参数，还是改 solver？"></div>
-<details class="replay-fallback" open><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/normal-calibration-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>初始／校准 · 0.2 kg · 0.5 ms: <a href="_static/visual/normal-calibration.json.gz">JSON.gz</a> · <a href="_static/visual/normal-calibration-curves.zh.svg">SVG</a> · <a href="_static/visual/normal-calibration.mp4">MP4 · initial-mujoco / validation-mujoco-reference</a></li></ul></details>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/normal-calibration-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>初始／校准 · 0.2 kg · 0.5 ms: <a href="_static/visual/normal-calibration.json.gz">JSON.gz</a> · <a href="_static/visual/normal-calibration-curves.zh.svg">SVG</a> · <a href="_static/visual/normal-calibration.mp4">MP4 · initial-mujoco / validation-mujoco-reference</a></li></ul></details>
 </div>
 ```
+
+<div class="comparison-matrix">
+<table>
+<caption>加载窗口的有效响应（合成目标 20 kN/m）</caption>
+<thead><tr>
+<th scope="col">阶段</th>
+<th scope="col">实测响应</th>
+<th scope="col">目标或检查</th>
+<th scope="col">读法</th>
+</tr></thead>
+<tbody>
+<tr><th scope="row"><strong>初始配置</strong><small>MuJoCo · 0.2 kg</small></th>
+<td>≈80 kN/m</td>
+<td>20 kN/m</td>
+<td><span class="matrix-result fail">未校准</span></td>
+</tr>
+<tr><th scope="row"><strong>校准后</strong><small>同一夹具与载荷</small></th>
+<td>≈20 kN/m</td>
+<td>20 kN/m</td>
+<td><span class="matrix-result pass">目标区间</span></td>
+</tr>
+<tr><th scope="row"><strong>直接迁移</strong><small>0.1 kg / 0.4 kg</small></th>
+<td>10.01 / 40.04 kN/m</td>
+<td>20 kN/m</td>
+<td><span class="matrix-result fail">迁移失败</span></td>
+</tr>
+<tr><th scope="row"><strong>质量补偿</strong><small>预声明规则</small></th>
+<td>20.04 / 19.93 kN/m</td>
+<td>20 kN/m</td>
+<td><span class="matrix-result pass">重新接近</span></td>
+</tr>
+</tbody>
+</table>
+</div>
 
 **条件：** 40 mm 方块，0.2 kg，0.5 ms；2/4/6/−1 N 加载。20 kN/m 是合成响应目标。
 
@@ -67,12 +181,60 @@
 
 同一 Genesis 夹具与物体，只改变指关节驱动力限额。对照完整闭合、抬升、保持和释放，并保留张开负例。
 
+<div class="comparison-summary">
+  <p class="comparison-claim"><strong>结论</strong> 在同一夹具中，保持边界位于 0.4 N 与 0.8 N 之间；±2 mm 初态偏移没有改变这条边界。</p>
+  <div class="comparison-terms">
+    <p><strong>实验条件</strong> Genesis 原生有限夹具、四档力限额和 ±2 mm 初始偏移，共 16 个固定案例。另有 MuJoCo 标准方块夹持与机器人 SDF 历史场景。</p>
+    <p><strong>结论边界</strong> 这不是跨引擎统一夹持排名。#145 的惯量／坐标问题和 #132→#134 的共同驱动／594 回合正式研究仍独立开放。</p>
+  </div>
+</div>
+
+<div class="replay-guide" aria-label="同步回放阅读说明">
+  <p><strong>画面顺序</strong> 0.4 N 力限额 / 0.8 N 力限额</p>
+  <p><strong>看什么</strong> 依次看闭合、抬升、保持和释放，重点确认物体相对指面是否持续滑移。</p>
+  <p><strong>不要直接推出</strong> 抬起或离开画面不等于完成保持；张开负例与原生物体运动共同防止错误成功。</p>
+</div>
+
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-variants="[{&quot;label&quot;: &quot;保持边界：0.4 N／0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-retention.json.gz&quot;}, {&quot;label&quot;: &quot;张开负例／0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-negative.json.gz&quot;}]">
+<div class="dexlab-replay" data-language="zh" data-launch="加载 0.4 N／0.8 N 夹持边界回放" data-variants="[{&quot;label&quot;: &quot;保持边界：0.4 N／0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-retention.json.gz&quot;}, {&quot;label&quot;: &quot;张开负例／0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-negative.json.gz&quot;}]">
 <div class="visual-hero"><img loading="lazy" src="_static/visual/pinch-dev-cap-0.4.png" alt="夹持：0.4 N 滑脱，0.8 N 保持"></div>
-<details class="replay-fallback" open><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/pinch-retention-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>保持边界：0.4 N／0.8 N: <a href="_static/visual/pinch-retention.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-retention-curves.zh.svg">SVG</a> · <a href="_static/visual/pinch-dev-cap-0.4.mp4">MP4 · dev-cap-0.4</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li><li>张开负例／0.8 N: <a href="_static/visual/pinch-negative.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-negative-curves.zh.svg">SVG</a> · <a href="_static/visual/pinch-dev-open.mp4">MP4 · dev-open</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li></ul></details>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/pinch-retention-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>保持边界：0.4 N／0.8 N: <a href="_static/visual/pinch-retention.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-retention-curves.zh.svg">SVG</a> · <a href="_static/visual/pinch-dev-cap-0.4.mp4">MP4 · dev-cap-0.4</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li><li>张开负例／0.8 N: <a href="_static/visual/pinch-negative.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-negative-curves.zh.svg">SVG</a> · <a href="_static/visual/pinch-dev-open.mp4">MP4 · dev-open</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li></ul></details>
 </div>
 ```
+
+<div class="comparison-matrix">
+<table>
+<caption>指关节驱动力限额与保持结果</caption>
+<thead><tr>
+<th scope="col">力限额</th>
+<th scope="col">保持</th>
+<th scope="col">释放检查</th>
+<th scope="col">读法</th>
+</tr></thead>
+<tbody>
+<tr><th scope="row"><strong>0.2 N</strong></th>
+<td>滑脱</td>
+<td>无有效保持</td>
+<td><span class="matrix-result fail">失败</span></td>
+</tr>
+<tr><th scope="row"><strong>0.4 N</strong></th>
+<td>滑脱</td>
+<td>无有效保持</td>
+<td><span class="matrix-result fail">失败</span></td>
+</tr>
+<tr><th scope="row"><strong>0.8 N</strong></th>
+<td>保持</td>
+<td>完成释放</td>
+<td><span class="matrix-result pass">通过</span></td>
+</tr>
+<tr><th scope="row"><strong>10 N</strong></th>
+<td>保持</td>
+<td>完成释放</td>
+<td><span class="matrix-result pass">通过</span></td>
+</tr>
+</tbody>
+</table>
+</div>
 
 **条件：** Genesis 原生有限夹具、四档力限额和 ±2 mm 初始偏移，共 16 个固定案例。另有 MuJoCo 标准方块夹持与机器人 SDF 历史场景。
 
@@ -93,12 +255,55 @@
 
 相同动作、初态、Panda 和成功判定；原版 2 ms 与未通过筛查的 1 ms 对照。全部留出任务成功，物理诊断 5/10 对 3/10，成本约翻倍。观测刷新补丁的策略效果未验证。
 
+<div class="comparison-summary">
+  <p class="comparison-claim"><strong>结论</strong> 1 ms 没有改善原任务成功率，反而让物理诊断从 5/10 降到 3/10，并使原生步进成本约翻倍。</p>
+  <div class="comparison-terms">
+    <p><strong>实验条件</strong> 官方 cream-cheese-to-basket，Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic；20 Hz 控制，原版 2 ms。</p>
+    <p><strong>结论边界</strong> 只有示范动作执行，未验证固定策略闭环效果、真实材料准确性或中途状态恢复；留出仅为同任务的十条示范，不是新任务泛化。</p>
+  </div>
+</div>
+
+<div class="replay-guide" aria-label="同步回放阅读说明">
+  <p><strong>画面顺序</strong> 原版 2 ms / 对照 1 ms</p>
+  <p><strong>看什么</strong> 先确认两种步长都完成原任务，再对照同一动作下的接触重叠、相对高度和法向力。</p>
+  <p><strong>不要直接推出</strong> 原任务成功不能替代物理筛查；画面也不能唯一解释 5/10 到 3/10 的退化。</p>
+</div>
+
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-variants="[{&quot;label&quot;: &quot;开发 demo_0：冻结首条示范&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo0.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_4：首个诊断退化&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo4.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_8：最大原生穿透&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo8.json.gz&quot;}]">
+<div class="dexlab-replay" data-language="zh" data-launch="加载 LIBERO 原任务与 1 ms 对照回放" data-variants="[{&quot;label&quot;: &quot;开发 demo_0：冻结首条示范&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo0.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_4：首个诊断退化&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo4.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_8：最大原生穿透&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo8.json.gz&quot;}]">
 <div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.png" alt="LIBERO：原任务、步长对照与观测修正"></div>
-<details class="replay-fallback" open><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>开发 demo_0：冻结首条示范: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo0-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo0-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_4：首个诊断退化: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo4-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo4-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_8：最大原生穿透: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo8-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo8-step-1000us.mp4">MP4 · step-1000us</a></li></ul></details>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>开发 demo_0：冻结首条示范: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo0-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo0-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_4：首个诊断退化: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo4-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo4-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_8：最大原生穿透: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo8-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo8-step-1000us.mp4">MP4 · step-1000us</a></li></ul></details>
 </div>
 ```
+
+<div class="comparison-matrix">
+<table>
+<caption>原版 2 ms 与 1 ms 的同动作对照</caption>
+<thead><tr>
+<th scope="col">指标</th>
+<th scope="col">原版 2 ms</th>
+<th scope="col">对照 1 ms</th>
+<th scope="col">读法</th>
+</tr></thead>
+<tbody>
+<tr><th scope="row"><strong>留出原任务</strong></th>
+<td>10 / 10</td>
+<td>10 / 10</td>
+<td><span class="matrix-result mixed">无法区分</span></td>
+</tr>
+<tr><th scope="row"><strong>物理诊断</strong></th>
+<td>5 / 10</td>
+<td>3 / 10</td>
+<td><span class="matrix-result fail">退化</span></td>
+</tr>
+<tr><th scope="row"><strong>原生步进成本</strong></th>
+<td>2.239 s</td>
+<td>4.481 s</td>
+<td><span class="matrix-result fail">约翻倍</span></td>
+</tr>
+</tbody>
+</table>
+</div>
 
 **条件：** 官方 cream-cheese-to-basket，Panda / robosuite 1.4.0 / MuJoCo 2.3.7 Newton elliptic；20 Hz 控制，原版 2 ms。
 
