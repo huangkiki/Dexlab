@@ -26,6 +26,7 @@ html_js_files = [
     ('live-lab.js', {'defer': 'defer'}),
     ('learning-diagrams.js', {'type': 'module'}),
     ('reader-page.js', {'defer': 'defer'}),
+    ('blog-index.js', {'defer': 'defer'}),
 ]
 templates_path = [str(HERE / '_templates')]
 html_show_sourcelink = False
