@@ -1103,7 +1103,21 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <p>若状态链不能改善归因或复现，就不建共享代码库；若主要误差仍来自评分或物理响应，继续评分审计或接触标定。暂不采用全自动 RSI、通用 task library，也不把代码成功率替代物理/真机验收。本节核查于 2026-11-16（论文 <code>2610.12369v1</code>），没有代码复现、模型运行、物理重跑或真机实验。</p>
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/335">完整讨论与版本边界 ↗</a><a href="https://arxiv.org/abs/2610.12369">论文 v1</a><a href="../../dexterous-hand-simulation.html#coap">导读 / Reading companion</a><a href="#top">回到开头</a></div>
 </section>
-<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · 吞吐与成本专题：2026-11-15 · COAP 状态审计：2026-11-16 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
+<section class="section" id="capx-aspire">
+<div class="section-heading"><div><div class="eyebrow">15 / CODE-AS-POLICY AGENTS</div><h2>CaP-X 与 ASPIRE：先验证反馈，再晋升技能</h2></div><p>2026-11-16 · 受控反馈 / 失败归因 / 技能准入</p></div>
+<p><a href="https://github.com/huangkiki/Dexlab/discussions/341">CaP-X 完整讨论 ↗</a> · <a href="https://github.com/huangkiki/Dexlab/discussions/342">ASPIRE 完整讨论 ↗</a></p>
+<div class="callout"><strong>CaP-X 是实验设计模板，ASPIRE 是技能记忆的准入协议。</strong>DexLab 先借“抽象层级与反馈通道受控”和“隔离复现后才晋升”，不先迁移整套 Agent。</div>
+<p>仍以“闭爪后法向冲量衰减、面包滑落”为例。高层反馈只留下“抓取函数已调用、最后失败”；结构化视觉差分可以说“搬运中物体先移动、后离开夹爪”；逐原语 trace 才能把闭爪命令、实际指宽、相对位姿、冲量和首次滑移放到同一时间轴。若提出“增加抓取深度并低速试提”，这仍是候选修复；只有验证者在不看原修复代码时，凭失败签名、触发条件和修复说明在留出场景复现，才能晋升为共享技能。</p>
+<h3>两个可迁移机制</h3>
+<p><strong>CaP-X 的受控反馈：</strong><a href="https://arxiv.org/abs/2603.22435">论文</a>把 API 从人工高层宏切到低层原语、单轮切到多轮，并比较终态文本、RGB 和结构化视觉差分。作者报告高层抽象提高分数、移除后下降，文本化视觉差分通常比直接交错原图更适合程序修复。策略比较因此必须登记抽象层、交互轮数、反馈表达、模型与采样预算。其固定源码仍主要从成功 trial 抽取函数，评分器若接受错误成功，技能库也会固化错误。</p>
+<p><strong>ASPIRE 的晋升门槛：</strong><a href="https://arxiv.org/abs/2607.00272">论文</a>把逐原语 trace、修复、独立验证和留出评测接起来。当前公开实现要求 fresh verifier 看不到提出者最终程序，以 5 个开发 seed、最多 2 次尝试、至少 4/5 成功作为单次晋升门槛；文档明确这证明文字能传递修复，不证明跨任务泛化。作者报告的消融中，细粒度执行引擎的主要收益大于后加的进化搜索。</p>
+<h3>DexLab 的优先顺序</h3>
+<p>先为一个已有失败案例建立反馈契约，并比较“终态/视觉进度”与“逐原语/接触状态”两种观察包的归因能力；再把根因整理成 <code>失败签名 → 触发前提 → 修复动作 → 适用边界 → 支持证据 → 反例/未测范围</code> 的 skill card；最后才评估技能库晋升、进化搜索或反向重跑。被测程序不能读取 reward、success 或 privileged state；开发与留出 seed 分开，<code>verified_once</code>、<code>transferred</code> 和 <code>refuted</code> 不得混写。</p>
+<p>最小验收不是平均成功率上升，而是首次失效层更明确、proposal 在隔离条件下可复现、反例能阻止错误触发、失败分母不变且留出结果未回流调参。若反馈没有改善归因，先改测量选择性；若主要误差来自评分或物理，仍回到 scorer audit 或接触标定。暂不默认引入进化搜索、通用技能平台或代码成功率替代物理/真机验收。</p>
+<p>核查于 2026-11-16：CaP-X <code>2603.22435v2</code> / 源码 <code>53e9966d</code>，ASPIRE <code>2607.00272v2</code> / 源码 <code>fa00f0ef</code>。没有运行外部 Agent、仿真、物理重跑或真机实验，全部性能数字均为作者报告。</p>
+<div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/341">CaP-X 讨论与证据边界 ↗</a><a href="https://github.com/huangkiki/Dexlab/discussions/342">ASPIRE 讨论与验证门槛 ↗</a><a href="../../dexterous-hand-simulation.html#capx-aspire">导读 / Reading companion</a><a href="#top">回到开头</a></div>
+</section>
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · 吞吐与成本专题：2026-11-15 · COAP 与 Code-as-Policy Agent 专题：2026-11-16 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
 <script>
 const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
 function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}

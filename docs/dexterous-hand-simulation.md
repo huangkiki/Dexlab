@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-16 addition: [CaP-X and ASPIRE: validate feedback before promoting skills](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#capx-aspire).** Both are Code-as-Policy systems. CaP-X turns API abstraction and feedback channels into controlled variables; ASPIRE admits a repair as reusable knowledge only after isolated reproduction. DexLab should borrow these evidence gates before migrating either agent stack.
+
 **2026-11-16 addition: [COAP: auditable state, task programs and first-failure layers](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#coap).** The useful transfer is explicit state, a task/primitive boundary and controlled code changes, not a wholesale switch to code-only policies.
 
 **2026-11-15 addition: [separate throughput, cost and the complete training loop](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#throughput-cost-closed-loop).** In RaiSim's vendor-authored CPU-MuJoCo and GPU-Newton comparisons, small batches, large batches, FP32/FP64, ray queries and different contact work do not collapse into one engine score.
@@ -450,6 +452,22 @@ Boundaries matter: all results are simulated; camera calibration, meshes, object
 If this chain does not improve attribution or reproducibility, do not build a shared policy library. If the dominant error remains scoring or physical response, retain the scorer-audit or contact-calibration priority. Defer automated RSI, a general task library and code success as a substitute for physical/hardware acceptance. Checked on 2026-11-16 against paper `2610.12369v1`; no code reproduction, model run, physics rerun or hardware experiment was performed here.
 
 
+(capx-aspire)=
+## CaP-X and ASPIRE: validate feedback before promoting skills
+
+**2026-11-16 distillation: [full CaP-X discussion](https://github.com/huangkiki/Dexlab/discussions/341) and [full ASPIRE discussion](https://github.com/huangkiki/Dexlab/discussions/342).** Both are Code-as-Policy systems, but they affect DexLab differently: CaP-X is an experimental-design template, while ASPIRE is an admission contract for reusable skill memory.
+
+Return to the toast-slip record. A terminal score says only that the task failed; structured visual differencing can say that the object moved and then left the gripper; a primitive trace connects close-command state, measured finger width, relative pose, contact impulse and the first slip on one timeline. A proposal such as “increase grasp depth and lift slowly” remains a candidate until a verifier, without the proposer's solution, can reproduce it from the failure signature, trigger and repair instructions on held-out scenes.
+
+[CaP-X](https://arxiv.org/abs/2603.22435) contributes controlled variables: human macros versus low-level primitives, single- versus multi-turn interaction, and terminal text, raw RGB or structured visual feedback, with model and compute budgets recorded. Its authors report that high-level abstractions raise scores and removing them lowers scores; structured visual descriptions tend to help code repair more than interleaving raw images. A comparison therefore cannot report only success: abstraction, interaction turns and feedback representation are part of the condition. Its fixed source primarily extracts helper functions from successful trials, so an evaluator that accepts false success can also fossilize bad skills.
+
+[ASPIRE](https://arxiv.org/abs/2607.00272) connects primitive traces, repairs, independent verification and held-out evaluation. The current implementation hides the proposer's final program from a fresh verifier and promotes after at least 4/5 successes on five development seeds within two attempts. Its own documentation states that this proves the written skill can transmit a repair, not that it generalizes. The authors also report a larger main gain from fine-grained execution evidence than from adding evolutionary search; search should address an explicit plateau rather than become the default cost.
+
+**DexLab order:** establish a feedback contract on one existing failure and compare a terminal/visual-progress pack against a primitive/contact-state pack; then convert one root cause into `failure signature → trigger → repair → applicability → evidence → counterexample/unmeasured range`; only then evaluate skill admission, evolutionary search or backward reruns. Generated policies must not read reward, success or privileged state. Development and held-out seeds remain separate, and `verified_once`, `transferred` and `refuted` remain distinct states.
+
+Acceptance is a clearer first-failure layer, an independently reproducible proposal, a counterexample that blocks a bad trigger, unchanged failure denominators and no held-out feedback into tuning—not merely a higher average success rate. If richer feedback does not improve attribution, improve measurement selectivity; if scoring or physics dominates, return to scorer audit or contact calibration. Checked on 2026-11-16 against CaP-X `2603.22435v2` and source `53e9966d`, plus ASPIRE `2607.00272v2` and source `fa00f0ef`. No external agent, simulation, physics rerun or hardware experiment was run here; all performance figures are author-reported.
+
+
 ## Sources and maintenance scope
 
 This public guide adapts the research note “What are we discussing when we discuss dexterous manipulation simulation?”, created on 2026-09-10 and supplemented on 2026-09-14. It preserves the six-layer framework, research approaches and evidence boundaries. On **2026-11-02**, the cited official abstracts, documentation and published DexLab cases were checked; HydroShear and Dex-X links were updated to v2 and v3 respectively. This did not repeat the original note's complete literature screening or carry old-version details into newer versions without verification.
@@ -459,3 +477,5 @@ On 2026-11-03, the author's original self-contained HTML was published at their 
 On 2026-11-12, the RLT/CAP precision-insertion boundary was added after static review of the papers, official project page and public repository entry points. No policy, checkpoint, simulator or hardware experiment was run. The Discussion records the full reasoning first; this guide retains only the durable conclusion.
 
 On 2026-11-16, the COAP state-evidence and code-change gates were added without changing the current scorer-audit priority or claiming an external reproduction. The full reasoning and version boundaries are in [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335).
+
+On 2026-11-16, the CaP-X and ASPIRE feedback and skill-admission gates were added. They affect future evaluation design but do not constitute adoption of a coding agent, automatic skill library or evolutionary search. Full reasoning is in [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341) and [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342).
