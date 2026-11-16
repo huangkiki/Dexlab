@@ -15,6 +15,21 @@
 (architecture)=
 ## 架构
 
+<div class="blog-architecture-signals" aria-label="DexLab 架构特征">
+  <span>Diverse Tasks</span>
+  <span>Multi-Backend</span>
+  <span>Unified Evaluation</span>
+  <span>Reproducible</span>
+</div>
+
+<ol class="blog-architecture-stages" aria-label="DexLab 架构阶段">
+  <li><span>01</span><strong>Tasks &amp; Protocols</strong></li>
+  <li><span>02</span><strong>Systems under Test</strong></li>
+  <li><span>03</span><strong>Action Execution</strong></li>
+  <li><span>04</span><strong>Environment Backends</strong></li>
+  <li><span>05</span><strong>Evidence and Scoring</strong></li>
+</ol>
+
 <figure class="blog-architecture">
 <a href="_static/images/dexlab-architecture.png"><img src="_static/images/dexlab-architecture.png" width="100%" alt="DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分"></a>
 <figcaption>DexLab 平台总览：任务与协议、被测系统、动作执行、环境后端、证据与评分。任务缩略图仅说明任务类型；实际实现与验证范围见覆盖矩阵。</figcaption>
@@ -151,6 +166,7 @@
   <a href="#blog-guide">研究导读</a>
   <a href="#blog-policy">策略与评测</a>
   <a href="#blog-learn">仿真学习</a>
+  <a href="#contact-author">联系作者</a>
 </nav>
 
 <p class="blog-reading-note"><strong>先读方式：</strong>表中保留绝对数值和限定条件。不同实验族的分母不同，不能加总成成功率，也不能据此给出“某引擎更强”的结论。</p>
@@ -346,3 +362,17 @@
   <li><a href="learn/physx/docs/curriculum.html">PhysX 课程</a></li>
   <li><a href="learn/drake/docs/curriculum.html">Drake 课程</a></li>
 </ul>
+
+(contact-author)=
+## 联系作者
+
+<div class="blog-contact">
+  <div>
+    <p class="blog-contact-kicker">DexLab · Kiki Huang</p>
+    <p>想复现实验、指出问题，或者只是想聊聊仿真，都欢迎。</p>
+  </div>
+  <div class="blog-contact-links">
+    <a href="mailto:huangyue0719@outlook.com">邮件</a>
+    <a href="https://github.com/huangkiki">GitHub ↗</a>
+  </div>
+</div>
