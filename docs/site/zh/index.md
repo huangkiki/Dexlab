@@ -32,12 +32,8 @@
 </section>
 <section class="blog-section" id="blog" aria-labelledby="blog-heading">
   <section id="research-diagnosis"></section>
-  <div class="section-heading"><div><h2 id="blog-heading">沿着问题，继续读</h2></div><a class="text-link" href="_static/research/dexterous-simulation.html">从研究导读开始</a></div>
-  <div class="topic-controls" hidden aria-label="选择 Blog 专题"><button type="button" data-topic="contact" aria-controls="topic-contact" aria-pressed="true">接触与物理</button><button type="button" data-topic="diagnosis" aria-controls="topic-diagnosis" aria-pressed="false">失败与诊断</button><button type="button" data-topic="capability" aria-controls="topic-agents" aria-pressed="false">策略、技能与评测</button></div>
-  <section class="topic-panel" id="topic-contact" aria-labelledby="heading-contact"><div class="topic-intro"><h3 id="heading-contact">夹得更紧，为什么仍会滑？</h3><p>从接触需要提供的力与力矩出发，再讨论模型、参数和求解。</p><a class="text-link" href="#learn">连接到学习地图</a></div><ol class="reading-list"><li><a href="wuji-contact.html"><span>点接触与抗扭接触：一次抓持对照</span></a></li><li><a href="contact-response.html"><span>预测误差更低，就能预报接触失效吗？</span></a></li><li><a href="solver-taxonomy.html"><span>物理模型、数值问题与 solver，分别负责什么？</span></a></li></ol></section>
-<section class="topic-panel" id="topic-diagnosis" aria-labelledby="heading-diagnosis"><div class="topic-intro"><h3 id="heading-diagnosis">任务完成，真的说明能力提高了吗？</h3><p>沿动作、状态和受力追踪第一失效层，把任务评分与物理证据放在一起读。</p><a class="text-link" href="#learn">连接到学习地图</a></div><ol class="reading-list"><li><a href="failure-root-cause-atlas.html"><span>失败根因图谱：沿着证据找第一失效层</span></a></li><li><a href="robodojo-bread-slip.html"><span>闭爪命令正确，面包为什么仍会掉？</span></a></li><li><a href="rss-wiping.html"><span>去掉辅助保持，再看擦拭任务</span></a></li></ol></section>
-<section class="topic-panel" id="topic-agents" aria-labelledby="heading-agents"><div class="topic-intro"><h3 id="heading-agents">怎样区分策略、执行、技能和评测？</h3><p>先确定动作由谁生成、执行边界在哪里、经验保存在哪里，再用独立证据判断它是否有效。完整自主改进流程仍是研究方向。</p><a class="text-link" href="#learn">连接到学习地图</a></div><div class="topic-groups"><section class="topic-group"><h4>策略表示</h4><p>动作是学习得到的连续策略、运行时生成的程序，还是固定代码？</p><ul><li><a href="code-as-policy.html">Code as Policy 专题：四种系统形态</a></li><li><a href="_static/research/dexterous-simulation.html#robodojo-astra">RoboDojo / Astra：纠正动作与可靠接触控制</a></li></ul></section><section class="topic-group"><h4>执行边界</h4><p>Agent harness、控制器、仿真器和评分器各拥有什么证据？</p><ul><li><a href="code-as-policy.html#execution-stack">程序下面还有哪些层？</a></li><li><a href="model-evaluation.html">怎样把模型、执行与评分分开？</a></li></ul></section><section class="topic-group"><h4>技能与记忆</h4><p>修复保存在代码、文本还是技能库，什么时候才能复用？</p><ul><li><a href="_static/research/dexterous-simulation.html#capx-aspire">CaP-X / ASPIRE：从 trace 到技能晋升</a></li><li><a href="_static/research/dexterous-simulation.html#coap">COAP：固定代码、显式状态与受控改动</a></li></ul></section><section class="topic-group"><h4>评测与归因</h4><p>抽象层级、反馈、预算、留出集和评分怎样改变结论？</p><ul><li><a href="code-as-policy.html#cap-evaluation">Code as Policy 评测字段清单</a></li><li><a href="_static/research/dexterous-simulation.html#benchmark-gaming-audit">榜单高分如何被误读？</a></li></ul></section></div></section>
-
+  <div class="section-heading"><div><h2 id="blog-heading">沿着问题，继续读</h2><p>从接触与失败归因，走向策略、技能记忆和可信评测。</p></div><a class="text-link" href="blog.html">打开 Blog 目录</a></div>
+  <a class="guide-link" href="blog.html">浏览接触、诊断、策略与评测专题<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
 </section>
 <section class="learning-section" id="learn" aria-labelledby="learn-heading">
   <section id="research-selection"></section>
@@ -62,6 +58,7 @@
 实验目录 <experiments>
 结果与诊断 <results>
 引擎与模型 <engines>
+Blog <blog>
 研究资料 <references>
 参与项目 <contributing>
 ```

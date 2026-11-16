@@ -16,7 +16,7 @@
       <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
         <a href="_static/research/dexterous-simulation.html">{{ '研究导读' if homepage_is_chinese else 'Research guide' }}</a>
         <a href="#experiments">{{ '研究结论' if homepage_is_chinese else 'Findings' }}</a>
-        <a href="{{ '#blog' if homepage_is_chinese else other_language_root + 'index.html#blog' }}"{% if not homepage_is_chinese %} lang="zh-CN" hreflang="zh-CN"{% endif %}>{{ 'Blog' if homepage_is_chinese else 'Blog · 中文' }}</a>
+        <a href="{{ 'blog.html' if homepage_is_chinese else other_language_root + 'blog.html' }}"{% if not homepage_is_chinese %} lang="zh-CN" hreflang="zh-CN"{% endif %}>{{ 'Blog' if homepage_is_chinese else 'Blog · 中文' }}</a>
         <a href="#learn">{{ '学习地图' if homepage_is_chinese else 'Learning map' }}</a>
         <a href="about.html">{{ '文档' if homepage_is_chinese else 'Docs' }}</a>
       </nav>

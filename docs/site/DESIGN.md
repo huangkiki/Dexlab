@@ -175,7 +175,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
-Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` and `_static/blog-index.css` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
@@ -262,11 +262,11 @@ Use the original comparison MP4 in a native video with controls, inline playback
 
 A native details/summary disclosure follows under a top rule. Its text is muted (14px), its summary is charcoal, and its expanded paragraphs retain the evidence limits. Keep it a native disclosure rather than a custom animated accordion.
 
-### Topic controls and reading rows
+### Blog index and reading rows
 
-Three transparent buttons use muted text (15px), padding (12px 0), and a green label and bottom stroke when selected. They become (13px) on mobile. Preserve `aria-pressed` and `aria-controls`; the implementation uses buttons, not tab-widget semantics. JavaScript reveals the controls and selects one panel; without it, all three panels remain readable.
+The Chinese Blog is a first-class reader page rather than a homepage anchor. A short jump row links to three topic sections, then all reading rows remain visible without tabs or hidden panels. Each topic pairs one research question with open ruled links; the policy section divides into four two-column subtopics. The page omits the right-hand outline rail and uses a wider reading column so the grouped index is visible at once.
 
-Each panel pairs a research question with an open reading list. Links use regular charcoal text (15px), padding (18px 0), and green underlined hover. The current rows contain titles without secondary descriptors.
+The homepage retains only a short Blog handoff. Legacy `#blog` links resolve to `blog.html`; the English Blog entry points to the same canonical Chinese index.
 
 ### Learning and knowledge bridges
 

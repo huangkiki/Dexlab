@@ -34,7 +34,7 @@
 <section class="blog-section" id="blog" aria-labelledby="blog-heading">
   <div class="section-heading"><div><h2 id="blog-heading">Blog index</h2></div><a class="text-link" href="_static/research/dexterous-simulation.html">Start with the research guide (中文)</a></div>
   <p>The research Blog has one canonical Chinese topic index. Individual reports remain available in English through each page's language switch.</p>
-  <a class="guide-link" href="../../zh-cn/latest/index.html#blog" lang="zh-CN" hreflang="zh-CN">打开中文 Blog 首页<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+  <a class="guide-link" href="../../zh-cn/latest/blog.html" lang="zh-CN" hreflang="zh-CN">打开中文 Blog 首页<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
 </section>
 <section class="learning-section" id="learn" aria-labelledby="learn-heading">
   <section id="research-selection"></section>

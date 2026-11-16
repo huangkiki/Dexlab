@@ -41,23 +41,37 @@ button, a, input, select, summary { touch-action: manipulation; }
 [hidden] { display: none !important; }
 
 /* The existing navigation becomes a quiet reading rail, then wraps on mobile. */
-header { max-width: 1440px; margin: auto; padding: 28px 40px; }
-.brand { color: var(--muted); font-size: .75rem; letter-spacing: .08em; }
-.nav-links {
+header {
+  max-width: 1440px;
+  margin: auto;
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand { color: var(--ink); font: 600 1.5625rem/1.4 var(--serif); letter-spacing: normal; text-decoration: none; white-space: nowrap; }
+.brand span { color: inherit; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.site-nav a { color: var(--muted); font-size: .875rem; text-decoration: none; padding: 8px 0; }
+.site-nav a:first-child { color: var(--accent); font-weight: 600; }
+.site-nav a:hover, .site-nav a:focus-visible { color: var(--ink); text-decoration: underline; }
+.section-nav {
   position: fixed;
   top: 160px;
   left: max(40px, calc((100vw - 1440px) / 2 + 40px));
   width: 190px;
   max-height: calc(100dvh - 192px);
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0 16px 0 18px;
+  padding-top: 0;
+  padding-right: 16px;
+  padding-bottom: 0;
+  padding-left: 18px;
   border-left: 1px solid var(--line);
   scrollbar-width: thin;
   scrollbar-color: #a7afa0 var(--paper);
 }
+.nav-links { display: flex; flex-direction: column; gap: 10px; }
 .nav-links a { color: var(--muted); font-size: .8125rem; text-decoration: none; padding: 4px 0; }
 .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); text-decoration: underline; }
 main {
@@ -176,15 +190,19 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 .footer { max-width: 740px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
 
 @media (max-width: 1000px) {
-  header { max-width: 900px; padding: 24px 32px 0; }
-  .nav-links { position: static; width: auto; max-height: none; flex-direction: row; flex-wrap: wrap; gap: 6px 22px; padding: 18px 0; margin-top: 20px; border-left: 0; border-block: 1px solid var(--line); overflow: visible; }
+  header { max-width: 900px; padding: 24px 32px 0; flex-wrap: wrap; gap: 12px; }
+  .site-nav { width: 100%; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .section-nav { position: static; width: auto; max-height: none; padding: 18px 0; margin-top: 20px; border-left: 0; border-block: 1px solid var(--line); overflow: visible; }
+  .nav-links { flex-direction: row; flex-wrap: wrap; gap: 6px 22px; }
   main { width: auto; max-width: 900px; margin: auto; padding: 28px 32px 56px; }
   h1 { font-size: 2.75rem; }
 }
 
 @media (max-width: 600px) {
   header { padding: 22px 22px 0; }
-  .brand { font-size: .75rem; letter-spacing: .03em; }
+  .brand { font-size: 1.5rem; letter-spacing: normal; }
+  .site-nav { gap: 4px 16px; }
+  .site-nav a { font-size: .8125rem; }
   .nav-links { gap: 4px 18px; padding: 14px 0; margin-top: 18px; }
   .nav-links a { font-size: .75rem; }
   main { padding: 22px 22px 40px; }
@@ -225,7 +243,8 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
   a { color: inherit; }
 }
 </style></head><body>
-<header><nav aria-label="主要导航" class="nav"><div class="brand">DEXTEROUS SIMULATION / RESEARCH 2026</div><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">仿真评测</a><a href="#corl-2026-dexlab-lessons">CoRL 2026</a><a href="#robodojo-astra">LLM 操作评测</a><a href="#precision-insertion-rlt-cap">精细插接</a><a href="#robocoliseum">RoboColiseum</a><a href="#coap">COAP 状态审计</a></div></nav></header>
+<header><a class="brand" href="../../index.html" aria-label="DexLab 首页">Dex<span>Lab</span></a><nav class="site-nav" aria-label="网站导航"><a href="#top" aria-current="page">研究导读</a><a href="../../index.html#experiments">研究结论</a><a href="../../blog.html">Blog</a><a href="../../learning.html">仿真学习</a><a href="../../about.html">文档</a></nav></header>
+<nav aria-label="本文目录" class="section-nav"><div class="nav-links"><a href="#funnel">筛选漏斗</a><a href="#layers">六层问题</a><a href="#evidence">关键证据</a><a href="#papers">论文</a><a href="#projects">项目</a><a href="#october-2026">10月增补</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">仿真评测</a><a href="#corl-2026-dexlab-lessons">CoRL 2026</a><a href="#robodojo-astra">LLM 操作评测</a><a href="#precision-insertion-rlt-cap">精细插接</a><a href="#robocoliseum">RoboColiseum</a><a href="#coap">COAP 状态审计</a></div></nav>
 <main id="top"><section class="hero"><div><div class="eyebrow">2024.09.10 — 2026.09.10 · 2026.09.14补充HydroShear</div><h1>当我们在讨论<br/><span>灵巧操作仿真</span>时，<br/>我们在讨论什么？</h1><p class="lead">在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</p><div class="chips"><span class="chip">多指 / 双手</span><span class="chip">接触与触觉</span><span class="chip">数据与迁移</span><span class="chip">来源可追溯</span></div></div><aside class="hero-side"><h2>仿真是一整条闭环</h2><div class="loop"><div><b>WORLD</b><span>接触如何演化</span></div><div><b>OBSERVATION</b><span>机器人看见什么</span></div><div><b>ACTION</b><span>动作如何执行</span></div><div><b>VALIDATION</b><span>真机获得什么</span></div></div><p>引擎、画面和FPS各回答一部分。选型从具体接触失效与验收方法开始。</p></aside></section>
 <div class="stats"><div class="stat"><b>38 → 29 → 7</b><span>候选论文 → 核心 → 全文精读</span></div><div class="stat"><b>19</b><span>仓库快照 · 18技术项目 + 1网页</span></div><div class="stat"><b>20</b><span>笔记映射 · 含3条历史线索</span></div><div class="stat"><b>3</b><span>可执行研究路线 · 尚未复现</span></div></div>
 <section class="section" id="funnel"><div class="section-heading"><div class="eyebrow">01 / SCREENING</div><h2>先筛证据，再分问题</h2><p>投入精力的漏斗与技术系统的层次分开；七篇精读由机制互补选出。</p></div><div class="funnel-grid"><div class="funnel"><div class="stage"><div>可审计候选<small>官方标题、v1日期与摘要核验</small></div><b>38</b></div><div class="stage"><div>核心问题层<small>多指 / 双手 + 共享接触与触觉机制</small></div><b>29</b></div><div class="stage"><div>完整精读层<small>全文、图表、公式与局限</small></div><b>7</b></div><div class="stage"><div>决策层<small>假设、基线、退出条件</small></div><b>3</b></div></div><aside class="method"><h3>范围与阅读口径</h3><p>时间窗按arXiv首次提交日期；原六篇保留9月10日核验的版本，HydroShear在9月14日复核后补入。9篇邻接工作单列背景。</p><p>原Obsidian关键词匹配222个文件，本次累计连接20条笔记线索，其中17篇可定位、3条为历史记录。GitHub保留原18仓库快照，新增HydroShear。</p><p class="tiny">这是定向范围调研，未宣称穷尽arXiv。HydroShear作为共享触觉机制纳入；其夹爪实验不当作多指全手验证。本次未运行训练或真机实验。</p></aside></div></section>
