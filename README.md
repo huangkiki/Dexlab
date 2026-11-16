@@ -1,23 +1,23 @@
 # DexLab
 
-DexLab 是我的个人研究项目，探索 Agent Skills 与仿真如何相互改进。
+DexLab is my personal research project exploring how Agent Skills and simulation can improve each other.
 
-一次抓取失败，可能是 policy 策略问题，也可能是仿真没有准确模拟接触与摩擦求解。
+A grasp can fail because of the policy or because the simulator does not handle contact and friction accurately.
 
-DexLab 从这样的具体问题出发，**用任务暴露问题，用对照实验定位原因，再改进对应的仿真。**
+DexLab starts with concrete problems like this. **Use tasks to expose problems, run controlled experiments to identify their causes, then improve the relevant part of the simulation.**
 
-改进后的仿真再支持 Agent 学习下一轮 Skills。新的 Skills 让 Agent 能挑战更难的任务，进一步检验仿真的边界。
+The improved simulation helps the Agent learn new Skills. With those Skills, the Agent can take on harder tasks and probe the limits of the simulation.
 
-## [📖 阅读 Blog →](https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog)
+## [📖 Read the Blog →](https://huangkiki.github.io/Dexlab/en/latest/#blog)
 
-[研究结论](https://huangkiki.github.io/Dexlab/zh-cn/latest/experience.html) · [实验记录](https://huangkiki.github.io/Dexlab/zh-cn/latest/experiments.html) · [仿真学习](https://huangkiki.github.io/Dexlab/zh-cn/latest/learning.html) · [English](README.en.md)
+[Research findings](https://huangkiki.github.io/Dexlab/en/latest/experience.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html) · [简体中文](README.zh-CN.md)
 
 <a id="architecture"></a>
-<a href="https://huangkiki.github.io/Dexlab/zh-cn/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab 架构示意：任务与协议、被测系统、动作执行、环境后端、证据与评分"></a>
+<a href="https://huangkiki.github.io/Dexlab/en/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab architecture concept: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring"></a>
 
-## 引用
+## Citation
 
-如果你在研究中使用了 DexLab，请引用本仓库：
+If you use DexLab in your work, please cite the repository:
 
 ```bibtex
 @misc{huang2026dexlab,
@@ -29,4 +29,4 @@ DexLab 从这样的具体问题出发，**用任务暴露问题，用对照实�
 }
 ```
 
-GitHub 也会读取 [`CITATION.cff`](CITATION.cff) 提供一键引用。
+GitHub also reads [`CITATION.cff`](CITATION.cff) to provide its one-click citation entry.
