@@ -43,6 +43,7 @@ The program is easier to inspect because it names a task decomposition. It also 
 
 The value is not that code is automatically reliable. Explicit programs turn reliability into **separate propositions that can be checked**. Without traces, state and independent scoring, code only packages the failure in plausible logic.
 
+(execution-stack)=
 ## 2. A program is not a standalone layer
 
 | Layer | Question | Typical contents | Must not be conflated with |
@@ -54,6 +55,7 @@ The value is not that code is automatically reliable. Explicit programs turn rel
 
 Task code usually runs in an outer loop. Contact acquisition, slip and release may need millisecond-scale inner-loop control. CaP-X reports code iterations of roughly `6.8–23.8 s` and VLA action chunks or single-action inference of roughly `73–167 ms` under its conditions. These are not a fair performance ranking, but they show why Code as Policy belongs primarily at the system-2 task layer rather than replacing high-frequency contact control by default.
 
+(policy-map)=
 ## 3. Four related forms are not one system
 
 | Work | Runtime task decision maker | Primary artifact | Problem addressed | Key boundary |
@@ -97,6 +99,7 @@ A task program is an executable policy. A task skill is runtime guidance read by
 - **Skill contamination.** Extracting helpers from all successful trials can preserve lucky behavior or scorer exploits. One successful repair is not a general skill.
 - **Cost and latency.** Multi-turn inference, parallel candidates, verifiers and evolutionary search consume model calls and physical rollouts.
 
+(cap-evaluation)=
 ## 5. What a Code as Policy evaluation must record
 
 - primitive abstraction and whether usage examples are supplied;
@@ -109,6 +112,7 @@ A task program is an executable policy. A task skill is runtime guidance read by
 
 A claim that “model A has higher success” is usually uninterpretable without these conditions. The improvement may come from the model, API, extra attempts or changed scoring.
 
+(dexlab-policy)=
 ## 6. How DexLab should use this route
 
 ### Borrow directly
