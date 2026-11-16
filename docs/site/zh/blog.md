@@ -2,14 +2,14 @@
 
 <div class="blog-intro">
 <p class="blog-tagline"><strong>Contact-rich robotics, beyond rigid-body simulation.</strong></p>
-<p>DexLab 是一个以物理为中心的研究平台，用于研究接触、形变和材料分离条件下的机器人操作。近期以 <strong>Physics Research Platform</strong> 为主体：把接触、形变和材料分离做成可观察、可归因、可复算的实验；长期再用模型失败反馈仿真器，用改进后的仿真器训练和评测模型。</p>
+<p>DexLab 是一个以物理为中心的研究平台，研究接触、形变和材料分离下的机器人操作。它把失败拆成可观察、可归因、可复算的证据，再反馈给技能与仿真。</p>
 <blockquote><p><strong>用模型暴露仿真缺口，再用更可信的仿真改善模型。</strong></p></blockquote>
 <nav class="blog-intro-links" aria-label="DexLab 介绍与阅读入口">
   <a href="about.html">项目与技术文档</a>
   <a href="index.html">研究首页</a>
   <a href="_static/research/dexterous-simulation.html">研究导读</a>
 </nav>
-<blockquote class="blog-status"><p>当前已有原生命令、接触读回、独立评分、离线证据与多项接触实验；远程模型执行器、公开 leaderboard 和跨任务统一结论仍在建设中。</p></blockquote>
+<p class="blog-scope">当前范围：接触、抓取、布料、切割与多引擎对比。跨任务统一结论仍在建设中。</p>
 </div>
 
 (architecture)=
@@ -31,6 +31,74 @@
 
 <p class="blog-deck"><strong>这页从对比实验读起：</strong>它不给出“谁赢了”的引擎排行榜，而是把接触、抓持、布料、耦合和斜面实验整理成三条线索：对比实验测出了什么，几个 solver 各自显示出什么边界，以及失败最早发生在哪一层。</p>
 
+(evidence-feature)=
+## 代表性实验
+
+<div class="blog-evidence-grid">
+<article class="blog-evidence-card">
+  <a class="blog-evidence-media" href="cut-push.html"><img src="_static/cutting/showcase.gif" alt="豆腐与香蕉切割后直接侧推的记录回放" loading="lazy"></a>
+  <p class="blog-evidence-kicker">01 / 切割与侧推</p>
+  <h3>切完，仍要证明三块、四块能独立运动。</h3>
+  <p>最后一块不再被同一切面带动，才不是只切出了画面。</p>
+</article>
+
+<article class="blog-evidence-card">
+  <a class="blog-evidence-media" href="wuji-contact.html"><img src="_static/wuji-contact/hold-comparison.png" alt="点接触与抗扭接触的保持段轨迹比较" loading="lazy"></a>
+  <p class="blog-evidence-kicker">02 / 摩擦与抗扭力矩</p>
+  <h3>一直有接触，球仍可能绕夹持线转动。</h3>
+  <p>点接触缺少力矩方向；补上抗扭接触后，保持才进入原定门槛。</p>
+</article>
+
+<article class="blog-evidence-card">
+  <a class="blog-evidence-media" href="benchmark.html"><img src="_static/studio/apple.png" alt="苹果梗抓取实验记录" loading="lazy"></a>
+  <p class="blog-evidence-kicker">03 / 苹果梗抓取</p>
+  <h3>同一条抓梗任务，固定配置仍可能给出不同结果。</h3>
+  <p>MuJoCo 与 SuperDex 的差异必须连同步长、驱动和接触表示一起读。</p>
+</article>
+</div>
+
+<div class="comparison-matrix blog-evidence-matrix">
+<table>
+<caption>三组代表实验与 MotrixSim 公开报告的对应关系</caption>
+<thead><tr>
+<th scope="col">主题</th>
+<th scope="col">DexLab 实测</th>
+<th scope="col">MotrixSim 公开报告</th>
+<th scope="col">能否直接并表</th>
+</tr></thead>
+<tbody>
+<tr><th scope="row"><strong>切割与侧推</strong><small>豆腐 / 香蕉</small></th>
+<td>豆腐 3 块，香蕉 4 块；活动块侧推 <strong>11.096 / 10.209 mm</strong></td>
+<td>当前报告首页未给出同协议切割实验</td>
+<td><span class="matrix-result mixed">不应并表</span></td></tr>
+<tr><th scope="row"><strong>接触力矩</strong><small>Wuji 双指夹球</small></th>
+<td>点接触 → 抗扭接触：位移 <strong>2.734 → 1.025 mm</strong></td>
+<td><a href="https://motrixsim.motphys.com/#contact-grasping">抓取摩擦阈值</a>、<a href="https://motrixsim.motphys.com/#friction-rotation">滚动摩擦与后旋</a></td>
+<td><span class="matrix-result mixed">机制相近</span></td></tr>
+<tr><th scope="row"><strong>苹果抓取</strong><small>OpenArm + Wuji</small></th>
+<td>10 个固定回归场景：MuJoCo <strong>1/10</strong>，SuperDex <strong>10/10</strong></td>
+<td><a href="https://motrixsim.motphys.com/#sdf-collision">SDF 精细几何抓苹果演示</a></td>
+<td><span class="matrix-result mixed">任务相近</span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="matrix-note">MotrixSim 内容为公开技术报告中的外部结果；DexLab 数值来自本项目保存记录。任务、几何、控制和评分尚未对齐，因此这里只建立阅读对应关系，不生成跨协议胜负。</p>
+
+<div class="blog-evidence-detail">
+<div>
+  <strong>切割判据</strong>
+  <p>豆腐刀面冲量 0.092625 N·s；香蕉 0.021000 N·s。无侧推对照按预期拒绝。</p>
+</div>
+<div>
+  <strong>抗扭判据</strong>
+  <p>峰值角速度 <b>29.336 → 0.024992 rad/s</b>；抗扭接触内禀力矩 0.022138 mN·m。</p>
+</div>
+<div>
+  <strong>苹果判据</strong>
+  <p>差别是固定配置的鲁棒性，不是纯 solver 排名；20 个回归记录中 11 通过、9 失败。</p>
+</div>
+</div>
+
 <nav class="blog-entry-links" aria-label="开始阅读">
   <a class="blog-entry-primary" href="#blog-preview">先看三个判断</a>
   <a href="#experiment-findings">实验结论</a>
@@ -40,8 +108,6 @@
 
 (blog-preview)=
 ## 先看三个判断
-
-<p class="blog-preview-lead">下面的判断会随着滚动依次出现。每个判断都是后文实验记录的前置读法，不替代具体证据。</p>
 
 <div class="blog-verdict-grid">
 <article class="blog-verdict">

@@ -56,13 +56,6 @@ body[data-reader-page="blog"] .section-rail {
   line-height: 1.8;
 }
 
-.blog-intro .blog-status {
-  border-left: 0;
-  border-block: 1px solid var(--rule);
-  background: transparent;
-  color: var(--muted);
-}
-
 .blog-intro .blog-tagline {
   margin-top: 0;
   color: var(--green);
@@ -82,6 +75,12 @@ body[data-reader-page="blog"] .section-rail {
 .blog-intro-links a {
   font-weight: 600;
   text-underline-offset: 4px;
+}
+
+.blog-scope {
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 13px !important;
 }
 
 .blog-architecture {
@@ -110,6 +109,130 @@ body[data-reader-page="blog"] .section-rail {
 .blog-question {
   max-width: 760px;
   margin-top: 20px;
+}
+
+.blog-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin: 24px 0;
+}
+
+.blog-evidence-card {
+  min-width: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.blog-evidence-media {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+
+.blog-evidence-media img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: contain;
+  transition: transform 320ms ease;
+}
+
+.blog-evidence-media:hover img,
+.blog-evidence-media:focus-visible img {
+  transform: scale(1.025);
+}
+
+.blog-evidence-kicker {
+  margin: 12px 0 4px !important;
+  color: var(--green) !important;
+  font-size: 11px !important;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+body[data-reader-page="blog"] .lesson-article .blog-evidence-card h3 {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  font: 600 17px/1.55 var(--sans);
+  letter-spacing: -0.015em;
+}
+
+.blog-evidence-card > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.blog-evidence-matrix {
+  min-width: 0;
+}
+
+body[data-reader-page="blog"] .lesson-article .blog-evidence-matrix table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.blog-evidence-matrix th:nth-child(1),
+.blog-evidence-matrix td:nth-child(1) {
+  width: 23%;
+}
+
+.blog-evidence-matrix th:nth-child(2),
+.blog-evidence-matrix td:nth-child(2) {
+  width: 31%;
+}
+
+.blog-evidence-matrix th:nth-child(3),
+.blog-evidence-matrix td:nth-child(3) {
+  width: 31%;
+}
+
+.blog-evidence-matrix th:nth-child(4),
+.blog-evidence-matrix td:nth-child(4) {
+  width: 15%;
+}
+
+.blog-evidence-matrix td:nth-child(2) {
+  text-align: left;
+}
+
+.blog-evidence-matrix :is(th, td) {
+  overflow-wrap: anywhere;
+}
+
+.blog-evidence-detail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 24px 0 0;
+  padding: 18px 0;
+  border-block: 1px solid var(--rule);
+}
+
+.blog-evidence-detail > div {
+  min-width: 0;
+}
+
+.blog-evidence-detail strong {
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.blog-evidence-detail p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.blog-evidence-detail b {
+  color: var(--ink);
 }
 
 .blog-entry-links {
@@ -141,13 +264,6 @@ body[data-reader-page="blog"] .section-rail {
   content: "↓";
   font-weight: 400;
   animation: blog-scroll-cue 1.8s ease-in-out infinite;
-}
-
-.blog-preview-lead {
-  max-width: 700px;
-  margin: 14px 0 0;
-  color: var(--muted);
-  font-size: 14px;
 }
 
 .blog-verdict-grid {
@@ -484,6 +600,19 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
     font-size: 15px;
   }
 
+  .blog-evidence-grid,
+  .blog-evidence-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-evidence-grid {
+    gap: 24px;
+  }
+
+  .blog-evidence-media {
+    aspect-ratio: 16 / 9;
+  }
+
   .blog-entry-links {
     margin-bottom: 64px;
   }
@@ -535,8 +664,14 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
 
   body[data-reader-page="blog"] .lesson-article table {
     display: block;
+    width: 100%;
     min-width: 0;
     margin: 18px 0;
+  }
+
+  body[data-reader-page="blog"] .lesson-article caption {
+    display: block;
+    width: 100%;
   }
 
   body[data-reader-page="blog"] .lesson-article thead {
@@ -606,6 +741,18 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
 
   #root-causes td:nth-child(4)::before {
     content: "边界与下一步";
+  }
+
+  #evidence-feature td:nth-child(2)::before {
+    content: "DexLab 实测";
+  }
+
+  #evidence-feature td:nth-child(3)::before {
+    content: "MotrixSim";
+  }
+
+  #evidence-feature td:nth-child(4)::before {
+    content: "可比性";
   }
 }
 
