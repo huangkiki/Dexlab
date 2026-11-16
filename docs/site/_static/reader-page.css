@@ -24,70 +24,30 @@ html {
 }
 
 .reader-layout {
+  grid-template-columns: minmax(0, 760px) 160px;
+  gap: 40px;
+  max-width: 1040px;
   align-items: start;
 }
 
-.reader-navigation .toctree-wrapper {
-  display: block;
+.reader-layout:has(.section-rail:empty),
+body[data-reader-page="search"] .reader-layout {
+  grid-template-columns: minmax(0, 760px);
+  max-width: 840px;
 }
 
-.reader-navigation .toctree-wrapper > ul {
-  list-style: none;
-  margin: 12px 0;
-  padding: 0;
+@media (max-width: 1200px) {
+  .reader-layout {
+    grid-template-columns: minmax(0, 760px);
+    max-width: 840px;
+  }
 }
 
-.reader-navigation ul {
-  list-style: none;
-  margin: 4px 0 0;
-  padding-left: 18px;
-}
-
-.reader-navigation .toctree-wrapper > ul {
-  padding-left: 0;
-}
-
-.reader-navigation li {
-  margin: 0;
-}
-
-.reader-navigation li > a {
-  display: block;
-  min-height: 40px;
-  padding: 8px 10px;
-  border-radius: 4px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-  text-decoration: none;
-}
-
-.reader-navigation li > a:hover {
-  background: var(--panel);
-  color: var(--ink);
-}
-
-.reader-navigation li > a.current {
-  background: var(--panel);
-  color: var(--green);
-  font-weight: 700;
-}
-
-.reader-navigation .caption {
-  display: block;
-  margin: 20px 10px 6px;
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.reader-navigation .caption-text {
-  font: inherit;
-}
-
-.reader-navigation ul ul a {
-  padding-block: 5px;
-  font-size: 13px;
+@media (max-width: 800px) {
+  .reader-layout {
+    display: block;
+    max-width: none;
+  }
 }
 
 .lesson-article > section > h1:first-child,
@@ -356,24 +316,7 @@ html {
   display: none;
 }
 
-@media (max-width: 1200px) {
-  .reader-navigation {
-    max-height: none;
-  }
-}
-
 @media (max-width: 800px) {
-  .reader-navigation .toctree-wrapper > ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-  }
-
-  .reader-navigation .toctree-wrapper > ul > li > ul {
-    grid-column: 1 / -1;
-    padding-left: 18px;
-  }
-
   .lesson-article:has(.lab-kicker) > section > h1,
   .lesson-article:has(.research-eyebrow) > section > h1 {
     font-size: 30px;
@@ -386,10 +329,6 @@ html {
 }
 
 @media (max-width: 440px) {
-  .reader-navigation .toctree-wrapper > ul {
-    grid-template-columns: 1fr;
-  }
-
   .lesson-article:has(.lab-kicker) > section > h1,
   .lesson-article:has(.research-eyebrow) > section > h1 {
     font-size: 28px;
@@ -397,8 +336,6 @@ html {
 }
 
 @media print {
-  .reader-navigation,
-  .rail-links,
   .lesson-pagination {
     display: none;
   }

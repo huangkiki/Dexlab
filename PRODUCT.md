@@ -22,6 +22,7 @@ The November 2026 ten-question interview established these choices:
 - Keep README minimal: the project name, one-line RSI direction, the approved architecture image and one primary research-index link. Detailed findings, cases, learning and reproduction belong on the website.
 - Give the website clear reading paths and explicit connections between questions, experiments, findings and further work. The learning-map reference is https://rl-robotics.github.io/. The homepage follows the existing dexterous-simulation guide’s reading style: warm paper, serif opening title, restrained green links, quiet separators and one scroll-linked research trace.
 - Organize the Blog as one complete content index around persistent topics. Keep category headings and article titles visible together rather than requiring readers to open each category first.
+- Keep the shared reader hierarchy flat: one global site masthead and, only when useful, one current-page outline. Do not repeat the full site tree in a second left sidebar.
 - Show the learning map, prerequisites and complete existing courses on this site. Reading links stay within DexLab; canonical learning repositories remain the authored sources and source-code references. Publish pinned snapshots through the shared documentation reader and sync upstream changes explicitly rather than editing two copies.
 - This revision covers README and the website entrance. Existing articles, research evidence and technical documentation stay available; it is not a redesign of every report.
 

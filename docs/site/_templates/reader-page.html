@@ -41,18 +41,6 @@
     </div>
   </header>
   <div class="learn-layout reader-layout">
-    <aside class="lesson-rail">
-      <details class="chapter-menu" open>
-        <summary>{{ '全部内容' if zh else 'All content' }}</summary>
-        <nav class="reader-navigation" aria-label="{{ '内容目录' if zh else 'Content navigation' }}">
-          {{ toctree(collapse=True, maxdepth=2, includehidden=True) }}
-        </nav>
-        <div class="rail-links">
-          <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
-          <a href="{{ pathto('learning') }}">{{ 'MuJoCo 学习路线' if zh else 'MuJoCo learning route' }}</a>
-        </div>
-      </details>
-    </aside>
     <main id="main-content" role="main" class="lesson-article bd-article">
       {% if pagename == 'search' %}
       <h1 id="search-documentation">{{ '搜索' if zh else 'Search' }}</h1>
