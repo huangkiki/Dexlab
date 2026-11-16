@@ -1,7 +1,5 @@
 # Blog
 
-<p class="blog-index-lead">DexLab 的完整内容目录。研究导读、实验文章与学习路线都在下方直接展开，不需要逐类点开。</p>
-
 <nav class="blog-jump" aria-label="Blog 专题">
   <a href="#blog-guide">研究导读</a>
   <a href="#blog-contact">接触与物理</a>
