@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use DexLab in your work, please cite this repository."
+title: "DexLab: Robotics Simulation Solver Diagnosis and Selection"
+abstract: >-
+  DexLab is a personal research project that uses controlled simulation
+  experiments to diagnose contact and friction behavior and improve the
+  fidelity of robotics simulation.
+date-released: 2026-11-13
+authors:
+  - family-names: Huang
+    given-names: Kiki
+    alias: huangkiki
+    website: "https://github.com/huangkiki"
+repository-code: "https://github.com/huangkiki/Dexlab"
+url: "https://huangkiki.github.io/Dexlab/"
+license: Apache-2.0
+type: software
+keywords:
+  - robotics
+  - simulation
+  - contact dynamics
+  - friction
+  - grasping

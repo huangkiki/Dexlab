@@ -14,3 +14,19 @@ The improved simulation helps the Agent learn new Skills. With those Skills, the
 
 <a id="architecture"></a>
 <a href="https://huangkiki.github.io/Dexlab/en/latest/#blog"><img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab architecture concept: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring"></a>
+
+## Citation
+
+If you use DexLab in your work, please cite the repository:
+
+```bibtex
+@misc{huang2026dexlab,
+  author = {Kiki Huang},
+  title = {DexLab: Robotics Simulation Solver Diagnosis and Selection},
+  year = {2026},
+  url = {https://github.com/huangkiki/Dexlab},
+  note = {GitHub repository}
+}
+```
+
+GitHub also reads [`CITATION.cff`](CITATION.cff) to provide its one-click citation entry.
