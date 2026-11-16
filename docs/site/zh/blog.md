@@ -74,30 +74,30 @@
 
 <div class="comparison-matrix blog-evidence-matrix">
 <table>
-<caption>三组代表实验与 MotrixSim 公开报告的对应关系</caption>
+<caption>三组代表实验的控制变量与验收结果</caption>
 <thead><tr>
-<th scope="col">主题</th>
-<th scope="col">DexLab 实测</th>
-<th scope="col">MotrixSim 公开报告</th>
-<th scope="col">能否直接并表</th>
+<th scope="col">实验</th>
+<th scope="col">控制变量</th>
+<th scope="col">关键读回</th>
+<th scope="col">结果</th>
 </tr></thead>
 <tbody>
 <tr><th scope="row"><strong>切割与侧推</strong><small>豆腐 / 香蕉</small></th>
-<td>豆腐 3 块，香蕉 4 块；活动块侧推 <strong>11.096 / 10.209 mm</strong></td>
-<td>当前报告首页未给出同协议切割实验</td>
-<td><span class="matrix-result mixed">不应并表</span></td></tr>
+<td>豆腐 0.125 ms、η=5 Pa·s；香蕉 0.25 ms、η=0</td>
+<td>活动块相对位移；刀面接触冲量</td>
+<td><span class="matrix-result pass">通过</span><small>11.096 / 10.209 mm</small></td></tr>
 <tr><th scope="row"><strong>接触力矩</strong><small>Wuji 双指夹球</small></th>
-<td>点接触 → 抗扭接触：位移 <strong>2.734 → 1.025 mm</strong></td>
-<td><a href="https://motrixsim.motphys.com/#contact-grasping">抓取摩擦阈值</a>、<a href="https://motrixsim.motphys.com/#friction-rotation">滚动摩擦与后旋</a></td>
-<td><span class="matrix-result mixed">机制相近</span></td></tr>
+<td>只把点接触改为抗扭接触</td>
+<td>保持位移；峰值角速度</td>
+<td><span class="matrix-result pass">2.734 → 1.025 mm</span><small>29.336 → 0.024992 rad/s</small></td></tr>
 <tr><th scope="row"><strong>苹果抓取</strong><small>OpenArm + Wuji</small></th>
-<td>10 个固定回归场景：MuJoCo <strong>1/10</strong>，SuperDex <strong>10/10</strong></td>
-<td><a href="https://motrixsim.motphys.com/#sdf-collision">SDF 精细几何抓苹果演示</a></td>
-<td><span class="matrix-result mixed">任务相近</span></td></tr>
+<td>同一组 10 个固定回归场景</td>
+<td>离桌、支撑、保持、穿透与释放</td>
+<td><span class="matrix-result mixed">MuJoCo 1/10 · SuperDex 10/10</span><small>固定配置，不是纯 solver 排名</small></td></tr>
 </tbody>
 </table>
 </div>
-<p class="matrix-note">MotrixSim 内容为公开技术报告中的外部结果；DexLab 数值来自本项目保存记录。任务、几何、控制和评分尚未对齐，因此这里只建立阅读对应关系，不生成跨协议胜负。</p>
+<p class="matrix-note">结果来自 DexLab 已保存的原生记录；不同实验的控制变量与验收条件不同，不合并为跨引擎总排名。</p>
 
 <div class="blog-evidence-detail">
 <div>
