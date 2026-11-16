@@ -19,6 +19,85 @@ body[data-reader-page="blog"] .section-rail {
   letter-spacing: -0.01em;
 }
 
+.blog-deck strong {
+  color: var(--ink);
+}
+
+.blog-intro {
+  max-width: 760px;
+  margin: 18px 0 30px;
+}
+
+.blog-intro p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.blog-intro p strong {
+  color: var(--ink);
+}
+
+.blog-intro .blog-tagline {
+  margin-top: 0;
+  color: var(--green);
+  font: 700 14px/1.7 var(--sans);
+  letter-spacing: 0.02em;
+}
+
+.blog-intro-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.blog-intro-links a {
+  font-weight: 600;
+  text-underline-offset: 4px;
+}
+
+.blog-entry-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 26px 0 clamp(120px, 18vh, 180px);
+  font-size: 14px;
+}
+
+.blog-entry-links a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.blog-entry-links a:hover {
+  text-decoration: underline;
+}
+
+.blog-entry-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--green);
+}
+
+.blog-entry-primary::after {
+  content: "↓";
+  font-weight: 400;
+  animation: blog-scroll-cue 1.8s ease-in-out infinite;
+}
+
+.blog-preview-lead {
+  max-width: 700px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .blog-verdict-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -76,6 +155,23 @@ body[data-reader-page="blog"] .section-rail {
 
 .blog-verdict > a:hover {
   text-decoration: underline;
+}
+
+.blog-verdict-grid.is-reveal-ready .blog-verdict {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(3px);
+  transition:
+    opacity 620ms ease,
+    transform 720ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 620ms ease;
+  transition-delay: calc(var(--reveal-order, 0) * 110ms);
+}
+
+.blog-verdict-grid.is-reveal-ready .blog-verdict.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 .blog-jump {
@@ -332,6 +428,14 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
 }
 
 @media (max-width: 700px) {
+  .blog-intro p {
+    font-size: 15px;
+  }
+
+  .blog-entry-links {
+    margin-bottom: 100px;
+  }
+
   .blog-links,
   .blog-subgrid {
     grid-template-columns: 1fr;
@@ -450,6 +554,30 @@ body[data-reader-page="blog"] .lesson-article td:first-child {
 
   #root-causes td:nth-child(4)::before {
     content: "边界与下一步";
+  }
+}
+
+@keyframes blog-scroll-cue {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-entry-primary::after {
+    animation: none;
+  }
+
+  .blog-verdict-grid.is-reveal-ready .blog-verdict {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }
 

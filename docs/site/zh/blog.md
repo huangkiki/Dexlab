@@ -1,6 +1,29 @@
-# 对比实验，先看这三个答案
+# DexLab 对比实验阅读指南
 
-<p class="blog-deck">DexLab 现有实验不支持一张“solver 总排名”。它们更有价值地回答了三件事：哪一层先失效，改变一个变量后结果怎样变化，以及这个结论最多能外推到哪里。</p>
+<div class="blog-intro">
+<p class="blog-tagline"><strong>Contact-rich robotics, beyond rigid-body simulation.</strong></p>
+<p>DexLab 是我用于研究接触、形变和材料分离条件下机器人操作的物理研究平台。这个 Blog 页面集中整理其中已经完成的 solver 与接触对比实验。</p>
+<p>机器人策略在仿真中失败时，我们通常只看到一次失败。它可能来自策略、控制器、场景配置、接触离散、材料模型或数值求解。这组对比实验要追问的正是：<strong>失败的到底是策略，还是我们信任的物理？</strong></p>
+<nav class="blog-intro-links" aria-label="DexLab 介绍与阅读入口">
+  <a href="about.html">完整项目介绍</a>
+  <a href="index.html">研究首页</a>
+  <a href="_static/research/dexterous-simulation.html">研究导读</a>
+</nav>
+</div>
+
+<p class="blog-deck"><strong>这个页面怎么读：</strong>它不给出“谁赢了”的引擎排行榜，而是把接触、抓持、布料、耦合和斜面实验整理成三条线索：对比实验测出了什么，几个 solver 各自显示出什么边界，以及失败最早发生在哪一层。</p>
+
+<nav class="blog-entry-links" aria-label="开始阅读">
+  <a class="blog-entry-primary" href="#blog-preview">先看三个判断</a>
+  <a href="#experiment-findings">实验结论</a>
+  <a href="#solver-map">Solver 认知</a>
+  <a href="#root-causes">失败根因</a>
+</nav>
+
+(blog-preview)=
+## 先看三个判断
+
+<p class="blog-preview-lead">下面的判断会随着滚动依次出现。每个判断都是后文实验记录的前置读法，不替代具体证据。</p>
 
 <div class="blog-verdict-grid">
 <article class="blog-verdict">
