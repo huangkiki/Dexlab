@@ -1,14 +1,14 @@
 # Research homepage
 
-Mode: Read. Code-led implementation. Scope: bilingual homepages, their template, stylesheet and scroll enhancement. The homepage is a research entrance whose first screen contains one primary index action, followed by a scroll-linked research trace and five pre-expanded topic groups.
+Mode: Read. Code-led implementation. Scope: bilingual homepages, their template, stylesheet and scroll enhancement. The homepage is a research entrance whose first screen contains one primary index action, followed by the system architecture, a scroll-linked research trace and five pre-expanded topic groups.
 
 ## Direction contract
 
-THESIS: Make the space between arrival and the full index readable. The visitor understands DexLab's research direction, sees how failures become checked findings, and meets the actual article titles while scrolling; the canonical Blog remains the exhaustive catalogue.
+THESIS: Make the space between arrival and the full index readable. The visitor sees the system architecture, understands how failures become checked findings, and meets the actual article titles while scrolling; the canonical Blog remains the exhaustive catalogue.
 
 OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif display title and fine rules. Use an editorial long page, an unboxed vertical trace and asymmetric open topic rows; no cards, gradients or decorative depth.
 
-STORY: The task fails, the reader follows the first failing layer, sees the skill/simulation fork, and reaches independent retest. The page then opens five reading threads with direct article links. RSI remains a direction without claiming a completed autonomous loop.
+STORY: The architecture shows the path from tasks to scoring; the reader then follows the first failing layer, sees the skill/simulation fork, and reaches independent retest. The page opens five reading threads with direct article links. RSI remains a direction without claiming a completed autonomous loop.
 
 FIRST VIEWPORT: A horizontal masthead, oversized DexLab title, two-line research thesis, short scope note, one ruled index action and a quiet downward cue. The primary action remains visible without requiring the motion layer. Mobile preserves the same order, with the scroll cue moved into normal flow.
 
