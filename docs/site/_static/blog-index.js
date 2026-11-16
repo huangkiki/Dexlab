@@ -3,7 +3,7 @@
   "use strict";
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reducedMotion || !("IntersectionObserver" in window)) {
+  if (reducedMotion) {
     return;
   }
 
@@ -15,6 +15,15 @@
 
     root.classList.add("is-reveal-ready");
     items.forEach((item, index) => item.style.setProperty("--reveal-order", index));
+
+    if (!("IntersectionObserver" in window)) {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          items.forEach((item) => item.classList.add("is-revealed"));
+        });
+      });
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
