@@ -75,7 +75,7 @@
 ## 按需要继续
 
 - [全部实验](docs/site/zh/experiments.md)
-- [研究导读](docs/site/zh/_static/research/dexterous-simulation.html)
+- [研究导读](docs/site/_static/research/dexterous-simulation.html)
 - [仿真学习](docs/site/zh/learning.md)
 
 ## 联系作者
