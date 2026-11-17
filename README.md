@@ -4,9 +4,9 @@
 
 I study how agents and simulation can improve each other through experiments. Tasks expose a problem; controlled comparisons locate the first failing layer; the fix is then retested independently.
 
-## [Explore DexLab on GitHub →](https://github.com/huangkiki/Dexlab)
+## [Open the DexLab research overview →](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html)
 
-This repository is the main entry to the project. It includes the architecture, experiment records, results, solver notes and learning material below.
+The research overview is the main entry to the project. This README mirrors its architecture, experiment records, results, solver notes and learning material.
 
 [简体中文](README.zh-CN.md)
 
