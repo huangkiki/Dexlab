@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-17 专题增补：[Closing the Loop：硬件限位、闭环传动与 reset 要分层验收](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#closing-loop-transmission)。** Unitree G1 脚踝的串行模型忽略了曲柄—推杆闭链。作者依次处理实测限位、传动雅可比、控制增益、reset 一致性和积分器稳定性；可迁移的是这条判因顺序，不是“所有资产都应立刻改成闭环”。
+
 **2026-11-16 专题增补：[CaP-X 与 ASPIRE：先验证反馈，再晋升技能](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#capx-aspire)。** 两篇同属 Code-as-Policy：CaP-X 把 API 抽象层级和反馈通道变成受控变量；ASPIRE 要求失败修复经隔离复现后才进入技能库。DexLab 先借这两道证据门，不先迁移整套 Agent。
 
 **2026-11-16 专题增补：[COAP：可审计状态、任务程序与首次失效层](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#coap)。** 最值得借的不是“纯代码超过 VLA”，而是显式状态、任务/原语分层和受控代码改动；DexLab 先把它用于一条已有接触失败记录，不整体切换策略路线。
@@ -466,6 +468,25 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描
 
 最小验收不是平均成功率上升，而是首次失效层更明确、proposal 在隔离条件下可复现、反例能阻止错误触发、失败分母不变且留出结果未回流调参。若反馈没有改善归因，先改测量选择性；若主要误差来自评分或物理，仍回到 scorer audit 或接触标定。本轮核查 CaP-X `2603.22435v2`、固定源码 `53e9966d`，以及 ASPIRE `2607.00272v2`、固定源码 `fa00f0ef`；没有运行外部 Agent、仿真、物理重跑或真机实验，全部性能数字均为作者报告。
 
+(closing-loop-transmission)=
+## 硬件限位、闭环传动与 reset：保真度不是一个开关
+
+**2026-11-17 蒸馏：[Closing the Loop 完整讨论](https://github.com/huangkiki/Dexlab/discussions/372)。** [原文](https://kzakka.com/closing-the-loop/)处理的是 Unitree G1 脚踝：常见串行模型把 pitch 和 roll 当作独立关节，真实机构却由电机、曲柄和推杆形成两个闭链。
+
+**最值得借的是按可观测后果逐层加模型：硬件限位 → 传动耦合 → 控制映射 → reset → 积分器/约束求解。** 例如，仿真写入一个机械止挡不允许的组合角；串行关节范围会放行，实测切角限位应拒绝。再恢复闭链后，如果 reset 只写脚踝角而不移动电机，杆长不一致会让求解器产生校正力和位置瞬态。即使 reset 一致，把脚踝位置执行器、`implicitfast` 和 4 ms 步长放在一起，闭链误差仍可能增长。每一步都新增不同的状态与首次失效层。
+
+| 本体的模型 | 多表示了什么 | 何时值得用 |
+| --- | --- | --- |
+| 串行关节 + 实测切角限位 | 近似可达域，没有电机/杆件闭链状态 | 重定向、初始训练；先固定一个简单基线 |
+| spatial tendon + equality | 理想杆长、位姿相关传动、电机状态 | 力矩、惯量或控制增益会改变结论 |
+| 显式 rod body + connect | 杆的质量、惯量、碰撞和端部自由度 | 这些因素进入被研究的任务或失败 |
+
+作者报告，在其 LAFAN1 重定向中，机械限位之外的着地脚样本有 1.5% 超过 1°；对负载着地样本估算，少于 0.1% 需要单电机超过 25 N·m，因此“限位修正后的串行模型已足够做初步训练”是有条件判断。恢复闭链后，传动雅可比 `G` 使脚踝扭矩和反射惯量随位姿变化。作者还报告：同一串行训练设置中，直接给两个电机各 14.25 N·m/rad，名义站姿的等效 pitch 刚度约为 62、roll 约为 19，而训练口径为每个脚踝关节 28.5；一个 6 秒舞蹈片段、256 组配对 rollout 的失败率从约 16% 升到约 20%。这表明控制接口不能只比较同名参数，但只覆盖一个策略、一个片段和特定失败阈值。
+
+**DexLab 的顺序：** 先给已有资产补一张“joints / tendons / equality / actuator placement / integrator / reset / soft-limit”审计表；只有当失败指向组合限位、驱动耦合或控制映射时，才做“加切角的串行基线对一致初始化的 tendon 闭环”的受控比较。reset 与积分器必须是独立变量；最终是否掉下或误差是否变小，不足以证明闭环值得。当前评分语义与 [Discussion #302](https://github.com/huangkiki/Dexlab/discussions/302) 仍是更早的判因层；这里的“闭环”是运动学闭链，不是 [#334](https://github.com/huangkiki/Dexlab/discussions/334) 所说的完整训练闭环。
+
+核查于 2026-11-17。已读取原文、公式、表格和随文模型包；包内五个 MJCF 都写有 `discrete`，并分别提供 serial、tendon、rod-body 以及执行器在脚踝/电机上的变体。模型包 SHA-256 为 `32eb7206e4996b7d76956590544039377fe3ec67e9387a7a2df2f7334f3529d5`。当前环境 MuJoCo 为 3.12，低于模型要求的 3.16；本轮没有运行硬件限位测量、256 组策略 rollout 或积分器扫描，因此性能与成功率仍是作者报告。
+
 
 ## 来源与维护范围
 
@@ -478,3 +499,5 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描
 2026-11-16 增补 COAP 的状态证据与代码改动门槛。该节沿用现有评分审计优先顺序，没有新增策略实现、实验或外部复现；完整讨论与版本边界见 [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335)。
 
 2026-11-16 增补 CaP-X / ASPIRE 的反馈契约与技能晋升门槛。两者分别以实验设计和技能准入影响后续评测，不代表已采用代码 Agent、自动技能库或进化搜索；完整讨论见 [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341) 与 [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342)。
+
+2026-11-17 增补 G1 脚踝闭环传动的本体建模边界。该节把硬件限位、传动状态、控制映射、reset 和积分器分开，不表示 DexLab 已迁移闭环资产或复现作者实验；完整讨论见 [Discussion #372](https://github.com/huangkiki/Dexlab/discussions/372)。
