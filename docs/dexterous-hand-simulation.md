@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-17 addition: [Closing the Loop: validate hardware stops, closed-chain transmission and reset as separate layers](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#closing-loop-transmission).** A common Unitree G1 ankle model omits the crank-and-pushrod loops. The authors separately address measured stops, the transmission Jacobian, controller gains, consistent resets and integrator stability. The transferable lesson is that attribution order, not an immediate closed-loop rewrite of every asset.
+
 **2026-11-16 addition: [CaP-X and ASPIRE: validate feedback before promoting skills](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#capx-aspire).** Both are Code-as-Policy systems. CaP-X turns API abstraction and feedback channels into controlled variables; ASPIRE admits a repair as reusable knowledge only after isolated reproduction. DexLab should borrow these evidence gates before migrating either agent stack.
 
 **2026-11-16 addition: [COAP: auditable state, task programs and first-failure layers](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#coap).** The useful transfer is explicit state, a task/primitive boundary and controlled code changes, not a wholesale switch to code-only policies.
@@ -467,6 +469,25 @@ Return to the toast-slip record. A terminal score says only that the task failed
 
 Acceptance is a clearer first-failure layer, an independently reproducible proposal, a counterexample that blocks a bad trigger, unchanged failure denominators and no held-out feedback into tuning—not merely a higher average success rate. If richer feedback does not improve attribution, improve measurement selectivity; if scoring or physics dominates, return to scorer audit or contact calibration. Checked on 2026-11-16 against CaP-X `2603.22435v2` and source `53e9966d`, plus ASPIRE `2607.00272v2` and source `fa00f0ef`. No external agent, simulation, physics rerun or hardware experiment was run here; all performance figures are author-reported.
 
+(closing-loop-transmission)=
+## Hardware stops, closed-chain transmission and reset: fidelity is not one switch
+
+**2026-11-17 distillation: [full Closing the Loop discussion](https://github.com/huangkiki/Dexlab/discussions/372).** The [source article](https://kzakka.com/closing-the-loop/) examines the Unitree G1 ankle. A common serial model treats pitch and roll as independent joints, while the hardware drives the foot through two crank-and-pushrod loops.
+
+**The useful order is consequence-driven: hardware stops → transmission coupling → controller mapping → reset → integrator/constraint solve.** A serial joint range can accept a pitch–roll combination that the physical stops reject. After a closed chain is restored, a reset that writes only ankle angles leaves the rod lengths inconsistent; the constraint solver then creates corrective forces and pose transients. Even with a consistent reset, ankle-space position actuators plus `implicitfast` at a 4 ms timestep can let loop-closure error grow. Each stage introduces a different hidden state and first-failure layer.
+
+| Body model | What it adds | When it earns its cost |
+| --- | --- | --- |
+| Serial joints + measured corner stops | An approximate reachable set, with no motor/rod loop state | Retargeting or initial training; establish the simple baseline first |
+| Spatial tendon + equality | Ideal rod length, pose-dependent transmission and motor state | Torque, inertia or controller gains can change the conclusion |
+| Explicit rod body + connect | Rod mass, inertia, collisions and end-joint DOFs | Those factors enter the task or failure being studied |
+
+The authors report that 1.5% of planted-foot samples in their LAFAN1 retargets lay more than 1° beyond the mechanical stops. Among load-bearing samples, fewer than 0.1% required more than 25 N·m at either motor, making the stopped serial model a conditional choice for initial training rather than a universal approximation. With the closed chain restored, the transmission Jacobian `G` makes ankle torque and reflected inertia pose-dependent. The authors also report that direct 14.25 N·m/rad gains at each motor produced roughly 62 N·m/rad effective pitch stiffness and 19 N·m/rad roll stiffness at nominal stance, versus the 28.5 N·m/rad per-ankle training convention. Failure in 256 paired rollouts of one six-second dance clip rose from about 16% to 20%. This establishes a controller-mapping effect under one policy and clip, not a general ranking.
+
+**DexLab order:** audit existing assets for `joints / tendons / equality / actuator placement / integrator / reset / soft-limit`; only when a failure points to combined limits, drive coupling or controller mapping should it compare a corner-limited serial baseline with a consistently initialized tendon loop. Reset and integrator remain independent variables. Whether a rollout falls or its final error shrinks does not by itself establish that closed-chain fidelity is worth the added cost. Scorer semantics and [Discussion #302](https://github.com/huangkiki/Dexlab/discussions/302) remain earlier attribution layers. Here “closed loop” means a kinematic closed chain, not the complete training loop in [#334](https://github.com/huangkiki/Dexlab/discussions/334).
+
+Checked on 2026-11-17 against the article, equations, tables and downloadable model archive. All five MJCF files declare `discrete` and provide serial, tendon or rod-body variants with actuators at either the ankle or motors. The archive SHA-256 is `32eb7206e4996b7d76956590544039377fe3ec67e9387a7a2df2f7334f3529d5`. The local environment has MuJoCo 3.12, below the models' 3.16 requirement. No hardware limit measurement, 256-rollout policy test or integrator sweep was rerun; all performance and success figures remain author-reported.
+
 
 ## Sources and maintenance scope
 
@@ -479,3 +500,5 @@ On 2026-11-12, the RLT/CAP precision-insertion boundary was added after static r
 On 2026-11-16, the COAP state-evidence and code-change gates were added without changing the current scorer-audit priority or claiming an external reproduction. The full reasoning and version boundaries are in [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335).
 
 On 2026-11-16, the CaP-X and ASPIRE feedback and skill-admission gates were added. They affect future evaluation design but do not constitute adoption of a coding agent, automatic skill library or evolutionary search. Full reasoning is in [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341) and [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342).
+
+On 2026-11-17, the body-model boundaries for closed-chain ankle transmission were added. The section separates hardware stops, transmission state, controller mapping, reset and integration; it does not claim that DexLab has migrated closed-chain assets or reproduced the authors' experiments. Full reasoning is in [Discussion #372](https://github.com/huangkiki/Dexlab/discussions/372).
