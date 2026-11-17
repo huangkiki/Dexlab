@@ -46,74 +46,110 @@
     <span>Task trial → First failing layer → Repair → Independent retest</span>
   </header>
 
-  <div class="home-evidence-grid" data-reveal-group>
-    <article class="home-evidence-card home-evidence-card-wide" data-reveal-item>
-      <div class="home-evidence-media home-evidence-split">
-        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="Latest tofu two-cut and side-push recording">
-          <source src="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4">
-        </video>
-        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="Latest banana three-cut and side-push recording">
-          <source src="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p class="home-evidence-label">01 / Cutting and pushing</p>
-      <h3>Three or four pieces must move independently after the cuts.</h3>
-      <p>Latest records: tofu becomes three pieces after two cuts; banana becomes four after three.</p>
-    </article>
-    <article class="home-evidence-card" data-reveal-item>
-      <div class="home-evidence-media">
-        <video controls muted loop playsinline preload="metadata" aria-label="Wuji point and torsional contact comparison">
-          <source src="../../zh-cn/latest/_static/wuji-contact/comparison.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p class="home-evidence-label">02 / Friction and torque</p>
-      <h3>Persistent contact does not prevent rotation about the grasp line.</h3>
-      <p>Point contact lacks the required torque direction; synthetic torsional contact brings retention back inside its original threshold.</p>
-    </article>
-    <article class="home-evidence-card" data-reveal-item>
-      <div class="home-evidence-media">
-        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/studio/apple.png" aria-label="OpenArm and Wuji apple-stem grasp record">
-          <source src="../../zh-cn/latest/_static/studio/apple.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p class="home-evidence-label">03 / Apple-stem grasping</p>
-      <h3>A fixed task can still produce different outcomes across configurations.</h3>
-      <p>Read MuJoCo and SuperDex differences together with step size, drive and contact representation.</p>
-    </article>
-    <article class="home-evidence-card" data-reveal-item>
-      <div class="home-evidence-media">
-        <video controls muted loop playsinline preload="metadata" aria-label="Cloth grasp and motion record">
-          <source src="../../zh-cn/latest/_static/cloth-studio/grasp.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p class="home-evidence-label">04 / Cloth</p>
-      <h3>Grasping, lifting and completing a fold are separate checks.</h3>
-      <p>Seven native configurations produced 105 frozen records; material responses are not cross-engine calibrated.</p>
-    </article>
-    <article class="home-evidence-card" data-reveal-item>
-      <div class="home-evidence-media">
-        <video controls muted loop playsinline preload="metadata" poster="../../zh-cn/latest/_static/studio/incline.png" aria-label="Six-engine incline comparison record">
-          <source src="../../zh-cn/latest/_static/studio/incline.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p class="home-evidence-label">05 / Six-engine incline</p>
-      <h3>Contact representation and numerical gates still change the result.</h3>
-      <p>Fixed profiles can be compared individually, but not combined into a universal solver ranking.</p>
-    </article>
-  </div>
+  <div class="evidence-inspector" role="group" aria-label="Representative experiment evidence inspector">
+    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-cut" aria-controls="panel-cut" checked>
+    <label class="evidence-choice" id="choice-cut" for="evidence-cut"><span>01</span><span><strong>Cutting and pushing</strong><small>11.096 / 10.209 mm</small></span></label>
+    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-wuji" aria-controls="panel-wuji">
+    <label class="evidence-choice" id="choice-wuji" for="evidence-wuji"><span>02</span><span><strong>Contact and torsional moment</strong><small>2.734 → 1.025 mm</small></span></label>
+    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-apple" aria-controls="panel-apple">
+    <label class="evidence-choice" id="choice-apple" for="evidence-apple"><span>03</span><span><strong>Apple-stem grasp</strong><small>1/10 · 10/10</small></span></label>
+    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-cloth" aria-controls="panel-cloth">
+    <label class="evidence-choice" id="choice-cloth" for="evidence-cloth"><span>04</span><span><strong>Cloth</strong><small>52 / 105 pass</small></span></label>
+    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-incline" aria-controls="panel-incline">
+    <label class="evidence-choice" id="choice-incline" for="evidence-incline"><span>05</span><span><strong>Six-engine incline</strong><small>Per configuration</small></span></label>
 
-  <div class="home-result-table" data-reveal-group>
-    <table data-reveal-item>
-      <caption>Controlled variables and acceptance results</caption>
-      <thead><tr><th>Experiment</th><th>Controlled variable</th><th>Key readback</th><th>Result</th></tr></thead>
-      <tbody>
-        <tr><th>Cutting and pushing</th><td>Tofu 0.125 ms, η=5 Pa·s; banana 0.25 ms, η=0</td><td>Active-piece displacement; knife–material impulse</td><td><strong>Pass</strong><small>11.096 / 10.209 mm</small></td></tr>
-        <tr><th>Contact torque</th><td>Point contact replaced only by torsional contact</td><td>Retention displacement; peak angular velocity</td><td><strong>2.734 → 1.025 mm</strong><small>29.336 → 0.024992 rad/s</small></td></tr>
-        <tr><th>Apple grasp</th><td>Same set of ten fixed regression scenes</td><td>Lift, support, retention, penetration and release</td><td><strong>MuJoCo 1/10 · SuperDex 10/10</strong><small>Fixed profiles</small></td></tr>
-        <tr><th>Cloth</th><td>Same frozen holdout set</td><td>Deformation, sag, penetration, residual motion and cost</td><td><strong>52 / 105 pass</strong><small>Materials not calibrated</small></td></tr>
-        <tr><th>Six-engine incline</th><td>Static, sliding and nominal zero friction; three steps</td><td>Displacement, velocity, force and numerical consistency</td><td><strong>Per-profile verdicts</strong><small>No composite ranking</small></td></tr>
-      </tbody>
-    </table>
+    <div class="evidence-panels">
+      <article class="evidence-panel" id="panel-cut" data-evidence="cut" role="region" aria-labelledby="choice-cut">
+        <div class="evidence-media evidence-media-split">
+          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="Latest tofu two-cut and side-push recording"><source src="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4"></video>
+          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="Latest banana three-cut and side-push recording"><source src="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4"></video>
+        </div>
+        <div class="evidence-copy">
+          <p class="home-evidence-label">Cutting / separation criterion</p>
+          <h3>After cutting, prove the final piece can move independently.</h3>
+          <p class="evidence-verdict">Direct pushing after the last cut produced independent displacement for three tofu pieces and four banana pieces.</p>
+          <dl class="evidence-ledger">
+            <div><dt>Control variable</dt><dd>Tofu 0.125 ms, η=5 Pa·s; banana 0.25 ms, η=0</dd></div>
+            <div><dt>Native readback</dt><dd>Relative displacement of active pieces and knife-contact impulse</dd></div>
+            <div><dt>Criterion</dt><dd><strong>Pass · 11.096 / 10.209 mm</strong></dd></div>
+            <div><dt>Scope</dt><dd>Synthetic materials and a fixed cut-and-push protocol; not food calibration</dd></div>
+          </dl>
+          <a href="cut-push.html">Open records, controls and raw data →</a>
+        </div>
+      </article>
+
+      <article class="evidence-panel" id="panel-wuji" data-evidence="wuji" role="region" aria-labelledby="choice-wuji">
+        <div class="evidence-media">
+          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/wuji-contact/hold-comparison.png" aria-label="Wuji point and torsional contact comparison"><source src="../../zh-cn/latest/_static/wuji-contact/comparison.mp4" type="video/mp4"></video>
+        </div>
+        <div class="evidence-copy">
+          <p class="home-evidence-label">Contact / moment direction</p>
+          <h3>Persistent contact does not prevent rotation about the grasp line.</h3>
+          <p class="evidence-verdict">Point contact lacks the required torque direction; synthetic torsional contact brings retention back inside its original threshold.</p>
+          <dl class="evidence-ledger">
+            <div><dt>Control variable</dt><dd>Point contact replaced only by synthetic torsional contact</dd></div>
+            <div><dt>Native readback</dt><dd>Two-second hold displacement and peak angular velocity</dd></div>
+            <div><dt>Criterion</dt><dd><strong>2.734 → 1.025 mm; 29.336 → 0.024992 rad/s</strong></dd></div>
+            <div><dt>Scope</dt><dd>Two-finger ball hold; not hardware material calibration or whole-hand capability</dd></div>
+          </dl>
+          <a href="wuji-contact.html">Open contact records, video and independent recomputation →</a>
+        </div>
+      </article>
+
+      <article class="evidence-panel" id="panel-apple" data-evidence="apple" role="region" aria-labelledby="choice-apple">
+        <div class="evidence-media">
+          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/studio/apple.png" aria-label="OpenArm and Wuji apple-stem grasp record"><source src="../../zh-cn/latest/_static/studio/apple.mp4" type="video/mp4"></video>
+        </div>
+        <div class="evidence-copy">
+          <p class="home-evidence-label">Task / frozen disturbance set</p>
+          <h3>A fixed task can still produce different outcomes across configurations.</h3>
+          <p class="evidence-verdict">Read MuJoCo and SuperDex differences together with step size, drive, mass, position and contact representation.</p>
+          <dl class="evidence-ledger">
+            <div><dt>Control variable</dt><dd>Same set of ten fixed regression scenes with no held-out retuning</dd></div>
+            <div><dt>Native readback</dt><dd>Lift, support, sustained hold, penetration and release</dd></div>
+            <div><dt>Criterion</dt><dd><strong>MuJoCo 1/10 · SuperDex 10/10</strong></dd></div>
+            <div><dt>Scope</dt><dd>Fixed-profile comparison, not an engine accuracy ranking</dd></div>
+          </dl>
+          <a href="experiments.html#apple-replays">Open close-up replays and fixed-scene results →</a>
+        </div>
+      </article>
+
+      <article class="evidence-panel" id="panel-cloth" data-evidence="cloth" role="region" aria-labelledby="choice-cloth">
+        <div class="evidence-media">
+          <video controls muted loop playsinline preload="none" aria-label="Cloth grasp and motion record"><source src="../../zh-cn/latest/_static/cloth-studio/grasp.mp4" type="video/mp4"></video>
+        </div>
+        <div class="evidence-copy">
+          <p class="home-evidence-label">Deformable body / staged acceptance</p>
+          <h3>Grasping, lifting and completing a fold are separate checks.</h3>
+          <p class="evidence-verdict">Deformation, penetration, residual motion and cost are scored separately on one frozen held-out set.</p>
+          <dl class="evidence-ledger">
+            <div><dt>Control variable</dt><dd>Seven native configurations on the same frozen held-out set</dd></div>
+            <div><dt>Native readback</dt><dd>Deformation, sag, penetration, residual motion and cost</dd></div>
+            <div><dt>Criterion</dt><dd><strong>52 / 105 pass; 53 failures retained</strong></dd></div>
+            <div><dt>Scope</dt><dd>Material responses are not cross-engine calibrated</dd></div>
+          </dl>
+          <a href="cloth-comparison.html">Open cloth configurations, failures and evidence limits →</a>
+        </div>
+      </article>
+
+      <article class="evidence-panel" id="panel-incline" data-evidence="incline" role="region" aria-labelledby="choice-incline">
+        <div class="evidence-media">
+          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/studio/incline.png" aria-label="Six-engine incline comparison record"><source src="../../zh-cn/latest/_static/studio/incline.mp4" type="video/mp4"></video>
+        </div>
+        <div class="evidence-copy">
+          <p class="home-evidence-label">Solver / same-task response</p>
+          <h3>Contact representation and numerical gates still change the result.</h3>
+          <p class="evidence-verdict">Static, sliding and nominally frictionless cases are decided per profile rather than as one engine total.</p>
+          <dl class="evidence-ledger">
+            <div><dt>Control variable</dt><dd>Three contact conditions and three steps across six fixed engine profiles</dd></div>
+            <div><dt>Native readback</dt><dd>Displacement, velocity, support force, geometric overlap and observation validity</dd></div>
+            <div><dt>Criterion</dt><dd><strong>Passes, failures and invalid records remain separate</strong></dd></div>
+            <div><dt>Scope</dt><dd>Different protocols and budgets do not form a universal solver ranking</dd></div>
+          </dl>
+          <a href="visual-comparisons.html#incline">Open synchronized replay, curves and the complete matrix →</a>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -123,20 +159,20 @@
     <p>Three conclusions</p>
     <h2 id="answer-heading">Read these three judgments first.</h2>
   </header>
-  <div class="home-answer-grid" data-reveal-group>
-    <article id="experiment-findings" data-reveal-item>
+  <div class="home-answer-grid">
+    <article id="experiment-findings">
       <span>01 / Experiment findings</span>
       <h3>Results are failure boundaries, not engine rankings.</h3>
       <p>Contact model, geometry, coupling and assisted retention can change the task verdict. Smaller steps and more iterations are not universal fixes.</p>
       <a href="experiments.html">Open the experiment catalogue →</a>
     </article>
-    <article id="solver-map" data-reveal-item>
+    <article id="solver-map">
       <span>02 / Solver understanding</span>
       <h3>Separate engine, model, coupling and numerical configuration.</h3>
       <p>A name can belong to different layers. Profiles become comparable only after versions, contact representation, budgets and runtime readbacks are frozen.</p>
       <a href="solver-taxonomy.html">Read the solver taxonomy →</a>
     </article>
-    <article id="root-causes" data-reveal-item>
+    <article id="root-causes">
       <span>03 / Failure causes</span>
       <h3>Many “solver failures” are decided before iteration.</h3>
       <p>Check task, geometry, control and coupling before discretisation, residuals and scoring. Keep unresolved mechanisms explicitly labelled.</p>

@@ -8,6 +8,7 @@ colors:
   ink: '#282b26'
   muted: '#60675a'
   rule: '#dcded4'
+  media: '#111820'
 typography:
   hero-display:
     fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
@@ -169,7 +170,7 @@ components:
 
 **Creative North Star: "The Research Reading Index"**
 
-The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a four-stage research trace and five pre-expanded topic groups. Fine rules and open rows carry the hierarchy.
+The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a five-case evidence inspector, three research judgments and direct continuation links. Fine rules and open rows carry the hierarchy.
 
 This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: one global masthead, a 760px reading column and an optional current-page outline. The dedicated left chapter rail remains only on the course route, where it represents an ordered lesson sequence rather than the entire website. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
@@ -177,14 +178,14 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
-- The original architecture diagram followed by a scroll-linked research trace and asymmetric topic rows.
+- The original architecture diagram followed by a ruled, native-radio evidence inspector and open reading rows.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
 - Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
-Source of truth: `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` and `_static/blog-index.css` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` and `_static/blog-index.css` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
@@ -202,6 +203,7 @@ One restrained green accent sits among warm, low-chroma neutrals shared with the
 
 - **Warm Paper** (`page`): the page canvas and text on the focused skip link.
 - **Paper Wash** (`panel`): the native video's backdrop.
+- **Recorded Media** (`media`): the neutral dark stage behind user-controlled video.
 - **Charcoal** (`ink`): titles, body text, reading rows, summary labels and hovered ordinary links.
 - **Muted Olive Gray** (`muted`): supporting text, captions and resting navigation.
 - **Fine Rule** (`rule`): reading-rail edge, section separators and reading rows.
@@ -226,10 +228,12 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. The research trace then uses a sticky left statement and a four-stage right column. The topic map uses one ruled row per theme: an editorial heading on the left and direct article links in two columns on the right. A final ruled action opens the exhaustive Blog index.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. The evidence inspector then uses a five-case left index and one synchronized media-plus-readback panel on the right. Three numbered research judgments follow in open columns, then three continuation links close the main reading path.
 
-- At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and the trace and topic columns use tighter gaps.
-- At (800px) and below, the architecture introduction, trace and topic rows stack into one column; the left statement stops being sticky.
+The representative-experiment section is an evidence inspector: a ruled case index on the left and one synchronized evidence panel on the right. The selected case keeps its media, conclusion, control variable, native readback, criterion/result and scope together. Native radio controls provide the selection without a script. Below (800px), the case index becomes a vertical set of ruled choices above the selected panel.
+
+- At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and the evidence inspector narrows its case index before stacking media and readback.
+- At (800px) and below, the architecture introduction stacks and the evidence case index precedes a full-width selected panel.
 - At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow. The architecture image keeps an (820px) reading width inside a keyboard-focusable horizontal scroll region.
 
 The research guide uses a fixed (190px) reading rail with six labeled groups and the same six-entry guide map below the opening statistics. The map is an open two-column set of ruled rows, not cards. Core evidence items use a two-column grid; the six problem layers use two columns; the three starting experiments use three equal open columns. Long prose remains at its (740px) reading measure, while grouped evidence can use (900px).
@@ -260,15 +264,15 @@ There are no shadows, gradients or decorative transitions. Thin rules, whitespac
 
 ## Motion
 
-**Motion thesis:** one scroll relationship explains how a failed task becomes a checked finding. The vertical trace and reached node are the focal sequence; the page-progress hairline provides quiet orientation. Article rows do not receive repeated entrance animations.
+**Motion thesis:** orientation is useful; content should not perform an entrance. The thin page-progress hairline is the only passive scroll response. Evidence cases switch immediately when their radio changes, and media plays only after an explicit control action.
 
-The trace uses a transform-only draw at roughly a (120ms) linear response cadence to follow scroll, while stage contrast and the node fill settle over (220–320ms) with `cubic-bezier(.16, 1, .3, 1)`. The sticky current-stage label changes as the line reaches a stage. There is no autoplay loop, parallax or unrelated hover motion.
+There is no page-load reveal, stagger, blur, translate, parallax or automatic fade. Content is fully visible in the first paint and remains visible if JavaScript fails. Hover and focus feedback is immediate. A selected evidence case changes background and text contrast without moving the reading position or delaying the evidence.
 
-With `prefers-reduced-motion: reduce`, the trace is complete from the start, all stages retain their active-level contrast, and no draw transition runs. Scroll remains the only way the sequence advances.
+With `prefers-reduced-motion: reduce`, there is no change because the surface contains no nonessential spatial animation or autoplay loop. Media remains user-controlled.
 
 ## Shapes
 
-The homepage defines no component radius scale. Its directory entrance and topic rows remain unfilled; the research-trace nodes are (13px) editorial circles, not controls. Learning numbers are plain serif numerals. Chapter and engine links wrap within similarly open ruled groups.
+The homepage defines no component radius scale. Its directory entrance, evidence choices and continuation rows remain unfilled and rule-separated. Learning numbers are plain serif numerals. Chapter and engine links wrap within similarly open ruled groups.
 
 The course reader's `learning-control` radius belongs only to its outlined buttons and chapter links. The teaching panel remains rectangular; native ranges, radios, progress and disclosures keep their browser affordances. The filled read button is an explicit reading state, not a homepage action style.
 
@@ -282,21 +286,15 @@ Navigation is one horizontal masthead row on desktop and wraps below the brand o
 
 ### Architecture view
 
-The architecture section follows the first screen and explains the system before the research trace. A serif heading and short scope paragraph introduce the official diagram; the (1774×887) diagram spans the reading column between fine rules without cropping, recoloring or overlaying explanatory chrome. The homepage uses a (199 KB) WebP rendition and falls back to the (2.1 MB) authored PNG; both preserve the source dimensions. Its authored blue, green, peach and dark diagram colors are treated as source-evidence colors, not as a second interface palette.
+The architecture section follows the first screen and explains the system before the evidence inspector. A serif heading and short scope paragraph introduce the official diagram; the (1774×887) diagram spans the reading column between fine rules without cropping, recoloring or overlaying explanatory chrome. The homepage uses a (199 KB) WebP rendition and falls back to the (2.1 MB) authored PNG; both preserve the source dimensions. Its authored blue, green, peach and dark diagram colors are treated as source-evidence colors, not as a second interface palette.
 
 The image itself opens the original asset. On narrow screens, the figure becomes a keyboard-focusable horizontal scroll region with an (820px) image width so labels remain legible; a visible “scroll horizontally” hint appears above it, and the caption also provides an explicit original-image link. This is the only nested scroll surface on the homepage.
 
-### Scroll-linked research trace
+### Evidence inspector
 
-The trace is the page's single authored motion moment. A fine vertical rule marks the complete path; a green line draws over it as the stage advances. Four open stages describe task failure, first failing layer, the skill/simulation fork and independent retest. The reached marker and active heading turn Reading Green, while the sticky summary names the current stage. Every stage keeps full readable contrast rather than being hidden or faded below body-text contrast.
+The representative-experiment index lists five cases in editorial order. Selecting a case reveals one evidence panel containing the recorded video or paired videos, a conclusion, and a four-row ledger for control variable, native readback, criterion/result and scope. Links open the complete experiment record rather than expanding an unbounded transcript on the homepage.
 
-A hairline page-progress rule stays at the top as supporting orientation. The enhancement is driven by passive scroll updates with `requestAnimationFrame`; without JavaScript the complete trace and all stages remain visible. Under reduced motion the trace is shown complete, no draw transition runs, and the current-stage state remains textual.
-
-### Topic map
-
-Five ruled topic rows put the category name and question on the left and direct article titles on the right. Research guide, contact/physics, failure/diagnosis, policy/skills/evaluation and simulation learning use the same row grammar but keep their own emphasis: the first row leads with the full guide title and chapter anchors; policy includes the skill-memory link; learning leads with the on-site route. No row hides its contents behind a tab, accordion or category page.
-
-A final open band names the exhaustive catalogue and opens the canonical Blog. Its serif statement and arrow are larger than ordinary link rows, making it the only closing call to action.
+Selection uses native radios with visible focus on their labels; it works without JavaScript. The default case is present before script execution. Print hides the selector and shows all five panels. The inspector is not a tabbed marketing showcase: every result keeps its governing condition and evidence boundary beside the media.
 
 ### Research-guide lanes
 
@@ -308,7 +306,7 @@ Core reading keeps a (740px) prose measure but allows equivalent evidence groups
 
 The Chinese Blog is a first-class reader page and the canonical complete content index. A short jump row links to five sections: research guide, contact and physics, failure and diagnosis, policy/skills/evaluation, and simulation learning. All headings, article rows and course links remain visible without tabs or hidden panels. The policy section divides into four two-column subtopics. The page omits the right-hand outline rail and uses a wider reading column so the grouped index is visible at once.
 
-The homepage opens this index from both the first-screen action and the closing catalogue band. Legacy `#blog` links resolve to `blog.html`; the English Blog entry points to the same canonical Chinese index.
+Legacy `#blog` links resolve to `blog.html`; the English Blog entry points to the same canonical Chinese index.
 
 ### Learning and knowledge bridges
 
@@ -343,7 +341,8 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** keep the homepage aligned with the article's warm paper, serif opening title and green links.
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
 - **Do** present the architecture diagram uncropped with its authored colors and a direct path to the original PNG.
-- **Do** use scroll motion only for the research trace and preserve complete content without JavaScript or with reduced motion.
+- **Do** use the page-progress hairline as the only passive scroll response and preserve complete content without JavaScript or with reduced motion.
+- **Do** keep experiment comparison content visible from first paint and use native selection for the evidence inspector.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
 - **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
@@ -358,7 +357,8 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Don't** reintroduce the old wide Sphinx report shell or restore per-page report palettes; the separate browser application remains outside this reading system.
 - **Don't** crop the architecture diagram or shrink it below readable label size on mobile.
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
-- **Don't** turn the topic map into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
+- **Don't** turn the evidence index into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
+- **Don't** hide content before an IntersectionObserver reveal, blur or fade whole experiment groups on load.
 - **Don't** append newly added systems or observations as more chapter numbers in the original guide sequence.
 - **Don't** restore the full-site Sphinx tree as a second left sidebar on article pages.
 - **Don't** present an engine table as a universal ranking when cohorts, tuning budgets or invalid records differ.
