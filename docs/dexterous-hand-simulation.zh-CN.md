@@ -475,6 +475,10 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描
 
 **最值得借的是按可观测后果逐层加模型：硬件限位 → 传动耦合 → 控制映射 → reset → 积分器/约束求解。** 例如，仿真写入一个机械止挡不允许的组合角；串行关节范围会放行，实测切角限位应拒绝。再恢复闭链后，如果 reset 只写脚踝角而不移动电机，杆长不一致会让求解器产生校正力和位置瞬态。即使 reset 一致，把脚踝位置执行器、`implicitfast` 和 4 ms 步长放在一起，闭链误差仍可能增长。每一步都新增不同的状态与首次失效层。
 
+**不要把这个结果压成“2 ms 是安全线”。** 作者在 MuJoCo 4.0.1 上报告，闭链误差在约 2 ms 及以上开始增长；`discrete` 让约束求解与状态更新共享有效惯量，因而稳定了该模型，并非给所有模型提供普遍保证。`discrete` 下的 `qacc` 是这一步的速度差分 `(v⁺ - v) / h`，不是连续时间加速度。限位行切换、`forcerange` / `actuatorfrcrange` 饱和、armature／阻尼和接触正则化仍要分别观测。先读回精确运行时版本：MuJoCo 4.0.1 修复了 4.0.0 的稀疏 Cholesky 缺陷，该缺陷会在稀疏约束 Jacobian 上让 Newton 收敛变慢、产生错误加速度甚至发散。
+
+DexLab 的其他步长实验提供边界，而不是 G1 复现：LIBERO 的 2→1 ms 对照把留出物理诊断从 5/10 降到 3/10，原生步进成本约翻倍；冻结抓梗基准的 h、h/2、h/4 为 2/3 通过，也不能宣称单调收敛。小步长可以减少部分离散误差，同时改变接触采样、active set 与成本。G1 实验应先固定执行器位置、力限幅和接触／限位参数，再比较步长，并记录杆长残差、实际力、`qacc/qvel`、墙钟及独立的守恒账。
+
 | 本体的模型 | 多表示了什么 | 何时值得用 |
 | --- | --- | --- |
 | 串行关节 + 实测切角限位 | 近似可达域，没有电机/杆件闭链状态 | 重定向、初始训练；先固定一个简单基线 |
@@ -485,7 +489,7 @@ Season II [§3.3](https://robocoliseum.ai/techreport/robocoliseum#en-sub-3-3)描
 
 **DexLab 的顺序：** 先给已有资产补一张“joints / tendons / equality / actuator placement / integrator / reset / soft-limit”审计表；只有当失败指向组合限位、驱动耦合或控制映射时，才做“加切角的串行基线对一致初始化的 tendon 闭环”的受控比较。reset 与积分器必须是独立变量；最终是否掉下或误差是否变小，不足以证明闭环值得。当前评分语义与 [Discussion #302](https://github.com/huangkiki/Dexlab/discussions/302) 仍是更早的判因层；这里的“闭环”是运动学闭链，不是 [#334](https://github.com/huangkiki/Dexlab/discussions/334) 所说的完整训练闭环。
 
-核查于 2026-11-17。已读取原文、公式、表格和随文模型包；包内五个 MJCF 都写有 `discrete`，并分别提供 serial、tendon、rod-body 以及执行器在脚踝/电机上的变体。模型包 SHA-256 为 `32eb7206e4996b7d76956590544039377fe3ec67e9387a7a2df2f7334f3529d5`。当前环境 MuJoCo 为 3.12，低于模型要求的 3.16；本轮没有运行硬件限位测量、256 组策略 rollout 或积分器扫描，因此性能与成功率仍是作者报告。
+核查于 2026-11-17。已读取原文、公式、表格、随文模型包和 MuJoCo 4.0.1 官方发布说明；包内五个 MJCF 都写有 `discrete`，并分别提供 serial、tendon、rod-body 以及执行器在脚踝/电机上的变体。模型包 SHA-256 为 `32eb7206e4996b7d76956590544039377fe3ec67e9387a7a2df2f7334f3529d5`。当前环境 MuJoCo 为 3.12，低于模型要求的 3.16；本轮没有运行硬件限位测量、256 组策略 rollout 或积分器扫描，因此性能与成功率仍是作者报告。文中的 DexLab 步长反例来自其他接触任务，不是 G1 复现。
 
 
 ## 来源与维护范围
