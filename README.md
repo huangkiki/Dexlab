@@ -75,7 +75,7 @@ Tasks and protocols move through systems under test, action execution, environme
 ## Continue by need
 
 - [All experiments](docs/site/en/experiments.md)
-- [Research guide](docs/site/en/_static/research/dexterous-simulation.html)
+- [Research guide](docs/site/_static/research/dexterous-simulation.html)
 - [Learn simulation](docs/site/en/learning.md)
 
 ## Contact
