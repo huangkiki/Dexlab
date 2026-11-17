@@ -4,9 +4,9 @@
 
 我关注智能体与仿真如何通过实验相互改进。任务暴露问题，对照实验定位第一失效层，修复后再放回独立条件中复验。
 
-## [在 GitHub 查看 DexLab →](https://github.com/huangkiki/Dexlab)
+## [打开 DexLab 研究总览 →](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html)
 
-本仓库是 DexLab 的统一入口，下面直接展示项目架构、代表性实验、结果、Solver 说明与学习材料。
+研究总览是 DexLab 的统一入口；本页同步展示项目架构、代表性实验、结果、Solver 说明与学习材料。
 
 [English](README.md)
 
