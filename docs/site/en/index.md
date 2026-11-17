@@ -162,12 +162,7 @@
 </section>
 
 <section class="home-contact" id="research-scope" aria-labelledby="contact-heading">
-  <span id="contact-author"></span>
-  <div>
-    <p>DexLab · Kiki Huang</p>
-    <h2 id="contact-heading">Contact the author</h2>
-    <span>For reproduction questions, corrections or a conversation about simulation, get in touch.</span>
-  </div>
+  <h2 id="contact-heading">Contact the author</h2>
   <nav aria-label="Contact the author">
     <a href="mailto:huangyue0719@outlook.com">Email</a>
     <a href="https://github.com/huangkiki">GitHub ↗</a>

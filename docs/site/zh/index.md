@@ -166,12 +166,7 @@
 </section>
 
 <section class="home-contact" id="research-scope" aria-labelledby="contact-heading">
-  <span id="contact-author"></span>
-  <div>
-    <p>DexLab · Kiki Huang</p>
-    <h2 id="contact-heading">联系作者</h2>
-    <span>想复现实验、指出问题，或者只是想聊聊仿真，都欢迎。</span>
-  </div>
+  <h2 id="contact-heading">联系作者</h2>
   <nav aria-label="联系作者">
     <a href="mailto:huangyue0719@outlook.com">邮件</a>
     <a href="https://github.com/huangkiki">GitHub ↗</a>
