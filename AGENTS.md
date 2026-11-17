@@ -16,6 +16,13 @@ Use the [research loop](docs/autoresearch.md#research-loop) to turn a question i
 - **Avoid unnecessary secondary labels and descriptions. Let the layout do the explaining.** Use spacing, hierarchy and grouping before adding badges, repeated subtitles or explanatory UI copy. Keep labels that clarify actions, accessibility or evidence boundaries. Maintain Chinese/English parity and verify desktop and mobile rendering.
 - Keep learning MuJoCo-first and question-led, with explicit reading bookmarks rather than competence scores. Separate teaching examples and MuJoCo 4 release notes from native evidence; preserve the original courses' pinned baseline and the established reading identity.
 
+## Visualization and interaction design
+
+- Design a figure as an **evidence inspector, not decoration**. One selected run, timestamp, frame or pose should stay linked across the requested action/mode, native readback, physical response, score and first-failure layer. If one state cannot be reconciled across those views, stop adding animation and fix the data or attribution.
+- Keep the baseline and comparison conditions visible. Compare the same initial state, action, configuration and scorer; show costs and failures beside improvements. A control may expose a variable only when changing it can change the conclusion or its attribution.
+- Prefer a static, self-explanatory figure before an interactive one, and 2D SVG/canvas before bespoke 3D. Heavy WebGL, WebAssembly or front-end frameworks require a demonstrated question that simpler presentation cannot answer; lazy-load them and share one runtime when genuinely needed.
+- Preserve progressive enhancement and access: prose, caption, alt text, units, source label and print view must stand without JavaScript; controls need keyboard/focus states, reduced-motion behavior, mobile layout and no forced autoplay. Do not reuse the existing design system's visual tokens as evidence or mix interactive commands with measured values.
+
 ## Implementation and evidence
 
 - Use the smallest direct implementation. Keep scene ownership, control commands, native measured observations, rendering and independent scoring distinct. Follow the accepted UniSim ownership boundary in the current-work entry; preserve qualified native references and explicit migration gaps. The historical UniLab SDF task is not thereby a built-in UniSim backend. No new generic framework or scheduler.
