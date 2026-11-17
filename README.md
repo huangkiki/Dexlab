@@ -80,8 +80,6 @@ Tasks and protocols move through systems under test, action execution, environme
 
 ## Contact
 
-Questions about reproduction, corrections or collaboration are welcome.
-
 [Email](mailto:huangyue0719@outlook.com) · [GitHub](https://github.com/huangkiki)
 
 ## Citation

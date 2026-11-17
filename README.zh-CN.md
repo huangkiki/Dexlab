@@ -80,8 +80,6 @@
 
 ## 联系作者
 
-想复现实验、指出问题或讨论合作，都欢迎联系。
-
 [邮件](mailto:huangyue0719@outlook.com) · [GitHub](https://github.com/huangkiki)
 
 ## 引用
