@@ -260,6 +260,10 @@ main > section > h1 {
   border-block: 1px solid var(--rule);
 }
 
+.home-search-mode-head {
+  display: none;
+}
+
 .home-search svg {
   color: var(--muted);
 }
@@ -359,10 +363,82 @@ main > section > h1 {
   font-size: 12px;
 }
 
+.home-search-list .context {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
 .home-search-more {
   margin: 8px 0 14px;
   font-size: 13px;
   font-weight: 600;
+}
+
+body.home-search-active .site-header,
+body.home-search-active .site-footer,
+body.home-search-active .architecture-view,
+body.home-search-active .concept-entry,
+body.home-search-active .home-evidence,
+body.home-search-active .home-answers,
+body.home-search-active .home-next,
+body.home-search-active .home-validity,
+body.home-search-active .home-contact {
+  display: none;
+}
+
+body.home-search-active .home {
+  width: min(100%, 980px);
+  padding-top: clamp(32px, 8vh, 80px);
+  padding-bottom: 72px;
+}
+
+body.home-search-active .story-hero {
+  min-height: 0;
+  padding: 0;
+}
+
+body.home-search-active .hero-copy {
+  max-width: none;
+}
+
+body.home-search-active .hero-copy > :is(h1, .hero-thesis, .hero-project, .hero-lead, .hero-scope) {
+  display: none;
+}
+
+body.home-search-active .home-search-mode-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.home-search-mode-head h2 {
+  font: 400 clamp(2rem, 5vw, 3.4rem)/1.2 var(--serif);
+  letter-spacing: -.03em;
+}
+
+.home-search-close {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  color: var(--accent);
+  background: transparent;
+  font: 600 14px/1.5 var(--sans);
+  cursor: pointer;
+}
+
+.home-search-close:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
+body.home-search-active .home-search,
+body.home-search-active .home-search-results {
+  max-width: none;
 }
 
 .directory-entry {

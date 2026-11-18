@@ -9,6 +9,10 @@
     <p class="hero-project"><strong>DexLab is my personal research project.</strong><span>It explores how Agent Skills and simulation can improve each other through experiments.</span></p>
     <p class="hero-lead">Experiments connect tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
     <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
+    <div class="home-search-mode-head">
+      <h2>Search DexLab</h2>
+      <button class="home-search-close" type="button">Back to DexLab</button>
+    </div>
     <form class="home-search" action="search.html" method="get" role="search" aria-labelledby="home-search-label" data-search-index="searchindex.js">
       <label class="visually-hidden" id="home-search-label" for="home-search-input">Search DexLab</label>
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.4 15.4 5.1 5.1"></path></svg>
