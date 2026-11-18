@@ -25,16 +25,17 @@ body[data-reader-page^="concepts/"] {
 
 .concept-field {
   --concept-reveal: .08;
-  position: absolute;
-  inset: 84px 0 auto;
-  z-index: 2;
-  height: calc(100svh - 84px);
-  overflow: hidden;
+  position: relative;
+  min-height: clamp(300px, 38svh, 500px);
+  margin-top: 26px;
+  padding: 24px 0 12px;
+  border-top: 1px solid var(--rule, #dcded4);
+  overflow: clip;
   color: var(--accent, #4f664c);
-  opacity: calc(.03 + var(--concept-reveal) * .45);
-  filter: blur(calc(3.5px - var(--concept-reveal) * 3.3px));
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, var(--ink, #282b26) 14%, var(--ink, #282b26) 82%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, var(--ink, #282b26) 14%, var(--ink, #282b26) 82%, transparent 100%);
+  opacity: calc(.04 + var(--concept-reveal) * .96);
+  filter: blur(calc(4px - var(--concept-reveal) * 4px));
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, var(--ink, #282b26) 10%, var(--ink, #282b26) 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, var(--ink, #282b26) 10%, var(--ink, #282b26) 92%, transparent 100%);
   pointer-events: none;
   user-select: none;
   transition:
@@ -48,9 +49,9 @@ body[data-reader-page^="concepts/"] {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 36px 28px;
-  width: min(1540px, calc(100% - 40px));
-  margin: 42px auto 0;
-  transform: translateY(calc((1 - var(--concept-reveal)) * 18px));
+  width: 100%;
+  margin: 0;
+  transform: translateY(calc((1 - var(--concept-reveal)) * 32px));
   transition: transform 220ms ease;
 }
 
@@ -518,15 +519,13 @@ body[data-reader-page^="concepts/"] .lesson-article code {
 
 @media (max-width: 800px) {
   .concept-field {
-    inset-block-start: 144px;
-    height: calc(100svh - 144px);
+    min-height: clamp(480px, 64svh, 720px);
+    margin-top: 22px;
   }
 
   .concept-field-inner {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px 18px;
-    width: calc(100% - 28px);
-    margin-top: 24px;
   }
 
   .concept-field-group:last-child {
@@ -599,8 +598,7 @@ body[data-reader-page^="concepts/"] .lesson-article code {
 
 @media (max-width: 700px) {
   .concept-field {
-    inset-block-start: 180px;
-    height: calc(100svh - 180px);
+    min-height: 560px;
   }
 
   .concept-field-inner {

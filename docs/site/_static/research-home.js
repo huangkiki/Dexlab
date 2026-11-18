@@ -28,11 +28,15 @@ function updateReadingProgress() {
     pageProgress.style.transform = `scaleX(${pageRatio})`;
   }
   if (conceptField && !reduceMotion.matches) {
-    const revealDistance = Math.max(
-      160,
-      Math.min((storyHero?.offsetHeight || window.innerHeight) * .32, 300),
+    const fieldRect = conceptField.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || storyHero?.offsetHeight || 1;
+    const revealStart = viewportHeight * .72;
+    const revealEnd = viewportHeight * .28;
+    const conceptReveal = clamp(
+      (revealStart - fieldRect.top) / Math.max(1, revealStart - revealEnd),
+      0,
+      1,
     );
-    const conceptReveal = clamp(window.scrollY / revealDistance, 0, 1);
     conceptField.style.setProperty(
       "--concept-reveal",
       conceptReveal.toFixed(3),
