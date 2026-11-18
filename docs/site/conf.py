@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from concept_atlas import home_context
 
 project = 'DexLab'
-author = 'DexLab contributors'
+author = 'Kiki Huang'
 copyright = '2026, DexLab contributors'
 release = tomllib.loads((ROOT / 'pyproject.toml').read_text())['project']['version']
 language = os.environ.get('DEXLAB_DOCS_LANGUAGE', 'zh_CN')

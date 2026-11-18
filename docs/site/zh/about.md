@@ -166,7 +166,7 @@ bash demos/apple-stem-grasp/run.sh \
 
 ```bibtex
 @software{dexlab2026,
-  author  = {DexLab contributors},
+  author  = {Kiki Huang},
   title   = {DexLab: A Physics-Centric Research Platform for Contact-Rich Robot Manipulation},
   year    = {2026},
   url     = {https://github.com/huangkiki/Dexlab}
