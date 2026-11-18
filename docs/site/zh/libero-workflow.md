@@ -265,6 +265,21 @@ OSC 仍使用复位时的缓存。已暴露的沙拉酱 `demo_35` 中，缓存�
 
 画面中的“修改”指步长对照，并不表示优化成功。观测刷新补丁不改变预录示范动作，不能用这两段视频宣称补丁提升了策略成功率。
 
+## Mask 进度信号审计
+
+[#408](https://github.com/huangkiki/Dexlab/issues/408) 在 demo_0 的已发布固定相机回放上增加离线审计，不重跑物理、不训练策略。每五帧取一个样本，共 28 个阶段点；目标 mask 来自确定性的颜色连通域跟踪，夹爪 ROI 来自固定初始化跟踪器。接触、抬升、入篮和原生成功只作为阶段标签，不进入候选进度分。
+
+基线 ROI overlap 从接触前中位数 `0` 升到 contact-to-lift `0.535`、lift-to-success `0.877`，接触前后排序 AUC 为 `0.861`。这说明 mask 信号在接近、接触和搬运阶段有区分力。但最后两个成功阶段样本的 mask 均为空，因此它**没有被证明是完成信号**；原生成功保持不变。
+
+扰动结果进一步说明必须先过质量门：
+
+- 7 次漏检把 AUC 降到 `0.738`；
+- 在 ROI 中心伪造框后，接触前 overlap 达到 `0.780`，高分反而可能来自假进度；
+- 3 帧延迟改变接触阶段 overlap；
+- 遮挡会缩小分母，部分情况下反而抬高 overlap，不能把面积变化直接解释为进度下降。
+
+[机器记录](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/mask-progress-audit-v1.json) · [SHA-256](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/mask-progress-audit-v1.sha256) · [实验说明与复现命令](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/MASK-PROGRESS.md)
+
 ## 版本、物理参照与冻结规则
 
 | 项目 | 实际执行 |

@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "experiment": "mask-progress-signal-audit",
+  "source": {
+    "video": "docs/evidence/visual/libero-demo0-baseline.mp4",
+    "video_sha256": "37e84fa770514cd892f3688843add4a34ffa80b655148e67a1f64e2dbd16cb58",
+    "summary": "docs/evidence/libero/summary.json",
+    "summary_sha256": "fa4ab804dc6825ea2f415a520ee7e75315a0dcf94e3495b53403a5288615789b",
+    "demo": "demo_0",
+    "published_record_only": true,
+    "new_physics_run": false,
+    "new_policy_run": false
+  },
+  "tracking": {
+    "fps": 20,
+    "native_time_origin_s": 0.25,
+    "target_color_hsv_low": [
+      60,
+      15,
+      80
+    ],
+    "target_color_hsv_high": [
+      140,
+      110,
+      170
+    ],
+    "target_seed_center_px": [
+      304.7,
+      308.8
+    ],
+    "gripper_seed_box_px": [
+      242,
+      131,
+      39,
+      44
+    ],
+    "roi_padding_px": 14
+  },
+  "events_used_only_as_stage_labels": {
+    "first_finger_contact_s": 2.8339999999999095,
+    "first_lift_s": 3.4499999999998416,
+    "first_native_success_s": 6.64999999999949,
+    "first_basket_contact_s": 6.681999999999486,
+    "last_finger_contact_s": 6.489999999999507
+  },
+  "signal_contract": {
+    "mask_area": "target-mask pixels / image pixels",
+    "roi_overlap": "target-mask pixels in gripper ROI / target-mask pixels",
+    "first_lost_stage": "first stage with median ROI-overlap change greater than 0.05"
+  },
+  "perturbation_contract": {
+    "dropout": "blank mask when frame % 20 == 15",
+    "false-box": "fill the centre half of the gripper ROI",
+    "delay": "use the mask from three frames earlier",
+    "occlusion": "remove the right 40% of the target-mask bounding box"
+  },
+  "reports": {
+    "baseline": {
+      "perturbation": "baseline",
+      "sample_count": 28,
+      "missed_detections": 0,
+      "mask_absent_samples": 2,
+      "false_boxes": 0,
+      "delay_frames": 0,
+      "delayed_samples": 0,
+      "mean_mask_area_fraction": 0.000731,
+      "precontact_vs_postcontact_auc": 0.860963,
+      "stages": {
+        "pre-contact": {
+          "samples": 11,
+          "median_area_fraction": 0.00109,
+          "median_roi_overlap": 0.0
+        },
+        "contact-to-lift": {
+          "samples": 2,
+          "median_area_fraction": 0.000562,
+          "median_roi_overlap": 0.535101
+        },
+        "lift-to-success": {
+          "samples": 13,
+          "median_area_fraction": 0.000609,
+          "median_roi_overlap": 0.877005
+        },
+        "post-success": {
+          "samples": 2,
+          "median_area_fraction": 0.0,
+          "median_roi_overlap": 0.0
+        }
+      },
+      "first_lost_stage": "none"
+    },
+    "dropout": {
+      "perturbation": "dropout",
+      "sample_count": 28,
+      "missed_detections": 7,
+      "mask_absent_samples": 8,
+      "false_boxes": 0,
+      "delay_frames": 0,
+      "delayed_samples": 0,
+      "mean_mask_area_fraction": 0.000564,
+      "precontact_vs_postcontact_auc": 0.737968,
+      "stages": {
+        "pre-contact": {
+          "samples": 11,
+          "median_area_fraction": 0.00109,
+          "median_roi_overlap": 0.0
+        },
+        "contact-to-lift": {
+          "samples": 2,
+          "median_area_fraction": 0.000293,
+          "median_roi_overlap": 0.347222
+        },
+        "lift-to-success": {
+          "samples": 13,
+          "median_area_fraction": 0.000583,
+          "median_roi_overlap": 0.8
+        },
+        "post-success": {
+          "samples": 2,
+          "median_area_fraction": 0.0,
+          "median_roi_overlap": 0.0
+        }
+      },
+      "first_lost_stage": "contact-to-lift"
+    },
+    "false-box": {
+      "perturbation": "false-box",
+      "sample_count": 28,
+      "missed_detections": 0,
+      "mask_absent_samples": 0,
+      "false_boxes": 28,
+      "delay_frames": 0,
+      "delayed_samples": 0,
+      "mean_mask_area_fraction": 0.004594,
+      "precontact_vs_postcontact_auc": 0.951872,
+      "stages": {
+        "pre-contact": {
+          "samples": 11,
+          "median_area_fraction": 0.004958,
+          "median_roi_overlap": 0.780039
+        },
+        "contact-to-lift": {
+          "samples": 2,
+          "median_area_fraction": 0.004429,
+          "median_roi_overlap": 0.941834
+        },
+        "lift-to-success": {
+          "samples": 13,
+          "median_area_fraction": 0.004476,
+          "median_roi_overlap": 0.983273
+        },
+        "post-success": {
+          "samples": 2,
+          "median_area_fraction": 0.003867,
+          "median_roi_overlap": 1.0
+        }
+      },
+      "first_lost_stage": "pre-contact"
+    },
+    "delay": {
+      "perturbation": "delay",
+      "sample_count": 28,
+      "missed_detections": 0,
+      "mask_absent_samples": 2,
+      "false_boxes": 0,
+      "delay_frames": 3,
+      "delayed_samples": 28,
+      "mean_mask_area_fraction": 0.00072,
+      "precontact_vs_postcontact_auc": 0.890374,
+      "stages": {
+        "pre-contact": {
+          "samples": 11,
+          "median_area_fraction": 0.00109,
+          "median_roi_overlap": 0.0
+        },
+        "contact-to-lift": {
+          "samples": 2,
+          "median_area_fraction": 0.000581,
+          "median_roi_overlap": 0.326306
+        },
+        "lift-to-success": {
+          "samples": 13,
+          "median_area_fraction": 0.000589,
+          "median_roi_overlap": 0.973118
+        },
+        "post-success": {
+          "samples": 2,
+          "median_area_fraction": 0.000343,
+          "median_roi_overlap": 0.040284
+        }
+      },
+      "first_lost_stage": "contact-to-lift"
+    },
+    "occlusion": {
+      "perturbation": "occlusion",
+      "sample_count": 28,
+      "missed_detections": 0,
+      "mask_absent_samples": 2,
+      "false_boxes": 0,
+      "delay_frames": 0,
+      "delayed_samples": 0,
+      "mean_mask_area_fraction": 0.000445,
+      "precontact_vs_postcontact_auc": 0.828877,
+      "stages": {
+        "pre-contact": {
+          "samples": 11,
+          "median_area_fraction": 0.000664,
+          "median_roi_overlap": 0.0
+        },
+        "contact-to-lift": {
+          "samples": 2,
+          "median_area_fraction": 0.000304,
+          "median_roi_overlap": 0.913333
+        },
+        "lift-to-success": {
+          "samples": 13,
+          "median_area_fraction": 0.000381,
+          "median_roi_overlap": 1.0
+        },
+        "post-success": {
+          "samples": 2,
+          "median_area_fraction": 0.0,
+          "median_roi_overlap": 0.0
+        }
+      },
+      "first_lost_stage": "contact-to-lift"
+    }
+  },
+  "acceptance": {
+    "physical_task_success_computed": false,
+    "events_are_separate_from_signal_score": true,
+    "actor_input_and_acceptance_truth_separated": true,
+    "new_physics_backend": false,
+    "policy_training": false
+  }
+}

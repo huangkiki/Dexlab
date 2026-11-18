@@ -322,6 +322,21 @@ record the denominators, individual negatives and provenance hashes.
 
 The modified video is a timestep control, not a successful optimization. Refreshing observations cannot change prerecorded demonstration actions; these videos do not establish improved policy success from the patch.
 
+## Mask progress-signal audit
+
+[#408](https://github.com/huangkiki/Dexlab/issues/408) adds an offline audit over the published fixed-camera demo-0 replay. It does not rerun physics or train a policy. The audit uses 28 samples, one every fifth frame; a deterministic colour/component tracker creates the target mask while a fixed-initialized tracker supplies the gripper ROI. Contact, lift, basket and native-success events only label stages; they never enter the candidate progress score.
+
+Baseline ROI overlap rises from a pre-contact median of `0` to `0.535` at contact-to-lift and `0.877` during lift-to-success. Its AUC for ranking post-contact above pre-contact is `0.861`, so the mask carries information through approach, contact and transport. Both post-success samples have an empty target mask, however. The audit therefore does **not** establish this mask as a completion signal; native success remains unchanged.
+
+The perturbations expose why a quality gate is required:
+
+- seven missed detections reduce AUC to `0.738`;
+- a false box in ROI centre gives pre-contact overlap `0.780`, so a high score can come from fabricated progress;
+- three-frame delay changes overlap at contact;
+- occlusion can raise overlap by shrinking the denominator, so mask-area change is not automatically loss of progress.
+
+[Machine record](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/mask-progress-audit-v1.json) · [SHA-256](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/mask-progress-audit-v1.sha256) · [Audit contract and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/MASK-PROGRESS.md)
+
 ## Frozen execution and physical reference
 
 | Item | Executed configuration |
