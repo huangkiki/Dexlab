@@ -20,6 +20,7 @@ const evidencePanels = [...document.querySelectorAll("[data-evidence-reveal]")];
 const homeSearchForm = document.querySelector(".home-search");
 const homeSearchInput = homeSearchForm?.querySelector('input[name="q"]');
 const homeSearchResults = document.querySelector("#home-search-results");
+const homeSearchClose = document.querySelector(".home-search-close");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const homeSearchLanguage = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
@@ -63,6 +64,7 @@ function scheduleReadingProgress() {
 
 function clearHomeSearchResults() {
   homeSearchRequest += 1;
+  document.body.classList.remove("home-search-active");
   if (homeSearchResults) {
     homeSearchResults.hidden = true;
     homeSearchResults.replaceChildren();
@@ -97,7 +99,7 @@ function loadHomeSearchIndex() {
   return homeSearchIndexPromise;
 }
 
-function renderHomeSearchResults(query, results) {
+function renderHomeSearchResults(query, results, searchTerms) {
   if (!homeSearchResults) {
     return;
   }
@@ -124,6 +126,21 @@ function renderHomeSearchResults(query, results) {
       const detail = document.createElement("small");
       detail.textContent = description;
       item.append(detail);
+    } else {
+      fetch(`${docName}.html`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to load search result");
+          }
+          return response.text();
+        })
+        .then((html) => {
+          const summary = Search.makeSearchSummary(html, searchTerms, anchor);
+          if (summary && item.isConnected) {
+            item.append(summary);
+          }
+        })
+        .catch(() => {});
     }
     list.append(item);
   });
@@ -144,6 +161,7 @@ async function performHomeSearch(query, requestId) {
     return;
   }
   homeSearchResults.hidden = false;
+  document.body.classList.add("home-search-active");
   const loading = document.createElement("p");
   loading.className = "home-search-status";
   loading.textContent = homeSearchLanguage === "zh" ? "正在搜索…" : "Searching…";
@@ -167,7 +185,7 @@ async function performHomeSearch(query, requestId) {
       highlightTerms,
       objectTerms,
     );
-    renderHomeSearchResults(query, results);
+    renderHomeSearchResults(query, results, searchTerms);
   } catch {
     if (requestId !== homeSearchRequest) {
       return;
@@ -197,6 +215,18 @@ if (homeSearchForm && homeSearchInput) {
     homeSearchTimer = window.setTimeout(() => {
       performHomeSearch(query, requestId);
     }, 160);
+  });
+  homeSearchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      homeSearchInput.value = "";
+      clearHomeSearchResults();
+      homeSearchInput.blur();
+    }
+  });
+  homeSearchClose?.addEventListener("click", () => {
+    homeSearchInput.value = "";
+    clearHomeSearchResults();
+    homeSearchInput.focus();
   });
 }
 
