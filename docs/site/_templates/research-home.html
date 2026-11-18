@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ 'zh-CN' if homepage_is_chinese else 'en' }}">
+<html lang="{{ 'zh-CN' if homepage_is_chinese else 'en' }}" data-content_root="{{ content_root }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +7,12 @@
   <title>DexLab · {{ '研究总览' if homepage_is_chinese else 'Research overview' }}</title>
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
   <link rel="stylesheet" href="{{ pathto('_static/concept-atlas.css', 1) }}">
+  <script src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
+  <script src="{{ pathto('_static/doctools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/sphinx_highlight.js', 1) }}"></script>
+  <script src="{{ pathto('_static/translations.js', 1) }}"></script>
+  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
   <script src="{{ pathto('_static/concept-atlas.js', 1) }}" defer></script>
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
 </head>

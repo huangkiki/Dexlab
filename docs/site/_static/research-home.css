@@ -311,6 +311,60 @@ main > section > h1 {
   color: var(--accent);
 }
 
+.home-search-results {
+  max-width: 700px;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.home-search-results[hidden] {
+  display: none;
+}
+
+.home-search-status {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.home-search-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-search-list li {
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.home-search-list a {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.home-search-list a:hover,
+.home-search-list a:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.home-search-list small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.home-search-more {
+  margin: 8px 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .directory-entry {
   position: relative;
   z-index: 1;
