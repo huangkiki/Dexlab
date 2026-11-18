@@ -160,6 +160,8 @@ main > section > h1 {
 }
 
 .home {
+  position: relative;
+  z-index: 1;
   width: min(100%, 1120px);
   margin: auto;
   padding: 0 40px;
@@ -167,6 +169,7 @@ main > section > h1 {
 
 .story-hero {
   position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -175,6 +178,8 @@ main > section > h1 {
 }
 
 .hero-copy {
+  position: relative;
+  z-index: 1;
   max-width: 920px;
 }
 
@@ -213,7 +218,22 @@ main > section > h1 {
   font-size: 17px;
 }
 
+.hero-scope {
+  max-width: 700px;
+  margin-top: 11px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.hero-scope strong {
+  color: var(--muted);
+  font-weight: 500;
+}
+
 .directory-entry {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 28px;
@@ -960,6 +980,10 @@ main > section > h1 {
   .hero-lead {
     margin-top: 18px;
     font-size: 16px;
+  }
+
+  .hero-scope {
+    font-size: 12px;
   }
 
   .directory-entry {

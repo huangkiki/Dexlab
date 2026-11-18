@@ -1,10 +1,15 @@
 """Bilingual documentation; building it never imports a physics runtime."""
 import os
 from pathlib import Path
+import sys
 import tomllib
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+
+from concept_atlas import home_context
+
 project = 'DexLab'
 author = 'DexLab contributors'
 copyright = '2026, DexLab contributors'
@@ -19,7 +24,12 @@ myst_heading_anchors = 6
 html_theme = 'pydata_sphinx_theme'
 html_title = 'DexLab · ' + ('仿真器与模型共同进化' if language == 'zh_CN' else 'Simulator and model co-evolution')
 html_static_path = [str(HERE / '_static'), str(ROOT / 'docs/evidence')]
-html_css_files = ['dexlab.css', 'simulation-learning.css', 'reader-page.css']
+html_css_files = [
+    'dexlab.css',
+    'simulation-learning.css',
+    'reader-page.css',
+    'concept-atlas.css',
+]
 html_js_files = [
     ('replay.js', {'defer': 'defer'}),
     ('cutting.js', {'defer': 'defer'}),
@@ -62,6 +72,7 @@ def setup(app):
             'en/latest/' if app.config.language == 'zh_CN' else 'zh-cn/latest/')
         if pagename == 'index':
             context['homepage_is_chinese'] = app.config.language in ('zh_CN', 'zh')
+            context.update(home_context('zh' if app.config.language == 'zh_CN' else 'en'))
             return 'research-home.html'
         for index, (route, _, _) in enumerate(lessons):
             if pagename == route:

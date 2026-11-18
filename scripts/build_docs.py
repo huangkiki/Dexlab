@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import sys
 
+from concept_atlas import prepare_concept_pages
 from learning_docs import copy_course_assets, prepare_courses
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +22,7 @@ def main():
     output = args.output.resolve()
     source = ROOT / 'docs/site'
     for directory, language, route in [('zh', 'zh_CN', 'zh-cn'), ('en', 'en', 'en')]:
+        prepare_concept_pages(source / directory)
         courses = prepare_courses(source / directory)
         subprocess.run([
             sys.executable, '-m', 'sphinx', '-W', '--keep-going', '-n', '-b', 'html',
