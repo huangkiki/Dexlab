@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-18 addition: [RoboDojo simulator-integrity audit: read back parameters, test numerical behaviour and inspect scoring before blaming sim-to-real](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-simulator-audit).** The technical blog checks parameter delivery, plausibility, solver conservation and evaluator semantics in one Isaac Sim benchmark. The transferable object is the four-gate preflight, not a global verdict that every failure is a Sim-to-Real Gap.
+
 **2026-11-17 addition: [Closing the Loop: validate hardware stops, closed-chain transmission and reset as separate layers](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#closing-loop-transmission).** A common Unitree G1 ankle model omits the crank-and-pushrod loops. The authors separately address measured stops, the transmission Jacobian, controller gains, consistent resets and integrator stability. The transferable lesson is that attribution order, not an immediate closed-loop rewrite of every asset.
 
 **2026-11-16 addition: [CaP-X and ASPIRE: validate feedback before promoting skills](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#capx-aspire).** Both are Code-as-Policy systems. CaP-X turns API abstraction and feedback channels into controlled variables; ASPIRE admits a repair as reusable knowledge only after isolated reproduction. DexLab should borrow these evidence gates before migrating either agent stack.
@@ -400,6 +402,41 @@ Next, a candidate comparison could hold prompts, conversion, model-call and envi
 Checked on 2026-11-11 against paper v1, the live report and RoboProbe commit `3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e`. This was static inspection and arithmetic recomputation, not a model or physics rerun. Slots retain actual layout IDs, including thirteen IDs ≥ 50; 134 scored Astra episodes lack cost transcripts. Original collection, budget-version correspondence and transfer remain unverified here. The historical 38-paper and 19-repository counts are unchanged.
 
 
+(robodojo-simulator-audit)=
+## RoboDojo simulator-integrity audit: prove that the simulator received the parameters before discussing Sim-to-Real
+
+**2026-11-18 distillation: [full discussion and minimum validation gates](https://github.com/huangkiki/Dexlab/discussions/388).** [What does RoboDojo really simulate?](https://p-b-p-b.github.io/blog/2026/what-does-robodojo-really-simulate/) by Bo Peng, Wenhao Chai and Zhifei Li examines the Isaac Sim side of RoboDojo without starting from a model comparison. It follows four links that can fail independently:
+
+`real object/hardware specification → task parameters and assets → runtime engine readback → numerical and solver checks → contact/object response → task score`
+
+The central lesson is that a YAML value, an error-free script, a convincing image and a nonzero score each answer different questions. If a parameter never reaches the engine, or an evaluator accepts a proxy rather than the task, changing the policy or adding a transfer algorithm acts on a downstream error.
+
+### One xylophone example exposes the scoring gap
+
+The task text requires the mallet to strike every key. The current score mainly checks whether the mallet's `beat` point lies above each key with `z` in `0.01–0.036 m`; it does not require a contact event or impulse. [Source L19](https://github.com/RoboDojo-Benchmark/RoboDojo/blob/fbfbbcb3801397fa00dcffaef3ca64d97c3fe76f/task/RoboDojo/tasks/play_Xylophone.py#L19)
+
+The [author-run negative case](https://p-b-p-b.github.io/blog/2026/what-does-robodojo-really-simulate/#scoring) can therefore pass every strike while hovering above the keys with zero contact. The first failure is in evaluator semantics, before any question about tool-use policy. The bottle task has a similar proxy: its score checks a bottle's vertical relation to the bin, not whether a grasp occurred. [Source L26](https://github.com/RoboDojo-Benchmark/RoboDojo/blob/fbfbbcb3801397fa00dcffaef3ca64d97c3fe76f/task/RoboDojo/tasks/put_bottles_into_dustbin.py#L26)
+
+### Four preflight gates
+
+| Gate | Question | Minimum evidence |
+| --- | --- | --- |
+| Parameter delivery | Did friction, mass, inertia, limits and control parameters reach the engine? | Configured values, imported asset values, runtime readback, activation time and one observable response to changing the value |
+| Physical plausibility | Could these values describe the real object or robot? | Dimensions, density, mass, inertia, joint ranges, drive force and controller limits |
+| Numerical invariance and conservation | Does the response survive changes that should not alter the answer? | `dt`/`dt/2`, repeated and batched runs, penetration, impulses, velocities and an energy account |
+| Evaluator semantics | Does the score inspect the task rather than a proximity proxy? | Positive control for honest completion; idle, no-contact, hidden-support, carry/reset and early-exit negative controls |
+
+The blog also follows a nonphysical rebound from initial condition to task consequence. A steel bottle is released at `0.92 m`, falls at about `3.0 m/s`, and first contacts a light bottle pinned against the bin floor after already penetrating it. In one `4 ms` step, its velocity reverses to about `3.5 m/s` upward; it reaches `1.06 m`, `0.14 m` above release, then leaves the bin. The supported first-failure layer is the contact/solver computation. Mass, inertia and missing friction are possible amplifiers, but the rebound remained after corrected settings, so the author does not establish default friction as the sole cause. Per-step separation, normal impulse, velocity correction, solver iterations and time-step comparisons are the next discriminating measurements.
+
+### DexLab order
+
+Do not expand a leaderboard, swap engines or rerank models first. Add four short tables to one existing qualified bread-slip or slot-contact record: parameter request/readback, physical plausibility, `dt` and energy checks, and evaluator positive/negative controls. Collect only the missing quantities.
+
+If delivery fails, repair scene/data lifetime; if the value is physically impossible, repair assets and body parameters; if equivalent numerical settings disagree, inspect contact and solver behaviour; if scoring accepts false completion, repair the evaluator. Only after the simulation chain and hardware measurements are both credible should residual differences be attributed to materials, sensing or Sim-to-Real transfer.
+
+The authors deeply inspect three tasks and lightly check the other 51. Their references come from specifications and physical objects, not measurements of the actual benchmark hardware; repair comparisons use 20 layouts and hand-written solutions. The evidence supports reproducible gaps in the evaluation chain, not a claim that all 54 tasks are invalid or that one engine parameter explains every failure. This review statically checked part of RoboDojo `fbfbbcb3801397fa00dcffaef3ca64d97c3fe76f`; it did not rerun Isaac Sim, the author repairs or task policies.
+
+
 <a id="robocoliseum"></a>
 ## RoboColiseum: replay commands, validate responses, then compare complete tasks
 
@@ -506,3 +543,5 @@ On 2026-11-16, the COAP state-evidence and code-change gates were added without 
 On 2026-11-16, the CaP-X and ASPIRE feedback and skill-admission gates were added. They affect future evaluation design but do not constitute adoption of a coding agent, automatic skill library or evolutionary search. Full reasoning is in [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341) and [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342).
 
 On 2026-11-17, the body-model boundaries for closed-chain ankle transmission were added. The section separates hardware stops, transmission state, controller mapping, reset and integration; it does not claim that DexLab has migrated closed-chain assets or reproduced the authors' experiments. Full reasoning is in [Discussion #372](https://github.com/huangkiki/Dexlab/discussions/372).
+
+On 2026-11-18, we added the RoboDojo parameter-delivery, plausibility, solver-conservation and evaluator-control audit. External run results come from the author's blog; DexLab performed only a partial static source check. This is not a DexLab reproduction, physics rerun or hardware validation. Full discussion: [Discussion #388](https://github.com/huangkiki/Dexlab/discussions/388).

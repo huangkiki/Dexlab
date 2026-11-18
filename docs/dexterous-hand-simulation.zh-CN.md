@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-18 专题增补：[RoboDojo 仿真可信度审计：先读回参数、检查数值与评分](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-simulator-audit)。** 技术博客沿着“参数送达 → 数值可能性 → 求解守恒 → 评分语义”检查一个 Isaac Sim benchmark。最值得 DexLab 借鉴的是四道前置检查，不是把任何真机失败都改写成 Sim-to-Real Gap。
+
 **2026-11-17 专题增补：[Closing the Loop：硬件限位、闭环传动与 reset 要分层验收](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#closing-loop-transmission)。** Unitree G1 脚踝的串行模型忽略了曲柄—推杆闭链。作者依次处理实测限位、传动雅可比、控制增益、reset 一致性和积分器稳定性；可迁移的是这条判因顺序，不是“所有资产都应立刻改成闭环”。
 
 **2026-11-16 专题增补：[CaP-X 与 ASPIRE：先验证反馈，再晋升技能](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#capx-aspire)。** 两篇同属 Code-as-Policy：CaP-X 把 API 抽象层级和反馈通道变成受控变量；ASPIRE 要求失败修复经隔离复现后才进入技能库。DexLab 先借这两道证据门，不先迁移整套 Agent。
@@ -384,6 +386,40 @@ DexLab [已有 Poke 适配](https://github.com/huangkiki/Dexlab/blob/4867a8637b5
 
 核查于 2026-11-11：论文 v1、当日报告和 RoboProbe `3c0bc68383a75bf3fa2d7bfc5ab1d1241c7e171e`。本轮做了静态源码核对和已发布结果的算术复算，没有重跑模型或物理任务。原始采集、预算版本对应和跨仿真器/真机泛化仍未独立验证；134 个已评分 Astra episode 的成本 transcript 缺失。槽位保留真实布局 ID，其中 13 个 ID ≥ 50。钢琴及其他本体案例不并入主榜；原 38 篇论文、19 个仓库统计不变。
 
+(robodojo-simulator-audit)=
+## RoboDojo 仿真可信度审计：先证明仿真收到参数，再讨论 Sim-to-Real
+
+**2026-11-18 蒸馏：[完整讨论与最小验证门槛](https://github.com/huangkiki/Dexlab/discussions/388)。** [What does RoboDojo really simulate?](https://p-b-p-b.github.io/blog/2026/what-does-robodojo-really-simulate/)（Bo Peng, Wenhao Chai, Zhifei Li）没有先比较模型，而是沿四个可独立失效的关卡检查 RoboDojo 的 Isaac Sim 仿真端：
+
+`对象与真机规格 → 任务参数/资产 → 引擎运行时读回 → 数值与求解检查 → 接触/物体响应 → 任务评分`
+
+这里最重要的认识是：**“配置里有这个值”“脚本无报错”“画面看起来像”和“评分给了分”，都不等于仿真在计算任务声称的物理。** 当失败来自参数未送达或评分漏检时，继续调策略、加域随机化或换迁移算法只是在下游放大错误。
+
+### 用一个木琴任务看评分缺口
+
+任务说明要求琴槌实际击打八个琴键，但当前评分主要检查琴槌的 `beat` 点是否位于琴键上方，`z` 在 `0.01–0.036 m` 内，没有要求接触事件或冲量。[源码 L19](https://github.com/RoboDojo-Benchmark/RoboDojo/blob/fbfbbcb3801397fa00dcffaef3ca64d97c3fe76f/task/RoboDojo/tasks/play_Xylophone.py#L19)
+
+因此，让琴槌依次从所有琴键上方掠过、实际接触为零，也能累计击打阶段。[作者运行负例](https://p-b-p-b.github.io/blog/2026/what-does-robodojo-really-simulate/#scoring) 这说明失败首先位于“评分是否检查任务”，早于“策略是否会工具操作”。相似地，瓶子任务说明要求拿起放入箱中，阶段分却只检查瓶体位于箱体上下范围。[源码 L26](https://github.com/RoboDojo-Benchmark/RoboDojo/blob/fbfbbcb3801397fa00dcffaef3ca64d97c3fe76f/task/RoboDojo/tasks/put_bottles_into_dustbin.py#L26) 作者报告直接把三个瓶子推落可拿 `40`，不做任务直接退出可拿 `100`，木琴悬空扫过可拿 `100`；修正检查后三种捷径均为 `0`。
+
+### 四道前置检查
+
+| 关卡 | 要问的问题 | 最低证据 |
+| --- | --- | --- |
+| 参数送达 | 配置里的摩擦、质量、惯量、限位和控制参数是否进入引擎？ | 配置值、资产导入值、运行时读回、生效时刻和一次可观测响应。 |
+| 数值可能性 | 这些值是否能对应现实物体或本体？ | 尺寸、密度、质量、惯量、关节范围、驱动力和控制器限幅。 |
+| 求解与守恒 | 改变不应改变结论的数值条件后，响应是否保持？ | `dt`/`dt/2`、重复运行、批量对照，以及穿透、冲量、速度和能量账。 |
+| 评分语义 | 分数检查的是任务，还是接近目标等代理量？ | 真实完成的 positive control；idle、无接触、隐藏支撑、错误 carry/reset 等 negative controls。 |
+
+原文的瓶子案例还给出了一条完整的非物理时间线：钢瓶从 `0.92 m` 释放，以约 `3.0 m/s` 落入箱内；首次接触时它已进入被压在箱底的轻瓶内部，并在单个 `4 ms` 步内反转为向上 `3.5 m/s`，升到 `1.06 m`，比释放点高 `0.14 m`，最后落到箱外。**现有证据支持的第一失效层是接触/求解计算产生了非物理响应**；质量、惯量和未送达的摩擦可能是放大器，但修正设置后反弹仍能复现，因此不能把默认摩擦单独写成主因。下一步应读回每步接触距离、法向冲量、速度修正、求解迭代与步长对照，在没有这些量前把内部机制保留为待定。
+
+### DexLab 先学哪一步
+
+不要先扩大榜单、换引擎或给模型重新排名。先在一条已有合格记录上补齐四张短表：参数请求/读回、数值 plausibility、`dt` 与能量对照、evaluator 正负控制。用“面包滑落”或“入槽接触逃逸”都行；只有现有日志缺少的量才补采。
+
+如果参数未送达，先修数据与场景生命周期；如果数值明显不可能，先查资产和本体参数；如果相同输入在不同步长或批量下给出相反响应，先查接触与求解；如果评分接受伪完成，先修 evaluator；上述都正常而固定输入下仍有可重复的非物理响应，再做接触标定或求解器对照；只有仿真链路和真机测量都可信，剩余差异才属于材料、感知或 Sim-to-Real 迁移。
+
+作者深读 3 个任务，其他 51 个只做轻量检查；数值参照来自规格表和现实物体，不是真机测量；修复对照使用 20 个 layout 和手写解。这些结果支持“评测链有可复现缺口”，不支持“54 个任务全部无效”，也尚未证明某个特定 Isaac Sim/PhysX 参数是全部异常的单一根因。本轮静态核对了 RoboDojo `fbfbbcb3801397fa00dcffaef3ca64d97c3fe76f` 的部分源码，没有独立重跑 Isaac Sim、作者修复或任务策略。
+
 
 <a id="robocoliseum"></a>
 ## RoboColiseum：回放动作、检验响应，再比较完整任务
@@ -505,3 +541,5 @@ DexLab 的其他步长实验提供边界，而不是 G1 复现：LIBERO 的 2→
 2026-11-16 增补 CaP-X / ASPIRE 的反馈契约与技能晋升门槛。两者分别以实验设计和技能准入影响后续评测，不代表已采用代码 Agent、自动技能库或进化搜索；完整讨论见 [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341) 与 [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342)。
 
 2026-11-17 增补 G1 脚踝闭环传动的本体建模边界。该节把硬件限位、传动状态、控制映射、reset 和积分器分开，不表示 DexLab 已迁移闭环资产或复现作者实验；完整讨论见 [Discussion #372](https://github.com/huangkiki/Dexlab/discussions/372)。
+
+2026-11-18 增补 RoboDojo 的参数送达、数值 plausibility、求解守恒与评分正负控制审计。外部运行结果来自作者博客，DexLab 侧只做了固定源码静态核对；不表示 DexLab 已完成相应实现、物理重跑或真机验证。完整讨论见 [Discussion #388](https://github.com/huangkiki/Dexlab/discussions/388)。
