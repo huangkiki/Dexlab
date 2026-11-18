@@ -9,11 +9,6 @@
     <p class="hero-project"><strong>DexLab is my personal research project.</strong><span>It explores how Agent Skills and simulation can improve each other through experiments.</span></p>
     <p class="hero-lead">Experiments connect tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
     <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
-    <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
-      <span>Hover to focus</span>
-      <strong>Click a concept to open the atlas</strong>
-      <small>Physical concepts and solver or numerical options</small>
-    </a>
   </div>
   <a class="directory-entry" href="#experiments">
     <span class="directory-action">Start with representative experiments and findings</span>
