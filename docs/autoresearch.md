@@ -25,6 +25,25 @@ Each cycle answers one question that changes the next decision. Use the existing
 
 See [current work](current-work.md) for ordering. Scorer auditing gates only the proposed sequence that depends on it, not independent existing work. If carried state exposes no interpretable new difference, retain that result and stop extending the sequence. Defer generative worlds, the full factory task suite, generic multi-agent frameworks and new default engines until a minimal case establishes decision value.
 
+<a id="research-intake"></a>
+### Automatic Discussion-to-Triage intake
+
+Every distilled Discussion must contain one `dexlab-intake:v1` JSON block in addition to its human-readable analysis. The block records `decision`, `current_work_impact` and zero or more `candidates`; each candidate fixes a slug, work type, goal, entry points, first slice, acceptance, dependencies and non-goals. `watch` and `reject` decisions create no task.
+
+```bash
+python3 scripts/autoresearch.py intake check --discussion 388
+python3 scripts/autoresearch.py intake sync --discussion 388 --dry-run
+python3 scripts/autoresearch.py intake sync --discussion 388
+python3 scripts/autoresearch.py intake promote \
+  --umbrella ISSUE --slice SLICE --priority P2 --dry-run
+```
+
+- `intake sync` idempotently maintains one `[Research intake]` umbrella Issue per actionable Discussion and places it in Project 4 as `Triage`.
+- The umbrella is not executable: it has no priority or `auto:approved`, so `next --dry-run` cannot select it.
+- `intake promote` selects one slice, creates a linked execution Issue, adds it to Todo and sets only the work type and priority. The maintainer still adds `auto:approved` separately.
+- Re-running sync/promote updates or reuses the fixed-marker Issue instead of creating duplicates. Malformed Discussion data, duplicate markers or a missing Project state fail closed.
+- Update `current-work` only after an execution child is accepted. Triage candidates do not pollute the mainline or resume scheduled dispatch.
+
 ### Documentation and delivery
 
 README introduces the research direction and architecture and links to the Blog; the website explains findings and their implications; experiment reports preserve complete protocols and outcomes; Discussions preserve the reasoning behind proposals; current work records adopted design ordering and recovery points. Distinguish discussion, design adoption, implementation, runtime validation and public delivery. The submission and merge gates below still apply; design documentation neither resumes dispatch nor launches an experiment.

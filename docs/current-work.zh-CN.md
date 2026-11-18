@@ -33,6 +33,8 @@ Wuji 合成抗扭接触使两秒保持最大位移由 2.734 mm 降到 1.025 mm�
 
 [Project 4](https://github.com/users/huangkiki/projects/4)与 Issue 保存实时执行范围、依赖、预算和阻塞；恢复时读回真实状态。沿用 [UniSim #142](https://github.com/huangkiki/Dexlab/issues/142) 的所有权边界：DexLab 管实验、记录和独立评分，生产适配缺口由 UniSim 承担，已合格原生参考保留。
 
+研究蒸馏通过 `intake sync` 进入 Project 4 的 `Triage`，但 Triage 伞形项不是开发承诺，也不会被 autodev 领取。只有维护者用 `intake promote` 选出切片并另行添加 `auto:approved` 后，子 Issue 才进入执行队列；`current-work` 此时才按影响更新。[Intake 规则](autoresearch.zh-CN.md#research-intake)
+
 遵守[操作指南](autoresearch.zh-CN.md)与 [AGENTS](../AGENTS.zh-CN.md)：单执行者，保留未提交工作、失败与累计预算；机器派发状态缺失或损坏时默认暂停。`next --dry-run` 只检查候选，不恢复定时器。优先级、讨论或文档计划不能绕过作者、依赖、资源与授权检查。
 
 每次交付更新相应报告中的结论、适用范围和下一步；网站承载研究结论，README 保持为简洁的架构与 Blog 入口。沿用已授权的精确 head 审查、适用门禁、合并及部署读回；部分交付不关闭父项。Obsidian 提交／推送仍暂停。

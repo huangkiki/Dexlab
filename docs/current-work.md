@@ -33,6 +33,8 @@ Detailed acceptance, historical priorities and cumulative scope remain in the [N
 
 [Project 4](https://github.com/users/huangkiki/projects/4) and Issues hold live execution scope, dependencies, budgets and blockers; read back actual state on recovery. Preserve [UniSim #142](https://github.com/huangkiki/Dexlab/issues/142)'s ownership boundary: DexLab owns experiments, recording and independent scoring; production adapter gaps belong to UniSim, with qualified native references retained.
 
+Research distillation enters Project 4 as `Triage` through `intake sync`, but a Triage umbrella is not a development commitment and autodev cannot select it. Only a slice promoted with `intake promote`, followed by a separate `auto:approved` decision, becomes executable; `current-work` changes only at that point. [Intake contract](autoresearch.md#research-intake)
+
 Follow the [operating guide](autoresearch.md) and [AGENTS](../AGENTS.md): one executor, preserved dirty work, failures and cumulative budgets; missing or malformed dispatch state means paused. `next --dry-run` inspects candidates without resuming a scheduler. Priorities, Discussions and plans cannot bypass author, dependency, resource or authorization checks.
 
 Each delivery updates the report's finding, scope and next decision; the website carries the findings, while README remains a concise architecture and Blog entrance. Continue authorized exact-head review, applicable gates, merge and deployment readback; partial delivery does not close a parent. Obsidian commit/push remains paused.

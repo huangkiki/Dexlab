@@ -8,6 +8,13 @@ assignees: ''
 
 ## Problem and evidence / 问题与证据
 
+## Research source / 研究来源
+
+<!-- For distillations only: link the Discussion and Triage umbrella. Use "none" for direct engineering work. / 仅蒸馏任务填写 Discussion 与 Triage 伞形项；直接工程任务写 none。 -->
+
+- Discussion / 讨论:
+- Candidate slice / 候选切片:
+
 ## Uncertainty and public impact / 不确定项与公开影响
 
 <!-- Exact claim/artifact + version, unresolved question, known evidence, affected interpretation, verification route and recovery condition. Reuse existing Issues first. README/site ambiguity defaults to P0 before new capability work; label and dependency checks still apply. A wording edit or Issue link is not technical closure. -->
