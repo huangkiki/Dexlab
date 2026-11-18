@@ -211,11 +211,30 @@ main > section > h1 {
   font-weight: 400;
 }
 
+.hero-project {
+  display: grid;
+  gap: 4px;
+  max-width: 760px;
+  margin-top: 24px;
+  color: var(--ink);
+  font: 400 clamp(1.25rem, 2.1vw, 1.55rem)/1.55 var(--serif);
+}
+
+.hero-project strong {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.hero-project span {
+  color: var(--ink);
+}
+
 .hero-lead {
   max-width: 700px;
-  margin-top: 24px;
+  margin-top: 14px;
   color: var(--muted);
-  font-size: 17px;
+  font-size: 16px;
+  line-height: 1.85;
 }
 
 .hero-scope {
