@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-18 addition: [RaiSim: fast CPU training is not evidence of universal physical accuracy](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#raisim-physics-boundary).** RaiSim's publication footprint and hardware-transfer evidence come mainly from high-rate robot control, not from an all-task accuracy ranking. DexLab can use it as an independent solver probe without migrating every task.
+
 **2026-11-18 addition: [RoboDojo simulator-integrity audit: read back parameters, test numerical behaviour and inspect scoring before blaming sim-to-real](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-simulator-audit).** The technical blog checks parameter delivery, plausibility, solver conservation and evaluator semantics in one Isaac Sim benchmark. The transferable object is the four-gate preflight, not a global verdict that every failure is a Sim-to-Real Gap.
 
 **2026-11-17 addition: [Closing the Loop: validate hardware stops, closed-chain transmission and reset as separate layers](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#closing-loop-transmission).** A common Unitree G1 ankle model omits the crank-and-pushrod loops. The authors separately address measured stops, the transmission Jacobian, controller gains, consistent resets and integrator stability. The transferable lesson is that attribution order, not an immediate closed-loop rewrite of every asset.
@@ -249,7 +251,7 @@ Recent [RoboLab](https://github.com/NVlabs/RoboLab) and [RoboDojo](https://arxiv
 
 > **TL;DR:** The useful lesson from RaiSim's comparison is not that CPU engines universally beat GPUs. It is that small-batch latency, large-batch throughput, cost per dollar and the complete training loop are separate decisions. Faster physics becomes faster training only when physics dominates end-to-end time.
 
-Consider a batched Wuji cycle: contact state → policy action → physics advance → new observation/reward. If the cycle takes 100 ms and physics takes 20 ms, making physics 10× faster would ideally reduce the cycle to 38 ms, not accelerate the whole task by 10×. The 100/20 ms example illustrates arithmetic only and is not a measurement of either platform. Under the author-selected hardware and prices, the [random-action report](https://raisim.com/sections/BenchmarkNewton.html) reports 95.77× (ANYmal) and 13.43× (Strandbeest) throughput at one world, with FPS/USD still at 3.40×/2.04× at 4,096 worlds. Random targets change every ten steps; timing includes target generation and physics but excludes policy inference, observations, rewards, episode resets, rendering and recording. [Fixed document snapshot](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/sections/BenchmarkNewton.md) · [Raw measurements](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/public/raisim_newton_random_actions.json)
+Consider a batched Wuji cycle: contact state → policy action → physics advance → new observation/reward. If the cycle takes 100 ms and physics takes 20 ms, making physics 10× faster would ideally reduce the cycle to 82 ms, not accelerate the whole task by 10×. The 100/20 ms example illustrates arithmetic only and is not a measurement of either platform. Under the author-selected hardware and prices, the [random-action report](https://raisim.com/sections/BenchmarkNewton.html) reports 95.77× (ANYmal) and 13.43× (Strandbeest) throughput at one world, with FPS/USD still at 3.40×/2.04× at 4,096 worlds. Random targets change every ten steps; timing includes target generation and physics but excludes policy inference, observations, rewards, episode resets, rendering and recording. [Fixed document snapshot](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/sections/BenchmarkNewton.md) · [Raw measurements](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/public/raisim_newton_random_actions.json)
 
 This also compares different numerical work. RaiSim uses FP64 on CPU, while Newton SolverMuJoCo / MuJoCo Warp uses FP32; solver, constraints, trajectories and mean contact counts also differ. Bit-identical action targets establish identical input, not identical contact computation or contact accuracy. For the next authorized batched-learning experiment, DexLab should record five clocks separately: steady-state physics, observation/reward, inference and transfer, reset/recovery, and recording/rendering. It should then derive cost per useful transition while freezing parallel scale, action sequence and task criteria, and retaining contact events and first-failure layers at each scale.
 
@@ -265,6 +267,61 @@ One `primitive_ray_scaling` workload shows why the timing boundary matters: the 
 The MuJoCo eight-cube deformable row must be excluded: the recorded variants use different particles, masses and collision radii, and QACC becomes `NaN/Inf/huge` at 0.020 s, roughly step 20. Although the launcher exits 0, the authors do not turn 9.17 s versus 0.445 s into a speedup. The evidence locates a first failure layer—deformable contact/deformation loses numerical finiteness within 20 ms—but not a unique material, geometry, iteration or solver cause. A causal test needs matched parameters and steps 0–20 of QACC, particle spacing, penetration, contact force, constraint residual and energy.
 
 For DexLab, the next step remains to decompose scene construction, steady physics, contact queries, LiDAR/rays, observations, policies, resets and recording before choosing an optimization layer. This MuJoCo 3.13.0 single-thread result also cannot be combined into a total ranking with the Newton page's MuJoCo Warp 3.17.0 FP32 GPU batches. See the [Discussion #334 supplement](https://github.com/huangkiki/Dexlab/discussions/334#discussioncomment-19645295) for the full failure-analysis gate and limits.
+
+<a id="raisim-physics-boundary"></a>
+### RaiSim: a CPU physics stack built around high-rate robot control
+
+> **TL;DR:** RaiSim's publication footprint comes from sufficiently fast dynamic contact, a usable training stack and hardware-transfer evidence, not from proof that every contact is more accurate. For DexLab, it warrants an independent solver probe, not immediate promotion to the main backend for every task.
+>
+> **Example:** A quadruped policy emits joint targets; RaiSim advances articulated dynamics and ground-contact impulses; PPO consumes the next state. If that loop is fast enough, policies can be collected in parallel on ordinary CPUs. Transfer also depends on the actuator model, domain randomization, observations, control and calibration. Their joint success cannot be attributed to the contact law alone.
+>
+> **It establishes** that RaiSim can support influential robot-learning work. **It does not establish** that its friction, deformation, penetration or energy dissipation is best for every DexLab task.
+
+RaiSim is not a wrapper over another physics engine; it is a proprietary multibody stack. The public documentation and headers expose articulated dynamics, an AABB broadphase, analytic/SAT/MPR/GJK-EPA narrowphase, and a contact solve that sweeps constraint rows and uses bisection for frictional contacts. Ordinary rigid contacts warm-start from the previous impulse. Contact output is an impulse; dividing by the timestep gives force. [Contact and Collision](https://raisim.com/sections/Contact.html) · [Collision Detection](https://raisim.com/sections/CollisionDetection.html)
+
+The public workspace provides RaiSim and rayrai binaries, headers, examples and wrappers, but not the engine source or complete internal tests. This review can establish public APIs, configuration and observability semantics; it cannot audit the solver kernel. The papers also span RaiSim v1, v2 and forks. Reproduction must use each paper repository's pinned dependency and settings rather than backfilling old results with the current release.
+
+Its physics runs natively on CPU. `raisimGymTorch` creates one `raisim::World` per environment and uses OpenMP to step, reset and observe worlds in parallel. PyTorch policy training may run on CPU or GPU; the GPU is not the physics backend. [raisimGymTorch](https://github.com/raisimTech/raisim2Lib/tree/v2.16.0/raisimGymTorch)
+
+#### Why a cluster of papers keeps using it
+
+1. **Historical speed.** The 2018 per-contact paper reports less than 20 µs per simulated step for an 18-DOF quadruped with multiple contacts on one CPU core, and a larger advantage over PGS in complex scenes. The 2019 ANYmal paper reports nearly 500K steps/s for the complete rigid-body-plus-actuator-network simulator, with every training run under 11 hours on one CPU and one GPU. [Per-Contact Iteration](https://doi.org/10.1109/LRA.2018.2792536) · [ANYmal 2019](https://arxiv.org/html/1901.08652)
+2. **Contact observability.** Native contact position, normal, frame and impulse can feed rewards, teacher observations and failure records directly.
+3. **A reusable training and asset path.** URDF support, terrain generation, the C++ vector environment and `raisimGymTorch` reduce the distance from a robot model to a PPO experiment. Later projects often reuse robots, configurations and code.
+4. **A feedback loop from visible hardware results.** Once an engine has supported dynamic quadrupeds and long field deployments, following that stack can be less risky than rebuilding the full loop. This is an ecosystem advantage, not isolated proof of physical accuracy.
+
+#### Representative paper map
+
+This is a representative sample, not a paper census and not an independent review of a vendor-maintained list. Each paper's success belongs first to its task, control, learning and hardware system.
+
+| Work | Role of RaiSim | Reading boundary |
+| --- | --- | --- |
+| [Hwangbo et al., 2019](https://arxiv.org/html/1901.08652) | ANYmal dynamic locomotion and recovery; rigid/contact stepping with an actuator network | The fast hybrid loop is not a pure engine-speed or accuracy measurement |
+| [Lee et al., 2020](https://arxiv.org/html/2010.11251v1) · [Miki et al., 2022](https://arxiv.org/html/2201.08117) · [Choi et al., 2023](https://doi.org/10.1126/scirobotics.ade2256) | Quadruped policies trained for wild, snow, vegetation, mud and sand conditions | Several difficult terrains are deployment conditions; the actual simulated terrain and material model still require separate checks |
+| [RMA, 2021](https://arxiv.org/html/2107.04034v1) | Base policy and adaptation module for A1 trained entirely in RaiSim | Supports fast simulation, randomization and online adaptation; it does not prove automatic contact-parameter accuracy |
+| [Circus ANYmal, 2021](https://arxiv.org/abs/2011.08811v2) | Four limbs manipulate a yoga ball and transfer zero-shot | The authors explicitly state that the simulator then lacked ball deformation and used normal-contact-velocity penalties to work around it |
+| [Concurrent policy/state estimator, 2022](https://arxiv.org/html/2202.05481v2) | Policy, value and estimator trained jointly | Hardware speed depends on the estimator, controller and complete robot, not one engine metric |
+| [Whole-body manipulation, 2023](https://arxiv.org/html/2308.16820) | 300 environments, Ryzen 9 5950X plus RTX 3070, about 15 hours of training | Simulation success and real heavy-object operation are different conditions; no engine-accuracy ablation was performed |
+| [D-Grasp, 2022](https://arxiv.org/abs/2112.03028) · [ArtiGrasp, 2024](https://arxiv.org/abs/2309.03891) · [RobustDexGrasp, 2025](https://arxiv.org/abs/2504.05287) | Hand-object policies, articulated objects and dexterous grasping; official implementations use RaiSim | Shows that multi-finger and object contact impulses can support training, not that materials are accurate across engines |
+| [RAIBO2, Nature 2026](https://doi.org/10.1038/s41586-026-11102-5) | One part of the low-consumption gait training chain | The marathon is a joint hardware-loss, motor, mechanism and policy result |
+| [DiffContact, 2026](https://arxiv.org/html/2610.35852v1) | Fast 1 ms forward rollouts with a custom backward contact gradient | The paper also notes that standard RaiSim can depart from maximum dissipation during sliding |
+
+#### Why adoption cannot be rewritten as an accuracy ranking
+
+Independent contact work shows that standard RaiSim does not strictly satisfy the maximum-dissipation principle during sliding and can under-dissipate energy; the paper also supplies a correction. [Reconciling RaiSim](https://doi.org/10.1109/TRO.2024.3430711) and [Contact Models in Robotics](https://arxiv.org/html/2304.06372v3) further show that complementarity conditions, friction cones, tolerances and timesteps all change trajectories.
+
+"More accurate" therefore has to name the measured quantity: contact position, normal force, tangential impulse, slip, energy dissipation, penetration or task success. Without equivalent contact parameters, no cross-engine number is an accuracy ranking. RaiSim's defensible advantage is narrower: **for dynamic rigid and articulated systems, it can produce sufficiently fast, transferable rollouts on CPU at modest engineering cost.**
+
+#### DexLab integration boundary
+
+RaiSim should not become the primary backend for every contact, cloth, apple and dexterous-hand task now. The informative first step is an optional adapter on the existing `ContactPlane` rest, sliding and zero-friction cases, freezing:
+
+- the exact RaiSim and `raisim2Lib` tag, native-library hash and FP64 configuration;
+- rigid-body mass, inertia, collision shape, initial state, gravity, friction and timestep matched to the record;
+- integration scheme, maximum iterations, per-row threshold and solver warm-start reset between episodes;
+- contact position, normal, frame, `impulse / dt`, solver loop count, stall status and finiteness.
+
+RaiSim earns promotion only if it produces a reproducible solver-sensitive difference and exposes a first failure layer absent from existing records. If only trajectories differ slightly, retain this paper map and evidence boundary without taking on a full backend. This review performed no RaiSim installation, new physics experiment or hardware test.
 
 <a id="benchmark-gaming-audit"></a>
 ### From scorer exploits to leaderboard gaming: what does a high score identify?
