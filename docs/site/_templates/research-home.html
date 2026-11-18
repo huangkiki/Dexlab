@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ 'DexLab：项目介绍、系统架构、代表性实验、Solver 边界与失败根因。' if homepage_is_chinese else 'DexLab: project overview, architecture, representative experiments, solver boundaries and failure causes.' }}">
+  <meta name="description" content="{{ 'DexLab：项目介绍、真机验证边界、物理保证、代表性实验、Solver 边界与失败根因。' if homepage_is_chinese else 'DexLab: project overview, hardware-validation boundary, physical checks, representative experiments, solver boundaries and failure causes.' }}">
   <title>DexLab · {{ '研究总览' if homepage_is_chinese else 'Research overview' }}</title>
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
@@ -16,6 +16,7 @@
       <a class="brand" href="#top" aria-label="DexLab {{ '首页' if homepage_is_chinese else 'home' }}">Dex<span>Lab</span></a>
       <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
         <a href="_static/research/dexterous-simulation.html">{{ '研究导读' if homepage_is_chinese else 'Research guide' }}</a>
+        <a href="#physical-validity">{{ '物理验证' if homepage_is_chinese else 'Validation' }}</a>
         <a href="#experiments">{{ '实验结论' if homepage_is_chinese else 'Findings' }}</a>
         <a href="learning.html">{{ '仿真学习' if homepage_is_chinese else 'Learn simulation' }}</a>
         <a href="about.html">{{ '文档' if homepage_is_chinese else 'Docs' }}</a>

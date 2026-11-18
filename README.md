@@ -10,6 +10,12 @@ The research overview is the main entry to the project. This README mirrors its 
 
 [简体中文](README.zh-CN.md)
 
+## Validation boundary
+
+There are currently **no hardware experiments**. “Physical correctness” here means reproducible consistency inside a frozen simulation model: auditable inputs, analytic or engineering references, positive and negative controls, conservation checks and a full regression after each declared parameter change. It does not claim real-material calibration or sim-to-real accuracy.
+
+The [physical-validation section](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#physical-validity) gives the test design and evidence boundary for each representative experiment.
+
 ## Architecture
 
 <p align="center">
