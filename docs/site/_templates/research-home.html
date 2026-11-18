@@ -34,7 +34,7 @@
   <main id="main-content" role="main">{{ body }}</main>
   <footer class="site-footer">
     <a class="brand" href="#top">Dex<span>Lab</span></a>
-    <p>{{ '读懂一个结论，也看清它成立的条件。' if homepage_is_chinese else 'Understand a finding and the conditions that support it.' }}</p>
+    <p>{{ '以实验暴露问题，以证据限定结论。' if homepage_is_chinese else 'Expose problems through experiments; bound conclusions with evidence.' }}</p>
     <div><a href="#experiments">{{ '实验结论' if homepage_is_chinese else 'Findings' }}</a><a href="contributing.html">{{ '参与研究' if homepage_is_chinese else 'Contribute' }}</a><a href="https://github.com/huangkiki/Dexlab">GitHub</a><a href="about.html#documentation-and-citation">{{ '引用与许可' if homepage_is_chinese else 'Citation & license' }}</a></div>
   </footer>
   {{ concept_dialog_html|safe }}
