@@ -261,7 +261,7 @@
       "name": "Concept field",
       "kind": "custom",
       "refersTo": "concept-field",
-      "description": "Every physical concept and canonical solver or numerical option sits behind the opening copy as a static low-opacity semantic field. Engine registrations remain separate context instead of creating an `engine + token` entry. The blurred field is decorative; a visible trigger opens the sharp atlas.",
+      "description": "Every physical concept and canonical solver or numerical option sits behind the opening copy as a scroll-revealed semantic field. Engine registrations remain separate context instead of creating an `engine + token` entry. Hovering one term sharpens and enlarges it while the rest recedes; clicking opens the matching atlas entry.",
       "html": "<div class=\"ds-concept-field\" aria-hidden=\"true\"><section><span>Motion and time</span><p>Acceleration Timestep Velocity Contact</p></section><section><span>Dynamics</span><p>Force Torque Damping Momentum Energy exchange</p></section></div><a class=\"ds-concept-trigger\" href=\"concepts/index.html\">Click the field <strong>Open the concept atlas</strong></a>",
       "css": ".ds-concept-field{position:absolute;inset:84px 0 auto;height:calc(100svh - 84px);overflow:hidden;color:var(--accent,#4f664c);opacity:.17;filter:blur(2.8px);pointer-events:none}.ds-concept-field::after{position:absolute;inset:0;background:rgba(250,250,246,.62);content:\"\"}.ds-concept-field section{position:relative;z-index:1;display:inline-block;width:20%;margin:42px 2.5%;vertical-align:top}.ds-concept-field span{color:var(--ink,#282b26);font:13px/1.4 var(--serif,Georgia,serif)}.ds-concept-field p{margin-top:12px;font:500 13px/1.6 var(--sans,Arial,sans-serif)}.ds-concept-trigger{display:inline-flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline;color:var(--muted,#60675a);text-decoration:none}.ds-concept-trigger strong{color:var(--accent,#4f664c);font:400 16px/1.4 var(--serif,Georgia,serif)}.ds-concept-trigger:hover strong{color:var(--ink,#282b26);text-decoration:underline}"
     },
@@ -292,11 +292,11 @@
   ],
   "narrative": {
     "northStar": "The Research Reading Index",
-    "overview": "The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence. Behind the opening copy, every curated concept and canonical solver or numerical option forms a statically blurred semantic field; engine registrations remain separate context. Activating the field opens a searchable, filterable concept atlas.\n\nThis system governs the Chinese and English research homepages, concept entries and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.",
+    "overview": "The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence. Behind the opening copy, every curated concept and canonical solver or numerical option forms a semantic field that resolves during the first scroll. Hovering one term sharpens the field, enlarges that term and dims the others; engine registrations remain separate context. Activating a term opens the matching entry in a searchable, filterable concept atlas.\n\nThis system governs the Chinese and English research homepages, concept entries and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.",
     "keyCharacteristics": [
       "Warm paper and charcoal, with restrained green reading accents.",
       "A serif opening title beside a desktop reading rail; navigation wraps above the title on smaller screens.",
-      "A blurred first-screen concept field that opens into a native searchable atlas and stable bilingual terms.",
+      "A scroll-revealed first-screen concept field with individual hover focus that opens into a native searchable atlas and stable bilingual terms.",
       "Open sections and ruled reading rows, with hierarchy carried by spacing and type.",
       "Original experiment media, native controls and explicit evidence boundaries.",
       "The physical-validation boundary closes the study path after experiments, findings and continuation links.",
@@ -317,7 +317,7 @@
     "dos": [
       "Do keep the homepage aligned with the article's warm paper, serif opening title and green links.",
       "Do let spacing, hierarchy and open rows explain the page before adding secondary labels.",
-      "Do keep the concept field low-opacity and semantically grouped, with a visible non-JavaScript path to the complete concept index.",
+      "Do resolve the concept field during the first scroll, focus one hovered term, and keep a visible non-JavaScript path to the complete concept index.",
       "Do draw only the selected concept’s local relationships and keep every term a stable bilingual link.",
       "Do close the homepage research path with the physical-validation boundary before the contact footer.",
       "Do preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.",
@@ -327,7 +327,7 @@
     "donts": [
       "Don't restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.",
       "Don't restyle the article, unrelated Sphinx pages or the separate web application through this reading system.",
-      "Don't make blurred background terms individually clickable or use font size to imply popularity.",
+      "Don't animate every concept independently or use resting font size to imply popularity.",
       "Don't show a complete relation graph at rest or wrap concept entries in cards and shadows.",
       "Don't replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.",
       "Don't invent component variants, radius scales or motion tokens absent from the implementation."

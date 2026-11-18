@@ -385,7 +385,7 @@ def render_field(atlas, language):
     groups = []
     for group in atlas["groups"]:
         words = "".join(
-            "<span>"
+            f'<span data-concept-open data-concept-target="{item["id"]}">'
             + html.escape(item["name"][language])
             + "</span>"
             for item in grouped[group["id"]]

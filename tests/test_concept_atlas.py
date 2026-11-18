@@ -9,6 +9,7 @@ from scripts.concept_atlas import (
     load_atlas,
     prepare_concept_pages,
     render_dialog,
+    render_field,
 )
 
 
@@ -80,6 +81,11 @@ class ConceptAtlasTests(unittest.TestCase):
         self.assertNotIn("<small>SuperDex</small>", rendered)
         self.assertIn("data-relations=", rendered)
         self.assertIn(f"{len(self.atlas['concepts'])} 个词条", rendered)
+
+    def test_concept_field_words_open_their_matching_atlas_entry(self):
+        rendered = render_field(self.atlas, "zh")
+        self.assertEqual(rendered.count("data-concept-open"), len(self.atlas["concepts"]))
+        self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
 
     def test_generated_pages_keep_the_source_of_truth_and_fix_local_links(self):
         with tempfile.TemporaryDirectory() as directory:

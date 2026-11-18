@@ -12,6 +12,8 @@ if (conceptDialog) {
   const closeButton = conceptDialog.querySelector(".concept-close");
   const defaultLens = lens.innerHTML;
   const byId = new Map(terms.map((term) => [term.dataset.concept, term]));
+  const conceptField = document.querySelector(".concept-field");
+  const conceptWords = [...document.querySelectorAll(".concept-field-words span")];
   const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
   const relationLabels = {
     zh: {
@@ -39,6 +41,8 @@ if (conceptDialog) {
   }
 
   function openAtlas(event) {
+    const requestedConcept =
+      event?.currentTarget?.dataset.conceptTarget || null;
     if (event) {
       event.preventDefault();
     }
@@ -46,7 +50,19 @@ if (conceptDialog) {
       conceptDialog.showModal();
       document.body.classList.add("concept-dialog-open");
     }
-    requestAnimationFrame(() => closeButton?.focus());
+    activeConceptWord?.classList.remove("is-active");
+    activeConceptWord = null;
+    conceptField?.classList.remove("is-concept-hover");
+    requestAnimationFrame(() => {
+      const requestedTerm = requestedConcept
+        ? byId.get(requestedConcept)
+        : null;
+      if (requestedTerm && !requestedTerm.hidden) {
+        requestedTerm.focus();
+      } else {
+        closeButton?.focus();
+      }
+    });
     drawLines(activeTerm);
   }
 
@@ -54,19 +70,25 @@ if (conceptDialog) {
     trigger.addEventListener("click", openAtlas);
   });
 
-  const hero = document.querySelector(".story-hero");
-  hero?.addEventListener("click", (event) => {
-    if (!(event.target instanceof Element)) {
-      return;
-    }
-    if (
-      event.target.closest(
-        "a, button, input, select, textarea, .hero-copy, .directory-entry",
-      )
-    ) {
-      return;
-    }
-    openAtlas(event);
+  let activeConceptWord = null;
+  conceptWords.forEach((word) => {
+    word.addEventListener("pointerenter", () => {
+      if (activeConceptWord === word) {
+        return;
+      }
+      activeConceptWord?.classList.remove("is-active");
+      activeConceptWord = word;
+      word.classList.add("is-active");
+      conceptField?.classList.add("is-concept-hover");
+    });
+    word.addEventListener("pointerleave", () => {
+      if (activeConceptWord !== word) {
+        return;
+      }
+      word.classList.remove("is-active");
+      activeConceptWord = null;
+      conceptField?.classList.remove("is-concept-hover");
+    });
   });
 
   conceptDialog.addEventListener("close", () => {
