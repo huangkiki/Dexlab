@@ -203,7 +203,7 @@ components:
 
 **Creative North Star: "The Research Reading Index"**
 
-The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a five-case evidence inspector, three research judgments and direct continuation links. Fine rules and open rows carry the hierarchy.
+The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a five-case evidence sequence, three research judgments and direct continuation links. Fine rules and open rows carry the hierarchy.
 
 This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: one global masthead, a 760px reading column and an optional current-page outline. The dedicated left chapter rail remains only on the course route, where it represents an ordered lesson sequence rather than the entire website. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
@@ -212,7 +212,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
 - A semantic field of curated concepts and canonical solver options below the opening entry, resolving into view with scroll, with individual hover focus and a searchable relationship atlas.
-- The original architecture diagram and ruled native-radio evidence inspector, with the hardware-free validation boundary closing the research reading order.
+- The original architecture diagram and ruled scroll-revealed evidence sequence, with the hardware-free validation boundary closing the research reading order.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
 - Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
@@ -262,14 +262,14 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, personal-project statement, method paragraph and a small scope note occupy the main column, followed by a dedicated concept band in normal flow and then one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A five-case evidence inspector follows, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, personal-project statement, method paragraph and a small scope note occupy the main column, followed by a dedicated concept band in normal flow and then one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. Five evidence cases follow in one vertical reading sequence, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
 
-The first screen also carries a data-driven concept field below the index action. Physical concepts, validation terms and canonical solver or numerical options share one mixed semantic cloud rather than separate columns or a solver footer. Group membership remains metadata for the atlas, where explicit filters still organize the searchable map. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. Individual visible terms accept pointer hover: the field temporarily sharpens, other terms recede and the active term enlarges. A term click and the masthead’s “Concepts” link provide the interaction.
+The first screen also carries a data-driven concept field before the index action. Physical concepts, validation terms and canonical solver or numerical options share one mixed semantic cloud rather than separate columns or a solver footer. Group membership remains metadata for the atlas, where explicit filters still organize the searchable map. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. Individual visible terms accept pointer hover: the field temporarily sharpens, other terms recede and the active term enlarges. A term click and the masthead’s “Concepts” link provide the interaction.
 
-The representative-experiment section is an evidence inspector: a ruled case index on the left and one synchronized evidence panel on the right. The selected case keeps its media, conclusion, control variable, native readback, criterion/result and scope together. Native radio controls provide the selection without a script. Below (800px), the case index becomes a vertical set of ruled choices above the selected panel.
+The representative-experiment section is one open, vertically ordered case sequence. Each case begins with its number, title and headline result, followed by synchronized media and a ledger for conclusion, control variable, native readback, criterion/result and scope. There is no selection control: scrolling is the only progression through the cases. Content remains visible without JavaScript, while progressive enhancement gives each case a short bounded reveal as it enters the viewport.
 
-- At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and the evidence inspector narrows its case index before stacking media and readback.
-- At (800px) and below, the architecture introduction stacks and the evidence case index precedes a full-width selected panel.
+- At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and each evidence case stacks media above its readback.
+- At (800px) and below, the architecture introduction stacks and the evidence case header meters wrap beneath the case title.
 - At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow. The architecture image keeps an (820px) reading width inside a keyboard-focusable horizontal scroll region.
 
 The research guide uses a fixed (190px) reading rail with six labeled groups and the same six-entry guide map below the opening statistics. The map is an open two-column set of ruled rows, not cards. Core evidence items use a two-column grid; the six problem layers use two columns; the three starting experiments use three equal open columns. Long prose remains at its (740px) reading measure, while grouped evidence can use (900px).
@@ -300,15 +300,15 @@ There are no shadows, gradients or decorative transitions. Thin rules, whitespac
 
 ## Motion
 
-**Motion thesis:** the concept band below the opening entry is readable on entry and gains only a small amount of contrast and vertical settling as it rises through the lower viewport. This is the one authored scroll-linked moment; the page-progress hairline is supporting orientation. Evidence cases switch immediately when their radio changes, and media plays only after an explicit control action.
+**Motion thesis:** the concept field forms the atmospheric entry and the evidence cases form the sequential reading cadence. Both use bounded, progressively enhanced scroll reactions; the page-progress hairline is supporting orientation, and media plays only after an explicit control action.
 
-There is no page-load choreography or per-section reveal. The concept field uses a short, bounded vertical response and a small contrast increase as it enters view; every term is readable at rest. Pointer entry into one concept sharpens the field, reduces unrelated terms to a still-readable secondary contrast and enlarges the active word by roughly 1.5× with a short exponential ease-out. A click opens the atlas and focuses the matching entry. Content is visible in the first paint and remains usable if JavaScript fails. A selected evidence case changes background and text contrast without moving the reading position or delaying the evidence.
+There is no page-load choreography. The concept field uses a short, bounded vertical response and a small contrast increase as it enters view; every term is readable at rest. Pointer entry into one concept sharpens the field, reduces unrelated terms to a still-readable secondary contrast and enlarges the active word by roughly 1.5× with a short exponential ease-out. A click opens the atlas and focuses the matching entry. Evidence panels enter in source order with a restrained rise and contrast transition, and remain fully visible if JavaScript fails.
 
-With `prefers-reduced-motion: reduce`, the concept field opens at its resolved opacity without scroll-linked movement, hover scaling is removed, and the hover/click contrast feedback remains. Media remains user-controlled.
+With `prefers-reduced-motion: reduce`, the concept field and evidence sequence are fully visible without scroll-linked movement, hover scaling is removed, and the hover/click contrast feedback remains. Media remains user-controlled.
 
 ## Shapes
 
-The homepage defines no component radius scale. Its directory entrance, evidence choices and continuation rows remain unfilled and rule-separated. Learning numbers are plain serif numerals. Chapter and engine links wrap within similarly open ruled groups.
+The homepage defines no component radius scale. Its directory entrance, evidence case headers and continuation rows remain unfilled and rule-separated. Learning numbers are plain serif numerals. Chapter and engine links wrap within similarly open ruled groups.
 
 The course reader's `learning-control` radius belongs only to its outlined buttons and chapter links. The teaching panel remains rectangular; native ranges, radios, progress and disclosures keep their browser affordances. The filled read button is an explicit reading state, not a homepage action style.
 
@@ -346,9 +346,9 @@ At (1100px) and below the evidence layers use two columns. At (800px) and below 
 
 ### Evidence inspector
 
-The representative-experiment index lists five cases in editorial order. Selecting a case reveals one evidence panel containing the recorded video or paired videos, a conclusion, and a four-row ledger for control variable, native readback, criterion/result and scope. Links open the complete experiment record rather than expanding an unbounded transcript on the homepage.
+The representative-experiment section lists five cases in editorial order. Every case remains in the page and contains its recorded video or paired videos, a conclusion, and a four-row ledger for control variable, native readback, criterion/result and scope. Links open the complete experiment record rather than expanding an unbounded transcript on the homepage.
 
-Selection uses native radios with visible focus on their labels; it works without JavaScript. The default case is present before script execution. Print hides the selector and shows all five panels. The inspector is not a tabbed marketing showcase: every result keeps its governing condition and evidence boundary beside the media.
+Scrolling carries the reader from one case to the next; there is no radio or tab selection. Each case occupies an open ruled row with its own header and stacks on narrow screens. With motion enabled, panels begin slightly low and translucent and settle as they intersect the viewport; without JavaScript or with reduced motion, all five remain fully visible. Print shows the same five-panel sequence without transitions. Every result keeps its governing condition and evidence boundary beside the media.
 
 ### Research-guide lanes
 
@@ -400,7 +400,7 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** mix the concept field into one continuous cloud, resolve it gradually as it enters view, and preserve category filters in the complete atlas plus a visible non-JavaScript path to the index.
 - **Do** make one hovered concept clear and larger while the rest of the field recedes, and open the matching atlas entry on click.
 - **Do** draw only the selected concept’s local relationships; keep the atlas readable before adding any connection lines.
-- **Do** keep experiment comparison content visible from first paint and use native selection for the evidence inspector.
+- **Do** keep every experiment case visible without JavaScript and reveal the vertical evidence sequence through scroll rather than click-based selection.
 - **Do** close the homepage research path with the physical-validation boundary after experiments, findings and continuation links.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.

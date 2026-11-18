@@ -48,27 +48,20 @@
     <span>任务试验 → 第一失效层 → 修复 → 独立复验</span>
   </header>
 
-  <div class="evidence-inspector" role="group" aria-label="代表性实验证据检查器">
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-cut" aria-controls="panel-cut" checked>
-    <label class="evidence-choice" id="choice-cut" for="evidence-cut"><span>01</span><span><strong>切割与侧推</strong><small>11.096 / 10.209 mm</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-wuji" aria-controls="panel-wuji">
-    <label class="evidence-choice" id="choice-wuji" for="evidence-wuji"><span>02</span><span><strong>接触与抗扭力矩</strong><small>2.734 → 1.025 mm</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-apple" aria-controls="panel-apple">
-    <label class="evidence-choice" id="choice-apple" for="evidence-apple"><span>03</span><span><strong>苹果梗抓取</strong><small>1/10 · 10/10</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-cloth" aria-controls="panel-cloth">
-    <label class="evidence-choice" id="choice-cloth" for="evidence-cloth"><span>04</span><span><strong>布料</strong><small>52 / 105 通过</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-incline" aria-controls="panel-incline">
-    <label class="evidence-choice" id="choice-incline" for="evidence-incline"><span>05</span><span><strong>六引擎斜面</strong><small>逐配置判定</small></span></label>
-
-    <div class="evidence-panels">
-      <article class="evidence-panel" id="panel-cut" data-evidence="cut" role="region" aria-labelledby="choice-cut">
+  <div class="evidence-sequence" aria-label="代表性实验证据序列">
+      <article class="evidence-panel" id="panel-cut" data-evidence="cut" data-evidence-reveal role="region" aria-labelledby="evidence-cut-title">
+        <header class="evidence-panel-head">
+          <span>01</span>
+          <strong>切割与侧推</strong>
+          <small>11.096 / 10.209 mm</small>
+        </header>
         <div class="evidence-media evidence-media-split">
           <video controls muted loop playsinline preload="none" poster="_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="豆腐两刀三块后直接侧推的最新记录"><source src="_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4"></video>
           <video controls muted loop playsinline preload="none" poster="_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="香蕉三刀四块后直接侧推的最新记录"><source src="_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">切割 / 分离判据</p>
-          <h3>切完，仍要证明末块能独立运动。</h3>
+          <h3 id="evidence-cut-title">切完，仍要证明末块能独立运动。</h3>
           <p class="evidence-verdict">最后一刀直接侧推后，豆腐三块、香蕉四块均出现独立相对位移。</p>
           <dl class="evidence-ledger">
             <div><dt>控制变量</dt><dd>豆腐 0.125 ms、η=5 Pa·s；香蕉 0.25 ms、η=0</dd></div>
@@ -80,13 +73,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-wuji" data-evidence="wuji" role="region" aria-labelledby="choice-wuji">
+      <article class="evidence-panel" id="panel-wuji" data-evidence="wuji" data-evidence-reveal role="region" aria-labelledby="evidence-wuji-title">
+        <header class="evidence-panel-head">
+          <span>02</span>
+          <strong>接触与抗扭力矩</strong>
+          <small>2.734 → 1.025 mm</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" poster="_static/wuji-contact/hold-comparison.png" aria-label="Wuji 点接触与抗扭接触的同时间原速比较"><source src="_static/wuji-contact/comparison.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">接触 / 力矩方向</p>
-          <h3>一直有接触，球仍可能绕夹持线转动。</h3>
+          <h3 id="evidence-wuji-title">一直有接触，球仍可能绕夹持线转动。</h3>
           <p class="evidence-verdict">点接触缺少力矩方向；补上合成抗扭接触后，保持才进入原定门槛。</p>
           <dl class="evidence-ledger">
             <div><dt>控制变量</dt><dd>只将点接触改为合成抗扭接触</dd></div>
@@ -98,13 +96,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-apple" data-evidence="apple" role="region" aria-labelledby="choice-apple">
+      <article class="evidence-panel" id="panel-apple" data-evidence="apple" data-evidence-reveal role="region" aria-labelledby="evidence-apple-title">
+        <header class="evidence-panel-head">
+          <span>03</span>
+          <strong>苹果梗抓取</strong>
+          <small>1/10 · 10/10</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" poster="_static/studio/apple.png" aria-label="OpenArm 与 Wuji 苹果梗抓取记录"><source src="_static/studio/apple.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">任务 / 固定扰动集</p>
-          <h3>同一条抓梗任务，固定配置仍可能给出不同结果。</h3>
+          <h3 id="evidence-apple-title">同一条抓梗任务，固定配置仍可能给出不同结果。</h3>
           <p class="evidence-verdict">差异必须连同步长、驱动、质量、位置和接触表示一起读。</p>
           <dl class="evidence-ledger">
             <div><dt>控制变量</dt><dd>同一组 10 个冻结场景，不针对留出场景重调参</dd></div>
@@ -116,13 +119,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-cloth" data-evidence="cloth" role="region" aria-labelledby="choice-cloth">
+      <article class="evidence-panel" id="panel-cloth" data-evidence="cloth" data-evidence-reveal role="region" aria-labelledby="evidence-cloth-title">
+        <header class="evidence-panel-head">
+          <span>04</span>
+          <strong>布料</strong>
+          <small>52 / 105 通过</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" aria-label="布料夹持与运动记录"><source src="_static/cloth-studio/grasp.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">柔性体 / 分阶段验收</p>
-          <h3>夹住、抬起与完成折叠是三个不同验收。</h3>
+          <h3 id="evidence-cloth-title">夹住、抬起与完成折叠是三个不同验收。</h3>
           <p class="evidence-verdict">同一冻结留出集按形变、穿透、残余运动与成本分别判定。</p>
           <dl class="evidence-ledger">
             <div><dt>控制变量</dt><dd>7 个原生配置与同一冻结留出集</dd></div>
@@ -134,13 +142,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-incline" data-evidence="incline" role="region" aria-labelledby="choice-incline">
+      <article class="evidence-panel" id="panel-incline" data-evidence="incline" data-evidence-reveal role="region" aria-labelledby="evidence-incline-title">
+        <header class="evidence-panel-head">
+          <span>05</span>
+          <strong>六引擎斜面</strong>
+          <small>逐配置判定</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" poster="_static/studio/incline.png" aria-label="六引擎斜面同步比较记录"><source src="_static/studio/incline.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Solver / 同工况响应</p>
-          <h3>同一任务，接触表达和数值门禁仍会改变结果。</h3>
+          <h3 id="evidence-incline-title">同一任务，接触表达和数值门禁仍会改变结果。</h3>
           <p class="evidence-verdict">静止、滑动和名义零摩擦逐配置判定，不合并成引擎总分。</p>
           <dl class="evidence-ledger">
             <div><dt>控制变量</dt><dd>三种接触条件和三个步长，六个固定引擎配置</dd></div>
@@ -151,7 +164,6 @@
           <a href="visual-comparisons.html#incline">打开同步回放、曲线与完整矩阵 →</a>
         </div>
       </article>
-    </div>
   </div>
 </section>
 
