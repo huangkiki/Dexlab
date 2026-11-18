@@ -29,8 +29,8 @@ function updateReadingProgress() {
   }
   if (conceptField && !reduceMotion.matches) {
     const revealDistance = Math.max(
-      220,
-      Math.min((storyHero?.offsetHeight || window.innerHeight) * .48, 520),
+      160,
+      Math.min((storyHero?.offsetHeight || window.innerHeight) * .32, 300),
     );
     const conceptReveal = clamp(window.scrollY / revealDistance, 0, 1);
     conceptField.style.setProperty(
