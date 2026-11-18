@@ -9,8 +9,8 @@
     <p class="hero-lead">I study how agents can improve manipulation skills and physics simulation through experiments. DexLab connects tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
     <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
     <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
-      <span>Click the field</span>
-      <strong>Open the concept atlas</strong>
+      <span>Hover to focus</span>
+      <strong>Click a concept to open the atlas</strong>
       <small>Physical concepts and solver or numerical options</small>
     </a>
   </div>
