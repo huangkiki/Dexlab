@@ -124,44 +124,6 @@ body[data-reader-page^="concepts/"] {
   font-size: 14px;
 }
 
-.concept-field-trigger {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 3px 10px;
-  align-items: baseline;
-  margin-top: 18px;
-  color: var(--muted, #60675a);
-  text-decoration: none;
-}
-
-.concept-field-trigger span {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.concept-field-trigger strong {
-  color: var(--accent, #4f664c);
-  font: 400 16px/1.4 var(--serif, Georgia, serif);
-}
-
-.concept-field-trigger small {
-  color: var(--muted, #60675a);
-  font-size: 12px;
-  line-height: 1.65;
-}
-
-.concept-field-trigger:hover strong,
-.concept-field-trigger:focus-visible strong {
-  color: var(--ink, #282b26);
-  text-decoration: underline;
-  text-decoration-color: #a5b29b;
-  text-underline-offset: .22em;
-}
-
 .concept-dialog {
   width: 100vw;
   max-width: none;
@@ -561,10 +523,6 @@ body[data-reader-page^="concepts/"] .lesson-article code {
     gap: 9px 13px;
   }
 
-  .concept-field-trigger small {
-    flex-basis: 100%;
-  }
-
   .concept-dialog-head h2 {
     font-size: 30px;
   }
@@ -577,7 +535,6 @@ body[data-reader-page^="concepts/"] .lesson-article code {
 
 @media print {
   .concept-field,
-  .concept-field-trigger,
   .concept-dialog {
     display: none !important;
   }
