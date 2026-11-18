@@ -15,6 +15,8 @@ A failure may come from the model, adapter, controller, scene, or physics. DexLa
 
 Every result binds model version, simulator version, task protocol, seeds, budget, and evidence. Without that version pair, we cannot tell whether changing the model or the simulator produced the change.
 
+See [visual goal-signal auditing](mask-conditioned-gcrl.md) for the boundary between target masks, progress rewards and physical task success.
+
 ## Current status
 
 The repository already contains task scenes, native observations, independent scoring, retained failures, and offline evidence records. The remote model executor and public leaderboard are still being built. Scoped pilot requests are welcome, but a scripted example in this repository is not a measured score for an external model.
