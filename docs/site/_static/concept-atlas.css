@@ -31,8 +31,8 @@ body[data-reader-page^="concepts/"] {
   height: calc(100svh - 84px);
   overflow: hidden;
   color: var(--accent, #4f664c);
-  opacity: calc(.03 + var(--concept-reveal) * .24);
-  filter: blur(calc(4.6px - var(--concept-reveal) * 3.8px));
+  opacity: calc(.03 + var(--concept-reveal) * .45);
+  filter: blur(calc(3.5px - var(--concept-reveal) * 3.3px));
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, var(--ink, #282b26) 14%, var(--ink, #282b26) 82%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, var(--ink, #282b26) 14%, var(--ink, #282b26) 82%, transparent 100%);
   pointer-events: none;
