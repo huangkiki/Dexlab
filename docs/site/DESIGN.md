@@ -44,6 +44,16 @@ typography:
     fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
     fontSize: 13px
     lineHeight: 1.8
+  meta-label:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 1.8
+  micro-label:
+    fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
+    fontSize: 11px
+    fontWeight: 700
+    lineHeight: 1.8
   guide-link:
     fontFamily: Arial, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif
     fontSize: 18px
@@ -178,7 +188,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
-- The original architecture diagram followed by a ruled, native-radio evidence inspector and open reading rows.
+- The original architecture diagram followed by a hardware-free validation boundary, then a ruled native-radio evidence inspector and open reading rows.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
 - Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
@@ -228,7 +238,7 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. The evidence inspector then uses a five-case left index and one synchronized media-plus-readback panel on the right. Three numbered research judgments follow in open columns, then three continuation links close the main reading path.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A physical-validation section then states that no hardware experiment exists, introduces four evidence layers and gives six experiment-specific records. Each record uses an open row with the experiment on the left and guarantee, parameter-regression test and claim boundary in three equal columns. The evidence inspector then uses a five-case left index and one synchronized media-plus-readback panel on the right. Three numbered research judgments follow in open columns, then three continuation links close the main reading path.
 
 The representative-experiment section is an evidence inspector: a ruled case index on the left and one synchronized evidence panel on the right. The selected case keeps its media, conclusion, control variable, native readback, criterion/result and scope together. Native radio controls provide the selection without a script. Below (800px), the case index becomes a vertical set of ruled choices above the selected panel.
 
@@ -280,7 +290,7 @@ The course reader's `learning-control` radius belongs only to its outlined butto
 
 ### Research entrance and navigation
 
-The first screen shows the project title, a two-line research thesis, a scope paragraph and one primary content action. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
+The first screen shows the project title, a two-line research thesis, a scope paragraph and one primary content action. The scope paragraph states explicitly that every current experiment is simulation-only and that physical correctness is bounded by the frozen model. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
 
 Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. Language and repository links stay beside the masthead. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
 
@@ -289,6 +299,14 @@ Navigation is one horizontal masthead row on desktop and wraps below the brand o
 The architecture section follows the first screen and explains the system before the evidence inspector. A serif heading and short scope paragraph introduce the official diagram; the (1774×887) diagram spans the reading column between fine rules without cropping, recoloring or overlaying explanatory chrome. The homepage uses a (199 KB) WebP rendition and falls back to the (2.1 MB) authored PNG; both preserve the source dimensions. Its authored blue, green, peach and dark diagram colors are treated as source-evidence colors, not as a second interface palette.
 
 The image itself opens the original asset. On narrow screens, the figure becomes a keyboard-focusable horizontal scroll region with an (820px) image width so labels remain legible; a visible “scroll horizontally” hint appears above it, and the caption also provides an explicit original-image link. This is the only nested scroll surface on the homepage.
+
+### Physical validation boundary
+
+The validation section starts with an explicit “hardware experiments: 0” statement and separates simulation-internal consistency from real-world accuracy. A ruled boundary row links the prepared hardware-collection protocol while stating that no acceptable hardware dataset exists.
+
+Four evidence layers use the same open three-rule grammar as the conclusions: frozen input identity, positive and negative controls, native numerical readback, and parameter-change regression. Six experiment records follow as open ruled rows. Each names the experiment, its physical guarantee, the exact regression design after a parameter change, and what the result cannot prove. Results include both passes and retained failures, including the MuJoCo apple timestep case that is expected to fail.
+
+At (1100px) and below the evidence layers use two columns. At (800px) and below the validation boundary and experiment records become one column, with guarantee, regression and boundary stacked in reading order.
 
 ### Evidence inspector
 

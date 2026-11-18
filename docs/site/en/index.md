@@ -6,11 +6,11 @@
   <div class="hero-copy">
     <h1 id="home-heading">DexLab<span>.</span></h1>
     <p class="hero-thesis"><span>Agents and simulation,</span><strong>improving together through experiments.</strong></p>
-    <p class="hero-lead">I study how agents can help improve manipulation skills and physics simulation through experiments. Humans set goals and boundaries; agents help identify questions, experiment and iterate. A complete autonomous loop remains unverified; current findings come from individual experiments.</p>
+    <p class="hero-lead">I study how agents can help improve manipulation skills and physics simulation through experiments. Humans set goals and boundaries; agents help identify questions, experiment and iterate. A complete autonomous loop remains unverified. Every current experiment is simulation-only: there are no hardware experiments. “Physically correct” here means physical consistency inside a frozen model, not measured real-world accuracy.</p>
   </div>
-  <a class="directory-entry" href="#experiments">
-    <span class="directory-action">See experiments and findings</span>
-    <span class="directory-summary">Representative comparisons, solver boundaries, failure causes and deeper reading in one page.</span>
+  <a class="directory-entry" href="#physical-validity">
+    <span class="directory-action">Start with physical validation</span>
+    <span class="directory-summary">Hardware experiments: 0. Read the four validation layers, six representative experiments and the regression test used after each parameter change.</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
   <div class="scroll-note" aria-hidden="true"><span>Scroll to read</span><i></i></div>
@@ -33,6 +33,180 @@
     </div>
     <figcaption><span>The system view: tasks enter the execution stack and physics backends; observations and evidence return to skill and simulation improvement. On mobile, scroll horizontally or open the original image.</span><a href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener">Open original</a></figcaption>
   </figure>
+</section>
+
+<section class="home-validity" id="physical-validity" aria-labelledby="validity-heading">
+  <header class="home-section-head">
+    <p>Validation boundary</p>
+    <h2 id="validity-heading">No hardware experiments.<br>How is physical correctness checked?</h2>
+    <span>Claim limit: reproducible physical consistency inside a frozen simulation model.</span>
+  </header>
+
+  <div class="validity-boundary">
+    <strong>Hardware experiments: 0</strong>
+    <div>
+      <p>Every result is simulation-only. No real sensor, robot or material data has been used for calibration. “Guaranteed” here does not claim sim-to-real transfer; it means inputs, contact, dynamics, task verdicts and parameter changes can be independently replayed.</p>
+      <p>A hardware collection protocol and blank templates exist, but no acceptable hardware data has been collected. We therefore report neither real-material error, hardware timing error nor a reality gap.</p>
+    </div>
+    <a href="https://github.com/huangkiki/Dexlab/blob/main/docs/hardware/README.zh-CN.md">View the hardware protocol →</a>
+  </div>
+
+  <ol class="validity-chain" data-reveal-group>
+    <li data-reveal-item>
+      <span>Freeze the input</span>
+      <h3>First prove the same object is computed.</h3>
+      <p>Record versions, source and asset hashes, units, scale, mass and inertia, initial state and control timing. Missing fields stay unknown rather than being filled with defaults.</p>
+    </li>
+    <li data-reveal-item>
+      <span>Positive and negative controls</span>
+      <h3>A positive passes and a negative is rejected.</h3>
+      <p>Controls share the same initial state and actions; only the tested condition is removed or replaced. A negative that accidentally passes invalidates the check.</p>
+    </li>
+    <li data-reveal-item>
+      <span>Native readback</span>
+      <h3>Video explains; numbers decide.</h3>
+      <p>Independently check penetration, contact force, supporting object, momentum and angular-momentum residuals, actuation saturation and task stage. Similar pixels do not imply equivalent physics.</p>
+    </li>
+    <li data-reveal-item>
+      <span>Parameter regression</span>
+      <h3>Change one declared variable and rerun the full gate.</h3>
+      <p>Freeze thresholds and variables before the run. After a change, rerun task positives and negatives, base response, conservation checks and prior regressions. Do not reuse old passes or delete failures.</p>
+    </li>
+  </ol>
+
+  <div class="validity-records" data-reveal-group>
+    <article class="validity-record" data-reveal-item>
+      <header>
+        <p>01 / Cutting and pushing</p>
+        <h3>Visible knife contact must explain the displacement.</h3>
+      </header>
+      <dl>
+        <div>
+          <dt>What it guarantees</dt>
+          <dd>The final cut preserves three or four connected pieces, then checks active-piece displacement, knife impulse, cut history and native state. Motion and force come from stored simulation state; no material velocity is injected. The full positive passes 18 checks and the no-push negative is rejected.</dd>
+        </div>
+        <div>
+          <dt>Regression after a parameter change</dt>
+          <dd>At a fixed timestep, only viscosity changes from η=0 to 5 Pa·s. The complete 6 s acceptance and no-push control are rerun, plus shear, volumetric, objectivity, rigid-motion, momentum and discrete-dissipation tests. Eighteen zero-viscosity material steps remain bit-identical and seven elastic records remain unchanged. Half-step behavior is sensitivity evidence, not convergence.</dd>
+        </div>
+        <div>
+          <dt>What it cannot prove</dt>
+          <dd>Material values are synthetic and not calibrated to tofu or banana. Initial gravity settling is retained; local jitter improvement does not establish real damping or accurate knife contact force.</dd>
+        </div>
+      </dl>
+      <a href="cut-push.html">Open the cutting protocol →</a>
+    </article>
+
+    <article class="validity-record" data-reveal-item>
+      <header>
+        <p>02 / Contact torque</p>
+        <h3>Change only the contact model, then test hold, release and negatives.</h3>
+      </header>
+      <dl>
+        <div>
+          <dt>What it guarantees</dt>
+          <dd>With the same hand, controller and action, only the ball contact changes from point to torsional. Independent checks cover continuous two-pad contact, the 2 mm hold limit, active release, single-finger unloading, open/no-contact/zero-friction negatives, linear momentum and angular momentum.</dd>
+        </div>
+        <div>
+          <dt>Regression after a parameter change</dt>
+          <dd>Torsional parameters are frozen before the run; they are not swept to fit the result. v4 changes only the contact model and reruns six development controls. Historical v1–v3 failures and 15 unrun cases remain visible and are not backfilled.</dd>
+        </div>
+        <div>
+          <dt>What it cannot prove</dt>
+          <dd>The ball, pads and torsional patch are synthetic. v4 still drifts slowly; passing a two-second window does not prove indefinite holding or a real fingertip material.</dd>
+        </div>
+      </dl>
+      <a href="wuji-contact.html">Open the torsional-contact comparison →</a>
+    </article>
+
+    <article class="validity-record" data-reveal-item>
+      <header>
+        <p>03 / Apple-stem grasp</p>
+        <h3>Ten fixed regressions allow only two fingertips to support the apple.</h3>
+      </header>
+      <dl>
+        <div>
+          <dt>What it guarantees</dt>
+          <dd>MuJoCo and SuperDex use the same ten fixed cases, including each frozen apple mass and pose, plus the same scripted action. Twenty-three checks cover a free rigid body with no attachment or object actuation, lift, two SDF pads supporting through hold, no table or other support, bounded penetration, retention, release and momentum balance.</dd>
+        </div>
+        <div>
+          <dt>Regression after a parameter change</dt>
+          <dd>Timestep changes rerun the full checks, not only the video. MuJoCo covers 0.125/0.25/0.5 ms and SuperDex covers 0.5/1/2 ms. MuJoCo at 0.25 ms remains a retained penetration failure, showing the gate can reject a candidate. The regression suite is frozen before evaluation and the test split is not used to retune.</dd>
+        </div>
+        <div>
+          <dt>What it cannot prove</dt>
+          <dd>MuJoCo 1/10 and SuperDex 10/10 describe two fixed configurations only. Stem deformation, fracture, real friction material and hardware precision are not validated, and this is not a universal engine ranking.</dd>
+        </div>
+      </dl>
+      <a href="experiments.html#apple-replays">Open the apple-grasp records →</a>
+    </article>
+
+    <article class="validity-record" data-reveal-item>
+      <header>
+        <p>04 / Cloth</p>
+        <h3>Deformation, penetration, residual motion and cost are separate checks.</h3>
+      </header>
+      <dl>
+        <div>
+          <dt>What it guarantees</dt>
+          <dd>Seven configurations share hanging and sphere-drape tasks in 105 frozen records. Checks cover protocol, shape, oscillation, surface crossing, penetration, residual motion and cost. Playback reads stored vertices; the renderer performs zero physics steps and never moves vertices to hide penetration.</dd>
+        </div>
+        <div>
+          <dt>Regression after a parameter change</dt>
+          <dd>A material or solver change becomes a new profile and reruns all 15 cases for each task; old passes are not reused. The comparator rejects mismatched initial states, rest meshes or timelines. Different engine budgets prevent pass counts from becoming a physical-accuracy ranking.</dd>
+        </div>
+        <div>
+          <dt>What it cannot prove</dt>
+          <dd>Materials are not cross-calibrated and 52/105 is not a real-fabric accuracy rate. A green result means the frozen protocol passed, not that real cloth parameters were identified.</dd>
+        </div>
+      </dl>
+      <a href="cloth-comparison.html">Open the cloth comparison →</a>
+    </article>
+
+    <article class="validity-record" data-reveal-item>
+      <header>
+        <p>05 / Six-engine incline</p>
+        <h3>Read the analytic reference, three timesteps and invalid rows together.</h3>
+      </header>
+      <dl>
+        <div>
+          <dt>What it guarantees</dt>
+          <dd>The same 40 mm, 64 g block is tested while static, sliding and at nominal zero friction, with 0.5/1/2 ms timesteps. Checks cover displacement, velocity, force and numerical consistency. The static friction inequality and <i>a</i>=<i>g</i>(sin θ−μ cos θ) are analytic or engineering references, not physical measurements.</dd>
+        </div>
+        <div>
+          <dt>Regression after a parameter change</dt>
+          <dd>Timestep is already a nine-case cross design. Contact law, precision and execution path are frozen with each full profile. Positives, negatives, failures and invalid rows remain in the denominator; the best post-change result cannot replace history.</dd>
+        </div>
+        <div>
+          <dt>What it cannot prove</dt>
+          <dd>Contact laws, budgets and applicability differ. Nine cases support per-profile decisions only; no engine passes all nine and the matrix is not a universal solver ranking.</dd>
+        </div>
+      </dl>
+      <a href="visual-comparisons.html#incline">Open the six-engine matrix →</a>
+    </article>
+
+    <article class="validity-record" data-reveal-item>
+      <header>
+        <p>06 / Calibration and transfer</p>
+        <h3>A fixture-local calibration must be retested on another load.</h3>
+      </header>
+      <dl>
+        <div>
+          <dt>What it guarantees</dt>
+          <dd>The same MuJoCo four-point contact fixture is checked against a synthetic 20 kN/m target. It starts near 80 kN/m and reaches about 20 kN/m after calibration. The unloaded separation segment remains in the dataset so gap motion is not miscounted as contact response.</dd>
+        </div>
+        <div>
+          <dt>Regression after a parameter change</dt>
+          <dd>Direct transfer to 0.1/0.4 kg gives 10.01/40.04 kN/m and fails as expected. A predeclared mass compensation gives 20.04/19.93 kN/m and passes again. Every change is checked on loading, unloading, separation and neighboring masses, not only on the calibrated load.</dd>
+        </div>
+        <div>
+          <dt>What it cannot prove</dt>
+          <dd>20 kN/m is a synthetic engineering target, not real stiffness. The result belongs only to this constant-impedance fixture and does not generalize to arbitrary geometry or real materials.</dd>
+        </div>
+      </dl>
+      <a href="visual-comparisons.html#normal">Open the normal-response protocol →</a>
+    </article>
+  </div>
 </section>
 
 <section class="home-evidence" id="experiments" aria-labelledby="evidence-heading">
