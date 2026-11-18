@@ -389,17 +389,34 @@ def render_field(atlas, language):
             progress = (item_index + .5) / len(items)
             ordered.append((progress, group_index, item))
     ordered.sort(key=lambda entry: entry[:2])
-    words = "".join(
-        f'<span class="concept-field-level-{item["level"]}" '
-        f'data-concept-open data-concept-target="{item["id"]}">'
-        + html.escape(item["name"][language])
-        + "</span>"
-        for _, _, item in ordered
-    )
+    words = []
+    for _, _, item in ordered:
+        label = item["name"][language]
+        length = len(label)
+        if item["level"] == "core":
+            scale = (
+                "xl" if length <= 2 else
+                "lg" if length <= 4 else
+                "md" if length <= 8 else
+                "sm" if length <= 14 else
+                "xs"
+            )
+        else:
+            scale = (
+                "lg" if length <= 2 else
+                "md" if length <= 4 else
+                "sm" if length <= 8 else
+                "xs"
+            )
+        words.append(
+            f'<span class="concept-field-size-{scale}" '
+            f'data-concept-open data-concept-target="{item["id"]}">'
+            f"{html.escape(label)}</span>"
+        )
     return (
         '<div class="concept-field" aria-hidden="true">'
         '<div class="concept-field-inner">'
-        f'<div class="concept-field-words">{words}</div>'
+        f'<div class="concept-field-words">{"".join(words)}</div>'
         + "</div></div>"
     )
 
