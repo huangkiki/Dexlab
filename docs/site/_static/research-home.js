@@ -17,11 +17,18 @@ const conceptField = document.querySelector(".concept-field");
 const storyHero = document.querySelector(".story-hero");
 const evidenceSequence = document.querySelector(".evidence-sequence");
 const evidencePanels = [...document.querySelectorAll("[data-evidence-reveal]")];
+const homeSearchForm = document.querySelector(".home-search");
+const homeSearchInput = homeSearchForm?.querySelector('input[name="q"]');
+const homeSearchResults = document.querySelector("#home-search-results");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const homeSearchLanguage = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
 
 let scheduled = 0;
 let evidenceObserver;
+let homeSearchIndexPromise;
+let homeSearchTimer = 0;
+let homeSearchRequest = 0;
 
 function updateReadingProgress() {
   scheduled = 0;
@@ -52,6 +59,145 @@ function scheduleReadingProgress() {
   if (!scheduled) {
     scheduled = window.requestAnimationFrame(updateReadingProgress);
   }
+}
+
+function clearHomeSearchResults() {
+  homeSearchRequest += 1;
+  if (homeSearchResults) {
+    homeSearchResults.hidden = true;
+    homeSearchResults.replaceChildren();
+  }
+}
+
+function loadHomeSearchIndex() {
+  if (typeof Search !== "undefined" && Search.hasIndex()) {
+    return Promise.resolve();
+  }
+  if (homeSearchIndexPromise) {
+    return homeSearchIndexPromise;
+  }
+  const indexUrl = homeSearchForm?.dataset.searchIndex;
+  if (!indexUrl) {
+    return Promise.reject(new Error("Search index URL is missing"));
+  }
+  homeSearchIndexPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = indexUrl;
+    script.addEventListener("load", () => resolve(), { once: true });
+    script.addEventListener("error", reject, { once: true });
+    document.head.append(script);
+  }).then(() => {
+    if (typeof Search === "undefined" || !Search.hasIndex()) {
+      throw new Error("Search index did not initialize");
+    }
+  }).catch((error) => {
+    homeSearchIndexPromise = undefined;
+    throw error;
+  });
+  return homeSearchIndexPromise;
+}
+
+function renderHomeSearchResults(query, results) {
+  if (!homeSearchResults) {
+    return;
+  }
+  const status = document.createElement("p");
+  status.className = "home-search-status";
+  const resultLabel = homeSearchLanguage === "zh"
+    ? `找到 ${results.length} 个页面，显示前 ${Math.min(results.length, 6)} 个`
+    : `${results.length} pages found; showing the top ${Math.min(results.length, 6)}`;
+  status.textContent = results.length
+    ? resultLabel
+    : homeSearchLanguage === "zh"
+      ? "没有匹配页面"
+      : "No matching pages";
+
+  const list = document.createElement("ul");
+  list.className = "home-search-list";
+  results.slice(0, 6).forEach(([docName, title, anchor, description]) => {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = `${docName}.html${anchor || ""}`;
+    link.textContent = title;
+    item.append(link);
+    if (description) {
+      const detail = document.createElement("small");
+      detail.textContent = description;
+      item.append(detail);
+    }
+    list.append(item);
+  });
+
+  const more = document.createElement("a");
+  more.className = "home-search-more";
+  more.href = `search.html?q=${encodeURIComponent(query)}`;
+  more.textContent = homeSearchLanguage === "zh"
+    ? "查看完整搜索结果 →"
+    : "Open all search results →";
+
+  homeSearchResults.replaceChildren(status, list, more);
+  homeSearchResults.hidden = false;
+}
+
+async function performHomeSearch(query, requestId) {
+  if (!homeSearchResults) {
+    return;
+  }
+  homeSearchResults.hidden = false;
+  const loading = document.createElement("p");
+  loading.className = "home-search-status";
+  loading.textContent = homeSearchLanguage === "zh" ? "正在搜索…" : "Searching…";
+  homeSearchResults.replaceChildren(loading);
+  try {
+    await loadHomeSearchIndex();
+    if (requestId !== homeSearchRequest || homeSearchInput?.value.trim() !== query) {
+      return;
+    }
+    const [
+      searchQuery,
+      searchTerms,
+      excludedTerms,
+      highlightTerms,
+      objectTerms,
+    ] = Search._parseQuery(query);
+    const results = Search._performSearch(
+      searchQuery,
+      searchTerms,
+      excludedTerms,
+      highlightTerms,
+      objectTerms,
+    );
+    renderHomeSearchResults(query, results);
+  } catch {
+    if (requestId !== homeSearchRequest) {
+      return;
+    }
+    const error = document.createElement("p");
+    error.className = "home-search-status";
+    error.textContent = homeSearchLanguage === "zh"
+      ? "搜索索引暂时不可用，请按回车打开完整搜索页。"
+      : "Search is temporarily unavailable. Press Enter to open the full search page.";
+    homeSearchResults.replaceChildren(error);
+  }
+}
+
+if (homeSearchForm && homeSearchInput) {
+  homeSearchInput.addEventListener("focus", () => {
+    loadHomeSearchIndex().catch(() => {});
+  }, { once: true });
+  homeSearchInput.addEventListener("input", () => {
+    window.clearTimeout(homeSearchTimer);
+    const query = homeSearchInput.value.trim();
+    if (!query) {
+      clearHomeSearchResults();
+      return;
+    }
+    const requestId = homeSearchRequest + 1;
+    homeSearchRequest = requestId;
+    homeSearchTimer = window.setTimeout(() => {
+      performHomeSearch(query, requestId);
+    }, 160);
+  });
 }
 
 if (pageProgress || conceptField) {
