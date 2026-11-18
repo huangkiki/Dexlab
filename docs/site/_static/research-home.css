@@ -250,6 +250,67 @@ main > section > h1 {
   font-weight: 500;
 }
 
+.home-search {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  max-width: 700px;
+  margin-top: 28px;
+  border-block: 1px solid var(--rule);
+}
+
+.home-search svg {
+  color: var(--muted);
+}
+
+.home-search input {
+  min-width: 0;
+  min-height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--ink);
+  background: transparent;
+  font: 400 16px/1.5 var(--sans);
+  appearance: none;
+}
+
+.home-search input::placeholder {
+  color: var(--muted);
+  opacity: .9;
+}
+
+.home-search input:focus-visible {
+  outline: 0;
+}
+
+.home-search button {
+  min-height: 44px;
+  padding: 0 0 0 12px;
+  border: 0;
+  color: var(--accent);
+  background: transparent;
+  font: 700 14px/1.5 var(--sans);
+  cursor: pointer;
+}
+
+.home-search button:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
+.home-search:focus-within {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.home-search:focus-within svg {
+  color: var(--accent);
+}
+
 .directory-entry {
   position: relative;
   z-index: 1;
@@ -958,6 +1019,16 @@ main > section > h1 {
 
   .hero-scope {
     font-size: 12px;
+  }
+
+  .home-search {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .home-search button {
+    padding-left: 8px;
+    font-size: 13px;
   }
 
   .directory-entry {

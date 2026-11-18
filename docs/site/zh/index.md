@@ -9,6 +9,12 @@
     <p class="hero-project"><strong>DexLab 是我的个人研究项目。</strong><span>它探索智能体技能与仿真如何通过实验相互促进。</span></p>
     <p class="hero-lead">实验把任务、执行、接触动力学、证据追踪和失败归因串成一条可复核的研究链：人设定目标与边界，智能体参与问题发现、实验设计与迭代。</p>
     <p class="hero-scope"><strong>当前范围</strong> 结论来自冻结仿真模型内可复验的物理一致性；自主实验闭环与真机验证是下一层证据门槛，尚无真机实验数据。</p>
+    <form class="home-search" action="search.html" method="get" role="search" aria-labelledby="home-search-label">
+      <label class="visually-hidden" id="home-search-label" for="home-search-input">搜索 DexLab</label>
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.4 15.4 5.1 5.1"></path></svg>
+      <input id="home-search-input" type="search" name="q" placeholder="搜索实验、概念与研究记录" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+      <button type="submit">搜索</button>
+    </form>
   </div>
 </section>
 
