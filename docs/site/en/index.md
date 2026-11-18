@@ -10,12 +10,6 @@
     <p class="hero-lead">Experiments connect tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
     <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
   </div>
-  <div id="concept-field-slot"></div>
-  <a class="directory-entry" href="#experiments">
-    <span class="directory-action">Start with representative experiments and findings</span>
-    <span class="directory-summary">Begin with five representative experiments and three research judgments; physical-validation boundaries and regression conditions close the page.</span>
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
-  </a>
 </section>
 
 <section class="architecture-view" aria-labelledby="architecture-heading">
@@ -35,6 +29,15 @@
     </div>
     <figcaption><span>The system view: tasks enter the execution stack and physics backends; observations and evidence return to skill and simulation improvement. On mobile, scroll horizontally or open the original image.</span><a href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener">Open original</a></figcaption>
   </figure>
+</section>
+
+<section class="concept-entry" aria-label="Concept field and experiment entry">
+  <div id="concept-field-slot"></div>
+  <a class="directory-entry" href="#experiments">
+    <span class="directory-action">Start with representative experiments and findings</span>
+    <span class="directory-summary">Begin with five representative experiments and three research judgments; physical-validation boundaries and regression conditions close the page.</span>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+  </a>
 </section>
 
 <section class="home-evidence" id="experiments" aria-labelledby="evidence-heading">
