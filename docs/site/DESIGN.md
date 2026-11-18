@@ -212,7 +212,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
 - A blurred semantic field of every concept and solver token, opening into a searchable relationship atlas.
-- The original architecture diagram followed by a hardware-free validation boundary, then a ruled native-radio evidence inspector and open reading rows.
+- The original architecture diagram and ruled native-radio evidence inspector, with the hardware-free validation boundary closing the research reading order.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
 - Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
@@ -262,7 +262,7 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead, a small scope note and the concept-atlas trigger occupy the main column, followed by one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A physical-validation section then states that no hardware experiment exists, introduces four evidence layers and gives six experiment-specific records. Each record uses an open row with the experiment on the left and guarantee, parameter-regression test and claim boundary in three equal columns. The evidence inspector then uses a five-case left index and one synchronized media-plus-readback panel on the right. Three numbered research judgments follow in open columns, then three continuation links close the main reading path.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead, a small scope note and the concept-atlas trigger occupy the main column, followed by one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A five-case evidence inspector follows, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
 
 The first screen also carries a decorative but data-driven concept field. Six semantic clusters and all registered solver tokens are distributed across the opening plane, then reduced by blur, low opacity and a translucent paper wash until the title remains the focal point. The field never accepts pointer events; a small explicit trigger in the hero and the masthead’s “Concepts” link provide the accessible interaction. Opening the atlas replaces the blurred atmosphere with a sharp full-viewport reading layer.
 
@@ -338,7 +338,7 @@ The image itself opens the original asset. On narrow screens, the figure becomes
 
 ### Physical validation boundary
 
-The validation section starts with an explicit “hardware experiments: 0” statement and separates simulation-internal consistency from real-world accuracy. A ruled boundary row links the prepared hardware-collection protocol while stating that no acceptable hardware dataset exists.
+The validation section is the final research section before the contact footer. It starts with an explicit “hardware experiments: 0” statement and separates simulation-internal consistency from real-world accuracy. A ruled boundary row links the prepared hardware-collection protocol while stating that no acceptable hardware dataset exists.
 
 Four evidence layers use the same open three-rule grammar as the conclusions: frozen input identity, positive and negative controls, native numerical readback, and parameter-change regression. Six experiment records follow as open ruled rows. Each names the experiment, its physical guarantee, the exact regression design after a parameter change, and what the result cannot prove. Results include both passes and retained failures, including the MuJoCo apple timestep case that is expected to fail.
 
@@ -399,6 +399,7 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** keep the first-screen concept field low-contrast and semantically grouped, with a visible non-JavaScript path to the complete concept index.
 - **Do** draw only the selected concept’s local relationships; keep the atlas readable before adding any connection lines.
 - **Do** keep experiment comparison content visible from first paint and use native selection for the evidence inspector.
+- **Do** close the homepage research path with the physical-validation boundary after experiments, findings and continuation links.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
 - **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
