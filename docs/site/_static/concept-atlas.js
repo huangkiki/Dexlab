@@ -200,6 +200,7 @@ if (conceptDialog) {
       );
     });
     if (lens) {
+      const context = (term.dataset.context || "").trim();
       const related = relations
         .map((relation) => {
           const target = byId.get(relation.id);
@@ -209,6 +210,13 @@ if (conceptDialog) {
       lens.innerHTML = `
         <p class="concept-lens-name">${escapeHtml(term.dataset.name)}</p>
         <p class="concept-lens-summary">${escapeHtml(term.dataset.summary)}</p>
+        ${
+          context
+            ? `<p class="concept-lens-context"><strong>${
+                language === "zh" ? "登记上下文" : "Registered contexts"
+              }</strong> · ${escapeHtml(context)}</p>`
+            : ""
+        }
         <p class="concept-lens-relations">${escapeHtml(
           related ||
             (language === "zh"

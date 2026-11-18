@@ -11,7 +11,7 @@
     <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
       <span>点击背景</span>
       <strong>展开概念星图</strong>
-      <small>物理概念与全部 Solver 配置</small>
+      <small>物理概念与 Solver／数值选项</small>
     </a>
   </div>
   <a class="directory-entry" href="#experiments">

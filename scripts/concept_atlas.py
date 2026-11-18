@@ -130,6 +130,21 @@ CANONICAL_SOLVER_DEFS = {
         "点接触只通过离散接触点传递力，缺少连续表面压力分布。",
         "Point contact transmits force through discrete contact points rather than a continuous surface-pressure field.",
     ),
+    "fp64": (
+        "FP64 表示双精度浮点计算或读回路径；是否启用取决于具体引擎、构建和配置，不是某一引擎专属能力。",
+        "FP64 denotes a double-precision computation or readback path. Whether it is active depends on the engine, build and profile; it is not specific to one engine.",
+    ),
+    "semiimplicit": (
+        "半隐式推进用当前状态推进位置，并对部分速度相关项作隐式处理。",
+        "Semi-implicit stepping advances position from the current state and treats selected velocity-dependent terms implicitly.",
+    ),
+}
+SOLVER_KEY_ALIASES = {
+    "semi_implicit": "semiimplicit",
+    "semiimplicit": "semiimplicit",
+}
+SOLVER_CANONICAL_LABELS = {
+    "cg": "CG",
 }
 
 
@@ -171,65 +186,123 @@ def _normalize_relations(concepts):
                 existing.add(key)
 
 
-def _solver_concept(engine, token, role, label, roles, engine_data):
-    role_name = roles[role]
-    engine_id = _slug(engine)
-    token_id = _slug(token)
+def _solver_concept(key, label, registrations, roles):
     summary = CANONICAL_SOLVER_DEFS.get(
-        token,
+        key,
         (
-            f"{label} 是 {engine} 固定配置中登记为“{role_name['zh']}”的求解或运行选项。",
-            f"{label} is a solver or runtime option registered as “{role_name['en']}” in this fixed {engine} profile.",
+            f"{label} 是一个求解或运行选项；它的角色和生效条件由具体配置决定。",
+            f"{label} is a solver or runtime option whose role and activation conditions are determined by the full profile.",
         ),
     )
-    relations = [
-        {"type": "related", "target": target}
-        for target in ROLE_TO_CONCEPTS.get(role, ())
-    ]
+    relations = []
+    relation_keys = set()
+    for registration in registrations:
+        for target in ROLE_TO_CONCEPTS.get(registration["role"], ()):
+            relation_key = ("related", target)
+            if relation_key not in relation_keys:
+                relations.append({"type": "related", "target": target})
+                relation_keys.add(relation_key)
+    contexts = []
+    context_keys = set()
+    for registration in registrations:
+        context_key = (registration["engine"], registration["role"])
+        if context_key in context_keys:
+            continue
+        context_keys.add(context_key)
+        contexts.append(
+            {
+                "engine": registration["engine"],
+                "token": registration["token"],
+                "role": registration["role"],
+                "role_name": roles[registration["role"]],
+            }
+        )
+    aliases = []
+    for registration in registrations:
+        for alias in (registration["token"], registration["label"]):
+            if alias.casefold() not in {value.casefold() for value in aliases}:
+                aliases.append(alias)
     sources = []
-    for source in engine_data.get("sources", []):
-        if source.startswith("http"):
-            sources.append(
-                {
+    source_urls = set()
+    for registration in registrations:
+        engine = registration["engine"]
+        source_entries = []
+        for source in registration["sources"]:
+            if source.startswith("http"):
+                source_entry = {
                     "zh": f"{engine} 官方来源",
                     "en": f"{engine} official source",
                     "url": source,
                 }
-            )
-        else:
-            sources.append(
-                {
+            else:
+                source_entry = {
                     "zh": f"DexLab {engine} 记录",
                     "en": f"DexLab {engine} record",
                     "url": f"https://github.com/huangkiki/Dexlab/blob/main/{source}",
                 }
-            )
+            source_entries.append(source_entry)
+        for source_entry in source_entries:
+            if source_entry["url"] not in source_urls:
+                sources.append(source_entry)
+                source_urls.add(source_entry["url"])
+    context_zh = "、".join(
+        f"{context['engine']}（{context['role_name']['zh']}）" for context in contexts
+    )
+    context_en = ", ".join(
+        f"{context['engine']} ({context['role_name']['en']})" for context in contexts
+    )
     return {
-        "id": f"solver-{engine_id}-{token_id}",
+        "id": f"solver-{_slug(key)}",
         "group": "solver",
         "level": "advanced",
         "kind": "solver",
-        "engine": engine,
-        "token": token,
+        "token": key,
+        "contexts": contexts,
         "name": {"zh": label, "en": label},
-        "aliases": {"zh": [token], "en": [token]},
+        "aliases": {"zh": aliases, "en": aliases},
         "summary": {"zh": summary[0], "en": summary[1]},
         "body": {
-            "zh": f"这里的结论只指 {engine} 登记配置中的 `{token}`。同名 token 在其他引擎或上下文中可能承担不同角色，不能仅凭名称合并。",
-            "en": f"This entry refers only to `{token}` in the registered {engine} profile. The same token can play another role in a different engine or context.",
+            "zh": f"这个概念把 `{label}` 作为独立 token 组织。它目前登记于 {context_zh}；跨配置出现不表示语义、实现、精度或计算预算相同。",
+            "en": f"This concept treats `{label}` as an independent token. It is currently registered in {context_en}; shared naming does not imply shared semantics, implementation, precision or computational budget.",
         },
         "example": {
-            "zh": f"先读取 {engine} 的编译后配置、实际运行路径与角色，再讨论该 `{token}` 是否执行。",
-            "en": f"Read the compiled {engine} configuration, actual runtime path and role before claiming that `{token}` executed.",
+            "zh": f"先读取具体配置、实际运行路径与角色，再讨论 `{label}` 是否执行以及执行的是哪一种版本。",
+            "en": f"Read the full profile, actual runtime path and role before claiming that `{label}` executed or that two occurrences are equivalent.",
         },
         "confusions": {
-            "zh": ["登记名称不等于已执行算法，同名 token 也不保证语义相同。"],
-            "en": ["A registered name does not prove execution, and equal tokens do not guarantee equal semantics."],
+            "zh": ["同名 token 不保证语义相同；引擎登记项也不能替代 token 本身。"],
+            "en": ["Equal token names do not guarantee equal semantics, and an engine registration does not define the token by itself."],
         },
         "relations": relations,
         "sources": sources,
         "related_pages": ["solver-taxonomy"],
     }
+
+
+def _load_solver_concepts(taxonomy):
+    registrations = {}
+    token_count = 0
+    for engine, engine_data in taxonomy["engines"].items():
+        for token, (role, label) in engine_data["tokens"].items():
+            key = SOLVER_KEY_ALIASES.get(token, token)
+            registrations.setdefault(key, []).append(
+                {
+                    "engine": engine,
+                    "token": token,
+                    "role": role,
+                    "label": label,
+                    "sources": engine_data.get("sources", []),
+                }
+            )
+            token_count += 1
+    concepts = []
+    for key, items in registrations.items():
+        label = SOLVER_CANONICAL_LABELS.get(key, items[0]["label"])
+        concepts.append(_solver_concept(key, label, items, taxonomy["roles"]))
+    expected = sum(len(data["tokens"]) for data in taxonomy["engines"].values())
+    if token_count != expected:
+        raise ValueError("Solver taxonomy expansion is incomplete")
+    return concepts, token_count
 
 
 def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
@@ -259,25 +332,12 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
                 if key in aliases[language]:
                     raise ValueError(f"Duplicate concept alias {alias}")
                 aliases[language].add(key)
-    token_count = 0
-    for engine, engine_data in taxonomy["engines"].items():
-        for token, (role, label) in engine_data["tokens"].items():
-            item = _solver_concept(
-                engine,
-                token,
-                role,
-                label,
-                taxonomy["roles"],
-                engine_data,
-            )
-            if item["id"] in ids:
-                raise ValueError(f"Duplicate generated solver concept {item['id']}")
-            ids.add(item["id"])
-            concepts.append(item)
-            token_count += 1
-    expected = sum(len(data["tokens"]) for data in taxonomy["engines"].values())
-    if token_count != expected:
-        raise ValueError("Solver taxonomy expansion is incomplete")
+    solver_concepts, solver_registrations = _load_solver_concepts(taxonomy)
+    for item in solver_concepts:
+        if item["id"] in ids:
+            raise ValueError(f"Duplicate generated solver concept {item['id']}")
+        ids.add(item["id"])
+        concepts.append(item)
     group_ids = {group["id"] for group in atlas["groups"]}
     for item in concepts:
         if item["group"] not in group_ids:
@@ -296,7 +356,8 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
         "groups": atlas["groups"],
         "sources": atlas["sources"],
         "concepts": concepts,
-        "solver_tokens": token_count,
+        "solver_concepts": len(solver_concepts),
+        "solver_registrations": solver_registrations,
     }
 
 
@@ -358,10 +419,18 @@ def render_dialog(atlas, language):
         )
         terms = []
         for item in grouped[group["id"]]:
-            search = " ".join(
-                [item["name"][language], *item.get("aliases", {}).get(language, [])]
+            contexts = item.get("contexts", [])
+            context_label = " · ".join(
+                f"{context['engine']} {context['role_name'][language]}"
+                for context in contexts
             )
-            engine = f'<small>{html.escape(item["engine"])}</small>' if item.get("engine") else ""
+            search = " ".join(
+                [
+                    item["name"][language],
+                    *item.get("aliases", {}).get(language, []),
+                    context_label,
+                ]
+            )
             terms.append(
                 f'<a class="concept-term concept-level-{item["level"]}" '
                 f'href="concepts/{item["id"]}.html" '
@@ -369,8 +438,9 @@ def render_dialog(atlas, language):
                 f'data-name="{html.escape(item["name"][language], quote=True)}" '
                 f'data-search="{html.escape(search.casefold(), quote=True)}" '
                 f'data-summary="{html.escape(item["summary"][language], quote=True)}" '
+                f'data-context="{html.escape(context_label, quote=True)}" '
                 f'data-relations="{_render_relation_data(item)}">'
-                f'{html.escape(item["name"][language])}{engine}</a>'
+                f'{html.escape(item["name"][language])}</a>'
             )
         groups.append(
             f'<section class="concept-map-group" data-concept-group="{group["id"]}">'
@@ -388,9 +458,9 @@ def render_dialog(atlas, language):
     search_label = "搜索概念、别名或 Solver token" if language == "zh" else "Search concepts, aliases or solver tokens"
     title = "概念星图" if language == "zh" else "Concept atlas"
     intro = (
-        "所有物理概念与已登记 Solver 配置在一张可读的关系图里。先找词，再回到论文、课程和实验记录。"
+        "物理概念、数值方法和 Solver token 在一张可读的关系图里；引擎登记上下文单独保留，不写进 token 名称。"
         if language == "zh"
-        else "A reading graph of physical concepts and every registered solver token, connected back to papers, lessons and experiment records."
+        else "Physical concepts, numerical methods and solver tokens share one readable graph; engine registrations remain separate context rather than part of the token name."
     )
     status = f"{len(atlas['concepts'])} 个词条" if language == "zh" else f"{len(atlas['concepts'])} entries"
     return (
@@ -428,7 +498,8 @@ def home_context(language):
         "concept_field_html": render_field(atlas, language),
         "concept_dialog_html": render_dialog(atlas, language),
         "concept_count": len(atlas["concepts"]),
-        "concept_solver_count": atlas["solver_tokens"],
+        "concept_solver_count": atlas["solver_concepts"],
+        "concept_solver_registration_count": atlas["solver_registrations"],
     }
 
 
@@ -449,8 +520,6 @@ def _page_markdown(item, atlas, language):
     group = next(group for group in atlas["groups"] if group["id"] == item["group"])
     aliases = item.get("aliases", {}).get(language, [])
     meta = [group[language], LEVEL_LABELS[item["level"]][0 if zh else 1]]
-    if item.get("engine"):
-        meta.insert(0, item["engine"])
     if aliases:
         meta.append(("别名：" if zh else "Also: ") + " / ".join(aliases))
     lines = [
@@ -461,6 +530,15 @@ def _page_markdown(item, atlas, language):
         "",
         item["body"][language],
         "",
+    ]
+    if item.get("contexts"):
+        lines += ["## " + ("登记上下文" if zh else "Registered contexts"), ""]
+        lines.extend(
+            f"- **{context['engine']}** · {context['role_name'][language]}"
+            for context in item["contexts"]
+        )
+        lines += [""]
+    lines += [
         "## " + ("看一个具体差别" if zh else "A concrete distinction"),
         "",
         item["example"][language],
@@ -510,9 +588,9 @@ def _index_markdown(atlas, language):
         ),
         "",
         (
-            f"共 {len(atlas['concepts'])} 个词条，其中 {atlas['solver_tokens']} 个来自已登记 Solver token。"
+            f"共 {len(atlas['concepts'])} 个词条，其中 {atlas['solver_concepts']} 个是独立 Solver／数值概念，覆盖 {atlas['solver_registrations']} 个引擎登记项。"
             if zh
-            else f"{len(atlas['concepts'])} entries, including {atlas['solver_tokens']} registered solver tokens."
+            else f"{len(atlas['concepts'])} entries, including {atlas['solver_concepts']} independent solver or numerical concepts across {atlas['solver_registrations']} engine registrations."
         ),
         "",
     ]

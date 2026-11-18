@@ -405,6 +405,18 @@ body[data-reader-page^="concepts/"] {
   line-height: 1.8;
 }
 
+.concept-lens-context {
+  margin-top: 12px;
+  color: var(--muted, #60675a);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.concept-lens-context strong {
+  color: var(--accent, #4f664c);
+  font-weight: 700;
+}
+
 .concept-lens-relations {
   margin-top: 18px;
   color: var(--ink, #282b26);
