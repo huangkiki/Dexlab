@@ -174,7 +174,7 @@ main > section > h1 {
   flex-direction: column;
   justify-content: center;
   min-height: calc(100svh - 92px);
-  padding: 72px 0 96px;
+  padding: 72px 0 56px;
 }
 
 .hero-copy {
@@ -965,7 +965,7 @@ main > section > h1 {
 
   .story-hero {
     min-height: calc(100svh - 226px);
-    padding: 44px 0 80px;
+    padding: 44px 0 56px;
   }
 
   .hero-copy h1 {

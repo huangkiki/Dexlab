@@ -30,8 +30,8 @@ function updateReadingProgress() {
   if (conceptField && !reduceMotion.matches) {
     const fieldRect = conceptField.getBoundingClientRect();
     const viewportHeight = window.innerHeight || storyHero?.offsetHeight || 1;
-    const revealStart = viewportHeight * .72;
-    const revealEnd = viewportHeight * .28;
+    const revealStart = viewportHeight * .82;
+    const revealEnd = viewportHeight * .42;
     const conceptReveal = clamp(
       (revealStart - fieldRect.top) / Math.max(1, revealStart - revealEnd),
       0,
