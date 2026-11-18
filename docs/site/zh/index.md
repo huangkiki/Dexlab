@@ -212,11 +212,13 @@
   <div class="validity-boundary">
     <strong>真机实验：0</strong>
     <div>
-      <p>所有结果都来自仿真；没有真实传感器、机器人或材料数据可用于校准。这里所说的“保证”不是宣称已经跨过 sim-to-real，而是证明输入、接触、动力学、任务判定和参数改动都能被独立复验。</p>
-      <p>真机采集协议和空模板已经准备，但没有形成可验收的真机数据；因此不报告真实材料误差、硬件时序误差或 reality gap。</p>
+      <p><strong>DexLab 的 claim：</strong>物理正确不是“仿真成功”这一总分，而是一条可逐层证伪的证据链。先证明配置值真的到达引擎；再检查单位、质量、惯量、本体限位与现实量级；用守恒和时间步扰动排除自相矛盾的数值行为；检查接触和物体响应没有越过物理边界；最后要求评分拒绝 idle、接近但不接触、隐藏支撑和错误搬运／reset 等伪完成。</p>
+      <p>全部通过，也只说明冻结模型内部可复核、可重复，不自动证明 sim-to-real。没有真实传感器、机器人或材料数据，就不报告真实材料误差、硬件时序误差或 reality gap；真机实验仍是外部有效性检查。<a href="https://github.com/huangkiki/Dexlab/discussions/388">完整证据链、失效 case 与边界见 Discussion #388 →</a></p>
     </div>
     <a href="https://github.com/huangkiki/Dexlab/blob/main/docs/hardware/README.zh-CN.md">查看真机采集协议 →</a>
   </div>
+
+  <p><a class="lab-button" href="https://github.com/huangkiki/Dexlab/discussions">进入 DexLab Discussions <span aria-hidden="true">→</span></a></p>
 
   <ol class="validity-chain" data-reveal-group>
     <li data-reveal-item>
