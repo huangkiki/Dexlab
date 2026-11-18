@@ -10,12 +10,12 @@
     <p class="hero-lead">实验把任务、执行、接触动力学、证据追踪和失败归因串成一条可复核的研究链：人设定目标与边界，智能体参与问题发现、实验设计与迭代。</p>
     <p class="hero-scope"><strong>当前范围</strong> 结论来自冻结仿真模型内可复验的物理一致性；自主实验闭环与真机验证是下一层证据门槛，尚无真机实验数据。</p>
   </div>
+  <div id="concept-field-slot"></div>
   <a class="directory-entry" href="#experiments">
     <span class="directory-action">先看代表性实验与结论</span>
     <span class="directory-summary">从五个代表实验和三个研究判断开始；物理验证边界与回归条件放在全文末尾。</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
-  <div id="concept-field-slot"></div>
 </section>
 
 <section class="architecture-view" aria-labelledby="architecture-heading">
