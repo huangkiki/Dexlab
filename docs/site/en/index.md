@@ -6,14 +6,19 @@
   <div class="hero-copy">
     <h1 id="home-heading">DexLab<span>.</span></h1>
     <p class="hero-thesis"><span>Agents and simulation,</span><strong>improving together through experiments.</strong></p>
-    <p class="hero-lead">I study how agents can help improve manipulation skills and physics simulation through experiments. Humans set goals and boundaries; agents help identify questions, experiment and iterate. A complete autonomous loop remains unverified. Every current experiment is simulation-only: there are no hardware experiments. “Physically correct” here means physical consistency inside a frozen model, not measured real-world accuracy.</p>
+    <p class="hero-lead">I study how agents can improve manipulation skills and physics simulation through experiments. DexLab connects tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
+    <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
+    <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
+      <span>Click the field</span>
+      <strong>Open the concept atlas</strong>
+      <small>Physical concepts and every solver configuration</small>
+    </a>
   </div>
   <a class="directory-entry" href="#physical-validity">
     <span class="directory-action">Start with physical validation</span>
     <span class="directory-summary">Hardware experiments: 0. Read the four validation layers, six representative experiments and the regression test used after each parameter change.</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
-  <div class="scroll-note" aria-hidden="true"><span>Scroll to read</span><i></i></div>
 </section>
 
 <section class="architecture-view" aria-labelledby="architecture-heading">
@@ -392,5 +397,6 @@ Experiments <experiments>
 Results & diagnosis <results>
 Engines & models <engines>
 Research guides <references>
+Concept index <concepts/index>
 Contributing <contributing>
 ```

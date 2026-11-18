@@ -6,14 +6,19 @@
   <div class="hero-copy">
     <h1 id="home-heading">DexLab<span>.</span></h1>
     <p class="hero-thesis"><span>让智能体与仿真，</span><strong>在实验中共同进化。</strong></p>
-    <p class="hero-lead">我关注智能体如何通过实验改进操作技能与物理仿真。由人确定目标与边界，让智能体参与问题发现、实验和迭代；完整自主闭环尚未验证。所有当前实验均在仿真中完成，没有任何真机实验。这里的“物理正确”只表示冻结模型内的物理一致性，不代表真实世界精度。</p>
+    <p class="hero-lead">我研究智能体如何通过实验改进操作技能与物理仿真。DexLab 把任务、执行、接触动力学、证据追踪和失败归因串成一条可复核的研究链：人设定目标与边界，智能体参与问题发现、实验设计与迭代。</p>
+    <p class="hero-scope"><strong>当前范围</strong> 结论来自冻结仿真模型内可复验的物理一致性；自主实验闭环与真机验证是下一层证据门槛，尚无真机实验数据。</p>
+    <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
+      <span>点击背景</span>
+      <strong>展开概念星图</strong>
+      <small>物理概念与全部 Solver 配置</small>
+    </a>
   </div>
   <a class="directory-entry" href="#physical-validity">
     <span class="directory-action">先看物理验证与实验结论</span>
     <span class="directory-summary">真机实验：0。先读四项验证保证、六个代表实验，以及每次调整参数后的回归测试。</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
-  <div class="scroll-note" aria-hidden="true"><span>向下滚动</span><i></i></div>
 </section>
 
 <section class="architecture-view" aria-labelledby="architecture-heading">
@@ -393,5 +398,6 @@
 引擎与模型 <engines>
 研究旧链接 <blog>
 研究资料 <references>
+概念索引 <concepts/index>
 参与项目 <contributing>
 ```

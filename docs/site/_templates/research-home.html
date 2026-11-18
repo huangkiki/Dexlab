@@ -6,6 +6,8 @@
   <meta name="description" content="{{ 'DexLab：项目介绍、真机验证边界、物理保证、代表性实验、Solver 边界与失败根因。' if homepage_is_chinese else 'DexLab: project overview, hardware-validation boundary, physical checks, representative experiments, solver boundaries and failure causes.' }}">
   <title>DexLab · {{ '研究总览' if homepage_is_chinese else 'Research overview' }}</title>
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
+  <link rel="stylesheet" href="{{ pathto('_static/concept-atlas.css', 1) }}">
+  <script src="{{ pathto('_static/concept-atlas.js', 1) }}" defer></script>
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
 </head>
 <body>
@@ -16,6 +18,7 @@
       <a class="brand" href="#top" aria-label="DexLab {{ '首页' if homepage_is_chinese else 'home' }}">Dex<span>Lab</span></a>
       <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
         <a href="_static/research/dexterous-simulation.html">{{ '研究导读' if homepage_is_chinese else 'Research guide' }}</a>
+        <a href="concepts/index.html" data-concept-open>{{ '概念' if homepage_is_chinese else 'Concepts' }}</a>
         <a href="#physical-validity">{{ '物理验证' if homepage_is_chinese else 'Validation' }}</a>
         <a href="#experiments">{{ '实验结论' if homepage_is_chinese else 'Findings' }}</a>
         <a href="learning.html">{{ '仿真学习' if homepage_is_chinese else 'Learn simulation' }}</a>
@@ -27,11 +30,13 @@
       </div>
     </div>
   </header>
+  {{ concept_field_html|safe }}
   <main id="main-content" role="main">{{ body }}</main>
   <footer class="site-footer">
     <a class="brand" href="#top">Dex<span>Lab</span></a>
     <p>{{ '读懂一个结论，也看清它成立的条件。' if homepage_is_chinese else 'Understand a finding and the conditions that support it.' }}</p>
     <div><a href="#experiments">{{ '实验结论' if homepage_is_chinese else 'Findings' }}</a><a href="contributing.html">{{ '参与研究' if homepage_is_chinese else 'Contribute' }}</a><a href="https://github.com/huangkiki/Dexlab">GitHub</a><a href="about.html#documentation-and-citation">{{ '引用与许可' if homepage_is_chinese else 'Citation & license' }}</a></div>
   </footer>
+  {{ concept_dialog_html|safe }}
 </body>
 </html>

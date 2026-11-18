@@ -143,6 +143,29 @@ components:
   reading-link:
     textColor: '{colors.ink}'
     padding: 18px 0
+  concept-field:
+    textColor: '{colors.accent}'
+    opacity: .17
+  concept-trigger:
+    textColor: '{colors.accent}'
+    typography: '{typography.caption}'
+  concept-term:
+    textColor: '{colors.ink}'
+    typography: '{typography.label}'
+    padding: 7px 0
+  concept-term-related:
+    textColor: '{colors.accent}'
+  concept-term-contrast:
+    textColor: '{colors.ink}'
+  concept-filter:
+    backgroundColor: transparent
+    textColor: '{colors.muted}'
+    padding: 6px 0
+  concept-filter-selected:
+    textColor: '{colors.accent}'
+  concept-lens:
+    textColor: '{colors.ink}'
+    padding: 20px 0 24px
   learning-number:
     textColor: '{colors.accent}'
     typography: '{typography.step-number}'
@@ -188,6 +211,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
+- A blurred semantic field of every concept and solver token, opening into a searchable relationship atlas.
 - The original architecture diagram followed by a hardware-free validation boundary, then a ruled native-radio evidence inspector and open reading rows.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
@@ -195,7 +219,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
-Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_templates/research-home.html`, `_static/research-home.js`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` and `_static/blog-index.css` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`; the homepage composition is recorded in the root `.impeccable/surfaces/research-home.md`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_templates/research-home.html`, `docs/concept-atlas.json`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
@@ -238,7 +262,9 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead and one ruled index action occupy the main column; a small scroll cue anchors at the lower right. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A physical-validation section then states that no hardware experiment exists, introduces four evidence layers and gives six experiment-specific records. Each record uses an open row with the experiment on the left and guarantee, parameter-regression test and claim boundary in three equal columns. The evidence inspector then uses a five-case left index and one synchronized media-plus-readback panel on the right. Three numbered research judgments follow in open columns, then three continuation links close the main reading path.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead, a small scope note and the concept-atlas trigger occupy the main column, followed by one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A physical-validation section then states that no hardware experiment exists, introduces four evidence layers and gives six experiment-specific records. Each record uses an open row with the experiment on the left and guarantee, parameter-regression test and claim boundary in three equal columns. The evidence inspector then uses a five-case left index and one synchronized media-plus-readback panel on the right. Three numbered research judgments follow in open columns, then three continuation links close the main reading path.
+
+The first screen also carries a decorative but data-driven concept field. Six semantic clusters and all registered solver tokens are distributed across the opening plane, then reduced by blur, low opacity and a translucent paper wash until the title remains the focal point. The field never accepts pointer events; a small explicit trigger in the hero and the masthead’s “Concepts” link provide the accessible interaction. Opening the atlas replaces the blurred atmosphere with a sharp full-viewport reading layer.
 
 The representative-experiment section is an evidence inspector: a ruled case index on the left and one synchronized evidence panel on the right. The selected case keeps its media, conclusion, control variable, native readback, criterion/result and scope together. Native radio controls provide the selection without a script. Below (800px), the case index becomes a vertical set of ruled choices above the selected panel.
 
@@ -276,7 +302,7 @@ There are no shadows, gradients or decorative transitions. Thin rules, whitespac
 
 **Motion thesis:** orientation is useful; content should not perform an entrance. The thin page-progress hairline is the only passive scroll response. Evidence cases switch immediately when their radio changes, and media plays only after an explicit control action.
 
-There is no page-load reveal, stagger, blur, translate, parallax or automatic fade. Content is fully visible in the first paint and remains visible if JavaScript fails. Hover and focus feedback is immediate. A selected evidence case changes background and text contrast without moving the reading position or delaying the evidence.
+There is no page-load reveal, stagger, translate, parallax or automatic fade. The concept field is statically blurred as a surface material; clicking it changes state immediately to a sharp, readable atlas rather than animating words into place. Content is fully visible in the first paint and remains visible if JavaScript fails. Hover and focus feedback are immediate. A selected evidence case changes background and text contrast without moving the reading position or delaying the evidence.
 
 With `prefers-reduced-motion: reduce`, there is no change because the surface contains no nonessential spatial animation or autoplay loop. Media remains user-controlled.
 
@@ -293,6 +319,16 @@ The course reader's `learning-control` radius belongs only to its outlined butto
 The first screen shows the project title, a two-line research thesis, a scope paragraph and one primary content action. The scope paragraph states explicitly that every current experiment is simulation-only and that physical correctness is bounded by the frozen model. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
 
 Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. Language and repository links stay beside the masthead. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
+
+### Concept field and atlas
+
+The concept field is the opening surface, not a card grid. Terms retain stable group order and receive typographic weight only from whether they are a core concept or an advanced solver configuration; no popularity score or random size is implied. Group labels remain readable through the blur, while an explicit “open the concept atlas” trigger names the available interaction.
+
+The atlas uses a native full-viewport `dialog`. Search, group filters, the six semantic clusters, and a single reading lens share one ruled reading surface. At rest the clusters show words only; hovering or focusing a term highlights direct relations and contrasts and draws only that local set of edges. The lens states the selected term, one-sentence definition, links to its full entry, and the related terms without moving the reader’s place in the map.
+
+On desktop the map occupies the wide column and the lens stays in a narrow side column. Below (800px), the map and lens stack, controls become a single column, relation highlighting remains available to pointer and keyboard users, and every term retains a large-enough hit target. Closing returns focus to the trigger. Without JavaScript, the trigger opens the generated concept index, where every term and relationship remains a normal link.
+
+Each generated concept page is a one-screen reading entry: term and aliases, concise definition, one concrete distinction grounded in DexLab evidence, likely confusion, relation links, sources, and a return to the atlas. Longer experiments and papers remain linked rather than duplicated.
 
 ### Architecture view
 
@@ -360,6 +396,8 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
 - **Do** present the architecture diagram uncropped with its authored colors and a direct path to the original PNG.
 - **Do** use the page-progress hairline as the only passive scroll response and preserve complete content without JavaScript or with reduced motion.
+- **Do** keep the first-screen concept field low-contrast and semantically grouped, with a visible non-JavaScript path to the complete concept index.
+- **Do** draw only the selected concept’s local relationships; keep the atlas readable before adding any connection lines.
 - **Do** keep experiment comparison content visible from first paint and use native selection for the evidence inspector.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
@@ -377,6 +415,8 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Don't** replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.
 - **Don't** turn the evidence index into repeated fade-and-rise cards, parallax layers or a sequence of equal-height panels.
 - **Don't** hide content before an IntersectionObserver reveal, blur or fade whole experiment groups on load.
+- **Don't** make the blurred background terms individually clickable before the atlas opens or use font size to imply unsupported popularity.
+- **Don't** present a complete relation graph at rest or use cards and shadows for the concept atlas.
 - **Don't** append newly added systems or observations as more chapter numbers in the original guide sequence.
 - **Don't** restore the full-site Sphinx tree as a second left sidebar on article pages.
 - **Don't** present an engine table as a universal ranking when cohorts, tuning budgets or invalid records differ.

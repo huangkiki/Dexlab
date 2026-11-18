@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-13T08:05:58+00:00",
+  "generatedAt": "2026-11-18T02:30:00+00:00",
   "title": "Design System: DexLab Research Homepage and Learning",
   "extensions": {
     "colorMeta": {
@@ -256,14 +256,47 @@
       "description": "Explicit reading state, not competence. This preview shows the read state; production JavaScript owns browser storage and progress updates.",
       "html": "<div class=\"ds-learning-bookmark\"><button type=\"button\" aria-pressed=\"true\">Read · unmark</button><p>Progress stays in this browser. You can unmark a lesson.</p></div>",
       "css": ".ds-learning-bookmark{font:16px/1.9 var(--sans,Arial,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);border-top:1px solid var(--rule,#dcded4);padding-top:24px}.ds-learning-bookmark button{font:inherit;cursor:pointer;color:var(--green,#4f664c);border:1px solid var(--rule,#dcded4);background:transparent;padding:8px 14px;border-radius:4px;min-height:44px}.ds-learning-bookmark button:hover{background:var(--panel,#f0f1eb);border-color:var(--green,#4f664c)}.ds-learning-bookmark button[aria-pressed=\"true\"]{background:var(--green,#4f664c);color:var(--paper,#fafaf6)}.ds-learning-bookmark button:focus-visible{outline:2px solid var(--green,#4f664c);outline-offset:4px}.ds-learning-bookmark p{font-size:13px;color:var(--muted,#60675a);margin-top:10px}"
+    },
+    {
+      "name": "Concept field",
+      "kind": "custom",
+      "refersTo": "concept-field",
+      "description": "Every physical concept and registered solver token sits behind the opening copy as a static low-opacity semantic field. The blurred field is decorative; a visible trigger opens the sharp atlas.",
+      "html": "<div class=\"ds-concept-field\" aria-hidden=\"true\"><section><span>Motion and time</span><p>Acceleration Timestep Velocity Contact</p></section><section><span>Dynamics</span><p>Force Torque Damping Momentum Energy exchange</p></section></div><a class=\"ds-concept-trigger\" href=\"concepts/index.html\">Click the field <strong>Open the concept atlas</strong></a>",
+      "css": ".ds-concept-field{position:absolute;inset:84px 0 auto;height:calc(100svh - 84px);overflow:hidden;color:var(--accent,#4f664c);opacity:.17;filter:blur(2.8px);pointer-events:none}.ds-concept-field::after{position:absolute;inset:0;background:rgba(250,250,246,.62);content:\"\"}.ds-concept-field section{position:relative;z-index:1;display:inline-block;width:20%;margin:42px 2.5%;vertical-align:top}.ds-concept-field span{color:var(--ink,#282b26);font:13px/1.4 var(--serif,Georgia,serif)}.ds-concept-field p{margin-top:12px;font:500 13px/1.6 var(--sans,Arial,sans-serif)}.ds-concept-trigger{display:inline-flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline;color:var(--muted,#60675a);text-decoration:none}.ds-concept-trigger strong{color:var(--accent,#4f664c);font:400 16px/1.4 var(--serif,Georgia,serif)}.ds-concept-trigger:hover strong{color:var(--ink,#282b26);text-decoration:underline}"
+    },
+    {
+      "name": "Concept atlas controls",
+      "kind": "button",
+      "refersTo": "concept-filter",
+      "description": "Search and semantic group filters remain open ruled controls inside a native full-viewport dialog; no cards or filled pills.",
+      "html": "<div class=\"ds-concept-controls\"><input type=\"search\" placeholder=\"Search concepts, aliases or solver tokens\"><div><button type=\"button\" aria-pressed=\"true\">All</button><button type=\"button\" aria-pressed=\"false\">Motion and time</button><button type=\"button\" aria-pressed=\"false\">Contact</button><button type=\"button\" aria-pressed=\"false\">Solver configurations</button></div><span>131 entries</span></div>",
+      "css": ".ds-concept-controls{display:grid;grid-template-columns:minmax(250px,420px) minmax(0,1fr) auto;gap:20px 28px;align-items:center;padding:16px 0;border-block:1px solid var(--rule,#dcded4)}.ds-concept-controls input{min-height:42px;padding:8px 11px;border:1px solid var(--rule,#dcded4);background:transparent}.ds-concept-controls div{display:flex;flex-wrap:wrap;gap:5px 16px}.ds-concept-controls button{min-height:44px;padding:6px 0;border:0;border-bottom:1px solid transparent;background:transparent;color:var(--muted,#60675a)}.ds-concept-controls button[aria-pressed=\"true\"]{border-bottom-color:var(--accent,#4f664c);color:var(--accent,#4f664c)}.ds-concept-controls span{font-size:12px;color:var(--muted,#60675a);white-space:nowrap}@media(max-width:800px){.ds-concept-controls{grid-template-columns:1fr}}"
+    },
+    {
+      "name": "Concept relationship map",
+      "kind": "custom",
+      "refersTo": "concept-term",
+      "description": "A focused term reveals only its local dependencies, relations and contrasts. Font weight distinguishes core and advanced entries, not popularity.",
+      "html": "<section class=\"ds-concept-map\"><h3>Contact and constraints</h3><div><a href=\"concepts/penetration.html\">Penetration</a><a class=\"related\" href=\"concepts/contact-depth.html\">Contact depth</a><a class=\"contrast\" href=\"concepts/non-penetration.html\">Non-penetration</a><a href=\"concepts/contact.html\">Contact</a></div></section>",
+      "css": ".ds-concept-map{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;padding:22px 0;border-top:1px solid var(--rule,#dcded4)}.ds-concept-map h3{color:var(--muted,#60675a);font:600 15px/1.55 var(--sans,Arial,sans-serif)}.ds-concept-map div{display:flex;flex-wrap:wrap;gap:7px 20px}.ds-concept-map a{display:inline-flex;min-height:38px;align-items:center;color:var(--ink,#282b26);font:600 17px/1.45 var(--sans,Arial,sans-serif);text-decoration:none}.ds-concept-map a:hover,.ds-concept-map a:focus-visible{color:var(--accent,#4f664c);text-decoration:underline}.ds-concept-map .related{color:var(--accent,#4f664c)}.ds-concept-map .contrast{font-style:italic}@media(max-width:800px){.ds-concept-map{grid-template-columns:1fr;gap:10px}}"
+    },
+    {
+      "name": "Concept reading lens",
+      "kind": "custom",
+      "refersTo": "concept-lens",
+      "description": "The selected term’s definition, local relations and full-entry link remain in one narrow reading column beside the map.",
+      "html": "<aside class=\"ds-concept-lens\"><h3>Penetration</h3><p>Collision surfaces entering another surface or crossing it at the sampled state.</p><p><strong>Related</strong> Contact depth<br><strong>Contrasts with</strong> Non-penetration</p><a href=\"concepts/penetration.html\">Open full entry →</a></aside>",
+      "css": ".ds-concept-lens{min-height:220px;padding:20px 0 24px;border-block:1px solid var(--ink,#282b26);font:14px/1.8 var(--sans,Arial,sans-serif)}.ds-concept-lens h3{font:400 28px/1.25 var(--serif,Georgia,serif)}.ds-concept-lens p{margin-top:12px;color:var(--muted,#60675a)}.ds-concept-lens p:nth-of-type(2){color:var(--ink,#282b26);font-size:12px}.ds-concept-lens a{display:inline-block;margin-top:18px;font-size:13px;font-weight:600}"
     }
   ],
   "narrative": {
     "northStar": "The Research Reading Index",
-    "overview": "The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence.\n\nThis system governs the Chinese and English research homepages and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.",
+    "overview": "The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. A quiet reading rail, comfortable line lengths and fine rules establish hierarchy. Open rows and restrained labels keep attention on the research and its evidence. Behind the opening copy, every curated concept and registered solver token forms a statically blurred semantic field; activating it opens a searchable, filterable concept atlas.\n\nThis system governs the Chinese and English research homepages, concept entries and their MuJoCo learning route. The learning surface extends the same palette and type character with chapter navigation and native reading controls; its tokens are named separately so the homepage keeps its established hierarchy. The existing article is the visual reference; its content and styles remain independently maintained. Other Sphinx pages and the separate web application retain their own design systems.",
     "keyCharacteristics": [
       "Warm paper and charcoal, with restrained green reading accents.",
       "A serif opening title beside a desktop reading rail; navigation wraps above the title on smaller screens.",
+      "A blurred first-screen concept field that opens into a native searchable atlas and stable bilingual terms.",
       "Open sections and ruled reading rows, with hierarchy carried by spacing and type.",
       "Original experiment media, native controls and explicit evidence boundaries.",
       "A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions."
@@ -283,6 +316,8 @@
     "dos": [
       "Do keep the homepage aligned with the article's warm paper, serif opening title and green links.",
       "Do let spacing, hierarchy and open rows explain the page before adding secondary labels.",
+      "Do keep the concept field low-opacity and semantically grouped, with a visible non-JavaScript path to the complete concept index.",
+      "Do draw only the selected concept’s local relationships and keep every term a stable bilingual link.",
       "Do preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.",
       "Do maintain Chinese/English parity, on-site learning links and original evidence provenance.",
       "Do preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline."
@@ -290,6 +325,8 @@
     "donts": [
       "Don't restore the homepage's old blue-white centered hero, filled action buttons or rounded promotional panels.",
       "Don't restyle the article, unrelated Sphinx pages or the separate web application through this reading system.",
+      "Don't make blurred background terms individually clickable or use font size to imply popularity.",
+      "Don't show a complete relation graph at rest or wrap concept entries in cards and shadows.",
       "Don't replace recorded evidence with generated imagery, autoplay the replay or imply an autonomous result.",
       "Don't invent component variants, radius scales or motion tokens absent from the implementation."
     ]
