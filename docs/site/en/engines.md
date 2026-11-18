@@ -8,6 +8,7 @@ Selection <selection>
 Solver configuration roles <solver-taxonomy>
 Solver synchronization and preCICE <solver-coupling>
 Co-evolution and model evaluation <model-evaluation>
+Visual goal-signal auditing <mask-conditioned-gcrl>
 Physical captions and reference coverage <physcapbench>
 Code as Policy topic <code-as-policy>
 Uranus generative environment backend <uranus-backend>
