@@ -212,11 +212,13 @@
   <div class="validity-boundary">
     <strong>Hardware experiments: 0</strong>
     <div>
-      <p>Every result is simulation-only. No real sensor, robot or material data has been used for calibration. “Guaranteed” here does not claim sim-to-real transfer; it means inputs, contact, dynamics, task verdicts and parameter changes can be independently replayed.</p>
-      <p>A hardware collection protocol and blank templates exist, but no acceptable hardware data has been collected. We therefore report neither real-material error, hardware timing error nor a reality gap.</p>
+      <p><strong>DexLab's claim:</strong> physical correctness is not a single “simulation succeeded” score. It is a chain of independently falsifiable checks: declared values reach the engine; units, mass, inertia and joint limits stay plausible; conservation and timestep perturbations do not produce contradictory behavior; contact and object responses stay inside physical bounds; and task scoring rejects idle, near-miss, hidden-support and wrong carry/reset shortcuts.</p>
+      <p>Passing them establishes reproducible consistency inside a frozen model; it does not prove sim-to-real. Without real sensor, robot or material data, we report neither real-material error, hardware timing error nor a reality gap. A hardware experiment remains the external validity check. <a href="https://github.com/huangkiki/Dexlab/discussions/388">Read the full evidence chain, failure cases and limits in Discussion #388 →</a></p>
     </div>
     <a href="https://github.com/huangkiki/Dexlab/blob/main/docs/hardware/README.zh-CN.md">View the hardware protocol →</a>
   </div>
+
+  <p><a class="lab-button" href="https://github.com/huangkiki/Dexlab/discussions">Explore DexLab Discussions <span aria-hidden="true">→</span></a></p>
 
   <ol class="validity-chain" data-reveal-group>
     <li data-reveal-item>
