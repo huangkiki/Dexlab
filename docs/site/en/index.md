@@ -6,7 +6,8 @@
   <div class="hero-copy">
     <h1 id="home-heading">DexLab<span>.</span></h1>
     <p class="hero-thesis"><span>Agents and simulation,</span><strong>improving together through experiments.</strong></p>
-    <p class="hero-lead">I study how agents can improve manipulation skills and physics simulation through experiments. DexLab connects tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
+    <p class="hero-project"><strong>DexLab is my personal research project.</strong><span>It explores how Agent Skills and simulation can improve each other through experiments.</span></p>
+    <p class="hero-lead">Experiments connect tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
     <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
     <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
       <span>Hover to focus</span>

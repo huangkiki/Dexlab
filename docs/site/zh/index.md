@@ -6,7 +6,8 @@
   <div class="hero-copy">
     <h1 id="home-heading">DexLab<span>.</span></h1>
     <p class="hero-thesis"><span>让智能体与仿真，</span><strong>在实验中共同进化。</strong></p>
-    <p class="hero-lead">我研究智能体如何通过实验改进操作技能与物理仿真。DexLab 把任务、执行、接触动力学、证据追踪和失败归因串成一条可复核的研究链：人设定目标与边界，智能体参与问题发现、实验设计与迭代。</p>
+    <p class="hero-project"><strong>DexLab 是我的个人研究项目。</strong><span>它探索智能体技能与仿真如何通过实验相互促进。</span></p>
+    <p class="hero-lead">实验把任务、执行、接触动力学、证据追踪和失败归因串成一条可复核的研究链：人设定目标与边界，智能体参与问题发现、实验设计与迭代。</p>
     <p class="hero-scope"><strong>当前范围</strong> 结论来自冻结仿真模型内可复验的物理一致性；自主实验闭环与真机验证是下一层证据门槛，尚无真机实验数据。</p>
     <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
       <span>悬停聚焦</span>
