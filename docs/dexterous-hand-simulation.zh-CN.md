@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-18 专题增补：[RaiSim：CPU 快速训练不等于全局物理更准](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#raisim-physics-boundary)。** RaiSim 的论文影响力和真机迁移证据主要来自高频机器人控制，不是所有接触任务上的精度排名。DexLab 可把它作为独立求解器对照，但暂不应把所有任务迁移过去。
+
 **2026-11-18 专题增补：[RoboDojo 仿真可信度审计：先读回参数、检查数值与评分](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-simulator-audit)。** 技术博客沿着“参数送达 → 数值可能性 → 求解守恒 → 评分语义”检查一个 Isaac Sim benchmark。最值得 DexLab 借鉴的是四道前置检查，不是把任何真机失败都改写成 Sim-to-Real Gap。
 
 **2026-11-17 专题增补：[Closing the Loop：硬件限位、闭环传动与 reset 要分层验收](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#closing-loop-transmission)。** Unitree G1 脚踝的串行模型忽略了曲柄—推杆闭链。作者依次处理实测限位、传动雅可比、控制增益、reset 一致性和积分器稳定性；可迁移的是这条判因顺序，不是“所有资产都应立刻改成闭环”。
@@ -236,7 +238,7 @@
 
 > **TL;DR：** RaiSim 的对照最值得借鉴的不是“CPU 全面胜过 GPU”，而是把选择拆成小批量延迟、大批量吞吐、每美元成本和完整训练闭环。物理步更快，只在物理占端到端时间的主要部分时才可能转成训练收益。
 
-以 Wuji 批量任务为例，一轮包含“接触状态 → 策略动作 → 物理推进 → 新观测／奖励”。若一轮 100 ms、物理只占 20 ms，即使物理快 10×，理想情况下整轮也只从 100 ms 降到 38 ms；这个 100/20 ms 只说明算术关系，不是任何一方的实测。[作者的随机动作报告](https://raisim.com/sections/BenchmarkNewton.html)在作者指定硬件与价格口径下报告：1 world 的吞吐为 RaiSim/Newton 的 95.77×（ANYmal）和 13.43×（Strandbeest），到 4,096 worlds 的 FPS/USD 仍为 3.40×／2.04×。计时每十步更新随机目标，包含目标生成与物理，但排除策略推理、观测、奖励、episode reset、渲染和记录。[固定文档快照](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/sections/BenchmarkNewton.md) · [原始测量数据](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/public/raisim_newton_random_actions.json)
+以 Wuji 批量任务为例，一轮包含“接触状态 → 策略动作 → 物理推进 → 新观测／奖励”。若一轮 100 ms、物理只占 20 ms，即使物理快 10×，理想情况下整轮也只从 100 ms 降到 82 ms；这个 100/20 ms 只说明算术关系，不是任何一方的实测。[作者的随机动作报告](https://raisim.com/sections/BenchmarkNewton.html)在作者指定硬件与价格口径下报告：1 world 的吞吐为 RaiSim/Newton 的 95.77×（ANYmal）和 13.43×（Strandbeest），到 4,096 worlds 的 FPS/USD 仍为 3.40×／2.04×。计时每十步更新随机目标，包含目标生成与物理，但排除策略推理、观测、奖励、episode reset、渲染和记录。[固定文档快照](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/sections/BenchmarkNewton.md) · [原始测量数据](https://github.com/raisimTech/raisim2Lib/blob/f256e315b4c6196f55d15f27a9a16a776213db8b/docs/public/raisim_newton_random_actions.json)
 
 这也是一组不同数值工作的比较：RaiSim CPU 使用 FP64，Newton SolverMuJoCo / MuJoCo Warp 使用 FP32；求解器、约束与轨迹不同，轨迹平均接触数也不同。动作目标逐位相同只证明输入一致，不能把比率解释为接触正确性排名。对 DexLab，下一次获得授权的批量学习实验应分别记录物理稳态、观测／奖励、推理与传输、reset／恢复、记录／渲染五个时钟，再合成每个有效 transition 的成本；同时冻结并行规模、动作序列和任务判据，保留不同规模下的接触事件与首次失败层。
 
@@ -252,6 +254,61 @@ RaiSim 的 MuJoCo 页面补足了单线程 CPU 视角：10 个有效 workload �
 MuJoCo 八块软体堆叠行必须排除：公开配置使用不同粒子、质量和碰撞半径，时间推进到 0.020 s、约第 20 步时 QACC 出现 `NaN/Inf/huge`。launcher 虽返回 0，作者没有用 9.17 s 对 0.445 s 生成速度比。现有证据只能定位到“软体接触／形变数值演化在 20 ms 内失去有限性”；要区分材料、几何、迭代或 solver 主因，还需匹配参数并保存第 0–20 步的 QACC、粒子间距、穿透、接触力、约束残差和能量。
 
 对 DexLab，下一步仍是先分解场景构建、持续物理、接触查询、LiDAR／ray、观测、策略、reset 和记录，再按主导瓶颈选优化层。这份 MuJoCo 3.13.0 单线程结果也不能与 Newton 页的 MuJoCo Warp 3.17.0 FP32 GPU 批量结果合成总排名。失败 case 判因门槛与完整边界见 [Discussion #334 补充](https://github.com/huangkiki/Dexlab/discussions/334#discussioncomment-19645295)。
+
+<a id="raisim-physics-boundary"></a>
+### RaiSim：一个为高频机器人控制而生的 CPU 物理栈
+
+> **TL;DR：** RaiSim 的论文影响力来自“足够快的动态接触 + 可用的训练工具链 + 真机迁移记录”，不是“所有接触都比其他引擎更准”。对 DexLab，它值得作为独立求解器对照，暂不值得成为所有任务的主物理后端。
+>
+> **例子：** 一个四足机器人策略输出关节目标后，RaiSim 计算关节动力学与地面接触冲量，再把新状态交给 PPO。只要这个回路足够快，策略就可以在普通 CPU 上并行采集；真机迁移还依赖执行器模型、域随机化、观测、控制与标定。它们共同成功，不能单独归功于 RaiSim 的接触律。
+>
+> **它证明：** RaiSim 可以承载高影响力机器人学习工作。**它不证明：** RaiSim 的摩擦、形变、穿透或能量耗散在 DexLab 的所有任务上都优于其他引擎。
+
+RaiSim 不是对另一个物理引擎的封装，而是自有的闭源多体仿真栈。当前公开文档与头文件可确认的主要路径是：刚体与关节体动力学、AABB broadphase、解析/SAT/MPR/GJK-EPA narrowphase，以及按约束行扫描、对摩擦接触使用二分法的接触求解。普通刚体接触会缓存上一轮冲量作为 warm start；接触以冲量报告，除以时间步才得到力。[Contact and Collision](https://raisim.com/sections/Contact.html) · [Collision Detection](https://raisim.com/sections/CollisionDetection.html)
+
+公开 workspace 只提供 RaiSim 与 rayrai 的二进制、头文件、示例和包裹层，没有引擎源码与完整内部测试。因此这里能核对公开 API、配置与可观测语义，不能审计 solver kernel。论文还跨越 RaiSim v1、v2 和各自 fork；复现实验应使用论文仓库固定的依赖与设置，不能把当前版本行为反填旧结果。
+
+它也是原生 CPU 物理系统。`raisimGymTorch` 为每个环境创建一个 `raisim::World`，用 OpenMP 在 CPU 上并行 step、reset 和观测；PyTorch 策略可以在 CPU 或 GPU 上训练。GPU 主要承担神经网络和 rayrai 渲染，不是这套框架里的物理后端。[raisimGymTorch](https://github.com/raisimTech/raisim2Lib/tree/v2.16.0/raisimGymTorch)
+
+#### 为什么有一批论文反复使用它
+
+1. **历史速度优势。** 2018 年的逐接触求解论文报告，18-DOF 四足机器人多接触单步在单 CPU 核上少于 20 µs，并明显快于复杂场景中的 PGS；2019 年 ANYmal 工作报告“刚体 + 执行器网络”的完整混合仿真接近 500K steps/s，单 CPU、单 GPU 训练均不超过 11 小时。[Per-Contact Iteration](https://doi.org/10.1109/LRA.2018.2792536) · [ANYmal 2019](https://arxiv.org/html/1901.08652)
+2. **接触可观测。** 原生接口可读接触位置、法向、坐标系和冲量，适合把接触事件直接写进 reward、老师策略观测和失败记录。
+3. **训练与资产形成复用链。** URDF、地形生成、C++ 向量环境和 `raisimGymTorch` 降低了从机器人模型到 PPO 试验的成本；后续团队常直接复用已有机器人资产和代码。
+4. **高影响力真机结果形成正反馈。** 当一个引擎先支撑了动态四足、野外感知和长时任务，后续工作沿用它的风险低于重新搭建整套栈。这是“工具与经验”的优势，不是物理精度的单独证明。
+
+#### 工作谱系：哪些论文真正把 RaiSim 用作核心工具
+
+下表是代表性样本，不是完整论文总数，也不把官网列名当作独立评审。论文的成功首先归属于各自的任务、控制、学习与硬件系统。
+
+| 工作 | RaiSim 在系统中的角色 | 阅读边界 |
+| --- | --- | --- |
+| [Hwangbo et al., 2019](https://arxiv.org/html/1901.08652) | ANYmal 动态运动与恢复；刚体和接触推进，执行器网络补偿驱动差距 | 高速混合训练回路，不等于纯 RaiSim 速度或精度 |
+| [Lee et al., 2020](https://arxiv.org/html/2010.11251v1) · [Miki et al., 2022](https://arxiv.org/html/2201.08117) · [Choi et al., 2023](https://doi.org/10.1126/scirobotics.ade2256) | 四足在野外、雪地、植被、泥地和沙地等条件下的策略训练 | 泥、雪、植被和可变形地面多为部署条件；仿真里仍要分别核对实际地形与材料模型 |
+| [RMA, 2021](https://arxiv.org/html/2107.04034v1) | A1 的基座策略和环境适应模块全部在 RaiSim 中训练 | 证明“快模拟 + 域随机化 + 在线适应”可迁移，不是证明接触参数自动正确 |
+| [Circus ANYmal, 2021](https://arxiv.org/abs/2011.08811v2) | 四足用四肢操纵瑜伽球，零样本上真机 | 作者明确说明当时模拟器不能模拟球的形变，并用接触速度惩罚绕开这一差距 |
+| [Concurrent policy/state estimator, 2022](https://arxiv.org/html/2202.05481v2) | 策略、价值函数和状态估计器在 RaiSim 中联合训练 | 真机速度结果依赖估计器、控制器和整机系统，不是单独引擎读数 |
+| [Whole-body manipulation, 2023](https://arxiv.org/html/2308.16820) | 300 个环境、Ryzen 9 5950X + RTX 3070，约 15 小时训练整身推物 | 仿真成功率与真机重物操作是不同条件；没有做引擎精度消融 |
+| [D-Grasp, 2022](https://arxiv.org/abs/2112.03028) · [ArtiGrasp, 2024](https://arxiv.org/abs/2309.03891) · [RobustDexGrasp, 2025](https://arxiv.org/abs/2504.05287) | 手–物接触策略、articulated object 与灵巧抓取；官方实现使用 RaiSim | 展示多指手与复杂物体可用接触冲量训练；不是跨引擎材料准确性比较 |
+| [RAIBO2, Nature 2026](https://doi.org/10.1038/s41586-026-11102-5) | 低耗散步态训练链的一部分 | 单次充电完成马拉松是整机、硬件损耗模型、电机和策略的共同结果 |
+| [DiffContact, 2026](https://arxiv.org/html/2610.35852v1) | 用 1 ms 步长做快速前向 rollout，再在反向使用自定义接触梯度 | 论文同时注明标准 RaiSim 在滑动时可能偏离最大耗散，因此它不是用于证明“标准 RaiSim 精确”的案例 |
+
+#### 为什么“采用得多”不能改写成“物理更准”
+
+独立接触研究指出，标准 RaiSim 在滑动接触下不严格满足最大耗散原理，会低估能量耗散，并给出了修正。[Reconciling RaiSim](https://doi.org/10.1109/TRO.2024.3430711) 与 [Contact Models in Robotics](https://arxiv.org/html/2304.06372v3)进一步说明，接触互补条件、摩擦锥、数值容差和时间步都会改变轨迹。
+
+因此，“更准”必须绑定到具体量：接触点、法向力、切向冲量、滑移、能量耗散、穿透还是任务成功率。接触参数未等效时，任何跨引擎数字都不能被读成精度排名。RaiSim 的直接优势更适合表述为：**在动态刚体与关节体任务上，能在 CPU 上以较低工程成本得到足够快、能迁移的 rollout。**
+
+#### 对 DexLab 的接入边界
+
+现阶段不把 RaiSim 扩成所有接触、布料、苹果与灵巧手任务的主后端。更有信息量的第一步，是在已有 `ContactPlane` 的静止、滑动和零摩擦 case 上增加可选适配器，并冻结：
+
+- RaiSim 与 `raisim2Lib` 的精确 tag、原生库哈希和 FP64 配置；
+- 与记录一致的刚体质量、惯量、碰撞形状、初态、重力、摩擦和时间步；
+- 积分方案、最大迭代数、每约束阈值，以及 episode reset 后的 solver warm-start 清理；
+- 接触点、法向、接触坐标系、`impulse / dt`、求解轮数、stall 状态和有限性检查。
+
+只有 RaiSim 产生可复现的求解器敏感差异、并暴露现有记录看不到的首个失效层时，才把它晋升为正式对照后端。若结论只是轨迹略有不同，保留研究页中的谱系与证据边界，不增加整套任务维护成本。本轮只完成资料核查与文档沉淀，没有安装 RaiSim、运行新物理实验或做真机测试。
 
 <a id="benchmark-gaming-audit"></a>
 ### 从“评分漏洞”到“榜单投机”：高分究竟识别了什么
