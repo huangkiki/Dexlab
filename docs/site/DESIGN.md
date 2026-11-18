@@ -211,7 +211,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
-- A blurred semantic field of every concept and solver token, opening into a searchable relationship atlas.
+- A blurred semantic field of curated concepts and canonical solver options, opening into a searchable relationship atlas.
 - The original architecture diagram and ruled native-radio evidence inspector, with the hardware-free validation boundary closing the research reading order.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
@@ -264,7 +264,7 @@ The homepage header has a maximum width of (1440px), padding (24px 40px) and one
 
 The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead, a small scope note and the concept-atlas trigger occupy the main column, followed by one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A five-case evidence inspector follows, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
 
-The first screen also carries a decorative but data-driven concept field. Six semantic clusters and all registered solver tokens are distributed across the opening plane, then reduced by blur, low opacity and a translucent paper wash until the title remains the focal point. The field never accepts pointer events; a small explicit trigger in the hero and the masthead’s “Concepts” link provide the accessible interaction. Opening the atlas replaces the blurred atmosphere with a sharp full-viewport reading layer.
+The first screen also carries a decorative but data-driven concept field. Six semantic clusters and canonical solver or numerical options are distributed across the opening plane, then reduced by blur, low opacity and a translucent paper wash until the title remains the focal point. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. The field never accepts pointer events; a small explicit trigger in the hero and the masthead’s “Concepts” link provide the accessible interaction. Opening the atlas replaces the blurred atmosphere with a sharp full-viewport reading layer.
 
 The representative-experiment section is an evidence inspector: a ruled case index on the left and one synchronized evidence panel on the right. The selected case keeps its media, conclusion, control variable, native readback, criterion/result and scope together. Native radio controls provide the selection without a script. Below (800px), the case index becomes a vertical set of ruled choices above the selected panel.
 
@@ -322,7 +322,7 @@ Navigation is one horizontal masthead row on desktop and wraps below the brand o
 
 ### Concept field and atlas
 
-The concept field is the opening surface, not a card grid. Terms retain stable group order and receive typographic weight only from whether they are a core concept or an advanced solver configuration; no popularity score or random size is implied. Group labels remain readable through the blur, while an explicit “open the concept atlas” trigger names the available interaction.
+The concept field is the opening surface, not a card grid. Terms retain stable group order and receive typographic weight only from whether they are a core concept or an advanced solver or numerical option; no popularity score or random size is implied. A token such as FP64, Euler or Newton is one concept even when several engines register it; engine names appear only in a separated context list. Group labels remain readable through the blur, while an explicit “open the concept atlas” trigger names the available interaction.
 
 The atlas uses a native full-viewport `dialog`. Search, group filters, the six semantic clusters, and a single reading lens share one ruled reading surface. At rest the clusters show words only; hovering or focusing a term highlights direct relations and contrasts and draws only that local set of edges. The lens states the selected term, one-sentence definition, links to its full entry, and the related terms without moving the reader’s place in the map.
 

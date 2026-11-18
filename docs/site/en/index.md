@@ -11,7 +11,7 @@
     <a class="concept-field-trigger" href="concepts/index.html" data-concept-open>
       <span>Click the field</span>
       <strong>Open the concept atlas</strong>
-      <small>Physical concepts and every solver configuration</small>
+      <small>Physical concepts and solver or numerical options</small>
     </a>
   </div>
   <a class="directory-entry" href="#experiments">

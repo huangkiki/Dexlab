@@ -17,11 +17,37 @@ class ConceptAtlasTests(unittest.TestCase):
     def setUpClass(cls):
         cls.atlas = load_atlas()
 
-    def test_every_solver_token_has_a_stable_entry(self):
+    def test_solver_tokens_are_canonical_concepts_with_separate_registrations(self):
         solver_entries = [item for item in self.atlas["concepts"] if item["group"] == "solver"]
-        self.assertEqual(len(solver_entries), 63)
-        self.assertEqual(self.atlas["solver_tokens"], 63)
-        self.assertEqual(len({item["id"] for item in solver_entries}), 63)
+        self.assertEqual(len(solver_entries), 54)
+        self.assertEqual(self.atlas["solver_concepts"], 54)
+        self.assertEqual(self.atlas["solver_registrations"], 63)
+        self.assertEqual(len({item["id"] for item in solver_entries}), 54)
+
+    def test_cross_engine_tokens_are_merged_without_losing_context(self):
+        by_id = {item["id"]: item for item in self.atlas["concepts"]}
+        newton = by_id["solver-newton"]
+        self.assertEqual(
+            {context["engine"] for context in newton["contexts"]},
+            {"Genesis", "MuJoCo", "SuperDex"},
+        )
+        self.assertEqual(newton["name"]["zh"], "Newton")
+
+        cg = by_id["solver-cg"]
+        self.assertEqual(
+            {context["role"] for context in cg["contexts"]},
+            {"constraint", "linear"},
+        )
+        self.assertEqual(cg["name"]["zh"], "CG")
+
+        semi = by_id["solver-semiimplicit"]
+        self.assertEqual(len(semi["contexts"]), 1)
+        self.assertEqual(semi["name"]["zh"], "SemiImplicit")
+
+        fp64 = by_id["solver-fp64"]
+        self.assertEqual(fp64["name"]["zh"], "FP64")
+        self.assertEqual([context["engine"] for context in fp64["contexts"]], ["SuperDex"])
+        self.assertNotIn("SuperDex", fp64["name"]["zh"])
 
     def test_all_entries_are_bilingual_and_related_targets_exist(self):
         ids = {item["id"] for item in self.atlas["concepts"]}
@@ -49,6 +75,9 @@ class ConceptAtlasTests(unittest.TestCase):
         rendered = render_dialog(self.atlas, "zh")
         self.assertEqual(rendered.count('class="concept-term '), len(self.atlas["concepts"]))
         self.assertIn('data-concept="penetration"', rendered)
+        self.assertIn('data-concept="solver-fp64"', rendered)
+        self.assertIn('data-name="FP64"', rendered)
+        self.assertNotIn("<small>SuperDex</small>", rendered)
         self.assertIn("data-relations=", rendered)
         self.assertIn(f"{len(self.atlas['concepts'])} 个词条", rendered)
 
@@ -61,6 +90,11 @@ class ConceptAtlasTests(unittest.TestCase):
             self.assertIn("# 穿模", page)
             self.assertIn("../failure-root-cause-atlas.md", page)
             self.assertNotIn("](failure-root-cause-atlas.html)", page)
+            fp64 = (language_dir / "concepts/solver-fp64.md").read_text()
+            self.assertIn("# FP64", fp64)
+            self.assertIn("## 登记上下文", fp64)
+            self.assertIn("**SuperDex**", fp64)
+            self.assertNotIn("SuperDex · 进阶", fp64)
             self.assertTrue((language_dir / "concepts/index.md").exists())
             self.assertEqual(
                 len(list((language_dir / "concepts").glob("*.md"))),
