@@ -14,6 +14,8 @@ assignees: ''
 
 - Discussion / 讨论:
 - Candidate slice / 候选切片:
+- Triage umbrella / Triage 伞形项:
+- Decision / 决策:
 
 ## Uncertainty and public impact / 不确定项与公开影响
 
