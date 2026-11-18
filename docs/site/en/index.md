@@ -48,27 +48,20 @@
     <span>Task trial → First failing layer → Repair → Independent retest</span>
   </header>
 
-  <div class="evidence-inspector" role="group" aria-label="Representative experiment evidence inspector">
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-cut" aria-controls="panel-cut" checked>
-    <label class="evidence-choice" id="choice-cut" for="evidence-cut"><span>01</span><span><strong>Cutting and pushing</strong><small>11.096 / 10.209 mm</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-wuji" aria-controls="panel-wuji">
-    <label class="evidence-choice" id="choice-wuji" for="evidence-wuji"><span>02</span><span><strong>Contact and torsional moment</strong><small>2.734 → 1.025 mm</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-apple" aria-controls="panel-apple">
-    <label class="evidence-choice" id="choice-apple" for="evidence-apple"><span>03</span><span><strong>Apple-stem grasp</strong><small>1/10 · 10/10</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-cloth" aria-controls="panel-cloth">
-    <label class="evidence-choice" id="choice-cloth" for="evidence-cloth"><span>04</span><span><strong>Cloth</strong><small>52 / 105 pass</small></span></label>
-    <input class="evidence-input" type="radio" name="home-evidence" id="evidence-incline" aria-controls="panel-incline">
-    <label class="evidence-choice" id="choice-incline" for="evidence-incline"><span>05</span><span><strong>Six-engine incline</strong><small>Per configuration</small></span></label>
-
-    <div class="evidence-panels">
-      <article class="evidence-panel" id="panel-cut" data-evidence="cut" role="region" aria-labelledby="choice-cut">
+  <div class="evidence-sequence" aria-label="Representative experiment evidence sequence">
+      <article class="evidence-panel" id="panel-cut" data-evidence="cut" data-evidence-reveal role="region" aria-labelledby="evidence-cut-title">
+        <header class="evidence-panel-head">
+          <span>01</span>
+          <strong>Cutting and pushing</strong>
+          <small>11.096 / 10.209 mm</small>
+        </header>
         <div class="evidence-media evidence-media-split">
           <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="Latest tofu two-cut and side-push recording"><source src="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4"></video>
           <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="Latest banana three-cut and side-push recording"><source src="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Cutting / separation criterion</p>
-          <h3>After cutting, prove the final piece can move independently.</h3>
+          <h3 id="evidence-cut-title">After cutting, prove the final piece can move independently.</h3>
           <p class="evidence-verdict">Direct pushing after the last cut produced independent displacement for three tofu pieces and four banana pieces.</p>
           <dl class="evidence-ledger">
             <div><dt>Control variable</dt><dd>Tofu 0.125 ms, η=5 Pa·s; banana 0.25 ms, η=0</dd></div>
@@ -80,13 +73,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-wuji" data-evidence="wuji" role="region" aria-labelledby="choice-wuji">
+      <article class="evidence-panel" id="panel-wuji" data-evidence="wuji" data-evidence-reveal role="region" aria-labelledby="evidence-wuji-title">
+        <header class="evidence-panel-head">
+          <span>02</span>
+          <strong>Contact and torsional moment</strong>
+          <small>2.734 → 1.025 mm</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/wuji-contact/hold-comparison.png" aria-label="Wuji point and torsional contact comparison"><source src="../../zh-cn/latest/_static/wuji-contact/comparison.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Contact / moment direction</p>
-          <h3>Persistent contact does not prevent rotation about the grasp line.</h3>
+          <h3 id="evidence-wuji-title">Persistent contact does not prevent rotation about the grasp line.</h3>
           <p class="evidence-verdict">Point contact lacks the required torque direction; synthetic torsional contact brings retention back inside its original threshold.</p>
           <dl class="evidence-ledger">
             <div><dt>Control variable</dt><dd>Point contact replaced only by synthetic torsional contact</dd></div>
@@ -98,13 +96,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-apple" data-evidence="apple" role="region" aria-labelledby="choice-apple">
+      <article class="evidence-panel" id="panel-apple" data-evidence="apple" data-evidence-reveal role="region" aria-labelledby="evidence-apple-title">
+        <header class="evidence-panel-head">
+          <span>03</span>
+          <strong>Apple-stem grasp</strong>
+          <small>1/10 · 10/10</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/studio/apple.png" aria-label="OpenArm and Wuji apple-stem grasp record"><source src="../../zh-cn/latest/_static/studio/apple.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Task / frozen disturbance set</p>
-          <h3>A fixed task can still produce different outcomes across configurations.</h3>
+          <h3 id="evidence-apple-title">A fixed task can still produce different outcomes across configurations.</h3>
           <p class="evidence-verdict">Read MuJoCo and SuperDex differences together with step size, drive, mass, position and contact representation.</p>
           <dl class="evidence-ledger">
             <div><dt>Control variable</dt><dd>Same set of ten fixed regression scenes with no held-out retuning</dd></div>
@@ -116,13 +119,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-cloth" data-evidence="cloth" role="region" aria-labelledby="choice-cloth">
+      <article class="evidence-panel" id="panel-cloth" data-evidence="cloth" data-evidence-reveal role="region" aria-labelledby="evidence-cloth-title">
+        <header class="evidence-panel-head">
+          <span>04</span>
+          <strong>Cloth</strong>
+          <small>52 / 105 pass</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" aria-label="Cloth grasp and motion record"><source src="../../zh-cn/latest/_static/cloth-studio/grasp.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Deformable body / staged acceptance</p>
-          <h3>Grasping, lifting and completing a fold are separate checks.</h3>
+          <h3 id="evidence-cloth-title">Grasping, lifting and completing a fold are separate checks.</h3>
           <p class="evidence-verdict">Deformation, penetration, residual motion and cost are scored separately on one frozen held-out set.</p>
           <dl class="evidence-ledger">
             <div><dt>Control variable</dt><dd>Seven native configurations on the same frozen held-out set</dd></div>
@@ -134,13 +142,18 @@
         </div>
       </article>
 
-      <article class="evidence-panel" id="panel-incline" data-evidence="incline" role="region" aria-labelledby="choice-incline">
+      <article class="evidence-panel" id="panel-incline" data-evidence="incline" data-evidence-reveal role="region" aria-labelledby="evidence-incline-title">
+        <header class="evidence-panel-head">
+          <span>05</span>
+          <strong>Six-engine incline</strong>
+          <small>Per configuration</small>
+        </header>
         <div class="evidence-media">
           <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/studio/incline.png" aria-label="Six-engine incline comparison record"><source src="../../zh-cn/latest/_static/studio/incline.mp4" type="video/mp4"></video>
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Solver / same-task response</p>
-          <h3>Contact representation and numerical gates still change the result.</h3>
+          <h3 id="evidence-incline-title">Contact representation and numerical gates still change the result.</h3>
           <p class="evidence-verdict">Static, sliding and nominally frictionless cases are decided per profile rather than as one engine total.</p>
           <dl class="evidence-ledger">
             <div><dt>Control variable</dt><dd>Three contact conditions and three steps across six fixed engine profiles</dd></div>
@@ -151,7 +164,6 @@
           <a href="visual-comparisons.html#incline">Open synchronized replay, curves and the complete matrix →</a>
         </div>
       </article>
-    </div>
   </div>
 </section>
 

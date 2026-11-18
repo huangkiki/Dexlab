@@ -540,99 +540,56 @@ main > section > h1 {
   font-weight: 600;
 }
 
-.evidence-inspector {
-  display: grid;
-  grid-template-columns: 270px minmax(0, 1fr);
-  align-items: start;
+.evidence-sequence {
   border-top: 1px solid var(--rule);
 }
 
-.evidence-input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.evidence-choice {
-  grid-column: 1;
+.evidence-panel {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
-  gap: 10px;
-  min-width: 0;
-  padding: 17px 12px 17px 0;
+  grid-template-columns: minmax(0, 1.12fr) minmax(290px, .88fr);
+  gap: 24px 32px;
+  align-items: start;
+  padding: 30px 0 52px;
   border-bottom: 1px solid var(--rule);
-  color: var(--muted);
-  cursor: pointer;
 }
 
-.evidence-choice > span:first-child {
+.evidence-panel-head {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: baseline;
+  padding-bottom: 2px;
+}
+
+.evidence-panel-head span {
   color: var(--accent);
   font-size: 14px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
-.evidence-choice strong,
-.evidence-choice small {
-  display: block;
+.evidence-panel-head strong {
+  font: 400 24px/1.35 var(--serif);
 }
 
-.evidence-choice strong {
-  color: var(--ink);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.evidence-choice small {
-  margin-top: 2px;
+.evidence-panel-head small {
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.55;
   font-variant-numeric: tabular-nums;
 }
 
-.evidence-input:checked + .evidence-choice {
-  padding-left: 12px;
-  background: var(--panel);
-  color: var(--ink);
-}
+@media (prefers-reduced-motion: no-preference) {
+  .evidence-panel[data-evidence-reveal] {
+    transition:
+      opacity 520ms cubic-bezier(.16, 1, .3, 1),
+      transform 520ms cubic-bezier(.16, 1, .3, 1);
+  }
 
-.evidence-input:checked + .evidence-choice strong {
-  color: var(--accent);
-}
-
-.evidence-input:focus-visible + .evidence-choice {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
-}
-
-.evidence-panels {
-  grid-column: 2;
-  grid-row: 1 / span 10;
-  min-width: 0;
-  padding-left: 36px;
-  border-left: 1px solid var(--rule);
-}
-
-.evidence-panel {
-  display: none;
-  grid-template-columns: minmax(0, 1.12fr) minmax(290px, .88fr);
-  gap: 32px;
-  align-items: start;
-}
-
-#evidence-cut:checked ~ .evidence-panels [data-evidence="cut"],
-#evidence-wuji:checked ~ .evidence-panels [data-evidence="wuji"],
-#evidence-apple:checked ~ .evidence-panels [data-evidence="apple"],
-#evidence-cloth:checked ~ .evidence-panels [data-evidence="cloth"],
-#evidence-incline:checked ~ .evidence-panels [data-evidence="incline"] {
-  display: grid;
+  .evidence-sequence.is-scroll-enabled .evidence-panel[data-evidence-reveal]:not(.is-visible) {
+    opacity: .12;
+    transform: translateY(34px);
+  }
 }
 
 .evidence-media {
@@ -875,10 +832,6 @@ main > section > h1 {
     padding-block: 96px 112px;
   }
 
-  .evidence-inspector {
-    grid-template-columns: 230px minmax(0, 1fr);
-  }
-
   .validity-chain {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -944,14 +897,12 @@ main > section > h1 {
     gap: 20px;
   }
 
-  .evidence-inspector {
-    display: block;
+  .evidence-panel-head {
+    grid-template-columns: 32px minmax(0, 1fr);
   }
 
-  .evidence-panels {
-    padding: 22px 0 0;
-    border-top: 1px solid var(--rule);
-    border-left: 0;
+  .evidence-panel-head small {
+    grid-column: 2;
   }
 }
 
@@ -1101,22 +1052,12 @@ main > section > h1 {
     display: none !important;
   }
 
-  .evidence-input,
-  .evidence-choice {
-    display: none !important;
-  }
-
-  .evidence-inspector,
-  .evidence-panels {
-    display: block;
-    padding: 0;
-    border: 0;
-  }
-
   .evidence-panel {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 18px;
+    opacity: 1 !important;
+    transform: none !important;
     margin-top: 24px;
     break-inside: avoid;
   }
