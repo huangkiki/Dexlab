@@ -19,6 +19,7 @@
     <span class="directory-summary">Begin with five representative experiments and three research judgments; physical-validation boundaries and regression conditions close the page.</span>
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
   </a>
+  <div id="concept-field-slot"></div>
 </section>
 
 <section class="architecture-view" aria-labelledby="architecture-heading">

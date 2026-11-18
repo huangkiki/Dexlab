@@ -211,7 +211,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A horizontal masthead, oversized serif opening title and one ruled content entrance.
-- A scroll-revealed semantic field of curated concepts and canonical solver options, with individual hover focus and a searchable relationship atlas.
+- A semantic field of curated concepts and canonical solver options below the opening entry, resolving into view with scroll, with individual hover focus and a searchable relationship atlas.
 - The original architecture diagram and ruled native-radio evidence inspector, with the hardware-free validation boundary closing the research reading order.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
@@ -262,9 +262,9 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead, a small scope note and the concept-atlas trigger occupy the main column, followed by one ruled index action. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A five-case evidence inspector follows, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
+The first screen is at least the viewport height minus the masthead. The DexLab title, thesis, lead, a small scope note and the concept-atlas trigger occupy the main column, followed by one ruled index action. A dedicated concept band follows that action in normal flow, then the next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. A five-case evidence inspector follows, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
 
-The first screen also carries a data-driven concept field. Six semantic clusters and canonical solver or numerical options are distributed across the opening plane, then reduced by blur, low opacity and the top/bottom mask until the title remains the focal point. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. The field begins faint and gains contrast during the first viewport of scrolling. Individual visible terms accept pointer hover: the field temporarily sharpens, other terms recede and the active term enlarges. A term click, the small explicit hero trigger and the masthead’s “Concepts” link provide the interaction.
+The first screen also carries a data-driven concept field below the index action. Six semantic clusters and canonical solver or numerical options occupy their own ruled band instead of sitting behind the title, then resolve from blur and low opacity as their top edge rises through the lower half of the viewport. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. Individual visible terms accept pointer hover: the field temporarily sharpens, other terms recede and the active term enlarges. A term click, the small explicit hero trigger and the masthead’s “Concepts” link provide the interaction.
 
 The representative-experiment section is an evidence inspector: a ruled case index on the left and one synchronized evidence panel on the right. The selected case keeps its media, conclusion, control variable, native readback, criterion/result and scope together. Native radio controls provide the selection without a script. Below (800px), the case index becomes a vertical set of ruled choices above the selected panel.
 
@@ -300,7 +300,7 @@ There are no shadows, gradients or decorative transitions. Thin rules, whitespac
 
 ## Motion
 
-**Motion thesis:** the opening concept field gradually resolves from atmosphere into a readable semantic surface as the visitor begins to scroll. This is the one authored scroll-linked moment; the page-progress hairline is supporting orientation. Evidence cases switch immediately when their radio changes, and media plays only after an explicit control action.
+**Motion thesis:** the concept band below the opening entry gradually resolves from atmosphere into a readable semantic surface as it enters the viewport. This is the one authored scroll-linked moment; the page-progress hairline is supporting orientation. Evidence cases switch immediately when their radio changes, and media plays only after an explicit control action.
 
 There is no page-load choreography or per-section reveal. The concept field uses a bounded scroll-linked opacity, blur and small vertical response over the first viewport. Pointer entry into one concept sharpens the field, dims unrelated terms and scales the active word with a short exponential ease-out. A click opens the atlas and focuses the matching entry. Content is visible in the first paint and remains usable if JavaScript fails. A selected evidence case changes background and text contrast without moving the reading position or delaying the evidence.
 
@@ -322,7 +322,7 @@ Navigation is one horizontal masthead row on desktop and wraps below the brand o
 
 ### Concept field and atlas
 
-The concept field is the opening surface, not a card grid. Terms retain stable group order and receive typographic weight only from whether they are a core concept or an advanced solver or numerical option; no popularity score or random size is implied. A token such as FP64, Euler or Newton is one concept even when several engines register it; engine names appear only in a separated context list. During initial scroll the field resolves from low-contrast blur toward a readable background. Hovering a term clears the whole field just enough to isolate that word, dims unrelated terms and scales the active word; moving away restores the field. The explicit trigger remains the accessible non-hover path.
+The concept field is a dedicated band below the opening index action, not a card grid and not a backdrop behind the hero. Terms retain stable group order and receive typographic weight only from whether they are a core concept or an advanced solver or numerical option; no popularity score or random size is implied. A token such as FP64, Euler or Newton is one concept even when several engines register it; engine names appear only in a separated context list. As the band enters the viewport, it resolves from low-contrast blur toward a readable surface. Hovering a term clears the whole field just enough to isolate that word, dims unrelated terms and scales the active word; moving away restores the field. The explicit trigger remains the accessible non-hover path.
 
 The atlas uses a native full-viewport `dialog`. Search, group filters, the six semantic clusters, and a single reading lens share one ruled reading surface. At rest the clusters show words only; hovering or focusing a term highlights direct relations and contrasts and draws only that local set of edges. The lens states the selected term, one-sentence definition, links to its full entry, and the related terms without moving the reader’s place in the map.
 
@@ -394,9 +394,10 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 
 - **Do** keep the homepage aligned with the article's warm paper, serif opening title and green links.
 - **Do** let spacing, hierarchy and open rows explain the page before adding secondary labels.
+- **Do** keep the concept field below the opening index action so it no longer competes with or obscures the hero copy.
 - **Do** present the architecture diagram uncropped with its authored colors and a direct path to the original PNG.
 - **Do** use the concept-field reveal as the authored scroll response, keep the page-progress hairline supporting, and preserve complete content without JavaScript or with reduced motion.
-- **Do** keep the first-screen concept field semantically grouped, resolve it gradually during the first scroll, and preserve a visible non-JavaScript path to the complete concept index.
+- **Do** keep the concept field semantically grouped, resolve it gradually as it enters view, and preserve a visible non-JavaScript path to the complete concept index.
 - **Do** make one hovered concept clear and larger while the rest of the field recedes, and open the matching atlas entry on click.
 - **Do** draw only the selected concept’s local relationships; keep the atlas readable before adding any connection lines.
 - **Do** keep experiment comparison content visible from first paint and use native selection for the evidence inspector.
