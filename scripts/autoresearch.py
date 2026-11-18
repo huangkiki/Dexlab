@@ -17,6 +17,15 @@ import tempfile
 import uuid
 from pathlib import Path
 
+try:
+    from scripts.research_intake import check as intake_check
+    from scripts.research_intake import promote as intake_promote
+    from scripts.research_intake import sync as intake_sync
+except ModuleNotFoundError:
+    from research_intake import check as intake_check
+    from research_intake import promote as intake_promote
+    from research_intake import sync as intake_sync
+
 REPO = "huangkiki/Dexlab"
 ROOT = Path(__file__).resolve().parents[1]
 APPROVAL = "auto:approved"
@@ -436,6 +445,7 @@ def check_remote(worktree, destination, remote_state=None, **selection):
 # changes require the developer to name their tests instead of guessing coverage.
 TOOL_TESTS = {
     "scripts/autoresearch.py": "test_autoresearch.py",
+    "scripts/research_intake.py": "test_research_intake.py",
     "scripts/run_tests.py": "test_test_entrypoint.py",
 }
 
@@ -733,6 +743,18 @@ def main():
     start_parser.add_argument("--interactive", action="store_true",
                               help="Start the explicitly authorized item without resuming automatic dispatch")
     sub.add_parser("dispatch").add_argument("action", choices=("status", "pause", "resume"))
+    intake_parser = sub.add_parser("intake", help="Synchronize Discussion research decisions")
+    intake_sub = intake_parser.add_subparsers(dest="intake_command", required=True)
+    intake_check_parser = intake_sub.add_parser("check")
+    intake_check_parser.add_argument("--discussion", type=int, required=True)
+    intake_sync_parser = intake_sub.add_parser("sync")
+    intake_sync_parser.add_argument("--discussion", type=int, required=True)
+    intake_sync_parser.add_argument("--dry-run", action="store_true")
+    intake_promote_parser = intake_sub.add_parser("promote")
+    intake_promote_parser.add_argument("--umbrella", type=int, required=True)
+    intake_promote_parser.add_argument("--slice", required=True)
+    intake_promote_parser.add_argument("--priority", choices=("P0", "P1", "P2"), required=True)
+    intake_promote_parser.add_argument("--dry-run", action="store_true")
     check_parser = sub.add_parser("check")
     check_parser.add_argument("worktree", type=Path)
     check_parser.add_argument("--expected-tree")
@@ -758,6 +780,18 @@ def main():
         result = start(args.issue, interactive=args.interactive)
     elif args.command == "dispatch":
         result = dispatch_state() if args.action == "status" else set_dispatch(args.action == "pause")
+    elif args.command == "intake":
+        if args.intake_command == "check":
+            result = intake_check(args.discussion)
+        elif args.intake_command == "sync":
+            result = intake_sync(args.discussion, dry_run=args.dry_run)
+        else:
+            result = intake_promote(
+                args.umbrella,
+                args.slice,
+                args.priority,
+                dry_run=args.dry_run,
+            )
     elif args.command == "check":
         worktree = args.worktree.resolve()
         before = source_tree(worktree)

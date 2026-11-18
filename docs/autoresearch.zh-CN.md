@@ -25,6 +25,25 @@
 
 顺序见[当前工作](current-work.zh-CN.md)。评分审计只约束依赖它的新序列，不人为阻塞独立的既有工作。连续序列若没有可由状态继承解释的新差异，就保留结果并停止扩长。生成式世界、整套工厂任务、通用多 Agent 框架和新默认引擎暂不进入主线；先证明最小案例有新增判断价值。
 
+<a id="research-intake"></a>
+### 从 Discussion 自动进入 Triage
+
+Distill 的 Discussion 必须在人读正文之外包含唯一一个 `dexlab-intake:v1` JSON 机器块。机器块记录 `decision`、`current_work_impact` 和 0–N 个 `candidates`；每个 candidate 固定给出 slug、任务类型、目标、入口、first slice、验收、依赖和范围外内容。`watch` / `reject` 不创建任务。
+
+```bash
+python3 scripts/autoresearch.py intake check --discussion 388
+python3 scripts/autoresearch.py intake sync --discussion 388 --dry-run
+python3 scripts/autoresearch.py intake sync --discussion 388
+python3 scripts/autoresearch.py intake promote \
+  --umbrella ISSUE --slice SLICE --priority P2 --dry-run
+```
+
+- `intake sync` 为每个含可执行候选的 Discussion 幂等维护一条 `[Research intake]` 伞形 Issue，并加入 Project 4 的 `Triage`。
+- 伞形项不是执行任务，不带优先级或 `auto:approved`，因此不会进入 `next --dry-run`。
+- `intake promote` 从伞形项选择一个切片，创建 linked execution Issue、加入 Todo，并只设置任务类型与优先级；`auto:approved` 仍由维护者单独添加。
+- 重复运行 `sync` / `promote` 只更新或复用固定 marker 对应的 Issue，不重复建项；marker 冲突、Discussion 机器块损坏或 Project 状态缺失均 fail closed。
+- 只有执行子项被采纳后，才按影响更新 `current-work`。Triage 候选不污染当前主线，也不会恢复定时派发。
+
 ### 文档与交付分工
 
 README 简述研究方向、展示架构并引导进入 Blog；网站回答“得到了什么结论、据此该怎么选”；实验报告保存完整协议与所有结果；Discussion 保存借鉴理由；当前工作说明已采纳的设计顺序与恢复点。只读讨论、设计采纳、代码实现、运行验证和公开交付分别标记。下面的提交与合并门禁继续适用；设计文档不会恢复自动派发或启动新实验。
