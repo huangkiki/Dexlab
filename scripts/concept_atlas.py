@@ -382,24 +382,24 @@ def _render_relation_data(item):
 
 def render_field(atlas, language):
     grouped = _group_items(atlas)
-    groups = []
-    for group in atlas["groups"]:
-        words = "".join(
-            f'<span data-concept-open data-concept-target="{item["id"]}">'
-            + html.escape(item["name"][language])
-            + "</span>"
-            for item in grouped[group["id"]]
-        )
-        groups.append(
-            f'<section class="concept-field-group">'
-            f'<span class="concept-field-group-name">{html.escape(group[language])}</span>'
-            f'<div class="concept-field-words">{words}</div>'
-            "</section>"
-        )
+    ordered = []
+    for group_index, group in enumerate(atlas["groups"]):
+        items = grouped[group["id"]]
+        for item_index, item in enumerate(items):
+            progress = (item_index + .5) / len(items)
+            ordered.append((progress, group_index, item))
+    ordered.sort(key=lambda entry: entry[:2])
+    words = "".join(
+        f'<span class="concept-field-level-{item["level"]}" '
+        f'data-concept-open data-concept-target="{item["id"]}">'
+        + html.escape(item["name"][language])
+        + "</span>"
+        for _, _, item in ordered
+    )
     return (
         '<div class="concept-field" aria-hidden="true">'
         '<div class="concept-field-inner">'
-        + "".join(groups)
+        f'<div class="concept-field-words">{words}</div>'
         + "</div></div>"
     )
 
