@@ -252,19 +252,8 @@ class SubmissionTest(unittest.TestCase):
             if self.pulls:
                 self.pulls[0]["headRefOid"] = self.git("rev-parse", "HEAD")
             return None
-        if args[:2] == ("gh", "api"):
-            self.assertEqual(args[2:], ("repos/huangkiki/Dexlab/pulls", "--input", "-"))
-            payload = json.loads(kwargs["input"])
-            self.assertEqual(payload["base"], "main")
-            self.assertEqual(payload["head"], "autoresearch/issue-1")
-            self.assertIn("Refs #1", payload["body"])
-            self.assertIn("selected unit regression", payload["body"])
-            self.assertNotIn("14 s", payload["body"])
-            self.publications.append(args)
-            self.pulls = [dict(number=8, url="https://github.com/huangkiki/Dexlab/pull/8",
-                               state="OPEN", baseRefName="main", headRefName=payload["head"],
-                               headRefOid=self.git("rev-parse", "HEAD"))]
-            return json.dumps({"html_url": self.pulls[0]["url"]})
+        if args[:2] == ("git", "ls-remote"):
+            return f"{self.git('rev-parse', 'HEAD')}\t{args[-1]}"
         if args[:3] == ("gh", "pr", "edit"):
             self.assertEqual(args[3], "7")
             self.publications.append(args)
@@ -273,12 +262,13 @@ class SubmissionTest(unittest.TestCase):
             self.fail(f"Unexpected publication command: {args}")
         return self.real_run(*args, **kwargs)
 
-    def test_standard_submission_validates_commits_pushes_and_creates_without_git_discovery(self):
+    def test_standard_submission_validates_commits_and_pushes_without_a_pr(self):
         result = module.submit(1, self.summary)
         self.check_mock.assert_called_once_with(self.worktree)
-        self.assertEqual(result["headRefOid"], self.git("rev-parse", "HEAD"))
+        self.assertEqual(result["commit"], self.git("rev-parse", "HEAD"))
+        self.assertEqual(result["branch"], "autoresearch/issue-1")
         self.assertFalse(self.git("status", "--porcelain"))
-        self.assertEqual([p[:2] for p in self.publications], [("git", "push"), ("gh", "api")])
+        self.assertEqual([p[:2] for p in self.publications], [("git", "push")])
 
     def test_explicit_recovery_updates_same_pr_after_new_reviewed_commit(self):
         self.recover()
@@ -289,16 +279,16 @@ class SubmissionTest(unittest.TestCase):
         self.check_mock.assert_called_once_with(self.worktree)
         self.assertEqual([p[:2] for p in self.publications], [("git", "push"), ("gh", "pr")])
 
-    def test_standard_existing_pr_still_commits_reviewed_changes_after_gate(self):
+    def test_standard_submission_does_not_implicitly_touch_an_existing_pr(self):
         pull = self.recover()
         self.git("branch", "-m", "autoresearch/issue-1")
         pull["headRefName"] = "autoresearch/issue-1"
         self.source.write_text("reviewed standard-branch correction\n")
         result = module.submit(1, self.summary)
-        self.assertEqual(result["number"], 7)
+        self.assertEqual(result["branch"], "autoresearch/issue-1")
         self.assertFalse(self.git("status", "--porcelain"))
         self.check_mock.assert_called_once_with(self.worktree)
-        self.assertFalse(any(p[:2] == ("gh", "api") for p in self.publications))
+        self.assertEqual([p[:2] for p in self.publications], [("git", "push")])
 
     def test_recovery_requires_explicit_pr(self):
         self.recover()
@@ -412,13 +402,14 @@ class SubmissionTest(unittest.TestCase):
         self.assertFalse(self.publications)
 
     def test_wrong_pr_readback_is_rejected(self):
+        self.recover()
         original = self.github
         def wrong(*args):
             result = original(*args)
             return {**result, "baseRefName": "other"} if args[:2] == ("pr", "view") else result
         self.gh_json_mock.side_effect = wrong
         with self.assertRaisesRegex(SystemExit, "PR readback"):
-            module.submit(1, self.summary)
+            module.submit(1, self.summary, existing_pr=7)
 
     def test_cli_forwards_explicit_recovery_without_changing_defaults(self):
         with patch.object(module, "submit", return_value={}) as submitter:
