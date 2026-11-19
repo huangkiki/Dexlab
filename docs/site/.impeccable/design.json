@@ -266,6 +266,14 @@
       "css": ".ds-concept-field{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:12px 22px;padding:24px 0 30px;border-top:1px solid var(--rule,#dcded4);color:var(--muted,#60675a)}.ds-concept-word{font:500 14px/1.35 var(--sans,Arial,sans-serif)}.ds-concept-word-xl{color:var(--ink,#282b26);font:400 34px/1.1 var(--serif,Georgia,serif)}.ds-concept-field:hover .ds-concept-word{opacity:.65}.ds-concept-word:hover{color:var(--ink,#282b26);opacity:1;transform:scale(1.35)}@media(max-width:800px){.ds-concept-field{justify-content:flex-start;gap:10px 16px}}"
     },
     {
+      "name": "Homepage search suggestions",
+      "kind": "custom",
+      "refersTo": "navigation-link",
+      "description": "Focusing the empty global search field reveals six ruled recommended queries. They use text rows rather than chips and lead into the existing live-result view.",
+      "html": "<div class=\"ds-search-suggestions\"><p>Suggested searches</p><div><button type=\"button\"><span>six-engine incline</span><small>Experiment</small></button><button type=\"button\"><span>contact force</span><small>Concept</small></button><button type=\"button\"><span>grasp slip</span><small>Failure</small></button><button type=\"button\"><span>cloth penetration</span><small>Physics</small></button></div></div>",
+      "css": ".ds-search-suggestions{max-width:700px;font-family:var(--sans,Arial,sans-serif)}.ds-search-suggestions>p{margin:12px 0 2px;color:var(--muted,#60675a);font-size:11px;font-weight:700;letter-spacing:.08em}.ds-search-suggestions>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}.ds-search-suggestions button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;min-height:44px;padding:10px 0;border:0;border-top:1px solid var(--rule,#dcded4);background:transparent;color:var(--ink,#282b26);font:600 14px/1.55 var(--sans,Arial,sans-serif);text-align:left}.ds-search-suggestions button:hover span{color:var(--accent,#4f664c);text-decoration:underline;text-underline-offset:.2em}.ds-search-suggestions small{color:var(--muted,#60675a);font-size:11px;font-weight:500}@media(max-width:700px){.ds-search-suggestions>div{grid-template-columns:1fr}}"
+    },
+    {
       "name": "Research topic index",
       "kind": "custom",
       "refersTo": "research-topic-link",
