@@ -1,7 +1,9 @@
 """Concept atlas source and generated-page regression tests."""
 
+import re
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 
 from scripts.concept_atlas import (
@@ -63,6 +65,8 @@ class ConceptAtlasTests(unittest.TestCase):
                 self.assertTrue(item[field]["en"], (item["id"], field, "en"))
             for relation in item["relations"]:
                 self.assertIn(relation["target"], ids)
+            if item["kind"] == "synthesis":
+                date.fromisoformat(item["updated"])
 
     def test_dangling_or_self_relations_are_rejected(self):
         concepts = [
@@ -102,10 +106,13 @@ class ConceptAtlasTests(unittest.TestCase):
         )
         self.assertNotIn('class="concept-field-synthesis"', rendered)
         self.assertEqual(rendered.count('class="concept-topic-link"'), syntheses)
+        self.assertEqual(rendered.count('<time datetime="'), syntheses)
         self.assertLess(
             rendered.index('class="concept-field"'),
             rendered.index('class="concept-topics"'),
         )
+        rendered_dates = re.findall(r'<time datetime="([^"]+)">', rendered)
+        self.assertEqual(rendered_dates, sorted(rendered_dates, reverse=True))
         self.assertIn('href="failure-root-cause-atlas.html"', rendered)
         self.assertIn("当我们在讨论 Sim-to-Real Gap 时", rendered)
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)

@@ -156,31 +156,51 @@ body[data-reader-page^="concepts/"] {
 
 .concept-topics-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 28px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 36px;
 }
 
 .concept-topic-link {
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 7px;
-  min-height: 142px;
+  min-height: 118px;
   padding: 16px 0 18px;
   border-top: 1px solid var(--rule, #dcded4);
   color: var(--ink, #282b26);
+  overflow: visible;
   text-decoration: none;
 }
 
 .concept-topic-link strong {
+  display: block;
+  min-width: 0;
   font: 400 clamp(1.2rem, 1.8vw, 1.45rem)/1.35 var(--serif, Georgia, serif);
   letter-spacing: -.015em;
   text-wrap: pretty;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .concept-topic-summary {
   color: var(--muted, #60675a);
   font-size: 13px;
   line-height: 1.75;
+}
+
+.concept-topic-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.concept-topic-footer time {
+  color: var(--muted, #60675a);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
 }
 
 .concept-topic-action {
@@ -552,7 +572,7 @@ body[data-reader-page^="concepts/"] .lesson-article code {
   }
 
   .concept-topics-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
   }
 
   .concept-dialog-shell {

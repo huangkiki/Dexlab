@@ -4,6 +4,7 @@ import html
 import json
 import re
 import shutil
+from datetime import date
 from pathlib import Path
 
 
@@ -322,8 +323,15 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
         item.setdefault("kind", "concept")
         if item["kind"] not in ITEM_KINDS:
             raise ValueError(f"{item['id']} has an unknown kind")
-        if item["kind"] == "synthesis" and not item.get("href"):
-            raise ValueError(f"{item['id']} is a synthesis without a target href")
+        if item["kind"] == "synthesis":
+            if not item.get("href"):
+                raise ValueError(f"{item['id']} is a synthesis without a target href")
+            try:
+                date.fromisoformat(item.get("updated", ""))
+            except (TypeError, ValueError) as error:
+                raise ValueError(
+                    f"{item['id']} has an invalid synthesis update date"
+                ) from error
         required_fields = (
             ("name", "summary")
             if item["kind"] == "synthesis"
@@ -432,15 +440,28 @@ def render_field(atlas, language):
             f"{html.escape(label)}</span>"
         )
     topic_links = []
-    for item in grouped["synthesis"]:
+    topic_items = sorted(
+        grouped["synthesis"],
+        key=lambda item: item["updated"],
+        reverse=True,
+    )
+    for item in topic_items:
+        updated = date.fromisoformat(item["updated"])
+        updated_label = (
+            f"更新于 {updated.isoformat()}"
+            if language == "zh"
+            else f"Updated {updated.isoformat()}"
+        )
         topic_links.append(
             '<a class="concept-topic-link" '
             f'href="{html.escape(item["href"], quote=True)}">'
             f"<strong>{html.escape(item['name'][language])}</strong>"
             f'<span class="concept-topic-summary">'
             f"{html.escape(item['summary'][language])}</span>"
+            '<span class="concept-topic-footer">'
+            f'<time datetime="{item["updated"]}">{html.escape(updated_label)}</time>'
             f'<span class="concept-topic-action">'
-            f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></a>'
+            f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></span></a>'
         )
     return (
         '<div class="concept-field-band">'
