@@ -2,8 +2,6 @@
 
 **2026-11-19 addition: [Felis: a six-motor actuated spine is the mechanism; an event-triggered policy contract is the reusable lesson](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#felis-policy-contract).** The project exposes inference code and three trained policies, not a training framework. DexLab should observe the underactuated mechanism while borrowing its explicit observation, reset, release and controller boundaries.
 
-**2026-11-19 addition: [RaiSim can run the Bumi BlinkMimic2 transition loop, but a finite backend is not a successful policy](https://huangkiki.github.io/Dexlab/en/latest/raisim-bumi-mimic.html).** A six-clip local study restored Bumi actuator semantics, collected 6.43M RaiSim environment steps and completed 5,000 updates. The frozen policy started at 5/6 completed clips and fell to 0/6 after training; the transferable result is to validate the physical learner below the solver name.
-
 **2026-11-18 addition: [RaiSim: fast CPU training is not evidence of universal physical accuracy](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#raisim-physics-boundary).** RaiSim's publication footprint and hardware-transfer evidence come mainly from high-rate robot control, not from an all-task accuracy ranking. DexLab can use it as an independent solver probe without migrating every task.
 
 **2026-11-18 addition: [RoboDojo simulator-integrity audit: read back parameters, test numerical behaviour and inspect scoring before blaming sim-to-real](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-simulator-audit).** The technical blog checks parameter delivery, plausibility, solver conservation and evaluator semantics in one Isaac Sim benchmark. The transferable object is the four-gate preflight, not a global verdict that every failure is a Sim-to-Real Gap.
@@ -325,30 +323,7 @@ RaiSim should not become the primary backend for every contact, cloth, apple and
 - integration scheme, maximum iterations, per-row threshold and solver warm-start reset between episodes;
 - contact position, normal, frame, `impulse / dt`, solver loop count, stall status and finiteness.
 
-RaiSim earns promotion only if it produces a reproducible solver-sensitive difference and exposes a first failure layer absent from existing records. If only trajectories differ slightly, retain this paper map and evidence boundary without taking on a full backend. A follow-up installation and six-clip Bumi experiment are recorded below; it still does not qualify a full backend replacement.
-
-<a id="raisim-bumi-blinkmimic2"></a>
-### Bumi BlinkMimic2: a working training loop whose policy regressed
-
-> **TL;DR:** The adapter can collect real transitions, update BlinkMimic2 and save/reload checkpoints on RaiSim. That proves an executable backend boundary, not a useful replacement: the frozen policy fell from 5/6 to 0/6 completed clips after 5,000 updates.
->
-> **Example:** A Bumi policy emits 21 normalized joint targets. RaiSim advances the floating-base model for four 5 ms substeps, and the existing world model/replay trainer updates from the resulting 20 ms transition. All infrastructure remains finite, yet the closed-loop actor later misses reference orientation and end-effector height gates.
->
-> **It establishes** that RaiSim can carry the Bumi transition and update loop at 512 CPU worlds. **It does not establish** that the previous replay statistics, actor objective or retained learning rate remain valid after the physics source changes.
-
-The first adapter defect was concrete and earlier than the policy: current RaiSim treats the vendor URDF's `velocity="0"` as a true joint lock. Restoring the per-joint velocity limits moved the frozen checkpoint from 0/6 to 5/6 and changed the first failure from “joints do not move” to a real closed-loop drift.
-
-| Checkpoint | Completed | Mean body-position error |
-| --- | ---: | ---: |
-| Frozen MuJoCo policy on RaiSim | 5/6 | 0.0584 m |
-| 10,500 updates | 4/6 | 0.0376 m |
-| 11,500 updates | 2/6 | 0.0589 m |
-| 12,000 updates | 1/6 | 0.0433 m |
-| 15,000 averaged actor | 0/6 | 0.0399 m |
-
-Lower error on shorter surviving rollouts is not an improvement. The final policy first crosses a reference gate in every clip; walk survives to 92.5% progress, while fight fails at 14%. The shared supported chain is policy drift → root/end-effector relation degradation → the unchanged 0.8-rad orientation or 0.4 m end-height gate. The run cannot distinguish world-model bias, actor overfitting to imagined states, incompatible replay statistics and an excessive retained learning rate.
-
-The negative result is actionable: freeze the actor and test the world model, then freeze the world model and test the actor with a smaller clean replay, before another mixed 5,000-update run. [Protocol, failures and raw metrics](https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.md).
+RaiSim earns promotion only if it produces a reproducible solver-sensitive difference and exposes a first failure layer absent from existing records. If only trajectories differ slightly, retain this paper map and evidence boundary without taking on a full backend.
 
 <a id="benchmark-gaming-audit"></a>
 ### From scorer exploits to leaderboard gaming: what does a high score identify?
