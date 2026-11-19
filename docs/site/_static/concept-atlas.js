@@ -14,6 +14,8 @@ if (conceptDialog) {
   const byId = new Map(terms.map((term) => [term.dataset.concept, term]));
   const conceptField = document.querySelector(".concept-field");
   const conceptWords = [...document.querySelectorAll("[data-concept-wall-item]")];
+  const topicFilters = [...document.querySelectorAll("[data-topic-filter]")];
+  const topicLinks = [...document.querySelectorAll("[data-topic]")];
   const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
   const relationLabels = {
     zh: {
@@ -31,6 +33,21 @@ if (conceptDialog) {
   }[language];
   let activeFilter = "all";
   let activeTerm = null;
+
+  topicFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      const topic = button.dataset.topicFilter;
+      topicFilters.forEach((candidate) => {
+        candidate.setAttribute(
+          "aria-pressed",
+          candidate === button ? "true" : "false",
+        );
+      });
+      topicLinks.forEach((link) => {
+        link.hidden = topic !== "all" && link.dataset.topic !== topic;
+      });
+    });
+  });
 
   function parseRelations(term) {
     try {

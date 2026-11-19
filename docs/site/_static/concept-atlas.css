@@ -154,6 +154,45 @@ body[data-reader-page^="concepts/"] {
   line-height: 1.8;
 }
 
+.concept-topic-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+  margin-bottom: 8px;
+  padding-block: 6px;
+  border-block: 1px solid var(--rule, #dcded4);
+}
+
+.concept-topic-filters button {
+  min-height: 38px;
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  color: var(--muted, #60675a);
+  background: transparent;
+  font: 600 12px/1.5 var(--sans, Arial, sans-serif);
+  cursor: pointer;
+}
+
+.concept-topic-filters button small {
+  margin-left: 5px;
+  color: inherit;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.concept-topic-filters button:hover,
+.concept-topic-filters button:focus-visible,
+.concept-topic-filters button[aria-pressed="true"] {
+  border-bottom-color: var(--accent, #4f664c);
+  color: var(--accent, #4f664c);
+}
+
+.concept-topic-link[hidden] {
+  display: none;
+}
+
 .concept-topics-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -194,6 +233,20 @@ body[data-reader-page^="concepts/"] {
   align-items: baseline;
   justify-content: space-between;
   gap: 8px 16px;
+}
+
+.concept-topic-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.concept-topic-label {
+  color: var(--accent, #4f664c);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
 }
 
 .concept-topic-footer time {

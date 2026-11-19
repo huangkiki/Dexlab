@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS_PATH = ROOT / "docs/concept-atlas.json"
 TAXONOMY_PATH = ROOT / "docs/solver-taxonomy.json"
+TOPIC_TAXONOMY_PATH = ROOT / "docs/topic-taxonomy.json"
 RELATION_TYPES = {"depends_on", "related", "contrasts_with", "part_of"}
 RELATION_LABELS = {
     "depends_on": ("依赖", "Depends on"),
@@ -308,9 +309,33 @@ def _load_solver_concepts(taxonomy):
     return concepts, token_count
 
 
-def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
+def _load_topic_taxonomy(path):
+    data = json.loads(Path(path).read_text())
+    if data.get("schema_version") != 1:
+        raise ValueError("Unsupported topic taxonomy schema")
+    topics = data.get("topics", [])
+    ids = [topic.get("id") for topic in topics]
+    if not topics or len(ids) != len(set(ids)):
+        raise ValueError("Topic taxonomy must contain unique topics")
+    for topic in topics:
+        if not topic.get("id"):
+            raise ValueError("Topic taxonomy contains an empty identifier")
+        for field in ("name", "description"):
+            value = topic.get(field)
+            if not isinstance(value, dict) or not value.get("zh") or not value.get("en"):
+                raise ValueError(f"{topic['id']} lacks bilingual {field}")
+    return topics
+
+
+def load_atlas(
+    path=ATLAS_PATH,
+    taxonomy_path=TAXONOMY_PATH,
+    topic_taxonomy_path=TOPIC_TAXONOMY_PATH,
+):
     atlas = json.loads(Path(path).read_text())
     taxonomy = json.loads(Path(taxonomy_path).read_text())
+    topics = _load_topic_taxonomy(topic_taxonomy_path)
+    topic_ids = {topic["id"] for topic in topics}
     if atlas.get("schema_version") != 1:
         raise ValueError("Unsupported concept-atlas schema")
     concepts = list(atlas["concepts"])
@@ -332,6 +357,8 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
                 raise ValueError(
                     f"{item['id']} has an invalid synthesis update date"
                 ) from error
+            if item.get("topic") not in topic_ids:
+                raise ValueError(f"{item['id']} has an unknown research topic")
         required_fields = (
             ("name", "summary")
             if item["kind"] == "synthesis"
@@ -374,6 +401,7 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
     return {
         "schema_version": 1,
         "groups": atlas["groups"],
+        "topics": topics,
         "sources": atlas["sources"],
         "concepts": concepts,
         "solver_concepts": len(solver_concepts),
@@ -440,6 +468,10 @@ def render_field(atlas, language):
             f"{html.escape(label)}</span>"
         )
     topic_links = []
+    topics_by_id = {topic["id"]: topic for topic in atlas["topics"]}
+    topic_counts = {topic["id"]: 0 for topic in atlas["topics"]}
+    for item in grouped["synthesis"]:
+        topic_counts[item["topic"]] += 1
     topic_items = sorted(
         grouped["synthesis"],
         key=lambda item: (
@@ -455,17 +487,33 @@ def render_field(atlas, language):
             if language == "zh"
             else f"Updated {updated.isoformat()}"
         )
+        topic = topics_by_id[item["topic"]]
         topic_links.append(
             '<a class="concept-topic-link" '
-            f'href="{html.escape(item["href"], quote=True)}">'
+            f'href="{html.escape(item["href"], quote=True)}" '
+            f'data-topic="{item["topic"]}">'
             f"<strong>{html.escape(item['name'][language])}</strong>"
             f'<span class="concept-topic-summary">'
             f"{html.escape(item['summary'][language])}</span>"
             '<span class="concept-topic-footer">'
-            f'<time datetime="{item["updated"]}">{html.escape(updated_label)}</time>'
+            '<span class="concept-topic-meta">'
+            f'<span class="concept-topic-label">{html.escape(topic["name"][language])}</span>'
+            f'<time datetime="{item["updated"]}">{html.escape(updated_label)}</time></span>'
             f'<span class="concept-topic-action">'
             f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></span></a>'
         )
+    topic_filters = [
+        '<button type="button" data-topic-filter="all" aria-pressed="true">'
+        + ("全部" if language == "zh" else "All")
+        + "</button>"
+    ]
+    topic_filters.extend(
+        f'<button type="button" data-topic-filter="{topic["id"]}" aria-pressed="false">'
+        f'{html.escape(topic["name"][language])}'
+        f'<small>{topic_counts[topic["id"]]}</small></button>'
+        for topic in atlas["topics"]
+        if topic_counts[topic["id"]]
+    )
     return (
         '<div class="concept-field-band">'
         '<div class="concept-field" id="concept-field" role="navigation" '
@@ -478,6 +526,7 @@ def render_field(atlas, language):
         f'<h2 id="concept-topics-title">{"专题文章" if language == "zh" else "Research topics"}</h2>'
         f'<p>{"从实验、求解器、数据与验证边界进入可独立阅读的研究路径。" if language == "zh" else "Enter independently readable research paths through experiments, solvers, data and validation boundaries."}</p>'
         '</header>'
+        f'<nav class="concept-topic-filters" aria-label="{"按专题筛选文章" if language == "zh" else "Filter articles by research topic"}">{"".join(topic_filters)}</nav>'
         f'<div class="concept-topics-grid">{"".join(topic_links)}</div>'
         "</section></div>"
     )

@@ -54,6 +54,7 @@ class ConceptAtlasTests(unittest.TestCase):
 
     def test_all_entries_are_bilingual_and_related_targets_exist(self):
         ids = {item["id"] for item in self.atlas["concepts"]}
+        topic_ids = {topic["id"] for topic in self.atlas["topics"]}
         for item in self.atlas["concepts"]:
             fields = (
                 ("name", "summary")
@@ -67,6 +68,7 @@ class ConceptAtlasTests(unittest.TestCase):
                 self.assertIn(relation["target"], ids)
             if item["kind"] == "synthesis":
                 date.fromisoformat(item["updated"])
+                self.assertIn(item["topic"], topic_ids)
 
     def test_dangling_or_self_relations_are_rejected(self):
         concepts = [
@@ -106,6 +108,8 @@ class ConceptAtlasTests(unittest.TestCase):
         )
         self.assertNotIn('class="concept-field-synthesis"', rendered)
         self.assertEqual(rendered.count('class="concept-topic-link"'), syntheses)
+        self.assertEqual(rendered.count("data-topic-filter="), len(self.atlas["topics"]) + 1)
+        self.assertEqual(rendered.count('class="concept-topic-label"'), syntheses)
         self.assertEqual(rendered.count('<time datetime="'), syntheses)
         self.assertLess(
             rendered.index('class="concept-field"'),
@@ -117,6 +121,7 @@ class ConceptAtlasTests(unittest.TestCase):
             rendered.index("NeuralActuator：执行器误差单独建模"),
             rendered.index("灵巧操作仿真：六层问题"),
         )
+        self.assertIn('data-topic="sim2real"', rendered)
         self.assertIn('href="failure-root-cause-atlas.html"', rendered)
         self.assertIn("当我们在讨论 Sim-to-Real Gap 时", rendered)
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
