@@ -16,6 +16,8 @@ from scripts.concept_atlas import (
 
 
 class ConceptAtlasTests(unittest.TestCase):
+    root = Path(__file__).resolve().parents[1]
+
     @classmethod
     def setUpClass(cls):
         cls.atlas = load_atlas()
@@ -70,6 +72,36 @@ class ConceptAtlasTests(unittest.TestCase):
                 date.fromisoformat(item["updated"])
                 self.assertIn(item["topic"], topic_ids)
 
+    def test_synthesis_titles_match_full_article_headings(self):
+        for item in self.atlas["concepts"]:
+            if item["kind"] != "synthesis":
+                continue
+            for language in ("zh", "en"):
+                if item["href"].startswith("_static/") and language == "en":
+                    continue
+                if item["href"].startswith("_static/"):
+                    path = self.root / "docs/site" / item["href"]
+                    heading = re.search(
+                        r"<h1[^>]*>(.*?)</h1>",
+                        path.read_text(errors="ignore"),
+                        re.S,
+                    )
+                    title = re.sub(r"<[^>]+>", " ", heading.group(1))
+                else:
+                    path = (
+                        self.root
+                        / "docs/site"
+                        / language
+                        / item["href"].replace(".html", ".md")
+                    )
+                    heading = re.search(r"^# (.+)$", path.read_text(), re.M)
+                    title = heading.group(1)
+                self.assertEqual(
+                    re.sub(r"\s+", "", item["name"][language]),
+                    re.sub(r"\s+", "", title),
+                    (item["id"], language),
+                )
+
     def test_dangling_or_self_relations_are_rejected(self):
         concepts = [
             {
@@ -118,12 +150,15 @@ class ConceptAtlasTests(unittest.TestCase):
         rendered_dates = re.findall(r'<time datetime="([^"]+)">', rendered)
         self.assertEqual(rendered_dates, sorted(rendered_dates, reverse=True))
         self.assertLess(
-            rendered.index("NeuralActuator：执行器误差单独建模"),
-            rendered.index("灵巧操作仿真：六层问题"),
+            rendered.index("NeuralActuator：执行器误差要单独建模，接触仍要交给物理"),
+            rendered.index("当我们在讨论灵巧操作仿真时，我们在讨论什么？"),
         )
         self.assertIn('data-topic="sim2real"', rendered)
         self.assertIn('href="failure-root-cause-atlas.html"', rendered)
-        self.assertIn("当我们在讨论 Sim-to-Real Gap 时", rendered)
+        self.assertIn(
+            "当我们在讨论仿真 Sim-to-Real Gap 问题时，我们在讨论什么？",
+            rendered,
+        )
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
 
     def test_generated_pages_keep_the_source_of_truth_and_fix_local_links(self):
