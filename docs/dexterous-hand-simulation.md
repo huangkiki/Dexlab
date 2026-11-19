@@ -1,5 +1,7 @@
 # What are we discussing when we discuss dexterous-hand simulation?
 
+**2026-11-19 addition: [Felis: a six-motor actuated spine is the mechanism; an event-triggered policy contract is the reusable lesson](https://huangkiki.github.io/Dexlab/en/latest/dexterous-hand-simulation.html#felis-policy-contract).** The project exposes inference code and three trained policies, not a training framework. DexLab should observe the underactuated mechanism while borrowing its explicit observation, reset, release and controller boundaries.
+
 **2026-11-19 addition: [RaiSim can run the Bumi BlinkMimic2 transition loop, but a finite backend is not a successful policy](https://huangkiki.github.io/Dexlab/en/latest/raisim-bumi-mimic.html).** A six-clip local study restored Bumi actuator semantics, collected 6.43M RaiSim environment steps and completed 5,000 updates. The frozen policy started at 5/6 completed clips and fell to 0/6 after training; the transferable result is to validate the physical learner below the solver name.
 
 **2026-11-18 addition: [RaiSim: fast CPU training is not evidence of universal physical accuracy](https://huangkiki.github.io/Dexlab/en/latest/_static/research/dexterous-simulation.html#raisim-physics-boundary).** RaiSim's publication footprint and hardware-transfer evidence come mainly from high-rate robot control, not from an all-task accuracy ranking. DexLab can use it as an independent solver probe without migrating every task.
@@ -611,6 +613,21 @@ The authors report that 1.5% of planted-foot samples in their LAFAN1 retargets l
 
 Checked on 2026-11-17 against the article, equations, tables, downloadable model archive and the official MuJoCo 4.0.1 release. All five MJCF files declare `discrete` and provide serial, tendon or rod-body variants with actuators at either the ankle or motors. The archive SHA-256 is `32eb7206e4996b7d76956590544039377fe3ec67e9387a7a2df2f7334f3529d5`. The local environment has MuJoCo 3.12, below the models' 3.16 requirement. No hardware limit measurement, 256-rollout policy test or integrator sweep was rerun; all performance and success figures remain author-reported. DexLab's cited timestep counterexamples are separate contact tasks, not a G1 replication.
 
+(felis-policy-contract)=
+## Event-triggered policies are more than a checkpoint: Felis's actuated-spine contract
+
+**2026-11-19 distillation: [full Felis discussion](https://github.com/huangkiki/Dexlab/discussions/416).** [Felis](https://frank-zy-dou.github.io/blog/felis/) is a small cat-inspired quadruped with a two-axis active spine: two motors drive waist yaw and pitch, while each leg has one hip motor, for six motors total. The project page reports that its simulated robot turns from an upside-down release to a landing pose in about 0.66 s and uses the same mechanism for walking and jumping. The mechanism is interesting, but the more immediately transferable object is the policy contract around it.
+
+Use the belly-up release as the concrete case. At a stated 2.5–3.5 m release height, the policy reads attitude, angular velocity, six joint positions and velocities, time and drop height every 20 ms, then outputs six joint-position targets for per-axis PD loops. The action history and gait clock reset at release. Running the policy while the robot is still held, or starting it 100 ms late, changes the physical episode even if the network and physics are otherwise identical.
+
+The motion itself is not passive compliance. The active two-axis waist changes body shape; in the falling frame, a sequence of internal bends and turns can change attitude without contact, a tail or a reaction wheel. The page's reading list also records earlier falling-cat and active-spine robots, so the defensible contribution is a compact system integration rather than the first discovery of mid-air righting.
+
+The public evidence supports a real robot build, a documented sim-to-policy interface and animated simulated demonstrations. It does not establish hardware success rates: release conditions, repeats, failure denominators, latency, torque tracking, energy and sim-to-real error are not published. The checked repository contains inference code, three small actor networks and parity fixtures, but explicitly excludes training code, simulation assets and 3D models; no visible license was found in the checked tree. Parity checks exported actions against recorded rollouts, not physical task success.
+
+**DexLab decision: watch.** Do not add an active-spine locomotion task before a concrete manipulation failure shows that proximal body or wrist motion can replace distal finger motion and that changing the mechanism distinguishes explanations. Do borrow the event-triggered contract when an existing policy depends on release, contact onset, release-to-loose or reset: log event time, observation time, model output, applied target and controller mode separately. A reset should also clear action history and timing state rather than only overwrite an initial pose.
+
+This was checked on 2026-11-19 against the rendered project page and repository commit `605e9f6d07d8e4ce166ddd1988578a345dec665d`. PyTorch was unavailable in the local environment, so the parity and policy examples were not run. No DexLab task, training run, physics sweep or hardware experiment was added.
+
 
 ## Sources and maintenance scope
 
@@ -627,3 +644,5 @@ On 2026-11-16, the CaP-X and ASPIRE feedback and skill-admission gates were adde
 On 2026-11-17, the body-model boundaries for closed-chain ankle transmission were added. The section separates hardware stops, transmission state, controller mapping, reset and integration; it does not claim that DexLab has migrated closed-chain assets or reproduced the authors' experiments. Full reasoning is in [Discussion #372](https://github.com/huangkiki/Dexlab/discussions/372).
 
 On 2026-11-18, we added the RoboDojo parameter-delivery, plausibility, solver-conservation and evaluator-control audit. External run results come from the author's blog; DexLab performed only a partial static source check. This is not a DexLab reproduction, physics rerun or hardware validation. Full discussion: [Discussion #388](https://github.com/huangkiki/Dexlab/discussions/388).
+
+On 2026-11-19, the Felis policy-contract boundary was added after checking the rendered project page and the fixed inference repository. The underactuated active-spine mechanism remains a watch item; the reusable event/reset boundary belongs to future policy evaluation. No training, physics or hardware result is claimed. Full discussion: [Discussion #416](https://github.com/huangkiki/Dexlab/discussions/416).
