@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "topics": [
+    {
+      "id": "sim2real",
+      "name": {
+        "zh": "Sim-to-Real",
+        "en": "Sim-to-Real"
+      },
+      "description": {
+        "zh": "执行器、动力学、参数送达、真机边界和现实差距。",
+        "en": "Actuation, dynamics, parameter delivery, hardware boundaries and the reality gap."
+      }
+    },
+    {
+      "id": "physics-contact",
+      "name": {
+        "zh": "物理与接触",
+        "en": "Physics & Contact"
+      },
+      "description": {
+        "zh": "接触、摩擦、材料、碰撞和物体响应。",
+        "en": "Contact, friction, materials, collision and object response."
+      }
+    },
+    {
+      "id": "solvers-runtime",
+      "name": {
+        "zh": "求解器与运行路径",
+        "en": "Solvers & Runtime"
+      },
+      "description": {
+        "zh": "引擎、solver、时间步、耦合、精度和执行路径。",
+        "en": "Engines, solvers, timesteps, coupling, precision and execution paths."
+      }
+    },
+    {
+      "id": "skills-evaluation",
+      "name": {
+        "zh": "技能与评测",
+        "en": "Skills & Evaluation"
+      },
+      "description": {
+        "zh": "策略、技能程序、视觉信号、任务成功和评测语义。",
+        "en": "Policies, skill programs, visual signals, task success and evaluation semantics."
+      }
+    }
+  ]
+}
