@@ -8,14 +8,14 @@ Findings <experience>
 Coverage <coverage>
 Visual comparisons <visual-comparisons>
 Diagnosis <diagnosis>
-Failure root-cause atlas <failure-root-cause-atlas>
+Sim-to-Real Gap <failure-root-cause-atlas>
 Solver failure audit <solver-failure-audit>
 Contact prediction diagnostics <contact-response>
 Benchmark <benchmark>
 Ledger <research-ledger>
 ```
 
-The [failure root-cause atlas](failure-root-cause-atlas.md) reviews all 15 historical demos, eight research experiences, remaining registered evidence families and later additions as symptom → first failing layer → causal chain → evidence boundary → next gate. The [solver failure audit](solver-failure-audit.md) retains backend- and configuration-specific historical evidence.
+[What do we mean when we discuss the Sim-to-Real Gap?](failure-root-cause-atlas.md) organizes all 15 historical demos, eight research experiences, remaining registered evidence families and later additions into a seven-layer evidence chain, with explicit limits for simulation-only evidence. The [solver failure audit](solver-failure-audit.md) retains backend- and configuration-specific historical evidence.
 
 ## Paired engine incline comparison
 

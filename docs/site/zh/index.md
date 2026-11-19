@@ -201,10 +201,10 @@
       <a href="solver-taxonomy.html">查看求解配置 →</a>
     </article>
     <article id="root-causes">
-      <span>03 / 失败根因</span>
-      <h3>很多“solver 失败”在迭代前已经注定。</h3>
-      <p>先查任务、几何、控制和耦合，再查离散、残差与评分；证据不足时保留为未唯一确定。</p>
-      <a href="failure-root-cause-atlas.html">查看失败根因图谱 →</a>
+      <span>03 / Sim-to-Real Gap</span>
+      <h3>仿真的差距不只在引擎里。</h3>
+      <p>从任务、参数送达和受力预算一直检查到接触、评分与真机验证；证据不足时保留为未唯一确定。</p>
+      <a href="failure-root-cause-atlas.html">阅读 Sim-to-Real Gap 全景 →</a>
     </article>
   </div>
 </section>

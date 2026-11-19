@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "groups": [
+    {"id": "synthesis", "zh": "研究总论", "en": "Research syntheses"},
     {"id": "motion", "zh": "运动与时间", "en": "Motion and time"},
     {"id": "contact", "zh": "接触与约束", "en": "Contact and constraints"},
     {"id": "dynamics", "zh": "动力学与守恒", "en": "Dynamics and conservation"},
@@ -35,8 +36,8 @@
       "url": "contact-response.html"
     },
     "dexlab_failure": {
-      "zh": "DexLab 失败根因图谱",
-      "en": "DexLab failure-root-cause atlas",
+      "zh": "DexLab：当我们在讨论 Sim-to-Real Gap 时",
+      "en": "DexLab: What do we mean by the Sim-to-Real Gap?",
       "url": "failure-root-cause-atlas.html"
     },
     "dexlab_results": {
@@ -56,6 +57,21 @@
     }
   },
   "concepts": [
+    {
+      "id": "sim-to-real-gap",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "failure-root-cause-atlas.html",
+      "name": {"zh": "当我们在讨论 Sim-to-Real Gap 时", "en": "When we discuss the Sim-to-Real Gap"},
+      "aliases": {"zh": ["仿真与现实差距", "仿真到现实差距"], "en": ["sim2real", "sim2real gap", "simulation-to-reality gap", "sim-to-real"]},
+      "summary": {"zh": "Sim-to-Real Gap 不是单一误差或引擎排名，而是一条从任务、参数、动力学和观测一直延伸到真机验证的证据链。", "en": "The Sim-to-Real Gap is not a single error or engine ranking; it is an evidence chain from task and parameters through dynamics and observation to hardware validation."},
+      "body": {"zh": "这篇研究总论把现有实验重新组织为七层判断，并明确没有真机数据时能够证明什么、不能证明什么。", "en": "This research synthesis reorganizes existing experiments into seven layers and states what can and cannot be established without hardware data."},
+      "example": {"zh": "一个看似 solver 失败的面包滑脱，可能先由浅抓取几何造成，再由抬升加速度放大。", "en": "An apparent solver-driven bread drop may begin with shallow grasp geometry and then be amplified by lift acceleration."},
+      "confusions": {"zh": ["仿真内部通过、视觉相似和任务成功都不等于 sim-to-real 验证。"], "en": ["Simulation-internal passes, visual similarity and task success do not establish sim-to-real validation."]},
+      "relations": [{"type": "related", "target": "readback"}, {"type": "related", "target": "numerical-consistency"}, {"type": "related", "target": "task-success"}, {"type": "related", "target": "evidence-boundary"}],
+      "sources": ["dexlab_failure"]
+    },
     {
       "id": "model-state",
       "group": "motion",

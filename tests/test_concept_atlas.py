@@ -76,15 +76,28 @@ class ConceptAtlasTests(unittest.TestCase):
         rendered = render_dialog(self.atlas, "zh")
         self.assertEqual(rendered.count('class="concept-term '), len(self.atlas["concepts"]))
         self.assertIn('data-concept="penetration"', rendered)
+        self.assertIn('data-kind="synthesis"', rendered)
+        self.assertIn('href="failure-root-cause-atlas.html"', rendered)
         self.assertIn('data-concept="solver-fp64"', rendered)
         self.assertIn('data-name="FP64"', rendered)
         self.assertNotIn("<small>SuperDex</small>", rendered)
         self.assertIn("data-relations=", rendered)
-        self.assertIn(f"{len(self.atlas['concepts'])} 个词条", rendered)
+        syntheses = sum(item["kind"] == "synthesis" for item in self.atlas["concepts"])
+        self.assertIn(
+            f"{len(self.atlas['concepts']) - syntheses} 个概念 · {syntheses} 篇研究总论",
+            rendered,
+        )
 
-    def test_concept_field_words_open_their_matching_atlas_entry(self):
+    def test_concept_field_mixes_concepts_and_direct_synthesis_links(self):
         rendered = render_field(self.atlas, "zh")
-        self.assertEqual(rendered.count("data-concept-open"), len(self.atlas["concepts"]))
+        syntheses = sum(item["kind"] == "synthesis" for item in self.atlas["concepts"])
+        self.assertEqual(
+            rendered.count("data-concept-open"),
+            len(self.atlas["concepts"]) - syntheses,
+        )
+        self.assertIn('class="concept-field-synthesis"', rendered)
+        self.assertIn('href="failure-root-cause-atlas.html"', rendered)
+        self.assertIn("当我们在讨论 Sim-to-Real Gap 时", rendered)
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
 
     def test_generated_pages_keep_the_source_of_truth_and_fix_local_links(self):
@@ -96,15 +109,24 @@ class ConceptAtlasTests(unittest.TestCase):
             self.assertIn("# 穿模", page)
             self.assertIn("../failure-root-cause-atlas.md", page)
             self.assertNotIn("](failure-root-cause-atlas.html)", page)
+            evidence = (language_dir / "concepts/evidence-boundary.md").read_text()
+            self.assertIn("../failure-root-cause-atlas.md", evidence)
+            self.assertNotIn("](sim-to-real-gap.md)", evidence)
             fp64 = (language_dir / "concepts/solver-fp64.md").read_text()
             self.assertIn("# FP64", fp64)
             self.assertIn("## 登记上下文", fp64)
             self.assertIn("**SuperDex**", fp64)
             self.assertNotIn("SuperDex · 进阶", fp64)
             self.assertTrue((language_dir / "concepts/index.md").exists())
+            index = (language_dir / "concepts/index.md").read_text()
+            self.assertIn("../failure-root-cause-atlas.md", index)
+            self.assertNotIn("](failure-root-cause-atlas.html)", index)
             self.assertEqual(
                 len(list((language_dir / "concepts").glob("*.md"))),
-                len(self.atlas["concepts"]) + 1,
+                len(self.atlas["concepts"]),
+            )
+            self.assertFalse(
+                (language_dir / "concepts/sim-to-real-gap.md").exists()
             )
 
     def test_user_vocabulary_and_energy_aliases_route_to_canonical_terms(self):

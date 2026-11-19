@@ -1134,7 +1134,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <article class="deep-card"><h3>layout 011 · 无明显外碰撞的浅夹持滑脱</h3><video controls preload="metadata" poster="../robodojo-bread-slip/layout-011-preview.gif" style="width:100%;height:auto"><source src="../robodojo-bread-slip/layout-011.mp4" type="video/mp4"></video><p>接触点只比面包上缘低约 1.4 cm；step 186→188，面包相对腕部的平面内转角约 6.93°→12.45°，OBB 代理上缘余量从 14.41→2.87 mm，之后法向冲量才塌缩。释放前没有邻片或货架冲量。</p></article>
 </div>
 <p>第一优先级是加深抓取、拒绝窄夹持、增加邻片净空并做低速试提。仿真侧的可验证缺口是：0.07 kg 刚体面包没有压缩、表面粗糙度或指垫顺应性；metadata 与对象加载路径使用的摩擦字段不同，最终 finger–bread 材质 pair 和 combine mode 尚未完整读回；现有记录只有 40 ms 窗内法向冲量峰值和 25 Hz 位姿微分，不含完整切向冲量。它们会影响边缘接触突变的可信度，但当前证据尚未建立 PhysX 求解器错误、真实面包标定或跨引擎排名。</p>
-<p><a href="../../robodojo-bread-slip.html">完整中英文报告、参数建议和机器可读指标</a>；其余历史实验按同一结构整理在<a href="../../failure-root-cause-atlas.html">仿真失败根因图谱</a>。第三栏青色／橙色框是根据刚体位姿和包围盒绘制的诊断代理，不是 PhysX 原生碰撞网格导出。</p>
+<p><a href="../../robodojo-bread-slip.html">完整中英文报告、参数建议和机器可读指标</a>；其余历史实验按同一结构整理在<a href="../../failure-root-cause-atlas.html">Sim-to-Real Gap 七层证据链</a>。第三栏青色／橙色框是根据刚体位姿和包围盒绘制的诊断代理，不是 PhysX 原生碰撞网格导出。</p>
 <h3>DexLab 先学哪一步</h3>
 <p><a href="https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/roboapi-poke.zh-CN.md">已有 Poke 适配</a>具备会话与工具回执，任务侧的观测和动作映射仍需逐项接入。沿用<a href="https://github.com/huangkiki/Dexlab/blob/4867a8637b5999f4169a6dd8a36ecf6ffdede989/docs/current-work.zh-CN.md">当前评分语义审计方向</a>，先为一个合格案例记录完整链条：模型看到什么 → 请求什么 → 工具接受、拒绝或改写什么 → 实际执行什么 → 原生状态如何变化 → 独立评分器判了什么。尤其要保存请求值与实际执行值、动作块时长、到达误差和退出原因；API 成功返回不能代替物理动作成功。</p>
 <p>之后再做历史对照和小扰动诊断，并同时报告失败、超时、主动放弃、基础设施错误，以及成本记录缺失。动作块时长和推理等待应分别计时。暂不扩充大规模任务榜单，不新增通用代理框架，也不把模型生成的钢琴控制程序视作已学会通用多指策略。若相同输入和预算的对照显示快速接触控制收益，或另一仿真器及真机重复了优势，再调整这一优先级。</p>

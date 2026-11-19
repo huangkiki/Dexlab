@@ -33,7 +33,7 @@ AMP 记录器一致性失败 <amp-lift>
 
 `src/dexlab/` 保留共享任务注册、评分与记录逻辑；`scripts/` 放安装、复算、文档及研究工具。只有有实际重复或不变量的部分进入共享代码，不另建通用仿真框架。
 
-[按第一失效层查看全部历史实验的根因、未判定项与成功边界 →](failure-root-cause-atlas.md)
+[沿 Sim-to-Real Gap 七层证据链查看全部历史实验、未判定项与成功边界 →](failure-root-cause-atlas.md)
 
 ## 苹果抓梗的控制与动力学
 

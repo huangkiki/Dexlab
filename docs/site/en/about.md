@@ -16,7 +16,7 @@ DexLab is a physics-centric research platform for robot manipulation involving c
 | --- | --- |
 | Understand what dexterous-hand simulation studies | [What are we discussing when we discuss dexterous manipulation simulation?](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) (Chinese original): the full six-layer review, paper filters and repository comparison, with an [October supplement](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026). [English reading companion](dexterous-hand-simulation.md). |
 | Inspect experiments, rescore evidence or reproduce a task | [Experiments](experiments.md) → [Quickstart](quickstart.md); inspect existing evidence with the {ref}`GPU-free wiping rescore <offline-evidence>`. |
-| Understand contact failures and backend differences | [Failure root-cause atlas](failure-root-cause-atlas.md) → [Per-configuration audit](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
+| Understand the simulation-to-reality gap | [What do we mean by the Sim-to-Real Gap?](failure-root-cause-atlas.md) → [Per-configuration audit](solver-failure-audit.md) → [Solver configuration roles](solver-taxonomy.md) → [Full results](results.md). |
 | Integrate a model or understand evaluation rules | [Model-evaluation protocol](model-evaluation.md); remote execution and public leaderboards are not yet complete. |
 | Read related research | [Newton topic guide](newton-reading-guide.md) → [Complete bibliography](newton-publications.md); find other reading in [References](references.md). |
 
@@ -90,7 +90,7 @@ These animations come from DexLab simulation recordings or recorded-state replay
 
 Together, these results show why a success video is insufficient: **material models, contact response, and downstream policy transfer must be checked separately.**
 
-[Full experiments](experiments.md) · [Failure root-cause atlas](failure-root-cause-atlas.md) · [All results and failures](results.md) · [Research findings](experience.md)
+[Full experiments](experiments.md) · [Sim-to-Real Gap guide](failure-root-cause-atlas.md) · [All results and failures](results.md) · [Research findings](experience.md)
 
 (live-lab)=
 ## Play the claw machine

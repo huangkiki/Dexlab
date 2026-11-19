@@ -16,7 +16,7 @@ DexLab 是一个以物理为中心的研究平台，用于研究接触、形变�
 | --- | --- |
 | 先理解灵巧手仿真在研究什么 | [当我们在讨论灵巧操作仿真时，我们在讨论什么？](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html)：本机原版，保留六层框架、论文筛选与仓库对照；[10 月增补](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#october-2026)已按原框架归位。 |
 | 看实验、复查结果或复现任务 | [实验目录](experiments.md) → [安装复现](quickstart.md)；只核对已有证据可从{ref}`无需 GPU 的擦拭复算 <offline-evidence>`开始。 |
-| 理解接触失败与后端差异 | [失败根因图谱](failure-root-cause-atlas.md) → [逐配置复盘](solver-failure-audit.md) → [求解配置分层](solver-taxonomy.md) → [完整结果](results.md)。 |
+| 理解仿真与现实的差距 | [当我们在讨论 Sim-to-Real Gap 时](failure-root-cause-atlas.md) → [逐配置复盘](solver-failure-audit.md) → [求解配置分层](solver-taxonomy.md) → [完整结果](results.md)。 |
 | 接入模型或理解评测约定 | [模型评测协议](model-evaluation.md)；远程执行与公开榜单尚未完成。 |
 | 阅读相关论文 | [Newton 七类论文导读](newton-reading-guide.md) → [完整书目](newton-publications.md)；其他资料见[参考目录](references.md)。 |
 
@@ -90,7 +90,7 @@ DexLab 的核心工作不是给单一引擎或模型打总分，而是让下面�
 
 这些结果共同指向一个问题：**成功视频不足以证明材料模型、接触响应和下游策略都可迁移。**
 
-[完整实验目录](experiments.md) · [失败根因图谱](failure-root-cause-atlas.md) · [全部结果与失败](results.md) · [研究经验](experience.md)
+[完整实验目录](experiments.md) · [Sim-to-Real Gap 全景](failure-root-cause-atlas.md) · [全部结果与失败](results.md) · [研究经验](experience.md)
 
 (live-lab)=
 ## 来抓一只娃娃

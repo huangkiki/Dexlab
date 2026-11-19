@@ -201,10 +201,10 @@
       <a href="solver-taxonomy.html">Read the solver taxonomy →</a>
     </article>
     <article id="root-causes">
-      <span>03 / Failure causes</span>
-      <h3>Many “solver failures” are decided before iteration.</h3>
-      <p>Check task, geometry, control and coupling before discretisation, residuals and scoring. Keep unresolved mechanisms explicitly labelled.</p>
-      <a href="failure-root-cause-atlas.html">Open the failure atlas →</a>
+      <span>03 / Sim-to-Real Gap</span>
+      <h3>The simulation gap begins before the engine.</h3>
+      <p>Check task definition, parameter delivery and force budgets through contact, scoring and hardware validation. Keep unresolved mechanisms explicit.</p>
+      <a href="failure-root-cause-atlas.html">Read the Sim-to-Real Gap guide →</a>
     </article>
   </div>
 </section>

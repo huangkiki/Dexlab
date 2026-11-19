@@ -1,101 +1,48 @@
 # DexLab
 
-**A benchmark and platform for contact-rich manipulation.**
+**Contact-rich robot manipulation, beyond rigid-body simulation.**
 
-I study how agents and simulation can improve each other through experiments. Tasks expose a problem; controlled comparisons locate the first failing layer; the fix is then retested independently.
+[Research overview](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Sim-to-Real Gap](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html)
 
-## [Open the DexLab research overview →](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html)
+DexLab is my personal research project exploring how Agent Skills and simulation can improve each other.
 
-The research overview is the main entry to the project. This README mirrors its architecture, experiment records, results, solver notes and learning material.
+A grasp can fail because of the policy or because the simulator does not handle contact and friction accurately.
 
-[简体中文](README.zh-CN.md)
+DexLab starts with concrete problems like this. **Use tasks to expose problems, run controlled experiments to identify their causes, then improve the relevant part of the simulation.**
 
-## Validation boundary
-
-There are currently **no hardware experiments**. “Physical correctness” here means reproducible consistency inside a frozen simulation model: auditable inputs, analytic or engineering references, positive and negative controls, conservation checks and a full regression after each declared parameter change. It does not claim real-material calibration or sim-to-real accuracy.
-
-The [physical-validation section](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html#physical-validity) gives the test design and evidence boundary for each representative experiment.
-
-## Architecture
+The improved simulation helps the Agent learn new Skills. With those Skills, the Agent can take on harder tasks and probe the limits of the simulation.
 
 <p align="center">
-  <a href="docs/site/_static/images/dexlab-architecture.png">
-    <img src="docs/site/_static/images/dexlab-architecture.png" width="100%" alt="DexLab architecture: tasks and protocols, systems under test, action execution, environment backends, evidence and scoring">
-  </a>
+  <a href="https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html">
+    <img src="docs/evidence/wuji-contact/comparison.gif" width="100%" alt="Wuji point contact and synthetic torsional contact, synchronized replay">
+  </a><br>
+  <sub>Same grasp and controller. Point contact drifts <strong>2.734 mm</strong>; adding synthetic torsional contact reduces it to <strong>1.025 mm</strong>.</sub>
 </p>
 
-Tasks and protocols move through systems under test, action execution, environment backends, and independent evidence and scoring. Observations and failures return to improve both skills and simulation.
+## Selected experiments
 
-## Representative experiments
+- **Contact model changes the verdict:** point versus torsional contact in a two-finger sphere grasp.
+- **Cutting is checked beyond the animation:** tofu and banana records verify piece connectivity, contact impulse and independent motion.
+- **A grasp is not a fold:** cloth experiments score deformation, penetration, residual motion and release separately.
+- **Engines are compared per profile:** six-engine incline results retain failures and validity checks instead of producing a ranking.
 
-<p align="center">
-  <strong>Cutting and pushing</strong><br>
-  <a href="docs/site/en/cut-push.md">
-    <img src="docs/evidence/cutting/tofu-cut-push/surface-rtx.gif" width="49%" alt="Tofu two-cut and side-push record">
-  </a>
-  <a href="docs/site/en/cut-push.md">
-    <img src="docs/evidence/cutting/banana-cut-push/surface-rtx.gif" width="49%" alt="Banana three-cut and side-push record">
-  </a>
-  <br>
-  <sub>Latest records: tofu becomes three pieces after two cuts; banana becomes four after three.</sub>
-</p>
+[Browse all experiments →](https://huangkiki.github.io/Dexlab/en/latest/experiments.html)
 
-| Experiment | Controlled variable | Key readback | Result |
-| --- | --- | --- | --- |
-| Cutting and pushing | Tofu 0.125 ms, η=5 Pa·s; banana 0.25 ms, η=0 | Active-piece displacement; knife–material impulse | **Pass** · 11.096 / 10.209 mm |
-| Contact torque | Only point contact changed to torsional contact | Retention displacement; peak angular velocity | **2.734 → 1.025 mm** · 29.336 → 0.024992 rad/s |
-| Apple-stem grasp | Same set of ten fixed regression scenes | Lift, support, retention, penetration and release | **MuJoCo 1/10 · SuperDex 10/10** |
-| Cloth | Same frozen holdout set | Deformation, sag, penetration, residual motion and cost | **52 / 105 pass** |
-| Six-engine incline | Static, sliding and nominal zero friction; three steps | Displacement, velocity, force and numerical consistency | **Per-profile verdicts, not a composite ranking** |
+## Evidence boundary
 
-<table>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <strong>Wuji contact torque</strong><br>
-      <a href="docs/site/en/wuji-contact.md"><img src="docs/evidence/wuji-contact/comparison.gif" width="100%" alt="Wuji point and torsional contact comparison"></a>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <strong>Apple-stem grasp</strong><br>
-      <a href="docs/site/en/benchmark.md"><img src="docs/evidence/studio/apple.gif" width="100%" alt="Apple-stem grasp replay"></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <strong>Cloth manipulation</strong><br>
-      <a href="docs/site/en/cloth-comparison.md"><img src="docs/evidence/cloth-studio/grasp.gif" width="100%" alt="Cloth grasp record"></a>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <strong>Six-engine incline</strong><br>
-      <a href="docs/site/en/visual-comparisons.md"><img src="docs/evidence/studio/incline.gif" width="100%" alt="Six-engine incline comparison"></a>
-    </td>
-  </tr>
-</table>
+There are currently **no hardware experiments**. “Physical correctness” here means reproducible consistency inside a frozen simulation model: auditable inputs, analytic or engineering references, positive and negative controls, conservation checks and regression after each declared parameter change. It does not claim real-material calibration or sim-to-real accuracy.
 
-## Three conclusions
-
-| Experiment findings | Solver understanding | Failure causes |
-| --- | --- | --- |
-| Results are failure boundaries, not engine rankings. Contact model, geometry, coupling and assisted retention can change the verdict. | Separate engine, model, coupling and numerical configuration. Profiles become comparable only after versions, contact representation and budgets are frozen. | Many “solver failures” are decided before iteration. Check task, geometry, control and coupling before residuals. |
-| [Experiment catalogue](docs/site/en/experiments.md) | [Solver taxonomy](docs/solver-taxonomy.md) | [Failure atlas](docs/site/en/failure-root-cause-atlas.md) |
-
-## Continue by need
-
-- [All experiments](docs/site/en/experiments.md)
-- [Research guide](docs/site/_static/research/dexterous-simulation.html)
-- [Learn simulation](docs/site/en/learning.md)
-
-## Contact
-
-[Email](mailto:huangyue0719@outlook.com) · [GitHub](https://github.com/huangkiki)
+[Read the validation boundary →](https://huangkiki.github.io/Dexlab/en/latest/index.html#physical-validity)
 
 ## Citation
 
 ```bibtex
-@misc{huang2026dexlab,
-  author = {Kiki Huang},
-  title = {DexLab: A Benchmark and Platform for Contact-Rich Manipulation},
-  year = {2026},
-  url = {https://github.com/huangkiki/Dexlab},
-  note = {GitHub repository}
+@software{dexlab2026,
+  author  = {Kiki Huang},
+  title   = {DexLab: A Physics-Centric Research Platform for Contact-Rich Robot Manipulation},
+  year    = {2026},
+  url     = {https://github.com/huangkiki/Dexlab}
 }
 ```
+
+[Email](mailto:huangyue0719@outlook.com) · [GitHub](https://github.com/huangkiki)

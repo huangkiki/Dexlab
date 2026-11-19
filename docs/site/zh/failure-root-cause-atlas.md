@@ -1,12 +1,47 @@
-# 仿真失败根因图谱
+# 当我们在讨论仿真 Sim-to-Real Gap 问题时，我们在讨论什么？
 
-## TL;DR
+**DexLab 是 Kiki Huang 的个人研究项目。** 这篇文章把现有实验重新组织成一个问题：仿真里“看起来对”或“任务成功”，究竟能证明什么？
 
-DexLab 目前最稳定的经验不是“哪个引擎更好”，而是：**找到最早偏离预期的那一层，不要把最后一帧的现象当根因。** 面包掉落前的法向载荷归零、布料穿桌后的任务失败、缩小步长后的指标变差，都是结果；根因可能更早出现在抓取几何、执行器预算、辅助约束、碰撞覆盖、接触定律、观测刷新或证据记录。
+## 先给结论
 
-本页统一用五个问题复盘已有实验：**现象 → 第一失效层 → 因果链 → 证据证明／未证明什么 → 下一次判因门槛**。这里的“根因”只指现有证据能够定位到的最早一层；证据不足时保留 `未唯一确定`，成功或只做了准入检查的实验记为 `未观察到可归因失败`。
+Sim-to-Real Gap 通常被说成一个误差、一次失败，或者“仿真器和现实不一样”。这些说法都不够具体。
 
-凡在本页单独列出、归类或用于支撑结论的失败 case，都应达到这一解释深度，而不是只给最终报错或末帧现象。物理对应准确时，再补一个日常直觉类比，并明确类比的边界；类比用于解释已经由测量和时间线支持的机制，不能反过来充当证据。简表只压缩展示，详细卡片、链接证据或 `未唯一确定` 状态必须保留判因边界。
+更可检验的定义是：**Gap 是一条逐层失效的证据链。** 任务和本体可能不代表现实；目标参数可能没有送达引擎；单位、初态或执行器预算可能先错；几何、接触和耦合可能不支持任务；步长和停止条件可能使记录无效；观测、评分和日志可能把失败记成成功；即使这些都在冻结模型内通过，没有真机数据仍不能证明现实误差。
+
+因此 DexLab 不从“哪个引擎最好”开始，而从最早偏离预期的那一层开始。面包滑落前的法向载荷归零、布料穿桌后的任务失败、缩小步长后的指标变差，都是结果；第一失效层可能更早出现在抓取几何、执行器预算、辅助约束、碰撞覆盖、接触定律、观测刷新或证据记录。
+
+> **没有真机实验时，可以证明的是：参数确实送达、数值记录自洽、守恒与预算闭合、正负对照有效、参数变化后的回归可复现。不能证明的是：真实传感器时序、真实执行器响应、真实材料参数和 sim-to-real 迁移已经完成。**
+
+本页统一用五个问题复盘实验：**现象 → 第一失效层 → 因果链 → 证据证明／未证明什么 → 下一次判因门槛**。这里的“根因”只指现有证据能够定位到的最早一层；证据不足时保留 `未唯一确定`，成功或只做了准入检查的实验记为 `未观察到可归因失败`。
+
+## Gap 不是一件事，而是一条链
+
+| 判断层 | 要问的问题 | 若这一层先错，后面的结论会怎样 |
+| --- | --- | --- |
+| 1. 任务与本体定义 | 任务目标、机器人、物体、环境和成功条件是否代表要研究的现实问题？ | 物理引擎再稳定，也可能在回答另一个问题 |
+| 2. 参数实际送达 | 配置中的质量、惯量、摩擦、接触对、求解器和精度是否真的进入运行时？ | 文件名和 YAML 正确，不代表原生状态正确 |
+| 3. 单位、初态与时钟 | 长度、质量、角度、重力、reset、控制和物理步是否一致？ | 后续轨迹从错误起点开始 |
+| 4. 执行器与受力预算 | 指力、力矩、支撑、功和能量由谁提供，是否可能完成目标？ | “抓不住”可能只是物理上合理地失败 |
+| 5. 几何、接触、材料与离散 | 碰撞形状、法向、摩擦、接触力矩、软硬耦合和时间步是否能表达所需机制？ | 有接触不等于有承载，有穿透不等于 solver 错误 |
+| 6. 观测、评分与记录 | 策略和评分读到的是新状态吗？评分是否覆盖真实失效？日志是否扰动运行？ | 过期观测、漏检评分或记录器差异会制造假结论 |
+| 7. 真机外部验证 | 真实传感器、执行器、材料、时延和任务表现是否被独立测量？ | 仿真内部通过仍不能称为 sim-to-real 验证 |
+
+后文仍使用 `P/A/G/C/N/O/U` 七类第一失效层：`P` 对应任务和几何，`A` 对应控制、执行器和辅助，`G` 对应碰撞与几何离散，`C` 对应接触、材料和耦合，`N` 对应时间离散、停止和精度，`O` 对应观测、适配器、评分和证据，`U` 表示现有记录不足以唯一区分多个机制。分类允许“主因 + 放大器”；放大器不能替代已经证实的第一失效层。
+
+## 代表性实验：每一层都在现有博客里出现过
+
+| 研究层 | 代表实验 | 关键判断 |
+| --- | --- | --- |
+| 任务几何 | RoboDojo layout 011 | 面包先在浅夹持中转动，上缘余量从 14.41 缩到 2.87 mm，随后法向冲量才塌缩；最终掉落不是根因 |
+| 执行器与隐藏辅助 | 0.4 N 夹持、RSS 擦拭 | 低指力留下桌面支撑；RSS 的 3/3 成功依赖 latch，去掉后为 0/3 |
+| 几何与耦合 | 旧夹布、Genesis PBD 薄布 | 顶点评分可通过而三角形仍穿桌；名义摩擦改变但切向保持仍缺失 |
+| 接触力矩空间 | Wuji 点接触 | 两指始终有接触，球仍绕夹持线转动；补上抗扭方向后峰值角速度从 29.336 降到 0.024992 rad/s |
+| 参数迁移与瞬态 | 质量／尺寸迁移、接触起始 | 名义点可拟合，但 30 组联合目标 0/30；收紧停止容差不消除蠕滑 |
+| 观测与比较语义 | LIBERO、香蕉 64×、AMP | 陈旧观测、错误接触相位和记录器差异都必须在动力学归因前排除 |
+| 多引擎比较 | 六引擎斜面 | 相同任务不等于相同材料目标、接触表达和数值门禁，不生成假排名 |
+| 真机外部验证 | 硬件采集协议 | 只有协议，没有合格真机数据；真机实验数仍为 0 |
+
+这些实验共同说明：**Sim-to-Real Gap 不是最后一帧与视频的差距，而是“我们凭什么相信这条结论”的差距。**
 
 ## 七类第一失效层
 
@@ -92,7 +127,9 @@ DexLab 目前最稳定的经验不是“哪个引擎更好”，而是：**找�
 
 [逐目录、逐后端的完整旧清单](solver-failure-inventory.md)继续保留 RSS 50 个公开入口、全部证据目录和成功负对照；`docs/evidence` 根目录的 manifest、图表和版本附件归随其所属队列，不冒充独立实验。本页不把外部示例的 scoped pass 改写成 DexLab 的失败实验。
 
-## 代表性根因卡片
+## 完整失败案例卡
+
+下表卡保留每个失败或边界案例的原始数字、时间线、证据和下一门槛。代表实验表负责给出阅读路径；这些卡片负责避免把汇总结论写成无法复查的概括。
 
 ### 1. RoboDojo layout 011：为什么没有碰撞也会掉？
 
@@ -203,7 +240,20 @@ DexLab 目前最稳定的经验不是“哪个引擎更好”，而是：**找�
 
 如果没有同一材料目标、等效接触表示、统一观测和共同数值门禁，把通过数相加只会把“模型不同、记录无效和任务失败”混成一个假排名。
 
-## 以后每次失败都按这个顺序查
+## 没有真机实验，物理正确如何被证明？
+
+答案不是“仿真看起来真实”，而是把能独立检验的部分拆开：
+
+1. **实现一致：** 配置是否真正送达，记录是否对应实际运行状态。
+2. **数学自洽：** 单位、初态、力—位移、动量、角动量和能量账本是否闭合。
+3. **数值可靠：** 固定模型后改变步长、容差、精度和预算，记录敏感性而不是宣称“越细越真实”。
+4. **物理边界：** 法向支撑、摩擦锥、接触力矩、非穿透、耦合与释放是否符合当前模型假设。
+5. **评分有效：** 正例、负例、idle、无接触、零摩擦、隐藏支撑和错误 reset 是否被正确拒绝。
+6. **外部有效性：** 只有真实传感器、执行器、材料和任务测量才能评价对应的 reality gap。
+
+前五层可以通过仿真、解析参考和反例审计；第六层不能由前五层替代。当前 DexLab 已完成前五层中的多项有限检查，真机实验数仍是 **0**，因此不能报告真实材料误差、硬件时延误差或已经完成的 sim-to-real transfer。
+
+## 每次判断都按这个顺序查
 
 1. **冻结结果定义。** 任务成功、物理有效、数值有效、记录有效分别判定。
 2. **找最早变化。** 从命令、执行器、相对位姿、几何余量、接触数／冲量、外部碰撞、残差到任务结果按时间排序。
@@ -213,4 +263,29 @@ DexLab 目前最稳定的经验不是“哪个引擎更好”，而是：**找�
 6. **运行时读回。** 不用配置文件代替最终材质 pair、combine mode、solver、精度和碰撞形状。
 7. **证据不足就停在 U。** 缺切向冲量、材料实测或原生网格时，写清下一门槛，不把候选机制包装成根因。
 
-[旧版 solver 失败复盘](solver-failure-audit.md)保留逐引擎和历史证据；本图谱把它们重新组织为“第一失效层”。两者都不构成真实材料标定或通用引擎排名。
+[旧版 solver 失败复盘](solver-failure-audit.md)保留逐引擎和历史证据；本文把它们重新组织为 Sim-to-Real Gap 的逐层判断。两者都不构成真实材料标定、真机验证或通用引擎排名。
+
+## 参考文献
+
+1. <a id="ref-reality-gap"></a>Elie Aljalbout et al. [The Reality Gap in Robotics: Challenges, Solutions, and Best Practices](https://arxiv.org/abs/2510.20808). arXiv:2510.20808, 2025.
+2. <a id="ref-mujoco-paper"></a>Emanuel Todorov, Tom Erez, and Yuval Tassa. [MuJoCo: A physics engine for model-based control](https://doi.org/10.1109/IROS.2012.6386109). IROS, 2012.
+3. <a id="ref-mujoco-docs"></a>Google DeepMind. [MuJoCo documentation](https://mujoco.readthedocs.io/). Current official engine and contact documentation.
+4. <a id="ref-genesis"></a>Genesis Authors. [Genesis: A Generative and Universal Physics Engine for Robotics and Beyond](https://genesis-world.readthedocs.io/en/latest/). Official documentation and citation.
+5. <a id="ref-newton"></a>The Newton Developers. [Newton Physics documentation](https://newton-physics.github.io/newton/). Solver, contact and versioned API documentation.
+6. <a id="ref-physx"></a>NVIDIA. [PhysX SDK](https://github.com/NVIDIA-Omniverse/PhysX). Official source and release documentation.
+7. <a id="ref-drake"></a>Russ Tedrake and the Drake Development Team. [Drake: Model-Based Design and Verification for Robotics](https://drake.mit.edu/), 2019.
+8. <a id="ref-libero"></a>Bo Liu et al. [LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning](https://arxiv.org/abs/2306.03310). arXiv:2306.03310, 2023.
+9. <a id="ref-robodojo"></a>Chen et al. [RoboDojo: A Unified Sim-and-Real Benchmark for Comprehensive Evaluation of Generalist Robot Manipulation Policies](https://arxiv.org/abs/2607.04434). arXiv:2607.04434, 2026.
+10. <a id="ref-robosimstudio"></a>RoboSimStudio Authors. [RoboSimStudio: An Interactive Toolkit for Rapid Real2Sim of Robot Manipulation Tasks](https://arxiv.org/abs/2610.18835). arXiv:2610.18835, 2026.
+11. <a id="ref-superdex"></a>Meta Research. [SuperDex](https://github.com/facebookresearch/project_superdex). Official repository and versioned implementation.
+
+### 项目引用
+
+```bibtex
+@software{dexlab2026,
+  author  = {Kiki Huang},
+  title   = {DexLab: A Physics-Centric Research Platform for Contact-Rich Robot Manipulation},
+  year    = {2026},
+  url     = {https://github.com/huangkiki/Dexlab}
+}
+```

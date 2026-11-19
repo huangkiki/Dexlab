@@ -33,7 +33,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 
 `src/dexlab/` contains shared task registration, scoring and recording. `scripts/` contains setup, rescoring, documentation and research tools. Share code only for real duplication or invariants; this is not a new general simulation framework.
 
-[Inspect root causes, unresolved cases and success boundaries for every historical experiment by first failing layer →](failure-root-cause-atlas.md)
+[Inspect every historical experiment, unresolved case and success boundary through the seven Sim-to-Real Gap layers →](failure-root-cause-atlas.md)
 
 ## Apple control and dynamics
 

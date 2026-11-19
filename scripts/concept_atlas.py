@@ -21,6 +21,7 @@ LEVEL_LABELS = {
     "core": ("核心", "Core"),
     "advanced": ("进阶", "Advanced"),
 }
+ITEM_KINDS = {"concept", "synthesis"}
 ROLE_TO_CONCEPTS = {
     "constraint": ("equality-constraint", "contact"),
     "contact": ("contact",),
@@ -317,6 +318,11 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
         if item["id"] in ids:
             raise ValueError(f"Duplicate concept identifier {item['id']}")
         ids.add(item["id"])
+        item.setdefault("kind", "concept")
+        if item["kind"] not in ITEM_KINDS:
+            raise ValueError(f"{item['id']} has an unknown kind")
+        if item["kind"] == "synthesis" and not item.get("href"):
+            raise ValueError(f"{item['id']} is a synthesis without a target href")
         for field in ("name", "summary", "body", "example", "confusions"):
             value = item.get(field)
             if not isinstance(value, dict) or not value.get("zh") or not value.get("en"):
@@ -392,6 +398,18 @@ def render_field(atlas, language):
     words = []
     for _, _, item in ordered:
         label = item["name"][language]
+        if item["kind"] == "synthesis":
+            words.append(
+                '<a class="concept-field-synthesis" '
+                f'href="{html.escape(item["href"], quote=True)}" '
+                'data-concept-wall-item '
+                f'data-concept-target="{item["id"]}">'
+                f'<small>{"研究总论" if language == "zh" else "Research synthesis"}</small>'
+                f"<strong>{html.escape(label)}</strong>"
+                f'<span class="concept-field-synthesis-action">'
+                f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></a>'
+            )
+            continue
         length = len(label)
         if item["level"] == "core":
             scale = (
@@ -410,11 +428,12 @@ def render_field(atlas, language):
             )
         words.append(
             f'<span class="concept-field-size-{scale}" '
-            f'data-concept-open data-concept-target="{item["id"]}">'
+            f'data-concept-wall-item data-concept-open data-concept-target="{item["id"]}">'
             f"{html.escape(label)}</span>"
         )
     return (
-        '<div class="concept-field" aria-hidden="true">'
+        '<div class="concept-field" id="concept-field" role="navigation" '
+        f'aria-label="{"概念词与研究总论" if language == "zh" else "Concepts and research syntheses"}">'
         '<div class="concept-field-inner">'
         f'<div class="concept-field-words">{"".join(words)}</div>'
         + "</div></div>"
@@ -441,6 +460,7 @@ def render_dialog(atlas, language):
                 f"{context['engine']} {context['role_name'][language]}"
                 for context in contexts
             )
+            href = item.get("href", f"concepts/{item['id']}.html")
             search = " ".join(
                 [
                     item["name"][language],
@@ -449,13 +469,14 @@ def render_dialog(atlas, language):
                 ]
             )
             terms.append(
-                f'<a class="concept-term concept-level-{item["level"]}" '
-                f'href="concepts/{item["id"]}.html" '
+                f'<a class="concept-term concept-level-{item["level"]} concept-kind-{item["kind"]}" '
+                f'href="{html.escape(href, quote=True)}" '
                 f'data-concept="{item["id"]}" '
                 f'data-name="{html.escape(item["name"][language], quote=True)}" '
                 f'data-search="{html.escape(search.casefold(), quote=True)}" '
                 f'data-summary="{html.escape(item["summary"][language], quote=True)}" '
                 f'data-context="{html.escape(context_label, quote=True)}" '
+                f'data-kind="{item["kind"]}" '
                 f'data-relations="{_render_relation_data(item)}">'
                 f'{html.escape(item["name"][language])}</a>'
             )
@@ -466,6 +487,13 @@ def render_dialog(atlas, language):
             "</section>"
         )
     default = next(item for item in atlas["concepts"] if item["level"] == "core")
+    default_href = default.get("href", f'concepts/{default["id"]}.html')
+    if default["kind"] == "synthesis":
+        default_link_label = (
+            "阅读研究总论 →" if language == "zh" else "Read the research synthesis →"
+        )
+    else:
+        default_link_label = "打开完整词条 →" if language == "zh" else "Open full entry →"
     empty_relations = (
         "鼠标悬停或键盘聚焦一个词，查看关系与对照。"
         if language == "zh"
@@ -475,11 +503,18 @@ def render_dialog(atlas, language):
     search_label = "搜索概念、别名或 Solver token" if language == "zh" else "Search concepts, aliases or solver tokens"
     title = "概念星图" if language == "zh" else "Concept atlas"
     intro = (
-        "物理概念、数值方法和 Solver token 在一张可读的关系图里；引擎登记上下文单独保留，不写进 token 名称。"
+        "物理概念、数值方法和 Solver token 在一张可读的关系图里；跨实验研究总论单独标记，引擎登记上下文不写进 token 名称。"
         if language == "zh"
-        else "Physical concepts, numerical methods and solver tokens share one readable graph; engine registrations remain separate context rather than part of the token name."
+        else "Physical concepts, numerical methods and solver tokens share one readable graph; cross-experiment syntheses are marked separately and engine registrations remain context rather than part of the token name."
     )
-    status = f"{len(atlas['concepts'])} 个词条" if language == "zh" else f"{len(atlas['concepts'])} entries"
+    syntheses = sum(item["kind"] == "synthesis" for item in atlas["concepts"])
+    concepts = len(atlas["concepts"]) - syntheses
+    status = (
+        f"{concepts} 个概念 · {syntheses} 篇研究总论"
+        if language == "zh"
+        else f"{concepts} concepts · {syntheses} "
+        + ("synthesis" if syntheses == 1 else "syntheses")
+    )
     return (
         '<dialog class="concept-dialog" id="concept-atlas" aria-labelledby="concept-atlas-title">'
         '<div class="concept-dialog-shell">'
@@ -501,8 +536,8 @@ def render_dialog(atlas, language):
         f'<p class="concept-lens-name">{html.escape(default["name"][language])}</p>'
         f'<p class="concept-lens-summary">{html.escape(default["summary"][language])}</p>'
         f'<p class="concept-lens-relations">{empty_relations}</p>'
-        f'<a class="concept-lens-link" href="concepts/{default["id"]}.html">'
-        + ("打开完整词条 →" if language == "zh" else "Open full entry →")
+        f'<a class="concept-lens-link" href="{html.escape(default_href, quote=True)}">'
+        + default_link_label
         + "</a></aside>"
         '</div>'
         '</div></dialog>'
@@ -526,8 +561,13 @@ def _related_line(relation, target, language):
     target_item = by_id[relation["target"]]
     labels = relation_labels[relation["type"]]
     label = labels[0] if language == "zh" else labels[1]
+    href = (
+        "../" + target_item["href"].replace(".html", ".md")
+        if target_item["kind"] == "synthesis"
+        else f"{relation['target']}.md"
+    )
     return (
-        f"- **{label}** · [{target_item['name'][language]}]({relation['target']}.md)"
+        f"- **{label}** · [{target_item['name'][language]}]({href})"
     )
 
 
@@ -595,31 +635,47 @@ def _page_markdown(item, atlas, language):
 def _index_markdown(atlas, language):
     zh = language == "zh"
     grouped = _group_items(atlas)
+    syntheses = sum(item["kind"] == "synthesis" for item in atlas["concepts"])
+    concepts = len(atlas["concepts"]) - syntheses
     lines = [
         "# " + ("概念星图" if zh else "Concept atlas"),
         "",
         (
-            "从物理量、接触、动力学、数值推进、验证证据与 Solver 配置进入词条。"
+            "从物理量、接触、动力学、数值推进、验证证据与 Solver 配置进入词条；跨实验研究总论与概念分开标记。"
             if zh
-            else "Browse concepts through physics, contact, dynamics, numerical stepping, evidence and solver configurations."
+            else "Browse concepts through physics, contact, dynamics, numerical stepping, evidence and solver configurations, with cross-experiment syntheses marked separately."
         ),
         "",
         (
-            f"共 {len(atlas['concepts'])} 个词条，其中 {atlas['solver_concepts']} 个是独立 Solver／数值概念，覆盖 {atlas['solver_registrations']} 个引擎登记项。"
+            f"共 {concepts} 个概念和 {syntheses} 篇研究总论；其中 {atlas['solver_concepts']} 个是独立 Solver／数值概念，覆盖 {atlas['solver_registrations']} 个引擎登记项。"
             if zh
-            else f"{len(atlas['concepts'])} entries, including {atlas['solver_concepts']} independent solver or numerical concepts across {atlas['solver_registrations']} engine registrations."
+            else f"{concepts} concepts and {syntheses} research "
+            + ("synthesis" if syntheses == 1 else "syntheses")
+            + f", including {atlas['solver_concepts']} independent solver or numerical concepts across {atlas['solver_registrations']} engine registrations."
         ),
         "",
     ]
     for group in atlas["groups"]:
         lines += [f"## {group[language]}", ""]
         for item in grouped[group["id"]]:
+            href = (
+                "../" + item["href"].replace(".html", ".md")
+                if item["kind"] == "synthesis"
+                else f"{item['id']}.md"
+            )
+            marker = ""
+            if item["kind"] == "synthesis":
+                marker = " · 研究总论" if zh else " · Research synthesis"
             lines.append(
-                f"- [{item['name'][language]}]({item['id']}.md) — {item['summary'][language]}"
+                f"- [{item['name'][language]}]({href}) — {item['summary'][language]}{marker}"
             )
         lines.append("")
     lines += ["```{toctree}", ":hidden:", ":maxdepth: 1", ""]
-    lines.extend(f"{item['name'][language]} <{item['id']}>" for item in atlas["concepts"])
+    lines.extend(
+        f"{item['name'][language]} <{item['id']}>"
+        for item in atlas["concepts"]
+        if item["kind"] == "concept"
+    )
     lines += ["```", ""]
     return "\n".join(lines)
 
@@ -633,5 +689,7 @@ def prepare_concept_pages(language_dir):
     output.mkdir(parents=True)
     (output / "index.md").write_text(_index_markdown(atlas, language))
     for item in atlas["concepts"]:
+        if item["kind"] == "synthesis":
+            continue
         (output / f"{item['id']}.md").write_text(_page_markdown(item, atlas, language))
     return atlas

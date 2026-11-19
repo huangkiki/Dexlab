@@ -70,7 +70,42 @@ body[data-reader-page^="concepts/"] {
     transform 220ms cubic-bezier(.16, 1, .3, 1);
 }
 
-.concept-field.is-ready .concept-field-words span {
+.concept-field-synthesis {
+  display: inline-flex;
+  max-width: min(430px, 100%);
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  padding: 5px 0 7px;
+  border-block: 1px solid var(--accent, #4f664c);
+  color: var(--ink, #282b26);
+  text-decoration: none;
+  transform-origin: center;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.concept-field-synthesis small {
+  color: var(--accent, #4f664c);
+  font: 700 11px/1.35 var(--sans, Arial, sans-serif);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.concept-field-synthesis strong {
+  font: 400 clamp(24px, 2.8vw, 36px)/1.16 var(--serif, Georgia, serif);
+  white-space: normal;
+}
+
+.concept-field-synthesis-action {
+  color: var(--accent, #4f664c);
+  font: 600 11px/1.4 var(--sans, Arial, sans-serif);
+}
+
+.concept-field.is-ready .concept-field-words span,
+.concept-field.is-ready .concept-field-synthesis {
   pointer-events: auto;
   cursor: pointer;
 }
@@ -80,11 +115,13 @@ body[data-reader-page^="concepts/"] {
   filter: none;
 }
 
-.concept-field.is-concept-hover .concept-field-words span:not(.is-active) {
+.concept-field.is-concept-hover .concept-field-words span:not(.is-active),
+.concept-field.is-concept-hover .concept-field-synthesis:not(.is-active) {
   opacity: .65;
 }
 
-.concept-field-words span.is-active {
+.concept-field-words span.is-active,
+.concept-field-synthesis.is-active {
   position: relative;
   z-index: 2;
   color: var(--ink, #282b26);
@@ -93,6 +130,13 @@ body[data-reader-page^="concepts/"] {
   text-shadow:
     0 0 18px rgba(250, 250, 246, .98),
     0 0 7px rgba(250, 250, 246, .98);
+}
+
+.concept-field-synthesis:hover,
+.concept-field-synthesis:focus-visible {
+  color: var(--accent, #4f664c);
+  text-decoration: none;
+  transform: scale(1.04);
 }
 
 .concept-field-words .concept-field-size-xl {
@@ -307,6 +351,13 @@ body[data-reader-page^="concepts/"] {
   font-weight: 400;
 }
 
+.concept-kind-synthesis {
+  color: var(--accent, #4f664c);
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+
 .concept-term small {
   color: var(--muted, #60675a);
   font-size: 11px;
@@ -500,7 +551,8 @@ body[data-reader-page^="concepts/"] .lesson-article code {
   }
 
   .concept-field-inner,
-  .concept-field-words span {
+  .concept-field-words span,
+  .concept-field-synthesis {
     transition: none;
   }
 
@@ -508,11 +560,13 @@ body[data-reader-page^="concepts/"] .lesson-article code {
     transform: none;
   }
 
-  .concept-field-words span.is-active {
+  .concept-field-words span.is-active,
+  .concept-field-synthesis {
     transform: none;
   }
 
-  .concept-field .concept-field-words span {
+  .concept-field .concept-field-words span,
+  .concept-field .concept-field-synthesis {
     pointer-events: auto;
     cursor: pointer;
   }

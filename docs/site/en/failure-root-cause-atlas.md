@@ -1,12 +1,47 @@
-# Simulation Failure Root-Cause Atlas
+# What do we mean when we discuss the Sim-to-Real Gap?
 
-## TL;DR
+**DexLab is Kiki Huang's personal research project.** This article reorganizes the existing experiments around one question: what does it mean for a simulation to “look right” or complete a task?
 
-DexLab's most reliable lesson is not that one engine is best. It is: **find the earliest layer that departs from the expected behavior, instead of treating the final visible symptom as the root cause.** Vanishing normal load before a bread slice falls, task failure after cloth penetrates a table, and a metric that worsens at a smaller timestep are outcomes. Their causes may begin earlier in grasp geometry, actuator budget, auxiliary constraints, collision coverage, contact laws, observation refresh or evidence recording.
+## The short answer
 
-This page applies five questions to the existing experiments: **symptom → first failing layer → causal chain → what the evidence proves and does not prove → the next attribution gate**. “Root cause” means only the earliest layer supported by present evidence. Insufficient cases remain `not uniquely identified`; successful or admission-only experiments are marked `no attributable failure observed`.
+The Sim-to-Real Gap is usually described as an error, one failed rollout, or the observation that “simulation differs from reality.” None of those descriptions is specific enough to test.
 
-Every failure case that this page lists, classifies or uses to support a conclusion should reach this explanatory depth rather than stop at an error string or final-frame symptom. When the physics maps cleanly, add an everyday analogy and state its limits. The analogy explains a mechanism already supported by measurements and chronology; it is not evidence by itself. Summary tables may compress presentation, but detailed cards, linked evidence or an explicit `not uniquely identified` status must preserve the attribution boundary.
+A more useful definition is that **the gap is an evidence chain that can fail at multiple layers.** A task or embodiment may not represent reality; requested parameters may never reach the engine; units, initial state and actuator budgets may already be wrong; geometry, contact and coupling may not support the task; timestep and stopping conditions may invalidate the record; observation, scoring and logging may turn failure into apparent success; and even if all of these checks pass inside a frozen model, no hardware data means no measured real-world error.
+
+DexLab therefore does not begin with “which engine is best.” It begins with the earliest layer that departs from the expected behavior. Vanishing normal load before a bread slice falls, task failure after cloth penetrates a table, and a metric that worsens at a smaller timestep are outcomes. The first failing layer may be earlier in grasp geometry, actuator budget, auxiliary constraints, collision coverage, contact laws, observation refresh or evidence recording.
+
+> **Without hardware experiments, DexLab can establish parameter delivery, internally consistent records, conservation and budget closure, valid positive/negative controls, and reproducible regressions after parameter changes. It cannot establish real sensor timing, actuator response, material parameters or completed sim-to-real transfer.**
+
+This page applies five questions to every experiment: **symptom → first failing layer → causal chain → what the evidence proves and does not prove → the next attribution gate**. “Root cause” means only the earliest layer supported by present evidence. Insufficient cases remain `not uniquely identified`; successful or admission-only experiments are marked `no attributable failure observed`.
+
+## The gap is a chain, not one quantity
+
+| Check layer | Question | What goes wrong if this layer fails first |
+| --- | --- | --- |
+| 1. Task and embodiment | Do the task, robot, objects, environment and success conditions represent the real problem? | A stable engine may be answering a different question |
+| 2. Parameter delivery | Did mass, inertia, friction, contact pairs, solver and precision actually reach runtime? | Correct files and YAML do not establish correct native state |
+| 3. Units, initial state and clocks | Are length, mass, angle, gravity, reset, control and physics steps consistent? | Every later trajectory starts from the wrong state |
+| 4. Actuator and force budgets | Who supplies finger force, torque, support, work and energy? | “Cannot grasp” may be a physically reasonable failure |
+| 5. Geometry, contact, material and discretisation | Can collision shape, normal, friction, contact moment, coupling and timestep express the needed mechanism? | Contact does not imply support, and penetration does not imply solver error |
+| 6. Observation, scoring and recording | Are policy and scorer reading fresh state? Does scoring cover the real failure? Does logging perturb the run? | Stale input, missed failures or recorder drift can create a false conclusion |
+| 7. Hardware validation | Were real sensors, actuators, materials, timing and task performance measured? | Simulation-internal passes are still not sim-to-real validation |
+
+The diagnostic labels remain `P/A/G/C/N/O/U`: `P` covers task and geometry; `A` covers control, actuators and assistance; `G` covers collision and geometric discretisation; `C` covers contact, materials and coupling; `N` covers time discretisation, stopping and precision; `O` covers observation, adapters, scoring and evidence; and `U` means the present records cannot uniquely separate mechanisms. A case can have a primary cause plus an amplifier. An amplifier never replaces the first proven failing layer.
+
+## Representative experiments
+
+| Research layer | Representative evidence | Central judgment |
+| --- | --- | --- |
+| Task geometry | RoboDojo layout 011 | The bread rotates under a shallow pinch and top-edge margin falls from 14.41 to 2.87 mm before normal impulse collapses; the final drop is not the cause |
+| Actuation and hidden assistance | 0.4 N pinch and RSS wiping | Low finger force leaves table support active; RSS passes 3/3 with a latch and 0/3 without it |
+| Geometry and coupling | Historical cloth and Genesis PBD | Vertex scoring can pass while triangle interiors cross the table; nominal friction can change while tangential retention remains absent |
+| Contact-moment space | Wuji point contact | Both fingers stay in contact while the sphere rotates about the pinch line; adding torsion lowers peak angular speed from 29.336 to 0.024992 rad/s |
+| Parameter transfer and transients | Mass/size transfer and contact onset | Nominal calibration can pass while 0/30 joint transfer targets fail; tighter stopping tolerance does not remove creep |
+| Observation and comparison semantics | LIBERO, banana 64× and AMP | Stale observations, mismatched contact phases and recorder affects must be excluded before dynamics attribution |
+| Multi-engine comparison | Six-engine incline | Equal task names do not establish equal material targets, contact representations or numerical gates, so a combined ranking is false |
+| Hardware validation | Acquisition protocol | A protocol exists, but no qualified hardware dataset does; hardware experiments remain zero |
+
+Together, these experiments show that **the Sim-to-Real Gap is not the difference between a final frame and a video. It is the gap between a claim and the evidence that would make the claim trustworthy.**
 
 ## Seven first-failure layers
 
@@ -92,7 +127,9 @@ These cohorts are not separate task directories, but they are part of the histor
 
 The [complete legacy inventory](solver-failure-inventory.md) retains all 50 public RSS entries, all evidence directories and successful negative controls. Manifests, plots and version attachments at the `docs/evidence` root belong to their parent cohorts and do not become independent experiments. This atlas does not relabel scoped passes in external examples as DexLab failure experiments.
 
-## Representative root-cause cards
+## Complete failure-case cards
+
+The cards below retain the original numbers, timelines, evidence and next gates. The representative table provides a reading path; these cards keep the synthesis verifiable rather than turning it into an unsupported summary.
 
 ### 1. RoboDojo layout 011: why can it fall without a collision?
 
@@ -203,7 +240,20 @@ The incline cohort is a set of per-configuration diagnoses, not one shared-cause
 
 Without a common material target, equivalent contact representation, unified observations and shared numerical gates, adding pass counts only mixes “different model,” “invalid record” and “task failure” into a false ranking.
 
-## The required order for every future failure
+## No hardware data: how can physical correctness be checked?
+
+The answer is not “the simulation looks real.” Separate the claims that can be tested independently:
+
+1. **Implementation consistency:** Did configuration reach runtime, and do records match actual state?
+2. **Mathematical consistency:** Do units, initial state, force-displacement, momentum, angular momentum and energy close?
+3. **Numerical reliability:** With physics fixed, vary timestep, tolerance, precision and budget; report sensitivity instead of assuming finer is more real.
+4. **Physical boundary:** Do normal support, friction cone, contact moment, non-penetration, coupling and release satisfy the current model assumptions?
+5. **Scoring validity:** Are positives, negatives, idle, no-contact, zero-friction, hidden support and wrong-reset controls classified correctly?
+6. **External validity:** Only real sensor, actuator, material and task measurements can evaluate the corresponding reality gap.
+
+The first five layers can be investigated through simulation, analytical references and negative controls. The sixth cannot be replaced by the first five. DexLab has completed parts of the first five layers in bounded profiles; hardware experiments remain **0**, so it does not claim measured material error, hardware-timing error or completed sim-to-real transfer.
+
+## The required order for every future judgment
 
 1. **Freeze the verdict.** Score task success, physical validity, numerical validity and record validity separately.
 2. **Find the earliest change.** Order commands, actuator state, relative pose, geometric margin, contact count/impulse, external collision, residual and task outcome in time.
@@ -213,4 +263,29 @@ Without a common material target, equivalent contact representation, unified obs
 6. **Read back runtime state.** A config file is not the resolved material pair, combine mode, solver, precision or collision shape.
 7. **Stop at U when evidence stops.** If tangential impulse, hardware material data or native geometry is missing, state the next gate rather than promoting a candidate mechanism to a root cause.
 
-The [legacy solver failure audit](solver-failure-audit.md) retains backend-specific and historical evidence. This atlas reorganizes that evidence by first failing layer. Neither page establishes real-material calibration or a universal engine ranking.
+The [legacy solver failure audit](solver-failure-audit.md) retains backend-specific and historical evidence. This article reorganizes that evidence into the layers of a Sim-to-Real Gap. Neither page establishes real-material calibration, hardware validation or a universal engine ranking.
+
+## References
+
+1. <a id="ref-reality-gap"></a>Elie Aljalbout et al. [The Reality Gap in Robotics: Challenges, Solutions, and Best Practices](https://arxiv.org/abs/2510.20808). arXiv:2510.20808, 2025.
+2. <a id="ref-mujoco-paper"></a>Emanuel Todorov, Tom Erez, and Yuval Tassa. [MuJoCo: A physics engine for model-based control](https://doi.org/10.1109/IROS.2012.6386109). IROS, 2012.
+3. <a id="ref-mujoco-docs"></a>Google DeepMind. [MuJoCo documentation](https://mujoco.readthedocs.io/). Current official engine and contact documentation.
+4. <a id="ref-genesis"></a>Genesis Authors. [Genesis: A Generative and Universal Physics Engine for Robotics and Beyond](https://genesis-world.readthedocs.io/en/latest/). Official documentation and citation.
+5. <a id="ref-newton"></a>The Newton Developers. [Newton Physics documentation](https://newton-physics.github.io/newton/). Solver, contact and versioned API documentation.
+6. <a id="ref-physx"></a>NVIDIA. [PhysX SDK](https://github.com/NVIDIA-Omniverse/PhysX). Official source and release documentation.
+7. <a id="ref-drake"></a>Russ Tedrake and the Drake Development Team. [Drake: Model-Based Design and Verification for Robotics](https://drake.mit.edu/), 2019.
+8. <a id="ref-libero"></a>Bo Liu et al. [LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning](https://arxiv.org/abs/2306.03310). arXiv:2306.03310, 2023.
+9. <a id="ref-robodojo"></a>Chen et al. [RoboDojo: A Unified Sim-and-Real Benchmark for Comprehensive Evaluation of Generalist Robot Manipulation Policies](https://arxiv.org/abs/2607.04434). arXiv:2607.04434, 2026.
+10. <a id="ref-robosimstudio"></a>RoboSimStudio Authors. [RoboSimStudio: An Interactive Toolkit for Rapid Real2Sim of Robot Manipulation Tasks](https://arxiv.org/abs/2610.18835). arXiv:2610.18835, 2026.
+11. <a id="ref-superdex"></a>Meta Research. [SuperDex](https://github.com/facebookresearch/project_superdex). Official repository and versioned implementation.
+
+### Project citation
+
+```bibtex
+@software{dexlab2026,
+  author  = {Kiki Huang},
+  title   = {DexLab: A Physics-Centric Research Platform for Contact-Rich Robot Manipulation},
+  year    = {2026},
+  url     = {https://github.com/huangkiki/Dexlab}
+}
+```

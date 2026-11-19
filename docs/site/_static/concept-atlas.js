@@ -13,7 +13,7 @@ if (conceptDialog) {
   const defaultLens = lens.innerHTML;
   const byId = new Map(terms.map((term) => [term.dataset.concept, term]));
   const conceptField = document.querySelector(".concept-field");
-  const conceptWords = [...document.querySelectorAll(".concept-field-words span")];
+  const conceptWords = [...document.querySelectorAll("[data-concept-wall-item]")];
   const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
   const relationLabels = {
     zh: {
@@ -246,7 +246,9 @@ if (conceptDialog) {
               : "No relations are registered for this entry yet."),
         )}</p>
         <a class="concept-lens-link" href="${term.href}">${
-          language === "zh" ? "打开完整词条 →" : "Open full entry →"
+          term.dataset.kind === "synthesis"
+            ? (language === "zh" ? "阅读研究总论 →" : "Read the research synthesis →")
+            : (language === "zh" ? "打开完整词条 →" : "Open full entry →")
         }</a>`;
     }
     drawLines(term);
