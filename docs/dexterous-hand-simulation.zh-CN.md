@@ -2,8 +2,6 @@
 
 **2026-11-19 专题增补：[Felis：六电机主动脊柱是机制，事件触发的策略合同才是可迁移部分](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#felis-policy-contract)。** 该项目公开推理代码与三个训练好的策略，不是训练框架。DexLab 暂观察欠驱动机构，先借鉴其观测、reset、release 和控制器边界。
 
-**2026-11-19 专题增补：[RaiSim 能跑通 Bumi BlinkMimic2 transition 闭环，不代表策略训练成功](https://huangkiki.github.io/Dexlab/zh-cn/latest/raisim-bumi-mimic.html)。** 六段本机实验恢复了 Bumi 执行器语义，采集 643 万个 RaiSim 环境步并完成 5,000 次更新；冻结策略从 5/6 完成降到训练后的 0/6。最可迁移的结论是：solver 名称之下的物理学习器必须单独验收。
-
 **2026-11-18 专题增补：[RaiSim：CPU 快速训练不等于全局物理更准](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#raisim-physics-boundary)。** RaiSim 的论文影响力和真机迁移证据主要来自高频机器人控制，不是所有接触任务上的精度排名。DexLab 可把它作为独立求解器对照，但暂不应把所有任务迁移过去。
 
 **2026-11-18 专题增补：[RoboDojo 仿真可信度审计：先读回参数、检查数值与评分](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#robodojo-simulator-audit)。** 技术博客沿着“参数送达 → 数值可能性 → 求解守恒 → 评分语义”检查一个 Isaac Sim benchmark。最值得 DexLab 借鉴的是四道前置检查，不是把任何真机失败都改写成 Sim-to-Real Gap。
@@ -312,30 +310,7 @@ RaiSim 不是对另一个物理引擎的封装，而是自有的闭源多体仿�
 - 积分方案、最大迭代数、每约束阈值，以及 episode reset 后的 solver warm-start 清理；
 - 接触点、法向、接触坐标系、`impulse / dt`、求解轮数、stall 状态和有限性检查。
 
-只有 RaiSim 产生可复现的求解器敏感差异、并暴露现有记录看不到的首个失效层时，才把它晋升为正式对照后端。若结论只是轨迹略有不同，保留研究页中的谱系与证据边界，不增加整套任务维护成本。后续已经完成安装和六段 Bumi 实验，记录如下，但仍不构成全后端替换资格。
-
-<a id="raisim-bumi-blinkmimic2"></a>
-### Bumi BlinkMimic2：训练闭环跑通，策略却退化
-
-> **TL;DR：** 适配器能在 RaiSim 上采集真实 transition、更新 BlinkMimic2 并保存／重载 checkpoint。这证明可执行的训练后端边界，而不是有用的替代方案：冻结策略在 5,000 次更新后从 5/6 完成降到 0/6。
->
-> **例子：** Bumi 策略输出 21 个归一化关节目标；RaiSim 以四个 5 ms 子步推进浮基模型，原世界模型／replay 更新器再从 20 ms transition 学习。所有基础设施保持有限，但闭环 actor 随后越过参考姿态和末端高度门禁。
->
-> **它证明** RaiSim 能在 512 个 CPU world 上承载 Bumi transition 与更新闭环。**它不证明** 物理来源改变后，原 replay 统计、actor 目标和保留学习率仍然有效。
-
-第一个适配缺陷比策略更早且可具体定位：当前 RaiSim 把厂商 URDF 的 `velocity="0"` 当成真实关节锁死。恢复逐关节速度上限后，冻结 checkpoint 从 0/6 回到 5/6，第一失效也从“关节不动”变成真实闭环漂移。
-
-| Checkpoint | 完成数 | 平均 body 位置误差 |
-| --- | ---: | ---: |
-| 冻结 MuJoCo 策略直接在 RaiSim 运行 | 5/6 | 0.0584 m |
-| 第 10,500 次更新 | 4/6 | 0.0376 m |
-| 第 11,500 次更新 | 2/6 | 0.0589 m |
-| 第 12,000 次更新 | 1/6 | 0.0433 m |
-| 第 15,000 次 averaged actor | 0/6 | 0.0399 m |
-
-更短存活轨迹上的更低误差不是改进。最终策略在每段都越过参考门禁；walk 活到 92.5%，fight 在 14% 失败。共同链条是策略漂移 → root 与末端关系退化 → 未改变的 0.8 rad 姿态或 0.4 m 末端高度门禁。当前运行不能区分世界模型偏差、actor 对想象状态过拟合、不兼容 replay 统计和保留学习率过大。
-
-这是一条可执行的负结果：先冻结 actor 检验世界模型，再冻结世界模型并用较小、干净 replay 检验 actor，然后才考虑另一条混合 5,000 次更新。 [协议、失败与原始指标](https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.zh-CN.md)。
+只有 RaiSim 产生可复现的求解器敏感差异、并暴露现有记录看不到的首个失效层时，才把它晋升为正式对照后端。若结论只是轨迹略有不同，保留研究页中的谱系与证据边界，不增加整套任务维护成本。
 
 <a id="benchmark-gaming-audit"></a>
 ### 从“评分漏洞”到“榜单投机”：高分究竟识别了什么

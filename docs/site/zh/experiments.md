@@ -7,7 +7,6 @@
 Wuji 抓持与抗扭接触 <wuji-contact>
 海绵擦拭与辅助保持对照 <rss-wiping>
 RoboDojo 面包脱落诊断 <robodojo-bread-slip>
-RaiSim Bumi BlinkMimic2 训练后端 <raisim-bumi-mimic>
 布料引擎对比 <cloth-comparison>
 切割与推动 <cutting-experiments>
 LIBERO 原生流程 <libero-workflow>
@@ -22,7 +21,6 @@ AMP 记录器一致性失败 <amp-lift>
 |---|---|---|
 | [海绵擦拭与辅助保持](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | 来源为 RoboSimStudio `wipe_the_bar`；原版用柔顺约束辅助海绵随手运动，固定几何下另测无辅助的接触保持、滑脱和清洁率 |
 | [RoboDojo 面包脱落诊断](robodojo-bread-slip.md) | 外部运行记录与 DexLab 离线诊断 | 两个局部事件均为闭爪命令正确；一例由邻片放大，另一例先发生平面内转动和上缘余量损失，之后法向冲量才塌缩；保留 19/100 成功、79/81 失败归为策略执行的批次边界 |
-| [RaiSim Bumi BlinkMimic2 后端](raisim-bumi-mimic.md) | [demos/raisim-bumi-mimic/](https://github.com/huangkiki/Dexlab/tree/main/demos/raisim-bumi-mimic/) | 保持 BlinkMimic2 学习算法，仅把 Bumi transition 采集换到 RaiSim；六段名义动作暴露后端契约与长时闭环失败 |
 | [连续切割与刀面推动](cut-push.md) | [demos/tofu-knife-push/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-knife-push/) | 豆腐三块、香蕉四块；用记录的刀面接触力解释分离运动，合成材料 |
 | [交叉浅划](tofu-scoring.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 两条浅切、底部连通；区分弹性回弹与原生切割历史 |
 | [豆腐状软块对半切](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | 单次切割 CPU TLMPM、刀具反力闭环与撤刀后分离；独立 BladeMaster 参考实现 |
