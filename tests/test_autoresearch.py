@@ -209,6 +209,7 @@ class SubmissionTest(unittest.TestCase):
         self.summary.write_text("Concrete change and validation evidence")
         self.pulls = []
         self.publications = []
+        self.merged_tree_override = None
         self.real_run = module.run
         patcher = patch.object(module, "ROOT", self.root)
         patcher.start()
@@ -254,21 +255,66 @@ class SubmissionTest(unittest.TestCase):
             return None
         if args[:2] == ("git", "ls-remote"):
             return f"{self.git('rev-parse', 'HEAD')}\t{args[-1]}"
+        if args[:3] == ("gh", "api", f"repos/huangkiki/Dexlab/pulls"):
+            self.assertEqual(args[3:], ("--input", "-"))
+            payload = json.loads(kwargs["input"])
+            self.assertEqual(payload["base"], "main")
+            self.assertEqual(payload["head"], "autoresearch/issue-1")
+            self.assertIn("Refs #1", payload["body"])
+            self.assertIn("selected unit regression", payload["body"])
+            self.assertNotIn("14 s", payload["body"])
+            self.publications.append(args)
+            self.pulls = [dict(number=8, url="https://github.com/huangkiki/Dexlab/pull/8",
+                               state="OPEN", baseRefName="main", headRefName=payload["head"],
+                               headRefOid=self.git("rev-parse", "HEAD"), mergeCommit=None)]
+            return json.dumps({"html_url": self.pulls[0]["url"]})
         if args[:3] == ("gh", "pr", "edit"):
             self.assertEqual(args[3], "7")
             self.publications.append(args)
             return None
+        if args[:3] == ("gh", "pr", "merge"):
+            self.assertIn(args[3], {"7", "8"})
+            self.assertEqual(args[4:], ("--repo", "huangkiki/Dexlab", "--squash",
+                                        "--match-head-commit", self.git("rev-parse", "HEAD")))
+            self.publications.append(args)
+            self.pulls[0].update(
+                state="MERGED",
+                mergeCommit={"oid": self.git("rev-parse", "HEAD")},
+            )
+            return None
+        if args[:3] == ("gh", "api", "--method"):
+            self.assertEqual(args[3], "DELETE")
+            self.assertEqual(
+                args[4],
+                f"repos/huangkiki/Dexlab/git/refs/heads/{self.pulls[0]['headRefName']}",
+            )
+            self.publications.append(args)
+            return None
+        if (len(args) >= 3 and args[:2] == ("gh", "api")
+                and args[2].startswith("repos/huangkiki/Dexlab/git/commits/")):
+            return json.dumps({
+                "tree": self.merged_tree_override or self.git("rev-parse", "HEAD^{tree}")
+            })
         if args[0] == "gh":
             self.fail(f"Unexpected publication command: {args}")
         return self.real_run(*args, **kwargs)
 
-    def test_standard_submission_validates_commits_and_pushes_without_a_pr(self):
+    def test_standard_submission_validates_commits_creates_and_merges_pr(self):
         result = module.submit(1, self.summary)
         self.check_mock.assert_called_once_with(self.worktree)
-        self.assertEqual(result["commit"], self.git("rev-parse", "HEAD"))
-        self.assertEqual(result["branch"], "autoresearch/issue-1")
+        self.assertEqual(result["state"], "MERGED")
+        self.assertEqual(result["headRefOid"], self.git("rev-parse", "HEAD"))
+        self.assertEqual(result["mergeCommit"]["oid"], self.git("rev-parse", "HEAD"))
         self.assertFalse(self.git("status", "--porcelain"))
-        self.assertEqual([p[:2] for p in self.publications], [("git", "push")])
+        self.assertEqual(
+            [p[:2] for p in self.publications],
+            [
+                ("git", "push"),
+                ("gh", "api"),
+                ("gh", "pr"),
+                ("gh", "api"),
+            ],
+        )
 
     def test_explicit_recovery_updates_same_pr_after_new_reviewed_commit(self):
         self.recover()
@@ -276,19 +322,37 @@ class SubmissionTest(unittest.TestCase):
         self.git("commit", "-qam", "review correction")
         result = module.submit(1, self.summary, existing_pr=7)
         self.assertEqual(result["number"], 7)
+        self.assertEqual(result["state"], "MERGED")
         self.check_mock.assert_called_once_with(self.worktree)
-        self.assertEqual([p[:2] for p in self.publications], [("git", "push"), ("gh", "pr")])
+        self.assertEqual(
+            [p[:2] for p in self.publications],
+            [
+                ("git", "push"),
+                ("gh", "pr"),
+                ("gh", "pr"),
+                ("gh", "api"),
+            ],
+        )
 
-    def test_standard_submission_does_not_implicitly_touch_an_existing_pr(self):
+    def test_standard_submission_updates_and_merges_an_existing_pr(self):
         pull = self.recover()
         self.git("branch", "-m", "autoresearch/issue-1")
         pull["headRefName"] = "autoresearch/issue-1"
         self.source.write_text("reviewed standard-branch correction\n")
         result = module.submit(1, self.summary)
-        self.assertEqual(result["branch"], "autoresearch/issue-1")
+        self.assertEqual(result["number"], 7)
+        self.assertEqual(result["state"], "MERGED")
         self.assertFalse(self.git("status", "--porcelain"))
         self.check_mock.assert_called_once_with(self.worktree)
-        self.assertEqual([p[:2] for p in self.publications], [("git", "push")])
+        self.assertEqual(
+            [p[:2] for p in self.publications],
+            [
+                ("git", "push"),
+                ("gh", "pr"),
+                ("gh", "pr"),
+                ("gh", "api"),
+            ],
+        )
 
     def test_recovery_requires_explicit_pr(self):
         self.recover()
@@ -410,6 +474,15 @@ class SubmissionTest(unittest.TestCase):
         self.gh_json_mock.side_effect = wrong
         with self.assertRaisesRegex(SystemExit, "PR readback"):
             module.submit(1, self.summary, existing_pr=7)
+
+    def test_merged_tree_must_match_the_validated_candidate(self):
+        self.merged_tree_override = "f" * 40
+        with self.assertRaisesRegex(SystemExit, "Merged tree differs"):
+            module.submit(1, self.summary)
+        self.assertEqual(
+            [p[:2] for p in self.publications],
+            [("git", "push"), ("gh", "api"), ("gh", "pr")],
+        )
 
     def test_cli_forwards_explicit_recovery_without_changing_defaults(self):
         with patch.object(module, "submit", return_value={}) as submitter:

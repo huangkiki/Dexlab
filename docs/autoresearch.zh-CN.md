@@ -99,7 +99,7 @@ DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 python scripts/autoresearch.py check 
 
 使用具备所选测试／构建依赖的解释器；`SUPERDEX_PYTHON` 可覆盖检查解释器。脚本不安装或升级包。普通测试通过明确源码路径使用当前工作树，可复用兼容环境。`--offline` 仅省略全局原生预检，不忽略测试失败，也不免除所选测试自身依赖；必须指定文件模式，空匹配会失败。原生／完整验证保留明确 MuJoCo profile、隔离 editable 源码核验和包／原生版本预检。`run_tests.py --check-only --mujoco-profile PROFILE` 只检查运行时。
 
-`check` 和 `submit` 自动识别文字／图片、修改的测试文件及两个工作流入口。其他可执行或机器读取内容必须显式给出 `--test`；未知改动会列出文件后停止，避免猜测覆盖。重复 `--backend` 可选择 apple 双后端，`--full` 执行全量单测及两个完整 14 秒 apple 回合。必要的任务专用命令或历史记录重评分仍须执行，并写入 commit message 或交付摘要；apple 门禁不能证明布料、LIBERO、浏览器或其他任务的验收。远端和本地提交沿用同一选择、候选文件树与 base；普通 `submit` 只提交并推送已验证分支。
+`check` 和 `submit` 自动识别文字／图片、修改的测试文件及两个工作流入口。其他可执行或机器读取内容必须显式给出 `--test`；未知改动会列出文件后停止，避免猜测覆盖。重复 `--backend` 可选择 apple 双后端，`--full` 执行全量单测及两个完整 14 秒 apple 回合。必要的任务专用命令或历史记录重评分仍须执行，并写入 commit message 或交付摘要；apple 门禁不能证明布料、LIBERO、浏览器或其他任务的验收。远端和本地提交沿用同一选择、候选文件树与 base；`submit` 创建或更新关联 PR，并在读回后自动合并。
 
 | 改动 | 合格交付所需验证 |
 | --- | --- |
@@ -123,9 +123,9 @@ DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 python scripts/autoresearch.py check 
 
 [#241](https://github.com/huangkiki/Dexlab/issues/241) 说明原生 profile 应提前核对，但不能扩展为普通 Python 测试依赖 MuJoCo。[#202](https://github.com/huangkiki/Dexlab/issues/202) 暴露运行中发行版本变化的问题，应在执行前冻结，并将升级独立处理。保留 [#243](https://github.com/huangkiki/Dexlab/issues/243) 的输出尝试隔离、[#245](https://github.com/huangkiki/Dexlab/issues/245) 的环境保全和 [#184](https://github.com/huangkiki/Dexlab/issues/184) 的发布失败恢复，不重复未变化的验证。文档 CI 仍构建可部署前端，但仅在 `web/` 或文档工作流变化、以及手动触发时运行耗时前端回归。
 
-### 提交、推送与恢复现有 PR 分支
+### 提交并自动合并现有 PR 分支
 
-个人仓库中的普通 Issue 提交先验证精确候选文件树，再只提交本项文件并推送分支，默认不创建 PR。返回的分支、commit 和实际完成的检查就是交付记录。
+Issue 驱动的 autoresearch 先验证精确候选文件树，再只提交本项文件，创建或更新唯一的关联 PR，并把实际完成的检查写入 PR 正文。随后用已审查的 head SHA 做 squash 合并，读回合并 commit，核验合并树与已验证候选树一致，并删除远端工作分支。这与普通聊天开发的直接 commit + push、不建 PR 分开。
 
 确需恢复已有 PR 时，在 `.autoresearch/worktrees/issue-N` 恢复原分支，不创建第二个 PR，也不为满足标准命名重命名原分支。先审查并在本地仅提交本项修改，使恢复工作树保持干净，再在正常资源约束内显式指定关联 PR，运行按范围选择的提交门禁：
 
@@ -133,13 +133,13 @@ DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 python scripts/autoresearch.py check 
 python3 scripts/autoresearch.py submit 177 --existing-pr 180 --summary-file /path/to/review.md
 ```
 
-恢复会核验 Issue 授权、拉取与推送仓库、PR 归属、`main` base、分支与远端 head 祖先关系。多个 PR 声明同一任务、无关脏文件、外部 remote 或验证中发生身份变化时停止发布。所选门禁和前后文件树检查仍会运行，更新原 PR 后读回实际 head/base。可选的 PR 路径只用于显式恢复，或用户明确要求外部审查时。
+恢复会核验 Issue 授权、拉取与推送仓库、PR 归属、`main` base、分支与远端 head 祖先关系。多个 PR 声明同一任务、无关脏文件、外部 remote 或验证中发生身份变化时停止发布。所选门禁和前后文件树检查仍会运行，更新原 PR 后读回实际 head/base，并执行相同的精确 head 自动合并与合并树核验。
 
-远端分支读回必须与已验证的本地 commit 一致，提交才能成功。发布失败不会抹去已通过的验证，也不能把整条命令改报成功。保留失败记录，重试前先核对远端分支；仅当已审查 head/tree 和 base 仍匹配已完成检查时恢复未完成的推送。源码或组合树变化后须重新运行适用门禁。此流程不更改主机访问权限、科学阈值或定时状态。[恢复缺口与验收](https://github.com/huangkiki/Dexlab/issues/184)。
+远端 PR 与合并读回必须与已验证的本地 commit 和文件树一致，提交才能成功。发布失败不会抹去已通过的验证，也不能把整条命令改报成功。保留失败记录，重试前先核对远端分支／PR；仅当已审查 head/tree 和 base 仍匹配已完成检查时恢复未完成的发布步骤。源码或组合树变化后须重新运行适用门禁。此流程不更改主机访问权限、科学阈值或定时状态。[恢复缺口与验收](https://github.com/huangkiki/Dexlab/issues/184)。
 
 ## 合并、发布与恢复
 
-个人仓库的普通交付止于把已验证 commit 推送到当前分支。只有用户明确要求时才进行 `main` 集成或创建审查 PR。任何集成前都核对真实 diff、适用检查和分支保护。组合树变化后重新验证；完全相同的已验收树可按哈希复用对应证据。不强推 main 或绕过保护。
+Issue 驱动的 autoresearch 在适用检查和分支保护允许时，自动把审查过的 PR squash 合并到 `main`；合并被阻塞时保持 PR 开启。任何合并前都核对真实 diff 和检查。组合树变化后重新验证；完全相同的已验收树可按哈希复用对应证据。不强推 main 或绕过保护。
 
 交付后读回 commit／树、真实站点构建／部署和线上版本。只有完整自身验收和交付核验满足后才关闭 Issue，不以分支推送或部分 commit 替代。保留剩余工作和真实外部依赖。代码发版在最终验证前更新版本，使用新不可变标签、中英说明及允许分发的小型验证附件，核对公开标签、大小与哈希。每轮最多一个合格代码版本，不发空版、不移动标签、不覆盖旧附件、不隐式发布 PyPI。`apple-stem-assets-v1` 是独立资产标签，不纳入代码版本序列。请求超时先核实远端实际状态。[原合并／发版细则](autoresearch-2026-10-10.zh-CN.md)继续用于用户明确要求的集成与发布。
 

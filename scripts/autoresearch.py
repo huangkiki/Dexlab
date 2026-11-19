@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Issue queue and verified branch submission for the Codex research worker.
+"""Issue queue and verified PR delivery for the Codex research worker.
 
 This tool does not invent a policy or invoke a hidden model. The scheduled Codex
 worker reads the selected issue, implements it, and uses these commands to keep
@@ -653,7 +653,7 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None, *, exi
     if not summary:
         raise SystemExit("Provide a concrete implementation and validation summary")
     issue = authorized_issue(number)
-    pull = submission_pull(number, branch, existing_pr) if existing_pr is not None else None
+    pull = submission_pull(number, branch, existing_pr)
     validated_head = submission_checkout(worktree, branch, pull, clean=existing_pr is not None)
     validated_tree = source_tree(worktree)
     if check_remote_at:
@@ -663,11 +663,10 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None, *, exi
     if source_tree(worktree) != validated_tree:
         raise SystemExit("Source changed during verification; rerun the gate")
     issue = authorized_issue(number)  # Approval can be withdrawn during a long gate.
-    current_pull = submission_pull(number, branch, existing_pr) if existing_pr is not None else None
-    if pull is not None:
-        identity = lambda p: (p["number"], p["headRefOid"])
-        if identity(current_pull) != identity(pull):
-            raise SystemExit("PR changed during verification; inspect it before publishing")
+    current_pull = submission_pull(number, branch, existing_pr)
+    identity = lambda p: None if p is None else (p["number"], p["headRefOid"])
+    if identity(current_pull) != identity(pull):
+        raise SystemExit("PR changed during verification; inspect it before publishing")
     if submission_checkout(worktree, branch, current_pull,
                            clean=existing_pr is not None) != validated_head:
         raise SystemExit("Local commit changed during verification; rerun the gate")
@@ -705,32 +704,24 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None, *, exi
         raise SystemExit("No implementation commit to submit")
     run("git", "push", "--set-upstream", "origin", branch, cwd=worktree)
     expected = run("git", "rev-parse", "HEAD", cwd=worktree, capture=True)
-    remote = run(
-        "git", "ls-remote", "--heads", "origin", f"refs/heads/{branch}",
-        cwd=worktree, capture=True,
-    ).split()
-    if len(remote) != 2 or remote[0] != expected or remote[1] != f"refs/heads/{branch}":
-        raise SystemExit("Remote branch readback does not match the submitted commit")
-    if pull is None:
-        return {
-            "branch": branch,
-            "commit": expected,
-            "url": f"https://github.com/{REPO}/tree/{branch}",
-            "checks": validation["checks"],
-        }
-    run(
-        "gh",
-        "pr",
-        "edit",
-        str(pull["number"]),
-        "--repo",
-        REPO,
-        "--body-file",
-        "-",
-        input=body,
+    if pull is not None:
+        run(
+            "gh", "pr", "edit", str(pull["number"]), "--repo", REPO,
+            "--body-file", "-", input=body,
+        )
+        url = pull["url"]
+    else:
+        created = json.loads(run(
+            "gh", "api", f"repos/{REPO}/pulls", "--input", "-",
+            input=json.dumps({"base": "main", "head": branch,
+                              "title": issue["title"], "body": body}),
+            capture=True,
+        ))
+        url = created["html_url"]
+    result = gh_json(
+        "pr", "view", url, "--json",
+        "number,url,state,baseRefName,headRefName,headRefOid,mergeCommit",
     )
-    url = pull["url"]
-    result = gh_json("pr", "view", url, "--json", "url,state,baseRefName,headRefName,headRefOid")
     if (
         result["state"] != "OPEN"
         or result["baseRefName"] != "main"
@@ -738,6 +729,37 @@ def submit(number, summary_file, check_remote_at=None, remote_state=None, *, exi
         or result["headRefOid"] != expected
     ):
         raise SystemExit("PR readback does not match the submitted commit")
+    run(
+        "gh", "pr", "merge", str(result["number"]), "--repo", REPO,
+        "--squash", "--match-head-commit", expected,
+    )
+    result = gh_json(
+        "pr", "view", url, "--json",
+        "number,url,state,baseRefName,headRefName,headRefOid,mergeCommit",
+    )
+    merge_commit = (result.get("mergeCommit") or {}).get("oid", "")
+    if (
+        result["state"] != "MERGED"
+        or result["baseRefName"] != "main"
+        or result["headRefName"] != branch
+        or not re.fullmatch(r"[0-9a-f]{40}", merge_commit)
+    ):
+        raise SystemExit("PR merge readback does not match the submitted branch")
+    merged_tree = json.loads(run(
+        "gh", "api", f"repos/{REPO}/git/commits/{merge_commit}",
+        "--jq", "{tree: .tree.sha}", capture=True,
+    )).get("tree")
+    if merged_tree != validated_tree:
+        raise SystemExit("Merged tree differs from the validated candidate tree")
+    remote = run(
+        "git", "ls-remote", "--heads", "origin", f"refs/heads/{branch}",
+        cwd=worktree, capture=True,
+    )
+    if remote:
+        run(
+            "gh", "api", "--method", "DELETE",
+            f"repos/{REPO}/git/refs/heads/{branch}",
+        )
     return result
 
 
@@ -772,7 +794,7 @@ def main():
     submit_parser.add_argument("--check-remote", metavar="SSH_ALIAS:/CHECKOUT")
     submit_parser.add_argument("--remote-state", type=Path)
     submit_parser.add_argument("--existing-pr", type=int,
-                               help="Explicitly update this linked PR; ordinary submissions only commit and push")
+                               help="Explicitly update and merge this linked PR")
     for command_parser in (check_parser, submit_parser):
         command_parser.add_argument("--base", default="origin/main")
         command_parser.add_argument("--test", dest="tests", action="append", default=[],
