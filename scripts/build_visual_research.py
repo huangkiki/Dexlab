@@ -216,35 +216,19 @@ def replay_html(case, language):
     ]
     first = case["variants"][0]["data"]["path"]
     stem = Path(first).name.removesuffix(".json.gz")
-    bundle = read_bundle(ROOT / first)
-    video = bundle["videos"][0]
-    attrs = html.escape(json.dumps(variants, ensure_ascii=False), quote=True)
-    launch = {
-        "incline": {
-            "zh": "加载六引擎同步回放与逐帧曲线",
-            "en": "Load the six-engine synchronized replay and frame-by-frame curves",
-        },
-        "normal": {
-            "zh": "加载法向校准回放与响应曲线",
-            "en": "Load the normal-response replay and curves",
-        },
-        "pinch": {
-            "zh": "加载 0.4 N／0.8 N 夹持边界回放",
-            "en": "Load the 0.4 N / 0.8 N pinch-boundary replay",
-        },
-        "libero": {
-            "zh": "加载 LIBERO 原任务与 1 ms 对照回放",
-            "en": "Load the LIBERO native-task and 1 ms comparison replay",
-        },
-    }[case["id"]][language]
+    previews = {
+        "incline": "_static/visual/incline-sliding-0.001.gif",
+        "normal": "_static/visual/normal-calibration.gif",
+        "pinch": "_static/force-limit/comparison.gif",
+        "libero": "_static/visual/libero-demo0-baseline.gif",
+    }
     caption = (
         "静态图表与完整数据（无需 JavaScript）"
         if language == "zh"
         else "Static figures and full data (no JavaScript required)"
     )
     downloads = []
-    for variant, item in zip(variants, case["variants"]):
-        data = read_bundle(ROOT / item["data"]["path"])
+    for variant, _ in zip(variants, case["variants"]):
         curve = variant["url"].removesuffix(".json.gz") + (
             "-curves.zh.svg" if language == "zh" else "-curves.svg"
         )
@@ -252,18 +236,14 @@ def replay_html(case, language):
             f'<a href="{variant["url"]}">JSON.gz</a>',
             f'<a href="{curve}">SVG</a>',
         ]
-        links += [
-            f'<a href="_static/visual/{v["path"]}">MP4 · {html.escape(" / ".join(v["series"]))}</a>'
-            for v in data["videos"]
-        ]
         downloads.append(
             f"<li>{html.escape(variant['label'])}: " + " · ".join(links) + "</li>"
         )
     return "\n".join(
         [
             "```{raw} html",
-            f'<div class="dexlab-replay" data-language="{language}" data-launch="{html.escape(launch, quote=True)}" data-variants="{attrs}">',
-            f'<div class="visual-hero"><img loading="lazy" src="_static/visual/{video["poster"]}" alt="{html.escape(case["title"][language])}"></div>',
+            '<div class="gif-evidence">',
+            f'<div class="visual-hero"><img loading="lazy" src="{previews[case["id"]]}" alt="{html.escape(case["title"][language])}"></div>',
             f'<details class="replay-fallback"><summary>{caption}</summary><img loading="lazy" src="_static/visual/{stem}-curves{".zh" if language == "zh" else ""}.svg" alt="{caption}"><ul>{"".join(downloads)}</ul></details>',
             "</div>",
             "```",
@@ -298,8 +278,8 @@ COMPARISON_GUIDES = {
             "en": "In the same two-second window, see whether the cube holds, rotates or loses support; each pane also reports its outcome.",
         },
         "limit": {
-            "zh": "画面相似不等于物理等价；通过或失败仍由同时间轴的力、位移和速度判据决定。",
-            "en": "Similar video does not establish physical equivalence; force, displacement and velocity criteria on the shared clock decide the result.",
+            "zh": "GIF 相似不等于物理等价；通过或失败仍由同时间轴的力、位移和速度判据决定。",
+            "en": "A similar GIF does not establish physical equivalence; force, displacement and velocity criteria on the shared clock decide the result.",
         },
     },
     "normal": {
@@ -308,8 +288,8 @@ COMPARISON_GUIDES = {
             "en": "Inspect indentation during loading, then whether unloading, separation and other masses remain close to the target.",
         },
         "limit": {
-            "zh": "画面不能证明材料真实刚度；有效响应只在声明的夹具、载荷和合成目标内成立。",
-            "en": "The video does not establish real material stiffness; the response is limited to the declared fixture, loads and synthetic target.",
+            "zh": "GIF 不能证明材料真实刚度；有效响应只在声明的夹具、载荷和合成目标内成立。",
+            "en": "The GIF does not establish real material stiffness; the response is limited to the declared fixture, loads and synthetic target.",
         },
     },
     "pinch": {
@@ -328,8 +308,8 @@ COMPARISON_GUIDES = {
             "en": "First verify both timesteps complete the native task, then compare overlap, relative height and normal force under the same actions.",
         },
         "limit": {
-            "zh": "原任务成功不能替代物理筛查；画面也不能唯一解释 5/10 到 3/10 的退化。",
-            "en": "Native task success does not replace physical screening, and the video does not uniquely explain the 5/10 → 3/10 regression.",
+            "zh": "原任务成功不能替代物理筛查；GIF 也不能唯一解释 5/10 到 3/10 的退化。",
+            "en": "Native task success does not replace physical screening, and the GIF does not uniquely explain the 5/10 → 3/10 regression.",
         },
     },
 }
@@ -380,7 +360,7 @@ def replay_guide(case, language):
     return "\n".join(
         [
             '<div class="replay-guide" aria-label="'
-            + ("同步回放阅读说明" if zh else "Synchronized replay reading guide")
+            + ("GIF 阅读说明" if zh else "Recorded GIF guide")
             + '">',
             f'  <p><strong>{"画面顺序" if zh else "Pane order"}</strong> {html.escape(" / ".join(names))}</p>',
             f'  <p><strong>{"看什么" if zh else "What to watch"}</strong> {html.escape(COMPARISON_GUIDES[case["id"]]["watch"][language])}</p>',
@@ -487,9 +467,9 @@ def comparisons(index, experiences, language):
         + ("对比实验：从画面到判据" if zh else "Comparative experiments: from visible motion to criteria"),
         "",
         (
-            "每个实验按同一顺序阅读：先看结论与判据，再看同条件的同步回放，随后用结果矩阵定位差异。最后才进入协议、解释和边界。"
+            "每个实验按同一顺序阅读：先看结论与判据，再看同条件的记录 GIF，随后用结果矩阵定位差异。最后才进入协议、解释和边界。"
             if zh
-            else "Read every experiment in the same order: conclusion and criteria first, then the synchronized replay under shared conditions, then a result matrix that locates the differences. Protocols, explanation and limits follow."
+            else "Read every experiment in the same order: conclusion and criteria first, then the recorded GIF under shared conditions, then a result matrix that locates the differences. Protocols, explanation and limits follow."
         ),
         "",
         (

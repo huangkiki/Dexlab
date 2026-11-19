@@ -21,7 +21,8 @@ LEVEL_LABELS = {
     "core": ("核心", "Core"),
     "advanced": ("进阶", "Advanced"),
 }
-ITEM_KINDS = {"concept", "synthesis"}
+CONCEPT_PAGE_KINDS = {"concept", "solver"}
+ITEM_KINDS = CONCEPT_PAGE_KINDS | {"synthesis"}
 ROLE_TO_CONCEPTS = {
     "constraint": ("equality-constraint", "contact"),
     "contact": ("contact",),
@@ -323,7 +324,12 @@ def load_atlas(path=ATLAS_PATH, taxonomy_path=TAXONOMY_PATH):
             raise ValueError(f"{item['id']} has an unknown kind")
         if item["kind"] == "synthesis" and not item.get("href"):
             raise ValueError(f"{item['id']} is a synthesis without a target href")
-        for field in ("name", "summary", "body", "example", "confusions"):
+        required_fields = (
+            ("name", "summary")
+            if item["kind"] == "synthesis"
+            else ("name", "summary", "body", "example", "confusions")
+        )
+        for field in required_fields:
             value = item.get(field)
             if not isinstance(value, dict) or not value.get("zh") or not value.get("en"):
                 raise ValueError(f"{item['id']} lacks bilingual {field}")
@@ -674,7 +680,7 @@ def _index_markdown(atlas, language):
     lines.extend(
         f"{item['name'][language]} <{item['id']}>"
         for item in atlas["concepts"]
-        if item["kind"] == "concept"
+        if item["kind"] in CONCEPT_PAGE_KINDS
     )
     lines += ["```", ""]
     return "\n".join(lines)

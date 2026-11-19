@@ -7,13 +7,11 @@ This is a **DexLab diagnosis of external RoboDojo `make_toast` offline Code-as-P
 ## Case 1: edge roll-out after neighbor interaction
 
 ```{raw} html
-<video controls preload="metadata" width="100%" poster="_static/robodojo-bread-slip/layout-002-preview.gif">
-  <source src="_static/robodojo-bread-slip/layout-002.mp4" type="video/mp4">
-</video>
+<img src="_static/robodojo-bread-slip/layout-002-preview.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 ```
 
 ```{raw} html
-<p><a href="_static/robodojo-bread-slip/layout-002.mp4">Download the full layout 002 MP4</a></p>
+<p><a href="_static/robodojo-bread-slip/layout-002-preview.gif">Download layout 002 GIF</a></p>
 ```
 
 Seed 0 / layout 002 loses contact at step 982. The peak bilateral normal impulse falls from about **0.252 N·s** to **0**. A neighboring slice contributes about **0.062 N·s** near release, followed by the first shelf impact at about **0.048 N·s**. The contact lies about **4.60 cm** above the center of mass, with a **4.85 cm** lever arm. This is analogous to pinching the upper rim of a thin card and then pushing it sideways: the contact normals rotate and the slice rolls out around its upper edge.
@@ -23,13 +21,11 @@ After release, recorded peaks reach about **0.70 m/s** translation and **11.4 ra
 ## Case 2: shallow top-edge grip loss
 
 ```{raw} html
-<video controls preload="metadata" width="100%" poster="_static/robodojo-bread-slip/layout-011-preview.gif">
-  <source src="_static/robodojo-bread-slip/layout-011.mp4" type="video/mp4">
-</video>
+<img src="_static/robodojo-bread-slip/layout-011-preview.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 ```
 
 ```{raw} html
-<p><a href="_static/robodojo-bread-slip/layout-011.mp4">Download the full layout 011 MP4</a></p>
+<p><a href="_static/robodojo-bread-slip/layout-011-preview.gif">Download layout 011 GIF</a></p>
 ```
 
 Seed 0 / layout 011 loses contact at step 188. Normal impulse falls from about **0.253 N·s** to **0.0019 N·s**. No neighbor or shelf impulse is measured near release; the slice first hits the table at step 192 with about **0.111 N·s**. Contact is **4.42 cm** above the center of mass—only about 1.4 cm below the top edge of the roughly 11.8 cm-tall slice.
@@ -49,13 +45,13 @@ The supported chain is therefore: **shallow top-edge pinch → lifting amplifies
 | `s1/l049` | One slice is already placed; the second `seat` stops at `0.952 m`, **2.8 cm** high | A 10 mm lift and lateral nudge remain blocked; the next `rs-down` takes TCP from `0.975 m` to `1.258 m` over eleven steps, a **28.3 cm** rise and **47.8 cm** 3-D target error | The grasp releases and withdrawal fails; the second slice cannot be confirmed and the task stops at one slice |
 
 ```{raw} html
-<details><summary>Show the three full right-wrist videos</summary>
+<details><summary>Show the three right-wrist GIFs</summary>
 <p><code>s0/l025</code></p>
-<video controls preload="metadata" width="100%"><source src="_static/robodojo-bread-slip/v67-s0-l025-right.mp4" type="video/mp4"></video>
+<img src="_static/robodojo-bread-slip/v67-s0-l025-right.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 <p><code>s1/l026</code></p>
-<video controls preload="metadata" width="100%"><source src="_static/robodojo-bread-slip/v67-s1-l026-right.mp4" type="video/mp4"></video>
+<img src="_static/robodojo-bread-slip/v67-s1-l026-right.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 <p><code>s1/l049</code></p>
-<video controls preload="metadata" width="100%"><source src="_static/robodojo-bread-slip/v67-s1-l049-right.mp4" type="video/mp4"></video>
+<img src="_static/robodojo-bread-slip/v67-s1-l049-right.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 </details>
 ```
 
@@ -113,7 +109,7 @@ For simulation A/B tests, save the resolved finger–bread material pair, fricti
 
 ## Evidence boundary
 
-- Old drop batch: 2026-11-12; 100 distinct seed/layout cases, 19 successes and 81 failures. RGB and rigid poses are 25 Hz; diagnostics aggregate 250 Hz PhysX callbacks. Each clip spans about four seconds before and after release at 2× slow motion, with release centered at eight seconds.
-- v67 contact-escape batch: 2026-11-13; 100 distinct seed/layout cases, 65 successes and 35 failures. All three escape cases retain full right-wrist video and action-level endpoints, but no per-physics-step contact or drive trace.
+- Old drop batch: 2026-11-12; 100 distinct seed/layout cases, 19 successes and 81 failures. RGB and rigid poses are 25 Hz; diagnostics aggregate 250 Hz PhysX callbacks. Each GIF spans about four seconds before and after release at 2× slow motion, with release centered at eight seconds.
+- v67 contact-escape batch: 2026-11-13; 100 distinct seed/layout cases, 65 successes and 35 failures. All three escape cases retain right-wrist GIFs and action-level endpoints, but no per-physics-step contact or drive trace.
 - Machine-readable data: old-batch <a href="_static/robodojo-bread-slip/metrics.json">metrics.json</a> and <a href="_static/robodojo-bread-slip/layout-011-root-cause.json">layout-011-root-cause.json</a>; v67 <a href="_static/robodojo-bread-slip/contact-escape-v67.json">contact-escape-v67.json</a>.
 - No second engine, hardware bread experiment or material calibration was run, and no controlled solver/control/material A/B has yet rerun the three v67 cases. Conclusions remain scoped to each batch and recorded event.

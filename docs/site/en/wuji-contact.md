@@ -4,7 +4,7 @@
 
 ![Synchronized, real-time complete 4.4-second replay: point contact v3 left, torsional contact v4 right](../../evidence/wuji-contact/comparison.gif)
 
-The point-contact hold fails; the torsional-contact hold and commanded release pass. Both show preparation, holding and release at original speed. Crosses are **orientation textures added only during replay**, without changing collision geometry or physics. Video is 30 fps and GIF is 15 fps; angular measurements come from the 2 kHz raw record, not the animation. [Full video](../../evidence/wuji-contact/comparison.mp4) · [Raw identities and frame map](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/comparison.json).
+The point-contact hold fails; the torsional-contact hold and commanded release pass. Both show preparation, holding and release. Crosses are **orientation textures added only during replay**, without changing collision geometry or physics. The GIF runs at 15 fps; angular measurements come from the 2 kHz raw record, not the animation. [Full GIF](../../evidence/wuji-contact/comparison.gif) · [Raw identities and frame map](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/comparison.json).
 
 ## Rescore without installing a simulator
 

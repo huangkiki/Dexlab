@@ -70,8 +70,8 @@
           <small>11.096 / 10.209 mm</small>
         </header>
         <div class="evidence-media evidence-media-split">
-          <video controls muted loop playsinline preload="none" poster="_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="豆腐两刀三块后直接侧推的最新记录"><source src="_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4"></video>
-          <video controls muted loop playsinline preload="none" poster="_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="香蕉三刀四块后直接侧推的最新记录"><source src="_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4"></video>
+          <img src="_static/cutting/tofu-cut-push/surface-rtx.gif" alt="豆腐两刀三块后直接侧推的最新记录" width="100%" loading="lazy">
+          <img src="_static/cutting/banana-cut-push/surface-rtx.gif" alt="香蕉三刀四块后直接侧推的最新记录" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">切割 / 分离判据</p>
@@ -94,7 +94,7 @@
           <small>2.734 → 1.025 mm</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" poster="_static/wuji-contact/hold-comparison.png" aria-label="Wuji 点接触与抗扭接触的同时间原速比较"><source src="_static/wuji-contact/comparison.mp4" type="video/mp4"></video>
+          <img src="_static/wuji-contact/comparison.gif" alt="Wuji 点接触与抗扭接触的同时间原速比较" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">接触 / 力矩方向</p>
@@ -106,7 +106,7 @@
             <div><dt>判据结果</dt><dd><strong>2.734 → 1.025 mm；角速度 29.336 → 0.024992 rad/s</strong></dd></div>
             <div><dt>适用范围</dt><dd>双指夹球工况；不是真机材料标定或全手能力</dd></div>
           </dl>
-          <a href="wuji-contact.html">查看接触记录、视频与独立复算 →</a>
+          <a href="wuji-contact.html">查看接触记录、GIF 与独立复算 →</a>
         </div>
       </article>
 
@@ -117,7 +117,7 @@
           <small>1/10 · 10/10</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" poster="_static/studio/apple.png" aria-label="OpenArm 与 Wuji 苹果梗抓取记录"><source src="_static/studio/apple.mp4" type="video/mp4"></video>
+          <img src="_static/studio/apple.gif" alt="OpenArm 与 Wuji 苹果梗抓取记录" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">任务 / 固定扰动集</p>
@@ -140,7 +140,7 @@
           <small>52 / 105 通过</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" aria-label="布料夹持与运动记录"><source src="_static/cloth-studio/grasp.mp4" type="video/mp4"></video>
+          <img src="_static/cloth-studio/grasp.gif" alt="布料夹持与运动记录" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">柔性体 / 分阶段验收</p>
@@ -163,7 +163,7 @@
           <small>逐配置判定</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" poster="_static/studio/incline.png" aria-label="六引擎斜面同步比较记录"><source src="_static/studio/incline.mp4" type="video/mp4"></video>
+          <img src="_static/studio/incline.gif" alt="六引擎斜面同步比较记录" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Solver / 同工况响应</p>
@@ -256,7 +256,7 @@
     </li>
     <li data-reveal-item>
       <span>原生读回</span>
-      <h3>视频只解释现象，数值决定通过。</h3>
+      <h3>画面只解释现象，数值决定通过。</h3>
       <p>独立核对穿透、接触力、支撑对象、动量和角动量残差、驱动饱和与任务阶段；不能从画面相似推出物理等价。</p>
     </li>
     <li data-reveal-item>

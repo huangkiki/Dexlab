@@ -4,8 +4,8 @@
 
 ```{raw} html
 <section class="cutting-player" aria-label="豆腐对半切">
-<header><h3>豆腐对半切</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.mp4" data-poster="_static/cutting/tofu/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.mp4" data-poster="_static/cutting/tofu/particles-poster.png" aria-pressed="false">粒子</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu/surface-poster.png" aria-label="豆腐对半切"><source src="_static/cutting/tofu/surface.mp4" type="video/mp4"><a href="_static/cutting/tofu/surface.mp4">观看视频</a></video>
+<header><h3>豆腐对半切</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.gif" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.gif" aria-pressed="false">粒子</button></div></header>
+<img src="_static/cutting/tofu/surface.gif" alt="豆腐对半切" width="100%" loading="lazy">
 <p>切开、撤刀，再检验两块独立运动。</p>
 </section>
 ```

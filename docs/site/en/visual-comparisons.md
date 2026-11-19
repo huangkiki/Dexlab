@@ -1,6 +1,6 @@
 # Comparative experiments: from visible motion to criteria
 
-Read every experiment in the same order: conclusion and criteria first, then the synchronized replay under shared conditions, then a result matrix that locates the differences. Protocols, explanation and limits follow.
+Read every experiment in the same order: conclusion and criteria first, then the recorded GIF under shared conditions, then a result matrix that locates the differences. Protocols, explanation and limits follow.
 
 Replay geometry keeps physical proportions; inspect small changes in the curves. Dashed lines are the declared analytical/engineering references, not measured material truth. Historical protocols do not form a universal engine ranking.
 
@@ -17,16 +17,16 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
   </div>
 </div>
 
-<div class="replay-guide" aria-label="Synchronized replay reading guide">
+<div class="replay-guide" aria-label="Recorded GIF guide">
   <p><strong>Pane order</strong> MuJoCo / SuperDex / Genesis / Newton Physics / PhysX / Drake</p>
   <p><strong>What to watch</strong> In the same two-second window, see whether the cube holds, rotates or loses support; each pane also reports its outcome.</p>
-  <p><strong>Do not infer</strong> Similar video does not establish physical equivalence; force, displacement and velocity criteria on the shared clock decide the result.</p>
+  <p><strong>Do not infer</strong> A similar GIF does not establish physical equivalence; force, displacement and velocity criteria on the shared clock decide the result.</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="en" data-launch="Load the six-engine synchronized replay and frame-by-frame curves" data-variants="[{&quot;label&quot;: &quot;Static · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;Static · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;Static · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;Sliding · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;Sliding · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;Sliding · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;Nominal zero friction · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;Nominal zero friction · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;Nominal zero friction · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.0005.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-static-0.001.png" alt="Six-engine incline: shared conditions, different responses"></div>
-<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Static · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.svg">SVG</a> · <a href="_static/visual/incline-static-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Static · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.svg">SVG</a> · <a href="_static/visual/incline-static-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Static · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.svg">SVG</a> · <a href="_static/visual/incline-static-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Sliding · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Sliding · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Sliding · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Nominal zero friction · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Nominal zero friction · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>Nominal zero friction · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-sliding-0.001.gif" alt="Six-engine incline: shared conditions, different responses"></div>
+<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Static · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.svg">SVG</a></li><li>Static · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.svg">SVG</a></li><li>Static · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.svg">SVG</a></li><li>Sliding · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.svg">SVG</a></li><li>Sliding · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.svg">SVG</a></li><li>Sliding · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.svg">SVG</a></li><li>Nominal zero friction · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.svg">SVG</a></li><li>Nominal zero friction · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.svg">SVG</a></li><li>Nominal zero friction · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -111,16 +111,16 @@ The same MuJoCo fixture moves from about 80 kN/m toward the synthetic 20 kN/m ta
   </div>
 </div>
 
-<div class="replay-guide" aria-label="Synchronized replay reading guide">
+<div class="replay-guide" aria-label="Recorded GIF guide">
   <p><strong>Pane order</strong> Initial MuJoCo / Calibrated MuJoCo</p>
   <p><strong>What to watch</strong> Inspect indentation during loading, then whether unloading, separation and other masses remain close to the target.</p>
-  <p><strong>Do not infer</strong> The video does not establish real material stiffness; the response is limited to the declared fixture, loads and synthetic target.</p>
+  <p><strong>Do not infer</strong> The GIF does not establish real material stiffness; the response is limited to the declared fixture, loads and synthetic target.</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="en" data-launch="Load the normal-response replay and curves" data-variants="[{&quot;label&quot;: &quot;Initial / calibrated · 0.2 kg · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/normal-calibration.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/normal-calibration.png" alt="Normal response: change parameters or the solver?"></div>
-<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/normal-calibration-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Initial / calibrated · 0.2 kg · 0.5 ms: <a href="_static/visual/normal-calibration.json.gz">JSON.gz</a> · <a href="_static/visual/normal-calibration-curves.svg">SVG</a> · <a href="_static/visual/normal-calibration.mp4">MP4 · initial-mujoco / validation-mujoco-reference</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/normal-calibration.gif" alt="Normal response: change parameters or the solver?"></div>
+<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/normal-calibration-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Initial / calibrated · 0.2 kg · 0.5 ms: <a href="_static/visual/normal-calibration.json.gz">JSON.gz</a> · <a href="_static/visual/normal-calibration-curves.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -189,16 +189,16 @@ The same Genesis fixture and object, changing the finger-joint force limit. Comp
   </div>
 </div>
 
-<div class="replay-guide" aria-label="Synchronized replay reading guide">
+<div class="replay-guide" aria-label="Recorded GIF guide">
   <p><strong>Pane order</strong> 0.4 N limit / 0.8 N limit</p>
   <p><strong>What to watch</strong> Watch closing, lift, hold and release in order, focusing on continued object slip relative to the fingers.</p>
   <p><strong>Do not infer</strong> Lifting or leaving the frame is not valid retention; the open negative and native object motion prevent false success.</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="en" data-launch="Load the 0.4 N / 0.8 N pinch-boundary replay" data-variants="[{&quot;label&quot;: &quot;Retention: 0.4 N / 0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-retention.json.gz&quot;}, {&quot;label&quot;: &quot;Open negative / 0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-negative.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/pinch-dev-cap-0.4.png" alt="Pinch: 0.4 N slips, 0.8 N holds"></div>
-<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/pinch-retention-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Retention: 0.4 N / 0.8 N: <a href="_static/visual/pinch-retention.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-retention-curves.svg">SVG</a> · <a href="_static/visual/pinch-dev-cap-0.4.mp4">MP4 · dev-cap-0.4</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li><li>Open negative / 0.8 N: <a href="_static/visual/pinch-negative.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-negative-curves.svg">SVG</a> · <a href="_static/visual/pinch-dev-open.mp4">MP4 · dev-open</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/force-limit/comparison.gif" alt="Pinch: 0.4 N slips, 0.8 N holds"></div>
+<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/pinch-retention-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Retention: 0.4 N / 0.8 N: <a href="_static/visual/pinch-retention.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-retention-curves.svg">SVG</a></li><li>Open negative / 0.8 N: <a href="_static/visual/pinch-negative.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-negative-curves.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -263,16 +263,16 @@ Same actions, initial state, Panda and native success; original 2 ms versus unqu
   </div>
 </div>
 
-<div class="replay-guide" aria-label="Synchronized replay reading guide">
+<div class="replay-guide" aria-label="Recorded GIF guide">
   <p><strong>Pane order</strong> Original 2 ms / 1 ms control</p>
   <p><strong>What to watch</strong> First verify both timesteps complete the native task, then compare overlap, relative height and normal force under the same actions.</p>
-  <p><strong>Do not infer</strong> Native task success does not replace physical screening, and the video does not uniquely explain the 5/10 → 3/10 regression.</p>
+  <p><strong>Do not infer</strong> Native task success does not replace physical screening, and the GIF does not uniquely explain the 5/10 → 3/10 regression.</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="en" data-launch="Load the LIBERO native-task and 1 ms comparison replay" data-variants="[{&quot;label&quot;: &quot;Development demo_0: first frozen demo&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo0.json.gz&quot;}, {&quot;label&quot;: &quot;Heldout demo_4: first screen regression&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo4.json.gz&quot;}, {&quot;label&quot;: &quot;Heldout demo_8: maximum native overlap&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo8.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.png" alt="LIBERO: native task, timestep control and observation fix"></div>
-<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Development demo_0: first frozen demo: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.svg">SVG</a> · <a href="_static/visual/libero-demo0-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo0-step-1000us.mp4">MP4 · step-1000us</a></li><li>Heldout demo_4: first screen regression: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.svg">SVG</a> · <a href="_static/visual/libero-demo4-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo4-step-1000us.mp4">MP4 · step-1000us</a></li><li>Heldout demo_8: maximum native overlap: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.svg">SVG</a> · <a href="_static/visual/libero-demo8-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo8-step-1000us.mp4">MP4 · step-1000us</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.gif" alt="LIBERO: native task, timestep control and observation fix"></div>
+<details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Development demo_0: first frozen demo: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.svg">SVG</a></li><li>Heldout demo_4: first screen regression: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.svg">SVG</a></li><li>Heldout demo_8: maximum native overlap: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -315,7 +315,7 @@ Same actions, initial state, Panda and native success; original 2 ms versus unqu
 
 **Limits：** Demonstration action execution only: no fixed-policy closed-loop effect, real-material accuracy or mid-episode restore qualification. Holdouts are ten demonstrations of one task, not new-task generalization.
 
-Default: first frozen development demonstration, independent of outcome. Additional views show the first heldout screen regression and maximum baseline overlap, explicitly post-hoc diagnostic selections; all ten pairs remain in the full results. Video rendering never integrates physics.
+Default: first frozen development demonstration, independent of outcome. Additional views show the first heldout screen regression and maximum baseline overlap, explicitly post-hoc diagnostic selections; all ten pairs remain in the full results. GIF rendering never integrates physics.
 
 The 1 mm dashed line is a declared numerical screen. Relative height includes rotation; normal force is actual contact readback. Native time = display time + 0.25 s; channels retain their pre/post-integration epochs.
 

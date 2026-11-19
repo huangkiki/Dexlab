@@ -9,12 +9,12 @@ Studio 回放让接触部位、材料表面和物体运动更清楚。它使用�
 这 13 条完整回放保留来源时间和实际比例。苹果使用两条独立验收通过的 14 s 回归记录，其余场景沿用已公开的历史记录。六引擎斜面采用相同的物体跟随机位，底部保留世界坐标位置，避免跟随画面掩盖平移。
 
 ```{raw} html
-<table><tr><th>实验</th><th>回放</th><th>视频</th></tr>
-<tr><td>苹果抓梗：MuJoCo / SuperDex</td><td><a href="_static/studio/apple.mp4"><img src="_static/studio/apple.gif" width="500" alt="苹果抓梗：MuJoCo / SuperDex"></a></td><td><a href="_static/studio/apple.mp4">MP4</a></td></tr>
-<tr><td>Genesis：0.4 N / 0.8 N 限额</td><td><a href="_static/studio/pinch.mp4"><img src="_static/studio/pinch.gif" width="500" alt="Genesis：0.4 N / 0.8 N 限额"></a></td><td><a href="_static/studio/pinch.mp4">MP4</a></td></tr>
-<tr><td>LIBERO demo 0</td><td><a href="_static/studio/libero.mp4"><img src="_static/studio/libero.gif" width="500" alt="LIBERO demo 0"></a></td><td><a href="_static/studio/libero.mp4">MP4</a></td></tr>
-<tr><td>六引擎斜面</td><td><a href="_static/studio/incline.mp4"><img src="_static/studio/incline.gif" width="500" alt="六引擎斜面"></a></td><td><a href="_static/studio/incline.mp4">MP4</a></td></tr>
-<tr><td>法向接触：初始／调整后</td><td><a href="_static/studio/normal.mp4"><img src="_static/studio/normal.gif" width="500" alt="法向接触：初始／调整后"></a></td><td><a href="_static/studio/normal.mp4">MP4</a></td></tr></table>
+<table><tr><th>实验</th><th>回放</th><th>文件</th></tr>
+<tr><td>苹果抓梗：MuJoCo / SuperDex</td><td><a href="_static/studio/apple.gif"><img src="_static/studio/apple.gif" width="500" alt="苹果抓梗：MuJoCo / SuperDex"></a></td><td><a href="_static/studio/apple.gif">GIF</a></td></tr>
+<tr><td>Genesis：0.4 N / 0.8 N 限额</td><td><a href="_static/studio/pinch.gif"><img src="_static/studio/pinch.gif" width="500" alt="Genesis：0.4 N / 0.8 N 限额"></a></td><td><a href="_static/studio/pinch.gif">GIF</a></td></tr>
+<tr><td>LIBERO demo 0</td><td><a href="_static/studio/libero.gif"><img src="_static/studio/libero.gif" width="500" alt="LIBERO demo 0"></a></td><td><a href="_static/studio/libero.gif">GIF</a></td></tr>
+<tr><td>六引擎斜面</td><td><a href="_static/studio/incline.gif"><img src="_static/studio/incline.gif" width="500" alt="六引擎斜面"></a></td><td><a href="_static/studio/incline.gif">GIF</a></td></tr>
+<tr><td>法向接触：初始／调整后</td><td><a href="_static/studio/normal.gif"><img src="_static/studio/normal.gif" width="500" alt="法向接触：初始／调整后"></a></td><td><a href="_static/studio/normal.gif">GIF</a></td></tr></table>
 <p><a href="_static/studio/manifest.json">13-scene manifest</a></p>
 ```
 

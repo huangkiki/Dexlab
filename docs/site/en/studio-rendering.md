@@ -9,12 +9,12 @@ The homepage gathers the experiments in one preview table. Cut-push uses repaire
 These 13 complete replays retain the source times and scale. Apple uses two independently verified 14 s regression records; the other scenes retain the published historical records. The six incline panels use the same body-follow camera, with world position printed below to retain the motion reference.
 
 ```{raw} html
-<table><tr><th>Experiment</th><th>Replay</th><th>Video</th></tr>
-<tr><td>Apple grasp: MuJoCo / SuperDex</td><td><a href="_static/studio/apple.mp4"><img src="_static/studio/apple.gif" width="500" alt="Apple grasp: MuJoCo / SuperDex"></a></td><td><a href="_static/studio/apple.mp4">MP4</a></td></tr>
-<tr><td>Genesis: 0.4 N / 0.8 N limits</td><td><a href="_static/studio/pinch.mp4"><img src="_static/studio/pinch.gif" width="500" alt="Genesis: 0.4 N / 0.8 N limits"></a></td><td><a href="_static/studio/pinch.mp4">MP4</a></td></tr>
-<tr><td>LIBERO demo 0</td><td><a href="_static/studio/libero.mp4"><img src="_static/studio/libero.gif" width="500" alt="LIBERO demo 0"></a></td><td><a href="_static/studio/libero.mp4">MP4</a></td></tr>
-<tr><td>Six-engine incline</td><td><a href="_static/studio/incline.mp4"><img src="_static/studio/incline.gif" width="500" alt="Six-engine incline"></a></td><td><a href="_static/studio/incline.mp4">MP4</a></td></tr>
-<tr><td>Initial / calibrated normal response</td><td><a href="_static/studio/normal.mp4"><img src="_static/studio/normal.gif" width="500" alt="Initial / calibrated normal response"></a></td><td><a href="_static/studio/normal.mp4">MP4</a></td></tr></table>
+<table><tr><th>Experiment</th><th>Replay</th><th>File</th></tr>
+<tr><td>Apple grasp: MuJoCo / SuperDex</td><td><a href="_static/studio/apple.gif"><img src="_static/studio/apple.gif" width="500" alt="Apple grasp: MuJoCo / SuperDex"></a></td><td><a href="_static/studio/apple.gif">GIF</a></td></tr>
+<tr><td>Genesis: 0.4 N / 0.8 N limits</td><td><a href="_static/studio/pinch.gif"><img src="_static/studio/pinch.gif" width="500" alt="Genesis: 0.4 N / 0.8 N limits"></a></td><td><a href="_static/studio/pinch.gif">GIF</a></td></tr>
+<tr><td>LIBERO demo 0</td><td><a href="_static/studio/libero.gif"><img src="_static/studio/libero.gif" width="500" alt="LIBERO demo 0"></a></td><td><a href="_static/studio/libero.gif">GIF</a></td></tr>
+<tr><td>Six-engine incline</td><td><a href="_static/studio/incline.gif"><img src="_static/studio/incline.gif" width="500" alt="Six-engine incline"></a></td><td><a href="_static/studio/incline.gif">GIF</a></td></tr>
+<tr><td>Initial / calibrated normal response</td><td><a href="_static/studio/normal.gif"><img src="_static/studio/normal.gif" width="500" alt="Initial / calibrated normal response"></a></td><td><a href="_static/studio/normal.gif">GIF</a></td></tr></table>
 <p><a href="_static/studio/manifest.json">13-scene manifest</a></p>
 ```
 

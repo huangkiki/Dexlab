@@ -140,7 +140,7 @@ Sim-to-Real Gap 通常被说成一个误差、一次失败，或者“仿真器�
 - **证据未证明：** 无完整切向冲量、运行时材质 pair 和原生碰撞网格，不能唯一拆分摩擦、刚性边缘、缺少顺应性与抬升加速度各自贡献，更不能宣称 PhysX solver 缺陷。
 - **下一门槛：** 相同初态下冻结抓取深度，A/B `0.016 → 0.028 → 0.034 m`；同时读回材质 pair、切向冲量和接触斑，再测顺应性模型。
 
-[完整视频与两例对照](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/layout-011-root-cause.json">派生时间线 JSON</a>
+[完整 GIF 与两例对照](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/layout-011-root-cause.json">派生时间线 JSON</a>
 
 ### 2. Wuji：为什么夹得更紧仍会绕轴滑？
 
@@ -232,7 +232,7 @@ Sim-to-Real Gap 通常被说成一个误差、一次失败，或者“仿真器�
 - **证据未证明：** 本批没有逐步驱动力矩、接触冲量、穿透和运行时材质 pair；执行器本身是能量源，不能从端点位姿直接推出“被动 solver 凭空注入全部能量”。异常的 A/C/N 内部分摊仍是 U。
 - **下一门槛：** 先在第一次卡滞时退出 20–30 mm；冻结三例逐项 A/B 速度／位置迭代、stabilization、去穿透速度与步长，并用 4 ms 的 `Στ·Δq`、接触冲量和 `Δ(K+U)` 闭合能量账本。
 
-[三个完整腕部视频、逐例时间线与修复顺序](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/contact-escape-v67.json">机器可读证据</a>
+[三个腕部 GIF、逐例时间线与修复顺序](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/contact-escape-v67.json">机器可读证据</a>
 
 ## 六引擎斜面：为什么不强行给一个根因？
 

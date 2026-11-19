@@ -8,8 +8,6 @@ The public `Mjlab-G1-DualArm` checkpoint uses Toaster003. It is distinct from th
 
 The GIF shows all 11 saved pose boundaries at 50 fps: 0.2 s of native motion plus one endpoint frame (0.22 s presentation). The object remains ground-supported in this short probe. This interval cannot assess a 60 s lift. No dynamics were rerun for playback.
 
-<video controls preload="metadata" style="width:100%;max-width:100%;height:auto"><source src="_static/amp-lift/probe-replay.mp4" type="video/mp4"></video>
-
 ## What passed and what stopped
 
 Both fresh-process runs used seed 137, the released actor, one world, 5 ms physics and four substeps per action. Initial state, effective randomized model, source/runtime identity and first policy input matched exactly. Play mode retained source initialization and mass/COM/friction randomization, while disabling virtual PD and observation corruption. The recorded object's mass was 1.376522779 kg; 1.30 kg is only the source's nominal inertial sum.

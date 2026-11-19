@@ -32,12 +32,12 @@ The original cleaning range agrees with the author's reported 95.5–95.9%. This
 
 <!-- rss-results:end -->
 
-The first repetition of each mode is the predetermined video pair. Both show the entire recorded task at 10 frames per simulation second, using RSS's native tiled collision view.
+The first repetition of each mode is the predetermined GIF pair. Both show the entire recorded task at five frames per simulation second, using RSS's native tiled collision view.
 
 ```{raw} html
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
-<section><h3>Original: compliant latch assistance</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
-<section><h3>No latch: contact alone</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/no-latch.png" src="_static/rss-wiping/no-latch.mp4"></video></section>
+<section><h3>Original: compliant latch assistance</h3><img src="_static/rss-wiping/original.gif" alt="DexLab recorded replay" width="100%" loading="lazy"></section>
+<section><h3>No latch: contact alone</h3><img src="_static/rss-wiping/no-latch.gif" alt="DexLab recorded replay" width="100%" loading="lazy"></section>
 </div>
 ```
 
@@ -47,9 +47,9 @@ The first repetition of each mode is the predetermined video pair. Both show the
 
 The original latched condition's first recording now has a **continuous 10–20 s replay**: 100 frames at 10 fps and 960×544 per view. Left is the tiled collision view; right is OVRTX path tracing. **Both views retain latch assistance**, using the same camera, timestamps and recorded state. Metal reflections, mat texture, robot-shell highlights and soft shadows come from the pinned RSS materials, room and lighting.
 
-![Same state and camera: tiled left, RTX right; simulation 10–20 s at original speed](../../evidence/rss-wiping/rtx/comparison.gif)
+![Same state and camera: tiled left, RTX right; simulation 10–20 s as a GIF](../../evidence/rss-wiping/rtx/comparison.gif)
 
-[Full comparison video](../../evidence/rss-wiping/rtx/comparison-labeled.mp4) · [Frame map, input hashes and state checks](../../evidence/rss-wiping/rtx/render.json) · [Media processing record](../../evidence/rss-wiping/rtx/media.json)
+[Full comparison GIF](../../evidence/rss-wiping/rtx/comparison.gif) · [Frame map, input hashes and state checks](../../evidence/rss-wiping/rtx/render.json) · [Media processing record](../../evidence/rss-wiping/rtx/media.json)
 
 Replay executed **zero physics steps**. Maximum absolute loading error was zero for rigid poses, joints, sponge material points and ink; state and live colors remained unchanged after all 100 paired renders. Input file hashes also remained unchanged. The recorded ground-visibility toggle is restored before the complete compiled model is checked array by array and by hash; collision-bit changes are rejected. Replay neither interpolates nor smooths material points and produces no new task-success result.
 

@@ -232,7 +232,7 @@ The cards below retain the original numbers, timelines, evidence and next gates.
 - **Not proved:** the batch lacks per-step drive effort, contact impulse, penetration and resolved runtime material pairing. The actuator is itself an energy source, so endpoint pose cannot prove that a passive solver created all excess energy. The A/C/N split remains U.
 - **Next gate:** retreat 20–30 mm on first jam; freeze the three cases and A/B velocity/position iterations, stabilization, depenetration velocity and timestep; close a 4 ms energy ledger with `Στ·Δq`, contact impulses and `Δ(K+U)`.
 
-[Full wrist videos, per-case timelines and repair order](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/contact-escape-v67.json">Machine-readable evidence</a>
+[Full wrist GIFs, per-case timelines and repair order](robodojo-bread-slip.md) · <a href="_static/robodojo-bread-slip/contact-escape-v67.json">Machine-readable evidence</a>
 
 ## Six-engine incline: why not force one root cause?
 

@@ -1,17 +1,17 @@
 # 豆腐连续两刀与刀面推动
 
-**历史协议存档。最新连续切割与刀面侧推，以及逐帧接触力／位移，见[当前展示](cut-push.md)。下文数值与视频仍对应各自历史输入，不是最新任务。**
+**历史协议存档。最新连续切割与刀面侧推，以及逐帧接触力／位移，见[当前展示](cut-push.md)。下文数值与 GIF 仍对应各自历史输入，不是最新任务。**
 
-当前视频用实际刀具接触解释切后位移：切完后先回到左侧切缝，再横向推开左块。刀具由驱动力和材料反作用共同积分；材料速度没有直接修改。香蕉与交叉浅划保持各自任务。
+当前 GIF 用实际刀具接触解释切后位移：切完后先回到左侧切缝，再横向推开左块。刀具由驱动力和材料反作用共同积分；材料速度没有直接修改。香蕉与交叉浅划保持各自任务。
 
 ```{raw} html
 <section class="cutting-player" aria-label="豆腐连续两刀与独立运动"><header><h3>DexLab · 豆腐两刀</h3>
-<div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-sequential/particles.mp4" data-poster="_static/cutting/tofu-sequential/particles-poster.png" aria-pressed="true">粒子</button><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-sequential/surface.mp4" data-poster="_static/cutting/tofu-sequential/surface-poster.png" aria-pressed="false">表面</button></div></header>
-<video controls muted playsinline preload="metadata" poster="_static/cutting/tofu-sequential/particles-poster.png" aria-label="豆腐连续两刀与独立运动"><source src="_static/cutting/tofu-sequential/particles.mp4" type="video/mp4"></video>
+<div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-sequential/particles.gif" aria-pressed="true">粒子</button><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-sequential/surface.gif" aria-pressed="false">表面</button></div></header>
+<img src="_static/cutting/tofu-sequential/particles.gif" alt="豆腐连续两刀与独立运动" width="100%" loading="lazy">
 <p>两刀形成三块；刀具回到左侧切缝，以刀面接触向左推，再撤刀。材料没有直接施加速度增量。</p></section>
 ```
 
-**比较边界：** 原作者片末尾给左块初速度；当前 DexLab 片采用刀面接触推动。相同切割问题不等于相同末尾输入，不能比较这一步的位移、力或成本排名。下面保留旧初速度协议的数据与下载，不能把其位移数值套到新视频。
+**比较边界：** 原作者片末尾给左块初速度；当前 DexLab 片采用刀面接触推动。相同切割问题不等于相同末尾输入，不能比较这一步的位移、力或成本排名。下面保留旧初速度协议的数据与下载，不能把其位移数值套到新 GIF。
 
 ## 动作与验收
 

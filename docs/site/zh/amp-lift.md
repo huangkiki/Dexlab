@@ -8,8 +8,6 @@
 
 动图以 50 fps 展示全部 11 个保存的姿态边界：原生运动 0.2 秒，另加一个终点帧，播放长 0.22 秒。短探针中物体仍由地面支撑，这段时间不能评价 60 秒抬箱任务。回放没有重新推进物理。
 
-<video controls preload="metadata" style="width:100%;max-width:100%;height:auto"><source src="_static/amp-lift/probe-replay.mp4" type="video/mp4"></video>
-
 ## 哪些检查通过，哪里停止
 
 两个独立进程均使用种子 137、公开 actor、单环境、5 ms 物理步及每动作四个子步。初态、随机化后的有效模型、源码／运行时身份和第一条策略输入逐项相同。play 模式保留源码初始化及质量／质心／摩擦随机化，关闭虚拟 PD 和观测扰动。记录中的物体质量为 1.376522779 kg；1.30 kg 只是源码名义惯性质量总和。

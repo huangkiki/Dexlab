@@ -10,7 +10,7 @@ Watch the motion before reading the checks. These historical recordings replay t
 ```
 
 ```{raw} html
-<p><a href="_static/cloth-studio/sag.mp4">Full video</a> · <a href="_static/cloth-studio/sag.json">Frame times and provenance</a></p>
+<p><a href="_static/cloth-studio/sag.gif">Full GIF</a> · <a href="_static/cloth-studio/sag.json">Frame times and provenance</a></p>
 ```
 
 Compare hanging shape, oscillation and surface crossings. Each panel shows the protocol result for its complete recording. Green means the specified checks passed, not that its material matches real fabric. The light floor is a backdrop and the short rail marks the existing fixed edge. Neither participates in physics; this experiment has no ground contact.
@@ -23,7 +23,7 @@ Compare hanging shape, oscillation and surface crossings. Each panel shows the p
 ```
 
 ```{raw} html
-<p><a href="_static/cloth-studio/drape.mp4">Full video</a> · <a href="_static/cloth-studio/drape.json">Frame times and provenance</a></p>
+<p><a href="_static/cloth-studio/drape.gif">Full GIF</a> · <a href="_static/cloth-studio/drape.json">Frame times and provenance</a></p>
 ```
 
 The sheet starts at rest above a 60 mm-radius sphere and ground. Every panel also reports maximum penetration over the complete recording; cloth below the ground is never moved back onto it. Animation cannot check collisions between displayed frames. Independent scoring remains the basis for the results.
@@ -37,7 +37,7 @@ The first views compare MuJoCo, SuperDex, Newton VBD and PhysX so the cloth rema
 ![Eight-profile sphere drape](../../../docs/evidence/cloth-studio/drape-profiles.gif)
 
 ```{raw} html
-<p><a href="_static/cloth-studio/sag-profiles.mp4">Full sag video</a> · <a href="_static/cloth-studio/sag-profiles.json">Provenance</a> · <a href="_static/cloth-studio/drape-profiles.mp4">Full drape video</a> · <a href="_static/cloth-studio/drape-profiles.json">Provenance</a></p>
+<p><a href="_static/cloth-studio/sag-profiles.gif">Full sag GIF</a> · <a href="_static/cloth-studio/sag-profiles.json">Provenance</a> · <a href="_static/cloth-studio/drape-profiles.gif">Full drape GIF</a> · <a href="_static/cloth-studio/drape-profiles.json">Provenance</a></p>
 ```
 
 ## What is covered across six engines?

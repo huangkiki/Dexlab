@@ -1,13 +1,13 @@
 # 香蕉连续三刀切片
 
-**历史协议存档。最新连续切割与刀面侧推，以及逐帧接触力／位移，见[当前展示](cut-push.md)。下文数值与视频仍对应各自历史输入，不是最新任务。**
+**历史协议存档。最新连续切割与刀面侧推，以及逐帧接触力／位移，见[当前展示](cut-push.md)。下文数值与 GIF 仍对应各自历史输入，不是最新任务。**
 
 一把受力驱动的刀沿三个位置依次落下、撤回，将弯曲的去皮香蕉状软体切成四段。表面与粒子视图来自同一份仿真记录，可以暂停、拖动进度条或切换观察。
 
 ```{raw} html
 <section class="cutting-player" aria-label="香蕉三刀切片">
-<header><h3>香蕉三刀切片</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana/surface.mp4" data-poster="_static/cutting/banana/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana/particles.mp4" data-poster="_static/cutting/banana/particles-poster.png" aria-pressed="false">粒子</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana/surface-poster.png" aria-label="香蕉三刀切片"><source src="_static/cutting/banana/surface.mp4" type="video/mp4"><a href="_static/cutting/banana/surface.mp4">观看视频</a></video>
+<header><h3>香蕉三刀切片</h3><div class="cutting-view-switch" aria-label="视图"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana/surface.gif" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana/particles.gif" aria-pressed="false">粒子</button></div></header>
+<img src="_static/cutting/banana/surface.gif" alt="香蕉三刀切片" width="100%" loading="lazy">
 <p>连续三刀，保留每一刀形成的分离。</p>
 </section>
 ```

@@ -1,12 +1,12 @@
 # Do cut pieces stay independent?
 
-This page retains the historical v0.66.0 three-column comparison, with values and videos from that protocol. See the [current showcase](cut-push.md) for tofu/banana final cuts transitioning directly into a side push.
+This page retains the historical v0.66.0 three-column comparison, with values and GIFs from that protocol. See the [current showcase](cut-push.md) for tofu/banana final cuts transitioning directly into a side push.
 
 ```{raw} html
 :file: _cutting-comparison.html
 ```
 
-Measured GIFs show opening, interior volume and piece motion derived from saved states. GIF playback is slowed; clocks retain physical time. [Paper audit and measurement definitions](cutting-fidelity.md).
+Measured GIFs show opening, interior volume and piece motion derived from saved states. GIFs are display-only; figures and reports retain physical time. [Paper audit and measurement definitions](cutting-fidelity.md).
 
 ## What the original comparison tests
 
@@ -24,7 +24,7 @@ The [BladeMaster project](https://jango6324.github.io/blademaster/#comparison) a
 
 ¹ Values reported by the [BladeMaster project / paper Fig. 5](https://jango6324.github.io/blademaster/#comparison), including its CRESSim-MPM comparison. ² [DexLab event measurements from saved states](https://github.com/huangkiki/Dexlab/blob/main/demos/tofu-knife-push/evidence.json): 5 mm grid, 0.25 ms timestep and 0.5 mm blade; displacements cover 4.00–7.00 s; contact impulse is integrated over 4.00–6.60 s. The half-depth event occurs at 0.82375 s; the table uses the nearest saved frame, 0.82 s. Openings use affine material faces and volumes use interior middle-piece tetrahedra; contraction is the negative relative volume change (-ΔV/V₀). These are **reported / measured values side by side**. Complete author settings and sampling remain [unmatched](https://github.com/huangkiki/Dexlab/issues/200), so the table does not establish a controlled accuracy ranking.
 
-Reference videos remain attributed embeds on the original host. DexLab records, failures and controls are in the [two-cut tofu experiment](tofu-comparison.md).
+Reference GIFs remain attributed to the original authors. DexLab records, failures and controls are in the [two-cut tofu experiment](tofu-comparison.md).
 
 ## DexLab event measurements (5 mm grid)
 
@@ -48,9 +48,9 @@ The third column uses a neutral gray ground, cream particles and an orthographic
 ## Protocol for a future matched comparison
 
 1. **Freeze one question.** Does the first discontinuity remain mechanically separated after the second cut? Freeze block dimensions, material parameters, sampling, blade geometry, trajectories and contact model before running. Resolve missing author parameters rather than estimate them from screenshots.
-2. **Align events.** Save first half-depth, first withdrawal, second withdrawal, single-piece velocity initialization and a fixed elapsed interval. Synchronize only shared-input runs; never stretch clips to imply equal speed or cost.
+2. **Align events.** Save first half-depth, first withdrawal, second withdrawal, single-piece velocity initialization and a fixed elapsed interval. GIFs provide no comparable shared clock; never use playback speed to imply equal speed or cost.
 3. **Measure separately.** Sample gap distributions in the same material-coordinate band, declare the middle-piece volume estimator, and record every piece's centroid motion, momentum and external impulse. A visible gap does not replace connectivity scoring.
 4. **Keep counterexamples.** Uncut, partial-cut and history-disabled-after-withdrawal ablations; half-step and finer-sampling sensitivities. Retain failed, invalid and not-run cases.
-5. **Qualify before ranking.** Every executed implementation needs source/binary versions, shared inputs, independent scoring, budgets and raw records. Author videos are references. No matched three-method comparison or superiority ranking has yet been established.
+5. **Qualify before ranking.** Every executed implementation needs source/binary versions, shared inputs, independent scoring, budgets and raw records. Author GIFs are references. No matched three-method comparison or superiority ranking has yet been established.
 
-This is a reusable comparison workflow. A new benchmark still needs its own frozen protocol and resource budget. This page first delivers the three-column view and explicit provenance.
+This is a reusable comparison workflow. A new benchmark still needs its own frozen protocol and resource budget. This page first delivers the three-column GIF view and explicit provenance.

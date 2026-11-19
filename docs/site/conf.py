@@ -31,7 +31,6 @@ html_css_files = [
     'concept-atlas.css',
 ]
 html_js_files = [
-    ('replay.js', {'defer': 'defer'}),
     ('cutting.js', {'defer': 'defer'}),
     ('live-lab.js', {'defer': 'defer'}),
     ('learning-diagrams.js', {'type': 'module'}),

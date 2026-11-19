@@ -4,7 +4,7 @@
 
 ![同时间、原速的完整 4.4 秒回放：左为点接触 v3，右为抗扭接触 v4](../../evidence/wuji-contact/comparison.gif)
 
-左侧点接触配置保持失败，右侧抗扭配置保持及张开释放通过。两侧均包含准备、保持和释放，原速播放。球上的十字是**回放时添加的方向纹理**，不参与碰撞或物理计算。视频为 30 fps、动图为 15 fps；转动指标来自 2 kHz 原始记录，不能从动图估算。[完整视频](../../evidence/wuji-contact/comparison.mp4) · [原始轨迹与帧映射](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/comparison.json)。
+左侧点接触配置保持失败，右侧抗扭配置保持及张开释放通过。两侧均包含准备、保持和释放。球上的十字是**回放时添加的方向纹理**，不参与碰撞或物理计算。GIF 为 15 fps；转动指标来自 2 kHz 原始记录，不能从动图估算。[完整 GIF](../../evidence/wuji-contact/comparison.gif) · [原始轨迹与帧映射](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/wuji-contact/comparison.json)。
 
 ## 不装仿真引擎，先复算结果
 

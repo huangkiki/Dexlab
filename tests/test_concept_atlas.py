@@ -53,7 +53,12 @@ class ConceptAtlasTests(unittest.TestCase):
     def test_all_entries_are_bilingual_and_related_targets_exist(self):
         ids = {item["id"] for item in self.atlas["concepts"]}
         for item in self.atlas["concepts"]:
-            for field in ("name", "summary", "body", "example", "confusions"):
+            fields = (
+                ("name", "summary")
+                if item["kind"] == "synthesis"
+                else ("name", "summary", "body", "example", "confusions")
+            )
+            for field in fields:
                 self.assertTrue(item[field]["zh"], (item["id"], field, "zh"))
                 self.assertTrue(item[field]["en"], (item["id"], field, "en"))
             for relation in item["relations"]:
@@ -121,9 +126,16 @@ class ConceptAtlasTests(unittest.TestCase):
             index = (language_dir / "concepts/index.md").read_text()
             self.assertIn("../failure-root-cause-atlas.md", index)
             self.assertNotIn("](failure-root-cause-atlas.html)", index)
+            self.assertIn("FP64 <solver-fp64>", index)
+            for item in self.atlas["concepts"]:
+                if item["kind"] in {"concept", "solver"}:
+                    self.assertIn(f"<{item['id']}>", index)
             self.assertEqual(
                 len(list((language_dir / "concepts").glob("*.md"))),
-                len(self.atlas["concepts"]),
+                sum(
+                    item["kind"] in {"concept", "solver"}
+                    for item in self.atlas["concepts"]
+                ) + 1,
             )
             self.assertFalse(
                 (language_dir / "concepts/sim-to-real-gap.md").exists()

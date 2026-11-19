@@ -32,12 +32,12 @@
 
 <!-- rss-results:end -->
 
-预先选定每组第一次记录作为视频对照，完整展示任务过程。每秒仿真时间录制 10 帧，使用 RSS 自带的 tiled 碰撞几何视图。
+预先选定每组第一次记录作为 GIF 对照，完整展示任务过程。每秒仿真时间保留 5 帧，使用 RSS 自带的 tiled 碰撞几何视图。
 
 ```{raw} html
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
-<section><h3>原版：latch 柔顺辅助固定</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/original.png" src="_static/rss-wiping/original.mp4"></video></section>
-<section><h3>无 latch：仅靠接触保持</h3><video controls muted playsinline preload="metadata" style="width:100%" poster="_static/rss-wiping/no-latch.png" src="_static/rss-wiping/no-latch.mp4"></video></section>
+<section><h3>原版：latch 柔顺辅助固定</h3><img src="_static/rss-wiping/original.gif" alt="DexLab recorded replay" width="100%" loading="lazy"></section>
+<section><h3>无 latch：仅靠接触保持</h3><img src="_static/rss-wiping/no-latch.gif" alt="DexLab recorded replay" width="100%" loading="lazy"></section>
 </div>
 ```
 
@@ -47,9 +47,9 @@
 
 已将使用 latch 的原版第 1 次记录的 **10–20 s 连续片段**重渲染为 100 帧、10 fps、960×544 的 RTX 视频。下图左侧为 tiled 碰撞视图，右侧为 OVRTX 路径追踪，**两侧都保留 latch 辅助保持**，使用相同机位、相同时间戳与原始状态。金属反射、桌面纹理、机器人外壳光泽和柔和阴影来自固定版本 RSS 的材质、房间和灯光。
 
-![同一状态与机位：左 tiled，右 RTX；10–20 s，原速回放](../../evidence/rss-wiping/rtx/comparison.gif)
+![同一状态与机位：左 tiled，右 RTX；10–20 s，GIF 回放](../../evidence/rss-wiping/rtx/comparison.gif)
 
-[完整对照视频](../../evidence/rss-wiping/rtx/comparison-labeled.mp4) · [逐帧映射、输入哈希与状态核验](../../evidence/rss-wiping/rtx/render.json) · [媒体处理记录](../../evidence/rss-wiping/rtx/media.json)
+[完整对照 GIF](../../evidence/rss-wiping/rtx/comparison.gif) · [逐帧映射、输入哈希与状态核验](../../evidence/rss-wiping/rtx/render.json) · [媒体处理记录](../../evidence/rss-wiping/rtx/media.json)
 
 此次回放执行 **0 个物理步**；刚体位姿、关节、海绵材料点和墨迹加载的最大绝对误差均为 0，100 对画面输出后状态与动态颜色保持不变。原始输入文件哈希也保持不变。恢复了录制时保存的地面显示开关，完整编译模型随后逐数组及哈希匹配；碰撞标志不允许改变。回放不插值、不平滑材料点，也不产生新的任务成功率。
 

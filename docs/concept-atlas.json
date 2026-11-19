@@ -73,6 +73,94 @@
       "sources": ["dexlab_failure"]
     },
     {
+      "id": "dexterous-simulation-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "_static/research/dexterous-simulation.html",
+      "name": {"zh": "灵巧操作仿真：六层问题", "en": "Dexterous simulation: six questions"},
+      "aliases": {"zh": ["灵巧手仿真", "灵巧操作"], "en": ["dexterous manipulation", "dexterous simulation"]},
+      "summary": {"zh": "从任务、本体、物理、传感、策略和验证六层理解灵巧操作仿真。", "en": "A six-layer guide to tasks, embodiment, physics, sensing, policy and validation in dexterous simulation."},
+      "relations": [{"type": "related", "target": "contact"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "task-success"}]
+    },
+    {
+      "id": "libero-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "libero-workflow.html",
+      "name": {"zh": "LIBERO：任务、观测与接触", "en": "LIBERO: tasks, observations and contact"},
+      "aliases": {"zh": ["LIBERO 工作流", "LIBERO 诊断"], "en": ["LIBERO workflow", "LIBERO diagnostics"]},
+      "summary": {"zh": "区分原任务成功、观测刷新、接触诊断和数值敏感性。", "en": "Separate native task success, observation refresh, contact diagnostics and numerical sensitivity."},
+      "relations": [{"type": "related", "target": "reset"}, {"type": "related", "target": "task-success"}, {"type": "related", "target": "readback"}]
+    },
+    {
+      "id": "code-as-policy-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "code-as-policy.html",
+      "name": {"zh": "Code as Policy：可验证技能", "en": "Code as Policy: verifiable skills"},
+      "aliases": {"zh": ["代码即策略", "技能程序"], "en": ["code policy", "agent skills"]},
+      "summary": {"zh": "把任务语义、反馈、动作顺序和失败恢复写成可检查、可修改的程序。", "en": "Represent task meaning, feedback, action order and recovery as inspectable programs."},
+      "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "evidence-boundary"}]
+    },
+    {
+      "id": "solver-coupling-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "solver-coupling.html",
+      "name": {"zh": "多求解器同步：时间与反力", "en": "Solver coupling: time and reaction forces"},
+      "aliases": {"zh": ["求解器耦合", "preCICE"], "en": ["solver coupling", "preCICE"]},
+      "summary": {"zh": "分开墙钟时间、仿真时间、内部步长和跨求解器交换周期。", "en": "Separate wall time, simulation time, substeps and cross-solver exchange periods."},
+      "relations": [{"type": "related", "target": "simulation-time"}, {"type": "related", "target": "control-period"}, {"type": "related", "target": "contact-force"}]
+    },
+    {
+      "id": "physcapbench-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "physcapbench.html",
+      "name": {"zh": "物理 caption：先评参考覆盖", "en": "Physical captions: evaluate reference coverage"},
+      "aliases": {"zh": ["物理描述", "视频事实"], "en": ["physical caption", "video facts"]},
+      "summary": {"zh": "在比较物理描述前，先确认参考记录是否覆盖对象、接触、因果和时间顺序。", "en": "Before comparing physical captions, check reference coverage of objects, contact, causality and temporal order."},
+      "relations": [{"type": "related", "target": "evidence-boundary"}, {"type": "related", "target": "task-success"}]
+    },
+    {
+      "id": "mask-gcrl-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "mask-conditioned-gcrl.html",
+      "name": {"zh": "视觉 mask 与 GCRL：先证进度", "en": "Visual masks and GCRL: prove progress"},
+      "aliases": {"zh": ["目标 mask", "GCRL"], "en": ["object mask", "GCRL"]},
+      "summary": {"zh": "目标 mask 进入策略或奖励前，必须先通过单调性、遮挡和误检检查。", "en": "Before a target mask enters a policy or reward, test monotonicity, occlusion and false detections."},
+      "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "positive-negative-control"}]
+    },
+    {
+      "id": "cloth-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "cloth-comparison.html",
+      "name": {"zh": "布料：同一场景，不同引擎", "en": "Cloth: one scene, different engines"},
+      "aliases": {"zh": ["布料仿真", "柔性体"], "en": ["cloth simulation", "deformable objects"]},
+      "summary": {"zh": "分别验收形变、下垂、穿透、残余运动和成本，不把它们混成一个引擎分数。", "en": "Score deformation, sag, penetration, residual motion and cost separately instead of collapsing them into one engine score."},
+      "relations": [{"type": "related", "target": "contact"}, {"type": "related", "target": "penetration"}, {"type": "related", "target": "task-success"}]
+    },
+    {
+      "id": "cut-push-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "cut-push.html",
+      "name": {"zh": "切割：末块能否独立运动", "en": "Cutting: can the final piece move independently"},
+      "aliases": {"zh": ["切割与推动", "软材料切割"], "en": ["cutting and pushing", "soft-material cutting"]},
+      "summary": {"zh": "用连通性、刀面接触冲量和独立位移判断材料是否真的分离。", "en": "Use connectivity, blade-contact impulse and independent displacement to test whether material actually separated."},
+      "relations": [{"type": "related", "target": "contact-force"}, {"type": "related", "target": "impulse"}, {"type": "related", "target": "task-success"}]
+    },
+    {
       "id": "model-state",
       "group": "motion",
       "level": "core",

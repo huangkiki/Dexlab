@@ -2,8 +2,8 @@
 
 ```{raw} html
 <section class="cutting-player" aria-label="Crossed shallow cuts with an intact base"><header><h3>Crossed shallow cuts with an intact base</h3>
-<div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-scoring/surface.mp4" data-poster="_static/cutting/tofu-scoring/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-scoring/particles.mp4" data-poster="_static/cutting/tofu-scoring/particles-poster.png" aria-pressed="false">Particles / history</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu-scoring/surface-poster.png" aria-label="Crossed shallow cuts with an intact base"><source src="_static/cutting/tofu-scoring/surface.mp4" type="video/mp4"></video></section>
+<div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-scoring/surface.gif" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-scoring/particles.gif" aria-pressed="false">Particles / history</button></div></header>
+<img src="_static/cutting/tofu-scoring/surface.gif" alt="Crossed shallow cuts with an intact base" width="100%" loading="lazy"></section>
 ```
 
 The blade makes a shallow incision, withdraws fully, turns 90°, and repeats. The crossing incisions retain a connected lower bridge. Surface and particle replays use the same saved states, with signed opening widths, blade depth, component count and base status displayed throughout.

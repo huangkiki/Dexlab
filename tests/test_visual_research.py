@@ -1,8 +1,6 @@
 """Prevent publication of misaligned or misattributed visual evidence."""
 
 import copy
-import shutil
-import subprocess
 import unittest
 
 from scripts.visual_research import (
@@ -26,11 +24,24 @@ class VisualEvidenceTests(unittest.TestCase):
         )
         self.assertEqual(len(index["cases"][0]["variants"]), 9)
 
+    def test_site_uses_gif_previews_instead_of_embedded_video(self):
+        offenders = []
+        for path in (ROOT / "docs/site").rglob("*"):
+            if path.suffix not in {".md", ".html"} or "_build" in path.parts:
+                continue
+            text = path.read_text(errors="ignore")
+            if "<video" in text or 'type="video/mp4"' in text:
+                offenders.append(str(path.relative_to(ROOT)))
+        self.assertEqual(offenders, [])
+
     def test_comparison_pages_keep_conclusion_guide_and_matrix(self):
         for language in ("zh", "en"):
             text = (
                 ROOT / f"docs/site/{language}/visual-comparisons.md"
             ).read_text()
+            self.assertNotIn("<video", text)
+            self.assertNotIn(".mp4", text)
+            self.assertEqual(text.count('<div class="gif-evidence">'), 4)
             anchors = [
                 text.index(f"({case_id})=")
                 for case_id in ("incline", "normal", "pinch", "libero")
@@ -121,14 +132,3 @@ class VisualEvidenceTests(unittest.TestCase):
             data["series"][1]["effective_parameters"],
         )
         self.assertEqual([s["verdict"] for s in data["series"]], ["fail", "pass"])
-
-    @unittest.skipUnless(
-        shutil.which("node"), "Node required for browser-clock unit checks"
-    )
-    def test_browser_clock_and_peak_preservation(self):
-        subprocess.run(
-            ["node", str(ROOT / "tests/visual_replay_clock.cjs")],
-            check=True,
-            capture_output=True,
-            text=True,
-        )

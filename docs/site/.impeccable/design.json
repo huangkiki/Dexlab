@@ -234,12 +234,12 @@
       "css": ".ds-step{font-family:var(--sans,Arial,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);line-height:1.95;color:var(--ink,#282b26);padding-left:38px;position:relative}.ds-step-number{position:absolute;left:0;top:0;color:var(--accent,#4f664c);font:22px/1.55 var(--serif,Georgia,\"Noto Serif CJK SC\",\"Source Han Serif SC\",\"Songti SC\",serif)}.ds-step h3{font-size:18px;line-height:1.55;text-wrap:pretty;overflow-wrap:anywhere;margin:0 0 8px}.ds-step p{margin:0;color:var(--muted,#60675a);font-size:14px}.ds-step small{display:block;font-size:13px;color:var(--muted,#60675a);margin:6px 0 12px}.ds-step a{display:block;width:fit-content;font-size:14px}.ds-step a{color:var(--accent,#4f664c);text-decoration-color:#a5b29b;text-underline-offset:.22em;text-decoration-thickness:1px}.ds-step a:hover{color:var(--ink,#282b26);text-decoration-color:currentColor}.ds-step a:focus-visible{outline:2px solid var(--accent,#4f664c);outline-offset:4px}"
     },
     {
-      "name": "Original evidence replay",
+      "name": "Recorded evidence GIF",
       "kind": "custom",
-      "refersTo": "evidence-video",
-      "description": "Native paused playback and the existing poster; asset URLs are relative to the rendered homepage.",
-      "html": "<figure class=\"ds-evidence\"><video controls playsinline preload=\"none\" width=\"896\" height=\"504\" poster=\"_static/research-home-wuji.png\" aria-label=\"Original-speed Wuji point-contact versus synthetic torsional-contact replay\"><source src=\"_static/wuji-contact/comparison.mp4\" type=\"video/mp4\"><a href=\"_static/wuji-contact/comparison.mp4\">Download the original replay</a></video><figcaption>Recorded replay · Left: point contact / right: synthetic torsion · Same time, original speed · Click to play</figcaption></figure>",
-      "css": ".ds-evidence{margin:0;font-family:var(--sans,Arial,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);color:var(--ink,#282b26);line-height:1.95}.ds-evidence video{display:block;max-width:100%;height:auto;background:var(--panel,#f0f1eb);width:100%}.ds-evidence figcaption{margin-top:12px;font-size:13px;line-height:1.8;color:var(--muted,#60675a)}.ds-evidence a{color:var(--accent,#4f664c);text-decoration-color:#a5b29b;text-underline-offset:.22em;text-decoration-thickness:1px}.ds-evidence a:hover{color:var(--ink,#282b26);text-decoration-color:currentColor}.ds-evidence a:focus-visible{outline:2px solid var(--accent,#4f664c);outline-offset:4px}.ds-evidence video:focus-visible{outline:2px solid var(--accent,#4f664c);outline-offset:4px}"
+      "refersTo": "evidence-gif",
+      "description": "A looping recorded simulation GIF; asset URLs are relative to the rendered page.",
+      "html": "<figure class=\"ds-evidence\"><img src=\"_static/wuji-contact/comparison.gif\" width=\"896\" height=\"504\" alt=\"Wuji point-contact versus synthetic torsional-contact replay\"><figcaption>Recorded GIF · Left: point contact / right: synthetic torsion</figcaption></figure>",
+      "css": ".ds-evidence{margin:0;font-family:var(--sans,Arial,\"Noto Sans CJK SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif);color:var(--ink,#282b26);line-height:1.95}.ds-evidence img{display:block;max-width:100%;height:auto;background:var(--panel,#f0f1eb);width:100%}.ds-evidence figcaption{margin-top:12px;font-size:13px;line-height:1.8;color:var(--muted,#60675a)}"
     },
     {
       "name": "Evidence boundary disclosure",
@@ -320,7 +320,7 @@
       "Do resolve the concept field during the first scroll, focus one hovered term, and keep a visible non-JavaScript path to the complete concept index.",
       "Do draw only the selected concept’s local relationships and keep every term a stable bilingual link.",
       "Do close the homepage research path with the physical-validation boundary before the contact footer.",
-      "Do preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.",
+      "Do preserve visible keyboard focus and complete GIF, figure and disclosure access without JavaScript.",
       "Do maintain Chinese/English parity, on-site learning links and original evidence provenance.",
       "Do preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline."
     ],

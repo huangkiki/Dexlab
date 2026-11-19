@@ -2,8 +2,8 @@
 
 ```{raw} html
 <section class="cutting-player" aria-label="豆腐交叉浅切：底部仍然相连"><header><h3>豆腐交叉浅切：底部仍然相连</h3>
-<div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-scoring/surface.mp4" data-poster="_static/cutting/tofu-scoring/surface-poster.png" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-scoring/particles.mp4" data-poster="_static/cutting/tofu-scoring/particles-poster.png" aria-pressed="false">粒子／历史</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu-scoring/surface-poster.png" aria-label="豆腐交叉浅切：底部仍然相连"><source src="_static/cutting/tofu-scoring/surface.mp4" type="video/mp4"></video></section>
+<div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-scoring/surface.gif" aria-pressed="true">表面</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-scoring/particles.gif" aria-pressed="false">粒子／历史</button></div></header>
+<img src="_static/cutting/tofu-scoring/surface.gif" alt="豆腐交叉浅切：底部仍然相连" width="100%" loading="lazy"></section>
 ```
 
 刀具先浅切一刀，完全撤出后转过 90°，再做第二刀。两条划痕交叉，下面仍是一整块。表面和粒子回放来自同一份保存状态，画面同时显示两条切口的有符号宽度、刀刃深度、连通块数和底部状态。

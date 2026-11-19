@@ -10,7 +10,7 @@
 ```
 
 ```{raw} html
-<p><a href="_static/cloth-studio/sag.mp4">完整视频</a> · <a href="_static/cloth-studio/sag.json">逐帧时间与来源</a></p>
+<p><a href="_static/cloth-studio/sag.gif">完整 GIF</a> · <a href="_static/cloth-studio/sag.json">逐帧时间与来源</a></p>
 ```
 
 比较悬垂形状、振荡和表面穿越。每格显示该条完整记录的协议检查结果；绿色只表示通过规定检查，不代表布料参数已符合真实织物。浅色地面是展示背景，短杆标记原有固定边；它们不参与物理计算，这个实验没有地面接触。
@@ -23,7 +23,7 @@
 ```
 
 ```{raw} html
-<p><a href="_static/cloth-studio/drape.mp4">完整视频</a> · <a href="_static/cloth-studio/drape.json">逐帧时间与来源</a></p>
+<p><a href="_static/cloth-studio/drape.gif">完整 GIF</a> · <a href="_static/cloth-studio/drape.json">逐帧时间与来源</a></p>
 ```
 
 布片从静止释放，落向半径 60 mm 的球体与地面。每格同时给出整段记录的最大穿透量；布落到地面以下时不会被移回表面。动图不能检验两个采样帧之间的碰撞，结论仍以独立评分为准。
@@ -37,7 +37,7 @@
 ![八配置球面覆盖](../../../docs/evidence/cloth-studio/drape-profiles.gif)
 
 ```{raw} html
-<p><a href="_static/cloth-studio/sag-profiles.mp4">下垂完整视频</a> · <a href="_static/cloth-studio/sag-profiles.json">来源</a> · <a href="_static/cloth-studio/drape-profiles.mp4">覆盖完整视频</a> · <a href="_static/cloth-studio/drape-profiles.json">来源</a></p>
+<p><a href="_static/cloth-studio/sag-profiles.gif">下垂完整 GIF</a> · <a href="_static/cloth-studio/sag-profiles.json">来源</a> · <a href="_static/cloth-studio/drape-profiles.gif">覆盖完整 GIF</a> · <a href="_static/cloth-studio/drape-profiles.json">来源</a></p>
 ```
 
 ## 六个引擎，目前分别比较到了哪里

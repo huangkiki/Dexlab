@@ -1,6 +1,6 @@
 # 对比实验：从画面到判据
 
-每个实验按同一顺序阅读：先看结论与判据，再看同条件的同步回放，随后用结果矩阵定位差异。最后才进入协议、解释和边界。
+每个实验按同一顺序阅读：先看结论与判据，再看同条件的记录 GIF，随后用结果矩阵定位差异。最后才进入协议、解释和边界。
 
 画面采用实物比例；微小变化看局部曲线。虚线是案例声明的解析／工程参照，并不代表真实材料测量。不同历史协议的结果不汇总为引擎排行榜。
 
@@ -17,16 +17,16 @@
   </div>
 </div>
 
-<div class="replay-guide" aria-label="同步回放阅读说明">
+<div class="replay-guide" aria-label="GIF 阅读说明">
   <p><strong>画面顺序</strong> MuJoCo / SuperDex / Genesis / Newton Physics / PhysX / Drake</p>
   <p><strong>看什么</strong> 在同一两秒窗口内，看方块是否保持、转动或失去支撑；每个画面同时标出运行状态。</p>
-  <p><strong>不要直接推出</strong> 画面相似不等于物理等价；通过或失败仍由同时间轴的力、位移和速度判据决定。</p>
+  <p><strong>不要直接推出</strong> GIF 相似不等于物理等价；通过或失败仍由同时间轴的力、位移和速度判据决定。</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-launch="加载六引擎同步回放与逐帧曲线" data-variants="[{&quot;label&quot;: &quot;静止 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;静止 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;静止 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-static-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;滑动 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-sliding-0.0005.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 1 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.001.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 2 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.002.json.gz&quot;}, {&quot;label&quot;: &quot;名义零摩擦 · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/incline-frictionless-0.0005.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-static-0.001.png" alt="六引擎斜面：相同工况，响应不同"></div>
-<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>静止 · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>静止 · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>静止 · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-static-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>滑动 · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-sliding-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.001.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.002.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li><li>名义零摩擦 · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.zh.svg">SVG</a> · <a href="_static/visual/incline-frictionless-0.0005.mp4">MP4 · mujoco / superdex / genesis / newton / physx / drake</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-sliding-0.001.gif" alt="六引擎斜面：相同工况，响应不同"></div>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>静止 · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.zh.svg">SVG</a></li><li>静止 · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.zh.svg">SVG</a></li><li>静止 · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.zh.svg">SVG</a></li><li>滑动 · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.zh.svg">SVG</a></li><li>滑动 · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.zh.svg">SVG</a></li><li>滑动 · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.zh.svg">SVG</a></li><li>名义零摩擦 · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.zh.svg">SVG</a></li><li>名义零摩擦 · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.zh.svg">SVG</a></li><li>名义零摩擦 · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.zh.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -111,16 +111,16 @@
   </div>
 </div>
 
-<div class="replay-guide" aria-label="同步回放阅读说明">
+<div class="replay-guide" aria-label="GIF 阅读说明">
   <p><strong>画面顺序</strong> 初始 MuJoCo / 校准后 MuJoCo</p>
   <p><strong>看什么</strong> 先看加载窗的压入量，再看卸载、离面段和其他质量下的响应是否仍接近目标。</p>
-  <p><strong>不要直接推出</strong> 画面不能证明材料真实刚度；有效响应只在声明的夹具、载荷和合成目标内成立。</p>
+  <p><strong>不要直接推出</strong> GIF 不能证明材料真实刚度；有效响应只在声明的夹具、载荷和合成目标内成立。</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-launch="加载法向校准回放与响应曲线" data-variants="[{&quot;label&quot;: &quot;初始／校准 · 0.2 kg · 0.5 ms&quot;, &quot;url&quot;: &quot;_static/visual/normal-calibration.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/normal-calibration.png" alt="法向响应：改参数，还是改 solver？"></div>
-<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/normal-calibration-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>初始／校准 · 0.2 kg · 0.5 ms: <a href="_static/visual/normal-calibration.json.gz">JSON.gz</a> · <a href="_static/visual/normal-calibration-curves.zh.svg">SVG</a> · <a href="_static/visual/normal-calibration.mp4">MP4 · initial-mujoco / validation-mujoco-reference</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/normal-calibration.gif" alt="法向响应：改参数，还是改 solver？"></div>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/normal-calibration-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>初始／校准 · 0.2 kg · 0.5 ms: <a href="_static/visual/normal-calibration.json.gz">JSON.gz</a> · <a href="_static/visual/normal-calibration-curves.zh.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -189,16 +189,16 @@
   </div>
 </div>
 
-<div class="replay-guide" aria-label="同步回放阅读说明">
+<div class="replay-guide" aria-label="GIF 阅读说明">
   <p><strong>画面顺序</strong> 0.4 N 力限额 / 0.8 N 力限额</p>
   <p><strong>看什么</strong> 依次看闭合、抬升、保持和释放，重点确认物体相对指面是否持续滑移。</p>
   <p><strong>不要直接推出</strong> 抬起或离开画面不等于完成保持；张开负例与原生物体运动共同防止错误成功。</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-launch="加载 0.4 N／0.8 N 夹持边界回放" data-variants="[{&quot;label&quot;: &quot;保持边界：0.4 N／0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-retention.json.gz&quot;}, {&quot;label&quot;: &quot;张开负例／0.8 N&quot;, &quot;url&quot;: &quot;_static/visual/pinch-negative.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/pinch-dev-cap-0.4.png" alt="夹持：0.4 N 滑脱，0.8 N 保持"></div>
-<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/pinch-retention-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>保持边界：0.4 N／0.8 N: <a href="_static/visual/pinch-retention.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-retention-curves.zh.svg">SVG</a> · <a href="_static/visual/pinch-dev-cap-0.4.mp4">MP4 · dev-cap-0.4</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li><li>张开负例／0.8 N: <a href="_static/visual/pinch-negative.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-negative-curves.zh.svg">SVG</a> · <a href="_static/visual/pinch-dev-open.mp4">MP4 · dev-open</a> · <a href="_static/visual/pinch-dev-cap-0.8.mp4">MP4 · dev-cap-0.8</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/force-limit/comparison.gif" alt="夹持：0.4 N 滑脱，0.8 N 保持"></div>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/pinch-retention-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>保持边界：0.4 N／0.8 N: <a href="_static/visual/pinch-retention.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-retention-curves.zh.svg">SVG</a></li><li>张开负例／0.8 N: <a href="_static/visual/pinch-negative.json.gz">JSON.gz</a> · <a href="_static/visual/pinch-negative-curves.zh.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -263,16 +263,16 @@
   </div>
 </div>
 
-<div class="replay-guide" aria-label="同步回放阅读说明">
+<div class="replay-guide" aria-label="GIF 阅读说明">
   <p><strong>画面顺序</strong> 原版 2 ms / 对照 1 ms</p>
   <p><strong>看什么</strong> 先确认两种步长都完成原任务，再对照同一动作下的接触重叠、相对高度和法向力。</p>
-  <p><strong>不要直接推出</strong> 原任务成功不能替代物理筛查；画面也不能唯一解释 5/10 到 3/10 的退化。</p>
+  <p><strong>不要直接推出</strong> 原任务成功不能替代物理筛查；GIF 也不能唯一解释 5/10 到 3/10 的退化。</p>
 </div>
 
 ```{raw} html
-<div class="dexlab-replay" data-language="zh" data-launch="加载 LIBERO 原任务与 1 ms 对照回放" data-variants="[{&quot;label&quot;: &quot;开发 demo_0：冻结首条示范&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo0.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_4：首个诊断退化&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo4.json.gz&quot;}, {&quot;label&quot;: &quot;留出 demo_8：最大原生穿透&quot;, &quot;url&quot;: &quot;_static/visual/libero-demo8.json.gz&quot;}]">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.png" alt="LIBERO：原任务、步长对照与观测修正"></div>
-<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>开发 demo_0：冻结首条示范: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo0-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo0-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_4：首个诊断退化: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo4-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo4-step-1000us.mp4">MP4 · step-1000us</a></li><li>留出 demo_8：最大原生穿透: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.zh.svg">SVG</a> · <a href="_static/visual/libero-demo8-baseline.mp4">MP4 · baseline</a> · <a href="_static/visual/libero-demo8-step-1000us.mp4">MP4 · step-1000us</a></li></ul></details>
+<div class="gif-evidence">
+<div class="visual-hero"><img loading="lazy" src="_static/visual/libero-demo0-baseline.gif" alt="LIBERO：原任务、步长对照与观测修正"></div>
+<details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/libero-demo0-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>开发 demo_0：冻结首条示范: <a href="_static/visual/libero-demo0.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo0-curves.zh.svg">SVG</a></li><li>留出 demo_4：首个诊断退化: <a href="_static/visual/libero-demo4.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo4-curves.zh.svg">SVG</a></li><li>留出 demo_8：最大原生穿透: <a href="_static/visual/libero-demo8.json.gz">JSON.gz</a> · <a href="_static/visual/libero-demo8-curves.zh.svg">SVG</a></li></ul></details>
 </div>
 ```
 
@@ -315,7 +315,7 @@
 
 **边界：** 只有示范动作执行，未验证固定策略闭环效果、真实材料准确性或中途状态恢复；留出仅为同任务的十条示范，不是新任务泛化。
 
-默认是冻结顺序第一条开发示范，不按结果挑选。另展示留出首个诊断退化与最大原版穿透，两者为事后诊断选择；完整十条配对结果均保留。视频不再积分物理。
+默认是冻结顺序第一条开发示范，不按结果挑选。另展示留出首个诊断退化与最大原版穿透，两者为事后诊断选择；完整十条配对结果均保留。GIF 不再积分物理。
 
 1 mm 虚线只是预设数值筛查；相对高度包含旋转，法向力来自实际接触。原生时间 = 显示时间 + 0.25 s；曲线使用各自积分前／后时刻。
 

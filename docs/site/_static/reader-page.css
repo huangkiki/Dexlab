@@ -144,7 +144,7 @@ body[data-reader-page="visual-comparisons"] .lesson-article {
   overflow-x: auto;
 }
 
-.lesson-article :is(.admonition, .sd-card, .lab-showcase, .lab-chart, .experiment-card, .dexlab-replay, .cutting-player, .cutting-comparison-panel, .dexlab-live-lab) {
+.lesson-article :is(.admonition, .sd-card, .lab-showcase, .lab-chart, .experiment-card, .gif-evidence, .cutting-player, .cutting-comparison-panel, .dexlab-live-lab) {
   border-radius: 0;
   box-shadow: none;
 }
@@ -244,9 +244,7 @@ body[data-reader-page="visual-comparisons"] .lesson-article {
 }
 
 .lesson-article .cutting-view-switch,
-.lesson-article .cutting-view-switch button,
-.lesson-article .cutting-reference-controls button,
-.lesson-article .cutting-playback-controls button {
+.lesson-article .cutting-view-switch button {
   border-radius: 0;
   box-shadow: none;
 }

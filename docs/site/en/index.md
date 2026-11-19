@@ -70,8 +70,8 @@
           <small>11.096 / 10.209 mm</small>
         </header>
         <div class="evidence-media evidence-media-split">
-          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx-poster.png" aria-label="Latest tofu two-cut and side-push recording"><source src="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx.mp4" type="video/mp4"></video>
-          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx-poster.png" aria-label="Latest banana three-cut and side-push recording"><source src="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx.mp4" type="video/mp4"></video>
+          <img src="../../zh-cn/latest/_static/cutting/tofu-cut-push/surface-rtx.gif" alt="Latest tofu two-cut and side-push recording" width="100%" loading="lazy">
+          <img src="../../zh-cn/latest/_static/cutting/banana-cut-push/surface-rtx.gif" alt="Latest banana three-cut and side-push recording" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Cutting / separation criterion</p>
@@ -94,7 +94,7 @@
           <small>2.734 → 1.025 mm</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/wuji-contact/hold-comparison.png" aria-label="Wuji point and torsional contact comparison"><source src="../../zh-cn/latest/_static/wuji-contact/comparison.mp4" type="video/mp4"></video>
+          <img src="../../zh-cn/latest/_static/wuji-contact/comparison.gif" alt="Wuji point and torsional contact comparison" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Contact / moment direction</p>
@@ -106,7 +106,7 @@
             <div><dt>Criterion</dt><dd><strong>2.734 → 1.025 mm; 29.336 → 0.024992 rad/s</strong></dd></div>
             <div><dt>Scope</dt><dd>Two-finger ball hold; not hardware material calibration or whole-hand capability</dd></div>
           </dl>
-          <a href="wuji-contact.html">Open contact records, video and independent recomputation →</a>
+          <a href="wuji-contact.html">Open contact records, GIF and independent recomputation →</a>
         </div>
       </article>
 
@@ -117,7 +117,7 @@
           <small>1/10 · 10/10</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/studio/apple.png" aria-label="OpenArm and Wuji apple-stem grasp record"><source src="../../zh-cn/latest/_static/studio/apple.mp4" type="video/mp4"></video>
+          <img src="../../zh-cn/latest/_static/studio/apple.gif" alt="OpenArm and Wuji apple-stem grasp record" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Task / frozen disturbance set</p>
@@ -140,7 +140,7 @@
           <small>52 / 105 pass</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" aria-label="Cloth grasp and motion record"><source src="../../zh-cn/latest/_static/cloth-studio/grasp.mp4" type="video/mp4"></video>
+          <img src="../../zh-cn/latest/_static/cloth-studio/grasp.gif" alt="Cloth grasp and motion record" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Deformable body / staged acceptance</p>
@@ -163,7 +163,7 @@
           <small>Per configuration</small>
         </header>
         <div class="evidence-media">
-          <video controls muted loop playsinline preload="none" poster="../../zh-cn/latest/_static/studio/incline.png" aria-label="Six-engine incline comparison record"><source src="../../zh-cn/latest/_static/studio/incline.mp4" type="video/mp4"></video>
+          <img src="../../zh-cn/latest/_static/studio/incline.gif" alt="Six-engine incline comparison record" width="100%" loading="lazy">
         </div>
         <div class="evidence-copy">
           <p class="home-evidence-label">Solver / same-task response</p>
@@ -256,7 +256,7 @@
     </li>
     <li data-reveal-item>
       <span>Native readback</span>
-      <h3>Video explains; numbers decide.</h3>
+      <h3>Visuals explain; numbers decide.</h3>
       <p>Independently check penetration, contact force, supporting object, momentum and angular-momentum residuals, actuation saturation and task stage. Similar pixels do not imply equivalent physics.</p>
     </li>
     <li data-reveal-item>

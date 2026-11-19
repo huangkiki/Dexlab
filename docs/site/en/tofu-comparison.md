@@ -1,17 +1,17 @@
 # Two tofu cuts and a knife-face push
 
-**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and videos below retain their historical inputs; they are not the latest task.**
+**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and GIFs below retain their historical inputs; they are not the latest task.**
 
-The current replay makes the source of post-cut motion visible: the knife returns to the left kerf and pushes the left piece sideways. Actuator forces and material reactions jointly integrate the blade; material velocity is never directly changed. Banana slicing and cross scoring remain separate tasks.
+The current GIF makes the source of post-cut motion visible: the knife returns to the left kerf and pushes the left piece sideways. Actuator forces and material reactions jointly integrate the blade; material velocity is never directly changed. Banana slicing and cross scoring remain separate tasks.
 
 ```{raw} html
 <section class="cutting-player" aria-label="Two tofu cuts and independent motion"><header><h3>DexLab · Two tofu cuts</h3>
-<div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-sequential/particles.mp4" data-poster="_static/cutting/tofu-sequential/particles-poster.png" aria-pressed="true">Particles</button><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-sequential/surface.mp4" data-poster="_static/cutting/tofu-sequential/surface-poster.png" aria-pressed="false">Surface</button></div></header>
-<video controls muted playsinline preload="metadata" poster="_static/cutting/tofu-sequential/particles-poster.png" aria-label="Two tofu cuts and independent motion"><source src="_static/cutting/tofu-sequential/particles.mp4" type="video/mp4"></video>
+<div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu-sequential/particles.gif" aria-pressed="true">Particles</button><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu-sequential/surface.gif" aria-pressed="false">Surface</button></div></header>
+<img src="_static/cutting/tofu-sequential/particles.gif" alt="Two tofu cuts and independent motion" width="100%" loading="lazy">
 <p>Two cuts form three pieces. The knife re-enters the left kerf, pushes through face contact, then withdraws. No direct material velocity increment.</p></section>
 ```
 
-**Comparison boundary:** author clips initialize left-piece velocity; the current DexLab clip uses knife-face contact. The same cutting problem does not imply the same final input or permit displacement, force or cost rankings. Historical impulse data and downloads below remain unchanged and do not describe the new video.
+**Comparison boundary:** author clips initialize left-piece velocity; the current DexLab clip uses knife-face contact. The same cutting problem does not imply the same final input or permit displacement, force or cost rankings. Historical impulse data and downloads below remain unchanged and do not describe the new GIF.
 
 ## Motion and acceptance
 

@@ -169,7 +169,7 @@ components:
   learning-number:
     textColor: '{colors.accent}'
     typography: '{typography.step-number}'
-  evidence-video:
+  evidence-gif:
     backgroundColor: '{colors.panel}'
     width: 100%
   evidence-boundary:
@@ -236,8 +236,8 @@ One restrained green accent sits among warm, low-chroma neutrals shared with the
 ### Neutral
 
 - **Warm Paper** (`page`): the page canvas and text on the focused skip link.
-- **Paper Wash** (`panel`): the native video's backdrop.
-- **Recorded Media** (`media`): the neutral dark stage behind user-controlled video.
+- **Paper Wash** (`panel`): the stage behind recorded GIF previews.
+- **Recorded Media** (`media`): the neutral stage behind recorded GIF previews.
 - **Charcoal** (`ink`): titles, body text, reading rows, summary labels and hovered ordinary links.
 - **Muted Olive Gray** (`muted`): supporting text, captions and resting navigation.
 - **Fine Rule** (`rule`): reading-rail edge, section separators and reading rows.
@@ -280,7 +280,7 @@ The research guide uses a fixed (190px) reading rail with six labeled groups and
 
 The shared Sphinx reader centers a (760px) article with an optional (160px) current-page outline, inside a (1040px) maximum grid. It does not render a second full-site toctree. Pages without a useful outline collapse to an (840px) centered column. The Blog uses an (880px) centered index with no section rail. At (1200px) and below, the outline disappears and the article centers; at (800px) and below, the grid becomes a single flow with the shared page gutters.
 
-Comparative experiment pages may widen the article to (960px) through their own content components. A comparison summary uses a two-column open rule between the claim and its criteria/scope. A three-column replay guide names pane order, what to watch and what the video cannot establish. Result matrices keep (760px) minimum width in their own horizontal scroll region and mark pass, failure, partial result and invalid evidence with text plus color, never color alone.
+Comparative experiment pages may widen the article to (960px) through their own content components. A comparison summary uses a two-column open rule between the claim and its criteria/scope. A three-column GIF guide names pane order, what to watch and what the image cannot establish. Result matrices keep (760px) minimum width in their own horizontal scroll region and mark pass, failure, partial result and invalid evidence with text plus color, never color alone.
 
 Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
@@ -346,7 +346,7 @@ At (1100px) and below the evidence layers use two columns. At (800px) and below 
 
 ### Evidence inspector
 
-The representative-experiment section lists five cases in editorial order. Every case remains in the page and contains its recorded video or paired videos, a conclusion, and a four-row ledger for control variable, native readback, criterion/result and scope. Links open the complete experiment record rather than expanding an unbounded transcript on the homepage.
+The representative-experiment section lists five cases in editorial order. Every case remains in the page and contains its recorded GIF or paired GIFs, a conclusion, and a four-row ledger for control variable, native readback, criterion/result and scope. Links open the complete experiment record rather than expanding an unbounded transcript on the homepage.
 
 Scrolling carries the reader from one case to the next; there is no radio or tab selection. Each case occupies an open ruled row with its own header and stacks on narrow screens. With motion enabled, panels begin slightly low and translucent and settle as they intersect the viewport; without JavaScript or with reduced motion, all five remain fully visible. Print shows the same five-panel sequence without transitions. Every result keeps its governing condition and evidence boundary beside the media.
 
@@ -378,7 +378,7 @@ Native explanations can be expanded together. Self-checks use labeled radios, a 
 
 Reports, experiment pages, project documentation and generated course pages share one responsive shell. The global masthead is the only site-level navigation. Long documents may add a single right-hand current-page outline; Blog and short pages omit it. There is no second left rail containing the full Sphinx tree. This reduces navigation from “global category → all-site tree → current page” to “global category → current page”.
 
-Sphinx-specific content keeps its native semantics: local toctrees become open ruled reading lists, tables scroll within the article, code blocks use the paper wash, admonitions use top and bottom rules, and existing video/replay/experiment components retain their controls and scripts. No report introduces rounded promotional cards, shadows, gradients or a separate palette.
+Sphinx-specific content keeps its native semantics: local toctrees become open ruled reading lists, tables scroll within the article, code blocks use the paper wash, admonitions use top and bottom rules, and GIF/experiment components retain their static data disclosures. No report introduces rounded promotional cards, shadows, gradients or a separate palette.
 
 ### Engine comparison experiment
 
@@ -405,7 +405,7 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
 - **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
-- **Do** preserve visible keyboard focus, native video and disclosure controls, and complete reading access without JavaScript.
+- **Do** preserve visible keyboard focus and complete GIF, figure and disclosure access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.
 - **Do** preserve explicit reading bookmarks and distinguish teaching calculations, sourced MuJoCo 4 changes and native measurements; retain the detailed courses' pinned baseline.
 - **Do** send every ordinary content page through the shared reader template so navigation, type, spacing and responsive behavior stay identical across the Blog.

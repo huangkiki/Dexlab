@@ -4,8 +4,8 @@ This experiment implements one **synthetic tofu-like block halving** task from t
 
 ```{raw} html
 <section class="cutting-player" aria-label="Tofu halving">
-<header><h3>Tofu halving</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.mp4" data-poster="_static/cutting/tofu/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.mp4" data-poster="_static/cutting/tofu/particles-poster.png" aria-pressed="false">Particles</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/tofu/surface-poster.png" aria-label="Tofu halving"><source src="_static/cutting/tofu/surface.mp4" type="video/mp4"><a href="_static/cutting/tofu/surface.mp4">Watch video</a></video>
+<header><h3>Tofu halving</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/tofu/surface.gif" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/tofu/particles.gif" aria-pressed="false">Particles</button></div></header>
+<img src="_static/cutting/tofu/surface.gif" alt="Tofu halving" width="100%" loading="lazy">
 <p>Cut, withdraw and check independent motion.</p>
 </section>
 ```

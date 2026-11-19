@@ -7,13 +7,11 @@
 ## Case 1：相邻面包挤压后的滚边脱落
 
 ```{raw} html
-<video controls preload="metadata" width="100%" poster="_static/robodojo-bread-slip/layout-002-preview.gif">
-  <source src="_static/robodojo-bread-slip/layout-002.mp4" type="video/mp4">
-</video>
+<img src="_static/robodojo-bread-slip/layout-002-preview.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 ```
 
 ```{raw} html
-<p><a href="_static/robodojo-bread-slip/layout-002.mp4">下载 layout 002 完整 MP4</a></p>
+<p><a href="_static/robodojo-bread-slip/layout-002-preview.gif">下载 layout 002 GIF</a></p>
 ```
 
 seed 0 / layout 002 在 step 982 发生接触塌缩。此前双指法向冲量峰值约为 **0.252 N·s**，该帧降为 **0**；相邻面包在释放附近产生约 **0.062 N·s** 冲量，随后目标面包先撞货架（约 **0.048 N·s**）。接触点比质心高约 **4.60 cm**，对质心的力臂约 **4.85 cm**。这相当于只捏住薄片上缘，再被旁边薄片横向顶一下：接触法线旋转，面包绕上缘滚出双指，而不是沿一个稳定、居中的夹持面被提起。
@@ -23,13 +21,11 @@ seed 0 / layout 002 在 step 982 发生接触塌缩。此前双指法向冲量�
 ## Case 2：没有明显外碰撞的浅夹持滑脱
 
 ```{raw} html
-<video controls preload="metadata" width="100%" poster="_static/robodojo-bread-slip/layout-011-preview.gif">
-  <source src="_static/robodojo-bread-slip/layout-011.mp4" type="video/mp4">
-</video>
+<img src="_static/robodojo-bread-slip/layout-011-preview.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 ```
 
 ```{raw} html
-<p><a href="_static/robodojo-bread-slip/layout-011.mp4">下载 layout 011 完整 MP4</a></p>
+<p><a href="_static/robodojo-bread-slip/layout-011-preview.gif">下载 layout 011 GIF</a></p>
 ```
 
 seed 0 / layout 011 在 step 188 失稳。双指法向冲量从约 **0.253 N·s** 降到 **0.0019 N·s**；释放前附近没有测到相邻面包或货架冲量，之后面包在 step 192 撞桌面（约 **0.111 N·s**）。接触点比质心高约 **4.42 cm**；对约 11.8 cm 高的面包片而言，它只比上缘低约 1.4 cm。
@@ -49,13 +45,13 @@ seed 0 / layout 011 在 step 188 失稳。双指法向冲量从约 **0.253 N·s*
 | `s1/l049` | 第一片已放入；第二片 `seat` 停在 `0.952 m`，比目标高 **2.8 cm** | 10 mm 上移与横移仍被阻挡；随后 `rs-down` 在 11 步内把 TCP 从 `0.975 m` 带到 `1.258 m`，上升 **28.3 cm**，距三维目标 **47.8 cm** | 夹持释放、撤离失败，第二片无法确认，任务停在一片 |
 
 ```{raw} html
-<details><summary>展开三个完整右腕视频</summary>
+<details><summary>展开三个右腕 GIF</summary>
 <p><code>s0/l025</code></p>
-<video controls preload="metadata" width="100%"><source src="_static/robodojo-bread-slip/v67-s0-l025-right.mp4" type="video/mp4"></video>
+<img src="_static/robodojo-bread-slip/v67-s0-l025-right.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 <p><code>s1/l026</code></p>
-<video controls preload="metadata" width="100%"><source src="_static/robodojo-bread-slip/v67-s1-l026-right.mp4" type="video/mp4"></video>
+<img src="_static/robodojo-bread-slip/v67-s1-l026-right.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 <p><code>s1/l049</code></p>
-<video controls preload="metadata" width="100%"><source src="_static/robodojo-bread-slip/v67-s1-l049-right.mp4" type="video/mp4"></video>
+<img src="_static/robodojo-bread-slip/v67-s1-l049-right.gif" alt="DexLab recorded replay" width="100%" loading="lazy">
 </details>
 ```
 
@@ -113,7 +109,7 @@ seed 0 / layout 011 在 step 188 失稳。双指法向冲量从约 **0.253 N·s*
 
 ## 证据范围
 
-- 旧脱落批次：2026-11-12；100 个不同 seed/layout 工况，成功 19、失败 81。视频为 25 Hz RGB 与刚体位姿；接触诊断聚合 250 Hz PhysX 回调。两个片段均为失稳前后约 4 秒、2 倍慢放；第 8 秒对应释放 step。
-- v67 接触逃逸批次：2026-11-13；100 个不同 seed/layout 工况，成功 65、失败 35；三个逃逸 case 均有完整右腕视频和动作级端点日志，但没有逐物理步接触／驱动记录。
+- 旧脱落批次：2026-11-12；100 个不同 seed/layout 工况，成功 19、失败 81。GIF 由 25 Hz RGB 与刚体位姿生成；接触诊断聚合 250 Hz PhysX 回调。两个片段均为失稳前后约 4 秒、2 倍慢放；第 8 秒对应释放 step。
+- v67 接触逃逸批次：2026-11-13；100 个不同 seed/layout 工况，成功 65、失败 35；三个逃逸 case 均有右腕 GIF 和动作级端点日志，但没有逐物理步接触／驱动记录。
 - 机器可读指标：旧批次 <a href="_static/robodojo-bread-slip/metrics.json">metrics.json</a> 与 <a href="_static/robodojo-bread-slip/layout-011-root-cause.json">layout-011-root-cause.json</a>；v67 见 <a href="_static/robodojo-bread-slip/contact-escape-v67.json">contact-escape-v67.json</a>。
 - 没有运行另一物理引擎、真实面包实验或参数标定；没有完成三个 v67 case 的受控 solver／控制／材质 A/B。结论只覆盖各自批次和已记录事件。

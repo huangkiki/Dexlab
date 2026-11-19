@@ -1,13 +1,13 @@
 # Three sequential banana cuts
 
-**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and videos below retain their historical inputs; they are not the latest task.**
+**Historical protocol archive. See the [current showcase](cut-push.md) for continuous cut-to-push motion and per-frame contact forces/displacements. Numbers and GIFs below retain their historical inputs; they are not the latest task.**
 
 A force-driven blade descends and withdraws at three positions, cutting a curved peeled-banana shape into four pieces. Surface and particle views replay the same physical states. Pause, scrub or switch representations to inspect each cut.
 
 ```{raw} html
 <section class="cutting-player" aria-label="Three banana cuts">
-<header><h3>Three banana cuts</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana/surface.mp4" data-poster="_static/cutting/banana/surface-poster.png" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana/particles.mp4" data-poster="_static/cutting/banana/particles-poster.png" aria-pressed="false">Particles</button></div></header>
-<video controls autoplay muted loop playsinline preload="metadata" poster="_static/cutting/banana/surface-poster.png" aria-label="Three banana cuts"><source src="_static/cutting/banana/surface.mp4" type="video/mp4"><a href="_static/cutting/banana/surface.mp4">Watch video</a></video>
+<header><h3>Three banana cuts</h3><div class="cutting-view-switch" aria-label="Representation"><button type="button" data-cutting-view="surface" data-src="_static/cutting/banana/surface.gif" aria-pressed="true">Surface</button><button type="button" data-cutting-view="particles" data-src="_static/cutting/banana/particles.gif" aria-pressed="false">Particles</button></div></header>
+<img src="_static/cutting/banana/surface.gif" alt="Three banana cuts" width="100%" loading="lazy">
 <p>Three sequential cuts with persistent separation.</p>
 </section>
 ```
