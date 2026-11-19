@@ -15,7 +15,7 @@ Solver 失败复盘 <solver-failure-audit>
 研究账本 <research-ledger>
 ```
 
-[当我们在讨论仿真 Sim-to-Real Gap 问题时，我们在讨论什么？](failure-root-cause-atlas.md)把 15 个历史 demo、8 项研究经验、其余注册证据族和后续新增入口统一整理为七层证据链，并明确没有真机数据时能够证明的边界。[Solver 失败复盘](solver-failure-audit.md)继续保留逐引擎、逐配置的历史证据。
+[当我们在讨论仿真 Sim-to-Real Gap 问题时，我们在讨论什么？](failure-root-cause-atlas.md)用运行时前置检查与 P/A/G/C/N/O 六个第一失效域给出判因路径，并把完整实验、未判定项和真机边界交给下列证据页继续追踪。[Solver 失败复盘](solver-failure-audit.md)保留逐引擎、逐配置的历史证据。
 
 ## 双引擎斜面对照
 

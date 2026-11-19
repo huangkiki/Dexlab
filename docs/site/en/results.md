@@ -15,7 +15,7 @@ Benchmark <benchmark>
 Ledger <research-ledger>
 ```
 
-[What do we mean when we discuss the Sim-to-Real Gap?](failure-root-cause-atlas.md) organizes all 15 historical demos, eight research experiences, remaining registered evidence families and later additions into a seven-layer evidence chain, with explicit limits for simulation-only evidence. The [solver failure audit](solver-failure-audit.md) retains backend- and configuration-specific historical evidence.
+[What do we mean when we discuss the Sim-to-Real Gap?](failure-root-cause-atlas.md) gives a runtime-preflight and P/A/G/C/N/O process for locating the first failing layer, then points to the evidence pages for complete experiments, unresolved items and hardware limits. The [solver failure audit](solver-failure-audit.md) retains backend- and configuration-specific historical evidence.
 
 ## Paired engine incline comparison
 
