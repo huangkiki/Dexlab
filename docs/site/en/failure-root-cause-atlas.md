@@ -1,6 +1,6 @@
 # What do we mean when we discuss the Sim-to-Real Gap?
 
-**DexLab is Kiki Huang's personal research project.** This article reorganizes the existing experiments around one question: what does it mean for a simulation to “look right” or complete a task?
+This article reorganizes the existing experiments around one question: what does it mean for a simulation to “look right” or complete a task?
 
 ## The short answer
 
