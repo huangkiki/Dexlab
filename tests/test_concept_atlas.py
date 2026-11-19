@@ -113,6 +113,10 @@ class ConceptAtlasTests(unittest.TestCase):
         )
         rendered_dates = re.findall(r'<time datetime="([^"]+)">', rendered)
         self.assertEqual(rendered_dates, sorted(rendered_dates, reverse=True))
+        self.assertLess(
+            rendered.index("NeuralActuator：执行器误差单独建模"),
+            rendered.index("灵巧操作仿真：六层问题"),
+        )
         self.assertIn('href="failure-root-cause-atlas.html"', rendered)
         self.assertIn("当我们在讨论 Sim-to-Real Gap 时", rendered)
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)

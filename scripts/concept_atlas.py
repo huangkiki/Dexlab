@@ -442,7 +442,10 @@ def render_field(atlas, language):
     topic_links = []
     topic_items = sorted(
         grouped["synthesis"],
-        key=lambda item: item["updated"],
+        key=lambda item: (
+            item["updated"],
+            item.get("topic_priority", 0),
+        ),
         reverse=True,
     )
     for item in topic_items:

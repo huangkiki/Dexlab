@@ -58,6 +58,19 @@
   },
   "concepts": [
     {
+      "id": "neural-actuator-topic",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "neural-actuator.html",
+      "updated": "2026-11-19",
+      "topic_priority": 1,
+      "name": {"zh": "NeuralActuator：执行器误差单独建模", "en": "NeuralActuator: model actuator error separately"},
+      "aliases": {"zh": ["神经执行器", "低成本舵机建模", "torque surrogate"], "en": ["neural actuator", "low-cost servo modeling", "torque surrogate"]},
+      "summary": {"zh": "先证明命令、状态、telemetry 与力参考能区分执行器误差和接触载荷，再谈学习型 torque surrogate。", "en": "First show that command, state, telemetry and force references separate actuator error from contact load; then consider a learned torque surrogate."},
+      "relations": [{"type": "related", "target": "sim-to-real-gap"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "readback"}]
+    },
+    {
       "id": "sim-to-real-gap",
       "group": "synthesis",
       "level": "core",

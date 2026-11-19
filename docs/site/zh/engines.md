@@ -8,6 +8,7 @@
 求解配置分层 <solver-taxonomy>
 多求解器同步与 preCICE <solver-coupling>
 共同进化与模型评测 <model-evaluation>
+执行器误差与接触载荷 <neural-actuator>
 视觉目标信号审计 <mask-conditioned-gcrl>
 物理 caption 与参考覆盖 <physcapbench>
 Code as Policy 专题 <code-as-policy>
