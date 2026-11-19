@@ -1,0 +1,74 @@
+{
+  "walk1_subject1": {
+    "step": 12089,
+    "progress": 0.9252257943153381,
+    "anchor_xy_error": 0.7169563174247742,
+    "anchor_height_error": 0.17383956909179688,
+    "anchor_orientation_error": 0.8247004151344299,
+    "end_height_error": 0.4073234498500824,
+    "body_position_error": 0.27687373757362366,
+    "joint_limit_cost": 0.020400315523147583,
+    "max_contact_force": 81.56904602050781,
+    "base_z": 0.3301764130592346
+  },
+  "fallAndGetUp1_subject4": {
+    "step": 1617,
+    "progress": 0.19224824011325836,
+    "anchor_xy_error": 0.45456111431121826,
+    "anchor_height_error": 0.11813940107822418,
+    "anchor_orientation_error": 0.8995242118835449,
+    "end_height_error": 0.1753029227256775,
+    "body_position_error": 0.1913464367389679,
+    "joint_limit_cost": 0.07606589794158936,
+    "max_contact_force": 1305.6790771484375,
+    "base_z": 0.28646180033683777
+  },
+  "fight1_subject3": {
+    "step": 1689,
+    "progress": 0.1379338502883911,
+    "anchor_xy_error": 0.7187713980674744,
+    "anchor_height_error": 0.2553880214691162,
+    "anchor_orientation_error": 0.5328930616378784,
+    "end_height_error": 0.3632960915565491,
+    "body_position_error": 0.2802843749523163,
+    "joint_limit_cost": 0.09275904297828674,
+    "max_contact_force": 81.32303619384766,
+    "base_z": 0.2623971104621887
+  },
+  "dance1_subject3": {
+    "step": 3271,
+    "progress": 0.4974904954433441,
+    "anchor_xy_error": 0.6918702125549316,
+    "anchor_height_error": 0.20075899362564087,
+    "anchor_orientation_error": 0.897492527961731,
+    "end_height_error": 0.39702996611595154,
+    "body_position_error": 0.2556605935096741,
+    "joint_limit_cost": 0.029318928718566895,
+    "max_contact_force": 145.79391479492188,
+    "base_z": 0.32799232006073
+  },
+  "jumps1_subject1": {
+    "step": 5433,
+    "progress": 0.44448989629745483,
+    "anchor_xy_error": 1.0356472730636597,
+    "anchor_height_error": 0.18639644980430603,
+    "anchor_orientation_error": 0.9362530708312988,
+    "end_height_error": 0.40299192070961,
+    "body_position_error": 0.24545855820178986,
+    "joint_limit_cost": 0.0183565616607666,
+    "max_contact_force": 168.37753295898438,
+    "base_z": 0.3000488579273224
+  },
+  "run1_subject5": {
+    "step": 5695,
+    "progress": 0.4789336621761322,
+    "anchor_xy_error": 0.9356929659843445,
+    "anchor_height_error": 0.20979651808738708,
+    "anchor_orientation_error": 0.7787153124809265,
+    "end_height_error": 0.4338577687740326,
+    "body_position_error": 0.31569594144821167,
+    "joint_limit_cost": 0.08985316753387451,
+    "max_contact_force": 381.37939453125,
+    "base_z": 0.2741898000240326
+  }
+}

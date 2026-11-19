@@ -220,6 +220,7 @@
   </header>
   <div class="home-next-grid">
     <a href="experiments.html"><strong>All experiments</strong><span>Tasks, protocols, results and retained failures</span></a>
+    <a href="raisim-bumi-mimic.html"><strong>RaiSim Bumi backend</strong><span>BlinkMimic2 transitions, contract repair and closed-loop limits</span></a>
     <a href="../../zh-cn/latest/_static/research/dexterous-simulation.html"><strong>Research guide</strong><span>Six layers of dexterous simulation</span></a>
     <a href="learning.html"><strong>Learn simulation</strong><span>MuJoCo route and six engine courses</span></a>
   </div>

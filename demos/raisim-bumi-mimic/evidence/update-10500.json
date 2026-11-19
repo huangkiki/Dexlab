@@ -1,0 +1,165 @@
+{
+  "task": "Raisim-Bumi-BlinkMimic2-Lafan6",
+  "checkpoint_info": {
+    "sha256": "c3f446614f09a12d020cd9ae0652ae5ed821e15e23cf5f24da580a8298d9927e",
+    "metadata": {
+      "format": 1,
+      "task": "Mjlab-Bumi-BlinkMimic2-Lafan",
+      "joint_order": [
+        "l_leg_pitch_joint",
+        "r_leg_pitch_joint",
+        "waist_yaw_joint",
+        "l_leg_roll_joint",
+        "r_leg_roll_joint",
+        "l_arm_pitch_joint",
+        "r_arm_pitch_joint",
+        "l_leg_yaw_joint",
+        "r_leg_yaw_joint",
+        "l_arm_roll_joint",
+        "r_arm_roll_joint",
+        "l_knee_pitch_joint",
+        "r_knee_pitch_joint",
+        "l_arm_yaw_joint",
+        "r_arm_yaw_joint",
+        "l_ankle_pitch_joint",
+        "r_ankle_pitch_joint",
+        "l_elbow_pitch_joint",
+        "r_elbow_pitch_joint",
+        "l_ankle_roll_joint",
+        "r_ankle_roll_joint"
+      ],
+      "motion_processing": "lafan40-bvh-gmr-current-model-v3",
+      "versions": {
+        "bumi": "2454535c967cd1d6f04dfe0f0289f3c6c608e596",
+        "mjlab": "f389738f68bb831754c030e4ec1d3585b7498cdf",
+        "rsl_rl": "5.5.2"
+      },
+      "assets_manifest_sha256": "6e152959792e627608648ed48d4ed8bfe8bd063e5a4bf8e762bd8a3ca2823a61",
+      "algorithm_schema": "blink2-k8-h32-startup-objective-v6",
+      "method_source": {
+        "repository": "https://github.com/jyl681/blinkmimic2",
+        "revision": "850de91c4c26ed1337b36259391d2a4f21c89198"
+      },
+      "closed_loop_goal_sources": [
+        {
+          "repository": "https://github.com/miao-org/awesome-supermimic",
+          "revision": "9b11b6c0a06297163459d3b06d89a738d43967e8"
+        },
+        {
+          "repository": "https://github.com/btx0424/rethinking-supermimic",
+          "revision": "95481d20fe63ec596b8b45c3be76892ed3d2e1a8"
+        },
+        {
+          "repository": "https://github.com/Huy-Quang-Dao/instantTrack",
+          "revision": "b9512a96d4e82e6ddea9a6de3b03276888bbcb2c"
+        }
+      ],
+      "lafan_manifest_sha256": "604554646ef99f390dcd88fef06bc98bbbb6ffbbd9722f0b97d01203d75afbdf"
+    },
+    "lafan_manifest_sha256": "604554646ef99f390dcd88fef06bc98bbbb6ffbbd9722f0b97d01203d75afbdf",
+    "iteration": 10500,
+    "runtime": {
+      "python": "3.12.3",
+      "packages": {
+        "mjlab": "1.6.0",
+        "rsl-rl-lib": "5.5.2",
+        "torch": "2.14.1+cu130",
+        "mujoco": "3.16.0",
+        "mujoco-warp": "3.16.0",
+        "warp-lang": "1.19.0"
+      },
+      "docker_image": "sha256:2c3f3b4214f6bb43f31e3ccfedac8267d875c7c0068065715e215a81fc5f389f",
+      "source_sha256": {
+        "__init__.py": "24d1cdfb6f4ed81ee5ee312859c36ee45a783013a77ed7747cc4a0ae2200b70b",
+        "algorithm.py": "2390bc17e6062cd0f546ffd8d311ef9c68d54749d61b0d2e107d8f775f183279",
+        "budget.py": "e504995e7545edaeaec9009af9440d10055dab0441e773844687a4f2f198c410",
+        "commands.py": "2da1096b35762ed9682c5bc89c2890a66c2c384f7d1b324315aea40f6132ef99",
+        "config.py": "3f39f89fa4813ad9c496eb131893479e523b9ead9eb47da0002d52c3e0c73c92",
+        "contact.py": "07ab7dcea5f1f88f0dfb2365930b3f5c17d98e945a201671858765bfb495376c",
+        "env.py": "bb04753ba1ff77ace4bd1070d7cdc8e8467331a042a86d1a44b81907494e3c3d",
+        "evaluate.py": "7f7eb578a0ea2da2051145501d3d583ec097421909f700e60c788f914f655f11",
+        "events.py": "eb2ab28b50e896e578ae9a7556285a05702e56a585b3aae2d398fa2d76f05b0a",
+        "motion.py": "993004587bdfab403fe7b6fcd47c932b313e574da0caecb7e7aa313f7b44a034",
+        "observations.py": "0950280fecbedd76324ad95c195c0f0bcb8cad112b50e833fc274d2296ab9f96",
+        "play.py": "5a54c0759cc6b379da3e470489c97ff21fdb6a04af32fc6602e58087b9450b08",
+        "prepare_lafan.py": "2f242789c841dd96eb15bb1b7d2aa76e72b439ed332de40bb9bcc4d812d8a687",
+        "prepare_motion.py": "4c3c46a8ec52f954dc3217aa24394e6a97f496b5dfb5b9f7fb48fc817dab938f",
+        "raisim/__init__.py": "1414b71895b8d9187763724b6d5f57625c964ec6b614a1c55fd775a3220dfa82",
+        "raisim/mimic_env.py": "b19542d7ce45d51685c0c9c3ca4f648684b07c0ccef617d2f7b6bdcd8f86c14a",
+        "raisim/native.py": "089394527808f26a40a3d70715b83f1c5c24a38555c65b141ce319e63cccda05",
+        "raisim/train.py": "42fc0500fa45da9d7a0140057be7b88e1035a40e998d39d8be777d252474a124",
+        "rewards.py": "658e8ca43513b4faefbe7d3099bfbe9f6aedc15a6663600c96311035a5dd76a3",
+        "robot.py": "d9fe4ffd819da5788e725230fe08db56b4b0e25a9288fe6fe77fa3921cf02b71",
+        "runner.py": "430a28ee6e399dc98d130e3d4ebc03e03c3e1af1020e3674c95f7714c5db8145",
+        "supermimic/__init__.py": "d3810e3903ab83e0e4adad3578423af1d008fe9ee8e43e56f2b16b1adaded8b2",
+        "supermimic/bvh.py": "385d605c3432f95ebd62b22898ecb2ec44502ecab1578baa9bba3fe10059d02d",
+        "supermimic/config.py": "a9c78d9451924dbed61e71c6eab524320c6b4183d98b789c65f0af5b79f4a187",
+        "supermimic/control.py": "a98f2c76ee3df78c444c1d7c50e09e62fc5c3e055566b851966dc0d76e1ffaad",
+        "supermimic/diagnostics.py": "9274c5895ef74ce6fde14df4bd819bd711cf4b040c4780e44eadb479b2e9ceb9",
+        "supermimic/evaluation.py": "1d7144a843e6c09eadd1fa820fd5a5b56aae8287ceabf38fbe6bb456cbd3c509",
+        "supermimic/kinematics.py": "44eaa7a4fb479a65b3e7f3a5aa46d37c6a011e924d6e30ad0c6b551b2dfddf04",
+        "supermimic/lafan.py": "01eb0845a88b95600d6eb7288304809bbaed17c5d9a56a4617fb5471c9d31d8e",
+        "supermimic/learner.py": "432616b9ddf503c978f6180fe877de747e56931c4db9dcf51d85c76b5c12e59d",
+        "supermimic/mirror.py": "85063c87bf02afd5f86763f831263dd5f8ff7c87c7c209841b08f7755bb1391b",
+        "supermimic/models.py": "afbf02f70ead553f021f966d894aa5b46c67ff9401147d130881aa31a7edeb61",
+        "supermimic/objectives.py": "b8c278855d3e04bd5d87cbb7709fe9c8623d969f8d2f1a81ac1fe64b517c2391",
+        "supermimic/policy.py": "5dd1ed756a85bace3d5a6a66f2a54a1e979ddce1e8ec9695ad50910898b9711b",
+        "supermimic/replay.py": "a4b84580c281ffeb73c1247697b30d1f2ed701fa9dc04d0ad42adb0b56990476",
+        "supermimic/retarget.py": "d0239c200ed17b34b01d47ca92f9c79f8293236c34eacf563d7f5b718f986d12",
+        "supermimic/runner.py": "21ed83deab2537fc84fb6e37297f0b9bb262aab3342e78888565199987590392",
+        "supermimic/state.py": "99a0dd0725939e78c30232554d7d3170bafd6171fc1b72abb1130e9f5070dc14",
+        "symmetry.py": "248e7089c0cfefbf1743f480d732ec31c1da703ac95a111a327f03890036e20d",
+        "tasks.py": "82f518e1032f441b906ef77f12158d630320bc7b981b8e190ca2c01fc1290305",
+        "train.py": "03ab4460dc4c4da0f6a4ccf0ce5daffadfff0855969f56fdb79c5049e6ddfff8"
+      }
+    }
+  },
+  "clips": [
+    {
+      "motion": "walk1_subject1",
+      "completed": true,
+      "failed": false,
+      "progress": 0.9999234676361084,
+      "body_position_error_mean": 0.02349504455924034
+    },
+    {
+      "motion": "run1_subject5",
+      "completed": true,
+      "failed": false,
+      "progress": 0.9999158978462219,
+      "body_position_error_mean": 0.03632102161645889
+    },
+    {
+      "motion": "jumps1_subject1",
+      "completed": true,
+      "failed": false,
+      "progress": 0.9999181628227234,
+      "body_position_error_mean": 0.037225089967250824
+    },
+    {
+      "motion": "dance1_subject3",
+      "completed": true,
+      "failed": false,
+      "progress": 0.9998478889465332,
+      "body_position_error_mean": 0.030466781929135323
+    },
+    {
+      "motion": "fallAndGetUp1_subject4",
+      "completed": false,
+      "failed": true,
+      "progress": 0.09927476197481155,
+      "body_position_error_mean": 0.06091591343283653
+    },
+    {
+      "motion": "fight1_subject3",
+      "completed": false,
+      "failed": true,
+      "progress": 0.5465087890625,
+      "body_position_error_mean": 0.03713059425354004
+    }
+  ],
+  "completed": 4,
+  "episodes": 6,
+  "completion_rate": 0.6666666666666666,
+  "body_position_error_mean": 0.03759240762641033
+}

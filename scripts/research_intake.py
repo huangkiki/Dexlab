@@ -386,7 +386,7 @@ def ensure_project_status(url: str, status: str) -> dict[str, Any]:
     if item is None:
         item = json.loads(run(
             "gh", "project", "item-add", str(PROJECT_NUMBER),
-            "--owner", OWNER, "--url", url, "--format", "json",
+            "--owner", "@me", "--url", url, "--format", "json",
         ))
     if item.get("status") != status:
         run(

@@ -7,6 +7,7 @@
 Wuji grasp and torsional contact <wuji-contact>
 Sponge wiping and grasp-assistance comparison <rss-wiping>
 RoboDojo bread-slip diagnosis <robodojo-bread-slip>
+RaiSim Bumi BlinkMimic2 training backend <raisim-bumi-mimic>
 Cloth engine comparison <cloth-comparison>
 Cutting & pushing <cutting-experiments>
 Native LIBERO workflow <libero-workflow>
@@ -21,6 +22,7 @@ Keep existing code paths to preserve asset references, reproduction commands and
 |---|---|---|
 | [Sponge wiping and assisted retention](rss-wiping.md) | [demos/rss-wiping/](https://github.com/huangkiki/Dexlab/tree/main/demos/rss-wiping/) | Source: RoboSimStudio `wipe_the_bar`. The original uses compliant constraints to carry the sponge with the hand; matched unassisted runs measure contact-only holding, slipping and cleaning |
 | [RoboDojo bread-slip diagnosis](robodojo-bread-slip.md) | External run records with DexLab offline diagnosis | Both events keep the close command. One is neighbor-amplified; the other first develops in-plane rotation and loses top-edge margin before normal impulse collapses. The batch boundary remains 19/100 success, with 79/81 failures classified as policy execution |
+| [RaiSim Bumi BlinkMimic2 backend](raisim-bumi-mimic.md) | [demos/raisim-bumi-mimic/](https://github.com/huangkiki/Dexlab/tree/main/demos/raisim-bumi-mimic/) | Keep BlinkMimic2 learning fixed while collecting Bumi transitions in RaiSim; six nominal clips expose backend-contract and long-horizon failures |
 | [Sequential cutting and knife-driven pushing](cut-push.md) | [demos/tofu-knife-push/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-knife-push/) | Three tofu pieces and four banana pieces; explain separation through recorded knife-contact forces, using synthetic materials |
 | [Cross scoring](tofu-scoring.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Two shallow cuts and a connected base; distinguish elastic rebound from native cut history |
 | [Synthetic tofu halving](cutting.md) | [demos/tofu-cut/](https://github.com/huangkiki/Dexlab/tree/main/demos/tofu-cut/) | Single-cut CPU TLMPM, dynamic blade reaction and separation after withdrawal; independent BladeMaster reference |

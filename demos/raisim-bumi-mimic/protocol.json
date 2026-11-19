@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "task": "Raisim-Bumi-BlinkMimic2-Lafan6",
+  "status": "training_completed_acceptance_failed",
+  "bumi_source_commit": "2454535c967cd1d6f04dfe0f0289f3c6c608e596",
+  "algorithm_schema": "blink2-k8-h32-startup-objective-v6",
+  "raisim_version": "2.16.0",
+  "motion_names": [
+    "walk1_subject1",
+    "run1_subject5",
+    "jumps1_subject1",
+    "dance1_subject3",
+    "fallAndGetUp1_subject4",
+    "fight1_subject3"
+  ],
+  "lafan_manifest_sha256": "604554646ef99f390dcd88fef06bc98bbbb6ffbbd9722f0b97d01203d75afbdf",
+  "derived_motion_sha256": "8a9ac977de900db22038780f40b914f5a03454532130129aaa876b7a9eaf11e5",
+  "source_manifest_sha256": "10e34d49464ca4b26e95421685e52fc287afd575713ba4edba8cefb3fabf7fa3",
+  "native_library_sha256": "086815969b6c4d9e33289faf731fa38c69d4a62543316177a05a8735d5c0f2cb",
+  "input_checkpoint_sha256": "b2ba0efc3b099ad47f43c59462165a5d14d7320bff4990719738e8061ce80f81",
+  "final_checkpoint_sha256": "5ce008b07529481f7da37a1aacb2331cd2c82039bff8fe70f30770589f740e11",
+  "final_averaged_sha256": "925bb72eb1511e3ea99457cea1a0b813245ce5f9005443c94c98c22672a19540",
+  "final_online_actor_sha256": "22d2c8cff30c8425e304e786650859f63a0781ed18f49478e1413b9191b40c09",
+  "runtime": {
+    "python": "3.12.3",
+    "torch": "2.14.1+cu130",
+    "device": "NVIDIA GeForce RTX 4090",
+    "docker_image": "sha256:2c3f3b4214f6bb43f31e3ccfedac8267d875c7c0068065715e215a81fc5f389f"
+  },
+  "training": {
+    "mode": "warm-start",
+    "start_iteration": 10000,
+    "end_iteration": 15000,
+    "updates": 5000,
+    "num_envs": 512,
+    "num_threads": 16,
+    "physics_dt": 0.005,
+    "control_dt": 0.02,
+    "elapsed_seconds": 2447.6550258310162,
+    "environment_steps": 6432768,
+    "replay_restored": false,
+    "sampler_restored": false
+  },
+  "evaluation": {
+    "baseline": {
+      "completed": 5,
+      "episodes": 6,
+      "completion_rate": 0.8333333333333334,
+      "body_position_error_mean": 0.058406613456706044
+    },
+    "final_averaged": {
+      "completed": 0,
+      "episodes": 6,
+      "completion_rate": 0.0,
+      "body_position_error_mean": 0.03994490019977093
+    },
+    "final_online_actor": {
+      "completed": 0,
+      "episodes": 6,
+      "completion_rate": 0.0,
+      "body_position_error_mean": 0.037268586146334805
+    }
+  },
+  "limitations": [
+    "Six nominal clips only",
+    "No mass or contact-material randomization qualification",
+    "Exam and failure-frontier phases disabled",
+    "Warm start rebuilds replay and sampler",
+    "No hardware validation"
+  ]
+}

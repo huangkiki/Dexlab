@@ -1,0 +1,32 @@
+{
+  "task": "Raisim-Bumi-BlinkMimic2-Lafan6",
+  "physics": "raisim-2.16.0",
+  "motion_names": [
+    "walk1_subject1",
+    "run1_subject5",
+    "jumps1_subject1",
+    "dance1_subject3",
+    "fallAndGetUp1_subject4",
+    "fight1_subject3"
+  ],
+  "source_motion": "/workspace/.docker-cache/noetix_bumi_mjlab/lafan1/processed/lafan40.npz",
+  "derived_motion": "/workspace/work/lafan6.npz",
+  "checkpoint": "/workspace/artifacts/blinkmimic2/formal_v6r_failure5_seed30_pro1_gpu4_20261113/final.pt",
+  "checkpoint_sha256": "b2ba0efc3b099ad47f43c59462165a5d14d7320bff4990719738e8061ce80f81",
+  "num_envs": 512,
+  "num_threads": 16,
+  "physics_dt": 0.005,
+  "control_dt": 0.02,
+  "seed": 30,
+  "max_seconds": 7200.0,
+  "iterations": 5000,
+  "mode": "warm-start",
+  "source_iteration": 10000,
+  "source_kind": "bumi_blinkmimic2_online_v1",
+  "source_algorithm_schema": "blink2-k8-h32-startup-objective-v6",
+  "replay_restored": false,
+  "sampler_restored": false,
+  "elapsed_seconds": 2447.6550258310162,
+  "completed_iteration": 15000,
+  "environment_steps": 6432768
+}
