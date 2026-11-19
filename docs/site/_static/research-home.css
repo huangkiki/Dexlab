@@ -370,6 +370,17 @@ main > section > h1 {
   line-height: 1.75;
 }
 
+.home-search-results mark {
+  padding: 0 .08em;
+  border-bottom: 1px solid var(--accent);
+  border-radius: 2px;
+  color: var(--ink);
+  background: #dce5d3;
+  font-weight: 650;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 .home-search-more {
   margin: 8px 0 14px;
   font-size: 13px;

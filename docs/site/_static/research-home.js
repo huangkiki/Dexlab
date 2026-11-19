@@ -99,6 +99,47 @@ function loadHomeSearchIndex() {
   return homeSearchIndexPromise;
 }
 
+function highlightHomeSearchText(element, query) {
+  const terms = [...new Set(
+    query.trim().split(/\s+/).filter(Boolean),
+  )].sort((left, right) => right.length - left.length);
+  if (!element || !terms.length) {
+    return;
+  }
+  const escaped = terms.map((term) =>
+    term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  );
+  const pattern = new RegExp(escaped.join("|"), "giu");
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) {
+    nodes.push(walker.currentNode);
+  }
+  nodes.forEach((node) => {
+    const text = node.nodeValue;
+    pattern.lastIndex = 0;
+    if (!text || !pattern.test(text)) {
+      return;
+    }
+    pattern.lastIndex = 0;
+    const fragment = document.createDocumentFragment();
+    let cursor = 0;
+    let match;
+    while ((match = pattern.exec(text))) {
+      fragment.append(document.createTextNode(text.slice(cursor, match.index)));
+      const highlighted = document.createElement("mark");
+      highlighted.textContent = match[0];
+      fragment.append(highlighted);
+      cursor = match.index + match[0].length;
+    }
+    if (!fragment.childNodes.length) {
+      return;
+    }
+    fragment.append(document.createTextNode(text.slice(cursor)));
+    node.replaceWith(fragment);
+  });
+}
+
 function renderHomeSearchResults(query, results, searchTerms) {
   if (!homeSearchResults) {
     return;
@@ -121,10 +162,12 @@ function renderHomeSearchResults(query, results, searchTerms) {
     const link = document.createElement("a");
     link.href = `${docName}.html${anchor || ""}`;
     link.textContent = title;
+    highlightHomeSearchText(link, query);
     item.append(link);
     if (description) {
       const detail = document.createElement("small");
       detail.textContent = description;
+      highlightHomeSearchText(detail, query);
       item.append(detail);
     } else {
       fetch(`${docName}.html`)
@@ -137,6 +180,7 @@ function renderHomeSearchResults(query, results, searchTerms) {
         .then((html) => {
           const summary = Search.makeSearchSummary(html, searchTerms, anchor);
           if (summary && item.isConnected) {
+            highlightHomeSearchText(summary, query);
             item.append(summary);
           }
         })
