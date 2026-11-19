@@ -359,6 +359,13 @@ def load_atlas(
                 ) from error
             if item.get("topic") not in topic_ids:
                 raise ValueError(f"{item['id']} has an unknown research topic")
+            tags = item.get("tags")
+            if (
+                not isinstance(tags, dict)
+                or not tags.get("zh")
+                or not tags.get("en")
+            ):
+                raise ValueError(f"{item['id']} lacks bilingual research tags")
         required_fields = (
             ("name", "summary")
             if item["kind"] == "synthesis"
@@ -488,19 +495,30 @@ def render_field(atlas, language):
             else f"Updated {updated.isoformat()}"
         )
         topic = topics_by_id[item["topic"]]
+        tags = list(
+            dict.fromkeys(
+                [topic["name"][language], *item["tags"][language]]
+            )
+        )
+        tag_html = "".join(
+            f'<span class="concept-topic-tag{" is-topic" if index == 0 else ""}">'
+            f"{html.escape(tag)}</span>"
+            for index, tag in enumerate(tags)
+        )
         topic_links.append(
             '<a class="concept-topic-link" '
             f'href="{html.escape(item["href"], quote=True)}" '
             f'data-topic="{item["topic"]}">'
+            '<span class="concept-topic-head">'
             f"<strong>{html.escape(item['name'][language])}</strong>"
+            f'<span class="concept-topic-action">'
+            f'{"阅读全文 ↗" if language == "zh" else "Read article ↗"}</span></span>'
             f'<span class="concept-topic-summary">'
             f"{html.escape(item['summary'][language])}</span>"
             '<span class="concept-topic-footer">'
-            '<span class="concept-topic-meta">'
-            f'<span class="concept-topic-label">{html.escape(topic["name"][language])}</span>'
-            f'<time datetime="{item["updated"]}">{html.escape(updated_label)}</time></span>'
-            f'<span class="concept-topic-action">'
-            f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></span></a>'
+            f'<span class="concept-topic-tags">{tag_html}</span>'
+            f'<time datetime="{item["updated"]}">{html.escape(updated_label)}</time>'
+            "</span></a>"
         )
     topic_filters = [
         '<button type="button" data-topic-filter="all" aria-pressed="true">'

@@ -71,6 +71,8 @@ class ConceptAtlasTests(unittest.TestCase):
             if item["kind"] == "synthesis":
                 date.fromisoformat(item["updated"])
                 self.assertIn(item["topic"], topic_ids)
+                self.assertTrue(item["tags"]["zh"], (item["id"], "tags", "zh"))
+                self.assertTrue(item["tags"]["en"], (item["id"], "tags", "en"))
 
     def test_synthesis_titles_match_full_article_headings(self):
         for item in self.atlas["concepts"]:
@@ -141,7 +143,15 @@ class ConceptAtlasTests(unittest.TestCase):
         self.assertNotIn('class="concept-field-synthesis"', rendered)
         self.assertEqual(rendered.count('class="concept-topic-link"'), syntheses)
         self.assertEqual(rendered.count("data-topic-filter="), len(self.atlas["topics"]) + 1)
-        self.assertEqual(rendered.count('class="concept-topic-label"'), syntheses)
+        tag_count = sum(
+            len(item["tags"]["zh"]) + 1
+            for item in self.atlas["concepts"]
+            if item["kind"] == "synthesis"
+        )
+        self.assertEqual(
+            len(re.findall(r'<span class="concept-topic-tag(?:\s|")', rendered)),
+            tag_count,
+        )
         self.assertEqual(rendered.count('<time datetime="'), syntheses)
         self.assertLess(
             rendered.index('class="concept-field"'),

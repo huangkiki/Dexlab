@@ -195,26 +195,31 @@ body[data-reader-page^="concepts/"] {
 
 .concept-topics-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 36px;
+  grid-template-columns: 1fr;
 }
 
 .concept-topic-link {
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 7px;
-  min-height: 118px;
-  padding: 16px 0 18px;
+  gap: 10px;
+  min-height: 0;
+  padding: 18px 0 20px;
   border-top: 1px solid var(--rule, #dcded4);
   color: var(--ink, #282b26);
   overflow: visible;
   text-decoration: none;
 }
 
+.concept-topic-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px 28px;
+  align-items: start;
+}
+
 .concept-topic-link strong {
   display: block;
   min-width: 0;
-  font: 400 clamp(1.2rem, 1.8vw, 1.45rem)/1.35 var(--serif, Georgia, serif);
+  font: 400 clamp(1.28rem, 2vw, 1.58rem)/1.35 var(--serif, Georgia, serif);
   letter-spacing: -.015em;
   text-wrap: pretty;
   white-space: normal;
@@ -222,6 +227,7 @@ body[data-reader-page^="concepts/"] {
 }
 
 .concept-topic-summary {
+  max-width: 82ch;
   color: var(--muted, #60675a);
   font-size: 13px;
   line-height: 1.75;
@@ -235,18 +241,28 @@ body[data-reader-page^="concepts/"] {
   gap: 8px 16px;
 }
 
-.concept-topic-meta {
+.concept-topic-tags {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 12px;
+  gap: 5px 7px;
 }
 
-.concept-topic-label {
+.concept-topic-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 7px;
+  border: 1px solid var(--rule, #dcded4);
+  color: var(--muted, #60675a);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.concept-topic-tag.is-topic {
+  border-color: #a5b29b;
   color: var(--accent, #4f664c);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .02em;
 }
 
 .concept-topic-footer time {
@@ -258,6 +274,7 @@ body[data-reader-page^="concepts/"] {
 
 .concept-topic-action {
   width: fit-content;
+  justify-self: end;
   color: var(--accent, #4f664c);
   font-size: 12px;
   font-weight: 700;
@@ -624,10 +641,6 @@ body[data-reader-page^="concepts/"] .lesson-article code {
     justify-self: start;
   }
 
-  .concept-topics-grid {
-    gap: 0 28px;
-  }
-
   .concept-dialog-shell {
     padding: 18px 22px 24px;
   }
@@ -704,6 +717,15 @@ body[data-reader-page^="concepts/"] .lesson-article code {
 
   .concept-topic-link {
     min-height: 0;
+  }
+
+  .concept-topic-head {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .concept-topic-action {
+    justify-self: start;
   }
 
   .concept-dialog-head h2 {
