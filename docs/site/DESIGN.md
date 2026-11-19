@@ -349,6 +349,12 @@ Four evidence layers use the same open three-rule grammar as the conclusions: fr
 
 At (1100px) and below the evidence layers use two columns. At (800px) and below the validation boundary and experiment records become one column, with guarantee, regression and boundary stacked in reading order.
 
+### Sim-to-Real Gap evidence map
+
+The failure-root-cause atlas starts its gap definition with a seven-layer evidence map. On desktop it is one horizontal causal sequence with a green origin marker at each layer and a boundary row that separates simulation-internal checks from hardware validity. At (800px) and below the sequence becomes a vertical timeline; no node is hidden behind a control.
+
+Recorded evidence then appears as full-width media rows rather than small cards or decorative illustrations. Each row pairs the original GIF or measurement image with a two-column caption: the failing-layer label and question on the left, and what the evidence shows, what it cannot show, and the complete report on the right. On narrow screens the caption becomes one flow beneath the media. These figures are the article's evidence, not a replacement for native readback; every caption states the measurement boundary explicitly.
+
 ### Evidence inspector
 
 The representative-experiment section lists five cases in editorial order. Every case remains in the page and contains its recorded GIF or paired GIFs, a conclusion, and a four-row ledger for control variable, native readback, criterion/result and scope. Links open the complete experiment record rather than expanding an unbounded transcript on the homepage.

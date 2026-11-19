@@ -16,6 +16,26 @@ This page applies five questions to every experiment: **symptom → first failin
 
 ## The gap is a chain, not one quantity
 
+<div class="gap-chain" role="group" aria-labelledby="gap-chain-title">
+  <div class="gap-chain-copy">
+    <p id="gap-chain-title">A failed simulation can depart from reality at any layer.</p>
+    <strong>Find the earliest divergence before explaining the final outcome.</strong>
+  </div>
+  <ol class="gap-chain-track">
+    <li><span>01</span><strong>Task &amp;<br>embodiment</strong><small>Is this the same problem?</small></li>
+    <li><span>02</span><strong>Parameter<br>delivery</strong><small>Did configuration reach runtime?</small></li>
+    <li><span>03</span><strong>Units &amp;<br>initial state</strong><small>Does every trajectory share one origin?</small></li>
+    <li><span>04</span><strong>Actuator<br>budget</strong><small>Who supplies the required force and torque?</small></li>
+    <li><span>05</span><strong>Geometry, contact<br>&amp; material</strong><small>Does the required mechanism exist?</small></li>
+    <li><span>06</span><strong>Observation, score<br>&amp; recording</strong><small>Is the conclusion reading valid state?</small></li>
+    <li><span>07</span><strong>Hardware<br>validation</strong><small>Was real-world error measured?</small></li>
+  </ol>
+  <div class="gap-chain-boundary">
+    <span><b>P/A/G/C/N/O</b> are tested inside the model through readback, controls, conservation and regression</span>
+    <span><b>Hardware validity</b> is not supplied by passing the first six layers in simulation</span>
+  </div>
+</div>
+
 | Check layer | Question | What goes wrong if this layer fails first |
 | --- | --- | --- |
 | 1. Task and embodiment | Do the task, robot, objects, environment and success conditions represent the real problem? | A stable engine may be answering a different question |
@@ -42,6 +62,59 @@ The diagnostic labels remain `P/A/G/C/N/O/U`: `P` covers task and geometry; `A` 
 | Hardware validation | Acquisition protocol | A protocol exists, but no qualified hardware dataset does; hardware experiments remain zero |
 
 Together, these experiments show that **the Sim-to-Real Gap is not the difference between a final frame and a video. It is the gap between a claim and the evidence that would make the claim trustworthy.**
+
+## Where the gap breaks in the recorded evidence
+
+<div class="gap-evidence-gallery">
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="robodojo-bread-slip.html" aria-label="Open the complete RoboDojo layout 011 record">
+      <img src="_static/robodojo-bread-slip/layout-011-preview.gif" alt="RoboDojo layout 011 recording of shallow top-edge pinch, bread rotation and loss of contact geometry" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">P · Task geometry</span>
+      <strong>The bread does not simply “drop”</strong>
+      <p>Before bilateral normal impulse collapses, mean top-edge margin in the OBB proxy has already fallen from <b>14.41</b> to <b>2.87 mm</b>. Only then does contact geometry disappear.</p>
+      <small><b>Evidence boundary:</b> The image shows orientation change. The first failing layer comes from the phase-aligned margin, rotation and impulse timeline, not from guessing at the GIF.</small>
+      <a href="robodojo-bread-slip.html">Open the complete layout 011 record →</a>
+    </figcaption>
+  </figure>
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="_static/force-limit/comparison.gif" aria-label="Open the Genesis low-force pinch comparison GIF">
+      <img src="_static/force-limit/comparison.gif" alt="Genesis pinch and lift comparison at 0.4 N and 0.8 N per-finger force limits" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">A · Actuator budget</span>
+      <strong>“Cannot grasp” may only mean “cannot afford the force”</strong>
+      <p>At low limits, fingers provide only <b>0.2/0.4 N</b> while the table still carries about <b>0.428/0.228 N</b>. At 0.8/10 N, the object finally leaves with the gripper.</p>
+      <small><b>Evidence boundary:</b> This is a physically explained failure, not a numerical-solver defect. The image is a measured-pose replay; support comes from the force ledger.</small>
+      <a href="visual-comparisons.html#pinch">Open the pinch and release comparison →</a>
+    </figcaption>
+  </figure>
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="wuji-contact.html" aria-label="Open the complete Wuji point- and torsional-contact report">
+      <img src="_static/wuji-contact/comparison.gif" alt="Synchronized Wuji point-contact failure and torsional-contact pass in the same task" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">C · Contact wrench space</span>
+      <strong>Contact can persist while the sphere rotates</strong>
+      <p>Both point contacts remain present, yet peak angular speed reaches about <b>29.336 rad/s</b>. Adding only the torsional direction lowers it to <b>0.024992 rad/s</b>.</p>
+      <small><b>Evidence boundary:</b> This identifies a missing contact-moment direction in this fixture; it does not calibrate real fingertips or indict every solver.</small>
+      <a href="wuji-contact.html">Open the contact model and hold curves →</a>
+    </figcaption>
+  </figure>
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="visual-comparisons.html#incline" aria-label="Open the complete six-engine incline comparison">
+      <img src="_static/visual/incline-static-0.001.png" alt="Six physics engines in the same incline scene, with versions, precision and pass or failure labels" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">C · N · U</span>
+      <strong>One task name is not one physical target</strong>
+      <p>The incline cohort records static, sliding and nominal-zero-friction cases separately. Contact representation, precision, stopping gates and invalid records must remain configuration-specific.</p>
+      <small><b>Evidence boundary:</b> The figure supports configuration differences and rejection reasons. It does not support adding unlike budgets and gates into an engine ranking.</small>
+      <a href="visual-comparisons.html#incline">Open synchronized replay and the full matrix →</a>
+    </figcaption>
+  </figure>
+</div>
 
 ## Seven first-failure layers
 

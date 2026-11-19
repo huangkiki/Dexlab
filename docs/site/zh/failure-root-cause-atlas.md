@@ -16,6 +16,26 @@ Sim-to-Real Gap 通常被说成一个误差、一次失败，或者“仿真器�
 
 ## Gap 不是一件事，而是一条链
 
+<div class="gap-chain" role="group" aria-labelledby="gap-chain-title">
+  <div class="gap-chain-copy">
+    <p id="gap-chain-title">同一句“仿真失败”，可能坏在任何一层。</p>
+    <strong>先找最早偏离，再解释最后结果。</strong>
+  </div>
+  <ol class="gap-chain-track">
+    <li><span>01</span><strong>任务<br>与本体</strong><small>问的是不是同一个问题</small></li>
+    <li><span>02</span><strong>参数<br>送达</strong><small>配置是否真的进入运行时</small></li>
+    <li><span>03</span><strong>单位<br>与初态</strong><small>后续轨迹是否从同一状态开始</small></li>
+    <li><span>04</span><strong>执行器<br>预算</strong><small>谁提供任务所需的力和力矩</small></li>
+    <li><span>05</span><strong>几何·接触<br>材料</strong><small>需要的物理机制是否存在</small></li>
+    <li><span>06</span><strong>观测·评分<br>记录</strong><small>结论读的是不是可信状态</small></li>
+    <li><span>07</span><strong>真机<br>验证</strong><small>现实误差是否被独立测量</small></li>
+  </ol>
+  <div class="gap-chain-boundary">
+    <span><b>P/A/G/C/N/O</b> 由模型内读回、正负对照、守恒与回归检验</span>
+    <span><b>真机外部有效性</b> 不由前六层的仿真通过自动补足</span>
+  </div>
+</div>
+
 | 判断层 | 要问的问题 | 若这一层先错，后面的结论会怎样 |
 | --- | --- | --- |
 | 1. 任务与本体定义 | 任务目标、机器人、物体、环境和成功条件是否代表要研究的现实问题？ | 物理引擎再稳定，也可能在回答另一个问题 |
@@ -42,6 +62,59 @@ Sim-to-Real Gap 通常被说成一个误差、一次失败，或者“仿真器�
 | 真机外部验证 | 硬件采集协议 | 只有协议，没有合格真机数据；真机实验数仍为 0 |
 
 这些实验共同说明：**Sim-to-Real Gap 不是最后一帧与视频的差距，而是“我们凭什么相信这条结论”的差距。**
+
+## 从画面看，Gap 先在何处断裂
+
+<div class="gap-evidence-gallery">
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="robodojo-bread-slip.html" aria-label="查看 RoboDojo layout 011 完整记录">
+      <img src="_static/robodojo-bread-slip/layout-011-preview.gif" alt="RoboDojo layout 011：上缘浅夹持、面包转动与接触几何消失的记录画面" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">P · 任务几何</span>
+      <strong>面包不是“突然掉了”</strong>
+      <p>双指法向冲量塌缩前，OBB 代理的上缘平均余量已经从 <b>14.41</b> 缩到 <b>2.87 mm</b>；随后接触几何才消失。</p>
+      <small><b>证据边界：</b>画面能看见姿态变化；第一失效层由同相位的余量、转角与冲量时间线确定，不能只看 GIF 猜根因。</small>
+      <a href="robodojo-bread-slip.html">查看 layout 011 完整记录 →</a>
+    </figcaption>
+  </figure>
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="_static/force-limit/comparison.gif" aria-label="打开 Genesis 低力夹持对照 GIF">
+      <img src="_static/force-limit/comparison.gif" alt="Genesis 0.4 N 与 0.8 N 每指力限额下的夹持与抬升对照" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">A · 执行器预算</span>
+      <strong>“抓不住”可能只是力预算不够</strong>
+      <p>低限额下只剩 <b>0.2/0.4 N</b> 指力，桌面仍承担约 <b>0.428/0.228 N</b>；提高到 0.8/10 N 后，物体才随夹爪离桌。</p>
+      <small><b>证据边界：</b>这是可解释的物理失败，不是数值 solver 缺陷；画面是测量姿态回放，支撑结论仍来自力账本。</small>
+      <a href="visual-comparisons.html#pinch">查看夹持与释放对照 →</a>
+    </figcaption>
+  </figure>
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="wuji-contact.html" aria-label="查看 Wuji 点接触与抗扭接触完整报告">
+      <img src="_static/wuji-contact/comparison.gif" alt="Wuji 同任务点接触失败与抗扭接触通过的同步记录" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">C · 接触扳手空间</span>
+      <strong>一直有接触，球仍会绕夹持线转</strong>
+      <p>点接触配置下两指接触持续存在，峰值角速度约 <b>29.336 rad/s</b>；只补抗扭方向后降到 <b>0.024992 rad/s</b>。</p>
+      <small><b>证据边界：</b>证明当前夹具缺少一个接触力矩方向，不外推为真实指垫参数或所有 solver 的普遍缺陷。</small>
+      <a href="wuji-contact.html">查看接触模型与保持曲线 →</a>
+    </figcaption>
+  </figure>
+  <figure class="gap-evidence-item">
+    <a class="gap-evidence-media" href="visual-comparisons.html#incline" aria-label="查看六引擎斜面完整对照">
+      <img src="_static/visual/incline-static-0.001.png" alt="六个物理引擎在相同斜面场景中的静止响应、版本、精度与通过或失败标记" loading="lazy" decoding="async">
+    </a>
+    <figcaption>
+      <span class="gap-evidence-kicker">C · N · U</span>
+      <strong>同一个任务名，不等于同一个物理目标</strong>
+      <p>六引擎斜面分别记录静止、滑动和名义零摩擦；接触表达、数值精度、停止门禁与无效记录必须逐配置保留。</p>
+      <small><b>证据边界：</b>这张图支持配置差异与拒绝原因，不支持把不同预算和门禁相加成“引擎排行榜”。</small>
+      <a href="visual-comparisons.html#incline">查看同步回放与完整矩阵 →</a>
+    </figcaption>
+  </figure>
+</div>
 
 ## 七类第一失效层
 

@@ -106,6 +106,265 @@ body[data-reader-page="visual-comparisons"] .lesson-article {
   line-height: 1.8;
 }
 
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain {
+  margin: 28px 0 34px;
+  padding: 22px 0 20px;
+  border-block: 1px solid var(--rule);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-copy {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px 40px;
+  align-items: baseline;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-copy p {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--ink);
+  font: 400 clamp(22px, 3vw, 31px)/1.35 var(--serif);
+  letter-spacing: -.02em;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-copy strong {
+  max-width: 22ch;
+  color: var(--green);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li {
+  position: relative;
+  display: flex;
+  min-height: 148px;
+  flex-direction: column;
+  padding: 20px 17px 12px 0;
+  border-top: 1px solid var(--rule);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li::before {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  content: "";
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li::after {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+  color: var(--rule);
+  content: "→";
+  font-size: 18px;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li:last-child::after {
+  content: none;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track span {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track strong {
+  margin: 11px 0 8px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-boundary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 32px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-chain-boundary b {
+  color: var(--green);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-gallery {
+  margin: 26px 0 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item {
+  display: block;
+  margin: 0;
+  padding: 30px 0;
+  border-top: 1px solid var(--rule);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item:first-child {
+  border-top: 0;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-media {
+  display: block;
+  align-self: start;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--media);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-media:hover {
+  border-color: var(--green);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption {
+  display: grid;
+  grid-template-columns: minmax(180px, .7fr) minmax(0, 1.3fr);
+  gap: 0 36px;
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-kicker {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption strong {
+  display: block;
+  grid-column: 1;
+  grid-row: 2;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font: 400 23px/1.35 var(--serif);
+  letter-spacing: -.02em;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption p {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption small {
+  display: block;
+  grid-column: 2;
+  grid-row: 2;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption small b,
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption p b {
+  color: var(--green);
+}
+
+body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption a {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: start;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-copy {
+    display: block;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-copy strong {
+    display: block;
+    margin-top: 8px;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track {
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+    border-left: 1px solid var(--rule);
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li {
+    min-height: 0;
+    padding: 12px 0 14px 24px;
+    border-top: 0;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li::before {
+    top: 19px;
+    left: -4px;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li::after {
+    top: auto;
+    right: auto;
+    bottom: -10px;
+    left: 7px;
+    content: "↓";
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-track li:last-child::after {
+    content: none;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-chain-boundary {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item {
+    padding: 22px 0;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption {
+    display: block;
+  }
+
+  body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption a {
+    display: inline-block;
+    margin-top: 4px;
+  }
+}
+
 .lesson-article .toctree-wrapper {
   display: block;
   margin: 28px 0;
