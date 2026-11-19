@@ -13,10 +13,10 @@ DexLab starts with concrete problems like this. **Use tasks to expose problems, 
 The improved simulation helps the Agent learn new Skills. With those Skills, the Agent can take on harder tasks and probe the limits of the simulation.
 
 <p align="center">
-  <a href="https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html">
-    <img src="docs/evidence/wuji-contact/comparison.gif" width="100%" alt="Wuji point contact and synthetic torsional contact, synchronized replay">
+  <a href="https://huangkiki.github.io/Dexlab/en/latest/index.html">
+    <img src="docs/site/_static/images/dexlab-architecture.webp" width="100%" alt="DexLab architecture: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring">
   </a><br>
-  <sub>Same grasp and controller. Point contact drifts <strong>2.734 mm</strong>; adding synthetic torsional contact reduces it to <strong>1.025 mm</strong>.</sub>
+  <sub>DexLab workflow: tasks and protocols → systems under test → action execution → environment backends → independent evidence and scoring.</sub>
 </p>
 
 ## Selected experiments
