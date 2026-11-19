@@ -125,7 +125,7 @@ Resource isolation does not inherit arbitrary environment variables: pass the re
 
 ### Submit and auto-merge an existing PR branch
 
-Issue-driven autoresearch validates the exact candidate tree, commits only the task-owned changes, creates or updates one linked PR and records all completed checks in its body. It then squash-merges with the reviewed head SHA, reads back the merged commit, verifies that the merged tree equals the validated candidate tree and deletes the remote work branch. This is distinct from ordinary chat development, which commits and pushes directly without a PR.
+Issue-driven autoresearch validates the exact candidate tree, commits only the task-owned changes, creates or updates one linked PR and records all completed checks in its body. It then squash-merges with the reviewed head SHA, reads back the merged commit, verifies that the merged tree equals the validated candidate tree and deletes the remote work branch. This is distinct from ordinary chat development, which integrates directly into `main` without a PR.
 
 If an existing PR genuinely requires recovery, restore its original branch at `.autoresearch/worktrees/issue-N`; do not create a second PR or rename its branch to satisfy the standard naming convention. Review and commit only the intended changes locally, leaving a clean recovery worktree, then run the bounded submission gate with the explicit linked PR:
 

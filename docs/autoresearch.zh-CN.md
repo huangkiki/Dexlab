@@ -125,7 +125,7 @@ DEXLAB_MUJOCO_PROFILE=qualification-3.17.0 python scripts/autoresearch.py check 
 
 ### 提交并自动合并现有 PR 分支
 
-Issue 驱动的 autoresearch 先验证精确候选文件树，再只提交本项文件，创建或更新唯一的关联 PR，并把实际完成的检查写入 PR 正文。随后用已审查的 head SHA 做 squash 合并，读回合并 commit，核验合并树与已验证候选树一致，并删除远端工作分支。这与普通聊天开发的直接 commit + push、不建 PR 分开。
+Issue 驱动的 autoresearch 先验证精确候选文件树，再只提交本项文件，创建或更新唯一的关联 PR，并把实际完成的检查写入 PR 正文。随后用已审查的 head SHA 做 squash 合并，读回合并 commit，核验合并树与已验证候选树一致，并删除远端工作分支。普通聊天开发则直接合入 `main`，不创建 PR；两条交付路径分开。
 
 确需恢复已有 PR 时，在 `.autoresearch/worktrees/issue-N` 恢复原分支，不创建第二个 PR，也不为满足标准命名重命名原分支。先审查并在本地仅提交本项修改，使恢复工作树保持干净，再在正常资源约束内显式指定关联 PR，运行按范围选择的提交门禁：
 
