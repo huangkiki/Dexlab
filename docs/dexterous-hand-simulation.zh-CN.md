@@ -1,5 +1,7 @@
 # 当我们在讨论灵巧手仿真时，我们在讨论什么
 
+**2026-11-19 专题增补：[Felis：六电机主动脊柱是机制，事件触发的策略合同才是可迁移部分](https://huangkiki.github.io/Dexlab/zh-cn/latest/dexterous-hand-simulation.html#felis-policy-contract)。** 该项目公开推理代码与三个训练好的策略，不是训练框架。DexLab 暂观察欠驱动机构，先借鉴其观测、reset、release 和控制器边界。
+
 **2026-11-19 专题增补：[RaiSim 能跑通 Bumi BlinkMimic2 transition 闭环，不代表策略训练成功](https://huangkiki.github.io/Dexlab/zh-cn/latest/raisim-bumi-mimic.html)。** 六段本机实验恢复了 Bumi 执行器语义，采集 643 万个 RaiSim 环境步并完成 5,000 次更新；冻结策略从 5/6 完成降到训练后的 0/6。最可迁移的结论是：solver 名称之下的物理学习器必须单独验收。
 
 **2026-11-18 专题增补：[RaiSim：CPU 快速训练不等于全局物理更准](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html#raisim-physics-boundary)。** RaiSim 的论文影响力和真机迁移证据主要来自高频机器人控制，不是所有接触任务上的精度排名。DexLab 可把它作为独立求解器对照，但暂不应把所有任务迁移过去。
@@ -609,6 +611,21 @@ DexLab 的其他步长实验提供边界，而不是 G1 复现：LIBERO 的 2→
 
 核查于 2026-11-17。已读取原文、公式、表格、随文模型包和 MuJoCo 4.0.1 官方发布说明；包内五个 MJCF 都写有 `discrete`，并分别提供 serial、tendon、rod-body 以及执行器在脚踝/电机上的变体。模型包 SHA-256 为 `32eb7206e4996b7d76956590544039377fe3ec67e9387a7a2df2f7334f3529d5`。当前环境 MuJoCo 为 3.12，低于模型要求的 3.16；本轮没有运行硬件限位测量、256 组策略 rollout 或积分器扫描，因此性能与成功率仍是作者报告。文中的 DexLab 步长反例来自其他接触任务，不是 G1 复现。
 
+(felis-policy-contract)=
+## 事件触发的策略不等于权重文件：Felis 的主动脊柱与控制合同
+
+**2026-11-19 蒸馏：[Felis 完整讨论](https://github.com/huangkiki/Dexlab/discussions/416)。** [Felis](https://frank-zy-dou.github.io/blog/felis/) 是一个小型猫形四足：腰部两轴主动脊柱由 2 个电机驱动 yaw 和 pitch，四条腿各有一个髋电机，共 6 个主动电机。项目页报告仿真机器人从倒置释放到落地姿态约需 0.66 s，同一机构还完成走路和跳跃。机构本身值得观察，但更接近 DexLab 当前缺口的，是围绕策略写清楚的观测与事件合同。
+
+具体看一次倒置释放：项目说明在 2.5–3.5 m 的释放高度上，策略每 20 ms 读取姿态、角速度、六个关节的位置与速度、时间和释放高度，再输出六个关节位置目标，交给每轴 PD 环。动作历史与时间相位在 release 时清空；如果机器人仍被手握住就开始运行，或晚 100 ms 才触发，即使网络和物理完全相同，也已经不是同一回合。
+
+这不是被动柔性关节。两轴腰部主动改变身体形状；在随质心运动的坐标系里，内部弯曲与扭转的时序可以改变整体姿态，不需要接触、尾巴或反作用轮。项目页的阅读列表也列出了更早的猫翻身与主动脊柱机器人，因此可防守的贡献是紧凑的系统集成，不是首次发现空中翻身。
+
+公开证据已经支持实机存在、明确的仿真到策略接口与动态演示；它尚不支持硬件成功率结论。释放条件、重复次数、失败分母、控制延迟、力矩跟踪、能耗与 sim-to-real 误差都没有公开。已核查仓库包含推理代码、三个小型 actor 和一致性数据，但明确不含训练代码、仿真资产与 3D 模型；核查树中也未见许可证。parity 只核对导出模型与参考 rollout 的动作，不是物理任务验收。
+
+**对 DexLab 的判断是 watch。** 在具体操作失败证明“近端躯干或手腕运动能替代远端手指自由度”，且改变机构能区分失败解释之前，不新增主动脊柱运动任务。已有策略一旦依赖 release、接触建立、松手或 reset，则应借这份合同：分别记录事件时间、观测时间、模型输出、实际下发目标和控制模式；reset 不只要覆盖初始位姿，还要清空动作历史与时间状态。
+
+核查于 2026-11-19，依据渲染后的项目页与仓库提交 `605e9f6d07d8e4ce166ddd1988578a345dec665d`。本轮环境未安装 PyTorch，因此没有运行 parity 或策略示例；没有新增 DexLab 任务、训练、物理扫描或真机实验。
+
 
 ## 来源与维护范围
 
@@ -625,3 +642,5 @@ DexLab 的其他步长实验提供边界，而不是 G1 复现：LIBERO 的 2→
 2026-11-17 增补 G1 脚踝闭环传动的本体建模边界。该节把硬件限位、传动状态、控制映射、reset 和积分器分开，不表示 DexLab 已迁移闭环资产或复现作者实验；完整讨论见 [Discussion #372](https://github.com/huangkiki/Dexlab/discussions/372)。
 
 2026-11-18 增补 RoboDojo 的参数送达、数值 plausibility、求解守恒与评分正负控制审计。外部运行结果来自作者博客，DexLab 侧只做了固定源码静态核对；不表示 DexLab 已完成相应实现、物理重跑或真机验证。完整讨论见 [Discussion #388](https://github.com/huangkiki/Dexlab/discussions/388)。
+
+2026-11-19 增补 Felis 的策略合同边界。依据渲染后的项目页与固定推理仓库核查；欠驱动主动脊柱保留为 watch，事件/reset 边界供后续策略评测借鉴。本轮没有训练、物理或真机结果，完整讨论见 [Discussion #416](https://github.com/huangkiki/Dexlab/discussions/416)。
