@@ -567,10 +567,8 @@ def _related_line(relation, target, language):
     target_item = by_id[relation["target"]]
     labels = relation_labels[relation["type"]]
     label = labels[0] if language == "zh" else labels[1]
-    href = (
-        "../" + target_item["href"].replace(".html", ".md")
-        if target_item["kind"] == "synthesis"
-        else f"{relation['target']}.md"
+    href = _generated_target(target_item) if target_item["kind"] == "synthesis" else (
+        f"{relation['target']}.md"
     )
     return (
         f"- **{label}** · [{target_item['name'][language]}]({href})"
@@ -665,7 +663,7 @@ def _index_markdown(atlas, language):
         lines += [f"## {group[language]}", ""]
         for item in grouped[group["id"]]:
             href = (
-                "../" + item["href"].replace(".html", ".md")
+                _generated_target(item)
                 if item["kind"] == "synthesis"
                 else f"{item['id']}.md"
             )
@@ -684,6 +682,14 @@ def _index_markdown(atlas, language):
     )
     lines += ["```", ""]
     return "\n".join(lines)
+
+
+def _generated_target(item):
+    """Keep static HTML links intact and map Sphinx pages to Markdown sources."""
+    href = item["href"]
+    if href.startswith("_static/"):
+        return "../" + href
+    return "../" + href.replace(".html", ".md")
 
 
 def prepare_concept_pages(language_dir):
