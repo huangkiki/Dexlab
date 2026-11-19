@@ -567,12 +567,12 @@ def _related_line(relation, target, language):
     target_item = by_id[relation["target"]]
     labels = relation_labels[relation["type"]]
     label = labels[0] if language == "zh" else labels[1]
-    href = _generated_target(target_item) if target_item["kind"] == "synthesis" else (
-        f"{relation['target']}.md"
+    link = (
+        _generated_link(target_item, target_item["name"][language])
+        if target_item["kind"] == "synthesis"
+        else f"[{target_item['name'][language]}]({relation['target']}.md)"
     )
-    return (
-        f"- **{label}** · [{target_item['name'][language]}]({href})"
-    )
+    return f"- **{label}** · {link}"
 
 
 def _page_markdown(item, atlas, language):
@@ -662,16 +662,16 @@ def _index_markdown(atlas, language):
     for group in atlas["groups"]:
         lines += [f"## {group[language]}", ""]
         for item in grouped[group["id"]]:
-            href = (
-                _generated_target(item)
+            link = (
+                _generated_link(item, item["name"][language])
                 if item["kind"] == "synthesis"
-                else f"{item['id']}.md"
+                else f"[{item['name'][language]}]({item['id']}.md)"
             )
             marker = ""
             if item["kind"] == "synthesis":
                 marker = " · 研究总论" if zh else " · Research synthesis"
             lines.append(
-                f"- [{item['name'][language]}]({href}) — {item['summary'][language]}{marker}"
+                f"- {link} — {item['summary'][language]}{marker}"
             )
         lines.append("")
     lines += ["```{toctree}", ":hidden:", ":maxdepth: 1", ""]
@@ -690,6 +690,17 @@ def _generated_target(item):
     if href.startswith("_static/"):
         return "../" + href
     return "../" + href.replace(".html", ".md")
+
+
+def _generated_link(item, label):
+    """Use raw HTML for static assets so MyST does not resolve them as documents."""
+    href = _generated_target(item)
+    if href.startswith("../_static/"):
+        return (
+            f'<a href="{html.escape(href, quote=True)}">'
+            f"{html.escape(label)}</a>"
+        )
+    return f"[{label}]({href})"
 
 
 def prepare_concept_pages(language_dir):

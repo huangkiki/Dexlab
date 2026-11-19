@@ -126,17 +126,12 @@ class ConceptAtlasTests(unittest.TestCase):
             index = (language_dir / "concepts/index.md").read_text()
             self.assertIn("../failure-root-cause-atlas.md", index)
             self.assertNotIn("](failure-root-cause-atlas.html)", index)
-            self.assertIn(
-                "../_static/research/dexterous-simulation.html",
-                index,
-            )
+            static_link = '<a href="../_static/research/dexterous-simulation.html">'
+            self.assertIn(static_link, index)
             self.assertNotIn("dexterous-simulation.md", index)
             self.assertIn("FP64 <solver-fp64>", index)
             contact = (language_dir / "concepts/contact.md").read_text()
-            self.assertIn(
-                "../_static/research/dexterous-simulation.html",
-                contact,
-            )
+            self.assertIn(static_link, contact)
             self.assertNotIn("dexterous-simulation.md", contact)
             for item in self.atlas["concepts"]:
                 if item["kind"] in {"concept", "solver"}:
