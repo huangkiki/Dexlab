@@ -396,7 +396,13 @@ def render_field(atlas, language):
     grouped = _group_items(atlas)
     ordered = []
     for group_index, group in enumerate(atlas["groups"]):
-        items = grouped[group["id"]]
+        items = [
+            item
+            for item in grouped[group["id"]]
+            if item["kind"] != "synthesis"
+        ]
+        if not items:
+            continue
         for item_index, item in enumerate(items):
             progress = (item_index + .5) / len(items)
             ordered.append((progress, group_index, item))
@@ -404,18 +410,6 @@ def render_field(atlas, language):
     words = []
     for _, _, item in ordered:
         label = item["name"][language]
-        if item["kind"] == "synthesis":
-            words.append(
-                '<a class="concept-field-synthesis" '
-                f'href="{html.escape(item["href"], quote=True)}" '
-                'data-concept-wall-item '
-                f'data-concept-target="{item["id"]}">'
-                f'<small>{"研究总论" if language == "zh" else "Research synthesis"}</small>'
-                f"<strong>{html.escape(label)}</strong>"
-                f'<span class="concept-field-synthesis-action">'
-                f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></a>'
-            )
-            continue
         length = len(label)
         if item["level"] == "core":
             scale = (
@@ -437,12 +431,31 @@ def render_field(atlas, language):
             f'data-concept-wall-item data-concept-open data-concept-target="{item["id"]}">'
             f"{html.escape(label)}</span>"
         )
+    topic_links = []
+    for item in grouped["synthesis"]:
+        topic_links.append(
+            '<a class="concept-topic-link" '
+            f'href="{html.escape(item["href"], quote=True)}">'
+            f"<strong>{html.escape(item['name'][language])}</strong>"
+            f'<span class="concept-topic-summary">'
+            f"{html.escape(item['summary'][language])}</span>"
+            f'<span class="concept-topic-action">'
+            f'{"阅读全文 ↗" if language == "zh" else "Read the article ↗"}</span></a>'
+        )
     return (
+        '<div class="concept-field-band">'
         '<div class="concept-field" id="concept-field" role="navigation" '
-        f'aria-label="{"概念词与研究总论" if language == "zh" else "Concepts and research syntheses"}">'
+        f'aria-label="{"概念词" if language == "zh" else "Concepts"}">'
         '<div class="concept-field-inner">'
         f'<div class="concept-field-words">{"".join(words)}</div>'
-        + "</div></div>"
+        "</div></div>"
+        '<section class="concept-topics" aria-labelledby="concept-topics-title">'
+        '<header class="concept-topics-head">'
+        f'<h2 id="concept-topics-title">{"专题文章" if language == "zh" else "Research topics"}</h2>'
+        f'<p>{"从实验、求解器、数据与验证边界进入可独立阅读的研究路径。" if language == "zh" else "Enter independently readable research paths through experiments, solvers, data and validation boundaries."}</p>'
+        '</header>'
+        f'<div class="concept-topics-grid">{"".join(topic_links)}</div>'
+        "</section></div>"
     )
 
 

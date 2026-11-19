@@ -173,8 +173,8 @@ main > section > h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: calc(100svh - 92px);
-  padding: 72px 0 56px;
+  min-height: min(760px, calc(100svh - 92px));
+  padding: 56px 0 36px;
 }
 
 .hero-copy {
@@ -460,8 +460,8 @@ body.home-search-active .home-search-results {
   gap: 4px 28px;
   align-items: center;
   max-width: 920px;
-  margin-top: 54px;
-  padding: 22px 0;
+  margin-top: 36px;
+  padding: 18px 0;
   border-block: 1px solid var(--rule);
   color: var(--ink);
   text-decoration: none;
@@ -523,16 +523,16 @@ body.home-search-active .home-search-results {
 }
 
 .architecture-view {
-  padding: 112px 0 128px;
+  padding: 76px 0 84px;
   border-top: 1px solid var(--rule);
 }
 
 .architecture-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 32px;
   align-items: end;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .architecture-intro h2 {
@@ -595,14 +595,14 @@ body.home-search-active .home-search-results {
 }
 
 .concept-entry {
-  padding-bottom: 72px;
+  padding-bottom: 56px;
 }
 
 .home-validity,
 .home-evidence,
 .home-answers,
 .home-next {
-  padding: 112px 0;
+  padding: 76px 0 84px;
   border-top: 1px solid var(--rule);
 }
 
@@ -611,7 +611,7 @@ body.home-search-active .home-search-results {
   grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr);
   gap: 20px 48px;
   align-items: end;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .home-section-head > p {
@@ -701,7 +701,7 @@ body.home-search-active .home-search-results {
 }
 
 .validity-records {
-  margin-top: 64px;
+  margin-top: 44px;
   border-top: 1px solid var(--rule);
 }
 
@@ -755,7 +755,7 @@ body.home-search-active .home-search-results {
   grid-template-columns: minmax(0, 1.12fr) minmax(290px, .88fr);
   gap: 24px 32px;
   align-items: start;
-  padding: 30px 0 52px;
+  padding: 26px 0 40px;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -952,7 +952,7 @@ body.home-search-active .home-search-results {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 32px;
   align-items: center;
-  padding: 36px 0 42px;
+  padding: 30px 0 36px;
   border-top: 1px solid var(--rule);
 }
 
@@ -1031,11 +1031,11 @@ body.home-search-active .home-search-results {
   }
 
   .story-hero {
-    min-height: calc(100svh - 154px);
+    min-height: min(720px, calc(100svh - 154px));
   }
 
   .architecture-view {
-    padding-block: 96px 112px;
+    padding-block: 64px 72px;
   }
 
   .validity-chain {
@@ -1053,8 +1053,12 @@ body.home-search-active .home-search-results {
 
 @media (max-width: 800px) {
   .story-hero {
-    min-height: calc(100svh - 190px);
-    padding-top: 56px;
+    min-height: min(680px, calc(100svh - 190px));
+    padding-top: 44px;
+  }
+
+  .architecture-view {
+    padding-block: 58px 66px;
   }
 
   .architecture-intro {
@@ -1068,7 +1072,7 @@ body.home-search-active .home-search-results {
 
   .home-section-head {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 12px;
   }
 
   .home-section-head > span {
@@ -1140,8 +1144,8 @@ body.home-search-active .home-search-results {
   }
 
   .story-hero {
-    min-height: calc(100svh - 226px);
-    padding: 44px 0 56px;
+    min-height: 0;
+    padding: 36px 0 40px;
   }
 
   .hero-copy h1 {
@@ -1174,8 +1178,8 @@ body.home-search-active .home-search-results {
 
   .directory-entry {
     grid-template-columns: 1fr;
-    margin-top: 42px;
-    padding: 20px 0;
+    margin-top: 28px;
+    padding: 18px 0;
   }
 
   .directory-action {
@@ -1194,7 +1198,7 @@ body.home-search-active .home-search-results {
   }
 
   .architecture-view {
-    padding: 80px 0 88px;
+    padding: 52px 0 60px;
   }
 
   .architecture-image-link {
@@ -1218,7 +1222,7 @@ body.home-search-active .home-search-results {
   .home-validity,
   .home-answers,
   .home-next {
-    padding: 80px 0;
+    padding: 56px 0 60px;
   }
 
   .validity-chain {

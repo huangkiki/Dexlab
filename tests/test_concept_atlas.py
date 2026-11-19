@@ -93,14 +93,19 @@ class ConceptAtlasTests(unittest.TestCase):
             rendered,
         )
 
-    def test_concept_field_mixes_concepts_and_direct_synthesis_links(self):
+    def test_concept_field_keeps_topics_in_separate_article_band(self):
         rendered = render_field(self.atlas, "zh")
         syntheses = sum(item["kind"] == "synthesis" for item in self.atlas["concepts"])
         self.assertEqual(
-            rendered.count("data-concept-open"),
+            rendered.count("data-concept-wall-item"),
             len(self.atlas["concepts"]) - syntheses,
         )
-        self.assertIn('class="concept-field-synthesis"', rendered)
+        self.assertNotIn('class="concept-field-synthesis"', rendered)
+        self.assertEqual(rendered.count('class="concept-topic-link"'), syntheses)
+        self.assertLess(
+            rendered.index('class="concept-field"'),
+            rendered.index('class="concept-topics"'),
+        )
         self.assertIn('href="failure-root-cause-atlas.html"', rendered)
         self.assertIn("当我们在讨论 Sim-to-Real Gap 时", rendered)
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
