@@ -90,6 +90,8 @@ GR00T 2 给出了一个很清楚的系统分工：**Agent 决定“做什么”�
 
 更重要的限制来自失败本身：在 300 次 Agent 装配里，3 次失败是螺丝只旋进一部分，GR00T 2 和 Agent 都把细微视觉差异判成完成；无 RL 的仿真中，S2 干预后也只有 `24%`（RoboDojo）和 `56%`（RoboCasa365）成功。Agent 能调用恢复程序，不代表它拥有正确的物理测量，更不代表每次恢复都有效。
 
+这也不意味着 WAM 是接触层的唯一实现。[SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation) 把 SuperMimic 风格的可微世界模型优化用于状态式机械臂操作；固定提交的报告在仿真 ARX5 上把方形螺母套柱做到 `95.0%`、把胶囊放抽屉并推关做到 `90.2%`（各 256 个 held-out reset 回合）。它说明：在**已知任务、完整本体/物体状态、固定工作台和可构造 reset bank** 的仿真里，task-specific controller 可以承担 GR00T 2 的局部接触层。但它只看低维状态，每任务单独训练，没有语言、开放视觉、跨本体、Agent 恢复或真机结果；因此不能替代 GR00T 2 的完整系统角色。判断“谁替代谁”至少要用同任务、同状态、同动作接口和同 scorer。
+
 这里应使用 **CaP = Code-as-Policy**。它与 [Contact-Anchored Policy（CAP）](https://github.com/huangkiki/Dexlab/discussions/309) 无关：后者用三维接触锚点消除“在哪里交互”的歧义，前者用程序组合定位、运动、夹爪和验证。GR00T 2 的完整分析见 [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419)；#419 的候选只进入 Triage，不构成实验授权。
 
 ### Task skill 不是 task program
