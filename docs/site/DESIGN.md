@@ -210,17 +210,18 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 **Key Characteristics:**
 
 - Warm paper and charcoal, with restrained green reading accents.
-- A horizontal masthead, oversized serif opening title and one ruled content entrance.
+- A sticky horizontal masthead with one global site-search field, an oversized serif opening title and one ruled content entrance.
 - A semantic field of curated concepts and canonical solver options below the opening entry, resolving into view with scroll, with individual hover focus and a searchable relationship atlas.
 - A separate, compact research-topic index for cross-experiment articles, so article titles do not break the concept cloud or compete with individual terms.
 - The original architecture diagram and ruled scroll-revealed evidence sequence, with the hardware-free validation boundary closing the research reading order.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
+- A shared closing footer that states the personal-project scope and names Kiki Huang as author.
 - Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
-Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_templates/research-home.html`, `docs/concept-atlas.json`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/site-chrome.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_templates/research-home.html`, `_templates/site-search.html`, `_templates/site-footer.html`, `docs/concept-atlas.json`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
@@ -261,17 +262,17 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 ## Layout
 
-The homepage header has a maximum width of (1440px), padding (24px 40px) and one horizontal navigation row beside the brand. The page body has a maximum width of (1120px) and (40px) gutters.
+The homepage header has a maximum width of (1440px), padding (24px 40px), one horizontal navigation row and a global search field. The masthead remains sticky. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is capped at (760px) rather than stretching to the viewport, so the project introduction does not leave a large empty gap before the research content. The DexLab title, thesis, personal-project statement, method paragraph and a small scope note occupy the main column. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. After that system explanation, a concept field, a separate two-column research-topic index and one ruled index action form a compact transition into evidence browsing. Five evidence cases follow in one vertical reading sequence, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
+The first screen is capped at (760px) rather than stretching to the viewport, so the project introduction does not leave a large empty gap before the research content. The DexLab title, thesis, method paragraph and a small scope note occupy the main column. The personal-project statement and author identity live in the shared closing footer, so they remain available on every page without competing with the research opening. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. After that system explanation, a concept field, a separate two-column research-topic index and one ruled index action form a compact transition into evidence browsing. Five evidence cases follow in one vertical reading sequence, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
 
 The concept band contains only physical concepts, validation terms and canonical solver or numerical options. Cross-experiment research articles sit immediately below it in a separate, headed article index. Group membership remains metadata for the atlas, where explicit filters still organize the searchable map. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. Individual visible terms accept pointer hover: the field temporarily sharpens, other terms recede and the active term enlarges. A concept click and the masthead’s “Concepts” link open the atlas; each topic link opens its article directly.
 
 The representative-experiment section is one open, vertically ordered case sequence. Each case begins with its number, title and headline result, followed by synchronized media and a ledger for conclusion, control variable, native readback, criterion/result and scope. There is no selection control: scrolling is the only progression through the cases. Content remains visible without JavaScript, while progressive enhancement gives each case a short bounded reveal as it enters the viewport.
 
-- At (1100px) and below, the masthead wraps navigation onto a second row; gutters become (32px), and each evidence case stacks media above its readback.
+- At (1180px) and below, the masthead keeps the search field beside the brand and wraps navigation onto a second row; gutters become (32px), and each evidence case stacks media above its readback.
 - At (800px) and below, the architecture introduction stacks and the evidence case header meters wrap beneath the case title.
-- At (800px) and below, the research-topic index uses two columns and its heading stacks. At (700px) and below, gutters become (22px), navigation labels are (13px), topic links use one column, and the scroll cue moves into normal flow. The architecture image keeps an (820px) reading width inside a keyboard-focusable horizontal scroll region.
+- At (800px) and below, the research-topic index uses two columns and its heading stacks. At (700px) and below, the global search field takes a full masthead row, navigation remains a single horizontal scrollable row, gutters become (22px), topic links use one column, and the scroll cue moves into normal flow. The architecture image keeps an (820px) reading width inside a keyboard-focusable horizontal scroll region.
 
 Homepage section rhythm uses (72–84px) vertical padding on desktop and (56–60px) on narrow screens. The concept-to-topic transition uses a (22px) rule gap; the ruled experiment entrance follows the topic grid after (36px).
 
@@ -285,11 +286,11 @@ The shared Sphinx reader centers a (760px) article with an optional (160px) curr
 
 Comparative experiment pages may widen the article to (960px) through their own content components. A comparison summary uses a two-column open rule between the claim and its criteria/scope. A three-column GIF guide names pane order, what to watch and what the image cannot establish. Result matrices keep (760px) minimum width in their own horizontal scroll region and mark pass, failure, partial result and invalid evidence with text plus color, never color alone.
 
-Anchor scroll padding is (32px). Print removes navigation and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
+Anchor scroll padding clears the sticky masthead. Print removes navigation, search and footer chrome, exposes all topic panels, and avoids splitting the principal content grids.
 
 ### MuJoCo learning layout
 
-The learning masthead is in normal flow, (80px) tall with (40px) horizontal padding and a maximum width of (1600px). The centered course grid has columns (240px / minmax(0, 760px) / 160px), a (40px) gap, maximum width (1440px) and padding (36px 40px 72px). Chapter and section rails stick (28px) below the viewport top; the central article remains the reading focus.
+The learning masthead is sticky, has a minimum height of (80px), uses (40px) horizontal padding and contains the same global search component as every other page. The centered course grid has columns (240px / minmax(0, 760px) / 160px), a (40px) gap, maximum width (1440px) and padding (36px 40px 72px). Chapter and section rails stick below the masthead; the central article remains the reading focus.
 
 - At (1200px) and below, the section rail disappears and the grid uses a (220px) chapter rail, flexible article, (32px) gap and maximum width (1120px).
 - At (800px) and below, the article stacks under a native chapter disclosure, with page padding (20px 22px 48px). JavaScript initially collapses the chapter disclosure; without it, the links remain visible. Chapter links use two columns, becoming one at (440px). The masthead wraps, and its tools take a separate row at the narrow breakpoint.
@@ -319,9 +320,11 @@ The course reader's `learning-control` radius belongs only to its outlined butto
 
 ### Research entrance and navigation
 
-The first screen shows the project title, a two-line research thesis, a clear personal-project statement, a shorter method paragraph, a scope paragraph, a search field and one primary content action. The personal-project statement uses the serif voice at a smaller display scale and names DexLab as the author's own research project before the method description. The scope paragraph states explicitly that every current experiment is simulation-only and that physical correctness is bounded by the frozen model. The search field is a native GET form to the site search page, with an inline icon, accessible label and 44px action target. Focusing an empty field reveals six ruled suggested searches with a short category label; choosing one starts the live search. It lazily loads the generated Sphinx index on first use and displays a debounced, six-item live result list beneath the field; the typed terms are marked in result titles and excerpts, and submitting still opens the complete search page. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
+The first screen shows the project title, a two-line research thesis, a shorter method paragraph, a scope paragraph and one primary content action. The scope paragraph states explicitly that every current experiment is simulation-only and that physical correctness is bounded by the frozen model. The global search field is a native GET form to the site search page, with an inline icon, accessible label, keyboard submission and a 44px action target. The same field is present in the research homepage, shared reader and learning mastheads; it remains usable without JavaScript. The directory entrance is a full-width open row bounded by fine rules, with a (20px) action label, a (14px) explanatory line and a (22px) inline arrow. A downward line and label indicate that more content follows. The entrance turns green on hover and focus without becoming a filled button.
 
-Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. Language and repository links stay beside the masthead. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
+Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. The search field stays in the sticky masthead on every generated page; language and repository links stay beside it. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
+
+The shared footer closes every page with the sentence “DexLab 是我的个人研究项目。它探索智能体技能与仿真如何通过实验相互促进。” in Chinese and its English equivalent. It names Kiki Huang as the author, links to the author's GitHub profile, and repeats only four high-value site destinations. Context-specific evidence or course notes remain above this shared footer rather than being replaced by it.
 
 ### Concept field and atlas
 
@@ -416,6 +419,8 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** close the homepage research path with the physical-validation boundary after experiments, findings and continuation links.
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
+- **Do** keep the global search field in the sticky masthead on every page and keep its native GET submission usable without JavaScript.
+- **Do** keep the personal-project statement and Kiki Huang's author credit in the shared footer on every page.
 - **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
 - **Do** preserve visible keyboard focus and complete GIF, figure and disclosure access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.

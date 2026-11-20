@@ -1,0 +1,14 @@
+<footer class="global-site-footer">
+  <div class="global-site-footer-inner">
+    <div class="global-site-footer-project">
+      <p><strong>{{ 'DexLab 是我的个人研究项目。' if site_is_chinese else 'DexLab is my personal research project.' }}</strong> {{ '它探索智能体技能与仿真如何通过实验相互促进。' if site_is_chinese else 'It explores how Agent Skills and simulation can improve each other through experiments.' }}</p>
+      <p class="global-site-author">{{ '作者：' if site_is_chinese else 'Author: ' }}<a href="https://github.com/huangkiki" rel="me">Kiki Huang</a></p>
+    </div>
+    <nav aria-label="{{ '站尾导航' if site_is_chinese else 'Footer navigation' }}">
+      <a href="{{ '#experiments' if pagename == 'index' else pathto('index') + '#experiments' }}">{{ '实验结论' if site_is_chinese else 'Findings' }}</a>
+      <a href="{{ pathto('contributing') }}">{{ '参与研究' if site_is_chinese else 'Contribute' }}</a>
+      <a href="https://github.com/huangkiki/Dexlab">GitHub</a>
+      <a href="{{ pathto('about') }}#documentation-and-citation">{{ '引用与许可' if site_is_chinese else 'Citation & license' }}</a>
+    </nav>
+  </div>
+</footer>

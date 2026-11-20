@@ -29,6 +29,7 @@ html_css_files = [
     'simulation-learning.css',
     'reader-page.css',
     'concept-atlas.css',
+    'site-chrome.css',
 ]
 html_js_files = [
     ('cutting.js', {'defer': 'defer'}),
@@ -50,6 +51,7 @@ html_theme_options = {
 }
 html_context = {
     'default_mode': 'light',
+    'site_is_chinese': language == 'zh_CN',
     'other_language': 'English' if language == 'zh_CN' else '简体中文',
     'other_language_root': '../../en/latest/' if language == 'zh_CN' else '../../zh-cn/latest/',
 }

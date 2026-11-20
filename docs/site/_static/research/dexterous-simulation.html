@@ -39,16 +39,23 @@ a:hover { color: var(--ink); text-decoration-color: currentColor; }
 button, input, select { font: inherit; }
 button, a, input, select, summary { touch-action: manipulation; }
 [hidden] { display: none !important; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
 
 /* The existing navigation becomes a quiet reading rail, then wraps on mobile. */
 header {
-  max-width: 1440px;
-  margin: auto;
-  padding: 28px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  max-width: none;
+  padding: 18px max(40px, calc((100vw - 1360px) / 2));
+  border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  backdrop-filter: blur(14px);
 }
 .brand { color: var(--ink); font: 600 1.5625rem/1.4 var(--serif); letter-spacing: normal; text-decoration: none; white-space: nowrap; }
 .brand span { color: inherit; }
@@ -56,6 +63,24 @@ header {
 .site-nav a { color: var(--muted); font-size: .875rem; text-decoration: none; padding: 8px 0; }
 .site-nav a:first-child { color: var(--accent); font-weight: 600; }
 .site-nav a:hover, .site-nav a:focus-visible { color: var(--ink); text-decoration: underline; }
+.dex-site-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: min(100%, 240px);
+  min-height: 44px;
+  padding: 0 4px 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--paper) 88%, white);
+}
+.dex-site-search:focus-within { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 2px; }
+.dex-site-search svg { flex: none; }
+.dex-site-search input { min-width: 0; min-height: 40px; flex: 1; padding: 0; border: 0; outline: 0; color: var(--ink); background: transparent; }
+.dex-site-search input::placeholder { color: var(--muted); opacity: .9; }
+.dex-site-search button { min-width: 44px; min-height: 36px; padding: 0 12px; border: 0; border-radius: 999px; color: var(--accent); background: transparent; font-weight: 700; font-size: .75rem; cursor: pointer; }
+.dex-site-search button:hover { color: var(--ink); background: var(--wash); }
 .section-nav {
   position: fixed;
   top: 160px;
@@ -205,9 +230,12 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 .export { display: flex; gap: 12px 24px; flex-wrap: wrap; margin: 28px 0; }
 .export a { font-size: .8125rem; padding-block: 4px; }
 .footer { max-width: 740px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+.site-author { display: grid; gap: 4px; margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
+.site-author strong { color: var(--ink); font: 400 1.125rem/1.5 var(--serif); }
+.site-author a { font-weight: 700; text-decoration: none; }
 
 @media (max-width: 1000px) {
-  header { max-width: 900px; padding: 24px 32px 0; flex-wrap: wrap; gap: 12px; }
+  header { padding: 12px 32px; flex-wrap: wrap; gap: 12px; }
   .site-nav { width: 100%; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
   .section-nav { position: static; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 24px; width: auto; max-height: none; padding: 18px 32px; margin-top: 20px; border-left: 0; border-block: 1px solid var(--line); overflow: visible; }
   .nav-group + .nav-group { margin-top: 0; }
@@ -227,9 +255,10 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 }
 
 @media (max-width: 600px) {
-  header { padding: 22px 22px 0; }
+  header { padding: 12px 22px; gap: 10px; }
   .brand { font-size: 1.5rem; letter-spacing: normal; }
-  .site-nav { gap: 4px 16px; }
+  .dex-site-search { order: 3; width: 100%; }
+  .site-nav { order: 2; width: 100%; gap: 4px 16px; padding-bottom: 0; border-bottom: 0; }
   .site-nav a { font-size: .8125rem; }
   .section-nav { display: block; padding: 0; }
   .section-nav > summary { display: flex; min-height: 46px; align-items: center; padding: 12px 22px; color: var(--ink); font-size: .8125rem; font-weight: 600; }
@@ -276,7 +305,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
   a { color: inherit; }
 }
 </style></head><body>
-<header><a class="brand" href="../../index.html" aria-label="DexLab 首页">Dex<span>Lab</span></a><nav class="site-nav" aria-label="网站导航"><a href="#top" aria-current="page">研究导读</a><a href="../../experience.html">研究结论</a><a href="../../blog.html">Blog</a><a href="../../learning.html">仿真学习</a><a href="../../about.html">文档</a></nav></header>
+<header><a class="brand" href="../../index.html" aria-label="DexLab 首页">Dex<span>Lab</span></a><form class="dex-site-search" action="../../search.html" method="get" role="search"><label class="visually-hidden" for="guide-site-search">搜索 DexLab</label><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.4 15.4 5.1 5.1"/></svg><input id="guide-site-search" name="q" type="search" placeholder="搜索全站" autocomplete="off" enterkeyhint="search"/><button type="submit">搜索</button></form><nav class="site-nav" aria-label="网站导航"><a href="#top" aria-current="page">研究导读</a><a href="../../experience.html">研究结论</a><a href="../../blog.html">Blog</a><a href="../../learning.html">仿真学习</a><a href="../../about.html">文档</a></nav></header>
 <details class="section-nav" open><summary>阅读目录 · 核心导读、证据索引与五个研究专题</summary><nav aria-label="本文目录" class="nav-groups"><div class="nav-group"><span class="nav-group-title">核心导读</span><div class="nav-links"><a href="#funnel">筛选口径</a><a href="#layers">六层问题</a><a href="#evidence">七篇证据</a><a href="#routes">起步路线</a></div></div><div class="nav-group"><span class="nav-group-title">证据索引</span><div class="nav-links"><a href="#papers">38 篇论文</a><a href="#projects">仓库与层级</a><a href="#full">完整论证</a></div></div><div class="nav-group"><span class="nav-group-title">任务与执行</span><div class="nav-links"><a href="#october-layer-1">任务与接触</a><a href="#october-layer-2">本体与执行器</a><a href="#closing-loop-transmission">闭环传动</a><a href="#felis-policy-contract">Felis 策略合同</a><a href="#robodojo-astra">RoboDojo / Astra</a><a href="#robodojo-simulator-audit">仿真可信度审计</a><a href="#precision-insertion-rlt-cap">RLT / CAP</a></div></div><div class="nav-group"><span class="nav-group-title">物理与感知</span><div class="nav-links"><a href="#october-layer-3">物理与求解</a><a href="#raisim-physics-boundary">RaiSim 判因</a><a href="#october-layer-4">传感与观测</a><a href="#shared-dexterous-tracking">多示范共享</a><a href="#simulation-benchmarks-2026">Benchmark 方法</a></div></div><div class="nav-group"><span class="nav-group-title">数据与技能</span><div class="nav-links"><a href="#october-layer-5">数据与策略</a><a href="#coap">COAP</a><a href="#capx-aspire">CaP-X / ASPIRE</a></div></div><div class="nav-group"><span class="nav-group-title">评测与收益</span><div class="nav-links"><a href="#october-layer-6">校准与收益</a><a href="#corl-2026-dexlab-lessons">CoRL 研究筛选</a><a href="#robocoliseum">RoboColiseum</a></div></div></nav></details>
 <main id="top"><section class="hero"><div><div class="eyebrow">2024.09.10 — 2026.09.10 · 2026.09.14补充HydroShear · 2026.11.18补充RaiSim · 2026.11.19补充Felis策略合同</div><h1>当我们在讨论<br/><span>灵巧操作仿真</span>时，<br/>我们在讨论什么？</h1><p class="lead">在可控的虚拟环境里，探索灵巧手如何完成操作、为什么失败、哪些方法更有效，再检验这些结果能否在真实机器人上成立。</p><div class="chips"><span class="chip">多指 / 双手</span><span class="chip">接触与触觉</span><span class="chip">数据与迁移</span><span class="chip">来源可追溯</span></div></div><aside class="hero-side"><h2>仿真是一整条闭环</h2><div class="loop"><div><b>WORLD</b><span>接触如何演化</span></div><div><b>OBSERVATION</b><span>机器人看见什么</span></div><div><b>ACTION</b><span>动作如何执行</span></div><div><b>VALIDATION</b><span>真机获得什么</span></div></div><p>引擎、画面和FPS各回答一部分。选型从具体接触失效与验收方法开始。</p></aside></section>
 <div class="stats"><div class="stat"><b>38 → 29 → 7</b><span>候选论文 → 核心 → 全文精读</span></div><div class="stat"><b>19</b><span>仓库快照 · 18技术项目 + 1网页</span></div><div class="stat"><b>20</b><span>笔记映射 · 含3条历史线索</span></div><div class="stat"><b>3</b><span>可执行研究路线 · 尚未复现</span></div></div>
@@ -1258,7 +1287,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <p><strong>证据边界：</strong>核查于 2026-11-19，依据渲染后的项目页与仓库提交 <code>605e9f6d07d8e4ce166ddd1988578a345dec665d</code>。本轮环境未安装 PyTorch，因此没有运行 parity 或策略示例；没有新增 DexLab 任务、训练、物理扫描或真机实验。</p>
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/416">完整讨论与证据边界 ↗</a><a href="https://frank-zy-dou.github.io/blog/felis/">Felis 项目页 ↗</a><a href="https://github.com/Frank-ZY-Dou/Computational-Design-Fabrication/tree/main/Felis">推理代码与策略 ↗</a><a href="../../dexterous-hand-simulation.html#felis-policy-contract">导读 / Reading companion</a><a href="#top">回到开头</a></div>
 </section>
-<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · 吞吐与成本专题：2026-11-15 · COAP 与 Code-as-Policy Agent 专题：2026-11-16 · 闭环传动专题：2026-11-17 · 仿真可信度审计与 RaiSim 判因专题：2026-11-18 · Felis 策略合同专题：2026-11-19 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。</footer></main>
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · 吞吐与成本专题：2026-11-15 · COAP 与 Code-as-Policy Agent 专题：2026-11-16 · 闭环传动专题：2026-11-17 · 仿真可信度审计与 RaiSim 判因专题：2026-11-18 · Felis 策略合同专题：2026-11-19 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。<span class="site-author"><strong>DexLab 是我的个人研究项目。</strong>它探索智能体技能与仿真如何通过实验相互促进。作者：<a href="https://github.com/huangkiki" rel="me">Kiki Huang</a></span></footer></main>
 <script>
 const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
 function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}

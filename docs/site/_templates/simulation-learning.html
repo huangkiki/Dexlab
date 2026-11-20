@@ -8,18 +8,20 @@
   <meta name="description" content="{{ '从步进、接触与控制理解 MuJoCo，学习 4.0 新特性，再回到仿真失败与改进。' if zh else 'Learn MuJoCo through stepping, contact and control, explore version 4, and connect concepts to simulation diagnosis.' }}">
   <title>{{ title|striptags }} · DexLab</title>
   <link rel="stylesheet" href="{{ pathto('_static/simulation-learning.css', 1) }}">
+  <link rel="stylesheet" href="{{ pathto('_static/site-chrome.css', 1) }}">
   <script src="{{ pathto('_static/simulation-learning.js', 1) }}" defer></script>
 </head>
 <body data-lesson="{{ pagename }}">
   <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>
   <header class="learn-header">
     <a class="brand" href="{{ pathto('index') }}">DexLab</a>
+    {% include "site-search.html" %}
     <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
       <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
       <a href="{{ pathto('concepts/index') }}">{{ '概念' if zh else 'Concepts' }}</a>
       <a href="{{ pathto('learning') }}" aria-current="{{ 'page' if pagename == 'learning' else 'true' }}">{{ '仿真学习' if zh else 'Learn simulation' }}</a>
     </nav>
-    <div class="header-tools"><a href="{{ pathto('search') }}">{{ '搜索' if zh else 'Search' }}</a><a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a></div>
+    <div class="header-tools"><a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a></div>
   </header>
   <div class="learn-layout">
     <aside class="lesson-rail">
@@ -50,5 +52,6 @@
     </main>
     <aside class="section-rail" aria-label="{{ '本课内容' if zh else 'On this page' }}">{{ toc }}</aside>
   </div>
+  {% include "site-footer.html" %}
 </body>
 </html>

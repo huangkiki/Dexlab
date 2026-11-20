@@ -7,12 +7,11 @@
   <title>DexLab · {{ '研究总览' if homepage_is_chinese else 'Research overview' }}</title>
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
   <link rel="stylesheet" href="{{ pathto('_static/concept-atlas.css', 1) }}">
+  <link rel="stylesheet" href="{{ pathto('_static/site-chrome.css', 1) }}">
   <script src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
   <script src="{{ pathto('_static/doctools.js', 1) }}"></script>
   <script src="{{ pathto('_static/sphinx_highlight.js', 1) }}"></script>
   <script src="{{ pathto('_static/translations.js', 1) }}"></script>
-  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
-  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
   <script src="{{ pathto('_static/concept-atlas.js', 1) }}" defer></script>
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
 </head>
@@ -30,6 +29,7 @@
         <a href="about.html">{{ '文档' if homepage_is_chinese else 'Docs' }}</a>
         <a href="#physical-validity">{{ '物理验证' if homepage_is_chinese else 'Validation' }}</a>
       </nav>
+      {% include "site-search.html" %}
       <div class="header-links">
         <a href="{{ other_language_root }}index.html" lang="{{ 'en' if homepage_is_chinese else 'zh-CN' }}">{{ other_language }}</a>
         <a href="https://github.com/huangkiki/Dexlab" aria-label="DexLab on GitHub"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m8 5-7 7 7 7m8-14 7 7-7 7M14 3l-4 18"/></svg></a>
@@ -37,11 +37,7 @@
     </div>
   </header>
   <main id="main-content" role="main">{{ body }}</main>
-  <footer class="site-footer">
-    <a class="brand" href="#top">Dex<span>Lab</span></a>
-    <p>{{ '以实验暴露问题，以证据限定结论。' if homepage_is_chinese else 'Expose problems through experiments; bound conclusions with evidence.' }}</p>
-    <div><a href="#experiments">{{ '实验结论' if homepage_is_chinese else 'Findings' }}</a><a href="contributing.html">{{ '参与研究' if homepage_is_chinese else 'Contribute' }}</a><a href="https://github.com/huangkiki/Dexlab">GitHub</a><a href="about.html#documentation-and-citation">{{ '引用与许可' if homepage_is_chinese else 'Citation & license' }}</a></div>
-  </footer>
+  {% include "site-footer.html" %}
   {{ concept_dialog_html|safe }}
 </body>
 </html>

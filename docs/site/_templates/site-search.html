@@ -1,0 +1,6 @@
+<form class="site-search" action="{{ pathto('search') }}" method="get" role="search">
+  <label class="visually-hidden" for="site-search-input">{{ '搜索 DexLab' if site_is_chinese else 'Search DexLab' }}</label>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.4 15.4 5.1 5.1"></path></svg>
+  <input id="site-search-input" type="search" name="q" placeholder="{{ '搜索全站' if site_is_chinese else 'Search site' }}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  <button type="submit">{{ '搜索' if site_is_chinese else 'Search' }}</button>
+</form>
