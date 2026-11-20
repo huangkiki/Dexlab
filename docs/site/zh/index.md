@@ -389,13 +389,6 @@
   </div>
 </section>
 
-<section class="home-contact" id="research-scope" aria-labelledby="contact-heading">
-  <h2 id="contact-heading">联系作者</h2>
-  <nav aria-label="联系作者">
-    <a href="mailto:huangyue0719@outlook.com">邮件</a>
-    <a href="https://github.com/huangkiki">GitHub ↗</a>
-  </nav>
-</section>
 </div>
 ```
 

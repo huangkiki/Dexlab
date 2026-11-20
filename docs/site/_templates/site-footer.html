@@ -1,14 +1,34 @@
-<footer class="global-site-footer">
+<footer class="global-site-footer" aria-labelledby="site-author-name">
   <div class="global-site-footer-inner">
-    <div class="global-site-footer-project">
-      <p><strong>{{ 'DexLab 是我的个人研究项目。' if site_is_chinese else 'DexLab is my personal research project.' }}</strong> {{ '它探索智能体技能与仿真如何通过实验相互促进。' if site_is_chinese else 'It explores how Agent Skills and simulation can improve each other through experiments.' }}</p>
-      <p class="global-site-author">{{ '作者：' if site_is_chinese else 'Author: ' }}<a href="https://github.com/huangkiki" rel="me">Kiki Huang</a></p>
+    <section class="author-card">
+      <div class="author-card-profile">
+        <span class="author-monogram" aria-hidden="true">KH</span>
+        <div class="author-card-copy">
+          <p class="author-kicker">{{ 'DEXLAB / 作者' if site_is_chinese else 'DEXLAB / AUTHOR' }}</p>
+          <p class="author-name" id="site-author-name"><a href="https://github.com/huangkiki" rel="me">Kiki Huang</a></p>
+          <p class="author-project"><strong>{{ 'DexLab 是我的个人研究项目。' if site_is_chinese else 'DexLab is my personal research project.' }}</strong> {{ '它探索智能体技能与仿真如何通过实验相互促进。' if site_is_chinese else 'It explores how Agent Skills and simulation can improve each other through experiments.' }}</p>
+        </div>
+      </div>
+      <address class="author-card-contact">
+        <p class="author-contact-label">{{ '联系作者' if site_is_chinese else 'Contact' }}</p>
+        <a href="mailto:huangyue0719@outlook.com">
+          <span>Email</span>
+          <strong>huangyue0719@outlook.com</strong>
+        </a>
+        <a href="https://github.com/huangkiki">
+          <span>GitHub</span>
+          <strong>@huangkiki <i aria-hidden="true">↗</i></strong>
+        </a>
+      </address>
+    </section>
+    <div class="global-site-footer-meta">
+      <p>© 2026 Kiki Huang</p>
+      <nav aria-label="{{ '站尾导航' if site_is_chinese else 'Footer navigation' }}">
+        <a href="{{ '#experiments' if pagename == 'index' else pathto('index') + '#experiments' }}">{{ '实验结论' if site_is_chinese else 'Findings' }}</a>
+        <a href="{{ pathto('contributing') }}">{{ '参与研究' if site_is_chinese else 'Contribute' }}</a>
+        <a href="https://github.com/huangkiki/Dexlab">DexLab GitHub</a>
+        <a href="{{ pathto('about') }}#documentation-and-citation">{{ '引用与许可' if site_is_chinese else 'Citation & license' }}</a>
+      </nav>
     </div>
-    <nav aria-label="{{ '站尾导航' if site_is_chinese else 'Footer navigation' }}">
-      <a href="{{ '#experiments' if pagename == 'index' else pathto('index') + '#experiments' }}">{{ '实验结论' if site_is_chinese else 'Findings' }}</a>
-      <a href="{{ pathto('contributing') }}">{{ '参与研究' if site_is_chinese else 'Contribute' }}</a>
-      <a href="https://github.com/huangkiki/Dexlab">GitHub</a>
-      <a href="{{ pathto('about') }}#documentation-and-citation">{{ '引用与许可' if site_is_chinese else 'Citation & license' }}</a>
-    </nav>
   </div>
 </footer>

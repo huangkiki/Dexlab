@@ -216,7 +216,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - The original architecture diagram and ruled scroll-revealed evidence sequence, with the hardware-free validation boundary closing the research reading order.
 - A grouped research-guide taxonomy with two foundation lanes and four persistent research topics.
 - A flat site hierarchy: global masthead first, current-page outline second, no repeated all-site tree.
-- A shared closing footer that states the personal-project scope and names Kiki Huang as author.
+- A shared closing personal card that combines the author identity, personal-project scope, email and GitHub contact.
 - Engine comparisons led by a conclusion, explicit criteria, synchronized panes and a compact result matrix.
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
@@ -264,7 +264,7 @@ The `learning-*` tokens apply only to the course reader: a regular serif lesson 
 
 The homepage header has a maximum width of (1440px), padding (24px 40px), one horizontal navigation row and a global search field. The masthead remains sticky. The page body has a maximum width of (1120px) and (40px) gutters.
 
-The first screen is capped at (760px) rather than stretching to the viewport, so the project introduction does not leave a large empty gap before the research content. The DexLab title, thesis, method paragraph and a small scope note occupy the main column. The personal-project statement and author identity live in the shared closing footer, so they remain available on every page without competing with the research opening. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. After that system explanation, a concept field, a separate two-column research-topic index and one ruled index action form a compact transition into evidence browsing. Five evidence cases follow in one vertical reading sequence, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the contact footer: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
+The first screen is capped at (760px) rather than stretching to the viewport, so the project introduction does not leave a large empty gap before the research content. The DexLab title, thesis, method paragraph and a small scope note occupy the main column. The personal-project statement and author identity live in the shared closing card, so they remain available on every page without competing with the research opening. The next section introduces the task-to-evidence architecture and displays the authored (1774×887) diagram across the reading column. After that system explanation, a concept field, a separate two-column research-topic index and one ruled index action form a compact transition into evidence browsing. Five evidence cases follow in one vertical reading sequence, then three numbered research judgments and three continuation links. The hardware-free validation boundary closes the main research path immediately before the author card: four evidence layers establish the proof model, and six experiment-specific records use open rows for physical guarantee, regression after parameter change and claim boundary.
 
 The concept band contains only physical concepts, validation terms and canonical solver or numerical options. Cross-experiment research articles sit immediately below it in a separate, headed article index. Group membership remains metadata for the atlas, where explicit filters still organize the searchable map. Solver concepts are identified by token rather than `engine + token`; engine registrations remain separate context. Individual visible terms accept pointer hover: the field temporarily sharpens, other terms recede and the active term enlarges. A concept click and the masthead’s “Concepts” link open the atlas; each topic link opens its article directly.
 
@@ -324,7 +324,7 @@ The first screen shows the project title, a two-line research thesis, a shorter 
 
 Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. The search field stays in the sticky masthead on every generated page; language and repository links stay beside it. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
 
-The shared footer closes every page with the sentence “DexLab 是我的个人研究项目。它探索智能体技能与仿真如何通过实验相互促进。” in Chinese and its English equivalent. It names Kiki Huang as the author, links to the author's GitHub profile, and repeats only four high-value site destinations. Context-specific evidence or course notes remain above this shared footer rather than being replaced by it.
+The shared footer is a personal card rather than a generic copyright row. A circular `KH` monogram, an `AUTHOR` kicker and Kiki Huang's name establish identity; the project sentence explains the work; a separate ruled contact column exposes email and GitHub as the two primary actions. The card uses a fine border and a restrained tonal wash, not a floating promotional tile. Copyright and four site destinations sit in a quieter metadata row below it. Context-specific evidence or course notes remain above this shared card rather than being replaced by it.
 
 ### Concept field and atlas
 
@@ -346,7 +346,7 @@ The image itself opens the original asset. On narrow screens, the figure becomes
 
 ### Physical validation boundary
 
-The validation section is the final research section before the contact footer. It starts with an explicit “hardware experiments: 0” statement and separates simulation-internal consistency from real-world accuracy. A ruled boundary row links the prepared hardware-collection protocol while stating that no acceptable hardware dataset exists.
+The validation section is the final research section before the author card. It starts with an explicit “hardware experiments: 0” statement and separates simulation-internal consistency from real-world accuracy. A ruled boundary row links the prepared hardware-collection protocol while stating that no acceptable hardware dataset exists.
 
 Four evidence layers use the same open three-rule grammar as the conclusions: frozen input identity, positive and negative controls, native numerical readback, and parameter-change regression. Six experiment records follow as open ruled rows. Each names the experiment, its physical guarantee, the exact regression design after a parameter change, and what the result cannot prove. Results include both passes and retained failures, including the MuJoCo apple timestep case that is expected to fail.
 
@@ -420,7 +420,7 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
 - **Do** keep the global search field in the sticky masthead on every page and keep its native GET submission usable without JavaScript.
-- **Do** keep the personal-project statement and Kiki Huang's author credit in the shared footer on every page.
+- **Do** keep the `KH` identity, project statement and Kiki Huang's email/GitHub actions together in the shared personal card on every page.
 - **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
 - **Do** preserve visible keyboard focus and complete GIF, figure and disclosure access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.

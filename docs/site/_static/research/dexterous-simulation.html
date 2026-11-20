@@ -230,9 +230,17 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 .export { display: flex; gap: 12px 24px; flex-wrap: wrap; margin: 28px 0; }
 .export a { font-size: .8125rem; padding-block: 4px; }
 .footer { max-width: 740px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
-.site-author { display: grid; gap: 4px; margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
-.site-author strong { color: var(--ink); font: 400 1.125rem/1.5 var(--serif); }
-.site-author a { font-weight: 700; text-decoration: none; }
+.site-author { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; margin: 20px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; }
+.site-author-profile { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; align-items: start; }
+.site-author-monogram { display: grid; width: 52px; height: 52px; place-items: center; border: 1px solid var(--accent); border-radius: 50%; color: var(--accent); font: 400 1rem/1 var(--serif); letter-spacing: .08em; }
+.site-author-kicker { margin: 0 0 4px; color: var(--muted); font-size: .625rem; font-weight: 700; letter-spacing: .14em; }
+.site-author-name { display: block; color: var(--ink); font: 400 1.5rem/1.25 var(--serif); text-decoration: none; }
+.site-author-project { margin: 8px 0 0; line-height: 1.8; }
+.site-author-project strong { color: var(--ink); font-weight: 650; }
+.site-author-contact { display: grid; gap: 6px; min-width: 220px; }
+.site-author-contact a { display: grid; gap: 1px; padding: 8px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.site-author-contact small { color: var(--muted); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase; }
+.site-author-contact strong { color: var(--accent); font-size: .75rem; font-weight: 650; overflow-wrap: anywhere; }
 
 @media (max-width: 1000px) {
   header { padding: 12px 32px; flex-wrap: wrap; gap: 12px; }
@@ -260,6 +268,8 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
   .dex-site-search { order: 3; width: 100%; }
   .site-nav { order: 2; width: 100%; gap: 4px 16px; padding-bottom: 0; border-bottom: 0; }
   .site-nav a { font-size: .8125rem; }
+  .site-author { grid-template-columns: 1fr; gap: 14px; }
+  .site-author-contact { min-width: 0; }
   .section-nav { display: block; padding: 0; }
   .section-nav > summary { display: flex; min-height: 46px; align-items: center; padding: 12px 22px; color: var(--ink); font-size: .8125rem; font-weight: 600; }
   .nav-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px; padding: 0 22px 16px; }
@@ -1287,7 +1297,7 @@ summary { cursor: pointer; padding: 18px 0; font-weight: 600; list-style-positio
 <p><strong>证据边界：</strong>核查于 2026-11-19，依据渲染后的项目页与仓库提交 <code>605e9f6d07d8e4ce166ddd1988578a345dec665d</code>。本轮环境未安装 PyTorch，因此没有运行 parity 或策略示例；没有新增 DexLab 任务、训练、物理扫描或真机实验。</p>
 <div class="export"><a href="https://github.com/huangkiki/Dexlab/discussions/416">完整讨论与证据边界 ↗</a><a href="https://frank-zy-dou.github.io/blog/felis/">Felis 项目页 ↗</a><a href="https://github.com/Frank-ZY-Dou/Computational-Design-Fabrication/tree/main/Felis">推理代码与策略 ↗</a><a href="../../dexterous-hand-simulation.html#felis-policy-contract">导读 / Reading companion</a><a href="#top">回到开头</a></div>
 </section>
-<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · 吞吐与成本专题：2026-11-15 · COAP 与 Code-as-Policy Agent 专题：2026-11-16 · 闭环传动专题：2026-11-17 · 仿真可信度审计与 RaiSim 判因专题：2026-11-18 · Felis 策略合同专题：2026-11-19 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。<span class="site-author"><strong>DexLab 是我的个人研究项目。</strong>它探索智能体技能与仿真如何通过实验相互促进。作者：<a href="https://github.com/huangkiki" rel="me">Kiki Huang</a></span></footer></main>
+<footer class="footer">初版：2026-09-10 · 补充：2026-09-14 · 评测专题：2026-11-11 · CoRL 2026 与精细插接专题：2026-11-12 · RoboColiseum 专题：2026-11-13 · 吞吐与成本专题：2026-11-15 · COAP 与 Code-as-Policy Agent 专题：2026-11-16 · 闭环传动专题：2026-11-17 · 仿真可信度审计与 RaiSim 判因专题：2026-11-18 · Felis 策略合同专题：2026-11-19 · arXiv / 官方仓库 / 既有Obsidian笔记。HTML自包含，可离线阅读；论文与GitHub外链需要网络，Obsidian链接打开本地笔记。本次未运行训练、性能复测或真机实验。<span class="site-author"><span class="site-author-profile"><span class="site-author-monogram" aria-hidden="true">KH</span><span><span class="site-author-kicker">DEXLAB / 作者</span><a class="site-author-name" href="https://github.com/huangkiki" rel="me">Kiki Huang</a><span class="site-author-project"><strong>DexLab 是我的个人研究项目。</strong>它探索智能体技能与仿真如何通过实验相互促进。</span></span></span><span class="site-author-contact"><a href="mailto:huangyue0719@outlook.com"><small>Email</small><strong>huangyue0719@outlook.com</strong></a><a href="https://github.com/huangkiki"><small>GitHub</small><strong>@huangkiki ↗</strong></a></span></span></footer></main>
 <script>
 const cards=[...document.querySelectorAll('.paper')],q=document.querySelector('#paper-search'),d=document.querySelector('#decision'),l=document.querySelector('#layer');
 function filterPapers(){let n=0;for(const c of cards){const keep=c.textContent.toLowerCase().includes(q.value.trim().toLowerCase())&&(d.value==='all'||c.dataset.decision===d.value)&&(l.value==='all'||c.dataset.layer===l.value);c.hidden=!keep;if(keep)n++}document.querySelector('#paper-count').textContent=`显示 ${n} / ${cards.length} 篇 · 精读7篇计入核心29篇；“核心”筛选显示其余22篇`;document.querySelector('#no-papers').hidden=n>0}
