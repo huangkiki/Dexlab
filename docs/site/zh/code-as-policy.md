@@ -84,6 +84,8 @@ open_gripper()
 
 GR00T 2 给出了一个很清楚的系统分工：**Agent 决定“做什么”，CaP 执行可编程的搬取和恢复，World-Action Model 执行难脚本化的接触丰富操作。** 三者通过 MCP 工具服务器连接，并由一个 control worker 串行化命令，避免策略和程序同时抢机器人控制权。
 
+截至 2026-11-20，默认 `Isaac-GR00T` main/release 仍是 N1.7，项目页仍把正式 GR00T 2 代码标为 December。不过公开仓库存在非默认分支 `codex/n2-action-expert`，可静态阅读 N2 模型、训练和部署代码；它使用 NVIDIA 评估许可证而非开源许可证，base checkpoint `nvidia/GR00T2Internal` 也仍是私有。源码结构可以确认：冻结 Wan VAE 编码多视角视频、Cosmos-Reason1 编码语言，Cosmos 2B DiT 处理视频/状态/动作 token，动作和视频分别用 flow-matching velocity loss；推理可以联合生成未来视频与动作，也可以在 disjoint 模式只生成动作。
+
 以随机倒料的小车装配为例：零件掉落时，Agent 检测到阶段没有前进，调用 `localize_object`、`move_to_pose` 和 `set_gripper` 重新抓取；随后把轮子对准、旋紧等需要精细接触的步骤交还给 GR00T 2。这不是“Agent 学会了装配”，而是 Agent 修复了一个可观测的局部状态，再让专门的接触策略继续工作。
 
 论文报告三类装配从 SFT+DAgger 的 `84/71/78` 次成功提高到 Agent+CaP 的 `98/97/97`；五次连续插接在 SFT+RL+Agent 下达到 `19/20`（网线）和 `20/20`（充电器）。这些结果同时包含纠错数据、RL、任务程序、重试和成功验证，不能归因给 Agent 或 CaP 单独一项。
