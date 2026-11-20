@@ -65,6 +65,7 @@ open_gripper()
 | [COAP](https://arxiv.org/abs/2610.12369) | 在线运行固定代码；coding agent 离线修改 | 显式状态 + 任务程序 + 共享代码库 | 让状态、任务逻辑和代码改动可审计 | 全部结果为仿真；仍未证明跨本体/真实材料 |
 | [ASPIRE](https://arxiv.org/abs/2607.00272) | coding agent 在线执行、诊断和修复 | 逐原语 trace + 可复用技能库 | 把失败修复持续沉淀并迁移到新任务 | 固定 API、前沿模型依赖、验证一次不等于泛化 |
 | [HexaShell](https://arxiv.org/abs/2610.23479) / [Auriga](https://arxiv.org/abs/2611.01112) | 通用模型在 harness 中直接调工具或写短程序 | 通用工具、测量、准入与可选 task skill | 降低每个机器人/benchmark 的适配和任务专用代码 | harness 本身也贡献成功率，不能全归给基础模型 |
+| [GR00T 2](https://research.nvidia.com/labs/gear/gr00t-2) | Agent 选择阶段并检查执行；WAM 做接触操作；CaP 做可脚本化修复 | 任务程序、MCP 工具、CaP 原语、WAM API | 把长任务编排、局部恢复和接触丰富操作分开 | 依赖纠错数据、RL、可靠成功检查与足够精确的恢复原语 |
 
 这里最重要的区分不是“有没有 Python”，而是**运行时是否仍有模型、经验到底保存在代码、文本还是权重中、谁拥有安全与成功判定**。
 
@@ -78,6 +79,18 @@ open_gripper()
 - VLA 更接近连续动作生成，但推理可解释性和任务逻辑定位通常更难。
 
 二者也不是互斥关系。最现实的系统常把 Code as Policy 放在任务层，把 VLA、阻抗控制或专用控制器放在局部接触层。
+
+### GR00T 2：Agent、CaP 与接触策略各管一段
+
+GR00T 2 给出了一个很清楚的系统分工：**Agent 决定“做什么”，CaP 执行可编程的搬取和恢复，World-Action Model 执行难脚本化的接触丰富操作。** 三者通过 MCP 工具服务器连接，并由一个 control worker 串行化命令，避免策略和程序同时抢机器人控制权。
+
+以随机倒料的小车装配为例：零件掉落时，Agent 检测到阶段没有前进，调用 `localize_object`、`move_to_pose` 和 `set_gripper` 重新抓取；随后把轮子对准、旋紧等需要精细接触的步骤交还给 GR00T 2。这不是“Agent 学会了装配”，而是 Agent 修复了一个可观测的局部状态，再让专门的接触策略继续工作。
+
+论文报告三类装配从 SFT+DAgger 的 `84/71/78` 次成功提高到 Agent+CaP 的 `98/97/97`；五次连续插接在 SFT+RL+Agent 下达到 `19/20`（网线）和 `20/20`（充电器）。这些结果同时包含纠错数据、RL、任务程序、重试和成功验证，不能归因给 Agent 或 CaP 单独一项。
+
+更重要的限制来自失败本身：在 300 次 Agent 装配里，3 次失败是螺丝只旋进一部分，GR00T 2 和 Agent 都把细微视觉差异判成完成；无 RL 的仿真中，S2 干预后也只有 `24%`（RoboDojo）和 `56%`（RoboCasa365）成功。Agent 能调用恢复程序，不代表它拥有正确的物理测量，更不代表每次恢复都有效。
+
+这里应使用 **CaP = Code-as-Policy**。它与 [Contact-Anchored Policy（CAP）](https://github.com/huangkiki/Dexlab/discussions/309) 无关：后者用三维接触锚点消除“在哪里交互”的歧义，前者用程序组合定位、运动、夹爪和验证。GR00T 2 的完整分析见 [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419)；#419 的候选只进入 Triage，不构成实验授权。
 
 ### Task skill 不是 task program
 
@@ -155,10 +168,11 @@ CaP-X 给出的最有价值提醒，是不要把“模型能力”与“人工�
 2. 再读 [CaP-X](https://arxiv.org/abs/2603.22435)，看抽象层、反馈和测试时计算如何改变结论，并参考 [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341)。
 3. 读 [COAP](https://arxiv.org/abs/2610.12369) 的显式状态与受控代码改动，参考 [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335)。
 4. 读 [ASPIRE](https://arxiv.org/abs/2607.00272) 的 trace、技能晋升和 held-out 协议，参考 [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342)。
-5. 最后回到 DexLab 的 [面包滑落证据](robodojo-bread-slip.md)与[模型评测协议](model-evaluation.md)，判断哪些机制能接进真实失败链。
+5. 读 GR00T 2 的 [官方白皮书](https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf) 的 §3.4 与附录 G，观察 Agent、CaP、接触策略和单一控制权如何分层，参考 [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419)。
+6. 最后回到 DexLab 的 [面包滑落证据](robodojo-bread-slip.md)与[模型评测协议](model-evaluation.md)，判断哪些机制能接进真实失败链。
 
 ## 证据范围
 
-本页整理的是方法位置和可迁移机制，不是跨论文排行榜。论文性能数字均为作者报告；CaP-X、ASPIRE 的固定源码可确认 trace、反馈、技能晋升和评测边界，但本轮没有运行外部 Agent、外部 benchmark 或 DexLab 新物理实验。HexaShell/Auriga 仅按官方摘要定位为 agent harness 邻类，没有在本页重述其成功率排名。
+本页整理的是方法位置和可迁移机制，不是跨论文排行榜。论文性能数字均为作者报告；CaP-X、ASPIRE 的固定源码可确认 trace、反馈、技能晋升和评测边界。GR00T 2 使用 2026-11 官方白皮书核对，但官方代码要到 2026-12 才开放，因此这里没有审查其实现。本轮没有运行外部 Agent、外部 benchmark 或 DexLab 新物理实验。HexaShell/Auriga 仅按官方摘要定位为 agent harness 邻类，没有在本页重述其成功率排名。
 
 更广的仿真问题仍从《[当我们在讨论灵巧操作仿真时，我们在讨论什么？](dexterous-hand-simulation.md)》开始；Code as Policy 是其中“策略与评测”层的一个专题，不是整个仿真研究的总框架。

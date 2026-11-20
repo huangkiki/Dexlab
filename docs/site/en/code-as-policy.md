@@ -65,6 +65,7 @@ Task code usually runs in an outer loop. Contact acquisition, slip and release m
 | [COAP](https://arxiv.org/abs/2610.12369) | fixed code runs online; a coding agent edits code offline | explicit state, task programs, shared code library | make state, task logic and code changes auditable | all reported results are simulated; cross-body/material transfer is unproven |
 | [ASPIRE](https://arxiv.org/abs/2607.00272) | a coding agent executes, diagnoses and repairs online | primitive traces and a reusable skill library | persist validated repairs and transfer them to later tasks | fixed API, frontier-model dependence, and one-time validation is not generalization |
 | [HexaShell](https://arxiv.org/abs/2610.23479) / [Auriga](https://arxiv.org/abs/2611.01112) | a general model calls tools or writes short programs inside a harness | general tools, measurements, admission and optional task skills | reduce per-robot and per-benchmark task-specific code | the harness itself contributes to success and cannot be hidden inside a model-only score |
+| [GR00T 2](https://research.nvidia.com/labs/gear/gr00t-2) | an agent selects stages and checks execution; a WAM handles contact; CaP handles scriptable repair | task program, MCP tools, CaP primitives and WAM API | separate long-horizon orchestration, local recovery and contact-rich manipulation | depends on correction data, RL, reliable success checks and sufficiently precise recovery primitives |
 
 The important distinction is not the presence of Python. It is **whether a model remains in the runtime loop, where experience is stored—code, text or weights—and who owns safety and success determination.**
 
@@ -76,6 +77,18 @@ The important distinction is not the presence of Python. It is **whether a model
 - VLA generates continuous actions more directly, while task logic and intermediate failure attribution are often harder to inspect.
 
 They are not mutually exclusive. A practical system can use Code as Policy in the task layer and a VLA, impedance controller or specialized controller for local contact.
+
+### GR00T 2: separate ownership for agent, CaP and contact policy
+
+GR00T 2 provides a concrete division of labour: **the agent decides what to do, CaP performs programmable transport and recovery, and the World-Action Model performs contact-rich manipulation that is hard to script.** They connect through an MCP tool server, and one control worker serializes commands so the policy and code programs do not drive the robot at the same time.
+
+In randomized toy-car assembly, for example, the agent detects that a stage has stalled after a part is dropped and calls `localize_object`, `move_to_pose` and `set_gripper` to recover the state. It then hands wheel alignment and fastening back to GR00T 2. The agent has not learned assembly; it repairs an observable local state and returns control to the contact policy.
+
+The paper reports three assembly tasks rising from `84/71/78` successes with SFT+DAgger to `98/97/97` with Agent+CaP. Five consecutive insertions reach `19/20` for Ethernet cables and `20/20` for chargers with SFT+RL+Agent. These results jointly include correction data, RL, task programs, retries and success checks; they cannot be assigned to the agent or CaP alone.
+
+The failures expose the limit. Three of 300 agent-assisted assembly episodes failed because a screw was only partly driven, while both GR00T 2 and the agent judged the subtle visual difference complete. Without RL, only `24%` of S2 interventions on RoboDojo and `56%` on RoboCasa365 succeeded. Calling a recovery program is not the same as measuring the physical state correctly or establishing that the repair worked.
+
+This page uses **CaP = Code-as-Policy**. It is unrelated to [Contact-Anchored Policy (CAP)](https://github.com/huangkiki/Dexlab/discussions/309), which removes ambiguity about where interaction should occur by conditioning on a 3D contact anchor. See [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419) for the full GR00T 2 review. Its candidate slice is in Triage only and is not an execution authorization.
 
 ### Task skill is not task program
 
@@ -151,10 +164,11 @@ Only after this feedback contract is stable should DexLab test “write one repa
 2. Read [CaP-X](https://arxiv.org/abs/2603.22435) for abstraction, feedback and test-time computation, then [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341).
 3. Read [COAP](https://arxiv.org/abs/2610.12369) for explicit state and controlled code changes, then [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335).
 4. Read [ASPIRE](https://arxiv.org/abs/2607.00272) for traces, skill admission and held-out evaluation, then [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342).
-5. Return to DexLab's [toast-slip evidence](robodojo-bread-slip.md) and [model-evaluation protocol](model-evaluation.md) to decide what can enter a real failure chain.
+5. Read §3.4 and Appendix G of the [GR00T 2 whitepaper](https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf) for the agent, CaP, contact-policy and single-controller split, then [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419).
+6. Return to DexLab's [toast-slip evidence](robodojo-bread-slip.md) and [model-evaluation protocol](model-evaluation.md) to decide what can enter a real failure chain.
 
 ## Evidence scope
 
-This page maps methods and transferable mechanisms; it is not a cross-paper leaderboard. All performance figures are author-reported. The fixed CaP-X and ASPIRE source establishes trace, feedback, skill-admission and evaluation boundaries, but this review ran no external agent, external benchmark or new DexLab physics experiment. HexaShell and Auriga are positioned as adjacent agent harnesses from their official abstracts; their success rankings are not restated here.
+This page maps methods and transferable mechanisms; it is not a cross-paper leaderboard. All performance figures are author-reported. The fixed CaP-X and ASPIRE source establishes trace, feedback, skill-admission and evaluation boundaries. GR00T 2 is checked against the November 2026 official whitepaper; its official code is not due until December 2026, so this review does not inspect that implementation. The review ran no external agent, external benchmark or new DexLab physics experiment. HexaShell and Auriga are positioned as adjacent agent harnesses from their official abstracts; their success rankings are not restated here.
 
 For the broader simulation question, start with “[What are we discussing when we discuss dexterous-hand simulation?](dexterous-hand-simulation.md).” Code as Policy is a topic within its policy-and-evaluation layer, not the whole simulation framework.
