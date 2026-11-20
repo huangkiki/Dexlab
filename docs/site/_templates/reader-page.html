@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title|striptags }} · DexLab</title>
+  <link rel="icon" href="{{ pathto('_static/favicon.svg', 1) }}" type="image/svg+xml">
   {{ metatags }}
   {%- for css in css_files %}
     {%- if css|attr("filename") %}
@@ -26,7 +27,7 @@
 <body data-reader-page="{{ pagename }}">
   <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>
   <header class="learn-header">
-    <a class="brand" href="{{ pathto('index') }}">DexLab</a>
+    <a class="brand" href="{{ pathto('index') }}" aria-label="DexLab">{% include "brand.html" %}</a>
     {% include "site-search.html" %}
     <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
       <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>

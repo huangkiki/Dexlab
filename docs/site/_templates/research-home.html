@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ 'DexLab：项目介绍、Sim-to-Real Gap、真机验证边界、物理保证、代表性实验与 Solver 边界。' if homepage_is_chinese else 'DexLab: project overview, Sim-to-Real Gap, hardware-validation boundary, physical checks, representative experiments and solver boundaries.' }}">
   <title>DexLab · {{ '研究总览' if homepage_is_chinese else 'Research overview' }}</title>
+  <link rel="icon" href="{{ pathto('_static/favicon.svg', 1) }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ pathto('_static/research-home.css', 1) }}">
   <link rel="stylesheet" href="{{ pathto('_static/concept-atlas.css', 1) }}">
   <link rel="stylesheet" href="{{ pathto('_static/site-chrome.css', 1) }}">
@@ -20,7 +21,7 @@
   <div class="page-progress" aria-hidden="true"><span></span></div>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="#top" aria-label="DexLab {{ '首页' if homepage_is_chinese else 'home' }}">Dex<span>Lab</span></a>
+      <a class="brand" href="#top" aria-label="DexLab {{ '首页' if homepage_is_chinese else 'home' }}">{% include "brand.html" %}</a>
       <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
         <a href="_static/research/dexterous-simulation.html">{{ '研究导读' if homepage_is_chinese else 'Research guide' }}</a>
         <a href="concepts/index.html" data-concept-open>{{ '概念' if homepage_is_chinese else 'Concepts' }}</a>
