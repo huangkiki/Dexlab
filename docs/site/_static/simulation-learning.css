@@ -85,6 +85,11 @@ button:disabled {
   max-width: 1600px;
   margin: auto;
 }
+.brand {
+  font: 700 27px var(--serif);
+  color: var(--ink);
+  text-decoration: none;
+}
 .learn-header nav,
 .header-tools {
   display: flex;
@@ -545,6 +550,9 @@ h3:hover .headerlink,
   }
   .time-lab {
     padding: 18px;
+  }
+  .learn-header .brand {
+    font-size: 25px;
   }
   .header-tools a,
   .learn-header nav a {

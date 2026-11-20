@@ -211,7 +211,6 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 
 - Warm paper and charcoal, with restrained green reading accents.
 - A sticky horizontal masthead with one global site-search field, an oversized serif opening title and one ruled content entrance.
-- A shared `D` contact mark with a green evidence point, paired with a two-tone `DexLab.` wordmark and favicon.
 - A semantic field of curated concepts and canonical solver options below the opening entry, resolving into view with scroll, with individual hover focus and a searchable relationship atlas.
 - A separate, compact research-topic index for cross-experiment articles, so article titles do not break the concept cloud or compete with individual terms.
 - The original architecture diagram and ruled scroll-revealed evidence sequence, with the hardware-free validation boundary closing the research reading order.
@@ -222,7 +221,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
-Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/site-chrome.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_static/favicon.svg`, `_templates/brand.html`, `_templates/research-home.html`, `_templates/site-search.html`, `_templates/site-footer.html`, `docs/concept-atlas.json`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/site-chrome.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_templates/research-home.html`, `_templates/site-search.html`, `_templates/site-footer.html`, `docs/concept-atlas.json`, and `zh/index.md` / `en/index.md`. The Blog index uses `zh/blog.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
@@ -325,9 +324,7 @@ The first screen shows the project title, a two-line research thesis, a shorter 
 
 Navigation is one horizontal masthead row on desktop and wraps below the brand on smaller screens. The guide destination is green and semibold; other destinations are muted. Hover adds an underline and charcoal text. The search field stays in the sticky masthead on every generated page; language and repository links stay beside it. A skip link becomes visible on focus; all links and buttons retain keyboard focus.
 
-The DexLab brand is a compact wordmark rather than plain interface text. A geometric `D` shell contains a smaller green `D` and a circular contact point linked by a horizontal stroke, making contact and evidence visible without a literal robot icon. The `Dex` lettering remains charcoal serif, `Lab` is the same face in the restrained green accent, and a final period anchors the mark. The symbol reduces to a dedicated favicon; at mobile width the mark becomes (30px) and the wordmark (23px), while the link retains a single-line accessible name.
-
-The shared footer is a personal card rather than a generic copyright row. A circular `KH` monogram, an `AUTHOR` kicker and Kiki Huang's name establish identity; the project sentence explains the work; a separate ruled contact column exposes email and GitHub as the two primary actions. The card uses a fine border and a restrained tonal wash, not a floating promotional tile. Copyright and four site destinations sit in a quieter metadata row below it. Context-specific evidence or course notes remain above this shared card rather than being replaced by it.
+The shared footer is a personal card rather than a generic copyright row. A circular `KK` monogram, an `AUTHOR` kicker and Kiki Huang's name establish identity; the project sentence explains the work; a separate ruled contact column exposes email and GitHub as the two primary actions. The card uses a fine border and a restrained tonal wash, not a floating promotional tile. Copyright and four site destinations sit in a quieter metadata row below it. Context-specific evidence or course notes remain above this shared card rather than being replaced by it.
 
 ### Concept field and atlas
 
@@ -423,7 +420,7 @@ Supporting conditions, source links and limitations remain below the matrix. Det
 - **Do** classify the long research guide by reading intent and keep equivalent evidence groups in responsive open columns.
 - **Do** keep one global site navigation and at most one current-page outline in the shared reader.
 - **Do** keep the global search field in the sticky masthead on every page and keep its native GET submission usable without JavaScript.
-- **Do** keep the `KH` identity, project statement and Kiki Huang's email/GitHub actions together in the shared personal card on every page.
+- **Do** keep the `KK` identity, project statement and Kiki Huang's email/GitHub actions together in the shared personal card on every page.
 - **Do** put an experiment's conclusion, criteria, synchronized comparison and result matrix before its long protocol.
 - **Do** preserve visible keyboard focus and complete GIF, figure and disclosure access without JavaScript.
 - **Do** maintain Chinese/English parity, on-site learning links and original evidence provenance.

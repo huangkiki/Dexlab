@@ -13,67 +13,6 @@ html {
   backdrop-filter: blur(14px);
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--ink, #282b26);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.brand-mark {
-  display: block;
-  width: 34px;
-  height: 34px;
-  flex: none;
-}
-
-.brand-mark svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.brand-mark-shell {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.8;
-  stroke-linejoin: round;
-}
-
-.brand-mark-inner,
-.brand-mark-contact {
-  fill: none;
-  stroke: var(--accent, var(--green, #4f664c));
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-.brand-mark-dot {
-  fill: var(--accent, var(--green, #4f664c));
-}
-
-.brand-wordmark {
-  color: var(--ink, #282b26);
-  font: 400 25px/1 var(--serif, Georgia, serif);
-  letter-spacing: -.055em;
-}
-
-.brand-wordmark .brand-lab {
-  color: var(--accent, var(--green, #4f664c));
-  font-weight: 600;
-}
-
-.brand-wordmark .brand-stop {
-  color: var(--ink, #282b26);
-}
-
-.brand:hover .brand-wordmark {
-  color: var(--accent, var(--green, #4f664c));
-  text-decoration: none;
-}
-
 .site-header .header-inner {
   grid-template-columns: auto minmax(0, 1fr) minmax(190px, 250px) auto;
   gap: clamp(16px, 2vw, 32px);
@@ -455,19 +394,6 @@ html {
     width: auto;
     justify-content: flex-end;
     margin-top: 0;
-  }
-
-  .brand {
-    gap: 8px;
-  }
-
-  .brand-mark {
-    width: 30px;
-    height: 30px;
-  }
-
-  .brand-wordmark {
-    font-size: 23px;
   }
 
   .global-site-footer-inner {
