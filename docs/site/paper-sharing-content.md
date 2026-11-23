@@ -12,7 +12,7 @@ Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Geo
   <p lang="zh-CN">从不穿透与库仑摩擦推导锥互补模型，比较精确转写、凸松弛和常用求解算法。</p>
 </div>
 <ul class="paper-sharing-links">
-  <li><a href="../../zh-cn/latest/_static/research/paper-sharing/complementarity-contact-models.zh-CN.html" hreflang="zh-CN"><span lang="en">Read the full Chinese translation</span><span lang="zh-CN">阅读中文全译</span></a></li>
+  <li><a href="../../zh-cn/latest/_static/research/paper-sharing/complementarity-contact-models.zh-CN.html"><span lang="en">Read the bilingual full text</span><span lang="zh-CN">阅读中英对照全文</span></a></li>
   <li><a href="https://arxiv.org/html/2611.26600v1" hreflang="en"><span lang="en">arXiv v1 original</span><span lang="zh-CN">arXiv v1 原文</span></a></li>
   <li><a href="complementarity-contact-models.html"><span lang="en">Companion Blog article: why does a sliding block lift off after the contact solve converges?</span><span lang="zh-CN">Blog 伴读：接触求解收敛了，滑块为什么还会离开桌面？</span></a></li>
 </ul>
@@ -31,7 +31,7 @@ Zhanyu Yang, Yunuo Chen, Yanjia Huang, Joseph Masterjohn, Yin Yang, Chenfanfu Ji
   <p lang="zh-CN">把切割历史记在物质点上，使切口在撤刀后保持分离，切下的材料仍可独立操作和重新接触。</p>
 </div>
 <ul class="paper-sharing-links">
-  <li><a href="../../zh-cn/latest/_static/research/paper-sharing/blademaster/" hreflang="zh-CN"><span lang="en">Read the full Chinese translation</span><span lang="zh-CN">阅读中文全译</span></a></li>
+  <li><a href="../../zh-cn/latest/_static/research/paper-sharing/blademaster/"><span lang="en">Read the bilingual full text</span><span lang="zh-CN">阅读中英对照全文</span></a></li>
   <li><a href="https://arxiv.org/html/2609.27342v2" hreflang="en"><span lang="en">arXiv v2 original</span><span lang="zh-CN">arXiv v2 原文</span></a></li>
   <li><a href="cut-push.html"><span lang="en">Related experiment: how can we tell if a simulated cut fully separates tofu or banana?</span><span lang="zh-CN">相关实验：仿真里，怎么知道豆腐和香蕉真的切开了？</span></a></li>
 </ul>
