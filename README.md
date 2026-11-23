@@ -2,7 +2,7 @@
 
 **Contact-rich robot manipulation, beyond rigid-body simulation.**
 
-[Blog](https://huangkiki.github.io/Dexlab/en/latest/index.html) · [Research overview](https://huangkiki.github.io/Dexlab/en/latest/research-overview.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Sim-to-Real Gap](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html)
+[Blog](https://huangkiki.github.io/Dexlab/en/latest/blog.html) · [Research overview](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Sim-to-Real Gap](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html)
 
 DexLab is my personal research project exploring how Agent Skills and simulation can improve each other.
 
@@ -13,7 +13,7 @@ DexLab starts with concrete problems like this. **Use tasks to expose problems, 
 The improved simulation helps the Agent learn new Skills. With those Skills, the Agent can take on harder tasks and probe the limits of the simulation.
 
 <p align="center">
-  <a href="https://huangkiki.github.io/Dexlab/en/latest/research-overview.html">
+  <a href="https://huangkiki.github.io/Dexlab/en/latest/index.html">
     <img src="docs/site/_static/images/dexlab-architecture.webp" width="100%" alt="DexLab architecture: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring">
   </a><br>
   <sub>DexLab workflow: tasks and protocols → systems under test → action execution → environment backends → independent evidence and scoring.</sub>
@@ -32,7 +32,7 @@ The improved simulation helps the Agent learn new Skills. With those Skills, the
 
 There are currently **no hardware experiments**. “Physical correctness” here means reproducible consistency inside a frozen simulation model: auditable inputs, analytic or engineering references, positive and negative controls, conservation checks and regression after each declared parameter change. It does not claim real-material calibration or sim-to-real accuracy.
 
-[Read the validation boundary →](https://huangkiki.github.io/Dexlab/en/latest/research-overview.html#physical-validity)
+[Read the validation boundary →](https://huangkiki.github.io/Dexlab/en/latest/index.html#physical-validity)
 
 ## Citation
 

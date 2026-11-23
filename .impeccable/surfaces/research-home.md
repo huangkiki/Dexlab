@@ -1,10 +1,10 @@
-# Research overview
+# Research homepage
 
-Mode: Read. Code-led implementation. Scope: bilingual research overviews, their template, stylesheet and evidence interaction. The overview is a research entrance whose first screen contains one primary index action, followed by the system architecture, a five-case evidence inspector and open continuation links.
+Mode: Read. Code-led implementation. Scope: bilingual homepages, their template, stylesheet and evidence interaction. The homepage is a research entrance whose first screen contains one primary index action, followed by the system architecture, a five-case evidence inspector and open continuation links.
 
 ## Direction contract
 
-THESIS: Make the space between arrival and the full index readable. The visitor sees the system architecture, understands how failures become checked findings, and meets the actual article titles while scrolling; the Blog homepage contains the full article catalogue.
+THESIS: Make the space between arrival and the full index readable. The visitor sees the system architecture, understands how failures become checked findings, and meets the actual article titles while scrolling; the canonical Blog remains the exhaustive catalogue.
 
 OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif display title and fine rules. Use an editorial long page, a native-radio evidence index and open ruled rows; no cards, gradients or decorative depth.
 

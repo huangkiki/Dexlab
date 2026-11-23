@@ -21,7 +21,12 @@
   <header class="learn-header">
     <a class="brand" href="{{ pathto('index') }}">DexLab</a>
     {% include "site-search.html" %}
-    {% include "site-navigation.html" %}
+    <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
+      <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
+      <a href="{{ pathto('blog') }}">Blog</a>
+      <a href="{{ pathto('concepts/index') }}">{{ '概念' if zh else 'Concepts' }}</a>
+      <a href="{{ pathto('learning') }}" aria-current="{{ 'page' if pagename == 'learning' else 'true' }}">{{ '仿真学习' if zh else 'Learn simulation' }}</a>
+    </nav>
     <div class="header-tools"><a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a></div>
   </header>
   <div class="learn-layout">

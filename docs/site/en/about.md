@@ -1,6 +1,6 @@
 # DexLab project & documentation
 
-[Back to Blog](index.md) · [Research overview](research-overview.md)
+[Back to the research home](index.md)
 
 **Contact-rich robotics, beyond rigid-body simulation.**
 

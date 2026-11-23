@@ -4,14 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {%- if pagename in ('index', 'blog') %}
-  <script src="{{ pathto('_static/legacy-home-links.js', 1) }}"></script>
-  {%- endif %}
-  {%- if pagename == 'blog' %}
-  <link rel="canonical" href="{{ pathto('index') }}">
-  <meta name="robots" content="noindex">
-  <noscript><meta http-equiv="refresh" content="0; url={{ pathto('index') }}"></noscript>
-  {%- endif %}
   <title>{{ title|striptags }} · DexLab</title>
   {{ metatags }}
   {%- for css in css_files %}
@@ -35,7 +27,15 @@
   <header class="learn-header">
     <a class="brand" href="{{ pathto('index') }}">DexLab</a>
     {% include "site-search.html" %}
-    {% include "site-navigation.html" %}
+    <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
+      <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
+      <a href="{{ pathto('blog') }}"{% if pagename == 'blog' %} aria-current="page"{% endif %}>Blog</a>
+      <a href="{{ pathto('paper-sharing') }}"{% if pagename == 'paper-sharing' %} aria-current="page"{% endif %}>Paper sharing</a>
+      <a href="{{ pathto('concepts/index') }}">{{ '概念' if zh else 'Concepts' }}</a>
+      <a href="{{ pathto('index') }}#experiments">{{ '研究结论' if zh else 'Findings' }}</a>
+      <a href="{{ pathto('learning') }}">{{ '仿真学习' if zh else 'Learn simulation' }}</a>
+      <a href="{{ pathto('about') }}">{{ '文档' if zh else 'Docs' }}</a>
+    </nav>
     <div class="header-tools">
       <a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a>
       <a href="https://github.com/huangkiki/Dexlab" aria-label="DexLab on GitHub">GitHub</a>
@@ -59,7 +59,7 @@
       {% else %}
       {{ body }}
       {% endif %}
-      {% if pagename not in ('index', 'blog') %}
+      {% if pagename != 'blog' %}
       <nav class="lesson-pagination" aria-label="{{ '前后文章' if zh else 'Adjacent pages' }}">
         {% if prev %}
         <a href="{{ prev.link|e }}"><small>{{ '上一篇' if zh else 'Previous' }}</small>{{ prev.title|striptags }}</a>
@@ -74,7 +74,7 @@
         <p>{{ '以实验暴露问题，以证据限定结论。' if zh else 'Expose problems through experiments; bound conclusions with evidence.' }}</p>
       </footer>
     </main>
-    {% if pagename not in ('index', 'blog') %}<aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>{% endif %}
+    {% if pagename != 'blog' %}<aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>{% endif %}
   </div>
   {% include "site-footer.html" %}
 </body>
