@@ -439,3 +439,128 @@ html {
     display: none !important;
   }
 }
+
+.site-header nav.site-nav,
+.learn-header nav.site-nav {
+  flex-wrap: wrap;
+  gap: 0 clamp(10px, 2vw, 24px);
+  overflow: visible;
+}
+
+.site-nav summary {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2px;
+  color: var(--muted, #60675a);
+  font: 400 14px/1.4 var(--sans, Arial, sans-serif);
+  white-space: nowrap;
+  list-style: none;
+  cursor: pointer;
+}
+
+.site-nav summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-nav summary::after {
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.site-nav details[open] > summary::after {
+  margin-top: 3px;
+  transform: rotate(225deg);
+}
+
+.site-nav details[open] > summary,
+.site-nav summary:hover {
+  color: var(--accent, var(--green, #4f664c));
+}
+
+.site-nav-panel {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  z-index: 2;
+  width: min(780px, calc(100% - 44px));
+  max-height: min(64vh, 32rem);
+  margin-inline: auto;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 20px clamp(16px, 3vw, 28px);
+  border: 1px solid var(--rule, #dcded4);
+  background: var(--paper, var(--page, #fafaf6));
+  color: var(--ink, #282b26);
+}
+
+.site-nav-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 18px 24px;
+}
+
+.site-nav-section {
+  min-width: 0;
+}
+
+.site-nav-section h2 {
+  margin: 0 0 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule, #dcded4);
+  color: var(--ink, #282b26);
+  font: 650 14px/1.5 var(--sans, Arial, sans-serif);
+}
+
+.site-nav-section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav-section p {
+  margin: 2px 0 0;
+  color: var(--muted, #60675a);
+  font: 400 12px/1.5 var(--sans, Arial, sans-serif);
+}
+
+.site-header nav.site-nav .site-nav-panel a,
+.learn-header nav.site-nav .site-nav-panel a {
+  display: block;
+  min-height: 36px;
+  padding: 8px 0;
+  color: var(--accent, var(--green, #4f664c));
+  font: 400 14px/1.45 var(--sans, Arial, sans-serif);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.site-nav .site-nav-panel a:hover,
+.site-nav .site-nav-panel a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.site-nav-more {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule, #dcded4);
+}
+
+@media (max-width: 700px) {
+  .site-nav summary {
+    min-height: 40px;
+    gap: 5px;
+    font-size: 13px;
+  }
+
+  .site-nav-columns {
+    grid-template-columns: 1fr;
+  }
+}

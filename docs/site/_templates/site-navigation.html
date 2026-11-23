@@ -1,0 +1,111 @@
+{% macro link(route, chinese, english, fragment='', asset=false, atlas=false) -%}
+  {% set path = pathto(route, 1) if asset else pathto(route) -%}
+  <a href="{{ (path if path != '#' else '') ~ '#' ~ fragment if fragment else path }}"
+     {%- if atlas and pagename == 'index' %} data-concept-open{% endif %}
+     {%- if pagename == route and not fragment %} aria-current="page"{% endif %}>{{ chinese if site_is_chinese else english }}</a>
+{%- endmacro %}
+<nav class="site-nav" aria-label="{{ '网站导航' if site_is_chinese else 'Site navigation' }}">
+  <details name="site-nav">
+    <summary>{{ '研究' if site_is_chinese else 'Research' }}</summary>
+    <div class="site-nav-panel">
+      <div class="site-nav-columns">
+        <section class="site-nav-section" aria-labelledby="nav-research-guides">
+          <h2 id="nav-research-guides">{{ '研究导读' if site_is_chinese else 'Research guides' }}</h2>
+          <ul>
+            <li>{{ link('_static/research/dexterous-simulation.html', '灵巧操作仿真研究导读', 'Dexterous manipulation simulation guide', asset=true) }}</li>
+            <li>{{ link('failure-root-cause-atlas', 'Sim-to-Real 失败归因', 'Sim-to-real failure atlas') }}</li>
+          </ul>
+        </section>
+        <section class="site-nav-section" aria-labelledby="nav-research-concepts">
+          <h2 id="nav-research-concepts">{{ '概念与求解器' if site_is_chinese else 'Concepts and solvers' }}</h2>
+          <ul>
+            <li>{{ link('concepts/index', '概念索引与星图', 'Concept index and atlas', atlas=true) }}</li>
+            <li>{{ link('solver-taxonomy', '求解器、积分器与接触配置', 'Solvers, integrators and contact models') }}</li>
+            <li>{{ link('engines', '物理引擎与模型', 'Physics engines and models') }}</li>
+          </ul>
+        </section>
+        <section class="site-nav-section" aria-labelledby="nav-research-evidence">
+          <h2 id="nav-research-evidence">{{ '实验与验证' if site_is_chinese else 'Experiments and validation' }}</h2>
+          <ul>
+            <li>{{ link('index', '代表性实验与结论', 'Representative experiments and findings', fragment='experiments') }}</li>
+            <li>{{ link('visual-comparisons', '六引擎斜面对照', 'Incline comparison across six engines', fragment='incline') }}</li>
+            <li>{{ link('index', '物理验证与真机证据边界', 'Physical checks and hardware evidence', fragment='physical-validity') }}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </details>
+
+  <details name="site-nav">
+    <summary>Blog</summary>
+    <div class="site-nav-panel">
+      <div class="site-nav-columns">
+        <section class="site-nav-section" aria-labelledby="nav-blog-basics">
+          <h2 id="nav-blog-basics">{{ '求解器与仿真基础' if site_is_chinese else 'Solver and simulation fundamentals' }}</h2>
+          <ul>
+            <li>{{ link('mujoco-learning/step', '一步仿真，几种时间', 'One step, several clocks') }}</li>
+            <li>{{ link('complementarity-contact-models', '接触求解收敛了，滑块为什么还会离开桌面？', 'Why does a sliding block lift off after the contact solve converges?') }}</li>
+            <li>{{ link('solver-coupling', '多求解器如何同步？', 'How do multiple solvers stay in sync?') }}</li>
+          </ul>
+        </section>
+        <section class="site-nav-section" aria-labelledby="nav-blog-findings">
+          <h2 id="nav-blog-findings">{{ '实验发现' if site_is_chinese else 'Experimental findings' }}</h2>
+          <ul>
+            <li>{{ link('wuji-contact', '两根手指一直夹着，球为什么还会转？', 'Why does the ball still spin between two gripping fingers?') }}</li>
+            <li>{{ link('cut-push', '仿真里，怎么知道豆腐和香蕉真的切开了？', 'How can we tell if a simulated cut fully separates tofu or banana?') }}</li>
+            <li>{{ link('cloth-comparison', '布料：同一场景，不同引擎', 'Cloth: one scene, different engines') }}</li>
+          </ul>
+        </section>
+      </div>
+      <div class="site-nav-more">{{ link('blog', '查看全部文章', 'All Blog articles') }}</div>
+    </div>
+  </details>
+
+  <details name="site-nav">
+    <summary>Paper Sharing</summary>
+    <div class="site-nav-panel">
+      <div class="site-nav-columns">
+        <section class="site-nav-section" aria-labelledby="nav-papers-contact">
+          <h2 id="nav-papers-contact">{{ '接触建模' if site_is_chinese else 'Contact modeling' }}</h2>
+          <ul>
+            <li>{{ link('paper-sharing', '机器人学中的互补接触模型教程', 'A Tutorial on Complementarity-Based Contact Models for Robotics', fragment='a-tutorial-on-complementarity-based-contact-models-for-robotics') }}</li>
+          </ul>
+          <p>{{ '中英对照 · 摩擦、互补条件与求解器' if site_is_chinese else 'Bilingual full text on friction, complementarity and solvers' }}</p>
+        </section>
+        <section class="site-nav-section" aria-labelledby="nav-papers-cutting">
+          <h2 id="nav-papers-cutting">{{ '切割仿真' if site_is_chinese else 'Cutting simulation' }}</h2>
+          <ul>
+            <li>{{ link('paper-sharing', 'BladeMaster：实时机器人切割仿真', 'BladeMaster: Real-Time Robotic Cutting Simulation', fragment='blademaster-paper') }}</li>
+          </ul>
+          <p>{{ '中英对照 · 切开后的材料如何保持分离' if site_is_chinese else 'Bilingual full text on keeping cut surfaces separated' }}</p>
+        </section>
+      </div>
+      <div class="site-nav-more">{{ link('paper-sharing', '查看全部论文', 'All papers') }}</div>
+    </div>
+  </details>
+
+  <details name="site-nav">
+    <summary>{{ '学习与文档' if site_is_chinese else 'Learn & Docs' }}</summary>
+    <div class="site-nav-panel">
+      <div class="site-nav-columns">
+        <section class="site-nav-section" aria-labelledby="nav-docs-learning">
+          <h2 id="nav-docs-learning">{{ '仿真学习' if site_is_chinese else 'Learn simulation' }}</h2>
+          <ul>
+            <li>{{ link('learning', 'MuJoCo 学习路线', 'MuJoCo learning path') }}</li>
+            <li>{{ link('mujoco-learning/contact', '接触、摩擦与求解', 'Contact, friction and solving') }}</li>
+            <li>{{ link('learning', '全部引擎课程', 'All engine courses', fragment='all-courses') }}</li>
+          </ul>
+        </section>
+        <section class="site-nav-section" aria-labelledby="nav-docs-project">
+          <h2 id="nav-docs-project">{{ '项目文档' if site_is_chinese else 'Project documentation' }}</h2>
+          <ul>
+            <li>{{ link('about', '项目与系统架构', 'Project and architecture') }}</li>
+            <li>{{ link('quickstart', '安装与复现', 'Installation and reproduction') }}</li>
+            <li>{{ link('experiments', '实验目录与原始记录', 'Experiment index and records') }}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </details>
+</nav>
+<script src="{{ pathto('_static/site-navigation.js', 1) }}" defer></script>

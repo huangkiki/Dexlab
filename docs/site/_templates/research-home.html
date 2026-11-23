@@ -22,16 +22,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="DexLab {{ '首页' if homepage_is_chinese else 'home' }}">Dex<span>Lab</span></a>
-      <nav aria-label="{{ '主要导航' if homepage_is_chinese else 'Main navigation' }}">
-        <a href="_static/research/dexterous-simulation.html">{{ '研究导读' if homepage_is_chinese else 'Research guide' }}</a>
-        <a href="blog.html">Blog</a>
-        <a href="paper-sharing.html">Paper sharing</a>
-        <a href="concepts/index.html" data-concept-open>{{ '概念' if homepage_is_chinese else 'Concepts' }}</a>
-        <a href="#experiments">{{ '实验结论' if homepage_is_chinese else 'Findings' }}</a>
-        <a href="learning.html">{{ '仿真学习' if homepage_is_chinese else 'Learn simulation' }}</a>
-        <a href="about.html">{{ '文档' if homepage_is_chinese else 'Docs' }}</a>
-        <a href="#physical-validity">{{ '物理验证' if homepage_is_chinese else 'Validation' }}</a>
-      </nav>
+      {% include "site-navigation.html" %}
       {% include "site-search.html" %}
       <div class="header-links">
         <a href="{{ other_language_root }}index.html" lang="{{ 'en' if homepage_is_chinese else 'zh-CN' }}">{{ other_language }}</a>

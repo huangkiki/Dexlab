@@ -27,15 +27,7 @@
   <header class="learn-header">
     <a class="brand" href="{{ pathto('index') }}">DexLab</a>
     {% include "site-search.html" %}
-    <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
-      <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
-      <a href="{{ pathto('blog') }}"{% if pagename == 'blog' %} aria-current="page"{% endif %}>Blog</a>
-      <a href="{{ pathto('paper-sharing') }}"{% if pagename == 'paper-sharing' %} aria-current="page"{% endif %}>Paper sharing</a>
-      <a href="{{ pathto('concepts/index') }}">{{ '概念' if zh else 'Concepts' }}</a>
-      <a href="{{ pathto('index') }}#experiments">{{ '研究结论' if zh else 'Findings' }}</a>
-      <a href="{{ pathto('learning') }}">{{ '仿真学习' if zh else 'Learn simulation' }}</a>
-      <a href="{{ pathto('about') }}">{{ '文档' if zh else 'Docs' }}</a>
-    </nav>
+    {% include "site-navigation.html" %}
     <div class="header-tools">
       <a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a>
       <a href="https://github.com/huangkiki/Dexlab" aria-label="DexLab on GitHub">GitHub</a>
