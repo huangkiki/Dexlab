@@ -20,6 +20,10 @@
   border: 1px solid var(--rule);
 }
 
+.paper-index :is(.paper-zh, summary) {
+  font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "Noto Serif SC", "Microsoft YaHei", serif;
+}
+
 .paper-index summary {
   position: relative;
   display: flex;
@@ -110,6 +114,8 @@
 
 .paper-index nav .paper-zh {
   margin: .12rem 0 0;
+  font-size: .9375rem;
+  line-height: 1.5;
 }
 
 .paper-index nav a[aria-current="location"] {
@@ -117,6 +123,10 @@
   color: var(--accent);
   background: var(--panel);
   font-weight: 650;
+}
+
+.paper-index nav a[aria-current="location"] .paper-zh {
+  font-weight: 600;
 }
 
 .paper-index :is(a, summary):focus-visible {

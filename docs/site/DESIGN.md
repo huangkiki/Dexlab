@@ -382,6 +382,8 @@ Use `.paper-pair` on each passage with consecutive `.paper-en[lang="en"]` and `.
 
 The strict site build runs [`paper_sharing.py`](../../scripts/paper_sharing.py) for every paper source. It checks bilingual pairs, authorship, the arXiv link and section anchors. It builds the static outline from the article headings and applies the shared paper styles and scroll tracking. At 1000px and wider the outline sticks to the left and highlights the current chapter or subsection. At smaller widths a native disclosure sticks to the top and shows the current location when folded. Chapter links work without JavaScript, and print leaves the full article visible.
 
+Outline labels use the article's local Simplified Chinese serif faces at 15px where available, with a native Chinese fallback. English labels use a smaller sans-serif face. The folded mobile outline uses the same Chinese font stack for the current location.
+
 ### Learning and knowledge bridges
 
 The simulation-learning page uses four steps in two columns on desktop and a single column on mobile. Each has a plain green serif number, a content inset of (38px), a heading, subjects, prerequisite and course link. Engine choices sit between fine rules; related concepts link across to experiments. Course and engine links open the on-site `learn/` reader. The authored courses remain maintained by Sim Learning.
