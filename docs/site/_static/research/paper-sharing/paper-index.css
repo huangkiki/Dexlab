@@ -1,3 +1,8 @@
+/* Paper links jump directly so the outline tracks the destination in one step. */
+html:has(.paper-reader) {
+  scroll-behavior: auto;
+}
+
 .paper-reader {
   width: min(100% - 2rem, 58rem);
   margin: 0 auto;
@@ -167,12 +172,6 @@
     border: 0;
     border-top: 1px solid var(--rule);
     max-height: calc(100dvh - 5.75rem);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html:has(.paper-reader) {
-    scroll-behavior: auto;
   }
 }
 
