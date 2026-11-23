@@ -8,6 +8,7 @@ import sys
 
 from concept_atlas import prepare_concept_pages
 from learning_docs import copy_course_assets, prepare_courses
+from paper_sharing import prepare_paper_readers
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -21,14 +22,18 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'scripts/build_visual_research.py'), '--check'], check=True)
     output = args.output.resolve()
     source = ROOT / 'docs/site'
+    papers = prepare_paper_readers(source)
     for directory, language, route in [('zh', 'zh_CN', 'zh-cn'), ('en', 'en', 'en')]:
+        destination = output / route / 'latest'
         prepare_concept_pages(source / directory)
         courses = prepare_courses(source / directory)
         subprocess.run([
             sys.executable, '-m', 'sphinx', '-W', '--keep-going', '-n', '-b', 'html',
-            '-c', str(source), str(source / directory), str(output / route / 'latest'),
+            '-c', str(source), str(source / directory), str(destination),
         ], env={**os.environ, 'DEXLAB_DOCS_LANGUAGE': language}, check=True)
-        copy_course_assets(output / route / 'latest', courses)
+        copy_course_assets(destination, courses)
+        for path, html in papers.items():
+            (destination / path).write_text(html, encoding='utf-8')
     (output / 'index.html').write_text(
         '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
         '<meta http-equiv="refresh" content="0;url=zh-cn/latest/index.html">'

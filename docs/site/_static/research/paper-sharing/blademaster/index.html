@@ -39,17 +39,6 @@ a:hover { color: #173d2d; }
 .edition { margin-top: .8rem !important; }
 .ltx_abstract { padding: 0.1rem 0 .7rem; }
 .ltx_abstract h6 { font-size: 1.23rem; }
-nav {
-  padding: 1rem 1.3rem 1.15rem;
-  border: 1px solid var(--rule);
-  background: var(--panel);
-  border-radius: .35rem;
-  margin: 1.5rem 0 2.75rem;
-}
-nav h2 { margin: .15rem 0 .35rem; font-size: 1.15rem; }
-nav ul { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 2rem; }
-nav li { margin: .16rem 0; break-inside: avoid; }
-nav a { font-size: .9rem; }
 .ltx_title .ltx_tag { margin-right: .5em; }
 .ltx_itemize, .ltx_enumerate { padding-left: 1.45rem; }
 .ltx_section, .ltx_appendix, .ltx_bibliography { margin-top: 3rem; }
@@ -141,7 +130,6 @@ figcaption .ltx_tag { font-weight: 650; margin-right: .35em; }
 @media (max-width: 680px) {
   body { font-size: 15px; }
   article { width: calc(100% - 2rem); margin: 2.2rem auto 3rem; }
-  nav ul { columns: 1; }
   h2 { font-size: 1.39rem; }
   h3 { font-size: 1.13rem; }
   .ltx_table .ltx_tabular { min-width: 31rem; }
@@ -155,7 +143,6 @@ figcaption .ltx_tag { font-weight: 650; margin-right: .35em; }
   h1, h2, h3, h4 { break-after: avoid; }
   figure.ltx_figure, figure.ltx_float_algorithm { break-inside: avoid; }
   a { color: inherit; }
-  nav { break-inside: avoid; }
   .table-scroll { overflow: visible; }
 }
 .figure-description { margin-top: .35rem; color: var(--secondary); font-size: .83rem; }
@@ -210,7 +197,7 @@ h1 { text-wrap: balance; }
 @media (max-width: 540px) {
   .ltx_flex_figure { grid-template-columns: 1fr; }
 }
-</style><link href="../paper-bilingual.css" rel="stylesheet"/></head><body><article class="ltx_document ltx_authors_1line">
+</style></head><body><article class="ltx_document ltx_authors_1line">
 <p class="paper-series"><a href="../../../../paper-sharing.html"><span aria-hidden="true">← </span>Paper sharing</a></p><h1 class="ltx_title ltx_font_bold ltx_title_document paper-pair"><span class="paper-en" data-paper-language="heading" lang="en">BladeMaster: Real-Time Robotic Cutting Simulation with Online-Generated Persistent Discontinuities：</span>
 <span class="paper-zh" data-paper-language="heading" lang="zh-CN">BladeMaster：在线生成持久不连续面的实时机器人切割仿真</span></h1><ul aria-label="文章标签" class="paper-tags"><li>机器人切割</li><li>可变形体仿真</li><li>TLMPM</li><li>接触动力学</li></ul><header class="translation-meta"><p class="authors">Zhanyu Yang<sup>1,2</sup>、Yunuo Chen<sup>2,3</sup>、Yanjia Huang<sup>3</sup>、Joseph Masterjohn<sup>4</sup>、Yin Yang<sup>5</sup>、Chenfanfu Jiang<sup>2</sup></p>
 <p class="affiliations"><sup>1</sup> 普渡大学 · <sup>2</sup> 加州大学洛杉矶分校 · <sup>3</sup> Envora · <sup>4</sup> 丰田研究院 · <sup>5</sup> 犹他大学</p>
@@ -219,14 +206,7 @@ h1 { text-wrap: balance; }
 <span class="paper-zh" data-paper-language="heading" lang="zh-CN">摘要</span></h6>
 <p class="ltx_p paper-pair" id="abstract1.1"><span class="paper-en" data-paper-language="prose" lang="en">Cutting changes both the shape and topology of deformable objects, making accurate simulation challenging for robotic manipulation. A simulator must track the cutting tool as a cut develops, preserve the resulting discontinuities after tool withdrawal, and enable newly exposed surfaces to interact with the tool and with each other. Existing formulations often prescribe cut surfaces in advance or couple material separation to auxiliary geometric fields. We introduce <span class="ltx_text ltx_font_smallcaps">BladeMaster</span>, a GPU-accelerated cutting framework based on the total Lagrangian material point method (TLMPM). Our key idea is to encode the cutting history directly on material points through persistent side labels generated online from the blade geometry. These labels govern particle–grid coupling, preserving connectivity within intact material while preventing spurious coupling across cut faces after tool withdrawal. Our formulation supports progressive and intersecting cuts without predefined cut surfaces or particle duplication. Material–material contact enables cut surfaces to recontact and slide against each other without reconnecting, while two-way tool–material coupling allows material reaction forces to influence tool motion. Experiments demonstrate tool-driven cutting followed by manipulation, with faster-than-real-time performance on representative tasks. Project page: <a class="ltx_ref ltx_href" href="https://jango6324.github.io/blademaster/" rel="noreferrer" title="">https://jango6324.github.io/blademaster/</a>.</span>
 <span class="paper-zh" data-paper-language="prose" lang="zh-CN">切割会改变可变形物体的形状和拓扑，因此很难在机器人操作仿真中准确模拟。仿真器必须在切口逐渐形成时跟踪刀具，在撤刀后保留切割形成的不连续面，并允许新露出的表面与刀具及彼此发生接触。现有方法通常预先指定切割面，或将材料分离与辅助几何场绑定。我们提出 BladeMaster，一种基于全拉格朗日物质点法（TLMPM）的 GPU 加速切割框架。核心思路是根据刀刃几何在线生成持久侧别标记，直接把切割历史编码在物质点上。这些标记决定粒子–网格耦合，使完好材料内部保持连通，并防止撤刀后切口两侧出现虚假耦合。该方法支持逐步切割和相交切割，无需预设切割面或复制粒子。材料–材料接触计算允许切面重新接触并发生相对滑动，同时保留切面间的分离。刀具与材料的双向耦合使材料反力可以改变刀具运动。实验演示了由刀具驱动的切割以及切割后的操作，代表性任务的仿真速度超过实时。项目主页见 <a class="ltx_ref ltx_href" href="https://jango6324.github.io/blademaster/" rel="noreferrer" title="">https://jango6324.github.io/blademaster/</a>。</span></p>
-</div><nav aria-label="目录"><h2>目录</h2><ul><li><a href="#S1"><span class="paper-en" data-paper-language="toc" lang="en">Introduction</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">I 引言</span></a></li><li><a href="#S2"><span class="paper-en" data-paper-language="toc" lang="en">Related Work</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">II 相关工作</span></a></li><li><a href="#S3"><span class="paper-en" data-paper-language="toc" lang="en">Method</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">III 方法</span></a></li><li><a href="#S4"><span class="paper-en" data-paper-language="toc" lang="en">Experiments</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">IV 实验</span></a></li><li><a href="#S5"><span class="paper-en" data-paper-language="toc" lang="en">Conclusion</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">V 结论</span></a></li><li><a href="#S5.p3.1"><span class="paper-en" data-paper-language="toc" lang="en">[Momentum Conservation]</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">动量守恒</span></a></li><li><a href="#bib"><span class="paper-en" data-paper-language="toc" lang="en">References</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">参考文献</span></a></li></ul></nav>
+</div>
 <section class="ltx_section" id="S1">
 <h2 class="ltx_title ltx_title_section paper-pair"><span class="paper-en" data-paper-language="heading" lang="en"><span class="ltx_text ltx_font_smallcaps">Introduction</span></span>
 <span class="paper-zh" data-paper-language="heading" lang="zh-CN"><span class="ltx_tag ltx_tag_section">I </span> 引言</span></h2>

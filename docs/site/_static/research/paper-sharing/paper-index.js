@@ -7,7 +7,7 @@
   const wide = window.matchMedia("(min-width: 1000px)");
   const entries = Array.from(outline.querySelectorAll("a"), (link) => ({
     link,
-    target: document.getElementById(link.hash.slice(1)),
+    target: document.getElementById(decodeURIComponent(link.hash.slice(1))),
   }));
   let current;
   let frame = 0;
@@ -63,7 +63,7 @@
     if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return;
     }
-    const target = document.getElementById(link.hash.slice(1));
+    const { target } = entries.find((entry) => entry.link === link);
     target.setAttribute("tabindex", "-1");
     if (!wide.matches) panel.open = false;
     target.focus({ preventScroll: true });

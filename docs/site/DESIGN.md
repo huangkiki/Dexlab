@@ -205,7 +205,7 @@ components:
 
 The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a concept field, a selected-article preview, a five-case evidence sequence, three research judgments and direct continuation links. Fine rules and open rows carry the hierarchy.
 
-This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: one global masthead, a 760px reading column and an optional current-page outline. The dedicated left chapter rail remains only on the course route, where it represents an ordered lesson sequence rather than the entire website. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
+This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html` with one global masthead, a 760px reading column and an optional current-page outline. The left course rail shows the ordered lesson sequence. Paper sharing full texts use their own left outline of the paper's sections and subsections. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
 **Key Characteristics:**
 
@@ -373,6 +373,14 @@ Core reading keeps a (740px) prose measure but allows equivalent evidence groups
 ### Blog index and reading rows
 
 The bilingual Blog uses the shared reader with an 880px centered index and no section rail. The two visible groups are solver and simulation fundamentals and experimental findings. Fine rules separate article titles and their summaries. The homepage previews selected articles and links to the full Blog. Paper Sharing has its own navigation entry, with contextual links between the paper and related Blog articles.
+
+### Paper sharing full texts
+
+Store each full text as a standalone HTML source with a single `article` inside the `body` in [`_static/research/paper-sharing/`](_static/research/paper-sharing/). Add its bilingual title, description and links in [`paper-sharing-content.md`](paper-sharing-content.md), which serves both site languages.
+
+Use `.paper-pair` on each passage with consecutive `.paper-en[lang="en"]` and `.paper-zh[lang="zh-CN"]` children. End the English span of the main title with `：`. Give each nested `section` its original ID and an immediate bilingual heading. Keep the original figures, equations, tables, numbers and cross-references in the article, and include `.translation-meta` with an `.authors` credit and the versioned arXiv link.
+
+The strict site build runs [`paper_sharing.py`](../../scripts/paper_sharing.py) for every paper source. It checks bilingual pairs, authorship, the arXiv link and section anchors. It builds the static outline from the article headings and applies the shared paper styles and scroll tracking. At 1000px and wider the outline sticks to the left and highlights the current chapter or subsection. At smaller widths a native disclosure sticks to the top and shows the current location when folded. Chapter links work without JavaScript, and print leaves the full article visible.
 
 ### Learning and knowledge bridges
 
