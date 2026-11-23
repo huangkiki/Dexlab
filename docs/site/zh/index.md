@@ -404,6 +404,7 @@
 引擎与模型 <engines>
 研究旧链接 <blog>
 研究资料 <references>
+Paper sharing <paper-sharing>
 概念索引 <concepts/index>
 参与项目 <contributing>
 ```

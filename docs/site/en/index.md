@@ -403,6 +403,7 @@ Experiments <experiments>
 Results & diagnosis <results>
 Engines & models <engines>
 Research guides <references>
+Paper sharing <paper-sharing>
 Concept index <concepts/index>
 Contributing <contributing>
 ```
