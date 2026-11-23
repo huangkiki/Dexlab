@@ -74,6 +74,36 @@ body[data-reader-page="visual-comparisons"] .lesson-article {
   border-top: 0;
 }
 
+.paper-sharing-summary p {
+  margin: 0;
+}
+
+.paper-sharing-summary p + p {
+  margin-top: .4rem;
+}
+
+.lesson-article .paper-sharing-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1rem;
+  padding: 0;
+  list-style: none;
+  font-size: .9rem;
+  line-height: 1.65;
+}
+
+.lesson-article .paper-sharing-links li {
+  margin: 0;
+}
+
+.paper-sharing-links li:last-child {
+  flex-basis: 100%;
+}
+
+.paper-sharing-links a span {
+  display: block;
+}
+
 .lesson-article h3,
 .lesson-article h4 {
   text-wrap: pretty;
