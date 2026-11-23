@@ -1,75 +1,29 @@
 # 布料：同一场景，不同引擎
 
-先看布怎么动，再看数值检查。下方回放历史记录的真实顶点，使用相同的固定相机、光照和时间轴；没有重跑物理、移动顶点来消除穿透，或给网格增加虚构褶皱。
+**布条在空中垂得下来，已经说明它会弯。把它放到球体上，还要另外证明碰撞能撑住它。** 在这组历史对照里，同一 Newton VBD 配置通过了固定边下垂检查，到了覆盖球体的场景却出现 **10.35 mm** 最大球面穿透。
 
 ## 下垂：固定一边，释放布条
 
-```{image} ../../../docs/evidence/cloth-studio/sag.gif
-:alt: 同一布条在四个引擎的代表配置下的完整三秒下垂记录
-:width: 1280px
-```
+![固定边下垂。四个引擎使用相同视角与时间轴](../../../docs/evidence/cloth-studio/sag.gif)
 
-```{raw} html
-<p><a href="_static/cloth-studio/sag.gif">完整 GIF</a> · <a href="_static/cloth-studio/sag.json">逐帧时间与来源</a></p>
-```
-
-比较悬垂形状、振荡和表面穿越。每格显示该条完整记录的协议检查结果；绿色只表示通过规定检查，不代表布料参数已符合真实织物。浅色地面是展示背景，短杆标记原有固定边；它们不参与物理计算，这个实验没有地面接触。
+把一边固定的水平布条放开，重力会让自由端往下落。看末端落了多少、布面还在怎样摆，以及固定点有没有跟着移动。这里的地面只是画面背景。这一步可以把下垂时的响应单独拿出来观察。
 
 ## 覆盖球体：看接触处，而不只看外轮廓
 
-```{image} ../../../docs/evidence/cloth-studio/drape.gif
-:alt: 同一自由布片覆盖球体；失败与最大穿透值保留在各配置画面内
-:width: 1280px
-```
+![自由布片覆盖球体。每格都保留最大穿透和原判定](../../../docs/evidence/cloth-studio/drape.gif)
+
+把一张自由布片从静止释放，下面只放一个半径 **60 mm** 的球和地面。观察球面怎样撑起布，以及布的两层怎样擦过。用同一帧看最后的轮廓，可能会漏掉中途发生的穿透。
+
+Newton VBD 的这条记录里，布片下落后，**0.21 s** 首次在采样帧观察到布面自交，整段的最大球面穿透为 **10.35 mm**，超过 **1.5 mm** 门槛。积分结束时球面穿透读回已回到零，整段检查仍然失败。已测到的失效位于接触响应，现有记录还不足以区分接触何时生成、材料响应和步长分别贡献了多少。下一步是在同一网格、初态和材料下，记录首次接触与穿透的时间，再单独改步长做对照。
+
+这里比较的是历史配置，每个场景对各引擎使用同一输入网格和初态。材料参数没有跨引擎标定，迭代、精度和物理实现也不同。两段回放适合用来区分问题出现在哪里。真实布料的拟合效果需要有实物测量才能判断。
 
 ```{raw} html
-<p><a href="_static/cloth-studio/drape.gif">完整 GIF</a> · <a href="_static/cloth-studio/drape.json">逐帧时间与来源</a></p>
+<span id="newton"></span>
+<span id="rss"></span>
+<span id="id5"></span>
 ```
 
-布片从静止释放，落向半径 60 mm 的球体与地面。每格同时给出整段记录的最大穿透量；布落到地面以下时不会被移回表面。动图不能检验两个采样帧之间的碰撞，结论仍以独立评分为准。
+## 实验记录
 
-## Newton 的其他求解器也保留
-
-上面先并排展示 MuJoCo、SuperDex、Newton VBD、PhysX，便于看清布面。下方展开全部八种配置，其中 Newton 有五种；每张动图内的相机与时间轴仍统一。
-
-![八配置下垂](../../../docs/evidence/cloth-studio/sag-profiles.gif)
-
-![八配置球面覆盖](../../../docs/evidence/cloth-studio/drape-profiles.gif)
-
-```{raw} html
-<p><a href="_static/cloth-studio/sag-profiles.gif">下垂完整 GIF</a> · <a href="_static/cloth-studio/sag-profiles.json">来源</a> · <a href="_static/cloth-studio/drape-profiles.gif">覆盖完整 GIF</a> · <a href="_static/cloth-studio/drape-profiles.json">来源</a></p>
-```
-
-## 六个引擎，目前分别比较到了哪里
-
-| 引擎／历史配置 | 现有布料证据 | 同场景动图 |
-| --- | --- | --- |
-| MuJoCo 3.11.0 flex | 15 条中 4 条通过；下垂有表面穿越，球面覆盖有穿透 | 下垂、覆盖球体 |
-| SuperDex 1.0.0 FP64 shell | 15 条中 7 条通过；覆盖球体仍失败 | 下垂、覆盖球体 |
-| Newton Physics 1.7.0.dev0，`2dee3234` | XPBD／VBD／SemiImplicit／Featherstone 各 8/15，Style3D 9/15；五种配置属于同一个引擎 | 五种配置全部展示 |
-| PhysX 表面可变形体，Isaac Sim 5.1.0.0 | 另一批 15 条：10 通过、1 表面穿越失败、4 逐节点外力实验不支持 | 使用最终批次的对应记录 |
-| Genesis 1.4.3 PBD | 已做接触、动量交换与夹布诊断；尚无这套同输入基准记录 | 暂无匹配记录 |
-| Drake | 现有仓库没有通过资格验证的同协议薄布料记录 | 暂无匹配记录 |
-
-这是**四引擎的历史响应对照，加六引擎覆盖说明**，尚不是完整六引擎布料基准。PhysX 的宿主版本不等于原生核心版本；旧记录中的“107.3”不能补齐核心身份，见[版本审计](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-solver-audit.md)。Genesis 的诊断结果见[布料接触报告](https://github.com/huangkiki/Dexlab/blob/main/docs/genesis-cloth.md)。
-
-两幅动图均按清单顺序固定选择 `test-sag-00`、`test-drape-00`，展示完整 0–3 s，正常速度；没有按结果挑选最好的一条。完整历史批次仍为 [105 条／七配置](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/evidence/heldout-v1.json)和[另行记录的 PhysX 批次](https://github.com/huangkiki/Dexlab/blob/main/demos/physx-contact/evidence/cloth-v1.json)，没有重新标为新留出集。材料未做跨引擎标定，迭代预算和精度也不同，因此不能用外观或通过数排名物理精度、速度。
-
-## 从 RSS 借鉴了什么
-
-[RSS 的布料示例](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/01_cloth/02_engines.py)让同一布片切换 Newton、SuperDex、Genesis；[渲染配置](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/robosimstudio/core/render/look.py)提供有环境背景、主光与补光的呈现。这里借鉴这些展示方法，统一了场景与视角，并保留记录中的低分辨率几何。布面纹理与平滑法线只影响光照。
-
-RSS 的[夹布示例](https://github.com/robosimstudio/robosimstudio/blob/23417de77edf59d614531a833334ed4e2206fc2c/examples/01_cloth/00_towel.py)采用单向耦合，机械臂不会感到布的反力；这不作为 DexLab 摩擦夹持成功的依据。[机器人夹布](experiments.md)仍有独立的模型、记录和评分。
-
-## 重新生成
-
-从[布料基准](https://github.com/huangkiki/Dexlab/blob/main/demos/cloth-benchmark/README.zh-CN.md)及[PhysX 原始档案](https://github.com/huangkiki/Dexlab/releases/download/v0.11.0/v0.11.0-physx-cloth-evidence.tar.gz)准备同一 case 的记录，然后在仓库环境中运行：
-
-```bash
-.venv/bin/python demos/cloth-benchmark/src/render.py \
-  /path/to/test-sag-00-mujoco \
-  /path/to/test-sag-00-superdex-shell \
-  --output /path/to/new-comparison
-```
-
-一次可传 1–8 条记录。输入、初态、静止网格或时间轴不匹配会拒绝拼接；输出目录必须新建且位于原记录之外。PNG 检查帧、MP4、GIF 和来源文件一起生成。渲染器只读输入，记录前后哈希，执行零个物理步。
+[八种配置、评分与生成方法](cloth-comparison-report.md) · [下垂帧映射](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/cloth-studio/sag.json) · [球面覆盖帧映射](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/cloth-studio/drape.json)

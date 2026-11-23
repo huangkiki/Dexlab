@@ -11,7 +11,7 @@ Measure native MuJoCo flex, SuperDex experimental shells, Newton cloth and PhysX
 | Sag | [![Four-engine sag](../../docs/evidence/cloth-studio/sag.gif)](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html) | Fixed edge, hanging shape and oscillation |
 | Sphere drape | [![Four-engine sphere drape](../../docs/evidence/cloth-studio/drape.gif)](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html) | Contact, penetration and surface crossings |
 
-The previews show historical case 00 across four engines; the linked report expands all eight profiles. Complete 0–3 s at normal speed. Camera and display settings are shared; original geometry and failed scores remain. [Six-engine coverage, full videos, provenance and reproduction](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison.html). This is not calibrated material or engine-accuracy ranking.
+The previews show historical case 00 across four engines; the linked report expands all eight profiles. Complete 0–3 s at normal speed. Camera and display settings are shared; original geometry and failed scores remain. [Six-engine coverage, full videos, provenance and reproduction](https://huangkiki.github.io/Dexlab/en/latest/cloth-comparison-report.html). This is not calibrated material or engine-accuracy ranking.
 
 ## Experiments and inputs
 

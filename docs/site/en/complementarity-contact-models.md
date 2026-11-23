@@ -89,3 +89,5 @@ The exact reference uses a chosen discrete rigid law. Soft pads can deform. Expe
 | What changes with polyhedral friction or smooth derivatives? | [Fig. 9 and Appendix A](https://arxiv.org/html/2611.26600v1#A1.F9) · [§7.2](https://arxiv.org/html/2611.26600v1#S7.SS2) |
 
 The original tutorial is by Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier and Georg Martius. This reading guide uses independently derived examples and an original figure. [Tutorial and version history](https://arxiv.org/abs/2611.26600v1)
+
+[Paper Sharing: the original paper and full Chinese translation](paper-sharing.md).

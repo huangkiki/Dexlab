@@ -611,3 +611,59 @@ body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption 
     display: none;
   }
 }
+
+[data-reader-page="blog"] .reader-layout {
+  grid-template-columns: minmax(0, 800px);
+  max-width: 880px;
+}
+
+[data-reader-page="blog"] .lesson-article {
+  max-width: none;
+}
+
+[data-reader-page="blog"] .lesson-article section > ul {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+[data-reader-page="blog"] .lesson-article section > ul > li {
+  margin: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+
+[data-reader-page="blog"] .lesson-article li > p {
+  margin: 0;
+}
+
+[data-reader-page="blog"] .lesson-article li > p:first-child a {
+  color: var(--ink);
+  font-weight: 650;
+  text-underline-offset: .2em;
+}
+
+[data-reader-page="blog"] .lesson-article li > p:first-child a:hover {
+  color: var(--green);
+}
+
+[data-reader-page="blog"] .lesson-article li > p + p {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.blog-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin-top: 18px;
+}
+
+.blog-jump a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  font-size: .9rem;
+}

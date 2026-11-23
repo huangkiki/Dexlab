@@ -476,17 +476,13 @@ def render_field(atlas, language):
         )
     topic_links = []
     topics_by_id = {topic["id"]: topic for topic in atlas["topics"]}
-    topic_counts = {topic["id"]: 0 for topic in atlas["topics"]}
-    for item in grouped["synthesis"]:
-        topic_counts[item["topic"]] += 1
-    topic_items = sorted(
-        grouped["synthesis"],
-        key=lambda item: (
-            item["updated"],
-            item.get("topic_priority", 0),
-        ),
-        reverse=True,
+    featured = (
+        "complementarity-contact-models.html",
+        "cloth-comparison.html",
+        "cut-push.html",
     )
+    by_route = {item["href"]: item for item in grouped["synthesis"]}
+    topic_items = [by_route[route] for route in featured]
     for item in topic_items:
         updated = date.fromisoformat(item["updated"])
         updated_label = (
@@ -507,8 +503,7 @@ def render_field(atlas, language):
         )
         topic_links.append(
             '<a class="concept-topic-link" '
-            f'href="{html.escape(item["href"], quote=True)}" '
-            f'data-topic="{item["topic"]}">'
+            f'href="{html.escape(item["href"], quote=True)}">'
             '<span class="concept-topic-head">'
             f"<strong>{html.escape(item['name'][language])}</strong>"
             f'<span class="concept-topic-action">'
@@ -520,18 +515,6 @@ def render_field(atlas, language):
             f'<time datetime="{item["updated"]}">{html.escape(updated_label)}</time>'
             "</span></a>"
         )
-    topic_filters = [
-        '<button type="button" data-topic-filter="all" aria-pressed="true">'
-        + ("全部" if language == "zh" else "All")
-        + "</button>"
-    ]
-    topic_filters.extend(
-        f'<button type="button" data-topic-filter="{topic["id"]}" aria-pressed="false">'
-        f'{html.escape(topic["name"][language])}'
-        f'<small>{topic_counts[topic["id"]]}</small></button>'
-        for topic in atlas["topics"]
-        if topic_counts[topic["id"]]
-    )
     return (
         '<div class="concept-field-band">'
         '<div class="concept-field" id="concept-field" role="navigation" '
@@ -541,10 +524,9 @@ def render_field(atlas, language):
         "</div></div>"
         '<section class="concept-topics" aria-labelledby="concept-topics-title">'
         '<header class="concept-topics-head">'
-        f'<h2 id="concept-topics-title">{"专题文章" if language == "zh" else "Research topics"}</h2>'
-        f'<p>{"从实验、求解器、数据与验证边界进入可独立阅读的研究路径。" if language == "zh" else "Enter independently readable research paths through experiments, solvers, data and validation boundaries."}</p>'
+        f'<h2 id="concept-topics-title">{"精选文章" if language == "zh" else "Selected articles"}</h2>'
+        f'<a href="blog.html">{"全部文章" if language == "zh" else "All articles"}</a>'
         '</header>'
-        f'<nav class="concept-topic-filters" aria-label="{"按专题筛选文章" if language == "zh" else "Filter articles by research topic"}">{"".join(topic_filters)}</nav>'
         f'<div class="concept-topics-grid">{"".join(topic_links)}</div>'
         "</section></div>"
     )

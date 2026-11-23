@@ -11,7 +11,7 @@
 | 下垂 | [![四引擎下垂](../../docs/evidence/cloth-studio/sag.gif)](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html) | 固定边、悬垂形状与振荡 |
 | 球面覆盖 | [![四引擎覆盖球体](../../docs/evidence/cloth-studio/drape.gif)](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html) | 贴合、穿透与表面穿越 |
 
-预览四个引擎的历史 case 00，完整页展开八种配置；完整 0–3 s、正常速度；相同相机与显示设置，原始几何与失败评分保留。[六引擎覆盖、完整视频、来源与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison.html)。这不是已标定材料或引擎精度排名。
+预览四个引擎的历史 case 00，完整页展开八种配置；完整 0–3 s、正常速度；相同相机与显示设置，原始几何与失败评分保留。[六引擎覆盖、完整视频、来源与复现](https://huangkiki.github.io/Dexlab/zh-cn/latest/cloth-comparison-report.html)。这不是已标定材料或引擎精度排名。
 
 ## 实验与输入
 

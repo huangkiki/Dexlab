@@ -8,7 +8,7 @@ The v3 point-contact configuration failed holding at **2.734 mm**. Adding the se
 
 ![Synchronized point-contact / torsional-contact replay](../../docs/evidence/wuji-contact/comparison.gif)
 
-[Start with the offline rescore and full report](https://huangkiki.github.io/Dexlab/en/latest/wuji-contact.html) before installing a native runtime.
+[Start with the offline rescore and full report](https://huangkiki.github.io/Dexlab/en/latest/wuji-contact-report.html) before installing a native runtime.
 
 ## Run the native fixture
 

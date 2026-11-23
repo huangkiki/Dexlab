@@ -2,7 +2,7 @@
 
 This is the official **LIBERO-Object cream-cheese-to-basket task**, using Panda, the dataset controller, original assets, initial state and native success predicate. DexLab records action execution and diagnoses the workflow. It does not train a policy, change solver source, or count playback as task success. mjlab is outside this round.
 
-See the [bilingual results and synchronized comparison](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow.html). The first development demonstrations complete the original task; the reported slip is a hypothesis, not an established defect.
+See the [bilingual results and synchronized comparison](https://huangkiki.github.io/Dexlab/en/latest/libero-workflow-report.html). The first development demonstrations complete the original task; the reported slip is a hypothesis, not an established defect.
 
 ## Reproduce the frozen cohort
 

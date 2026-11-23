@@ -71,7 +71,7 @@
             <div><dt>判据结果</dt><dd><strong>通过 · 11.096 / 10.209 mm</strong></dd></div>
             <div><dt>适用范围</dt><dd>合成材料与固定切推协议，不是食材标定</dd></div>
           </dl>
-          <a href="cut-push.html">查看完整记录、对照与原始数据 →</a>
+          <a href="cut-push-report.html">查看完整记录、对照与原始数据 →</a>
         </div>
       </article>
 
@@ -94,7 +94,7 @@
             <div><dt>判据结果</dt><dd><strong>2.734 → 1.025 mm；角速度 29.336 → 0.024992 rad/s</strong></dd></div>
             <div><dt>适用范围</dt><dd>双指夹球工况；不是真机材料标定或全手能力</dd></div>
           </dl>
-          <a href="wuji-contact.html">查看接触记录、GIF 与独立复算 →</a>
+          <a href="wuji-contact-report.html">查看接触记录、GIF 与独立复算 →</a>
         </div>
       </article>
 
@@ -140,7 +140,7 @@
             <div><dt>判据结果</dt><dd><strong>52 / 105 通过，53 条失败保留</strong></dd></div>
             <div><dt>适用范围</dt><dd>材料未做跨求解器等效标定</dd></div>
           </dl>
-          <a href="cloth-comparison.html">查看布料配置、失败与证据边界 →</a>
+          <a href="cloth-comparison-report.html">查看布料配置、失败与证据边界 →</a>
         </div>
       </article>
 
@@ -274,7 +274,7 @@
           <dd>材料参数是合成值，没有豆腐／香蕉实测标定；初始重力沉降未预平衡，局部抖动改善也不代表刀接触力或真实食材阻尼准确。</dd>
         </div>
       </dl>
-      <a href="cut-push.html">查看切割协议与证据 →</a>
+      <a href="cut-push-report.html">查看切割协议与证据 →</a>
     </article>
 
     <article class="validity-record" data-reveal-item>
@@ -402,7 +402,7 @@
 实验目录 <experiments>
 结果与诊断 <results>
 引擎与模型 <engines>
-研究旧链接 <blog>
+Blog <blog>
 研究资料 <references>
 Paper sharing <paper-sharing>
 概念索引 <concepts/index>

@@ -93,3 +93,5 @@ $$
 | 多面体摩擦与可微接触有什么代价 | [Fig. 9 与附录 A](https://arxiv.org/html/2611.26600v1#A1.F9) · [§7.2](https://arxiv.org/html/2611.26600v1#S7.SS2) |
 
 原作作者为 Onur Beker、A. René Geist、Michael Posa、Marc Toussaint、Justin Carpentier 和 Georg Martius。本文为中文导读，图和数值例题为独立推导。 [原文与版本记录](https://arxiv.org/abs/2611.26600v1)
+
+[Paper Sharing：原文与中文全译](paper-sharing.md)。

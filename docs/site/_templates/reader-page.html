@@ -29,6 +29,7 @@
     {% include "site-search.html" %}
     <nav aria-label="{{ '网站导航' if zh else 'Site navigation' }}">
       <a href="{{ pathto('_static/research/dexterous-simulation.html', 1) }}">{{ '研究导读' if zh else 'Research guide' }}</a>
+      <a href="{{ pathto('blog') }}"{% if pagename == 'blog' %} aria-current="page"{% endif %}>Blog</a>
       <a href="{{ pathto('paper-sharing') }}"{% if pagename == 'paper-sharing' %} aria-current="page"{% endif %}>Paper sharing</a>
       <a href="{{ pathto('concepts/index') }}">{{ '概念' if zh else 'Concepts' }}</a>
       <a href="{{ pathto('index') }}#experiments">{{ '研究结论' if zh else 'Findings' }}</a>
@@ -36,7 +37,7 @@
       <a href="{{ pathto('about') }}">{{ '文档' if zh else 'Docs' }}</a>
     </nav>
     <div class="header-tools">
-      <a href="{{ other_language_root }}{{ 'index.html' if pagename == 'blog' else pagename + '.html' }}" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a>
+      <a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a>
       <a href="https://github.com/huangkiki/Dexlab" aria-label="DexLab on GitHub">GitHub</a>
     </div>
   </header>
@@ -58,6 +59,7 @@
       {% else %}
       {{ body }}
       {% endif %}
+      {% if pagename != 'blog' %}
       <nav class="lesson-pagination" aria-label="{{ '前后文章' if zh else 'Adjacent pages' }}">
         {% if prev %}
         <a href="{{ prev.link|e }}"><small>{{ '上一篇' if zh else 'Previous' }}</small>{{ prev.title|striptags }}</a>
@@ -66,12 +68,13 @@
         <a class="next" href="{{ next.link|e }}"><small>{{ '下一篇' if zh else 'Next' }}</small>{{ next.title|striptags }} <span aria-hidden="true">→</span></a>
         {% endif %}
       </nav>
+      {% endif %}
       <footer class="lesson-footer">
         <a href="{{ pathto('index') }}">DexLab</a>
         <p>{{ '以实验暴露问题，以证据限定结论。' if zh else 'Expose problems through experiments; bound conclusions with evidence.' }}</p>
       </footer>
     </main>
-    <aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>
+    {% if pagename != 'blog' %}<aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>{% endif %}
   </div>
   {% include "site-footer.html" %}
 </body>

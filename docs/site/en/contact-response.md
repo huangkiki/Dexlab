@@ -24,7 +24,7 @@ Constant velocity reduces short-horizon displacement error here, but neither con
 
 ## Reproduce the offline diagnostics
 
-After following the [Wuji bundle download](wuji-contact.md#rescore-without-installing-a-simulator), include the new entry in the sparse checkout and run with the same isolated offline dependencies:
+After following the [Wuji bundle download](wuji-contact-report.md#rescore-without-installing-a-simulator), include the new entry in the sparse checkout and run with the same isolated offline dependencies:
 
 ```bash
 git sparse-checkout add demos/contact-response

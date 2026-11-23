@@ -8,7 +8,7 @@ v3 点接触配置保持位移 **2.734 mm**，未通过验收。v4 按独立冻�
 
 ![点接触与抗扭接触的同时间回放](../../docs/evidence/wuji-contact/comparison.gif)
 
-建议先看[离线复算入口和完整报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact.html)，不必先安装原生引擎。
+建议先看[离线复算入口和完整报告](https://huangkiki.github.io/Dexlab/zh-cn/latest/wuji-contact-report.html)，不必先安装原生引擎。
 
 ## 运行原生夹持实验
 

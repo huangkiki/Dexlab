@@ -1,0 +1,442 @@
+---
+orphan: true
+no-search: true
+---
+
+# LIBERO: from a native task to a verifiable change · Experiment report
+
+[Read the blog article](libero-workflow.md)
+
+**First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. The historical case below uses only this task dataset. mjlab is deferred; scheduled development remains paused.
+
+## Additional complete Object cohorts
+
+All ten Object tasks now have every official demonstration recorded under
+`osc-restored-pose-v1`: **500/500 valid records**, comprising **403/403 development**
+and **97/97 predetermined validation** records. There are 495 native successes,
+5 retained native failures, and 0 records passing every frozen
+numerical diagnostic. Native success does not establish physical accuracy.
+
+The seven later unpaired cohorts below complement the original three-task paired
+regression, whose comparisons and failures remain separately reported below.
+
+| Task | Development records / native successes | Validation records / native successes | Native failures |
+| --- | --- | --- | --- |
+| Cream cheese | 43 / 43 | 7 / 7 | — |
+| Ketchup | 40 / 39 | 10 / 9 | development `demo_20`; validation `demo_29` |
+| Tomato sauce | 40 / 40 | 10 / 10 | — |
+| Butter | 40 / 40 | 10 / 10 | — |
+| Milk | 40 / 40 | 10 / 10 | — |
+| Chocolate pudding | 40 / 40 | 10 / 10 | — |
+| Orange juice | 40 / 40 | 10 / 10 | — |
+
+Both ketchup failures persist with recording off: all 52 shared initial, command,
+state and observation arrays and four configuration artifacts match in each control.
+Recorder-specific `goal_event_range` is excluded. The validation control is post-hoc;
+it changes no validation outcome and adds no unseen validation or baseline sample.
+The other six later cohorts required no failure controls or native retries.
+
+The unchanged numerical screening retains all per-record violations in the linked
+reports. Constrained acceleration and projected body effort share native acceleration
+and force information through different reconstructions; their violations are not
+independent physical references. A substep may violate several diagnostics.
+No tolerance or physical-error interpretation was selected from these outcomes.
+
+| Task package | New native runs | Native worker seconds | Offline service seconds |
+| --- | --- | --- | --- |
+| Cream cheese | 49 | 1581.37 | 9.38 |
+| Ketchup | 51 | 1638.37 | 17.79 |
+| Tomato sauce | 49 | 1577.46 | 8.29 |
+| Butter | 49 | 1704.19 | 10.55 |
+| Milk | 49 | 1550.32 | 13.54 |
+| Chocolate pudding | 49 | 1683.58 | 16.56 |
+| Orange juice | 49 | 1484.62 | 21.02 |
+
+Ketchup includes two diagnostic controls; every other listed package adds 49 baseline
+runs. The table covers native execution and admission/comparison/closure services;
+input preparation and repository delivery gates have separate receipts. Offline costs
+retain the cream-cheese preflight failure. At Object completion, the native LIBERO
+campaign ledger was **775 starts /
+23729.89 native worker seconds**, including earlier
+failures and controls. Execution/scoring sources, initialization, parameters and
+thresholds were unchanged through these cohorts. Historical controller state was not
+reconstructed, and the original observed records were never relabeled as new holdouts.
+
+[Per-case reports and complete Object coverage index](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/restored-baseline-index-v2.json).
+Object covers ten of 130 official tasks. Fourteen native paths have representative
+recording qualification; this separate denominator does not complete the other 120
+task baselines or the other 116 path qualifications. Full task/all-demonstration
+coverage, independent physical references and visual-policy evaluation remain open.
+
+## Complete affected-task records and remaining failures
+
+All **50 official demonstrations for each of three affected Object tasks** now have
+accepted records under `osc-restored-pose-v1`. Each task retains its frozen 40-development /
+10-validation split. All 150 records are valid; **147 replays meet the native task goal and none of the
+150 records passes all numerical diagnostics**. Numerical bounds are unchanged and are
+not universal physical-accuracy thresholds.
+
+| Task | Original development successes | Restored development successes | Fixed-candidate validation successes | Remaining native failure |
+| --- | --- | --- | --- | --- |
+| Alphabet soup | 36/40 | 39/40 | 10/10 | `demo_29` |
+| Salad dressing | 39/40 | 39/40 | 10/10 | `demo_25` |
+| BBQ sauce | 37/40 | 39/40 | 10/10 | `demo_31` |
+
+The paired development comparison changes 112/120 native successes to 117/120: seven
+failures improve, two successes regress and one failure persists. Salad's unchanged total
+therefore hides a changed failure. The 30 validation runs evaluate the frozen candidate;
+they are **not a paired original-versus-corrected validation comparison**. The new Salad
+and BBQ failures also reproduce with recording off. Their maximum target/source position
+differences increase from 101.12 to 281.88 mm and 12.91 to 408.58 mm, respectively. These
+outcome-selected source comparisons do not estimate an unbiased improvement or physical error.
+[Regression source audit](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/new-regression-source-audit-v1.json).
+
+At the earlier three-task delivery, verified Object coverage was **157/500 demonstrations**:
+127/403 development and 30/97 validation, with 343 remaining. Fourteen of the 130 native
+task paths have representative recording qualification; the other 116 paths, full baseline
+coverage, physical references and visual-policy evaluation remain open. A qualified path,
+a complete task cohort and an individual successful replay are different denominators.
+[Per-case results, packet hashes and coverage index](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/restored-baseline-index-v1.json).
+
+### What explicit gripper-memory interventions change
+
+All three remaining development failures were replayed in full with the reset memory
+`[0]` and two explicit interventions. These are nine diagnostic runs, with 1,542 actions
+and 38,550 native gripper-command updates; they add **zero baseline records**. All 53 arrays (including the initial-state array)
+in each observation-only control match its archived recording-off reference exactly.
+Before intervention the state, actuator controls, warm start and OSC memory match; only
+gripper memory is changed. The actual pinned `PandaGripper` mapping is recorded at every call.
+
+| Development failure | Reset `[0]` | Memory `[1, -1]` | Memory `[-1, 1]` |
+| --- | --- | --- | --- |
+| Alphabet soup `demo_29` | Failed | Succeeded | Succeeded |
+| Salad dressing `demo_25` | Failed | Succeeded | Succeeded |
+| BBQ sauce `demo_31` | Failed | Failed | Succeeded |
+
+For BBQ, `[1, -1]` reduces the first-action finger difference from 5.392902 mm to about
+0.000156 mm, yet the task still fails and the maximum target/source difference increases
+from 408.58 to 413.79 mm. Conversely, `[-1, 1]` succeeds with a larger initial finger
+difference. Thus the declared intervention affects these exposed cases, but first-action
+agreement and native success do not identify historical memory. No production default,
+historical score, baseline failure or validation split is replaced.
+[All nine controls and source identities](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/gripper-memory-diagnostic-v2.json).
+
+The source-schema audit rehashed all three HDF5 files and inspected 150 demonstration
+headers. It found no dedicated controller/gripper-memory or warm-start datasets. Their
+metadata includes `tag` and lacks `bddl_file_content`, unlike the pinned exporter. This
+does not distinguish a different generating revision from subsequent metadata edits;
+the exporter revision, runtime and any unrecorded action prefix remain unknown. The pinned
+script's five-action skip is not proof that these files were produced that way.
+[Schema findings and audit limits](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/history-schema-audit-v1.json).
+
+The nine diagnostic runs used 46.71 native worker seconds and peaked at 1,078,919,168 bytes
+within 8 GiB hard /7 GiB high /four-core /zero-swap limits, with no high/max/OOM events.
+Cumulative native accounting is **430 starts /12,509.98 worker seconds**, including retained
+earlier attempts and controls; this is not the unique-baseline count. Source preparation
+and offline checking used a separate 2.12 and 1.80 service seconds. The unexecuted first
+observer candidate failed an interface preflight and is retained with zero native expense.
+
+The linked packets publish per-case summaries, hashes, audit findings and the exact executed
+[diagnostic source](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/gripper-memory-worker-v2.py).
+Full raw trajectories and resource archives are separately retained; summaries alone cannot
+independently re-audit every native step. The source snapshot requires an admitted plan and
+compatible raw inputs, and is not a standalone benchmark command.
+
+## Restored controller state
+
+This section preserves the earlier initialization and representative-path qualification.
+
+The first-action investigation in [#198](https://github.com/huangkiki/Dexlab/issues/198)
+found that native state restoration left an OSC cache from reset. In the exposed Salad-dressing
+`demo_35`, its cached end-effector position differed by 24.2377 mm; a cache-refresh control
+changed the native outcome while a forward-only control did not. Source-state differences
+remain, including finger coordinates. Native success does not establish source identity or
+physical accuracy.
+
+New runs explicitly select `osc-restored-pose-v1`: one native state restore, one OSC cache
+refresh/forward and position/orientation goals set to the restored pose, with reset nullspace
+and gripper memory retained and recorded. No dummy actions or stepwise state injection are
+added. Missing source controller history is unresolved. The real pinned-controller tests
+exercise first relative goals and zero-orientation actions. The complete affected-task
+records are reported above. [Initialization protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md#versioned-controller-initialization).
+
+The representative paths and 120 development records produced before this change remain
+evidence of their original initialization. Their recording controls remain valid within that
+protocol; they are not corrected baselines. The results below preserve their original scope.
+
+The same seven exposed diagnostic demonstrations now have **21 complete on/off/repeat runs**,
+3,126 actions and 52,100 recorded substeps under the new contract. All 14 instrumented records
+are valid; arrays are unchanged by recording, and repeated goals, scores and substep archives
+match exactly. Native outcomes agree across all three modes:
+
+| Development demonstration | Original native outcome | Restored-pose native outcome |
+| --- | --- | --- |
+| Alphabet soup `demo_9` | Failed | Succeeded |
+| Alphabet soup `demo_22` | Failed | Succeeded |
+| Alphabet soup `demo_27` | Failed | Succeeded |
+| Alphabet soup `demo_29` | Failed | Failed |
+| Alphabet soup `demo_1` | Succeeded | Succeeded |
+| Salad dressing `demo_35` | Failed | Succeeded |
+| Salad dressing `demo_1` | Succeeded | Succeeded |
+
+Constrained-acceleration and projected-body-effort negatives persist in every instrumented
+run at unchanged bounds; the other nine diagnostics have no violating substeps. This selected
+diagnostic set is not a full-task success-rate estimate or physical validation. The package
+used 518.89 native worker seconds, with all terminal resources and artifact hashes verified.
+[Qualification records and per-case negatives](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-restoration-v1.json).
+
+The follow-up covers the other twelve previously qualified paths: free objects, a drawer,
+a stove, simultaneous targets, a long sequence and the remaining Object tasks. **36 complete
+on/off/repeat runs contain 6,426 actions and 107,100 recorded substeps**. All 24 instrumented
+records are valid and all twelve examples retain native success in all three modes. Common
+control/state/non-image arrays are exact across recording modes; repeated goals, scores and
+substep files match, as do the original native model identities. Every instrumented run
+retains constrained-acceleration and projected-body-effort negatives at unchanged bounds.
+
+The package used 973.09 native worker seconds and at most 1,464,868,864 bytes peak cgroup
+memory within the same 8 GiB hard /7 GiB high /four-core /zero-swap limits. All processes and
+terminal resource receipts were verified. At this earlier stage, cumulative accounting was 277 starts /
+7,895.72 worker seconds; queue waits and offline checks are separate. Together, the two
+packages cover 19 exposed demonstrations across all fourteen previously qualified task
+paths. The later complete affected-task records are reported above; the other 116 task paths,
+source-history questions, physical-reference validity and visual-policy evaluation remain open.
+[Complete path-regression evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-path-regression-v1.json).
+
+The independent source comparison checks 1,035 overlapping states from the same examples,
+after fully rehashing both source HDF5 files. All clocks match exactly. The still-failing
+Alphabet `demo_29` has a larger maximum target/source difference: **131.64 → 511.85 mm**;
+the successful Salad `demo_1` reference also increases, **22.80 → 25.31 mm**. First-action
+finger-coordinate differences remain **5.37–5.39 mm** in all seven cases. These retained
+negatives show that cache synchronization does not reconstruct missing controller/gripper
+history or guarantee closer source trajectories; they do not establish the remaining cause.
+[Complete source comparisons](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/controller-source-comparison-v1.json).
+
+## Task-aware recording qualification (in progress)
+
+The body-aware version-2 path completed five development sequences: a free object,
+a drawer, a stove joint, simultaneous targets and a long sequence. Each ran with
+recording on, off and on again: **15 complete runs, 3,018 actions and 50,300 recorded
+substeps**. All native final task queries succeeded; all ten instrumented records were
+structurally valid. Current action/state/observation arrays and goals matched exactly,
+and repeated substep archives were byte-identical. This qualifies the recorded
+representative paths, not the 130-task baseline or learned-policy evaluation.
+
+| Development sequence | Actions per run | Recorded substeps per run | Violating substeps for each of two residuals |
+| --- | --- | --- | --- |
+| Free object | 139 | 3,475 | 507 |
+| Drawer | 138 | 3,450 | 166 |
+| Stove joint | 80 | 2,000 | 45 |
+| Simultaneous targets | 388 | 9,700 | 749 |
+| Long sequence | 261 | 6,525 | 367 |
+
+The two residuals are constrained acceleration and projected body effort, at their
+unchanged per-coordinate numerical bounds. The other nine metrics had no violating
+substeps. These negatives do not alone establish material inaccuracy or a recorder defect.
+The earlier exact comparison failure in seven relative-quaternion channels and their
+aggregate remains unchanged. Offline reconstruction isolated differing thread
+configurations; the new five-family batch pins those controls and relevant package versions.
+
+Small body/solver fixtures passed 20 native checks and offline replay of 139 retained
+substeps, followed by 83 recording/execution regressions without importing an engine.
+The body-aware protocol uses the original force epoch, reports rigid free-COM impulse
+diagnostics and retains current solver statistics. Inferred subtree loads are not measured
+joint reactions; physical-reference qualification remains open.
+
+Three additional analytical checks passed for a driven damped slider, a driven
+hinge and centered free fall: eight synthetic configurations, 142 recorded
+substeps and matching uninstrumented controls. All saved substeps also passed
+offline replay. Closed-form loads and integration references use declared constants;
+deliberately damaged hinge acceleration fails the independent reference. Over
+40 ms of free fall, vertical position error decreases from 0.7848 to 0.1962 mm
+as the step decreases from 4 to 1 ms, matching the analytical Euler error.
+This retains finite-step error alongside small equation residuals. These ideal
+references do not calibrate LIBERO materials or measure general joint reactions.
+[Equations, units and applicability](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md#independent-analytical-references).
+
+Packed storage passed 86 record/storage/executor regressions and exact lossless conversion
+and full rescoring of all five complete reference sequences (1,006 actions / 25,150 substeps).
+Their substep chunks decreased from 1,837,228,156 to 442,665,669 bytes, a **75.91% reduction**.
+A subsequent three-run native integration check preserved all original free-object
+states/actions/goals/scores and repeated chunk bytes; native packed fields matched the
+offline reference exactly. This does not establish an all-task capacity or throughput claim.
+
+One earlier native startup failed before any task action because its new configuration
+directory lacked `config.yaml`. The failure and cost remain recorded; the corrected revision
+checked the known configuration hash and paths before dispatch. Original records,
+thresholds and numerical failures remain intact.
+
+The engineering implementation is merged in [PR #193](https://github.com/huangkiki/Dexlab/pull/193).
+Its complete gate ran 1,076 tests (1,055 passed and 21 runtime-specific skips), both full
+14-second backend regressions (MuJoCo 23/23 checks and SuperDex 22/22), raw-record rescoring,
+official-package identity checks and strict bilingual documentation builds. A subsequent
+Git fetch failure was retained; publication recovered against the same verified tree and
+unchanged base. These backend regressions qualify the declared existing profiles, not SDF
+parameter equivalence across engines. [#188](https://github.com/huangkiki/Dexlab/issues/188)
+retains its remaining qualifications; the full 130-task and visual-policy parents stay open.
+
+[Recording protocol and limitations](https://github.com/huangkiki/Dexlab/blob/main/docs/libero-substeps.md)
+and [qualification evidence](https://github.com/huangkiki/Dexlab/issues/188#issuecomment-6159417739)
+separate record integrity, numerical diagnostics, physical-reference validity and native
+success. Current implementation results do not change the historical case below.
+
+## Object task-path qualification
+
+The other nine Object tasks completed one development demonstration each with
+recording on/off/repeat: **27 complete runs, 4,317 actions and 71,950 recorded
+substeps**. Every native final query succeeded; all 18 instrumented records were
+valid. Full artifact hashes, action/time chains and model identities were verified.
+Recording left control/state/observation arrays unchanged; repeated goals, scores
+and substep archives matched exactly.
+
+| Object | Actions per run | Recorded substeps per run | Violating substeps for each of the same two residuals |
+| --- | --- | --- | --- |
+| alphabet-soup | 179 | 4,475 | 54 |
+| salad-dressing | 124 | 3,100 | 264 |
+| bbq-sauce | 134 | 3,350 | 441 |
+| ketchup | 248 | 6,200 | 752 |
+| tomato-sauce | 132 | 3,300 | 171 |
+| butter | 169 | 4,225 | 729 |
+| milk | 150 | 3,750 | 104 |
+| chocolate-pudding | 168 | 4,200 | 812 |
+| orange-juice | 135 | 3,375 | 835 |
+
+The unchanged constrained-acceleration and projected-body-effort negatives remain;
+the other nine metrics had no violating substeps. Native success is separate from
+numerical consistency and physical accuracy. This package used 666.11 native-worker
+seconds and approximately 1.43 GB of campaign output; these are observed qualification
+costs, not engine throughput or an all-demonstration capacity estimate.
+
+Together with the prior cream-cheese case, all ten Object task paths have selected
+native controls. All **500 official Object demonstrations / 74,507 actions** have
+prepared, load-checked inputs; their full baseline execution remains incomplete.
+The original 403 development / 97 validation split is preserved, and these nine
+qualification sequences use development data only. All 130 tasks, physical-reference
+qualification and visual-policy evaluation retain their full acceptance.
+[Object evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/object-path-qualification-v1.json)
+and [analytical reference evidence](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/analytic-references-v1.json)
+record the denominators, individual negatives and provenance hashes.
+
+## What the original case establishes
+
+- **Reproduction:** the original configuration completes all three development and ten heldout demonstrations. Lift-and-slip was not reproduced. These are action-execution outcomes, not learned-policy benchmark scores.
+- **Verified workflow defect:** the independent evaluator discards five settling observations, while the training evaluator refreshes them. During a native 0.25 s audit, the largest end-effector position-component change is **4.481 mm**, and one finger-joint position changes **12.143 mm**. A reversible one-line patch refreshes the observation without changing the five zero actions.
+- **An unsuccessful optimization:** smaller timesteps do not consistently reduce penetration. Heldout numerical screens pass **3/10** at 1 ms versus **5/10** at the original 2 ms, with about **2.00×** native stepping cost. This change is not recommended; screening limits remain fixed.
+- **A concrete remaining question:** the 12.163 mm maximum occurs at `floor ↔ cream_cheese_1_g1` in demo_8 at native time 2.940 s, before the first measured lift. Its mixed time constant is 10.5 ms, so the 4 ms refsafe floor at h=2 ms is inactive. Geometry, drive and contact-response attribution continue in [#174](https://github.com/huangkiki/Dexlab/issues/174).
+
+![Native task and timestep control](../../evidence/visual/libero-demo0-baseline.png)
+
+[Synchronized replay, frame-linked curves and three conditions](libero) · [All results JSON](https://huangkiki.github.io/Dexlab/en/latest/_static/libero/summary.json) · [Full records](https://github.com/huangkiki/Dexlab/releases/download/v0.60.0/libero-native-v1.tar.gz)
+
+The modified video is a timestep control, not a successful optimization. Refreshing observations cannot change prerecorded demonstration actions; these videos do not establish improved policy success from the patch.
+
+## Mask progress-signal audit
+
+[#408](https://github.com/huangkiki/Dexlab/issues/408) adds an offline audit over the published fixed-camera demo-0 replay. It does not rerun physics or train a policy. The audit uses 28 samples, one every fifth frame; a deterministic colour/component tracker creates the target mask while a fixed-initialized tracker supplies the gripper ROI. Contact, lift, basket and native-success events only label stages; they never enter the candidate progress score.
+
+Baseline ROI overlap rises from a pre-contact median of `0` to `0.535` at contact-to-lift and `0.877` during lift-to-success. Its AUC for ranking post-contact above pre-contact is `0.861`, so the mask carries information through approach, contact and transport. Both post-success samples have an empty target mask, however. The audit therefore does **not** establish this mask as a completion signal; native success remains unchanged.
+
+The perturbations expose why a quality gate is required:
+
+- seven missed detections reduce AUC to `0.738`;
+- a false box in ROI centre gives pre-contact overlap `0.780`, so a high score can come from fabricated progress;
+- three-frame delay changes overlap at contact;
+- occlusion can raise overlap by shrinking the denominator, so mask-area change is not automatically loss of progress.
+
+[Machine record](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/mask-progress-audit-v1.json) · [SHA-256](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero/mask-progress-audit-v1.sha256) · [Audit contract and reproduction](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/MASK-PROGRESS.md)
+
+## Frozen execution and physical reference
+
+| Item | Executed configuration |
+| --- | --- |
+| Native path | LIBERO `8f1084e3132a39270c3a13ebe37270a43ece2a01` → robosuite 1.4.0 → MuJoCo 2.3.7 |
+| Solver / contact / integration | Newton / elliptic / Euler; 100 iterations, tolerance=1e-8, impratio=20 |
+| Control | Native OSC_POSE at 20 Hz; original servos, friction, mass and geometry |
+| Target mass | 0.012337579236976485 kg; full inertia, COM offset, actuation and contact readbacks retained |
+| Dataset | One official HDF5 with pinned revision and SHA-256; demo_0..2 development, demo_3..12 unseen validation, from 50 demonstrations |
+| Initialization | Published states[0] time/qpos/qvel plus native controller reset; not exact recovery of historical controller memory |
+| Acceptance | Original task, observation integrity, numerical screening, stability and cost are separate; reliable coverage unchanged |
+
+Independent scoring compares **world COM momentum change with contact plus gravity impulse**, accounting for local free-joint angular velocity and COM offset. Declared screens are maximum target overlap ≤1 mm and p99 momentum residual ≤5% of weight. They are numerical diagnostics, not official LIBERO success criteria or measured material accuracy. Full rotational balance is not certified. Gripper-frame relative height includes rotation and release; it is not pure slip.
+
+Constraint forces read after `mj_step` belong to the pre-integration epoch; states are post-integration. Curves retain actual timestamps and every peak. Videos display recorded states at 20 Hz without advancing physics. [Full units, frames and control semantics](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/semantics.json).
+
+(scoring-integrity)=
+## Scoring integrity
+
+Scorer v2 independently recomputes each substep's maximum overlap as `max(0, -distance)` across its recorded target contacts. The serialized overlap must match exactly: both channels originate from the same native values, so this check introduces no physical tolerance. Contact distances, force vectors and epochs must be finite; counts must match exactly, and exactly one geometry in each contact must belong to the target. Empty contacts require zero overlap and zero summed contact force.
+
+A disposable-copy regression showed that the previous scorer could accept a zeroed overlap summary after refreshing the local trajectory hash while the contact distances still showed penetration. The separately published package manifest would reject that changed trajectory. This defect does not establish historical data corruption. V2 rejects the contradictory record without changing native task success or the historical numerical thresholds. Its output includes `scoring_version: 2`; archived v0.60.0 scores predate that field and remain immutable. Track acceptance in [#183](https://github.com/huangkiki/Dexlab/issues/183).
+
+Offline rescoring preserves all historical values for **40/40 records**, apart from the new version field, and verifies every original per-case file hash. The same summary-only mutation is now rejected despite valid refreshed local hashes. [Regression receipt](https://github.com/huangkiki/Dexlab/blob/main/docs/evidence/libero-score-v2.json). This is record validation, not a new simulation run or material-accuracy claim.
+
+## All development controls and failures
+
+| Development configuration | Step | Positive reference floor | Native task | Physics screen | Maximum overlap | Native stepping, three demos |
+| --- | --- | --- | --- | --- | --- | --- |
+| baseline | 2 ms | original | 3/3 | 0/3 | 4.882 mm | 0.694 s |
+| step-1000us | 1 ms | original | 3/3 | 0/3 | 4.997 mm | 1.360 s |
+| step-500us | 0.5 ms | original | 3/3 | 0/3 | 5.011 mm | 2.710 s |
+| aligned-2000us | 2 ms | 4 ms | 3/3 | 0/3 | 5.304 mm | 0.710 s |
+| aligned-1000us | 1 ms | 4 ms | 3/3 | 0/3 | 5.407 mm | 1.387 s |
+| aligned-500us | 0.5 ms | 4 ms | 3/3 | 0/3 | 6.362 mm | 2.780 s |
+
+Recording-off and settling audits bring the total to eight candidates, not eight solvers or task types. The original timestep sweep changes integration and some contact responses: positive-format MuJoCo references with refsafe enabled use `max(timeconst, 2h)`. [Pinned 2.3.7 implementation](https://github.com/google-deepmind/mujoco/blob/2.3.7/src/engine/engine_core_constraint.c#L1045-L1048)
+
+The aligned family floors positive geom/pair time constants at 4 ms before varying h. It is a **different contact configuration**; within-family timestep attribution does not imply material equivalence to the original. Geometry, mass, friction, control period, drive limits and native success remain unchanged.
+
+Before heldout execution, selection requires valid observations and task success on every development demonstration, preferring all-screen-pass configurations and then the smallest worst overlap and cost. If none passes all screens, the least-overlap nonbaseline candidate becomes an **unqualified diagnostic challenger**, not a recommendation. This rule selected 1 ms to test transfer of the negative development result.
+
+| Heldout demo_3..12 | Native final success | Physics screen | Maximum overlap | Native stepping total |
+| --- | --- | --- | --- | --- |
+| Original 2 ms | 10/10 | 5/10 | 12.163 mm | 2.239 s |
+| Control 1 ms | 10/10 | 3/10 | 12.212 mm | 4.481 s |
+
+These are ten paired demonstrations at one fixed seed. No fitting follows heldout inspection. Costs are serial same-host native stepping; import, recording and scoring costs remain separately recorded. They are not training throughput or a cross-engine ranking. The JSON and archive retain every success, failure and regression.
+
+## From observations to a change
+
+1. Execute the full original action prefix, recording goals, actual actuator output, contacts, states and effective parameters; localize contact, lift, release and basket events.
+2. Validate instrumentation: control-rate states, actions, observations, controller targets and success sequences are exactly equal with recording enabled/disabled. Independent-process baseline repeats also match exactly.
+3. Inspect actual peak-contact pairs and epochs. The demo_0 peak is object/basket contact during placement; the demo_8 peak is object/floor contact during grasp preparation. They need separate explanations.
+4. Six configurations and independent scoring do not support “reduce the timestep to fix it.” Preserve this negative result and bound further mechanism research.
+5. Deliver the [reversible observation-refresh patch](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/patches/refresh-settle-observation.patch), supported by source and native observation differences. A compatible fixed checkpoint is still needed to test closed-loop consequences; **neither a changed first policy action nor higher policy success is claimed**.
+
+Event labels localize hypotheses rather than assign causes: no finger contact, no measured lift, transport contact and placement failure are distinct. Post-lift contact loss still requires action/geometry review to distinguish slip from intentional release. No simplified fixture or mid-episode restore is qualified; this round executes full tasks.
+
+## Reproduction and boundaries
+
+[Setup, run, independent score, patch/undo and render commands](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/README.md) · [Frozen candidates and selection rule](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/protocol.json) · [Independent evaluator](https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/libero/lifelong/evaluate.py#L260-L273) · [Training evaluator](https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/libero/lifelong/metric.py#L117-L136)
+
+Native simulation uses an isolated Python 3.10 diagnostic environment. Upstream’s complete Python 3.8 / PyTorch 1.11 learning installation is not claimed as a qualified policy runtime here. The HDF5 lacks embedded historical BDDL text. Its canonical task and problem match pinned source, but its instruction matches `benchmark.Task.language` rather than the BDDL's distinct wording: “pick up the cream cheese…” versus “pick the cream cheese…”. Legacy `env_args` also retains an older BDDL filename. These declarations are preserved separately; neither missing embedded text nor an auxiliary filename establishes native environment equivalence. Dataset terminal reward/done values do not supply success evidence; runtime native queries do. [Input-identity follow-up #185](https://github.com/huangkiki/Dexlab/issues/185).
+
+## Full-suite input admission
+
+The input inventory preserves all **130 official tasks** in five groups (10/10/10/10/90), each source BDDL and initial-state hash, every native goal, and the pinned dataset's expected bytes and SHA-256. LIBERO-100 is the existing 90+10 partition, not an additional suite. Static identity, downloaded bytes, HDF5 content admission and native execution are separate states; [#181](https://github.com/huangkiki/Dexlab/issues/181) remains the full execution parent.
+
+Use the Python 3.12 DexLab environment with its `libero-inputs` extra for offline data inspection; retain the separate legacy simulation environment. Freeze the inventory and deterministic split before reading new outcomes, then admit complete files through the existing archive resource envelope and shared research guard. The tool verifies the whole file before reading HDF5, rejects external/aliased content, and records every demonstration's action count, state width, initial-state and model XML identities. It reads finite action/state arrays in bounded chunks, without selecting demonstrations from rewards, done labels or images.
+
+```bash
+python -m pip install -e '.[libero-inputs]'
+python -m dexlab.libero_dataset freeze LIBERO_SOURCE FROZEN_INPUTS
+# Run complete-file reads inside scripts/research_guard.py + scripts/bounded_run.py:
+python -m dexlab.libero_dataset admit LIBERO_SOURCE FROZEN_INPUTS TASK_ID TASK_HDF5 NEW_RECEIPT
+python -m dexlab.libero_dataset aggregate LIBERO_SOURCE FROZEN_INPUTS DATA_ROOT RECEIPT_ROOT NEW_SUMMARY
+```
+
+`TASK_ID` is the exact `suite/task` key from the inventory. Store receipts as `RECEIPT_ROOT/suite/task.json` and data under the frozen official relative path. Aggregate output retains missing and invalid rows. Availability checks file size only; a prior admitted receipt proves the bytes at its recorded verification, not a fresh current hash. Re-admit changed or untrusted files; existing different receipts are never overwritten.
+
+The receipt index rejects missing or contradictory task linkage, initial-state identity, exposure/split declarations and reader provenance. Invalid receipts do not contribute demonstrations to the admitted total; their expected tasks remain in the denominator. Numeric initial-state equality can legitimately have different byte representations, including signed zero or different floating dtypes, so hashes alone do not replace the original value comparison.
+
+Source BDDL language and the pinned benchmark API language are compared independently: **29/130 source declarations differ**. Dataset text must match at least one of these explicit source declarations after case/whitespace normalization; arbitrary paraphrases fail. Missing embedded BDDL remains `not-provided`, while present text must match source bytes. Native/policy qualification must record the actual instruction and executed BDDL; input admission does not establish policy equivalence.
+
+For each task, hash-rank previously unexposed demo IDs with the frozen salt and allocate `floor(unexposed_count / 5)` to validation; all remaining IDs go to development. Cohorts below five unexposed IDs have no validation cases. Historical cream-cheese demo_0…12 remain exposed development evidence. Every demo stays in the full baseline denominator, and the historical v1 campaign and its original split remain unchanged.
+
+The serial download helper initially freezes a cumulative plan before retrieval: at most 390 attempts, three per file, 125 GiB of charged response-body bytes and 12 hours, with 600 seconds per attempt and an 8 MiB/s read throttle. Failed/interrupted transfers retain partials and consume their reserved allowance; a live recorded owner prevents recovery. Resumption checks exact Content-Range and unchanged strong ETag before appending, and publication requires the complete pinned hash. It never overwrites an existing final file or automatically retries. Use the same shared archive guard and finite resource envelope; download completion is not content or runtime admission. The pinned source README declares CC BY 4.0 for datasets, while the pinned dataset card declares Apache-2.0; retain both declarations without treating either as a resolved license for all data. Source-code MIT and upstream asset licenses remain separate. [Source notices](https://github.com/huangkiki/Dexlab/blob/main/demos/libero-contact/NOTICE.md).
+
+Response reads and complete-file verification share the same attempt deadline. A detected late result remains a failed attempt with retained partials and charges, rather than being published as a completed download. Run each retrieval with a process timeout no larger than its reserved attempt window, in addition to the whole-package resource guard: deadline checks cannot preempt a blocking operating-system call.
+
+A measured capacity shortfall can be handled by one explicit `amend-wall` operation in the same ledger, under the shared guard after the package and all recorded owners have stopped. Supply a reason and a JSON evidence report identifying `inventory_sha256`, `transfer_plan_sha256` and a positive `completed_successful_transfers` count, together with the measured costs supporting the change. The immutable amendment binds that evidence and every preceding attempt receipt, raising only the total wall ceiling to 24 hours and the per-attempt ceiling to 1800 seconds. All prior charges remain in those totals; attempt counts, body-byte allowance, throttling and task scope stay unchanged. Interrupted attempts are charged their own recorded ceiling, so old 600-second reservations are not reinterpreted. Repeated amendments, pending/live owners and altered evidence or receipt history are rejected. A byte-complete partial still requires full hash and HDF5 admission; file size alone cannot qualify it. Freeze new package/source identities before continuing, and keep each outer package within the existing 3600-second runner ceiling; one 1800-second file plus overhead fits, while five such windows do not.
+
+DexLab now connects a benchmark observation to a concrete time, contact and code path, tests a plausible intervention, and delivers verified workflow corrections separately from unsuccessful physics tuning. For a new scene, check observation freshness, actual contact forces and actuation before recommending a configuration. This cohort does not establish a new recommended physics profile.
+
+Resources and recovery: the native batch froze 16 GiB hard / 15 GiB high, four CPU equivalents, swap disabled and an additional 8 GiB desktop reserve. Maximum measured cgroup memory was about 1.218 GiB; limits did not change within the batch. The inherited ledger accounts for 46/64 starts and 363.07/21600 s of charged runtime, including early failures/diagnostics; this is not total development or tool time. A future comparable batch can admit the measured workload at the 8 GiB tier. Native package files were checked against wheel RECORD hashes after execution; this integrity check is not presented as pre-run binary telemetry.

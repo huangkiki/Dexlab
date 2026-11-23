@@ -145,52 +145,12 @@ body[data-reader-page^="concepts/"] {
   letter-spacing: -.025em;
 }
 
-.concept-topics-head p {
-  max-width: 58ch;
+.concept-topics-head a {
   justify-self: end;
-  margin: 0;
-  color: var(--muted, #60675a);
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.concept-topic-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 18px;
-  margin-bottom: 8px;
-  padding-block: 6px;
-  border-block: 1px solid var(--rule, #dcded4);
-}
-
-.concept-topic-filters button {
-  min-height: 38px;
-  padding: 4px 0;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  color: var(--muted, #60675a);
-  background: transparent;
-  font: 600 12px/1.5 var(--sans, Arial, sans-serif);
-  cursor: pointer;
-}
-
-.concept-topic-filters button small {
-  margin-left: 5px;
-  color: inherit;
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 500;
-}
-
-.concept-topic-filters button:hover,
-.concept-topic-filters button:focus-visible,
-.concept-topic-filters button[aria-pressed="true"] {
-  border-bottom-color: var(--accent, #4f664c);
   color: var(--accent, #4f664c);
-}
-
-.concept-topic-link[hidden] {
-  display: none;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: .22em;
 }
 
 .concept-topics-grid {
@@ -637,7 +597,7 @@ body[data-reader-page^="concepts/"] .lesson-article code {
     gap: 8px;
   }
 
-  .concept-topics-head p {
+  .concept-topics-head a {
     justify-self: start;
   }
 

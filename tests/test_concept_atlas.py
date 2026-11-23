@@ -141,33 +141,15 @@ class ConceptAtlasTests(unittest.TestCase):
             len(self.atlas["concepts"]) - syntheses,
         )
         self.assertNotIn('class="concept-field-synthesis"', rendered)
-        self.assertEqual(rendered.count('class="concept-topic-link"'), syntheses)
-        self.assertEqual(rendered.count("data-topic-filter="), len(self.atlas["topics"]) + 1)
-        tag_count = sum(
-            len(item["tags"]["zh"]) + 1
-            for item in self.atlas["concepts"]
-            if item["kind"] == "synthesis"
-        )
         self.assertEqual(
-            len(re.findall(r'<span class="concept-topic-tag(?:\s|")', rendered)),
-            tag_count,
+            re.findall(r'class="concept-topic-link" href="([^"]+)"', rendered),
+            ["complementarity-contact-models.html", "cloth-comparison.html", "cut-push.html"],
         )
-        self.assertEqual(rendered.count('<time datetime="'), syntheses)
+        self.assertIn('href="blog.html"', rendered)
+        self.assertIn('class="concept-topic-tag', rendered)
         self.assertLess(
             rendered.index('class="concept-field"'),
             rendered.index('class="concept-topics"'),
-        )
-        rendered_dates = re.findall(r'<time datetime="([^"]+)">', rendered)
-        self.assertEqual(rendered_dates, sorted(rendered_dates, reverse=True))
-        self.assertLess(
-            rendered.index("NeuralActuator：执行器误差要单独建模，接触仍要交给物理"),
-            rendered.index("当我们在讨论灵巧操作仿真时，我们在讨论什么？"),
-        )
-        self.assertIn('data-topic="sim2real"', rendered)
-        self.assertIn('href="failure-root-cause-atlas.html"', rendered)
-        self.assertIn(
-            "当我们在讨论仿真 Sim-to-Real Gap 问题时，我们在讨论什么？",
-            rendered,
         )
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
 

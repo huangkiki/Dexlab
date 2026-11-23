@@ -71,7 +71,7 @@
             <div><dt>Criterion</dt><dd><strong>Pass · 11.096 / 10.209 mm</strong></dd></div>
             <div><dt>Scope</dt><dd>Synthetic materials and a fixed cut-and-push protocol; not food calibration</dd></div>
           </dl>
-          <a href="cut-push.html">Open records, controls and raw data →</a>
+          <a href="cut-push-report.html">Open records, controls and raw data →</a>
         </div>
       </article>
 
@@ -94,7 +94,7 @@
             <div><dt>Criterion</dt><dd><strong>2.734 → 1.025 mm; 29.336 → 0.024992 rad/s</strong></dd></div>
             <div><dt>Scope</dt><dd>Two-finger ball hold; not hardware material calibration or whole-hand capability</dd></div>
           </dl>
-          <a href="wuji-contact.html">Open contact records, GIF and independent recomputation →</a>
+          <a href="wuji-contact-report.html">Open contact records, GIF and independent recomputation →</a>
         </div>
       </article>
 
@@ -140,7 +140,7 @@
             <div><dt>Criterion</dt><dd><strong>52 / 105 pass; 53 failures retained</strong></dd></div>
             <div><dt>Scope</dt><dd>Material responses are not cross-engine calibrated</dd></div>
           </dl>
-          <a href="cloth-comparison.html">Open cloth configurations, failures and evidence limits →</a>
+          <a href="cloth-comparison-report.html">Open cloth configurations, failures and evidence limits →</a>
         </div>
       </article>
 
@@ -274,7 +274,7 @@
           <dd>Material values are synthetic and not calibrated to tofu or banana. Initial gravity settling is retained; local jitter improvement does not establish real damping or accurate knife contact force.</dd>
         </div>
       </dl>
-      <a href="cut-push.html">Open the cutting protocol →</a>
+      <a href="cut-push-report.html">Open the cutting protocol →</a>
     </article>
 
     <article class="validity-record" data-reveal-item>
@@ -403,6 +403,7 @@ Experiments <experiments>
 Results & diagnosis <results>
 Engines & models <engines>
 Research guides <references>
+Blog <blog>
 Paper sharing <paper-sharing>
 Concept index <concepts/index>
 Contributing <contributing>
