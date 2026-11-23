@@ -24,7 +24,7 @@
     <div class="global-site-footer-meta">
       <p>© 2026 Kiki Huang</p>
       <nav aria-label="{{ '站尾导航' if site_is_chinese else 'Footer navigation' }}">
-        <a href="{{ '#experiments' if pagename == 'index' else pathto('index') + '#experiments' }}">{{ '实验结论' if site_is_chinese else 'Findings' }}</a>
+        <a href="{{ '#experiments' if pagename == 'research-overview' else pathto('research-overview') + '#experiments' }}">{{ '实验结论' if site_is_chinese else 'Findings' }}</a>
         <a href="{{ pathto('contributing') }}">{{ '参与研究' if site_is_chinese else 'Contribute' }}</a>
         <a href="https://github.com/huangkiki/Dexlab">DexLab GitHub</a>
         <a href="{{ pathto('about') }}#documentation-and-citation">{{ '引用与许可' if site_is_chinese else 'Citation & license' }}</a>

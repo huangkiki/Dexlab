@@ -203,9 +203,9 @@ components:
 
 **Creative North Star: "The Research Reading Index"**
 
-The homepage shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a concept field, a selected-article preview, a five-case evidence sequence, three research judgments and direct continuation links. Fine rules and open rows carry the hierarchy.
+The research overview shares the existing dexterous-simulation guide's warm paper, charcoal text, muted green links and serif opening title. It is an editorial research entrance: the first screen establishes the project and primary index action; scrolling reveals the authored architecture diagram, a concept field, a selected-article preview, a five-case evidence sequence, three research judgments and direct continuation links. Fine rules and open rows carry the hierarchy.
 
-This system governs the Chinese and English research homepages, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: one global masthead, a 760px reading column and an optional current-page outline. The dedicated left chapter rail remains only on the course route, where it represents an ordered lesson sequence rather than the entire website. The canonical Blog page owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
+This system governs the Chinese and English Blog homepages, research overviews, the MuJoCo learning route and every Sphinx content page. Ordinary articles use the unified reader in `_templates/reader-page.html`: one global masthead, a 760px reading column and an optional current-page outline. The dedicated left chapter rail remains only on the course route, where it represents an ordered lesson sequence rather than the entire website. The Blog homepage owns the pre-expanded category index. The existing article remains the visual reference; report content and scientific scope stay independently maintained. The separate browser application retains its own design system.
 
 **Key Characteristics:**
 
@@ -221,7 +221,7 @@ This system governs the Chinese and English research homepages, the MuJoCo learn
 - Original experiment media, native controls and explicit evidence boundaries.
 - A MuJoCo learning column with chapter navigation, explicit reading bookmarks and small teaching interactions.
 
-Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/site-chrome.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_templates/research-home.html`, `_templates/site-search.html`, `_templates/site-footer.html`, `docs/concept-atlas.json`, and `zh/index.md` / `en/index.md`. The Blog indexes use `zh/blog.md` and `en/blog.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
+Source of truth: `_static/research-palette.css`, `_static/research-home.css`, `_static/site-chrome.css`, `_static/concept-atlas.css`, `_static/concept-atlas.js`, `_templates/research-home.html`, `_templates/site-search.html`, `_templates/site-footer.html`, `docs/concept-atlas.json`, and the localized `research-overview.md` pages. The Blog uses `zh/index.md` and `en/index.md` inside the shared reader. The reference is `_static/research/dexterous-simulation.html`. Frontmatter contains implemented tokens. The sidecar adds component previews and responsive metadata; its tonal ramps are preview aids, not production colors.
 
 The learning surface uses `_static/simulation-learning.css`, `_templates/simulation-learning.html`, `_static/simulation-learning.js`, and both languages' `learning.md` / `mujoco-learning/` lessons. Its route contract is in the root `.impeccable/surfaces/mujoco-learning.md`. The shared reader uses `_static/reader-page.css`, `_templates/reader-page.html` and `_static/reader-page.js`; it imports the learning styles and the existing evidence-component styles before applying report-specific layout overrides.
 
@@ -372,7 +372,7 @@ Core reading keeps a (740px) prose measure but allows equivalent evidence groups
 
 ### Blog index and reading rows
 
-The bilingual Blog uses the shared reader with an 880px centered index and no section rail. The two visible groups are solver and simulation fundamentals and experimental findings. Fine rules separate article titles and their summaries. The homepage previews selected articles and links to the full Blog. Paper Sharing has its own navigation entry, with contextual links between the paper and related Blog articles.
+The bilingual Blog uses the shared reader with an 880px centered index and no section rail. The two visible groups are solver and simulation fundamentals and experimental findings. Fine rules separate article titles and their summaries. The homepage opens directly to this index. The masthead links to Paper Sharing and Docs alongside global search, language switching and GitHub. The research overview is linked from the Blog and Docs. Paper Sharing keeps contextual links to related Blog articles.
 
 ### Learning and knowledge bridges
 

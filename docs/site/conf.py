@@ -71,13 +71,13 @@ def setup(app):
         # Nested course pages need a language switch relative to their own route.
         context['other_language_root'] = '../' * (len(pagename.split('/')) + 1) + (
             'en/latest/' if app.config.language == 'zh_CN' else 'zh-cn/latest/')
-        if pagename == 'index':
+        if pagename == 'research-overview':
             context['homepage_is_chinese'] = app.config.language in ('zh_CN', 'zh')
             homepage = home_context('zh' if app.config.language == 'zh_CN' else 'en')
             context.update(homepage)
             marker = '<div id="concept-field-slot"></div>'
             if marker not in context['body']:
-                raise RuntimeError('Homepage concept-field slot is missing')
+                raise RuntimeError('Research overview concept-field slot is missing')
             context['body'] = context['body'].replace(
                 marker,
                 f'<div id="concept-field-slot">{homepage["concept_field_html"]}</div>',

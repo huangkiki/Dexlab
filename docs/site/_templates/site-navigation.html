@@ -1,0 +1,4 @@
+<nav aria-label="{{ '网站导航' if site_is_chinese else 'Site navigation' }}">
+  <a href="{{ pathto('paper-sharing') }}"{% if pagename == 'paper-sharing' %} aria-current="page"{% endif %}>Paper Sharing</a>
+  <a href="{{ pathto('about') }}"{% if pagename == 'about' %} aria-current="page"{% endif %}>{{ '文档' if site_is_chinese else 'Docs' }}</a>
+</nav>
