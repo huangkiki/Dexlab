@@ -1,4 +1,5 @@
-# Finish the last cut, then push with the blade
+(finish-the-last-cut-then-push-with-the-blade)=
+# How can we tell if a simulated cut fully separates tofu or banana?
 
 Two tofu cuts create three pieces; three banana cuts create four. After the last cut, the blade lifts just clear of the board, stays inside the kerf, pushes sideways, then withdraws. Every frame shows measured knife contact force and each material region’s x displacement from its initial position.
 

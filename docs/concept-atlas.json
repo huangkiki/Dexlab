@@ -211,9 +211,9 @@
       "updated": "2026-11-18",
       "topic": "physics-contact",
       "tags": {"zh": ["切割", "接触冲量", "分离"], "en": ["cutting", "contact impulse", "separation"]},
-      "name": {"zh": "最后一刀切完，直接用刀面推开", "en": "Finish the last cut, then push with the blade"},
+      "name": {"zh": "仿真里，怎么知道豆腐和香蕉真的切开了？", "en": "How can we tell if a simulated cut fully separates tofu or banana?"},
       "aliases": {"zh": ["切割与推动", "软材料切割"], "en": ["cutting and pushing", "soft-material cutting"]},
-      "summary": {"zh": "用连通性、刀面接触冲量和独立位移判断材料是否真的分离。", "en": "Use connectivity, blade-contact impulse and independent displacement to test whether material actually separated."},
+      "summary": {"zh": "用刀面侧推最后一块，检查它能否单独移动，以及切缝两边是否仍相连。", "en": "Push the last piece sideways with the blade and check whether it moves on its own and whether the two sides are still connected."},
       "relations": [{"type": "related", "target": "contact-force"}, {"type": "related", "target": "impulse"}, {"type": "related", "target": "task-success"}]
     },
     {
