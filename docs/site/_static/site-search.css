@@ -81,7 +81,9 @@
   color: var(--accent, var(--green, #4f664c));
 }
 
-.site-search-results mark {
+.site-search-results mark,
+#search-results mark {
   background: #dde8d5;
-  color: inherit;
+  color: var(--ink, #282b26);
+  font-weight: 600;
 }

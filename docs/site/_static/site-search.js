@@ -2,7 +2,112 @@
 (() => {
   "use strict";
 
-  if (!document.currentScript.hasAttribute("data-search-page")) {
+  const searchResultsPage = document.currentScript.hasAttribute("data-search-page");
+
+  // Sphinx looks for partial title matches even when the keyword is indexed in full text.
+  function queryMatches(query) {
+    const parsed = Search._parseQuery(query);
+    const [, terms, , words] = parsed;
+    const { terms: body, titleterms: titles, docnames } = Search._index;
+    const exact = new Map();
+    for (const term of terms) {
+      const files = [body, titles].flatMap((table) => Object.hasOwn(table, term) ? table[term] : []);
+      if (files.length) exact.set(term, new Set(files.map((file) => docnames[file])));
+    }
+
+    const required = [...exact.values()];
+    const results = Search._performSearch(...parsed).reverse().filter(([docName, , , , , , kind]) =>
+      kind !== SearchResultKind.text || required.every((docs) => docs.has(docName)),
+    );
+    const partial = [...terms].filter((term) => term.length > 2 && !exact.has(term));
+    const latinWord = /^[\p{Script=Latin}\p{Number}]+$/u;
+    const literal = [...words].filter((word) => !latinWord.test(word));
+    literal.sort((left, right) => right.length - left.length);
+    const tokens = new RegExp([...literal.map(_escapeRegExp), "[\\p{Script=Latin}\\p{Number}]+"].join("|"), "giu");
+    const stemmer = new Stemmer();
+
+    function findMatches(text) {
+      return [...text.matchAll(tokens)].filter(([token]) => {
+        const word = token.toLowerCase();
+        if (words.has(word)) return true;
+        if (!latinWord.test(word)) return false;
+        const stem = stemmer.stemWord(word);
+        return terms.has(stem) || partial.some((term) => stem.includes(term));
+      });
+    }
+
+    return { results, findMatches };
+  }
+
+  function highlight(element, text, matches, start = 0, end = text.length) {
+    let offset = start;
+    for (const { 0: word, index } of matches) {
+      if (index < start) continue;
+      if (index + word.length > end) break;
+      element.append(text.slice(offset, index));
+      const mark = document.createElement("mark");
+      mark.textContent = word;
+      element.append(mark);
+      offset = index + word.length;
+    }
+    element.append(text.slice(offset, end));
+  }
+
+  async function loadExcerpt(container, url, anchor, findMatches, signal) {
+    try {
+      const response = await fetch(url, { signal });
+      if (!response.ok) return;
+      const html = await response.text();
+      if (signal?.aborted) return;
+
+      const text = Search.htmlToText(html, anchor).replace(/\s+/g, " ").trim();
+      const matches = findMatches(text);
+      if (!matches.length) return;
+
+      const [first] = matches;
+      const start = Math.max(0, first.index - (signal ? 24 : 56));
+      const end = Math.min(text.length, first.index + first[0].length + (signal ? 90 : 150));
+      const excerpt = document.createElement(signal ? "span" : "p");
+      excerpt.className = signal ? "site-search-excerpt" : "context";
+      if (start) excerpt.append("…");
+      highlight(excerpt, text, matches, start, end);
+      if (end < text.length) excerpt.append("…");
+      container.append(excerpt);
+    } catch {
+      // A failed excerpt request leaves the result title and link available.
+    }
+  }
+
+  function renderResult([docName, title, anchor, description, score, , kind], searchPage, findMatches, signal) {
+    const item = document.createElement("li");
+    const link = item.appendChild(document.createElement("a"));
+    const url = new URL(`${docName}.html`, searchPage);
+    link.href = `${url}${anchor}`;
+    link.dataset.score = score;
+    item.classList.add(`kind-${kind}`);
+    highlight(link, title, findMatches(title));
+
+    const container = signal ? link : item;
+    if (description) {
+      const excerpt = container.appendChild(document.createElement("span"));
+      if (signal) excerpt.className = "site-search-excerpt";
+      const text = signal ? description : ` (${description})`;
+      highlight(excerpt, text, findMatches(text));
+    } else if (signal || DOCUMENTATION_OPTIONS.SHOW_SEARCH_SUMMARY) {
+      loadExcerpt(container, url, anchor, findMatches, signal);
+    }
+    return item;
+  }
+
+  if (searchResultsPage) {
+    Search.query = (query) => {
+      const { results, findMatches } = queryMatches(query);
+      for (const result of results) {
+        Search.output.append(renderResult(result, window.location.href, findMatches));
+      }
+      _finishSearch(results.length);
+    };
+  } else {
     // Sphinx's initializer clears the query field and expects a full results page.
     document.removeEventListener("DOMContentLoaded", Search.init);
     document.addEventListener("DOMContentLoaded", SphinxHighlight.highlightSearchWords);
@@ -70,54 +175,13 @@
       }
     }
 
-    function highlight(element, text, pattern) {
-      for (const [index, part] of text.split(pattern).entries()) {
-        if (index % 2 === 0) {
-          element.append(part);
-        } else {
-          const mark = document.createElement("mark");
-          mark.textContent = part;
-          element.append(mark);
-        }
-      }
-    }
-
-    function addExcerpt(link, text, pattern) {
-      const excerpt = document.createElement("span");
-      excerpt.className = "site-search-excerpt";
-      highlight(excerpt, text, pattern);
-      link.append(excerpt);
-    }
-
-    async function loadExcerpt(link, url, anchor, pattern, signal) {
-      try {
-        const response = await fetch(url, { signal });
-        if (!response.ok) return;
-        const html = await response.text();
-        if (signal.aborted) return;
-
-        const text = Search.htmlToText(html, anchor).replace(/\s+/g, " ").trim();
-        const match = text.search(pattern);
-        if (match < 0) return;
-
-        const start = Math.max(0, match - 24);
-        const end = Math.min(text.length, match + 96);
-        const excerpt = `${start ? "…" : ""}${text.slice(start, end).trim()}${end < text.length ? "…" : ""}`;
-        addExcerpt(link, excerpt, pattern);
-      } catch {
-        // The title remains a usable link when an excerpt cannot be loaded.
-      }
-    }
-
     async function showMatches(query, signal) {
       try {
         await loadIndex();
         if (signal.aborted) return;
 
-        const matches = Search._performSearch(...Search._parseQuery(query));
+        const { results: matches, findMatches } = queryMatches(query);
         const pages = new Set();
-        const words = query.split(/\s+/).sort((left, right) => right.length - left.length);
-        const pattern = new RegExp(`(${words.map(_escapeRegExp).join("|")})`, "giu");
 
         if (matches.length === 0) {
           showStatus(zh ? "没有匹配的文章" : "No matching pages");
@@ -125,21 +189,11 @@
         }
 
         showStatus(zh ? "匹配文章" : "Matching pages");
-        // Sphinx returns the best matches last. Show each article once.
-        for (const [docName, title, anchor, description] of matches.reverse()) {
+        for (const match of matches) {
+          const [docName] = match;
           if (pages.has(docName)) continue;
           pages.add(docName);
-
-          const url = new URL(`${docName}.html`, searchPage);
-          const link = document.createElement("a");
-          link.href = `${url}${anchor}`;
-          highlight(link, title, pattern);
-          addResult(link);
-          if (description) {
-            addExcerpt(link, description, pattern);
-          } else {
-            loadExcerpt(link, url, anchor, pattern, signal);
-          }
+          results.append(renderResult(match, searchPage, findMatches, signal));
           if (pages.size === 6) break;
         }
 
