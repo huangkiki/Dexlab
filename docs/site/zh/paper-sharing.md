@@ -9,3 +9,13 @@ Onur Beker、A. René Geist、Michael Posa、Marc Toussaint、Justin Carpentier�
 ```{raw} html
 <p><a href="_static/research/paper-sharing/complementarity-contact-models.zh-CN.html">阅读中文全译</a> · <a href="https://arxiv.org/html/2611.26600v1">arXiv v1 原文</a></p>
 ```
+
+## BladeMaster：在线生成持久不连续面的实时机器人切割仿真
+
+Zhanyu Yang、Yunuo Chen、Yanjia Huang、Joseph Masterjohn、Yin Yang、Chenfanfu Jiang
+
+把切割历史记在物质点上，使切口在撤刀后保持分离，切下的材料仍可独立操作和重新接触。
+
+```{raw} html
+<p><a href="_static/research/paper-sharing/blademaster/">阅读中文全译</a> · <a href="https://arxiv.org/html/2609.27342v2">arXiv v2 原文</a></p>
+```
