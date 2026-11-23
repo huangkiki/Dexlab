@@ -9,6 +9,7 @@ Solver configuration roles <solver-taxonomy>
 Solver synchronization and preCICE <solver-coupling>
 Co-evolution and model evaluation <model-evaluation>
 Actuator error versus contact load <neural-actuator>
+Contact laws and solver residuals <complementarity-contact-models>
 Visual goal-signal auditing <mask-conditioned-gcrl>
 Physical captions and reference coverage <physcapbench>
 Code as Policy topic <code-as-policy>

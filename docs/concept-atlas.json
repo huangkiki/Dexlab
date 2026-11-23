@@ -58,6 +58,20 @@
   },
   "concepts": [
     {
+      "id": "complementarity-contact-models",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "complementarity-contact-models.html",
+      "updated": "2026-11-23",
+      "topic": "physics-contact",
+      "tags": {"zh": ["摩擦", "锥互补", "接触松弛"], "en": ["friction", "cone complementarity", "contact relaxation"]},
+      "name": {"zh": "接触求解收敛了，滑块为什么还会离开桌面？", "en": "Why can a converged contact solver lift a block off the table?"},
+      "aliases": {"zh": ["接触模型精读", "de Saxcé 修正", "慢滑"], "en": ["contact tutorial", "de Saxcé correction", "creep"]},
+      "summary": {"zh": "用同一个解析滑块解释凸松弛的抬离和固定正则化的慢滑，定位接触定律与求解误差各自的证据。", "en": "Use a single analytical block to explain lift-off and creep, and identify the evidence for contact-law effects and solver error."},
+      "relations": [{"type": "related", "target": "contact"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "numerical-consistency"}]
+    },
+    {
       "id": "neural-actuator-topic",
       "group": "synthesis",
       "level": "core",
