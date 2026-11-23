@@ -43,17 +43,6 @@ a:hover { color: #173d2d; }
 .edition { margin-top: .8rem !important; }
 .ltx_abstract { padding: 0.1rem 0 .7rem; }
 .ltx_abstract h6 { font-size: 1.23rem; }
-nav {
-  padding: 1rem 1.3rem 1.15rem;
-  border: 1px solid var(--rule);
-  background: var(--panel);
-  border-radius: .35rem;
-  margin: 1.5rem 0 2.75rem;
-}
-nav h2 { margin: .15rem 0 .35rem; font-size: 1.15rem; }
-nav ul { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 2rem; }
-nav li { margin: .16rem 0; break-inside: avoid; }
-nav a { font-size: .9rem; }
 .ltx_title .ltx_tag { margin-right: .5em; }
 .ltx_itemize, .ltx_enumerate { padding-left: 1.45rem; }
 .ltx_section, .ltx_appendix, .ltx_bibliography { margin-top: 3rem; }
@@ -197,7 +186,392 @@ h1 { text-wrap: balance; }
   .equation-box .ltx_eqn_center_padright { display: none; }
   .equation-box .ltx_eqn_eqno { min-width: 3.8em; }
 }
-</style><link href="paper-bilingual.css" rel="stylesheet"/></head><body><article class="ltx_document ltx_authors_1line ltx_leqno">
+</style><link href="paper-bilingual.css" rel="stylesheet"/><link href="paper-index.css" rel="stylesheet"/>
+<script defer src="paper-index.js"></script>
+</head><body>
+<main class="paper-reader">
+<aside class="paper-index">
+  <details class="paper-index-panel">
+    <summary>
+      <span>目录</span>
+      <span class="paper-index-position">摘要</span>
+    </summary>
+    <nav aria-label="目录">
+      <ul>
+        <li><a href="#abstract1">
+          <span class="paper-en" lang="en">Abstract</span>
+          <span class="paper-zh" lang="zh-CN">摘要</span>
+        </a>
+        </li>
+        <li><a href="#S1">
+          <span class="paper-en" lang="en">Introduction</span>
+          <span class="paper-zh" lang="zh-CN">1. 引言</span>
+        </a>
+          <ul>
+            <li><a href="#S1.SS1">
+              <span class="paper-en" lang="en">Scope and Positioning</span>
+              <span class="paper-zh" lang="zh-CN">1.1. 范围与定位</span>
+            </a>
+              <ul>
+                <li><a href="#S1.SS1.SSS1">
+                  <span class="paper-en" lang="en">Relation to Existing Surveys and Tutorials</span>
+                  <span class="paper-zh" lang="zh-CN">1.1.1. 与现有综述和教程的关系</span>
+                </a>
+                </li>
+                <li><a href="#S1.SS1.SSS2">
+                  <span class="paper-en" lang="en">Time-stepping Methods and Impulse-Based Theories of Contact Dynamics</span>
+                  <span class="paper-zh" lang="zh-CN">1.1.2. 时间步进方法与基于冲量的接触动力学理论</span>
+                </a>
+                </li>
+                <li><a href="#S1.SS1.SSS3">
+                  <span class="paper-en" lang="en">Event-Driven Methods and Continuous-Time Theories of Contact Dynamics</span>
+                  <span class="paper-zh" lang="zh-CN">1.1.3. 事件驱动方法与连续时间接触动力学理论</span>
+                </a>
+                </li>
+                <li><a href="#S1.SS1.SSS4">
+                  <span class="paper-en" lang="en">Contact Formulations Beyond Cone Complementarity</span>
+                  <span class="paper-zh" lang="zh-CN">1.1.4. 锥互补之外的接触表述</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#S1.SS2">
+              <span class="paper-en" lang="en">Tutorial Content</span>
+              <span class="paper-zh" lang="zh-CN">1.2. 教程内容</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S2">
+          <span class="paper-en" lang="en">Background: Rigid-Body Simulation</span>
+          <span class="paper-zh" lang="zh-CN">2. 背景知识：刚体仿真</span>
+        </a>
+          <ul>
+            <li><a href="#S2.SS1">
+              <span class="paper-en" lang="en">Rigid-Body Dynamics</span>
+              <span class="paper-zh" lang="zh-CN">2.1. 刚体动力学</span>
+            </a>
+              <ul>
+                <li><a href="#S2.SS1.SSS1">
+                  <span class="paper-en" lang="en">Continuous Time</span>
+                  <span class="paper-zh" lang="zh-CN">2.1.1. 连续时间</span>
+                </a>
+                </li>
+                <li><a href="#S2.SS1.SSS2">
+                  <span class="paper-en" lang="en">Discrete Time</span>
+                  <span class="paper-zh" lang="zh-CN">2.1.2. 离散时间</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#S2.SS2">
+              <span class="paper-en" lang="en">Collision Detection</span>
+              <span class="paper-zh" lang="zh-CN">2.2. 碰撞检测</span>
+            </a>
+            </li>
+            <li><a href="#S2.SS3">
+              <span class="paper-en" lang="en">Further Notational Conventions</span>
+              <span class="paper-zh" lang="zh-CN">2.3. 其他记号约定</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S3">
+          <span class="paper-en" lang="en">Background on Conic Optimization</span>
+          <span class="paper-zh" lang="zh-CN">3. 锥优化基础</span>
+        </a>
+          <ul>
+            <li><a href="#S3.SS1">
+              <span class="paper-en" lang="en">Convex Cones</span>
+              <span class="paper-zh" lang="zh-CN">3.1. 凸锥</span>
+            </a>
+            </li>
+            <li><a href="#S3.SS2">
+              <span class="paper-en" lang="en">Circular Cones and Isotropic Friction</span>
+              <span class="paper-zh" lang="zh-CN">3.2. 圆锥与各向同性摩擦</span>
+            </a>
+            </li>
+            <li><a href="#S3.SS3">
+              <span class="paper-en" lang="en">Optimization Problems with Cone Constraints</span>
+              <span class="paper-zh" lang="zh-CN">3.3. 带锥约束的优化问题</span>
+            </a>
+            </li>
+            <li><a href="#S3.SS4">
+              <span class="paper-en" lang="en">Cone Complementarity Problems</span>
+              <span class="paper-zh" lang="zh-CN">3.4. 锥互补问题</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S4">
+          <span class="paper-en" lang="en">Problem Formulation</span>
+          <span class="paper-zh" lang="zh-CN">4. 问题的数学表述</span>
+        </a>
+          <ul>
+            <li><a href="#S4.SS1">
+              <span class="paper-en" lang="en">Exact Transcriptions</span>
+              <span class="paper-zh" lang="zh-CN">4.1. 精确转写</span>
+            </a>
+              <ul>
+                <li><a href="#S4.SS1.SSS1">
+                  <span class="paper-en" lang="en">Signorini–Coulomb Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">4.1.1. Signorini–Coulomb 转写</span>
+                </a>
+                </li>
+                <li><a href="#S4.SS1.SSS2">
+                  <span class="paper-en" lang="en">Nonlinear Cone Complementarity (N-CCP) Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">4.1.2. 非线性锥互补（N-CCP）转写</span>
+                </a>
+                </li>
+                <li><a href="#S4.SS1.SSS3">
+                  <span class="paper-en" lang="en">Root-Finding Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">4.1.3. 求根转写</span>
+                </a>
+                </li>
+                <li><a href="#S4.SS1.SSS4">
+                  <span class="paper-en" lang="en">Cascaded Quadratically Constrained Quadratic Program (C-QCQP) Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">4.1.4. 级联二次约束二次规划（C-QCQP）转写</span>
+                </a>
+                </li>
+                <li><a href="#S4.SS1.SSS5">
+                  <span class="paper-en" lang="en">Coupled Quadratic Program (QP) Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">4.1.5. 耦合二次规划（QP）转写</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#S4.SS2">
+              <span class="paper-en" lang="en">Convex Relaxations</span>
+              <span class="paper-zh" lang="zh-CN">4.2. 凸松弛</span>
+            </a>
+              <ul>
+                <li><a href="#S4.SS2.SSS1">
+                  <span class="paper-en" lang="en">Linear Cone Complementarity (L-CCP) and QCQP Transcriptions</span>
+                  <span class="paper-zh" lang="zh-CN">4.2.1. 线性锥互补（L-CCP）与 QCQP 转写</span>
+                </a>
+                </li>
+                <li><a href="#S4.SS2.SSS2">
+                  <span class="paper-en" lang="en">Nonlinear Least Squares (NLS) Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">4.2.2. 非线性最小二乘（NLS）转写</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#S4.SS3">
+              <span class="paper-en" lang="en">Physical Interpretations of the Convex Relaxation</span>
+              <span class="paper-zh" lang="zh-CN">4.3. 凸松弛的物理解释</span>
+            </a>
+              <ul>
+                <li><a href="#S4.SS3.SSS1">
+                  <span class="paper-en" lang="en">NLS Optimality Conditions as Inverse Dynamics</span>
+                  <span class="paper-zh" lang="zh-CN">4.3.1. 将 NLS 最优性条件解释为逆动力学</span>
+                </a>
+                </li>
+                <li><a href="#S4.SS3.SSS2">
+                  <span class="paper-en" lang="en">Kinetic Energy Minimization Perspective</span>
+                  <span class="paper-zh" lang="zh-CN">4.3.2. 动能最小化视角</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S5">
+          <span class="paper-en" lang="en">Algorithmic Solutions</span>
+          <span class="paper-zh" lang="zh-CN">5. 求解算法</span>
+        </a>
+          <ul>
+            <li><a href="#S5.SS1">
+              <span class="paper-en" lang="en">Convex Relaxations</span>
+              <span class="paper-zh" lang="zh-CN">5.1. 凸松弛</span>
+            </a>
+              <ul>
+                <li><a href="#S5.SS1.SSS1">
+                  <span class="paper-en" lang="en">L-CCP Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">5.1.1. L-CCP 转写</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS1.SSS2">
+                  <span class="paper-en" lang="en">QCQP Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">5.1.2. QCQP 转写</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS1.SSS3">
+                  <span class="paper-en" lang="en">NLS Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">5.1.3. NLS 转写</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#S5.SS2">
+              <span class="paper-en" lang="en">Exact Transcriptions</span>
+              <span class="paper-zh" lang="zh-CN">5.2. 精确转写</span>
+            </a>
+              <ul>
+                <li><a href="#S5.SS2.SSS1">
+                  <span class="paper-en" lang="en">Signorini–Coulomb Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.1. Signorini–Coulomb 转写</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS2.SSS2">
+                  <span class="paper-en" lang="en">N-CCP Transcription: Projected Gauss–Seidel</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.2. N-CCP 转写：投影 Gauss–Seidel 法</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS2.SSS3">
+                  <span class="paper-en" lang="en">N-CCP Transcription: Nonsmooth Newton</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.3. N-CCP 转写：非光滑 Newton 法</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS2.SSS4">
+                  <span class="paper-en" lang="en">Root-Finding Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.4. 求根转写</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS2.SSS5">
+                  <span class="paper-en" lang="en">Coupled Quadratic Program (C-QP) Transcription</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.5. 耦合二次规划（C-QP）转写</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS2.SSS6">
+                  <span class="paper-en" lang="en">Rank Deficiency and Proximal Minimization</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.6. 秩亏与近端最小化</span>
+                </a>
+                </li>
+                <li><a href="#S5.SS2.SSS7">
+                  <span class="paper-en" lang="en">C-QCQP with Proximal Minimization</span>
+                  <span class="paper-zh" lang="zh-CN">5.2.7. 采用近端最小化的 C-QCQP</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S6">
+          <span class="paper-en" lang="en">Comparative Analysis</span>
+          <span class="paper-zh" lang="zh-CN">6. 对比分析</span>
+        </a>
+          <ul>
+            <li><a href="#S6.SS1">
+              <span class="paper-en" lang="en">Existence and Uniqueness of Solutions</span>
+              <span class="paper-zh" lang="zh-CN">6.1. 解的存在性和唯一性</span>
+            </a>
+            </li>
+            <li><a href="#S6.SS2">
+              <span class="paper-en" lang="en">Physical Trade-offs Between the Transcriptions</span>
+              <span class="paper-zh" lang="zh-CN">6.2. 不同转写的物理取舍</span>
+            </a>
+            </li>
+            <li><a href="#S6.SS3">
+              <span class="paper-en" lang="en">Trade-offs Between the Solution Algorithms</span>
+              <span class="paper-zh" lang="zh-CN">6.3. 求解算法的取舍</span>
+            </a>
+            </li>
+            <li><a href="#S6.SS4">
+              <span class="paper-en" lang="en">Implementations on CPUs and GPUs</span>
+              <span class="paper-zh" lang="zh-CN">6.4. CPU 和 GPU 上的实现</span>
+            </a>
+            </li>
+            <li><a href="#S6.SS5">
+              <span class="paper-en" lang="en">Choosing a Transcription and a Solver</span>
+              <span class="paper-zh" lang="zh-CN">6.5. 转写与求解器的选择</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S7">
+          <span class="paper-en" lang="en">Beyond Forward Simulation: Ongoing Developments and Future Perspectives</span>
+          <span class="paper-zh" lang="zh-CN">7. 正向仿真之外：当前进展与未来展望</span>
+        </a>
+          <ul>
+            <li><a href="#S7.SS1">
+              <span class="paper-en" lang="en">Contact Models for Planning and Optimal Control</span>
+              <span class="paper-zh" lang="zh-CN">7.1. 面向规划与最优控制的接触模型</span>
+            </a>
+            </li>
+            <li><a href="#S7.SS2">
+              <span class="paper-en" lang="en">Differentiable Simulation</span>
+              <span class="paper-zh" lang="zh-CN">7.2. 可微仿真</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#S8">
+          <span class="paper-en" lang="en">Conclusion</span>
+          <span class="paper-zh" lang="zh-CN">8. 结论</span>
+        </a>
+        </li>
+        <li><a href="#Sx1">
+          <span class="paper-en" lang="en">Acknowledgements</span>
+          <span class="paper-zh" lang="zh-CN">致谢</span>
+        </a>
+        </li>
+        <li><a href="#bib">
+          <span class="paper-en" lang="en">References</span>
+          <span class="paper-zh" lang="zh-CN">参考文献</span>
+        </a>
+        </li>
+        <li><a href="#A1">
+          <span class="paper-en" lang="en">The Linear Complementarity Based Formulation</span>
+          <span class="paper-zh" lang="zh-CN">附录 A 基于线性互补的表述</span>
+        </a>
+          <ul>
+            <li><a href="#A1.SS1">
+              <span class="paper-en" lang="en">Linear Complementarity Problems</span>
+              <span class="paper-zh" lang="zh-CN">A.1. 线性互补问题</span>
+            </a>
+            </li>
+            <li><a href="#A1.SS2">
+              <span class="paper-en" lang="en">Converting N-CCP Conditions to LCP Conditions</span>
+              <span class="paper-zh" lang="zh-CN">A.2. 将 N-CCP 条件转化为 LCP 条件</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#A2">
+          <span class="paper-en" lang="en">A (Not so) Brief History of Cone Complementarity Based Contact Models</span>
+          <span class="paper-zh" lang="zh-CN">附录 B 锥互补接触模型简史（并不算短）</span>
+        </a>
+          <ul>
+            <li><a href="#A2.SS1">
+              <span class="paper-en" lang="en">Early Beginnings and the Continuous-Time Formulation</span>
+              <span class="paper-zh" lang="zh-CN">B.1. 早期工作与连续时间表述</span>
+            </a>
+            </li>
+            <li><a href="#A2.SS2">
+              <span class="paper-en" lang="en">Branching Due to the Pathologies of the Continuous-Time Formulation</span>
+              <span class="paper-zh" lang="zh-CN">B.2. 连续时间表述的病态及其引出的不同路线</span>
+            </a>
+              <ul>
+                <li><a href="#A2.SS2.SSS1">
+                  <span class="paper-en" lang="en">Further developments of the frictionless theory</span>
+                  <span class="paper-zh" lang="zh-CN">B.2.1. 无摩擦理论的后续发展</span>
+                </a>
+                </li>
+                <li><a href="#A2.SS2.SSS2">
+                  <span class="paper-en" lang="en">Event-driven simulation</span>
+                  <span class="paper-zh" lang="zh-CN">B.2.2. 事件驱动仿真</span>
+                </a>
+                </li>
+                <li><a href="#A2.SS2.SSS3">
+                  <span class="paper-en" lang="en">Emergence of the impulse-based theory</span>
+                  <span class="paper-zh" lang="zh-CN">B.2.3. 冲量理论的兴起</span>
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#A2.SS3">
+              <span class="paper-en" lang="en">Emergence of the Modern Discrete Time-Stepping Methods</span>
+              <span class="paper-zh" lang="zh-CN">B.3. 现代离散时间步进方法的兴起</span>
+            </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </details>
+</aside>
+<article class="ltx_document ltx_authors_1line ltx_leqno">
 <p class="paper-series"><a href="../../../paper-sharing.html"><span aria-hidden="true">← </span>Paper sharing</a></p>
 <h1 class="ltx_title ltx_title_document paper-pair"><span class="paper-en" data-paper-language="heading" lang="en">A Tutorial on Complementarity-Based
 <br class="ltx_break"/>Contact Models for Robotics：</span>
@@ -214,19 +588,7 @@ h1 { text-wrap: balance; }
 <p class="ltx_p paper-pair" id="abstract1.1"><span class="paper-en" data-paper-language="prose" lang="en">Simulating rigid-body dynamics with contact is fundamental to robotics, from motion synthesis and control to mechanism design. Many widely used simulators rely on cone complementarity formulations, whose physical assumptions and numerical solution require substantial background. While excellent surveys, monographs, and course notes exist, they mostly address computational mechanics or computer graphics, or document a single simulator. To the best of our knowledge, a self-contained pedagogical treatment for robotics, bringing these formulations and their solvers together with complete derivations and a unified notation, does not yet exist. This tutorial addresses this gap by connecting rigid-body dynamics, conic optimization, and frictional contact.
 In particular, we explain how complementarity conditions encode non-penetration and frictional dissipation, determining separation, sticking, and sliding without prescribed contact modes. We distinguish equivalent transcriptions from convex relaxations, showing how the latter can introduce artifacts such as lift-off and creep. We examine existence and uniqueness of motion and contact forces, including the solver’s role in selecting among multiple solutions. We then compare first-order and Newton-based methods, explain regularization and proximal strategies, and discuss trade-offs between computational cost, robustness, and physical fidelity. Connections to widely used simulators, optimal control, and differentiable simulation help readers interpret simulation results, choose suitable formulations and solvers, and develop their own contact dynamics routines.</span>
 <span class="paper-zh" data-paper-language="prose" lang="zh-CN">含接触的刚体动力学仿真是机器人学的基础，应用涵盖运动生成、控制和机构设计。许多广泛使用的仿真器采用锥互补表述。理解这些表述的物理假设和数值求解，需要相当扎实的背景知识。虽然已有一些优秀的综述、专著和课程讲义，但它们大多面向计算力学或计算机图形学，或只介绍某一个仿真器。据我们所知，目前还没有一份面向机器人学、可以独立阅读的教程，能够在统一记号下完整推导这些表述及其求解方法。本教程将刚体动力学、锥优化与摩擦接触联系起来，以填补这一空白。具体而言，我们说明互补条件如何表达不穿透和摩擦耗散，从而在无需预先指定接触模式的情况下确定接触是分离、粘着还是滑动。我们区分等价转写与凸松弛，并说明凸松弛如何引入抬离和慢滑等伪象。我们考察运动和接触力的存在性与唯一性，包括存在多个解时求解器如何影响解的选择。随后，我们比较一阶方法与基于 Newton 法的方法，解释正则化和近端策略，并讨论计算代价、稳健性与物理保真度之间的取舍。通过与常用仿真器、最优控制和可微仿真建立联系，本教程帮助读者解读仿真结果，选择适当的表述和求解器，并开发自己的接触动力学求解程序。</span></p>
-</div><nav aria-label="目录"><h2>目录</h2><ul><li><a href="#S1"><span class="paper-en" data-paper-language="toc" lang="en">Introduction</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">1. 引言</span></a></li><li><a href="#S2"><span class="paper-en" data-paper-language="toc" lang="en">Background: Rigid-Body Simulation</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">2. 背景知识：刚体仿真</span></a></li><li><a href="#S3"><span class="paper-en" data-paper-language="toc" lang="en">Background on Conic Optimization</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">3. 锥优化基础</span></a></li><li><a href="#S4"><span class="paper-en" data-paper-language="toc" lang="en">Problem Formulation</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">4. 问题的数学表述</span></a></li><li><a href="#S5"><span class="paper-en" data-paper-language="toc" lang="en">Algorithmic Solutions</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">5. 求解算法</span></a></li><li><a href="#S6"><span class="paper-en" data-paper-language="toc" lang="en">Comparative Analysis</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">6. 对比分析</span></a></li><li><a href="#S7"><span class="paper-en" data-paper-language="toc" lang="en">Beyond Forward Simulation: Ongoing Developments and Future Perspectives</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">7. 正向仿真之外：当前进展与未来展望</span></a></li><li><a href="#S8"><span class="paper-en" data-paper-language="toc" lang="en">Conclusion</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">8. 结论</span></a></li><li><a href="#Sx1"><span class="paper-en" data-paper-language="toc" lang="en">Acknowledgements</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">致谢</span></a></li><li><a href="#bib"><span class="paper-en" data-paper-language="toc" lang="en">References</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">参考文献</span></a></li><li><a href="#A1"><span class="paper-en" data-paper-language="toc" lang="en">The Linear Complementarity Based Formulation</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">附录 A 基于线性互补的表述</span></a></li><li><a href="#A2"><span class="paper-en" data-paper-language="toc" lang="en">A (Not so) Brief History of Cone Complementarity Based Contact Models</span>
-<span class="paper-zh" data-paper-language="toc" lang="zh-CN">附录 B 锥互补接触模型简史（并不算短）</span></a></li></ul></nav>
+</div>
 <section class="ltx_section" id="S1">
 <h2 class="ltx_title ltx_title_section paper-pair"><span class="paper-en" data-paper-language="heading" lang="en">Introduction</span>
 <span class="paper-zh" data-paper-language="heading" lang="zh-CN"><span class="ltx_tag ltx_tag_section">1. </span> 引言</span></h2>
@@ -7831,4 +8193,6 @@ This relaxation, however, comes at the cost of a physical artifact: sliding cont
 </div>
 </section>
 </section>
-</article></body></html>
+</article>
+</main>
+</body></html>
