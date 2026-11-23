@@ -1,8 +1,11 @@
 # Paper sharing：论文分享
 
+(recommendations-2026-11)=
+## <span lang="en">November 2026 Picks</span>：<br><span lang="zh-CN">2026 年 11 月推荐</span>
+
 (id1)=
 (a-tutorial-on-complementarity-based-contact-models-for-robotics)=
-## <span lang="en">A Tutorial on Complementarity-Based Contact Models for Robotics</span>：<br><span lang="zh-CN">机器人学中的互补接触模型教程</span>
+### <span lang="en">A Tutorial on Complementarity-Based Contact Models for Robotics</span>：<br><span lang="zh-CN">机器人学中的互补接触模型教程</span>
 
 Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Georg Martius
 
@@ -18,10 +21,13 @@ Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Geo
 </ul>
 ```
 
+(recommendations-2026-10)=
+## <span lang="en">October 2026 Picks</span>：<br><span lang="zh-CN">2026 年 10 月推荐</span>
+
 (blademaster)=
 (blademaster-real-time-robotic-cutting-simulation-with-online-generated-persistent-discontinuities)=
 (blademaster-paper)=
-## <span lang="en">BladeMaster: Real-Time Robotic Cutting Simulation with Online-Generated Persistent Discontinuities</span>：<br><span lang="zh-CN">在线生成持久不连续面的实时机器人切割仿真</span>
+### <span lang="en">BladeMaster: Real-Time Robotic Cutting Simulation with Online-Generated Persistent Discontinuities</span>：<br><span lang="zh-CN">在线生成持久不连续面的实时机器人切割仿真</span>
 
 Zhanyu Yang, Yunuo Chen, Yanjia Huang, Joseph Masterjohn, Yin Yang, Chenfanfu Jiang
 

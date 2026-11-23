@@ -378,6 +378,8 @@ The bilingual Blog uses the shared reader with an 880px centered index and no se
 
 Store each full text as a standalone HTML source with a single `article` inside the `body` in [`_static/research/paper-sharing/`](_static/research/paper-sharing/). Add its bilingual title, description and links in [`paper-sharing-content.md`](paper-sharing-content.md), which serves both site languages.
 
+Group papers by recommendation month, newest first. Give each bilingual month heading a stable `recommendations-YYYY-MM` anchor and place the papers under it as subheadings.
+
 Use `.paper-pair` on each passage with consecutive `.paper-en[lang="en"]` and `.paper-zh[lang="zh-CN"]` children. End the English span of the main title with `：`. Give each nested `section` its original ID and an immediate bilingual heading. Keep the original figures, equations, tables, numbers and cross-references in the article, and include `.translation-meta` with an `.authors` credit and the versioned arXiv link.
 
 The strict site build runs [`paper_sharing.py`](../../scripts/paper_sharing.py) for every paper source. It checks bilingual pairs, authorship, the arXiv link and section anchors. It builds the static outline from the article headings and applies the shared paper styles and scroll tracking. At 1000px and wider the outline sticks to the left and highlights the current chapter or subsection. At smaller widths a native disclosure sticks to the top and shows the current location when folded. Chapter links work without JavaScript, and print leaves the full article visible.
