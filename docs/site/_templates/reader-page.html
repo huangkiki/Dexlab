@@ -16,9 +16,8 @@
   {%- for script in script_files %}
     {{ js_tag(script) }}
   {%- endfor %}
+  {% include "site-search-assets.html" %}
   {%- if pagename == 'search' %}
-  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
-  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
   <script src="{{ pathto('searchindex.js', 1) }}" defer></script>
   <meta name="robots" content="noindex">
   {%- endif %}

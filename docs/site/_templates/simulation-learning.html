@@ -1,7 +1,7 @@
 {% set zh = learning_is_chinese %}
 {% set label_index = 1 if zh else 2 %}
 <!doctype html>
-<html lang="{{ 'zh-CN' if zh else 'en' }}">
+<html lang="{{ 'zh-CN' if zh else 'en' }}" data-content_root="{{ content_root }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="{{ pathto('_static/simulation-learning.css', 1) }}">
   <link rel="stylesheet" href="{{ pathto('_static/site-chrome.css', 1) }}">
   <script src="{{ pathto('_static/simulation-learning.js', 1) }}" defer></script>
+  <script src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
+  <script src="{{ pathto('_static/doctools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/sphinx_highlight.js', 1) }}"></script>
+  <script src="{{ pathto('_static/translations.js', 1) }}"></script>
+  {% include "site-search-assets.html" %}
 </head>
 <body data-lesson="{{ pagename }}">
   <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>

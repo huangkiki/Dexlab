@@ -1,0 +1,87 @@
+[data-site-search] {
+  position: relative;
+}
+
+.site-search-results {
+  position: absolute;
+  inset-block-start: calc(100% + 8px);
+  inset-inline-start: 0;
+  z-index: 1;
+  width: min(max(100%, 25rem), calc(100vw - 44px));
+  max-height: min(28rem, 56vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  border: 1px solid var(--rule, #dcded4);
+  border-radius: 12px;
+  background: var(--paper, var(--page, #fafaf6));
+  box-shadow: 0 12px 28px rgb(40 43 38 / 14%);
+  color: var(--ink, #282b26);
+  font: 400 14px/1.5 var(--sans, Arial, sans-serif);
+}
+
+@media (min-width: 1181px) {
+  .site-header .site-search-results {
+    inset-inline: auto 0;
+  }
+}
+
+.site-search-results > p {
+  margin: 4px 8px;
+  color: var(--muted, #60675a);
+  font-size: 12px;
+}
+
+.site-search-results ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-search-results a,
+.site-search-results button {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px;
+  border-radius: 6px;
+  color: var(--ink, #282b26);
+  font: inherit;
+  font-weight: 600;
+  text-align: start;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.site-search-results a:hover,
+.site-search-results a:focus-visible,
+.site-search-results button:hover,
+.site-search-results button:focus-visible {
+  background: var(--panel, #f0f1eb);
+  text-decoration: none;
+}
+
+.site-search-results :is(a, button):focus-visible {
+  outline-offset: -2px;
+}
+
+.site-search-excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 2px;
+  color: var(--muted, #60675a);
+  font-size: 12px;
+  font-weight: 400;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.site-search-results .site-search-more {
+  color: var(--accent, var(--green, #4f664c));
+}
+
+.site-search-results mark {
+  background: #dde8d5;
+  color: inherit;
+}
