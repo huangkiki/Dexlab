@@ -6,7 +6,13 @@
         <div class="author-card-copy">
           <p class="author-kicker">{{ 'DEXLAB / 作者' if site_is_chinese else 'DEXLAB / AUTHOR' }}</p>
           <p class="author-name" id="site-author-name"><a href="https://github.com/huangkiki" rel="me">Kiki Huang</a></p>
-          <p class="author-project"><strong>{{ 'DexLab 是我的个人研究项目。' if site_is_chinese else 'DexLab is my personal research project.' }}</strong> {{ '它探索智能体技能与仿真如何通过实验相互促进。' if site_is_chinese else 'It explores how Agent Skills and simulation can improve each other through experiments.' }}</p>
+          <p class="author-project">
+            <strong>{% if pagename == 'paper-sharing' %}<a href="{{ pathto('index') }}">DexLab</a>{% else %}DexLab{% endif %}{{ ' 是我的个人研究项目。' if site_is_chinese else ' is my personal research project.' }}</strong>
+            {{ '它探索智能体技能与仿真如何通过实验相互促进。' if site_is_chinese else 'It explores how Agent Skills and simulation can improve each other through experiments.' }}
+            {% if pagename == 'paper-sharing' %}
+            {{ '以实验暴露问题，以证据限定结论。' if site_is_chinese else 'Experiments expose problems, and evidence bounds conclusions.' }}
+            {% endif %}
+          </p>
         </div>
       </div>
       <address class="author-card-contact">

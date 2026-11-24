@@ -620,6 +620,7 @@ body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption 
 [data-reader-page="paper-sharing"] .reader-layout {
   grid-template-columns: minmax(0, 1fr);
   max-width: 1040px;
+  padding-block-end: 24px;
 }
 
 :is([data-reader-page="blog"], [data-reader-page="paper-sharing"]) .lesson-article {
@@ -640,9 +641,6 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
 }
 
 #paper-sharing > section {
-  display: grid;
-  grid-template-columns: 168px minmax(0, 1fr);
-  column-gap: 16px;
   padding: 28px 0 24px;
   border-top: 1px solid var(--rule);
 }
@@ -658,17 +656,11 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
 }
 
 #paper-sharing h2 {
-  grid-column: 1;
-  grid-row: 1;
-  margin: .25rem 0 0;
+  margin: 0 0 16px;
   color: var(--green);
   font: 600 14px/1.5 var(--sans);
   letter-spacing: normal;
   font-variant-numeric: tabular-nums;
-}
-
-#paper-sharing > section > section {
-  grid-column: 2;
 }
 
 #paper-sharing > section > section + section {
@@ -743,7 +735,6 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
   }
 
   #paper-sharing > section {
-    column-gap: 32px;
     padding-block: 36px;
   }
 
@@ -767,6 +758,10 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
     grid-column: 2;
     grid-row: 1 / span 2;
   }
+
+  .paper-sharing-summary p {
+    text-wrap: balance;
+  }
 }
 
 /* Allow catalog links to clear the masthead when it wraps. */
@@ -788,17 +783,11 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
   }
 
   #paper-sharing > section {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 12px;
     padding-block: 20px 18px;
   }
 
   #paper-sharing h2 {
-    margin: 0;
-  }
-
-  #paper-sharing > section > section {
-    grid-column: 1;
+    margin-bottom: 12px;
   }
 }
 
