@@ -1,4 +1,5 @@
 {% set zh = reader_is_chinese %}
+{% set show_article_navigation = pagename not in ('blog', 'paper-sharing') %}
 <!doctype html>
 <html lang="{{ 'zh-CN' if zh else 'en' }}" data-content_root="{{ content_root }}">
 <head>
@@ -51,7 +52,7 @@
       {% else %}
       {{ body }}
       {% endif %}
-      {% if pagename != 'blog' %}
+      {% if show_article_navigation %}
       <nav class="lesson-pagination" aria-label="{{ '前后文章' if zh else 'Adjacent pages' }}">
         {% if prev %}
         <a href="{{ prev.link|e }}"><small>{{ '上一篇' if zh else 'Previous' }}</small>{{ prev.title|striptags }}</a>
@@ -66,7 +67,7 @@
         <p>{{ '以实验暴露问题，以证据限定结论。' if zh else 'Expose problems through experiments; bound conclusions with evidence.' }}</p>
       </footer>
     </main>
-    {% if pagename != 'blog' %}<aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>{% endif %}
+    {% if show_article_navigation %}<aside class="section-rail" aria-label="{{ '本页内容' if zh else 'On this page' }}">{{ toc }}</aside>{% endif %}
   </div>
   {% include "site-footer.html" %}
 </body>

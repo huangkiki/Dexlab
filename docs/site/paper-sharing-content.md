@@ -1,7 +1,7 @@
-# Paper sharing：论文分享
+# <span class="paper-sharing-local"><span lang="en">Paper sharing</span><span class="paper-sharing-separator">：</span><span lang="zh-CN">论文分享</span></span>
 
 (recommendations-2026-11)=
-## <span lang="en">November 2026 Picks</span>：<br><span lang="zh-CN">2026 年 11 月推荐</span>
+## <span class="paper-sharing-local"><span lang="en">November 2026 Picks</span><span class="paper-sharing-separator">：</span><span lang="zh-CN">2026 年 11 月推荐</span></span>
 
 (id1)=
 (a-tutorial-on-complementarity-based-contact-models-for-robotics)=
@@ -22,7 +22,7 @@ Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Geo
 ```
 
 (recommendations-2026-10)=
-## <span lang="en">October 2026 Picks</span>：<br><span lang="zh-CN">2026 年 10 月推荐</span>
+## <span class="paper-sharing-local"><span lang="en">October 2026 Picks</span><span class="paper-sharing-separator">：</span><span lang="zh-CN">2026 年 10 月推荐</span></span>
 
 (blademaster)=
 (blademaster-real-time-robotic-cutting-simulation-with-online-generated-persistent-discontinuities)=
