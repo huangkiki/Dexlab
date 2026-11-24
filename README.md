@@ -2,7 +2,7 @@
 
 **Contact-rich robot manipulation, beyond rigid-body simulation.**
 
-[Blog](https://huangkiki.github.io/Dexlab/en/latest/blog.html) · [Research overview](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Sim-to-Real Gap](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html)
+[Blog](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Research overview](https://huangkiki.github.io/Dexlab/zh-cn/latest/index.html) · [Experiments](https://huangkiki.github.io/Dexlab/en/latest/experiments.html) · [Sim-to-Real Gap](https://huangkiki.github.io/Dexlab/en/latest/failure-root-cause-atlas.html) · [Learn simulation](https://huangkiki.github.io/Dexlab/en/latest/learning.html)
 
 DexLab is my personal research project exploring how Agent Skills and simulation can improve each other.
 
