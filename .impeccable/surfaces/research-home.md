@@ -1,19 +1,19 @@
 # Research homepage
 
-Mode: Read. Code-led implementation. Scope: bilingual homepages, their template, stylesheet and evidence interaction. The homepage is a research entrance whose first screen contains one primary index action, followed by the system architecture, a five-case evidence inspector and open continuation links.
+Mode: Read. Code-led implementation. Scope: bilingual homepages, their template, stylesheet and evidence interaction. The homepage opens with the project motto, then the architecture, three failure examples, the concept field and the existing research index.
 
 ## Direction contract
 
-THESIS: Make the space between arrival and the full index readable. The visitor sees the system architecture, understands how failures become checked findings, and meets the actual article titles while scrolling; the canonical Blog remains the exhaustive catalogue.
+THESIS: Make the space between arrival and the full index readable. Readers see the architecture, follow a task failure to its evidence and reach the linked articles. The canonical Blog holds the complete catalogue.
 
-OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif display title and fine rules. Use an editorial long page, a native-radio evidence index and open ruled rows; no cards, gradients or decorative depth.
+OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif display title and fine rules. Use a long editorial page with open ruled rows.
 
-STORY: The architecture shows the path from tasks to scoring. The representative-experiment evidence inspector then keeps each recorded view beside its control variable, native readback, criterion/result and scope. Five reading threads open direct experiment records. RSI remains a direction without claiming a completed autonomous loop.
+STORY: The architecture shows the path from tasks to scoring. The three opening cases trace failures to simulation numerics, a scene constraint and the evaluation procedure. The conclusion connects agent learning with evidence for improving simulation. The five representative experiments keep each recorded view beside its control variable, native readback, criterion and scope.
 
-FIRST VIEWPORT: A horizontal masthead, oversized DexLab title, two-line research thesis, short scope note, one ruled index action and a quiet downward cue. The primary action remains visible without requiring the motion layer. Mobile preserves the same order, with the scroll cue moved into normal flow.
+FIRST VIEWPORT: A horizontal masthead with an oversized DexLab title and a two-line research motto. The architecture fits the same content width as the cases and concept field. Mobile preserves the order and fits the diagram within the page.
 
 FORM: User-directed editorial scroll, matching the existing article. No concept tournament or generated comp. Seed: none (user-pinned).
 
-MOTION: Content is visible from first paint. The thin page-progress rule is the only passive scroll response. Evidence cases switch immediately through native radio selection; videos remain user-started. There is no page-load fade, blur, stagger, parallax or automatic entrance. Reduced motion requires no special fallback because no nonessential spatial animation remains.
+MOTION: Sections fade in and rise slightly near the bottom of the viewport. The concept field uses its original scroll and hover behaviour. Opening OVRTX GIFs have still-frame alternatives for reduced motion, and their video links are user-started. The full reading order works without JavaScript.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

@@ -2,33 +2,72 @@
 
 ```{raw} html
 <div class="home story-home" id="top">
-<section class="story-hero" aria-labelledby="home-heading">
-  <div class="hero-copy">
+<div class="home-opening">
+  <header class="story-hero" aria-labelledby="home-heading">
     <h1 id="home-heading">DexLab<span>.</span></h1>
-    <p class="hero-thesis"><span>Agents and simulation,</span><strong>improving together through experiments.</strong></p>
-    <p class="hero-lead">Experiments connect tasks, execution, contact dynamics, evidence tracking and failure attribution into one reproducible research chain: humans set goals and boundaries while agents participate in question discovery, experiment design and iteration.</p>
-    <p class="hero-scope"><strong>Current scope</strong> Findings establish reproducible physical consistency within frozen simulation models. Autonomous experiment loops and physical-robot validation are the next evidence layer; no hardware dataset is included yet.</p>
-  </div>
-</section>
-
-<section class="architecture-view" aria-labelledby="architecture-heading">
-  <header class="architecture-intro">
-    <h2 id="architecture-heading">From a task<br>to checkable evidence.</h2>
-    <p>DexLab puts tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring on one path. Observations and failure records return to skill and simulation improvement for the next experiment.</p>
+    <p class="hero-thesis">Agents and simulation,<br><strong>improving together through experiments.</strong></p>
   </header>
-  <figure class="architecture-figure">
-    <p class="architecture-scroll-hint">Scroll horizontally to view the full architecture</p>
-    <div class="architecture-scroll" tabindex="0" role="region" aria-label="DexLab system architecture diagram, horizontally scrollable">
-      <a class="architecture-image-link" href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="Open the original DexLab architecture image">
-        <picture>
-          <source srcset="../../zh-cn/latest/_static/images/dexlab-architecture.webp" type="image/webp">
-          <img src="../../zh-cn/latest/_static/images/dexlab-architecture.png" width="1774" height="887" loading="eager" decoding="async" alt="DexLab architecture: tasks and protocols, systems under test, action execution, environment backends, evidence and scoring, and the observation loop returning to system improvement">
-        </picture>
-      </a>
-    </div>
-    <figcaption><span>The system view: tasks enter the execution stack and physics backends; observations and evidence return to skill and simulation improvement. On mobile, scroll horizontally or open the original image.</span><a href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener">Open original</a></figcaption>
+
+  <figure id="architecture" class="home-overview" data-home-reveal aria-label="DexLab architecture">
+    <a id="architecture-heading" href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="Open the original DexLab architecture image">
+      <picture>
+        <source srcset="../../zh-cn/latest/_static/images/dexlab-architecture.webp" type="image/webp">
+        <img src="../../zh-cn/latest/_static/images/dexlab-architecture.png" width="1774" height="887" loading="eager" decoding="async" alt="DexLab architecture, from tasks, systems under test, execution and simulation backends to evidence and scoring, with results feeding back into system improvements.">
+      </picture>
+    </a>
   </figure>
-</section>
+
+  <div class="experiment-intro" data-home-reveal>
+    <p class="opening"><strong>A task can fail<br>for reasons beyond the policy.</strong></p>
+    <p>Numerical errors in the simulation, scene constraints and the evaluation procedure can all affect the result.</p>
+  </div>
+
+  <section id="genesis" aria-label="Genesis incline experiment">
+    <p class="case-copy" data-home-reveal><strong>The solver can stop while forces and motion still disagree.</strong> In the incline experiment, the block starts at rest. The Genesis <strong>CG</strong> solver stops when the improvement per iteration falls below its stopping threshold. At step 106, the block’s change in momentum differs from the combined impulse of gravity and contact forces by <strong class="measure">3.32 × 10⁻⁷ N·s</strong>. That is <strong>3.32 times</strong> the acceptance limit of <strong class="measure">1.00 × 10⁻⁷ N·s</strong>.</p>
+    <figure data-home-reveal>
+      <picture>
+        <source media="(max-width:600px) and (prefers-reduced-motion: reduce)" width="560" height="844" srcset="../../zh-cn/latest/_static/homepage-evidence/genesis-incline-mobile.jpg">
+        <source media="(prefers-reduced-motion: reduce)" srcset="../../zh-cn/latest/_static/homepage-evidence/genesis-incline.jpg">
+        <source media="(max-width:600px)" width="560" height="844" srcset="../../zh-cn/latest/_static/homepage-evidence/genesis-incline-mobile.gif">
+        <img width="1080" height="420" loading="lazy" src="../../zh-cn/latest/_static/homepage-evidence/genesis-incline.gif" alt="OVRTX incline replay synchronized with the measured residual. At step 106 the residual is 3.32 × 10⁻⁷ N·s, above the 1.00 × 10⁻⁷ N·s acceptance limit.">
+      </picture>
+      <figcaption>15° incline with a 1 ms step. The OVRTX replay and measured residual are synchronized and pause at step 106 before looping. <a class="figure-links" href="../../zh-cn/latest/_static/homepage-evidence/genesis-incline.gif">Original GIF</a> · <a href="../../zh-cn/latest/_static/homepage-evidence/genesis-incline.mp4">Video</a></figcaption>
+    </figure>
+    <p class="sources"><a href="https://github.com/huangkiki/Dexlab/blob/7363a9c5b1af2fb1045b132b545f098e03ae5194/docs/genesis-incline-results.md">Incline experiment</a></p>
+  </section>
+
+  <section id="sponge" aria-label="Dual-arm sponge wiping">
+    <p class="case-copy" data-home-reveal><strong>Completing the wiping task depended on an extra grasp constraint in the simulation.</strong> After the grippers close on the sponge, a compliant constraint makes a small patch of the sponge follow the grippers. Both conditions use the same controller and solver settings: <strong>MJWarp’s Newton solver</strong> for rigid bodies and <strong>SuperDex’s Newton solver</strong> for the sponge, with <strong>CG</strong> configured for the inner solve. With the assist, <strong>3/3 trials passed</strong>. Without it, the sponge slipped during wiping, the controller stopped early after detecting lost pressing contact, and <strong>0/3 trials passed</strong>.</p>
+    <figure data-home-reveal>
+      <picture>
+        <source media="(prefers-reduced-motion: reduce)" srcset="../../zh-cn/latest/_static/homepage-evidence/sponge-wiping.jpg">
+        <img width="1042" height="294" loading="lazy" src="../../zh-cn/latest/_static/homepage-evidence/sponge-wiping.gif" alt="Side-by-side dual-arm wiping replays. The grasp assist is enabled on the left. The sponge slips during wiping with the assist removed on the right.">
+      </picture>
+      <figcaption>
+        <span class="caption-pair"><span>With assist · 95.5% cleaned</span><span>Without assist · 39.9% cleaned</span></span>
+        First recorded trial in each condition, simulation time 14–41.25 s, OVRTX replay at 2× speed. <a class="figure-links" href="../../zh-cn/latest/_static/homepage-evidence/sponge-wiping.mp4">Video</a>
+      </figcaption>
+    </figure>
+    <p class="sources"><a href="rss-wiping.html">Sponge wiping comparison</a></p>
+  </section>
+
+  <section id="libero" aria-label="LIBERO standalone evaluation">
+    <p class="case-copy" data-home-reveal><strong>Before the first action, the evaluation can already be using a stale observation.</strong> LIBERO’s official standalone evaluation script saves an observation when it sets the initial state, then advances the simulation for five settling steps. During those steps, the robot end effector’s Y coordinate changes by <strong class="measure">4.481 mm</strong>. The script discards the newer observations, so <strong>the policy computes its first action from the observation before settling, and the simulator applies it to the state after settling</strong>.</p>
+    <figure data-home-reveal>
+      <picture>
+        <source media="(prefers-reduced-motion: reduce)" srcset="../../zh-cn/latest/_static/homepage-evidence/libero-first-observation.jpg">
+        <img width="1122" height="432" loading="lazy" src="../../zh-cn/latest/_static/homepage-evidence/libero-first-observation.gif" alt="Native replay of LIBERO’s five settling steps. The end effector’s Y coordinate changes by 4.481 mm while the stored evaluation input remains at step 0.">
+      </picture>
+      <figcaption>
+        <span class="caption-pair"><span>State in the old observation</span><span>Current simulation state</span></span>
+        OVRTX replays from the same camera. The end effector’s Y coordinate changes by 4.481 mm in five steps. The clip ends before the first policy action. <a class="figure-links" href="../../zh-cn/latest/_static/homepage-evidence/libero-first-observation.mp4">Video</a>
+      </figcaption>
+    </figure>
+    <p class="sources"><a href="libero-workflow-report.html">LIBERO workflow audit</a> · <a href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/libero/lifelong/evaluate.py#L260-L273">Standalone evaluation source</a></p>
+  </section>
+
+  <p id="conclusion" class="opening" data-home-reveal><strong>Agents learn from simulation feedback,<br>and their recorded behaviour in experiments provides evidence for testing and correcting the simulation model.</strong></p>
+</div>
 
 <section class="concept-entry" aria-label="Concept field and experiment entry">
   <div id="concept-field-slot"></div>

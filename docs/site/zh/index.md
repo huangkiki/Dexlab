@@ -2,33 +2,66 @@
 
 ```{raw} html
 <div class="home story-home" id="top">
-<section class="story-hero" aria-labelledby="home-heading">
-  <div class="hero-copy">
+<div class="home-opening">
+  <header class="story-hero" aria-labelledby="home-heading">
     <h1 id="home-heading">DexLab<span>.</span></h1>
-    <p class="hero-thesis"><span>让智能体与仿真，</span><strong>在实验中共同进化。</strong></p>
-    <p class="hero-lead">实验把任务、执行、接触动力学、证据追踪和失败归因串成一条可复核的研究链：人设定目标与边界，智能体参与问题发现、实验设计与迭代。</p>
-    <p class="hero-scope"><strong>当前范围</strong> 结论来自冻结仿真模型内可复验的物理一致性；自主实验闭环与真机验证是下一层证据门槛，尚无真机实验数据。</p>
-  </div>
-</section>
-
-<section class="architecture-view" aria-labelledby="architecture-heading">
-  <header class="architecture-intro">
-    <h2 id="architecture-heading">从任务，<br>到可复核的证据。</h2>
-    <p>DexLab 把任务与协议、被测系统、动作执行、环境后端和证据评分放在同一条链上。观测与失败记录再返回技能和仿真，形成下一轮实验。</p>
+    <p class="hero-thesis">让智能体与仿真，<br><strong>在实验中共同进化。</strong></p>
   </header>
-  <figure class="architecture-figure">
-    <p class="architecture-scroll-hint">横向滑动查看完整架构</p>
-    <div class="architecture-scroll" tabindex="0" role="region" aria-label="DexLab 系统架构图，可横向滚动">
-      <a class="architecture-image-link" href="_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="打开 DexLab 架构图原图">
-        <picture>
-          <source srcset="_static/images/dexlab-architecture.webp" type="image/webp">
-          <img src="_static/images/dexlab-architecture.png" width="1774" height="887" loading="eager" decoding="async" alt="DexLab 架构图：任务与协议、被测系统、动作执行、环境后端、证据与评分，以及返回系统改进的观测链">
-        </picture>
-      </a>
-    </div>
-    <figcaption><span>系统全景：任务进入执行栈与物理后端，观测和证据返回技能与仿真改进。移动端可横向滑动，也可以打开原图。</span><a href="_static/images/dexlab-architecture.png" target="_blank" rel="noopener">查看原图</a></figcaption>
+
+  <figure class="home-overview" data-home-reveal id="architecture" aria-label="DexLab 架构图">
+    <a id="architecture-heading" href="_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="打开 DexLab 架构图原图">
+      <picture>
+        <source srcset="_static/images/dexlab-architecture.webp" type="image/webp">
+        <img src="_static/images/dexlab-architecture.png" width="1774" height="887" loading="eager" decoding="async" alt="DexLab 架构，从任务、被测系统、动作执行和环境后端，到证据与评分，再用实验结果改进系统。">
+      </picture>
+    </a>
   </figure>
-</section>
+
+  <div class="experiment-intro" data-home-reveal>
+    <p class="opening"><strong>任务失败，<br>并不一定是策略的问题。</strong></p>
+    <p>也可能是仿真本身的数值问题，或是场景约束与评测流程影响了结果。</p>
+  </div>
+
+  <section id="genesis" aria-label="Genesis 斜面实验">
+    <p class="case-copy" data-home-reveal><strong><span>求解器停止迭代时，</span><span>力和运动仍可能对不上。</span></strong> 在斜面实验中，方块从静止开始。Genesis 的 <strong>CG</strong> 在迭代改进量低于停止阈值时退出。第 106 步，方块的动量变化与重力和接触力产生的总冲量相差 <strong class="measure">3.32 × 10⁻⁷ N·s</strong>，是验收上限 <strong class="measure">1.00 × 10⁻⁷ N·s</strong> 的 <strong>3.32 倍</strong>。</p>
+    <figure data-home-reveal>
+      <picture>
+        <source media="(max-width:600px) and (prefers-reduced-motion: reduce)" width="560" height="844" srcset="_static/homepage-evidence/genesis-incline-mobile.jpg">
+        <source media="(prefers-reduced-motion: reduce)" srcset="_static/homepage-evidence/genesis-incline.jpg">
+        <source media="(max-width:600px)" width="560" height="844" srcset="_static/homepage-evidence/genesis-incline-mobile.gif">
+        <img width="1080" height="420" loading="lazy" src="_static/homepage-evidence/genesis-incline.gif" alt="OVRTX 斜面回放与实测残差同步。第 106 步的残差为 3.32 × 10⁻⁷ N·s，验收线为 1.00 × 10⁻⁷ N·s。">
+      </picture>
+      <figcaption>15° 斜面，步长 1 ms。OVRTX 回放与实测曲线同步，到第 106 步停留后循环。<a class="figure-links" href="_static/homepage-evidence/genesis-incline.gif">GIF 原图</a> · <a href="_static/homepage-evidence/genesis-incline.mp4">视频</a></figcaption>
+    </figure>
+    <p class="sources"><a href="https://github.com/huangkiki/Dexlab/blob/7363a9c5b1af2fb1045b132b545f098e03ae5194/docs/genesis-incline-results.zh-CN.md">斜面实验</a></p>
+  </section>
+
+  <section id="sponge" aria-label="双臂海绵擦拭">
+    <p class="case-copy" data-home-reveal><strong><span>完成这项擦拭任务，</span><span>依赖仿真额外施加的抓持约束。</span></strong> 双臂实验中，夹爪夹住海绵后，仿真用柔顺约束牵住一小片海绵，让它随夹爪移动。两组沿用同一控制器和求解配置，刚体侧用 <strong>MJWarp 的 Newton</strong>，海绵侧用 <strong>SuperDex 的 Newton</strong>，内层按源码配置选用 <strong>CG</strong>。有辅助时 <strong>3/3 通过</strong>。撤去辅助后，海绵在擦拭中滑脱，控制器因压靠失败提前结束擦拭，<strong>0/3 通过</strong>。</p>
+    <figure data-home-reveal>
+      <picture><source media="(prefers-reduced-motion: reduce)" srcset="_static/homepage-evidence/sponge-wiping.jpg"><img width="1042" height="294" loading="lazy" src="_static/homepage-evidence/sponge-wiping.gif" alt="双臂海绵擦拭并排回放。左侧保留辅助，右侧撤去后在擦拭过程中滑脱"></picture>
+      <figcaption>
+        <span class="caption-pair"><span>有辅助 · 清洁率 95.5%</span><span>撤去辅助 · 清洁率 39.9%</span></span>
+        两组第一次记录，仿真 14–41.25 秒，OVRTX 回放 2 倍速。<a class="figure-links" href="_static/homepage-evidence/sponge-wiping.mp4">视频</a>
+      </figcaption>
+    </figure>
+    <p class="sources"><a href="rss-wiping.html">海绵擦拭对照</a></p>
+  </section>
+
+  <section id="libero" aria-label="LIBERO 独立评测">
+    <p class="case-copy" data-home-reveal><strong><span>首条动作还没发出，</span><span>评测流程就可能</span><span>让观测落后于仿真。</span></strong> LIBERO 的官方独立评测脚本在设置初态时保存了一份观测，随后让仿真静置五步。期间，机械臂末端的 Y 坐标变化了 <strong class="measure">4.481 mm</strong>。脚本丢弃了这五步返回的新观测，于是<strong>策略用静置前的观测算出第一条动作，仿真从静置后的状态执行它</strong>。</p>
+    <figure data-home-reveal>
+      <picture><source media="(prefers-reduced-motion: reduce)" srcset="_static/homepage-evidence/libero-first-observation.jpg"><img width="1122" height="432" loading="lazy" src="_static/homepage-evidence/libero-first-observation.gif" alt="LIBERO 五步静置的原生复现，末端 Y 坐标变化 4.481 mm，评测输入保留在第 0 步"></picture>
+      <figcaption>
+        <span class="caption-pair"><span>旧观测对应的状态</span><span>仿真当前状态</span></span>
+        OVRTX 同机位回放。五步之后，末端 Y 坐标变化 4.481 mm。片段止于首条策略动作之前。<a class="figure-links" href="_static/homepage-evidence/libero-first-observation.mp4">视频</a>
+      </figcaption>
+    </figure>
+    <p class="sources"><a href="libero-workflow-report.html">LIBERO 流程审计</a> · <a href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/libero/lifelong/evaluate.py#L260-L273">独立评测源码</a></p>
+  </section>
+
+  <p id="conclusion" class="opening" data-home-reveal><strong>智能体从仿真反馈中学习，<br>实验中的行为记录又为检验和修正仿真模型提供证据。</strong></p>
+</div>
 
 <section class="concept-entry" aria-label="概念墙与实验入口">
   <div id="concept-field-slot"></div>

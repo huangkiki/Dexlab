@@ -11,7 +11,9 @@
   <script src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
   <script src="{{ pathto('_static/doctools.js', 1) }}"></script>
   <script src="{{ pathto('_static/sphinx_highlight.js', 1) }}"></script>
+  {% if homepage_is_chinese %}
   <script src="{{ pathto('_static/translations.js', 1) }}"></script>
+  {% endif %}
   {% include "site-search-assets.html" %}
   <script src="{{ pathto('_static/concept-atlas.js', 1) }}" defer></script>
   <script src="{{ pathto('_static/research-home.js', 1) }}" defer></script>
