@@ -71,4 +71,14 @@
 
   作者的抓苹果案例里，目标区域能提供什么反馈，遮挡和定位偏差又会带来什么问题。
 
+- [DONIC 的双手跟踪分，能看出交接成功吗？](donic-bimanual-tracking.md)
+
+  从一次杯子交接看，怎样用接触与传力证据解释跟踪分。
+
 [更多实验与证据](experiments.md) · [灵巧操作仿真研究导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) · [Paper Sharing](paper-sharing.md)
+
+```{toctree}
+:hidden:
+
+donic-bimanual-tracking
+```

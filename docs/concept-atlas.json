@@ -189,6 +189,20 @@
       "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "positive-negative-control"}]
     },
     {
+      "id": "donic-bimanual-tracking",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "donic-bimanual-tracking.html",
+      "updated": "2026-11-24",
+      "topic": "skills-evaluation",
+      "tags": {"zh": ["双手操作", "参考跟踪", "接触交接"], "en": ["bimanual manipulation", "reference tracking", "contact handoff"]},
+      "name": {"zh": "DONIC 的双手跟踪分，能看出交接成功吗？", "en": "Can a DONIC tracking score tell whether a handoff succeeded?"},
+      "aliases": {"zh": ["DONIC", "双手交接"], "en": ["DONIC", "bimanual handoff"]},
+      "summary": {"zh": "用杯子交接解释参考跟踪、实际接触与阶段任务结果各需要什么证据。", "en": "A cup handoff shows what evidence is needed for reference tracking, contact, and the phase outcome."},
+      "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
+    },
+    {
       "id": "cloth-topic",
       "group": "synthesis",
       "level": "core",

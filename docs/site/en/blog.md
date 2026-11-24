@@ -71,4 +71,14 @@ Solver fundamentals and findings from simulation experiments.
 
   The authors’ apple grasp illustrates how a goal mask supplies feedback and how localization errors can affect it.
 
+- [Can a DONIC tracking score tell whether a handoff succeeded?](donic-bimanual-tracking.md)
+
+  A cup handoff shows what contact and support observations add to a tracking score.
+
 [More experiments and evidence](experiments.md) · [Dexterous-hand simulation guide](dexterous-hand-simulation.md) · [Paper Sharing](paper-sharing.md)
+
+```{toctree}
+:hidden:
+
+donic-bimanual-tracking
+```

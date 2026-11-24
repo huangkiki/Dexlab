@@ -119,7 +119,7 @@
 | 工作与核查入口 | 共享什么、怎样学习 | 结果应该怎样理解 |
 | --- | --- | --- |
 | [FlashDexRetarget · v2](https://arxiv.org/html/2610.01849v2) | 多参考 FlashSAC；左右手各有 actor–critic，每侧参数跨示范共享。几何、距离和未来参考帮助区分交互。 | 已有多示范联合训练，没有 SuperMimic 式可微 WM。论文的 CHORD 对照使用 PPO，不能将其加速比移植到当前 FlashCHORD。 |
-| [DONIC · v1](https://arxiv.org/html/2610.29997v1) | PPO + BC、接触角色奖励与成功轨迹回收；共享双手跟踪策略。 | 最大训练集合为 3,420 条参考。同一冻结 checkpoint 分别评估未见轨迹与未见物体，与训练期间累计转换数不同。 |
+| [DONIC · v1](https://arxiv.org/html/2610.29997v1) | PPO + BC、接触角色奖励与成功轨迹回收；共享双手跟踪策略。 | 公共训练池为 1,845 段，加入 BiHOI 后共 3,420 段。冻结策略分别评估未见轨迹与留出物体。[双手跟踪与交接评测](https://huangkiki.github.io/Dexlab/zh-cn/latest/donic-bimanual-tracking.html)。 |
 | [ReDexT · 官方项目页](https://aim-uofa.github.io/ReDexT/) | 共享残差策略根据执行反馈修正 IK 命令，支持冻结执行和整批适应。 | 每种手分别训练一套策略，跨该手的轨迹共享；共享适应后的结果不是零样本泛化。 |
 | [Dex-SuperMimic · 仓库快照](https://github.com/CumulusAlpha/Dex-Supermimic/blob/2becb7380fed86171056f9bf4338b2a6a0c14b01/README.md) | 学习到的 WM、想象 rollout 与策略更新用于 Wuji 手转方块、转笔。 | 三个任务配置不等于一个权重联合完成三个任务，也没有建立 CHORD 多示范规模的结果。 |
 | [rethinking-supermimic · 仓库快照](https://github.com/btx0424/rethinking-supermimic/blob/c2b1126e1de9990354290c2c231481b29bc265db/README.md) | 接入 Weave / Weave XHand 手—物参考，提供基于学习模型的策略更新入口。 | 数据与训练接口属于实现证据；所查 README 未报告新增手—物任务的成功率或加速基准。 |
