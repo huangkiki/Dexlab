@@ -157,6 +157,12 @@ main > section > h1 {
   gap: 24px;
 }
 
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .home {
   position: relative;
   z-index: 1;
