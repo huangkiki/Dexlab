@@ -380,7 +380,7 @@ Store each full text as a standalone HTML source with a single `article` inside 
 
 Group papers by recommendation month, newest first. Give each bilingual month heading a stable `recommendations-YYYY-MM` anchor and place the papers under it as subheadings.
 
-The catalog uses the same reading width as the Blog. On desktop, a narrow date column sits beside the papers, with a fine rule between months. On small screens, the date appears above its papers. Page and month labels and reading links follow the site language. Paper titles and summaries show English above Chinese, with author credit and the versioned source grouped with each paper.
+The catalog separates months with fine rules. At 1200px and wider, the date, paper title and authors, and summary and reading links occupy three columns across the page. At narrower widths, the summary and links sit below the title and authors. On phones, the date also moves above its papers. Page and month labels and reading links follow the site language. Paper titles and summaries show English above Chinese, with author credit and the versioned source grouped with each paper.
 
 Use `.paper-pair` on each passage with consecutive `.paper-en[lang="en"]` and `.paper-zh[lang="zh-CN"]` children. End the English span of the main title with `：`. Give each nested `section` its original ID and an immediate bilingual heading. Keep the original figures, equations, tables, numbers and cross-references in the article, and include `.translation-meta` with an `.authors` credit and the versioned arXiv link.
 

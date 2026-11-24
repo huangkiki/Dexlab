@@ -612,9 +612,14 @@ body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption 
   }
 }
 
-:is([data-reader-page="blog"], [data-reader-page="paper-sharing"]) .reader-layout {
+[data-reader-page="blog"] .reader-layout {
   grid-template-columns: minmax(0, 800px);
   max-width: 880px;
+}
+
+[data-reader-page="paper-sharing"] .reader-layout {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1040px;
 }
 
 :is([data-reader-page="blog"], [data-reader-page="paper-sharing"]) .lesson-article {
@@ -730,6 +735,38 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
 
 .paper-sharing-links li:first-child a {
   font-weight: 700;
+}
+
+@media screen and (min-width: 1200px) {
+  [data-reader-page="paper-sharing"] .reader-layout {
+    max-width: 1280px;
+  }
+
+  #paper-sharing > section {
+    column-gap: 32px;
+    padding-block: 36px;
+  }
+
+  #paper-sharing > section > section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 40px;
+    align-items: start;
+  }
+
+  #paper-sharing > section > section > :is(h3, p) {
+    grid-column: 1;
+  }
+
+  #paper-sharing h3 + p {
+    margin-bottom: 0;
+  }
+
+  .paper-sharing-detail {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
 }
 
 /* Allow catalog links to clear the masthead when it wraps. */
