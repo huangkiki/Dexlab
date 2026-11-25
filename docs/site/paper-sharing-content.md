@@ -31,11 +31,11 @@ Sheldon Andrews, Kenny Erleben, Zachary Ferguson · ACM SIGGRAPH 2022 Courses ·
 ```{raw} html
 <div class="paper-sharing-detail">
   <div class="paper-sharing-summary">
-    <p lang="en">A course on how simulators detect contact, model friction, and compute a response. The reading guide points to chapters for missed contacts, unstable resting contacts, and deformable bodies.</p>
-    <p lang="zh-CN">讲义把接触仿真拆成碰撞检测、接触与摩擦建模、数值求解。导读按漏检、静止接触不稳和可变形物体等问题，指向原文对应章节。</p>
+    <p lang="en">Worked examples explain missed contacts, how much push makes a block slide, and why stacked bodies need several solver sweeps. The notes also cover cloth, rope, and directional friction, with links to the course chapters.</p>
+    <p lang="zh-CN">用算例讲清为什么会漏检、推多大力会滑、两个叠放的方块为什么要迭代多轮，再讲布料、绳子和方向相关的摩擦。每节都附讲义页码。</p>
   </div>
   <ul class="paper-sharing-links">
-    <li><a href="contact-friction-siggraph-2022.html"><span lang="en">Read the bilingual guide</span><span lang="zh-CN">阅读中英导读</span></a></li>
+    <li><a href="contact-friction-siggraph-2022.html"><span lang="en">Read the bilingual technical notes</span><span lang="zh-CN">阅读中英技术笔记</span></a></li>
     <li><a href="https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf" hreflang="en"><span lang="en">Course notes PDF</span><span lang="zh-CN">作者版讲义 PDF</span></a></li>
     <li><a href="https://doi.org/10.1145/3532720.3535640" hreflang="en"><span lang="en">ACM publication</span><span lang="zh-CN">ACM 正式出版页</span></a></li>
   </ul>
