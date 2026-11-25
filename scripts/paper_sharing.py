@@ -51,7 +51,7 @@ def outline_html(sections, depth=3):
     return "\n".join(lines)
 
 
-def render_paper(source, asset_path):
+def render_paper(source, asset_path, paper_id):
     page = BeautifulSoup(source, "html.parser")
     if page.body is None or [tag.name for tag in page.body.find_all(recursive=False)] != ["article"]:
         raise ValueError("Paper sources must contain one article directly inside the body")
@@ -97,10 +97,17 @@ def render_paper(source, asset_path):
     return (
         f'{head}<link href="{assets}/paper-bilingual.css" rel="stylesheet"/>\n'
         f'<link href="{assets}/paper-index.css" rel="stylesheet"/>\n'
+        f'<link href="{assets}/paper-notes.css" rel="stylesheet"/>\n'
         f'<script defer src="{assets}/paper-index.js"></script>\n'
+        f'<script defer src="{assets}/paper-notes.js"></script>\n'
         f"{end_head}{body[:opening.end()]}\n"
-        '<main class="paper-reader">\n'
+        f'<main class="paper-reader" data-paper-id="{escape(paper_id)}">\n'
         '<aside class="paper-index">\n'
+        '  <div class="paper-notes-tools" hidden>\n'
+        '    <button type="button" data-paper-highlight title="选中正文后高亮">高亮选中</button>\n'
+        '    <button type="button" data-paper-notes-open aria-haspopup="dialog">笔记</button>\n'
+        '    <p class="paper-notes-feedback" role="status"></p>\n'
+        '  </div>\n'
         '  <details class="paper-index-panel">\n'
         "    <summary>\n"
         "      <span>目录</span>\n"
@@ -111,7 +118,17 @@ def render_paper(source, asset_path):
         "    </nav>\n"
         "  </details>\n"
         "</aside>\n"
-        f"{body[opening.end():].strip()}\n</main>\n{end_body}{footer}"
+        f"{body[opening.end():].strip()}\n</main>\n"
+        '<dialog class="paper-notes" aria-labelledby="paper-notes-title">\n'
+        '  <header>\n'
+        '    <h2 id="paper-notes-title">阅读笔记</h2>\n'
+        '    <form method="dialog"><button type="submit" autofocus>关闭</button></form>\n'
+        '  </header>\n'
+        '  <p class="paper-notes-hint">选中论文文字后点击「高亮选中」。摘录保存在当前浏览器。</p>\n'
+        '  <p class="paper-notes-message" role="status"></p>\n'
+        '  <div class="paper-notes-list"></div>\n'
+        '</dialog>\n'
+        f"{end_body}{footer}"
     )
 
 
@@ -122,7 +139,9 @@ def prepare_paper_readers(site):
         destination = path.relative_to(site)
         try:
             rendered[destination] = render_paper(
-                path.read_text(encoding="utf-8"), relpath(directory, path.parent)
+                path.read_text(encoding="utf-8"),
+                relpath(directory, path.parent),
+                path.relative_to(directory).as_posix(),
             )
         except ValueError as error:
             raise ValueError(f"{destination}: {error}") from error

@@ -9,6 +9,7 @@ colors:
   muted: '#60675a'
   rule: '#dcded4'
   media: '#111820'
+  paper-highlight: '#f6e6aa'
 typography:
   hero-display:
     fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
@@ -387,6 +388,8 @@ Use `.paper-pair` on each passage with consecutive `.paper-en[lang="en"]` and `.
 The strict site build runs [`paper_sharing.py`](../../scripts/paper_sharing.py) for every paper source. It checks bilingual pairs, authorship, the arXiv link and section anchors. It builds the static outline from the article headings and applies the shared paper styles and scroll tracking. At 1000px and wider the outline sticks to the left and highlights the current chapter or subsection. At smaller widths a native disclosure sticks to the top and shows the current location when folded. Chapter links work without JavaScript, and print leaves the full article visible.
 
 Outline labels use the article's local Simplified Chinese serif faces at 15px where available, with a native Chinese fallback. English labels use a smaller sans-serif face. The folded mobile outline uses the same Chinese font stack for the current location.
+
+Every full-text reader offers a selection highlight and a shared reading notebook. The toolbar sits above the desktop outline and beside the mobile outline. Saved highlights use the paper highlight color. The notebook groups excerpts by paper and links each excerpt back to its source. Excerpts stay in this site's browser storage. The reader checks the exact quote before restoring its position and preserves the excerpt if the paper has changed.
 
 ### Learning and knowledge bridges
 
