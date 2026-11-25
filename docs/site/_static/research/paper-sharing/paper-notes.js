@@ -7,6 +7,10 @@
   const tools = reader.querySelector(".paper-notes-tools");
   const notesButton = tools.querySelector("[data-paper-notes-open]");
   const feedback = tools.querySelector(".paper-notes-feedback");
+  const guide = reader.querySelector(".paper-highlight-guide");
+  const highlightMenu = document.querySelector(".paper-highlight-menu");
+  const highlightQuote = highlightMenu?.querySelector(".paper-highlight-quote");
+  const removeHighlight = highlightMenu?.querySelector("button");
   const dialog = document.querySelector(".paper-notes");
   if (typeof dialog.showModal !== "function") return;
 
@@ -16,8 +20,11 @@
   const fragmentPrefix = "#paper-note-";
   const highlightName = "dexlab-paper-note";
   const canPaint = Boolean(window.CSS?.highlights && window.Highlight);
+  const canRemoveInPaper = canPaint && typeof highlightMenu?.showPopover === "function";
   const touchSelection = matchMedia("(pointer: coarse)");
   let notes = [];
+  let paintedNotes = [];
+  let highlightToRemove = null;
   let selectionPointer = null;
   let selectionTimer = 0;
 
@@ -119,6 +126,55 @@
     return node;
   }
 
+  function removeNote(note) {
+    try {
+      localStorage.removeItem(storagePrefix + note.id);
+    } catch {
+      const error = "删除失败，请检查浏览器的本地存储设置。";
+      if (dialog.open) message.textContent = error;
+      else report(error);
+      return false;
+    }
+    message.textContent = "";
+    refresh();
+    return true;
+  }
+
+  function hitsHighlightedText(range, target, x, y) {
+    if (!range.intersectsNode(target)) return false;
+
+    // A range spanning multiple elements also reports their full box rectangles.
+    const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+    const textRange = document.createRange();
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!range.intersectsNode(node)) continue;
+      textRange.setStart(node, node === range.startContainer ? range.startOffset : 0);
+      textRange.setEnd(node, node === range.endContainer ? range.endOffset : node.length);
+      if (!textRange.collapsed && Array.from(textRange.getClientRects()).some((rect) =>
+        rect.left <= x && x < rect.right && rect.top <= y && y < rect.bottom)) return true;
+    }
+    return false;
+  }
+
+  function openHighlightMenu(event) {
+    if (event.defaultPrevented || event.pointerType === "touch" || !article.contains(event.target)) return;
+    const { clientX: x, clientY: y } = event;
+    const hit = paintedNotes.find(({ range }) => hitsHighlightedText(range, event.target, x, y));
+    if (!hit) return;
+
+    event.preventDefault();
+    cancelSelectionTimer();
+    window.getSelection()?.removeAllRanges();
+    highlightToRemove = hit.note;
+    highlightQuote.textContent = hit.note.quote.replace(/\s+/g, " ");
+    if (!highlightMenu.matches(":popover-open")) highlightMenu.showPopover();
+    const { width, height } = highlightMenu.getBoundingClientRect();
+    const viewport = document.documentElement;
+    highlightMenu.style.left = `${Math.max(4, Math.min(x, viewport.clientWidth - width - 4))}px`;
+    highlightMenu.style.top = `${Math.max(4, Math.min(y, viewport.clientHeight - height - 4))}px`;
+    removeHighlight.focus({ preventScroll: true });
+  }
+
   function renderList() {
     list.replaceChildren();
     if (!notes.length) {
@@ -148,15 +204,7 @@
       const remove = element("button", "删除");
       remove.type = "button";
       remove.addEventListener("click", () => {
-        try {
-          localStorage.removeItem(storagePrefix + note.id);
-        } catch {
-          message.textContent = "删除失败，请检查浏览器的本地存储设置。";
-          return;
-        }
-        message.textContent = "";
-        refresh();
-        dialog.querySelector("button").focus();
+        if (removeNote(note)) dialog.querySelector("button").focus();
       });
       actions.append(jump, remove);
       item.append(quote, actions);
@@ -176,14 +224,18 @@
       return;
     }
 
+    if (guide) guide.hidden = false;
     article.removeAttribute("data-paper-selection-saved");
     notesButton.textContent = notes.length ? `笔记 ${notes.length}` : "笔记";
     if (canPaint) {
       const highlight = new Highlight();
+      paintedNotes = [];
       for (const note of notes) {
         if (note.paper !== paperId) continue;
         const range = rangeFor(note);
-        if (range) highlight.add(range);
+        if (!range) continue;
+        highlight.add(range);
+        paintedNotes.push({ note, range });
       }
       CSS.highlights.set(highlightName, highlight);
     }
@@ -265,6 +317,16 @@
     if (event.key === null || event.key.startsWith(storagePrefix)) refresh();
   });
   window.addEventListener("hashchange", jumpFromFragment);
+  if (guide && !canPaint) guide.querySelector("[data-paper-highlight-save]").textContent = "选中文字会自动存入笔记。";
+  if (canRemoveInPaper) {
+    guide?.setAttribute("data-right-click", "");
+    highlightMenu.hidden = false;
+    document.addEventListener("contextmenu", openHighlightMenu);
+    removeHighlight.addEventListener("click", () => {
+      highlightMenu.hidePopover();
+      if (removeNote(highlightToRemove)) report("已删除高亮。", true);
+    });
+  }
   tools.hidden = false;
   refresh();
   jumpFromFragment();

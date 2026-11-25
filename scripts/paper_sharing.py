@@ -117,13 +117,23 @@ def render_paper(source, asset_path, paper_id):
         "    </nav>\n"
         "  </details>\n"
         "</aside>\n"
-        f"{body[opening.end():].strip()}\n</main>\n"
+        '<div class="paper-reading-content">\n'
+        '  <p class="paper-highlight-guide" hidden>\n'
+        '    <span data-paper-highlight-save>选中文字即可高亮并存入笔记。</span>\n'
+        '    <span data-paper-highlight-right-click>右键高亮可删除。</span>\n'
+        '    <span data-paper-highlight-notebook>可在「笔记」中删除。</span>\n'
+        '  </p>\n'
+        f"{body[opening.end():].strip()}\n</div>\n</main>\n"
+        '<div class="paper-highlight-menu" popover hidden>\n'
+        '  <p class="paper-highlight-quote" id="paper-highlight-quote"></p>\n'
+        '  <button type="button" aria-describedby="paper-highlight-quote">删除高亮</button>\n'
+        '</div>\n'
         '<dialog class="paper-notes" aria-labelledby="paper-notes-title">\n'
         '  <header>\n'
         '    <h2 id="paper-notes-title">阅读笔记</h2>\n'
         '    <form method="dialog"><button type="submit" autofocus>关闭</button></form>\n'
         '  </header>\n'
-        '  <p class="paper-notes-hint">选完论文文字后会自动高亮并存入笔记。摘录保存在当前浏览器。</p>\n'
+        '  <p class="paper-notes-hint">选中文字会存入笔记。摘录保存在当前浏览器。</p>\n'
         '  <p class="paper-notes-message" role="status"></p>\n'
         '  <div class="paper-notes-list"></div>\n'
         '</dialog>\n'
