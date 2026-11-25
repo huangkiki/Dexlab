@@ -133,7 +133,7 @@ def render_paper(source, asset_path, paper_id):
         '    <h2 id="paper-notes-title">阅读笔记</h2>\n'
         '    <form method="dialog"><button type="submit" autofocus>关闭</button></form>\n'
         '  </header>\n'
-        '  <p class="paper-notes-hint">选中文字会存入笔记。摘录保存在当前浏览器。</p>\n'
+        '  <p class="paper-notes-hint">点摘录可回到原文。笔记保存在当前浏览器。</p>\n'
         '  <p class="paper-notes-message" role="status"></p>\n'
         '  <div class="paper-notes-list"></div>\n'
         '</dialog>\n'

@@ -22,8 +22,9 @@
   const canPaint = Boolean(window.CSS?.highlights && window.Highlight);
   const canRemoveInPaper = canPaint && typeof highlightMenu?.showPopover === "function";
   const touchSelection = matchMedia("(pointer: coarse)");
+  const otherPapers = new Map();
   let notes = [];
-  let paintedNotes = [];
+  let paperRanges = new Map();
   let highlightToRemove = null;
   let selectionPointer = null;
   let selectionTimer = 0;
@@ -73,13 +74,12 @@
     return { section: scope === article ? "" : scope.id, start: prefix.toString().length + leadingSpace, quote };
   }
 
-  function scopeFor(note) {
-    const section = note.section && document.getElementById(note.section);
-    return section && article.contains(section) ? section : article;
+  function scopeFor(note, source = article) {
+    return (note.section && source.querySelector("#" + CSS.escape(note.section))) || source;
   }
 
-  function rangeFor(note) {
-    const scope = scopeFor(note);
+  function rangeFor(note, source = article) {
+    const scope = scopeFor(note, source);
     const text = scope.textContent;
     const { quote } = note;
     let start = note.start;
@@ -89,8 +89,8 @@
     }
 
     const end = start + quote.length;
-    const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
-    const range = document.createRange();
+    const walker = scope.ownerDocument.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+    const range = scope.ownerDocument.createRange();
     let offset = 0;
     let started = false;
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -159,14 +159,17 @@
   function openHighlightMenu(event) {
     if (event.defaultPrevented || event.pointerType === "touch" || !article.contains(event.target)) return;
     const { clientX: x, clientY: y } = event;
-    const hit = paintedNotes.find(({ range }) => hitsHighlightedText(range, event.target, x, y));
-    if (!hit) return;
+    const note = notes.find(({ id }) => {
+      const range = paperRanges.get(id);
+      return range && hitsHighlightedText(range, event.target, x, y);
+    });
+    if (!note) return;
 
     event.preventDefault();
     cancelSelectionTimer();
     window.getSelection()?.removeAllRanges();
-    highlightToRemove = hit.note;
-    highlightQuote.textContent = hit.note.quote.replace(/\s+/g, " ");
+    highlightToRemove = note;
+    highlightQuote.replaceChildren(excerpt(paperRanges.get(note.id), note.quote));
     if (!highlightMenu.matches(":popover-open")) highlightMenu.showPopover();
     const { width, height } = highlightMenu.getBoundingClientRect();
     const viewport = document.documentElement;
@@ -175,25 +178,64 @@
     removeHighlight.focus({ preventScroll: true });
   }
 
-  function renderList() {
-    list.replaceChildren();
-    if (!notes.length) {
-      list.append(element("p", "暂无高亮摘录。"));
-      return;
-    }
-
-    const groups = new Map();
-    for (const note of notes) {
-      if (!groups.has(note.paper)) {
-        const entries = document.createElement("ul");
-        list.append(element("h3", note.title), entries);
-        groups.set(note.paper, entries);
+  function copyMath(node) {
+    const copy = node.cloneNode(true);
+    copy.querySelectorAll("annotation, annotation-xml").forEach((annotation) => annotation.remove());
+    for (const part of [copy, ...copy.querySelectorAll("*")]) {
+      if (part.namespaceURI !== node.namespaceURI) {
+        part.remove();
+        continue;
       }
+      for (const attribute of [...part.attributes]) {
+        if (["id", "style", "href"].includes(attribute.localName) || attribute.localName.startsWith("on")) {
+          part.removeAttributeNode(attribute);
+        }
+      }
+    }
+    return copy;
+  }
+
+  function excerpt(range, fallback) {
+    if (!range) return document.createTextNode(fallback.replace(/\s+/g, " "));
+    const display = range.cloneRange();
+    const start = range.startContainer;
+    const end = range.endContainer;
+    const firstMath = (start.nodeType === Node.ELEMENT_NODE ? start : start.parentElement)?.closest("math");
+    const lastMath = (end.nodeType === Node.ELEMENT_NODE ? end : end.parentElement)?.closest("math");
+    if (firstMath) display.setStartBefore(firstMath);
+    if (lastMath) display.setEndAfter(lastMath);
+
+    const result = document.createDocumentFragment();
+    function append(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        result.append(node.data.replace(/\s+/g, " "));
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.matches("script, style, [hidden]")) return;
+        if (node.localName === "math") {
+          result.append(copyMath(node));
+          return;
+        }
+        for (const child of node.childNodes) append(child);
+        if (node.matches("p, div, li, td, br, figcaption, .paper-pair > span")) result.append(" ");
+      }
+    }
+    for (const node of display.cloneContents().childNodes) append(node);
+    return result;
+  }
+
+  function renderEntries(entries) {
+    const rows = document.createElement("ul");
+    for (const { note, range } of entries) {
       const item = document.createElement("li");
-      const quote = element("blockquote", note.quote.replace(/\s+/g, " "));
-      const actions = document.createElement("div");
-      actions.className = "paper-note-actions";
-      const jump = element("a", "回到原文");
+      const jump = document.createElement("a");
+      jump.className = "paper-note-excerpt";
+      jump.title = range ? "回到原文" : "摘录位置未能定位，请回到原文核对";
+      jump.append(excerpt(range, note.quote));
+      if (!range) {
+        const label = element("small", "原文未定位");
+        label.className = "paper-note-unresolved";
+        jump.append(label);
+      }
       jump.href = new URL(note.paper + fragmentPrefix + encodeURIComponent(note.id), papersRoot).href;
       jump.addEventListener("click", (event) => {
         if (note.paper !== paperId || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
@@ -202,14 +244,105 @@
         requestAnimationFrame(() => revealNote(note));
       });
       const remove = element("button", "删除");
+      remove.className = "paper-note-remove";
       remove.type = "button";
+      remove.dataset.noteId = note.id;
+      remove.setAttribute("aria-label", "删除摘录：" + jump.textContent.trim().slice(0, 36));
       remove.addEventListener("click", () => {
-        if (removeNote(note)) dialog.querySelector("button").focus();
+        const neighbor = item.nextElementSibling || item.previousElementSibling;
+        const nextId = neighbor?.querySelector(".paper-note-remove").dataset.noteId;
+        if (!removeNote(note)) return;
+        const next = nextId && list.querySelector('[data-note-id="' + nextId + '"]');
+        (next || dialog.querySelector("header button")).focus({ preventScroll: true });
       });
-      actions.append(jump, remove);
-      item.append(quote, actions);
-      groups.get(note.paper).append(item);
+      item.append(jump, remove);
+      rows.append(item);
     }
+    return rows;
+  }
+
+  function renderPaperNotes(target, source, paperNotes) {
+    const chapters = [...source.querySelectorAll(":scope > section[id], :scope > .ltx_abstract[id]")];
+    const byChapter = new Map(chapters.map((chapter) => [chapter, []]));
+    byChapter.set(null, []);
+    for (const note of paperNotes) {
+      const range = source === article ? paperRanges.get(note.id) : rangeFor(note, source);
+      const anchor = range?.startContainer || scopeFor(note, source);
+      const chapter = chapters.find((entry) => entry.contains(anchor)) || null;
+      byChapter.get(chapter).push({ note, range });
+    }
+    for (const [chapter, entries] of byChapter) {
+      if (!entries.length) continue;
+      entries.sort((a, b) => {
+        if (a.range && b.range) return a.range.compareBoundaryPoints(Range.START_TO_START, b.range);
+        return Number(Boolean(b.range)) - Number(Boolean(a.range));
+      });
+      const section = document.createElement("section");
+      section.className = "paper-note-chapter";
+      const title = chapter?.querySelector(":scope > :is(h2, h3, h4, h5, h6) .paper-zh")?.textContent.trim();
+      section.append(element("h4", title || "其他摘录"), renderEntries(entries));
+      target.append(section);
+    }
+  }
+
+  async function loadPaper(paper) {
+    if (!otherPapers.has(paper)) {
+      const response = await fetch(new URL(paper, papersRoot), { mode: "same-origin" });
+      if (!response.ok) throw new Error("Paper unavailable");
+      const page = new DOMParser().parseFromString(await response.text(), "text/html");
+      const source = page.querySelector(".paper-reader article");
+      if (!source) throw new Error("Paper unavailable");
+      otherPapers.set(paper, source);
+    }
+    return otherPapers.get(paper);
+  }
+
+  function renderList() {
+    const wasExpanded = list.querySelector(".paper-notes-other")?.open;
+    list.replaceChildren();
+    const current = notes.filter((note) => note.paper === paperId);
+    const other = notes.filter((note) => note.paper !== paperId);
+    list.append(element("h3", paperTitle));
+    if (current.length) renderPaperNotes(list, article, current);
+    else list.append(element("p", "选中本篇文字，摘录就会记在这里。"));
+    if (!other.length) return;
+
+    const details = document.createElement("details");
+    details.className = "paper-notes-other";
+    details.open = Boolean(wasExpanded);
+    details.append(element("summary", "其他论文 · " + other.length + " 条摘录"));
+    const groups = new Map();
+    for (const note of other) {
+      if (!groups.has(note.paper)) groups.set(note.paper, []);
+      groups.get(note.paper).push(note);
+    }
+    for (const [paper, paperNotes] of groups) {
+      const group = document.createElement("section");
+      group.append(element("h3", paperNotes[0].title));
+      const content = document.createElement("div");
+      group.append(content);
+      details.append(group);
+      async function showOther() {
+        if (!details.open || content.hasChildNodes()) return;
+        const cached = otherPapers.get(paper);
+        if (cached) {
+          renderPaperNotes(content, cached, paperNotes);
+          return;
+        }
+        content.append(element("p", "正在载入原文…"));
+        try {
+          const source = await loadPaper(paper);
+          content.replaceChildren();
+          renderPaperNotes(content, source, paperNotes);
+        } catch {
+          content.replaceChildren(element("p", "暂时无法载入原文，公式请以原文为准。"));
+          content.append(renderEntries(paperNotes.map((note) => ({ note }))));
+        }
+      }
+      details.addEventListener("toggle", showOther);
+      if (details.open) showOther();
+    }
+    list.append(details);
   }
 
   function refresh() {
@@ -227,18 +360,13 @@
     if (guide) guide.hidden = false;
     article.removeAttribute("data-paper-selection-saved");
     notesButton.textContent = notes.length ? `笔记 ${notes.length}` : "笔记";
-    if (canPaint) {
-      const highlight = new Highlight();
-      paintedNotes = [];
-      for (const note of notes) {
-        if (note.paper !== paperId) continue;
-        const range = rangeFor(note);
-        if (!range) continue;
-        highlight.add(range);
-        paintedNotes.push({ note, range });
-      }
-      CSS.highlights.set(highlightName, highlight);
+    paperRanges = new Map();
+    for (const note of notes) {
+      if (note.paper !== paperId) continue;
+      const range = rangeFor(note);
+      if (range) paperRanges.set(note.id, range);
     }
+    if (canPaint) CSS.highlights.set(highlightName, new Highlight(...paperRanges.values()));
     if (dialog.open) renderList();
   }
 

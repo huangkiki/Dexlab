@@ -60,6 +60,12 @@ typography:
     fontSize: 18px
     fontWeight: 600
     lineHeight: 1.95
+  paper-note-handwriting:
+    fontFamily: "DexLab Paper Handwriting", KaiTi, STKaiti, "AR PL UKai CN", serif
+    fontSize: 18px
+    lineHeight: 1.42
+  paper-note-math:
+    fontFamily: math
   step-number:
     fontFamily: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif
     fontSize: 22px
@@ -389,7 +395,7 @@ The strict site build runs [`paper_sharing.py`](../../scripts/paper_sharing.py) 
 
 Outline labels use the article's local Simplified Chinese serif faces at 15px where available, with a native Chinese fallback. English labels use a smaller sans-serif face. The folded mobile outline uses the same Chinese font stack for the current location.
 
-Every full-text reader saves a highlight automatically when text selection settles. A short guide above the paper explains how to save and delete highlights. Readers can right-click a saved highlight to remove it or delete it from the notebook, which also works on touch screens. The notes button sits above the desktop outline and beside the mobile outline. The notebook groups excerpts by paper and links each excerpt back to its source. Excerpts stay in this site's browser storage. The reader checks the exact quote before restoring its position and preserves the excerpt if the paper has changed.
+Every full-text reader saves a highlight automatically when text selection settles. A short guide above the paper explains how to save and delete highlights. Readers can right-click a saved highlight to remove it or delete it from the notebook, which also works on touch screens. The notebook uses an A4-proportioned paper surface with handwriting for excerpts and compact rows grouped by chapter in source order. Other papers are collapsed initially. Clicking an excerpt returns to its location. Excerpts stay in browser storage. The reader checks each saved quote against the source before restoring its position or rendering source MathML. Selections touching a formula show the complete formula in the notebook. The handwriting face is a web subset of LXGW WenKai v1.530 under its bundled SIL Open Font License.
 
 ### Learning and knowledge bridges
 

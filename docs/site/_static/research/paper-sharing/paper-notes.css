@@ -2,6 +2,12 @@
   --paper-note-highlight: #f6e6aa;
 }
 
+@font-face {
+  font-family: "DexLab Paper Handwriting";
+  src: url("dexlab-paper-handwriting.woff2") format("woff2");
+  font-display: swap;
+}
+
 ::highlight(dexlab-paper-note) {
   background-color: var(--paper-note-highlight);
   color: var(--ink);
@@ -97,7 +103,7 @@
 
 .paper-notes-tools button:focus-visible,
 .paper-highlight-menu button:focus-visible,
-.paper-notes :is(button, a):focus-visible {
+.paper-notes :is(button, a, summary):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -123,12 +129,15 @@
 }
 
 .paper-notes {
-  width: min(100% - 2rem, 40rem);
-  max-height: calc(100dvh - 2rem);
+  width: min(100% - 1.25rem, 40rem);
+  max-height: calc(100dvh - 1.25rem);
+  aspect-ratio: 210 / 297;
   border: 1px solid var(--rule);
-  padding: clamp(1rem, 4vw, 1.5rem);
+  padding: 0 clamp(1rem, 4vw, 2rem) 1.5rem;
   overflow: auto;
   overscroll-behavior: contain;
+  scroll-padding-block-start: 3.5rem;
+  scrollbar-color: var(--secondary) var(--paper);
   background: var(--paper);
   color: var(--ink);
   font: .9375rem/1.65 system-ui, sans-serif;
@@ -146,22 +155,22 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding-block: .85rem .35rem;
   background: var(--paper);
 }
 
-.paper-notes h2,
-.paper-notes h3 {
-  margin: 0;
-  font-size: 1.35rem;
+.paper-notes :is(h2, h3, .paper-note-excerpt) {
+  font-family: "DexLab Paper Handwriting", KaiTi, STKaiti, "AR PL UKai CN", serif;
 }
 
-.paper-notes h3 {
-  margin: 1.5rem 0 .5rem;
-  font-size: 1rem;
+.paper-notes h2 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
 .paper-notes-hint,
 .paper-notes-message {
+  margin: 0 0 1rem;
   color: var(--secondary);
   font-size: .875rem;
 }
@@ -170,8 +179,30 @@
   margin: 0;
 }
 
-.paper-notes-list > p {
-  margin-bottom: 0;
+.paper-notes-list {
+  border-inline-start: 1px solid var(--rule);
+  padding-inline-start: .85rem;
+}
+
+.paper-notes h3 {
+  margin: 0 0 .65rem;
+  font-size: 1.18rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.paper-note-chapter + .paper-note-chapter {
+  margin-block-start: 1rem;
+}
+
+.paper-note-chapter h4 {
+  margin: 0;
+  padding-block: 0 .3rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--secondary);
+  font-size: .8125rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
 }
 
 .paper-notes-list ul {
@@ -181,28 +212,75 @@
 }
 
 .paper-notes-list li {
-  border-top: 1px solid var(--rule);
-  padding: .75rem 0 .5rem;
-}
-
-.paper-notes-list blockquote {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .35rem;
   margin: 0;
-  padding: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.paper-note-excerpt {
+  padding-block: .35rem;
+  color: var(--ink);
+  font-size: 1.125rem;
+  line-height: 1.42;
+  text-decoration: none;
   overflow-wrap: anywhere;
+  overflow-x: auto;
 }
 
-.paper-note-actions {
-  display: flex;
-  align-items: center;
-  gap: .85rem;
-  margin-top: .35rem;
-  font-size: .875rem;
+.paper-note-excerpt:is(:hover, :focus-visible) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: .18em;
 }
 
-.paper-note-actions a {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
+.paper-note-excerpt math,
+.paper-highlight-quote math {
+  font-family: math;
+}
+
+.paper-note-unresolved {
+  margin-inline-start: .45rem;
+  color: var(--secondary);
+  font: .75rem system-ui, sans-serif;
+}
+
+.paper-notes .paper-note-remove {
+  min-height: 2.25rem;
+  border: 0;
+  padding: .3rem .4rem;
+  color: var(--secondary);
+  font-size: .8125rem;
+}
+
+.paper-notes-other {
+  margin-block-start: 1rem;
+}
+
+.paper-notes-other summary {
+  padding-block: .5rem;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.paper-notes-other > section {
+  margin-block-start: .75rem;
+}
+
+@media (pointer: coarse) {
+  .paper-note-excerpt,
+  .paper-notes .paper-note-remove,
+  .paper-notes-other summary {
+    min-height: 2.75rem;
+    padding-block: .6rem;
+  }
+
+  .paper-notes .paper-note-remove {
+    min-width: 2.75rem;
+  }
 }
 
 @media (width < 1000px) {
