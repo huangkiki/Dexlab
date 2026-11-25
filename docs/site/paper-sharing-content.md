@@ -23,6 +23,25 @@ Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Geo
 </div>
 ```
 
+(contact-friction-siggraph-2022)=
+### <span lang="en">Contact and Friction Simulation for Computer Graphics</span>：<br><span lang="zh-CN">计算机图形学中的接触与摩擦仿真</span>
+
+Sheldon Andrews, Kenny Erleben, Zachary Ferguson · ACM SIGGRAPH 2022 Courses · pp. 1–172
+
+```{raw} html
+<div class="paper-sharing-detail">
+  <div class="paper-sharing-summary">
+    <p lang="en">A course on how simulators detect contact, model friction, and compute a response. The reading guide points to chapters for missed contacts, unstable resting contacts, and deformable bodies.</p>
+    <p lang="zh-CN">讲义把接触仿真拆成碰撞检测、接触与摩擦建模、数值求解。导读按漏检、静止接触不稳和可变形物体等问题，指向原文对应章节。</p>
+  </div>
+  <ul class="paper-sharing-links">
+    <li><a href="contact-friction-siggraph-2022.html"><span lang="en">Read the bilingual guide</span><span lang="zh-CN">阅读中英导读</span></a></li>
+    <li><a href="https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf" hreflang="en"><span lang="en">Course notes PDF</span><span lang="zh-CN">作者版讲义 PDF</span></a></li>
+    <li><a href="https://doi.org/10.1145/3532720.3535640" hreflang="en"><span lang="en">ACM publication</span><span lang="zh-CN">ACM 正式出版页</span></a></li>
+  </ul>
+</div>
+```
+
 (recommendations-2026-10)=
 ## <span class="paper-sharing-local"><span lang="en">October 2026 Picks</span><span class="paper-sharing-separator">：</span><span lang="zh-CN">2026 年 10 月推荐</span></span>
 
@@ -45,4 +64,10 @@ Zhanyu Yang, Yunuo Chen, Yanjia Huang, Joseph Masterjohn, Yin Yang, Chenfanfu Ji
     <li><a href="cut-push.html"><span lang="en">Related experiment: how can we tell if a simulated cut fully separates tofu or banana?</span><span lang="zh-CN">相关实验：仿真里，怎么知道豆腐和香蕉真的切开了？</span></a></li>
   </ul>
 </div>
+```
+
+```{toctree}
+:hidden:
+
+contact-friction-siggraph-2022
 ```
