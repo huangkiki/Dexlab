@@ -36,6 +36,7 @@ Sheldon Andrews, Kenny Erleben, Zachary Ferguson · ACM SIGGRAPH 2022 Courses ·
   </div>
   <ul class="paper-sharing-links">
     <li><a href="https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf" hreflang="en"><span lang="en">Complete author PDF (172 pages)</span><span lang="zh-CN">完整英文原文（172 页）</span></a></li>
+    <li><a href="https://www.youtube.com/watch?v=vGfwbIShvog" hreflang="en"><span lang="en">Course recording (YouTube)</span><span lang="zh-CN">课程录像（YouTube）</span></a></li>
     <li><a href="contact-friction-siggraph-2022.html"><span lang="en">Chapter links and worked examples</span><span lang="zh-CN">原文目录与中英算例</span></a></li>
     <li><a href="https://doi.org/10.1145/3532720.3535640" hreflang="en"><span lang="en">ACM publication</span><span lang="zh-CN">ACM 正式出版页</span></a></li>
   </ul>

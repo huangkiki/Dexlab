@@ -2,7 +2,7 @@
 
 Sheldon Andrews, Kenny Erleben, Zachary Ferguson · ACM SIGGRAPH 2022 Courses, Article 3, pp. 1–172
 
-**[阅读完整英文原文（172 页） · Read the complete author PDF][notes]**
+**[阅读完整英文原文（172 页） · Read the complete author PDF][notes]** · [观看课程录像（YouTube） · Watch the course recording](https://www.youtube.com/watch?v=vGfwbIShvog)
 
 {ref}`Paper Sharing <contact-friction-siggraph-2022>` · [课程网站 Course website](https://siggraphcontact.github.io/) · [ACM 出版页 ACM publication](https://doi.org/10.1145/3532720.3535640)
 
