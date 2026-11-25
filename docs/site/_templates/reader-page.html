@@ -25,15 +25,7 @@
 </head>
 <body data-reader-page="{{ pagename }}">
   <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>
-  <header class="learn-header">
-    <a class="brand" href="{{ pathto('index') }}">DexLab</a>
-    {% include "site-search.html" %}
-    {% include "site-navigation.html" %}
-    <div class="header-tools">
-      <a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a>
-      <a href="https://github.com/huangkiki/Dexlab" aria-label="DexLab on GitHub">GitHub</a>
-    </div>
-  </header>
+  {% include "site-header.html" %}
   <div class="learn-layout reader-layout">
     <main id="main-content" role="main" class="lesson-article bd-article">
       {% if pagename == 'search' %}

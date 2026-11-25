@@ -764,19 +764,6 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
   }
 }
 
-/* Allow catalog links to clear the masthead when it wraps. */
-@media (max-width: 800px) {
-  #paper-sharing, #paper-sharing :is(section, span[id]) {
-    scroll-margin-block-start: 36px;
-  }
-}
-
-@media (max-width: 384px) {
-  #paper-sharing, #paper-sharing :is(section, span[id]) {
-    scroll-margin-block-start: 76px;
-  }
-}
-
 @media (max-width: 700px), print {
   #paper-sharing h1 {
     margin-bottom: 20px;

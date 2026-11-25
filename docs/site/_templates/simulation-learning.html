@@ -18,12 +18,7 @@
 </head>
 <body data-lesson="{{ pagename }}">
   <a class="skip-link" href="#main-content">{{ '跳到正文' if zh else 'Skip to content' }}</a>
-  <header class="learn-header">
-    <a class="brand" href="{{ pathto('index') }}">DexLab</a>
-    {% include "site-search.html" %}
-    {% include "site-navigation.html" %}
-    <div class="header-tools"><a href="{{ other_language_root }}{{ pagename }}.html" lang="{{ 'en' if zh else 'zh-CN' }}">{{ other_language }}</a></div>
-  </header>
+  {% include "site-header.html" %}
   <div class="learn-layout">
     <aside class="lesson-rail">
       <details class="chapter-menu" open>

@@ -75,41 +75,6 @@ button:disabled {
 .skip-link:focus {
   top: 12px;
 }
-.learn-header {
-  height: 80px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  padding: 0 40px;
-  max-width: 1600px;
-  margin: auto;
-}
-.brand {
-  font: 700 27px var(--serif);
-  color: var(--ink);
-  text-decoration: none;
-}
-.learn-header nav,
-.header-tools {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-.learn-header a {
-  white-space: nowrap;
-}
-.learn-header nav a,
-.header-tools a {
-  text-decoration: none;
-  font-size: 14px;
-}
-.learn-header nav [aria-current] {
-  font-weight: 700;
-}
-.header-tools {
-  margin-left: auto;
-}
 .learn-layout {
   display: grid;
   grid-template-columns: 240px minmax(0, 760px) 160px;
@@ -121,9 +86,9 @@ button:disabled {
 .lesson-rail,
 .section-rail {
   position: sticky;
-  top: 28px;
+  top: var(--site-header-clearance, 28px);
   align-self: start;
-  max-height: calc(100vh - 56px);
+  max-height: calc(100vh - var(--site-header-clearance, 28px) - 28px);
   overflow: auto;
 }
 .chapter-menu summary {
@@ -489,26 +454,10 @@ h3:hover .headerlink,
   .section-rail {
     display: none;
   }
-  .learn-header {
-    gap: 32px;
-  }
 }
 @media (max-width: 800px) {
   html {
     scroll-padding-top: 24px;
-  }
-  .learn-header {
-    height: auto;
-    min-height: 72px;
-    padding: 18px 22px;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .learn-header nav {
-    gap: 16px;
-  }
-  .header-tools {
-    gap: 16px;
   }
   .learn-layout {
     display: block;
@@ -551,25 +500,10 @@ h3:hover .headerlink,
   .time-lab {
     padding: 18px;
   }
-  .learn-header .brand {
-    font-size: 25px;
-  }
-  .header-tools a,
-  .learn-header nav a {
-    font-size: 13px;
-  }
 }
 @media (max-width: 440px) {
   .timeline text {
     font-size: 22px;
-  }
-  .learn-header {
-    gap: 12px;
-  }
-  .header-tools {
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: -8px;
   }
   .lesson-rail ol {
     grid-template-columns: 1fr;
@@ -589,7 +523,6 @@ h3:hover .headerlink,
   }
 }
 @media print {
-  .learn-header,
   .lesson-rail,
   .section-rail,
   .reading-controls,
