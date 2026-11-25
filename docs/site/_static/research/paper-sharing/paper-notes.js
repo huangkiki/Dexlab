@@ -5,7 +5,6 @@
   const paperTitle = article.querySelector("h1 .paper-zh").textContent.trim();
   const papersRoot = new URL(".", document.currentScript.src);
   const tools = reader.querySelector(".paper-notes-tools");
-  const addButton = tools.querySelector("[data-paper-highlight]");
   const notesButton = tools.querySelector("[data-paper-notes-open]");
   const feedback = tools.querySelector(".paper-notes-feedback");
   const dialog = document.querySelector(".paper-notes");
@@ -17,9 +16,10 @@
   const fragmentPrefix = "#paper-note-";
   const highlightName = "dexlab-paper-note";
   const canPaint = Boolean(window.CSS?.highlights && window.Highlight);
+  const touchSelection = matchMedia("(pointer: coarse)");
   let notes = [];
-  let selectionAtPress;
-  let selectionAtFocus;
+  let selectionPointer = null;
+  let selectionTimer = 0;
 
   function report(text, quiet = false) {
     feedback.textContent = text;
@@ -176,6 +176,7 @@
       return;
     }
 
+    article.removeAttribute("data-paper-selection-saved");
     notesButton.textContent = notes.length ? `笔记 ${notes.length}` : "笔记";
     if (canPaint) {
       const highlight = new Highlight();
@@ -195,26 +196,21 @@
     if (note) requestAnimationFrame(() => revealNote(note));
   }
 
-  document.addEventListener("selectionchange", () => {
-    const selection = selectionInPaper();
-    if (selection || document.activeElement !== addButton) selectionAtFocus = selection;
-    addButton.toggleAttribute("data-ready", Boolean(selectionAtFocus));
-    if (selection) report("");
-  });
-  addButton.addEventListener("pointerdown", () => { selectionAtPress = selectionInPaper(); });
-  addButton.addEventListener("pointercancel", () => { selectionAtPress = null; });
-  addButton.addEventListener("mousedown", (event) => event.preventDefault());
-  addButton.addEventListener("click", () => {
-    const range = selectionInPaper() || selectionAtPress || selectionAtFocus;
-    selectionAtPress = null;
-    if (!range || !range.toString().trim()) {
-      report("先选中需要高亮的文字。");
-      return;
-    }
+  function cancelSelectionTimer() {
+    clearTimeout(selectionTimer);
+    selectionTimer = 0;
+  }
+
+  function saveSelection() {
+    cancelSelectionTimer();
+    if (selectionPointer !== null || dialog.open) return;
+    const range = selectionInPaper();
+    if (!range) return;
     const anchor = describeRange(range);
+    if (!anchor.quote) return;
     if (notes.some((note) => note.paper === paperId && note.section === anchor.section &&
         note.start === anchor.start && note.quote === anchor.quote)) {
-      report("这段文字已在笔记中。");
+      article.toggleAttribute("data-paper-selection-saved", canPaint);
       return;
     }
     try {
@@ -224,13 +220,43 @@
       report("无法保存摘录，请检查浏览器的本地存储空间或设置。");
       return;
     }
-    selectionAtFocus = null;
-    addButton.removeAttribute("data-ready");
-    window.getSelection().removeAllRanges();
     refresh();
+    article.toggleAttribute("data-paper-selection-saved", canPaint);
     report(canPaint ? "已存入笔记。" : "已保存摘录。当前浏览器不支持正文高亮。", canPaint);
+  }
+
+  function scheduleSelection() {
+    cancelSelectionTimer();
+    article.removeAttribute("data-paper-selection-saved");
+    if (selectionPointer !== null || dialog.open || !selectionInPaper()) return;
+    selectionTimer = setTimeout(saveSelection, touchSelection.matches ? 700 : 250);
+  }
+
+  function finishPointerSelection(event) {
+    if (event.pointerId !== selectionPointer) return;
+    selectionPointer = null;
+    scheduleSelection();
+  }
+
+  document.addEventListener("selectionchange", scheduleSelection);
+  window.addEventListener("pointerdown", (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    if (article.contains(event.target)) {
+      selectionPointer = event.pointerId;
+      cancelSelectionTimer();
+    } else if (selectionTimer) {
+      saveSelection();
+    }
+  }, true);
+  window.addEventListener("pointerup", finishPointerSelection, true);
+  window.addEventListener("pointercancel", finishPointerSelection, true);
+  window.addEventListener("blur", () => {
+    selectionPointer = null;
+    cancelSelectionTimer();
   });
   notesButton.addEventListener("click", () => {
+    if (selectionTimer) saveSelection();
+    window.getSelection()?.removeAllRanges();
     report("");
     dialog.showModal();
     renderList();

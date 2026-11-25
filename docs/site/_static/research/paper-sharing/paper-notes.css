@@ -1,5 +1,14 @@
+:root {
+  --paper-note-highlight: #f6e6aa;
+}
+
 ::highlight(dexlab-paper-note) {
-  background-color: #f6e6aa;
+  background-color: var(--paper-note-highlight);
+  color: var(--ink);
+}
+
+[data-paper-selection-saved] ::selection {
+  background-color: var(--paper-note-highlight);
   color: var(--ink);
 }
 
@@ -22,7 +31,7 @@
   cursor: pointer;
 }
 
-.paper-notes-tools button:is(:hover, [data-ready]),
+.paper-notes-tools button:hover,
 .paper-notes button:hover {
   background: var(--panel);
 }
