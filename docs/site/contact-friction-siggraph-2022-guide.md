@@ -2,7 +2,23 @@
 
 Sheldon Andrews, Kenny Erleben, Zachary Ferguson · ACM SIGGRAPH 2022 Courses, Article 3, pp. 1–172
 
-{ref}`Paper Sharing <contact-friction-siggraph-2022>` · [作者版讲义 Course notes PDF][notes] · [课程网站 Course website](https://siggraphcontact.github.io/) · [ACM 出版页 ACM publication](https://doi.org/10.1145/3532720.3535640)
+**[阅读完整英文原文（172 页） · Read the complete author PDF][notes]**
+
+{ref}`Paper Sharing <contact-friction-siggraph-2022>` · [课程网站 Course website](https://siggraphcontact.github.io/) · [ACM 出版页 ACM publication](https://doi.org/10.1145/3532720.3535640)
+
+## Original chapters · 原文目录
+
+- [前言与课程安排 · Preface and course outline（第 6 页 / p. 6）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=6)
+- [第 1 章 接触模型入门 · Contact simulation basics（第 9 页 / p. 9）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=9)
+- [第 2 章 如何生成接触 · Finding contacts（第 41 页 / p. 41）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=41)
+- [第 3 章 接触问题的数值求解 · Solving the contact problem（第 60 页 / p. 60）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=60)
+- [第 4 章 可变形物体的接触 · Contact between deformable bodies（第 110 页 / p. 110）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=110)
+- [第 5 章 罚函数与屏障法 · Penalties and barriers（第 131 页 / p. 131）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=131)
+- [第 6 章 方向相关的摩擦 · Direction-dependent friction（第 146 页 / p. 146）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=146)
+- [附录 刚体仿真编程练习 · Rigid-body coding exercise（第 160 页 / p. 160）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=160)
+- [参考文献 · References（第 166 页 / p. 166）](https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf#page=166)
+
+## DexLab worked examples · DexLab 中英算例
 
 <p lang="en">A block on a table can slide because the contact was missed, because the friction model permits it, or because the solver stopped early. This DexLab companion works through those three cases with numbers. The examples are calculations for the stated models. The linked DexLab experiments are separate measurements.</p>
 

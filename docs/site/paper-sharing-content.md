@@ -35,8 +35,8 @@ Sheldon Andrews, Kenny Erleben, Zachary Ferguson · ACM SIGGRAPH 2022 Courses ·
     <p lang="zh-CN">用算例讲清为什么会漏检、推多大力会滑、两个叠放的方块为什么要迭代多轮，再讲布料、绳子和方向相关的摩擦。每节都附讲义页码。</p>
   </div>
   <ul class="paper-sharing-links">
-    <li><a href="contact-friction-siggraph-2022.html"><span lang="en">Read the bilingual technical notes</span><span lang="zh-CN">阅读中英技术笔记</span></a></li>
-    <li><a href="https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf" hreflang="en"><span lang="en">Course notes PDF</span><span lang="zh-CN">作者版讲义 PDF</span></a></li>
+    <li><a href="https://siggraphcontact.github.io/assets/files/SIGGRAPH22_friction_contact_notes.pdf" hreflang="en"><span lang="en">Complete author PDF (172 pages)</span><span lang="zh-CN">完整英文原文（172 页）</span></a></li>
+    <li><a href="contact-friction-siggraph-2022.html"><span lang="en">Chapter links and worked examples</span><span lang="zh-CN">原文目录与中英算例</span></a></li>
     <li><a href="https://doi.org/10.1145/3532720.3535640" hreflang="en"><span lang="en">ACM publication</span><span lang="zh-CN">ACM 正式出版页</span></a></li>
   </ul>
 </div>

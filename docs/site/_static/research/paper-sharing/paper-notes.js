@@ -243,9 +243,10 @@
         dialog.close();
         requestAnimationFrame(() => revealNote(note));
       });
-      const remove = element("button", "删除");
+      const remove = document.createElement("button");
       remove.className = "paper-note-remove";
       remove.type = "button";
+      remove.title = "删除这条摘录";
       remove.dataset.noteId = note.id;
       remove.setAttribute("aria-label", "删除摘录：" + jump.textContent.trim().slice(0, 36));
       remove.addEventListener("click", () => {

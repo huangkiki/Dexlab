@@ -129,7 +129,7 @@
 }
 
 .paper-notes {
-  width: min(100% - 1.25rem, 40rem);
+  width: min(100% - 1.25rem, 56rem);
   max-height: calc(100dvh - 1.25rem);
   aspect-ratio: 210 / 297;
   border: 1px solid var(--rule);
@@ -198,7 +198,6 @@
 .paper-note-chapter h4 {
   margin: 0;
   padding-block: 0 .3rem;
-  border-bottom: 1px solid var(--rule);
   color: var(--secondary);
   font-size: .8125rem;
   font-weight: 650;
@@ -206,22 +205,25 @@
 }
 
 .paper-notes-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .15rem .9rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .paper-notes-list li {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: inline-grid;
+  grid-template-columns: minmax(0, auto) auto;
   align-items: start;
-  gap: .35rem;
+  max-width: 100%;
   margin: 0;
-  border-bottom: 1px solid var(--rule);
 }
 
 .paper-note-excerpt {
-  padding-block: .35rem;
+  padding-block: .2rem;
   color: var(--ink);
   font-size: 1.125rem;
   line-height: 1.42;
@@ -232,8 +234,7 @@
 
 .paper-note-excerpt:is(:hover, :focus-visible) {
   color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: .18em;
+  text-decoration: none;
 }
 
 .paper-note-excerpt math,
@@ -248,11 +249,34 @@
 }
 
 .paper-notes .paper-note-remove {
-  min-height: 2.25rem;
+  position: relative;
+  width: 1.75rem;
+  min-height: 1.75rem;
   border: 0;
-  padding: .3rem .4rem;
+  padding: 0;
   color: var(--secondary);
-  font-size: .8125rem;
+}
+
+.paper-note-remove::before,
+.paper-note-remove::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  content: "";
+}
+
+.paper-note-remove::before {
+  top: calc(50% - 3px);
+  width: 7px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-top: 0;
+}
+
+.paper-note-remove::after {
+  top: calc(50% - 4px);
+  width: 11px;
+  border-top: 1px solid currentColor;
 }
 
 .paper-notes-other {
@@ -271,15 +295,19 @@
 }
 
 @media (pointer: coarse) {
+  .paper-notes {
+    min-height: min(100dvh - 1.25rem, 36rem);
+  }
+
   .paper-note-excerpt,
-  .paper-notes .paper-note-remove,
   .paper-notes-other summary {
     min-height: 2.75rem;
     padding-block: .6rem;
   }
 
   .paper-notes .paper-note-remove {
-    min-width: 2.75rem;
+    width: 2.75rem;
+    min-height: 2.75rem;
   }
 }
 
