@@ -1,10 +1,14 @@
 # Research distillation
 
-What DexLab can borrow from external papers and projects, what the authors verified, and what still needs testing here.
+Deep technical distillations of external papers and projects: what the external work actually does, what the authors verified, and what DexLab should test first.
 
 ```{toctree}
 :hidden:
 
+neural-actuator
+mask-conditioned-gcrl
+physcapbench
+code-as-policy
 donic-bimanual-tracking
 physicsnemo-contact-surrogates
 ```

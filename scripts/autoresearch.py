@@ -48,13 +48,38 @@ def gh_json(*args):
     return json.loads(run("gh", *args, "--repo", REPO, capture=True))
 
 
+def _author_gate_candidates():
+    """Search trusted out-of-repo skill installations across Antigravity and Codex."""
+    candidates = []
+    override = os.environ.get("AUTODEV_SKILL_DIR", "").strip()
+    if override:
+        candidates.append(Path(override) / "scripts/check_issue_author.py")
+    home = Path.home()
+    candidates.extend([
+        home / ".gemini/config/skills/autodev/scripts/check_issue_author.py",
+        home / ".agents/skills/autodev/scripts/check_issue_author.py",
+        home / ".codex/skills/autodev/scripts/check_issue_author.py",
+    ])
+    return candidates
+
+
+def _resolve_author_gate():
+    checkout = ROOT.resolve()
+    for candidate in _author_gate_candidates():
+        try:
+            resolved = candidate.resolve(strict=True)
+        except OSError:
+            continue
+        if resolved.is_relative_to(checkout):
+            raise ValueError("author gate must be installed outside the checkout")
+        return candidate, resolved
+    raise FileNotFoundError("installed author gate not found")
+
+
 def author_admission(number):
     """Invoke installed policy before reading task text; never trust repository policy."""
-    gate = Path.home() / ".codex/skills/autodev/scripts/check_issue_author.py"
     try:
-        resolved = gate.resolve(strict=True)
-        if resolved.is_relative_to(ROOT.resolve()):
-            raise ValueError("author gate must be installed outside the checkout")
+        gate, _ = _resolve_author_gate()
         result = subprocess.run(
             [sys.executable, "-I", str(gate), "--repo", REPO, "--issue", str(number)],
             cwd=gate.parent, text=True, capture_output=True, timeout=45,
@@ -447,6 +472,18 @@ TOOL_TESTS = {
     "scripts/autoresearch.py": "test_autoresearch.py",
     "scripts/research_intake.py": "test_research_intake.py",
     "scripts/run_tests.py": "test_test_entrypoint.py",
+    "scripts/build_docs.py": "test_docs_workflow.py",
+    "scripts/concept_atlas.py": "test_concept_atlas.py",
+    "docs/concept-atlas.json": "test_concept_atlas.py",
+    "docs/topic-taxonomy.json": "test_concept_atlas.py",
+    "scripts/learning_docs.py": "test_learning_docs.py",
+    "scripts/task_coverage.py": "test_task_coverage.py",
+    "docs/task-coverage.json": "test_task_coverage.py",
+    "scripts/solver_taxonomy.py": "test_solver_taxonomy.py",
+    "docs/solver-taxonomy.json": "test_solver_taxonomy.py",
+    "scripts/research_experience.py": "test_research_experience.py",
+    "scripts/visual_research.py": "test_visual_research.py",
+    "scripts/build_visual_research.py": "test_visual_research.py",
 }
 
 

@@ -20,6 +20,7 @@ PROJECT_NUMBER = 4
 INTAKE_VERSION = 1
 INTAKE_START = "<!-- dexlab-intake:v1:start -->"
 INTAKE_END = "<!-- dexlab-intake:v1:end -->"
+NON_EXECUTABLE_MARKER = "<!-- dexlab-intake-non-executable:v1 -->"
 TRIAGE_STATUS = "Triage"
 TODO_STATUS = "Todo"
 DECISIONS = {"adopt-existing", "pilot", "experiment", "watch", "reject"}
@@ -253,6 +254,7 @@ def render_umbrella(payload: dict[str, Any], discussion_url: str) -> str:
 """
         )
     return f"""{_umbrella_marker(payload)}
+{NON_EXECUTABLE_MARKER}
 ## Research source / 研究来源
 
 - Discussion #{payload['discussion']}: {discussion_url}
@@ -303,6 +305,11 @@ def render_child(
 ## Acceptance and commands / 验收与命令
 
 {_bullets(candidate['acceptance'])}
+
+Suggested validation entrypoint (adjust `--test` / `--backend` to match modified files):
+```bash
+python3 scripts/autoresearch.py check . --base origin/main
+```
 
 ## Dependencies / 依赖
 
@@ -545,7 +552,10 @@ def promote(
         "number,state,title,body,url,id,labels",
     )
     discussion_number, umbrella_slug = _parse_issue_marker(umbrella_issue["body"])
-    if "executable" in umbrella_issue["body"].lower() and "not authorized" not in umbrella_issue["body"].lower():
+    body_text = umbrella_issue["body"]
+    has_structured_guard = NON_EXECUTABLE_MARKER in body_text
+    has_legacy_guard = "not authorized" in body_text.lower()
+    if not (has_structured_guard or has_legacy_guard):
         raise IntakeError("Umbrella body is missing the non-executable intake marker")
     discussion = load_discussion(discussion_number)
     payload = parse_discussion_body(discussion["body"], discussion_number)

@@ -108,9 +108,11 @@ class RenderTests(unittest.TestCase):
             "https://github.com/huangkiki/Dexlab/discussions/388",
         )
         self.assertIn(intake._umbrella_marker(value), umbrella)
+        self.assertIn(intake.NON_EXECUTABLE_MARKER, umbrella)
         self.assertIn("not authorized for execution", umbrella)
         self.assertIn(intake._child_marker(42, value, value["candidates"][0]), child)
         self.assertIn("Depends on: #243", child)
+        self.assertIn("scripts/autoresearch.py check", child)
         self.assertNotIn("auto:approved", child)
 
 

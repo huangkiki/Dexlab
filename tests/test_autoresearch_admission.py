@@ -90,6 +90,24 @@ class InstalledAuthorTests(unittest.TestCase):
             self.assertFalse(module.author_admission(12)["allowed"])
             runner.assert_not_called()
 
+    def test_antigravity_global_gate_and_env_override_are_discovered(self):
+        self.gate.unlink()
+        agy_gate = self.home / ".gemini/config/skills/autodev/scripts/check_issue_author.py"
+        agy_gate.parent.mkdir(parents=True)
+        agy_gate.write_text("# agy gate fixture\n")
+        value, runner = self.invoke(decision(12))
+        self.assertTrue(value["allowed"])
+        self.assertEqual(runner.call_args.args[0][2], str(agy_gate))
+
+        custom_dir = self.base / "custom-autodev"
+        custom_gate = custom_dir / "scripts/check_issue_author.py"
+        custom_gate.parent.mkdir(parents=True)
+        custom_gate.write_text("# env override gate fixture\n")
+        with patch.dict("os.environ", {"AUTODEV_SKILL_DIR": str(custom_dir)}, clear=False):
+            value, runner = self.invoke(decision(12))
+        self.assertTrue(value["allowed"])
+        self.assertEqual(runner.call_args.args[0][2], str(custom_gate))
+
 
 class QueueReadTests(unittest.TestCase):
     def test_approved_external_author_without_admission_cannot_be_selected(self):

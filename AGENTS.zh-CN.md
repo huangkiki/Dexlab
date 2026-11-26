@@ -6,7 +6,7 @@
 
 选择或恢复工作前读取[当前工作与暂停状态](docs/current-work.zh-CN.md)。这是唯一当前顺序入口，其中链接的历史决定不是现行派发指令。定时开发保持 **PAUSED**。本次整理不启动实验、不改变冻结验收，也不增加权限。
 
-按[研究流程](docs/autoresearch.zh-CN.md#research-loop)把问题转为有界对照与结论；解释新结果前审查评分语义。提案、实现、运行证据和公开交付分开记录，已有协议、交付门禁与历史评分继续有效。
+按[研究流程](docs/autoresearch.zh-CN.md#research-loop)把问题转为有界对照与结论；解释新结果前审查评分语义。外部工作蒸馏与 Triage 落点遵循[蒸馏与 Intake 契约](docs/distill-contract.zh-CN.md)（Blog 为单一事实源，Discussion 为轻量决策卡）。提案、实现、运行证据和公开交付分开记录，已有协议、交付门禁与历史评分继续有效。
 
 ## 公开网站设计
 
