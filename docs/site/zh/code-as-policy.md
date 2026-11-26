@@ -1,182 +1,118 @@
 # Code as Policy：从“模型写代码”到可验证的机器人技能
 
-## TL;DR
+> **一页速览**
+>
+> | 维度 | 内容 |
+> | --- | --- |
+> | **涉及工作** | ① [Code as Policies (arXiv:2209.07753)](https://arxiv.org/abs/2209.07753)（路线源头）<br>② [CaP-X (arXiv:2603.22435v2)](https://arxiv.org/abs/2603.22435v2) · [COAP (arXiv:2610.12369v1)](https://arxiv.org/abs/2610.12369v1) · [ASPIRE (arXiv:2607.00272v2)](https://arxiv.org/abs/2607.00272v2)<br>③ [GR00T 2 白皮书 (2026-11)](https://research.nvidia.com/labs/gear/gr00t-2) + 反例对照 [SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation) |
+> | **固定源码** | [`capgym/cap-x@53e9966d`](https://github.com/capgym/cap-x/tree/53e9966d7a8e2fa7494676772bccc35280f5c0ed)（MIT） · [`NVlabs/ASPIRE@fa00f0ef`](https://github.com/NVlabs/ASPIRE/tree/fa00f0ef2bc1d91d594b9aa502c22133c9f538f7)（Apache-2.0） · `Isaac-GR00T` 非默认分支 `codex/n2-action-expert@7e492ad1`（评估许可） · [`supermimic_manipulation@eda7da48`](https://github.com/emoPointer/supermimic_manipulation/tree/eda7da480c6d92a68cc41c9628b7efdae08cae23) · COAP 暂无公开仓库 |
+> | **核心问题** | 端到端 VLA 在长时任务编排、异常恢复与失败归因上不透明；而把机器人策略直接写成代码时，模型能力、API 抽象脚手架、执行反馈模态、技能晋升与物理接触控制常常混作一团，无法判断究竟是哪一层起作用。 |
+> | **核心做法** | 把任务语义、状态变量、感知反馈与恢复逻辑写成可审计的程序或技能卡：CaP-X 拆解抽象层与反馈变量；COAP 冻结在线显式状态机、离线改代码；ASPIRE 用逐原语 trace 与独立验证者晋升技能卡；GR00T 2 将 System-2 Agent、CaP 恢复与 WAM 接触操作通过单控制者分层解耦。 |
+> | **开源现状** | CaP-X 与 ASPIRE 完整开源；COAP 未见公开代码；GR00T 2 默认仓库仍为 N1.7（公开 N2 分支为评估许可证且 base checkpoint 私有）。 |
+> | **对 DexLab 判决** | **`experiment`（采纳反馈视图消融、单控制者恢复合同与独立验证者 skill card，不以 Code Agent 替代物理引擎或评分器）** — 先验证细粒度执行证据能否改善已有失败链归因，再讨论技能晋升或局部控制器对照。 |
 
-**Code as Policy 不应该被当成“又一个 VLA 模型”，它首先是一种控制表示：把任务语义、反馈条件和动作顺序写成可检查、可修改的程序。**
+---
 
-以“夹起面包、抬升、放进盘子”为例，程序可能依次调用定位、抓取生成、运动规划、闭爪、持物检查和释放。真正决定系统是否可靠的，不只是大模型会不会写 Python，而是感知值从哪里来、闭爪命令和实际夹持是否一致、接触何时丢失、机器人执行到了哪一步，以及独立评分器依据什么判定成功。
+## 一、这条路线与四项代表工作具体做了什么？
 
-这条路线值得一个独立专题，因为现在已经出现至少四种容易混淆的形态：
+**Code as Policy（CaP）首先不是“又一个 VLA 模型”，而是一种显式控制表示：把任务阶段、条件分支、感知测量与失败恢复写成可检查、可修改的程序。**（注意简称区分：本文 `CaP = Code-as-Policy`，与 [Discussion #309](https://github.com/huangkiki/Dexlab/discussions/309) 中的 `CAP = Contact-Anchored Policy` 不是同一路线。）
 
-- 大模型在运行时生成程序，如 CaP-X、ASPIRE；
-- 程序在线冻结、模型只离线改代码，如 COAP；
-- 通用 Agent harness 提供工具、测量和安全准入，如 HexaShell、Auriga；
-- 任务知识写成约一页 Markdown 的 task skill，而不是运行时执行的策略代码。
+### 1. 问题设定、输入输出与四层执行栈
 
-**DexLab 的落点应是“用 Code as Policy 研究失败归因和技能记忆”，不是用一个代码 Agent 替代物理引擎或完整评测协议。** 先让一条已有失败记录拥有可审计的反馈链，再讨论技能晋升和自动进化。
-
-## 1. 从一次面包滑落开始
-
-下面只是教学伪代码，不是某个论文或 DexLab 已实现的 API：
-
-```python
-bread = localize_object("bread slice")
-grasp = select_grasp(bread, strategy="top_down")
-move_to_pose(grasp.approach_pose)
-close_gripper()
-
-if not verify_hold("bread slice", min_lift_m=0.02):
-    raise TaskFailure("grasp_not_established")
-
-move_to_pose(plate.approach_pose)
-open_gripper()
-```
-
-这段程序看起来比端到端策略更容易审计，因为它明确写出了任务分解。但它同时引入了多个新的失效位置：
-
-- `localize_object` 可能把邻片或货架边缘当成目标；
-- `select_grasp` 可能选择上缘浅夹持；
-- `move_to_pose` 的规划成功不代表实际到达；
-- `close_gripper` 返回成功不等于接触能够承载重力；
-- `verify_hold` 可能使用过期视觉、错误阈值或漏掉旋转；
-- 最终评分器可能把“到达盘子上方”当成“放入盘中”。
-
-所以 Code as Policy 的价值不是“写成代码，因此更可靠”，而是**把可靠性拆成可以被逐层验证的命题**。没有 trace、状态和独立评分时，代码只会把失败包装得更像一段合理的逻辑。
+以“夹起面包片、抬升、放入盘子”为例，程序依次调用 `localize_object` → `select_grasp` → `move_to_pose` → `close_gripper` → `verify_hold` → `open_gripper`。相比端到端策略，代码路线的输入通常是**语言目标 + 结构化感知/状态 API + 执行反馈 trace**，输出是**可执行任务程序、技能卡或受限工具调用序列**；但它同时把可靠性拆成四个必须分清所有权的层次：
 
 (execution-stack)=
-## 2. 程序不是一个孤立的层
-
-| 层 | 它回答的问题 | 典型内容 | 不应混为 |
+| 层 | 它回答的问题 | 典型内容 | 时标特征与不应混为 |
 | --- | --- | --- | --- |
-| 任务层 | 要完成什么，何时停止或恢复 | 语言目标、阶段、成功谓词、重试预算 | 可直接执行的控制逻辑 |
-| 程序层 | 如何组合感知与动作来实现目标 | 条件判断、循环、函数、错误分支 | 底层伺服和物理真值 |
-| 技能层 | 哪些测量、抓取或运动能力可复用 | 定位、抓取生成、IK、轨迹执行、工具 API | 整任务技能文档 |
-| 执行层 | 命令怎样变成关节、接触与物体响应 | 控制器、规划器、仿真/真机、时钟 | 任务成败 |
+| **任务层（System 2）** | 下一步做什么、何时重试或停止 | 语言目标、阶段状态、成功谓词、恢复决策 | 外环秒级（CaP-X 迭代 `6.8–23.8 s`；GR00T 2 Agent 中位 `7.5 s`）；不能直接替代高频控制 |
+| **程序层（CaP）** | 如何组合感知、条件分支与恢复动作 | Python 状态机、循环、异常分支、白名单原语调用 | COAP 冻结程序 CPU 中位 `0.3 ms`；但返回 `True` 不等于物理成功 |
+| **技能 / 策略层** | 单个定位、抓取或接触操作如何实现 | 抓取生成、IK/规划器、VLA/WAM 动作块（`73–167 ms`）或局部接触控制器 | 不应把可执行的 task program 与自然语言 task skill 混为一谈 |
+| **执行与评分层** | 命令如何变成关节/接触响应、谁判成败 | 仿真器/真机控制器、原生接触读回、独立 scorer | 程序与 Agent 绝不应直接读取 reward 或改写成功谓词 |
 
-任务代码通常运行在“外环”：看到较大的状态变化后再决定下一步。接触夹持、滑移和释放可能需要毫秒级内环控制。CaP-X 作者报告的一次程序迭代约 `6.8–23.8 s`，而 VLA 的 action chunk 或单动作推理在报告条件下约 `73–167 ms`；这组数字不是公平性能排名，但足以说明 Code as Policy 更适合作为 system-2 任务层，而不是默认替代高频接触控制器。
+### 2. 四类系统全景与核心机制拆解
+
+近年来这一方向分化出四种形态迥异的系统，切忌混称为同一种“AI 写代码控制机器人”：
 
 (policy-map)=
-## 3. 四类系统，不要叫成同一个东西
-
-| 工作 | 运行时谁做任务决策 | 主要产物 | 解决的问题 | 关键边界 |
+| 工作 | 运行时谁做决策 | 核心产物与机制 | 解决的核心瓶颈 | 关键证据边界 |
 | --- | --- | --- | --- | --- |
-| [Code as Policies](https://arxiv.org/abs/2209.07753) | LLM 根据语言和 API 生成程序 | 可执行 policy code | 把语言指令变成组合感知、几何与控制 API 的程序 | 依赖人工设计的 primitive 和 few-shot 示例 |
-| [CaP-X](https://arxiv.org/abs/2603.22435) | coding model 在单轮或多轮中生成程序 | 基准、程序、执行反馈、技能库与 RL 接口 | 系统比较抽象层级、交互、视觉 grounding 和测试时计算 | 模型分数同时受 API scaffold、反馈和预算影响 |
-| [COAP](https://arxiv.org/abs/2610.12369) | 在线运行固定代码；coding agent 离线修改 | 显式状态 + 任务程序 + 共享代码库 | 让状态、任务逻辑和代码改动可审计 | 全部结果为仿真；仍未证明跨本体/真实材料 |
-| [ASPIRE](https://arxiv.org/abs/2607.00272) | coding agent 在线执行、诊断和修复 | 逐原语 trace + 可复用技能库 | 把失败修复持续沉淀并迁移到新任务 | 固定 API、前沿模型依赖、验证一次不等于泛化 |
-| [HexaShell](https://arxiv.org/abs/2610.23479) / [Auriga](https://arxiv.org/abs/2611.01112) | 通用模型在 harness 中直接调工具或写短程序 | 通用工具、测量、准入与可选 task skill | 降低每个机器人/benchmark 的适配和任务专用代码 | harness 本身也贡献成功率，不能全归给基础模型 |
-| [GR00T 2](https://research.nvidia.com/labs/gear/gr00t-2) | Agent 选择阶段并检查执行；WAM 做接触操作；CaP 做可脚本化修复 | 任务程序、MCP 工具、CaP 原语、WAM API | 把长任务编排、局部恢复和接触丰富操作分开 | 依赖纠错数据、RL、可靠成功检查与足够精确的恢复原语 |
+| **[CaP-X](https://arxiv.org/abs/2603.22435v2)** | Coding model 单轮/多轮生成程序 | 基准 + 抽象层级/反馈模态/并行采样对照框架 | 剥离“模型能力”与“人工高层 API 脚手架” | 论文 v2 写 187 任务，源码 README 为 39 任务；技能库仅从成功样本编译、缺独立验证者 |
+| **[COAP](https://arxiv.org/abs/2610.12369v1)** | **在线零模型**（固定代码状态机）；Agent 仅离线改代码 | 3 类显式状态 + 5 层共享库 + worktree diff 变更门禁 | 让状态、任务逻辑与代码演进完全可审计、确定性运行 | 全部为 RoboDojo 仿真，依赖 benchmark 常量；截至核查日未见作者公开代码 |
+| **[ASPIRE](https://arxiv.org/abs/2607.00272v2)** | Coding agent 在线调试、诊断与修复 | 逐原语 trace 引擎 + 独立验证者晋升技能库 + K 路进化搜索 | 防止把单次偶然成功污染成共享技能 | 固定白名单 API 决定上限；验证通过只证知识可传递、不证跨任务泛化；调用成本高 |
+| **[GR00T 2](https://research.nvidia.com/labs/gear/gr00t-2)** | System-2 Agent 编排；CaP 恢复；2B WAM 执行接触 | MCP 工具服务 + 单 control worker + 联合视频-动作 DiT | 把长任务阶段/掉落恢复与精细接触操作解耦 | 97%–98% 依赖 DAgger/RL/恢复技能组合；默认仓库仍为 N1.7，N2 分支为评估许可 |
+| *[HexaShell](https://arxiv.org/abs/2610.23479) / [Auriga](https://arxiv.org/abs/2611.01112)* | 通用 VLM 在 harness 中逐轮写短代码/调工具 | 通用工具、沙箱、回读 + 约 39–61 行 Markdown **task skill** | 降低跨任务工程适配 | harness 本身贡献大量成功率；task skill 是文本说明书，不是冻结代码程序 |
 
-这里最重要的区分不是“有没有 Python”，而是**运行时是否仍有模型、经验到底保存在代码、文本还是权重中、谁拥有安全与成功判定**。
+下面把四项核心工作的具体机制拆开：
 
-### CaP 不是 VLA
+1. **CaP-X — 把抽象层级与视觉反馈变成受控实验（§3、`cap-x@53e9966d`）**：系统拆开 4 个变量：（1）**抽象层级**（高层宏 vs 定位/抓取/IK 低层原语）；（2）**时间交互**（单轮开环 vs 多轮读报错改代码）；（3）**感知接地**（纯文本日志 vs 直接交错原始 RGB 图 vs 先把前后帧转成“物体是否移动、夹爪是否接触”的**结构化视觉差分文字**）；（4）**测试时计算**（多轮、技能合成与 9 路单模型 / 3×3 多模型并行采样）。一个反直觉发现是：**直接把原始 RGB 图塞给 coding model 往往不如纯执行文本，而把前后帧先转成结构化视觉差分再交回代码模型则显著提升**——说明反馈并非越多越好，必须与代码决策空间对齐。
 
-两者都可以把视觉和语言映射为动作，但机制不同：
+![CaP-X 高低层 API 抽象对比](https://arxiv.org/html/2603.22435v1/high_vs_low.png)
 
-- VLA 通常从示范学习一个从观测到动作或动作块的策略；
-- Code as Policy 让模型生成显式程序，再由规划器、控制器和机器人 API 执行；
-- 代码路线更容易替换 API、插入条件分支和追踪中间量；
-- VLA 更接近连续动作生成，但推理可解释性和任务逻辑定位通常更难。
+*图 1（[CaP-X Figure 2](https://arxiv.org/html/2603.22435v1#S3.F2)）：高层封装掩盖了大量任务先验，拆到底层感知/规划/控制原语后模型成功率明显分化，凸显评测必须固定并登记 API 抽象层级。*
 
-二者也不是互斥关系。最现实的系统常把 Code as Policy 放在任务层，把 VLA、阻抗控制或专用控制器放在局部接触层。
+2. **COAP — 离线改代码、在线冻结显式状态机（§3、`2610.12369v1`）**：COAP 明确与在线调大模型的 Agent Harness 划清界限。在线输入仅三路 RGB、语言、关节角、末端位姿与夹爪回显，代码显式维护**环境状态**（物体位姿/尺寸/关系及误差、来源、时间）、**机器人状态**与**任务状态**（阶段、手—物分配、跨遮挡记忆），并按 `运动 → 感知 → 操作原语 → 对象族 → 任务程序` 五层组织。coding agent 只在离线读失败记录、于独立 worktree 提交完整 diff，通过兼容性与默认关闭保护并在验证布局上超过重跑噪声边际后才合并。
+3. **ASPIRE — 逐原语 trace 与独立验证者晋升门禁（§3、`ASPIRE@fa00f0ef`）**：执行引擎记录每次原语调用的输入输出、关键帧、mask overlay、抓取候选与规划状态，并将被测代码隔离在白名单内（禁止读取 reward、success 或特权状态）。新修复先以 proposal 独立存放，交由**看不到提出者代码的 fresh verifier** 在同任务 **5 个开发 seed、最多 2 次尝试内达到 ≥4/5 成功**才晋升为 `verified`，且后续任务逐条标记 `useful / misleading / wrong / not-applicable`。当单轨迹修复陷入平台期时，再开启 K 候选进化搜索并在冻结 held-out 集评测。
 
-### GR00T 2：Agent、CaP 与接触策略各管一段
+![ASPIRE 执行引擎、技能晋升与进化搜索系统架构](https://arxiv.org/html/2607.00272v1/system_design.png)
 
-GR00T 2 给出了一个很清楚的系统分工：**Agent 决定“做什么”，CaP 执行可编程的搬取和恢复，World-Action Model 执行难脚本化的接触丰富操作。** 三者通过 MCP 工具服务器连接，并由一个 control worker 串行化命令，避免策略和程序同时抢机器人控制权。
+*图 2（[ASPIRE Figure 1](https://arxiv.org/html/2607.00272v1#S2.F1)）：ASPIRE 将逐原语执行追踪、独立验证者技能库晋升与多候选进化搜索连成闭环，并强制隔离开发 seed 与留出 seed。*
 
-截至 2026-11-20，默认 `Isaac-GR00T` main/release 仍是 N1.7，项目页仍把正式 GR00T 2 代码标为 December。不过公开仓库存在非默认分支 `codex/n2-action-expert`，可静态阅读 N2 模型、训练和部署代码；它使用 NVIDIA 评估许可证而非开源许可证，base checkpoint `nvidia/GR00T2Internal` 也仍是私有。源码结构可以确认：冻结 Wan VAE 编码多视角视频、Cosmos-Reason1 编码语言，Cosmos 2B DiT 处理视频/状态/动作 token，动作和视频分别用 flow-matching velocity loss；推理可以联合生成未来视频与动作，也可以在 disjoint 模式只生成动作。
+4. **GR00T 2 — Agent + CaP + WAM 三层分工与 SuperMimic 局部反例**：GR00T 2 用冻结 Wan VAE + Cosmos-Reason1 + 2B Cosmos-Predict2.5 DiT 联合去噪多视角未来视频与 48 步动作块（支持 joint video-action 或 disjoint action-only 推理），专攻难以脚本化的接触操作；System-2 Agent 通过 MCP 调用 `wam_act`/`stop_wam`、`localize_object`（SAM 3）和 `move_to_pose`（cuRobo）做阶段调度与掉落恢复，并由**单一 control worker 串行化命令**避免双源抢控。但社区独立适配 **[SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation)** 提供了关键反例：在已知任务、固定工作台与低维全状态的 mjlab 仿真中，单任务可微世界模型控制无需视觉大模型即可完成螺母套柱（`95.0%`）与抽屉放胶囊（`90.2%`，各 256 held-out resets）——说明 WAM 的真正不可替代处在于**开放视觉、语言、多任务与跨本体**，而非“只有大 WAM 能完成局部接触”。
 
-以随机倒料的小车装配为例：零件掉落时，Agent 检测到阶段没有前进，调用 `localize_object`、`move_to_pose` 和 `set_gripper` 重新抓取；随后把轮子对准、旋紧等需要精细接触的步骤交还给 GR00T 2。这不是“Agent 学会了装配”，而是 Agent 修复了一个可观测的局部状态，再让专门的接触策略继续工作。
+### 3. 主实验设置、结果汇总与自带反例
 
-论文报告三类装配从 SFT+DAgger 的 `84/71/78` 次成功提高到 Agent+CaP 的 `98/97/97`；五次连续插接在 SFT+RL+Agent 下达到 `19/20`（网线）和 `20/20`（充电器）。这些结果同时包含纠错数据、RL、任务程序、重试和成功验证，不能归因给 Agent 或 CaP 单独一项。
+| 工作与基准 | 条件与分母 | 核心结果（作者报告） | 这组结果实际证明了什么 / 关键反例 |
+| --- | --- | --- | --- |
+| **CaP-X**（7 核心任务，12 模型） | 100 trials/tier；对照抽象层、多轮、视觉差分与 9 路并行 | 撤掉高层宏后成功率显著下滑；多轮 + 结构化视觉差分 + 并行采样大幅拉回 | **API 脚手架与反馈格式会主导分数**；单报“某模型成功率高”无法区分模型与接口贡献 |
+| **COAP**（RoboDojo 42 双臂任务） | 仿真 RGB + 本体 + 语言，在线无模型 | COAP **`70.24%`** vs 最强 WAM `29.64%` / VLA `27.96%`；Memory **`90%`** vs Harness `47%`；在线 CPU 中位 **`0.3 ms`** | 显式状态与测量在仿真长时/精度任务优势显著；但全部在仿真，且 62% 失败仍在感知/接触层 |
+| **ASPIRE**（LIBERO-Pro，Opus 4.6） | 零样本 → 逐原语 trace + 技能库 → +进化搜索 | 平均成功率 **`14% → 62% → 72%`**（特定全配置最高可达 99%） | **最大跳升来自执行引擎 trace 与技能循环（+48 pp）**，进化搜索排第二（+10 pp）且成本陡增 |
+| **GR00T 2 Agent+CaP**（真机装配 & 插接） | 3 类随机倒料装配各 100 次；5 连续插接各 20 次 | 装配 SFT+DAgger `84/71/78` → +Agent+CaP **`98/97/97`**；连续插接 SFT+RL+Agent **`19/20`（网线）、`20/20`（充电器）** | 系统分工显著拉高长任务可靠性；**反例：无 RL 仿真中 S2 干预仅 `24%`（RoboDojo 188/773）与 `56%`（RoboCasa 553/988）成功** |
+| **SuperMimic-manipulation**（ARX5 mjlab） | 256 held-out resets，每任务单训（A100 3.4–10.5 h） | `square` **`95.0%`**、`drawer` **`90.2%`**；但 `drawer` 另一种子仅 `75.9%`（checkpoint 波动 `24–90%`） | 已知全状态仿真中专用控制器可胜任局部接触；但无视觉/语言/跨本体/真机能力 |
 
-更重要的限制来自失败本身：在 300 次 Agent 装配里，3 次失败是螺丝只旋进一部分，GR00T 2 和 Agent 都把细微视觉差异判成完成；无 RL 的仿真中，S2 干预后也只有 `24%`（RoboDojo）和 `56%`（RoboCasa365）成功。Agent 能调用恢复程序，不代表它拥有正确的物理测量，更不代表每次恢复都有效。
+---
 
-这也不意味着 WAM 是接触层的唯一实现。[SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation) 把 SuperMimic 风格的可微世界模型优化用于状态式机械臂操作；固定提交的报告在仿真 ARX5 上把方形螺母套柱做到 `95.0%`、把胶囊放抽屉并推关做到 `90.2%`（各 256 个 held-out reset 回合）。它说明：在**已知任务、完整本体/物体状态、固定工作台和可构造 reset bank** 的仿真里，task-specific controller 可以承担 GR00T 2 的局部接触层。但它只看低维状态，每任务单独训练，没有语言、开放视觉、跨本体、Agent 恢复或真机结果；因此不能替代 GR00T 2 的完整系统角色。判断“谁替代谁”至少要用同任务、同状态、同动作接口和同 scorer。
+## 二、哪些隐藏前提与反例可能改变判断？
 
-这里应使用 **CaP = Code-as-Policy**。它与 [Contact-Anchored Policy（CAP）](https://github.com/huangkiki/Dexlab/discussions/309) 无关：后者用三维接触锚点消除“在哪里交互”的歧义，前者用程序组合定位、运动、夹爪和验证。GR00T 2 的完整分析见 [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419)；#419 的候选只进入 Triage，不构成实验授权。
-
-### Task skill 不是 task program
-
-task program 是可执行策略；task skill 是运行时模型读取的说明，例如完成条件、已验证参数、常见失败和预算。HexaShell 的 task skill 约一页文本，不是一段被固定执行的任务程序。把二者都叫“技能”会让“哪些知识真的进入了运行时决策”变得不可审计。
-
-## 4. 为什么它有效，以及在哪里失效
-
-### 有效机制
-
-1. **组合性。** 同一组定位、抓取、规划和运动 API 可以按任务重新组合，不必为每个长尾指令收集完整遥操作数据。
-2. **可审计性。** 每个中间测量和分支都能留下值、来源、时间和误差；失败可以落到具体 API 或状态转换。
-3. **持续修改。** 失败 trace 可以转成程序 diff、约束说明或可复用 helper，而不必每次重新训练权重。
-4. **反馈闭环。** 多轮执行、结构化视觉差分和 per-primitive trace 可以让模型从异常中恢复。
-
-### 主要失效
-
-- **抽象泄漏。** 高层 `pick()` 可能隐藏定位、抓取和持物失败；模型分数会错误归因给理解能力。
-- **反馈错配。** 原图、成功标志、文本日志和接触冲量回答不同问题；反馈越多不等于诊断越好。
-- **系统层级混淆。** 模型、harness、控制器、仿真器和评分器共同决定结果，不能只报一个端到端分数。
-- **安全与供应链边界。** 执行模型生成的代码需要白名单工具、隔离环境和人工扩展 API；进程 watchdog 不是安全沙箱。
-- **技能污染。** 从成功样本直接抽函数会固化偶然成功或评分漏洞；一次修复也不能自动晋升为通用技能。
-- **成本与时延。** 多轮推理、并行候选、验证者和 evolution search 都消耗模型调用与物理 rollout。
+1. **`S2 intervenes ≠ S2 rescues`，且视觉成功检查本身会漏判**：GR00T 2 报告的 300 次 Agent 装配中有 3 次失败是**螺丝只旋进一半却被 GR00T 2 与 Agent 双双判成完成**；仿真失败人工归类中，38%–39% 是恢复动作比运动规划工具更精细，24%–38% 进入不可恢复或超时状态；YAM 清桌中机器人有 38% 时间在干等 Agent（中位 7.5 s/轮）。
+2. **抽象泄漏与技能污染**：高层 `pick()` 返回成功常掩盖浅夹持或滑移；CaP-X 固定源码 `53e9966d` 的技能编译只筛选成功 trial，若评分器存在漏洞，错误策略会被自动固化成共享函数；即使通过 ASPIRE 的 5-seed 验证，源码也明确写道它只证明“修复知识能传递给新验证者”，不证明跨任务泛化，且入库后缺乏持续复验。
+3. **跨论文总分不可直接横比**：COAP 在 RoboDojo 的 `70.24%`、HexaShell 的 `85.0%` 与 GR00T 2 在 layout bank 0 的 `75.8%` 使用不同的布局集合、观测常量、尝试预算与默认执行器选择，绝不能拼成一张跨论文排行榜。
 
 (cap-evaluation)=
-## 5. 评测 Code as Policy 时至少要记什么
+### 评测 Code as Policy 时的 7 项最低登记清单
 
-CaP-X 给出的最有价值提醒，是不要把“模型能力”与“人工提供的接口脚手架”混在一起。一次可信比较至少应登记：
+任何可信对比至少必须同步登记：（1）可用原语的抽象层级及是否给示例；（2）单轮/多轮次数、反馈模态与 token/调用预算；（3）工具返回值是否包含实际到达、接触、错误码与关键帧；（4）开发 seed、未见检查 seed 与冻结 held-out seed 的隔离边界；（5）程序、模型、harness、控制器、仿真器与评分器版本号；（6）无效运行、超时、接口报错与物理失败是否全部计入同一分母；（7）被测程序或 Agent 能否读取 reward、success、原生特权状态或未来状态。
 
-- 可用 primitive 的抽象层级，以及是否提供用法示例；
-- 单轮/多轮次数、每次反馈的模态和 token/调用预算；
-- 工具返回是否包含实际到达、接触、错误码和关键帧；
-- 开发 seed、未参与调参的未见 seed 和最终 held-out seed；
-- 程序、模型、harness、控制器、仿真器和评分器版本；
-- 无效运行、超时、接口错误和物理失败是否进入分母；
-- 被测程序能否读取 reward、success、原生状态或未来状态。
+---
 
-策略比较若只写“模型 A 成功率更高”，却没有这些条件，通常无法判断提升来自模型、API、更多尝试还是评分变化。
+## 三、对 DexLab 的借鉴判断与最小验证切片
 
 (dexlab-policy)=
-## 6. DexLab 应该怎样用这条路线
+对 DexLab 而言，Code as Policy 最有价值的落点是**把失败归因、控制权切换与诊断知识沉淀做成可审计的工程实验**，而不是用代码 Agent 替代物理引擎或评分器。
 
-### 直接借鉴
+- **直接借鉴**：
+  1. **四层唯一所有权 + 单控制者合同**：任务层（阶段与恢复选择）、程序层（白名单原语）、执行层（仿真/控制器读回）与独立评分层彻底分离；任何执行者切换前先停止旧控制源并记录 `command_owner`、`recovery_attempted`、`recovery_succeeded`、`stage_resumed` 与 `full_task_succeeded`；严禁程序/Agent 读取 reward 或 success。
+  2. **先做反馈视图消融，再谈 Agent 编排**：把已有失败记录组织成不同粒度的观察包，验证到底哪一层证据能把竞争物理假设分开。
+  3. **带触发前提与晋升状态的 skill card**：把失败根因沉淀为 `失败签名 → 触发前提 → 修复动作 → 适用边界 → 支持证据 → 反例`，严格区分 `verified_once`、`transferred` 与 `refuted`。
+- **需适配验证**：
+  - 在已知全状态仿真接触任务上，将 SuperMimic 风格的 task-specific 局部接触控制器与同环境 PPO、固定脚本、通用 WAM 放在**同一观测权限与同一独立 scorer** 下对照，明确通用模型与专用控制器的性价比边界。
+- **暂不采用**：
+  - 不搭建多 Agent 平台、自动任务课程或默认开启 9 路并行/进化搜索；
+  - 不让自然语言 `task skill` 与可执行 `task program` 共用一个模糊标签；
+  - 不把作者在 RoboDojo / LIBERO-Pro / 真机上的组合成功率当作 DexLab 可默认达到的基线。
 
-1. **把 Code as Policy 用作实验表示。** 任务逻辑、测量、动作和评分写成不同所有权，让每次失败能沿时间线追到第一失效层。
-2. **先做反馈消融。** 对同一条面包或入槽失败记录，比较“终态/视觉进度”与“逐原语/接触状态”两种观察包能否改善归因。
-3. **把根因整理成 skill card。** 每条至少包含失败签名、触发前提、候选修复、适用边界、支持证据与反例。
-4. **技能晋升与任务成功分开。** `verified_once`、`transferred`、`refuted` 是不同状态；同任务有限 seed 复现只证明知识能传递，不证明泛化。
+### 第一步最小可证伪验证切片
 
-### 暂不采用
+- **验证问题**：在 DexLab 已公开的 [烤面包滑落失败记录](robodojo-bread-slip.md) 上，冻结物理与独立评分，仅改变反馈视图与控制权合同，是否能显著提升**首次失效层归因**的准确率与可复算性？
+- **固定条件与对照**：
+  1. **反馈消融（源自 CaP-X / COAP）**：对同一批冻结失败轨迹分别提供视图 `A`（任务阶段、终态谓词、前后图或结构化视觉差分）与视图 `B`（在 `A` 基础上加入逐原语请求/实际到达、接触建立/丢失、法向冲量与首次滑移时间），由独立诊断者分别写出首次失效链；
+  2. **单控制者与技能卡晋升（源自 GR00T 2 / ASPIRE）**：先跑固定脚本基线，再对比受限 Agent（只读结构化状态、只能调用白名单恢复原语、禁读 reward/success）；若产出修复，交由不看原代码的 fresh verifier 在 5 个开发 seed（最多 2 次尝试）上验证并独立报告留出 seed。
+- **通过与停止标准**：最低门槛是“能准确指向现有测量真正支持的第一失效层、区分竞争解释、保持失败/超时分母与旧评分不变”。若更细 trace 不改善归因、或固定脚本已能完成同等恢复，则直接止损，不扩展 Agent 或技能库。
 
-- 用 Code Agent 替代 DexLab 的物理引擎或独立评分器；
-- 因一次成功率提升就默认引入并行候选、进化搜索和开放式技能库；
-- 让 task skill 与可执行 task program 共用一个“skill”标签；
-- 把作者报告、演示视频或接口存在当成 DexLab 已复现能力。
+---
 
-### 第一个可验证问题
+## 四、可核查来源与证据范围
 
-选择已公开的烤面包滑落案例，冻结任务、物理和评分，只增加两类观察包：
-
-- `A`：任务阶段、成功谓词、前后图或结构化视觉变化；
-- `B`：在 `A` 上加入逐原语请求/结果、实际到达、接触建立/丢失、冲量和首次滑移。
-
-让独立诊断者分别写首次失效链。改变判断的最低证据不是“文本更详细”，而是：
-
-- 能否定位到现有测量真正支持的第一层；
-- 竞争解释是否被区分；
-- 同配置是否可复算；
-- 失败分母和旧评分路径是否保持不变。
-
-只有反馈契约稳定后，才值得测试“把修复写成 skill card，再由 fresh verifier 按卡复现”。若反馈不改善归因，增加代码生成或自动技能库只是增加成本。
-
-## 7. 推荐阅读顺序
-
-1. 先读原始 [Code as Policies](https://arxiv.org/abs/2209.07753)，理解“语言模型程序 + policy API”的基本命题。
-2. 再读 [CaP-X](https://arxiv.org/abs/2603.22435)，看抽象层、反馈和测试时计算如何改变结论，并参考 [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341)。
-3. 读 [COAP](https://arxiv.org/abs/2610.12369) 的显式状态与受控代码改动，参考 [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335)。
-4. 读 [ASPIRE](https://arxiv.org/abs/2607.00272) 的 trace、技能晋升和 held-out 协议，参考 [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342)。
-5. 读 GR00T 2 的 [官方白皮书](https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf) 的 §3.4 与附录 G，观察 Agent、CaP、接触策略和单一控制权如何分层，参考 [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419)。
-6. 最后回到 DexLab 的 [面包滑落证据](robodojo-bread-slip.md)与[模型评测协议](model-evaluation.md)，判断哪些机制能接进真实失败链。
-
-## 证据范围
-
-本页整理的是方法位置和可迁移机制，不是跨论文排行榜。论文性能数字均为作者报告；CaP-X、ASPIRE 的固定源码可确认 trace、反馈、技能晋升和评测边界。GR00T 2 使用 2026-11 官方白皮书核对，但官方代码要到 2026-12 才开放，因此这里没有审查其实现。本轮没有运行外部 Agent、外部 benchmark 或 DexLab 新物理实验。HexaShell/Auriga 仅按官方摘要定位为 agent harness 邻类，没有在本页重述其成功率排名。
-
-更广的仿真问题仍从《[当我们在讨论灵巧操作仿真时，我们在讨论什么？](dexterous-hand-simulation.md)》开始；Code as Policy 是其中“策略与评测”层的一个专题，不是整个仿真研究的总框架。
+- 论文与白皮书：[Code as Policies (arXiv:2209.07753)](https://arxiv.org/abs/2209.07753) · [CaP-X (arXiv:2603.22435v2)](https://arxiv.org/abs/2603.22435v2) · [COAP (arXiv:2610.12369v1)](https://arxiv.org/abs/2610.12369v1) · [ASPIRE (arXiv:2607.00272v2)](https://arxiv.org/abs/2607.00272v2) · [HexaShell (arXiv:2610.23479)](https://arxiv.org/abs/2610.23479) · [Auriga (arXiv:2611.01112)](https://arxiv.org/abs/2611.01112) · [GR00T 2 白皮书](https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf)
+- 固定源码：[`capgym/cap-x@53e9966d`](https://github.com/capgym/cap-x/tree/53e9966d7a8e2fa7494676772bccc35280f5c0ed) · [`NVlabs/ASPIRE@fa00f0ef`](https://github.com/NVlabs/ASPIRE/tree/fa00f0ef2bc1d91d594b9aa502c22133c9f538f7) · `Isaac-GR00T` `codex/n2-action-expert@7e492ad1` · [`emoPointer/supermimic_manipulation@eda7da48`](https://github.com/emoPointer/supermimic_manipulation/tree/eda7da480c6d92a68cc41c9628b7efdae08cae23)
+- 相关讨论与站内延伸：[COAP #335](https://github.com/huangkiki/Dexlab/discussions/335) · [CaP-X #341](https://github.com/huangkiki/Dexlab/discussions/341) · [ASPIRE #342](https://github.com/huangkiki/Dexlab/discussions/342) · [GR00T 2 #419](https://github.com/huangkiki/Dexlab/discussions/419) · [面包滑落证据](robodojo-bread-slip.md) · [模型评测协议](model-evaluation.md) · [灵巧操作仿真导读](dexterous-hand-simulation.md)
+- **核查范围（2026-11-26）**：综合自各论文/白皮书原文及固定提交的静态源码核查。全部成功率、延迟与恢复占比均为作者报告；COAP 未见公开代码库，GR00T 2 官方正式开源代码标为 2026-12（非默认 N2 分支受评估许可证约束且基座权重私有）；本轮未运行外部 Agent、外部 benchmark 或 DexLab 新增物理实验。

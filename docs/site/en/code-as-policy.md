@@ -1,178 +1,118 @@
 # Code as Policy: from model-written programs to verified robot skills
 
-## TL;DR
+> **At a Glance**
+>
+> | Field | Details |
+> | --- | --- |
+> | **Works Covered** | 1. [Code as Policies (arXiv:2209.07753)](https://arxiv.org/abs/2209.07753) (origin)<br>2. [CaP-X (arXiv:2603.22435v2)](https://arxiv.org/abs/2603.22435v2) · [COAP (arXiv:2610.12369v1)](https://arxiv.org/abs/2610.12369v1) · [ASPIRE (arXiv:2607.00272v2)](https://arxiv.org/abs/2607.00272v2)<br>3. [GR00T 2 Whitepaper (2026-11)](https://research.nvidia.com/labs/gear/gr00t-2) + local-contact counterexample [SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation) |
+> | **Pinned Sources** | [`capgym/cap-x@53e9966d`](https://github.com/capgym/cap-x/tree/53e9966d7a8e2fa7494676772bccc35280f5c0ed) (MIT) · [`NVlabs/ASPIRE@fa00f0ef`](https://github.com/NVlabs/ASPIRE/tree/fa00f0ef2bc1d91d594b9aa502c22133c9f538f7) (Apache-2.0) · `Isaac-GR00T` non-default branch `codex/n2-action-expert@7e492ad1` (eval license) · [`supermimic_manipulation@eda7da48`](https://github.com/emoPointer/supermimic_manipulation/tree/eda7da480c6d92a68cc41c9628b7efdae08cae23) · COAP: no public repo found |
+> | **Core Problem** | End-to-end VLAs obscure task-level logic, recovery, and root-cause attribution; yet when policies are written as code, model capability, API scaffolding, execution feedback, skill admission, and low-level contact control are routinely confounded. |
+> | **Core Approach** | Represents task semantics, state, feedback, and recovery as inspectable programs or skill cards: CaP-X isolates abstraction and feedback axes; COAP freezes deterministic stateful code online while editing offline; ASPIRE pairs per-primitive traces with fresh-verifier skill promotion; GR00T 2 splits System-2 Agent, CaP recovery, and 2B WAM contact control under a single control worker. |
+> | **Open-Source Status** | CaP-X and ASPIRE are open-source; COAP has no public repo; GR00T 2 default repo remains N1.7 (public N2 branch is evaluation-licensed with a private base checkpoint). |
+> | **DexLab Verdict** | **`experiment` (adopt feedback-view ablation, single-owner recovery contracts, and fresh-verifier skill cards; never replace physics engines or scorers with code agents)** — prove fine-grained traces improve failure attribution before expanding skill libraries or agent loops. |
 
-**Code as Policy is not “another VLA model.” It is a control representation: task semantics, feedback conditions and action order become an inspectable, editable program.**
+---
 
-Consider “grasp a bread slice, lift it, and place it on a plate.” A program may call localization, grasp generation, motion planning, gripper control, a hold check and release. Reliability depends less on whether an LLM can write Python than on where measurements come from, whether a close command matches the acquired contact, when support is lost, what the robot actually executed, and how an independent scorer defines success.
+## 1. What This Paradigm & Four Representative Works Actually Do
 
-This deserves its own topic because at least four forms now need to be distinguished:
+**Code as Policy (CaP) is not "another VLA"—it is an explicit control representation that expresses task phases, sensing checks, action order, and failure recovery as inspectable programs.** (Terminology note: here `CaP = Code-as-Policy`, distinct from `CAP = Contact-Anchored Policy` in [Discussion #309](https://github.com/huangkiki/Dexlab/discussions/309).)
 
-- a model generates programs at runtime, as in CaP-X and ASPIRE;
-- programs are frozen online while a model edits them offline, as in COAP;
-- an agent harness supplies tools, measurements and an admission gateway, as in HexaShell and Auriga;
-- task knowledge lives in a page of Markdown as a task skill, not in a strategy program executed at runtime.
+### Problem Setup, I/O, and Four-Layer Execution Stack
 
-**For DexLab, Code as Policy is a way to study failure attribution and skill memory—not a replacement for the physics engine or evaluation contract.** Establish an auditable feedback chain on one existing failure before discussing skill promotion or automated evolution.
-
-## 1. Start with one dropped slice
-
-The following is teaching pseudocode, not an implemented DexLab or author API:
-
-```python
-bread = localize_object("bread slice")
-grasp = select_grasp(bread, strategy="top_down")
-move_to_pose(grasp.approach_pose)
-close_gripper()
-
-if not verify_hold("bread slice", min_lift_m=0.02):
-    raise TaskFailure("grasp_not_established")
-
-move_to_pose(plate.approach_pose)
-open_gripper()
-```
-
-The program is easier to inspect because it names a task decomposition. It also introduces new failure locations:
-
-- `localize_object` may select a neighbor or a shelf edge;
-- `select_grasp` may produce a shallow top-edge pinch;
-- a successful motion plan is not a measured arrival;
-- a successful close call does not establish load-bearing contact;
-- `verify_hold` may use stale vision, a wrong threshold, or miss rotation;
-- the scorer may treat “above the plate” as “placed on the plate.”
-
-The value is not that code is automatically reliable. Explicit programs turn reliability into **separate propositions that can be checked**. Without traces, state and independent scoring, code only packages the failure in plausible logic.
+Consider picking up a bread slice, lifting it, and placing it onto a plate via `localize_object` → `select_grasp` → `move_to_pose` → `close_gripper` → `verify_hold` → `open_gripper`. Inputs are **language goals + structured perception/state APIs + execution traces**, and outputs are **executable task programs, skill cards, or allowlisted tool calls**. Reliability breaks cleanly into four layers with distinct ownership:
 
 (execution-stack)=
-## 2. A program is not a standalone layer
-
-| Layer | Question | Typical contents | Must not be conflated with |
+| Layer | Question Answered | Typical Artifacts | Timescale & Non-Conflation Boundary |
 | --- | --- | --- | --- |
-| Task | What to accomplish and when to stop or recover | language goal, stages, success predicates, retry budget | directly executable control logic |
-| Program | How to compose perception and action | conditions, loops, functions, error branches | low-level servoing or physical truth |
-| Skill | Which capabilities are reusable | localization, grasp generation, IK, trajectory execution, tools | an entire task-level instruction document |
-| Execution | How commands become joint, contact and object response | controller, planner, simulator/hardware, clocks | task success |
+| **Task layer (System 2)** | What to do next, when to retry or stop | Language goal, stage state, completion checks, recovery selection | Outer-loop seconds (CaP-X turn `6.8–23.8 s`; GR00T 2 Agent median `7.5 s`); not a high-rate contact controller |
+| **Program layer (CaP)** | How sensing, branching, and recovery compose | Python state machines, conditionals, allowlisted primitive calls | COAP frozen code runs in `0.3 ms` median CPU; returning `True` does not certify physical hold |
+| **Skill / policy layer** | How localization, motion, or contact is executed | Grasp generators, IK/planners, VLA/WAM action chunks (`73–167 ms`), local controllers | Do not conflate executable task programs with natural-language task skills |
+| **Execution & scoring layer** | How commands produce physics and who scores success | Simulator/robot controller, native contact readback, independent scorer | Programs and agents must never read rewards or mutate success predicates |
 
-Task code usually runs in an outer loop. Contact acquisition, slip and release may need millisecond-scale inner-loop control. CaP-X reports code iterations of roughly `6.8–23.8 s` and VLA action chunks or single-action inference of roughly `73–167 ms` under its conditions. These are not a fair performance ranking, but they show why Code as Policy belongs primarily at the system-2 task layer rather than replacing high-frequency contact control by default.
+### Taxonomy & Deep Breakdown of the Four Representative Works
+
+Recent systems span four distinct architectures that should not be lumped together:
 
 (policy-map)=
-## 3. Four related forms are not one system
-
-| Work | Runtime task decision maker | Primary artifact | Problem addressed | Key boundary |
+| Work | Online Task Decision Maker | Core Artifact & Mechanism | Bottleneck Addressed | Key Evidence Boundary |
 | --- | --- | --- | --- | --- |
-| [Code as Policies](https://arxiv.org/abs/2209.07753) | an LLM writes programs from language and API context | executable policy code | turn instructions into compositions of perception, geometry and control APIs | depends on hand-designed primitives and few-shot examples |
-| [CaP-X](https://arxiv.org/abs/2603.22435) | a coding model writes code over one or multiple turns | benchmark, programs, execution feedback, skill library and RL interface | compare abstraction, interaction, visual grounding and test-time compute | scores depend on API scaffolding, feedback and budget |
-| [COAP](https://arxiv.org/abs/2610.12369) | fixed code runs online; a coding agent edits code offline | explicit state, task programs, shared code library | make state, task logic and code changes auditable | all reported results are simulated; cross-body/material transfer is unproven |
-| [ASPIRE](https://arxiv.org/abs/2607.00272) | a coding agent executes, diagnoses and repairs online | primitive traces and a reusable skill library | persist validated repairs and transfer them to later tasks | fixed API, frontier-model dependence, and one-time validation is not generalization |
-| [HexaShell](https://arxiv.org/abs/2610.23479) / [Auriga](https://arxiv.org/abs/2611.01112) | a general model calls tools or writes short programs inside a harness | general tools, measurements, admission and optional task skills | reduce per-robot and per-benchmark task-specific code | the harness itself contributes to success and cannot be hidden inside a model-only score |
-| [GR00T 2](https://research.nvidia.com/labs/gear/gr00t-2) | an agent selects stages and checks execution; a WAM handles contact; CaP handles scriptable repair | task program, MCP tools, CaP primitives and WAM API | separate long-horizon orchestration, local recovery and contact-rich manipulation | depends on correction data, RL, reliable success checks and sufficiently precise recovery primitives |
+| **[CaP-X](https://arxiv.org/abs/2603.22435v2)** | Coding model (single/multi-turn code gen) | Benchmark + abstraction, feedback, and test-time compute controls | Separates model reasoning from hand-built API scaffolding | Paper v2 lists 187 tasks vs. 39 in repo README; skill compilation filters successful trials without a fresh verifier |
+| **[COAP](https://arxiv.org/abs/2610.12369v1)** | **No online model** (frozen stateful code); offline coding agent | 3-part explicit state + 5-layer library + worktree diff change gate | Auditable state, deterministic runtime, regression-gated code evolution | All results in RoboDojo sim with benchmark constants; no public repo located |
+| **[ASPIRE](https://arxiv.org/abs/2607.00272v2)** | Coding agent debugging & repairing online | Per-primitive trace engine + fresh-verifier skill promotion + K-way evolutionary search | Stops one-off lucky fixes from polluting shared skill memory | Fixed allowlisted APIs cap expressiveness; verification proves transferability, not generalization; high compute cost |
+| **[GR00T 2](https://research.nvidia.com/labs/gear/gr00t-2)** | System-2 Agent plans; CaP recovers; 2B WAM handles contact | MCP tool server + single control worker + joint video-action DiT | Decouples long-horizon recovery from fine contact-rich control | 97%–98% reflects DAgger + RL + recovery skills combined; default repo still N1.7, N2 branch is eval-licensed |
+| *[HexaShell](https://arxiv.org/abs/2610.23479) / [Auriga](https://arxiv.org/abs/2611.01112)* | Generalist VLM writing short cells/tool calls in a harness | Generic tools, sandbox, readback + ~39–61 line Markdown **task skills** | Cuts per-robot/per-task code adaptation | Harness contributes substantially to success; task skills are text guides, not frozen programs |
 
-The important distinction is not the presence of Python. It is **whether a model remains in the runtime loop, where experience is stored—code, text or weights—and who owns safety and success determination.**
+Breaking down the concrete mechanisms of the four core works:
 
-### CaP is not VLA
+1. **CaP-X — Turning abstraction and feedback into controlled variables (§3, `cap-x@53e9966d`)**: Systematically varies (1) **abstraction tier** (high-level macros vs. low-level localization/grasp/IK primitives), (2) **temporal interaction** (one-shot vs. multi-turn debug), (3) **perceptual grounding** (text logs vs. interleaved raw RGB vs. **structured visual-diff text** summarizing object motion and gripper contact), and (4) **test-time compute** (multi-turn, skill synthesis, 9-way single-model or 3×3 multi-model sampling). Counterintuitively, **interleaving raw RGB often underperforms plain text logs, whereas translating before/after images into structured visual diffs yields large gains**—showing feedback must match the decision interface.
 
-- VLA policies usually learn a mapping from observations to actions or action chunks from demonstrations.
-- Code as Policy writes an explicit program; planners, controllers and robot APIs execute it.
-- Code can be modified and instrumented more directly, but depends on the exposed API and execution stack.
-- VLA generates continuous actions more directly, while task logic and intermediate failure attribution are often harder to inspect.
+![CaP-X high-level vs low-level abstraction comparison](https://arxiv.org/html/2603.22435v1/high_vs_low.png)
 
-They are not mutually exclusive. A practical system can use Code as Policy in the task layer and a VLA, impedance controller or specialized controller for local contact.
+*Figure 1 (from [CaP-X Figure 2](https://arxiv.org/html/2603.22435v1#S3.F2)): Removing high-level hand-engineered macros exposes large performance gaps across models, proving API abstraction level must be logged alongside any success score.*
 
-### GR00T 2: separate ownership for agent, CaP and contact policy
+2. **COAP — Frozen explicit state machine online, coding agent offline (§3, `2610.12369v1`)**: Explicitly contrasts itself with online VLM harnesses. Online execution consumes 3-view RGB, language, joints, end-effector pose, and gripper echo with zero model calls, updating **environment state** (object poses/sizes/relations with uncertainty, source, and timestamp), **robot state**, and **task state** across a 5-layer stack (`motion → perception → manipulation → object family → task program`). Offline, a coding agent inspects failure logs, edits in an isolated worktree behind default-off guards, and merges only diffs that clear validation-layout noise margins.
+3. **ASPIRE — Per-primitive traces and fresh-verifier promotion (§3, `ASPIRE@fa00f0ef`)**: Captures per-call inputs/outputs, keyframes, mask overlays, grasp candidates, and planner status while restricting generated code to allowlisted tools (no access to rewards, success predicates, or privileged simulator state). New skill proposals live outside the shared library until a **fresh verifier**—blind to the proposer's code—solves **≥4/5 development seeds within 2 attempts**; downstream runs tag skills `useful / misleading / wrong / not-applicable`. K-candidate evolutionary search activates only when single-trace debugging plateaus, evaluated strictly on frozen held-out seeds.
 
-GR00T 2 provides a concrete division of labour: **the agent decides what to do, CaP performs programmable transport and recovery, and the World-Action Model performs contact-rich manipulation that is hard to script.** They connect through an MCP tool server, and one control worker serializes commands so the policy and code programs do not drive the robot at the same time.
+![ASPIRE execution engine, skill promotion, and evolutionary search architecture](https://arxiv.org/html/2607.00272v1/system_design.png)
 
-As of 2026-11-20, the default `Isaac-GR00T` main branch and release remain N1.7, and the project page still marks official GR00T 2 code as available in December. A public non-default branch, `codex/n2-action-expert`, nevertheless exposes N2 model, training and deployment code for static inspection. It uses an NVIDIA evaluation licence rather than an open-source licence, and the `nvidia/GR00T2Internal` base checkpoint remains private. The source confirms the structure: a frozen Wan VAE encodes multi-view video, Cosmos-Reason1 encodes language, and a Cosmos 2B DiT processes video, state and action tokens with separate flow-matching velocity losses for video and action. Inference can jointly generate future video and action, or use a disjoint action-only path.
+*Figure 2 (from [ASPIRE Figure 1](https://arxiv.org/html/2607.00272v1#S2.F1)): ASPIRE connects per-primitive execution tracing, fresh-verifier skill admission, and multi-candidate evolutionary search while strictly separating dev and held-out seeds.*
 
-In randomized toy-car assembly, for example, the agent detects that a stage has stalled after a part is dropped and calls `localize_object`, `move_to_pose` and `set_gripper` to recover the state. It then hands wheel alignment and fastening back to GR00T 2. The agent has not learned assembly; it repairs an observable local state and returns control to the contact policy.
+4. **GR00T 2 — Agent + CaP + WAM layering and the SuperMimic local-contact counterexample**: GR00T 2 pairs a frozen Wan VAE, frozen Cosmos-Reason1, and a 2B Cosmos-Predict2.5 DiT jointly denoising multi-view future video and 48-step action chunks (supporting joint or action-only disjoint inference) for contact-rich steps, while a System-2 Agent calls MCP tools (`wam_act`, `stop_wam`, SAM 3 `localize_object`, cuRobo `move_to_pose`) serialized by **one control worker** so control sources never collide. Crucially, the independent community port **[SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation)** serves as a sharp counterexample: in fixed-table, full-state mjlab simulation, a per-task differentiable world-model controller reaches `95.0%` on square-nut insertion and `90.2%` on drawer closing (256 held-out ARX5 resets each)—proving WAM's unique value lies in **open vision, language, multi-tasking, and cross-embodiment**, not exclusive mastery of local contact.
 
-The paper reports three assembly tasks rising from `84/71/78` successes with SFT+DAgger to `98/97/97` with Agent+CaP. Five consecutive insertions reach `19/20` for Ethernet cables and `20/20` for chargers with SFT+RL+Agent. These results jointly include correction data, RL, task programs, retries and success checks; they cannot be assigned to the agent or CaP alone.
+### Main Experiments, Results, and Built-in Counterexamples
 
-The failures expose the limit. Three of 300 agent-assisted assembly episodes failed because a screw was only partly driven, while both GR00T 2 and the agent judged the subtle visual difference complete. Without RL, only `24%` of S2 interventions on RoboDojo and `56%` on RoboCasa365 succeeded. Calling a recovery program is not the same as measuring the physical state correctly or establishing that the repair worked.
+| Work & Benchmark | Protocol & Denominator | Key Results (Author-Reported) | What This Proves / Counterexample |
+| --- | --- | --- | --- |
+| **CaP-X** (7 core tasks, 12 models) | 100 trials/tier across abstraction, turns, visual diff, 9-way sampling | Removing high-level macros drops SR sharply; multi-turn + structured visual diff + parallel compute recover much of it | **API scaffolding and feedback format dominate scores**; raw model SR cannot be read without interface conditions |
+| **COAP** (RoboDojo 42 bimanual tasks) | Sim RGB + proprioception + language, zero online LLM calls | COAP **`70.24%`** vs. best WAM `29.64%` / VLA `27.96%`; Memory **`90%`** vs. Harness `47%`; median CPU **`0.3 ms`** | Explicit state and pixel measurement excel in sim; yet 62% of remaining failures are still perception/contact |
+| **ASPIRE** (LIBERO-Pro, Opus 4.6) | Zero-shot → trace engine + skill loop → + evolutionary search | Mean success **`14% → 62% → 72%`** (up to 99% under full budget/config) | **Largest gain comes from per-primitive trace + skill loop (+48 pp)**; evolutionary search adds +10 pp at high cost |
+| **GR00T 2 Agent+CaP** (Real assembly & insertion) | 3 dumped-part assemblies (100 trials each); 5-in-a-row insertions (20 each) | Assembly SFT+DAgger `84/71/78` → +Agent+CaP **`98/97/97`**; insertions SFT+RL+Agent **`19/20` (cable), `20/20` (charger)** | Clear system-level reliability boost; **counterexample: S2 intervention without RL succeeds only `24%` (RoboDojo 188/773) and `56%` (RoboCasa 553/988)** |
+| **SuperMimic-manipulation** (ARX5 mjlab) | 256 held-out resets, per-task training (3.4–10.5 h on A100) | `square` **`95.0%`**, `drawer` **`90.2%`**; second `drawer` seed `75.9%` (checkpoint swing `24–90%`) | Task-specific state controllers can cover local contact in known sim; lacks vision, language, cross-embodiment, and hardware validation |
 
-Nor is the WAM the only possible contact layer. [SuperMimic-manipulation](https://github.com/emoPointer/supermimic_manipulation) adapts SuperMimic-style differentiable world-model optimization to state-based arm manipulation. At the pinned revision it reports `95.0%` on seating a square nut on a peg and `90.2%` on placing a pod in a drawer and pushing it closed, each over 256 held-out reset episodes in simulated ARX5. This shows that a task-specific controller can carry the local contact role when the task is known, full body/object state is available, the workcell is fixed, and reset banks can be built. It sees only low-dimensional state, trains one policy per task, and has no language, open-vision, cross-embodiment, agent-recovery or real-robot result. It therefore does not replace GR00T 2's full system role. A replacement claim must compare the same task, state, action interface and scorer.
+---
 
-This page uses **CaP = Code-as-Policy**. It is unrelated to [Contact-Anchored Policy (CAP)](https://github.com/huangkiki/Dexlab/discussions/309), which removes ambiguity about where interaction should occur by conditioning on a 3D contact anchor. See [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419) for the full GR00T 2 review. Its candidate slice is in Triage only and is not an execution authorization.
+## 2. Counterexamples, Hidden Switches, and Evidence Boundaries
 
-### Task skill is not task program
-
-A task program is an executable policy. A task skill is runtime guidance read by a model, such as completion conditions, validated parameters, common failures and budgets. HexaShell's task skill is roughly one page of text, not a task program that is automatically executed. Calling both “skills” obscures which knowledge actually entered runtime decisions.
-
-## 4. Why it works, and where it breaks
-
-### Mechanisms that help
-
-1. **Composition.** One set of localization, grasp, planning and motion APIs can be recomposed across tasks without collecting a full demonstration dataset for every long-tail instruction.
-2. **Auditability.** Each measurement and branch can retain value, source, time and uncertainty, allowing a failure to land on a specific API or transition.
-3. **Persistent modification.** A trace can become a program diff, constraint or helper instead of a new set of learned weights.
-4. **Feedback loops.** Multi-turn execution, structured visual differencing and primitive traces can support recovery from several failure classes.
-
-### Dominant failures
-
-- **Abstraction leakage.** A high-level `pick()` can hide localization, grasp and hold failures; a score then misattributes them to model understanding.
-- **Feedback mismatch.** Raw images, success flags, text logs and contact impulses answer different questions. More feedback is not automatically better diagnosis.
-- **System-layer conflation.** Model, harness, controller, simulator and scorer jointly determine a score.
-- **Safety and supply boundaries.** Generated code needs allowlisted tools and isolation; a watchdog is not a security sandbox.
-- **Skill contamination.** Extracting helpers from all successful trials can preserve lucky behavior or scorer exploits. One successful repair is not a general skill.
-- **Cost and latency.** Multi-turn inference, parallel candidates, verifiers and evolutionary search consume model calls and physical rollouts.
+1. **`S2 intervenes ≠ S2 rescues`, and visual checks still miss physical failure**: In 300 real GR00T 2 Agent assemblies, 3 of 8 failures were **partially driven screws marked complete by both GR00T 2 and the Agent**; in sim, 38%–39% of SFT+Agent failures needed finer manipulation than S2 motion planners could provide, 24%–38% hit unrecoverable states or timeouts, and robots spent 38% of YAM table-clearing time waiting on the Agent (median 7.5 s/turn).
+2. **Abstraction leakage and skill contamination**: High-level `pick()` calls hide shallow grasps and slip; CaP-X (`53e9966d`) compiles skills strictly from successful trials without a fresh verifier, risking freezing scorer exploits; and even ASPIRE's 5-seed admission explicitly verifies *knowledge transferability*, not cross-task generalization or ongoing re-validation.
+3. **Cross-paper headline scores are not comparable**: COAP's `70.24%` (42 RoboDojo tasks), HexaShell's `85.0%`, and GR00T 2's `75.8%` (RoboDojo layout bank 0) differ in layout banks, privileged constants, retry budgets, and default-executor selection.
 
 (cap-evaluation)=
-## 5. What a Code as Policy evaluation must record
+### Minimum 7-Item Evaluation Checklist for Code as Policy
 
-- primitive abstraction and whether usage examples are supplied;
-- single/multi-turn count and token/call budgets;
-- whether feedback contains measured arrival, contact, error codes and keyframes;
-- development, unseen-check and final held-out seed partitions;
-- program, model, harness, controller, simulator and scorer versions;
-- invalid runs, timeouts, interface errors and physical failures in the denominator;
-- whether generated code can read reward, success, native or future state.
+Any credible comparison must log: (1) primitive abstraction tier and whether usage examples are supplied; (2) turn count, feedback modality, and token/call budget; (3) whether tool returns report actual arrival, contact, error codes, and keyframes; (4) separation of dev, unseen-check, and frozen held-out seeds; (5) pinned versions of program, model, harness, controller, simulator, and scorer; (6) inclusion of invalid runs, timeouts, API errors, and physics failures in the same denominator; and (7) confirmation that tested code/agents cannot read rewards, success predicates, or privileged/future state.
 
-A claim that “model A has higher success” is usually uninterpretable without these conditions. The improvement may come from the model, API, extra attempts or changed scoring.
+---
+
+## 3. What DexLab Should Borrow & First Minimal Validation Slice
 
 (dexlab-policy)=
-## 6. How DexLab should use this route
+For DexLab, Code as Policy is best used as **an auditable representation for failure attribution, command ownership, and verified diagnostic memory**—never as a substitute for physics engines or independent scorers.
 
-### Borrow directly
+- **Adopt directly**:
+  1. **Four-layer ownership + single-commander contract**: Separate task logic, allowlisted primitives, execution readback, and independent scoring; stop any active controller before handoff and log `command_owner`, `recovery_attempted`, `recovery_succeeded`, `stage_resumed`, and `full_task_succeeded` separately, blocking agent access to reward/success.
+  2. **Run feedback ablations before building agent loops**: Test which observation packet actually disambiguates competing physical hypotheses on existing failures.
+  3. **Promote root-cause knowledge via gated skill cards**: Structure cards as `failure signature → trigger preconditions → repair action → scope boundary → supporting evidence → counterexamples`, distinguishing `verified_once`, `transferred`, and `refuted`.
+- **Validate after adaptation**:
+  - On one known full-state contact task in simulation, benchmark task-specific SuperMimic-style differentiable world-model control against same-state PPO, scripted control, and generalist WAM post-training under **identical observations and one independent scorer**.
+- **Defer or reject**:
+  - Do not build a multi-agent coordinator platform, automatic curriculum, or default 9-way/evolutionary search;
+  - Do not overload "skill" across natural-language `task skills` and executable `task programs`;
+  - Do not treat RoboDojo / LIBERO-Pro / real-world composite scores as default DexLab targets.
 
-1. **Use Code as Policy as an experimental representation.** Give task logic, measurements, actions and scoring explicit ownership so a failure can be traced to its first failing layer.
-2. **Start with a feedback ablation.** For the existing bread or slot-contact failure, compare a terminal/visual-progress pack against a primitive/contact-state pack.
-3. **Turn a root cause into a skill card.** Include failure signature, trigger, candidate repair, applicability, evidence and counterexample.
-4. **Separate promotion from task success.** `verified_once`, `transferred` and `refuted` are different states. Reproduction on a few source seeds shows that knowledge can transmit, not that it generalizes.
+### First Minimal Falsifiable Slice
 
-### Defer
+- **Question**: On DexLab's existing [bread-slip failure record](robodojo-bread-slip.md), with physics and independent scoring frozen, do structured per-primitive/contact traces and a single-owner recovery contract improve **first-failure-layer attribution** and reproducibility?
+- **Controlled comparison**:
+  1. **Feedback ablation (CaP-X / COAP)**: Present the same frozen failure trajectories under View `A` (stage, success predicate, before/after images or structured visual diff) vs. View `B` (`A` plus per-primitive commands/arrivals, contact onset/loss, normal impulse, and first slip timestamp) to independent diagnosticians;
+  2. **Single-owner contract & skill-card gate (GR00T 2 / ASPIRE)**: Compare a fixed scripted baseline against a restricted Agent reading only structured state and invoking allowlisted recovery primitives (no reward/success access); promote any resulting repair only if a code-blind fresh verifier passes on 5 dev seeds (≤2 attempts) and reports held-out seeds separately.
+- **Pass / stop criteria**: Require accurate first-failure localization supported by actual measurements, separation of competing hypotheses, and unchanged failure/timeout denominators. Stop before expanding agents or skill libraries if finer traces do not improve attribution or if fixed scripts match Agent recovery.
 
-- replacing the physics engine or independent scorer with a code agent;
-- making parallel candidates, evolutionary search or an open-ended library the default after one gain;
-- using “skill” for both executable task programs and text guidance;
-- treating author-reported scores, demos or interface existence as a DexLab reproduction.
+---
 
-### First testable question
+## 4. Verifiable Sources & Inspection Scope
 
-Take the published toast-slip case, freeze task, physics and scoring, and add two observation packs:
-
-- `A`: task stage, success predicate, before/after images or structured visual change;
-- `B`: `A` plus per-primitive request/result, measured arrival, contact establishment/loss, impulse and first slip.
-
-Let independent diagnosticians write the first-failure chain under each condition. The result is useful only if it:
-
-- lands on the layer the measurements actually support;
-- distinguishes competing explanations;
-- is reproducible under the same configuration;
-- preserves failure denominators and the old scoring path.
-
-Only after this feedback contract is stable should DexLab test “write one repair as a skill card and ask a fresh verifier to reproduce it.” If feedback does not improve attribution, code generation and automated skill libraries only add cost.
-
-## 7. Recommended reading order
-
-1. Start with [Code as Policies](https://arxiv.org/abs/2209.07753) for the language-program and policy-API formulation.
-2. Read [CaP-X](https://arxiv.org/abs/2603.22435) for abstraction, feedback and test-time computation, then [Discussion #341](https://github.com/huangkiki/Dexlab/discussions/341).
-3. Read [COAP](https://arxiv.org/abs/2610.12369) for explicit state and controlled code changes, then [Discussion #335](https://github.com/huangkiki/Dexlab/discussions/335).
-4. Read [ASPIRE](https://arxiv.org/abs/2607.00272) for traces, skill admission and held-out evaluation, then [Discussion #342](https://github.com/huangkiki/Dexlab/discussions/342).
-5. Read §3.4 and Appendix G of the [GR00T 2 whitepaper](https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf) for the agent, CaP, contact-policy and single-controller split, then [Discussion #419](https://github.com/huangkiki/Dexlab/discussions/419).
-6. Return to DexLab's [toast-slip evidence](robodojo-bread-slip.md) and [model-evaluation protocol](model-evaluation.md) to decide what can enter a real failure chain.
-
-## Evidence scope
-
-This page maps methods and transferable mechanisms; it is not a cross-paper leaderboard. All performance figures are author-reported. The fixed CaP-X and ASPIRE source establishes trace, feedback, skill-admission and evaluation boundaries. GR00T 2 is checked against the November 2026 official whitepaper; its official code is not due until December 2026, so this review does not inspect that implementation. The review ran no external agent, external benchmark or new DexLab physics experiment. HexaShell and Auriga are positioned as adjacent agent harnesses from their official abstracts; their success rankings are not restated here.
-
-For the broader simulation question, start with “[What are we discussing when we discuss dexterous-hand simulation?](dexterous-hand-simulation.md).” Code as Policy is a topic within its policy-and-evaluation layer, not the whole simulation framework.
+- Papers & whitepapers: [Code as Policies (arXiv:2209.07753)](https://arxiv.org/abs/2209.07753) · [CaP-X (arXiv:2603.22435v2)](https://arxiv.org/abs/2603.22435v2) · [COAP (arXiv:2610.12369v1)](https://arxiv.org/abs/2610.12369v1) · [ASPIRE (arXiv:2607.00272v2)](https://arxiv.org/abs/2607.00272v2) · [HexaShell (arXiv:2610.23479)](https://arxiv.org/abs/2610.23479) · [Auriga (arXiv:2611.01112)](https://arxiv.org/abs/2611.01112) · [GR00T 2 Whitepaper](https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf)
+- Pinned repos: [`capgym/cap-x@53e9966d`](https://github.com/capgym/cap-x/tree/53e9966d7a8e2fa7494676772bccc35280f5c0ed) · [`NVlabs/ASPIRE@fa00f0ef`](https://github.com/NVlabs/ASPIRE/tree/fa00f0ef2bc1d91d594b9aa502c22133c9f538f7) · `Isaac-GR00T` `codex/n2-action-expert@7e492ad1` · [`emoPointer/supermimic_manipulation@eda7da48`](https://github.com/emoPointer/supermimic_manipulation/tree/eda7da480c6d92a68cc41c9628b7efdae08cae23)
+- Related discussions & DexLab pages: [COAP #335](https://github.com/huangkiki/Dexlab/discussions/335) · [CaP-X #341](https://github.com/huangkiki/Dexlab/discussions/341) · [ASPIRE #342](https://github.com/huangkiki/Dexlab/discussions/342) · [GR00T 2 #419](https://github.com/huangkiki/Dexlab/discussions/419) · [Bread-slip evidence](robodojo-bread-slip.md) · [Model evaluation](model-evaluation.md) · [Dexterous simulation guide](dexterous-hand-simulation.md)
+- **Inspection scope (2026-11-26)**: Synthesized from papers/whitepapers and static inspection of pinned commits. All success rates, latencies, and rescue counts are author-reported; no public COAP repo was found, and GR00T 2 official release code is listed for 2026-12 (the non-default N2 branch carries an evaluation license and private base checkpoint). No external agents, external benchmarks, or new DexLab physics experiments were run.

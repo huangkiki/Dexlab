@@ -1,89 +1,114 @@
 # Physical captions in DexLab: measure reference coverage before claiming video truth
 
-## TL;DR
+> **At a Glance**
+>
+> | Field | Details |
+> | --- | --- |
+> | **Work Covered** | *PhysCapBench: A Cross-Domain Benchmark for Physically Grounded Video Captioning* (BAAI, PKU, Beihang, Tsinghua, Physis, [arXiv:2611.16424v2](https://arxiv.org/abs/2611.16424v2), 2026-11-16; distinct from Physis-Lang's homonymous benchmark—always cite the arXiv ID) |
+> | **Pinned Sources** | Evaluator [`hfwang2001/PhysCapBench@0858c69`](https://github.com/hfwang2001/PhysCapBench/tree/0858c694f6aa2fae247c5fc907fb60488f27c4b7) (MIT) · Dataset [`HF@4b18722`](https://huggingface.co/datasets/hfwang01/PhysCapBench/tree/4b1872201558c6fb5e231f5be2b843ed16b2e105) · [Project Page](https://hfwang2001.github.io/physcapbench-site/) |
+> | **Core Problem** | Standard video captioning metrics reward broad scene summaries while missing physical process details (actors/tools, contact onset/maintenance/release, state transitions, causal mechanisms, temporal order), making it hard to diagnose what world models or policy captions omit. |
+> | **Core Approach** | Builds a 1,500-video, 3-domain structured physical reference dataset, **freezes per-dimension evidence applicability before seeing any candidate**, and uses a fixed text judge to score candidate-to-reference coverage across 7 physical dimensions. |
+> | **Open-Source Status** | Evaluation code (MIT) and 1,500 structured annotations/videos are public (video licenses split by upstream source; EgoDex is CC BY-NC-ND); **downstream video-reconstruction and policy-training code/checkpoints are not released**. |
+> | **DexLab Verdict** | **`pilot` (adopt structured event-chain references and candidate-blind applicability freezing; downgrade any "video truth certification" claim)** — the current judge checks text-to-reference coverage without penalizing unmentioned fabrications, so it cannot serve as a reward or physics oracle. |
 
-**The useful idea in PhysCapBench is not another scalar “physical caption score.” It is a contract that turns a physical process into an inspectable reference and freezes whether each dimension has enough evidence before candidates are evaluated.**
+---
 
-It can diagnose what physical information a simulation record, failure explanation or video description omitted. It cannot replace contact force, state trajectories, native task criteria or hardware evidence. The public evaluator mostly compares a candidate with a textual Gold reference; it does not rewatch the video to verify every claim.
+## 1. What This Work Actually Does
 
-## Start with a page-turning task
+PhysCapBench targets captions that sound plausible while omitting the mechanics that actually happened—e.g., describing a bimanual page turn simply as "a person turns a page" without stating which hand holds the page down, which applies torque, how long contact persists, or how the page state changes. The paper formalizes these records as **traceable structured physical references** and tests whether richer physical captions improve video reconstruction and policy fine-tuning.
 
-Suppose a video shows the left hand holding a book steady while the right hand turns a page from right to left. Contact is maintained during the turn, the page state changes from right to left, and the reference also records a torque-based orientation change and event order.
+### Problem Setup & I/O
 
-The candidate “a person turns a book page” is semantically reasonable, but it leaves out:
+- **Inputs**: A single-view or synchronized multi-view video $v$ and a free-text candidate caption $c$.
+- **Core evaluation boundary**: The evaluator does **not** compare $c$ directly against video $v$; it compares $c$ against a human-verified structured Gold reference $r$ to score 7-dimension semantic agreement and coverage (**caption-to-reference**, not caption-to-video fact verification).
+- **Balanced 3-domain dataset (1,500 videos, 9.16 hours)**:
+  - **Third-person physical scenes (500 videos, 2.125 h)**: Single-view RGB spanning 8 physical categories (fluid 32.2%, gravity/support 16.0%, granular 13.0%, rotation/friction 12.0%, etc.) and 16 scene categories;
+  - **Egocentric human manipulation (500 videos, 2.212 h)**: Sourced from Apple EgoDex (RGB + hand-pose cues) across 118 tasks and 15 scenario groups;
+  - **Multi-view handheld grippers (500 episodes, 4.821 h)**: Sourced from Tencent `Hy-Embodied-0.5-VLA-Data` with synchronized left-wrist, overhead, and right-wrist views (30 fps, 424×240 each) plus gripper trajectory cues.
 
-- which hand stabilizes and which hand acts;
-- the page's rotation direction relative to the book;
-- when contact starts, persists or ends;
-- the page's final physical state;
-- which visible relation supports the causal explanation;
-- the order of events.
+### System Pipeline & Four Core Modules
 
-PhysCapBench separates these into seven dimensions: event coverage, objects and roles, actions and motion, contact and interaction, states and outcomes, physical mechanisms and causality, and temporal order. The point is not a longer caption. It is to make “sounds right but omits the process” a locatable failure.
+1. **Evidence-Grounded Structured Physical Record (Tables 7–9)**: Each sample stores entity IDs, initial/final states, event frame/time spans, actors/instruments/targets, motion direction and reference objects, contact relations, state deltas, mechanism statements, temporal links, **evidence frames/witness IDs**, revision logs, and SHA-256 dataset hashes.
+2. **Seven Physical Evaluation Dimensions (Table 1)**: Decomposes caption quality into **Event Coverage, Objects & Roles, Actions & Motion, Contact & Interaction, States & Outcomes, Physical Mechanisms & Causality, and Temporal Order** (0–100 scale, 5-tier rubric), exposing cases where events are right but causality or release is missing.
+3. **Domain-Adaptive Annotation Cues (§3, Figure 3)**: Third-person relies on RGB scene tracking; egocentric combines EgoDex hand-speed peak frames with HOI-DETR interaction cues; handheld gripper pairs overhead views for global events with wrist views and trajectory pose/aperture shifts for contact boundaries. VLM drafts undergo cross-checking by 7 annotators and schema validation.
+4. **Candidate-Blind Applicability Freezing + Two-Stage Judge**: Stage 1 freezes whether Gold provides sufficient evidence for each dimension **without seeing any candidate output**; Stage 2 runs Doubao Seed 2.1 Pro (`temperature=0`, thinking disabled) over candidate, Gold, and frozen evidence to score all 7 dimensions.
 
-## The reusable part is the evaluation contract
+![Figure 1: PhysCapBench three-domain data, 7-dimension evaluation, and downstream tasks](https://arxiv.org/html/2611.16424v2/physcapbench_overview_20261109.png)
 
-A reference contains entities, initial/final states, events, roles, actions, contact, state changes, mechanisms, order and evidence. The evaluator first determines, without seeing a candidate, whether each dimension has sufficient reference evidence. It then gives the text judge the candidate and the frozen evidence.
+*Figure 1 (from [Paper Figure 1](https://arxiv.org/html/2611.16424v2#S1.F1)): Overview linking the three-domain structured physical dataset, candidate-blind 7-dimension reference evaluation, and downstream reconstruction and policy studies.*
 
-This order reduces a common contamination: after seeing which dimensions make a method look weak, the evaluator changes Gold or removes the hard dimension. The DexLab equivalent should:
+### Core Mechanism & Load-Bearing Equations
 
-1. freeze tasks, references, applicability, scorers and failure denominators;
-2. run the system under test;
-3. report whether native measurements support each criterion;
-4. preserve insufficient evidence as insufficient.
+Score aggregation and egocentric motion-guided keyframe selection are governed by (§3–4, Eqs. 1–5):
 
-Data revisions should be frozen too. This review pinned [paper v2](https://arxiv.org/abs/2611.16424v2), [GitHub `0858c69`](https://github.com/hfwang2001/PhysCapBench/tree/0858c694f6aa2fae247c5fc907fb60488f27c4b7) and [Hugging Face revision `4b18722`](https://huggingface.co/datasets/hfwang01/PhysCapBench/tree/4b1872201558c6fb5e231f5be2b843ed16b2e105). The released metadata passes ID, reference, applicability and hash checks for 1,500 samples. That does not establish the factual correctness of 1,500 captions.
+$$
+S(c, r) = \frac{1}{|D(r)|} \sum_{d \in D(r)} s_d(c, r)
+$$
 
-## What the evidence does and does not establish
+$$
+v_t = f \left\lVert p_t - p_{t-1} \right\rVert_2, \qquad
+\omega_t = f \arccos\!\left(\operatorname{clip}\!\left(\frac{\operatorname{tr}(R_{t-1}^{\top} R_t) - 1}{2},\, -1,\, 1\right)\right), \qquad
+m_t = v_t + 0.05\,\omega_t, \qquad
+F = \operatorname{UniqueSort}(U \cup P)
+$$
 
-The authors report that physical captions reduce third-person reconstruction LPIPS by 8.6–9.5% and egocentric LPIPS by 26.9–30.9%; both generators and PVCS move in the same direction. Instruction enrichment raises one controlled task from 37.5% to 45.0% over 40 shared scenes, and four policy families improve on average on two benchmarks.
+- $D(r)$: subset of dimensions frozen as evaluable from reference $r$ before candidates appear; $s_d(c,r) \in [0, 100]$ is the per-dimension agreement/coverage score;
+- $p_t, R_t$: camera-frame hand-center position and palm rotation at frame rate $f$; $m_t$ blends translational and angular hand speed;
+- $F$: deduplicated union of up to 12 uniform frames $U$ and up to 8 peak-speed frames $P$;
+- **Intuition**: Freezing $D(r)$ upfront stops evaluators from dropping hard dimensions after seeing weak model results. However, unweighted averaging over $D(r)$ measures only **how much of Gold is covered**, neither weighting critical dimensions nor penalizing fabricated details outside Gold.
 
-This supports the broader hypothesis that richer physical descriptions can improve downstream conditioning and training instructions. Three boundaries remain:
+### Main Experiments, Results, and Built-in Counterexamples
 
-- The controlled policy gain is three additional successes, with one training seed and one rollout per scene; no per-dimension description ablation or confidence interval is reported.
-- The public repository contains the benchmark evaluator, not the reconstruction or policy-training reproduction packages.
-- A text evaluator can miss an incorrect contact or causal claim that is absent from Gold. It measures reference agreement/coverage rather than complete video factuality.
+| Experiment / Task | Setup & Budget | Key Metrics (Author-Reported) | What This Proves / Boundary |
+| --- | --- | --- | --- |
+| **3rd-Person & Ego Captioning** ([Table 4](https://arxiv.org/html/2611.16424v2#S4.T4)) | 11 strategies (3rd-person); 7 strategies on Qwen3-VL-8B-Instruct (ego) | Ego overall: Physis **`79.36`** > Cosmos Ego `75.41` > Meta `42.41`; **mechanism/causality lags sharply: Physis `49.58`, Meta `7.08`** | Dimension breakdown exposes how generic captions miss contact (`38.57`) and mechanisms (`7.08`) |
+| **Video Reconstruction** ([Figure 6](https://arxiv.org/html/2611.16424v2#S5.F6)) | MiniMax H3 33B & LingBot-World 2.0 14B, fixed first frame & duration, metadata vs. physical caption | 3rd-person LPIPS relative drop **`8.6–9.5%`** (PVCS `8.9–9.0%`); ego LPIPS drop **`26.9–30.9%`** (PVCS `27.9–28.1%`) | Consistent direction across two generators and metrics; **measures visual match, not physical dynamics validity** |
+| **Single-Task Policy Enrichment** ([Table 5a–b](https://arxiv.org/html/2611.16424v2#S5.T5)) | 50 demos, 5k LoRA steps, **single seed `0`**, 40 shared held-out scenes × 1 rollout | Overall success `37.5% → 45.0%` (standard `50%→55%`, randomized `25%→35%`); PhysCapBench `27.3/34.7 → 69.4/73.3` | Only **+3 successful trials** (15→18/40), single seed, no dimension ablation—preliminary signal only |
+| **Multi-Policy Benchmark Enrichment** ([Tables 5c–d, 6](https://arxiv.org/html/2611.16424v2#S5.T6)) | $\pi_{0.5}$, X-VLA, GalaxeaVLA, starVLA across 6 tasks each in RoboTwin 2.0 & RoboDojo Sim | RoboTwin mean `+0.5–1.5 pp` ($\pi_{0.5}$ `50.4→51.9%`); RoboDojo mean `+0.6–2.0 pp` ($\pi_{0.5}$ `30.6→32.6%`) | Consistent modest upward direction across 4 families, but training scripts are unreleased and length vs. physics content is unablated |
 
-The paper also does not report human–judge agreement. Using the score directly as a DexLab reward or task-success criterion would confuse reference coverage with physical correctness.
+![Figure 6: Video reconstruction LPIPS and PVCS gains from physical captions](https://arxiv.org/html/2611.16424v2/figures/reconstruction_comparison.png)
 
-## Transfer order for DexLab
+*Figure 2 (from [Paper Figure 6](https://arxiv.org/html/2611.16424v2#S5.F6)): Across both MiniMax H3 33B and LingBot-World 2.0 14B, replacing metadata with structured physical captions lowers LPIPS and PVCS in third-person and egocentric domains.*
 
-### Borrow directly
+---
 
-1. **Represent a process as an event chain:** actor/tool/target, motion, contact start/maintain/end, state before/after, visible mechanism and temporal relation.
-2. **Freeze applicability before candidates:** decide whether current measurements support a criterion before running the system under test.
-3. **Choose cues by what they can identify:** RGB scenes, hand pose/HOI, synchronized gripper views and trajectories answer different questions; cues do not automatically become Gold.
-4. **Bind evidence to versions:** reference revision, configuration hash, frame/time window, review status and candidate visibility.
+## 2. Counterexamples, Hidden Switches, and Evidence Boundaries
 
-### Adapt
+1. **Reference coverage ≠ video truth, and non-conflicting hallucinations go unpenalized**: The text judge never watches the video, and its prompt explicitly instructs neither to reward nor penalize extra candidate claims absent from Gold unless they contradict Gold. Fabricated contacts or reversed causality not negated in Gold can slip through.
+2. **Single uncalibrated LLM judge and missing annotator agreement**: All scores rely solely on Doubao Seed 2.1 Pro, with no reported inter-annotator agreement (IAA), human-judge correlation, or cross-judge variance.
+3. **Three verified version mismatches across paper, release, and leaderboard**:
+   - The paper averages over applicable dimensions $D(r)$, whereas the released package (`4b18722`) outputs numeric scores for all 7 dimensions and attaches an unweighted `confidence` field to 48 `null`-evidence cells across 46 samples (45 mechanism, 3 temporal);
+   - The paper ranks internal Physis first in third-person (`74.07`), whereas the public repo snapshot omits Physis and ranks LingBot Temporal first (`72.91`);
+   - The pinned repo (`0858c69`) passes all 12 contract tests and 1,500-item SHA-256 validation, yet **contains no downstream reconstruction or policy training scripts**, and upstream video licenses split (EgoDex is CC BY-NC-ND).
 
-Simulation can use stronger evidence than a video caption: native contact force, contact establishment/loss, solver events and object pose/velocity. Keep `command ≠ measurement` and `render ≠ physical control`. Final acceptance still depends on the first failing layer, native task criteria, full-task success and appropriate hardware measurement.
+---
 
-### Defer
+## 3. What DexLab Should Borrow & First Minimal Validation Slice
 
-- an equal-weight seven-dimension score as a universal physical truth metric;
-- one LLM judge as a direct reward;
-- replacing simulation-to-real or task success with a caption-score increase.
+DexLab needs auditable failure attribution and contact evaluation, not another caption leaderboard. PhysCapBench's strongest engineering lesson is its **hash-bound, candidate-blind reference contract** (1,500 validated IDs/hashes; all 60 `supplements.jsonl` revisions logged as `candidate_seen=false`).
 
-## First testable question
+- **Adopt directly**:
+  1. **Event-chain failure records**: Structure DexLab failure explanations as `actor/tool/target → motion → contact onset/maintenance/release → state before/after → visible mechanism → temporal order`, bound to frame/time windows and code revisions.
+  2. **Candidate-blind applicability freezing**: Freeze which predicates native measurements can actually support *before* running any candidate method; keep insufficient dimensions as `insufficient` instead of dropping hard metrics post hoc.
+  3. **Separate omissions from fabrications**: Track false contacts, wrong causal arrows, and hallucinated state transitions separately from reference coverage.
+- **Validate after adaptation**:
+  - For DexLab simulation episodes, ground structured references directly in native contact forces, contact-switch timestamps, solver events, and object pose/velocity traces while preserving `command ≠ measurement` and `render ≠ physical control`.
+- **Defer or reject**:
+  - Do not treat the equal-weighted 7-dimension mean as a general physical-realism or sim-to-real score;
+  - Do not wire a single uncalibrated LLM judge into RL rewards or task-success verdicts;
+  - Do not cite "PhysCapBench" without its full title or arXiv ID due to the homonymous Physis-Lang benchmark.
 
-Use 20–30 existing DexLab episodes spanning stable grasp, slip/contact transition and state recovery. Compare a short task instruction, a generic video caption and a structured physical caption. Besides seven-dimension coverage, separately count:
+### First Minimal Falsifiable Slice
 
-- wrong contact;
-- reversed causal direction;
-- wrong state transition.
+- **Question**: On existing DexLab episodes, do structured physical event-chain descriptions improve blind first-failure-layer localization compared with short task prompts and generic video captions, without increasing false assertions?
+- **Controlled comparison**: Sample 20–30 existing DexLab episodes (stable grasp, slip/contact switching, state recovery), generate all three description types (90–120 candidates), and have ≥2 blind human raters plus 2 independent judges score both 7-dimension coverage and 3 fabrication counts (false contact, wrong causality, wrong state transition).
+- **Pass / stop criteria**: Advance to broader data auditing or instruction enrichment only if structured descriptions **simultaneously** improve first-failure localization, keep false assertions flat or lower, and show acceptable human–judge agreement.
 
-Blind-review 90–120 candidates with at least two people, then compare two text or multimodal judges. The minimum bar is not longer text. The structured description must make the first failing layer easier to localize without increasing false assertions. Only then should it enter a larger data-cleaning or training-instruction pipeline.
+---
 
-## Continue reading
+## 4. Verifiable Sources & Inspection Scope
 
-- [PhysCapBench paper](https://arxiv.org/abs/2611.16424v2)
-- [Official evaluator](https://github.com/hfwang2001/PhysCapBench)
-- [Public data](https://huggingface.co/datasets/hfwang01/PhysCapBench)
-- [DexLab discussion #378](https://github.com/huangkiki/Dexlab/discussions/378)
-
-See [model evaluation](model-evaluation.md) for DexLab's broader co-evolution and acceptance boundaries.
-
-## Evidence scope
-
-This page maps mechanisms from the paper and public implementation. It is not a PhysCapBench leaderboard reproduction or a new DexLab physics experiment. This review ran the released metadata checks and repository contract tests and checked hashes and sampled frames for representative videos. It did not call the judge endpoint or rerun caption, reconstruction or policy experiments. All downstream figures are author-reported.
+- Paper: [PhysCapBench (arXiv:2611.16424v2)](https://arxiv.org/abs/2611.16424v2) (full review of 12 figures, 17 tables, and 5 equations) · [Project Page](https://hfwang2001.github.io/physcapbench-site/)
+- Pinned code & data: [GitHub `0858c69`](https://github.com/hfwang2001/PhysCapBench/tree/0858c694f6aa2fae247c5fc907fb60488f27c4b7) · [Hugging Face `4b18722`](https://huggingface.co/datasets/hfwang01/PhysCapBench/tree/4b1872201558c6fb5e231f5be2b843ed16b2e105)
+- Related discussion & context: [DexLab Discussion #378](https://github.com/huangkiki/Dexlab/discussions/378) · [Model evaluation boundaries](model-evaluation.md)
+- **Inspection scope (2026-11-26)**: Synthesized from arXiv `2611.16424v2`, executed 12 repo contract tests, `bench.py validate` across all 1,500 manifests/references/hashes, and SHA-256 + frame spot-checks on 4 downloaded videos across all 3 domains. No judge API calls, caption runs, reconstruction runs, or policy fine-tuning were executed; downstream numbers are author-reported.
