@@ -8,7 +8,14 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 
-from concept_atlas import home_context
+from concept_atlas import (
+    ATLAS_PATH,
+    TOPIC_TAXONOMY_PATH,
+    distillation_groups,
+    distillation_markdown,
+    home_context,
+    load_atlas,
+)
 
 project = 'DexLab'
 author = 'Kiki Huang'
@@ -16,6 +23,8 @@ copyright = '2026, DexLab contributors'
 release = tomllib.loads((ROOT / 'pyproject.toml').read_text())['project']['version']
 language = os.environ.get('DEXLAB_DOCS_LANGUAGE', 'zh_CN')
 assert language in ('zh_CN', 'en')
+content_language = 'zh' if language == 'zh_CN' else 'en'
+distillations = distillation_groups(load_atlas(), content_language)
 extensions = ['myst_parser', 'sphinx_design', 'sphinx.ext.mathjax']
 source_suffix = {'.md': 'markdown'}
 root_doc = 'index'
@@ -55,6 +64,7 @@ html_context = {
     'site_is_chinese': language == 'zh_CN',
     'other_language': 'English' if language == 'zh_CN' else '简体中文',
     'other_language_root': '../../en/latest/' if language == 'zh_CN' else '../../zh-cn/latest/',
+    'distillation_topics': [(anchor, title) for anchor, title, _ in distillations],
 }
 
 
@@ -98,7 +108,14 @@ def setup(app):
         context['reader_is_chinese'] = app.config.language == 'zh_CN'
         return 'reader-page.html'
 
+    def read_distillation_index(app, docname, source):
+        if docname == 'distillation':
+            app.env.note_dependency(ATLAS_PATH)
+            app.env.note_dependency(TOPIC_TAXONOMY_PATH)
+            source[0] += '\n\n' + distillation_markdown(distillations, content_language)
+
     app.connect('html-page-context', select_home_template)
+    app.connect('source-read', read_distillation_index)
 
     # Sphinx 9.1 selects the JS constructor from language_name, but Chinese
     # indexing deliberately uses english-stemmer.js. Retain Chinese tokenization.

@@ -617,6 +617,10 @@ body[data-reader-page="failure-root-cause-atlas"] .gap-evidence-item figcaption 
   max-width: 880px;
 }
 
+[data-reader-page="distillation"] .toctree-wrapper:not(:has(ul)) {
+  display: none;
+}
+
 [data-reader-page="paper-sharing"] .reader-layout {
   grid-template-columns: minmax(0, 1fr);
   max-width: 1040px;

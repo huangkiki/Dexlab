@@ -8,7 +8,20 @@
   {{ link(guide, '研究导读', 'Guide', asset=site_is_chinese) }}
   {{ link('concepts/index', '概念', 'Concepts') }}
   {{ link('results', '实验', 'Experiments') }}
-  {{ link('distillation', '蒸馏', 'Distillation') }}
+
+  <details class="site-nav-compact" name="site-nav">
+    <summary>{{ '蒸馏' if site_is_chinese else 'Distillation' }}</summary>
+    <div class="site-nav-panel site-nav-panel-compact">
+      <div class="site-nav-section">
+        <ul>
+          <li>{{ link('distillation', '全部蒸馏', 'All distillations') }}</li>
+          {% for anchor, title in distillation_topics %}
+          <li>{{ link('distillation', title, title, fragment=anchor) }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </details>
 
   <details name="site-nav">
     <summary>Paper Sharing</summary>

@@ -8,6 +8,8 @@ from pathlib import Path
 
 from scripts.concept_atlas import (
     _normalize_relations,
+    distillation_groups,
+    distillation_markdown,
     load_atlas,
     prepare_concept_pages,
     render_dialog,
@@ -153,6 +155,40 @@ class ConceptAtlasTests(unittest.TestCase):
             rendered.index('class="concept-topics"'),
         )
         self.assertIn('data-concept-target="solver-fp64">FP64</span>', rendered)
+
+    def test_distillation_groups_share_bilingual_anchors_and_exclude_other_articles(self):
+        article_ids = {
+            "physicsnemo-contact-surrogates",
+            "donic-bimanual-tracking",
+            "neural-actuator-topic",
+            "cloth-topic",
+        }
+        catalog = {
+            "topics": self.atlas["topics"],
+            "concepts": [
+                item for item in self.atlas["concepts"] if item["id"] in article_ids
+            ],
+        }
+        expected = [
+            ("distill-physics-contact", "physicsnemo-contact-surrogates"),
+            ("distill-skills-evaluation", "donic-bimanual-tracking"),
+            ("distill-sim2real", "neural-actuator-topic"),
+        ]
+        for language in ("zh", "en"):
+            groups = distillation_groups(catalog, language)
+            membership = [
+                (anchor, article["id"])
+                for anchor, _, articles in groups
+                for article in articles
+            ]
+            self.assertEqual(membership, expected)
+            document = distillation_markdown(groups, language)
+            for anchor, title, items in groups:
+                self.assertIn(f"({anchor})=\n## {title}", document)
+                article = items[0]
+                target = article["href"].removesuffix(".html") + ".md"
+                self.assertIn(f"[{article['name'][language]}]({target})", document)
+            self.assertNotIn("cloth-comparison.md", document)
 
     def test_generated_pages_keep_the_source_of_truth_and_fix_local_links(self):
         with tempfile.TemporaryDirectory() as directory:

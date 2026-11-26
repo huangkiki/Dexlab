@@ -349,6 +349,11 @@ def load_atlas(
         item.setdefault("kind", "concept")
         if item["kind"] not in ITEM_KINDS:
             raise ValueError(f"{item['id']} has an unknown kind")
+        if item.get("distillation") and (
+            item["kind"] != "synthesis"
+            or not re.fullmatch(r"[a-z0-9-]+\.html", item.get("href", ""))
+        ):
+            raise ValueError(f"{item['id']} is not a local distillation article")
         if item["kind"] == "synthesis":
             if not item.get("href"):
                 raise ValueError(f"{item['id']} is a synthesis without a target href")
@@ -419,6 +424,37 @@ def load_atlas(
 
 def _concept_by_id(atlas):
     return {item["id"]: item for item in atlas["concepts"]}
+
+
+def distillation_groups(atlas, language):
+    topics = {topic["id"]: topic["name"][language] for topic in atlas["topics"]}
+    articles = sorted(
+        (item for item in atlas["concepts"] if item.get("distillation")),
+        key=lambda item: item["updated"],
+        reverse=True,
+    )
+    grouped = {}
+    for article in articles:
+        grouped.setdefault(article["topic"], []).append(article)
+    return [
+        (f"distill-{topic_id}", topics[topic_id], articles)
+        for topic_id, articles in grouped.items()
+    ]
+
+
+def distillation_markdown(groups, language):
+    lines = []
+    for anchor, title, articles in groups:
+        lines.extend([f"({anchor})=", f"## {title}", ""])
+        for article in articles:
+            doc = article["href"].removesuffix(".html") + ".md"
+            lines.extend([
+                f"- [{article['name'][language]}]({doc})",
+                "",
+                f"  {article['summary'][language]}",
+                "",
+            ])
+    return "\n".join(lines)
 
 
 def _group_items(atlas):
