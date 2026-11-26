@@ -20,6 +20,16 @@
       "en": "MuJoCo actuator force limits",
       "url": "https://mujoco.readthedocs.io/en/stable/modeling.html#force-limits"
     },
+    "mujoco_solver_parameters": {
+      "zh": "MuJoCo 4.0 求解参数与摩擦约束",
+      "en": "MuJoCo 4.0 solver parameters and friction constraints",
+      "url": "https://mujoco.readthedocs.io/en/4.0.0/modeling.html#solver-parameters"
+    },
+    "mujoco_contact_parameters": {
+      "zh": "MuJoCo 4.0 接触参数组合规则",
+      "en": "MuJoCo 4.0 contact parameter mixing",
+      "url": "https://mujoco.readthedocs.io/en/4.0.0/modeling.html#contact-parameters"
+    },
     "closing_loop": {
       "zh": "Closing the Loop",
       "en": "Closing the Loop",
@@ -522,12 +532,12 @@
       "level": "advanced",
       "name": {"zh": "软约束", "en": "Soft constraint"},
       "aliases": {"zh": ["solref", "solimp"], "en": ["solref", "solimp"]},
-      "summary": {"zh": "软约束把硬几何关系表示为带刚度、阻尼和阻抗的约束响应。", "en": "A soft constraint represents a hard geometric relation with stiffness, damping and impedance."},
-      "body": {"zh": "参数首先定义数值响应，不能直接当作真实材料属性。", "en": "Parameters first define numerical response and are not automatically real material properties."},
-      "example": {"zh": "MuJoCo refsafe 会把小于两倍步长的时间常数提高，改变有效接触柔度。", "en": "MuJoCo refsafe raises time constants below twice the timestep, changing effective contact compliance."},
-      "confusions": {"zh": ["接触越硬不等于越真实，接触越稳也不等于力越准确。"], "en": ["Stiffer contact is not necessarily more realistic, and stable contact is not necessarily accurate."]},
-      "relations": [{"type": "depends_on", "target": "stiffness"}, {"type": "related", "target": "damping"}, {"type": "related", "target": "timestep"}],
-      "sources": ["mujoco_computation", "mujoco_modeling"]
+      "summary": {"zh": "软约束允许有限的几何误差，通过带刚度、阻尼和阻抗的响应来纠正。", "en": "A soft constraint tolerates finite geometric error and responds with stiffness, damping and impedance."},
+      "body": {"zh": "在 MuJoCo 里，`solref` 决定约束想让物体怎么恢复，`solimp` 决定当前误差下这条约束介入多强。比如同一个球落到桌面，前者影响压入后的恢复和回弹，后者可以让刚接触时较柔、压深后变硬。", "en": "In MuJoCo, `solref` sets the target recovery response and `solimp` sets how strongly the constraint acts at the current error. When a ball lands on a table, the former shapes recovery and rebound, while the latter can make the initial contact soft and the deeper response firmer."},
+      "example": {"zh": "对于已建立的接触，固定步长、阻抗和阻尼比，只缩短正格式 `solref` 的时间常数，再比较峰值压入和稳定时间。", "en": "For an established contact, hold the timestep, impedance and damping ratio fixed. Shorten only the positive-format `solref` time constant and compare peak penetration and settling time."},
+      "confusions": {"zh": ["求解器残差小表示当前数值问题求得较准。材料真实性要靠有单位、有条件的测量来验证。"], "en": ["A small solver residual indicates accuracy for the specified numerical problem. Material realism requires measurements with declared units and conditions."]},
+      "relations": [{"type": "depends_on", "target": "stiffness"}, {"type": "related", "target": "damping"}, {"type": "related", "target": "contact-timeconstant"}, {"type": "related", "target": "readback"}],
+      "sources": ["mujoco_solver_parameters", "mujoco_contact_parameters", "mujoco_computation"]
     },
     {
       "id": "force",

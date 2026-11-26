@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS_PATH = ROOT / "docs/concept-atlas.json"
+DETAILS_PATH = ROOT / "docs/site/concept-details"
 TAXONOMY_PATH = ROOT / "docs/solver-taxonomy.json"
 TOPIC_TAXONOMY_PATH = ROOT / "docs/topic-taxonomy.json"
 RELATION_TYPES = {"depends_on", "related", "contrasts_with", "part_of"}
@@ -678,6 +679,9 @@ def _page_markdown(item, atlas, language):
         item["body"][language],
         "",
     ]
+    details = DETAILS_PATH / language / f"{item['id']}.md"
+    if details.is_file():
+        lines += [details.read_text(encoding="utf-8").strip(), ""]
     if item.get("contexts"):
         lines += ["## " + ("登记上下文" if zh else "Registered contexts"), ""]
         lines.extend(

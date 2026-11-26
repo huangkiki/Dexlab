@@ -38,4 +38,4 @@
 
 本站已有 [Wuji 点接触与扭转接触案例](../wuji-contact.md)。最后一课会回到它的测量和边界。
 
-继续读：[软接触与摩擦锥](../learn/mujoco/docs/contact-models.md) · [求解器与积分器](../learn/mujoco/docs/solvers-and-integration.md) · [力观测](../learn/mujoco/docs/force-observations.md) · [官方接触维数说明](https://mujoco.readthedocs.io/en/4.0.0/computation/index.html#condim)
+继续读：[软约束与 `solref`、`solimp`](../concepts/soft-constraint.md) · [软接触与摩擦锥](../learn/mujoco/docs/contact-models.md) · [求解器与积分器](../learn/mujoco/docs/solvers-and-integration.md) · [力观测](../learn/mujoco/docs/force-observations.md) · [官方接触维数说明](https://mujoco.readthedocs.io/en/4.0.0/computation/index.html#condim)

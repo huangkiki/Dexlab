@@ -343,7 +343,7 @@ The atlas uses a native full-viewport `dialog`. Search, group filters, the six c
 
 On desktop the map occupies the wide column and the lens stays in a narrow side column. Below (800px), the map and lens stack, controls become a single column, relation highlighting remains available to pointer and keyboard users, and every term retains a large-enough hit target. Closing returns focus to the trigger. Without JavaScript, the trigger opens the generated concept index, where every term and relationship remains a normal link.
 
-Each generated concept page is a one-screen reading entry: term and aliases, concise definition, one concrete distinction grounded in DexLab evidence, likely confusion, relation links, sources, and a return to the atlas. Longer experiments and papers remain linked rather than duplicated.
+Each generated concept page opens with the term, aliases, and concise definition. An authored detail file under `concept-details/<language>/<id>.md` can add explanations, equations, or parameter tables to that page. The standard example, common confusions, relations, sources, and return link follow. Longer experiments and papers have their own linked pages.
 
 ### Architecture view
 

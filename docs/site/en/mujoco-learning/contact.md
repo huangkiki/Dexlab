@@ -38,4 +38,4 @@ Record contact points, normal and tangential forces, intrinsic moments, object v
 
 DexLab has an existing [Wuji point-versus-torsional-contact case](../wuji-contact.md). The final lesson returns to its measurements and limits.
 
-Read more: [Soft contact and friction cones](../learn/mujoco/docs/contact-models.md) · [Solvers and integration](../learn/mujoco/docs/solvers-and-integration.md) · [Force observations](../learn/mujoco/docs/force-observations.md) · [Official contact dimensions](https://mujoco.readthedocs.io/en/4.0.0/computation/index.html#condim)
+Read more: [Soft constraints, `solref`, and `solimp`](../concepts/soft-constraint.md) · [Soft contact and friction cones](../learn/mujoco/docs/contact-models.md) · [Solvers and integration](../learn/mujoco/docs/solvers-and-integration.md) · [Force observations](../learn/mujoco/docs/force-observations.md) · [Official contact dimensions](https://mujoco.readthedocs.io/en/4.0.0/computation/index.html#condim)
