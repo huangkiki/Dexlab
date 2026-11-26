@@ -14,10 +14,20 @@ Think of an ideal axle passing through the sphere: rotation about that direction
 - **Numerical solve:** MuJoCo's PGS, nonlinear CG and Newton solve the constraint problem. Iteration budgets, tolerances and warmstart affect the approximation and its cost.
 - **Time evolution:** the step and integrator affect the trajectory. A smaller solver residual does not establish a smaller trajectory error or better material fidelity.
 
-<details class="explanation"><summary>Read condim as a model choice, not a quality level</summary>
-<p><code>condim=1</code> has the normal component; 3 adds two sliding components; 4 adds twisting about the normal; 6 adds two rolling components. More components do not make every task more accurate.</p>
-<p>Torsional and rolling friction coefficients involve a length scale. Do not substitute a dimensionless sliding coefficient. Check the actual combined contact parameters and native readbacks, not only one geom's XML.</p>
-</details>
+(contact-tuning)=
+## Which setting should I check for this symptom?
+
+Find the two collision shapes involved at the first abnormal step. Check whether the pair is recorded, whether it produces force and what direction and magnitude that force has.
+
+| What you see | What to check first | Which setting to change |
+| --- | --- | --- |
+| Collision shapes overlap, but the intended pair never appears | At an overlapping pose, verify the geom pair, contact flags and exclusions. If it only misses at speed, compare a smaller step. | [`contype` / `conaffinity`](../concepts/collision-filtering.md) or `timestep`, depending on where the contact went missing. |
+| The object gets pushed away before touching | At the first step with normal force, verify `0 < dist < includemargin`. If the collision shapes already overlap, compare them with the rendered surfaces. | Since MuJoCo 3.9, reducing effective [`margin`](../concepts/margin.md) delays force activation. Check `o_margin` if global override is on. |
+| There is a contact record but no measured force | If `efc_address=-1`, compare `dist` with `includemargin` to see whether the pair is still in the detection buffer. | Use [`gap`](../concepts/gap.md) for earlier detection. Check [`margin`](../concepts/margin.md) for force at that distance. MuJoCo 3.9 changed these two settings. |
+| The object slides down the pads, spins about a pad normal or keeps rolling on a surface | Read `contact.dim`, then check local tangential velocity, angular velocity and normal load. | Use [`condim`](../concepts/condim.md) to check available components, then check [`friction`](../concepts/friction.md) for the observed direction. |
+| An active, loaded contact drifts slowly near rest | Check for spare capacity in the friction cone and record tangential velocity and pose. | Compare [`impratio` with elliptic cones or a separate `noslip_iterations` pass](../concepts/friction.md), one change at a time. |
+| Force starts at the right time, but the object then sinks too far or bounces | Measure peak penetration, normal force and rebound height from contact onset. | Check [`solref` / `solimp`](../concepts/soft-constraint.md) and the timestep. |
+| XML changed, but the contact readback stayed the same | Check both geoms, explicit pairs and global overrides. | Check how [`priority` / `solmix`](../concepts/contact-parameter-mixing.md) combine the values. |
 
 ## Self-check: model or iterations?
 

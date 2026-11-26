@@ -35,7 +35,7 @@ The default is `solimp="0.9 0.95 0.001 0.5 2"`. It controls how impedance varies
 | 4 | `midpoint` | Relative location of the curve's inflection within the width. A value of 0.5 puts it in the middle. |
 | 5 | `power` | Shape of the transition. A value of 1 gives a linear transition. |
 
-Setting both end values to `0.9` makes impedance constant. Using `0.2 0.95` makes the onset softer and applies stronger correction once the error reaches `width`. **Width defines the impedance transition. Geometry and settings such as `margin` and `gap` determine when contact is detected and when it can generate force.**
+Setting both end values to `0.9` makes impedance constant. Using `0.2 0.95` makes the onset softer and applies stronger correction once the error reaches `width`. **Width defines the impedance transition.** For force activation and detection range, see [`margin`](margin.md) and [`gap`](gap.md).
 
 The friction dimensions of an elliptic contact cone and joint or tendon dry-friction constraints have zero position error, so they sample the impedance curve at $d(0)$. In these friction constraints, the positive-format time constant controls velocity decay and the damping ratio is ignored. The direct format uses damping and ignores stiffness. An explicit contact pair can set `solreffriction` separately for the friction dimensions of an elliptic cone. [MuJoCo friction constraints](https://mujoco.readthedocs.io/en/4.0.0/modeling.html#friction) · [`solreffriction` in MJCF](https://mujoco.readthedocs.io/en/4.0.0/XMLreference.html#contact-pair-solreffriction)
 

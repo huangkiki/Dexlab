@@ -14,10 +14,20 @@
 - **数值求解：** MuJoCo 的 PGS、非线性 CG、Newton 在给定模型下求解约束问题。迭代预算、容差与 warmstart 影响近似解和成本。
 - **时间推进：** 步长和积分器影响状态演化。更小的求解残差，不等于更小的轨迹误差，更不等于材料更真实。
 
-<details class="explanation"><summary>读懂 condim，不把它当质量档位</summary>
-<p><code>condim=1</code> 只有法向分量；3 增加两个切向滑动分量；4 再增加绕法向的扭转分量；6 再加入两个滚动分量。数值更大表示模型允许更多接触分量，并不表示任何任务都更准确。</p>
-<p>扭转、滚动摩擦系数涉及长度尺度，不能直接拿无量纲滑动摩擦系数的数值套用。还要核对接触对的实际组合参数与原生读回，而不只看某一个 geom 的 XML。</p>
-</details>
+(contact-tuning)=
+## 遇到什么问题，该查哪个参数？
+
+从异常发生的第一步开始，找出实际接触的两块碰撞几何。先确定这对几何有没有记录，再确认有没有施力，最后看力的方向和大小。
+
+| 看到什么 | 先查什么 | 哪个参数值得动 |
+| --- | --- | --- |
+| 碰撞表面明明重叠，目标接触一直没有记录 | 在重叠姿态下确认 geom 对、碰撞开关和排除规则。若只在高速时漏掉，做更小步长对照。 | [`contype` / `conaffinity`](../concepts/collision-filtering.md) 或 `timestep`，取决于漏掉的阶段。 |
+| 还没碰到，物体就被顶开 | 首次读到法向力时，确认 `0 < dist < includemargin`。若碰撞几何已相交，查视觉与碰撞形状。 | MuJoCo 3.9 起，减小有效 [`margin`](../concepts/margin.md) 可让施力推迟。启用全局覆盖时查 `o_margin`。 |
+| 有接触记录，没测到力 | 若 `efc_address=-1`，对照 `dist` 和 `includemargin`，看是否只进入了检测缓冲区。 | 只想提前检测，调 [`gap`](../concepts/gap.md)。希望这个距离开始施力，查 [`margin`](../concepts/margin.md)。两者的含义在 MuJoCo 3.9 改过。 |
+| 物体夹住后往下滑、绕指腹法向转，或靠着面一直滚 | 先看 `contact.dim`，再看接触点切向速度、角速度与法向载荷。 | 用 [`condim`](../concepts/condim.md) 确认分量，按运动方向核对 [`friction`](../concepts/friction.md)。 |
+| 接触持续承载，接近静止时仍缓慢漂移 | 确认摩擦锥还有余量，并记录切向速度和位姿。 | 对照 [椭圆锥的 `impratio` 或额外的 `noslip_iterations`](../concepts/friction.md)，每次只改一项。 |
+| 开始受力的时机对，但之后压得太深或反弹 | 从接触建立起测峰值压入、法向力和反弹高度。 | 查 [`solref` / `solimp`](../concepts/soft-constraint.md) 和步长。 |
+| XML 改了，实际接触读回没变 | 对照两个 geom、显式 pair 和全局覆盖。 | 查 [`priority` / `solmix`](../concepts/contact-parameter-mixing.md) 适用的合成规则。 |
 
 ## 自测：先查模型，还是先加迭代？
 

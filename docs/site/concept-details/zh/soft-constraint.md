@@ -35,7 +35,7 @@ $d$ 越接近 1，响应越接近恢复目标。多个接触会通过同一物�
 | 4 | `midpoint` | 过渡曲线拐点在宽度内的相对位置，0.5 表示居中。 |
 | 5 | `power` | 曲线的形状，1 对应线性过渡。 |
 
-例如把前两项都设成 `0.9`，阻抗保持恒定。设为 `0.2 0.95` 时，刚开始接触较柔，误差增到 `width` 后介入更强。**width 只定义阻抗过渡的距离，接触何时被检测、何时开始产生力由几何和 `margin`、`gap` 等设置决定。**
+例如把前两项都设成 `0.9`，阻抗保持恒定。设为 `0.2 0.95` 时，刚开始接触较柔，误差增到 `width` 后介入更强。**width 定义阻抗过渡的距离。** 施力时机和检测范围分别见 [`margin`](margin.md) 与 [`gap`](gap.md)。
 
 椭圆摩擦锥的摩擦分量以及关节、肌腱的干摩擦约束，其位置误差恒为零，所以阻抗曲线在 $d(0)$ 处取值。对这些摩擦约束，正格式用时间常数来衰减相对速度，忽略阻尼比。直接格式使用阻尼，忽略刚度。显式接触对可用 `solreffriction` 为椭圆锥的摩擦分量单独指定参考响应。[MuJoCo 摩擦约束](https://mujoco.readthedocs.io/en/4.0.0/modeling.html#friction) · [`solreffriction` XML 字段](https://mujoco.readthedocs.io/en/4.0.0/XMLreference.html#contact-pair-solreffriction)
 
