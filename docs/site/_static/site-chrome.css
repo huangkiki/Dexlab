@@ -408,6 +408,12 @@ html {
   }
 }
 
+@media (max-width: 540px) {
+  html:lang(en) {
+    --site-header-clearance: 230px;
+  }
+}
+
 @media (max-width: 420px) {
   html {
     --site-header-clearance: 230px;

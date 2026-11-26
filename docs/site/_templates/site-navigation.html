@@ -1,42 +1,13 @@
-{% macro link(route, chinese, english, fragment='', asset=false, atlas=false) -%}
+{% macro link(route, chinese, english, fragment='', asset=false) -%}
   {% set path = pathto(route, 1) if asset else pathto(route) -%}
   <a href="{{ (path if path != '#' else '') ~ '#' ~ fragment if fragment else path }}"
-     {%- if atlas and pagename == 'index' %} data-concept-open{% endif %}
      {%- if pagename == route and not fragment %} aria-current="page"{% endif %}>{{ chinese if site_is_chinese else english }}</a>
 {%- endmacro %}
 <nav class="site-nav" aria-label="{{ '网站导航' if site_is_chinese else 'Site navigation' }}">
-  <details name="site-nav">
-    <summary>{{ '研究' if site_is_chinese else 'Research' }}</summary>
-    <div class="site-nav-panel">
-      <div class="site-nav-columns">
-        <section class="site-nav-section" aria-labelledby="nav-research-guides">
-          <h2 id="nav-research-guides">{{ '研究导读' if site_is_chinese else 'Research guides' }}</h2>
-          <ul>
-            <li>{{ link('_static/research/dexterous-simulation.html', '灵巧操作仿真研究导读', 'Dexterous manipulation simulation guide', asset=true) }}</li>
-            <li>{{ link('failure-root-cause-atlas', 'Sim-to-Real 失败归因', 'Sim-to-real failure atlas') }}</li>
-          </ul>
-        </section>
-        <section class="site-nav-section" aria-labelledby="nav-research-concepts">
-          <h2 id="nav-research-concepts">{{ '概念与求解器' if site_is_chinese else 'Concepts and solvers' }}</h2>
-          <ul>
-            <li>{{ link('concepts/index', '概念索引与星图', 'Concept index and atlas', atlas=true) }}</li>
-            <li>{{ link('solver-taxonomy', '求解器、积分器与接触配置', 'Solvers, integrators and contact models') }}</li>
-            <li>{{ link('engines', '物理引擎与模型', 'Physics engines and models') }}</li>
-          </ul>
-        </section>
-        <section class="site-nav-section" aria-labelledby="nav-research-evidence">
-          <h2 id="nav-research-evidence">{{ '实验与验证' if site_is_chinese else 'Experiments and validation' }}</h2>
-          <ul>
-            <li>{{ link('results', '实验发现', 'Experimental findings', fragment='experimental-findings') }}</li>
-            <li>{{ link('index', '代表性实验与结论', 'Representative experiments and findings', fragment='experiments') }}</li>
-            <li>{{ link('visual-comparisons', '六引擎斜面对照', 'Incline comparison across six engines', fragment='incline') }}</li>
-            <li>{{ link('index', '物理验证与真机证据边界', 'Physical checks and hardware evidence', fragment='physical-validity') }}</li>
-          </ul>
-        </section>
-      </div>
-    </div>
-  </details>
-
+  {% set guide = '_static/research/dexterous-simulation.html' if site_is_chinese else 'dexterous-hand-simulation' %}
+  {{ link(guide, '研究导读', 'Guide', asset=site_is_chinese) }}
+  {{ link('concepts/index', '概念', 'Concepts') }}
+  {{ link('results', '实验', 'Experiments') }}
   {{ link('distillation', '蒸馏', 'Distillation') }}
 
   <details name="site-nav">

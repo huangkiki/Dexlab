@@ -146,6 +146,7 @@ class ConceptAtlasTests(unittest.TestCase):
             ["complementarity-contact-models.html", "cloth-comparison.html", "cut-push.html"],
         )
         self.assertIn('href="distillation.html"', rendered)
+        self.assertIn('href="concepts/index.html" data-concept-open', rendered)
         self.assertIn('class="concept-topic-tag', rendered)
         self.assertLess(
             rendered.index('class="concept-field"'),
@@ -172,6 +173,8 @@ class ConceptAtlasTests(unittest.TestCase):
             self.assertNotIn("SuperDex · 进阶", fp64)
             self.assertTrue((language_dir / "concepts/index.md").exists())
             index = (language_dir / "concepts/index.md").read_text()
+            self.assertIn("](../solver-taxonomy.md)", index)
+            self.assertIn("](../engines.md)", index)
             self.assertIn("../failure-root-cause-atlas.md", index)
             self.assertNotIn("](failure-root-cause-atlas.html)", index)
             static_link = '<a href="../_static/research/dexterous-simulation.html">'

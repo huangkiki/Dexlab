@@ -1,5 +1,9 @@
 # 实验结果与失败
 
+```{raw} html
+<p><a href="index.html#experiments">代表性实验</a> · <a href="experiments.html">实验目录与原始记录</a> · <a href="visual-comparisons.html#incline">六引擎斜面对照</a> · <a href="index.html#physical-validity">物理验证与真机证据边界</a></p>
+```
+
 ```{toctree}
 :maxdepth: 1
 :caption: 本栏目录
@@ -25,8 +29,6 @@ Solver 失败复盘 <solver-failure-audit>
 - [布料：同一场景，不同引擎](cloth-comparison.md)：比较布条自由下垂与布片覆盖球体，分别观察弯曲与接触。
 - [LIBERO：从原生任务到可验证的改进](libero-workflow.md)：步长减半后十次示范都完成，但通过接触诊断的次数变少了。
 - [RoboDojo 烤面包：面包脱落与入槽接触逃逸](robodojo-bread-slip.md)：用同步动作与接触记录解释相似失败为什么需要不同的修复。
-
-[查看实验目录与原始记录](experiments.md)
 
 ## 双引擎斜面对照
 

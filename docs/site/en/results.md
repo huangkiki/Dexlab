@@ -1,5 +1,9 @@
 # Results and failures
 
+```{raw} html
+<p><a href="index.html#experiments">Representative experiments</a> · <a href="experiments.html">Experiment index and raw records</a> · <a href="visual-comparisons.html#incline">Six-engine incline comparison</a> · <a href="index.html#physical-validity">Physical checks and hardware evidence</a></p>
+```
+
 ```{toctree}
 :maxdepth: 1
 :caption: In this section
@@ -25,8 +29,6 @@ Ledger <research-ledger>
 - [Cloth: one scene, different engines](cloth-comparison.md): compare a freely sagging strip and a sheet draped over a sphere to study bending and contact separately.
 - [LIBERO: from a native task to a verifiable change](libero-workflow.md): all ten demonstrations completed at half the step size, but fewer passed the contact checks.
 - [RoboDojo toast: bread loss and contact escape during insertion](robodojo-bread-slip.md): synchronized motion and contact records show why similar-looking failures need different fixes.
-
-[Browse experiments and raw records](experiments.md)
 
 ## Paired engine incline comparison
 

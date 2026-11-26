@@ -47,8 +47,6 @@ if (conceptDialog) {
       event.preventDefault();
     }
     if (!conceptDialog.open) {
-      // The navigation panel closes when focus enters the dialog.
-      event?.currentTarget.closest(".site-nav details")?.querySelector("summary")?.focus();
       conceptDialog.showModal();
       document.body.classList.add("concept-dialog-open");
     }

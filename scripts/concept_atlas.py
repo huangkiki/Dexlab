@@ -523,6 +523,8 @@ def render_field(atlas, language):
         '<div class="concept-field-inner">'
         f'<div class="concept-field-words">{"".join(words)}</div>'
         "</div></div>"
+        '<a class="concept-atlas-trigger" href="concepts/index.html" data-concept-open>'
+        f'{"打开交互星图" if language == "zh" else "Open the interactive atlas"}</a>'
         '<section class="concept-topics" aria-labelledby="concept-topics-title">'
         '<header class="concept-topics-head">'
         f'<h2 id="concept-topics-title">{"精选文章" if language == "zh" else "Selected articles"}</h2>'
@@ -733,6 +735,12 @@ def _index_markdown(atlas, language):
     concepts = len(atlas["concepts"]) - syntheses
     lines = [
         "# " + ("概念星图" if zh else "Concept atlas"),
+        "",
+        (
+            "[求解器、积分器与接触配置](../solver-taxonomy.md) · [物理引擎与模型](../engines.md)"
+            if zh
+            else "[Solvers, integrators and contact models](../solver-taxonomy.md) · [Physics engines and models](../engines.md)"
+        ),
         "",
         (
             "从物理量、接触、动力学、数值推进、验证证据与 Solver 配置进入词条；跨实验研究总论与概念分开标记。"

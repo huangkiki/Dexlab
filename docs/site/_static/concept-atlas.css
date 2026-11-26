@@ -124,6 +124,12 @@ body[data-reader-page^="concepts/"] {
   font-size: 14px;
 }
 
+.concept-atlas-trigger {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
 .concept-topics {
   margin-top: 22px;
   padding-top: 22px;
@@ -147,6 +153,10 @@ body[data-reader-page^="concepts/"] {
 
 .concept-topics-head a {
   justify-self: end;
+}
+
+.concept-topics-head a,
+.concept-atlas-trigger {
   color: var(--accent, #4f664c);
   font-size: 14px;
   text-decoration: underline;
