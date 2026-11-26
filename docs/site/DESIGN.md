@@ -379,7 +379,7 @@ Core reading keeps a (740px) prose measure but allows equivalent evidence groups
 
 ### Blog index and reading rows
 
-The bilingual Blog uses the shared reader with an 880px centered index and no section rail. The two visible groups are solver and simulation fundamentals and experimental findings. Fine rules separate article titles and their summaries. The homepage previews selected articles and links to the full Blog. Paper Sharing has its own navigation entry, with contextual links between the paper and related Blog articles.
+The bilingual Blog uses the shared reader with an 880px centered index and no section rail. Its three visible groups are solver and simulation fundamentals, experimental findings, and research distillation. Experimental findings report measured runs or original analyses of run records; distillation explains external papers or projects and what DexLab can borrow. The Blog menu mirrors these groups. Fine rules separate article titles and their summaries. The homepage previews selected articles and links to the full Blog. Paper Sharing has its own navigation entry, with contextual links between the paper and related Blog articles.
 
 ### Paper sharing full texts
 

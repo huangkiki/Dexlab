@@ -1,11 +1,12 @@
 # Blog
 
-Solver fundamentals and findings from simulation experiments.
+Solver and simulation fundamentals, findings from DexLab experiments, and research distillation.
 
 ```{raw} html
 <nav class="blog-jump" aria-label="Blog sections">
   <a href="#solver-fundamentals">Solver and simulation fundamentals</a>
   <a href="#experimental-findings">Experimental findings</a>
+  <a href="#distillation">Research distillation</a>
 </nav>
 ```
 
@@ -32,10 +33,6 @@ Solver fundamentals and findings from simulation experiments.
 
   Follow the evidence in time to find where a simulation first goes wrong.
 
-- [Code as Policy: from model-written code to verifiable robot skills](code-as-policy.md)
-
-  Use a failed grasp to see how program actions and feedback can be inspected.
-
 (experimental-findings)=
 ## Experimental findings
 
@@ -59,25 +56,34 @@ Solver fundamentals and findings from simulation experiments.
 
   Synchronized motion and contact records show why similar-looking failures lead to different fixes.
 
-- [NeuralActuator: modeling actuator error while keeping physical contact](neural-actuator.md)
+(distillation)=
+## Research distillation
 
-  Read the authors’ 500 g load test and see what still needs checking when contact is disabled.
+What DexLab can borrow from external papers and projects, what the authors verified, and what still needs testing here.
 
-- [Physical captions: check reference coverage before judging video facts](physcapbench.md)
+- [PhysicsNeMo: does accurate position prediction get contact events right?](physicsnemo-contact-surrogates.md)
 
-  A page-turning example shows how an evaluation can distinguish omitted details from invented ones.
-
-- [Goal masks: test the progress signal before using it for GCRL](mask-conditioned-gcrl.md)
-
-  The authors’ apple grasp illustrates how a goal mask supplies feedback and how localization errors can affect it.
+  Shell crossings and finger unloading show why pose error and contact events need separate tests.
 
 - [Can a DONIC tracking score tell whether a handoff succeeded?](donic-bimanual-tracking.md)
 
   A cup handoff shows what contact and support observations add to a tracking score.
 
-- [PhysicsNeMo: does accurate position prediction get contact events right?](physicsnemo-contact-surrogates.md)
+- [Goal masks: test the progress signal before using it for GCRL](mask-conditioned-gcrl.md)
 
-  Shell crossings and finger unloading show why pose error and contact events need separate tests.
+  The authors’ apple grasp illustrates how a goal mask supplies feedback and how localization errors can affect it.
+
+- [Physical captions: check reference coverage before judging video facts](physcapbench.md)
+
+  A page-turning example shows how an evaluation can distinguish omitted details from invented ones.
+
+- [NeuralActuator: modeling actuator error while keeping physical contact](neural-actuator.md)
+
+  Read the authors’ 500 g load test and see what still needs checking when contact is disabled.
+
+- [Code as Policy: from model-written code to verifiable robot skills](code-as-policy.md)
+
+  Use a failed grasp to see how program actions and feedback can be inspected.
 
 [More experiments and evidence](experiments.md) · [Dexterous-hand simulation guide](dexterous-hand-simulation.md) · [Paper Sharing](paper-sharing.md)
 

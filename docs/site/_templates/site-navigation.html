@@ -56,6 +56,14 @@
             <li>{{ link('cloth-comparison', '布料：同一场景，不同引擎', 'Cloth: one scene, different engines') }}</li>
           </ul>
         </section>
+        <section class="site-nav-section" aria-labelledby="nav-blog-distillation">
+          <h2 id="nav-blog-distillation">{{ '蒸馏' if site_is_chinese else 'Research distillation' }}</h2>
+          <ul>
+            <li>{{ link('physicsnemo-contact-surrogates', 'PhysicsNeMo：位置预测准了，接触事件也准吗？', 'PhysicsNeMo: does accurate position prediction get contact events right?') }}</li>
+            <li>{{ link('donic-bimanual-tracking', 'DONIC 的双手跟踪分，能看出交接成功吗？', 'Can a DONIC tracking score tell whether a handoff succeeded?') }}</li>
+            <li>{{ link('blog', '查看全部蒸馏', 'All research distillations', fragment='distillation') }}</li>
+          </ul>
+        </section>
       </div>
       <div class="site-nav-more">{{ link('blog', '查看全部文章', 'All Blog articles') }}</div>
     </div>
