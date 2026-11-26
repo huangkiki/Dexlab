@@ -75,10 +75,15 @@
 
   从一次杯子交接看，怎样用接触与传力证据解释跟踪分。
 
+- [PhysicsNeMo：位置预测准了，接触事件也准吗？](physicsnemo-contact-surrogates.md)
+
+  从车壳穿越和握球卸载，看位置误差和接触事件为什么要分开测。
+
 [更多实验与证据](experiments.md) · [灵巧操作仿真研究导读](https://huangkiki.github.io/Dexlab/zh-cn/latest/_static/research/dexterous-simulation.html) · [Paper Sharing](paper-sharing.md)
 
 ```{toctree}
 :hidden:
 
 donic-bimanual-tracking
+physicsnemo-contact-surrogates
 ```

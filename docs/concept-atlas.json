@@ -228,6 +228,20 @@
       "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
     },
     {
+      "id": "physicsnemo-contact-surrogates",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "physicsnemo-contact-surrogates.html",
+      "updated": "2026-11-26",
+      "topic": "physics-contact",
+      "tags": {"zh": ["物理代理", "接触切换", "碰撞检测"], "en": ["physical surrogates", "contact switching", "collision detection"]},
+      "name": {"zh": "PhysicsNeMo：位置预测准了，接触事件也准吗？", "en": "PhysicsNeMo: does accurate position prediction get contact events right?"},
+      "aliases": {"zh": ["PhysicsNeMo", "DeFormer", "接触局部修正"], "en": ["PhysicsNeMo", "DeFormer", "local contact correction"]},
+      "summary": {"zh": "用车壳穿越和握球卸载说明：动作输入、接触事件和探针覆盖要分别验证。", "en": "Shell crossings and finger unloading show why action inputs, contact events, and probe coverage need separate checks."},
+      "relations": [{"type": "related", "target": "contact-switching"}, {"type": "related", "target": "penetration"}, {"type": "related", "target": "evidence-boundary"}]
+    },
+    {
       "id": "cloth-topic",
       "group": "synthesis",
       "level": "core",

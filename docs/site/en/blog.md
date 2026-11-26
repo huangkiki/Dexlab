@@ -75,10 +75,15 @@ Solver fundamentals and findings from simulation experiments.
 
   A cup handoff shows what contact and support observations add to a tracking score.
 
+- [PhysicsNeMo: does accurate position prediction get contact events right?](physicsnemo-contact-surrogates.md)
+
+  Shell crossings and finger unloading show why pose error and contact events need separate tests.
+
 [More experiments and evidence](experiments.md) · [Dexterous-hand simulation guide](dexterous-hand-simulation.md) · [Paper Sharing](paper-sharing.md)
 
 ```{toctree}
 :hidden:
 
 donic-bimanual-tracking
+physicsnemo-contact-surrogates
 ```
