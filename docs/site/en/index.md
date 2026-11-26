@@ -12,9 +12,10 @@
     <a id="architecture-heading" href="../../zh-cn/latest/_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="Open the original DexLab architecture image">
       <picture>
         <source srcset="../../zh-cn/latest/_static/images/dexlab-architecture.webp" type="image/webp">
-        <img src="../../zh-cn/latest/_static/images/dexlab-architecture.png" width="1774" height="887" loading="eager" decoding="async" alt="DexLab architecture, from tasks, systems under test, execution and simulation backends to evidence and scoring, with results feeding back into system improvements.">
+        <img src="../../zh-cn/latest/_static/images/dexlab-architecture.png" width="1804" height="872" loading="eager" decoding="async" alt="DexLab architecture, from tasks, systems under test, execution and simulation backends to evidence and scoring, with results feeding back into system improvements.">
       </picture>
     </a>
+    <figcaption>Platform architecture overview. <a href="coverage.html">See validation by task and engine.</a></figcaption>
   </figure>
 
   <div class="experiment-intro" data-home-reveal>

@@ -16,7 +16,7 @@ The improved simulation helps the Agent learn new Skills. With those Skills, the
   <a href="https://huangkiki.github.io/Dexlab/en/latest/index.html">
     <img src="docs/site/_static/images/dexlab-architecture.webp" width="100%" alt="DexLab architecture: tasks and protocols, systems under test, action execution, environment backends, and evidence and scoring">
   </a><br>
-  <sub>DexLab workflow: tasks and protocols → systems under test → action execution → environment backends → independent evidence and scoring.</sub>
+  <sub>DexLab platform architecture. <a href="https://huangkiki.github.io/Dexlab/en/latest/coverage.html">See validation by task and engine.</a></sub>
 </p>
 
 ## Selected experiments

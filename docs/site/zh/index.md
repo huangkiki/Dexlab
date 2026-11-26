@@ -12,9 +12,10 @@
     <a id="architecture-heading" href="_static/images/dexlab-architecture.png" target="_blank" rel="noopener" aria-label="打开 DexLab 架构图原图">
       <picture>
         <source srcset="_static/images/dexlab-architecture.webp" type="image/webp">
-        <img src="_static/images/dexlab-architecture.png" width="1774" height="887" loading="eager" decoding="async" alt="DexLab 架构，从任务、被测系统、动作执行和环境后端，到证据与评分，再用实验结果改进系统。">
+        <img src="_static/images/dexlab-architecture.png" width="1804" height="872" loading="eager" decoding="async" alt="DexLab 架构，从任务、被测系统、动作执行和环境后端，到证据与评分，再用实验结果改进系统。">
       </picture>
     </a>
+    <figcaption>平台架构示意。<a href="coverage.html">查看各任务和引擎的验证状态。</a></figcaption>
   </figure>
 
   <div class="experiment-intro" data-home-reveal>

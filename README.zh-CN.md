@@ -26,6 +26,8 @@
 
 任务与协议经过被测系统、动作执行和环境后端，最终进入独立证据与评分。观测和失败再返回技能与仿真，推动下一轮改进。
 
+[查看各任务和引擎的验证状态](https://huangkiki.github.io/Dexlab/zh-cn/latest/coverage.html)。
+
 ## 代表性实验
 
 <p align="center">

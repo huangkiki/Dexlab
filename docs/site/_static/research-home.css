@@ -191,7 +191,7 @@ main > section > h1 {
   margin: 0 0 clamp(32px, 5vw, 56px);
 }
 
-.home-overview a {
+.home-overview > a {
   display: block;
 }
 
