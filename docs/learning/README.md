@@ -6,6 +6,10 @@ snapshots, with the upstream Apache-2.0 licenses and third-party notices retaine
 `sources.json` records the repository, exact revision and SHA-256 of every file.
 It is a publication snapshot, not a separate authored course.
 
+DexLab's bilingual Chaos and Bullet modules are authored directly under
+`docs/site/{zh,en}/{chaos-learning,bullet-learning}/`. The shared Bullet example
+lives in `docs/learning/examples/`.
+
 `scripts/build_docs.py` verifies the snapshots and generates the Chinese and
 English reading routes in `docs/site/{zh,en}/learn/`. These generated directories
 are ignored by Git. Course text remains primarily Chinese in both shells, with

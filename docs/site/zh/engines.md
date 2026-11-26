@@ -18,6 +18,15 @@ Uranus 生成式环境后端 <uranus-backend>
 
 同一个视觉网格、参数名称或关节目标，不保证引擎求解了同一个物理问题。
 
+## Chaos Physics 与 Bullet Physics
+
+| 引擎 | 原生入口 | 读什么 | 当前证据 |
+| --- | --- | --- | --- |
+| [Chaos Physics](chaos-learning/index.md) | Unreal Engine 5 的物理系统 | 用 Chaos Visual Debugger 读刚体状态、碰撞和关节约束，区分游戏帧与物理子步。 | UE 编辑器练习，DexLab 尚无运行记录。 |
+| [Bullet Physics](bullet-learning/index.md) | Bullet C++ SDK，课程走 PyBullet CPU `DIRECT` | 显式步进，读回法向力、位姿和关节状态。 | 课程方块落地正反对照。 |
+
+引擎准入和正式任务覆盖见[评测矩阵](coverage.md)。比较时先对齐单位、碰撞形状和观测时间。Chaos 的碰撞事件冲量与 Bullet 的逐步法向力各有自己的时间归属。
+
 ## 生成式环境后端
 
 Uranus 是 DexLab 的候选生成式 observation backend，不在 MuJoCo、SuperDex、Genesis、Newton、PhysX 或 Drake 的原生物理引擎分母中。它接收未来 `qpos` 并生成多视角视频，不提供接触力、求解器状态或任务 success；界面、评测任务和证据边界见 [Uranus 后端](uranus-backend.md)。

@@ -242,7 +242,7 @@
   <div class="home-next-grid">
     <a href="experiments.html"><strong>全部实验</strong><span>任务、协议、结果与失败记录</span></a>
     <a href="_static/research/dexterous-simulation.html"><strong>研究导读</strong><span>灵巧操作仿真的六层问题</span></a>
-    <a href="learning.html"><strong>仿真学习</strong><span>MuJoCo 起点与六个引擎课程</span></a>
+    <a href="learning.html"><strong>仿真学习</strong><span>MuJoCo 导学与八个引擎课程</span></a>
   </div>
 </section>
 

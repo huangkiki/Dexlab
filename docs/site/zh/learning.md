@@ -43,13 +43,13 @@
 (all-courses)=
 ## 全部课程
 
-这六课是一条导学路线。需要完整推导、API 与源码时，进入已有课程继续阅读。
+从 MuJoCo 导学继续读原生 API 和源码，或直接选择感兴趣的引擎做练习。
 
 - **共同基础：** [Physics-Based Simulation 伴读](learn/sim/docs/physics-based-simulation.md) · [九单元 Solver 教程](learn/sim/docs/solver-guide/README.md) · [术语索引](learn/sim/docs/solver-guide/term-index.md) · [应用与原理路线](learn/sim/docs/learning-paths.md)
 - **MuJoCo：** [完整目录](learn/mujoco/docs/curriculum.md) · [状态与时间](learn/mujoco/docs/state-and-time.md) · [接触模型](learn/mujoco/docs/contact-models.md) · [版本与证据](learn/mujoco/docs/versions.md)
-- **其他引擎：** [SuperDex](learn/superdex/docs/curriculum.md) · [Genesis](learn/genesis/docs/curriculum.md) · [Newton Physics](learn/newton/docs/curriculum.md) · [PhysX](learn/physx/docs/curriculum.md) · [Drake](learn/drake/docs/curriculum.md)
+- **其他引擎：** [SuperDex](learn/superdex/docs/curriculum.md) · [Genesis](learn/genesis/docs/curriculum.md) · [Newton Physics](learn/newton/docs/curriculum.md) · [PhysX](learn/physx/docs/curriculum.md) · [Drake](learn/drake/docs/curriculum.md) · [Chaos Physics](chaos-learning/index.md) · [Bullet Physics](bullet-learning/index.md)
 
-课程来自 Sim Learning 与各引擎的独立课程仓库，保留原始内容和来源。阅读留在本站；源码与许可见各课程页。
+本站保留 Sim Learning 与独立课程仓库的原文和许可。Chaos 与 Bullet 提供 DexLab 编写的双语练习，可用同一方块落地场景学习两种原生工作流。
 
 ```{toctree}
 :hidden:
@@ -67,4 +67,6 @@ Genesis <learn/genesis/docs/curriculum>
 Newton Physics <learn/newton/docs/curriculum>
 PhysX <learn/physx/docs/curriculum>
 Drake <learn/drake/docs/curriculum>
+Chaos Physics <chaos-learning/index>
+Bullet Physics <bullet-learning/index>
 ```

@@ -43,13 +43,13 @@ As checked on **2026-11-13**, the official stable release is [4.0.1](https://git
 (all-courses)=
 ## All courses
 
-These six lessons are a guided entry. Continue into the existing courses for derivations, APIs and source code. **Those detailed courses are primarily Chinese; this introductory route is bilingual.**
+Continue from the guided MuJoCo route into native APIs and source code, or choose an engine and start with its exercises.
 
 - **Shared foundations:** [Physics-Based Simulation](learn/sim/docs/physics-based-simulation.md) · [Nine-part solver guide](learn/sim/docs/solver-guide/README.md) · [Term index](learn/sim/docs/solver-guide/term-index.md) · [Application and theory tracks](learn/sim/docs/learning-paths.md)
 - **MuJoCo:** [Full contents](learn/mujoco/docs/curriculum.md) · [State and time](learn/mujoco/docs/state-and-time.md) · [Contact models](learn/mujoco/docs/contact-models.md) · [Versions and evidence](learn/mujoco/docs/versions.md)
-- **Other engines:** [SuperDex](learn/superdex/docs/curriculum.md) · [Genesis](learn/genesis/docs/curriculum.md) · [Newton Physics](learn/newton/docs/curriculum.md) · [PhysX](learn/physx/docs/curriculum.md) · [Drake](learn/drake/docs/curriculum.md)
+- **Other engines:** [SuperDex](learn/superdex/docs/curriculum.md) · [Genesis](learn/genesis/docs/curriculum.md) · [Newton Physics](learn/newton/docs/curriculum.md) · [PhysX](learn/physx/docs/curriculum.md) · [Drake](learn/drake/docs/curriculum.md) · [Chaos Physics](chaos-learning/index.md) · [Bullet Physics](bullet-learning/index.md)
 
-Courses come from Sim Learning and the independent engine-course repositories. Original text and provenance remain intact. Read here; find source and license information on each course page.
+Sim Learning and the independent courses retain their original text, primarily in Chinese, and their licenses. DexLab’s Chaos and Bullet modules offer bilingual exercises that use the same box drop to explore both native workflows.
 
 ```{toctree}
 :hidden:
@@ -67,4 +67,6 @@ Genesis <learn/genesis/docs/curriculum>
 Newton Physics <learn/newton/docs/curriculum>
 PhysX <learn/physx/docs/curriculum>
 Drake <learn/drake/docs/curriculum>
+Chaos Physics <chaos-learning/index>
+Bullet Physics <bullet-learning/index>
 ```
