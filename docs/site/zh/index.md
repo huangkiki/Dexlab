@@ -435,7 +435,7 @@
 实验目录 <experiments>
 结果与诊断 <results>
 引擎与模型 <engines>
-Blog <blog>
+蒸馏 <distillation>
 研究资料 <references>
 Paper sharing <paper-sharing>
 概念索引 <concepts/index>

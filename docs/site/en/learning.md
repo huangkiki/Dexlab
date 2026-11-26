@@ -14,6 +14,15 @@ A change anywhere can affect what follows. A dropped object in the last frame do
 
 This route covers time, contact, version 4, performance and an existing failure case. Each lesson starts with a question, then offers expandable explanations, a self-check and links to detailed courses.
 
+(solver-fundamentals)=
+## Solver and simulation fundamentals
+
+- [One step, several clocks](mujoco-learning/step.md): use a physics step to distinguish the simulation step, control period and display rate.
+- [Contact, friction and solving](mujoco-learning/contact.md): follow an object onto a table to see when contact activates and how friction limits sliding.
+- [Why does a sliding block lift off after the contact solve converges?](complementarity-contact-models.md): use a sliding block to see what the solver is solving and how the contact model changes the answer.
+- [How do multiple solvers stay in sync, and what does preCICE do?](solver-coupling.md): see how solvers exchange state and forces within one scene.
+- [Sim-to-real failure atlas](failure-root-cause-atlas.md): follow the evidence in time to find where a simulation first goes wrong.
+
 ## Connect learning to system optimization
 
 For a robot system built on MuJoCo, start with three questions: how often does control update; which instant do the recorded forces and states describe; and where is time spent across physics, control, rendering and communication? The same questions help investigate MATRiX integration.

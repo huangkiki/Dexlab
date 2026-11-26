@@ -526,7 +526,7 @@ def render_field(atlas, language):
         '<section class="concept-topics" aria-labelledby="concept-topics-title">'
         '<header class="concept-topics-head">'
         f'<h2 id="concept-topics-title">{"精选文章" if language == "zh" else "Selected articles"}</h2>'
-        f'<a href="blog.html">{"全部文章" if language == "zh" else "All articles"}</a>'
+        f'<a href="distillation.html">{"浏览蒸馏" if language == "zh" else "Browse distillations"}</a>'
         '</header>'
         f'<div class="concept-topics-grid">{"".join(topic_links)}</div>'
         "</section></div>"

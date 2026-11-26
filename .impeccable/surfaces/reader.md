@@ -1,6 +1,6 @@
 # Shared content reader
 
-Mode: Read. Scope: Sphinx article, report, documentation and Blog pages rendered by `_templates/reader-page.html`.
+Mode: Read. Scope: Sphinx article, report, documentation and reading index pages rendered by `_templates/reader-page.html`.
 
 ## Direction contract
 
@@ -12,6 +12,6 @@ STORY: Choose a site section from the masthead, read the page, and use the right
 
 FIRST VIEWPORT: Global masthead, article title and lead. No "all content" chapter rail. Long pages reveal a current-page outline at the right after the masthead.
 
-ADAPTATION: The desktop reader uses a 760px article plus 160px outline within 1040px. At 1200px and below the outline is removed and the article centers at 840px. At 800px and below the layout is a single flow using the shared page gutters. Blog uses an 880px centered index without an outline.
+ADAPTATION: The desktop reader uses a 760px article plus 160px outline within 1040px. At 1200px and below the outline is removed and the article centers at 840px. At 800px and below the layout is a single flow using the shared page gutters. Distillation uses an 880px centered index without an outline.
 
 REMOVED: The left rail's generated full-site Sphinx toctree and duplicate "All content / 全部内容" disclosure. Site sections remain reachable from the masthead; page headings remain reachable from the right outline.

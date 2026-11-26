@@ -5,7 +5,7 @@ no-search: true
 
 # LIBERO: from a native task to a verifiable change · Experiment report
 
-[Read the blog article](libero-workflow.md)
+[Read the findings](libero-workflow.md)
 
 **First case: LIBERO-Object, “pick up the cream cheese and place it in the basket.”** Panda, assets, controller, demonstration initial states and the native success predicate remain intact. Complete action sequences include release and final state. The historical case below uses only this task dataset. mjlab is deferred; scheduled development remains paused.
 

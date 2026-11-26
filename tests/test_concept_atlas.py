@@ -145,7 +145,7 @@ class ConceptAtlasTests(unittest.TestCase):
             re.findall(r'class="concept-topic-link" href="([^"]+)"', rendered),
             ["complementarity-contact-models.html", "cloth-comparison.html", "cut-push.html"],
         )
-        self.assertIn('href="blog.html"', rendered)
+        self.assertIn('href="distillation.html"', rendered)
         self.assertIn('class="concept-topic-tag', rendered)
         self.assertLess(
             rendered.index('class="concept-field"'),

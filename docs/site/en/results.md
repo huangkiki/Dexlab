@@ -17,6 +17,17 @@ Ledger <research-ledger>
 
 [What do we mean when we discuss the Sim-to-Real Gap?](failure-root-cause-atlas.md) gives a runtime-preflight and P/A/G/C/N/O process for locating the first failing layer, then points to the evidence pages for complete experiments, unresolved items and hardware limits. The [solver failure audit](solver-failure-audit.md) retains backend- and configuration-specific historical evidence.
 
+(experimental-findings)=
+## Experimental findings
+
+- [Why does the ball still spin between two gripping fingers?](wuji-contact.md): compare point and torsional contact to explain rotation about the fingertip line.
+- [How can we tell if a simulated cut fully separates tofu or banana?](cut-push.md): push the last piece sideways and check whether the sides can move independently.
+- [Cloth: one scene, different engines](cloth-comparison.md): compare a freely sagging strip and a sheet draped over a sphere to study bending and contact separately.
+- [LIBERO: from a native task to a verifiable change](libero-workflow.md): all ten demonstrations completed at half the step size, but fewer passed the contact checks.
+- [RoboDojo toast: bread loss and contact escape during insertion](robodojo-bread-slip.md): synchronized motion and contact records show why similar-looking failures need different fixes.
+
+[Browse experiments and raw records](experiments.md)
+
 ## Paired engine incline comparison
 
 [Same cube, three timesteps, complete paired report](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.md): fixed profiles yield MuJoCo 3/9 and SuperDex 8/9 passes. Drift, initial transients and the lower drift of higher-impedance MuJoCo remain visible; no universal ranking.

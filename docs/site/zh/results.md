@@ -17,6 +17,17 @@ Solver 失败复盘 <solver-failure-audit>
 
 [当我们在讨论仿真 Sim-to-Real Gap 问题时，我们在讨论什么？](failure-root-cause-atlas.md)用运行时前置检查与 P/A/G/C/N/O 六个第一失效域给出判因路径，并把完整实验、未判定项和真机边界交给下列证据页继续追踪。[Solver 失败复盘](solver-failure-audit.md)保留逐引擎、逐配置的历史证据。
 
+(experimental-findings)=
+## 实验发现
+
+- [两根手指一直夹着，球为什么还会转？](wuji-contact.md)：用点接触与抗扭接触的对照，解释球为什么能绕着夹持线转。
+- [仿真里，怎么知道豆腐和香蕉真的切开了？](cut-push.md)：侧推最后一块，检查切缝两边是否已经断开、能否各自移动。
+- [布料：同一场景，不同引擎](cloth-comparison.md)：比较布条自由下垂与布片覆盖球体，分别观察弯曲与接触。
+- [LIBERO：从原生任务到可验证的改进](libero-workflow.md)：步长减半后十次示范都完成，但通过接触诊断的次数变少了。
+- [RoboDojo 烤面包：面包脱落与入槽接触逃逸](robodojo-bread-slip.md)：用同步动作与接触记录解释相似失败为什么需要不同的修复。
+
+[查看实验目录与原始记录](experiments.md)
+
 ## 双引擎斜面对照
 
 [相同方块、三个步长的完整配对报告](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-results.zh-CN.md)：固定配置下 MuJoCo 3/9、SuperDex 8/9 通过；保留静态漂移、初始瞬态及 MuJoCo 更高阻抗下漂移更小的反例，不作通用排名。

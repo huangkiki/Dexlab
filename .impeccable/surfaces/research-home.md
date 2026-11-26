@@ -4,7 +4,7 @@ Mode: Read. Code-led implementation. Scope: bilingual homepages, their template,
 
 ## Direction contract
 
-THESIS: Make the space between arrival and the full index readable. Readers see the architecture, follow a task failure to its evidence and reach the linked articles. The canonical Blog holds the complete catalogue.
+THESIS: Make the space between arrival and the underlying evidence readable. Readers see the architecture, follow a task failure to its evidence and reach selected articles. Experimental findings, research distillation and simulation fundamentals have separate entrances.
 
 OWN-WORLD: Keep the article's warm paper, charcoal text, muted green links, serif display title and fine rules. Use a long editorial page with open ruled rows.
 

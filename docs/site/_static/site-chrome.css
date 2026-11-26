@@ -428,7 +428,8 @@ html {
   overflow: visible;
 }
 
-.site-nav summary {
+.site-nav summary,
+.site-header .site-nav > a {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -438,6 +439,7 @@ html {
   font: 400 14px/1.4 var(--sans, Arial, sans-serif);
   white-space: nowrap;
   list-style: none;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -461,7 +463,8 @@ html {
 }
 
 .site-nav details[open] > summary,
-.site-nav summary:hover {
+.site-nav summary:hover,
+.site-header .site-nav > a:is(:hover, :focus-visible, [aria-current="page"]) {
   color: var(--accent, var(--green, #4f664c));
 }
 
@@ -534,7 +537,8 @@ html {
 }
 
 @media (max-width: 700px) {
-  .site-nav summary {
+  .site-nav summary,
+  .site-header .site-nav > a {
     min-height: 40px;
     gap: 5px;
     font-size: 13px;

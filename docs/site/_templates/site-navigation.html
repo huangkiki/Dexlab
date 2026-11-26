@@ -27,6 +27,7 @@
         <section class="site-nav-section" aria-labelledby="nav-research-evidence">
           <h2 id="nav-research-evidence">{{ '实验与验证' if site_is_chinese else 'Experiments and validation' }}</h2>
           <ul>
+            <li>{{ link('results', '实验发现', 'Experimental findings', fragment='experimental-findings') }}</li>
             <li>{{ link('index', '代表性实验与结论', 'Representative experiments and findings', fragment='experiments') }}</li>
             <li>{{ link('visual-comparisons', '六引擎斜面对照', 'Incline comparison across six engines', fragment='incline') }}</li>
             <li>{{ link('index', '物理验证与真机证据边界', 'Physical checks and hardware evidence', fragment='physical-validity') }}</li>
@@ -36,38 +37,7 @@
     </div>
   </details>
 
-  <details name="site-nav">
-    <summary>Blog</summary>
-    <div class="site-nav-panel">
-      <div class="site-nav-columns">
-        <section class="site-nav-section" aria-labelledby="nav-blog-basics">
-          <h2 id="nav-blog-basics">{{ '求解器与仿真基础' if site_is_chinese else 'Solver and simulation fundamentals' }}</h2>
-          <ul>
-            <li>{{ link('mujoco-learning/step', '一步仿真，几种时间', 'One step, several clocks') }}</li>
-            <li>{{ link('complementarity-contact-models', '接触求解收敛了，滑块为什么还会离开桌面？', 'Why does a sliding block lift off after the contact solve converges?') }}</li>
-            <li>{{ link('solver-coupling', '多求解器如何同步？', 'How do multiple solvers stay in sync?') }}</li>
-          </ul>
-        </section>
-        <section class="site-nav-section" aria-labelledby="nav-blog-findings">
-          <h2 id="nav-blog-findings">{{ '实验发现' if site_is_chinese else 'Experimental findings' }}</h2>
-          <ul>
-            <li>{{ link('wuji-contact', '两根手指一直夹着，球为什么还会转？', 'Why does the ball still spin between two gripping fingers?') }}</li>
-            <li>{{ link('cut-push', '仿真里，怎么知道豆腐和香蕉真的切开了？', 'How can we tell if a simulated cut fully separates tofu or banana?') }}</li>
-            <li>{{ link('cloth-comparison', '布料：同一场景，不同引擎', 'Cloth: one scene, different engines') }}</li>
-          </ul>
-        </section>
-        <section class="site-nav-section" aria-labelledby="nav-blog-distillation">
-          <h2 id="nav-blog-distillation">{{ '蒸馏' if site_is_chinese else 'Research distillation' }}</h2>
-          <ul>
-            <li>{{ link('physicsnemo-contact-surrogates', 'PhysicsNeMo：位置预测准了，接触事件也准吗？', 'PhysicsNeMo: does accurate position prediction get contact events right?') }}</li>
-            <li>{{ link('donic-bimanual-tracking', 'DONIC 的双手跟踪分，能看出交接成功吗？', 'Can a DONIC tracking score tell whether a handoff succeeded?') }}</li>
-            <li>{{ link('blog', '查看全部蒸馏', 'All research distillations', fragment='distillation') }}</li>
-          </ul>
-        </section>
-      </div>
-      <div class="site-nav-more">{{ link('blog', '查看全部文章', 'All Blog articles') }}</div>
-    </div>
-  </details>
+  {{ link('distillation', '蒸馏', 'Distillation') }}
 
   <details name="site-nav">
     <summary>Paper Sharing</summary>
@@ -101,6 +71,7 @@
           <h2 id="nav-docs-learning">{{ '仿真学习' if site_is_chinese else 'Learn simulation' }}</h2>
           <ul>
             <li>{{ link('learning', 'MuJoCo 学习路线', 'MuJoCo learning path') }}</li>
+            <li>{{ link('learning', '求解器与仿真基础', 'Solver and simulation fundamentals', fragment='solver-fundamentals') }}</li>
             <li>{{ link('mujoco-learning/contact', '接触、摩擦与求解', 'Contact, friction and solving') }}</li>
             <li>{{ link('learning', '全部引擎课程', 'All engine courses', fragment='all-courses') }}</li>
           </ul>

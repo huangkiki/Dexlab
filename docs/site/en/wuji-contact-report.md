@@ -5,7 +5,7 @@ no-search: true
 
 # Wuji sphere pinch: point contact versus torsional contact · Experiment report
 
-[Read the blog article](wuji-contact.md)
+[Read the findings](wuji-contact.md)
 
 **With the same hand, controller and commands, changing the contact model reduced maximum holding displacement from 2.734 mm to 1.025 mm, passing the original 2 mm limit.** This uses MuJoCo's existing torsional-contact capability; the solver was not modified. It demonstrates contact-model sensitivity in this synthetic fixture, not a qualified solver failure or a validated real fingertip material.
 

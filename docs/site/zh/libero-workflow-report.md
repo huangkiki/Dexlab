@@ -5,7 +5,7 @@ no-search: true
 
 # LIBERO：从原生任务到可验证的改进 · 实验报告
 
-[阅读博客正文](libero-workflow.md)
+[阅读实验发现](libero-workflow.md)
 
 **首个案例：LIBERO-Object「抓取 cream cheese 并放入篮子」。** 保留原生 Panda、资产、控制器、示范初态与成功判定，执行完整动作，包括释放和终态。下方历史案例只使用这个任务的数据；mjlab 延后，定时开发保持暂停。
 

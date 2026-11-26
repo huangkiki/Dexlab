@@ -5,7 +5,7 @@ no-search: true
 
 # Cloth: one scene, different engines · Experiment report
 
-[Read the blog article](cloth-comparison.md)
+[Read the findings](cloth-comparison.md)
 
 Watch the motion before reading the checks. These historical recordings replay their actual vertices with shared lighting, a fixed camera and synchronized time. No dynamics were rerun, vertices moved to remove penetration, or extra folds added to the mesh.
 

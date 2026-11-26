@@ -38,6 +38,7 @@ html_js_files = [
     ('reader-page.js', {'defer': 'defer'}),
 ]
 templates_path = [str(HERE / '_templates')]
+html_additional_pages = {'blog': 'legacy-blog.html'}
 html_show_sourcelink = False
 html_theme_options = {
     'logo': {'text': 'DexLab'},
@@ -68,6 +69,8 @@ def setup(app):
     ]
 
     def select_home_template(app, pagename, templatename, context, doctree):
+        if templatename == 'legacy-blog.html':
+            return templatename
         # Nested course pages need a language switch relative to their own route.
         context['other_language_root'] = '../' * (len(pagename.split('/')) + 1) + (
             'en/latest/' if app.config.language == 'zh_CN' else 'zh-cn/latest/')

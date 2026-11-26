@@ -18,7 +18,7 @@ Onur Beker, A. René Geist, Michael Posa, Marc Toussaint, Justin Carpentier, Geo
   <ul class="paper-sharing-links">
     <li><a href="../../zh-cn/latest/_static/research/paper-sharing/complementarity-contact-models.zh-CN.html"><span lang="en">Read the bilingual full text</span><span lang="zh-CN">阅读中英对照全文</span></a></li>
     <li><a href="https://arxiv.org/html/2611.26600v1" hreflang="en"><span lang="en">arXiv v1 original</span><span lang="zh-CN">arXiv v1 原文</span></a></li>
-    <li><a href="complementarity-contact-models.html"><span lang="en">Companion Blog article: why does a sliding block lift off after the contact solve converges?</span><span lang="zh-CN">Blog 伴读：接触求解收敛了，滑块为什么还会离开桌面？</span></a></li>
+    <li><a href="complementarity-contact-models.html"><span lang="en">Companion reading: why does a sliding block lift off after the contact solve converges?</span><span lang="zh-CN">伴读：接触求解收敛了，滑块为什么还会离开桌面？</span></a></li>
   </ul>
 </div>
 ```

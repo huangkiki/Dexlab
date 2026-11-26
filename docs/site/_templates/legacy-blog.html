@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ 'zh-CN' if site_is_chinese else 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <title>{{ '内容已迁移' if site_is_chinese else 'Content has moved' }} · DexLab</title>
+</head>
+<body>
+  <main>
+    <h1>{{ '内容已迁移' if site_is_chinese else 'Content has moved' }}</h1>
+    <ul>
+      <li><a id="solver-fundamentals" href="{{ pathto('learning') }}#solver-fundamentals">{{ '求解器与仿真基础' if site_is_chinese else 'Solver and simulation fundamentals' }}</a></li>
+      <li><a id="experimental-findings" href="{{ pathto('results') }}#experimental-findings">{{ '实验发现' if site_is_chinese else 'Experimental findings' }}</a></li>
+      <li><a id="distillation" href="{{ pathto('distillation') }}">{{ '蒸馏' if site_is_chinese else 'Research distillation' }}</a></li>
+      <li><a id="overview" href="{{ pathto('index') }}">{{ '研究总览' if site_is_chinese else 'Research overview' }}</a></li>
+    </ul>
+  </main>
+  <script>
+    const fragment = location.hash.slice(1);
+    const links = {
+      'solver-fundamentals': 'solver-fundamentals',
+      'solver-and-simulation-fundamentals': 'solver-fundamentals',
+      'experimental-findings': 'experimental-findings',
+      'distillation': 'distillation',
+      'research-distillation': 'distillation',
+    };
+    const target = Object.hasOwn(links, fragment) ? links[fragment] : 'overview';
+    location.replace(document.getElementById(target).href);
+  </script>
+</body>
+</html>

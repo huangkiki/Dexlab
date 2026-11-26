@@ -442,7 +442,7 @@ Experiments <experiments>
 Results & diagnosis <results>
 Engines & models <engines>
 Research guides <references>
-Blog <blog>
+Research distillation <distillation>
 Paper sharing <paper-sharing>
 Concept index <concepts/index>
 Contributing <contributing>
