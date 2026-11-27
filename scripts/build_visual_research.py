@@ -393,6 +393,18 @@ def comparisons(index, experiences, language, root):
         if case["id"] == "incline":
             lines += [
                 (
+                    "评分器先核对状态与力的时间和数值，再评估运动是否达标。Chaos 三条滑动在状态与冲量的核对中超限。"
+                    " {ref}`为什么判无效，查看首次越界和逐步对账 <incline-invalid-records>`。"
+                    " 表中历史无效项另见 [Newton Physics 的位置与速度检查](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md)"
+                    " 和 [PhysX 的法向冲量方向检查](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。"
+                    if zh else
+                    "The scorer checks the timing and numerical agreement of state and force before evaluating motion against the limits. "
+                    "The three Chaos sliding records exceeded that consistency limit. {ref}`Why they were invalid, including the first step over the limit <incline-invalid-records>`. "
+                    "For historical rows, see [Newton Physics position and velocity checks](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) "
+                    "and [PhysX normal-impulse direction checks](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md)."
+                ),
+                "",
+                (
                     "GIF 保留原六引擎回放。九引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。"
                     if zh else
                     "The GIF retains the original six-engine replay. The nine-engine curves use the same 1 ms conditions. Dotted lines mark invalid records."

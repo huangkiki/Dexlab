@@ -8,6 +8,25 @@ Each backend completed the nine original conditions and one disabled-collision c
 | Bullet / PyBullet 3.2.7, CPU DIRECT | 2/3 | 0/3 | 1/3 | 3 / 6 / 0 |
 | SOFA 26.06.00, rigid OBB / block Gauss–Seidel | 0/3 | 0/3 | 0/3 | 0 / 9 / 0 |
 
+(incline-invalid-records)=
+## Why a record is marked invalid
+
+**A failure means the record passed the consistency checks and the measured motion or force exceeded an experiment limit. An invalid record did not pass the checks that precede scoring.** All three Chaos sliding runs reached two seconds. The scorer checks the whole trace. Any step where impulse and momentum change disagree beyond tolerance invalidates the record.
+
+Think of each step as having two ledgers. The velocity ledger uses the velocities before and after the step to compute the momentum change, `m × (v_after − v_before)`. The force ledger adds the gravity and contact impulses over that same interval. Both quantities have direction. The check measures the length of the three-dimensional difference. The analogy corresponds to two sets of measured quantities on one physics step. The recorded values include numerical rounding, and the frozen limit allows a difference of up to **0.100 µN·s (1e-7 N·s)** on each step. Chaos uses the native velocity impulse and the position correction converted over the same interval.
+
+Take **step 1597 of the 1 ms run**. The numbers below show horizontal x and vertical z. The y component is negligible. The velocity ledger gives **(295.00000, −206.56250) µN·s**. The contact and gravity ledger gives **(295.04451, −206.47272) µN·s**. The difference is about **(−0.04451, −0.08978) µN·s**, with a length of **0.100204 µN·s**. The adjacent steps give **0.093713** and **0.096117 µN·s**. These digits are shown for reproduction.
+
+All three cubes start at rest, flush to the 35° incline, with contact friction μ=0.5. On step one, the tangential force is **−0.136 N** at 2 ms and near zero at 1 and 0.5 ms. The cubes then accelerate downhill. At the first exceedance, each run still reports four contact points and about **0.514 N** of normal support. Tangential force remains below **3e-8 N** in magnitude. The ideal Coulomb sliding reference would give about **−0.257 N** in the tangential direction. The weak tangential resistance is visible before the consistency gate is crossed and remains diagnostic evidence.
+
+| Timestep | First step over the limit and its end time | Downhill speed at start of that step | First / maximum residual (µN·s) | Steps over the limit / total |
+| --- | --- | ---: | ---: | ---: |
+| 2 ms | 811 / 1.622 s | 7.779 m/s | 0.101099 / 0.110414 | 4 / 1000 |
+| 1 ms | 1597 / 1.597 s | 8.980 m/s | 0.100204 / 0.110195 | 152 / 2000 |
+| 0.5 ms | 3175 / 1.5875 s | 8.930 m/s | 0.103196 / 0.103613 | 28 / 4000 |
+
+The first scoring gate crossed is **state–impulse consistency**. All three records retain their invalid status, and their trajectories remain available for diagnosis. The engine's particle velocity array stores single-precision values. At the first exceedance, one representable increment in a larger velocity component corresponds to about **0.0391 µN·s** of momentum, enough to affect this check. Rounding the force-predicted end velocity once in the engine's centimeter units takes the 0.5 ms diagnostic below the limit, while steps at 2 and 1 ms still exceed it. The full error budget remains unresolved. A discriminating check needs the gravity update, position correction, velocity impulse and velocities before and after writeback in the same step. The separate {ref}`disabled-collision control <incline-no-floor-control>` crossed the free-fall velocity limit.
+
 ## Matched inputs
 
 A uniform 40 mm, 64 g cube starts at rest with its base flush against the incline. Runs use 9.81 m/s² gravity and last 2 s. The conditions are 15° with μ=0.5 for static support, 35° with μ=0.5 for sliding, and 15° with μ=0 for nominal frictionless sliding. Each runs at 2, 1 and 0.5 ms. The nine cases, scoring window and limits come from the frozen incline manifest. The added disabled-collision control is outside the nine-case denominator. [Original incline protocol](https://github.com/huangkiki/Dexlab/blob/main/docs/incline-comparison-protocol.md)
@@ -27,11 +46,8 @@ Chaos and SOFA use finite slabs whose top faces contain the complete cube motion
 | Static, 2 ms | Step one supplies −0.149 N tangential force. Rotation exceeds 0.01 rad at about 0.034 s, drift exceeds 1 mm at 0.068 s, and final downhill displacement reaches 1.461 m. |
 | Static, 1 ms | Step one supplies about 0.606 N normal force and near-zero tangential force. Drift exceeds 1 mm at 0.028 s and reaches 5.081 m. |
 | Static, 0.5 ms | Step one also supplies normal support with near-zero tangential force. Drift exceeds 1 mm at 0.028 s and reaches 5.079 m. |
-| Sliding, 2 ms | After downhill acceleration, the momentum residual first exceeds its limit at step 811, ending at 1.622 s. The maximum is 1.104e-7 N·s. The record is invalid. |
-| Sliding, 1 ms | The first step has normal support and near-zero tangential force. During acceleration, the momentum check first fails at step 1597 (1.597 s). The maximum is 1.102e-7 N·s. The record is invalid. |
-| Sliding, 0.5 ms | The first step has normal support and near-zero tangential force. During acceleration, the momentum check first fails at step 3175 (1.5875 s). The maximum is 1.036e-7 N·s. The record is invalid. |
 
-At 1 and 0.5 ms the static case reads back 0.5 friction, yet its tangential force stays below 1.2e-8 N in magnitude throughout the scoring window. The traces nearly coincide with the frictionless controls. Logging tangential impulse in each first-step solve phase would distinguish friction anchors, iterations and phase selection. The sliding residuals cross the limit as velocity grows. Rounding accounts for part of the discrepancy. Distinguishing the remaining contributions requires reading the solved and stored velocities over the same intervals.
+At 1 and 0.5 ms the static case reads back 0.5 friction, yet its tangential force stays below 1.2e-8 N in magnitude throughout the scoring window. The traces nearly coincide with the frictionless controls. Logging tangential impulse in each first-step solve phase would distinguish friction anchors, iterations and phase selection.
 
 ### Bullet
 
@@ -62,6 +78,7 @@ The earliest observed departures are force oscillation and rotation. Impulse and
 
 The earliest observed departures are contact support and static retention. Solver rows and state increments agree through the momentum check. Native OBB contact positions and constraint gaps would distinguish collision generation, constraint response and contact-distance effects. Single-step force deviations locate the onset of a departure. The pass criterion uses windowed RMSE.
 
+(incline-no-floor-control)=
 ### Disabled-collision control
 
 All three cubes crossed the incline with no contact records. Bullet and SOFA passed the stepwise free-fall velocity check. Chaos first exceeded the 1e-4 m/s limit at 1.431 s and ended near −19.61966 m/s. Replaying the velocity update with single-precision centimeter-unit accumulation tracks the complete native velocity to a maximum error of 2.4e-9 m/s. The strict check retains this control as invalid.

@@ -100,6 +100,8 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 </div>
 <p class="matrix-note">† Invalid records remain in the denominator; they are not passes and are not physical failures.</p>
 
+The scorer checks the timing and numerical agreement of state and force before evaluating motion against the limits. The three Chaos sliding records exceeded that consistency limit. {ref}`Why they were invalid, including the first step over the limit <incline-invalid-records>`. For historical rows, see [Newton Physics position and velocity checks](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) and [PhysX normal-impulse direction checks](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md).
+
 The GIF retains the original six-engine replay. The nine-engine curves use the same 1 ms conditions. Dotted lines mark invalid records.
 
 ```{raw} html
