@@ -814,3 +814,63 @@ html:lang(en) :is(.paper-sharing-local, .paper-sharing-links a) > [lang="zh-CN"]
   color: var(--muted);
   font-size: .9rem;
 }
+
+[data-reader-page="experiments"] .lesson-article .toctree-wrapper:not(:has(ul)) {
+  display: none;
+}
+
+.task-register {
+  margin: 14px 0 30px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.task-register-labels,
+.task-register-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 26px;
+}
+
+.task-register-labels {
+  padding: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.task-register-entry {
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.lesson-article .task-register-entry h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.lesson-article .task-register-entry p {
+  margin: 0;
+}
+
+.task-register-engines {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.task-register-result {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+  .task-register-labels {
+    display: none;
+  }
+
+  .task-register-entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+}

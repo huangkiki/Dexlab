@@ -6,200 +6,60 @@ import json
 import re
 from pathlib import Path
 
-from solver_taxonomy import summarize_roles
-from task_coverage import load_inventory
 from visual_research import ROOT, check, read_bundle
 
 MARKERS = ("<!-- visual-research:start -->", "<!-- visual-research:end -->")
-SITE = "https://huangkiki.github.io/Dexlab/"
-ENGINES = ("MuJoCo", "SuperDex", "Genesis", "Newton Physics", "PhysX", "Drake")
+CATALOGUE_GROUPS = {
+    "rigid-contact": {"zh": "刚体接触与摩擦", "en": "Rigid contact and friction"},
+    "grasping": {"zh": "夹持与灵巧操作", "en": "Grasping and manipulation"},
+    "deformables": {"zh": "布料与软体操作", "en": "Cloth and soft manipulation"},
+    "cutting": {"zh": "切割与刀面推动", "en": "Cutting and blade-driven pushing"},
+    "execution": {"zh": "仿真运行路径", "en": "Simulation execution paths"},
+}
+HIGHLIGHT_ANCHORS = {
+    "six-engine-incline": "incline",
+    "normal-response": "normal",
+    "pinch-load": "pinch",
+    "libero-workflow": "libero",
+}
 
 
-def solver_summary(engine, rows, language="en"):
-    """Describe engine-specific roles without promoting names to peer algorithms."""
-    return summarize_roles(engine, rows, language)
-
-
-def site_url(language, path=""):
-    return SITE + ("zh-cn" if language == "zh" else "en") + "/latest/" + path
-
-
-def engine_table(inventory, language, site):
-    zh = language == "zh"
-    lines = [
-        "## "
-        + (
-            "比较了哪些引擎与 solver"
-            if zh
-            else "Which engines and solvers are compared?"
-        ),
-        "",
-    ]
-    lines += [
-        "| "
-        + (
-            "引擎 | 已登记配置的角色（非同级算法清单） | 实验版本与路径 |"
-            if zh
-            else "Engine | Roles in registered profiles (not peer algorithms) | Experiment versions and paths |"
-        ),
-        "| --- | --- | --- |",
-    ]
-    for engine in ENGINES:
-        rows = [r for r in inventory["rows"] if r["engine"] == engine]
-        if not rows:
-            raise ValueError("Engine missing from coverage: " + engine)
-        solvers = solver_summary(engine, rows, language)
-        versions = sorted(
-            {r["version"] for r in rows if r["runtime_path"].startswith("native")}
-        )
-        # Runtime labels and versions are displayed verbatim from the coverage source.
-        if not versions:
-            versions = sorted({r["version"] for r in rows})
-        versions = [
-            v
-            for v in versions
-            if v not in ("unknown", "unqualified", "pending", "not qualified")
-        ]
-        lines.append(
-            f"| **{engine}** | {solvers} | "
-            + ", ".join(versions)
-            + "; native / "
-            + ("历史路径详见矩阵" if zh else "historical paths in matrix")
-            + " |"
-        )
-    target = "coverage.md" if site else site_url(language, "coverage.html")
-    lines += [
-        "",
-        (
-            "原生与框架 **MJWarp** 另列运行路径及实际核心。Newton Physics 是引擎项目，Newton 也是求解算法名。SuperDex BFGS／SR1 在已测 assembly period=1 时执行 Newton 等价步；配置名不计作独立算法。"
-            if zh
-            else "Native and framework **MJWarp** are separate paths with their actual core identified. Newton Physics is an engine project; Newton is also an algorithm name. Tested SuperDex BFGS/SR1 with assembly period=1 execute Newton-equivalent steps; configuration names are not independent algorithm counts."
-        ),
-        "",
-        (
-            "本表是研究对象概览，包含失败与未准入项；执行情况、CPU/GPU、精度、完整配置和不支持原因见"
-            if zh
-            else "This is a research inventory including failures and unqualified entries. Execution, CPU/GPU, precision, full profiles and unsupported reasons: "
-        )
-        + f" [完整矩阵 / Full matrix]({target})。",
-        "",
-    ]
-    taxonomy_target = (
-        "solver-taxonomy.md"
-        if site
-        else ("docs/solver-taxonomy.zh-CN.md" if zh else "docs/solver-taxonomy.md")
+def catalogue(index, language):
+    rows = index["catalogue"]
+    ids = {row["id"] for row in rows}
+    if len(ids) != len(rows) or {row["group"] for row in rows} != set(CATALOGUE_GROUPS):
+        raise ValueError("Expected unique catalogue entries in the published task groups")
+    links = " · ".join(
+        f"[{titles[language]}](#tasks-{key})" for key, titles in CATALOGUE_GROUPS.items()
     )
+    lines = ["(full-experiment-catalogue)=", links, ""]
+    labels = ["任务与所用仿真", "实验结果"] if language == "zh" else ["Task and simulator", "Observed outcome"]
+    for key, titles in CATALOGUE_GROUPS.items():
+        lines += [f"(tasks-{key})=", "## " + titles[language], "", "```{raw} html",
+                  '<div class="task-register">',
+                  '<div class="task-register-labels" aria-hidden="true">'
+                  + "".join(f"<span>{label}</span>" for label in labels) + "</div>"]
+        for row in rows:
+            if row["group"] != key:
+                continue
+            engine = row["engines"]
+            if isinstance(engine, dict):
+                engine = engine[language]
+            alias = HIGHLIGHT_ANCHORS.get(row["id"])
+            anchor = f' id="experiment-highlight-{alias}"' if alias else ""
+            lines += [
+                f'<article class="task-register-entry"{anchor}>',
+                '<div><h3><a href="' + html.escape(row["link"]) + '">'
+                + html.escape(row["title"][language]) + "</a></h3>",
+                '<p class="task-register-engines">' + html.escape(engine) + "</p></div>",
+                '<p class="task-register-result">' + html.escape(row["finding"][language]) + "</p>",
+                "</article>",
+            ]
+        lines += ["</div>", "```", ""]
     lines += [
-        (
-            "角色按各引擎的已记录名称解释，不代表这些算法求解同一问题，也不证明任意组合已经执行。AUTO 只是选择策略；未知身份不从默认值补写。"
-            if zh
-            else "Roles interpret recorded names within each engine, not identical mathematical problems or evidence that every combination ran. AUTO is a selection policy; missing identities are not filled from defaults."
-        ),
-        "",
-        (
-            "**比较边界：** 系统配置选型与受控算法归因分开；记录完整性、数值一致性、物理参照和任务结果分别阅读，原始评分与失败分母不变。"
-            if zh
-            else "**Comparison boundary:** distinguish system-profile selection from controlled algorithm attribution. Read record integrity, numerical consistency, physical references and task outcomes separately; original scores and failure denominators are unchanged."
-        )
-        + f" [{'分类与证据说明' if zh else 'Roles and evidence guide'}]({taxonomy_target})。",
-        "",
-        (
-            "细 SDF 几何与材料响应仍需 [#178](https://github.com/huangkiki/Dexlab/issues/178) 资格核验；布料材料、碰撞/耦合与夹持分别由 [#179](https://github.com/huangkiki/Dexlab/issues/179) 补齐基线。既有开发案例通过不等于公平的跨引擎材料比较。"
-            if zh
-            else "Thin-feature SDF geometry/response qualification remains [#178](https://github.com/huangkiki/Dexlab/issues/178); cloth material, collision/coupling and grasp baselines remain [#179](https://github.com/huangkiki/Dexlab/issues/179). Existing development passes are not calibrated cross-engine material comparisons."
-        ),
-        "",
-    ]
-    lines += [
-        (
-            "**MJWarp 运行路径对照（归入 MuJoCo 核心）**"
-            if zh
-            else "**MJWarp path comparison (MuJoCo core)**"
-        ),
-        "",
-        (
-            "| 运行路径 | 实际物理核心 | solver／接触路径 | 任务验收状态 |"
-            if zh
-            else "| Runtime path | Actual physics core | Solver / contact path | Task acceptance |"
-        ),
-        "| --- | --- | --- | --- |",
-    ]
-    for row in inventory["rows"]:
-        if row["solver"].startswith("MJWarp"):
-            states = " / ".join(
-                sorted({cell["state"] for cell in row["cells"].values()})
-            )
-            lines.append(
-                f"| {row['runtime_path']} | {row['engine']} {row['version']} | {row['solver']} | [{states}]({target}) |"
-            )
-    lines += [
-        "",
-        (
-            "已有模型与时钟诊断；可靠任务验收仍按矩阵状态记录。[路径差异 #152](https://github.com/huangkiki/Dexlab/issues/152) 保留独立研究范围。"
-            if zh
-            else "Model/clock diagnostics already exist; task acceptance retains the matrix state. [Path differences #152](https://github.com/huangkiki/Dexlab/issues/152) remain a separate research question."
-        ),
-        "",
-    ]
-    return "\n".join(lines)
-
-
-def catalogue(index, language, site):
-    zh = language == "zh"
-    lines = ["## " + ("完整实验与历史记录" if zh else "Full experiment and historical index"), ""]
-    if site:
-        lines.insert(0, "(full-experiment-catalogue)=")
-    if site:
-        lines += ["```{raw} html", '<div class="experiment-grid">']
-    else:
-        lines += [
-            "| "
-            + (
-                "实验画面／图表 | 比较对象与研究结论 |"
-                if zh
-                else "Experiment / figure | Comparisons and findings |"
-            ),
-            "| --- | --- |",
-        ]
-    for card in index["catalogue"]:
-        image = ("../../.." if site else ".") + "/" + card["thumbnail"]
-        link = card["link"] if site else site_url(language, card["link"])
-        title = card["title"][language]
-        if site:
-            # Sphinx does not copy raw-HTML image sources; use stable repository raw URLs.
-            image = card["site_thumbnail"]
-            lines.append(
-                '<article class="experiment-card"><a href="'
-                + html.escape(link)
-                + '"><img loading="lazy" src="'
-                + html.escape(image)
-                + '" alt="'
-                + html.escape(title)
-                + '"></a><div class="card-copy"><h3><a href="'
-                + html.escape(link)
-                + '">'
-                + html.escape(title)
-                + '</a></h3><p class="engines">'
-                + html.escape(card["engines"])
-                + "</p><p>"
-                + html.escape(card["question"][language])
-                + "</p><p>"
-                + html.escape(card["finding"][language])
-                + "</p></div></article>"
-            )
-        else:
-            lines.append(
-                f'| <a href="{link}"><img src="{image}" width="200" alt="{title}"></a> | **[{title}]({link})**<br>{card["engines"]}<br>{card["question"][language]}<br>{card["finding"][language]} |'
-            )
-    if site:
-        lines += ["</div>", "```"]
-    lines += [
-        "",
-        (
-            "**待开展／未完成：** 更广推动、手内旋转、主动折布及抓取迁移分别见现有 Issue。已有刀面推动按其单独协议报告；预折叠下落不等于主动折布成功。"
-            if zh
-            else "**Pending / incomplete:** broader pushing, in-hand rotation, active folding and grasp transfer remain in their existing Issues. Existing knife-driven pushing has its own protocol; folded drop is not active folding."
-        ),
+        "[切割任务全集](cutting-experiments.md) · [完整任务盘点](https://github.com/huangkiki/Dexlab/blob/main/docs/inventory/README.zh-CN.md)"
+        if language == "zh"
+        else "[All cutting tasks](cutting-experiments.md) · [Complete task inventory](https://github.com/huangkiki/Dexlab/blob/main/docs/inventory/README.md)",
         "",
     ]
     return "\n".join(lines)
@@ -527,55 +387,9 @@ def comparisons(index, experiences, language):
     return "\n".join(lines)
 
 
-def highlights(index, language, site):
-    zh = language == "zh"
-    lines = ["## " + ("我们已经知道什么" if zh else "What we already know"), ""]
-    for case in index["cases"]:
-        target = (
-            case["id"]
-            if site
-            else site_url(language, "visual-comparisons.html#" + case["id"])
-        )
-        first = case["variants"][0]["data"]["path"]
-        bundle = read_bundle(ROOT / first)
-        poster = "docs/evidence/visual/" + bundle["videos"][0]["poster"]
-        if case["id"] == "libero":
-            poster = "docs/evidence/visual/libero-summary.png"
-        if case["id"] == "pinch":
-            poster = (
-                "docs/evidence/visual/pinch-summary.png"
-                if site
-                else "docs/evidence/force-limit/comparison.gif"
-            )
-        figure = (
-            f"normal-summary.{language}"
-            if case["id"] == "normal"
-            else Path(first).name.removesuffix(".json.gz")
-            + "-curves"
-            + (".zh" if zh else "")
-        )
-        prefix = "../../../" if site else ""
-        if site:
-            lines.append(f"(experiment-highlight-{case['id']})=")
-        lines += [
-            "### " + case["title"][language],
-            "",
-            case["intro"][language],
-            "",
-            f"![{case['title'][language]}]({prefix}{poster})",
-            "",
-            f"![{case['title'][language]} — curves]({prefix}docs/evidence/visual/{figure}.svg)",
-            "",
-            f"[{'同步回放、逐步曲线、参数与原始证据' if zh else 'Synchronized replay, full-rate curves, parameters and original evidence'}]({target})",
-            "",
-        ]
-    return "\n".join(lines)
-
-
 def update(root=ROOT, check_only=False):
     manifest = json.loads((root / "docs/research-experiences.json").read_text())
     index = check(root)
-    inventory = load_inventory(root)
     stale = []
 
     def save(path, content):
@@ -594,13 +408,7 @@ def update(root=ROOT, check_only=False):
             raise ValueError("Expected generated visual marker pair")
         before, rest = text.split(start)
         _, after = rest.split(end)
-        block = (
-            catalogue(index, lang, True)
-            + "\n"
-            + highlights(index, lang, True)
-            + "\n"
-            + engine_table(inventory, lang, True)
-        )
+        block = catalogue(index, lang)
         save(path, before + start + "\n" + block + "\n" + end + after)
         save(
             root / f"docs/site/{lang}/visual-comparisons.md",

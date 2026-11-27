@@ -410,144 +410,25 @@
     "schema_version": 1,
     "catalogue": [
       {
-        "id": "banana-force",
+        "id": "six-engine-incline",
         "title": {
-          "zh": "香蕉单刀测力：20 次采样与 64× 粒子",
-          "en": "Banana single-cut force: 20 samplings and 64× particles"
+          "zh": "斜面静止与滑动",
+          "en": "Resting and sliding on an incline"
         },
-        "engines": "CPU TLMPM / independent paper-value protocol",
-        "link": "banana-force.html",
+        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake",
+        "thumbnail": "docs/evidence/incline-friction/error-cost.png",
         "question": {
-          "zh": "材料力是否对采样、步长、接触尺度和粒子细化稳定？",
-          "en": "Is material resistance stable across sampling, timestep, contact scale and particle refinement?"
+          "zh": "静止、滑动和低摩擦有哪些差异？",
+          "en": "Where do static, sliding and low-friction cases differ?"
         },
         "finding": {
-          "zh": "20 次基准记账合格；64× 在 0.5 s 内未接触砧板，RMSE 为 2.051，不能支持收敛或真实力精度。",
-          "en": "Twenty baseline runs qualify numerically; the 64× case misses support contact within 0.5 s and gives 2.051 RMSE, so convergence and real-force accuracy remain unsupported."
+          "zh": "六个公开配置各跑九例，没有配置全通过。页面分列静止、滑动和名义零摩擦的成绩及无效记录。",
+          "en": "None of the six published profiles passed all nine cases. The comparison separates static, sliding and nominal-zero-friction outcomes and retains invalid records."
         },
-        "thumbnail": "docs/evidence/cutting/banana-force/force-protocol.svg",
-        "site_thumbnail": "_static/cutting/banana-force/force-protocol.svg",
-        "thumbnail_sha256": "c3d76cf18f17ea8bee695366485b50ed199142a07db75fd580babee1f0b317d6"
-      },
-      {
-        "id": "cut-push",
-        "title": {
-          "zh": "最后一刀直接侧推：豆腐与香蕉",
-          "en": "Final cut directly into a side push: tofu and banana"
-        },
-        "engines": "CPU TLMPM / measured knife contact",
-        "link": "cut-push.html",
-        "question": {
-          "zh": "末块分离是否由可见刀面接触产生？",
-          "en": "Does visible blade-face contact drive the final piece apart?"
-        },
-        "finding": {
-          "zh": "豆腐三块、香蕉四块；最后一刀直接侧推，逐帧显示接触力与位移。豆腐增加牛顿黏性，并保留纯弹性、半步长及无侧推对照。",
-          "en": "Three tofu pieces and four banana pieces; the final cut transitions directly to a face push, displaying contact force and motion. Tofu adds Newtonian viscosity with retained elastic, half-step and no-push controls."
-        },
-        "thumbnail": "docs/evidence/cutting/tofu-cut-push/surface-poster.png",
-        "site_thumbnail": "_static/cutting/tofu-cut-push/surface-poster.png",
-        "thumbnail_sha256": "23b0b45045caeb1ca7c4258d7eee92f24fbb3bb6a6bd97070cc448faecd754f8"
-      },
-      {
-        "id": "tofu-cut",
-        "title": {
-          "zh": "历史：豆腐状软块对半切",
-          "en": "Historical: Synthetic tofu halving"
-        },
-        "engines": "CPU TLMPM / BladeMaster v2 reference",
-        "thumbnail": "docs/evidence/cutting/tofu/surface-poster.png",
-        "thumbnail_sha256": "e2f053a4252f55a2a28c43836a729d39b0229ada5d64e5d168f733523b07d5bc",
-        "site_thumbnail": "_static/cutting/tofu/surface-poster.png",
-        "link": "cutting.html",
-        "question": {
-          "zh": "撤刀后，切开的两块材料能否独立运动？",
-          "en": "Do the two cut pieces move independently after withdrawal?"
-        },
-        "finding": {
-          "zh": "三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。",
-          "en": "Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven."
-        }
-      },
-      {
-        "id": "tofu-sequential-cut",
-        "title": {
-          "zh": "历史：豆腐连续两刀与三列对比",
-          "en": "Historical: Two tofu cuts: three-method view"
-        },
-        "engines": "CPU TLMPM / author reference videos",
-        "link": "cutting-comparison.html",
-        "question": {
-          "zh": "两刀之后，左块能否独立运动？",
-          "en": "Can the left piece move independently after two cuts?"
-        },
-        "finding": {
-          "zh": "两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。",
-          "en": "Two cuts form three pieces; native knife contact pushes the left piece, with measured force and displacement. Author clips use a final velocity input, so inputs differ."
-        },
-        "thumbnail": "docs/evidence/cutting/tofu-sequential/surface-poster.png",
-        "thumbnail_sha256": "909ecf6809c16faf23c633f4c2a9d111e284046f4bb9e0d2e75e75b7da2b3245",
-        "site_thumbnail": "_static/cutting/tofu-sequential/surface-poster.png"
-      },
-      {
-        "id": "tofu-scoring",
-        "title": {
-          "zh": "豆腐交叉浅切",
-          "en": "Crossed shallow tofu cuts"
-        },
-        "engines": "CPU TLMPM / guided orthogonal scoring",
-        "thumbnail": "docs/evidence/cutting/tofu-scoring/surface-poster.png",
-        "site_thumbnail": "_static/cutting/tofu-scoring/surface-poster.png",
-        "link": "tofu-scoring.html",
-        "question": {
-          "zh": "划出交叉切口后，底部是否仍然连接？",
-          "en": "Does the lower bridge remain connected after crossing incisions?"
-        },
-        "finding": {
-          "zh": "默认与半步长均形成两条浅切，保持一个原生连通块；未切负例被拒绝。合成材料，非食材标定。",
-          "en": "Default and half-step cases form two shallow cuts while retaining one native component; the uncut control is rejected. Synthetic material, not food calibration."
-        },
-        "thumbnail_sha256": "a029509d2326ce8a778d73825788b43c4419dd307efa1227637ac210564975c7"
-      },
-      {
-        "id": "banana-cut",
-        "title": {
-          "zh": "历史：香蕉连续三刀切片",
-          "en": "Historical: Three sequential banana cuts"
-        },
-        "engines": "CPU TLMPM / persistent cut history",
-        "link": "banana-cutting.html",
-        "question": {
-          "zh": "后续切割会保留之前的切面吗？",
-          "en": "Do subsequent cuts preserve earlier discontinuities?"
-        },
-        "finding": {
-          "zh": "逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。",
-          "en": "Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration."
-        },
-        "thumbnail": "docs/evidence/cutting/banana/surface-poster.png",
-        "thumbnail_sha256": "6a625636097befc13dd2cd95681b45828679f827a06084a56ea08dc671185f4b",
-        "site_thumbnail": "_static/cutting/banana/surface-poster.png"
-      },
-      {
-        "id": "libero-workflow",
-        "title": {
-          "zh": "LIBERO 原生抓取：诊断与改进",
-          "en": "Native LIBERO: diagnosis and change"
-        },
-        "engines": "LIBERO / robosuite 1.4.0 / MuJoCo 2.3.7 · Newton / elliptic",
-        "thumbnail": "docs/evidence/visual/libero-summary.png",
-        "thumbnail_sha256": "38ca972b3e807365990bb26b611abe5d99daeedeaa3e5e0d9fd02016750118ba",
-        "site_thumbnail": "_static/visual/libero-summary.png",
-        "link": "libero-workflow.html",
-        "question": {
-          "zh": "如何从已有 benchmark 定位问题，再验证修改？",
-          "en": "How can an existing benchmark expose and validate a change?"
-        },
-        "finding": {
-          "zh": "发现观测陈旧；步长试验保留成功、失败和退化，不把任务成功当作物理验收。",
-          "en": "Stale observations identified; timestep trials retain successes, failures and regressions."
-        }
+        "link": "visual-comparisons.html#incline",
+        "thumbnail_sha256": "1b5d51d0b31545d442d0505c3aa69c7cb4a57ac9f80c12bc536bb70d44beabd2",
+        "site_thumbnail": "_static/visual/catalogue/error-cost.png",
+        "group": "rigid-contact"
       },
       {
         "id": "normal-response",
@@ -555,7 +436,10 @@
           "zh": "法向与瞬态响应",
           "en": "Normal & transient response"
         },
-        "engines": "MuJoCo · SuperDex · historical PhysX",
+        "engines": {
+          "zh": "MuJoCo · SuperDex · PhysX（历史路径）",
+          "en": "MuJoCo · SuperDex · PhysX (historical path)"
+        },
         "thumbnail": "demos/contact-benchmark/media/normal-response-v1.png",
         "question": {
           "zh": "压入、卸载与动态响应如何随参数改变？",
@@ -567,27 +451,8 @@
         },
         "link": "experience.html#normal-response",
         "thumbnail_sha256": "31ad2d0a2f83de1f704efe98878da4ceed830894c95f18e0295c52d82a516ec2",
-        "site_thumbnail": "_static/visual/catalogue/normal-response-v1.png"
-      },
-      {
-        "id": "six-engine-incline",
-        "title": {
-          "zh": "六引擎斜面与摩擦",
-          "en": "Six-engine incline & friction"
-        },
-        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake",
-        "thumbnail": "docs/evidence/incline-friction/error-cost.png",
-        "question": {
-          "zh": "静止、滑动和低摩擦有哪些差异？",
-          "en": "Where do static, sliding and low-friction cases differ?"
-        },
-        "finding": {
-          "zh": "原配置结果与观测有效性分列；全部失败保留。",
-          "en": "Fixed-profile outcomes and observation validity are separate; failures remain."
-        },
-        "link": "visual-comparisons.html#incline",
-        "thumbnail_sha256": "1b5d51d0b31545d442d0505c3aa69c7cb4a57ac9f80c12bc536bb70d44beabd2",
-        "site_thumbnail": "_static/visual/catalogue/error-cost.png"
+        "site_thumbnail": "_static/visual/catalogue/normal-response-v1.png",
+        "group": "rigid-contact"
       },
       {
         "id": "impact",
@@ -607,72 +472,8 @@
         },
         "link": "results.html",
         "thumbnail_sha256": "8ca1132f6d52a2a940bcd55ae0fdd908ec809bd0476f808f8ed8ea168703388c",
-        "site_thumbnail": "_static/visual/catalogue/sensitivity.png"
-      },
-      {
-        "id": "pinch-load",
-        "title": {
-          "zh": "夹具夹持、抬升与释放",
-          "en": "Fixture pinch, lift & release"
-        },
-        "engines": "Genesis · MuJoCo · SuperDex (separate protocols)",
-        "thumbnail": "docs/evidence/force-limit/replays/dev-cap-0.8/frame-060.png",
-        "question": {
-          "zh": "夹持为什么保持或滑脱？",
-          "en": "Why does the grasp hold or slip?"
-        },
-        "finding": {
-          "zh": "Genesis 0.4 N 与 0.8 N 配置呈现不同保持结果。",
-          "en": "Genesis 0.4 N and 0.8 N configurations have different retention outcomes."
-        },
-        "link": "visual-comparisons.html#pinch",
-        "thumbnail_sha256": "a26e1646d59338e1205888dfb37d5e84cd19ce58a38f675dfe8f0216d6c2282d",
-        "site_thumbnail": "_static/visual/catalogue/frame-060.png"
-      },
-      {
-        "id": "apple",
-        "title": {
-          "zh": "苹果抓梗 · SDF 接触",
-          "en": "Apple-stem grasp · SDF contact"
-        },
-        "engines": "MuJoCo · SuperDex · historical PhysX",
-        "thumbnail": "demos/apple-stem-grasp/media/superdex-sdf.png",
-        "question": {
-          "zh": "复杂几何下能否连续保持？",
-          "en": "Can a grasp maintain contact on complex geometry?"
-        },
-        "finding": {
-          "zh": "已有原生连续回放与独立历史验收；不同批次分列。",
-          "en": "Native continuous replays and historical independent checks; cohorts stay separate."
-        },
-        "link": "experiments.html#apple-replays",
-        "thumbnail_sha256": "a38bb120e6edc269025f45f6612723ac5270bcc8b30f45e8fa2a32ebac7e7937",
-        "site_thumbnail": "_static/visual/catalogue/superdex-sdf.png"
-      },
-      {
-        "id": "cloth",
-        "title": {
-          "zh": "布料力学与机器人夹布",
-          "en": "Cloth mechanics & robot grasp"
-        },
-        "engines": "MuJoCo · SuperDex · Newton Physics · Genesis · historical PhysX",
-        "thumbnail": "docs/evidence/visual/cloth-poster.png",
-        "question": {
-          "zh": "柔性形变、接触与保持何时失效？",
-          "en": "When do deformation, contact and retention fail?"
-        },
-        "finding": {
-          "zh": "历史柔顺夹布画面；力学、下落与夹布按独立协议记录，保留失败。",
-          "en": "Historical compliant-grasp frame; mechanics, drop and grasp retain separate protocols and failures."
-        },
-        "link": "coverage.html",
-        "thumbnail_sha256": "77a3cbd26e0ad6c8717095123d216bc13a56bebbd83cfa2925d74c05e84da093",
-        "site_thumbnail": "_static/visual/catalogue/cloth-poster.png",
-        "thumbnail_source": {
-          "path": "demos/cloth-folding/media/compliance-grasp.gif",
-          "sha256": "866415b8e795a395f8d43c790bc07b6638f07903afc70ac0b896a12c0364c602",
-          "frame_selection": "middle frame, historical compliance-grasp protocol; not a new comparison"
-        }
+        "site_thumbnail": "_static/visual/catalogue/sensitivity.png",
+        "group": "rigid-contact"
       },
       {
         "id": "mass-size-transfer",
@@ -692,7 +493,8 @@
         },
         "link": "experience.html#mass-size-transfer",
         "thumbnail_sha256": "339cdc6a58fc73a54383309b3bf106da38c3878da2126b1505e6bcd6e6582ab6",
-        "site_thumbnail": "_static/visual/catalogue/contact-transfer-v1.png"
+        "site_thumbnail": "_static/visual/catalogue/contact-transfer-v1.png",
+        "group": "rigid-contact"
       },
       {
         "id": "transient-cost",
@@ -712,7 +514,299 @@
         },
         "link": "experience.html#transient-cost",
         "thumbnail_sha256": "37b02e843a12da54d8eeb65b412b31a4893155e37ceea6fb5151d6ba23f565bd",
-        "site_thumbnail": "_static/visual/catalogue/response-cost-v1.png"
+        "site_thumbnail": "_static/visual/catalogue/response-cost-v1.png",
+        "group": "rigid-contact"
+      },
+      {
+        "id": "wuji",
+        "link": "wuji-contact.html",
+        "engines": "MuJoCo",
+        "title": {
+          "zh": "Wuji 双指夹球",
+          "en": "Wuji two-finger sphere hold"
+        },
+        "finding": {
+          "zh": "加入抗扭接触后，两秒保持段最大角速度由 29.336 降至 0.025 rad/s，随后释放通过。",
+          "en": "Torsional contact reduced peak angular speed from 29.336 to 0.025 rad/s over the two-second hold. Release passed."
+        },
+        "group": "grasping"
+      },
+      {
+        "id": "apple",
+        "title": {
+          "zh": "苹果抓梗 · SDF 接触",
+          "en": "Apple-stem grasp · SDF contact"
+        },
+        "engines": "MuJoCo · SuperDex · PhysX",
+        "thumbnail": "demos/apple-stem-grasp/media/superdex-sdf.png",
+        "question": {
+          "zh": "复杂几何下能否连续保持？",
+          "en": "Can a grasp maintain contact on complex geometry?"
+        },
+        "finding": {
+          "zh": "三条路径均有固定场景抓梗验收与近景回放。PhysX 是独立配置，三个记录分别看。",
+          "en": "All three paths have fixed-scene grasp evidence and close-up replays. PhysX was evaluated in a separate setup."
+        },
+        "link": "experiments.html#apple-replays",
+        "thumbnail_sha256": "a38bb120e6edc269025f45f6612723ac5270bcc8b30f45e8fa2a32ebac7e7937",
+        "site_thumbnail": "_static/visual/catalogue/superdex-sdf.png",
+        "group": "grasping"
+      },
+      {
+        "id": "pinch-load",
+        "title": {
+          "zh": "夹具夹持、抬升与释放",
+          "en": "Fixture pinch, lift & release"
+        },
+        "engines": {
+          "zh": "Genesis · MuJoCo · SuperDex（分属不同协议）",
+          "en": "Genesis · MuJoCo · SuperDex (separate protocols)"
+        },
+        "thumbnail": "docs/evidence/force-limit/replays/dev-cap-0.8/frame-060.png",
+        "question": {
+          "zh": "夹持为什么保持或滑脱？",
+          "en": "Why does the grasp hold or slip?"
+        },
+        "finding": {
+          "zh": "在 Genesis 同一夹具中，0.4 N 滑脱，0.8 N 保持并随后完成释放。",
+          "en": "In the same Genesis fixture, 0.4 N slipped. At 0.8 N the box held and was released."
+        },
+        "link": "visual-comparisons.html#pinch",
+        "thumbnail_sha256": "a26e1646d59338e1205888dfb37d5e84cd19ce58a38f675dfe8f0216d6c2282d",
+        "site_thumbnail": "_static/visual/catalogue/frame-060.png",
+        "group": "grasping"
+      },
+      {
+        "id": "libero-workflow",
+        "title": {
+          "zh": "LIBERO 原生抓取：诊断与改进",
+          "en": "Native LIBERO: diagnosis and change"
+        },
+        "engines": "MuJoCo 2.3.7 / robosuite 1.4.0",
+        "thumbnail": "docs/evidence/visual/libero-summary.png",
+        "thumbnail_sha256": "38ca972b3e807365990bb26b611abe5d99daeedeaa3e5e0d9fd02016750118ba",
+        "site_thumbnail": "_static/visual/libero-summary.png",
+        "link": "libero-workflow.html",
+        "question": {
+          "zh": "如何从已有 benchmark 定位问题，再验证修改？",
+          "en": "How can an existing benchmark expose and validate a change?"
+        },
+        "finding": {
+          "zh": "留出任务原版与半步长均为 10/10，物理检查却从 5/10 降至 3/10。另定位并修复了观测陈旧。",
+          "en": "Original and half-step runs both completed 10/10 held-out tasks. Physical checks dropped from 5/10 to 3/10. A separate stale-observation bug was fixed."
+        },
+        "group": "grasping"
+      },
+      {
+        "id": "bread-slip",
+        "link": "robodojo-bread-slip.html",
+        "engines": {
+          "zh": "PhysX · 外部记录离线分析",
+          "en": "PhysX · offline analysis of external runs"
+        },
+        "title": {
+          "zh": "RoboDojo 夹面包",
+          "en": "RoboDojo bread grasp"
+        },
+        "finding": {
+          "zh": "公开运行批次成功 19/100。对两次脱落逐帧追查，分别见到相邻物体挤压和浅夹持处的转动。",
+          "en": "The published batch succeeded in 19/100 runs. Two slip cases were traced to contact from neighboring pieces and rotation at a shallow grasp."
+        },
+        "group": "grasping"
+      },
+      {
+        "id": "amp-lift",
+        "link": "amp-lift.html",
+        "engines": "MuJoCo Warp",
+        "title": {
+          "zh": "AMP 抬箱",
+          "en": "AMP box lift"
+        },
+        "finding": {
+          "zh": "两个短探针执行完成，记录前后状态一致性未通过。完整抬箱回合未运行。",
+          "en": "Both short probes ran. Recorded and unrecorded states disagreed beyond tolerance. Full lift episodes remain unrun."
+        },
+        "group": "grasping"
+      },
+      {
+        "id": "cloth",
+        "title": {
+          "zh": "布条下垂与覆盖球体",
+          "en": "Cloth sag and sphere drape"
+        },
+        "engines": "MuJoCo · SuperDex · Newton Physics · PhysX",
+        "thumbnail": "docs/evidence/visual/cloth-poster.png",
+        "question": {
+          "zh": "柔性形变、接触与保持何时失效？",
+          "en": "When do deformation, contact and retention fail?"
+        },
+        "finding": {
+          "zh": "同一 Newton VBD 配置通过固定边下垂，覆盖球体时最大穿透 10.35 mm，超过 1.5 mm 门槛。",
+          "en": "The same Newton VBD configuration passed edge-clamped sag but reached 10.35 mm penetration when draped over a sphere, above the 1.5 mm limit."
+        },
+        "link": "cloth-comparison.html",
+        "thumbnail_sha256": "77a3cbd26e0ad6c8717095123d216bc13a56bebbd83cfa2925d74c05e84da093",
+        "site_thumbnail": "_static/visual/catalogue/cloth-poster.png",
+        "thumbnail_source": {
+          "path": "demos/cloth-folding/media/compliance-grasp.gif",
+          "sha256": "866415b8e795a395f8d43c790bc07b6638f07903afc70ac0b896a12c0364c602",
+          "frame_selection": "middle frame, historical compliance-grasp protocol; not a new comparison"
+        },
+        "group": "deformables"
+      },
+      {
+        "id": "cloth-grasp",
+        "link": "experiments.html#cloth-grasp-replay",
+        "engines": "MuJoCo",
+        "title": {
+          "zh": "机器人夹布、抬升与释放",
+          "en": "Robot cloth grasp, lift and release"
+        },
+        "finding": {
+          "zh": "修复后一个 9 秒场景通过。自接触穿透接近阈值，历史桌体相交失败保留。",
+          "en": "One repaired 9-second case passed. Self-contact penetration remained near its limit. An earlier table-intersection failure is retained."
+        },
+        "group": "deformables"
+      },
+      {
+        "id": "rss-wiping",
+        "link": "rss-wiping.html",
+        "engines": "Newton Physics / MuJoCo Warp + SuperDex",
+        "title": {
+          "zh": "海绵擦拭",
+          "en": "Sponge wiping"
+        },
+        "finding": {
+          "zh": "原版辅助保持通过 3/3。去掉辅助后失败 3/3，海绵从夹爪滑出。",
+          "en": "The original assisted retention passed 3/3 runs. Removing the assistance caused slips and failed 3/3 runs."
+        },
+        "group": "deformables"
+      },
+      {
+        "id": "cut-push",
+        "title": {
+          "zh": "最后一刀直接侧推：豆腐与香蕉",
+          "en": "Final cut directly into a side push: tofu and banana"
+        },
+        "engines": "CPU TLMPM / measured knife contact",
+        "link": "cut-push.html",
+        "question": {
+          "zh": "末块分离是否由可见刀面接触产生？",
+          "en": "Does visible blade-face contact drive the final piece apart?"
+        },
+        "finding": {
+          "zh": "豆腐三块、香蕉四块；最后一刀直接侧推，逐帧显示接触力与位移。豆腐增加牛顿黏性，并保留纯弹性、半步长及无侧推对照。",
+          "en": "Three tofu pieces and four banana pieces; the final cut transitions directly to a face push, displaying contact force and motion. Tofu adds Newtonian viscosity with retained elastic, half-step and no-push controls."
+        },
+        "thumbnail": "docs/evidence/cutting/tofu-cut-push/surface-poster.png",
+        "site_thumbnail": "_static/cutting/tofu-cut-push/surface-poster.png",
+        "thumbnail_sha256": "23b0b45045caeb1ca7c4258d7eee92f24fbb3bb6a6bd97070cc448faecd754f8",
+        "group": "cutting"
+      },
+      {
+        "id": "banana-force",
+        "title": {
+          "zh": "香蕉单刀测力：20 次采样与 64× 粒子",
+          "en": "Banana single-cut force: 20 samplings and 64× particles"
+        },
+        "engines": "CPU TLMPM / independent paper-value protocol",
+        "link": "banana-force.html",
+        "question": {
+          "zh": "材料力是否对采样、步长、接触尺度和粒子细化稳定？",
+          "en": "Is material resistance stable across sampling, timestep, contact scale and particle refinement?"
+        },
+        "finding": {
+          "zh": "20 次基准记账合格；64× 在 0.5 s 内未接触砧板，RMSE 为 2.051，不能支持收敛或真实力精度。",
+          "en": "Twenty baseline runs qualify numerically; the 64× case misses support contact within 0.5 s and gives 2.051 RMSE, so convergence and real-force accuracy remain unsupported."
+        },
+        "thumbnail": "docs/evidence/cutting/banana-force/force-protocol.svg",
+        "site_thumbnail": "_static/cutting/banana-force/force-protocol.svg",
+        "thumbnail_sha256": "c3d76cf18f17ea8bee695366485b50ed199142a07db75fd580babee1f0b317d6",
+        "group": "cutting"
+      },
+      {
+        "id": "tofu-cut",
+        "title": {
+          "zh": "历史：豆腐状软块对半切",
+          "en": "Historical: Synthetic tofu halving"
+        },
+        "engines": "CPU TLMPM / BladeMaster v2 reference",
+        "thumbnail": "docs/evidence/cutting/tofu/surface-poster.png",
+        "thumbnail_sha256": "e2f053a4252f55a2a28c43836a729d39b0229ada5d64e5d168f733523b07d5bc",
+        "site_thumbnail": "_static/cutting/tofu/surface-poster.png",
+        "link": "cutting.html",
+        "question": {
+          "zh": "撤刀后，切开的两块材料能否独立运动？",
+          "en": "Do the two cut pieces move independently after withdrawal?"
+        },
+        "finding": {
+          "zh": "三个完整切割均分成两块，各占50%质量；负对照保持连接。力值收敛未验证，未做真实豆腐标定。",
+          "en": "Three full-cut cases yield 50% mass pieces; negative controls stay connected. Force convergence and real-tofu calibration are unproven."
+        },
+        "group": "cutting"
+      },
+      {
+        "id": "tofu-sequential-cut",
+        "title": {
+          "zh": "历史：豆腐连续两刀与三列对比",
+          "en": "Historical: Two tofu cuts: three-method view"
+        },
+        "engines": "CPU TLMPM / author reference videos",
+        "link": "cutting-comparison.html",
+        "question": {
+          "zh": "两刀之后，左块能否独立运动？",
+          "en": "Can the left piece move independently after two cuts?"
+        },
+        "finding": {
+          "zh": "两刀形成三等份；刀面接触后将左块推开，动图显示实际接触力与位移。原作末尾采用初速度输入，双方输入不同。",
+          "en": "Two cuts form three pieces; native knife contact pushes the left piece, with measured force and displacement. Author clips use a final velocity input, so inputs differ."
+        },
+        "thumbnail": "docs/evidence/cutting/tofu-sequential/surface-poster.png",
+        "thumbnail_sha256": "909ecf6809c16faf23c633f4c2a9d111e284046f4bb9e0d2e75e75b7da2b3245",
+        "site_thumbnail": "_static/cutting/tofu-sequential/surface-poster.png",
+        "group": "cutting"
+      },
+      {
+        "id": "tofu-scoring",
+        "title": {
+          "zh": "豆腐交叉浅切",
+          "en": "Crossed shallow tofu cuts"
+        },
+        "engines": "CPU TLMPM / guided orthogonal scoring",
+        "thumbnail": "docs/evidence/cutting/tofu-scoring/surface-poster.png",
+        "site_thumbnail": "_static/cutting/tofu-scoring/surface-poster.png",
+        "link": "tofu-scoring.html",
+        "question": {
+          "zh": "划出交叉切口后，底部是否仍然连接？",
+          "en": "Does the lower bridge remain connected after crossing incisions?"
+        },
+        "finding": {
+          "zh": "默认与半步长均形成两条浅切，保持一个原生连通块；未切负例被拒绝。合成材料，非食材标定。",
+          "en": "Default and half-step cases form two shallow cuts while retaining one native component; the uncut control is rejected. Synthetic material, not food calibration."
+        },
+        "thumbnail_sha256": "a029509d2326ce8a778d73825788b43c4419dd307efa1227637ac210564975c7",
+        "group": "cutting"
+      },
+      {
+        "id": "banana-cut",
+        "title": {
+          "zh": "历史：香蕉连续三刀切片",
+          "en": "Historical: Three sequential banana cuts"
+        },
+        "engines": "CPU TLMPM / persistent cut history",
+        "link": "banana-cutting.html",
+        "question": {
+          "zh": "后续切割会保留之前的切面吗？",
+          "en": "Do subsequent cuts preserve earlier discontinuities?"
+        },
+        "finding": {
+          "zh": "逐刀分离与完整负对照见实验记录；表面和粒子来自相同状态，未做真实香蕉标定。",
+          "en": "Progressive separation and complete controls in the experiment record. Surface/particles share physical states; no real-banana calibration."
+        },
+        "thumbnail": "docs/evidence/cutting/banana/surface-poster.png",
+        "thumbnail_sha256": "6a625636097befc13dd2cd95681b45828679f827a06084a56ea08dc671185f4b",
+        "site_thumbnail": "_static/cutting/banana/surface-poster.png",
+        "group": "cutting"
       },
       {
         "id": "framework-path",
@@ -720,19 +814,20 @@
           "zh": "原生与框架接入路径",
           "en": "Native & framework paths"
         },
-        "engines": "MuJoCo / MJWarp · Newton / Isaac Sim",
+        "engines": "MuJoCo Warp / Newton Physics / Isaac Sim",
         "thumbnail": "docs/evidence/engine-qualification/contact-parameters.png",
         "question": {
           "zh": "相同核心为何仍可能出现轨迹差异？",
           "en": "Why can matching cores still produce different trajectories?"
         },
         "finding": {
-          "zh": "对齐 CPU 模型后仍有 GPU 字段差异；参数概览图非轨迹证据。",
-          "en": "GPU field differences remain after CPU alignment; parameter-map thumbnail is not trajectory evidence."
+          "zh": "对齐四项 GPU 字段后原生支撑仍未通过动量核对，轨迹仍与 Isaac Sim 不同。",
+          "en": "After aligning four GPU fields, native support still failed the momentum check and its trajectory still differed from Isaac Sim."
         },
         "link": "experience.html#framework-path",
         "thumbnail_sha256": "af4051520404419903d59a1141796854c169e6c726524b115c0da10b17b2598d",
-        "site_thumbnail": "_static/visual/catalogue/contact-parameters.png"
+        "site_thumbnail": "_static/visual/catalogue/contact-parameters.png",
+        "group": "execution"
       }
     ],
     "cases": [

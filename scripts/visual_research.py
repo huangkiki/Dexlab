@@ -154,6 +154,8 @@ def read_bundle(path):
 def check(root=ROOT):
     index = json.loads((root / "docs/research-experiences.json").read_text())["visuals"]
     for card in index["catalogue"]:
+        if "thumbnail" not in card:
+            continue
         if (source := card.get("thumbnail_source")) and digest(
             root / source["path"]
         ) != source["sha256"]:
