@@ -233,6 +233,21 @@
       "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
     },
     {
+      "id": "robosimstudio-real2sim",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "robosimstudio-real2sim.html",
+      "distillation": true,
+      "updated": "2026-11-27",
+      "topic": "sim2real",
+      "tags": {"zh": ["交互式 Real2Sim", "耦合", "参数生效"], "en": ["interactive Real2Sim", "coupling", "effective parameters"]},
+      "name": {"zh": "RoboSimStudio：让场景改动和接触结果对得上", "en": "RoboSimStudio: trace scene edits to contact outcomes"},
+      "aliases": {"zh": ["RoboSimStudio", "RSS"], "en": ["RoboSimStudio", "RSS"]},
+      "summary": {"zh": "从海绵擦杆看参数生效、真机支撑失配和仿真辅助保持。", "en": "Sponge wiping illustrates effective parameters, a hardware support mismatch, and assisted retention in simulation."},
+      "relations": [{"type": "related", "target": "evidence-boundary"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
+    },
+    {
       "id": "real2worlds2real-collision-geometry",
       "group": "synthesis",
       "level": "core",
