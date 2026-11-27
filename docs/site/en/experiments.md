@@ -13,7 +13,6 @@ Wuji grasp and torsional contact <wuji-contact>
 Sponge wiping and grasp-assistance comparison <rss-wiping>
 RoboDojo bread-slip diagnosis <robodojo-bread-slip>
 Cloth engine comparison <cloth-comparison>
-Opening A rope and palm contact <rope-opening-a>
 Cutting & pushing <cutting-experiments>
 Native LIBERO workflow <libero-workflow>
 AMP recorder parity failure <amp-lift>
@@ -111,11 +110,6 @@ AMP recorder parity failure <amp-lift>
 <div><h3><a href="experiments.html#cloth-grasp-replay">Robot cloth grasp, lift and release</a></h3>
 <p class="task-register-engines">MuJoCo</p></div>
 <p class="task-register-result">One repaired 9-second case passed. Self-contact penetration remained near its limit. An earlier table-intersection failure is retained.</p>
-</article>
-<article class="task-register-entry">
-<div><h3><a href="rope-opening-a.html">Opening A string figure</a></h3>
-<p class="task-register-engines">libuipc 0.0.30 · CUDA</p></div>
-<p class="task-register-result">Two moving palm guides spread a closed loop into strands 8.0 cm apart. Disabling rope–palm contact made the loop fall.</p>
 </article>
 <article class="task-register-entry">
 <div><h3><a href="rss-wiping.html">Sponge wiping</a></h3>

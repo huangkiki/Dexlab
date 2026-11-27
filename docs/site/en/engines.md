@@ -25,10 +25,6 @@ Matching visual meshes, parameter names or joint targets does not establish matc
 
 See the [benchmark matrix](coverage.md) for qualification and task coverage. For a comparison, align units, collision shapes and observation times first. Chaos hit-event impulses and Bullet’s per-step normal forces have different timing semantics.
 
-## libuipc
-
-The optional native CUDA path uses `pyuipc==0.0.30`. The [Opening A rope demo](rope-opening-a.md) runs a closed Kirchhoff rod against two moving affine-body palm guides with IPC contact. This development scene is scoped to a single contact pair experiment outside the engine qualification matrix.
-
 ## Generative environment backends
 
 Uranus is a candidate generative observation backend in DexLab and is listed separately from the native physics engines. It consumes future `qpos` and generates multi-view video; it does not provide contact force, solver state or task success. See the [Uranus backend](uranus-backend.md) for its interface, candidate tasks and evidence boundary.

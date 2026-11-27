@@ -669,20 +669,6 @@
         "group": "deformables"
       },
       {
-        "id": "rope-opening-a",
-        "link": "rope-opening-a.html",
-        "engines": "libuipc 0.0.30 · CUDA",
-        "title": {
-          "zh": "翻花绳 Opening A",
-          "en": "Opening A string figure"
-        },
-        "finding": {
-          "zh": "闭环绳经双侧手掌接触撑开，稳定阶段两股相距约 8.0 cm。仅关闭绳与手掌的接触后，绳圈坠落。",
-          "en": "Two moving palm guides spread a closed loop into strands 8.0 cm apart. Disabling rope–palm contact made the loop fall."
-        },
-        "group": "deformables"
-      },
-      {
         "id": "rss-wiping",
         "link": "rss-wiping.html",
         "engines": "Newton Physics / MuJoCo Warp + SuperDex",
