@@ -71,13 +71,22 @@ math {
 .table-scroll { display: block; max-width: 100%; overflow-x: auto; }
 .ltx_eqn_table {
   border-spacing: 0;
-  margin: .6rem 0 .95rem;
-  min-width: 100%;
+  margin: .6rem auto .95rem;
   padding: .16rem .3rem;
 }
 .ltx_eqn_table td { padding: .05rem .12rem; white-space: nowrap; }
-.ltx_eqn_table .ltx_eqn_center_padleft, .ltx_eqn_table .ltx_eqn_center_padright { width: 45%; }
-.ltx_eqn_table .ltx_eqn_eqno { font: .86rem/1.4 Georgia, serif; color: var(--secondary); }
+.ltx_eqn_table :is(.ltx_eqn_center_padleft, .ltx_eqn_center_padright) { padding: 0; }
+.ltx_eqn_table .ltx_eqn_eqno {
+  padding-inline-end: .8rem;
+  text-align: end;
+  font: .86rem/1.4 Georgia, serif;
+  color: var(--secondary);
+}
+/* Unnumbered rows keep the same alignment columns as numbered rows in the group. */
+.ltx_eqn_table:has(.ltx_eqn_eqno) tr:has(> .ltx_eqn_center_padleft:first-child)::before {
+  content: "";
+  display: table-cell;
+}
 figure { margin: 1.4rem 0 1.65rem; max-width: 100%; }
 figure > .ltx_inline-block { display: block; text-align: center; }
 figure svg.ltx_picture { display: block; margin: 0 auto; max-width: 100%; height: auto; }
@@ -137,7 +146,6 @@ figcaption .ltx_tag { font-weight: 650; margin-right: .35em; }
   h2 { font-size: 1.39rem; }
   h3 { font-size: 1.13rem; }
   .ltx_table .ltx_tabular { min-width: 31rem; }
-  .ltx_eqn_table .ltx_eqn_center_padleft, .ltx_eqn_table .ltx_eqn_center_padright { width: 16%; }
   .ltx_float_algorithm { padding: .65rem; }
 }
 @media print {
@@ -164,26 +172,8 @@ figcaption .ltx_tag { font-weight: 650; margin-right: .35em; }
   font-size: .9rem;
   font-weight: 650;
 }
-.equation-box .ltx_eqn_table { margin: .4rem 0; }
+.equation-box .ltx_eqn_table { margin-block: .4rem; }
 h1 { text-wrap: balance; }
-.equation-box .ltx_eqn_table { min-width: 0; }
-.equation-box .ltx_eqn_center_padleft,
-.equation-box .ltx_eqn_center_padright { width: 0; }
-.equation-box .ltx_eqn_eqno { padding-right: .55rem; }
-@media (max-width: 680px) {
-  .equation-box .ltx_eqn_table,
-  .equation-box .ltx_eqn_table tbody { display: block; }
-  .equation-box .ltx_eqn_table tr {
-    display: flex;
-    width: max-content;
-    align-items: baseline;
-  }
-  .equation-box .ltx_eqn_table td { display: block; }
-  .equation-box .ltx_eqn_table td:empty,
-  .equation-box .ltx_eqn_center_padleft,
-  .equation-box .ltx_eqn_center_padright { display: none; }
-  .equation-box .ltx_eqn_eqno { min-width: 3.8em; }
-}
 </style></head><body>
 <article class="ltx_document ltx_authors_1line ltx_leqno">
 <p class="paper-series"><a href="../../../paper-sharing.html"><span aria-hidden="true">← </span>Paper sharing</a></p>
