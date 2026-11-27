@@ -268,36 +268,65 @@ def incline_extension_rows(root):
                 state = "invalid"
             else:
                 state = "mixed" if passed else "fail"
-            cells.append((f"{passed} / {len(group)}" + ("†" if invalid else ""), state))
+            cells.append((passed, state, bool(invalid)))
         yield label, configuration, cells
+
+
+def ranked_incline_rows(rows):
+    rows.sort(key=lambda row: row[2][-1][0], reverse=True)
+    rank = 0
+    previous_score = None
+    for position, (name, configuration, results) in enumerate(rows, start=1):
+        score = results[-1][0]
+        if score != previous_score:
+            rank = position
+            previous_score = score
+        cells = [
+            (f"{passed} / {total}" + ("†" if invalid else ""), state)
+            for (passed, state, invalid), total in zip(results, (3, 3, 3, 9), strict=True)
+        ]
+        yield f"{rank}. {name}", configuration, [cells[-1], *cells[:-1]]
 
 
 def comparison_table(case, language, root):
     zh = language == "zh"
     if case["id"] == "incline":
         caption = (
-            "固定发布配置的分条件结果（通过数 / 该条件三例）"
+            "固定配置的斜面九例排名"
             if zh
-            else "Published fixed configurations by condition (passes / three cases per condition)"
+            else "Fixed configurations ranked on the nine incline cases"
         )
         headers = (
-            ["引擎与配置", "静止", "滑动", "名义零摩擦", "总计"]
+            ["名次与引擎配置", "总分", "静止", "滑动", "名义零摩擦"]
             if zh
-            else ["Engine and configuration", "Static", "Sliding", "Nominal zero friction", "Total"]
+            else ["Rank and configuration", "Score", "Static", "Sliding", "Nominal zero friction"]
         )
         rows = [
-            ("MuJoCo", "3.15 · PGS / elliptic", [("0 / 3", "fail"), ("0 / 3", "fail"), ("3 / 3", "pass"), ("3 / 9", "fail")]),
-            ("SuperDex", "1.0 · Newton / AUTO / C1", [("2 / 3", "mixed"), ("3 / 3", "pass"), ("3 / 3", "pass"), ("8 / 9", "mixed")]),
-            ("Genesis", "1.4.3 · Newton / elliptic / Signorini", [("3 / 3", "pass"), ("3 / 3", "pass"), ("0 / 3", "fail"), ("6 / 9", "mixed")]),
-            ("Newton Physics", "1.6.1 · XPBD / 100 sweeps", [("1 / 3", "mixed"), ("0 / 3†", "invalid"), ("0 / 3†", "invalid"), ("1 / 9†", "invalid")]),
-            ("PhysX", "5.9.0 · PGS / patch friction", [("3 / 3", "pass"), ("2 / 3†", "mixed"), ("2 / 3", "mixed"), ("7 / 9†", "mixed")]),
-            ("Drake", "1.57 · SAP / kLagged / hydroelastic", [("3 / 3", "pass"), ("0 / 3", "fail"), ("3 / 3", "pass"), ("6 / 9", "mixed")]),
+            ("MuJoCo", "3.15 · PGS / elliptic", [
+                (0, "fail", False), (0, "fail", False), (3, "pass", False), (3, "fail", False),
+            ]),
+            ("SuperDex", "1.0 · Newton / AUTO / C1", [
+                (2, "mixed", False), (3, "pass", False), (3, "pass", False), (8, "mixed", False),
+            ]),
+            ("Genesis", "1.4.3 · Newton / elliptic / Signorini", [
+                (3, "pass", False), (3, "pass", False), (0, "fail", False), (6, "mixed", False),
+            ]),
+            ("Newton Physics", "1.6.1 · XPBD / 100 sweeps", [
+                (1, "mixed", False), (0, "invalid", True), (0, "invalid", True), (1, "invalid", True),
+            ]),
+            ("PhysX", "5.9.0 · PGS / patch friction", [
+                (3, "pass", False), (2, "mixed", True), (2, "mixed", False), (7, "mixed", True),
+            ]),
+            ("Drake", "1.57 · SAP / kLagged / hydroelastic", [
+                (3, "pass", False), (0, "fail", False), (3, "pass", False), (6, "mixed", False),
+            ]),
         ]
         rows.extend(incline_extension_rows(root))
+        rows = ranked_incline_rows(rows)
         note = (
-            "† 无效记录保留在分母中，不计为通过；不能解释成物理失败。"
+            "每通过一例得 1 分，满分 9 分，同分并列。† 表示含无效记录，仍计入分母并得 0 分。"
             if zh
-            else "† Invalid records remain in the denominator; they are not passes and are not physical failures."
+            else "Each pass earns one point out of nine. Equal scores share a rank. † marks invalid records that count toward the denominator and earn zero points."
         )
     elif case["id"] == "normal":
         caption = "加载窗口的有效响应（合成目标 20 kN/m）" if zh else "Effective loaded-window response against the synthetic 20 kN/m target"
@@ -401,9 +430,9 @@ def comparisons(index, experiences, language, root):
         ]
         if case["id"] == "incline":
             lines += [
-                '<p><a href="#incline-results">十引擎结果矩阵</a> · <a href="raisim-incline.html">RaiSim 九例与原始数据</a></p>'
+                '<p><a href="#incline-results">十引擎斜面排名</a> · <a href="raisim-incline.html">RaiSim 九例与原始数据</a></p>'
                 if zh else
-                '<p><a href="#incline-results">Ten-engine result matrix</a> · <a href="raisim-incline.html">RaiSim cases and native data</a></p>',
+                '<p><a href="#incline-results">Ten-engine incline ranking</a> · <a href="raisim-incline.html">RaiSim cases and native data</a></p>',
                 "",
             ]
         lines += [
