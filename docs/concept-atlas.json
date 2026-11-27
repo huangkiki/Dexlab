@@ -233,6 +233,21 @@
       "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
     },
     {
+      "id": "real2worlds2real-collision-geometry",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "real2worlds2real-collision-geometry.html",
+      "distillation": true,
+      "updated": "2026-11-27",
+      "topic": "sim2real",
+      "tags": {"zh": ["数字孪生", "碰撞几何", "真机迁移"], "en": ["digital twins", "collision geometry", "hardware transfer"]},
+      "name": {"zh": "Real2Worlds2Real：先验收碰撞几何，再扩大训练世界", "en": "Real2Worlds2Real: verify collision geometry before scaling training worlds"},
+      "aliases": {"zh": ["Real2Worlds2Real", "数字表亲"], "en": ["Real2Worlds2Real", "digital cousins"]},
+      "summary": {"zh": "借齿轮插入和叠杯区分任务几何验收、仿真泛化和真机结果。", "en": "Gear insertion and cup stacking distinguish geometry validation, simulation generalization, and hardware outcomes."},
+      "relations": [{"type": "related", "target": "penetration"}, {"type": "related", "target": "evidence-boundary"}, {"type": "related", "target": "positive-negative-control"}]
+    },
+    {
       "id": "roboagentlab-episode-evidence",
       "group": "synthesis",
       "level": "core",
