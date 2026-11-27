@@ -13,6 +13,7 @@ Wuji 抓持与抗扭接触 <wuji-contact>
 海绵擦拭与辅助保持对照 <rss-wiping>
 RoboDojo 面包脱落诊断 <robodojo-bread-slip>
 布料引擎对比 <cloth-comparison>
+翻花绳 Opening A <rope-opening-a>
 切割与推动 <cutting-experiments>
 LIBERO 原生流程 <libero-workflow>
 AMP 记录器一致性失败 <amp-lift>
@@ -110,6 +111,11 @@ AMP 记录器一致性失败 <amp-lift>
 <div><h3><a href="experiments.html#cloth-grasp-replay">机器人夹布、抬升与释放</a></h3>
 <p class="task-register-engines">MuJoCo</p></div>
 <p class="task-register-result">修复后一个 9 秒场景通过。自接触穿透接近阈值，历史桌体相交失败保留。</p>
+</article>
+<article class="task-register-entry">
+<div><h3><a href="rope-opening-a.html">翻花绳 Opening A</a></h3>
+<p class="task-register-engines">libuipc 0.0.30 · CUDA</p></div>
+<p class="task-register-result">闭环绳经双侧手掌接触撑开，稳定阶段两股相距约 8.0 cm。仅关闭绳与手掌的接触后，绳圈坠落。</p>
 </article>
 <article class="task-register-entry">
 <div><h3><a href="rss-wiping.html">海绵擦拭</a></h3>

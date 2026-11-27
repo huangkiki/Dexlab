@@ -25,6 +25,10 @@ Uranus 生成式环境后端 <uranus-backend>
 
 引擎准入和正式任务覆盖见[评测矩阵](coverage.md)。比较时先对齐单位、碰撞形状和观测时间。Chaos 的碰撞事件冲量与 Bullet 的逐步法向力各有自己的时间归属。
 
+## libuipc
+
+可选的原生 CUDA 路径使用 `pyuipc==0.0.30`。[翻花绳 Opening A](rope-opening-a.md)用 Kirchhoff 杆表示闭环绳，由两个会移动的仿射体手掌导向件通过 IPC 接触撑开。当前证据来自一个开发场景，正式引擎对照矩阵另行验收。
+
 ## 生成式环境后端
 
 Uranus 是 DexLab 的候选生成式 observation backend，独立于原生物理引擎对照。它接收未来 `qpos` 并生成多视角视频，不提供接触力、求解器状态或任务 success；界面、评测任务和证据边界见 [Uranus 后端](uranus-backend.md)。

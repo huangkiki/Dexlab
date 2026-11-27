@@ -30,6 +30,8 @@
 
 ## 代表性实验
 
+[翻花绳 Opening A](https://huangkiki.github.io/Dexlab/zh-cn/latest/rope-opening-a.html)用 libuipc 原生接触把无固定点的闭环绳撑成两股，附录像和关闭手掌碰撞的对照。
+
 <p align="center">
   <strong>切割与侧推</strong><br>
   <a href="docs/site/zh/cut-push.md">
