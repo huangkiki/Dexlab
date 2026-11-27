@@ -13,6 +13,10 @@ from dexlab.incline_score import ImpulseConsistencyError, file_hash, measure_res
 PROFILES = ('xpbd', 'semiimplicit', 'featherstone', 'vbd-legacy', 'vbd-compliant',
             'kamino-padmm', 'kamino-dvi')
 EPS32 = np.finfo(np.float32).eps
+RELEASES = {
+    '1.6.1': ('713fecdc41caf0c9d726f5c016939f36e66e3dff', '1.18.0'),
+    '1.8.0': ('425db81f01e402b51f96f560e154d529d645c6de', '1.19.0'),
+}
 LIMITS = dict(static_displacement_m=.001, static_speed_m_s=.001,
               sliding_velocity_rmse_m_s=.01, sliding_position_rmse_m=.01,
               acceleration_error_m_s2=.05, rotation_rad=.01,
@@ -37,11 +41,10 @@ def initial_state(protocol, case):
 def validate_protocol(protocol):
     if protocol['profile'] not in PROFILES:
         raise ValueError('Unqualified solver profile')
-    if (protocol['limits'] != LIMITS
-            or protocol['source_commit'] != '713fecdc41caf0c9d726f5c016939f36e66e3dff'):
-        raise ValueError('Changed physical limits or source identity')
-    for name, value in dict(schema_version=1, engine='Newton Physics', version='1.6.1',
-                            warp_version='1.18.0', duration_s=2, score_start_s=.5,
+    if (protocol['limits'] != LIMITS or
+            RELEASES.get(protocol['version']) != (protocol['source_commit'], protocol['warp_version'])):
+        raise ValueError('Changed physical limits or unqualified release identity')
+    for name, value in dict(schema_version=1, engine='Newton Physics', duration_s=2, score_start_s=.5,
                             side_m=.04, mass_kg=.064, density_kg_m3=1000,
                             gravity_m_s2=9.81).items():
         if protocol[name] != value:
@@ -205,7 +208,7 @@ def score_campaign(root):
     if (campaign['device'] != 'cpu' or campaign['precision'] != 'float32'
             or campaign['engine_patches'] is not False or proof['source_commit'] != protocol['source_commit']):
         raise ValueError('Unqualified runtime or source')
-    for name, version in [('newton', '1.6.1'), ('warp-lang', '1.18.0')]:
+    for name, version in [('newton', protocol['version']), ('warp-lang', protocol['warp_version'])]:
         identity = campaign['packages'][name]
         if identity != proof['packages'][name]['identity'] or identity['version'] != version or not identity['record_verified']:
             raise ValueError('Wrong official runtime identity')

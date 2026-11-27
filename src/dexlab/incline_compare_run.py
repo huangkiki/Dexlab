@@ -1,6 +1,7 @@
 """Record the preregistered SuperDex half of the paired incline campaign."""
 
 import argparse
+from importlib.metadata import distribution
 import json
 import platform
 from pathlib import Path
@@ -40,8 +41,8 @@ def configure_profile(native, profile, negative=False):
             native.p.IncludeNestedActors.__members__['NO'])
 
 
-def admit(native, protocol, case):
-    """Reject incorrect setup before any positive-duration native step."""
+def admit(native, protocol, case, *, path=None):
+    """Retain the setup readback and reject errors before stepping."""
     from dexlab.incline_compare_score import validate_admission
 
     pose, velocity = native.observe()
@@ -54,11 +55,23 @@ def admit(native, protocol, case):
                   double_precision=bool(native.p.uses_double_precision()),
                   gravity=np.asarray(native.scene.get_gravity()).tolist(),
                   plane_query_points=points.tolist(), plane_distances=distances.tolist())
+    if 'official_runtime' in protocol['comparison']:
+        root = Path(distribution('superdex-physics-fp64').locate_file('superdex_physics_fp64')).resolve()
+        mapped = set()
+        for line in Path('/proc/self/maps').read_text().splitlines():
+            fields = line.split(maxsplit=5)
+            if len(fields) == 6 and fields[5].startswith('/'):
+                library = Path(fields[5]).resolve()
+                if library.is_relative_to(root) and '.so' in library.name:
+                    mapped.add(library)
+        record['mapped_fp64'] = {str(path.relative_to(root.parent)): file_hash(path) for path in sorted(mapped)}
     if 'solver_profile' in protocol:
         record.update(effective_solver=solver_readback(native.scene.get_solver_params()),
                       box_com_local=np.asarray(native.box.get_rigid_center_of_mass_local()).tolist(),
                       box_dofs=native.box.get_num_dofs(), plane_dofs=native.plane.get_num_dofs(),
                       contact_pair_disabled_command=bool(case.get('negative_no_floor', False)))
+    if path is not None:
+        path.write_text(json.dumps(record, indent=2)+'\n')
     validate_admission(protocol, case, record)
     return record
 
@@ -76,12 +89,12 @@ def run_case(protocol, case, destination, *, admission_only=False):
                           solver_parameters={'iterations': config['solver_iterations'],
                                              'absolute_tolerance': config['absolute_tolerance'],
                                              'relative_tolerance': config['relative_tolerance']},
-                          measure_step_timing=True, incline_angle_deg=case['angle_deg'])
+                          measure_step_timing=True, incline_angle_deg=case['angle_deg'],
+                          expected_version=config['superdex_version'])
     try:
         if 'solver_profile' in protocol:
             configure_profile(native, protocol['solver_profile'], case.get('negative_no_floor', False))
-        admission = admit(native, protocol, case)
-        (destination/'admission.json').write_text(json.dumps(admission, indent=2)+'\n')
+        admission = admit(native, protocol, case, path=destination/'admission.json')
         if admission_only:
             return
         setup_s = time.perf_counter()-started

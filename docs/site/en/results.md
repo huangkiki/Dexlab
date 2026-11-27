@@ -11,6 +11,7 @@
 Findings <experience>
 Coverage <coverage>
 Visual comparisons <visual-comparisons>
+Latest stable incline retest <incline-latest>
 Chaos, Bullet and SOFA incline records <incline-extension>
 RaiSim’s nine incline cases <raisim-incline>
 Diagnosis <diagnosis>

@@ -160,7 +160,9 @@ int main(int argc, char** argv) {
         if(reverse) { scene->addActor(*cube); scene->addActor(*plane); } else { scene->addActor(*plane); scene->addActor(*cube); }
         std::cout << std::setprecision(17);
         PxU32 position_iterations=0,velocity_iterations=0; cube->getSolverIterationCounts(position_iterations,velocity_iterations);
-        std::cout << "{\"kind\":\"admission\",\"sdk_version\":\"5.9.0\",\"sdk_version_integer\":" << PX_PHYSICS_VERSION
+        std::cout << "{\"kind\":\"admission\",\"sdk_version\":\"" << PX_PHYSICS_VERSION_MAJOR << '.'
+                  << PX_PHYSICS_VERSION_MINOR << '.' << PX_PHYSICS_VERSION_BUGFIX
+                  << "\",\"sdk_version_integer\":" << PX_PHYSICS_VERSION
                   << ",\"real_bytes\":" << sizeof(PxReal) << ",\"profile\":"; quoted(std::cout,profile);
         std::cout << ",\"requested_timestep\":" << requested_dt << ",\"effective_timestep\":" << h
                   << ",\"solver_type\":" << int(scene->getSolverType()) << ",\"scene_flags\":" << unsigned(scene->getFlags())

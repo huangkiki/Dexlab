@@ -18,6 +18,7 @@ IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, ChaosIncline, "ChaosInclin
 #include "HAL/IConsoleManager.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/CommandLine.h"
+#include "Misc/EngineVersion.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
@@ -262,7 +263,8 @@ private:
         Test->TestTrue(TEXT("Saved states"), FFileHelper::SaveStringToFile(States, *FPaths::Combine(Directory, TEXT("states.csv"))));
         Test->TestTrue(TEXT("Saved contacts"), FFileHelper::SaveStringToFile(Contacts, *FPaths::Combine(Directory, TEXT("contacts.csv"))));
         const FString Readback = FString::Printf(
-            TEXT("{\"mass_kg\":%.17g,\"inertia_kg_m2\":[%.17g,%.17g,%.17g],\"gravity_m_s2\":[%.17g,%.17g,%.17g],\"floor_height_m\":%.17g,\"floor_normal\":[%.17g,%.17g,%.17g],\"box_side_m\":[%.17g,%.17g,%.17g],\"completed_steps\":%d}\n"),
+            TEXT("{\"engine_version\":\"%s\",\"engine_changelist\":%u,\"mass_kg\":%.17g,\"inertia_kg_m2\":[%.17g,%.17g,%.17g],\"gravity_m_s2\":[%.17g,%.17g,%.17g],\"floor_height_m\":%.17g,\"floor_normal\":[%.17g,%.17g,%.17g],\"box_side_m\":[%.17g,%.17g,%.17g],\"completed_steps\":%d}\n"),
+            *FEngineVersion::Current().ToString(EVersionComponent::Patch), FEngineVersion::Current().GetChangelist(),
             Mass, Inertia.X, Inertia.Y, Inertia.Z, Gravity.X, Gravity.Y, Gravity.Z, FloorHeight,
             FloorNormal.X, FloorNormal.Y, FloorNormal.Z, BoxSide.X, BoxSide.Y, BoxSide.Z, Step);
         Test->TestTrue(TEXT("Saved native readback"), FFileHelper::SaveStringToFile(Readback, *FPaths::Combine(Directory, TEXT("readback.json"))));

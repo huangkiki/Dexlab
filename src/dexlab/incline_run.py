@@ -182,11 +182,16 @@ def main():
     import mujoco as mj
 
     protocol = json.loads(args.manifest.read_text())
-    if len(protocol['cases']) > 24 or protocol['version'] != mj.mj_versionString():
+    version = protocol['version']
+    if len(protocol['cases']) > 24 or version != mj.mj_versionString():
         raise ValueError('Case budget or native version mismatch')
+    # MuJoCo 4 ships the CPU core and Python binding in mujoco-core.
+    package = 'mujoco-core' if version == '4.0.1' else 'mujoco'
+    if package == 'mujoco-core' and protocol.get('schema_version') != 2:
+        raise ValueError('MuJoCo 4 requires a manifest with official wheel verification')
     # Runtime file verification happens before timed stepping, once per campaign.
-    identity = mujoco_profile_identity(package_identity('mujoco'), mj.mj_versionString(),
-                                       profile='qualification-3.15.0')
+    identity = mujoco_profile_identity(package_identity(package), mj.mj_versionString(),
+                                       profile=f'qualification-{version}')
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / 'manifest.json').write_bytes(args.manifest.read_bytes())
     from dexlab.incline_score import file_hash
@@ -201,7 +206,7 @@ def main():
             raise ValueError('Prospective qualification requires an official wheel proof')
         from dexlab.apple_admission import loaded_mujoco_library, record_native_file
         proof = json.loads(args.proof.read_bytes())
-        native_hash = record_native_file('mujoco', loaded_mujoco_library())
+        native_hash = record_native_file(package, loaded_mujoco_library())
         if (identity['code_sha256'] != proof['wheel']['package_code_sha256']
                 or native_hash != proof['native_core_sha256'] or proof['version'] != protocol['version']):
             raise ValueError('Loaded runtime differs from the official qualification')

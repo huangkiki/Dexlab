@@ -1,0 +1,26 @@
+{
+  "engine": "Chaos",
+  "version": "5.8.4",
+  "historical_version": "5.7.1",
+  "score_status": "invalid",
+  "completed_steps": 2000,
+  "contacts": 0,
+  "final_vertical_position_m": -19.61036784789249,
+  "final_vertical_velocity_m_s": -19.61965576171875,
+  "initial_step_vertical_velocity_m_s": -0.009810000658035278,
+  "first_exceeding_step": 1431,
+  "first_exceeding_time_s": 1.4310000679688528,
+  "first_residual_m_s": 0.00010041286819628681,
+  "max_abs_residual_m_s": 0.00034517018124446963,
+  "freefall_tolerance_m_s": 0.0001,
+  "steps_above_tolerance": 570,
+  "recurrence_max_error_m_s": 3.552713678800501e-15,
+  "recurrence": "Float32 storage of every centimeter-per-second velocity update with native observed dt and g=981 cm/s^2",
+  "historical_states_byte_identical": true,
+  "historical_contacts_byte_identical": true,
+  "artifact_sha256": {
+    "states.csv": "914ea82cd5f263794301abb4ce17be3fe9f983727d9a8fa889cbe61a17029ffd",
+    "contacts.csv": "546338f24c71fb3c460c2379d48512db32b553e603a25aaf1fd4a72c2f7eb75b"
+  },
+  "native_storage_source": "UE 5.8.4 Chaos/KinematicGeometryParticles.h: MV is TVector<FRealSingle,d>; SetV writes to MV."
+}

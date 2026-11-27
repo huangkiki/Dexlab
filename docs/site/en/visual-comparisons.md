@@ -34,7 +34,7 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 
 <div class="comparison-matrix">
 <table id="incline-results">
-<caption>Fixed configurations ranked on the nine incline cases</caption>
+<caption>Latest stable incline results (2026-11-27)</caption>
 <thead><tr>
 <th scope="col">Rank and configuration</th>
 <th scope="col">Score</th>
@@ -43,61 +43,61 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 <th scope="col">Nominal zero friction</th>
 </tr></thead>
 <tbody>
-<tr><th scope="row"><strong>1. SuperDex</strong><small>1.0 · Newton / AUTO / C1</small></th>
+<tr><th scope="row"><strong>1. SuperDex</strong><small>1.0.1 · Newton / AUTO / C1 FP64</small></th>
 <td><span class="matrix-result mixed">8 / 9</span></td>
 <td><span class="matrix-result mixed">2 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>2. PhysX</strong><small>5.9.0 · PGS / patch friction</small></th>
+<tr><th scope="row"><strong>2. PhysX</strong><small>5.9.1 · Standalone CPU SDK PGS / patch friction</small></th>
 <td><span class="matrix-result mixed">7 / 9†</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result mixed">2 / 3†</span></td>
 <td><span class="matrix-result mixed">2 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>3. Genesis</strong><small>1.4.3 · Newton / elliptic / Signorini</small></th>
+<tr><th scope="row"><strong>3. Genesis</strong><small>1.5.0 · Newton / elliptic / Signorini CPU</small></th>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>3. Drake</strong><small>1.57 · SAP / kLagged / hydroelastic</small></th>
+<tr><th scope="row"><strong>3. Drake</strong><small>1.59.0 · SAP / kLagged / hydroelastic</small></th>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>3. RaiSim</strong><small>2.16.0 · CPU FP64 / bisection</small></th>
+<tr><th scope="row"><strong>3. RaiSim</strong><small>2.18.1 · Native C++ CPU FP64 bisection</small></th>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>6. MuJoCo</strong><small>3.15 · PGS / elliptic</small></th>
-<td><span class="matrix-result fail">3 / 9</span></td>
+<tr><th scope="row"><strong>6. Chaos</strong><small>5.8.4 · Unreal Engine Linux Development Editor / Chaos</small></th>
+<td><span class="matrix-result mixed">5 / 9</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result mixed">2 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+</tr>
+<tr><th scope="row"><strong>7. MuJoCo</strong><small>4.0.1 · PGS / elliptic / Euler</small></th>
+<td><span class="matrix-result mixed">3 / 9</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>6. Chaos</strong><small>UE 5.7.1 · Linux Editor</small></th>
-<td><span class="matrix-result mixed">3 / 9†</span></td>
-<td><span class="matrix-result fail">0 / 3</span></td>
-<td><span class="matrix-result invalid">0 / 3†</span></td>
-<td><span class="matrix-result pass">3 / 3</span></td>
-</tr>
-<tr><th scope="row"><strong>6. Bullet</strong><small>PyBullet 3.2.7 · CPU DIRECT</small></th>
+<tr><th scope="row"><strong>7. Bullet</strong><small>3.2.7 · PyBullet CPU DIRECT</small></th>
 <td><span class="matrix-result mixed">3 / 9</span></td>
 <td><span class="matrix-result mixed">2 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result mixed">1 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>9. Newton Physics</strong><small>1.6.1 · XPBD / 100 sweeps</small></th>
-<td><span class="matrix-result invalid">1 / 9†</span></td>
+<tr><th scope="row"><strong>9. Newton Physics</strong><small>1.8.0 · XPBD / 100 sweeps</small></th>
+<td><span class="matrix-result mixed">1 / 9†</span></td>
 <td><span class="matrix-result mixed">1 / 3</span></td>
 <td><span class="matrix-result invalid">0 / 3†</span></td>
 <td><span class="matrix-result invalid">0 / 3†</span></td>
 </tr>
-<tr><th scope="row"><strong>10. SOFA</strong><small>26.06.00 · rigid OBB / block GS</small></th>
+<tr><th scope="row"><strong>10. SOFA</strong><small>26.06.00 · Rigid OBB / block Gauss-Seidel</small></th>
 <td><span class="matrix-result fail">0 / 9</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
@@ -106,11 +106,13 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 </tbody>
 </table>
 </div>
-<p class="matrix-note">Each pass earns one point out of nine. Equal scores share a rank. † marks invalid records that count toward the denominator and earn zero points.</p>
+<p class="matrix-note">Each pass earns one point out of nine. Equal scores share a rank. † marks invalid records that count toward the denominator and earn zero points. The Chaos disabled-collision control was invalidated by the separate free-fall velocity check.</p>
 
-The scorer checks the timing and numerical agreement of state and force before evaluating motion against the limits. The three Chaos sliding records exceeded that consistency limit. {ref}`Why they were invalid, including the first step over the limit <incline-invalid-records>`. For historical rows, see [Newton Physics position and velocity checks](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) and [PhysX normal-impulse direction checks](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md).
+[Latest case results and native data](incline-latest.md)
 
-The GIF shows the original six-engine replay. The ten-engine curves use the same 1 ms conditions. Dotted lines mark invalid records.
+In the historical batch, the scorer checks the timing and numerical agreement of state and force before evaluating motion against the limits. The three Chaos sliding records exceeded that consistency limit. {ref}`Why they were invalid, including the first step over the limit <incline-invalid-records>`. For historical rows, see [Newton Physics position and velocity checks](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) and [PhysX normal-impulse direction checks](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md).
+
+The historical GIF shows the original six-engine replay. The ten-engine curves use the same 1 ms conditions. Dotted lines mark invalid records.
 
 ```{raw} html
 <p><a href="_static/incline-extension/static-1ms-curves.svg">Static curves</a> · <a href="_static/incline-extension/sliding-1ms-curves.svg">Sliding curves</a> · <a href="_static/incline-extension/frictionless-1ms-curves.svg">Nominal-zero-friction curves</a></p>

@@ -241,6 +241,28 @@ def replay_guide(case, language):
     )
 
 
+def incline_case_cells(rows, engine):
+    groups = [[row for row in rows if row["regime"] == name]
+              for name in ("static", "sliding", "frictionless")]
+    if len(rows) != 9 or any(
+        len(group) != 3 or {row["timestep"] for row in group} != {.002, .001, .0005}
+        for group in groups
+    ) or any(row["status"] not in ("pass", "fail", "invalid") for row in rows):
+        raise ValueError(f"Incomplete published incline profile: {engine}")
+    cells = []
+    for group in [*groups, rows]:
+        passed = sum(row["status"] == "pass" for row in group)
+        invalid = sum(row["status"] == "invalid" for row in group)
+        if passed == len(group):
+            state = "pass"
+        elif invalid == len(group):
+            state = "invalid"
+        else:
+            state = "mixed" if passed else "fail"
+        cells.append((passed, state, bool(invalid)))
+    return cells
+
+
 def incline_extension_rows(root):
     evidence = root / "docs/evidence/incline-extension"
     profiles = [
@@ -252,24 +274,20 @@ def incline_extension_rows(root):
     for key, label, configuration in profiles:
         rows = json.loads((evidence / f"{key}-results.json").read_text())["cases"]
         positive = [row for row in rows if row["id"] != "negative-no-floor-1ms"]
-        groups = [[row for row in positive if row["regime"] == name]
-                  for name in ("static", "sliding", "frictionless")]
-        if len(positive) != 9 or any(
-            {row["timestep"] for row in group} != {.002, .001, .0005} for group in groups
-        ):
-            raise ValueError(f"Incomplete published incline extension: {key}")
-        cells = []
-        for group in [*groups, positive]:
-            passed = sum(row["status"] == "pass" for row in group)
-            invalid = sum(row["status"] == "invalid" for row in group)
-            if passed == len(group):
-                state = "pass"
-            elif invalid == len(group):
-                state = "invalid"
-            else:
-                state = "mixed" if passed else "fail"
-            cells.append((passed, state, bool(invalid)))
-        yield label, configuration, cells
+        yield label, configuration, incline_case_cells(positive, key)
+
+
+def latest_incline_rows(report, expected_engines):
+    profiles = report["profiles"]
+    found_engines = {profile["engine"] for profile in profiles}
+    if (report["complete"] is not True or report["pending"] or len(profiles) != len(expected_engines)
+            or found_engines != expected_engines
+            or any(row["negative_control"] not in ("rejected", "invalid") for row in profiles)):
+        raise ValueError("The latest incline ranking requires a complete ten-engine retest")
+    for profile in profiles:
+        cases = [dict(row, timestep=row["timestep_s"]) for row in profile["cases"]]
+        detail = f'{profile["version"]} · {profile["profile"]}'
+        yield profile["engine"], detail, incline_case_cells(cases, profile["engine"])
 
 
 def ranked_incline_rows(rows):
@@ -322,12 +340,23 @@ def comparison_table(case, language, root):
             ]),
         ]
         rows.extend(incline_extension_rows(root))
+        latest_results = root / "docs/evidence/incline-latest/summary.json"
+        if latest_results.is_file():
+            latest = json.loads(latest_results.read_text())
+            rows = list(latest_incline_rows(latest, {row[0] for row in rows}))
+            checked = latest["stable_versions_verified_at"][:10]
+            caption = f"最新版斜面九例排名（{checked}）" if zh else f"Latest stable incline results ({checked})"
         rows = ranked_incline_rows(rows)
         note = (
             "每通过一例得 1 分，满分 9 分，同分并列。† 表示含无效记录，仍计入分母并得 0 分。"
             if zh
             else "Each pass earns one point out of nine. Equal scores share a rank. † marks invalid records that count toward the denominator and earn zero points."
         )
+        if latest_results.is_file() and any(row["negative_control"] == "invalid" for row in latest["profiles"]):
+            note += (
+                " Chaos 的禁碰撞对照在自由落体速度检查中判为无效，另行报告。"
+                if zh else " The Chaos disabled-collision control was invalidated by the separate free-fall velocity check."
+            )
     elif case["id"] == "normal":
         caption = "加载窗口的有效响应（合成目标 20 kN/m）" if zh else "Effective loaded-window response against the synthetic 20 kN/m target"
         headers = ["阶段", "实测响应", "目标或检查", "读法"] if zh else ["Stage", "Measured response", "Target or check", "Reading"]
@@ -394,6 +423,7 @@ def comparison_table(case, language, root):
 
 def comparisons(index, experiences, language, root):
     zh = language == "zh"
+    has_latest_incline = (root / "docs/evidence/incline-latest/summary.json").is_file()
     lines = [
         "# "
         + ("对比实验：从画面到判据" if zh else "Comparative experiments: from visible motion to criteria"),
@@ -441,23 +471,33 @@ def comparisons(index, experiences, language, root):
             comparison_table(case, language, root),
         ]
         if case["id"] == "incline":
+            if has_latest_incline:
+                lines += [
+                    "[最新版逐例结果和原始数据](incline-latest.md)" if zh
+                    else "[Latest case results and native data](incline-latest.md)",
+                    "",
+                ]
             lines += [
                 (
-                    "评分器先核对状态与力的时间和数值，再评估运动是否达标。Chaos 三条滑动在状态与冲量的核对中超限。"
+                    ("历史批次中，" if has_latest_incline else "")
+                    + "评分器先核对状态与力的时间和数值，再评估运动是否达标。Chaos 三条滑动在状态与冲量的核对中超限。"
                     " {ref}`为什么判无效，查看首次越界和逐步对账 <incline-invalid-records>`。"
                     " 表中历史无效项另见 [Newton Physics 的位置与速度检查](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md)"
                     " 和 [PhysX 的法向冲量方向检查](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。"
                     if zh else
-                    "The scorer checks the timing and numerical agreement of state and force before evaluating motion against the limits. "
+                    ("In the historical batch, the scorer" if has_latest_incline else "The scorer")
+                    + " checks the timing and numerical agreement of state and force before evaluating motion against the limits. "
                     "The three Chaos sliding records exceeded that consistency limit. {ref}`Why they were invalid, including the first step over the limit <incline-invalid-records>`. "
                     "For historical rows, see [Newton Physics position and velocity checks](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) "
                     "and [PhysX normal-impulse direction checks](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md)."
                 ),
                 "",
                 (
-                    "GIF 展示原六引擎回放。十引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。"
+                    ("历史 " if has_latest_incline else "")
+                    + "GIF 展示原六引擎回放。十引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。"
                     if zh else
-                    "The GIF shows the original six-engine replay. The ten-engine curves use the same 1 ms conditions. Dotted lines mark invalid records."
+                    ("The historical GIF" if has_latest_incline else "The GIF")
+                    + " shows the original six-engine replay. The ten-engine curves use the same 1 ms conditions. Dotted lines mark invalid records."
                 ),
                 "",
                 (

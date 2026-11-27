@@ -94,6 +94,15 @@ class GenesisIncline:
             geom.set_friction(case['friction'])
             geom.set_sol_params(config['sol_params'])
         rigid = self.solver
+        contact_buffer = rigid.collider.collider_state.n_contacts
+        initial_contacts = qd_to_numpy(contact_buffer)
+        if initial_contacts is None and protocol['version'] == '1.5.0':
+            # Model setters invalidate the derived contact view before the first solve.
+            # Inspect the reset buffer without forcing collision detection to run.
+            initial_contacts = qd_to_numpy(contact_buffer, copy=False)
+            initial_contact_source = 'reset_buffer'
+        else:
+            initial_contact_source = 'derived_view'
         self.admission = dict(
             state=self.state().tolist(), options=rigid._options.model_dump(mode='json'),
             sim_options=self.scene.sim.options.model_dump(mode='json'),
@@ -107,7 +116,8 @@ class GenesisIncline:
             authored_material_friction=material_friction,
             before_geom_setters=self.initial_geom_parameters,
             friction_ratio=rigid.get_geoms_friction_ratio().tolist(),
-            initial_contact_count=int(qd_to_numpy(rigid.collider.collider_state.n_contacts).item()),
+            initial_contact_count=int(initial_contacts.item()),
+            initial_contact_source=initial_contact_source,
             initial_errors=qd_to_numpy(rigid._errno).tolist(),
             contact_capacity=int(rigid.collider.collider_state.contact_data.friction.shape[0]),
             constraint_storage_shape=list(rigid.constraint_solver.constraint_state.Jaref.shape),

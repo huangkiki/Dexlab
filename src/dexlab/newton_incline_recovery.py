@@ -1,4 +1,4 @@
-"""Offline provenance checks for a separately recovered Newton negative."""
+"""Offline provenance checks for a separately recovered Newton case sequence."""
 
 import gzip
 import json
@@ -14,33 +14,34 @@ def validate_recovery(root, campaign, protocol):
             or file_hash(root / 'continuation.py') != recovery['runner_sha256']):
         raise ValueError('Changed recovery provenance')
     previous = json.loads((original / 'campaign.json').read_text())
+    reused = len(previous['cases']) - 1
     if (previous['state'] != 'interrupted' or previous['admission_only']
-            or len(previous['cases']) != len(protocol['cases'])
-            or campaign['cases'][:-1] != previous['cases'][:-1]
+            or not 0 <= reused < len(protocol['cases'])
+            or campaign['cases'][:reused] != previous['cases'][:reused]
             or campaign['packages'] != previous['packages']):
-        raise ValueError('Recovery changed completed positives or runtime')
+        raise ValueError('Recovery changed completed cases or runtime')
     for name, key in [('manifest.json', 'protocol_sha256'), ('recorder.py', 'recorder_sha256'),
                       ('official-proof.json', 'proof_sha256')]:
         if file_hash(original / name) != campaign[key] or previous[key] != campaign[key]:
             raise ValueError('Recovery changed frozen source, proof or protocol')
     interrupted = previous['cases'][-1]
-    case = protocol['cases'][-1]
-    if (interrupted['case'] != case or not case.get('negative_no_floor', False)
+    case = protocol['cases'][reused]
+    if (interrupted['case'] != case
             or recovery['replaced_case'] != case['id']
             or not isinstance(interrupted['error'], str)
             or not interrupted['error'].startswith('KeyboardInterrupt:')
             or recovery['original_completed_steps'] != interrupted['completed_steps']):
-        raise ValueError('Recovery did not preserve the interrupted negative')
+        raise ValueError('Recovery did not preserve the interrupted case')
     completed = interrupted['completed_steps']
     if not 0 < completed < round(protocol['duration_s'] / case['timestep']):
-        raise ValueError('Not an incomplete negative')
-    for item, expected in zip(previous['cases'], protocol['cases'], strict=True):
+        raise ValueError('Not an incomplete case')
+    for item, expected in zip(previous['cases'], protocol['cases'][:reused + 1], strict=True):
         directory = original / expected['id']
         if item['case'] != expected or item != json.loads((directory / 'metadata.json').read_text()):
             raise ValueError('Changed original case metadata')
         if item is not interrupted and (item['error'] or
                 item['completed_steps'] != round(protocol['duration_s'] / expected['timestep'])):
-            raise ValueError('An incomplete positive cannot be reused')
+            raise ValueError('An incomplete case cannot be reused')
         for name, digest in item['hashes'].items():
             if Path(name).name != name or file_hash(directory / name) != digest:
                 raise ValueError('Changed original case artifact')
@@ -55,7 +56,7 @@ def validate_recovery(root, campaign, protocol):
     for before, after in zip(old_rows[:completed], new_rows[:completed], strict=True):
         if before['state'] != after['state'] or before['net_force'] != after['net_force']:
             raise ValueError('Recovered state/force prefix differs from original')
-    return dict(reused_positive_cases=len(protocol['cases']) - 1,
+    return dict(reused_positive_cases=reused,
                 preserved_interrupted_attempt=True, identical_prefix_steps=completed,
                 original_campaign_sha256=recovery['original_campaign_sha256'],
                 continuation_runner_sha256=recovery['runner_sha256'])

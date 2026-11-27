@@ -33,6 +33,8 @@ def readback_checks(engine, readback, protocol, case, normal, rotation):
     require_close(readback["mass_kg"], mass, "native mass", 1e-8)
     require_close(readback["inertia_kg_m2"], np.full(3, mass * side ** 2 / 6), "native inertia", 1e-8)
     if engine == "chaos":
+        if "chaos_version" in protocol and readback.get("engine_version") != protocol["chaos_version"]:
+            raise ValueError("Unexpected native Chaos engine version")
         require_close(readback["gravity_m_s2"], [0, 0, -gravity], "native gravity", 1e-6)
         require_close(readback["floor_height_m"], 0, "native floor surface", 1e-8)
         require_close(readback["floor_normal"], normal, "native floor normal", 1e-7)
@@ -54,7 +56,7 @@ def readback_checks(engine, readback, protocol, case, normal, rotation):
         require_close(readback["gravity_m_s2"], [0, 0, -gravity], "native gravity")
         require_close(readback["box_side_m"], [side] * 3, "native side length")
         require_close(readback["timestep_s"], case["timestep"], "native fixed timestep")
-        if readback["version"] != "2.16.0" or readback["sleeping_enabled"]:
+        if readback["version"] != protocol.get("raisim_version", "2.16.0") or readback["sleeping_enabled"]:
             raise ValueError("Unexpected RaiSim version or sleeping configuration")
         floor_fields = ("floor_center_m", "floor_quaternion_wxyz", "floor_size_m")
         if case.get("negative_no_floor"):

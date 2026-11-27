@@ -11,6 +11,7 @@
 研究经验 <experience>
 完整覆盖 <coverage>
 可视对照 <visual-comparisons>
+斜面实验最新稳定版复测 <incline-latest>
 Chaos、Bullet、SOFA 斜面记录 <incline-extension>
 RaiSim 斜面九例 <raisim-incline>
 诊断方法 <diagnosis>

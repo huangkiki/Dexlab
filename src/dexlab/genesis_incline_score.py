@@ -35,8 +35,10 @@ def validate_protocol(protocol):
             or any(negatives[0][key] != value for key, value in
                    dict(regime='static', angle_deg=15, friction=.5, timestep=.001).items())):
         raise ValueError('Duplicate/unsafe case identity or incorrect negative control')
+    if (protocol['version'], protocol['quadrants_version']) not in {('1.4.3', '1.3.3'), ('1.5.0', '1.4.0')}:
+        raise ValueError('Unqualified Genesis and Quadrants release pair')
     if any(protocol[key] != value for key, value in dict(
-            schema_version=1, engine='Genesis', version='1.4.3', quadrants_version='1.3.3',
+            schema_version=1, engine='Genesis',
             threads=1, duration_s=2, score_start_s=.5, mass_kg=.064, side_m=.04,
             density_kg_m3=1000, gravity_m_s2=9.81).items()):
         raise ValueError('Unqualified acquisition protocol')
@@ -70,7 +72,8 @@ def validate_admission(protocol, case, admission):
     config = protocol['genesis']
     options = admission['options']
     expected = dict(config['options'])
-    expected.update({key: ENUMS[key][value] for key, value in config['options'].items() if key in ENUMS})
+    if protocol['version'] == '1.4.3':
+        expected.update({key: ENUMS[key][value] for key, value in config['options'].items() if key in ENUMS})
     expected['dt'] = case['timestep']
     if any(options.get(key) != value for key, value in expected.items()):
         raise ValueError('Native solver/contact/clock settings differ')

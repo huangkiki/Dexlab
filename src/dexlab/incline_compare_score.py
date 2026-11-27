@@ -16,6 +16,14 @@ def validate_admission(protocol, case, record):
         identity = meta[key]
         if identity['version'] != config['superdex_version'] or not identity['record_verified']:
             raise ValueError('Unverified official runtime')
+    if config['superdex_version'] == '1.0.1':
+        official = config['official_runtime']
+        for package, key in (('superdex-physics', 'api_identity'), ('superdex-physics-fp64', 'identity')):
+            identity = {name: value for name, value in meta[key].items() if name != 'installation_origin'}
+            if identity != official['packages'][package]['identity']:
+                raise ValueError(f'{package} differs from the official wheel')
+        if not record.get('mapped_fp64') or record['mapped_fp64'] != official['mapped_fp64']:
+            raise ValueError('Mapped FP64 libraries differ from the official wheel')
     if record['double_precision'] is not True or record['time_s'] != 0:
         raise ValueError('Precision or initial clock mismatch')
     angle = np.deg2rad(case['angle_deg'])

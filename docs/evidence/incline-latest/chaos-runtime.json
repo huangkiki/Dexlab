@@ -1,0 +1,25 @@
+{
+  "engine_version": "5.8.4",
+  "source_commit": "f45729c0b6f097038e72b52d366a62baeca3275b",
+  "build": "Linux Development Editor, synchronous manual world ticks, NullRHI",
+  "native_cases": 10,
+  "automation_test": "DexLab.ChaosIncline",
+  "automation_status": "Success",
+  "warnings": 6,
+  "warning_scope": "External connectivity probes timed out",
+  "automation_errors": 0,
+  "native_duration_s": 192.35360717773438,
+  "engine_binaries_sha256": {
+    "UnrealEditor": "407e6b157e889011fcdfff0d3ca64badf39146bc73bf096eacfbe93b0289e372",
+    "libUnrealEditor-Chaos.so": "8fb4ed7ccb6338fbfdf0927d069cfc46a618eb15b96e7a43e11689cef1d84d85"
+  },
+  "native_inputs_sha256": {
+    "chaos-5.8.4-protocol.json": "f72c96c8ad6020bb0316b90c5168bbcb6041f673e42887f77520214517f93209",
+    "ChaosIncline.cpp": "e25ce1dcd8f44c730a7078416aa4382b15247eeedd234ac9ac47e2399d0f3752"
+  },
+  "process_statistics": {
+    "peak_rss_kib": "3579140",
+    "swaps": "0",
+    "exit_status": "0"
+  }
+}

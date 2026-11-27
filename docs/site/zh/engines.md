@@ -12,6 +12,8 @@
 Uranus 生成式环境后端 <uranus-backend>
 ```
 
+[斜面实验最新稳定版复测](incline-latest.md)列出十个引擎实际使用的版本和各自的九例结果。
+
 同一个视觉网格、参数名称或关节目标，不保证引擎求解了同一个物理问题。
 
 ## Chaos Physics、Bullet Physics、SOFA 与 RaiSim

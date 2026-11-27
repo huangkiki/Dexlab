@@ -93,7 +93,7 @@ void record_case(const Json& protocol, const Json& condition, const fs::path& ou
     const auto& settings = solver.getConfig();
     const auto& pair = world.getMaterialPairProperties("cube", "slab");
     Json readback = {
-        {"version", "2.16.0"},
+        {"version", DEXLAB_RAISIM_VERSION},
         {"mass_kg", box->getMass()},
         {"inertia_kg_m2", array(box->getInertiaMatrix_B().diagonal())},
         {"gravity_m_s2", array(world.getGravity().e())},
@@ -160,6 +160,9 @@ int main(int argc, char** argv) {
         }
         std::ifstream manifest(argv[1]);
         const Json protocol = Json::parse(manifest);
+        if (protocol.value("raisim_version", "2.16.0") != DEXLAB_RAISIM_VERSION) {
+            throw std::runtime_error("RaiSim SDK version differs from the manifest");
+        }
         const fs::path output(argv[2]);
         if (!fs::create_directory(output)) {
             throw std::runtime_error("Output already exists");

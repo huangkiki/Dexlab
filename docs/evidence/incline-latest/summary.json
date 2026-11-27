@@ -1,0 +1,688 @@
+{
+  "scope": "Fixed incline profiles",
+  "stable_versions_verified_at": "2026-11-27T11:44:54.211585+00:00",
+  "complete": true,
+  "profiles": [
+    {
+      "engine": "MuJoCo",
+      "version": "4.0.1",
+      "profile": "PGS / elliptic / Euler",
+      "previous_version": "3.15.0",
+      "release": "https://github.com/google-deepmind/mujoco/releases/tag/4.0.1",
+      "protocol_sha256": "ce2cb8fd5564076b8465d256d78fb2da1e725cae23aa527dd724e8e4e282545e",
+      "score_sha256": "0aa8a61ae75896145032ab4e3e40b327c18a92fd693ef46d7e23c0bef14ec3c9",
+      "positive_passed": 3,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "static-d0.9-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "static-d0.9-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "engine": "SuperDex",
+      "version": "1.0.1",
+      "profile": "Newton / AUTO / C1 FP64",
+      "previous_version": "1.0.0",
+      "release": "https://github.com/facebookresearch/project_superdex/releases/tag/v1.0.1",
+      "protocol_sha256": "a051714de623c211a0723b1bb0682825fdd8e193818e59d5b2adcbca58ecb6de",
+      "score_sha256": "ad7871bb4c052f5e15157d374f5944eb774c4e3291854884d18c307915f3633a",
+      "positive_passed": 8,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "static-d0.9-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "static-d0.9-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-d0.9-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-d0.9-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "engine": "Genesis",
+      "version": "1.5.0",
+      "profile": "Newton / elliptic / Signorini CPU",
+      "previous_version": "1.4.3",
+      "release": "https://github.com/Genesis-Embodied-AI/genesis-world/releases/tag/v1.5.0",
+      "protocol_sha256": "3f2dd2449bcac99eb4c5a0219f3d1d82f9c6801b47310eaf523a2aab02c100b0",
+      "score_sha256": "22eff2a28f5f78696f11809957cb10578dd8844177e8a185c1593dee42c3918b",
+      "positive_passed": 6,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "static-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "static-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "engine": "Newton Physics",
+      "version": "1.8.0",
+      "profile": "XPBD / 100 sweeps",
+      "previous_version": "1.6.1",
+      "release": "https://github.com/newton-physics/newton/releases/tag/v1.8.0",
+      "protocol_sha256": "b0412fa3582e0de0932c3ee2899f524f6ebb873620e4194d5945e4087e5f749f",
+      "score_sha256": "612d379ca41a8981bb949bd57af72e67bb0643919db50e9798de9ad5405e9b07",
+      "positive_passed": 1,
+      "invalid_cases": 6,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "static-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "static-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "invalid"
+        },
+        {
+          "id": "sliding-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "invalid"
+        },
+        {
+          "id": "sliding-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "invalid"
+        },
+        {
+          "id": "frictionless-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "invalid"
+        },
+        {
+          "id": "frictionless-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "invalid"
+        },
+        {
+          "id": "frictionless-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "invalid"
+        }
+      ]
+    },
+    {
+      "engine": "PhysX",
+      "version": "5.9.1",
+      "profile": "Standalone CPU SDK PGS / patch friction",
+      "previous_version": "5.9.0",
+      "release": "https://github.com/NVIDIA-Omniverse/PhysX/releases/tag/110.3-omni-and-physx-5.9.1",
+      "protocol_sha256": "34efe309293a97baf5428488be5f669b3be55f4fe5c0bbfc1e844ccc6c1e324e",
+      "score_sha256": "af9900b83703898b03fe9786fa1d24789f401b53380a9e8748a795131d33c6c5",
+      "positive_passed": 7,
+      "invalid_cases": 1,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "static-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "static-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "invalid"
+        },
+        {
+          "id": "sliding-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "engine": "Drake",
+      "version": "1.59.0",
+      "profile": "SAP / kLagged / hydroelastic",
+      "previous_version": "1.57.0",
+      "release": "https://github.com/RobotLocomotion/drake/releases/tag/v1.59.0",
+      "protocol_sha256": "a2ffe26c2abf2911c8279387f47d448b2e34ad43a19be1339b5a8f0238b1eb4c",
+      "score_sha256": "1edbcfcd0a41b097dfe99eef641edcedb4448dd70ff5850e0eb3f8b247f81a7e",
+      "positive_passed": 6,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "static-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "static-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "engine": "Chaos",
+      "version": "5.8.4",
+      "profile": "Unreal Engine Linux Development Editor / Chaos",
+      "previous_version": "5.7.1",
+      "release": "https://forums.unrealengine.com/t/5-8-4-hotfix-released/2842775",
+      "protocol_sha256": "f72c96c8ad6020bb0316b90c5168bbcb6041f673e42887f77520214517f93209",
+      "score_sha256": "04c4bb9292e96dfb119728910a2bc13b8008ef60c69fc9d2e17fb570d4f31322",
+      "positive_passed": 5,
+      "invalid_cases": 0,
+      "negative_control": "invalid",
+      "cases": [
+        {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "static-d0.9-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "static-d0.9-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-d0.9-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "engine": "Bullet",
+      "version": "3.2.7",
+      "profile": "PyBullet CPU DIRECT",
+      "previous_version": "3.2.7",
+      "release": "https://pypi.org/project/pybullet/3.2.7/",
+      "protocol_sha256": "8d15b321107aca8780a161c3c550412ba4fb3361b7a3e9d0223fefc77e6af7a4",
+      "score_sha256": "fcbb401f726514caa3cd4b8a13a0285f4cf8797f9b21eab1097f746a063b7a49",
+      "positive_passed": 3,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "static-d0.9-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "static-d0.9-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "engine": "SOFA",
+      "version": "26.06.00",
+      "profile": "Rigid OBB / block Gauss-Seidel",
+      "previous_version": "26.06.00",
+      "release": "https://github.com/sofa-framework/sofa/releases/tag/v26.06.00",
+      "protocol_sha256": "8d15b321107aca8780a161c3c550412ba4fb3361b7a3e9d0223fefc77e6af7a4",
+      "score_sha256": "1b30a946fc7fd9bbf574671c678cb65f13f309e911d9dca7a81f7e147ffcbd78",
+      "positive_passed": 0,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "static-d0.9-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "static-d0.9-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "engine": "RaiSim",
+      "version": "2.18.1",
+      "profile": "Native C++ CPU FP64 bisection",
+      "previous_version": "2.16.0",
+      "release": "https://github.com/raisimTech/raisim2Lib/releases/tag/v2.18.1",
+      "protocol_sha256": "d91f281ec73f3108b38b1c4d669296304dc1bae90d5a889a0a1f68940d2c2933",
+      "score_sha256": "61793074966e50a2e1964adbe0e3c6f1a05291cf199a0c7e256c5de36063bd21",
+      "positive_passed": 6,
+      "invalid_cases": 0,
+      "negative_control": "rejected",
+      "cases": [
+        {
+          "id": "static-d0.9-h0.002",
+          "regime": "static",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "static-d0.9-h0.001",
+          "regime": "static",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "static-d0.9-h0.0005",
+          "regime": "static",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        },
+        {
+          "id": "sliding-d0.9-h0.002",
+          "regime": "sliding",
+          "timestep_s": 0.002,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.001",
+          "regime": "sliding",
+          "timestep_s": 0.001,
+          "status": "fail"
+        },
+        {
+          "id": "sliding-d0.9-h0.0005",
+          "regime": "sliding",
+          "timestep_s": 0.0005,
+          "status": "fail"
+        },
+        {
+          "id": "frictionless-d0.9-h0.002",
+          "regime": "frictionless",
+          "timestep_s": 0.002,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.001",
+          "regime": "frictionless",
+          "timestep_s": 0.001,
+          "status": "pass"
+        },
+        {
+          "id": "frictionless-d0.9-h0.0005",
+          "regime": "frictionless",
+          "timestep_s": 0.0005,
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "pending": []
+}

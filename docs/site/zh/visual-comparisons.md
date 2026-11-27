@@ -34,7 +34,7 @@
 
 <div class="comparison-matrix">
 <table id="incline-results">
-<caption>固定配置的斜面九例排名</caption>
+<caption>最新版斜面九例排名（2026-11-27）</caption>
 <thead><tr>
 <th scope="col">名次与引擎配置</th>
 <th scope="col">总分</th>
@@ -43,61 +43,61 @@
 <th scope="col">名义零摩擦</th>
 </tr></thead>
 <tbody>
-<tr><th scope="row"><strong>1. SuperDex</strong><small>1.0 · Newton / AUTO / C1</small></th>
+<tr><th scope="row"><strong>1. SuperDex</strong><small>1.0.1 · Newton / AUTO / C1 FP64</small></th>
 <td><span class="matrix-result mixed">8 / 9</span></td>
 <td><span class="matrix-result mixed">2 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>2. PhysX</strong><small>5.9.0 · PGS / patch friction</small></th>
+<tr><th scope="row"><strong>2. PhysX</strong><small>5.9.1 · Standalone CPU SDK PGS / patch friction</small></th>
 <td><span class="matrix-result mixed">7 / 9†</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result mixed">2 / 3†</span></td>
 <td><span class="matrix-result mixed">2 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>3. Genesis</strong><small>1.4.3 · Newton / elliptic / Signorini</small></th>
+<tr><th scope="row"><strong>3. Genesis</strong><small>1.5.0 · Newton / elliptic / Signorini CPU</small></th>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>3. Drake</strong><small>1.57 · SAP / kLagged / hydroelastic</small></th>
+<tr><th scope="row"><strong>3. Drake</strong><small>1.59.0 · SAP / kLagged / hydroelastic</small></th>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>3. RaiSim</strong><small>2.16.0 · CPU FP64 / bisection</small></th>
+<tr><th scope="row"><strong>3. RaiSim</strong><small>2.18.1 · Native C++ CPU FP64 bisection</small></th>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>6. MuJoCo</strong><small>3.15 · PGS / elliptic</small></th>
-<td><span class="matrix-result fail">3 / 9</span></td>
+<tr><th scope="row"><strong>6. Chaos</strong><small>5.8.4 · Unreal Engine Linux Development Editor / Chaos</small></th>
+<td><span class="matrix-result mixed">5 / 9</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result mixed">2 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+</tr>
+<tr><th scope="row"><strong>7. MuJoCo</strong><small>4.0.1 · PGS / elliptic / Euler</small></th>
+<td><span class="matrix-result mixed">3 / 9</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result pass">3 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>6. Chaos</strong><small>UE 5.7.1 · Linux Editor</small></th>
-<td><span class="matrix-result mixed">3 / 9†</span></td>
-<td><span class="matrix-result fail">0 / 3</span></td>
-<td><span class="matrix-result invalid">0 / 3†</span></td>
-<td><span class="matrix-result pass">3 / 3</span></td>
-</tr>
-<tr><th scope="row"><strong>6. Bullet</strong><small>PyBullet 3.2.7 · CPU DIRECT</small></th>
+<tr><th scope="row"><strong>7. Bullet</strong><small>3.2.7 · PyBullet CPU DIRECT</small></th>
 <td><span class="matrix-result mixed">3 / 9</span></td>
 <td><span class="matrix-result mixed">2 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result mixed">1 / 3</span></td>
 </tr>
-<tr><th scope="row"><strong>9. Newton Physics</strong><small>1.6.1 · XPBD / 100 sweeps</small></th>
-<td><span class="matrix-result invalid">1 / 9†</span></td>
+<tr><th scope="row"><strong>9. Newton Physics</strong><small>1.8.0 · XPBD / 100 sweeps</small></th>
+<td><span class="matrix-result mixed">1 / 9†</span></td>
 <td><span class="matrix-result mixed">1 / 3</span></td>
 <td><span class="matrix-result invalid">0 / 3†</span></td>
 <td><span class="matrix-result invalid">0 / 3†</span></td>
 </tr>
-<tr><th scope="row"><strong>10. SOFA</strong><small>26.06.00 · rigid OBB / block GS</small></th>
+<tr><th scope="row"><strong>10. SOFA</strong><small>26.06.00 · Rigid OBB / block Gauss-Seidel</small></th>
 <td><span class="matrix-result fail">0 / 9</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result fail">0 / 3</span></td>
@@ -106,11 +106,13 @@
 </tbody>
 </table>
 </div>
-<p class="matrix-note">每通过一例得 1 分，满分 9 分，同分并列。† 表示含无效记录，仍计入分母并得 0 分。</p>
+<p class="matrix-note">每通过一例得 1 分，满分 9 分，同分并列。† 表示含无效记录，仍计入分母并得 0 分。 Chaos 的禁碰撞对照在自由落体速度检查中判为无效，另行报告。</p>
 
-评分器先核对状态与力的时间和数值，再评估运动是否达标。Chaos 三条滑动在状态与冲量的核对中超限。 {ref}`为什么判无效，查看首次越界和逐步对账 <incline-invalid-records>`。 表中历史无效项另见 [Newton Physics 的位置与速度检查](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md) 和 [PhysX 的法向冲量方向检查](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。
+[最新版逐例结果和原始数据](incline-latest.md)
 
-GIF 展示原六引擎回放。十引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。
+历史批次中，评分器先核对状态与力的时间和数值，再评估运动是否达标。Chaos 三条滑动在状态与冲量的核对中超限。 {ref}`为什么判无效，查看首次越界和逐步对账 <incline-invalid-records>`。 表中历史无效项另见 [Newton Physics 的位置与速度检查](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md) 和 [PhysX 的法向冲量方向检查](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。
+
+历史 GIF 展示原六引擎回放。十引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。
 
 ```{raw} html
 <p><a href="_static/incline-extension/static-1ms-curves.zh.svg">静止曲线</a> · <a href="_static/incline-extension/sliding-1ms-curves.zh.svg">滑动曲线</a> · <a href="_static/incline-extension/frictionless-1ms-curves.zh.svg">名义零摩擦曲线</a></p>

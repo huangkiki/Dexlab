@@ -10,7 +10,10 @@ import numpy as np
 from dexlab.incline_score import ImpulseConsistencyError, file_hash, measure_response, require_close
 
 
-SOURCE_COMMIT = '517a0073715120e114ee055b63b26c95e00d9039'
+SDK_RELEASES = {
+    '5.9.0': ('517a0073715120e114ee055b63b26c95e00d9039', 0x05090000),
+    '5.9.1': ('4f5f47733d72bc0966af6b1e469eb76acbae7d69', 0x05090100),
+}
 PROFILES = {'pgs': (0, 16448), 'pgs-friction': (0, 49216),
             'tgs': (1, 16448), 'tgs-external': (1, 81984)}
 LIMITS = dict(static_displacement_m=.001, static_speed_m_s=.001,
@@ -37,9 +40,10 @@ def vector(value, label):
 
 
 def validate_protocol(protocol):
-    if protocol['profile'] not in PROFILES or protocol['source_commit'] != SOURCE_COMMIT:
+    release = SDK_RELEASES.get(protocol['version'])
+    if protocol['profile'] not in PROFILES or release is None or protocol['source_commit'] != release[0]:
         raise ValueError('Unqualified source or profile')
-    for key, value in dict(schema_version=1, version='5.9.0', duration_s=2, score_start_s=.5,
+    for key, value in dict(schema_version=1, duration_s=2, score_start_s=.5,
                            side_m=.04, mass_kg=.064, gravity_m_s2=9.81, limits=LIMITS).items():
         if protocol[key] != value:
             raise ValueError(f'Changed protocol: {key}')
@@ -60,7 +64,8 @@ def validate_protocol(protocol):
 
 def validate_admission(protocol, case, a):
     solver, flags = PROFILES[protocol['profile']]
-    expected = dict(kind='admission', sdk_version='5.9.0', sdk_version_integer=84475904,
+    expected = dict(kind='admission', sdk_version=protocol['version'],
+                    sdk_version_integer=SDK_RELEASES[protocol['version']][1],
                     real_bytes=4, profile=protocol['profile'], requested_timestep=case['timestep'],
                     effective_timestep=float(np.float32(case['timestep'])), solver_type=solver,
                     scene_flags=flags, friction_type=0, position_iterations=8, velocity_iterations=2,
@@ -175,7 +180,7 @@ def score_campaign(root):
         if file_hash(root / name) != campaign[key]:
             raise ValueError('Changed campaign provenance')
     proof = json.loads((root / 'official-proof.json').read_text())
-    if (proof['source_commit'] != SOURCE_COMMIT or proof['binary_sha256'] != protocol['binary_sha256']
+    if (proof['source_commit'] != protocol['source_commit'] or proof['binary_sha256'] != protocol['binary_sha256']
             or campaign['binary_sha256'] != protocol['binary_sha256']
             or proof['recorder_sha256'] != protocol['recorder_sha256']
             or campaign['runner_sha256'] != protocol['runner_sha256']):

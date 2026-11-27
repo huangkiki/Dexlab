@@ -159,7 +159,8 @@ class MuJoCoPlane:
 class SuperDexPlane:
     """Official FP64 API with actual COM state and signed per-contact forces."""
 
-    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None, measure_step_timing=False, incline_angle_deg=0.):
+    def __init__(self, case, output, *, normal_parameters=None, solver_parameters=None,
+                 measure_step_timing=False, incline_angle_deg=0., expected_version="1.0.0"):
         os.environ.setdefault("SUPERDEX_PRECISION", "fp64")
         import trimesh
         from superdex import physics as p
@@ -171,8 +172,8 @@ class SuperDexPlane:
         _, normal_axis, quaternion = axes(incline_angle_deg)
         self.p, self.case = p, case
         identity = package_identity("superdex-physics-fp64")
-        if identity["version"] != "1.0.0" or not p.uses_double_precision():
-            raise ValueError("The frozen native profile requires SuperDex 1.0.0 FP64")
+        if expected_version not in ("1.0.0", "1.0.1") or identity["version"] != expected_version or not p.uses_double_precision():
+            raise ValueError(f"The frozen native profile requires SuperDex {expected_version} FP64")
         if not p.is_initialized():
             p.initialize(num_worker_threads=0)
         self.scene = p.create_scene(case.name)
