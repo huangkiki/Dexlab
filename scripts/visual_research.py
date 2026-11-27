@@ -15,6 +15,9 @@ COLORS = {
     "Newton Physics": "#D55E00",
     "PhysX": "#E69F00",
     "Drake": "#6B5B95",
+    "Chaos": "#222222",
+    "Bullet": "#A65012",
+    "SOFA": "#8B4FA5",
 }
 
 

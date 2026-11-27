@@ -5,12 +5,12 @@
 画面采用实物比例；微小变化看局部曲线。虚线是案例声明的解析／工程参照，并不代表真实材料测量。不同历史协议的结果不汇总为引擎排行榜。
 
 (incline)=
-## 六引擎斜面：相同工况，响应不同
+## 斜面接触：相同工况，响应不同
 
 40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。
 
 <div class="comparison-summary">
-  <p class="comparison-claim"><strong>结论</strong> 在这组固定配置中，没有任何引擎通过全部九例。差异集中在静止漂移、滑动受力响应，以及名义零摩擦时的有效接触。</p>
+  <p class="comparison-claim"><strong>结论</strong> 九种公开配置中，没有配置通过全部九例。新增记录显示，Chaos 三个名义零摩擦工况通过，Bullet 两个静止工况通过，SOFA 的滑动轨迹接近参考时，接触力仍可能超出门槛。</p>
   <div class="comparison-terms">
     <p><strong>实验条件</strong> MuJoCo 3.15.0、SuperDex 1.0.0、Genesis 1.4.3、Newton Physics 1.6.1、PhysX 5.9.0、Drake 1.57.0 原生斜面；每个 solver 的接触律、精度与适用配置分别记录。</p>
     <p><strong>结论边界</strong> 各批协议和准入范围保持独立；完整配置表给研究范围，不给普遍排名。#157/#159/#163/#165 的数值问题仍未全部解决。</p>
@@ -25,7 +25,7 @@
 
 ```{raw} html
 <div class="gif-evidence">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-sliding-0.001.gif" alt="六引擎斜面：相同工况，响应不同"></div>
+<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-sliding-0.001.gif" alt="斜面接触：相同工况，响应不同"></div>
 <details class="replay-fallback"><summary>静态图表与完整数据（无需 JavaScript）</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.zh.svg" alt="静态图表与完整数据（无需 JavaScript）"><ul><li>静止 · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.zh.svg">SVG</a></li><li>静止 · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.zh.svg">SVG</a></li><li>静止 · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.zh.svg">SVG</a></li><li>滑动 · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.zh.svg">SVG</a></li><li>滑动 · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.zh.svg">SVG</a></li><li>滑动 · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.zh.svg">SVG</a></li><li>名义零摩擦 · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.zh.svg">SVG</a></li><li>名义零摩擦 · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.zh.svg">SVG</a></li><li>名义零摩擦 · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.zh.svg">SVG</a></li></ul></details>
 </div>
 ```
@@ -77,10 +77,36 @@
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 </tr>
+<tr><th scope="row"><strong>Chaos</strong><small>UE 5.7.1 · Linux Editor</small></th>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result invalid">0 / 3†</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">3 / 9†</span></td>
+</tr>
+<tr><th scope="row"><strong>Bullet</strong><small>PyBullet 3.2.7 · CPU DIRECT</small></th>
+<td><span class="matrix-result mixed">2 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result mixed">1 / 3</span></td>
+<td><span class="matrix-result mixed">3 / 9</span></td>
+</tr>
+<tr><th scope="row"><strong>SOFA</strong><small>26.06.00 · rigid OBB / block GS</small></th>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 9</span></td>
+</tr>
 </tbody>
 </table>
 </div>
 <p class="matrix-note">† 无效记录保留在分母中，不计为通过；不能解释成物理失败。</p>
+
+GIF 保留原六引擎回放。九引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。
+
+```{raw} html
+<p><a href="_static/incline-extension/static-1ms-curves.zh.svg">静止曲线</a> · <a href="_static/incline-extension/sliding-1ms-curves.zh.svg">滑动曲线</a> · <a href="_static/incline-extension/frictionless-1ms-curves.zh.svg">名义零摩擦曲线</a></p>
+```
+
+[新增工况报告与原始数据](incline-extension.md)
 
 **条件：** MuJoCo 3.15.0、SuperDex 1.0.0、Genesis 1.4.3、Newton Physics 1.6.1、PhysX 5.9.0、Drake 1.57.0 原生斜面；每个 solver 的接触律、精度与适用配置分别记录。
 

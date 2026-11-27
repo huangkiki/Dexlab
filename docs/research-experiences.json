@@ -415,15 +415,15 @@
           "zh": "斜面静止与滑动",
           "en": "Resting and sliding on an incline"
         },
-        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake",
+        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA",
         "thumbnail": "docs/evidence/incline-friction/error-cost.png",
         "question": {
           "zh": "静止、滑动和低摩擦有哪些差异？",
           "en": "Where do static, sliding and low-friction cases differ?"
         },
         "finding": {
-          "zh": "六个公开配置各跑九例，没有配置全通过。页面分列静止、滑动和名义零摩擦的成绩及无效记录。",
-          "en": "None of the six published profiles passed all nine cases. The comparison separates static, sliding and nominal-zero-friction outcomes and retains invalid records."
+          "zh": "九个公开配置各跑九例。新增的三组里，Chaos 通过全部零摩擦例，Bullet 通过两个静止例和一个零摩擦例，SOFA 未达到完整判据。",
+          "en": "Nine profiles ran nine cases each. Among the added profiles, Chaos passed all zero-friction cases, Bullet passed two static and one zero-friction case, and every SOFA case exceeded a limit."
         },
         "link": "visual-comparisons.html#incline",
         "thumbnail_sha256": "1b5d51d0b31545d442d0505c3aa69c7cb4a57ac9f80c12bc536bb70d44beabd2",
@@ -835,8 +835,8 @@
         "id": "incline",
         "experience_id": "six-engine-incline",
         "title": {
-          "zh": "六引擎斜面：相同工况，响应不同",
-          "en": "Six-engine incline: shared conditions, different responses"
+          "zh": "斜面接触：相同工况，响应不同",
+          "en": "Incline contact: shared conditions, different responses"
         },
         "intro": {
           "zh": "40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。",

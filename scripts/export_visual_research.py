@@ -531,7 +531,7 @@ def pinch_videos(entries, series):
     return videos
 
 
-def plot(bundle, variant_id, language="en"):
+def plot(bundle, variant_id, language="en", *, output=OUT, formats=("svg", "png")):
     import matplotlib
 
     matplotlib.use("Agg")
@@ -620,9 +620,9 @@ def plot(bundle, variant_id, language="en"):
         else "Recorded observations | original verdicts retained | no performance ranking",
         fontsize=11,
     )
-    for suffix in ("svg", "png"):
+    for suffix in formats:
         fig.savefig(
-            OUT / (variant_id + "-curves" + (".zh" if zh else "") + "." + suffix),
+            output / (variant_id + "-curves" + (".zh" if zh else "") + "." + suffix),
             dpi=160,
             bbox_inches="tight",
             metadata={"Date": None} if suffix == "svg" else None,

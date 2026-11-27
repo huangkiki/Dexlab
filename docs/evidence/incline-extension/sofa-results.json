@@ -1,0 +1,348 @@
+{
+  "engine": "sofa",
+  "manifest_sha256": "8d15b321107aca8780a161c3c550412ba4fb3361b7a3e9d0223fefc77e6af7a4",
+  "cases": [
+    {
+      "id": "static-d0.9-h0.002",
+      "regime": "static",
+      "timestep": 0.002,
+      "hashes": {
+        "states.csv": "1896447281220696cdd7eb145f89a1a1064d44317d267df697d588d53eb7c918",
+        "readback.json": "8e953636f148003b3eaa88b895aa39a671bad8765c2b2c9964b9375b885ef73d",
+        "impulses.csv": "b5bdb6692e4e25a3b9a34db06ee5c1e50b13dfae0306145bfaf97171a765a9c1",
+        "constraint-rows.csv": "18f2e0c94b5d0306035f2ada9884cfe13681fe051a13078eda5f058108d56752"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 0.026003773056251466,
+        "static_speed_m_s": 0.09920992849913816,
+        "sliding_velocity_rmse_m_s": 0.024800349715431307,
+        "sliding_position_rmse_m": 0.006178935326143653,
+        "acceleration_error_m_s2": 0.03203378730108142,
+        "rotation_rad": 0.07625266459207868,
+        "penetration_m": 0.00031056423858885976,
+        "force_balance_rmse_n": 0.4619028700970736
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 0.03203378730108142,
+      "full_velocity_rmse_m_s": 0.022726943618986112,
+      "full_position_rmse_m": 0.008651861531313702,
+      "impulse_residual_max_ns": 9.406826964681546e-17
+    },
+    {
+      "id": "static-d0.9-h0.001",
+      "regime": "static",
+      "timestep": 0.001,
+      "hashes": {
+        "states.csv": "654957c9ffcd5e18b079508e606b976ceea6b336f32d6cb492faa154685ea4ab",
+        "readback.json": "19f98d9aca83c9ee0fc1d29bec899263faf8d7e1c7ceb3764bdb5b0315ad4084",
+        "impulses.csv": "742531bb817cbb98e6f6b2da1467cd34ca4bbf61f1e1155e25d0ed8011ef50ed",
+        "constraint-rows.csv": "6d648347eb80b3cb8bfb382efa75db16e6e4bcb9dfda0e55afa73063915475a1"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 0.021524322822469473,
+        "static_speed_m_s": 0.1128410805364179,
+        "sliding_velocity_rmse_m_s": 0.025507002745635898,
+        "sliding_position_rmse_m": 0.005272549655179312,
+        "acceleration_error_m_s2": 0.03404454825275645,
+        "rotation_rad": 0.12720289536376073,
+        "penetration_m": 0.00022366853235613812,
+        "force_balance_rmse_n": 0.6413729372257894
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 0.03404454825275645,
+      "full_velocity_rmse_m_s": 0.02259906270207838,
+      "full_position_rmse_m": 0.006017024836121006,
+      "impulse_residual_max_ns": 8.626639615888836e-16
+    },
+    {
+      "id": "static-d0.9-h0.0005",
+      "regime": "static",
+      "timestep": 0.0005,
+      "hashes": {
+        "states.csv": "08fdcef8e278d1d504b293598586c061ad30684b160ac57f63a5933b267eadfd",
+        "readback.json": "bf5c411096151ae6ce5a23c996fc191f1e257fbd068fe72ca7095f6d2daf53ad",
+        "impulses.csv": "f243fe241fbe4f2ba0e936808308463ce1c1033496c4cf4a3f68cbdc65c2c058",
+        "constraint-rows.csv": "b2d39cc6bd34bf78ee98dc3d34c22a89d02180567fc0c61882b127a875a17b2d"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 0.00570007436091121,
+        "static_speed_m_s": 0.029553016129525874,
+        "sliding_velocity_rmse_m_s": 0.005376176242222068,
+        "sliding_position_rmse_m": 0.0013564823709393456,
+        "acceleration_error_m_s2": 0.0062696669873304545,
+        "rotation_rad": 0.02722330861274314,
+        "penetration_m": 2.803413156233711e-05,
+        "force_balance_rmse_n": 0.47657532406192155
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "static_displacement_m": false,
+        "static_speed_m_s": false,
+        "continuous_support": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 0.0,
+      "acceleration_fitted_m_s2": 0.0062696669873304545,
+      "full_velocity_rmse_m_s": 0.004973915116024424,
+      "full_position_rmse_m": 0.002032299102215779,
+      "impulse_residual_max_ns": 2.5138049801415283e-16
+    },
+    {
+      "id": "sliding-d0.9-h0.002",
+      "regime": "sliding",
+      "timestep": 0.002,
+      "hashes": {
+        "states.csv": "2e38cde768de8d8a8c3dadcf314eeeb0e777e45ea2eaeac93b318e6c3b53860d",
+        "readback.json": "1c151408a7cec504040439be7dfdf4bfdacc1d3272635898c22f7058c17d6859",
+        "impulses.csv": "b61aef036a05f94dc49c10484d8c12e1cac88794a12984f7a3fd987793b0c200",
+        "constraint-rows.csv": "486d5a91cdb4ffed02f0e891e99118ffd770abb25c71f8e769cc506a52b3823e"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 3.2386949102762843,
+        "static_speed_m_s": 3.2640890374208182,
+        "sliding_velocity_rmse_m_s": 0.02276171275958025,
+        "sliding_position_rmse_m": 0.0008037829843816105,
+        "acceleration_error_m_s2": 0.001846915041339381,
+        "rotation_rad": 0.23594797256364303,
+        "penetration_m": 0.000644954155193684,
+        "force_balance_rmse_n": 0.7853045792931537
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": false,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.6106909784075965,
+      "full_velocity_rmse_m_s": 0.02172645281434323,
+      "full_position_rmse_m": 0.011727569120880375,
+      "impulse_residual_max_ns": 1.4462405910833351e-16
+    },
+    {
+      "id": "sliding-d0.9-h0.001",
+      "regime": "sliding",
+      "timestep": 0.001,
+      "hashes": {
+        "states.csv": "f92cba847ce270919cb08cc0c40b4a80de7df7195f7233d1d3d34fd5a68ad061",
+        "readback.json": "40c72f857a60b72ac1ef04858a92bb9a142b44268c6c7ccb6b3784098659cf4a",
+        "impulses.csv": "769ee48ca94005d6802ab780de640c2ad9183d6e58bc62f720d33378e63b068b",
+        "constraint-rows.csv": "a74273fb9f81760f89d93beb96f62a4a896396a5acaca7649ad2079b5864881a"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 3.227985621383127,
+        "static_speed_m_s": 3.225036777851802,
+        "sliding_velocity_rmse_m_s": 0.00940690339363394,
+        "sliding_position_rmse_m": 0.003621203308972981,
+        "acceleration_error_m_s2": 0.0004278640900579056,
+        "rotation_rad": 0.05317794504656651,
+        "penetration_m": 0.00014906090280542017,
+        "force_balance_rmse_n": 0.6680746929644442
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.609271927456315,
+      "full_velocity_rmse_m_s": 0.008788748182945564,
+      "full_position_rmse_m": 0.00585739050732583,
+      "impulse_residual_max_ns": 8.210344790743216e-16
+    },
+    {
+      "id": "sliding-d0.9-h0.0005",
+      "regime": "sliding",
+      "timestep": 0.0005,
+      "hashes": {
+        "states.csv": "aead1a65a7c6e20f1c71108a5ca310d079a631de1a7181bda22658f9e993ebf8",
+        "readback.json": "466082ef5bc8520905dd9e4e7184b6eb2884d9eb1cb53c1031c6530b288404a4",
+        "impulses.csv": "2bb72d693706f047c14b9447d05ebb1d5093ca8f79242ddfe47465d65c9db692",
+        "constraint-rows.csv": "031e1876e6faa4bdbf32f091a2b5899882ad755155adfc831e5f55eef08425a5"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 3.222511912046786,
+        "static_speed_m_s": 3.219508830932781,
+        "sliding_velocity_rmse_m_s": 0.0049588506495730445,
+        "sliding_position_rmse_m": 0.00027459720901757285,
+        "acceleration_error_m_s2": 0.00018815136380689879,
+        "rotation_rad": 0.018696506457010414,
+        "penetration_m": 5.457835127364863e-05,
+        "force_balance_rmse_n": 0.7350226536502619
+      },
+      "checks": {
+        "rotation_rad": false,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": false
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 1.608844063366257,
+      "acceleration_fitted_m_s2": 1.609032214730064,
+      "full_velocity_rmse_m_s": 0.004733873370603826,
+      "full_position_rmse_m": 0.0027454987649984594,
+      "impulse_residual_max_ns": 4.957758743648972e-16
+    },
+    {
+      "id": "frictionless-d0.9-h0.002",
+      "regime": "frictionless",
+      "timestep": 0.002,
+      "hashes": {
+        "states.csv": "292fdb080890ced5201d9f8d43a3fda562c7b288e29bec83b48e3193fb56a1c3",
+        "readback.json": "cb2db3e121f2857724851a127d5286ea9e81a8428dbac94c67d3fb6f55e7e5e1",
+        "impulses.csv": "5b592a02715f474428c5e6bf024facbb159fec94a67449c40b73385d4c267509",
+        "constraint-rows.csv": "de5c150d932369f4084156bd26c1b9515df3014193f49ac5f6c914425fc47281"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 5.08310769457637,
+        "static_speed_m_s": 5.0780296649114565,
+        "sliding_velocity_rmse_m_s": 1.910254575839462e-15,
+        "sliding_position_rmse_m": 0.0021995841738213806,
+        "acceleration_error_m_s2": 5.329070518200751e-15,
+        "rotation_rad": 0.0015915391036959792,
+        "penetration_m": 6.34119400389592e-05,
+        "force_balance_rmse_n": 0.2791371564290978
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.5390148324557233,
+      "full_velocity_rmse_m_s": 2.4757773037366415e-15,
+      "full_position_rmse_m": 0.0029325346528391344,
+      "impulse_residual_max_ns": 1.5276114520536237e-16
+    },
+    {
+      "id": "frictionless-d0.9-h0.001",
+      "regime": "frictionless",
+      "timestep": 0.001,
+      "hashes": {
+        "states.csv": "adeb9ba0594f30d3f8851e959d2aac689d1ea5d12d0df704c3dfb6688cb42dcb",
+        "readback.json": "352e5495d3380358aa65d3675b1b7ae44a4cfb69e70f58ab473eb76603507198",
+        "impulses.csv": "3fcb257ef77fc276f086a3c4eb72bdea048f24868bebfc04f8cc9216ab08182c",
+        "constraint-rows.csv": "bbc46fba87b7dbd23fb6ff9cb9ef92bc8d9a34e2011ac55e90572e65a19ccbcc"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 5.080568681204611,
+        "static_speed_m_s": 5.078029667278913,
+        "sliding_velocity_rmse_m_s": 1.5179907048985738e-09,
+        "sliding_position_rmse_m": 0.0010996093447603293,
+        "acceleration_error_m_s2": 2.2912245434270062e-09,
+        "rotation_rad": 0.00039741858360732644,
+        "penetration_m": 1.5787404074776856e-05,
+        "force_balance_rmse_n": 0.09261222566764735
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.539014834746953,
+      "full_velocity_rmse_m_s": 1.3147271708590238e-09,
+      "full_position_rmse_m": 0.0014660844738547088,
+      "impulse_residual_max_ns": 1.154216218059058e-16
+    },
+    {
+      "id": "frictionless-d0.9-h0.0005",
+      "regime": "frictionless",
+      "timestep": 0.0005,
+      "hashes": {
+        "states.csv": "6f12c2aaaf4b64bc8b7ba3ef18afd2a0c70cea837f114540dfcf4eb8a920c147",
+        "readback.json": "5191abb36bd4f6325a068de2756c008869b2b75ccd68937b21f9edd79456d57a",
+        "impulses.csv": "9723ffff1b7c81ee9c4144634d36510a9fafb6dde899cabc33183e160c42a1ed",
+        "constraint-rows.csv": "09fab0e978ebc01b1279c8153cc74d961bc31d950d5a4dda898fcf6d2954bc3b"
+      },
+      "status": "fail",
+      "metrics": {
+        "static_displacement_m": 5.079299172327759,
+        "static_speed_m_s": 5.078029664911449,
+        "sliding_velocity_rmse_m_s": 2.477633511336659e-13,
+        "sliding_position_rmse_m": 0.0005497586442965684,
+        "acceleration_error_m_s2": 2.8466118351389014e-13,
+        "rotation_rad": 0.00010377156673999103,
+        "penetration_m": 4.050407866849903e-06,
+        "force_balance_rmse_n": 0.08399631108852852
+      },
+      "checks": {
+        "rotation_rad": true,
+        "penetration_m": true,
+        "force_balance_rmse_n": false,
+        "sliding_velocity_rmse_m_s": true,
+        "sliding_position_rmse_m": true,
+        "acceleration_error_m_s2": true,
+        "continuous_support": true
+      },
+      "passed": false,
+      "acceleration_reference_m_s2": 2.5390148324557287,
+      "acceleration_fitted_m_s2": 2.5390148324560133,
+      "full_velocity_rmse_m_s": 2.1327545379543107e-13,
+      "full_position_rmse_m": 0.0007329962568175995,
+      "impulse_residual_max_ns": 6.375643477352295e-17
+    },
+    {
+      "id": "negative-no-floor-1ms",
+      "regime": "static",
+      "timestep": 0.001,
+      "hashes": {
+        "states.csv": "df39f65317dd89574ceb72fa32195ec93c865b4eb9ba2f3954799556409c2c0e",
+        "readback.json": "996e3f2aecf43abfe278188e6e3a19be0253118f445b3a40ba379c01769e3c09",
+        "impulses.csv": "5476aea4ec6cd9e96fc187cceef984b92195179dceb7943f11c04ecdd0b40076",
+        "constraint-rows.csv": "9f6e01885a1e6a6a28539e0c880a6344e262e41fdac1eb2b9d4b8ee10a291cfe"
+      },
+      "status": "negative-rejected"
+    }
+  ]
+}

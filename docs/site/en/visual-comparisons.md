@@ -5,12 +5,12 @@ Read every experiment in the same order: conclusion and criteria first, then the
 Replay geometry keeps physical proportions; inspect small changes in the curves. Dashed lines are the declared analytical/engineering references, not measured material truth. Historical protocols do not form a universal engine ranking.
 
 (incline)=
-## Six-engine incline: shared conditions, different responses
+## Incline contact: shared conditions, different responses
 
 A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at three timesteps. Curves and replays retain the original passes, failures and invalid records.
 
 <div class="comparison-summary">
-  <p class="comparison-claim"><strong>Conclusion</strong> Under these fixed settings, no engine passes all nine cases. The differences separate into static drift, sliding force response, and effective contact at nominal zero friction.</p>
+  <p class="comparison-claim"><strong>Conclusion</strong> None of the nine published profiles passed all nine cases. Chaos passed all three nominal-zero-friction cases. Bullet passed two static cases. SOFA could stay close to the sliding reference while exceeding the contact-force limit.</p>
   <div class="comparison-terms">
     <p><strong>Setup</strong> Native incline cohorts: MuJoCo 3.15.0, SuperDex 1.0.0, Genesis 1.4.3, Newton Physics 1.6.1, PhysX 5.9.0 and Drake 1.57.0; each records contact law, precision and applicable profiles.</p>
     <p><strong>Scope</strong> Cohort protocols and admission scope remain separate. The full matrix maps research scope, not universal rank. Numerical work remains in #157/#159/#163/#165.</p>
@@ -25,7 +25,7 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 
 ```{raw} html
 <div class="gif-evidence">
-<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-sliding-0.001.gif" alt="Six-engine incline: shared conditions, different responses"></div>
+<div class="visual-hero"><img loading="lazy" src="_static/visual/incline-sliding-0.001.gif" alt="Incline contact: shared conditions, different responses"></div>
 <details class="replay-fallback"><summary>Static figures and full data (no JavaScript required)</summary><img loading="lazy" src="_static/visual/incline-static-0.001-curves.svg" alt="Static figures and full data (no JavaScript required)"><ul><li>Static · 1 ms: <a href="_static/visual/incline-static-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.001-curves.svg">SVG</a></li><li>Static · 2 ms: <a href="_static/visual/incline-static-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.002-curves.svg">SVG</a></li><li>Static · 0.5 ms: <a href="_static/visual/incline-static-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-static-0.0005-curves.svg">SVG</a></li><li>Sliding · 1 ms: <a href="_static/visual/incline-sliding-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.001-curves.svg">SVG</a></li><li>Sliding · 2 ms: <a href="_static/visual/incline-sliding-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.002-curves.svg">SVG</a></li><li>Sliding · 0.5 ms: <a href="_static/visual/incline-sliding-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-sliding-0.0005-curves.svg">SVG</a></li><li>Nominal zero friction · 1 ms: <a href="_static/visual/incline-frictionless-0.001.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.001-curves.svg">SVG</a></li><li>Nominal zero friction · 2 ms: <a href="_static/visual/incline-frictionless-0.002.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.002-curves.svg">SVG</a></li><li>Nominal zero friction · 0.5 ms: <a href="_static/visual/incline-frictionless-0.0005.json.gz">JSON.gz</a> · <a href="_static/visual/incline-frictionless-0.0005-curves.svg">SVG</a></li></ul></details>
 </div>
 ```
@@ -77,10 +77,36 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 <td><span class="matrix-result pass">3 / 3</span></td>
 <td><span class="matrix-result mixed">6 / 9</span></td>
 </tr>
+<tr><th scope="row"><strong>Chaos</strong><small>UE 5.7.1 · Linux Editor</small></th>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result invalid">0 / 3†</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">3 / 9†</span></td>
+</tr>
+<tr><th scope="row"><strong>Bullet</strong><small>PyBullet 3.2.7 · CPU DIRECT</small></th>
+<td><span class="matrix-result mixed">2 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result mixed">1 / 3</span></td>
+<td><span class="matrix-result mixed">3 / 9</span></td>
+</tr>
+<tr><th scope="row"><strong>SOFA</strong><small>26.06.00 · rigid OBB / block GS</small></th>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result fail">0 / 9</span></td>
+</tr>
 </tbody>
 </table>
 </div>
 <p class="matrix-note">† Invalid records remain in the denominator; they are not passes and are not physical failures.</p>
+
+The GIF retains the original six-engine replay. The nine-engine curves use the same 1 ms conditions. Dotted lines mark invalid records.
+
+```{raw} html
+<p><a href="_static/incline-extension/static-1ms-curves.svg">Static curves</a> · <a href="_static/incline-extension/sliding-1ms-curves.svg">Sliding curves</a> · <a href="_static/incline-extension/frictionless-1ms-curves.svg">Nominal-zero-friction curves</a></p>
+```
+
+[New cases and original data](incline-extension.md)
 
 **Conditions：** Native incline cohorts: MuJoCo 3.15.0, SuperDex 1.0.0, Genesis 1.4.3, Newton Physics 1.6.1, PhysX 5.9.0 and Drake 1.57.0; each records contact law, precision and applicable profiles.
 

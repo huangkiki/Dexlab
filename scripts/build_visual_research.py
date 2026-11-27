@@ -114,8 +114,8 @@ def replay_html(case, language):
 
 COMPARISON_CLAIMS = {
     "incline": {
-        "zh": "在这组固定配置中，没有任何引擎通过全部九例。差异集中在静止漂移、滑动受力响应，以及名义零摩擦时的有效接触。",
-        "en": "Under these fixed settings, no engine passes all nine cases. The differences separate into static drift, sliding force response, and effective contact at nominal zero friction.",
+        "zh": "九种公开配置中，没有配置通过全部九例。新增记录显示，Chaos 三个名义零摩擦工况通过，Bullet 两个静止工况通过，SOFA 的滑动轨迹接近参考时，接触力仍可能超出门槛。",
+        "en": "None of the nine published profiles passed all nine cases. Chaos passed all three nominal-zero-friction cases. Bullet passed two static cases. SOFA could stay close to the sliding reference while exceeding the contact-force limit.",
     },
     "normal": {
         "zh": "参数校准可以把这组夹具的加载响应带到合成目标附近，但固定参数直接迁移到其他质量时会失效；明确写出质量补偿后，两个迁移载荷才重新接近目标。",
@@ -231,7 +231,37 @@ def replay_guide(case, language):
     )
 
 
-def comparison_table(case, language):
+def incline_extension_rows(root):
+    evidence = root / "docs/evidence/incline-extension"
+    profiles = [
+        ("chaos", "Chaos", "UE 5.7.1 · Linux Editor"),
+        ("bullet", "Bullet", "PyBullet 3.2.7 · CPU DIRECT"),
+        ("sofa", "SOFA", "26.06.00 · rigid OBB / block GS"),
+    ]
+    for key, label, configuration in profiles:
+        rows = json.loads((evidence / f"{key}-results.json").read_text())["cases"]
+        positive = [row for row in rows if row["id"] != "negative-no-floor-1ms"]
+        groups = [[row for row in positive if row["regime"] == name]
+                  for name in ("static", "sliding", "frictionless")]
+        if len(positive) != 9 or any(
+            {row["timestep"] for row in group} != {.002, .001, .0005} for group in groups
+        ):
+            raise ValueError(f"Incomplete published incline extension: {key}")
+        cells = []
+        for group in [*groups, positive]:
+            passed = sum(row["status"] == "pass" for row in group)
+            invalid = sum(row["status"] == "invalid" for row in group)
+            if passed == len(group):
+                state = "pass"
+            elif invalid == len(group):
+                state = "invalid"
+            else:
+                state = "mixed" if passed else "fail"
+            cells.append((f"{passed} / {len(group)}" + ("†" if invalid else ""), state))
+        yield label, configuration, cells
+
+
+def comparison_table(case, language, root):
     zh = language == "zh"
     if case["id"] == "incline":
         caption = (
@@ -252,6 +282,7 @@ def comparison_table(case, language):
             ("PhysX", "5.9.0 · PGS / patch friction", [("3 / 3", "pass"), ("2 / 3†", "mixed"), ("2 / 3", "mixed"), ("7 / 9†", "mixed")]),
             ("Drake", "1.57 · SAP / kLagged / hydroelastic", [("3 / 3", "pass"), ("0 / 3", "fail"), ("3 / 3", "pass"), ("6 / 9", "mixed")]),
         ]
+        rows.extend(incline_extension_rows(root))
         note = (
             "† 无效记录保留在分母中，不计为通过；不能解释成物理失败。"
             if zh
@@ -320,7 +351,7 @@ def comparison_table(case, language):
     return "\n".join(lines)
 
 
-def comparisons(index, experiences, language):
+def comparisons(index, experiences, language, root):
     zh = language == "zh"
     lines = [
         "# "
@@ -357,8 +388,31 @@ def comparisons(index, experiences, language):
             comparison_summary(case, row, language),
             replay_guide(case, language),
             replay_html(case, language),
-            comparison_table(case, language),
+            comparison_table(case, language, root),
         ]
+        if case["id"] == "incline":
+            lines += [
+                (
+                    "GIF 保留原六引擎回放。九引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。"
+                    if zh else
+                    "The GIF retains the original six-engine replay. The nine-engine curves use the same 1 ms conditions. Dotted lines mark invalid records."
+                ),
+                "",
+                (
+                    "```{raw} html\n"
+                    '<p><a href="_static/incline-extension/static-1ms-curves.zh.svg">静止曲线</a> · '
+                    '<a href="_static/incline-extension/sliding-1ms-curves.zh.svg">滑动曲线</a> · '
+                    '<a href="_static/incline-extension/frictionless-1ms-curves.zh.svg">名义零摩擦曲线</a></p>\n'
+                    "```\n\n[新增工况报告与原始数据](incline-extension.md)"
+                    if zh else
+                    "```{raw} html\n"
+                    '<p><a href="_static/incline-extension/static-1ms-curves.svg">Static curves</a> · '
+                    '<a href="_static/incline-extension/sliding-1ms-curves.svg">Sliding curves</a> · '
+                    '<a href="_static/incline-extension/frictionless-1ms-curves.svg">Nominal-zero-friction curves</a></p>\n'
+                    "```\n\n[New cases and original data](incline-extension.md)"
+                ),
+                "",
+            ]
         for key, z, e in labels:
             lines += ["**" + (z if zh else e) + "：** " + row[language][key], ""]
         for key in ("selection", "reference", "parameters"):
@@ -412,7 +466,7 @@ def update(root=ROOT, check_only=False):
         save(path, before + start + "\n" + block + "\n" + end + after)
         save(
             root / f"docs/site/{lang}/visual-comparisons.md",
-            comparisons(index, manifest["experiences"], lang),
+            comparisons(index, manifest["experiences"], lang, root),
         )
     if check_only and stale:
         raise ValueError("Stale visual pages: " + ", ".join(stale))

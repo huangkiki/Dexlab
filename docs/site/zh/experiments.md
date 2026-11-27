@@ -30,8 +30,8 @@ AMP 记录器一致性失败 <amp-lift>
 <div class="task-register-labels" aria-hidden="true"><span>任务与所用仿真</span><span>实验结果</span></div>
 <article class="task-register-entry" id="experiment-highlight-incline">
 <div><h3><a href="visual-comparisons.html#incline">斜面静止与滑动</a></h3>
-<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p></div>
-<p class="task-register-result">六个公开配置各跑九例，没有配置全通过。页面分列静止、滑动和名义零摩擦的成绩及无效记录。</p>
+<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA</p></div>
+<p class="task-register-result">九个公开配置各跑九例。新增的三组里，Chaos 通过全部零摩擦例，Bullet 通过两个静止例和一个零摩擦例，SOFA 未达到完整判据。</p>
 </article>
 <article class="task-register-entry" id="experiment-highlight-normal">
 <div><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3>

@@ -30,8 +30,8 @@ AMP recorder parity failure <amp-lift>
 <div class="task-register-labels" aria-hidden="true"><span>Task and simulator</span><span>Observed outcome</span></div>
 <article class="task-register-entry" id="experiment-highlight-incline">
 <div><h3><a href="visual-comparisons.html#incline">Resting and sliding on an incline</a></h3>
-<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake</p></div>
-<p class="task-register-result">None of the six published profiles passed all nine cases. The comparison separates static, sliding and nominal-zero-friction outcomes and retains invalid records.</p>
+<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA</p></div>
+<p class="task-register-result">Nine profiles ran nine cases each. Among the added profiles, Chaos passed all zero-friction cases, Bullet passed two static and one zero-friction case, and every SOFA case exceeded a limit.</p>
 </article>
 <article class="task-register-entry" id="experiment-highlight-normal">
 <div><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3>

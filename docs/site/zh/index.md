@@ -396,7 +396,7 @@
           <dd>每个引擎的接触律、预算和适用范围不同，九例结果只支持逐配置判断；没有一套引擎通过全部九例，也不能据此生成通用 solver 排名。</dd>
         </div>
       </dl>
-      <a href="visual-comparisons.html#incline">查看六引擎矩阵 →</a>
+      <a href="visual-comparisons.html#incline">查看斜面对照矩阵 →</a>
     </article>
 
     <article class="validity-record" data-reveal-item>
