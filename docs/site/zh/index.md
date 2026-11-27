@@ -181,7 +181,7 @@
       <article class="evidence-panel" id="panel-incline" data-evidence="incline" data-evidence-reveal role="region" aria-labelledby="evidence-incline-title">
         <header class="evidence-panel-head">
           <span>05</span>
-          <strong>六引擎斜面</strong>
+          <strong>斜面接触对照</strong>
           <small>逐配置判定</small>
         </header>
         <div class="evidence-media">
@@ -192,7 +192,7 @@
           <h3 id="evidence-incline-title">同一任务，接触表达和数值门禁仍会改变结果。</h3>
           <p class="evidence-verdict">静止、滑动和名义零摩擦逐配置判定，不合并成引擎总分。</p>
           <dl class="evidence-ledger">
-            <div><dt>控制变量</dt><dd>三种接触条件和三个步长，六个固定引擎配置</dd></div>
+            <div><dt>控制变量</dt><dd>三种接触条件和三个步长，十个固定引擎配置</dd></div>
             <div><dt>原生读回</dt><dd>位移、速度、支撑力、几何重叠与观测有效性</dd></div>
             <div><dt>判据结果</dt><dd><strong>通过、失败和无效记录分别保留</strong></dd></div>
             <div><dt>适用范围</dt><dd>不同协议与预算不拼成通用 solver 排名</dd></div>
@@ -379,7 +379,7 @@
 
     <article class="validity-record" data-reveal-item>
       <header>
-        <p>05 / 六引擎斜面</p>
+        <p>05 / 十引擎斜面</p>
         <h3>解析参照、三个步长和无效记录一起读。</h3>
       </header>
       <dl>
@@ -389,7 +389,7 @@
         </div>
         <div>
           <dt>改参后如何回归</dt>
-          <dd>步长本来就是九例交叉设计；接触模型、精度和执行路径随完整 profile 冻结。正例、负例、失败和无效记录全部保留在分母中，不能用某次参数调整后的最好结果替换历史。</dd>
+          <dd>步长本来就是九例交叉设计；接触模型、精度和执行路径随完整 profile 冻结。九个正式工况的通过、失败和无效记录均计入分母，负对照单列，不能用某次参数调整后的最好结果替换历史。</dd>
         </div>
         <div>
           <dt>不能证明</dt>

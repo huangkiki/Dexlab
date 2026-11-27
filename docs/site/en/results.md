@@ -1,7 +1,7 @@
 # Results and failures
 
 ```{raw} html
-<p><a href="index.html#experiments">Representative experiments</a> · <a href="experiments.html">Experiment index and raw records</a> · <a href="visual-comparisons.html#incline">Nine-engine incline comparison</a> · <a href="index.html#physical-validity">Physical checks and hardware evidence</a></p>
+<p><a href="index.html#experiments">Representative experiments</a> · <a href="experiments.html">Experiment index and raw records</a> · <a href="visual-comparisons.html#incline">Ten-engine incline comparison</a> · <a href="index.html#physical-validity">Physical checks and hardware evidence</a></p>
 ```
 
 ```{toctree}
@@ -12,6 +12,7 @@ Findings <experience>
 Coverage <coverage>
 Visual comparisons <visual-comparisons>
 Chaos, Bullet and SOFA incline records <incline-extension>
+RaiSim’s nine incline cases <raisim-incline>
 Diagnosis <diagnosis>
 Sim-to-Real Gap <failure-root-cause-atlas>
 Solver failure audit <solver-failure-audit>

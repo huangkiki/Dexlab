@@ -14,13 +14,14 @@ Uranus generative environment backend <uranus-backend>
 
 Matching visual meshes, parameter names or joint targets does not establish matching physical problems.
 
-## Chaos Physics, Bullet Physics and SOFA
+## Chaos Physics, Bullet Physics, SOFA and RaiSim
 
 | Engine | Native entry point | What to inspect | Current evidence |
 | --- | --- | --- | --- |
 | [Chaos Physics](chaos-learning/index.md) | Unreal Engine 5 physics system | Use Chaos Visual Debugger for body state, collision and joint constraints. Separate game frames from physics substeps. | [Native incline runs](incline-extension.md). The CVD lesson has a separate scope. |
 | [Bullet Physics](bullet-learning/index.md) | Bullet C++ SDK, taught through PyBullet CPU `DIRECT` | Step explicitly and read normal force, poses and joint state. | [Native incline runs](incline-extension.md) and paired course drop controls. |
 | SOFA | 26.06.00 | Rigid oriented boxes and constraint contact. | [Native incline runs](incline-extension.md) |
+| RaiSim | 2.16.0 · CPU FP64 | Step explicitly and read contact frames, impulses and their objects. | [Nine incline cases](raisim-incline.md) · [Bumi motion imitation](https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.md) |
 
 See the [benchmark matrix](coverage.md) for qualification and task coverage. For a comparison, align units, collision shapes and observation times first. Chaos hit-event impulses and Bullet’s per-step normal forces have different timing semantics.
 

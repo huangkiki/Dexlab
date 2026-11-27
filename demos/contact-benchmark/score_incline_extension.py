@@ -1,4 +1,4 @@
-"""Audit native Chaos, Bullet and SOFA traces against the frozen incline cases."""
+"""Audit native traces against the frozen incline cases."""
 
 import argparse
 import csv
@@ -50,6 +50,26 @@ def readback_checks(engine, readback, protocol, case, normal, rotation):
         require_close(float(readback["response_params"].removeprefix("mu=")), case["friction"],
                       "contact manager friction")
         return
+    if engine == "raisim":
+        require_close(readback["gravity_m_s2"], [0, 0, -gravity], "native gravity")
+        require_close(readback["box_side_m"], [side] * 3, "native side length")
+        require_close(readback["timestep_s"], case["timestep"], "native fixed timestep")
+        if readback["version"] != "2.16.0" or readback["sleeping_enabled"]:
+            raise ValueError("Unexpected RaiSim version or sleeping configuration")
+        floor_fields = ("floor_center_m", "floor_quaternion_wxyz", "floor_size_m")
+        if case.get("negative_no_floor"):
+            if any(readback[field] is not None for field in floor_fields):
+                raise ValueError("Negative control still has a floor collision shape")
+        else:
+            require_close(readback["floor_center_m"], -0.1 * normal, "slab center")
+            require_close(readback["floor_quaternion_wxyz"], rotation, "slab orientation")
+            require_close(readback["floor_size_m"], [40, 40, .2], "slab size")
+        material = readback["material_pair"]
+        require_close([material["static_friction"], material["dynamic_friction"]],
+                      [case["friction"]] * 2, "native friction pair")
+        require_close([material["restitution"], material["rolling_friction"], material["spinning_friction"]],
+                      [0, 0, 0], "native restitution and rolling friction")
+        return
     settings = readback["settings"]
     require_close([settings[f"gravityAcceleration{axis}"] for axis in "XYZ"], [0, 0, -gravity],
                   "native gravity")
@@ -96,6 +116,8 @@ def read_case(engine, protocol, case, directory):
     dt = state_data[1:, 2]
     if engine == "sofa":
         summed, contacts = sofa_impulses(directory, steps)
+    elif engine == "raisim":
+        summed, contacts = raisim_impulses(directory, steps, readback["solver"]["max_iterations"])
     else:
         summed, contacts = pair_impulses(engine, case, directory, dt)
     distances = geometric_distance(states[1:, 1:4], states[1:, 4:8], normal, protocol["side_m"])
@@ -126,6 +148,32 @@ def step_indices(native_steps, total):
     return steps - 1
 
 
+def raisim_impulses(directory, steps, max_iterations):
+    telemetry = load_columns(directory / "solver.csv", ("step", "iterations", "stalled"))
+    require_close(telemetry[:, 0], np.arange(1, steps + 1), "RaiSim solver step sequence", 0)
+    iterations, stalled = telemetry[:, 1], telemetry[:, 2]
+    if (np.any(iterations % 1) or np.any((iterations < 0) | (iterations > max_iterations)) or
+            not np.isin(stalled, [0, 1]).all()):
+        raise ValueError("Malformed RaiSim solver telemetry")
+    frame_fields = tuple(f"f{row}{column}" for row in range(3) for column in range(3))
+    recorded = load_columns(directory / "contacts.csv", (
+        "step", "distance_m", "box_is_a", "local_jx_ns", "local_jy_ns", "local_jz_ns",
+        *frame_fields, "px_m", "py_m", "pz_m",
+    ))
+    indices = step_indices(recorded[:, 0], steps)
+    box_is_a = recorded[:, 2]
+    if not np.isin(box_is_a, [0, 1]).all():
+        raise ValueError("Invalid RaiSim contact participant")
+    frames = recorded[:, 6:15].reshape(-1, 3, 3)
+    require_close(frames @ frames.swapaxes(1, 2), np.broadcast_to(np.eye(3), frames.shape),
+                  "RaiSim contact frames", 1e-8)
+    # Native rows express the world-to-contact rotation and the impulse on object A.
+    impulses = np.einsum("nij,ni->nj", frames, recorded[:, 3:6]) * (2 * box_is_a[:, None] - 1)
+    summed = np.zeros((steps, 3))
+    np.add.at(summed, indices, impulses)
+    return summed, np.bincount(indices, minlength=steps)
+
+
 def pair_impulses(engine, case, directory, dt):
     extra = ("mu_static", "mu_dynamic") if engine == "chaos" else (
         "normal_force_n", "nx", "ny", "nz", "lateral1_n", "tx1", "ty1", "tz1",
@@ -150,7 +198,10 @@ def pair_impulses(engine, case, directory, dt):
 
 def score_case(engine, protocol, case, directory):
     result = {"id": case["id"], "regime": case["regime"], "timestep": case["timestep"]}
-    native_files = ("impulses.csv", "constraint-rows.csv") if engine == "sofa" else ("contacts.csv",)
+    native_files = {
+        "sofa": ("impulses.csv", "constraint-rows.csv"),
+        "raisim": ("contacts.csv", "solver.csv"),
+    }.get(engine, ("contacts.csv",))
     result["hashes"] = {
         name: file_hash(directory / name) for name in ("states.csv", "readback.json", *native_files)
         if (directory / name).is_file()
@@ -185,7 +236,7 @@ def assert_no_floor(protocol, case, trace):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("engine", choices=["bullet", "chaos", "sofa"])
+    parser.add_argument("engine", choices=["bullet", "chaos", "sofa", "raisim"])
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--records", type=Path, required=True)
     parser.add_argument("--step", type=float)

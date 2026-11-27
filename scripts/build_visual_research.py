@@ -45,11 +45,14 @@ def catalogue(index, language):
             engine = row["engines"]
             if isinstance(engine, dict):
                 engine = engine[language]
+            link = row["link"]
+            if isinstance(link, dict):
+                link = link[language]
             alias = HIGHLIGHT_ANCHORS.get(row["id"])
             anchor = f' id="experiment-highlight-{alias}"' if alias else ""
             lines += [
                 f'<article class="task-register-entry"{anchor}>',
-                '<div><h3><a href="' + html.escape(row["link"]) + '">'
+                '<div><h3><a href="' + html.escape(link) + '">'
                 + html.escape(row["title"][language]) + "</a></h3>",
                 '<p class="task-register-engines">' + html.escape(engine) + "</p></div>",
                 '<p class="task-register-result">' + html.escape(row["finding"][language]) + "</p>",
@@ -114,8 +117,8 @@ def replay_html(case, language):
 
 COMPARISON_CLAIMS = {
     "incline": {
-        "zh": "九种公开配置中，没有配置通过全部九例。新增记录显示，Chaos 三个名义零摩擦工况通过，Bullet 两个静止工况通过，SOFA 的滑动轨迹接近参考时，接触力仍可能超出门槛。",
-        "en": "None of the nine published profiles passed all nine cases. Chaos passed all three nominal-zero-friction cases. Bullet passed two static cases. SOFA could stay close to the sliding reference while exceeding the contact-force limit.",
+        "zh": "十种公开配置各跑九例，最高通过数为 8/9。RaiSim 通过全部静止与名义零摩擦工况。三档有摩擦滑动都有可核对的接触冲量，方块均沿斜面转了约 48°。",
+        "en": "Ten published profiles ran nine cases each, with a best score of 8/9. RaiSim passed all static and nominal-zero-friction cases. All three frictional sliding records had verifiable contact impulses and the cube turned about 48° in the plane.",
     },
     "normal": {
         "zh": "参数校准可以把这组夹具的加载响应带到合成目标附近，但固定参数直接迁移到其他质量时会失效；明确写出质量补偿后，两个迁移载荷才重新接近目标。",
@@ -194,12 +197,19 @@ REPLAY_SERIES_LABELS = {
 def comparison_summary(case, row, language):
     zh = language == "zh"
     claim = COMPARISON_CLAIMS[case["id"]][language]
+    condition = row[language]["condition"]
+    if case["id"] == "incline":
+        condition = (
+            "15° 静止、35° 滑动、15° 名义零摩擦，各跑 2、1 和 0.5 ms。"
+            if zh else
+            "15° static, 35° sliding and 15° nominal zero friction at 2, 1 and 0.5 ms each."
+        )
     return "\n".join(
         [
             '<div class="comparison-summary">',
             f'  <p class="comparison-claim"><strong>{"结论" if zh else "Conclusion"}</strong> {html.escape(claim)}</p>',
             '  <div class="comparison-terms">',
-            f'    <p><strong>{"实验条件" if zh else "Setup"}</strong> {html.escape(row[language]["condition"])}</p>',
+            f'    <p><strong>{"实验条件" if zh else "Setup"}</strong> {html.escape(condition)}</p>',
             f'    <p><strong>{"结论边界" if zh else "Scope"}</strong> {html.escape(row[language]["boundary"])}</p>',
             "  </div>",
             "</div>",
@@ -237,6 +247,7 @@ def incline_extension_rows(root):
         ("chaos", "Chaos", "UE 5.7.1 · Linux Editor"),
         ("bullet", "Bullet", "PyBullet 3.2.7 · CPU DIRECT"),
         ("sofa", "SOFA", "26.06.00 · rigid OBB / block GS"),
+        ("raisim", "RaiSim", "2.16.0 · CPU FP64 / bisection"),
     ]
     for key, label, configuration in profiles:
         rows = json.loads((evidence / f"{key}-results.json").read_text())["cases"]
@@ -331,7 +342,8 @@ def comparison_table(case, language, root):
             ("Native stepping cost", "", [("2.239 s", "plain"), ("4.481 s", "plain"), ("≈2×", "fail")]),
         ]
         note = ""
-    lines = ['<div class="comparison-matrix">', "<table>", f"<caption>{html.escape(caption)}</caption>", "<thead><tr>"]
+    anchor = ' id="incline-results"' if case["id"] == "incline" else ""
+    lines = ['<div class="comparison-matrix">', f"<table{anchor}>", f"<caption>{html.escape(caption)}</caption>", "<thead><tr>"]
     lines += [f'<th scope="col">{html.escape(h)}</th>' for h in headers]
     lines += ["</tr></thead>", "<tbody>"]
     for name, detail, cells in rows:
@@ -386,6 +398,15 @@ def comparisons(index, experiences, language, root):
             case["intro"][language],
             "",
             comparison_summary(case, row, language),
+        ]
+        if case["id"] == "incline":
+            lines += [
+                '<p><a href="#incline-results">十引擎结果矩阵</a> · <a href="raisim-incline.html">RaiSim 九例与原始数据</a></p>'
+                if zh else
+                '<p><a href="#incline-results">Ten-engine result matrix</a> · <a href="raisim-incline.html">RaiSim cases and native data</a></p>',
+                "",
+            ]
+        lines += [
             replay_guide(case, language),
             replay_html(case, language),
             comparison_table(case, language, root),
@@ -405,9 +426,9 @@ def comparisons(index, experiences, language, root):
                 ),
                 "",
                 (
-                    "GIF 保留原六引擎回放。九引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。"
+                    "GIF 展示原六引擎回放。十引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。"
                     if zh else
-                    "The GIF retains the original six-engine replay. The nine-engine curves use the same 1 ms conditions. Dotted lines mark invalid records."
+                    "The GIF shows the original six-engine replay. The ten-engine curves use the same 1 ms conditions. Dotted lines mark invalid records."
                 ),
                 "",
                 (
@@ -415,13 +436,13 @@ def comparisons(index, experiences, language, root):
                     '<p><a href="_static/incline-extension/static-1ms-curves.zh.svg">静止曲线</a> · '
                     '<a href="_static/incline-extension/sliding-1ms-curves.zh.svg">滑动曲线</a> · '
                     '<a href="_static/incline-extension/frictionless-1ms-curves.zh.svg">名义零摩擦曲线</a></p>\n'
-                    "```\n\n[新增工况报告与原始数据](incline-extension.md)"
+                    "```\n\n[RaiSim 九例与原始数据](raisim-incline.md) · [Chaos、Bullet、SOFA 的报告与原始数据](incline-extension.md)"
                     if zh else
                     "```{raw} html\n"
                     '<p><a href="_static/incline-extension/static-1ms-curves.svg">Static curves</a> · '
                     '<a href="_static/incline-extension/sliding-1ms-curves.svg">Sliding curves</a> · '
                     '<a href="_static/incline-extension/frictionless-1ms-curves.svg">Nominal-zero-friction curves</a></p>\n'
-                    "```\n\n[New cases and original data](incline-extension.md)"
+                    "```\n\n[RaiSim's nine cases and native data](raisim-incline.md) · [Chaos, Bullet and SOFA reports and native data](incline-extension.md)"
                 ),
                 "",
             ]

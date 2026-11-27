@@ -49,3 +49,29 @@ For Bullet, install NumPy and the pinned `pybullet==3.2.7` wheel in an isolated 
 ```
 
 The Python recorders accept `--step .001` for the 1 ms cases. The matching Chaos argument is `-DexInclineStep=0.001`. Keep both source and configuration frozen across the full batch. Each engine records its force observation epoch. Only an independently valid record can satisfy the physical response checks.
+
+## RaiSim 2.16.0
+
+RaiSim uses the same manifest and thresholds. Extract its archive into the records directory from the offline verification section to rescore RaiSim and generate the ten-engine curves.
+
+```bash
+python -m zipfile -e docs/evidence/incline-extension/raisim-native-v1.zip "$OUT/records"
+PYTHONPATH=src python demos/contact-benchmark/score_incline_extension.py raisim \
+  --manifest "$OUT/records/manifest.json" --records "$OUT/records/raisim" \
+  --output "$OUT/raisim-results.json"
+cmp "$OUT/raisim-results.json" "$OUT/records/raisim-results.json"
+PYTHONPATH=src:scripts python demos/contact-benchmark/plot_incline_extension.py \
+  --records "$OUT/records" --output "$OUT/curves"
+```
+
+The archive has SHA-256 `d796881594c8afccdbc09c75588d533011c0035358bcd56793b437eb34bd70a0`. Its receipt records checksums for the raw files, recorder and scorer. Native execution requires the activated RaiSim 2.16.0 C++ SDK and the nlohmann_json development package. Set `RAISIM_SDK` to the SDK install prefix. The recorder uses the SDK's normal activation lookup or an optional `RAISIM_ACTIVATION_FILE` path.
+
+```bash
+cmake -S demos/contact-benchmark/raisim-incline -B "$OUT/raisim-build" \
+  -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$RAISIM_SDK"
+cmake --build "$OUT/raisim-build" --parallel 2
+"$OUT/raisim-build/record_raisim_incline" \
+  docs/evidence/incline-extension/manifest.json "$OUT/raisim"
+```
+
+[Results and first-failure measurements](https://huangkiki.github.io/Dexlab/en/latest/raisim-incline.html) · [RaiSim installation](https://raisim.com/sections/Installation.html)

@@ -1,6 +1,6 @@
 # Incline comparison with Chaos, Bullet and SOFA
 
-Each backend completed the nine original conditions and one disabled-collision control. **Chaos passed all three nominal-zero-friction cases. Bullet passed two static cases and one nominal-zero-friction case. SOFA's nine records passed the momentum check and all exceeded at least one physical limit.** {ref}`Nine-engine matrix and overlaid curves <incline>`
+Each backend completed the nine original conditions and one disabled-collision control. **Chaos passed all three nominal-zero-friction cases. Bullet passed two static cases and one nominal-zero-friction case. SOFA's nine records passed the momentum check and all exceeded at least one physical limit.** {ref}`Ten-engine matrix and overlaid curves <incline>`
 
 | Frozen configuration | Static | Sliding | Nominal zero friction | Pass / fail / invalid |
 | --- | ---: | ---: | ---: | --- |

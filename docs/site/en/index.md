@@ -187,7 +187,7 @@
       <article class="evidence-panel" id="panel-incline" data-evidence="incline" data-evidence-reveal role="region" aria-labelledby="evidence-incline-title">
         <header class="evidence-panel-head">
           <span>05</span>
-          <strong>Six-engine incline</strong>
+          <strong>Incline contact comparison</strong>
           <small>Per configuration</small>
         </header>
         <div class="evidence-media">
@@ -198,7 +198,7 @@
           <h3 id="evidence-incline-title">Contact representation and numerical gates still change the result.</h3>
           <p class="evidence-verdict">Static, sliding and nominally frictionless cases are decided per profile rather than as one engine total.</p>
           <dl class="evidence-ledger">
-            <div><dt>Control variable</dt><dd>Three contact conditions and three steps across six fixed engine profiles</dd></div>
+            <div><dt>Control variable</dt><dd>Three contact conditions and three steps across ten fixed engine profiles</dd></div>
             <div><dt>Native readback</dt><dd>Displacement, velocity, support force, geometric overlap and observation validity</dd></div>
             <div><dt>Criterion</dt><dd><strong>Passes, failures and invalid records remain separate</strong></dd></div>
             <div><dt>Scope</dt><dd>Different protocols and budgets do not form a universal solver ranking</dd></div>
@@ -385,7 +385,7 @@
 
     <article class="validity-record" data-reveal-item>
       <header>
-        <p>05 / Six-engine incline</p>
+        <p>05 / Ten-engine incline</p>
         <h3>Read the analytic reference, three timesteps and invalid rows together.</h3>
       </header>
       <dl>
@@ -395,14 +395,14 @@
         </div>
         <div>
           <dt>Regression after a parameter change</dt>
-          <dd>Timestep is already a nine-case cross design. Contact law, precision and execution path are frozen with each full profile. Positives, negatives, failures and invalid rows remain in the denominator; the best post-change result cannot replace history.</dd>
+          <dd>Timestep is already a nine-case cross design. Contact law, precision and execution path are frozen with each full profile. Passes, failures and invalid records count in the nine-case denominator. Negative controls are reported separately.</dd>
         </div>
         <div>
           <dt>What it cannot prove</dt>
           <dd>Contact laws, budgets and applicability differ. Nine cases support per-profile decisions only; no engine passes all nine and the matrix is not a universal solver ranking.</dd>
         </div>
       </dl>
-      <a href="visual-comparisons.html#incline">Open the six-engine matrix →</a>
+      <a href="visual-comparisons.html#incline">Open the ten-engine matrix →</a>
     </article>
 
     <article class="validity-record" data-reveal-item>

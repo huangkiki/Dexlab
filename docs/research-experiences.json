@@ -415,15 +415,15 @@
           "zh": "斜面静止与滑动",
           "en": "Resting and sliding on an incline"
         },
-        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA",
+        "engines": "MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA · RaiSim",
         "thumbnail": "docs/evidence/incline-friction/error-cost.png",
         "question": {
           "zh": "静止、滑动和低摩擦有哪些差异？",
           "en": "Where do static, sliding and low-friction cases differ?"
         },
         "finding": {
-          "zh": "九个公开配置各跑九例。新增的三组里，Chaos 通过全部零摩擦例，Bullet 通过两个静止例和一个零摩擦例，SOFA 未达到完整判据。",
-          "en": "Nine profiles ran nine cases each. Among the added profiles, Chaos passed all zero-friction cases, Bullet passed two static and one zero-friction case, and every SOFA case exceeded a limit."
+          "zh": "十种公开配置各跑九例。RaiSim 静止与名义零摩擦各通过 3/3，三档有摩擦滑动均出现旋转超限。",
+          "en": "Ten profiles ran nine cases each. RaiSim passed 3/3 static and 3/3 nominal-zero-friction cases. Its three frictional sliding cases exceeded the rotation limit."
         },
         "link": "visual-comparisons.html#incline",
         "thumbnail_sha256": "1b5d51d0b31545d442d0505c3aa69c7cb4a57ac9f80c12bc536bb70d44beabd2",
@@ -827,6 +827,23 @@
         "link": "experience.html#framework-path",
         "thumbnail_sha256": "af4051520404419903d59a1141796854c169e6c726524b115c0da10b17b2598d",
         "site_thumbnail": "_static/visual/catalogue/contact-parameters.png",
+        "group": "execution"
+      },
+      {
+        "id": "raisim-bumi",
+        "title": {
+          "zh": "Bumi 动作模仿",
+          "en": "Bumi motion imitation"
+        },
+        "engines": "RaiSim 2.16.0 · CPU FP64",
+        "finding": {
+          "zh": "冻结的 MuJoCo checkpoint 在 RaiSim 上完成 5/6 段动作。继续训练至第 15,000 次更新后，最终 checkpoint 完成 0/6。",
+          "en": "The frozen MuJoCo checkpoint completed 5/6 clips in RaiSim. After training through update 15,000, the final checkpoint completed 0/6."
+        },
+        "link": {
+          "zh": "https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.zh-CN.md",
+          "en": "https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.md"
+        },
         "group": "execution"
       }
     ],

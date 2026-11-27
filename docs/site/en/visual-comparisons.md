@@ -10,12 +10,14 @@ Replay geometry keeps physical proportions; inspect small changes in the curves.
 A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at three timesteps. Curves and replays retain the original passes, failures and invalid records.
 
 <div class="comparison-summary">
-  <p class="comparison-claim"><strong>Conclusion</strong> None of the nine published profiles passed all nine cases. Chaos passed all three nominal-zero-friction cases. Bullet passed two static cases. SOFA could stay close to the sliding reference while exceeding the contact-force limit.</p>
+  <p class="comparison-claim"><strong>Conclusion</strong> Ten published profiles ran nine cases each, with a best score of 8/9. RaiSim passed all static and nominal-zero-friction cases. All three frictional sliding records had verifiable contact impulses and the cube turned about 48° in the plane.</p>
   <div class="comparison-terms">
-    <p><strong>Setup</strong> Native incline cohorts: MuJoCo 3.15.0, SuperDex 1.0.0, Genesis 1.4.3, Newton Physics 1.6.1, PhysX 5.9.0 and Drake 1.57.0; each records contact law, precision and applicable profiles.</p>
+    <p><strong>Setup</strong> 15° static, 35° sliding and 15° nominal zero friction at 2, 1 and 0.5 ms each.</p>
     <p><strong>Scope</strong> Cohort protocols and admission scope remain separate. The full matrix maps research scope, not universal rank. Numerical work remains in #157/#159/#163/#165.</p>
   </div>
 </div>
+
+<p><a href="#incline-results">Ten-engine result matrix</a> · <a href="raisim-incline.html">RaiSim cases and native data</a></p>
 
 <div class="replay-guide" aria-label="Recorded GIF guide">
   <p><strong>Pane order</strong> MuJoCo / SuperDex / Genesis / Newton Physics / PhysX / Drake</p>
@@ -31,7 +33,7 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 ```
 
 <div class="comparison-matrix">
-<table>
+<table id="incline-results">
 <caption>Published fixed configurations by condition (passes / three cases per condition)</caption>
 <thead><tr>
 <th scope="col">Engine and configuration</th>
@@ -95,6 +97,12 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result fail">0 / 9</span></td>
 </tr>
+<tr><th scope="row"><strong>RaiSim</strong><small>2.16.0 · CPU FP64 / bisection</small></th>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">6 / 9</span></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -102,13 +110,13 @@ A 40 mm, 64 g cube; static, sliding and nominal-zero-friction conditions at thre
 
 The scorer checks the timing and numerical agreement of state and force before evaluating motion against the limits. The three Chaos sliding records exceeded that consistency limit. {ref}`Why they were invalid, including the first step over the limit <incline-invalid-records>`. For historical rows, see [Newton Physics position and velocity checks](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.md) and [PhysX normal-impulse direction checks](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.md).
 
-The GIF retains the original six-engine replay. The nine-engine curves use the same 1 ms conditions. Dotted lines mark invalid records.
+The GIF shows the original six-engine replay. The ten-engine curves use the same 1 ms conditions. Dotted lines mark invalid records.
 
 ```{raw} html
 <p><a href="_static/incline-extension/static-1ms-curves.svg">Static curves</a> · <a href="_static/incline-extension/sliding-1ms-curves.svg">Sliding curves</a> · <a href="_static/incline-extension/frictionless-1ms-curves.svg">Nominal-zero-friction curves</a></p>
 ```
 
-[New cases and original data](incline-extension.md)
+[RaiSim's nine cases and native data](raisim-incline.md) · [Chaos, Bullet and SOFA reports and native data](incline-extension.md)
 
 **Conditions：** Native incline cohorts: MuJoCo 3.15.0, SuperDex 1.0.0, Genesis 1.4.3, Newton Physics 1.6.1, PhysX 5.9.0 and Drake 1.57.0; each records contact law, precision and applicable profiles.
 

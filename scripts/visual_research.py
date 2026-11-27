@@ -18,6 +18,7 @@ COLORS = {
     "Chaos": "#222222",
     "Bullet": "#A65012",
     "SOFA": "#8B4FA5",
+    "RaiSim": "#455A2A",
 }
 
 

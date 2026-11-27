@@ -34,6 +34,9 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     protocol = json.loads((args.records / "manifest.json").read_text())
+    profiles = [("chaos", "Chaos"), ("bullet", "Bullet"), ("sofa", "SOFA")]
+    if (args.records / "raisim-results.json").is_file():
+        profiles.append(("raisim", "RaiSim"))
     args.output.mkdir(parents=True, exist_ok=True)
     for case in protocol["cases"]:
         if case["timestep"] != .001 or case.get("negative_no_floor"):
@@ -41,7 +44,7 @@ def main():
         regime = case["regime"]
         original = ROOT / f"docs/evidence/visual/incline-{regime}-0.001.json.gz"
         bundle = read_bundle(original)
-        for engine, label in (("chaos", "Chaos"), ("bullet", "Bullet"), ("sofa", "SOFA")):
+        for engine, label in profiles:
             bundle["series"].append(plotted_series(args.records, engine, label, protocol, case))
         for language in ("en", "zh"):
             stem = f"{regime}-1ms"

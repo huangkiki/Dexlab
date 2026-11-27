@@ -24,7 +24,7 @@ The improved simulation helps the Agent learn new Skills. With those Skills, the
 - **Contact model changes the verdict:** point versus torsional contact in a two-finger sphere grasp.
 - **Cutting is checked beyond the animation:** tofu and banana records verify piece connectivity, contact impulse and independent motion.
 - **A grasp is not a fold:** cloth experiments score deformation, penetration, residual motion and release separately.
-- **Engines are compared per profile:** six-engine incline results retain failures and validity checks instead of producing a ranking.
+- **Incline contact:** [ten engine profiles](https://huangkiki.github.io/Dexlab/en/latest/visual-comparisons.html#incline-results) run the same nine cases. Each result retains its pass, failure or invalid status.
 
 [Browse all experiments →](https://huangkiki.github.io/Dexlab/en/latest/experiments.html)
 

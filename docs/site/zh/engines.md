@@ -14,13 +14,14 @@ Uranus 生成式环境后端 <uranus-backend>
 
 同一个视觉网格、参数名称或关节目标，不保证引擎求解了同一个物理问题。
 
-## Chaos Physics、Bullet Physics 与 SOFA
+## Chaos Physics、Bullet Physics、SOFA 与 RaiSim
 
 | 引擎 | 原生入口 | 读什么 | 当前证据 |
 | --- | --- | --- | --- |
 | [Chaos Physics](chaos-learning/index.md) | Unreal Engine 5 的物理系统 | 用 Chaos Visual Debugger 读刚体状态、碰撞和关节约束，区分游戏帧与物理子步。 | [斜面原生实跑](incline-extension.md)，课程 CVD 练习另列。 |
 | [Bullet Physics](bullet-learning/index.md) | Bullet C++ SDK，课程走 PyBullet CPU `DIRECT` | 显式步进，读回法向力、位姿和关节状态。 | [斜面原生实跑](incline-extension.md)与课程落地对照。 |
 | SOFA | 26.06.00 | 刚体有向盒与约束接触。 | [斜面原生实跑](incline-extension.md) |
+| RaiSim | 2.16.0 · CPU FP64 | 显式步进，读接触坐标系、冲量和作用对象。 | [斜面九例](raisim-incline.md) · [Bumi 动作模仿](https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.zh-CN.md) |
 
 引擎准入和正式任务覆盖见[评测矩阵](coverage.md)。比较时先对齐单位、碰撞形状和观测时间。Chaos 的碰撞事件冲量与 Bullet 的逐步法向力各有自己的时间归属。
 

@@ -1,7 +1,7 @@
 # 实验结果与失败
 
 ```{raw} html
-<p><a href="index.html#experiments">代表性实验</a> · <a href="experiments.html">实验目录与原始记录</a> · <a href="visual-comparisons.html#incline">九引擎斜面对照</a> · <a href="index.html#physical-validity">物理验证与真机证据边界</a></p>
+<p><a href="index.html#experiments">代表性实验</a> · <a href="experiments.html">实验目录与原始记录</a> · <a href="visual-comparisons.html#incline">十引擎斜面对照</a> · <a href="index.html#physical-validity">物理验证与真机证据边界</a></p>
 ```
 
 ```{toctree}
@@ -12,6 +12,7 @@
 完整覆盖 <coverage>
 可视对照 <visual-comparisons>
 Chaos、Bullet、SOFA 斜面记录 <incline-extension>
+RaiSim 斜面九例 <raisim-incline>
 诊断方法 <diagnosis>
 Sim-to-Real Gap 全景 <failure-root-cause-atlas>
 Solver 失败复盘 <solver-failure-audit>

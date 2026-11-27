@@ -30,8 +30,8 @@ AMP recorder parity failure <amp-lift>
 <div class="task-register-labels" aria-hidden="true"><span>Task and simulator</span><span>Observed outcome</span></div>
 <article class="task-register-entry" id="experiment-highlight-incline">
 <div><h3><a href="visual-comparisons.html#incline">Resting and sliding on an incline</a></h3>
-<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA</p></div>
-<p class="task-register-result">Nine profiles ran nine cases each. Among the added profiles, Chaos passed all zero-friction cases, Bullet passed two static and one zero-friction case, and every SOFA case exceeded a limit.</p>
+<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA · RaiSim</p></div>
+<p class="task-register-result">Ten profiles ran nine cases each. RaiSim passed 3/3 static and 3/3 nominal-zero-friction cases. Its three frictional sliding cases exceeded the rotation limit.</p>
 </article>
 <article class="task-register-entry" id="experiment-highlight-normal">
 <div><h3><a href="experience.html#normal-response">Normal &amp; transient response</a></h3>
@@ -168,6 +168,11 @@ AMP recorder parity failure <amp-lift>
 <div><h3><a href="experience.html#framework-path">Native &amp; framework paths</a></h3>
 <p class="task-register-engines">MuJoCo Warp / Newton Physics / Isaac Sim</p></div>
 <p class="task-register-result">After aligning four GPU fields, native support still failed the momentum check and its trajectory still differed from Isaac Sim.</p>
+</article>
+<article class="task-register-entry">
+<div><h3><a href="https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.md">Bumi motion imitation</a></h3>
+<p class="task-register-engines">RaiSim 2.16.0 · CPU FP64</p></div>
+<p class="task-register-result">The frozen MuJoCo checkpoint completed 5/6 clips in RaiSim. After training through update 15,000, the final checkpoint completed 0/6.</p>
 </article>
 </div>
 ```

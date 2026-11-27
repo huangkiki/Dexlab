@@ -30,8 +30,8 @@ AMP 记录器一致性失败 <amp-lift>
 <div class="task-register-labels" aria-hidden="true"><span>任务与所用仿真</span><span>实验结果</span></div>
 <article class="task-register-entry" id="experiment-highlight-incline">
 <div><h3><a href="visual-comparisons.html#incline">斜面静止与滑动</a></h3>
-<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA</p></div>
-<p class="task-register-result">九个公开配置各跑九例。新增的三组里，Chaos 通过全部零摩擦例，Bullet 通过两个静止例和一个零摩擦例，SOFA 未达到完整判据。</p>
+<p class="task-register-engines">MuJoCo · SuperDex · Genesis · Newton Physics · PhysX · Drake · Chaos · Bullet · SOFA · RaiSim</p></div>
+<p class="task-register-result">十种公开配置各跑九例。RaiSim 静止与名义零摩擦各通过 3/3，三档有摩擦滑动均出现旋转超限。</p>
 </article>
 <article class="task-register-entry" id="experiment-highlight-normal">
 <div><h3><a href="experience.html#normal-response">法向与瞬态响应</a></h3>
@@ -168,6 +168,11 @@ AMP 记录器一致性失败 <amp-lift>
 <div><h3><a href="experience.html#framework-path">原生与框架接入路径</a></h3>
 <p class="task-register-engines">MuJoCo Warp / Newton Physics / Isaac Sim</p></div>
 <p class="task-register-result">对齐四项 GPU 字段后原生支撑仍未通过动量核对，轨迹仍与 Isaac Sim 不同。</p>
+</article>
+<article class="task-register-entry">
+<div><h3><a href="https://github.com/huangkiki/Dexlab/blob/main/demos/raisim-bumi-mimic/README.zh-CN.md">Bumi 动作模仿</a></h3>
+<p class="task-register-engines">RaiSim 2.16.0 · CPU FP64</p></div>
+<p class="task-register-result">冻结的 MuJoCo checkpoint 在 RaiSim 上完成 5/6 段动作。继续训练至第 15,000 次更新后，最终 checkpoint 完成 0/6。</p>
 </article>
 </div>
 ```

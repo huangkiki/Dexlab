@@ -48,7 +48,7 @@
 | 接触力矩 | 只把点接触改为抗扭接触 | 保持位移；峰值角速度 | **2.734 → 1.025 mm** · 29.336 → 0.024992 rad/s |
 | 苹果梗抓取 | 同一组 10 个固定回归场景 | 离桌、支撑、保持、穿透与释放 | **MuJoCo 1/10 · SuperDex 10/10** |
 | 布料 | 同一冻结留出集 | 形变、下垂、穿透、残余运动与成本 | **52 / 105 通过** |
-| 六引擎斜面 | 静止、滑动与名义零摩擦；三个步长 | 位移、速度、力与数值一致性 | **逐配置判定，不合并为引擎排名** |
+| [十引擎斜面](https://huangkiki.github.io/Dexlab/zh-cn/latest/visual-comparisons.html#incline-results) | 静止、滑动与名义零摩擦，三个步长 | 位移、速度、力与数值一致性 | **逐配置保留通过、失败与无效记录** |
 
 <table>
   <tr>
@@ -67,7 +67,7 @@
       <a href="docs/site/zh/cloth-comparison.md"><img src="docs/evidence/cloth-studio/grasp.gif" width="100%" alt="布料夹持记录"></a>
     </td>
     <td width="50%" align="center" valign="top">
-      <strong>六引擎斜面</strong><br>
+      <strong>斜面原六引擎回放</strong><br>
       <a href="docs/site/zh/visual-comparisons.md"><img src="docs/evidence/studio/incline.gif" width="100%" alt="六引擎斜面比较"></a>
     </td>
   </tr>

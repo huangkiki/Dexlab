@@ -10,12 +10,14 @@
 40 mm、64 g 方块；比较静止、滑动及名义零摩擦，三个步长。曲线与回放保留原配置的通过、失败和无效记录。
 
 <div class="comparison-summary">
-  <p class="comparison-claim"><strong>结论</strong> 九种公开配置中，没有配置通过全部九例。新增记录显示，Chaos 三个名义零摩擦工况通过，Bullet 两个静止工况通过，SOFA 的滑动轨迹接近参考时，接触力仍可能超出门槛。</p>
+  <p class="comparison-claim"><strong>结论</strong> 十种公开配置各跑九例，最高通过数为 8/9。RaiSim 通过全部静止与名义零摩擦工况。三档有摩擦滑动都有可核对的接触冲量，方块均沿斜面转了约 48°。</p>
   <div class="comparison-terms">
-    <p><strong>实验条件</strong> MuJoCo 3.15.0、SuperDex 1.0.0、Genesis 1.4.3、Newton Physics 1.6.1、PhysX 5.9.0、Drake 1.57.0 原生斜面；每个 solver 的接触律、精度与适用配置分别记录。</p>
+    <p><strong>实验条件</strong> 15° 静止、35° 滑动、15° 名义零摩擦，各跑 2、1 和 0.5 ms。</p>
     <p><strong>结论边界</strong> 各批协议和准入范围保持独立；完整配置表给研究范围，不给普遍排名。#157/#159/#163/#165 的数值问题仍未全部解决。</p>
   </div>
 </div>
+
+<p><a href="#incline-results">十引擎结果矩阵</a> · <a href="raisim-incline.html">RaiSim 九例与原始数据</a></p>
 
 <div class="replay-guide" aria-label="GIF 阅读说明">
   <p><strong>画面顺序</strong> MuJoCo / SuperDex / Genesis / Newton Physics / PhysX / Drake</p>
@@ -31,7 +33,7 @@
 ```
 
 <div class="comparison-matrix">
-<table>
+<table id="incline-results">
 <caption>固定发布配置的分条件结果（通过数 / 该条件三例）</caption>
 <thead><tr>
 <th scope="col">引擎与配置</th>
@@ -95,6 +97,12 @@
 <td><span class="matrix-result fail">0 / 3</span></td>
 <td><span class="matrix-result fail">0 / 9</span></td>
 </tr>
+<tr><th scope="row"><strong>RaiSim</strong><small>2.16.0 · CPU FP64 / bisection</small></th>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result fail">0 / 3</span></td>
+<td><span class="matrix-result pass">3 / 3</span></td>
+<td><span class="matrix-result mixed">6 / 9</span></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -102,13 +110,13 @@
 
 评分器先核对状态与力的时间和数值，再评估运动是否达标。Chaos 三条滑动在状态与冲量的核对中超限。 {ref}`为什么判无效，查看首次越界和逐步对账 <incline-invalid-records>`。 表中历史无效项另见 [Newton Physics 的位置与速度检查](https://github.com/huangkiki/Dexlab/blob/main/docs/newton-incline-results.zh-CN.md) 和 [PhysX 的法向冲量方向检查](https://github.com/huangkiki/Dexlab/blob/main/docs/physx-incline-results.zh-CN.md)。
 
-GIF 保留原六引擎回放。九引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。
+GIF 展示原六引擎回放。十引擎曲线使用同一 1 ms 工况，点线标记数值记录无效。
 
 ```{raw} html
 <p><a href="_static/incline-extension/static-1ms-curves.zh.svg">静止曲线</a> · <a href="_static/incline-extension/sliding-1ms-curves.zh.svg">滑动曲线</a> · <a href="_static/incline-extension/frictionless-1ms-curves.zh.svg">名义零摩擦曲线</a></p>
 ```
 
-[新增工况报告与原始数据](incline-extension.md)
+[RaiSim 九例与原始数据](raisim-incline.md) · [Chaos、Bullet、SOFA 的报告与原始数据](incline-extension.md)
 
 **条件：** MuJoCo 3.15.0、SuperDex 1.0.0、Genesis 1.4.3、Newton Physics 1.6.1、PhysX 5.9.0、Drake 1.57.0 原生斜面；每个 solver 的接触律、精度与适用配置分别记录。
 
