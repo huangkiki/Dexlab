@@ -233,6 +233,21 @@
       "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
     },
     {
+      "id": "cfc-character-fluid-coupling",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "cfc-character-fluid-coupling.html",
+      "distillation": true,
+      "updated": "2026-11-27",
+      "topic": "solvers-runtime",
+      "tags": {"zh": ["角色与流体耦合", "世界模型", "训练耗时"], "en": ["character-fluid coupling", "world models", "training time"]},
+      "name": {"zh": "CFC：角色与流体怎么互相影响，训练为何快 3 倍和 8 倍？", "en": "CFC: how characters and fluid interact, and what the 3× and 8× speedups measure"},
+      "aliases": {"zh": ["CFC", "双层世界模型"], "en": ["CFC", "two-level world model"]},
+      "summary": {"zh": "核对固定迭代数和固定回报的训练耗时，以及关节外力接口和原生梯度的证据边界。", "en": "Compares training at a fixed iteration count and return threshold, then audits the evidence for the joint-load interface and native gradients."},
+      "relations": [{"type": "related", "target": "solver-coupling-topic"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "evidence-boundary"}]
+    },
+    {
       "id": "robosimstudio-real2sim",
       "group": "synthesis",
       "level": "core",

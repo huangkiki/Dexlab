@@ -14,4 +14,5 @@ physicsnemo-contact-surrogates
 roboagentlab-episode-evidence
 real2worlds2real-collision-geometry
 robosimstudio-real2sim
+cfc-character-fluid-coupling
 ```
