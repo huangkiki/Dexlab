@@ -233,6 +233,21 @@
       "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "contact-force"}, {"type": "related", "target": "positive-negative-control"}]
     },
     {
+      "id": "roboagentlab-episode-evidence",
+      "group": "synthesis",
+      "level": "core",
+      "kind": "synthesis",
+      "href": "roboagentlab-episode-evidence.html",
+      "distillation": true,
+      "updated": "2026-11-27",
+      "topic": "skills-evaluation",
+      "tags": {"zh": ["机器人 Agent", "独立评分", "动作回放"], "en": ["robotics agents", "independent scoring", "action replay"]},
+      "name": {"zh": "RoboAgentLab：怎样让机器人 Agent 的动作和结果对得上？", "en": "RoboAgentLab: can you trace an agent's command to the robot's outcome?"},
+      "aliases": {"zh": ["RoboAgentLab", "原生读回"], "en": ["RoboAgentLab", "native readback"]},
+      "summary": {"zh": "用 HumanCLAW 沙发回放说明动作请求、原生指标和任务验收为何需要分别留证。", "en": "A HumanCLAW couch replay shows why an action request, a native metric, and physical task acceptance each need evidence."},
+      "relations": [{"type": "related", "target": "task-success"}, {"type": "related", "target": "evidence-boundary"}, {"type": "related", "target": "positive-negative-control"}]
+    },
+    {
       "id": "physicsnemo-contact-surrogates",
       "group": "synthesis",
       "level": "core",
